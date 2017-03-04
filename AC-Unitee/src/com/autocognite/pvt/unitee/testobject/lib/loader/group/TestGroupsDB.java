@@ -1,0 +1,254 @@
+package com.autocognite.pvt.unitee.testobject.lib.loader.group;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.commons.io.FilenameUtils;
+import org.apache.log4j.Logger;
+
+import com.autocognite.batteries.config.RunConfig;
+import com.autocognite.batteries.console.Console;
+import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
+import com.autocognite.pvt.arjuna.enums.PickerTargetType;
+import com.autocognite.pvt.arjuna.enums.SkipCode;
+import com.autocognite.pvt.arjuna.enums.TestPickerProperty;
+import com.autocognite.pvt.arjuna.enums.UnpickedCode;
+import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
+import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
+import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
+import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
+import com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode;
+import com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator;
+
+public class TestGroupsDB {
+	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Map<String, Group> defaultGroups = new HashMap<String, Group>();
+	private PickerConfig config = null;
+
+	public TestGroupsDB() throws Exception{
+		this.defaultGroups.put("MBGROUP", new MBGroup());
+		this.defaultGroups.put("MLGROUP", new MLGroup());		
+	}
+	
+	public void createPickerConfigForCLIConfig(Map<TestPickerProperty, String> options) throws Exception{
+		config = new PickerConfigForCLI(options);
+		config.process();
+	}
+	
+	public void createGroupForCLIOptions(Map<TestPickerProperty, String> options) throws Exception{
+		createPickerConfigForCLIConfig(options);
+		if (config.getTargetType() == null){
+			// No pickers provided in CLI, so magroup would be used.
+			return;
+		}			
+		String groupName = null;
+		switch (config.getTargetType()){
+		case CLASSES:
+			groupName = "mfcgroup";
+			break;
+		case METHODS:
+			groupName = "mfmgroup";
+			break;
+		case PACKAGES:
+			groupName = "mfpgroup";
+			break;
+		}
+		
+		Group group = new DefaultTestGroup(groupName);
+		config.setGroup(group);
+		Picker picker = config.createPicker();
+		logger.debug("Picker Type for CLI Options: " + picker.getClass().getSimpleName());
+		group.setPickers(Arrays.asList((Picker)picker));
+		
+		if (group != null){
+			this.defaultGroups.put(group.getName().toUpperCase(), group);
+		}
+	}
+	
+	public void createAllCapturingGroup() throws Exception{
+		Group group = new DefaultTestGroup("magroup");
+		Map<TestPickerProperty,String> options = new HashMap<TestPickerProperty,String>();
+		options.put(TestPickerProperty.PACKAGE_CONSIDER_PATTERNS, ".*?");
+		PickerConfig config = new PickerConfigForCLI(options);
+		config.process();
+		config.setGroup(group);
+		Picker picker = config.createPicker();
+		group.setPickers(Arrays.asList((Picker)picker));	
+		this.defaultGroups.put(group.getName().toUpperCase(), group);
+	}
+	
+	public Group getGroup(SessionSubNode subNode, String name) throws Exception{
+		String uName = name.toUpperCase();
+		Group group = this.defaultGroups.get(name.toUpperCase());
+		group.setSessionSubNode(subNode);
+		return group;
+	}
+
+	public PickerTargetType getTargetForMagicGroup() {
+		return config.getTargetType();
+	}
+
+}
+
+class DefaultTestGroup extends BaseGroup{
+
+	public DefaultTestGroup(String name) throws Exception {
+		super(name);
+		TestLoader loader = new JavaTestClassLoader(this);
+		super.setLoader(loader);
+	}
+}
+
+class MBGroup extends BaseGroup{
+	
+	public MBGroup() throws Exception {
+		super("mbgroup");
+		TestLoader loader = new SkippedJavaTestClassLoader(this);
+		super.setLoader(loader);
+	}
+}
+
+class MLGroup extends BaseGroup{
+
+	public MLGroup() throws Exception {
+		super("mlgroup");
+		TestLoader loader = new UnselectedJavaTestClassLoader(this);
+		super.setLoader(loader);
+	}
+
+}
+
+class SkippedJavaTestClassLoader implements TestLoader {
+	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private ExecutionSlotsCreator execSlotsCreator = null;
+	private int testMethodCount = 0;
+	private Group group = null;
+	
+	public SkippedJavaTestClassLoader(Group group) throws Exception{
+		this.group = group;
+		execSlotsCreator = new ExecutionSlotsCreator(group);
+	}
+	
+	@Override
+	public void load() throws Exception {
+		if (ArjunaInternal.displayLoadingInfo){
+			logger.debug("Begin loading of tests for current test session.");
+		}
+		List<String> containers = new ArrayList<String>();
+		for (String className: TestDefinitionsDB.getClassNameList()){
+			logger.debug(String.format("Group: %s, Evaluating: %s", this.group.getName(), className)) ;
+			JavaTestClassDefinition classDef = TestDefinitionsDB.getContainerDefinition(className);
+			logger.debug("Should skip?" +  classDef.shouldBeSkipped());
+			if (!classDef.shouldBeSkipped()){
+				continue;
+			}			
+			logger.debug(String.format("Group: %s, Including: %s", this.group.getName(), className)) ;
+//			logger.debug(String.format("Skip Class Loader: %s", classDef.getQualifiedName()));
+			
+			List<String> methodNames = classDef.getTestMethodQueue();
+			for (String methodName: methodNames){
+				JavaTestMethodDefinition methodDef = classDef.getTestCreatorDefinition(methodName);
+				methodDef.setSkipped(SkipCode.SKIPPED_CLASS_ANNOTATION);
+				if (ArjunaInternal.displayLoadingInfo){
+					logger.debug("Included: " + methodName);
+					logger.debug("Send to execution scheduler.");
+				}
+				execSlotsCreator.addTestCreatorName(methodDef.getQualifiedName());
+				testMethodCount += 1;
+			}
+			containers.add(className);
+		}
+		TestDefinitionsDB.markScheduled(group.getSessionName(), containers);
+		execSlotsCreator.load();	
+		TestDefinitionsDB.removeAsSkipped(containers);
+	}
+	
+	@Override
+	public TestSlotExecutor next() throws Exception{
+		return this.execSlotsCreator.next();
+	}
+
+	@Override
+	public int getTestMethodCount() {
+		return testMethodCount;
+	}
+}
+
+class UnselectedJavaTestClassLoader implements TestLoader {
+	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private ExecutionSlotsCreator execSlotsCreator = null;
+	private int testMethodCount = 0;
+	private Group group = null;
+	
+	public UnselectedJavaTestClassLoader(Group group) throws Exception{
+		this.group = group;
+		execSlotsCreator = new ExecutionSlotsCreator(group);
+	}
+	
+	@Override
+	public void load() throws Exception {
+		if (ArjunaInternal.displayLoadingInfo){
+			logger.debug("Begin loading of tests for current test session.");
+		}
+		
+		List<String> containers = new ArrayList<String>();
+		for (String className: TestDefinitionsDB.getUnscheduledContainers()){
+			logger.debug(String.format("Group: %s, Evaluating: %s", this.group.getName(), className)) ;
+			JavaTestClassDefinition classDef = TestDefinitionsDB.getContainerDefinition(className);
+			
+//			logger.debug(String.format("Unselected Class Loader: %s", classDef.getQualifiedName()));
+			
+			List<String> methodNames = classDef.getTestMethodQueue();
+			for (String methodName: methodNames){
+				JavaTestMethodDefinition methodDef = classDef.getTestCreatorDefinition(methodName);
+				methodDef.setUnpicked(UnpickedCode.UNPICKED_CLASS);
+				if (ArjunaInternal.displayLoadingInfo){
+					logger.debug("Included: " + methodName);
+					logger.debug("Send to execution scheduler.");
+				}
+				execSlotsCreator.addTestCreatorName(methodDef.getQualifiedName());
+				testMethodCount += 1;
+			}
+			classDef.setUnpicked(UnpickedCode.UNPICKED_CLASS);
+			containers.add(className);
+		}
+		
+		TestDefinitionsDB.markScheduled(group.getSessionName(), containers);
+
+		logger.debug("Looking for unpicked methods");
+		logger.debug(TestDefinitionsDB.getScheduledContainers());
+		for (String className: TestDefinitionsDB.getScheduledContainers()){
+			logger.debug(String.format("Group: %s, Evaluating: %s", this.group.getName(), className)) ;
+			JavaTestClassDefinition classDef = TestDefinitionsDB.getContainerDefinition(className);
+			
+//			logger.debug(String.format("Unselected Class Loader: %s", classDef.getQualifiedName()));
+			
+			for (String methodName: classDef.getUnscheduledCreators()){
+				logger.debug(String.format("Group: %s, Unpicked: %s", group.getName(), methodName)) ;
+				JavaTestMethodDefinition methodDef = classDef.getTestCreatorDefinition(methodName);
+				methodDef.setUnpicked(UnpickedCode.UNPICKED_METHOD);
+				execSlotsCreator.addTestCreatorName(methodDef.getQualifiedName());
+				testMethodCount += 1;
+			}
+			containers.add(className);
+		}
+		
+		execSlotsCreator.load();	
+	}
+	
+	@Override
+	public TestSlotExecutor next() throws Exception{
+		return this.execSlotsCreator.next();
+	}
+
+	@Override
+	public int getTestMethodCount() {
+		return testMethodCount;
+	}
+}
+
