@@ -1,0 +1,33 @@
+libraryjar		
+			
+			
+			
+			<keeppackagename name="com.autocognite.batteries.**" />
+			<keeppackagename name="com.autocognite.pvt.batteries.**" />
+			<!-- don't obfuscate this method -->
+
+			<keepattribute name="*Annotation*" />
+
+			<keep name="com.autocognite.batteries.**" access="public">
+				<method access="public" name="*" />
+				<method access="protected" name="*" />
+			</keep>
+
+			<keep name="com.autocognite.batteries.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
+
+			<keepclassmembers name="com.autocognite.pvt.batteries.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keepclassmembers>
+
+			<keepattribute name="LineNumberTable" />
+			<keepattribute name="SourceFile" />
+			<keepattribute name="Exceptions" />
+			<keepattribute name="Signature" />
+			<keepattribute name="InnerClasses" />
+			

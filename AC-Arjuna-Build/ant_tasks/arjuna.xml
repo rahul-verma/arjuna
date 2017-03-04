@@ -1,0 +1,173 @@
+<?xml version= "1.0"?>
+<project name="arjuna_targets" default="arjuna_build" basedir=".">
+	<description>
+simple example build file
+</description>
+	<!-- set global properties for this build -->
+
+	<!-- ======================================================================================== -->
+	<!-- ===================================== GLOBAL PROPERTIES =================================================== -->
+	<!-- ===================================== AC-arjuna =================================================== -->
+	<!-- ======================================================================================== -->
+
+	<property name="arjuna.build_version" value="${autocognite.build.version}" />
+	<property name="arjuna.proj.name" value="AutoCognite-Arjuna" />
+	<property name="arjuna.name" value="autocognite-arjuna" />
+	<property name="arjuna.github.rep.name" value="autocognite-unitee" />
+	<property name="root.arjuna.dir" value="${all.sources.dir}/${arjuna.github.rep.name}" />
+	<property name="proj.arjuna.dir" value="${root.arjuna.dir}/${arjuna.proj.name}" />
+	<property name="src.arjuna.dir" location="${proj.arjuna.dir}/src" />
+	<property name="arjuna.prefix" value="${arjuna.name}-${arjuna.build_version}" />
+		
+	<property name="arjuna.dist.file.name" value="${arjuna.prefix}.zip" />
+	<property name="arjuna.jar.file.name" value="${arjuna.name}.jar" />
+	<property name="arjuna.full.jar.file.name" value="${arjuna.prefix}.jar" />
+	<property name="arjuna.src.file.name" value="${arjuna.prefix}-sources.zip" />
+	<property name="ant.arjuna.root.dir" value="${current.build.dir}/${arjuna.proj.name}" />
+	<property name="ant.arjuna.build.dir" location="${ant.arjuna.root.dir}/build" />
+	<property name="ant.arjuna.jar.dir" location="${ant.arjuna.root.dir}/jar" />
+	<property name="ant.arjuna.jar.file" value="${ant.arjuna.jar.dir}/${arjuna.jar.file.name}.jar" />
+	
+	<property name="private.arjuna.jars.dir" value="${current.dist.private.dir}/arjuna_jars/arjuna" />
+	<property name="private.arjuna.self.jar.dir" value="${private.arjuna.jars.dir}/self" />
+	<property name="private.arjuna.self.jar.file" value="${private.arjuna.self.jar.dir}/${arjuna.jar.file.name}" />
+	<property name="private.arjuna.clear.jar.dir" value="${private.arjuna.jars.dir}/open" />
+	<property name="private.arjuna.clear.jar.file" value="${private.arjuna.clear.jar.dir}/clear_${arjuna.jar.file.name}" />
+	<property name="private.arjuna.obfuscated.jar.dir" value="${private.arjuna.jars.dir}/obfuscated" />
+	<property name="private.arjuna.obfuscated.jar.file" value="${private.arjuna.obfuscated.jar.dir}/obfuscated_${arjuna.jar.file.name}" />
+	
+	
+	<property name="private.arjuna.dist.tools.dir" value="${current.dist.private.tools.dir}/${arjuna.name}-dist" />
+	<property name="private.arjuna.dist.tools.root.dir" value="${private.arjuna.dist.tools.dir}/${arjuna.name}" />
+	<property name="private.arjuna.dist.tools.jar.dir" value="${private.arjuna.dist.tools.root.dir}/lib/java" />
+	<property name="private.arjuna.dist.tools.jar.file" value="${private.arjuna.dist.tools.jar.dir}/${arjuna.full.jar.file.name}" />
+	<property name="private.arjuna.dist.jar.file" value="${current.dist.private.jars.dir}/${arjuna.full.jar.file.name}" />
+	<property name="private.arjuna.dist.src.dir" value="${current.dist.private.sources.dir}/${arjuna.prefix}" />
+	
+	<property name="public.tools.arjuna.dir" value="${current.dist.public.tools.dir}/${arjuna.name}" />
+	<property name="public.tools.arjuna.dist.file" value="${public.tools.arjuna.dir}/${arjuna.dist.file.name}" />
+	
+	<target name="arjuna_mkdirs">
+		<!-- ======================================================================================== -->
+		<!-- ===================================== DIRECTORY STRUCTURE =================================================== -->
+		<!-- ===================================== uiautomator =================================================== -->
+		<!-- ======================================================================================== -->
+
+		<mkdir dir="${ant.arjuna.root.dir}" />
+		<mkdir dir="${ant.arjuna.build.dir}" />
+		<mkdir dir="${ant.arjuna.jar.dir}" />
+		
+		<mkdir dir="${private.arjuna.dist.tools.dir}/docs" />
+		<copy todir="${private.arjuna.dist.tools.dir}/docs">
+			<fileset dir="${root.arjuna.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy file="${root.arjuna.dir}/LICENSE.txt" tofile="${private.arjuna.dist.tools.dir}/LICENSE.txt" />
+		<copy file="${root.arjuna.dir}/NOTICE.txt" tofile="${private.arjuna.dist.tools.dir}/NOTICE.txt" />
+		<copy file="${root.arjuna.dir}/README.txt" tofile="${private.arjuna.dist.tools.dir}/README.txt" />
+		<mkdir dir="${private.arjuna.dist.components.jar.dir}" />
+		<mkdir dir="${public.tools.arjuna.dir}" />
+		
+
+		<mkdir dir="${private.arjuna.dist.src.dir}/${arjuna.name}/src" />
+		<mkdir dir="${private.arjuna.dist.src.dir}/docs" />
+		<copy file="${root.arjuna.dir}/LICENSE.txt" tofile="${private.arjuna.dist.src.dir}/LICENSE.txt" />
+		<copy file="${root.arjuna.dir}/NOTICE.txt" tofile="${private.arjuna.dist.src.dir}/NOTICE.txt" />
+		<copy file="${root.arjuna.dir}/README.txt" tofile="${private.arjuna.dist.src.dir}/README.txt" />
+		<copy todir="${private.arjuna.dist.src.dir}/docs">
+			<fileset dir="${root.arjuna.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<mkdir dir="${private.arjuna.obfuscated.jar.dir}"/>
+		<mkdir dir="${private.arjuna.self.jar.dir}"/>
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/lib/java" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/examples" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/examples/data" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/examples/uiauto_maps" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/config" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/temp" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/scripts" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/tools" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/ext" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/ext/java" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/log" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/data" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/data/sources" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/data/references" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/uiauto_maps" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/uiauto_images" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/temp/screenshots" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/tools/uidrivers" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/tests" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/report" />
+		<mkdir dir="${private.arjuna.dist.tools.root.dir}/archives" />
+
+		<copy file="${proj.arjuna.dir}/arjuna.bat" tofile="${private.arjuna.dist.tools.root.dir}/arjuna.bat" />
+		<copy file="${proj.arjuna.dir}/arjuna.sh" tofile="${private.arjuna.dist.tools.root.dir}/arjuna.sh" />
+
+		<copy todir="${private.arjuna.dist.tools.root.dir}/examples/data">
+			<fileset dir="${source.private.examples.dir}/data">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+
+		<copy todir="${private.arjuna.dist.tools.root.dir}/examples/uiauto_maps">
+			<fileset dir="${source.private.examples.dir}/uiauto_maps">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy file="${source.general.acprops.file}" tofile="${private.arjuna.dist.tools.root.dir}/config/arjuna.conf" />	
+	</target>
+	
+	<!-- ===================================== AC-Batteries =================================================== -->
+
+	<target name="arjuna_compile" depends="arjuna_mkdirs">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+
+		<javac srcdir="${src.arjuna.dir}" destdir="${ant.arjuna.build.dir}" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+			<classpath refid="build.classpath" />
+		</javac>
+		
+		<copy todir="${ant.arjuna.build.dir}">
+		    <fileset dir="${src.arjuna.dir}"
+		             includes="**/*.conf" />
+		    <fileset dir="${src.arjuna.dir}"
+		             includes="**/*.help" />
+		</copy>
+
+		<jar jarfile="${ant.arjuna.jar.file}" basedir="${ant.arjuna.build.dir}" />
+		<copy file="${ant.arjuna.jar.file}" tofile="${private.arjuna.self.jar.file}" />
+		<jar destFile="${private.arjuna.clear.jar.file}">
+			<zipgroupfileset includes="*.jar" dir="${private.batteries.self.jar.dir}" />
+			<zipgroupfileset includes="*.jar" dir="${private.unitee.core.self.jar.dir}" />
+			<zipgroupfileset includes="*.jar" dir="${private.cli.self.jar.dir}" />
+			<zipgroupfileset includes="*.jar" dir="${private.arjuna.self.jar.dir}" />
+		</jar>
+		
+		<copy todir="${private.arjuna.dist.src.dir}/${arjuna.name}/src">
+			<fileset dir="${src.arjuna.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	</target>
+			
+	<target name="arjuna_build" depends="arjuna_compile">
+		<jar destFile="${private.arjuna.dist.tools.jar.file}">
+		<zipgroupfileset includes="*.jar" dir="${3rd_party_batteries_jars}"/>
+			<zipgroupfileset includes="*.jar" dir="${private.arjuna.obfuscated.jar.dir}"/>
+		</jar>
+
+		<zip destfile="${public.tools.arjuna.dist.file}" basedir="${private.arjuna.dist.tools.dir}" />
+		
+		<copy file="${private.arjuna.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/autocognite-arjuna/lib/java/arjuna.jar"/>
+		<copy file="${private.arjuna.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/autocognite-arjuna/lib/java/arjuna.jar"/>
+
+	</target>
+
+</project>

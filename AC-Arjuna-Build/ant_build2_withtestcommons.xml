@@ -1,0 +1,529 @@
+<?xml version= "1.0"?>
+<project name="autocognite" default="unitee_copy" basedir=".">
+	<description>
+simple example build file
+</description>
+	<!-- set global properties for this build -->
+
+	<!-- ======================================================================================== -->
+	<!-- ===================================== GLOBAL PROPERTIES =================================================== -->
+	<!-- ===================================== Common =================================================== -->
+	<!-- ======================================================================================== -->
+
+	<taskdef resource="proguard/ant/task.properties" classpath="/Users/rahulverma/Documents/coding_workbench/tools/proguard5.2.1/lib/proguard.jar" />
+	<property name="3rd_party_jars" location="/Users/rahulverma/Documents/Dropbox/_jars">
+	</property>
+
+	<property name="autocognite.build.version" value="1.4b1" />
+
+	<property name="autocognite.dir" value="/Users/rahulverma/Documents/_autocognite" />
+	<property name="all.sources.dir" location="/Users/rahulverma/Documents/coding_workbench/eclipse_java_ws_rep_clone" />
+	<property name="all.dist.dir" value="${autocognite.dir}/all_dists" />
+	<property name="current.dist.dir" value="${autocognite.dir}/current_dist" />
+	<property name="current.build.dir" location="${autocognite.dir}/current_build" />
+
+	<property name="batteries.depends.jar.dir" location="/Users/rahulverma/Documents/Dropbox/_jars/batteries_jars" />
+
+	<property name="current.dist.private.dir" location="${current.dist.dir}/private/AutoCognite-${autocognite.build.version}" />
+	<property name="current.dist.private.components.dir" location="${current.dist.private.dir}/components" />
+	<property name="current.dist.private.jars.dir" value="${current.dist.private.dir}/jars" />
+	<property name="current.dist.private.sources.dir" value="${current.dist.private.dir}/sources" />
+	<property name="current.dist.private.tools.dir" value="${current.dist.private.dir}/tools" />
+	<property name="source.private.examples.dir" value="${all.sources.dir}/unitee/UniTEE-Pro/examples" />
+
+	<property name="source.general.acprops.file" value="${all.sources.dir}/unitee/UniTEE-Pro/autocognite.conf" />
+
+	<property name="current.dist.public.dir" location="${current.dist.dir}/public/AutoCognite-${autocognite.build.version}" />
+	<property name="current.dist.public.components.dir" location="${current.dist.public.dir}/components" />
+	<property name="current.dist.public.tools.dir" location="${current.dist.public.dir}/tools" />
+
+	<!-- ======================================================================================== -->
+	<!-- ===================================== GLOBAL PROPERTIES =================================================== -->
+	<!-- ===================================== AC-Batteries =================================================== -->
+	<!-- ======================================================================================== -->
+
+	<property name="batteries.build_version" value="${autocognite.build.version}" />
+	<property name="batteries.proj.name" value="AutoCognite-Batteries" />
+	<property name="batteries.name" value="autocognite-batteries" />
+	<property name="batteries.github.rep.name" value="autocognite-batteries" />
+	<property name="root.batteries.dir" value="${all.sources.dir}/${batteries.github.rep.name}" />
+	<property name="proj.batteries.dir" value="${root.batteries.dir}/${batteries.proj.name}" />
+	<property name="src.batteries.dir" location="${proj.batteries.dir}/src" />
+	<property name="batteries.prefix" value="${batteries.name}-${batteries.build_version}" />
+
+	<property name="batteries.dist.file.name" value="${batteries.prefix}.zip" />
+	<property name="batteries.jar.file.name" value="${batteries.prefix}.jar" />
+	<property name="batteries.src.file.name" value="${batteries.prefix}-sources.zip" />
+	<property name="ant.batteries.root.dir" value="${current.build.dir}/${batteries.proj.name}" />
+	<property name="ant.batteries.build.dir" location="${ant.batteries.root.dir}/build" />
+	<property name="ant.batteries.jar.dir" location="${ant.batteries.root.dir}/jar" />
+	<property name="ant.batteries.jar.file" value="${ant.batteries.jar.dir}/${batteries.jar.file.name}.jar" />
+	<property name="private.batteries.dist.components.dir" value="${current.dist.private.components.dir}/${batteries.name}-dist" />
+	<property name="private.batteries.dist.components.root.dir" value="${private.batteries.dist.components.dir}/${batteries.name}" />
+	<property name="private.batteries.dist.components.jar.dir" value="${private.batteries.dist.components.dir}/${batteries.name}" />
+	<property name="private.batteries.dist.components.jar.file" value="${private.batteries.dist.components.jar.dir}/${batteries.jar.file.name}" />
+	<property name="private.batteries.dist.jar.file" value="${current.dist.private.jars.dir}/${batteries.jar.file.name}" />
+	<property name="private.batteries.dist.src.dir" value="${current.dist.private.sources.dir}/${batteries.prefix}" />
+
+	<property name="public.components.batteries.dir" value="${current.dist.public.components.dir}/${batteries.name}" />
+	<property name="public.components.batteries.dist.file" value="${public.components.batteries.dir}/${batteries.dist.file.name}" />
+	<property name="public.components.batteries.src.file" value="${public.components.batteries.dir}/${batteries.src.file.name}" />
+
+	<!-- ======================================================================================== -->
+	<!-- ===================================== GLOBAL PROPERTIES =================================================== -->
+	<!-- ===================================== AC-TestCommons =================================================== -->
+	<!-- ======================================================================================== -->
+
+	<property name="testcommons.build_version" value="${autocognite.build.version}" />
+	<property name="testcommons.proj.name" value="AutoCognite-TestCommons" />
+	<property name="testcommons.name" value="autocognite-testcommons" />
+	<property name="testcommons.github.rep.name" value="autocognite-testcommons" />
+	<property name="root.testcommons.dir" value="${all.sources.dir}/${testcommons.github.rep.name}" />
+	<property name="proj.testcommons.dir" value="${root.testcommons.dir}/${testcommons.proj.name}" />
+	<property name="src.testcommons.dir" location="${proj.testcommons.dir}/src" />
+	<property name="testcommons.prefix" value="${testcommons.name}-${testcommons.build_version}" />
+
+	<property name="testcommons.dist.file.name" value="${testcommons.prefix}.zip" />
+	<property name="testcommons.jar.file.name" value="${testcommons.prefix}.jar" />
+	<property name="testcommons.src.file.name" value="${testcommons.prefix}-sources.zip" />
+	<property name="ant.testcommons.root.dir" value="${current.build.dir}/${testcommons.proj.name}" />
+	<property name="ant.testcommons.build.dir" location="${ant.testcommons.root.dir}/build" />
+	<property name="ant.testcommons.jar.dir" location="${ant.testcommons.root.dir}/jar" />
+	<property name="ant.testcommons.jar.file" value="${ant.testcommons.jar.dir}/${testcommons.jar.file.name}.jar" />
+	<property name="private.testcommons.dist.components.dir" value="${current.dist.private.components.dir}/${testcommons.name}-dist" />
+	<property name="private.testcommons.dist.components.root.dir" value="${private.testcommons.dist.components.dir}/${testcommons.name}" />
+	<property name="private.testcommons.dist.components.jar.dir" value="${private.testcommons.dist.components.dir}/${testcommons.name}" />
+	<property name="private.testcommons.dist.components.jar.file" value="${private.testcommons.dist.components.jar.dir}/${testcommons.jar.file.name}" />
+	<property name="private.testcommons.dist.jar.file" value="${current.dist.private.jars.dir}/${testcommons.jar.file.name}" />
+	<property name="private.testcommons.dist.src.dir" value="${current.dist.private.sources.dir}/${testcommons.prefix}" />
+
+	<property name="public.components.testcommons.dir" value="${current.dist.public.components.dir}/${testcommons.name}" />
+	<property name="public.components.testcommons.dist.file" value="${public.components.testcommons.dir}/${testcommons.dist.file.name}" />
+	<property name="public.components.testcommons.src.file" value="${public.components.testcommons.dir}/${testcommons.src.file.name}" />
+
+	<!-- ======================================================================================== -->
+	<!-- ===================================== GLOBAL PROPERTIES =================================================== -->
+	<!-- ===================================== AC-UiAutomator =================================================== -->
+	<!-- ======================================================================================== -->
+
+	<property name="uiautomator.build_version" value="${autocognite.build.version}" />
+	<property name="uiautomator.proj.name" value="AutoCognite-UiAutomator" />
+	<property name="uiautomator.name" value="autocognite-uiautomator" />
+	<property name="uiautomator.github.rep.name" value="autocognite-uiautomator" />
+	<property name="root.uiautomator.dir" value="${all.sources.dir}/${uiautomator.github.rep.name}" />
+	<property name="proj.uiautomator.dir" value="${root.uiautomator.dir}/${uiautomator.proj.name}" />
+	<property name="src.uiautomator.dir" location="${proj.uiautomator.dir}/src" />
+	<property name="uiautomator.prefix" value="${uiautomator.name}-${uiautomator.build_version}" />
+
+	<property name="uiautomator.dist.file.name" value="${uiautomator.prefix}.zip" />
+	<property name="uiautomator.jar.file.name" value="${uiautomator.prefix}.jar" />
+	<property name="uiautomator.src.file.name" value="${uiautomator.prefix}-sources.zip" />
+	<property name="ant.uiautomator.root.dir" value="${current.build.dir}/${uiautomator.proj.name}" />
+	<property name="ant.uiautomator.build.dir" location="${ant.uiautomator.root.dir}/build" />
+	<property name="ant.uiautomator.jar.dir" location="${ant.uiautomator.root.dir}/jar" />
+	<property name="ant.uiautomator.jar.file" value="${ant.uiautomator.jar.dir}/${uiautomator.jar.file.name}.jar" />
+	<property name="private.uiautomator.dist.components.dir" value="${current.dist.private.components.dir}/${uiautomator.name}-dist" />
+	<property name="private.uiautomator.dist.components.root.dir" value="${private.uiautomator.dist.components.dir}/${uiautomator.name}" />
+	<property name="private.uiautomator.dist.components.jar.dir" value="${private.uiautomator.dist.components.dir}/${uiautomator.name}" />
+	<property name="private.uiautomator.dist.components.jar.file" value="${private.uiautomator.dist.components.jar.dir}/${uiautomator.jar.file.name}" />
+	<property name="private.uiautomator.dist.jar.file" value="${current.dist.private.jars.dir}/${uiautomator.jar.file.name}" />
+	<property name="private.uiautomator.dist.src.dir" value="${current.dist.private.sources.dir}/${uiautomator.prefix}" />
+
+	<property name="public.components.uiautomator.dir" value="${current.dist.public.components.dir}/${uiautomator.name}" />
+	<property name="public.components.uiautomator.dist.file" value="${public.components.uiautomator.dir}/${uiautomator.dist.file.name}" />
+	<property name="public.components.uiautomator.src.file" value="${public.components.uiautomator.dir}/${uiautomator.src.file.name}" />
+
+	<!-- ======================================================================================== -->
+	<!-- ===================================== GLOBAL PROPERTIES =================================================== -->
+	<!-- ===================================== AC-unitee =================================================== -->
+	<!-- ======================================================================================== -->
+
+	<property name="unitee.build_version" value="${autocognite.build.version}" />
+	<property name="unitee.proj.name" value="AutoCognite-UniTEE" />
+	<property name="unitee.name" value="autocognite-unitee" />
+	<property name="unitee.github.rep.name" value="autocognite-unitee" />
+	<property name="root.unitee.dir" value="${all.sources.dir}/${unitee.github.rep.name}" />
+	<property name="proj.unitee.dir" value="${root.unitee.dir}/${unitee.proj.name}" />
+	<property name="src.unitee.dir" location="${proj.unitee.dir}/src" />
+	<property name="unitee.prefix" value="${unitee.name}-${unitee.build_version}" />
+		
+	<property name="unitee.dist.file.name" value="${unitee.prefix}.zip" />
+	<property name="unitee.jar.file.name" value="${unitee.prefix}.jar" />
+	<property name="unitee.src.file.name" value="${unitee.prefix}-sources.zip" />
+	<property name="ant.unitee.root.dir" value="${current.build.dir}/${unitee.proj.name}" />
+	<property name="ant.unitee.build.dir" location="${ant.unitee.root.dir}/build" />
+	<property name="ant.unitee.jar.dir" location="${ant.unitee.root.dir}/jar" />
+	<property name="ant.unitee.jar.file" value="${ant.unitee.jar.dir}/${unitee.jar.file.name}.jar" />
+	<property name="private.unitee.dist.tools.dir" value="${current.dist.private.tools.dir}/${unitee.name}-dist" />
+	<property name="private.unitee.dist.tools.root.dir" value="${private.unitee.dist.tools.dir}/${unitee.name}" />
+	<property name="private.unitee.dist.tools.jar.dir" value="${private.unitee.dist.tools.root.dir}/lib/java" />
+	<property name="private.unitee.dist.tools.jar.file" value="${private.unitee.dist.tools.jar.dir}/${unitee.jar.file.name}" />
+	<property name="private.unitee.dist.jar.file" value="${current.dist.private.jars.dir}/${unitee.jar.file.name}" />
+	<property name="private.unitee.dist.src.dir" value="${current.dist.private.sources.dir}/${unitee.prefix}" />
+	
+	<property name="public.tools.unitee.dir" value="${current.dist.public.tools.dir}/${unitee.name}" />
+	<property name="public.tools.unitee.dist.file" value="${public.tools.unitee.dir}/${unitee.dist.file.name}" />
+	<property name="public.tools.unitee.src.file" value="${public.tools.unitee.dir}/${unitee.src.file.name}" />
+
+	<!-- ======================================================================================== -->
+	<!-- ===================================== CLASSPATH =================================================== -->
+	<!-- ======================================================================================== -->
+
+	<path id="build.classpath">
+		<fileset dir="${3rd_party_jars}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${current.dist.private.jars.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+
+		<!-- ======================================================================================== -->
+		<!-- ===================================== DIRECTORY STRUCTURE =================================================== -->
+		<!-- ===================================== Common =================================================== -->
+		<!-- ======================================================================================== -->
+
+		<delete dir="${current.dist.dir}" />
+		<mkdir dir="${current.dist.dir}" />
+		<delete dir="${current.build.dir}" />
+		<mkdir dir="${current.build.dir}" />
+
+		<mkdir dir="${current.dist.private.dir}" />
+		<mkdir dir="${current.dist.private.components.dir}" />
+		<mkdir dir="${current.dist.private.jars.dir}" />
+		<mkdir dir="${current.dist.private.sources.dir}" />
+
+		<mkdir dir="${current.dist.public.dir}" />
+		<mkdir dir="${current.dist.public.components.dir}" />
+		<mkdir dir="${current.dist.public.tools.dir}" />
+
+
+		<!-- ======================================================================================== -->
+		<!-- ===================================== DIRECTORY STRUCTURE =================================================== -->
+		<!-- ===================================== Batteries =================================================== -->
+		<!-- ======================================================================================== -->
+
+		<mkdir dir="${ant.batteries.root.dir}" />
+		<mkdir dir="${ant.batteries.build.dir}" />
+		<mkdir dir="${ant.batteries.jar.dir}" />
+		<mkdir dir="${private.batteries.dist.components.dir}/docs" />
+		<copy todir="${private.batteries.dist.components.dir}/docs">
+			<fileset dir="${root.batteries.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy file="${root.batteries.dir}/LICENSE.txt" tofile="${private.batteries.dist.components.dir}/LICENSE.txt" />
+		<copy file="${root.batteries.dir}/NOTICE.txt" tofile="${private.batteries.dist.components.dir}/NOTICE.txt" />
+		<copy file="${root.batteries.dir}/README.txt" tofile="${private.batteries.dist.components.dir}/README.txt" />
+		<mkdir dir="${private.batteries.dist.components.jar.dir}" />
+		<mkdir dir="${public.components.batteries.dir}" />
+
+		<mkdir dir="${private.batteries.dist.src.dir}/${batteries.name}/src" />
+		<mkdir dir="${private.batteries.dist.src.dir}/docs" />
+		<copy file="${root.batteries.dir}/LICENSE.txt" tofile="${private.batteries.dist.src.dir}/LICENSE.txt" />
+		<copy file="${root.batteries.dir}/NOTICE.txt" tofile="${private.batteries.dist.src.dir}/NOTICE.txt" />
+		<copy file="${root.batteries.dir}/README.txt" tofile="${private.batteries.dist.src.dir}/README.txt" />
+		<copy todir="${private.batteries.dist.src.dir}/docs">
+			<fileset dir="${root.batteries.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+
+		<copy file="${source.general.acprops.file}" tofile="${private.batteries.dist.components.root.dir}/autocognite.conf" />
+
+		
+
+		<!-- ======================================================================================== -->
+		<!-- ===================================== DIRECTORY STRUCTURE =================================================== -->
+		<!-- ===================================== testcommons =================================================== -->
+		<!-- ======================================================================================== -->
+
+		<mkdir dir="${ant.testcommons.root.dir}" />
+		<mkdir dir="${ant.testcommons.build.dir}" />
+		<mkdir dir="${ant.testcommons.jar.dir}" />
+		<mkdir dir="${private.testcommons.dist.components.dir}/docs" />
+		<copy todir="${private.testcommons.dist.components.dir}/docs">
+			<fileset dir="${root.testcommons.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy file="${root.testcommons.dir}/LICENSE.txt" tofile="${private.testcommons.dist.components.dir}/LICENSE.txt" />
+		<copy file="${root.testcommons.dir}/NOTICE.txt" tofile="${private.testcommons.dist.components.dir}/NOTICE.txt" />
+		<copy file="${root.testcommons.dir}/README.txt" tofile="${private.testcommons.dist.components.dir}/README.txt" />
+		<mkdir dir="${private.testcommons.dist.components.jar.dir}" />
+		<mkdir dir="${public.components.testcommons.dir}" />
+
+		<mkdir dir="${private.testcommons.dist.src.dir}/${testcommons.name}/src" />
+		<mkdir dir="${private.testcommons.dist.src.dir}/docs" />
+		<copy file="${root.testcommons.dir}/LICENSE.txt" tofile="${private.testcommons.dist.src.dir}/LICENSE.txt" />
+		<copy file="${root.testcommons.dir}/NOTICE.txt" tofile="${private.testcommons.dist.src.dir}/NOTICE.txt" />
+		<copy file="${root.testcommons.dir}/README.txt" tofile="${private.testcommons.dist.src.dir}/README.txt" />
+		<copy todir="${private.testcommons.dist.src.dir}/docs">
+			<fileset dir="${root.testcommons.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<copy file="${source.general.acprops.file}" tofile="${private.testcommons.dist.components.root.dir}/autocognite.conf" />
+
+		<!-- ======================================================================================== -->
+		<!-- ===================================== DIRECTORY STRUCTURE =================================================== -->
+		<!-- ===================================== uiautomator =================================================== -->
+		<!-- ======================================================================================== -->
+
+		<mkdir dir="${ant.uiautomator.root.dir}" />
+		<mkdir dir="${ant.uiautomator.build.dir}" />
+		<mkdir dir="${ant.uiautomator.jar.dir}" />
+		<mkdir dir="${private.uiautomator.dist.components.dir}/docs" />
+		<copy todir="${private.uiautomator.dist.components.dir}/docs">
+			<fileset dir="${root.uiautomator.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy file="${root.uiautomator.dir}/LICENSE.txt" tofile="${private.uiautomator.dist.components.dir}/LICENSE.txt" />
+		<copy file="${root.uiautomator.dir}/NOTICE.txt" tofile="${private.uiautomator.dist.components.dir}/NOTICE.txt" />
+		<copy file="${root.uiautomator.dir}/README.txt" tofile="${private.uiautomator.dist.components.dir}/README.txt" />
+		<mkdir dir="${private.uiautomator.dist.components.jar.dir}" />
+		<mkdir dir="${public.components.uiautomator.dir}" />
+
+		<mkdir dir="${private.uiautomator.dist.src.dir}/${uiautomator.name}/src" />
+		<mkdir dir="${private.uiautomator.dist.src.dir}/docs" />
+		<copy file="${root.uiautomator.dir}/LICENSE.txt" tofile="${private.uiautomator.dist.src.dir}/LICENSE.txt" />
+		<copy file="${root.uiautomator.dir}/NOTICE.txt" tofile="${private.uiautomator.dist.src.dir}/NOTICE.txt" />
+		<copy file="${root.uiautomator.dir}/README.txt" tofile="${private.uiautomator.dist.src.dir}/README.txt" />
+		<copy todir="${private.uiautomator.dist.src.dir}/docs">
+			<fileset dir="${root.uiautomator.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<copy file="${source.general.acprops.file}" tofile="${private.uiautomator.dist.components.root.dir}/autocognite.conf" />
+
+		<!-- ======================================================================================== -->
+		<!-- ===================================== DIRECTORY STRUCTURE =================================================== -->
+		<!-- ===================================== unitee =================================================== -->
+		<!-- ======================================================================================== -->
+
+		<mkdir dir="${ant.unitee.root.dir}" />
+		<mkdir dir="${ant.unitee.build.dir}" />
+		<mkdir dir="${ant.unitee.jar.dir}" />
+		
+		<mkdir dir="${private.unitee.dist.tools.dir}/docs" />
+		<copy todir="${private.unitee.dist.tools.dir}/docs">
+			<fileset dir="${root.unitee.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy file="${root.unitee.dir}/LICENSE.txt" tofile="${private.unitee.dist.tools.dir}/LICENSE.txt" />
+		<copy file="${root.unitee.dir}/NOTICE.txt" tofile="${private.unitee.dist.tools.dir}/NOTICE.txt" />
+		<copy file="${root.unitee.dir}/README.txt" tofile="${private.unitee.dist.tools.dir}/README.txt" />
+		<mkdir dir="${private.unitee.dist.components.jar.dir}" />
+		<mkdir dir="${public.tools.unitee.dir}" />
+		
+
+		<mkdir dir="${private.unitee.dist.src.dir}/${unitee.name}/src" />
+		<mkdir dir="${private.unitee.dist.src.dir}/docs" />
+		<copy file="${root.unitee.dir}/LICENSE.txt" tofile="${private.unitee.dist.src.dir}/LICENSE.txt" />
+		<copy file="${root.unitee.dir}/NOTICE.txt" tofile="${private.unitee.dist.src.dir}/NOTICE.txt" />
+		<copy file="${root.unitee.dir}/README.txt" tofile="${private.unitee.dist.src.dir}/README.txt" />
+		<copy todir="${private.unitee.dist.src.dir}/docs">
+			<fileset dir="${root.unitee.dir}/docs">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<mkdir dir="${private.unitee.dist.tools.root.dir}" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/lib/java" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/examples" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/examples/data" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/examples/uiauto_maps" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/config" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/temp" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/scripts" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/tools" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/ext" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/ext/java" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/log" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/data" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/data/sources" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/data/references" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/uiauto_maps" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/uiauto_images" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/temp/screenshots" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/tools/uidrivers" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/tests" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/report" />
+		<mkdir dir="${private.unitee.dist.tools.root.dir}/archives" />
+
+		<copy file="${proj.unitee.dir}/unitee.bat" tofile="${private.unitee.dist.tools.root.dir}/unitee.bat" />
+		<copy file="${proj.unitee.dir}/unitee.sh" tofile="${private.unitee.dist.tools.root.dir}/unitee.sh" />
+
+		<copy todir="${private.unitee.dist.tools.root.dir}/examples/data">
+			<fileset dir="${source.private.examples.dir}/data">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+
+		<copy todir="${private.unitee.dist.tools.root.dir}/examples/uiauto_maps">
+			<fileset dir="${source.private.examples.dir}/uiauto_maps">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		<copy file="${source.general.acprops.file}" tofile="${private.unitee.dist.tools.root.dir}/config/autocognite.conf" />
+	</target>
+
+	
+
+
+	<!-- ===================================== AC-Batteries =================================================== -->
+
+	<target name="batteries_build" depends="clean">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+
+		<javac srcdir="${src.batteries.dir}" destdir="${ant.batteries.build.dir}" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+			<classpath refid="build.classpath" />
+		</javac>
+		
+		<copy todir="${ant.batteries.build.dir}">
+		    <fileset dir="${src.batteries.dir}"
+		             includes="**/*.conf" />
+		</copy>
+
+		<jar destFile="${ant.batteries.jar.file}" filesetmanifest="skip">
+			<fileset dir="${ant.batteries.build.dir}" />
+			<zipgroupfileset includes="*.jar" dir="${batteries.depends.jar.dir}" />
+		</jar>
+
+		<copy file="${ant.batteries.jar.file}" tofile="${private.batteries.dist.components.jar.file}" />
+		<copy file="${ant.batteries.jar.file}" tofile="${private.batteries.dist.jar.file}" />
+
+		<copy todir="${private.batteries.dist.src.dir}/${batteries.name}/src">
+			<fileset dir="${src.batteries.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+
+		<zip destfile="${public.components.batteries.src.file}" basedir="${private.batteries.dist.src.dir}" />
+		<zip destfile="${public.components.batteries.dist.file}" basedir="${private.batteries.dist.components.dir}" />
+
+	</target>
+
+	<target name="batteries_copy" depends="batteries_build">
+	</target>
+
+	<!-- ===================================== AC-testcommons =================================================== -->
+
+	<target name="testcommons_build" depends="batteries_copy">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+
+		<javac srcdir="${src.testcommons.dir}" destdir="${ant.testcommons.build.dir}" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+			<classpath refid="build.classpath" />
+		</javac>
+		
+		<copy todir="${ant.testcommons.build.dir}">
+		    <fileset dir="${src.testcommons.dir}"
+		             includes="**/*.conf" />
+		</copy>
+
+		<jar jarfile="${ant.testcommons.jar.file}" basedir="${ant.testcommons.build.dir}" />
+		<copy file="${ant.testcommons.jar.file}" tofile="${private.testcommons.dist.components.jar.file}" />
+		<copy file="${ant.testcommons.jar.file}" tofile="${private.testcommons.dist.jar.file}" />
+
+		<copy todir="${private.testcommons.dist.src.dir}/${testcommons.name}/src">
+			<fileset dir="${src.testcommons.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+
+		<zip destfile="${public.components.testcommons.src.file}" basedir="${private.testcommons.dist.src.dir}" />
+
+		<zip destfile="${public.components.testcommons.dist.file}" basedir="${private.testcommons.dist.components.dir}" />
+
+	</target>
+
+	<target name="testcommons_copy" depends="testcommons_build">
+	</target>
+
+	<!-- ===================================== AC-uiautomator =================================================== -->
+
+	<target name="uiautomator_build" depends="testcommons_copy">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+
+		<javac srcdir="${src.uiautomator.dir}" destdir="${ant.uiautomator.build.dir}" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+			<classpath refid="build.classpath" />
+		</javac>
+		
+		<copy todir="${ant.uiautomator.build.dir}">
+		    <fileset dir="${src.uiautomator.dir}"
+		             includes="**/*.conf" />
+		</copy>
+
+		<jar jarfile="${ant.uiautomator.jar.file}" basedir="${ant.uiautomator.build.dir}" />
+		<copy file="${ant.uiautomator.jar.file}" tofile="${private.uiautomator.dist.components.jar.file}" />
+		<copy file="${ant.uiautomator.jar.file}" tofile="${private.uiautomator.dist.jar.file}" />
+
+		<copy todir="${private.uiautomator.dist.src.dir}/${uiautomator.name}/src">
+			<fileset dir="${src.uiautomator.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+
+		<zip destfile="${public.components.uiautomator.src.file}" basedir="${private.uiautomator.dist.src.dir}" />
+		<zip destfile="${public.components.uiautomator.dist.file}" basedir="${private.uiautomator.dist.components.dir}" />
+
+	</target>
+
+	<target name="uiautomator_copy" depends="uiautomator_build">
+	</target>
+
+	<!-- ===================================== AC-unitee =================================================== -->
+
+	<target name="unitee_build" depends="uiautomator_copy">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+
+		<javac srcdir="${src.unitee.dir}" destdir="${ant.unitee.build.dir}" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+			<classpath refid="build.classpath" />
+		</javac>
+		
+		
+		<copy todir="${ant.unitee.build.dir}">
+		    <fileset dir="${src.unitee.dir}"
+		             includes="**/*.conf" />
+		</copy>
+
+		<jar jarfile="${ant.unitee.jar.file}" basedir="${ant.unitee.build.dir}" />
+		<copy file="${ant.unitee.jar.file}" tofile="${private.unitee.dist.jar.file}" />
+
+		<copy todir="${private.unitee.dist.src.dir}/${unitee.name}/src">
+			<fileset dir="${src.unitee.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+
+		<zip destfile="${public.tools.unitee.src.file}" basedir="${private.unitee.dist.src.dir}" />
+
+	</target>
+
+	<target name="unitee_copy" depends="unitee_build">
+		<jar destFile="${private.unitee.dist.tools.jar.file}">
+			<zipgroupfileset includes="*.jar" dir="${current.dist.private.jars.dir}" />
+		</jar>
+		<zip destfile="${public.tools.unitee.dist.file}" basedir="${private.unitee.dist.tools.dir}" />
+		
+		<copy file="${private.unitee.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/autocognite-unitee/lib/java/unitee.jar"/>
+		<copy file="${private.unitee.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/autocognite-unitee/lib/java/unitee.jar"/>
+		
+</target>
+
+</project>

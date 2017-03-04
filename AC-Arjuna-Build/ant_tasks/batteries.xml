@@ -1,0 +1,71 @@
+<?xml version= "1.0"?>
+<project name="batteries" default="batteries_build" basedir=".">
+	<description>
+simple example build file
+</description>
+	<!-- set global properties for this build -->
+
+	<!-- ======================================================================================== -->
+	<!-- ===================================== GLOBAL PROPERTIES =================================================== -->
+	<!-- ===================================== AC-Batteries =================================================== -->
+	<!-- ======================================================================================== -->
+
+	<property name="batteries.proj.name" value="AutoCognite-Batteries" />
+	<property name="batteries.name" value="autocognite-batteries" />
+	<property name="batteries.github.rep.name" value="autocognite-batteries" />
+	<property name="root.batteries.dir" value="${all.sources.dir}/${batteries.github.rep.name}" />
+	<property name="proj.batteries.dir" value="${root.batteries.dir}/${batteries.proj.name}" />
+	<property name="src.batteries.dir" location="${proj.batteries.dir}/src" />
+
+	<property name="batteries.dist.file.name" value="${batteries.name}.zip" />
+	<property name="batteries.jar.file.name" value="${batteries.name}.jar" />
+	<property name="batteries.src.file.name" value="${batteries.name}-sources.zip" />
+	<property name="ant.batteries.root.dir" value="${current.build.dir}/${batteries.proj.name}" />
+	<property name="ant.batteries.build.dir" location="${ant.batteries.root.dir}/build" />
+	<property name="ant.batteries.jar.dir" location="${ant.batteries.root.dir}/jar" />
+	<property name="ant.batteries.jar.file" value="${ant.batteries.jar.dir}/${batteries.jar.file.name}" />
+	<property name="private.batteries.self.jar.dir" value="${current.dist.private.jars.dir}/batteries" />
+	<property name="private.batteries.self.jar.file" value="${private.batteries.self.jar.dir}/${batteries.jar.file.name}" />
+	<property name="private.batteries.dist.src.dir" value="${current.dist.private.sources.dir}/${batteries.name}" />
+	
+	<target name="batteries_mkdirs">
+		<!-- ======================================================================================== -->
+		<!-- ===================================== DIRECTORY STRUCTURE =================================================== -->
+		<!-- ===================================== Batteries =================================================== -->
+		<!-- ======================================================================================== -->
+
+	</target>
+	
+	<!-- ===================================== AC-Batteries =================================================== -->
+
+	<target name="batteries_build" depends="batteries_mkdirs">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+
+		<javac srcdir="${src.batteries.dir}" destdir="${ant.batteries.build.dir}" debug="true" debuglevel="lines,vars,source" includeantruntime="false">
+			<classpath refid="build.classpath" />
+		</javac>
+
+		<copy todir="${ant.batteries.build.dir}">
+		    <fileset dir="${src.batteries.dir}"
+		             includes="**/*.conf" />
+		    <fileset dir="${src.batteries.dir}"
+		             includes="**/*.help" />
+		</copy>
+		
+		<jar destFile="${ant.batteries.jar.file}" filesetmanifest="skip">
+			<fileset dir="${ant.batteries.build.dir}" />
+		</jar>
+		
+		<copy file="${ant.batteries.jar.file}" tofile="${private.batteries.self.jar.file}" />
+		
+		<copy todir="${private.batteries.dist.src.dir}/${batteries.name}/src">
+			<fileset dir="${src.batteries.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+	</target>
+
+</project>

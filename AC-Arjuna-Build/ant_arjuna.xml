@@ -1,0 +1,46 @@
+<?xml version= "1.0"?>
+<project name="arjuna" default="build" basedir=".">
+	<import file="./ant_tasks/global.xml"/>
+	<import file="./ant_tasks/batteries.xml"/>
+	<import file="./ant_tasks/unitee-core.xml"/>
+	<import file="./ant_tasks/cli.xml"/>
+	<import file="./ant_tasks/arjuna.xml"/>
+	<import file="./ant_tasks/obfuscate.xml"/>
+	<description>
+simple example build file
+</description>
+	<!-- set global properties for this build -->
+
+	<!-- ======================================================================================== -->
+	<!-- ===================================== GLOBAL PROPERTIES =================================================== -->
+	<!-- ===================================== Common =================================================== -->
+	<!-- ======================================================================================== -->
+	
+	<taskdef resource="proguard/ant/task.properties" classpath="/Users/rahulverma/Documents/coding_workbench/tools_dir/proguard5.2.1/lib/proguard.jar" />
+		
+	<target name="build">
+		<antcall>
+	    	<target name="global_clean"/>
+	   	</antcall>
+		<antcall>
+	    	<target name="batteries_build"/>
+	   	</antcall>
+		<antcall>
+	    	<target name="unitee.core_build"/>
+	   	</antcall>
+		<antcall>
+	    	<target name="cli_build"/>
+	   	</antcall>
+		<antcall>
+	    	<target name="arjuna_compile"/>
+	   	</antcall>
+		<antcall target="obfuscate">
+				<param name="jar1" value="${private.arjuna.clear.jar.file}"/>
+				<param name="jar2" value="${private.arjuna.obfuscated.jar.file}"/>
+	   	</antcall>
+		<antcall>
+	    	<target name="arjuna_build"/>
+	   	</antcall>
+	</target>
+
+</project>
