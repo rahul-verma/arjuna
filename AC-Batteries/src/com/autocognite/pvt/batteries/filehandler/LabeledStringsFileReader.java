@@ -1,0 +1,88 @@
+/*******************************************************************************
+ * Copyright 2015-16 AutoCognite Testing Research Pvt Ltd
+ * 
+ * Website: www.AutoCognite.com
+ * Email: support [at] autocognite.com
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * 
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ * 
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ ******************************************************************************/
+package com.autocognite.pvt.batteries.filehandler;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class LabeledStringsFileReader {
+	FileLineReader reader = null;
+	private ArrayList<String> labels = new ArrayList<String>();
+	private HashMap<String, ArrayList<String>> labeledStrings = new HashMap<String, ArrayList<String>>();
+	private String currentLabel = null;
+
+	public LabeledStringsFileReader(String filePath) throws IOException {
+		reader = new FileLineReader(filePath);
+		init();
+	}
+
+	private void addLabel(String label) {
+		if (!labeledStrings.containsKey(label)) {
+			labeledStrings.put(label, new ArrayList<String>());
+			labels.add(label);
+		}
+	}
+
+	private void addString(String inString) {
+		if (this.currentLabel != null) {
+			labeledStrings.get(this.currentLabel).add(inString);
+		}
+	}
+
+	private void handleLine(String line) {
+		String trimmedLine = line.trim();
+		String pattern = "\\[\\s*(.*?)\\s*\\]";
+		Pattern r = Pattern.compile(pattern);
+		Matcher m = r.matcher(trimmedLine);
+		if (m.find()) {
+			addLabel(m.group(1));
+			this.currentLabel = m.group(1);
+		} else {
+			if (!trimmedLine.startsWith("#")) {
+				addString(trimmedLine);
+			}
+		}
+	}
+
+	private void init() {
+		ArrayList<String> lines = reader.all();
+		for (String line : lines) {
+			handleLine(line);
+		}
+	}
+
+	public void close() {
+		this.reader.close();
+	}
+
+	public ArrayList<String> getLabels() {
+		return labels;
+	}
+
+	public HashMap<String, ArrayList<String>> getAllLabeledStrings() {
+		return labeledStrings;
+	}
+
+	public ArrayList<String> getStringsForLabel(String label) {
+		return labeledStrings.get(label);
+	}
+}
