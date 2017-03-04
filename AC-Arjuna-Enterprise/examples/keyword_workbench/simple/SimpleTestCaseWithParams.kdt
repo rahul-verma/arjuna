@@ -1,0 +1,3 @@
+[Test]					
+ Result = Multiply Numbers 2 3
+ Is ${Result} = 6 ?

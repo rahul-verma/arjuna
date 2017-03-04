@@ -1,0 +1,15 @@
+[in.unitee.ex.klib.StaticKeywords]	addNumbers
+	Multiply Numbers = multiplyNumbers
+[in.unitee.ex.klib.LowLevelCodedKeywords]	Create Calculator = createCalculator
+	Create Formatter = createFormatter
+	Create Dummy Math = createDummyMath
+	Add = add
+	Multiply = multiply
+	Subtract = subtract
+	Square = square
+	Print = print
+	Print Formatted = printFormatted
+	Reset Calculator = resetCalculator
+
+[in.unitee.ex.klib.HighLevelCodedKeywords]	Add and Square = addAndSquare
+

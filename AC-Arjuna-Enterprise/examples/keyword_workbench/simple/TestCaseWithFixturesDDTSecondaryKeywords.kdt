@@ -1,0 +1,18 @@
+[Init]
+Test Style is DDTestSuite
+Data Source is "{UNITEE_DATA_DIR}/secondary_keywords.ini"
+Data Delimiter is ,
+
+[ Set Up Once]
+	Create	Calculator			
+		Create	Formatter			
+	Create	Dummy Math			
+[Set Up Test ]
+	Reset	Calculator						
+[Test 1]					
+	Squared	=	Add and Square	${First}	${Second}
+	Is	${Squared}	=	${Answer}
+[tear down Test]				
+	Print tearDownTest						
+[TearDown once ]				
+	Print tearDownOnce		

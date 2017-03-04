@@ -1,0 +1,16 @@
+[ Set Up Once]
+	Create Calculator			
+		Create	Formatter			
+	Create	Dummy Math			
+[Set Up Test ]
+	Reset Calculator						
+[Test 1]					
+Add 1 2		
+	Is	Result	=	3	?
+[Test 2]					
+    Multiply numbers 2 3		
+	Is Result = 6?
+[tear down Test]				
+	Print tearDownTest						
+[TearDown once ]				
+	Print tearDownOnce		
