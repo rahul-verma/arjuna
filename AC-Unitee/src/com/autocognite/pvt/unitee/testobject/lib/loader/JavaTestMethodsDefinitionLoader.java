@@ -11,8 +11,10 @@ import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DriveWithData;
 import com.autocognite.arjuna.annotations.DriveWithDataArray;
+import com.autocognite.arjuna.annotations.DriveWithDataFile;
 import com.autocognite.arjuna.annotations.DriveWithDataGenerator;
 import com.autocognite.arjuna.annotations.DriveWithDataMethod;
+import com.autocognite.arjuna.annotations.Instances;
 import com.autocognite.arjuna.annotations.Skip;
 import com.autocognite.arjuna.annotations.TestMethod;
 import com.autocognite.arjuna.interfaces.TestVariables;
@@ -82,6 +84,9 @@ public class JavaTestMethodsDefinitionLoader implements TestCreatorLoader {
 			} else if (m.isAnnotationPresent(DriveWithDataGenerator.class)) {
 				anyDataDriveAnnPresent = true;
 				methodDSMap.put(mName, DataSourceType.DATA_GENERATOR);				
+			} else if (m.isAnnotationPresent(DriveWithDataFile.class)) {
+				anyDataDriveAnnPresent = true;
+				methodDSMap.put(mName, DataSourceType.DATA_FILE);					
 			}
 			
 			if (isTestMethod || anyDataDriveAnnPresent){
@@ -131,18 +136,70 @@ public class JavaTestMethodsDefinitionLoader implements TestCreatorLoader {
 				hasDataSourceAnn = true;
 			}
 			
+			// For Data ref processing
+			methodDef.setDataRefPresent(JavaTestLoadingUtils.isDataRefPresent(m));
+			if (ArjunaInternal.displayLoadingInfo){
+				logger.debug("Data Ref Present? " + methodDef.isDataRefPresent());
+			}
+			
+			if (methodDef.isDataRefPresent()){
+				String dataRefName = JavaTestLoadingUtils.getDataRefName(m);
+				String filePath = JavaTestLoadingUtils.getDataRefPath(m);
+				if (dataRefName.equals("NOT_SET")){
+					dataRefName = FilenameUtils.getBaseName(filePath).toUpperCase();
+				}
+				if (ArjunaInternal.displayLoadingInfo){
+					logger.debug(String.format("Now registering data reference with name %s.", dataRefName));
+				}
+				methodDef.addFileDataRefWithPath(dataRefName, filePath);
+			}
+			
+			boolean instancesAnnotationPresent = JavaTestLoadingUtils.isInstancesAnnotationPresent(m);
 			boolean hasUserSuppliedProperties = false;
-			methodDef.setInstanceCount(1);
-			methodDef.setInstanceThreadCount(1);
+			if (ArjunaInternal.displayLoadingInfo){
+				logger.debug("Instances Annotation Present? " + instancesAnnotationPresent);
+			}
+			Instances instancesAnn = null;
+			HashMap<Integer,HashMap<String,String>> instanceProps = new HashMap<Integer,HashMap<String,String>>();
+			if (instancesAnnotationPresent){
+				if (ArjunaInternal.displayLoadingInfo){
+					logger.debug("Found @Instances Annotation");
+				}
+				instancesAnn = (Instances) m.getAnnotation(Instances.class);
+				int instanceCount = JavaTestLoadingUtils.getInstancesCount(instancesAnn);
+				if (instanceCount == -1){
+					System.err.println(String.format("Instance count must be >=1. Correction needed for: %s", methodDef.getQualifiedName()));
+					System.err.println("Exiting...");
+					System.exit(1);
+				}
+				
+				int instanceThreadCount = JavaTestLoadingUtils.getInstanceThreadCount(instancesAnn);
+				if (instanceThreadCount == -1){
+					System.err.println(String.format("Instance Thread count must be >=1. Correction needed for: %s", methodDef.getQualifiedName()));
+					System.err.println("Exiting...");
+					System.exit(1);
+				}
+				
+				methodDef.setInstanceCount(instanceCount);
+				methodDef.setInstanceThreadCount(instanceThreadCount);
+				if (ArjunaInternal.displayInstanceProcessingInfo){
+					logger.debug("Instance Count: " + methodDef.getInstanceCount());
+				}
+				hasUserSuppliedProperties = JavaTestLoadingUtils.hasUserSuppliedProperties(mQualifiedName, instancesAnn);
+				if (ArjunaInternal.displayUDVProcessingInfo){
+					logger.debug("User has supplied UDVs: " + hasUserSuppliedProperties);
+				}
+			}
 			
 			boolean testVarsAreMandatory = hasUserSuppliedProperties || methodDef.isDataRefPresent() || hasDataSourceAnn;
-			this.populateExpectedSignature(m, methodDef, mQualifiedName, testVarsAreMandatory);	
+			this.populateExpectedSignature(m, methodDef, mQualifiedName, testVarsAreMandatory);
+			instanceProps = JavaTestLoadingUtils.loadUDVFromInstancesAnnotation(instancesAnn, methodDef.getInstanceCount(), hasUserSuppliedProperties);	
 			
 			if (ArjunaInternal.displayLoadingInfo){
 				logger.debug("Adding instances. count=" + methodDef.getInstanceCount());
 			}
 			for (int i=1; i <= methodDef.getInstanceCount(); i++){
-				methodDef.setUdvForInstance(i, new HashMap<String,String>());
+				methodDef.setUdvForInstance(i, instanceProps.get(i));
 			}
 			
 			this.getTestClassDef().addTestMethodDefinition(mName, methodDef);

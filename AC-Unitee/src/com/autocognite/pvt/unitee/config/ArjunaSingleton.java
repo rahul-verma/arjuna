@@ -57,6 +57,7 @@ import com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerMisConfigura
 import com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.MSession;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.Session;
+import com.autocognite.pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
 import com.typesafe.config.ConfigObject;
 
 public enum ArjunaSingleton {
@@ -232,6 +233,7 @@ public enum ArjunaSingleton {
 			throw e;
 		}
 		groupsDB.createAllCapturingGroup();
+		groupsDB.createUserDefinedGroups();
 		session.load();
 	}
 	
@@ -362,13 +364,56 @@ class SessionCreator {
 
 	public SessionCreator(ComponentIntegrator integrator, Map<TestPickerProperty, String> options, String sessionName) throws Exception{
 		this.sessionName = sessionName;
-		ArjunaSingleton.INSTANCE.getTestGroupDB().createPickerConfigForCLIConfig(options);
-		PickerTargetType pType = ArjunaSingleton.INSTANCE.getTestGroupDB().getTargetForMagicGroup();
-		if (pType == null){
-			session = new MSession();
+		if (sessionName.trim().toUpperCase().equals("MSESSION")){
+			ArjunaSingleton.INSTANCE.getTestGroupDB().createPickerConfigForCLIConfig(options);
+			PickerTargetType pType = ArjunaSingleton.INSTANCE.getTestGroupDB().getTargetForMagicGroup();
+			if (pType == null){
+				session = new MSession();
+			} else {
+				session = new MSession(pType);
+			}
 		} else {
-			session = new MSession(pType);
+			String sessionsDir = integrator.value(ArjunaProperty.DIRECTORY_SESSIONS).asString();
+			File sDir = new File(sessionsDir);
+			boolean matchFound = false;
+			String sFileName = null;
+			if (!sDir.isDirectory()){
+				Console.displayError("Sessions directory does not exist: " + sDir);
+				Console.displayError("Exiting...");
+				System.exit(1);
+			}
+			
+			boolean fileExistsButConfExtUsedInSessionName = false;
+			for (File f: sDir.listFiles()){
+				if (f.isFile()){
+					if (f.getName().toUpperCase().equals(sessionName.toUpperCase() + "." + "CONF")){
+						matchFound = true;
+						sFileName = f.getName();
+						break;
+					}
+					
+					if ((sessionName.toUpperCase().endsWith(".CONF")) && (f.getName().toUpperCase().equals(sessionName.toUpperCase()))){
+						fileExistsButConfExtUsedInSessionName = true;
+					}
+				}
+			}
+			
+			if (!matchFound){
+				if (fileExistsButConfExtUsedInSessionName){
+					Console.displayError("Provide session name without the conf extension.");
+				} else {
+					Console.displayError("No session template found for session name: "  + sessionName);
+					Console.displayError(String.format("Ensure that >>%s.conf<< file is present in >>%s<< directory.", sessionName.toUpperCase().replace(".CONF", ""), sessionsDir));
+					if (sessionName.toUpperCase().endsWith(".CONF")){
+						Console.displayError("Also, provide session name without the conf extension.");
+					}
+				}
+				Console.displayError("Exiting...");
+				System.exit(1);
+			}
+			session = new UserDefinedSession(sessionName, sessionsDir + "/" + sFileName);
 		}
+		
 	}
 	
 	public Session getSession() throws Exception {

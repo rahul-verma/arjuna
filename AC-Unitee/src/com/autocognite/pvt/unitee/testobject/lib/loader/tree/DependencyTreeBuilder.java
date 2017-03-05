@@ -12,6 +12,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.annotations.ClassDependency;
 import com.autocognite.arjuna.annotations.MethodDependency;
 import com.autocognite.batteries.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
@@ -43,6 +44,22 @@ public class DependencyTreeBuilder {
 			logger.debug(String.format("Adding dependency edge %s for: %s", dependencyMethodQualifiedName, dependentMethodQualifiedName));
 		}
 		allNodesMap.get(dependentMethodQualifiedName).addEdge(allNodesMap.get(dependencyMethodQualifiedName));
+	}
+	
+	private List<String> addDependencyEdgesForClassesDependency(JavaTestMethodDefinition dependentMethodDef, String dependentMethodQualifiedName, ClassDependency depAnn) throws Exception{
+		List<String> processedClassDeps = new ArrayList<String>();
+		for (Class<?> dependencyClass: depAnn.testClasses()){
+			JavaTestClassDefinition depClassDef = DependencyUtils.getClassDefForDependencyClass(dependentMethodQualifiedName, dependencyClass);
+			if (depClassDef == null){
+				continue;
+			}
+			
+			processedClassDeps.add(dependencyClass.getName());
+			for(String dependencyMethodName: depClassDef.getTestMethodQueue()){
+				addSingleMethodDependencyEdge(dependentMethodQualifiedName, dependencyClass.getName() + "." + dependencyMethodName);
+			}
+		}
+		return processedClassDeps;
 	}
 
 	private List<String> addDependencyEdgesForMethodDependency(JavaTestMethodDefinition dependentMethodDef, String dependentMethodQualifiedName, MethodDependency depAnn, List<String> dependencyMethodNames) throws Exception{
@@ -127,6 +144,28 @@ public class DependencyTreeBuilder {
 					}
 					methodDef.addDependencyMethodNames(processedDepMethodNames);
 				}
+			}
+			
+			// Add self dependencies
+			if (m.isAnnotationPresent(ClassDependency.class)){
+				Annotation annotation = m.getAnnotation(ClassDependency.class);
+				ClassDependency depAnn = (ClassDependency) annotation;
+				List<String> processedClassDeps = null;
+				Class<?>[] depClasses = DependencyUtils.getDependencyClasses(targetNodeName, depAnn);
+				if (ArjunaInternal.displayDefProcessingInfo){
+					logger.debug(String.format("Found class dependencies type annotation for %s: %s.", targetNodeName, Arrays.toString(depClasses)));
+				}
+				
+				if (depClasses.length > 0){
+					processedClassDeps = this.addDependencyEdgesForClassesDependency(methodDef, targetNodeName, depAnn);
+				}
+				
+				if (processedClassDeps.size() != 0){
+					if (ArjunaInternal.displayDefProcessingInfo){
+						logger.debug("Adding Class dependencies to Method Definition : " + processedClassDeps);
+					}
+					methodDef.addDependencyClassNames(processedClassDeps);
+				}					
 			}
 
 			this.baseNode.addEdge(allNodesMap.get(targetNodeName));

@@ -22,12 +22,28 @@ import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.DefaultTestGroup;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.Group;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.JavaTestClassLoader;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.MBGroup;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.MLGroup;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.Picker;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerConfig;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.SkippedJavaTestClassLoader;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.UnselectedJavaTestClassLoader;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.UserDefinedGroup;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode;
 import com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator;
 
 public class TestGroupsDB {
 	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
 	private Map<String, Group> defaultGroups = new HashMap<String, Group>();
+	private Map<String,String> customGroupFileNames = new HashMap<String,String>();
+	private PickerTargetType targetForMagicGroup = null;
+	private String groupsDir;
 	private PickerConfig config = null;
 
 	public TestGroupsDB() throws Exception{
@@ -83,10 +99,56 @@ public class TestGroupsDB {
 	}
 	
 	public Group getGroup(SessionSubNode subNode, String name) throws Exception{
+		Group group = null;
 		String uName = name.toUpperCase();
-		Group group = this.defaultGroups.get(name.toUpperCase());
-		group.setSessionSubNode(subNode);
+		if (this.customGroupFileNames.containsKey(uName)){
+			group = new UserDefinedGroup(subNode, uName, groupsDir + "/" + this.customGroupFileNames.get(uName));
+		} else if (this.defaultGroups.containsKey(uName)){
+			group = this.defaultGroups.get(uName);
+			group.setSessionSubNode(subNode);
+		} else {
+			String sessionFile = RunConfig.value(ArjunaProperty.DIRECTORY_SESSIONS).asString() + "/" + subNode.getSession().getName() + ".conf";
+			if ((name.toUpperCase().endsWith(".CONF")) && (this.customGroupFileNames.containsKey(uName.replace(".CONF", "")))){
+					Console.displayError(
+							String.format(
+									"Provide group name >>%s<< without the conf extension in session file: >>%s<<.",
+									uName.replace(".CONF", ""),
+									sessionFile
+							));
+			} else {
+					Console.displayError(
+							String.format(
+									"No group template found for group name >>%s<< specified in session file: >>%s<< ", 
+									uName.replace(".CONF", ""), 
+									sessionFile
+					));
+					
+					if (name.toUpperCase().endsWith(".CONF")){
+						Console.displayError("Also, provide group name without the conf extension.");
+					}
+			}
+			
+			Console.displayError("Exiting...");
+			System.exit(1);
+		}
+
 		return group;
+	}
+	
+	public void createUserDefinedGroups() throws Exception{
+		groupsDir = RunConfig.value(ArjunaProperty.DIRECTORY_GROUPS).asString();
+		File sDir = new File(groupsDir);
+		if (!sDir.isDirectory()){
+			return;
+		}
+		for (File f: sDir.listFiles()){
+			if (f.isFile()){
+				if (f.getName().toUpperCase().endsWith(".CONF")){
+					String gName = FilenameUtils.getBaseName(f.getName());
+					this.customGroupFileNames.put(gName.toUpperCase(), f.getName());
+				}
+			}
+		}		
 	}
 
 	public PickerTargetType getTargetForMagicGroup() {

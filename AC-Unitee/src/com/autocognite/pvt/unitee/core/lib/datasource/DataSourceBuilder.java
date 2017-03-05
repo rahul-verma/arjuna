@@ -10,11 +10,15 @@ import org.apache.log4j.Logger;
 import com.autocognite.arjuna.annotations.Data;
 import com.autocognite.arjuna.annotations.DriveWithData;
 import com.autocognite.arjuna.annotations.DriveWithDataArray;
+import com.autocognite.arjuna.annotations.DriveWithDataFile;
 import com.autocognite.arjuna.annotations.DriveWithDataGenerator;
 import com.autocognite.arjuna.annotations.DriveWithDataMethod;
 import com.autocognite.batteries.config.RunConfig;
 import com.autocognite.batteries.databroker.DataSource;
+import com.autocognite.batteries.databroker.DataSourceFactory;
+import com.autocognite.batteries.util.FileSystemBatteries;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 import com.autocognite.pvt.unitee.core.lib.annotate.None;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 
@@ -107,6 +111,29 @@ public class DataSourceBuilder {
 		dataArrayAnnHeaders = dataArrayContainer.headers();
 		
 	}
+	
+	private void processDriveWithDataFileAnnotation() throws Exception{
+		Annotation annotation = this.testMethod.getAnnotation(DriveWithDataFile.class);
+		DriveWithDataFile dataFileAnnotation = (DriveWithDataFile) annotation;
+		if (dataFileAnnotation.path().equals("NOT_SET")){
+			if (dataFileAnnotation.value().equals("NOT_SET")){
+				throw new Exception("Used DriveWithDataFile annotation by providing neither location nor value attribute.");
+			} else {
+				location = dataFileAnnotation.value();
+			}
+		} else {
+			location = dataFileAnnotation.path();
+		}
+		
+		if (!FileSystemBatteries.isFile(location)){
+			location = RunConfig.value(BatteriesPropertyType.DIRECTORY_DATA_SOURCES).asString() + "/" + location;
+			if (!FileSystemBatteries.isFile(location)){
+				throw new Exception(String.format("File path provided using DataFile annotation does not exist: %s", location));
+			}
+		}
+
+		delimiter = dataFileAnnotation.delimiter();
+	}
 
 	private void processDriveWithDataMethodAnnotation() throws Exception{
 		Annotation annotation = this.testMethod.getAnnotation(DriveWithDataMethod.class);
@@ -181,6 +208,9 @@ public class DataSourceBuilder {
 		case DATA_ARRAY:
 			processDriveWithDataArrayAnnotation();
 			break;
+		case DATA_FILE:
+			processDriveWithDataFileAnnotation();
+			break;
 		case DATA_METHOD:
 			processDriveWithDataMethodAnnotation();
 			break;
@@ -199,6 +229,8 @@ public class DataSourceBuilder {
 			return new SingleDataRecordSource(dataAnnHeaders, dataAnnRecord);
 		case DATA_ARRAY:
 			return new DataArrayDataSource(this.dataArrayAnnHeaders, this.dataArrayRecords);
+		case DATA_FILE:
+			return DataSourceFactory.getDataSource(this.location, this.delimiter);
 		case DATA_METHOD:
 			return new DataMethodDataSource(this.dataMethod);
 		case DATA_GENERATOR:

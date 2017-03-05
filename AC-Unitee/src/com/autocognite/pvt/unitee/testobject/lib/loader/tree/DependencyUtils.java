@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.annotations.ClassDependency;
 import com.autocognite.arjuna.annotations.MethodDependency;
 import com.autocognite.batteries.config.RunConfig;
 import com.autocognite.batteries.util.DataBatteries;
@@ -13,6 +14,20 @@ import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 
 public class DependencyUtils {
 	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+
+	public static Class<?>[] getDependencyClasses(String testObjectQualifiedName, ClassDependency depAnn) throws Exception{
+		Class<?>[] depClasses = depAnn.testClasses();
+		if (depClasses.length == 0){
+			logger.error(String.format("A dependency defined for %s is invalid.", testObjectQualifiedName));
+			logger.error("Dependency Target Type: TEST_CLASSES");
+			logger.error("Error: Provided empty \"testClasses\" attribute for @Dependency annotation");
+			logger.error("Solution: Provide \"testClasses\" attribute for @Dependency annotation with a class array of length > 0");
+			logger.error("Exiting...");
+			System.exit(1);
+		}
+		
+		return depClasses;
+	}
 	
 	public static String[] getDependencyMethods(String testObjectQualifiedName,MethodDependency depAnn) throws Exception{
 		String[] methodNames = null;

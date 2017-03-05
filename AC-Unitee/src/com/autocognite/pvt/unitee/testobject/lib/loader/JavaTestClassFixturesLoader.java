@@ -55,6 +55,26 @@ public class JavaTestClassFixturesLoader {
 				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASS_NAME).asString()));	
 	}
 	
+	private boolean isBeforeClassInstanceFixture(Method m) throws Exception{
+		return (m.isAnnotationPresent(BeforeClassInstance.class) || 
+				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPCLASSINSTANCE_NAME).asString()));	
+	}
+	
+	private boolean isAfterClassInstanceFixture(Method m) throws Exception{
+		return (m.isAnnotationPresent(AfterClassInstance.class) || 
+				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASSINSTANCE_NAME).asString()));	
+	}
+
+	private boolean isBeforeClassFragmentFixture(Method m) throws Exception{
+		return (m.isAnnotationPresent(BeforeClassInstance.class) || 
+				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPCLASSFRAGMENT_NAME).asString()));	
+	}
+	
+	private boolean isAfterClassFragmentFixture(Method m) throws Exception{
+		return (m.isAnnotationPresent(AfterClassInstance.class) || 
+				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASSFRAGMENT_NAME).asString()));	
+	}
+	
 	private boolean isBeforeMethodFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(BeforeMethod.class) || 
 				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPMETHOD_NAME).asString()));	
@@ -63,6 +83,16 @@ public class JavaTestClassFixturesLoader {
 	private boolean isAfterMethodFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(AfterMethod.class) || 
 				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNMETHOD_NAME).asString()));	
+	}
+	
+	private boolean isBeforeMethodInstanceFixture(Method m) throws Exception{
+		return (m.isAnnotationPresent(BeforeMethodInstance.class) || 
+				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPMETHODINSTANCE_NAME).asString()));	
+	}
+	
+	private boolean isAfterMethodInstanceFixture(Method m) throws Exception{
+		return (m.isAnnotationPresent(AfterMethodInstance.class) || 
+				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNMETHODINSTANCE_NAME).asString()));	
 	}
 	
 	private boolean isBeforeTestFixture(Method m) throws Exception{
@@ -121,6 +151,22 @@ public class JavaTestClassFixturesLoader {
 			validateStatic(m);
 			tearDownClassFixture = new StaticFixture(this.classDef.getUserTestClass(), TestClassFixtureType.TEARDOWN_CLASS, m);
 			incrementFixtureCount(fixtureCounts, TestClassFixtureType.TEARDOWN_CLASS, m.getName());
+		} else if (this.isBeforeClassInstanceFixture(m)){
+			validatePublic(m);
+			setUpClassInstanceFixture = new BoundFixture(this.classDef.getUserTestClass(), TestClassFixtureType.SETUP_CLASS_INSTANCE, m);
+			incrementFixtureCount(fixtureCounts, TestClassFixtureType.SETUP_CLASS_INSTANCE, m.getName());
+		} else if (this.isAfterClassInstanceFixture(m)){
+			validatePublic(m);
+			tearDownClassInstanceFixture = new BoundFixture(this.classDef.getUserTestClass(), TestClassFixtureType.TEARDOWN_CLASS_INSTANCE, m);
+			incrementFixtureCount(fixtureCounts, TestClassFixtureType.TEARDOWN_CLASS_INSTANCE, m.getName());
+		} else if (this.isBeforeClassFragmentFixture(m)){
+			validatePublic(m);
+			setUpClassFragmentFixture = new BoundFixture(this.classDef.getUserTestClass(), TestClassFixtureType.SETUP_CLASS_FRAGMENT, m);
+			incrementFixtureCount(fixtureCounts, TestClassFixtureType.SETUP_CLASS_FRAGMENT, m.getName());
+		} else if (this.isAfterClassFragmentFixture(m)){
+			validatePublic(m);
+			tearDownClassFragmentFixture = new BoundFixture(this.classDef.getUserTestClass(), TestClassFixtureType.TEARDOWN_CLASS_FRAGMENT, m);
+			incrementFixtureCount(fixtureCounts, TestClassFixtureType.TEARDOWN_CLASS_FRAGMENT, m.getName());
 		} else if (this.isBeforeMethodFixture(m)){
 			validatePublic(m);
 			setUpMethodFixture = new BoundFixture(this.classDef.getUserTestClass(), TestClassFixtureType.SETUP_METHOD, m);
@@ -129,6 +175,14 @@ public class JavaTestClassFixturesLoader {
 			validatePublic(m);
 			tearDownMethodFixture = new BoundFixture(this.classDef.getUserTestClass(), TestClassFixtureType.TEARDOWN_METHOD, m);
 			incrementFixtureCount(fixtureCounts, TestClassFixtureType.TEARDOWN_METHOD, m.getName());
+		} else if (this.isBeforeMethodInstanceFixture(m)){
+			validatePublic(m);
+			setUpMethodInstanceFixture = new BoundFixture(this.classDef.getUserTestClass(), TestClassFixtureType.SETUP_METHOD_INSTANCE, m);
+			incrementFixtureCount(fixtureCounts, TestClassFixtureType.SETUP_METHOD_INSTANCE, m.getName());
+		} else if (this.isAfterMethodInstanceFixture(m)){
+			validatePublic(m);
+			tearDownMethodInstanceFixture = new BoundFixture(this.classDef.getUserTestClass(), TestClassFixtureType.TEARDOWN_METHOD_INSTANCE, m);
+			incrementFixtureCount(fixtureCounts, TestClassFixtureType.TEARDOWN_METHOD_INSTANCE, m.getName());
 		} else if (this.isBeforeTestFixture(m)){
 			validatePublic(m);
 			setUpTestFixture = new BoundFixture(this.classDef.getUserTestClass(), TestClassFixtureType.SETUP_TEST, m);

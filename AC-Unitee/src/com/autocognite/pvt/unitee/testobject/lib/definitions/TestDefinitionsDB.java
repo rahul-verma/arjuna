@@ -11,6 +11,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.annotations.ClassDependency;
 import com.autocognite.arjuna.annotations.MethodDependency;
 import com.autocognite.batteries.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
@@ -90,7 +91,7 @@ public class TestDefinitionsDB {
 	
 	public static synchronized void validateDependencies() throws Exception{
 		for (String name: classDefinitions.keySet()){
-			processClassLevelMethodDependencies(classDefinitions.get(name));
+			processClassLevelDependencies(classDefinitions.get(name));
 		}
 		depTreeBuilder.processDependencies();
 		depTreeBuilder.validate();
@@ -120,7 +121,7 @@ public class TestDefinitionsDB {
 		allClassNameSet.add(name);
 	}
 	
-	public static synchronized void processClassLevelMethodDependencies(JavaTestClassDefinition classDef) throws Exception{
+	public static synchronized void processClassLevelDependencies(JavaTestClassDefinition classDef) throws Exception{
 		Class<?> userTestClass = classDef.getUserTestClass();
 		String containerQualifiedName = classDef.getQualifiedName();
 
@@ -167,6 +168,31 @@ public class TestDefinitionsDB {
 			}
 		}
 
+		if (userTestClass.isAnnotationPresent(ClassDependency.class)){
+			Annotation annotation = userTestClass.getAnnotation(ClassDependency.class);
+			ClassDependency depAnn = (ClassDependency) annotation;
+			List<String> processedClassDeps = new ArrayList<String>();
+			List<Class<?>> depClasses = Arrays.asList(DependencyUtils.getDependencyClasses(classDef.getQualifiedName(), depAnn));
+			if (ArjunaInternal.displayLoadingInfo){
+				logger.debug(String.format("Found class dependencies type annotation for %s: %s.", classDef.getQualifiedName(), depClasses));
+			}
+			
+			for (Class<?> dependencyClass: depClasses){
+				JavaTestClassDefinition depClassDef = DependencyUtils.getClassDefForDependencyClass(containerQualifiedName, dependencyClass);
+				if (depClassDef == null){
+					continue;
+				}
+				processedClassDeps.add(dependencyClass.getName());
+			}
+			
+			if (processedClassDeps.size() != 0){
+				if (ArjunaInternal.displayDependencyDefInfo){
+					logger.debug("Adding Class dependencies to Class Definition : " + processedClassDeps);
+				}
+				classDef.addDependencyClassNames(processedClassDeps);
+			}
+		}
+		
 		if (ArjunaInternal.displayDependencyDefInfo){
 			logger.debug("Deps processed.");
 		}

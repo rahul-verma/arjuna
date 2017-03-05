@@ -12,6 +12,7 @@ import java.util.List;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.annotations.Instances;
 import com.autocognite.arjuna.annotations.Skip;
 import com.autocognite.arjuna.annotations.TestClass;
 import com.autocognite.arjuna.interfaces.TestVariables;
@@ -109,11 +110,55 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 				System.exit(1);
 			}
 			classDef.setCreatorThreadCount(creatorThreadCount);
+			
+			// For Data ref processing
+			classDef.setDataRefPresent(JavaTestLoadingUtils.isDataRefPresent(klass));
+			if (classDef.isDataRefPresent()){
+				String dataRefName = JavaTestLoadingUtils.getDataRefName(klass);
+				String filePath = JavaTestLoadingUtils.getDataRefPath(klass);
+				if (dataRefName.equals("NOT_SET")){
+					dataRefName = FilenameUtils.getBaseName(filePath).toUpperCase();
+				}
+				if (ArjunaInternal.displayDataMethodProcessingInfo){
+					logger.debug(String.format("Now registering data reference with name %s.", dataRefName));
+				}
+				classDef.addFileDataRefWithPath(dataRefName, filePath);
+			}
 
-			classDef.setInstanceCount(1);
-			classDef.setInstanceThreadCount(1);
+			boolean instancesAnnPresent = JavaTestLoadingUtils.isInstancesAnnotationPresent(klass);
+			Instances instancesAnn = null;
+			boolean userHasSuppliedProperties = false;
+			HashMap<Integer,HashMap<String,String>> instanceProps = new HashMap<Integer,HashMap<String,String>>();
+			int instanceCount = 1;
+			int instanceThreadCount = 1;
+			if (instancesAnnPresent){
+				if (ArjunaInternal.displayInstanceProcessingInfo){
+					logger.debug("Found @Instances Annotation");
+				}
+				instancesAnn = (Instances) klass.getAnnotation(Instances.class);
+				instanceCount = JavaTestLoadingUtils.getInstancesCount(instancesAnn);
+				if (instanceCount == -1){
+					System.err.println(String.format("Instance count must be >=1. Correction needed for: %s", classDef.getQualifiedName()));
+					System.err.println("Exiting...");
+					System.exit(1);
+				}
+				
+				instanceThreadCount = JavaTestLoadingUtils.getInstanceThreadCount(instancesAnn);
+				if (instanceThreadCount == -1){
+					System.err.println(String.format("Instance Thread count must be >=1. Correction needed for: %s", classDef.getQualifiedName()));
+					System.err.println("Exiting...");
+					System.exit(1);
+				}
+				userHasSuppliedProperties = JavaTestLoadingUtils.hasUserSuppliedProperties(qualifiedName, instancesAnn);
+			}
+			
+			classDef.setInstanceCount(instanceCount);
+			classDef.setInstanceThreadCount(instanceThreadCount);
+			
+			instanceProps = JavaTestLoadingUtils.loadUDVFromInstancesAnnotation(instancesAnn, classDef.getInstanceCount(), userHasSuppliedProperties);
+
 			ConstructorDef constructorType = new ConstructorDef();
-			Constructor<?> constructor = this.getConstructor(klass, constructorType, false, classDef.isDataRefPresent());
+			Constructor<?> constructor = this.getConstructor(klass, constructorType, userHasSuppliedProperties, classDef.isDataRefPresent());
 			
 			classDef.setConstructor(constructor);
 			classDef.setConstructorType(constructorType.type);
@@ -123,7 +168,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 			}
 //			logger.debug(classDef.getInstanceCount());
 			for (int i=1; i <= classDef.getInstanceCount(); i++){
-				classDef.setUdvForInstance(i, new HashMap<String,String>());
+				classDef.setUdvForInstance(i, instanceProps.get(i));
 			}
 			
 			TestCreatorLoader creatorLoader = new JavaTestMethodsDefinitionLoader(this, classDef);
