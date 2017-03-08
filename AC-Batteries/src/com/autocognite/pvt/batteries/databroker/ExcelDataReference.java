@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.autocognite.arjuna.interfaces.DataReference;
+import com.autocognite.arjuna.bases.DefaultDataRecord;
 import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 

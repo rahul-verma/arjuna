@@ -3,12 +3,12 @@ package com.autocognite.pvt.unitee.core.lib.testvars;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.autocognite.arjuna.bases.DefaultDataRecord;
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataReference;
 import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
 import com.autocognite.arjuna.interfaces.TestProperties;
-import com.autocognite.pvt.batteries.databroker.DefaultDataRecord;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.reporter.lib.reportable.TestVariablesSerializer;
 import com.google.gson.JsonObject;

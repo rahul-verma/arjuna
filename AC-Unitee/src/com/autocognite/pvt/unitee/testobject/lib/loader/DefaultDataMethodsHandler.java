@@ -25,9 +25,9 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataMethod;
+import com.autocognite.arjuna.bases.DataRecordContainer;
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.batteries.databroker.DataRecordContainer;
 
 public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());

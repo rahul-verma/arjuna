@@ -21,6 +21,7 @@ package com.autocognite.pvt.batteries.databroker;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.autocognite.arjuna.bases.DefaultDataRecord;
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataSource;
 import com.autocognite.arjuna.interfaces.DataRecord;
