@@ -11,8 +11,8 @@ simple example build file
 	<!-- ======================================================================================== -->
 
 	<property name="arjuna.build_version" value="${autocognite.build.version}" />
-	<property name="arjuna.proj.name" value="AutoCognite-Arjuna" />
-	<property name="arjuna.name" value="autocognite-arjuna" />
+	<property name="arjuna.proj.name" value="AutoCognite-Arjuna-Platform" />
+	<property name="arjuna.name" value="autocognite-arjuna-platform-edition" />
 	<property name="arjuna.github.rep.name" value="arjuna" />
 	<property name="root.arjuna.dir" value="${all.sources.dir}/${arjuna.github.rep.name}" />
 	<property name="proj.arjuna.dir" value="${root.arjuna.dir}/${arjuna.proj.name}" />
@@ -59,13 +59,13 @@ simple example build file
 		
 		<mkdir dir="${private.arjuna.dist.tools.dir}/docs" />
 		<copy todir="${private.arjuna.dist.tools.dir}/docs">
-			<fileset dir="${root.arjuna.dir}/docs">
+			<fileset dir="${proj.arjuna.dir}/docs">
 				<include name="**/*.*" />
 			</fileset>
 		</copy>
-		<copy file="${root.arjuna.dir}/LICENSE.txt" tofile="${private.arjuna.dist.tools.dir}/LICENSE.txt" />
-		<copy file="${root.arjuna.dir}/NOTICE.txt" tofile="${private.arjuna.dist.tools.dir}/NOTICE.txt" />
-		<copy file="${root.arjuna.dir}/README.txt" tofile="${private.arjuna.dist.tools.dir}/README.txt" />
+		<copy file="${proj.arjuna.dir}/LICENSE.txt" tofile="${private.arjuna.dist.tools.dir}/LICENSE.txt" />
+		<copy file="${proj.arjuna.dir}/NOTICE.txt" tofile="${private.arjuna.dist.tools.dir}/NOTICE.txt" />
+		<copy file="${proj.arjuna.dir}/README.txt" tofile="${private.arjuna.dist.tools.dir}/README.txt" />
 		<mkdir dir="${private.arjuna.dist.components.jar.dir}" />
 		<mkdir dir="${public.tools.arjuna.dir}" />
 		
@@ -76,7 +76,7 @@ simple example build file
 		<copy file="${root.arjuna.dir}/NOTICE.txt" tofile="${private.arjuna.dist.src.dir}/NOTICE.txt" />
 		<copy file="${root.arjuna.dir}/README.txt" tofile="${private.arjuna.dist.src.dir}/README.txt" />
 		<copy todir="${private.arjuna.dist.src.dir}/docs">
-			<fileset dir="${root.arjuna.dir}/docs">
+			<fileset dir="${proj.arjuna.dir}/docs">
 				<include name="**/*.*" />
 			</fileset>
 		</copy>
