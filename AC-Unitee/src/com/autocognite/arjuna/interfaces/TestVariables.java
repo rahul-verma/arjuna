@@ -10,9 +10,9 @@ public interface TestVariables {
 
 	TestProperties testProps() throws Exception;
 
-	DefaultStringKeyValueContainer customProps() throws Exception;
+	StringKeyValueContainer customProps() throws Exception;
 
-	DefaultStringKeyValueContainer udv() throws Exception;
+	StringKeyValueContainer udv() throws Exception;
 
 	ReadOnlyDataRecord dataRecord();
 

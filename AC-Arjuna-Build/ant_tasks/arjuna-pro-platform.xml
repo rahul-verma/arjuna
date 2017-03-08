@@ -35,8 +35,7 @@ simple example build file
 	<property name="private.arjuna.clear.jar.file" value="${private.arjuna.clear.jar.dir}/clear_${arjuna.jar.file.name}" />
 	<property name="private.arjuna.obfuscated.jar.dir" value="${private.arjuna.jars.dir}/obfuscated" />
 	<property name="private.arjuna.obfuscated.jar.file" value="${private.arjuna.obfuscated.jar.dir}/obfuscated_${arjuna.jar.file.name}" />
-	
-	
+
 	<property name="private.arjuna.dist.tools.dir" value="${current.dist.private.tools.dir}/${arjuna.name}-dist" />
 	<property name="private.arjuna.dist.tools.root.dir" value="${private.arjuna.dist.tools.dir}/${arjuna.name}" />
 	<property name="private.arjuna.dist.tools.jar.dir" value="${private.arjuna.dist.tools.root.dir}/lib/java" />
