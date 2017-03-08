@@ -24,8 +24,6 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.ElementLoaderType;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.enums.UiDriverEngine;
@@ -37,6 +35,8 @@ import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
 import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.api.CentralPageMap;
 import com.autocognite.pvt.uiautomator.api.ElementMetaData;
@@ -45,7 +45,7 @@ import com.autocognite.pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 import com.autocognite.pvt.uiautomator.lib.config.UiAutomatorSingleton;
 
 public class BasePage implements Page{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private UiDriver automator = null;
 	private HashMap<String, UiElement> uiElementMap = new HashMap<String, UiElement>();
 	private UiAutomationContext context = null;
@@ -67,7 +67,7 @@ public class BasePage implements Page{
 	
 	public BasePage(String uiLabel) throws Exception{
 		this();
-		imagesDirectory = RunConfig.value(UiAutomatorPropertyType.DIRECTORY_UI_IMAGES).asString();
+		imagesDirectory = Batteries.value(UiAutomatorPropertyType.DIRECTORY_UI_IMAGES).asString();
 		Random rn = new Random();
 		java.util.Date date= new java.util.Date();
 		long millis = date.getTime();
@@ -290,7 +290,7 @@ public class BasePage implements Page{
 		return throwDefaultUiException(
 				methodName,
 				UiAutomator.problem.PAGE_NULL_AUTOMATOR,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.PAGE_NULL_AUTOMATOR,
 						UiAutomator.getAutomationContextName(this.getContext())
 						)
@@ -301,7 +301,7 @@ public class BasePage implements Page{
 		return throwDefaultUiException(
 				methodName,
 				UiAutomator.problem.PAGE_UNDEFINED_ELEMENT,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.PAGE_UNDEFINED_ELEMENT,
 						elementName,
 						DataBatteries.toTitleCase(this.getContext().toString())
@@ -315,7 +315,7 @@ public class BasePage implements Page{
 		return throwDefaultUiException(
 				methodName,
 				UiAutomator.problem.UI_NULL_ELEMENT,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.UI_NULL_ELEMENT,
 						DataBatteries.toTitleCase(this.getContext().toString())
 						//						Batteries.toTitleCase(getDeviceType().toString()),

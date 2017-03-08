@@ -26,9 +26,10 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.pvt.batteries.config.Batteries;
 
 public class FileAggregator {
-	public Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	public Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	ArrayList<DiscoveredFile> files = new ArrayList<DiscoveredFile>();
 	HashMap<String, DiscoveredFile> tempMap = new HashMap<String, DiscoveredFile>();
 

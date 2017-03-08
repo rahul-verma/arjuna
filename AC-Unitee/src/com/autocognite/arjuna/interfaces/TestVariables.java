@@ -2,8 +2,6 @@ package com.autocognite.arjuna.interfaces;
 
 import java.util.Map;
 
-import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
-
 public interface TestVariables {
 
 	TestObjectProperties objectProps() throws Exception;

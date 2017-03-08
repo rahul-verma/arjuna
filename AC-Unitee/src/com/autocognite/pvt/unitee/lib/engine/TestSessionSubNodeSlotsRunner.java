@@ -21,12 +21,9 @@ package com.autocognite.pvt.unitee.lib.engine;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.utils.ThreadBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.Group;
-import com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionNode;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode;
 
 public class TestSessionSubNodeSlotsRunner implements Runnable {

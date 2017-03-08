@@ -22,8 +22,6 @@ import java.io.File;
 
 import org.apache.commons.io.FilenameUtils;
 
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.interfaces.App;
 import com.autocognite.arjuna.uiauto.interfaces.Page;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
@@ -31,6 +29,8 @@ import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.lib.BaseApp;
 import com.autocognite.arjuna.uiauto.lib.BasePage;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
@@ -52,14 +52,14 @@ public class UiFactory {
 		App app = new BaseApp(name);
 		String consideredPath = appMapsRootDir;
 		if (!FileSystemBatteries.isDir(consideredPath)){
-			consideredPath = FileSystemBatteries.getCanonicalPath(RunConfig.value(UiAutomatorPropertyType.DIRECTORY_UI_MAPS).asString() + "/" + consideredPath);
+			consideredPath = FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_UI_MAPS).asString() + "/" + consideredPath);
 			if (!FileSystemBatteries.isDir(consideredPath)){
 				throw new Problem(
 						"UI Automator", 
 						"Page Mapper", 
 						"getFileMapper", 
 						UiAutomator.problem.APP_MAP_DIR_NOT_A_DIR, 
-						RunConfig.getProblemText(UiAutomator.problem.APP_MAP_DIR_NOT_A_DIR, consideredPath)
+						Batteries.getProblemText(UiAutomator.problem.APP_MAP_DIR_NOT_A_DIR, consideredPath)
 					);				
 			} 
 		}

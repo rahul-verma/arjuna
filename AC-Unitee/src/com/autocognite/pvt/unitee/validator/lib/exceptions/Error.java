@@ -18,7 +18,7 @@
  ******************************************************************************/
 package com.autocognite.pvt.unitee.validator.lib.exceptions;
 
-import com.autocognite.arjuna.interfaces.Check;
+import com.autocognite.pvt.arjuna.interfaces.Check;
 
 public class Error extends StepResultEvent {
 	/**

@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.autocognite.arjuna.bases.DefaultDataRecord;
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.interfaces.DataReference;
 import com.autocognite.arjuna.interfaces.DataRecord;
+import com.autocognite.arjuna.interfaces.DataReference;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
 import com.autocognite.arjuna.interfaces.TestProperties;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.reporter.lib.reportable.TestVariablesSerializer;
 import com.google.gson.JsonObject;
@@ -127,7 +127,7 @@ public class DefaultTestVariables implements InternalTestVariables {
 			return this.dataRefMap.get(uName);
 		} else {
 			try{
-				return RunConfig.getDataReference(uName);
+				return Batteries.getDataReference(uName);
 			} catch (Exception e){
 				throw new Exception(
 						String.format("No reference found with name \"%s\" for current test object or in central repository.",

@@ -27,13 +27,11 @@ import java.util.Map;
 
 import com.autocognite.arjuna.annotations.DataGenerator;
 import com.autocognite.arjuna.annotations.DataMethodContainer;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataSource;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
-import com.autocognite.pvt.arjuna.enums.ReportMode;
 import com.autocognite.pvt.arjuna.enums.TestPickerProperty;
 import com.autocognite.pvt.batteries.cli.CLIConfigurator;
 import com.autocognite.pvt.batteries.config.Batteries;
@@ -47,12 +45,10 @@ import com.autocognite.pvt.batteries.hocon.HoconStringReader;
 import com.autocognite.pvt.batteries.lib.ComponentIntegrator;
 import com.autocognite.pvt.batteries.logging.Log;
 import com.autocognite.pvt.batteries.property.ConfigPropertyBatteries;
-import com.autocognite.pvt.batteries.value.EnumValue;
 import com.autocognite.pvt.batteries.value.StringValue;
 //import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.unitee.reporter.lib.CentralExecutionState;
 import com.autocognite.pvt.unitee.reporter.lib.Reporter;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig;
 import com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerMisConfiguration;
 import com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.MSession;
@@ -62,7 +58,7 @@ import com.typesafe.config.ConfigObject;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.1b1";
+	private String version = "0.0b2";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -217,7 +213,7 @@ public enum ArjunaSingleton {
 	}
 	
 	public void loadSession() throws Exception{
-		session.setUDVs(RunConfig.cloneCentralUDVs());
+		session.setUDVs(Batteries.cloneCentralUDVs());
 		try{
 			groupsDB.createGroupForCLIOptions(this.cliPickerOptions);
 		} catch (PickerMisConfiguration e){
@@ -267,10 +263,10 @@ public enum ArjunaSingleton {
 	private void initlogger() throws Exception {
 		Log log = new Log();
 		log.configure(
-				RunConfig.getDisplayLevel(),
-				RunConfig.getLogLevel(),
-				RunConfig.getCentralLogName(),
-				RunConfig.getLogDir()
+				Batteries.getDisplayLevel(),
+				Batteries.getLogLevel(),
+				Batteries.getCentralLogName(),
+				Batteries.getLogDir()
 					);
 	}
 	

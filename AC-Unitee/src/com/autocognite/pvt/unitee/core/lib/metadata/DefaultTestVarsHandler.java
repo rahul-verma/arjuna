@@ -20,15 +20,15 @@ package com.autocognite.pvt.unitee.core.lib.metadata;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject;
 
 public class DefaultTestVarsHandler implements TestVarsHandler{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private TestObject testObject = null;
 	private TestObject parentTestObject = null;
 	private InternalTestVariables testVars =  new DefaultTestVariables();

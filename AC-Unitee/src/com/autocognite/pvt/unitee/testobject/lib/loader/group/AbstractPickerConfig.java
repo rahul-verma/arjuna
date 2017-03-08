@@ -4,34 +4,25 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
-import com.autocognite.pvt.arjuna.enums.UnpickedCode;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.console.Console;
-import com.autocognite.pvt.batteries.filehandler.FileReader;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 
 public abstract class AbstractPickerConfig implements PickerConfig {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	
 	private Group group = null;
 	private JsonElement elem = null;
@@ -258,7 +249,7 @@ public abstract class AbstractPickerConfig implements PickerConfig {
 
 
 abstract class BasePicker implements Picker {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private List<String> considerPatterns = null;
 	private List<String> ignorePatterns = null;
 	private Group group;
@@ -407,7 +398,7 @@ abstract class BasePicker implements Picker {
 }
 
 class PackagePicker extends BasePicker {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	
 	public PackagePicker(Group group, AbstractPickerConfig config) throws Exception {
 		super(group);

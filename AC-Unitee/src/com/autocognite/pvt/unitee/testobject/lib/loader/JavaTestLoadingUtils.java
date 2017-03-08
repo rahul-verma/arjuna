@@ -9,9 +9,9 @@ import com.autocognite.arjuna.annotations.FileDataReference;
 import com.autocognite.arjuna.annotations.Instances;
 import com.autocognite.arjuna.annotations.TestClass;
 import com.autocognite.arjuna.annotations.TestMethod;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 
 public class JavaTestLoadingUtils {
@@ -31,7 +31,7 @@ public class JavaTestLoadingUtils {
 		}
 
 		if (!FileSystemBatteries.isFile(refPath)){
-			String relRefPath = RunConfig.value(BatteriesPropertyType.DIRECTORY_DATA_REFERENCES).asString() + "/" + refPath;
+			String relRefPath = Batteries.value(BatteriesPropertyType.DIRECTORY_DATA_REFERENCES).asString() + "/" + refPath;
 			if (!FileSystemBatteries.isFile(relRefPath)){
 				throw new Exception("File path provided using @FileDataReference annotation does not exist:" + refPath);
 			}

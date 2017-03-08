@@ -8,11 +8,11 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
 import com.autocognite.pvt.arjuna.enums.UnpickedCode;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
@@ -24,7 +24,7 @@ import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass;
 import com.autocognite.pvt.unitee.testobject.lib.loader.group.Group;
 
 public class ExecutionSlotsCreator {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private HashMap<Integer,ArrayList<JavaTestMethodDefinition>> execMap = new HashMap<Integer,ArrayList<JavaTestMethodDefinition>>();
 	private Map<String, TestContainer> createdContainerObjects = new HashMap<String, TestContainer>();
 	private DependencyTree depTree =  null;

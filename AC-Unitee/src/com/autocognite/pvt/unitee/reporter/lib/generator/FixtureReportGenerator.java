@@ -4,22 +4,20 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.interfaces.ReportGenerator;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResultDeserializer;
-import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
-import com.autocognite.pvt.unitee.reporter.lib.test.TestResultDeserializer;
 import com.google.gson.JsonElement;
 
 public class FixtureReportGenerator extends JsonResultsReader{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private FixtureResultDeserializer deserializer = null;
 	
 	public FixtureReportGenerator(List<ReportGenerator> generators) throws Exception{
-		super(RunConfig.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_FIXTURES).asString(), generators);
+		super(Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_FIXTURES).asString(), generators);
 		deserializer = new FixtureResultDeserializer();
 	}
 	

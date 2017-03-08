@@ -18,15 +18,15 @@
  ******************************************************************************/
 package com.autocognite.arjuna.uiauto.plugins.appium;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.appium.lib.base.AbstractAppiumUiDriver;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.uiautomator.api.identify.enums.MobileNativeIdentifyBy;
 import com.autocognite.pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
 public class AppiumNativeUiDriver extends AbstractAppiumUiDriver {
 	
 	public AppiumNativeUiDriver() throws Exception{
-		super(RunConfig.value(UiAutomatorPropertyType.APP_MOBILE_PATH).asString());
+		super(Batteries.value(UiAutomatorPropertyType.APP_MOBILE_PATH).asString());
 	}
 	
 	public AppiumNativeUiDriver(String appPath) throws Exception{

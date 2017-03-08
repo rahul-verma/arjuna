@@ -158,6 +158,29 @@ com.autocognite.arjuna.assertions.Assertions: com.autocognite.arjuna.interfaces.
 com.autocognite.arjuna.assertions.Assertions: com.autocognite.arjuna.interfaces.Check assertDoesNotContain(java.lang.String[],java.lang.String)
 com.autocognite.arjuna.assertions.Assertions: com.autocognite.arjuna.interfaces.Check assertDoesNotContain(java.lang.String,java.util.HashMap,java.lang.String)
 com.autocognite.arjuna.assertions.Assertions: com.autocognite.arjuna.interfaces.Check assertDoesNotContain(java.util.HashMap,java.lang.String)
+com.autocognite.arjuna.bases.DataRecordContainer
+com.autocognite.arjuna.bases.DataRecordContainer: DataRecordContainer(com.autocognite.pvt.batteries.enums.DataRecordOrder)
+com.autocognite.arjuna.bases.DataRecordContainer: DataRecordContainer()
+com.autocognite.arjuna.bases.DataRecordContainer: DataRecordContainer(java.lang.Object[][])
+com.autocognite.arjuna.bases.DataRecordContainer: void setHeaders(java.lang.String[])
+com.autocognite.arjuna.bases.DataRecordContainer: void add(com.autocognite.arjuna.interfaces.DataRecord)
+com.autocognite.arjuna.bases.DataRecordContainer: void add(java.lang.Object[])
+com.autocognite.arjuna.bases.DataRecordContainer: void addAll(java.lang.Object[][])
+com.autocognite.arjuna.bases.DataRecordContainer: com.autocognite.arjuna.interfaces.DataRecord get(int)
+com.autocognite.arjuna.bases.DataRecordContainer: java.util.ArrayList getAll()
+com.autocognite.arjuna.bases.DataRecordContainer: java.util.Iterator iterator()
+com.autocognite.arjuna.bases.DefaultDataRecord
+com.autocognite.arjuna.bases.DefaultDataRecord: void add(java.lang.String,java.lang.Object)
+com.autocognite.arjuna.bases.DefaultDataRecord: DefaultDataRecord()
+com.autocognite.arjuna.bases.DefaultDataRecord: DefaultDataRecord(java.util.List,java.util.ArrayList)
+com.autocognite.arjuna.bases.DefaultDataRecord: DefaultDataRecord(java.lang.String[],java.lang.Object[])
+com.autocognite.arjuna.bases.DefaultDataRecord: DefaultDataRecord(java.util.HashMap)
+com.autocognite.arjuna.bases.DefaultDataRecord: DefaultDataRecord(java.lang.Object[])
+com.autocognite.arjuna.bases.DefaultDataRecord: DefaultDataRecord(java.lang.String[],java.util.List)
+com.autocognite.arjuna.bases.DefaultDataRecord: boolean hasIndex(int)
+com.autocognite.arjuna.bases.DefaultDataRecord: com.autocognite.arjuna.interfaces.Value valueAt(int)
+com.autocognite.arjuna.bases.DefaultDataRecord: java.lang.String stringAt(int)
+com.autocognite.arjuna.bases.DefaultDataRecord: java.lang.Object objectAt(int)
 com.autocognite.arjuna.checks.Checks
 com.autocognite.arjuna.checks.Checks: Checks()
 com.autocognite.arjuna.checks.Checks: boolean isTrue(boolean)
@@ -371,8 +394,6 @@ com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.util.Lis
 com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: com.autocognite.arjuna.interfaces.Value value(java.lang.String)
 com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.lang.String string(java.lang.String)
 com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: boolean hasKey(java.lang.String)
-com.autocognite.arjuna.interfaces.ReportGenerator
-com.autocognite.arjuna.interfaces.ReportableObserver
 com.autocognite.arjuna.interfaces.StringKeyValueContainer
 com.autocognite.arjuna.interfaces.StringKeyValueContainer: void add(java.lang.String,com.autocognite.arjuna.interfaces.Value)
 com.autocognite.arjuna.interfaces.StringKeyValueContainer: void add(java.lang.String,java.lang.Number)
@@ -439,33 +460,6 @@ com.autocognite.arjuna.utils.CommandExecutor: java.lang.String getStdoutText()
 com.autocognite.arjuna.utils.CommandExecutor: java.lang.String getStderrText()
 com.autocognite.arjuna.utils.CommandExecutor: int getReturnCode()
 com.autocognite.arjuna.utils.CommandExecutor: void execute()
-com.autocognite.arjuna.utils.ConfigPropertyBatteries
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: ConfigPropertyBatteries()
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: java.lang.String pathToCoreAbsolutePath(java.lang.String)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: java.lang.String pathToProjectAbsolutePath(java.lang.String)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: java.lang.String enumToPropPath(java.lang.Enum)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: boolean isNotSet(com.autocognite.arjuna.interfaces.Value)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createStringProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,java.lang.Object,java.lang.reflect.Method,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createStringListProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,java.lang.Object,java.lang.reflect.Method,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: java.lang.String getSame(java.lang.String)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createCoreDirPath(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createProjectDirPath(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createStringListProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createDirectoriesProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createStringProperty(java.lang.Enum,java.lang.String,java.lang.String,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createStringProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createEnumProperty(java.lang.Enum,java.lang.String,java.lang.Class,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createEnumListProperty(java.lang.Enum,java.lang.String,java.lang.Class,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createBooleanProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createIntProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createLongProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createFloatProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createDoubleProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createNumberProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createProperty(java.lang.Enum,com.autocognite.arjuna.enums.ValueType,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createNullProperty(java.lang.Enum,com.autocognite.arjuna.enums.ValueType,java.lang.String,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createSimpleProperty(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createSimpleProperty(java.lang.String,com.autocognite.arjuna.interfaces.Value)
 com.autocognite.arjuna.utils.DataBatteries
 com.autocognite.arjuna.utils.DataBatteries: DataBatteries()
 com.autocognite.arjuna.utils.DataBatteries: java.util.HashMap zip(java.lang.String[],java.lang.String[])
@@ -490,11 +484,6 @@ com.autocognite.arjuna.utils.DataBatteries: java.util.ArrayList split(java.lang.
 com.autocognite.arjuna.utils.DataBatteries: java.util.ArrayList split(java.lang.String)
 com.autocognite.arjuna.utils.DataBatteries: java.lang.String flatten(java.util.Set)
 com.autocognite.arjuna.utils.DataBatteries: void print(java.util.Set)
-com.autocognite.arjuna.utils.ExceptionBatteries
-com.autocognite.arjuna.utils.ExceptionBatteries: ExceptionBatteries()
-com.autocognite.arjuna.utils.ExceptionBatteries: java.lang.String getStackTraceAsString(java.lang.Exception)
-com.autocognite.arjuna.utils.ExceptionBatteries: java.lang.String getStackTraceAsString(java.lang.AssertionError)
-com.autocognite.arjuna.utils.ExceptionBatteries: java.lang.String getStackTraceAsString(java.lang.Throwable)
 com.autocognite.arjuna.utils.FileSystemBatteries
 com.autocognite.arjuna.utils.FileSystemBatteries: FileSystemBatteries()
 com.autocognite.arjuna.utils.FileSystemBatteries: java.lang.String getJarFilePathForObject(java.lang.Object)
@@ -524,19 +513,6 @@ com.autocognite.arjuna.utils.HardCoded: void sleep(java.lang.String,float)
 com.autocognite.arjuna.utils.MathBatteries
 com.autocognite.arjuna.utils.MathBatteries: MathBatteries()
 com.autocognite.arjuna.utils.MathBatteries: int min(int,int)
-com.autocognite.arjuna.utils.StackBatteries
-com.autocognite.arjuna.utils.StackBatteries: StackBatteries()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getCurrentMethodName()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getCurrentClassName()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getCurrentSimpleClasseName()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getCurrentFileName()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getInvokingMethodName()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getInvokingClassName()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getInvokingFileName()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getCurrentMethodNameFqn()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getCurrentFileNameFqn()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getInvokingMethodNameFqn()
-com.autocognite.arjuna.utils.StackBatteries: java.lang.String getInvokingFileNameFqn()
 com.autocognite.arjuna.utils.SystemBatteries
 com.autocognite.arjuna.utils.SystemBatteries: SystemBatteries()
 com.autocognite.arjuna.utils.SystemBatteries: void exit()
@@ -955,8 +931,9 @@ com.autocognite.pvt.arjuna.enums.UnpickedCode: com.autocognite.pvt.arjuna.enums.
 com.autocognite.pvt.arjuna.enums.UnpickedCode: com.autocognite.pvt.arjuna.enums.UnpickedCode[] $VALUES
 com.autocognite.pvt.arjuna.enums.UnpickedCode: com.autocognite.pvt.arjuna.enums.UnpickedCode[] values()
 com.autocognite.pvt.arjuna.enums.UnpickedCode: com.autocognite.pvt.arjuna.enums.UnpickedCode valueOf(java.lang.String)
-com.autocognite.pvt.arjuna.interfaces.InternalReportGenerator
 com.autocognite.pvt.arjuna.interfaces.InternlReportableObserver
+com.autocognite.pvt.arjuna.interfaces.ReportGenerator
+com.autocognite.pvt.arjuna.interfaces.TestResultObserver
 com.autocognite.pvt.batteries.cli.AbstractCLI
 com.autocognite.pvt.batteries.cli.AbstractCliConfigurator
 com.autocognite.pvt.batteries.cli.CLI
@@ -969,17 +946,57 @@ com.autocognite.pvt.batteries.configurator.lib.strings.NamedString
 com.autocognite.pvt.batteries.configurator.lib.strings.NamedStringsContainer
 com.autocognite.pvt.batteries.console.Console
 com.autocognite.pvt.batteries.container.BaseContainer
+com.autocognite.pvt.batteries.container.BaseContainer: java.lang.Object getValueForNonExistentKey()
+com.autocognite.pvt.batteries.container.BaseContainer: java.lang.String getStrValueForNonExistentKey()
+com.autocognite.pvt.batteries.container.BaseContainer: void cloneAdd(java.util.Map)
+com.autocognite.pvt.batteries.container.BaseContainer: void cloneAdd(java.lang.Object,java.lang.Object)
+com.autocognite.pvt.batteries.container.BaseContainer: java.lang.Object formatKey(java.lang.Object)
+com.autocognite.pvt.batteries.container.BaseContainer: BaseContainer(java.util.HashMap)
+com.autocognite.pvt.batteries.container.BaseContainer: BaseContainer()
+com.autocognite.pvt.batteries.container.BaseContainer: void add(java.util.Map)
+com.autocognite.pvt.batteries.container.BaseContainer: void add(com.autocognite.pvt.batteries.container.Container)
+com.autocognite.pvt.batteries.container.BaseContainer: void add(java.lang.Object,java.lang.Object)
+com.autocognite.pvt.batteries.container.BaseContainer: boolean hasKey(java.lang.Object)
+com.autocognite.pvt.batteries.container.BaseContainer: java.lang.Object value(java.lang.Object)
+com.autocognite.pvt.batteries.container.BaseContainer: java.lang.String string(java.lang.Object)
+com.autocognite.pvt.batteries.container.BaseContainer: java.util.Map items()
+com.autocognite.pvt.batteries.container.BaseContainer: java.util.Map items(java.util.List)
+com.autocognite.pvt.batteries.container.BaseContainer: java.util.Map strItems()
+com.autocognite.pvt.batteries.container.BaseContainer: java.util.Map strItems(java.util.List)
+com.autocognite.pvt.batteries.container.BaseContainer: java.util.List values()
+com.autocognite.pvt.batteries.container.BaseContainer: java.util.List values(java.util.List)
+com.autocognite.pvt.batteries.container.BaseContainer: java.util.List strings()
+com.autocognite.pvt.batteries.container.BaseContainer: java.util.List strings(java.util.List)
 com.autocognite.pvt.batteries.container.BaseValueContainer
+com.autocognite.pvt.batteries.container.BaseValueContainer: BaseValueContainer()
+com.autocognite.pvt.batteries.container.BaseValueContainer: com.autocognite.arjuna.interfaces.Value getValueForNonExistentKey()
+com.autocognite.pvt.batteries.container.BaseValueContainer: java.lang.String getStrValueForNonExistentKey()
+com.autocognite.pvt.batteries.container.BaseValueContainer: void addAsStringValue(java.util.Map)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void addAsStringValue(java.lang.Object,java.lang.String)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void cloneAdd(java.util.Map)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void cloneAdd(com.autocognite.pvt.batteries.container.Container)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void cloneAdd(java.lang.Object,com.autocognite.arjuna.interfaces.Value)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void add(java.lang.Object,java.lang.Number)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void add(java.lang.Object,java.lang.String)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void add(java.lang.Object,boolean)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void addObject(java.lang.Object,java.lang.Object)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void add(java.lang.Object,java.lang.Enum)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void addEnumList(java.lang.Object,java.util.List)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void addNumberList(java.lang.Object,java.util.List)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void addStringList(java.lang.Object,java.util.List)
+com.autocognite.pvt.batteries.container.BaseValueContainer: com.autocognite.arjuna.enums.ValueType valueType(java.lang.String)
+com.autocognite.pvt.batteries.container.BaseValueContainer: java.lang.Class valueEnumType(java.lang.String)
+com.autocognite.pvt.batteries.container.BaseValueContainer: java.lang.Object key(java.lang.String)
+com.autocognite.pvt.batteries.container.BaseValueContainer: void cloneAdd(java.lang.Object,java.lang.Object)
+com.autocognite.pvt.batteries.container.BaseValueContainer: java.lang.Object getValueForNonExistentKey()
 com.autocognite.pvt.batteries.container.Container
 com.autocognite.pvt.batteries.container.EnumKeyValueContainer
 com.autocognite.pvt.batteries.container.ReadOnlyContainer
 com.autocognite.pvt.batteries.container.ReadWriteContainer
 com.autocognite.pvt.batteries.container.ValueContainer
 com.autocognite.pvt.batteries.databroker.DataItem
-com.autocognite.pvt.batteries.databroker.DataRecordContainer
 com.autocognite.pvt.batteries.databroker.DataReferenceFactory
 com.autocognite.pvt.batteries.databroker.DataSourceFactory
-com.autocognite.pvt.batteries.databroker.DefaultDataRecord
 com.autocognite.pvt.batteries.databroker.DsvFileDataSource
 com.autocognite.pvt.batteries.databroker.ExcelDataReference
 com.autocognite.pvt.batteries.databroker.ExcelFileDataSource
@@ -1122,6 +1139,7 @@ com.autocognite.pvt.batteries.networker.lib.util.StringIntPair
 com.autocognite.pvt.batteries.nvpair.BaseNameValuePair
 com.autocognite.pvt.batteries.nvpair.NameValuePair
 com.autocognite.pvt.batteries.property.ConfigProperty
+com.autocognite.pvt.batteries.property.ConfigPropertyBatteries
 com.autocognite.pvt.batteries.property.ConfigPropertyBuilder
 com.autocognite.pvt.batteries.property.ConfigPropertyMetaData
 com.autocognite.pvt.batteries.root.DefaultRoot
@@ -1130,12 +1148,35 @@ com.autocognite.pvt.batteries.sqlite.SqliteFileDB
 com.autocognite.pvt.batteries.threads.ConsumerThread
 com.autocognite.pvt.batteries.threads.ProducerConsumerQueue
 com.autocognite.pvt.batteries.threads.ProducerThread
+com.autocognite.pvt.batteries.utils.ExceptionBatteries
+com.autocognite.pvt.batteries.utils.StackBatteries
 com.autocognite.pvt.batteries.value.AbstractDataWrapper
 com.autocognite.pvt.batteries.value.AbstractValue
 com.autocognite.pvt.batteries.value.AnyRefListValue
 com.autocognite.pvt.batteries.value.AnyRefValue
 com.autocognite.pvt.batteries.value.BooleanValue
 com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: DefaultStringKeyValueContainer()
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: com.autocognite.arjuna.enums.ValueType valueType(java.lang.String)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: java.lang.Class valueEnumType(java.lang.String)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: java.lang.String key(java.lang.String)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: java.lang.String formatKey(java.lang.String)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer clone()
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: java.lang.Object key(java.lang.String)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: java.lang.Object formatKey(java.lang.Object)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: java.lang.Object clone()
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: void addStringList(java.lang.String,java.util.List)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: void addNumberList(java.lang.String,java.util.List)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: void addEnumList(java.lang.String,java.util.List)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: void add(java.lang.String,java.lang.Enum)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: void addObject(java.lang.String,java.lang.Object)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: void add(java.lang.String,boolean)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: void add(java.lang.String,java.lang.String)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: void add(java.lang.String,java.lang.Number)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: void add(java.lang.String,com.autocognite.arjuna.interfaces.Value)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: boolean hasKey(java.lang.String)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: java.lang.String string(java.lang.String)
+com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer: com.autocognite.arjuna.interfaces.Value value(java.lang.String)
 com.autocognite.pvt.batteries.value.DoubleValue
 com.autocognite.pvt.batteries.value.EnumListValue
 com.autocognite.pvt.batteries.value.EnumValue

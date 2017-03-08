@@ -15,11 +15,11 @@ import org.apache.log4j.Logger;
 import com.autocognite.arjuna.annotations.Instances;
 import com.autocognite.arjuna.annotations.Skip;
 import com.autocognite.arjuna.annotations.TestClass;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.discoverer.DiscoveredFile;
 import com.autocognite.pvt.batteries.discoverer.DiscoveredFileAttribute;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
@@ -29,7 +29,7 @@ import com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType;
 import com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;
 
 public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private ClassLoader classLoader = null;
 	private DependencyTreeBuilder depTreeBuilder = new DependencyTreeBuilder();
 	String testDir = null;

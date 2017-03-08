@@ -17,11 +17,11 @@ import com.autocognite.arjuna.annotations.DriveWithDataMethod;
 import com.autocognite.arjuna.annotations.Instances;
 import com.autocognite.arjuna.annotations.Skip;
 import com.autocognite.arjuna.annotations.TestMethod;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder;
 import com.autocognite.pvt.unitee.core.lib.datasource.DataSourceType;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
@@ -30,7 +30,7 @@ import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 
 public class JavaTestMethodsDefinitionLoader implements TestCreatorLoader {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private JavaTestClassDefinition testClassDef = null;
 	private TestDefinitionsLoader javaTestClassLoader = null;
 	

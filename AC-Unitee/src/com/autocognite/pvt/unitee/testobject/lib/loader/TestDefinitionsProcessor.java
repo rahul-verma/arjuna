@@ -28,6 +28,7 @@ import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.TestLanguage;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.discoverer.DiscoveredFile;
 import com.autocognite.pvt.batteries.discoverer.DiscoveredFileAttribute;
 import com.autocognite.pvt.batteries.discoverer.FileAggregator;
@@ -35,7 +36,7 @@ import com.autocognite.pvt.batteries.discoverer.FileDiscoverer;
 import com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader;
 
 public class TestDefinitionsProcessor {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private ArrayList<String> classes = null;
 //	ArrayList<AuthoredTest> tests = new ArrayList<AuthoredTest>();
 	private HashMap<TestLanguage, TestDefinitionsLoader> testDefinitionLoaders = new HashMap<TestLanguage, TestDefinitionsLoader>();
@@ -66,10 +67,10 @@ public class TestDefinitionsProcessor {
 	
 	public void populate() throws Exception{
 		if (ArjunaInternal.displayDiscoveryInfo){
-			logger.debug("Now finding tests inside: " + RunConfig.value(ArjunaProperty.DIRECTORY_TESTS).asString());
-			logger.debug(RunConfig.getInfoMessageText(ArjunaInternal.info.TEST_DISCOVERY_START));	
+			logger.debug("Now finding tests inside: " + Batteries.value(ArjunaProperty.DIRECTORY_TESTS).asString());
+			logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TEST_DISCOVERY_START));	
 		}
-		String startDir = RunConfig.value(ArjunaProperty.DIRECTORY_TESTS).asString();
+		String startDir = Batteries.value(ArjunaProperty.DIRECTORY_TESTS).asString();
 		FileAggregator aggregator = new FileAggregator();
 		FileDiscoverer discoverer = new FileDiscoverer(aggregator, startDir);
 		discoverer.discover();

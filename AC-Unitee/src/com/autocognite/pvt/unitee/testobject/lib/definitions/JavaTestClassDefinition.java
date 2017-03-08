@@ -10,13 +10,13 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataReference;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.DependencyTarget;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.arjuna.enums.UnpickedCode;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.databroker.DataReferenceFactory;
 import com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler;
 import com.autocognite.pvt.unitee.core.lib.testvars.DefaultTestVariables;
@@ -28,7 +28,7 @@ import com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassDataMethods
 import com.autocognite.pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor;
 
 public class JavaTestClassDefinition {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private DataMethodsHandler dataMethodsHandler = null;
 	private String qualifiedName = null;
 	private boolean dataRefPresent = false;
@@ -60,7 +60,7 @@ public class JavaTestClassDefinition {
 	public JavaTestClassDefinition() throws Exception{
 		this.testVars = new DefaultTestVariables();
 		this.testVars.populateDefaults();
-		this.testVars.rawUdv().add(RunConfig.cloneCentralUDVs());
+		this.testVars.rawUdv().add(Batteries.cloneCentralUDVs());
 	}
 	
 	public String getPackageName() throws Exception {

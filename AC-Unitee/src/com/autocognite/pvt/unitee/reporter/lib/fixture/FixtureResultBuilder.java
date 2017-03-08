@@ -4,12 +4,9 @@ import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.pvt.arjuna.enums.FixtureResultPropertyType;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
-import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
-import com.autocognite.pvt.batteries.utils.ExceptionBatteries;
 import com.autocognite.pvt.batteries.value.EnumValue;
 import com.autocognite.pvt.batteries.value.IntValue;
 import com.autocognite.pvt.batteries.value.StringValue;
-import com.autocognite.pvt.unitee.reporter.lib.test.TestResultBuilder;
 
 public class FixtureResultBuilder {
 	private FixtureResultProperties resultProps = new FixtureResultProperties();

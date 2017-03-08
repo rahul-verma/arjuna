@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectType;
-import com.autocognite.pvt.batteries.container.ReadOnlyContainer;
 
 public interface TestObjectProperties {
 	

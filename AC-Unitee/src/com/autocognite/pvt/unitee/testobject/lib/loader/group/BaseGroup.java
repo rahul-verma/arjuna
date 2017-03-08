@@ -4,16 +4,14 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
-import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionNode;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode;
 
 public class BaseGroup implements Group{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private String sessionName = null;
 	private String name = null;
 	private TestLoader loader = null;

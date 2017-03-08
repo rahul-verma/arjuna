@@ -23,9 +23,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.autocognite.pvt.arjuna.enums.DependencyTarget;
-import com.autocognite.pvt.unitee.core.lib.annotate.None;
-
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.METHOD})
 public @interface ClassDependency {

@@ -19,16 +19,13 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.internal.arjuna.enums.TestAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
 import com.autocognite.pvt.arjuna.enums.FixtureResultPropertyType;
 import com.autocognite.pvt.arjuna.enums.IssueAttribute;
@@ -37,6 +34,7 @@ import com.autocognite.pvt.arjuna.enums.TestReportSection;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
 import com.autocognite.pvt.arjuna.interfaces.ReportGenerator;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.reporter.lib.event.Event;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult;
 import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;
@@ -46,7 +44,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 public class ExcelReportGenerator implements ReportGenerator{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private FileOutputStream fileOut = null;
 	private HSSFWorkbook workbook = null;
 	HSSFCellStyle cellStyle = null;
@@ -178,7 +176,7 @@ public class ExcelReportGenerator implements ReportGenerator{
 }
 
 abstract class ExcelResultWriter<T>{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private String reportTypeLabel = null;
 	private HSSFSheet sheet = null;
 	private int currentRow = -1;
@@ -270,7 +268,7 @@ abstract class ExcelResultWriter<T>{
 }
 
 class ExcelTestResultWriter extends ExcelResultWriter<TestResult> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private List<TestObjectAttribute> execTestObjectProps = null;
 	private List<TestAttribute> execTestProps = null;
 	private List<TestResultAttribute> execResultProps = null;
@@ -416,7 +414,7 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult> {
 }
 
 class ExcelStepResultWriter extends ExcelResultWriter<StepResult> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 
 	private List<TestObjectAttribute> stepTestObjectProps = null;
 	private List<TestAttribute> stepTestProps = null;
@@ -482,7 +480,7 @@ class ExcelStepResultWriter extends ExcelResultWriter<StepResult> {
 }
 
 class ExcelIssueWriter extends ExcelResultWriter<Issue> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 
 	private List<TestObjectAttribute> issueTestObjectProps = null;
 	private List<TestAttribute> issueTestProps = null;
@@ -539,7 +537,7 @@ class ExcelIssueWriter extends ExcelResultWriter<Issue> {
 }
 
 class ExcelFixtureResultWriter extends ExcelResultWriter<FixtureResult> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 
 	private List<TestObjectAttribute> fixtureTestObjectProps = null;
 	private List<FixtureResultPropertyType> fixtureResultProps = null;	
@@ -580,7 +578,7 @@ class ExcelFixtureResultWriter extends ExcelResultWriter<FixtureResult> {
 }
 
 class ExcelEventWriter extends ExcelResultWriter<Event> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 
 	private List<EventAttribute> eventAttrs = null;
 	private List<String> eventHeaders = new ArrayList<String>();

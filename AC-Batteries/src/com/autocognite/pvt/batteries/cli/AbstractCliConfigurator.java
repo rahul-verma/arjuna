@@ -24,9 +24,10 @@ import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.pvt.batteries.config.Batteries;
 
 public abstract class AbstractCliConfigurator implements CLIConfigurator {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private CLI cli = null;
 	private HashMap<String, String> rawMap = new HashMap<String, String>();
 	private HashMap<String, Value> userOptionMap = new HashMap<String, Value>();

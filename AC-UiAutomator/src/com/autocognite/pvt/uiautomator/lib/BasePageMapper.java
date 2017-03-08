@@ -19,9 +19,10 @@
 package com.autocognite.pvt.uiautomator.lib;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 
 public abstract class BasePageMapper implements PageMapper{
@@ -35,7 +36,7 @@ public abstract class BasePageMapper implements PageMapper{
 			String message
 			) throws Exception{
 				throw new Problem(
-						RunConfig.getConfiguredName("COMPONENT_NAMES", "UI_AUTOMATOR"),
+						Batteries.getConfiguredName("COMPONENT_NAMES", "UI_AUTOMATOR"),
 				this.getName(),
 				action,
 				code,
@@ -47,7 +48,7 @@ public abstract class BasePageMapper implements PageMapper{
 		return throwGenericUiMapperException(
 				methodName,
 				UiAutomator.problem.MAPFILE_NOTAFILE,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.MAPFILE_NOTAFILE,
 						FileSystemBatteries.getCanonicalPath(filePath)
 				)
@@ -58,7 +59,7 @@ public abstract class BasePageMapper implements PageMapper{
 		return throwGenericUiMapperException(
 				methodName,
 				UiAutomator.problem.MAPFILE_NOT_FOUND,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.MAPFILE_NOT_FOUND,
 						FileSystemBatteries.getCanonicalPath(filePath)
 				)
@@ -69,7 +70,7 @@ public abstract class BasePageMapper implements PageMapper{
 		return throwGenericUiMapperException(
 				methodName,
 				UiAutomator.problem.MAPFILE_RELATIVE_PATH,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.MAPFILE_RELATIVE_PATH,
 						filePath
 				)

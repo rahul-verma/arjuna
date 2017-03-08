@@ -12,7 +12,6 @@ import com.autocognite.pvt.arjuna.enums.TestResultCode;
 import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.reporter.lib.IssueId;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer;
-import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 
 public class TestContainerExecutor implements Runnable{
 	private static Logger logger = RunConfig.getCentralLogger();

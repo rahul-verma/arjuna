@@ -7,13 +7,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler;
 import com.autocognite.pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
 import com.autocognite.pvt.unitee.reporter.lib.IssueId;
@@ -22,12 +22,11 @@ import com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture;
 import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
-import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator;
 import com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 import com.autocognite.pvt.unitee.testobject.lib.loader.group.Group;
 
 public class JavaTestClass extends BaseTestObject implements TestContainer {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private JavaTestClassDefinition classDef = null;
 	private Class<?> testClass = null;
 	private Constructor<?> constructor = null;

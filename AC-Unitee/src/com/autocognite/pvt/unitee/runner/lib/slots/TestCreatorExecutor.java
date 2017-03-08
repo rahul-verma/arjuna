@@ -13,7 +13,6 @@ import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.reporter.lib.IssueId;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator;
-import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreatorInstance;
 
 public class TestCreatorExecutor implements Runnable{
 	private static Logger logger = RunConfig.getCentralLogger();

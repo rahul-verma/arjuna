@@ -26,6 +26,7 @@ import org.apache.commons.io.FilenameUtils;
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataReference;
 import com.autocognite.arjuna.interfaces.DataRecord;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.databroker.DataReferenceFactory;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 
@@ -35,7 +36,7 @@ public enum BatteriesSingleton {
 	HashMap<String, DataReference> dataReferences = new HashMap<String, DataReference>();
 
 	public void loadDataReferences() throws Exception {
-		String mapRefDir = RunConfig.getCentralProperty(BatteriesPropertyType.DIRECTORY_DATA_REFERENCES).asString();
+		String mapRefDir = Batteries.getCentralProperty(BatteriesPropertyType.DIRECTORY_DATA_REFERENCES).asString();
 		File mapFileDir = new File(mapRefDir);
 		if (mapFileDir.exists() && mapFileDir.isDirectory()) {
 			File[] listOfMapFiles = mapFileDir.listFiles();

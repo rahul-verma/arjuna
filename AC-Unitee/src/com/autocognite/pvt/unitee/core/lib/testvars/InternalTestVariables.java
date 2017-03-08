@@ -2,8 +2,8 @@ package com.autocognite.pvt.unitee.core.lib.testvars;
 
 import java.util.Map;
 
-import com.autocognite.arjuna.interfaces.DataReference;
 import com.autocognite.arjuna.interfaces.DataRecord;
+import com.autocognite.arjuna.interfaces.DataReference;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.google.gson.JsonObject;

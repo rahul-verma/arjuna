@@ -5,7 +5,6 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.internal.arjuna.enums.TestObjectType;
@@ -14,6 +13,7 @@ import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.utils.ExceptionBatteries;
 import com.autocognite.pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
 import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
@@ -25,7 +25,7 @@ import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.Test;
 
 public class JavaTest extends BaseTestObject implements Test{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private int testNumber;
 	private JavaTestMethodInstance parent;
 	private JavaTestMethodDefinition methodDef;

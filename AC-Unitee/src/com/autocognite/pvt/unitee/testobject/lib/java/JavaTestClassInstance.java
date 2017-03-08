@@ -8,7 +8,6 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.ArjunaInternal;
@@ -17,6 +16,7 @@ import com.autocognite.pvt.arjuna.enums.IssueSubType;
 import com.autocognite.pvt.arjuna.enums.IssueType;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
 import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;
 import com.autocognite.pvt.unitee.reporter.lib.issue.IssueBuilder;
@@ -29,7 +29,7 @@ import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator;
 import com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 
 public class JavaTestClassInstance extends BaseTestObject implements TestContainerInstance {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private int instanceNumber;
 	private Object testObject = null;
 	private JavaTestClass container = null;

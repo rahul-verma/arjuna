@@ -26,11 +26,11 @@ import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataMethod;
 import com.autocognite.arjuna.bases.DataRecordContainer;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 
 public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
-	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private HashMap<String,Method> methods = new HashMap<String,Method>();
 	HashMap<String,String> dgMethodNames = new HashMap<String,String>();
 	public static Object[][] sampleArr = {};

@@ -42,7 +42,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.enums.Browser;
 import com.autocognite.arjuna.uiauto.enums.ElementLoaderType;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
@@ -51,6 +50,7 @@ import com.autocognite.arjuna.uiauto.enums.UiElementType;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 import com.autocognite.pvt.selenium.api.WDMediator;
 import com.autocognite.pvt.selenium.lib.base.DefaultSeleniumMediator;
@@ -110,7 +110,7 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 	}
 
 	public WebDriver getFirefoxDriver() throws Exception {
-		this.setAppTitle(RunConfig.value(UiAutomatorPropertyType.FIREFOX_WINDOWNAME).asString());
+		this.setAppTitle(Batteries.value(UiAutomatorPropertyType.FIREFOX_WINDOWNAME).asString());
 		capabilities = getFireFoxCapabilitiesSkeleton();
 		//driver = new FirefoxDriver(capabilities);
 		FirefoxProfile profile = new FirefoxProfile();
@@ -121,7 +121,7 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 	}
 
 	public WebDriver getChromeDriver() throws Exception {
-		this.setAppTitle(RunConfig.value(UiAutomatorPropertyType.CHROME_WINDOWNAME).asString());
+		this.setAppTitle(Batteries.value(UiAutomatorPropertyType.CHROME_WINDOWNAME).asString());
 		String os = SystemBatteries.getOSName();
 		String chromeDriverBinaryName = null;
 		if (os.startsWith("Window")){
@@ -129,22 +129,22 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 		} else if (os.startsWith("Mac")) {
 			chromeDriverBinaryName = "chromedriver";
 		}
-		System.setProperty("webdriver.chrome.driver", RunConfig.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + chromeDriverBinaryName);
+		System.setProperty("webdriver.chrome.driver", Batteries.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + chromeDriverBinaryName);
 		capabilities = getChromeCapabilitiesSkeleton();
 		setCapabilities(capabilities);
 		return new ChromeDriver(capabilities);
 	}
 
 	public WebDriver getSafariDriver() throws Exception {
-		this.setAppTitle(RunConfig.value(UiAutomatorPropertyType.SAFARI_WINDOWNAME).asString());
+		this.setAppTitle(Batteries.value(UiAutomatorPropertyType.SAFARI_WINDOWNAME).asString());
 		capabilities = getSafariCapabilitiesSkeleton();
 		setCapabilities(capabilities);
 		return new SafariDriver(capabilities);
 	}
 
 	public void initDriver() throws Exception {
-		this.setBrowser(Browser.valueOf(RunConfig.value(UiAutomatorPropertyType.BROWSER_PC_DEFAULT).asString().toUpperCase()));
-		this.setWaitTime(RunConfig.value(UiAutomatorPropertyType.BROWSER_PC_MAXWAIT).asInt());
+		this.setBrowser(Browser.valueOf(Batteries.value(UiAutomatorPropertyType.BROWSER_PC_DEFAULT).asString().toUpperCase()));
+		this.setWaitTime(Batteries.value(UiAutomatorPropertyType.BROWSER_PC_MAXWAIT).asInt());
 		this.setUiTestEngineName(UiDriverEngine.WEBDRIVER);		
 	}
 
@@ -197,9 +197,9 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 	}
 
 	public void setCapabilities(DesiredCapabilities capabilities) throws Exception {
-		if (RunConfig.value(UiAutomatorPropertyType.BROWSER_PC_PROXY_ON).asBoolean()){
+		if (Batteries.value(UiAutomatorPropertyType.BROWSER_PC_PROXY_ON).asBoolean()){
 			Proxy proxy = new Proxy();
-			String p = RunConfig.value(UiAutomatorPropertyType.BROWSER_PC_PROXY_HOST).asString() + ":" + RunConfig.value(UiAutomatorPropertyType.BROWSER_PC_PROXY_PORT).asString();
+			String p = Batteries.value(UiAutomatorPropertyType.BROWSER_PC_PROXY_HOST).asString() + ":" + Batteries.value(UiAutomatorPropertyType.BROWSER_PC_PROXY_PORT).asString();
 			setHttpProxy(proxy, p);
 			setSslProxy(proxy, p);
 			capabilities.setCapability("proxy", proxy);
@@ -228,7 +228,7 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 		uiElement.setMediator(mediator);
 		uiElement.setLoaderType(this.getElementLoaderType());
 		mediator.setFindersQueue(finderQueue);
-		mediator.setAutomatorName(RunConfig.getComponentName("WEBDRIVER_AUTOMATOR"));
+		mediator.setAutomatorName(Batteries.getComponentName("WEBDRIVER_AUTOMATOR"));
 		return uiElement;
 	}
 
@@ -240,7 +240,7 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 			idType = WebIdentifyBy.valueOf(identifier.toUpperCase());
 		} catch (Throwable e){
 			throwUnsupportedIndentifierException(
-					RunConfig.getComponentName("WEBDRIVER_AUTOMATOR"),
+					Batteries.getComponentName("WEBDRIVER_AUTOMATOR"),
 					"getFinderType",
 					identifier);
 		}
@@ -355,7 +355,7 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 	public File takeScreenshot() throws Exception {
 		TakesScreenshot augDriver = getScreenshotAugmentedDriver();
         File srcFile = augDriver.getScreenshotAs(OutputType.FILE);
-        return FileSystemBatteries.moveFiletoDir(srcFile, RunConfig.value(BatteriesPropertyType.DIRECTORY_SCREENSHOTS).asString());
+        return FileSystemBatteries.moveFiletoDir(srcFile, Batteries.value(BatteriesPropertyType.DIRECTORY_SCREENSHOTS).asString());
 	}
 	
 	public void focusOnApp() throws Exception{

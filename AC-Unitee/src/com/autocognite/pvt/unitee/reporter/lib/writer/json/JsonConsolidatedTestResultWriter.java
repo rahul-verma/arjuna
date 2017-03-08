@@ -20,11 +20,11 @@ package com.autocognite.pvt.unitee.reporter.lib.writer.json;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
 
 public class JsonConsolidatedTestResultWriter extends JsonConsolidatedResultWriter<TestResult> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	
 	public JsonConsolidatedTestResultWriter() throws Exception{
 		super("tests.json");

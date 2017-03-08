@@ -20,14 +20,14 @@ package com.autocognite.arjuna.uiauto.lib;
 
 import java.util.HashMap;
 
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.factories.PageMapperFactory;
 import com.autocognite.arjuna.uiauto.interfaces.App;
 import com.autocognite.arjuna.uiauto.interfaces.Page;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 
 public class BaseApp implements App{
@@ -61,31 +61,31 @@ public class BaseApp implements App{
 
 	protected void throwNullAutomatorException(String method, UiAutomationContext context) throws Exception{
 		throw new Problem(
-			RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 			this.getName(),
 			method,
 			UiAutomator.problem.COMPOSITE_PAGE_NULL_AUTOMATOR,
-			RunConfig.getProblemText(UiAutomator.problem.COMPOSITE_PAGE_NULL_AUTOMATOR, UiAutomator.getAutomationContextName(context) )
+			Batteries.getProblemText(UiAutomator.problem.COMPOSITE_PAGE_NULL_AUTOMATOR, UiAutomator.getAutomationContextName(context) )
 		);
 	}
 	
 	protected Page throwUndefinedUiException(String method, String uiLabel) throws Exception{
 		throw new Problem(
-				RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 			this.getName(),
 			method,
 			UiAutomator.problem.COMPOSITE_PAGE_NONEXISTING_LABEL,
-			RunConfig.getProblemText(UiAutomator.problem.COMPOSITE_PAGE_NONEXISTING_LABEL, uiLabel, this.getName())
+			Batteries.getProblemText(UiAutomator.problem.COMPOSITE_PAGE_NONEXISTING_LABEL, uiLabel, this.getName())
 		);
 	}
 	
 	protected Page throwNullUiException(String method) throws Exception{
 		throw new Problem(
-				RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 			this.getName(),
 			method,
 			UiAutomator.problem.COMPOSITE_PAGE_NULL_LABEL,
-			RunConfig.getProblemText(UiAutomator.problem.COMPOSITE_PAGE_NULL_LABEL, this.getName() )
+			Batteries.getProblemText(UiAutomator.problem.COMPOSITE_PAGE_NULL_LABEL, this.getName() )
 		);
 	}
 

@@ -20,7 +20,6 @@ package com.autocognite.pvt.unitee.reporter.lib.writer.console;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -28,21 +27,19 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.internal.arjuna.enums.TestAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.TestReportSection;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.reporter.lib.DefaultObserver;
 import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
 
 public class ConsoleTestResultWriter extends DefaultObserver<TestResult> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	String marker = new String(new char[100]).replace("\0", "-");
 	private List<TestObjectAttribute> execTestObjectProps = null;
 	private List<TestAttribute> execTestProps = null;

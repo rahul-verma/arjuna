@@ -8,15 +8,15 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.interfaces.ReportGenerator;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.filehandler.FileReader;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 public abstract class JsonResultsReader{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private String reportDir = null;
 	private File[] files = null;
 	private List<ReportGenerator> generators = new ArrayList<ReportGenerator>();

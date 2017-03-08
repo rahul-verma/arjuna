@@ -6,14 +6,14 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 
 public class TestSlotTestContainer {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private int slotNum;
 	private TestContainer testContainer = null;
 	private List<TestSlotTestContainerInstance> testSlotContainerInstances = null;

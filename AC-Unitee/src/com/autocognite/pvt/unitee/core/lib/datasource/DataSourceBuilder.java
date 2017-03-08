@@ -13,10 +13,10 @@ import com.autocognite.arjuna.annotations.DriveWithDataArray;
 import com.autocognite.arjuna.annotations.DriveWithDataFile;
 import com.autocognite.arjuna.annotations.DriveWithDataGenerator;
 import com.autocognite.arjuna.annotations.DriveWithDataMethod;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataSource;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.databroker.DataSourceFactory;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 import com.autocognite.pvt.unitee.core.lib.annotate.None;
@@ -24,7 +24,7 @@ import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefini
 
 // Purpose of this is to achieve thread safety for Data Sources by creating unique objects every time.
 public class DataSourceBuilder {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private JavaTestClassDefinition testClassDef = null;
 	private DataSourceType dataSourceType = null;
 	private Method testMethod = null;
@@ -126,7 +126,7 @@ public class DataSourceBuilder {
 		}
 		
 		if (!FileSystemBatteries.isFile(location)){
-			location = RunConfig.value(BatteriesPropertyType.DIRECTORY_DATA_SOURCES).asString() + "/" + location;
+			location = Batteries.value(BatteriesPropertyType.DIRECTORY_DATA_SOURCES).asString() + "/" + location;
 			if (!FileSystemBatteries.isFile(location)){
 				throw new Exception(String.format("File path provided using DataFile annotation does not exist: %s", location));
 			}

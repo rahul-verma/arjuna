@@ -25,14 +25,14 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataMethodContainer;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 import com.autocognite.pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler;
 
 public class DataMethodContainerMap {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	HashMap<String,DataMethodsHandler> wrappers = new HashMap<String, DataMethodsHandler>();
 	HashMap<String,String> containerClassNames = new HashMap<String,String>();
 	HashMap<Class<?>,String> containerClassToNameMapper = new HashMap<Class<?>,String>();

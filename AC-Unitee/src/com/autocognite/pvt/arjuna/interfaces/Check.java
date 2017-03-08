@@ -1,4 +1,4 @@
-package com.autocognite.arjuna.interfaces;
+package com.autocognite.pvt.arjuna.interfaces;
 
 public interface Check {
 

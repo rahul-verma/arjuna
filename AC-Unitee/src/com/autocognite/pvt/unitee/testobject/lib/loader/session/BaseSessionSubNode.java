@@ -9,7 +9,6 @@ import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.hocon.HoconReader;
 import com.autocognite.pvt.batteries.hocon.HoconStringReader;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
-import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import com.autocognite.pvt.unitee.testobject.lib.loader.group.Group;
 import com.google.gson.JsonObject;

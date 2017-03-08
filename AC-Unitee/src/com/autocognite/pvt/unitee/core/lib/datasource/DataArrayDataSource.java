@@ -6,8 +6,8 @@ import java.util.List;
 import com.autocognite.arjuna.bases.DataRecordContainer;
 import com.autocognite.arjuna.bases.DefaultDataRecord;
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
-import com.autocognite.arjuna.interfaces.DataSource;
 import com.autocognite.arjuna.interfaces.DataRecord;
+import com.autocognite.arjuna.interfaces.DataSource;
 
 public class DataArrayDataSource implements DataSource{
 	private DataRecordContainer container = null;

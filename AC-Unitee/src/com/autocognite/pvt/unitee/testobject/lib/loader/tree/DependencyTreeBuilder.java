@@ -14,16 +14,15 @@ import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.ClassDependency;
 import com.autocognite.arjuna.annotations.MethodDependency;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.arjuna.enums.DependencyTarget;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.core.lib.annotate.None;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 
 public class DependencyTreeBuilder {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	TestNode baseNode = null;
 	Set<String> allFilteredMethods = new HashSet<String>();
 	HashMap<String, TestMethodNode> allNodesMap = new HashMap<String, TestMethodNode>();

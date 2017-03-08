@@ -20,13 +20,13 @@ package com.autocognite.pvt.unitee.reporter.lib.reportable;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.utils.ExceptionBatteries;
 import com.autocognite.pvt.unitee.reporter.lib.event.Event;
 import com.autocognite.pvt.unitee.reporter.lib.event.EventBuilder;
 
 public class ReportableFactory {
-	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	
 //	private static FixtureResult getFixtureResult(TestVariables testVars, TestClassFixtureType type, Throwable e) throws Exception{
 //		FixtureResultBuilder builder = new FixtureResultBuilder();

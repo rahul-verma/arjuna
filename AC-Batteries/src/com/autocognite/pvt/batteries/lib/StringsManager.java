@@ -21,10 +21,10 @@ package com.autocognite.pvt.batteries.lib;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.pvt.batteries.configurator.lib.strings.NamedString;
 import com.autocognite.pvt.batteries.ds.MessagesContainer;
 import com.autocognite.pvt.batteries.ds.NamesContainer;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 
 public class StringsManager {
 	HashMap<String, HashMap<String, String>> msgMap = new HashMap<String, HashMap<String, String>>();

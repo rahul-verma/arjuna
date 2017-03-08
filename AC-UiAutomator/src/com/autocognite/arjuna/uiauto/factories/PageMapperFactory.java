@@ -20,17 +20,17 @@ package com.autocognite.arjuna.uiauto.factories;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.enums.FileFormat;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.lib.IniFilePageMapper;
 import com.autocognite.pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
 public class PageMapperFactory {
-	private static Logger sLogger = Logger.getLogger(RunConfig.getCentralLogName());
+	private static Logger sLogger = Logger.getLogger(Batteries.getCentralLogName());
 	
 	public static PageMapper getFileMapper(String mapPath) throws Exception{
 		String ext = FileSystemBatteries.getExtension(mapPath).toUpperCase();
@@ -44,19 +44,19 @@ public class PageMapperFactory {
 					"Page Mapper", 
 					"getFileMapper", 
 					UiAutomator.problem.UNSUPPORTED_MAP_FILE_FORMAT, 
-					RunConfig.getProblemText(UiAutomator.problem.UNSUPPORTED_MAP_FILE_FORMAT, ext)
+					Batteries.getProblemText(UiAutomator.problem.UNSUPPORTED_MAP_FILE_FORMAT, ext)
 				);			
 		}
 		
 		if (!FileSystemBatteries.isFile(consideredPath)){
-			consideredPath = FileSystemBatteries.getCanonicalPath(RunConfig.value(UiAutomatorPropertyType.DIRECTORY_UI_MAPS).asString() + "/" + consideredPath);
+			consideredPath = FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_UI_MAPS).asString() + "/" + consideredPath);
 			if (FileSystemBatteries.isDir(consideredPath)){
 				throw new Problem(
 						"UI Automator", 
 						"Page Mapper", 
 						"getFileMapper", 
 						UiAutomator.problem.MAPFILE_NOTAFILE, 
-						RunConfig.getProblemText(UiAutomator.problem.MAPFILE_NOTAFILE, consideredPath)
+						Batteries.getProblemText(UiAutomator.problem.MAPFILE_NOTAFILE, consideredPath)
 					);				
 			} else if (!FileSystemBatteries.isFile(consideredPath)){
 				throw new Problem(
@@ -64,7 +64,7 @@ public class PageMapperFactory {
 						"Page Mapper", 
 						"getFileMapper", 
 						UiAutomator.problem.MAPFILE_NOT_FOUND, 
-						RunConfig.getProblemText(UiAutomator.problem.MAPFILE_NOT_FOUND, consideredPath)
+						Batteries.getProblemText(UiAutomator.problem.MAPFILE_NOT_FOUND, consideredPath)
 					);				
 			}
 		}

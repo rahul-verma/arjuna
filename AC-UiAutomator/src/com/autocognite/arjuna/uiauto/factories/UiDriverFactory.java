@@ -18,8 +18,6 @@
  ******************************************************************************/
 package com.autocognite.arjuna.uiauto.factories;
 
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.plugins.appium.AppiumHybridUiDriver;
@@ -27,6 +25,8 @@ import com.autocognite.arjuna.uiauto.plugins.appium.AppiumNativeUiDriver;
 import com.autocognite.arjuna.uiauto.plugins.appium.AppiumWebUiDriver;
 import com.autocognite.arjuna.uiauto.plugins.selenium.SeleniumWebUiDriver;
 import com.autocognite.arjuna.uiauto.plugins.sikuli.SikuliScreenUiDriver;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 
 public class UiDriverFactory {
@@ -78,11 +78,11 @@ public class UiDriverFactory {
 	public static UiDriver getMobileNativeUiDriver(String appPath) throws Exception{
 		if (appPath == null){
 			throw new Problem(
-					RunConfig.getComponentName("UI_AUTOMATOR"),
+					Batteries.getComponentName("UI_AUTOMATOR"),
 					"UiDriver Factory",
 					"getMobileNativeAutomator",
 					UiAutomator.problem.FACTORY_AUTOMATOR_MOBILE_NULL_APP_PATH,
-					RunConfig.getProblemText(UiAutomator.problem.FACTORY_AUTOMATOR_MOBILE_NULL_APP_PATH));
+					Batteries.getProblemText(UiAutomator.problem.FACTORY_AUTOMATOR_MOBILE_NULL_APP_PATH));
 			}
 		return getAppiumNative(appPath);
 	}
@@ -90,11 +90,11 @@ public class UiDriverFactory {
 	public static UiDriver getMobileHybridUiDriver(String appPath) throws Exception{
 		if (appPath == null){
 			throw new Problem(
-					RunConfig.getComponentName("UI_AUTOMATOR"),
+					Batteries.getComponentName("UI_AUTOMATOR"),
 					"UiDriver Factory",
 					"getMobileNativeAutomator",
 					UiAutomator.problem.FACTORY_AUTOMATOR_MOBILE_NULL_APP_PATH,
-					RunConfig.getProblemText(UiAutomator.problem.FACTORY_AUTOMATOR_MOBILE_NULL_APP_PATH));
+					Batteries.getProblemText(UiAutomator.problem.FACTORY_AUTOMATOR_MOBILE_NULL_APP_PATH));
 			}
 		return getAppiumHybrid(appPath);
 	}
@@ -126,11 +126,11 @@ public class UiDriverFactory {
 	
 	public static UiDriver throwAppPathFactoryMethodWronglyUsed(UiAutomationContext context) throws Exception{
 		throw new Problem(
-				RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 				"UiDriver Factory",
 				"getUiDriver",
 				UiAutomator.problem.FACTORY_METHOD_APPPATH_NOT_APPLICABLE,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.FACTORY_METHOD_APPPATH_NOT_APPLICABLE,
 						UiAutomator.getAutomationContextName(context))
 			);		
@@ -138,11 +138,11 @@ public class UiDriverFactory {
 	
 	public static UiDriver throwUnsupportedAutomationContextException(UiAutomationContext context) throws Exception{
 		throw new Problem(
-				RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 				"UiDriver Factory",
 				"getUiDriver",
 				UiAutomator.problem.FACTORY_AUTOMATOR_UNSUPPORTED_CONTEXT,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.FACTORY_AUTOMATOR_UNSUPPORTED_CONTEXT,
 						UiAutomator.getAutomationContextName(context))
 			);		

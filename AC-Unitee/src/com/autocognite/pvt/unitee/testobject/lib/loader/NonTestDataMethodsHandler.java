@@ -25,11 +25,11 @@ import java.lang.reflect.Modifier;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataMethod;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 
 public class NonTestDataMethodsHandler extends DefaultDataMethodsHandler {
-	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	Class<?> klass = null;
 
 	public NonTestDataMethodsHandler(Class<?> klass) throws Exception {

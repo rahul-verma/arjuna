@@ -1,7 +1,5 @@
 package com.autocognite.pvt.unitee.core.lib.testvars;
 
-import org.apache.poi.util.SystemOutLogger;
-
 import com.autocognite.arjuna.bases.DefaultDataRecord;
 import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.DataRecord;
@@ -10,13 +8,10 @@ import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.batteries.container.EnumKeyValueContainer;
-import com.autocognite.pvt.batteries.ds.Name;
 import com.autocognite.pvt.batteries.value.DoubleValue;
 import com.autocognite.pvt.batteries.value.EnumValue;
-import com.autocognite.pvt.batteries.value.FloatValue;
 import com.autocognite.pvt.batteries.value.IntValue;
 import com.autocognite.pvt.batteries.value.LongValue;
-import com.autocognite.pvt.batteries.value.NotSetValue;
 import com.autocognite.pvt.batteries.value.StringValue;
 
 public class DefaultTestObjectProperties 

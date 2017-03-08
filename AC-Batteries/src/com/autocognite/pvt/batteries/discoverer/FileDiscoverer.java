@@ -32,10 +32,11 @@ import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.discovery.JarClassDiscoverer;
 
 public class FileDiscoverer extends DirectoryWalker {
-	public Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	public Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	FileAggregator aggregator = null;
 	String rootDir = null;
 	String currentDir = null;
@@ -71,9 +72,9 @@ public class FileDiscoverer extends DirectoryWalker {
 
 	protected void handleFile(File file, int depth, Collection results) throws IOException {
 		String fullPath = FileSystemBatteries.getCanonicalPath(file.getAbsolutePath());
-		// Batteries.getCentralLogger().debug(fullPath);
+		// RunConfig.getCentralLogger().debug(fullPath);
 		String parentDir = fullPath.substring(0, fullPath.indexOf(file.getName()) - 1);
-		// Batteries.getCentralLogger().debug(parentDir);
+		// RunConfig.getCentralLogger().debug(parentDir);
 		String pkgParentDir = null;
 		if (parentDir.equals(this.rootDir)) {
 			pkgParentDir = "";

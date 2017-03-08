@@ -5,12 +5,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;
 import com.autocognite.pvt.arjuna.enums.IssueType;
 import com.autocognite.pvt.arjuna.enums.StepResultType;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;
 import com.autocognite.pvt.unitee.reporter.lib.issue.IssueBuilder;
 import com.autocognite.pvt.unitee.reporter.lib.step.StepResult;
@@ -20,7 +20,7 @@ import com.autocognite.pvt.unitee.validator.lib.exceptions.Error;
 import com.autocognite.pvt.unitee.validator.lib.exceptions.Failure;
 
 public class ThreadState {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private Test currentTest = null;
 	private List<StepResult> currentStepResults =  null;
 	

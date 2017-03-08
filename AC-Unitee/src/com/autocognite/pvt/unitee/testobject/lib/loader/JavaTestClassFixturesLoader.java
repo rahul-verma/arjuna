@@ -7,20 +7,34 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.annotations.*;
+import com.autocognite.arjuna.annotations.AfterClass;
+import com.autocognite.arjuna.annotations.AfterClassInstance;
+import com.autocognite.arjuna.annotations.AfterMethod;
+import com.autocognite.arjuna.annotations.AfterMethodInstance;
+import com.autocognite.arjuna.annotations.AfterTest;
+import com.autocognite.arjuna.annotations.BeforeClass;
+import com.autocognite.arjuna.annotations.BeforeClassInstance;
+import com.autocognite.arjuna.annotations.BeforeMethod;
+import com.autocognite.arjuna.annotations.BeforeMethodInstance;
+import com.autocognite.arjuna.annotations.BeforeTest;
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.reporter.lib.reportable.ReportableFactory;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
-import com.autocognite.pvt.unitee.testobject.lib.fixture.*;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.BoundFixture;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.StaticFixture;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.TestClassFixtures;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 
 public class JavaTestClassFixturesLoader {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private JavaTestClassDefinition classDef = null;
 	private Fixture setUpSessionFixture = null;
 	private Fixture tearDownSessionFixture = null;
@@ -47,62 +61,62 @@ public class JavaTestClassFixturesLoader {
 	
 	private boolean isBeforeClassFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(BeforeClass.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPCLASS_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPCLASS_NAME).asString()));	
 	}
 	
 	private boolean isAfterClassFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(AfterClass.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASS_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASS_NAME).asString()));	
 	}
 	
 	private boolean isBeforeClassInstanceFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(BeforeClassInstance.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPCLASSINSTANCE_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPCLASSINSTANCE_NAME).asString()));	
 	}
 	
 	private boolean isAfterClassInstanceFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(AfterClassInstance.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASSINSTANCE_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASSINSTANCE_NAME).asString()));	
 	}
 
 	private boolean isBeforeClassFragmentFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(BeforeClassInstance.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPCLASSFRAGMENT_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPCLASSFRAGMENT_NAME).asString()));	
 	}
 	
 	private boolean isAfterClassFragmentFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(AfterClassInstance.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASSFRAGMENT_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASSFRAGMENT_NAME).asString()));	
 	}
 	
 	private boolean isBeforeMethodFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(BeforeMethod.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPMETHOD_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPMETHOD_NAME).asString()));	
 	}
 	
 	private boolean isAfterMethodFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(AfterMethod.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNMETHOD_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNMETHOD_NAME).asString()));	
 	}
 	
 	private boolean isBeforeMethodInstanceFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(BeforeMethodInstance.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPMETHODINSTANCE_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPMETHODINSTANCE_NAME).asString()));	
 	}
 	
 	private boolean isAfterMethodInstanceFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(AfterMethodInstance.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNMETHODINSTANCE_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNMETHODINSTANCE_NAME).asString()));	
 	}
 	
 	private boolean isBeforeTestFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(BeforeTest.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPTEST_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPTEST_NAME).asString()));	
 	}
 	
 	private boolean isAfterTestFixture(Method m) throws Exception{
 		return (m.isAnnotationPresent(AfterTest.class) || 
-				m.getName().equals(RunConfig.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNTEST_NAME).asString()));	
+				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNTEST_NAME).asString()));	
 	}
 	
 	public void incrementFixtureCount(HashMap<TestClassFixtureType, ArrayList<String>> tracker, TestClassFixtureType type, String fixtureName){

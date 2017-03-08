@@ -18,7 +18,7 @@
  ******************************************************************************/
 package com.autocognite.pvt.unitee.validator.lib.check;
 
-import com.autocognite.arjuna.interfaces.Check;
+import com.autocognite.pvt.arjuna.interfaces.Check;
 import com.autocognite.pvt.unitee.validator.lib.exceptions.Error;
 import com.autocognite.pvt.unitee.validator.lib.exceptions.Failure;
 

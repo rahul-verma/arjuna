@@ -20,17 +20,17 @@ package com.autocognite.pvt.unitee.reporter.lib.writer.json;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.reporter.lib.event.Event;
 
 public class JsonEventWriter extends JsonResultWriter<Event> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private int counter = 0;
 	private JsonConsolidatedEventWriter childWriter;
 	
 	public JsonEventWriter() throws Exception{
-		super(RunConfig.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_EVENTS).asString());
+		super(Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_EVENTS).asString());
 		childWriter = new JsonConsolidatedEventWriter();
 	}
 	

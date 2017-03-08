@@ -6,14 +6,14 @@ import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.ClassDependency;
 import com.autocognite.arjuna.annotations.MethodDependency;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 
 public class DependencyUtils {
-	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 
 	public static Class<?>[] getDependencyClasses(String testObjectQualifiedName, ClassDependency depAnn) throws Exception{
 		Class<?>[] depClasses = null;

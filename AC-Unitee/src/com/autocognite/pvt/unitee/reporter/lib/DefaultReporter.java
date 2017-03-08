@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.interfaces.InternlReportableObserver;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.reporter.lib.event.Event;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult;
 import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;
@@ -47,7 +48,7 @@ public class DefaultReporter implements Reporter{
 	private List<InternlReportableObserver<FixtureResult>> fixtureResultObservers = new ArrayList<InternlReportableObserver<FixtureResult>>();
 	
 	private String getRunIDReportDir() throws Exception{
-		return RunConfig.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT).asString();
+		return Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT).asString();
 	}
 	
 	public DefaultReporter() throws Exception{

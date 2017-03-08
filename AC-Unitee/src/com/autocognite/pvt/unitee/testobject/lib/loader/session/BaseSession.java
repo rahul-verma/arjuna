@@ -1,31 +1,14 @@
 package com.autocognite.pvt.unitee.testobject.lib.loader.session;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.arjuna.enums.SkipCode;
-import com.autocognite.pvt.arjuna.enums.UnpickedCode;
-import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.core.lib.exception.SessionNodesFinishedException;
-import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
-import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
-import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
-import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.Group;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader;
-import com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 public abstract class BaseSession implements Session {
 	private static Logger logger = RunConfig.getCentralLogger();

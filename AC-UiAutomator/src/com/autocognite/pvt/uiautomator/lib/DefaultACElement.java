@@ -23,9 +23,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.ElementLoaderType;
 import com.autocognite.arjuna.uiauto.enums.UiElementType;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.api.ACElement;
 import com.autocognite.pvt.uiautomator.api.ElementMetaData;
@@ -218,7 +219,7 @@ public abstract class DefaultACElement implements  ACElement{
 			String message
 			) throws Exception{
 		throw new Problem(
-				RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 				getClassForLoaderType(),
 				action,
 				code,
@@ -233,7 +234,7 @@ public abstract class DefaultACElement implements  ACElement{
 				e, 
 				code,
 				action,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						code,
 						this.getMediator().getAutomatorName(),
 						filler,
@@ -245,11 +246,11 @@ public abstract class DefaultACElement implements  ACElement{
 
 	protected Object throwUnsupportedException(String action) throws Exception{
 		throw new Problem(
-				RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 				getClassForLoaderType(),
 				action,
 				UiAutomator.problem.ELEMENT_UNSUPPORTED_ACTION,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.ELEMENT_UNSUPPORTED_ACTION,
 						action,
 						getElementNameFillerForException(),
@@ -261,11 +262,11 @@ public abstract class DefaultACElement implements  ACElement{
 	
 	protected Object throwExceptionFromMediator(String code, String action) throws Exception{
 		throw new Problem(
-				RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 				getClassForLoaderType(),
 				action,
 				code,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						code,
 						getElementNameFillerForException(),
 						this.getMetaData().getAllProperties().toString()
@@ -276,11 +277,11 @@ public abstract class DefaultACElement implements  ACElement{
 	
 	protected Object throwUnsupportedActionExceptionFromMediator(String code, String action) throws Exception{
 		throw new Problem(
-				RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 				getClassForLoaderType(),
 				action,
 				code,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						code,
 						action,
 						getElementNameFillerForException(),
@@ -384,7 +385,7 @@ public abstract class DefaultACElement implements  ACElement{
 					e,
 					UiAutomator.problem.ELEMENT_WAIT_FAILURE,
 					"waitForPresence",
-					RunConfig.getProblemText(
+					Batteries.getProblemText(
 							UiAutomator.problem.ELEMENT_WAIT_FAILURE,
 							this.getMediator().getAutomatorName(),
 							this.getMediator().getWaitTime(),
@@ -405,7 +406,7 @@ public abstract class DefaultACElement implements  ACElement{
 					e,
 					UiAutomator.problem.ELEMENT_WAIT_FAILURE,
 					"waitForAbsence",
-					RunConfig.getProblemText(
+					Batteries.getProblemText(
 							UiAutomator.problem.ELEMENT_WAIT_FAILURE,
 							this.getMediator().getAutomatorName(),
 							this.getMediator().getWaitTime(),
@@ -425,7 +426,7 @@ public abstract class DefaultACElement implements  ACElement{
 					e,
 					UiAutomator.problem.ELEMENT_WAIT_FAILURE,
 					"waitForVisibility",
-					RunConfig.getProblemText(
+					Batteries.getProblemText(
 							UiAutomator.problem.ELEMENT_WAIT_FAILURE,
 							this.getMediator().getAutomatorName(),
 							this.getMediator().getWaitTime(),
@@ -445,7 +446,7 @@ public abstract class DefaultACElement implements  ACElement{
 					e,
 					UiAutomator.problem.ELEMENT_WAIT_FAILURE,
 					"waitForInvisibility",
-					RunConfig.getProblemText(
+					Batteries.getProblemText(
 							UiAutomator.problem.ELEMENT_WAIT_FAILURE,
 							this.getMediator().getAutomatorName(),
 							this.getMediator().getWaitTime(),

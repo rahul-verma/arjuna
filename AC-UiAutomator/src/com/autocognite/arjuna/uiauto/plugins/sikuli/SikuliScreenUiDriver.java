@@ -32,13 +32,13 @@ import org.sikuli.script.Match;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.ElementLoaderType;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.sikuli.api.SikuliMediator;
 import com.autocognite.pvt.sikuli.lib.base.DefaultSikuliMediator;
 import com.autocognite.pvt.uiautomator.UiAutomator;
@@ -119,7 +119,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 	}
 
 	private double getDefaultMinScore() throws Exception {
-		return RunConfig.value(UiAutomatorPropertyType.SIKULI_COMPARISON_SCORE).asDouble();
+		return Batteries.value(UiAutomatorPropertyType.SIKULI_COMPARISON_SCORE).asDouble();
 	}
 
 	@Override
@@ -144,7 +144,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 
 	protected void throwScreenAutomatorException(String action, String code, String message) throws Exception {
 				throw new Problem(
-						RunConfig.getConfiguredName("COMPONENT_NAMES", "SIKULI_AUTOMATOR"),
+						Batteries.getConfiguredName("COMPONENT_NAMES", "SIKULI_AUTOMATOR"),
 				this.getClass().getSimpleName(),
 				action,
 				code,
@@ -157,7 +157,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 		throwScreenAutomatorException(
 				methodName,
 				UiAutomator.problem.COMPARISON_IMAGE_NOT_FOUND,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.COMPARISON_IMAGE_NOT_FOUND,
 						whichSide,
 						filePath
@@ -170,7 +170,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 		throwScreenAutomatorException(
 				methodName,
 				UiAutomator.problem.COMPARISON_NOT_POSSIBLE,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.COMPARISON_NOT_POSSIBLE,
 						FileSystemBatteries.getCanonicalPath(leftImagePath),
 						FileSystemBatteries.getCanonicalPath(rightImagePath)
@@ -186,7 +186,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 		for (Identifier id: elementMetaData.getIdentifiers()){
 			if (id.NAME.equals("IMAGE")){
 				uiElement.setImagePath(
-						FileSystemBatteries.getCanonicalPath(RunConfig.value(UiAutomatorPropertyType.DIRECTORY_UI_IMAGES).asString() + "/" + id.VALUE));
+						FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_UI_IMAGES).asString() + "/" + id.VALUE));
 			}
 		}
 		SikuliMediator mediator = createMediatorSkeleton(uiElement);
@@ -495,7 +495,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 	 */
 	@Override
 	public int getWaitTime() throws Exception{
-		return RunConfig.value(UiAutomatorPropertyType.SIKULI_MAXWAIT).asInt();
+		return Batteries.value(UiAutomatorPropertyType.SIKULI_MAXWAIT).asInt();
 	}
 	
 	/*

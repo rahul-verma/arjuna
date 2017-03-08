@@ -5,15 +5,15 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 
 public class BaseSerializer {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	
 	protected <T> JsonObject serializeEnumKeyMap(Map<T, Value> map) throws Exception{
 		if (ArjunaInternal.logJsonSerializationInfo){

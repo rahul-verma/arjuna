@@ -33,6 +33,7 @@ import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.ReportFormat;
 import com.autocognite.pvt.arjuna.enums.TestLanguage;
 import com.autocognite.pvt.arjuna.interfaces.InternlReportableObserver;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.config.ArjunaSingleton;
 import com.autocognite.pvt.unitee.lib.engine.TestEngine;
@@ -51,7 +52,7 @@ import com.autocognite.pvt.unitee.testobject.lib.loader.TestDefinitionsProcessor
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.Session;
 
 public class ArjunaTestEngine implements TestEngine{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private Session session = null;
 	
 	public ArjunaTestEngine(String[] options) throws Exception {
@@ -73,13 +74,13 @@ public class ArjunaTestEngine implements TestEngine{
 	
 	@Override
 	public void initReporter() throws Exception {
-		logger.debug(RunConfig.getInfoMessageText(ArjunaInternal.info.TESTRUNNER_CREATE_START));
-		logger.debug(RunConfig.getInfoMessageText(ArjunaInternal.info.TESTREPORTER_CREATE_START));
+		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTRUNNER_CREATE_START));
+		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTREPORTER_CREATE_START));
 		archive();
 		
 		ArjunaSingleton.INSTANCE.setCentralExecState(new CentralExecutionState());
 		Reporter reporter = new DefaultReporter();
-		List<String> reportFormats = RunConfig.value(ArjunaProperty.REPORT_LISTENERS_BUILTIN).asStringList();
+		List<String> reportFormats = Batteries.value(ArjunaProperty.REPORT_LISTENERS_BUILTIN).asStringList();
 		for (String reportFormatName: reportFormats) {
 			if (ArjunaInternal.displayReportPrepInfo){
 				logger.debug(reportFormatName);
@@ -103,8 +104,8 @@ public class ArjunaTestEngine implements TestEngine{
 		
 		ArjunaSingleton.INSTANCE.setReporter(reporter);
 
-		logger.debug(RunConfig.getInfoMessageText(ArjunaInternal.info.TESTREPORTER_CREATE_FINISH));
-		logger.debug(RunConfig.getInfoMessageText(ArjunaInternal.info.TESTRUNNER_CREATE_FINISH));		
+		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTREPORTER_CREATE_FINISH));
+		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTRUNNER_CREATE_FINISH));		
 	}
 	
 	@Override
@@ -113,7 +114,7 @@ public class ArjunaTestEngine implements TestEngine{
 			logger.debug("Setting up Report Generator");
 		}
 		CentralReportGenerator generator = new CentralReportGenerator();
-		List<String> reportFormats = RunConfig.value(ArjunaProperty.REPORT_GENERATORS_BUILTIN).asStringList();
+		List<String> reportFormats = Batteries.value(ArjunaProperty.REPORT_GENERATORS_BUILTIN).asStringList();
 		for (String reportFormatName: reportFormats) {
 			if (ArjunaInternal.displayReportGenerationInfo){
 				logger.debug(reportFormatName);
@@ -141,7 +142,7 @@ public class ArjunaTestEngine implements TestEngine{
 	}
 	
 	protected String getReportDir() throws Exception {
-		String dirPath = RunConfig.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT).asString(); 
+		String dirPath = Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT).asString(); 
 		
 		File dirObj = new File(dirPath);
 		//FileUtils.forceMkdir(arg0 );
@@ -154,12 +155,12 @@ public class ArjunaTestEngine implements TestEngine{
 	}
 	
 	private String getArchivesDir() throws Exception{
-		return RunConfig.value(ArjunaProperty.DIRECTORY_ARCHIVES).asString();
+		return Batteries.value(ArjunaProperty.DIRECTORY_ARCHIVES).asString();
 	}
 	
 	protected void archive() throws Exception{
 		FileUtils.forceMkdir(new File(getArchivesDir()));
-		for (File f: (new File(RunConfig.value(ArjunaProperty.DIRECTORY_REPORT).asString())).listFiles()){
+		for (File f: (new File(Batteries.value(ArjunaProperty.DIRECTORY_REPORT).asString())).listFiles()){
 			if (f.isHidden()) continue;
 			if (f.isDirectory()){
 				String targetPath = getArchivesDir() + "/" + f.getName();
@@ -174,7 +175,7 @@ public class ArjunaTestEngine implements TestEngine{
 	 */
 	@Override
 	public void run() throws Exception {
-		logger.debug(RunConfig.getInfoMessageText(ArjunaInternal.info.RUN_BEGIN));
+		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.RUN_BEGIN));
 		Thread t;
 		try{
 			Session session = ArjunaInternal.getSession();
@@ -188,7 +189,7 @@ public class ArjunaTestEngine implements TestEngine{
 			System.exit(1);
 		}
 		ArjunaInternal.getReporter().tearDown();
-		logger.debug(RunConfig.getInfoMessageText(ArjunaInternal.info.RUN_FINISH));
+		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.RUN_FINISH));
 	}
 	
 	@Override

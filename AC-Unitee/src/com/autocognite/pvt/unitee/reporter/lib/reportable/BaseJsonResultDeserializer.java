@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.bases.DefaultDataRecord;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.container.BaseValueContainer;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.batteries.value.DoubleValue;
@@ -31,7 +31,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 public class BaseJsonResultDeserializer {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	
 	protected InternalTestVariables getTestVars(JsonObject root){
 		InternalTestVariables testVars = null;

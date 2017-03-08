@@ -4,12 +4,12 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;
 import com.autocognite.pvt.arjuna.enums.IssueType;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResultBuilder;
 import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;
@@ -18,7 +18,7 @@ import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject;
 import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance;
 
 public abstract class BaseTestClassFixture implements Fixture {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private Class<?> testClass = null;
 	private Method method = null;
 	private String fixtureName = null;

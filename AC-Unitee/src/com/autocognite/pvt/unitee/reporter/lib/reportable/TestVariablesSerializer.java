@@ -2,14 +2,13 @@ package com.autocognite.pvt.unitee.reporter.lib.reportable;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.google.gson.JsonObject;
 
 public class TestVariablesSerializer extends BaseSerializer {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	
 	public void serializeTestVariables(JsonObject jsonObject, TestVariables testVars) throws Exception{
 		try{

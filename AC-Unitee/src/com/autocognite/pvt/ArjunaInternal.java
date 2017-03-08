@@ -26,9 +26,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataSource;
-import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.internal.arjuna.enums.TestAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
@@ -40,6 +38,7 @@ import com.autocognite.pvt.arjuna.enums.TestReportSection;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
 import com.autocognite.pvt.batteries.cli.CLIConfigurator;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.ds.NamesContainer;
 import com.autocognite.pvt.unitee.config.ArjunaSingleton;
@@ -52,7 +51,7 @@ import com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.Session;
 
 public class ArjunaInternal {
-	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	public static boolean displayReportPrepInfo = false;
 	public static boolean displayDiscoveryInfo = false;
 	public static boolean displayLoadingInfo = false;
@@ -131,39 +130,39 @@ public class ArjunaInternal {
 	}
 	
 	public static String getTestObjectTypeName(String name) throws Exception {
-		return RunConfig.getConfiguredName(NamesContainerType.TEST_OBJECT_TYPE_NAMES.toString(), name);
+		return Batteries.getConfiguredName(NamesContainerType.TEST_OBJECT_TYPE_NAMES.toString(), name);
 	}
 	
 	public static String getTestObjectAttrName(String name) throws Exception {
-		return RunConfig.getConfiguredName(NamesContainerType.TEST_OBJECT.toString(), name);
+		return Batteries.getConfiguredName(NamesContainerType.TEST_OBJECT.toString(), name);
 	}
 	
 	public static String getTestAttrName(String name) throws Exception{
-		return RunConfig.getConfiguredName(NamesContainerType.TEST.toString(), name);
+		return Batteries.getConfiguredName(NamesContainerType.TEST.toString(), name);
 	}
 	
 	public static String getStepResultAttrName(String name) throws Exception{
-		return RunConfig.getConfiguredName(NamesContainerType.STEP_RESULT.toString(), name);
+		return Batteries.getConfiguredName(NamesContainerType.STEP_RESULT.toString(), name);
 	}
 	
 	public static String getTestResultAttrName(String name) throws Exception{
-		return RunConfig.getConfiguredName(NamesContainerType.TEST_RESULT.toString(), name);
+		return Batteries.getConfiguredName(NamesContainerType.TEST_RESULT.toString(), name);
 	}
 	
 	public static String getExcludedTestResultAttrName(String name) throws Exception{
-		return RunConfig.getConfiguredName(NamesContainerType.EXCLUDED_TEST_RESULT.toString(), name);
+		return Batteries.getConfiguredName(NamesContainerType.EXCLUDED_TEST_RESULT.toString(), name);
 	}
 	
 	public static String getIssueAttrName(String name) throws Exception{
-		return RunConfig.getConfiguredName(NamesContainerType.ISSUE.toString(), name);
+		return Batteries.getConfiguredName(NamesContainerType.ISSUE.toString(), name);
 	}
 	
 	public static String getFixtureResultAttrName(String name) throws Exception{
-		return RunConfig.getConfiguredName(NamesContainerType.FIXTURE_RESULT.toString(), name);
+		return Batteries.getConfiguredName(NamesContainerType.FIXTURE_RESULT.toString(), name);
 	}
 	
 	public static String getEventAttrName(String name) throws Exception{
-		return RunConfig.getConfiguredName(NamesContainerType.EVENT.toString(), name);
+		return Batteries.getConfiguredName(NamesContainerType.EVENT.toString(), name);
 	}
 	
 	public static ArrayList<NamesContainer> getAllNames(){

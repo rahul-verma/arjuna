@@ -13,15 +13,14 @@ import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.ClassDependency;
 import com.autocognite.arjuna.annotations.MethodDependency;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.arjuna.enums.DependencyTarget;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.core.lib.annotate.None;
 import com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;
 import com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyUtils;
 
 public class TestDefinitionsDB {
-	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private static Map<String, JavaTestClassDefinition> classDefinitions = new HashMap<String, JavaTestClassDefinition>();
 	private static Set<String> allClassNameSet = new HashSet<String>();
 	private static Set<String> testClassNameSet =  new HashSet<String>();

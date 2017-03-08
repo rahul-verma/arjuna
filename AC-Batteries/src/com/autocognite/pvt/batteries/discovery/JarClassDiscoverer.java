@@ -36,7 +36,7 @@ import com.autocognite.pvt.batteries.discoverer.DiscoveredFileAttribute;
 import com.autocognite.pvt.batteries.discoverer.FileAggregator;
 
 public class JarClassDiscoverer {
-	public Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	public Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	FileAggregator aggregator = null;
 	String jarFilePath = null;
 	String parentDir = null;

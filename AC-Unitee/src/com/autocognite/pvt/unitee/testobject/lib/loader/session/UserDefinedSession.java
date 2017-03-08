@@ -2,8 +2,7 @@ package com.autocognite.pvt.unitee.testobject.lib.loader.session;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.hocon.HoconFileReader;
 import com.autocognite.pvt.batteries.hocon.HoconReader;
@@ -11,10 +10,9 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.typesafe.config.ConfigException;
 
 public class UserDefinedSession extends BaseSession{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private String sessionFilePath = null;
 	private JsonObject configObj = null;
 	private JsonObject sObject = null;

@@ -6,13 +6,13 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
 import com.autocognite.pvt.arjuna.enums.TestPickerProperty;
+import com.autocognite.pvt.batteries.config.Batteries;
 
 public class PickerConfigForCLI extends AbstractPickerConfig{
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private Map<TestPickerProperty, String> options = null;
 	
 	public PickerConfigForCLI(Map<TestPickerProperty, String> options) throws Exception {

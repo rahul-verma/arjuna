@@ -4,11 +4,11 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
+import com.autocognite.pvt.batteries.config.Batteries;
 
 public class SummaryResult {
-	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private static HashMap<TestResultType, Integer> template = null;
 	private HashMap<TestResultType, Integer> summary = new HashMap<TestResultType, Integer>();
 	

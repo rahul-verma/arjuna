@@ -8,10 +8,10 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.filehandler.FileWriter;
 import com.autocognite.pvt.unitee.reporter.lib.DefaultObserver;
 
@@ -22,7 +22,7 @@ public abstract class JsonConsolidatedResultWriter<T> extends DefaultObserver<T>
 	
 	public JsonConsolidatedResultWriter(String reportName) throws Exception{
 		super();
-		this.reportDir = FileSystemBatteries.getCanonicalPath(RunConfig.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT).asString() + "/json");
+		this.reportDir = FileSystemBatteries.getCanonicalPath(Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT).asString() + "/json");
 		FileUtils.forceMkdir(new File(reportDir));
 		String rPath = FileSystemBatteries.getCanonicalPath(reportDir + "/" + reportName);
 		writer = new FileWriter(rPath);

@@ -20,17 +20,16 @@ package com.autocognite.pvt.unitee.reporter.lib.writer.json;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult;
-import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
 
 public class JsonFixtureResultWriter extends JsonResultWriter<FixtureResult> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	JsonConsolidatedFixtureResultWriter childWriter = null;
 	
 	public JsonFixtureResultWriter() throws Exception{
-		super(RunConfig.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_FIXTURES).asString());
+		super(Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_FIXTURES).asString());
 		childWriter = new JsonConsolidatedFixtureResultWriter();
 	}
 	

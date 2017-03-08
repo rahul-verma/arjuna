@@ -22,13 +22,14 @@ import java.io.File;
 import java.util.HashMap;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.ElementLoaderType;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.enums.UiDriverEngine;
 import com.autocognite.arjuna.uiauto.enums.UiElementType;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.api.ElementMetaData;
 import com.autocognite.pvt.uiautomator.lib.DefaultElementMetaData;
@@ -65,7 +66,7 @@ public abstract class BaseUiDriver implements UiDriver{
 			String message
 			) throws Exception{
 				throw new Problem(
-						RunConfig.getComponentName("UI_AUTOMATOR"),
+						Batteries.getComponentName("UI_AUTOMATOR"),
 				automatorName,
 				action,
 				code,
@@ -78,7 +79,7 @@ public abstract class BaseUiDriver implements UiDriver{
 				componentName,
 				methodName,
 				UiAutomator.problem.UNSUPPORTED_IDENTIFIER,
-				RunConfig.getProblemText(
+				Batteries.getProblemText(
 						UiAutomator.problem.UNSUPPORTED_IDENTIFIER,
 						idString
 				)
@@ -123,11 +124,11 @@ public abstract class BaseUiDriver implements UiDriver{
 
 	public Object throwUnsupportedActionException(String action) throws Exception {
 		throw new Problem(
-				RunConfig.getComponentName("UI_AUTOMATOR"),
+				Batteries.getComponentName("UI_AUTOMATOR"),
 				"Default Automator",
 				action,
 				UiAutomator.problem.AUTOMATOR_UNSUPPORTED_ACTION,
-				RunConfig.getProblemText(UiAutomator.problem.AUTOMATOR_UNSUPPORTED_ACTION, this.getClass().getSimpleName())
+				Batteries.getProblemText(UiAutomator.problem.AUTOMATOR_UNSUPPORTED_ACTION, this.getClass().getSimpleName())
 			);		
 	}
 

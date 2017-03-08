@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.internal.arjuna.enums.TestAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.ArjunaInternal;
@@ -38,6 +37,7 @@ import com.autocognite.pvt.arjuna.enums.StepResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestReportSection;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
+import com.autocognite.pvt.batteries.config.Batteries;
 
 public enum TestReporterSingleton {
 	INSTANCE;
@@ -99,67 +99,67 @@ public enum TestReporterSingleton {
 			activityPropNamesMap.put(e, ArjunaInternal.getEventAttrName(e.toString()));
 		}
 		
-		execTestProps = RunConfig.value(ArjunaProperty.REPORT_METADATA_TEST).asEnumList(TestAttribute.class);
-		execTestResultProps = RunConfig.value(ArjunaProperty.REPORT_TESTS_METADATA_REPORTABLE).asEnumList(TestResultAttribute.class);;
-		execStepResultProps = RunConfig.value(ArjunaProperty.REPORT_STEPS_METADATA_REPORTABLE).asEnumList(StepResultAttribute.class);;
-		execIssueProps = RunConfig.value(ArjunaProperty.REPORT_ISSUES_METADATA_REPORTABLE).asEnumList(IssueAttribute.class);;
-		execFixtureResultProps = RunConfig.value(ArjunaProperty.REPORT_FIXTURES_METADATA_REPORTABLE).asEnumList(FixtureResultPropertyType.class);
-		execActivityProps = RunConfig.value(ArjunaProperty.REPORT_EVENTS_METADATA_REPORTABLE).asEnumList(EventAttribute.class);;
+		execTestProps = Batteries.value(ArjunaProperty.REPORT_METADATA_TEST).asEnumList(TestAttribute.class);
+		execTestResultProps = Batteries.value(ArjunaProperty.REPORT_TESTS_METADATA_REPORTABLE).asEnumList(TestResultAttribute.class);;
+		execStepResultProps = Batteries.value(ArjunaProperty.REPORT_STEPS_METADATA_REPORTABLE).asEnumList(StepResultAttribute.class);;
+		execIssueProps = Batteries.value(ArjunaProperty.REPORT_ISSUES_METADATA_REPORTABLE).asEnumList(IssueAttribute.class);;
+		execFixtureResultProps = Batteries.value(ArjunaProperty.REPORT_FIXTURES_METADATA_REPORTABLE).asEnumList(FixtureResultPropertyType.class);
+		execActivityProps = Batteries.value(ArjunaProperty.REPORT_EVENTS_METADATA_REPORTABLE).asEnumList(EventAttribute.class);;
 				
-		ReportMode mode = RunConfig.value(ArjunaProperty.REPORT_MODE).asEnum(ReportMode.class);
+		ReportMode mode = Batteries.value(ArjunaProperty.REPORT_MODE).asEnum(ReportMode.class);
 		
 		switch (mode){
 		case MINIMAL:
-			execTestObjectPropsForTestReport = RunConfig.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
-			execTestObjectPropsForStepReport = RunConfig.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForIssueReport = RunConfig.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForFixtureReport = RunConfig.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
-			allowedSections.addAll(RunConfig.value(ArjunaProperty.REPORT_MINIMAL_SECTIONS).asEnumList(TestReportSection.class));
-			reportableTestResultTypes.addAll(RunConfig.value(ArjunaProperty.REPORT_MINIMAL_INCLUDED_RTYPE).asEnumList(TestResultType.class));
-			shouldIncludeAnnotatedTestProps = RunConfig.value(ArjunaProperty.REPORT_MINIMAL_TESTS_ANNOTATED_ON).asBoolean();
-			shouldIncludeCustomProps = RunConfig.value(ArjunaProperty.REPORT_MINIMAL_TESTS_CUSTOM_ON).asBoolean();
-			shouldIncludeUdv = RunConfig.value(ArjunaProperty.REPORT_MINIMAL_TESTS_UDV_ON).asBoolean();
-			shouldIncludeDataRecord = RunConfig.value(ArjunaProperty.REPORT_MINIMAL_TESTS_DATARECORD_ON).asBoolean();
-			shouldIncludeDataRef = RunConfig.value(ArjunaProperty.REPORT_MINIMAL_TESTS_DATAREF_ON).asBoolean();
+			execTestObjectPropsForTestReport = Batteries.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
+			execTestObjectPropsForStepReport = Batteries.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForFixtureReport = Batteries.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
+			allowedSections.addAll(Batteries.value(ArjunaProperty.REPORT_MINIMAL_SECTIONS).asEnumList(TestReportSection.class));
+			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_MINIMAL_INCLUDED_RTYPE).asEnumList(TestResultType.class));
+			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_ANNOTATED_ON).asBoolean();
+			shouldIncludeCustomProps = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_CUSTOM_ON).asBoolean();
+			shouldIncludeUdv = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_UDV_ON).asBoolean();
+			shouldIncludeDataRecord = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_DATARECORD_ON).asBoolean();
+			shouldIncludeDataRef = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_DATAREF_ON).asBoolean();
 			break;
 		case BASIC:
-			execTestObjectPropsForTestReport = RunConfig.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
-			execTestObjectPropsForStepReport = RunConfig.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForIssueReport = RunConfig.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForFixtureReport = RunConfig.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
-			allowedSections.addAll(RunConfig.value(ArjunaProperty.REPORT_BASIC_SECTIONS).asEnumList(TestReportSection.class));
-			reportableTestResultTypes.addAll(RunConfig.value(ArjunaProperty.REPORT_BASIC_INCLUDED_RTYPE).asEnumList(TestResultType.class));
-			shouldIncludeAnnotatedTestProps = RunConfig.value(ArjunaProperty.REPORT_BASIC_TESTS_ANNOTATED_ON).asBoolean();
-			shouldIncludeCustomProps = RunConfig.value(ArjunaProperty.REPORT_BASIC_TESTS_CUSTOM_ON).asBoolean();
-			shouldIncludeUdv = RunConfig.value(ArjunaProperty.REPORT_BASIC_TESTS_UDV_ON).asBoolean();
-			shouldIncludeDataRecord = RunConfig.value(ArjunaProperty.REPORT_BASIC_TESTS_DATARECORD_ON).asBoolean();
-			shouldIncludeDataRef = RunConfig.value(ArjunaProperty.REPORT_BASIC_TESTS_DATAREF_ON).asBoolean();
+			execTestObjectPropsForTestReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
+			execTestObjectPropsForStepReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForFixtureReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
+			allowedSections.addAll(Batteries.value(ArjunaProperty.REPORT_BASIC_SECTIONS).asEnumList(TestReportSection.class));
+			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_BASIC_INCLUDED_RTYPE).asEnumList(TestResultType.class));
+			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_ANNOTATED_ON).asBoolean();
+			shouldIncludeCustomProps = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_CUSTOM_ON).asBoolean();
+			shouldIncludeUdv = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_UDV_ON).asBoolean();
+			shouldIncludeDataRecord = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_DATARECORD_ON).asBoolean();
+			shouldIncludeDataRef = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_DATAREF_ON).asBoolean();
 			break;
 		case ADVANCED:
-			execTestObjectPropsForTestReport = RunConfig.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
-			execTestObjectPropsForStepReport = RunConfig.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForIssueReport = RunConfig.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForFixtureReport = RunConfig.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
-			allowedSections.addAll(RunConfig.value(ArjunaProperty.REPORT_ADVANCED_SECTIONS).asEnumList(TestReportSection.class));
-			reportableTestResultTypes.addAll(RunConfig.value(ArjunaProperty.REPORT_ADVANCED_INCLUDED_RTYPE).asEnumList(TestResultType.class));
-			shouldIncludeAnnotatedTestProps = RunConfig.value(ArjunaProperty.REPORT_ADVANCED_TESTS_ANNOTATED_ON).asBoolean();
-			shouldIncludeCustomProps = RunConfig.value(ArjunaProperty.REPORT_ADVANCED_TESTS_CUSTOM_ON).asBoolean();
-			shouldIncludeUdv = RunConfig.value(ArjunaProperty.REPORT_ADVANCED_TESTS_UDV_ON).asBoolean();
-			shouldIncludeDataRecord = RunConfig.value(ArjunaProperty.REPORT_ADVANCED_TESTS_DATARECORD_ON).asBoolean();
-			shouldIncludeDataRef = RunConfig.value(ArjunaProperty.REPORT_ADVANCED_TESTS_DATAREF_ON).asBoolean();
+			execTestObjectPropsForTestReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
+			execTestObjectPropsForStepReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForFixtureReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
+			allowedSections.addAll(Batteries.value(ArjunaProperty.REPORT_ADVANCED_SECTIONS).asEnumList(TestReportSection.class));
+			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_ADVANCED_INCLUDED_RTYPE).asEnumList(TestResultType.class));
+			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_ANNOTATED_ON).asBoolean();
+			shouldIncludeCustomProps = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_CUSTOM_ON).asBoolean();
+			shouldIncludeUdv = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_UDV_ON).asBoolean();
+			shouldIncludeDataRecord = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_DATARECORD_ON).asBoolean();
+			shouldIncludeDataRef = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_DATAREF_ON).asBoolean();
 			break;
 		case DEBUG:
-			execTestObjectPropsForTestReport = RunConfig.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
-			execTestObjectPropsForStepReport = RunConfig.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForIssueReport = RunConfig.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForFixtureReport = RunConfig.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
-			allowedSections.addAll(RunConfig.value(ArjunaProperty.REPORT_DEBUG_SECTIONS).asEnumList(TestReportSection.class));
-			reportableTestResultTypes.addAll(RunConfig.value(ArjunaProperty.REPORT_DEBUG_INCLUDED_RTYPE).asEnumList(TestResultType.class));
-			shouldIncludeAnnotatedTestProps = RunConfig.value(ArjunaProperty.REPORT_DEBUG_TESTS_ANNOTATED_ON).asBoolean();
-			shouldIncludeCustomProps = RunConfig.value(ArjunaProperty.REPORT_DEBUG_TESTS_CUSTOM_ON).asBoolean();
-			shouldIncludeUdv = RunConfig.value(ArjunaProperty.REPORT_DEBUG_TESTS_UDV_ON).asBoolean();
-			shouldIncludeDataRecord = RunConfig.value(ArjunaProperty.REPORT_DEBUG_TESTS_DATARECORD_ON).asBoolean();
-			shouldIncludeDataRef = RunConfig.value(ArjunaProperty.REPORT_DEBUG_TESTS_DATAREF_ON).asBoolean();
+			execTestObjectPropsForTestReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
+			execTestObjectPropsForStepReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForFixtureReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
+			allowedSections.addAll(Batteries.value(ArjunaProperty.REPORT_DEBUG_SECTIONS).asEnumList(TestReportSection.class));
+			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_DEBUG_INCLUDED_RTYPE).asEnumList(TestResultType.class));
+			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_ANNOTATED_ON).asBoolean();
+			shouldIncludeCustomProps = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_CUSTOM_ON).asBoolean();
+			shouldIncludeUdv = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_UDV_ON).asBoolean();
+			shouldIncludeDataRecord = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_DATARECORD_ON).asBoolean();
+			shouldIncludeDataRef = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_DATAREF_ON).asBoolean();
 			break;
 		default:
 			break;

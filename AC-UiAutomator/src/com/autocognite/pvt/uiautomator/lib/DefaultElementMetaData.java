@@ -22,9 +22,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.enums.UiElementType;
+import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.api.ElementMetaData;
 import com.autocognite.pvt.uiautomator.api.Identifier;
@@ -203,11 +204,11 @@ public class DefaultElementMetaData implements ElementMetaData {
 		this.process(context);
 		if (!this.isRelevantForPage()){
 			throw new Problem(
-					RunConfig.getComponentName("UI_AUTOMATOR"),
+					Batteries.getComponentName("UI_AUTOMATOR"),
 					"Element Meta Data",
 					"processStrictly",
 					UiAutomator.problem.UI_ELEMENT_INVALID_METADATA,
-					RunConfig.getProblemText(
+					Batteries.getProblemText(
 							UiAutomator.problem.UI_ELEMENT_INVALID_METADATA, 
 							UiAutomator.getAutomationContextName(context),
 							metaData.toString())

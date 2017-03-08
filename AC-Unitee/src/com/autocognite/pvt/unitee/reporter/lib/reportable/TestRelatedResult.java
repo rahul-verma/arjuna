@@ -7,10 +7,8 @@ import com.autocognite.arjuna.interfaces.StringKeyValueContainer;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
 import com.autocognite.arjuna.interfaces.TestProperties;
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.internal.arjuna.enums.TestAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
-import com.autocognite.pvt.batteries.container.ReadOnlyContainer;
 
 public class TestRelatedResult {
 	private TestVariables testVars = null;

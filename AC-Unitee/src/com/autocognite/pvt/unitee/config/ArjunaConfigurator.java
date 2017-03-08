@@ -3,7 +3,6 @@ package com.autocognite.pvt.unitee.config;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.autocognite.arjuna.enums.LoggingLevel;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.internal.arjuna.enums.TestAttribute;

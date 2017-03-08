@@ -23,6 +23,7 @@ import java.util.List;
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.api.ElementMetaData;
 
@@ -66,7 +67,7 @@ public class DefaultUiElement  extends DefaultACElement implements UiElement{
 					e,
 					UiAutomator.problem.ACTION_MULTIELEMENT_FAILURE,
 					"hoverAndClickElement",
-					RunConfig.getProblemText(
+					Batteries.getProblemText(
 							UiAutomator.problem.ACTION_MULTIELEMENT_FAILURE,
 							this.getMediator().getAutomatorName(),
 							"hover on",
@@ -88,7 +89,7 @@ public class DefaultUiElement  extends DefaultACElement implements UiElement{
 					e,
 					UiAutomator.problem.ACTION_MULTIELEMENT_FAILURE,
 					"rightClickAndClicElement",
-					RunConfig.getProblemText(
+					Batteries.getProblemText(
 							UiAutomator.problem.ACTION_MULTIELEMENT_FAILURE,
 							this.getMediator().getAutomatorName(),
 							"right click on",

@@ -10,36 +10,23 @@ import java.util.Map;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.arjuna.enums.TestPickerProperty;
 import com.autocognite.pvt.arjuna.enums.UnpickedCode;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.DefaultTestGroup;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.Group;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.JavaTestClassLoader;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.MBGroup;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.MLGroup;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.Picker;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerConfig;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.SkippedJavaTestClassLoader;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.UnselectedJavaTestClassLoader;
-import com.autocognite.pvt.unitee.testobject.lib.loader.group.UserDefinedGroup;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode;
 import com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator;
 
 public class TestGroupsDB {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private Map<String, Group> defaultGroups = new HashMap<String, Group>();
 	private Map<String,String> customGroupFileNames = new HashMap<String,String>();
 	private PickerTargetType targetForMagicGroup = null;
@@ -107,7 +94,7 @@ public class TestGroupsDB {
 			group = this.defaultGroups.get(uName);
 			group.setSessionSubNode(subNode);
 		} else {
-			String sessionFile = RunConfig.value(ArjunaProperty.DIRECTORY_SESSIONS).asString() + "/" + subNode.getSession().getName() + ".conf";
+			String sessionFile = Batteries.value(ArjunaProperty.DIRECTORY_SESSIONS).asString() + "/" + subNode.getSession().getName() + ".conf";
 			if ((name.toUpperCase().endsWith(".CONF")) && (this.customGroupFileNames.containsKey(uName.replace(".CONF", "")))){
 					Console.displayError(
 							String.format(
@@ -136,7 +123,7 @@ public class TestGroupsDB {
 	}
 	
 	public void createUserDefinedGroups() throws Exception{
-		groupsDir = RunConfig.value(ArjunaProperty.DIRECTORY_GROUPS).asString();
+		groupsDir = Batteries.value(ArjunaProperty.DIRECTORY_GROUPS).asString();
 		File sDir = new File(groupsDir);
 		if (!sDir.isDirectory()){
 			return;
@@ -186,7 +173,7 @@ class MLGroup extends BaseGroup{
 }
 
 class SkippedJavaTestClassLoader implements TestLoader {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private ExecutionSlotsCreator execSlotsCreator = null;
 	private int testMethodCount = 0;
 	private Group group = null;
@@ -242,7 +229,7 @@ class SkippedJavaTestClassLoader implements TestLoader {
 }
 
 class UnselectedJavaTestClassLoader implements TestLoader {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private ExecutionSlotsCreator execSlotsCreator = null;
 	private int testMethodCount = 0;
 	private Group group = null;

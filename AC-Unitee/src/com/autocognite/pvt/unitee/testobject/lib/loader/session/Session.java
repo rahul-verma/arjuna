@@ -1,11 +1,7 @@
 package com.autocognite.pvt.unitee.testobject.lib.loader.session;
 
-import java.util.HashMap;
-
-import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.google.gson.JsonObject;
-import com.typesafe.config.ConfigObject;
 
 public interface Session {
 

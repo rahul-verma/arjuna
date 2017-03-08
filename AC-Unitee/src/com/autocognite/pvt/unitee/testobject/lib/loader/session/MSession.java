@@ -1,7 +1,6 @@
 package com.autocognite.pvt.unitee.testobject.lib.loader.session;
 
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
-import com.autocognite.pvt.unitee.config.ArjunaSingleton;
 import com.google.gson.JsonObject;
 
 public class MSession extends BaseSession{

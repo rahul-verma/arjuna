@@ -27,17 +27,16 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
 import com.autocognite.pvt.arjuna.enums.TestReportSection;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.reporter.lib.DefaultObserver;
 import com.autocognite.pvt.unitee.reporter.lib.event.Event;
 
 public class ConsoleEventWriter extends DefaultObserver<Event> {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	String marker = new String(new char[100]).replace("\0", "-");
 	Set<String> ignoreValues = new HashSet<String>(Arrays.asList("NA","NOT_SET", "null"));
 	private List<EventAttribute> activityInfoProps = null;

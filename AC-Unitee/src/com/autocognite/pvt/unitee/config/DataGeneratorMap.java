@@ -24,12 +24,12 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataGenerator;
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataSource;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.config.Batteries;
 
 public class DataGeneratorMap {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	HashMap<String,Class<? extends DataSource>> dataSources = new HashMap<String, Class<? extends DataSource>>();
 	HashMap<String,String> dataGenClassNames = new HashMap<String,String>();
 	HashMap<Class<? extends DataSource>,String> dataGenClassToNameMapper = new HashMap<Class<? extends DataSource>,String>();

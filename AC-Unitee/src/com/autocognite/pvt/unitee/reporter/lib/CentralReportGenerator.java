@@ -5,15 +5,15 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.arjuna.interfaces.ReportGenerator;
+import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.reporter.lib.generator.ActivityReportGenerator;
 import com.autocognite.pvt.unitee.reporter.lib.generator.FixtureReportGenerator;
 import com.autocognite.pvt.unitee.reporter.lib.generator.IssueReportGenerator;
 import com.autocognite.pvt.unitee.reporter.lib.generator.TestReportGenerator;
 
 public class CentralReportGenerator {
-	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private List<ReportGenerator> generators = new ArrayList<ReportGenerator>();
 	private String reportDir = null;
 	
