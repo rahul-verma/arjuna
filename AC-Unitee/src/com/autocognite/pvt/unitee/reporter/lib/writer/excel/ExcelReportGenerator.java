@@ -36,7 +36,7 @@ import com.autocognite.pvt.arjuna.enums.StepResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestReportSection;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
-import com.autocognite.pvt.arjuna.interfaces.InternalReportGenerator;
+import com.autocognite.pvt.arjuna.interfaces.ReportGenerator;
 import com.autocognite.pvt.unitee.reporter.lib.event.Event;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult;
 import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;
@@ -45,7 +45,7 @@ import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class ExcelReportGenerator implements InternalReportGenerator{
+public class ExcelReportGenerator implements ReportGenerator{
 	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
 	private FileOutputStream fileOut = null;
 	private HSSFWorkbook workbook = null;

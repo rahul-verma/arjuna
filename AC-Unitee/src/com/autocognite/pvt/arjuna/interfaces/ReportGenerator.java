@@ -5,7 +5,7 @@ import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult;
 import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;
 import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
 
-public interface InternalReportGenerator {	
+public interface ReportGenerator {	
 	void setUp() throws Exception;
 	void tearDown() throws Exception;
 	

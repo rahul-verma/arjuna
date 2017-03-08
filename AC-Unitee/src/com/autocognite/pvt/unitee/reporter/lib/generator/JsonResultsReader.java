@@ -10,7 +10,7 @@ import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.arjuna.interfaces.InternalReportGenerator;
+import com.autocognite.pvt.arjuna.interfaces.ReportGenerator;
 import com.autocognite.pvt.batteries.filehandler.FileReader;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
@@ -19,16 +19,16 @@ public abstract class JsonResultsReader{
 	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
 	private String reportDir = null;
 	private File[] files = null;
-	private List<InternalReportGenerator> generators = new ArrayList<InternalReportGenerator>();
+	private List<ReportGenerator> generators = new ArrayList<ReportGenerator>();
 	
-	public JsonResultsReader(String reportDir, List<InternalReportGenerator> observers) throws Exception{
+	public JsonResultsReader(String reportDir, List<ReportGenerator> observers) throws Exception{
 		this.reportDir = reportDir;
 		files = (new File(reportDir)).listFiles();
 		Arrays.sort(files);
 		this.getGenerators().addAll(observers);
 	}
 	
-	public void addGenerator(InternalReportGenerator observer){
+	public void addGenerator(ReportGenerator observer){
 		this.getGenerators().add(observer);
 	}
 	
@@ -66,11 +66,11 @@ public abstract class JsonResultsReader{
 		}			
 	}
 
-	protected List<InternalReportGenerator> getGenerators() {
+	protected List<ReportGenerator> getGenerators() {
 		return generators;
 	}
 
-	private void setGenerators(List<InternalReportGenerator> generators) {
+	private void setGenerators(List<ReportGenerator> generators) {
 		this.generators = generators;
 	}
 }

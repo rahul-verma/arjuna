@@ -6,7 +6,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.pvt.arjuna.interfaces.InternalReportGenerator;
+import com.autocognite.pvt.arjuna.interfaces.ReportGenerator;
 import com.autocognite.pvt.unitee.reporter.lib.generator.ActivityReportGenerator;
 import com.autocognite.pvt.unitee.reporter.lib.generator.FixtureReportGenerator;
 import com.autocognite.pvt.unitee.reporter.lib.generator.IssueReportGenerator;
@@ -14,7 +14,7 @@ import com.autocognite.pvt.unitee.reporter.lib.generator.TestReportGenerator;
 
 public class CentralReportGenerator {
 	private Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
-	private List<InternalReportGenerator> generators = new ArrayList<InternalReportGenerator>();
+	private List<ReportGenerator> generators = new ArrayList<ReportGenerator>();
 	private String reportDir = null;
 	
 	TestReportGenerator executionGenerator = null;
@@ -25,12 +25,12 @@ public class CentralReportGenerator {
 	public CentralReportGenerator(){
 	}
 	
-	public synchronized void addReportGenerator(InternalReportGenerator generator) throws Exception {
+	public synchronized void addReportGenerator(ReportGenerator generator) throws Exception {
 		generators.add(generator);
 	}
 	
 	public void setUp() throws Exception{
-		for (InternalReportGenerator generator: this.generators){
+		for (ReportGenerator generator: this.generators){
 			generator.setUp();
 		}
 		executionGenerator = new TestReportGenerator(generators);
@@ -41,7 +41,7 @@ public class CentralReportGenerator {
 	
 	
 	public void tearDown() throws Exception{
-		for (InternalReportGenerator generator: this.generators){
+		for (ReportGenerator generator: this.generators){
 			generator.tearDown();
 		}
 	}
