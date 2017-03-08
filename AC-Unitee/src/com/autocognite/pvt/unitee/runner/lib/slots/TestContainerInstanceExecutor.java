@@ -77,7 +77,8 @@ public class TestContainerInstanceExecutor implements Runnable{
 		}
 		// Before venturing into launching test creators, setupclass is executed
 		
-		if (testContainerInstance.shouldExecuteSetupClassInstanceFixture()){
+		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
+		(testContainerInstance.shouldExecuteSetupClassInstanceFixture()))){
 			if (ArjunaInternal.displayFixtureExecInfo){
 				logger.debug(String.format("Attempting Set Up Class Instance for Test Class %s in Slot# %d", 
 						testContainerInstance.getQualifiedName(),
@@ -101,7 +102,8 @@ public class TestContainerInstanceExecutor implements Runnable{
 			}
 		}
 		
-		if (testContainerInstance.shouldExecuteSetupClassFragmentFixture()){
+		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
+		 (testContainerInstance.shouldExecuteSetupClassFragmentFixture()))){
 			if (ArjunaInternal.displayFixtureExecInfo){
 				logger.debug(String.format("Attempting Set Up Class Fragment for Test Class %s in Slot# %d", 
 						testContainerInstance.getQualifiedName(),
@@ -164,14 +166,16 @@ public class TestContainerInstanceExecutor implements Runnable{
 			ArjunaInternal.getCentralExecState().deregisterThread(tName);
 		}
 		
-		if (testContainerInstance.shouldExecuteTearDownClassFragmentFixture()){
+		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
+		(testContainerInstance.shouldExecuteTearDownClassFragmentFixture()))){
 			this.executeTearDownClassFragmentFor(testContainerInstance);
 			if (ArjunaInternal.displaySlotsInfo){
 				logger.debug(String.format("All test instance creators in %s have finished for current execution slot. Tear down class fragment." , testContainerInstance.getQualifiedName()));
 			}
 		}
 		
-		if (testContainerInstance.shouldExecuteTearDownClassInstanceFixture()){
+		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
+		(testContainerInstance.shouldExecuteTearDownClassInstanceFixture()))){
 			if (testContainerInstance.hasCompleted()){
 				this.executeTearDownClassInstanceFor(testContainerInstance);
 				if (ArjunaInternal.displaySlotsInfo){

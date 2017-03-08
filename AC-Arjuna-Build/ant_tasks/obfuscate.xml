@@ -94,6 +94,13 @@ class files -->
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keepclassmembers>
+			
+			<keepclassmembers name="com.autocognite.pvt.batteries.property.ConfigPropertyBatteries" access="public">
+				<method access="public static" name="pathToCoreAbsolutePath"/>
+				<method access="public static" name="pathToProjectAbsolutePath"/>
+				<method access="public static" name="getSame"/>
+					<method access="public static" name="pathToAbsolutePath"/>
+			</keepclassmembers>
 
 			<keepattribute name="LineNumberTable" />
 			<keepattribute name="SourceFile" />

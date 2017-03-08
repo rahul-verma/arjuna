@@ -58,7 +58,9 @@ public class TestContainerExecutor implements Runnable{
 			logger.debug(String.format("Exclusion Description? %s", testContainer.getExclusionDesc()));
 		}
 		
-		if (testContainer.shouldExecuteSetupClassFixture()){
+		if ((!testContainer.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup")
+				&&
+				(testContainer.shouldExecuteSetupClassFixture()))){
 			if (ArjunaInternal.displayFixtureExecInfo){
 				logger.debug(String.format("Attempting Set Up Class for Test Class %s in Slot# %d", 
 						testContainer.getQualifiedName(),
@@ -118,7 +120,8 @@ public class TestContainerExecutor implements Runnable{
 			ArjunaInternal.getCentralExecState().deregisterThread(tName);
 		}
 		
-		if (testContainer.shouldExecuteTearDownClassFixture()){
+		if ((!testContainer.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
+		 (testContainer.shouldExecuteTearDownClassFixture()))){
 			if (testContainer.hasCompleted()){
 				this.executeTearDownClassFor(testContainer);
 				if (ArjunaInternal.displaySlotsInfo){

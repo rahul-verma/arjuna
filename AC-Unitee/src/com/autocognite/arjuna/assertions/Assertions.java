@@ -36,11 +36,7 @@ public class Assertions {
 		check.setExceptionMessage("Error in assertion: " + e.getClass().getSimpleName() + ":" + e.getMessage());		
 	}
 
-	public static void evalauteCheck(Check check) throws Exception{
-		check.evaluate();		
-	}
-
-	public static Check fail(String purpose) throws Exception {
+	public static void fail(String purpose) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		try{
 			check.setExceptionMessage("fail() explicitly called.");
@@ -50,15 +46,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check fail() throws Exception {
-		return fail(null);
+	public static void fail() throws Exception {
+		fail(null);
 	}
 
-	public static Check error(String purpose) throws Exception {
+	public static void error(String purpose) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		try{
 			check.setExceptionMessage("error() explicitly called.");
@@ -68,15 +64,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check error() throws Exception {
-		return error(null);
+	public static void error() throws Exception {
+		error(null);
 	}
 
-	public static Check assertTrue(String purpose, boolean bool) throws Exception {
+	public static void assertTrue(String purpose, boolean bool) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be True");
@@ -93,15 +89,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertTrue(boolean bool) throws Exception {
-		return assertTrue(null, bool);
+	public static void assertTrue(boolean bool) throws Exception {
+		assertTrue(null, bool);
 	}
 
-	public static Check assertFalse(String purpose, boolean bool) throws Exception {
+	public static void assertFalse(String purpose, boolean bool) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be False");
@@ -118,12 +114,12 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;	
+		check.evaluate();
+			
 	}
 
-	public static Check assertFalse(boolean bool) throws Exception {
-		return assertFalse(null, bool);	
+	public static void assertFalse(boolean bool) throws Exception {
+		assertFalse(null, bool);	
 	}
 
 	/*
@@ -137,7 +133,7 @@ public class Assertions {
 		check.setActualObservation("Error: An error occured before this could be evaluated.");
 	}
 
-	public static Check assertEquals(String purpose, String actual, String expected) throws Exception {
+	public static void assertEquals(String purpose, String actual, String expected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal.");
@@ -164,15 +160,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertEquals(String actual, String expected) throws Exception {
-		return assertEquals(null, actual, expected);
+	public static void assertEquals(String actual, String expected) throws Exception {
+		assertEquals(null, actual, expected);
 	}
 
-	public static Check assertEquals(String purpose, int actual, int expected) throws Exception {
+	public static void assertEquals(String purpose, int actual, int expected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal.");
@@ -187,15 +183,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertEquals(int actual, int expected) throws Exception {
-		return assertEquals(null, actual, expected);
+	public static void assertEquals(int actual, int expected) throws Exception {
+		assertEquals(null, actual, expected);
 	}
 
-	public static Check assertEquals(String purpose, long actual, long expected) throws Exception {
+	public static void assertEquals(String purpose, long actual, long expected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal.");
@@ -210,12 +206,12 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertEquals(long actual, long expected) throws Exception {
-		return assertEquals(null, actual, expected);
+	public static void assertEquals(long actual, long expected) throws Exception {
+		assertEquals(null, actual, expected);
 	}
 
 	public double round2(double num) {
@@ -225,7 +221,7 @@ public class Assertions {
 		return result;
 	}
 
-	public static Check assertEquals(String purpose, float actual, float expected, float delta) throws Exception {
+	public static void assertEquals(String purpose, float actual, float expected, float delta) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		try{
@@ -247,15 +243,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertEquals(float actual, float expected, float delta) throws Exception {
-		return assertEquals(null, actual, expected, delta);
+	public static void assertEquals(float actual, float expected, float delta) throws Exception {
+		assertEquals(null, actual, expected, delta);
 	}
 
-	public static Check assertEquals(String purpose, double actual, double expected, double delta) throws Exception {
+	public static void assertEquals(String purpose, double actual, double expected, double delta) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		try{
@@ -281,12 +277,12 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertEquals(double actual, double expected, double delta) throws Exception {
-		return assertEquals(null, actual, expected, delta);
+	public static void assertEquals(double actual, double expected, double delta) throws Exception {
+		assertEquals(null, actual, expected, delta);
 	}
 
 	/*
@@ -294,7 +290,7 @@ public class Assertions {
 	 * pointing to the same object. In essence, unless, .equals method is overriden
 	 * the behavior of this assertion is same as AssertSame.
 	 */
-	public static Check assertEquals(String purpose, Object actual, Object expected) throws Exception {
+	public static void assertEquals(String purpose, Object actual, Object expected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal.");
@@ -321,15 +317,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertEquals(Object actual, Object expected) throws Exception {
-		return assertEquals(null, actual, expected);
+	public static void assertEquals(Object actual, Object expected) throws Exception {
+		assertEquals(null, actual, expected);
 	}
 
-	public static Check assertSame(String purpose, Object actual, Object expected) throws Exception {
+	public static void assertSame(String purpose, Object actual, Object expected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Same.");
@@ -358,19 +354,19 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertSame(Object actual, Object expected) throws Exception {
-		return assertSame(null, actual, expected);
+	public static void assertSame(Object actual, Object expected) throws Exception {
+		assertSame(null, actual, expected);
 	}
 
 	/*
 	 * Assertions for Non-Equality of Single Objects
 	 */
 
-	public static Check assertNotEquals(String purpose, String actual, String unexpected) throws Exception {
+	public static void assertNotEquals(String purpose, String actual, String unexpected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should NOT be Equal.");
@@ -397,15 +393,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertNotEquals(String actual, String unexpected) throws Exception {
-		return assertNotEquals(null, actual, unexpected);
+	public static void assertNotEquals(String actual, String unexpected) throws Exception {
+		assertNotEquals(null, actual, unexpected);
 	}
 
-	public static Check assertNotEquals(String purpose, int actual, int unexpected) throws Exception {
+	public static void assertNotEquals(String purpose, int actual, int unexpected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should NOT be Equal.");
@@ -420,15 +416,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertNotEquals(int actual, int unexpected) throws Exception {
-		return assertNotEquals(null, actual, unexpected);
+	public static void assertNotEquals(int actual, int unexpected) throws Exception {
+		assertNotEquals(null, actual, unexpected);
 	}
 
-	public static Check assertNotEquals(String purpose, long actual, long unexpected) throws Exception {
+	public static void assertNotEquals(String purpose, long actual, long unexpected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should NOT be Equal.");
@@ -443,15 +439,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;	
+		check.evaluate();
+			
 	}
 
-	public static Check assertNotEquals(long actual, long unexpected) throws Exception {
-		return assertNotEquals(null, actual, unexpected);
+	public static void assertNotEquals(long actual, long unexpected) throws Exception {
+		assertNotEquals(null, actual, unexpected);
 	}
 
-	public static Check assertNotEquals(String purpose, float actual, float unexpected, float delta) throws Exception {
+	public static void assertNotEquals(String purpose, float actual, float unexpected, float delta) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		try{		
@@ -473,16 +469,16 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
 
-	public static Check assertNotEquals(float actual, float unexpected, float delta) throws Exception {
-		return assertNotEquals(null, actual, unexpected, delta);
+	public static void assertNotEquals(float actual, float unexpected, float delta) throws Exception {
+		assertNotEquals(null, actual, unexpected, delta);
 	}
 
-	public static Check assertNotEquals(String purpose, double actual, double unexpected, double delta) throws Exception {
+	public static void assertNotEquals(String purpose, double actual, double unexpected, double delta) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		try{		
@@ -508,12 +504,12 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertNotEquals(double actual, double unexpected, double delta) throws Exception {
-		return assertNotEquals(null, actual, unexpected, delta);
+	public static void assertNotEquals(double actual, double unexpected, double delta) throws Exception {
+		assertNotEquals(null, actual, unexpected, delta);
 	}
 
 	/*
@@ -521,7 +517,7 @@ public class Assertions {
 	 * pointing to the same object. In essence, unless, .equals method is overriden
 	 * the behavior of this assertion is same as AssertSame.
 	 */
-	public static Check assertNotEquals(String purpose, Object actual, Object unexpected) throws Exception {
+	public static void assertNotEquals(String purpose, Object actual, Object unexpected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should NOT be Equal.");
@@ -548,15 +544,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertNotEquals(Object actual, Object unexpected) throws Exception {
-		return assertNotEquals(null, actual, unexpected);
+	public static void assertNotEquals(Object actual, Object unexpected) throws Exception {
+		assertNotEquals(null, actual, unexpected);
 	}
 
-	public static Check assertNotSame(String purpose, Object actual, Object unexpected) throws Exception {
+	public static void assertNotSame(String purpose, Object actual, Object unexpected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should NOT be Same.");
@@ -585,18 +581,18 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertNotSame(Object actual, Object unexpected) throws Exception {
-		return assertNotSame(null, actual, unexpected);
+	public static void assertNotSame(Object actual, Object unexpected) throws Exception {
+		assertNotSame(null, actual, unexpected);
 	}
 
 	/*
 	 * Array Assertions
 	 */
-	public static Check assertArrayEquals(String purpose, boolean[] actual, boolean[] expected) throws Exception {
+	public static void assertArrayEquals(String purpose, boolean[] actual, boolean[] expected) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal. Expected array can not be null.");
@@ -614,15 +610,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;	
+		check.evaluate();
+			
 	}
 
-	public static Check assertArrayEquals(boolean[] actual, boolean[] expected)throws Exception {
-		return assertArrayEquals(null, actual, expected);		
+	public static void assertArrayEquals(boolean[] actual, boolean[] expected)throws Exception {
+		assertArrayEquals(null, actual, expected);		
 	}
 
-	public static Check assertArrayEquals(String purpose, byte[] actual, byte[] expected)throws Exception {
+	public static void assertArrayEquals(String purpose, byte[] actual, byte[] expected)throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal. Expected array can not be null.");
@@ -640,15 +636,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertArrayEquals(byte[] actual, byte[] expected)throws Exception {
-		return assertArrayEquals(null, actual, expected);	
+	public static void assertArrayEquals(byte[] actual, byte[] expected)throws Exception {
+		assertArrayEquals(null, actual, expected);	
 	}
 
-	public static Check assertArrayEquals(String purpose, char[] actual, char[] expected)throws Exception {
+	public static void assertArrayEquals(String purpose, char[] actual, char[] expected)throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal. Expected array can not be null.");
@@ -666,16 +662,16 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;			
+		check.evaluate();
+					
 	}
 
-	public static Check assertArrayEquals(char[] actual, char[] expected)throws Exception {
-		return assertArrayEquals(null, actual, expected);		
+	public static void assertArrayEquals(char[] actual, char[] expected)throws Exception {
+		assertArrayEquals(null, actual, expected);		
 	}
 
 
-	public static Check assertArrayEquals(String purpose, double[] actual, double[] expected)throws Exception {
+	public static void assertArrayEquals(String purpose, double[] actual, double[] expected)throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal. Expected array can not be null.");
@@ -693,15 +689,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertArrayEquals(double[] actual, double[] expected)throws Exception {
-		return assertArrayEquals(null, actual, expected);		
+	public static void assertArrayEquals(double[] actual, double[] expected)throws Exception {
+		assertArrayEquals(null, actual, expected);		
 	}
 
-	public static Check assertArrayEquals(String purpose, float[] actual, float[] expected)throws Exception {
+	public static void assertArrayEquals(String purpose, float[] actual, float[] expected)throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal. Expected array can not be null.");
@@ -719,15 +715,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertArrayEquals(float[] actual, float[] expected)throws Exception {
-		return assertArrayEquals(null, actual, expected);		
+	public static void assertArrayEquals(float[] actual, float[] expected)throws Exception {
+		assertArrayEquals(null, actual, expected);		
 	}
 
-	public static Check assertArrayEquals(String purpose, int[] actual, int[] expected)throws Exception {
+	public static void assertArrayEquals(String purpose, int[] actual, int[] expected)throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal. Expected array can not be null.");
@@ -745,15 +741,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;	
+		check.evaluate();
+			
 	}
 
-	public static Check assertArrayEquals(int[] actual, int[] expected)throws Exception {
-		return assertArrayEquals(null, actual, expected);	
+	public static void assertArrayEquals(int[] actual, int[] expected)throws Exception {
+		assertArrayEquals(null, actual, expected);	
 	}
 
-	public static Check assertArrayEquals(String purpose, long[] actual, long[] expected)throws Exception {
+	public static void assertArrayEquals(String purpose, long[] actual, long[] expected)throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal. Expected array can not be null.");
@@ -771,15 +767,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;		
+		check.evaluate();
+				
 	}
 
-	public static Check assertArrayEquals(short[] actual, short[] expected)throws Exception {
-		return assertArrayEquals(null, actual, expected);		
+	public static void assertArrayEquals(short[] actual, short[] expected)throws Exception {
+		assertArrayEquals(null, actual, expected);		
 	}
 
-	public static Check assertArrayEquals(String purpose, short[] actual, short[] expected)throws Exception {
+	public static void assertArrayEquals(String purpose, short[] actual, short[] expected)throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal. Expected array can not be null.");
@@ -797,15 +793,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;	
+		check.evaluate();
+			
 	}
 
 	public static void assertArrayEquals(long[] actual, long[] expected)throws Exception {
 		assertArrayEquals(null, actual, expected);		
 	}
 
-	public static Check assertArrayEquals(String purpose, Object[] actual, Object[] expected)throws Exception {
+	public static void assertArrayEquals(String purpose, Object[] actual, Object[] expected)throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be Equal. Expected array can not be null.");
@@ -823,15 +819,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;	
+		check.evaluate();
+			
 	}
 
-	public static Check assertArrayEquals(Object[] actual, Object[] expected)throws Exception {
-		return assertArrayEquals(null, actual, expected);
+	public static void assertArrayEquals(Object[] actual, Object[] expected)throws Exception {
+		assertArrayEquals(null, actual, expected);
 	}
 
-	public static Check assertNull(String purpose, Object obj) throws Exception {
+	public static void assertNull(String purpose, Object obj) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should be null.");
@@ -846,15 +842,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertNull(Object obj) throws Exception {
-		return assertNull(null, obj);
+	public static void assertNull(Object obj) throws Exception {
+		assertNull(null, obj);
 	}
 
-	public static Check assertNotNull(String purpose, Object obj) throws Exception {
+	public static void assertNotNull(String purpose, Object obj) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Should not be null.");
@@ -869,19 +865,19 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertNotNull(Object obj) throws Exception {
-		return assertNotNull(null, obj);
+	public static void assertNotNull(Object obj) throws Exception {
+		assertNotNull(null, obj);
 	}
 
 	/*
 	 * Container assertions
 	 */
 
-	public static Check assertContains(String purpose, String parent, String child) throws Exception {
+	public static void assertContains(String purpose, String parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Sub-String should be Present.");
@@ -900,15 +896,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;	
+		check.evaluate();
+			
 	}
 
-	public static Check assertContains(String parent, String child) throws Exception {
-		return assertContains(null, parent, child);
+	public static void assertContains(String parent, String child) throws Exception {
+		assertContains(null, parent, child);
 	}
 
-	public static Check assertContains(String purpose, ArrayList<String> parent, String child) throws Exception {
+	public static void assertContains(String purpose, ArrayList<String> parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("ArrayList should contain given item.");
@@ -927,15 +923,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertContains(ArrayList<String> parent, String child) throws Exception {
-		return assertContains(null, parent, child);
+	public static void assertContains(ArrayList<String> parent, String child) throws Exception {
+		assertContains(null, parent, child);
 	}
 
-	public static Check assertContains(String purpose, String[] parent, String child) throws Exception {
+	public static void assertContains(String purpose, String[] parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Array should contain given item.");
@@ -954,15 +950,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertContains(String[] parent, String child) throws Exception {
-		return assertContains(null,parent, child);
+	public static void assertContains(String[] parent, String child) throws Exception {
+		assertContains(null,parent, child);
 	}
 
-	public static Check assertContains(String purpose, HashMap<String, Object> parent, String child) throws Exception {
+	public static void assertContains(String purpose, HashMap<String, Object> parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("HashMap should contain given key.");
@@ -981,15 +977,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertContains(HashMap<String, Object> parent, String child) throws Exception {
-		return assertContains(null,parent, child);
+	public static void assertContains(HashMap<String, Object> parent, String child) throws Exception {
+		assertContains(null,parent, child);
 	}
 
-	public static Check assertDoesNotContain(String purpose, String parent, String child) throws Exception {
+	public static void assertDoesNotContain(String purpose, String parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Sub-String should NOT be Present.");
@@ -1008,15 +1004,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;	
+		check.evaluate();
+			
 	}
 
-	public static Check assertDoesNotContain(String parent, String child) throws Exception {
-		return assertDoesNotContain(null, parent, child);
+	public static void assertDoesNotContain(String parent, String child) throws Exception {
+		assertDoesNotContain(null, parent, child);
 	}
 
-	public static Check assertDoesNotContain(String purpose, ArrayList<String> parent, String child) throws Exception {
+	public static void assertDoesNotContain(String purpose, ArrayList<String> parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("ArrayList should NOT contain given item.");
@@ -1035,15 +1031,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertDoesNotContain(ArrayList<String> parent, String child) throws Exception {
-		return assertDoesNotContain(null, parent, child);
+	public static void assertDoesNotContain(ArrayList<String> parent, String child) throws Exception {
+		assertDoesNotContain(null, parent, child);
 	}
 
-	public static Check assertDoesNotContain(String purpose, String[] parent, String child) throws Exception {
+	public static void assertDoesNotContain(String purpose, String[] parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("Array should NOT contain given item.");
@@ -1062,15 +1058,15 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertDoesNotContain(String[] parent, String child) throws Exception {
-		return assertDoesNotContain(null, parent, child);
+	public static void assertDoesNotContain(String[] parent, String child) throws Exception {
+		assertDoesNotContain(null, parent, child);
 	}
 
-	public static Check assertDoesNotContain(String purpose, HashMap<String, Object> parent, String child) throws Exception {
+	public static void assertDoesNotContain(String purpose, HashMap<String, Object> parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
 		check.setText("HashMap should NOT contain given key.");
@@ -1089,11 +1085,11 @@ public class Assertions {
 			setCheckErrorForAssertionIssue(check, e);
 		}
 
-		evalauteCheck(check);
-		return check;
+		check.evaluate();
+		
 	}
 
-	public static Check assertDoesNotContain(HashMap<String, Object> parent, String child) throws Exception {
-		return assertDoesNotContain(null, parent, child);
+	public static void assertDoesNotContain(HashMap<String, Object> parent, String child) throws Exception {
+		assertDoesNotContain(null, parent, child);
 	}
 }
