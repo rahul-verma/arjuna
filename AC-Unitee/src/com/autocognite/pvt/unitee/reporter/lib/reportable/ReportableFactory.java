@@ -21,7 +21,7 @@ package com.autocognite.pvt.unitee.reporter.lib.reportable;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.utils.ExceptionBatteries;
+import com.autocognite.pvt.batteries.utils.ExceptionBatteries;
 import com.autocognite.pvt.unitee.reporter.lib.event.Event;
 import com.autocognite.pvt.unitee.reporter.lib.event.EventBuilder;
 
