@@ -32,10 +32,13 @@ public class DefaultTestObjectProperties
 	
 	@Override
 	public void populateDefaults() throws Exception{
-		this.setParentName(notSetValue);
+		this.setParentQualifiedName(notSetValue);
+		this.setPackage(notSetValue);
+		this.setClass(notSetValue);
 		this.setObjectType(notSetValue);
 		this.setObjectTypeName(notSetValue);
 		this.setClassInstanceNumber(naValue);
+		this.setMethod(naValue);
 		this.setName(notSetValue);
 		this.setMethodInstanceNumber(naValue);
 		this.setSessionName(new StringValue("default_session"));
@@ -85,21 +88,48 @@ public class DefaultTestObjectProperties
 	}
 	
 	public String qualifiedName() throws Exception{
-		return this.value(TestObjectAttribute.PQNAME).asString() + "." + this.value(TestObjectAttribute.NAME).asString();
+		if (this.method().equals("NOT_SET")){
+			return this.value(TestObjectAttribute.PNAME).asString() + "." + this.value(TestObjectAttribute.CNAME).asString();
+		} else {
+			return this.value(TestObjectAttribute.PNAME).asString() + "." + this.value(TestObjectAttribute.CNAME).asString() + this.value(TestObjectAttribute.MNAME).asString();
+		}
 	}
 	
 	public String parentQualifiedName() throws Exception{
 		return this.value(TestObjectAttribute.PQNAME).asString();
 	}
 	
-	public void setParentName(Value value) throws Exception{
+	public void setParentQualifiedName(Value value) throws Exception{
 		super.add(TestObjectAttribute.PQNAME, value);
 	}
 	
 	public void setParentQualifiedName(String name) throws Exception{
-		this.setParentName(new StringValue(name));
+		this.setParentQualifiedName(new StringValue(name));
+	}
+	
+	public String pkg() throws Exception{
+		return this.value(TestObjectAttribute.PNAME).asString();
+	}
+	
+	public void setPackage(Value value) throws Exception{
+		super.add(TestObjectAttribute.PNAME, value);
+	}
+	
+	public void setPackage(String name) throws Exception{
+		this.setPackage(new StringValue(name));
 	}
 
+	public String klass() throws Exception{
+		return this.value(TestObjectAttribute.CNAME).asString();
+	}
+	
+	public void setClass(Value value) throws Exception{
+		super.add(TestObjectAttribute.CNAME, value);
+	}
+	
+	public void setClass(String name) throws Exception{
+		this.setClass(new StringValue(name));
+	}
 	public int classInstanceNumber() throws Exception{
 		return this.value(TestObjectAttribute.CIN).asInt();
 	}
@@ -112,8 +142,20 @@ public class DefaultTestObjectProperties
 		this.setClassInstanceNumber(new IntValue(num));
 	}
 	
+	public String method() throws Exception{
+		return this.value(TestObjectAttribute.MNAME).asString();
+	}
+	
+	public void setMethod(Value value) throws Exception{
+		super.add(TestObjectAttribute.MNAME, value);
+	}
+	
+	public void setMethod(String name) throws Exception{
+		this.setMethod(new StringValue(name));
+	}
+	
 	public String name() throws Exception{
-		return this.value(TestObjectAttribute.NAME).asString();
+		return this.value(TestObjectAttribute.MNAME).asString();
 	}
 	
 	public void setName(Value value) throws Exception{
@@ -274,8 +316,14 @@ public class DefaultTestObjectProperties
 		switch (propType){
 		case PQNAME:
 			return ValueType.STRING;
+		case PNAME:
+			return ValueType.STRING;
+		case CNAME:
+			return ValueType.STRING;
 		case CIN:
 			return ValueType.INTEGER;
+		case MNAME:
+			return ValueType.STRING;
 		case NAME:
 			return ValueType.STRING;
 		case MIN:

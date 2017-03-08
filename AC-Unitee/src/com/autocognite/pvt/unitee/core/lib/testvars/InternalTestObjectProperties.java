@@ -20,15 +20,21 @@ public interface InternalTestObjectProperties
 
 	void setObjectType(TestObjectType type) throws Exception;
 	
-	void setParentName(Value value) throws Exception;
-	
 	void setParentQualifiedName(String name) throws Exception;
+	
+	void setParentQualifiedName(Value value) throws Exception;
+	
+	void setPackage(String name) throws Exception;
+	
+	void setPackage(Value value) throws Exception;
+	
+	void setClass(String name) throws Exception;
 	
 	void setClassInstanceNumber(Value value) throws Exception;
 	
 	void setClassInstanceNumber(int num) throws Exception;
 	
-	void setName(Value value) throws Exception;
+	void setMethod(String name) throws Exception;
 	
 	void setName(String name) throws Exception;
 	

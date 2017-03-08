@@ -12,8 +12,14 @@ public interface TestObjectProperties extends
 	TestObjectType objectType() throws Exception;
 	
 	String parentQualifiedName() throws Exception;
+	
+	String pkg() throws Exception;
+	
+	String klass() throws Exception;
 
 	int classInstanceNumber() throws Exception;
+	
+	String method() throws Exception;
 	
 	String name() throws Exception;
 	

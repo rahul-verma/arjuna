@@ -97,6 +97,7 @@ public class JavaTestMethodDefinition {
 		this.name = m.getName();
 		this.qualifiedName = getClassDefinition().getQualifiedName() + "." + getName();	
 		this.testVars.rawObjectProps().setName(name);
+		this.testVars.rawObjectProps().setMethod(name);
 		TestPropertyAnnotationsProcessor.populateTestProps(this, this.testVars);
 	}
 	

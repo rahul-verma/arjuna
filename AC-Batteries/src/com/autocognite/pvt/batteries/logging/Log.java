@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.autocognite.pvt.batteries.dev.logging;
+package com.autocognite.pvt.batteries.logging;
 
 import org.apache.log4j.ConsoleAppender;
 import org.apache.log4j.FileAppender;

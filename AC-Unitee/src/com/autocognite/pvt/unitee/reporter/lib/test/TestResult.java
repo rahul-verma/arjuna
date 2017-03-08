@@ -82,7 +82,7 @@ public class TestResult extends TestRelatedResult {
 	public void buildFromStepResults(List<StepResult> stepResults) throws Exception{
 		this.addStepResults(stepResults);
 		if (ArjunaInternal.displayReportProcessingInfo){
-			logger.debug("Now processing test result for " +  this.objectProps().parentQualifiedName() + "." + this.objectProps().name());
+			logger.debug("Now processing test result for " +  this.objectProps().qualifiedName());
 		}
 
 		// Flag to check whether the result is updated because of a check issue. 

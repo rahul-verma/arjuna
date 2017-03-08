@@ -126,6 +126,8 @@ public class JavaTestClassDefinition {
 		this.dataMethodsHandler = handler;
 		packageName = getPackageName(klass);
 		this.testVars.rawObjectProps().setParentQualifiedName(packageName);
+		this.testVars.rawObjectProps().setPackage(packageName);
+		this.testVars.rawObjectProps().setClass(klass.getSimpleName());
 		this.testVars.rawObjectProps().setName(klass.getSimpleName());
 		
 		TestPropertyAnnotationsProcessor.populateTestProps(this, this.testVars);

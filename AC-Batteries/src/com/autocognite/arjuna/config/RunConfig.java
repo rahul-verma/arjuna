@@ -52,7 +52,7 @@ public class RunConfig {
 	}
 
 	public static String getCentralLogName() {
-		return "autocognite";
+		return "arjuna";
 	}
 
 	public static Logger getCentralLogger() {

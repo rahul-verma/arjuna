@@ -41,9 +41,10 @@ public class UniteeNames {
 		NamesContainer testObjectProperties = new NamesContainer(NamesContainerType.TEST_OBJECT.toString());
 		testObjectProperties.add(new Name(TestObjectAttribute.OTYPE.toString(), "Test Object Enum Type"));
 		testObjectProperties.add(new Name(TestObjectAttribute.ONAME.toString(), "Test Object Type"));
-		testObjectProperties.add(new Name(TestObjectAttribute.PQNAME.toString(), "Test Object Class"));
+		testObjectProperties.add(new Name(TestObjectAttribute.PNAME.toString(), "Test Package"));
+		testObjectProperties.add(new Name(TestObjectAttribute.CNAME.toString(), "Test Class"));
 		testObjectProperties.add(new Name(TestObjectAttribute.CIN.toString(), "Test Class Instance Number"));
-		testObjectProperties.add(new Name(TestObjectAttribute.NAME.toString(), "Test Object Name"));
+		testObjectProperties.add(new Name(TestObjectAttribute.MNAME.toString(), "Test Method"));
 		testObjectProperties.add(new Name(TestObjectAttribute.MIN.toString(), "Test Method Instance Number"));
 		testObjectProperties.add(new Name(TestObjectAttribute.TN.toString(), "Test Number")); // E.g DDT
 		testObjectProperties.add(new Name(TestObjectAttribute.SN.toString(), "Test Session Name"));
