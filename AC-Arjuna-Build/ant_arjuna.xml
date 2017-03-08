@@ -3,7 +3,7 @@
 	<import file="./ant_tasks/global.xml"/>
 	<import file="./ant_tasks/batteries.xml"/>
 	<import file="./ant_tasks/unitee.xml"/>
-	<import file="./ant_tasks/arjuna.xml"/>
+	<import file="./ant_tasks/arjuna-pro-platform.xml"/>
 	<import file="./ant_tasks/obfuscate.xml"/>
 	<description>
 simple example build file
