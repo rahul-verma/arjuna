@@ -2,8 +2,8 @@ package com.autocognite.pvt.unitee.reporter.lib.reportable;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.batteries.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.google.gson.JsonObject;
 

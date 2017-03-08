@@ -32,13 +32,13 @@ import org.sikuli.script.Match;
 import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.ElementLoaderType;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.exceptions.Problem;
-import com.autocognite.batteries.util.FileSystemBatteries;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.sikuli.api.SikuliMediator;
 import com.autocognite.pvt.sikuli.lib.base.DefaultSikuliMediator;
 import com.autocognite.pvt.uiautomator.UiAutomator;

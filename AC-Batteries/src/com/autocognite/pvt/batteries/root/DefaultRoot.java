@@ -20,7 +20,7 @@ package com.autocognite.pvt.batteries.root;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
+import com.autocognite.arjuna.config.RunConfig;
 
 public abstract class DefaultRoot {
 	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());

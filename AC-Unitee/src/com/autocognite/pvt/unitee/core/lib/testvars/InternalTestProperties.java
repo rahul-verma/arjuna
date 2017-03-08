@@ -1,7 +1,7 @@
 package com.autocognite.pvt.unitee.core.lib.testvars;
 
 import com.autocognite.arjuna.interfaces.TestProperties;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.TestAttribute;
 import com.autocognite.pvt.batteries.container.ValueContainer;
 import com.autocognite.pvt.batteries.value.ValueType;

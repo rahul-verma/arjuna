@@ -25,7 +25,7 @@ import java.lang.reflect.Modifier;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataMethod;
-import com.autocognite.batteries.config.RunConfig;
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 
 public class NonTestDataMethodsHandler extends DefaultDataMethodsHandler {

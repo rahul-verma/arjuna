@@ -1,8 +1,8 @@
 package com.autocognite.pvt.unitee.core.lib.datasource;
 
-import com.autocognite.batteries.databroker.DataRecord;
-import com.autocognite.batteries.databroker.DataSource;
-import com.autocognite.batteries.databroker.DataSourceFinishedException;
+import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
+import com.autocognite.arjuna.interfaces.DataSource;
+import com.autocognite.pvt.batteries.databroker.DataRecord;
 
 public class SingleDataRecordSource implements DataSource{
 	private DataRecord record = null;

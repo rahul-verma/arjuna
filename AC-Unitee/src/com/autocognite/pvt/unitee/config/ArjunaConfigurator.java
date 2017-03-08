@@ -3,11 +3,11 @@ package com.autocognite.pvt.unitee.config;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.autocognite.batteries.console.Console;
-import com.autocognite.batteries.enums.LoggingLevel;
-import com.autocognite.batteries.util.ConfigPropertyBatteries;
-import com.autocognite.batteries.util.SystemBatteries;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.enums.LoggingLevel;
+import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.arjuna.utils.ConfigPropertyBatteries;
+import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;

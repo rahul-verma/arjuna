@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.autocognite.batteries.console.Console;
-import com.autocognite.batteries.value.StringKeyValueContainer;
+import com.autocognite.arjuna.console.Console;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.hocon.HoconReader;
 import com.autocognite.pvt.batteries.hocon.HoconStringReader;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.testobject.lib.loader.group.Group;
 import com.google.gson.JsonArray;
@@ -24,7 +24,7 @@ public class BaseSessionNode implements SessionNode{
 	private int id;
 	private Iterator<SessionSubNode> iter = null;
 	private Session session = null;
-	private StringKeyValueContainer udvars = new StringKeyValueContainer();
+	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
 	
 	private BaseSessionNode(Session session, int id) throws Exception{
 		this.session = session;
@@ -252,7 +252,7 @@ public class BaseSessionNode implements SessionNode{
 	}
 
 	@Override
-	public StringKeyValueContainer getUDV() {
+	public DefaultStringKeyValueContainer getUDV() {
 		return this.udvars;
 	} 
 }

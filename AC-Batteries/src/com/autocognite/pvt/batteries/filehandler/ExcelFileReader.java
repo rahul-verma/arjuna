@@ -30,7 +30,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 import org.apache.poi.ss.usermodel.DataFormatter;
 
-import com.autocognite.batteries.util.DataBatteries;
+import com.autocognite.arjuna.utils.DataBatteries;
 
 public class ExcelFileReader {
 

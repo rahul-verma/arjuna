@@ -2,8 +2,8 @@ package com.autocognite.pvt.unitee.testobject.lib.java;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.enums.TestObjectType;
-import com.autocognite.batteries.config.RunConfig;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
 import com.autocognite.pvt.unitee.core.lib.metadata.TestVarsHandler;
 import com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables;

@@ -7,11 +7,11 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.databroker.DataRecord;
-import com.autocognite.batteries.value.StringKeyValueContainer;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.container.BaseValueContainer;
+import com.autocognite.pvt.batteries.databroker.DataRecord;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.batteries.value.DoubleValue;
 import com.autocognite.pvt.batteries.value.EnumValue;
 import com.autocognite.pvt.batteries.value.IntValue;
@@ -55,13 +55,13 @@ public class BaseJsonResultDeserializer {
 
 			//Deserialize customProps
 			JsonObject customPropsObj = root.get("customProps").getAsJsonObject();
-			StringKeyValueContainer customProps = new StringKeyValueContainer();
+			DefaultStringKeyValueContainer customProps = new DefaultStringKeyValueContainer();
 			processJsonObjectForEnumMap(customPropsObj, customProps);
 			testVars.setCustomProps(customProps);	
 
 			//Deserialize udv
 			JsonObject udvObj = root.get("udv").getAsJsonObject();
-			StringKeyValueContainer udvProps = new StringKeyValueContainer();
+			DefaultStringKeyValueContainer udvProps = new DefaultStringKeyValueContainer();
 			processJsonObjectForEnumMap(udvObj, udvProps);
 			testVars.setUdv(udvProps);	
 

@@ -18,8 +18,8 @@
  ******************************************************************************/
 package com.autocognite;
 
-import com.autocognite.batteries.console.Console;
-import com.autocognite.batteries.util.SystemBatteries;
+import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.ArjunaTestEngine;
 import com.autocognite.pvt.unitee.cli.UniteeCliConfigurator;

@@ -7,8 +7,8 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
-import com.autocognite.batteries.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
 import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;

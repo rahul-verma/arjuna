@@ -19,12 +19,12 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.databroker.ReadOnlyDataRecord;
-import com.autocognite.batteries.util.DataBatteries;
-import com.autocognite.batteries.util.SystemBatteries;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;

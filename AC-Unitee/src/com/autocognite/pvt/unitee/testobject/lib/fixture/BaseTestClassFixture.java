@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;

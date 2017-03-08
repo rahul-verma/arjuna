@@ -7,13 +7,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.console.Console;
-import com.autocognite.batteries.value.StringKeyValueContainer;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.arjuna.enums.UnpickedCode;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.core.lib.exception.SessionNodesFinishedException;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
@@ -33,7 +33,7 @@ public abstract class BaseSession implements Session {
 	private Iterator<SessionNode> iter = null;
 	private int testMethodCount = 0;
 	private String name = null;
-	private StringKeyValueContainer udvars = new StringKeyValueContainer();
+	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
 	
 	public BaseSession(String name){
 		this.name = name;
@@ -78,12 +78,12 @@ public abstract class BaseSession implements Session {
 	}
 	
 	@Override
-	public void setUDVs(StringKeyValueContainer udvs){
+	public void setUDVs(DefaultStringKeyValueContainer udvs){
 		udvars = udvs;
 	}
 	
 	@Override 	
-	public StringKeyValueContainer getUDV(){
+	public DefaultStringKeyValueContainer getUDV(){
 		return this.udvars;
 	}
 }

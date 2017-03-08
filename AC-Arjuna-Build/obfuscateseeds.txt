@@ -2,11 +2,20 @@ com.autocognite.Arjuna
 com.autocognite.Arjuna: Arjuna()
 com.autocognite.Arjuna: void main(java.lang.String[])
 com.autocognite.arjuna.annotations.AfterClass
+com.autocognite.arjuna.annotations.AfterClassFragment
+com.autocognite.arjuna.annotations.AfterClassInstance
 com.autocognite.arjuna.annotations.AfterMethod
+com.autocognite.arjuna.annotations.AfterMethodInstance
 com.autocognite.arjuna.annotations.AfterTest
 com.autocognite.arjuna.annotations.BeforeClass
+com.autocognite.arjuna.annotations.BeforeClassFragment
+com.autocognite.arjuna.annotations.BeforeClassInstance
 com.autocognite.arjuna.annotations.BeforeMethod
+com.autocognite.arjuna.annotations.BeforeMethodInstance
 com.autocognite.arjuna.annotations.BeforeTest
+com.autocognite.arjuna.annotations.ClassDependency
+com.autocognite.arjuna.annotations.ClassDependency: java.lang.Class[] value()
+com.autocognite.arjuna.annotations.ClassDependency: java.lang.Class[] testClasses()
 com.autocognite.arjuna.annotations.Data
 com.autocognite.arjuna.annotations.Data: java.lang.String[] value()
 com.autocognite.arjuna.annotations.DataGenerator
@@ -26,6 +35,10 @@ com.autocognite.arjuna.annotations.DriveWithDataArray
 com.autocognite.arjuna.annotations.DriveWithDataArray: com.autocognite.arjuna.annotations.Data[] value()
 com.autocognite.arjuna.annotations.DriveWithDataArray: com.autocognite.arjuna.annotations.Data[] records()
 com.autocognite.arjuna.annotations.DriveWithDataArray: java.lang.String[] headers()
+com.autocognite.arjuna.annotations.DriveWithDataFile
+com.autocognite.arjuna.annotations.DriveWithDataFile: java.lang.String value()
+com.autocognite.arjuna.annotations.DriveWithDataFile: java.lang.String path()
+com.autocognite.arjuna.annotations.DriveWithDataFile: java.lang.String delimiter()
 com.autocognite.arjuna.annotations.DriveWithDataGenerator
 com.autocognite.arjuna.annotations.DriveWithDataGenerator: java.lang.String value()
 com.autocognite.arjuna.annotations.DriveWithDataGenerator: java.lang.String name()
@@ -35,6 +48,15 @@ com.autocognite.arjuna.annotations.DriveWithDataMethod: java.lang.String value()
 com.autocognite.arjuna.annotations.DriveWithDataMethod: java.lang.String name()
 com.autocognite.arjuna.annotations.DriveWithDataMethod: java.lang.String container()
 com.autocognite.arjuna.annotations.DriveWithDataMethod: java.lang.Class containerClass()
+com.autocognite.arjuna.annotations.FileDataReference
+com.autocognite.arjuna.annotations.FileDataReference: java.lang.String value()
+com.autocognite.arjuna.annotations.FileDataReference: java.lang.String path()
+com.autocognite.arjuna.annotations.FileDataReference: java.lang.String name()
+com.autocognite.arjuna.annotations.Instances
+com.autocognite.arjuna.annotations.Instances: int value()
+com.autocognite.arjuna.annotations.Instances: int count()
+com.autocognite.arjuna.annotations.Instances: int instanceThreads()
+com.autocognite.arjuna.annotations.Instances: java.lang.String[] udv()
 com.autocognite.arjuna.annotations.MethodDependency
 com.autocognite.arjuna.annotations.MethodDependency: java.lang.String[] value()
 com.autocognite.arjuna.annotations.MethodDependency: java.lang.String[] testMethods()
@@ -166,6 +188,8 @@ com.autocognite.arjuna.interfaces.Check: void setError()
 com.autocognite.arjuna.interfaces.Check: java.lang.String getExceptionMessage()
 com.autocognite.arjuna.interfaces.Check: void evaluate()
 com.autocognite.arjuna.interfaces.Check: void setExceptionMessage(java.lang.String)
+com.autocognite.arjuna.interfaces.ReportGenerator
+com.autocognite.arjuna.interfaces.ReportableObserver
 com.autocognite.arjuna.interfaces.TestObjectProperties
 com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String objectId()
 com.autocognite.arjuna.interfaces.TestObjectProperties: com.autocognite.arjuna.enums.TestObjectType objectType()
@@ -1102,6 +1126,38 @@ com.autocognite.pvt.batteries.lib.StringsManager$infoCodes
 com.autocognite.pvt.batteries.lib.StringsManager$problemCodes
 com.autocognite.pvt.batteries.lib.ThreadSafeStreamReader
 com.autocognite.pvt.batteries.lib.UserDefinedProperty
+com.autocognite.pvt.batteries.networker.Networker
+com.autocognite.pvt.batteries.networker.api.KeyValueQueue
+com.autocognite.pvt.batteries.networker.api.NetworkProtocol
+com.autocognite.pvt.batteries.networker.api.http.AcHttpContent
+com.autocognite.pvt.batteries.networker.api.http.AcHttpHeaders
+com.autocognite.pvt.batteries.networker.api.http.AcUrl
+com.autocognite.pvt.batteries.networker.lib.http.AcDefaultUrl
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpContentBuilder
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpHeader
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpHeaders
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpHeadersBuilder
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpMethod
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpRequest
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpRequestBuilder
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpRequestBuilder$1
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpRequester
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpRequesterBuilder
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpRequests
+com.autocognite.pvt.batteries.networker.lib.http.AcHttpResponse
+com.autocognite.pvt.batteries.networker.lib.http.AcProxies
+com.autocognite.pvt.batteries.networker.lib.http.AcRawHttpContent
+com.autocognite.pvt.batteries.networker.lib.http.AcTextHttpContent
+com.autocognite.pvt.batteries.networker.lib.http.AcUrlBuilder
+com.autocognite.pvt.batteries.networker.lib.http.AcUrlEncodedContent
+com.autocognite.pvt.batteries.networker.lib.util.AbstractKVQueue
+com.autocognite.pvt.batteries.networker.lib.util.FormData
+com.autocognite.pvt.batteries.networker.lib.util.FormParam
+com.autocognite.pvt.batteries.networker.lib.util.KeyValuePair
+com.autocognite.pvt.batteries.networker.lib.util.NameValuePairBuilder
+com.autocognite.pvt.batteries.networker.lib.util.QueryData
+com.autocognite.pvt.batteries.networker.lib.util.QueryParam
+com.autocognite.pvt.batteries.networker.lib.util.StringIntPair
 com.autocognite.pvt.batteries.nvpair.BaseNameValuePair
 com.autocognite.pvt.batteries.nvpair.NameValuePair
 com.autocognite.pvt.batteries.property.ConfigProperty
@@ -1314,6 +1370,7 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.ClassPicker
 com.autocognite.pvt.unitee.testobject.lib.loader.group.DefaultTestGroup
 com.autocognite.pvt.unitee.testobject.lib.loader.group.Group
 com.autocognite.pvt.unitee.testobject.lib.loader.group.JavaTestClassLoader
+com.autocognite.pvt.unitee.testobject.lib.loader.group.JsonTestPickerProperty
 com.autocognite.pvt.unitee.testobject.lib.loader.group.MBGroup
 com.autocognite.pvt.unitee.testobject.lib.loader.group.MLGroup
 com.autocognite.pvt.unitee.testobject.lib.loader.group.MethodPicker
@@ -1322,12 +1379,15 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.Picker
 com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerConfig
 com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI
 com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI$1
+com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerConfigForJson
+com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerConfigForJson$1
 com.autocognite.pvt.unitee.testobject.lib.loader.group.PickerMisConfiguration
 com.autocognite.pvt.unitee.testobject.lib.loader.group.SkippedJavaTestClassLoader
 com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB
 com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB$1
 com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader
 com.autocognite.pvt.unitee.testobject.lib.loader.group.UnselectedJavaTestClassLoader
+com.autocognite.pvt.unitee.testobject.lib.loader.group.UserDefinedGroup
 com.autocognite.pvt.unitee.testobject.lib.loader.session.BaseSession
 com.autocognite.pvt.unitee.testobject.lib.loader.session.BaseSessionNode
 com.autocognite.pvt.unitee.testobject.lib.loader.session.BaseSessionSubNode
@@ -1336,6 +1396,7 @@ com.autocognite.pvt.unitee.testobject.lib.loader.session.MSession$1
 com.autocognite.pvt.unitee.testobject.lib.loader.session.Session
 com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionNode
 com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode
+com.autocognite.pvt.unitee.testobject.lib.loader.session.UserDefinedSession
 com.autocognite.pvt.unitee.testobject.lib.loader.tree.AbstractTestMethodNode
 com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTree
 com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder

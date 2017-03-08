@@ -3,11 +3,11 @@ package com.autocognite.pvt.unitee.core.lib.datasource;
 import java.util.Iterator;
 import java.util.List;
 
-import com.autocognite.batteries.databroker.DataRecord;
-import com.autocognite.batteries.databroker.DataRecordContainer;
-import com.autocognite.batteries.databroker.DataSource;
-import com.autocognite.batteries.databroker.DataSourceFinishedException;
-import com.autocognite.batteries.databroker.ReadOnlyDataRecord;
+import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
+import com.autocognite.arjuna.interfaces.DataSource;
+import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.pvt.batteries.databroker.DataRecord;
+import com.autocognite.pvt.batteries.databroker.DataRecordContainer;
 
 public class DataArrayDataSource implements DataSource{
 	private DataRecordContainer container = null;

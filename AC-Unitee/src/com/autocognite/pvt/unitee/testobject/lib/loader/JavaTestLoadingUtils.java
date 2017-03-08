@@ -9,9 +9,9 @@ import com.autocognite.arjuna.annotations.FileDataReference;
 import com.autocognite.arjuna.annotations.Instances;
 import com.autocognite.arjuna.annotations.TestClass;
 import com.autocognite.arjuna.annotations.TestMethod;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.util.DataBatteries;
-import com.autocognite.batteries.util.FileSystemBatteries;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 
 public class JavaTestLoadingUtils {

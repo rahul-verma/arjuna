@@ -21,9 +21,8 @@ package com.autocognite.pvt.batteries.databroker;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.autocognite.batteries.databroker.DataRecord;
-import com.autocognite.batteries.databroker.DataReference;
-import com.autocognite.batteries.databroker.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataReference;
+import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
 import com.autocognite.pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 
 public class ExcelDataReference implements DataReference {

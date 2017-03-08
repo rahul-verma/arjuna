@@ -25,7 +25,7 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PatternLayout;
 
-import com.autocognite.batteries.console.Console;
+import com.autocognite.arjuna.console.Console;
 
 public class Log {
 	private ConsoleAppender console = new ConsoleAppender(); // create appender

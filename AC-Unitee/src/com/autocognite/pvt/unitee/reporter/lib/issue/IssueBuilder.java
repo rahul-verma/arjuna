@@ -1,8 +1,8 @@
 package com.autocognite.pvt.unitee.reporter.lib.issue;
 
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.batteries.exceptions.Problem;
-import com.autocognite.batteries.util.ExceptionBatteries;
+import com.autocognite.arjuna.utils.ExceptionBatteries;
 import com.autocognite.pvt.arjuna.enums.IssueAttribute;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;
 import com.autocognite.pvt.arjuna.enums.IssueType;

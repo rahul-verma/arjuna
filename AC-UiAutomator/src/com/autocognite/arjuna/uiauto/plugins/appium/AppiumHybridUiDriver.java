@@ -18,7 +18,7 @@
  ******************************************************************************/
 package com.autocognite.arjuna.uiauto.plugins.appium;
 
-import com.autocognite.batteries.config.RunConfig;
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.appium.lib.base.AbstractAppiumUiDriver;
 import com.autocognite.pvt.uiautomator.api.identify.enums.IdentifyBy;
 import com.autocognite.pvt.uiautomator.lib.config.UiAutomatorPropertyType;

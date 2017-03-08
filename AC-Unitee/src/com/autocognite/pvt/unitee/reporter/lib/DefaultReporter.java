@@ -25,7 +25,7 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.interfaces.InternlReportableObserver;
 import com.autocognite.pvt.unitee.reporter.lib.event.Event;

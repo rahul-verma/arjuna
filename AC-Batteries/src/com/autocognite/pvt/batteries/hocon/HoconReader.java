@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 import java.util.Map.Entry;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigValue;
 

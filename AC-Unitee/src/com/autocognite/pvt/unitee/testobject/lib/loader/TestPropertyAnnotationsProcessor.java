@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 import com.autocognite.arjuna.annotations.TestClass;
 import com.autocognite.arjuna.annotations.TestMethod;
-import com.autocognite.batteries.util.DataBatteries;
+import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;

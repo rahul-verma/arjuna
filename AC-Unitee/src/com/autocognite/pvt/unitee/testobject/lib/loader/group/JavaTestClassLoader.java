@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.value.StringKeyValueContainer;
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator;

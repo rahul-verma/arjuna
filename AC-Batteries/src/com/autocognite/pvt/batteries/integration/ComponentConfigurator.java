@@ -2,7 +2,7 @@ package com.autocognite.pvt.batteries.integration;
 
 import java.util.HashMap;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.lib.ComponentIntegrator;
 
 public interface ComponentConfigurator {

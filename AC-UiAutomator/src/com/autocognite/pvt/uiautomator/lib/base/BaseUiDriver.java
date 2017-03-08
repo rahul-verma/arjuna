@@ -21,14 +21,14 @@ package com.autocognite.pvt.uiautomator.lib.base;
 import java.io.File;
 import java.util.HashMap;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.ElementLoaderType;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.enums.UiDriverEngine;
 import com.autocognite.arjuna.uiauto.enums.UiElementType;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.api.ElementMetaData;
 import com.autocognite.pvt.uiautomator.lib.DefaultElementMetaData;

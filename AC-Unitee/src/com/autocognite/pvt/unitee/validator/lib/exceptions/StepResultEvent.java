@@ -18,10 +18,10 @@
  ******************************************************************************/
 package com.autocognite.pvt.unitee.validator.lib.exceptions;
 
+import com.autocognite.arjuna.exceptions.ArjunaException;
 import com.autocognite.arjuna.interfaces.Check;
-import com.autocognite.batteries.exceptions.ACException;
 
-public class StepResultEvent extends ACException {
+public class StepResultEvent extends ArjunaException {
 	/**
 	 * 
 	 */

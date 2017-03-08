@@ -21,7 +21,7 @@ package com.autocognite.pvt.batteries.lib;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.autocognite.batteries.exceptions.Problem;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.pvt.batteries.configurator.lib.strings.NamedString;
 import com.autocognite.pvt.batteries.ds.MessagesContainer;
 import com.autocognite.pvt.batteries.ds.NamesContainer;

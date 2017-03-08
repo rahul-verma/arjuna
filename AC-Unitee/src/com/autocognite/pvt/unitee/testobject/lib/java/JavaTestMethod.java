@@ -8,9 +8,9 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.TestMethod;
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.enums.TestObjectType;
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.batteries.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;

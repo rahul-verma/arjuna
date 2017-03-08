@@ -25,7 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import com.autocognite.batteries.util.DataBatteries;
+import com.autocognite.arjuna.utils.DataBatteries;
 
 public class FileWriter {
 	private BufferedWriter writer = null;

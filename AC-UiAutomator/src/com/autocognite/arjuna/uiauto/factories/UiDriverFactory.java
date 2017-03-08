@@ -18,6 +18,8 @@
  ******************************************************************************/
 package com.autocognite.arjuna.uiauto.factories;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.plugins.appium.AppiumHybridUiDriver;
@@ -25,8 +27,6 @@ import com.autocognite.arjuna.uiauto.plugins.appium.AppiumNativeUiDriver;
 import com.autocognite.arjuna.uiauto.plugins.appium.AppiumWebUiDriver;
 import com.autocognite.arjuna.uiauto.plugins.selenium.SeleniumWebUiDriver;
 import com.autocognite.arjuna.uiauto.plugins.sikuli.SikuliScreenUiDriver;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 
 public class UiDriverFactory {

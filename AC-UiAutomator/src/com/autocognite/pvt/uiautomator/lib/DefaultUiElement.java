@@ -20,9 +20,9 @@ package com.autocognite.pvt.uiautomator.lib;
 
 import java.util.List;
 
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
-import com.autocognite.batteries.config.RunConfig;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.api.ElementMetaData;
 

@@ -1,6 +1,6 @@
 package com.autocognite.pvt.batteries.property;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.enums.ConfigPropertyLevel;
 import com.autocognite.pvt.batteries.value.ValueType;
 

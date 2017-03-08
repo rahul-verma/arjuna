@@ -3,21 +3,21 @@ package com.autocognite.pvt.unitee.core.lib.testvars;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.interfaces.DataReference;
+import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
 import com.autocognite.arjuna.interfaces.TestProperties;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.databroker.DataRecord;
-import com.autocognite.batteries.databroker.DataReference;
-import com.autocognite.batteries.databroker.ReadOnlyDataRecord;
-import com.autocognite.batteries.value.StringKeyValueContainer;
+import com.autocognite.pvt.batteries.databroker.DataRecord;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.reporter.lib.reportable.TestVariablesSerializer;
 import com.google.gson.JsonObject;
 
 public class DefaultTestVariables implements InternalTestVariables {
 	private InternalTestObjectProperties objectProps = new DefaultTestObjectProperties();
 	private InternalTestProperties testProps = new DefaultTestProperties();
-	private StringKeyValueContainer customProps = new StringKeyValueContainer();
-	private StringKeyValueContainer udvars = new StringKeyValueContainer();
+	private DefaultStringKeyValueContainer customProps = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
 	private ReadOnlyDataRecord dataRecord =  null;
 	private Map<String,DataReference> dataRefMap = new HashMap<String,DataReference>();
 	private static ReadOnlyDataRecord dr = new DataRecord();
@@ -51,7 +51,7 @@ public class DefaultTestVariables implements InternalTestVariables {
 	 * @see com.autocognite.result.TestVariables#customProps()
 	 */
 	@Override
-	public StringKeyValueContainer customProps() throws Exception {
+	public DefaultStringKeyValueContainer customProps() throws Exception {
 		return this.rawCustomProps();
 	}
 	
@@ -59,7 +59,7 @@ public class DefaultTestVariables implements InternalTestVariables {
 	 * @see com.autocognite.result.TestVariables#udv()
 	 */
 	@Override
-	public StringKeyValueContainer udv() throws Exception {
+	public DefaultStringKeyValueContainer udv() throws Exception {
 		return this.rawUdv();
 	}
 
@@ -74,12 +74,12 @@ public class DefaultTestVariables implements InternalTestVariables {
 	}
 
 	@Override
-	public StringKeyValueContainer rawCustomProps() throws Exception {
+	public DefaultStringKeyValueContainer rawCustomProps() throws Exception {
 		return this.customProps;
 	}
 
 	@Override
-	public StringKeyValueContainer rawUdv() throws Exception {
+	public DefaultStringKeyValueContainer rawUdv() throws Exception {
 		return this.udvars;
 	}
 
@@ -94,12 +94,12 @@ public class DefaultTestVariables implements InternalTestVariables {
 	}
 
 	@Override
-	public void setCustomProps(StringKeyValueContainer props) throws Exception {
+	public void setCustomProps(DefaultStringKeyValueContainer props) throws Exception {
 		this.customProps = props;
 	}
 
 	@Override
-	public void setUdv(StringKeyValueContainer props) throws Exception {
+	public void setUdv(DefaultStringKeyValueContainer props) throws Exception {
 		this.udvars = props;
 	}
 	

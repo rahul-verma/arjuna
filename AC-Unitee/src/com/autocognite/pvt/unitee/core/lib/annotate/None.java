@@ -18,7 +18,7 @@
  ******************************************************************************/
 package com.autocognite.pvt.unitee.core.lib.annotate;
 
-import com.autocognite.batteries.databroker.DataSource;
+import com.autocognite.arjuna.interfaces.DataSource;
 
 public abstract class None implements DataSource{
 	// A placeholder class for annotation checking

@@ -23,7 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.autocognite.batteries.databroker.DataSource;
+import com.autocognite.arjuna.interfaces.DataSource;
 import com.autocognite.pvt.unitee.core.lib.annotate.None;
 
 @Retention(RetentionPolicy.RUNTIME)

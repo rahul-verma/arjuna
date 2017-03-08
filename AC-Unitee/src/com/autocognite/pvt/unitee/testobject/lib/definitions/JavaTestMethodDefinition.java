@@ -7,13 +7,13 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.autocognite.arjuna.interfaces.DataReference;
+import com.autocognite.arjuna.interfaces.DataSource;
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.batteries.databroker.DataReference;
-import com.autocognite.batteries.databroker.DataReferenceFactory;
-import com.autocognite.batteries.databroker.DataSource;
 import com.autocognite.pvt.arjuna.enums.DependencyTarget;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.arjuna.enums.UnpickedCode;
+import com.autocognite.pvt.batteries.databroker.DataReferenceFactory;
 import com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder;
 import com.autocognite.pvt.unitee.core.lib.datasource.DummyDataSource;
 import com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler;

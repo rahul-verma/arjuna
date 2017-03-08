@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.exceptions.Problem;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;
 import com.autocognite.pvt.arjuna.enums.IssueType;

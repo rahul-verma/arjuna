@@ -48,10 +48,6 @@ simple example build file
 	<property name="public.tools.arjuna.dist.file" value="${public.tools.arjuna.dir}/${arjuna.dist.file.name}" />
 	
 	<target name="arjuna_mkdirs">
-		<!-- ======================================================================================== -->
-		<!-- ===================================== DIRECTORY STRUCTURE =================================================== -->
-		<!-- ===================================== uiautomator =================================================== -->
-		<!-- ======================================================================================== -->
 
 		<mkdir dir="${ant.arjuna.root.dir}" />
 		<mkdir dir="${ant.arjuna.build.dir}" />
@@ -87,7 +83,6 @@ simple example build file
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/lib/java" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/examples" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/examples/data" />
-		<mkdir dir="${private.arjuna.dist.tools.root.dir}/examples/uiauto_maps" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/config" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/temp" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/scripts" />
@@ -98,10 +93,6 @@ simple example build file
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/data" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/data/sources" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/data/references" />
-		<mkdir dir="${private.arjuna.dist.tools.root.dir}/uiauto_maps" />
-		<mkdir dir="${private.arjuna.dist.tools.root.dir}/uiauto_images" />
-		<mkdir dir="${private.arjuna.dist.tools.root.dir}/temp/screenshots" />
-		<mkdir dir="${private.arjuna.dist.tools.root.dir}/tools/uidrivers" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/tests" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/report" />
 		<mkdir dir="${private.arjuna.dist.tools.root.dir}/archives" />

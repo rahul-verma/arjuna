@@ -22,15 +22,15 @@ import java.io.File;
 
 import org.apache.commons.io.FilenameUtils;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.interfaces.App;
 import com.autocognite.arjuna.uiauto.interfaces.Page;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.lib.BaseApp;
 import com.autocognite.arjuna.uiauto.lib.BasePage;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.exceptions.Problem;
-import com.autocognite.batteries.util.FileSystemBatteries;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 

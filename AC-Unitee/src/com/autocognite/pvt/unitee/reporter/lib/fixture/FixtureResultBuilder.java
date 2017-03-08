@@ -1,7 +1,7 @@
 package com.autocognite.pvt.unitee.reporter.lib.fixture;
 
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.batteries.util.ExceptionBatteries;
+import com.autocognite.arjuna.utils.ExceptionBatteries;
 import com.autocognite.pvt.arjuna.enums.FixtureResultPropertyType;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;

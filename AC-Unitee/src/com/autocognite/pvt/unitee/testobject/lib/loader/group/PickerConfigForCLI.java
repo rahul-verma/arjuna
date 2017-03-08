@@ -6,8 +6,8 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.util.DataBatteries;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
 import com.autocognite.pvt.arjuna.enums.TestPickerProperty;
 

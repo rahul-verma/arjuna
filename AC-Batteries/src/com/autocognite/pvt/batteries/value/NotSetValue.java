@@ -1,6 +1,6 @@
 package com.autocognite.pvt.batteries.value;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 
 public class NotSetValue extends AbstractValue {
 	private static String val = "NOT_SET";

@@ -6,7 +6,7 @@ import java.util.Map;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
 import com.autocognite.arjuna.interfaces.TestProperties;
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.TestAttribute;
 import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.batteries.container.ReadOnlyContainer;

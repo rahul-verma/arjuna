@@ -2,8 +2,8 @@ package com.autocognite.pvt.unitee.testobject.lib.loader.session;
 
 import java.util.HashMap;
 
-import com.autocognite.batteries.value.StringKeyValueContainer;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.google.gson.JsonObject;
 import com.typesafe.config.ConfigObject;
 
@@ -23,7 +23,7 @@ public interface Session {
 
 	JsonObject getUDVObject();
 
-	StringKeyValueContainer getUDV();
+	DefaultStringKeyValueContainer getUDV();
 
-	void setUDVs(StringKeyValueContainer udvs);
+	void setUDVs(DefaultStringKeyValueContainer udvs);
 }

@@ -1,7 +1,6 @@
 package com.autocognite.arjuna.interfaces;
 
 import com.autocognite.arjuna.enums.TestObjectType;
-import com.autocognite.batteries.value.Value;
 import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.batteries.container.ReadOnlyContainer;
 

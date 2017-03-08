@@ -2,7 +2,7 @@ package com.autocognite.pvt.batteries.value;
 
 import java.util.List;
 
-import com.autocognite.batteries.value.DataWrapper;
+import com.autocognite.arjuna.interfaces.DataWrapper;
 
 public abstract class AbstractDataWrapper implements DataWrapper {
 	@Override

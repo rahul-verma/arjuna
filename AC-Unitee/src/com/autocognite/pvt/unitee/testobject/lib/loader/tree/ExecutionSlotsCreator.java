@@ -8,12 +8,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.value.StringKeyValueContainer;
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
 import com.autocognite.pvt.arjuna.enums.UnpickedCode;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
@@ -36,7 +36,7 @@ public class ExecutionSlotsCreator {
 	private Iterator<TestMethodNode> slotCreatorIter = null;
 	private int currentSlotNum = 0;
 	private HashMap<String,Integer> methodToSlotMap = new HashMap<String,Integer>();
-	private StringKeyValueContainer udvars = new StringKeyValueContainer();
+	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
 //	
 	public ExecutionSlotsCreator(Group group) throws Exception{
 		this.group = group;

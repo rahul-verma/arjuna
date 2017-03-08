@@ -10,14 +10,14 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.interfaces.DataReference;
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.databroker.DataReference;
-import com.autocognite.batteries.databroker.DataReferenceFactory;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.DependencyTarget;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.arjuna.enums.UnpickedCode;
+import com.autocognite.pvt.batteries.databroker.DataReferenceFactory;
 import com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler;
 import com.autocognite.pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables;

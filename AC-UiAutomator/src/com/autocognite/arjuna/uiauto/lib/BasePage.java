@@ -24,6 +24,8 @@ import java.util.Random;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.enums.ElementLoaderType;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
 import com.autocognite.arjuna.uiauto.enums.UiDriverEngine;
@@ -34,9 +36,7 @@ import com.autocognite.arjuna.uiauto.interfaces.Page;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.exceptions.Problem;
-import com.autocognite.batteries.util.DataBatteries;
+import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.api.CentralPageMap;
 import com.autocognite.pvt.uiautomator.api.ElementMetaData;

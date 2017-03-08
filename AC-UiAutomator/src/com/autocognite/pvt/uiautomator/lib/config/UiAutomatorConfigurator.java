@@ -3,9 +3,9 @@ package com.autocognite.pvt.uiautomator.lib.config;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.uiauto.enums.UiAutomationContext;
-import com.autocognite.batteries.util.ConfigPropertyBatteries;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.utils.ConfigPropertyBatteries;
 import com.autocognite.pvt.batteries.ds.Message;
 import com.autocognite.pvt.batteries.ds.MessagesContainer;
 import com.autocognite.pvt.batteries.ds.Name;

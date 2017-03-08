@@ -2,7 +2,7 @@ package com.autocognite.pvt.unitee.reporter.lib.event;
 
 import java.util.HashMap;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
 import com.autocognite.pvt.batteries.container.EnumKeyValueContainer;
 import com.autocognite.pvt.batteries.value.BooleanValue;

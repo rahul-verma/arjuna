@@ -2,9 +2,7 @@ package com.autocognite.arjuna.interfaces;
 
 import java.util.Map;
 
-import com.autocognite.batteries.databroker.DataReference;
-import com.autocognite.batteries.databroker.ReadOnlyDataRecord;
-import com.autocognite.batteries.value.StringKeyValueContainer;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 
 public interface TestVariables {
 
@@ -12,9 +10,9 @@ public interface TestVariables {
 
 	TestProperties testProps() throws Exception;
 
-	StringKeyValueContainer customProps() throws Exception;
+	DefaultStringKeyValueContainer customProps() throws Exception;
 
-	StringKeyValueContainer udv() throws Exception;
+	DefaultStringKeyValueContainer udv() throws Exception;
 
 	ReadOnlyDataRecord dataRecord();
 

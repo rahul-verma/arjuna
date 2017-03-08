@@ -25,7 +25,7 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
+import com.autocognite.arjuna.config.RunConfig;
 
 public class FileAggregator {
 	public Logger logger = Logger.getLogger(RunConfig.getCentralLogName());

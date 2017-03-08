@@ -20,11 +20,11 @@ package com.autocognite.arjuna.uiauto.factories;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.enums.FileFormat;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.enums.FileFormat;
-import com.autocognite.batteries.exceptions.Problem;
-import com.autocognite.batteries.util.FileSystemBatteries;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 import com.autocognite.pvt.uiautomator.lib.IniFilePageMapper;
 import com.autocognite.pvt.uiautomator.lib.config.UiAutomatorPropertyType;

@@ -23,10 +23,10 @@ import java.util.HashMap;
 
 import org.apache.commons.io.FilenameUtils;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.databroker.DataReference;
-import com.autocognite.batteries.databroker.DataReferenceFactory;
-import com.autocognite.batteries.databroker.ReadOnlyDataRecord;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.interfaces.DataReference;
+import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.pvt.batteries.databroker.DataReferenceFactory;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 
 public enum BatteriesSingleton {

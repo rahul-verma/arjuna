@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.value.StringKeyValueContainer;
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionNode;
@@ -20,7 +20,7 @@ public class BaseGroup implements Group{
 	private int classThreads = 1;
 	List<Picker> containerPickers = null;
 	private SessionSubNode sessionSubNode;
-	private StringKeyValueContainer udvars = new StringKeyValueContainer();
+	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
 	
 	public BaseGroup(String name) throws Exception{
 		this.name = name;
@@ -106,7 +106,7 @@ public class BaseGroup implements Group{
 	}
 
 	@Override
-	public StringKeyValueContainer getUDV() {
+	public DefaultStringKeyValueContainer getUDV() {
 		return this.udvars;
 	}
 

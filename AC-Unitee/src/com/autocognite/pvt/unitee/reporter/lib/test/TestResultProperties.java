@@ -2,7 +2,7 @@ package com.autocognite.pvt.unitee.reporter.lib.test;
 
 import java.util.HashMap;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
 import com.autocognite.pvt.arjuna.enums.TestResultType;

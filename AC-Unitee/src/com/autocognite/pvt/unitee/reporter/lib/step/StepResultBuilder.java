@@ -1,6 +1,6 @@
 package com.autocognite.pvt.unitee.reporter.lib.step;
 
-import com.autocognite.batteries.exceptions.Problem;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.pvt.arjuna.enums.StepResultAttribute;
 import com.autocognite.pvt.arjuna.enums.StepResultType;
 import com.autocognite.pvt.batteries.value.EnumValue;

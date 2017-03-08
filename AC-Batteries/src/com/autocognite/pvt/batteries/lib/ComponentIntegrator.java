@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.autocognite.batteries.console.Console;
-import com.autocognite.batteries.util.FileSystemBatteries;
-import com.autocognite.batteries.value.StringKeyValueContainer;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.batteries.config.Configuration;
 import com.autocognite.pvt.batteries.ds.MessagesContainer;
 import com.autocognite.pvt.batteries.ds.NamesContainer;
 import com.autocognite.pvt.batteries.integration.ComponentConfigurator;
 import com.autocognite.pvt.batteries.property.ConfigProperty;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.batteries.value.ValueType;
 
 public class ComponentIntegrator {
@@ -32,7 +32,7 @@ public class ComponentIntegrator {
 	private Set<String> visiableProperties = new HashSet<String>();
 	private HashMap<String, String> readableNames = new HashMap<String, String>();
 	private StringsManager stringsManager = new StringsManager();
-	private StringKeyValueContainer udvMap = new StringKeyValueContainer();
+	private DefaultStringKeyValueContainer udvMap = new DefaultStringKeyValueContainer();
 
 	public void init() {
 		setRefDir(FileSystemBatteries.getJarFilePathForObject(this));

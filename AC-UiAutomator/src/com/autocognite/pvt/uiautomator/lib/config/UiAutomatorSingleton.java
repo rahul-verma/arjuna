@@ -26,7 +26,7 @@ import com.autocognite.arjuna.uiauto.enums.UiElementType;
 import com.autocognite.arjuna.uiauto.plugins.appium.AppiumAndroidBrowserType;
 import com.autocognite.arjuna.uiauto.plugins.appium.AppiumIosBrowserType;
 import com.autocognite.arjuna.uiauto.plugins.appium.AppiumMobilePlatformType;
-import com.autocognite.batteries.util.DataBatteries;
+import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.uiautomator.api.CentralPageMap;
 import com.autocognite.pvt.uiautomator.api.identify.enums.IdentifyBy;
 import com.autocognite.pvt.uiautomator.api.identify.enums.MobileNativeIdentifyBy;

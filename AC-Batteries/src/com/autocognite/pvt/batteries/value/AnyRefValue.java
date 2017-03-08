@@ -2,7 +2,7 @@ package com.autocognite.pvt.batteries.value;
 
 import java.lang.reflect.Field;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 
 public class AnyRefValue extends AbstractValue {
 

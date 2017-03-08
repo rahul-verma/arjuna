@@ -1,12 +1,12 @@
 package com.autocognite.pvt.unitee.core.lib.testvars;
 
 import com.autocognite.arjuna.enums.TestObjectType;
+import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
-import com.autocognite.batteries.databroker.DataRecord;
-import com.autocognite.batteries.databroker.ReadOnlyDataRecord;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.batteries.container.ValueContainer;
+import com.autocognite.pvt.batteries.databroker.DataRecord;
 import com.autocognite.pvt.batteries.value.IntValue;
 import com.autocognite.pvt.batteries.value.StringValue;
 import com.autocognite.pvt.batteries.value.ValueType;

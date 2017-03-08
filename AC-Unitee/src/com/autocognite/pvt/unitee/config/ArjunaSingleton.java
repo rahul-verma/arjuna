@@ -27,12 +27,12 @@ import java.util.Map;
 
 import com.autocognite.arjuna.annotations.DataGenerator;
 import com.autocognite.arjuna.annotations.DataMethodContainer;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.console.Console;
-import com.autocognite.batteries.databroker.DataSource;
-import com.autocognite.batteries.util.ConfigPropertyBatteries;
-import com.autocognite.batteries.util.FileSystemBatteries;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.interfaces.DataSource;
+import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.arjuna.utils.ConfigPropertyBatteries;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
 import com.autocognite.pvt.arjuna.enums.ReportMode;

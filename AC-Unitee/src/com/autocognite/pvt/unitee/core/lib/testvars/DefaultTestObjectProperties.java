@@ -3,12 +3,12 @@ package com.autocognite.pvt.unitee.core.lib.testvars;
 import org.apache.poi.util.SystemOutLogger;
 
 import com.autocognite.arjuna.enums.TestObjectType;
-import com.autocognite.batteries.databroker.DataRecord;
-import com.autocognite.batteries.databroker.ReadOnlyDataRecord;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.batteries.container.EnumKeyValueContainer;
+import com.autocognite.pvt.batteries.databroker.DataRecord;
 import com.autocognite.pvt.batteries.ds.Name;
 import com.autocognite.pvt.batteries.value.DoubleValue;
 import com.autocognite.pvt.batteries.value.EnumValue;

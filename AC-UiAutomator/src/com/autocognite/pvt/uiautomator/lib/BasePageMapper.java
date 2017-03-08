@@ -18,10 +18,10 @@
  ******************************************************************************/
 package com.autocognite.pvt.uiautomator.lib;
 
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.exceptions.Problem;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.exceptions.Problem;
-import com.autocognite.batteries.util.FileSystemBatteries;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.uiautomator.UiAutomator;
 
 public abstract class BasePageMapper implements PageMapper{

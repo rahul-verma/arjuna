@@ -8,7 +8,7 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 
-import com.autocognite.batteries.util.FileSystemBatteries;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.batteries.filehandler.FileWriter;
 import com.autocognite.pvt.unitee.reporter.lib.DefaultObserver;
 

@@ -3,7 +3,7 @@ package com.autocognite.pvt.batteries.container;
 import java.util.List;
 import java.util.Map;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.value.AnyRefValue;
 import com.autocognite.pvt.batteries.value.BooleanValue;
 import com.autocognite.pvt.batteries.value.EnumListValue;

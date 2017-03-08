@@ -1,7 +1,7 @@
 package com.autocognite.pvt.unitee.testobject.lib.interfaces;
 
+import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.batteries.databroker.ReadOnlyDataRecord;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture;
 import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;

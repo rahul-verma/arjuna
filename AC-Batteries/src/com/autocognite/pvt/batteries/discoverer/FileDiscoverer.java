@@ -28,10 +28,10 @@ import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.util.DataBatteries;
-import com.autocognite.batteries.util.FileSystemBatteries;
-import com.autocognite.batteries.util.SystemBatteries;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.pvt.batteries.discovery.JarClassDiscoverer;
 
 public class FileDiscoverer extends DirectoryWalker {

@@ -24,8 +24,8 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataGenerator;
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.databroker.DataSource;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.interfaces.DataSource;
 import com.autocognite.pvt.ArjunaInternal;
 
 public class DataGeneratorMap {

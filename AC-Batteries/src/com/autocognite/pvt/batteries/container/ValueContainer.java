@@ -2,7 +2,7 @@ package com.autocognite.pvt.batteries.container;
 
 import java.util.Map;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 
 public interface ValueContainer<T> extends ReadWriteContainer<T, Value>, Cloneable {
 

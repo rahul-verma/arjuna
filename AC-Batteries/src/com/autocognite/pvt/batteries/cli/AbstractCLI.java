@@ -27,8 +27,8 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
-import com.autocognite.batteries.console.Console;
-import com.autocognite.batteries.util.SystemBatteries;
+import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.utils.SystemBatteries;
 
 public abstract class AbstractCLI implements CLI {
 

@@ -20,8 +20,8 @@ package com.autocognite.pvt.unitee.lib.engine;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.util.ThreadBatteries;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.utils.ThreadBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;

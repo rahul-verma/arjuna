@@ -1,6 +1,6 @@
 package com.autocognite.pvt.unitee.reporter.lib.event;
 
-import com.autocognite.batteries.util.ExceptionBatteries;
+import com.autocognite.arjuna.utils.ExceptionBatteries;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
 import com.autocognite.pvt.batteries.value.BooleanValue;
 import com.autocognite.pvt.batteries.value.StringValue;

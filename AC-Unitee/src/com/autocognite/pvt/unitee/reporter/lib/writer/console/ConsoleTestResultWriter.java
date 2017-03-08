@@ -28,9 +28,9 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
-import com.autocognite.batteries.console.Console;
-import com.autocognite.batteries.util.DataBatteries;
+import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.TestAttribute;

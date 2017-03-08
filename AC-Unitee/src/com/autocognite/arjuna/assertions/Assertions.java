@@ -23,10 +23,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import com.autocognite.arjuna.checks.Checks;
 import com.autocognite.arjuna.interfaces.Check;
-import com.autocognite.batteries.checks.Checks;
-import com.autocognite.batteries.util.DataBatteries;
-import com.autocognite.batteries.util.StackBatteries;
+import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.StackBatteries;
 import com.autocognite.pvt.unitee.validator.lib.check.DefaultCheck;
 
 public class Assertions {

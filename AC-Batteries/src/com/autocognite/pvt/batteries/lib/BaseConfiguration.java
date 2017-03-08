@@ -1,9 +1,9 @@
 package com.autocognite.pvt.batteries.lib;
 
-import com.autocognite.batteries.value.StringKeyValueContainer;
 import com.autocognite.pvt.batteries.config.Configuration;
+import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 
-public class BaseConfiguration extends StringKeyValueContainer implements Configuration {
+public class BaseConfiguration extends DefaultStringKeyValueContainer implements Configuration {
 
 	public BaseConfiguration clone() {
 		BaseConfiguration map = new BaseConfiguration();

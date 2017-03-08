@@ -6,8 +6,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.autocognite.batteries.util.DataBatteries;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.arjuna.utils.DataBatteries;
 
 public class ValueFactory {
 	private static NullValue nullValue = new NullValue();

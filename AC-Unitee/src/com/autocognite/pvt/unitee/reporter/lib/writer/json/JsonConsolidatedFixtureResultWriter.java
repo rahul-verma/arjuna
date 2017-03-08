@@ -20,7 +20,7 @@ package com.autocognite.pvt.unitee.reporter.lib.writer.json;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.batteries.config.RunConfig;
+import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
 
 public class JsonConsolidatedFixtureResultWriter extends JsonConsolidatedResultWriter<TestResult> {

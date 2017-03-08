@@ -25,8 +25,8 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.autocognite.batteries.console.Console;
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.TestPickerProperty;
 import com.autocognite.pvt.batteries.cli.AbstractCliConfigurator;

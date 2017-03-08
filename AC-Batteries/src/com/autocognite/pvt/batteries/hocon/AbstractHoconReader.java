@@ -10,7 +10,7 @@ import org.apache.poi.util.SystemOutLogger;
 
 import java.util.Set;
 
-import com.autocognite.batteries.value.Value;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.enums.HoconSyntaxType;
 import com.autocognite.pvt.batteries.value.AnyRefListValue;
 import com.autocognite.pvt.batteries.value.AnyRefValue;
