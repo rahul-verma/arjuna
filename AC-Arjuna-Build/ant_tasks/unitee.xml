@@ -10,9 +10,9 @@ simple example build file
 	<!-- ===================================== AC-Batteries =================================================== -->
 	<!-- ======================================================================================== -->
 
-	<property name="unitee.core.proj.name" value="AutoCognite-Arjuna-Unitee" />
+	<property name="unitee.core.proj.name" value="AC-Unitee" />
 	<property name="unitee.core.name" value="autocognite-unitee" />
-	<property name="unitee.core.github.rep.name" value="autocognite-unitee" />
+	<property name="unitee.core.github.rep.name" value="arjuna" />
 	<property name="root.unitee.core.dir" value="${all.sources.dir}/${unitee.core.github.rep.name}" />
 	<property name="proj.unitee.core.dir" value="${root.unitee.core.dir}/${unitee.core.proj.name}" />
 	<property name="src.unitee.core.dir" location="${proj.unitee.core.dir}/src" />

@@ -62,7 +62,7 @@ import com.typesafe.config.ConfigObject;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.1b3";
+	private String version = "0.1b1";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -81,7 +81,7 @@ public enum ArjunaSingleton {
 	private CLIConfigurator cliConfigurator = null;
 	private Session session = null;
 	
-	private String name = "Arjuna CE";
+	private String name = "Arjuna Pro Platform Edition";
 	
 	ComponentIntegrator integrator;
 	
@@ -294,7 +294,7 @@ public enum ArjunaSingleton {
 		Console.marker(60);
 		Console.displayPaddedKeyValue("Product Name", this.name);
 		Console.displayPaddedKeyValue("Version", this.version);
-		Console.displayPaddedKeyValue("Website", "www.autocognite.com");
+		Console.displayPaddedKeyValue("Website", "www.arjunapro.com");
 		Console.displayPaddedKeyValue("Contact", "support@autocognite.com");
 		Console.marker(60);	
 	}

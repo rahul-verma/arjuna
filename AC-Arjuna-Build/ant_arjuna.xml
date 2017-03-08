@@ -2,8 +2,7 @@
 <project name="arjuna" default="build" basedir=".">
 	<import file="./ant_tasks/global.xml"/>
 	<import file="./ant_tasks/batteries.xml"/>
-	<import file="./ant_tasks/unitee-core.xml"/>
-	<import file="./ant_tasks/cli.xml"/>
+	<import file="./ant_tasks/unitee.xml"/>
 	<import file="./ant_tasks/arjuna.xml"/>
 	<import file="./ant_tasks/obfuscate.xml"/>
 	<description>
@@ -27,9 +26,6 @@ simple example build file
 	   	</antcall>
 		<antcall>
 	    	<target name="unitee.core_build"/>
-	   	</antcall>
-		<antcall>
-	    	<target name="cli_build"/>
 	   	</antcall>
 		<antcall>
 	    	<target name="arjuna_compile"/>

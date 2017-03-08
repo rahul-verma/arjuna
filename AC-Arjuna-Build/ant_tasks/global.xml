@@ -13,7 +13,7 @@ simple example build file
 	<property name="3rd_party_batteries_jars" location="/Users/rahulverma/Documents/Dropbox/_jars/batteries_jars">
 	</property>
 
-	<property name="autocognite.build.version" value="0.1b3" />
+	<property name="autocognite.build.version" value="0.1b1" />
 
 	<property name="autocognite.dir" value="/Users/rahulverma/Documents/_autocognite" />
 	<property name="all.sources.dir" location="/Users/rahulverma/Documents/coding_workbench/eclipse_java_ws_rep_clone" />
@@ -30,7 +30,7 @@ simple example build file
 	<property name="current.dist.private.tools.dir" value="${current.dist.private.dir}/tools" />
 	<property name="source.private.examples.dir" value="${all.sources.dir}/unitee/UniTEE-Pro/examples" />
 
-	<property name="source.general.acprops.file" value="${all.sources.dir}/unitee/UniTEE-Pro/arjuna.conf" />
+	<property name="source.general.acprops.file" value="${all.sources.dir}/arjuna/AC-Arjuna-Build/arjuna.conf" />
 
 	<property name="current.dist.public.dir" location="${current.dist.dir}/public/AutoCognite-${autocognite.build.version}" />
 	<property name="current.dist.public.tools.dir" location="${current.dist.public.dir}" />
