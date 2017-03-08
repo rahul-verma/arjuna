@@ -16,14 +16,20 @@ public class DependencyUtils {
 	private static Logger logger = Logger.getLogger(RunConfig.getCentralLogName());
 
 	public static Class<?>[] getDependencyClasses(String testObjectQualifiedName, ClassDependency depAnn) throws Exception{
-		Class<?>[] depClasses = depAnn.testClasses();
-		if (depClasses.length == 0){
-			logger.error(String.format("A dependency defined for %s is invalid.", testObjectQualifiedName));
-			logger.error("Dependency Target Type: TEST_CLASSES");
-			logger.error("Error: Provided empty \"testClasses\" attribute for @Dependency annotation");
-			logger.error("Solution: Provide \"testClasses\" attribute for @Dependency annotation with a class array of length > 0");
-			logger.error("Exiting...");
-			System.exit(1);
+		Class<?>[] depClasses = null;
+		if (depAnn.testClasses().length == 0){
+			if (depAnn.value().length == 0){
+				logger.error(String.format("A dependency defined for %s is invalid.", testObjectQualifiedName));
+				logger.error("Dependency Target Type: TEST_CLASSES");
+				logger.error("Error: Provided empty \"testClasses\" attribute for @Dependency annotation");
+				logger.error("Solution: Provide \"testClasses\" attribute for @Dependency annotation with a class array of length > 0");
+				logger.error("Exiting...");
+				System.exit(1);
+			} else {
+				depClasses = depAnn.value();
+			}
+		} else {
+			depClasses = depAnn.testClasses();
 		}
 		
 		return depClasses;
@@ -35,8 +41,8 @@ public class DependencyUtils {
 			if (depAnn.value().length == 0){
 				logger.error(String.format("A dependency defined for %s is invalid.", testObjectQualifiedName));
 				logger.error("Dependency Target Type: TEST_METHODS");
-				logger.error("Error: Provided empty test method names array for @Dependency annotation");
-				logger.error("Solution: Provide either value or \"testMethods\" attribute for @Dependency annotation with a string array of length > 0");
+				logger.error("Error: Provided empty test method names array for @MethodDependency annotation");
+				logger.error("Solution: Provide either value or \"testMethods\" attribute for @MethodsDependency annotation with a string array of length > 0");
 				logger.error("Exiting...");
 				System.exit(1);
 			} else {
