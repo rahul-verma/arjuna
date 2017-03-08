@@ -106,11 +106,11 @@ public class UniteeCLI extends AbstractCLI {
 		"run-id",
 		"Name of current run",
 		"A name to identify a run in Unitee.");	
-		
-		addSingleArgSwitch("s",
-		"session-name",
-		"Name of Session Template",
-		"Unitee Session template to be used for this run.");	
+//		
+//		addSingleArgSwitch("s",
+//		"session-name",
+//		"Name of Session Template",
+//		"Unitee Session template to be used for this run.");	
 	}
 
 	@Override

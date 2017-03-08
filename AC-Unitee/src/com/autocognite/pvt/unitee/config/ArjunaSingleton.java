@@ -62,7 +62,7 @@ import com.typesafe.config.ConfigObject;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.1b1";
+	private String version = "0.0b1";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -181,11 +181,6 @@ public enum ArjunaSingleton {
 		updateOptions.put(
 				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.SESSION_NAME),
 				new StringValue("msession")
-		);
-		
-		updateOptions.put(
-				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.REPORT_MODE),
-				new EnumValue<ReportMode>(ReportMode.MINIMAL)
 		);
 		
 		Batteries.processConfigProperties(updateOptions);

@@ -244,10 +244,7 @@ public class DependencyTreeBuilder {
 			}			
 			TestMethodNode targetNode = nodeMap.get(name);
 			TestMethodNode sourceNode = this.allNodesMap.get(name);
-			if (ArjunaInternal.displayExecTreeLoadingInfo){
-				logger.debug("Printing edges of node: " + sourceNode.getName());
-				sourceNode.enumerateEdges();
-			}
+
 			for (TestNode edge: sourceNode.getEdges()){
 				if (ArjunaInternal.displayExecTreeLoadingInfo){
 					logger.debug("Edge: " + edge);
