@@ -6,14 +6,14 @@ import java.util.Iterator;
 
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataSource;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.pvt.batteries.databroker.DataRecordContainer;
 
 public class DataMethodDataSource implements DataSource{
 	private static Object[][] sampleArr = {};
 	private Method dataMethod = null;
 	DataRecordContainer recordContainer =  null;
-	Iterator<ReadOnlyDataRecord> iter = null;
+	Iterator<DataRecord> iter = null;
 	
 	public DataMethodDataSource(Method dataMethod) throws Exception{
 		if (Modifier.isStatic(dataMethod.getModifiers())){
@@ -34,7 +34,7 @@ public class DataMethodDataSource implements DataSource{
 		iter = recordContainer.iterator();
 	}
 	
-	public ReadOnlyDataRecord next() throws DataSourceFinishedException{
+	public DataRecord next() throws DataSourceFinishedException{
 		if (iter.hasNext()){
 			return iter.next();
 		} else {

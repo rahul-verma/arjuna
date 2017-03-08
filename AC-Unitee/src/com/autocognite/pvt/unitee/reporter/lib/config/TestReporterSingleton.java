@@ -26,6 +26,8 @@ import java.util.Map;
 import java.util.Set;
 
 import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.internal.arjuna.enums.TestAttribute;
+import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
@@ -33,8 +35,6 @@ import com.autocognite.pvt.arjuna.enums.FixtureResultPropertyType;
 import com.autocognite.pvt.arjuna.enums.IssueAttribute;
 import com.autocognite.pvt.arjuna.enums.ReportMode;
 import com.autocognite.pvt.arjuna.enums.StepResultAttribute;
-import com.autocognite.pvt.arjuna.enums.TestAttribute;
-import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.arjuna.enums.TestReportSection;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultType;

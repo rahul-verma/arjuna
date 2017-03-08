@@ -21,7 +21,7 @@ package com.autocognite.pvt.unitee.core.lib.metadata;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.enums.TestObjectType;
+import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables;

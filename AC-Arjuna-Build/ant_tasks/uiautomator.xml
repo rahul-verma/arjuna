@@ -1,5 +1,6 @@
 <?xml version= "1.0"?>
 <project name="uiautomator" default="uiautomator_build" basedir=".">
+	<import file="./ant_tasks/global.xml"/>
 	<description>
 simple example build file
 </description>

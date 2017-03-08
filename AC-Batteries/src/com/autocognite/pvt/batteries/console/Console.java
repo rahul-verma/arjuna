@@ -1,4 +1,4 @@
-package com.autocognite.arjuna.console;
+package com.autocognite.pvt.batteries.console;
 
 import org.apache.log4j.Level;
 

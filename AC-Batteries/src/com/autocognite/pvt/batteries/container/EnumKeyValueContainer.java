@@ -1,6 +1,6 @@
 package com.autocognite.pvt.batteries.container;
 
-import com.autocognite.pvt.batteries.value.ValueType;
+import com.autocognite.arjuna.enums.ValueType;
 
 public abstract class EnumKeyValueContainer<T extends Enum<T>> extends BaseValueContainer<T> {
 

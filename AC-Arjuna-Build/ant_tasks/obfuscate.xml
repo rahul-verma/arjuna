@@ -10,7 +10,7 @@ simple example build file
 
 		<proguard allowaccessmodification="true" usemixedcaseclassnames="false" 
 			defaultpackage="" ignorewarnings="true" shrink="false" keepparameternames="true" 
-			skipnonpubliclibraryclasses="false" printseeds="obfuscateseeds.txt" 
+			skipnonpubliclibraryclasses="false" printseeds="obfuscateseeds.txt"
 			printusage="obfuscateusage.txt" printmapping="obfuscatemapping.txt" 
 			repackageclasses="com.autocognite.pvt">
 
@@ -40,7 +40,7 @@ class files -->
 			<!-- don't obfuscate this method -->
 
 			<keepattribute name="*Annotation*" />
-
+			
 			<keep name="com.autocognite.batteries.**" access="public">
 				<method access="public" name="*" />
 				<method access="protected" name="*" />
@@ -76,6 +76,12 @@ class files -->
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
+			
+			<keep name="com.autocognite.internal.arjuna.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
 					
 			<keepclassmembers name="com.autocognite.pvt.arjuna.enums.**" access="public">
 				<field name="*" />
@@ -94,6 +100,9 @@ class files -->
 			<keepattribute name="Exceptions" />
 			<keepattribute name="Signature" />
 			<keepattribute name="InnerClasses" />
+			<keepattribute name="LocalVariableTable" />
+			<keepattribute name="LocalVariableTypeTable" />
+			<keepattribute name="MethodParameters" />
 
 		</proguard>
 	</target>

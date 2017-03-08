@@ -2,12 +2,12 @@ package com.autocognite.pvt.unitee.reporter.lib.event;
 
 import java.util.HashMap;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
 import com.autocognite.pvt.batteries.container.EnumKeyValueContainer;
 import com.autocognite.pvt.batteries.value.BooleanValue;
 import com.autocognite.pvt.batteries.value.StringValue;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class EventProperties 
 				extends EnumKeyValueContainer<EventAttribute>{

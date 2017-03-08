@@ -27,13 +27,13 @@ import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.console.Console;
 import com.autocognite.arjuna.utils.ThreadBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.ReportFormat;
 import com.autocognite.pvt.arjuna.enums.TestLanguage;
 import com.autocognite.pvt.arjuna.interfaces.InternlReportableObserver;
+import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.config.ArjunaSingleton;
 import com.autocognite.pvt.unitee.lib.engine.TestEngine;
 import com.autocognite.pvt.unitee.lib.engine.TestSessionRunner;

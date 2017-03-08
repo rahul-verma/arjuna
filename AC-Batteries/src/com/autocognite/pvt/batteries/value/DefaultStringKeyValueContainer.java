@@ -1,9 +1,11 @@
 package com.autocognite.pvt.batteries.value;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.StringKeyValueContainer;
 import com.autocognite.pvt.batteries.container.BaseValueContainer;
+import com.autocognite.pvt.batteries.container.ValueContainer;
 
-public class DefaultStringKeyValueContainer extends BaseValueContainer<String> implements StringKeyValueContainer{
+public class DefaultStringKeyValueContainer extends BaseValueContainer<String> implements ValueContainer<String>, StringKeyValueContainer{
 
 	@Override
 	public ValueType valueType(String strKey) {

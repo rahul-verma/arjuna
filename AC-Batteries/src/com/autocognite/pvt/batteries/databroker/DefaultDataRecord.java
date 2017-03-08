@@ -22,12 +22,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.pvt.batteries.container.ReadOnlyContainer;
 import com.autocognite.pvt.batteries.value.AnyRefValue;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 
-public class DataRecord extends DefaultStringKeyValueContainer implements ReadOnlyDataRecord {
+public class DefaultDataRecord extends DefaultStringKeyValueContainer implements ReadOnlyContainer<String, Value>, DataRecord {
 	HashMap<Integer, String> indexToKeyMap = new HashMap<Integer, String>();
 	private int counter = 0;
 
@@ -41,35 +42,35 @@ public class DataRecord extends DefaultStringKeyValueContainer implements ReadOn
 		counter += 1;
 	}
 
-	public DataRecord() {
+	public DefaultDataRecord() {
 
 	}
 
-	public DataRecord(List<String> names, ArrayList<Object> values) {
+	public DefaultDataRecord(List<String> names, ArrayList<Object> values) {
 		for (int i = 0; i < names.size(); i++) {
 			this.add(names.get(i), values.get(i));
 		}
 	}
 
-	public DataRecord(String[] names, Object[] values) {
+	public DefaultDataRecord(String[] names, Object[] values) {
 		for (int i = 0; i < names.length; i++) {
 			this.add(names[i], values[i]);
 		}
 	}
 
-	public DataRecord(HashMap<String, Object> nvMap) {
+	public DefaultDataRecord(HashMap<String, Object> nvMap) {
 		for (String name : nvMap.keySet()) {
 			this.add(name, nvMap.get(name));
 		}
 	}
 
-	public DataRecord(Object[] record) {
+	public DefaultDataRecord(Object[] record) {
 		for (Object obj : record) {
 			this.add(null, obj);
 		}
 	}
 
-	public DataRecord(String[] headers, List<Object> objList) {
+	public DefaultDataRecord(String[] headers, List<Object> objList) {
 		for (int i = 0; i < headers.length; i++) {
 			this.add(headers[i], objList.get(i));
 		}

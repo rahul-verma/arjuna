@@ -1,17 +1,16 @@
-package com.autocognite.arjuna.utils;
+package com.autocognite.pvt.batteries.property;
 
 import java.io.File;
 import java.lang.reflect.Method;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.lib.UserDefinedProperty;
-import com.autocognite.pvt.batteries.property.ConfigProperty;
-import com.autocognite.pvt.batteries.property.ConfigPropertyBuilder;
 import com.autocognite.pvt.batteries.value.StringListValue;
 import com.autocognite.pvt.batteries.value.StringValue;
 import com.autocognite.pvt.batteries.value.ValueFactory;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class ConfigPropertyBatteries {
 

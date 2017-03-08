@@ -3,6 +3,7 @@ package com.autocognite.pvt.batteries.value;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 
 public class EnumListValue<T extends Enum<T>> extends AbstractValue {

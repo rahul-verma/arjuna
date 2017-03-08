@@ -4,7 +4,7 @@ import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.interfaces.DataReference;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.utils.ThreadBatteries;
 import com.autocognite.pvt.batteries.config.Configuration;
@@ -71,7 +71,7 @@ public class RunConfig {
 		return RunConfig.getCentralProperty(BatteriesPropertyType.DIRECTORY_LOG).asString();
 	}
 
-	public static ReadOnlyDataRecord getDataRecord(String refFileName, String key) throws Exception {
+	public static DataRecord getDataRecord(String refFileName, String key) throws Exception {
 		return BatteriesSingleton.INSTANCE.getDataRecord(refFileName, key);
 	}
 

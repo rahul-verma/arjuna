@@ -2,12 +2,12 @@ package com.autocognite.pvt.unitee.reporter.lib.step;
 
 import java.util.HashMap;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.StepResultAttribute;
 import com.autocognite.pvt.arjuna.enums.StepResultType;
 import com.autocognite.pvt.batteries.container.EnumKeyValueContainer;
 import com.autocognite.pvt.batteries.value.IntValue;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class StepResultProperties 
 				extends EnumKeyValueContainer<StepResultAttribute>{

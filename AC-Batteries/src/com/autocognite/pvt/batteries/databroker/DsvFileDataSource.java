@@ -20,7 +20,7 @@ package com.autocognite.pvt.batteries.databroker;
 
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataSource;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.pvt.batteries.filehandler.FileLine2ArrayReader;
 
 public class DsvFileDataSource implements DataSource {
@@ -36,13 +36,13 @@ public class DsvFileDataSource implements DataSource {
 		this(path, "\\t");
 	}
 
-	public synchronized ReadOnlyDataRecord next() throws DataSourceFinishedException {
+	public synchronized DataRecord next() throws DataSourceFinishedException {
 		String[] dataRecord = reader.next();
 
 		if (dataRecord == null) {
 			throw new DataSourceFinishedException("Records Finished.");
 		} else {
-			return new DataRecord(this.headers, dataRecord);
+			return new DefaultDataRecord(this.headers, dataRecord);
 		}
 	}
 

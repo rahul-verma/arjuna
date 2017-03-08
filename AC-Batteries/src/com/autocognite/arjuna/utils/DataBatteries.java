@@ -26,7 +26,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import com.autocognite.arjuna.console.Console;
+import com.autocognite.pvt.batteries.console.Console;
 
 public class DataBatteries {
 

@@ -3,8 +3,8 @@ package com.autocognite.pvt.unitee.testobject.lib.loader.session;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.console.Console;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.hocon.HoconFileReader;
 import com.autocognite.pvt.batteries.hocon.HoconReader;
 import com.google.gson.JsonArray;

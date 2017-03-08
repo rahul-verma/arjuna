@@ -2,6 +2,7 @@ package com.autocognite.pvt.unitee.reporter.lib.fixture;
 
 import java.util.HashMap;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.FixtureResultPropertyType;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
@@ -9,7 +10,6 @@ import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.batteries.container.EnumKeyValueContainer;
 import com.autocognite.pvt.batteries.value.StringValue;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class FixtureResultProperties 
 				extends EnumKeyValueContainer<FixtureResultPropertyType>{

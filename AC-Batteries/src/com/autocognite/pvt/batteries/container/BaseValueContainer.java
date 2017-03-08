@@ -3,6 +3,8 @@ package com.autocognite.pvt.batteries.container;
 import java.util.List;
 import java.util.Map;
 
+import com.autocognite.arjuna.enums.ValueType;
+import com.autocognite.arjuna.interfaces.StringKeyValueContainer;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.value.AnyRefValue;
 import com.autocognite.pvt.batteries.value.BooleanValue;
@@ -14,7 +16,6 @@ import com.autocognite.pvt.batteries.value.NumberListValue;
 import com.autocognite.pvt.batteries.value.NumberValue;
 import com.autocognite.pvt.batteries.value.StringListValue;
 import com.autocognite.pvt.batteries.value.StringValue;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public abstract class BaseValueContainer<T> extends BaseContainer<T, Value> implements ValueContainer<T> {
 	public static NotSetValue notSetValue = new NotSetValue();

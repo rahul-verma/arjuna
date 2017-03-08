@@ -1,8 +1,8 @@
 package com.autocognite.pvt.batteries.property;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.enums.ConfigPropertyLevel;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class ConfigPropertyBuilder<T extends Enum<T>> {
 	private String definer = "UserDefined";

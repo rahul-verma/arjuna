@@ -1,4 +1,4 @@
-package com.autocognite.arjuna.enums;
+package com.autocognite.internal.arjuna.enums;
 
 public enum TestObjectType {
 	TEST_CLASS,

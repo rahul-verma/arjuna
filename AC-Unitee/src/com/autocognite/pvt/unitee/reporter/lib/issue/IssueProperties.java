@@ -2,13 +2,13 @@ package com.autocognite.pvt.unitee.reporter.lib.issue;
 
 import java.util.HashMap;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.IssueAttribute;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;
 import com.autocognite.pvt.arjuna.enums.IssueType;
 import com.autocognite.pvt.batteries.container.EnumKeyValueContainer;
 import com.autocognite.pvt.batteries.value.StringValue;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class IssueProperties 
 				extends EnumKeyValueContainer<IssueAttribute>{

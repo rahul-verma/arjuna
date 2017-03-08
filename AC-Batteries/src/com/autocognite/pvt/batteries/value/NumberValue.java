@@ -1,5 +1,6 @@
 package com.autocognite.pvt.batteries.value;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 
 public class NumberValue extends AbstractValue {

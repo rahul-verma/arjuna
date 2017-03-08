@@ -23,7 +23,7 @@ import java.util.Set;
 
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataSource;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.pvt.batteries.filehandler.IniFileReader;
 
 public class IniFileDataSource implements DataSource {
@@ -38,9 +38,9 @@ public class IniFileDataSource implements DataSource {
 	}
 
 	@Override
-	public synchronized ReadOnlyDataRecord next() throws DataSourceFinishedException {
+	public synchronized DataRecord next() throws DataSourceFinishedException {
 		if (iter.hasNext()) {
-			return new DataRecord(this.reader.getSectionDataObjects((String) iter.next()));
+			return new DefaultDataRecord(this.reader.getSectionDataObjects((String) iter.next()));
 		} else {
 			throw new DataSourceFinishedException("Records Finished.");
 		}

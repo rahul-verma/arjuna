@@ -1,18 +1,19 @@
 package com.autocognite.pvt.unitee.core.lib.testvars;
 
-import com.autocognite.arjuna.enums.TestObjectType;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.enums.ValueType;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
+import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
+import com.autocognite.internal.arjuna.enums.TestObjectType;
+import com.autocognite.pvt.batteries.container.ReadOnlyContainer;
 import com.autocognite.pvt.batteries.container.ValueContainer;
-import com.autocognite.pvt.batteries.databroker.DataRecord;
+import com.autocognite.pvt.batteries.databroker.DefaultDataRecord;
 import com.autocognite.pvt.batteries.value.IntValue;
 import com.autocognite.pvt.batteries.value.StringValue;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public interface InternalTestObjectProperties 
-				extends TestObjectProperties, ValueContainer<TestObjectAttribute>{
+				extends TestObjectProperties, ValueContainer<TestObjectAttribute>, ReadOnlyContainer<TestObjectAttribute, Value>{
 	
 	void setObjectId(String name) throws Exception;
 	
@@ -64,7 +65,7 @@ public interface InternalTestObjectProperties
 
 	void setThreadId(String id) throws Exception;
 	
-	void setDataRecord(DataRecord dataRecord) throws Exception;
+	void setDataRecord(DefaultDataRecord dataRecord) throws Exception;
 	
 	void setSessionNodeName(Value value) throws Exception;	
 	void setSessionNodeName(String name) throws Exception;		

@@ -20,14 +20,14 @@ package com.autocognite.pvt.unitee.lib.strings;
 
 import java.util.ArrayList;
 
-import com.autocognite.arjuna.enums.TestObjectType;
+import com.autocognite.internal.arjuna.enums.TestAttribute;
+import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
+import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
 import com.autocognite.pvt.arjuna.enums.FixtureResultPropertyType;
 import com.autocognite.pvt.arjuna.enums.IssueAttribute;
 import com.autocognite.pvt.arjuna.enums.NamesContainerType;
 import com.autocognite.pvt.arjuna.enums.StepResultAttribute;
-import com.autocognite.pvt.arjuna.enums.TestAttribute;
-import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.UniteeComponent;
 import com.autocognite.pvt.batteries.ds.Name;

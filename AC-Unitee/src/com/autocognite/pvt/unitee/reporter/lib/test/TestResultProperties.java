@@ -2,6 +2,7 @@ package com.autocognite.pvt.unitee.reporter.lib.test;
 
 import java.util.HashMap;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
@@ -10,7 +11,6 @@ import com.autocognite.pvt.batteries.container.EnumKeyValueContainer;
 import com.autocognite.pvt.batteries.value.EnumValue;
 import com.autocognite.pvt.batteries.value.IntValue;
 import com.autocognite.pvt.batteries.value.StringValue;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class TestResultProperties 
 				extends EnumKeyValueContainer<TestResultAttribute>{

@@ -25,16 +25,16 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.TestPickerProperty;
 import com.autocognite.pvt.batteries.cli.AbstractCliConfigurator;
+import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 import com.autocognite.pvt.batteries.lib.ComponentIntegrator;
 import com.autocognite.pvt.batteries.value.StringListValue;
 import com.autocognite.pvt.batteries.value.ValueFactory;
-import com.autocognite.pvt.batteries.value.ValueType;
 import com.autocognite.pvt.unitee.config.ArjunaSingleton;
 
 public class UniteeCliConfigurator extends AbstractCliConfigurator {	

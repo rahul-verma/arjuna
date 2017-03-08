@@ -2,13 +2,14 @@ package com.autocognite.pvt.unitee.core.lib.testvars;
 
 import org.apache.poi.util.SystemOutLogger;
 
-import com.autocognite.arjuna.enums.TestObjectType;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.enums.ValueType;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
+import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.ArjunaInternal;
-import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.batteries.container.EnumKeyValueContainer;
-import com.autocognite.pvt.batteries.databroker.DataRecord;
+import com.autocognite.pvt.batteries.databroker.DefaultDataRecord;
 import com.autocognite.pvt.batteries.ds.Name;
 import com.autocognite.pvt.batteries.value.DoubleValue;
 import com.autocognite.pvt.batteries.value.EnumValue;
@@ -17,14 +18,13 @@ import com.autocognite.pvt.batteries.value.IntValue;
 import com.autocognite.pvt.batteries.value.LongValue;
 import com.autocognite.pvt.batteries.value.NotSetValue;
 import com.autocognite.pvt.batteries.value.StringValue;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class DefaultTestObjectProperties 
 				extends EnumKeyValueContainer<TestObjectAttribute>
 				implements InternalTestObjectProperties{
 		
 	private String objectId = null;
-	private ReadOnlyDataRecord dataRecord = null;
+	private DataRecord dataRecord = null;
 	
 	public DefaultTestObjectProperties(){
 
@@ -227,11 +227,11 @@ public class DefaultTestObjectProperties
 		this.setThreadId(new StringValue(id));
 	}
 	
-	public ReadOnlyDataRecord dataRecord() throws Exception{
+	public DataRecord dataRecord() throws Exception{
 		return dataRecord;
 	}
 	
-	public void setDataRecord(DataRecord dataRecord) throws Exception{
+	public void setDataRecord(DefaultDataRecord dataRecord) throws Exception{
 		this.dataRecord = dataRecord;
 	}
 	

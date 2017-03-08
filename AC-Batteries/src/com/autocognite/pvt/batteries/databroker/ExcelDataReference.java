@@ -22,11 +22,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.autocognite.arjuna.interfaces.DataReference;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 
 public class ExcelDataReference implements DataReference {
-	HashMap<String, ReadOnlyDataRecord> map = new HashMap<String, ReadOnlyDataRecord>();
+	HashMap<String, DataRecord> map = new HashMap<String, DataRecord>();
 	ExcelFileLine2ArrayReader reader = null;
 	String keyColumn = null;
 	int keyIndex = -1;
@@ -64,14 +64,14 @@ public class ExcelDataReference implements DataReference {
 		String keyColumnValue = null;
 		while (dataRecord != null) {
 			keyColumnValue = (String) dataRecord.get(keyIndex);
-			DataRecord data = new DataRecord(this.headers, dataRecord);
+			DefaultDataRecord data = new DefaultDataRecord(this.headers, dataRecord);
 			map.put(keyColumnValue.toUpperCase(), data);
 			dataRecord = reader.next();
 		}
 		reader.close();
 	}
 
-	public synchronized ReadOnlyDataRecord getRecord(String key) throws Exception {
+	public synchronized DataRecord getRecord(String key) throws Exception {
 		if (map.containsKey(key.toUpperCase())) {
 			return map.get(key.toUpperCase());
 		} else {

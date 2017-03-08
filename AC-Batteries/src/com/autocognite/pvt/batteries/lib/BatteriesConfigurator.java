@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 import com.autocognite.arjuna.enums.LoggingLevel;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.arjuna.utils.ConfigPropertyBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.ds.Message;
 import com.autocognite.pvt.batteries.ds.MessagesContainer;
@@ -16,6 +15,7 @@ import com.autocognite.pvt.batteries.hocon.HoconReader;
 import com.autocognite.pvt.batteries.hocon.HoconResourceReader;
 import com.autocognite.pvt.batteries.integration.AbstractComponentConfigurator;
 import com.autocognite.pvt.batteries.property.ConfigProperty;
+import com.autocognite.pvt.batteries.property.ConfigPropertyBatteries;
 import com.autocognite.pvt.batteries.property.ConfigPropertyBuilder;
 
 public class BatteriesConfigurator extends AbstractComponentConfigurator {

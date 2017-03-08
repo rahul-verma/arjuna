@@ -3,9 +3,9 @@ package com.autocognite.pvt.unitee.testobject.lib.loader.group;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.autocognite.arjuna.console.Console;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.hocon.HoconFileReader;
 import com.autocognite.pvt.batteries.hocon.HoconReader;
 import com.autocognite.pvt.batteries.hocon.HoconStringReader;

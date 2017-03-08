@@ -20,19 +20,19 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.internal.arjuna.enums.TestAttribute;
+import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
 import com.autocognite.pvt.arjuna.enums.FixtureResultPropertyType;
 import com.autocognite.pvt.arjuna.enums.IssueAttribute;
 import com.autocognite.pvt.arjuna.enums.StepResultAttribute;
-import com.autocognite.pvt.arjuna.enums.TestAttribute;
-import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.arjuna.enums.TestReportSection;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
@@ -381,7 +381,7 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult> {
 		
 		if (this.shouldIncludeDataRecord){
 			StringBuilder ub = new StringBuilder();
-			ReadOnlyDataRecord dr = reportable.testVars().dataRecord();
+			DataRecord dr = reportable.testVars().dataRecord();
 			if (dr != null){
 				Map<String,Value> dmap = dr.items();
 				if (dmap.size() == 0){

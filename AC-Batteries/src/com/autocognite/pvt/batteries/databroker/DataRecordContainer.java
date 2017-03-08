@@ -21,12 +21,12 @@ package com.autocognite.pvt.batteries.databroker;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.pvt.batteries.enums.DataRecordOrder;
 
 public class DataRecordContainer {
 	private DataRecordOrder order = DataRecordOrder.ORDERED;
-	private ArrayList<ReadOnlyDataRecord> queue = new ArrayList<ReadOnlyDataRecord>();
+	private ArrayList<DataRecord> queue = new ArrayList<DataRecord>();
 	private String[] headers = null;
 
 	public DataRecordContainer(DataRecordOrder order) {
@@ -45,39 +45,39 @@ public class DataRecordContainer {
 		this.headers = names;
 	}
 
-	public void add(ReadOnlyDataRecord record) {
+	public void add(DataRecord record) {
 		this.queue.add(record);
 	}
 
 	public void add(Object[] record) {
 		if (this.headers == null) {
-			this.queue.add(new DataRecord(record));
+			this.queue.add(new DefaultDataRecord(record));
 		} else {
-			this.queue.add(new DataRecord(headers, record));
+			this.queue.add(new DefaultDataRecord(headers, record));
 		}
 	}
 
 	public void addAll(Object[][] records) {
 		if (this.headers == null) {
 			for (Object[] record : records) {
-				this.queue.add(new DataRecord(record));
+				this.queue.add(new DefaultDataRecord(record));
 			}
 		} else {
 			for (Object[] record : records) {
-				this.queue.add(new DataRecord(headers, record));
+				this.queue.add(new DefaultDataRecord(headers, record));
 			}
 		}
 	}
 
-	public ReadOnlyDataRecord get(int index) {
+	public DataRecord get(int index) {
 		return this.queue.get(index);
 	}
 
-	public ArrayList<ReadOnlyDataRecord> getAll() {
+	public ArrayList<DataRecord> getAll() {
 		return queue;
 	}
 
-	public Iterator<ReadOnlyDataRecord> iterator() {
+	public Iterator<DataRecord> iterator() {
 		return queue.iterator();
 	}
 

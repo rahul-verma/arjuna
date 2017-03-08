@@ -14,7 +14,7 @@ public interface TestVariables {
 
 	StringKeyValueContainer udv() throws Exception;
 
-	ReadOnlyDataRecord dataRecord();
+	DataRecord dataRecord();
 
 	DataReference dataRef(String refName) throws Exception;
 	

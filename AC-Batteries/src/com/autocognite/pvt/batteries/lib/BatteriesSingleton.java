@@ -25,7 +25,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataReference;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.pvt.batteries.databroker.DataReferenceFactory;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 
@@ -52,7 +52,7 @@ public enum BatteriesSingleton {
 		}
 	}
 
-	public synchronized ReadOnlyDataRecord getDataRecord(String refFileName, String key) throws Exception {
+	public synchronized DataRecord getDataRecord(String refFileName, String key) throws Exception {
 		DataReference ref = this.dataReferences.get(refFileName.toUpperCase());
 		if (ref == null) {
 			throw new Exception(

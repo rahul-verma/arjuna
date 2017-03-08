@@ -1,7 +1,7 @@
 package com.autocognite.pvt.unitee.testobject.lib.interfaces;
 
-import com.autocognite.arjuna.enums.TestObjectType;
 import com.autocognite.arjuna.interfaces.TestVariables;
+import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
 
 public interface TestObject {

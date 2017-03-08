@@ -2,17 +2,17 @@ package com.autocognite.pvt.unitee.core.lib.datasource;
 
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataSource;
-import com.autocognite.pvt.batteries.databroker.DataRecord;
+import com.autocognite.pvt.batteries.databroker.DefaultDataRecord;
 
 public class SingleDataRecordSource implements DataSource{
-	private DataRecord record = null;
+	private DefaultDataRecord record = null;
 	private boolean done = false;
 	
 	public SingleDataRecordSource(String[] headers, String[] values) throws Exception{
 		if (headers.length == 0){
-			record = new DataRecord(values);
+			record = new DefaultDataRecord(values);
 		} else {
-			record = new DataRecord(headers, values);
+			record = new DefaultDataRecord(headers, values);
 		}
 	}
 	
@@ -20,7 +20,7 @@ public class SingleDataRecordSource implements DataSource{
 		// Do nothing
 	}
 	
-	public DataRecord next() throws DataSourceFinishedException{
+	public DefaultDataRecord next() throws DataSourceFinishedException{
 		if (done){
 			throw new DataSourceFinishedException("Done");
 		} else {

@@ -2,15 +2,15 @@ package com.autocognite.pvt.unitee.core.lib.datasource;
 
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataSource;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
-import com.autocognite.pvt.batteries.databroker.DataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
+import com.autocognite.pvt.batteries.databroker.DefaultDataRecord;
 
 public class DummyDataSource implements DataSource{
 	boolean done = false;
-	static DataRecord record = new DataRecord();
+	static DefaultDataRecord record = new DefaultDataRecord();
 
 	@Override
-	public ReadOnlyDataRecord next() throws DataSourceFinishedException {
+	public DataRecord next() throws DataSourceFinishedException {
 		if (done){
 			throw new DataSourceFinishedException("Done");
 		} else {

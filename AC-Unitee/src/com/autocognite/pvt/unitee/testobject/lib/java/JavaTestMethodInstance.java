@@ -5,11 +5,11 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.enums.TestObjectType;
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataSource;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
+import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
@@ -140,7 +140,7 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 	public synchronized Test next() throws Exception {
 		try{
 //			logger.debug("Check if next Test Wrapper is available for: " + this.getTestContainer().getAuthoredTest().getUserTestClassQualifiedName() + "." + this.method.getName());
-			ReadOnlyDataRecord dataRecord = this.dataSource.next();
+			DataRecord dataRecord = this.dataSource.next();
 			this.currentTestNumber += 1;
 			String testObjectId = String.format("%s|TestNumber-%d", this.getObjectId(), this.currentTestNumber);
 			Test test = new JavaTest(currentTestNumber, testObjectId, this, methodDef);

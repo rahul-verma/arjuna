@@ -8,9 +8,10 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.container.BaseValueContainer;
-import com.autocognite.pvt.batteries.databroker.DataRecord;
+import com.autocognite.pvt.batteries.databroker.DefaultDataRecord;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.batteries.value.DoubleValue;
 import com.autocognite.pvt.batteries.value.EnumValue;
@@ -21,7 +22,6 @@ import com.autocognite.pvt.batteries.value.NotSetValue;
 import com.autocognite.pvt.batteries.value.NullValue;
 import com.autocognite.pvt.batteries.value.StringListValue;
 import com.autocognite.pvt.batteries.value.StringValue;
-import com.autocognite.pvt.batteries.value.ValueType;
 import com.autocognite.pvt.unitee.core.lib.testvars.DefaultTestObjectProperties;
 import com.autocognite.pvt.unitee.core.lib.testvars.DefaultTestProperties;
 import com.autocognite.pvt.unitee.core.lib.testvars.DefaultTestVariables;
@@ -67,7 +67,7 @@ public class BaseJsonResultDeserializer {
 
 			//Deserialize dataRecord
 			JsonObject drObj = root.get("dataRecord").getAsJsonObject();
-			DataRecord drProps = new DataRecord();
+			DefaultDataRecord drProps = new DefaultDataRecord();
 			processJsonObjectForEnumMap(drObj, drProps);
 			testVars.setDataRecord(drProps);
 		} catch (Exception e){

@@ -6,10 +6,10 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.enums.TestObjectType;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.arjuna.utils.ExceptionBatteries;
+import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
@@ -31,7 +31,7 @@ public class JavaTest extends BaseTestObject implements Test{
 	private JavaTestMethodDefinition methodDef;
 	private Fixture setUpTestFixture = null;
 	private Fixture tearDownTestFixture = null;
-	private ReadOnlyDataRecord dataRecord = null;
+	private DataRecord dataRecord = null;
 
 	public JavaTest(int testNumber, String testObjectId, JavaTestMethodInstance javaTestMethodInstance, JavaTestMethodDefinition methodDef) throws Exception{
 		super(testObjectId, TestObjectType.TEST);
@@ -241,7 +241,7 @@ public class JavaTest extends BaseTestObject implements Test{
 	}
 
 	@Override
-	public void setDataRecord(ReadOnlyDataRecord dataRecord) {
+	public void setDataRecord(DataRecord dataRecord) {
 		this.dataRecord = dataRecord;
 		this.getTestVariables().setDataRecord(dataRecord);
 	}

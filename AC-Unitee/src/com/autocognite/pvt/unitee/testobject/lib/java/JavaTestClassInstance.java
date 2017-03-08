@@ -9,8 +9,8 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.enums.TestObjectType;
 import com.autocognite.arjuna.interfaces.TestVariables;
+import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;

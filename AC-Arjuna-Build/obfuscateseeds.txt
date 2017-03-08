@@ -212,7 +212,7 @@ com.autocognite.arjuna.config.RunConfig: org.apache.log4j.Logger getCentralLogge
 com.autocognite.arjuna.config.RunConfig: org.apache.log4j.Level getDisplayLevel()
 com.autocognite.arjuna.config.RunConfig: org.apache.log4j.Level getLogLevel()
 com.autocognite.arjuna.config.RunConfig: java.lang.String getLogDir()
-com.autocognite.arjuna.config.RunConfig: com.autocognite.arjuna.interfaces.ReadOnlyDataRecord getDataRecord(java.lang.String,java.lang.String)
+com.autocognite.arjuna.config.RunConfig: com.autocognite.arjuna.interfaces.DataRecord getDataRecord(java.lang.String,java.lang.String)
 com.autocognite.arjuna.config.RunConfig: java.lang.String getConfiguredName(java.lang.String,java.lang.String)
 com.autocognite.arjuna.config.RunConfig: java.lang.String getProblemText(java.lang.String,java.lang.Object[])
 com.autocognite.arjuna.config.RunConfig: java.lang.String getComponentName(java.lang.String)
@@ -220,24 +220,6 @@ com.autocognite.arjuna.config.RunConfig: java.lang.String getInfoMessageText(jav
 com.autocognite.arjuna.config.RunConfig: com.autocognite.pvt.batteries.config.Configuration getCentralConfig()
 com.autocognite.arjuna.config.RunConfig: void registerNewThread(java.lang.String)
 com.autocognite.arjuna.config.RunConfig: com.autocognite.arjuna.interfaces.DataReference getDataReference(java.lang.String)
-com.autocognite.arjuna.console.Console
-com.autocognite.arjuna.console.Console: Console()
-com.autocognite.arjuna.console.Console: void init()
-com.autocognite.arjuna.console.Console: void display(java.lang.String)
-com.autocognite.arjuna.console.Console: void displayError(java.lang.String)
-com.autocognite.arjuna.console.Console: void displayOnSameLine(java.lang.String)
-com.autocognite.arjuna.console.Console: void marker(int)
-com.autocognite.arjuna.console.Console: void markerError(int)
-com.autocognite.arjuna.console.Console: void markerOnSameLine(int)
-com.autocognite.arjuna.console.Console: void marker(int,char)
-com.autocognite.arjuna.console.Console: void markerError(int,char)
-com.autocognite.arjuna.console.Console: void displayKeyValue(java.lang.String,java.lang.String)
-com.autocognite.arjuna.console.Console: void displayPaddedKeyValue(java.lang.String,java.lang.String)
-com.autocognite.arjuna.console.Console: void displayPaddedKeyValue(java.lang.String,java.lang.String,int)
-com.autocognite.arjuna.console.Console: void displayPaddedKeyValueError(java.lang.String,java.lang.String,int)
-com.autocognite.arjuna.console.Console: void displayExceptionBlock(java.lang.Throwable)
-com.autocognite.arjuna.console.Console: void setCentralLogLevel(org.apache.log4j.Level)
-com.autocognite.arjuna.console.Console: void displayPaddedKeyValueExceptionTrace(java.lang.String,java.lang.String,int)
 com.autocognite.arjuna.enums.Browser
 com.autocognite.arjuna.enums.Browser: com.autocognite.arjuna.enums.Browser CHROME
 com.autocognite.arjuna.enums.Browser: com.autocognite.arjuna.enums.Browser FIREFOX
@@ -285,15 +267,27 @@ com.autocognite.arjuna.enums.MobilePlatform: com.autocognite.arjuna.enums.Mobile
 com.autocognite.arjuna.enums.MobilePlatform: com.autocognite.arjuna.enums.MobilePlatform[] $VALUES
 com.autocognite.arjuna.enums.MobilePlatform: com.autocognite.arjuna.enums.MobilePlatform[] values()
 com.autocognite.arjuna.enums.MobilePlatform: com.autocognite.arjuna.enums.MobilePlatform valueOf(java.lang.String)
-com.autocognite.arjuna.enums.TestObjectType
-com.autocognite.arjuna.enums.TestObjectType: com.autocognite.arjuna.enums.TestObjectType TEST_CLASS
-com.autocognite.arjuna.enums.TestObjectType: com.autocognite.arjuna.enums.TestObjectType TEST_CLASS_INSTANCE
-com.autocognite.arjuna.enums.TestObjectType: com.autocognite.arjuna.enums.TestObjectType TEST_METHOD
-com.autocognite.arjuna.enums.TestObjectType: com.autocognite.arjuna.enums.TestObjectType TEST_METHOD_INSTANCE
-com.autocognite.arjuna.enums.TestObjectType: com.autocognite.arjuna.enums.TestObjectType TEST
-com.autocognite.arjuna.enums.TestObjectType: com.autocognite.arjuna.enums.TestObjectType[] $VALUES
-com.autocognite.arjuna.enums.TestObjectType: com.autocognite.arjuna.enums.TestObjectType[] values()
-com.autocognite.arjuna.enums.TestObjectType: com.autocognite.arjuna.enums.TestObjectType valueOf(java.lang.String)
+com.autocognite.arjuna.enums.ValueType
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType BOOLEAN
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType STRING
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType STRING_LIST
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType NULL
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType NUMBER
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType NUMBER_LIST
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType LIST
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType ANYREF
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType ENUM
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType ENUM_LIST
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType INTEGER
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType ANYREF_LIST
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType FLOAT
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType DOUBLE
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType LONG
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType NOT_SET
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType NA
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType[] $VALUES
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType[] values()
+com.autocognite.arjuna.enums.ValueType: com.autocognite.arjuna.enums.ValueType valueOf(java.lang.String)
 com.autocognite.arjuna.exceptions.ArjunaException
 com.autocognite.arjuna.exceptions.ArjunaException: ArjunaException(java.lang.String)
 com.autocognite.arjuna.exceptions.ArjunaException: ArjunaException(java.lang.String,java.lang.String)
@@ -340,12 +334,16 @@ com.autocognite.arjuna.interfaces.Check: void setError()
 com.autocognite.arjuna.interfaces.Check: java.lang.String getExceptionMessage()
 com.autocognite.arjuna.interfaces.Check: void evaluate()
 com.autocognite.arjuna.interfaces.Check: void setExceptionMessage(java.lang.String)
+com.autocognite.arjuna.interfaces.DataRecord
+com.autocognite.arjuna.interfaces.DataRecord: com.autocognite.arjuna.interfaces.Value valueAt(int)
+com.autocognite.arjuna.interfaces.DataRecord: java.lang.String stringAt(int)
+com.autocognite.arjuna.interfaces.DataRecord: java.lang.Object objectAt(int)
 com.autocognite.arjuna.interfaces.DataReference
-com.autocognite.arjuna.interfaces.DataReference: com.autocognite.arjuna.interfaces.ReadOnlyDataRecord getRecord(java.lang.String)
+com.autocognite.arjuna.interfaces.DataReference: com.autocognite.arjuna.interfaces.DataRecord getRecord(java.lang.String)
 com.autocognite.arjuna.interfaces.DataSource
-com.autocognite.arjuna.interfaces.DataSource: com.autocognite.arjuna.interfaces.ReadOnlyDataRecord next()
+com.autocognite.arjuna.interfaces.DataSource: com.autocognite.arjuna.interfaces.DataRecord next()
 com.autocognite.arjuna.interfaces.DataWrapper
-com.autocognite.arjuna.interfaces.DataWrapper: com.autocognite.pvt.batteries.value.ValueType valueType()
+com.autocognite.arjuna.interfaces.DataWrapper: com.autocognite.arjuna.enums.ValueType valueType()
 com.autocognite.arjuna.interfaces.DataWrapper: java.lang.Object object()
 com.autocognite.arjuna.interfaces.DataWrapper: boolean isNull()
 com.autocognite.arjuna.interfaces.DataWrapper: boolean asBoolean()
@@ -361,18 +359,38 @@ com.autocognite.arjuna.interfaces.DataWrapper: java.util.List asIntList()
 com.autocognite.arjuna.interfaces.DataWrapper: java.util.List asStringList()
 com.autocognite.arjuna.interfaces.DataWrapper: java.util.List asList()
 com.autocognite.arjuna.interfaces.DataWrapper: float asFloat()
-com.autocognite.arjuna.interfaces.ReadOnlyDataRecord
-com.autocognite.arjuna.interfaces.ReadOnlyDataRecord: com.autocognite.arjuna.interfaces.Value valueAt(int)
-com.autocognite.arjuna.interfaces.ReadOnlyDataRecord: java.lang.String stringAt(int)
-com.autocognite.arjuna.interfaces.ReadOnlyDataRecord: java.lang.Object objectAt(int)
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map items()
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map items(java.util.List)
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map strItems()
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map strItems(java.util.List)
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.util.List values()
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.util.List values(java.util.List)
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.util.List strings()
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.util.List strings(java.util.List)
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: com.autocognite.arjuna.interfaces.Value value(java.lang.String)
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: java.lang.String string(java.lang.String)
+com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer: boolean hasKey(java.lang.String)
 com.autocognite.arjuna.interfaces.ReportGenerator
 com.autocognite.arjuna.interfaces.ReportableObserver
 com.autocognite.arjuna.interfaces.StringKeyValueContainer
+com.autocognite.arjuna.interfaces.StringKeyValueContainer: void add(java.lang.String,com.autocognite.arjuna.interfaces.Value)
+com.autocognite.arjuna.interfaces.StringKeyValueContainer: void add(java.lang.String,java.lang.Number)
+com.autocognite.arjuna.interfaces.StringKeyValueContainer: void add(java.lang.String,java.lang.String)
+com.autocognite.arjuna.interfaces.StringKeyValueContainer: void add(java.lang.String,boolean)
+com.autocognite.arjuna.interfaces.StringKeyValueContainer: void addObject(java.lang.String,java.lang.Object)
+com.autocognite.arjuna.interfaces.StringKeyValueContainer: void add(java.lang.String,java.lang.Enum)
+com.autocognite.arjuna.interfaces.StringKeyValueContainer: void addEnumList(java.lang.String,java.util.List)
+com.autocognite.arjuna.interfaces.StringKeyValueContainer: void addNumberList(java.lang.String,java.util.List)
+com.autocognite.arjuna.interfaces.StringKeyValueContainer: void addStringList(java.lang.String,java.util.List)
 com.autocognite.arjuna.interfaces.TestObjectProperties
 com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String objectId()
-com.autocognite.arjuna.interfaces.TestObjectProperties: com.autocognite.arjuna.enums.TestObjectType objectType()
+com.autocognite.arjuna.interfaces.TestObjectProperties: com.autocognite.internal.arjuna.enums.TestObjectType objectType()
 com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String parentQualifiedName()
+com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String pkg()
+com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String klass()
 com.autocognite.arjuna.interfaces.TestObjectProperties: int classInstanceNumber()
+com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String method()
 com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String name()
 com.autocognite.arjuna.interfaces.TestObjectProperties: int methodInstanceNumber()
 com.autocognite.arjuna.interfaces.TestObjectProperties: int testNumber()
@@ -382,17 +400,31 @@ com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String session
 com.autocognite.arjuna.interfaces.TestObjectProperties: int sessionNodeId()
 com.autocognite.arjuna.interfaces.TestObjectProperties: int sessionSubNodeId()
 com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String group()
+com.autocognite.arjuna.interfaces.TestObjectProperties: java.util.Map items()
+com.autocognite.arjuna.interfaces.TestObjectProperties: java.util.Map strItems()
+com.autocognite.arjuna.interfaces.TestObjectProperties: com.autocognite.arjuna.interfaces.Value value(com.autocognite.internal.arjuna.enums.TestObjectAttribute)
+com.autocognite.arjuna.interfaces.TestObjectProperties: java.lang.String string(com.autocognite.internal.arjuna.enums.TestObjectAttribute)
+com.autocognite.arjuna.interfaces.TestObjectProperties: boolean hasKey(com.autocognite.internal.arjuna.enums.TestObjectAttribute)
+com.autocognite.arjuna.interfaces.TestObjectProperties: java.util.List strings(java.util.List)
+com.autocognite.arjuna.interfaces.TestObjectProperties: java.util.Map strItems(java.util.List)
 com.autocognite.arjuna.interfaces.TestProperties
 com.autocognite.arjuna.interfaces.TestProperties: java.lang.String id()
 com.autocognite.arjuna.interfaces.TestProperties: java.lang.String name()
 com.autocognite.arjuna.interfaces.TestProperties: java.lang.String idea()
 com.autocognite.arjuna.interfaces.TestProperties: int priority()
+com.autocognite.arjuna.interfaces.TestProperties: java.util.Map items()
+com.autocognite.arjuna.interfaces.TestProperties: java.util.Map strItems()
+com.autocognite.arjuna.interfaces.TestProperties: com.autocognite.arjuna.interfaces.Value value(com.autocognite.internal.arjuna.enums.TestAttribute)
+com.autocognite.arjuna.interfaces.TestProperties: java.lang.String string(com.autocognite.internal.arjuna.enums.TestAttribute)
+com.autocognite.arjuna.interfaces.TestProperties: boolean hasKey(com.autocognite.internal.arjuna.enums.TestAttribute)
+com.autocognite.arjuna.interfaces.TestProperties: java.util.List strings(java.util.List)
+com.autocognite.arjuna.interfaces.TestProperties: java.util.Map strItems(java.util.List)
 com.autocognite.arjuna.interfaces.TestVariables
 com.autocognite.arjuna.interfaces.TestVariables: com.autocognite.arjuna.interfaces.TestObjectProperties objectProps()
 com.autocognite.arjuna.interfaces.TestVariables: com.autocognite.arjuna.interfaces.TestProperties testProps()
-com.autocognite.arjuna.interfaces.TestVariables: com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer customProps()
-com.autocognite.arjuna.interfaces.TestVariables: com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer udv()
-com.autocognite.arjuna.interfaces.TestVariables: com.autocognite.arjuna.interfaces.ReadOnlyDataRecord dataRecord()
+com.autocognite.arjuna.interfaces.TestVariables: com.autocognite.arjuna.interfaces.StringKeyValueContainer customProps()
+com.autocognite.arjuna.interfaces.TestVariables: com.autocognite.arjuna.interfaces.StringKeyValueContainer udv()
+com.autocognite.arjuna.interfaces.TestVariables: com.autocognite.arjuna.interfaces.DataRecord dataRecord()
 com.autocognite.arjuna.interfaces.TestVariables: com.autocognite.arjuna.interfaces.DataReference dataRef(java.lang.String)
 com.autocognite.arjuna.interfaces.TestVariables: java.util.Map getAllDataReferences()
 com.autocognite.arjuna.interfaces.Value
@@ -430,8 +462,8 @@ com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batter
 com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createFloatProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
 com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createDoubleProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
 com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createNumberProperty(java.lang.Enum,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createProperty(java.lang.Enum,com.autocognite.pvt.batteries.value.ValueType,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
-com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createNullProperty(java.lang.Enum,com.autocognite.pvt.batteries.value.ValueType,java.lang.String,java.lang.String,boolean)
+com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createProperty(java.lang.Enum,com.autocognite.arjuna.enums.ValueType,java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean)
+com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createNullProperty(java.lang.Enum,com.autocognite.arjuna.enums.ValueType,java.lang.String,java.lang.String,boolean)
 com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createSimpleProperty(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String)
 com.autocognite.arjuna.utils.ConfigPropertyBatteries: com.autocognite.pvt.batteries.property.ConfigProperty createSimpleProperty(java.lang.String,com.autocognite.arjuna.interfaces.Value)
 com.autocognite.arjuna.utils.DataBatteries
@@ -524,6 +556,46 @@ com.autocognite.arjuna.utils.WindowsBatteries: void killProcess(java.lang.String
 com.autocognite.arjuna.utils.WindowsBatteries: void startService(java.lang.String)
 com.autocognite.arjuna.utils.WindowsBatteries: void stopService(java.lang.String)
 com.autocognite.arjuna.utils.WindowsBatteries: boolean isServiceRunning(java.lang.String)
+com.autocognite.internal.arjuna.enums.TestAttribute
+com.autocognite.internal.arjuna.enums.TestAttribute: com.autocognite.internal.arjuna.enums.TestAttribute ID
+com.autocognite.internal.arjuna.enums.TestAttribute: com.autocognite.internal.arjuna.enums.TestAttribute NAME
+com.autocognite.internal.arjuna.enums.TestAttribute: com.autocognite.internal.arjuna.enums.TestAttribute IDEA
+com.autocognite.internal.arjuna.enums.TestAttribute: com.autocognite.internal.arjuna.enums.TestAttribute PRIORITY
+com.autocognite.internal.arjuna.enums.TestAttribute: com.autocognite.internal.arjuna.enums.TestAttribute[] $VALUES
+com.autocognite.internal.arjuna.enums.TestAttribute: com.autocognite.internal.arjuna.enums.TestAttribute[] values()
+com.autocognite.internal.arjuna.enums.TestAttribute: com.autocognite.internal.arjuna.enums.TestAttribute valueOf(java.lang.String)
+com.autocognite.internal.arjuna.enums.TestObjectAttribute
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute OTYPE
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute ONAME
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute PQNAME
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute PNAME
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute CNAME
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute CIN
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute MNAME
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute NAME
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute MIN
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute TN
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute SN
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute TID
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute GN
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute NNAME
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute NID
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute SNID
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute BTSTAMP
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute ETSTAMP
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute TTIME
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute[] $VALUES
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute[] values()
+com.autocognite.internal.arjuna.enums.TestObjectAttribute: com.autocognite.internal.arjuna.enums.TestObjectAttribute valueOf(java.lang.String)
+com.autocognite.internal.arjuna.enums.TestObjectType
+com.autocognite.internal.arjuna.enums.TestObjectType: com.autocognite.internal.arjuna.enums.TestObjectType TEST_CLASS
+com.autocognite.internal.arjuna.enums.TestObjectType: com.autocognite.internal.arjuna.enums.TestObjectType TEST_CLASS_INSTANCE
+com.autocognite.internal.arjuna.enums.TestObjectType: com.autocognite.internal.arjuna.enums.TestObjectType TEST_METHOD
+com.autocognite.internal.arjuna.enums.TestObjectType: com.autocognite.internal.arjuna.enums.TestObjectType TEST_METHOD_INSTANCE
+com.autocognite.internal.arjuna.enums.TestObjectType: com.autocognite.internal.arjuna.enums.TestObjectType TEST
+com.autocognite.internal.arjuna.enums.TestObjectType: com.autocognite.internal.arjuna.enums.TestObjectType[] $VALUES
+com.autocognite.internal.arjuna.enums.TestObjectType: com.autocognite.internal.arjuna.enums.TestObjectType[] values()
+com.autocognite.internal.arjuna.enums.TestObjectType: com.autocognite.internal.arjuna.enums.TestObjectType valueOf(java.lang.String)
 com.autocognite.pvt.ArjunaInternal
 com.autocognite.pvt.ArjunaInternal$info
 com.autocognite.pvt.ArjunaInternal$problem
@@ -779,14 +851,6 @@ com.autocognite.pvt.arjuna.enums.StepResultType: com.autocognite.pvt.arjuna.enum
 com.autocognite.pvt.arjuna.enums.StepResultType: com.autocognite.pvt.arjuna.enums.StepResultType[] $VALUES
 com.autocognite.pvt.arjuna.enums.StepResultType: com.autocognite.pvt.arjuna.enums.StepResultType[] values()
 com.autocognite.pvt.arjuna.enums.StepResultType: com.autocognite.pvt.arjuna.enums.StepResultType valueOf(java.lang.String)
-com.autocognite.pvt.arjuna.enums.TestAttribute
-com.autocognite.pvt.arjuna.enums.TestAttribute: com.autocognite.pvt.arjuna.enums.TestAttribute ID
-com.autocognite.pvt.arjuna.enums.TestAttribute: com.autocognite.pvt.arjuna.enums.TestAttribute NAME
-com.autocognite.pvt.arjuna.enums.TestAttribute: com.autocognite.pvt.arjuna.enums.TestAttribute IDEA
-com.autocognite.pvt.arjuna.enums.TestAttribute: com.autocognite.pvt.arjuna.enums.TestAttribute PRIORITY
-com.autocognite.pvt.arjuna.enums.TestAttribute: com.autocognite.pvt.arjuna.enums.TestAttribute[] $VALUES
-com.autocognite.pvt.arjuna.enums.TestAttribute: com.autocognite.pvt.arjuna.enums.TestAttribute[] values()
-com.autocognite.pvt.arjuna.enums.TestAttribute: com.autocognite.pvt.arjuna.enums.TestAttribute valueOf(java.lang.String)
 com.autocognite.pvt.arjuna.enums.TestClassFixtureType
 com.autocognite.pvt.arjuna.enums.TestClassFixtureType: com.autocognite.pvt.arjuna.enums.TestClassFixtureType SETUP_CLASS
 com.autocognite.pvt.arjuna.enums.TestClassFixtureType: com.autocognite.pvt.arjuna.enums.TestClassFixtureType SETUP_CLASS_INSTANCE
@@ -808,26 +872,6 @@ com.autocognite.pvt.arjuna.enums.TestLanguage: com.autocognite.pvt.arjuna.enums.
 com.autocognite.pvt.arjuna.enums.TestLanguage: com.autocognite.pvt.arjuna.enums.TestLanguage[] $VALUES
 com.autocognite.pvt.arjuna.enums.TestLanguage: com.autocognite.pvt.arjuna.enums.TestLanguage[] values()
 com.autocognite.pvt.arjuna.enums.TestLanguage: com.autocognite.pvt.arjuna.enums.TestLanguage valueOf(java.lang.String)
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute OTYPE
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute ONAME
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute PQNAME
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute CIN
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute NAME
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute MIN
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute TN
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute SN
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute TID
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute GN
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute NNAME
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute NID
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute SNID
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute BTSTAMP
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute ETSTAMP
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute TTIME
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute[] $VALUES
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute[] values()
-com.autocognite.pvt.arjuna.enums.TestObjectAttribute: com.autocognite.pvt.arjuna.enums.TestObjectAttribute valueOf(java.lang.String)
 com.autocognite.pvt.arjuna.enums.TestPickerProperty
 com.autocognite.pvt.arjuna.enums.TestPickerProperty: com.autocognite.pvt.arjuna.enums.TestPickerProperty PACKAGE_NAME
 com.autocognite.pvt.arjuna.enums.TestPickerProperty: com.autocognite.pvt.arjuna.enums.TestPickerProperty CLASS_NAME
@@ -923,6 +967,7 @@ com.autocognite.pvt.batteries.config.Batteries$info
 com.autocognite.pvt.batteries.config.Configuration
 com.autocognite.pvt.batteries.configurator.lib.strings.NamedString
 com.autocognite.pvt.batteries.configurator.lib.strings.NamedStringsContainer
+com.autocognite.pvt.batteries.console.Console
 com.autocognite.pvt.batteries.container.BaseContainer
 com.autocognite.pvt.batteries.container.BaseValueContainer
 com.autocognite.pvt.batteries.container.Container
@@ -931,10 +976,10 @@ com.autocognite.pvt.batteries.container.ReadOnlyContainer
 com.autocognite.pvt.batteries.container.ReadWriteContainer
 com.autocognite.pvt.batteries.container.ValueContainer
 com.autocognite.pvt.batteries.databroker.DataItem
-com.autocognite.pvt.batteries.databroker.DataRecord
 com.autocognite.pvt.batteries.databroker.DataRecordContainer
 com.autocognite.pvt.batteries.databroker.DataReferenceFactory
 com.autocognite.pvt.batteries.databroker.DataSourceFactory
+com.autocognite.pvt.batteries.databroker.DefaultDataRecord
 com.autocognite.pvt.batteries.databroker.DsvFileDataSource
 com.autocognite.pvt.batteries.databroker.ExcelDataReference
 com.autocognite.pvt.batteries.databroker.ExcelFileDataSource
@@ -948,7 +993,6 @@ com.autocognite.pvt.batteries.datafilter.PrefixFilter
 com.autocognite.pvt.batteries.datafilter.StringFilter
 com.autocognite.pvt.batteries.datafilter.StringFilterFactory
 com.autocognite.pvt.batteries.datafilter.SuffixFilter
-com.autocognite.pvt.batteries.dev.logging.Log
 com.autocognite.pvt.batteries.discoverer.DiscoveredFile
 com.autocognite.pvt.batteries.discoverer.DiscoveredFileAttribute
 com.autocognite.pvt.batteries.discoverer.FileAggregator
@@ -1042,6 +1086,7 @@ com.autocognite.pvt.batteries.lib.StringsManager$infoCodes
 com.autocognite.pvt.batteries.lib.StringsManager$problemCodes
 com.autocognite.pvt.batteries.lib.ThreadSafeStreamReader
 com.autocognite.pvt.batteries.lib.UserDefinedProperty
+com.autocognite.pvt.batteries.logging.Log
 com.autocognite.pvt.batteries.networker.Networker
 com.autocognite.pvt.batteries.networker.api.KeyValueQueue
 com.autocognite.pvt.batteries.networker.api.NetworkProtocol
@@ -1107,7 +1152,6 @@ com.autocognite.pvt.batteries.value.StringListValue
 com.autocognite.pvt.batteries.value.StringValue
 com.autocognite.pvt.batteries.value.UnsupportedRepresentationException
 com.autocognite.pvt.batteries.value.ValueFactory
-com.autocognite.pvt.batteries.value.ValueType
 com.autocognite.pvt.unitee.api.TestRunner
 com.autocognite.pvt.unitee.api.TestScheduler
 com.autocognite.pvt.unitee.cli.UniteeCLI

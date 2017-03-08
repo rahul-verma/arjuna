@@ -111,7 +111,7 @@ public class JavaTestClassDefinition {
 			logger.debug(this.testClassInstanceTestVars.get(instanceNumber).udv());
 			logger.debug(udv);
 		}
-		this.testClassInstanceTestVars.get(instanceNumber).udv().addAsStringValue(udv);
+		this.testClassInstanceTestVars.get(instanceNumber).rawUdv().addAsStringValue(udv);
 	}
 
 	public Class<?> getUserTestClass() {

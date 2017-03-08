@@ -22,7 +22,7 @@ import java.util.ArrayList;
 
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataSource;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 
 public class ExcelFileDataSource implements DataSource {
@@ -39,7 +39,7 @@ public class ExcelFileDataSource implements DataSource {
 	}
 
 	@Override
-	public synchronized ReadOnlyDataRecord next() throws DataSourceFinishedException {
+	public synchronized DataRecord next() throws DataSourceFinishedException {
 		ArrayList<Object> dataRecord = null;
 		try {
 			dataRecord = reader.next();
@@ -51,7 +51,7 @@ public class ExcelFileDataSource implements DataSource {
 		if (dataRecord == null) {
 			throw new DataSourceFinishedException("Records Finished.");
 		} else {
-			return new DataRecord(this.headers, dataRecord);
+			return new DefaultDataRecord(this.headers, dataRecord);
 		}
 	}
 

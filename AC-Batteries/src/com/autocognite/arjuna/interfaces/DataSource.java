@@ -22,6 +22,6 @@ import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 
 public interface DataSource {
 
-	ReadOnlyDataRecord next() throws DataSourceFinishedException;
+	DataRecord next() throws DataSourceFinishedException;
 
 }

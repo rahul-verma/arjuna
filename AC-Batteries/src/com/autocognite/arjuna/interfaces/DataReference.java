@@ -20,6 +20,6 @@ package com.autocognite.arjuna.interfaces;
 
 public interface DataReference {
 
-	ReadOnlyDataRecord getRecord(String key) throws Exception;
+	DataRecord getRecord(String key) throws Exception;
 
 }

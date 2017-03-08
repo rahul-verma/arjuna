@@ -5,10 +5,10 @@ import java.util.Map;
 
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataReference;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
 import com.autocognite.arjuna.interfaces.TestProperties;
-import com.autocognite.pvt.batteries.databroker.DataRecord;
+import com.autocognite.pvt.batteries.databroker.DefaultDataRecord;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.reporter.lib.reportable.TestVariablesSerializer;
 import com.google.gson.JsonObject;
@@ -18,9 +18,9 @@ public class DefaultTestVariables implements InternalTestVariables {
 	private InternalTestProperties testProps = new DefaultTestProperties();
 	private DefaultStringKeyValueContainer customProps = new DefaultStringKeyValueContainer();
 	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
-	private ReadOnlyDataRecord dataRecord =  null;
+	private DataRecord dataRecord =  null;
 	private Map<String,DataReference> dataRefMap = new HashMap<String,DataReference>();
-	private static ReadOnlyDataRecord dr = new DataRecord();
+	private static DataRecord dr = new DefaultDataRecord();
 	
 	public DefaultTestVariables() throws Exception{
 		this.dataRecord = dr;		
@@ -111,12 +111,12 @@ public class DefaultTestVariables implements InternalTestVariables {
 	}
 
 	@Override
-	public void setDataRecord(ReadOnlyDataRecord dataRecord) {
+	public void setDataRecord(DataRecord dataRecord) {
 		this.dataRecord = dataRecord;
 	}
 	
 	@Override
-	public ReadOnlyDataRecord dataRecord() {
+	public DataRecord dataRecord() {
 		return this.dataRecord;
 	}
 

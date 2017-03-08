@@ -8,16 +8,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.autocognite.arjuna.console.Console;
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
 import com.autocognite.pvt.batteries.config.Configuration;
+import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.ds.MessagesContainer;
 import com.autocognite.pvt.batteries.ds.NamesContainer;
 import com.autocognite.pvt.batteries.integration.ComponentConfigurator;
 import com.autocognite.pvt.batteries.property.ConfigProperty;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class ComponentIntegrator {
 	private String refDir = null;

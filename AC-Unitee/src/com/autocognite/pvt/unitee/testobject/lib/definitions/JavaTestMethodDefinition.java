@@ -77,7 +77,7 @@ public class JavaTestMethodDefinition {
 	}
 
 	public void setUdvForInstance(int instanceNumber, HashMap<String, String> udv) throws Exception {
-		this.testMethodInstanceTestVars.get(instanceNumber).udv().addAsStringValue(udv);
+		this.testMethodInstanceTestVars.get(instanceNumber).rawUdv().addAsStringValue(udv);
 	}
 	
 	public TestVariables getTestCreatorInstanceDefinition(int instanceNumber) {

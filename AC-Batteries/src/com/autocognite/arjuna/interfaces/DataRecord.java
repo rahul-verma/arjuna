@@ -1,8 +1,6 @@
 package com.autocognite.arjuna.interfaces;
 
-import com.autocognite.pvt.batteries.container.ReadOnlyContainer;
-
-public interface ReadOnlyDataRecord extends ReadOnlyContainer<String, Value> {
+public interface DataRecord extends ReadOnlyStringKeyValueContainer {
 
 	Value valueAt(int index) throws Exception;
 

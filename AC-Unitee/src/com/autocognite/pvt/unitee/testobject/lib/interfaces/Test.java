@@ -1,6 +1,6 @@
 package com.autocognite.pvt.unitee.testobject.lib.interfaces;
 
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture;
@@ -14,8 +14,6 @@ public interface Test extends TestObject{
 	int getTestNumber();
 
 	boolean didSetUpTestFixtureSucceed();
-
-	TestVariables getTestVariables();
 
 	TestContainerInstance getTestContainerInstance();
 
@@ -43,7 +41,7 @@ public interface Test extends TestObject{
 
 	Fixture getSetupTestFixture();
 
-	void setDataRecord(ReadOnlyDataRecord dataRecord);
+	void setDataRecord(DataRecord dataRecord);
 
 	JavaTestMethodInstance getParentCreatorInstance();
 

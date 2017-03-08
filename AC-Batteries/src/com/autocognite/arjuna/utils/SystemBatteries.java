@@ -20,7 +20,7 @@ package com.autocognite.arjuna.utils;
 
 import java.io.File;
 
-import com.autocognite.arjuna.console.Console;
+import com.autocognite.pvt.batteries.console.Console;
 
 public class SystemBatteries {
 

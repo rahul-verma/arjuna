@@ -1,11 +1,13 @@
 package com.autocognite.arjuna.interfaces;
 
-import com.autocognite.arjuna.enums.TestObjectType;
-import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
+import java.util.List;
+import java.util.Map;
+
+import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
+import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.batteries.container.ReadOnlyContainer;
 
-public interface TestObjectProperties extends 
-					ReadOnlyContainer<TestObjectAttribute, Value>{
+public interface TestObjectProperties {
 	
 	String objectId() throws Exception;
 	
@@ -37,5 +39,19 @@ public interface TestObjectProperties extends
 
 	int sessionSubNodeId() throws Exception;
 
-	String group() throws Exception;	
+	String group() throws Exception;
+	
+	Map<TestObjectAttribute, Value> items() throws Exception;
+
+	Map<String, String> strItems() throws Exception;
+
+	Value value(TestObjectAttribute key) throws Exception;
+
+	String string(TestObjectAttribute key) throws Exception;
+
+	boolean hasKey(TestObjectAttribute key);
+	
+	List<String> strings(List<TestObjectAttribute> props)  throws Exception;
+
+	Map<String, String> strItems(List<TestObjectAttribute> props)  throws Exception;
 }

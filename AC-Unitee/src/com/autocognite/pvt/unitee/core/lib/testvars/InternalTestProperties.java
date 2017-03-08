@@ -1,13 +1,14 @@
 package com.autocognite.pvt.unitee.core.lib.testvars;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.TestProperties;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.pvt.arjuna.enums.TestAttribute;
+import com.autocognite.internal.arjuna.enums.TestAttribute;
+import com.autocognite.pvt.batteries.container.ReadOnlyContainer;
 import com.autocognite.pvt.batteries.container.ValueContainer;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public interface InternalTestProperties 
-				extends TestProperties, ValueContainer<TestAttribute>{
+				extends TestProperties, ReadOnlyContainer<TestAttribute, Value>, ValueContainer<TestAttribute>{
 	
 	void setId(Value value) throws Exception;
 	

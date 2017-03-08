@@ -1,7 +1,7 @@
 package com.autocognite.pvt.batteries.nvpair;
 
+import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.pvt.batteries.value.ValueType;
 
 public class BaseNameValuePair implements NameValuePair {
 	private String name = null;

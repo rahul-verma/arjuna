@@ -3,12 +3,13 @@ package com.autocognite.pvt.unitee.reporter.lib.reportable;
 import java.util.List;
 import java.util.Map;
 
+import com.autocognite.arjuna.interfaces.StringKeyValueContainer;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
 import com.autocognite.arjuna.interfaces.TestProperties;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.pvt.arjuna.enums.TestAttribute;
-import com.autocognite.pvt.arjuna.enums.TestObjectAttribute;
+import com.autocognite.internal.arjuna.enums.TestAttribute;
+import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.batteries.container.ReadOnlyContainer;
 
 public class TestRelatedResult {
@@ -30,11 +31,11 @@ public class TestRelatedResult {
 		return this.testVars.testProps();
 	}
 	
-	public ReadOnlyContainer<String, Value> customProps() throws Exception {
+	public StringKeyValueContainer customProps() throws Exception {
 		return this.testVars.customProps();
 	}
 	
-	public ReadOnlyContainer<String, Value> udv() throws Exception {
+	public StringKeyValueContainer udv() throws Exception {
 		return this.testVars.udv();
 	}
 

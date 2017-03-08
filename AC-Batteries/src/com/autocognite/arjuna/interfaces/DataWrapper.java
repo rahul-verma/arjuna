@@ -2,7 +2,7 @@ package com.autocognite.arjuna.interfaces;
 
 import java.util.List;
 
-import com.autocognite.pvt.batteries.value.ValueType;
+import com.autocognite.arjuna.enums.ValueType;
 
 public interface DataWrapper {
 	ValueType valueType();

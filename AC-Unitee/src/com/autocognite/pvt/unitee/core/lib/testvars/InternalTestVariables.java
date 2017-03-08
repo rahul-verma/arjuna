@@ -3,7 +3,7 @@ package com.autocognite.pvt.unitee.core.lib.testvars;
 import java.util.Map;
 
 import com.autocognite.arjuna.interfaces.DataReference;
-import com.autocognite.arjuna.interfaces.ReadOnlyDataRecord;
+import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.google.gson.JsonObject;
@@ -30,7 +30,7 @@ public interface InternalTestVariables extends TestVariables {
 
 	JsonObject asJsonObject() throws Exception;
 
-	void setDataRecord(ReadOnlyDataRecord dataRecord);
+	void setDataRecord(DataRecord dataRecord);
 
 	void addDataReference(String name, DataReference dataRef);
 
