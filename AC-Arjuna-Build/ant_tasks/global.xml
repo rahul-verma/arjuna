@@ -13,7 +13,7 @@ simple example build file
 	<property name="3rd_party_batteries_jars" location="/Users/rahulverma/Documents/Dropbox/_jars/batteries_jars">
 	</property>
 
-	<property name="autocognite.build.version" value="0.0b4" />
+	<property name="autocognite.build.version" value="0.0b5" />
 
 	<property name="autocognite.dir" value="/Users/rahulverma/Documents/_autocognite" />
 	<property name="all.sources.dir" location="/Users/rahulverma/Documents/coding_workbench/eclipse_java_ws_rep_clone" />
