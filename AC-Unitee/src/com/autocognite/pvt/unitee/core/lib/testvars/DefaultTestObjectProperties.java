@@ -86,7 +86,7 @@ public class DefaultTestObjectProperties
 		if (this.method().equals("NA")){
 			return this.value(TestObjectAttribute.PNAME).asString() + "." + this.value(TestObjectAttribute.CNAME).asString();
 		} else {
-			return this.value(TestObjectAttribute.PNAME).asString() + "." + this.value(TestObjectAttribute.CNAME).asString() + this.value(TestObjectAttribute.MNAME).asString();
+			return this.value(TestObjectAttribute.PNAME).asString() + "." + this.value(TestObjectAttribute.CNAME).asString() + "." + this.value(TestObjectAttribute.MNAME).asString();
 		}
 	}
 	

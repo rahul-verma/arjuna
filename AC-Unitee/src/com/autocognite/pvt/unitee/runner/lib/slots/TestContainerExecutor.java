@@ -25,7 +25,12 @@ public class TestContainerExecutor implements Runnable{
 	
 	protected void executeSetUpClassFor(TestContainer container){
 		try{
-			container.setUpClass();	
+			if (ArjunaInternal.displayFixtureExecInfo){
+				logger.debug("Executing Set Up Class for :" + container.getTestVariables().objectProps().qualifiedName());
+			}
+			
+			container.setUpClass();
+			
 		} catch (Throwable e){
 			e.printStackTrace();
 		}

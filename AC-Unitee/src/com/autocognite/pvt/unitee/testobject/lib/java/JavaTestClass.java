@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -39,9 +40,8 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 	private ArrayList<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
 	private static Fixture setUpSessionFixture = null;
 	private static Fixture tearDownSessionFixture = null;
-	private static Fixture setUpClassFixture = null;
-	private static Fixture tearDownClassFixture = null;
-	private boolean firstObject = true;
+	private static Map<String,Fixture> setUpClassFixtures = new HashMap<String,Fixture>();
+	private static Map<String,Fixture> tearDownClassFixtures = new HashMap<String,Fixture>();
 	
 	public JavaTestClass(JavaTestClassDefinition classDef) throws Exception{
 		super(Thread.currentThread().getName() + "|" + classDef.getUserTestClass().getName(), TestObjectType.TEST_CLASS);
@@ -66,17 +66,21 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 		}
 		
 		this.setThreadId(Thread.currentThread().getName());
-		if (firstObject){
+		if (!setUpClassFixtures.containsKey(this.getQualifiedName())){
 			
-			setUpClassFixture = this.getTestFixtures().getFixture(TestClassFixtureType.SETUP_CLASS);
-			if (setUpClassFixture != null){
-				setUpClassFixture.setTestObject(this);
+			Fixture sFix = this.getTestFixtures().getFixture(TestClassFixtureType.SETUP_CLASS);
+			if (sFix != null){
+				sFix.setTestObject(this);
 			}
-			
-			tearDownClassFixture = this.getTestFixtures().getFixture(TestClassFixtureType.TEARDOWN_CLASS);
-			if (tearDownClassFixture != null){
-				tearDownClassFixture.setTestObject(this);
+			setUpClassFixtures.put(this.getQualifiedName(), sFix);
+		}
+		
+		if (!tearDownClassFixtures.containsKey(this.getTestVariables().objectProps().qualifiedName())){
+			Fixture tFix = this.getTestFixtures().getFixture(TestClassFixtureType.TEARDOWN_CLASS);
+			if (tFix != null){
+				tFix.setTestObject(this);
 			}
+			tearDownClassFixtures.put(this.getQualifiedName(), tFix);
 		}
 
 	}
@@ -254,34 +258,42 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 		if (ArjunaInternal.displayFixtureExecInfo){
 			logger.debug("Inside Java Test Class Set Up Class.");
 		}
+		
+		Fixture setUpClassFixture = setUpClassFixtures.get(this.getQualifiedName());
+		
 		if (setUpClassFixture != null){
-			boolean success = this.setUpClassFixture.execute();
+			boolean success = setUpClassFixture.execute();
 			if (!success){
 				this.markExcluded(
 						TestResultCode.ERROR_IN_SETUP_CLASS, 
-						String.format("Error in \"%s.%s\" fixture", this.setUpClassFixture.getFixtureClassName(), this.setUpClassFixture.getName()),
-						this.setUpClassFixture.getIssueId());
+						String.format("Error in \"%s.%s\" fixture", setUpClassFixture.getFixtureClassName(), setUpClassFixture.getName()),
+						setUpClassFixture.getIssueId());
 			}
 		}
 	}
 
 	@Override
 	public void tearDownClass() throws Exception {
+		
+		Fixture tearDownClassFixture = tearDownClassFixtures.get(this.getQualifiedName());
+		
 		if (tearDownClassFixture != null){
 			boolean success = tearDownClassFixture.execute();
 			if (!success){
 				this.markExcluded(
 						TestResultCode.ERROR_IN_TEARDOWN_CLASS, 
-						String.format("Error in \"%s.%s\" fixture", this.tearDownClassFixture.getFixtureClassName(), this.tearDownClassFixture.getName()),
-						this.tearDownClassFixture.getIssueId());
+						String.format("Error in \"%s.%s\" fixture", tearDownClassFixture.getFixtureClassName(), tearDownClassFixture.getName()),
+						tearDownClassFixture.getIssueId());
 			}
 		}
 	}
 
 	@Override
 	public boolean wasSetUpClassFixtureExecuted() {
-		if (this.setUpClassFixture != null){
-			return this.setUpClassFixture.wasExecuted();
+		Fixture setUpClassFixture = setUpClassFixtures.get(this.getQualifiedName());
+		
+		if (setUpClassFixture != null){
+			return setUpClassFixture.wasExecuted();
 		} else {
 			return true;
 		}

@@ -79,6 +79,7 @@ public class CentralExecutionState {
 	public synchronized boolean didTestCreatorsSucceed(Set<String> targets, IssueId outId) {
 		if (ArjunaInternal.logDependencyMetInfo){
 			logger.debug("Checking success for these test creator dependencies: " + targets);
+			logger.debug(this.methodIssueMap.keySet());
 		}
 		
 		for (String target: targets){

@@ -2,6 +2,7 @@ package com.autocognite.arjuna.config;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.interfaces.StringKeyValueContainer;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.utils.ThreadBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
@@ -23,5 +24,9 @@ public class RunConfig {
 
 	public static Logger getCentralLogger() {
 		return Logger.getLogger(Batteries.getCentralLogName());
+	}
+	
+	public static StringKeyValueContainer cloneSessionUDVs() throws Exception {
+		return Batteries.cloneCentralUDVs();
 	}
 }

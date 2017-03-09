@@ -36,8 +36,6 @@ import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 public class JavaTestClassFixturesLoader {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private JavaTestClassDefinition classDef = null;
-	private Fixture setUpSessionFixture = null;
-	private Fixture tearDownSessionFixture = null;
 	private Fixture setUpClassFixture = null;
 	private Fixture tearDownClassFixture = null;
 	private Fixture setUpClassInstanceFixture = null;
