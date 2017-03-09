@@ -25,8 +25,11 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.log4j.Level;
+
 import com.autocognite.arjuna.annotations.DataGenerator;
 import com.autocognite.arjuna.annotations.DataMethodContainer;
+import com.autocognite.arjuna.enums.LoggingLevel;
 import com.autocognite.arjuna.interfaces.DataSource;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.utils.FileSystemBatteries;
@@ -58,7 +61,7 @@ import com.typesafe.config.ConfigObject;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.0b3";
+	private String version = "0.0b4";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -181,8 +184,18 @@ public enum ArjunaSingleton {
 		
 		Batteries.processConfigProperties(updateOptions);
 		
+		Log log = new Log();
+		log.configure(
+				Level.toLevel(integrator.value(BatteriesPropertyType.LOGGING_CONSOLE_LEVEL).asString()),
+				Level.toLevel(integrator.value(BatteriesPropertyType.LOGGING_FILE_LEVEL).asString()),
+				integrator.value(BatteriesPropertyType.LOGGING_NAME).asString(),
+				integrator.value(BatteriesPropertyType.DIRECTORY_LOG).asString()
+		);
+		
 		groupsDB = new TestGroupsDB();
+		
 		String sessionName = integrator.value(ArjunaProperty.SESSION_NAME).asString();
+		
 		SessionCreator sCreator = null;
 		try{
 			sCreator = new SessionCreator(integrator, this.cliPickerOptions, sessionName);
@@ -191,6 +204,7 @@ public enum ArjunaSingleton {
 		} catch (Exception e){
 			throw e;
 		}
+		
 		session = sCreator.getSession();
 		if (session.getConfigObject() != null){
 			HoconReader cReader = new HoconStringReader(session.getConfigObject().toString());
@@ -203,6 +217,7 @@ public enum ArjunaSingleton {
 			sessionUDVReader.process();
 			Batteries.processCentralUDVProperties(sessionUDVReader.getProperties());
 		}
+		
 	}
 	
 	public void freeze() throws Exception{

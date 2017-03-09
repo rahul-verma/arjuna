@@ -82,83 +82,82 @@ com.autocognite.arjuna.annotations.TestMethod -> com.autocognite.arjuna.annotati
 com.autocognite.arjuna.assertions.Assertions -> com.autocognite.arjuna.assertions.Assertions:
     32:32:void <init>() -> <init>
     35:37:void setCheckErrorForAssertionIssue(com.autocognite.pvt.arjuna.interfaces.Check,java.lang.Exception) -> setCheckErrorForAssertionIssue
-    40:41:void evalauteCheck(com.autocognite.pvt.arjuna.interfaces.Check) -> evalauteCheck
-    44:54:com.autocognite.pvt.arjuna.interfaces.Check fail(java.lang.String) -> fail
-    58:58:com.autocognite.pvt.arjuna.interfaces.Check fail() -> fail
-    62:72:com.autocognite.pvt.arjuna.interfaces.Check error(java.lang.String) -> error
-    76:76:com.autocognite.pvt.arjuna.interfaces.Check error() -> error
-    80:97:com.autocognite.pvt.arjuna.interfaces.Check assertTrue(java.lang.String,boolean) -> assertTrue
-    101:101:com.autocognite.pvt.arjuna.interfaces.Check assertTrue(boolean) -> assertTrue
-    105:122:com.autocognite.pvt.arjuna.interfaces.Check assertFalse(java.lang.String,boolean) -> assertFalse
-    126:126:com.autocognite.pvt.arjuna.interfaces.Check assertFalse(boolean) -> assertFalse
-    134:138:void updateCheckForNullExpectedObject(com.autocognite.pvt.arjuna.interfaces.Check) -> updateCheckForNullExpectedObject
-    141:168:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(java.lang.String,java.lang.String,java.lang.String) -> assertEquals
-    172:172:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(java.lang.String,java.lang.String) -> assertEquals
-    176:191:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(java.lang.String,int,int) -> assertEquals
-    195:195:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(int,int) -> assertEquals
-    199:214:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(java.lang.String,long,long) -> assertEquals
-    218:218:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(long,long) -> assertEquals
-    222:225:double round2(double) -> round2
-    229:251:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(java.lang.String,float,float,float) -> assertEquals
-    255:255:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(float,float,float) -> assertEquals
-    259:285:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(java.lang.String,double,double,double) -> assertEquals
-    289:289:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(double,double,double) -> assertEquals
-    298:325:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(java.lang.String,java.lang.Object,java.lang.Object) -> assertEquals
-    329:329:com.autocognite.pvt.arjuna.interfaces.Check assertEquals(java.lang.Object,java.lang.Object) -> assertEquals
-    333:362:com.autocognite.pvt.arjuna.interfaces.Check assertSame(java.lang.String,java.lang.Object,java.lang.Object) -> assertSame
-    366:366:com.autocognite.pvt.arjuna.interfaces.Check assertSame(java.lang.Object,java.lang.Object) -> assertSame
-    374:401:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(java.lang.String,java.lang.String,java.lang.String) -> assertNotEquals
-    405:405:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(java.lang.String,java.lang.String) -> assertNotEquals
-    409:424:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(java.lang.String,int,int) -> assertNotEquals
-    428:428:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(int,int) -> assertNotEquals
-    432:447:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(java.lang.String,long,long) -> assertNotEquals
-    451:451:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(long,long) -> assertNotEquals
-    455:477:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(java.lang.String,float,float,float) -> assertNotEquals
-    482:482:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(float,float,float) -> assertNotEquals
-    486:512:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(java.lang.String,double,double,double) -> assertNotEquals
-    516:516:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(double,double,double) -> assertNotEquals
-    525:552:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(java.lang.String,java.lang.Object,java.lang.Object) -> assertNotEquals
-    556:556:com.autocognite.pvt.arjuna.interfaces.Check assertNotEquals(java.lang.Object,java.lang.Object) -> assertNotEquals
-    560:589:com.autocognite.pvt.arjuna.interfaces.Check assertNotSame(java.lang.String,java.lang.Object,java.lang.Object) -> assertNotSame
-    593:593:com.autocognite.pvt.arjuna.interfaces.Check assertNotSame(java.lang.Object,java.lang.Object) -> assertNotSame
-    600:618:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.String,boolean[],boolean[]) -> assertArrayEquals
-    622:622:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(boolean[],boolean[]) -> assertArrayEquals
-    626:644:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.String,byte[],byte[]) -> assertArrayEquals
-    648:648:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(byte[],byte[]) -> assertArrayEquals
-    652:670:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.String,char[],char[]) -> assertArrayEquals
-    674:674:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(char[],char[]) -> assertArrayEquals
-    679:697:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.String,double[],double[]) -> assertArrayEquals
-    701:701:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(double[],double[]) -> assertArrayEquals
-    705:723:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.String,float[],float[]) -> assertArrayEquals
-    727:727:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(float[],float[]) -> assertArrayEquals
-    731:749:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.String,int[],int[]) -> assertArrayEquals
-    753:753:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(int[],int[]) -> assertArrayEquals
-    757:775:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.String,long[],long[]) -> assertArrayEquals
-    779:779:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(short[],short[]) -> assertArrayEquals
-    783:801:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.String,short[],short[]) -> assertArrayEquals
-    805:806:void assertArrayEquals(long[],long[]) -> assertArrayEquals
-    809:827:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.String,java.lang.Object[],java.lang.Object[]) -> assertArrayEquals
-    831:831:com.autocognite.pvt.arjuna.interfaces.Check assertArrayEquals(java.lang.Object[],java.lang.Object[]) -> assertArrayEquals
-    835:850:com.autocognite.pvt.arjuna.interfaces.Check assertNull(java.lang.String,java.lang.Object) -> assertNull
-    854:854:com.autocognite.pvt.arjuna.interfaces.Check assertNull(java.lang.Object) -> assertNull
-    858:873:com.autocognite.pvt.arjuna.interfaces.Check assertNotNull(java.lang.String,java.lang.Object) -> assertNotNull
-    877:877:com.autocognite.pvt.arjuna.interfaces.Check assertNotNull(java.lang.Object) -> assertNotNull
-    885:904:com.autocognite.pvt.arjuna.interfaces.Check assertContains(java.lang.String,java.lang.String,java.lang.String) -> assertContains
-    908:908:com.autocognite.pvt.arjuna.interfaces.Check assertContains(java.lang.String,java.lang.String) -> assertContains
-    912:931:com.autocognite.pvt.arjuna.interfaces.Check assertContains(java.lang.String,java.util.ArrayList,java.lang.String) -> assertContains
-    935:935:com.autocognite.pvt.arjuna.interfaces.Check assertContains(java.util.ArrayList,java.lang.String) -> assertContains
-    939:958:com.autocognite.pvt.arjuna.interfaces.Check assertContains(java.lang.String,java.lang.String[],java.lang.String) -> assertContains
-    962:962:com.autocognite.pvt.arjuna.interfaces.Check assertContains(java.lang.String[],java.lang.String) -> assertContains
-    966:985:com.autocognite.pvt.arjuna.interfaces.Check assertContains(java.lang.String,java.util.HashMap,java.lang.String) -> assertContains
-    989:989:com.autocognite.pvt.arjuna.interfaces.Check assertContains(java.util.HashMap,java.lang.String) -> assertContains
-    993:1012:com.autocognite.pvt.arjuna.interfaces.Check assertDoesNotContain(java.lang.String,java.lang.String,java.lang.String) -> assertDoesNotContain
-    1016:1016:com.autocognite.pvt.arjuna.interfaces.Check assertDoesNotContain(java.lang.String,java.lang.String) -> assertDoesNotContain
-    1020:1039:com.autocognite.pvt.arjuna.interfaces.Check assertDoesNotContain(java.lang.String,java.util.ArrayList,java.lang.String) -> assertDoesNotContain
-    1043:1043:com.autocognite.pvt.arjuna.interfaces.Check assertDoesNotContain(java.util.ArrayList,java.lang.String) -> assertDoesNotContain
-    1047:1066:com.autocognite.pvt.arjuna.interfaces.Check assertDoesNotContain(java.lang.String,java.lang.String[],java.lang.String) -> assertDoesNotContain
-    1070:1070:com.autocognite.pvt.arjuna.interfaces.Check assertDoesNotContain(java.lang.String[],java.lang.String) -> assertDoesNotContain
-    1074:1093:com.autocognite.pvt.arjuna.interfaces.Check assertDoesNotContain(java.lang.String,java.util.HashMap,java.lang.String) -> assertDoesNotContain
-    1097:1097:com.autocognite.pvt.arjuna.interfaces.Check assertDoesNotContain(java.util.HashMap,java.lang.String) -> assertDoesNotContain
+    40:51:void fail(java.lang.String) -> fail
+    54:55:void fail() -> fail
+    58:69:void error(java.lang.String) -> error
+    72:73:void error() -> error
+    76:94:void assertTrue(java.lang.String,boolean) -> assertTrue
+    97:98:void assertTrue(boolean) -> assertTrue
+    101:119:void assertFalse(java.lang.String,boolean) -> assertFalse
+    122:123:void assertFalse(boolean) -> assertFalse
+    130:134:void updateCheckForNullExpectedObject(com.autocognite.pvt.arjuna.interfaces.Check) -> updateCheckForNullExpectedObject
+    137:165:void assertEquals(java.lang.String,java.lang.String,java.lang.String) -> assertEquals
+    168:169:void assertEquals(java.lang.String,java.lang.String) -> assertEquals
+    172:188:void assertEquals(java.lang.String,int,int) -> assertEquals
+    191:192:void assertEquals(int,int) -> assertEquals
+    195:211:void assertEquals(java.lang.String,long,long) -> assertEquals
+    214:215:void assertEquals(long,long) -> assertEquals
+    218:221:double round2(double) -> round2
+    225:248:void assertEquals(java.lang.String,float,float,float) -> assertEquals
+    251:252:void assertEquals(float,float,float) -> assertEquals
+    255:282:void assertEquals(java.lang.String,double,double,double) -> assertEquals
+    285:286:void assertEquals(double,double,double) -> assertEquals
+    294:322:void assertEquals(java.lang.String,java.lang.Object,java.lang.Object) -> assertEquals
+    325:326:void assertEquals(java.lang.Object,java.lang.Object) -> assertEquals
+    329:359:void assertSame(java.lang.String,java.lang.Object,java.lang.Object) -> assertSame
+    362:363:void assertSame(java.lang.Object,java.lang.Object) -> assertSame
+    370:398:void assertNotEquals(java.lang.String,java.lang.String,java.lang.String) -> assertNotEquals
+    401:402:void assertNotEquals(java.lang.String,java.lang.String) -> assertNotEquals
+    405:421:void assertNotEquals(java.lang.String,int,int) -> assertNotEquals
+    424:425:void assertNotEquals(int,int) -> assertNotEquals
+    428:444:void assertNotEquals(java.lang.String,long,long) -> assertNotEquals
+    447:448:void assertNotEquals(long,long) -> assertNotEquals
+    451:474:void assertNotEquals(java.lang.String,float,float,float) -> assertNotEquals
+    478:479:void assertNotEquals(float,float,float) -> assertNotEquals
+    482:509:void assertNotEquals(java.lang.String,double,double,double) -> assertNotEquals
+    512:513:void assertNotEquals(double,double,double) -> assertNotEquals
+    521:549:void assertNotEquals(java.lang.String,java.lang.Object,java.lang.Object) -> assertNotEquals
+    552:553:void assertNotEquals(java.lang.Object,java.lang.Object) -> assertNotEquals
+    556:586:void assertNotSame(java.lang.String,java.lang.Object,java.lang.Object) -> assertNotSame
+    589:590:void assertNotSame(java.lang.Object,java.lang.Object) -> assertNotSame
+    596:615:void assertArrayEquals(java.lang.String,boolean[],boolean[]) -> assertArrayEquals
+    618:619:void assertArrayEquals(boolean[],boolean[]) -> assertArrayEquals
+    622:641:void assertArrayEquals(java.lang.String,byte[],byte[]) -> assertArrayEquals
+    644:645:void assertArrayEquals(byte[],byte[]) -> assertArrayEquals
+    648:667:void assertArrayEquals(java.lang.String,char[],char[]) -> assertArrayEquals
+    670:671:void assertArrayEquals(char[],char[]) -> assertArrayEquals
+    675:694:void assertArrayEquals(java.lang.String,double[],double[]) -> assertArrayEquals
+    697:698:void assertArrayEquals(double[],double[]) -> assertArrayEquals
+    701:720:void assertArrayEquals(java.lang.String,float[],float[]) -> assertArrayEquals
+    723:724:void assertArrayEquals(float[],float[]) -> assertArrayEquals
+    727:746:void assertArrayEquals(java.lang.String,int[],int[]) -> assertArrayEquals
+    749:750:void assertArrayEquals(int[],int[]) -> assertArrayEquals
+    753:772:void assertArrayEquals(java.lang.String,long[],long[]) -> assertArrayEquals
+    775:776:void assertArrayEquals(short[],short[]) -> assertArrayEquals
+    779:798:void assertArrayEquals(java.lang.String,short[],short[]) -> assertArrayEquals
+    801:802:void assertArrayEquals(long[],long[]) -> assertArrayEquals
+    805:824:void assertArrayEquals(java.lang.String,java.lang.Object[],java.lang.Object[]) -> assertArrayEquals
+    827:828:void assertArrayEquals(java.lang.Object[],java.lang.Object[]) -> assertArrayEquals
+    831:847:void assertNull(java.lang.String,java.lang.Object) -> assertNull
+    850:851:void assertNull(java.lang.Object) -> assertNull
+    854:870:void assertNotNull(java.lang.String,java.lang.Object) -> assertNotNull
+    873:874:void assertNotNull(java.lang.Object) -> assertNotNull
+    881:901:void assertContains(java.lang.String,java.lang.String,java.lang.String) -> assertContains
+    904:905:void assertContains(java.lang.String,java.lang.String) -> assertContains
+    908:928:void assertContains(java.lang.String,java.util.ArrayList,java.lang.String) -> assertContains
+    931:932:void assertContains(java.util.ArrayList,java.lang.String) -> assertContains
+    935:955:void assertContains(java.lang.String,java.lang.String[],java.lang.String) -> assertContains
+    958:959:void assertContains(java.lang.String[],java.lang.String) -> assertContains
+    962:982:void assertContains(java.lang.String,java.util.HashMap,java.lang.String) -> assertContains
+    985:986:void assertContains(java.util.HashMap,java.lang.String) -> assertContains
+    989:1009:void assertDoesNotContain(java.lang.String,java.lang.String,java.lang.String) -> assertDoesNotContain
+    1012:1013:void assertDoesNotContain(java.lang.String,java.lang.String) -> assertDoesNotContain
+    1016:1036:void assertDoesNotContain(java.lang.String,java.util.ArrayList,java.lang.String) -> assertDoesNotContain
+    1039:1040:void assertDoesNotContain(java.util.ArrayList,java.lang.String) -> assertDoesNotContain
+    1043:1063:void assertDoesNotContain(java.lang.String,java.lang.String[],java.lang.String) -> assertDoesNotContain
+    1066:1067:void assertDoesNotContain(java.lang.String[],java.lang.String) -> assertDoesNotContain
+    1070:1090:void assertDoesNotContain(java.lang.String,java.util.HashMap,java.lang.String) -> assertDoesNotContain
+    1093:1094:void assertDoesNotContain(java.util.HashMap,java.lang.String) -> assertDoesNotContain
 com.autocognite.arjuna.bases.DataRecordContainer -> com.autocognite.arjuna.bases.DataRecordContainer:
     com.autocognite.pvt.batteries.enums.DataRecordOrder order -> a
     java.util.ArrayList queue -> b
@@ -606,179 +605,179 @@ com.autocognite.pvt.ArjunaInternal -> com.autocognite.pvt.a:
     93:94:void setCliConfigurator(com.autocognite.pvt.batteries.cli.CLIConfigurator) -> a
     1095:1096:void com.autocognite.pvt.unitee.config.ArjunaSingleton.setCliConfigurator(com.autocognite.pvt.batteries.cli.CLIConfigurator):95:96 -> a
     1095:1096:void setCliConfigurator(com.autocognite.pvt.batteries.cli.CLIConfigurator):93 -> a
-    97:101:void init(java.lang.String[]) -> a
+    97:103:void init(java.lang.String[]) -> a
     1274:1291:void com.autocognite.pvt.unitee.config.ArjunaSingleton.printUniteeHeader():274:291 -> a
     1274:1291:void init(java.lang.String[]):97 -> a
     1294:1295:void com.autocognite.pvt.unitee.config.ArjunaSingleton.setCliArgs(java.lang.String[]):294:295 -> a
     1294:1295:void init(java.lang.String[]):98 -> a
     2099:2206:void com.autocognite.pvt.unitee.config.ArjunaSingleton.init():99:206 -> a
-    2099:2206:void init(java.lang.String[]):99 -> a
+    2099:2206:void init(java.lang.String[]):100 -> a
     3032:3032:com.autocognite.pvt.batteries.lib.ComponentIntegrator com.autocognite.pvt.batteries.integration.AbstractComponentConfigurator.getIntegrator():32:32 -> a
     3032:3032:void com.autocognite.pvt.unitee.config.ArjunaSingleton.init():105 -> a
-    3032:3032:void init(java.lang.String[]):99 -> a
+    3032:3032:void init(java.lang.String[]):100 -> a
     3050:3051:void com.autocognite.pvt.batteries.lib.ComponentIntegrator.setProjectDir(java.lang.String):50:51 -> a
     3050:3051:void com.autocognite.pvt.unitee.config.ArjunaSingleton.init():109 -> a
-    3050:3051:void init(java.lang.String[]):99 -> a
+    3050:3051:void init(java.lang.String[]):100 -> a
     3411:3411:com.autocognite.pvt.unitee.testobject.lib.loader.session.Session com.autocognite.pvt.unitee.config.SessionCreator.getSession():411:411 -> a
     3411:3411:void com.autocognite.pvt.unitee.config.ArjunaSingleton.init():194 -> a
-    3411:3411:void init(java.lang.String[]):99 -> a
+    3411:3411:void init(java.lang.String[]):100 -> a
     4210:4213:void com.autocognite.pvt.unitee.config.ArjunaSingleton.freeze():210:213 -> a
-    4210:4213:void init(java.lang.String[]):100 -> a
-    104:104:java.util.Map getTestObjectAttrNameMap() -> a
+    4210:4213:void init(java.lang.String[]):101 -> a
+    106:106:java.util.Map getTestObjectAttrNameMap() -> a
     4247:4247:java.util.Map com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestObjectAttrNameMap():247:247 -> a
-    4247:4247:java.util.Map getTestObjectAttrNameMap():104 -> a
-    108:108:java.util.Map getTestAttrNameMap() -> b
+    4247:4247:java.util.Map getTestObjectAttrNameMap():106 -> a
+    110:110:java.util.Map getTestAttrNameMap() -> b
     4251:4251:java.util.Map com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestAttrNameMap():251:251 -> b
-    4251:4251:java.util.Map getTestAttrNameMap():108 -> b
-    112:112:java.util.Map getTestResultAttrNameMap() -> c
+    4251:4251:java.util.Map getTestAttrNameMap():110 -> b
+    114:114:java.util.Map getTestResultAttrNameMap() -> c
     4255:4255:java.util.Map com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestResultAttrNameMap():255:255 -> c
-    4255:4255:java.util.Map getTestResultAttrNameMap():112 -> c
-    116:116:java.util.Map getStepResultAttrNameMap() -> d
+    4255:4255:java.util.Map getTestResultAttrNameMap():114 -> c
+    118:118:java.util.Map getStepResultAttrNameMap() -> d
     4259:4259:java.util.Map com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getStepResultAttrNameMap():259:259 -> d
-    4259:4259:java.util.Map getStepResultAttrNameMap():116 -> d
-    120:120:java.util.Map getIssueAttrNameMap() -> e
+    4259:4259:java.util.Map getStepResultAttrNameMap():118 -> d
+    122:122:java.util.Map getIssueAttrNameMap() -> e
     4263:4263:java.util.Map com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getIssueAttrNameMap():263:263 -> e
-    4263:4263:java.util.Map getIssueAttrNameMap():120 -> e
-    125:125:java.util.Map getFixtureResultAttrNameMap() -> f
+    4263:4263:java.util.Map getIssueAttrNameMap():122 -> e
+    127:127:java.util.Map getFixtureResultAttrNameMap() -> f
     4267:4267:java.util.Map com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getFixtureResultAttrNameMap():267:267 -> f
-    4267:4267:java.util.Map getFixtureResultAttrNameMap():125 -> f
-    129:129:java.util.Map getEventAttrNameMap() -> g
+    4267:4267:java.util.Map getFixtureResultAttrNameMap():127 -> f
+    131:131:java.util.Map getEventAttrNameMap() -> g
     4271:4271:java.util.Map com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getEventAttrNameMap():271:271 -> g
-    4271:4271:java.util.Map getEventAttrNameMap():129 -> g
-    133:133:java.lang.String getTestObjectTypeName(java.lang.String) -> a
-    137:137:java.lang.String getTestObjectAttrName(java.lang.String) -> b
-    141:141:java.lang.String getTestAttrName(java.lang.String) -> c
-    145:145:java.lang.String getStepResultAttrName(java.lang.String) -> d
-    149:149:java.lang.String getTestResultAttrName(java.lang.String) -> e
-    153:153:java.lang.String getExcludedTestResultAttrName(java.lang.String) -> j
-    157:157:java.lang.String getIssueAttrName(java.lang.String) -> f
-    161:161:java.lang.String getFixtureResultAttrName(java.lang.String) -> g
-    165:165:java.lang.String getEventAttrName(java.lang.String) -> h
-    169:169:java.util.ArrayList getAllNames() -> B
-    173:174:void processNonTestClass(java.lang.Class) -> a
+    4271:4271:java.util.Map getEventAttrNameMap():131 -> g
+    135:135:java.lang.String getTestObjectTypeName(java.lang.String) -> a
+    139:139:java.lang.String getTestObjectAttrName(java.lang.String) -> b
+    143:143:java.lang.String getTestAttrName(java.lang.String) -> c
+    147:147:java.lang.String getStepResultAttrName(java.lang.String) -> d
+    151:151:java.lang.String getTestResultAttrName(java.lang.String) -> e
+    155:155:java.lang.String getExcludedTestResultAttrName(java.lang.String) -> j
+    159:159:java.lang.String getIssueAttrName(java.lang.String) -> f
+    163:163:java.lang.String getFixtureResultAttrName(java.lang.String) -> g
+    167:167:java.lang.String getEventAttrName(java.lang.String) -> h
+    171:171:java.util.ArrayList getAllNames() -> B
+    175:176:void processNonTestClass(java.lang.Class) -> a
     4306:4312:void com.autocognite.pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):306:312 -> a
-    4306:4312:void processNonTestClass(java.lang.Class):173 -> a
+    4306:4312:void processNonTestClass(java.lang.Class):175 -> a
     5041:5063:void com.autocognite.pvt.unitee.config.DataMethodContainerMap.process(java.lang.Class):41:63 -> a
     5041:5063:void com.autocognite.pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):307 -> a
-    5041:5063:void processNonTestClass(java.lang.Class):173 -> a
+    5041:5063:void processNonTestClass(java.lang.Class):175 -> a
     6039:6077:void com.autocognite.pvt.unitee.config.DataGeneratorMap.process(java.lang.Class):39:77 -> a
     6039:6077:void com.autocognite.pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):309 -> a
-    6039:6077:void processNonTestClass(java.lang.Class):173 -> a
-    177:177:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String) -> a
+    6039:6077:void processNonTestClass(java.lang.Class):175 -> a
+    179:179:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String) -> a
     6315:6315:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.String,java.lang.String):315:315 -> a
-    6315:6315:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):177 -> a
+    6315:6315:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):179 -> a
     7066:7071:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.String,java.lang.String):66:71 -> a
     7066:7071:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.String,java.lang.String):315 -> a
-    7066:7071:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):177 -> a
-    181:181:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String) -> a
+    7066:7071:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):179 -> a
+    183:183:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String) -> a
     7319:7319:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.Class,java.lang.String):319:319 -> a
-    7319:7319:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):181 -> a
+    7319:7319:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):183 -> a
     8076:8088:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.Class,java.lang.String):76:88 -> a
     8076:8088:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.Class,java.lang.String):319 -> a
-    8076:8088:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):181 -> a
-    185:185:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String) -> i
+    8076:8088:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):183 -> a
+    187:187:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String) -> i
     8323:8323:com.autocognite.arjuna.interfaces.DataSource com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataSourceFromDataGenName(java.lang.String):323:323 -> i
-    8323:8323:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):185 -> i
+    8323:8323:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):187 -> i
     9080:9085:com.autocognite.arjuna.interfaces.DataSource com.autocognite.pvt.unitee.config.DataGeneratorMap.getDataSource(java.lang.String):80:85 -> i
     9080:9085:com.autocognite.arjuna.interfaces.DataSource com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataSourceFromDataGenName(java.lang.String):323 -> i
-    9080:9085:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):185 -> i
-    189:189:com.autocognite.pvt.unitee.reporter.lib.Reporter getReporter() -> h
+    9080:9085:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):187 -> i
+    191:191:com.autocognite.pvt.unitee.reporter.lib.Reporter getReporter() -> h
     9298:9298:com.autocognite.pvt.unitee.reporter.lib.Reporter com.autocognite.pvt.unitee.config.ArjunaSingleton.getReporter():298:298 -> h
-    9298:9298:com.autocognite.pvt.unitee.reporter.lib.Reporter getReporter():189 -> h
-    193:193:com.autocognite.pvt.unitee.reporter.lib.CentralExecutionState getCentralExecState() -> i
+    9298:9298:com.autocognite.pvt.unitee.reporter.lib.Reporter getReporter():191 -> h
+    195:195:com.autocognite.pvt.unitee.reporter.lib.CentralExecutionState getCentralExecState() -> i
     9331:9331:com.autocognite.pvt.unitee.reporter.lib.CentralExecutionState com.autocognite.pvt.unitee.config.ArjunaSingleton.getCentralExecState():331:331 -> i
-    9331:9331:com.autocognite.pvt.unitee.reporter.lib.CentralExecutionState getCentralExecState():193 -> i
-    204:239:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> a
-    10261:10271:void discover(com.autocognite.pvt.unitee.lib.engine.TestEngine):261:271 -> a
-    10261:10271:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):216 -> a
-    10301:10310:void loadSession$1936654e():301:310 -> a
-    10301:10310:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):217 -> a
-    11275:11284:void initReporter(com.autocognite.pvt.unitee.lib.engine.TestEngine):275:284 -> a
-    11275:11284:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):218 -> a
-    11314:11322:void run(com.autocognite.pvt.unitee.lib.engine.TestEngine):314:322 -> a
-    11314:11322:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):219 -> a
-    12288:12297:void report(com.autocognite.pvt.unitee.lib.engine.TestEngine):288:297 -> a
-    12288:12297:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):222 -> a
-    242:242:java.lang.String getVersion() -> C
+    9331:9331:com.autocognite.pvt.unitee.reporter.lib.CentralExecutionState getCentralExecState():195 -> i
+    206:241:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> a
+    10263:10273:void discover(com.autocognite.pvt.unitee.lib.engine.TestEngine):263:273 -> a
+    10263:10273:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):218 -> a
+    10303:10312:void loadSession$1936654e():303:312 -> a
+    10303:10312:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):219 -> a
+    11277:11286:void initReporter(com.autocognite.pvt.unitee.lib.engine.TestEngine):277:286 -> a
+    11277:11286:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):220 -> a
+    11316:11324:void run(com.autocognite.pvt.unitee.lib.engine.TestEngine):316:324 -> a
+    11316:11324:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):221 -> a
+    12290:12299:void report(com.autocognite.pvt.unitee.lib.engine.TestEngine):290:299 -> a
+    12290:12299:void execute(com.autocognite.pvt.unitee.lib.engine.TestEngine):224 -> a
+    244:244:java.lang.String getVersion() -> C
     13260:13260:java.lang.String com.autocognite.pvt.unitee.config.ArjunaSingleton.getVersion():260:260 -> C
-    13260:13260:java.lang.String getVersion():242 -> C
-    261:271:void discover(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> b
-    275:284:void initReporter(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> c
-    288:297:void report(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> d
-    301:310:void loadSession$1936654e() -> D
+    13260:13260:java.lang.String getVersion():244 -> C
+    263:273:void discover(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> b
+    277:286:void initReporter(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> c
+    290:299:void report(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> d
+    303:312:void loadSession$1936654e() -> D
     14216:14229:void com.autocognite.pvt.unitee.config.ArjunaSingleton.loadSession():216:229 -> D
-    14216:14229:void loadSession$1936654e():302 -> D
+    14216:14229:void loadSession$1936654e():304 -> D
     15047:15074:void com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB.createGroupForCLIOptions(java.util.Map):47:74 -> D
     15047:15074:void com.autocognite.pvt.unitee.config.ArjunaSingleton.loadSession():218 -> D
-    15047:15074:void loadSession$1936654e():302 -> D
+    15047:15074:void loadSession$1936654e():304 -> D
     15077:15086:void com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB.createAllCapturingGroup():77:86 -> D
     15077:15086:void com.autocognite.pvt.unitee.config.ArjunaSingleton.loadSession():226 -> D
-    15077:15086:void loadSession$1936654e():302 -> D
-    314:322:void run(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> e
-    325:325:com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB getGroupLoader() -> j
+    15077:15086:void loadSession$1936654e():304 -> D
+    316:324:void run(com.autocognite.pvt.unitee.lib.engine.TestEngine) -> e
+    327:327:com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB getGroupLoader() -> j
     15335:15335:com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB com.autocognite.pvt.unitee.config.ArjunaSingleton.getTestGroupDB():335:335 -> j
-    15335:15335:com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB getGroupLoader():325 -> j
-    329:329:java.util.List getTestObjectAttrListForTestReport() -> k
+    15335:15335:com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB getGroupLoader():327 -> j
+    331:331:java.util.List getTestObjectAttrListForTestReport() -> k
     16171:16171:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestObjectAttrListForTestReport():171:171 -> k
-    16171:16171:java.util.List getTestObjectAttrListForTestReport():329 -> k
-    333:333:java.util.List getTestObjectAttrListForStepReport() -> l
+    16171:16171:java.util.List getTestObjectAttrListForTestReport():331 -> k
+    335:335:java.util.List getTestObjectAttrListForStepReport() -> l
     16175:16175:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestObjectAttrListForStepReport():175:175 -> l
-    16175:16175:java.util.List getTestObjectAttrListForStepReport():333 -> l
-    337:337:java.util.List getTestObjectAttrListForIssueReport() -> m
+    16175:16175:java.util.List getTestObjectAttrListForStepReport():335 -> l
+    339:339:java.util.List getTestObjectAttrListForIssueReport() -> m
     16179:16179:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestObjectAttrListForIssueReport():179:179 -> m
-    16179:16179:java.util.List getTestObjectAttrListForIssueReport():337 -> m
-    341:341:java.util.List getTestObjectAttrListForFixtureReport() -> n
+    16179:16179:java.util.List getTestObjectAttrListForIssueReport():339 -> m
+    343:343:java.util.List getTestObjectAttrListForFixtureReport() -> n
     16183:16183:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestObjectAttrListForFixtureReport():183:183 -> n
-    16183:16183:java.util.List getTestObjectAttrListForFixtureReport():341 -> n
-    345:345:java.util.List getTestAttrList() -> o
+    16183:16183:java.util.List getTestObjectAttrListForFixtureReport():343 -> n
+    347:347:java.util.List getTestAttrList() -> o
     16187:16187:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestAttrList():187:187 -> o
-    16187:16187:java.util.List getTestAttrList():345 -> o
-    349:349:java.util.List getTestResultAttrList() -> p
+    16187:16187:java.util.List getTestAttrList():347 -> o
+    351:351:java.util.List getTestResultAttrList() -> p
     16191:16191:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestResultAttrList():191:191 -> p
-    16191:16191:java.util.List getTestResultAttrList():349 -> p
-    353:353:java.util.List getStepResultAttrList() -> q
+    16191:16191:java.util.List getTestResultAttrList():351 -> p
+    355:355:java.util.List getStepResultAttrList() -> q
     16195:16195:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getStepResultAttrList():195:195 -> q
-    16195:16195:java.util.List getStepResultAttrList():353 -> q
-    357:357:java.util.List getIssueAttrList() -> r
+    16195:16195:java.util.List getStepResultAttrList():355 -> q
+    359:359:java.util.List getIssueAttrList() -> r
     16203:16203:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getIssueAttrList():203:203 -> r
-    16203:16203:java.util.List getIssueAttrList():357 -> r
-    361:361:java.util.List getFixtureResultAttrList() -> s
+    16203:16203:java.util.List getIssueAttrList():359 -> r
+    363:363:java.util.List getFixtureResultAttrList() -> s
     17199:17199:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getFixtureResultAttrList():199:199 -> s
-    17199:17199:java.util.List getFixtureResultAttrList():361 -> s
-    365:365:java.util.List getEventAttrList() -> t
+    17199:17199:java.util.List getFixtureResultAttrList():363 -> s
+    367:367:java.util.List getEventAttrList() -> t
     17207:17207:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getEventAttrList():207:207 -> t
-    17207:17207:java.util.List getEventAttrList():365 -> t
-    369:369:java.util.List getReportSections() -> E
+    17207:17207:java.util.List getEventAttrList():367 -> t
+    371:371:java.util.List getReportSections() -> E
     17211:17211:java.util.List com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getReportSections():211:211 -> E
-    17211:17211:java.util.List getReportSections():369 -> E
-    373:373:boolean shouldIncludedReportSection(com.autocognite.pvt.arjuna.enums.TestReportSection) -> a
+    17211:17211:java.util.List getReportSections():371 -> E
+    375:375:boolean shouldIncludedReportSection(com.autocognite.pvt.arjuna.enums.TestReportSection) -> a
     17215:17215:boolean com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludedReportSection(com.autocognite.pvt.arjuna.enums.TestReportSection):215:215 -> a
-    17215:17215:boolean shouldIncludedReportSection(com.autocognite.pvt.arjuna.enums.TestReportSection):373 -> a
-    377:377:java.util.Set getReportableTestTypes() -> u
+    17215:17215:boolean shouldIncludedReportSection(com.autocognite.pvt.arjuna.enums.TestReportSection):375 -> a
+    379:379:java.util.Set getReportableTestTypes() -> u
     17219:17219:java.util.Set com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.getReportableTestTypes():219:219 -> u
-    17219:17219:java.util.Set getReportableTestTypes():377 -> u
-    381:381:boolean isReportableResultType(com.autocognite.pvt.arjuna.enums.TestResultType) -> a
+    17219:17219:java.util.Set getReportableTestTypes():379 -> u
+    383:383:boolean isReportableResultType(com.autocognite.pvt.arjuna.enums.TestResultType) -> a
     17223:17223:boolean com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.isReportableResultType(com.autocognite.pvt.arjuna.enums.TestResultType):223:223 -> a
-    17223:17223:boolean isReportableResultType(com.autocognite.pvt.arjuna.enums.TestResultType):381 -> a
-    385:385:boolean shouldIncludeAnnotatedTestPropsInReport() -> v
+    17223:17223:boolean isReportableResultType(com.autocognite.pvt.arjuna.enums.TestResultType):383 -> a
+    387:387:boolean shouldIncludeAnnotatedTestPropsInReport() -> v
     17227:17227:boolean com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeAnnotatedTestPropsInReport():227:227 -> v
-    17227:17227:boolean shouldIncludeAnnotatedTestPropsInReport():385 -> v
-    389:389:boolean shouldIncludeCustomPropsInReport() -> w
+    17227:17227:boolean shouldIncludeAnnotatedTestPropsInReport():387 -> v
+    391:391:boolean shouldIncludeCustomPropsInReport() -> w
     17231:17231:boolean com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeCustomPropsInReport():231:231 -> w
-    17231:17231:boolean shouldIncludeCustomPropsInReport():389 -> w
-    393:393:boolean shouldIncludeUdvInReport() -> x
+    17231:17231:boolean shouldIncludeCustomPropsInReport():391 -> w
+    395:395:boolean shouldIncludeUdvInReport() -> x
     17235:17235:boolean com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeUdvInReport():235:235 -> x
-    17235:17235:boolean shouldIncludeUdvInReport():393 -> x
-    397:397:boolean shouldIncludeDataRecordInReport() -> y
+    17235:17235:boolean shouldIncludeUdvInReport():395 -> x
+    399:399:boolean shouldIncludeDataRecordInReport() -> y
     17239:17239:boolean com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeDataRecordInReport():239:239 -> y
-    17239:17239:boolean shouldIncludeDataRecordInReport():397 -> y
-    401:401:boolean shouldIncludeDataRefInReport() -> z
+    17239:17239:boolean shouldIncludeDataRecordInReport():399 -> y
+    403:403:boolean shouldIncludeDataRefInReport() -> z
     17243:17243:boolean com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeDataRefInReport():243:243 -> z
-    17243:17243:boolean shouldIncludeDataRefInReport():401 -> z
-    405:405:com.autocognite.pvt.unitee.testobject.lib.loader.session.Session getSession() -> A
+    17243:17243:boolean shouldIncludeDataRefInReport():403 -> z
+    407:407:com.autocognite.pvt.unitee.testobject.lib.loader.session.Session getSession() -> A
     17343:17343:com.autocognite.pvt.unitee.testobject.lib.loader.session.Session com.autocognite.pvt.unitee.config.ArjunaSingleton.getSession():343:343 -> A
-    17343:17343:com.autocognite.pvt.unitee.testobject.lib.loader.session.Session getSession():405 -> A
-    54:200:void <clinit>() -> <clinit>
+    17343:17343:com.autocognite.pvt.unitee.testobject.lib.loader.session.Session getSession():407 -> A
+    54:202:void <clinit>() -> <clinit>
 com.autocognite.pvt.ArjunaInternal$info -> com.autocognite.pvt.a$a:
     java.lang.String EXIT_ON_ERROR -> a
     java.lang.String RUN_BEGIN -> b
@@ -791,10 +790,10 @@ com.autocognite.pvt.ArjunaInternal$info -> com.autocognite.pvt.a$a:
     java.lang.String TESTREPORTER_CREATE_START -> i
     java.lang.String TESTREPORTER_CREATE_FINISH -> j
     java.lang.String ALLOWED_REPORT_FORMATS -> k
-    245:245:void <init>() -> <init>
+    247:247:void <init>() -> <init>
 com.autocognite.pvt.ArjunaInternal$problem -> com.autocognite.pvt.a$b:
     java.lang.String REPORT_WRONG_FORMAT -> a
-    196:196:void <init>() -> <init>
+    198:198:void <init>() -> <init>
 com.autocognite.pvt.ArjunaTestEngine -> com.autocognite.pvt.b:
     org.apache.log4j.Logger logger -> a
     com.autocognite.pvt.unitee.testobject.lib.loader.session.Session session -> b
@@ -3308,14 +3307,28 @@ com.autocognite.pvt.batteries.value.StringListValue -> com.autocognite.pvt.ga:
     36:44:java.util.List asEnumList(java.lang.Class) -> asEnumList
     10:10:java.lang.Object clone() -> clone
 com.autocognite.pvt.batteries.value.StringValue -> com.autocognite.pvt.gb:
-    11:12:void <init>(java.lang.String) -> <init>
-    16:16:com.autocognite.arjuna.interfaces.Value clone() -> clone
-    21:24:java.lang.String asString() -> asString
-    29:30:void process(java.lang.Object,java.lang.reflect.Method) -> a
+    java.util.Set trues -> b
+    java.util.Set falses -> c
+    17:18:void <init>(java.lang.String) -> <init>
+    22:22:com.autocognite.arjuna.interfaces.Value clone() -> clone
+    27:30:java.lang.String asString() -> asString
+    35:36:void process(java.lang.Object,java.lang.reflect.Method) -> a
     1030:1031:void com.autocognite.pvt.batteries.value.AbstractValue.setObject(java.lang.Object):30:31 -> a
-    1030:1031:void process(java.lang.Object,java.lang.reflect.Method):29 -> a
-    35:38:java.lang.Enum asEnum(java.lang.Class) -> asEnum
-    8:8:java.lang.Object clone() -> clone
+    1030:1031:void process(java.lang.Object,java.lang.reflect.Method):35 -> a
+    41:44:java.lang.Enum asEnum(java.lang.Class) -> asEnum
+    50:56:boolean asBoolean() -> asBoolean
+    62:78:java.lang.Number asNumber() -> asNumber
+    84:86:int asInt() -> asInt
+    93:95:long asLong() -> asLong
+    102:104:double asDouble() -> asDouble
+    111:113:float asFloat() -> asFloat
+    120:122:java.util.List asEnumList(java.lang.Class) -> asEnumList
+    129:131:java.util.List asNumberList() -> asNumberList
+    138:140:java.util.List asIntList() -> asIntList
+    147:149:java.util.List asStringList() -> asStringList
+    154:154:java.util.List asList() -> asList
+    12:12:java.lang.Object clone() -> clone
+    13:14:void <clinit>() -> <clinit>
 com.autocognite.pvt.batteries.value.UnsupportedRepresentationException -> com.autocognite.pvt.gc:
     long serialVersionUID -> a
     33:35:void <init>(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> <init>
@@ -5180,33 +5193,33 @@ com.autocognite.pvt.unitee.runner.lib.slots.TestContainerExecutor -> com.autocog
     18:24:void <init>(int,com.autocognite.pvt.unitee.runner.lib.slots.TestSlot) -> <init>
     28:32:void executeSetUpClassFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer) -> a
     36:40:void executeTearDownClassFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer) -> b
-    43:129:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer) -> a
+    43:132:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer) -> a
     1041:1041:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer.getTestContainer():41:41 -> a
     1041:1041:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):43 -> a
     2028:2032:void executeSetUpClassFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer):28:32 -> a
-    2028:2032:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):73 -> a
+    2028:2032:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):75 -> a
     2036:2040:void executeTearDownClassFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer):36:40 -> a
-    2036:2040:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):123 -> a
-    133:153:void run() -> run
+    2036:2040:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):126 -> a
+    136:156:void run() -> run
     3026:3029:com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer com.autocognite.pvt.unitee.runner.lib.slots.TestSlot.next():26:29 -> run
-    3026:3029:void run():135 -> run
+    3026:3029:void run():138 -> run
     3041:3041:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer.getTestContainer():41:41 -> run
-    3041:3041:void run():138 -> run
+    3041:3041:void run():141 -> run
     4041:4041:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer.getTestContainer():41:41 -> run
-    4041:4041:void run():139 -> run
+    4041:4041:void run():142 -> run
     5041:5041:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer.getTestContainer():41:41 -> run
-    5041:5041:void run():141 -> run
-    5043:5129:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):43:129 -> run
-    5043:5129:void run():146 -> run
+    5041:5041:void run():144 -> run
+    5043:5132:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):43:132 -> run
+    5043:5132:void run():149 -> run
     6041:6041:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer.getTestContainer():41:41 -> run
     6041:6041:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):43 -> run
-    6041:6041:void run():146 -> run
+    6041:6041:void run():149 -> run
     7028:7032:void executeSetUpClassFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer):28:32 -> run
-    7028:7032:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):73 -> run
-    7028:7032:void run():146 -> run
+    7028:7032:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):75 -> run
+    7028:7032:void run():149 -> run
     7036:7040:void executeTearDownClassFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer):36:40 -> run
-    7036:7040:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):123 -> run
-    7036:7040:void run():146 -> run
+    7036:7040:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer):126 -> run
+    7036:7040:void run():149 -> run
     17:17:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.runner.lib.slots.TestContainerInstanceExecutor -> com.autocognite.pvt.kv:
     org.apache.log4j.Logger logger -> a
@@ -5217,45 +5230,45 @@ com.autocognite.pvt.unitee.runner.lib.slots.TestContainerInstanceExecutor -> com
     35:39:void executeSetUpClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> b
     43:47:void executeTearDownClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> c
     51:55:void executeTearDownClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> d
-    70:184:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance) -> a
+    70:188:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance) -> a
     1036:1036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> a
     1036:1036:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70 -> a
     2027:2031:void executeSetUpClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):27:31 -> a
-    2027:2031:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):92 -> a
+    2027:2031:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):93 -> a
     2035:2039:void executeSetUpClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):35:39 -> a
-    2035:2039:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):112 -> a
+    2035:2039:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):114 -> a
     2043:2047:void executeTearDownClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):43:47 -> a
-    2043:2047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):168 -> a
+    2043:2047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):171 -> a
     2051:2055:void executeTearDownClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):51:55 -> a
-    2051:2055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):176 -> a
-    188:217:void run() -> run
+    2051:2055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):180 -> a
+    192:221:void run() -> run
     3045:3048:com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer.next():45:48 -> run
-    3045:3048:void run():190 -> run
+    3045:3048:void run():194 -> run
     4036:4036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    4036:4036:void run():191 -> run
+    4036:4036:void run():195 -> run
     5036:5036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    5036:5036:void run():194 -> run
+    5036:5036:void run():198 -> run
     6036:6036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    6036:6036:void run():199 -> run
+    6036:6036:void run():203 -> run
     7036:7036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    7036:7036:void run():204 -> run
-    7070:7184:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70:184 -> run
-    7070:7184:void run():210 -> run
+    7036:7036:void run():208 -> run
+    7070:7188:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70:188 -> run
+    7070:7188:void run():214 -> run
     8036:8036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
     8036:8036:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70 -> run
-    8036:8036:void run():210 -> run
+    8036:8036:void run():214 -> run
     9027:9031:void executeSetUpClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):27:31 -> run
-    9027:9031:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):92 -> run
-    9027:9031:void run():210 -> run
+    9027:9031:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):93 -> run
+    9027:9031:void run():214 -> run
     9035:9039:void executeSetUpClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):35:39 -> run
-    9035:9039:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):112 -> run
-    9035:9039:void run():210 -> run
+    9035:9039:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):114 -> run
+    9035:9039:void run():214 -> run
     9043:9047:void executeTearDownClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):43:47 -> run
-    9043:9047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):168 -> run
-    9043:9047:void run():210 -> run
+    9043:9047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):171 -> run
+    9043:9047:void run():214 -> run
     9051:9055:void executeTearDownClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):51:55 -> run
-    9051:9055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):176 -> run
-    9051:9055:void run():210 -> run
+    9051:9055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):180 -> run
+    9051:9055:void run():214 -> run
     16:16:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.runner.lib.slots.TestCreatorExecutor -> com.autocognite.pvt.kw:
     org.apache.log4j.Logger logger -> a

@@ -22,7 +22,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
 public abstract class AbstractPickerConfig implements PickerConfig {
-	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	
 	private Group group = null;
 	private JsonElement elem = null;

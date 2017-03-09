@@ -27,7 +27,6 @@ import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.config.Batteries;
 
 public abstract class AbstractCliConfigurator implements CLIConfigurator {
-	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private CLI cli = null;
 	private HashMap<String, String> rawMap = new HashMap<String, String>();
 	private HashMap<String, Value> userOptionMap = new HashMap<String, Value>();

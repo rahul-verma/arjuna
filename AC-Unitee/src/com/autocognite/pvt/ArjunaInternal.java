@@ -98,6 +98,7 @@ public class ArjunaInternal {
 		ArjunaSingleton.INSTANCE.setCliArgs(args);
 		ArjunaSingleton.INSTANCE.init();
 		ArjunaSingleton.INSTANCE.freeze();
+		logger = Logger.getLogger(Batteries.getCentralLogName());
 	}
 	
 	public static Map<TestObjectAttribute, String> getTestObjectAttrNameMap(){

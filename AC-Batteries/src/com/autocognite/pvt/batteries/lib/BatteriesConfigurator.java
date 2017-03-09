@@ -113,7 +113,7 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 				case LOGGING_FILE_LEVEL:
 					handleLogLevelConfig(propPath, cValue, "Minimum Logging Message Level for File Log", true);
 					break;
-				case LOGGING_FILE_NAME:
+				case LOGGING_NAME:
 					builder.overridable(false).visible(false);
 					handleStringConfig(propPath, cValue, "AutoCognite Log file name", false);
 					break;
