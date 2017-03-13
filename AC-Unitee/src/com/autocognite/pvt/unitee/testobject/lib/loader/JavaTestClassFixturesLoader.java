@@ -8,11 +8,13 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.AfterClass;
+import com.autocognite.arjuna.annotations.AfterClassFragment;
 import com.autocognite.arjuna.annotations.AfterClassInstance;
 import com.autocognite.arjuna.annotations.AfterMethod;
 import com.autocognite.arjuna.annotations.AfterMethodInstance;
 import com.autocognite.arjuna.annotations.AfterTest;
 import com.autocognite.arjuna.annotations.BeforeClass;
+import com.autocognite.arjuna.annotations.BeforeClassFragment;
 import com.autocognite.arjuna.annotations.BeforeClassInstance;
 import com.autocognite.arjuna.annotations.BeforeMethod;
 import com.autocognite.arjuna.annotations.BeforeMethodInstance;
@@ -78,12 +80,12 @@ public class JavaTestClassFixturesLoader {
 	}
 
 	private boolean isBeforeClassFragmentFixture(Method m) throws Exception{
-		return (m.isAnnotationPresent(BeforeClassInstance.class) || 
+		return (m.isAnnotationPresent(BeforeClassFragment.class) || 
 				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_SETUPCLASSFRAGMENT_NAME).asString()));	
 	}
 	
 	private boolean isAfterClassFragmentFixture(Method m) throws Exception{
-		return (m.isAnnotationPresent(AfterClassInstance.class) || 
+		return (m.isAnnotationPresent(AfterClassFragment.class) || 
 				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNCLASSFRAGMENT_NAME).asString()));	
 	}
 	
@@ -228,13 +230,10 @@ public class JavaTestClassFixturesLoader {
 			
 			String msg = String.format("Test Class: %s%sFound anomaly in fixtures.%sDuplicate fixtures detected.%sCheck annotation usage.%s"
 					, classDef.getUserTestClass().getName(),sep,sep,sep,sep);
-			logger.error("!!!ALERT!!!");			
-			ArjunaInternal.getReporter().update(ReportableFactory.createAlert(
-					"Test Scheduler",
-					msg + sb.toString()));
-			logger.error(msg);
-			logger.error("Exiting...");
-			ArjunaInternal.getReporter().tearDown();
+			Console.displayError("!!!ALERT!!!");
+			Console.displayError(msg);
+			Console.displayError(sb.toString());
+			Console.displayError("Exiting...");
 			System.exit(1);
 		}		
 	}

@@ -22,33 +22,46 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.autocognite.arjuna.interfaces.DataRecord;
+import com.autocognite.arjuna.interfaces.DataRecordContainer;
 import com.autocognite.pvt.batteries.enums.DataRecordOrder;
 
-public class DataRecordContainer {
+public class DefaultDataRecordContainer implements DataRecordContainer {
 	private DataRecordOrder order = DataRecordOrder.ORDERED;
 	private ArrayList<DataRecord> queue = new ArrayList<DataRecord>();
 	private String[] headers = null;
 
-	public DataRecordContainer(DataRecordOrder order) {
+	public DefaultDataRecordContainer(DataRecordOrder order) {
 		this.order = order;
 	}
 
-	public DataRecordContainer() {
+	public DefaultDataRecordContainer() {
 		this(DataRecordOrder.ORDERED);
 	}
 
-	public DataRecordContainer(Object[][] records) {
+	public DefaultDataRecordContainer(Object[][] records) {
 		this.addAll(records);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.autocognite.arjuna.bases.DataRecordContainer#setHeaders(java.lang.String[])
+	 */
+	@Override
 	public void setHeaders(String[] names) {
 		this.headers = names;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.autocognite.arjuna.bases.DataRecordContainer#add(com.autocognite.arjuna.interfaces.DataRecord)
+	 */
+	@Override
 	public void add(DataRecord record) {
 		this.queue.add(record);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.autocognite.arjuna.bases.DataRecordContainer#add(java.lang.Object[])
+	 */
+	@Override
 	public void add(Object[] record) {
 		if (this.headers == null) {
 			this.queue.add(new DefaultDataRecord(record));
@@ -57,6 +70,10 @@ public class DataRecordContainer {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.autocognite.arjuna.bases.DataRecordContainer#addAll(java.lang.Object[][])
+	 */
+	@Override
 	public void addAll(Object[][] records) {
 		if (this.headers == null) {
 			for (Object[] record : records) {
@@ -69,14 +86,26 @@ public class DataRecordContainer {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see com.autocognite.arjuna.bases.DataRecordContainer#get(int)
+	 */
+	@Override
 	public DataRecord get(int index) {
 		return this.queue.get(index);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.autocognite.arjuna.bases.DataRecordContainer#getAll()
+	 */
+	@Override
 	public ArrayList<DataRecord> getAll() {
 		return queue;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.autocognite.arjuna.bases.DataRecordContainer#iterator()
+	 */
+	@Override
 	public Iterator<DataRecord> iterator() {
 		return queue.iterator();
 	}

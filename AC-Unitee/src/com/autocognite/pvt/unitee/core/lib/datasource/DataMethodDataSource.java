@@ -4,9 +4,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Iterator;
 
-import com.autocognite.arjuna.bases.DataRecordContainer;
+import com.autocognite.arjuna.bases.DefaultDataRecordContainer;
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataRecord;
+import com.autocognite.arjuna.interfaces.DataRecordContainer;
 import com.autocognite.arjuna.interfaces.DataSource;
 
 public class DataMethodDataSource implements DataSource{
@@ -27,7 +28,7 @@ public class DataMethodDataSource implements DataSource{
 	public void init() throws Exception{
 //			logger.debug("The method is invoked in static manner for class: " + targetMethod.getDeclaringClass().getName());
 		if (dataMethod.getReturnType().isAssignableFrom(sampleArr.getClass())){
-			recordContainer = new DataRecordContainer((Object[][]) dataMethod.invoke(null));
+			recordContainer = new DefaultDataRecordContainer((Object[][]) dataMethod.invoke(null));
 		} else {
 			recordContainer = (DataRecordContainer) dataMethod.invoke(null);
 		}	

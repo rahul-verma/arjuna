@@ -21,6 +21,8 @@ public interface TestContainerInstance extends TestObject {
 
 	boolean didSetUpClassFixtureSucceed();
 
+	boolean hasFragmentCompleted();
+	
 	boolean hasCompleted();
 
 	int getCreatorThreadCount();
@@ -63,5 +65,7 @@ public interface TestContainerInstance extends TestObject {
 	boolean shouldExecuteSetupClassInstanceFixture();
 
 	boolean shouldExecuteTearDownClassInstanceFixture();
+
+	void setAllScheduledCreators(List<String> creatorNames);
 
 }

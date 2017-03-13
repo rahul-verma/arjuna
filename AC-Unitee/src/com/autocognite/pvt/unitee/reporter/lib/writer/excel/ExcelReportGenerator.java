@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Observer;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -26,6 +27,7 @@ import com.autocognite.arjuna.utils.SystemBatteries;
 import com.autocognite.internal.arjuna.enums.TestAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.ArjunaInternal;
+import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
 import com.autocognite.pvt.arjuna.enums.FixtureResultPropertyType;
 import com.autocognite.pvt.arjuna.enums.IssueAttribute;
@@ -58,7 +60,7 @@ public class ExcelReportGenerator implements ReportGenerator{
 	
 	public ExcelReportGenerator(String reportDir) throws Exception {
 		FileUtils.forceMkdir(new File(reportDir));
-		fileOut  = new FileOutputStream(reportDir + "/" + "AcTestReport.xls");
+		fileOut  = new FileOutputStream(reportDir + "/" + Batteries.value(ArjunaProperty.REPORT_NAME_FORMAT).asString() + ".xls");
 		this.allowedRTypes = ArjunaInternal.getReportableTestTypes();
 	}
 	
@@ -267,7 +269,7 @@ abstract class ExcelResultWriter<T>{
 	}
 }
 
-class ExcelTestResultWriter extends ExcelResultWriter<TestResult> {
+class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private List<TestObjectAttribute> execTestObjectProps = null;
 	private List<TestAttribute> execTestProps = null;

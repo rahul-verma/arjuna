@@ -3,10 +3,11 @@ package com.autocognite.pvt.unitee.core.lib.datasource;
 import java.util.Iterator;
 import java.util.List;
 
-import com.autocognite.arjuna.bases.DataRecordContainer;
+import com.autocognite.arjuna.bases.DefaultDataRecordContainer;
 import com.autocognite.arjuna.bases.DefaultDataRecord;
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataRecord;
+import com.autocognite.arjuna.interfaces.DataRecordContainer;
 import com.autocognite.arjuna.interfaces.DataSource;
 
 public class DataArrayDataSource implements DataSource{
@@ -14,7 +15,7 @@ public class DataArrayDataSource implements DataSource{
 	private Iterator<DataRecord> iter = null;
 
 	public DataArrayDataSource(String[] headers, List<String[]> valuesArr) throws Exception {
-		container = new DataRecordContainer();
+		container = new DefaultDataRecordContainer();
 		for (String[] rec: valuesArr){
 			DefaultDataRecord record = null;
 			if (headers.length == 0){

@@ -42,6 +42,7 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 	private static Fixture tearDownSessionFixture = null;
 	private static Map<String,Fixture> setUpClassFixtures = new HashMap<String,Fixture>();
 	private static Map<String,Fixture> tearDownClassFixtures = new HashMap<String,Fixture>();
+	private List<String> allScheduledCreators = null;
 	
 	public JavaTestClass(JavaTestClassDefinition classDef) throws Exception{
 		super(Thread.currentThread().getName() + "|" + classDef.getUserTestClass().getName(), TestObjectType.TEST_CLASS);
@@ -146,7 +147,8 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 			if (ArjunaInternal.displayLoadingInfo){
 				logger.debug(String.format("Creating instance #%d", i));
 			}
-			this.createInstance(i);
+			JavaTestClassInstance instance = this.createInstance(i);
+			instance.setAllScheduledCreators(this.allScheduledCreators);
 		}
 		instancesCreated = true;
 	}
@@ -179,11 +181,12 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 		this.constructorType = constructorType;
 	}
 
-	public void createInstance(int instanceNumber) throws Exception {
+	public JavaTestClassInstance createInstance(int instanceNumber) throws Exception {
 		String instanceId = String.format("%s|TCC%d", this.getObjectId(), instanceNumber);
 		JavaTestClassInstance classClone = new JavaTestClassInstance(instanceNumber, instanceId, this, this.classDef);
 		this.instanceExecTracker.put(instanceId, classClone);
 		this.instanceQueue.add(classClone);
+		return classClone;
 	}
 	
 	public void loadInstances() throws Exception{
@@ -319,4 +322,10 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 	public void markTestClassInstanceCompleted(TestContainerInstance instance) {
 		this.instanceExecTracker.remove(instance.getObjectId());
 	}
+
+	@Override
+	public void setAllScheduledCreators(List<String> creatorNames) {
+		this.allScheduledCreators  = creatorNames;
+	}
+
 }

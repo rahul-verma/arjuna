@@ -37,4 +37,8 @@ public interface Group {
 
 	void setSessionSubNode(SessionSubNode node);
 
+	void addClassMethodMap(String qualifiedName, List<String> scheduledCreators);
+
+	List<String> getScheduledCreatorsForContainer(String qualifiedName);
+
 }

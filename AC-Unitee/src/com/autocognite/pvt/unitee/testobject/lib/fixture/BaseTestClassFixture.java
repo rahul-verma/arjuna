@@ -129,6 +129,7 @@ public abstract class BaseTestClassFixture implements Fixture {
 	
 	private void reportFixtureSuccess() throws Exception{
 		FixtureResultBuilder builder = new FixtureResultBuilder();
+		this.setResultType(FixtureResultType.SUCCESS);
 		FixtureResult result = builder
 		.testVariables(this.getTestObject().getTestVariables())
 		.type(this.getType())
@@ -142,6 +143,7 @@ public abstract class BaseTestClassFixture implements Fixture {
 	
 	private FixtureResult getFixtureErrorResult(int issueId) throws Exception{
 		FixtureResultBuilder builder = new FixtureResultBuilder();
+		this.setResultType(FixtureResultType.ERROR);
 		return builder
 		.testVariables(this.getTestObject().getTestVariables())
 		.type(this.getType())
@@ -230,7 +232,7 @@ public abstract class BaseTestClassFixture implements Fixture {
 		}
 		switch (this.getTestObject().getTestVariables().objectProps().objectType()){
 		case TEST_CLASS:
-			suffix = String.format("For each occurance of Test Class [%s]. %%s instance.", qualifiedName);
+			suffix = String.format("For each occurrence of Test Class [%s]. %%s instance.", qualifiedName);
 			switch(this.getType()){		
 			case SETUP_CLASS: return String.format(suffix, "before first");
 			case TEARDOWN_CLASS: return String.format(suffix, "after last");
@@ -240,14 +242,14 @@ public abstract class BaseTestClassFixture implements Fixture {
 			suffix = String.format("all methods in Test Class - [%s], Class Instance #%d.", qualifiedName, this.getTestClassInstance().getInstanceNumber());
 			suffix2 = String.format("all methods in Test Class - [%s], Class Instance #%d, Fragment.", qualifiedName, this.getTestClassInstance().getInstanceNumber());
 			switch(this.getType()){		
-			case SETUP_CLASS_INSTANCE: return String.format("For each occurance of a test class. Before %s", suffix);
-			case TEARDOWN_CLASS_INSTANCE: return String.format("For each occurance of a test class. After %s", suffix);
-			case SETUP_CLASS_FRAGMENT: return String.format("For each occurance of a test class. Before %s", suffix2);
-			case TEARDOWN_CLASS_FRAGMENT: return String.format("For each occurance of a test class. After %s", suffix2);
+			case SETUP_CLASS_INSTANCE: return String.format("For each occurrence of a test class. Before %s", suffix);
+			case TEARDOWN_CLASS_INSTANCE: return String.format("For each occurrence of a test class. After %s", suffix);
+			case SETUP_CLASS_FRAGMENT: return String.format("For each occurrence of a test class. Before %s", suffix2);
+			case TEARDOWN_CLASS_FRAGMENT: return String.format("For each occurrence of a test class. After %s", suffix2);
 			}
 			break;
 		case TEST_METHOD:
-			suffix = String.format("all minstances of Test Method [%s]", this.getTestObject().getTestVariables().objectProps().name());
+			suffix = String.format("all instances of Test Method [%s]", this.getTestObject().getTestVariables().objectProps().name());
 			switch(this.getType()){
 			case SETUP_METHOD: return String.format("Before %s", suffix);
 			case TEARDOWN_METHOD: return String.format("After %s", suffix);

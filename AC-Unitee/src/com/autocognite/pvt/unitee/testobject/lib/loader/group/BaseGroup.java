@@ -1,6 +1,8 @@
 package com.autocognite.pvt.unitee.testobject.lib.loader.group;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -19,6 +21,7 @@ public class BaseGroup implements Group{
 	List<Picker> containerPickers = null;
 	private SessionSubNode sessionSubNode;
 	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
+	private Map<String,List<String>> classMethodMap = new HashMap<String,List<String>>();
 	
 	public BaseGroup(String name) throws Exception{
 		this.name = name;
@@ -113,4 +116,13 @@ public class BaseGroup implements Group{
 		return this.sessionSubNode.getSessionNode();
 	}
 
+	@Override
+	public void addClassMethodMap(String qualifiedName, List<String> scheduledCreators) {
+		this.classMethodMap .put(qualifiedName, scheduledCreators);
+	}
+
+	@Override
+	public List<String> getScheduledCreatorsForContainer(String qualifiedName) {
+		return this.classMethodMap.get(qualifiedName);
+	}
 }

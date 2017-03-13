@@ -13,7 +13,7 @@ simple example build file
 	<property name="3rd_party_batteries_jars" location="/Users/rahulverma/Documents/Dropbox/_jars/batteries_jars">
 	</property>
 
-	<property name="autocognite.build.version" value="0.0b5" />
+	<property name="autocognite.build.version" value="0.0b6" />
 
 	<property name="autocognite.dir" value="/Users/rahulverma/Documents/_autocognite" />
 	<property name="all.sources.dir" location="/Users/rahulverma/Documents/coding_workbench/eclipse_java_ws_rep_clone" />
@@ -52,9 +52,6 @@ simple example build file
 		<fileset dir="${private.unitee.core.self.jar.dir}">
 			<include name="**/*.jar" />
 		</fileset>
-		<fileset dir="${private.cli.self.jar.dir}">
-			<include name="**/*.jar" />
-		</fileset>
 	</path>
 
 	<target name="global_clean" description="clean up">
@@ -87,11 +84,6 @@ simple example build file
 		<mkdir dir="${ant.unitee.core.build.dir}" />
 		<mkdir dir="${ant.unitee.core.jar.dir}" />	
 		<mkdir dir="${private.unitee.core.self.jar.dir}" />
-		
-		<mkdir dir="${ant.cli.root.dir}" />
-		<mkdir dir="${ant.cli.build.dir}" />
-		<mkdir dir="${ant.cli.jar.dir}" />
-		<mkdir dir="${private.cli.self.jar.dir}" />
 	</target>
 
 </project>

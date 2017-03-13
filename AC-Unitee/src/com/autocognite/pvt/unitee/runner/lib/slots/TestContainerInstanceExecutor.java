@@ -168,9 +168,11 @@ public class TestContainerInstanceExecutor implements Runnable{
 		
 		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
 		(testContainerInstance.shouldExecuteTearDownClassFragmentFixture()))){
-			this.executeTearDownClassFragmentFor(testContainerInstance);
-			if (ArjunaInternal.displaySlotsInfo){
-				logger.debug(String.format("All test instance creators in %s have finished for current execution slot. Tear down class fragment." , testContainerInstance.getQualifiedName()));
+			if (testContainerInstance.hasFragmentCompleted()){
+				this.executeTearDownClassFragmentFor(testContainerInstance);
+				if (ArjunaInternal.displaySlotsInfo){
+					logger.debug(String.format("All test instance creators in %s have finished for current execution slot. Tear down class fragment." , testContainerInstance.getQualifiedName()));
+				}
 			}
 		}
 		
@@ -179,12 +181,14 @@ public class TestContainerInstanceExecutor implements Runnable{
 			if (testContainerInstance.hasCompleted()){
 				this.executeTearDownClassInstanceFor(testContainerInstance);
 				if (ArjunaInternal.displaySlotsInfo){
-					logger.debug(String.format("All test instance creators in %s have finished. Tear down class." , testContainerInstance.getQualifiedName()));
+					logger.debug(String.format("All scheduled test instance creators in %s have finished. Tear down class instance." , testContainerInstance.getQualifiedName()));
 				}
 			}
 		}
 		
-		testContainerInstance.getContainer().markTestClassInstanceCompleted(testContainerInstance);
+		if (testContainerInstance.hasCompleted()){
+			testContainerInstance.getContainer().markTestClassInstanceCompleted(testContainerInstance);
+		}
 	}
 
 	public void run() {

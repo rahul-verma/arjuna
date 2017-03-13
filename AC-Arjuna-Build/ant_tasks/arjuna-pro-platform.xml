@@ -131,7 +131,6 @@ simple example build file
 		<jar destFile="${private.arjuna.clear.jar.file}">
 			<zipgroupfileset includes="*.jar" dir="${private.batteries.self.jar.dir}" />
 			<zipgroupfileset includes="*.jar" dir="${private.unitee.core.self.jar.dir}" />
-			<zipgroupfileset includes="*.jar" dir="${private.cli.self.jar.dir}" />
 			<zipgroupfileset includes="*.jar" dir="${private.arjuna.self.jar.dir}" />
 		</jar>
 		

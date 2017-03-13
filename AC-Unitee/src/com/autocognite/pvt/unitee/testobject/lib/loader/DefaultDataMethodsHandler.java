@@ -25,7 +25,7 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataMethod;
-import com.autocognite.arjuna.bases.DataRecordContainer;
+import com.autocognite.arjuna.bases.DefaultDataRecordContainer;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.batteries.config.Batteries;
 
@@ -43,7 +43,7 @@ public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 	
 	public static boolean hasAllowedReturnType(Method m){
 		return (m.getReturnType().isAssignableFrom(sampleArr.getClass())) 
-				|| (m.getReturnType().isAssignableFrom(DataRecordContainer.class));
+				|| (m.getReturnType().isAssignableFrom(DefaultDataRecordContainer.class));
 	}
 
 	public void process() throws Exception{

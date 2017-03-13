@@ -374,6 +374,7 @@ abstract class BasePicker implements Picker {
 			classDef.markScheduledNonSkipped(group.getSessionName(), scheduledCreators);
 			containers.add(className);
 			classDef.setPicked();
+			group.addClassMethodMap(classDef.getQualifiedName(), scheduledCreators);
 		}
 		
 		TestDefinitionsDB.markScheduled(group.getSessionName(), containers);

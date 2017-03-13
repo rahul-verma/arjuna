@@ -53,4 +53,6 @@ public interface TestContainer extends TestObject {
 	boolean hasCompleted();
 
 	void markTestClassInstanceCompleted(TestContainerInstance instance);
+
+	void setAllScheduledCreators(List<String> scheduledCreatorsForContainer);
 }

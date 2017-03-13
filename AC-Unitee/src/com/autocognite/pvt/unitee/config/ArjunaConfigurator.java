@@ -30,6 +30,7 @@ import com.autocognite.pvt.batteries.property.ConfigProperty;
 import com.autocognite.pvt.batteries.property.ConfigPropertyBatteries;
 import com.autocognite.pvt.batteries.property.ConfigPropertyBuilder;
 import com.autocognite.pvt.batteries.value.IncompatibleInputForValueException;
+import com.autocognite.pvt.batteries.value.UnsupportedRepresentationException;
 import com.autocognite.pvt.unitee.lib.strings.UniteeNames;
 import com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton;
 
@@ -135,9 +136,16 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 	}
 	
 	protected void handleReportMode(String propPath, Value configValue, String purpose, boolean visible) throws Exception {
-		ConfigProperty prop = ConfigPropertyBatteries.createEnumProperty(codeForPath(propPath), propPath,
-				ReportMode.class, configValue, purpose, visible);
-		registerProperty(prop);
+		try{
+			ConfigProperty prop = ConfigPropertyBatteries.createEnumProperty(codeForPath(propPath), propPath,
+					ReportMode.class, configValue, purpose, visible);
+			registerProperty(prop);
+		} catch (UnsupportedRepresentationException e){
+			Console.displayError(String.format("Unsupported report format provided in your input: %s.", configValue.asString()));
+			Console.displayError("Check your config files and CLI options.");
+			Console.displayError("Exiting...");
+			System.exit(1);
+		}
 	}
 	
 	protected void handleReportSections(String propPath, Value configValue, String purpose, boolean visible) throws Exception{

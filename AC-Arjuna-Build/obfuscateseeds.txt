@@ -224,6 +224,7 @@ com.autocognite.arjuna.config.RunConfig: RunConfig()
 com.autocognite.arjuna.config.RunConfig: boolean exists(java.lang.String)
 com.autocognite.arjuna.config.RunConfig: com.autocognite.arjuna.interfaces.Value value(java.lang.String)
 com.autocognite.arjuna.config.RunConfig: org.apache.log4j.Logger getCentralLogger()
+com.autocognite.arjuna.config.RunConfig: com.autocognite.arjuna.interfaces.StringKeyValueContainer cloneSessionUDVs()
 com.autocognite.arjuna.enums.Browser
 com.autocognite.arjuna.enums.Browser: com.autocognite.arjuna.enums.Browser CHROME
 com.autocognite.arjuna.enums.Browser: com.autocognite.arjuna.enums.Browser FIREFOX
@@ -972,7 +973,7 @@ com.autocognite.pvt.batteries.enums.BatteriesPropertyType: com.autocognite.pvt.b
 com.autocognite.pvt.batteries.enums.BatteriesPropertyType: com.autocognite.pvt.batteries.enums.BatteriesPropertyType LOGGING_CONSOLE_LEVEL
 com.autocognite.pvt.batteries.enums.BatteriesPropertyType: com.autocognite.pvt.batteries.enums.BatteriesPropertyType LOGGING_FILE_ON
 com.autocognite.pvt.batteries.enums.BatteriesPropertyType: com.autocognite.pvt.batteries.enums.BatteriesPropertyType LOGGING_FILE_LEVEL
-com.autocognite.pvt.batteries.enums.BatteriesPropertyType: com.autocognite.pvt.batteries.enums.BatteriesPropertyType LOGGING_FILE_NAME
+com.autocognite.pvt.batteries.enums.BatteriesPropertyType: com.autocognite.pvt.batteries.enums.BatteriesPropertyType LOGGING_NAME
 com.autocognite.pvt.batteries.enums.BatteriesPropertyType: com.autocognite.pvt.batteries.enums.BatteriesPropertyType DIRECTORY_ROOT
 com.autocognite.pvt.batteries.enums.BatteriesPropertyType: com.autocognite.pvt.batteries.enums.BatteriesPropertyType DIRECTORY_PROJECT
 com.autocognite.pvt.batteries.enums.BatteriesPropertyType: com.autocognite.pvt.batteries.enums.BatteriesPropertyType[] $VALUES

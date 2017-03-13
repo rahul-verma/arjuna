@@ -42,6 +42,7 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 	private Set<TestCreator> methodExecTracker = new HashSet<TestCreator>();
 	private int creatorThreadCount = 1;
 	private List<String> executableCreatorNames = new ArrayList<String>();
+	private Set<String> allScheduledCreators = new HashSet<String>();
 	
 	public JavaTestClassInstance(int instanceNumber, String objectId, JavaTestClass container, JavaTestClassDefinition classDef) throws Exception {
 		super(objectId, TestObjectType.TEST_CLASS_INSTANCE);
@@ -262,13 +263,19 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 	}
 
 	@Override
-	public boolean hasCompleted() {
+	public synchronized boolean hasFragmentCompleted() {
 		return this.methodExecTracker.size() == 0;
 	}
 	
 	@Override
-	public void markTestCreatorCompleted(TestCreator testCreator) {
+	public synchronized boolean hasCompleted() {
+		return this.allScheduledCreators.size() == 0;
+	}
+	
+	@Override
+	public synchronized void markTestCreatorCompleted(TestCreator testCreator) {
 		this.methodExecTracker.remove(testCreator);
+		this.allScheduledCreators.remove(testCreator.getName());
 	}
 
 	@Override
@@ -384,5 +391,12 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 		}
 		
 		return true;
+	}
+	
+	@Override
+	public void setAllScheduledCreators(List<String> creatorNames) {
+		if (creatorNames != null){
+			this.allScheduledCreators.addAll(creatorNames);
+		}
 	}
 }
