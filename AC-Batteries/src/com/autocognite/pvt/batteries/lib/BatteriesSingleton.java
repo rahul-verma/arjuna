@@ -59,7 +59,7 @@ public enum BatteriesSingleton {
 			throw new Exception(
 					String.format("No data reference with %s name has been loaded by Unitee.", refFileName));
 		}
-		return ref.getRecord(key);
+		return ref.record(key);
 	}
 
 	public DataReference getDataReference(String refName) throws Exception {

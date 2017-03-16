@@ -83,95 +83,44 @@ com.autocognite.arjuna.assertions.Assertions -> com.autocognite.arjuna.assertion
     32:32:void <init>() -> <init>
     35:37:void setCheckErrorForAssertionIssue(com.autocognite.pvt.arjuna.interfaces.Check,java.lang.Exception) -> setCheckErrorForAssertionIssue
     40:51:void fail(java.lang.String) -> fail
-    54:55:void fail() -> fail
     58:69:void error(java.lang.String) -> error
-    72:73:void error() -> error
     76:94:void assertTrue(java.lang.String,boolean) -> assertTrue
-    97:98:void assertTrue(boolean) -> assertTrue
     101:119:void assertFalse(java.lang.String,boolean) -> assertFalse
-    122:123:void assertFalse(boolean) -> assertFalse
     130:134:void updateCheckForNullExpectedObject(com.autocognite.pvt.arjuna.interfaces.Check) -> updateCheckForNullExpectedObject
     137:165:void assertEquals(java.lang.String,java.lang.String,java.lang.String) -> assertEquals
-    168:169:void assertEquals(java.lang.String,java.lang.String) -> assertEquals
     172:188:void assertEquals(java.lang.String,int,int) -> assertEquals
-    191:192:void assertEquals(int,int) -> assertEquals
     195:211:void assertEquals(java.lang.String,long,long) -> assertEquals
-    214:215:void assertEquals(long,long) -> assertEquals
     218:221:double round2(double) -> round2
     225:248:void assertEquals(java.lang.String,float,float,float) -> assertEquals
-    251:252:void assertEquals(float,float,float) -> assertEquals
     255:282:void assertEquals(java.lang.String,double,double,double) -> assertEquals
-    285:286:void assertEquals(double,double,double) -> assertEquals
     294:322:void assertEquals(java.lang.String,java.lang.Object,java.lang.Object) -> assertEquals
-    325:326:void assertEquals(java.lang.Object,java.lang.Object) -> assertEquals
     329:359:void assertSame(java.lang.String,java.lang.Object,java.lang.Object) -> assertSame
-    362:363:void assertSame(java.lang.Object,java.lang.Object) -> assertSame
-    370:398:void assertNotEquals(java.lang.String,java.lang.String,java.lang.String) -> assertNotEquals
-    401:402:void assertNotEquals(java.lang.String,java.lang.String) -> assertNotEquals
-    405:421:void assertNotEquals(java.lang.String,int,int) -> assertNotEquals
-    424:425:void assertNotEquals(int,int) -> assertNotEquals
-    428:444:void assertNotEquals(java.lang.String,long,long) -> assertNotEquals
-    447:448:void assertNotEquals(long,long) -> assertNotEquals
-    451:474:void assertNotEquals(java.lang.String,float,float,float) -> assertNotEquals
-    478:479:void assertNotEquals(float,float,float) -> assertNotEquals
-    482:509:void assertNotEquals(java.lang.String,double,double,double) -> assertNotEquals
-    512:513:void assertNotEquals(double,double,double) -> assertNotEquals
-    521:549:void assertNotEquals(java.lang.String,java.lang.Object,java.lang.Object) -> assertNotEquals
-    552:553:void assertNotEquals(java.lang.Object,java.lang.Object) -> assertNotEquals
+    370:398:void assertNotEqual(java.lang.String,java.lang.String,java.lang.String) -> assertNotEqual
+    405:421:void assertNotEqual(java.lang.String,int,int) -> assertNotEqual
+    428:444:void assertNotEqual(java.lang.String,long,long) -> assertNotEqual
+    451:474:void assertNotEqual(java.lang.String,float,float,float) -> assertNotEqual
+    482:509:void assertNotEqual(java.lang.String,double,double,double) -> assertNotEqual
+    521:549:void assertNotEqual(java.lang.String,java.lang.Object,java.lang.Object) -> assertNotEqual
     556:586:void assertNotSame(java.lang.String,java.lang.Object,java.lang.Object) -> assertNotSame
-    589:590:void assertNotSame(java.lang.Object,java.lang.Object) -> assertNotSame
     596:615:void assertArrayEquals(java.lang.String,boolean[],boolean[]) -> assertArrayEquals
-    618:619:void assertArrayEquals(boolean[],boolean[]) -> assertArrayEquals
     622:641:void assertArrayEquals(java.lang.String,byte[],byte[]) -> assertArrayEquals
-    644:645:void assertArrayEquals(byte[],byte[]) -> assertArrayEquals
     648:667:void assertArrayEquals(java.lang.String,char[],char[]) -> assertArrayEquals
-    670:671:void assertArrayEquals(char[],char[]) -> assertArrayEquals
     675:694:void assertArrayEquals(java.lang.String,double[],double[]) -> assertArrayEquals
-    697:698:void assertArrayEquals(double[],double[]) -> assertArrayEquals
     701:720:void assertArrayEquals(java.lang.String,float[],float[]) -> assertArrayEquals
-    723:724:void assertArrayEquals(float[],float[]) -> assertArrayEquals
     727:746:void assertArrayEquals(java.lang.String,int[],int[]) -> assertArrayEquals
-    749:750:void assertArrayEquals(int[],int[]) -> assertArrayEquals
     753:772:void assertArrayEquals(java.lang.String,long[],long[]) -> assertArrayEquals
-    775:776:void assertArrayEquals(short[],short[]) -> assertArrayEquals
     779:798:void assertArrayEquals(java.lang.String,short[],short[]) -> assertArrayEquals
-    801:802:void assertArrayEquals(long[],long[]) -> assertArrayEquals
     805:824:void assertArrayEquals(java.lang.String,java.lang.Object[],java.lang.Object[]) -> assertArrayEquals
-    827:828:void assertArrayEquals(java.lang.Object[],java.lang.Object[]) -> assertArrayEquals
     831:847:void assertNull(java.lang.String,java.lang.Object) -> assertNull
-    850:851:void assertNull(java.lang.Object) -> assertNull
     854:870:void assertNotNull(java.lang.String,java.lang.Object) -> assertNotNull
-    873:874:void assertNotNull(java.lang.Object) -> assertNotNull
     881:901:void assertContains(java.lang.String,java.lang.String,java.lang.String) -> assertContains
-    904:905:void assertContains(java.lang.String,java.lang.String) -> assertContains
     908:928:void assertContains(java.lang.String,java.util.ArrayList,java.lang.String) -> assertContains
-    931:932:void assertContains(java.util.ArrayList,java.lang.String) -> assertContains
     935:955:void assertContains(java.lang.String,java.lang.String[],java.lang.String) -> assertContains
-    958:959:void assertContains(java.lang.String[],java.lang.String) -> assertContains
     962:982:void assertContains(java.lang.String,java.util.HashMap,java.lang.String) -> assertContains
-    985:986:void assertContains(java.util.HashMap,java.lang.String) -> assertContains
     989:1009:void assertDoesNotContain(java.lang.String,java.lang.String,java.lang.String) -> assertDoesNotContain
-    1012:1013:void assertDoesNotContain(java.lang.String,java.lang.String) -> assertDoesNotContain
     1016:1036:void assertDoesNotContain(java.lang.String,java.util.ArrayList,java.lang.String) -> assertDoesNotContain
-    1039:1040:void assertDoesNotContain(java.util.ArrayList,java.lang.String) -> assertDoesNotContain
     1043:1063:void assertDoesNotContain(java.lang.String,java.lang.String[],java.lang.String) -> assertDoesNotContain
-    1066:1067:void assertDoesNotContain(java.lang.String[],java.lang.String) -> assertDoesNotContain
     1070:1090:void assertDoesNotContain(java.lang.String,java.util.HashMap,java.lang.String) -> assertDoesNotContain
-    1093:1094:void assertDoesNotContain(java.util.HashMap,java.lang.String) -> assertDoesNotContain
-com.autocognite.arjuna.bases.DataRecordContainer -> com.autocognite.arjuna.bases.DataRecordContainer:
-    com.autocognite.pvt.batteries.enums.DataRecordOrder order -> a
-    java.util.ArrayList queue -> b
-    java.lang.String[] headers -> c
-    28:34:void <init>(com.autocognite.pvt.batteries.enums.DataRecordOrder) -> <init>
-    37:38:void <init>() -> <init>
-    28:42:void <init>(java.lang.Object[][]) -> <init>
-    45:46:void setHeaders(java.lang.String[]) -> setHeaders
-    49:50:void add(com.autocognite.arjuna.interfaces.DataRecord) -> add
-    53:58:void add(java.lang.Object[]) -> add
-    61:70:void addAll(java.lang.Object[][]) -> addAll
-    73:73:com.autocognite.arjuna.interfaces.DataRecord get(int) -> get
-    77:77:java.util.ArrayList getAll() -> getAll
-    81:81:java.util.Iterator iterator() -> iterator
 com.autocognite.arjuna.bases.DefaultDataRecord -> com.autocognite.arjuna.bases.DefaultDataRecord:
     java.util.HashMap indexToKeyMap -> c
     int counter -> d
@@ -187,6 +136,20 @@ com.autocognite.arjuna.bases.DefaultDataRecord -> com.autocognite.arjuna.bases.D
     91:92:com.autocognite.arjuna.interfaces.Value valueAt(int) -> valueAt
     97:98:java.lang.String stringAt(int) -> stringAt
     103:104:java.lang.Object objectAt(int) -> objectAt
+com.autocognite.arjuna.bases.DefaultDataRecordContainer -> com.autocognite.arjuna.bases.DefaultDataRecordContainer:
+    com.autocognite.pvt.batteries.enums.DataRecordOrder order -> a
+    java.util.ArrayList queue -> b
+    java.lang.String[] headers -> c
+    29:35:void <init>(com.autocognite.pvt.batteries.enums.DataRecordOrder) -> <init>
+    38:39:void <init>() -> <init>
+    29:43:void <init>(java.lang.Object[][]) -> <init>
+    50:51:void setHeaders(java.lang.String[]) -> setHeaders
+    58:59:void add(com.autocognite.arjuna.interfaces.DataRecord) -> add
+    66:71:void add(java.lang.Object[]) -> add
+    78:87:void addAll(java.lang.Object[][]) -> addAll
+    94:94:com.autocognite.arjuna.interfaces.DataRecord get(int) -> get
+    102:102:java.util.ArrayList getAll() -> getAll
+    110:110:java.util.Iterator iterator() -> iterator
 com.autocognite.arjuna.checks.Checks -> com.autocognite.arjuna.checks.Checks:
     25:25:void <init>() -> <init>
     28:31:boolean isTrue(boolean) -> isTrue
@@ -274,13 +237,11 @@ com.autocognite.arjuna.enums.FileFormat -> com.autocognite.arjuna.enums.FileForm
     21:21:void <init>(java.lang.String,int) -> <init>
     21:22:void <clinit>() -> <clinit>
 com.autocognite.arjuna.enums.LoggingLevel -> com.autocognite.arjuna.enums.LoggingLevel:
-    com.autocognite.arjuna.enums.LoggingLevel TRACE -> TRACE
     com.autocognite.arjuna.enums.LoggingLevel DEBUG -> DEBUG
     com.autocognite.arjuna.enums.LoggingLevel INFO -> INFO
     com.autocognite.arjuna.enums.LoggingLevel WARN -> WARN
     com.autocognite.arjuna.enums.LoggingLevel ERROR -> ERROR
     com.autocognite.arjuna.enums.LoggingLevel FATAL -> FATAL
-    com.autocognite.arjuna.enums.LoggingLevel ALL -> ALL
     com.autocognite.arjuna.enums.LoggingLevel[] $VALUES -> $VALUES
     3:3:com.autocognite.arjuna.enums.LoggingLevel[] values() -> values
     3:3:com.autocognite.arjuna.enums.LoggingLevel valueOf(java.lang.String) -> valueOf
@@ -325,6 +286,14 @@ com.autocognite.arjuna.interfaces.DataRecord -> com.autocognite.arjuna.interface
     com.autocognite.arjuna.interfaces.Value valueAt(int) -> valueAt
     java.lang.String stringAt(int) -> stringAt
     java.lang.Object objectAt(int) -> objectAt
+com.autocognite.arjuna.interfaces.DataRecordContainer -> com.autocognite.arjuna.interfaces.DataRecordContainer:
+    void setHeaders(java.lang.String[]) -> setHeaders
+    void add(com.autocognite.arjuna.interfaces.DataRecord) -> add
+    void add(java.lang.Object[]) -> add
+    void addAll(java.lang.Object[][]) -> addAll
+    com.autocognite.arjuna.interfaces.DataRecord get(int) -> get
+    java.util.ArrayList getAll() -> getAll
+    java.util.Iterator iterator() -> iterator
 com.autocognite.arjuna.interfaces.DataReference -> com.autocognite.arjuna.interfaces.DataReference:
     com.autocognite.arjuna.interfaces.DataRecord getRecord(java.lang.String) -> getRecord
 com.autocognite.arjuna.interfaces.DataSource -> com.autocognite.arjuna.interfaces.DataSource:
@@ -658,24 +627,24 @@ com.autocognite.pvt.ArjunaInternal -> com.autocognite.pvt.a:
     174:175:void processNonTestClass(java.lang.Class) -> a
     4321:4327:void com.autocognite.pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):321:327 -> a
     4321:4327:void processNonTestClass(java.lang.Class):174 -> a
-    5041:5063:void com.autocognite.pvt.unitee.config.DataMethodContainerMap.process(java.lang.Class):41:63 -> a
-    5041:5063:void com.autocognite.pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):322 -> a
-    5041:5063:void processNonTestClass(java.lang.Class):174 -> a
+    5044:5067:void com.autocognite.pvt.unitee.config.DataMethodContainerMap.process(java.lang.Class):44:67 -> a
+    5044:5067:void com.autocognite.pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):322 -> a
+    5044:5067:void processNonTestClass(java.lang.Class):174 -> a
     6039:6077:void com.autocognite.pvt.unitee.config.DataGeneratorMap.process(java.lang.Class):39:77 -> a
     6039:6077:void com.autocognite.pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):324 -> a
     6039:6077:void processNonTestClass(java.lang.Class):174 -> a
     178:178:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String) -> a
     6330:6330:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.String,java.lang.String):330:330 -> a
     6330:6330:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):178 -> a
-    7066:7071:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.String,java.lang.String):66:71 -> a
-    7066:7071:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.String,java.lang.String):330 -> a
-    7066:7071:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):178 -> a
+    7070:7075:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.String,java.lang.String):70:75 -> a
+    7070:7075:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.String,java.lang.String):330 -> a
+    7070:7075:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):178 -> a
     182:182:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String) -> a
     7334:7334:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.Class,java.lang.String):334:334 -> a
     7334:7334:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):182 -> a
-    8076:8088:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.Class,java.lang.String):76:88 -> a
-    8076:8088:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.Class,java.lang.String):334 -> a
-    8076:8088:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):182 -> a
+    8080:8095:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.Class,java.lang.String):80:95 -> a
+    8080:8095:java.lang.reflect.Method com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.Class,java.lang.String):334 -> a
+    8080:8095:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):182 -> a
     186:186:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String) -> i
     8338:8338:com.autocognite.arjuna.interfaces.DataSource com.autocognite.pvt.unitee.config.ArjunaSingleton.getDataSourceFromDataGenName(java.lang.String):338:338 -> i
     8338:8338:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):186 -> i
@@ -1586,7 +1555,7 @@ com.autocognite.pvt.batteries.databroker.ExcelDataReference -> com.autocognite.p
     1047:1047:void <init>(java.lang.String,java.lang.String):42 -> <init>
     60:73:void populate() -> a
     2047:2047:java.util.ArrayList com.autocognite.pvt.batteries.filehandler.ExcelFileReader.getHeaders():47:47 -> a
-    2047:2047:void populate():62 -> a
+    2047:2047:void populate():61 -> a
     76:79:com.autocognite.arjuna.interfaces.DataRecord getRecord(java.lang.String) -> getRecord
 com.autocognite.pvt.batteries.databroker.ExcelFileDataSource -> com.autocognite.pvt.bg:
     com.autocognite.pvt.batteries.filehandler.ExcelFileLine2ArrayReader reader -> a
@@ -3426,49 +3395,49 @@ com.autocognite.pvt.unitee.config.ArjunaConfigurator -> com.autocognite.pvt.gj:
     com.autocognite.pvt.batteries.property.ConfigPropertyBuilder builder -> b
     java.util.HashMap pathToEnumMap -> c
     java.util.HashMap enumToPathMap -> d
-    37:48:void <init>() -> <init>
-    51:51:com.autocognite.pvt.arjuna.enums.ArjunaProperty codeForPath(java.lang.String) -> b
-    55:57:void handleStringConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> a
-    60:62:void handleCoreDirPath(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> b
-    65:67:void handleProjectDirPath(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> c
-    70:72:void handleBooleanConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> d
-    80:82:void handleStringListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> e
-    85:95:void handleReportFormatsListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> f
-    98:100:void handleTestObjectPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> g
-    103:105:void handleTestPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> h
-    108:110:void handleTestResultPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> i
-    113:115:void handleStepResultPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> j
-    118:120:void handleIssuePropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> k
-    123:125:void handleEventPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> l
-    128:130:void handleFixturePropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> m
-    133:135:void handleReportSectionPropList(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> n
-    138:141:void handleReportMode(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> o
-    144:146:void handleReportSections(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> p
-    149:151:void handleTestResultType(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> q
-    155:409:void processConfigProperties(java.util.HashMap) -> a
-    1138:1141:void handleReportMode(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):138:141 -> a
-    1138:1141:void processConfigProperties(java.util.HashMap):207 -> a
-    2103:2105:void handleTestPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):103:105 -> a
-    2103:2105:void processConfigProperties(java.util.HashMap):282 -> a
-    2123:2125:void handleEventPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):123:125 -> a
-    2123:2125:void processConfigProperties(java.util.HashMap):345 -> a
-    3108:3110:void handleTestResultPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):108:110 -> a
-    3108:3110:void processConfigProperties(java.util.HashMap):348 -> a
-    3118:3120:void handleIssuePropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):118:120 -> a
-    3118:3120:void processConfigProperties(java.util.HashMap):351 -> a
-    3128:3130:void handleFixturePropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):128:130 -> a
-    3128:3130:void processConfigProperties(java.util.HashMap):354 -> a
-    4113:4115:void handleStepResultPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):113:115 -> a
-    4113:4115:void processConfigProperties(java.util.HashMap):357 -> a
-    412:414:void processDefaults() -> f
-    418:419:void loadComponent() -> g
+    38:49:void <init>() -> <init>
+    52:52:com.autocognite.pvt.arjuna.enums.ArjunaProperty codeForPath(java.lang.String) -> b
+    56:58:void handleStringConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> a
+    61:63:void handleCoreDirPath(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> b
+    66:68:void handleProjectDirPath(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> c
+    71:73:void handleBooleanConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> d
+    81:83:void handleStringListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> e
+    86:96:void handleReportFormatsListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> f
+    99:101:void handleTestObjectPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> g
+    104:106:void handleTestPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> h
+    109:111:void handleTestResultPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> i
+    114:116:void handleStepResultPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> j
+    119:121:void handleIssuePropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> k
+    124:126:void handleEventPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> l
+    129:131:void handleFixturePropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> m
+    134:136:void handleReportSectionPropList(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> n
+    140:149:void handleReportMode(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> o
+    152:154:void handleReportSections(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> p
+    157:159:void handleTestResultType(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean) -> q
+    163:417:void processConfigProperties(java.util.HashMap) -> a
+    1140:1149:void handleReportMode(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):140:149 -> a
+    1140:1149:void processConfigProperties(java.util.HashMap):215 -> a
+    2104:2106:void handleTestPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):104:106 -> a
+    2104:2106:void processConfigProperties(java.util.HashMap):290 -> a
+    2124:2126:void handleEventPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):124:126 -> a
+    2124:2126:void processConfigProperties(java.util.HashMap):353 -> a
+    3109:3111:void handleTestResultPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):109:111 -> a
+    3109:3111:void processConfigProperties(java.util.HashMap):356 -> a
+    3119:3121:void handleIssuePropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):119:121 -> a
+    3119:3121:void processConfigProperties(java.util.HashMap):359 -> a
+    3129:3131:void handleFixturePropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):129:131 -> a
+    3129:3131:void processConfigProperties(java.util.HashMap):362 -> a
+    4114:4116:void handleStepResultPropListConfig(java.lang.String,com.autocognite.arjuna.interfaces.Value,java.lang.String,boolean):114:116 -> a
+    4114:4116:void processConfigProperties(java.util.HashMap):365 -> a
+    420:422:void processDefaults() -> f
+    426:427:void loadComponent() -> g
     5074:5168:void com.autocognite.pvt.unitee.reporter.lib.config.TestReporterSingleton.init():74:168 -> g
-    5074:5168:void loadComponent():418 -> g
-    423:486:java.util.ArrayList getAllMessages() -> d
-    491:491:java.util.ArrayList getAllNames() -> e
+    5074:5168:void loadComponent():426 -> g
+    431:494:java.util.ArrayList getAllMessages() -> d
+    499:499:java.util.ArrayList getAllNames() -> e
 com.autocognite.pvt.unitee.config.ArjunaConfigurator$1 -> com.autocognite.pvt.gk:
     int[] $SwitchMap$com$autocognite$pvt$arjuna$enums$ArjunaProperty -> a
-    160:160:void <clinit>() -> <clinit>
+    168:168:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.config.ArjunaSingleton -> com.autocognite.pvt.gl:
     com.autocognite.pvt.unitee.config.ArjunaSingleton INSTANCE -> a
     java.lang.String version -> b
@@ -3522,16 +3491,16 @@ com.autocognite.pvt.unitee.config.ArjunaSingleton -> com.autocognite.pvt.gl:
     313:313:com.autocognite.pvt.unitee.reporter.lib.Reporter getReporter() -> h
     317:318:void setReporter(com.autocognite.pvt.unitee.reporter.lib.Reporter) -> a
     321:327:void processNonTestClass(java.lang.Class) -> a
-    5041:5063:void com.autocognite.pvt.unitee.config.DataMethodContainerMap.process(java.lang.Class):41:63 -> a
-    5041:5063:void processNonTestClass(java.lang.Class):322 -> a
+    5044:5067:void com.autocognite.pvt.unitee.config.DataMethodContainerMap.process(java.lang.Class):44:67 -> a
+    5044:5067:void processNonTestClass(java.lang.Class):322 -> a
     6039:6077:void com.autocognite.pvt.unitee.config.DataGeneratorMap.process(java.lang.Class):39:77 -> a
     6039:6077:void processNonTestClass(java.lang.Class):324 -> a
     330:330:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String) -> a
-    7066:7071:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.String,java.lang.String):66:71 -> a
-    7066:7071:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):330 -> a
+    7070:7075:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.String,java.lang.String):70:75 -> a
+    7070:7075:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):330 -> a
     334:334:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String) -> a
-    7076:7088:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.Class,java.lang.String):76:88 -> a
-    7076:7088:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):334 -> a
+    7080:7095:java.lang.reflect.Method com.autocognite.pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.Class,java.lang.String):80:95 -> a
+    7080:7095:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):334 -> a
     338:338:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String) -> a
     8080:8085:com.autocognite.arjuna.interfaces.DataSource com.autocognite.pvt.unitee.config.DataGeneratorMap.getDataSource(java.lang.String):80:85 -> a
     8080:8085:com.autocognite.arjuna.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):338 -> a
@@ -3551,14 +3520,15 @@ com.autocognite.pvt.unitee.config.DataGeneratorMap -> com.autocognite.pvt.gm:
     39:77:void process(java.lang.Class) -> a
     80:85:com.autocognite.arjuna.interfaces.DataSource getDataSource(java.lang.String) -> a
 com.autocognite.pvt.unitee.config.DataMethodContainerMap -> com.autocognite.pvt.gn:
-    org.apache.log4j.Logger logger -> d
-    java.util.HashMap wrappers -> a
-    java.util.HashMap containerClassNames -> b
-    java.util.HashMap containerClassToNameMapper -> c
-    34:38:void <init>() -> <init>
-    41:63:void process(java.lang.Class) -> a
-    66:71:java.lang.reflect.Method getMethod(java.lang.String,java.lang.String) -> a
-    76:88:java.lang.reflect.Method getMethod(java.lang.Class,java.lang.String) -> a
+    org.apache.log4j.Logger logger -> a
+    java.util.HashMap wrappers -> b
+    java.util.HashMap containerClassNames -> c
+    java.util.HashMap containerClassToNameMapper -> d
+    java.util.HashMap containerClassNameToClassMapper -> e
+    35:41:void <init>() -> <init>
+    44:67:void process(java.lang.Class) -> a
+    70:75:java.lang.reflect.Method getMethod(java.lang.String,java.lang.String) -> a
+    80:95:java.lang.reflect.Method getMethod(java.lang.Class,java.lang.String) -> a
 com.autocognite.pvt.unitee.config.SessionCreator -> com.autocognite.pvt.go:
     java.lang.String sessionName -> b
     com.autocognite.pvt.unitee.testobject.lib.loader.session.Session session -> a
@@ -3573,24 +3543,24 @@ com.autocognite.pvt.unitee.config.SessionCreator -> com.autocognite.pvt.go:
 com.autocognite.pvt.unitee.core.lib.annotate.None -> com.autocognite.pvt.gp:
     23:23:void <init>() -> <init>
 com.autocognite.pvt.unitee.core.lib.datasource.DataArrayDataSource -> com.autocognite.pvt.gq:
-    com.autocognite.arjuna.bases.DataRecordContainer container -> a
+    com.autocognite.arjuna.interfaces.DataRecordContainer container -> a
     java.util.Iterator iter -> b
-    13:28:void <init>(java.lang.String[],java.util.List) -> <init>
-    1031:1032:void initialize():31:32 -> <init>
-    1031:1032:void <init>(java.lang.String[],java.util.List):27 -> <init>
-    31:32:void initialize() -> a
-    35:38:com.autocognite.arjuna.interfaces.DataRecord next() -> next
+    14:29:void <init>(java.lang.String[],java.util.List) -> <init>
+    1032:1033:void initialize():32:33 -> <init>
+    1032:1033:void <init>(java.lang.String[],java.util.List):28 -> <init>
+    32:33:void initialize() -> a
+    36:39:com.autocognite.arjuna.interfaces.DataRecord next() -> next
 com.autocognite.pvt.unitee.core.lib.datasource.DataMethodDataSource -> com.autocognite.pvt.gr:
     java.lang.Object[][] sampleArr -> a
     java.lang.reflect.Method dataMethod -> b
-    com.autocognite.arjuna.bases.DataRecordContainer recordContainer -> c
+    com.autocognite.arjuna.interfaces.DataRecordContainer recordContainer -> c
     java.util.Iterator iter -> d
-    14:25:void <init>(java.lang.reflect.Method) -> <init>
-    1029:1035:void init():29:35 -> <init>
-    1029:1035:void <init>(java.lang.reflect.Method):24 -> <init>
-    29:35:void init() -> a
-    38:41:com.autocognite.arjuna.interfaces.DataRecord next() -> next
-    13:13:void <clinit>() -> <clinit>
+    15:26:void <init>(java.lang.reflect.Method) -> <init>
+    1030:1036:void init():30:36 -> <init>
+    1030:1036:void <init>(java.lang.reflect.Method):25 -> <init>
+    30:36:void init() -> a
+    39:42:com.autocognite.arjuna.interfaces.DataRecord next() -> next
+    14:14:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder -> com.autocognite.pvt.gs:
     org.apache.log4j.Logger logger -> n
     com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition testClassDef -> a
@@ -4960,24 +4930,24 @@ com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelEventWriter -> com.aut
     org.apache.log4j.Logger logger -> d
     java.util.List eventAttrs -> e
     java.util.List eventHeaders -> f
-    581:588:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
-    591:600:void setUp() -> a
-    603:604:void update(com.autocognite.pvt.unitee.reporter.lib.event.Event) -> a
-    1216:1217:void com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelResultWriter.writeData(java.util.List):216:217 -> a
-    1216:1217:void update(com.autocognite.pvt.unitee.reporter.lib.event.Event):603 -> a
+    583:590:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
+    593:602:void setUp() -> a
+    605:606:void update(com.autocognite.pvt.unitee.reporter.lib.event.Event) -> a
+    1218:1219:void com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelResultWriter.writeData(java.util.List):218:219 -> a
+    1218:1219:void update(com.autocognite.pvt.unitee.reporter.lib.event.Event):605 -> a
 com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelFixtureResultWriter -> com.autocognite.pvt.ke:
     org.apache.log4j.Logger logger -> d
     java.util.List fixtureTestObjectProps -> e
     java.util.List fixtureResultProps -> f
     java.util.List fixtureHeaders -> g
-    540:548:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
-    552:569:void setUp() -> a
-    572:576:void update(com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult) -> a
+    542:550:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
+    554:571:void setUp() -> a
+    574:578:void update(com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult) -> a
     1033:1033:java.util.List com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult.resultPropStrings(java.util.List):33:33 -> a
-    1033:1033:void update(com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult):574 -> a
+    1033:1033:void update(com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult):576 -> a
     2021:2021:com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResultProperties com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult.resultProps():21:21 -> a
     2021:2021:java.util.List com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult.resultPropStrings(java.util.List):33 -> a
-    2021:2021:void update(com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult):574 -> a
+    2021:2021:void update(com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult):576 -> a
 com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelIssueWriter -> com.autocognite.pvt.kf:
     org.apache.log4j.Logger logger -> d
     java.util.List issueTestObjectProps -> e
@@ -4985,14 +4955,14 @@ com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelIssueWriter -> com.aut
     java.util.List issueResultProps -> g
     java.util.List issueHeaders -> h
     boolean shouldIncludeAnnotatedTestProps -> i
-    483:494:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
-    498:525:void setUp() -> a
-    528:535:void update(com.autocognite.pvt.unitee.reporter.lib.issue.Issue) -> a
+    485:496:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
+    500:527:void setUp() -> a
+    530:537:void update(com.autocognite.pvt.unitee.reporter.lib.issue.Issue) -> a
     1025:1025:java.util.List com.autocognite.pvt.unitee.reporter.lib.issue.Issue.resultPropStrings(java.util.List):25:25 -> a
-    1025:1025:void update(com.autocognite.pvt.unitee.reporter.lib.issue.Issue):529 -> a
+    1025:1025:void update(com.autocognite.pvt.unitee.reporter.lib.issue.Issue):531 -> a
     2021:2021:com.autocognite.pvt.unitee.reporter.lib.issue.IssueProperties com.autocognite.pvt.unitee.reporter.lib.issue.Issue.resultProps():21:21 -> a
     2021:2021:java.util.List com.autocognite.pvt.unitee.reporter.lib.issue.Issue.resultPropStrings(java.util.List):25 -> a
-    2021:2021:void update(com.autocognite.pvt.unitee.reporter.lib.issue.Issue):529 -> a
+    2021:2021:void update(com.autocognite.pvt.unitee.reporter.lib.issue.Issue):531 -> a
 com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelReportGenerator -> com.autocognite.pvt.kg:
     org.apache.log4j.Logger logger -> a
     java.io.FileOutputStream fileOut -> b
@@ -5005,18 +4975,18 @@ com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelReportGenerator -> com
     com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelEventWriter eventSheet -> i
     com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelFixtureResultWriter fixtureSheet -> j
     java.util.Set allowedRTypes -> k
-    47:63:void <init>(java.lang.String) -> <init>
-    66:96:void createWorkBook() -> c
-    100:124:void setUp() -> a
-    1066:1096:void createWorkBook():66:96 -> a
-    1066:1096:void setUp():100 -> a
-    127:144:void tearDown() -> b
-    148:153:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult) -> a
+    49:65:void <init>(java.lang.String) -> <init>
+    68:98:void createWorkBook() -> c
+    102:126:void setUp() -> a
+    1068:1098:void createWorkBook():68:98 -> a
+    1068:1098:void setUp():102 -> a
+    129:146:void tearDown() -> b
+    150:155:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult) -> a
     2034:2034:com.autocognite.pvt.unitee.reporter.lib.test.TestResultProperties com.autocognite.pvt.unitee.reporter.lib.test.TestResult.resultProps():34:34 -> a
-    2034:2034:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):149 -> a
-    157:160:void update(com.autocognite.pvt.unitee.reporter.lib.issue.Issue) -> a
-    164:167:void update(com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult) -> a
-    171:174:void update(com.autocognite.pvt.unitee.reporter.lib.event.Event) -> a
+    2034:2034:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):151 -> a
+    159:162:void update(com.autocognite.pvt.unitee.reporter.lib.issue.Issue) -> a
+    166:169:void update(com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult) -> a
+    173:176:void update(com.autocognite.pvt.unitee.reporter.lib.event.Event) -> a
 com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelResultWriter -> com.autocognite.pvt.kh:
     org.apache.log4j.Logger logger -> d
     java.lang.String reportTypeLabel -> e
@@ -5029,15 +4999,15 @@ com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelResultWriter -> com.au
     org.apache.poi.hssf.usermodel.HSSFCellStyle lastCellStyle -> c
     org.apache.poi.hssf.usermodel.HSSFWorkbook workbook -> j
     org.apache.poi.hssf.usermodel.HSSFCellStyle currentStyle -> k
-    179:194:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook,java.lang.String) -> <init>
-    197:200:void setStyles(org.apache.poi.hssf.usermodel.HSSFCellStyle,org.apache.poi.hssf.usermodel.HSSFCellStyle,org.apache.poi.hssf.usermodel.HSSFCellStyle) -> a
-    203:205:void setHeaders(java.util.List) -> a
-    208:208:java.util.List getHeaders() -> d
-    212:213:void writeHeader() -> b
-    216:217:void writeData(java.util.List) -> b
-    222:254:void writeExcelRow(java.util.List,boolean) -> a
-    258:259:void setUp() -> a
-    262:267:void tearDown() -> c
+    181:196:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook,java.lang.String) -> <init>
+    199:202:void setStyles(org.apache.poi.hssf.usermodel.HSSFCellStyle,org.apache.poi.hssf.usermodel.HSSFCellStyle,org.apache.poi.hssf.usermodel.HSSFCellStyle) -> a
+    205:207:void setHeaders(java.util.List) -> a
+    210:210:java.util.List getHeaders() -> d
+    214:215:void writeHeader() -> b
+    218:219:void writeData(java.util.List) -> b
+    224:256:void writeExcelRow(java.util.List,boolean) -> a
+    260:261:void setUp() -> a
+    264:269:void tearDown() -> c
 com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelStepResultWriter -> com.autocognite.pvt.ki:
     org.apache.log4j.Logger logger -> d
     java.util.List stepTestObjectProps -> e
@@ -5045,15 +5015,15 @@ com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelStepResultWriter -> co
     java.util.List stepResultProps -> g
     java.util.List stepHeaders -> h
     boolean shouldIncludeAnnotatedTestProps -> i
-    417:428:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
-    432:459:void setUp() -> a
-    462:462:void update$4d23362d() -> d
-    466:478:void update(com.autocognite.arjuna.interfaces.TestVariables,java.util.List) -> a
+    419:430:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
+    434:461:void setUp() -> a
+    464:464:void update$4d23362d() -> d
+    468:480:void update(com.autocognite.arjuna.interfaces.TestVariables,java.util.List) -> a
     1021:1021:java.util.List com.autocognite.pvt.unitee.reporter.lib.step.StepResult.resultPropStrings(java.util.List):21:21 -> a
-    1021:1021:void update(com.autocognite.arjuna.interfaces.TestVariables,java.util.List):474 -> a
+    1021:1021:void update(com.autocognite.arjuna.interfaces.TestVariables,java.util.List):476 -> a
     2017:2017:com.autocognite.pvt.unitee.reporter.lib.step.StepResultProperties com.autocognite.pvt.unitee.reporter.lib.step.StepResult.resultProps():17:17 -> a
     2017:2017:java.util.List com.autocognite.pvt.unitee.reporter.lib.step.StepResult.resultPropStrings(java.util.List):21 -> a
-    2017:2017:void update(com.autocognite.arjuna.interfaces.TestVariables,java.util.List):474 -> a
+    2017:2017:void update(com.autocognite.arjuna.interfaces.TestVariables,java.util.List):476 -> a
 com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelTestResultWriter -> com.autocognite.pvt.kj:
     org.apache.log4j.Logger logger -> d
     java.util.List execTestObjectProps -> e
@@ -5067,18 +5037,18 @@ com.autocognite.pvt.unitee.reporter.lib.writer.excel.ExcelTestResultWriter -> co
     boolean shouldIncludeDataRecord -> m
     boolean shouldIncludeDataRef -> n
     com.google.gson.Gson gson -> o
-    271:291:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
-    295:344:void setUp() -> a
-    347:405:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult) -> a
+    273:293:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
+    297:346:void setUp() -> a
+    349:407:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult) -> a
     1037:1037:com.autocognite.arjuna.interfaces.StringKeyValueContainer com.autocognite.pvt.unitee.reporter.lib.reportable.TestRelatedResult.udv():37:37 -> a
-    1037:1037:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):369 -> a
+    1037:1037:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):371 -> a
     2021:2021:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.reporter.lib.reportable.TestRelatedResult.testVars():21:21 -> a
-    2021:2021:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):382 -> a
+    2021:2021:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):384 -> a
     3021:3021:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.reporter.lib.reportable.TestRelatedResult.testVars():21:21 -> a
-    3021:3021:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):403 -> a
+    3021:3021:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):405 -> a
     3057:3057:java.util.List com.autocognite.pvt.unitee.reporter.lib.test.TestResult.stepResults():57:57 -> a
-    3057:3057:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):403 -> a
-    408:412:void tearDown() -> c
+    3057:3057:void update(com.autocognite.pvt.unitee.reporter.lib.test.TestResult):405 -> a
+    410:414:void tearDown() -> c
 com.autocognite.pvt.unitee.reporter.lib.writer.json.JsonConsolidatedEventWriter -> com.autocognite.pvt.kk:
     org.apache.log4j.Logger logger -> a
     int counter -> b
@@ -5211,7 +5181,7 @@ com.autocognite.pvt.unitee.runner.lib.slots.TestContainerInstanceExecutor -> com
     35:39:void executeSetUpClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> b
     43:47:void executeTearDownClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> c
     51:55:void executeTearDownClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> d
-    70:188:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance) -> a
+    70:192:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance) -> a
     1036:1036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> a
     1036:1036:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70 -> a
     2027:2031:void executeSetUpClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):27:31 -> a
@@ -5219,37 +5189,37 @@ com.autocognite.pvt.unitee.runner.lib.slots.TestContainerInstanceExecutor -> com
     2035:2039:void executeSetUpClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):35:39 -> a
     2035:2039:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):114 -> a
     2043:2047:void executeTearDownClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):43:47 -> a
-    2043:2047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):171 -> a
+    2043:2047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):172 -> a
     2051:2055:void executeTearDownClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):51:55 -> a
-    2051:2055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):180 -> a
-    192:221:void run() -> run
+    2051:2055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):182 -> a
+    196:225:void run() -> run
     3045:3048:com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer.next():45:48 -> run
-    3045:3048:void run():194 -> run
+    3045:3048:void run():198 -> run
     4036:4036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    4036:4036:void run():195 -> run
+    4036:4036:void run():199 -> run
     5036:5036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    5036:5036:void run():198 -> run
+    5036:5036:void run():202 -> run
     6036:6036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    6036:6036:void run():203 -> run
+    6036:6036:void run():207 -> run
     7036:7036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    7036:7036:void run():208 -> run
-    7070:7188:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70:188 -> run
-    7070:7188:void run():214 -> run
+    7036:7036:void run():212 -> run
+    7070:7192:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70:192 -> run
+    7070:7192:void run():218 -> run
     8036:8036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
     8036:8036:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70 -> run
-    8036:8036:void run():214 -> run
+    8036:8036:void run():218 -> run
     9027:9031:void executeSetUpClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):27:31 -> run
     9027:9031:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):93 -> run
-    9027:9031:void run():214 -> run
+    9027:9031:void run():218 -> run
     9035:9039:void executeSetUpClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):35:39 -> run
     9035:9039:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):114 -> run
-    9035:9039:void run():214 -> run
+    9035:9039:void run():218 -> run
     9043:9047:void executeTearDownClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):43:47 -> run
-    9043:9047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):171 -> run
-    9043:9047:void run():214 -> run
+    9043:9047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):172 -> run
+    9043:9047:void run():218 -> run
     9051:9055:void executeTearDownClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):51:55 -> run
-    9051:9055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):180 -> run
-    9051:9055:void run():214 -> run
+    9051:9055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):182 -> run
+    9051:9055:void run():218 -> run
     16:16:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.runner.lib.slots.TestCreatorExecutor -> com.autocognite.pvt.kw:
     org.apache.log4j.Logger logger -> a
@@ -5265,8 +5235,6 @@ com.autocognite.pvt.unitee.runner.lib.slots.TestCreatorExecutor -> com.autocogni
     1029:1033:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestCreator):56 -> a
     1037:1041:void executeTearDownMethodFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator):37:41 -> a
     1037:1041:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestCreator):99 -> a
-    1271:1272:void com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.markTestCreatorCompleted(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator):271:272 -> a
-    1271:1272:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestCreator):106 -> a
     111:165:void run() -> run
     2040:2043:com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestCreator com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.next():40:43 -> run
     2040:2043:void run():114 -> run
@@ -5295,9 +5263,6 @@ com.autocognite.pvt.unitee.runner.lib.slots.TestCreatorExecutor -> com.autocogni
     10037:10041:void executeTearDownMethodFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator):37:41 -> run
     10037:10041:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestCreator):99 -> run
     10037:10041:void run():157 -> run
-    10271:10272:void com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.markTestCreatorCompleted(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator):271:272 -> run
-    10271:10272:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestCreator):106 -> run
-    10271:10272:void run():157 -> run
     18:18:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.runner.lib.slots.TestCreatorInstanceExecutor -> com.autocognite.pvt.kx:
     org.apache.log4j.Logger logger -> a
@@ -5840,12 +5805,12 @@ com.autocognite.pvt.unitee.testobject.lib.fixture.BaseTestClassFixture -> com.au
     31079:31079:java.lang.String getFixturePoint():236 -> q
     31087:31087:com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance getTestClassInstance():87:87 -> q
     31087:31087:java.lang.String getFixturePoint():242 -> q
-    31180:31180:int com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getInstanceNumber():180:180 -> q
-    31180:31180:java.lang.String getFixturePoint():242 -> q
+    31181:31181:int com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getInstanceNumber():181:181 -> q
+    31181:31181:java.lang.String getFixturePoint():242 -> q
     32087:32087:com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance getTestClassInstance():87:87 -> q
     32087:32087:java.lang.String getFixturePoint():243 -> q
-    32180:32180:int com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getInstanceNumber():180:180 -> q
-    32180:32180:java.lang.String getFixturePoint():243 -> q
+    32181:32181:int com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getInstanceNumber():181:181 -> q
+    32181:32181:java.lang.String getFixturePoint():243 -> q
     33079:33079:com.autocognite.pvt.arjuna.enums.TestClassFixtureType getType():79:79 -> q
     33079:33079:java.lang.String getFixturePoint():244 -> q
     33096:33096:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject getTestObject():96:96 -> q
@@ -5878,8 +5843,8 @@ com.autocognite.pvt.unitee.testobject.lib.fixture.BoundFixture -> com.autocognit
     1071:1071:void executeFixture():14 -> a
     1087:1087:com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance com.autocognite.pvt.unitee.testobject.lib.fixture.BaseTestClassFixture.getTestClassInstance():87:87 -> a
     1087:1087:void executeFixture():14 -> a
-    1184:1184:java.lang.Object com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getUserTestContainerObject():184:184 -> a
-    1184:1184:void executeFixture():14 -> a
+    1185:1185:java.lang.Object com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getUserTestContainerObject():185:185 -> a
+    1185:1185:void executeFixture():14 -> a
     18:20:com.autocognite.pvt.unitee.testobject.lib.fixture.BoundFixture clone() -> o
     2063:2063:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.fixture.BaseTestClassFixture.getTestClass():63:63 -> o
     2063:2063:com.autocognite.pvt.unitee.testobject.lib.fixture.BoundFixture clone():18 -> o
@@ -6061,6 +6026,7 @@ com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer -> com.autoco
     boolean wasSetUpClassFixtureExecuted() -> e_
     boolean hasCompleted() -> s
     void markTestClassInstanceCompleted(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> a
+    void setAllScheduledCreators(java.util.List) -> a
 com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance -> com.autocognite.pvt.ls:
     int getInstanceNumber() -> b
     void loadTestCreators() -> c
@@ -6068,29 +6034,31 @@ com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance -> co
     java.util.List getTestCreators() -> e
     boolean wasSetUpClassInstanceFixtureExecuted() -> f
     boolean didSetUpClassFixtureSucceed() -> g
-    boolean hasCompleted() -> h
-    int getCreatorThreadCount() -> i
-    java.lang.Class getUserTestContainer() -> j
-    com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler() -> k
-    java.lang.Object getUserTestContainerObject() -> l
-    com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> m
-    boolean wasTearDownClassFixtureExecuted() -> n
-    boolean didTearDownClassFixtureSucceed() -> o
-    com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpClassFixtureResult() -> p
-    com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownClassFixtureResult() -> q
+    boolean hasFragmentCompleted() -> h
+    boolean hasCompleted() -> i
+    int getCreatorThreadCount() -> j
+    java.lang.Class getUserTestContainer() -> k
+    com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler() -> l
+    java.lang.Object getUserTestContainerObject() -> m
+    com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> n
+    boolean wasTearDownClassFixtureExecuted() -> o
+    boolean didTearDownClassFixtureSucceed() -> p
+    com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpClassFixtureResult() -> q
+    com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownClassFixtureResult() -> r
     void markTestCreatorCompleted(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator) -> a
     void addExecutableCreatorName(java.lang.String) -> a
-    void resetExecutorCreatorQueue() -> r
-    void setUpClassInstance() -> s
-    void tearDownClassInstance() -> t
-    void setUpClassFragment() -> u
-    void tearDownClassFragment() -> v
-    com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpClassFragmentFixtureResult() -> w
-    com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownClassFragmentFixtureResult() -> x
-    boolean shouldExecuteTearDownClassFragmentFixture() -> y
-    boolean shouldExecuteSetupClassFragmentFixture() -> z
-    boolean shouldExecuteSetupClassInstanceFixture() -> A
-    boolean shouldExecuteTearDownClassInstanceFixture() -> B
+    void resetExecutorCreatorQueue() -> s
+    void setUpClassInstance() -> t
+    void tearDownClassInstance() -> u
+    void setUpClassFragment() -> v
+    void tearDownClassFragment() -> w
+    com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpClassFragmentFixtureResult() -> x
+    com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownClassFragmentFixtureResult() -> y
+    boolean shouldExecuteTearDownClassFragmentFixture() -> z
+    boolean shouldExecuteSetupClassFragmentFixture() -> A
+    boolean shouldExecuteSetupClassInstanceFixture() -> B
+    boolean shouldExecuteTearDownClassInstanceFixture() -> C
+    void setAllScheduledCreators(java.util.List) -> a
 com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator -> com.autocognite.pvt.lt:
     java.util.List getInstances() -> b
     int getInstanceThreadCount() -> c
@@ -6121,27 +6089,27 @@ com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreatorInstance -> com.
     boolean shouldExecuteSetupMethodInstanceFixture() -> d_
     boolean shouldExecuteTearDownMethodInstanceFixture() -> p
 com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject -> com.autocognite.pvt.lv:
-    com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> C
-    java.lang.String getObjectId() -> D
+    com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> D
+    java.lang.String getObjectId() -> E
     java.lang.String getQualifiedName() -> a
-    com.autocognite.arjuna.interfaces.TestVariables getTestVariables() -> E
-    com.autocognite.internal.arjuna.enums.TestObjectType getObjectType() -> F
+    com.autocognite.arjuna.interfaces.TestVariables getTestVariables() -> F
+    com.autocognite.internal.arjuna.enums.TestObjectType getObjectType() -> G
     void markExcluded(com.autocognite.pvt.arjuna.enums.TestResultCode,java.lang.String,int) -> a
-    boolean wasExcluded() -> G
-    com.autocognite.pvt.arjuna.enums.TestResultCode getExclusionType() -> H
-    java.lang.String getExclusionDesc() -> I
-    int getExclusionIssueId() -> J
+    boolean wasExcluded() -> H
+    com.autocognite.pvt.arjuna.enums.TestResultCode getExclusionType() -> I
+    java.lang.String getExclusionDesc() -> J
+    int getExclusionIssueId() -> K
     void markUnSelected(com.autocognite.pvt.arjuna.enums.TestResultCode,java.lang.String) -> a
-    boolean wasUnSelected() -> K
-    com.autocognite.pvt.arjuna.enums.TestResultCode getUnSelectedType() -> L
-    java.lang.String getUnSelectedDesc() -> M
+    boolean wasUnSelected() -> L
+    com.autocognite.pvt.arjuna.enums.TestResultCode getUnSelectedType() -> M
+    java.lang.String getUnSelectedDesc() -> N
     void markSkipped(com.autocognite.pvt.arjuna.enums.TestResultCode,java.lang.String) -> b
-    boolean wasSkipped() -> N
-    com.autocognite.pvt.arjuna.enums.TestResultCode getSkipType() -> O
-    java.lang.String getSkipDesc() -> P
+    boolean wasSkipped() -> O
+    com.autocognite.pvt.arjuna.enums.TestResultCode getSkipType() -> P
+    java.lang.String getSkipDesc() -> Q
     void setThreadId(java.lang.String) -> b
-    void initTimeStamp() -> Q
-    void endTimeStamp() -> R
+    void initTimeStamp() -> R
+    void endTimeStamp() -> S
 com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject -> com.autocognite.pvt.lw:
     org.apache.log4j.Logger logger -> m
     java.lang.String objectId -> a
@@ -6163,38 +6131,38 @@ com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject -> com.autocognite
     1041:1042:void <init>(java.lang.String,com.autocognite.internal.arjuna.enums.TestObjectType):32 -> <init>
     1049:1050:void setObjectType(com.autocognite.internal.arjuna.enums.TestObjectType):49:50 -> <init>
     1049:1050:void <init>(java.lang.String,com.autocognite.internal.arjuna.enums.TestObjectType):33 -> <init>
-    37:37:java.lang.String getObjectId() -> D
+    37:37:java.lang.String getObjectId() -> E
     41:42:void setObjectId(java.lang.String) -> a
-    45:45:com.autocognite.internal.arjuna.enums.TestObjectType getObjectType() -> F
+    45:45:com.autocognite.internal.arjuna.enums.TestObjectType getObjectType() -> G
     49:50:void setObjectType(com.autocognite.internal.arjuna.enums.TestObjectType) -> a
-    53:53:com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables getTestVariables() -> S
+    53:53:com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables getTestVariables() -> T
     57:59:void setTestVarsHandler(com.autocognite.pvt.unitee.core.lib.metadata.TestVarsHandler) -> a
     62:62:java.lang.String getQualifiedName() -> a
     66:67:void setQualifiedName(java.lang.String) -> c
     71:75:void markExcluded(com.autocognite.pvt.arjuna.enums.TestResultCode,java.lang.String,int) -> a
-    79:79:boolean wasExcluded() -> G
-    84:84:com.autocognite.pvt.arjuna.enums.TestResultCode getExclusionType() -> H
-    89:89:java.lang.String getExclusionDesc() -> I
-    94:94:int getExclusionIssueId() -> J
+    79:79:boolean wasExcluded() -> H
+    84:84:com.autocognite.pvt.arjuna.enums.TestResultCode getExclusionType() -> I
+    89:89:java.lang.String getExclusionDesc() -> J
+    94:94:int getExclusionIssueId() -> K
     99:102:void markUnSelected(com.autocognite.pvt.arjuna.enums.TestResultCode,java.lang.String) -> a
-    106:106:boolean wasUnSelected() -> K
-    111:111:com.autocognite.pvt.arjuna.enums.TestResultCode getUnSelectedType() -> L
-    116:116:java.lang.String getUnSelectedDesc() -> M
+    106:106:boolean wasUnSelected() -> L
+    111:111:com.autocognite.pvt.arjuna.enums.TestResultCode getUnSelectedType() -> M
+    116:116:java.lang.String getUnSelectedDesc() -> N
     121:124:void markSkipped(com.autocognite.pvt.arjuna.enums.TestResultCode,java.lang.String) -> b
-    128:128:boolean wasSkipped() -> N
-    133:133:com.autocognite.pvt.arjuna.enums.TestResultCode getSkipType() -> O
-    138:138:java.lang.String getSkipDesc() -> P
+    128:128:boolean wasSkipped() -> O
+    133:133:com.autocognite.pvt.arjuna.enums.TestResultCode getSkipType() -> P
+    138:138:java.lang.String getSkipDesc() -> Q
     142:142:boolean shouldExecuteSetupSessionFixture() -> b
     146:146:boolean shouldExecuteSetupClassFixture() -> c_
-    150:150:boolean shouldExecuteSetupClassInstanceFixture() -> A
-    154:154:boolean shouldExecuteSetupClassFragmentFixture() -> z
+    150:150:boolean shouldExecuteSetupClassInstanceFixture() -> B
+    154:154:boolean shouldExecuteSetupClassFragmentFixture() -> A
     158:158:boolean shouldExecuteSetupMethodFixture() -> f_
     162:162:boolean shouldExecuteSetupMethodInstanceFixture() -> d_
     166:166:boolean shouldExecuteSetupTestFixture() -> g_
     171:172:void setThreadId(java.lang.String) -> b
-    176:177:void initTimeStamp() -> Q
-    181:182:void endTimeStamp() -> R
-    12:12:com.autocognite.arjuna.interfaces.TestVariables getTestVariables() -> E
+    176:177:void initTimeStamp() -> R
+    181:182:void endTimeStamp() -> S
+    12:12:com.autocognite.arjuna.interfaces.TestVariables getTestVariables() -> F
 com.autocognite.pvt.unitee.testobject.lib.java.JavaTest -> com.autocognite.pvt.lx:
     org.apache.log4j.Logger logger -> m
     int testNumber -> n
@@ -6289,9 +6257,9 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTest -> com.autocognite.pvt.l
     13131:13131:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator com.autocognite.pvt.unitee.testobject.lib.java.JavaTestMethodInstance.getParentTestCreator():131:131 -> o
     13131:13131:void run():181 -> o
     13131:13131:void execute():160 -> o
-    13184:13184:java.lang.Object com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getUserTestContainerObject():184:184 -> o
-    13184:13184:void run():181 -> o
-    13184:13184:void execute():160 -> o
+    13185:13185:java.lang.Object com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getUserTestContainerObject():185:185 -> o
+    13185:13185:void run():181 -> o
+    13185:13185:void execute():160 -> o
     14155:14155:com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestMethodSignatureType com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethodSignatureType():155:155 -> o
     14155:14155:void run():183 -> o
     14155:14155:void execute():160 -> o
@@ -6305,8 +6273,8 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTest -> com.autocognite.pvt.l
     15105:15105:void run():180 -> f
     15131:15131:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator com.autocognite.pvt.unitee.testobject.lib.java.JavaTestMethodInstance.getParentTestCreator():131:131 -> f
     15131:15131:void run():181 -> f
-    15184:15184:java.lang.Object com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getUserTestContainerObject():184:184 -> f
-    15184:15184:void run():181 -> f
+    15185:15185:java.lang.Object com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.getUserTestContainerObject():185:185 -> f
+    15185:15185:void run():181 -> f
     16155:16155:com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestMethodSignatureType com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethodSignatureType():155:155 -> f
     16155:16155:void run():183 -> f
     194:194:java.lang.String getTestMethodName() -> u
@@ -6318,9 +6286,9 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTest -> com.autocognite.pvt.l
     198:198:java.lang.reflect.Method getTestMethod() -> v
     18105:18105:java.lang.reflect.Method com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> v
     18105:18105:java.lang.reflect.Method getTestMethod():198 -> v
-    203:203:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> C
-    18125:18125:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getTestVariables():125:125 -> C
-    18125:18125:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():203 -> C
+    203:203:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> D
+    18125:18125:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getTestVariables():125:125 -> D
+    18125:18125:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():203 -> D
     208:208:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> l
     19088:19088:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> l
     19088:19088:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():208 -> l
@@ -6356,20 +6324,20 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTest -> com.autocognite.pvt.l
     22133:22133:void reportSkipped():286 -> y
     22138:22138:java.lang.String com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getSkipDesc():138:138 -> y
     22138:22138:void reportSkipped():287 -> y
-    295:296:void beginTest() -> B
-    23028:23030:void com.autocognite.pvt.unitee.reporter.lib.ThreadState.beginTest(com.autocognite.pvt.unitee.testobject.lib.interfaces.Test):28:30 -> B
-    23028:23030:void beginTest():295 -> B
-    299:304:void endTest() -> T
-    23042:23042:java.util.List com.autocognite.pvt.unitee.reporter.lib.ThreadState.getCurrentTestStepResults():42:42 -> T
-    23042:23042:void endTest():300 -> T
-    23083:23129:void com.autocognite.pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):83:129 -> T
-    23083:23129:void endTest():300 -> T
-    24061:24064:void com.autocognite.pvt.unitee.reporter.lib.test.TestResult.updatePassInfo(com.autocognite.pvt.unitee.reporter.lib.test.TestResultProperties):61:64 -> T
-    24061:24064:void com.autocognite.pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):93 -> T
-    24061:24064:void endTest():300 -> T
-    25017:25017:com.autocognite.pvt.unitee.reporter.lib.step.StepResultProperties com.autocognite.pvt.unitee.reporter.lib.step.StepResult.resultProps():17:17 -> T
-    25017:25017:void com.autocognite.pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):99 -> T
-    25017:25017:void endTest():300 -> T
+    295:296:void beginTest() -> z
+    23028:23030:void com.autocognite.pvt.unitee.reporter.lib.ThreadState.beginTest(com.autocognite.pvt.unitee.testobject.lib.interfaces.Test):28:30 -> z
+    23028:23030:void beginTest():295 -> z
+    299:304:void endTest() -> C
+    23042:23042:java.util.List com.autocognite.pvt.unitee.reporter.lib.ThreadState.getCurrentTestStepResults():42:42 -> C
+    23042:23042:void endTest():300 -> C
+    23083:23129:void com.autocognite.pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):83:129 -> C
+    23083:23129:void endTest():300 -> C
+    24061:24064:void com.autocognite.pvt.unitee.reporter.lib.test.TestResult.updatePassInfo(com.autocognite.pvt.unitee.reporter.lib.test.TestResultProperties):61:64 -> C
+    24061:24064:void com.autocognite.pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):93 -> C
+    24061:24064:void endTest():300 -> C
+    25017:25017:com.autocognite.pvt.unitee.reporter.lib.step.StepResultProperties com.autocognite.pvt.unitee.reporter.lib.step.StepResult.resultProps():17:17 -> C
+    25017:25017:void com.autocognite.pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):99 -> C
+    25017:25017:void endTest():300 -> C
     307:313:boolean shouldExecuteTearDownTestFixture() -> s
     25106:25106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> s
     25106:25106:boolean shouldExecuteTearDownTestFixture():307 -> s
@@ -6401,111 +6369,115 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass -> com.autocognite.
     com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture tearDownSessionFixture -> y
     java.util.Map setUpClassFixtures -> z
     java.util.Map tearDownClassFixtures -> A
-    30:86:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> <init>
+    java.util.List allScheduledCreators -> B
+    30:87:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> <init>
     1118:1118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> <init>
-    1118:1118:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):47 -> <init>
+    1118:1118:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):48 -> <init>
     2118:2118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> <init>
-    2118:2118:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):48 -> <init>
+    2118:2118:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):49 -> <init>
     3066:3067:void com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.setQualifiedName(java.lang.String):66:67 -> <init>
-    3066:3067:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):48 -> <init>
+    3066:3067:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):49 -> <init>
     3141:3141:java.lang.reflect.Constructor com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getConstructor():141:141 -> <init>
-    3141:3141:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):53 -> <init>
-    3171:3172:void setConstructor(java.lang.reflect.Constructor):171:172 -> <init>
-    3171:3172:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):53 -> <init>
+    3141:3141:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):54 -> <init>
+    3173:3174:void setConstructor(java.lang.reflect.Constructor):173:174 -> <init>
+    3173:3174:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):54 -> <init>
     4118:4118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> <init>
-    4118:4118:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):54 -> <init>
-    4159:4160:void setTestClass(java.lang.Class):159:160 -> <init>
-    4159:4160:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):54 -> <init>
+    4118:4118:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):55 -> <init>
+    4161:4162:void setTestClass(java.lang.Class):161:162 -> <init>
+    4161:4162:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):55 -> <init>
     5149:5149:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getConstructorType():149:149 -> <init>
-    5149:5149:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):55 -> <init>
-    5179:5180:void setConstructorType(com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType):179:180 -> <init>
-    5179:5180:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):55 -> <init>
+    5149:5149:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):56 -> <init>
+    5181:5182:void setConstructorType(com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType):181:182 -> <init>
+    5181:5182:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):56 -> <init>
     5271:5281:java.util.List com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDependencies():271:281 -> <init>
-    5271:5281:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):61 -> <init>
+    5271:5281:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):62 -> <init>
     6032:6033:void com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler.setTargets(java.util.Set):32:33 -> <init>
     6032:6033:java.util.List com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDependencies():273 -> <init>
-    6032:6033:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):61 -> <init>
+    6032:6033:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):62 -> <init>
     6074:6075:void com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler.setType(com.autocognite.pvt.arjuna.enums.DependencyTarget):74:75 -> <init>
     6074:6075:java.util.List com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDependencies():274 -> <init>
-    6074:6075:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):61 -> <init>
+    6074:6075:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):62 -> <init>
     7032:7033:void com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler.setTargets(java.util.Set):32:33 -> <init>
     7032:7033:java.util.List com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDependencies():278 -> <init>
-    7032:7033:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):61 -> <init>
+    7032:7033:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):62 -> <init>
     7074:7075:void com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler.setType(com.autocognite.pvt.arjuna.enums.DependencyTarget):74:75 -> <init>
     7074:7075:java.util.List com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDependencies():279 -> <init>
-    7074:7075:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):61 -> <init>
-    7116:7117:void addDependency(com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler):116:117 -> <init>
-    7116:7117:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):65 -> <init>
-    7233:7233:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():233:233 -> <init>
-    7233:7233:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):71 -> <init>
+    7074:7075:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):62 -> <init>
+    7117:7118:void addDependency(com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler):117:118 -> <init>
+    7117:7118:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):66 -> <init>
+    7236:7236:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():236:236 -> <init>
+    7236:7236:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):72 -> <init>
     8157:8157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> <init>
-    8157:8157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():233 -> <init>
-    8157:8157:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):71 -> <init>
-    8233:8233:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():233:233 -> <init>
-    8233:8233:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):79 -> <init>
+    8157:8157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():236 -> <init>
+    8157:8157:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):72 -> <init>
+    8236:8236:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():236:236 -> <init>
+    8236:8236:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):80 -> <init>
     9157:9157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> <init>
-    9157:9157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():233 -> <init>
-    9157:9157:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):79 -> <init>
-    90:93:com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpSessionFixtureResult() -> l
-    99:102:com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownSessionFixtureResult() -> m
-    108:113:void setGroup(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group) -> a
-    116:117:void addDependency(com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler) -> a
-    121:136:boolean shouldExecute(com.autocognite.pvt.unitee.reporter.lib.IssueId) -> a
-    141:152:void load() -> j
+    9157:9157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():236 -> <init>
+    9157:9157:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):80 -> <init>
+    91:94:com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpSessionFixtureResult() -> l
+    100:103:com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownSessionFixtureResult() -> m
+    109:114:void setGroup(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group) -> a
+    117:118:void addDependency(com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler) -> a
+    122:137:boolean shouldExecute(com.autocognite.pvt.unitee.reporter.lib.IssueId) -> a
+    142:154:void load() -> j
     10096:10096:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> j
-    10096:10096:void load():145 -> j
-    10183:10187:void createInstance(int):183:187 -> j
-    10183:10187:void load():149 -> j
+    10096:10096:void load():146 -> j
+    10185:10189:com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance createInstance(int):185:189 -> j
+    10185:10189:void load():150 -> j
     11037:11037:java.lang.String com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getObjectId():37:37 -> j
-    11037:11037:void createInstance(int):183 -> j
-    11037:11037:void load():149 -> j
-    155:155:java.lang.Class getUserTestClass() -> d
-    159:160:void setTestClass(java.lang.Class) -> a
-    163:163:java.lang.String getUserTestClassName() -> t
-    11155:11155:java.lang.Class getUserTestClass():155:155 -> t
-    11155:11155:java.lang.String getUserTestClassName():163 -> t
-    167:167:java.lang.reflect.Constructor getConstructor() -> u
-    171:172:void setConstructor(java.lang.reflect.Constructor) -> a
-    175:175:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType() -> v
-    179:180:void setConstructorType(com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType) -> a
-    183:187:void createInstance(int) -> a
-    12037:12037:java.lang.String com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getObjectId():37:37 -> a
-    12037:12037:void createInstance(int):183 -> a
-    190:205:void loadInstances() -> b
-    209:209:int getInstanceCount() -> c
-    213:213:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getFixtures() -> w
-    12157:12157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> w
-    12157:12157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getFixtures():213 -> w
-    218:219:void addExecutableCreatorName(java.lang.String) -> a
-    223:223:java.util.List getInstances() -> e
-    228:228:int getInstanceThreadCount() -> f
-    12215:12215:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceThreadCount():215:215 -> f
-    12215:12215:int getInstanceThreadCount():228 -> f
-    233:233:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> g
-    13157:13157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> g
-    13157:13157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():233 -> g
-    238:238:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler() -> h
-    13211:13211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDataMethodsHandler():211:211 -> h
-    13211:13211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler():238 -> h
-    243:244:void resetExecutorCreatorQueue() -> i
-    248:248:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> C
-    13223:13223:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getTestVariables():223:223 -> C
-    13223:13223:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():248 -> C
-    253:253:boolean areInstancesCreated() -> k
-    258:273:void setUpClass() -> o
-    278:289:void tearDownClass() -> p
-    293:298:boolean wasSetUpClassFixtureExecuted() -> e_
-    304:310:boolean shouldExecuteTearDownClassFixture() -> n
-    14106:14106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> n
-    14106:14106:boolean shouldExecuteTearDownClassFixture():304 -> n
-    14128:14128:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasSkipped():128:128 -> n
-    14128:14128:boolean shouldExecuteTearDownClassFixture():304 -> n
-    15079:15079:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():79:79 -> n
-    15079:15079:boolean shouldExecuteTearDownClassFixture():306 -> n
-    15084:15084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> n
-    15084:15084:boolean shouldExecuteTearDownClassFixture():306 -> n
-    315:315:boolean hasCompleted() -> s
-    320:321:void markTestClassInstanceCompleted(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> a
+    11037:11037:com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance createInstance(int):185 -> j
+    11037:11037:void load():150 -> j
+    11398:11401:void com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.setAllScheduledCreators(java.util.List):398:401 -> j
+    11398:11401:void load():151 -> j
+    157:157:java.lang.Class getUserTestClass() -> d
+    161:162:void setTestClass(java.lang.Class) -> a
+    165:165:java.lang.String getUserTestClassName() -> t
+    12157:12157:java.lang.Class getUserTestClass():157:157 -> t
+    12157:12157:java.lang.String getUserTestClassName():165 -> t
+    169:169:java.lang.reflect.Constructor getConstructor() -> u
+    173:174:void setConstructor(java.lang.reflect.Constructor) -> a
+    177:177:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType() -> v
+    181:182:void setConstructorType(com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType) -> a
+    185:189:com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance createInstance(int) -> a
+    13037:13037:java.lang.String com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getObjectId():37:37 -> a
+    13037:13037:com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance createInstance(int):185 -> a
+    193:208:void loadInstances() -> b
+    212:212:int getInstanceCount() -> c
+    216:216:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getFixtures() -> w
+    13157:13157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> w
+    13157:13157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getFixtures():216 -> w
+    221:222:void addExecutableCreatorName(java.lang.String) -> a
+    226:226:java.util.List getInstances() -> e
+    231:231:int getInstanceThreadCount() -> f
+    13215:13215:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceThreadCount():215:215 -> f
+    13215:13215:int getInstanceThreadCount():231 -> f
+    236:236:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> g
+    14157:14157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> g
+    14157:14157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():236 -> g
+    241:241:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler() -> h
+    14211:14211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDataMethodsHandler():211:211 -> h
+    14211:14211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler():241 -> h
+    246:247:void resetExecutorCreatorQueue() -> i
+    251:251:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> D
+    14223:14223:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getTestVariables():223:223 -> D
+    14223:14223:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():251 -> D
+    256:256:boolean areInstancesCreated() -> k
+    261:276:void setUpClass() -> o
+    281:292:void tearDownClass() -> p
+    296:301:boolean wasSetUpClassFixtureExecuted() -> e_
+    307:313:boolean shouldExecuteTearDownClassFixture() -> n
+    15106:15106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> n
+    15106:15106:boolean shouldExecuteTearDownClassFixture():307 -> n
+    15128:15128:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasSkipped():128:128 -> n
+    15128:15128:boolean shouldExecuteTearDownClassFixture():307 -> n
+    16079:16079:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():79:79 -> n
+    16079:16079:boolean shouldExecuteTearDownClassFixture():309 -> n
+    16084:16084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> n
+    16084:16084:boolean shouldExecuteTearDownClassFixture():309 -> n
+    318:318:boolean hasCompleted() -> s
+    323:324:void markTestClassInstanceCompleted(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> a
+    328:329:void setAllScheduledCreators(java.util.List) -> a
     41:44:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance -> com.autocognite.pvt.ma:
     org.apache.log4j.Logger logger -> p
@@ -6518,131 +6490,134 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance -> com.auto
     com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture tearDownClassInstanceFixture -> u
     com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture setUpClassFragmentFixture -> v
     com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture tearDownClassFragmentFixture -> w
-    java.util.Set methodExecTracker -> o
-    int creatorThreadCount -> x
-    java.util.List executableCreatorNames -> y
-    32:111:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> <init>
+    java.util.Set methodExecTracker -> x
+    int creatorThreadCount -> y
+    java.util.List executableCreatorNames -> z
+    java.util.Set allScheduledCreators -> o
+    32:112:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> <init>
     1066:1067:void com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.setQualifiedName(java.lang.String):66:67 -> <init>
-    1066:1067:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):51 -> <init>
-    1291:1291:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():291:291 -> <init>
-    1291:1291:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):60 -> <init>
+    1066:1067:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):52 -> <init>
+    1298:1298:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():298:298 -> <init>
+    1298:1298:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):61 -> <init>
     2157:2157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> <init>
-    2157:2157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():291 -> <init>
-    2157:2157:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):60 -> <init>
-    2291:2291:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():291:291 -> <init>
-    2291:2291:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):65 -> <init>
+    2157:2157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():298 -> <init>
+    2157:2157:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):61 -> <init>
+    2298:2298:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():298:298 -> <init>
+    2298:2298:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):66 -> <init>
     3157:3157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> <init>
-    3157:3157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():291 -> <init>
-    3157:3157:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):65 -> <init>
-    3291:3291:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():291:291 -> <init>
-    3291:3291:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):71 -> <init>
+    3157:3157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():298 -> <init>
+    3157:3157:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):66 -> <init>
+    3298:3298:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():298:298 -> <init>
+    3298:3298:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):72 -> <init>
     4157:4157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> <init>
-    4157:4157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():291 -> <init>
-    4157:4157:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):71 -> <init>
-    4291:4291:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():291:291 -> <init>
-    4291:4291:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):76 -> <init>
+    4157:4157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():298 -> <init>
+    4157:4157:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):72 -> <init>
+    4298:4298:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():298:298 -> <init>
+    4298:4298:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):77 -> <init>
     5157:5157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> <init>
-    5157:5157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():291 -> <init>
-    5157:5157:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):76 -> <init>
-    5165:5165:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType():165:165 -> <init>
-    5165:5165:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):83 -> <init>
+    5157:5157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():298 -> <init>
+    5157:5157:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):77 -> <init>
+    5166:5166:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType():166:166 -> <init>
+    5166:5166:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):84 -> <init>
     6149:6149:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getConstructorType():149:149 -> <init>
-    6149:6149:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType():165 -> <init>
-    6149:6149:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):83 -> <init>
-    6161:6161:java.lang.reflect.Constructor getConstructor():161:161 -> <init>
-    6161:6161:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):85 -> <init>
+    6149:6149:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType():166 -> <init>
+    6149:6149:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):84 -> <init>
+    6162:6162:java.lang.reflect.Constructor getConstructor():162:162 -> <init>
+    6162:6162:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):86 -> <init>
     7141:7141:java.lang.reflect.Constructor com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getConstructor():141:141 -> <init>
-    7141:7141:java.lang.reflect.Constructor getConstructor():161 -> <init>
-    7141:7141:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):85 -> <init>
-    7148:7149:void setUserTestClassObject(java.lang.Object):148:149 -> <init>
-    7148:7149:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):85 -> <init>
-    7161:7161:java.lang.reflect.Constructor getConstructor():161:161 -> <init>
-    7161:7161:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):92 -> <init>
+    7141:7141:java.lang.reflect.Constructor getConstructor():162 -> <init>
+    7141:7141:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):86 -> <init>
+    7149:7150:void setUserTestClassObject(java.lang.Object):149:150 -> <init>
+    7149:7150:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):86 -> <init>
+    7162:7162:java.lang.reflect.Constructor getConstructor():162:162 -> <init>
+    7162:7162:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):93 -> <init>
     8141:8141:java.lang.reflect.Constructor com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getConstructor():141:141 -> <init>
-    8141:8141:java.lang.reflect.Constructor getConstructor():161 -> <init>
-    8141:8141:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):92 -> <init>
-    8148:8149:void setUserTestClassObject(java.lang.Object):148:149 -> <init>
-    8148:8149:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):92 -> <init>
-    114:128:void processContainerConstructorException(java.lang.Throwable) -> a
+    8141:8141:java.lang.reflect.Constructor getConstructor():162 -> <init>
+    8141:8141:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):93 -> <init>
+    8149:8150:void setUserTestClassObject(java.lang.Object):149:150 -> <init>
+    8149:8150:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):93 -> <init>
+    115:129:void processContainerConstructorException(java.lang.Throwable) -> a
     9088:9089:com.autocognite.pvt.unitee.reporter.lib.issue.IssueBuilder com.autocognite.pvt.unitee.reporter.lib.issue.IssueBuilder.testVariables(com.autocognite.arjuna.interfaces.TestVariables):88:89 -> a
-    9088:9089:void processContainerConstructorException(java.lang.Throwable):117 -> a
-    9281:9281:java.lang.Class getUserTestContainer():281:281 -> a
-    9281:9281:void processContainerConstructorException(java.lang.Throwable):126 -> a
+    9088:9089:void processContainerConstructorException(java.lang.Throwable):118 -> a
+    9288:9288:java.lang.Class getUserTestContainer():288:288 -> a
+    9288:9288:void processContainerConstructorException(java.lang.Throwable):127 -> a
     10118:10118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    10118:10118:java.lang.Class getUserTestContainer():281 -> a
-    10118:10118:void processContainerConstructorException(java.lang.Throwable):126 -> a
-    131:145:void loadTestCreators() -> c
+    10118:10118:java.lang.Class getUserTestContainer():288 -> a
+    10118:10118:void processContainerConstructorException(java.lang.Throwable):127 -> a
+    132:146:void loadTestCreators() -> c
     11037:11037:java.lang.String com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getObjectId():37:37 -> c
-    11037:11037:void loadTestCreators():140 -> c
-    148:149:void setUserTestClassObject(java.lang.Object) -> a
-    153:153:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer getContainer() -> d
-    157:157:java.lang.Class getTestClass() -> T
-    11118:11118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> T
-    11118:11118:java.lang.Class getTestClass():157 -> T
-    161:161:java.lang.reflect.Constructor getConstructor() -> U
-    11141:11141:java.lang.reflect.Constructor com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getConstructor():141:141 -> U
-    11141:11141:java.lang.reflect.Constructor getConstructor():161 -> U
-    165:165:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType() -> V
-    11149:11149:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getConstructorType():149:149 -> V
-    11149:11149:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType():165 -> V
-    170:170:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> C
-    11219:11219:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getTestContainerInstanceDefinition(int):219:219 -> C
-    11219:11219:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():170 -> C
-    175:175:java.lang.String getQualifiedName() -> a
+    11037:11037:void loadTestCreators():141 -> c
+    149:150:void setUserTestClassObject(java.lang.Object) -> a
+    154:154:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer getContainer() -> d
+    158:158:java.lang.Class getTestClass() -> U
+    11118:11118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> U
+    11118:11118:java.lang.Class getTestClass():158 -> U
+    162:162:java.lang.reflect.Constructor getConstructor() -> V
+    11141:11141:java.lang.reflect.Constructor com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getConstructor():141:141 -> V
+    11141:11141:java.lang.reflect.Constructor getConstructor():162 -> V
+    166:166:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType() -> W
+    11149:11149:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getConstructorType():149:149 -> W
+    11149:11149:com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType getConstructorType():166 -> W
+    171:171:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> D
+    11219:11219:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getTestContainerInstanceDefinition(int):219:219 -> D
+    11219:11219:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():171 -> D
+    176:176:java.lang.String getQualifiedName() -> a
     12203:12203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    12203:12203:java.lang.String getQualifiedName():175 -> a
-    180:180:int getInstanceNumber() -> b
-    184:184:java.lang.Object getUserTestContainerObject() -> l
-    189:189:java.util.List getTestCreators() -> e
-    194:197:com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpClassFixtureResult() -> p
-    203:206:com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownClassFixtureResult() -> q
-    212:215:com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpClassFragmentFixtureResult() -> w
-    221:224:com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownClassFragmentFixtureResult() -> x
-    230:233:boolean wasSetUpClassInstanceFixtureExecuted() -> f
-    239:242:boolean didSetUpClassFixtureSucceed() -> g
-    248:251:boolean wasTearDownClassFixtureExecuted() -> n
-    257:260:boolean didTearDownClassFixtureSucceed() -> o
-    266:266:boolean hasCompleted() -> h
-    271:272:void markTestCreatorCompleted(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator) -> a
-    276:276:int getCreatorThreadCount() -> i
-    12207:12207:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getCreatorThreadCount():207:207 -> i
-    12207:12207:int getCreatorThreadCount():276 -> i
-    281:281:java.lang.Class getUserTestContainer() -> j
-    13118:13118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> j
-    13118:13118:java.lang.Class getUserTestContainer():281 -> j
-    286:286:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler() -> k
-    13211:13211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDataMethodsHandler():211:211 -> k
-    13211:13211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler():286 -> k
-    291:291:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> m
-    14157:14157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> m
-    14157:14157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():291 -> m
-    296:301:void addExecutableCreatorName(java.lang.String) -> a
-    305:307:void resetExecutorCreatorQueue() -> r
-    311:323:void setUpClassInstance() -> s
-    327:336:void tearDownClassInstance() -> t
-    340:352:void setUpClassFragment() -> u
-    356:365:void tearDownClassFragment() -> v
-    369:375:boolean shouldExecuteTearDownClassInstanceFixture() -> B
-    15106:15106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> B
-    15106:15106:boolean shouldExecuteTearDownClassInstanceFixture():369 -> B
-    15128:15128:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasSkipped():128:128 -> B
-    15128:15128:boolean shouldExecuteTearDownClassInstanceFixture():369 -> B
-    16079:16079:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():79:79 -> B
-    16079:16079:boolean shouldExecuteTearDownClassInstanceFixture():371 -> B
-    16084:16084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> B
-    16084:16084:boolean shouldExecuteTearDownClassInstanceFixture():371 -> B
-    380:386:boolean shouldExecuteTearDownClassFragmentFixture() -> y
-    16106:16106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> y
-    16106:16106:boolean shouldExecuteTearDownClassFragmentFixture():380 -> y
-    16128:16128:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasSkipped():128:128 -> y
-    16128:16128:boolean shouldExecuteTearDownClassFragmentFixture():380 -> y
-    17079:17079:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():79:79 -> y
-    17079:17079:boolean shouldExecuteTearDownClassFragmentFixture():382 -> y
-    17084:17084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> y
-    17084:17084:boolean shouldExecuteTearDownClassFragmentFixture():382 -> y
+    12203:12203:java.lang.String getQualifiedName():176 -> a
+    181:181:int getInstanceNumber() -> b
+    185:185:java.lang.Object getUserTestContainerObject() -> m
+    190:190:java.util.List getTestCreators() -> e
+    195:198:com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpClassFixtureResult() -> q
+    204:207:com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownClassFixtureResult() -> r
+    213:216:com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpClassFragmentFixtureResult() -> x
+    222:225:com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownClassFragmentFixtureResult() -> y
+    231:234:boolean wasSetUpClassInstanceFixtureExecuted() -> f
+    240:243:boolean didSetUpClassFixtureSucceed() -> g
+    249:252:boolean wasTearDownClassFixtureExecuted() -> o
+    258:261:boolean didTearDownClassFixtureSucceed() -> p
+    267:267:boolean hasFragmentCompleted() -> h
+    272:272:boolean hasCompleted() -> i
+    277:279:void markTestCreatorCompleted(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator) -> a
+    283:283:int getCreatorThreadCount() -> j
+    12207:12207:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getCreatorThreadCount():207:207 -> j
+    12207:12207:int getCreatorThreadCount():283 -> j
+    288:288:java.lang.Class getUserTestContainer() -> k
+    13118:13118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> k
+    13118:13118:java.lang.Class getUserTestContainer():288 -> k
+    293:293:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler() -> l
+    13211:13211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDataMethodsHandler():211:211 -> l
+    13211:13211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler getDataMethodsHandler():293 -> l
+    298:298:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> n
+    14157:14157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():157:157 -> n
+    14157:14157:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():298 -> n
+    303:308:void addExecutableCreatorName(java.lang.String) -> a
+    312:314:void resetExecutorCreatorQueue() -> s
+    318:330:void setUpClassInstance() -> t
+    334:343:void tearDownClassInstance() -> u
+    347:359:void setUpClassFragment() -> v
+    363:372:void tearDownClassFragment() -> w
+    376:382:boolean shouldExecuteTearDownClassInstanceFixture() -> C
+    15106:15106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> C
+    15106:15106:boolean shouldExecuteTearDownClassInstanceFixture():376 -> C
+    15128:15128:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasSkipped():128:128 -> C
+    15128:15128:boolean shouldExecuteTearDownClassInstanceFixture():376 -> C
+    16079:16079:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():79:79 -> C
+    16079:16079:boolean shouldExecuteTearDownClassInstanceFixture():378 -> C
+    16084:16084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> C
+    16084:16084:boolean shouldExecuteTearDownClassInstanceFixture():378 -> C
+    387:393:boolean shouldExecuteTearDownClassFragmentFixture() -> z
+    16106:16106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> z
+    16106:16106:boolean shouldExecuteTearDownClassFragmentFixture():387 -> z
+    16128:16128:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasSkipped():128:128 -> z
+    16128:16128:boolean shouldExecuteTearDownClassFragmentFixture():387 -> z
+    17079:17079:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():79:79 -> z
+    17079:17079:boolean shouldExecuteTearDownClassFragmentFixture():389 -> z
+    17084:17084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> z
+    17084:17084:boolean shouldExecuteTearDownClassFragmentFixture():389 -> z
+    398:401:void setAllScheduledCreators(java.util.List) -> a
 com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance$1 -> com.autocognite.pvt.mb:
     int[] $SwitchMap$com$autocognite$pvt$unitee$testobject$lib$java$TestClassConstructorType -> a
-    83:83:void <clinit>() -> <clinit>
+    84:84:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.testobject.lib.java.JavaTestMethod -> com.autocognite.pvt.mc:
     org.apache.log4j.Logger logger -> n
     com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition methodDef -> o
@@ -6711,9 +6686,9 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTestMethod -> com.autocognite
     11037:11037:void createInstance(int):102 -> a
     12037:12037:java.lang.String com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getObjectId():37:37 -> a
     12037:12037:void createInstance(int):105 -> a
-    110:110:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> C
-    12125:12125:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getTestVariables():125:125 -> C
-    12125:12125:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():110 -> C
+    110:110:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> D
+    12125:12125:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getTestVariables():125:125 -> D
+    12125:12125:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():110 -> D
     115:115:java.util.List getInstances() -> b
     120:120:int getInstanceThreadCount() -> c
     12179:12179:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getInstanceThreadCount():179:179 -> c
@@ -6751,9 +6726,9 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTestMethodInstance -> com.aut
     25:59:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestMethod,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition) -> <init>
     1131:1131:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator getParentTestCreator():131:131 -> <init>
     1131:1131:void <init>(int,java.lang.String,com.autocognite.pvt.unitee.testobject.lib.java.JavaTestMethod,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):48 -> <init>
-    63:63:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> C
-    2084:2084:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getTestCreatorInstanceDefinition(int):84:84 -> C
-    2084:2084:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():63 -> C
+    63:63:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition() -> D
+    2084:2084:com.autocognite.arjuna.interfaces.TestVariables com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getTestCreatorInstanceDefinition(int):84:84 -> D
+    2084:2084:com.autocognite.arjuna.interfaces.TestVariables getTestVariablesDefinition():63 -> D
     68:68:java.lang.String getQualifiedName() -> a
     73:76:com.autocognite.pvt.arjuna.enums.FixtureResultType getSetUpMethodFixtureResult() -> i
     82:85:com.autocognite.pvt.arjuna.enums.FixtureResultType getTearDownMethodFixtureResult() -> j
@@ -6921,88 +6896,88 @@ com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader -> 
     java.lang.String sep -> p
     java.util.HashMap fixtureCounts -> n
     boolean fixtureAnomaly -> q
-    37:58:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> <init>
-    1214:1215:void setContainer(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):214:215 -> <init>
-    1214:1215:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):57 -> <init>
-    61:62:boolean isBeforeClassFixture(java.lang.reflect.Method) -> d
-    66:67:boolean isAfterClassFixture(java.lang.reflect.Method) -> e
-    71:72:boolean isBeforeClassInstanceFixture(java.lang.reflect.Method) -> f
-    76:77:boolean isAfterClassInstanceFixture(java.lang.reflect.Method) -> g
-    81:82:boolean isBeforeClassFragmentFixture(java.lang.reflect.Method) -> h
-    86:87:boolean isAfterClassFragmentFixture(java.lang.reflect.Method) -> i
-    91:92:boolean isBeforeMethodFixture(java.lang.reflect.Method) -> j
-    96:97:boolean isAfterMethodFixture(java.lang.reflect.Method) -> k
-    101:102:boolean isBeforeMethodInstanceFixture(java.lang.reflect.Method) -> l
-    106:107:boolean isAfterMethodInstanceFixture(java.lang.reflect.Method) -> m
-    111:112:boolean isBeforeTestFixture(java.lang.reflect.Method) -> n
-    116:117:boolean isAfterTestFixture(java.lang.reflect.Method) -> o
-    121:127:void incrementFixtureCount(java.util.HashMap,com.autocognite.pvt.arjuna.enums.TestClassFixtureType,java.lang.String) -> a
-    130:138:void validateStatic(java.lang.reflect.Method) -> a
+    39:60:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> <init>
+    1216:1217:void setContainer(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):216:217 -> <init>
+    1216:1217:void <init>(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):59 -> <init>
+    63:64:boolean isBeforeClassFixture(java.lang.reflect.Method) -> d
+    68:69:boolean isAfterClassFixture(java.lang.reflect.Method) -> e
+    73:74:boolean isBeforeClassInstanceFixture(java.lang.reflect.Method) -> f
+    78:79:boolean isAfterClassInstanceFixture(java.lang.reflect.Method) -> g
+    83:84:boolean isBeforeClassFragmentFixture(java.lang.reflect.Method) -> h
+    88:89:boolean isAfterClassFragmentFixture(java.lang.reflect.Method) -> i
+    93:94:boolean isBeforeMethodFixture(java.lang.reflect.Method) -> j
+    98:99:boolean isAfterMethodFixture(java.lang.reflect.Method) -> k
+    103:104:boolean isBeforeMethodInstanceFixture(java.lang.reflect.Method) -> l
+    108:109:boolean isAfterMethodInstanceFixture(java.lang.reflect.Method) -> m
+    113:114:boolean isBeforeTestFixture(java.lang.reflect.Method) -> n
+    118:119:boolean isAfterTestFixture(java.lang.reflect.Method) -> o
+    123:129:void incrementFixtureCount(java.util.HashMap,com.autocognite.pvt.arjuna.enums.TestClassFixtureType,java.lang.String) -> a
+    132:140:void validateStatic(java.lang.reflect.Method) -> a
     2118:2118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    2118:2118:void validateStatic(java.lang.reflect.Method):132 -> a
-    141:149:void validatePublic(java.lang.reflect.Method) -> b
+    2118:2118:void validateStatic(java.lang.reflect.Method):134 -> a
+    143:151:void validatePublic(java.lang.reflect.Method) -> b
     3118:3118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> b
-    3118:3118:void validatePublic(java.lang.reflect.Method):143 -> b
-    152:207:void loadFixture(java.lang.reflect.Method) -> c
-    4061:4062:boolean isBeforeClassFixture(java.lang.reflect.Method):61:62 -> c
-    4061:4062:void loadFixture(java.lang.reflect.Method):156 -> c
+    3118:3118:void validatePublic(java.lang.reflect.Method):145 -> b
+    154:209:void loadFixture(java.lang.reflect.Method) -> c
+    4063:4064:boolean isBeforeClassFixture(java.lang.reflect.Method):63:64 -> c
+    4063:4064:void loadFixture(java.lang.reflect.Method):158 -> c
     4118:4118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    4118:4118:void loadFixture(java.lang.reflect.Method):159 -> c
-    5066:5067:boolean isAfterClassFixture(java.lang.reflect.Method):66:67 -> c
-    5066:5067:void loadFixture(java.lang.reflect.Method):161 -> c
+    4118:4118:void loadFixture(java.lang.reflect.Method):161 -> c
+    5068:5069:boolean isAfterClassFixture(java.lang.reflect.Method):68:69 -> c
+    5068:5069:void loadFixture(java.lang.reflect.Method):163 -> c
     5118:5118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    5118:5118:void loadFixture(java.lang.reflect.Method):164 -> c
-    6071:6072:boolean isBeforeClassInstanceFixture(java.lang.reflect.Method):71:72 -> c
-    6071:6072:void loadFixture(java.lang.reflect.Method):166 -> c
+    5118:5118:void loadFixture(java.lang.reflect.Method):166 -> c
+    6073:6074:boolean isBeforeClassInstanceFixture(java.lang.reflect.Method):73:74 -> c
+    6073:6074:void loadFixture(java.lang.reflect.Method):168 -> c
     6118:6118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    6118:6118:void loadFixture(java.lang.reflect.Method):168 -> c
-    7076:7077:boolean isAfterClassInstanceFixture(java.lang.reflect.Method):76:77 -> c
-    7076:7077:void loadFixture(java.lang.reflect.Method):170 -> c
+    6118:6118:void loadFixture(java.lang.reflect.Method):170 -> c
+    7078:7079:boolean isAfterClassInstanceFixture(java.lang.reflect.Method):78:79 -> c
+    7078:7079:void loadFixture(java.lang.reflect.Method):172 -> c
     7118:7118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    7118:7118:void loadFixture(java.lang.reflect.Method):172 -> c
-    8081:8082:boolean isBeforeClassFragmentFixture(java.lang.reflect.Method):81:82 -> c
-    8081:8082:void loadFixture(java.lang.reflect.Method):174 -> c
+    7118:7118:void loadFixture(java.lang.reflect.Method):174 -> c
+    8083:8084:boolean isBeforeClassFragmentFixture(java.lang.reflect.Method):83:84 -> c
+    8083:8084:void loadFixture(java.lang.reflect.Method):176 -> c
     8118:8118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    8118:8118:void loadFixture(java.lang.reflect.Method):176 -> c
-    9086:9087:boolean isAfterClassFragmentFixture(java.lang.reflect.Method):86:87 -> c
-    9086:9087:void loadFixture(java.lang.reflect.Method):178 -> c
+    8118:8118:void loadFixture(java.lang.reflect.Method):178 -> c
+    9088:9089:boolean isAfterClassFragmentFixture(java.lang.reflect.Method):88:89 -> c
+    9088:9089:void loadFixture(java.lang.reflect.Method):180 -> c
     9118:9118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    9118:9118:void loadFixture(java.lang.reflect.Method):180 -> c
-    10091:10092:boolean isBeforeMethodFixture(java.lang.reflect.Method):91:92 -> c
-    10091:10092:void loadFixture(java.lang.reflect.Method):182 -> c
+    9118:9118:void loadFixture(java.lang.reflect.Method):182 -> c
+    10093:10094:boolean isBeforeMethodFixture(java.lang.reflect.Method):93:94 -> c
+    10093:10094:void loadFixture(java.lang.reflect.Method):184 -> c
     10118:10118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    10118:10118:void loadFixture(java.lang.reflect.Method):184 -> c
-    11096:11097:boolean isAfterMethodFixture(java.lang.reflect.Method):96:97 -> c
-    11096:11097:void loadFixture(java.lang.reflect.Method):186 -> c
+    10118:10118:void loadFixture(java.lang.reflect.Method):186 -> c
+    11098:11099:boolean isAfterMethodFixture(java.lang.reflect.Method):98:99 -> c
+    11098:11099:void loadFixture(java.lang.reflect.Method):188 -> c
     11118:11118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    11118:11118:void loadFixture(java.lang.reflect.Method):188 -> c
-    12101:12102:boolean isBeforeMethodInstanceFixture(java.lang.reflect.Method):101:102 -> c
-    12101:12102:void loadFixture(java.lang.reflect.Method):190 -> c
+    11118:11118:void loadFixture(java.lang.reflect.Method):190 -> c
+    12103:12104:boolean isBeforeMethodInstanceFixture(java.lang.reflect.Method):103:104 -> c
+    12103:12104:void loadFixture(java.lang.reflect.Method):192 -> c
     12118:12118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    12118:12118:void loadFixture(java.lang.reflect.Method):192 -> c
-    13106:13107:boolean isAfterMethodInstanceFixture(java.lang.reflect.Method):106:107 -> c
-    13106:13107:void loadFixture(java.lang.reflect.Method):194 -> c
+    12118:12118:void loadFixture(java.lang.reflect.Method):194 -> c
+    13108:13109:boolean isAfterMethodInstanceFixture(java.lang.reflect.Method):108:109 -> c
+    13108:13109:void loadFixture(java.lang.reflect.Method):196 -> c
     13118:13118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    13118:13118:void loadFixture(java.lang.reflect.Method):196 -> c
-    14111:14112:boolean isBeforeTestFixture(java.lang.reflect.Method):111:112 -> c
-    14111:14112:void loadFixture(java.lang.reflect.Method):198 -> c
+    13118:13118:void loadFixture(java.lang.reflect.Method):198 -> c
+    14113:14114:boolean isBeforeTestFixture(java.lang.reflect.Method):113:114 -> c
+    14113:14114:void loadFixture(java.lang.reflect.Method):200 -> c
     14118:14118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    14118:14118:void loadFixture(java.lang.reflect.Method):200 -> c
-    15116:15117:boolean isAfterTestFixture(java.lang.reflect.Method):116:117 -> c
-    15116:15117:void loadFixture(java.lang.reflect.Method):202 -> c
-    15118:15118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    15118:15118:void loadFixture(java.lang.reflect.Method):204 -> c
-    210:210:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getJavaTestClass() -> b
-    214:215:void setContainer(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
-    218:240:void validate() -> c
+    14118:14118:void loadFixture(java.lang.reflect.Method):202 -> c
+    15118:15119:boolean isAfterTestFixture(java.lang.reflect.Method):118:119 -> c
+    15118:15119:void loadFixture(java.lang.reflect.Method):204 -> c
     16118:16118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
-    16118:16118:void validate():230 -> c
-    243:244:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures build() -> a
-    16218:16240:void validate():218:240 -> a
-    16218:16240:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures build():243 -> a
-    17118:17118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    17118:17118:void validate():230 -> a
-    17118:17118:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures build():243 -> a
+    16118:16118:void loadFixture(java.lang.reflect.Method):206 -> c
+    212:212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getJavaTestClass() -> b
+    216:217:void setContainer(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
+    220:239:void validate() -> c
+    17118:17118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> c
+    17118:17118:void validate():232 -> c
+    242:243:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures build() -> a
+    17220:17239:void validate():220:239 -> a
+    17220:17239:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures build():242 -> a
+    18118:18118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
+    18118:18118:void validate():232 -> a
+    18118:18118:com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures build():242 -> a
 com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestLoadingUtils -> com.autocognite.pvt.ml:
     java.lang.String[] checkArray -> a
     17:17:void <init>() -> <init>
@@ -7053,168 +7028,168 @@ com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestMethodsDefinitionLoader
     4212:4212:void loadDefinitions():96 -> a
     4235:4236:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addNonTestMethodName(java.lang.String):235:236 -> a
     4235:4236:void loadDefinitions():96 -> a
-    5152:5207:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):152:207 -> a
-    5152:5207:void loadDefinitions():97 -> a
-    6061:6062:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassFixture(java.lang.reflect.Method):61:62 -> a
-    6061:6062:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):156 -> a
-    6061:6062:void loadDefinitions():97 -> a
+    5154:5209:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):154:209 -> a
+    5154:5209:void loadDefinitions():97 -> a
+    6063:6064:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassFixture(java.lang.reflect.Method):63:64 -> a
+    6063:6064:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):158 -> a
+    6063:6064:void loadDefinitions():97 -> a
     6118:6118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    6118:6118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):159 -> a
+    6118:6118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):161 -> a
     6118:6118:void loadDefinitions():97 -> a
-    7066:7067:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassFixture(java.lang.reflect.Method):66:67 -> a
-    7066:7067:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):161 -> a
-    7066:7067:void loadDefinitions():97 -> a
+    7068:7069:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassFixture(java.lang.reflect.Method):68:69 -> a
+    7068:7069:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):163 -> a
+    7068:7069:void loadDefinitions():97 -> a
     7118:7118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    7118:7118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):164 -> a
+    7118:7118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):166 -> a
     7118:7118:void loadDefinitions():97 -> a
-    8071:8072:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassInstanceFixture(java.lang.reflect.Method):71:72 -> a
-    8071:8072:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):166 -> a
-    8071:8072:void loadDefinitions():97 -> a
+    8073:8074:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassInstanceFixture(java.lang.reflect.Method):73:74 -> a
+    8073:8074:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):168 -> a
+    8073:8074:void loadDefinitions():97 -> a
     8118:8118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    8118:8118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):168 -> a
+    8118:8118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):170 -> a
     8118:8118:void loadDefinitions():97 -> a
-    9076:9077:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassInstanceFixture(java.lang.reflect.Method):76:77 -> a
-    9076:9077:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):170 -> a
-    9076:9077:void loadDefinitions():97 -> a
+    9078:9079:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassInstanceFixture(java.lang.reflect.Method):78:79 -> a
+    9078:9079:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):172 -> a
+    9078:9079:void loadDefinitions():97 -> a
     9118:9118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    9118:9118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):172 -> a
+    9118:9118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):174 -> a
     9118:9118:void loadDefinitions():97 -> a
-    10081:10082:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassFragmentFixture(java.lang.reflect.Method):81:82 -> a
-    10081:10082:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):174 -> a
-    10081:10082:void loadDefinitions():97 -> a
+    10083:10084:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassFragmentFixture(java.lang.reflect.Method):83:84 -> a
+    10083:10084:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):176 -> a
+    10083:10084:void loadDefinitions():97 -> a
     10118:10118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    10118:10118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):176 -> a
+    10118:10118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):178 -> a
     10118:10118:void loadDefinitions():97 -> a
-    11086:11087:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassFragmentFixture(java.lang.reflect.Method):86:87 -> a
-    11086:11087:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):178 -> a
-    11086:11087:void loadDefinitions():97 -> a
+    11088:11089:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassFragmentFixture(java.lang.reflect.Method):88:89 -> a
+    11088:11089:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):180 -> a
+    11088:11089:void loadDefinitions():97 -> a
     11118:11118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    11118:11118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):180 -> a
+    11118:11118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):182 -> a
     11118:11118:void loadDefinitions():97 -> a
-    12091:12092:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeMethodFixture(java.lang.reflect.Method):91:92 -> a
-    12091:12092:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):182 -> a
-    12091:12092:void loadDefinitions():97 -> a
+    12093:12094:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeMethodFixture(java.lang.reflect.Method):93:94 -> a
+    12093:12094:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):184 -> a
+    12093:12094:void loadDefinitions():97 -> a
     12118:12118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    12118:12118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):184 -> a
+    12118:12118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):186 -> a
     12118:12118:void loadDefinitions():97 -> a
-    13096:13097:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterMethodFixture(java.lang.reflect.Method):96:97 -> a
-    13096:13097:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):186 -> a
-    13096:13097:void loadDefinitions():97 -> a
+    13098:13099:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterMethodFixture(java.lang.reflect.Method):98:99 -> a
+    13098:13099:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):188 -> a
+    13098:13099:void loadDefinitions():97 -> a
     13118:13118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    13118:13118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):188 -> a
+    13118:13118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):190 -> a
     13118:13118:void loadDefinitions():97 -> a
-    14101:14102:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeMethodInstanceFixture(java.lang.reflect.Method):101:102 -> a
-    14101:14102:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):190 -> a
-    14101:14102:void loadDefinitions():97 -> a
+    14103:14104:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeMethodInstanceFixture(java.lang.reflect.Method):103:104 -> a
+    14103:14104:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):192 -> a
+    14103:14104:void loadDefinitions():97 -> a
     14118:14118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    14118:14118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):192 -> a
+    14118:14118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):194 -> a
     14118:14118:void loadDefinitions():97 -> a
-    15106:15107:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterMethodInstanceFixture(java.lang.reflect.Method):106:107 -> a
-    15106:15107:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):194 -> a
-    15106:15107:void loadDefinitions():97 -> a
+    15108:15109:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterMethodInstanceFixture(java.lang.reflect.Method):108:109 -> a
+    15108:15109:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):196 -> a
+    15108:15109:void loadDefinitions():97 -> a
     15118:15118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    15118:15118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):196 -> a
+    15118:15118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):198 -> a
     15118:15118:void loadDefinitions():97 -> a
-    16111:16112:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeTestFixture(java.lang.reflect.Method):111:112 -> a
-    16111:16112:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):198 -> a
-    16111:16112:void loadDefinitions():97 -> a
+    16113:16114:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeTestFixture(java.lang.reflect.Method):113:114 -> a
+    16113:16114:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):200 -> a
+    16113:16114:void loadDefinitions():97 -> a
     16118:16118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    16118:16118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):200 -> a
+    16118:16118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):202 -> a
     16118:16118:void loadDefinitions():97 -> a
-    17116:17117:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterTestFixture(java.lang.reflect.Method):116:117 -> a
-    17116:17117:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):202 -> a
-    17116:17117:void loadDefinitions():97 -> a
-    17118:17118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    17118:17118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):204 -> a
-    17118:17118:void loadDefinitions():97 -> a
-    17212:17212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
-    17212:17212:void loadDefinitions():102 -> a
-    18153:18154:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setFixtures(com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures):153:154 -> a
-    18153:18154:void loadDefinitions():102 -> a
+    17118:17119:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterTestFixture(java.lang.reflect.Method):118:119 -> a
+    17118:17119:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):204 -> a
+    17118:17119:void loadDefinitions():97 -> a
+    18118:18118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
+    18118:18118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):206 -> a
+    18118:18118:void loadDefinitions():97 -> a
     18212:18212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
-    18212:18212:void loadDefinitions():116 -> a
-    19092:19093:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setClassDefinition(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):92:93 -> a
-    19092:19093:void loadDefinitions():116 -> a
-    19096:19102:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):96:102 -> a
-    19096:19102:void loadDefinitions():117 -> a
-    20088:20088:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> a
-    20088:20088:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
-    20088:20088:void loadDefinitions():117 -> a
-    20203:20203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    20203:20203:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
-    20203:20203:void loadDefinitions():117 -> a
-    21121:21121:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getName():121:121 -> a
-    21121:21121:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
-    21121:21121:void loadDefinitions():117 -> a
-    22047:22050:void processSelection(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):47:50 -> a
-    22047:22050:void loadDefinitions():118 -> a
-    22117:22117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    22117:22117:void loadDefinitions():121 -> a
-    22147:22148:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setTestThreadCount(int):147:148 -> a
-    22147:22148:void loadDefinitions():125 -> a
-    23054:23055:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.testClassDef(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):54:55 -> a
-    23054:23055:void loadDefinitions():131 -> a
-    23058:23059:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.dataSourceType(com.autocognite.pvt.unitee.core.lib.datasource.DataSourceType):58:59 -> a
-    23058:23059:void loadDefinitions():132 -> a
-    23062:23063:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.testMethod(java.lang.reflect.Method):62:63 -> a
-    23062:23063:void loadDefinitions():133 -> a
-    23204:23221:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():204:221 -> a
-    23204:23221:void loadDefinitions():134 -> a
-    24066:24079:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataAnnotation():66:79 -> a
-    24066:24079:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():206 -> a
-    24066:24079:void loadDefinitions():134 -> a
-    24116:24136:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataFileAnnotation():116:136 -> a
-    24116:24136:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():212 -> a
-    24116:24136:void loadDefinitions():134 -> a
-    24139:24179:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataMethodAnnotation():139:179 -> a
-    24139:24179:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():215 -> a
-    24139:24179:void loadDefinitions():134 -> a
-    24211:24211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDataMethodsHandler():211:211 -> a
-    24211:24211:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataMethodAnnotation():172 -> a
-    24211:24211:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():215 -> a
-    24211:24211:void loadDefinitions():134 -> a
-    25182:25201:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataGenerator():182:201 -> a
-    25182:25201:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():218 -> a
-    25182:25201:void loadDefinitions():134 -> a
-    26167:26168:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setDataSourceBuilder(com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder):167:168 -> a
-    26167:26168:void loadDefinitions():135 -> a
-    27056:27057:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setDataRefPresent(boolean):56:57 -> a
-    27056:27057:void loadDefinitions():140 -> a
-    27060:27060:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.isDataRefPresent():60:60 -> a
-    27060:27060:void loadDefinitions():145 -> a
-    27064:27066:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.addFileDataRefWithPath(java.lang.String,java.lang.String):64:66 -> a
-    27064:27066:void loadDefinitions():154 -> a
-    27117:27117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    27117:27117:void loadDefinitions():171 -> a
+    18212:18212:void loadDefinitions():102 -> a
+    19153:19154:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setFixtures(com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures):153:154 -> a
+    19153:19154:void loadDefinitions():102 -> a
+    19212:19212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
+    19212:19212:void loadDefinitions():116 -> a
+    20092:20093:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setClassDefinition(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):92:93 -> a
+    20092:20093:void loadDefinitions():116 -> a
+    20096:20102:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):96:102 -> a
+    20096:20102:void loadDefinitions():117 -> a
+    21088:21088:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> a
+    21088:21088:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
+    21088:21088:void loadDefinitions():117 -> a
+    21203:21203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
+    21203:21203:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
+    21203:21203:void loadDefinitions():117 -> a
+    22121:22121:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getName():121:121 -> a
+    22121:22121:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
+    22121:22121:void loadDefinitions():117 -> a
+    23047:23050:void processSelection(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):47:50 -> a
+    23047:23050:void loadDefinitions():118 -> a
+    23117:23117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
+    23117:23117:void loadDefinitions():121 -> a
+    23147:23148:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setTestThreadCount(int):147:148 -> a
+    23147:23148:void loadDefinitions():125 -> a
+    24054:24055:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.testClassDef(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):54:55 -> a
+    24054:24055:void loadDefinitions():131 -> a
+    24058:24059:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.dataSourceType(com.autocognite.pvt.unitee.core.lib.datasource.DataSourceType):58:59 -> a
+    24058:24059:void loadDefinitions():132 -> a
+    24062:24063:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.testMethod(java.lang.reflect.Method):62:63 -> a
+    24062:24063:void loadDefinitions():133 -> a
+    24204:24221:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():204:221 -> a
+    24204:24221:void loadDefinitions():134 -> a
+    25066:25079:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataAnnotation():66:79 -> a
+    25066:25079:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():206 -> a
+    25066:25079:void loadDefinitions():134 -> a
+    25116:25136:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataFileAnnotation():116:136 -> a
+    25116:25136:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():212 -> a
+    25116:25136:void loadDefinitions():134 -> a
+    25139:25179:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataMethodAnnotation():139:179 -> a
+    25139:25179:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():215 -> a
+    25139:25179:void loadDefinitions():134 -> a
+    25211:25211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDataMethodsHandler():211:211 -> a
+    25211:25211:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataMethodAnnotation():172 -> a
+    25211:25211:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():215 -> a
+    25211:25211:void loadDefinitions():134 -> a
+    26182:26201:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataGenerator():182:201 -> a
+    26182:26201:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():218 -> a
+    26182:26201:void loadDefinitions():134 -> a
+    27167:27168:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setDataSourceBuilder(com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder):167:168 -> a
+    27167:27168:void loadDefinitions():135 -> a
+    28056:28057:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setDataRefPresent(boolean):56:57 -> a
+    28056:28057:void loadDefinitions():140 -> a
+    28060:28060:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.isDataRefPresent():60:60 -> a
+    28060:28060:void loadDefinitions():145 -> a
+    28064:28066:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.addFileDataRefWithPath(java.lang.String,java.lang.String):64:66 -> a
+    28064:28066:void loadDefinitions():154 -> a
     28117:28117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    28117:28117:void loadDefinitions():178 -> a
-    28183:28184:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setInstanceThreadCount(int):183:184 -> a
-    28183:28184:void loadDefinitions():184 -> a
-    29060:29060:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.isDataRefPresent():60:60 -> a
-    29060:29060:void loadDefinitions():194 -> a
-    29069:29069:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getInstanceCount():69:69 -> a
-    29069:29069:void loadDefinitions():196 -> a
+    28117:28117:void loadDefinitions():171 -> a
+    29117:29117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
+    29117:29117:void loadDefinitions():178 -> a
+    29183:29184:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setInstanceThreadCount(int):183:184 -> a
+    29183:29184:void loadDefinitions():184 -> a
+    30060:30060:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.isDataRefPresent():60:60 -> a
+    30060:30060:void loadDefinitions():194 -> a
     30069:30069:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getInstanceCount():69:69 -> a
-    30069:30069:void loadDefinitions():201 -> a
-    30080:30081:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setUdvForInstance(int,java.util.HashMap):80:81 -> a
-    30080:30081:void loadDefinitions():202 -> a
-    30212:30212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
-    30212:30212:void loadDefinitions():205 -> a
-    31161:31166:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addTestMethodDefinition(java.lang.String,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):161:166 -> a
-    31161:31166:void loadDefinitions():205 -> a
-    31193:31195:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):193:195 -> a
-    31193:31195:void loadDefinitions():207 -> a
-    32117:32117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    32117:32117:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):193 -> a
-    32117:32117:void loadDefinitions():207 -> a
+    30069:30069:void loadDefinitions():196 -> a
+    31069:31069:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getInstanceCount():69:69 -> a
+    31069:31069:void loadDefinitions():201 -> a
+    31080:31081:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setUdvForInstance(int,java.util.HashMap):80:81 -> a
+    31080:31081:void loadDefinitions():202 -> a
+    31212:31212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
+    31212:31212:void loadDefinitions():205 -> a
+    32161:32166:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addTestMethodDefinition(java.lang.String,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):161:166 -> a
+    32161:32166:void loadDefinitions():205 -> a
+    32193:32195:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):193:195 -> a
+    32193:32195:void loadDefinitions():207 -> a
     33117:33117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    33117:33117:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):194 -> a
+    33117:33117:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):193 -> a
     33117:33117:void loadDefinitions():207 -> a
+    34117:34117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
+    34117:34117:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):194 -> a
+    34117:34117:void loadDefinitions():207 -> a
     212:212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef() -> b
     220:221:void setContainer(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
     225:299:void populateExpectedSignature(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition,java.lang.String,boolean) -> a
-    33151:33152:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethodSignatureType(com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestMethodSignatureType):151:152 -> a
-    33151:33152:void populateExpectedSignature(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition,java.lang.String,boolean):294 -> a
+    34151:34152:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethodSignatureType(com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestMethodSignatureType):151:152 -> a
+    34151:34152:void populateExpectedSignature(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition,java.lang.String,boolean):294 -> a
 com.autocognite.pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler -> com.autocognite.pvt.mo:
     org.apache.log4j.Logger logger -> a
     java.lang.Class klass -> b
@@ -7362,29 +7337,32 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup -> com.autocogn
     java.util.List containerPickers -> c
     com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode sessionSubNode -> h
     com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer udvars -> d
-    14:25:void <init>(java.lang.String) -> <init>
-    14:31:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String) -> <init>
-    1103:1104:void setSessionSubNode(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode):103:104 -> <init>
-    1103:1104:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String):28 -> <init>
-    34:35:void setGroupName(java.lang.String) -> b
-    38:39:void setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader) -> a
-    42:49:void load() -> a
-    2053:2053:java.lang.String getName():53:53 -> a
-    2053:2053:void load():42 -> a
-    53:53:java.lang.String getName() -> b
-    58:58:com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> c
-    63:63:int getTestMethodCount() -> d
-    68:69:void setSessionName(java.lang.String) -> a
-    73:73:java.lang.String getSessionName() -> e
-    77:78:void setClassThreadCount(int) -> a
-    81:82:void setPickers(java.util.List) -> a
-    85:85:java.util.List getPickers() -> f
-    90:90:java.lang.String getDefinitionFile() -> g
-    94:94:int getClassThreadCount() -> h
-    98:98:com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode getSessionSubNode() -> i
-    103:104:void setSessionSubNode(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode) -> a
-    108:108:com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer getUDV() -> j
-    113:113:com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> k
+    java.util.Map classMethodMap -> i
+    16:28:void <init>(java.lang.String) -> <init>
+    16:34:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String) -> <init>
+    1106:1107:void setSessionSubNode(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode):106:107 -> <init>
+    1106:1107:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String):31 -> <init>
+    37:38:void setGroupName(java.lang.String) -> c
+    41:42:void setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader) -> a
+    45:52:void load() -> a
+    2056:2056:java.lang.String getName():56:56 -> a
+    2056:2056:void load():45 -> a
+    56:56:java.lang.String getName() -> b
+    61:61:com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> c
+    66:66:int getTestMethodCount() -> d
+    71:72:void setSessionName(java.lang.String) -> a
+    76:76:java.lang.String getSessionName() -> e
+    80:81:void setClassThreadCount(int) -> a
+    84:85:void setPickers(java.util.List) -> a
+    88:88:java.util.List getPickers() -> f
+    93:93:java.lang.String getDefinitionFile() -> g
+    97:97:int getClassThreadCount() -> h
+    101:101:com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode getSessionSubNode() -> i
+    106:107:void setSessionSubNode(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode) -> a
+    111:111:com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer getUDV() -> j
+    116:116:com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> k
+    121:122:void addClassMethodMap(java.lang.String,java.util.List) -> a
+    126:126:java.util.List getScheduledCreatorsForContainer(java.lang.String) -> b
 com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker -> com.autocognite.pvt.mw:
     org.apache.log4j.Logger logger -> b
     java.util.List considerPatterns -> c
@@ -7394,8 +7372,8 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker -> com.autocog
     251:259:void <init>() -> <init>
     251:263:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group) -> <init>
     266:268:void init() -> a
-    1395:1395:com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig getPickerConfig():395:395 -> a
-    1395:1395:void init():266 -> a
+    1396:1396:com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig getPickerConfig():396:396 -> a
+    1396:1396:void init():266 -> a
     2050:2058:java.util.List com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig.getConsiderPatterns():50:58 -> a
     2050:2058:void init():266 -> a
     2189:2189:com.autocognite.pvt.arjuna.enums.PickerTargetType com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig.getTargetType():189:189 -> a
@@ -7403,8 +7381,8 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker -> com.autocog
     2189:2189:void init():266 -> a
     2272:2273:void setConsiderPatterns(java.util.List):272:273 -> a
     2272:2273:void init():266 -> a
-    2395:2395:com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig getPickerConfig():395:395 -> a
-    2395:2395:void init():267 -> a
+    2396:2396:com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig getPickerConfig():396:396 -> a
+    2396:2396:void init():267 -> a
     3062:3070:java.util.List com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig.getIgnorePatterns():62:70 -> a
     3062:3070:void init():267 -> a
     3189:3189:com.autocognite.pvt.arjuna.enums.PickerTargetType com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig.getTargetType():189:189 -> a
@@ -7431,7 +7409,7 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker -> com.autocog
     7281:7281:java.util.List getConsiderPatterns():281:281 -> a
     7281:7281:boolean matched(java.lang.String):310 -> a
     329:330:void setGroup(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group) -> a
-    334:381:int load(com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator,java.util.List) -> a
+    334:382:int load(com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator,java.util.List) -> a
     7289:7289:com.autocognite.pvt.unitee.testobject.lib.loader.group.Group getTestGroup():289:289 -> a
     7289:7289:int load(com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator,java.util.List):335 -> a
     8289:8289:com.autocognite.pvt.unitee.testobject.lib.loader.group.Group getTestGroup():289:289 -> a
@@ -7457,31 +7435,33 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker -> com.autocog
     14203:14203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
     14203:14203:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setPicked():289 -> a
     14203:14203:int load(com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator,java.util.List):376 -> a
+    15203:15203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
+    15203:15203:int load(com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator,java.util.List):377 -> a
     boolean shouldIncludePackage(java.lang.String) -> b
     boolean shouldIncludeContainer(java.lang.String) -> c
     boolean shouldIncludeMethod(java.lang.String) -> d
-    391:392:void setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> a
-    395:395:com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig getPickerConfig() -> f
+    392:393:void setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> a
+    396:396:com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig getPickerConfig() -> f
 com.autocognite.pvt.unitee.testobject.lib.loader.group.ClassPicker -> com.autocognite.pvt.mx:
     java.lang.String pkg -> b
     java.lang.String lPkg -> c
-    432:440:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
+    433:441:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
     1241:1241:java.lang.String com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig.getPackageName():241:241 -> <init>
-    1241:1241:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):437 -> <init>
-    1455:1457:void setPackageName(java.lang.String):455:457 -> <init>
-    1455:1457:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):437 -> <init>
-    2391:2392:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker.setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):391:392 -> <init>
-    2391:2392:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):438 -> <init>
-    443:443:boolean shouldIncludePackage(java.lang.String) -> b
-    447:447:boolean shouldIncludeContainer(java.lang.String) -> c
-    451:451:boolean shouldIncludeMethod(java.lang.String) -> d
-    455:457:void setPackageName(java.lang.String) -> e
-    460:460:java.lang.String getPackageName() -> c
-    464:464:com.autocognite.pvt.arjuna.enums.PickerTargetType getTargetType() -> b
+    1241:1241:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):438 -> <init>
+    1456:1458:void setPackageName(java.lang.String):456:458 -> <init>
+    1456:1458:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):438 -> <init>
+    2392:2393:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker.setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):392:393 -> <init>
+    2392:2393:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):439 -> <init>
+    444:444:boolean shouldIncludePackage(java.lang.String) -> b
+    448:448:boolean shouldIncludeContainer(java.lang.String) -> c
+    452:452:boolean shouldIncludeMethod(java.lang.String) -> d
+    456:458:void setPackageName(java.lang.String) -> e
+    461:461:java.lang.String getPackageName() -> c
+    465:465:com.autocognite.pvt.arjuna.enums.PickerTargetType getTargetType() -> b
 com.autocognite.pvt.unitee.testobject.lib.loader.group.DefaultTestGroup -> com.autocognite.pvt.my:
     150:153:void <init>(java.lang.String) -> <init>
-    1038:1039:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader):38:39 -> <init>
-    1038:1039:void <init>(java.lang.String):152 -> <init>
+    1041:1042:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader):41:42 -> <init>
+    1041:1042:void <init>(java.lang.String):152 -> <init>
 com.autocognite.pvt.unitee.testobject.lib.loader.group.Group -> com.autocognite.pvt.mz:
     java.lang.String getName() -> b
     com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> c
@@ -7497,6 +7477,8 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.Group -> com.autocognite.
     com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> k
     com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode getSessionSubNode() -> i
     void setSessionSubNode(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode) -> a
+    void addClassMethodMap(java.lang.String,java.util.List) -> a
+    java.util.List getScheduledCreatorsForContainer(java.lang.String) -> b
 com.autocognite.pvt.unitee.testobject.lib.loader.group.JavaTestClassLoader -> com.autocognite.pvt.na:
     org.apache.log4j.Logger logger -> a
     com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator execSlotsCreator -> b
@@ -7519,48 +7501,48 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.JsonTestPickerProperty ->
     3:8:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.testobject.lib.loader.group.MBGroup -> com.autocognite.pvt.nc:
     159:162:void <init>() -> <init>
-    1038:1039:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader):38:39 -> <init>
-    1038:1039:void <init>():161 -> <init>
+    1041:1042:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader):41:42 -> <init>
+    1041:1042:void <init>():161 -> <init>
 com.autocognite.pvt.unitee.testobject.lib.loader.group.MLGroup -> com.autocognite.pvt.nd:
     168:171:void <init>() -> <init>
-    1038:1039:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader):38:39 -> <init>
-    1038:1039:void <init>():170 -> <init>
+    1041:1042:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader):41:42 -> <init>
+    1041:1042:void <init>():170 -> <init>
 com.autocognite.pvt.unitee.testobject.lib.loader.group.MethodPicker -> com.autocognite.pvt.ne:
     java.lang.String pkg -> b
     java.lang.String lPkg -> c
     java.lang.String klass -> d
     java.lang.String lKlass -> e
-    470:481:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
+    471:482:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
     1241:1241:java.lang.String com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig.getPackageName():241:241 -> <init>
-    1241:1241:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):477 -> <init>
-    1496:1498:void setPackageName(java.lang.String):496:498 -> <init>
-    1496:1498:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):477 -> <init>
+    1241:1241:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):478 -> <init>
+    1497:1499:void setPackageName(java.lang.String):497:499 -> <init>
+    1497:1499:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):478 -> <init>
     2245:2245:java.lang.String com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig.getClassName():245:245 -> <init>
-    2245:2245:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):478 -> <init>
-    2505:2507:void setClassName(java.lang.String):505:507 -> <init>
-    2505:2507:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):478 -> <init>
-    3391:3392:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker.setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):391:392 -> <init>
-    3391:3392:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):479 -> <init>
-    484:484:boolean shouldIncludePackage(java.lang.String) -> b
-    488:488:boolean shouldIncludeContainer(java.lang.String) -> c
-    492:492:boolean shouldIncludeMethod(java.lang.String) -> d
-    496:498:void setPackageName(java.lang.String) -> e
-    501:501:java.lang.String getPackageName() -> c
-    505:507:void setClassName(java.lang.String) -> f
-    510:510:java.lang.String getClassName() -> d
-    514:514:com.autocognite.pvt.arjuna.enums.PickerTargetType getTargetType() -> b
+    2245:2245:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):479 -> <init>
+    2506:2508:void setClassName(java.lang.String):506:508 -> <init>
+    2506:2508:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):479 -> <init>
+    3392:3393:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker.setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):392:393 -> <init>
+    3392:3393:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):480 -> <init>
+    485:485:boolean shouldIncludePackage(java.lang.String) -> b
+    489:489:boolean shouldIncludeContainer(java.lang.String) -> c
+    493:493:boolean shouldIncludeMethod(java.lang.String) -> d
+    497:499:void setPackageName(java.lang.String) -> e
+    502:502:java.lang.String getPackageName() -> c
+    506:508:void setClassName(java.lang.String) -> f
+    511:511:java.lang.String getClassName() -> d
+    515:515:com.autocognite.pvt.arjuna.enums.PickerTargetType getTargetType() -> b
 com.autocognite.pvt.unitee.testobject.lib.loader.group.PackagePicker -> com.autocognite.pvt.nf:
     org.apache.log4j.Logger logger -> b
-    400:406:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
-    1391:1392:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker.setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):391:392 -> <init>
-    1391:1392:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):404 -> <init>
-    400:412:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
-    2391:2392:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker.setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):391:392 -> <init>
-    2391:2392:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):410 -> <init>
-    415:415:boolean shouldIncludePackage(java.lang.String) -> b
-    419:419:boolean shouldIncludeContainer(java.lang.String) -> c
-    423:423:boolean shouldIncludeMethod(java.lang.String) -> d
-    427:427:com.autocognite.pvt.arjuna.enums.PickerTargetType getTargetType() -> b
+    401:407:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
+    1392:1393:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker.setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):392:393 -> <init>
+    1392:1393:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.Group,com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):405 -> <init>
+    401:413:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
+    2392:2393:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BasePicker.setPickerConfig(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):392:393 -> <init>
+    2392:2393:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):411 -> <init>
+    416:416:boolean shouldIncludePackage(java.lang.String) -> b
+    420:420:boolean shouldIncludeContainer(java.lang.String) -> c
+    424:424:boolean shouldIncludeMethod(java.lang.String) -> d
+    428:428:com.autocognite.pvt.arjuna.enums.PickerTargetType getTargetType() -> b
 com.autocognite.pvt.unitee.testobject.lib.loader.group.Picker -> com.autocognite.pvt.ng:
     int load(com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator,java.util.List) -> a
     void setConsiderPatterns(java.util.List) -> a
@@ -7928,19 +7910,19 @@ com.autocognite.pvt.unitee.testobject.lib.loader.group.UnselectedJavaTestClassLo
 com.autocognite.pvt.unitee.testobject.lib.loader.group.UserDefinedGroup -> com.autocognite.pvt.ns:
     java.lang.String groupFilePath -> e
     18:41:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String,java.lang.String) -> <init>
-    1038:1039:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader):38:39 -> <init>
-    1038:1039:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String,java.lang.String):40 -> <init>
+    1041:1042:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(com.autocognite.pvt.unitee.testobject.lib.loader.group.TestLoader):41:42 -> <init>
+    1041:1042:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String,java.lang.String):40 -> <init>
     44:51:void errorUdvNotObject() -> l
     54:61:void existAsClassThreadsIsNotInt() -> m
     66:138:void processJson(com.google.gson.JsonObject) -> a
-    1108:1108:com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.getUDV():108:108 -> a
-    1108:1108:void processJson(com.google.gson.JsonObject):69 -> a
+    1111:1111:com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.getUDV():111:111 -> a
+    1111:1111:void processJson(com.google.gson.JsonObject):69 -> a
     2044:2051:void errorUdvNotObject():44:51 -> a
     2044:2051:void processJson(com.google.gson.JsonObject):71 -> a
-    2077:2078:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setClassThreadCount(int):77:78 -> a
-    2077:2078:void processJson(com.google.gson.JsonObject):118 -> a
-    2081:2082:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setPickers(java.util.List):81:82 -> a
-    2081:2082:void processJson(com.google.gson.JsonObject):137 -> a
+    2080:2081:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setClassThreadCount(int):80:81 -> a
+    2080:2081:void processJson(com.google.gson.JsonObject):118 -> a
+    2084:2085:void com.autocognite.pvt.unitee.testobject.lib.loader.group.BaseGroup.setPickers(java.util.List):84:85 -> a
+    2084:2085:void processJson(com.google.gson.JsonObject):137 -> a
     143:143:java.lang.String getDefinitionFile() -> g
 com.autocognite.pvt.unitee.testobject.lib.loader.session.BaseSession -> com.autocognite.pvt.nt:
     org.apache.log4j.Logger logger -> a
@@ -8253,7 +8235,7 @@ com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator -> c
     4045:4045:void load():122 -> a
     5042:5043:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTree.removeFromQueue(java.util.ArrayList):42:43 -> a
     5042:5043:void load():130 -> a
-    149:238:java.util.List getContainerList(int,java.util.ArrayList) -> a
+    149:239:java.util.List getContainerList(int,java.util.ArrayList) -> a
     5088:5088:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> a
     5088:5088:java.util.List getContainerList(int,java.util.ArrayList):160 -> a
     6088:6088:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> a
@@ -8265,18 +8247,18 @@ com.autocognite.pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator -> c
     8088:8088:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> a
     8088:8088:java.util.List getContainerList(int,java.util.ArrayList):177 -> a
     8203:8203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    8203:8203:java.util.List getContainerList(int,java.util.ArrayList):180 -> a
+    8203:8203:java.util.List getContainerList(int,java.util.ArrayList):181 -> a
     8309:8309:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():309:309 -> a
-    8309:8309:java.util.List getContainerList(int,java.util.ArrayList):181 -> a
+    8309:8309:java.util.List getContainerList(int,java.util.ArrayList):182 -> a
     9203:9203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    9203:9203:java.util.List getContainerList(int,java.util.ArrayList):185 -> a
+    9203:9203:java.util.List getContainerList(int,java.util.ArrayList):186 -> a
     9313:9313:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.isUnpicked():313:313 -> a
-    9313:9313:java.util.List getContainerList(int,java.util.ArrayList):187 -> a
+    9313:9313:java.util.List getContainerList(int,java.util.ArrayList):188 -> a
     10203:10203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    10203:10203:java.util.List getContainerList(int,java.util.ArrayList):191 -> a
+    10203:10203:java.util.List getContainerList(int,java.util.ArrayList):192 -> a
     11105:11105:java.lang.reflect.Method com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> a
-    11105:11105:java.util.List getContainerList(int,java.util.ArrayList):204 -> a
-    242:249:com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> b
+    11105:11105:java.util.List getContainerList(int,java.util.ArrayList):205 -> a
+    243:250:com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> b
 com.autocognite.pvt.unitee.testobject.lib.loader.tree.NonTestNode -> com.autocognite.pvt.oh:
     6:7:void <init>(java.lang.String) -> <init>
     10:10:boolean isDummy() -> a

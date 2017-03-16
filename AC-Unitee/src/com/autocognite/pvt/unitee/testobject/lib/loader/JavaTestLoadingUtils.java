@@ -33,7 +33,7 @@ public class JavaTestLoadingUtils {
 		if (!FileSystemBatteries.isFile(refPath)){
 			String relRefPath = Batteries.value(BatteriesPropertyType.DIRECTORY_DATA_REFERENCES).asString() + "/" + refPath;
 			if (!FileSystemBatteries.isFile(relRefPath)){
-				throw new Exception("File path provided using @FileDataReference annotation does not exist:" + refPath);
+				throw new Exception(String.format("File path provided using @FileDataReference annotation is present neither as Arjuna path: %s nor as absolute path: %s:", relRefPath, refPath));
 			}
 			refPath = relRefPath;
 		}		

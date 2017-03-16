@@ -27,11 +27,11 @@ import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 
 public class ExcelDataReference implements DataReference {
-	HashMap<String, DataRecord> map = new HashMap<String, DataRecord>();
-	ExcelFileLine2ArrayReader reader = null;
-	String keyColumn = null;
-	int keyIndex = -1;
-	ArrayList<String> headers = null;
+	private HashMap<String, DataRecord> map = new HashMap<String, DataRecord>();
+	private ExcelFileLine2ArrayReader reader = null;
+	private String keyColumn = null;
+	private int keyIndex = -1;
+	private ArrayList<String> headers = null;
 	private Object path;
 
 	public ExcelDataReference(String path, String keyColumn) throws Exception {
@@ -56,23 +56,23 @@ public class ExcelDataReference implements DataReference {
 		populate();
 	}
 
-	public void populate() throws Exception {
-		ArrayList<Object> dataRecord = reader.next();
+	private void populate() throws Exception {
 		if (this.keyColumn == null) {
 			this.keyColumn = reader.getHeaders().get(0);
 		}
 
+		ArrayList<Object> dataRecord = reader.next();
 		String keyColumnValue = null;
 		while (dataRecord != null) {
-			keyColumnValue = (String) dataRecord.get(keyIndex);
-			DefaultDataRecord data = new DefaultDataRecord(this.headers, dataRecord);
+			keyColumnValue = (String) dataRecord.get(this.keyIndex);
+			DataRecord data = new DefaultDataRecord(this.headers, dataRecord);
 			map.put(keyColumnValue.toUpperCase(), data);
 			dataRecord = reader.next();
 		}
 		reader.close();
 	}
 
-	public synchronized DataRecord getRecord(String key) throws Exception {
+	public synchronized DataRecord record(String key) throws Exception {
 		if (map.containsKey(key.toUpperCase())) {
 			return map.get(key.toUpperCase());
 		} else {

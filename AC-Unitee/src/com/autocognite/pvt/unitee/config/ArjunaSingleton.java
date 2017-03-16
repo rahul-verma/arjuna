@@ -61,7 +61,7 @@ import com.typesafe.config.ConfigObject;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.0b7";
+	private String version = "0.0b8";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();

@@ -34,13 +34,13 @@ public class UniteeCLI extends AbstractCLI {
 
 		addSingleArgSwitch("dl",
 		"display-level",
-		"log4j Level Enum String",
-		"Min message level for console display.");	
+		"(DEBUG/INFO/WARN/ERROR/FATAL)",
+		"Min log message level for console display.");	
 
 		addSingleArgSwitch("ll",
 		"log-level",
-		"log4j Level Enum String",
-		"Min message level for file logging.");
+		"(DEBUG/INFO/WARN/ERROR/FATAL)",
+		"Min log message level for file logging.");
 		
 		addSingleArgSwitch("pn",
 		"package-name",
@@ -55,32 +55,32 @@ public class UniteeCLI extends AbstractCLI {
 		addSingleArgSwitch("cp",
 		"consider-packages",
 		"comma separated patterns",
-		"Consider only these test packages from discovery");
+		"Consider only these test packages for execution");
 
 		addSingleArgSwitch("cc",
 		"consider-classes",
 		"comma separated patterns",
-		"Consider only these test classes from discovery");
+		"Consider only these test classes for execution");
 
 		addSingleArgSwitch("cm",
 		"consider-methods",
 		"comma separated patterns",
-		"Consider only these test methods from discovery");
+		"Consider only these test methods for execution");
 
 		addSingleArgSwitch("ip",
 		"ignore-packages",
 		"comma separated patterns",
-		"Ignore these test packages");
+		"Ignore these test packages for execution");
 
 		addSingleArgSwitch("ic",
 		"ignore-classes",
 		"comma separated patterns",
-		"Ignore these test classes.");
+		"Ignore these test classes for execution");
 
 		addSingleArgSwitch("im",
 		"ignore-methods",
 		"comma separated patterns",
-		"Ignore these test methods.");
+		"Ignore these test methods for execution");
 
 		addSingleArgSwitch("d",
 		"test-dir",

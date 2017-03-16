@@ -1,13 +1,18 @@
 package com.autocognite.pvt.unitee.testobject.lib.loader;
 
 import java.io.File;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
@@ -16,12 +21,16 @@ import com.autocognite.arjuna.annotations.Instances;
 import com.autocognite.arjuna.annotations.Skip;
 import com.autocognite.arjuna.annotations.TestClass;
 import com.autocognite.arjuna.interfaces.TestVariables;
+import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.batteries.config.Batteries;
+import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.discoverer.DiscoveredFile;
 import com.autocognite.pvt.batteries.discoverer.DiscoveredFileAttribute;
+import com.autocognite.pvt.batteries.hocon.HoconReader;
+import com.autocognite.pvt.batteries.hocon.HoconResourceReader;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass;
@@ -33,8 +42,27 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 	private ClassLoader classLoader = null;
 	private DependencyTreeBuilder depTreeBuilder = new DependencyTreeBuilder();
 	String testDir = null;
+	public static Map<String, Set<String>> CLASS_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
+	public static Map<String, Set<String>> METHOD_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
 	
 	public JavaTestClassDefinitionsLoader() throws Exception{
+		HoconReader reader1 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/class_annotations_compatibility.conf"));
+		reader1.process();
+		Map<String, Value> rules1 = reader1.getProperties();
+		for (String r: rules1.keySet()){
+			Set<String> aSet = new HashSet<String>();
+			aSet.addAll(rules1.get(r).asStringList());
+			CLASS_ANNOTATION_COMPAT.put(r, aSet);
+		}
+		
+		HoconReader reader2 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/method_annotations_compatibility.conf"));
+		reader2.process();
+		Map<String, Value> rules2 = reader2.getProperties();
+		for (String r: rules2.keySet()){
+			Set<String> aSet = new HashSet<String>();
+			aSet.addAll(rules2.get(r).asStringList());
+			METHOD_ANNOTATION_COMPAT.put(r, aSet);
+		}
 	}
 	
 	@Override
@@ -87,6 +115,51 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 			//boolean include = JavaObjectFilter.shouldIncludeClass(cls);
 //							logger.debug("Filtering: " + fullQualifiedClassName);
 			Class<?> klass = this.loadClass(f, qualifiedName);
+			
+			Annotation[] annos = klass.getAnnotations();
+			ArrayList<String> annNames = new ArrayList<String>();
+
+			for(Annotation a : annos){
+				if (a.annotationType().getName().startsWith("com.autocognite.arjuna")){
+					annNames.add(a.annotationType().getSimpleName());
+				}
+			}
+			
+			// Check for compatible annotations usage.
+			// Only applicable if more than one annotations exist for one method
+			if (annNames.size() > 1){
+				Collections.sort(annNames);
+				String mainAnn = annNames.get(0);
+				annNames.remove(0);
+				if (!JavaTestClassDefinitionsLoader.CLASS_ANNOTATION_COMPAT.containsKey(mainAnn)){
+					Console.displayError(String.format("There is a critical error with your test class: %s", qualifiedName));
+					Console.displayError(String.format("Arjuna found that it is annotated with @%s.", mainAnn));
+					Console.displayError(String.format("Along with this you have annotated the class with: %s.", annNames.toString()));
+					Console.displayError(String.format("@%s annotation can not be used along with any other annotation.", mainAnn));
+					Console.displayError(String.format("Please correct the annotation usage."));
+					Console.displayError("Exiting...");
+					System.exit(1);					
+				} else {
+					List<String> incompatibles = new ArrayList<String>();
+					boolean annAnomaly = false;
+					for (String annName: annNames){
+						if (!JavaTestClassDefinitionsLoader.CLASS_ANNOTATION_COMPAT.get(mainAnn).contains(annName)){
+							incompatibles.add(annName);
+							annAnomaly = true;							
+						} 
+					}
+					
+					if (annAnomaly){
+						Console.displayError(String.format("There is a critical error with your test class: %s", qualifiedName));
+						Console.displayError(String.format("Arjuna found that it is annotated with @%s.", mainAnn));						
+						Console.displayError(String.format("Along with this you have annotated the class with: %s.", annNames.toString()));
+						Console.displayError(String.format("Out of these, these annotations are incompatanle with @%s: %s.", mainAnn, incompatibles.toString()));
+						Console.displayError(String.format("Please correct the annotation usage."));
+						Console.displayError("Exiting...");
+						System.exit(1);		
+					}
+				}
+			}
 
 			if (!this.isTestClass(klass)) {
 				ArjunaInternal.processNonTestClass(klass);

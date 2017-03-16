@@ -25,6 +25,7 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataMethodContainer;
+import com.autocognite.arjuna.checks.Checks;
 import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.batteries.config.Batteries;
@@ -36,6 +37,8 @@ public class DataMethodContainerMap {
 	HashMap<String,DataMethodsHandler> wrappers = new HashMap<String, DataMethodsHandler>();
 	HashMap<String,String> containerClassNames = new HashMap<String,String>();
 	HashMap<Class<?>,String> containerClassToNameMapper = new HashMap<Class<?>,String>();
+	// In obfuscated jar somehow class to class look up not working. So, this data structure.
+	HashMap<String,Class<?>> containerClassNameToClassMapper = new HashMap<String,Class<?>>();
 	
 	public void process(Class<?> klass) throws Exception{
 		if (ArjunaInternal.displayDataMethodProcessingInfo){
@@ -57,6 +60,7 @@ public class DataMethodContainerMap {
 		
 		this.containerClassNames.put(containerClassName, containerName);
 		this.containerClassToNameMapper.put(klass, containerName);
+		this.containerClassNameToClassMapper.put(klass.getName(), klass);
 		DataMethodsHandler handler = new NonTestDataMethodsHandler(klass);
 		handler.process();
 		this.wrappers.put(containerName, handler);
@@ -77,15 +81,18 @@ public class DataMethodContainerMap {
 			logger.debug("Retrieving Data Method for class: "  + containerClass.getName());
 		}
 		if (!containerClass.isAnnotationPresent(DataMethodContainer.class)){
+			logger.debug("@DataMethodContainer Annotated Container");
 			return NonTestDataMethodsHandler.getStaticMethodForClass(containerClass, dgName);
 		}
 		if (ArjunaInternal.displayDataMethodProcessingInfo){
-			logger.debug(DataBatteries.flatten(this.containerClassToNameMapper.keySet().toArray()));
+			logger.debug(DataBatteries.flatten(this.containerClassNameToClassMapper.keySet()));
 		}
-		if (containerClassToNameMapper.containsKey(containerClass)){
-			return (Method) wrappers.get(containerClassToNameMapper.get(containerClass)).getMethod(dgName);
+		
+		if (containerClassNameToClassMapper.containsKey(containerClass.getName())){
+			Class<?> k = containerClassNameToClassMapper.get(containerClass.getName());
+			return (Method) wrappers.get(containerClassToNameMapper.get(k)).getMethod(dgName);
 		} else {
-			throw new Exception(String.format("No data generator class found for ", containerClass.getName()));
+			throw new Exception(String.format("No data generator class found for: %s", containerClass.getName()));
 		}
 	}
 }

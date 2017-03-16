@@ -1,6 +1,7 @@
 package com.autocognite.pvt.batteries.value;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import com.autocognite.arjuna.enums.ValueType;
@@ -41,6 +42,19 @@ public class AnyRefListValue extends AbstractValue {
 			e.printStackTrace();
 			throw new UnsupportedRepresentationException(AnyRefListValue.class.getSimpleName(), "asEnumList()",
 					this.toString(), enumClass.getSimpleName());
+		}
+	}
+	
+	@Override
+	public List<String> asStringList() throws Exception {
+		List<String> tempList = new ArrayList<String>();
+		try{
+			for (Object o : this.asList()) {
+				tempList.add(o.toString());
+			}
+			return tempList;
+		} catch (Exception e){
+			throw new Exception(String.format(">>%s<< can not be represented as a list of strings.", this.asString()));
 		}
 	}
 
