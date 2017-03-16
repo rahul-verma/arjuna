@@ -295,7 +295,7 @@ com.autocognite.arjuna.interfaces.DataRecordContainer -> com.autocognite.arjuna.
     java.util.ArrayList getAll() -> getAll
     java.util.Iterator iterator() -> iterator
 com.autocognite.arjuna.interfaces.DataReference -> com.autocognite.arjuna.interfaces.DataReference:
-    com.autocognite.arjuna.interfaces.DataRecord getRecord(java.lang.String) -> getRecord
+    com.autocognite.arjuna.interfaces.DataRecord record(java.lang.String) -> record
 com.autocognite.arjuna.interfaces.DataSource -> com.autocognite.arjuna.interfaces.DataSource:
     com.autocognite.arjuna.interfaces.DataRecord next() -> next
 com.autocognite.arjuna.interfaces.DataWrapper -> com.autocognite.arjuna.interfaces.DataWrapper:
@@ -1556,7 +1556,7 @@ com.autocognite.pvt.batteries.databroker.ExcelDataReference -> com.autocognite.p
     60:73:void populate() -> a
     2047:2047:java.util.ArrayList com.autocognite.pvt.batteries.filehandler.ExcelFileReader.getHeaders():47:47 -> a
     2047:2047:void populate():61 -> a
-    76:79:com.autocognite.arjuna.interfaces.DataRecord getRecord(java.lang.String) -> getRecord
+    76:79:com.autocognite.arjuna.interfaces.DataRecord record(java.lang.String) -> record
 com.autocognite.pvt.batteries.databroker.ExcelFileDataSource -> com.autocognite.pvt.bg:
     com.autocognite.pvt.batteries.filehandler.ExcelFileLine2ArrayReader reader -> a
     java.util.ArrayList headers -> b
@@ -3140,11 +3140,12 @@ com.autocognite.pvt.batteries.value.AbstractValue -> com.autocognite.pvt.fj:
     50:50:java.lang.String toString() -> toString
     6:6:java.lang.Object clone() -> clone
 com.autocognite.pvt.batteries.value.AnyRefListValue -> com.autocognite.pvt.fk:
-    12:13:void <init>(java.util.List) -> <init>
-    17:17:com.autocognite.arjuna.interfaces.Value clone() -> clone
-    23:23:java.util.List asList() -> asList
-    28:43:java.util.List asEnumList(java.lang.Class) -> asEnumList
-    9:9:java.lang.Object clone() -> clone
+    13:14:void <init>(java.util.List) -> <init>
+    18:18:com.autocognite.arjuna.interfaces.Value clone() -> clone
+    24:24:java.util.List asList() -> asList
+    29:44:java.util.List asEnumList(java.lang.Class) -> asEnumList
+    50:57:java.util.List asStringList() -> asStringList
+    10:10:java.lang.Object clone() -> clone
 com.autocognite.pvt.batteries.value.AnyRefValue -> com.autocognite.pvt.fl:
     11:12:void <init>(java.lang.Object) -> <init>
     16:16:com.autocognite.arjuna.interfaces.Value clone() -> clone
@@ -6781,7 +6782,7 @@ com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType -> com.a
     3:5:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.testobject.lib.loader.ConstructorDef -> com.autocognite.pvt.mf:
     com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType type -> a
-    285:286:void <init>() -> <init>
+    358:359:void <init>() -> <init>
 com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler -> com.autocognite.pvt.mg:
     void process() -> a
     java.lang.reflect.Method getMethod(java.lang.String) -> a
@@ -6805,79 +6806,82 @@ com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassDataMethodsHandler
     37:37:java.lang.reflect.Method[] getMethods() -> b
     42:42:java.lang.String getContainerName() -> c
 com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassDefinitionsLoader -> com.autocognite.pvt.mj:
-    org.apache.log4j.Logger logger -> a
-    java.lang.ClassLoader classLoader -> b
-    com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder depTreeBuilder -> c
-    java.lang.String testDir -> d
-    32:38:void <init>() -> <init>
-    42:43:void setTestDir(java.lang.String) -> a
-    46:65:java.lang.ClassLoader getClassLoader(com.autocognite.pvt.batteries.discoverer.DiscoveredFile) -> b
-    70:75:java.lang.ClassLoader getClassLoader(java.lang.String) -> b
-    80:182:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile) -> a
-    1185:1193:java.lang.String getQualifiedName(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):185:193 -> a
-    1185:1193:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):81 -> a
-    1247:1247:boolean isTestClass(java.lang.Class):247:247 -> a
-    1247:1247:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):91 -> a
+    org.apache.log4j.Logger logger -> b
+    java.lang.ClassLoader classLoader -> c
+    com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder depTreeBuilder -> d
+    java.lang.String testDir -> e
+    java.util.Map CLASS_ANNOTATION_COMPAT -> f
+    java.util.Map METHOD_ANNOTATION_COMPAT -> a
+    41:66:void <init>() -> <init>
+    70:71:void setTestDir(java.lang.String) -> a
+    74:93:java.lang.ClassLoader getClassLoader(com.autocognite.pvt.batteries.discoverer.DiscoveredFile) -> b
+    98:103:java.lang.ClassLoader getClassLoader(java.lang.String) -> b
+    108:255:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile) -> a
+    1258:1266:java.lang.String getQualifiedName(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):258:266 -> a
+    1258:1266:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):109 -> a
+    1320:1320:boolean isTestClass(java.lang.Class):320:320 -> a
+    1320:1320:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):164 -> a
     2122:2134:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUserTestClass(java.lang.Class):122:134 -> a
-    2122:2134:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):98 -> a
+    2122:2134:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):171 -> a
     3071:3075:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getPackageName(java.lang.Class):71:75 -> a
     3071:3075:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUserTestClass(java.lang.Class):127 -> a
-    3071:3075:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):98 -> a
-    3251:3254:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):251:254 -> a
-    3251:3254:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):104 -> a
-    3301:3306:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):301:306 -> a
-    3301:3306:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):252 -> a
-    3301:3306:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):104 -> a
-    4203:4203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    4203:4203:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):301 -> a
-    4203:4203:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):252 -> a
-    4203:4203:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):104 -> a
-    4309:4309:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():309:309 -> a
-    4309:4309:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):305 -> a
-    4309:4309:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):252 -> a
-    4309:4309:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):104 -> a
+    3071:3075:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):171 -> a
+    3324:3327:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):324:327 -> a
+    3324:3327:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):177 -> a
+    4301:4306:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):301:306 -> a
+    4301:4306:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):325 -> a
+    4301:4306:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):177 -> a
     5203:5203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    5203:5203:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):108 -> a
-    5227:5228:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setCreatorThreadCount(int):227:228 -> a
-    5227:5228:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):112 -> a
-    6080:6081:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setDataRefPresent(boolean):80:81 -> a
-    6080:6081:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):115 -> a
-    6084:6084:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.isDataRefPresent():84:84 -> a
-    6084:6084:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):116 -> a
-    6088:6093:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addFileDataRefWithPath(java.lang.String,java.lang.String):88:93 -> a
-    6088:6093:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):125 -> a
+    5203:5203:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):301 -> a
+    5203:5203:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):325 -> a
+    5203:5203:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):177 -> a
+    5309:5309:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():309:309 -> a
+    5309:5309:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):305 -> a
+    5309:5309:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):325 -> a
+    5309:5309:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):177 -> a
     6203:6203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    6203:6203:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):141 -> a
+    6203:6203:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):181 -> a
+    6227:6228:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setCreatorThreadCount(int):227:228 -> a
+    6227:6228:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):185 -> a
+    7080:7081:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setDataRefPresent(boolean):80:81 -> a
+    7080:7081:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):188 -> a
+    7084:7084:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.isDataRefPresent():84:84 -> a
+    7084:7084:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):189 -> a
+    7088:7093:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addFileDataRefWithPath(java.lang.String,java.lang.String):88:93 -> a
+    7088:7093:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):198 -> a
     7203:7203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    7203:7203:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):148 -> a
-    7231:7232:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setInstanceThreadCount(int):231:232 -> a
-    7231:7232:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):156 -> a
-    8096:8096:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
-    8096:8096:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):158 -> a
-    8137:8138:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructor(java.lang.reflect.Constructor):137:138 -> a
-    8137:8138:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):163 -> a
-    8145:8146:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructorType(com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType):145:146 -> a
-    8145:8146:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):164 -> a
+    7203:7203:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):214 -> a
+    8203:8203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
+    8203:8203:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):221 -> a
+    8231:8232:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setInstanceThreadCount(int):231:232 -> a
+    8231:8232:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):229 -> a
     9096:9096:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
-    9096:9096:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):170 -> a
-    9107:9115:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUdvForInstance(int,java.util.HashMap):107:115 -> a
-    9107:9115:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):171 -> a
-    185:193:java.lang.String getQualifiedName(com.autocognite.pvt.batteries.discoverer.DiscoveredFile) -> c
-    202:244:java.lang.Class loadClass(com.autocognite.pvt.batteries.discoverer.DiscoveredFile,java.lang.String) -> a
-    10046:10065:java.lang.ClassLoader getClassLoader(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):46:65 -> a
-    10046:10065:java.lang.Class loadClass(com.autocognite.pvt.batteries.discoverer.DiscoveredFile,java.lang.String):205 -> a
-    247:247:boolean isTestClass(java.lang.Class) -> a
-    251:254:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
-    10301:10306:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):301:306 -> a
-    10301:10306:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):252 -> a
-    11203:11203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    11203:11203:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):301 -> a
-    11203:11203:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):252 -> a
-    11309:11309:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():309:309 -> a
-    11309:11309:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):305 -> a
-    11309:11309:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):252 -> a
-    257:274:java.lang.reflect.Constructor getConstructor$27227072(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.loader.ConstructorDef) -> a
-    280:281:void validateDependencies() -> a
+    9096:9096:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):231 -> a
+    9137:9138:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructor(java.lang.reflect.Constructor):137:138 -> a
+    9137:9138:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):236 -> a
+    9145:9146:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructorType(com.autocognite.pvt.unitee.testobject.lib.java.TestClassConstructorType):145:146 -> a
+    9145:9146:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):237 -> a
+    10096:10096:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
+    10096:10096:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):243 -> a
+    10107:10115:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUdvForInstance(int,java.util.HashMap):107:115 -> a
+    10107:10115:void load(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):244 -> a
+    258:266:java.lang.String getQualifiedName(com.autocognite.pvt.batteries.discoverer.DiscoveredFile) -> c
+    275:317:java.lang.Class loadClass(com.autocognite.pvt.batteries.discoverer.DiscoveredFile,java.lang.String) -> a
+    11074:11093:java.lang.ClassLoader getClassLoader(com.autocognite.pvt.batteries.discoverer.DiscoveredFile):74:93 -> a
+    11074:11093:java.lang.Class loadClass(com.autocognite.pvt.batteries.discoverer.DiscoveredFile,java.lang.String):278 -> a
+    320:320:boolean isTestClass(java.lang.Class) -> a
+    324:327:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
+    11301:11306:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):301:306 -> a
+    11301:11306:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):325 -> a
+    12203:12203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
+    12203:12203:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):301 -> a
+    12203:12203:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):325 -> a
+    12309:12309:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():309:309 -> a
+    12309:12309:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(com.autocognite.pvt.arjuna.enums.SkipCode):305 -> a
+    12309:12309:void processSkip$27b3b15e(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):325 -> a
+    330:347:java.lang.reflect.Constructor getConstructor$27227072(java.lang.Class,com.autocognite.pvt.unitee.testobject.lib.loader.ConstructorDef) -> a
+    353:354:void validateDependencies() -> a
+    45:46:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader -> com.autocognite.pvt.mk:
     org.apache.log4j.Logger logger -> o
     com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition classDef -> a
@@ -7009,187 +7013,187 @@ com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestMethodsDefinitionLoader
     org.apache.log4j.Logger logger -> a
     com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition testClassDef -> b
     com.autocognite.pvt.unitee.testobject.lib.loader.TestDefinitionsLoader javaTestClassLoader -> c
-    33:40:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.TestDefinitionsLoader,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> <init>
-    1220:1221:void setContainer(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):220:221 -> <init>
-    1220:1221:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.TestDefinitionsLoader,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):38 -> <init>
-    43:43:boolean isTestMethod(java.lang.reflect.Method) -> a
-    47:50:void processSelection(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition) -> a
-    53:54:void addFilteredMethodNameToTree(java.lang.String) -> a
+    35:42:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.TestDefinitionsLoader,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> <init>
+    1316:1317:void setContainer(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):316:317 -> <init>
+    1316:1317:void <init>(com.autocognite.pvt.unitee.testobject.lib.loader.TestDefinitionsLoader,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):40 -> <init>
+    45:45:boolean isTestMethod(java.lang.reflect.Method) -> a
+    49:52:void processSelection(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition) -> a
+    55:56:void addFilteredMethodNameToTree(java.lang.String) -> a
     2185:2186:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.addFilteredCreator(java.lang.String):185:186 -> a
-    2185:2186:void addFilteredMethodNameToTree(java.lang.String):53 -> a
-    57:209:void loadDefinitions() -> a
-    2212:2212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
-    2212:2212:void loadDefinitions():62 -> a
+    2185:2186:void addFilteredMethodNameToTree(java.lang.String):55 -> a
+    59:305:void loadDefinitions() -> a
+    2308:2308:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():308:308 -> a
+    2308:2308:void loadDefinitions():64 -> a
     3118:3118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    3118:3118:void loadDefinitions():62 -> a
-    4043:4043:boolean isTestMethod(java.lang.reflect.Method):43:43 -> a
-    4043:4043:void loadDefinitions():72 -> a
-    4212:4212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
-    4212:4212:void loadDefinitions():96 -> a
-    4235:4236:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addNonTestMethodName(java.lang.String):235:236 -> a
-    4235:4236:void loadDefinitions():96 -> a
-    5154:5209:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):154:209 -> a
-    5154:5209:void loadDefinitions():97 -> a
-    6063:6064:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassFixture(java.lang.reflect.Method):63:64 -> a
-    6063:6064:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):158 -> a
-    6063:6064:void loadDefinitions():97 -> a
-    6118:6118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    6118:6118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):161 -> a
-    6118:6118:void loadDefinitions():97 -> a
-    7068:7069:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassFixture(java.lang.reflect.Method):68:69 -> a
-    7068:7069:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):163 -> a
-    7068:7069:void loadDefinitions():97 -> a
+    3118:3118:void loadDefinitions():64 -> a
+    4045:4045:boolean isTestMethod(java.lang.reflect.Method):45:45 -> a
+    4045:4045:void loadDefinitions():144 -> a
+    4308:4308:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():308:308 -> a
+    4308:4308:void loadDefinitions():175 -> a
+    5235:5236:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addNonTestMethodName(java.lang.String):235:236 -> a
+    5235:5236:void loadDefinitions():175 -> a
+    6154:6209:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):154:209 -> a
+    6154:6209:void loadDefinitions():176 -> a
+    7063:7064:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassFixture(java.lang.reflect.Method):63:64 -> a
+    7063:7064:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):158 -> a
+    7063:7064:void loadDefinitions():176 -> a
     7118:7118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    7118:7118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):166 -> a
-    7118:7118:void loadDefinitions():97 -> a
-    8073:8074:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassInstanceFixture(java.lang.reflect.Method):73:74 -> a
-    8073:8074:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):168 -> a
-    8073:8074:void loadDefinitions():97 -> a
+    7118:7118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):161 -> a
+    7118:7118:void loadDefinitions():176 -> a
+    8068:8069:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassFixture(java.lang.reflect.Method):68:69 -> a
+    8068:8069:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):163 -> a
+    8068:8069:void loadDefinitions():176 -> a
     8118:8118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    8118:8118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):170 -> a
-    8118:8118:void loadDefinitions():97 -> a
-    9078:9079:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassInstanceFixture(java.lang.reflect.Method):78:79 -> a
-    9078:9079:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):172 -> a
-    9078:9079:void loadDefinitions():97 -> a
+    8118:8118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):166 -> a
+    8118:8118:void loadDefinitions():176 -> a
+    9073:9074:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassInstanceFixture(java.lang.reflect.Method):73:74 -> a
+    9073:9074:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):168 -> a
+    9073:9074:void loadDefinitions():176 -> a
     9118:9118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    9118:9118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):174 -> a
-    9118:9118:void loadDefinitions():97 -> a
-    10083:10084:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassFragmentFixture(java.lang.reflect.Method):83:84 -> a
-    10083:10084:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):176 -> a
-    10083:10084:void loadDefinitions():97 -> a
+    9118:9118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):170 -> a
+    9118:9118:void loadDefinitions():176 -> a
+    10078:10079:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassInstanceFixture(java.lang.reflect.Method):78:79 -> a
+    10078:10079:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):172 -> a
+    10078:10079:void loadDefinitions():176 -> a
     10118:10118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    10118:10118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):178 -> a
-    10118:10118:void loadDefinitions():97 -> a
-    11088:11089:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassFragmentFixture(java.lang.reflect.Method):88:89 -> a
-    11088:11089:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):180 -> a
-    11088:11089:void loadDefinitions():97 -> a
+    10118:10118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):174 -> a
+    10118:10118:void loadDefinitions():176 -> a
+    11083:11084:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeClassFragmentFixture(java.lang.reflect.Method):83:84 -> a
+    11083:11084:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):176 -> a
+    11083:11084:void loadDefinitions():176 -> a
     11118:11118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    11118:11118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):182 -> a
-    11118:11118:void loadDefinitions():97 -> a
-    12093:12094:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeMethodFixture(java.lang.reflect.Method):93:94 -> a
-    12093:12094:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):184 -> a
-    12093:12094:void loadDefinitions():97 -> a
+    11118:11118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):178 -> a
+    11118:11118:void loadDefinitions():176 -> a
+    12088:12089:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterClassFragmentFixture(java.lang.reflect.Method):88:89 -> a
+    12088:12089:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):180 -> a
+    12088:12089:void loadDefinitions():176 -> a
     12118:12118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    12118:12118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):186 -> a
-    12118:12118:void loadDefinitions():97 -> a
-    13098:13099:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterMethodFixture(java.lang.reflect.Method):98:99 -> a
-    13098:13099:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):188 -> a
-    13098:13099:void loadDefinitions():97 -> a
+    12118:12118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):182 -> a
+    12118:12118:void loadDefinitions():176 -> a
+    13093:13094:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeMethodFixture(java.lang.reflect.Method):93:94 -> a
+    13093:13094:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):184 -> a
+    13093:13094:void loadDefinitions():176 -> a
     13118:13118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    13118:13118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):190 -> a
-    13118:13118:void loadDefinitions():97 -> a
-    14103:14104:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeMethodInstanceFixture(java.lang.reflect.Method):103:104 -> a
-    14103:14104:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):192 -> a
-    14103:14104:void loadDefinitions():97 -> a
+    13118:13118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):186 -> a
+    13118:13118:void loadDefinitions():176 -> a
+    14098:14099:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterMethodFixture(java.lang.reflect.Method):98:99 -> a
+    14098:14099:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):188 -> a
+    14098:14099:void loadDefinitions():176 -> a
     14118:14118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    14118:14118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):194 -> a
-    14118:14118:void loadDefinitions():97 -> a
-    15108:15109:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterMethodInstanceFixture(java.lang.reflect.Method):108:109 -> a
-    15108:15109:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):196 -> a
-    15108:15109:void loadDefinitions():97 -> a
+    14118:14118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):190 -> a
+    14118:14118:void loadDefinitions():176 -> a
+    15103:15104:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeMethodInstanceFixture(java.lang.reflect.Method):103:104 -> a
+    15103:15104:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):192 -> a
+    15103:15104:void loadDefinitions():176 -> a
     15118:15118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    15118:15118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):198 -> a
-    15118:15118:void loadDefinitions():97 -> a
-    16113:16114:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeTestFixture(java.lang.reflect.Method):113:114 -> a
-    16113:16114:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):200 -> a
-    16113:16114:void loadDefinitions():97 -> a
+    15118:15118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):194 -> a
+    15118:15118:void loadDefinitions():176 -> a
+    16108:16109:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterMethodInstanceFixture(java.lang.reflect.Method):108:109 -> a
+    16108:16109:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):196 -> a
+    16108:16109:void loadDefinitions():176 -> a
     16118:16118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    16118:16118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):202 -> a
-    16118:16118:void loadDefinitions():97 -> a
-    17118:17119:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterTestFixture(java.lang.reflect.Method):118:119 -> a
-    17118:17119:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):204 -> a
-    17118:17119:void loadDefinitions():97 -> a
-    18118:18118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
-    18118:18118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):206 -> a
-    18118:18118:void loadDefinitions():97 -> a
-    18212:18212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
-    18212:18212:void loadDefinitions():102 -> a
-    19153:19154:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setFixtures(com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures):153:154 -> a
-    19153:19154:void loadDefinitions():102 -> a
-    19212:19212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
-    19212:19212:void loadDefinitions():116 -> a
-    20092:20093:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setClassDefinition(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):92:93 -> a
-    20092:20093:void loadDefinitions():116 -> a
-    20096:20102:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):96:102 -> a
-    20096:20102:void loadDefinitions():117 -> a
-    21088:21088:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> a
-    21088:21088:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
-    21088:21088:void loadDefinitions():117 -> a
-    21203:21203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
-    21203:21203:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
-    21203:21203:void loadDefinitions():117 -> a
-    22121:22121:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getName():121:121 -> a
-    22121:22121:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
-    22121:22121:void loadDefinitions():117 -> a
-    23047:23050:void processSelection(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):47:50 -> a
-    23047:23050:void loadDefinitions():118 -> a
-    23117:23117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    23117:23117:void loadDefinitions():121 -> a
-    23147:23148:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setTestThreadCount(int):147:148 -> a
-    23147:23148:void loadDefinitions():125 -> a
-    24054:24055:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.testClassDef(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):54:55 -> a
-    24054:24055:void loadDefinitions():131 -> a
-    24058:24059:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.dataSourceType(com.autocognite.pvt.unitee.core.lib.datasource.DataSourceType):58:59 -> a
-    24058:24059:void loadDefinitions():132 -> a
-    24062:24063:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.testMethod(java.lang.reflect.Method):62:63 -> a
-    24062:24063:void loadDefinitions():133 -> a
-    24204:24221:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():204:221 -> a
-    24204:24221:void loadDefinitions():134 -> a
-    25066:25079:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataAnnotation():66:79 -> a
-    25066:25079:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():206 -> a
-    25066:25079:void loadDefinitions():134 -> a
-    25116:25136:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataFileAnnotation():116:136 -> a
-    25116:25136:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():212 -> a
-    25116:25136:void loadDefinitions():134 -> a
-    25139:25179:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataMethodAnnotation():139:179 -> a
-    25139:25179:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():215 -> a
-    25139:25179:void loadDefinitions():134 -> a
-    25211:25211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDataMethodsHandler():211:211 -> a
-    25211:25211:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataMethodAnnotation():172 -> a
-    25211:25211:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():215 -> a
-    25211:25211:void loadDefinitions():134 -> a
-    26182:26201:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataGenerator():182:201 -> a
-    26182:26201:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():218 -> a
-    26182:26201:void loadDefinitions():134 -> a
-    27167:27168:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setDataSourceBuilder(com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder):167:168 -> a
-    27167:27168:void loadDefinitions():135 -> a
-    28056:28057:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setDataRefPresent(boolean):56:57 -> a
-    28056:28057:void loadDefinitions():140 -> a
-    28060:28060:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.isDataRefPresent():60:60 -> a
-    28060:28060:void loadDefinitions():145 -> a
-    28064:28066:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.addFileDataRefWithPath(java.lang.String,java.lang.String):64:66 -> a
-    28064:28066:void loadDefinitions():154 -> a
-    28117:28117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    28117:28117:void loadDefinitions():171 -> a
+    16118:16118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):198 -> a
+    16118:16118:void loadDefinitions():176 -> a
+    17113:17114:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isBeforeTestFixture(java.lang.reflect.Method):113:114 -> a
+    17113:17114:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):200 -> a
+    17113:17114:void loadDefinitions():176 -> a
+    17118:17118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
+    17118:17118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):202 -> a
+    17118:17118:void loadDefinitions():176 -> a
+    18118:18119:boolean com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.isAfterTestFixture(java.lang.reflect.Method):118:119 -> a
+    18118:18119:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):204 -> a
+    18118:18119:void loadDefinitions():176 -> a
+    19118:19118:java.lang.Class com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
+    19118:19118:void com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader.loadFixture(java.lang.reflect.Method):206 -> a
+    19118:19118:void loadDefinitions():176 -> a
+    19308:19308:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():308:308 -> a
+    19308:19308:void loadDefinitions():198 -> a
+    20153:20154:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setFixtures(com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures):153:154 -> a
+    20153:20154:void loadDefinitions():198 -> a
+    20308:20308:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():308:308 -> a
+    20308:20308:void loadDefinitions():212 -> a
+    21092:21093:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setClassDefinition(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):92:93 -> a
+    21092:21093:void loadDefinitions():212 -> a
+    21096:21102:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):96:102 -> a
+    21096:21102:void loadDefinitions():213 -> a
+    22088:22088:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> a
+    22088:22088:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
+    22088:22088:void loadDefinitions():213 -> a
+    22203:22203:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():203:203 -> a
+    22203:22203:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
+    22203:22203:void loadDefinitions():213 -> a
+    23121:23121:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getName():121:121 -> a
+    23121:23121:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethod(java.lang.reflect.Method):98 -> a
+    23121:23121:void loadDefinitions():213 -> a
+    24049:24052:void processSelection(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):49:52 -> a
+    24049:24052:void loadDefinitions():214 -> a
+    24117:24117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
+    24117:24117:void loadDefinitions():217 -> a
+    24147:24148:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setTestThreadCount(int):147:148 -> a
+    24147:24148:void loadDefinitions():221 -> a
+    25054:25055:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.testClassDef(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):54:55 -> a
+    25054:25055:void loadDefinitions():227 -> a
+    25058:25059:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.dataSourceType(com.autocognite.pvt.unitee.core.lib.datasource.DataSourceType):58:59 -> a
+    25058:25059:void loadDefinitions():228 -> a
+    25062:25063:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.testMethod(java.lang.reflect.Method):62:63 -> a
+    25062:25063:void loadDefinitions():229 -> a
+    25204:25221:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():204:221 -> a
+    25204:25221:void loadDefinitions():230 -> a
+    26066:26079:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataAnnotation():66:79 -> a
+    26066:26079:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():206 -> a
+    26066:26079:void loadDefinitions():230 -> a
+    26116:26136:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataFileAnnotation():116:136 -> a
+    26116:26136:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():212 -> a
+    26116:26136:void loadDefinitions():230 -> a
+    26139:26179:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataMethodAnnotation():139:179 -> a
+    26139:26179:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():215 -> a
+    26139:26179:void loadDefinitions():230 -> a
+    26211:26211:com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getDataMethodsHandler():211:211 -> a
+    26211:26211:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataMethodAnnotation():172 -> a
+    26211:26211:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():215 -> a
+    26211:26211:void loadDefinitions():230 -> a
+    27182:27201:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.processDriveWithDataGenerator():182:201 -> a
+    27182:27201:void com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder.process():218 -> a
+    27182:27201:void loadDefinitions():230 -> a
+    28167:28168:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setDataSourceBuilder(com.autocognite.pvt.unitee.core.lib.datasource.DataSourceBuilder):167:168 -> a
+    28167:28168:void loadDefinitions():231 -> a
+    29056:29057:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setDataRefPresent(boolean):56:57 -> a
+    29056:29057:void loadDefinitions():236 -> a
+    29060:29060:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.isDataRefPresent():60:60 -> a
+    29060:29060:void loadDefinitions():241 -> a
+    29064:29066:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.addFileDataRefWithPath(java.lang.String,java.lang.String):64:66 -> a
+    29064:29066:void loadDefinitions():250 -> a
     29117:29117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    29117:29117:void loadDefinitions():178 -> a
-    29183:29184:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setInstanceThreadCount(int):183:184 -> a
-    29183:29184:void loadDefinitions():184 -> a
-    30060:30060:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.isDataRefPresent():60:60 -> a
-    30060:30060:void loadDefinitions():194 -> a
-    30069:30069:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getInstanceCount():69:69 -> a
-    30069:30069:void loadDefinitions():196 -> a
+    29117:29117:void loadDefinitions():267 -> a
+    30117:30117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
+    30117:30117:void loadDefinitions():274 -> a
+    30183:30184:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setInstanceThreadCount(int):183:184 -> a
+    30183:30184:void loadDefinitions():280 -> a
+    31060:31060:boolean com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.isDataRefPresent():60:60 -> a
+    31060:31060:void loadDefinitions():290 -> a
     31069:31069:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getInstanceCount():69:69 -> a
-    31069:31069:void loadDefinitions():201 -> a
-    31080:31081:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setUdvForInstance(int,java.util.HashMap):80:81 -> a
-    31080:31081:void loadDefinitions():202 -> a
-    31212:31212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():212:212 -> a
-    31212:31212:void loadDefinitions():205 -> a
-    32161:32166:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addTestMethodDefinition(java.lang.String,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):161:166 -> a
-    32161:32166:void loadDefinitions():205 -> a
-    32193:32195:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):193:195 -> a
-    32193:32195:void loadDefinitions():207 -> a
-    33117:33117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    33117:33117:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):193 -> a
-    33117:33117:void loadDefinitions():207 -> a
+    31069:31069:void loadDefinitions():292 -> a
+    32069:32069:int com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getInstanceCount():69:69 -> a
+    32069:32069:void loadDefinitions():297 -> a
+    32080:32081:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setUdvForInstance(int,java.util.HashMap):80:81 -> a
+    32080:32081:void loadDefinitions():298 -> a
+    32308:32308:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():308:308 -> a
+    32308:32308:void loadDefinitions():301 -> a
+    33161:33166:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addTestMethodDefinition(java.lang.String,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):161:166 -> a
+    33161:33166:void loadDefinitions():301 -> a
+    33193:33195:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):193:195 -> a
+    33193:33195:void loadDefinitions():303 -> a
     34117:34117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
-    34117:34117:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):194 -> a
-    34117:34117:void loadDefinitions():207 -> a
-    212:212:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef() -> b
-    220:221:void setContainer(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
-    225:299:void populateExpectedSignature(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition,java.lang.String,boolean) -> a
-    34151:34152:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethodSignatureType(com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestMethodSignatureType):151:152 -> a
-    34151:34152:void populateExpectedSignature(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition,java.lang.String,boolean):294 -> a
+    34117:34117:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):193 -> a
+    34117:34117:void loadDefinitions():303 -> a
+    35117:35117:java.lang.String com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getQualifiedName():117:117 -> a
+    35117:35117:void com.autocognite.pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder.createNode$5fb2b12c(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition):194 -> a
+    35117:35117:void loadDefinitions():303 -> a
+    308:308:com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef() -> b
+    316:317:void setContainer(com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
+    321:395:void populateExpectedSignature(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition,java.lang.String,boolean) -> a
+    35151:35152:void com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethodSignatureType(com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestMethodSignatureType):151:152 -> a
+    35151:35152:void populateExpectedSignature(java.lang.reflect.Method,com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition,java.lang.String,boolean):390 -> a
 com.autocognite.pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler -> com.autocognite.pvt.mo:
     org.apache.log4j.Logger logger -> a
     java.lang.Class klass -> b

@@ -270,7 +270,7 @@ com.autocognite.arjuna.interfaces.DataRecordContainer: com.autocognite.arjuna.in
 com.autocognite.arjuna.interfaces.DataRecordContainer: java.util.ArrayList getAll()
 com.autocognite.arjuna.interfaces.DataRecordContainer: java.util.Iterator iterator()
 com.autocognite.arjuna.interfaces.DataReference
-com.autocognite.arjuna.interfaces.DataReference: com.autocognite.arjuna.interfaces.DataRecord getRecord(java.lang.String)
+com.autocognite.arjuna.interfaces.DataReference: com.autocognite.arjuna.interfaces.DataRecord record(java.lang.String)
 com.autocognite.arjuna.interfaces.DataSource
 com.autocognite.arjuna.interfaces.DataSource: com.autocognite.arjuna.interfaces.DataRecord next()
 com.autocognite.arjuna.interfaces.DataWrapper

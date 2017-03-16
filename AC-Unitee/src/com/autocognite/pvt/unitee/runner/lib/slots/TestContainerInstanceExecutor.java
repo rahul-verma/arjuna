@@ -166,9 +166,15 @@ public class TestContainerInstanceExecutor implements Runnable{
 			ArjunaInternal.getCentralExecState().deregisterThread(tName);
 		}
 		
+		if (ArjunaInternal.displaySlotsInfo){
+			logger.debug(String.format("Evaluating whether to execute tear down class fragment for  %s." , testContainerInstance.getQualifiedName()));
+		}
 		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
 		(testContainerInstance.shouldExecuteTearDownClassFragmentFixture()))){
 			if (testContainerInstance.hasFragmentCompleted()){
+				if (ArjunaInternal.displaySlotsInfo){
+					logger.debug(String.format("Now executing tear down class fragment for  %s." , testContainerInstance.getQualifiedName()));
+				}
 				this.executeTearDownClassFragmentFor(testContainerInstance);
 				if (ArjunaInternal.displaySlotsInfo){
 					logger.debug(String.format("All test instance creators in %s have finished for current execution slot. Tear down class fragment." , testContainerInstance.getQualifiedName()));
@@ -176,9 +182,18 @@ public class TestContainerInstanceExecutor implements Runnable{
 			}
 		}
 		
+		if (ArjunaInternal.displaySlotsInfo){
+			logger.debug(String.format("Evaluating whether to execute tear down class instance for  %s." , testContainerInstance.getQualifiedName()));
+			logger.debug(String.format("Is it container in mlgroup? %s." , testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup")));
+			logger.debug(String.format("Should execute tear down? %s." , testContainerInstance.shouldExecuteTearDownClassInstanceFixture()));
+			logger.debug(String.format("Has Completed? %s.", testContainerInstance.hasCompleted()));
+		}
 		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
 		(testContainerInstance.shouldExecuteTearDownClassInstanceFixture()))){
 			if (testContainerInstance.hasCompleted()){
+				if (ArjunaInternal.displaySlotsInfo){
+					logger.debug(String.format("Now executing tear down class instance for  %s." , testContainerInstance.getQualifiedName()));
+				}
 				this.executeTearDownClassInstanceFor(testContainerInstance);
 				if (ArjunaInternal.displaySlotsInfo){
 					logger.debug(String.format("All scheduled test instance creators in %s have finished. Tear down class instance." , testContainerInstance.getQualifiedName()));
@@ -186,8 +201,17 @@ public class TestContainerInstanceExecutor implements Runnable{
 			}
 		}
 		
+		if (ArjunaInternal.displaySlotsInfo){
+			logger.debug(String.format("Check if  %s class instance has completed." , testContainerInstance.getQualifiedName()));
+		}
 		if (testContainerInstance.hasCompleted()){
+			if (ArjunaInternal.displaySlotsInfo){
+				logger.debug(String.format("Class instance  %s completed. Update class and mark this instance completed." , testContainerInstance.getQualifiedName()));
+			}
 			testContainerInstance.getContainer().markTestClassInstanceCompleted(testContainerInstance);
+			if (ArjunaInternal.displaySlotsInfo){
+				logger.debug("Updated");
+			}
 		}
 	}
 

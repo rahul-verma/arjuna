@@ -373,10 +373,22 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 
 	@Override
 	public boolean shouldExecuteTearDownClassInstanceFixture(){
+		if (ArjunaInternal.displaySlotsInfo){
+			logger.debug(String.format("Was unselected? %s." , this.wasUnSelected()));
+			logger.debug(String.format("Was skipped? %s." , this.wasSkipped()));
+			logger.debug(String.format("Was excluded? %s." , this.wasExcluded()));
+			logger.debug(String.format("Exclusion Type: %s." , this.getExclusionType()));
+		}
 		if (this.wasUnSelected() || this.wasSkipped()){
 			return false;
-		} else if (this.wasExcluded() && (this.getExclusionType() != TestResultCode.ERROR_IN_SETUP_CLASS_INSTANCE)){
-			return false;
+		} else if (this.wasExcluded()){
+			if ((this.getExclusionType() == TestResultCode.ERROR_IN_SETUP_CLASS_INSTANCE) 
+					|| (this.getExclusionType() == TestResultCode.ERROR_IN_SETUP_CLASS_FRAGMENT)
+					|| (this.getExclusionType() == TestResultCode.ERROR_IN_TEARDOWN_CLASS_FRAGMENT)){
+				return true;
+			} else {
+				return false;
+			}
 		}
 		
 		return true;
