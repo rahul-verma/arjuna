@@ -959,15 +959,19 @@ com.autocognite.pvt.arjuna.enums.IssueAttribute -> com.autocognite.pvt.k:
     3:11:void <clinit>() -> <clinit>
 com.autocognite.pvt.arjuna.enums.IssueSubType -> com.autocognite.pvt.l:
     com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_SESSION -> FIXTURE_SETUP_SESSION
-    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_GROUP -> FIXTURE_SETUP_GROUP
-    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS -> FIXTURE_SETUP_CLASS
-    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS_FRAGMENT -> FIXTURE_SETUP_CLASS_FRAGMENT
     com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_SESSION -> FIXTURE_TEARDOWN_SESSION
+    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_GROUP -> FIXTURE_SETUP_GROUP
     com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_GROUP -> FIXTURE_TEARDOWN_GROUP
+    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS -> FIXTURE_SETUP_CLASS
     com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_CLASS -> FIXTURE_TEARDOWN_CLASS
+    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS_INSTANCE -> FIXTURE_SETUP_CLASS_INSTANCE
+    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_CLASS_INSTANCE -> FIXTURE_TEARDOWN_CLASS_INSTANCE
+    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS_FRAGMENT -> FIXTURE_SETUP_CLASS_FRAGMENT
     com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_CLASS_FRAGMENT -> FIXTURE_TEARDOWN_CLASS_FRAGMENT
     com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_METHOD -> FIXTURE_SETUP_METHOD
     com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_METHOD -> FIXTURE_TEARDOWN_METHOD
+    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_METHOD_INSTANCE -> FIXTURE_SETUP_METHOD_INSTANCE
+    com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_METHOD_INSTANCE -> FIXTURE_TEARDOWN_METHOD_INSTANCE
     com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_TEST -> FIXTURE_SETUP_TEST
     com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_TEST -> FIXTURE_TEARDOWN_TEST
     com.autocognite.pvt.arjuna.enums.IssueSubType CONSTRUCTOR -> CONSTRUCTOR
@@ -977,7 +981,7 @@ com.autocognite.pvt.arjuna.enums.IssueSubType -> com.autocognite.pvt.l:
     3:3:com.autocognite.pvt.arjuna.enums.IssueSubType[] values() -> values
     3:3:com.autocognite.pvt.arjuna.enums.IssueSubType valueOf(java.lang.String) -> valueOf
     3:3:void <init>(java.lang.String,int) -> <init>
-    3:18:void <clinit>() -> <clinit>
+    3:22:void <clinit>() -> <clinit>
 com.autocognite.pvt.arjuna.enums.IssueType -> com.autocognite.pvt.m:
     com.autocognite.pvt.arjuna.enums.IssueType CONSTRUCTOR -> CONSTRUCTOR
     com.autocognite.pvt.arjuna.enums.IssueType FIXTURE -> FIXTURE
@@ -5182,7 +5186,7 @@ com.autocognite.pvt.unitee.runner.lib.slots.TestContainerInstanceExecutor -> com
     35:39:void executeSetUpClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> b
     43:47:void executeTearDownClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> c
     51:55:void executeTearDownClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance) -> d
-    70:192:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance) -> a
+    70:216:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance) -> a
     1036:1036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> a
     1036:1036:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70 -> a
     2027:2031:void executeSetUpClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):27:31 -> a
@@ -5190,37 +5194,37 @@ com.autocognite.pvt.unitee.runner.lib.slots.TestContainerInstanceExecutor -> com
     2035:2039:void executeSetUpClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):35:39 -> a
     2035:2039:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):114 -> a
     2043:2047:void executeTearDownClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):43:47 -> a
-    2043:2047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):172 -> a
+    2043:2047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):178 -> a
     2051:2055:void executeTearDownClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):51:55 -> a
-    2051:2055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):182 -> a
-    196:225:void run() -> run
+    2051:2055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):197 -> a
+    220:249:void run() -> run
     3045:3048:com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainer.next():45:48 -> run
-    3045:3048:void run():198 -> run
+    3045:3048:void run():222 -> run
     4036:4036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    4036:4036:void run():199 -> run
+    4036:4036:void run():223 -> run
     5036:5036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    5036:5036:void run():202 -> run
+    5036:5036:void run():226 -> run
     6036:6036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    6036:6036:void run():207 -> run
+    6036:6036:void run():231 -> run
     7036:7036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
-    7036:7036:void run():212 -> run
-    7070:7192:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70:192 -> run
-    7070:7192:void run():218 -> run
+    7036:7036:void run():236 -> run
+    7070:7216:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70:216 -> run
+    7070:7216:void run():242 -> run
     8036:8036:com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance.getContainerInstance():36:36 -> run
     8036:8036:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):70 -> run
-    8036:8036:void run():218 -> run
+    8036:8036:void run():242 -> run
     9027:9031:void executeSetUpClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):27:31 -> run
     9027:9031:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):93 -> run
-    9027:9031:void run():218 -> run
+    9027:9031:void run():242 -> run
     9035:9039:void executeSetUpClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):35:39 -> run
     9035:9039:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):114 -> run
-    9035:9039:void run():218 -> run
+    9035:9039:void run():242 -> run
     9043:9047:void executeTearDownClassFragmentFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):43:47 -> run
-    9043:9047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):172 -> run
-    9043:9047:void run():218 -> run
+    9043:9047:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):178 -> run
+    9043:9047:void run():242 -> run
     9051:9055:void executeTearDownClassInstanceFor(com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance):51:55 -> run
-    9051:9055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):182 -> run
-    9051:9055:void run():218 -> run
+    9051:9055:void execute(com.autocognite.pvt.unitee.runner.lib.slots.TestSlotTestContainerInstance):197 -> run
+    9051:9055:void run():242 -> run
     16:16:void <clinit>() -> <clinit>
 com.autocognite.pvt.unitee.runner.lib.slots.TestCreatorExecutor -> com.autocognite.pvt.kw:
     org.apache.log4j.Logger logger -> a
@@ -6429,8 +6433,8 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClass -> com.autocognite.
     11037:11037:java.lang.String com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getObjectId():37:37 -> j
     11037:11037:com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance createInstance(int):185 -> j
     11037:11037:void load():150 -> j
-    11398:11401:void com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.setAllScheduledCreators(java.util.List):398:401 -> j
-    11398:11401:void load():151 -> j
+    11410:11413:void com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance.setAllScheduledCreators(java.util.List):410:413 -> j
+    11410:11413:void load():151 -> j
     157:157:java.lang.Class getUserTestClass() -> d
     161:162:void setTestClass(java.lang.Class) -> a
     165:165:java.lang.String getUserTestClassName() -> t
@@ -6597,25 +6601,29 @@ com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance -> com.auto
     334:343:void tearDownClassInstance() -> u
     347:359:void setUpClassFragment() -> v
     363:372:void tearDownClassFragment() -> w
-    376:382:boolean shouldExecuteTearDownClassInstanceFixture() -> C
+    376:394:boolean shouldExecuteTearDownClassInstanceFixture() -> C
     15106:15106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> C
-    15106:15106:boolean shouldExecuteTearDownClassInstanceFixture():376 -> C
+    15106:15106:boolean shouldExecuteTearDownClassInstanceFixture():382 -> C
     15128:15128:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasSkipped():128:128 -> C
-    15128:15128:boolean shouldExecuteTearDownClassInstanceFixture():376 -> C
+    15128:15128:boolean shouldExecuteTearDownClassInstanceFixture():382 -> C
     16079:16079:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():79:79 -> C
-    16079:16079:boolean shouldExecuteTearDownClassInstanceFixture():378 -> C
+    16079:16079:boolean shouldExecuteTearDownClassInstanceFixture():384 -> C
     16084:16084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> C
-    16084:16084:boolean shouldExecuteTearDownClassInstanceFixture():378 -> C
-    387:393:boolean shouldExecuteTearDownClassFragmentFixture() -> z
-    16106:16106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> z
-    16106:16106:boolean shouldExecuteTearDownClassFragmentFixture():387 -> z
-    16128:16128:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasSkipped():128:128 -> z
-    16128:16128:boolean shouldExecuteTearDownClassFragmentFixture():387 -> z
-    17079:17079:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():79:79 -> z
-    17079:17079:boolean shouldExecuteTearDownClassFragmentFixture():389 -> z
-    17084:17084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> z
-    17084:17084:boolean shouldExecuteTearDownClassFragmentFixture():389 -> z
-    398:401:void setAllScheduledCreators(java.util.List) -> a
+    16084:16084:boolean shouldExecuteTearDownClassInstanceFixture():385 -> C
+    17084:17084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> C
+    17084:17084:boolean shouldExecuteTearDownClassInstanceFixture():386 -> C
+    18084:18084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> C
+    18084:18084:boolean shouldExecuteTearDownClassInstanceFixture():387 -> C
+    399:405:boolean shouldExecuteTearDownClassFragmentFixture() -> z
+    18106:18106:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasUnSelected():106:106 -> z
+    18106:18106:boolean shouldExecuteTearDownClassFragmentFixture():399 -> z
+    18128:18128:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasSkipped():128:128 -> z
+    18128:18128:boolean shouldExecuteTearDownClassFragmentFixture():399 -> z
+    19079:19079:boolean com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():79:79 -> z
+    19079:19079:boolean shouldExecuteTearDownClassFragmentFixture():401 -> z
+    19084:19084:com.autocognite.pvt.arjuna.enums.TestResultCode com.autocognite.pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():84:84 -> z
+    19084:19084:boolean shouldExecuteTearDownClassFragmentFixture():401 -> z
+    410:413:void setAllScheduledCreators(java.util.List) -> a
 com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance$1 -> com.autocognite.pvt.mb:
     int[] $SwitchMap$com$autocognite$pvt$unitee$testobject$lib$java$TestClassConstructorType -> a
     84:84:void <clinit>() -> <clinit>

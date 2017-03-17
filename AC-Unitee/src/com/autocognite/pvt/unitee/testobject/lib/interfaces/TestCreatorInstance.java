@@ -10,28 +10,8 @@ public interface TestCreatorInstance extends TestObject {
 
 	TestCreator getParentTestCreator();
 
-	TestContainerInstance getTestContainerInstance();
+	TestContainerFragment getTestContainerFragment();
 
 	int getInstanceNumber();
-
-	void setUpMethodInstance() throws Exception;
-
-	void tearDownMethodInstance() throws Exception;
-
-	FixtureResultType getSetUpMethodFixtureResult();
-
-	FixtureResultType getTearDownMethodFixtureResult();
-
-	boolean wasSetUpMethodInstanceFixtureExecuted();
-
-	boolean didSetUpMethodFixtureSucceed();
-
-	boolean wasTearDownMethodFixtureExecuted();
-
-	boolean didTearDownMethodFixtureSucceed();
-	
-	boolean shouldExecuteSetupMethodInstanceFixture();
-
-	boolean shouldExecuteTearDownMethodInstanceFixture();
 
 }

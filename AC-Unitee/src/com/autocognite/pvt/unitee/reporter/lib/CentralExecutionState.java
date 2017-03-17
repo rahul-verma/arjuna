@@ -54,11 +54,10 @@ public class CentralExecutionState {
 		case TEST_CLASS:
 			addContainerIssue(reportable.objectProps().qualifiedName(), reportable.resultProps().id());
 			break;
-		case TEST:
-			addCreatorIssue(reportable.objectProps().qualifiedName(), reportable.resultProps().id());
-			addContainerIssue(reportable.objectProps().parentQualifiedName(), reportable.resultProps().id());
-			break;
 		case TEST_CLASS_INSTANCE:
+			addContainerIssue(reportable.objectProps().qualifiedName(), reportable.resultProps().id());
+			break;
+		case TEST_CLASS_FRAGMENT:
 			addContainerIssue(reportable.objectProps().qualifiedName(), reportable.resultProps().id());
 			break;
 		case TEST_METHOD:
@@ -66,6 +65,10 @@ public class CentralExecutionState {
 			addContainerIssue(reportable.objectProps().parentQualifiedName(), reportable.resultProps().id());
 			break;
 		case TEST_METHOD_INSTANCE:
+			addCreatorIssue(reportable.objectProps().qualifiedName(), reportable.resultProps().id());
+			addContainerIssue(reportable.objectProps().parentQualifiedName(), reportable.resultProps().id());
+			break;
+		case TEST:
 			addCreatorIssue(reportable.objectProps().qualifiedName(), reportable.resultProps().id());
 			addContainerIssue(reportable.objectProps().parentQualifiedName(), reportable.resultProps().id());
 			break;

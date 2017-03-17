@@ -2,11 +2,16 @@ package com.autocognite.pvt.unitee.testobject.lib.java;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.internal.arjuna.enums.TestObjectType;
+import com.autocognite.pvt.arjuna.enums.FixtureResultType;
+import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.core.lib.metadata.TestVarsHandler;
 import com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject;
 
 public abstract class BaseTestObject implements TestObject {
@@ -27,6 +32,10 @@ public abstract class BaseTestObject implements TestObject {
 	private boolean skipped = false;
 	private TestResultCode skipType = null;
 	private String skipDesc = null;
+	
+	private Fixture setUpFixture = null;
+	private Fixture tearDownFixture = null;
+	private TestResultCode ignoreExclusionCode = null;
 	
 	public BaseTestObject(String objectId, TestObjectType objectType) throws Exception{
 		this.setObjectId(objectId);
@@ -138,34 +147,6 @@ public abstract class BaseTestObject implements TestObject {
 		return this.skipDesc;
 	}
 	
-	public boolean shouldExecuteSetupSessionFixture(){
-		return !(this.excluded || this.notSelected || this.skipped);
-	}
-	
-	public boolean shouldExecuteSetupClassFixture(){
-		return !(this.excluded || this.notSelected || this.skipped);
-	}
-
-	public boolean shouldExecuteSetupClassInstanceFixture(){
-		return !(this.excluded || this.notSelected || this.skipped);
-	}
-	
-	public boolean shouldExecuteSetupClassFragmentFixture(){
-		return !(this.excluded || this.notSelected || this.skipped);
-	}
-	
-	public boolean shouldExecuteSetupMethodFixture(){
-		return !(this.excluded || this.notSelected || this.skipped);
-	}
-	
-	public boolean shouldExecuteSetupMethodInstanceFixture(){
-		return !(this.excluded || this.notSelected || this.skipped);
-	}
-	
-	public boolean shouldExecuteSetupTestFixture(){
-		return !(this.excluded || this.notSelected || this.skipped);
-	}
-	
 	@Override
 	public void setThreadId(String id) throws Exception{
 		this.getTestVariables().rawObjectProps().setThreadId(id);
@@ -179,5 +160,146 @@ public abstract class BaseTestObject implements TestObject {
 	@Override
 	public void endTimeStamp() throws Exception {
 		this.getTestVariables().rawObjectProps().setEndTstamp();
+	}
+
+	@Override
+	public Fixture getSetUpFixture() throws Exception {
+		return this.setUpFixture;
+	}
+
+	protected void setSetUpFixture(Fixture fixture) throws Exception {
+		this.setUpFixture = fixture;
+	}
+
+	public Fixture getTearDownFixture() throws Exception {
+		return this.tearDownFixture;
+	}
+
+	protected void setTearDownFixture(Fixture fixture) throws Exception {
+		this.tearDownFixture = fixture;
+	}
+	
+	protected void setIgnoreExclusionTestResultCode(TestResultCode code){
+		this.ignoreExclusionCode = code;
+	}
+	
+	protected TestResultCode getIgnoreExclusionTestResultCode(){
+		return this.ignoreExclusionCode;
+	}
+	
+	public boolean shouldExecuteSetUp(){
+		return !(this.excluded || this.notSelected || this.skipped);
+	}
+	
+	public boolean shouldExecuteTearDown(){
+		if (this.wasUnSelected() || this.wasSkipped()){
+			return false;
+		} else if (this.wasExcluded() && (this.getExclusionType() != this.getIgnoreExclusionTestResultCode())){
+			return false;
+		}
+		
+		return true;
+	}
+	
+	@Override
+	public void setUp() throws Exception{
+		if (this.getSetUpFixture() != null){
+			boolean success = this.getSetUpFixture().execute();
+			if (!success){
+				this.markExcluded(
+						this.getSetUpFixture().getTestResultCodeForFixtureError(),
+						String.format("Error in \"%s.%s\" fixture", this.getSetUpFixture().getFixtureClassName(), this.getSetUpFixture().getName()),
+						this.getSetUpFixture().getIssueId());
+			}
+		}
+	}
+
+	@Override
+	public void tearDown() throws Exception {
+		if (this.getTearDownFixture() != null){
+			boolean success = getTearDownFixture().execute();
+			if (!success){
+				this.markExcluded(
+						this.getTearDownFixture().getTestResultCodeForFixtureError(),
+						String.format("Error in \"%s.%s\" fixture", this.getTearDownFixture().getFixtureClassName(), this.getTearDownFixture().getName()),
+				this.getTearDownFixture().getIssueId());
+			}
+		}
+	}
+	
+	@Override
+	public boolean wasSetUpExecuted() throws Exception{
+		if (this.getSetUpFixture() != null){
+			return this.getSetUpFixture().wasExecuted();
+		} else {
+			return true;
+		}
+	}
+	
+	@Override
+	public boolean wasTearDownExecuted() throws Exception{
+		if (this.getTearDownFixture() != null){
+			return this.getTearDownFixture().wasExecuted();
+		} else {
+			return true;
+		}
+	}
+	
+	@Override
+	public boolean wasSetUpSuccessful() throws Exception{
+		if (this.getSetUpFixture() != null){
+			return this.getSetUpFixture().wasSuccessful();
+		} else {
+			return true;
+		}
+	}
+	
+	@Override
+	public boolean wasTearDownSuccessful() throws Exception{
+		if (this.getTearDownFixture() != null){
+			return this.getTearDownFixture().wasSuccessful();
+		} else {
+			return true;
+		}
+	}
+	
+	@Override
+	public FixtureResultType getSetUpResult() throws Exception {
+		if (this.getSetUpFixture() != null){
+			return this.getSetUpFixture().getResultType();
+		} else {
+			return FixtureResultType.SUCCESS;
+		}
+	}
+
+	@Override
+	public FixtureResultType getTearDownResult() throws Exception {
+		if (this.getTearDownFixture() != null){
+			return this.getTearDownFixture().getResultType();
+		} else {
+			return FixtureResultType.SUCCESS;
+		}
+	}
+	
+	protected void initFixtures(TestClassFixtureType sFixType, TestClassFixtureType tFixType) throws Exception{
+		Fixture sFix = this.getTestFixtures().getFixture(sFixType);
+		if (sFix != null){
+			sFix.setTestObject(this);
+		}
+		sFix.setTestObject(this);
+		this.setSetUpFixture(sFix);
+		
+		Fixture tFix = this.getTestFixtures().getFixture(tFixType);
+		if (tFix != null){
+			tFix.setTestObject(this);
+		}
+		tFix.setTestObject(this);
+		this.setTearDownFixture(tFix);		
+	}
+	
+	public abstract TestFixtures getTestFixtures();
+	
+	public boolean hasCompleted(){
+		return true;
 	}
 }

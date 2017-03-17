@@ -3,6 +3,7 @@ package com.autocognite.pvt.unitee.testobject.lib.fixture;
 import java.lang.reflect.Method;
 
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
+import com.autocognite.pvt.arjuna.enums.TestResultCode;
 
 public class BoundFixture extends BaseTestClassFixture {
 	
@@ -19,4 +20,5 @@ public class BoundFixture extends BaseTestClassFixture {
 		boundFixture.setTestContainerInstance(null);
 		return boundFixture;
 	}
+
 }

@@ -38,10 +38,6 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 	private List<String> executableCreatorNames = new ArrayList<String>();
 	private boolean instancesCreated = false;
 	private ArrayList<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
-	private static Fixture setUpSessionFixture = null;
-	private static Fixture tearDownSessionFixture = null;
-	private static Map<String,Fixture> setUpClassFixtures = new HashMap<String,Fixture>();
-	private static Map<String,Fixture> tearDownClassFixtures = new HashMap<String,Fixture>();
 	private List<String> allScheduledCreators = null;
 	
 	public JavaTestClass(JavaTestClassDefinition classDef) throws Exception{
@@ -67,41 +63,9 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 		}
 		
 		this.setThreadId(Thread.currentThread().getName());
-		if (!setUpClassFixtures.containsKey(this.getQualifiedName())){
 			
-			Fixture sFix = this.getTestFixtures().getFixture(TestClassFixtureType.SETUP_CLASS);
-			if (sFix != null){
-				sFix.setTestObject(this);
-			}
-			setUpClassFixtures.put(this.getQualifiedName(), sFix);
-		}
-		
-		if (!tearDownClassFixtures.containsKey(this.getTestVariables().objectProps().qualifiedName())){
-			Fixture tFix = this.getTestFixtures().getFixture(TestClassFixtureType.TEARDOWN_CLASS);
-			if (tFix != null){
-				tFix.setTestObject(this);
-			}
-			tearDownClassFixtures.put(this.getQualifiedName(), tFix);
-		}
-
-	}
-	
-	@Override
-	public FixtureResultType getSetUpSessionFixtureResult() {
-		if (this.setUpSessionFixture != null){
-			return this.setUpSessionFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
-	}
-
-	@Override
-	public FixtureResultType getTearDownSessionFixtureResult() {
-		if (this.tearDownSessionFixture != null){
-			return this.tearDownSessionFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
+		initFixtures(TestClassFixtureType.SETUP_CLASS, TestClassFixtureType.TEARDOWN_CLASS);
+		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_CLASS);
 	}
 	
 	@Override
@@ -165,16 +129,8 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 		return this.getUserTestClass().getSimpleName();
 	}
 
-	private Constructor<?> getConstructor() {
-		return constructor;
-	}
-
 	private void setConstructor(Constructor<?> constructor) {
 		this.constructor = constructor;
-	}
-
-	private TestClassConstructorType getConstructorType() {
-		return constructorType;
 	}
 
 	private void setConstructorType(TestClassConstructorType constructorType) {
@@ -183,7 +139,7 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 
 	public JavaTestClassInstance createInstance(int instanceNumber) throws Exception {
 		String instanceId = String.format("%s|TCC%d", this.getObjectId(), instanceNumber);
-		JavaTestClassInstance classClone = new JavaTestClassInstance(instanceNumber, instanceId, this, this.classDef);
+		JavaTestClassInstance classClone = new JavaTestClassInstance(instanceNumber, instanceId, this.classDef, this);
 		this.instanceExecTracker.put(instanceId, classClone);
 		this.instanceQueue.add(classClone);
 		return classClone;
@@ -199,12 +155,9 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 				logger.debug(String.format("Loading instance #%d", instance.getInstanceNumber()));
 				logger.debug(String.format("Configuring test methods: %s", this.executableCreatorNames));
 			}
-			instance.resetExecutorCreatorQueue();
-			for (String creatorName: this.executableCreatorNames){
-				instance.addExecutableCreatorName(creatorName);
-			}
-			instance.loadTestCreators();
+			instance.loadFragment(executableCreatorNames);			
 		}
+		
 	}
 
 	@Override
@@ -255,64 +208,7 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 	public boolean areInstancesCreated() {
 		return this.instancesCreated;
 	}
-	
-	@Override
-	public void setUpClass() throws Exception{
-		if (ArjunaInternal.displayFixtureExecInfo){
-			logger.debug("Inside Java Test Class Set Up Class.");
-		}
 		
-		Fixture setUpClassFixture = setUpClassFixtures.get(this.getQualifiedName());
-		
-		if (setUpClassFixture != null){
-			boolean success = setUpClassFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_SETUP_CLASS, 
-						String.format("Error in \"%s.%s\" fixture", setUpClassFixture.getFixtureClassName(), setUpClassFixture.getName()),
-						setUpClassFixture.getIssueId());
-			}
-		}
-	}
-
-	@Override
-	public void tearDownClass() throws Exception {
-		
-		Fixture tearDownClassFixture = tearDownClassFixtures.get(this.getQualifiedName());
-		
-		if (tearDownClassFixture != null){
-			boolean success = tearDownClassFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_TEARDOWN_CLASS, 
-						String.format("Error in \"%s.%s\" fixture", tearDownClassFixture.getFixtureClassName(), tearDownClassFixture.getName()),
-						tearDownClassFixture.getIssueId());
-			}
-		}
-	}
-
-	@Override
-	public boolean wasSetUpClassFixtureExecuted() {
-		Fixture setUpClassFixture = setUpClassFixtures.get(this.getQualifiedName());
-		
-		if (setUpClassFixture != null){
-			return setUpClassFixture.wasExecuted();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean shouldExecuteTearDownClassFixture() {
-		if (this.wasUnSelected() || this.wasSkipped()){
-			return false;
-		} else if (this.wasExcluded() && (this.getExclusionType() != TestResultCode.ERROR_IN_SETUP_CLASS)){
-			return false;
-		}
-		
-		return true;
-	}
-	
 	@Override
 	public boolean hasCompleted() {
 		return this.instanceExecTracker.size() == 0;

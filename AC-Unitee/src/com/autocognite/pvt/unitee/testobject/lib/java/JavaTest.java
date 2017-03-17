@@ -29,8 +29,6 @@ public class JavaTest extends BaseTestObject implements Test{
 	private int testNumber;
 	private JavaTestMethodInstance parent;
 	private JavaTestMethodDefinition methodDef;
-	private Fixture setUpTestFixture = null;
-	private Fixture tearDownTestFixture = null;
 	private DataRecord dataRecord = null;
 
 	public JavaTest(int testNumber, String testObjectId, JavaTestMethodInstance javaTestMethodInstance, JavaTestMethodDefinition methodDef) throws Exception{
@@ -43,16 +41,14 @@ public class JavaTest extends BaseTestObject implements Test{
 		this.setTestVarsHandler(new DefaultTestVarsHandler(this, javaTestMethodInstance));
 		this.getTestVariables().rawObjectProps().setTestNumber(this.testNumber);
 		this.setThreadId(Thread.currentThread().getName());
-		this.setUpTestFixture = this.getTestFixtures().getFixture(TestClassFixtureType.SETUP_TEST);
-		if (setUpTestFixture != null){
-			setUpTestFixture.setTestContainerInstance(this.getTestContainerInstance());
-			setUpTestFixture.setTestObject(this);
-		}
-		this.tearDownTestFixture = this.getTestFixtures().getFixture(TestClassFixtureType.TEARDOWN_TEST);
-		if (tearDownTestFixture != null){
-			tearDownTestFixture.setTestContainerInstance(this.getTestContainerInstance());
-			tearDownTestFixture.setTestObject(this);
-		}
+		
+		initFixtures(TestClassFixtureType.SETUP_TEST, TestClassFixtureType.TEARDOWN_TEST);
+		this.getSetUpFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
+		this.getTearDownFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
+		this.getSetUpFixture().setTestContainerFragment(this.getTestContainerFragment());
+		this.getTearDownFixture().setTestContainerFragment(this.getTestContainerFragment());
+		
+		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_TEST);
 	}
 
 	@Override
@@ -66,63 +62,8 @@ public class JavaTest extends BaseTestObject implements Test{
 	}
 
 	@Override
-	public FixtureResultType getSetUpTestFixtureResult() {
-		if (this.setUpTestFixture != null){
-			return this.setUpTestFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
-	}
-
-	@Override
-	public FixtureResultType getTearDownTestFixtureResult() {
-		if (this.tearDownTestFixture != null){
-			return this.tearDownTestFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
-	}
-	
-	@Override
-	public boolean wasSetUpTestFixtureExecuted(){
-		logger.debug("HERE");
-		if (this.setUpTestFixture != null){
-			return this.setUpTestFixture.wasExecuted();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean didSetUpTestFixtureSucceed(){
-		if (this.setUpTestFixture != null){
-			return this.setUpTestFixture.wasSuccessful();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean wasTearDownTestFixtureExecuted(){
-		if (this.tearDownTestFixture != null){
-			return this.setUpTestFixture.wasExecuted();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean didTearDownTestFixtureSucceed(){
-		if (this.tearDownTestFixture != null){
-			return this.setUpTestFixture.wasSuccessful();
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public JavaTestClassInstance getTestContainerInstance() {
-		return this.parent.getTestContainerInstance();
+	public JavaTestClassFragment getTestContainerFragment() {
+		return this.parent.getTestContainerFragment();
 	}
 
 	@Override
@@ -178,7 +119,7 @@ public class JavaTest extends BaseTestObject implements Test{
 
 	public void run() throws Exception {
 		Method m = this.methodDef.getMethod();
-		Object userTestClassObject = this.parent.getParentTestCreator().getTestContainerInstance().getUserTestContainerObject();
+		Object userTestClassObject = this.parent.getParentTestCreator().getTestContainerFragment().getContainerInstance().getUserTestContainerObject();
 		
 		switch(this.methodDef.getMethodSignatureType()){
 		case NO_ARG:
@@ -206,38 +147,6 @@ public class JavaTest extends BaseTestObject implements Test{
 	@Override
 	public TestFixtures getTestFixtures() {
 		return methodDef.getClassDefinition().getFixtures();
-	}
-	
-	
-	@Override
-	public void setUpTest() throws Exception{
-		if (this.setUpTestFixture != null){
-			boolean success = this.setUpTestFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_SETUP_TEST, 
-						String.format("Error in \"%s.%s\" fixture", this.setUpTestFixture.getFixtureClassName(), this.setUpTestFixture.getName()),
-						this.setUpTestFixture.getIssueId());
-			}
-		}
-	}
-
-	@Override
-	public void tearDownTest() throws Exception {
-		if (this.tearDownTestFixture != null){
-			boolean success = tearDownTestFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_TEARDOWN_TEST, 
-						String.format("Error in \"%s.%s\" fixture", this.tearDownTestFixture.getFixtureClassName(), this.tearDownTestFixture.getName()),
-				this.tearDownTestFixture.getIssueId());
-			}
-		}
-	}
-
-	@Override
-	public Fixture getSetupTestFixture() {
-		return this.setUpTestFixture;
 	}
 
 	@Override
@@ -301,15 +210,5 @@ public class JavaTest extends BaseTestObject implements Test{
 		ArjunaInternal.getCentralExecState().update(result);
 		ArjunaInternal.getCentralExecState().getCurrentThreadState().endTest();
 		ArjunaInternal.getReporter().update(result);
-	}
-	
-	public boolean shouldExecuteTearDownTestFixture(){
-		if (this.wasUnSelected() || this.wasSkipped()){
-			return false;
-		} else if (this.wasExcluded() && (this.getExclusionType() != TestResultCode.ERROR_IN_SETUP_TEST)){
-			return false;
-		}
-		
-		return true;
 	}
 }

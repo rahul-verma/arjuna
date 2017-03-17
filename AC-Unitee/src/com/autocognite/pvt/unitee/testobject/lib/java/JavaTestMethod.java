@@ -29,23 +29,20 @@ public class JavaTestMethod extends BaseTestObject implements TestCreator{
 	private JavaTestMethodDefinition methodDef = null;
 	private Method method = null;
 	private String mName = null;;
-	private HashMap<String,JavaTestMethodInstance> instanceExecTracker = new HashMap<String,JavaTestMethodInstance>();
 	private List<JavaTestMethodInstance> methodInstanceQueue = new ArrayList<JavaTestMethodInstance>();
 	private int instanceCount;
-	private Fixture setUpMethodFixture = null;
-	private Fixture tearDownMethodFixture = null;
-	private JavaTestClassInstance containerInstance;
+	private JavaTestClassFragment containerFragment;
 	private ArrayList<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
 	private TestFixtures fixtures = null;
 	
-	public JavaTestMethod(String objectId, JavaTestClassInstance containerInstance, JavaTestMethodDefinition methodDef) throws Exception {
+	public JavaTestMethod(String objectId, JavaTestClassFragment containerFragment, JavaTestMethodDefinition methodDef) throws Exception {
 		super(objectId, TestObjectType.TEST_METHOD);
-		this.containerInstance = containerInstance;
+		this.containerFragment = containerFragment;
 		this.methodDef = methodDef;
 		this.method = methodDef.getMethod();
 		this.mName =  this.method.getName();
 		this.setQualifiedName(this.methodDef.getQualifiedName());
-		this.setTestVarsHandler(new DefaultTestVarsHandler(this, containerInstance));
+		this.setTestVarsHandler(new DefaultTestVarsHandler(this, containerFragment));
 		this.setThreadId(Thread.currentThread().getName());
 		// Override object properties
 //		this.getTestVariables().rawObjectProps().setName(mName);
@@ -70,16 +67,13 @@ public class JavaTestMethod extends BaseTestObject implements TestCreator{
 			this.addDependency(dep);
 		}
 		
-		this.setUpMethodFixture = this.getTestFixtures().getFixture(TestClassFixtureType.SETUP_METHOD);
-		if (setUpMethodFixture != null){
-			setUpMethodFixture.setTestContainerInstance(this.getTestContainerInstance());
-			setUpMethodFixture.setTestObject(this);
-		}
-		this.tearDownMethodFixture = this.getTestFixtures().getFixture(TestClassFixtureType.TEARDOWN_METHOD);
-		if (tearDownMethodFixture != null){
-			tearDownMethodFixture.setTestContainerInstance(this.getTestContainerInstance());
-			tearDownMethodFixture.setTestObject(this);
-		}
+		initFixtures(TestClassFixtureType.SETUP_METHOD, TestClassFixtureType.TEARDOWN_METHOD);
+		this.getSetUpFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
+		this.getTearDownFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
+		this.getSetUpFixture().setTestContainerFragment(this.getTestContainerFragment());
+		this.getTearDownFixture().setTestContainerFragment(this.getTestContainerFragment());
+		
+		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_METHOD);
 		
 		if (methodDef.isUnpicked()){
 			this.markUnSelected(
@@ -94,15 +88,14 @@ public class JavaTestMethod extends BaseTestObject implements TestCreator{
 		}
 	}
 
-	private TestFixtures getTestFixtures() {
-		return this.containerInstance.getTestFixtures();
+	public TestFixtures getTestFixtures() {
+		return this.containerFragment.getTestFixtures();
 	}
 
 	private void createInstance(int i) throws Exception {
 		String instanceId = String.format("%s|Instance-%d", this.getObjectId(), i);
 		JavaTestMethodInstance methodInstance = new JavaTestMethodInstance(i, instanceId, this, this.methodDef);
 		this.methodInstanceQueue.add(methodInstance);
-		instanceExecTracker.put(methodInstance.getObjectId(), methodInstance);
 	}
 
 	@Override
@@ -148,72 +141,13 @@ public class JavaTestMethod extends BaseTestObject implements TestCreator{
 		return this.mName;
 	}
 
-	public JavaTestClassInstance getParent() {
-		return this.containerInstance;
+	public JavaTestClassFragment getParent() {
+		return this.containerFragment;
 	}
 
 	@Override
-	public JavaTestClassInstance getTestContainerInstance() {
-		return this.containerInstance;
-	}
-	
-	@Override
-	public boolean hasCompleted() {
-		return this.instanceExecTracker.size() == 0;
-	}
-	
-	@Override
-	public void markTestMethodInstanceCompleted(TestCreatorInstance instance) {
-		this.instanceExecTracker.remove(instance.getObjectId());
-	}
-	
-	@Override
-	public boolean shouldExecuteTearDownMethodFixture() {
-		if (this.wasUnSelected() || this.wasSkipped()){
-			return false;
-		} else if (this.wasExcluded() && (this.getExclusionType() != TestResultCode.ERROR_IN_SETUP_METHOD)){
-			return false;
-		}
-		
-		return true;
-	}
-	
-	@Override
-	public void setUpMethod() throws Exception{
-		if (ArjunaInternal.displayFixtureExecInfo){
-			logger.debug("Inside Java Test Class Set Up Class.");
-		}
-		if (setUpMethodFixture != null){
-			boolean success = this.setUpMethodFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_SETUP_METHOD, 
-						String.format("Error in \"%s.%s\" fixture", this.setUpMethodFixture.getFixtureClassName(), this.setUpMethodFixture.getName()),
-						this.setUpMethodFixture.getIssueId());
-			}
-		}
-	}
-
-	@Override
-	public void tearDownMethod() throws Exception {
-		if (tearDownMethodFixture != null){
-			boolean success = tearDownMethodFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_TEARDOWN_CLASS, 
-						String.format("Error in \"%s.%s\" fixture", this.tearDownMethodFixture.getFixtureClassName(), this.tearDownMethodFixture.getName()),
-						this.tearDownMethodFixture.getIssueId());
-			}
-		}
-	}
-	
-	@Override
-	public boolean wasSetUpMethodFixtureExecuted() {
-		if (this.setUpMethodFixture != null){
-			return this.setUpMethodFixture.wasExecuted();
-		} else {
-			return true;
-		}
+	public JavaTestClassFragment getTestContainerFragment() {
+		return this.containerFragment;
 	}
 }
 

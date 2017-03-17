@@ -40,7 +40,7 @@ import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
 
 public class ConsoleTestResultWriter extends DefaultObserver<TestResult> {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
-	String marker = new String(new char[100]).replace("\0", "-");
+	String marker = new String(new char[130]).replace("\0", "-");
 	private List<TestObjectAttribute> execTestObjectProps = null;
 	private List<TestAttribute> execTestProps = null;
 	private List<String> execCustomProps = null;
@@ -113,11 +113,11 @@ public class ConsoleTestResultWriter extends DefaultObserver<TestResult> {
 			String val = values.get(i);
 			if (this.ignoreValues.contains(val)) continue;
 			if (header.equals("Exception Trace")){
-				Console.displayPaddedKeyValueExceptionTrace(execTestHeaders.get(i), values.get(i), 30);
+				Console.displayPaddedKeyValueExceptionTrace(execTestHeaders.get(i), values.get(i), 40);
 			} else if (header.equals("Exception Message")){
-				Console.displayPaddedKeyValueError(execTestHeaders.get(i), values.get(i), 30);
+				Console.displayPaddedKeyValueError(execTestHeaders.get(i), values.get(i), 40);
 			} else {
-				Console.displayPaddedKeyValue(execTestHeaders.get(i), values.get(i), 30);
+				Console.displayPaddedKeyValue(execTestHeaders.get(i), values.get(i), 40);
 			}
 		}
 		Console.display(marker);

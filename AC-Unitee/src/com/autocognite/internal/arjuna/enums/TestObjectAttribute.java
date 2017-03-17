@@ -25,6 +25,7 @@ public enum TestObjectAttribute {
 	PNAME,
 	CNAME,
 	CIN,
+	CFN,
 	MNAME,
 	NAME,
 	MIN,

@@ -24,6 +24,7 @@ import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefini
 import com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture;
 import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer;
+import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator;
 import com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler;
@@ -32,19 +33,20 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private int instanceNumber;
 	private Object testObject = null;
-	private JavaTestClass container = null;
-	private List<JavaTestMethod> methodsQueue = new ArrayList<JavaTestMethod>();
 	private JavaTestClassDefinition classDef = null;
-	private Fixture setUpClassInstanceFixture = null;
-	private Fixture tearDownClassInstanceFixture = null;
-	private Fixture setUpClassFragmentFixture = null;
-	private Fixture tearDownClassFragmentFixture = null;
-	private Set<TestCreator> methodExecTracker = new HashSet<TestCreator>();
-	private int creatorThreadCount = 1;
-	private List<String> executableCreatorNames = new ArrayList<String>();
-	private Set<String> allScheduledCreators = new HashSet<String>();
+	private JavaTestClass container = null;
 	
-	public JavaTestClassInstance(int instanceNumber, String objectId, JavaTestClass container, JavaTestClassDefinition classDef) throws Exception {
+	private int creatorThreadCount = 1;
+	
+	private List<JavaTestMethod> methodsQueue = new ArrayList<JavaTestMethod>();
+	private Set<TestCreator> methodExecTracker = new HashSet<TestCreator>();
+	private List<String> executableCreatorNames = new ArrayList<String>();
+	
+	private Set<String> allScheduledCreators = new HashSet<String>();
+	private int currentFragmentNumber = 0;
+	private TestContainerFragment currentFragment = null;
+	
+	public JavaTestClassInstance(int instanceNumber, String objectId, JavaTestClassDefinition classDef, JavaTestClass container) throws Exception {
 		super(objectId, TestObjectType.TEST_CLASS_INSTANCE);
 		this.instanceNumber = instanceNumber;
 		this.container = container;
@@ -58,27 +60,11 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 		this.getTestVariables().rawObjectProps().setClassInstanceNumber(this.instanceNumber);
 		this.setThreadId(Thread.currentThread().getName());
 		
-		this.setUpClassInstanceFixture = this.getTestFixtures().getFixture(TestClassFixtureType.SETUP_CLASS_INSTANCE);
-		if (setUpClassInstanceFixture != null){
-			setUpClassInstanceFixture.setTestContainerInstance(this);
-			setUpClassInstanceFixture.setTestObject(this);
-		}
-		this.tearDownClassInstanceFixture = this.getTestFixtures().getFixture(TestClassFixtureType.TEARDOWN_CLASS_INSTANCE);
-		if (tearDownClassInstanceFixture != null){
-			tearDownClassInstanceFixture.setTestContainerInstance(this);
-			tearDownClassInstanceFixture.setTestObject(this);
-		}
+		initFixtures(TestClassFixtureType.SETUP_CLASS_INSTANCE, TestClassFixtureType.TEARDOWN_CLASS_INSTANCE);
+		this.getSetUpFixture().setTestContainerInstance(this);
+		this.getTearDownFixture().setTestContainerInstance(this);
 		
-		this.setUpClassFragmentFixture = this.getTestFixtures().getFixture(TestClassFixtureType.SETUP_CLASS_FRAGMENT);
-		if (setUpClassFragmentFixture != null){
-			setUpClassFragmentFixture.setTestContainerInstance(this);
-			setUpClassFragmentFixture.setTestObject(this);
-		}
-		this.tearDownClassFragmentFixture = this.getTestFixtures().getFixture(TestClassFixtureType.TEARDOWN_CLASS_FRAGMENT);
-		if (tearDownClassFragmentFixture != null){
-			tearDownClassFragmentFixture.setTestContainerInstance(this);
-			tearDownClassFragmentFixture.setTestObject(this);
-		}
+		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_CLASS_INSTANCE);
 		
 		try{
 			switch(this.getConstructorType()){
@@ -128,21 +114,18 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 				issueId);		
 	}
 
-	public void loadTestCreators() throws Exception{
+	@Override
+	public void loadFragment(List<String> methods) throws Exception{
 		if (ArjunaInternal.displayLoadingInfo){
-			logger.debug("Loading test creators");
-			logger.debug(this.executableCreatorNames);
+			logger.debug("Loading Fragment");
+			logger.debug(methods);
 		}
-		JavaTestMethod testMethod = null;
-		for (String creatorName: this.executableCreatorNames){
-			if (ArjunaInternal.displayLoadingInfo){
-				logger.debug(creatorName);
-			}
-			String methodObjectId = String.format("%s|%s", this.getObjectId(), creatorName);
-			testMethod = new JavaTestMethod(methodObjectId, this, classDef.getTestCreatorDefinition(creatorName));
-			this.methodsQueue.add(testMethod);
-			methodExecTracker.add(testMethod);
-		}
+		
+		String fragmentObjectId = String.format("%s|Fragment-%d", this.getObjectId(), ++currentFragmentNumber);
+		
+		this.currentFragment = new JavaTestClassFragment(currentFragmentNumber, fragmentObjectId, this.classDef, this.container, this);
+		currentFragment.setCreatorNames(methods);
+		currentFragment.loadTestCreators();
 	}
 
 	private void setUserTestClassObject(Object testObject) {
@@ -184,98 +167,10 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 	public Object getUserTestContainerObject() {
 		return this.testObject;
 	}
-
-	@Override
-	public List<JavaTestMethod> getTestCreators() {
-		return this.methodsQueue;
-	}
-	
-	@Override
-	public FixtureResultType getSetUpClassFixtureResult() {
-		if (this.setUpClassInstanceFixture != null){
-			return this.setUpClassInstanceFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
-	}
-
-	@Override
-	public FixtureResultType getTearDownClassFixtureResult() {
-		if (this.tearDownClassInstanceFixture != null){
-			return this.tearDownClassInstanceFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
-	}
-
-	@Override
-	public FixtureResultType getSetUpClassFragmentFixtureResult() {
-		if (this.setUpClassFragmentFixture != null){
-			return this.setUpClassFragmentFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
-	}
-
-	@Override
-	public FixtureResultType getTearDownClassFragmentFixtureResult() {
-		if (this.tearDownClassFragmentFixture != null){
-			return this.tearDownClassFragmentFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
-	}
-	
-	@Override
-	public boolean wasSetUpClassInstanceFixtureExecuted(){
-		if (this.setUpClassInstanceFixture != null){
-			return this.setUpClassInstanceFixture.wasExecuted();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean didSetUpClassFixtureSucceed(){
-		if (this.setUpClassInstanceFixture != null){
-			return this.setUpClassInstanceFixture.wasSuccessful();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean wasTearDownClassFixtureExecuted(){
-		if (this.tearDownClassInstanceFixture != null){
-			return this.tearDownClassInstanceFixture.wasExecuted();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean didTearDownClassFixtureSucceed(){
-		if (this.tearDownClassInstanceFixture != null){
-			return this.tearDownClassInstanceFixture.wasSuccessful();
-		} else {
-			return true;
-		}
-	}
-
-	@Override
-	public synchronized boolean hasFragmentCompleted() {
-		return this.methodExecTracker.size() == 0;
-	}
 	
 	@Override
 	public synchronized boolean hasCompleted() {
 		return this.allScheduledCreators.size() == 0;
-	}
-	
-	@Override
-	public synchronized void markTestCreatorCompleted(TestCreator testCreator) {
-		this.methodExecTracker.remove(testCreator);
-		this.allScheduledCreators.remove(testCreator.getName());
 	}
 
 	@Override
@@ -297,118 +192,24 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 	public TestFixtures getTestFixtures() {
 		return classDef.getFixtures();
 	}
-
-	@Override
-	public void addExecutableCreatorName(String name) {
-		if (ArjunaInternal.displayLoadingInfo){
-			logger.debug("Adding creator name for current execution slot: " + name);
-		}
-		this.executableCreatorNames.add(name);
-		
-	}
-	
-	@Override
-	public void resetExecutorCreatorQueue() {
-		this.executableCreatorNames = new ArrayList<String>();
-		this.methodsQueue = new ArrayList<JavaTestMethod>();
-	}
-	
-	@Override
-	public void setUpClassInstance() throws Exception{
-		if (ArjunaInternal.displayFixtureExecInfo){
-			logger.debug("Inside Java Test Class Set Up Class.");
-		}
-		if (this.setUpClassInstanceFixture != null){
-			boolean success = this.setUpClassInstanceFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_SETUP_CLASS_INSTANCE, 
-						String.format("Error in \"%s.%s\" fixture", this.setUpClassInstanceFixture.getFixtureClassName(), this.setUpClassInstanceFixture.getName()),
-						this.setUpClassInstanceFixture.getIssueId());
-			}
-		}
-	}
-
-	@Override
-	public void tearDownClassInstance() throws Exception {
-		if (this.tearDownClassInstanceFixture != null){
-			boolean success = tearDownClassInstanceFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_TEARDOWN_CLASS_INSTANCE, 
-						String.format("Error in \"%s.%s\" fixture", this.tearDownClassInstanceFixture.getFixtureClassName(), this.tearDownClassInstanceFixture.getName()),
-						this.tearDownClassInstanceFixture.getIssueId());
-			}
-		}
-	}
-	
-	@Override
-	public void setUpClassFragment() throws Exception{
-		if (ArjunaInternal.displayFixtureExecInfo){
-			logger.debug("Inside Java Test Class Set Up Class.");
-		}
-		if (this.setUpClassFragmentFixture != null){
-			boolean success = this.setUpClassFragmentFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_SETUP_CLASS_FRAGMENT, 
-						String.format("Error in \"%s.%s\" fixture", this.setUpClassFragmentFixture.getFixtureClassName(), this.setUpClassFragmentFixture.getName()),
-						this.setUpClassFragmentFixture.getIssueId());
-			}
-		}
-	}
-
-	@Override
-	public void tearDownClassFragment() throws Exception {
-		if (this.tearDownClassFragmentFixture != null){
-			boolean success = tearDownClassFragmentFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_TEARDOWN_CLASS_FRAGMENT, 
-						String.format("Error in \"%s.%s\" fixture", this.tearDownClassFragmentFixture.getFixtureClassName(), this.tearDownClassFragmentFixture.getName()),
-						this.tearDownClassFragmentFixture.getIssueId());
-			}
-		}
-	}
-
-	@Override
-	public boolean shouldExecuteTearDownClassInstanceFixture(){
-		if (ArjunaInternal.displaySlotsInfo){
-			logger.debug(String.format("Was unselected? %s." , this.wasUnSelected()));
-			logger.debug(String.format("Was skipped? %s." , this.wasSkipped()));
-			logger.debug(String.format("Was excluded? %s." , this.wasExcluded()));
-			logger.debug(String.format("Exclusion Type: %s." , this.getExclusionType()));
-		}
-		if (this.wasUnSelected() || this.wasSkipped()){
-			return false;
-		} else if (this.wasExcluded()){
-			if ((this.getExclusionType() == TestResultCode.ERROR_IN_SETUP_CLASS_INSTANCE) 
-					|| (this.getExclusionType() == TestResultCode.ERROR_IN_SETUP_CLASS_FRAGMENT)
-					|| (this.getExclusionType() == TestResultCode.ERROR_IN_TEARDOWN_CLASS_FRAGMENT)){
-				return true;
-			} else {
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-	@Override
-	public boolean shouldExecuteTearDownClassFragmentFixture() {
-		if (this.wasUnSelected() || this.wasSkipped()){
-			return false;
-		} else if (this.wasExcluded() && (this.getExclusionType() != TestResultCode.ERROR_IN_SETUP_CLASS_FRAGMENT)){
-			return false;
-		}
-		
-		return true;
-	}
 	
 	@Override
 	public void setAllScheduledCreators(List<String> creatorNames) {
 		if (creatorNames != null){
 			this.allScheduledCreators.addAll(creatorNames);
 		}
+	}
+
+	@Override
+	public TestContainerFragment getCurrentFragment() {
+		return this.currentFragment;
+	}
+
+	@Override
+	public void markCurrentFragmentCompleted(TestContainerFragment fragment) {
+		for (JavaTestMethod m: fragment.getTestCreators()){
+			this.allScheduledCreators.remove(m.getName());
+		}
+		currentFragment = null;
 	}
 }

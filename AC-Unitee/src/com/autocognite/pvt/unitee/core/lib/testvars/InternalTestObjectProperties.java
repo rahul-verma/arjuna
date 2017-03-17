@@ -72,5 +72,7 @@ public interface InternalTestObjectProperties
 	void setSessionSubNodeId(int id) throws Exception;
 
 	void setBeginTstamp() throws Exception;
-	void setEndTstamp() throws Exception;	
+	void setEndTstamp() throws Exception;
+
+	void setClassFragmentNumber(int num) throws Exception;	
 }

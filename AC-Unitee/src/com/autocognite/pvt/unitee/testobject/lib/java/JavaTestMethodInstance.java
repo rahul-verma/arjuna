@@ -17,6 +17,7 @@ import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.Test;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreatorInstance;
@@ -27,8 +28,6 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 	private JavaTestMethod jMethod;
 	private Method method;
 	private JavaTestMethodDefinition methodDef = null;
-	private Fixture setUpMethodFixture = null;
-	private Fixture tearDownMethodFixture = null;
 	private DataSource dataSource = null;
 	int currentTestNumber = 0;
 	Test lastTest = null;
@@ -45,17 +44,13 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 		this.setThreadId(Thread.currentThread().getName());
 		this.dataSource =  this.methodDef.getDataSource();
 		
-		JavaTestClassInstance classInstance = this.getParentTestCreator().getTestContainerInstance();
-		this.setUpMethodFixture = classInstance.getTestFixtures().getFixture(TestClassFixtureType.SETUP_METHOD_INSTANCE);
-		if (setUpMethodFixture != null){
-			setUpMethodFixture.setTestContainerInstance(classInstance);
-			setUpMethodFixture.setTestObject(this);
-		}
-		this.tearDownMethodFixture = classInstance.getTestFixtures().getFixture(TestClassFixtureType.TEARDOWN_METHOD_INSTANCE);
-		if (tearDownMethodFixture != null){
-			tearDownMethodFixture.setTestContainerInstance(classInstance);
-			tearDownMethodFixture.setTestObject(this);
-		}
+		initFixtures(TestClassFixtureType.SETUP_METHOD_INSTANCE, TestClassFixtureType.TEARDOWN_METHOD_INSTANCE);
+		this.getSetUpFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
+		this.getTearDownFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
+		this.getSetUpFixture().setTestContainerFragment(this.getTestContainerFragment());
+		this.getTearDownFixture().setTestContainerFragment(this.getTestContainerFragment());
+		
+		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_METHOD_INSTANCE);
 	}
 
 	@Override
@@ -69,59 +64,6 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 	}
 
 	@Override
-	public FixtureResultType getSetUpMethodFixtureResult() {
-		if (this.setUpMethodFixture != null){
-			return this.setUpMethodFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
-	}
-
-	@Override
-	public FixtureResultType getTearDownMethodFixtureResult() {
-		if (this.tearDownMethodFixture != null){
-			return this.tearDownMethodFixture.getResultType();
-		} else {
-			return FixtureResultType.SUCCESS;
-		}
-	}
-	
-	@Override
-	public boolean wasSetUpMethodInstanceFixtureExecuted(){
-		if (this.setUpMethodFixture != null){
-			return this.setUpMethodFixture.wasExecuted();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean didSetUpMethodFixtureSucceed(){
-		if (this.setUpMethodFixture != null){
-			return this.setUpMethodFixture.wasSuccessful();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean wasTearDownMethodFixtureExecuted(){
-		if (this.tearDownMethodFixture != null){
-			return this.setUpMethodFixture.wasExecuted();
-		} else {
-			return true;
-		}
-	}
-	
-	@Override
-	public boolean didTearDownMethodFixtureSucceed(){
-		if (this.tearDownMethodFixture != null){
-			return this.setUpMethodFixture.wasSuccessful();
-		} else {
-			return true;
-		}
-	}
-	@Override
 	public int getTestThreadCount() {
 		return this.methodDef.getTestThreadCount();
 	}
@@ -132,7 +74,7 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 	}
 
 	@Override
-	public JavaTestClassInstance getTestContainerInstance() {
+	public JavaTestClassFragment getTestContainerFragment() {
 		return this.jMethod.getParent();
 	}
 
@@ -163,35 +105,6 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 		return this.instanceNumber;
 	}
 	
-	@Override
-	public void setUpMethodInstance() throws Exception{
-		if (this.setUpMethodFixture != null){
-			boolean success = this.setUpMethodFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_SETUP_METHOD_INSTANCE, 
-						String.format("Error in \"%s.%s\" fixture", this.setUpMethodFixture.getFixtureClassName(), this.setUpMethodFixture.getName()),
-						this.setUpMethodFixture.getIssueId()
-				);
-						
-			}
-		}
-	}
-
-	@Override
-	public void tearDownMethodInstance() throws Exception {
-		if (this.tearDownMethodFixture != null){
-			boolean success = tearDownMethodFixture.execute();
-			if (!success){
-				this.markExcluded(
-						TestResultCode.ERROR_IN_TEARDOWN_METHOD_INSTANCE, 
-						String.format("Error in \"%s.%s\" fixture", this.tearDownMethodFixture.getFixtureClassName(), this.tearDownMethodFixture.getName()),
-						this.tearDownMethodFixture.getIssueId()
-				);
-			}
-		}
-	}
-	
 	public boolean shouldExecuteSetUpMethodInstanceFixture(){
 		if (this.wasUnSelected() || this.wasSkipped()){
 			return false;
@@ -210,6 +123,10 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 		}
 		
 		return true;
+	}
+	
+	public TestFixtures getTestFixtures() {
+		return this.getParentTestCreator().getTestFixtures();
 	}
 		
 }

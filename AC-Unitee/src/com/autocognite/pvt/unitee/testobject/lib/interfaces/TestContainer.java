@@ -23,8 +23,6 @@ public interface TestContainer extends TestObject {
 
 	int getInstanceThreadCount();
 
-	TestFixtures getTestFixtures();
-
 	DataMethodsHandler getDataMethodsHandler();
 
 	void resetExecutorCreatorQueue();
@@ -36,19 +34,6 @@ public interface TestContainer extends TestObject {
 	boolean shouldExecute(IssueId outId);
 
 	void setGroup(Group g) throws Exception;
-
-	FixtureResultType getSetUpSessionFixtureResult();
-	FixtureResultType getTearDownSessionFixtureResult();
-
-	boolean shouldExecuteTearDownClassFixture();
-
-	void setUpClass() throws Exception;
-
-	void tearDownClass() throws Exception;
-
-	boolean shouldExecuteSetupClassFixture();
-
-	boolean wasSetUpClassFixtureExecuted();
 
 	boolean hasCompleted();
 

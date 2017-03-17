@@ -629,15 +629,19 @@ com.autocognite.pvt.arjuna.enums.IssueAttribute: com.autocognite.pvt.arjuna.enum
 com.autocognite.pvt.arjuna.enums.IssueAttribute: com.autocognite.pvt.arjuna.enums.IssueAttribute valueOf(java.lang.String)
 com.autocognite.pvt.arjuna.enums.IssueSubType
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_SESSION
-com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_GROUP
-com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS
-com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS_FRAGMENT
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_SESSION
+com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_GROUP
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_GROUP
+com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_CLASS
+com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS_INSTANCE
+com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_CLASS_INSTANCE
+com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_CLASS_FRAGMENT
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_CLASS_FRAGMENT
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_METHOD
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_METHOD
+com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_METHOD_INSTANCE
+com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_METHOD_INSTANCE
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_SETUP_TEST
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType FIXTURE_TEARDOWN_TEST
 com.autocognite.pvt.arjuna.enums.IssueSubType: com.autocognite.pvt.arjuna.enums.IssueSubType CONSTRUCTOR

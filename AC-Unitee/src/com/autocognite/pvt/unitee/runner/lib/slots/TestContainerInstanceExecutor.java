@@ -11,204 +11,50 @@ import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
+import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject;
 
-public class TestContainerInstanceExecutor implements Runnable{
+public class TestContainerInstanceExecutor extends AbstractTestObjectExecutor implements Runnable{
 	private static Logger logger = RunConfig.getCentralLogger();
 	private TestSlotTestContainer slotTestContainer = null;
-	private int slotNum;
+	private TestContainerInstance currentTestContainerInstance = null;
+	private TestSlotTestContainerInstance currentSlotsContainerInstance = null;
 
 	public TestContainerInstanceExecutor (int slotNum, TestSlotTestContainer slotTestContainer){
-		this.slotNum = slotNum;
+		super(slotNum);
 		this.slotTestContainer = slotTestContainer;
 	}
 
-	protected void executeSetUpClassInstanceFor(TestContainerInstance containerInstance){
-		try{
-			containerInstance.setUpClassInstance();	
-		} catch (Throwable e){
-			e.printStackTrace();
-		}
-	}
-	
-	protected void executeSetUpClassFragmentFor(TestContainerInstance containerInstance){
-		try{
-			containerInstance.setUpClassFragment();	
-		} catch (Throwable e){
-			e.printStackTrace();
-		}
-	}
-	
-	protected void executeTearDownClassFragmentFor(TestContainerInstance containerInstance){
-		try{
-			containerInstance.tearDownClassFragment();	
-		} catch (Exception e){
-			e.printStackTrace();
-		}
-	}
-	
-	protected void executeTearDownClassInstanceFor(TestContainerInstance containerInstance){
-		try{
-			containerInstance.tearDownClassInstance();	
-		} catch (Exception e){
-			e.printStackTrace();
-		}
+	protected int getChildThreadCount(){
+		return 1;
 	}
 
-//	protected void excludeForSetUpClassIssue(TestCreator testCreator){
-//		try{
-//			ExcludedTestReportableFactory.reportExcludedTestBecauseOfFixture(
-//					testCreator.getTestVariables(),
-//					ExclusionType.ERROR_IN_SETUP_CLASS, 
-//					testCreator.getTestContainerInstance().getTestFixtures().getFixtureName(TestClassFixtureType.SETUP_CLASS)
-//			);
-//		} catch (Exception e){
-//			e.printStackTrace();
-//		}
-//	}
+	protected String getThreadNameSuffix(int threadNum){
+		return "T-1";
+	}
+
+	protected Runnable createRunnable(){
+		return new TestContainerFragmentExecutor(this.getSlotNum(), currentSlotsContainerInstance);
+	}
 
 	public void execute(TestSlotTestContainerInstance slotTestContainerInstance) throws Exception{
-		TestContainerInstance testContainerInstance = slotTestContainerInstance.getContainerInstance();
-		testContainerInstance.setThreadId(Thread.currentThread().getName());
-		if (ArjunaInternal.logExclusionInfo){
-			logger.debug(String.format("Exclusion Info: %s", testContainerInstance.getQualifiedName()));
-			logger.debug(String.format("Is marked for exclusion? %s", testContainerInstance.wasExcluded()));
-			logger.debug(String.format("Exclusion Type? %s", testContainerInstance.getExclusionType()));
-			logger.debug(String.format("Exclusion Description? %s", testContainerInstance.getExclusionDesc()));
-		}
-		// Before venturing into launching test creators, setupclass is executed
-		
-		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
-		(testContainerInstance.shouldExecuteSetupClassInstanceFixture()))){
-			if (ArjunaInternal.displayFixtureExecInfo){
-				logger.debug(String.format("Attempting Set Up Class Instance for Test Class %s in Slot# %d", 
-						testContainerInstance.getQualifiedName(),
-						this.slotNum
-						));
-			}
-	
-			if (!testContainerInstance.wasSetUpClassInstanceFixtureExecuted()){
-				if (ArjunaInternal.displayFixtureExecInfo){
-					logger.debug("Set Up Class");
-				}
-				executeSetUpClassInstanceFor(testContainerInstance);
-			}
-			
-			if (ArjunaInternal.logExclusionInfo){
-				logger.debug("After Set Up Class");
-				logger.debug(String.format("Exclusion Info: %s", testContainerInstance.getQualifiedName()));
-				logger.debug(String.format("Is marked for exclusion? %s", testContainerInstance.wasExcluded()));
-				logger.debug(String.format("Exclusion Type? %s", testContainerInstance.getExclusionType()));
-				logger.debug(String.format("Exclusion Description? %s", testContainerInstance.getExclusionDesc()));
-			}
-		}
-		
-		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
-		 (testContainerInstance.shouldExecuteSetupClassFragmentFixture()))){
-			if (ArjunaInternal.displayFixtureExecInfo){
-				logger.debug(String.format("Attempting Set Up Class Fragment for Test Class %s in Slot# %d", 
-						testContainerInstance.getQualifiedName(),
-						this.slotNum
-						));
-			}
-			
-			executeSetUpClassFragmentFor(testContainerInstance);
-			
-			if (ArjunaInternal.logExclusionInfo){
-				logger.debug("After Set Up Class");
-				logger.debug(String.format("Exclusion Info: %s", testContainerInstance.getQualifiedName()));
-				logger.debug(String.format("Is marked for exclusion? %s", testContainerInstance.wasExcluded()));
-				logger.debug(String.format("Exclusion Type? %s", testContainerInstance.getExclusionType()));
-				logger.debug(String.format("Exclusion Description? %s", testContainerInstance.getExclusionDesc()));
-			}
-		}
-		
+		this.currentSlotsContainerInstance = slotTestContainerInstance;
+		currentTestContainerInstance = slotTestContainerInstance.getContainerInstance();
+		currentTestContainerInstance.setThreadId(Thread.currentThread().getName());
+
+		this.executeSetUp(currentTestContainerInstance);
+
+		this.execute();
+
+		this.executeTearDown(currentTestContainerInstance);
+
 		if (ArjunaInternal.displaySlotsInfo){
-			logger.debug(String.format("Now Executing Test Class %s methods in Slot# %d", 
-				testContainerInstance.getQualifiedName(),
-				this.slotNum
-				));
+			logger.debug(String.format("Check if  %s class instance has completed." , currentTestContainerInstance.getQualifiedName()));
 		}
-		ArrayList<Thread> containerInstanceThreads = new ArrayList<Thread>();
-		Thread t;
-		
-		if (ArjunaInternal.displayLoadingInfo){
-			logger.debug(String.format("Launching threads for: Slot# %d - Test Container: %s - Instance #%d",
-				this.slotNum, 
-				testContainerInstance.getQualifiedName(), 
-				testContainerInstance.getInstanceNumber()));
-			logger.debug(String.format("Number of threads for running test creators: %d", testContainerInstance.getCreatorThreadCount()));
-		}
-		List<String> threadNames = new ArrayList<String>();
-		for (int i = 1; i <= testContainerInstance.getCreatorThreadCount(); i++){
-			String threadName = String.format("%s|CrT-%d", Thread.currentThread().getName(), i);
-			try{
-				t = ThreadBatteries.createThread(threadName, new TestCreatorExecutor(this.slotNum, slotTestContainerInstance));
-				threadNames.add(t.getName());
-				ArjunaInternal.getCentralExecState().registerThread(t.getName());
-				t.start();
-				containerInstanceThreads.add(t);
-			} catch (Exception e){
-				System.err.println("Critical Error: Exception occured while creating Test Slot Execution Thread.");
-				e.printStackTrace();
-				System.err.println("Exiting...");
-				System.exit(1);
-			}
-		}
-		try{
-			for(Thread tLaunched : containerInstanceThreads){
-				tLaunched.join();
-			}	
-		} catch (InterruptedException e){
-			e.printStackTrace();
-		}
-		
-		for (String tName: threadNames){
-			ArjunaInternal.getCentralExecState().deregisterThread(tName);
-		}
-		
-		if (ArjunaInternal.displaySlotsInfo){
-			logger.debug(String.format("Evaluating whether to execute tear down class fragment for  %s." , testContainerInstance.getQualifiedName()));
-		}
-		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
-		(testContainerInstance.shouldExecuteTearDownClassFragmentFixture()))){
-			if (testContainerInstance.hasFragmentCompleted()){
-				if (ArjunaInternal.displaySlotsInfo){
-					logger.debug(String.format("Now executing tear down class fragment for  %s." , testContainerInstance.getQualifiedName()));
-				}
-				this.executeTearDownClassFragmentFor(testContainerInstance);
-				if (ArjunaInternal.displaySlotsInfo){
-					logger.debug(String.format("All test instance creators in %s have finished for current execution slot. Tear down class fragment." , testContainerInstance.getQualifiedName()));
-				}
-			}
-		}
-		
-		if (ArjunaInternal.displaySlotsInfo){
-			logger.debug(String.format("Evaluating whether to execute tear down class instance for  %s." , testContainerInstance.getQualifiedName()));
-			logger.debug(String.format("Is it container in mlgroup? %s." , testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup")));
-			logger.debug(String.format("Should execute tear down? %s." , testContainerInstance.shouldExecuteTearDownClassInstanceFixture()));
-			logger.debug(String.format("Has Completed? %s.", testContainerInstance.hasCompleted()));
-		}
-		if ((!testContainerInstance.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
-		(testContainerInstance.shouldExecuteTearDownClassInstanceFixture()))){
-			if (testContainerInstance.hasCompleted()){
-				if (ArjunaInternal.displaySlotsInfo){
-					logger.debug(String.format("Now executing tear down class instance for  %s." , testContainerInstance.getQualifiedName()));
-				}
-				this.executeTearDownClassInstanceFor(testContainerInstance);
-				if (ArjunaInternal.displaySlotsInfo){
-					logger.debug(String.format("All scheduled test instance creators in %s have finished. Tear down class instance." , testContainerInstance.getQualifiedName()));
-				}
-			}
-		}
-		
-		if (ArjunaInternal.displaySlotsInfo){
-			logger.debug(String.format("Check if  %s class instance has completed." , testContainerInstance.getQualifiedName()));
-		}
-		if (testContainerInstance.hasCompleted()){
+		if (currentTestContainerInstance.hasCompleted()){
 			if (ArjunaInternal.displaySlotsInfo){
-				logger.debug(String.format("Class instance  %s completed. Update class and mark this instance completed." , testContainerInstance.getQualifiedName()));
+				logger.debug(String.format("Class instance  %s completed. Update class and mark this instance completed." , currentTestContainerInstance.getQualifiedName()));
 			}
-			testContainerInstance.getContainer().markTestClassInstanceCompleted(testContainerInstance);
+			currentTestContainerInstance.getContainer().markTestClassInstanceCompleted(currentTestContainerInstance);
 			if (ArjunaInternal.displaySlotsInfo){
 				logger.debug("Updated");
 			}
@@ -221,25 +67,10 @@ public class TestContainerInstanceExecutor implements Runnable{
 			try{
 				slotTestContainerInstance = this.slotTestContainer.next();
 				TestContainer container = slotTestContainerInstance.getContainerInstance().getContainer();
-				
-					if (container.wasSkipped()){
-					  slotTestContainerInstance.getContainerInstance().markSkipped(
-							  container.getSkipType(),
-							  container.getSkipDesc()
-					);
-				  } else if (container.wasUnSelected()){
-					  slotTestContainerInstance.getContainerInstance().markUnSelected(
-							  container.getUnSelectedType(),
-							  container.getUnSelectedDesc()
-					);
-				  } else if (container.wasExcluded()){
-				  slotTestContainerInstance.getContainerInstance().markExcluded(
-						  container.getExclusionType(),
-						  container.getExclusionDesc(),
-						  container.getExclusionIssueId()
-				);
-			  }
-			this.execute(slotTestContainerInstance);
+
+				copySchedulingStatusFromParentAndReturnFalseIfNotApplicable(container, slotTestContainerInstance.getContainerInstance());
+
+				this.execute(slotTestContainerInstance);
 			} catch (SubTestsFinishedException e){
 				return;
 			} catch (Exception e) {

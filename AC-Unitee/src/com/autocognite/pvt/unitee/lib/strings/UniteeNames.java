@@ -44,6 +44,7 @@ public class UniteeNames {
 		testObjectProperties.add(new Name(TestObjectAttribute.PNAME.toString(), "Test Package"));
 		testObjectProperties.add(new Name(TestObjectAttribute.CNAME.toString(), "Test Class"));
 		testObjectProperties.add(new Name(TestObjectAttribute.CIN.toString(), "Test Class Instance Number"));
+		testObjectProperties.add(new Name(TestObjectAttribute.CFN.toString(), "Test Class Instance Fragment Number"));
 		testObjectProperties.add(new Name(TestObjectAttribute.MNAME.toString(), "Test Method"));
 		testObjectProperties.add(new Name(TestObjectAttribute.MIN.toString(), "Test Method Instance Number"));
 		testObjectProperties.add(new Name(TestObjectAttribute.TN.toString(), "Test Number")); // E.g DDT
@@ -62,6 +63,7 @@ public class UniteeNames {
 		NamesContainer testObjectTypeNames = new NamesContainer(NamesContainerType.TEST_OBJECT_TYPE_NAMES.toString());
 		testObjectTypeNames.add(new Name(TestObjectType.TEST_CLASS.toString(), "Test Class"));
 		testObjectTypeNames.add(new Name(TestObjectType.TEST_CLASS_INSTANCE.toString(), "Test Class Instance"));
+		testObjectTypeNames.add(new Name(TestObjectType.TEST_CLASS_FRAGMENT.toString(), "Test Class Instance Fragment"));
 		testObjectTypeNames.add(new Name(TestObjectType.TEST_METHOD.toString(), "Test Method"));
 		testObjectTypeNames.add(new Name(TestObjectType.TEST_METHOD_INSTANCE.toString(), "Test Method Instance"));
 		testObjectTypeNames.add(new Name(TestObjectType.TEST.toString(), "Test"));

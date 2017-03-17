@@ -7,15 +7,13 @@ import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestMethod;
 import com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 
-public interface TestContainerInstance extends TestObject {
+public interface TestContainerFragment extends TestObject {
 
-	int getInstanceNumber();
+	int getFragmentNumber();
 
 	TestContainer getContainer();
 	
-	TestContainerFragment getCurrentFragment();
-	
-	boolean hasCompleted();
+	TestContainerInstance getContainerInstance();
 
 	int getCreatorThreadCount();
 
@@ -26,11 +24,10 @@ public interface TestContainerInstance extends TestObject {
 	Object getUserTestContainerObject();
 
 	TestFixtures getTestFixtures();
+	
+	List<JavaTestMethod> getTestCreators();
+	void loadTestCreators() throws Exception;
 
-	void setAllScheduledCreators(List<String> creatorNames);
-
-	void loadFragment(List<String> methods) throws Exception;
-
-	void markCurrentFragmentCompleted(TestContainerFragment fragment);
+	void setCreatorNames(List<String> methods);
 
 }

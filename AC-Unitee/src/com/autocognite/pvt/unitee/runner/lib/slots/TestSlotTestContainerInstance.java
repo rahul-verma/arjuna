@@ -16,27 +16,22 @@ public class TestSlotTestContainerInstance {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private int slotNum;
 	private TestContainerInstance testContainerInstance = null;
-	private List<TestSlotTestCreator> slotTestCreators = null;
-	private Iterator<TestSlotTestCreator> iter = null;
+	private List<TestSlotTestContainerFragment> slotTestClassFragments = null;
+	private Iterator<TestSlotTestContainerFragment> iter = null;
 	
 	public TestSlotTestContainerInstance (int slotNum, TestContainerInstance testContainerInstance){
 		this.slotNum = slotNum;
 		this.testContainerInstance = testContainerInstance;
-		slotTestCreators = new ArrayList<TestSlotTestCreator>();
-		if (ArjunaInternal.displaySlotsInfo){
-			logger.debug("Creators for container instance: " + testContainerInstance.getTestCreators());
-		}
-		for (TestCreator creator: testContainerInstance.getTestCreators()){
-			slotTestCreators.add(new TestSlotTestCreator(slotNum, creator));
-		}
-		this.iter = slotTestCreators.iterator();
+		slotTestClassFragments = new ArrayList<TestSlotTestContainerFragment>();
+		slotTestClassFragments.add(new TestSlotTestContainerFragment(slotNum, testContainerInstance.getCurrentFragment()));
+		this.iter = slotTestClassFragments.iterator();
 	}
 
 	public TestContainerInstance getContainerInstance() {
 		return testContainerInstance;
 	}
 	
-	public TestSlotTestCreator next() throws Exception{
+	public TestSlotTestContainerFragment next() throws Exception{
 		if (iter.hasNext()){
 			return this.iter.next();
 		} else {

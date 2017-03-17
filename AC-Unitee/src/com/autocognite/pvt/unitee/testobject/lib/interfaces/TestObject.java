@@ -2,11 +2,14 @@ package com.autocognite.pvt.unitee.testobject.lib.interfaces;
 
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.internal.arjuna.enums.TestObjectType;
+import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.TestResultCode;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.Fixture;
+import com.autocognite.pvt.unitee.testobject.lib.fixture.TestFixtures;
 
 public interface TestObject {
 	
-	TestVariables getTestVariablesDefinition();
+	TestVariables getTestVariablesDefinition() throws Exception;
 
 	String getObjectId();
 
@@ -47,5 +50,32 @@ public interface TestObject {
 	void initTimeStamp() throws Exception;
 	
 	void endTimeStamp() throws Exception;
+	
+	Fixture getSetUpFixture() throws Exception;
+	
+	Fixture getTearDownFixture() throws Exception;
+	
+	void setUp() throws Exception;
+	
+	void tearDown() throws Exception;
+	
+	boolean wasSetUpExecuted() throws Exception;
+	
+	boolean wasTearDownExecuted() throws Exception;
+	
+	boolean wasSetUpSuccessful() throws Exception;
+	
+	boolean wasTearDownSuccessful() throws Exception;
+	
+	boolean shouldExecuteSetUp() throws Exception;
+	
+	boolean shouldExecuteTearDown() throws Exception;
+	
+	FixtureResultType getSetUpResult() throws Exception;
+	
+	FixtureResultType getTearDownResult() throws Exception;
+	
+	TestFixtures getTestFixtures();
 
+	boolean hasCompleted();
 }

@@ -1,7 +1,11 @@
 package com.autocognite.pvt.unitee.testobject.lib.fixture;
 
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
+import com.autocognite.pvt.arjuna.enums.TestResultCode;
+import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
+import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject;
+import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassFragment;
 import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance;
 
 public interface Fixture extends Cloneable{
@@ -10,7 +14,7 @@ public interface Fixture extends Cloneable{
 
 	public Fixture clone() throws CloneNotSupportedException;
 
-	void setTestContainerInstance(JavaTestClassInstance classInstance);
+	void setTestContainerInstance(TestContainerInstance testContainerInstance);
 
 	boolean execute() throws Exception;
 
@@ -27,5 +31,9 @@ public interface Fixture extends Cloneable{
 	String getFixtureClassName();
 
 	int getIssueId();
+
+	void setTestContainerFragment(TestContainerFragment javaTestClassFragment);
+	
+	TestResultCode getTestResultCodeForFixtureError();
 
 }

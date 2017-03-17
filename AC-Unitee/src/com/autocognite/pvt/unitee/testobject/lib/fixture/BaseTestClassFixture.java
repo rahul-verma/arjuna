@@ -9,12 +9,16 @@ import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;
 import com.autocognite.pvt.arjuna.enums.IssueType;
 import com.autocognite.pvt.arjuna.enums.TestClassFixtureType;
+import com.autocognite.pvt.arjuna.enums.TestResultCode;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResult;
 import com.autocognite.pvt.unitee.reporter.lib.fixture.FixtureResultBuilder;
 import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;
 import com.autocognite.pvt.unitee.reporter.lib.issue.IssueBuilder;
+import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
+import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject;
+import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassFragment;
 import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance;
 
 public abstract class BaseTestClassFixture implements Fixture {
@@ -23,10 +27,12 @@ public abstract class BaseTestClassFixture implements Fixture {
 	private Method method = null;
 	private String fixtureName = null;
 	private TestClassFixtureType type = null;
-	private JavaTestClassInstance classInstance = null;
+	private TestContainerInstance classInstance = null;
+	private TestContainerFragment classFragment = null;
 	private TestObject testObject = null;
 	private FixtureResultType resultType = FixtureResultType.NOT_EXECUTED;
 	private int issueId = -1;
+	private TestResultCode errorCodeForFixture = TestResultCode.ALL_STEPS_PASS;
 
 	public BaseTestClassFixture(Class<?> testClass, TestClassFixtureType fType, Method m){
 		this.setTestClass(testClass);
@@ -51,6 +57,7 @@ public abstract class BaseTestClassFixture implements Fixture {
 				logger.debug(String.format("Error in fixture: %s.%s", this.getClass().getName(), this.getName()));
 			}
 			//			logger.debug(ExceptionBatteries.getStackTraceAsString(e));
+			this.errorCodeForFixture = this.getErrorTestResultCode();
 			reportFixtureError(e);
 			return false;
 		}
@@ -83,12 +90,20 @@ public abstract class BaseTestClassFixture implements Fixture {
 		this.type = type;
 	}
 
-	public JavaTestClassInstance getTestClassInstance() {
+	public TestContainerInstance getTestClassInstance() {
 		return classInstance;
 	}
 
-	public void setTestContainerInstance(JavaTestClassInstance classInstance) {
+	public void setTestContainerInstance(TestContainerInstance classInstance) {
 		this.classInstance = classInstance;
+	}
+	
+	public TestContainerFragment getTestClassFragment() {
+		return this.classFragment;
+	}
+
+	public void setTestContainerFragment(TestContainerFragment classFragment) {
+		this.classFragment = classFragment;
 	}
 	
 	@Override
@@ -222,6 +237,10 @@ public abstract class BaseTestClassFixture implements Fixture {
 		this.issueId = intIssueId;
 	}
 	
+	protected TestResultCode getErrorTestResultCode() throws Exception {
+		return TestResultCode.valueOf(String.format("ERROR_IN_%s",this.getType().toString()));
+	}
+	
 	protected String getFixturePoint() throws Exception {
 		String qualifiedName = this.getTestObject().getTestVariables().objectProps().qualifiedName();
 		String suffix = null;
@@ -232,48 +251,63 @@ public abstract class BaseTestClassFixture implements Fixture {
 		}
 		switch (this.getTestObject().getTestVariables().objectProps().objectType()){
 		case TEST_CLASS:
-			suffix = String.format("For each occurrence of Test Class [%s]. %%s instance.", qualifiedName);
+			suffix = String.format("Within a group, once %%s Test Class [%s].", qualifiedName);
 			switch(this.getType()){		
-			case SETUP_CLASS: return String.format(suffix, "before first");
-			case TEARDOWN_CLASS: return String.format(suffix, "after last");
+			case SETUP_CLASS: return String.format(suffix, "before");
+			case TEARDOWN_CLASS: return String.format(suffix, "after");
 			}
 			break;
 		case TEST_CLASS_INSTANCE:
-			suffix = String.format("all methods in Test Class - [%s], Class Instance #%d.", qualifiedName, this.getTestClassInstance().getInstanceNumber());
-			suffix2 = String.format("all methods in Test Class - [%s], Class Instance #%d, Fragment.", qualifiedName, this.getTestClassInstance().getInstanceNumber());
+			suffix = String.format("Once %%s Test Class [%s], Instance [%d]", qualifiedName, this.getTestClassInstance().getInstanceNumber());
 			switch(this.getType()){		
-			case SETUP_CLASS_INSTANCE: return String.format("For each occurrence of a test class. Before %s", suffix);
-			case TEARDOWN_CLASS_INSTANCE: return String.format("For each occurrence of a test class. After %s", suffix);
-			case SETUP_CLASS_FRAGMENT: return String.format("For each occurrence of a test class. Before %s", suffix2);
-			case TEARDOWN_CLASS_FRAGMENT: return String.format("For each occurrence of a test class. After %s", suffix2);
+			case SETUP_CLASS_INSTANCE: return String.format(suffix, "before");
+			case TEARDOWN_CLASS_INSTANCE: return String.format(suffix, "after");
+			}
+			break;
+		case TEST_CLASS_FRAGMENT:
+			suffix = String.format("Once %%s Test Class [%s], Instance [%d], Fragment [%d]", qualifiedName, this.getTestClassInstance().getInstanceNumber(), this.getTestClassFragment().getFragmentNumber());
+			switch(this.getType()){		
+			case SETUP_CLASS_FRAGMENT: return String.format(suffix, "before");
+			case TEARDOWN_CLASS_FRAGMENT: return String.format(suffix, "after");
 			}
 			break;
 		case TEST_METHOD:
-			suffix = String.format("all instances of Test Method [%s]", this.getTestObject().getTestVariables().objectProps().name());
-			switch(this.getType()){
-			case SETUP_METHOD: return String.format("Before %s", suffix);
-			case TEARDOWN_METHOD: return String.format("After %s", suffix);
+			suffix = String.format("Once %%s Test Class [%s], Instance [%d], Fragment [%d], Method [%s]", qualifiedName, 
+					this.getTestClassInstance().getInstanceNumber(), this.getTestClassFragment().getFragmentNumber(),
+					this.getTestObject().getTestVariables().objectProps().name());
+			switch(this.getType()){		
+			case SETUP_METHOD: return String.format(suffix, "before");
+			case TEARDOWN_METHOD: return String.format(suffix, "after");
 			}
 			break;
 		case TEST_METHOD_INSTANCE:
-			suffix = String.format("all tests created by Test Method [%s], Method Instance# %d.", this.getTestObject().getTestVariables().objectProps().name(), this.getTestObject().getTestVariables().objectProps().methodInstanceNumber());
-			switch(this.getType()){
-			case SETUP_METHOD_INSTANCE: return String.format("Before %s", suffix);
-			case TEARDOWN_METHOD_INSTANCE: return String.format("After %s", suffix);
+			suffix = String.format("Once %%s Test Class [%s], Instance [%d], Fragment [%d], Method [%s], Method Instance [%d]", qualifiedName, 
+					this.getTestClassInstance().getInstanceNumber(), this.getTestClassFragment().getFragmentNumber(),
+					this.getTestObject().getTestVariables().objectProps().name(),
+					this.getTestObject().getTestVariables().objectProps().methodInstanceNumber());
+			switch(this.getType()){		
+			case SETUP_METHOD_INSTANCE: return String.format(suffix, "before");
+			case TEARDOWN_METHOD_INSTANCE: return String.format(suffix, "after");
 			}
 			break;
 		case TEST:
-			suffix = String.format("Test Method [%s], Method Instance# %d, Test# %d",
+			suffix = String.format("Once %%s Test Class [%s], Instance [%d], Fragment [%d], Method [%s], Method Instance [%d], Test [%d]", qualifiedName, 
+					this.getTestClassInstance().getInstanceNumber(), this.getTestClassFragment().getFragmentNumber(),
 					this.getTestObject().getTestVariables().objectProps().name(),
 					this.getTestObject().getTestVariables().objectProps().methodInstanceNumber(),
 					this.getTestObject().getTestVariables().objectProps().testNumber());
 			switch(this.getType()){		
-			case SETUP_TEST: return String.format("Before %s", suffix);
-			case TEARDOWN_TEST: return String.format("After %s", suffix);
+			case SETUP_TEST: return String.format(suffix, "before");
+			case TEARDOWN_TEST: return String.format(suffix, "after");
 			}
 			break;
 		}
 
 		return null;
+	}
+	
+	@Override
+	public TestResultCode getTestResultCodeForFixtureError() {
+		return this.errorCodeForFixture;
 	}
 }

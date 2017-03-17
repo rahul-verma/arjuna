@@ -8,22 +8,26 @@ import com.autocognite.pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.Test;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreatorInstance;
 
-public class TestExecutor implements Runnable{
+public class TestExecutor extends AbstractTestObjectExecutor implements Runnable{
 	private static Logger logger = RunConfig.getCentralLogger();
 	private int slotNum;
 	private TestSlotTestCreatorInstance creatorInstance = null;
 
 	public TestExecutor (int slotNum, TestSlotTestCreatorInstance creatorInstance){
-		this.slotNum = slotNum;
+		super(slotNum);
 		this.creatorInstance = creatorInstance;
 	}
 
-	protected void executeSetUpTestFor(Test test){
-		try{
-			test.setUpTest();	
-		} catch (Exception e){
-			e.printStackTrace();
-		}
+	protected int getChildThreadCount(){
+		return -1;
+	}
+
+	protected String getThreadNameSuffix(int threadNum){
+		return null;
+	}
+
+	protected Runnable createRunnable(){
+		return null;
 	}
 
 	public void run() {
@@ -40,52 +44,30 @@ public class TestExecutor implements Runnable{
 				}
 				if (ArjunaInternal.displaySlotsInfo){
 					logger.debug(String.format("Now Executing %s (Test# %d) in Slot# %d",
-						test.getQualifiedName(),
-						test.getTestNumber(),
-						this.slotNum)
-						);
+							test.getQualifiedName(),
+							test.getTestNumber(),
+							this.getSlotNum())
+							);
 				}
-	
+
 				TestCreatorInstance creatorInstance = test.getParentCreatorInstance(); 
 				try{
 					creatorInstance.setThreadId(Thread.currentThread().getName());
 				} catch (Exception e){
-					
+
 				}
-				if (creatorInstance.wasSkipped()){
-					test.markSkipped(
-							creatorInstance.getSkipType(),
-							creatorInstance.getSkipDesc()
-					);
-				  } else if (creatorInstance.wasUnSelected()){
-					  test.markUnSelected(
-							  creatorInstance.getUnSelectedType(),
-							  creatorInstance.getUnSelectedDesc()
-					);
-				  } else if (creatorInstance.wasExcluded()){
-					  test.markExcluded(
-							  creatorInstance.getExclusionType(),
-							  creatorInstance.getExclusionDesc(),
-							  creatorInstance.getExclusionIssueId()
-					);
-				  }
-				if (test.shouldExecuteSetupTestFixture()){
-					executeSetUpTestFor(test);
-				}
-	
+
+				copySchedulingStatusFromParentAndReturnFalseIfNotApplicable(creatorInstance, test);
+
+				this.executeSetUp(test);
+
 				try{
 					test.execute();
 				} catch (Exception e){
 					e.printStackTrace();
 				}
-	
-				if (test.shouldExecuteTearDownTestFixture()){
-					try{
-						test.tearDownTest();
-					} catch (Exception e){
-						e.printStackTrace();
-					}
-				}
+
+				this.executeTearDown(test);
 			} catch (Exception e){
 				e.printStackTrace();
 			}

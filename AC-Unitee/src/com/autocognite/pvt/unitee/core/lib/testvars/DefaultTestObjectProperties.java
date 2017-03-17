@@ -33,6 +33,7 @@ public class DefaultTestObjectProperties
 		this.setObjectType(notSetValue);
 		this.setObjectTypeName(notSetValue);
 		this.setClassInstanceNumber(naValue);
+		this.setClassFragmentNumber(naValue);
 		this.setMethod(naValue);
 		this.setName(notSetValue);
 		this.setMethodInstanceNumber(naValue);
@@ -135,6 +136,18 @@ public class DefaultTestObjectProperties
 	
 	public void setClassInstanceNumber(int num) throws Exception{
 		this.setClassInstanceNumber(new IntValue(num));
+	}
+	
+	public int classFragmentNumber() throws Exception{
+		return this.value(TestObjectAttribute.CFN).asInt();
+	}
+	
+	public void setClassFragmentNumber(Value value) throws Exception{
+		super.add(TestObjectAttribute.CFN, value);
+	}
+	
+	public void setClassFragmentNumber(int num) throws Exception{
+		this.setClassFragmentNumber(new IntValue(num));
 	}
 	
 	public String method() throws Exception{
@@ -316,6 +329,8 @@ public class DefaultTestObjectProperties
 		case CNAME:
 			return ValueType.STRING;
 		case CIN:
+			return ValueType.INTEGER;
+		case CFN:
 			return ValueType.INTEGER;
 		case MNAME:
 			return ValueType.STRING;
