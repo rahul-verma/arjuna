@@ -23,7 +23,7 @@ public class TestContainerFragmentExecutor extends AbstractTestObjectExecutor im
 		super(slotNum);
 		this.slotTestContainerInstance = slotTestContainerInstance;
 	}
-	
+
 	protected int getChildThreadCount(){
 		return currentTestContainerFragment.getCreatorThreadCount();
 	}
@@ -31,23 +31,23 @@ public class TestContainerFragmentExecutor extends AbstractTestObjectExecutor im
 	protected String getThreadNameSuffix(int threadNum){
 		return String.format("IF-%d|CrT-%d", currentTestContainerFragment.getFragmentNumber(), threadNum);
 	}
-	
+
 	protected Runnable createRunnable(){
 		return new TestCreatorExecutor(this.getSlotNum(), currentSlotsContainerFragment);
 	}
 
 	public void execute(TestSlotTestContainerFragment slotTestContainerFragment) throws Exception{
 		this.currentSlotsContainerFragment = slotTestContainerFragment;
-		
+
 		currentTestContainerFragment = slotTestContainerFragment.getContainerFragment();
 		currentTestContainerFragment.setThreadId(Thread.currentThread().getName());
-		
+
 		this.executeSetUp(currentTestContainerFragment);
-		
+
 		this.execute();
-		
+
 		this.executeTearDown(currentTestContainerFragment);
-		
+
 		if (ArjunaInternal.displaySlotsInfo){
 			logger.debug(String.format("Check if  %s class instance has completed." , currentTestContainerFragment.getQualifiedName()));
 		}
@@ -68,25 +68,10 @@ public class TestContainerFragmentExecutor extends AbstractTestObjectExecutor im
 			try{
 				slotTestContainerFragment = this.slotTestContainerInstance.next();
 				TestContainerInstance containerInstance = slotTestContainerFragment.getContainerFragment().getContainerInstance();
-				
-					if (containerInstance.wasSkipped()){
-						slotTestContainerFragment.getContainerFragment().markSkipped(
-							  containerInstance.getSkipType(),
-							  containerInstance.getSkipDesc()
-					);
-				  } else if (containerInstance.wasUnSelected()){
-					  slotTestContainerFragment.getContainerFragment().markUnSelected(
-							  containerInstance.getUnSelectedType(),
-							  containerInstance.getUnSelectedDesc()
-					);
-				  } else if (containerInstance.wasExcluded()){
-					  slotTestContainerFragment.getContainerFragment().markExcluded(
-						  containerInstance.getExclusionType(),
-						  containerInstance.getExclusionDesc(),
-						  containerInstance.getExclusionIssueId()
-				);
-			  }
-			this.execute(slotTestContainerFragment);
+
+				copySchedulingStatusFromParentAndReturnFalseIfNotApplicable(containerInstance, slotTestContainerFragment.getContainerFragment());
+
+				this.execute(slotTestContainerFragment);
 			} catch (SubTestsFinishedException e){
 				return;
 			} catch (Exception e) {
