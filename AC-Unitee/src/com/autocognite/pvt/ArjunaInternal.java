@@ -69,7 +69,7 @@ public class ArjunaInternal {
 	public static boolean logDependencyExecResolutionInfo = false;
 	public static boolean logDependencyMetInfo = false;
 	public static boolean displayDummiesLoadingInfo = false;
-	public static boolean displaySlotsInfo = true;
+	public static boolean displaySlotsInfo = false;
 	public static boolean displayReportProcessingInfo = false;
 	public static boolean displayReportGenerationInfo = false;
 	public static boolean logFixtureError = false;

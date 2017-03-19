@@ -60,7 +60,11 @@ public class JavaTestLoadingUtils {
 	
 	public static int getCreatorThreadCount(Class<?> klass) throws Exception{
 		TestClass testClassAnn = (TestClass) klass.getAnnotation(TestClass.class); 
-		return testClassAnn.methodThreads();
+		if (testClassAnn != null){
+			return testClassAnn.methodThreads();
+		} else {
+			return 1;
+		}
 	}
 	
 	public static int getTestThreadCount(Method m) throws Exception{

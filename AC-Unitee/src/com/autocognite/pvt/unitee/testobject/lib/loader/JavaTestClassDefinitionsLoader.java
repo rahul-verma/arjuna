@@ -20,6 +20,7 @@ import org.apache.log4j.Logger;
 import com.autocognite.arjuna.annotations.Instances;
 import com.autocognite.arjuna.annotations.Skip;
 import com.autocognite.arjuna.annotations.TestClass;
+import com.autocognite.arjuna.annotations.TestMethod;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.arjuna.utils.DataBatteries;
@@ -116,8 +117,13 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 //							logger.debug("Filtering: " + fullQualifiedClassName);
 			Class<?> klass = this.loadClass(f, qualifiedName);
 			
-			AnnotationValidator.validateClassAnnotations(klass, qualifiedName);
+			boolean isReserved = false;
+			isReserved = AnnotationValidator.validateReservedNamedClass(klass, qualifiedName);
+			if (!isReserved){
+				AnnotationValidator.validateClassAnnotations(klass, qualifiedName);
+			}
 			
+			System.out.println(this.isTestClass(klass));
 			if (!this.isTestClass(klass)) {
 				ArjunaInternal.processNonTestClass(klass);
 				TestDefinitionsDB.addNonTestClassName(klass.getName());
@@ -274,7 +280,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 		throw new Exception("Not able to load test class: " + fullName);
 }
 	private boolean isTestClass(Class<?> klass){
-		return klass.isAnnotationPresent(TestClass.class);
+		return klass.isAnnotationPresent(TestClass.class) || klass.getSimpleName().startsWith("Test");
 	}
 	
 	private void processSkip(String fullName, Class<?> klass, JavaTestClassDefinition classDef) throws Exception{

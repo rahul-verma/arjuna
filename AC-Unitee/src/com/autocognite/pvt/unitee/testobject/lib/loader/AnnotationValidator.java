@@ -67,6 +67,13 @@ public class AnnotationValidator {
 		}		
 	}
 	
+	private static void displayErrorHeadingForNamedTestClass(String testObjectName, String qualifiedName, boolean annAnomaly, boolean ddtAnomaly, boolean depAnomaly){
+		if (annAnomaly || ddtAnomaly || depAnomaly){
+			Console.displayError(String.format("There is a critical error with your %s: %s", testObjectName, qualifiedName));
+			Console.displayError(String.format("Arjuna found that it is a test class using the reserved 'Test' prefix."));						
+		}		
+	}
+	
 	private static void displayErrorHeadingForNamedTest(String testObjectName, String qualifiedName, boolean annAnomaly, boolean ddtAnomaly, boolean depAnomaly){
 		if (annAnomaly || ddtAnomaly || depAnomaly){
 			Console.displayError(String.format("There is a critical error with your %s: %s", testObjectName, qualifiedName));
@@ -123,11 +130,11 @@ public class AnnotationValidator {
 			annAnomaly = true;
 		}
 		
-		if (ddtAnns.size() > 0){
+		if (ddtAnns.size() > 1){
 			ddtAnomaly = true;
 		}
 		
-		if (depAnns.size() > 0){
+		if (depAnns.size() > 1){
 			depAnomaly = true;
 		}
 		displayErrorHeadingForAnnotatedMethod(mainAnn, testObjectName, qualifiedName, annAnomaly, ddtAnomaly, depAnomaly);
@@ -185,12 +192,12 @@ public class AnnotationValidator {
 				annAnomaly = true;
 			}
 			
-			if (ddtAnns.size() > 0){
+			if (ddtAnns.size() > 1){
 				ddtAnomaly = true;
 			}
 			
 			
-			if (depAnns.size() > 0){
+			if (depAnns.size() > 1){
 				depAnomaly = true;
 			}
 			
@@ -205,15 +212,59 @@ public class AnnotationValidator {
 				annAnomaly = true;
 			}
 			
-			if (ddtAnns.size() > 0){
+			if (ddtAnns.size() > 1){
 				ddtAnomaly = true;
 			}
 			
 			
-			if (depAnns.size() > 0){
+			if (depAnns.size() > 1){
 				depAnomaly = true;
 			}
 			displayErrorHeadingForNamedFixture(fixtureName, testObjectName, qualifiedName, annAnomaly, ddtAnomaly, depAnomaly);
+			exitOnAnnotationAnomaly(testObjectName, qualifiedName, annNames, incompatibles, annAnomaly);
+			exitOnDDTAnnotationAnomaly(testObjectName, qualifiedName, annNames, ddtAnns, ddtAnomaly);
+			exitOnDepAnnotationAnomaly(testObjectName, qualifiedName, annNames, depAnns, depAnomaly);
+		}
+		
+		return isReserved;
+	}
+	
+	public static boolean validateReservedNamedClass(Class<?> klass, String qualifiedName){
+		boolean isReserved = false;
+		List<String> annNames = getAnnNames(klass.getAnnotations());
+		if (klass.getSimpleName().startsWith("Test")){
+			isReserved = true;
+		}
+		
+		if (annNames.size() == 0){
+			return isReserved;
+		} else {
+			Collections.sort(annNames);
+		}
+
+		List<String> incompatibles = new ArrayList<String>();
+		List<String> ddtAnns = new ArrayList<String>();
+		List<String> depAnns = new ArrayList<String>();
+		boolean annAnomaly = false;
+		boolean ddtAnomaly = false;
+		boolean depAnomaly = false;
+		String testObjectName = "class";
+		if (klass.getSimpleName().startsWith("Test")){
+			populateAnns("PrefixedTestClass", annNames, JavaTestClassDefinitionsLoader.CLASS_ANNOTATION_COMPAT, incompatibles, ddtAnns, depAnns);
+			if (incompatibles.size() > 0){
+				annAnomaly = true;
+			}
+			
+			if (ddtAnns.size() > 1){
+				ddtAnomaly = true;
+			}
+			
+			
+			if (depAnns.size() > 1){
+				depAnomaly = true;
+			}
+			
+			displayErrorHeadingForNamedTestClass(testObjectName, qualifiedName, annAnomaly, ddtAnomaly, depAnomaly);
 			exitOnAnnotationAnomaly(testObjectName, qualifiedName, annNames, incompatibles, annAnomaly);
 			exitOnDDTAnnotationAnomaly(testObjectName, qualifiedName, annNames, ddtAnns, ddtAnomaly);
 			exitOnDepAnnotationAnomaly(testObjectName, qualifiedName, annNames, depAnns, depAnomaly);
