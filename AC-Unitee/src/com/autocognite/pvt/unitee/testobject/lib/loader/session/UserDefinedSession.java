@@ -17,6 +17,7 @@ public class UserDefinedSession extends BaseSession{
 	private JsonObject configObj = null;
 	private JsonObject sObject = null;
 	private JsonObject udvObject = null;
+	private JsonObject userConfigObject = null;
 
 	public UserDefinedSession(String sessionName, String sessionFilePath) throws Exception{
 		super(sessionName);
@@ -28,6 +29,7 @@ public class UserDefinedSession extends BaseSession{
 		sObject = root.getAsJsonObject();
 		configObj = sObject.getAsJsonObject("config");
 		udvObject = sObject.getAsJsonObject("udv");
+		userConfigObject = sObject.getAsJsonObject("userConfig");
 	}
 	
 	private void exitAsAttrNotAnArray(String subjectName, String attr){
@@ -134,5 +136,10 @@ public class UserDefinedSession extends BaseSession{
 	@Override
 	public JsonObject getUDVObject() {
 		return this.udvObject;
+	}
+	
+	@Override
+	public JsonObject getUserConfigObject() {
+		return this.userConfigObject;
 	}
 }

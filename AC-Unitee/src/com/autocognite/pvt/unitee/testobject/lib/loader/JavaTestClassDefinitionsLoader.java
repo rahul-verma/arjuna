@@ -123,7 +123,6 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 				AnnotationValidator.validateClassAnnotations(klass, qualifiedName);
 			}
 			
-			System.out.println(this.isTestClass(klass));
 			if (!this.isTestClass(klass)) {
 				ArjunaInternal.processNonTestClass(klass);
 				TestDefinitionsDB.addNonTestClassName(klass.getName());

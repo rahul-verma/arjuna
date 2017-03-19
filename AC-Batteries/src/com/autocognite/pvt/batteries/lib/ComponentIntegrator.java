@@ -33,6 +33,7 @@ public class ComponentIntegrator {
 	private HashMap<String, String> readableNames = new HashMap<String, String>();
 	private StringsManager stringsManager = new StringsManager();
 	private DefaultStringKeyValueContainer udvMap = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer userConfigMap = new DefaultStringKeyValueContainer();
 
 	public void init() {
 		setRefDir(FileSystemBatteries.getJarFilePathForObject(this));
@@ -131,6 +132,10 @@ public class ComponentIntegrator {
 	public void processCentralUDVProperties(Map<String, Value> properties) {
 		this.udvMap.add(properties);
 	}
+	
+	public void processCentralUserConfigProperties(Map<String, Value> properties) {
+		this.userConfigMap.add(properties);
+	}
 
 	public Configuration freezeCentralConfig() throws Exception {
 		BaseConfiguration configuration = new BaseConfiguration();
@@ -140,6 +145,7 @@ public class ComponentIntegrator {
 			configuration.add(key, fworkProperties.get(key).value());
 		}
 		CentralConfiguration.setCentralUDVMap(this.udvMap);
+		CentralConfiguration.setCentralUserConfigMap(this.userConfigMap);
 		CentralConfiguration.setCentralProperties(configuration);
 		for (ComponentConfigurator configurator : configurators) {
 			configurator.loadComponent();

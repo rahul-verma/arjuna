@@ -2,6 +2,7 @@ package com.autocognite.pvt.batteries.lib;
 
 import java.util.HashMap;
 
+import com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.config.Configuration;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
@@ -12,6 +13,7 @@ public class CentralConfiguration {
 	private static HashMap<String, BaseConfiguration> threadMap = new HashMap<String, BaseConfiguration>();
 	private static StringsManager stringsManager = null;
 	private static DefaultStringKeyValueContainer udvMap = null;
+	private static DefaultStringKeyValueContainer userConfigMap = null;
 
 	public synchronized static Value getCentralProperty(String propPath) throws Exception {
 		return centralConfig.value(propPath);
@@ -105,9 +107,24 @@ public class CentralConfiguration {
 		CentralConfiguration.udvMap = udvMap;
 	}
 
+	public static void setCentralUserConfigMap(DefaultStringKeyValueContainer userConfigMap) throws Exception {
+		CentralConfiguration.userConfigMap = userConfigMap;
+	}
+	
 	public static DefaultStringKeyValueContainer cloneCentralUDVs() throws Exception {
 		DefaultStringKeyValueContainer container = new DefaultStringKeyValueContainer();
 		container.cloneAdd(CentralConfiguration.udvMap.items());
 		return container;
+	}
+	
+	public static DefaultStringKeyValueContainer cloneUserConfig() throws Exception {
+		DefaultStringKeyValueContainer container = new DefaultStringKeyValueContainer();
+		container.cloneAdd(CentralConfiguration.userConfigMap.items());
+		return container;
+	}
+	
+	public static ReadOnlyStringKeyValueContainer userConfig() throws Exception {
+//		System.out.println(CentralConfiguration.userConfigMap.items());
+		return CentralConfiguration.userConfigMap;
 	}
 }

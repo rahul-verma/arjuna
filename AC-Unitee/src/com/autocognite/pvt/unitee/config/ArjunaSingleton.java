@@ -127,6 +127,11 @@ public enum ArjunaSingleton {
 		udvReader.process();
 		Batteries.processCentralUDVProperties(udvReader.getProperties());
 		
+		ConfigObject userConfig = reader2.getConfig().getObject("userConfig");
+		HoconReader userConfigReader = new HoconConfigObjectReader(userConfig);
+		userConfigReader.process();
+		Batteries.processCentralUserConfigProperties(userConfigReader.getProperties());
+		
 		//CLI
 		cliConfigurator.setIntegrator(integrator);
 		cliConfigurator.setArgs(cliArgs);
@@ -218,6 +223,11 @@ public enum ArjunaSingleton {
 			Batteries.processCentralUDVProperties(sessionUDVReader.getProperties());
 		}
 		
+		if (session.getUserConfigObject() != null){
+			HoconReader sessionUserConfigReader = new HoconStringReader(session.getUserConfigObject().toString());
+			sessionUserConfigReader.process();
+			Batteries.processCentralUserConfigProperties(sessionUserConfigReader.getProperties());
+		}
 	}
 	
 	public void freeze() throws Exception{

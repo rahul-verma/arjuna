@@ -27,6 +27,7 @@ import org.apache.log4j.Logger;
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.DataReference;
+import com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer;
 import com.autocognite.arjuna.interfaces.Value;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 import com.autocognite.pvt.batteries.integration.ComponentConfigurator;
@@ -75,6 +76,10 @@ public class Batteries {
 	public static void processCentralUDVProperties(Map<String, Value> properties) {
 		integrator.processCentralUDVProperties(properties);
 	}
+	
+	public static void processCentralUserConfigProperties(Map<String, Value> properties) {
+		integrator.processCentralUserConfigProperties(properties);
+	}
 
 	public static void freezeCentralConfig() throws Exception {
 		Configuration configuration = integrator.freezeCentralConfig();
@@ -86,6 +91,14 @@ public class Batteries {
 	
 	public synchronized static DefaultStringKeyValueContainer cloneCentralUDVs() throws Exception {
 		return CentralConfiguration.cloneCentralUDVs();
+	}
+	
+	public synchronized static DefaultStringKeyValueContainer cloneCentralUserConfig() throws Exception {
+		return CentralConfiguration.cloneUserConfig();
+	}
+	
+	public synchronized static ReadOnlyStringKeyValueContainer sessionUserConfig() throws Exception {
+		return CentralConfiguration.userConfig();
 	}
 	
 	public synchronized static <T extends Enum<T>> Value value(T enumObject) throws Exception {

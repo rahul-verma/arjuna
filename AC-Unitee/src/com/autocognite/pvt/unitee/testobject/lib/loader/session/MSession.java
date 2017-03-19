@@ -54,4 +54,9 @@ public class MSession extends BaseSession{
 	public JsonObject getUDVObject() {
 		return new JsonObject();
 	}
+	
+	@Override
+	public JsonObject getUserConfigObject() {
+		return new JsonObject();
+	}
 }

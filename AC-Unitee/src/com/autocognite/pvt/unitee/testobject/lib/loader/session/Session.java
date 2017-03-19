@@ -22,4 +22,6 @@ public interface Session {
 	DefaultStringKeyValueContainer getUDV();
 
 	void setUDVs(DefaultStringKeyValueContainer udvs);
+
+	JsonObject getUserConfigObject();
 }
