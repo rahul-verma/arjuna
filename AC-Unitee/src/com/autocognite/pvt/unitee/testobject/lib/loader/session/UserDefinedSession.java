@@ -16,7 +16,7 @@ public class UserDefinedSession extends BaseSession{
 	private String sessionFilePath = null;
 	private JsonObject configObj = null;
 	private JsonObject sObject = null;
-	private JsonObject udvObject = null;
+	private JsonObject utvObject = null;
 	private JsonObject userConfigObject = null;
 
 	public UserDefinedSession(String sessionName, String sessionFilePath) throws Exception{
@@ -28,7 +28,7 @@ public class UserDefinedSession extends BaseSession{
 		JsonElement root = (new JsonParser()).parse(jsonString);
 		sObject = root.getAsJsonObject();
 		configObj = sObject.getAsJsonObject("config");
-		udvObject = sObject.getAsJsonObject("udv");
+		utvObject = sObject.getAsJsonObject("utv");
 		userConfigObject = sObject.getAsJsonObject("userConfig");
 	}
 	
@@ -134,8 +134,8 @@ public class UserDefinedSession extends BaseSession{
 	}
 
 	@Override
-	public JsonObject getUDVObject() {
-		return this.udvObject;
+	public JsonObject getUTVObject() {
+		return this.utvObject;
 	}
 	
 	@Override

@@ -18,7 +18,7 @@ public class TestPropertyAnnotationsProcessor {
 			TestClass testProps = (TestClass) annotation;
 			setAnnotatedProperties(testVars, testProps);
 		
-			if (testVars.testProps().priority() < 1){
+			if (testVars.test().priority() < 1){
 				System.err.println(String.format("You must provide prioriy >=1. Correction needed for: %s", classDef.getQualifiedName()));
 				System.err.println("Exiting...");
 				System.exit(1);
@@ -57,7 +57,7 @@ public class TestPropertyAnnotationsProcessor {
 			testVars.rawTestProps().setPriority(priority);
 		} else if ((priority < 1) && (priority != -51111)){
 			System.err.println(String.format("Provided priority: %d", priority));
-			System.err.println(String.format("You must provide prioriy >=1. Correction needed for: %s", testVars.objectProps().qualifiedName()));
+			System.err.println(String.format("You must provide prioriy >=1. Correction needed for: %s", testVars.object().qualifiedName()));
 			System.err.println("Exiting...");
 			System.exit(1);
 		}
@@ -68,7 +68,7 @@ public class TestPropertyAnnotationsProcessor {
 		setName(testVars, testProps.name());
 		setIdea(testVars, testProps.idea());
 		setPriority(testVars, testProps.priority());
-		setCustomProps(testVars, testProps.customProps());
+		setCustomProps(testVars, testProps.utp());
 	}
 	
 	private static void setAnnotatedProperties(InternalTestVariables testVars, TestMethod testProps) throws Exception{
@@ -76,7 +76,7 @@ public class TestPropertyAnnotationsProcessor {
 		setName(testVars, testProps.name());
 		setIdea(testVars, testProps.idea());
 		setPriority(testVars, testProps.priority());
-		setCustomProps(testVars, testProps.customProps());
+		setCustomProps(testVars, testProps.utp());
 	}
 	
 	private static void setCustomProps(InternalTestVariables testVars, String[] customProps) throws Exception{
@@ -84,7 +84,7 @@ public class TestPropertyAnnotationsProcessor {
 			ArrayList<String> pKV = DataBatteries.split(kv, "=");
 			String propName = pKV.get(0);
 			String propValue = pKV.get(1);
-			testVars.customProps().add(propName, propValue);
+			testVars.utp().add(propName, propValue);
 		}		
 	}
 }

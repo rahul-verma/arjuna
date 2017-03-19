@@ -22,5 +22,5 @@ public interface SessionSubNode {
 
 	SessionNode getSessionNode();
 
-	DefaultStringKeyValueContainer getUDV();
+	DefaultStringKeyValueContainer getUTV();
 }

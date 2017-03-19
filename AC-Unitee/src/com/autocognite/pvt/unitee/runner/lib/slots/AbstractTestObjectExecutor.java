@@ -38,7 +38,7 @@ public abstract class AbstractTestObjectExecutor {
 	}
 
 	protected void executeSetUp(TestObject testObj) throws Exception{
-		if ((!testObj.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup")
+		if ((!testObj.getTestVariables().object().group().toLowerCase().equals("mlgroup")
 				&&
 				(testObj.shouldExecuteSetUp()))){
 			if (ArjunaInternal.displayFixtureExecInfo){
@@ -58,7 +58,7 @@ public abstract class AbstractTestObjectExecutor {
 	}
 
 	protected void executeTearDown(TestObject testObj) throws Exception{
-		if ((!testObj.getTestVariables().objectProps().group().toLowerCase().equals("mlgroup") &&
+		if ((!testObj.getTestVariables().object().group().toLowerCase().equals("mlgroup") &&
 				(testObj.shouldExecuteTearDown()))){
 			if (testObj.hasCompleted()){
 				this.executeTearDownWrapper(testObj);

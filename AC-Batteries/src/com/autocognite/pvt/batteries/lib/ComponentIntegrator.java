@@ -32,7 +32,7 @@ public class ComponentIntegrator {
 	private Set<String> visiableProperties = new HashSet<String>();
 	private HashMap<String, String> readableNames = new HashMap<String, String>();
 	private StringsManager stringsManager = new StringsManager();
-	private DefaultStringKeyValueContainer udvMap = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer utvMap = new DefaultStringKeyValueContainer();
 	private DefaultStringKeyValueContainer userConfigMap = new DefaultStringKeyValueContainer();
 
 	public void init() {
@@ -129,8 +129,8 @@ public class ComponentIntegrator {
 		}
 	}
 
-	public void processCentralUDVProperties(Map<String, Value> properties) {
-		this.udvMap.add(properties);
+	public void processCentralUTVProperties(Map<String, Value> properties) {
+		this.utvMap.add(properties);
 	}
 	
 	public void processCentralUserConfigProperties(Map<String, Value> properties) {
@@ -144,7 +144,7 @@ public class ComponentIntegrator {
 		for (String key : fworkProperties.keySet()) {
 			configuration.add(key, fworkProperties.get(key).value());
 		}
-		CentralConfiguration.setCentralUDVMap(this.udvMap);
+		CentralConfiguration.setCentralUTVMap(this.utvMap);
 		CentralConfiguration.setCentralUserConfigMap(this.userConfigMap);
 		CentralConfiguration.setCentralProperties(configuration);
 		for (ComponentConfigurator configurator : configurators) {

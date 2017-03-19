@@ -74,7 +74,7 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 			case SINGLEARG_TESTVARS:
 				if (ArjunaInternal.displayTestObjConstructionInfo){
 					logger.debug(String.format("Calling Test Var constructor for %s", this.getQualifiedName()));
-					logger.debug(this.getTestVariables().udv().strItems());
+					logger.debug(this.getTestVariables().utv().strItems());
 				}
 				this.setUserTestClassObject(this.getConstructor().newInstance(this.getTestVariables()));
 				break;	

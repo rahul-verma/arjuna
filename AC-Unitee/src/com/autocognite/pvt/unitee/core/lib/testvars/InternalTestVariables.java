@@ -16,7 +16,7 @@ public interface InternalTestVariables extends TestVariables {
 
 	DefaultStringKeyValueContainer rawCustomProps() throws Exception;
 
-	DefaultStringKeyValueContainer rawUdv() throws Exception;
+	DefaultStringKeyValueContainer rawUtv() throws Exception;
 	
 	void setObjectProps(InternalTestObjectProperties props) throws Exception;
 
@@ -24,7 +24,7 @@ public interface InternalTestVariables extends TestVariables {
 
 	void setCustomProps(DefaultStringKeyValueContainer props) throws Exception;
 
-	void setUdv(DefaultStringKeyValueContainer props) throws Exception;
+	void setUtv(DefaultStringKeyValueContainer props) throws Exception;
 
 	void populateDefaults() throws Exception;
 

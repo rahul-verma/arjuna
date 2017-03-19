@@ -73,8 +73,8 @@ public class Batteries {
 		integrator.processConfigProperties(properties);
 	}
 
-	public static void processCentralUDVProperties(Map<String, Value> properties) {
-		integrator.processCentralUDVProperties(properties);
+	public static void processCentralUTVProperties(Map<String, Value> properties) {
+		integrator.processCentralUTVProperties(properties);
 	}
 	
 	public static void processCentralUserConfigProperties(Map<String, Value> properties) {
@@ -89,8 +89,8 @@ public class Batteries {
 		public static final String EXIT_ON_ERROR = "message.exit.on.error";
 	}
 	
-	public synchronized static DefaultStringKeyValueContainer cloneCentralUDVs() throws Exception {
-		return CentralConfiguration.cloneCentralUDVs();
+	public synchronized static DefaultStringKeyValueContainer cloneCentralUTVs() throws Exception {
+		return CentralConfiguration.cloneCentralUTVs();
 	}
 	
 	public synchronized static DefaultStringKeyValueContainer cloneCentralUserConfig() throws Exception {

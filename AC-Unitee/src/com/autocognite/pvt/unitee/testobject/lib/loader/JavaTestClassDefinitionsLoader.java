@@ -190,7 +190,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 			classDef.setInstanceCount(instanceCount);
 			classDef.setInstanceThreadCount(instanceThreadCount);
 			
-			instanceProps = JavaTestLoadingUtils.loadUDVFromInstancesAnnotation(instancesAnn, classDef.getInstanceCount(), userHasSuppliedProperties);
+			instanceProps = JavaTestLoadingUtils.loadUTVFromInstancesAnnotation(instancesAnn, classDef.getInstanceCount(), userHasSuppliedProperties);
 
 			ConstructorDef constructorType = new ConstructorDef();
 			Constructor<?> constructor = this.getConstructor(klass, constructorType, userHasSuppliedProperties, classDef.isDataRefPresent());
@@ -203,7 +203,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 			}
 //			logger.debug(classDef.getInstanceCount());
 			for (int i=1; i <= classDef.getInstanceCount(); i++){
-				classDef.setUdvForInstance(i, instanceProps.get(i));
+				classDef.setUtvForInstance(i, instanceProps.get(i));
 			}
 			
 			TestCreatorLoader creatorLoader = new JavaTestMethodsDefinitionLoader(this, classDef);

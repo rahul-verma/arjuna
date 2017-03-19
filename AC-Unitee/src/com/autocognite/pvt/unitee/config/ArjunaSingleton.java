@@ -57,6 +57,7 @@ import com.autocognite.pvt.unitee.testobject.lib.loader.group.TestGroupsDB;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.MSession;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.Session;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
+import com.typesafe.config.ConfigException;
 import com.typesafe.config.ConfigObject;
 
 public enum ArjunaSingleton {
@@ -117,20 +118,32 @@ public enum ArjunaSingleton {
 		HoconReader reader2 = new HoconFileReader(integrator.value(BatteriesPropertyType.DIRECTORY_CONFIG).asString() + "/" + integrator.value(BatteriesPropertyType.CONFIG_FILE_NAME).asString());
 		reader2.process();
 		
-		ConfigObject configObj = reader2.getConfig().getObject("config");
-		HoconReader configReader = new HoconConfigObjectReader(configObj);
-		configReader.process();
-		Batteries.processConfigProperties(configReader.getProperties());
+		try{
+			ConfigObject configObj = reader2.getConfig().getObject("config");
+			HoconReader configReader = new HoconConfigObjectReader(configObj);
+			configReader.process();
+			Batteries.processConfigProperties(configReader.getProperties());
+		} catch (ConfigException e){
+			// config may not be defined. It's ok. It's optional
+		}
 		
-		ConfigObject udvObj = reader2.getConfig().getObject("udv");
-		HoconReader udvReader = new HoconConfigObjectReader(udvObj);
-		udvReader.process();
-		Batteries.processCentralUDVProperties(udvReader.getProperties());
+		try{
+			ConfigObject utvObj = reader2.getConfig().getObject("utv");
+			HoconReader utvReader = new HoconConfigObjectReader(utvObj);
+			utvReader.process();
+			Batteries.processCentralUTVProperties(utvReader.getProperties());
+		} catch (ConfigException e){
+			// utv may not be defined. It's ok. It's optional
+		}
 		
-		ConfigObject userConfig = reader2.getConfig().getObject("userConfig");
-		HoconReader userConfigReader = new HoconConfigObjectReader(userConfig);
-		userConfigReader.process();
-		Batteries.processCentralUserConfigProperties(userConfigReader.getProperties());
+		try{
+			ConfigObject userConfig = reader2.getConfig().getObject("userConfig");
+			HoconReader userConfigReader = new HoconConfigObjectReader(userConfig);
+			userConfigReader.process();
+			Batteries.processCentralUserConfigProperties(userConfigReader.getProperties());
+		} catch (ConfigException e){
+			// userConfig may not be defined. It's ok. It's optional
+		}
 		
 		//CLI
 		cliConfigurator.setIntegrator(integrator);
@@ -217,10 +230,10 @@ public enum ArjunaSingleton {
 			Batteries.processConfigProperties(cReader.getProperties());	
 		}
 		
-		if (session.getUDVObject() != null){
-			HoconReader sessionUDVReader = new HoconStringReader(session.getUDVObject().toString());
-			sessionUDVReader.process();
-			Batteries.processCentralUDVProperties(sessionUDVReader.getProperties());
+		if (session.getUTVObject() != null){
+			HoconReader sessionUTVReader = new HoconStringReader(session.getUTVObject().toString());
+			sessionUTVReader.process();
+			Batteries.processCentralUTVProperties(sessionUTVReader.getProperties());
 		}
 		
 		if (session.getUserConfigObject() != null){
@@ -238,7 +251,7 @@ public enum ArjunaSingleton {
 	}
 	
 	public void loadSession() throws Exception{
-		session.setUDVs(Batteries.cloneCentralUDVs());
+		session.setUTVs(Batteries.cloneCentralUTVs());
 		try{
 			groupsDB.createGroupForCLIOptions(this.cliPickerOptions);
 		} catch (PickerMisConfiguration e){

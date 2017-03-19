@@ -279,7 +279,7 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 	
 	private boolean shouldIncludeAnnotatedTestProps = false;
 	private boolean shouldIncludeCustomProps = false;
-	private boolean shouldIncludeUdv = false;
+	private boolean shouldIncludeUtv = false;
 	private boolean shouldIncludeDataRecord = false;
 	private boolean shouldIncludeDataRef = false;
 	
@@ -303,7 +303,7 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 		execTestProps = ArjunaInternal.getTestAttrList();
 		shouldIncludeAnnotatedTestProps = ArjunaInternal.shouldIncludeAnnotatedTestPropsInReport();
 		shouldIncludeCustomProps = ArjunaInternal.shouldIncludeCustomPropsInReport();
-		shouldIncludeUdv = ArjunaInternal.shouldIncludeUdvInReport();
+		shouldIncludeUtv = ArjunaInternal.shouldIncludeUtvInReport();
 		shouldIncludeDataRecord = ArjunaInternal.shouldIncludeDataRecordInReport();
 		shouldIncludeDataRef = ArjunaInternal.shouldIncludeDataRefInReport();
 		execResultProps = ArjunaInternal.getTestResultAttrList();
@@ -324,7 +324,7 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 			this.execHeaders.add("Custom Test Properties");
 		}
 		
-		if (shouldIncludeUdv){
+		if (shouldIncludeUtv){
 			this.execHeaders.add("User Defined Values");
 		}
 		
@@ -366,9 +366,9 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 			resultArr.add(cb.toString());
 		}
 		
-		if (shouldIncludeUdv){
+		if (shouldIncludeUtv){
 			StringBuilder ub = new StringBuilder();
-			Map<String,Value> umap = reportable.udv().items();
+			Map<String,Value> umap = reportable.utv().items();
 			if (umap.size() == 0){
 				ub.append("NA");
 			} else {
@@ -381,7 +381,7 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 		
 		if (this.shouldIncludeDataRecord){
 			StringBuilder ub = new StringBuilder();
-			DataRecord dr = reportable.testVars().dataRecord();
+			DataRecord dr = reportable.testVars().record();
 			if (dr != null){
 				Map<String,Value> dmap = dr.items();
 				if (dmap.size() == 0){
@@ -466,9 +466,9 @@ class ExcelStepResultWriter extends ExcelResultWriter<StepResult> {
 	
 	public void update(TestVariables testVars, List<StepResult> reportables) throws Exception {
 		List<String> testRelated = new ArrayList<String>(); 
-		testRelated.addAll(testVars.objectProps().strings(this.stepTestObjectProps));
+		testRelated.addAll(testVars.object().strings(this.stepTestObjectProps));
 		if (shouldIncludeAnnotatedTestProps){
-			testRelated.addAll(testVars.testProps().strings(this.stepTestProps));
+			testRelated.addAll(testVars.test().strings(this.stepTestProps));
 		}
 		for (StepResult reportable: reportables){
 			List<String> resultArr = new ArrayList<String>(); 

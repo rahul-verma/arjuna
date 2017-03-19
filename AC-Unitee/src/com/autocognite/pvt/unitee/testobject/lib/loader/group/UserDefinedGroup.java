@@ -40,10 +40,10 @@ public class UserDefinedGroup extends BaseGroup{
 		this.setLoader(new JavaTestClassLoader(this));
 	}
 	
-	private void errorUdvNotObject(){
+	private void errorUtvNotObject(){
 		Console.displayError(
 				String.format(
-						">>udv<< attribute in group definition should be a JSON object. Fix session template file: >>%s<<",
+						">>utv<< attribute in group definition should be a JSON object. Fix session template file: >>%s<<",
 						groupFilePath
 				));			
 		Console.displayError("Exiting...");
@@ -63,12 +63,12 @@ public class UserDefinedGroup extends BaseGroup{
 	private void processJson(JsonObject gObject) throws Exception{
 		
 		try{
-			JsonObject udv = gObject.getAsJsonObject("udv");
-			HoconReader udvReader = new HoconStringReader(udv.toString());
-			udvReader.process();
-			this.getUDV().add(udvReader.getProperties());
+			JsonObject utv = gObject.getAsJsonObject("utv");
+			HoconReader utvReader = new HoconStringReader(utv.toString());
+			utvReader.process();
+			this.getUTV().add(utvReader.getProperties());
 		} catch (ClassCastException e){
-			this.errorUdvNotObject();
+			this.errorUtvNotObject();
 		} catch (NullPointerException e){
 			// do nothing
 		}

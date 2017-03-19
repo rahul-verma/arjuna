@@ -29,5 +29,5 @@ public @interface Instances {
 	int value() default 1;
 	int count() default 1;
 	int instanceThreads() default 1;
-	String[] udv() default "NOT_SET";
+	String[] utv() default "NOT_SET";
 }

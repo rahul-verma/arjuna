@@ -242,14 +242,14 @@ public abstract class BaseTestClassFixture implements Fixture {
 	}
 	
 	protected String getFixturePoint() throws Exception {
-		String qualifiedName = this.getTestObject().getTestVariables().objectProps().qualifiedName();
+		String qualifiedName = this.getTestObject().getTestVariables().object().qualifiedName();
 		String suffix = null;
 		String suffix2 = null;
 		String suffix3 = null;
 		if (ArjunaInternal.displayFixtureExecInfo){
-			logger.debug("Retreiving fixture execution point for: " + this.getTestObject().getTestVariables().objectProps().objectType());
+			logger.debug("Retreiving fixture execution point for: " + this.getTestObject().getTestVariables().object().objectType());
 		}
-		switch (this.getTestObject().getTestVariables().objectProps().objectType()){
+		switch (this.getTestObject().getTestVariables().object().objectType()){
 		case TEST_CLASS:
 			suffix = String.format("Within a group, once %%s Test Class [%s].", qualifiedName);
 			switch(this.getType()){		
@@ -274,7 +274,7 @@ public abstract class BaseTestClassFixture implements Fixture {
 		case TEST_METHOD:
 			suffix = String.format("Once %%s Test Class [%s], Instance [%d], Fragment [%d], Method [%s]", qualifiedName, 
 					this.getTestClassInstance().getInstanceNumber(), this.getTestClassFragment().getFragmentNumber(),
-					this.getTestObject().getTestVariables().objectProps().name());
+					this.getTestObject().getTestVariables().object().name());
 			switch(this.getType()){		
 			case SETUP_METHOD: return String.format(suffix, "before");
 			case TEARDOWN_METHOD: return String.format(suffix, "after");
@@ -283,8 +283,8 @@ public abstract class BaseTestClassFixture implements Fixture {
 		case TEST_METHOD_INSTANCE:
 			suffix = String.format("Once %%s Test Class [%s], Instance [%d], Fragment [%d], Method [%s], Method Instance [%d]", qualifiedName, 
 					this.getTestClassInstance().getInstanceNumber(), this.getTestClassFragment().getFragmentNumber(),
-					this.getTestObject().getTestVariables().objectProps().name(),
-					this.getTestObject().getTestVariables().objectProps().methodInstanceNumber());
+					this.getTestObject().getTestVariables().object().name(),
+					this.getTestObject().getTestVariables().object().methodInstanceNumber());
 			switch(this.getType()){		
 			case SETUP_METHOD_INSTANCE: return String.format(suffix, "before");
 			case TEARDOWN_METHOD_INSTANCE: return String.format(suffix, "after");
@@ -293,9 +293,9 @@ public abstract class BaseTestClassFixture implements Fixture {
 		case TEST:
 			suffix = String.format("Once %%s Test Class [%s], Instance [%d], Fragment [%d], Method [%s], Method Instance [%d], Test [%d]", qualifiedName, 
 					this.getTestClassInstance().getInstanceNumber(), this.getTestClassFragment().getFragmentNumber(),
-					this.getTestObject().getTestVariables().objectProps().name(),
-					this.getTestObject().getTestVariables().objectProps().methodInstanceNumber(),
-					this.getTestObject().getTestVariables().objectProps().testNumber());
+					this.getTestObject().getTestVariables().object().name(),
+					this.getTestObject().getTestVariables().object().methodInstanceNumber(),
+					this.getTestObject().getTestVariables().object().testNumber());
 			switch(this.getType()){		
 			case SETUP_TEST: return String.format(suffix, "before");
 			case TEARDOWN_TEST: return String.format(suffix, "after");

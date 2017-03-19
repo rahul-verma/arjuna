@@ -23,14 +23,14 @@ public class BaseSessionSubNode implements SessionSubNode{
 	private Session session = null;
 	private SessionNode sessionNode = null;
 	private String name = null;
-	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
 	
 	private BaseSessionSubNode(SessionNode sessionNode, int id) throws Exception{
 		this.session = sessionNode.getSession();
 		this.sessionNode = sessionNode;
 		this.id = id;
 		this.name = this.sessionNode.getName() + "-" + this.id;
-		this.udvars.cloneAdd(sessionNode.getUDV().items());
+		this.utvars.cloneAdd(sessionNode.getUTV().items());
 	}
 	
 	public BaseSessionSubNode(SessionNode sessionNode, int id, Group group) throws Exception{
@@ -48,12 +48,12 @@ public class BaseSessionSubNode implements SessionSubNode{
 	public BaseSessionSubNode(SessionNode sessionNode, int id, JsonObject groupObj) throws Exception{
 		this(sessionNode, id);
 		try{
-			JsonObject udv = groupObj.getAsJsonObject("udv");
-			HoconReader udvReader = new HoconStringReader(udv.toString());
-			udvReader.process();
-			this.udvars.add(udvReader.getProperties());
+			JsonObject utv = groupObj.getAsJsonObject("utv");
+			HoconReader utvReader = new HoconStringReader(utv.toString());
+			utvReader.process();
+			this.utvars.add(utvReader.getProperties());
 		} catch (ClassCastException e){
-			this.errorUdvNotObject();
+			this.errorUtvNotObject();
 		} catch (NullPointerException e){
 			// do nothing
 		}
@@ -67,10 +67,10 @@ public class BaseSessionSubNode implements SessionSubNode{
 		this.name += "-" + group.getName();
 	}
 	
-	private void errorUdvNotObject(){
+	private void errorUtvNotObject(){
 		Console.displayError(
 				String.format(
-						">>udv<< attribute in session sub node definition should be a JSON object. Fix session template file: >>%s<<",
+						">>utv<< attribute in session sub node definition should be a JSON object. Fix session template file: >>%s<<",
 						session.getSessionFilePath()
 				));			
 		Console.displayError("Exiting...");
@@ -126,8 +126,8 @@ public class BaseSessionSubNode implements SessionSubNode{
 		return this.sessionNode;
 	}
 	@Override
-	public DefaultStringKeyValueContainer getUDV() {
-		return this.udvars;
+	public DefaultStringKeyValueContainer getUTV() {
+		return this.utvars;
 	}
  
 }

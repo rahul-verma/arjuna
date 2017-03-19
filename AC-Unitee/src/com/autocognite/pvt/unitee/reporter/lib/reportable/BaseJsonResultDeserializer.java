@@ -59,11 +59,11 @@ public class BaseJsonResultDeserializer {
 			processJsonObjectForEnumMap(customPropsObj, customProps);
 			testVars.setCustomProps(customProps);	
 
-			//Deserialize udv
-			JsonObject udvObj = root.get("udv").getAsJsonObject();
-			DefaultStringKeyValueContainer udvProps = new DefaultStringKeyValueContainer();
-			processJsonObjectForEnumMap(udvObj, udvProps);
-			testVars.setUdv(udvProps);	
+			//Deserialize utv
+			JsonObject utvObj = root.get("utv").getAsJsonObject();
+			DefaultStringKeyValueContainer utvProps = new DefaultStringKeyValueContainer();
+			processJsonObjectForEnumMap(utvObj, utvProps);
+			testVars.setUtv(utvProps);	
 
 			//Deserialize dataRecord
 			JsonObject drObj = root.get("dataRecord").getAsJsonObject();

@@ -51,7 +51,7 @@ public class MSession extends BaseSession{
 	}
 
 	@Override
-	public JsonObject getUDVObject() {
+	public JsonObject getUTVObject() {
 		return new JsonObject();
 	}
 	

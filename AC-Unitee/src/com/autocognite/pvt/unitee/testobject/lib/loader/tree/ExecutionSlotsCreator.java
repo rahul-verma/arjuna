@@ -36,11 +36,11 @@ public class ExecutionSlotsCreator {
 	private Iterator<TestMethodNode> slotCreatorIter = null;
 	private int currentSlotNum = 0;
 	private HashMap<String,Integer> methodToSlotMap = new HashMap<String,Integer>();
-	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
 //	
 	public ExecutionSlotsCreator(Group group) throws Exception{
 		this.group = group;
-		this.udvars.cloneAdd(group.getUDV().items());
+		this.utvars.cloneAdd(group.getUTV().items());
 	}
 	
 	public void addTestCreatorName(String name){

@@ -4,18 +4,18 @@ import java.util.Map;
 
 public interface TestVariables {
 
-	TestObjectProperties objectProps() throws Exception;
+	TestObjectProperties object() throws Exception;
 
-	TestProperties testProps() throws Exception;
+	TestProperties test() throws Exception;
 
-	StringKeyValueContainer customProps() throws Exception;
+	StringKeyValueContainer utp() throws Exception;
 
-	StringKeyValueContainer udv() throws Exception;
+	StringKeyValueContainer utv() throws Exception;
 
-	DataRecord dataRecord();
+	DataRecord record();
 
-	DataReference dataRef(String refName) throws Exception;
+	DataReference refer(String refName) throws Exception;
 	
-	Map<String, DataReference> getAllDataReferences();
+	Map<String, DataReference> references();
 
 }

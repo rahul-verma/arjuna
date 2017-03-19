@@ -60,7 +60,7 @@ public class JavaTestClassDefinition {
 	public JavaTestClassDefinition() throws Exception{
 		this.testVars = new DefaultTestVariables();
 		this.testVars.populateDefaults();
-		this.testVars.rawUdv().add(Batteries.cloneCentralUDVs());
+		this.testVars.rawUtv().add(Batteries.cloneCentralUTVs());
 	}
 	
 	public String getPackageName() throws Exception {
@@ -103,15 +103,15 @@ public class JavaTestClassDefinition {
 		}
 	}
 
-	public void setUdvForInstance(int instanceNumber, HashMap<String, String> udv) throws Exception {
+	public void setUtvForInstance(int instanceNumber, HashMap<String, String> utv) throws Exception {
 		if (ArjunaInternal.displayLoadingInfo){
 			logger.debug(this.testClassInstanceTestVars);
 			logger.debug(instanceNumber);
 			logger.debug(this.testClassInstanceTestVars.get(instanceNumber));
-			logger.debug(this.testClassInstanceTestVars.get(instanceNumber).udv());
-			logger.debug(udv);
+			logger.debug(this.testClassInstanceTestVars.get(instanceNumber).utv());
+			logger.debug(utv);
 		}
-		this.testClassInstanceTestVars.get(instanceNumber).rawUdv().addAsStringValue(udv);
+		this.testClassInstanceTestVars.get(instanceNumber).rawUtv().addAsStringValue(utv);
 	}
 
 	public Class<?> getUserTestClass() {

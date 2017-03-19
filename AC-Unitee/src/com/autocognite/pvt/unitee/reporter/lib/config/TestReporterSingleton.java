@@ -66,7 +66,7 @@ public enum TestReporterSingleton {
 	
 	private boolean shouldIncludeAnnotatedTestProps = false;
 	private boolean shouldIncludeCustomProps = false;
-	private boolean shouldIncludeUdv = false;
+	private boolean shouldIncludeUtv = false;
 	private boolean shouldIncludeDataRecord = false;
 	private boolean shouldIncludeDataRef = false;
 	
@@ -118,7 +118,7 @@ public enum TestReporterSingleton {
 			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_MINIMAL_INCLUDED_RTYPE).asEnumList(TestResultType.class));
 			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_ANNOTATED_ON).asBoolean();
 			shouldIncludeCustomProps = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_CUSTOM_ON).asBoolean();
-			shouldIncludeUdv = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_UDV_ON).asBoolean();
+			shouldIncludeUtv = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_UTV_ON).asBoolean();
 			shouldIncludeDataRecord = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_DATARECORD_ON).asBoolean();
 			shouldIncludeDataRef = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_DATAREF_ON).asBoolean();
 			break;
@@ -131,7 +131,7 @@ public enum TestReporterSingleton {
 			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_BASIC_INCLUDED_RTYPE).asEnumList(TestResultType.class));
 			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_ANNOTATED_ON).asBoolean();
 			shouldIncludeCustomProps = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_CUSTOM_ON).asBoolean();
-			shouldIncludeUdv = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_UDV_ON).asBoolean();
+			shouldIncludeUtv = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_UTV_ON).asBoolean();
 			shouldIncludeDataRecord = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_DATARECORD_ON).asBoolean();
 			shouldIncludeDataRef = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_DATAREF_ON).asBoolean();
 			break;
@@ -144,7 +144,7 @@ public enum TestReporterSingleton {
 			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_ADVANCED_INCLUDED_RTYPE).asEnumList(TestResultType.class));
 			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_ANNOTATED_ON).asBoolean();
 			shouldIncludeCustomProps = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_CUSTOM_ON).asBoolean();
-			shouldIncludeUdv = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_UDV_ON).asBoolean();
+			shouldIncludeUtv = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_UTV_ON).asBoolean();
 			shouldIncludeDataRecord = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_DATARECORD_ON).asBoolean();
 			shouldIncludeDataRef = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_DATAREF_ON).asBoolean();
 			break;
@@ -157,7 +157,7 @@ public enum TestReporterSingleton {
 			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_DEBUG_INCLUDED_RTYPE).asEnumList(TestResultType.class));
 			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_ANNOTATED_ON).asBoolean();
 			shouldIncludeCustomProps = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_CUSTOM_ON).asBoolean();
-			shouldIncludeUdv = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_UDV_ON).asBoolean();
+			shouldIncludeUtv = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_UTV_ON).asBoolean();
 			shouldIncludeDataRecord = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_DATARECORD_ON).asBoolean();
 			shouldIncludeDataRef = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_DATAREF_ON).asBoolean();
 			break;
@@ -231,8 +231,8 @@ public enum TestReporterSingleton {
 		return this.shouldIncludeCustomProps;
 	}
 	
-	public boolean shouldIncludeUdvInReport(){
-		return this.shouldIncludeUdv;
+	public boolean shouldIncludeUtvInReport(){
+		return this.shouldIncludeUtv;
 	}
 	
 	public boolean shouldIncludeDataRecordInReport(){

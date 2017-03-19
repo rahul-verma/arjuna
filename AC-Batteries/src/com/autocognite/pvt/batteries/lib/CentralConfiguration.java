@@ -12,7 +12,7 @@ public class CentralConfiguration {
 	private static BaseConfiguration centralConfig = null;
 	private static HashMap<String, BaseConfiguration> threadMap = new HashMap<String, BaseConfiguration>();
 	private static StringsManager stringsManager = null;
-	private static DefaultStringKeyValueContainer udvMap = null;
+	private static DefaultStringKeyValueContainer utvMap = null;
 	private static DefaultStringKeyValueContainer userConfigMap = null;
 
 	public synchronized static Value getCentralProperty(String propPath) throws Exception {
@@ -103,17 +103,17 @@ public class CentralConfiguration {
 		return CentralConfiguration.centralConfig;
 	}
 
-	public static void setCentralUDVMap(DefaultStringKeyValueContainer udvMap) {
-		CentralConfiguration.udvMap = udvMap;
+	public static void setCentralUTVMap(DefaultStringKeyValueContainer utvMap) {
+		CentralConfiguration.utvMap = utvMap;
 	}
 
 	public static void setCentralUserConfigMap(DefaultStringKeyValueContainer userConfigMap) throws Exception {
 		CentralConfiguration.userConfigMap = userConfigMap;
 	}
 	
-	public static DefaultStringKeyValueContainer cloneCentralUDVs() throws Exception {
+	public static DefaultStringKeyValueContainer cloneCentralUTVs() throws Exception {
 		DefaultStringKeyValueContainer container = new DefaultStringKeyValueContainer();
-		container.cloneAdd(CentralConfiguration.udvMap.items());
+		container.cloneAdd(CentralConfiguration.utvMap.items());
 		return container;
 	}
 	

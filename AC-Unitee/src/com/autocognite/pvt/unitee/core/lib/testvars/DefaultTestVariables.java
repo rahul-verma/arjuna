@@ -17,7 +17,7 @@ public class DefaultTestVariables implements InternalTestVariables {
 	private InternalTestObjectProperties objectProps = new DefaultTestObjectProperties();
 	private InternalTestProperties testProps = new DefaultTestProperties();
 	private DefaultStringKeyValueContainer customProps = new DefaultStringKeyValueContainer();
-	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
 	private DataRecord dataRecord =  null;
 	private Map<String,DataReference> dataRefMap = new HashMap<String,DataReference>();
 	private static DataRecord dr = new DefaultDataRecord();
@@ -35,7 +35,7 @@ public class DefaultTestVariables implements InternalTestVariables {
 	 * @see com.autocognite.result.TestVariables#autoProps()
 	 */
 	@Override
-	public TestObjectProperties objectProps() throws Exception {
+	public TestObjectProperties object() throws Exception {
 		return this.rawObjectProps();
 	}
 	
@@ -43,7 +43,7 @@ public class DefaultTestVariables implements InternalTestVariables {
 	 * @see com.autocognite.result.TestVariables#testProps()
 	 */
 	@Override
-	public TestProperties testProps() throws Exception {
+	public TestProperties test() throws Exception {
 		return this.rawTestProps();
 	}
 	
@@ -51,16 +51,16 @@ public class DefaultTestVariables implements InternalTestVariables {
 	 * @see com.autocognite.result.TestVariables#customProps()
 	 */
 	@Override
-	public DefaultStringKeyValueContainer customProps() throws Exception {
+	public DefaultStringKeyValueContainer utp() throws Exception {
 		return this.rawCustomProps();
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.autocognite.result.TestVariables#udv()
+	 * @see com.autocognite.result.TestVariables#utv()
 	 */
 	@Override
-	public DefaultStringKeyValueContainer udv() throws Exception {
-		return this.rawUdv();
+	public DefaultStringKeyValueContainer utv() throws Exception {
+		return this.rawUtv();
 	}
 
 	@Override
@@ -79,8 +79,8 @@ public class DefaultTestVariables implements InternalTestVariables {
 	}
 
 	@Override
-	public DefaultStringKeyValueContainer rawUdv() throws Exception {
-		return this.udvars;
+	public DefaultStringKeyValueContainer rawUtv() throws Exception {
+		return this.utvars;
 	}
 
 	@Override
@@ -99,8 +99,8 @@ public class DefaultTestVariables implements InternalTestVariables {
 	}
 
 	@Override
-	public void setUdv(DefaultStringKeyValueContainer props) throws Exception {
-		this.udvars = props;
+	public void setUtv(DefaultStringKeyValueContainer props) throws Exception {
+		this.utvars = props;
 	}
 	
 	public JsonObject asJsonObject() throws Exception{
@@ -116,12 +116,12 @@ public class DefaultTestVariables implements InternalTestVariables {
 	}
 	
 	@Override
-	public DataRecord dataRecord() {
+	public DataRecord record() {
 		return this.dataRecord;
 	}
 
 	@Override
-	public DataReference dataRef(String refName) throws Exception {
+	public DataReference refer(String refName) throws Exception {
 		String uName = refName.toUpperCase();
 		if (this.dataRefMap.containsKey(uName)){
 			return this.dataRefMap.get(uName);
@@ -143,7 +143,7 @@ public class DefaultTestVariables implements InternalTestVariables {
 	}
 
 	@Override
-	public Map<String,DataReference> getAllDataReferences() {
+	public Map<String,DataReference> references() {
 		return this.dataRefMap;
 	}
 

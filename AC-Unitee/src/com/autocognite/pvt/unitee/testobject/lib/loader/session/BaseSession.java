@@ -16,7 +16,7 @@ public abstract class BaseSession implements Session {
 	private Iterator<SessionNode> iter = null;
 	private int testMethodCount = 0;
 	private String name = null;
-	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
 	
 	public BaseSession(String name){
 		this.name = name;
@@ -61,12 +61,12 @@ public abstract class BaseSession implements Session {
 	}
 	
 	@Override
-	public void setUDVs(DefaultStringKeyValueContainer udvs){
-		udvars = udvs;
+	public void setUTVs(DefaultStringKeyValueContainer utvs){
+		utvars = utvs;
 	}
 	
 	@Override 	
-	public DefaultStringKeyValueContainer getUDV(){
-		return this.udvars;
+	public DefaultStringKeyValueContainer getUTV(){
+		return this.utvars;
 	}
 }

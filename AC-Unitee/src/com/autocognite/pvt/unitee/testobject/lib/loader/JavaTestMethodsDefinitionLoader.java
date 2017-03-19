@@ -222,20 +222,20 @@ public class JavaTestMethodsDefinitionLoader implements TestCreatorLoader {
 					logger.debug("Instance Count: " + methodDef.getInstanceCount());
 				}
 				hasUserSuppliedProperties = JavaTestLoadingUtils.hasUserSuppliedProperties(mQualifiedName, instancesAnn);
-				if (ArjunaInternal.displayUDVProcessingInfo){
-					logger.debug("User has supplied UDVs: " + hasUserSuppliedProperties);
+				if (ArjunaInternal.displayUTVProcessingInfo){
+					logger.debug("User has supplied UTVs: " + hasUserSuppliedProperties);
 				}
 			}
 			
 			boolean testVarsAreMandatory = hasUserSuppliedProperties || methodDef.isDataRefPresent() || hasDataSourceAnn;
 			this.populateExpectedSignature(m, methodDef, mQualifiedName, testVarsAreMandatory);
-			instanceProps = JavaTestLoadingUtils.loadUDVFromInstancesAnnotation(instancesAnn, methodDef.getInstanceCount(), hasUserSuppliedProperties);	
+			instanceProps = JavaTestLoadingUtils.loadUTVFromInstancesAnnotation(instancesAnn, methodDef.getInstanceCount(), hasUserSuppliedProperties);	
 			
 			if (ArjunaInternal.displayLoadingInfo){
 				logger.debug("Adding instances. count=" + methodDef.getInstanceCount());
 			}
 			for (int i=1; i <= methodDef.getInstanceCount(); i++){
-				methodDef.setUdvForInstance(i, instanceProps.get(i));
+				methodDef.setUtvForInstance(i, instanceProps.get(i));
 			}
 			
 			this.getTestClassDef().addTestMethodDefinition(mName, methodDef);

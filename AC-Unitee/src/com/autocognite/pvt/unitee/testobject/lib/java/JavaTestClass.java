@@ -70,7 +70,7 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 	
 	@Override
 	public void setGroup(Group g) throws Exception{
-		this.getTestVariables().rawUdv().add(g.getUDV());
+		this.getTestVariables().rawUtv().add(g.getUTV());
 		this.getTestVariables().rawObjectProps().setSessionNodeName(g.getSessionNode().getName());
 		this.getTestVariables().rawObjectProps().setSessionNodeId(g.getSessionNode().getId());
 		this.getTestVariables().rawObjectProps().setSessionSubNodeId(g.getSessionSubNode().getId());

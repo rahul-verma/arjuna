@@ -22,13 +22,13 @@ public class BaseSessionNode implements SessionNode{
 	private int id;
 	private Iterator<SessionSubNode> iter = null;
 	private Session session = null;
-	private DefaultStringKeyValueContainer udvars = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
 	
 	private BaseSessionNode(Session session, int id) throws Exception{
 		this.session = session;
 		this.id = id;		
 		this.name = String.format("node%d", id);
-		this.udvars.cloneAdd(session.getUDV().items());
+		this.utvars.cloneAdd(session.getUTV().items());
 	}
 	
 	public BaseSessionNode(Session session, int id, String groupName) throws Exception{
@@ -45,12 +45,12 @@ public class BaseSessionNode implements SessionNode{
 		this(session, id);
 		
 		try{
-			JsonObject udv = nodeObj.getAsJsonObject("udv");
-			HoconReader udvReader = new HoconStringReader(udv.toString());
-			udvReader.process();
-			this.udvars.add(udvReader.getProperties());
+			JsonObject utv = nodeObj.getAsJsonObject("utv");
+			HoconReader utvReader = new HoconStringReader(utv.toString());
+			utvReader.process();
+			this.utvars.add(utvReader.getProperties());
 		} catch (ClassCastException e){
-			this.errorUdvNotObject();
+			this.errorUtvNotObject();
 		} catch (NullPointerException e){
 			// do nothing
 		}
@@ -109,10 +109,10 @@ public class BaseSessionNode implements SessionNode{
 		this.setGroupThreadCount(groupThreads);
 	}
 	
-	private void errorUdvNotObject(){
+	private void errorUtvNotObject(){
 			Console.displayError(
 					String.format(
-							">>udv<< attribute in session node definition should be a JSON object. Fix session template file: >>%s<<",
+							">>utv<< attribute in session node definition should be a JSON object. Fix session template file: >>%s<<",
 							session.getSessionFilePath()
 					));			
 			Console.displayError("Exiting...");
@@ -250,7 +250,7 @@ public class BaseSessionNode implements SessionNode{
 	}
 
 	@Override
-	public DefaultStringKeyValueContainer getUDV() {
-		return this.udvars;
+	public DefaultStringKeyValueContainer getUTV() {
+		return this.utvars;
 	} 
 }

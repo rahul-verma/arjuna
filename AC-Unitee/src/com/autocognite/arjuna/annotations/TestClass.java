@@ -32,5 +32,5 @@ public @interface TestClass {
 	String idea() default "NOT_SET";
 	int priority() default 1;
 	int methodThreads() default 1;
-	String[] customProps() default {};
+	String[] utp() default {};
 }

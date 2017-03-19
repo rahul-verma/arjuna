@@ -22,19 +22,19 @@ public class TestRelatedResult {
 	}
 	
 	public TestObjectProperties objectProps() throws Exception {
-		return this.testVars.objectProps();
+		return this.testVars.object();
 	}
 	
 	public TestProperties testProps() throws Exception {
-		return this.testVars.testProps();
+		return this.testVars.test();
 	}
 	
 	public StringKeyValueContainer customProps() throws Exception {
-		return this.testVars.customProps();
+		return this.testVars.utp();
 	}
 	
-	public StringKeyValueContainer udv() throws Exception {
-		return this.testVars.udv();
+	public StringKeyValueContainer utv() throws Exception {
+		return this.testVars.utv();
 	}
 
 	public void setTestVariables(TestVariables testVars) {

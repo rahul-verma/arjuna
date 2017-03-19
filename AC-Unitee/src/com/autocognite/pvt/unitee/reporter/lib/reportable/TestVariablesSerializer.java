@@ -13,14 +13,14 @@ public class TestVariablesSerializer extends BaseSerializer {
 	public void serializeTestVariables(JsonObject jsonObject, TestVariables testVars) throws Exception{
 		try{
 			if (ArjunaInternal.logJsonSerializationInfo){
-				logger.debug(testVars.objectProps());
-				logger.debug(testVars.objectProps().items());
+				logger.debug(testVars.object());
+				logger.debug(testVars.object().items());
 			}
-			jsonObject.add("objectProps", serializeEnumKeyMap(testVars.objectProps().items()));
-			jsonObject.add("testProps", serializeEnumKeyMap(testVars.testProps().items()));
-			jsonObject.add("customProps", serializeEnumKeyMap(testVars.customProps().items()));
-			jsonObject.add("udv", serializeEnumKeyMap(testVars.udv().items()));
-			jsonObject.add("dataRecord", serializeEnumKeyMap(testVars.dataRecord().items()));
+			jsonObject.add("objectProps", serializeEnumKeyMap(testVars.object().items()));
+			jsonObject.add("testProps", serializeEnumKeyMap(testVars.test().items()));
+			jsonObject.add("customProps", serializeEnumKeyMap(testVars.utp().items()));
+			jsonObject.add("utv", serializeEnumKeyMap(testVars.utv().items()));
+			jsonObject.add("dataRecord", serializeEnumKeyMap(testVars.record().items()));
 		} catch (Exception e){
 			jsonObject.addProperty("rType", "Error in getting string representation");
 			e.printStackTrace();

@@ -20,5 +20,5 @@ public interface SessionNode {
 
 	void setName(String name);
 
-	DefaultStringKeyValueContainer getUDV();
+	DefaultStringKeyValueContainer getUTV();
 }
