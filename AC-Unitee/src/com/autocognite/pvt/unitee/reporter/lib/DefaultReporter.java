@@ -40,7 +40,7 @@ import com.autocognite.pvt.unitee.reporter.lib.writer.json.JsonIssueWriter;
 import com.autocognite.pvt.unitee.reporter.lib.writer.json.JsonTestResultWriter;
 
 public class DefaultReporter implements Reporter{
-	private static Logger logger = RunConfig.getCentralLogger();
+	private static Logger logger = RunConfig.logger();
 	private List<InternlReportableObserver<TestResult>> testResultObservers = new ArrayList<InternlReportableObserver<TestResult>>();
 	private List<InternlReportableObserver<StepResult>> stepResultObservers = new ArrayList<InternlReportableObserver<StepResult>>();
 	private List<InternlReportableObserver<Issue>> issueObservers = new ArrayList<InternlReportableObserver<Issue>>();

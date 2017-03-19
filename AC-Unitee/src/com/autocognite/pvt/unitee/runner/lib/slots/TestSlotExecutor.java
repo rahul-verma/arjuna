@@ -29,7 +29,7 @@ import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer;
 
 public class TestSlotExecutor{
-	private static Logger logger = RunConfig.getCentralLogger();
+	private static Logger logger = RunConfig.logger();
 	private int slotNum;
 	private TestSlot testSlot = null;
 	private int classThreadCount = 1;

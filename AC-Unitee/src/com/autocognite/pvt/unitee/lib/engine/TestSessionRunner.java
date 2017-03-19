@@ -28,7 +28,7 @@ import com.autocognite.pvt.unitee.testobject.lib.loader.session.Session;
 import com.autocognite.pvt.unitee.testobject.lib.loader.session.SessionNode;
 
 public class TestSessionRunner implements Runnable {
-	private static Logger logger = RunConfig.getCentralLogger();
+	private static Logger logger = RunConfig.logger();
 	Session session = null;
 	
 	public TestSessionRunner(Session session){

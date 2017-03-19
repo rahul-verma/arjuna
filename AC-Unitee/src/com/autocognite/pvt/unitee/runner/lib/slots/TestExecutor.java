@@ -9,7 +9,7 @@ import com.autocognite.pvt.unitee.testobject.lib.interfaces.Test;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreatorInstance;
 
 public class TestExecutor extends AbstractTestObjectExecutor implements Runnable{
-	private static Logger logger = RunConfig.getCentralLogger();
+	private static Logger logger = RunConfig.logger();
 	private int slotNum;
 	private TestSlotTestCreatorInstance creatorInstance = null;
 

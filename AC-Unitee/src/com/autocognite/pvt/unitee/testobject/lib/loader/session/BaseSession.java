@@ -11,7 +11,7 @@ import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;
 import com.autocognite.pvt.unitee.core.lib.exception.SessionNodesFinishedException;
 
 public abstract class BaseSession implements Session {
-	private static Logger logger = RunConfig.getCentralLogger();
+	private static Logger logger = RunConfig.logger();
 	private List<SessionNode> nodesQueue = new ArrayList<SessionNode>(); 
 	private Iterator<SessionNode> iter = null;
 	private int testMethodCount = 0;

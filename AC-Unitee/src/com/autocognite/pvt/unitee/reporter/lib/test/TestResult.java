@@ -19,7 +19,7 @@ import com.autocognite.pvt.unitee.reporter.lib.step.StepResult;
 import com.google.gson.JsonObject;
 
 public class TestResult extends TestRelatedResult {
-	private static Logger logger = RunConfig.getCentralLogger();
+	private static Logger logger = RunConfig.logger();
 	private TestResultProperties resultProps = null;
 	private List<StepResult> stepResults = new ArrayList<StepResult>();
 	

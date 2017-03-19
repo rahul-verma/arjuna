@@ -15,7 +15,7 @@ import com.autocognite.pvt.unitee.reporter.lib.issue.Issue;
 import com.autocognite.pvt.unitee.reporter.lib.test.TestResult;
 
 public class CentralExecutionState {
-	private Logger logger = RunConfig.getCentralLogger();
+	private Logger logger = RunConfig.logger();
 	//private SummaryResult overallResultMap = new SummaryResult("Overall Results");
 	private HashMap<String,SummaryResult> bucketResultMap = new HashMap<String,SummaryResult>();
 	private HashMap<String,SummaryResult> testClassResultMap = new HashMap<String,SummaryResult>();

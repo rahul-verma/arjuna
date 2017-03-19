@@ -23,15 +23,15 @@ public class RunConfig {
 		return CentralConfiguration.value(propName);
 	}
 
-	public static Logger getCentralLogger() {
+	public static Logger logger() {
 		return Logger.getLogger(Batteries.getCentralLogName());
 	}
 	
-	public static StringKeyValueContainer cloneSessionUserConfig() throws Exception {
+	public static StringKeyValueContainer cloneUserConfig() throws Exception {
 		return Batteries.cloneCentralUserConfig();
 	}
 	
-	public static ReadOnlyStringKeyValueContainer sessionUserConfig() throws Exception {
+	public static ReadOnlyStringKeyValueContainer userConfig() throws Exception {
 		return Batteries.sessionUserConfig();
 	}
 }

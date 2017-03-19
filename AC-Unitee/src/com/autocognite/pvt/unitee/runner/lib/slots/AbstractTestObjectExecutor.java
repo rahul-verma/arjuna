@@ -12,7 +12,7 @@ import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject;
 
 public abstract class AbstractTestObjectExecutor {
-	private static Logger logger = RunConfig.getCentralLogger();
+	private static Logger logger = RunConfig.logger();
 	private int slotNum;
 
 	protected AbstractTestObjectExecutor(int slotNum){

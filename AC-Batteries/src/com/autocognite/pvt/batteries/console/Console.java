@@ -23,10 +23,10 @@ public class Console {
 		if (centralLogLevel == null) {
 			return true;
 		} else if (centralLogLevel == Level.DEBUG) {
-			RunConfig.getCentralLogger().debug(message);
+			RunConfig.logger().debug(message);
 			return false;
 		} else {
-			RunConfig.getCentralLogger().debug(message);
+			RunConfig.logger().debug(message);
 			return true;
 		}
 	}

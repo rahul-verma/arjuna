@@ -14,7 +14,7 @@ import com.autocognite.pvt.unitee.reporter.lib.IssueId;
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainer;
 
 public class TestContainerExecutor extends AbstractTestObjectExecutor implements Runnable{
-	private static Logger logger = RunConfig.getCentralLogger();
+	private static Logger logger = RunConfig.logger();
 	private TestSlot testSlot = null;
 	private TestContainer testContainer = null;
 	private TestSlotTestContainer currentSlotsContainer = null;

@@ -16,7 +16,7 @@ import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstanc
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestCreator;
 
 public class TestCreatorExecutor extends AbstractTestObjectExecutor implements Runnable{
-	private static Logger logger = RunConfig.getCentralLogger();
+	private static Logger logger = RunConfig.logger();
 	private TestSlotTestContainerFragment slotTestContainerFragment = null;
 	private TestCreator currentTestCreator = null;
 	private TestSlotTestCreator currentSlotTestCreator = null;
