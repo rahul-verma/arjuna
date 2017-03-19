@@ -258,7 +258,7 @@ public class JavaTestMethodsDefinitionLoader implements TestCreatorLoader {
 	
 	private void populateExpectedSignature(Method m, JavaTestMethodDefinition methodDef, String mQualifiedName, boolean testVarsAreMandatory){
 		//validate
-		JavaTestMethodSignatureType sigType = null;
+		MethodSignatureType sigType = null;
 
 		String mName = m.getName();
 		Class<?>[] paramTypes = m.getParameterTypes();
@@ -310,7 +310,7 @@ public class JavaTestMethodsDefinitionLoader implements TestCreatorLoader {
 				System.err.println("Exiting...");
 				System.exit(1);					
 			} else {
-				sigType = JavaTestMethodSignatureType.SINGLEARG_TESTVARS;
+				sigType = MethodSignatureType.SINGLEARG_TESTVARS;
 			}
 				
 		} else if (paramTypes.length == 0){
@@ -324,7 +324,7 @@ public class JavaTestMethodsDefinitionLoader implements TestCreatorLoader {
 				System.exit(1);	
 			} else {
 				expectedSigntureString = String.format("public void %s()", mName);
-				sigType = JavaTestMethodSignatureType.NO_ARG;
+				sigType = MethodSignatureType.NO_ARG;
 			}
 		}
 		methodDef.setMethodSignatureType(sigType);

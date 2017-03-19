@@ -302,4 +302,9 @@ public abstract class BaseTestObject implements TestObject {
 	public boolean hasCompleted(){
 		return true;
 	}
+	
+	@Override
+	public void populateUserProps() throws Exception {
+		this.testVarsHandler.populateUserProps();
+	}
 }

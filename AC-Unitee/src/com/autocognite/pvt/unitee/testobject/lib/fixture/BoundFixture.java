@@ -12,11 +12,19 @@ public class BoundFixture extends BaseTestClassFixture {
 	}
 
 	public void executeFixture() throws Exception {
-		this.getMethod().invoke(this.getTestClassInstance().getUserTestContainerObject());
+		switch(this.getSignatureType()){
+		case NO_ARG:
+			this.getMethod().invoke(this.getTestClassInstance().getUserTestContainerObject());
+			break;
+		case SINGLEARG_TESTVARS:
+			this.getMethod().invoke(this.getTestClassInstance().getUserTestContainerObject(), this.getTestObject().getTestVariables());
+			break;
+		}
 	}
 	
 	public BoundFixture clone(){
 		BoundFixture boundFixture = new BoundFixture(this.getTestClass(), this.getType(), this.getMethod());
+		boundFixture.setSignatureType(this.getSignatureType());
 		boundFixture.setTestContainerInstance(null);
 		return boundFixture;
 	}

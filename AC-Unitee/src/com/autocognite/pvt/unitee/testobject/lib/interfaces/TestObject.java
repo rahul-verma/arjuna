@@ -78,4 +78,6 @@ public interface TestObject {
 	TestFixtures getTestFixtures();
 
 	boolean hasCompleted();
+	
+	void populateUserProps() throws Exception;
 }

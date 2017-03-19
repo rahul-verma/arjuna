@@ -42,6 +42,7 @@ public class TestCreatorExecutor extends AbstractTestObjectExecutor implements R
 		this.currentSlotTestCreator = slotTestCreator;
 		currentTestCreator = slotTestCreator.getTestCreator();
 		currentTestCreator.setThreadId(Thread.currentThread().getName());
+		currentTestCreator.populateUserProps();
 
 		this.executeSetUp(currentTestCreator);
 

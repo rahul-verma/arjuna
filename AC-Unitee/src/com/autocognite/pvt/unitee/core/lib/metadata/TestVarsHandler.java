@@ -26,4 +26,6 @@ public interface TestVarsHandler {
 
 	void populate() throws Exception;
 
+	void populateUserProps() throws Exception;
+
 }

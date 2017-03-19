@@ -41,6 +41,7 @@ public class TestContainerFragmentExecutor extends AbstractTestObjectExecutor im
 
 		currentTestContainerFragment = slotTestContainerFragment.getContainerFragment();
 		currentTestContainerFragment.setThreadId(Thread.currentThread().getName());
+		currentTestContainerFragment.populateUserProps();
 
 		this.executeSetUp(currentTestContainerFragment);
 

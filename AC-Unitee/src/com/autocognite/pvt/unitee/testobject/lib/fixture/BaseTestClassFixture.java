@@ -1,9 +1,13 @@
 package com.autocognite.pvt.unitee.testobject.lib.fixture;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.interfaces.TestVariables;
+import com.autocognite.arjuna.utils.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;
@@ -20,6 +24,7 @@ import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestContainerInstanc
 import com.autocognite.pvt.unitee.testobject.lib.interfaces.TestObject;
 import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassFragment;
 import com.autocognite.pvt.unitee.testobject.lib.java.JavaTestClassInstance;
+import com.autocognite.pvt.unitee.testobject.lib.loader.MethodSignatureType;
 
 public abstract class BaseTestClassFixture implements Fixture {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
@@ -33,6 +38,7 @@ public abstract class BaseTestClassFixture implements Fixture {
 	private FixtureResultType resultType = FixtureResultType.NOT_EXECUTED;
 	private int issueId = -1;
 	private TestResultCode errorCodeForFixture = TestResultCode.ALL_STEPS_PASS;
+	private MethodSignatureType sigType = MethodSignatureType.NO_ARG;
 
 	public BaseTestClassFixture(Class<?> testClass, TestClassFixtureType fType, Method m){
 		this.setTestClass(testClass);
@@ -309,5 +315,13 @@ public abstract class BaseTestClassFixture implements Fixture {
 	@Override
 	public TestResultCode getTestResultCodeForFixtureError() {
 		return this.errorCodeForFixture;
+	}
+
+	public MethodSignatureType getSignatureType() {
+		return sigType;
+	}
+
+	public void setSignatureType(MethodSignatureType sigType) {
+		this.sigType = sigType;
 	}
 }

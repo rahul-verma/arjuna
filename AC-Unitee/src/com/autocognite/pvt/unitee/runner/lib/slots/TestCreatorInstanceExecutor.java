@@ -40,6 +40,7 @@ public class TestCreatorInstanceExecutor extends AbstractTestObjectExecutor impl
 		this.currentSlotTestCreatorInstance = slotCreatorInstance;
 		currentTestCreatorInstance = slotCreatorInstance.getCreatorInstance();
 		currentTestCreatorInstance.setThreadId(Thread.currentThread().getName());
+		currentTestCreatorInstance.populateUserProps();
 
 		this.executeSetUp(currentTestCreatorInstance);
 

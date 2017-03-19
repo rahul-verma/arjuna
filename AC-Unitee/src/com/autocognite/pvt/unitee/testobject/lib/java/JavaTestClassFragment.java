@@ -54,7 +54,7 @@ public class JavaTestClassFragment extends BaseTestObject implements TestContain
 		if (ArjunaInternal.displayLoadingInfo){
 			logger.debug(String.format("Populating Test Variables for %s instance# %d fragment# %d", this.getQualifiedName(), this.containerInstance.getInstanceNumber(), this.fragmentNumber));
 		}
-		this.setTestVarsHandler(new DefaultTestVarsHandler(this, container));
+		this.setTestVarsHandler(new DefaultTestVarsHandler(this, containerInstance));
 		
 		this.getTestVariables().rawObjectProps().setClassFragmentNumber(this.fragmentNumber);
 		this.setThreadId(Thread.currentThread().getName());

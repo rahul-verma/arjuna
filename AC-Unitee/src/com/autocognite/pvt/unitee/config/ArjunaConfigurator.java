@@ -176,40 +176,40 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 					handleBooleanConfig(propPath, cValue, "Stop on first failure/error?", false);
 					break;
 				case FIXTURE_TESTCLASS_SETUPCLASS_NAME:
-					handleStringConfig(propPath, cValue, "Set Up Class Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Set Up Class Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_SETUPCLASSINSTANCE_NAME:
-					handleStringConfig(propPath, cValue, "Set Up Class Instance Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Set Up Class Instance Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_SETUPCLASSFRAGMENT_NAME:
-					handleStringConfig(propPath, cValue, "Set Up Class Fragment Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Set Up Class Fragment Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_SETUPMETHOD_NAME:
-					handleStringConfig(propPath, cValue, "Set Up Method Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Set Up Method Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_SETUPMETHODINSTANCE_NAME:
-					handleStringConfig(propPath, cValue, "Set Up Method Instance Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Set Up Method Instance Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_SETUPTEST_NAME:
-					handleStringConfig(propPath, cValue, "Set Up Test Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Set Up Test Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_TEARDOWNCLASS_NAME:
-					handleStringConfig(propPath, cValue, "Tear Down Class Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Tear Down Class Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_TEARDOWNCLASSINSTANCE_NAME:
-					handleStringConfig(propPath, cValue, "Tear Down Class Instance Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Tear Down Class Instance Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_TEARDOWNCLASSFRAGMENT_NAME:
-					handleStringConfig(propPath, cValue, "Tear Down Class Fragment Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Tear Down Class Fragment Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_TEARDOWNMETHOD_NAME:
-					handleStringConfig(propPath, cValue, "Tear Down Method Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Tear Down Method Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_TEARDOWNMETHODINSTANCE_NAME:
-					handleStringConfig(propPath, cValue, "Tear Down Method Instance Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Tear Down Method Instance Fixture Method Name", false);
 					break;
 				case FIXTURE_TESTCLASS_TEARDOWNTEST_NAME:
-					handleStringConfig(propPath, cValue, "Tear Down Test Fixture Method Name", true);
+					handleStringConfig(propPath, cValue, "Tear Down Test Fixture Method Name", false);
 					break;
 				case REPORT_MODE:
 					this.handleReportMode(propPath, cValue, "Report Mode", true);

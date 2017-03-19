@@ -289,24 +289,19 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 	}
 	
 	public Constructor<?> getConstructor(Class<?> klass, ConstructorDef constructorType, boolean userHasSuppliedProperties, boolean userHasSuppliedDataRef) throws Exception{
-		Constructor<?> constructor = null;
-		try{
-			constructor =  klass.getConstructor(TestVariables.class);
-			constructorType.type = TestClassConstructorType.SINGLEARG_TESTVARS;
-		} catch (NoSuchMethodException e) {
-			try{
-				constructor =  klass.getConstructor();
-				constructorType.type = TestClassConstructorType.NO_ARG;
-			} catch (NoSuchMethodException f) {
-				System.err.println(String.format("You must define either of the following public constructors for %s: ",klass.getSimpleName()));
-				System.err.println(String.format("Option 1: public %s(TestVariables testClassVars)",klass.getSimpleName()));
-				System.err.println(String.format("Option 2: public %s()",klass.getSimpleName()));
-				System.err.println("Exiting...");
-				System.exit(1);							
-			}							
+		Constructor<?>[] constructors = klass.getConstructors();
+		if ((constructors.length > 1) || (constructors[0].getParameterTypes().length > 0)){
+			Console.displayError(String.format("Critical Error. Non-default constructor found for test class: %s",klass.getSimpleName()));
+			Console.displayError(String.format("Arjuna Test classes can only use default public constructor."));
+			Console.displayError(String.format("Change constructor to:"));
+			Console.displayError(String.format("public %s()",klass.getSimpleName()));
+			Console.displayError("Exiting...");
+			System.exit(1);				
 		}
 		
-		return constructor;
+		constructorType.type = TestClassConstructorType.NO_ARG;
+		
+		return klass.getConstructor();
 			
 	}
 

@@ -11,11 +11,19 @@ public class StaticFixture extends BaseTestClassFixture {
 	}
 
 	public void executeFixture() throws Exception {
-		this.getMethod().invoke(this.getTestClass());
+		switch(this.getSignatureType()){
+		case NO_ARG:
+			this.getMethod().invoke(this.getTestClass());
+			break;
+		case SINGLEARG_TESTVARS:
+			this.getMethod().invoke(this.getTestClass(), this.getTestObject().getTestVariables());
+			break;
+		}
 	}
 	
 	public StaticFixture clone(){
 		StaticFixture sFixture = new StaticFixture(this.getTestClass(), this.getType(), this.getMethod());
+		sFixture.setSignatureType(this.getSignatureType());
 		sFixture.setTestContainerInstance(null);
 		return sFixture;
 	}

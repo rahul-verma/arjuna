@@ -69,8 +69,6 @@ public class DefaultTestVarsHandler implements TestVarsHandler{
 			}
 			this.getTestVariables().rawObjectProps().cloneAdd(this.getParentTestObject().getTestVariables().object().items());
 			this.getTestVariables().rawTestProps().cloneAdd(this.getParentTestObject().getTestVariables().test().items());
-			this.getTestVariables().rawCustomProps().cloneAdd(this.getParentTestObject().getTestVariables().utp().items());
-			this.getTestVariables().rawUtv().cloneAdd(this.getParentTestObject().getTestVariables().utv().items());
 			this.getTestVariables().addDataReferences(this.getParentTestObject().getTestVariables().references());
 			if (testObject.getObjectType() == TestObjectType.TEST_METHOD){
 				if (ArjunaInternal.logPropInfo){
@@ -82,6 +80,18 @@ public class DefaultTestVarsHandler implements TestVarsHandler{
 		}
 	}
 	
+	protected void populateUserPropsFromParent() throws Exception{
+		if (this.parentTestObject != null){
+			this.getTestVariables().rawCustomProps().cloneAdd(this.getParentTestObject().getTestVariables().utp().items());
+			this.getTestVariables().rawUtv().cloneAdd(this.getParentTestObject().getTestVariables().utv().items());
+		}
+	}
+	
+	protected void populateUserPropsFromSelf() throws Exception{
+		this.getTestVariables().rawCustomProps().cloneAdd(this.getTestObject().getTestVariablesDefinition().utp().items());
+		this.getTestVariables().rawUtv().cloneAdd(this.getTestObject().getTestVariablesDefinition().utv().items());		
+	}
+	
 	protected void populateFromSelf() throws Exception{
 		if (ArjunaInternal.logPropInfo){
 			logger.debug("Self Type: " + this.getTestObject().getObjectType());
@@ -91,8 +101,6 @@ public class DefaultTestVarsHandler implements TestVarsHandler{
 		}
 		this.getTestVariables().rawObjectProps().cloneAdd(this.getTestObject().getTestVariablesDefinition().object().items());
 		this.getTestVariables().rawTestProps().cloneAdd(this.getTestObject().getTestVariablesDefinition().test().items());
-		this.getTestVariables().rawCustomProps().cloneAdd(this.getTestObject().getTestVariablesDefinition().utp().items());
-		this.getTestVariables().rawUtv().cloneAdd(this.getTestObject().getTestVariablesDefinition().utv().items());
 		this.getTestVariables().addDataReferences(this.getTestObject().getTestVariablesDefinition().references());
 	}
 	
@@ -112,6 +120,11 @@ public class DefaultTestVarsHandler implements TestVarsHandler{
 			logger.debug("Self Test Object Props: " + this.getTestVariables().object().items());
 			logger.debug("-------------------");
 		}
+	}
+	
+	public void populateUserProps() throws Exception{
+		this.populateUserPropsFromParent();
+		this.populateUserPropsFromSelf();
 	}
 
 }

@@ -19,7 +19,7 @@ import com.autocognite.pvt.unitee.core.lib.datasource.DummyDataSource;
 import com.autocognite.pvt.unitee.core.lib.dependency.DependencyHandler;
 import com.autocognite.pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import com.autocognite.pvt.unitee.core.lib.testvars.InternalTestVariables;
-import com.autocognite.pvt.unitee.testobject.lib.loader.JavaTestMethodSignatureType;
+import com.autocognite.pvt.unitee.testobject.lib.loader.MethodSignatureType;
 import com.autocognite.pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor;
 
 public class JavaTestMethodDefinition {
@@ -34,7 +34,7 @@ public class JavaTestMethodDefinition {
 	private Set<String> methodDependencies = new HashSet<String>();
 	private Set<String> classDependencies = new HashSet<String>();
 	private int testThreadCount = 1;
-	private JavaTestMethodSignatureType methodSignatureType = null;
+	private MethodSignatureType methodSignatureType = null;
 	private boolean hasDataAssociation = false;
 	private DataSourceBuilder dsBuilder;
 	private String name = null;
@@ -147,11 +147,11 @@ public class JavaTestMethodDefinition {
 		this.testThreadCount = count;
 	}
 
-	public void setMethodSignatureType(JavaTestMethodSignatureType type) {
+	public void setMethodSignatureType(MethodSignatureType type) {
 		this.methodSignatureType  = type;
 	}
 	
-	public JavaTestMethodSignatureType getMethodSignatureType() {
+	public MethodSignatureType getMethodSignatureType() {
 		return this.methodSignatureType;
 	}
 

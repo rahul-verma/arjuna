@@ -58,6 +58,8 @@ public class TestExecutor extends AbstractTestObjectExecutor implements Runnable
 				}
 
 				copySchedulingStatusFromParentAndReturnFalseIfNotApplicable(creatorInstance, test);
+				
+				test.populateUserProps();
 
 				this.executeSetUp(test);
 
