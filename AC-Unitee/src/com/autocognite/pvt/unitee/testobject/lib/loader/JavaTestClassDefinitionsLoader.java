@@ -116,51 +116,8 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 //							logger.debug("Filtering: " + fullQualifiedClassName);
 			Class<?> klass = this.loadClass(f, qualifiedName);
 			
-			Annotation[] annos = klass.getAnnotations();
-			ArrayList<String> annNames = new ArrayList<String>();
-
-			for(Annotation a : annos){
-				if (a.annotationType().getName().startsWith("com.autocognite.arjuna")){
-					annNames.add(a.annotationType().getSimpleName());
-				}
-			}
+			AnnotationValidator.validateClassAnnotations(klass, qualifiedName);
 			
-			// Check for compatible annotations usage.
-			// Only applicable if more than one annotations exist for one method
-			if (annNames.size() > 1){
-				Collections.sort(annNames);
-				String mainAnn = annNames.get(0);
-				annNames.remove(0);
-				if (!JavaTestClassDefinitionsLoader.CLASS_ANNOTATION_COMPAT.containsKey(mainAnn)){
-					Console.displayError(String.format("There is a critical error with your test class: %s", qualifiedName));
-					Console.displayError(String.format("Arjuna found that it is annotated with @%s.", mainAnn));
-					Console.displayError(String.format("Along with this you have annotated the class with: %s.", annNames.toString()));
-					Console.displayError(String.format("@%s annotation can not be used along with any other annotation.", mainAnn));
-					Console.displayError(String.format("Please correct the annotation usage."));
-					Console.displayError("Exiting...");
-					System.exit(1);					
-				} else {
-					List<String> incompatibles = new ArrayList<String>();
-					boolean annAnomaly = false;
-					for (String annName: annNames){
-						if (!JavaTestClassDefinitionsLoader.CLASS_ANNOTATION_COMPAT.get(mainAnn).contains(annName)){
-							incompatibles.add(annName);
-							annAnomaly = true;							
-						} 
-					}
-					
-					if (annAnomaly){
-						Console.displayError(String.format("There is a critical error with your test class: %s", qualifiedName));
-						Console.displayError(String.format("Arjuna found that it is annotated with @%s.", mainAnn));						
-						Console.displayError(String.format("Along with this you have annotated the class with: %s.", annNames.toString()));
-						Console.displayError(String.format("Out of these, these annotations are incompatanle with @%s: %s.", mainAnn, incompatibles.toString()));
-						Console.displayError(String.format("Please correct the annotation usage."));
-						Console.displayError("Exiting...");
-						System.exit(1);		
-					}
-				}
-			}
-
 			if (!this.isTestClass(klass)) {
 				ArjunaInternal.processNonTestClass(klass);
 				TestDefinitionsDB.addNonTestClassName(klass.getName());
