@@ -21,7 +21,7 @@ package com.autocognite.pvt.uiautomator.lib;
 import java.util.HashMap;
 import java.util.Set;
 
-import com.autocognite.pvt.batteries.filehandler.IniFileReader;
+import com.autocognite.arjuna.utils.file.IniFileReader;
 
 public class IniFilePageMapper extends FileBasedPageMapper{
 	private IniFileReader reader = null;

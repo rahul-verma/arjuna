@@ -10,9 +10,9 @@ import java.util.Set;
 
 import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.arjuna.utils.batteries.FileSystemBatteries;
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.pvt.batteries.config.Configuration;
-import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.ds.MessagesContainer;
 import com.autocognite.pvt.batteries.ds.NamesContainer;
 import com.autocognite.pvt.batteries.integration.ComponentConfigurator;

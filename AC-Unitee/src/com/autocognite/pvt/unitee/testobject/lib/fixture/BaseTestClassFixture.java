@@ -7,7 +7,7 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.interfaces.TestVariables;
-import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.batteries.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.FixtureResultType;
 import com.autocognite.pvt.arjuna.enums.IssueSubType;

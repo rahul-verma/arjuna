@@ -23,7 +23,7 @@ import org.apache.poi.ss.usermodel.IndexedColors;
 import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.TestVariables;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.arjuna.utils.batteries.SystemBatteries;
 import com.autocognite.internal.arjuna.enums.TestAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.ArjunaInternal;

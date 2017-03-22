@@ -16,8 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.autocognite.arjuna.utils;
+package com.autocognite.arjuna.utils.batteries;
 
+import com.autocognite.arjuna.utils.process.CommandExecutor;
 import com.sun.jna.platform.win32.Advapi32Util;
 import com.sun.jna.platform.win32.WinReg.HKEY;
 

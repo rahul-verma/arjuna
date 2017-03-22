@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 
 import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.arjuna.utils.batteries.FileSystemBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.lib.UserDefinedProperty;
 import com.autocognite.pvt.batteries.value.StringListValue;

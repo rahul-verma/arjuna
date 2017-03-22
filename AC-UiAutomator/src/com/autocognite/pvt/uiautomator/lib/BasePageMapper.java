@@ -20,7 +20,7 @@ package com.autocognite.pvt.uiautomator.lib;
 
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
-import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.arjuna.utils.batteries.FileSystemBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.autocognite.arjuna.utils;
+package com.autocognite.arjuna.utils.batteries;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,7 +26,7 @@ import java.util.Set;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import com.autocognite.pvt.batteries.console.Console;
+import com.autocognite.arjuna.utils.console.Console;
 
 public class DataBatteries {
 

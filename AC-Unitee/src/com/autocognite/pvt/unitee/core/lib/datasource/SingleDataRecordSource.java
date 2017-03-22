@@ -1,8 +1,8 @@
 package com.autocognite.pvt.unitee.core.lib.datasource;
 
-import com.autocognite.arjuna.bases.DefaultDataRecord;
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataSource;
+import com.autocognite.arjuna.utils.datarecord.DefaultDataRecord;
 
 public class SingleDataRecordSource implements DataSource{
 	private DefaultDataRecord record = null;

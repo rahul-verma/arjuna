@@ -29,7 +29,7 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.batteries.DataBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.discoverer.DiscoveredFile;
 import com.autocognite.pvt.batteries.discoverer.DiscoveredFileAttribute;

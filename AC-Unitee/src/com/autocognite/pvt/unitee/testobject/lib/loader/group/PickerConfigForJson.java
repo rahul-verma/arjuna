@@ -8,9 +8,9 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
 import com.autocognite.pvt.batteries.config.Batteries;
-import com.autocognite.pvt.batteries.console.Console;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;

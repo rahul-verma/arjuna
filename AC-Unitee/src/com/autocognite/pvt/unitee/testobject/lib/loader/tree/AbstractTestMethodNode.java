@@ -3,7 +3,7 @@ package com.autocognite.pvt.unitee.testobject.lib.loader.tree;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.autocognite.pvt.batteries.console.Console;
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 
 public class AbstractTestMethodNode implements TestNode{

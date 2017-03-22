@@ -21,7 +21,7 @@ package com.autocognite.pvt.batteries.filehandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.batteries.DataBatteries;
 
 public class FileLine2MapReader {
 	private String[] headers = null;

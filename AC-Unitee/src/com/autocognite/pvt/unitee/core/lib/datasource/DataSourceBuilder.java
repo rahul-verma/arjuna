@@ -14,7 +14,7 @@ import com.autocognite.arjuna.annotations.DriveWithDataFile;
 import com.autocognite.arjuna.annotations.DriveWithDataGenerator;
 import com.autocognite.arjuna.annotations.DriveWithDataMethod;
 import com.autocognite.arjuna.interfaces.DataSource;
-import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.arjuna.utils.batteries.FileSystemBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.databroker.DataSourceFactory;

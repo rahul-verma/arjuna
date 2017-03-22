@@ -5,7 +5,7 @@ import org.apache.log4j.Logger;
 import com.autocognite.arjuna.interfaces.ReadOnlyStringKeyValueContainer;
 import com.autocognite.arjuna.interfaces.StringKeyValueContainer;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.arjuna.utils.ThreadBatteries;
+import com.autocognite.arjuna.utils.batteries.ThreadBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.lib.CentralConfiguration;
 

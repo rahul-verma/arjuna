@@ -23,7 +23,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.arjuna.utils.batteries.SystemBatteries;
 
 public class ThreadSafeStreamReader extends Thread {
 	InputStream is;

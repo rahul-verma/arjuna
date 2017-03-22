@@ -26,7 +26,7 @@ import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataMethodContainer;
 import com.autocognite.arjuna.checks.Checks;
-import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.batteries.DataBatteries;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.unitee.testobject.lib.loader.DataMethodsHandler;

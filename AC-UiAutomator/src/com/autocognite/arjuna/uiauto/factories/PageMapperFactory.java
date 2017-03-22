@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.enums.FileFormat;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
-import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.arjuna.utils.batteries.FileSystemBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;

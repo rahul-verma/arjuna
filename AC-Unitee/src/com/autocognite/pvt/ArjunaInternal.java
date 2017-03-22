@@ -27,6 +27,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.interfaces.DataSource;
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.internal.arjuna.enums.TestAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
@@ -39,7 +40,6 @@ import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
 import com.autocognite.pvt.batteries.cli.CLIConfigurator;
 import com.autocognite.pvt.batteries.config.Batteries;
-import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.ds.NamesContainer;
 import com.autocognite.pvt.unitee.config.ArjunaSingleton;
 import com.autocognite.pvt.unitee.lib.engine.TestEngine;

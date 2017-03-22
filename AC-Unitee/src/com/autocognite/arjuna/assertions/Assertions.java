@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import com.autocognite.arjuna.checks.Checks;
-import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.batteries.DataBatteries;
 import com.autocognite.pvt.arjuna.interfaces.Check;
 import com.autocognite.pvt.batteries.utils.StackBatteries;
 import com.autocognite.pvt.unitee.validator.lib.check.DefaultCheck;

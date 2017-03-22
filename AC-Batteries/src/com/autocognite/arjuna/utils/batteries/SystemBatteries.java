@@ -16,15 +16,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.autocognite.arjuna.utils;
+package com.autocognite.arjuna.utils.batteries;
 
-public class MathBatteries {
+import java.io.File;
 
-	public static int min(int left, int right) {
-		if (left < right) {
-			return left;
-		} else {
-			return right;
-		}
+import com.autocognite.arjuna.utils.console.Console;
+
+public class SystemBatteries {
+
+	public static void exit() {
+		Console.displayError("Exiting...");
+		System.exit(1);
+	}
+
+	public static Runtime getRunTime() {
+		return Runtime.getRuntime();
+	}
+
+	public static String getOSName() {
+		return System.getProperty("os.name");
+	}
+
+	public static String getLineSeparator() {
+		return System.getProperty("line.separator");
+	}
+
+	public static String getPathSeparator() {
+		return File.separator;
 	}
 }

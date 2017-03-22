@@ -21,8 +21,8 @@ package com.autocognite.pvt.unitee.cli;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.pvt.batteries.cli.AbstractCLI;
-import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig;
 
 public class UniteeCLI extends AbstractCLI {

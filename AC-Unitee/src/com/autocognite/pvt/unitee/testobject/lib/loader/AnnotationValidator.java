@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.autocognite.pvt.batteries.console.Console;
+import com.autocognite.arjuna.utils.console.Console;
 
 public class AnnotationValidator {
 	private static Set<String> namedFixtures = new HashSet<String>(Arrays.asList(

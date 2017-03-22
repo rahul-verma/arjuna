@@ -1,9 +1,9 @@
 package com.autocognite.pvt.unitee.core.lib.testvars;
 
-import com.autocognite.arjuna.bases.DefaultDataRecord;
 import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.TestObjectProperties;
 import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.arjuna.utils.datarecord.DefaultDataRecord;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectType;
 import com.autocognite.pvt.batteries.container.ReadOnlyContainer;

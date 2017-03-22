@@ -8,7 +8,7 @@ import java.util.Set;
 
 import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.batteries.DataBatteries;
 
 public class ValueFactory {
 	private static NullValue nullValue = new NullValue();

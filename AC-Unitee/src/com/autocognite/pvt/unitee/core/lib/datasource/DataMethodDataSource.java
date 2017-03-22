@@ -4,11 +4,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Iterator;
 
-import com.autocognite.arjuna.bases.DefaultDataRecordContainer;
 import com.autocognite.arjuna.exceptions.DataSourceFinishedException;
 import com.autocognite.arjuna.interfaces.DataRecord;
 import com.autocognite.arjuna.interfaces.DataRecordContainer;
 import com.autocognite.arjuna.interfaces.DataSource;
+import com.autocognite.arjuna.utils.datarecord.DefaultDataRecordContainer;
 
 public class DataMethodDataSource implements DataSource{
 	private static Object[][] sampleArr = {};

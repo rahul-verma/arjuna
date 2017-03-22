@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.autocognite.arjuna.interfaces.Value;
-import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.arjuna.utils.batteries.SystemBatteries;
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.internal.arjuna.enums.TestAttribute;
 import com.autocognite.internal.arjuna.enums.TestObjectAttribute;
 import com.autocognite.pvt.ArjunaInternal;
@@ -19,7 +20,6 @@ import com.autocognite.pvt.arjuna.enums.StepResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestReportSection;
 import com.autocognite.pvt.arjuna.enums.TestResultAttribute;
 import com.autocognite.pvt.arjuna.enums.TestResultType;
-import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.ds.Message;
 import com.autocognite.pvt.batteries.ds.MessagesContainer;
 import com.autocognite.pvt.batteries.ds.NamesContainer;

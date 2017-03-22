@@ -16,15 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.autocognite.arjuna.utils;
+package com.autocognite.arjuna.utils.batteries;
 
-public class HardCoded {
+public class MathBatteries {
 
-	public static void sleep(String why, int seconds) throws Exception {
-		Thread.sleep(seconds * 1000);
-	}
-
-	public static void sleep(String why, float seconds) throws Exception {
-		Thread.sleep(new Float(seconds).longValue());
+	public static int min(int left, int right) {
+		if (left < right) {
+			return left;
+		} else {
+			return right;
+		}
 	}
 }

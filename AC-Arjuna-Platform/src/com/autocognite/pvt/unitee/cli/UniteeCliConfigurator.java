@@ -27,10 +27,10 @@ import java.util.Set;
 
 import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.TestPickerProperty;
 import com.autocognite.pvt.batteries.cli.AbstractCliConfigurator;
-import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;
 import com.autocognite.pvt.batteries.lib.ComponentIntegrator;
 import com.autocognite.pvt.batteries.value.StringListValue;

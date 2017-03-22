@@ -46,7 +46,7 @@ import com.autocognite.arjuna.uiauto.enums.UiElementType;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
 import com.autocognite.arjuna.uiauto.plugins.appium.AppiumMobilePlatformType;
 import com.autocognite.arjuna.uiauto.plugins.appium.AppiumUiDriver;
-import com.autocognite.arjuna.utils.FileSystemBatteries;
+import com.autocognite.arjuna.utils.batteries.FileSystemBatteries;
 import com.autocognite.pvt.appium.api.AppiumMediator;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.enums.BatteriesPropertyType;

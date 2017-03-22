@@ -7,9 +7,9 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.bases.DefaultDataRecord;
 import com.autocognite.arjuna.enums.ValueType;
 import com.autocognite.arjuna.interfaces.Value;
+import com.autocognite.arjuna.utils.datarecord.DefaultDataRecord;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.container.BaseValueContainer;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;

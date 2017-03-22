@@ -1,9 +1,9 @@
-package com.autocognite.pvt.batteries.console;
+package com.autocognite.arjuna.utils.console;
 
 import org.apache.log4j.Level;
 
 import com.autocognite.arjuna.config.RunConfig;
-import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.arjuna.utils.batteries.SystemBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.utils.ExceptionBatteries;
 

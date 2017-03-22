@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.autocognite.arjuna.utils;
+package com.autocognite.arjuna.utils.batteries;
 
 import java.io.File;
 import java.net.URL;

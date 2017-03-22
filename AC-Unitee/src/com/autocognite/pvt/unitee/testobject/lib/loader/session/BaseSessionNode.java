@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.autocognite.pvt.batteries.console.Console;
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.pvt.batteries.hocon.HoconReader;
 import com.autocognite.pvt.batteries.hocon.HoconStringReader;
 import com.autocognite.pvt.batteries.value.DefaultStringKeyValueContainer;

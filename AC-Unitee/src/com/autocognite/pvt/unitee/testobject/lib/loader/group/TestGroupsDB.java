@@ -10,6 +10,7 @@ import java.util.Map;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
@@ -17,7 +18,6 @@ import com.autocognite.pvt.arjuna.enums.SkipCode;
 import com.autocognite.pvt.arjuna.enums.TestPickerProperty;
 import com.autocognite.pvt.arjuna.enums.UnpickedCode;
 import com.autocognite.pvt.batteries.config.Batteries;
-import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;

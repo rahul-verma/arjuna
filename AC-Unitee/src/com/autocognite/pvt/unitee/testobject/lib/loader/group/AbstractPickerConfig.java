@@ -8,11 +8,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.autocognite.arjuna.utils.DataBatteries;
-import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.arjuna.utils.batteries.DataBatteries;
+import com.autocognite.arjuna.utils.batteries.SystemBatteries;
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.pvt.arjuna.enums.PickerTargetType;
 import com.autocognite.pvt.batteries.config.Batteries;
-import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import com.autocognite.pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;

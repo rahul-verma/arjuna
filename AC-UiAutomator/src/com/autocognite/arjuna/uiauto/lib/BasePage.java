@@ -34,7 +34,7 @@ import com.autocognite.arjuna.uiauto.interfaces.Page;
 import com.autocognite.arjuna.uiauto.interfaces.PageMapper;
 import com.autocognite.arjuna.uiauto.interfaces.UiDriver;
 import com.autocognite.arjuna.uiauto.interfaces.UiElement;
-import com.autocognite.arjuna.utils.DataBatteries;
+import com.autocognite.arjuna.utils.batteries.DataBatteries;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.exceptions.Problem;
 import com.autocognite.pvt.uiautomator.UiAutomator;

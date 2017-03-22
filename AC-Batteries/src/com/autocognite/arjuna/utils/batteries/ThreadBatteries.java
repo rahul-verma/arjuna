@@ -1,4 +1,4 @@
-package com.autocognite.arjuna.utils;
+package com.autocognite.arjuna.utils.batteries;
 
 import com.autocognite.arjuna.config.RunConfig;
 import com.autocognite.pvt.batteries.config.Batteries;

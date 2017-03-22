@@ -25,7 +25,7 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.autocognite.arjuna.annotations.DataMethod;
-import com.autocognite.arjuna.bases.DefaultDataRecordContainer;
+import com.autocognite.arjuna.utils.datarecord.DefaultDataRecordContainer;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.batteries.config.Batteries;
 

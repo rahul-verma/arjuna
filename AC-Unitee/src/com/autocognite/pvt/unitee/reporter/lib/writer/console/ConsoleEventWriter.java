@@ -27,11 +27,11 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import com.autocognite.arjuna.utils.console.Console;
 import com.autocognite.pvt.ArjunaInternal;
 import com.autocognite.pvt.arjuna.enums.EventAttribute;
 import com.autocognite.pvt.arjuna.enums.TestReportSection;
 import com.autocognite.pvt.batteries.config.Batteries;
-import com.autocognite.pvt.batteries.console.Console;
 import com.autocognite.pvt.unitee.reporter.lib.DefaultObserver;
 import com.autocognite.pvt.unitee.reporter.lib.event.Event;
 

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.autocognite.pvt.batteries.filehandler;
+package com.autocognite.arjuna.utils.file;
 
 import java.io.File;
 import java.util.HashMap;
@@ -28,7 +28,6 @@ import org.ini4j.Wini;
 public class IniFileReader {
 	private Wini reader = null;
 
-	// F:\GitHub_MyWork\raft\config\config.ini
 	public IniFileReader(String fileName) throws Exception {
 		this.setReader(new Wini(new File(fileName)));
 	}

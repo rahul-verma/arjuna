@@ -8,8 +8,8 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 
-import com.autocognite.arjuna.utils.FileSystemBatteries;
-import com.autocognite.arjuna.utils.SystemBatteries;
+import com.autocognite.arjuna.utils.batteries.FileSystemBatteries;
+import com.autocognite.arjuna.utils.batteries.SystemBatteries;
 import com.autocognite.pvt.arjuna.enums.ArjunaProperty;
 import com.autocognite.pvt.batteries.config.Batteries;
 import com.autocognite.pvt.batteries.filehandler.FileWriter;

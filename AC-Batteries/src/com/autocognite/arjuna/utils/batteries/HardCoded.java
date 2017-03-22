@@ -16,32 +16,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.autocognite.arjuna.utils;
+package com.autocognite.arjuna.utils.batteries;
 
-import java.io.File;
+public class HardCoded {
 
-import com.autocognite.pvt.batteries.console.Console;
-
-public class SystemBatteries {
-
-	public static void exit() {
-		Console.displayError("Exiting...");
-		System.exit(1);
+	public static void sleep(String why, int seconds) throws Exception {
+		Thread.sleep(seconds * 1000);
 	}
 
-	public static Runtime getRunTime() {
-		return Runtime.getRuntime();
-	}
-
-	public static String getOSName() {
-		return System.getProperty("os.name");
-	}
-
-	public static String getLineSeparator() {
-		return System.getProperty("line.separator");
-	}
-
-	public static String getPathSeparator() {
-		return File.separator;
+	public static void sleep(String why, float seconds) throws Exception {
+		Thread.sleep(new Float(seconds).longValue());
 	}
 }
