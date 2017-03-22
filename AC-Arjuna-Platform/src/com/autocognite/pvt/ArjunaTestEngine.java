@@ -113,6 +113,8 @@ public class ArjunaTestEngine implements TestEngine{
 		if (ArjunaInternal.displayReportGenerationInfo){
 			logger.debug("Setting up Report Generator");
 		}
+		
+		String reportDir = this.getReportDir();
 		CentralReportGenerator generator = new CentralReportGenerator();
 		List<String> reportFormats = Batteries.value(ArjunaProperty.REPORT_GENERATORS_BUILTIN).asStringList();
 		for (String reportFormatName: reportFormats) {
@@ -122,8 +124,8 @@ public class ArjunaTestEngine implements TestEngine{
 			ReportFormat reportFormat = ReportFormat.valueOf(reportFormatName.toUpperCase());
 			switch(reportFormat){
 			case EXCEL:
-				FileUtils.forceMkdir(new File(getReportDir() + "/excel"));
-				generator.addReportGenerator(new ExcelReportGenerator(getReportDir()+ "/excel"));
+				FileUtils.forceMkdir(new File(reportDir + "/excel"));
+				generator.addReportGenerator(new ExcelReportGenerator(reportDir + "/excel"));
 				break;
 			default:
 				String msg = "Unrecognized report format option: " + reportFormatName + ". Exiting now...";
@@ -159,6 +161,15 @@ public class ArjunaTestEngine implements TestEngine{
 	}
 	
 	protected void archive() throws Exception{
+		String dirPath = Batteries.value(ArjunaProperty.DIRECTORY_REPORT).asString(); 
+		
+		File dirObj = new File(dirPath);
+		//FileUtils.forceMkdir(arg0 );
+		if (!dirObj.exists()){
+			FileUtils.forceMkdir(dirObj);
+			//dirObj.mkdirs();
+		}
+		
 		FileUtils.forceMkdir(new File(getArchivesDir()));
 		for (File f: (new File(Batteries.value(ArjunaProperty.DIRECTORY_REPORT).asString())).listFiles()){
 			if (f.isHidden()) continue;

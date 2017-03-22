@@ -1,0 +1,117 @@
+RUN USING
+---------
+    On Windows:		unitee.bat
+    On Mac/Linux/*nix:	unitee.sh
+    
+SYNOPSIS
+--------
+    unitee.(bat | sh)  [OPTIONS]
+    
+---------------------------------------------------------------------------------------------------
+    
+OPTIONS
+-------
+
+CONTROLLING LEVEL OF LOGGING:
+
+    -dl,  --display-level <DEBUG/INFO/WARN/ERROR/FATAL>
+            Minimum log message level for console display.
+            DEFAULT: INFO
+      
+    -ll,  --log-level <(DEBUG/INFO/WARN/ERROR/FATAL)>
+            Minimum log message level for file logging.
+            DEFAULT: DEBUG
+
+TEST FILTERING:
+
+    -d,   --test-dir <Full directory path of tests>
+            Contains Java classes/JAR files.  
+            DEFAULT: /autocognite-arjuna-pro/mproject/tests
+      
+    -cp,  --consider-packages <Comma-separated list of Java package names/patterns>
+            Consider only these test packages for execution
+            DEFAULT: All
+      
+    -pn,  --package-name <Exact Java package name>
+            Consider only this test package for execution
+            DEFAULT: None
+      
+    -ip,  --ignore-packages <Comma-separated list of Java package names/patterns>
+            Ignore these test packages for execution
+            DEFAULT: None
+      
+    -cc,  --consider-classes <Comma-separated list of Java class names/patterns>
+            Consider only these test classes for execution
+            DEFAULT: All
+      
+    -cn,  --class-name <Java class name>
+            Consider only this test class for execution
+            DEFAULT: All
+      
+    -ic,  --ignore-classes <Comma-separated list of Java class names/patterns>
+            Ignore these test classes for execution
+            DEFAULT: None
+      
+    -cm,  --consider-methods <Comma-separated list of Java method names/patterns>
+            Consider only these test methods for execution
+            DEFAULT: All
+      
+    -im,  --ignore-methods <Comma-separated list of Java method names/patterns>
+            Ignore these test methods for execution
+            DEFAULT: None
+ 
+EXECUTION:
+
+    -rid, --run-id <String>
+            An identifier/label for test execution.
+            DEFAULT: mrunid
+
+REPORTING:
+ 
+    -rm,  --report-mode <(MINIMAL/BASIC/ADVANCED/DEBUG)>
+            Controls types and level of information in built-in reports.
+            DEFAULT: MINIMAL
+
+    -rgb, --report-generators-builtin <Comma separated list of built-in report generation formats> 
+            Generate Test Reports in the formats supplied as parameters, at the end of the test.
+            Currently supported: EXCEL
+      
+    -rlb, --report-listeners-builtin <Comma separated list of built-in report listening formats>
+            Generate Test Reports in the formats supplied as parameters, *during* the test.
+            Currently supported: CONSOLE
+
+GET INFORMATION ABOUT ARJUNA:
+
+    -v,   --version
+            Prints Arjuna version.
+      
+    -h,   --help
+            Prints all command line options that Arjuna CLI provides with basic help.
+			
+---------------------------------------------------------------------------------------------------
+
+EXAMPLES
+--------
+(Use arjuna.sh on non-Windows OS)
+
+    arjuna.bat
+            Runs all the tests in the Java Project in /autocognite-arjuna-pro/mproject/tests 
+            directory and generates MINIMAL report.
+		
+    arjuna.bat -d /usr/project/ -rm BASIC
+            Runs all the tests in /usr/project/ directory and generates report in BASIC mode.
+		
+    arjuna.bat -cp a.b.c,a.b.d
+            Runs all the tests in the two packages.
+		
+    arjuna.bat -ip a.b.* -runid beta2-run
+            Runs all tests in the project and ignore the test in packages that matched with 
+            regex, labeled with run id as "beta2-run". The reports are generated under 
+            /report/<timestamp>-beta2-run directory
+		
+    arjuna.bat -pn a.b -cn Test1 -dl ERROR
+            Runs all tests in Test1 class and display ERROR & FATAL level log messages.
+		
+---------------------------------------------------------------------------------------------------
+		
+

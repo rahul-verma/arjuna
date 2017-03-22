@@ -45,10 +45,15 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 		this.dataSource =  this.methodDef.getDataSource();
 		
 		initFixtures(TestClassFixtureType.SETUP_METHOD_INSTANCE, TestClassFixtureType.TEARDOWN_METHOD_INSTANCE);
-		this.getSetUpFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
-		this.getTearDownFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
-		this.getSetUpFixture().setTestContainerFragment(this.getTestContainerFragment());
-		this.getTearDownFixture().setTestContainerFragment(this.getTestContainerFragment());
+		if (this.getSetUpFixture() != null){
+			this.getSetUpFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());	
+			this.getSetUpFixture().setTestContainerFragment(this.getTestContainerFragment());
+		}
+		
+		if (this.getTearDownFixture() != null){
+			this.getTearDownFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
+			this.getTearDownFixture().setTestContainerFragment(this.getTestContainerFragment());			
+		}
 		
 		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_METHOD_INSTANCE);
 	}

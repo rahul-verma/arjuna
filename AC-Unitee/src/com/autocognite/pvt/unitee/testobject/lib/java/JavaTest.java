@@ -43,10 +43,15 @@ public class JavaTest extends BaseTestObject implements Test{
 		this.setThreadId(Thread.currentThread().getName());
 		
 		initFixtures(TestClassFixtureType.SETUP_TEST, TestClassFixtureType.TEARDOWN_TEST);
-		this.getSetUpFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
-		this.getTearDownFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
-		this.getSetUpFixture().setTestContainerFragment(this.getTestContainerFragment());
-		this.getTearDownFixture().setTestContainerFragment(this.getTestContainerFragment());
+		if (this.getSetUpFixture() != null){
+			this.getSetUpFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
+			this.getSetUpFixture().setTestContainerFragment(this.getTestContainerFragment());
+		}
+		
+		if (this.getTearDownFixture() != null){
+			this.getTearDownFixture().setTestContainerInstance(this.getTestContainerFragment().getContainerInstance());
+			this.getTearDownFixture().setTestContainerFragment(this.getTestContainerFragment());
+		}
 		
 		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_TEST);
 	}

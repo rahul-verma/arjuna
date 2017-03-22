@@ -42,6 +42,7 @@ public class BaseSessionSubNode implements SessionSubNode{
 	public BaseSessionSubNode(SessionNode sessionNode, int id, String groupName) throws Exception{
 		this(sessionNode, id);
 		this.group = ArjunaInternal.getGroupLoader().getGroup(this, groupName);
+		this.group.setSessionName(this.getSession().getName());
 		this.name += "-" + group.getName();
 	}
 	
@@ -64,6 +65,7 @@ public class BaseSessionSubNode implements SessionSubNode{
 			existAsNameIsNotString();
 		}
 		this.group = ArjunaInternal.getGroupLoader().getGroup(this, groupName);
+		this.group.setSessionName(this.getSession().getName());
 		this.name += "-" + group.getName();
 	}
 	

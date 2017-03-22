@@ -37,7 +37,7 @@ public class DefaultTestObjectProperties
 		this.setMethod(naValue);
 		this.setName(notSetValue);
 		this.setMethodInstanceNumber(naValue);
-		this.setSessionName(new StringValue("default_session"));
+		this.setSessionName(new StringValue("msession"));
 		this.setTestNumber(naValue);	
 		this.setThreadId(notSetValue);
 		this.setSessionNodeName(notSetValue);

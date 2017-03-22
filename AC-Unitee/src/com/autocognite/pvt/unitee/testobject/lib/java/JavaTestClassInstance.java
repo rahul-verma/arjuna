@@ -61,8 +61,13 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 		this.setThreadId(Thread.currentThread().getName());
 		
 		initFixtures(TestClassFixtureType.SETUP_CLASS_INSTANCE, TestClassFixtureType.TEARDOWN_CLASS_INSTANCE);
-		this.getSetUpFixture().setTestContainerInstance(this);
-		this.getTearDownFixture().setTestContainerInstance(this);
+		if (this.getSetUpFixture() != null){
+			this.getSetUpFixture().setTestContainerInstance(this);	
+		}
+		
+		if (this.getTearDownFixture() != null){
+			this.getTearDownFixture().setTestContainerInstance(this);			
+		}
 		
 		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_CLASS_INSTANCE);
 		

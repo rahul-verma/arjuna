@@ -60,11 +60,16 @@ public class JavaTestClassFragment extends BaseTestObject implements TestContain
 		this.setThreadId(Thread.currentThread().getName());
 		
 		initFixtures(TestClassFixtureType.SETUP_CLASS_FRAGMENT, TestClassFixtureType.TEARDOWN_CLASS_FRAGMENT);
-		this.getSetUpFixture().setTestContainerInstance(this.getContainerInstance());
-		this.getTearDownFixture().setTestContainerInstance(this.getContainerInstance());
-		this.getSetUpFixture().setTestContainerFragment(this);
-		this.getTearDownFixture().setTestContainerFragment(this);
+		if (this.getSetUpFixture() != null){
+			this.getSetUpFixture().setTestContainerInstance(this.getContainerInstance());
+			this.getSetUpFixture().setTestContainerFragment(this);
+		}
 		
+		if (this.getTearDownFixture() != null){
+			this.getTearDownFixture().setTestContainerInstance(this.getContainerInstance());
+			this.getTearDownFixture().setTestContainerFragment(this);			
+		}
+	
 		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_CLASS_FRAGMENT);
 	}
 

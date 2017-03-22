@@ -18,7 +18,12 @@
  ******************************************************************************/
 package com.autocognite.pvt.unitee.cli;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import com.autocognite.pvt.batteries.cli.AbstractCLI;
+import com.autocognite.pvt.batteries.console.Console;
+import com.autocognite.pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig;
 
 public class UniteeCLI extends AbstractCLI {
 	
@@ -115,6 +120,12 @@ public class UniteeCLI extends AbstractCLI {
 
 	@Override
 	public void help() throws Exception {
-		super.help("unitee.sh OR unitee.bat\r\n\r\n");
+		BufferedReader txtReader = new BufferedReader(new InputStreamReader(UniteeCLI.class.getResourceAsStream("/com/autocognite/pvt/text/arjuna_cli.help")));
+		String line = null;
+		while ((line = txtReader.readLine()) != null) {
+			Console.displayError(line);
+		}
+		txtReader.close();
+//		super.help("unitee.sh OR unitee.bat\r\n\r\n");
 	}
 }

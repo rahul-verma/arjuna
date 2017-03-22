@@ -285,16 +285,14 @@ public abstract class BaseTestObject implements TestObject {
 		Fixture sFix = this.getTestFixtures().getFixture(sFixType);
 		if (sFix != null){
 			sFix.setTestObject(this);
+			this.setSetUpFixture(sFix);
 		}
-		sFix.setTestObject(this);
-		this.setSetUpFixture(sFix);
 		
 		Fixture tFix = this.getTestFixtures().getFixture(tFixType);
 		if (tFix != null){
 			tFix.setTestObject(this);
+			this.setTearDownFixture(tFix);	
 		}
-		tFix.setTestObject(this);
-		this.setTearDownFixture(tFix);		
 	}
 	
 	public abstract TestFixtures getTestFixtures();
