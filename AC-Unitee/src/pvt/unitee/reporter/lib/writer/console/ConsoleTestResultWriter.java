@@ -27,11 +27,11 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.enums.TestAttribute;
 import com.arjunapro.testauto.enums.TestObjectAttribute;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.TestReportSection;
 import pvt.arjunapro.enums.TestResultAttribute;
 import pvt.arjunapro.enums.TestResultType;

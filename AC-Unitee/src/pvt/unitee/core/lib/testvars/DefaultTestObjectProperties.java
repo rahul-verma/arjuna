@@ -2,12 +2,12 @@ package pvt.unitee.core.lib.testvars;
 
 import com.arjunapro.ddt.datarecord.DefaultDataRecord;
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.enums.TestObjectAttribute;
 import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.enums.ValueType;
 import com.arjunapro.testauto.interfaces.Value;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.value.DoubleValue;
 import pvt.batteries.value.EnumValue;

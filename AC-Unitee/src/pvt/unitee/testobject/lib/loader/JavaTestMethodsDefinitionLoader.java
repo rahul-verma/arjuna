@@ -15,7 +15,6 @@ import com.arjunapro.ddt.annotations.DriveWithDataArray;
 import com.arjunapro.ddt.annotations.DriveWithDataFile;
 import com.arjunapro.ddt.annotations.DriveWithDataGenerator;
 import com.arjunapro.ddt.annotations.DriveWithDataMethod;
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.sysauto.batteries.DataBatteries;
 import com.arjunapro.testauto.annotations.Instances;
 import com.arjunapro.testauto.annotations.Skip;
@@ -23,6 +22,7 @@ import com.arjunapro.testauto.annotations.TestMethod;
 import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.SkipCode;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.datasource.DataSourceBuilder;

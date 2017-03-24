@@ -8,8 +8,7 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
-
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.SkipCode;
 import pvt.arjunapro.enums.TestResultCode;
 import pvt.arjunapro.enums.UnpickedCode;

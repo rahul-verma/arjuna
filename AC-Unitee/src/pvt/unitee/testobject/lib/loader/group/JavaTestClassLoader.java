@@ -5,8 +5,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
-
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;

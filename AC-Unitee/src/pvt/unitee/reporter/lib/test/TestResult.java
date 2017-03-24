@@ -6,11 +6,11 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.config.RunConfig;
 import com.arjunapro.testauto.interfaces.TestVariables;
 import com.google.gson.JsonObject;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.StepResultAttribute;
 import pvt.arjunapro.enums.StepResultType;
 import pvt.arjunapro.enums.TestResultAttribute;

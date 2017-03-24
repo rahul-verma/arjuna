@@ -52,9 +52,6 @@ class files -->
 			<keep name="com.autocognite.ArjunaPro" access="public">
 				<method access="public" name="*" />
 			</keep>
-
-			<keep name="pvt.**" allowobfuscation="true">
-			</keep>
 				
 			<keep name="com.arjunapro.testauto.enums.**" access="public">
 				<field name="*" />
@@ -74,13 +71,25 @@ class files -->
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
 			
+			<keep name="com.arjunapro.uiauto.appium.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
+			
 			<keep name="com.arjunapro.sysauto.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
 					
-			<keepclassmembers name="pvt.arjuna.enums.**" access="public">
+			<keepclassmembers name="pvt.arjunapro.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keepclassmembers>
+			
+			<keepclassmembers name="pvt.uiauto.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
@@ -92,6 +101,13 @@ class files -->
 				<method access="public static" name="getSame"/>
 					<method access="public static" name="pathToAbsolutePath"/>
 			</keepclassmembers>
+			
+			<keepclassmembers name="pvt.uiautomator.api.**" access="public">
+				<method access="public"/>
+			</keepclassmembers>
+			
+			<keep name="pvt.**" allowobfuscation="true">
+			</keep>
 
 			<keepattribute name="LineNumberTable" />
 			<keepattribute name="SourceFile" />

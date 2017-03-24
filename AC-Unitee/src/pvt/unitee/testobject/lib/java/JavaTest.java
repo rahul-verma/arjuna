@@ -6,10 +6,10 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.FixtureResultType;
 import pvt.arjunapro.enums.TestClassFixtureType;
 import pvt.arjunapro.enums.TestResultCode;

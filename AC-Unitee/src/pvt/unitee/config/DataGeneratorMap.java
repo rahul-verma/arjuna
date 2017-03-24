@@ -25,8 +25,8 @@ import org.apache.log4j.Logger;
 
 import com.arjunapro.ddt.annotations.DataGenerator;
 import com.arjunapro.ddt.interfaces.DataSource;
-import com.arjunapro.pvt.ArjunaInternal;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 
 public class DataGeneratorMap {

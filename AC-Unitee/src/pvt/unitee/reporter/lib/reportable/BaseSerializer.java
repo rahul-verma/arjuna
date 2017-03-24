@@ -5,12 +5,12 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.interfaces.Value;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 
 public class BaseSerializer {

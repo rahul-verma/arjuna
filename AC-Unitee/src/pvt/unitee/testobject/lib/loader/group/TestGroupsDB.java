@@ -10,9 +10,9 @@ import java.util.Map;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.console.Console;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.arjunapro.enums.PickerTargetType;
 import pvt.arjunapro.enums.SkipCode;

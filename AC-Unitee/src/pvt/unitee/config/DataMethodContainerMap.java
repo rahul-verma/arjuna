@@ -25,10 +25,10 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.ddt.annotations.DataMethodContainer;
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.sysauto.batteries.DataBatteries;
 import com.arjunapro.testauto.checks.Checks;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 import pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler;

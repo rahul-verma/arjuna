@@ -5,10 +5,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.sysauto.batteries.ThreadBatteries;
 import com.arjunapro.testauto.config.RunConfig;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.TestResultCode;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.reporter.lib.IssueId;

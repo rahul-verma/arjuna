@@ -27,10 +27,10 @@ import com.arjunapro.uiauto.enums.UiElementType;
 
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
+import pvt.uiauto.enums.IdentifyBy;
 import pvt.uiautomator.UiAutomator;
 import pvt.uiautomator.api.ElementMetaData;
 import pvt.uiautomator.api.Identifier;
-import pvt.uiautomator.api.identify.enums.IdentifyBy;
 
 public class DefaultElementMetaData implements ElementMetaData {
 	private HashMap<String, String> metaData = new HashMap<String, String>();

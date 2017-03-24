@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.sysauto.batteries.DataBatteries;
 import com.arjunapro.testauto.annotations.ClassDependency;
 import com.arjunapro.testauto.annotations.MethodDependency;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;

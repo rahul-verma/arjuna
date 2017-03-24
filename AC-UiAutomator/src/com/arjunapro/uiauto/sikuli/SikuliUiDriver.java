@@ -27,8 +27,8 @@ import org.sikuli.script.Match;
 import com.arjunapro.uiauto.interfaces.UiElement;
 
 import pvt.sikuli.api.SikuliMediator;
+import pvt.uiauto.enums.ScreenIdentifyBy;
 import pvt.uiautomator.api.ElementMetaData;
-import pvt.uiautomator.api.identify.enums.ScreenIdentifyBy;
 
 public interface SikuliUiDriver {
 	void focusOnApp() throws Exception;

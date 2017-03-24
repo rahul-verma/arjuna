@@ -26,8 +26,8 @@ import org.apache.log4j.Logger;
 
 import com.arjunapro.ddt.annotations.DataMethod;
 import com.arjunapro.ddt.datarecord.DefaultDataRecordContainer;
-import com.arjunapro.pvt.ArjunaInternal;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 
 public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {

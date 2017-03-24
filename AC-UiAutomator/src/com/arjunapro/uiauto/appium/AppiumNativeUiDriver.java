@@ -20,7 +20,7 @@ package com.arjunapro.uiauto.appium;
 
 import pvt.appium.lib.base.AbstractAppiumUiDriver;
 import pvt.batteries.config.Batteries;
-import pvt.uiautomator.api.identify.enums.MobileNativeIdentifyBy;
+import pvt.uiauto.enums.MobileNativeIdentifyBy;
 import pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
 public class AppiumNativeUiDriver extends AbstractAppiumUiDriver {

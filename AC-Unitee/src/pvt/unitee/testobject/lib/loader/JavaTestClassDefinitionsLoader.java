@@ -17,7 +17,6 @@ import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.sysauto.batteries.DataBatteries;
 import com.arjunapro.testauto.annotations.Instances;
 import com.arjunapro.testauto.annotations.Skip;
@@ -27,6 +26,7 @@ import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.interfaces.TestVariables;
 import com.arjunapro.testauto.interfaces.Value;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.SkipCode;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discoverer.DiscoveredFile;

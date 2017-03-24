@@ -2,10 +2,10 @@ package pvt.unitee.reporter.lib.reportable;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.interfaces.TestVariables;
 import com.google.gson.JsonObject;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 
 public class TestVariablesSerializer extends BaseSerializer {

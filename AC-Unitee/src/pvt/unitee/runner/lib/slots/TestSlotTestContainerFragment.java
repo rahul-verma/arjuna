@@ -6,8 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
-
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;

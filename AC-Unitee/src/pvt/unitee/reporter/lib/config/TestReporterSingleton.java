@@ -25,10 +25,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.enums.TestAttribute;
 import com.arjunapro.testauto.enums.TestObjectAttribute;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.arjunapro.enums.EventAttribute;
 import pvt.arjunapro.enums.FixtureResultPropertyType;

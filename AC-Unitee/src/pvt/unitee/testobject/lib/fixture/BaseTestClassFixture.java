@@ -6,10 +6,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.sysauto.batteries.DataBatteries;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.FixtureResultType;
 import pvt.arjunapro.enums.IssueSubType;
 import pvt.arjunapro.enums.IssueType;

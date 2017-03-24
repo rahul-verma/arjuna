@@ -16,9 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.arjunapro.uiauto.appium;
+package pvt.uiauto.enums;
 
-public enum AppiumMobilePlatformType {
-	ANDROID,
-	IOS;
+public enum MobileWebIdentifyBy {
+	ID, NAME, XPATH, CSS, CLASS, LINK_TEXT, PARTIAL_LINK_TEXT, TAG,
+	X_TEXT, X_TITLE, X_PARTIAL_TEXT, X_TYPE, X_VALUE, X_IMAGE_SRC; 
 }

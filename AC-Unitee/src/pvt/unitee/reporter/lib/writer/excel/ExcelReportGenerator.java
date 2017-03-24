@@ -21,7 +21,6 @@ import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.sysauto.batteries.SystemBatteries;
 import com.arjunapro.testauto.enums.TestAttribute;
 import com.arjunapro.testauto.enums.TestObjectAttribute;
@@ -30,6 +29,7 @@ import com.arjunapro.testauto.interfaces.Value;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.arjunapro.enums.EventAttribute;
 import pvt.arjunapro.enums.FixtureResultPropertyType;

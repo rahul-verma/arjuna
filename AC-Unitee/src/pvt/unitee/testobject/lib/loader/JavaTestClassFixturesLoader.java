@@ -9,7 +9,6 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.sysauto.batteries.DataBatteries;
 import com.arjunapro.sysauto.batteries.SystemBatteries;
 import com.arjunapro.testauto.annotations.AfterClass;
@@ -28,6 +27,7 @@ import com.arjunapro.testauto.config.RunConfig;
 import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.arjunapro.enums.TestClassFixtureType;
 import pvt.batteries.config.Batteries;

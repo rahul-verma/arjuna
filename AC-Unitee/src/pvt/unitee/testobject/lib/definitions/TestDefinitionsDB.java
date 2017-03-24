@@ -11,10 +11,10 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.annotations.ClassDependency;
 import com.arjunapro.testauto.annotations.MethodDependency;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.annotate.None;
 import pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;

@@ -20,9 +20,9 @@ package pvt.unitee.lib.engine;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.config.RunConfig;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import pvt.unitee.testobject.lib.loader.session.SessionSubNode;

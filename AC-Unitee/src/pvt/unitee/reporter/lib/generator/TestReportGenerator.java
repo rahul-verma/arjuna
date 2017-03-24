@@ -4,9 +4,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.google.gson.JsonElement;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.arjunapro.interfaces.ReportGenerator;
 import pvt.batteries.config.Batteries;

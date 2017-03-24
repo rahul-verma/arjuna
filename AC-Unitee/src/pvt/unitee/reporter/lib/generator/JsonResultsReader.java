@@ -8,10 +8,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.interfaces.ReportGenerator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.filehandler.FileReader;

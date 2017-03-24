@@ -27,9 +27,9 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.console.Console;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.EventAttribute;
 import pvt.arjunapro.enums.TestReportSection;
 import pvt.batteries.config.Batteries;

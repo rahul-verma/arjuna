@@ -20,9 +20,9 @@ package pvt.unitee.core.lib.metadata;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.enums.TestObjectType;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;

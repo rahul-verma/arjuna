@@ -3,13 +3,13 @@ package pvt.unitee.config;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.sysauto.batteries.SystemBatteries;
 import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.enums.TestAttribute;
 import com.arjunapro.testauto.enums.TestObjectAttribute;
 import com.arjunapro.testauto.interfaces.Value;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.arjunapro.enums.EventAttribute;
 import pvt.arjunapro.enums.FixtureResultPropertyType;

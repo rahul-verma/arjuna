@@ -7,10 +7,10 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.pvt.ArjunaInternal;
 import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
+import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.SkipCode;
 import pvt.arjunapro.enums.TestClassFixtureType;
 import pvt.arjunapro.enums.TestResultCode;

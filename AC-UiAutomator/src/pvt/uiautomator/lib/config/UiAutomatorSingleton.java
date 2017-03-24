@@ -22,19 +22,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.uiauto.appium.AppiumAndroidBrowserType;
-import com.arjunapro.uiauto.appium.AppiumIosBrowserType;
-import com.arjunapro.uiauto.appium.AppiumMobilePlatformType;
+import com.arjunapro.uiauto.appium.enums.AppiumAndroidBrowserType;
+import com.arjunapro.uiauto.appium.enums.AppiumIosBrowserType;
+import com.arjunapro.uiauto.appium.enums.AppiumMobilePlatformType;
 import com.arjunapro.uiauto.enums.UiAutomationContext;
 import com.arjunapro.uiauto.enums.UiElementType;
 
+import pvt.uiauto.enums.IdentifyBy;
+import pvt.uiauto.enums.MobileNativeIdentifyBy;
+import pvt.uiauto.enums.MobileWebIdentifyBy;
+import pvt.uiauto.enums.NativeIdentifyBy;
+import pvt.uiauto.enums.ScreenIdentifyBy;
+import pvt.uiauto.enums.WebIdentifyBy;
 import pvt.uiautomator.api.CentralPageMap;
-import pvt.uiautomator.api.identify.enums.IdentifyBy;
-import pvt.uiautomator.api.identify.enums.MobileNativeIdentifyBy;
-import pvt.uiautomator.api.identify.enums.MobileWebIdentifyBy;
-import pvt.uiautomator.api.identify.enums.NativeIdentifyBy;
-import pvt.uiautomator.api.identify.enums.ScreenIdentifyBy;
-import pvt.uiautomator.api.identify.enums.WebIdentifyBy;
 import pvt.uiautomator.lib.DefaultCentralUiMap;
 
 public enum UiAutomatorSingleton {
