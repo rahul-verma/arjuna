@@ -16,25 +16,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.uiautomator.lib;
+package pvt.arjunapro.uiauto.exceptions;
 
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiauto.enums.UiAutomationContext;
-import pvt.uiautomator.lib.base.BaseUiDriver;
+public class IgnoreElementException extends Exception {
 
-public class DefaultUiDriver extends BaseUiDriver{
-
-	public DefaultUiDriver(UiAutomationContext context) {
-		super(context);
-	}
-	
-	public DefaultUiDriver(UiAutomationContext context, ElementLoaderType loaderType) {
-		super(context, loaderType);
-	}
-
-	public DefaultUiDriver() {
-		super();
-	}
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 990169334688511644L;
 
 }

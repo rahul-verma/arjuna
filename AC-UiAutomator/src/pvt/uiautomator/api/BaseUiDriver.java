@@ -20,8 +20,8 @@ package pvt.uiautomator.api;
 
 import java.io.File;
 
-import com.arjunapro.uiauto.enums.UiAutomationContext;
-import com.arjunapro.uiauto.enums.UiDriverEngine;
+import pvt.uiauto.enums.UiAutomationContext;
+import pvt.uiauto.enums.UiDriverEngine;
 //
 public interface BaseUiDriver {
 	UiDriverEngine getUiDriverEngineName() throws Exception;

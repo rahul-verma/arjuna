@@ -20,8 +20,8 @@ package com.arjunapro.uiauto.interfaces;
 
 import java.util.HashMap;
 
-import com.arjunapro.uiauto.enums.UiAutomationContext;
-
+import pvt.arjunapro.uiauto.interfaces.PageMapper;
+import pvt.uiauto.enums.UiAutomationContext;
 import pvt.uiautomator.api.BaseUiDriver;
 import pvt.uiautomator.api.CentralPageMap;
 import pvt.uiautomator.api.appactions.BrowserActionHandler;

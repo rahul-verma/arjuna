@@ -24,11 +24,11 @@ import java.util.List;
 
 import org.sikuli.script.Match;
 
-import com.arjunapro.uiauto.enums.ElementLoaderType;
 import com.arjunapro.uiauto.interfaces.UiElement;
-import com.arjunapro.uiauto.sikuli.SikuliUiDriver;
 
+import pvt.arjunapro.uiauto.sikuli.SikuliUiDriver;
 import pvt.sikuli.api.SikuliMediator;
+import pvt.uiauto.enums.ElementLoaderType;
 import pvt.uiautomator.api.ElementMetaData;
 import pvt.uiautomator.lib.base.BaseUiScreenMediator;
 

@@ -16,25 +16,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.uiautomator.lib;
+package pvt.arjunapro.uiauto.appium;
 
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiauto.enums.UiAutomationContext;
-import pvt.uiautomator.lib.base.BaseUiDriver;
+import pvt.appium.lib.base.AbstractAppiumUiDriver;
+import pvt.uiauto.enums.MobileWebIdentifyBy;
 
-public class DefaultUiDriver extends BaseUiDriver{
-
-	public DefaultUiDriver(UiAutomationContext context) {
-		super(context);
+public class AppiumWebUiDriver extends AbstractAppiumUiDriver {
+	public AppiumWebUiDriver() throws Exception{
 	}
 	
-	public DefaultUiDriver(UiAutomationContext context, ElementLoaderType loaderType) {
-		super(context, loaderType);
+	protected boolean checkNullIdentifier(String identifier, String idValue) throws Exception{
+		return MobileWebIdentifyBy.valueOf(identifier) == null;
 	}
-
-	public DefaultUiDriver() {
-		super();
+	
+	@Override
+	public String getName() {
+		return "Appium Web UiDriver";
 	}
-
+	
+	@Override
+	public void switchToWebContext() throws Exception{
+		// do nothing
+	}
 
 }

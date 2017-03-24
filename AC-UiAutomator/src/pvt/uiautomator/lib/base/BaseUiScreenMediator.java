@@ -22,9 +22,9 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.arjunapro.uiauto.enums.UiElementType;
 import com.arjunapro.uiauto.interfaces.UiElement;
 
+import pvt.uiauto.enums.UiElementType;
 import pvt.uiautomator.api.ElementMetaData;
 import pvt.uiautomator.api.UiMediator;
 

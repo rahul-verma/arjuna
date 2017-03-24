@@ -16,25 +16,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.uiautomator.lib;
+package pvt.arjunapro.uiauto.appium;
 
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiauto.enums.UiAutomationContext;
-import pvt.uiautomator.lib.base.BaseUiDriver;
+import pvt.appium.lib.base.AbstractAppiumUiDriver;
+import pvt.batteries.config.Batteries;
+import pvt.uiauto.enums.MobileNativeIdentifyBy;
+import pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
-public class DefaultUiDriver extends BaseUiDriver{
-
-	public DefaultUiDriver(UiAutomationContext context) {
-		super(context);
+public class AppiumNativeUiDriver extends AbstractAppiumUiDriver {
+	
+	public AppiumNativeUiDriver() throws Exception{
+		super(Batteries.value(UiAutomatorPropertyType.APP_MOBILE_PATH).asString());
 	}
 	
-	public DefaultUiDriver(UiAutomationContext context, ElementLoaderType loaderType) {
-		super(context, loaderType);
+	public AppiumNativeUiDriver(String appPath) throws Exception{
+		super(appPath);
+	}
+	
+	protected boolean checkNullIdentifier(String identifier, String idValue) throws Exception{
+		return MobileNativeIdentifyBy.valueOf(identifier) == null;
 	}
 
-	public DefaultUiDriver() {
-		super();
+	@Override
+	public String getName() {
+		return "Appium Native UiDriver";
 	}
-
+	
+	@Override
+	public void switchToNativeContext() throws Exception{
+		// do nothing
+	}
 
 }

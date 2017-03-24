@@ -25,11 +25,11 @@ import java.util.List;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
-import com.arjunapro.uiauto.appium.AppiumUiDriver;
-import com.arjunapro.uiauto.enums.ElementLoaderType;
 import com.arjunapro.uiauto.interfaces.UiElement;
 
 import io.appium.java_client.MobileElement;
+import pvt.arjunapro.uiauto.appium.AppiumUiDriver;
+import pvt.uiauto.enums.ElementLoaderType;
 import pvt.uiautomator.api.ElementMetaData;
 import pvt.uiautomator.api.UiMediator;
 

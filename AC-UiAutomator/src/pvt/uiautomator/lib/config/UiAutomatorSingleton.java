@@ -22,17 +22,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.uiauto.appium.enums.AppiumAndroidBrowserType;
-import com.arjunapro.uiauto.appium.enums.AppiumIosBrowserType;
-import com.arjunapro.uiauto.appium.enums.AppiumMobilePlatformType;
-import com.arjunapro.uiauto.enums.UiAutomationContext;
-import com.arjunapro.uiauto.enums.UiElementType;
 
+import pvt.uiauto.enums.AppiumAndroidBrowserType;
+import pvt.uiauto.enums.AppiumIosBrowserType;
+import pvt.uiauto.enums.AppiumMobilePlatformType;
 import pvt.uiauto.enums.IdentifyBy;
 import pvt.uiauto.enums.MobileNativeIdentifyBy;
 import pvt.uiauto.enums.MobileWebIdentifyBy;
 import pvt.uiauto.enums.NativeIdentifyBy;
 import pvt.uiauto.enums.ScreenIdentifyBy;
+import pvt.uiauto.enums.UiAutomationContext;
+import pvt.uiauto.enums.UiElementType;
 import pvt.uiauto.enums.WebIdentifyBy;
 import pvt.uiautomator.api.CentralPageMap;
 import pvt.uiautomator.lib.DefaultCentralUiMap;

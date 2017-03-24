@@ -16,25 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.uiautomator.lib;
+package pvt.uiauto.enums;
 
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiauto.enums.UiAutomationContext;
-import pvt.uiautomator.lib.base.BaseUiDriver;
-
-public class DefaultUiDriver extends BaseUiDriver{
-
-	public DefaultUiDriver(UiAutomationContext context) {
-		super(context);
-	}
+public enum UiElementType {
+	TEXTBOX, LINK, BUTTON, DROPDOWN, CHECKBOX, RADIO, URL, IMAGE, TITLE, GENERIC, PASSWORD, SUBMIT_BUTTON;
 	
-	public DefaultUiDriver(UiAutomationContext context, ElementLoaderType loaderType) {
-		super(context, loaderType);
-	}
-
-	public DefaultUiDriver() {
-		super();
-	}
-
-
 }

@@ -18,9 +18,8 @@
  ******************************************************************************/
 package com.arjunapro.uiauto.interfaces;
 
-import com.arjunapro.uiauto.enums.ElementLoaderType;
-import com.arjunapro.uiauto.enums.UiAutomationContext;
-
+import pvt.uiauto.enums.ElementLoaderType;
+import pvt.uiauto.enums.UiAutomationContext;
 import pvt.uiautomator.api.BaseUiDriver;
 import pvt.uiautomator.api.ElementMetaData;
 import pvt.uiautomator.api.appactions.BrowserActionHandler;

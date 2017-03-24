@@ -20,8 +20,7 @@ package pvt.uiautomator.lib;
 
 import java.util.HashMap;
 
-import com.arjunapro.uiauto.interfaces.PageMapper;
-
+import pvt.arjunapro.uiauto.interfaces.PageMapper;
 import pvt.uiautomator.api.CentralPageMap;
 
 public class DefaultCentralUiMap implements CentralPageMap {

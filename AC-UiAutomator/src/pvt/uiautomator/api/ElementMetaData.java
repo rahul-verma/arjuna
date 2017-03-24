@@ -21,7 +21,7 @@ package pvt.uiautomator.api;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.arjunapro.uiauto.enums.UiAutomationContext;
+import pvt.uiauto.enums.UiAutomationContext;
 
 public interface ElementMetaData {
 

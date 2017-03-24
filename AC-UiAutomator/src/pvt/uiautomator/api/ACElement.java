@@ -18,9 +18,8 @@
  ******************************************************************************/
 package pvt.uiautomator.api;
 
-import com.arjunapro.uiauto.enums.ElementLoaderType;
-import com.arjunapro.uiauto.enums.UiElementType;
-
+import pvt.uiauto.enums.ElementLoaderType;
+import pvt.uiauto.enums.UiElementType;
 import pvt.uiautomator.api.actions.BasicActionHandler;
 
 public interface ACElement extends BasicActionHandler{

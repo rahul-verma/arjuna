@@ -16,25 +16,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.uiautomator.lib;
+package pvt.arjunapro.uiauto.interfaces;
 
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiauto.enums.UiAutomationContext;
-import pvt.uiautomator.lib.base.BaseUiDriver;
+import java.util.HashMap;
 
-public class DefaultUiDriver extends BaseUiDriver{
+import com.arjunapro.uiauto.interfaces.Page;
+import com.arjunapro.uiauto.interfaces.UiDriver;
 
-	public DefaultUiDriver(UiAutomationContext context) {
-		super(context);
-	}
+public interface App{
 	
-	public DefaultUiDriver(UiAutomationContext context, ElementLoaderType loaderType) {
-		super(context, loaderType);
-	}
+	String getName();
+	void setName(String name);
 
-	public DefaultUiDriver() {
-		super();
-	}
+	void addElement(String uiElementName, HashMap<String, String> elemMap) throws Exception;
+	void addElement(String uiLabel, String uiElementName, HashMap<String, String> elemMap) throws Exception;
 
+	void registerPage(String uiLabel, UiDriver uiDriver, String mapPath) throws Exception;
+	//void registerPage(String uiLabel, UiDriver uiDriver, PageMapper mapper) throws Exception;
 
+	Page page(String name) throws Exception;
+	
 }

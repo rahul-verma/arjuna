@@ -23,11 +23,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import com.arjunapro.testauto.config.RunConfig;
-import com.arjunapro.uiauto.enums.ElementLoaderType;
-import com.arjunapro.uiauto.enums.UiElementType;
 
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
+import pvt.uiauto.enums.ElementLoaderType;
+import pvt.uiauto.enums.UiElementType;
 import pvt.uiautomator.UiAutomator;
 import pvt.uiautomator.api.ACElement;
 import pvt.uiautomator.api.ElementMetaData;

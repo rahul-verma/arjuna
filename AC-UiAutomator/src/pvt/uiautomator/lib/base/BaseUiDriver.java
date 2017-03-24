@@ -22,15 +22,15 @@ import java.io.File;
 import java.util.HashMap;
 
 import com.arjunapro.testauto.config.RunConfig;
-import com.arjunapro.uiauto.enums.ElementLoaderType;
-import com.arjunapro.uiauto.enums.UiAutomationContext;
-import com.arjunapro.uiauto.enums.UiDriverEngine;
-import com.arjunapro.uiauto.enums.UiElementType;
 import com.arjunapro.uiauto.interfaces.UiDriver;
 import com.arjunapro.uiauto.interfaces.UiElement;
 
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
+import pvt.uiauto.enums.ElementLoaderType;
+import pvt.uiauto.enums.UiAutomationContext;
+import pvt.uiauto.enums.UiDriverEngine;
+import pvt.uiauto.enums.UiElementType;
 import pvt.uiautomator.UiAutomator;
 import pvt.uiautomator.api.ElementMetaData;
 import pvt.uiautomator.lib.DefaultElementMetaData;

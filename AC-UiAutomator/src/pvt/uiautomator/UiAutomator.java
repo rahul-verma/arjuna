@@ -20,10 +20,9 @@ package pvt.uiautomator;
 
 import java.util.ArrayList;
 
-import com.arjunapro.uiauto.appium.enums.AppiumMobilePlatformType;
-import com.arjunapro.uiauto.enums.UiAutomationContext;
-
 import pvt.batteries.integration.ComponentConfigurator;
+import pvt.uiauto.enums.AppiumMobilePlatformType;
+import pvt.uiauto.enums.UiAutomationContext;
 import pvt.uiautomator.lib.config.UiAutomatorConfigurator;
 import pvt.uiautomator.lib.config.UiAutomatorSingleton;
 

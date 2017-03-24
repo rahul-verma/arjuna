@@ -20,9 +20,9 @@ package pvt.uiautomator.api;
 
 import java.io.File;
 
-import com.arjunapro.uiauto.enums.UiElementType;
 import com.arjunapro.uiauto.interfaces.UiElement;
 
+import pvt.uiauto.enums.UiElementType;
 import pvt.uiautomator.api.actions.AttributesInquirer;
 import pvt.uiautomator.api.actions.BasicActionHandler;
 import pvt.uiautomator.api.actions.ChainActionHandler;

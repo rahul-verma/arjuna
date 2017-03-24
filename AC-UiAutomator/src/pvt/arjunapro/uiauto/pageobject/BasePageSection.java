@@ -16,25 +16,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.uiautomator.lib;
+package pvt.arjunapro.uiauto.pageobject;
 
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiauto.enums.UiAutomationContext;
-import pvt.uiautomator.lib.base.BaseUiDriver;
+import com.arjunapro.uiauto.interfaces.Page;
+import com.arjunapro.uiauto.interfaces.UiDriver;
 
-public class DefaultUiDriver extends BaseUiDriver{
+import pvt.arjunapro.uiauto.interfaces.PageSection;
 
-	public DefaultUiDriver(UiAutomationContext context) {
-		super(context);
+public class BasePageSection extends BasePage implements PageSection{
+
+	public BasePageSection(
+			String uiLabel, 
+			Page parent, 
+			UiDriver automator) throws Exception {
+		super(uiLabel, parent, automator);
 	}
 	
-	public DefaultUiDriver(UiAutomationContext context, ElementLoaderType loaderType) {
-		super(context, loaderType);
+	public BasePageSection(
+			String uiLabel, 
+			Page parent,
+			UiDriver automator, 
+			String mapPath) throws Exception {
+		super(uiLabel, parent, automator, mapPath);
 	}
-
-	public DefaultUiDriver() {
-		super();
-	}
-
-
+	
 }
