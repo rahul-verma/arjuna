@@ -18,6 +18,7 @@
  ******************************************************************************/
 package pvt.unitee.config;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -25,6 +26,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Level;
 
 import com.arjunapro.ddt.annotations.DataGenerator;
@@ -108,14 +110,14 @@ public enum ArjunaSingleton {
 		Batteries.processConfigDefaults();
 		integrator = uConf.getIntegrator();
 		//integrator.enumerate();
-		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/autocognite_defaults_updated.conf"));
+		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/arjuna_visible.conf"));
 		reader.process();		
 		integrator.setProjectDir(Batteries.getBaseDir());
 		Batteries.processConfigProperties(reader.getProperties());
 		//integrator.enumerate();
 		
 		// arjuna file
-		HoconReader reader2 = new HoconFileReader(integrator.value(BatteriesPropertyType.DIRECTORY_CONFIG).asString() + "/" + integrator.value(BatteriesPropertyType.CONFIG_FILE_NAME).asString());
+		HoconReader reader2 = new HoconFileReader(integrator.value(BatteriesPropertyType.DIRECTORY_CONFIG).asString() + "/" + integrator.value(BatteriesPropertyType.CONFIG_CENTRAL_FILE_NAME).asString());
 		reader2.process();
 		
 		try{
@@ -152,63 +154,75 @@ public enum ArjunaSingleton {
 		HashMap<String,Value> options = cliConfigurator.getUserOptions();
 		Batteries.processConfigProperties(options);
 
+//		HashMap<String, Value> updateOptions = new HashMap<String, Value>();
+//		String reportDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString();
+//		String runID =  integrator.value(ArjunaProperty.RUNID).asString();
+//		String timestampedRunID = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date()) + "-" + runID;
+//		String runIDReportDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT).asString()
+//				.replace("%%slugREPORT_DIR", reportDir)
+//				.replace("%%slugRUNID", timestampedRunID);
+//		updateOptions.put(
+//				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT),
+//				new StringValue(runIDReportDir)
+//		);
+//		
+//		String rawJsonReportDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ROOT).asString()
+//				.replace("%%slugRUNID_RPT_DIR", runIDReportDir);
+//		updateOptions.put(
+//				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ROOT),
+//				new StringValue(rawJsonReportDir)
+//		);
+//		
+//		updateOptions.put(
+//				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_EVENTS),
+//				new StringValue(integrator.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_EVENTS).asString()
+//						.replace("%%slugRAW_DIR", rawJsonReportDir))
+//		);
+//		
+//		updateOptions.put(
+//				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_TESTS),
+//				new StringValue(integrator.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_TESTS).asString()
+//						.replace("%%slugRAW_DIR", rawJsonReportDir))
+//		);
+//		
+//		updateOptions.put(
+//				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES),
+//				new StringValue(integrator.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES).asString()
+//						.replace("%%slugRAW_DIR", rawJsonReportDir))
+//		);
+//		
+//		updateOptions.put(
+//				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_FIXTURES),
+//				new StringValue(integrator.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_FIXTURES).asString()
+//						.replace("%%slugRAW_DIR", rawJsonReportDir))
+//		);
+//		
+//		updateOptions.put(
+//				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.SESSION_NAME),
+//				new StringValue("msession")
+//		);
+//		
+//		Batteries.processConfigProperties(updateOptions);
+		
+		System.out.println(integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString());
 		HashMap<String, Value> updateOptions = new HashMap<String, Value>();
-		String reportDir = integrator.value(ArjunaProperty.DIRECTORY_REPORT).asString();
+		String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString();
 		String runID =  integrator.value(ArjunaProperty.RUNID).asString();
 		String timestampedRunID = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date()) + "-" + runID;
-		String runIDReportDir = integrator.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT).asString()
-				.replace("%%slugREPORT_DIR", reportDir)
-				.replace("%%slugRUNID", timestampedRunID);
-		updateOptions.put(
-				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT),
-				new StringValue(runIDReportDir)
-		);
+		String updates = IOUtils.toString((BufferedInputStream) ArjunaSingleton.class.getResource("/com/arjunapro/pvt/text/arjuna_invisible.conf").getContent(), "UTF-8");
+		String replaced = updates.replace("%%slugProjDir", projDir).replace("%%slugRUNID", timestampedRunID);
+		HoconReader uReader = new HoconStringReader(replaced);
+		uReader.process();
+		Batteries.processConfigProperties(uReader.getProperties());
+		//integrator.enumerate();
 		
-		String rawJsonReportDir = integrator.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_ROOT).asString()
-				.replace("%%slugRUNID_RPT_DIR", runIDReportDir);
-		updateOptions.put(
-				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_ROOT),
-				new StringValue(rawJsonReportDir)
-		);
-		
-		updateOptions.put(
-				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_EVENTS),
-				new StringValue(integrator.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_EVENTS).asString()
-						.replace("%%slugRAW_DIR", rawJsonReportDir))
-		);
-		
-		updateOptions.put(
-				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_TESTS),
-				new StringValue(integrator.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_TESTS).asString()
-						.replace("%%slugRAW_DIR", rawJsonReportDir))
-		);
-		
-		updateOptions.put(
-				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_ISSUES),
-				new StringValue(integrator.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_ISSUES).asString()
-						.replace("%%slugRAW_DIR", rawJsonReportDir))
-		);
-		
-		updateOptions.put(
-				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_FIXTURES),
-				new StringValue(integrator.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_FIXTURES).asString()
-						.replace("%%slugRAW_DIR", rawJsonReportDir))
-		);
-		
-		updateOptions.put(
-				ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.SESSION_NAME),
-				new StringValue("msession")
-		);
-		
-		Batteries.processConfigProperties(updateOptions);
-		
-		Log log = new Log();
-		log.configure(
-				Level.toLevel(integrator.value(BatteriesPropertyType.LOGGING_CONSOLE_LEVEL).asString()),
-				Level.toLevel(integrator.value(BatteriesPropertyType.LOGGING_FILE_LEVEL).asString()),
-				integrator.value(BatteriesPropertyType.LOGGING_NAME).asString(),
-				integrator.value(BatteriesPropertyType.DIRECTORY_LOG).asString()
-		);
+//		Log log = new Log();
+//		log.configure(
+//				Level.toLevel(integrator.value(BatteriesPropertyType.LOGGING_CONSOLE_LEVEL).asString()),
+//				Level.toLevel(integrator.value(BatteriesPropertyType.LOGGING_FILE_LEVEL).asString()),
+//				integrator.value(BatteriesPropertyType.LOGGING_NAME).asString(),
+//				integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_LOG).asString()
+//		);
 		
 		groupsDB = new TestGroupsDB();
 		
@@ -402,7 +416,7 @@ class SessionCreator {
 				session = new MSession(pType);
 			}
 		} else {
-			String sessionsDir = integrator.value(ArjunaProperty.DIRECTORY_SESSIONS).asString();
+			String sessionsDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_SESSIONS).asString();
 			File sDir = new File(sessionsDir);
 			boolean matchFound = false;
 			String sFileName = null;

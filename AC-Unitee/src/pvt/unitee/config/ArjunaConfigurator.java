@@ -365,37 +365,37 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_STEPS_METADATA_REPORTABLE:
 					handleStepResultPropListConfig(propPath, cValue, "Result Properties for Steps report", false);
 					break;
-				case DIRECTORY_TESTS:
+				case DIRECTORY_PROJECT_TESTS:
 					handleProjectDirPath(propPath, cValue, "Test Directory", true);
 					break;
-				case DIRECTORY_REPORT:
+				case DIRECTORY_PROJECT_REPORT:
 					handleProjectDirPath(propPath, cValue, "Report Directory", false);
 					break;
-				case DIRECTORY_ARCHIVES:
+				case DIRECTORY_PROJECT_ARCHIVES:
 					handleProjectDirPath(propPath, cValue, "Report Archives directory", false);
 					break;
-				case DIRECTORY_SESSIONS:
+				case DIRECTORY_PROJECT_SESSIONS:
 					handleProjectDirPath(propPath, cValue, "Session Templates directory", false);
 					break;
-				case DIRECTORY_GROUPS:
+				case DIRECTORY_PROJECT_GROUPS:
 					handleProjectDirPath(propPath, cValue, "Group Templates directory", false);
 					break;
-				case DIRECTORY_RUNID_REPORT_ROOT:
+				case DIRECTORY_PROJECT_RUNID_REPORT_ROOT:
 					handleStringConfig(propPath, cValue, "Report Directory for the Run ID", false);
 					break;
-				case DIRECTORY_RUNID_REPORT_JSON_RAW_ROOT:
+				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ROOT:
 					handleStringConfig(propPath, cValue, "Root Raw Report Directory for JSON.", false);
 					break;
-				case DIRECTORY_RUNID_REPORT_JSON_RAW_TESTS:
+				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_TESTS:
 					handleStringConfig(propPath, cValue, "Raw Report Directory for JSON Test Execution results.", false);
 					break;
-				case DIRECTORY_RUNID_REPORT_JSON_RAW_ISSUES:
+				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES:
 					handleStringConfig(propPath, cValue, "Report Directory for JSON Fixture results.", false);
 					break;
-				case DIRECTORY_RUNID_REPORT_JSON_RAW_EVENTS:
+				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_EVENTS:
 					handleStringConfig(propPath, cValue, "Report Directory for JSON Event results.", false);
 					break;
-				case DIRECTORY_RUNID_REPORT_JSON_RAW_FIXTURES:
+				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_FIXTURES:
 					handleStringConfig(propPath, cValue, "Report Directory for JSON Fixture results.", false);
 					break;
 				case REPORT_NAME_FORMAT:
@@ -418,7 +418,7 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 	}
 
 	public void processDefaults() throws Exception {
-		HoconReader reader =  new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/arjuna.conf"));
+		HoconReader reader =  new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/arjuna_visible.conf"));
 		super.processDefaults(reader);
 	}
 	

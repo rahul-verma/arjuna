@@ -46,78 +46,119 @@ simple example build file
 	<property name="public.tools.arjunastartup.dir" value="${current.dist.public.tools.dir}/${arjunastartup.name}" />
 	<property name="public.tools.arjunastartup.dist.file" value="${public.tools.arjunastartup.dir}/${arjunastartup.dist.file.name}" />
 	
+	
 	<target name="arjunastartup_mkdirs">
+		<property name="arjEd" value="${ed}" />
+		<property name="source.private.meta.examples.my.dir" value="${source.private.meta.examples.dir}/${arjEd}" />
+		<echo message="HERE ${source.private.meta.examples.my.dir}"/>
+		<property name="source.private.meta.bin.my.dir" value="${source.private.meta.bin.dir}/${arjEd}" />
+		<property name="source.private.meta.docs.my.dir" value="${source.private.meta.docs.dir}/${arjEd}" />
+		<property name="source.private.meta.lntexts.my.dir" value="${source.private.meta.lntexts.dir}/${arjEd}" />
+		<property name="source.private.meta.config.my.dir" value="${source.private.meta.config.dir}/${arjEd}" />
 
 		<mkdir dir="${ant.arjunastartup.root.dir}" />
 		<mkdir dir="${ant.arjunastartup.build.dir}" />
 		<mkdir dir="${ant.arjunastartup.jar.dir}" />
-		
-		<mkdir dir="${private.arjunastartup.dist.tools.dir}/docs" />
-		<copy todir="${private.arjunastartup.dist.tools.dir}/docs">
-			<fileset dir="${proj.arjunastartup.dir}/docs">
-				<include name="**/*.*" />
-			</fileset>
-		</copy>
-		<copy file="${proj.arjunastartup.dir}/LICENSE.txt" tofile="${private.arjunastartup.dist.tools.dir}/LICENSE.txt" />
-		<copy file="${proj.arjunastartup.dir}/NOTICE.txt" tofile="${private.arjunastartup.dist.tools.dir}/NOTICE.txt" />
-		<copy file="${proj.arjunastartup.dir}/README.txt" tofile="${private.arjunastartup.dist.tools.dir}/README.txt" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/docs" />
 		<mkdir dir="${private.arjunastartup.dist.components.jar.dir}" />
 		<mkdir dir="${public.tools.arjunastartup.dir}" />
-		
-
 		<mkdir dir="${private.arjunastartup.dist.src.dir}/${arjunastartup.name}/src" />
-		<mkdir dir="${private.arjunastartup.dist.src.dir}/docs" />
-		<copy file="${proj.arjunastartup.dir}/LICENSE.txt" tofile="${private.arjunastartup.dist.src.dir}/LICENSE.txt" />
-		<copy file="${proj.arjunastartup.dir}/NOTICE.txt" tofile="${private.arjunastartup.dist.src.dir}/NOTICE.txt" />
-		<copy file="${proj.arjunastartup.dir}/README.txt" tofile="${private.arjunastartup.dist.src.dir}/README.txt" />
-		<copy todir="${private.arjunastartup.dist.src.dir}/docs">
-			<fileset dir="${proj.arjunastartup.dir}/docs">
-				<include name="**/*.*" />
-			</fileset>
-		</copy>
-		
+		<mkdir dir="${private.arjunastartup.dist.src.dir}/${arjunastartup.name}/docs" />
 		<mkdir dir="${private.arjunastartup.obfuscated.jar.dir}"/>
 		<mkdir dir="${private.arjunastartup.self.jar.dir}"/>
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/bin" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/lib/java" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/examples" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/examples/data" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/examples/uiauto_maps" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/config" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/temp" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/scripts" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/tools" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/tools/uidrivers" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/ext" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/ext/java" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/log" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/data" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/data/sources" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/data/references" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/tests" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/report" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/archives" />
-
-		<copy file="${proj.arjunastartup.dir}/arjuna.bat" tofile="${private.arjunastartup.dist.tools.root.dir}/arjuna.bat" />
-		<copy file="${proj.arjunastartup.dir}/arjuna.sh" tofile="${private.arjunastartup.dist.tools.root.dir}/arjuna.sh" />
-
-		<copy todir="${private.arjunastartup.dist.tools.root.dir}/examples/data">
-			<fileset dir="${source.private.examples.dir}/platform/data">
-				<include name="**/*.*" />
-			</fileset>
-		</copy>
 		
-		<copy todir="${private.arjunastartup.dist.tools.root.dir}/examples/uiauto_maps">
-			<fileset dir="${source.private.examples.dir}/startup/uiauto_maps">
-				<include name="**/*.*" />
-			</fileset>
-		</copy>
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/archives" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/data" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/data/sources" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/data/references" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/log" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/temp" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/scripts" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/tests" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/report" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/ui_maps" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/ui_images" />
 
-		<copy file="${source.general.acprops.file}" tofile="${private.arjunastartup.dist.tools.root.dir}/config/arjunastartup.conf" />	
+		<copy todir="${private.arjunastartup.dist.tools.root.dir}/docs">
+					<fileset dir="${source.private.meta.docs.common.dir}">
+						<include name="**/*.*" />
+					</fileset>
+					<fileset dir="${source.private.meta.docs.my.dir}">
+						<include name="**/*.*" />
+					</fileset>
+				</copy>
+				
+				<copy todir="${private.arjunastartup.dist.tools.dir}">
+					<fileset dir="${source.private.meta.lntexts.common.dir}">
+						<include name="**/*.*" />
+					</fileset>
+					<fileset dir="${source.private.meta.lntexts.my.dir}">
+						<include name="**/*.*" />
+					</fileset>
+				</copy>
+				
+				<copy todir="${private.arjunastartup.dist.src.dir}/${arjunastartup.name}/docs">
+					<fileset dir="${source.private.meta.docs.common.dir}">
+						<include name="**/*.*" />
+					</fileset>
+					<fileset dir="${source.private.meta.docs.my.dir}">
+						<include name="**/*.*" />
+					</fileset>
+				</copy>
+				
+				<copy todir="${private.arjunastartup.dist.src.dir}">
+					<fileset dir="${source.private.meta.lntexts.common.dir}">
+						<include name="**/*.*" />
+					</fileset>
+					<fileset dir="${source.private.meta.lntexts.my.dir}">
+						<include name="**/*.*" />
+					</fileset>
+				</copy>
+				
+				<copy todir="${private.arjunastartup.dist.tools.root.dir}/bin">
+					<fileset dir="${source.private.meta.bin.common.dir}">
+						<include name="**/*.*" />
+					</fileset>
+					<fileset dir="${source.private.meta.bin.my.dir}">
+						<include name="**/*.*" />
+					</fileset>
+				</copy>
+		
+				<copy todir="${private.arjunastartup.dist.tools.root.dir}/examples">
+					<fileset dir="${source.private.meta.examples.common.dir}">
+						<include name="**/*.*" />
+					</fileset>
+					<fileset dir="${source.private.meta.examples.my.dir}">
+						<include name="**/*.*" />
+					</fileset>
+				</copy>
+				
+				<copy todir="${private.arjunastartup.dist.tools.root.dir}/config">
+					<fileset dir="${source.private.meta.config.common.dir}">
+						<include name="**/*.*" />
+					</fileset>
+					<fileset dir="${source.private.meta.config.my.dir}">
+						<include name="**/*.*" />
+					</fileset>
+				</copy>
 	</target>
 	
 	<!-- ===================================== AC-Batteries =================================================== -->
 
-	<target name="arjunastartup_compile" depends="arjunastartup_mkdirs">
+	<target name="arjunastartup_compile">
 		<!-- Create the time stamp -->
 		<tstamp />
 		<!-- Create the build directory structure used by compile -->
@@ -149,7 +190,7 @@ simple example build file
 		</copy>
 	</target>
 			
-	<target name="arjunastartup_build" depends="arjunastartup_compile">
+	<target name="arjunastartup_build">
 		<jar destFile="${private.arjunastartup.dist.tools.jar.file}">
 		<zipgroupfileset includes="*.jar" dir="${3rd_party_batteries_jars}"/>
 			<zipgroupfileset includes="*.jar" dir="${private.arjunastartup.obfuscated.jar.dir}"/>

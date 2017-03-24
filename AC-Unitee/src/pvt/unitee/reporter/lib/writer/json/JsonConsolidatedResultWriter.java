@@ -23,7 +23,7 @@ public abstract class JsonConsolidatedResultWriter<T> extends DefaultObserver<T>
 	
 	public JsonConsolidatedResultWriter(String reportName) throws Exception{
 		super();
-		this.reportDir = FileSystemBatteries.getCanonicalPath(Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT).asString() + "/json");
+		this.reportDir = FileSystemBatteries.getCanonicalPath(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT).asString() + "/json");
 		FileUtils.forceMkdir(new File(reportDir));
 		String rPath = FileSystemBatteries.getCanonicalPath(reportDir + "/" + reportName);
 		writer = new FileWriter(rPath);

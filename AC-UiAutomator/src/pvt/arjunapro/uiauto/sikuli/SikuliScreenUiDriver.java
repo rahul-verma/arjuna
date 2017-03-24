@@ -187,7 +187,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 		for (Identifier id: elementMetaData.getIdentifiers()){
 			if (id.NAME.equals("IMAGE")){
 				uiElement.setImagePath(
-						FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_UI_IMAGES).asString() + "/" + id.VALUE));
+						FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_PROJECT_UI_IMAGES).asString() + "/" + id.VALUE));
 			}
 		}
 		SikuliMediator mediator = createMediatorSkeleton(uiElement);

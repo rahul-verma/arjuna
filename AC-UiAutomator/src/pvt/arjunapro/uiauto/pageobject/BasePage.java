@@ -68,7 +68,7 @@ public class BasePage implements Page{
 	
 	public BasePage(String uiLabel) throws Exception{
 		this();
-		imagesDirectory = Batteries.value(UiAutomatorPropertyType.DIRECTORY_UI_IMAGES).asString();
+		imagesDirectory = Batteries.value(UiAutomatorPropertyType.DIRECTORY_PROJECT_UI_IMAGES).asString();
 		Random rn = new Random();
 		java.util.Date date= new java.util.Date();
 		long millis = date.getTime();

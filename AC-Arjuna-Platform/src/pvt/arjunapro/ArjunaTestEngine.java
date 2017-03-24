@@ -145,7 +145,7 @@ public class ArjunaTestEngine implements TestEngine{
 	}
 	
 	protected String getReportDir() throws Exception {
-		String dirPath = Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_ROOT).asString(); 
+		String dirPath = Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT).asString(); 
 		
 		File dirObj = new File(dirPath);
 		//FileUtils.forceMkdir(arg0 );
@@ -158,11 +158,11 @@ public class ArjunaTestEngine implements TestEngine{
 	}
 	
 	private String getArchivesDir() throws Exception{
-		return Batteries.value(ArjunaProperty.DIRECTORY_ARCHIVES).asString();
+		return Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_ARCHIVES).asString();
 	}
 	
 	protected void archive() throws Exception{
-		String dirPath = Batteries.value(ArjunaProperty.DIRECTORY_REPORT).asString(); 
+		String dirPath = Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString(); 
 		
 		File dirObj = new File(dirPath);
 		//FileUtils.forceMkdir(arg0 );
@@ -172,7 +172,7 @@ public class ArjunaTestEngine implements TestEngine{
 		}
 		
 		FileUtils.forceMkdir(new File(getArchivesDir()));
-		for (File f: (new File(Batteries.value(ArjunaProperty.DIRECTORY_REPORT).asString())).listFiles()){
+		for (File f: (new File(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString())).listFiles()){
 			if (f.isHidden()) continue;
 			if (f.isDirectory()){
 				String targetPath = getArchivesDir() + "/" + f.getName();

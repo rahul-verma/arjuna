@@ -106,6 +106,8 @@ public abstract class AbstractHoconReader implements HoconReader {
 
 		while (iter.hasNext()) {
 			Entry<String, ConfigValue> entry = iter.next();
+//			System.out.println(entry);
+//			System.out.println(entry.getValue().valueType());
 			switch (entry.getValue().valueType()) {
 			case BOOLEAN:
 				map.put(entry.getKey(), new BooleanValue((boolean) entry.getValue().unwrapped()));

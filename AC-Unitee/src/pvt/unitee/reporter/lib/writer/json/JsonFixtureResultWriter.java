@@ -29,7 +29,7 @@ public class JsonFixtureResultWriter extends JsonResultWriter<FixtureResult> {
 	JsonConsolidatedFixtureResultWriter childWriter = null;
 	
 	public JsonFixtureResultWriter() throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_FIXTURES).asString());
+		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_FIXTURES).asString());
 		childWriter = new JsonConsolidatedFixtureResultWriter();
 	}
 	

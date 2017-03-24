@@ -75,37 +75,37 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 			if (pathToEnumMap.containsKey(ucPropPath)){
 				switch(pathToEnumMap.get(ucPropPath)){
 				case APPIUM_HUB_HOST:
-					handleStringConfig(propPath, cValue, "Appium Hub Host Name", true);
+					handleStringConfig(propPath, cValue, "Appium Hub Host Name", false);
 					break;
 				case APPIUM_HUB_PORT:
-					handleIntConfig(propPath, cValue, "Appium Hub Port Number", true);
+					handleIntConfig(propPath, cValue, "Appium Hub Port Number", false);
 					break;
 				case APPIUM_HUB_URL:
 					handleStringConfig(propPath, cValue, "Appium Hub URL", false);
 					break;
 				case APP_MOBILE_MAXWAIT:
-					handleIntConfig(propPath, cValue, "Mobile App Max Wait Time for Element Identification", true);
+					handleIntConfig(propPath, cValue, "Mobile App Max Wait Time for Element Identification", false);
 					break;
 				case APP_MOBILE_PATH:
-					handleStringConfig(propPath, cValue, "Mobile App Path on Test Machine", true);
+					handleStringConfig(propPath, cValue, "Mobile App Path on Test Machine", false);
 					break;
 				case APP_PC_MAXWAIT:
 					handleIntConfig(propPath, cValue, "PC App Max Wait Time for Element Identification", true);
 					break;
 				case BROWSER_MOBILE_DEFAULT:
-					handleStringConfig(propPath, cValue, "Default Mobile Web Browser", true);
+					handleStringConfig(propPath, cValue, "Default Mobile Web Browser", false);
 					break;
 				case BROWSER_MOBILE_MAXWAIT:
-					handleIntConfig(propPath, cValue, "Mobile Web Browser Max Wait Time for Element Identification", true);
+					handleIntConfig(propPath, cValue, "Mobile Web Browser Max Wait Time for Element Identification", false);
 					break;
 				case BROWSER_MOBILE_PROXY_HOST:
-					handleStringConfig(propPath, cValue, "Mobile Web Browser Proxy Host Name", true);
+					handleStringConfig(propPath, cValue, "Mobile Web Browser Proxy Host Name", false);
 					break;
 				case BROWSER_MOBILE_PROXY_ON:
-					handleBooleanConfig(propPath, cValue, "Should enable proxy for Web Browser on Mobile?", true);
+					handleBooleanConfig(propPath, cValue, "Should enable proxy for Web Browser on Mobile?", false);
 					break;
 				case BROWSER_MOBILE_PROXY_PORT:
-					handleIntConfig(propPath, cValue, "Mobile Web Browser Proxy Port Number", true);
+					handleIntConfig(propPath, cValue, "Mobile Web Browser Proxy Port Number", false);
 					break;
 				case BROWSER_MOBILE_PROXY_URL:
 					handleStringConfig(propPath, cValue, "Mobile Web Browser Proxy URL", false);
@@ -134,35 +134,35 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 				case DIRECTORY_TOOLS_UIDRIVERS:
 					handleCoreDirPath(propPath, cValue, "UI Drivers directory", false);
 					break;
-				case DIRECTORY_UI_IMAGES:
+				case DIRECTORY_PROJECT_UI_IMAGES:
 					handleCoreDirPath(propPath, cValue, "UI Images Directory (Identification Images)", false);
 					break;
-				case DIRECTORY_UI_MAPS:
+				case DIRECTORY_PROJECT_UI_MAPS:
 					handleCoreDirPath(propPath, cValue, "UI Maps Directory (Page Definitions)", false);
 					break;
 				case FIREFOX_WINDOWNAME:
 					handleStringConfig(propPath, cValue, "Firefox Web Browser's Window Name", false);
 					break;
 				case MOBILE_DEVICE_UDID:
-					handleStringConfig(propPath, cValue, "Mobile Device UDID", true);
+					handleStringConfig(propPath, cValue, "Mobile Device UDID", false);
 					break;
 				case MOBILE_DEVICE_NAME:
-					handleStringConfig(propPath, cValue, "Mobile Device Name", true);
+					handleStringConfig(propPath, cValue, "Mobile Device Name", false);
 					break;
 				case MOBILE_PLATFORM_NAME:
-					handleStringConfig(propPath, cValue, "Mobile Platform Name", true);
+					handleStringConfig(propPath, cValue, "Mobile Platform Name", false);
 					break;
 				case MOBILE_PLATFORM_VERSION:
-					handleStringConfig(propPath, cValue, "Mobile Platform Version", true);
+					handleStringConfig(propPath, cValue, "Mobile Platform Version", false);
 					break;
 				case SAFARI_WINDOWNAME:
 					handleStringConfig(propPath, cValue, "Safari Web Browser's Window Name", false);
 					break;
 				case SIKULI_COMPARISON_SCORE:
-					handleDoubleConfig(propPath, cValue, "Sikuli Min Comparison Score for successful match", true);
+					handleDoubleConfig(propPath, cValue, "Sikuli Min Comparison Score for successful match", false);
 					break;
 				case SIKULI_MAXWAIT:
-					handleIntConfig(propPath, cValue, "Sikuli Max Wait Time for Image Identification", true);
+					handleIntConfig(propPath, cValue, "Sikuli Max Wait Time for Image Identification", false);
 					break;
 				case UIAUTO_RUNCONTEXT:
 					handleUiContextConfig(propPath, cValue, "Current UI Automation Context", true);
@@ -181,7 +181,7 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 
 	public void processDefaults() throws Exception {
 		UiAutomator.init();
-		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/uiautomator.conf"));
+		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/uiautomator.conf"));
 		super.processDefaults(reader);
 	}
 

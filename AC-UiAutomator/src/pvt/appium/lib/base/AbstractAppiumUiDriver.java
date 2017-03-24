@@ -436,7 +436,7 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 	public File takeScreenshot() throws Exception {
 		TakesScreenshot augDriver = getScreenshotAugmentedDriver();
         File srcFile = augDriver.getScreenshotAs(OutputType.FILE);
-        return FileSystemBatteries.moveFiletoDir(srcFile, Batteries.value(BatteriesPropertyType.DIRECTORY_SCREENSHOTS).asString());
+        return FileSystemBatteries.moveFiletoDir(srcFile, Batteries.value(BatteriesPropertyType.DIRECTORY_PROJECT_SCREENSHOTS).asString());
 	}
 	
 	public void focusOnApp() throws Exception{

@@ -30,7 +30,7 @@ public class JsonEventWriter extends JsonResultWriter<Event> {
 	private JsonConsolidatedEventWriter childWriter;
 	
 	public JsonEventWriter() throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_EVENTS).asString());
+		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_EVENTS).asString());
 		childWriter = new JsonConsolidatedEventWriter();
 	}
 	

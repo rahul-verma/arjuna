@@ -30,9 +30,20 @@ simple example build file
 	<property name="current.dist.private.jars.dir" value="${current.dist.private.dir}/component_jars" />
 	<property name="current.dist.private.sources.dir" value="${current.dist.private.dir}/sources" />
 	<property name="current.dist.private.tools.dir" value="${current.dist.private.dir}/tools" />
-	<property name="source.private.examples.dir" value="${all.sources.dir}/arjuna/AC-Arjuna-Build/examples" />
+	
+	<property name="source.private.meta.dir" value="${all.sources.dir}/arjuna/AC-Arjuna-Build/for_building" />
+	<property name="source.private.meta.examples.dir" value="${source.private.meta.dir}/examples" />
+	<property name="source.private.meta.examples.common.dir" value="${source.private.meta.examples.dir}/common" />
+	<property name="source.private.meta.bin.dir" value="${source.private.meta.dir}/bin" />
+	<property name="source.private.meta.bin.common.dir" value="${source.private.meta.bin.dir}/common" />
+	<property name="source.private.meta.docs.dir" value="${source.private.meta.dir}/docs" />
+	<property name="source.private.meta.docs.common.dir" value="${source.private.meta.docs.dir}/common" />
+	<property name="source.private.meta.lntexts.dir" value="${source.private.meta.dir}/license_notice_texts" />
+	<property name="source.private.meta.lntexts.common.dir" value="${source.private.meta.lntexts.dir}/common" />
+	<property name="source.private.meta.config.dir" value="${source.private.meta.dir}/config" />
+	<property name="source.private.meta.config.common.dir" value="${source.private.meta.config.dir}/common" />
 
-	<property name="source.general.acprops.file" value="${all.sources.dir}/arjuna/AC-Arjuna-Build/arjuna.conf" />
+	<property name="source.general.acprops.file" value="${all.sources.dir}/arjuna/AC-Arjuna-Build/arjunapro.conf" />
 
 	<property name="current.dist.public.dir" location="${current.dist.dir}/public/AutoCognite-${autocognite.build.version}" />
 	<property name="current.dist.public.tools.dir" location="${current.dist.public.dir}" />
@@ -57,7 +68,7 @@ simple example build file
 		<fileset dir="${private.unitee.core.self.jar.dir}">
 			<include name="**/*.jar" />
 		</fileset>
-		<fileset dir="${private.uiautomator.core.self.jar.dir}">
+		<fileset dir="${private.uiautomator.self.jar.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>

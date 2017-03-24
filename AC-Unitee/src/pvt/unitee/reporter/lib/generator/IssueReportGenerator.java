@@ -18,7 +18,7 @@ public class IssueReportGenerator extends JsonResultsReader{
 	private IssueDeserializer deserializer = null;
 	
 	public IssueReportGenerator(List<ReportGenerator> generators) throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_ISSUES).asString(), generators);
+		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES).asString(), generators);
 		deserializer = new IssueDeserializer();
 	}
 	

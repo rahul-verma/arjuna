@@ -46,39 +46,28 @@ simple example build file
 	<property name="public.tools.arjunaplatform.dir" value="${current.dist.public.tools.dir}/${arjunaplatform.name}" />
 	<property name="public.tools.arjunaplatform.dist.file" value="${public.tools.arjunaplatform.dir}/${arjunaplatform.dist.file.name}" />
 	
+	
 	<target name="arjunaplatform_mkdirs">
+		<property name="arjEd" value="${ed}" />
+		<property name="source.private.meta.examples.my.dir" value="${source.private.meta.examples.dir}/${arjEd}" />
+		<echo message="HERE ${source.private.meta.examples.my.dir}"/>
+		<property name="source.private.meta.bin.my.dir" value="${source.private.meta.bin.dir}/${arjEd}" />
+		<property name="source.private.meta.docs.my.dir" value="${source.private.meta.docs.dir}/${arjEd}" />
+		<property name="source.private.meta.lntexts.my.dir" value="${source.private.meta.lntexts.dir}/${arjEd}" />
+		<property name="source.private.meta.config.my.dir" value="${source.private.meta.config.dir}/${arjEd}" />
 
 		<mkdir dir="${ant.arjunaplatform.root.dir}" />
 		<mkdir dir="${ant.arjunaplatform.build.dir}" />
 		<mkdir dir="${ant.arjunaplatform.jar.dir}" />
-		
-		<mkdir dir="${private.arjunaplatform.dist.tools.dir}/docs" />
-		<copy todir="${private.arjunaplatform.dist.tools.dir}/docs">
-			<fileset dir="${proj.arjunaplatform.dir}/docs">
-				<include name="**/*.*" />
-			</fileset>
-		</copy>
-		<copy file="${proj.arjunaplatform.dir}/LICENSE.txt" tofile="${private.arjunaplatform.dist.tools.dir}/LICENSE.txt" />
-		<copy file="${proj.arjunaplatform.dir}/NOTICE.txt" tofile="${private.arjunaplatform.dist.tools.dir}/NOTICE.txt" />
-		<copy file="${proj.arjunaplatform.dir}/README.txt" tofile="${private.arjunaplatform.dist.tools.dir}/README.txt" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/docs" />
 		<mkdir dir="${private.arjunaplatform.dist.components.jar.dir}" />
 		<mkdir dir="${public.tools.arjunaplatform.dir}" />
-		
-
 		<mkdir dir="${private.arjunaplatform.dist.src.dir}/${arjunaplatform.name}/src" />
-		<mkdir dir="${private.arjunaplatform.dist.src.dir}/docs" />
-		<copy file="${proj.arjunaplatform.dir}/LICENSE.txt" tofile="${private.arjunaplatform.dist.src.dir}/LICENSE.txt" />
-		<copy file="${proj.arjunaplatform.dir}/NOTICE.txt" tofile="${private.arjunaplatform.dist.src.dir}/NOTICE.txt" />
-		<copy file="${proj.arjunaplatform.dir}/README.txt" tofile="${private.arjunaplatform.dist.src.dir}/README.txt" />
-		<copy todir="${private.arjunaplatform.dist.src.dir}/docs">
-			<fileset dir="${proj.arjunaplatform.dir}/docs">
-				<include name="**/*.*" />
-			</fileset>
-		</copy>
-		
+		<mkdir dir="${private.arjunaplatform.dist.src.dir}/${arjunaplatform.name}/docs" />
 		<mkdir dir="${private.arjunaplatform.obfuscated.jar.dir}"/>
 		<mkdir dir="${private.arjunaplatform.self.jar.dir}"/>
 		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/bin" />
 		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/lib/java" />
 		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/examples" />
 		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/examples/data" />
@@ -88,29 +77,86 @@ simple example build file
 		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/tools" />
 		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/ext" />
 		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/ext/java" />
-		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/log" />
-		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/data" />
-		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/data/sources" />
-		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/data/references" />
-		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/tests" />
-		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/report" />
-		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/archives" />
-
-		<copy file="${proj.arjunaplatform.dir}/arjuna.bat" tofile="${private.arjunaplatform.dist.tools.root.dir}/arjuna.bat" />
-		<copy file="${proj.arjunaplatform.dir}/arjuna.sh" tofile="${private.arjunaplatform.dist.tools.root.dir}/arjuna.sh" />
-
-		<copy todir="${private.arjunaplatform.dist.tools.root.dir}/examples/data">
-			<fileset dir="${source.private.examples.dir}/platform/data">
+		
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject/archives" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject/data" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject/data/sources" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject/data/references" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject/log" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject/temp" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject/scripts" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject/tests" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/mproject/report" />
+		
+		<copy todir="${private.arjunaplatform.dist.tools.root.dir}/docs">
+			<fileset dir="${source.private.meta.docs.common.dir}">
+				<include name="**/*.*" />
+			</fileset>
+			<fileset dir="${source.private.meta.docs.my.dir}">
 				<include name="**/*.*" />
 			</fileset>
 		</copy>
-
-		<copy file="${source.general.acprops.file}" tofile="${private.arjunaplatform.dist.tools.root.dir}/config/arjunaplatform.conf" />	
+		
+		<copy todir="${private.arjunaplatform.dist.tools.dir}">
+			<fileset dir="${source.private.meta.lntexts.common.dir}">
+				<include name="**/*.*" />
+			</fileset>
+			<fileset dir="${source.private.meta.lntexts.my.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${private.arjunaplatform.dist.src.dir}/${arjunaplatform.name}/docs">
+			<fileset dir="${source.private.meta.docs.common.dir}">
+				<include name="**/*.*" />
+			</fileset>
+			<fileset dir="${source.private.meta.docs.my.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${private.arjunaplatform.dist.src.dir}">
+			<fileset dir="${source.private.meta.lntexts.common.dir}">
+				<include name="**/*.*" />
+			</fileset>
+			<fileset dir="${source.private.meta.lntexts.my.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${private.arjunaplatform.dist.tools.root.dir}/bin">
+			<fileset dir="${source.private.meta.bin.common.dir}">
+				<include name="**/*.*" />
+			</fileset>
+			<fileset dir="${source.private.meta.bin.my.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${private.arjunaplatform.dist.tools.root.dir}/examples">
+			<fileset dir="${source.private.meta.examples.common.dir}">
+				<include name="**/*.*" />
+			</fileset>
+			<fileset dir="${source.private.meta.examples.my.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+		
+		<copy todir="${private.arjunaplatform.dist.tools.root.dir}/config">
+			<fileset dir="${source.private.meta.config.common.dir}">
+				<include name="**/*.*" />
+			</fileset>
+			<fileset dir="${source.private.meta.config.my.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</copy>
+	
 	</target>
 	
 	<!-- ===================================== AC-Batteries =================================================== -->
 
-	<target name="arjunaplatform_compile" depends="arjunaplatform_mkdirs">
+	<target name="arjunaplatform_compile">
 		<!-- Create the time stamp -->
 		<tstamp />
 		<!-- Create the build directory structure used by compile -->
@@ -141,7 +187,7 @@ simple example build file
 		</copy>
 	</target>
 			
-	<target name="arjunaplatform_build" depends="arjunaplatform_compile">
+	<target name="arjunaplatform_build">
 		<jar destFile="${private.arjunaplatform.dist.tools.jar.file}">
 		<zipgroupfileset includes="*.jar" dir="${3rd_party_batteries_jars}"/>
 			<zipgroupfileset includes="*.jar" dir="${private.arjunaplatform.obfuscated.jar.dir}"/>

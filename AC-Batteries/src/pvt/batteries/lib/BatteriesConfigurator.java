@@ -75,31 +75,31 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 			Value cValue = tempMap.get(propPath);
 			if (pathToEnumMap.containsKey(ucPropPath)) {
 				switch (pathToEnumMap.get(ucPropPath)) {
-				case CONFIG_FILE_NAME:
+				case CONFIG_CENTRAL_FILE_NAME:
 					handleStringConfig(propPath, cValue, "Central Configuration File", false);
 					break;
-				case DIRECTORY_PROJECT:
+				case DIRECTORY_PROJECT_ROOT:
 					handleCoreDirPath(propPath, cValue, "Configuration Directory", false);
 					break;
 				case DIRECTORY_CONFIG:
 					handleCoreDirPath(propPath, cValue, "Configuration Directory", false);
 					break;
-				case DIRECTORY_DATA_REFERENCES:
+				case DIRECTORY_PROJECT_DATA_REFERENCES:
 					handleProjectDirPath(propPath, cValue, "Data References Directory", false);
 					break;
-				case DIRECTORY_DATA_ROOT:
+				case DIRECTORY_PROJECT_DATA_ROOT:
 					handleProjectDirPath(propPath, cValue, "Data Directory", false);
 					break;
-				case DIRECTORY_DATA_SOURCES:
+				case DIRECTORY_PROJECT_DATA_SOURCES:
 					handleProjectDirPath(propPath, cValue, "Data Sources Directory", false);
 					break;
-				case DIRECTORY_LOG:
+				case DIRECTORY_PROJECT_LOG:
 					handleProjectDirPath(propPath, cValue, "Log Directory", false);
 					break;
-				case DIRECTORY_SCREENSHOTS:
+				case DIRECTORY_PROJECT_SCREENSHOTS:
 					handleProjectDirPath(propPath, cValue, "Screenshots Directory", false);
 					break;
-				case DIRECTORY_TEMP:
+				case DIRECTORY_PROJECT_TEMP:
 					handleProjectDirPath(propPath, cValue, "Temporary Directory", false);
 					break;
 				case DIRECTORY_TOOLS_ROOT:
@@ -133,7 +133,7 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 	}
 
 	public void processDefaults() throws Exception {
-		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/batteries.conf"));
+		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/batteries.conf"));
 		super.processDefaults(reader);
 	}
 

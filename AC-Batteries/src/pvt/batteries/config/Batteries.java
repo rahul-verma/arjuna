@@ -127,7 +127,7 @@ public class Batteries {
 	}
 
 	public static String getLogDir() throws Exception {
-		return Batteries.getCentralProperty(BatteriesPropertyType.DIRECTORY_LOG).asString();
+		return Batteries.getCentralProperty(BatteriesPropertyType.DIRECTORY_PROJECT_LOG).asString();
 	}
 	
 	public static DataRecord getDataRecord(String refFileName, String key) throws Exception {

@@ -32,6 +32,9 @@ simple example build file
 					<libraryjar name="${3rd_party_batteries_jars}/log4j-1.2.17.jar" />
 					<libraryjar name="${3rd_party_batteries_jars}/poi-3.12-20150511.jar" />
 						<libraryjar name="${3rd_party_batteries_jars}/sqlite-jdbc-3.8.11.2.jar" />
+			<libraryjar name="${3rd_party_uiauto_jars}/java-client-3.2.0.jar" />
+							<libraryjar name="${3rd_party_uiauto_jars}/selenium-server-standalone-2.53.0.jar" />
+							<libraryjar name="${3rd_party_uiauto_jars}/sikuli-script.jar" />
 			<!-- the output jar file that should be created with the obfuscated java 
 class files -->
 			<outjar name="${jar2}" />

@@ -18,7 +18,7 @@ public class TestReportGenerator extends JsonResultsReader{
 	private TestResultDeserializer deserializer = null;
 	
 	public TestReportGenerator(List<ReportGenerator> generators) throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_RUNID_REPORT_JSON_RAW_TESTS).asString(), generators);
+		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_TESTS).asString(), generators);
 		deserializer = new TestResultDeserializer();
 	}
 	

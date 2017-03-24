@@ -121,7 +121,7 @@ public class UniteeCLI extends AbstractCLI {
 
 	@Override
 	public void help() throws Exception {
-		BufferedReader txtReader = new BufferedReader(new InputStreamReader(UniteeCLI.class.getResourceAsStream("/com/autocognite/pvt/text/arjuna_cli.help")));
+		BufferedReader txtReader = new BufferedReader(new InputStreamReader(UniteeCLI.class.getResourceAsStream("/com/arjunapro/pvt/text/arjuna_cli.help")));
 		String line = null;
 		while ((line = txtReader.readLine()) != null) {
 			Console.displayError(line);

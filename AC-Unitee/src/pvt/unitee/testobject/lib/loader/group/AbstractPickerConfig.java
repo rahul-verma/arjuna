@@ -230,7 +230,7 @@ public abstract class AbstractPickerConfig implements PickerConfig {
         	Console.displayError(s);
         }
 		Console.displayError("Check your picker json w.r.t. the following rules:");
-		BufferedReader txtReader = new BufferedReader(new InputStreamReader(AbstractPickerConfig.class.getResourceAsStream("/com/autocognite/pvt/text/pickers.help")));
+		BufferedReader txtReader = new BufferedReader(new InputStreamReader(AbstractPickerConfig.class.getResourceAsStream("/com/arjunapro/pvt/text/pickers.help")));
 		String line = null;
 		while ((line = txtReader.readLine()) != null) {
 			Console.displayError(line);

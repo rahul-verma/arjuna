@@ -32,12 +32,23 @@ simple example build file
 		<antcall>
 	    	<target name="uiautomator.core_build"/>
 	   	</antcall>
-		<antcall>
-	    	<target name="arjunaplatform_compile"/>
+		
+		<antcall target="arjunaplatform_mkdirs">
+				<param name="ed" value="platform"/>
 	   	</antcall>
-		<antcall>
-	    	<target name="arjunastartup_compile"/>
+			
+		<antcall target="arjunastartup_mkdirs">
+				<param name="ed" value="startup"/>
 	   	</antcall>
+			
+		<antcall target="arjunaplatform_compile">
+				<param name="ed" value="platform"/>
+	   	</antcall>
+			
+		<antcall target="arjunastartup_compile">
+				<param name="ed" value="startup"/>
+	   	</antcall>
+			
 		<antcall target="obfuscate">
 				<param name="jar1" value="${private.arjunaplatform.clear.jar.file}"/>
 				<param name="jar2" value="${private.arjunaplatform.obfuscated.jar.file}"/>
