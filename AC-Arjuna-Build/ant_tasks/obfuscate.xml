@@ -12,7 +12,7 @@ simple example build file
 			defaultpackage="" ignorewarnings="true" shrink="false" keepparameternames="true" 
 			skipnonpubliclibraryclasses="false" printseeds="obfuscateseeds.txt"
 			printusage="obfuscateusage.txt" printmapping="obfuscatemapping.txt" 
-			repackageclasses="com.autocognite.pvt">
+			repackageclasses="com.arjunapro.pvt">
 
 			<!-- specify which jar files should be obfuscated -->
 			<injar name="${jar1}" />
@@ -36,66 +36,57 @@ simple example build file
 class files -->
 			<outjar name="${jar2}" />
 			
-			<keeppackagename name="com.autocognite.batteries.**" />
+			<keeppackagename name="com.arjunapro.testauto.**" />
+			<keeppackagename name="com.arjunapro.sysauto.**" />
+				<keeppackagename name="com.arjunapro.uiauto.**" />
+				<keeppackagename name="com.arjunapro.ddt.**" />
 			<!-- don't obfuscate this method -->
 
 			<keepattribute name="*Annotation*" />
 			
-			<keep name="com.autocognite.batteries.**" access="public">
+			<keep name="com.arjunapro.**" access="public">
 				<method access="public" name="*" />
 				<method access="protected" name="*" />
 			</keep>
 			
-			<keep name="com.autocognite.Arjuna" access="public">
+			<keep name="com.autocognite.ArjunaPro" access="public">
 				<method access="public" name="*" />
-			</keep>
-			
-			<keep name="com.autocognite.arjuna.**" access="public">
-				<method access="public" name="*" />
-				<method access="protected" name="*" />
 			</keep>
 
-			<keep name="com.autocognite.pvt.**" allowobfuscation="true">
+			<keep name="pvt.**" allowobfuscation="true">
 			</keep>
-			
-			<keep name="com.autocognite.prot.**" allowobfuscation="true">
-			</keep>
-			
-			<keepclassmembers name="com.autocognite.prot.**" access="public">
-				<method access="public"/>
-			</keepclassmembers>
 				
-			<keep name="com.autocognite.batteries.enums.**" access="public">
+			<keep name="com.arjunapro.testauto.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
 
-			<keep name="com.autocognite.arjuna.enums.**" access="public">
+			<keep name="com.arjunapro.ddt.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
 			
-			<keep name="com.autocognite.internal.arjuna.enums.**" access="public">
+			<keep name="com.arjunapro.uiauto.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
+			
+			<keep name="com.arjunapro.sysauto.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
 					
-			<keepclassmembers name="com.autocognite.pvt.arjuna.enums.**" access="public">
+			<keepclassmembers name="pvt.arjuna.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keepclassmembers>
 			
-			<keepclassmembers name="com.autocognite.pvt.batteries.enums.**" access="public">
-				<field name="*" />
-				<method access="public static" type="**[]" name="values" parameters="" />
-				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
-			</keepclassmembers>
-			
-			<keepclassmembers name="com.autocognite.pvt.batteries.property.ConfigPropertyBatteries" access="public">
+			<keepclassmembers name="pvt.batteries.property.ConfigPropertyBatteries" access="public">
 				<method access="public static" name="pathToCoreAbsolutePath"/>
 				<method access="public static" name="pathToProjectAbsolutePath"/>
 				<method access="public static" name="getSame"/>

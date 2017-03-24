@@ -26,7 +26,7 @@ simple example build file
 	<property name="ant.uiautomator.build.dir" location="${ant.uiautomator.root.dir}/build" />
 	<property name="ant.uiautomator.jar.dir" location="${ant.uiautomator.root.dir}/jar" />
 	<property name="ant.uiautomator.jar.file" value="${ant.uiautomator.jar.dir}/${uiautomator.jar.file.name}" />
-	<property name="private.uiautomator.self.jar.dir" value="${current.dist.private.dir}/uiautomator" />
+	<property name="private.uiautomator.self.jar.dir" value="${current.dist.private.jars.dir}/uiautomator" />
 	<property name="private.uiautomator.self.jar.file" value="${private.uiautomator.self.jar.dir}/${uiautomator.jar.file.name}" />
 	<property name="private.uiautomator.dist.src.dir" value="${current.dist.private.sources.dir}/${uiautomator.name}" />
 	

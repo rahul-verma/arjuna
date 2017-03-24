@@ -37,7 +37,7 @@ simple example build file
 	<property name="private.arjunastartup.obfuscated.jar.file" value="${private.arjunastartup.obfuscated.jar.dir}/obfuscated_${arjunastartup.jar.file.name}" />
 
 	<property name="private.arjunastartup.dist.tools.dir" value="${current.dist.private.tools.dir}/${arjunastartup.name}-dist" />
-	<property name="private.arjunastartup.dist.tools.root.dir" value="${private.arjunastartup.dist.tools.dir}/autocognite-arjuna-pro" />
+	<property name="private.arjunastartup.dist.tools.root.dir" value="${private.arjunastartup.dist.tools.dir}/arjuna-pro" />
 	<property name="private.arjunastartup.dist.tools.jar.dir" value="${private.arjunastartup.dist.tools.root.dir}/lib/java" />
 	<property name="private.arjunastartup.dist.tools.jar.file" value="${private.arjunastartup.dist.tools.jar.dir}/${arjunastartup.full.jar.file.name}" />
 	<property name="private.arjunastartup.dist.jar.file" value="${current.dist.private.jars.dir}/${arjunastartup.full.jar.file.name}" />
@@ -82,7 +82,7 @@ simple example build file
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/lib/java" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/examples" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/examples/data" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/examples/uiauto_uimaps" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/examples/uiauto_maps" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/config" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/temp" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/scripts" />
@@ -138,6 +138,7 @@ simple example build file
 		<jar destFile="${private.arjunastartup.clear.jar.file}">
 			<zipgroupfileset includes="*.jar" dir="${private.batteries.self.jar.dir}" />
 			<zipgroupfileset includes="*.jar" dir="${private.unitee.core.self.jar.dir}" />
+			<zipgroupfileset includes="*.jar" dir="${private.uiautomator.self.jar.dir}" />
 			<zipgroupfileset includes="*.jar" dir="${private.arjunastartup.self.jar.dir}" />
 		</jar>
 		

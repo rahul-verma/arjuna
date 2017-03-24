@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.autocognite.pvt.batteries.filehandler.FileLineReader;
+import pvt.batteries.filehandler.FileLineReader;
 
 public class HeaderTextFileReader {
 	FileLineReader reader = null;

@@ -37,7 +37,7 @@ simple example build file
 	<property name="private.arjunaplatform.obfuscated.jar.file" value="${private.arjunaplatform.obfuscated.jar.dir}/obfuscated_${arjunaplatform.jar.file.name}" />
 
 	<property name="private.arjunaplatform.dist.tools.dir" value="${current.dist.private.tools.dir}/${arjunaplatform.name}-dist" />
-	<property name="private.arjunaplatform.dist.tools.root.dir" value="${private.arjunaplatform.dist.tools.dir}/autocognite-arjuna-pro" />
+	<property name="private.arjunaplatform.dist.tools.root.dir" value="${private.arjunaplatform.dist.tools.dir}/arjuna-pro" />
 	<property name="private.arjunaplatform.dist.tools.jar.dir" value="${private.arjunaplatform.dist.tools.root.dir}/lib/java" />
 	<property name="private.arjunaplatform.dist.tools.jar.file" value="${private.arjunaplatform.dist.tools.jar.dir}/${arjunaplatform.full.jar.file.name}" />
 	<property name="private.arjunaplatform.dist.jar.file" value="${current.dist.private.jars.dir}/${arjunaplatform.full.jar.file.name}" />
