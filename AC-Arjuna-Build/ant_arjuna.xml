@@ -3,7 +3,9 @@
 	<import file="./ant_tasks/global.xml"/>
 	<import file="./ant_tasks/batteries.xml"/>
 	<import file="./ant_tasks/unitee.xml"/>
+	<import file="./ant_tasks/uiautomator.xml"/>
 	<import file="./ant_tasks/arjuna-pro-platform.xml"/>
+	<import file="./ant_tasks/arjuna-pro-startup.xml"/>
 	<import file="./ant_tasks/obfuscate.xml"/>
 	<description>
 simple example build file
@@ -28,14 +30,27 @@ simple example build file
 	    	<target name="unitee.core_build"/>
 	   	</antcall>
 		<antcall>
-	    	<target name="arjuna_compile"/>
-	   	</antcall>
-		<antcall target="obfuscate">
-				<param name="jar1" value="${private.arjuna.clear.jar.file}"/>
-				<param name="jar2" value="${private.arjuna.obfuscated.jar.file}"/>
+	    	<target name="uiautomator.core_build"/>
 	   	</antcall>
 		<antcall>
-	    	<target name="arjuna_build"/>
+	    	<target name="arjunaplatform_compile"/>
+	   	</antcall>
+		<antcall>
+	    	<target name="arjunastartup_compile"/>
+	   	</antcall>
+		<antcall target="obfuscate">
+				<param name="jar1" value="${private.arjunaplatform.clear.jar.file}"/>
+				<param name="jar2" value="${private.arjunaplatform.obfuscated.jar.file}"/>
+	   	</antcall>
+		<antcall target="obfuscate">
+				<param name="jar1" value="${private.arjunastartup.clear.jar.file}"/>
+				<param name="jar2" value="${private.arjunastartup.obfuscated.jar.file}"/>
+	   	</antcall>
+		<antcall>
+	    	<target name="arjunaplatform_build"/>
+	   	</antcall>
+		<antcall>
+	    	<target name="arjunastartup_build"/>
 	   	</antcall>
 	</target>
 

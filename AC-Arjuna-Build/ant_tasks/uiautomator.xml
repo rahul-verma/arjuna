@@ -1,6 +1,6 @@
 <?xml version= "1.0"?>
-<project name="uiautomator" default="uiautomator_build" basedir=".">
-	<import file="./ant_tasks/global.xml"/>
+<project name="uiautomator" default="uiautomator.core_build" basedir=".">
+	<import file="./global.xml"/>
 	<description>
 simple example build file
 </description>
@@ -18,34 +18,28 @@ simple example build file
 	<property name="root.uiautomator.dir" value="${all.sources.dir}/${uiautomator.github.rep.name}" />
 	<property name="proj.uiautomator.dir" value="${root.uiautomator.dir}/${uiautomator.proj.name}" />
 	<property name="src.uiautomator.dir" location="${proj.uiautomator.dir}/src" />
-	<property name="uiautomator.prefix" value="${uiautomator.name}-${uiautomator.build_version}" />
 
-	<property name="uiautomator.dist.file.name" value="${uiautomator.prefix}.zip" />
-	<property name="uiautomator.jar.file.name" value="${uiautomator.prefix}.jar" />
-	<property name="uiautomator.src.file.name" value="${uiautomator.prefix}-sources.zip" />
+	<property name="uiautomator.dist.file.name" value="${uiautomator.name}.zip" />
+	<property name="uiautomator.jar.file.name" value="${uiautomator.name}.jar" />
+	<property name="uiautomator.src.file.name" value="${uiautomator.name}-sources.zip" />
 	<property name="ant.uiautomator.root.dir" value="${current.build.dir}/${uiautomator.proj.name}" />
 	<property name="ant.uiautomator.build.dir" location="${ant.uiautomator.root.dir}/build" />
 	<property name="ant.uiautomator.jar.dir" location="${ant.uiautomator.root.dir}/jar" />
 	<property name="ant.uiautomator.jar.file" value="${ant.uiautomator.jar.dir}/${uiautomator.jar.file.name}" />
 	<property name="private.uiautomator.self.jar.dir" value="${current.dist.private.dir}/uiautomator" />
 	<property name="private.uiautomator.self.jar.file" value="${private.uiautomator.self.jar.dir}/${uiautomator.jar.file.name}" />
-	<property name="private.uiautomator.dist.components.jar.file" value="${current.dist.private.jars.dir}/${uiautomator.jar.file.name}" />
-	<property name="private.uiautomator.dist.src.dir" value="${current.dist.private.sources.dir}/${uiautomator.prefix}" />
+	<property name="private.uiautomator.dist.src.dir" value="${current.dist.private.sources.dir}/${uiautomator.name}" />
 	
 	<target name="uiautomator_mkdirs">
 		<!-- ======================================================================================== -->
 		<!-- ===================================== DIRECTORY STRUCTURE =================================================== -->
 		<!-- ===================================== Batteries =================================================== -->
 		<!-- ======================================================================================== -->
-
-		<mkdir dir="${ant.uiautomator.root.dir}" />
-		<mkdir dir="${ant.uiautomator.build.dir}" />
-		<mkdir dir="${ant.uiautomator.jar.dir}" />	
 	</target>
 	
 	<!-- ===================================== AC-Batteries =================================================== -->
 
-	<target name="uiautomator_build" depends="uiautomator_mkdirs">
+	<target name="uiautomator.core_build" depends="uiautomator_mkdirs">
 		<!-- Create the time stamp -->
 		<tstamp />
 		<!-- Create the build directory structure used by compile -->
@@ -65,7 +59,7 @@ simple example build file
 			<fileset dir="${ant.uiautomator.build.dir}" />
 		</jar>
 		
-		<copy file="${ant.uiautomator.jar.file}" tofile="${private.uiautomator.dist.components.jar.file}" />
+		<copy file="${ant.uiautomator.jar.file}" tofile="${private.uiautomator.self.jar.file}" />
 		
 		<copy todir="${private.uiautomator.dist.src.dir}/${uiautomator.name}/src">
 			<fileset dir="${src.uiautomator.dir}">

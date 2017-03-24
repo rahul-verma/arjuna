@@ -11,7 +11,9 @@ simple example build file
 	<!-- ======================================================================================== -->
 
 	<property name="3rd_party_batteries_jars" location="/Users/rahulverma/Documents/Dropbox/_jars/batteries_jars">
+		
 	</property>
+	<property name="3rd_party_uiauto_jars" location="/Users/rahulverma/Documents/Dropbox/_jars/uiauto_jars"/>
 
 	<property name="autocognite.build.version" value="0.1b1" />
 
@@ -46,10 +48,16 @@ simple example build file
 		<fileset dir="${3rd_party_batteries_jars}">
 			<include name="**/*.jar" />
 		</fileset>
+		<fileset dir="${3rd_party_uiauto_jars}">
+			<include name="**/*.jar" />
+		</fileset>
 		<fileset dir="${private.batteries.self.jar.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 		<fileset dir="${private.unitee.core.self.jar.dir}">
+			<include name="**/*.jar" />
+		</fileset>
+		<fileset dir="${private.uiautomator.core.self.jar.dir}">
 			<include name="**/*.jar" />
 		</fileset>
 	</path>
@@ -84,6 +92,11 @@ simple example build file
 		<mkdir dir="${ant.unitee.core.build.dir}" />
 		<mkdir dir="${ant.unitee.core.jar.dir}" />	
 		<mkdir dir="${private.unitee.core.self.jar.dir}" />
+		
+		<mkdir dir="${ant.uiautomator.root.dir}" />
+		<mkdir dir="${ant.uiautomator.build.dir}" />
+		<mkdir dir="${ant.uiautomator.jar.dir}" />	
+		<mkdir dir="${private.uiautomator.self.jar.dir}" />
 	</target>
 
 </project>
