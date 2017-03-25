@@ -95,7 +95,7 @@ public class ArjunaInternal {
 	}
 	
 	public static void init(String[] args) throws Exception{
-		ArjunaSingleton.INSTANCE.printUniteeHeader();
+		ArjunaSingleton.INSTANCE.printArjunaHeader();
 		ArjunaSingleton.INSTANCE.setCliArgs(args);
 		ArjunaSingleton.INSTANCE.init();
 		ArjunaSingleton.INSTANCE.freeze();
@@ -405,6 +405,14 @@ public class ArjunaInternal {
 
 	public static Session getSession() {
 		return ArjunaSingleton.INSTANCE.getSession();
+	}
+
+	public static void shouldInitUiAutomator(boolean flag) {
+		ArjunaSingleton.INSTANCE.shouldInitUiAutomator(flag);
+	}
+
+	public static void setEdition(String edition) {
+		ArjunaSingleton.INSTANCE.setEdition(edition);
 	}
 
 }

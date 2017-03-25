@@ -121,8 +121,4 @@ public class UiAutomator {
 		public static final String COMPARISON_NOT_POSSIBLE = "problem.sikuli.comparison.imagesnotcomparable";
 		
 	}
-	public static ComponentConfigurator getComponentConfigurator() {
-		return new UiAutomatorConfigurator();
-	}
-
 }

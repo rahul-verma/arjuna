@@ -50,6 +50,7 @@ import pvt.batteries.hocon.HoconFileReader;
 import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.hocon.HoconResourceReader;
 import pvt.batteries.hocon.HoconStringReader;
+import pvt.batteries.integration.ComponentConfigurator;
 import pvt.batteries.lib.ComponentIntegrator;
 import pvt.batteries.logging.Log;
 import pvt.batteries.property.ConfigPropertyBatteries;
@@ -82,19 +83,25 @@ public enum ArjunaSingleton {
 	private TestGroupsDB groupsDB = null;
 	private CLIConfigurator cliConfigurator = null;
 	private Session session = null;
+	private boolean initUiAuto = false;
 	
-	private String name = "Arjuna Pro Platform Edition";
+	private String edition = "Arjuna Pro Platform Edition";
 	
 	ComponentIntegrator integrator;
 	
 	private Map<TestPickerProperty,String> cliPickerOptions = null;
 
-	public void setName(String name){
-		this.name = name;
+	public void setEdition(String edition){
+		this.edition = edition;
 	}
 	
 	public void setVersion(String version){
 		this.version = version;
+	}
+	
+
+	public void shouldInitUiAutomator(boolean flag) {
+		initUiAuto = flag;
 	}
 	
 	public void setCliConfigurator(CLIConfigurator cliConfigurator) {
@@ -102,9 +109,15 @@ public enum ArjunaSingleton {
 	}
 	
 	public void init() throws Exception{
+		String customTestDir = null;
 		String refPath = FileSystemBatteries.getAbsolutePathFromJar(FileSystemBatteries.getJarFilePathForObject(this), "./../../..");
 		Batteries.init(refPath);
-		//Batteries.addConfigurator(UiAutomator.getComponentConfigurator());
+		if (initUiAuto){
+			Class<?> klass = Class.forName("com.arjunapro.internal.UiAutoIntegrator");
+			Method m = klass.getDeclaredMethod("getComponentConfigurator");
+			ComponentConfigurator ci = (ComponentConfigurator) m.invoke(null);
+		    Batteries.addConfigurator(ci);
+		}
 		ArjunaConfigurator uConf = new ArjunaConfigurator();
 		Batteries.addConfigurator(uConf);
 		Batteries.processConfigDefaults();
@@ -147,12 +160,20 @@ public enum ArjunaSingleton {
 			// userConfig may not be defined. It's ok. It's optional
 		}
 		
+		if (!integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).isNull()){
+			customTestDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).asString();
+		}
+		
 		//CLI
 		cliConfigurator.setIntegrator(integrator);
 		cliConfigurator.setArgs(cliArgs);
 		cliConfigurator.processUserOptions();
 		HashMap<String,Value> options = cliConfigurator.getUserOptions();
 		Batteries.processConfigProperties(options);
+		
+		if (!integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).isNull()){
+			customTestDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).asString();
+		}
 
 //		HashMap<String, Value> updateOptions = new HashMap<String, Value>();
 //		String reportDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString();
@@ -204,7 +225,6 @@ public enum ArjunaSingleton {
 //		
 //		Batteries.processConfigProperties(updateOptions);
 		
-		System.out.println(integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString());
 		HashMap<String, Value> updateOptions = new HashMap<String, Value>();
 		String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString();
 		String runID =  integrator.value(ArjunaProperty.RUNID).asString();
@@ -223,6 +243,37 @@ public enum ArjunaSingleton {
 //				integrator.value(BatteriesPropertyType.LOGGING_NAME).asString(),
 //				integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_LOG).asString()
 //		);
+		
+		if (customTestDir != null){
+			if (!(FileSystemBatteries.isAbsolutePath(customTestDir))){
+				Console.displayError("Test Directory Path should be an absolute path.");
+				Console.displayError("You have provided: " + customTestDir);
+				Console.displayError("Please check your CLI usage/configurations");
+				Console.displayError("Exiting...");
+				Console.displayError("");
+				System.exit(1);					
+			} else if (!FileSystemBatteries.isDir(customTestDir)){
+				Console.displayError("Test Directory Path should be an existing directory.");
+				Console.displayError("You have provided: " + customTestDir);
+				Console.displayError("Please check your CLI usage/configurations");
+				Console.displayError("Exiting...");
+				Console.displayError("");
+				System.exit(1);	
+			} else if (!(new File(customTestDir)).exists()){
+				Console.displayError("Test Directory Path provided by you does not exist.");
+				Console.displayError("You have provided: " + customTestDir);
+				Console.displayError("Please check your CLI usage/configurations");
+				Console.displayError("Exiting...");
+				Console.displayError("");
+				System.exit(1);					
+			}
+			HashMap<String, Value> testOptions = new HashMap<String, Value>();
+			testOptions.put(
+			ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_TESTS),
+			new StringValue(customTestDir)
+			);
+			Batteries.processConfigProperties(testOptions);
+		}
 		
 		groupsDB = new TestGroupsDB();
 		
@@ -322,7 +373,7 @@ public enum ArjunaSingleton {
 					);
 	}
 	
-	public void printUniteeHeader(){
+	public void printArjunaHeader(){
 		Console.display("   ___         _                      ");
 		Console.display("  / _ \\       (_)                     ");
 		Console.display(" / /_\\ \\ _ __  _  _   _  _ __    __ _ ");
@@ -335,7 +386,7 @@ public enum ArjunaSingleton {
 		Console.marker(60);	
 		Console.display("Copyright (c) 2015-17 AutoCognite Testing Research Pvt Ltd");
 		Console.marker(60);
-		Console.displayPaddedKeyValue("Product Name", this.name);
+		Console.displayPaddedKeyValue("Product Name", this.edition);
 		Console.displayPaddedKeyValue("Version", this.version);
 		Console.displayPaddedKeyValue("Website", "www.arjunapro.com");
 		Console.displayPaddedKeyValue("Contact", "support@autocognite.com");

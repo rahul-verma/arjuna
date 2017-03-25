@@ -31,6 +31,8 @@ public class ArjunaPro {
 	public static void main(String[] args) throws Exception {
 		Console.init();
 		ArjunaInternal.setCliConfigurator(new UniteeCliConfigurator());
+		ArjunaInternal.setEdition("Arjuna Pro Startup Edition");
+		ArjunaInternal.shouldInitUiAutomator(true);
 		ArjunaInternal.init(args);
 		TestEngine tee = createEngine(args);
 		ArjunaInternal.execute(tee);
