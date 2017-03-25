@@ -322,11 +322,11 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 		}
 		
 		if (shouldIncludeCustomProps){
-			this.execHeaders.add("Custom Test Properties");
+			this.execHeaders.add("User Test Properties");
 		}
 		
 		if (shouldIncludeUtv){
-			this.execHeaders.add("User Defined Values");
+			this.execHeaders.add("User Test Variables");
 		}
 		
 		if (shouldIncludeDataRecord){
