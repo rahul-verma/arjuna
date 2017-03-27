@@ -339,8 +339,6 @@ limitations under the License.
 
 A copy of full license text for this library can be found in Software distribution at /docs/licenses/typesafe-config/LICENSE.txt
 
-
-
 Information on Linking To Third Party Software
 ------------------------------------------------
 
@@ -364,7 +362,7 @@ Source Link: http://www.appium.io/
 Arjuna Pro links to Appium (Client Library), which contains the following license and notice:
 
 Appium
-Copyright 2012-2015 Sauce Labs, Inc.
+Copyright 2012-2016 JS Foundation and other contributors
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -378,7 +376,7 @@ Copyright 2012-2015 Sauce Labs, Inc.
    See the License for the specific language governing permissions and
    limitations under the License.
 
-A copy of the Apache License, 2.0 is also provided as a part of the Software distribution at /docs/licenses/Apache-LICENSE-2.0.txt
+A copy of full license text for this library can be found in Software distribution at /docs/licenses/appium/LICENSE.txt
 
 Selenium
 --------
@@ -402,17 +400,17 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-A copy of the Apache License, 2.0 is also provided as a part of the Software distribution at /docs/licenses/Apache-LICENSE-2.0.txt
+A copy of full license text for this library can be found in Software distribution at /docs/licenses/selenium/LICENSE.txt
 
 Sikuli X
 --------
 Source Link: www.sikuli.org
 
-Arjuna Pro links to Sikuli, which contains the following license and notice:
+Arjuna Pro links to SikuliX, which contains the following license and notice:
 
-Licensed Under MIT License
+MIT License
 
-Copyright (c) 2010-2011 Sikuli.org
+Copyright (c) 2017 Raimund Hocke
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -421,13 +419,15 @@ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 copies of the Software, and to permit persons to whom the Software is
 furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+A copy of full license text for this library can be found in Software distribution at /docs/licenses/sikulix/LICENSE.txt
