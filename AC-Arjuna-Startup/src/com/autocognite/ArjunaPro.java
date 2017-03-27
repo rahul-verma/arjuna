@@ -18,6 +18,8 @@
  ******************************************************************************/
 package com.autocognite;
 
+import java.time.LocalDate;
+
 import com.arjunapro.sysauto.batteries.SystemBatteries;
 import com.arjunapro.testauto.console.Console;
 
@@ -36,7 +38,6 @@ public class ArjunaPro {
 		ArjunaInternal.init(args);
 		TestEngine tee = createEngine(args);
 		ArjunaInternal.execute(tee);
-
 	}
 	
 	private static TestEngine createEngine(String[] args){

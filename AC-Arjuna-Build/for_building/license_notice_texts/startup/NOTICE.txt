@@ -1,18 +1,22 @@
-AutoCognite UniTEE - Unified Test Engine Exemplified 
-(hereinafter also referred as Software)
-Copyright 2015-16 AutoCognite Testing Research Pvt Ltd
-www.AutoCognite.com
-support@autocognite.com
+AutoCognite Arjuna Pro Platform Edition
+Copyright 2015-17 AutoCognite Testing Research Pvt Ltd
+Product Website: www.ArjunaPro.com
+Email: support@arjunapro.com
 
 This Software includes software developed by
 AutoCognite Testing Research Pvt Ltd
-(Web: http://www.autocognite.com, Email: support@autocognite.com)
+(Company Website: http://www.autocognite.com, Company Email: sales@autocognite.com)
 
-AutoCognite UniTEE is released under Apache 2.0 license.
+AutoCognite Arjuna Pro Platform Edition, is hereinafter referred to as "Software" or "Arjuna Pro".
 
-This Software uses UNMODIFIED versions of all of the 
-listed libraries and may include one or more of these 
-as a part of its distribution.
+Access and use of Software is governed by AutoCognite Arjuna Pro End User License Agreement.
+
+Notice Files For 3rd Party Libraries Included in Software
+---------------------------------------------------------
+
+The Software includes the UNMODIFIED version of the following 3rd party libraries as a part of its distribution. The Software makes use of them in their originally released binary versions.
+
+The list is in the alphabetical order of names of the third party libraries.
 
 Following are the contents of notice files of all libraries 
 used by this Software.
@@ -21,9 +25,7 @@ Apache Commons CLI
 --------------------
 Source Link: http://commons.apache.org/proper/commons-cli/
 
-The following software may be included in this product: Apache Commons CLI.
-
-This software contains the following notice:
+Arjuna Pro includes Apache Commons CLI, which contains the following notice:
 
 Apache Commons CLI
 Copyright 2001-2015 The Apache Software Foundation
@@ -31,13 +33,33 @@ Copyright 2001-2015 The Apache Software Foundation
 This product includes software developed at
 The Apache Software Foundation (http://www.apache.org/).
 
+Apache Commons Codec
+--------------------
+Source Link: https://commons.apache.org/proper/commons-codec/
+
+Arjuna Pro includes Apache Commons Codec, which contains the following notice:
+
+Apache Commons Codec
+Copyright 2002-2016 The Apache Software Foundation
+
+This product includes software developed at
+The Apache Software Foundation (http://www.apache.org/).
+
+src/test/org/apache/commons/codec/language/DoubleMetaphoneTest.java
+contains test data from http://aspell.net/test/orig/batch0.tab.
+Copyright (C) 2002 Kevin Atkinson (kevina@gnu.org)
+	
+The content of package org.apache.commons.codec.language.bm has been translated
+from the original php source code available at http://stevemorse.org/phoneticinfo.htm
+with permission from the original authors.
+Original source copyright:
+Copyright (c) 2008 Alexander Beider & Stephen P. Morse.
+
 Apache Commons IO
 -------------------
 Source Link: http://commons.apache.org/proper/commons-io/
 
-The following software may be included in this product: Apache Commons IO.
-
-This software contains the following notice:
+Arjuna Pro includes Apache Commons IO, which contains the following notice:
 
 Apache Commons IO
 Copyright 2002-2014 The Apache Software Foundation
@@ -49,7 +71,7 @@ Apache Commons Lang
 -------------------
 Source Link: http://commons.apache.org/proper/commons-lang/
 
-The following software may be included in this product: Apache Commons Lang
+Arjuna Pro includes Apache Commons Lang, which contains the following notice:
 
 Apache Commons Lang
 Copyright 2001-2015 The Apache Software Foundation
@@ -64,9 +86,7 @@ Apache Commons Validator
 ------------------------
 Source Link: http://commons.apache.org/proper/commons-validator/
 
-The following software may be included in this product: Apache Commons IO.
-
-This software contains the following notice:
+Arjuna Pro includes Apache Commons IO, which contains the following notice:
 
 Apache Commons Validator
 Copyright 2001-2015 The Apache Software Foundation
@@ -78,9 +98,7 @@ Apache log4j
 ------------
 Source Link: http://logging.apache.org/log4j/1.2/
 
-The following software may be included in this product: Apache log4j.
-
-This software contains the following notice:
+Arjuna Pro includes Apache log4j, which contains the following notice:
 
 Apache log4j
 Copyright 2010 The Apache Software Foundation
@@ -92,9 +110,7 @@ Apache POI
 ----------
 Source Link: http://poi.apache.org/
 
-The following software may be included in this product: Apache POI.
-
-This software contains the following notice:
+Arjuna Pro includes Apache POI, which contains the following notice:
 
 Apache POI
 Copyright 2003-2015 The Apache Software Foundation
@@ -120,37 +136,11 @@ This product contains parts of the eID Applet project
 FedICT (federal ICT department of Belgium), e-Contract.be BVBA (https://www.e-contract.be),
 Bart Hanssens from FedICT
 
-Appium
-------
-Source Link: http://www.appium.io/
-
-The following software may be included in this product:  Selenium.
-
-Appium
-Copyright 2012-2015 Sauce Labs, Inc.
-
-   Licensed under the Apache License, Version 2.0 (the "License");
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an "AS IS" BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-
-A copy of the Apache License, 2.0 is also provided as a part of the Software distribution at /docs/licenses/Apache-LICENSE-2.0.txt
-
-
 [ini4j] by Ivan SZIBA
 -------------------
 Source Link: http://sourceforge.net/projects/ini4j/
 
-The following software may be included in this product: [ini4j].
-
-This software contains the following notice:
+Arjuna Pro includes [ini4j], which contains the following notice:
 
 [ini4j]
 Copyright 2005,2009 Ivan SZKIBA
@@ -171,13 +161,76 @@ Java Native Access (JNA)
 ------------------------
 Source Link: https://github.com/java-native-access
 
-The following software may be included in this product: Java Native Access (JNA).
+Arjuna Pro includes Java Native Access (JNA).
+
+Google gson
+-----------
+
+Source Link:  https://github.com/google/gson
+
+Arjuna Pro includes Google gson
+
+SQLite JDBC
+-----------
+
+Source Link:  https://github.com/xerial/sqlite-jdbc
+
+This product includes the following softwares developed by David Crawshaw.
+See LICENSE.zentus file.
+
+And also, NestedVM (Apache License Version 2.0) is used inside sqlite-jdbc
+
+A copy of the LICENSE.zentus files is provided as a part of the Software distribution at
+/docs/licenses/sqlite-jdbc/LICENSE.zentus
+
+Typesafe Config
+---------------
+Source Link: https://github.com/typesafehub/config
+
+Arjuna Pro includes Typesafe Config.
+
+Notice Files For 3rd Party Libraries That Software Links To
+-----------------------------------------------------------
+
+The Software links to the interface of the following libraries.
+
+These libraries are used in an UNMODIFIED version of their public distributions. The Software makes use of them in their originally released binary versions.
+
+The Software DOES NOT include these libraries as a part of its distribution. They have to be downloaded from their respective sources.
+
+The list is in the alphabetical order of names of the third party libraries.
+
+Following are the contents of notice files of all libraries 
+used by this Software.
+
+Appium
+------
+Source Link: http://www.appium.io/
+
+Arjuna Pro links to Appium, which contains the following notice:
+
+Appium
+Copyright 2012-2015 Sauce Labs, Inc.
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+A copy of the Apache License, 2.0 is also provided as a part of the Software distribution at /docs/licenses/Apache-LICENSE-2.0.txt
 
 Selenium
 --------
 Source Link: http://www.seleniumhq.org/
 
-The following software may be included in this product:  Selenium.
+Arjuna Pro links to Selenium, which contains the following notice:
 
 Selenium
 Copyright 2011-2015 Software Freedom Conservancy
@@ -201,7 +254,7 @@ Sikuli X
 --------
 Source Link: www.sikuli.org
 
-The following software may be included in this product:  Sikuli X.
+Arjuna Pro links to Sikuli X, which contains the following notice:
 
 Sikuli X
 Copyright (c) 2010-2011 Sikuli.org
@@ -223,63 +276,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
-
-Typesafe Config
----------------
-Source Link: https://github.com/typesafehub/config
-
-The following software may be included in this product: Typesafe Config.
-
-Google gson
------------
-
-Source Link:  https://github.com/google/gson
-
-The following software may be included in this product: Google gson
-
-SQLite JDBC
------------
-
-Source Link:  https://github.com/xerial/sqlite-jdbc
-
-This product includes the following softwares developed by David Crawshaw.
-See LICENSE.zentus file.
-
-And also, NestedVM (Apache License Version 2.0) is used inside sqlite-jdbc
-
-A copy of the LICENSE.zentus files is provided as a part of the Software distribution at
-/docs/licenses/LICENSE.zentus
-
-AutoCognite Batteries
----------------------
-Source Link: http://www.autocognite.com
-
-The following software may be included in this product: AutoCognite Batteries.
-
-This software contains the following notice:
-
-AutoCognite Batteries
-Copyright 2015-16 AutoCognite Testing Research Pvt Ltd
-www.AutoCognite.com
-support@autocognite.com
-
-This Software includes software developed by
-AutoCognite Testing Research Pvt Ltd
-(Web: http://www.autocognite.com, Email: support@autocognite.com)
-
-AutoCognite UI Automator
-------------------------
-Source Link: http://www.autocognite.com
-
-The following software may be included in this product: AutoCognite UI Automator.
-
-This software contains the following notice:
-
-AutoCognite UI Automator
-Copyright 2015-16 AutoCognite Testing Research Pvt Ltd
-www.AutoCognite.com
-support@autocognite.com
-
-This Software includes software developed by
-AutoCognite Testing Research Pvt Ltd
-(Web: http://www.autocognite.com, Email: support@autocognite.com)
