@@ -11,12 +11,12 @@ import com.arjunapro.ddt.annotations.Data;
 import com.arjunapro.ddt.annotations.DriveWithData;
 import com.arjunapro.ddt.annotations.DriveWithDataArray;
 import com.arjunapro.ddt.annotations.DriveWithDataFile;
-import com.arjunapro.ddt.annotations.DriveWithDataGenerator;
 import com.arjunapro.ddt.annotations.DriveWithDataMethod;
 import com.arjunapro.ddt.interfaces.DataSource;
 import com.arjunapro.sysauto.batteries.FileSystemBatteries;
 
 import pvt.arjunapro.ArjunaInternal;
+import pvt.arjunapro.annotations.DriveWithDataGenerator;
 import pvt.arjunapro.enums.BatteriesPropertyType;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.databroker.DataSourceFactory;

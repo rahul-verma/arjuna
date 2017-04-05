@@ -12,7 +12,7 @@ simple example build file
 
 	<property name="arjunastartup.build_version" value="${autocognite.build.version}" />
 	<property name="arjunastartup.proj.name" value="AC-Arjuna-Startup" />
-	<property name="arjunastartup.name" value="autocognite-arjuna-startup-edition" />
+	<property name="arjunastartup.name" value="autocognite-arjuna-pro-startup-edition" />
 	<property name="arjunastartup.github.rep.name" value="arjuna" />
 	<property name="root.arjunastartup.dir" value="${all.sources.dir}/${arjunastartup.github.rep.name}" />
 	<property name="proj.arjunastartup.dir" value="${root.arjunastartup.dir}/${arjunastartup.proj.name}" />

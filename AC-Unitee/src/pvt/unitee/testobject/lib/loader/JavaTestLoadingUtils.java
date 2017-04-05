@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import com.arjunapro.ddt.annotations.FileDataReference;
 import com.arjunapro.sysauto.batteries.DataBatteries;
 import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-import com.arjunapro.testauto.annotations.Instances;
 import com.arjunapro.testauto.annotations.TestClass;
 import com.arjunapro.testauto.annotations.TestMethod;
 
+import pvt.arjunapro.annotations.FileDataReference;
+import pvt.arjunapro.annotations.Instances;
 import pvt.arjunapro.enums.BatteriesPropertyType;
 import pvt.batteries.config.Batteries;
 

@@ -16,16 +16,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.arjunapro.testauto.annotations;
+package pvt.arjunapro.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.RUNTIME) 
 @Target({ElementType.TYPE, ElementType.METHOD})
-public @interface ClassDependency {
-	Class<?>[] value() default {};
-	Class<?>[] testClasses() default {};
+public @interface FileDataReference {
+	String value() default "NOT_SET";
+	String path() default "NOT_SET";
+	String name() default "NOT_SET";
 }

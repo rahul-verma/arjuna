@@ -12,10 +12,9 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.annotations.ClassDependency;
-import com.arjunapro.testauto.annotations.MethodDependency;
-
 import pvt.arjunapro.ArjunaInternal;
+import pvt.arjunapro.annotations.ClassDependency;
+import pvt.arjunapro.annotations.MethodDependency;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.annotate.None;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;

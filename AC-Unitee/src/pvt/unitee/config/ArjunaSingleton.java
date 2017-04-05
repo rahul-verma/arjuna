@@ -29,7 +29,6 @@ import java.util.Map;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Level;
 
-import com.arjunapro.ddt.annotations.DataGenerator;
 import com.arjunapro.ddt.annotations.DataMethodContainer;
 import com.arjunapro.ddt.interfaces.DataSource;
 import com.arjunapro.sysauto.batteries.FileSystemBatteries;
@@ -39,6 +38,7 @@ import com.arjunapro.testauto.interfaces.Value;
 import com.typesafe.config.ConfigException;
 import com.typesafe.config.ConfigObject;
 
+import pvt.arjunapro.annotations.DataGenerator;
 import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.arjunapro.enums.BatteriesPropertyType;
 import pvt.arjunapro.enums.PickerTargetType;
@@ -65,7 +65,7 @@ import pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.1b1";
+	private String version = "1.0a1";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();

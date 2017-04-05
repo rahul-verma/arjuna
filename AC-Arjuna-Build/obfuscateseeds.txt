@@ -90,6 +90,9 @@ com.arjunapro.ddt.interfaces.DataWrapper: java.util.List asIntList()
 com.arjunapro.ddt.interfaces.DataWrapper: java.util.List asStringList()
 com.arjunapro.ddt.interfaces.DataWrapper: java.util.List asList()
 com.arjunapro.ddt.interfaces.DataWrapper: float asFloat()
+com.arjunapro.internal.UiAutoIntegrator
+com.arjunapro.internal.UiAutoIntegrator: UiAutoIntegrator()
+com.arjunapro.internal.UiAutoIntegrator: pvt.batteries.integration.ComponentConfigurator getComponentConfigurator()
 com.arjunapro.sysauto.batteries.DataBatteries
 com.arjunapro.sysauto.batteries.DataBatteries: DataBatteries()
 com.arjunapro.sysauto.batteries.DataBatteries: java.util.HashMap zip(java.lang.String[],java.lang.String[])
@@ -552,19 +555,20 @@ pvt.arjunapro.ArjunaTestEngine$1
 pvt.arjunapro.enums.ArjunaProperty
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_RUNIDREPORT
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty SESSION_NAME
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty PROJECT_NAME
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty RUNID
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty FAILFAST
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_SESSIONS
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_GROUPS
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_TESTS
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_REPORT
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_ARCHIVES
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_RUNID_REPORT_ROOT
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_RUNID_REPORT_JSON_RAW_ROOT
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_RUNID_REPORT_JSON_RAW_TESTS
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_RUNID_REPORT_JSON_RAW_ISSUES
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_RUNID_REPORT_JSON_RAW_EVENTS
-pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_RUNID_REPORT_JSON_RAW_FIXTURES
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_SESSIONS
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_GROUPS
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_TESTS
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_REPORT
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_ARCHIVES
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_ROOT
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ROOT
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_TESTS
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_EVENTS
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_FIXTURES
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty FIXTURE_TESTCLASS_SETUPCLASS_NAME
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty FIXTURE_TESTCLASS_SETUPCLASSINSTANCE_NAME
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty FIXTURE_TESTCLASS_SETUPCLASSFRAGMENT_NAME
@@ -635,22 +639,24 @@ pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty[] $VALUES
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty[] values()
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty valueOf(java.lang.String)
 pvt.arjunapro.enums.BatteriesPropertyType
-pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType CONFIG_FILE_NAME
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType CONFIG_CENTRAL_FILE_NAME
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType CONFIG_PROJECT_FILE_NAME
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_TOOLS_ROOT
-pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_LOG
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_PROJECT_LOG
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_CONFIG
-pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_TEMP
-pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_DATA_ROOT
-pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_DATA_SOURCES
-pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_DATA_REFERENCES
-pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_SCREENSHOTS
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_PROJECT_CONFIG
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_PROJECT_TEMP
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_PROJECT_DATA_ROOT
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_PROJECT_DATA_SOURCES
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_PROJECT_DATA_REFERENCES
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_PROJECT_SCREENSHOTS
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType LOGGING_CONSOLE_ON
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType LOGGING_CONSOLE_LEVEL
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType LOGGING_FILE_ON
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType LOGGING_FILE_LEVEL
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType LOGGING_NAME
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_ROOT
-pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_PROJECT
+pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType DIRECTORY_PROJECT_ROOT
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType[] $VALUES
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType[] values()
 pvt.arjunapro.enums.BatteriesPropertyType: pvt.arjunapro.enums.BatteriesPropertyType valueOf(java.lang.String)
@@ -1063,6 +1069,10 @@ pvt.batteries.ds.Message
 pvt.batteries.ds.MessagesContainer
 pvt.batteries.ds.Name
 pvt.batteries.ds.NamesContainer
+pvt.batteries.encrypt.Base64Handler
+pvt.batteries.encrypt.BlowFishHandler
+pvt.batteries.encrypt.ZipArray
+pvt.batteries.encrypt.ZlibHandler
 pvt.batteries.exceptions.ArjunaException
 pvt.batteries.exceptions.Problem
 pvt.batteries.filehandler.DirReaderFinishedException
@@ -1099,38 +1109,6 @@ pvt.batteries.lib.StringsManager$problemCodes
 pvt.batteries.lib.ThreadSafeStreamReader
 pvt.batteries.lib.UserDefinedProperty
 pvt.batteries.logging.Log
-pvt.batteries.networker.Networker
-pvt.batteries.networker.api.KeyValueQueue
-pvt.batteries.networker.api.NetworkProtocol
-pvt.batteries.networker.api.http.AcHttpContent
-pvt.batteries.networker.api.http.AcHttpHeaders
-pvt.batteries.networker.api.http.AcUrl
-pvt.batteries.networker.lib.http.AcDefaultUrl
-pvt.batteries.networker.lib.http.AcHttpContentBuilder
-pvt.batteries.networker.lib.http.AcHttpHeader
-pvt.batteries.networker.lib.http.AcHttpHeaders
-pvt.batteries.networker.lib.http.AcHttpHeadersBuilder
-pvt.batteries.networker.lib.http.AcHttpMethod
-pvt.batteries.networker.lib.http.AcHttpRequest
-pvt.batteries.networker.lib.http.AcHttpRequestBuilder
-pvt.batteries.networker.lib.http.AcHttpRequestBuilder$1
-pvt.batteries.networker.lib.http.AcHttpRequester
-pvt.batteries.networker.lib.http.AcHttpRequesterBuilder
-pvt.batteries.networker.lib.http.AcHttpRequests
-pvt.batteries.networker.lib.http.AcHttpResponse
-pvt.batteries.networker.lib.http.AcProxies
-pvt.batteries.networker.lib.http.AcRawHttpContent
-pvt.batteries.networker.lib.http.AcTextHttpContent
-pvt.batteries.networker.lib.http.AcUrlBuilder
-pvt.batteries.networker.lib.http.AcUrlEncodedContent
-pvt.batteries.networker.lib.util.AbstractKVQueue
-pvt.batteries.networker.lib.util.FormData
-pvt.batteries.networker.lib.util.FormParam
-pvt.batteries.networker.lib.util.KeyValuePair
-pvt.batteries.networker.lib.util.NameValuePairBuilder
-pvt.batteries.networker.lib.util.QueryData
-pvt.batteries.networker.lib.util.QueryParam
-pvt.batteries.networker.lib.util.StringIntPair
 pvt.batteries.nvpair.BaseNameValuePair
 pvt.batteries.nvpair.NameValuePair
 pvt.batteries.property.ConfigProperty
@@ -1191,6 +1169,7 @@ pvt.batteries.value.StringListValue
 pvt.batteries.value.StringValue
 pvt.batteries.value.UnsupportedRepresentationException
 pvt.batteries.value.ValueFactory
+pvt.license.LicenseChecker
 pvt.selenium.api.WDMediator
 pvt.selenium.lib.base.DefaultSeleniumMediator
 pvt.selenium.lib.base.DefaultSeleniumMediator$1
