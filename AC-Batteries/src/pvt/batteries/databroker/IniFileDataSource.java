@@ -22,10 +22,10 @@ import java.util.Iterator;
 import java.util.Set;
 
 import com.arjunapro.ddt.datarecord.DefaultDataRecord;
+import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
 import com.arjunapro.ddt.interfaces.DataRecord;
 import com.arjunapro.ddt.interfaces.DataSource;
 import com.arjunapro.sysauto.file.IniFileReader;
-import com.arjunapro.testauto.exceptions.DataSourceFinishedException;
 
 public class IniFileDataSource implements DataSource {
 	IniFileReader reader = null;

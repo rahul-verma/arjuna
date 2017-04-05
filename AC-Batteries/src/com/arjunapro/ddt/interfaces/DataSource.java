@@ -18,7 +18,7 @@
  ******************************************************************************/
 package com.arjunapro.ddt.interfaces;
 
-import com.arjunapro.testauto.exceptions.DataSourceFinishedException;
+import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
 
 public interface DataSource {
 

@@ -1,8 +1,8 @@
 package pvt.unitee.core.lib.datasource;
 
 import com.arjunapro.ddt.datarecord.DefaultDataRecord;
+import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
 import com.arjunapro.ddt.interfaces.DataSource;
-import com.arjunapro.testauto.exceptions.DataSourceFinishedException;
 
 public class SingleDataRecordSource implements DataSource{
 	private DefaultDataRecord record = null;

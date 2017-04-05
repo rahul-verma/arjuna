@@ -38,7 +38,7 @@ simple example build file
 
 	<property name="private.arjunastartup.dist.tools.dir" value="${current.dist.private.tools.dir}/${arjunastartup.name}-dist" />
 	<property name="private.arjunastartup.dist.tools.root.dir" value="${private.arjunastartup.dist.tools.dir}/arjuna-pro" />
-	<property name="private.arjunastartup.dist.tools.jar.dir" value="${private.arjunastartup.dist.tools.root.dir}/lib/java" />
+	<property name="private.arjunastartup.dist.tools.jar.dir" value="${private.arjunastartup.dist.tools.root.dir}/bin/lib/java" />
 	<property name="private.arjunastartup.dist.tools.jar.file" value="${private.arjunastartup.dist.tools.jar.dir}/${arjunastartup.full.jar.file.name}" />
 	<property name="private.arjunastartup.dist.jar.file" value="${current.dist.private.jars.dir}/${arjunastartup.full.jar.file.name}" />
 	<property name="private.arjunastartup.dist.src.dir" value="${current.dist.private.sources.dir}/${arjunastartup.prefix}" />
@@ -68,16 +68,18 @@ simple example build file
 		<mkdir dir="${private.arjunastartup.self.jar.dir}"/>
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/bin" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/lib/java" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/bin/lib/java" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/examples" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/examples/data" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/config" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/temp" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/scripts" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/tools" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/tools/uidrivers" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/ext" />
-		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/ext/java" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/bin/scripts" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/bin/tools" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/bin/tools/uidrivers" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/bin/ext" />
+		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/bin/ext/java" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/bin/plugins" />
+		<mkdir dir="${private.arjunaplatform.dist.tools.root.dir}/bin/plugins/java" />
 		
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject" />
 		<mkdir dir="${private.arjunastartup.dist.tools.root.dir}/mproject/archives" />

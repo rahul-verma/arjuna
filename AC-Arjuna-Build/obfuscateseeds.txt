@@ -1,8 +1,5 @@
 com.arjunapro.ddt.annotations.Data
 com.arjunapro.ddt.annotations.Data: java.lang.String[] value()
-com.arjunapro.ddt.annotations.DataGenerator
-com.arjunapro.ddt.annotations.DataGenerator: java.lang.String value()
-com.arjunapro.ddt.annotations.DataGenerator: java.lang.String name()
 com.arjunapro.ddt.annotations.DataMethod
 com.arjunapro.ddt.annotations.DataMethod: java.lang.String value()
 com.arjunapro.ddt.annotations.DataMethod: java.lang.String name()
@@ -21,19 +18,11 @@ com.arjunapro.ddt.annotations.DriveWithDataFile
 com.arjunapro.ddt.annotations.DriveWithDataFile: java.lang.String value()
 com.arjunapro.ddt.annotations.DriveWithDataFile: java.lang.String path()
 com.arjunapro.ddt.annotations.DriveWithDataFile: java.lang.String delimiter()
-com.arjunapro.ddt.annotations.DriveWithDataGenerator
-com.arjunapro.ddt.annotations.DriveWithDataGenerator: java.lang.String value()
-com.arjunapro.ddt.annotations.DriveWithDataGenerator: java.lang.String name()
-com.arjunapro.ddt.annotations.DriveWithDataGenerator: java.lang.Class generatorClass()
 com.arjunapro.ddt.annotations.DriveWithDataMethod
 com.arjunapro.ddt.annotations.DriveWithDataMethod: java.lang.String value()
 com.arjunapro.ddt.annotations.DriveWithDataMethod: java.lang.String name()
 com.arjunapro.ddt.annotations.DriveWithDataMethod: java.lang.String container()
 com.arjunapro.ddt.annotations.DriveWithDataMethod: java.lang.Class containerClass()
-com.arjunapro.ddt.annotations.FileDataReference
-com.arjunapro.ddt.annotations.FileDataReference: java.lang.String value()
-com.arjunapro.ddt.annotations.FileDataReference: java.lang.String path()
-com.arjunapro.ddt.annotations.FileDataReference: java.lang.String name()
 com.arjunapro.ddt.datarecord.DefaultDataRecord
 com.arjunapro.ddt.datarecord.DefaultDataRecord: void add(java.lang.String,java.lang.Object)
 com.arjunapro.ddt.datarecord.DefaultDataRecord: DefaultDataRecord()
@@ -57,6 +46,9 @@ com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: void addAll(java.lang.O
 com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: com.arjunapro.ddt.interfaces.DataRecord get(int)
 com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: java.util.ArrayList getAll()
 com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: java.util.Iterator iterator()
+com.arjunapro.ddt.exceptions.DataSourceFinishedException
+com.arjunapro.ddt.exceptions.DataSourceFinishedException: DataSourceFinishedException()
+com.arjunapro.ddt.exceptions.DataSourceFinishedException: DataSourceFinishedException(java.lang.String)
 com.arjunapro.ddt.interfaces.DataRecord
 com.arjunapro.ddt.interfaces.DataRecord: com.arjunapro.testauto.interfaces.Value valueAt(int)
 com.arjunapro.ddt.interfaces.DataRecord: java.lang.String stringAt(int)
@@ -179,29 +171,11 @@ com.arjunapro.sysauto.process.CommandExecutor: java.lang.String getStderrText()
 com.arjunapro.sysauto.process.CommandExecutor: int getReturnCode()
 com.arjunapro.sysauto.process.CommandExecutor: void execute()
 com.arjunapro.testauto.annotations.AfterClass
-com.arjunapro.testauto.annotations.AfterClassFragment
-com.arjunapro.testauto.annotations.AfterClassInstance
 com.arjunapro.testauto.annotations.AfterMethod
-com.arjunapro.testauto.annotations.AfterMethodInstance
 com.arjunapro.testauto.annotations.AfterTest
 com.arjunapro.testauto.annotations.BeforeClass
-com.arjunapro.testauto.annotations.BeforeClassFragment
-com.arjunapro.testauto.annotations.BeforeClassInstance
 com.arjunapro.testauto.annotations.BeforeMethod
-com.arjunapro.testauto.annotations.BeforeMethodInstance
 com.arjunapro.testauto.annotations.BeforeTest
-com.arjunapro.testauto.annotations.ClassDependency
-com.arjunapro.testauto.annotations.ClassDependency: java.lang.Class[] value()
-com.arjunapro.testauto.annotations.ClassDependency: java.lang.Class[] testClasses()
-com.arjunapro.testauto.annotations.Instances
-com.arjunapro.testauto.annotations.Instances: int value()
-com.arjunapro.testauto.annotations.Instances: int count()
-com.arjunapro.testauto.annotations.Instances: int instanceThreads()
-com.arjunapro.testauto.annotations.Instances: java.lang.String[] utv()
-com.arjunapro.testauto.annotations.MethodDependency
-com.arjunapro.testauto.annotations.MethodDependency: java.lang.String[] value()
-com.arjunapro.testauto.annotations.MethodDependency: java.lang.String[] testMethods()
-com.arjunapro.testauto.annotations.MethodDependency: java.lang.Class containerClass()
 com.arjunapro.testauto.annotations.Skip
 com.arjunapro.testauto.annotations.TestClass
 com.arjunapro.testauto.annotations.TestClass: java.lang.String value()
@@ -427,9 +401,6 @@ com.arjunapro.testauto.enums.ValueType: com.arjunapro.testauto.enums.ValueType N
 com.arjunapro.testauto.enums.ValueType: com.arjunapro.testauto.enums.ValueType[] $VALUES
 com.arjunapro.testauto.enums.ValueType: com.arjunapro.testauto.enums.ValueType[] values()
 com.arjunapro.testauto.enums.ValueType: com.arjunapro.testauto.enums.ValueType valueOf(java.lang.String)
-com.arjunapro.testauto.exceptions.DataSourceFinishedException
-com.arjunapro.testauto.exceptions.DataSourceFinishedException: DataSourceFinishedException()
-com.arjunapro.testauto.exceptions.DataSourceFinishedException: DataSourceFinishedException(java.lang.String)
 com.arjunapro.testauto.interfaces.ReadOnlyStringKeyValueContainer
 com.arjunapro.testauto.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map items()
 com.arjunapro.testauto.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map items(java.util.List)
@@ -552,6 +523,18 @@ pvt.arjunapro.ArjunaInternal$info
 pvt.arjunapro.ArjunaInternal$problem
 pvt.arjunapro.ArjunaTestEngine
 pvt.arjunapro.ArjunaTestEngine$1
+pvt.arjunapro.annotations.AfterClassFragment
+pvt.arjunapro.annotations.AfterClassInstance
+pvt.arjunapro.annotations.AfterMethodInstance
+pvt.arjunapro.annotations.BeforeClassFragment
+pvt.arjunapro.annotations.BeforeClassInstance
+pvt.arjunapro.annotations.BeforeMethodInstance
+pvt.arjunapro.annotations.ClassDependency
+pvt.arjunapro.annotations.DataGenerator
+pvt.arjunapro.annotations.DriveWithDataGenerator
+pvt.arjunapro.annotations.FileDataReference
+pvt.arjunapro.annotations.Instances
+pvt.arjunapro.annotations.MethodDependency
 pvt.arjunapro.enums.ArjunaProperty
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_RUNIDREPORT
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty SESSION_NAME
