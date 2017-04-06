@@ -12,7 +12,6 @@ import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.FixtureResultType;
 import pvt.arjunapro.enums.IssueSubType;
 import pvt.arjunapro.enums.IssueType;
 import pvt.arjunapro.enums.TestClassFixtureType;
@@ -22,7 +21,6 @@ import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
-import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.TestContainer;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;

@@ -5,7 +5,6 @@ import java.util.Map;
 
 import com.arjunapro.testauto.enums.TestObjectAttribute;
 import com.arjunapro.testauto.enums.TestObjectType;
-import com.arjunapro.testauto.interfaces.Value;
 
 public interface TestObjectProperties {
 	
@@ -49,7 +48,7 @@ public interface TestObjectProperties {
 
 	String string(TestObjectAttribute key) throws Exception;
 
-	boolean hasKey(TestObjectAttribute key);
+	boolean hasKey(TestObjectAttribute key) throws Exception;
 	
 	List<String> strings(List<TestObjectAttribute> props)  throws Exception;
 

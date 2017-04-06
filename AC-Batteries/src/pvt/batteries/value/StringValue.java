@@ -1,10 +1,10 @@
 package pvt.batteries.value;
 
 import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Set;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import com.arjunapro.testauto.enums.ValueType;
 import com.arjunapro.testauto.interfaces.Value;

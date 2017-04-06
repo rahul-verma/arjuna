@@ -1,7 +1,6 @@
 package pvt.batteries.value;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.arjunapro.testauto.enums.ValueType;

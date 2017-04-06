@@ -21,10 +21,10 @@ package pvt.batteries.databroker;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecord;
+import com.arjunapro.ddt.datarecord.MapDataRecord;
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataReference;
 
+import pvt.arjunapro.ddt.interfaces.DataReference;
 import pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 
 public class ExcelDataReference implements DataReference {
@@ -66,7 +66,7 @@ public class ExcelDataReference implements DataReference {
 		String keyColumnValue = null;
 		while (dataRecord != null) {
 			keyColumnValue = (String) dataRecord.get(this.keyIndex);
-			DataRecord data = new DefaultDataRecord(this.headers, dataRecord);
+			DataRecord data = new MapDataRecord(this.headers, dataRecord);
 			map.put(keyColumnValue.toUpperCase(), data);
 			dataRecord = reader.next();
 		}

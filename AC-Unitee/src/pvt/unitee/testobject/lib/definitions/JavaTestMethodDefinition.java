@@ -7,10 +7,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.arjunapro.ddt.interfaces.DataReference;
 import com.arjunapro.ddt.interfaces.DataSource;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
+import pvt.arjunapro.ddt.interfaces.DataReference;
 import pvt.arjunapro.enums.DependencyTarget;
 import pvt.arjunapro.enums.SkipCode;
 import pvt.arjunapro.enums.UnpickedCode;

@@ -25,5 +25,5 @@ public interface ReadOnlyStringKeyValueContainer{
 
 	String string(String key) throws Exception;
 
-	boolean hasKey(String key);
+	boolean hasKey(String key) throws Exception;
 }

@@ -1,13 +1,15 @@
 package pvt.unitee.core.lib.datasource;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecord;
+import com.arjunapro.ddt.datarecord.MapDataRecord;
 import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataSource;
 
-public class DummyDataSource implements DataSource{
+import pvt.batteries.ddt.datarecord.BaseDataRecord;
+import pvt.batteries.ddt.datarecord.BaseDataSource;
+
+public class DummyDataSource extends BaseDataSource{
 	boolean done = false;
-	static DefaultDataRecord record = new DefaultDataRecord();
+	static BaseDataRecord record = new MapDataRecord();
 
 	@Override
 	public DataRecord next() throws DataSourceFinishedException {

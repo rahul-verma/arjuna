@@ -7,8 +7,6 @@ import pvt.arjunapro.enums.TestResultCode;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
 import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import pvt.unitee.testobject.lib.interfaces.TestObject;
-import pvt.unitee.testobject.lib.java.JavaTestClassFragment;
-import pvt.unitee.testobject.lib.java.JavaTestClassInstance;
 import pvt.unitee.testobject.lib.loader.MethodSignatureType;
 
 public interface Fixture extends Cloneable{

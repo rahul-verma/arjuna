@@ -2,9 +2,7 @@ package pvt.unitee.testobject.lib.interfaces;
 
 import java.util.List;
 
-import pvt.arjunapro.enums.FixtureResultType;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
-import pvt.unitee.testobject.lib.java.JavaTestMethod;
 import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 
 public interface TestContainerInstance extends TestObject {

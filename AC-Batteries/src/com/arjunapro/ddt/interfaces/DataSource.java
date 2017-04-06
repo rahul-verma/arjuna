@@ -22,6 +22,15 @@ import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
 
 public interface DataSource {
 
-	DataRecord next() throws DataSourceFinishedException;
+	DataRecord next() throws DataSourceFinishedException, Exception;
 
+	String getName();
+	
+	void setName(String name);
+
+	void terminate();
+	
+	public boolean isTerminated();
+	
+	public void validate() throws Exception;
 }

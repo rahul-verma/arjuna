@@ -22,8 +22,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import com.arjunapro.testauto.config.RunConfig;
-
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
 import pvt.uiauto.enums.ElementLoaderType;

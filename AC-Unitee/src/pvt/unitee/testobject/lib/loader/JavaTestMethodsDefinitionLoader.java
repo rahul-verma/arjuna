@@ -1,6 +1,5 @@
 package pvt.unitee.testobject.lib.loader;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collections;

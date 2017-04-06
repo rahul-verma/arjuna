@@ -1,7 +1,5 @@
 package com.arjunapro.sysauto.batteries;
 
-import com.arjunapro.testauto.config.RunConfig;
-
 import pvt.batteries.config.Batteries;
 
 public class ThreadBatteries {

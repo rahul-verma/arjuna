@@ -20,8 +20,6 @@ package pvt.batteries.root;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.config.RunConfig;
-
 import pvt.batteries.config.Batteries;
 
 public abstract class DefaultRoot {

@@ -8,5 +8,6 @@ public enum IssueAttribute {
 	EMSG,
 	ETRACE,
 	STEP_NUM,
-	FNAME
+	FNAME, 
+	DSNAME
 }

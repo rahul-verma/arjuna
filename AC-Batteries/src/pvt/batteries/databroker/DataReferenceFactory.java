@@ -20,7 +20,7 @@ package pvt.batteries.databroker;
 
 import org.apache.commons.io.FilenameUtils;
 
-import com.arjunapro.ddt.interfaces.DataReference;
+import pvt.arjunapro.ddt.interfaces.DataReference;
 
 public class DataReferenceFactory {
 	public static DataReference getReference(String fileFormat, String refFileDir, String refFileName, String key)

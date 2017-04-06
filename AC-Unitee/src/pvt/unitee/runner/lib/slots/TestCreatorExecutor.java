@@ -1,11 +1,7 @@
 package pvt.unitee.runner.lib.slots;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.log4j.Logger;
 
-import com.arjunapro.sysauto.batteries.ThreadBatteries;
 import com.arjunapro.testauto.config.RunConfig;
 
 import pvt.arjunapro.ArjunaInternal;
@@ -13,7 +9,6 @@ import pvt.arjunapro.enums.TestResultCode;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.reporter.lib.IssueId;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
-import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import pvt.unitee.testobject.lib.interfaces.TestCreator;
 
 public class TestCreatorExecutor extends AbstractTestObjectExecutor implements Runnable{

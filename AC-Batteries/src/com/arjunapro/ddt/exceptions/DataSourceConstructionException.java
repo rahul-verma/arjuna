@@ -16,10 +16,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.arjunapro.ddt.interfaces;
+package com.arjunapro.ddt.exceptions;
 
-public interface DataReference {
+public class DataSourceConstructionException extends Exception {
+	private Throwable e =  null;
+	private String name = null;
 
-	DataRecord record(String key) throws Exception;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1328715061248005907L;
+	
+	// Constructor that accepts a message
+	public DataSourceConstructionException(String message, String name, Throwable e) {
+		super(message);
+		this.e = e;
+		this.name = name;
+	}
+	
+	public Throwable getThrowable(){
+		return e;
+	}
+	
+	public String getName(){
+		return name;
+	}
 }

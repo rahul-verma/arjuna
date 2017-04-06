@@ -18,14 +18,14 @@
  ******************************************************************************/
 package pvt.batteries.databroker;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecord;
+import com.arjunapro.ddt.datarecord.MapDataRecord;
 import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataSource;
 
+import pvt.batteries.ddt.datarecord.BaseDataSource;
 import pvt.batteries.filehandler.FileLine2ArrayReader;
 
-public class DsvFileDataSource implements DataSource {
+public class DsvFileDataSource extends BaseDataSource {
 	FileLine2ArrayReader reader = null;
 	String[] headers = null;
 
@@ -39,13 +39,16 @@ public class DsvFileDataSource implements DataSource {
 	}
 
 	public synchronized DataRecord next() throws DataSourceFinishedException {
+		if (this.isTerminated()){
+			throw new DataSourceFinishedException("Records Finished.");			
+		}
+		
 		String[] dataRecord = reader.next();
 
 		if (dataRecord == null) {
 			throw new DataSourceFinishedException("Records Finished.");
 		} else {
-			return new DefaultDataRecord(this.headers, dataRecord);
+			return new MapDataRecord(this.headers, dataRecord);
 		}
 	}
-
 }

@@ -20,15 +20,7 @@ package com.arjunapro.uiauto.factories;
 
 import com.arjunapro.uiauto.interfaces.UiDriver;
 
-import pvt.arjunapro.uiauto.appium.AppiumHybridUiDriver;
-import pvt.arjunapro.uiauto.appium.AppiumNativeUiDriver;
-import pvt.arjunapro.uiauto.appium.AppiumWebUiDriver;
 import pvt.arjunapro.uiauto.selenium.SeleniumWebUiDriver;
-import pvt.arjunapro.uiauto.sikuli.SikuliScreenUiDriver;
-import pvt.batteries.config.Batteries;
-import pvt.batteries.exceptions.Problem;
-import pvt.uiauto.enums.UiAutomationContext;
-import pvt.uiautomator.UiAutomator;
 
 public class UiDriverFactory {
 	

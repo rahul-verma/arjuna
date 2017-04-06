@@ -1,6 +1,5 @@
 package pvt.unitee.core.lib.testvars;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecord;
 import com.arjunapro.testauto.enums.TestObjectAttribute;
 import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.enums.ValueType;
@@ -9,6 +8,7 @@ import com.arjunapro.testauto.interfaces.Value;
 
 import pvt.batteries.container.ReadOnlyContainer;
 import pvt.batteries.container.ValueContainer;
+import pvt.batteries.ddt.datarecord.BaseDataRecord;
 
 public interface InternalTestObjectProperties 
 				extends TestObjectProperties, ValueContainer<TestObjectAttribute>, ReadOnlyContainer<TestObjectAttribute, Value>{
@@ -63,7 +63,7 @@ public interface InternalTestObjectProperties
 
 	void setThreadId(String id) throws Exception;
 	
-	void setDataRecord(DefaultDataRecord dataRecord) throws Exception;
+	void setDataRecord(BaseDataRecord dataRecord) throws Exception;
 	
 	void setSessionNodeName(Value value) throws Exception;	
 	void setSessionNodeName(String name) throws Exception;		

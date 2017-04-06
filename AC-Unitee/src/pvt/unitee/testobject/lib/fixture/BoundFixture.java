@@ -3,7 +3,6 @@ package pvt.unitee.testobject.lib.fixture;
 import java.lang.reflect.Method;
 
 import pvt.arjunapro.enums.TestClassFixtureType;
-import pvt.arjunapro.enums.TestResultCode;
 
 public class BoundFixture extends BaseTestClassFixture {
 	

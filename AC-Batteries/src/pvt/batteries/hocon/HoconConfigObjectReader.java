@@ -1,7 +1,5 @@
 package pvt.batteries.hocon;
 
-import java.util.Set;
-
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigObject;
 

@@ -1,22 +1,12 @@
 package com.arjunapro.ddt.interfaces;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+public interface DataRecordContainer extends DataSource {
 
-public interface DataRecordContainer {
+	void setHeaders(String[] names) throws Exception;
 
-	void setHeaders(String[] names);
+	void add(Object[] record) throws Exception;
 
-	void add(DataRecord record);
-
-	void add(Object[] record);
-
-	void addAll(Object[][] records);
-
-	DataRecord get(int index);
-
-	ArrayList<DataRecord> getAll();
-
-	Iterator<DataRecord> iterator();
-
+	void addAll(Object[][] records) throws Exception;
+	
+	boolean hasNext();
 }

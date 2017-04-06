@@ -16,7 +16,7 @@ public class RunConfig {
 		return ThreadBatteries.getCurrentThreadName();
 	}
 
-	public synchronized static boolean exists(String path) {
+	public synchronized static boolean exists(String path) throws Exception {
 		return CentralConfiguration.hasProperty(getConfigName(), path);
 	}
 

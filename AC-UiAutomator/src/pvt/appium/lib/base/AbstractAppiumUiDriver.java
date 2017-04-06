@@ -38,7 +38,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-import com.arjunapro.testauto.config.RunConfig;
 import com.arjunapro.testauto.enums.Browser;
 import com.arjunapro.uiauto.interfaces.UiElement;
 

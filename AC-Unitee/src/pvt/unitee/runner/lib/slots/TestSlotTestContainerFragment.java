@@ -10,7 +10,6 @@ import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
-import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import pvt.unitee.testobject.lib.interfaces.TestCreator;
 
 public class TestSlotTestContainerFragment {

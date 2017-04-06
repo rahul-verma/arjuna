@@ -2,8 +2,6 @@ package pvt.unitee.testobject.lib.interfaces;
 
 import com.arjunapro.ddt.interfaces.DataRecord;
 
-import pvt.arjunapro.enums.FixtureResultType;
-import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.JavaTestClassFragment;
 import pvt.unitee.testobject.lib.java.JavaTestMethodInstance;

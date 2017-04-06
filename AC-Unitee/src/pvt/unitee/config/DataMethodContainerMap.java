@@ -26,7 +26,6 @@ import org.apache.log4j.Logger;
 
 import com.arjunapro.ddt.annotations.DataMethodContainer;
 import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.testauto.checks.Checks;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;

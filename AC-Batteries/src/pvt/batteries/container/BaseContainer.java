@@ -65,7 +65,7 @@ public abstract class BaseContainer<T, V> implements ReadOnlyContainer<T, V>, Re
 		this.map.put(formatKey(k), v);
 	}
 
-	public boolean hasKey(T k) {
+	public boolean hasKey(T k) throws Exception{
 		return this.map.containsKey(formatKey(k));
 	}
 

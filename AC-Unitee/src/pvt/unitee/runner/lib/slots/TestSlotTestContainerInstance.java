@@ -6,11 +6,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
-import pvt.unitee.testobject.lib.interfaces.TestCreator;
 
 public class TestSlotTestContainerInstance {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

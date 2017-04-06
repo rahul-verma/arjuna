@@ -28,7 +28,7 @@ public class CentralConfiguration {
 		return threadMap.containsKey(configName.toUpperCase());
 	}
 
-	public synchronized static boolean hasProperty(String configName, String path) {
+	public synchronized static boolean hasProperty(String configName, String path) throws Exception {
 		return hasConfiguration(configName) && (threadMap.get(configName).hasKey(path.toUpperCase()));
 	}
 

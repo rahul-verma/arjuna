@@ -3,7 +3,6 @@ package pvt.unitee.testobject.lib.java;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.testauto.enums.TestObjectType;
-import com.arjunapro.testauto.interfaces.TestVariables;
 
 import pvt.arjunapro.enums.FixtureResultType;
 import pvt.arjunapro.enums.TestClassFixtureType;

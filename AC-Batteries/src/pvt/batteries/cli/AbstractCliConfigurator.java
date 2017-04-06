@@ -20,12 +20,7 @@ package pvt.batteries.cli;
 
 import java.util.HashMap;
 
-import org.apache.log4j.Logger;
-
-import com.arjunapro.testauto.config.RunConfig;
 import com.arjunapro.testauto.interfaces.Value;
-
-import pvt.batteries.config.Batteries;
 
 public abstract class AbstractCliConfigurator implements CLIConfigurator {
 	private CLI cli = null;

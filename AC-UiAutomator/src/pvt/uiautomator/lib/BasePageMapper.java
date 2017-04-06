@@ -19,7 +19,6 @@
 package pvt.uiautomator.lib;
 
 import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-import com.arjunapro.testauto.config.RunConfig;
 
 import pvt.arjunapro.uiauto.interfaces.PageMapper;
 import pvt.batteries.config.Batteries;

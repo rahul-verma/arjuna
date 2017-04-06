@@ -20,7 +20,6 @@ package pvt.uiautomator.lib;
 
 import java.util.List;
 
-import com.arjunapro.testauto.config.RunConfig;
 import com.arjunapro.uiauto.interfaces.UiElement;
 
 import pvt.batteries.config.Batteries;

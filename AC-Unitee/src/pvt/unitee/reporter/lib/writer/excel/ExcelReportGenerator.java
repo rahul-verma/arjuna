@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Observer;
 import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
@@ -361,7 +360,7 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 				cb.append("NA");
 			} else {
 				for (String k: cmap.keySet()){
-					cb.append(String.format("%s=%s%s", k, cmap.get(k).asString(), SystemBatteries.getLineSeparator()));
+					cb.append(String.format("[%s] %s%s", k, cmap.get(k).asString(), SystemBatteries.getLineSeparator()));
 				}
 			}
 			resultArr.add(cb.toString());
@@ -374,7 +373,7 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 				ub.append("NA");
 			} else {
 				for (String k: umap.keySet()){
-					ub.append(String.format("%s=%s%s", k, umap.get(k).asString(), SystemBatteries.getLineSeparator()));
+					ub.append(String.format("[%s] %s%s", k, umap.get(k).asString(), SystemBatteries.getLineSeparator()));
 				}
 			}
 			resultArr.add(ub.toString());
@@ -392,7 +391,7 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 					String[] arr = dmap.keySet().toArray(new String[0]);
 					Arrays.sort(arr);
 					for (String k: arr){
-						ub.append(String.format("%s=%s%s", k, dmap.get(k).asString(), SystemBatteries.getLineSeparator()));
+						ub.append(String.format("[%s] %s%s", k, dmap.get(k).asString(), SystemBatteries.getLineSeparator()));
 					}
 				}
 			} else {

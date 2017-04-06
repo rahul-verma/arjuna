@@ -3,13 +3,13 @@ package pvt.unitee.core.lib.testvars;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecord;
+import com.arjunapro.ddt.datarecord.MapDataRecord;
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataReference;
 import com.arjunapro.testauto.interfaces.TestObjectProperties;
 import com.arjunapro.testauto.interfaces.TestProperties;
 import com.google.gson.JsonObject;
 
+import pvt.arjunapro.ddt.interfaces.DataReference;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import pvt.unitee.reporter.lib.reportable.TestVariablesSerializer;
@@ -21,7 +21,7 @@ public class DefaultTestVariables implements InternalTestVariables {
 	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
 	private DataRecord dataRecord =  null;
 	private Map<String,DataReference> dataRefMap = new HashMap<String,DataReference>();
-	private static DataRecord dr = new DefaultDataRecord();
+	private static DataRecord dr = new MapDataRecord();
 	
 	public DefaultTestVariables() throws Exception{
 		this.dataRecord = dr;		

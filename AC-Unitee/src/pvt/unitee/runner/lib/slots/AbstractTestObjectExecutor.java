@@ -9,7 +9,6 @@ import com.arjunapro.sysauto.batteries.ThreadBatteries;
 import com.arjunapro.testauto.config.RunConfig;
 
 import pvt.arjunapro.ArjunaInternal;
-import pvt.unitee.testobject.lib.interfaces.TestContainer;
 import pvt.unitee.testobject.lib.interfaces.TestObject;
 
 public abstract class AbstractTestObjectExecutor {

@@ -1,7 +1,6 @@
 package com.arjunapro.testauto.interfaces;
 
 import java.util.List;
-import java.util.Map;
 
 public interface StringKeyValueContainer extends ReadOnlyStringKeyValueContainer{
 

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.arjunapro.testauto.enums.TestAttribute;
-import com.arjunapro.testauto.interfaces.Value;
 
 public interface TestProperties {
 	
@@ -24,7 +23,7 @@ public interface TestProperties {
 
 	String string(TestAttribute key) throws Exception;
 
-	boolean hasKey(TestAttribute key);
+	boolean hasKey(TestAttribute key) throws Exception;
 	
 	List<String> strings(List<TestAttribute> props)  throws Exception;
 

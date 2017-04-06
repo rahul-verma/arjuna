@@ -1,10 +1,7 @@
 package pvt.unitee.testobject.lib.java;
 
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 
@@ -12,23 +9,16 @@ import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.FixtureResultType;
-import pvt.arjunapro.enums.IssueSubType;
-import pvt.arjunapro.enums.IssueType;
 import pvt.arjunapro.enums.TestClassFixtureType;
 import pvt.arjunapro.enums.TestResultCode;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
-import pvt.unitee.reporter.lib.issue.Issue;
-import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
-import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.TestContainer;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
 import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
-import pvt.unitee.testobject.lib.interfaces.TestCreator;
 import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 
 public class JavaTestClassFragment extends BaseTestObject implements TestContainerFragment {

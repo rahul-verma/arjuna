@@ -1,13 +1,11 @@
 package pvt.unitee.testobject.lib.loader;
 
 import java.io.File;
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,9 +18,7 @@ import org.apache.log4j.Logger;
 import com.arjunapro.sysauto.batteries.DataBatteries;
 import com.arjunapro.testauto.annotations.Skip;
 import com.arjunapro.testauto.annotations.TestClass;
-import com.arjunapro.testauto.annotations.TestMethod;
 import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.interfaces.TestVariables;
 import com.arjunapro.testauto.interfaces.Value;
 
 import pvt.arjunapro.ArjunaInternal;

@@ -24,7 +24,6 @@ import java.io.InputStreamReader;
 import com.arjunapro.testauto.console.Console;
 
 import pvt.batteries.cli.AbstractCLI;
-import pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig;
 
 public class UniteeCLI extends AbstractCLI {
 	

@@ -10,7 +10,6 @@ import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.FixtureResultType;
 import pvt.arjunapro.enums.TestClassFixtureType;
 import pvt.arjunapro.enums.TestResultCode;
 import pvt.arjunapro.enums.TestResultType;
@@ -21,7 +20,6 @@ import pvt.unitee.reporter.lib.test.TestResult;
 import pvt.unitee.reporter.lib.test.TestResultBuilder;
 import pvt.unitee.reporter.lib.test.TestResultProperties;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
-import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.Test;
 

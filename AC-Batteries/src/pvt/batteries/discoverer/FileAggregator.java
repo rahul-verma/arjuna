@@ -25,8 +25,6 @@ import java.util.Iterator;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.config.RunConfig;
-
 import pvt.batteries.config.Batteries;
 
 public class FileAggregator {

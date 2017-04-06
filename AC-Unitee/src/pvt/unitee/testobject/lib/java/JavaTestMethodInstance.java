@@ -4,20 +4,26 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 
+import com.arjunapro.ddt.datarecord.MapDataRecord;
+import com.arjunapro.ddt.exceptions.DataSourceConstructionException;
 import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
 import com.arjunapro.ddt.interfaces.DataRecord;
 import com.arjunapro.ddt.interfaces.DataSource;
 import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
-import pvt.arjunapro.enums.FixtureResultType;
+import pvt.arjunapro.ArjunaInternal;
+import pvt.arjunapro.enums.IssueSubType;
+import pvt.arjunapro.enums.IssueType;
 import pvt.arjunapro.enums.TestClassFixtureType;
 import pvt.arjunapro.enums.TestResultCode;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.core.lib.datasource.DummyDataSource;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
+import pvt.unitee.reporter.lib.issue.Issue;
+import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
-import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.Test;
 import pvt.unitee.testobject.lib.interfaces.TestCreator;
@@ -43,7 +49,27 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 		
 		this.getTestVariables().rawObjectProps().setMethodInstanceNumber(this.instanceNumber);
 		this.setThreadId(Thread.currentThread().getName());
-		this.dataSource =  this.methodDef.getDataSource();
+		try{
+			this.dataSource =  this.methodDef.getDataSource();
+		} catch (DataSourceConstructionException e){
+			int issueId = ArjunaInternal.getCentralExecState().getIssueId();
+			IssueBuilder builder = new IssueBuilder();
+			Issue issue = builder
+			.testVariables(this.getTestVariables())
+			.exception(e)
+			.trace(e.getThrowable())
+			.type(IssueType.DATA_SOURCE)
+			.subType(IssueSubType.DATA_SOURCE_CONSTRUCTION)
+			.dataSourceName(e.getName())
+			.id(issueId)
+			.build();
+			ArjunaInternal.getReporter().update(issue);
+			this.markExcluded(
+					TestResultCode.DATA_SOURCE_CONSTRUCTION_ERROR, 
+					String.format("Error in %s", e.getName()),
+					issueId);
+			this.dataSource = new DummyDataSource();
+		}
 		
 		initFixtures(TestClassFixtureType.SETUP_METHOD_INSTANCE, TestClassFixtureType.TEARDOWN_METHOD_INSTANCE);
 		if (this.getSetUpFixture() != null){
@@ -86,20 +112,50 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 
 	@Override
 	public synchronized Test next() throws Exception {
-		try{
 //			logger.debug("Check if next Test Wrapper is available for: " + this.getTestContainer().getAuthoredTest().getUserTestClassQualifiedName() + "." + this.method.getName());
-			DataRecord dataRecord = this.dataSource.next();
-			this.currentTestNumber += 1;
-			String testObjectId = String.format("%s|TestNumber-%d", this.getObjectId(), this.currentTestNumber);
-			Test test = new JavaTest(currentTestNumber, testObjectId, this, methodDef);
-			lastTest = test;
-			test.setDataRecord(dataRecord);
-			return test;
+		DataRecord dataRecord = null;
+		boolean dataSourceIssue = false;
+		int issueId = -1;
+		try{
+				dataRecord = this.dataSource.next();
 		} catch (DataSourceFinishedException e) {
-//			logger.debug("No further sub-tests. All done.");
+//				logger.debug("No further sub-tests. All done.");
 			//runTearDownFixtures();
 			throw new SubTestsFinishedException("All Done.");
+		} catch (Throwable e){
+			System.out.println("HHHH");
+				dataSourceIssue = true;
+				issueId = ArjunaInternal.getCentralExecState().getIssueId();
+				IssueBuilder builder = new IssueBuilder();
+				Issue issue = builder
+				.testVariables(this.getTestVariables())
+				.exception(e)
+				.message("Issue in Data Source next() call.")
+				.trace(e)
+				.type(IssueType.DATA_SOURCE)
+				.subType(IssueSubType.DATA_SOURCE_NEXT_EXCEPTION)
+				.dataSourceName(this.dataSource.getName())
+				.id(issueId)
+				.build();
+				ArjunaInternal.getReporter().update(issue);
+				this.dataSource.terminate();
+				System.out.println("GGGG");
 		}
+		
+		this.currentTestNumber += 1;
+		String testObjectId = String.format("%s|TestNumber-%d", this.getObjectId(), this.currentTestNumber);
+		Test test = new JavaTest(currentTestNumber, testObjectId, this, methodDef);
+		lastTest = test;
+		if (dataSourceIssue){
+			test.setDataRecord(new MapDataRecord());
+			test.markExcluded(
+					TestResultCode.DATA_SOURCE_NEXT_ERROR, 
+					String.format("Error in getting next Data Record from %s.", this.dataSource.getName()),
+					issueId);
+		} else {
+			test.setDataRecord(dataRecord);
+		}
+		return test;
 	}
 
 	public String getName() {

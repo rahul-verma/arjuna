@@ -23,29 +23,37 @@ com.arjunapro.ddt.annotations.DriveWithDataMethod: java.lang.String value()
 com.arjunapro.ddt.annotations.DriveWithDataMethod: java.lang.String name()
 com.arjunapro.ddt.annotations.DriveWithDataMethod: java.lang.String container()
 com.arjunapro.ddt.annotations.DriveWithDataMethod: java.lang.Class containerClass()
-com.arjunapro.ddt.datarecord.DefaultDataRecord
-com.arjunapro.ddt.datarecord.DefaultDataRecord: void add(java.lang.String,java.lang.Object)
-com.arjunapro.ddt.datarecord.DefaultDataRecord: DefaultDataRecord()
-com.arjunapro.ddt.datarecord.DefaultDataRecord: DefaultDataRecord(java.util.List,java.util.ArrayList)
-com.arjunapro.ddt.datarecord.DefaultDataRecord: DefaultDataRecord(java.lang.String[],java.lang.Object[])
-com.arjunapro.ddt.datarecord.DefaultDataRecord: DefaultDataRecord(java.util.HashMap)
-com.arjunapro.ddt.datarecord.DefaultDataRecord: DefaultDataRecord(java.lang.Object[])
-com.arjunapro.ddt.datarecord.DefaultDataRecord: DefaultDataRecord(java.lang.String[],java.util.List)
-com.arjunapro.ddt.datarecord.DefaultDataRecord: boolean hasIndex(int)
-com.arjunapro.ddt.datarecord.DefaultDataRecord: com.arjunapro.testauto.interfaces.Value valueAt(int)
-com.arjunapro.ddt.datarecord.DefaultDataRecord: java.lang.String stringAt(int)
-com.arjunapro.ddt.datarecord.DefaultDataRecord: java.lang.Object objectAt(int)
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: DefaultDataRecordContainer(pvt.arjunapro.enums.DataRecordOrder)
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: DefaultDataRecordContainer()
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: DefaultDataRecordContainer(java.lang.Object[][])
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: void setHeaders(java.lang.String[])
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: void add(com.arjunapro.ddt.interfaces.DataRecord)
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: void add(java.lang.Object[])
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: void addAll(java.lang.Object[][])
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: com.arjunapro.ddt.interfaces.DataRecord get(int)
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: java.util.ArrayList getAll()
-com.arjunapro.ddt.datarecord.DefaultDataRecordContainer: java.util.Iterator iterator()
+com.arjunapro.ddt.datarecord.ListDataRecord
+com.arjunapro.ddt.datarecord.ListDataRecord: ListDataRecord()
+com.arjunapro.ddt.datarecord.ListDataRecord: ListDataRecord(java.lang.Object[])
+com.arjunapro.ddt.datarecord.ListDataRecord: void add(java.lang.Object[])
+com.arjunapro.ddt.datarecord.ListDataRecord: java.util.Map items(java.util.List)
+com.arjunapro.ddt.datarecord.ListDataRecord: java.util.Map strItems(java.util.List)
+com.arjunapro.ddt.datarecord.ListDataRecord: java.util.List values(java.util.List)
+com.arjunapro.ddt.datarecord.ListDataRecord: java.util.List strings(java.util.List)
+com.arjunapro.ddt.datarecord.ListDataRecord: boolean hasKey(java.lang.String)
+com.arjunapro.ddt.datarecord.ListDataRecord: boolean hasKey(java.lang.Object)
+com.arjunapro.ddt.datarecord.ListDataRecordContainer
+com.arjunapro.ddt.datarecord.ListDataRecordContainer: ListDataRecordContainer()
+com.arjunapro.ddt.datarecord.ListDataRecordContainer: void setHeaders(java.lang.String[])
+com.arjunapro.ddt.datarecord.MapDataRecord
+com.arjunapro.ddt.datarecord.MapDataRecord: void add(java.lang.String,java.lang.Object)
+com.arjunapro.ddt.datarecord.MapDataRecord: MapDataRecord()
+com.arjunapro.ddt.datarecord.MapDataRecord: MapDataRecord(java.util.List,java.util.List)
+com.arjunapro.ddt.datarecord.MapDataRecord: MapDataRecord(java.lang.String[],java.util.List)
+com.arjunapro.ddt.datarecord.MapDataRecord: MapDataRecord(java.lang.String[],java.lang.Object[])
+com.arjunapro.ddt.datarecord.MapDataRecord: MapDataRecord(java.util.HashMap)
+com.arjunapro.ddt.datarecord.MapDataRecord: boolean hasIndex(int)
+com.arjunapro.ddt.datarecord.MapDataRecord: com.arjunapro.testauto.interfaces.Value valueAt(int)
+com.arjunapro.ddt.datarecord.MapDataRecord: java.lang.String stringAt(int)
+com.arjunapro.ddt.datarecord.MapDataRecord: java.lang.Object objectAt(int)
+com.arjunapro.ddt.datarecord.MapDataRecordContainer
+com.arjunapro.ddt.datarecord.MapDataRecordContainer: MapDataRecordContainer()
+com.arjunapro.ddt.datarecord.MapDataRecordContainer: void validate()
+com.arjunapro.ddt.exceptions.DataSourceConstructionException
+com.arjunapro.ddt.exceptions.DataSourceConstructionException: DataSourceConstructionException(java.lang.String,java.lang.String,java.lang.Throwable)
+com.arjunapro.ddt.exceptions.DataSourceConstructionException: java.lang.Throwable getThrowable()
+com.arjunapro.ddt.exceptions.DataSourceConstructionException: java.lang.String getName()
 com.arjunapro.ddt.exceptions.DataSourceFinishedException
 com.arjunapro.ddt.exceptions.DataSourceFinishedException: DataSourceFinishedException()
 com.arjunapro.ddt.exceptions.DataSourceFinishedException: DataSourceFinishedException(java.lang.String)
@@ -55,16 +63,16 @@ com.arjunapro.ddt.interfaces.DataRecord: java.lang.String stringAt(int)
 com.arjunapro.ddt.interfaces.DataRecord: java.lang.Object objectAt(int)
 com.arjunapro.ddt.interfaces.DataRecordContainer
 com.arjunapro.ddt.interfaces.DataRecordContainer: void setHeaders(java.lang.String[])
-com.arjunapro.ddt.interfaces.DataRecordContainer: void add(com.arjunapro.ddt.interfaces.DataRecord)
 com.arjunapro.ddt.interfaces.DataRecordContainer: void add(java.lang.Object[])
 com.arjunapro.ddt.interfaces.DataRecordContainer: void addAll(java.lang.Object[][])
-com.arjunapro.ddt.interfaces.DataRecordContainer: com.arjunapro.ddt.interfaces.DataRecord get(int)
-com.arjunapro.ddt.interfaces.DataRecordContainer: java.util.ArrayList getAll()
-com.arjunapro.ddt.interfaces.DataRecordContainer: java.util.Iterator iterator()
-com.arjunapro.ddt.interfaces.DataReference
-com.arjunapro.ddt.interfaces.DataReference: com.arjunapro.ddt.interfaces.DataRecord record(java.lang.String)
+com.arjunapro.ddt.interfaces.DataRecordContainer: boolean hasNext()
 com.arjunapro.ddt.interfaces.DataSource
 com.arjunapro.ddt.interfaces.DataSource: com.arjunapro.ddt.interfaces.DataRecord next()
+com.arjunapro.ddt.interfaces.DataSource: java.lang.String getName()
+com.arjunapro.ddt.interfaces.DataSource: void setName(java.lang.String)
+com.arjunapro.ddt.interfaces.DataSource: void terminate()
+com.arjunapro.ddt.interfaces.DataSource: boolean isTerminated()
+com.arjunapro.ddt.interfaces.DataSource: void validate()
 com.arjunapro.ddt.interfaces.DataWrapper
 com.arjunapro.ddt.interfaces.DataWrapper: com.arjunapro.testauto.enums.ValueType valueType()
 com.arjunapro.ddt.interfaces.DataWrapper: java.lang.Object object()
@@ -465,7 +473,7 @@ com.arjunapro.testauto.interfaces.TestVariables: com.arjunapro.testauto.interfac
 com.arjunapro.testauto.interfaces.TestVariables: com.arjunapro.testauto.interfaces.StringKeyValueContainer utp()
 com.arjunapro.testauto.interfaces.TestVariables: com.arjunapro.testauto.interfaces.StringKeyValueContainer utv()
 com.arjunapro.testauto.interfaces.TestVariables: com.arjunapro.ddt.interfaces.DataRecord record()
-com.arjunapro.testauto.interfaces.TestVariables: com.arjunapro.ddt.interfaces.DataReference refer(java.lang.String)
+com.arjunapro.testauto.interfaces.TestVariables: pvt.arjunapro.ddt.interfaces.DataReference refer(java.lang.String)
 com.arjunapro.testauto.interfaces.TestVariables: java.util.Map references()
 com.arjunapro.testauto.interfaces.Value
 com.arjunapro.testauto.interfaces.Value: java.lang.Object object()
@@ -535,6 +543,7 @@ pvt.arjunapro.annotations.DriveWithDataGenerator
 pvt.arjunapro.annotations.FileDataReference
 pvt.arjunapro.annotations.Instances
 pvt.arjunapro.annotations.MethodDependency
+pvt.arjunapro.ddt.interfaces.DataReference
 pvt.arjunapro.enums.ArjunaProperty
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_RUNIDREPORT
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty SESSION_NAME
@@ -547,6 +556,7 @@ pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_REPORT
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_ARCHIVES
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_ROOT
+pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JDB
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ROOT
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_TESTS
 pvt.arjunapro.enums.ArjunaProperty: pvt.arjunapro.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES
@@ -727,6 +737,7 @@ pvt.arjunapro.enums.IssueAttribute: pvt.arjunapro.enums.IssueAttribute EMSG
 pvt.arjunapro.enums.IssueAttribute: pvt.arjunapro.enums.IssueAttribute ETRACE
 pvt.arjunapro.enums.IssueAttribute: pvt.arjunapro.enums.IssueAttribute STEP_NUM
 pvt.arjunapro.enums.IssueAttribute: pvt.arjunapro.enums.IssueAttribute FNAME
+pvt.arjunapro.enums.IssueAttribute: pvt.arjunapro.enums.IssueAttribute DSNAME
 pvt.arjunapro.enums.IssueAttribute: pvt.arjunapro.enums.IssueAttribute[] $VALUES
 pvt.arjunapro.enums.IssueAttribute: pvt.arjunapro.enums.IssueAttribute[] values()
 pvt.arjunapro.enums.IssueAttribute: pvt.arjunapro.enums.IssueAttribute valueOf(java.lang.String)
@@ -750,12 +761,15 @@ pvt.arjunapro.enums.IssueSubType: pvt.arjunapro.enums.IssueSubType FIXTURE_TEARD
 pvt.arjunapro.enums.IssueSubType: pvt.arjunapro.enums.IssueSubType CONSTRUCTOR
 pvt.arjunapro.enums.IssueSubType: pvt.arjunapro.enums.IssueSubType STEP_FAILURE
 pvt.arjunapro.enums.IssueSubType: pvt.arjunapro.enums.IssueSubType STEP_ERROR
+pvt.arjunapro.enums.IssueSubType: pvt.arjunapro.enums.IssueSubType DATA_SOURCE_CONSTRUCTION
+pvt.arjunapro.enums.IssueSubType: pvt.arjunapro.enums.IssueSubType DATA_SOURCE_NEXT_EXCEPTION
 pvt.arjunapro.enums.IssueSubType: pvt.arjunapro.enums.IssueSubType[] $VALUES
 pvt.arjunapro.enums.IssueSubType: pvt.arjunapro.enums.IssueSubType[] values()
 pvt.arjunapro.enums.IssueSubType: pvt.arjunapro.enums.IssueSubType valueOf(java.lang.String)
 pvt.arjunapro.enums.IssueType
 pvt.arjunapro.enums.IssueType: pvt.arjunapro.enums.IssueType CONSTRUCTOR
 pvt.arjunapro.enums.IssueType: pvt.arjunapro.enums.IssueType FIXTURE
+pvt.arjunapro.enums.IssueType: pvt.arjunapro.enums.IssueType DATA_SOURCE
 pvt.arjunapro.enums.IssueType: pvt.arjunapro.enums.IssueType TEST_STEP
 pvt.arjunapro.enums.IssueType: pvt.arjunapro.enums.IssueType[] $VALUES
 pvt.arjunapro.enums.IssueType: pvt.arjunapro.enums.IssueType[] values()
@@ -782,12 +796,16 @@ pvt.arjunapro.enums.PickerTargetType: pvt.arjunapro.enums.PickerTargetType METHO
 pvt.arjunapro.enums.PickerTargetType: pvt.arjunapro.enums.PickerTargetType[] $VALUES
 pvt.arjunapro.enums.PickerTargetType: pvt.arjunapro.enums.PickerTargetType[] values()
 pvt.arjunapro.enums.PickerTargetType: pvt.arjunapro.enums.PickerTargetType valueOf(java.lang.String)
-pvt.arjunapro.enums.ReportFormat
-pvt.arjunapro.enums.ReportFormat: pvt.arjunapro.enums.ReportFormat EXCEL
-pvt.arjunapro.enums.ReportFormat: pvt.arjunapro.enums.ReportFormat CONSOLE
-pvt.arjunapro.enums.ReportFormat: pvt.arjunapro.enums.ReportFormat[] $VALUES
-pvt.arjunapro.enums.ReportFormat: pvt.arjunapro.enums.ReportFormat[] values()
-pvt.arjunapro.enums.ReportFormat: pvt.arjunapro.enums.ReportFormat valueOf(java.lang.String)
+pvt.arjunapro.enums.ReportGenerationFormat
+pvt.arjunapro.enums.ReportGenerationFormat: pvt.arjunapro.enums.ReportGenerationFormat EXCEL
+pvt.arjunapro.enums.ReportGenerationFormat: pvt.arjunapro.enums.ReportGenerationFormat[] $VALUES
+pvt.arjunapro.enums.ReportGenerationFormat: pvt.arjunapro.enums.ReportGenerationFormat[] values()
+pvt.arjunapro.enums.ReportGenerationFormat: pvt.arjunapro.enums.ReportGenerationFormat valueOf(java.lang.String)
+pvt.arjunapro.enums.ReportListenerFormat
+pvt.arjunapro.enums.ReportListenerFormat: pvt.arjunapro.enums.ReportListenerFormat CONSOLE
+pvt.arjunapro.enums.ReportListenerFormat: pvt.arjunapro.enums.ReportListenerFormat[] $VALUES
+pvt.arjunapro.enums.ReportListenerFormat: pvt.arjunapro.enums.ReportListenerFormat[] values()
+pvt.arjunapro.enums.ReportListenerFormat: pvt.arjunapro.enums.ReportListenerFormat valueOf(java.lang.String)
 pvt.arjunapro.enums.ReportMode
 pvt.arjunapro.enums.ReportMode: pvt.arjunapro.enums.ReportMode MINIMAL
 pvt.arjunapro.enums.ReportMode: pvt.arjunapro.enums.ReportMode BASIC
@@ -920,6 +938,8 @@ pvt.arjunapro.enums.TestResultCode: pvt.arjunapro.enums.TestResultCode ERROR_IN_
 pvt.arjunapro.enums.TestResultCode: pvt.arjunapro.enums.TestResultCode ERROR_IN_TEARDOWN_METHOD_INSTANCE
 pvt.arjunapro.enums.TestResultCode: pvt.arjunapro.enums.TestResultCode ERROR_IN_TEARDOWN_TEST
 pvt.arjunapro.enums.TestResultCode: pvt.arjunapro.enums.TestResultCode UNSELECTED
+pvt.arjunapro.enums.TestResultCode: pvt.arjunapro.enums.TestResultCode DATA_SOURCE_CONSTRUCTION_ERROR
+pvt.arjunapro.enums.TestResultCode: pvt.arjunapro.enums.TestResultCode DATA_SOURCE_NEXT_ERROR
 pvt.arjunapro.enums.TestResultCode: pvt.arjunapro.enums.TestResultCode[] $VALUES
 pvt.arjunapro.enums.TestResultCode: pvt.arjunapro.enums.TestResultCode[] values()
 pvt.arjunapro.enums.TestResultCode: pvt.arjunapro.enums.TestResultCode valueOf(java.lang.String)
@@ -1043,6 +1063,31 @@ pvt.batteries.datafilter.PrefixFilter
 pvt.batteries.datafilter.StringFilter
 pvt.batteries.datafilter.StringFilterFactory
 pvt.batteries.datafilter.SuffixFilter
+pvt.batteries.ddt.datarecord.BaseDataRecord
+pvt.batteries.ddt.datarecord.BaseDataRecord: BaseDataRecord()
+pvt.batteries.ddt.datarecord.BaseDataRecord: void addWithoutKey(java.lang.Object)
+pvt.batteries.ddt.datarecord.BaseDataRecord: void addWithKey(java.lang.String,java.lang.Object)
+pvt.batteries.ddt.datarecord.BaseDataRecord: boolean hasIndex(int)
+pvt.batteries.ddt.datarecord.BaseDataRecord: com.arjunapro.testauto.interfaces.Value valueAt(int)
+pvt.batteries.ddt.datarecord.BaseDataRecord: java.lang.String stringAt(int)
+pvt.batteries.ddt.datarecord.BaseDataRecord: java.lang.Object objectAt(int)
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer: BaseDataRecordContainer(pvt.arjunapro.enums.DataRecordOrder)
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer: BaseDataRecordContainer()
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer: BaseDataRecordContainer(java.lang.Object[][])
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer: java.lang.String[] getHeaders()
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer: void setHeaders(java.lang.String[])
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer: void add(java.lang.Object[])
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer: void addAll(java.lang.Object[][])
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer: com.arjunapro.ddt.interfaces.DataRecord next()
+pvt.batteries.ddt.datarecord.BaseDataRecordContainer: boolean hasNext()
+pvt.batteries.ddt.datarecord.BaseDataSource
+pvt.batteries.ddt.datarecord.BaseDataSource: BaseDataSource()
+pvt.batteries.ddt.datarecord.BaseDataSource: java.lang.String getName()
+pvt.batteries.ddt.datarecord.BaseDataSource: void setName(java.lang.String)
+pvt.batteries.ddt.datarecord.BaseDataSource: void terminate()
+pvt.batteries.ddt.datarecord.BaseDataSource: boolean isTerminated()
+pvt.batteries.ddt.datarecord.BaseDataSource: void validate()
 pvt.batteries.discoverer.DiscoveredFile
 pvt.batteries.discoverer.DiscoveredFileAttribute
 pvt.batteries.discoverer.FileAggregator

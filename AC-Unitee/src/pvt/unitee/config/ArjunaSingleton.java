@@ -18,8 +18,6 @@
  ******************************************************************************/
 package pvt.unitee.config;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -27,14 +25,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.io.IOUtils;
-import org.apache.log4j.Level;
-
 import com.arjunapro.ddt.annotations.DataMethodContainer;
 import com.arjunapro.ddt.interfaces.DataSource;
 import com.arjunapro.sysauto.batteries.FileSystemBatteries;
 import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.enums.LoggingLevel;
 import com.arjunapro.testauto.interfaces.Value;
 import com.typesafe.config.ConfigException;
 import com.typesafe.config.ConfigObject;

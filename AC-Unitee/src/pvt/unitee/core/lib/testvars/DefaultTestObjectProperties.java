@@ -1,6 +1,5 @@
 package pvt.unitee.core.lib.testvars;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecord;
 import com.arjunapro.ddt.interfaces.DataRecord;
 import com.arjunapro.testauto.enums.TestObjectAttribute;
 import com.arjunapro.testauto.enums.TestObjectType;
@@ -9,6 +8,7 @@ import com.arjunapro.testauto.interfaces.Value;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.container.EnumKeyValueContainer;
+import pvt.batteries.ddt.datarecord.BaseDataRecord;
 import pvt.batteries.value.DoubleValue;
 import pvt.batteries.value.EnumValue;
 import pvt.batteries.value.IntValue;
@@ -240,7 +240,7 @@ public class DefaultTestObjectProperties
 		return dataRecord;
 	}
 	
-	public void setDataRecord(DefaultDataRecord dataRecord) throws Exception{
+	public void setDataRecord(BaseDataRecord dataRecord) throws Exception{
 		this.dataRecord = dataRecord;
 	}
 	

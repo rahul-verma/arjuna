@@ -52,11 +52,26 @@ public class IssueBuilder {
 		return this;
 	}
 	
+	public IssueBuilder dataSourceName(String trace) throws Exception {
+		this.resultProps.add(IssueAttribute.DSNAME, new StringValue(trace));
+		return this;
+	}
+	
 	public IssueBuilder exception(Throwable e) throws Exception {
 		this.resultProps.setExcName(e.getClass().getName());
 		this.message(e.getMessage());
 		this.trace(ExceptionBatteries.getStackTraceAsString(e));
 		this.e = e;
+		return this;
+	}
+	
+	// Use this only if you want to set the trace as different from the exception using exception()
+	public IssueBuilder trace(Throwable e) throws Exception {
+      if ((e.getMessage() == null) && (e.getCause() != null)) {
+    	  this.trace(ExceptionBatteries.getStackTraceAsString(e.getCause()));
+        } else {
+        	this.trace(ExceptionBatteries.getStackTraceAsString(e));
+        }
 		return this;
 	}
 	

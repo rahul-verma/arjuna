@@ -18,23 +18,12 @@
  ******************************************************************************/
 package com.arjunapro.uiauto.factories;
 
-import java.io.File;
-
-import org.apache.commons.io.FilenameUtils;
-
-import com.arjunapro.sysauto.batteries.FileSystemBatteries;
 import com.arjunapro.uiauto.interfaces.Page;
 import com.arjunapro.uiauto.interfaces.UiDriver;
 
 import pvt.arjunapro.uiauto.factories.PageMapperFactory;
-import pvt.arjunapro.uiauto.interfaces.App;
 import pvt.arjunapro.uiauto.interfaces.PageMapper;
-import pvt.arjunapro.uiauto.pageobject.BaseApp;
 import pvt.arjunapro.uiauto.pageobject.BasePage;
-import pvt.batteries.config.Batteries;
-import pvt.batteries.exceptions.Problem;
-import pvt.uiautomator.UiAutomator;
-import pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
 public class PageFactory {
 

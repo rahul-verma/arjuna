@@ -1,13 +1,8 @@
 package pvt.unitee.testobject.lib.fixture;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 import org.apache.log4j.Logger;
-
-import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.testauto.interfaces.TestVariables;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.FixtureResultType;
@@ -23,8 +18,6 @@ import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
 import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import pvt.unitee.testobject.lib.interfaces.TestObject;
-import pvt.unitee.testobject.lib.java.JavaTestClassFragment;
-import pvt.unitee.testobject.lib.java.JavaTestClassInstance;
 import pvt.unitee.testobject.lib.loader.MethodSignatureType;
 
 public abstract class BaseTestClassFixture implements Fixture {

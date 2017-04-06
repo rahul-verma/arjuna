@@ -22,14 +22,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataReference;
-import com.arjunapro.testauto.config.RunConfig;
 import com.arjunapro.testauto.interfaces.ReadOnlyStringKeyValueContainer;
 import com.arjunapro.testauto.interfaces.Value;
 
+import pvt.arjunapro.ddt.interfaces.DataReference;
 import pvt.arjunapro.enums.BatteriesPropertyType;
 import pvt.batteries.integration.ComponentConfigurator;
 import pvt.batteries.lib.BatteriesConfigurator;

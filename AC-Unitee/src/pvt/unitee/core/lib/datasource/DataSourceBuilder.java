@@ -12,8 +12,11 @@ import com.arjunapro.ddt.annotations.DriveWithData;
 import com.arjunapro.ddt.annotations.DriveWithDataArray;
 import com.arjunapro.ddt.annotations.DriveWithDataFile;
 import com.arjunapro.ddt.annotations.DriveWithDataMethod;
+import com.arjunapro.ddt.exceptions.DataSourceConstructionException;
 import com.arjunapro.ddt.interfaces.DataSource;
 import com.arjunapro.sysauto.batteries.FileSystemBatteries;
+import com.arjunapro.sysauto.batteries.SystemBatteries;
+import com.arjunapro.testauto.console.Console;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.annotations.DriveWithDataGenerator;
@@ -77,6 +80,15 @@ public class DataSourceBuilder {
 		}
 
 		dataAnnHeaders = dataContainer.headers();
+		
+		if ((dataAnnHeaders.length != 0) && (dataAnnHeaders.length != dataAnnRecord.length)){
+			Console.displayError("Static Fatal Error: Problem with @DriveWithData annotation's [headers] attribute.");
+			Console.displayError(String.format("Problem In: Test Method [%s]", testClassDef.getQualifiedName(), testMethod.getName()));
+			Console.displayError("Problem: The length of [headers] and [record] arrays does not match.");
+			Console.displayError("Solution: Make [headers] and [record] array of same length. Or remove [headers] altogether and use List Data Record API.");
+			//Console.displayExceptionBlock(e);
+			SystemBatteries.exit();				
+		}
 	}
 	
 	private String[] getValuesFromDataAnnotation(Data annotation) throws Exception{
@@ -109,7 +121,35 @@ public class DataSourceBuilder {
 			dataArrayRecords.add(getValuesFromDataAnnotation(annRecordContainer));
 		}		
 		
+		int refLen = 0;
+		boolean first = true;
+		for (String[] dataArr: dataArrayRecords){
+			if (first){
+				refLen = dataArr.length;
+				first = false;
+				continue;
+			}
+			
+			if (dataArr.length != refLen){
+				Console.displayError("Static Fatal Error: Problem with @DriveWithDataArray annotation [records] attribute.");
+				Console.displayError(String.format("Problem In: Test Method [%s]", testClassDef.getQualifiedName(), testMethod.getName()));
+				Console.displayError("Problem: The length of record entries in [records] array does not match.");
+				Console.displayError("Solution: Make all record entries in [records] array of same length.");
+				//Console.displayExceptionBlock(e);
+				SystemBatteries.exit();						
+			}
+		}	
+		
 		dataArrayAnnHeaders = dataArrayContainer.headers();
+		
+		if ((dataArrayAnnHeaders.length != 0) && (dataArrayAnnHeaders.length != refLen)){
+			Console.displayError("Static Fatal Error: Problem with @DriveWithDataArray headers attribute.");
+			Console.displayError(String.format("Problem In: Test Method [%s]", testClassDef.getQualifiedName(), testMethod.getName()));
+			Console.displayError("Problem: The length of [headers] and record in [records] arrays does not match.");
+			Console.displayError("Solution: Make [headers] and length of every record in [records] array of same length. Or remove [headers] altogether and use List Data Record API.");
+			//Console.displayExceptionBlock(e);
+			SystemBatteries.exit();				
+		}
 		
 	}
 	
@@ -221,19 +261,60 @@ public class DataSourceBuilder {
 		}
 	}
 	
+	private void throwConstructionException(String ann, String name, Throwable e) throws DataSourceConstructionException{
+		String m = null;
+		if (e.getMessage() != null){
+			m = String.format(" : %s",e.getMessage());
+		} else {
+			m = ".";
+		}
+		
+		throw new DataSourceConstructionException(
+				String.format("Issues in creating Data Source for %s annotation%s", ann, m),
+				name,
+				e);		
+	}
+	
 	public DataSource build() throws Exception{
 		if (ArjunaInternal.displayDataMethodProcessingInfo){
 			logger.debug("Building data source");
 		}
+		
+		String name = null;
+		DataSource ds = null;
 		switch (this.dataSourceType){
 		case DATA:
-			return new SingleDataRecordSource(dataAnnHeaders, dataAnnRecord);
+			try{
+				name = String.format("@DriveWithData annotation for %s.%s",this.testClassDef.getQualifiedName(), this.testMethod.getName());
+				ds = new SingleDataRecordSource(dataAnnHeaders, dataAnnRecord);
+			} catch (Throwable e){
+				throwConstructionException("@DriveWithData", name, e);
+			}
+			break;
 		case DATA_ARRAY:
-			return new DataArrayDataSource(this.dataArrayAnnHeaders, this.dataArrayRecords);
+			try{
+				name = String.format("@DriveWithDataArray annotation");
+				ds = new DataArrayDataSource(this.dataArrayAnnHeaders, this.dataArrayRecords);
+			} catch (Throwable e){
+				throwConstructionException("@DriveWithDataArray", name, e);
+			}
+			break;
 		case DATA_FILE:
-			return DataSourceFactory.getDataSource(this.location, this.delimiter);
+			try{
+				name = String.format("@DriveWithDataFile annotation");
+				ds = DataSourceFactory.getDataSource(this.location, this.delimiter);
+			} catch (Throwable e){
+				throwConstructionException("@DriveWithDataFile", name, e);
+			}
+			break;
 		case DATA_METHOD:
-			return new DataMethodDataSource(this.dataMethod);
+			try{
+				name = String.format("[%s] data method used in @DriveWithDataMethod annotation",this.dataMethod.getName());
+				ds = new DataMethodDataSource(this.dataMethod);
+			} catch (Throwable e){
+				throwConstructionException("@DriveWithDataMethod", name, e);
+			}
+			break;
 		case DATA_GENERATOR:
 			if (ArjunaInternal.displayDataMethodProcessingInfo){
 				logger.debug("Choose Named Data Generator? " + this.chooseNamedDataGenerator);
@@ -242,17 +323,31 @@ public class DataSourceBuilder {
 				if (ArjunaInternal.displayDataMethodProcessingInfo){
 					logger.debug("Fetching central data generator");
 				}
-				return ArjunaInternal.getDataSourceFromDataGenName(this.dataGeneratorName);
+				try{
+					name = String.format("[%s] named generator used in @DriveWithDataGenerator annotation",this.dataGeneratorName);
+					ds = ArjunaInternal.getDataSourceFromDataGenName(this.dataGeneratorName);
+				} catch (Throwable e){
+					throwConstructionException("@DriveWithDataGenerator", name, e);
+				}
 			} else {
 				if (ArjunaInternal.displayDataMethodProcessingInfo){
 					logger.debug("Creating specific data generator object");
 				}
-				return this.dataGeneratorClass.newInstance();
+				try{
+					name = String.format("[%s] class used as data generator in @DriveWithDataGenerator annotation",this.dataGeneratorClass.getName());
+					ds = this.dataGeneratorClass.newInstance();
+				} catch (Throwable e){
+					throwConstructionException("@DriveWithDataGenerator", name, e);
+				}
 			}
-		}
+			break;
+		default:
+			name = "Dummy Data Source";
+			ds = new DummyDataSource();
+		}	
 		
-		throw new Exception(String.format("Unsupported Data Source Type supplied: %s", this.dataSourceType));
-		
+		ds.setName(name);
+		return ds;
 	}
 	
 

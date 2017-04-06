@@ -4,16 +4,17 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Iterator;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecordContainer;
-import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
+import com.arjunapro.ddt.datarecord.ListDataRecordContainer;
 import com.arjunapro.ddt.interfaces.DataRecord;
 import com.arjunapro.ddt.interfaces.DataRecordContainer;
 import com.arjunapro.ddt.interfaces.DataSource;
 
-public class DataMethodDataSource implements DataSource{
+import pvt.batteries.ddt.datarecord.BaseDataSource;
+
+public class DataMethodDataSource extends BaseDataSource{
 	private static Object[][] sampleArr = {};
 	private Method dataMethod = null;
-	DataRecordContainer recordContainer =  null;
+	DataSource recordContainer =  null;
 	Iterator<DataRecord> iter = null;
 	
 	public DataMethodDataSource(Method dataMethod) throws Exception{
@@ -23,24 +24,27 @@ public class DataMethodDataSource implements DataSource{
 			throw new Exception(String.format("Data method must be static: %s.%s", dataMethod.getDeclaringClass().getName(),dataMethod.getName()));
 		}
 		this.init();
+		this.recordContainer.validate();
 	}
 	 
 	public void init() throws Exception{
 //			logger.debug("The method is invoked in static manner for class: " + targetMethod.getDeclaringClass().getName());
 		if (dataMethod.getReturnType().isAssignableFrom(sampleArr.getClass())){
-			recordContainer = new DefaultDataRecordContainer((Object[][]) dataMethod.invoke(null));
+			DataRecordContainer container = new ListDataRecordContainer();
+			container.addAll((Object[][]) dataMethod.invoke(null));
+			recordContainer = container;
 		} else {
-			recordContainer = (DataRecordContainer) dataMethod.invoke(null);
+			recordContainer = (DataSource) dataMethod.invoke(null);
 		}	
-		iter = recordContainer.iterator();
 	}
 	
-	public DataRecord next() throws DataSourceFinishedException{
-		if (iter.hasNext()){
-			return iter.next();
-		} else {
-			throw new DataSourceFinishedException("Done");
-		}
+	public DataRecord next() throws Exception{
+		return recordContainer.next();
+	}
+	
+	public void terminate() {
+		super.terminate();
+		this.recordContainer.terminate();
 	}
 
 }

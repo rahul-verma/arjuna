@@ -25,10 +25,10 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.ddt.annotations.DataMethod;
-import com.arjunapro.ddt.datarecord.DefaultDataRecordContainer;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import pvt.batteries.ddt.datarecord.BaseDataRecordContainer;
 
 public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
@@ -44,7 +44,7 @@ public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 	
 	public static boolean hasAllowedReturnType(Method m){
 		return (m.getReturnType().isAssignableFrom(sampleArr.getClass())) 
-				|| (m.getReturnType().isAssignableFrom(DefaultDataRecordContainer.class));
+				|| (m.getReturnType().isAssignableFrom(BaseDataRecordContainer.class));
 	}
 
 	public void process() throws Exception{

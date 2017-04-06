@@ -23,6 +23,7 @@ public class IssueProperties
 		map.put(IssueAttribute.ETRACE, naValue);
 		map.put(IssueAttribute.STEP_NUM, naValue);
 		map.put(IssueAttribute.FNAME, naValue);
+		map.put(IssueAttribute.DSNAME, naValue);
 		super.add(map);
 	}
 
@@ -42,6 +43,8 @@ public class IssueProperties
 		case STEP_NUM:
 			return ValueType.INTEGER;
 		case FNAME:
+			return ValueType.STRING;
+		case DSNAME:
 			return ValueType.STRING;
 		case ID:
 			return ValueType.INTEGER;

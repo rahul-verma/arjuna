@@ -2,7 +2,6 @@ package pvt.unitee.testobject.lib.java;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -20,10 +19,8 @@ import pvt.unitee.core.lib.dependency.DependencyHandler;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
 import pvt.unitee.reporter.lib.IssueId;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
-import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.TestCreator;
-import pvt.unitee.testobject.lib.interfaces.TestCreatorInstance;
 
 public class JavaTestMethod extends BaseTestObject implements TestCreator{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

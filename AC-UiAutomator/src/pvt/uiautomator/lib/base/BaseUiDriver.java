@@ -21,7 +21,6 @@ package pvt.uiautomator.lib.base;
 import java.io.File;
 import java.util.HashMap;
 
-import com.arjunapro.testauto.config.RunConfig;
 import com.arjunapro.uiauto.interfaces.UiDriver;
 import com.arjunapro.uiauto.interfaces.UiElement;
 

@@ -106,6 +106,7 @@ public class UniteeNames {
 		NamesContainer issueProps = new NamesContainer(NamesContainerType.ISSUE.toString());
 		issueProps.add(new Name(IssueAttribute.STEP_NUM.toString(), "Test Step#"));
 		issueProps.add(new Name(IssueAttribute.FNAME.toString(), "Fixture Method"));
+		issueProps.add(new Name(IssueAttribute.DSNAME.toString(), "Data Source"));
 		issueProps.add(new Name(IssueAttribute.ID.toString(), "Issue Id"));
 		issueProps.add(new Name(IssueAttribute.TYPE.toString(), "Issue Type"));
 		issueProps.add(new Name(IssueAttribute.SUB_TYPE.toString(), "Issue Sub-Type"));

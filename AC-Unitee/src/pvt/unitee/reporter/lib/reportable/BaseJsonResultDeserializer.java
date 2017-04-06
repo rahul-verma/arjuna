@@ -7,7 +7,7 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecord;
+import com.arjunapro.ddt.datarecord.MapDataRecord;
 import com.arjunapro.testauto.enums.ValueType;
 import com.arjunapro.testauto.interfaces.Value;
 import com.google.gson.JsonArray;
@@ -16,6 +16,7 @@ import com.google.gson.JsonObject;
 
 import pvt.batteries.config.Batteries;
 import pvt.batteries.container.BaseValueContainer;
+import pvt.batteries.ddt.datarecord.BaseDataRecord;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import pvt.batteries.value.DoubleValue;
 import pvt.batteries.value.EnumValue;
@@ -68,7 +69,7 @@ public class BaseJsonResultDeserializer {
 
 			//Deserialize dataRecord
 			JsonObject drObj = root.get("dataRecord").getAsJsonObject();
-			DefaultDataRecord drProps = new DefaultDataRecord();
+			BaseDataRecord drProps = new MapDataRecord();
 			processJsonObjectForEnumMap(drObj, drProps);
 			testVars.setDataRecord(drProps);
 		} catch (Exception e){

@@ -21,8 +21,6 @@ package pvt.uiautomator.lib;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.arjunapro.testauto.config.RunConfig;
-
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
 import pvt.uiauto.enums.IdentifyBy;

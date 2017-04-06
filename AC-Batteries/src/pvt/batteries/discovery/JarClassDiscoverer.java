@@ -29,7 +29,6 @@ import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.testauto.config.RunConfig;
 
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discoverer.DiscoveredFile;

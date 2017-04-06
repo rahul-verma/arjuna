@@ -397,6 +397,9 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case DIRECTORY_PROJECT_RUNID_REPORT_ROOT:
 					handleStringConfig(propPath, cValue, "Report Directory for the Run ID", false);
 					break;
+				case DIRECTORY_PROJECT_RUNID_REPORT_JDB:
+					handleStringConfig(propPath, cValue, "Report Directory for the Run ID for JDB", false);
+					break;
 				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ROOT:
 					handleStringConfig(propPath, cValue, "Root Raw Report Directory for JSON.", false);
 					break;

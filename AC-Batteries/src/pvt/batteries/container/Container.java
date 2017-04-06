@@ -25,6 +25,6 @@ public interface Container<T, V> {
 
 	String string(T key) throws Exception;
 
-	boolean hasKey(T key);
+	boolean hasKey(T key) throws Exception;
 
 }

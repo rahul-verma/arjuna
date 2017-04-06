@@ -2,9 +2,7 @@ package pvt.unitee.testobject.lib.interfaces;
 
 import java.util.List;
 
-import pvt.arjunapro.enums.FixtureResultType;
 import pvt.unitee.reporter.lib.IssueId;
-import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.JavaTestClassInstance;
 import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 import pvt.unitee.testobject.lib.loader.group.Group;

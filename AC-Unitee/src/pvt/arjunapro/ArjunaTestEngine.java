@@ -19,18 +19,14 @@
 package pvt.arjunapro;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.sysauto.batteries.ThreadBatteries;
-import com.arjunapro.testauto.config.RunConfig;
 import com.arjunapro.testauto.console.Console;
 
-import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.arjunapro.enums.ReportGenerationFormat;
 import pvt.arjunapro.enums.ReportListenerFormat;

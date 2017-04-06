@@ -5,7 +5,6 @@ import org.apache.log4j.Level;
 import com.arjunapro.sysauto.batteries.SystemBatteries;
 import com.arjunapro.testauto.config.RunConfig;
 
-import pvt.batteries.config.Batteries;
 import pvt.batteries.utils.ExceptionBatteries;
 
 public class Console {

@@ -20,14 +20,14 @@ package pvt.batteries.databroker;
 
 import java.util.ArrayList;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecord;
+import com.arjunapro.ddt.datarecord.MapDataRecord;
 import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataSource;
 
+import pvt.batteries.ddt.datarecord.BaseDataSource;
 import pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 
-public class ExcelFileDataSource implements DataSource {
+public class ExcelFileDataSource extends BaseDataSource {
 	ExcelFileLine2ArrayReader reader = null;
 	ArrayList<String> headers = null;
 
@@ -42,6 +42,10 @@ public class ExcelFileDataSource implements DataSource {
 
 	@Override
 	public synchronized DataRecord next() throws DataSourceFinishedException {
+		if (this.isTerminated()){
+			throw new DataSourceFinishedException("Records Finished.");			
+		}
+		
 		ArrayList<Object> dataRecord = null;
 		try {
 			dataRecord = reader.next();
@@ -53,7 +57,7 @@ public class ExcelFileDataSource implements DataSource {
 		if (dataRecord == null) {
 			throw new DataSourceFinishedException("Records Finished.");
 		} else {
-			return new DefaultDataRecord(this.headers, dataRecord);
+			return new MapDataRecord(this.headers, dataRecord);
 		}
 	}
 

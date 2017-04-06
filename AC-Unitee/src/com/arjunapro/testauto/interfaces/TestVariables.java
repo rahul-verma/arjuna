@@ -3,8 +3,8 @@ package com.arjunapro.testauto.interfaces;
 import java.util.Map;
 
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataReference;
-import com.arjunapro.testauto.interfaces.StringKeyValueContainer;
+
+import pvt.arjunapro.ddt.interfaces.DataReference;
 
 public interface TestVariables {
 

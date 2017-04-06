@@ -4,7 +4,6 @@ import java.util.List;
 
 import pvt.unitee.reporter.lib.IssueId;
 import pvt.unitee.testobject.lib.java.JavaTestClassFragment;
-import pvt.unitee.testobject.lib.java.JavaTestClassInstance;
 import pvt.unitee.testobject.lib.java.JavaTestMethodInstance;
 
 public interface TestCreator extends TestObject{

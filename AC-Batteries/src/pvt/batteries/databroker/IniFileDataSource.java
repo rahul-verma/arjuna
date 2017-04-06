@@ -21,13 +21,14 @@ package pvt.batteries.databroker;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.arjunapro.ddt.datarecord.DefaultDataRecord;
+import com.arjunapro.ddt.datarecord.MapDataRecord;
 import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
 import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataSource;
 import com.arjunapro.sysauto.file.IniFileReader;
 
-public class IniFileDataSource implements DataSource {
+import pvt.batteries.ddt.datarecord.BaseDataSource;
+
+public class IniFileDataSource extends BaseDataSource {
 	IniFileReader reader = null;
 	Set<String> sections = null;
 	Iterator<String> iter = null;
@@ -40,8 +41,11 @@ public class IniFileDataSource implements DataSource {
 
 	@Override
 	public synchronized DataRecord next() throws DataSourceFinishedException {
+		if (this.isTerminated()){
+			throw new DataSourceFinishedException("Records Finished.");			
+		}
 		if (iter.hasNext()) {
-			return new DefaultDataRecord(this.reader.getSectionDataObjects((String) iter.next()));
+			return new MapDataRecord(this.reader.getSectionDataObjects((String) iter.next()));
 		} else {
 			throw new DataSourceFinishedException("Records Finished.");
 		}
