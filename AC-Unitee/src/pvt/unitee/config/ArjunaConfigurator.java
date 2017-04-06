@@ -14,7 +14,8 @@ import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.arjunapro.enums.EventAttribute;
 import pvt.arjunapro.enums.FixtureResultPropertyType;
 import pvt.arjunapro.enums.IssueAttribute;
-import pvt.arjunapro.enums.ReportFormat;
+import pvt.arjunapro.enums.ReportGenerationFormat;
+import pvt.arjunapro.enums.ReportListenerFormat;
 import pvt.arjunapro.enums.ReportMode;
 import pvt.arjunapro.enums.ReportablePropertyType;
 import pvt.arjunapro.enums.StepResultAttribute;
@@ -83,14 +84,27 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 		registerProperty(prop);		
 	}
 	
-	protected void handleReportFormatsListConfig(String propPath, Value configValue, String purpose, boolean visible) throws Exception{
+	protected void handleReportGenFormat(String propPath, Value configValue, String purpose, boolean visible) throws Exception{
 		ConfigProperty prop = null;
 		try{
-			prop = ConfigPropertyBatteries.createEnumListProperty(codeForPath(propPath), propPath, ReportFormat.class, configValue, purpose, visible);
+			prop = ConfigPropertyBatteries.createEnumListProperty(codeForPath(propPath), propPath, ReportGenerationFormat.class, configValue, purpose, visible);
 		} catch (IncompatibleInputForValueException e){
-			Console.displayError("Error: Invalid Report Format supplied.");
-			Console.displayError("Solution: Check configuration files and CLI options that you have provided. Provided value(s) should be valid ReportFormat Enum types.");
-			Console.displayExceptionBlock(e);
+			Console.displayError("Error: Invalid Report Generator Format supplied.");
+			Console.displayError("Solution: Check configuration files and CLI options that you have provided. Allowed formats: EXCEL.");
+			//Console.displayExceptionBlock(e);
+			SystemBatteries.exit();			
+		}
+		registerProperty(prop);		
+	}
+	
+	protected void handleReportListenerFormat(String propPath, Value configValue, String purpose, boolean visible) throws Exception{
+		ConfigProperty prop = null;
+		try{
+			prop = ConfigPropertyBatteries.createEnumListProperty(codeForPath(propPath), propPath, ReportListenerFormat.class, configValue, purpose, visible);
+		} catch (IncompatibleInputForValueException e){
+			Console.displayError("Error: Invalid Report Listener Format supplied.");
+			Console.displayError("Solution: Check configuration files and CLI options that you have provided. Allowed formats: CONSOLE.");
+			//Console.displayExceptionBlock(e);
 			SystemBatteries.exit();			
 		}
 		registerProperty(prop);		
@@ -402,10 +416,10 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 					handleStringConfig(propPath, cValue, "Report Name Format", false);
 					break;
 				case REPORT_GENERATORS_BUILTIN:
-					handleReportFormatsListConfig(propPath, cValue, "Chosen Built-in Report Generators", false);
+					handleReportGenFormat(propPath, cValue, "Chosen Built-in Report Generators", false);
 					break;
 				case REPORT_LISTENERS_BUILTIN:
-					handleReportFormatsListConfig(propPath, cValue, "Chosen Built-in Report Listeners", false);
+					handleReportListenerFormat(propPath, cValue, "Chosen Built-in Report Listeners", false);
 					break;
 				default:
 					break;

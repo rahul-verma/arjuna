@@ -19,6 +19,7 @@
 package pvt.unitee.config;
 
 import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -54,6 +55,7 @@ import pvt.batteries.integration.ComponentConfigurator;
 import pvt.batteries.lib.ComponentIntegrator;
 import pvt.batteries.logging.Log;
 import pvt.batteries.property.ConfigPropertyBatteries;
+import pvt.batteries.utils.ResourceStreamBatteries;
 import pvt.batteries.value.StringValue;
 import pvt.unitee.reporter.lib.CentralExecutionState;
 import pvt.unitee.reporter.lib.Reporter;
@@ -65,7 +67,7 @@ import pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "1.0a1";
+	private String version = "1.0a2";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -110,7 +112,8 @@ public enum ArjunaSingleton {
 	
 	public void init() throws Exception{
 		String customTestDir = null;
-		String refPath = FileSystemBatteries.getAbsolutePathFromJar(FileSystemBatteries.getJarFilePathForObject(this), "./../../..");
+		String refPath = FileSystemBatteries.getAbsolutePathFromJar(FileSystemBatteries.getJarFilePathForObject(this), "./../../../..");
+//		System.out.println(refPath);
 		Batteries.init(refPath);
 		if (initUiAuto){
 			Class<?> klass = Class.forName("com.arjunapro.internal.UiAutoIntegrator");
@@ -130,13 +133,16 @@ public enum ArjunaSingleton {
 		//integrator.enumerate();
 		
 		// arjuna file
-		HoconReader reader2 = new HoconFileReader(integrator.value(BatteriesPropertyType.DIRECTORY_CONFIG).asString() + "/" + integrator.value(BatteriesPropertyType.CONFIG_CENTRAL_FILE_NAME).asString());
+		String arjunaConfPath = integrator.value(BatteriesPropertyType.DIRECTORY_CONFIG).asString() + "/" + integrator.value(BatteriesPropertyType.CONFIG_CENTRAL_FILE_NAME).asString();
+//		System.out.println(arjunaConfPath);
+		HoconReader reader2 = new HoconFileReader(arjunaConfPath);
 		reader2.process();
 		
 		try{
 			ConfigObject configObj = reader2.getConfig().getObject("config");
 			HoconReader configReader = new HoconConfigObjectReader(configObj);
 			configReader.process();
+//			System.out.println(configReader.getProperties());
 			Batteries.processConfigProperties(configReader.getProperties());
 		} catch (ConfigException e){
 			// config may not be defined. It's ok. It's optional
@@ -224,12 +230,10 @@ public enum ArjunaSingleton {
 //		);
 //		
 //		Batteries.processConfigProperties(updateOptions);
-		
-		HashMap<String, Value> updateOptions = new HashMap<String, Value>();
 		String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString();
 		String runID =  integrator.value(ArjunaProperty.RUNID).asString();
 		String timestampedRunID = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date()) + "-" + runID;
-		String updates = IOUtils.toString((BufferedInputStream) ArjunaSingleton.class.getResource("/com/arjunapro/pvt/text/arjuna_invisible.conf").getContent(), "UTF-8");
+		String updates = ResourceStreamBatteries.streamToString(ArjunaSingleton.class.getResourceAsStream("/com/arjunapro/pvt/text/arjuna_invisible.conf"));
 		String replaced = updates.replace("%%slugProjDir", projDir).replace("%%slugRUNID", timestampedRunID);
 		HoconReader uReader = new HoconStringReader(replaced);
 		uReader.process();

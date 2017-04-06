@@ -22,7 +22,6 @@ package pvt.arjunapro.enums;
  * reporting format
  */
 
-public enum ReportFormat {
-	EXCEL, 
+public enum ReportListenerFormat {
 	CONSOLE
 }

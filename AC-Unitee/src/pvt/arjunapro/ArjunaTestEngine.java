@@ -32,7 +32,8 @@ import com.arjunapro.testauto.console.Console;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.ArjunaProperty;
-import pvt.arjunapro.enums.ReportFormat;
+import pvt.arjunapro.enums.ReportGenerationFormat;
+import pvt.arjunapro.enums.ReportListenerFormat;
 import pvt.arjunapro.enums.TestLanguage;
 import pvt.arjunapro.interfaces.InternlReportableObserver;
 import pvt.batteries.config.Batteries;
@@ -86,7 +87,7 @@ public class ArjunaTestEngine implements TestEngine{
 			if (ArjunaInternal.displayReportPrepInfo){
 				logger.debug(reportFormatName);
 			}
-			ReportFormat reportFormat = ReportFormat.valueOf(reportFormatName.toUpperCase());
+			ReportListenerFormat reportFormat = ReportListenerFormat.valueOf(reportFormatName.toUpperCase());
 			switch(reportFormat){
 			case CONSOLE:
 				InternlReportableObserver<TestResult> execConsoleObserver = new ConsoleTestResultWriter();
@@ -95,7 +96,7 @@ public class ArjunaTestEngine implements TestEngine{
 				reporter.addEventObserver(acConsoleObserver);
 				break;
 			default:
-				String msg = "Unrecognized report format option: " + reportFormatName + ". Exiting now...";
+				String msg = "Unrecognized report listener format option: " + reportFormatName + ". Exiting now...";
 				logger.fatal(msg);
 				Console.displayExceptionBlock(new Exception(msg));
 				System.err.println(msg);
@@ -122,7 +123,7 @@ public class ArjunaTestEngine implements TestEngine{
 			if (ArjunaInternal.displayReportGenerationInfo){
 				logger.debug(reportFormatName);
 			}
-			ReportFormat reportFormat = ReportFormat.valueOf(reportFormatName.toUpperCase());
+			ReportGenerationFormat reportFormat = ReportGenerationFormat.valueOf(reportFormatName.toUpperCase());
 			switch(reportFormat){
 			case EXCEL:
 				FileUtils.forceMkdir(new File(reportDir + "/excel"));

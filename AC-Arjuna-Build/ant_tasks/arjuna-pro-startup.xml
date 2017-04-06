@@ -200,7 +200,7 @@ simple example build file
 
 		<zip destfile="${public.tools.arjunastartup.dist.file}" basedir="${private.arjunastartup.dist.tools.dir}" />
 		
-		<copy file="${private.arjunastartup.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/autocognite-arjuna/lib/java/arjunastartup.jar"/>
+		<copy file="${private.arjunastartup.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/autocognite-arjuna/bin/lib/java/arjunastartup.jar"/>
 		<copy file="${private.arjunastartup.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/autocognite-arjuna/lib/java/arjunastartup.jar"/>
 
 	</target>
