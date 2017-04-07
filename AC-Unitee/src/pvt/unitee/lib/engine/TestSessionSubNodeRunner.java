@@ -22,6 +22,7 @@ import org.apache.log4j.Logger;
 
 import com.arjunapro.sysauto.batteries.ThreadBatteries;
 import com.arjunapro.testauto.config.RunConfig;
+import com.arjunapro.testauto.console.Console;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
@@ -51,7 +52,7 @@ public class TestSessionSubNodeRunner implements Runnable {
 					ArjunaInternal.getCentralExecState().deregisterThread(threadName);
 				} catch (Exception e){
 					System.err.println("Critical Error: Exception occured while creating Test Slot Execution Thread.");
-					e.printStackTrace();
+					Console.displayExceptionBlock(e);
 					System.err.println("Exiting...");
 					System.exit(1);
 				}
@@ -60,7 +61,7 @@ public class TestSessionSubNodeRunner implements Runnable {
 				break;
 			} catch (Throwable e){
 				logger.debug("Unexpected issue in Session runner.");
-				e.printStackTrace();
+				Console.displayExceptionBlock(e);
 				break;
 			}
 		}

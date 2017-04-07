@@ -18,17 +18,28 @@
  ******************************************************************************/
 package pvt.batteries.utils;
 
+import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.StringReader;
 import java.io.StringWriter;
 
-public class ExceptionBatteries {
+import com.arjunapro.sysauto.batteries.SystemBatteries;
 
+public class ExceptionBatteries {
+	private static String[] removeThese = new String[] {
+			"com.arjunapro.pvt.",
+			"sun.reflect",
+			"java.lang.reflect",
+			"java.lang.Thread.run"
+	};
+	
 	public static String getStackTraceAsString(Exception e) {
 		StringWriter sw = new StringWriter();
 		PrintWriter pw = new PrintWriter(sw);
 		e.printStackTrace(pw);
 		String st = sw.toString();
-		return st;
+		return cleanTrace(st);
 	}
 
 	public static String getStackTraceAsString(AssertionError e) {
@@ -36,7 +47,7 @@ public class ExceptionBatteries {
 		PrintWriter pw = new PrintWriter(sw);
 		e.printStackTrace(pw);
 		String st = sw.toString();
-		return st;
+		return cleanTrace(st);
 	}
 
 	public static String getStackTraceAsString(Throwable e) {
@@ -44,6 +55,39 @@ public class ExceptionBatteries {
 		PrintWriter pw = new PrintWriter(sw);
 		e.printStackTrace(pw);
 		String st = sw.toString();
-		return st;
+		return cleanTrace(st);
+	}
+
+	private static String cleanTrace(String trace) {
+		String lineSep = SystemBatteries.getLineSeparator();
+		StringReader stringReader = new StringReader(trace);
+		BufferedReader bufferedReader = new BufferedReader(stringReader);
+		StringBuffer buf = new StringBuffer();
+
+		try {
+			String line = bufferedReader.readLine();
+			if(line == null) {
+				return "";
+			}
+			buf.append(line).append(lineSep);
+
+			while((line = bufferedReader.readLine()) != null) {
+				boolean isExcluded = false;
+				for (String excluded : removeThese) {
+					if(line.contains(excluded)) {
+						isExcluded = true;
+						break;
+					}
+				}
+				if (!isExcluded) {
+					buf.append(line).append(lineSep);
+				}
+			}
+		}
+		catch(IOException ioex) {
+			// do nothing
+		}
+
+		return buf.toString();
 	}
 }

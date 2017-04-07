@@ -2,6 +2,7 @@ package pvt.unitee.reporter.lib.event;
 
 import java.lang.reflect.Type;
 
+import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
@@ -17,7 +18,7 @@ public class EventSerializer extends BaseSerializer implements JsonSerializer<Ev
 		} catch (Exception e){
 			JsonObject jsonObject = new JsonObject();
 			jsonObject.addProperty("rType", "Error in getting string representation");
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 			return jsonObject;
 		}
 	}	

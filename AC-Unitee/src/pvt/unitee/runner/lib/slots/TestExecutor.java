@@ -3,6 +3,7 @@ package pvt.unitee.runner.lib.slots;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.testauto.config.RunConfig;
+import com.arjunapro.testauto.console.Console;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
@@ -41,7 +42,7 @@ public class TestExecutor extends AbstractTestObjectExecutor implements Runnable
 				} catch (SubTestsFinishedException e){
 					return;
 				} catch (Exception e){
-					e.printStackTrace();
+					Console.displayExceptionBlock(e);
 				}
 				if (ArjunaInternal.displaySlotsInfo){
 					logger.debug(String.format("Now Executing %s (Test# %d) in Slot# %d",
@@ -67,12 +68,12 @@ public class TestExecutor extends AbstractTestObjectExecutor implements Runnable
 				try{
 					test.execute();
 				} catch (Exception e){
-					e.printStackTrace();
+					Console.displayExceptionBlock(e);
 				}
 
 				this.executeTearDown(test);
 			} catch (Exception e){
-				e.printStackTrace();
+				Console.displayExceptionBlock(e);
 			}
 		}
 	}

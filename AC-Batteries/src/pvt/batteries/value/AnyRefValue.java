@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.enums.ValueType;
 import com.arjunapro.testauto.interfaces.Value;
 
@@ -29,9 +30,9 @@ public class AnyRefValue extends AbstractValue {
 		try {
 			clone = o.getClass().newInstance();
 		} catch (InstantiationException e) {
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		} catch (IllegalAccessException e) {
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 
 		// Walk up the superclass hierarchy

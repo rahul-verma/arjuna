@@ -2,6 +2,7 @@ package pvt.unitee.reporter.lib.step;
 
 import java.lang.reflect.Type;
 
+import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -23,7 +24,7 @@ public class StepResultDeserializer extends BaseJsonResultDeserializer implement
 	
 			outResult = builder.resultProps(resultProps).build();
 		} catch (Exception e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 
 		return outResult;		

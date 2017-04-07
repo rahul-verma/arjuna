@@ -6,6 +6,6 @@ public class ListDataRecordContainer extends BaseDataRecordContainer {
 
 	@Override
 	public void setHeaders(String[] names) throws Exception {
-		throw new Exception("Not supported for List Data Record Container.");
+		throw new Exception("setHeaders() method is not supported for List Data Record Container.");
 	}
 }

@@ -61,7 +61,7 @@ import pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.1a1";
+	private String version = "0.1a2";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -318,10 +318,10 @@ public enum ArjunaSingleton {
 		try{
 			groupsDB.createGroupForCLIOptions(this.cliPickerOptions);
 		} catch (PickerMisConfiguration e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 			displayPickerConfigError();
 		} catch (Exception e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 			throw e;
 		}
 		groupsDB.createAllCapturingGroup();

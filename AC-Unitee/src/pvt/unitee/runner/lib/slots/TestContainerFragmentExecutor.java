@@ -3,6 +3,7 @@ package pvt.unitee.runner.lib.slots;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.testauto.config.RunConfig;
+import com.arjunapro.testauto.console.Console;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
@@ -73,7 +74,7 @@ public class TestContainerFragmentExecutor extends AbstractTestObjectExecutor im
 				return;
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Console.displayExceptionBlock(e);
 			}
 		}
 

@@ -25,6 +25,7 @@ import org.apache.log4j.Logger;
 
 import com.arjunapro.sysauto.batteries.ThreadBatteries;
 import com.arjunapro.testauto.config.RunConfig;
+import com.arjunapro.testauto.console.Console;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.unitee.testobject.lib.interfaces.TestContainer;
@@ -57,7 +58,7 @@ public class TestSlotExecutor{
 				ArjunaInternal.getCentralExecState().registerThread(t.getName());
 			} catch (Exception e){
 				System.err.println("Critical Error: Exception occured while creating Test Slot Execution Thread.");
-				e.printStackTrace();
+				Console.displayExceptionBlock(e);
 				System.err.println("Exiting...");
 				System.exit(1);
 			}
@@ -69,7 +70,7 @@ public class TestSlotExecutor{
 				tLaunched.join();
 			}	
 		} catch (InterruptedException e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 		
 		for (String tName: threadNames){

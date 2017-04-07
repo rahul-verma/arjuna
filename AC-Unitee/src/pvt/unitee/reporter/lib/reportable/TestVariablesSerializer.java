@@ -2,6 +2,7 @@ package pvt.unitee.reporter.lib.reportable;
 
 import org.apache.log4j.Logger;
 
+import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.interfaces.TestVariables;
 import com.google.gson.JsonObject;
 
@@ -24,7 +25,7 @@ public class TestVariablesSerializer extends BaseSerializer {
 			jsonObject.add("dataRecord", serializeEnumKeyMap(testVars.record().items()));
 		} catch (Exception e){
 			jsonObject.addProperty("rType", "Error in getting string representation");
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 			throw e;
 		}		
 	}

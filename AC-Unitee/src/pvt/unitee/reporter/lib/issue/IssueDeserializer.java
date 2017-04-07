@@ -1,5 +1,6 @@
 package pvt.unitee.reporter.lib.issue;
 
+import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonObject;
 
@@ -23,7 +24,7 @@ public class IssueDeserializer extends ResultDeserializer<Issue> implements Json
 	
 			outResult = builder.resultProps(resultProps).testVariables(testVars).build();
 		} catch (Exception e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 
 		return outResult;		

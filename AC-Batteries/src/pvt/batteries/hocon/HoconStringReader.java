@@ -23,7 +23,10 @@ public class HoconStringReader extends AbstractHoconReader {
 
 	@Override
 	public void loadConfig() throws Exception {
-		Reader reader = new StringReader(confString);
+		Reader reader = new StringReader(confString.replace("\\\\\\\\", "fourslash").replace("\\\\", "twoslash")
+				.replace("\\", "\\\\")
+				.replace("twoslash", "\\\\")
+				.replace("fourslash", "\\\\\\\\"));
 		Config loadedConf = ConfigFactory.load(ConfigFactory.parseReader(reader, this.getParseOptions()),
 				this.getResolveOptions());
 		this.setConfig(loadedConf);

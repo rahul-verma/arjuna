@@ -193,7 +193,7 @@ public class ArjunaTestEngine implements TestEngine{
 			t.join();
 		} catch (Exception e){
 			System.err.println("Critical Error: Exception occured while session Thread.");
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 			System.err.println("Exiting...");
 			System.exit(1);
 		}

@@ -1,6 +1,7 @@
 package pvt.unitee.core.lib.testvars;
 
 import com.arjunapro.ddt.interfaces.DataRecord;
+import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.enums.TestObjectAttribute;
 import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.enums.ValueType;
@@ -396,7 +397,7 @@ public class DefaultTestObjectProperties
 		try{
 			map.cloneAdd(this.items());
 		} catch (Exception e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 		return map;
 	}

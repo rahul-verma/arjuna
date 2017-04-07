@@ -34,6 +34,7 @@ import com.arjunapro.sysauto.batteries.SystemBatteries;
 
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discovery.JarClassDiscoverer;
+import pvt.batteries.utils.ExceptionBatteries;
 
 public class FileDiscoverer extends DirectoryWalker {
 	public Logger logger = Logger.getLogger(Batteries.getCentralLogName());
@@ -87,7 +88,7 @@ public class FileDiscoverer extends DirectoryWalker {
 			try {
 				jcd.discover();
 			} catch (Exception e) {
-				e.printStackTrace();
+				ExceptionBatteries.getStackTraceAsString(e);
 			}
 			return;
 		}

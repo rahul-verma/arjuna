@@ -38,7 +38,6 @@ public class AnyRefListValue extends AbstractValue {
 			}
 			return tempList;
 		} catch (Exception e) {
-			e.printStackTrace();
 			throw new UnsupportedRepresentationException(AnyRefListValue.class.getSimpleName(), "asEnumList()",
 					this.toString(), enumClass.getSimpleName());
 		}

@@ -35,6 +35,10 @@ public abstract class BaseDataRecord extends DefaultStringKeyValueContainer impl
 
 	}
 	
+	protected int maxIndex() {
+		return indexToKeyMap.size() - 1;
+	}
+	
 	protected void addWithoutKey(Object obj) {
 		String internalName = String.format("%d", counter);
 		super.add(internalName.toUpperCase(), new AnyRefValue(obj));

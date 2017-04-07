@@ -198,7 +198,11 @@ simple example build file
 		<zip destfile="${public.tools.arjunaplatform.dist.file}" basedir="${private.arjunaplatform.dist.tools.dir}" />
 		
 		<copy file="${private.arjunaplatform.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/autocognite-arjuna/bin/lib/java/arjunaplatform.jar"/>
-		<copy file="${private.arjunaplatform.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/autocognite-arjuna/lib/java/arjunaplatform.jar"/>
+		<jar destFile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/autocognite-arjuna/bin/lib/java/arjunaplatform_clear.jar">
+		<zipgroupfileset includes="*.jar" dir="${3rd_party_batteries_jars}"/>
+			<zipgroupfileset includes="*.jar" dir="${private.arjunaplatform.clear.jar.dir}"/>
+		</jar>
+		<copy file="${private.arjunaplatform.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/autocognite-arjuna/bin/lib/java/arjunaplatform.jar"/>
 
 	</target>
 

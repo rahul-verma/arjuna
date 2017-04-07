@@ -1,5 +1,7 @@
 package pvt.batteries.lib;
 
+import com.arjunapro.testauto.console.Console;
+
 import pvt.batteries.config.Configuration;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 
@@ -10,7 +12,7 @@ public class BaseConfiguration extends DefaultStringKeyValueContainer implements
 		try {
 			map.cloneAdd(this.items());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 		return map;
 	}

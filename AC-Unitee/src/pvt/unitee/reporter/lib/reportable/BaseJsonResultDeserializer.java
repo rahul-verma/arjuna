@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.ddt.datarecord.MapDataRecord;
+import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.enums.ValueType;
 import com.arjunapro.testauto.interfaces.Value;
 import com.google.gson.JsonArray;
@@ -73,7 +74,7 @@ public class BaseJsonResultDeserializer {
 			processJsonObjectForEnumMap(drObj, drProps);
 			testVars.setDataRecord(drProps);
 		} catch (Exception e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}		
 		
 		return testVars;

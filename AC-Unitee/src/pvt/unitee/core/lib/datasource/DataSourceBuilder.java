@@ -83,7 +83,7 @@ public class DataSourceBuilder {
 		
 		if ((dataAnnHeaders.length != 0) && (dataAnnHeaders.length != dataAnnRecord.length)){
 			Console.displayError("Static Fatal Error: Problem with @DriveWithData annotation's [headers] attribute.");
-			Console.displayError(String.format("Problem In: Test Method [%s]", testClassDef.getQualifiedName(), testMethod.getName()));
+			Console.displayError(String.format("Problem In: Test Method [%s.%s]", testClassDef.getQualifiedName(), testMethod.getName()));
 			Console.displayError("Problem: The length of [headers] and [record] arrays does not match.");
 			Console.displayError("Solution: Make [headers] and [record] array of same length. Or remove [headers] altogether and use List Data Record API.");
 			//Console.displayExceptionBlock(e);
@@ -132,7 +132,7 @@ public class DataSourceBuilder {
 			
 			if (dataArr.length != refLen){
 				Console.displayError("Static Fatal Error: Problem with @DriveWithDataArray annotation [records] attribute.");
-				Console.displayError(String.format("Problem In: Test Method [%s]", testClassDef.getQualifiedName(), testMethod.getName()));
+				Console.displayError(String.format("Problem In: Test Method [%s.%s]", testClassDef.getQualifiedName(), testMethod.getName()));
 				Console.displayError("Problem: The length of record entries in [records] array does not match.");
 				Console.displayError("Solution: Make all record entries in [records] array of same length.");
 				//Console.displayExceptionBlock(e);
@@ -144,7 +144,7 @@ public class DataSourceBuilder {
 		
 		if ((dataArrayAnnHeaders.length != 0) && (dataArrayAnnHeaders.length != refLen)){
 			Console.displayError("Static Fatal Error: Problem with @DriveWithDataArray headers attribute.");
-			Console.displayError(String.format("Problem In: Test Method [%s]", testClassDef.getQualifiedName(), testMethod.getName()));
+			Console.displayError(String.format("Problem In: Test Method [%s.%s]", testClassDef.getQualifiedName(), testMethod.getName()));
 			Console.displayError("Problem: The length of [headers] and record in [records] arrays does not match.");
 			Console.displayError("Solution: Make [headers] and length of every record in [records] array of same length. Or remove [headers] altogether and use List Data Record API.");
 			//Console.displayExceptionBlock(e);

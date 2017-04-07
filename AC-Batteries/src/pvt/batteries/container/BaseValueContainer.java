@@ -22,12 +22,12 @@ public abstract class BaseValueContainer<T> extends BaseContainer<T, Value> impl
 	public static NAValue naValue = new NAValue();
 
 	@Override
-	protected Value getValueForNonExistentKey() {
+	protected Value getValueForNonExistentKey(T key) throws Exception {
 		return notSetValue;
 	}
 
 	@Override
-	protected String getStrValueForNonExistentKey() {
+	protected String getStrValueForNonExistentKey(T key) throws Exception {
 		return notSetValue.asString();
 	}
 

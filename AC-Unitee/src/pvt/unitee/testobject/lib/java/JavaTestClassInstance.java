@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.enums.TestObjectType;
 import com.arjunapro.testauto.interfaces.TestVariables;
 
@@ -96,7 +97,7 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 			processContainerConstructorException(f);
 		}catch (Throwable e){
 			logger.debug(e.getMessage());
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 			processContainerConstructorException(e);
 		}
 	}

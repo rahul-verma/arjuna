@@ -32,7 +32,12 @@ com.arjunapro.ddt.datarecord.ListDataRecord: java.util.Map strItems(java.util.Li
 com.arjunapro.ddt.datarecord.ListDataRecord: java.util.List values(java.util.List)
 com.arjunapro.ddt.datarecord.ListDataRecord: java.util.List strings(java.util.List)
 com.arjunapro.ddt.datarecord.ListDataRecord: boolean hasKey(java.lang.String)
+com.arjunapro.ddt.datarecord.ListDataRecord: com.arjunapro.testauto.interfaces.Value getValueForNonExistentKey(java.lang.String)
+com.arjunapro.ddt.datarecord.ListDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.String)
 com.arjunapro.ddt.datarecord.ListDataRecord: boolean hasKey(java.lang.Object)
+com.arjunapro.ddt.datarecord.ListDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.Object)
+com.arjunapro.ddt.datarecord.ListDataRecord: com.arjunapro.testauto.interfaces.Value getValueForNonExistentKey(java.lang.Object)
+com.arjunapro.ddt.datarecord.ListDataRecord: java.lang.Object getValueForNonExistentKey(java.lang.Object)
 com.arjunapro.ddt.datarecord.ListDataRecordContainer
 com.arjunapro.ddt.datarecord.ListDataRecordContainer: ListDataRecordContainer()
 com.arjunapro.ddt.datarecord.ListDataRecordContainer: void setHeaders(java.lang.String[])
@@ -43,10 +48,15 @@ com.arjunapro.ddt.datarecord.MapDataRecord: MapDataRecord(java.util.List,java.ut
 com.arjunapro.ddt.datarecord.MapDataRecord: MapDataRecord(java.lang.String[],java.util.List)
 com.arjunapro.ddt.datarecord.MapDataRecord: MapDataRecord(java.lang.String[],java.lang.Object[])
 com.arjunapro.ddt.datarecord.MapDataRecord: MapDataRecord(java.util.HashMap)
+com.arjunapro.ddt.datarecord.MapDataRecord: com.arjunapro.testauto.interfaces.Value getValueForNonExistentKey(java.lang.String)
+com.arjunapro.ddt.datarecord.MapDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.String)
 com.arjunapro.ddt.datarecord.MapDataRecord: boolean hasIndex(int)
 com.arjunapro.ddt.datarecord.MapDataRecord: com.arjunapro.testauto.interfaces.Value valueAt(int)
 com.arjunapro.ddt.datarecord.MapDataRecord: java.lang.String stringAt(int)
 com.arjunapro.ddt.datarecord.MapDataRecord: java.lang.Object objectAt(int)
+com.arjunapro.ddt.datarecord.MapDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.Object)
+com.arjunapro.ddt.datarecord.MapDataRecord: com.arjunapro.testauto.interfaces.Value getValueForNonExistentKey(java.lang.Object)
+com.arjunapro.ddt.datarecord.MapDataRecord: java.lang.Object getValueForNonExistentKey(java.lang.Object)
 com.arjunapro.ddt.datarecord.MapDataRecordContainer
 com.arjunapro.ddt.datarecord.MapDataRecordContainer: MapDataRecordContainer()
 com.arjunapro.ddt.datarecord.MapDataRecordContainer: void validate()
@@ -57,6 +67,12 @@ com.arjunapro.ddt.exceptions.DataSourceConstructionException: java.lang.String g
 com.arjunapro.ddt.exceptions.DataSourceFinishedException
 com.arjunapro.ddt.exceptions.DataSourceFinishedException: DataSourceFinishedException()
 com.arjunapro.ddt.exceptions.DataSourceFinishedException: DataSourceFinishedException(java.lang.String)
+com.arjunapro.ddt.exceptions.EmptyListDataRecordLookUpException
+com.arjunapro.ddt.exceptions.EmptyListDataRecordLookUpException: EmptyListDataRecordLookUpException(java.lang.String)
+com.arjunapro.ddt.exceptions.ListDataRecordLookUpException
+com.arjunapro.ddt.exceptions.ListDataRecordLookUpException: ListDataRecordLookUpException(java.lang.String,int)
+com.arjunapro.ddt.exceptions.MapDataRecordLookUpException
+com.arjunapro.ddt.exceptions.MapDataRecordLookUpException: MapDataRecordLookUpException(java.lang.String)
 com.arjunapro.ddt.interfaces.DataRecord
 com.arjunapro.ddt.interfaces.DataRecord: com.arjunapro.testauto.interfaces.Value valueAt(int)
 com.arjunapro.ddt.interfaces.DataRecord: java.lang.String stringAt(int)
@@ -409,6 +425,10 @@ com.arjunapro.testauto.enums.ValueType: com.arjunapro.testauto.enums.ValueType N
 com.arjunapro.testauto.enums.ValueType: com.arjunapro.testauto.enums.ValueType[] $VALUES
 com.arjunapro.testauto.enums.ValueType: com.arjunapro.testauto.enums.ValueType[] values()
 com.arjunapro.testauto.enums.ValueType: com.arjunapro.testauto.enums.ValueType valueOf(java.lang.String)
+com.arjunapro.testauto.exceptions.Error
+com.arjunapro.testauto.exceptions.Error: Error(pvt.arjunapro.interfaces.Check)
+com.arjunapro.testauto.exceptions.Failure
+com.arjunapro.testauto.exceptions.Failure: Failure(pvt.arjunapro.interfaces.Check)
 com.arjunapro.testauto.interfaces.ReadOnlyStringKeyValueContainer
 com.arjunapro.testauto.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map items()
 com.arjunapro.testauto.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map items(java.util.List)
@@ -999,8 +1019,8 @@ pvt.batteries.config.Configuration
 pvt.batteries.configurator.lib.strings.NamedString
 pvt.batteries.configurator.lib.strings.NamedStringsContainer
 pvt.batteries.container.BaseContainer
-pvt.batteries.container.BaseContainer: java.lang.Object getValueForNonExistentKey()
-pvt.batteries.container.BaseContainer: java.lang.String getStrValueForNonExistentKey()
+pvt.batteries.container.BaseContainer: java.lang.Object getValueForNonExistentKey(java.lang.Object)
+pvt.batteries.container.BaseContainer: java.lang.String getStrValueForNonExistentKey(java.lang.Object)
 pvt.batteries.container.BaseContainer: void cloneAdd(java.util.Map)
 pvt.batteries.container.BaseContainer: void cloneAdd(java.lang.Object,java.lang.Object)
 pvt.batteries.container.BaseContainer: java.lang.Object formatKey(java.lang.Object)
@@ -1022,8 +1042,8 @@ pvt.batteries.container.BaseContainer: java.util.List strings()
 pvt.batteries.container.BaseContainer: java.util.List strings(java.util.List)
 pvt.batteries.container.BaseValueContainer
 pvt.batteries.container.BaseValueContainer: BaseValueContainer()
-pvt.batteries.container.BaseValueContainer: com.arjunapro.testauto.interfaces.Value getValueForNonExistentKey()
-pvt.batteries.container.BaseValueContainer: java.lang.String getStrValueForNonExistentKey()
+pvt.batteries.container.BaseValueContainer: com.arjunapro.testauto.interfaces.Value getValueForNonExistentKey(java.lang.Object)
+pvt.batteries.container.BaseValueContainer: java.lang.String getStrValueForNonExistentKey(java.lang.Object)
 pvt.batteries.container.BaseValueContainer: void addAsStringValue(java.util.Map)
 pvt.batteries.container.BaseValueContainer: void addAsStringValue(java.lang.Object,java.lang.String)
 pvt.batteries.container.BaseValueContainer: void cloneAdd(java.util.Map)
@@ -1041,7 +1061,7 @@ pvt.batteries.container.BaseValueContainer: com.arjunapro.testauto.enums.ValueTy
 pvt.batteries.container.BaseValueContainer: java.lang.Class valueEnumType(java.lang.String)
 pvt.batteries.container.BaseValueContainer: java.lang.Object key(java.lang.String)
 pvt.batteries.container.BaseValueContainer: void cloneAdd(java.lang.Object,java.lang.Object)
-pvt.batteries.container.BaseValueContainer: java.lang.Object getValueForNonExistentKey()
+pvt.batteries.container.BaseValueContainer: java.lang.Object getValueForNonExistentKey(java.lang.Object)
 pvt.batteries.container.Container
 pvt.batteries.container.EnumKeyValueContainer
 pvt.batteries.container.ReadOnlyContainer
@@ -1065,6 +1085,7 @@ pvt.batteries.datafilter.StringFilterFactory
 pvt.batteries.datafilter.SuffixFilter
 pvt.batteries.ddt.datarecord.BaseDataRecord
 pvt.batteries.ddt.datarecord.BaseDataRecord: BaseDataRecord()
+pvt.batteries.ddt.datarecord.BaseDataRecord: int maxIndex()
 pvt.batteries.ddt.datarecord.BaseDataRecord: void addWithoutKey(java.lang.Object)
 pvt.batteries.ddt.datarecord.BaseDataRecord: void addWithKey(java.lang.String,java.lang.Object)
 pvt.batteries.ddt.datarecord.BaseDataRecord: boolean hasIndex(int)
@@ -1102,6 +1123,17 @@ pvt.batteries.encrypt.BlowFishHandler
 pvt.batteries.encrypt.ZipArray
 pvt.batteries.encrypt.ZlibHandler
 pvt.batteries.exceptions.ArjunaException
+pvt.batteries.exceptions.ArjunaException: ArjunaException(java.lang.String)
+pvt.batteries.exceptions.ArjunaException: ArjunaException(java.lang.String,java.lang.String)
+pvt.batteries.exceptions.ArjunaException: ArjunaException(java.lang.String,java.lang.Throwable)
+pvt.batteries.exceptions.ArjunaException: ArjunaException(java.lang.String,java.lang.Throwable,java.lang.String)
+pvt.batteries.exceptions.ArjunaException: boolean containsScreenshot()
+pvt.batteries.exceptions.ArjunaException: java.lang.String getScreenshotPath()
+pvt.batteries.exceptions.ArjunaException: java.lang.String setScreenshotPath(java.lang.String)
+pvt.batteries.exceptions.ArjunaException: void insertChildThrowable(java.lang.Throwable)
+pvt.batteries.exceptions.ArjunaException: void appendChildThrowable(java.lang.Throwable)
+pvt.batteries.exceptions.ArjunaException: void extractChildThrowables(pvt.batteries.exceptions.ArjunaException)
+pvt.batteries.exceptions.ArjunaException: java.util.ArrayList getChildThrowables()
 pvt.batteries.exceptions.Problem
 pvt.batteries.filehandler.DirReaderFinishedException
 pvt.batteries.filehandler.ExcelFileLine2ArrayReader
@@ -1764,7 +1796,12 @@ pvt.unitee.testobject.lib.loader.tree.NonTestNode
 pvt.unitee.testobject.lib.loader.tree.TestMethodNode
 pvt.unitee.testobject.lib.loader.tree.TestNode
 pvt.unitee.validator.lib.check.DefaultCheck
-pvt.unitee.validator.lib.exceptions.Error
-pvt.unitee.validator.lib.exceptions.Failure
 pvt.unitee.validator.lib.exceptions.Pass
 pvt.unitee.validator.lib.exceptions.StepResultEvent
+pvt.unitee.validator.lib.exceptions.StepResultEvent: StepResultEvent(pvt.arjunapro.interfaces.Check)
+pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getMethodName()
+pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getClassName()
+pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getPurpose()
+pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getBenchmark()
+pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getActualObservation()
+pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getCheckText()

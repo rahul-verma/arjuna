@@ -208,7 +208,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 			
 			TestDefinitionsDB.registerTestClassDefinition(klass.getName(), classDef);
 		} catch (Throwable e) {
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 		
 	}

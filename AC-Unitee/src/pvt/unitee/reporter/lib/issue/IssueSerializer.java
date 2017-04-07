@@ -1,5 +1,6 @@
 package pvt.unitee.reporter.lib.issue;
 
+import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonObject;
 
 import pvt.unitee.reporter.lib.reportable.ResultSerializer;
@@ -12,7 +13,7 @@ public class IssueSerializer extends ResultSerializer<Issue> {
 			jsonObject.add("resultProps", serializeEnumKeyMap(result.resultProps().items()));
 		} catch (Exception e){
 			jsonObject.addProperty("rType", "Error in getting string representation");
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 	}	
 }

@@ -6,6 +6,8 @@ import java.util.zip.DataFormatException;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
+import pvt.batteries.utils.ExceptionBatteries;
+
 public class ZlibHandler {
 	private static int decompressFactor = 3;
 	
@@ -27,7 +29,7 @@ public class ZlibHandler {
          }
          catch(IOException ioe)
          {
-       	  	ioe.printStackTrace();
+        	 ExceptionBatteries.getStackTraceAsString(ioe);
          }
 		return new ZipArray(bos.toByteArray(), bos.size());
 	}
@@ -48,9 +50,9 @@ public class ZlibHandler {
 			decompresser.end();
 			
 		} catch (DataFormatException e) {
-			e.printStackTrace();
+			ExceptionBatteries.getStackTraceAsString(e);
 		} catch (IOException e) {
-			e.printStackTrace();
+			ExceptionBatteries.getStackTraceAsString(e);
 		}
 		return new String(baos.toByteArray());
 	}	

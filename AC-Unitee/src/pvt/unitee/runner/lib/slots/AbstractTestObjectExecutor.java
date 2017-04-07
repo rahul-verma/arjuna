@@ -7,6 +7,7 @@ import org.apache.log4j.Logger;
 
 import com.arjunapro.sysauto.batteries.ThreadBatteries;
 import com.arjunapro.testauto.config.RunConfig;
+import com.arjunapro.testauto.console.Console;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.unitee.testobject.lib.interfaces.TestObject;
@@ -25,7 +26,7 @@ public abstract class AbstractTestObjectExecutor {
 			testObj.setUp();
 
 		} catch (Throwable e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 	}
 
@@ -33,7 +34,7 @@ public abstract class AbstractTestObjectExecutor {
 		try{
 			testObj.tearDown();	
 		} catch (Throwable e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 	}
 
@@ -99,7 +100,7 @@ public abstract class AbstractTestObjectExecutor {
 				threads.add(t);
 			} catch (Exception e){
 				System.err.println("Critical Error: Exception occured while creating Test Slot Execution Thread.");
-				e.printStackTrace();
+				Console.displayExceptionBlock(e);
 				System.err.println("Exiting...");
 				System.exit(1);
 			}
@@ -109,7 +110,7 @@ public abstract class AbstractTestObjectExecutor {
 				tLaunched.join();
 			}	
 		} catch (InterruptedException e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 
 		for (String tName: threadNames){

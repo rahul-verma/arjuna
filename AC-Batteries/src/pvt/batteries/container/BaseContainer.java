@@ -11,9 +11,9 @@ public abstract class BaseContainer<T, V> implements ReadOnlyContainer<T, V>, Re
 	private Map<T, V> map = null;
 	private List<T> keys = null;
 
-	protected abstract V getValueForNonExistentKey();
+	protected abstract V getValueForNonExistentKey(T key) throws Exception;
 
-	protected abstract String getStrValueForNonExistentKey();
+	protected abstract String getStrValueForNonExistentKey(T key) throws Exception;
 
 	public abstract void cloneAdd(Map<T, V> map);
 
@@ -75,7 +75,7 @@ public abstract class BaseContainer<T, V> implements ReadOnlyContainer<T, V>, Re
 		if (this.map.containsKey(fKey)) {
 			return this.map.get(fKey);
 		} else {
-			return getValueForNonExistentKey();
+			return getValueForNonExistentKey(key);
 		}
 	}
 
@@ -85,7 +85,7 @@ public abstract class BaseContainer<T, V> implements ReadOnlyContainer<T, V>, Re
 		if (this.map.containsKey(fKey)) {
 			return this.map.get(fKey).toString();
 		} else {
-			return getStrValueForNonExistentKey();
+			return getStrValueForNonExistentKey(key);
 		}
 	}
 

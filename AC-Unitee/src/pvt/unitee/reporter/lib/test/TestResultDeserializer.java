@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
@@ -41,7 +42,7 @@ public class TestResultDeserializer extends ResultDeserializer<TestResult> imple
 			outResult.addStepResults(stepResults);
 						
 		} catch (Exception e){
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 
 		return outResult;		

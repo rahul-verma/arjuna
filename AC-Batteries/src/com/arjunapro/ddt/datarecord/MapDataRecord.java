@@ -21,6 +21,7 @@ package com.arjunapro.ddt.datarecord;
 import java.util.HashMap;
 import java.util.List;
 
+import com.arjunapro.ddt.exceptions.MapDataRecordLookUpException;
 import com.arjunapro.ddt.interfaces.DataRecord;
 import com.arjunapro.testauto.interfaces.Value;
 
@@ -59,6 +60,16 @@ public class MapDataRecord extends BaseDataRecord implements DataRecord {
 		for (String name : nvMap.keySet()) {
 			this.addWithKey(name, nvMap.get(name));
 		}
+	}	
+	
+	@Override
+	protected Value getValueForNonExistentKey(String key) throws Exception {
+		throw new MapDataRecordLookUpException(key);
+	}
+
+	@Override
+	protected String getStrValueForNonExistentKey(String key) throws Exception {
+		throw new MapDataRecordLookUpException(key);
 	}
 	
 	public boolean hasIndex(int index) throws Exception {

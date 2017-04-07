@@ -34,6 +34,7 @@ import pvt.batteries.config.Batteries;
 import pvt.batteries.discoverer.DiscoveredFile;
 import pvt.batteries.discoverer.DiscoveredFileAttribute;
 import pvt.batteries.discoverer.FileAggregator;
+import pvt.batteries.utils.ExceptionBatteries;
 
 public class JarClassDiscoverer {
 	public Logger logger = Logger.getLogger(Batteries.getCentralLogName());
@@ -79,7 +80,7 @@ public class JarClassDiscoverer {
 				c = cl.loadClass(className);
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				ExceptionBatteries.getStackTraceAsString(e1);
 			}
 			if (c != null) {
 				if (Batteries.logFileDiscoveryInfo) {

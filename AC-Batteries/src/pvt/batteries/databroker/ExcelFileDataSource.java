@@ -26,6 +26,7 @@ import com.arjunapro.ddt.interfaces.DataRecord;
 
 import pvt.batteries.ddt.datarecord.BaseDataSource;
 import pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
+import pvt.batteries.utils.ExceptionBatteries;
 
 public class ExcelFileDataSource extends BaseDataSource {
 	ExcelFileLine2ArrayReader reader = null;
@@ -50,7 +51,7 @@ public class ExcelFileDataSource extends BaseDataSource {
 		try {
 			dataRecord = reader.next();
 		} catch (Exception e) {
-			e.printStackTrace();
+			ExceptionBatteries.getStackTraceAsString(e);
 			throw new DataSourceFinishedException("Problem happened in reading. No further records would be provided.");
 		}
 

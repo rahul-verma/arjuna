@@ -3,6 +3,8 @@ package pvt.batteries.encrypt;
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
+import pvt.batteries.utils.ExceptionBatteries;
+
 public class BlowFishHandler {
 	private byte[] encKey = null;
 	//new byte [] {'T','h','i','s', 'i','s','a','t','e','s','t','e','d','k','e','y'};
@@ -26,7 +28,7 @@ public class BlowFishHandler {
 
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			ExceptionBatteries.getStackTraceAsString(e);
 			throw e;
 		}
 	}
@@ -46,7 +48,7 @@ public class BlowFishHandler {
 
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			ExceptionBatteries.getStackTraceAsString(e);
 			throw e;
 		}
 	}	

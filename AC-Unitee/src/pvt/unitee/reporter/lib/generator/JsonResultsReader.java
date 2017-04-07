@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
@@ -62,7 +63,7 @@ public abstract class JsonResultsReader{
 				}
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+				Console.displayExceptionBlock(e);
 			}
 		}			
 	}

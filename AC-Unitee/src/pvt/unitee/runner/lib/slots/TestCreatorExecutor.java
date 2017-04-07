@@ -3,6 +3,7 @@ package pvt.unitee.runner.lib.slots;
 import org.apache.log4j.Logger;
 
 import com.arjunapro.testauto.config.RunConfig;
+import com.arjunapro.testauto.console.Console;
 
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.TestResultCode;
@@ -75,7 +76,7 @@ public class TestCreatorExecutor extends AbstractTestObjectExecutor implements R
 				return;
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				Console.displayExceptionBlock(e1);
 			}
 
 		}

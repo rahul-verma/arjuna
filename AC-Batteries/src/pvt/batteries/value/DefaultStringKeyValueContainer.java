@@ -1,5 +1,6 @@
 package pvt.batteries.value;
 
+import com.arjunapro.testauto.console.Console;
 import com.arjunapro.testauto.enums.ValueType;
 import com.arjunapro.testauto.interfaces.StringKeyValueContainer;
 
@@ -36,7 +37,7 @@ public class DefaultStringKeyValueContainer extends BaseValueContainer<String> i
 		try {
 			map.cloneAdd(this.items());
 		} catch (Exception e) {
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 		}
 		return map;
 	}

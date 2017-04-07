@@ -23,6 +23,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import com.arjunapro.testauto.console.Console;
+
+import pvt.batteries.utils.ExceptionBatteries;
+
 public class FileLineReader {
 	Scanner reader = null;
 
@@ -57,7 +61,7 @@ public class FileLineReader {
 			return al;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			Console.displayExceptionBlock(e);
 			return null;
 		}
 	}

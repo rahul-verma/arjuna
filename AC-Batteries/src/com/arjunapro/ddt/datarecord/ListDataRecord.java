@@ -21,6 +21,9 @@ package com.arjunapro.ddt.datarecord;
 import java.util.List;
 import java.util.Map;
 
+import com.arjunapro.ddt.exceptions.EmptyListDataRecordLookUpException;
+import com.arjunapro.ddt.exceptions.ListDataRecordLookUpException;
+import com.arjunapro.ddt.exceptions.MapDataRecordLookUpException;
 import com.arjunapro.ddt.interfaces.DataRecord;
 import com.arjunapro.testauto.interfaces.Value;
 
@@ -61,5 +64,25 @@ public class ListDataRecord extends BaseDataRecord implements ReadOnlyContainer<
 
 	public boolean hasKey(String key) throws Exception{
 		throw new Exception("hasKey() method is not supported for List Data Record.");			
+	}
+	
+	
+	@Override
+	protected Value getValueForNonExistentKey(String key) throws Exception {
+		if (maxIndex() == -1){
+			throw new EmptyListDataRecordLookUpException(key);			
+		} else {
+			throw new ListDataRecordLookUpException(key, maxIndex());			
+		}
+	}
+
+	@Override
+	protected String getStrValueForNonExistentKey(String key) throws Exception {
+		if (maxIndex() == -1){
+			throw new EmptyListDataRecordLookUpException(key);			
+		} else {
+			throw new ListDataRecordLookUpException(key, maxIndex());			
+		}
+		
 	}
 }
