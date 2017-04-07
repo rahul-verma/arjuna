@@ -1230,6 +1230,7 @@ pvt.batteries.value.StringListValue
 pvt.batteries.value.StringValue
 pvt.batteries.value.UnsupportedRepresentationException
 pvt.batteries.value.ValueFactory
+pvt.batteries.webserver.BaseServer
 pvt.license.LicenseChecker
 pvt.selenium.api.WDMediator
 pvt.selenium.lib.base.DefaultSeleniumMediator
