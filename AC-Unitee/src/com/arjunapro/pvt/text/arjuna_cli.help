@@ -1,11 +1,9 @@
-RUN USING
----------
-    On Windows:		unitee.bat
-    On Mac/Linux/*nix:	unitee.sh
-    
+---------------------------------------------------------------------------------------------------
+Command Line Interface
+
 SYNOPSIS
 --------
-    unitee.(bat | sh)  [OPTIONS]
+    %%slugShell [OPTIONS]
     
 ---------------------------------------------------------------------------------------------------
     
@@ -92,24 +90,23 @@ GET INFORMATION ABOUT ARJUNA:
 
 EXAMPLES
 --------
-(Use arjuna.sh on non-Windows OS)
 
-    arjuna.bat
-            Runs all the tests in the Java Project in /autocognite-arjuna-pro/mproject/tests 
+    %%slugShell
+            Runs all the tests in the Java Project in %%slugMProjectTests 
             directory and generates MINIMAL report.
 		
-    arjuna.bat -d /usr/project/ -rm BASIC
-            Runs all the tests in /usr/project/ directory and generates report in BASIC mode.
+    %%slugShell -d %%slugUserProjectTests -rm BASIC
+            Runs all the tests in %%slugUserProjectTests directory and generates report in BASIC mode.
 		
-    arjuna.bat -cp a.b.c,a.b.d
+    %%slugShell -cp a.b.c,a.b.d
             Runs all the tests in the two packages.
 		
-    arjuna.bat -ip a.b.* -runid beta2-run
+    %%slugShell -ip a.b.* -runid beta2-run
             Runs all tests in the project and ignore the test in packages that matched with 
             regex, labeled with run id as "beta2-run". The reports are generated under 
-            /report/<timestamp>-beta2-run directory
+            <Project Dir>/report/<timestamp>-beta2-run directory
 		
-    arjuna.bat -pn a.b -cn Test1 -dl ERROR
+    %%slugShell -pn a.b -cn Test1 -dl ERROR
             Runs all tests in Test1 class and display ERROR & FATAL level log messages.
 		
 ---------------------------------------------------------------------------------------------------

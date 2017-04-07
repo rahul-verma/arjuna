@@ -131,6 +131,7 @@ public class JavaTestClassDefinition {
 		this.testVars.rawObjectProps().setClass(klass.getSimpleName());
 		this.testVars.rawObjectProps().setName(klass.getSimpleName());
 		
+		this.testVars.rawTestProps().setPriority(1);
 		TestPropertyAnnotationsProcessor.populateTestProps(this, this.testVars);
 	}
 

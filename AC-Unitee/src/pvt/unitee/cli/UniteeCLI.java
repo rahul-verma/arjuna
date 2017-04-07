@@ -21,6 +21,8 @@ package pvt.unitee.cli;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+import org.apache.commons.lang3.SystemUtils;
+
 import com.arjunapro.testauto.console.Console;
 
 import pvt.batteries.cli.AbstractCLI;
@@ -120,10 +122,24 @@ public class UniteeCLI extends AbstractCLI {
 
 	@Override
 	public void help() throws Exception {
+		String shell = null;
+		String mproject = null;
+		String userProject = null;
+		
+		if (SystemUtils.IS_OS_WINDOWS){
+			shell = "arjunapro.bat";
+			mproject = "autocognite-arjuna-pro\\mproject\\tests";
+			userProject = "C:\\\\some\\dir\\projectname\\tests";
+		} else {
+			shell = "./arjunapro.sh";
+			mproject = "/autocognite-arjuna-pro/mproject/tests";
+			userProject = "/usr/some/dir/projectname/tests";			
+		}
+		
 		BufferedReader txtReader = new BufferedReader(new InputStreamReader(UniteeCLI.class.getResourceAsStream("/com/arjunapro/pvt/text/arjuna_cli.help")));
 		String line = null;
 		while ((line = txtReader.readLine()) != null) {
-			Console.displayError(line);
+			Console.display(line.replace("%%slugShell", shell).replace("%%slugMProjectTests", mproject).replace("%%slugUserProjectTests", userProject));
 		}
 		txtReader.close();
 //		super.help("unitee.sh OR unitee.bat\r\n\r\n");

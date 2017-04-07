@@ -24,6 +24,8 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
+import com.arjunapro.sysauto.batteries.FileSystemBatteries;
+import com.arjunapro.sysauto.batteries.SystemBatteries;
 import com.arjunapro.sysauto.batteries.ThreadBatteries;
 import com.arjunapro.testauto.console.Console;
 
@@ -174,7 +176,20 @@ public class ArjunaTestEngine implements TestEngine{
 			if (f.isDirectory()){
 				String targetPath = getArchivesDir() + "/" + f.getName();
 				File targetDir = new File(targetPath);
-				FileUtils.moveDirectory(f, targetDir);
+				try{
+					FileUtils.moveDirectory(f, targetDir);
+				} catch (Throwable e){
+					Console.displayError("Arjuna archives previous run's report contents at beginning of new run.");
+					Console.displayError("Arjuna faced a critical issue in archving contents of report directory.");
+					Console.displayError("Please close any files that you have opened from the report directory and execute the run again.");
+					Console.displayError("Now Arjuna would attempt to delete any partial archive created and exit.");
+					try{
+						FileSystemBatteries.deleteDirectory(targetPath);
+					} catch (Throwable g){
+						
+					}
+					SystemBatteries.exit();
+				}
 			}
 		}
 	}
