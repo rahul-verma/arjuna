@@ -234,7 +234,11 @@ abstract class ExcelResultWriter<T>{
 		for (int i = 0; i < values.size(); i++) {
 			HSSFCell cell = excelRow.createCell(i);
 			cell.setCellType(HSSFCell.CELL_TYPE_STRING);
-			cell.setCellValue(values.get(i));
+			if (values.get(i).length() < 32767){
+				cell.setCellValue(values.get(i));
+			} else {
+				cell.setCellValue("!!EXCEL LIMIT FOR CELL EXCCEEDED. Ignoring content of this cell.!!!");
+			}
 			if (!headerRow) {
 				if (i == lastColumnNumber) {
 					cell.setCellStyle(lastCellStyle);
@@ -363,6 +367,11 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 					cb.append(String.format("[%s] %s%s", k, cmap.get(k).asString(), SystemBatteries.getLineSeparator()));
 				}
 			}
+			
+			String cbString = cb.toString();
+			if (cbString.length() > 32766){
+				cbString = ("TOO_LENGTHY_FOR_EXCEL_CELL");
+			}
 			resultArr.add(cb.toString());
 		}
 		
@@ -376,7 +385,13 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 					ub.append(String.format("[%s] %s%s", k, umap.get(k).asString(), SystemBatteries.getLineSeparator()));
 				}
 			}
-			resultArr.add(ub.toString());
+			
+			String ubString = ub.toString();
+			if (ubString.length() > 32766){
+				ubString = ("TOO_LENGTHY_FOR_EXCEL_CELL");
+			}
+			
+			resultArr.add(ubString);
 		}
 		
 		if (this.shouldIncludeDataRecord){
@@ -397,7 +412,13 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 			} else {
 				ub.append("NA");
 			}
-			resultArr.add(ub.toString());
+			
+			String ubString = ub.toString();
+			if (ubString.length() > 32766){
+				ubString = ("TOO_LENGTHY_FOR_EXCEL_CELL");
+			}
+			
+			resultArr.add(ubString);
 		}
 		
 		writeData(resultArr);

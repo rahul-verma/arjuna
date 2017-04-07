@@ -16,14 +16,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.unitee.validator.lib.exceptions;
+package com.arjunapro.testauto.exceptions;
 
 import pvt.arjunapro.interfaces.Check;
+import pvt.unitee.validator.lib.exceptions.StepResultEvent;
 
-public class Failure extends StepResultEvent {
-	private static final long serialVersionUID = 1102796489599386194L;
-
-	public Failure(Check check) {
+public class Error extends StepResultEvent {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3029394135447054950L;
+	
+	public Error(Check check) {
 		super(check);
 	}
 

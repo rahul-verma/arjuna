@@ -18,9 +18,10 @@
  ******************************************************************************/
 package pvt.unitee.validator.lib.check;
 
+import com.arjunapro.testauto.exceptions.Error;
+import com.arjunapro.testauto.exceptions.Failure;
+
 import pvt.arjunapro.interfaces.Check;
-import pvt.unitee.validator.lib.exceptions.Error;
-import pvt.unitee.validator.lib.exceptions.Failure;
 
 public class DefaultCheck implements Check {
 	private String methodName = "NOT_SET";
@@ -95,7 +96,11 @@ public class DefaultCheck implements Check {
 	 */
 	@Override
 	public void setBenchmark(String benchmark) {
-		this.benchmark = benchmark;
+		if ((benchmark != null) && (benchmark.length() > 25000)){
+			this.benchmark = "BENCHMARK_EXCEEDS_25000CHARRS";
+		} else {
+			this.benchmark = benchmark;
+		}
 	}
 	/* (non-Javadoc)
 	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#getActualObservation()
@@ -109,7 +114,11 @@ public class DefaultCheck implements Check {
 	 */
 	@Override
 	public void setActualObservation(String actual) {
-		this.actual = actual;
+		if ((actual != null) && (actual.length() > 25000)){
+			this.actual = "ACTUAL_EXCEEDS_25000CHARRS";
+		} else {
+			this.actual = actual;
+		}
 	}
 	/* (non-Javadoc)
 	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#getText()
@@ -123,7 +132,11 @@ public class DefaultCheck implements Check {
 	 */
 	@Override
 	public void setText(String assertion) {
-		this.assertion = assertion;
+		if ((assertion != null) && (assertion.length() > 25000)){
+			this.assertion = "TEXT_EXCEEDS_25000CHARRS";
+		} else {
+			this.assertion = assertion;
+		}
 	}
 	
 	/* (non-Javadoc)
@@ -206,6 +219,10 @@ public class DefaultCheck implements Check {
 	 */
 	@Override
 	public void setExceptionMessage(String message) {
-		this.message  = message;
+		if ((message != null) && (message.length() > 25000)){
+			this.message = "MESSAGE_EXCEEDS_25000CHARRS";
+		} else {
+			this.message  = message;
+		}
 	}
 }

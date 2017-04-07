@@ -48,7 +48,11 @@ public class IssueBuilder {
 	}	
 
 	public IssueBuilder trace(String trace) throws Exception {
-		this.resultProps.add(IssueAttribute.ETRACE, new StringValue(trace));
+		if ((trace != null) && (trace.length() > 25000)){
+			this.resultProps.add(IssueAttribute.ETRACE, new StringValue("TRACE_EXCEEDS_25000CHARRS"));
+		} else {
+			this.resultProps.add(IssueAttribute.ETRACE, new StringValue(trace));
+		}
 		return this;
 	}
 	

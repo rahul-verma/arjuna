@@ -5,6 +5,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
+import com.arjunapro.testauto.exceptions.Error;
+import com.arjunapro.testauto.exceptions.Failure;
+
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.enums.IssueSubType;
 import pvt.arjunapro.enums.IssueType;
@@ -16,8 +19,6 @@ import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.reporter.lib.step.StepResult;
 import pvt.unitee.reporter.lib.step.StepResultBuilder;
 import pvt.unitee.testobject.lib.interfaces.Test;
-import pvt.unitee.validator.lib.exceptions.Error;
-import pvt.unitee.validator.lib.exceptions.Failure;
 
 public class ThreadState {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
