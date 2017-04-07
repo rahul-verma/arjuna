@@ -17,8 +17,7 @@ public abstract class BaseWebServer implements ArjunaWebServer {
 		this.setServer(new Server(port));
 		ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
 		context.setContextPath("/static/root");
-		System.out.println(BaseWebServer.class.getClassLoader().getResource("/com/arjunapro/pvt/resources"));
-		context.setResourceBase(BaseWebServer.class.getClassLoader().getResource("/com/arjunapro/pvt/resources").toExternalForm());
+		context.setResourceBase(BaseWebServer.class.getClassLoader().getResource("com/arjunapro/pvt/resources").toExternalForm());
 		context.addServlet(DefaultServlet.class, "/");
 		this.handlers.addAll(this.getHandlers());
 		this.registerHandlers(handlers);
