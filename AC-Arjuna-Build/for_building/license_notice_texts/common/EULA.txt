@@ -1,6 +1,6 @@
 AUTOCOGNITE ARJUNA PRO ON-PREMISES END USER LICENSE AGREEMENT
 
-Current Version 06-04-2017
+Current Version 08-04-2017
 
 This license agreement (EULA) is a legal agreement between you (End User or Licensee or You or Your) and AutoCognite Testing Research Pvt Ltd of PSS Pinnacle, Bhoomi Reddy Colony, New Thippasandra, Bangalore, India - 560075 (Licensor or AutoCognite or IP Owner  or We or Us or Our) for access and usage (License) of one or more editions of AutoCognite Arjuna Pro - a test automation framework designed for test engineers (Licensed Software Edition), including the online documentation and demonstration example software and code made available by Licensor in any medium, current at the date of the download of Licensed Software (Documentation), collectively called Licensed Software. “On-Premises” means that the Licensed Software must be installed on a server, desktop, virtual machine or container on site at Your premises; all Licensed Software licensed under the terms of this EULA is for On-Premises deployments only.
 
@@ -185,9 +185,9 @@ The Ejusdem Generis rule should not be used in the interpretation of this EULA.
 
 7.2.7 Notwithstanding clause 7.2.6, Licensor’s decision about Fixing Priority Label for an Error would be final.
 
-7.3 Updates. Update means a subsequent release of the Licensed Software which is generally made available, which consists of minor technical or functional additions, modifications or bug fixes to the Licensed Software, released as minor version identified by new digits to the right of the first decimal point (e.g., version 1.2 as an Update to version 1.1). Updates do not include any upgrade or any other release, option or future product which Licensor licenses separately.
+7.3 Updates. Update means a subsequent release of the Licensed Software which is generally made available, which consists of minor technical or functional additions, modifications or bug fixes to the Licensed Software, released as minor version identified by new digits to the right of the second decimal point (e.g., version 1.2.1 as an Update to version 1.2.0). Updates do not include any upgrade or any other release, option or future product which Licensor licenses separately.
 
-7.4 Upgrades. Upgrade means a subsequent release of the Licensed Software which includes a major functional enhancement of the Licensed Software and which is identified by new digits before the first decimal point (e.g., version 2.0 as an Upgrade to version 1.2).
+7.4 Upgrades. Upgrade means a subsequent release of the Licensed Software which includes a major functional enhancement of the Licensed Software and which is identified by new digits to the left or to the right of the first decimal point (e.g., version 1.3 or version 2.0 as an Upgrade to version 1.2).
 
 7.5 The features in the Licensed Software may change when Updates and Upgrades are made. If the Licensed Software is an Upgrade or Update to a previous version of the Licensed Software, You must possess an Active License to such previous version in order to use such Upgrade or Update. 
 
@@ -454,5 +454,4 @@ This EULA, its subject matter or its formation (including non-contractual disput
 
 This EULA shall be subject to the exclusive jurisdiction of courts in Bangalore.
 
-Updated on 06 April  2017
-
+Updated on 08 April 2017

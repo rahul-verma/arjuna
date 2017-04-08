@@ -61,7 +61,7 @@ import pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.1a3";
+	private String version = "0.1.4-alpha";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
