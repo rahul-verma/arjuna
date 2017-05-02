@@ -1,4 +1,4 @@
-Note: UniTEE supports HOCON syntax for group templates. Equivalent JSON is fine too.
+Note: Arjuna supports HOCON syntax for group templates. Equivalent JSON is fine too.
 
 Valid Package Picker JSON formats
 #################################

@@ -2,6 +2,8 @@ package pvt.batteries.sqlite;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -23,10 +25,10 @@ public class SqliteFileDB {
 		// To Do
 	}
 
-	public void execute(String sql) throws SQLException{
-		Statement stmt = conn.createStatement();
-	      stmt.executeUpdate(sql);
-	      stmt.close();
+	public ResultSet select(String sql) throws SQLException{
+		PreparedStatement pstmt  = conn.prepareStatement(sql);
+		ResultSet rs  = pstmt.executeQuery();
+		return rs;
 	}
 				
 	public void commit() throws SQLException{

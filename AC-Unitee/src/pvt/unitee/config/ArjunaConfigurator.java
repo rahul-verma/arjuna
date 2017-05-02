@@ -419,10 +419,10 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 					handleStringConfig(propPath, cValue, "Report Name Format", false);
 					break;
 				case REPORT_GENERATORS_BUILTIN:
-					handleReportGenFormat(propPath, cValue, "Chosen Built-in Report Generators", false);
+					handleReportGenFormat(propPath, cValue, "Chosen Built-in Report Generators", true);
 					break;
 				case REPORT_LISTENERS_BUILTIN:
-					handleReportListenerFormat(propPath, cValue, "Chosen Built-in Report Listeners", false);
+					handleReportListenerFormat(propPath, cValue, "Chosen Built-in Report Listeners", true);
 					break;
 				default:
 					break;
