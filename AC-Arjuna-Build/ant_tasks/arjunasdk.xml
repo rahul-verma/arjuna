@@ -12,7 +12,7 @@ simple example build file
 
 	<property name="arjunasdk.build_version" value="${autocognite.build.version}" />
 	<property name="arjunasdk.proj.name" value="AC-Arjuna-SDK" />
-	<property name="arjunasdk.name" value="autocognite-arjuna-pro-startup-edition" />
+	<property name="arjunasdk.name" value="autocognite-arjuna-sdk" />
 	<property name="arjunasdk.github.rep.name" value="arjuna" />
 	<property name="root.arjunasdk.dir" value="${all.sources.dir}/${arjunasdk.github.rep.name}" />
 	<property name="proj.arjunasdk.dir" value="${root.arjunasdk.dir}/${arjunasdk.proj.name}" />
@@ -28,7 +28,7 @@ simple example build file
 	<property name="ant.arjunasdk.jar.dir" location="${ant.arjunasdk.root.dir}/jar" />
 	<property name="ant.arjunasdk.jar.file" value="${ant.arjunasdk.jar.dir}/${arjunasdk.jar.file.name}.jar" />
 	
-	<property name="private.arjunasdk.jars.dir" value="${current.dist.private.dir}/arjuna_jars/arjuna-startup" />
+	<property name="private.arjunasdk.jars.dir" value="${current.dist.private.dir}/arjuna_jars/arjuna-sdk" />
 	<property name="private.arjunasdk.self.jar.dir" value="${private.arjunasdk.jars.dir}/self" />
 	<property name="private.arjunasdk.self.jar.file" value="${private.arjunasdk.self.jar.dir}/${arjunasdk.jar.file.name}" />
 	<property name="private.arjunasdk.clear.jar.dir" value="${private.arjunasdk.jars.dir}/open" />
@@ -37,7 +37,7 @@ simple example build file
 	<property name="private.arjunasdk.obfuscated.jar.file" value="${private.arjunasdk.obfuscated.jar.dir}/obfuscated_${arjunasdk.jar.file.name}" />
 
 	<property name="private.arjunasdk.dist.tools.dir" value="${current.dist.private.tools.dir}/${arjunasdk.name}-dist" />
-	<property name="private.arjunasdk.dist.tools.root.dir" value="${private.arjunasdk.dist.tools.dir}/arjuna-pro" />
+	<property name="private.arjunasdk.dist.tools.root.dir" value="${private.arjunasdk.dist.tools.dir}/arjuna-sdk" />
 	<property name="private.arjunasdk.dist.tools.jar.dir" value="${private.arjunasdk.dist.tools.root.dir}/bin/lib/java" />
 	<property name="private.arjunasdk.dist.tools.jar.file" value="${private.arjunasdk.dist.tools.jar.dir}/${arjunasdk.full.jar.file.name}" />
 	<property name="private.arjunasdk.dist.jar.file" value="${current.dist.private.jars.dir}/${arjunasdk.full.jar.file.name}" />

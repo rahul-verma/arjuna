@@ -11,7 +11,8 @@ simple example build file
 	<!-- ======================================================================================== -->
 
 	<property name="arjunafree.build_version" value="${autocognite.build.version}" />
-	<property name="arjunafree.proj.name" value="AC-Arjuna" />
+	<!-- The name of AC-Arjuna is still AC-Arjuna-Startup in the Github repository-->
+	<property name="arjunafree.proj.name" value="AC-Arjuna-Startup" />
 	<property name="arjunafree.name" value="autocognite-arjuna" />
 	<property name="arjunafree.github.rep.name" value="arjuna" />
 	<property name="root.arjunafree.dir" value="${all.sources.dir}/${arjunafree.github.rep.name}" />
@@ -28,7 +29,7 @@ simple example build file
 	<property name="ant.arjunafree.jar.dir" location="${ant.arjunafree.root.dir}/jar" />
 	<property name="ant.arjunafree.jar.file" value="${ant.arjunafree.jar.dir}/${arjunafree.jar.file.name}.jar" />
 	
-	<property name="private.arjunafree.jars.dir" value="${current.dist.private.dir}/arjuna_jars/arjuna-startup" />
+	<property name="private.arjunafree.jars.dir" value="${current.dist.private.dir}/arjuna_jars/arjuna" />
 	<property name="private.arjunafree.self.jar.dir" value="${private.arjunafree.jars.dir}/self" />
 	<property name="private.arjunafree.self.jar.file" value="${private.arjunafree.self.jar.dir}/${arjunafree.jar.file.name}" />
 	<property name="private.arjunafree.clear.jar.dir" value="${private.arjunafree.jars.dir}/open" />
@@ -37,7 +38,7 @@ simple example build file
 	<property name="private.arjunafree.obfuscated.jar.file" value="${private.arjunafree.obfuscated.jar.dir}/obfuscated_${arjunafree.jar.file.name}" />
 
 	<property name="private.arjunafree.dist.tools.dir" value="${current.dist.private.tools.dir}/${arjunafree.name}-dist" />
-	<property name="private.arjunafree.dist.tools.root.dir" value="${private.arjunafree.dist.tools.dir}/arjuna-pro" />
+	<property name="private.arjunafree.dist.tools.root.dir" value="${private.arjunafree.dist.tools.dir}/arjuna" />
 	<property name="private.arjunafree.dist.tools.jar.dir" value="${private.arjunafree.dist.tools.root.dir}/bin/lib/java" />
 	<property name="private.arjunafree.dist.tools.jar.file" value="${private.arjunafree.dist.tools.jar.dir}/${arjunafree.full.jar.file.name}" />
 	<property name="private.arjunafree.dist.jar.file" value="${current.dist.private.jars.dir}/${arjunafree.full.jar.file.name}" />

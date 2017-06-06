@@ -1,4 +1,4 @@
-AutoCognite Arjuna Pro Platform Edition
+AutoCognite Arjuna SDK
 Copyright 2015-17 AutoCognite Testing Research Pvt Ltd
 Product Website: www.ArjunaPro.com
 Email: support@arjunapro.com
@@ -7,9 +7,9 @@ This Software includes software developed by
 AutoCognite Testing Research Pvt Ltd
 (Company Website: http://www.autocognite.com, Company Email: sales@autocognite.com)
 
-AutoCognite Arjuna Pro Platform Edition, is hereinafter referred to as "Software" or "Arjuna Pro".
+AutoCognite Arjuna SDK, is hereinafter referred to as "Software" or "Arjuna".
 
-Access and use of Software is governed by AutoCognite Arjuna Pro End User License Agreement.
+Access and use of Software is governed by AUTOCOGNITE ARJUNA ON-PREMISES END USER LICENSE AGREEMENT.
 
 Information on Inclusion of Third Party Software
 ------------------------------------------------
@@ -27,7 +27,7 @@ Apache Commons CLI
 ------------------
 Source Link: http://commons.apache.org/proper/commons-cli/
 
-Arjuna Pro includes Apache Commons CLI, which contains the following license and notice:
+Arjuna includes Apache Commons CLI, which contains the following license and notice:
 
 Apache Commons CLI
 Copyright 2001-2015 The Apache Software Foundation
@@ -47,7 +47,7 @@ Apache Commons Codec
 --------------------
 Source Link: https://commons.apache.org/proper/commons-codec/
 
-Arjuna Pro includes Apache Commons Codec, which contains the following license and notice:
+Arjuna includes Apache Commons Codec, which contains the following license and notice:
 
 Apache Commons Codec
 Copyright 2002-2016 The Apache Software Foundation
@@ -77,7 +77,7 @@ Apache Commons IO
 -----------------
 Source Link: http://commons.apache.org/proper/commons-io/
 
-Arjuna Pro includes Apache Commons IO, which contains the following license and notice:
+Arjuna includes Apache Commons IO, which contains the following license and notice:
 
 Apache Commons IO
 Copyright 2002-2014 The Apache Software Foundation
@@ -97,7 +97,7 @@ Apache Commons Lang
 -------------------
 Source Link: http://commons.apache.org/proper/commons-lang/
 
-Arjuna Pro includes Apache Commons Lang, which contains the following license and notice:
+Arjuna includes Apache Commons Lang, which contains the following license and notice:
 
 Apache Commons Lang
 Copyright 2001-2015 The Apache Software Foundation
@@ -120,7 +120,7 @@ Apache Commons Validator
 ------------------------
 Source Link: http://commons.apache.org/proper/commons-validator/
 
-Arjuna Pro includes Apache Commons IO, which contains the following license and notice:
+Arjuna includes Apache Commons IO, which contains the following license and notice:
 
 Apache Commons Validator
 Copyright 2001-2015 The Apache Software Foundation
@@ -140,7 +140,7 @@ Apache log4j
 ------------
 Source Link: http://logging.apache.org/log4j/1.2/
 
-Arjuna Pro includes Apache log4j, which contains the following license and notice:
+Arjuna includes Apache log4j, which contains the following license and notice:
 
 Apache log4j
 Copyright 2010 The Apache Software Foundation
@@ -159,7 +159,7 @@ A copy of full license text for this library can be found in Software distributi
 Apache POI
 ----------
 Source Link: http://poi.apache.org/
-Arjuna Pro includes Apache POI, which contains the following license and notice:
+Arjuna includes Apache POI, which contains the following license and notice:
 
 Apache POI
 Copyright 2003-2015 The Apache Software Foundation
@@ -198,7 +198,7 @@ Google gson
 
 Source Link:  https://github.com/google/gson
 
-Arjuna Pro includes Java Native Access (JNA), which contains the following license and notice:
+Arjuna includes Java Native Access (JNA), which contains the following license and notice:
 
 Copyright 2008 Google Inc.
 
@@ -220,7 +220,7 @@ A copy of full license text for this library can be found in Software distributi
 ---------------------
 Source Link: http://sourceforge.net/projects/ini4j/
 
-Arjuna Pro includes [ini4j], which contains the following license and notice:
+Arjuna includes [ini4j], which contains the following license and notice:
 
 [ini4j]
 Copyright 2005,2009 Ivan SZKIBA
@@ -244,7 +244,7 @@ Java Native Access (JNA)
 
 Source Link: https://github.com/java-native-access
 
-Arjuna Pro includes Java Native Access (JNA), which contains the following license and notice:
+Arjuna includes Java Native Access (JNA), which contains the following license and notice:
 
 Java Native Access (JNA)
 
@@ -267,7 +267,7 @@ SQLite JDBC
 
 Source Link:  https://github.com/xerial/sqlite-jdbc
 
-Arjuna Pro includes SQLite JDBC, which contains the following license and notice:
+Arjuna includes SQLite JDBC, which contains the following license and notice:
 
 Copyright  Taro L. Saito
 
@@ -321,7 +321,7 @@ Typesafe Config
 
 Source Link: https://github.com/typesafehub/config
 
-Arjuna Pro includes Typesafe Config, which contains the following license and notice:
+Arjuna includes Typesafe Config, which contains the following license and notice:
 
 Typesafe Config
 

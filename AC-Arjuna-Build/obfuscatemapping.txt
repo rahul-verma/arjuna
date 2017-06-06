@@ -168,6 +168,9 @@ com.arjunapro.sysauto.batteries.FileSystemBatteries -> com.arjunapro.sysauto.bat
     185:186:java.io.File moveFileToDir(java.lang.String,java.lang.String) -> moveFileToDir
     191:193:java.io.File createEmptyFile(java.lang.String) -> createEmptyFile
     197:197:java.lang.String getExtension(java.lang.String) -> getExtension
+com.arjunapro.sysauto.batteries.JsonBatteries -> com.arjunapro.sysauto.batteries.JsonBatteries:
+    7:7:void <init>() -> <init>
+    10:11:com.google.gson.JsonObject strToJsonObject(java.lang.String) -> strToJsonObject
 com.arjunapro.sysauto.batteries.MathBatteries -> com.arjunapro.sysauto.batteries.MathBatteries:
     21:21:void <init>() -> <init>
     24:27:int min(int,int) -> min
@@ -4215,11 +4218,11 @@ pvt.batteries.root.Root -> com.arjunapro.pvt.fl:
     java.lang.String getClassName() -> e
 pvt.batteries.sqlite.SqliteFileDB -> com.arjunapro.pvt.fm:
     java.sql.Connection conn -> a
-    9:20:void <init>(java.lang.String) -> <init>
-    24:24:void dropTable$552c4e01() -> a
-    27:30:void execute(java.lang.String) -> a
-    33:34:void commit() -> b
-    37:38:void close() -> c
+    11:22:void <init>(java.lang.String) -> <init>
+    26:26:void dropTable$552c4e01() -> a
+    29:31:java.sql.ResultSet select(java.lang.String) -> a
+    35:36:void commit() -> b
+    39:40:void close() -> c
 pvt.batteries.threads.ConsumerThread -> com.arjunapro.pvt.fn:
     java.util.concurrent.BlockingQueue sharedQueue -> a
     int threadNumber -> b

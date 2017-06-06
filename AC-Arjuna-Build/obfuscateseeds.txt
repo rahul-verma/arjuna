@@ -155,6 +155,9 @@ com.arjunapro.sysauto.batteries.FileSystemBatteries: java.io.File moveFiletoDir(
 com.arjunapro.sysauto.batteries.FileSystemBatteries: java.io.File moveFileToDir(java.lang.String,java.lang.String)
 com.arjunapro.sysauto.batteries.FileSystemBatteries: java.io.File createEmptyFile(java.lang.String)
 com.arjunapro.sysauto.batteries.FileSystemBatteries: java.lang.String getExtension(java.lang.String)
+com.arjunapro.sysauto.batteries.JsonBatteries
+com.arjunapro.sysauto.batteries.JsonBatteries: JsonBatteries()
+com.arjunapro.sysauto.batteries.JsonBatteries: com.google.gson.JsonObject strToJsonObject(java.lang.String)
 com.arjunapro.sysauto.batteries.MathBatteries
 com.arjunapro.sysauto.batteries.MathBatteries: MathBatteries()
 com.arjunapro.sysauto.batteries.MathBatteries: int min(int,int)
