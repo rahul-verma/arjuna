@@ -15,7 +15,7 @@ simple example build file
 	</property>
 	<property name="3rd_party_uiauto_jars" location="/Users/rahulverma/Documents/Dropbox/_jars/uiauto_jars"/>
 
-	<property name="autocognite.build.version" value="0.1.4-alpha" />
+	<property name="autocognite.build.version" value="0.2.1-alpha" />
 
 	<property name="autocognite.dir" value="/Users/rahulverma/Documents/_autocognite" />
 	<property name="all.sources.dir" location="/Users/rahulverma/Documents/coding_workbench/eclipse_java_ws_rep_clone" />

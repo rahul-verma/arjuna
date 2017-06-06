@@ -4,8 +4,8 @@
 	<import file="./ant_tasks/batteries.xml"/>
 	<import file="./ant_tasks/unitee.xml"/>
 	<import file="./ant_tasks/uiautomator.xml"/>
-	<import file="./ant_tasks/arjuna-pro-platform.xml"/>
-	<import file="./ant_tasks/arjuna-pro-startup.xml"/>
+	<import file="./ant_tasks/arjunasdk.xml"/>
+	<import file="./ant_tasks/arjunafree.xml"/>
 	<import file="./ant_tasks/obfuscate.xml"/>
 	<description>
 simple example build file
@@ -33,35 +33,35 @@ simple example build file
 	    	<target name="uiautomator.core_build"/>
 	   	</antcall>
 		
-		<antcall target="arjunaplatform_mkdirs">
-				<param name="ed" value="platform"/>
+		<antcall target="arjunasdk_mkdirs">
+				<param name="ed" value="sdk"/>
 	   	</antcall>
 			
-		<antcall target="arjunastartup_mkdirs">
-				<param name="ed" value="startup"/>
+		<antcall target="arjunafree_mkdirs">
+				<param name="ed" value="free"/>
 	   	</antcall>
 			
-		<antcall target="arjunaplatform_compile">
-				<param name="ed" value="platform"/>
+		<antcall target="arjunasdk_compile">
+				<param name="ed" value="sdk"/>
 	   	</antcall>
 			
-		<antcall target="arjunastartup_compile">
-				<param name="ed" value="startup"/>
+		<antcall target="arjunafree_compile">
+				<param name="ed" value="free"/>
 	   	</antcall>
 			
 		<antcall target="obfuscate">
-				<param name="jar1" value="${private.arjunaplatform.clear.jar.file}"/>
-				<param name="jar2" value="${private.arjunaplatform.obfuscated.jar.file}"/>
+				<param name="jar1" value="${private.arjunasdk.clear.jar.file}"/>
+				<param name="jar2" value="${private.arjunasdk.obfuscated.jar.file}"/>
 	   	</antcall>
 		<antcall target="obfuscate">
-				<param name="jar1" value="${private.arjunastartup.clear.jar.file}"/>
-				<param name="jar2" value="${private.arjunastartup.obfuscated.jar.file}"/>
+				<param name="jar1" value="${private.arjunafree.clear.jar.file}"/>
+				<param name="jar2" value="${private.arjunafree.obfuscated.jar.file}"/>
 	   	</antcall>
 		<antcall>
-	    	<target name="arjunaplatform_build"/>
+	    	<target name="arjunasdk_build"/>
 	   	</antcall>
 		<antcall>
-	    	<target name="arjunastartup_build"/>
+	    	<target name="arjunafree_build"/>
 	   	</antcall>
 	</target>
 
