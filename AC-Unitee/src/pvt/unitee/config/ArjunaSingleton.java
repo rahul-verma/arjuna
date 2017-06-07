@@ -227,7 +227,7 @@ public enum ArjunaSingleton {
 		// Would deal with projects in Arjuna Pro.
 		// For now project directory is same as root
 		//String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString();
-		String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_ROOT).asString();
+		String projDir = Batteries.getBaseDir();
 		String runID =  integrator.value(ArjunaProperty.RUNID).asString();
 		String timestampedRunID = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date()) + "-" + runID;
 		String updates = ResourceStreamBatteries.streamToString(ArjunaSingleton.class.getResourceAsStream("/com/arjunapro/pvt/text/arjuna_invisible.conf"));

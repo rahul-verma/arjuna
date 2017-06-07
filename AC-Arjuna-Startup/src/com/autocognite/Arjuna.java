@@ -28,7 +28,7 @@ import pvt.arjunapro.ArjunaTestEngine;
 import pvt.unitee.cli.UniteeCliConfigurator;
 import pvt.unitee.lib.engine.TestEngine;
 
-public class ArjunaPro {
+public class Arjuna {
 
 	public static void main(String[] args) throws Exception {
 		Console.init();
