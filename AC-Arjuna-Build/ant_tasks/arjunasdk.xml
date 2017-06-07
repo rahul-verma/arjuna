@@ -73,6 +73,7 @@ simple example build file
 		<mkdir dir="${private.arjunasdk.dist.tools.root.dir}/examples" />
 		<mkdir dir="${private.arjunasdk.dist.tools.root.dir}/bin/tools" />
 		<mkdir dir="${private.arjunasdk.dist.tools.root.dir}/bin/tools/uidrivers" />
+
 		<mkdir dir="${private.arjunasdk.dist.tools.root.dir}/log" />
 		<mkdir dir="${private.arjunasdk.dist.tools.root.dir}/ui_maps" />
 		<mkdir dir="${private.arjunasdk.dist.tools.root.dir}/ui_images" />

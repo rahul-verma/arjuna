@@ -128,11 +128,11 @@ public class UniteeCLI extends AbstractCLI {
 		
 		if (SystemUtils.IS_OS_WINDOWS){
 			shell = "arjunapro.bat";
-			mproject = "autocognite-arjuna-pro\\mproject\\tests";
+			mproject = "autocognite-arjuna\\mproject\\tests";
 			userProject = "C:\\\\some\\dir\\projectname\\tests";
 		} else {
 			shell = "./arjunapro.sh";
-			mproject = "/autocognite-arjuna-pro/mproject/tests";
+			mproject = "/autocognite-arjuna/mproject/tests";
 			userProject = "/usr/some/dir/projectname/tests";			
 		}
 		
