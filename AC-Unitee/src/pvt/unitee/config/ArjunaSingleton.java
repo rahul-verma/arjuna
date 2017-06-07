@@ -61,7 +61,7 @@ import pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.1.4-alpha";
+	private String version = "0.2.1-alpha";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -224,7 +224,10 @@ public enum ArjunaSingleton {
 //		);
 //		
 //		Batteries.processConfigProperties(updateOptions);
-		String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString();
+		// Would deal with projects in Arjuna Pro.
+		// For now project directory is same as root
+		//String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString();
+		String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_ROOT).asString();
 		String runID =  integrator.value(ArjunaProperty.RUNID).asString();
 		String timestampedRunID = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date()) + "-" + runID;
 		String updates = ResourceStreamBatteries.streamToString(ArjunaSingleton.class.getResourceAsStream("/com/arjunapro/pvt/text/arjuna_invisible.conf"));
