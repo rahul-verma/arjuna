@@ -22,11 +22,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
-import com.arjunapro.uiauto.interfaces.UiElement;
-
-import pvt.uiauto.enums.UiElementType;
-import pvt.uiautomator.api.ElementMetaData;
-import pvt.uiautomator.api.UiMediator;
+import arjunasdk.uiauto.interfaces.UiElement;
+import pvt.arjunasdk.uiauto.api.ElementMetaData;
+import pvt.arjunasdk.uiauto.api.UiMediator;
+import pvt.arjunasdk.uiauto.enums.UiElementType;
 
 public abstract class BaseUiScreenMediator implements UiMediator{
 

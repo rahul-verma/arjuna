@@ -1,12 +1,9 @@
 package pvt.unitee.core.lib.testvars;
 
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.enums.TestObjectAttribute;
-import com.arjunapro.testauto.enums.TestObjectType;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.console.Console;
+import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.ddt.datarecord.BaseDataRecord;
@@ -15,6 +12,8 @@ import pvt.batteries.value.EnumValue;
 import pvt.batteries.value.IntValue;
 import pvt.batteries.value.LongValue;
 import pvt.batteries.value.StringValue;
+import unitee.enums.TestObjectAttribute;
+import unitee.enums.TestObjectType;
 
 public class DefaultTestObjectProperties 
 				extends EnumKeyValueContainer<TestObjectAttribute>

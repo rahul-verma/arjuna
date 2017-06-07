@@ -8,12 +8,11 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 
-import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-import com.arjunapro.sysauto.batteries.SystemBatteries;
-
-import pvt.arjunapro.enums.ArjunaProperty;
+import arjunasdk.sysauto.batteries.FileSystemBatteries;
+import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.filehandler.FileWriter;
+import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.reporter.lib.DefaultObserver;
 
 public abstract class JsonConsolidatedResultWriter<T> extends DefaultObserver<T>{

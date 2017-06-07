@@ -20,8 +20,8 @@ package pvt.uiautomator;
 
 import java.util.ArrayList;
 
-import pvt.uiauto.enums.AppiumMobilePlatformType;
-import pvt.uiauto.enums.UiAutomationContext;
+import pvt.arjunasdk.uiauto.enums.AppiumMobilePlatformType;
+import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.uiautomator.lib.config.UiAutomatorSingleton;
 
 public class UiAutomator {

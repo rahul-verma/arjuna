@@ -2,13 +2,12 @@ package pvt.unitee.reporter.lib.step;
 
 import java.util.HashMap;
 
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
-import pvt.arjunapro.enums.StepResultAttribute;
-import pvt.arjunapro.enums.StepResultType;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.value.IntValue;
+import pvt.unitee.enums.StepResultAttribute;
+import pvt.unitee.enums.StepResultType;
 
 public class StepResultProperties 
 				extends EnumKeyValueContainer<StepResultAttribute>{

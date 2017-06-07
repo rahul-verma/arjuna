@@ -1,6 +1,6 @@
 package pvt.unitee.reporter.lib;
 
-import pvt.arjunapro.interfaces.InternlReportableObserver;
+import pvt.unitee.interfaces.InternlReportableObserver;
 
 public abstract class DefaultObserver<T> implements InternlReportableObserver<T>{
 

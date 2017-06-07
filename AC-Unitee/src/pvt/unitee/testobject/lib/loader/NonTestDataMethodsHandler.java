@@ -24,10 +24,9 @@ import java.lang.reflect.Modifier;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.ddt.annotations.DataMethod;
-
 import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import unitee.annotations.DataMethod;
 
 public class NonTestDataMethodsHandler extends DefaultDataMethodsHandler {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());

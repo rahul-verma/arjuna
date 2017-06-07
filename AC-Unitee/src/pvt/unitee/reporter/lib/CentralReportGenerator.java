@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import pvt.arjunapro.interfaces.ReportGenerator;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.interfaces.ReportGenerator;
 import pvt.unitee.reporter.lib.generator.ActivityReportGenerator;
 import pvt.unitee.reporter.lib.generator.FixtureReportGenerator;
 import pvt.unitee.reporter.lib.generator.IssueReportGenerator;

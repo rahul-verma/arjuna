@@ -18,8 +18,8 @@
  ******************************************************************************/
 package pvt.batteries.value;
 
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 
 public class IncompatibleInputForValueException extends Exception {
 

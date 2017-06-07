@@ -5,7 +5,7 @@ import java.io.File;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import pvt.arjunapro.enums.HoconSyntaxType;
+import pvt.arjunasdk.enums.HoconSyntaxType;
 
 public class HoconFileReader extends AbstractHoconReader {
 	private String confPath = null;

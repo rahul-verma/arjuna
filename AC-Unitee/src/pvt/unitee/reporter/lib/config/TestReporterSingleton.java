@@ -25,20 +25,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.arjunapro.testauto.enums.TestAttribute;
-import com.arjunapro.testauto.enums.TestObjectAttribute;
-
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.ArjunaProperty;
-import pvt.arjunapro.enums.EventAttribute;
-import pvt.arjunapro.enums.FixtureResultPropertyType;
-import pvt.arjunapro.enums.IssueAttribute;
-import pvt.arjunapro.enums.ReportMode;
-import pvt.arjunapro.enums.StepResultAttribute;
-import pvt.arjunapro.enums.TestReportSection;
-import pvt.arjunapro.enums.TestResultAttribute;
-import pvt.arjunapro.enums.TestResultType;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.ArjunaProperty;
+import pvt.unitee.enums.EventAttribute;
+import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.IssueAttribute;
+import pvt.unitee.enums.ReportMode;
+import pvt.unitee.enums.StepResultAttribute;
+import pvt.unitee.enums.TestReportSection;
+import pvt.unitee.enums.TestResultAttribute;
+import pvt.unitee.enums.TestResultType;
+import unitee.enums.TestAttribute;
+import unitee.enums.TestObjectAttribute;
 
 public enum TestReporterSingleton {
 	INSTANCE;

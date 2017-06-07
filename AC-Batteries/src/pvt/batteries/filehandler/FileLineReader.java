@@ -23,8 +23,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.console.Console;
 import pvt.batteries.utils.ExceptionBatteries;
 
 public class FileLineReader {

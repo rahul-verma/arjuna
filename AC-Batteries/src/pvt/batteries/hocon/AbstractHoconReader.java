@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.arjunapro.testauto.interfaces.Value;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 import com.typesafe.config.ConfigParseOptions;
@@ -15,7 +14,8 @@ import com.typesafe.config.ConfigResolveOptions;
 import com.typesafe.config.ConfigSyntax;
 import com.typesafe.config.ConfigValue;
 
-import pvt.arjunapro.enums.HoconSyntaxType;
+import arjunasdk.interfaces.Value;
+import pvt.arjunasdk.enums.HoconSyntaxType;
 import pvt.batteries.value.AnyRefListValue;
 import pvt.batteries.value.AnyRefValue;
 import pvt.batteries.value.BooleanValue;

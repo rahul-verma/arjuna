@@ -1,9 +1,9 @@
 package pvt.unitee.reporter.lib.fixture;
 
-import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonObject;
 
+import arjunasdk.console.Console;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;
 import pvt.unitee.reporter.lib.reportable.ResultDeserializer;
 

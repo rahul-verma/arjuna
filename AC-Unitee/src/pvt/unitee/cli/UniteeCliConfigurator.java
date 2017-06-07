@@ -25,18 +25,17 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
-import pvt.arjunapro.enums.ArjunaProperty;
-import pvt.arjunapro.enums.BatteriesPropertyType;
-import pvt.arjunapro.enums.TestPickerProperty;
+import arjunasdk.console.Console;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
+import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.batteries.cli.AbstractCliConfigurator;
 import pvt.batteries.lib.ComponentIntegrator;
 import pvt.batteries.value.StringListValue;
 import pvt.batteries.value.ValueFactory;
 import pvt.unitee.config.ArjunaSingleton;
+import pvt.unitee.enums.ArjunaProperty;
+import pvt.unitee.enums.TestPickerProperty;
 
 public class UniteeCliConfigurator extends AbstractCliConfigurator {	
 	ComponentIntegrator integrator = null;

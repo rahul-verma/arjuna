@@ -25,11 +25,10 @@ import java.util.List;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.config.RunConfig;
-
-import pvt.arjunapro.enums.ArjunaProperty;
-import pvt.arjunapro.interfaces.InternlReportableObserver;
+import arjunasdk.config.RunConfig;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.ArjunaProperty;
+import pvt.unitee.interfaces.InternlReportableObserver;
 import pvt.unitee.reporter.lib.event.Event;
 import pvt.unitee.reporter.lib.fixture.FixtureResult;
 import pvt.unitee.reporter.lib.issue.Issue;

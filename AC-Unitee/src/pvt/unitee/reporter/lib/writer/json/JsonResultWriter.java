@@ -8,8 +8,7 @@ import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
 
-import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-
+import arjunasdk.sysauto.batteries.FileSystemBatteries;
 import pvt.batteries.filehandler.FileWriter;
 import pvt.unitee.reporter.lib.DefaultObserver;
 

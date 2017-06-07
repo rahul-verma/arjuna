@@ -1,7 +1,6 @@
 package pvt.batteries.lib;
 
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.console.Console;
 import pvt.batteries.config.Configuration;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 

@@ -2,8 +2,8 @@ package pvt.unitee.testobject.lib.fixture;
 
 import java.lang.reflect.Method;
 
-import pvt.arjunapro.enums.FixtureResultType;
-import pvt.arjunapro.enums.TestResultCode;
+import pvt.unitee.enums.FixtureResultType;
+import pvt.unitee.enums.TestResultCode;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
 import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import pvt.unitee.testobject.lib.interfaces.TestObject;

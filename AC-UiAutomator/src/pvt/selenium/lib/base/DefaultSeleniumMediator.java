@@ -26,13 +26,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import com.arjunapro.uiauto.interfaces.UiElement;
-
-import pvt.arjunapro.uiauto.selenium.SeleniumUiDriver;
+import arjunasdk.uiauto.interfaces.SeleniumUiDriver;
+import arjunasdk.uiauto.interfaces.UiElement;
+import pvt.arjunasdk.uiauto.api.ElementMetaData;
+import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
+import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.selenium.api.WDMediator;
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiauto.enums.UiElementType;
-import pvt.uiautomator.api.ElementMetaData;
 import pvt.uiautomator.lib.base.BaseUiMediator;
 
 public class DefaultSeleniumMediator extends BaseUiMediator implements WDMediator{

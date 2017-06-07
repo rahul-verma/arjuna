@@ -3,13 +3,12 @@ package pvt.unitee.testobject.lib.loader;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.testauto.annotations.TestClass;
-import com.arjunapro.testauto.annotations.TestMethod;
-
+import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
+import unitee.annotations.TestClass;
+import unitee.annotations.TestMethod;
 
 public class TestPropertyAnnotationsProcessor {
 

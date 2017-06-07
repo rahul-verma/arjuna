@@ -2,12 +2,12 @@ package pvt.unitee.testobject.lib.loader.session;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
+import arjunasdk.console.Console;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.hocon.HoconFileReader;
 import pvt.batteries.hocon.HoconReader;

@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import pvt.arjunapro.enums.HoconSyntaxType;
+import pvt.arjunasdk.enums.HoconSyntaxType;
 
 public class HoconResourceReader extends AbstractHoconReader {
 	private InputStream fileStream = null;

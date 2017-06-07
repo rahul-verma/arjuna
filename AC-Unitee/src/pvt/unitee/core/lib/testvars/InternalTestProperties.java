@@ -1,12 +1,11 @@
 package pvt.unitee.core.lib.testvars;
 
-import com.arjunapro.testauto.enums.TestAttribute;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.TestProperties;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.container.ReadOnlyContainer;
 import pvt.batteries.container.ValueContainer;
+import unitee.enums.TestAttribute;
+import unitee.interfaces.TestProperties;
 
 public interface InternalTestProperties 
 				extends TestProperties, ReadOnlyContainer<TestAttribute, Value>, ValueContainer<TestAttribute>{

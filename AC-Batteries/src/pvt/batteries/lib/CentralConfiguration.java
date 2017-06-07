@@ -2,9 +2,8 @@ package pvt.batteries.lib;
 
 import java.util.HashMap;
 
-import com.arjunapro.testauto.interfaces.ReadOnlyStringKeyValueContainer;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.interfaces.ReadOnlyStringKeyValueContainer;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.config.Configuration;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 

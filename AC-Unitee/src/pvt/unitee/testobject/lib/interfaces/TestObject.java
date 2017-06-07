@@ -1,12 +1,11 @@
 package pvt.unitee.testobject.lib.interfaces;
 
-import com.arjunapro.testauto.enums.TestObjectType;
-import com.arjunapro.testauto.interfaces.TestVariables;
-
-import pvt.arjunapro.enums.FixtureResultType;
-import pvt.arjunapro.enums.TestResultCode;
+import pvt.unitee.enums.FixtureResultType;
+import pvt.unitee.enums.TestResultCode;
 import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
+import unitee.enums.TestObjectType;
+import unitee.interfaces.TestVariables;
 
 public interface TestObject {
 	

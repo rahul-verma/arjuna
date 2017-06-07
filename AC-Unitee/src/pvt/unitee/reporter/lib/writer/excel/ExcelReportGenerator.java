@@ -19,31 +19,31 @@ import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.sysauto.batteries.SystemBatteries;
-import com.arjunapro.testauto.enums.TestAttribute;
-import com.arjunapro.testauto.enums.TestObjectAttribute;
-import com.arjunapro.testauto.interfaces.TestVariables;
-import com.arjunapro.testauto.interfaces.Value;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.interfaces.Value;
+import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.ArjunaProperty;
-import pvt.arjunapro.enums.EventAttribute;
-import pvt.arjunapro.enums.FixtureResultPropertyType;
-import pvt.arjunapro.enums.IssueAttribute;
-import pvt.arjunapro.enums.StepResultAttribute;
-import pvt.arjunapro.enums.TestReportSection;
-import pvt.arjunapro.enums.TestResultAttribute;
-import pvt.arjunapro.enums.TestResultType;
-import pvt.arjunapro.interfaces.ReportGenerator;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.ArjunaProperty;
+import pvt.unitee.enums.EventAttribute;
+import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.IssueAttribute;
+import pvt.unitee.enums.StepResultAttribute;
+import pvt.unitee.enums.TestReportSection;
+import pvt.unitee.enums.TestResultAttribute;
+import pvt.unitee.enums.TestResultType;
+import pvt.unitee.interfaces.ReportGenerator;
 import pvt.unitee.reporter.lib.event.Event;
 import pvt.unitee.reporter.lib.fixture.FixtureResult;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.step.StepResult;
 import pvt.unitee.reporter.lib.test.TestResult;
+import unitee.enums.TestAttribute;
+import unitee.enums.TestObjectAttribute;
+import unitee.interfaces.TestVariables;
 
 public class ExcelReportGenerator implements ReportGenerator{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

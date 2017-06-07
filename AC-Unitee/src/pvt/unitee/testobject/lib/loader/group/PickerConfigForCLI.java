@@ -6,11 +6,10 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-
-import pvt.arjunapro.enums.PickerTargetType;
-import pvt.arjunapro.enums.TestPickerProperty;
+import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.PickerTargetType;
+import pvt.unitee.enums.TestPickerProperty;
 
 public class PickerConfigForCLI extends AbstractPickerConfig{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

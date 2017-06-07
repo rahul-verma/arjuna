@@ -26,23 +26,20 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.ddt.interfaces.DataSource;
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.enums.TestAttribute;
-import com.arjunapro.testauto.enums.TestObjectAttribute;
-
-import pvt.arjunapro.enums.EventAttribute;
-import pvt.arjunapro.enums.FixtureResultPropertyType;
-import pvt.arjunapro.enums.IssueAttribute;
-import pvt.arjunapro.enums.NamesContainerType;
-import pvt.arjunapro.enums.StepResultAttribute;
-import pvt.arjunapro.enums.TestReportSection;
-import pvt.arjunapro.enums.TestResultAttribute;
-import pvt.arjunapro.enums.TestResultType;
+import arjunasdk.console.Console;
+import arjunasdk.ddauto.interfaces.DataSource;
 import pvt.batteries.cli.CLIConfigurator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.ds.NamesContainer;
 import pvt.unitee.config.ArjunaSingleton;
+import pvt.unitee.enums.EventAttribute;
+import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.IssueAttribute;
+import pvt.unitee.enums.NamesContainerType;
+import pvt.unitee.enums.StepResultAttribute;
+import pvt.unitee.enums.TestReportSection;
+import pvt.unitee.enums.TestResultAttribute;
+import pvt.unitee.enums.TestResultType;
 import pvt.unitee.lib.engine.TestEngine;
 import pvt.unitee.lib.strings.UniteeNames;
 import pvt.unitee.reporter.lib.CentralExecutionState;
@@ -50,6 +47,8 @@ import pvt.unitee.reporter.lib.Reporter;
 import pvt.unitee.reporter.lib.config.TestReporterSingleton;
 import pvt.unitee.testobject.lib.loader.group.TestGroupsDB;
 import pvt.unitee.testobject.lib.loader.session.Session;
+import unitee.enums.TestAttribute;
+import unitee.enums.TestObjectAttribute;
 
 public class ArjunaInternal {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());

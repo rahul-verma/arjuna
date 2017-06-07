@@ -20,19 +20,18 @@ package pvt.unitee.lib.strings;
 
 import java.util.ArrayList;
 
-import com.arjunapro.testauto.enums.TestAttribute;
-import com.arjunapro.testauto.enums.TestObjectAttribute;
-import com.arjunapro.testauto.enums.TestObjectType;
-
-import pvt.arjunapro.enums.EventAttribute;
-import pvt.arjunapro.enums.FixtureResultPropertyType;
-import pvt.arjunapro.enums.IssueAttribute;
-import pvt.arjunapro.enums.NamesContainerType;
-import pvt.arjunapro.enums.StepResultAttribute;
-import pvt.arjunapro.enums.TestResultAttribute;
-import pvt.arjunapro.enums.UniteeComponent;
 import pvt.batteries.ds.Name;
 import pvt.batteries.ds.NamesContainer;
+import pvt.unitee.enums.EventAttribute;
+import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.IssueAttribute;
+import pvt.unitee.enums.NamesContainerType;
+import pvt.unitee.enums.StepResultAttribute;
+import pvt.unitee.enums.TestResultAttribute;
+import pvt.unitee.enums.UniteeComponent;
+import unitee.enums.TestAttribute;
+import unitee.enums.TestObjectAttribute;
+import unitee.enums.TestObjectType;
 
 public class UniteeNames {
 	

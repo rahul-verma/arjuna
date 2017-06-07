@@ -8,14 +8,14 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
-import pvt.arjunapro.enums.PickerTargetType;
+import arjunasdk.console.Console;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.PickerTargetType;
 
 public class PickerConfigForJson extends AbstractPickerConfig{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

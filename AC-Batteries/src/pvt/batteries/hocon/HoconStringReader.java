@@ -6,7 +6,7 @@ import java.io.StringReader;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigFactory;
 
-import pvt.arjunapro.enums.HoconSyntaxType;
+import pvt.arjunasdk.enums.HoconSyntaxType;
 
 public class HoconStringReader extends AbstractHoconReader {
 	private String confString = null;

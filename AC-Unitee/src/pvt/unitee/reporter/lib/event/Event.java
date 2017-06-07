@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
-import pvt.arjunapro.enums.EventAttribute;
+import pvt.unitee.enums.EventAttribute;
 
 public class Event {
 	private EventProperties props = null;

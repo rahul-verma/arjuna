@@ -8,14 +8,14 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
+import arjunasdk.console.Console;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.interfaces.ReportGenerator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.filehandler.FileReader;
+import pvt.unitee.interfaces.ReportGenerator;
 
 public abstract class JsonResultsReader{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

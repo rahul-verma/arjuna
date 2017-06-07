@@ -5,10 +5,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.sysauto.batteries.ThreadBatteries;
-import com.arjunapro.testauto.config.RunConfig;
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.config.RunConfig;
+import arjunasdk.console.Console;
+import arjunasdk.sysauto.batteries.ThreadBatteries;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.unitee.testobject.lib.loader.session.SessionNode;
 

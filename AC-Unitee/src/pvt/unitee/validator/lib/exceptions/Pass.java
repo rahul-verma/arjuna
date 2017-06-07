@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.unitee.validator.lib.exceptions;
 
-import pvt.arjunapro.interfaces.Check;
+import pvt.unitee.interfaces.Check;
 
 public class Pass extends StepResultEvent {
 	private static final long serialVersionUID = -3029394135447054950L;

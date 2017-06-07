@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.Set;
 
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.DependencyCondition;
-import pvt.arjunapro.enums.DependencyTarget;
+import pvt.unitee.enums.DependencyCondition;
+import pvt.unitee.enums.DependencyTarget;
 import pvt.unitee.reporter.lib.IssueId;
 
 public class DependencyHandler implements Cloneable{

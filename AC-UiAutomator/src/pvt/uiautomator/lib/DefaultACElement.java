@@ -22,14 +22,14 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import pvt.arjunasdk.uiauto.api.ACElement;
+import pvt.arjunasdk.uiauto.api.ElementMetaData;
+import pvt.arjunasdk.uiauto.api.UiMediator;
+import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
+import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiauto.enums.UiElementType;
 import pvt.uiautomator.UiAutomator;
-import pvt.uiautomator.api.ACElement;
-import pvt.uiautomator.api.ElementMetaData;
-import pvt.uiautomator.api.UiMediator;
 
 public abstract class DefaultACElement implements  ACElement{
 	private UiElementType elementType = UiElementType.GENERIC;

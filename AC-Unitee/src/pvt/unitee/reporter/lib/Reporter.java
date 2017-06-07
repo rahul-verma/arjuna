@@ -1,6 +1,6 @@
 package pvt.unitee.reporter.lib;
 
-import pvt.arjunapro.interfaces.InternlReportableObserver;
+import pvt.unitee.interfaces.InternlReportableObserver;
 import pvt.unitee.reporter.lib.event.Event;
 import pvt.unitee.reporter.lib.fixture.FixtureResult;
 import pvt.unitee.reporter.lib.issue.Issue;

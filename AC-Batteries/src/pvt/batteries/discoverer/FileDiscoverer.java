@@ -28,10 +28,9 @@ import org.apache.commons.io.DirectoryWalker;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-import com.arjunapro.sysauto.batteries.SystemBatteries;
-
+import arjunasdk.sysauto.batteries.DataBatteries;
+import arjunasdk.sysauto.batteries.FileSystemBatteries;
+import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discovery.JarClassDiscoverer;
 import pvt.batteries.utils.ExceptionBatteries;

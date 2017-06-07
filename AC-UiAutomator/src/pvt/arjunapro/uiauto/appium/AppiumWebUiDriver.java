@@ -19,7 +19,7 @@
 package pvt.arjunapro.uiauto.appium;
 
 import pvt.appium.lib.base.AbstractAppiumUiDriver;
-import pvt.uiauto.enums.MobileWebIdentifyBy;
+import pvt.arjunasdk.uiauto.enums.MobileWebIdentifyBy;
 
 public class AppiumWebUiDriver extends AbstractAppiumUiDriver {
 	public AppiumWebUiDriver() throws Exception{

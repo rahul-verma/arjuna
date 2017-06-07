@@ -9,27 +9,26 @@ import java.util.List;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import com.arjunapro.ddt.annotations.DriveWithData;
-import com.arjunapro.ddt.annotations.DriveWithDataArray;
-import com.arjunapro.ddt.annotations.DriveWithDataFile;
-import com.arjunapro.ddt.annotations.DriveWithDataMethod;
-import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.testauto.annotations.Skip;
-import com.arjunapro.testauto.annotations.TestMethod;
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.interfaces.TestVariables;
-
+import arjunasdk.console.Console;
+import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.annotations.DriveWithDataGenerator;
 import pvt.arjunapro.annotations.Instances;
-import pvt.arjunapro.enums.SkipCode;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.datasource.DataSourceBuilder;
 import pvt.unitee.core.lib.datasource.DataSourceType;
+import pvt.unitee.enums.SkipCode;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
+import unitee.annotations.DriveWithData;
+import unitee.annotations.DriveWithDataArray;
+import unitee.annotations.DriveWithDataFile;
+import unitee.annotations.DriveWithDataMethod;
+import unitee.annotations.Skip;
+import unitee.annotations.TestMethod;
+import unitee.interfaces.TestVariables;
 
 public class JavaTestMethodsDefinitionLoader implements TestCreatorLoader {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

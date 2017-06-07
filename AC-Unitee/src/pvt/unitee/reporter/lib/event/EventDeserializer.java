@@ -2,12 +2,12 @@ package pvt.unitee.reporter.lib.event;
 
 import java.lang.reflect.Type;
 
-import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import arjunasdk.console.Console;
 import pvt.unitee.reporter.lib.reportable.BaseJsonResultDeserializer;
 
 public class EventDeserializer extends BaseJsonResultDeserializer implements JsonDeserializer<Event> {

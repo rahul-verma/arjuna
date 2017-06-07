@@ -1,8 +1,8 @@
 package pvt.unitee.reporter.lib.issue;
 
-import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonObject;
 
+import arjunasdk.console.Console;
 import pvt.unitee.reporter.lib.reportable.ResultSerializer;
 
 public class IssueSerializer extends ResultSerializer<Issue> {

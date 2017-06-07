@@ -22,13 +22,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import com.arjunapro.ddt.datarecord.ListDataRecord;
-import com.arjunapro.ddt.datarecord.MapDataRecord;
-import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataRecordContainer;
-
-import pvt.arjunapro.enums.DataRecordOrder;
+import arjunasdk.ddauto.datarecord.ListDataRecord;
+import arjunasdk.ddauto.datarecord.MapDataRecord;
+import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
+import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.ddauto.interfaces.DataRecordContainer;
+import pvt.arjunasdk.enums.DataRecordOrder;
 
 public class BaseDataRecordContainer extends BaseDataSource implements DataRecordContainer {
 	private DataRecordOrder order = DataRecordOrder.ORDERED;

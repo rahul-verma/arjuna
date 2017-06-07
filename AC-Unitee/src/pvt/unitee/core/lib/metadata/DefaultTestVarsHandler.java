@@ -20,13 +20,12 @@ package pvt.unitee.core.lib.metadata;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.enums.TestObjectType;
-
 import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;
 import pvt.unitee.testobject.lib.interfaces.TestObject;
+import unitee.enums.TestObjectType;
 
 public class DefaultTestVarsHandler implements TestVarsHandler{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

@@ -2,11 +2,11 @@ package pvt.unitee.reporter.lib.fixture;
 
 import java.util.List;
 
-import com.arjunapro.testauto.interfaces.TestVariables;
 import com.google.gson.JsonObject;
 
-import pvt.arjunapro.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.FixtureResultPropertyType;
 import pvt.unitee.reporter.lib.reportable.TestRelatedResult;
+import unitee.interfaces.TestVariables;
 
 public class FixtureResult extends TestRelatedResult{
 	FixtureResultProperties resultProps = null;

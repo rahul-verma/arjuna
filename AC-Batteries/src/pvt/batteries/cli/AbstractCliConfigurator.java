@@ -20,7 +20,7 @@ package pvt.batteries.cli;
 
 import java.util.HashMap;
 
-import com.arjunapro.testauto.interfaces.Value;
+import arjunasdk.interfaces.Value;
 
 public abstract class AbstractCliConfigurator implements CLIConfigurator {
 	private CLI cli = null;

@@ -10,23 +10,22 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.interfaces.TestVariables;
-
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.ddt.interfaces.DataReference;
-import pvt.arjunapro.enums.DependencyTarget;
-import pvt.arjunapro.enums.SkipCode;
-import pvt.arjunapro.enums.UnpickedCode;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.databroker.DataReferenceFactory;
 import pvt.unitee.core.lib.dependency.DependencyHandler;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;
+import pvt.unitee.enums.DependencyTarget;
+import pvt.unitee.enums.SkipCode;
+import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.TestClassConstructorType;
 import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 import pvt.unitee.testobject.lib.loader.JavaTestClassDataMethodsHandler;
 import pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor;
+import unitee.interfaces.TestVariables;
 
 public class JavaTestClassDefinition {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

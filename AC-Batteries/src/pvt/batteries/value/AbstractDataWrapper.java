@@ -2,7 +2,7 @@ package pvt.batteries.value;
 
 import java.util.List;
 
-import com.arjunapro.ddt.interfaces.DataWrapper;
+import arjunasdk.ddauto.interfaces.DataWrapper;
 
 public abstract class AbstractDataWrapper implements DataWrapper {
 	@Override

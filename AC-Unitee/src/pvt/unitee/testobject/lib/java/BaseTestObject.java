@@ -2,17 +2,16 @@ package pvt.unitee.testobject.lib.java;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.enums.TestObjectType;
-
-import pvt.arjunapro.enums.FixtureResultType;
-import pvt.arjunapro.enums.TestClassFixtureType;
-import pvt.arjunapro.enums.TestResultCode;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.metadata.TestVarsHandler;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;
+import pvt.unitee.enums.FixtureResultType;
+import pvt.unitee.enums.TestClassFixtureType;
+import pvt.unitee.enums.TestResultCode;
 import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.TestObject;
+import unitee.enums.TestObjectType;
 
 public abstract class BaseTestObject implements TestObject {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

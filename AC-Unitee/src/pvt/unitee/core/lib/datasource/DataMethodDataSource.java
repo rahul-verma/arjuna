@@ -4,11 +4,10 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Iterator;
 
-import com.arjunapro.ddt.datarecord.ListDataRecordContainer;
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataRecordContainer;
-import com.arjunapro.ddt.interfaces.DataSource;
-
+import arjunasdk.ddauto.datarecord.ListDataRecordContainer;
+import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.ddauto.interfaces.DataRecordContainer;
+import arjunasdk.ddauto.interfaces.DataSource;
 import pvt.batteries.ddt.datarecord.BaseDataSource;
 
 public class DataMethodDataSource extends BaseDataSource{

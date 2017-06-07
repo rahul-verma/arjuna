@@ -7,21 +7,20 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.arjunapro.ddt.interfaces.DataSource;
-import com.arjunapro.testauto.interfaces.TestVariables;
-
+import arjunasdk.ddauto.interfaces.DataSource;
 import pvt.arjunapro.ddt.interfaces.DataReference;
-import pvt.arjunapro.enums.DependencyTarget;
-import pvt.arjunapro.enums.SkipCode;
-import pvt.arjunapro.enums.UnpickedCode;
 import pvt.batteries.databroker.DataReferenceFactory;
 import pvt.unitee.core.lib.datasource.DataSourceBuilder;
 import pvt.unitee.core.lib.datasource.DummyDataSource;
 import pvt.unitee.core.lib.dependency.DependencyHandler;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;
+import pvt.unitee.enums.DependencyTarget;
+import pvt.unitee.enums.SkipCode;
+import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.testobject.lib.loader.MethodSignatureType;
 import pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor;
+import unitee.interfaces.TestVariables;
 
 public class JavaTestMethodDefinition {
 	private boolean dataRefPresent = false;

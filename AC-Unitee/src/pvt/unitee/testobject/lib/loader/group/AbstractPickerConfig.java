@@ -8,15 +8,15 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.sysauto.batteries.SystemBatteries;
-import com.arjunapro.testauto.console.Console;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 
-import pvt.arjunapro.enums.PickerTargetType;
+import arjunasdk.console.Console;
+import arjunasdk.sysauto.batteries.DataBatteries;
+import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.PickerTargetType;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;

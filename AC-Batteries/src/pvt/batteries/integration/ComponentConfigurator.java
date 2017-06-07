@@ -2,8 +2,7 @@ package pvt.batteries.integration;
 
 import java.util.HashMap;
 
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.interfaces.Value;
 import pvt.batteries.lib.ComponentIntegrator;
 
 public interface ComponentConfigurator {

@@ -20,9 +20,8 @@ package pvt.batteries.ddt.datarecord;
 
 import java.util.HashMap;
 
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.container.ReadOnlyContainer;
 import pvt.batteries.value.AnyRefValue;
 import pvt.batteries.value.DefaultStringKeyValueContainer;

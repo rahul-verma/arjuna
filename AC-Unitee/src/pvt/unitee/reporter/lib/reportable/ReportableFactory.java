@@ -20,8 +20,7 @@ package pvt.unitee.reporter.lib.reportable;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.console.Console;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.utils.ExceptionBatteries;
 import pvt.unitee.reporter.lib.event.Event;

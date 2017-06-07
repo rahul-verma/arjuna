@@ -25,7 +25,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
+import arjunasdk.sysauto.batteries.DataBatteries;
 
 public class FileWriter {
 	private BufferedWriter writer = null;

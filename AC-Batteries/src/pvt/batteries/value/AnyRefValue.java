@@ -7,9 +7,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
+import arjunasdk.console.Console;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 
 public class AnyRefValue extends AbstractValue {
 	private static Set<String> trues = new HashSet<String>(Arrays.asList("YES", "TRUE", "ON", "1"));

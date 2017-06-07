@@ -1,13 +1,12 @@
 package pvt.unitee.reporter.lib.test;
 
-import com.arjunapro.testauto.interfaces.TestVariables;
-
-import pvt.arjunapro.enums.TestResultAttribute;
-import pvt.arjunapro.enums.TestResultCode;
-import pvt.arjunapro.enums.TestResultType;
 import pvt.batteries.value.EnumValue;
 import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.TestResultAttribute;
+import pvt.unitee.enums.TestResultCode;
+import pvt.unitee.enums.TestResultType;
+import unitee.interfaces.TestVariables;
 
 public class TestResultBuilder {
 	private TestResultProperties resultProps = new TestResultProperties();

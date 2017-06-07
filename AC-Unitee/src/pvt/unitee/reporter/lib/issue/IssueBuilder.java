@@ -1,16 +1,15 @@
 package pvt.unitee.reporter.lib.issue;
 
-import com.arjunapro.testauto.interfaces.TestVariables;
-
-import pvt.arjunapro.enums.IssueAttribute;
-import pvt.arjunapro.enums.IssueSubType;
-import pvt.arjunapro.enums.IssueType;
 import pvt.batteries.exceptions.Problem;
 import pvt.batteries.utils.ExceptionBatteries;
 import pvt.batteries.value.EnumValue;
 import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.IssueAttribute;
+import pvt.unitee.enums.IssueSubType;
+import pvt.unitee.enums.IssueType;
 import pvt.unitee.validator.lib.exceptions.StepResultEvent;
+import unitee.interfaces.TestVariables;
 
 public class IssueBuilder {
 	private IssueProperties resultProps = new IssueProperties();

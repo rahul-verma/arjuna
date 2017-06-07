@@ -5,23 +5,22 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.testauto.enums.TestObjectType;
-import com.arjunapro.testauto.interfaces.TestVariables;
-
+import arjunasdk.ddauto.interfaces.DataRecord;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.TestClassFixtureType;
-import pvt.arjunapro.enums.TestResultCode;
-import pvt.arjunapro.enums.TestResultType;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.utils.ExceptionBatteries;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
+import pvt.unitee.enums.TestClassFixtureType;
+import pvt.unitee.enums.TestResultCode;
+import pvt.unitee.enums.TestResultType;
 import pvt.unitee.reporter.lib.test.TestResult;
 import pvt.unitee.reporter.lib.test.TestResultBuilder;
 import pvt.unitee.reporter.lib.test.TestResultProperties;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.Test;
+import unitee.enums.TestObjectType;
+import unitee.interfaces.TestVariables;
 
 public class JavaTest extends BaseTestObject implements Test{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

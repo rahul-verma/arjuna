@@ -21,20 +21,19 @@ package pvt.uiautomator.lib.config;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-
-import pvt.uiauto.enums.AppiumAndroidBrowserType;
-import pvt.uiauto.enums.AppiumIosBrowserType;
-import pvt.uiauto.enums.AppiumMobilePlatformType;
-import pvt.uiauto.enums.IdentifyBy;
-import pvt.uiauto.enums.MobileNativeIdentifyBy;
-import pvt.uiauto.enums.MobileWebIdentifyBy;
-import pvt.uiauto.enums.NativeIdentifyBy;
-import pvt.uiauto.enums.ScreenIdentifyBy;
-import pvt.uiauto.enums.UiAutomationContext;
-import pvt.uiauto.enums.UiElementType;
-import pvt.uiauto.enums.WebIdentifyBy;
-import pvt.uiautomator.api.CentralPageMap;
+import arjunasdk.sysauto.batteries.DataBatteries;
+import pvt.arjunasdk.uiauto.api.CentralPageMap;
+import pvt.arjunasdk.uiauto.enums.AppiumAndroidBrowserType;
+import pvt.arjunasdk.uiauto.enums.AppiumIosBrowserType;
+import pvt.arjunasdk.uiauto.enums.AppiumMobilePlatformType;
+import pvt.arjunasdk.uiauto.enums.IdentifyBy;
+import pvt.arjunasdk.uiauto.enums.MobileNativeIdentifyBy;
+import pvt.arjunasdk.uiauto.enums.MobileWebIdentifyBy;
+import pvt.arjunasdk.uiauto.enums.NativeIdentifyBy;
+import pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy;
+import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import pvt.arjunasdk.uiauto.enums.UiElementType;
+import pvt.arjunasdk.uiauto.enums.WebIdentifyBy;
 import pvt.uiautomator.lib.DefaultCentralUiMap;
 
 public enum UiAutomatorSingleton {

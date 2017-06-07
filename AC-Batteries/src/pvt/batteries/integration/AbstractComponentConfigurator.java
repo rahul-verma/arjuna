@@ -2,11 +2,11 @@ package pvt.batteries.integration;
 
 import java.util.ArrayList;
 
+import pvt.arjunasdk.property.ConfigProperty;
 import pvt.batteries.ds.MessagesContainer;
 import pvt.batteries.ds.NamesContainer;
 import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.lib.ComponentIntegrator;
-import pvt.batteries.property.ConfigProperty;
 
 public abstract class AbstractComponentConfigurator implements ComponentConfigurator {
 	private String baseDir = null;

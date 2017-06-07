@@ -18,10 +18,9 @@
  ******************************************************************************/
 package pvt.unitee.validator.lib.check;
 
-import com.arjunapro.testauto.exceptions.Error;
-import com.arjunapro.testauto.exceptions.Failure;
-
-import pvt.arjunapro.interfaces.Check;
+import pvt.unitee.interfaces.Check;
+import unitee.exceptions.Error;
+import unitee.exceptions.Failure;
 
 public class DefaultCheck implements Check {
 	private String methodName = "NOT_SET";

@@ -1,9 +1,8 @@
 package pvt.batteries.value;
 
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.StringKeyValueContainer;
-
+import arjunasdk.console.Console;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.StringKeyValueContainer;
 import pvt.batteries.container.BaseValueContainer;
 import pvt.batteries.container.ValueContainer;
 

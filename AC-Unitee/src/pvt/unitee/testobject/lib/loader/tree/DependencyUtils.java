@@ -4,8 +4,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-
+import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.annotations.ClassDependency;
 import pvt.arjunapro.annotations.MethodDependency;

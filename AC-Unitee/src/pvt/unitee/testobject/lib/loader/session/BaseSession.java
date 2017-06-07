@@ -6,8 +6,7 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.config.RunConfig;
-
+import arjunasdk.config.RunConfig;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import pvt.unitee.core.lib.exception.SessionNodesFinishedException;
 

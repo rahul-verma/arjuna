@@ -2,7 +2,7 @@ package pvt.batteries.container;
 
 import java.util.Map;
 
-import com.arjunapro.testauto.interfaces.Value;
+import arjunasdk.interfaces.Value;
 
 public interface ValueContainer<T> extends ReadWriteContainer<T, Value>, Cloneable {
 

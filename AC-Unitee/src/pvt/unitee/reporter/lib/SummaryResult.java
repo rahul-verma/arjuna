@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
-import pvt.arjunapro.enums.TestResultType;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.TestResultType;
 
 public class SummaryResult {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());

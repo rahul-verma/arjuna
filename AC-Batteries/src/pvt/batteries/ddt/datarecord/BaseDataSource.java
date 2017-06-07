@@ -1,6 +1,6 @@
 package pvt.batteries.ddt.datarecord;
 
-import com.arjunapro.ddt.interfaces.DataSource;
+import arjunasdk.ddauto.interfaces.DataSource;
 
 public abstract class BaseDataSource implements DataSource {
 	private String name = null;

@@ -23,12 +23,11 @@ import java.util.Map;
 
 import org.apache.log4j.Level;
 
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.testauto.interfaces.ReadOnlyStringKeyValueContainer;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.interfaces.ReadOnlyStringKeyValueContainer;
+import arjunasdk.interfaces.Value;
 import pvt.arjunapro.ddt.interfaces.DataReference;
-import pvt.arjunapro.enums.BatteriesPropertyType;
+import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.batteries.integration.ComponentConfigurator;
 import pvt.batteries.lib.BatteriesConfigurator;
 import pvt.batteries.lib.BatteriesSingleton;

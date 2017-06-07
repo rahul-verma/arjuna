@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.batteries.value;
 
-import com.arjunapro.testauto.interfaces.Value;
+import arjunasdk.interfaces.Value;
 
 public class UnsupportedRepresentationException extends Exception {
 

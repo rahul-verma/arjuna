@@ -2,16 +2,15 @@ package pvt.unitee.reporter.lib.test;
 
 import java.util.HashMap;
 
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
-import pvt.arjunapro.enums.TestResultAttribute;
-import pvt.arjunapro.enums.TestResultCode;
-import pvt.arjunapro.enums.TestResultType;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.value.EnumValue;
 import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.TestResultAttribute;
+import pvt.unitee.enums.TestResultCode;
+import pvt.unitee.enums.TestResultType;
 
 public class TestResultProperties 
 				extends EnumKeyValueContainer<TestResultAttribute>{

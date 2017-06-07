@@ -2,14 +2,13 @@ package pvt.unitee.reporter.lib.fixture;
 
 import java.util.HashMap;
 
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
-import pvt.arjunapro.enums.FixtureResultPropertyType;
-import pvt.arjunapro.enums.FixtureResultType;
-import pvt.arjunapro.enums.TestClassFixtureType;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.FixtureResultType;
+import pvt.unitee.enums.TestClassFixtureType;
 
 public class FixtureResultProperties 
 				extends EnumKeyValueContainer<FixtureResultPropertyType>{

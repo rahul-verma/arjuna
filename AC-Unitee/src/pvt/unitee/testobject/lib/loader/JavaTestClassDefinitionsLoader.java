@@ -15,25 +15,24 @@ import java.util.Set;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.testauto.annotations.Skip;
-import com.arjunapro.testauto.annotations.TestClass;
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.console.Console;
+import arjunasdk.interfaces.Value;
+import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.annotations.Instances;
-import pvt.arjunapro.enums.SkipCode;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discoverer.DiscoveredFile;
 import pvt.batteries.discoverer.DiscoveredFileAttribute;
 import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.hocon.HoconResourceReader;
+import pvt.unitee.enums.SkipCode;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import pvt.unitee.testobject.lib.java.JavaTestClass;
 import pvt.unitee.testobject.lib.java.TestClassConstructorType;
 import pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;
+import unitee.annotations.Skip;
+import unitee.annotations.TestClass;
 
 public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

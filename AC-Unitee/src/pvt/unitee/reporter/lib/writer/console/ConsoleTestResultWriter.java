@@ -27,17 +27,16 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.enums.TestAttribute;
-import com.arjunapro.testauto.enums.TestObjectAttribute;
-
+import arjunasdk.console.Console;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.TestReportSection;
-import pvt.arjunapro.enums.TestResultAttribute;
-import pvt.arjunapro.enums.TestResultType;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.TestReportSection;
+import pvt.unitee.enums.TestResultAttribute;
+import pvt.unitee.enums.TestResultType;
 import pvt.unitee.reporter.lib.DefaultObserver;
 import pvt.unitee.reporter.lib.test.TestResult;
+import unitee.enums.TestAttribute;
+import unitee.enums.TestObjectAttribute;
 
 public class ConsoleTestResultWriter extends DefaultObserver<TestResult> {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

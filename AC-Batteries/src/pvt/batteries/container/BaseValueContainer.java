@@ -3,9 +3,8 @@ package pvt.batteries.container;
 import java.util.List;
 import java.util.Map;
 
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.value.AnyRefValue;
 import pvt.batteries.value.BooleanValue;
 import pvt.batteries.value.EnumListValue;

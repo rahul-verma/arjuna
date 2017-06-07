@@ -25,13 +25,13 @@ import java.util.Iterator;
 import org.apache.log4j.Logger;
 
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.ArjunaProperty;
-import pvt.arjunapro.enums.TestLanguage;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discoverer.DiscoveredFile;
 import pvt.batteries.discoverer.DiscoveredFileAttribute;
 import pvt.batteries.discoverer.FileAggregator;
 import pvt.batteries.discoverer.FileDiscoverer;
+import pvt.unitee.enums.ArjunaProperty;
+import pvt.unitee.enums.TestLanguage;
 import pvt.unitee.testobject.lib.loader.group.TestLoader;
 
 public class TestDefinitionsProcessor {

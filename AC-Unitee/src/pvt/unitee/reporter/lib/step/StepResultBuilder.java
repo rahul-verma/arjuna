@@ -1,11 +1,11 @@
 package pvt.unitee.reporter.lib.step;
 
-import pvt.arjunapro.enums.StepResultAttribute;
-import pvt.arjunapro.enums.StepResultType;
 import pvt.batteries.exceptions.Problem;
 import pvt.batteries.value.EnumValue;
 import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.StepResultAttribute;
+import pvt.unitee.enums.StepResultType;
 import pvt.unitee.validator.lib.exceptions.StepResultEvent;
 
 public class StepResultBuilder {

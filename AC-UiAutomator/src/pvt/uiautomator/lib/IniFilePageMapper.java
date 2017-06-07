@@ -21,7 +21,7 @@ package pvt.uiautomator.lib;
 import java.util.HashMap;
 import java.util.Set;
 
-import com.arjunapro.sysauto.file.IniFileReader;
+import arjunasdk.sysauto.file.IniFileReader;
 
 public class IniFilePageMapper extends FileBasedPageMapper{
 	private IniFileReader reader = null;

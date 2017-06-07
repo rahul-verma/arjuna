@@ -7,13 +7,12 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.config.RunConfig;
-import com.arjunapro.testauto.interfaces.TestObjectProperties;
-
+import arjunasdk.config.RunConfig;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.TestResultType;
+import pvt.unitee.enums.TestResultType;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.test.TestResult;
+import unitee.interfaces.TestObjectProperties;
 
 public class CentralExecutionState {
 	private Logger logger = RunConfig.logger();

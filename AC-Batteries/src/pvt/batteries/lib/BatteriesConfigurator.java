@@ -3,10 +3,12 @@ package pvt.batteries.lib;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.arjunapro.testauto.enums.LoggingLevel;
-import com.arjunapro.testauto.interfaces.Value;
-
-import pvt.arjunapro.enums.BatteriesPropertyType;
+import arjunasdk.enums.LoggingLevel;
+import arjunasdk.interfaces.Value;
+import pvt.arjunasdk.enums.BatteriesPropertyType;
+import pvt.arjunasdk.property.ConfigProperty;
+import pvt.arjunasdk.property.ConfigPropertyBatteries;
+import pvt.arjunasdk.property.ConfigPropertyBuilder;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.ds.Message;
 import pvt.batteries.ds.MessagesContainer;
@@ -15,9 +17,6 @@ import pvt.batteries.ds.NamesContainer;
 import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.hocon.HoconResourceReader;
 import pvt.batteries.integration.AbstractComponentConfigurator;
-import pvt.batteries.property.ConfigProperty;
-import pvt.batteries.property.ConfigPropertyBatteries;
-import pvt.batteries.property.ConfigPropertyBuilder;
 
 public class BatteriesConfigurator extends AbstractComponentConfigurator {
 	private ConfigPropertyBuilder<BatteriesPropertyType> builder = new ConfigPropertyBuilder<BatteriesPropertyType>();

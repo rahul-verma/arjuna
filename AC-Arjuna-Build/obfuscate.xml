@@ -1,0 +1,127 @@
+<?xml version= "1.0"?>
+<project name="obfus" default="obfuscate" basedir=".">
+	<description>
+simple example build file
+</description>
+
+	<target name="obfuscate">
+
+		<taskdef resource="proguard/ant/task.properties" classpath="/Users/rahulverma/Documents/coding_workbench/tools_dir/proguard5.2.1/lib/proguard.jar" />
+
+		<proguard allowaccessmodification="true" usemixedcaseclassnames="false" 
+			defaultpackage="" ignorewarnings="true" shrink="false" keepparameternames="true" 
+			skipnonpubliclibraryclasses="false" printseeds="obfuscateseeds.txt"
+			printusage="obfuscateusage.txt" printmapping="obfuscatemapping.txt" 
+			repackageclasses="com.arjunapro.pvt">
+
+			<!-- specify which jar files should be obfuscated -->
+			<injar name="${jar1}" />
+
+			<!-- java libraries my java application depends on -->
+			<libraryjar name="/Library/Java/JavaVirtualMachines/jdk1.8.0_101.jdk/Contents/Home/jre/lib/rt.jar" />
+			<!-- rt.jar on other platforms -->
+			<libraryjar name="${3rd_party_batteries_jars}/commons-cli-1.3.jar" /> 
+			<libraryjar name="${3rd_party_batteries_jars}/commons-io-2.4.jar" /> 
+					<libraryjar name="${3rd_party_batteries_jars}/commons-lang3-3.4.jar" /><!-- crypto stuff -->
+					<libraryjar name="${3rd_party_batteries_jars}/config-1.3.1.jar" /><!-- crypto stuff -->
+					<libraryjar name="${3rd_party_batteries_jars}/gson-2.8.0.jar" />
+					<libraryjar name="${3rd_party_batteries_jars}/commons-validator-1.5.0.jar" />
+					<libraryjar name="${3rd_party_batteries_jars}/ini4j-0.5.4.jar" />
+					<libraryjar name="${3rd_party_batteries_jars}/jna-4.2.2.jar" />
+					<libraryjar name="${3rd_party_batteries_jars}/jna-platform-4.2.2.jar" />
+					<libraryjar name="${3rd_party_batteries_jars}/log4j-1.2.17.jar" />
+					<libraryjar name="${3rd_party_batteries_jars}/poi-3.12-20150511.jar" />
+						<libraryjar name="${3rd_party_batteries_jars}/sqlite-jdbc-3.8.11.2.jar" />
+			<libraryjar name="${3rd_party_uiauto_jars}/java-client-3.2.0.jar" />
+							<libraryjar name="${3rd_party_uiauto_jars}/selenium-server-standalone-2.53.0.jar" />
+							<libraryjar name="${3rd_party_uiauto_jars}/sikuli-script.jar" />
+			<!-- the output jar file that should be created with the obfuscated java 
+class files -->
+			<outjar name="${jar2}" />
+			
+			<keeppackagename name="com.arjunapro.testauto.**" />
+			<keeppackagename name="com.arjunapro.sysauto.**" />
+				<keeppackagename name="com.arjunapro.uiauto.**" />
+				<keeppackagename name="com.arjunapro.ddt.**" />
+			<!-- don't obfuscate this method -->
+
+			<keepattribute name="*Annotation*" />
+			
+			<keep name="com.arjunapro.**" access="public">
+				<method access="public" name="*" />
+				<method access="protected" name="*" />
+			</keep>
+			
+			<keep name="com.autocognite.ArjunaPro" access="public">
+				<method access="public" name="*" />
+			</keep>
+				
+			<keep name="com.arjunapro.testauto.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
+
+			<keep name="com.arjunapro.ddt.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
+			
+			<keep name="com.arjunapro.uiauto.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
+			
+			<keep name="com.arjunapro.uiauto.appium.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
+			
+			<keep name="com.arjunapro.sysauto.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
+					
+			<keepclassmembers name="pvt.arjunapro.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keepclassmembers>
+			
+			<keepclassmembers name="pvt.uiauto.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keepclassmembers>
+			
+			<keepclassmembers name="pvt.batteries.property.ConfigPropertyBatteries" access="public">
+				<method access="public static" name="pathToCoreAbsolutePath"/>
+				<method access="public static" name="pathToProjectAbsolutePath"/>
+				<method access="public static" name="getSame"/>
+					<method access="public static" name="pathToAbsolutePath"/>
+			</keepclassmembers>
+			
+			<keepclassmembers name="pvt.uiautomator.api.**" access="public">
+				<method access="public"/>
+			</keepclassmembers>
+			
+			<keep name="pvt.**" allowobfuscation="true">
+			</keep>
+
+			<keepattribute name="LineNumberTable" />
+			<keepattribute name="SourceFile" />
+			<keepattribute name="Exceptions" />
+			<keepattribute name="Signature" />
+			<keepattribute name="InnerClasses" />
+			<keepattribute name="LocalVariableTable" />
+			<keepattribute name="LocalVariableTypeTable" />
+			<keepattribute name="MethodParameters" />
+
+		</proguard>
+	</target>
+
+</project>

@@ -21,11 +21,10 @@ package pvt.batteries.databroker;
 import java.util.Iterator;
 import java.util.Set;
 
-import com.arjunapro.ddt.datarecord.MapDataRecord;
-import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.sysauto.file.IniFileReader;
-
+import arjunasdk.ddauto.datarecord.MapDataRecord;
+import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
+import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.sysauto.file.IniFileReader;
 import pvt.batteries.ddt.datarecord.BaseDataSource;
 
 public class IniFileDataSource extends BaseDataSource {

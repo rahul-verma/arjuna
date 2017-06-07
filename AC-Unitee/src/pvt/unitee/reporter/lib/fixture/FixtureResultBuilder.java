@@ -1,13 +1,12 @@
 package pvt.unitee.reporter.lib.fixture;
 
-import com.arjunapro.testauto.interfaces.TestVariables;
-
-import pvt.arjunapro.enums.FixtureResultPropertyType;
-import pvt.arjunapro.enums.FixtureResultType;
-import pvt.arjunapro.enums.TestClassFixtureType;
 import pvt.batteries.value.EnumValue;
 import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.FixtureResultType;
+import pvt.unitee.enums.TestClassFixtureType;
+import unitee.interfaces.TestVariables;
 
 public class FixtureResultBuilder {
 	private FixtureResultProperties resultProps = new FixtureResultProperties();

@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.arjunapro.ddt.interfaces;
 
-import com.arjunapro.ddt.interfaces.DataRecord;
+import arjunasdk.ddauto.interfaces.DataRecord;
 
 public interface DataReference {
 

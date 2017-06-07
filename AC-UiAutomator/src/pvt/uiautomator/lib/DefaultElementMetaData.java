@@ -21,14 +21,14 @@ package pvt.uiautomator.lib;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import pvt.arjunasdk.uiauto.api.ElementMetaData;
+import pvt.arjunasdk.uiauto.api.Identifier;
+import pvt.arjunasdk.uiauto.enums.IdentifyBy;
+import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
-import pvt.uiauto.enums.IdentifyBy;
-import pvt.uiauto.enums.UiAutomationContext;
-import pvt.uiauto.enums.UiElementType;
 import pvt.uiautomator.UiAutomator;
-import pvt.uiautomator.api.ElementMetaData;
-import pvt.uiautomator.api.Identifier;
 
 public class DefaultElementMetaData implements ElementMetaData {
 	private HashMap<String, String> metaData = new HashMap<String, String>();

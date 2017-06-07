@@ -2,12 +2,12 @@ package pvt.unitee.reporter.lib.event;
 
 import java.lang.reflect.Type;
 
-import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
+import arjunasdk.console.Console;
 import pvt.unitee.reporter.lib.reportable.BaseSerializer;
 
 public class EventSerializer extends BaseSerializer implements JsonSerializer<Event>{

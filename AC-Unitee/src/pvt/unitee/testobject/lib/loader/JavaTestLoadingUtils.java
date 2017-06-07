@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-import com.arjunapro.testauto.annotations.TestClass;
-import com.arjunapro.testauto.annotations.TestMethod;
-
+import arjunasdk.sysauto.batteries.DataBatteries;
+import arjunasdk.sysauto.batteries.FileSystemBatteries;
 import pvt.arjunapro.annotations.FileDataReference;
 import pvt.arjunapro.annotations.Instances;
-import pvt.arjunapro.enums.BatteriesPropertyType;
+import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.batteries.config.Batteries;
+import unitee.annotations.TestClass;
+import unitee.annotations.TestMethod;
 
 public class JavaTestLoadingUtils {
 	private static String[] checkArray = new String[] {"NOT_SET"};

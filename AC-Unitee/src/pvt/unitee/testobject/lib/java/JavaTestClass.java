@@ -7,15 +7,12 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.enums.TestObjectType;
-import com.arjunapro.testauto.interfaces.TestVariables;
-
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.TestClassFixtureType;
-import pvt.arjunapro.enums.TestResultCode;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.dependency.DependencyHandler;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
+import pvt.unitee.enums.TestClassFixtureType;
+import pvt.unitee.enums.TestResultCode;
 import pvt.unitee.reporter.lib.IssueId;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
@@ -23,6 +20,8 @@ import pvt.unitee.testobject.lib.interfaces.TestContainer;
 import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 import pvt.unitee.testobject.lib.loader.group.Group;
+import unitee.enums.TestObjectType;
+import unitee.interfaces.TestVariables;
 
 public class JavaTestClass extends BaseTestObject implements TestContainer {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

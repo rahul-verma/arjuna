@@ -18,9 +18,8 @@
  ******************************************************************************/
 package pvt.uiautomator.lib;
 
-import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-
-import pvt.arjunapro.uiauto.interfaces.PageMapper;
+import arjunasdk.sysauto.batteries.FileSystemBatteries;
+import arjunasdk.uiauto.interfaces.PageMapper;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
 import pvt.uiautomator.UiAutomator;

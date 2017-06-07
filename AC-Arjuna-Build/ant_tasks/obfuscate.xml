@@ -12,7 +12,7 @@ simple example build file
 			defaultpackage="" ignorewarnings="true" shrink="false" keepparameternames="true" 
 			skipnonpubliclibraryclasses="false" printseeds="obfuscateseeds.txt"
 			printusage="obfuscateusage.txt" printmapping="obfuscatemapping.txt" 
-			repackageclasses="com.arjunapro.pvt">
+			repackageclasses="com.autocognite.pvt">
 
 			<!-- specify which jar files should be obfuscated -->
 			<injar name="${jar1}" />
@@ -39,10 +39,8 @@ simple example build file
 class files -->
 			<outjar name="${jar2}" />
 			
-			<keeppackagename name="com.arjunapro.testauto.**" />
-			<keeppackagename name="com.arjunapro.sysauto.**" />
-				<keeppackagename name="com.arjunapro.uiauto.**" />
-				<keeppackagename name="com.arjunapro.ddt.**" />
+			<keeppackagename name="arjunasdk.**" />
+			<keeppackagename name="unitee.**" />
 			<!-- don't obfuscate this method -->
 
 			<keepattribute name="*Annotation*" />
@@ -52,60 +50,58 @@ class files -->
 				<method access="protected" name="*" />
 			</keep>
 			
-			<keep name="com.autocognite.ArjunaPro" access="public">
+			<keep name="com.autocognite.Arjuna" access="public">
+				<method access="public" name="*" />
+			</keep>
+			
+			<keep name="com.autocognite.ArjunaSDK" access="public">
 				<method access="public" name="*" />
 			</keep>
 				
-			<keep name="com.arjunapro.testauto.enums.**" access="public">
-				<field name="*" />
-				<method access="public static" type="**[]" name="values" parameters="" />
-				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
-			</keep>
-
-			<keep name="com.arjunapro.ddt.enums.**" access="public">
+			<keep name="arjunasdk.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
 			
-			<keep name="com.arjunapro.uiauto.enums.**" access="public">
+			<keep name="pvt.arjunasdk.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
 			
-			<keep name="com.arjunapro.uiauto.appium.enums.**" access="public">
+			<keep name="unitee.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
 			
-			<keep name="com.arjunapro.sysauto.enums.**" access="public">
-				<field name="*" />
-				<method access="public static" type="**[]" name="values" parameters="" />
-				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
-			</keep>
-					
-			<keepclassmembers name="pvt.arjunapro.enums.**" access="public">
+			<keepclassmembers name="pvt.unitee.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keepclassmembers>
 			
-			<keepclassmembers name="pvt.uiauto.enums.**" access="public">
+			<keep name="arjunasdk.uiauto.enums.**" access="public">
+				<field name="*" />
+				<method access="public static" type="**[]" name="values" parameters="" />
+				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
+			</keep>
+			
+			<keepclassmembers name="pvt.arjunasdk.uiauto.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keepclassmembers>
 			
-			<keepclassmembers name="pvt.batteries.property.ConfigPropertyBatteries" access="public">
+			<keepclassmembers name="pvt.arjunasdk.property.ConfigPropertyBatteries" access="public">
 				<method access="public static" name="pathToCoreAbsolutePath"/>
 				<method access="public static" name="pathToProjectAbsolutePath"/>
 				<method access="public static" name="getSame"/>
 					<method access="public static" name="pathToAbsolutePath"/>
 			</keepclassmembers>
 			
-			<keepclassmembers name="pvt.uiautomator.api.**" access="public">
+			<keepclassmembers name="pvt.arjunasdk.uiauto.api.**" access="public">
 				<method access="public"/>
 			</keepclassmembers>
 			

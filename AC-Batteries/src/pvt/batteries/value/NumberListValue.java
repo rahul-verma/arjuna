@@ -2,8 +2,8 @@ package pvt.batteries.value;
 
 import java.util.List;
 
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 
 public class NumberListValue<T extends Number> extends AbstractValue {
 

@@ -20,10 +20,9 @@ package pvt.arjunapro.uiauto.factories;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-import com.arjunapro.testauto.enums.FileFormat;
-
-import pvt.arjunapro.uiauto.interfaces.PageMapper;
+import arjunasdk.enums.FileFormat;
+import arjunasdk.sysauto.batteries.FileSystemBatteries;
+import arjunasdk.uiauto.interfaces.PageMapper;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
 import pvt.uiautomator.UiAutomator;

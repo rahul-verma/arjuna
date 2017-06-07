@@ -2,7 +2,7 @@ package pvt.unitee.testobject.lib.loader.group;
 
 import java.util.List;
 
-import pvt.arjunapro.enums.PickerTargetType;
+import pvt.unitee.enums.PickerTargetType;
 import pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator;
 
 public interface Picker {

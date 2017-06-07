@@ -20,9 +20,8 @@ package com.autocognite;
 
 import java.time.LocalDate;
 
-import com.arjunapro.sysauto.batteries.SystemBatteries;
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.console.Console;
+import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.ArjunaTestEngine;
 import pvt.unitee.cli.UniteeCliConfigurator;

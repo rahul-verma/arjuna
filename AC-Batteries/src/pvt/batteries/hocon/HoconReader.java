@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import com.arjunapro.testauto.interfaces.Value;
 import com.typesafe.config.Config;
 import com.typesafe.config.ConfigValue;
+
+import arjunasdk.interfaces.Value;
 
 public interface HoconReader {
 

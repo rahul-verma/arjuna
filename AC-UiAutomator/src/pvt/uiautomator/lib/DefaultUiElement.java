@@ -20,12 +20,11 @@ package pvt.uiautomator.lib;
 
 import java.util.List;
 
-import com.arjunapro.uiauto.interfaces.UiElement;
-
+import arjunasdk.uiauto.interfaces.UiElement;
+import pvt.arjunasdk.uiauto.api.ElementMetaData;
+import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.batteries.config.Batteries;
-import pvt.uiauto.enums.UiAutomationContext;
 import pvt.uiautomator.UiAutomator;
-import pvt.uiautomator.api.ElementMetaData;
 
 public class DefaultUiElement  extends DefaultACElement implements UiElement{
 	private UiAutomationContext idType = null;

@@ -20,10 +20,9 @@ package pvt.batteries.databroker;
 
 import java.util.ArrayList;
 
-import com.arjunapro.ddt.datarecord.MapDataRecord;
-import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
-import com.arjunapro.ddt.interfaces.DataRecord;
-
+import arjunasdk.ddauto.datarecord.MapDataRecord;
+import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
+import arjunasdk.ddauto.interfaces.DataRecord;
 import pvt.batteries.ddt.datarecord.BaseDataSource;
 import pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 import pvt.batteries.utils.ExceptionBatteries;

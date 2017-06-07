@@ -7,14 +7,14 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.ddt.datarecord.MapDataRecord;
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import arjunasdk.console.Console;
+import arjunasdk.ddauto.datarecord.MapDataRecord;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.container.BaseValueContainer;
 import pvt.batteries.ddt.datarecord.BaseDataRecord;

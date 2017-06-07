@@ -3,8 +3,11 @@ package pvt.uiautomator.lib.config;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.interfaces.Value;
+import pvt.arjunasdk.property.ConfigProperty;
+import pvt.arjunasdk.property.ConfigPropertyBatteries;
+import pvt.arjunasdk.property.ConfigPropertyBuilder;
+import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.batteries.ds.Message;
 import pvt.batteries.ds.MessagesContainer;
 import pvt.batteries.ds.Name;
@@ -12,10 +15,6 @@ import pvt.batteries.ds.NamesContainer;
 import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.hocon.HoconResourceReader;
 import pvt.batteries.integration.AbstractComponentConfigurator;
-import pvt.batteries.property.ConfigProperty;
-import pvt.batteries.property.ConfigPropertyBatteries;
-import pvt.batteries.property.ConfigPropertyBuilder;
-import pvt.uiauto.enums.UiAutomationContext;
 import pvt.uiautomator.UiAutomator;
 
 public class UiAutomatorConfigurator extends AbstractComponentConfigurator{

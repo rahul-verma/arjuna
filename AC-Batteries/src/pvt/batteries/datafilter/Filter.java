@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.batteries.datafilter;
 
-import pvt.arjunapro.enums.FilterType;
+import pvt.arjunasdk.enums.FilterType;
 
 public abstract class Filter implements IFilter {
 	private FilterType type = null;

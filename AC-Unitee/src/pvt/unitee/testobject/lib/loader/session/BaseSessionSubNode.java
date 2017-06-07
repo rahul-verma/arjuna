@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import com.arjunapro.testauto.console.Console;
 import com.google.gson.JsonObject;
 
+import arjunasdk.console.Console;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.hocon.HoconStringReader;

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.arjunapro.testauto.console.Console;
+import arjunasdk.console.Console;
 
 public class AnnotationValidator {
 	private static Set<String> namedFixtures = new HashSet<String>(Arrays.asList(

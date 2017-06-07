@@ -1,6 +1,6 @@
 package pvt.unitee.testobject.lib.fixture;
 
-import pvt.arjunapro.enums.TestClassFixtureType;
+import pvt.unitee.enums.TestClassFixtureType;
 
 public interface TestFixtures {
 

@@ -10,15 +10,14 @@ import java.util.Map;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.console.Console;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.ArjunaProperty;
-import pvt.arjunapro.enums.PickerTargetType;
-import pvt.arjunapro.enums.SkipCode;
-import pvt.arjunapro.enums.TestPickerProperty;
-import pvt.arjunapro.enums.UnpickedCode;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.ArjunaProperty;
+import pvt.unitee.enums.PickerTargetType;
+import pvt.unitee.enums.SkipCode;
+import pvt.unitee.enums.TestPickerProperty;
+import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;

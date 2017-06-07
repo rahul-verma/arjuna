@@ -1,14 +1,13 @@
 package pvt.unitee.core.lib.testvars;
 
-import com.arjunapro.testauto.enums.TestObjectAttribute;
-import com.arjunapro.testauto.enums.TestObjectType;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.TestObjectProperties;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.container.ReadOnlyContainer;
 import pvt.batteries.container.ValueContainer;
 import pvt.batteries.ddt.datarecord.BaseDataRecord;
+import unitee.enums.TestObjectAttribute;
+import unitee.enums.TestObjectType;
+import unitee.interfaces.TestObjectProperties;
 
 public interface InternalTestObjectProperties 
 				extends TestObjectProperties, ValueContainer<TestObjectAttribute>, ReadOnlyContainer<TestObjectAttribute, Value>{

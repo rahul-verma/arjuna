@@ -1,7 +1,6 @@
 package pvt.unitee.testobject.lib.interfaces;
 
-import com.arjunapro.ddt.interfaces.DataRecord;
-
+import arjunasdk.ddauto.interfaces.DataRecord;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.JavaTestClassFragment;
 import pvt.unitee.testobject.lib.java.JavaTestMethodInstance;

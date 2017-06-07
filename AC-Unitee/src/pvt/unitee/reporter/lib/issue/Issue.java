@@ -2,11 +2,11 @@ package pvt.unitee.reporter.lib.issue;
 
 import java.util.List;
 
-import com.arjunapro.testauto.interfaces.TestVariables;
 import com.google.gson.JsonObject;
 
-import pvt.arjunapro.enums.IssueAttribute;
+import pvt.unitee.enums.IssueAttribute;
 import pvt.unitee.reporter.lib.reportable.TestRelatedResult;
+import unitee.interfaces.TestVariables;
 
 public class Issue extends TestRelatedResult{
 	IssueProperties resultProps = null;

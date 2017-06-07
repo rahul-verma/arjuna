@@ -1,6 +1,6 @@
 package pvt.unitee.testobject.lib.loader.group;
 
-import pvt.arjunapro.enums.PickerTargetType;
+import pvt.unitee.enums.PickerTargetType;
 
 public interface PickerConfig {
 

@@ -1,9 +1,9 @@
 package pvt.unitee.reporter.lib.event;
 
-import pvt.arjunapro.enums.EventAttribute;
 import pvt.batteries.utils.ExceptionBatteries;
 import pvt.batteries.value.BooleanValue;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.EventAttribute;
 
 public class EventBuilder {
 	private EventProperties props = new EventProperties();

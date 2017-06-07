@@ -20,8 +20,8 @@ package pvt.unitee.reporter.lib.writer.json;
 
 import org.apache.log4j.Logger;
 
-import pvt.arjunapro.enums.ArjunaProperty;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.reporter.lib.fixture.FixtureResult;
 
 public class JsonFixtureResultWriter extends JsonResultWriter<FixtureResult> {

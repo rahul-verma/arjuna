@@ -24,13 +24,12 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.ddt.annotations.DataMethodContainer;
-import com.arjunapro.sysauto.batteries.DataBatteries;
-
+import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 import pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler;
+import unitee.annotations.DataMethodContainer;
 
 public class DataMethodContainerMap {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

@@ -1,9 +1,8 @@
 package pvt.unitee.core.lib.datasource;
 
-import com.arjunapro.ddt.datarecord.MapDataRecord;
-import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
-import com.arjunapro.ddt.interfaces.DataRecord;
-
+import arjunasdk.ddauto.datarecord.MapDataRecord;
+import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
+import arjunasdk.ddauto.interfaces.DataRecord;
 import pvt.batteries.ddt.datarecord.BaseDataRecord;
 import pvt.batteries.ddt.datarecord.BaseDataSource;
 

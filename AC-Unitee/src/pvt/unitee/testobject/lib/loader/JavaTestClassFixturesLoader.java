@@ -8,17 +8,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.sysauto.batteries.SystemBatteries;
-import com.arjunapro.testauto.annotations.AfterClass;
-import com.arjunapro.testauto.annotations.AfterMethod;
-import com.arjunapro.testauto.annotations.AfterTest;
-import com.arjunapro.testauto.annotations.BeforeClass;
-import com.arjunapro.testauto.annotations.BeforeMethod;
-import com.arjunapro.testauto.annotations.BeforeTest;
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.interfaces.TestVariables;
-
+import arjunasdk.console.Console;
+import arjunasdk.sysauto.batteries.DataBatteries;
+import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.annotations.AfterClassFragment;
 import pvt.arjunapro.annotations.AfterClassInstance;
@@ -26,15 +18,22 @@ import pvt.arjunapro.annotations.AfterMethodInstance;
 import pvt.arjunapro.annotations.BeforeClassFragment;
 import pvt.arjunapro.annotations.BeforeClassInstance;
 import pvt.arjunapro.annotations.BeforeMethodInstance;
-import pvt.arjunapro.enums.ArjunaProperty;
-import pvt.arjunapro.enums.TestClassFixtureType;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.ArjunaProperty;
+import pvt.unitee.enums.TestClassFixtureType;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.fixture.BoundFixture;
 import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.StaticFixture;
 import pvt.unitee.testobject.lib.fixture.TestClassFixtures;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
+import unitee.annotations.AfterClass;
+import unitee.annotations.AfterMethod;
+import unitee.annotations.AfterTest;
+import unitee.annotations.BeforeClass;
+import unitee.annotations.BeforeMethod;
+import unitee.annotations.BeforeTest;
+import unitee.interfaces.TestVariables;
 
 public class JavaTestClassFixturesLoader {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

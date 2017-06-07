@@ -21,7 +21,7 @@ package pvt.batteries.filehandler;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
+import arjunasdk.sysauto.batteries.DataBatteries;
 
 public class FileLine2MapReader {
 	private String[] headers = null;

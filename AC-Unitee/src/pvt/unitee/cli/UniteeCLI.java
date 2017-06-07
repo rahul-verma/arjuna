@@ -23,8 +23,7 @@ import java.io.InputStreamReader;
 
 import org.apache.commons.lang3.SystemUtils;
 
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.console.Console;
 import pvt.batteries.cli.AbstractCLI;
 
 public class UniteeCLI extends AbstractCLI {

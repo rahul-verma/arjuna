@@ -4,23 +4,20 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.ddt.datarecord.MapDataRecord;
-import com.arjunapro.ddt.exceptions.DataSourceConstructionException;
-import com.arjunapro.ddt.exceptions.DataSourceFinishedException;
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.ddt.interfaces.DataSource;
-import com.arjunapro.testauto.enums.TestObjectType;
-import com.arjunapro.testauto.interfaces.TestVariables;
-
+import arjunasdk.ddauto.datarecord.MapDataRecord;
+import arjunasdk.ddauto.exceptions.DataSourceConstructionException;
+import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
+import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.ddauto.interfaces.DataSource;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.IssueSubType;
-import pvt.arjunapro.enums.IssueType;
-import pvt.arjunapro.enums.TestClassFixtureType;
-import pvt.arjunapro.enums.TestResultCode;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.datasource.DummyDataSource;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
+import pvt.unitee.enums.IssueSubType;
+import pvt.unitee.enums.IssueType;
+import pvt.unitee.enums.TestClassFixtureType;
+import pvt.unitee.enums.TestResultCode;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
@@ -28,6 +25,8 @@ import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.Test;
 import pvt.unitee.testobject.lib.interfaces.TestCreator;
 import pvt.unitee.testobject.lib.interfaces.TestCreatorInstance;
+import unitee.enums.TestObjectType;
+import unitee.interfaces.TestVariables;
 
 public class JavaTestMethodInstance extends BaseTestObject implements TestCreatorInstance{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

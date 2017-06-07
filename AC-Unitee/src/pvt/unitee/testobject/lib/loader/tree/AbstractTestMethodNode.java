@@ -3,8 +3,7 @@ package pvt.unitee.testobject.lib.loader.tree;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.console.Console;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 
 public class AbstractTestMethodNode implements TestNode{

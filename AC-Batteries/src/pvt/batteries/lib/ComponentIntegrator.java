@@ -8,16 +8,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.console.Console;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
+import arjunasdk.sysauto.batteries.FileSystemBatteries;
+import pvt.arjunasdk.property.ConfigProperty;
 import pvt.batteries.config.Configuration;
 import pvt.batteries.ds.MessagesContainer;
 import pvt.batteries.ds.NamesContainer;
 import pvt.batteries.integration.ComponentConfigurator;
-import pvt.batteries.property.ConfigProperty;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 
 public class ComponentIntegrator {

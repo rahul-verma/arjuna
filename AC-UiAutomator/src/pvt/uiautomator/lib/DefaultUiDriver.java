@@ -18,8 +18,8 @@
  ******************************************************************************/
 package pvt.uiautomator.lib;
 
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiauto.enums.UiAutomationContext;
+import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
+import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.uiautomator.lib.base.BaseUiDriver;
 
 public class DefaultUiDriver extends BaseUiDriver{

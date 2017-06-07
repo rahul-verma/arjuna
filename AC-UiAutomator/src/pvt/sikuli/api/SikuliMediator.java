@@ -23,12 +23,11 @@ import java.util.List;
 
 import org.sikuli.script.Match;
 
-import com.arjunapro.uiauto.interfaces.UiElement;
-
-import pvt.arjunapro.uiauto.sikuli.SikuliUiDriver;
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiautomator.api.ElementMetaData;
-import pvt.uiautomator.api.UiMediator;
+import arjunasdk.uiauto.interfaces.SikuliUiDriver;
+import arjunasdk.uiauto.interfaces.UiElement;
+import pvt.arjunasdk.uiauto.api.ElementMetaData;
+import pvt.arjunasdk.uiauto.api.UiMediator;
+import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
 
 public interface SikuliMediator extends UiMediator{
 

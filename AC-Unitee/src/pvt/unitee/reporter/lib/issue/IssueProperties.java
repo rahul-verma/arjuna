@@ -2,14 +2,13 @@ package pvt.unitee.reporter.lib.issue;
 
 import java.util.HashMap;
 
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
-import pvt.arjunapro.enums.IssueAttribute;
-import pvt.arjunapro.enums.IssueSubType;
-import pvt.arjunapro.enums.IssueType;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.IssueAttribute;
+import pvt.unitee.enums.IssueSubType;
+import pvt.unitee.enums.IssueType;
 
 public class IssueProperties 
 				extends EnumKeyValueContainer<IssueAttribute>{

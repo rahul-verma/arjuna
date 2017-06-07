@@ -8,15 +8,14 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.console.Console;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.SkipCode;
-import pvt.arjunapro.enums.TestResultCode;
-import pvt.arjunapro.enums.UnpickedCode;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
+import pvt.unitee.enums.SkipCode;
+import pvt.unitee.enums.TestResultCode;
+import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;

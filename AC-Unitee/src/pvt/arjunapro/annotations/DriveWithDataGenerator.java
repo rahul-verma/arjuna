@@ -23,8 +23,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import com.arjunapro.ddt.interfaces.DataSource;
-
+import arjunasdk.ddauto.interfaces.DataSource;
 import pvt.unitee.core.lib.annotate.None;
 
 @Retention(RetentionPolicy.RUNTIME)

@@ -23,8 +23,7 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.ddt.interfaces.DataSource;
-
+import arjunasdk.ddauto.interfaces.DataSource;
 import pvt.arjunapro.ArjunaInternal;
 import pvt.arjunapro.annotations.DataGenerator;
 import pvt.batteries.config.Batteries;

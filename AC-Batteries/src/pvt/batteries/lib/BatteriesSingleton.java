@@ -23,10 +23,9 @@ import java.util.HashMap;
 
 import org.apache.commons.io.FilenameUtils;
 
-import com.arjunapro.ddt.interfaces.DataRecord;
-
+import arjunasdk.ddauto.interfaces.DataRecord;
 import pvt.arjunapro.ddt.interfaces.DataReference;
-import pvt.arjunapro.enums.BatteriesPropertyType;
+import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.databroker.DataReferenceFactory;
 

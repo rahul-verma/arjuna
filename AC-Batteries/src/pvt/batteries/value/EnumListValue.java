@@ -3,8 +3,8 @@ package pvt.batteries.value;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 
 public class EnumListValue<T extends Enum<T>> extends AbstractValue {
 	Class<T> actualEnumClass = null;

@@ -6,18 +6,18 @@ import java.util.Map;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.config.RunConfig;
-import com.arjunapro.testauto.interfaces.TestVariables;
 import com.google.gson.JsonObject;
 
+import arjunasdk.config.RunConfig;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.StepResultAttribute;
-import pvt.arjunapro.enums.StepResultType;
-import pvt.arjunapro.enums.TestResultAttribute;
-import pvt.arjunapro.enums.TestResultCode;
-import pvt.arjunapro.enums.TestResultType;
+import pvt.unitee.enums.StepResultAttribute;
+import pvt.unitee.enums.StepResultType;
+import pvt.unitee.enums.TestResultAttribute;
+import pvt.unitee.enums.TestResultCode;
+import pvt.unitee.enums.TestResultType;
 import pvt.unitee.reporter.lib.reportable.TestRelatedResult;
 import pvt.unitee.reporter.lib.step.StepResult;
+import unitee.interfaces.TestVariables;
 
 public class TestResult extends TestRelatedResult {
 	private static Logger logger = RunConfig.logger();

@@ -5,12 +5,12 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.FixtureResultType;
-import pvt.arjunapro.enums.IssueSubType;
-import pvt.arjunapro.enums.IssueType;
-import pvt.arjunapro.enums.TestClassFixtureType;
-import pvt.arjunapro.enums.TestResultCode;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.FixtureResultType;
+import pvt.unitee.enums.IssueSubType;
+import pvt.unitee.enums.IssueType;
+import pvt.unitee.enums.TestClassFixtureType;
+import pvt.unitee.enums.TestResultCode;
 import pvt.unitee.reporter.lib.fixture.FixtureResult;
 import pvt.unitee.reporter.lib.fixture.FixtureResultBuilder;
 import pvt.unitee.reporter.lib.issue.Issue;

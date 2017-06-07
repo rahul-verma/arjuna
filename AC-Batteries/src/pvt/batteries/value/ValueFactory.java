@@ -6,9 +6,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.arjunapro.sysauto.batteries.DataBatteries;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
+import arjunasdk.sysauto.batteries.DataBatteries;
 
 public class ValueFactory {
 	private static NullValue nullValue = new NullValue();

@@ -27,12 +27,11 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.console.Console;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.EventAttribute;
-import pvt.arjunapro.enums.TestReportSection;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.EventAttribute;
+import pvt.unitee.enums.TestReportSection;
 import pvt.unitee.reporter.lib.DefaultObserver;
 import pvt.unitee.reporter.lib.event.Event;
 

@@ -1,12 +1,11 @@
 package pvt.unitee.core.lib.testvars;
 
-import com.arjunapro.testauto.enums.TestAttribute;
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
+import unitee.enums.TestAttribute;
 
 public class DefaultTestProperties 
 				extends EnumKeyValueContainer<TestAttribute>

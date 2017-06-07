@@ -20,7 +20,7 @@ package pvt.batteries.datafilter;
 
 import java.util.List;
 
-import pvt.arjunapro.enums.FilterType;
+import pvt.arjunasdk.enums.FilterType;
 
 public class StringFilterFactory {
 	public static StringFilter getFilter(final String type, final String mode, final List<String> list) {

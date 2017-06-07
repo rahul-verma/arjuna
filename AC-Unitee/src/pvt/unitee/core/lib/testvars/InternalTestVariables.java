@@ -2,12 +2,12 @@ package pvt.unitee.core.lib.testvars;
 
 import java.util.Map;
 
-import com.arjunapro.ddt.interfaces.DataRecord;
-import com.arjunapro.testauto.interfaces.TestVariables;
 import com.google.gson.JsonObject;
 
+import arjunasdk.ddauto.interfaces.DataRecord;
 import pvt.arjunapro.ddt.interfaces.DataReference;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
+import unitee.interfaces.TestVariables;
 
 public interface InternalTestVariables extends TestVariables {
 

@@ -3,12 +3,12 @@ package pvt.unitee.reporter.lib.reportable;
 import java.util.List;
 import java.util.Map;
 
-import com.arjunapro.testauto.enums.TestAttribute;
-import com.arjunapro.testauto.enums.TestObjectAttribute;
-import com.arjunapro.testauto.interfaces.StringKeyValueContainer;
-import com.arjunapro.testauto.interfaces.TestObjectProperties;
-import com.arjunapro.testauto.interfaces.TestProperties;
-import com.arjunapro.testauto.interfaces.TestVariables;
+import arjunasdk.interfaces.StringKeyValueContainer;
+import unitee.enums.TestAttribute;
+import unitee.enums.TestObjectAttribute;
+import unitee.interfaces.TestObjectProperties;
+import unitee.interfaces.TestProperties;
+import unitee.interfaces.TestVariables;
 
 public class TestRelatedResult {
 	private TestVariables testVars = null;

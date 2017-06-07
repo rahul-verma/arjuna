@@ -2,12 +2,11 @@ package pvt.unitee.runner.lib.slots;
 
 import org.apache.log4j.Logger;
 
-import com.arjunapro.testauto.config.RunConfig;
-import com.arjunapro.testauto.console.Console;
-
+import arjunasdk.config.RunConfig;
+import arjunasdk.console.Console;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.enums.TestResultCode;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
+import pvt.unitee.enums.TestResultCode;
 import pvt.unitee.reporter.lib.IssueId;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
 import pvt.unitee.testobject.lib.interfaces.TestCreator;

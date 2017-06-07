@@ -18,8 +18,8 @@
  ******************************************************************************/
 package pvt.unitee.validator.lib.exceptions;
 
-import pvt.arjunapro.interfaces.Check;
 import pvt.batteries.exceptions.ArjunaException;
+import pvt.unitee.interfaces.Check;
 
 public class StepResultEvent extends ArjunaException {
 	/**

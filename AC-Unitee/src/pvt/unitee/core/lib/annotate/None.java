@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.unitee.core.lib.annotate;
 
-import com.arjunapro.ddt.interfaces.DataSource;
+import arjunasdk.ddauto.interfaces.DataSource;
 
 public abstract class None implements DataSource{
 	// A placeholder class for annotation checking

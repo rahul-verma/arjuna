@@ -24,12 +24,11 @@ import java.util.List;
 
 import org.sikuli.script.Match;
 
-import com.arjunapro.uiauto.interfaces.UiElement;
-
-import pvt.arjunapro.uiauto.sikuli.SikuliUiDriver;
+import arjunasdk.uiauto.interfaces.SikuliUiDriver;
+import arjunasdk.uiauto.interfaces.UiElement;
+import pvt.arjunasdk.uiauto.api.ElementMetaData;
+import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
 import pvt.sikuli.api.SikuliMediator;
-import pvt.uiauto.enums.ElementLoaderType;
-import pvt.uiautomator.api.ElementMetaData;
 import pvt.uiautomator.lib.base.BaseUiScreenMediator;
 
 public class DefaultSikuliMediator extends BaseUiScreenMediator implements SikuliMediator{

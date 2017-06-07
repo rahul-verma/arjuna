@@ -24,7 +24,7 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.io.StringWriter;
 
-import com.arjunapro.sysauto.batteries.SystemBatteries;
+import arjunasdk.sysauto.batteries.SystemBatteries;
 
 public class ExceptionBatteries {
 	private static String[] removeThese = new String[] {

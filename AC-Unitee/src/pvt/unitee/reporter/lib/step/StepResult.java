@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.google.gson.JsonObject;
 
-import pvt.arjunapro.enums.StepResultAttribute;
+import pvt.unitee.enums.StepResultAttribute;
 
 public class StepResult {
 	private StepResultProperties resultProps =  null;

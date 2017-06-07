@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.batteries.databroker;
 
-import com.arjunapro.ddt.interfaces.DataSource;
+import arjunasdk.ddauto.interfaces.DataSource;
 
 public class DataSourceFactory {
 	public static DataSource getDataSource(String srcFilePath, String delimiter) throws Exception {

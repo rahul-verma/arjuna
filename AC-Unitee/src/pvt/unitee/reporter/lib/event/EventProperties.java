@@ -2,13 +2,12 @@ package pvt.unitee.reporter.lib.event;
 
 import java.util.HashMap;
 
-import com.arjunapro.testauto.enums.ValueType;
-import com.arjunapro.testauto.interfaces.Value;
-
-import pvt.arjunapro.enums.EventAttribute;
+import arjunasdk.enums.ValueType;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.value.BooleanValue;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.EventAttribute;
 
 public class EventProperties 
 				extends EnumKeyValueContainer<EventAttribute>{

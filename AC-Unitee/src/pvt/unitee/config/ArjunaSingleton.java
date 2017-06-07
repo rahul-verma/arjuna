@@ -25,19 +25,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.arjunapro.ddt.annotations.DataMethodContainer;
-import com.arjunapro.ddt.interfaces.DataSource;
-import com.arjunapro.sysauto.batteries.FileSystemBatteries;
-import com.arjunapro.testauto.console.Console;
-import com.arjunapro.testauto.interfaces.Value;
 import com.typesafe.config.ConfigException;
 import com.typesafe.config.ConfigObject;
 
+import arjunasdk.console.Console;
+import arjunasdk.ddauto.interfaces.DataSource;
+import arjunasdk.interfaces.Value;
+import arjunasdk.sysauto.batteries.FileSystemBatteries;
 import pvt.arjunapro.annotations.DataGenerator;
-import pvt.arjunapro.enums.ArjunaProperty;
-import pvt.arjunapro.enums.BatteriesPropertyType;
-import pvt.arjunapro.enums.PickerTargetType;
-import pvt.arjunapro.enums.TestPickerProperty;
+import pvt.arjunapro.integration.UiAutoIntegrator;
+import pvt.arjunasdk.enums.BatteriesPropertyType;
+import pvt.arjunasdk.property.ConfigPropertyBatteries;
 import pvt.batteries.cli.CLIConfigurator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.hocon.HoconConfigObjectReader;
@@ -48,9 +46,11 @@ import pvt.batteries.hocon.HoconStringReader;
 import pvt.batteries.integration.ComponentConfigurator;
 import pvt.batteries.lib.ComponentIntegrator;
 import pvt.batteries.logging.Log;
-import pvt.batteries.property.ConfigPropertyBatteries;
 import pvt.batteries.utils.ResourceStreamBatteries;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.enums.ArjunaProperty;
+import pvt.unitee.enums.PickerTargetType;
+import pvt.unitee.enums.TestPickerProperty;
 import pvt.unitee.reporter.lib.CentralExecutionState;
 import pvt.unitee.reporter.lib.Reporter;
 import pvt.unitee.testobject.lib.loader.group.PickerMisConfiguration;
@@ -58,6 +58,7 @@ import pvt.unitee.testobject.lib.loader.group.TestGroupsDB;
 import pvt.unitee.testobject.lib.loader.session.MSession;
 import pvt.unitee.testobject.lib.loader.session.Session;
 import pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
+import unitee.annotations.DataMethodContainer;
 
 public enum ArjunaSingleton {
 	INSTANCE;
@@ -109,12 +110,7 @@ public enum ArjunaSingleton {
 		String refPath = FileSystemBatteries.getAbsolutePathFromJar(FileSystemBatteries.getJarFilePathForObject(this), "./../../../..");
 //		System.out.println(refPath);
 		Batteries.init(refPath);
-		if (initUiAuto){
-			Class<?> klass = Class.forName("com.arjunapro.internal.UiAutoIntegrator");
-			Method m = klass.getDeclaredMethod("getComponentConfigurator");
-			ComponentConfigurator ci = (ComponentConfigurator) m.invoke(null);
-		    Batteries.addConfigurator(ci);
-		}
+		Batteries.addConfigurator(UiAutoIntegrator.getComponentConfigurator());
 		ArjunaConfigurator uConf = new ArjunaConfigurator();
 		Batteries.addConfigurator(uConf);
 		Batteries.processConfigDefaults();
