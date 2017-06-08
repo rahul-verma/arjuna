@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.arjunapro.annotations;
+package unitee.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

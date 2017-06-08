@@ -7,10 +7,10 @@ import java.util.HashMap;
 
 import arjunasdk.sysauto.batteries.DataBatteries;
 import arjunasdk.sysauto.batteries.FileSystemBatteries;
-import pvt.arjunapro.annotations.FileDataReference;
-import pvt.arjunapro.annotations.Instances;
 import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.batteries.config.Batteries;
+import unitee.annotations.FileDataReference;
+import unitee.annotations.Instances;
 import unitee.annotations.TestClass;
 import unitee.annotations.TestMethod;
 
@@ -121,7 +121,7 @@ public class JavaTestLoadingUtils {
 	}
 	
 	public static boolean hasUserSuppliedProperties(String mQualifiedName, Instances instancesAnn){
-		String[] properties = instancesAnn.utv();
+		String[] properties = instancesAnn.execVars();
 		if (!Arrays.equals(properties,checkArray)){
 			if (properties.length == 0){
 				System.err.println("Found empty properties in @Instances annotation: " + mQualifiedName);
@@ -146,7 +146,7 @@ public class JavaTestLoadingUtils {
 			return invocationWiseProps;
 		}
 
-		String[] properties = instancesAnnotation.utv();
+		String[] properties = instancesAnnotation.execVars();
 		
 		for(String propString: properties){
 			ArrayList<String> parts = DataBatteries.split(propString,"=");

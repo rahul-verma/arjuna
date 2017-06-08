@@ -23,6 +23,9 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+import arjunasdk.ddauto.interfaces.DataSource;
+import pvt.unitee.core.lib.annotate.None;
+
 @Retention(RetentionPolicy.RUNTIME) 
 @Target({ElementType.TYPE})
 public @interface TestClass {
@@ -32,5 +35,8 @@ public @interface TestClass {
 	String idea() default "NOT_SET";
 	int priority() default 1;
 	int methodThreads() default 1;
-	String[] utp() default {};
+	String[] attr() default {};
+	//Class<? extends Dictionary> attrClass() default None.class;
+	//String[] execVars() default {};
+	//Class<? extends MVDictionary> execVarsClass() default None.class;
 }

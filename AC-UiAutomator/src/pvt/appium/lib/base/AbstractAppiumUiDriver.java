@@ -54,6 +54,7 @@ import pvt.arjunasdk.uiauto.enums.AppiumMobilePlatformType;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
 import pvt.arjunasdk.uiauto.enums.MobileWebIdentifyBy;
 import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiauto.enums.UiDriverEngine;
 import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.batteries.config.Batteries;
@@ -61,7 +62,6 @@ import pvt.batteries.exceptions.Problem;
 import pvt.uiautomator.UiAutomator;
 import pvt.uiautomator.lib.DefaultUiDriver;
 import pvt.uiautomator.lib.DefaultUiElement;
-import pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
 public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements AppiumUiDriver {
 
@@ -94,11 +94,11 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 		init(context, null);
 	}
 	
-	public AppiumMediator createMediatorSkeleton(UiElement element) throws Exception {
+	private AppiumMediator createMediatorSkeleton(UiElement element) throws Exception {
 		return new DefaultAppiumMediator(this, element);
 	}
 	
-	public UiElement createDefaultElementSkeleton(ElementMetaData elementMetaData) throws Exception {
+	private UiElement createDefaultElementSkeleton(ElementMetaData elementMetaData) throws Exception {
 		return new DefaultUiElement(elementMetaData);
 	}
 	

@@ -23,11 +23,11 @@ import org.apache.log4j.Logger;
 import arjunasdk.enums.FileFormat;
 import arjunasdk.sysauto.batteries.FileSystemBatteries;
 import arjunasdk.uiauto.interfaces.PageMapper;
+import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
 import pvt.uiautomator.UiAutomator;
 import pvt.uiautomator.lib.IniFilePageMapper;
-import pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
 public class PageMapperFactory {
 	private static Logger sLogger = Logger.getLogger(Batteries.getCentralLogName());

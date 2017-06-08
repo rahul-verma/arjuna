@@ -1,4 +1,4 @@
-package pvt.uiautomator.lib.config;
+package pvt.arjunasdk.uiauto.enums;
 
 public enum UiAutomatorPropertyType {
 	DIRECTORY_PROJECT_UI_MAPS,

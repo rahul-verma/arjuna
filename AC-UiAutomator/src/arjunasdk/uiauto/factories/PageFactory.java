@@ -18,11 +18,22 @@
  ******************************************************************************/
 package arjunasdk.uiauto.factories;
 
+import java.io.File;
+
+import org.apache.commons.io.FilenameUtils;
+
+import arjunasdk.sysauto.batteries.FileSystemBatteries;
+import arjunasdk.uiauto.interfaces.App;
 import arjunasdk.uiauto.interfaces.Page;
 import arjunasdk.uiauto.interfaces.PageMapper;
 import arjunasdk.uiauto.interfaces.UiDriver;
+import arjunasdk.uiauto.pageobject.BaseApp;
 import arjunasdk.uiauto.pageobject.BasePage;
 import pvt.arjunapro.uiauto.factories.PageMapperFactory;
+import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
+import pvt.batteries.config.Batteries;
+import pvt.batteries.exceptions.Problem;
+import pvt.uiautomator.UiAutomator;
 
 public class PageFactory {
 
@@ -38,28 +49,28 @@ public class PageFactory {
 		return page;
 	}
 	
-//	public static App getSimpleApp(String name, UiDriver uiDriver, String appMapsRootDir) throws Exception{
-//		App app = new BaseApp(name);
-//		String consideredPath = appMapsRootDir;
-//		if (!FileSystemBatteries.isDir(consideredPath)){
-//			consideredPath = FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_UI_MAPS).asString() + "/" + consideredPath);
-//			if (!FileSystemBatteries.isDir(consideredPath)){
-//				throw new Problem(
-//						"UI Automator", 
-//						"Page Mapper", 
-//						"getFileMapper", 
-//						UiAutomator.problem.APP_MAP_DIR_NOT_A_DIR, 
-//						Batteries.getProblemText(UiAutomator.problem.APP_MAP_DIR_NOT_A_DIR, consideredPath)
-//					);				
-//			} 
-//		}
-//		File d = new File(consideredPath);
-//		for (File path: d.listFiles()){
-//			app.registerPage(FilenameUtils.getBaseName(path.getAbsolutePath()), uiDriver,
-//					path.getAbsolutePath());
-//		}
-//		return app;
-//	}
+	public static App getSimpleApp(String name, UiDriver uiDriver, String appMapsRootDir) throws Exception{
+		App app = new BaseApp(name);
+		String consideredPath = appMapsRootDir;
+		if (!FileSystemBatteries.isDir(consideredPath)){
+			consideredPath = FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_PROJECT_UI_MAPS).asString() + "/" + consideredPath);
+			if (!FileSystemBatteries.isDir(consideredPath)){
+				throw new Problem(
+						"UI Automator", 
+						"Page Mapper", 
+						"getFileMapper", 
+						UiAutomator.problem.APP_MAP_DIR_NOT_A_DIR, 
+						Batteries.getProblemText(UiAutomator.problem.APP_MAP_DIR_NOT_A_DIR, consideredPath)
+					);				
+			} 
+		}
+		File d = new File(consideredPath);
+		for (File path: d.listFiles()){
+			app.registerPage(FilenameUtils.getBaseName(path.getAbsolutePath()), uiDriver,
+					path.getAbsolutePath());
+		}
+		return app;
+	}
 
 	public static Page getPage(UiDriver uiDriver, String mapPath) throws Exception {
 		return getPage(uiDriver, PageMapperFactory.getFileMapper(mapPath));

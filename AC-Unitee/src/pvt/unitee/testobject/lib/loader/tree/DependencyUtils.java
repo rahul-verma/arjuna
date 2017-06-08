@@ -6,11 +6,11 @@ import org.apache.log4j.Logger;
 
 import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.annotations.ClassDependency;
-import pvt.arjunapro.annotations.MethodDependency;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
+import unitee.annotations.ClassDependency;
+import unitee.annotations.MethodDependency;
 
 public class DependencyUtils {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());

@@ -13,13 +13,13 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.annotations.ClassDependency;
-import pvt.arjunapro.annotations.MethodDependency;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.annotate.None;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
+import unitee.annotations.ClassDependency;
+import unitee.annotations.MethodDependency;
 
 public class DependencyTreeBuilder {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

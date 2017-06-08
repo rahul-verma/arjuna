@@ -25,8 +25,8 @@ import org.apache.log4j.Logger;
 
 import arjunasdk.ddauto.interfaces.DataSource;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.annotations.DataGenerator;
 import pvt.batteries.config.Batteries;
+import unitee.annotations.DataGenerator;
 
 public class DataGeneratorMap {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

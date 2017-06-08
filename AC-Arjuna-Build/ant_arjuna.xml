@@ -27,12 +27,11 @@ simple example build file
 	    	<target name="batteries_build"/>
 	   	</antcall>
 		<antcall>
-	    	<target name="unitee.core_build"/>
-	   	</antcall>
-		<antcall>
 	    	<target name="uiautomator.core_build"/>
 	   	</antcall>
-		
+		<antcall>
+	    	<target name="unitee.core_build"/>
+	   	</antcall>
 		<antcall target="arjunasdk_mkdirs">
 				<param name="ed" value="sdk"/>
 	   	</antcall>
@@ -57,11 +56,13 @@ simple example build file
 				<param name="jar1" value="${private.arjunafree.clear.jar.file}"/>
 				<param name="jar2" value="${private.arjunafree.obfuscated.jar.file}"/>
 	   	</antcall>
-		<antcall>
-	    	<target name="arjunasdk_build"/>
+		
+		<antcall target="arjunasdk_build">
+				<param name="ed" value="sdk"/>
 	   	</antcall>
-		<antcall>
-	    	<target name="arjunafree_build"/>
+		
+		<antcall target="arjunafree_build">
+				<param name="ed" value="free"/>
 	   	</antcall>
 	</target>
 

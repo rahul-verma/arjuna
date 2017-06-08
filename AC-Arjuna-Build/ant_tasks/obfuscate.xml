@@ -45,7 +45,13 @@ class files -->
 
 			<keepattribute name="*Annotation*" />
 			
-			<keep name="com.arjunapro.**" access="public">
+			<keep name="arjunasdk.**" access="public">
+				<method access="public" name="*" />
+				<method access="protected" name="*" />
+			</keep>
+			
+			
+			<keep name="unitee.**" access="public">
 				<method access="public" name="*" />
 				<method access="protected" name="*" />
 			</keep>
@@ -64,11 +70,11 @@ class files -->
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
 			</keep>
 			
-			<keep name="pvt.arjunasdk.enums.**" access="public">
+			<keepclassmembers name="pvt.arjunasdk.enums.**" access="public">
 				<field name="*" />
 				<method access="public static" type="**[]" name="values" parameters="" />
 				<method access="public static" type="**" name="valueOf" parameters="java.lang.String" />
-			</keep>
+			</keepclassmembers>
 			
 			<keep name="unitee.enums.**" access="public">
 				<field name="*" />
@@ -113,8 +119,6 @@ class files -->
 			<keepattribute name="Exceptions" />
 			<keepattribute name="Signature" />
 			<keepattribute name="InnerClasses" />
-			<keepattribute name="LocalVariableTable" />
-			<keepattribute name="LocalVariableTypeTable" />
 			<keepattribute name="MethodParameters" />
 
 		</proguard>

@@ -8,6 +8,7 @@ import pvt.arjunasdk.property.ConfigProperty;
 import pvt.arjunasdk.property.ConfigPropertyBatteries;
 import pvt.arjunasdk.property.ConfigPropertyBuilder;
 import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.ds.Message;
 import pvt.batteries.ds.MessagesContainer;
 import pvt.batteries.ds.Name;
@@ -180,7 +181,7 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 
 	public void processDefaults() throws Exception {
 		UiAutomator.init();
-		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/uiautomator.conf"));
+		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/uiautomator.conf"));
 		super.processDefaults(reader);
 	}
 

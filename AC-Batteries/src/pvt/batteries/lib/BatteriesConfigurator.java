@@ -132,7 +132,7 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 	}
 
 	public void processDefaults() throws Exception {
-		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/batteries.conf"));
+		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/batteries.conf"));
 		super.processDefaults(reader);
 	}
 

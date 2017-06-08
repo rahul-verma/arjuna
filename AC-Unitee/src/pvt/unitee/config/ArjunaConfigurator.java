@@ -434,7 +434,7 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 	}
 
 	public void processDefaults() throws Exception {
-		HoconReader reader =  new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/arjuna_visible.conf"));
+		HoconReader reader =  new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/arjuna_visible.conf"));
 		super.processDefaults(reader);
 	}
 	

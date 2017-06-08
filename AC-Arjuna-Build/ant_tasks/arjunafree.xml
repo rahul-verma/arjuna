@@ -38,7 +38,7 @@ simple example build file
 	<property name="private.arjunafree.obfuscated.jar.file" value="${private.arjunafree.obfuscated.jar.dir}/obfuscated_${arjunafree.jar.file.name}" />
 
 	<property name="private.arjunafree.dist.tools.dir" value="${current.dist.private.tools.dir}/${arjunafree.name}-dist" />
-	<property name="private.arjunafree.dist.tools.root.dir" value="${private.arjunafree.dist.tools.dir}/arjuna" />
+	<property name="private.arjunafree.dist.tools.root.dir" value="${private.arjunafree.dist.tools.dir}/autocognite-arjuna" />
 	<property name="private.arjunafree.dist.tools.jar.dir" value="${private.arjunafree.dist.tools.root.dir}/bin/lib/java" />
 	<property name="private.arjunafree.dist.tools.jar.file" value="${private.arjunafree.dist.tools.jar.dir}/${arjunafree.full.jar.file.name}" />
 	<property name="private.arjunafree.dist.jar.file" value="${current.dist.private.jars.dir}/${arjunafree.full.jar.file.name}" />
@@ -73,6 +73,8 @@ simple example build file
 		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/examples" />
 		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/examples/data" />
 		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/config" />
+		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/config/sessions" />
+		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/config/groups" />
 		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/temp" />
 		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/bin/scripts" />
 		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/bin/tools" />
@@ -179,8 +181,8 @@ simple example build file
 		<copy file="${ant.arjunafree.jar.file}" tofile="${private.arjunafree.self.jar.file}" />
 		<jar destFile="${private.arjunafree.clear.jar.file}">
 			<zipgroupfileset includes="*.jar" dir="${private.batteries.self.jar.dir}" />
-			<zipgroupfileset includes="*.jar" dir="${private.unitee.core.self.jar.dir}" />
 			<zipgroupfileset includes="*.jar" dir="${private.uiautomator.self.jar.dir}" />
+			<zipgroupfileset includes="*.jar" dir="${private.unitee.core.self.jar.dir}" />
 			<zipgroupfileset includes="*.jar" dir="${private.arjunafree.self.jar.dir}" />
 		</jar>
 		
@@ -192,8 +194,15 @@ simple example build file
 	</target>
 			
 	<target name="arjunafree_build">
+		<property name="arjEd" value="${ed}" />
+		<property name="source.private.meta.docs.my.dir" value="${source.private.meta.docs.dir}/${arjEd}" />
+		<property name="source.private.meta.lntexts.my.dir" value="${source.private.meta.lntexts.dir}/${arjEd}" />
+		<jar jarfile="${private.arjunafree.obfuscated.jar.dir}/docs.jar" basedir="${private.arjunafree.dist.src.dir}/${arjunafree.name}/docs" />
+		<jar jarfile="${private.arjunafree.obfuscated.jar.dir}/arjunalicense.jar" basedir="${source.private.meta.lntexts.my.dir}" />
+		<jar jarfile="${private.arjunafree.obfuscated.jar.dir}/eula.jar" basedir="${source.private.meta.lntexts.common.dir}" />
+		
 		<jar destFile="${private.arjunafree.dist.tools.jar.file}">
-		<zipgroupfileset includes="*.jar" dir="${3rd_party_batteries_jars}"/>
+			<zipgroupfileset includes="*.jar" dir="${3rd_party_batteries_jars}"/>
 			<zipgroupfileset includes="*.jar" dir="${private.arjunafree.obfuscated.jar.dir}"/>
 		</jar>
 

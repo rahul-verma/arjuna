@@ -19,7 +19,6 @@ import arjunasdk.console.Console;
 import arjunasdk.interfaces.Value;
 import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.annotations.Instances;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discoverer.DiscoveredFile;
 import pvt.batteries.discoverer.DiscoveredFileAttribute;
@@ -31,6 +30,7 @@ import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import pvt.unitee.testobject.lib.java.JavaTestClass;
 import pvt.unitee.testobject.lib.java.TestClassConstructorType;
 import pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;
+import unitee.annotations.Instances;
 import unitee.annotations.Skip;
 import unitee.annotations.TestClass;
 
@@ -43,7 +43,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 	public static Map<String, Set<String>> METHOD_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
 	
 	public JavaTestClassDefinitionsLoader() throws Exception{
-		HoconReader reader1 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/class_annotations_compatibility.conf"));
+		HoconReader reader1 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/class_annotations_compatibility.conf"));
 		reader1.process();
 		Map<String, Value> rules1 = reader1.getProperties();
 		for (String r: rules1.keySet()){
@@ -52,7 +52,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 			CLASS_ANNOTATION_COMPAT.put(r, aSet);
 		}
 		
-		HoconReader reader2 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/method_annotations_compatibility.conf"));
+		HoconReader reader2 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/method_annotations_compatibility.conf"));
 		reader2.process();
 		Map<String, Value> rules2 = reader2.getProperties();
 		for (String r: rules2.keySet()){

@@ -41,6 +41,7 @@ import pvt.arjunasdk.uiauto.api.Identifier;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
 import pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy;
 import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
 import pvt.sikuli.api.SikuliMediator;
@@ -48,7 +49,6 @@ import pvt.sikuli.lib.base.DefaultSikuliMediator;
 import pvt.uiautomator.UiAutomator;
 import pvt.uiautomator.lib.DefaultUiDriver;
 import pvt.uiautomator.lib.DefaultUiElement;
-import pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
 public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, SikuliUiDriver{
 	
@@ -60,7 +60,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 		super(UiAutomationContext.SCREEN, loaderType);
 	}
 	
-	public SikuliMediator createMediatorSkeleton(UiElement element) throws Exception {
+	private SikuliMediator createMediatorSkeleton(UiElement element) throws Exception {
 		return new DefaultSikuliMediator(this, element);
 	}
 
@@ -513,7 +513,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 		this.setText(imagePath, "");
 	}
 
-	public UiElement createDefaultElementSkeleton(ElementMetaData elementMetaData) throws Exception {
+	private UiElement createDefaultElementSkeleton(ElementMetaData elementMetaData) throws Exception {
 		return new DefaultUiElement(elementMetaData);
 	}
 

@@ -12,12 +12,12 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.annotations.ClassDependency;
-import pvt.arjunapro.annotations.MethodDependency;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.core.lib.annotate.None;
 import pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;
 import pvt.unitee.testobject.lib.loader.tree.DependencyUtils;
+import unitee.annotations.ClassDependency;
+import unitee.annotations.MethodDependency;
 
 public class TestDefinitionsDB {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());

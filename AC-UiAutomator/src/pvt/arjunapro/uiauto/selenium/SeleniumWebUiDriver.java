@@ -52,6 +52,7 @@ import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.api.Identifier;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
 import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiauto.enums.UiDriverEngine;
 import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.arjunasdk.uiauto.enums.WebIdentifyBy;
@@ -60,7 +61,6 @@ import pvt.selenium.api.WDMediator;
 import pvt.selenium.lib.base.DefaultSeleniumMediator;
 import pvt.uiautomator.lib.DefaultUiDriver;
 import pvt.uiautomator.lib.DefaultUiElement;
-import pvt.uiautomator.lib.config.UiAutomatorPropertyType;
 
 public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDriver {
 	
@@ -750,11 +750,11 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 		click(findElement(finder2));
 	}
 
-	public WDMediator createMediatorSkeleton(UiElement element) throws Exception {
+	private WDMediator createMediatorSkeleton(UiElement element) throws Exception {
 		return new DefaultSeleniumMediator(this, element);
 	}
 	
-	public UiElement createDefaultElementSkeleton(ElementMetaData elementMetaData) throws Exception {
+	private UiElement createDefaultElementSkeleton(ElementMetaData elementMetaData) throws Exception {
 		return new DefaultUiElement(elementMetaData);
 	}
 	

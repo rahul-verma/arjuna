@@ -16,19 +16,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.arjunapro.annotations;
+package unitee.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import pvt.unitee.core.lib.annotate.None;
-
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE, ElementType.METHOD})
-public @interface MethodDependency {
-	String[] value() default {};
-	String[] testMethods()  default {};
-	Class<?> containerClass() default None.class;
+@Target({ElementType.METHOD})
+public @interface AfterClassInstance {
 }

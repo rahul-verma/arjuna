@@ -70,6 +70,6 @@ public interface SikuliUiDriver {
 	File takeScreenshot() throws Exception;
 	void clearText(String imagePath) throws Exception;
 	
-	SikuliMediator createMediatorSkeleton(UiElement element) throws Exception;
+	//SikuliMediator createMediatorSkeleton(UiElement element) throws Exception;
 	UiElement declareElement(ElementMetaData elementMetaData) throws Exception;
 }

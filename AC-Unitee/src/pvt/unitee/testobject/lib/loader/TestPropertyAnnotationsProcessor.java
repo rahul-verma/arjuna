@@ -68,7 +68,7 @@ public class TestPropertyAnnotationsProcessor {
 		setName(testVars, testProps.name());
 		setIdea(testVars, testProps.idea());
 		setPriority(testVars, testProps.priority());
-		setCustomProps(testVars, testProps.utp());
+		setCustomProps(testVars, testProps.attr());
 	}
 	
 	private static void setAnnotatedProperties(InternalTestVariables testVars, TestMethod testProps) throws Exception{
@@ -76,7 +76,7 @@ public class TestPropertyAnnotationsProcessor {
 		setName(testVars, testProps.name());
 		setIdea(testVars, testProps.idea());
 		setPriority(testVars, testProps.priority());
-		setCustomProps(testVars, testProps.utp());
+		setCustomProps(testVars, testProps.attr());
 	}
 	
 	private static void setCustomProps(InternalTestVariables testVars, String[] customProps) throws Exception{

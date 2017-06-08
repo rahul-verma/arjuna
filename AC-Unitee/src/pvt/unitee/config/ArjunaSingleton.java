@@ -32,7 +32,6 @@ import arjunasdk.console.Console;
 import arjunasdk.ddauto.interfaces.DataSource;
 import arjunasdk.interfaces.Value;
 import arjunasdk.sysauto.batteries.FileSystemBatteries;
-import pvt.arjunapro.annotations.DataGenerator;
 import pvt.arjunapro.integration.UiAutoIntegrator;
 import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.arjunasdk.property.ConfigPropertyBatteries;
@@ -58,6 +57,7 @@ import pvt.unitee.testobject.lib.loader.group.TestGroupsDB;
 import pvt.unitee.testobject.lib.loader.session.MSession;
 import pvt.unitee.testobject.lib.loader.session.Session;
 import pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
+import unitee.annotations.DataGenerator;
 import unitee.annotations.DataMethodContainer;
 
 public enum ArjunaSingleton {
@@ -116,7 +116,7 @@ public enum ArjunaSingleton {
 		Batteries.processConfigDefaults();
 		integrator = uConf.getIntegrator();
 		//integrator.enumerate();
-		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/arjunapro/pvt/text/arjuna_visible.conf"));
+		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/arjuna_visible.conf"));
 		reader.process();		
 		integrator.setProjectDir(Batteries.getBaseDir());
 		Batteries.processConfigProperties(reader.getProperties());
@@ -226,7 +226,7 @@ public enum ArjunaSingleton {
 		String projDir = Batteries.getBaseDir();
 		String runID =  integrator.value(ArjunaProperty.RUNID).asString();
 		String timestampedRunID = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date()) + "-" + runID;
-		String updates = ResourceStreamBatteries.streamToString(ArjunaSingleton.class.getResourceAsStream("/com/arjunapro/pvt/text/arjuna_invisible.conf"));
+		String updates = ResourceStreamBatteries.streamToString(ArjunaSingleton.class.getResourceAsStream("/com/autocognite/pvt/text/arjuna_invisible.conf"));
 		String replaced = updates.replace("%%slugProjDir", projDir).replace("%%slugRUNID", timestampedRunID);
 		HoconReader uReader = new HoconStringReader(replaced);
 		uReader.process();

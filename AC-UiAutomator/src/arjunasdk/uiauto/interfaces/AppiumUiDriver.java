@@ -72,7 +72,7 @@ public interface AppiumUiDriver{
 	void switchToWebContext() throws Exception;
 	void switchToNativeContext() throws Exception;
 	void switchToFrame(MobileElement appiumElement) throws Exception;
-	AppiumMediator createMediatorSkeleton(UiElement element) throws Exception;
+	//AppiumMediator createMediatorSkeleton(UiElement element) throws Exception;
 	UiElement declareElement(ElementMetaData elementMetaData) throws Exception;
 	void waitForElementAbsence(By findBy) throws Exception;
 	void waitForElementVisibility(By findBy) throws Exception;

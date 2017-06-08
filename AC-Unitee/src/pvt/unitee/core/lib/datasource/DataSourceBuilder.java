@@ -13,7 +13,6 @@ import arjunasdk.ddauto.interfaces.DataSource;
 import arjunasdk.sysauto.batteries.FileSystemBatteries;
 import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.annotations.DriveWithDataGenerator;
 import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.databroker.DataSourceFactory;
@@ -23,6 +22,7 @@ import unitee.annotations.Data;
 import unitee.annotations.DriveWithData;
 import unitee.annotations.DriveWithDataArray;
 import unitee.annotations.DriveWithDataFile;
+import unitee.annotations.DriveWithDataGenerator;
 import unitee.annotations.DriveWithDataMethod;
 
 // Purpose of this is to achieve thread safety for Data Sources by creating unique objects every time.

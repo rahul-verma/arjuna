@@ -75,7 +75,7 @@ public interface SeleniumUiDriver {
 	Select convertToSelectElement(WebElement toolElement) throws Exception;
 	void hover(WebElement element) throws Exception;
 	void switchToFrame(WebElement wdElement) throws Exception;
-	WDMediator createMediatorSkeleton(UiElement uiElement) throws Exception;
+	//WDMediator createMediatorSkeleton(UiElement uiElement) throws Exception;
 	void waitForElementAbsence(By findBy) throws Exception;
 	void waitForElementVisibility(By findBy) throws Exception;
 	void waitForElementInvisibility(By findBy) throws Exception;

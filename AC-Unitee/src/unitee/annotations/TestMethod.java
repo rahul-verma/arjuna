@@ -32,5 +32,8 @@ public @interface TestMethod {
 	String idea() default "NOT_SET";
 	int priority() default -51111;
 	int testThreads() default 1;
-	String[] utp() default {};
+	String[] attr() default {};
+	//Class<? extends Dictionary> attrClass() default None.class;
+	//String[] execVars() default {};
+	//Class<? extends MVDictionary> execVarsClass() default None.class;
 }

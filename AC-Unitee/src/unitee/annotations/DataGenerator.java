@@ -16,20 +16,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.arjunapro.annotations;
+package unitee.annotations;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import arjunasdk.ddauto.interfaces.DataSource;
-import pvt.unitee.core.lib.annotate.None;
-
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.METHOD})
-public @interface DriveWithDataGenerator {
+@Target({ElementType.TYPE})
+public @interface DataGenerator {
 	String value() default "NOT_SET";
 	String name() default "NOT_SET";
-	Class<? extends DataSource> generatorClass() default None.class;
 }
