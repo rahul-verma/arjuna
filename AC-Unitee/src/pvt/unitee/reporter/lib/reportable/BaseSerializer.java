@@ -10,8 +10,8 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 
 import arjunasdk.interfaces.Value;
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.arjuna.ArjunaInternal;
 
 public class BaseSerializer {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

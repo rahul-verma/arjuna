@@ -4,7 +4,6 @@ import arjunasdk.console.Console;
 import arjunasdk.ddauto.interfaces.DataRecord;
 import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.ddt.datarecord.BaseDataRecord;
 import pvt.batteries.value.DoubleValue;
@@ -12,6 +11,7 @@ import pvt.batteries.value.EnumValue;
 import pvt.batteries.value.IntValue;
 import pvt.batteries.value.LongValue;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.arjuna.ArjunaInternal;
 import unitee.enums.TestObjectAttribute;
 import unitee.enums.TestObjectType;
 

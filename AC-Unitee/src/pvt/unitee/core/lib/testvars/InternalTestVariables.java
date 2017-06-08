@@ -5,7 +5,7 @@ import java.util.Map;
 import com.google.gson.JsonObject;
 
 import arjunasdk.ddauto.interfaces.DataRecord;
-import pvt.arjunapro.ddt.interfaces.DataReference;
+import pvt.arjunasdk.ddt.interfaces.DataReference;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import unitee.interfaces.TestVariables;
 

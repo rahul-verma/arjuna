@@ -26,7 +26,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import io.appium.java_client.MobileElement;
-import pvt.appium.api.AppiumMediator;
+import pvt.arjunasdk.appium.api.AppiumMediator;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.enums.UiElementType;
 

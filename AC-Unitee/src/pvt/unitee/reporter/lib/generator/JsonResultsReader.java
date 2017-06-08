@@ -12,9 +12,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 
 import arjunasdk.console.Console;
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.filehandler.FileReader;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.interfaces.ReportGenerator;
 
 public abstract class JsonResultsReader{

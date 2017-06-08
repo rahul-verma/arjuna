@@ -26,7 +26,7 @@ import org.apache.log4j.Logger;
 import arjunasdk.config.RunConfig;
 import arjunasdk.console.Console;
 import arjunasdk.sysauto.batteries.ThreadBatteries;
-import pvt.arjunapro.ArjunaInternal;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.testobject.lib.interfaces.TestContainer;
 
 public class TestSlotExecutor{

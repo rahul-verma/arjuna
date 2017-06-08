@@ -22,7 +22,7 @@ import org.apache.log4j.Logger;
 
 import arjunasdk.config.RunConfig;
 import arjunasdk.console.Console;
-import pvt.arjunapro.ArjunaInternal;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import pvt.unitee.testobject.lib.loader.session.SessionSubNode;

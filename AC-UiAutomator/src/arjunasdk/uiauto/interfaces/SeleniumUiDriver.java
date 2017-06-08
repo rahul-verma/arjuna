@@ -26,9 +26,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import pvt.arjunasdk.selenium.api.WDMediator;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.enums.UiElementType;
-import pvt.selenium.api.WDMediator;
 
 public interface SeleniumUiDriver {
 

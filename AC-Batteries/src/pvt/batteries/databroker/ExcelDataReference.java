@@ -23,7 +23,7 @@ import java.util.HashMap;
 
 import arjunasdk.ddauto.datarecord.MapDataRecord;
 import arjunasdk.ddauto.interfaces.DataRecord;
-import pvt.arjunapro.ddt.interfaces.DataReference;
+import pvt.arjunasdk.ddt.interfaces.DataReference;
 import pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 
 public class ExcelDataReference implements DataReference {

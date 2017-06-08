@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import pvt.unitee.enums.TestClassFixtureType;

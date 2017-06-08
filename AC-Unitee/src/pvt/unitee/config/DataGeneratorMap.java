@@ -24,8 +24,8 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import arjunasdk.ddauto.interfaces.DataSource;
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.arjuna.ArjunaInternal;
 import unitee.annotations.DataGenerator;
 
 public class DataGeneratorMap {

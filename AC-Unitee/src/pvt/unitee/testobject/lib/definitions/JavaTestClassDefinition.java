@@ -10,10 +10,10 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.ddt.interfaces.DataReference;
+import pvt.arjunasdk.ddt.interfaces.DataReference;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.databroker.DataReferenceFactory;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.dependency.DependencyHandler;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;

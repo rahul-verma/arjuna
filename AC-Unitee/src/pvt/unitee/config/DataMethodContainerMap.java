@@ -25,8 +25,8 @@ import java.util.HashMap;
 import org.apache.log4j.Logger;
 
 import arjunasdk.sysauto.batteries.DataBatteries;
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
 import pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler;
 import unitee.annotations.DataMethodContainer;

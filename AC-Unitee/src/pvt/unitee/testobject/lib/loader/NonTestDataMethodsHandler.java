@@ -24,8 +24,8 @@ import java.lang.reflect.Modifier;
 
 import org.apache.log4j.Logger;
 
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.arjuna.ArjunaInternal;
 import unitee.annotations.DataMethod;
 
 public class NonTestDataMethodsHandler extends DefaultDataMethodsHandler {

@@ -11,8 +11,8 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.annotate.None;
 import pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;
 import pvt.unitee.testobject.lib.loader.tree.DependencyUtils;

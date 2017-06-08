@@ -29,8 +29,6 @@ import arjunasdk.uiauto.interfaces.Page;
 import arjunasdk.uiauto.interfaces.PageMapper;
 import arjunasdk.uiauto.interfaces.UiDriver;
 import arjunasdk.uiauto.interfaces.UiElement;
-import pvt.arjunapro.uiauto.exceptions.IgnoreElementException;
-import pvt.arjunapro.uiauto.factories.PageMapperFactory;
 import pvt.arjunasdk.uiauto.api.CentralPageMap;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
@@ -38,11 +36,13 @@ import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiauto.enums.UiDriverEngine;
 import pvt.arjunasdk.uiauto.enums.UiElementType;
+import pvt.arjunasdk.uiauto.exceptions.IgnoreElementException;
+import pvt.arjunasdk.uiauto.factories.PageMapperFactory;
+import pvt.arjunasdk.uiautomator.UiAutomator;
+import pvt.arjunasdk.uiautomator.lib.DefaultElementMetaData;
+import pvt.arjunasdk.uiautomator.lib.config.UiAutomatorSingleton;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
-import pvt.uiautomator.UiAutomator;
-import pvt.uiautomator.lib.DefaultElementMetaData;
-import pvt.uiautomator.lib.config.UiAutomatorSingleton;
 
 public class BasePage implements Page{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

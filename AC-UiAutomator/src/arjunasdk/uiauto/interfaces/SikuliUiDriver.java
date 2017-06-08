@@ -24,9 +24,9 @@ import java.util.HashMap;
 
 import org.sikuli.script.Match;
 
+import pvt.arjunasdk.sikuli.api.SikuliMediator;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy;
-import pvt.sikuli.api.SikuliMediator;
 
 public interface SikuliUiDriver {
 	void focusOnApp() throws Exception;

@@ -29,11 +29,11 @@ import arjunasdk.uiauto.interfaces.PageMapper;
 import arjunasdk.uiauto.interfaces.UiDriver;
 import arjunasdk.uiauto.pageobject.BaseApp;
 import arjunasdk.uiauto.pageobject.BasePage;
-import pvt.arjunapro.uiauto.factories.PageMapperFactory;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
+import pvt.arjunasdk.uiauto.factories.PageMapperFactory;
+import pvt.arjunasdk.uiautomator.UiAutomator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
-import pvt.uiautomator.UiAutomator;
 
 public class PageFactory {
 

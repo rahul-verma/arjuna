@@ -19,13 +19,13 @@
 package arjunasdk.uiauto.factories;
 
 import arjunasdk.uiauto.interfaces.UiDriver;
-import pvt.arjunapro.uiauto.appium.*;
-import pvt.arjunapro.uiauto.selenium.SeleniumWebUiDriver;
-import pvt.arjunapro.uiauto.sikuli.SikuliScreenUiDriver;
+import pvt.arjunasdk.uiauto.appium.*;
 import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import pvt.arjunasdk.uiauto.selenium.SeleniumWebUiDriver;
+import pvt.arjunasdk.uiauto.sikuli.SikuliScreenUiDriver;
+import pvt.arjunasdk.uiautomator.UiAutomator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
-import pvt.uiautomator.UiAutomator;
 
 public class UiDriverFactory {
 	

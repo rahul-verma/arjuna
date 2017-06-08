@@ -7,7 +7,7 @@ import com.google.gson.JsonObject;
 
 import arjunasdk.ddauto.datarecord.MapDataRecord;
 import arjunasdk.ddauto.interfaces.DataRecord;
-import pvt.arjunapro.ddt.interfaces.DataReference;
+import pvt.arjunasdk.ddt.interfaces.DataReference;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import pvt.unitee.reporter.lib.reportable.TestVariablesSerializer;

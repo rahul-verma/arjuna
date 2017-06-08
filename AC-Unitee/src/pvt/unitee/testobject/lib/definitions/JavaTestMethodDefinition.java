@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Set;
 
 import arjunasdk.ddauto.interfaces.DataSource;
-import pvt.arjunapro.ddt.interfaces.DataReference;
+import pvt.arjunasdk.ddt.interfaces.DataReference;
 import pvt.batteries.databroker.DataReferenceFactory;
 import pvt.unitee.core.lib.datasource.DataSourceBuilder;
 import pvt.unitee.core.lib.datasource.DummyDataSource;

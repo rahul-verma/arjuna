@@ -5,8 +5,8 @@ import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
 
 import arjunasdk.console.Console;
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.arjuna.ArjunaInternal;
 import unitee.interfaces.TestVariables;
 
 public class TestVariablesSerializer extends BaseSerializer {

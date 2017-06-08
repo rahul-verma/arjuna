@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import pvt.arjunapro.ArjunaInternal;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.DependencyCondition;
 import pvt.unitee.enums.DependencyTarget;
 import pvt.unitee.reporter.lib.IssueId;

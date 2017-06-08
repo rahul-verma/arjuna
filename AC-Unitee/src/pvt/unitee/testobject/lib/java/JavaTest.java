@@ -6,9 +6,9 @@ import java.lang.reflect.Method;
 import org.apache.log4j.Logger;
 
 import arjunasdk.ddauto.interfaces.DataRecord;
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.utils.ExceptionBatteries;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
 import pvt.unitee.enums.TestClassFixtureType;
 import pvt.unitee.enums.TestResultCode;

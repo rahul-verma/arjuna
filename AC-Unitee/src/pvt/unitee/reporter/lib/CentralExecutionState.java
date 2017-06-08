@@ -8,7 +8,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import arjunasdk.config.RunConfig;
-import pvt.arjunapro.ArjunaInternal;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.TestResultType;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.test.TestResult;

@@ -9,7 +9,7 @@ import org.apache.log4j.Logger;
 import com.google.gson.JsonObject;
 
 import arjunasdk.config.RunConfig;
-import pvt.arjunapro.ArjunaInternal;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.StepResultAttribute;
 import pvt.unitee.enums.StepResultType;
 import pvt.unitee.enums.TestResultAttribute;

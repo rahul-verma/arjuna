@@ -22,8 +22,8 @@ import java.time.LocalDate;
 
 import arjunasdk.console.Console;
 import arjunasdk.sysauto.batteries.SystemBatteries;
-import pvt.arjunapro.ArjunaInternal;
-import pvt.arjunapro.ArjunaTestEngine;
+import pvt.unitee.arjuna.ArjunaInternal;
+import pvt.unitee.arjuna.ArjunaTestEngine;
 import pvt.unitee.cli.UniteeCliConfigurator;
 import pvt.unitee.lib.engine.TestEngine;
 

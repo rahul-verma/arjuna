@@ -26,7 +26,7 @@ import org.apache.log4j.Level;
 import arjunasdk.ddauto.interfaces.DataRecord;
 import arjunasdk.interfaces.ReadOnlyStringKeyValueContainer;
 import arjunasdk.interfaces.Value;
-import pvt.arjunapro.ddt.interfaces.DataReference;
+import pvt.arjunasdk.ddt.interfaces.DataReference;
 import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.batteries.integration.ComponentConfigurator;
 import pvt.batteries.lib.BatteriesConfigurator;

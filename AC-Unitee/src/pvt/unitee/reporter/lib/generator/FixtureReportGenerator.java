@@ -6,8 +6,8 @@ import org.apache.log4j.Logger;
 
 import com.google.gson.JsonElement;
 
-import pvt.arjunapro.ArjunaInternal;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.interfaces.ReportGenerator;
 import pvt.unitee.reporter.lib.fixture.FixtureResult;
