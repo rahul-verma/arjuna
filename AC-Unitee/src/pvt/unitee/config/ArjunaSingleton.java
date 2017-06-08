@@ -62,7 +62,7 @@ import unitee.annotations.DataMethodContainer;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.2.1-alpha";
+	private String version = "0.2.1";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();

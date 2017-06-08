@@ -126,16 +126,16 @@ public class UniteeCLI extends AbstractCLI {
 		String userProject = null;
 		
 		if (SystemUtils.IS_OS_WINDOWS){
-			shell = "arjunapro.bat";
-			mproject = "autocognite-arjuna\\mproject\\tests";
-			userProject = "C:\\\\some\\dir\\projectname\\tests";
+			shell = "arjuna.bat";
+			mproject = "autocognite-arjuna\\tests";
+			userProject = "C:\\\\some\\dir\\tests";
 		} else {
-			shell = "./arjunapro.sh";
-			mproject = "/autocognite-arjuna/mproject/tests";
-			userProject = "/usr/some/dir/projectname/tests";			
+			shell = "./arjuna.sh";
+			mproject = "/autocognite-arjuna/tests";
+			userProject = "/usr/some/dir/tests";			
 		}
 		
-		BufferedReader txtReader = new BufferedReader(new InputStreamReader(UniteeCLI.class.getResourceAsStream("/com/arjunapro/pvt/text/arjuna_cli.help")));
+		BufferedReader txtReader = new BufferedReader(new InputStreamReader(UniteeCLI.class.getResourceAsStream("/com/autocognite/pvt/text/arjuna_cli.help")));
 		String line = null;
 		while ((line = txtReader.readLine()) != null) {
 			Console.display(line.replace("%%slugShell", shell).replace("%%slugMProjectTests", mproject).replace("%%slugUserProjectTests", userProject));

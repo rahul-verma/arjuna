@@ -28,9 +28,7 @@ import arjunasdk.sysauto.batteries.SystemBatteries;
 
 public class ExceptionBatteries {
 	private static String[] removeThese = new String[] {
-			"pvt.batteries",
-			"pvt.arjunasdk",
-			"pvt.unitee",
+			"com.autocognite.pvt",
 			"sun.reflect",
 			"java.lang.reflect",
 			"java.lang.Thread.run"
