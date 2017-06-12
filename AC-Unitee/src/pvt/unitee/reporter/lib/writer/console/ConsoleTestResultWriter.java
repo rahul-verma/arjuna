@@ -43,7 +43,7 @@ public class ConsoleTestResultWriter extends DefaultObserver<TestResult> {
 	String marker = new String(new char[130]).replace("\0", "-");
 	private List<TestObjectAttribute> execTestObjectProps = null;
 	private List<TestAttribute> execTestProps = null;
-	private List<String> execCustomProps = null;
+	private List<String> execTestAttr = null;
 	private List<TestResultAttribute> execResultProps = null;
 	Map<TestObjectAttribute,String> testObjectNames = null;
 	Map<TestAttribute,String> testPropNames = null;
@@ -63,7 +63,7 @@ public class ConsoleTestResultWriter extends DefaultObserver<TestResult> {
 		testObjectNames = ArjunaInternal.getTestObjectAttrNameMap();
 		testPropNames = ArjunaInternal.getTestAttrNameMap();
 		testResultPropNames = ArjunaInternal.getTestResultAttrNameMap();
-		shouldIncludeAnnotatedTestProps = ArjunaInternal.shouldIncludeCustomPropsInReport();
+		shouldIncludeAnnotatedTestProps = ArjunaInternal.shouldIncludeTestAttrInReport();
 		
 		// Test Result Section		
 		execTestObjectProps = ArjunaInternal.getTestObjectAttrListForTestReport();

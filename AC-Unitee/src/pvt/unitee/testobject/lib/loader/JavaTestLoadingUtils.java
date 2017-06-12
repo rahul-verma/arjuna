@@ -136,7 +136,7 @@ public class JavaTestLoadingUtils {
 		}		
 	}
 	
-	public static HashMap<Integer,HashMap<String,String>> loadUTVFromInstancesAnnotation(Instances instancesAnnotation, int instanceCount, boolean userHasSuppliedProperties){
+	public static HashMap<Integer,HashMap<String,String>> loadExecVarsFromInstancesAnnotation(Instances instancesAnnotation, int instanceCount, boolean userHasSuppliedProperties){
 		HashMap<Integer,HashMap<String,String>> invocationWiseProps = new HashMap<Integer,HashMap<String,String>>();
 		for (int i=1; i <= instanceCount; i++){
 			invocationWiseProps.put(i, new HashMap<String,String>());

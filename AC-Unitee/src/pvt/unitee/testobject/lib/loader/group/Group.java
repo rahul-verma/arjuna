@@ -29,7 +29,7 @@ public interface Group {
 
 	int getClassThreadCount();
 
-	DefaultStringKeyValueContainer getUTV();
+	DefaultStringKeyValueContainer getExecVars();
 
 	SessionNode getSessionNode();
 	

@@ -7,8 +7,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import arjunasdk.ddauto.interfaces.DataReference;
 import arjunasdk.ddauto.interfaces.DataSource;
-import pvt.arjunasdk.ddt.interfaces.DataReference;
 import pvt.batteries.databroker.DataReferenceFactory;
 import pvt.unitee.core.lib.datasource.DataSourceBuilder;
 import pvt.unitee.core.lib.datasource.DummyDataSource;
@@ -76,8 +76,8 @@ public class JavaTestMethodDefinition {
 		}
 	}
 
-	public void setUtvForInstance(int instanceNumber, HashMap<String, String> utv) throws Exception {
-		this.testMethodInstanceTestVars.get(instanceNumber).rawUtv().addAsStringValue(utv);
+	public void setExecVarsForInstance(int instanceNumber, HashMap<String, String> execVars) throws Exception {
+		this.testMethodInstanceTestVars.get(instanceNumber).rawExecVars().addAsStringValue(execVars);
 	}
 	
 	public TestVariables getTestCreatorInstanceDefinition(int instanceNumber) {

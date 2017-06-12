@@ -282,8 +282,8 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 	private ExcelStepResultWriter stepWriter = null;
 	
 	private boolean shouldIncludeAnnotatedTestProps = false;
-	private boolean shouldIncludeCustomProps = false;
-	private boolean shouldIncludeUtv = false;
+	private boolean shouldIncludeAttr = false;
+	private boolean shouldIncludeExecVars = false;
 	private boolean shouldIncludeDataRecord = false;
 	private boolean shouldIncludeDataRef = false;
 	
@@ -306,8 +306,8 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 		execTestObjectProps = ArjunaInternal.getTestObjectAttrListForTestReport();
 		execTestProps = ArjunaInternal.getTestAttrList();
 		shouldIncludeAnnotatedTestProps = ArjunaInternal.shouldIncludeAnnotatedTestPropsInReport();
-		shouldIncludeCustomProps = ArjunaInternal.shouldIncludeCustomPropsInReport();
-		shouldIncludeUtv = ArjunaInternal.shouldIncludeUtvInReport();
+		shouldIncludeAttr = ArjunaInternal.shouldIncludeTestAttrInReport();
+		shouldIncludeExecVars = ArjunaInternal.shouldIncludeExecVarsInReport();
 		shouldIncludeDataRecord = ArjunaInternal.shouldIncludeDataRecordInReport();
 		shouldIncludeDataRef = ArjunaInternal.shouldIncludeDataRefInReport();
 		execResultProps = ArjunaInternal.getTestResultAttrList();
@@ -324,12 +324,12 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 			this.execHeaders.add(testResultPropNames.get(prop));
 		}
 		
-		if (shouldIncludeCustomProps){
-			this.execHeaders.add("User Test Properties");
+		if (shouldIncludeAttr){
+			this.execHeaders.add("Test Attributes");
 		}
 		
-		if (shouldIncludeUtv){
-			this.execHeaders.add("User Test Variables");
+		if (shouldIncludeExecVars){
+			this.execHeaders.add("Execution Variables");
 		}
 		
 		if (shouldIncludeDataRecord){
@@ -357,9 +357,9 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 		}
 		resultArr.addAll(reportable.resultPropStrings(this.execResultProps));
 		
-		if (shouldIncludeCustomProps){
+		if (shouldIncludeAttr){
 			StringBuilder cb = new StringBuilder();
-			Map<String,Value> cmap = reportable.customProps().items();
+			Map<String,Value> cmap = reportable.attr().items();
 			if (cmap.size() == 0){
 				cb.append("NA");
 			} else {
@@ -375,9 +375,9 @@ class ExcelTestResultWriter extends ExcelResultWriter<TestResult>{
 			resultArr.add(cb.toString());
 		}
 		
-		if (shouldIncludeUtv){
+		if (shouldIncludeExecVars){
 			StringBuilder ub = new StringBuilder();
-			Map<String,Value> umap = reportable.utv().items();
+			Map<String,Value> umap = reportable.execVars().items();
 			if (umap.size() == 0){
 				ub.append("NA");
 			} else {

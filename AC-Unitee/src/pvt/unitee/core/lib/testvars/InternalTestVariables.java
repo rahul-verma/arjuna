@@ -5,8 +5,9 @@ import java.util.Map;
 import com.google.gson.JsonObject;
 
 import arjunasdk.ddauto.interfaces.DataRecord;
-import pvt.arjunasdk.ddt.interfaces.DataReference;
+import arjunasdk.ddauto.interfaces.DataReference;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
+import pvt.batteries.value.UserStringKeyValueContainer;
 import unitee.interfaces.TestVariables;
 
 public interface InternalTestVariables extends TestVariables {
@@ -15,17 +16,17 @@ public interface InternalTestVariables extends TestVariables {
 
 	InternalTestProperties rawTestProps() throws Exception;
 
-	DefaultStringKeyValueContainer rawCustomProps() throws Exception;
+	DefaultStringKeyValueContainer rawAttr() throws Exception;
 
-	DefaultStringKeyValueContainer rawUtv() throws Exception;
+	DefaultStringKeyValueContainer rawExecVars() throws Exception;
 	
 	void setObjectProps(InternalTestObjectProperties props) throws Exception;
 
 	void setTestProps(InternalTestProperties props) throws Exception;
 
-	void setCustomProps(DefaultStringKeyValueContainer props) throws Exception;
+	void setAttr(UserStringKeyValueContainer props) throws Exception;
 
-	void setUtv(DefaultStringKeyValueContainer props) throws Exception;
+	void setExecVars(UserStringKeyValueContainer props) throws Exception;
 
 	void populateDefaults() throws Exception;
 

@@ -12,7 +12,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import arjunasdk.console.Console;
-import arjunasdk.ddauto.datarecord.MapDataRecord;
+import arjunasdk.ddauto.lib.MapDataRecord;
 import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
 import pvt.batteries.config.Batteries;
@@ -28,6 +28,7 @@ import pvt.batteries.value.NotSetValue;
 import pvt.batteries.value.NullValue;
 import pvt.batteries.value.StringListValue;
 import pvt.batteries.value.StringValue;
+import pvt.batteries.value.UserStringKeyValueContainer;
 import pvt.unitee.core.lib.testvars.DefaultTestObjectProperties;
 import pvt.unitee.core.lib.testvars.DefaultTestProperties;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
@@ -56,17 +57,17 @@ public class BaseJsonResultDeserializer {
 			testVars.setTestProps(testProps);			
 
 
-			//Deserialize customProps
-			JsonObject customPropsObj = root.get("customProps").getAsJsonObject();
-			DefaultStringKeyValueContainer customProps = new DefaultStringKeyValueContainer();
-			processJsonObjectForEnumMap(customPropsObj, customProps);
-			testVars.setCustomProps(customProps);	
+			//Deserialize test attr
+			JsonObject attrObj = root.get("attr").getAsJsonObject();
+			UserStringKeyValueContainer attrProps = new UserStringKeyValueContainer();
+			processJsonObjectForEnumMap(attrObj, attrProps);
+			testVars.setAttr(attrProps);	
 
-			//Deserialize utv
-			JsonObject utvObj = root.get("utv").getAsJsonObject();
-			DefaultStringKeyValueContainer utvProps = new DefaultStringKeyValueContainer();
-			processJsonObjectForEnumMap(utvObj, utvProps);
-			testVars.setUtv(utvProps);	
+			//Deserialize execVars
+			JsonObject execVarObj = root.get("execVars").getAsJsonObject();
+			UserStringKeyValueContainer execVarProps = new UserStringKeyValueContainer();
+			processJsonObjectForEnumMap(execVarObj, execVarProps);
+			testVars.setExecVars(execVarProps);	
 
 			//Deserialize dataRecord
 			JsonObject drObj = root.get("dataRecord").getAsJsonObject();

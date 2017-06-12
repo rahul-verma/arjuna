@@ -4,11 +4,11 @@ import java.lang.reflect.Method;
 
 import org.apache.log4j.Logger;
 
-import arjunasdk.ddauto.datarecord.MapDataRecord;
 import arjunasdk.ddauto.exceptions.DataSourceConstructionException;
 import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
 import arjunasdk.ddauto.interfaces.DataRecord;
 import arjunasdk.ddauto.interfaces.DataSource;
+import arjunasdk.ddauto.lib.MapDataRecord;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.datasource.DummyDataSource;
@@ -122,7 +122,6 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 			//runTearDownFixtures();
 			throw new SubTestsFinishedException("All Done.");
 		} catch (Throwable e){
-			System.out.println("HHHH");
 				dataSourceIssue = true;
 				issueId = ArjunaInternal.getCentralExecState().getIssueId();
 				IssueBuilder builder = new IssueBuilder();
@@ -138,7 +137,6 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 				.build();
 				ArjunaInternal.getReporter().update(issue);
 				this.dataSource.terminate();
-				System.out.println("GGGG");
 		}
 		
 		this.currentTestNumber += 1;

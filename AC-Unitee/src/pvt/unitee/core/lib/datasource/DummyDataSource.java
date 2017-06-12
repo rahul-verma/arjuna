@@ -1,10 +1,10 @@
 package pvt.unitee.core.lib.datasource;
 
-import arjunasdk.ddauto.datarecord.MapDataRecord;
 import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
 import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.ddauto.lib.BaseDataSource;
+import arjunasdk.ddauto.lib.MapDataRecord;
 import pvt.batteries.ddt.datarecord.BaseDataRecord;
-import pvt.batteries.ddt.datarecord.BaseDataSource;
 
 public class DummyDataSource extends BaseDataSource{
 	boolean done = false;

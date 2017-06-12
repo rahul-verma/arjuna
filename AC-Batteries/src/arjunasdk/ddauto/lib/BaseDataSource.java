@@ -1,4 +1,4 @@
-package pvt.batteries.ddt.datarecord;
+package arjunasdk.ddauto.lib;
 
 import arjunasdk.ddauto.interfaces.DataSource;
 

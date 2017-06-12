@@ -21,9 +21,9 @@ package pvt.batteries.databroker;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import arjunasdk.ddauto.datarecord.MapDataRecord;
 import arjunasdk.ddauto.interfaces.DataRecord;
-import pvt.arjunasdk.ddt.interfaces.DataReference;
+import arjunasdk.ddauto.interfaces.DataReference;
+import arjunasdk.ddauto.lib.MapDataRecord;
 import pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 
 public class ExcelDataReference implements DataReference {

@@ -27,11 +27,11 @@ public class RunConfig {
 		return Logger.getLogger(Batteries.getCentralLogName());
 	}
 	
-	public static StringKeyValueContainer cloneUserConfig() throws Exception {
-		return Batteries.cloneCentralUserConfig();
+	public static StringKeyValueContainer cloneUserOptions() throws Exception {
+		return Batteries.cloneCentralUserOptions();
 	}
 	
-	public static ReadOnlyStringKeyValueContainer userConfig() throws Exception {
-		return Batteries.sessionUserConfig();
+	public static ReadOnlyStringKeyValueContainer userOptions() throws Exception {
+		return Batteries.sessionUserOptions();
 	}
 }

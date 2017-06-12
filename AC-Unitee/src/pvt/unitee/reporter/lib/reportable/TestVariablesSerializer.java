@@ -20,8 +20,8 @@ public class TestVariablesSerializer extends BaseSerializer {
 			}
 			jsonObject.add("objectProps", serializeEnumKeyMap(testVars.object().items()));
 			jsonObject.add("testProps", serializeEnumKeyMap(testVars.test().items()));
-			jsonObject.add("customProps", serializeEnumKeyMap(testVars.utp().items()));
-			jsonObject.add("utv", serializeEnumKeyMap(testVars.utv().items()));
+			jsonObject.add("attr", serializeEnumKeyMap(testVars.attr().items()));
+			jsonObject.add("execVars", serializeEnumKeyMap(testVars.execVars().items()));
 			jsonObject.add("dataRecord", serializeEnumKeyMap(testVars.record().items()));
 		} catch (Exception e){
 			jsonObject.addProperty("rType", "Error in getting string representation");

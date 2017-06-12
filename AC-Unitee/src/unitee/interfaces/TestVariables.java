@@ -3,8 +3,8 @@ package unitee.interfaces;
 import java.util.Map;
 
 import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.ddauto.interfaces.DataReference;
 import arjunasdk.interfaces.StringKeyValueContainer;
-import pvt.arjunasdk.ddt.interfaces.DataReference;
 
 public interface TestVariables {
 
@@ -12,9 +12,9 @@ public interface TestVariables {
 
 	TestProperties test() throws Exception;
 
-	StringKeyValueContainer utp() throws Exception;
+	StringKeyValueContainer attr() throws Exception;
 
-	StringKeyValueContainer utv() throws Exception;
+	StringKeyValueContainer execVars() throws Exception;
 
 	DataRecord record();
 

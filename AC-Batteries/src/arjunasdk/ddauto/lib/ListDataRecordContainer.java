@@ -1,4 +1,4 @@
-package arjunasdk.ddauto.datarecord;
+package arjunasdk.ddauto.lib;
 
 import pvt.batteries.ddt.datarecord.BaseDataRecordContainer;
 

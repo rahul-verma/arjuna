@@ -46,8 +46,8 @@ arjunasdk.config.RunConfig: RunConfig()
 arjunasdk.config.RunConfig: boolean exists(java.lang.String)
 arjunasdk.config.RunConfig: arjunasdk.interfaces.Value value(java.lang.String)
 arjunasdk.config.RunConfig: org.apache.log4j.Logger logger()
-arjunasdk.config.RunConfig: arjunasdk.interfaces.StringKeyValueContainer cloneUserConfig()
-arjunasdk.config.RunConfig: arjunasdk.interfaces.ReadOnlyStringKeyValueContainer userConfig()
+arjunasdk.config.RunConfig: arjunasdk.interfaces.StringKeyValueContainer cloneUserOptions()
+arjunasdk.config.RunConfig: arjunasdk.interfaces.ReadOnlyStringKeyValueContainer userOptions()
 arjunasdk.console.Console
 arjunasdk.console.Console: Console()
 arjunasdk.console.Console: void init()
@@ -1372,23 +1372,23 @@ pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_ME
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_METADATA_TEST_OBJECT_ISSUES
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_METADATA_TEST_OBJECT_FIXTURES
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_ANNOTATED_ON
-pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_CUSTOM_ON
-pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_UTV_ON
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_ATTR_ON
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_EXECVAR_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_DATARECORD_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_DATAREF_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_ANNOTATED_ON
-pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_CUSTOM_ON
-pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_UTV_ON
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_ATTR_ON
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_EXECVAR_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_DATARECORD_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_DATAREF_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_ANNOTATED_ON
-pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_CUSTOM_ON
-pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_UTV_ON
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_ATTR_ON
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_EXECVAR_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_DATARECORD_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_DATAREF_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_ANNOTATED_ON
-pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_CUSTOM_ON
-pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_UTV_ON
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_ATTR_ON
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_EXECVAR_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_DATARECORD_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_DATAREF_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_SECTIONS
@@ -2096,8 +2096,8 @@ unitee.interfaces.TestProperties: java.util.Map strItems(java.util.List)
 unitee.interfaces.TestVariables
 unitee.interfaces.TestVariables: unitee.interfaces.TestObjectProperties object()
 unitee.interfaces.TestVariables: unitee.interfaces.TestProperties test()
-unitee.interfaces.TestVariables: arjunasdk.interfaces.StringKeyValueContainer utp()
-unitee.interfaces.TestVariables: arjunasdk.interfaces.StringKeyValueContainer utv()
+unitee.interfaces.TestVariables: arjunasdk.interfaces.StringKeyValueContainer attr()
+unitee.interfaces.TestVariables: arjunasdk.interfaces.StringKeyValueContainer execVars()
 unitee.interfaces.TestVariables: arjunasdk.ddauto.interfaces.DataRecord record()
 unitee.interfaces.TestVariables: pvt.arjunasdk.ddt.interfaces.DataReference refer(java.lang.String)
 unitee.interfaces.TestVariables: java.util.Map references()

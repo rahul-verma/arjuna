@@ -29,12 +29,12 @@ public class TestRelatedResult {
 		return this.testVars.test();
 	}
 	
-	public StringKeyValueContainer customProps() throws Exception {
-		return this.testVars.utp();
+	public StringKeyValueContainer attr() throws Exception {
+		return this.testVars.attr();
 	}
 	
-	public StringKeyValueContainer utv() throws Exception {
-		return this.testVars.utv();
+	public StringKeyValueContainer execVars() throws Exception {
+		return this.testVars.execVars();
 	}
 
 	public void setTestVariables(TestVariables testVars) {
@@ -57,11 +57,11 @@ public class TestRelatedResult {
 		return this.testProps().strItems(props);
 	}	
 	
-	public List<String> customPropStrings(List<String> props) throws Exception {
-		return this.customProps().strings(props);
+	public List<String> attrStrings(List<String> props) throws Exception {
+		return this.attr().strings(props);
 	}
 	
-	public Map<String,String> customPropStrItems(List<String> props) throws Exception {
-		return this.customProps().strItems(props);
+	public Map<String,String> attrStrItems(List<String> props) throws Exception {
+		return this.attr().strItems(props);
 	}
 }

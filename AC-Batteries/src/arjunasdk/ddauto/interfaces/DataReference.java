@@ -16,28 +16,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.batteries.databroker;
+package arjunasdk.ddauto.interfaces;
 
-import org.apache.commons.io.FilenameUtils;
+public interface DataReference {
 
-import arjunasdk.ddauto.interfaces.DataReference;
+	DataRecord record(String key) throws Exception;
 
-public class DataReferenceFactory {
-	public static DataReference getReference(String fileFormat, String refFileDir, String refFileName, String key)
-			throws Exception {
-		return getReference(fileFormat, refFileDir + "/" + refFileName, key);
-	}
-
-	public static DataReference getReference(String path) throws Exception {
-		return getReference(FilenameUtils.getExtension(path).toUpperCase(), path, null);
-	}
-
-	public static DataReference getReference(String fileFormat, String path, String key) throws Exception {
-		switch (fileFormat.toUpperCase().trim()) {
-		case "XLS":
-			return new ExcelDataReference(path, key);
-		default:
-			throw new Exception("Unsupported file reference format: " + fileFormat);
-		}
-	}
 }

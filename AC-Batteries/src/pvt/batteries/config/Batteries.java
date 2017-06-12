@@ -24,9 +24,9 @@ import java.util.Map;
 import org.apache.log4j.Level;
 
 import arjunasdk.ddauto.interfaces.DataRecord;
+import arjunasdk.ddauto.interfaces.DataReference;
 import arjunasdk.interfaces.ReadOnlyStringKeyValueContainer;
 import arjunasdk.interfaces.Value;
-import pvt.arjunasdk.ddt.interfaces.DataReference;
 import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.batteries.integration.ComponentConfigurator;
 import pvt.batteries.lib.BatteriesConfigurator;
@@ -63,20 +63,20 @@ public class Batteries {
 		return integrator.getProjectDir();
 	}
 
-	public static void processConfigDefaults() throws Exception {
+	public static void processArjunaDefaults() throws Exception {
 		integrator.processDefaults();
 	}
 
-	public static void processConfigProperties(HashMap<String, Value> properties) throws Exception {
+	public static void processArjunaOptions(HashMap<String, Value> properties) throws Exception {
 		integrator.processConfigProperties(properties);
 	}
 
-	public static void processCentralUTVProperties(Map<String, Value> properties) {
-		integrator.processCentralUTVProperties(properties);
+	public static void processCentralExecVars(Map<String, Value> properties) {
+		integrator.processCentralExecVars(properties);
 	}
 	
-	public static void processCentralUserConfigProperties(Map<String, Value> properties) {
-		integrator.processCentralUserConfigProperties(properties);
+	public static void processCentralUserOptions(Map<String, Value> properties) {
+		integrator.processCentralUserOptions(properties);
 	}
 
 	public static void freezeCentralConfig() throws Exception {
@@ -87,16 +87,16 @@ public class Batteries {
 		public static final String EXIT_ON_ERROR = "message.exit.on.error";
 	}
 	
-	public synchronized static DefaultStringKeyValueContainer cloneCentralUTVs() throws Exception {
-		return CentralConfiguration.cloneCentralUTVs();
+	public synchronized static DefaultStringKeyValueContainer cloneCentralExecVars() throws Exception {
+		return CentralConfiguration.cloneCentralExecVars();
 	}
 	
-	public synchronized static DefaultStringKeyValueContainer cloneCentralUserConfig() throws Exception {
-		return CentralConfiguration.cloneUserConfig();
+	public synchronized static DefaultStringKeyValueContainer cloneCentralUserOptions() throws Exception {
+		return CentralConfiguration.cloneUserOptions();
 	}
 	
-	public synchronized static ReadOnlyStringKeyValueContainer sessionUserConfig() throws Exception {
-		return CentralConfiguration.userConfig();
+	public synchronized static ReadOnlyStringKeyValueContainer sessionUserOptions() throws Exception {
+		return CentralConfiguration.userOptions();
 	}
 	
 	public synchronized static <T extends Enum<T>> Value value(T enumObject) throws Exception {

@@ -4,11 +4,11 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Iterator;
 
-import arjunasdk.ddauto.datarecord.ListDataRecordContainer;
 import arjunasdk.ddauto.interfaces.DataRecord;
 import arjunasdk.ddauto.interfaces.DataRecordContainer;
 import arjunasdk.ddauto.interfaces.DataSource;
-import pvt.batteries.ddt.datarecord.BaseDataSource;
+import arjunasdk.ddauto.lib.BaseDataSource;
+import arjunasdk.ddauto.lib.ListDataRecordContainer;
 
 public class DataMethodDataSource extends BaseDataSource{
 	private static Object[][] sampleArr = {};

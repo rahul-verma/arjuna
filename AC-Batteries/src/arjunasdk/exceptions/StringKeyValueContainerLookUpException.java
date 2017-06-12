@@ -16,12 +16,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.arjunasdk.ddt.interfaces;
+package arjunasdk.exceptions;
 
-import arjunasdk.ddauto.interfaces.DataRecord;
+public class StringKeyValueContainerLookUpException extends Exception {
 
-public interface DataReference {
-
-	DataRecord record(String key) throws Exception;
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1328715061248005907L;
+	
+	// Constructor that accepts a message
+	public StringKeyValueContainerLookUpException(String key) {
+		super(String.format("Invalid Key [%s] used for string key value container lookup.", key));
+	}
 }

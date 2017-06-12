@@ -179,7 +179,7 @@ public class ArjunaTestEngine implements TestEngine{
 					FileUtils.moveDirectory(f, targetDir);
 				} catch (Throwable e){
 					Console.displayError("Arjuna archives previous run's report contents at beginning of new run.");
-					Console.displayError("Arjuna faced a critical issue in archving contents of report directory.");
+					Console.displayError("Arjuna faced a critical issue in archiving contents of report directory.");
 					Console.displayError("Please close any files that you have opened from the report directory and execute the run again.");
 					Console.displayError("Now Arjuna would attempt to delete any partial archive created and exit.");
 					try{

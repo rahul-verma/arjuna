@@ -10,7 +10,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 
-import pvt.arjunasdk.ddt.interfaces.DataReference;
+import arjunasdk.ddauto.interfaces.DataReference;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.databroker.DataReferenceFactory;
 import pvt.unitee.arjuna.ArjunaInternal;
@@ -60,7 +60,7 @@ public class JavaTestClassDefinition {
 	public JavaTestClassDefinition() throws Exception{
 		this.testVars = new DefaultTestVariables();
 		this.testVars.populateDefaults();
-		this.testVars.rawUtv().add(Batteries.cloneCentralUTVs());
+		this.testVars.rawExecVars().add(Batteries.cloneCentralExecVars());
 	}
 	
 	public String getPackageName() throws Exception {
@@ -103,15 +103,15 @@ public class JavaTestClassDefinition {
 		}
 	}
 
-	public void setUtvForInstance(int instanceNumber, HashMap<String, String> utv) throws Exception {
+	public void setExecVarsForInstance(int instanceNumber, HashMap<String, String> execVars) throws Exception {
 		if (ArjunaInternal.displayLoadingInfo){
 			logger.debug(this.testClassInstanceTestVars);
 			logger.debug(instanceNumber);
 			logger.debug(this.testClassInstanceTestVars.get(instanceNumber));
-			logger.debug(this.testClassInstanceTestVars.get(instanceNumber).utv());
-			logger.debug(utv);
+			logger.debug(this.testClassInstanceTestVars.get(instanceNumber).execVars());
+			logger.debug(execVars);
 		}
-		this.testClassInstanceTestVars.get(instanceNumber).rawUtv().addAsStringValue(utv);
+		this.testClassInstanceTestVars.get(instanceNumber).rawExecVars().addAsStringValue(execVars);
 	}
 
 	public Class<?> getUserTestClass() {

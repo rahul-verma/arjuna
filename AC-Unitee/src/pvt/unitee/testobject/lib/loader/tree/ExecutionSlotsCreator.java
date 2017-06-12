@@ -37,11 +37,11 @@ public class ExecutionSlotsCreator {
 	private Iterator<TestMethodNode> slotCreatorIter = null;
 	private int currentSlotNum = 0;
 	private HashMap<String,Integer> methodToSlotMap = new HashMap<String,Integer>();
-	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer execVars = new DefaultStringKeyValueContainer();
 //	
 	public ExecutionSlotsCreator(Group group) throws Exception{
 		this.group = group;
-		this.utvars.cloneAdd(group.getUTV().items());
+		this.execVars.cloneAdd(group.getExecVars().items());
 	}
 	
 	public void addTestCreatorName(String name){

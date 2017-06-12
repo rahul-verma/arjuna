@@ -24,14 +24,14 @@ public class BaseSessionSubNode implements SessionSubNode{
 	private Session session = null;
 	private SessionNode sessionNode = null;
 	private String name = null;
-	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer execVars = new DefaultStringKeyValueContainer();
 	
 	private BaseSessionSubNode(SessionNode sessionNode, int id) throws Exception{
 		this.session = sessionNode.getSession();
 		this.sessionNode = sessionNode;
 		this.id = id;
 		this.name = this.sessionNode.getName() + "-" + this.id;
-		this.utvars.cloneAdd(sessionNode.getUTV().items());
+		this.execVars.cloneAdd(sessionNode.getExecVars().items());
 	}
 	
 	public BaseSessionSubNode(SessionNode sessionNode, int id, Group group) throws Exception{
@@ -50,12 +50,12 @@ public class BaseSessionSubNode implements SessionSubNode{
 	public BaseSessionSubNode(SessionNode sessionNode, int id, JsonObject groupObj) throws Exception{
 		this(sessionNode, id);
 		try{
-			JsonObject utv = groupObj.getAsJsonObject("utv");
-			HoconReader utvReader = new HoconStringReader(utv.toString());
-			utvReader.process();
-			this.utvars.add(utvReader.getProperties());
+			JsonObject execVarsObj = groupObj.getAsJsonObject("execVars");
+			HoconReader execVarsReader = new HoconStringReader(execVarsObj.toString());
+			execVarsReader.process();
+			this.execVars.add(execVarsReader.getProperties());
 		} catch (ClassCastException e){
-			this.errorUtvNotObject();
+			this.errorExecVarsNotObject();
 		} catch (NullPointerException e){
 			// do nothing
 		}
@@ -70,10 +70,10 @@ public class BaseSessionSubNode implements SessionSubNode{
 		this.name += "-" + group.getName();
 	}
 	
-	private void errorUtvNotObject(){
+	private void errorExecVarsNotObject(){
 		Console.displayError(
 				String.format(
-						">>utv<< attribute in session sub node definition should be a JSON object. Fix session template file: >>%s<<",
+						">>execVars<< attribute in session sub node definition should be a JSON object. Fix session template file: >>%s<<",
 						session.getSessionFilePath()
 				));			
 		Console.displayError("Exiting...");
@@ -129,8 +129,8 @@ public class BaseSessionSubNode implements SessionSubNode{
 		return this.sessionNode;
 	}
 	@Override
-	public DefaultStringKeyValueContainer getUTV() {
-		return this.utvars;
+	public DefaultStringKeyValueContainer getExecVars() {
+		return this.execVars;
 	}
  
 }

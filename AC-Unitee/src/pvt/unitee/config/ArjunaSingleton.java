@@ -62,7 +62,7 @@ import unitee.annotations.DataMethodContainer;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.2.1";
+	private String version = "0.2.2";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -113,47 +113,48 @@ public enum ArjunaSingleton {
 		Batteries.addConfigurator(UiAutoIntegrator.getComponentConfigurator());
 		ArjunaConfigurator uConf = new ArjunaConfigurator();
 		Batteries.addConfigurator(uConf);
-		Batteries.processConfigDefaults();
+		Batteries.processArjunaDefaults();
 		integrator = uConf.getIntegrator();
 		//integrator.enumerate();
 		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/arjuna_visible.conf"));
 		reader.process();		
 		integrator.setProjectDir(Batteries.getBaseDir());
-		Batteries.processConfigProperties(reader.getProperties());
+		Batteries.processArjunaOptions(reader.getProperties());
 		//integrator.enumerate();
 		
 		// arjuna file
 		String arjunaConfPath = integrator.value(BatteriesPropertyType.DIRECTORY_CONFIG).asString() + "/" + integrator.value(BatteriesPropertyType.CONFIG_CENTRAL_FILE_NAME).asString();
+//		System.out.println(integrator.value(BatteriesPropertyType.DIRECTORY_CONFIG).asString());
 //		System.out.println(arjunaConfPath);
 		HoconReader reader2 = new HoconFileReader(arjunaConfPath);
 		reader2.process();
 		
 		try{
-			ConfigObject configObj = reader2.getConfig().getObject("config");
-			HoconReader configReader = new HoconConfigObjectReader(configObj);
-			configReader.process();
+			ConfigObject arjunaOptObj = reader2.getConfig().getObject("arjunaOptions");
+			HoconReader arjunaOptReader = new HoconConfigObjectReader(arjunaOptObj);
+			arjunaOptReader.process();
 //			System.out.println(configReader.getProperties());
-			Batteries.processConfigProperties(configReader.getProperties());
+			Batteries.processArjunaOptions(arjunaOptReader.getProperties());
 		} catch (ConfigException e){
 			// config may not be defined. It's ok. It's optional
 		}
 		
 		try{
-			ConfigObject utvObj = reader2.getConfig().getObject("utv");
-			HoconReader utvReader = new HoconConfigObjectReader(utvObj);
-			utvReader.process();
-			Batteries.processCentralUTVProperties(utvReader.getProperties());
+			ConfigObject execVarObj = reader2.getConfig().getObject("execVars");
+			HoconReader execVarReader = new HoconConfigObjectReader(execVarObj);
+			execVarReader.process();
+			Batteries.processCentralExecVars(execVarReader.getProperties());
 		} catch (ConfigException e){
-			// utv may not be defined. It's ok. It's optional
+			// execVars may not be defined. It's ok. It's optional
 		}
 		
 		try{
-			ConfigObject userConfig = reader2.getConfig().getObject("userConfig");
-			HoconReader userConfigReader = new HoconConfigObjectReader(userConfig);
-			userConfigReader.process();
-			Batteries.processCentralUserConfigProperties(userConfigReader.getProperties());
+			ConfigObject userOptions = reader2.getConfig().getObject("userOptions");
+			HoconReader userOptionsReader = new HoconConfigObjectReader(userOptions);
+			userOptionsReader.process();
+			Batteries.processCentralUserOptions(userOptionsReader.getProperties());
 		} catch (ConfigException e){
-			// userConfig may not be defined. It's ok. It's optional
+			// userOptions may not be defined. It's ok. It's optional
 		}
 		
 		if (!integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).isNull()){
@@ -165,7 +166,7 @@ public enum ArjunaSingleton {
 		cliConfigurator.setArgs(cliArgs);
 		cliConfigurator.processUserOptions();
 		HashMap<String,Value> options = cliConfigurator.getUserOptions();
-		Batteries.processConfigProperties(options);
+		Batteries.processArjunaOptions(options);
 		
 		if (!integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).isNull()){
 			customTestDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).asString();
@@ -230,7 +231,7 @@ public enum ArjunaSingleton {
 		String replaced = updates.replace("%%slugProjDir", projDir).replace("%%slugRUNID", timestampedRunID);
 		HoconReader uReader = new HoconStringReader(replaced);
 		uReader.process();
-		Batteries.processConfigProperties(uReader.getProperties());
+		Batteries.processArjunaOptions(uReader.getProperties());
 		//integrator.enumerate();
 		
 //		Log log = new Log();
@@ -269,7 +270,7 @@ public enum ArjunaSingleton {
 			ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_TESTS),
 			new StringValue(customTestDir)
 			);
-			Batteries.processConfigProperties(testOptions);
+			Batteries.processArjunaOptions(testOptions);
 		}
 		
 		groupsDB = new TestGroupsDB();
@@ -289,19 +290,19 @@ public enum ArjunaSingleton {
 		if (session.getConfigObject() != null){
 			HoconReader cReader = new HoconStringReader(session.getConfigObject().toString());
 			cReader.process();
-			Batteries.processConfigProperties(cReader.getProperties());	
+			Batteries.processArjunaOptions(cReader.getProperties());	
 		}
 		
-		if (session.getUTVObject() != null){
-			HoconReader sessionUTVReader = new HoconStringReader(session.getUTVObject().toString());
-			sessionUTVReader.process();
-			Batteries.processCentralUTVProperties(sessionUTVReader.getProperties());
+		if (session.getExecVarObject() != null){
+			HoconReader sessionExecVarReader = new HoconStringReader(session.getExecVarObject().toString());
+			sessionExecVarReader.process();
+			Batteries.processCentralExecVars(sessionExecVarReader.getProperties());
 		}
 		
-		if (session.getUserConfigObject() != null){
-			HoconReader sessionUserConfigReader = new HoconStringReader(session.getUserConfigObject().toString());
-			sessionUserConfigReader.process();
-			Batteries.processCentralUserConfigProperties(sessionUserConfigReader.getProperties());
+		if (session.getUserOptionsObject() != null){
+			HoconReader sessionUserOptionsReader = new HoconStringReader(session.getUserOptionsObject().toString());
+			sessionUserOptionsReader.process();
+			Batteries.processCentralUserOptions(sessionUserOptionsReader.getProperties());
 		}
 	}
 	
@@ -313,7 +314,7 @@ public enum ArjunaSingleton {
 	}
 	
 	public void loadSession() throws Exception{
-		session.setUTVs(Batteries.cloneCentralUTVs());
+		session.setExecVars(Batteries.cloneCentralExecVars());
 		try{
 			groupsDB.createGroupForCLIOptions(this.cliPickerOptions);
 		} catch (PickerMisConfiguration e){

@@ -15,10 +15,10 @@ import pvt.batteries.hocon.HoconReader;
 public class UserDefinedSession extends BaseSession{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private String sessionFilePath = null;
-	private JsonObject configObj = null;
+	private JsonObject arjunaOptionsObj = null;
 	private JsonObject sObject = null;
-	private JsonObject utvObject = null;
-	private JsonObject userConfigObject = null;
+	private JsonObject execVarsObj = null;
+	private JsonObject userOptionsObj = null;
 
 	public UserDefinedSession(String sessionName, String sessionFilePath) throws Exception{
 		super(sessionName);
@@ -28,9 +28,9 @@ public class UserDefinedSession extends BaseSession{
 		String jsonString = reader.getConfig().root().render();
 		JsonElement root = (new JsonParser()).parse(jsonString);
 		sObject = root.getAsJsonObject();
-		configObj = sObject.getAsJsonObject("config");
-		utvObject = sObject.getAsJsonObject("utv");
-		userConfigObject = sObject.getAsJsonObject("userConfig");
+		arjunaOptionsObj = sObject.getAsJsonObject("arjunaOptions");
+		execVarsObj = sObject.getAsJsonObject("execVars");
+		userOptionsObj = sObject.getAsJsonObject("userOptions");
 	}
 	
 	private void exitAsAttrNotAnArray(String subjectName, String attr){
@@ -81,7 +81,7 @@ public class UserDefinedSession extends BaseSession{
 	
 	@Override
 	public JsonObject getConfigObject(){
-		return this.configObj;
+		return this.arjunaOptionsObj;
 	}
 	
 	public void load() throws Exception{
@@ -135,12 +135,12 @@ public class UserDefinedSession extends BaseSession{
 	}
 
 	@Override
-	public JsonObject getUTVObject() {
-		return this.utvObject;
+	public JsonObject getExecVarObject() {
+		return this.execVarsObj;
 	}
 	
 	@Override
-	public JsonObject getUserConfigObject() {
-		return this.userConfigObject;
+	public JsonObject getUserOptionsObject() {
+		return this.userOptionsObj;
 	}
 }

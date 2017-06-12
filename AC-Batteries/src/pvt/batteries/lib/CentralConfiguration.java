@@ -12,8 +12,8 @@ public class CentralConfiguration {
 	private static BaseConfiguration centralConfig = null;
 	private static HashMap<String, BaseConfiguration> threadMap = new HashMap<String, BaseConfiguration>();
 	private static StringsManager stringsManager = null;
-	private static DefaultStringKeyValueContainer utvMap = null;
-	private static DefaultStringKeyValueContainer userConfigMap = null;
+	private static DefaultStringKeyValueContainer execVarMap = null;
+	private static DefaultStringKeyValueContainer userOptionMap = null;
 
 	public synchronized static Value getCentralProperty(String propPath) throws Exception {
 		return centralConfig.value(propPath);
@@ -103,28 +103,27 @@ public class CentralConfiguration {
 		return CentralConfiguration.centralConfig;
 	}
 
-	public static void setCentralUTVMap(DefaultStringKeyValueContainer utvMap) {
-		CentralConfiguration.utvMap = utvMap;
+	public static void setCentralexecVarMap(DefaultStringKeyValueContainer execVarMap) {
+		CentralConfiguration.execVarMap = execVarMap;
 	}
 
-	public static void setCentralUserConfigMap(DefaultStringKeyValueContainer userConfigMap) throws Exception {
-		CentralConfiguration.userConfigMap = userConfigMap;
+	public static void setCentralUserOptionMap(DefaultStringKeyValueContainer userOptionMap) throws Exception {
+		CentralConfiguration.userOptionMap = userOptionMap;
 	}
 	
-	public static DefaultStringKeyValueContainer cloneCentralUTVs() throws Exception {
+	public static DefaultStringKeyValueContainer cloneCentralExecVars() throws Exception {
 		DefaultStringKeyValueContainer container = new DefaultStringKeyValueContainer();
-		container.cloneAdd(CentralConfiguration.utvMap.items());
+		container.cloneAdd(CentralConfiguration.execVarMap.items());
 		return container;
 	}
 	
-	public static DefaultStringKeyValueContainer cloneUserConfig() throws Exception {
+	public static DefaultStringKeyValueContainer cloneUserOptions() throws Exception {
 		DefaultStringKeyValueContainer container = new DefaultStringKeyValueContainer();
-		container.cloneAdd(CentralConfiguration.userConfigMap.items());
+		container.cloneAdd(CentralConfiguration.userOptionMap.items());
 		return container;
 	}
 	
-	public static ReadOnlyStringKeyValueContainer userConfig() throws Exception {
-//		System.out.println(CentralConfiguration.userConfigMap.items());
-		return CentralConfiguration.userConfigMap;
+	public static ReadOnlyStringKeyValueContainer userOptions() throws Exception {
+		return CentralConfiguration.userOptionMap;
 	}
 }

@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package arjunasdk.ddauto.datarecord;
+package arjunasdk.ddauto.lib;
 
 import java.util.List;
 import java.util.Map;

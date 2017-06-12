@@ -3,12 +3,12 @@ package pvt.unitee.core.lib.datasource;
 import java.util.Iterator;
 import java.util.List;
 
-import arjunasdk.ddauto.datarecord.ListDataRecordContainer;
-import arjunasdk.ddauto.datarecord.MapDataRecordContainer;
 import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
 import arjunasdk.ddauto.interfaces.DataRecord;
 import arjunasdk.ddauto.interfaces.DataRecordContainer;
-import pvt.batteries.ddt.datarecord.BaseDataSource;
+import arjunasdk.ddauto.lib.BaseDataSource;
+import arjunasdk.ddauto.lib.ListDataRecordContainer;
+import arjunasdk.ddauto.lib.MapDataRecordContainer;
 
 public class DataArrayDataSource extends BaseDataSource{
 	private DataRecordContainer container = null;

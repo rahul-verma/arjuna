@@ -5,11 +5,12 @@ import java.util.Map;
 
 import com.google.gson.JsonObject;
 
-import arjunasdk.ddauto.datarecord.MapDataRecord;
 import arjunasdk.ddauto.interfaces.DataRecord;
-import pvt.arjunasdk.ddt.interfaces.DataReference;
+import arjunasdk.ddauto.interfaces.DataReference;
+import arjunasdk.ddauto.lib.MapDataRecord;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
+import pvt.batteries.value.UserStringKeyValueContainer;
 import pvt.unitee.reporter.lib.reportable.TestVariablesSerializer;
 import unitee.interfaces.TestObjectProperties;
 import unitee.interfaces.TestProperties;
@@ -17,8 +18,8 @@ import unitee.interfaces.TestProperties;
 public class DefaultTestVariables implements InternalTestVariables {
 	private InternalTestObjectProperties objectProps = new DefaultTestObjectProperties();
 	private InternalTestProperties testProps = new DefaultTestProperties();
-	private DefaultStringKeyValueContainer customProps = new DefaultStringKeyValueContainer();
-	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
+	private UserStringKeyValueContainer attr = new UserStringKeyValueContainer();
+	private UserStringKeyValueContainer execVars = new UserStringKeyValueContainer();
 	private DataRecord dataRecord =  null;
 	private Map<String,DataReference> dataRefMap = new HashMap<String,DataReference>();
 	private static DataRecord dr = new MapDataRecord();
@@ -48,20 +49,15 @@ public class DefaultTestVariables implements InternalTestVariables {
 		return this.rawTestProps();
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.autocognite.result.TestVariables#customProps()
-	 */
+
 	@Override
-	public DefaultStringKeyValueContainer utp() throws Exception {
-		return this.rawCustomProps();
+	public DefaultStringKeyValueContainer attr() throws Exception {
+		return this.rawAttr();
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.autocognite.result.TestVariables#utv()
-	 */
 	@Override
-	public DefaultStringKeyValueContainer utv() throws Exception {
-		return this.rawUtv();
+	public DefaultStringKeyValueContainer execVars() throws Exception {
+		return this.rawExecVars();
 	}
 
 	@Override
@@ -75,13 +71,13 @@ public class DefaultTestVariables implements InternalTestVariables {
 	}
 
 	@Override
-	public DefaultStringKeyValueContainer rawCustomProps() throws Exception {
-		return this.customProps;
+	public DefaultStringKeyValueContainer rawAttr() throws Exception {
+		return this.attr;
 	}
 
 	@Override
-	public DefaultStringKeyValueContainer rawUtv() throws Exception {
-		return this.utvars;
+	public UserStringKeyValueContainer rawExecVars() throws Exception {
+		return this.execVars;
 	}
 
 	@Override
@@ -95,13 +91,13 @@ public class DefaultTestVariables implements InternalTestVariables {
 	}
 
 	@Override
-	public void setCustomProps(DefaultStringKeyValueContainer props) throws Exception {
-		this.customProps = props;
+	public void setAttr(UserStringKeyValueContainer props) throws Exception {
+		this.attr = props;
 	}
 
 	@Override
-	public void setUtv(DefaultStringKeyValueContainer props) throws Exception {
-		this.utvars = props;
+	public void setExecVars(UserStringKeyValueContainer props) throws Exception {
+		this.execVars = props;
 	}
 	
 	public JsonObject asJsonObject() throws Exception{

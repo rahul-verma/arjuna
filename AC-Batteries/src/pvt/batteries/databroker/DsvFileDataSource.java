@@ -18,10 +18,10 @@
  ******************************************************************************/
 package pvt.batteries.databroker;
 
-import arjunasdk.ddauto.datarecord.MapDataRecord;
 import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
 import arjunasdk.ddauto.interfaces.DataRecord;
-import pvt.batteries.ddt.datarecord.BaseDataSource;
+import arjunasdk.ddauto.lib.BaseDataSource;
+import arjunasdk.ddauto.lib.MapDataRecord;
 import pvt.batteries.filehandler.FileLine2ArrayReader;
 
 public class DsvFileDataSource extends BaseDataSource {

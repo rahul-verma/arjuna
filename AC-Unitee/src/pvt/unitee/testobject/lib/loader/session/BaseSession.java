@@ -16,7 +16,7 @@ public abstract class BaseSession implements Session {
 	private Iterator<SessionNode> iter = null;
 	private int testMethodCount = 0;
 	private String name = null;
-	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer execVars = new DefaultStringKeyValueContainer();
 	
 	public BaseSession(String name){
 		this.name = name;
@@ -61,12 +61,12 @@ public abstract class BaseSession implements Session {
 	}
 	
 	@Override
-	public void setUTVs(DefaultStringKeyValueContainer utvs){
-		utvars = utvs;
+	public void setExecVars(DefaultStringKeyValueContainer execVars){
+		this.execVars = execVars;
 	}
 	
 	@Override 	
-	public DefaultStringKeyValueContainer getUTV(){
-		return this.utvars;
+	public DefaultStringKeyValueContainer getExecVars(){
+		return this.execVars;
 	}
 }

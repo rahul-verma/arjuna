@@ -20,7 +20,7 @@ public class BaseGroup implements Group{
 	private int classThreads = 1;
 	List<Picker> containerPickers = null;
 	private SessionSubNode sessionSubNode;
-	private DefaultStringKeyValueContainer utvars = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer execVars = new DefaultStringKeyValueContainer();
 	private Map<String,List<String>> classMethodMap = new HashMap<String,List<String>>();
 	
 	public BaseGroup(String name) throws Exception{
@@ -30,7 +30,7 @@ public class BaseGroup implements Group{
 	public BaseGroup(SessionSubNode node, String name) throws Exception{
 		this.setSessionSubNode(node);
 		this.name = name;
-		this.utvars.cloneAdd(node.getUTV().items());
+		this.execVars.cloneAdd(node.getExecVars().items());
 	}
 	
 	public void setGroupName(String name){
@@ -107,8 +107,8 @@ public class BaseGroup implements Group{
 	}
 
 	@Override
-	public DefaultStringKeyValueContainer getUTV() {
-		return this.utvars;
+	public DefaultStringKeyValueContainer getExecVars() {
+		return this.execVars;
 	}
 
 	@Override

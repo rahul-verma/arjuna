@@ -63,7 +63,7 @@ public class DefaultTestVarsHandler implements TestVarsHandler{
 		if (this.parentTestObject != null){
 			if (ArjunaInternal.logPropInfo){
 				logger.debug("Parent: " + this.getParentTestObject().getObjectType());
-				logger.debug("Parent UTV: " + this.getParentTestObject().getTestVariables().utv().items());
+				logger.debug("Parent Exec Vars: " + this.getParentTestObject().getTestVariables().execVars().items());
 				logger.debug("Parent Test Vars: " + this.getParentTestObject().getTestVariables().test().items());
 				logger.debug("Parent Test Object Vars: " + this.getParentTestObject().getTestVariables().object().items());
 			}
@@ -82,20 +82,20 @@ public class DefaultTestVarsHandler implements TestVarsHandler{
 	
 	protected void populateUserPropsFromParent() throws Exception{
 		if (this.parentTestObject != null){
-			this.getTestVariables().rawCustomProps().cloneAdd(this.getParentTestObject().getTestVariables().utp().items());
-			this.getTestVariables().rawUtv().cloneAdd(this.getParentTestObject().getTestVariables().utv().items());
+			this.getTestVariables().rawAttr().cloneAdd(this.getParentTestObject().getTestVariables().attr().items());
+			this.getTestVariables().rawExecVars().cloneAdd(this.getParentTestObject().getTestVariables().execVars().items());
 		}
 	}
 	
 	protected void populateUserPropsFromSelf() throws Exception{
-		this.getTestVariables().rawCustomProps().cloneAdd(this.getTestObject().getTestVariablesDefinition().utp().items());
-		this.getTestVariables().rawUtv().cloneAdd(this.getTestObject().getTestVariablesDefinition().utv().items());		
+		this.getTestVariables().rawAttr().cloneAdd(this.getTestObject().getTestVariablesDefinition().attr().items());
+		this.getTestVariables().rawExecVars().cloneAdd(this.getTestObject().getTestVariablesDefinition().execVars().items());		
 	}
 	
 	protected void populateFromSelf() throws Exception{
 		if (ArjunaInternal.logPropInfo){
 			logger.debug("Self Type: " + this.getTestObject().getObjectType());
-			logger.debug("Self Definition UTV: " + this.getTestObject().getTestVariablesDefinition().utv().items());
+			logger.debug("Self Definition Exec Vars: " + this.getTestObject().getTestVariablesDefinition().execVars().items());
 			logger.debug("Self Definition Test Props: " + this.getTestObject().getTestVariablesDefinition().test().items());
 			logger.debug("Self Definition Test Object Props: " + this.getTestObject().getTestVariablesDefinition().object().items());
 		}
@@ -115,7 +115,7 @@ public class DefaultTestVarsHandler implements TestVarsHandler{
 		if (ArjunaInternal.logPropInfo){
 			logger.debug("-------------------");
 			logger.debug("Self Type: " + this.getTestVariables().object().objectType());
-			logger.debug("Self UTV: " + this.getTestVariables().utv().items());
+			logger.debug("Self Exec Vars: " + this.getTestVariables().execVars().items());
 			logger.debug("Self Test Props: " + this.getTestVariables().test().items());
 			logger.debug("Self Test Object Props: " + this.getTestVariables().object().items());
 			logger.debug("-------------------");

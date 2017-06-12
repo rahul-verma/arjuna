@@ -49,8 +49,8 @@ arjunasdk.config.RunConfig -> arjunasdk.config.RunConfig:
     1015:1015:boolean exists(java.lang.String):19 -> exists
     23:23:arjunasdk.interfaces.Value value(java.lang.String) -> value
     27:27:org.apache.log4j.Logger logger() -> logger
-    31:31:arjunasdk.interfaces.StringKeyValueContainer cloneUserConfig() -> cloneUserConfig
-    35:35:arjunasdk.interfaces.ReadOnlyStringKeyValueContainer userConfig() -> userConfig
+    31:31:arjunasdk.interfaces.StringKeyValueContainer cloneUserOptions() -> cloneUserOptions
+    35:35:arjunasdk.interfaces.ReadOnlyStringKeyValueContainer userOptions() -> userOptions
 arjunasdk.console.Console -> arjunasdk.console.Console:
     boolean done -> a
     java.lang.String separator -> b
@@ -3589,46 +3589,46 @@ pvt.batteries.config.Batteries -> com.autocognite.pvt.cl:
     pvt.batteries.lib.ComponentIntegrator integrator -> b
     38:38:void <init>() -> <init>
     43:46:void addConfigurator(pvt.batteries.integration.ComponentConfigurator) -> a
-    1119:1119:java.lang.String pvt.batteries.lib.ComponentIntegrator.getBaseDir():119:119 -> a
-    1119:1119:void addConfigurator(pvt.batteries.integration.ComponentConfigurator):44 -> a
+    1117:1117:java.lang.String pvt.batteries.lib.ComponentIntegrator.getBaseDir():117:117 -> a
+    1117:1117:void addConfigurator(pvt.batteries.integration.ComponentConfigurator):44 -> a
     2055:2057:void pvt.batteries.lib.ComponentIntegrator.addConfigurator(pvt.batteries.integration.ComponentConfigurator):55:57 -> a
     2055:2057:void addConfigurator(pvt.batteries.integration.ComponentConfigurator):45 -> a
     49:51:void init() -> l
     3039:3040:void pvt.batteries.lib.ComponentIntegrator.init():39:40 -> l
     3039:3040:void init():49 -> l
-    3123:3124:void pvt.batteries.lib.ComponentIntegrator.setRefDir(java.lang.String):123:124 -> l
-    3123:3124:void pvt.batteries.lib.ComponentIntegrator.init():39 -> l
-    3123:3124:void init():49 -> l
+    3121:3122:void pvt.batteries.lib.ComponentIntegrator.setRefDir(java.lang.String):121:122 -> l
+    3121:3122:void pvt.batteries.lib.ComponentIntegrator.init():39 -> l
+    3121:3122:void init():49 -> l
     54:56:void init(java.lang.String) -> a
     4043:4044:void pvt.batteries.lib.ComponentIntegrator.init(java.lang.String):43:44 -> a
     4043:4044:void init(java.lang.String):54 -> a
     59:59:java.lang.String getBaseDir() -> a
-    4119:4119:java.lang.String pvt.batteries.lib.ComponentIntegrator.getBaseDir():119:119 -> a
-    4119:4119:java.lang.String getBaseDir():59 -> a
+    4117:4117:java.lang.String pvt.batteries.lib.ComponentIntegrator.getBaseDir():117:117 -> a
+    4117:4117:java.lang.String getBaseDir():59 -> a
     63:63:java.lang.String getProjectDir() -> b
     5047:5047:java.lang.String pvt.batteries.lib.ComponentIntegrator.getProjectDir():47:47 -> b
     5047:5047:java.lang.String getProjectDir():63 -> b
-    67:68:void processConfigDefaults() -> c
-    5062:5065:void pvt.batteries.lib.ComponentIntegrator.processDefaults():62:65 -> c
-    5062:5065:void processConfigDefaults():67 -> c
-    71:72:void processConfigProperties(java.util.HashMap) -> a
-    5127:5130:void pvt.batteries.lib.ComponentIntegrator.processConfigProperties(java.util.HashMap):127:130 -> a
-    5127:5130:void processConfigProperties(java.util.HashMap):71 -> a
-    75:76:void processCentralUTVProperties(java.util.Map) -> a
-    5133:5134:void pvt.batteries.lib.ComponentIntegrator.processCentralUTVProperties(java.util.Map):133:134 -> a
-    5133:5134:void processCentralUTVProperties(java.util.Map):75 -> a
-    79:80:void processCentralUserConfigProperties(java.util.Map) -> b
-    5137:5138:void pvt.batteries.lib.ComponentIntegrator.processCentralUserConfigProperties(java.util.Map):137:138 -> b
-    5137:5138:void processCentralUserConfigProperties(java.util.Map):79 -> b
+    67:68:void processArjunaDefaults() -> c
+    5060:5063:void pvt.batteries.lib.ComponentIntegrator.processDefaults():60:63 -> c
+    5060:5063:void processArjunaDefaults():67 -> c
+    71:72:void processArjunaOptions(java.util.HashMap) -> a
+    5125:5128:void pvt.batteries.lib.ComponentIntegrator.processConfigProperties(java.util.HashMap):125:128 -> a
+    5125:5128:void processArjunaOptions(java.util.HashMap):71 -> a
+    75:76:void processCentralExecVars(java.util.Map) -> a
+    5131:5132:void pvt.batteries.lib.ComponentIntegrator.processCentralExecVars(java.util.Map):131:132 -> a
+    5131:5132:void processCentralExecVars(java.util.Map):75 -> a
+    79:80:void processCentralUserOptions(java.util.Map) -> b
+    5135:5136:void pvt.batteries.lib.ComponentIntegrator.processCentralUserOptions(java.util.Map):135:136 -> b
+    5135:5136:void processCentralUserOptions(java.util.Map):79 -> b
     83:84:void freezeCentralConfig() -> d
-    5141:5153:pvt.batteries.config.Configuration pvt.batteries.lib.ComponentIntegrator.freezeCentralConfig():141:153 -> d
-    5141:5153:void freezeCentralConfig():83 -> d
+    5139:5151:pvt.batteries.config.Configuration pvt.batteries.lib.ComponentIntegrator.freezeCentralConfig():139:151 -> d
+    5139:5151:void freezeCentralConfig():83 -> d
     6060:6060:arjunasdk.interfaces.Value pvt.arjunasdk.property.ConfigProperty.value():60:60 -> d
-    6060:6060:pvt.batteries.config.Configuration pvt.batteries.lib.ComponentIntegrator.freezeCentralConfig():145 -> d
+    6060:6060:pvt.batteries.config.Configuration pvt.batteries.lib.ComponentIntegrator.freezeCentralConfig():143 -> d
     6060:6060:void freezeCentralConfig():83 -> d
-    91:91:pvt.batteries.value.DefaultStringKeyValueContainer cloneCentralUTVs() -> e
-    95:95:pvt.batteries.value.DefaultStringKeyValueContainer cloneCentralUserConfig() -> f
-    99:99:arjunasdk.interfaces.ReadOnlyStringKeyValueContainer sessionUserConfig() -> g
+    91:91:pvt.batteries.value.DefaultStringKeyValueContainer cloneCentralExecVars() -> e
+    95:95:pvt.batteries.value.DefaultStringKeyValueContainer cloneCentralUserOptions() -> f
+    99:99:arjunasdk.interfaces.ReadOnlyStringKeyValueContainer sessionUserOptions() -> g
     103:103:arjunasdk.interfaces.Value value(java.lang.Enum) -> a
     107:107:arjunasdk.interfaces.Value getCentralProperty(java.lang.Enum) -> b
     111:111:java.lang.String getPropPathForEnum(java.lang.Enum) -> c
@@ -4320,131 +4320,131 @@ pvt.batteries.integration.AbstractComponentConfigurator -> com.autocognite.pvt.e
     49:50:void registerProperty(pvt.arjunasdk.property.ConfigProperty) -> a
     2041:2041:java.lang.String getComponentName():41:41 -> a
     2041:2041:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
-    2073:2095:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):73:95 -> a
-    2073:2095:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
+    2071:2093:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):71:93 -> a
+    2071:2093:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     3060:3060:arjunasdk.interfaces.Value pvt.arjunasdk.property.ConfigProperty.value():60:60 -> a
-    3060:3060:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):77 -> a
+    3060:3060:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):75 -> a
     3060:3060:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     4028:4028:java.lang.String pvt.arjunasdk.property.ConfigProperty.definer():28:28 -> a
-    4028:4028:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    4028:4028:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     4028:4028:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     4072:4072:pvt.arjunasdk.property.ConfigPropertyMetaData pvt.arjunasdk.property.ConfigProperty.getMetaData():72:72 -> a
     4072:4072:java.lang.String pvt.arjunasdk.property.ConfigProperty.definer():28 -> a
-    4072:4072:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    4072:4072:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     4072:4072:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     4107:4107:java.lang.String pvt.arjunasdk.property.ConfigPropertyMetaData.definer():107:107 -> a
     4107:4107:java.lang.String pvt.arjunasdk.property.ConfigProperty.definer():28 -> a
-    4107:4107:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    4107:4107:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     4107:4107:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     5032:5032:java.lang.String pvt.arjunasdk.property.ConfigProperty.code():32:32 -> a
-    5032:5032:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    5032:5032:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     5032:5032:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     5072:5072:pvt.arjunasdk.property.ConfigPropertyMetaData pvt.arjunasdk.property.ConfigProperty.getMetaData():72:72 -> a
     5072:5072:java.lang.String pvt.arjunasdk.property.ConfigProperty.code():32 -> a
-    5072:5072:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    5072:5072:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     5072:5072:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     5115:5115:java.lang.String pvt.arjunasdk.property.ConfigPropertyMetaData.code():115:115 -> a
     5115:5115:java.lang.String pvt.arjunasdk.property.ConfigProperty.code():32 -> a
-    5115:5115:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    5115:5115:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     5115:5115:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     6064:6064:arjunasdk.enums.ValueType pvt.arjunasdk.property.ConfigProperty.expectedValueType():64:64 -> a
-    6064:6064:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):85 -> a
+    6064:6064:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
     6064:6064:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     6119:6119:arjunasdk.enums.ValueType pvt.arjunasdk.property.ConfigPropertyMetaData.expectedValueType():119:119 -> a
     6119:6119:arjunasdk.enums.ValueType pvt.arjunasdk.property.ConfigProperty.expectedValueType():64 -> a
-    6119:6119:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):85 -> a
+    6119:6119:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
     6119:6119:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     7048:7048:boolean pvt.arjunasdk.property.ConfigProperty.overridable():48:48 -> a
-    7048:7048:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):88 -> a
+    7048:7048:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):86 -> a
     7048:7048:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     7072:7072:pvt.arjunasdk.property.ConfigPropertyMetaData pvt.arjunasdk.property.ConfigProperty.getMetaData():72:72 -> a
     7072:7072:boolean pvt.arjunasdk.property.ConfigProperty.overridable():48 -> a
-    7072:7072:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):88 -> a
+    7072:7072:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):86 -> a
     7072:7072:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     7151:7151:boolean pvt.arjunasdk.property.ConfigPropertyMetaData.overridable():151:151 -> a
     7151:7151:boolean pvt.arjunasdk.property.ConfigProperty.overridable():48 -> a
-    7151:7151:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):88 -> a
+    7151:7151:void pvt.batteries.lib.ComponentIntegrator.registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):86 -> a
     7151:7151:void registerProperty(pvt.arjunasdk.property.ConfigProperty):49 -> a
     53:57:void processDefaults(pvt.batteries.hocon.HoconReader) -> a
     8068:8069:void configureNames(java.util.ArrayList):68:69 -> a
     8068:8069:void processDefaults(pvt.batteries.hocon.HoconReader):55 -> a
-    8161:8162:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161:162 -> a
-    8161:8162:void configureNames(java.util.ArrayList):68 -> a
-    8161:8162:void processDefaults(pvt.batteries.hocon.HoconReader):55 -> a
+    8159:8160:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159:160 -> a
+    8159:8160:void configureNames(java.util.ArrayList):68 -> a
+    8159:8160:void processDefaults(pvt.batteries.hocon.HoconReader):55 -> a
     9054:9060:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):54:60 -> a
-    9054:9060:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> a
+    9054:9060:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> a
     9054:9060:void configureNames(java.util.ArrayList):68 -> a
     9054:9060:void processDefaults(pvt.batteries.hocon.HoconReader):55 -> a
     10036:10036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> a
     10036:10036:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):55 -> a
-    10036:10036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> a
+    10036:10036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> a
     10036:10036:void configureNames(java.util.ArrayList):68 -> a
     10036:10036:void processDefaults(pvt.batteries.hocon.HoconReader):55 -> a
     11036:11036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> a
     11036:11036:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):56 -> a
-    11036:11036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> a
+    11036:11036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> a
     11036:11036:void configureNames(java.util.ArrayList):68 -> a
     11036:11036:void processDefaults(pvt.batteries.hocon.HoconReader):55 -> a
     12036:12036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> a
     12036:12036:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):58 -> a
-    12036:12036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> a
+    12036:12036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> a
     12036:12036:void configureNames(java.util.ArrayList):68 -> a
     12036:12036:void processDefaults(pvt.batteries.hocon.HoconReader):55 -> a
     12040:12040:java.util.ArrayList pvt.batteries.configurator.lib.strings.NamedStringsContainer.getNamedStrings():40:40 -> a
     12040:12040:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):58 -> a
-    12040:12040:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> a
+    12040:12040:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> a
     12040:12040:void configureNames(java.util.ArrayList):68 -> a
     12040:12040:void processDefaults(pvt.batteries.hocon.HoconReader):55 -> a
     12064:12065:void configureMessages(java.util.ArrayList):64:65 -> a
     12064:12065:void processDefaults(pvt.batteries.hocon.HoconReader):56 -> a
-    12157:12158:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):157:158 -> a
-    12157:12158:void configureMessages(java.util.ArrayList):64 -> a
-    12157:12158:void processDefaults(pvt.batteries.hocon.HoconReader):56 -> a
+    12155:12156:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):155:156 -> a
+    12155:12156:void configureMessages(java.util.ArrayList):64 -> a
+    12155:12156:void processDefaults(pvt.batteries.hocon.HoconReader):56 -> a
     java.util.ArrayList getAllMessages() -> c
     java.util.ArrayList getAllNames() -> d
     64:65:void configureMessages(java.util.ArrayList) -> a
-    13157:13158:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):157:158 -> a
-    13157:13158:void configureMessages(java.util.ArrayList):64 -> a
+    13155:13156:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):155:156 -> a
+    13155:13156:void configureMessages(java.util.ArrayList):64 -> a
     14063:14069:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):63:69 -> a
-    14063:14069:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):157 -> a
+    14063:14069:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):155 -> a
     14063:14069:void configureMessages(java.util.ArrayList):64 -> a
     15036:15036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> a
     15036:15036:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):64 -> a
-    15036:15036:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):157 -> a
+    15036:15036:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):155 -> a
     15036:15036:void configureMessages(java.util.ArrayList):64 -> a
     16036:16036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> a
     16036:16036:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):65 -> a
-    16036:16036:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):157 -> a
+    16036:16036:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):155 -> a
     16036:16036:void configureMessages(java.util.ArrayList):64 -> a
     17036:17036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> a
     17036:17036:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):67 -> a
-    17036:17036:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):157 -> a
+    17036:17036:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):155 -> a
     17036:17036:void configureMessages(java.util.ArrayList):64 -> a
     17040:17040:java.util.ArrayList pvt.batteries.configurator.lib.strings.NamedStringsContainer.getNamedStrings():40:40 -> a
     17040:17040:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):67 -> a
-    17040:17040:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):157 -> a
+    17040:17040:void pvt.batteries.lib.ComponentIntegrator.populateMessages(java.util.ArrayList):155 -> a
     17040:17040:void configureMessages(java.util.ArrayList):64 -> a
     68:69:void configureNames(java.util.ArrayList) -> b
-    17161:17162:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161:162 -> b
-    17161:17162:void configureNames(java.util.ArrayList):68 -> b
+    17159:17160:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159:160 -> b
+    17159:17160:void configureNames(java.util.ArrayList):68 -> b
     18054:18060:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):54:60 -> b
-    18054:18060:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> b
+    18054:18060:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> b
     18054:18060:void configureNames(java.util.ArrayList):68 -> b
     19036:19036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> b
     19036:19036:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):55 -> b
-    19036:19036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> b
+    19036:19036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> b
     19036:19036:void configureNames(java.util.ArrayList):68 -> b
     20036:20036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> b
     20036:20036:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):56 -> b
-    20036:20036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> b
+    20036:20036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> b
     20036:20036:void configureNames(java.util.ArrayList):68 -> b
     21036:21036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> b
     21036:21036:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):58 -> b
-    21036:21036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> b
+    21036:21036:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> b
     21036:21036:void configureNames(java.util.ArrayList):68 -> b
     21040:21040:java.util.ArrayList pvt.batteries.configurator.lib.strings.NamedStringsContainer.getNamedStrings():40:40 -> b
     21040:21040:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):58 -> b
-    21040:21040:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):161 -> b
+    21040:21040:void pvt.batteries.lib.ComponentIntegrator.populateNames(java.util.ArrayList):159 -> b
     21040:21040:void configureNames(java.util.ArrayList):68 -> b
 pvt.batteries.integration.ComponentConfigurator -> com.autocognite.pvt.ex:
     void processDefaults() -> a
@@ -4501,8 +4501,8 @@ pvt.batteries.lib.CentralConfiguration -> com.autocognite.pvt.fc:
     pvt.batteries.lib.BaseConfiguration centralConfig -> b
     java.util.HashMap threadMap -> c
     pvt.batteries.lib.StringsManager stringsManager -> d
-    pvt.batteries.value.DefaultStringKeyValueContainer utvMap -> e
-    pvt.batteries.value.DefaultStringKeyValueContainer userConfigMap -> f
+    pvt.batteries.value.DefaultStringKeyValueContainer execVarMap -> e
+    pvt.batteries.value.DefaultStringKeyValueContainer userOptionMap -> f
     10:10:void <init>() -> <init>
     19:19:arjunasdk.interfaces.Value getCentralProperty(java.lang.String) -> e
     23:23:arjunasdk.interfaces.Value getCentralProperty(java.lang.Enum) -> a
@@ -4527,11 +4527,11 @@ pvt.batteries.lib.CentralConfiguration -> com.autocognite.pvt.fc:
     3120:3120:java.lang.String pvt.batteries.lib.StringsManager.getInfoMessageText(java.lang.String):120:120 -> d
     3120:3120:java.lang.String getInfoMessageText(java.lang.String):99 -> d
     103:103:pvt.batteries.config.Configuration getCentralConfiguration() -> a
-    107:108:void setCentralUTVMap(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
-    111:112:void setCentralUserConfigMap(pvt.batteries.value.DefaultStringKeyValueContainer) -> b
-    115:117:pvt.batteries.value.DefaultStringKeyValueContainer cloneCentralUTVs() -> b
-    121:123:pvt.batteries.value.DefaultStringKeyValueContainer cloneUserConfig() -> c
-    128:128:arjunasdk.interfaces.ReadOnlyStringKeyValueContainer userConfig() -> d
+    107:108:void setCentralexecVarMap(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
+    111:112:void setCentralUserOptionMap(pvt.batteries.value.DefaultStringKeyValueContainer) -> b
+    115:117:pvt.batteries.value.DefaultStringKeyValueContainer cloneCentralExecVars() -> b
+    121:123:pvt.batteries.value.DefaultStringKeyValueContainer cloneUserOptions() -> c
+    127:127:arjunasdk.interfaces.ReadOnlyStringKeyValueContainer userOptions() -> d
     11:16:void <clinit>() -> <clinit>
 pvt.batteries.lib.ComponentIntegrator -> com.autocognite.pvt.fd:
     java.lang.String refDir -> a
@@ -4546,100 +4546,100 @@ pvt.batteries.lib.ComponentIntegrator -> com.autocognite.pvt.fd:
     java.util.Set visiableProperties -> j
     java.util.HashMap readableNames -> k
     pvt.batteries.lib.StringsManager stringsManager -> l
-    pvt.batteries.value.DefaultStringKeyValueContainer utvMap -> m
-    pvt.batteries.value.DefaultStringKeyValueContainer userConfigMap -> n
+    pvt.batteries.value.DefaultStringKeyValueContainer execVarMap -> m
+    pvt.batteries.value.DefaultStringKeyValueContainer userOptionMap -> n
     22:36:void <init>() -> <init>
     39:40:void init() -> a
-    1123:1124:void setRefDir(java.lang.String):123:124 -> a
-    1123:1124:void init():39 -> a
+    1121:1122:void setRefDir(java.lang.String):121:122 -> a
+    1121:1122:void init():39 -> a
     43:44:void init(java.lang.String) -> a
     47:47:java.lang.String getProjectDir() -> b
     51:52:void setProjectDir(java.lang.String) -> b
     55:57:void addConfigurator(pvt.batteries.integration.ComponentConfigurator) -> a
-    62:65:void processDefaults() -> c
-    68:68:java.lang.String getKeyNameForEnumConstant(java.lang.Enum) -> d
-    73:95:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty) -> a
+    60:63:void processDefaults() -> c
+    66:66:java.lang.String getKeyNameForEnumConstant(java.lang.Enum) -> d
+    71:93:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty) -> a
     2060:2060:arjunasdk.interfaces.Value pvt.arjunasdk.property.ConfigProperty.value():60:60 -> a
-    2060:2060:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):77 -> a
+    2060:2060:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):75 -> a
     3028:3028:java.lang.String pvt.arjunasdk.property.ConfigProperty.definer():28:28 -> a
-    3028:3028:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    3028:3028:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     3072:3072:pvt.arjunasdk.property.ConfigPropertyMetaData pvt.arjunasdk.property.ConfigProperty.getMetaData():72:72 -> a
     3072:3072:java.lang.String pvt.arjunasdk.property.ConfigProperty.definer():28 -> a
-    3072:3072:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    3072:3072:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     3107:3107:java.lang.String pvt.arjunasdk.property.ConfigPropertyMetaData.definer():107:107 -> a
     3107:3107:java.lang.String pvt.arjunasdk.property.ConfigProperty.definer():28 -> a
-    3107:3107:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    3107:3107:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     4032:4032:java.lang.String pvt.arjunasdk.property.ConfigProperty.code():32:32 -> a
-    4032:4032:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    4032:4032:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     4072:4072:pvt.arjunasdk.property.ConfigPropertyMetaData pvt.arjunasdk.property.ConfigProperty.getMetaData():72:72 -> a
     4072:4072:java.lang.String pvt.arjunasdk.property.ConfigProperty.code():32 -> a
-    4072:4072:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    4072:4072:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     4115:4115:java.lang.String pvt.arjunasdk.property.ConfigPropertyMetaData.code():115:115 -> a
     4115:4115:java.lang.String pvt.arjunasdk.property.ConfigProperty.code():32 -> a
-    4115:4115:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
+    4115:4115:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):81 -> a
     5064:5064:arjunasdk.enums.ValueType pvt.arjunasdk.property.ConfigProperty.expectedValueType():64:64 -> a
-    5064:5064:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):85 -> a
+    5064:5064:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
     5119:5119:arjunasdk.enums.ValueType pvt.arjunasdk.property.ConfigPropertyMetaData.expectedValueType():119:119 -> a
     5119:5119:arjunasdk.enums.ValueType pvt.arjunasdk.property.ConfigProperty.expectedValueType():64 -> a
-    5119:5119:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):85 -> a
+    5119:5119:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):83 -> a
     6048:6048:boolean pvt.arjunasdk.property.ConfigProperty.overridable():48:48 -> a
-    6048:6048:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):88 -> a
+    6048:6048:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):86 -> a
     6072:6072:pvt.arjunasdk.property.ConfigPropertyMetaData pvt.arjunasdk.property.ConfigProperty.getMetaData():72:72 -> a
     6072:6072:boolean pvt.arjunasdk.property.ConfigProperty.overridable():48 -> a
-    6072:6072:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):88 -> a
+    6072:6072:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):86 -> a
     6151:6151:boolean pvt.arjunasdk.property.ConfigPropertyMetaData.overridable():151:151 -> a
     6151:6151:boolean pvt.arjunasdk.property.ConfigProperty.overridable():48 -> a
-    6151:6151:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):88 -> a
-    98:116:void enumerate() -> d
+    6151:6151:void registerProperty(java.lang.String,pvt.arjunasdk.property.ConfigProperty):86 -> a
+    96:114:void enumerate() -> d
     7060:7060:arjunasdk.interfaces.Value pvt.arjunasdk.property.ConfigProperty.value():60:60 -> d
-    7060:7060:void enumerate():110 -> d
-    119:119:java.lang.String getBaseDir() -> e
-    123:124:void setRefDir(java.lang.String) -> c
-    127:130:void processConfigProperties(java.util.HashMap) -> a
-    133:134:void processCentralUTVProperties(java.util.Map) -> a
-    137:138:void processCentralUserConfigProperties(java.util.Map) -> b
-    141:153:pvt.batteries.config.Configuration freezeCentralConfig() -> f
+    7060:7060:void enumerate():108 -> d
+    117:117:java.lang.String getBaseDir() -> e
+    121:122:void setRefDir(java.lang.String) -> c
+    125:128:void processConfigProperties(java.util.HashMap) -> a
+    131:132:void processCentralExecVars(java.util.Map) -> a
+    135:136:void processCentralUserOptions(java.util.Map) -> b
+    139:151:pvt.batteries.config.Configuration freezeCentralConfig() -> f
     8060:8060:arjunasdk.interfaces.Value pvt.arjunasdk.property.ConfigProperty.value():60:60 -> f
-    8060:8060:pvt.batteries.config.Configuration freezeCentralConfig():145 -> f
-    157:158:void populateMessages(java.util.ArrayList) -> a
+    8060:8060:pvt.batteries.config.Configuration freezeCentralConfig():143 -> f
+    155:156:void populateMessages(java.util.ArrayList) -> a
     8063:8069:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):63:69 -> a
-    8063:8069:void populateMessages(java.util.ArrayList):157 -> a
+    8063:8069:void populateMessages(java.util.ArrayList):155 -> a
     9036:9036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> a
     9036:9036:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):64 -> a
-    9036:9036:void populateMessages(java.util.ArrayList):157 -> a
+    9036:9036:void populateMessages(java.util.ArrayList):155 -> a
     10036:10036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> a
     10036:10036:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):65 -> a
-    10036:10036:void populateMessages(java.util.ArrayList):157 -> a
+    10036:10036:void populateMessages(java.util.ArrayList):155 -> a
     11036:11036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> a
     11036:11036:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):67 -> a
-    11036:11036:void populateMessages(java.util.ArrayList):157 -> a
+    11036:11036:void populateMessages(java.util.ArrayList):155 -> a
     11040:11040:java.util.ArrayList pvt.batteries.configurator.lib.strings.NamedStringsContainer.getNamedStrings():40:40 -> a
     11040:11040:void pvt.batteries.lib.StringsManager.populateMessages(java.util.ArrayList):67 -> a
-    11040:11040:void populateMessages(java.util.ArrayList):157 -> a
-    161:162:void populateNames(java.util.ArrayList) -> b
+    11040:11040:void populateMessages(java.util.ArrayList):155 -> a
+    159:160:void populateNames(java.util.ArrayList) -> b
     11054:11060:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):54:60 -> b
-    11054:11060:void populateNames(java.util.ArrayList):161 -> b
+    11054:11060:void populateNames(java.util.ArrayList):159 -> b
     12036:12036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> b
     12036:12036:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):55 -> b
-    12036:12036:void populateNames(java.util.ArrayList):161 -> b
+    12036:12036:void populateNames(java.util.ArrayList):159 -> b
     13036:13036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> b
     13036:13036:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):56 -> b
-    13036:13036:void populateNames(java.util.ArrayList):161 -> b
+    13036:13036:void populateNames(java.util.ArrayList):159 -> b
     14036:14036:java.lang.String pvt.batteries.configurator.lib.strings.NamedStringsContainer.getName():36:36 -> b
     14036:14036:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):58 -> b
-    14036:14036:void populateNames(java.util.ArrayList):161 -> b
+    14036:14036:void populateNames(java.util.ArrayList):159 -> b
     14040:14040:java.util.ArrayList pvt.batteries.configurator.lib.strings.NamedStringsContainer.getNamedStrings():40:40 -> b
     14040:14040:void pvt.batteries.lib.StringsManager.populateNames(java.util.ArrayList):58 -> b
-    14040:14040:void populateNames(java.util.ArrayList):161 -> b
-    165:167:java.lang.String getPropPathForEnum(java.lang.Enum) -> a
-    171:171:arjunasdk.interfaces.Value value(java.lang.Enum) -> b
+    14040:14040:void populateNames(java.util.ArrayList):159 -> b
+    163:165:java.lang.String getPropPathForEnum(java.lang.Enum) -> a
+    169:169:arjunasdk.interfaces.Value value(java.lang.Enum) -> b
     14060:14060:arjunasdk.interfaces.Value pvt.arjunasdk.property.ConfigProperty.value():60:60 -> b
-    14060:14060:arjunasdk.interfaces.Value value(java.lang.Enum):171 -> b
-    175:175:arjunasdk.enums.ValueType valueType(java.lang.Enum) -> e
+    14060:14060:arjunasdk.interfaces.Value value(java.lang.Enum):169 -> b
+    173:173:arjunasdk.enums.ValueType valueType(java.lang.Enum) -> e
     15056:15056:arjunasdk.enums.ValueType pvt.arjunasdk.property.ConfigProperty.valueType():56:56 -> e
-    15056:15056:arjunasdk.enums.ValueType valueType(java.lang.Enum):175 -> e
-    179:179:arjunasdk.enums.ValueType expectedValueType(java.lang.Enum) -> c
-    183:183:arjunasdk.enums.ValueType expectedValueType(java.lang.String) -> d
+    15056:15056:arjunasdk.enums.ValueType valueType(java.lang.Enum):173 -> e
+    177:177:arjunasdk.enums.ValueType expectedValueType(java.lang.Enum) -> c
+    181:181:arjunasdk.enums.ValueType expectedValueType(java.lang.String) -> d
 pvt.batteries.lib.DelimitedDataParser -> com.autocognite.pvt.fe:
     26:26:void <init>() -> <init>
     29:45:java.util.List parse(java.lang.String) -> a
@@ -5128,7 +5128,7 @@ pvt.unitee.arjuna.ArjunaInternal -> com.autocognite.pvt.gs:
     boolean displayFixtureProcessingInfo -> f
     boolean logFixtureExecutionInfo -> B
     boolean displayInstanceProcessingInfo -> g
-    boolean displayUTVProcessingInfo -> h
+    boolean displayExecVarProcessingInfo -> h
     boolean displayTestObjConstructionInfo -> i
     boolean logPropInfo -> j
     boolean logTestExceptionTraces -> k
@@ -5315,12 +5315,12 @@ pvt.unitee.arjuna.ArjunaInternal -> com.autocognite.pvt.gs:
     386:386:boolean shouldIncludeAnnotatedTestPropsInReport() -> v
     17227:17227:boolean pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeAnnotatedTestPropsInReport():227:227 -> v
     17227:17227:boolean shouldIncludeAnnotatedTestPropsInReport():386 -> v
-    390:390:boolean shouldIncludeCustomPropsInReport() -> w
-    17231:17231:boolean pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeCustomPropsInReport():231:231 -> w
-    17231:17231:boolean shouldIncludeCustomPropsInReport():390 -> w
-    394:394:boolean shouldIncludeUtvInReport() -> x
-    17235:17235:boolean pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeUtvInReport():235:235 -> x
-    17235:17235:boolean shouldIncludeUtvInReport():394 -> x
+    390:390:boolean shouldIncludeTestAttrInReport() -> w
+    17231:17231:boolean pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeTestAttrInReport():231:231 -> w
+    17231:17231:boolean shouldIncludeTestAttrInReport():390 -> w
+    394:394:boolean shouldIncludeExecVarsInReport() -> x
+    17235:17235:boolean pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeExecVarsInReport():235:235 -> x
+    17235:17235:boolean shouldIncludeExecVarsInReport():394 -> x
     398:398:boolean shouldIncludeDataRecordInReport() -> y
     17239:17239:boolean pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeDataRecordInReport():239:239 -> y
     17239:17239:boolean shouldIncludeDataRecordInReport():398 -> y
@@ -5408,8 +5408,8 @@ pvt.unitee.cli.UniteeCliConfigurator -> com.autocognite.pvt.gw:
     1447:1448:void processUserOptions():86 -> c
     90:95:void addFilter(pvt.unitee.enums.TestPickerProperty,java.lang.String) -> a
     98:151:void addUniteeStringProperty(java.lang.String,java.lang.Enum) -> a
-    2179:2179:arjunasdk.enums.ValueType pvt.batteries.lib.ComponentIntegrator.expectedValueType(java.lang.Enum):179:179 -> a
-    2179:2179:void addUniteeStringProperty(java.lang.String,java.lang.Enum):99 -> a
+    2177:2177:arjunasdk.enums.ValueType pvt.batteries.lib.ComponentIntegrator.expectedValueType(java.lang.Enum):177:177 -> a
+    2177:2177:void addUniteeStringProperty(java.lang.String,java.lang.Enum):99 -> a
     154:154:java.util.Map getCliPickerOptions() -> d
     159:160:void setIntegrator(pvt.batteries.lib.ComponentIntegrator) -> a
 pvt.unitee.cli.UniteeCliConfigurator$1 -> com.autocognite.pvt.gx:
@@ -5502,10 +5502,10 @@ pvt.unitee.config.ArjunaSingleton -> com.autocognite.pvt.ha:
     1511:1511:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.config.SessionCreator.getSession():511:511 -> a
     1511:1511:void init():288 -> a
     310:313:void freeze() -> b
-    2098:2116:void pvt.batteries.lib.ComponentIntegrator.enumerate():98:116 -> b
-    2098:2116:void freeze():311 -> b
+    2096:2114:void pvt.batteries.lib.ComponentIntegrator.enumerate():96:114 -> b
+    2096:2114:void freeze():311 -> b
     3060:3060:arjunasdk.interfaces.Value pvt.arjunasdk.property.ConfigProperty.value():60:60 -> b
-    3060:3060:void pvt.batteries.lib.ComponentIntegrator.enumerate():110 -> b
+    3060:3060:void pvt.batteries.lib.ComponentIntegrator.enumerate():108 -> b
     3060:3060:void freeze():311 -> b
     3364:3371:void initlogger():364:371 -> b
     3364:3371:void freeze():312 -> b
@@ -6085,52 +6085,52 @@ pvt.unitee.core.lib.testvars.DefaultTestProperties$1 -> com.autocognite.pvt.hy:
 pvt.unitee.core.lib.testvars.DefaultTestVariables -> com.autocognite.pvt.hz:
     pvt.unitee.core.lib.testvars.InternalTestObjectProperties objectProps -> a
     pvt.unitee.core.lib.testvars.InternalTestProperties testProps -> b
-    pvt.batteries.value.DefaultStringKeyValueContainer customProps -> c
-    pvt.batteries.value.DefaultStringKeyValueContainer utvars -> d
+    pvt.batteries.value.DefaultStringKeyValueContainer attr -> c
+    pvt.batteries.value.DefaultStringKeyValueContainer execVars -> d
     arjunasdk.ddauto.interfaces.DataRecord dataRecord -> e
     java.util.Map dataRefMap -> f
     arjunasdk.ddauto.interfaces.DataRecord dr -> g
     18:28:void <init>() -> <init>
     31:33:void populateDefaults() -> a
     40:40:unitee.interfaces.TestObjectProperties object() -> object
-    1069:1069:pvt.unitee.core.lib.testvars.InternalTestObjectProperties rawObjectProps():69:69 -> object
-    1069:1069:unitee.interfaces.TestObjectProperties object():40 -> object
+    1064:1064:pvt.unitee.core.lib.testvars.InternalTestObjectProperties rawObjectProps():64:64 -> object
+    1064:1064:unitee.interfaces.TestObjectProperties object():40 -> object
     48:48:unitee.interfaces.TestProperties test() -> test
-    1074:1074:pvt.unitee.core.lib.testvars.InternalTestProperties rawTestProps():74:74 -> test
-    1074:1074:unitee.interfaces.TestProperties test():48 -> test
-    56:56:pvt.batteries.value.DefaultStringKeyValueContainer utp() -> g
-    1079:1079:pvt.batteries.value.DefaultStringKeyValueContainer rawCustomProps():79:79 -> g
-    1079:1079:pvt.batteries.value.DefaultStringKeyValueContainer utp():56 -> g
-    64:64:pvt.batteries.value.DefaultStringKeyValueContainer utv() -> h
-    1084:1084:pvt.batteries.value.DefaultStringKeyValueContainer rawUtv():84:84 -> h
-    1084:1084:pvt.batteries.value.DefaultStringKeyValueContainer utv():64 -> h
-    69:69:pvt.unitee.core.lib.testvars.InternalTestObjectProperties rawObjectProps() -> b
-    74:74:pvt.unitee.core.lib.testvars.InternalTestProperties rawTestProps() -> c
-    79:79:pvt.batteries.value.DefaultStringKeyValueContainer rawCustomProps() -> d
-    84:84:pvt.batteries.value.DefaultStringKeyValueContainer rawUtv() -> e
-    89:90:void setObjectProps(pvt.unitee.core.lib.testvars.InternalTestObjectProperties) -> a
-    94:95:void setTestProps(pvt.unitee.core.lib.testvars.InternalTestProperties) -> a
-    99:100:void setCustomProps(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
-    104:105:void setUtv(pvt.batteries.value.DefaultStringKeyValueContainer) -> b
-    108:111:com.google.gson.JsonObject asJsonObject() -> f
-    116:117:void setDataRecord(arjunasdk.ddauto.interfaces.DataRecord) -> a
-    121:121:arjunasdk.ddauto.interfaces.DataRecord record() -> record
-    126:134:pvt.arjunasdk.ddt.interfaces.DataReference refer(java.lang.String) -> refer
-    143:144:void addDataReference(java.lang.String,pvt.arjunasdk.ddt.interfaces.DataReference) -> a
-    148:148:java.util.Map references() -> references
-    153:154:void addDataReferences(java.util.Map) -> a
-    17:17:arjunasdk.interfaces.StringKeyValueContainer utv() -> utv
-    2064:2064:pvt.batteries.value.DefaultStringKeyValueContainer utv():64:64 -> utv
-    2064:2064:arjunasdk.interfaces.StringKeyValueContainer utv():17 -> utv
-    2084:2084:pvt.batteries.value.DefaultStringKeyValueContainer rawUtv():84:84 -> utv
-    2084:2084:pvt.batteries.value.DefaultStringKeyValueContainer utv():64 -> utv
-    2084:2084:arjunasdk.interfaces.StringKeyValueContainer utv():17 -> utv
-    17:17:arjunasdk.interfaces.StringKeyValueContainer utp() -> utp
-    3056:3056:pvt.batteries.value.DefaultStringKeyValueContainer utp():56:56 -> utp
-    3056:3056:arjunasdk.interfaces.StringKeyValueContainer utp():17 -> utp
-    3079:3079:pvt.batteries.value.DefaultStringKeyValueContainer rawCustomProps():79:79 -> utp
-    3079:3079:pvt.batteries.value.DefaultStringKeyValueContainer utp():56 -> utp
-    3079:3079:arjunasdk.interfaces.StringKeyValueContainer utp():17 -> utp
+    1069:1069:pvt.unitee.core.lib.testvars.InternalTestProperties rawTestProps():69:69 -> test
+    1069:1069:unitee.interfaces.TestProperties test():48 -> test
+    54:54:pvt.batteries.value.DefaultStringKeyValueContainer attr() -> g
+    1074:1074:pvt.batteries.value.DefaultStringKeyValueContainer rawAttr():74:74 -> g
+    1074:1074:pvt.batteries.value.DefaultStringKeyValueContainer attr():54 -> g
+    59:59:pvt.batteries.value.DefaultStringKeyValueContainer execVars() -> h
+    1079:1079:pvt.batteries.value.DefaultStringKeyValueContainer rawExecVars():79:79 -> h
+    1079:1079:pvt.batteries.value.DefaultStringKeyValueContainer execVars():59 -> h
+    64:64:pvt.unitee.core.lib.testvars.InternalTestObjectProperties rawObjectProps() -> b
+    69:69:pvt.unitee.core.lib.testvars.InternalTestProperties rawTestProps() -> c
+    74:74:pvt.batteries.value.DefaultStringKeyValueContainer rawAttr() -> d
+    79:79:pvt.batteries.value.DefaultStringKeyValueContainer rawExecVars() -> e
+    84:85:void setObjectProps(pvt.unitee.core.lib.testvars.InternalTestObjectProperties) -> a
+    89:90:void setTestProps(pvt.unitee.core.lib.testvars.InternalTestProperties) -> a
+    94:95:void setAttr(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
+    99:100:void setExecVars(pvt.batteries.value.DefaultStringKeyValueContainer) -> b
+    103:106:com.google.gson.JsonObject asJsonObject() -> f
+    111:112:void setDataRecord(arjunasdk.ddauto.interfaces.DataRecord) -> a
+    116:116:arjunasdk.ddauto.interfaces.DataRecord record() -> record
+    121:129:pvt.arjunasdk.ddt.interfaces.DataReference refer(java.lang.String) -> refer
+    138:139:void addDataReference(java.lang.String,pvt.arjunasdk.ddt.interfaces.DataReference) -> a
+    143:143:java.util.Map references() -> references
+    148:149:void addDataReferences(java.util.Map) -> a
+    17:17:arjunasdk.interfaces.StringKeyValueContainer execVars() -> execVars
+    2059:2059:pvt.batteries.value.DefaultStringKeyValueContainer execVars():59:59 -> execVars
+    2059:2059:arjunasdk.interfaces.StringKeyValueContainer execVars():17 -> execVars
+    2079:2079:pvt.batteries.value.DefaultStringKeyValueContainer rawExecVars():79:79 -> execVars
+    2079:2079:pvt.batteries.value.DefaultStringKeyValueContainer execVars():59 -> execVars
+    2079:2079:arjunasdk.interfaces.StringKeyValueContainer execVars():17 -> execVars
+    17:17:arjunasdk.interfaces.StringKeyValueContainer attr() -> attr
+    3054:3054:pvt.batteries.value.DefaultStringKeyValueContainer attr():54:54 -> attr
+    3054:3054:arjunasdk.interfaces.StringKeyValueContainer attr():17 -> attr
+    3074:3074:pvt.batteries.value.DefaultStringKeyValueContainer rawAttr():74:74 -> attr
+    3074:3074:pvt.batteries.value.DefaultStringKeyValueContainer attr():54 -> attr
+    3074:3074:arjunasdk.interfaces.StringKeyValueContainer attr():17 -> attr
     24:24:void <clinit>() -> <clinit>
 pvt.unitee.core.lib.testvars.InternalTestObjectProperties -> com.autocognite.pvt.ia:
     void setObjectId(java.lang.String) -> a
@@ -6185,12 +6185,12 @@ pvt.unitee.core.lib.testvars.InternalTestProperties -> com.autocognite.pvt.ib:
 pvt.unitee.core.lib.testvars.InternalTestVariables -> com.autocognite.pvt.ic:
     pvt.unitee.core.lib.testvars.InternalTestObjectProperties rawObjectProps() -> b
     pvt.unitee.core.lib.testvars.InternalTestProperties rawTestProps() -> c
-    pvt.batteries.value.DefaultStringKeyValueContainer rawCustomProps() -> d
-    pvt.batteries.value.DefaultStringKeyValueContainer rawUtv() -> e
+    pvt.batteries.value.DefaultStringKeyValueContainer rawAttr() -> d
+    pvt.batteries.value.DefaultStringKeyValueContainer rawExecVars() -> e
     void setObjectProps(pvt.unitee.core.lib.testvars.InternalTestObjectProperties) -> a
     void setTestProps(pvt.unitee.core.lib.testvars.InternalTestProperties) -> a
-    void setCustomProps(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
-    void setUtv(pvt.batteries.value.DefaultStringKeyValueContainer) -> b
+    void setAttr(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
+    void setExecVars(pvt.batteries.value.DefaultStringKeyValueContainer) -> b
     void populateDefaults() -> a
     com.google.gson.JsonObject asJsonObject() -> f
     void setDataRecord(arjunasdk.ddauto.interfaces.DataRecord) -> a
@@ -6247,23 +6247,23 @@ pvt.unitee.enums.ArjunaProperty -> com.autocognite.pvt.id:
     pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_METADATA_TEST_OBJECT_ISSUES -> REPORT_DEBUG_METADATA_TEST_OBJECT_ISSUES
     pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_METADATA_TEST_OBJECT_FIXTURES -> REPORT_DEBUG_METADATA_TEST_OBJECT_FIXTURES
     pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_ANNOTATED_ON -> REPORT_MINIMAL_TESTS_ANNOTATED_ON
-    pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_CUSTOM_ON -> REPORT_MINIMAL_TESTS_CUSTOM_ON
-    pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_UTV_ON -> REPORT_MINIMAL_TESTS_UTV_ON
+    pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_ATTR_ON -> REPORT_MINIMAL_TESTS_ATTR_ON
+    pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_EXECVAR_ON -> REPORT_MINIMAL_TESTS_EXECVAR_ON
     pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_DATARECORD_ON -> REPORT_MINIMAL_TESTS_DATARECORD_ON
     pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_DATAREF_ON -> REPORT_MINIMAL_TESTS_DATAREF_ON
     pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_ANNOTATED_ON -> REPORT_BASIC_TESTS_ANNOTATED_ON
-    pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_CUSTOM_ON -> REPORT_BASIC_TESTS_CUSTOM_ON
-    pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_UTV_ON -> REPORT_BASIC_TESTS_UTV_ON
+    pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_ATTR_ON -> REPORT_BASIC_TESTS_ATTR_ON
+    pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_EXECVAR_ON -> REPORT_BASIC_TESTS_EXECVAR_ON
     pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_DATARECORD_ON -> REPORT_BASIC_TESTS_DATARECORD_ON
     pvt.unitee.enums.ArjunaProperty REPORT_BASIC_TESTS_DATAREF_ON -> REPORT_BASIC_TESTS_DATAREF_ON
     pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_ANNOTATED_ON -> REPORT_ADVANCED_TESTS_ANNOTATED_ON
-    pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_CUSTOM_ON -> REPORT_ADVANCED_TESTS_CUSTOM_ON
-    pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_UTV_ON -> REPORT_ADVANCED_TESTS_UTV_ON
+    pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_ATTR_ON -> REPORT_ADVANCED_TESTS_ATTR_ON
+    pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_EXECVAR_ON -> REPORT_ADVANCED_TESTS_EXECVAR_ON
     pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_DATARECORD_ON -> REPORT_ADVANCED_TESTS_DATARECORD_ON
     pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_TESTS_DATAREF_ON -> REPORT_ADVANCED_TESTS_DATAREF_ON
     pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_ANNOTATED_ON -> REPORT_DEBUG_TESTS_ANNOTATED_ON
-    pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_CUSTOM_ON -> REPORT_DEBUG_TESTS_CUSTOM_ON
-    pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_UTV_ON -> REPORT_DEBUG_TESTS_UTV_ON
+    pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_ATTR_ON -> REPORT_DEBUG_TESTS_ATTR_ON
+    pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_EXECVAR_ON -> REPORT_DEBUG_TESTS_EXECVAR_ON
     pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_DATARECORD_ON -> REPORT_DEBUG_TESTS_DATARECORD_ON
     pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_TESTS_DATAREF_ON -> REPORT_DEBUG_TESTS_DATAREF_ON
     pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_SECTIONS -> REPORT_MINIMAL_SECTIONS
@@ -6904,8 +6904,8 @@ pvt.unitee.reporter.lib.config.TestReporterSingleton -> com.autocognite.pvt.kc:
     java.util.List allowedSections -> s
     java.util.Set reportableTestResultTypes -> t
     boolean shouldIncludeAnnotatedTestProps -> u
-    boolean shouldIncludeCustomProps -> v
-    boolean shouldIncludeUtv -> w
+    boolean shouldIncludeAttr -> v
+    boolean shouldIncludeExecVars -> w
     boolean shouldIncludeDataRecord -> x
     boolean shouldIncludeDataRef -> y
     pvt.unitee.reporter.lib.config.TestReporterSingleton[] $VALUES -> z
@@ -6928,8 +6928,8 @@ pvt.unitee.reporter.lib.config.TestReporterSingleton -> com.autocognite.pvt.kc:
     219:219:java.util.Set getReportableTestTypes() -> m
     223:223:boolean isReportableResultType(pvt.unitee.enums.TestResultType) -> a
     227:227:boolean shouldIncludeAnnotatedTestPropsInReport() -> n
-    231:231:boolean shouldIncludeCustomPropsInReport() -> o
-    235:235:boolean shouldIncludeUtvInReport() -> p
+    231:231:boolean shouldIncludeTestAttrInReport() -> o
+    235:235:boolean shouldIncludeExecVarsInReport() -> p
     239:239:boolean shouldIncludeDataRecordInReport() -> q
     243:243:boolean shouldIncludeDataRefInReport() -> r
     247:247:java.util.Map getTestObjectAttrNameMap() -> s
@@ -7294,15 +7294,15 @@ pvt.unitee.reporter.lib.reportable.TestRelatedResult -> com.autocognite.pvt.lk:
     21:21:unitee.interfaces.TestVariables testVars() -> c
     25:25:unitee.interfaces.TestObjectProperties objectProps() -> d
     29:29:unitee.interfaces.TestProperties testProps() -> a
-    33:33:arjunasdk.interfaces.StringKeyValueContainer customProps() -> e
-    37:37:arjunasdk.interfaces.StringKeyValueContainer utv() -> f
+    33:33:arjunasdk.interfaces.StringKeyValueContainer attr() -> e
+    37:37:arjunasdk.interfaces.StringKeyValueContainer execVars() -> f
     41:42:void setTestVariables(unitee.interfaces.TestVariables) -> a
     45:45:java.util.List objectPropStrings(java.util.List) -> b
     49:49:java.util.Map objectPropStrItems(java.util.List) -> a
     53:53:java.util.List testPropStrings(java.util.List) -> c
     57:57:java.util.Map testPropStrItems(java.util.List) -> d
-    61:61:java.util.List customPropStrings(java.util.List) -> e
-    65:65:java.util.Map customPropStrItems(java.util.List) -> f
+    61:61:java.util.List attrStrings(java.util.List) -> e
+    65:65:java.util.Map attrStrItems(java.util.List) -> f
 pvt.unitee.reporter.lib.reportable.TestVariablesSerializer -> com.autocognite.pvt.ll:
     org.apache.log4j.Logger logger -> a
     12:13:void <init>() -> <init>
@@ -7495,7 +7495,7 @@ pvt.unitee.reporter.lib.writer.console.ConsoleTestResultWriter -> com.autocognit
     java.lang.String marker -> b
     java.util.List execTestObjectProps -> c
     java.util.List execTestProps -> d
-    java.util.List execCustomProps -> e
+    java.util.List execTestAttr -> e
     java.util.List execResultProps -> f
     java.util.Map testObjectNames -> g
     java.util.Map testPropNames -> h
@@ -7621,15 +7621,15 @@ pvt.unitee.reporter.lib.writer.excel.ExcelTestResultWriter -> com.autocognite.pv
     java.util.List execHeaders -> h
     pvt.unitee.reporter.lib.writer.excel.ExcelStepResultWriter stepWriter -> i
     boolean shouldIncludeAnnotatedTestProps -> j
-    boolean shouldIncludeCustomProps -> k
-    boolean shouldIncludeUtv -> l
+    boolean shouldIncludeAttr -> k
+    boolean shouldIncludeExecVars -> l
     boolean shouldIncludeDataRecord -> m
     boolean shouldIncludeDataRef -> n
     com.google.gson.Gson gson -> o
     277:297:void <init>(org.apache.poi.hssf.usermodel.HSSFWorkbook) -> <init>
     301:350:void setUp() -> a
     353:428:void update(pvt.unitee.reporter.lib.test.TestResult) -> a
-    1037:1037:arjunasdk.interfaces.StringKeyValueContainer pvt.unitee.reporter.lib.reportable.TestRelatedResult.utv():37:37 -> a
+    1037:1037:arjunasdk.interfaces.StringKeyValueContainer pvt.unitee.reporter.lib.reportable.TestRelatedResult.execVars():37:37 -> a
     1037:1037:void update(pvt.unitee.reporter.lib.test.TestResult):380 -> a
     2021:2021:unitee.interfaces.TestVariables pvt.unitee.reporter.lib.reportable.TestRelatedResult.testVars():21:21 -> a
     2021:2021:void update(pvt.unitee.reporter.lib.test.TestResult):399 -> a
@@ -8002,7 +8002,7 @@ pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition -> com.autocognite
     88:93:void addFileDataRefWithPath(java.lang.String,java.lang.String) -> a
     96:96:int getInstanceCount() -> c
     100:104:void setInstanceCount(int) -> a
-    107:115:void setUtvForInstance(int,java.util.HashMap) -> a
+    107:115:void setExecVarsForInstance(int,java.util.HashMap) -> a
     118:118:java.lang.Class getUserTestClass() -> d
     122:135:void setUserTestClass(java.lang.Class) -> a
     1071:1075:java.lang.String getPackageName(java.lang.Class):71:75 -> a
@@ -8096,7 +8096,7 @@ pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition -> com.autocognit
     64:66:void addFileDataRefWithPath(java.lang.String,java.lang.String) -> a
     69:69:int getInstanceCount() -> b
     73:77:void setInstanceCount(int) -> a
-    80:81:void setUtvForInstance(int,java.util.HashMap) -> a
+    80:81:void setExecVarsForInstance(int,java.util.HashMap) -> a
     84:84:unitee.interfaces.TestVariables getTestCreatorInstanceDefinition(int) -> b
     88:88:pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getClassDefinition() -> c
     92:93:void setClassDefinition(pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
@@ -9582,7 +9582,7 @@ pvt.unitee.testobject.lib.loader.JavaTestClassDefinitionsLoader -> com.autocogni
     9146:9147:void load(pvt.batteries.discoverer.DiscoveredFile):195 -> a
     10096:10096:int pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
     10096:10096:void load(pvt.batteries.discoverer.DiscoveredFile):201 -> a
-    10107:10115:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUtvForInstance(int,java.util.HashMap):107:115 -> a
+    10107:10115:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setExecVarsForInstance(int,java.util.HashMap):107:115 -> a
     10107:10115:void load(pvt.batteries.discoverer.DiscoveredFile):202 -> a
     216:224:java.lang.String getQualifiedName(pvt.batteries.discoverer.DiscoveredFile) -> c
     233:275:java.lang.Class loadClass(pvt.batteries.discoverer.DiscoveredFile,java.lang.String) -> a
@@ -9720,7 +9720,7 @@ pvt.unitee.testobject.lib.loader.JavaTestLoadingUtils -> com.autocognite.pvt.or:
     102:102:boolean isInstancesAnnotationPresent(java.lang.reflect.Method) -> e
     106:120:int getInstancesCount(unitee.annotations.Instances) -> b
     124:135:boolean hasUserSuppliedProperties(java.lang.String,unitee.annotations.Instances) -> a
-    140:170:java.util.HashMap loadUTVFromInstancesAnnotation(unitee.annotations.Instances,int,boolean) -> a
+    140:170:java.util.HashMap loadExecVarsFromInstancesAnnotation(unitee.annotations.Instances,int,boolean) -> a
     18:18:void <clinit>() -> <clinit>
 pvt.unitee.testobject.lib.loader.JavaTestMethodsDefinitionLoader -> com.autocognite.pvt.os:
     org.apache.log4j.Logger logger -> a
@@ -9892,7 +9892,7 @@ pvt.unitee.testobject.lib.loader.JavaTestMethodsDefinitionLoader -> com.autocogn
     31069:31069:void loadDefinitions():231 -> a
     32069:32069:int pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getInstanceCount():69:69 -> a
     32069:32069:void loadDefinitions():236 -> a
-    32080:32081:void pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setUtvForInstance(int,java.util.HashMap):80:81 -> a
+    32080:32081:void pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setExecVarsForInstance(int,java.util.HashMap):80:81 -> a
     32080:32081:void loadDefinitions():237 -> a
     32247:32247:pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition getTestClassDef():247:247 -> a
     32247:32247:void loadDefinitions():240 -> a
@@ -9980,7 +9980,7 @@ pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor -> com.autocog
     56:64:void setPriority(pvt.unitee.core.lib.testvars.InternalTestVariables,int) -> a
     67:72:void setAnnotatedProperties(pvt.unitee.core.lib.testvars.InternalTestVariables,unitee.annotations.TestClass) -> a
     75:80:void setAnnotatedProperties(pvt.unitee.core.lib.testvars.InternalTestVariables,unitee.annotations.TestMethod) -> a
-    83:89:void setCustomProps(pvt.unitee.core.lib.testvars.InternalTestVariables,java.lang.String[]) -> a
+    83:89:void setTestAttr(pvt.unitee.core.lib.testvars.InternalTestVariables,java.lang.String[]) -> a
 pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig -> com.autocognite.pvt.oz:
     pvt.unitee.testobject.lib.loader.group.Group group -> a
     com.google.gson.JsonElement elem -> k
@@ -10065,7 +10065,7 @@ pvt.unitee.testobject.lib.loader.group.BaseGroup -> com.autocognite.pvt.pb:
     int classThreads -> b
     java.util.List containerPickers -> c
     pvt.unitee.testobject.lib.loader.session.SessionSubNode sessionSubNode -> h
-    pvt.batteries.value.DefaultStringKeyValueContainer utvars -> d
+    pvt.batteries.value.DefaultStringKeyValueContainer execVars -> d
     java.util.Map classMethodMap -> i
     16:28:void <init>(java.lang.String) -> <init>
     16:34:void <init>(pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String) -> <init>
@@ -10088,7 +10088,7 @@ pvt.unitee.testobject.lib.loader.group.BaseGroup -> com.autocognite.pvt.pb:
     97:97:int getClassThreadCount() -> h
     101:101:pvt.unitee.testobject.lib.loader.session.SessionSubNode getSessionSubNode() -> i
     106:107:void setSessionSubNode(pvt.unitee.testobject.lib.loader.session.SessionSubNode) -> a
-    111:111:pvt.batteries.value.DefaultStringKeyValueContainer getUTV() -> j
+    111:111:pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> j
     116:116:pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> k
     121:122:void addClassMethodMap(java.lang.String,java.util.List) -> a
     126:126:java.util.List getScheduledCreatorsForContainer(java.lang.String) -> b
@@ -10202,7 +10202,7 @@ pvt.unitee.testobject.lib.loader.group.Group -> com.autocognite.pvt.pf:
     void setSessionName(java.lang.String) -> a
     java.lang.String getDefinitionFile() -> g
     int getClassThreadCount() -> h
-    pvt.batteries.value.DefaultStringKeyValueContainer getUTV() -> j
+    pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> j
     pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> k
     pvt.unitee.testobject.lib.loader.session.SessionSubNode getSessionSubNode() -> i
     void setSessionSubNode(pvt.unitee.testobject.lib.loader.session.SessionSubNode) -> a
@@ -10641,12 +10641,12 @@ pvt.unitee.testobject.lib.loader.group.UserDefinedGroup -> com.autocognite.pvt.p
     19:42:void <init>(pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String,java.lang.String) -> <init>
     1041:1042:void pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(pvt.unitee.testobject.lib.loader.group.TestLoader):41:42 -> <init>
     1041:1042:void <init>(pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String,java.lang.String):41 -> <init>
-    45:52:void errorUtvNotObject() -> l
+    45:52:void errorExecVarsNotObject() -> l
     55:62:void existAsClassThreadsIsNotInt() -> m
     67:139:void processJson(com.google.gson.JsonObject) -> a
-    1111:1111:pvt.batteries.value.DefaultStringKeyValueContainer pvt.unitee.testobject.lib.loader.group.BaseGroup.getUTV():111:111 -> a
+    1111:1111:pvt.batteries.value.DefaultStringKeyValueContainer pvt.unitee.testobject.lib.loader.group.BaseGroup.getExecVars():111:111 -> a
     1111:1111:void processJson(com.google.gson.JsonObject):70 -> a
-    2045:2052:void errorUtvNotObject():45:52 -> a
+    2045:2052:void errorExecVarsNotObject():45:52 -> a
     2045:2052:void processJson(com.google.gson.JsonObject):72 -> a
     2080:2081:void pvt.unitee.testobject.lib.loader.group.BaseGroup.setClassThreadCount(int):80:81 -> a
     2080:2081:void processJson(com.google.gson.JsonObject):119 -> a
@@ -10659,7 +10659,7 @@ pvt.unitee.testobject.lib.loader.session.BaseSession -> com.autocognite.pvt.pz:
     java.util.Iterator iter -> c
     int testMethodCount -> d
     java.lang.String name -> e
-    pvt.batteries.value.DefaultStringKeyValueContainer utvars -> f
+    pvt.batteries.value.DefaultStringKeyValueContainer execVars -> f
     15:23:void <init>(java.lang.String) -> <init>
     26:39:void load() -> a
     1060:1060:java.lang.String getName():60:60 -> a
@@ -10672,8 +10672,8 @@ pvt.unitee.testobject.lib.loader.session.BaseSession -> com.autocognite.pvt.pz:
     47:47:int getTestMethodCount() -> b
     52:55:pvt.unitee.testobject.lib.loader.session.SessionNode next() -> c
     60:60:java.lang.String getName() -> d
-    65:66:void setUTVs(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
-    70:70:pvt.batteries.value.DefaultStringKeyValueContainer getUTV() -> e
+    65:66:void setExecVars(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
+    70:70:pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> e
     14:14:void <clinit>() -> <clinit>
 pvt.unitee.testobject.lib.loader.session.BaseSessionNode -> com.autocognite.pvt.qa:
     java.util.List groupNodes -> b
@@ -10683,12 +10683,12 @@ pvt.unitee.testobject.lib.loader.session.BaseSessionNode -> com.autocognite.pvt.
     int id -> e
     java.util.Iterator iter -> f
     pvt.unitee.testobject.lib.loader.session.Session session -> g
-    pvt.batteries.value.DefaultStringKeyValueContainer utvars -> h
+    pvt.batteries.value.DefaultStringKeyValueContainer execVars -> h
     19:33:void <init>(pvt.unitee.testobject.lib.loader.session.Session,int) -> <init>
     36:38:void <init>(pvt.unitee.testobject.lib.loader.session.Session,int,java.lang.String) -> <init>
     41:43:void <init>(pvt.unitee.testobject.lib.loader.session.Session,int,java.lang.String,byte) -> <init>
     46:111:void <init>(pvt.unitee.testobject.lib.loader.session.Session,int,com.google.gson.JsonObject) -> <init>
-    1114:1121:void errorUtvNotObject():114:121 -> <init>
+    1114:1121:void errorExecVarsNotObject():114:121 -> <init>
     1114:1121:void <init>(pvt.unitee.testobject.lib.loader.session.Session,int,com.google.gson.JsonObject):54 -> <init>
     1124:1131:void existAsNameIsNotString():124:131 -> <init>
     1124:1131:void <init>(pvt.unitee.testobject.lib.loader.session.Session,int,com.google.gson.JsonObject):63 -> <init>
@@ -10706,7 +10706,7 @@ pvt.unitee.testobject.lib.loader.session.BaseSessionNode -> com.autocognite.pvt.
     3144:3151:void <init>(pvt.unitee.testobject.lib.loader.session.Session,int,com.google.gson.JsonObject):105 -> <init>
     3216:3217:void setGroupThreadCount(int):216:217 -> <init>
     3216:3217:void <init>(pvt.unitee.testobject.lib.loader.session.Session,int,com.google.gson.JsonObject):110 -> <init>
-    114:121:void errorUtvNotObject() -> i
+    114:121:void errorExecVarsNotObject() -> i
     124:131:void existAsNameIsNotString() -> j
     134:141:void existAsGroupThreadsIsNotInt() -> k
     144:151:void existAsInvalidGroupNodeSupplied() -> l
@@ -10725,7 +10725,7 @@ pvt.unitee.testobject.lib.loader.session.BaseSessionNode -> com.autocognite.pvt.
     236:239:pvt.unitee.testobject.lib.loader.session.SessionSubNode next() -> e
     245:245:int getId() -> f
     250:250:pvt.unitee.testobject.lib.loader.session.Session getSession() -> g
-    255:255:pvt.batteries.value.DefaultStringKeyValueContainer getUTV() -> h
+    255:255:pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> h
 pvt.unitee.testobject.lib.loader.session.BaseSessionSubNode -> com.autocognite.pvt.qb:
     java.util.List groupsQueue -> a
     int testMethodCount -> b
@@ -10736,20 +10736,20 @@ pvt.unitee.testobject.lib.loader.session.BaseSessionSubNode -> com.autocognite.p
     pvt.unitee.testobject.lib.loader.session.Session session -> g
     pvt.unitee.testobject.lib.loader.session.SessionNode sessionNode -> h
     java.lang.String name -> i
-    pvt.batteries.value.DefaultStringKeyValueContainer utvars -> j
+    pvt.batteries.value.DefaultStringKeyValueContainer execVars -> j
     18:35:void <init>(pvt.unitee.testobject.lib.loader.session.SessionNode,int) -> <init>
     38:41:void <init>(pvt.unitee.testobject.lib.loader.session.SessionNode,int,pvt.unitee.testobject.lib.loader.group.Group) -> <init>
     44:48:void <init>(pvt.unitee.testobject.lib.loader.session.SessionNode,int,java.lang.String) -> <init>
     1124:1124:pvt.unitee.testobject.lib.loader.session.Session getSession():124:124 -> <init>
     1124:1124:void <init>(pvt.unitee.testobject.lib.loader.session.SessionNode,int,java.lang.String):46 -> <init>
     51:71:void <init>(pvt.unitee.testobject.lib.loader.session.SessionNode,int,com.google.gson.JsonObject) -> <init>
-    2074:2081:void errorUtvNotObject():74:81 -> <init>
+    2074:2081:void errorExecVarsNotObject():74:81 -> <init>
     2074:2081:void <init>(pvt.unitee.testobject.lib.loader.session.SessionNode,int,com.google.gson.JsonObject):58 -> <init>
     2084:2091:void existAsNameIsNotString():84:91 -> <init>
     2084:2091:void <init>(pvt.unitee.testobject.lib.loader.session.SessionNode,int,com.google.gson.JsonObject):66 -> <init>
     2124:2124:pvt.unitee.testobject.lib.loader.session.Session getSession():124:124 -> <init>
     2124:2124:void <init>(pvt.unitee.testobject.lib.loader.session.SessionNode,int,com.google.gson.JsonObject):69 -> <init>
-    74:81:void errorUtvNotObject() -> j
+    74:81:void errorExecVarsNotObject() -> j
     84:91:void existAsNameIsNotString() -> k
     94:96:void load() -> a
     99:99:pvt.unitee.testobject.lib.loader.group.Group getGroup() -> b
@@ -10759,7 +10759,7 @@ pvt.unitee.testobject.lib.loader.session.BaseSessionSubNode -> com.autocognite.p
     119:119:pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> f
     124:124:pvt.unitee.testobject.lib.loader.session.Session getSession() -> g
     129:129:pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> h
-    133:133:pvt.batteries.value.DefaultStringKeyValueContainer getUTV() -> i
+    133:133:pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> i
 pvt.unitee.testobject.lib.loader.session.MSession -> com.autocognite.pvt.qc:
     java.lang.String groupName -> a
     8:13:void <init>(java.lang.String) -> <init>
@@ -10771,8 +10771,8 @@ pvt.unitee.testobject.lib.loader.session.MSession -> com.autocognite.pvt.qc:
     30:42:java.lang.String getMagicGroupName(pvt.unitee.enums.PickerTargetType) -> a
     46:46:com.google.gson.JsonObject getConfigObject() -> f
     51:51:java.lang.String getSessionFilePath() -> g
-    56:56:com.google.gson.JsonObject getUTVObject() -> h
-    61:61:com.google.gson.JsonObject getUserConfigObject() -> i
+    56:56:com.google.gson.JsonObject getExecVarObject() -> h
+    61:61:com.google.gson.JsonObject getUserOptionsObject() -> i
 pvt.unitee.testobject.lib.loader.session.MSession$1 -> com.autocognite.pvt.qd:
     int[] $SwitchMap$pvt$unitee$enums$PickerTargetType -> a
     31:31:void <clinit>() -> <clinit>
@@ -10783,10 +10783,10 @@ pvt.unitee.testobject.lib.loader.session.Session -> com.autocognite.pvt.qe:
     java.lang.String getName() -> d
     com.google.gson.JsonObject getConfigObject() -> f
     java.lang.String getSessionFilePath() -> g
-    com.google.gson.JsonObject getUTVObject() -> h
-    pvt.batteries.value.DefaultStringKeyValueContainer getUTV() -> e
-    void setUTVs(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
-    com.google.gson.JsonObject getUserConfigObject() -> i
+    com.google.gson.JsonObject getExecVarObject() -> h
+    pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> e
+    void setExecVars(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
+    com.google.gson.JsonObject getUserOptionsObject() -> i
 pvt.unitee.testobject.lib.loader.session.SessionNode -> com.autocognite.pvt.qf:
     int getTestMethodCount() -> b
     void load() -> a
@@ -10796,7 +10796,7 @@ pvt.unitee.testobject.lib.loader.session.SessionNode -> com.autocognite.pvt.qf:
     int getId() -> f
     pvt.unitee.testobject.lib.loader.session.Session getSession() -> g
     void setName(java.lang.String) -> a
-    pvt.batteries.value.DefaultStringKeyValueContainer getUTV() -> h
+    pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> h
 pvt.unitee.testobject.lib.loader.session.SessionSubNode -> com.autocognite.pvt.qg:
     int getTestMethodCount() -> c
     void load() -> a
@@ -10806,14 +10806,14 @@ pvt.unitee.testobject.lib.loader.session.SessionSubNode -> com.autocognite.pvt.q
     pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> f
     pvt.unitee.testobject.lib.loader.session.Session getSession() -> g
     pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> h
-    pvt.batteries.value.DefaultStringKeyValueContainer getUTV() -> i
+    pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> i
 pvt.unitee.testobject.lib.loader.session.UserDefinedSession -> com.autocognite.pvt.qh:
     org.apache.log4j.Logger logger -> a
     java.lang.String sessionFilePath -> b
-    com.google.gson.JsonObject configObj -> c
+    com.google.gson.JsonObject arjunaOptionsObj -> c
     com.google.gson.JsonObject sObject -> d
-    com.google.gson.JsonObject utvObject -> e
-    com.google.gson.JsonObject userConfigObject -> f
+    com.google.gson.JsonObject execVarsObj -> e
+    com.google.gson.JsonObject userOptionsObj -> f
     16:34:void <init>(java.lang.String,java.lang.String) -> <init>
     37:46:void exitAsAttrNotAnArray(java.lang.String,java.lang.String) -> a
     49:58:void exitAsAttrIsNull(java.lang.String,java.lang.String) -> b
@@ -10830,8 +10830,8 @@ pvt.unitee.testobject.lib.loader.session.UserDefinedSession -> com.autocognite.p
     1073:1080:void existAsInvalidSessionNodeSupplied():73:80 -> a
     1073:1080:void load():114 -> a
     134:134:java.lang.String getSessionFilePath() -> g
-    139:139:com.google.gson.JsonObject getUTVObject() -> h
-    144:144:com.google.gson.JsonObject getUserConfigObject() -> i
+    139:139:com.google.gson.JsonObject getExecVarObject() -> h
+    144:144:com.google.gson.JsonObject getUserOptionsObject() -> i
 pvt.unitee.testobject.lib.loader.tree.AbstractTestMethodNode -> com.autocognite.pvt.qi:
     pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition methodDef -> a
     java.lang.String name -> b
@@ -10947,7 +10947,7 @@ pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator -> com.autocognite.p
     java.util.Iterator slotCreatorIter -> i
     int currentSlotNum -> j
     java.util.HashMap methodToSlotMap -> k
-    pvt.batteries.value.DefaultStringKeyValueContainer utvars -> l
+    pvt.batteries.value.DefaultStringKeyValueContainer execVars -> l
     28:45:void <init>(pvt.unitee.testobject.lib.loader.group.Group) -> <init>
     48:49:void addTestCreatorName(java.lang.String) -> a
     52:88:boolean areAllEdgesScheduledForNode(pvt.unitee.testobject.lib.loader.tree.TestNode) -> a
@@ -11271,8 +11271,8 @@ unitee.interfaces.TestProperties -> unitee.interfaces.TestProperties:
 unitee.interfaces.TestVariables -> unitee.interfaces.TestVariables:
     unitee.interfaces.TestObjectProperties object() -> object
     unitee.interfaces.TestProperties test() -> test
-    arjunasdk.interfaces.StringKeyValueContainer utp() -> utp
-    arjunasdk.interfaces.StringKeyValueContainer utv() -> utv
+    arjunasdk.interfaces.StringKeyValueContainer attr() -> attr
+    arjunasdk.interfaces.StringKeyValueContainer execVars() -> execVars
     arjunasdk.ddauto.interfaces.DataRecord record() -> record
     pvt.arjunasdk.ddt.interfaces.DataReference refer(java.lang.String) -> refer
     java.util.Map references() -> references

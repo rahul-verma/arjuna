@@ -52,12 +52,12 @@ public class MSession extends BaseSession{
 	}
 
 	@Override
-	public JsonObject getUTVObject() {
+	public JsonObject getExecVarObject() {
 		return new JsonObject();
 	}
 	
 	@Override
-	public JsonObject getUserConfigObject() {
+	public JsonObject getUserOptionsObject() {
 		return new JsonObject();
 	}
 }

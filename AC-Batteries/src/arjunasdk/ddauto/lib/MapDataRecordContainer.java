@@ -1,4 +1,4 @@
-package arjunasdk.ddauto.datarecord;
+package arjunasdk.ddauto.lib;
 
 import arjunasdk.ddauto.exceptions.MapDataRecordLookUpException;
 import arjunasdk.interfaces.Value;

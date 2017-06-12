@@ -60,7 +60,7 @@ public class ArjunaInternal {
 	public static boolean displayFixtureProcessingInfo = false;
 	public static boolean logFixtureExecutionInfo = false;
 	public static boolean displayInstanceProcessingInfo = false;
-	public static boolean displayUTVProcessingInfo = false;
+	public static boolean displayExecVarProcessingInfo = false;
 	public static boolean displayTestObjConstructionInfo = false;
 	public static boolean logPropInfo = true;
 	public static boolean logTestExceptionTraces = false;
@@ -386,12 +386,12 @@ public class ArjunaInternal {
 		return TestReporterSingleton.INSTANCE.shouldIncludeAnnotatedTestPropsInReport();
 	}
 	
-	public static boolean shouldIncludeCustomPropsInReport(){
-		return TestReporterSingleton.INSTANCE.shouldIncludeCustomPropsInReport();
+	public static boolean shouldIncludeTestAttrInReport(){
+		return TestReporterSingleton.INSTANCE.shouldIncludeTestAttrInReport();
 	}
 	
-	public static boolean shouldIncludeUtvInReport(){
-		return TestReporterSingleton.INSTANCE.shouldIncludeUtvInReport();
+	public static boolean shouldIncludeExecVarsInReport(){
+		return TestReporterSingleton.INSTANCE.shouldIncludeExecVarsInReport();
 	}
 	
 	public static boolean shouldIncludeDataRecordInReport(){

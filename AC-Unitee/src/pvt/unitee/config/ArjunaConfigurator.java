@@ -306,11 +306,11 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_MINIMAL_TESTS_ANNOTATED_ON:
 					this.handleBooleanConfig(propPath, cValue, "Should Annotated Test Properties be included in Report?", false);
 					break;						
-				case REPORT_MINIMAL_TESTS_CUSTOM_ON:
-					this.handleBooleanConfig(propPath, cValue, "Should Custom Properties be included in Report?", false);
+				case REPORT_MINIMAL_TESTS_ATTR_ON:
+					this.handleBooleanConfig(propPath, cValue, "Should Test Attributes be included in Report?", false);
 					break;			
-				case REPORT_MINIMAL_TESTS_UTV_ON:
-					this.handleBooleanConfig(propPath, cValue, "Should User Defined Values be included in Report?", false);
+				case REPORT_MINIMAL_TESTS_EXECVAR_ON:
+					this.handleBooleanConfig(propPath, cValue, "Should Execution Variables be included in Report?", false);
 					break;	
 				case REPORT_MINIMAL_TESTS_DATARECORD_ON:
 					this.handleBooleanConfig(propPath, cValue, "Should Data Record be included in Report?", false);
@@ -321,11 +321,11 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_BASIC_TESTS_ANNOTATED_ON:
 					this.handleBooleanConfig(propPath, cValue, "Should Annotated Test Properties be included in Report?", false);
 					break;	
-				case REPORT_BASIC_TESTS_CUSTOM_ON:
-					this.handleBooleanConfig(propPath, cValue, "Should Custom Properties be included in Report?", false);
+				case REPORT_BASIC_TESTS_ATTR_ON:
+					this.handleBooleanConfig(propPath, cValue, "Should Test Attributes be included in Report?", false);
 					break;			
-				case REPORT_BASIC_TESTS_UTV_ON:
-					this.handleBooleanConfig(propPath, cValue, "Should User Defined Values be included in Report?", false);
+				case REPORT_BASIC_TESTS_EXECVAR_ON:
+					this.handleBooleanConfig(propPath, cValue, "Should Execution Variables be included in Report?", false);
 					break;	
 				case REPORT_BASIC_TESTS_DATARECORD_ON:
 					this.handleBooleanConfig(propPath, cValue, "Should Data Record be included in Report?", false);
@@ -336,11 +336,11 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_ADVANCED_TESTS_ANNOTATED_ON:
 					this.handleBooleanConfig(propPath, cValue, "Should Annotated Test Properties be included in Report?", false);
 					break;	
-				case REPORT_ADVANCED_TESTS_CUSTOM_ON:
-					this.handleBooleanConfig(propPath, cValue, "Should Custom Properties be included in Report?", false);
+				case REPORT_ADVANCED_TESTS_ATTR_ON:
+					this.handleBooleanConfig(propPath, cValue, "Should Test Attributes be included in Report?", false);
 					break;			
-				case REPORT_ADVANCED_TESTS_UTV_ON:
-					this.handleBooleanConfig(propPath, cValue, "Should User Defined Values be included in Report?", false);
+				case REPORT_ADVANCED_TESTS_EXECVAR_ON:
+					this.handleBooleanConfig(propPath, cValue, "Should Execution Variables be included in Report?", false);
 					break;	
 				case REPORT_ADVANCED_TESTS_DATARECORD_ON:
 					this.handleBooleanConfig(propPath, cValue, "Should Data Record be included in Report?", false);
@@ -351,11 +351,11 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_DEBUG_TESTS_ANNOTATED_ON:
 					this.handleBooleanConfig(propPath, cValue, "Should Annotated Test Properties be included in Report?", false);
 					break;	
-				case REPORT_DEBUG_TESTS_CUSTOM_ON:
-					this.handleBooleanConfig(propPath, cValue, "Should Custom Properties be included in Report?", false);
+				case REPORT_DEBUG_TESTS_ATTR_ON:
+					this.handleBooleanConfig(propPath, cValue, "Should Test Attributes be included in Report?", false);
 					break;			
-				case REPORT_DEBUG_TESTS_UTV_ON:
-					this.handleBooleanConfig(propPath, cValue, "Should User Defined Values be included in Report?", false);
+				case REPORT_DEBUG_TESTS_EXECVAR_ON:
+					this.handleBooleanConfig(propPath, cValue, "Should Execution Variables be included in Report?", false);
 					break;	
 				case REPORT_DEBUG_TESTS_DATARECORD_ON:
 					this.handleBooleanConfig(propPath, cValue, "Should Data Record be included in Report?", false);

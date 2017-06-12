@@ -18,11 +18,11 @@ public interface Session {
 
 	String getSessionFilePath();
 
-	JsonObject getUTVObject();
+	JsonObject getExecVarObject();
 
-	DefaultStringKeyValueContainer getUTV();
+	DefaultStringKeyValueContainer getExecVars();
 
-	void setUTVs(DefaultStringKeyValueContainer utvs);
+	void setExecVars(DefaultStringKeyValueContainer execVars);
 
-	JsonObject getUserConfigObject();
+	JsonObject getUserOptionsObject();
 }

@@ -22,11 +22,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import arjunasdk.ddauto.datarecord.ListDataRecord;
-import arjunasdk.ddauto.datarecord.MapDataRecord;
 import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
 import arjunasdk.ddauto.interfaces.DataRecord;
 import arjunasdk.ddauto.interfaces.DataRecordContainer;
+import arjunasdk.ddauto.lib.BaseDataSource;
+import arjunasdk.ddauto.lib.ListDataRecord;
+import arjunasdk.ddauto.lib.MapDataRecord;
 import pvt.arjunasdk.enums.DataRecordOrder;
 
 public class BaseDataRecordContainer extends BaseDataSource implements DataRecordContainer {

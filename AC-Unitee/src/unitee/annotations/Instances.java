@@ -30,6 +30,6 @@ public @interface Instances {
 	int count() default 1;
 	int instanceThreads() default 1;
 	//String[] execVars() default "NOT_SET";
-	String[] execVars() default {};
+	String[] execVars() default {"NOT_SET"};
 	//Class<? extends MVDictionary> execVarsClass() default None.class;
 }

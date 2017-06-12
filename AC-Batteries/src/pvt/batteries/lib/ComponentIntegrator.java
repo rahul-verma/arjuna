@@ -32,8 +32,8 @@ public class ComponentIntegrator {
 	private Set<String> visiableProperties = new HashSet<String>();
 	private HashMap<String, String> readableNames = new HashMap<String, String>();
 	private StringsManager stringsManager = new StringsManager();
-	private DefaultStringKeyValueContainer utvMap = new DefaultStringKeyValueContainer();
-	private DefaultStringKeyValueContainer userConfigMap = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer execVarMap = new DefaultStringKeyValueContainer();
+	private DefaultStringKeyValueContainer userOptionMap = new DefaultStringKeyValueContainer();
 
 	public void init() {
 		setRefDir(FileSystemBatteries.getJarFilePathForObject(this));
@@ -57,8 +57,6 @@ public class ComponentIntegrator {
 	}
 
 	public void processDefaults() throws Exception {
-		// Configuration config = new Configuration();
-		// UserDefinedConfig userConfig = new UserDefinedConfig();
 		for (ComponentConfigurator configurator : configurators) {
 			configurator.processDefaults();
 		}
@@ -129,12 +127,12 @@ public class ComponentIntegrator {
 		}
 	}
 
-	public void processCentralUTVProperties(Map<String, Value> properties) {
-		this.utvMap.add(properties);
+	public void processCentralExecVars(Map<String, Value> properties) {
+		this.execVarMap.add(properties);
 	}
 	
-	public void processCentralUserConfigProperties(Map<String, Value> properties) {
-		this.userConfigMap.add(properties);
+	public void processCentralUserOptions(Map<String, Value> properties) {
+		this.userOptionMap.add(properties);
 	}
 
 	public Configuration freezeCentralConfig() throws Exception {
@@ -144,8 +142,8 @@ public class ComponentIntegrator {
 		for (String key : fworkProperties.keySet()) {
 			configuration.add(key, fworkProperties.get(key).value());
 		}
-		CentralConfiguration.setCentralUTVMap(this.utvMap);
-		CentralConfiguration.setCentralUserConfigMap(this.userConfigMap);
+		CentralConfiguration.setCentralexecVarMap(this.execVarMap);
+		CentralConfiguration.setCentralUserOptionMap(this.userOptionMap);
 		CentralConfiguration.setCentralProperties(configuration);
 		for (ComponentConfigurator configurator : configurators) {
 			configurator.loadComponent();
