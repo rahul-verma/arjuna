@@ -6,8 +6,10 @@ public interface TestDefinitionsLoader {
 
 	void setTestDir(String testDir) throws Exception;
 
-	void load(DiscoveredFile f);
-
 	void validateDependencies() throws Exception;
+
+	void processIfNonTestFileElseStore(DiscoveredFile f);
+
+	void loadTests();
 
 }

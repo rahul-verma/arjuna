@@ -53,7 +53,7 @@ import unitee.enums.TestObjectAttribute;
 public class ArjunaInternal {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	public static boolean displayReportPrepInfo = false;
-	public static boolean displayDiscoveryInfo = false;
+	public static boolean displayDiscoveryInfo = true;
 	public static boolean displayLoadingInfo = false;
 	public static boolean displayDefProcessingInfo = false;
 	public static boolean displayExecTreeLoadingInfo = false;
@@ -62,7 +62,7 @@ public class ArjunaInternal {
 	public static boolean displayInstanceProcessingInfo = false;
 	public static boolean displayExecVarProcessingInfo = false;
 	public static boolean displayTestObjConstructionInfo = false;
-	public static boolean logPropInfo = true;
+	public static boolean logPropInfo = false;
 	public static boolean logTestExceptionTraces = false;
 	public static boolean displayDependencyDefInfo = false;
 	public static boolean logIgnoreDepInfo = false;
@@ -76,7 +76,7 @@ public class ArjunaInternal {
 	public static boolean logJsonSerializationInfo = false;
 	public static boolean logJsonDeserializationInfo = false;
 	
-	public static boolean displayDataMethodProcessingInfo = false;
+	public static boolean displayDataMethodProcessingInfo = true;
 	
 	public static boolean displayFixtureExecInfo = false;
 	public static boolean displayObserverSetUpInfo = false;

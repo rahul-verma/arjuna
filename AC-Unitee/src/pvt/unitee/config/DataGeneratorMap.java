@@ -23,6 +23,7 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
+import arjunasdk.console.Console;
 import arjunasdk.ddauto.interfaces.DataSource;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
@@ -31,8 +32,8 @@ import unitee.annotations.DataGenerator;
 public class DataGeneratorMap {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	HashMap<String,Class<? extends DataSource>> dataSources = new HashMap<String, Class<? extends DataSource>>();
-	HashMap<String,String> dataGenClassNames = new HashMap<String,String>();
-	HashMap<Class<? extends DataSource>,String> dataGenClassToNameMapper = new HashMap<Class<? extends DataSource>,String>();
+	//HashMap<String,String> dataGenClassNames = new HashMap<String,String>();
+	//HashMap<Class<? extends DataSource>,String> dataGenClassToNameMapper = new HashMap<Class<? extends DataSource>,String>();
 	
 	@SuppressWarnings("unchecked")
 	public void process(Class<?> klassRaw) throws Exception{
@@ -53,7 +54,7 @@ public class DataGeneratorMap {
 			}
 			return;
 		}
-		String dataGenClassName = klass.getSimpleName().toUpperCase();
+		String dataGenClassName = klass.getName().toUpperCase();
 		String dataGenName = null;
 		if (klass.isAnnotationPresent(DataGenerator.class)){
 			Annotation annotation = klass.getAnnotation(DataGenerator.class);
@@ -71,16 +72,20 @@ public class DataGeneratorMap {
 			dataGenName = klass.getName();
 		}
 		
-		this.dataGenClassNames.put(dataGenClassName, dataGenName);
-		this.dataGenClassToNameMapper.put(klass , dataGenName);
+		//this.dataGenClassNames.put(dataGenClassName, dataGenName);
+		//this.dataGenClassToNameMapper.put(klass , dataGenName);
+		if (this.dataSources.containsKey(dataGenName)){
+			Console.displayError("!!!FATAL Error!!!");
+			Console.displayError(String.format("Duplicate data generator class label/class name [%s] found in your project. Check @DataGenerator annotations for labels and the names of the classes annotated across your project for duplicate names as well names.", dataGenName));
+			Console.displayError("Exiting...");
+			System.exit(1);
+		}
 		dataSources.put(dataGenName, klass);
 	}
 	
 	public DataSource getDataSource(String dataGenName) throws Exception{
 		if (dataSources.containsKey(dataGenName.toUpperCase())){
 			return dataSources.get(dataGenName.toUpperCase()).newInstance();
-		} else if (dataGenClassNames.containsKey(dataGenName.toUpperCase())){
-			return dataSources.get(dataGenClassNames.get(dataGenName.toUpperCase())).newInstance();
 		} else {
 			throw new Exception(String.format("No data generator class with name %s found.", dataGenName));
 		}

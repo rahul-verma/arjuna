@@ -83,6 +83,7 @@ public class DataMethodContainerMap {
 			logger.debug("@DataMethodContainer Annotated Container");
 			return NonTestDataMethodsHandler.getStaticMethodForClass(containerClass, dgName);
 		}
+		
 		if (ArjunaInternal.displayDataMethodProcessingInfo){
 			logger.debug(DataBatteries.flatten(this.containerClassNameToClassMapper.keySet()));
 		}

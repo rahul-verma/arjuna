@@ -21,6 +21,7 @@ package pvt.unitee.testobject.lib.loader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
@@ -32,7 +33,9 @@ import pvt.batteries.discoverer.FileDiscoverer;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.TestLanguage;
+import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import pvt.unitee.testobject.lib.loader.group.TestLoader;
+import unitee.annotations.TestClass;
 
 public class TestDefinitionsProcessor {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
@@ -89,6 +92,8 @@ public class TestDefinitionsProcessor {
 		//		aggregator.enumerate();
 		TestDefinitionsLoader testDefLoader = null;
 		TestDefinitionsLoader testLoader = null;
+		List<DiscoveredFile> testClasses = new ArrayList<DiscoveredFile>();
+		
 		while(iter.hasNext()){
 			DiscoveredFile f = iter.next();
 			TestLanguage lang = this.extToLanguage(f.getAttribute(DiscoveredFileAttribute.EXTENSION));
@@ -106,12 +111,9 @@ public class TestDefinitionsProcessor {
 			
 			testDefLoader = this.testDefinitionLoaders.get(lang);
 			
-			testDefLoader.load(f);
-//			if (tests != null){
-//				for (AuthoredTest test: tests){
-//					this.tests.add(test);
-//				}
-//			}
+			testDefLoader.processIfNonTestFileElseStore(f);
 		}
+		
+		testDefLoader.loadTests();
 	}
 }

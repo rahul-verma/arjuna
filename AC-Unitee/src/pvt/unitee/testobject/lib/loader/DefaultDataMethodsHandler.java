@@ -24,6 +24,7 @@ import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
+import arjunasdk.console.Console;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.ddt.datarecord.BaseDataRecordContainer;
 import pvt.unitee.arjuna.ArjunaInternal;
@@ -32,7 +33,6 @@ import unitee.annotations.DataMethod;
 public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private HashMap<String,Method> methods = new HashMap<String,Method>();
-	HashMap<String,String> dgMethodNames = new HashMap<String,String>();
 	public static Object[][] sampleArr = {};
 
 	protected abstract boolean shouldInclude(Method m);
@@ -90,7 +90,13 @@ public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 			} else {
 				continue;
 			}
-				this.dgMethodNames.put(methodName, dgName);
+				if (this.methods.containsKey(dgName)){
+					Console.displayError("!!!FATAL Error!!!");
+					Console.displayError(String.format("Duplicate data method name/label [%s] found in %s class. Check @DataMethod annotation as well names of the data methods in code.", dgName, this.getContainerName()));
+					Console.displayError("Exiting...");
+					System.exit(1);
+				}
+
 				this.methods.put(dgName, m);
 			}
 
@@ -100,8 +106,6 @@ public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 		public Method getMethod(String dgName) throws Exception{
 			if (methods.containsKey(dgName.toUpperCase())){
 				return (Method) methods.get(dgName.toUpperCase());
-			} else if (dgMethodNames.containsKey(dgName.toUpperCase())){
-				return (Method) methods.get(dgMethodNames.get(dgName.toUpperCase()));
 			} else {
 				throw new Exception(String.format("No data method with name %s found in %s class.", dgName, this.getContainerName()));
 			}

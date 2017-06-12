@@ -38,6 +38,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private ClassLoader classLoader = null;
 	private DependencyTreeBuilder depTreeBuilder = new DependencyTreeBuilder();
+	private List<Class<?>> testClasses = new ArrayList<Class<?>>();
 	String testDir = null;
 	public static Map<String, Set<String>> CLASS_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
 	public static Map<String, Set<String>> METHOD_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
@@ -100,29 +101,48 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 		 return classLoader;
 	}
 	
-	@Override
-	public void load(DiscoveredFile f){
-		JavaTestClass jTestClass = null;
-		String qualifiedName = getQualifiedName(f);
-		if (ArjunaInternal.displayUserTestLoadingInfo){
-			logger.debug("Get Class Loader for: " + qualifiedName);
+	private boolean isTestClass(Class<?> klass){
+		return klass.isAnnotationPresent(TestClass.class) || klass.getSimpleName().startsWith("Test");
+	}
+	
+	public void processIfNonTestFileElseStore(DiscoveredFile f){
+		try{
+			String qualifiedName = getQualifiedName(f);
+			if (ArjunaInternal.displayUserTestLoadingInfo){
+				logger.debug("Get Class Loader for: " + qualifiedName);
+			}
+			Class<?> klass = this.loadClass(f, qualifiedName);		
+
+			if (!this.isTestClass(klass)) {
+				ArjunaInternal.processNonTestClass(klass);
+				TestDefinitionsDB.addNonTestClassName(klass.getName());			
+			} else {
+				testClasses.add(klass);
+			}
+		} catch (Throwable e) {
+			Console.displayExceptionBlock(e);
 		}
+	}
+	
+	@Override
+	public void loadTests() {
+		for (Class<?> testClass: this.testClasses){
+			this.load(testClass, testClass.getName());
+		}
+	}
+
+	private void load(Class<?> klass, String qualifiedName){
+		JavaTestClass jTestClass = null;
 
 		try {
 			//boolean include = JavaObjectFilter.shouldIncludeClass(cls);
 //							logger.debug("Filtering: " + fullQualifiedClassName);
-			Class<?> klass = this.loadClass(f, qualifiedName);
+
 			
 			boolean isReserved = false;
 			isReserved = AnnotationValidator.validateReservedNamedClass(klass, qualifiedName);
 			if (!isReserved){
 				AnnotationValidator.validateClassAnnotations(klass, qualifiedName);
-			}
-			
-			if (!this.isTestClass(klass)) {
-				ArjunaInternal.processNonTestClass(klass);
-				TestDefinitionsDB.addNonTestClassName(klass.getName());
-				return;				
 			}
 			
 			JavaTestClassDefinition classDef = new JavaTestClassDefinition();
@@ -274,9 +294,6 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 		
 		throw new Exception("Not able to load test class: " + fullName);
 }
-	private boolean isTestClass(Class<?> klass){
-		return klass.isAnnotationPresent(TestClass.class) || klass.getSimpleName().startsWith("Test");
-	}
 	
 	private void processSkip(String fullName, Class<?> klass, JavaTestClassDefinition classDef) throws Exception{
 		if (klass.isAnnotationPresent(Skip.class)){
@@ -304,8 +321,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 	@Override
 	public void validateDependencies() throws Exception {
 		TestDefinitionsDB.validateDependencies();
-	}
-	
+	}	
 }
 
 class ConstructorDef{
