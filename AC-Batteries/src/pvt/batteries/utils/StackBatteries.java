@@ -56,7 +56,7 @@ public class StackBatteries {
 		CLIENT_CODE_STACK_INDEX = i;
 	}
 
-	public static String getCurrentMethodName() {
+	public static synchronized String getCurrentMethodName() {
 		return getCurrentMethodName(1); // making additional overloaded method
 										// call requires +1 offset
 	}
@@ -65,12 +65,12 @@ public class StackBatteries {
 		return Thread.currentThread().getStackTrace()[CLIENT_CODE_STACK_INDEX + offset].getMethodName();
 	}
 
-	public static String getCurrentClassName() {
+	public static synchronized String getCurrentClassName() {
 		return getCurrentClassName(1); // making additional overloaded method
 										// call requires +1 offset
 	}
 
-	public static String getCurrentSimpleClasseName() {
+	public static synchronized String getCurrentSimpleClasseName() {
 		return getCurrentFileName(1).split("\\.")[0]; // making additional
 														// overloaded method
 														// call requires +1
@@ -81,7 +81,7 @@ public class StackBatteries {
 		return Thread.currentThread().getStackTrace()[CLIENT_CODE_STACK_INDEX + offset].getClassName();
 	}
 
-	public static String getCurrentFileName() {
+	public static synchronized String getCurrentFileName() {
 		return getCurrentFileName(1); // making additional overloaded method
 										// call requires +1 offset
 	}
@@ -93,7 +93,7 @@ public class StackBatteries {
 		return filename + ":" + lineNumber;
 	}
 
-	public static String getInvokingMethodName() {
+	public static synchronized String getInvokingMethodName() {
 		return getInvokingMethodName(2);
 	}
 
@@ -103,7 +103,7 @@ public class StackBatteries {
 													// with desired index
 	}
 
-	public static String getInvokingClassName() {
+	public static synchronized String getInvokingClassName() {
 		return getInvokingClassName(2);
 	}
 
@@ -112,7 +112,7 @@ public class StackBatteries {
 												// with desired index
 	}
 
-	public static String getInvokingFileName() {
+	public static synchronized String getInvokingFileName() {
 		return getInvokingFileName(2);
 	}
 
@@ -121,7 +121,7 @@ public class StackBatteries {
 												// with desired index
 	}
 
-	public static String getCurrentMethodNameFqn() {
+	public static synchronized String getCurrentMethodNameFqn() {
 		return getCurrentMethodNameFqn(1);
 	}
 
@@ -132,14 +132,14 @@ public class StackBatteries {
 		return currentClassName + "." + currentMethodName;
 	}
 
-	public static String getCurrentFileNameFqn() {
+	public static synchronized String getCurrentFileNameFqn() {
 		String CurrentMethodNameFqn = getCurrentMethodNameFqn(1);
 		String currentFileName = getCurrentFileName(1);
 
 		return CurrentMethodNameFqn + "(" + currentFileName + ")";
 	}
 
-	public static String getInvokingMethodNameFqn() {
+	public static synchronized String getInvokingMethodNameFqn() {
 		return getInvokingMethodNameFqn(2);
 	}
 
@@ -150,7 +150,7 @@ public class StackBatteries {
 		return invokingClassName + "." + invokingMethodName;
 	}
 
-	public static String getInvokingFileNameFqn() {
+	public static synchronized String getInvokingFileNameFqn() {
 		String invokingMethodNameFqn = getInvokingMethodNameFqn(2);
 		String invokingFileName = getInvokingFileName(2);
 

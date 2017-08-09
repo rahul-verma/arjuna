@@ -19,11 +19,13 @@
 package pvt.unitee.config;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
 
+import arjunasdk.console.Console;
 import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
@@ -34,10 +36,8 @@ import unitee.annotations.DataMethodContainer;
 public class DataMethodContainerMap {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	HashMap<String,DataMethodsHandler> wrappers = new HashMap<String, DataMethodsHandler>();
-	HashMap<String,String> containerClassNames = new HashMap<String,String>();
-	HashMap<Class<?>,String> containerClassToNameMapper = new HashMap<Class<?>,String>();
-	// In obfuscated jar somehow class to class look up not working. So, this data structure.
-	HashMap<String,Class<?>> containerClassNameToClassMapper = new HashMap<String,Class<?>>();
+	HashMap<String,Class<?>> containerMapper = new HashMap<String,Class<?>>();
+	HashMap<String,String> containerNameMapper = new HashMap<String,String>();
 	
 	public void process(Class<?> klass) throws Exception{
 		if (ArjunaInternal.displayDataMethodProcessingInfo){
@@ -45,54 +45,72 @@ public class DataMethodContainerMap {
 		}
 		Annotation annotation = klass.getAnnotation(DataMethodContainer.class);
 		DataMethodContainer dataContainer = (DataMethodContainer) annotation;
-		String containerClassName = klass.getSimpleName().toUpperCase();
+		String containerClassName = klass.getName().toUpperCase();
+		String origContainerName = null;
 		String containerName = null;
 		if (dataContainer.name().equals("NOT_SET")){
 			if (dataContainer.value().equals("NOT_SET")){
-				containerName = containerClassName;
+				origContainerName = containerClassName;
 			} else {
-				containerName = dataContainer.value().toUpperCase();
+				origContainerName = dataContainer.value();
 			}
 		} else {
-			containerName = dataContainer.name().toUpperCase();
+			origContainerName = dataContainer.name();
 		}
 		
-		this.containerClassNames.put(containerClassName, containerName);
-		this.containerClassToNameMapper.put(klass, containerName);
-		this.containerClassNameToClassMapper.put(klass.getName(), klass);
+		containerName = origContainerName.toUpperCase();
+		
+		if (this.containerMapper.containsKey(containerClassName)){
+			Console.displayError("!!!FATAL Error!!!");
+			Console.displayError(String.format("You need to change name of Data Method Container class [%s].", klass.getName()));
+			Console.displayError(String.format("Another data method container exists in your project, either with same name or @DataMethodContainer label."));
+			Console.displayError("Exiting...");
+			System.exit(1);
+		}
+		
+		if (this.containerMapper.containsKey(containerName)){
+			Console.displayError("!!!FATAL Error!!!");
+			Console.displayError(String.format("You need to change @DataMethodContainer label [%s] of data method container class [%s].", origContainerName, klass.getName()));
+			Console.displayError(String.format("Another data method container exists in your project, either with same name or @DataMethodContainer label."));
+			Console.displayError("Exiting...");
+			System.exit(1);
+		}
+		
+		containerMapper.put(containerClassName, klass);
+		containerMapper.put(containerName, klass);
+		
+		containerNameMapper.put(containerClassName, containerName);
+		containerNameMapper.put(containerName, containerName);
+		
 		DataMethodsHandler handler = new NonTestDataMethodsHandler(klass);
 		handler.process();
 		this.wrappers.put(containerName, handler);
 	}
 	
 	public Method getMethod(String containerName, String dgName) throws Exception{
-		if (wrappers.containsKey(containerName.toUpperCase())){
-			return (Method) wrappers.get(containerName.toUpperCase()).getMethod(dgName);
-		} else if (containerClassNames.containsKey(containerName.toUpperCase())){
-			return (Method) wrappers.get(containerClassNames.get(containerName.toUpperCase())).getMethod(dgName);
+		if (containerNameMapper.containsKey(containerName.toUpperCase())){
+			String cName = containerNameMapper.get(containerName.toUpperCase());
+			return (Method) wrappers.get(cName).getMethod(dgName);
 		} else {
-			throw new Exception(String.format("No data generator class with name %s found.", containerName));
+			throw new Exception(String.format("No data method container class with name %s found.", containerName));
 		}
 	}
 	
-	public Method getMethod(Class<?> containerClass, String dgName) throws Exception{
+	public Method getMethod(Class<?> containerClass, String methodName) throws Exception{
 		if (ArjunaInternal.displayDataMethodProcessingInfo){
 			logger.debug("Retrieving Data Method for class: "  + containerClass.getName());
 		}
 		if (!containerClass.isAnnotationPresent(DataMethodContainer.class)){
 			logger.debug("@DataMethodContainer Annotated Container");
-			return NonTestDataMethodsHandler.getStaticMethodForClass(containerClass, dgName);
+			return NonTestDataMethodsHandler.getStaticMethodForClass(containerClass, methodName);
 		}
 		
-		if (ArjunaInternal.displayDataMethodProcessingInfo){
-			logger.debug(DataBatteries.flatten(this.containerClassNameToClassMapper.keySet()));
-		}
-		
-		if (containerClassNameToClassMapper.containsKey(containerClass.getName())){
-			Class<?> k = containerClassNameToClassMapper.get(containerClass.getName());
-			return (Method) wrappers.get(containerClassToNameMapper.get(k)).getMethod(dgName);
+		String className = containerClass.getName();
+		if (containerNameMapper.containsKey(className.toUpperCase())){
+			String cName = containerNameMapper.get(className.toUpperCase());
+			return (Method) wrappers.get(cName).getMethod(methodName);
 		} else {
-			throw new Exception(String.format("No data generator class found for: %s", containerClass.getName()));
+			throw new Exception(String.format("No data generator class found for: %s", className));
 		}
 	}
 }

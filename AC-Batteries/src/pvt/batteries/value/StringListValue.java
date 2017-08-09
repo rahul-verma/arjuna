@@ -40,8 +40,8 @@ public class StringListValue extends AbstractValue {
 			}
 			return tempList;
 		} catch (Exception e) {
-			throw new UnsupportedRepresentationException(StringListValue.class.getSimpleName(), "asEnumList()",
-					this.toString(), enumClass.getSimpleName());
+			this.throwUnsupportedForEnumException(ValueType.ENUM_LIST, enumClass.getSimpleName(), "asEnumList");
+			return null;
 		}
 	}
 

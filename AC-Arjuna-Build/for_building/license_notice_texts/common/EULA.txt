@@ -22,7 +22,7 @@ In this EULA the following words and phrases have the following meanings:
 
 "Active License" means License for which Subscription Term has not yet expired. 
 
-"Affiliate" includes each and any subsidiary or holding organisation of the Licensor and each and any subsidiary of a holding organzation of the End User OR any business entity from time to time controlling, controlled by, or under common control with the End User;
+"Affiliate" includes each and any subsidiary or holding organisation of the Licensor and each and any subsidiary of a holding organization of the End User OR any business entity from time to time controlling, controlled by, or under common control with the End User;
 
 "AutoCognite Website" means the website at the web address www.autocognite.com
 
@@ -106,7 +106,7 @@ Licensor and Licensee (individually called "Party" and together called "Parties"
 
 2. GRANT AND SCOPE OF LICENSE
 
-2.1 In consideration of payment by you of any agreed License Fees (including grant of License at no charge to you by Licensor under Free License Type) and you agreeing to abide by the terms of this License, the Licensor hereby grants to you a limited, non-exclusive, non-assignable, non-sublicenseable, non-transferable license as per the License Type(s), Licensed Software and the Subscription Term mentioned in the Order approved by the Licensor, to use the Licensed Software only in its object code form and Documentation on the terms of this Agreement, solely for Your own internal operations and for the purpose for which the Licensed Software was designed as set forth in the applicable Documentation of the Licensed Software.
+2.1 In consideration of payment by you of any agreed License Fees (including grant of License at no charge to you by Licensor under Free License Type) and you agreeing to abide by the terms of this License, the Licensor hereby grants to you a limited, non-exclusive, non-assignable, non-sublicensable, non-transferable license as per the License Type(s), Licensed Software and the Subscription Term mentioned in the Order approved by the Licensor, to use the Licensed Software only in its object code form and Documentation on the terms of this Agreement, solely for Your own internal operations and for the purpose for which the Licensed Software was designed as set forth in the applicable Documentation of the Licensed Software.
 
 2.2 Licensor reserves any rights not expressly granted in this EULA.
 
@@ -150,7 +150,7 @@ Licensor and Licensee (individually called "Party" and together called "Parties"
 
 4. Licensed Software Distributions
 
-Licenses Software is made available in the format of different Licensed Software Distributions, which are downloadable as separate software packages or distributions and may contain different or additional functionality as compared to each other. Information about features available or planned for the said Licensed Software Distributions can be found on Product Website.
+Licensed Software is made available in the format of different Licensed Software Distributions, which are downloadable as separate software packages or distributions and may contain different or additional functionality as compared to each other. Information about features available or planned for the said Licensed Software Distributions can be found on Product Website.
 
 5. LICENSED SOFTWARE DELIVERY
 
@@ -224,7 +224,7 @@ Licenses Software is made available in the format of different Licensed Software
 
 9.1 Unless otherwise stated in our quotation to You, You shall pay all fees specified in an Order in advance. Fees are based on the Licensed Software Distribution(s), License Types(s) and Subscription Term purchased. You shall pay the License Fees as specified in an accepted Order. Licensor will invoice the license fees immediately following acceptance of the Order. 
 
-9.2 If a fee is not specified in an accepted Order Licensee shall pay License Fees according to the then current list price generally available to customers on AutoCognite Website and/or Product Website. 
+9.2 If a fee is not specified in an accepted Order, Licensee shall pay License Fees according to the then-current list price generally available to customers on AutoCognite Website and/or Product Website. 
 
 9.3 If a payment term is specified in an accepted Order, Licensee shall pay the license fees within the payment term. Any amounts payable by Licensee hereunder which remain unpaid after the due date are subject to a late charge from the due date until such amount is paid in the amount of 12% per annum or the maximum amount allowed by law in case this is lower. 
 
@@ -234,7 +234,7 @@ Licenses Software is made available in the format of different Licensed Software
 
 9.6 Taxes. Unless otherwise stated, Our License Fees and Premium Support fees do not include any Taxes. You shall be responsible for taxes levied on any transaction under this EULA, including all federal, state, and local taxes, levies and assessments, duties or similar governmental assessments of any nature, including but not limited to value-added, sales, use or withholding taxes, assessable by any local, state, provincial, federal or foreign jurisdiction (collectively, "Taxes"), excluding any tax based on Licensor’s income. If We have the legal obligation to pay or collect Taxes for which You are responsible under this paragraph, the appropriate amount shall be invoiced to and paid by You, unless You provide Us with a valid tax exemption certificate authorized by the appropriate taxing authority. We are solely responsible for taxes assessable against Us based on Our income, property and employees.
 
-10. INTELLECTUAL PROPERTY RIGHTS OF LICENCED SOFTWARE
+10. INTELLECTUAL PROPERTY RIGHTS OF LICENSED SOFTWARE
 
 10.1 You acknowledge that the Licensed Software and the authorship, systems, ideas, methods of operation, documentation and other information contained in the Licensed Software are proprietary intellectual property and/or the valuable trade secrets of the IP Owner and that the IP Owner is protected by civil and criminal law, and by the law of copyright, trade secret, trademark and patent in India, other countries and international treaties, anywhere in the world. The IP Owner owns and retain all right, title, and interest in and to the Licensed Software, including without limitation any error corrections, enhancements, Updates, Ugrades or other modifications to the Licensed Software, whether made by the IP Owner or any third party, and all copyrights, patents, trade secret rights, trademarks, and other intellectual property rights therein. All rights not specifically granted in this EULA, are reserved by Licensor.
 
@@ -264,15 +264,15 @@ Licenses Software is made available in the format of different Licensed Software
 
 12.1.1 You are not purchasing the Licensed Software as a consumer, but will be using the Licensed Software in your organisation and that you are duly authorized by your organisation to purchase the Licensed Software.
 
-12.1.2 the Licensed Software would be accessed and used only by You. You may use the Licensed Software to test applications being developed and/or tested by You in the course of services for one of your own customers, provided that such services are not supplied in such a way that the Licensed Software is itself used or operated by, or supplied or in any other way made available to, that customer. You warrant that You shall not provide the Activation Code and/or License Key to third parties or allow third parties access to the Activation Code(s) and/or License Key(s), which are deemed confidential data of IP Owner and You shall exercise reasonable care in protecting the Activation Code(s) and License Key(s).
+12.1.2 The Licensed Software would be accessed and used only by You. You may use the Licensed Software to test applications being developed and/or tested by You in the course of services for one of your own customers, provided that such services are not supplied in such a way that the Licensed Software is itself used or operated by, or supplied or in any other way made available to, that customer. You warrant that You shall not provide the Activation Code and/or License Key to third parties or allow third parties access to the Activation Code(s) and/or License Key(s), which are deemed confidential data of IP Owner and You shall exercise reasonable care in protecting the Activation Code(s) and License Key(s).
 
 12.1.3 You will not use the Licensed Software, the Documentation for any unlawful purposes, particularly as Licensed Software is a generic test automation engine and can be used to automate tests, which can compromise systems.
 
 12.1.4 You will obtain all necessary authorizations from system owners prior to using Licensed Software;
 
-12.1.5 Except for "Forever Free License" type, You will maintain records, systems and/or procedures that accurately record the number of copies of the Licensed Software that have been acquired and installed on Your Computer Nodes and will keep the records for two (2) years from the date of Your license to use the Licensed Software ends under this EULA. We may conduct an audit (remotely or at Your Permises) of records and systems from Your business, to verify that Your installation of the Licensed Software conforms with a valid license from Us. If the audit results find that Your use does not conform to a valid license, then You will be liable for any claims that might accrue from such breach by You.
+12.1.5 Except for "Forever Free License" type, You will maintain records, systems and/or procedures that accurately record the number of copies of the Licensed Software that have been acquired and installed on Your Computer Nodes and will keep the records for two (2) years from the date of Your license to use the Licensed Software ends under this EULA. We may conduct an audit (remotely or at Your Premises) of records and systems from Your business, to verify that Your installation of the Licensed Software conforms with a valid license from Us. If the audit results find that Your use does not conform to a valid license, then You will be liable for any claims that might accrue from such breach by You.
 
-12.1.6 You will supervise and control use of the Licensed Software and ensure that the Licensed Software is used by your employees and representatives in accordance with these terms and shall take all reasonable measures to prevent unauthorized copying
+12.1.6 You will supervise and control use of the Licensed Software and ensure that the Licensed Software is used by your employees and representatives in accordance with these terms and shall take all reasonable measures to prevent unauthorized copying.
 
 12.1.7 You will not attempt to bypass the license mechanism or generate unauthorized License Key(s) or Activation Code(s).
 
@@ -298,7 +298,7 @@ Licenses Software is made available in the format of different Licensed Software
 
 12.3 You acknowledge that:
 
-12.3.1 the Licensor has the right to block the License to use the Licensed Software in the event You breach any of the terms and conditions of this EULA and without any refund to You.
+12.3.1 The Licensor has the right to block the License to use the Licensed Software in the event You breach any of the terms and conditions of this EULA and without any refund to You.
 
 12.3.2 Any breach of the clauses mentioned in condition 10 of this EULA or Any failure to meet the warranties undertaken by You in the condition 12.1 and condition 12.2 of this EULA shall result in criminal and/or civil prosecution against You at the discretion of the Licensor.
 
@@ -314,7 +314,7 @@ WARNING: LICENSED SOFTWARE IS DESIGNED TO SUPPORT ALL FORMS OF TEST AUTOMATION A
 
 12.4.4 You will comply with Licensor’s process for the generation, issue and exchange of License Keys and Activation Codes as notified by Licensor from time to time; 
 
-12.4.5 in case of requesting an exchange of License Key, You will certify to Licensor in writing that the current License Key will no longer be used; and allow the Licensor to verify that You hold an Active License for the use of the Licensed Software; and at the discretion of Licensor, update the Licensed Software for which the License Key is generated if the installer version or release is not currently-supported version or release as mentioned on Product Website.
+12.4.5 In case of requesting an exchange of License Key, You will certify to Licensor in writing that the current License Key will no longer be used; and allow the Licensor to verify that You hold an Active License for the use of the Licensed Software; and at the discretion of Licensor, update the Licensed Software for which the License Key is generated if the installer version or release is not currently-supported version or release as mentioned on Product Website.
 
 12.4.6 You will document and promptly report to Licensor all Errors affecting the Licensed Software, and to comply with all reasonable Licensor instructions and procedures for their rectification, as soon as reasonably practicable after notification by Licensor.
 
@@ -322,13 +322,13 @@ WARNING: LICENSED SOFTWARE IS DESIGNED TO SUPPORT ALL FORMS OF TEST AUTOMATION A
 
 12.4.8 You will reasonably co-operate with Licensor in all matters relating to the Free Support Services; and to provide Licensor, its agents, subcontractors, consultants and employees, in a timely manner, with access to Your systems, premises, office accommodation, information and other facilities, during Free Support Hours, including where necessary the ability to dial-in or connect remotely to the said Computer Node(s), as reasonably required by Licensor to provide the Free Support Services, or exercise its rights under this EULA. Licensor will inform You of the specifications of the Computer Nodes needed, and You will be responsible for the costs and use of any such Computer Nodes at Your premises. Where You are only able to provide restricted access to Your Computer Nodes, then Licensor may only be able to provide limited support and You shall bear any additional costs incurred in compliance with additional security requirements.
 
-12.4.9 as soon as reasonably practicable, You will attend standardised training(s) in the use of the Licensed Software as deemed appropriate by Licensor from time to time, made available as online tutorials, videos, webinars or virtual trainings.; and take all reasonable measures to ensure that the Licensed Software is operated by personnel properly trained in its use and the use of any Computer Nodes on which it is installed or operates.
+12.4.9 As soon as reasonably practicable, You will attend standardised training(s) in the use of the Licensed Software as deemed appropriate by Licensor from time to time, made available as online tutorials, videos, webinars or virtual trainings.; and take all reasonable measures to ensure that the Licensed Software is operated by personnel properly trained in its use and the use of any Computer Nodes on which it is installed or operates.
 
 13. LICENSOR'S LIMITED WARRANTY AND DISCLAIMER
 
-13.1 AutoCognite warrants that it has the right to grant You a license to use the Licensed Software in accordance with this EULA; and that it either owns all right, title and interest to the Licensed Software.
+13.1 Licensor warrants that it has the right to grant You a license to use the Licensed Software in accordance with this EULA; and that it either owns all right, title and interest to the Licensed Software.
 
-13.2 The Licensor warrants that for a period of 30 days from the date of purchase of the Licensed Software ("Warranty Period") the Licensed Software will, when properly used, perform substantially in accordance with the functions described in the Documentation (provided that the Licensed Software is properly used on a Computer Node and with the runtime environment for which it was designed as referred to herein). Arjuna Plugins do not have the benefit of this warranty.
+13.2 The Licensor warrants that for a period of 30 days from the date of purchase of the Licensed Software ("Warranty Period") the Licensed Software will, when properly used, perform substantially in accordance with the functions described in the Documentation (provided that the Licensed Software is properly used on a Computer Node and with the runtime environment for which it was designed as referred to herein). AutoCognite Plugins do not have the benefit of this warranty.
 
 LICENSED SOFTWARE REQUIRES A COMPUTER WITH A MINIMUM OF 4GB OF MEMORY AND THE OFFICIAL JAVA RUNTIME ENVIRONMENT (64-BIT EDITION, VERSION 1.8 OR LATER). IF YOU INTEND TO USE THE LICENSED SOFTWARE ON ANY OTHER PLATFORM YOU SHOULD FIRST TEST WITH A FREE VERSION (IF MADE AVAILABLE BY LICENSOR) OR TRIAL VERSION OF LICENSED SOFTWARE ON THAT PLATFORM TO SATISFY YOURSELF THAT IT WORKS CORRECTLY. INTERNET ACCESS IS REQUIRED DURING INSTALLATION TO ACTIVATE THE LICENSED SOFTWARE. 
 
@@ -340,9 +340,9 @@ LICENSED SOFTWARE REQUIRES A COMPUTER WITH A MINIMUM OF 4GB OF MEMORY AND THE OF
 
 13.6 If You make a valid claim for refund in the Subscription Term provided (a) the Error(s) reported by You are not resolved as per the terms of this EULA or (b) if You provide a written notice of a substantial material breach of this EULA by the Licensor in the Subscription Term, Licensor would terminate this EULA immediately for You and refund You the pro rata amount paid for the affected Licensed Software, once it is certified by You to Licensor that the Licensed Software has been removed from all Computer Nodes by You.
 
-13.7 No oral or written information or advice given by AutoCognite, its agents, representatives or employees shall create any warranty or in any way increase any warranty provided herein. 
+13.7 No oral or written information or advice given by Licensor, its agents, representatives or employees shall create any warranty or in any way increase any warranty provided herein. 
 
-13.8 EXCEPT AS SET FORTH IN THE FOREGOING LIMITED WARRANTY, AND EXCEPT FOR ANY WARRANTY, CONDITION, REPRESENTATION OR TERM THE EXTENT TO WHICH CANNOT BE EXCLUDED OR LIMITED BY APPLICABLE LAW, THE LICENSED SOFTWARE IS PROVIDED "AS IS" AND LICENSOR DISCLAIMS ALL OTHER WARRANTIES AND REPRESENTATIONS, WHETHER EXPRESS, IMPLIED, OR OTHERWISE, INCLUDING THE WARRANTIES OF MERCHANTABILITY, SATISFACTORY QUALITY, INTEGRATION, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT AND TITLE OR QUIET ENJOYMENT.  LICENSOR DOES NOT WARRANT THAT THE LICENSED SOFTWARE IS ERROR-FREE OR WILL OPERATE WITHOUT INTERRUPTION.  YOU ASSUME ALL FAULTS, AND THE ENTIRE RISK AS TO PERFORMANCE AND RESPONSIBILITY FOR SELECTING THE LICENSED SOFTWARE TO ACHIEVE YOUR INTENDED RESULTS, AND FOR THE INSTALLATION OF, USE OF, AND RESULTS OBTAINED FROM THE LICENSED SOFTWARE. WITHOUT LIMITING THE FOREGOING PROVISIONS, THE LICENSOR MAKES NO REPRESENTATION AND GIVES NO WARRANTY THAT THE LICENSED SOFTWARE WILL BE ERROR-FREE OR FREE FROM INTERRUPTIONS OR OTHER FAILURES OR THAT THE LICENSED SOFTWARE WILL MEET ANY OR ALL OF YOUR REQUIREMENTS WHETHER OR NOT DISCLOSED TO THE RIGHTHOLDER. IN ADDITION, ALL THIRD PARTY COMPONENTS ARE PROVIDED "AS IS," "WHERE IS," "AS AVAILABLE," "WITH ALL FAULTS" AND, TO THE FULLEST EXTENT PERMITTED BY LAW, WITHOUT WARRANTY OF ANY KIND. AUTOCOGNITE DISCLAIMS ALL WARRANTIES WITH RESPECT TO THE THIRD PARTY COMPONENTS, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, AND TITLE, AND ANY WARRANTIES REGARDING THE SECURITY, QUIET ENJOYMENT, RELIABILITY, TIMELINESS, AND PERFORMANCE OF THE SERVICES. THE LICENSED SOFTWARE IS NOT DESIGNED, INTENDED OR LICENSED FOR USE IN HAZARDOUS ENVIRONMENTS REQUIRING FAIL-SAFE CONTROLS. LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR SUCH PURPOSES.  
+13.8 EXCEPT AS SET FORTH IN THE FOREGOING LIMITED WARRANTY, AND EXCEPT FOR ANY WARRANTY, CONDITION, REPRESENTATION OR TERM THE EXTENT TO WHICH CANNOT BE EXCLUDED OR LIMITED BY APPLICABLE LAW, THE LICENSED SOFTWARE IS PROVIDED "AS IS" AND LICENSOR DISCLAIMS ALL OTHER WARRANTIES AND REPRESENTATIONS, WHETHER EXPRESS, IMPLIED, OR OTHERWISE, INCLUDING THE WARRANTIES OF MERCHANTABILITY, SATISFACTORY QUALITY, INTEGRATION, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT AND TITLE OR QUIET ENJOYMENT.  LICENSOR DOES NOT WARRANT THAT THE LICENSED SOFTWARE IS ERROR-FREE OR WILL OPERATE WITHOUT INTERRUPTION.  YOU ASSUME ALL FAULTS, AND THE ENTIRE RISK AS TO PERFORMANCE AND RESPONSIBILITY FOR SELECTING THE LICENSED SOFTWARE TO ACHIEVE YOUR INTENDED RESULTS, AND FOR THE INSTALLATION OF, USE OF, AND RESULTS OBTAINED FROM THE LICENSED SOFTWARE. WITHOUT LIMITING THE FOREGOING PROVISIONS, THE LICENSOR MAKES NO REPRESENTATION AND GIVES NO WARRANTY THAT THE LICENSED SOFTWARE WILL BE ERROR-FREE OR FREE FROM INTERRUPTIONS OR OTHER FAILURES OR THAT THE LICENSED SOFTWARE WILL MEET ANY OR ALL OF YOUR REQUIREMENTS WHETHER OR NOT DISCLOSED TO THE RIGHTHOLDER. IN ADDITION, ALL THIRD PARTY COMPONENTS ARE PROVIDED "AS IS," "WHERE IS," "AS AVAILABLE," "WITH ALL FAULTS" AND, TO THE FULLEST EXTENT PERMITTED BY LAW, WITHOUT WARRANTY OF ANY KIND. LICENSOR DISCLAIMS ALL WARRANTIES WITH RESPECT TO THE THIRD PARTY COMPONENTS, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, AND TITLE, AND ANY WARRANTIES REGARDING THE SECURITY, QUIET ENJOYMENT, RELIABILITY, TIMELINESS, AND PERFORMANCE OF THE SERVICES. THE LICENSED SOFTWARE IS NOT DESIGNED, INTENDED OR LICENSED FOR USE IN HAZARDOUS ENVIRONMENTS REQUIRING FAIL-SAFE CONTROLS. LICENSOR SPECIFICALLY DISCLAIMS ANY EXPRESS OR IMPLIED WARRANTY OF FITNESS FOR SUCH PURPOSES.  
 
 13.9 The warranties set out in this condition (condition 13) are in lieu of and exclude all other terms, conditions or warranties which might have effect between the parties or be implied or incorporated into this EULA or any collateral contract, whether by statute, common law or otherwise to the fullest extent permitted by law. The actions set out in this condition (condition 13) shall be the Your sole remedy in respect of all warranties under this EULA.
 
@@ -400,7 +400,7 @@ provided that this condition 14.2 shall not prevent claims for loss of or damage
 
 17. PUBLICITY AND COMMUNICATION
 
-17.1 By entering into this EULA You agree to be identified as a customer of Licensor and agree that Licensor may refer to You by name, trade name, logo and trademark, if applicable, and may briefly describe your business in Licensor’s marketing materials and web site(s). You grant the Licensor the right to add your name and company logo to Our customer list(s) and website(s). You hereby grant Licensor a license to use your name and any of your trade names and trademarks solely in connection with the rights granted to Licensor pursuant to this marketing condition (condition 17.1).
+17.1 By entering into this EULA You agree to be identified as a customer of Licensor and agree that Licensor may refer to You by name, trade name, logo and trademark, if applicable, and may briefly describe your business in Licensor’s marketing materials and web site(s). You grant the Licensor the right to add your name and company logo to Our customer list(s) and website(s). You hereby grant Licensor a license to use your name and any of your trade names and trademarks solely in connection with the rights granted to Licensor pursuant to this marketing condition.
 
 17.2 By entering into this EULA you consent that we may process the personal data that we collect from you in accordance with our Privacy Policy. In particular, we may use information we hold about you for the purposes of, inter alia, sending out renewal reminders, questionnaires to certain categories of users including non-renewers and feedback requests.
 
@@ -431,7 +431,7 @@ provided that this condition 14.2 shall not prevent claims for loss of or damage
 
 19.5 Licensor reserves the right to suspend the provision of the Licensed Software or Support Services to You with immediate effect upon notice to You in the event that: (a) any regulatory authority requires Licensor to suspend the Licensing or Support Services and Licensor has no other reasonable alternative way to provide the Support Services and/or Licensed Software.
 
-19.6 Upon termination for any reason: (i) all rights granted to you under this EULA shall cease; and (ii) you must cease all activities authorized by this EULA; and (iii) you must immediately pay to the Licensor any sums due to the Licensor under this EULA; and (iv) you must immediately delete or remove the Licensed Software and any Product Plugins from all computer equipment in your possession, and immediately destroy or return to the Licensor (at the Licensor's option) all copies of the Licensed Software and Product Plugins then in your possession, custody or control and, in the case of destruction, certify to the Licensor that you have done so.
+19.6 Upon termination for any reason: (i) all rights granted to you under this EULA shall cease; and (ii) you must cease all activities authorized by this EULA; and (iii) you must immediately pay to the Licensor any sums due to the Licensor under this EULA; and (iv) you must immediately delete or remove the Licensed Software and any AutoCognite Plugins from all computer equipment in your possession, and immediately destroy or return to the Licensor (at the Licensor's option) all copies of the Licensed Software and AutoCognite Plugins then in your possession, custody or control and, in the case of destruction, certify to the Licensor that you have done so.
 
 19.7 Termination of this EULA, an Order or a license granted hereunder shall not limit either party from pursuing any remedies available to it, including injunctive relief, or relieve You of your obligation to pay all License Fees that have accrued or become payable hereunder.
 
@@ -443,7 +443,7 @@ provided that this condition 14.2 shall not prevent claims for loss of or damage
 
 20.3 Notice will be deemed received and properly served immediately when posted on AutoCognite Website or Product Website or 24 hours after an e-mail is sent, or three days after the date of posting of any letter. 
 
-20.4 In proving the service of any notice, it will be sufficient to prove, in case of posting of notice on AutoCognite Website or Product Website, that such notice was made publically available on AutoCognite Website or Product Website; in the case of a letter, that such letter was properly addressed, stamped and placed in the post; and, in the case of an e-mail, that such e-mail was sent to the specified e-mail address of the addressee.
+20.4 In proving the service of any notice, it will be sufficient to prove, in case of posting of notice on AutoCognite Website or Product Website, that such notice was made publicly available on AutoCognite Website or Product Website; in the case of a letter, that such letter was properly addressed, stamped and placed in the post; and, in the case of an e-mail, that such e-mail was sent to the specified e-mail address of the addressee.
 
 21. GENERAL
 

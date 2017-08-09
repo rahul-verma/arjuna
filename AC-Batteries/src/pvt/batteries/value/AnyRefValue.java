@@ -1,11 +1,18 @@
 package pvt.batteries.value;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import com.rits.cloning.Cloner;
 
 import arjunasdk.console.Console;
 import arjunasdk.enums.ValueType;
@@ -24,32 +31,49 @@ public class AnyRefValue extends AbstractValue {
 		return new AnyRefValue(this.clone(this.object()));
 	}
 
-	private Object clone(Object o) {
+	private Object clone(Object o){
 		Object clone = null;
-
 		try {
-			clone = o.getClass().newInstance();
-		} catch (InstantiationException e) {
-			Console.displayExceptionBlock(e);
-		} catch (IllegalAccessException e) {
-			Console.displayExceptionBlock(e);
-		}
-
-		// Walk up the superclass hierarchy
-		for (Class obj = o.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
-			Field[] fields = obj.getDeclaredFields();
-			for (int i = 0; i < fields.length; i++) {
-				fields[i].setAccessible(true);
-				try {
-					// for each class/suerclass, copy all fields
-					// from this object to the clone
-					fields[i].set(clone, fields[i].get(o));
-				} catch (IllegalArgumentException e) {
-				} catch (IllegalAccessException e) {
-				}
-			}
-		}
+			Cloner cloner= new Cloner();
+			clone = cloner.deepClone(o);
+	    } catch (Exception f) {
+	        f.printStackTrace();
+	    }
+		
 		return clone;
+		
+//		Object clone = null;
+//
+//		System.out.println("HEREREREREr");
+//		System.out.println(o);
+//		Class<?> klass = o.getClass();
+//		try{
+//			clone = klass.newInstance();
+//			// Walk up the superclass hierarchy
+//			for (Class obj = o.getClass(); !obj.equals(Object.class); obj = obj.getSuperclass()) {
+//				Field[] fields = obj.getDeclaredFields();
+//				for (int i = 0; i < fields.length; i++) {
+//					fields[i].setAccessible(true);
+//					try {
+//						// for each class/suerclass, copy all fields
+//						// from this object to the clone
+//						fields[i].set(clone, fields[i].get(o));
+//					} catch (IllegalArgumentException e) {
+//					} catch (IllegalAccessException e) {
+//					}
+//				}
+//			}
+//			return clone;
+//		} catch (Throwable e){
+//			try {
+//				Cloner cloner= new Cloner();
+//				clone = cloner.deepClone(o);
+//		    } catch (Exception f) {
+//		        f.printStackTrace();
+//		    }
+//		}
+//		
+//		return null;
 	}
 	
 	@Override
@@ -70,8 +94,8 @@ public class AnyRefValue extends AbstractValue {
 		try {
 			return Enum.valueOf(enumClass, this.asString().toUpperCase());
 		} catch (Exception e) {
-			throw new UnsupportedRepresentationException(StringValue.class.getSimpleName(), "asEnum()", this.toString(),
-					enumClass.getSimpleName());
+			this.throwUnsupportedForEnumException(ValueType.ENUM, enumClass.getSimpleName(), "asEnum");
+			return null;
 		}
 	}
 	

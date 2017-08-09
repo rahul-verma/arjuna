@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.batteries.value;
+package arjunasdk.exceptions;
 
 import arjunasdk.interfaces.Value;
 
@@ -28,10 +28,8 @@ public class UnsupportedRepresentationException extends Exception {
 	private static final long serialVersionUID = 669734988933529307L;
 
 	// Parameterless Constructor
-	public <T extends Value> UnsupportedRepresentationException(String raisingClass, String method,
-			String actualValueString, String failedConversionType) {
-		super(String.format("%s.%s: Can not represent %s as %s", raisingClass, method, actualValueString,
-				failedConversionType));
+	public <T extends Value> UnsupportedRepresentationException(String klassUserFriendlyName, String method, String strSourceValue, String targetValueType) {
+		super(String.format("Value.%s(): Can not represent %s value containing >>%s<< as %s.", method, strSourceValue, klassUserFriendlyName, targetValueType));
 	}
 
 }

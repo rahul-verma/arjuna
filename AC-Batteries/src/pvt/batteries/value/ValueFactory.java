@@ -7,8 +7,10 @@ import java.util.List;
 import java.util.Set;
 
 import arjunasdk.enums.ValueType;
+import arjunasdk.exceptions.UnsupportedRepresentationException;
 import arjunasdk.interfaces.Value;
 import arjunasdk.sysauto.batteries.DataBatteries;
+import pvt.batteries.utils.StackBatteries;
 
 public class ValueFactory {
 	private static NullValue nullValue = new NullValue();
@@ -18,6 +20,14 @@ public class ValueFactory {
 	private static Set<String> falses = new HashSet<String>(Arrays.asList("off", "OFF", "false", "FALSE", "no", "NO"));
 	private static Set<ValueType> numbers = new HashSet<ValueType>(
 			Arrays.asList(ValueType.NUMBER, ValueType.INTEGER, ValueType.LONG, ValueType.FLOAT, ValueType.DOUBLE));
+	
+	private static void throwIncomaptibleInputTypeException(ValueType sourceValueType, String actualValueStr, ValueType targetValueType) throws Exception{
+		throw new IncompatibleInputForValueException(sourceValueType.toString(), actualValueStr, targetValueType.toString());
+	}
+	
+	private static void throwIncomaptibleInputTypeExceptionForEnum(String targetEnumClass, ValueType sourceValueType, String actualValueStr, ValueType targetValueType) throws Exception{
+		throw new IncompatibleInputForValueException(actualValueStr, sourceValueType.toString(), targetValueType.toString() + "of enum type " + targetEnumClass);
+	}
 
 	public static NullValue createNullValue() throws Exception {
 		return nullValue;
@@ -37,7 +47,8 @@ public class ValueFactory {
 		} else if (falses.contains(boolStr)) {
 			return new BooleanValue(false);
 		}
-		throw new IncompatibleInputForValueException(BooleanValue.class, boolStr, ValueType.STRING);
+		throwIncomaptibleInputTypeException(ValueType.BOOLEAN, boolStr, ValueType.STRING);
+		return null;
 	}
 
 	public static BooleanValue createBooleanValue(Value value) throws Exception {
@@ -46,7 +57,8 @@ public class ValueFactory {
 		} else if (value.valueType() == ValueType.STRING) {
 			return createBooleanValue(value.asString());
 		} else {
-			throw new IncompatibleInputForValueException(BooleanValue.class, value.asString(), value.valueType());
+			throwIncomaptibleInputTypeException(ValueType.BOOLEAN, value.asString(), value.valueType());
+			return null;
 		}
 	}
 
@@ -68,7 +80,8 @@ public class ValueFactory {
 		try {
 			return new IntValue(Integer.parseInt(value));
 		} catch (Exception e) {
-			throw new IncompatibleInputForValueException(IntValue.class, value, ValueType.STRING);
+			throwIncomaptibleInputTypeException(ValueType.INTEGER, value, ValueType.STRING);
+			return null;
 		}
 	}
 
@@ -80,7 +93,8 @@ public class ValueFactory {
 		try {
 			return new LongValue(Long.parseLong(value));
 		} catch (Exception e) {
-			throw new IncompatibleInputForValueException(LongValue.class, value, ValueType.STRING);
+			throwIncomaptibleInputTypeException(ValueType.LONG, value, ValueType.STRING);
+			return null;
 		}
 	}
 
@@ -92,7 +106,8 @@ public class ValueFactory {
 		try {
 			return new FloatValue(Float.parseFloat(value));
 		} catch (Exception e) {
-			throw new IncompatibleInputForValueException(FloatValue.class, value, ValueType.STRING);
+			throwIncomaptibleInputTypeException(ValueType.FLOAT, value, ValueType.STRING);
+			return null;
 		}
 	}
 
@@ -104,7 +119,8 @@ public class ValueFactory {
 		try {
 			return new DoubleValue(Double.parseDouble(value));
 		} catch (Exception e) {
-			throw new IncompatibleInputForValueException(DoubleValue.class, value, ValueType.STRING);
+			throwIncomaptibleInputTypeException(ValueType.DOUBLE, value, ValueType.STRING);
+			return null;
 		}
 	}
 
@@ -135,7 +151,8 @@ public class ValueFactory {
 					try {
 						return createDoubleValue(numStr);
 					} catch (IncompatibleInputForValueException h) {
-						throw new IncompatibleInputForValueException(NumberValue.class, numStr, ValueType.STRING);
+						throwIncomaptibleInputTypeException(ValueType.NUMBER, numStr, ValueType.STRING);
+						return null;
 					}
 				}
 			}
@@ -148,7 +165,9 @@ public class ValueFactory {
 		} else if (value.valueType() == ValueType.STRING) {
 			return createNumberValue(value.asString());
 		}
-		throw new IncompatibleInputForValueException(NumberValue.class, value.asString(), value.valueType());
+		
+		throwIncomaptibleInputTypeException(ValueType.NUMBER, value.asString(), value.valueType());
+		return null;
 	}
 
 	public static StringValue createStringValue(String value) throws Exception {
@@ -161,7 +180,8 @@ public class ValueFactory {
 
 	public static StringListValue createStringListValueFrom(Value value) throws Exception {
 		if (value.isNull()) {
-			throw new IncompatibleInputForValueException(StringListValue.class, value.asString(), ValueType.NULL);
+			throwIncomaptibleInputTypeException(ValueType.STRING_LIST, value.asString(), value.valueType());
+			return null;
 		}
 
 		if ((value.valueType() == ValueType.STRING_LIST)) {
@@ -180,7 +200,8 @@ public class ValueFactory {
 			return new StringListValue(Arrays.asList(value.asString()));
 		}
 
-		throw new IncompatibleInputForValueException(StringListValue.class, value.asString(), value.valueType());
+		throwIncomaptibleInputTypeException(ValueType.STRING_LIST, value.asString(), value.valueType());
+		return null;
 	}
 
 	public static <T extends Enum<T>> EnumValue<T> creatEnumValue(Class<T> enumClass, String value) throws Exception {
@@ -189,14 +210,16 @@ public class ValueFactory {
 			T obj = v.asEnum(enumClass);
 			return new EnumValue<T>(obj);
 		} catch (Exception e) {
-			throw new IncompatibleInputForValueException(StringListValue.class, value, ValueType.STRING);
+			throwIncomaptibleInputTypeExceptionForEnum(enumClass.getSimpleName(), ValueType.ENUM, value, ValueType.STRING);
+			return null;
 		}
 	}
 
-	public static <T extends Enum<T>> EnumValue<T> creatEnumValueFrom(Class<T> enumClass, Value value)
+	public static <T extends Enum<T>> EnumValue<T> creatEnumValue(Class<T> enumClass, Value value)
 			throws Exception {
 		if (value.isNull()) {
-			throw new IncompatibleInputForValueException(StringListValue.class, value.asString(), ValueType.NULL);
+			throwIncomaptibleInputTypeExceptionForEnum(enumClass.getSimpleName(), ValueType.ENUM, value.asString(), value.valueType());
+			return null;
 		}
 
 		if ((value.valueType() == ValueType.STRING)) {
@@ -207,7 +230,8 @@ public class ValueFactory {
 			return new EnumValue<T>(value.asEnum(enumClass));
 		}
 
-		throw new IncompatibleInputForValueException(EnumValue.class, value.asString(), value.valueType());
+		throwIncomaptibleInputTypeExceptionForEnum(enumClass.getSimpleName(), ValueType.ENUM, value.asString(), value.valueType());
+		return null;
 	}
 
 	public static <T extends Enum<T>> EnumListValue<T> creatEnumListValue(Class<T> enumClass, List<String> value)
@@ -217,30 +241,31 @@ public class ValueFactory {
 			List<T> obj = sv.asEnumList(enumClass);
 			return new EnumListValue<T>(obj);
 		} catch (Exception e) {
-			throw new IncompatibleInputForValueException(EnumListValue.class, value.toString(), ValueType.STRING);
+			throwIncomaptibleInputTypeExceptionForEnum(enumClass.getSimpleName(), ValueType.ENUM_LIST, value.toString(), ValueType.LIST);
+			return null;
 		}
 	}
 
-	public static <T extends Enum<T>> EnumListValue<T> createEnumListValueFrom(Class<T> klass, Value configValue)
+	public static <T extends Enum<T>> EnumListValue<T> createEnumListValue(Class<T> enumKlass, Value value)
 			throws Exception {
-		if ((configValue.valueType() == ValueType.ENUM_LIST)) {
-			return new EnumListValue<T>(configValue.asEnumList(klass));
+		if ((value.valueType() == ValueType.ENUM_LIST)) {
+			return new EnumListValue<T>(value.asEnumList(enumKlass));
 		}
 
-		if (configValue.valueType() == ValueType.STRING_LIST) {
-			return creatEnumListValue(klass, configValue.asStringList());
+		if (value.valueType() == ValueType.STRING_LIST) {
+			return creatEnumListValue(enumKlass, value.asStringList());
 		}
 
-		if (configValue.valueType() == ValueType.ANYREF_LIST) {
-			return new EnumListValue<T>(configValue.asEnumList(klass));
+		if (value.valueType() == ValueType.ANYREF_LIST) {
+			return new EnumListValue<T>(value.asEnumList(enumKlass));
 		}
 
-		if (configValue.valueType() == ValueType.STRING) {
-			return creatEnumListValue(klass, Arrays.asList(configValue.asString()));
+		if (value.valueType() == ValueType.STRING) {
+			return creatEnumListValue(enumKlass, Arrays.asList(value.asString()));
 		}
-
-		throw new IncompatibleInputForValueException(EnumListValue.class, configValue.asString(),
-				configValue.valueType());
+		
+		throwIncomaptibleInputTypeExceptionForEnum(enumKlass.getSimpleName(), ValueType.ENUM_LIST, value.asString(), value.valueType());
+		return null;
 	}
 
 }

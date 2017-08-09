@@ -32,9 +32,11 @@ import arjunasdk.console.Console;
 import arjunasdk.ddauto.interfaces.DataSource;
 import arjunasdk.interfaces.Value;
 import arjunasdk.sysauto.batteries.FileSystemBatteries;
+import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.arjunasdk.integration.UiAutoIntegrator;
 import pvt.arjunasdk.property.ConfigPropertyBatteries;
+import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.cli.CLIConfigurator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.hocon.HoconConfigObjectReader;
@@ -62,7 +64,7 @@ import unitee.annotations.DataMethodContainer;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.2.2";
+	private String version = "0.2.6";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -134,7 +136,15 @@ public enum ArjunaSingleton {
 			HoconReader arjunaOptReader = new HoconConfigObjectReader(arjunaOptObj);
 			arjunaOptReader.process();
 //			System.out.println(configReader.getProperties());
-			Batteries.processArjunaOptions(arjunaOptReader.getProperties());
+			try{
+				Batteries.processArjunaOptions(arjunaOptReader.getProperties());
+			} catch (Exception e){
+				Console.display("Fatal Error in processing of Arjuna options in central configuration file");
+				Console.display("Please check the following exception details and modify the configuration.");
+				Console.displayExceptionBlock(e);
+				SystemBatteries.exit();
+				System.exit(1);
+			}
 		} catch (ConfigException e){
 			// config may not be defined. It's ok. It's optional
 		}
@@ -166,7 +176,15 @@ public enum ArjunaSingleton {
 		cliConfigurator.setArgs(cliArgs);
 		cliConfigurator.processUserOptions();
 		HashMap<String,Value> options = cliConfigurator.getUserOptions();
-		Batteries.processArjunaOptions(options);
+		try{
+			Batteries.processArjunaOptions(options);
+		} catch (Exception e){
+			Console.display("Fatal Error in processing of CLI Options");
+			Console.display("Please check the following exception details and provide the correct CLI options.");
+			Console.displayExceptionBlock(e);
+			SystemBatteries.exit();
+			System.exit(1);
+		}
 		
 		if (!integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).isNull()){
 			customTestDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).asString();
@@ -290,7 +308,15 @@ public enum ArjunaSingleton {
 		if (session.getConfigObject() != null){
 			HoconReader cReader = new HoconStringReader(session.getConfigObject().toString());
 			cReader.process();
-			Batteries.processArjunaOptions(cReader.getProperties());	
+			try{
+				Batteries.processArjunaOptions(cReader.getProperties());
+			} catch (Exception e){
+				Console.display("Fatal Error in processing of Arjuna options in session file: " + session.getSessionFilePath());
+				Console.display("Please check the following exception details and modify the configuration.");
+				Console.displayExceptionBlock(e);
+				SystemBatteries.exit();
+				System.exit(1);
+			}
 		}
 		
 		if (session.getExecVarObject() != null){

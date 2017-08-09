@@ -18,6 +18,7 @@
  ******************************************************************************/
 package pvt.arjunasdk.uiauto.selenium;
 
+import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,11 +26,13 @@ import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -95,7 +98,13 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 
 	public void maximizeWindow(){
 		// Check for some property here. To override this default.
-		getDriver().manage().window().maximize();	
+		try{
+			getDriver().manage().window().maximize();
+		} catch (WebDriverException e){
+			java.awt.Dimension d = Toolkit.getDefaultToolkit().getScreenSize();
+			// This dimension is webdriver Dimension
+			getDriver().manage().window().setSize(new Dimension((int)d.getWidth(), (int) d.getHeight()));
+		}
 	}
 
 	public DesiredCapabilities getFireFoxCapabilitiesSkeleton() { 
@@ -112,10 +121,19 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 
 	public WebDriver getFirefoxDriver() throws Exception {
 		this.setAppTitle(Batteries.value(UiAutomatorPropertyType.FIREFOX_WINDOWNAME).asString());
+		String os = SystemBatteries.getOSName();
+		String binaryName = null;
+		if (os.startsWith("Window")){
+			binaryName = "geckodriver.exe";
+		} else if (os.startsWith("Mac")) {
+			binaryName = "geckodriver";
+		}
+		System.setProperty("webdriver.gecko.driver", Batteries.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + binaryName);
+
 		capabilities = getFireFoxCapabilitiesSkeleton();
 		//driver = new FirefoxDriver(capabilities);
 		FirefoxProfile profile = new FirefoxProfile();
-		profile.setEnableNativeEvents(true);
+		//profile..setEnableNativeEvents(true);
 		capabilities.setCapability(FirefoxDriver.PROFILE, profile);
 		setCapabilities(capabilities);
 		return new FirefoxDriver(capabilities);
@@ -130,6 +148,7 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 		} else if (os.startsWith("Mac")) {
 			chromeDriverBinaryName = "chromedriver";
 		}
+
 		System.setProperty("webdriver.chrome.driver", Batteries.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + chromeDriverBinaryName);
 		capabilities = getChromeCapabilitiesSkeleton();
 		setCapabilities(capabilities);

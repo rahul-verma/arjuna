@@ -20,15 +20,21 @@ package pvt.unitee.testobject.lib.loader;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
+import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.ddt.datarecord.BaseDataRecordContainer;
 import pvt.unitee.arjuna.ArjunaInternal;
+import pvt.unitee.testobject.lib.fixture.StaticFixture;
 import unitee.annotations.DataMethod;
+import unitee.interfaces.TestVariables;
 
 public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
@@ -55,8 +61,11 @@ public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 			if (ArjunaInternal.displayDataMethodProcessingInfo){
 				logger.debug("Check for being a Data method: " + m.getName());
 			}
+			
 			String methodName = m.getName().toUpperCase();
+			String originalDgName = null;
 			String dgName = null;
+			
 			if (shouldInclude(m)){
 				if (ArjunaInternal.displayDataMethodProcessingInfo){
 					logger.debug("Passed method type check.");
@@ -76,12 +85,13 @@ public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 					DataMethod dataGenAnnotation = (DataMethod) annotation;
 					if (dataGenAnnotation.name().equals("NOT_SET")){
 						if (dataGenAnnotation.value().equals("NOT_SET")){
-							dgName = m.getName().toUpperCase();
+							originalDgName = m.getName();
+							
 						} else {
-							dgName = dataGenAnnotation.value().toUpperCase();
+							originalDgName = dataGenAnnotation.value();
 						}
 					} else {
-						dgName = dataGenAnnotation.name().toUpperCase();
+						originalDgName = dataGenAnnotation.name();
 					}		
 //					logger.debug("DG Method Label (Case insensitive): " + dgName);
 				} else{
@@ -90,14 +100,59 @@ public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 			} else {
 				continue;
 			}
-				if (this.methods.containsKey(dgName)){
-					Console.displayError("!!!FATAL Error!!!");
-					Console.displayError(String.format("Duplicate data method name/label [%s] found in %s class. Check @DataMethod annotation as well names of the data methods in code.", dgName, this.getContainerName()));
-					Console.displayError("Exiting...");
-					System.exit(1);
+			
+			dgName = originalDgName.toUpperCase();
+			
+			if (!Modifier.isStatic(m.getModifiers())){
+				Console.displayError("!!!FATAL Error!!!");
+				Console.displayError("Data methods need to be static methods.");
+				Console.displayError(String.format("Change Data method [%s] to static in %s class.", m.getName(), this.getContainerName()));
+				Console.displayError("Exiting...");
+				System.exit(1);
+				throw new Exception();
+			}
+			
+			Class<?>[] paramTypes = m.getParameterTypes();
+			if (paramTypes.length > 0){
+				List<String> tStrings =  new ArrayList<String>();
+				for (Class<?> t: paramTypes){
+					tStrings.add(t.getSimpleName());
 				}
 
+				String argString = null;
+				if (tStrings.size() == 0){
+					argString = "";
+				} else {
+					argString = DataBatteries.join(tStrings, ",");
+				}
+
+				Console.displayError("!!!FATAL Error!!!");
+				Console.displayError(String.format("There is a critical issue with your data method [%s] in %s class", m.getName(), this.getContainerName()));
+				Console.displayError(String.format("Current (wrong) data method signature is: static %s(%s)", m.getName(), argString));
+				Console.displayError("Data methods can not take any argument. Remove argument(s), change the method implementation and run again.");
+				Console.displayError("Exiting...");
+				System.exit(1);	
+
+			}
+			
+			if (this.methods.containsKey(methodName)){
+				Console.displayError("!!!FATAL Error!!!");
+				Console.displayError(String.format("You need to change name of data method [%s] in %s class.", m.getName(), this.getContainerName()));
+				Console.displayError(String.format("Another data method exists in %s class either with same name or @DataMethod label.", this.getContainerName()));
+				Console.displayError("Exiting...");
+				System.exit(1);
+			}
+			
+			if (this.methods.containsKey(dgName)){
+				Console.displayError("!!!FATAL Error!!!");
+				Console.displayError(String.format("You need to change @DataMethod label [%s] of data method [%s] in %s class.", originalDgName, m.getName(), this.getContainerName()));
+				Console.displayError(String.format("Another data method exists in %s class either with same name or @DataMethod label.", this.getContainerName()));
+				Console.displayError("Exiting...");
+				System.exit(1);
+			}
+
 				this.methods.put(dgName, m);
+				this.methods.put(methodName, m);
 			}
 
 		}
@@ -107,7 +162,11 @@ public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 			if (methods.containsKey(dgName.toUpperCase())){
 				return (Method) methods.get(dgName.toUpperCase());
 			} else {
-				throw new Exception(String.format("No data method with name %s found in %s class.", dgName, this.getContainerName()));
+				Console.displayError("!!!FATAL Error!!!");
+				Console.displayError(String.format("No data method with name [%s] found in %s class.", dgName, this.getContainerName()));
+				Console.displayError("Exiting...");
+				System.exit(1);
+				throw new Exception();
 			}
 		}
 	}

@@ -66,43 +66,6 @@ arjunasdk.console.Console: void displayPaddedKeyValueError(java.lang.String,java
 arjunasdk.console.Console: void displayExceptionBlock(java.lang.Throwable)
 arjunasdk.console.Console: void setCentralLogLevel(org.apache.log4j.Level)
 arjunasdk.console.Console: void displayPaddedKeyValueExceptionTrace(java.lang.String,java.lang.String,int)
-arjunasdk.ddauto.datarecord.ListDataRecord
-arjunasdk.ddauto.datarecord.ListDataRecord: ListDataRecord()
-arjunasdk.ddauto.datarecord.ListDataRecord: ListDataRecord(java.lang.Object[])
-arjunasdk.ddauto.datarecord.ListDataRecord: void add(java.lang.Object[])
-arjunasdk.ddauto.datarecord.ListDataRecord: java.util.Map items(java.util.List)
-arjunasdk.ddauto.datarecord.ListDataRecord: java.util.Map strItems(java.util.List)
-arjunasdk.ddauto.datarecord.ListDataRecord: java.util.List values(java.util.List)
-arjunasdk.ddauto.datarecord.ListDataRecord: java.util.List strings(java.util.List)
-arjunasdk.ddauto.datarecord.ListDataRecord: boolean hasKey(java.lang.String)
-arjunasdk.ddauto.datarecord.ListDataRecord: arjunasdk.interfaces.Value getValueForNonExistentKey(java.lang.String)
-arjunasdk.ddauto.datarecord.ListDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.String)
-arjunasdk.ddauto.datarecord.ListDataRecord: boolean hasKey(java.lang.Object)
-arjunasdk.ddauto.datarecord.ListDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.Object)
-arjunasdk.ddauto.datarecord.ListDataRecord: arjunasdk.interfaces.Value getValueForNonExistentKey(java.lang.Object)
-arjunasdk.ddauto.datarecord.ListDataRecord: java.lang.Object getValueForNonExistentKey(java.lang.Object)
-arjunasdk.ddauto.datarecord.ListDataRecordContainer
-arjunasdk.ddauto.datarecord.ListDataRecordContainer: ListDataRecordContainer()
-arjunasdk.ddauto.datarecord.ListDataRecordContainer: void setHeaders(java.lang.String[])
-arjunasdk.ddauto.datarecord.MapDataRecord
-arjunasdk.ddauto.datarecord.MapDataRecord: void add(java.lang.String,java.lang.Object)
-arjunasdk.ddauto.datarecord.MapDataRecord: MapDataRecord()
-arjunasdk.ddauto.datarecord.MapDataRecord: MapDataRecord(java.util.List,java.util.List)
-arjunasdk.ddauto.datarecord.MapDataRecord: MapDataRecord(java.lang.String[],java.util.List)
-arjunasdk.ddauto.datarecord.MapDataRecord: MapDataRecord(java.lang.String[],java.lang.Object[])
-arjunasdk.ddauto.datarecord.MapDataRecord: MapDataRecord(java.util.HashMap)
-arjunasdk.ddauto.datarecord.MapDataRecord: arjunasdk.interfaces.Value getValueForNonExistentKey(java.lang.String)
-arjunasdk.ddauto.datarecord.MapDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.String)
-arjunasdk.ddauto.datarecord.MapDataRecord: boolean hasIndex(int)
-arjunasdk.ddauto.datarecord.MapDataRecord: arjunasdk.interfaces.Value valueAt(int)
-arjunasdk.ddauto.datarecord.MapDataRecord: java.lang.String stringAt(int)
-arjunasdk.ddauto.datarecord.MapDataRecord: java.lang.Object objectAt(int)
-arjunasdk.ddauto.datarecord.MapDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.Object)
-arjunasdk.ddauto.datarecord.MapDataRecord: arjunasdk.interfaces.Value getValueForNonExistentKey(java.lang.Object)
-arjunasdk.ddauto.datarecord.MapDataRecord: java.lang.Object getValueForNonExistentKey(java.lang.Object)
-arjunasdk.ddauto.datarecord.MapDataRecordContainer
-arjunasdk.ddauto.datarecord.MapDataRecordContainer: MapDataRecordContainer()
-arjunasdk.ddauto.datarecord.MapDataRecordContainer: void validate()
 arjunasdk.ddauto.exceptions.DataSourceConstructionException
 arjunasdk.ddauto.exceptions.DataSourceConstructionException: DataSourceConstructionException(java.lang.String,java.lang.String,java.lang.Throwable)
 arjunasdk.ddauto.exceptions.DataSourceConstructionException: java.lang.Throwable getThrowable()
@@ -125,6 +88,9 @@ arjunasdk.ddauto.interfaces.DataRecordContainer: void setHeaders(java.lang.Strin
 arjunasdk.ddauto.interfaces.DataRecordContainer: void add(java.lang.Object[])
 arjunasdk.ddauto.interfaces.DataRecordContainer: void addAll(java.lang.Object[][])
 arjunasdk.ddauto.interfaces.DataRecordContainer: boolean hasNext()
+arjunasdk.ddauto.interfaces.DataReference
+arjunasdk.ddauto.interfaces.DataReference: arjunasdk.ddauto.interfaces.DataRecord record(java.lang.String)
+arjunasdk.ddauto.interfaces.DataReference: java.util.Set keys()
 arjunasdk.ddauto.interfaces.DataSource
 arjunasdk.ddauto.interfaces.DataSource: arjunasdk.ddauto.interfaces.DataRecord next()
 arjunasdk.ddauto.interfaces.DataSource: java.lang.String getName()
@@ -132,23 +98,50 @@ arjunasdk.ddauto.interfaces.DataSource: void setName(java.lang.String)
 arjunasdk.ddauto.interfaces.DataSource: void terminate()
 arjunasdk.ddauto.interfaces.DataSource: boolean isTerminated()
 arjunasdk.ddauto.interfaces.DataSource: void validate()
-arjunasdk.ddauto.interfaces.DataWrapper
-arjunasdk.ddauto.interfaces.DataWrapper: arjunasdk.enums.ValueType valueType()
-arjunasdk.ddauto.interfaces.DataWrapper: java.lang.Object object()
-arjunasdk.ddauto.interfaces.DataWrapper: boolean isNull()
-arjunasdk.ddauto.interfaces.DataWrapper: boolean asBoolean()
-arjunasdk.ddauto.interfaces.DataWrapper: java.lang.Number asNumber()
-arjunasdk.ddauto.interfaces.DataWrapper: int asInt()
-arjunasdk.ddauto.interfaces.DataWrapper: long asLong()
-arjunasdk.ddauto.interfaces.DataWrapper: double asDouble()
-arjunasdk.ddauto.interfaces.DataWrapper: java.lang.String asString()
-arjunasdk.ddauto.interfaces.DataWrapper: java.lang.Enum asEnum(java.lang.Class)
-arjunasdk.ddauto.interfaces.DataWrapper: java.util.List asEnumList(java.lang.Class)
-arjunasdk.ddauto.interfaces.DataWrapper: java.util.List asNumberList()
-arjunasdk.ddauto.interfaces.DataWrapper: java.util.List asIntList()
-arjunasdk.ddauto.interfaces.DataWrapper: java.util.List asStringList()
-arjunasdk.ddauto.interfaces.DataWrapper: java.util.List asList()
-arjunasdk.ddauto.interfaces.DataWrapper: float asFloat()
+arjunasdk.ddauto.lib.BaseDataSource
+arjunasdk.ddauto.lib.BaseDataSource: BaseDataSource()
+arjunasdk.ddauto.lib.BaseDataSource: java.lang.String getName()
+arjunasdk.ddauto.lib.BaseDataSource: void setName(java.lang.String)
+arjunasdk.ddauto.lib.BaseDataSource: void terminate()
+arjunasdk.ddauto.lib.BaseDataSource: boolean isTerminated()
+arjunasdk.ddauto.lib.BaseDataSource: void validate()
+arjunasdk.ddauto.lib.ListDataRecord
+arjunasdk.ddauto.lib.ListDataRecord: ListDataRecord()
+arjunasdk.ddauto.lib.ListDataRecord: ListDataRecord(java.lang.Object[])
+arjunasdk.ddauto.lib.ListDataRecord: void add(java.lang.Object[])
+arjunasdk.ddauto.lib.ListDataRecord: java.util.Map items(java.util.List)
+arjunasdk.ddauto.lib.ListDataRecord: java.util.Map strItems(java.util.List)
+arjunasdk.ddauto.lib.ListDataRecord: java.util.List values(java.util.List)
+arjunasdk.ddauto.lib.ListDataRecord: java.util.List strings(java.util.List)
+arjunasdk.ddauto.lib.ListDataRecord: boolean hasKey(java.lang.String)
+arjunasdk.ddauto.lib.ListDataRecord: arjunasdk.interfaces.Value getValueForNonExistentKey(java.lang.String)
+arjunasdk.ddauto.lib.ListDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.String)
+arjunasdk.ddauto.lib.ListDataRecord: boolean hasKey(java.lang.Object)
+arjunasdk.ddauto.lib.ListDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.Object)
+arjunasdk.ddauto.lib.ListDataRecord: arjunasdk.interfaces.Value getValueForNonExistentKey(java.lang.Object)
+arjunasdk.ddauto.lib.ListDataRecord: java.lang.Object getValueForNonExistentKey(java.lang.Object)
+arjunasdk.ddauto.lib.ListDataRecordContainer
+arjunasdk.ddauto.lib.ListDataRecordContainer: ListDataRecordContainer()
+arjunasdk.ddauto.lib.ListDataRecordContainer: void setHeaders(java.lang.String[])
+arjunasdk.ddauto.lib.MapDataRecord
+arjunasdk.ddauto.lib.MapDataRecord: void add(java.lang.String,java.lang.Object)
+arjunasdk.ddauto.lib.MapDataRecord: MapDataRecord()
+arjunasdk.ddauto.lib.MapDataRecord: MapDataRecord(java.util.List,java.util.List)
+arjunasdk.ddauto.lib.MapDataRecord: MapDataRecord(java.lang.String[],java.util.List)
+arjunasdk.ddauto.lib.MapDataRecord: MapDataRecord(java.lang.String[],java.lang.Object[])
+arjunasdk.ddauto.lib.MapDataRecord: MapDataRecord(java.util.HashMap)
+arjunasdk.ddauto.lib.MapDataRecord: arjunasdk.interfaces.Value getValueForNonExistentKey(java.lang.String)
+arjunasdk.ddauto.lib.MapDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.String)
+arjunasdk.ddauto.lib.MapDataRecord: boolean hasIndex(int)
+arjunasdk.ddauto.lib.MapDataRecord: arjunasdk.interfaces.Value valueAt(int)
+arjunasdk.ddauto.lib.MapDataRecord: java.lang.String stringAt(int)
+arjunasdk.ddauto.lib.MapDataRecord: java.lang.Object objectAt(int)
+arjunasdk.ddauto.lib.MapDataRecord: java.lang.String getStrValueForNonExistentKey(java.lang.Object)
+arjunasdk.ddauto.lib.MapDataRecord: arjunasdk.interfaces.Value getValueForNonExistentKey(java.lang.Object)
+arjunasdk.ddauto.lib.MapDataRecord: java.lang.Object getValueForNonExistentKey(java.lang.Object)
+arjunasdk.ddauto.lib.MapDataRecordContainer
+arjunasdk.ddauto.lib.MapDataRecordContainer: MapDataRecordContainer()
+arjunasdk.ddauto.lib.MapDataRecordContainer: void validate()
 arjunasdk.enums.Browser
 arjunasdk.enums.Browser: arjunasdk.enums.Browser CHROME
 arjunasdk.enums.Browser: arjunasdk.enums.Browser FIREFOX
@@ -202,9 +195,14 @@ arjunasdk.enums.ValueType: arjunasdk.enums.ValueType DOUBLE
 arjunasdk.enums.ValueType: arjunasdk.enums.ValueType LONG
 arjunasdk.enums.ValueType: arjunasdk.enums.ValueType NOT_SET
 arjunasdk.enums.ValueType: arjunasdk.enums.ValueType NA
+arjunasdk.enums.ValueType: arjunasdk.enums.ValueType INT_LIST
 arjunasdk.enums.ValueType: arjunasdk.enums.ValueType[] $VALUES
 arjunasdk.enums.ValueType: arjunasdk.enums.ValueType[] values()
 arjunasdk.enums.ValueType: arjunasdk.enums.ValueType valueOf(java.lang.String)
+arjunasdk.exceptions.StringKeyValueContainerLookUpException
+arjunasdk.exceptions.StringKeyValueContainerLookUpException: StringKeyValueContainerLookUpException(java.lang.String)
+arjunasdk.exceptions.UnsupportedRepresentationException
+arjunasdk.exceptions.UnsupportedRepresentationException: UnsupportedRepresentationException(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
 arjunasdk.interfaces.ReadOnlyStringKeyValueContainer
 arjunasdk.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map items()
 arjunasdk.interfaces.ReadOnlyStringKeyValueContainer: java.util.Map items(java.util.List)
@@ -228,7 +226,22 @@ arjunasdk.interfaces.StringKeyValueContainer: void addEnumList(java.lang.String,
 arjunasdk.interfaces.StringKeyValueContainer: void addNumberList(java.lang.String,java.util.List)
 arjunasdk.interfaces.StringKeyValueContainer: void addStringList(java.lang.String,java.util.List)
 arjunasdk.interfaces.Value
+arjunasdk.interfaces.Value: arjunasdk.enums.ValueType valueType()
 arjunasdk.interfaces.Value: java.lang.Object object()
+arjunasdk.interfaces.Value: boolean isNull()
+arjunasdk.interfaces.Value: boolean asBoolean()
+arjunasdk.interfaces.Value: java.lang.Number asNumber()
+arjunasdk.interfaces.Value: int asInt()
+arjunasdk.interfaces.Value: long asLong()
+arjunasdk.interfaces.Value: double asDouble()
+arjunasdk.interfaces.Value: java.lang.String asString()
+arjunasdk.interfaces.Value: java.lang.Enum asEnum(java.lang.Class)
+arjunasdk.interfaces.Value: java.util.List asEnumList(java.lang.Class)
+arjunasdk.interfaces.Value: java.util.List asNumberList()
+arjunasdk.interfaces.Value: java.util.List asIntList()
+arjunasdk.interfaces.Value: java.util.List asStringList()
+arjunasdk.interfaces.Value: java.util.List asList()
+arjunasdk.interfaces.Value: float asFloat()
 arjunasdk.interfaces.Value: arjunasdk.interfaces.Value clone()
 arjunasdk.sysauto.batteries.DataBatteries
 arjunasdk.sysauto.batteries.DataBatteries: DataBatteries()
@@ -619,7 +632,6 @@ pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver
 pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver$1
 pvt.arjunasdk.appium.lib.base.DefaultAppiumMediator
 pvt.arjunasdk.appium.lib.base.DefaultAppiumMediator$1
-pvt.arjunasdk.ddt.interfaces.DataReference
 pvt.arjunasdk.enums.BatteriesPropertyType
 pvt.arjunasdk.enums.BatteriesPropertyType: pvt.arjunasdk.enums.BatteriesPropertyType CONFIG_CENTRAL_FILE_NAME
 pvt.arjunasdk.enums.BatteriesPropertyType: pvt.arjunasdk.enums.BatteriesPropertyType CONFIG_PROJECT_FILE_NAME
@@ -1159,13 +1171,6 @@ pvt.batteries.ddt.datarecord.BaseDataRecordContainer: void add(java.lang.Object[
 pvt.batteries.ddt.datarecord.BaseDataRecordContainer: void addAll(java.lang.Object[][])
 pvt.batteries.ddt.datarecord.BaseDataRecordContainer: arjunasdk.ddauto.interfaces.DataRecord next()
 pvt.batteries.ddt.datarecord.BaseDataRecordContainer: boolean hasNext()
-pvt.batteries.ddt.datarecord.BaseDataSource
-pvt.batteries.ddt.datarecord.BaseDataSource: BaseDataSource()
-pvt.batteries.ddt.datarecord.BaseDataSource: java.lang.String getName()
-pvt.batteries.ddt.datarecord.BaseDataSource: void setName(java.lang.String)
-pvt.batteries.ddt.datarecord.BaseDataSource: void terminate()
-pvt.batteries.ddt.datarecord.BaseDataSource: boolean isTerminated()
-pvt.batteries.ddt.datarecord.BaseDataSource: void validate()
 pvt.batteries.discoverer.DiscoveredFile
 pvt.batteries.discoverer.DiscoveredFileAttribute
 pvt.batteries.discoverer.FileAggregator
@@ -1237,7 +1242,6 @@ pvt.batteries.threads.ProducerThread
 pvt.batteries.utils.ExceptionBatteries
 pvt.batteries.utils.ResourceStreamBatteries
 pvt.batteries.utils.StackBatteries
-pvt.batteries.value.AbstractDataWrapper
 pvt.batteries.value.AbstractValue
 pvt.batteries.value.AnyRefListValue
 pvt.batteries.value.AnyRefValue
@@ -1278,7 +1282,7 @@ pvt.batteries.value.NumberListValue
 pvt.batteries.value.NumberValue
 pvt.batteries.value.StringListValue
 pvt.batteries.value.StringValue
-pvt.batteries.value.UnsupportedRepresentationException
+pvt.batteries.value.UserStringKeyValueContainer
 pvt.batteries.value.ValueFactory
 pvt.unitee.api.TestRunner
 pvt.unitee.api.TestScheduler
@@ -1499,6 +1503,15 @@ pvt.unitee.enums.IssueType: pvt.unitee.enums.IssueType TEST_STEP
 pvt.unitee.enums.IssueType: pvt.unitee.enums.IssueType[] $VALUES
 pvt.unitee.enums.IssueType: pvt.unitee.enums.IssueType[] values()
 pvt.unitee.enums.IssueType: pvt.unitee.enums.IssueType valueOf(java.lang.String)
+pvt.unitee.enums.JsonTestPickerProperty
+pvt.unitee.enums.JsonTestPickerProperty: pvt.unitee.enums.JsonTestPickerProperty TARGET
+pvt.unitee.enums.JsonTestPickerProperty: pvt.unitee.enums.JsonTestPickerProperty PACKAGE
+pvt.unitee.enums.JsonTestPickerProperty: pvt.unitee.enums.JsonTestPickerProperty CLASS
+pvt.unitee.enums.JsonTestPickerProperty: pvt.unitee.enums.JsonTestPickerProperty CONSIDER
+pvt.unitee.enums.JsonTestPickerProperty: pvt.unitee.enums.JsonTestPickerProperty IGNORE
+pvt.unitee.enums.JsonTestPickerProperty: pvt.unitee.enums.JsonTestPickerProperty[] $VALUES
+pvt.unitee.enums.JsonTestPickerProperty: pvt.unitee.enums.JsonTestPickerProperty[] values()
+pvt.unitee.enums.JsonTestPickerProperty: pvt.unitee.enums.JsonTestPickerProperty valueOf(java.lang.String)
 pvt.unitee.enums.NamesContainerType
 pvt.unitee.enums.NamesContainerType: pvt.unitee.enums.NamesContainerType TEST
 pvt.unitee.enums.NamesContainerType: pvt.unitee.enums.NamesContainerType TEST_RESULT
@@ -1847,7 +1860,6 @@ pvt.unitee.testobject.lib.loader.group.ClassPicker
 pvt.unitee.testobject.lib.loader.group.DefaultTestGroup
 pvt.unitee.testobject.lib.loader.group.Group
 pvt.unitee.testobject.lib.loader.group.JavaTestClassLoader
-pvt.unitee.testobject.lib.loader.group.JsonTestPickerProperty
 pvt.unitee.testobject.lib.loader.group.MBGroup
 pvt.unitee.testobject.lib.loader.group.MLGroup
 pvt.unitee.testobject.lib.loader.group.MethodPicker
@@ -2099,5 +2111,5 @@ unitee.interfaces.TestVariables: unitee.interfaces.TestProperties test()
 unitee.interfaces.TestVariables: arjunasdk.interfaces.StringKeyValueContainer attr()
 unitee.interfaces.TestVariables: arjunasdk.interfaces.StringKeyValueContainer execVars()
 unitee.interfaces.TestVariables: arjunasdk.ddauto.interfaces.DataRecord record()
-unitee.interfaces.TestVariables: pvt.arjunasdk.ddt.interfaces.DataReference refer(java.lang.String)
+unitee.interfaces.TestVariables: arjunasdk.ddauto.interfaces.DataReference refer(java.lang.String)
 unitee.interfaces.TestVariables: java.util.Map references()

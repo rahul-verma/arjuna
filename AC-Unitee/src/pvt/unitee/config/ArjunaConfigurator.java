@@ -2,8 +2,11 @@ package pvt.unitee.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import arjunasdk.console.Console;
+import arjunasdk.exceptions.UnsupportedRepresentationException;
 import arjunasdk.interfaces.Value;
 import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.arjunasdk.property.ConfigProperty;
@@ -16,7 +19,6 @@ import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.hocon.HoconResourceReader;
 import pvt.batteries.integration.AbstractComponentConfigurator;
 import pvt.batteries.value.IncompatibleInputForValueException;
-import pvt.batteries.value.UnsupportedRepresentationException;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.EventAttribute;
@@ -184,6 +186,15 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 					handleStringConfig(propPath, cValue, "Test Session Name", false);
 					break;
 				case RUNID:
+			      String pattern = "^[a-zA-Z0-9\\-_]{3,30}$";
+
+			      // Create a Pattern object
+			      Pattern r = Pattern.compile(pattern);
+			      // Now create matcher object.
+			      Matcher m = r.matcher(cValue.asString());
+			      if (!m.matches()){
+			    	  throw new Exception("Invalid run id. It can only contain alphanumeric, - and _ chars. Length should be between 3 and 30 chars.");
+			      }
 					handleStringConfig(propPath, cValue, "Test Run ID", true);
 					break;
 				case FAILFAST:

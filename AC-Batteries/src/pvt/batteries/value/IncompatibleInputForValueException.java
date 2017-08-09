@@ -29,9 +29,8 @@ public class IncompatibleInputForValueException extends Exception {
 	private static final long serialVersionUID = 669734988933529307L;
 
 	// Parameterless Constructor
-	public <T extends Value> IncompatibleInputForValueException(Class<T> klass, String value, ValueType actual) {
-		super(String.format("Incompatible input value >>%s<< (type: %s) supplied for creating %s.", value, actual,
-				klass.getSimpleName()));
+	public <T extends Value> IncompatibleInputForValueException(String value, String actual, String valueType) {
+		super(String.format("Incompatible input value >>%s<< (type: %s) supplied for creating %s.", value, actual, valueType));
 	}
 
 }

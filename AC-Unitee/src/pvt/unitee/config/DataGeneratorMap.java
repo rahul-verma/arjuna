@@ -19,6 +19,7 @@
 package pvt.unitee.config;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 
 import org.apache.log4j.Logger;
@@ -56,31 +57,56 @@ public class DataGeneratorMap {
 		}
 		String dataGenClassName = klass.getName().toUpperCase();
 		String dataGenName = null;
+		String origDGName = null;
 		if (klass.isAnnotationPresent(DataGenerator.class)){
 			Annotation annotation = klass.getAnnotation(DataGenerator.class);
 			DataGenerator dataGenAnn = (DataGenerator) annotation;
 			if (dataGenAnn.name().equals("NOT_SET")){
 				if (dataGenAnn.value().equals("NOT_SET")){
-					dataGenName = dataGenClassName;
+					origDGName = dataGenClassName;
 				} else {
-					dataGenName = dataGenAnn.value().toUpperCase();
+					origDGName = dataGenAnn.value();
 				}
 			} else {
-				dataGenName = dataGenAnn.name().toUpperCase();
+				origDGName = dataGenAnn.name();
 			}
 		} else {
-			dataGenName = klass.getName();
+			origDGName = dataGenClassName;
 		}
 		
-		//this.dataGenClassNames.put(dataGenClassName, dataGenName);
-		//this.dataGenClassToNameMapper.put(klass , dataGenName);
-		if (this.dataSources.containsKey(dataGenName)){
+		dataGenName = origDGName.toUpperCase();
+		
+		Constructor<?>[] constructors = klass.getConstructors();
+		for (Constructor<?> constructor: constructors){
+			if (constructor.getParameterTypes().length > 0){
+				Console.displayError("!!!FATAL Error!!!");
+				Console.displayError(String.format("Critical Error. Non-default constructor found for data generator class: %s",klass.getName()));
+				Console.displayError(String.format("Data Generator constructor can not take any argument."));
+				Console.displayError(String.format("Change constructor to:"));
+				Console.displayError(String.format("public %s()", klass.getSimpleName()));
+				Console.displayError("Exiting...");
+				System.exit(1);				
+			}
+		}
+		
+		if (this.dataSources.containsKey(dataGenClassName)){
 			Console.displayError("!!!FATAL Error!!!");
-			Console.displayError(String.format("Duplicate data generator class label/class name [%s] found in your project. Check @DataGenerator annotations for labels and the names of the classes annotated across your project for duplicate names as well names.", dataGenName));
+			Console.displayError(String.format("You need to change name of Data Generator class [%s].", klass.getName()));
+			Console.displayError(String.format("Another data generator exists in your project, either with same name or @DataGenerator label."));
 			Console.displayError("Exiting...");
 			System.exit(1);
 		}
+		
+		if (this.dataSources.containsKey(dataGenName)){
+			Console.displayError("!!!FATAL Error!!!");
+			Console.displayError(String.format("You need to change @DataGenerator label [%s] of data generator class [%s].", origDGName, klass.getName()));
+			Console.displayError(String.format("Another data generator exists in your project, either with same name or @DataGenerator label."));
+			Console.displayError("Exiting...");
+			System.exit(1);
+		}
+		
 		dataSources.put(dataGenName, klass);
+		dataSources.put(dataGenClassName, klass);
 	}
 	
 	public DataSource getDataSource(String dataGenName) throws Exception{

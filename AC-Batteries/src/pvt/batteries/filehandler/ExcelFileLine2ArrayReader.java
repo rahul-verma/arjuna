@@ -27,10 +27,27 @@ public class ExcelFileLine2ArrayReader extends ExcelFileReader {
 		super(path);
 	}
 
-	public ArrayList<Object> next() throws Exception {
+	public synchronized ArrayList<Object> next() throws Exception {
+		System.out.println("Fetching next record...");
+		System.out.println(this.getRowCount());
+		System.out.println(this.getCurrentRowIndex());
 		if (this.getCurrentRowIndex() < this.getRowCount()) {
-			ArrayList<Object> retArray = getRowAsArrayList(this.getCurrentRowIndex());
-			this.setCurrentRowIndex(this.getCurrentRowIndex() + 1);
+			ArrayList<Object> retArray = null;
+			while (true) {
+				retArray = getRowAsArrayList(this.getCurrentRowIndex());
+				this.setCurrentRowIndex(this.getCurrentRowIndex() + 1);
+				if (retArray == null){
+					if (this.getCurrentRowIndex() > this.getRowCount()){
+						return null;
+					} else {
+						continue;
+					}
+				} else {
+					break;
+				}
+			}
+			
+			System.out.println(retArray);
 			HashMap<String, Object> zipped = zip(retArray);
 			if (zipped.containsKey("EXCLUDE")) {
 				String exclude = ((String) zipped.get("EXCLUDE")).toLowerCase().trim();

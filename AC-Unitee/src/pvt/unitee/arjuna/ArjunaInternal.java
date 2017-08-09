@@ -28,6 +28,7 @@ import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
 import arjunasdk.ddauto.interfaces.DataSource;
+import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.cli.CLIConfigurator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.ds.NamesContainer;
@@ -76,7 +77,7 @@ public class ArjunaInternal {
 	public static boolean logJsonSerializationInfo = false;
 	public static boolean logJsonDeserializationInfo = false;
 	
-	public static boolean displayDataMethodProcessingInfo = true;
+	public static boolean displayDataMethodProcessingInfo = false;
 	
 	public static boolean displayFixtureExecInfo = false;
 	public static boolean displayObserverSetUpInfo = false;

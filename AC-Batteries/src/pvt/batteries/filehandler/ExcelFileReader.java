@@ -56,7 +56,8 @@ public class ExcelFileReader {
 	}
 
 	protected void populateHeaders() throws Exception {
-		setRowCount(getSheet().getPhysicalNumberOfRows());
+//		System.out.println(getSheet().getFirstRowNum());
+		setRowCount(getSheet().getLastRowNum() + 1); //.getPhysicalNumberOfRows());
 		if (getRowCount() == 0) {
 			throw new Exception("Empty or wrongly formattted Excel file. Is first line empty?");
 		}
@@ -74,8 +75,12 @@ public class ExcelFileReader {
 	protected ArrayList<Object> getRowAsArrayList(int rowIndex) {
 		ArrayList<Object> cellArray = new ArrayList<Object>();
 		DataFormatter fmt = new DataFormatter();
+		HSSFRow row = getSheet().getRow(rowIndex);
+		if (row == null){
+			return null;
+		}
 		for (int c = 0; c < getColCount(); c++) {
-			HSSFCell cell = getSheet().getRow(rowIndex).getCell(c);
+			HSSFCell cell = row.getCell(c);
 			if (cell != null) {
 				cellArray.add(fmt.formatCellValue(cell));
 			} else {

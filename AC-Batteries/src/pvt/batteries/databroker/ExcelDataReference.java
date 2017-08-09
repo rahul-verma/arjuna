@@ -20,6 +20,8 @@ package pvt.batteries.databroker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 
 import arjunasdk.ddauto.interfaces.DataRecord;
 import arjunasdk.ddauto.interfaces.DataReference;
@@ -79,6 +81,11 @@ public class ExcelDataReference implements DataReference {
 			throw new Exception(String.format("Excel Data reference at %s does not contain %s key.", this.path, key));
 		}
 
+	}
+
+	@Override
+	public Set<String> keys() {
+		return this.map.keySet();
 	}
 
 }

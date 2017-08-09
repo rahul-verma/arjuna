@@ -114,13 +114,21 @@ public class BaseJsonResultDeserializer {
 	}
 
 	protected Value jsonValueToStringValue(JsonElement element){
-		String val = element.getAsJsonPrimitive().getAsString();
-		if (val.equals("NOT_SET")){
-			return new NotSetValue();
-		} else if (val.equals("NA")){
-			return new NAValue();
+		if (element.isJsonObject()){
+			return new StringValue(element.getAsJsonObject().toString());
+		} else if (element.isJsonArray()){
+			return new StringValue(element.getAsJsonArray().toString());			
+		} else if (element.isJsonPrimitive()){
+			String val = element.getAsJsonPrimitive().getAsString();
+			if (val.equals("NOT_SET")){
+				return new NotSetValue();
+			} else if (val.equals("NA")){
+				return new NAValue();
+			} else {
+				return new StringValue(element.getAsJsonPrimitive().getAsString());
+			}
 		} else {
-			return new StringValue(element.getAsJsonPrimitive().getAsString());
+			return new NotSetValue();
 		}
 	}
 

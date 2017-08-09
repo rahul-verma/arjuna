@@ -18,8 +18,13 @@
  ******************************************************************************/
 package arjunasdk.ddauto.interfaces;
 
+import java.util.List;
+import java.util.Set;
+
 public interface DataReference {
 
 	DataRecord record(String key) throws Exception;
+
+	Set<String> keys();
 
 }

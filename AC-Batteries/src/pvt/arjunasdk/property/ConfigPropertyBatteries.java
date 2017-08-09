@@ -16,11 +16,21 @@ public class ConfigPropertyBatteries {
 
 	public static String pathToCoreAbsolutePath(String configuredDir) throws Exception {
 		String retPath = null;
-		if (FileSystemBatteries.isAbsolutePath(configuredDir)) {
-			retPath = configuredDir;
+		if (configuredDir.startsWith("*")){
+			if (configuredDir.startsWith("*/") || configuredDir.startsWith("*\\")){
+				retPath = FileSystemBatteries.getCanonicalPath(Batteries.getBaseDir() + configuredDir.substring(1));
+			} else {
+				retPath = FileSystemBatteries.getCanonicalPath(Batteries.getBaseDir() + File.separator + configuredDir.substring(1));
+			}
+			
 		} else {
-			retPath = FileSystemBatteries.getCanonicalPath(Batteries.getBaseDir() + File.separator + configuredDir);
+			retPath = configuredDir;
 		}
+//		if (FileSystemBatteries.isAbsolutePath(configuredDir)) {
+//			retPath = configuredDir;
+//		} else {
+//			retPath = FileSystemBatteries.getCanonicalPath(Batteries.getBaseDir() + File.separator + configuredDir);
+//		}
 		return retPath;
 	}
 	
@@ -119,7 +129,7 @@ public class ConfigPropertyBatteries {
 
 	public static <T1 extends Enum<T1>, T2 extends Enum<T2>> ConfigProperty createEnumProperty(T1 code, String propPath,
 			Class<T2> klass, Value configValue, String purpose, boolean visible) throws Exception {
-		Value value = ValueFactory.creatEnumValueFrom(klass, configValue);
+		Value value = ValueFactory.creatEnumValue(klass, configValue);
 		return createProperty(code, ValueType.ENUM, propPath, value, purpose, visible);
 	}
 
@@ -128,7 +138,7 @@ public class ConfigPropertyBatteries {
 		if (ConfigPropertyBatteries.isNotSet(configValue)) {
 			return ConfigPropertyBatteries.createNullProperty(code, ValueType.ENUM_LIST, propPath, purpose, visible);
 		}
-		Value value = ValueFactory.createEnumListValueFrom(klass, configValue);
+		Value value = ValueFactory.createEnumListValue(klass, configValue);
 		return ConfigPropertyBatteries.createProperty(code, ValueType.ENUM_LIST, propPath, value, purpose, visible);
 	}
 

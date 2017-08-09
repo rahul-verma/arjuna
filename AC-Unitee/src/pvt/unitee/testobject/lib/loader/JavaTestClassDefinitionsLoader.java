@@ -6,12 +6,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.bcel.Repository;
+import org.apache.bcel.classfile.Code;
+import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
@@ -42,8 +46,22 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 	String testDir = null;
 	public static Map<String, Set<String>> CLASS_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
 	public static Map<String, Set<String>> METHOD_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
+	Code emptyCodeCheck = null;
+	
+	private void emptyMethodBenchMark(){
+		
+	}
 	
 	public JavaTestClassDefinitionsLoader() throws Exception{
+		// Empty method processor
+		JavaClass emptyKlass =  Repository.lookupClass(EmptyBenchmarkClass.class);
+		org.apache.bcel.classfile.Method[]  jMethods = emptyKlass.getMethods();
+		for (org.apache.bcel.classfile.Method jMethod: jMethods){
+			if (jMethod.getName().equals("<init>")){
+				emptyCodeCheck = jMethod.getCode();
+			}
+		}
+		
 		HoconReader reader1 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/class_annotations_compatibility.conf"));
 		reader1.process();
 		Map<String, Value> rules1 = reader1.getProperties();
@@ -302,14 +320,44 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 	}
 	
 	public Constructor<?> getConstructor(Class<?> klass, ConstructorDef constructorType, boolean userHasSuppliedProperties, boolean userHasSuppliedDataRef) throws Exception{
+		boolean constDefFound = false;
 		Constructor<?>[] constructors = klass.getConstructors();
-		if ((constructors.length > 1) || (constructors[0].getParameterTypes().length > 0)){
-			Console.displayError(String.format("Critical Error. Non-default constructor found for test class: %s",klass.getSimpleName()));
-			Console.displayError(String.format("Arjuna Test classes can only use default public constructor."));
-			Console.displayError(String.format("Change constructor to:"));
-			Console.displayError(String.format("public %s()",klass.getSimpleName()));
+		if (constructors.length > 1){
+			constDefFound = true;
+		} else if (constructors[0].getParameterTypes().length > 0){
+			constDefFound = true;			
+		} else {
+			List<JavaClass> jClasses =  new ArrayList<JavaClass>();
+			JavaClass jKlass = Repository.lookupClass(klass);
+			jClasses.add(jKlass);
+			jClasses.addAll(Arrays.asList(jKlass.getSuperClasses()));
+			for (JavaClass jClass: jClasses){
+				if(jClass.getClassName().equals("java.lang.Object")){
+					continue;
+				} else {
+					System.out.println(jClass.getClassName());
+				}
+				org.apache.bcel.classfile.Method[]  jMethods = jClass.getMethods();
+				for (org.apache.bcel.classfile.Method jMethod: jMethods){
+					if (jMethod.getName().equals("<init>")){
+						// Java byte code length for empty method is 
+						System.out.println(jMethod.getCode());
+						if (jMethod.getCode().getLength() != emptyCodeCheck.getLength()){
+							constDefFound = true;
+							break;
+						}
+					}
+				}
+			}
+		}
+		
+		if (constDefFound){
+			Console.displayError(String.format("Critical Error. Constructor definition found for test class: %s",klass.getSimpleName()));
+			Console.displayError(String.format("Arjuna Test classes or their base classes should not define any constructor."));
+			Console.displayError(String.format("Please remove any constructors from %s and its base classes, if any.", klass.getSimpleName()));
+			Console.displayError(String.format("Modify your logic to use an appropriate set-up fixture provisioned by Arjuna Test classes."));
 			Console.displayError("Exiting...");
-			System.exit(1);				
+			System.exit(1);	
 		}
 		
 		constructorType.type = TestClassConstructorType.NO_ARG;
@@ -326,4 +374,8 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 
 class ConstructorDef{
 	 public TestClassConstructorType type = TestClassConstructorType.NO_ARG;
+}
+
+class EmptyBenchmarkClass{
+	
 }

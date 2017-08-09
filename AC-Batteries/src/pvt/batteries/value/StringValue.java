@@ -40,8 +40,8 @@ public class StringValue extends AbstractValue {
 		try {
 			return Enum.valueOf(enumClass, this.asString().toUpperCase());
 		} catch (Exception e) {
-			throw new UnsupportedRepresentationException(StringValue.class.getSimpleName(), "asEnum()", this.toString(),
-					enumClass.getSimpleName());
+			this.throwUnsupportedForEnumException(ValueType.ENUM, enumClass.getSimpleName(), "asEnum");
+			return null;
 		}
 	}
 	

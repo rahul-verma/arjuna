@@ -47,8 +47,8 @@ public class EnumListValue<T extends Enum<T>> extends AbstractValue {
 		if (actualEnumClass == enumClass) {
 			return (List<T2>) this.object();
 		} else {
-			throw new UnsupportedRepresentationException(EnumValue.class.getSimpleName(), "asEnumList()",
-					this.toString(), enumClass.getSimpleName());
+			this.throwUnsupportedEnumForEnumException(actualEnumClass.getSimpleName(), ValueType.ENUM_LIST, enumClass.getSimpleName(), "asEnumList");
+			return null;
 		}
 	}
 

@@ -55,9 +55,13 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 	}
 
 	protected void handleLogLevelConfig(String propPath, Value configValue, String purpose, boolean visible) throws Exception {
-		ConfigProperty prop = ConfigPropertyBatteries.createEnumProperty(codeForPath(propPath), propPath,
-				LoggingLevel.class, configValue, purpose, visible);
-		registerProperty(prop);
+		try{
+			ConfigProperty prop = ConfigPropertyBatteries.createEnumProperty(codeForPath(propPath), propPath,
+					LoggingLevel.class, configValue, purpose, visible);
+			registerProperty(prop);
+		} catch (Exception e){
+			throw new Exception("Error in processing Logging Level configuration: " + e.getMessage());
+		}
 	}
 
 	protected void handleBooleanConfig(String propPath, Value configValue, String purpose, boolean visible) throws Exception {

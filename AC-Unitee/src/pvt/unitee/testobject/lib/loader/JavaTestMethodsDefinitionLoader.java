@@ -166,7 +166,15 @@ public class JavaTestMethodsDefinitionLoader implements TestCreatorLoader {
 				builder.testClassDef(testClassDef);
 				builder.dataSourceType(methodDSMap.get(mName));
 				builder.testMethod(m);
-				builder.process();
+				try{
+					builder.process();
+				} catch (Exception e){
+					Console.displayError("!!!FATAL Error!!!");
+					Console.displayError(String.format("Error in processing data driven annotation for test method [%s] in test class [%s].", m.getName(), userTestClass.getName()));
+					Console.displayExceptionBlock(e);
+					Console.displayError("Exiting...");
+					System.exit(1);				
+				}
 				methodDef.setDataSourceBuilder(builder);
 				hasDataSourceAnn = true;
 			}

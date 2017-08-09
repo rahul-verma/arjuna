@@ -15,6 +15,7 @@ import com.google.gson.JsonPrimitive;
 
 import arjunasdk.console.Console;
 import pvt.batteries.config.Batteries;
+import pvt.unitee.enums.JsonTestPickerProperty;
 import pvt.unitee.enums.PickerTargetType;
 
 public class PickerConfigForJson extends AbstractPickerConfig{

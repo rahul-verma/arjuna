@@ -1,4 +1,4 @@
-package pvt.unitee.testobject.lib.loader.group;
+package pvt.unitee.enums;
 
 public enum JsonTestPickerProperty {
 	TARGET,
