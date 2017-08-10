@@ -1,7 +1,7 @@
 <?xml version= "1.0"?>
 <project name="global" default="global_clean" basedir=".">
 	<description>
-simple example build file
+simple example build file for arjuna
 </description>
 	<!-- set global properties for this build -->
 
@@ -12,7 +12,7 @@ simple example build file
 
 	<property name="3rd_party_batteries_jars" location="/Users/rahulverma/Documents/Dropbox/_jars/batteries_jars">
 		
-	</property>
+	</property> 
 	<property name="3rd_party_uiauto_jars" location="/Users/rahulverma/Documents/Dropbox/_jars/uiauto_jars"/>
 
 	<property name="autocognite.build.version" value="0.2.6-b" />
