@@ -46,7 +46,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 	String testDir = null;
 	public static Map<String, Set<String>> CLASS_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
 	public static Map<String, Set<String>> METHOD_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
-	Code emptyCodeCheck = null;
+	byte[] emptyCodeCheck = null;
 	
 	private void emptyMethodBenchMark(){
 		
@@ -58,7 +58,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 		org.apache.bcel.classfile.Method[]  jMethods = emptyKlass.getMethods();
 		for (org.apache.bcel.classfile.Method jMethod: jMethods){
 			if (jMethod.getName().equals("<init>")){
-				emptyCodeCheck = jMethod.getCode();
+				emptyCodeCheck = jMethod.getCode().getCode();
 			}
 		}
 		
@@ -342,7 +342,7 @@ public class JavaTestClassDefinitionsLoader implements TestDefinitionsLoader {
 					if (jMethod.getName().equals("<init>")){
 						// Java byte code length for empty method is 
 						System.out.println(jMethod.getCode());
-						if (jMethod.getCode().getLength() != emptyCodeCheck.getLength()){
+						if (jMethod.getCode().getCode().length != emptyCodeCheck.length){
 							constDefFound = true;
 							break;
 						}

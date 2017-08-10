@@ -230,7 +230,7 @@ public abstract class AbstractPickerConfig implements PickerConfig {
         	Console.displayError(s);
         }
 		Console.displayError("Check your picker json w.r.t. the following rules:");
-		BufferedReader txtReader = new BufferedReader(new InputStreamReader(AbstractPickerConfig.class.getResourceAsStream("/com/arjunapro/pvt/text/pickers.help")));
+		BufferedReader txtReader = new BufferedReader(new InputStreamReader(AbstractPickerConfig.class.getResourceAsStream("/com/autocognite/pvt/text/pickers.help")));
 		String line = null;
 		while ((line = txtReader.readLine()) != null) {
 			Console.displayError(line);
@@ -309,9 +309,12 @@ abstract class BasePicker implements Picker {
 		if (this.getConsiderPatterns() != null){
 			logger.debug("Check consider pattern match.");
 			for (String m: this.getConsiderPatterns()){
-				if (m.startsWith("ARJUNANRX::")){
-					consider = targetString.equals(m.replace("ARJUNANRX::", ""));
+				logger.debug(m);
+				if (m.startsWith("NONRX::")){
+					System.out.println("String match");
+					consider = targetString.equals(m.replace("NONRX::", ""));
 				} else {
+					System.out.println("Regex match");
 					consider = targetString.matches(m);
 				}
 				if (consider == true) {

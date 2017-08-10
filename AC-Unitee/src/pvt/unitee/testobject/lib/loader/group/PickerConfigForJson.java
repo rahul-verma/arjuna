@@ -44,19 +44,26 @@ public class PickerConfigForJson extends AbstractPickerConfig{
 	}
 	
 	// This happens when names are used instead of package/class patterns
-	private void processNonRegexPickOptions(){
+	private void processNonRegexPickOptions() throws PickerMisConfiguration{
 		if (isMethodConsiderOrIgnoreOptionProvided() || isClassConsiderOrIgnoreOptionProvided() || isPackageConsiderOrIgnoreOptionProvided()){
 			return;
 		} else if ((this.getTargetType() == PickerTargetType.CLASSES)
 				&& (this.getPackageName() != null) && 
 					(this.getClassName() != null)){
 			logger.debug("Picker Combination: Package Name + Class Name");
-			configureClassConsiderPatterns(Arrays.asList(this.getClassName()));
+			// Here the provision for .java in class name is to support resource automatic selection in an IDE e.g. ${selected_resource} in Eclipse
+			if ((!this.getPackageName().matches("[\\.a-zA-Z0-9]+")) || (!this.getClassName().matches("[\\.a-zA-Z0-9]+"))){
+				throw new PickerMisConfiguration();
+			}
+			configureClassConsiderPatterns(Arrays.asList("NONRX::" + this.getClassName()));
 			return;	
 		} else if ((this.getTargetType() == PickerTargetType.PACKAGES)
 				&& (this.getPackageName() != null)){
 		logger.debug("Picker Combination: Package Name");
-		configurePackageConsiderPatterns(Arrays.asList(this.getPackageName()));
+		if (!this.getPackageName().matches("[\\.a-zA-Z0-9]+")){
+			throw new PickerMisConfiguration();
+		}
+		configurePackageConsiderPatterns(Arrays.asList("NONRX::" + this.getPackageName()));
 		return;	
 		}
 	}
@@ -87,6 +94,10 @@ public class PickerConfigForJson extends AbstractPickerConfig{
 			if ((this.getPackageName() == null)){
 				return false;
 			}
+			
+			if (!this.getPackageName().matches("[\\.a-zA-Z0-9]+")){
+				throw new PickerMisConfiguration();
+			}
 		}
 		
 		if (this.getTargetType() == PickerTargetType.METHODS){
@@ -98,8 +109,16 @@ public class PickerConfigForJson extends AbstractPickerConfig{
 				return false;
 			}
 			
+			if (!this.getPackageName().matches("[\\.a-zA-Z0-9]+")){
+				throw new PickerMisConfiguration();
+			}
+			
 			if ((this.getClassName() == null)){
 				return false;
+			}
+			
+			if (!this.getClassName().matches("[\\.a-zA-Z0-9]+")){
+				throw new PickerMisConfiguration();
 			}
 		}
 		

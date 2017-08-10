@@ -1841,6 +1841,7 @@ pvt.unitee.testobject.lib.loader.AnnotationValidator
 pvt.unitee.testobject.lib.loader.ConstructorDef
 pvt.unitee.testobject.lib.loader.DataMethodsHandler
 pvt.unitee.testobject.lib.loader.DefaultDataMethodsHandler
+pvt.unitee.testobject.lib.loader.EmptyBenchmarkClass
 pvt.unitee.testobject.lib.loader.JavaTestClassDataMethodsHandler
 pvt.unitee.testobject.lib.loader.JavaTestClassDefinitionsLoader
 pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader

@@ -4489,22 +4489,22 @@ pvt.batteries.lib.BatteriesConfigurator -> com.autocognite.pvt.ex:
     40:43:void handleStringConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> a
     46:49:void handleCoreDirPath(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> b
     52:55:void handleProjectDirPath(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> c
-    58:61:void handleLogLevelConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> d
-    64:67:void handleBooleanConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> e
-    71:132:void processConfigProperties(java.util.HashMap) -> a
+    59:65:void handleLogLevelConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> d
+    68:71:void handleBooleanConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> e
+    75:136:void processConfigProperties(java.util.HashMap) -> a
     1055:1056:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.overridable(boolean):55:56 -> a
-    1055:1056:void processConfigProperties(java.util.HashMap):117 -> a
+    1055:1056:void processConfigProperties(java.util.HashMap):121 -> a
     1060:1061:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.visible(boolean):60:61 -> a
-    1060:1061:void processConfigProperties(java.util.HashMap):117 -> a
-    135:137:void processDefaults() -> a
-    141:142:void loadComponent() -> b
+    1060:1061:void processConfigProperties(java.util.HashMap):121 -> a
+    139:141:void processDefaults() -> a
+    145:146:void loadComponent() -> b
     2038:2053:void pvt.batteries.lib.BatteriesSingleton.loadDataReferences():38:53 -> b
-    2038:2053:void loadComponent():141 -> b
-    145:151:java.util.ArrayList getAllMessages() -> c
-    155:163:java.util.ArrayList getAllNames() -> d
+    2038:2053:void loadComponent():145 -> b
+    149:155:java.util.ArrayList getAllMessages() -> c
+    159:167:java.util.ArrayList getAllNames() -> d
 pvt.batteries.lib.BatteriesConfigurator$1 -> com.autocognite.pvt.ey:
     int[] $SwitchMap$pvt$arjunasdk$enums$BatteriesPropertyType -> a
-    76:76:void <clinit>() -> <clinit>
+    80:80:void <clinit>() -> <clinit>
 pvt.batteries.lib.BatteriesSingleton -> com.autocognite.pvt.ez:
     pvt.batteries.lib.BatteriesSingleton INSTANCE -> a
     java.util.HashMap dataReferences -> b
@@ -4831,14 +4831,14 @@ pvt.batteries.utils.StackBatteries -> com.autocognite.pvt.fr:
     21:21:void <init>() -> <init>
     60:60:java.lang.String getCurrentMethodName() -> a
     65:65:java.lang.String getCurrentMethodName(int) -> a
-    69:69:java.lang.String getCurrentClassName() -> d
+    69:69:java.lang.String getCurrentClassName() -> c
     74:74:java.lang.String getCurrentSimpleClasseName() -> b
     81:81:java.lang.String getCurrentClassName(int) -> b
-    85:85:java.lang.String getCurrentFileName() -> e
+    85:85:java.lang.String getCurrentFileName() -> d
     90:93:java.lang.String getCurrentFileName(int) -> c
-    97:97:java.lang.String getInvokingMethodName() -> c
-    1101:1101:java.lang.String getInvokingMethodName(int):101:101 -> c
-    1101:1101:java.lang.String getInvokingMethodName():97 -> c
+    97:97:java.lang.String getInvokingMethodName() -> e
+    1101:1101:java.lang.String getInvokingMethodName(int):101:101 -> e
+    1101:1101:java.lang.String getInvokingMethodName():97 -> e
     101:101:java.lang.String getInvokingMethodName(int) -> d
     107:107:java.lang.String getInvokingClassName() -> f
     1111:1111:java.lang.String getInvokingClassName(int):111:111 -> f
@@ -4877,9 +4877,9 @@ pvt.batteries.value.AbstractValue -> com.autocognite.pvt.fs:
     44:44:boolean isNull() -> isNull
     49:49:java.lang.String asString() -> asString
     54:54:java.lang.String toString() -> toString
-    58:58:void throwUnsupportedException(arjunasdk.enums.ValueType) -> b
-    62:62:void throwUnsupportedForEnumException(arjunasdk.enums.ValueType,java.lang.String) -> a
-    66:66:void throwUnsupportedEnumForEnumException(java.lang.String,arjunasdk.enums.ValueType,java.lang.String) -> a
+    58:58:void throwUnsupportedException(arjunasdk.enums.ValueType,java.lang.String) -> a
+    62:62:void throwUnsupportedForEnumException(arjunasdk.enums.ValueType,java.lang.String,java.lang.String) -> a
+    66:66:void throwUnsupportedEnumForEnumException(java.lang.String,arjunasdk.enums.ValueType,java.lang.String,java.lang.String) -> a
     71:72:boolean asBoolean() -> asBoolean
     77:78:java.lang.Number asNumber() -> asNumber
     83:84:int asInt() -> asInt
@@ -4903,27 +4903,27 @@ pvt.batteries.value.AnyRefListValue -> com.autocognite.pvt.ft:
 pvt.batteries.value.AnyRefValue -> com.autocognite.pvt.fu:
     java.util.Set trues -> b
     java.util.Set falses -> c
-    19:20:void <init>(java.lang.Object) -> <init>
-    24:24:arjunasdk.interfaces.Value clone() -> clone
-    28:52:java.lang.Object clone(java.lang.Object) -> b
-    57:60:java.lang.String asString() -> asString
-    65:66:void process(java.lang.Object,java.lang.reflect.Method) -> a
+    26:27:void <init>(java.lang.Object) -> <init>
+    31:31:arjunasdk.interfaces.Value clone() -> clone
+    35:43:java.lang.Object clone(java.lang.Object) -> b
+    81:84:java.lang.String asString() -> asString
+    89:90:void process(java.lang.Object,java.lang.reflect.Method) -> a
     1034:1035:void pvt.batteries.value.AbstractValue.setObject(java.lang.Object):34:35 -> a
-    1034:1035:void process(java.lang.Object,java.lang.reflect.Method):65 -> a
-    71:74:java.lang.Enum asEnum(java.lang.Class) -> asEnum
-    80:86:boolean asBoolean() -> asBoolean
-    92:108:java.lang.Number asNumber() -> asNumber
-    114:116:int asInt() -> asInt
-    123:125:long asLong() -> asLong
-    132:134:double asDouble() -> asDouble
-    141:143:float asFloat() -> asFloat
-    150:152:java.util.List asEnumList(java.lang.Class) -> asEnumList
-    159:161:java.util.List asNumberList() -> asNumberList
-    168:170:java.util.List asIntList() -> asIntList
-    177:179:java.util.List asStringList() -> asStringList
-    184:184:java.util.List asList() -> asList
-    14:14:java.lang.Object clone() -> clone
-    15:16:void <clinit>() -> <clinit>
+    1034:1035:void process(java.lang.Object,java.lang.reflect.Method):89 -> a
+    95:98:java.lang.Enum asEnum(java.lang.Class) -> asEnum
+    104:110:boolean asBoolean() -> asBoolean
+    116:132:java.lang.Number asNumber() -> asNumber
+    138:140:int asInt() -> asInt
+    147:149:long asLong() -> asLong
+    156:158:double asDouble() -> asDouble
+    165:167:float asFloat() -> asFloat
+    174:176:java.util.List asEnumList(java.lang.Class) -> asEnumList
+    183:185:java.util.List asNumberList() -> asNumberList
+    192:194:java.util.List asIntList() -> asIntList
+    201:203:java.util.List asStringList() -> asStringList
+    208:208:java.util.List asList() -> asList
+    21:21:java.lang.Object clone() -> clone
+    22:23:void <clinit>() -> <clinit>
 pvt.batteries.value.BooleanValue -> com.autocognite.pvt.fv:
     9:10:void <init>(boolean) -> <init>
     14:14:arjunasdk.interfaces.Value clone() -> clone
@@ -5192,26 +5192,26 @@ pvt.unitee.arjuna.ArjunaInternal -> com.autocognite.pvt.gp:
     boolean headerPrinted -> I
     54:54:void <init>() -> <init>
     94:95:void setCliConfigurator(pvt.batteries.cli.CLIConfigurator) -> a
-    1106:1107:void pvt.unitee.config.ArjunaSingleton.setCliConfigurator(pvt.batteries.cli.CLIConfigurator):106:107 -> a
-    1106:1107:void setCliConfigurator(pvt.batteries.cli.CLIConfigurator):94 -> a
+    1107:1108:void pvt.unitee.config.ArjunaSingleton.setCliConfigurator(pvt.batteries.cli.CLIConfigurator):107:108 -> a
+    1107:1108:void setCliConfigurator(pvt.batteries.cli.CLIConfigurator):94 -> a
     98:103:void init(java.lang.String[]) -> a
-    1376:1393:void pvt.unitee.config.ArjunaSingleton.printArjunaHeader():376:393 -> a
-    1376:1393:void init(java.lang.String[]):98 -> a
-    1396:1397:void pvt.unitee.config.ArjunaSingleton.setCliArgs(java.lang.String[]):396:397 -> a
-    1396:1397:void init(java.lang.String[]):99 -> a
-    2110:2308:void pvt.unitee.config.ArjunaSingleton.init():110:308 -> a
-    2110:2308:void init(java.lang.String[]):100 -> a
+    1401:1418:void pvt.unitee.config.ArjunaSingleton.printArjunaHeader():401:418 -> a
+    1401:1418:void init(java.lang.String[]):98 -> a
+    1421:1422:void pvt.unitee.config.ArjunaSingleton.setCliArgs(java.lang.String[]):421:422 -> a
+    1421:1422:void init(java.lang.String[]):99 -> a
+    2111:2333:void pvt.unitee.config.ArjunaSingleton.init():111:333 -> a
+    2111:2333:void init(java.lang.String[]):100 -> a
     3032:3032:pvt.batteries.lib.ComponentIntegrator pvt.batteries.integration.AbstractComponentConfigurator.getIntegrator():32:32 -> a
-    3032:3032:void pvt.unitee.config.ArjunaSingleton.init():118 -> a
+    3032:3032:void pvt.unitee.config.ArjunaSingleton.init():119 -> a
     3032:3032:void init(java.lang.String[]):100 -> a
     3051:3052:void pvt.batteries.lib.ComponentIntegrator.setProjectDir(java.lang.String):51:52 -> a
-    3051:3052:void pvt.unitee.config.ArjunaSingleton.init():122 -> a
+    3051:3052:void pvt.unitee.config.ArjunaSingleton.init():123 -> a
     3051:3052:void init(java.lang.String[]):100 -> a
-    3513:3513:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.config.SessionCreator.getSession():513:513 -> a
-    3513:3513:void pvt.unitee.config.ArjunaSingleton.init():290 -> a
-    3513:3513:void init(java.lang.String[]):100 -> a
-    4312:4315:void pvt.unitee.config.ArjunaSingleton.freeze():312:315 -> a
-    4312:4315:void init(java.lang.String[]):101 -> a
+    3538:3538:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.config.SessionCreator.getSession():538:538 -> a
+    3538:3538:void pvt.unitee.config.ArjunaSingleton.init():307 -> a
+    3538:3538:void init(java.lang.String[]):100 -> a
+    4337:4340:void pvt.unitee.config.ArjunaSingleton.freeze():337:340 -> a
+    4337:4340:void init(java.lang.String[]):101 -> a
     106:106:java.util.Map getTestObjectAttrNameMap() -> a
     5247:5247:java.util.Map pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestObjectAttrNameMap():247:247 -> a
     5247:5247:java.util.Map getTestObjectAttrNameMap():106 -> a
@@ -5244,38 +5244,38 @@ pvt.unitee.arjuna.ArjunaInternal -> com.autocognite.pvt.gp:
     167:167:java.lang.String getEventAttrName(java.lang.String) -> h
     171:171:java.util.ArrayList getAllNames() -> B
     175:176:void processNonTestClass(java.lang.Class) -> a
-    5408:5414:void pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):408:414 -> a
-    5408:5414:void processNonTestClass(java.lang.Class):175 -> a
+    5433:5439:void pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):433:439 -> a
+    5433:5439:void processNonTestClass(java.lang.Class):175 -> a
     6043:6088:void pvt.unitee.config.DataMethodContainerMap.process(java.lang.Class):43:88 -> a
-    6043:6088:void pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):409 -> a
+    6043:6088:void pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):434 -> a
     6043:6088:void processNonTestClass(java.lang.Class):175 -> a
     7041:7110:void pvt.unitee.config.DataGeneratorMap.process(java.lang.Class):41:110 -> a
-    7041:7110:void pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):411 -> a
+    7041:7110:void pvt.unitee.config.ArjunaSingleton.processNonTestClass(java.lang.Class):436 -> a
     7041:7110:void processNonTestClass(java.lang.Class):175 -> a
     179:179:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String) -> a
-    7417:7417:java.lang.reflect.Method pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.String,java.lang.String):417:417 -> a
-    7417:7417:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):179 -> a
+    7442:7442:java.lang.reflect.Method pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.String,java.lang.String):442:442 -> a
+    7442:7442:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):179 -> a
     8091:8095:java.lang.reflect.Method pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.String,java.lang.String):91:95 -> a
-    8091:8095:java.lang.reflect.Method pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.String,java.lang.String):417 -> a
+    8091:8095:java.lang.reflect.Method pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.String,java.lang.String):442 -> a
     8091:8095:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):179 -> a
     183:183:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String) -> a
-    8421:8421:java.lang.reflect.Method pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.Class,java.lang.String):421:421 -> a
-    8421:8421:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):183 -> a
+    8446:8446:java.lang.reflect.Method pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.Class,java.lang.String):446:446 -> a
+    8446:8446:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):183 -> a
     9100:9113:java.lang.reflect.Method pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.Class,java.lang.String):100:113 -> a
-    9100:9113:java.lang.reflect.Method pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.Class,java.lang.String):421 -> a
+    9100:9113:java.lang.reflect.Method pvt.unitee.config.ArjunaSingleton.getDataGeneratorMethod(java.lang.Class,java.lang.String):446 -> a
     9100:9113:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):183 -> a
     187:187:arjunasdk.ddauto.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String) -> i
-    9425:9425:arjunasdk.ddauto.interfaces.DataSource pvt.unitee.config.ArjunaSingleton.getDataSourceFromDataGenName(java.lang.String):425:425 -> i
-    9425:9425:arjunasdk.ddauto.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):187 -> i
+    9450:9450:arjunasdk.ddauto.interfaces.DataSource pvt.unitee.config.ArjunaSingleton.getDataSourceFromDataGenName(java.lang.String):450:450 -> i
+    9450:9450:arjunasdk.ddauto.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):187 -> i
     10113:10116:arjunasdk.ddauto.interfaces.DataSource pvt.unitee.config.DataGeneratorMap.getDataSource(java.lang.String):113:116 -> i
-    10113:10116:arjunasdk.ddauto.interfaces.DataSource pvt.unitee.config.ArjunaSingleton.getDataSourceFromDataGenName(java.lang.String):425 -> i
+    10113:10116:arjunasdk.ddauto.interfaces.DataSource pvt.unitee.config.ArjunaSingleton.getDataSourceFromDataGenName(java.lang.String):450 -> i
     10113:10116:arjunasdk.ddauto.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):187 -> i
     191:191:pvt.unitee.reporter.lib.Reporter getReporter() -> h
-    10400:10400:pvt.unitee.reporter.lib.Reporter pvt.unitee.config.ArjunaSingleton.getReporter():400:400 -> h
-    10400:10400:pvt.unitee.reporter.lib.Reporter getReporter():191 -> h
+    10425:10425:pvt.unitee.reporter.lib.Reporter pvt.unitee.config.ArjunaSingleton.getReporter():425:425 -> h
+    10425:10425:pvt.unitee.reporter.lib.Reporter getReporter():191 -> h
     195:195:pvt.unitee.reporter.lib.CentralExecutionState getCentralExecState() -> i
-    10433:10433:pvt.unitee.reporter.lib.CentralExecutionState pvt.unitee.config.ArjunaSingleton.getCentralExecState():433:433 -> i
-    10433:10433:pvt.unitee.reporter.lib.CentralExecutionState getCentralExecState():195 -> i
+    10458:10458:pvt.unitee.reporter.lib.CentralExecutionState pvt.unitee.config.ArjunaSingleton.getCentralExecState():458:458 -> i
+    10458:10458:pvt.unitee.reporter.lib.CentralExecutionState getCentralExecState():195 -> i
     206:241:void execute(pvt.unitee.lib.engine.TestEngine) -> a
     11263:11273:void discover(pvt.unitee.lib.engine.TestEngine):263:273 -> a
     11263:11273:void execute(pvt.unitee.lib.engine.TestEngine):218 -> a
@@ -5288,24 +5288,24 @@ pvt.unitee.arjuna.ArjunaInternal -> com.autocognite.pvt.gp:
     13290:13299:void report(pvt.unitee.lib.engine.TestEngine):290:299 -> a
     13290:13299:void execute(pvt.unitee.lib.engine.TestEngine):224 -> a
     244:244:java.lang.String getVersion() -> C
-    13362:13362:java.lang.String pvt.unitee.config.ArjunaSingleton.getVersion():362:362 -> C
-    13362:13362:java.lang.String getVersion():244 -> C
+    13387:13387:java.lang.String pvt.unitee.config.ArjunaSingleton.getVersion():387:387 -> C
+    13387:13387:java.lang.String getVersion():244 -> C
     263:273:void discover(pvt.unitee.lib.engine.TestEngine) -> b
     277:286:void initReporter(pvt.unitee.lib.engine.TestEngine) -> c
     290:299:void report(pvt.unitee.lib.engine.TestEngine) -> d
     303:312:void loadSession$1cbd1cf7() -> D
-    14318:14331:void pvt.unitee.config.ArjunaSingleton.loadSession():318:331 -> D
-    14318:14331:void loadSession$1cbd1cf7():304 -> D
+    14343:14356:void pvt.unitee.config.ArjunaSingleton.loadSession():343:356 -> D
+    14343:14356:void loadSession$1cbd1cf7():304 -> D
     15047:15074:void pvt.unitee.testobject.lib.loader.group.TestGroupsDB.createGroupForCLIOptions(java.util.Map):47:74 -> D
-    15047:15074:void pvt.unitee.config.ArjunaSingleton.loadSession():320 -> D
+    15047:15074:void pvt.unitee.config.ArjunaSingleton.loadSession():345 -> D
     15047:15074:void loadSession$1cbd1cf7():304 -> D
     15077:15086:void pvt.unitee.testobject.lib.loader.group.TestGroupsDB.createAllCapturingGroup():77:86 -> D
-    15077:15086:void pvt.unitee.config.ArjunaSingleton.loadSession():328 -> D
+    15077:15086:void pvt.unitee.config.ArjunaSingleton.loadSession():353 -> D
     15077:15086:void loadSession$1cbd1cf7():304 -> D
     316:324:void run(pvt.unitee.lib.engine.TestEngine) -> e
     327:327:pvt.unitee.testobject.lib.loader.group.TestGroupsDB getGroupLoader() -> j
-    15437:15437:pvt.unitee.testobject.lib.loader.group.TestGroupsDB pvt.unitee.config.ArjunaSingleton.getTestGroupDB():437:437 -> j
-    15437:15437:pvt.unitee.testobject.lib.loader.group.TestGroupsDB getGroupLoader():327 -> j
+    15462:15462:pvt.unitee.testobject.lib.loader.group.TestGroupsDB pvt.unitee.config.ArjunaSingleton.getTestGroupDB():462:462 -> j
+    15462:15462:pvt.unitee.testobject.lib.loader.group.TestGroupsDB getGroupLoader():327 -> j
     331:331:java.util.List getTestObjectAttrListForTestReport() -> k
     16171:16171:java.util.List pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestObjectAttrListForTestReport():171:171 -> k
     16171:16171:java.util.List getTestObjectAttrListForTestReport():331 -> k
@@ -5364,14 +5364,14 @@ pvt.unitee.arjuna.ArjunaInternal -> com.autocognite.pvt.gp:
     17243:17243:boolean pvt.unitee.reporter.lib.config.TestReporterSingleton.shouldIncludeDataRefInReport():243:243 -> z
     17243:17243:boolean shouldIncludeDataRefInReport():403 -> z
     407:407:pvt.unitee.testobject.lib.loader.session.Session getSession() -> A
-    17445:17445:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.config.ArjunaSingleton.getSession():445:445 -> A
-    17445:17445:pvt.unitee.testobject.lib.loader.session.Session getSession():407 -> A
+    17470:17470:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.config.ArjunaSingleton.getSession():470:470 -> A
+    17470:17470:pvt.unitee.testobject.lib.loader.session.Session getSession():407 -> A
     411:412:void shouldInitUiAutomator(boolean) -> a
-    18102:18103:void pvt.unitee.config.ArjunaSingleton.shouldInitUiAutomator(boolean):102:103 -> a
-    18102:18103:void shouldInitUiAutomator(boolean):411 -> a
+    18103:18104:void pvt.unitee.config.ArjunaSingleton.shouldInitUiAutomator(boolean):103:104 -> a
+    18103:18104:void shouldInitUiAutomator(boolean):411 -> a
     415:416:void setEdition(java.lang.String) -> j
-    19093:19094:void pvt.unitee.config.ArjunaSingleton.setEdition(java.lang.String):93:94 -> j
-    19093:19094:void setEdition(java.lang.String):415 -> j
+    19094:19095:void pvt.unitee.config.ArjunaSingleton.setEdition(java.lang.String):94:95 -> j
+    19094:19095:void setEdition(java.lang.String):415 -> j
     55:202:void <clinit>() -> <clinit>
 pvt.unitee.arjuna.ArjunaInternal$info -> com.autocognite.pvt.gp$a:
     java.lang.String EXIT_ON_ERROR -> a
@@ -5402,10 +5402,10 @@ pvt.unitee.arjuna.ArjunaTestEngine -> com.autocognite.pvt.gq:
     76:108:void initReporter() -> c
     1163:1194:void archive():163:194 -> c
     1163:1194:void initReporter():78 -> c
-    1429:1430:void pvt.unitee.config.ArjunaSingleton.setCentralExecState(pvt.unitee.reporter.lib.CentralExecutionState):429:430 -> c
-    1429:1430:void initReporter():80 -> c
-    2404:2405:void pvt.unitee.config.ArjunaSingleton.setReporter(pvt.unitee.reporter.lib.Reporter):404:405 -> c
-    2404:2405:void initReporter():104 -> c
+    1454:1455:void pvt.unitee.config.ArjunaSingleton.setCentralExecState(pvt.unitee.reporter.lib.CentralExecutionState):454:455 -> c
+    1454:1455:void initReporter():80 -> c
+    2429:2430:void pvt.unitee.config.ArjunaSingleton.setReporter(pvt.unitee.reporter.lib.Reporter):429:430 -> c
+    2429:2430:void initReporter():104 -> c
     112:143:void report() -> d
     3146:3155:java.lang.String getReportDir():146:155 -> d
     3146:3155:void report():116 -> d
@@ -5433,8 +5433,8 @@ pvt.unitee.cli.UniteeCliConfigurator -> com.autocognite.pvt.gt:
     51:87:void processUserOptions() -> c
     1080:1083:arjunasdk.interfaces.Value pvt.batteries.cli.AbstractCliConfigurator.getUserOption(java.lang.String):80:83 -> c
     1080:1083:void processUserOptions():79 -> c
-    1449:1450:void pvt.unitee.config.ArjunaSingleton.setPickerOptions(java.util.Map):449:450 -> c
-    1449:1450:void processUserOptions():86 -> c
+    1474:1475:void pvt.unitee.config.ArjunaSingleton.setPickerOptions(java.util.Map):474:475 -> c
+    1474:1475:void processUserOptions():86 -> c
     90:95:void addFilter(pvt.unitee.enums.TestPickerProperty,java.lang.String) -> a
     98:151:void addUniteeStringProperty(java.lang.String,java.lang.Enum) -> a
     2177:2177:arjunasdk.enums.ValueType pvt.batteries.lib.ComponentIntegrator.expectedValueType(java.lang.Enum):177:177 -> a
@@ -5448,54 +5448,54 @@ pvt.unitee.config.ArjunaConfigurator -> com.autocognite.pvt.gv:
     pvt.arjunasdk.property.ConfigPropertyBuilder builder -> b
     java.util.HashMap pathToEnumMap -> c
     java.util.HashMap enumToPathMap -> d
-    39:50:void <init>() -> <init>
-    53:53:pvt.unitee.enums.ArjunaProperty codeForPath(java.lang.String) -> b
-    57:59:void handleStringConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> a
-    62:64:void handleCoreDirPath(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> b
-    67:69:void handleProjectDirPath(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> c
-    72:74:void handleBooleanConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> d
-    82:84:void handleStringListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> e
-    87:97:void handleReportGenFormat(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> f
-    100:110:void handleReportListenerFormat(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> g
-    113:115:void handleTestObjectPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> h
-    118:120:void handleTestPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> i
-    123:125:void handleTestResultPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> j
-    128:130:void handleStepResultPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> k
-    133:135:void handleIssuePropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> l
-    138:140:void handleEventPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> m
-    143:145:void handleFixturePropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> n
-    148:150:void handleReportSectionPropList(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> o
-    154:163:void handleReportMode(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> p
-    166:168:void handleReportSections(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> q
-    171:173:void handleTestResultType(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> r
-    177:434:void processConfigProperties(java.util.HashMap) -> a
-    1154:1163:void handleReportMode(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):154:163 -> a
-    1154:1163:void processConfigProperties(java.util.HashMap):229 -> a
-    2118:2120:void handleTestPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):118:120 -> a
-    2118:2120:void processConfigProperties(java.util.HashMap):304 -> a
-    2138:2140:void handleEventPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):138:140 -> a
-    2138:2140:void processConfigProperties(java.util.HashMap):367 -> a
-    3123:3125:void handleTestResultPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):123:125 -> a
-    3123:3125:void processConfigProperties(java.util.HashMap):370 -> a
-    3133:3135:void handleIssuePropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):133:135 -> a
-    3133:3135:void processConfigProperties(java.util.HashMap):373 -> a
-    3143:3145:void handleFixturePropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):143:145 -> a
-    3143:3145:void processConfigProperties(java.util.HashMap):376 -> a
-    4128:4130:void handleStepResultPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):128:130 -> a
-    4128:4130:void processConfigProperties(java.util.HashMap):379 -> a
-    5087:5097:void handleReportGenFormat(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):87:97 -> a
-    5087:5097:void processConfigProperties(java.util.HashMap):421 -> a
-    5100:5110:void handleReportListenerFormat(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):100:110 -> a
-    5100:5110:void processConfigProperties(java.util.HashMap):424 -> a
-    437:439:void processDefaults() -> a
-    443:444:void loadComponent() -> b
+    41:52:void <init>() -> <init>
+    55:55:pvt.unitee.enums.ArjunaProperty codeForPath(java.lang.String) -> b
+    59:61:void handleStringConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> a
+    64:66:void handleCoreDirPath(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> b
+    69:71:void handleProjectDirPath(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> c
+    74:76:void handleBooleanConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> d
+    84:86:void handleStringListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> e
+    89:99:void handleReportGenFormat(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> f
+    102:112:void handleReportListenerFormat(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> g
+    115:117:void handleTestObjectPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> h
+    120:122:void handleTestPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> i
+    125:127:void handleTestResultPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> j
+    130:132:void handleStepResultPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> k
+    135:137:void handleIssuePropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> l
+    140:142:void handleEventPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> m
+    145:147:void handleFixturePropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> n
+    150:152:void handleReportSectionPropList(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> o
+    156:165:void handleReportMode(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> p
+    168:170:void handleReportSections(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> q
+    173:175:void handleTestResultType(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> r
+    179:445:void processConfigProperties(java.util.HashMap) -> a
+    1156:1165:void handleReportMode(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):156:165 -> a
+    1156:1165:void processConfigProperties(java.util.HashMap):240 -> a
+    2120:2122:void handleTestPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):120:122 -> a
+    2120:2122:void processConfigProperties(java.util.HashMap):315 -> a
+    2140:2142:void handleEventPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):140:142 -> a
+    2140:2142:void processConfigProperties(java.util.HashMap):378 -> a
+    3125:3127:void handleTestResultPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):125:127 -> a
+    3125:3127:void processConfigProperties(java.util.HashMap):381 -> a
+    3135:3137:void handleIssuePropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):135:137 -> a
+    3135:3137:void processConfigProperties(java.util.HashMap):384 -> a
+    3145:3147:void handleFixturePropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):145:147 -> a
+    3145:3147:void processConfigProperties(java.util.HashMap):387 -> a
+    4130:4132:void handleStepResultPropListConfig(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):130:132 -> a
+    4130:4132:void processConfigProperties(java.util.HashMap):390 -> a
+    5089:5099:void handleReportGenFormat(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):89:99 -> a
+    5089:5099:void processConfigProperties(java.util.HashMap):432 -> a
+    5102:5112:void handleReportListenerFormat(java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):102:112 -> a
+    5102:5112:void processConfigProperties(java.util.HashMap):435 -> a
+    448:450:void processDefaults() -> a
+    454:455:void loadComponent() -> b
     6074:6168:void pvt.unitee.reporter.lib.config.TestReporterSingleton.init():74:168 -> b
-    6074:6168:void loadComponent():443 -> b
-    448:511:java.util.ArrayList getAllMessages() -> c
-    516:516:java.util.ArrayList getAllNames() -> d
+    6074:6168:void loadComponent():454 -> b
+    459:522:java.util.ArrayList getAllMessages() -> c
+    527:527:java.util.ArrayList getAllNames() -> d
 pvt.unitee.config.ArjunaConfigurator$1 -> com.autocognite.pvt.gw:
     int[] $SwitchMap$pvt$unitee$enums$ArjunaProperty -> a
-    182:182:void <clinit>() -> <clinit>
+    184:184:void <clinit>() -> <clinit>
 pvt.unitee.config.ArjunaSingleton -> com.autocognite.pvt.gx:
     pvt.unitee.config.ArjunaSingleton INSTANCE -> a
     java.lang.String version -> b
@@ -5516,80 +5516,80 @@ pvt.unitee.config.ArjunaSingleton -> com.autocognite.pvt.gx:
     pvt.batteries.lib.ComponentIntegrator integrator -> l
     java.util.Map cliPickerOptions -> m
     pvt.unitee.config.ArjunaSingleton[] $VALUES -> s
-    64:64:pvt.unitee.config.ArjunaSingleton[] values() -> l
-    64:64:pvt.unitee.config.ArjunaSingleton valueOf(java.lang.String) -> c
-    64:90:void <init>(java.lang.String,int) -> <init>
-    93:94:void setEdition(java.lang.String) -> a
-    97:98:void setVersion(java.lang.String) -> d
-    102:103:void shouldInitUiAutomator(boolean) -> a
-    106:107:void setCliConfigurator(pvt.batteries.cli.CLIConfigurator) -> a
-    110:308:void init() -> a
+    65:65:pvt.unitee.config.ArjunaSingleton[] values() -> l
+    65:65:pvt.unitee.config.ArjunaSingleton valueOf(java.lang.String) -> c
+    65:91:void <init>(java.lang.String,int) -> <init>
+    94:95:void setEdition(java.lang.String) -> a
+    98:99:void setVersion(java.lang.String) -> d
+    103:104:void shouldInitUiAutomator(boolean) -> a
+    107:108:void setCliConfigurator(pvt.batteries.cli.CLIConfigurator) -> a
+    111:333:void init() -> a
     1032:1032:pvt.batteries.lib.ComponentIntegrator pvt.batteries.integration.AbstractComponentConfigurator.getIntegrator():32:32 -> a
-    1032:1032:void init():118 -> a
+    1032:1032:void init():119 -> a
     1051:1052:void pvt.batteries.lib.ComponentIntegrator.setProjectDir(java.lang.String):51:52 -> a
-    1051:1052:void init():122 -> a
-    1513:1513:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.config.SessionCreator.getSession():513:513 -> a
-    1513:1513:void init():290 -> a
-    312:315:void freeze() -> b
+    1051:1052:void init():123 -> a
+    1538:1538:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.config.SessionCreator.getSession():538:538 -> a
+    1538:1538:void init():307 -> a
+    337:340:void freeze() -> b
     2096:2114:void pvt.batteries.lib.ComponentIntegrator.enumerate():96:114 -> b
-    2096:2114:void freeze():313 -> b
+    2096:2114:void freeze():338 -> b
     3060:3060:arjunasdk.interfaces.Value pvt.arjunasdk.property.ConfigProperty.value():60:60 -> b
     3060:3060:void pvt.batteries.lib.ComponentIntegrator.enumerate():108 -> b
-    3060:3060:void freeze():313 -> b
-    3366:3373:void initlogger():366:373 -> b
-    3366:3373:void freeze():314 -> b
+    3060:3060:void freeze():338 -> b
+    3391:3398:void initlogger():391:398 -> b
+    3391:3398:void freeze():339 -> b
     4068:4072:void pvt.batteries.logging.Log.configure(org.apache.log4j.Level,org.apache.log4j.Level,java.lang.String,java.lang.String):68:72 -> b
-    4068:4072:void initlogger():367 -> b
-    4068:4072:void freeze():314 -> b
+    4068:4072:void initlogger():392 -> b
+    4068:4072:void freeze():339 -> b
     5037:5050:void pvt.batteries.logging.Log.setConsoleLogger(org.apache.log4j.Level,java.lang.String):37:50 -> b
     5037:5050:void pvt.batteries.logging.Log.configure(org.apache.log4j.Level,org.apache.log4j.Level,java.lang.String,java.lang.String):70 -> b
-    5037:5050:void initlogger():367 -> b
-    5037:5050:void freeze():314 -> b
+    5037:5050:void initlogger():392 -> b
+    5037:5050:void freeze():339 -> b
     5053:5065:void pvt.batteries.logging.Log.setFileLogger(org.apache.log4j.Level,java.lang.String,java.lang.String):53:65 -> b
     5053:5065:void pvt.batteries.logging.Log.configure(org.apache.log4j.Level,org.apache.log4j.Level,java.lang.String,java.lang.String):71 -> b
-    5053:5065:void initlogger():367 -> b
-    5053:5065:void freeze():314 -> b
-    318:331:void loadSession() -> c
+    5053:5065:void initlogger():392 -> b
+    5053:5065:void freeze():339 -> b
+    343:356:void loadSession() -> c
     6047:6074:void pvt.unitee.testobject.lib.loader.group.TestGroupsDB.createGroupForCLIOptions(java.util.Map):47:74 -> c
-    6047:6074:void loadSession():320 -> c
+    6047:6074:void loadSession():345 -> c
     6077:6086:void pvt.unitee.testobject.lib.loader.group.TestGroupsDB.createAllCapturingGroup():77:86 -> c
-    6077:6086:void loadSession():328 -> c
-    334:359:void displayPickerConfigError() -> d
-    362:362:java.lang.String getVersion() -> e
-    366:373:void initlogger() -> f
+    6077:6086:void loadSession():353 -> c
+    359:384:void displayPickerConfigError() -> d
+    387:387:java.lang.String getVersion() -> e
+    391:398:void initlogger() -> f
     7068:7072:void pvt.batteries.logging.Log.configure(org.apache.log4j.Level,org.apache.log4j.Level,java.lang.String,java.lang.String):68:72 -> f
-    7068:7072:void initlogger():367 -> f
+    7068:7072:void initlogger():392 -> f
     8037:8050:void pvt.batteries.logging.Log.setConsoleLogger(org.apache.log4j.Level,java.lang.String):37:50 -> f
     8037:8050:void pvt.batteries.logging.Log.configure(org.apache.log4j.Level,org.apache.log4j.Level,java.lang.String,java.lang.String):70 -> f
-    8037:8050:void initlogger():367 -> f
+    8037:8050:void initlogger():392 -> f
     8053:8065:void pvt.batteries.logging.Log.setFileLogger(org.apache.log4j.Level,java.lang.String,java.lang.String):53:65 -> f
     8053:8065:void pvt.batteries.logging.Log.configure(org.apache.log4j.Level,org.apache.log4j.Level,java.lang.String,java.lang.String):71 -> f
-    8053:8065:void initlogger():367 -> f
-    376:393:void printArjunaHeader() -> g
-    396:397:void setCliArgs(java.lang.String[]) -> a
-    400:400:pvt.unitee.reporter.lib.Reporter getReporter() -> h
-    404:405:void setReporter(pvt.unitee.reporter.lib.Reporter) -> a
-    408:414:void processNonTestClass(java.lang.Class) -> a
+    8053:8065:void initlogger():392 -> f
+    401:418:void printArjunaHeader() -> g
+    421:422:void setCliArgs(java.lang.String[]) -> a
+    425:425:pvt.unitee.reporter.lib.Reporter getReporter() -> h
+    429:430:void setReporter(pvt.unitee.reporter.lib.Reporter) -> a
+    433:439:void processNonTestClass(java.lang.Class) -> a
     9043:9088:void pvt.unitee.config.DataMethodContainerMap.process(java.lang.Class):43:88 -> a
-    9043:9088:void processNonTestClass(java.lang.Class):409 -> a
+    9043:9088:void processNonTestClass(java.lang.Class):434 -> a
     10041:10110:void pvt.unitee.config.DataGeneratorMap.process(java.lang.Class):41:110 -> a
-    10041:10110:void processNonTestClass(java.lang.Class):411 -> a
-    417:417:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String) -> a
+    10041:10110:void processNonTestClass(java.lang.Class):436 -> a
+    442:442:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String) -> a
     11091:11095:java.lang.reflect.Method pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.String,java.lang.String):91:95 -> a
-    11091:11095:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):417 -> a
-    421:421:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String) -> a
+    11091:11095:java.lang.reflect.Method getDataGeneratorMethod(java.lang.String,java.lang.String):442 -> a
+    446:446:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String) -> a
     11100:11113:java.lang.reflect.Method pvt.unitee.config.DataMethodContainerMap.getMethod(java.lang.Class,java.lang.String):100:113 -> a
-    11100:11113:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):421 -> a
-    425:425:arjunasdk.ddauto.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String) -> b
+    11100:11113:java.lang.reflect.Method getDataGeneratorMethod(java.lang.Class,java.lang.String):446 -> a
+    450:450:arjunasdk.ddauto.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String) -> b
     12113:12116:arjunasdk.ddauto.interfaces.DataSource pvt.unitee.config.DataGeneratorMap.getDataSource(java.lang.String):113:116 -> b
-    12113:12116:arjunasdk.ddauto.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):425 -> b
-    429:430:void setCentralExecState(pvt.unitee.reporter.lib.CentralExecutionState) -> a
-    433:433:pvt.unitee.reporter.lib.CentralExecutionState getCentralExecState() -> i
-    437:437:pvt.unitee.testobject.lib.loader.group.TestGroupsDB getTestGroupDB() -> j
-    441:441:pvt.batteries.cli.CLIConfigurator getCliConfigurator() -> m
-    445:445:pvt.unitee.testobject.lib.loader.session.Session getSession() -> k
-    449:450:void setPickerOptions(java.util.Map) -> a
-    64:65:void <clinit>() -> <clinit>
+    12113:12116:arjunasdk.ddauto.interfaces.DataSource getDataSourceFromDataGenName(java.lang.String):450 -> b
+    454:455:void setCentralExecState(pvt.unitee.reporter.lib.CentralExecutionState) -> a
+    458:458:pvt.unitee.reporter.lib.CentralExecutionState getCentralExecState() -> i
+    462:462:pvt.unitee.testobject.lib.loader.group.TestGroupsDB getTestGroupDB() -> j
+    466:466:pvt.batteries.cli.CLIConfigurator getCliConfigurator() -> m
+    470:470:pvt.unitee.testobject.lib.loader.session.Session getSession() -> k
+    474:475:void setPickerOptions(java.util.Map) -> a
+    65:66:void <clinit>() -> <clinit>
 pvt.unitee.config.DataGeneratorMap -> com.autocognite.pvt.gy:
     org.apache.log4j.Logger logger -> b
     java.util.HashMap dataSources -> a
@@ -5608,14 +5608,14 @@ pvt.unitee.config.DataMethodContainerMap -> com.autocognite.pvt.gz:
 pvt.unitee.config.SessionCreator -> com.autocognite.pvt.ha:
     java.lang.String sessionName -> b
     pvt.unitee.testobject.lib.loader.session.Session session -> a
-    455:510:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String) -> <init>
-    1437:1437:pvt.unitee.testobject.lib.loader.group.TestGroupsDB pvt.unitee.config.ArjunaSingleton.getTestGroupDB():437:437 -> <init>
-    1437:1437:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String):461 -> <init>
-    2437:2437:pvt.unitee.testobject.lib.loader.group.TestGroupsDB pvt.unitee.config.ArjunaSingleton.getTestGroupDB():437:437 -> <init>
-    2437:2437:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String):462 -> <init>
+    480:535:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String) -> <init>
+    1462:1462:pvt.unitee.testobject.lib.loader.group.TestGroupsDB pvt.unitee.config.ArjunaSingleton.getTestGroupDB():462:462 -> <init>
+    1462:1462:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String):486 -> <init>
+    2462:2462:pvt.unitee.testobject.lib.loader.group.TestGroupsDB pvt.unitee.config.ArjunaSingleton.getTestGroupDB():462:462 -> <init>
+    2462:2462:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String):487 -> <init>
     3142:3142:pvt.unitee.enums.PickerTargetType pvt.unitee.testobject.lib.loader.group.TestGroupsDB.getTargetForMagicGroup():142:142 -> <init>
-    3142:3142:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String):462 -> <init>
-    513:513:pvt.unitee.testobject.lib.loader.session.Session getSession() -> a
+    3142:3142:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String):487 -> <init>
+    538:538:pvt.unitee.testobject.lib.loader.session.Session getSession() -> a
 pvt.unitee.core.lib.annotate.None -> com.autocognite.pvt.hb:
     23:23:void <init>() -> <init>
 pvt.unitee.core.lib.datasource.DataArrayDataSource -> com.autocognite.pvt.hc:
@@ -9481,7 +9481,7 @@ pvt.unitee.testobject.lib.loader.AnnotationValidator -> com.autocognite.pvt.oi:
     16:16:void <clinit>() -> <clinit>
 pvt.unitee.testobject.lib.loader.ConstructorDef -> com.autocognite.pvt.oj:
     pvt.unitee.testobject.lib.java.TestClassConstructorType type -> a
-    327:328:void <init>() -> <init>
+    375:376:void <init>() -> <init>
 pvt.unitee.testobject.lib.loader.DataMethodsHandler -> com.autocognite.pvt.ok:
     void process() -> a
     java.lang.reflect.Method getMethod(java.lang.String) -> a
@@ -9497,13 +9497,15 @@ pvt.unitee.testobject.lib.loader.DefaultDataMethodsHandler -> com.autocognite.pv
     56:158:void process() -> a
     162:169:java.lang.reflect.Method getMethod(java.lang.String) -> a
     40:42:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.JavaTestClassDataMethodsHandler -> com.autocognite.pvt.om:
+pvt.unitee.testobject.lib.loader.EmptyBenchmarkClass -> com.autocognite.pvt.om:
+    379:379:void <init>() -> <init>
+pvt.unitee.testobject.lib.loader.JavaTestClassDataMethodsHandler -> com.autocognite.pvt.on:
     java.lang.Class testClass -> a
     25:29:void <init>(java.lang.Class) -> <init>
     32:32:boolean shouldInclude(java.lang.reflect.Method) -> a
     37:37:java.lang.reflect.Method[] getMethods() -> b
     42:42:java.lang.String getContainerName() -> c
-pvt.unitee.testobject.lib.loader.JavaTestClassDefinitionsLoader -> com.autocognite.pvt.on:
+pvt.unitee.testobject.lib.loader.JavaTestClassDefinitionsLoader -> com.autocognite.pvt.oo:
     org.apache.log4j.Logger logger -> c
     java.lang.ClassLoader classLoader -> d
     pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder depTreeBuilder -> e
@@ -9511,149 +9513,146 @@ pvt.unitee.testobject.lib.loader.JavaTestClassDefinitionsLoader -> com.autocogni
     java.lang.String testDir -> g
     java.util.Map CLASS_ANNOTATION_COMPAT -> a
     java.util.Map METHOD_ANNOTATION_COMPAT -> b
-    38:64:void <init>() -> <init>
-    68:69:void setTestDir(java.lang.String) -> a
-    72:91:java.lang.ClassLoader getClassLoader(pvt.batteries.discoverer.DiscoveredFile) -> b
-    96:101:java.lang.ClassLoader getClassLoader(java.lang.String) -> b
-    105:105:boolean isTestClass(java.lang.Class) -> a
-    110:125:void processIfNonTestFileElseStore(pvt.batteries.discoverer.DiscoveredFile) -> a
-    1236:1244:java.lang.String getQualifiedName(pvt.batteries.discoverer.DiscoveredFile):236:244 -> a
-    1236:1244:void processIfNonTestFileElseStore(pvt.batteries.discoverer.DiscoveredFile):110 -> a
-    2105:2105:boolean isTestClass(java.lang.Class):105:105 -> a
-    2105:2105:void processIfNonTestFileElseStore(pvt.batteries.discoverer.DiscoveredFile):116 -> a
-    129:132:void loadTests() -> a
-    2135:2233:void load(java.lang.Class,java.lang.String):135:233 -> a
-    2135:2233:void loadTests():130 -> a
+    byte[] emptyCodeCheck -> h
+    53:53:void emptyMethodBenchMark() -> c
+    42:82:void <init>() -> <init>
+    86:87:void setTestDir(java.lang.String) -> a
+    90:109:java.lang.ClassLoader getClassLoader(pvt.batteries.discoverer.DiscoveredFile) -> b
+    114:119:java.lang.ClassLoader getClassLoader(java.lang.String) -> b
+    123:123:boolean isTestClass(java.lang.Class) -> a
+    128:143:void processIfNonTestFileElseStore(pvt.batteries.discoverer.DiscoveredFile) -> a
+    1254:1262:java.lang.String getQualifiedName(pvt.batteries.discoverer.DiscoveredFile):254:262 -> a
+    1254:1262:void processIfNonTestFileElseStore(pvt.batteries.discoverer.DiscoveredFile):128 -> a
+    2123:2123:boolean isTestClass(java.lang.Class):123:123 -> a
+    2123:2123:void processIfNonTestFileElseStore(pvt.batteries.discoverer.DiscoveredFile):134 -> a
+    147:150:void loadTests() -> a
+    2153:2251:void load(java.lang.Class,java.lang.String):153:251 -> a
+    2153:2251:void loadTests():148 -> a
     3122:3135:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUserTestClass(java.lang.Class):122:135 -> a
-    3122:3135:void load(java.lang.Class,java.lang.String):149 -> a
-    3122:3135:void loadTests():130 -> a
+    3122:3135:void load(java.lang.Class,java.lang.String):167 -> a
+    3122:3135:void loadTests():148 -> a
     4071:4075:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getPackageName(java.lang.Class):71:75 -> a
     4071:4075:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUserTestClass(java.lang.Class):127 -> a
-    4071:4075:void load(java.lang.Class,java.lang.String):149 -> a
-    4071:4075:void loadTests():130 -> a
-    4299:4302:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):299:302 -> a
-    4299:4302:void load(java.lang.Class,java.lang.String):155 -> a
-    4299:4302:void loadTests():130 -> a
+    4071:4075:void load(java.lang.Class,java.lang.String):167 -> a
+    4071:4075:void loadTests():148 -> a
+    4317:4320:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):317:320 -> a
+    4317:4320:void load(java.lang.Class,java.lang.String):173 -> a
+    4317:4320:void loadTests():148 -> a
     5302:5307:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302:307 -> a
-    5302:5307:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):300 -> a
-    5302:5307:void load(java.lang.Class,java.lang.String):155 -> a
-    5302:5307:void loadTests():130 -> a
+    5302:5307:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):318 -> a
+    5302:5307:void load(java.lang.Class,java.lang.String):173 -> a
+    5302:5307:void loadTests():148 -> a
     6204:6204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
     6204:6204:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302 -> a
-    6204:6204:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):300 -> a
-    6204:6204:void load(java.lang.Class,java.lang.String):155 -> a
-    6204:6204:void loadTests():130 -> a
+    6204:6204:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):318 -> a
+    6204:6204:void load(java.lang.Class,java.lang.String):173 -> a
+    6204:6204:void loadTests():148 -> a
     6310:6310:boolean pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():310:310 -> a
     6310:6310:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):306 -> a
-    6310:6310:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):300 -> a
-    6310:6310:void load(java.lang.Class,java.lang.String):155 -> a
-    6310:6310:void loadTests():130 -> a
+    6310:6310:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):318 -> a
+    6310:6310:void load(java.lang.Class,java.lang.String):173 -> a
+    6310:6310:void loadTests():148 -> a
     7204:7204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
-    7204:7204:void load(java.lang.Class,java.lang.String):159 -> a
-    7204:7204:void loadTests():130 -> a
+    7204:7204:void load(java.lang.Class,java.lang.String):177 -> a
+    7204:7204:void loadTests():148 -> a
     7228:7229:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setCreatorThreadCount(int):228:229 -> a
-    7228:7229:void load(java.lang.Class,java.lang.String):163 -> a
-    7228:7229:void loadTests():130 -> a
+    7228:7229:void load(java.lang.Class,java.lang.String):181 -> a
+    7228:7229:void loadTests():148 -> a
     8080:8081:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setDataRefPresent(boolean):80:81 -> a
-    8080:8081:void load(java.lang.Class,java.lang.String):166 -> a
-    8080:8081:void loadTests():130 -> a
+    8080:8081:void load(java.lang.Class,java.lang.String):184 -> a
+    8080:8081:void loadTests():148 -> a
     8084:8084:boolean pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.isDataRefPresent():84:84 -> a
-    8084:8084:void load(java.lang.Class,java.lang.String):167 -> a
-    8084:8084:void loadTests():130 -> a
+    8084:8084:void load(java.lang.Class,java.lang.String):185 -> a
+    8084:8084:void loadTests():148 -> a
     8088:8093:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addFileDataRefWithPath(java.lang.String,java.lang.String):88:93 -> a
-    8088:8093:void load(java.lang.Class,java.lang.String):176 -> a
-    8088:8093:void loadTests():130 -> a
+    8088:8093:void load(java.lang.Class,java.lang.String):194 -> a
+    8088:8093:void loadTests():148 -> a
     8204:8204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
-    8204:8204:void load(java.lang.Class,java.lang.String):192 -> a
-    8204:8204:void loadTests():130 -> a
+    8204:8204:void load(java.lang.Class,java.lang.String):210 -> a
+    8204:8204:void loadTests():148 -> a
     9204:9204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
-    9204:9204:void load(java.lang.Class,java.lang.String):199 -> a
-    9204:9204:void loadTests():130 -> a
+    9204:9204:void load(java.lang.Class,java.lang.String):217 -> a
+    9204:9204:void loadTests():148 -> a
     9232:9233:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setInstanceThreadCount(int):232:233 -> a
-    9232:9233:void load(java.lang.Class,java.lang.String):207 -> a
-    9232:9233:void loadTests():130 -> a
+    9232:9233:void load(java.lang.Class,java.lang.String):225 -> a
+    9232:9233:void loadTests():148 -> a
     10096:10096:int pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
-    10096:10096:void load(java.lang.Class,java.lang.String):209 -> a
-    10096:10096:void loadTests():130 -> a
-    10305:10317:java.lang.reflect.Constructor getConstructor$58d3673(java.lang.Class,pvt.unitee.testobject.lib.loader.ConstructorDef):305:317 -> a
-    10305:10317:void load(java.lang.Class,java.lang.String):212 -> a
-    10305:10317:void loadTests():130 -> a
-    11138:11139:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructor(java.lang.reflect.Constructor):138:139 -> a
-    11138:11139:void load(java.lang.Class,java.lang.String):214 -> a
-    11138:11139:void loadTests():130 -> a
-    11146:11147:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructorType(pvt.unitee.testobject.lib.java.TestClassConstructorType):146:147 -> a
-    11146:11147:void load(java.lang.Class,java.lang.String):215 -> a
-    11146:11147:void loadTests():130 -> a
-    12096:12096:int pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
-    12096:12096:void load(java.lang.Class,java.lang.String):221 -> a
-    12096:12096:void loadTests():130 -> a
-    12107:12115:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setExecVarsForInstance(int,java.util.HashMap):107:115 -> a
-    12107:12115:void load(java.lang.Class,java.lang.String):222 -> a
-    12107:12115:void loadTests():130 -> a
-    135:233:void load(java.lang.Class,java.lang.String) -> a
-    12122:12135:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUserTestClass(java.lang.Class):122:135 -> a
-    12122:12135:void load(java.lang.Class,java.lang.String):149 -> a
-    13071:13075:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getPackageName(java.lang.Class):71:75 -> a
-    13071:13075:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUserTestClass(java.lang.Class):127 -> a
-    13071:13075:void load(java.lang.Class,java.lang.String):149 -> a
-    13299:13302:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):299:302 -> a
-    13299:13302:void load(java.lang.Class,java.lang.String):155 -> a
-    14302:14307:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302:307 -> a
-    14302:14307:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):300 -> a
-    14302:14307:void load(java.lang.Class,java.lang.String):155 -> a
+    10096:10096:void load(java.lang.Class,java.lang.String):227 -> a
+    10096:10096:void loadTests():148 -> a
+    10138:10139:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructor(java.lang.reflect.Constructor):138:139 -> a
+    10138:10139:void load(java.lang.Class,java.lang.String):232 -> a
+    10138:10139:void loadTests():148 -> a
+    10146:10147:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructorType(pvt.unitee.testobject.lib.java.TestClassConstructorType):146:147 -> a
+    10146:10147:void load(java.lang.Class,java.lang.String):233 -> a
+    10146:10147:void loadTests():148 -> a
+    11096:11096:int pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
+    11096:11096:void load(java.lang.Class,java.lang.String):239 -> a
+    11096:11096:void loadTests():148 -> a
+    11107:11115:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setExecVarsForInstance(int,java.util.HashMap):107:115 -> a
+    11107:11115:void load(java.lang.Class,java.lang.String):240 -> a
+    11107:11115:void loadTests():148 -> a
+    153:251:void load(java.lang.Class,java.lang.String) -> a
+    11122:11135:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUserTestClass(java.lang.Class):122:135 -> a
+    11122:11135:void load(java.lang.Class,java.lang.String):167 -> a
+    12071:12075:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getPackageName(java.lang.Class):71:75 -> a
+    12071:12075:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setUserTestClass(java.lang.Class):127 -> a
+    12071:12075:void load(java.lang.Class,java.lang.String):167 -> a
+    12317:12320:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):317:320 -> a
+    12317:12320:void load(java.lang.Class,java.lang.String):173 -> a
+    13302:13307:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302:307 -> a
+    13302:13307:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):318 -> a
+    13302:13307:void load(java.lang.Class,java.lang.String):173 -> a
+    14204:14204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
+    14204:14204:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302 -> a
+    14204:14204:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):318 -> a
+    14204:14204:void load(java.lang.Class,java.lang.String):173 -> a
+    14310:14310:boolean pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():310:310 -> a
+    14310:14310:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):306 -> a
+    14310:14310:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):318 -> a
+    14310:14310:void load(java.lang.Class,java.lang.String):173 -> a
     15204:15204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
-    15204:15204:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302 -> a
-    15204:15204:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):300 -> a
-    15204:15204:void load(java.lang.Class,java.lang.String):155 -> a
-    15310:15310:boolean pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():310:310 -> a
-    15310:15310:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):306 -> a
-    15310:15310:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):300 -> a
-    15310:15310:void load(java.lang.Class,java.lang.String):155 -> a
+    15204:15204:void load(java.lang.Class,java.lang.String):177 -> a
+    15228:15229:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setCreatorThreadCount(int):228:229 -> a
+    15228:15229:void load(java.lang.Class,java.lang.String):181 -> a
+    16080:16081:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setDataRefPresent(boolean):80:81 -> a
+    16080:16081:void load(java.lang.Class,java.lang.String):184 -> a
+    16084:16084:boolean pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.isDataRefPresent():84:84 -> a
+    16084:16084:void load(java.lang.Class,java.lang.String):185 -> a
+    16088:16093:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addFileDataRefWithPath(java.lang.String,java.lang.String):88:93 -> a
+    16088:16093:void load(java.lang.Class,java.lang.String):194 -> a
     16204:16204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
-    16204:16204:void load(java.lang.Class,java.lang.String):159 -> a
-    16228:16229:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setCreatorThreadCount(int):228:229 -> a
-    16228:16229:void load(java.lang.Class,java.lang.String):163 -> a
-    17080:17081:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setDataRefPresent(boolean):80:81 -> a
-    17080:17081:void load(java.lang.Class,java.lang.String):166 -> a
-    17084:17084:boolean pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.isDataRefPresent():84:84 -> a
-    17084:17084:void load(java.lang.Class,java.lang.String):167 -> a
-    17088:17093:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.addFileDataRefWithPath(java.lang.String,java.lang.String):88:93 -> a
-    17088:17093:void load(java.lang.Class,java.lang.String):176 -> a
+    16204:16204:void load(java.lang.Class,java.lang.String):210 -> a
     17204:17204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
-    17204:17204:void load(java.lang.Class,java.lang.String):192 -> a
-    18204:18204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
-    18204:18204:void load(java.lang.Class,java.lang.String):199 -> a
-    18232:18233:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setInstanceThreadCount(int):232:233 -> a
-    18232:18233:void load(java.lang.Class,java.lang.String):207 -> a
+    17204:17204:void load(java.lang.Class,java.lang.String):217 -> a
+    17232:17233:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setInstanceThreadCount(int):232:233 -> a
+    17232:17233:void load(java.lang.Class,java.lang.String):225 -> a
+    18096:18096:int pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
+    18096:18096:void load(java.lang.Class,java.lang.String):227 -> a
+    18138:18139:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructor(java.lang.reflect.Constructor):138:139 -> a
+    18138:18139:void load(java.lang.Class,java.lang.String):232 -> a
+    18146:18147:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructorType(pvt.unitee.testobject.lib.java.TestClassConstructorType):146:147 -> a
+    18146:18147:void load(java.lang.Class,java.lang.String):233 -> a
     19096:19096:int pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
-    19096:19096:void load(java.lang.Class,java.lang.String):209 -> a
-    19305:19317:java.lang.reflect.Constructor getConstructor$58d3673(java.lang.Class,pvt.unitee.testobject.lib.loader.ConstructorDef):305:317 -> a
-    19305:19317:void load(java.lang.Class,java.lang.String):212 -> a
-    20138:20139:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructor(java.lang.reflect.Constructor):138:139 -> a
-    20138:20139:void load(java.lang.Class,java.lang.String):214 -> a
-    20146:20147:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setConstructorType(pvt.unitee.testobject.lib.java.TestClassConstructorType):146:147 -> a
-    20146:20147:void load(java.lang.Class,java.lang.String):215 -> a
-    21096:21096:int pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getInstanceCount():96:96 -> a
-    21096:21096:void load(java.lang.Class,java.lang.String):221 -> a
-    21107:21115:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setExecVarsForInstance(int,java.util.HashMap):107:115 -> a
-    21107:21115:void load(java.lang.Class,java.lang.String):222 -> a
-    236:244:java.lang.String getQualifiedName(pvt.batteries.discoverer.DiscoveredFile) -> c
-    253:295:java.lang.Class loadClass(pvt.batteries.discoverer.DiscoveredFile,java.lang.String) -> a
-    22072:22091:java.lang.ClassLoader getClassLoader(pvt.batteries.discoverer.DiscoveredFile):72:91 -> a
-    22072:22091:java.lang.Class loadClass(pvt.batteries.discoverer.DiscoveredFile,java.lang.String):256 -> a
-    299:302:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
-    22302:22307:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302:307 -> a
-    22302:22307:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):300 -> a
-    23204:23204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
-    23204:23204:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302 -> a
-    23204:23204:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):300 -> a
-    23310:23310:boolean pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():310:310 -> a
-    23310:23310:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):306 -> a
-    23310:23310:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):300 -> a
-    305:317:java.lang.reflect.Constructor getConstructor$58d3673(java.lang.Class,pvt.unitee.testobject.lib.loader.ConstructorDef) -> a
-    323:324:void validateDependencies() -> b
-    43:44:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader -> com.autocognite.pvt.oo:
+    19096:19096:void load(java.lang.Class,java.lang.String):239 -> a
+    19107:19115:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setExecVarsForInstance(int,java.util.HashMap):107:115 -> a
+    19107:19115:void load(java.lang.Class,java.lang.String):240 -> a
+    254:262:java.lang.String getQualifiedName(pvt.batteries.discoverer.DiscoveredFile) -> c
+    271:313:java.lang.Class loadClass(pvt.batteries.discoverer.DiscoveredFile,java.lang.String) -> a
+    20090:20109:java.lang.ClassLoader getClassLoader(pvt.batteries.discoverer.DiscoveredFile):90:109 -> a
+    20090:20109:java.lang.Class loadClass(pvt.batteries.discoverer.DiscoveredFile,java.lang.String):274 -> a
+    317:320:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition) -> a
+    20302:20307:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302:307 -> a
+    20302:20307:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):318 -> a
+    21204:21204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
+    21204:21204:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):302 -> a
+    21204:21204:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):318 -> a
+    21310:21310:boolean pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.shouldBeSkipped():310:310 -> a
+    21310:21310:void pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.setSkipped(pvt.unitee.enums.SkipCode):306 -> a
+    21310:21310:void processSkip$66bf00c7(java.lang.Class,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition):318 -> a
+    323:365:java.lang.reflect.Constructor getConstructor$58d3673(java.lang.Class,pvt.unitee.testobject.lib.loader.ConstructorDef) -> a
+    371:372:void validateDependencies() -> b
+    47:48:void <clinit>() -> <clinit>
+pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader -> com.autocognite.pvt.op:
     org.apache.log4j.Logger logger -> p
     pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition classDef -> a
     pvt.unitee.testobject.lib.fixture.Fixture setUpClassFixture -> b
@@ -9755,7 +9754,7 @@ pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader -> com.autocognite.
     17118:17118:java.lang.Class pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
     17118:17118:void validate():245 -> a
     17118:17118:pvt.unitee.testobject.lib.fixture.TestFixtures build():299 -> a
-pvt.unitee.testobject.lib.loader.JavaTestLoadingUtils -> com.autocognite.pvt.op:
+pvt.unitee.testobject.lib.loader.JavaTestLoadingUtils -> com.autocognite.pvt.oq:
     java.lang.String[] checkArray -> a
     17:17:void <init>() -> <init>
     21:41:java.lang.String getDataRefPath(unitee.annotations.FileDataReference) -> a
@@ -9774,7 +9773,7 @@ pvt.unitee.testobject.lib.loader.JavaTestLoadingUtils -> com.autocognite.pvt.op:
     124:135:boolean hasUserSuppliedProperties(java.lang.String,unitee.annotations.Instances) -> a
     140:170:java.util.HashMap loadExecVarsFromInstancesAnnotation(unitee.annotations.Instances,int,boolean) -> a
     18:18:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.JavaTestMethodsDefinitionLoader -> com.autocognite.pvt.oq:
+pvt.unitee.testobject.lib.loader.JavaTestMethodsDefinitionLoader -> com.autocognite.pvt.or:
     org.apache.log4j.Logger logger -> a
     pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition testClassDef -> b
     pvt.unitee.testobject.lib.loader.TestDefinitionsLoader javaTestClassLoader -> c
@@ -9963,7 +9962,7 @@ pvt.unitee.testobject.lib.loader.JavaTestMethodsDefinitionLoader -> com.autocogn
     268:342:void populateExpectedSignature(java.lang.reflect.Method,pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition,java.lang.String,boolean) -> a
     35151:35152:void pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.setMethodSignatureType(pvt.unitee.testobject.lib.loader.MethodSignatureType):151:152 -> a
     35151:35152:void populateExpectedSignature(java.lang.reflect.Method,pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition,java.lang.String,boolean):337 -> a
-pvt.unitee.testobject.lib.loader.MethodSignatureType -> com.autocognite.pvt.or:
+pvt.unitee.testobject.lib.loader.MethodSignatureType -> com.autocognite.pvt.os:
     pvt.unitee.testobject.lib.loader.MethodSignatureType SINGLEARG_TESTVARS -> a
     pvt.unitee.testobject.lib.loader.MethodSignatureType NO_ARG -> b
     pvt.unitee.testobject.lib.loader.MethodSignatureType[] $VALUES -> c
@@ -9971,7 +9970,7 @@ pvt.unitee.testobject.lib.loader.MethodSignatureType -> com.autocognite.pvt.or:
     3:3:pvt.unitee.testobject.lib.loader.MethodSignatureType valueOf(java.lang.String) -> a
     3:3:void <init>(java.lang.String,int) -> <init>
     3:5:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler -> com.autocognite.pvt.os:
+pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler -> com.autocognite.pvt.ot:
     org.apache.log4j.Logger logger -> a
     java.lang.Class klass -> b
     33:37:void <init>(java.lang.Class) -> <init>
@@ -9980,14 +9979,14 @@ pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler -> com.autocognite.pv
     105:105:java.lang.reflect.Method[] getMethods() -> b
     110:110:java.lang.String getContainerName() -> c
     32:32:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.TestCreatorLoader -> com.autocognite.pvt.ot:
+pvt.unitee.testobject.lib.loader.TestCreatorLoader -> com.autocognite.pvt.ou:
     void loadDefinitions() -> a
-pvt.unitee.testobject.lib.loader.TestDefinitionsLoader -> com.autocognite.pvt.ou:
+pvt.unitee.testobject.lib.loader.TestDefinitionsLoader -> com.autocognite.pvt.ov:
     void setTestDir(java.lang.String) -> a
     void validateDependencies() -> b
     void processIfNonTestFileElseStore(pvt.batteries.discoverer.DiscoveredFile) -> a
     void loadTests() -> a
-pvt.unitee.testobject.lib.loader.TestDefinitionsProcessor -> com.autocognite.pvt.ov:
+pvt.unitee.testobject.lib.loader.TestDefinitionsProcessor -> com.autocognite.pvt.ow:
     org.apache.log4j.Logger logger -> a
     java.util.ArrayList classes -> c
     java.util.HashMap testDefinitionLoaders -> b
@@ -10001,7 +10000,7 @@ pvt.unitee.testobject.lib.loader.TestDefinitionsProcessor -> com.autocognite.pvt
     1051:1051:void populateClassQueue(pvt.batteries.discoverer.FileAggregator):91 -> a
     1062:1066:pvt.unitee.enums.TestLanguage extToLanguage(java.lang.String):62:66 -> a
     1062:1066:void populateClassQueue(pvt.batteries.discoverer.FileAggregator):99 -> a
-pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor -> com.autocognite.pvt.ow:
+pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor -> com.autocognite.pvt.ox:
     13:13:void <init>() -> <init>
     16:27:void populateTestProps(pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition,pvt.unitee.core.lib.testvars.InternalTestVariables) -> a
     1118:1118:java.lang.Class pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getUserTestClass():118:118 -> a
@@ -10026,7 +10025,7 @@ pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor -> com.autocog
     67:72:void setAnnotatedProperties(pvt.unitee.core.lib.testvars.InternalTestVariables,unitee.annotations.TestClass) -> a
     75:80:void setAnnotatedProperties(pvt.unitee.core.lib.testvars.InternalTestVariables,unitee.annotations.TestMethod) -> a
     83:89:void setTestAttr(pvt.unitee.core.lib.testvars.InternalTestVariables,java.lang.String[]) -> a
-pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig -> com.autocognite.pvt.ox:
+pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig -> com.autocognite.pvt.oy:
     pvt.unitee.testobject.lib.loader.group.Group group -> a
     com.google.gson.JsonElement elem -> k
     pvt.unitee.enums.PickerTargetType type -> b
@@ -10099,10 +10098,10 @@ pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig -> com.autocognite.p
     224:239:void displayError(com.google.gson.JsonElement) -> a
     242:242:java.lang.String getPackageName() -> j
     246:246:java.lang.String getClassName() -> k
-pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig$1 -> com.autocognite.pvt.oy:
+pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig$1 -> com.autocognite.pvt.oz:
     int[] $SwitchMap$pvt$unitee$enums$PickerTargetType -> a
     51:51:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.group.BaseGroup -> com.autocognite.pvt.oz:
+pvt.unitee.testobject.lib.loader.group.BaseGroup -> com.autocognite.pvt.pa:
     org.apache.log4j.Logger logger -> e
     java.lang.String sessionName -> f
     java.lang.String name -> g
@@ -10137,7 +10136,7 @@ pvt.unitee.testobject.lib.loader.group.BaseGroup -> com.autocognite.pvt.oz:
     116:116:pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> k
     121:122:void addClassMethodMap(java.lang.String,java.util.List) -> a
     126:126:java.util.List getScheduledCreatorsForContainer(java.lang.String) -> b
-pvt.unitee.testobject.lib.loader.group.BasePicker -> com.autocognite.pvt.pa:
+pvt.unitee.testobject.lib.loader.group.BasePicker -> com.autocognite.pvt.pb:
     org.apache.log4j.Logger logger -> b
     java.util.List considerPatterns -> c
     java.util.List ignorePatterns -> d
@@ -10216,7 +10215,7 @@ pvt.unitee.testobject.lib.loader.group.BasePicker -> com.autocognite.pvt.pa:
     boolean shouldIncludeMethod(java.lang.String) -> d
     393:394:void setPickerConfig(pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> a
     397:397:pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig getPickerConfig() -> f
-pvt.unitee.testobject.lib.loader.group.ClassPicker -> com.autocognite.pvt.pb:
+pvt.unitee.testobject.lib.loader.group.ClassPicker -> com.autocognite.pvt.pc:
     java.lang.String pkg -> b
     java.lang.String lPkg -> c
     434:442:void <init>(pvt.unitee.testobject.lib.loader.group.Group,pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
@@ -10232,11 +10231,11 @@ pvt.unitee.testobject.lib.loader.group.ClassPicker -> com.autocognite.pvt.pb:
     457:459:void setPackageName(java.lang.String) -> e
     462:462:java.lang.String getPackageName() -> c
     466:466:pvt.unitee.enums.PickerTargetType getTargetType() -> b
-pvt.unitee.testobject.lib.loader.group.DefaultTestGroup -> com.autocognite.pvt.pc:
+pvt.unitee.testobject.lib.loader.group.DefaultTestGroup -> com.autocognite.pvt.pd:
     150:153:void <init>(java.lang.String) -> <init>
     1041:1042:void pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(pvt.unitee.testobject.lib.loader.group.TestLoader):41:42 -> <init>
     1041:1042:void <init>(java.lang.String):152 -> <init>
-pvt.unitee.testobject.lib.loader.group.Group -> com.autocognite.pvt.pd:
+pvt.unitee.testobject.lib.loader.group.Group -> com.autocognite.pvt.pe:
     java.lang.String getName() -> b
     pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> c
     int getTestMethodCount() -> d
@@ -10253,7 +10252,7 @@ pvt.unitee.testobject.lib.loader.group.Group -> com.autocognite.pvt.pd:
     void setSessionSubNode(pvt.unitee.testobject.lib.loader.session.SessionSubNode) -> a
     void addClassMethodMap(java.lang.String,java.util.List) -> a
     java.util.List getScheduledCreatorsForContainer(java.lang.String) -> b
-pvt.unitee.testobject.lib.loader.group.JavaTestClassLoader -> com.autocognite.pvt.pe:
+pvt.unitee.testobject.lib.loader.group.JavaTestClassLoader -> com.autocognite.pvt.pf:
     org.apache.log4j.Logger logger -> a
     pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator execSlotsCreator -> b
     int testMethodCount -> c
@@ -10262,15 +10261,15 @@ pvt.unitee.testobject.lib.loader.group.JavaTestClassLoader -> com.autocognite.pv
     27:83:void load() -> a
     87:87:pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> b
     92:92:int getTestMethodCount() -> c
-pvt.unitee.testobject.lib.loader.group.MBGroup -> com.autocognite.pvt.pf:
+pvt.unitee.testobject.lib.loader.group.MBGroup -> com.autocognite.pvt.pg:
     159:162:void <init>() -> <init>
     1041:1042:void pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(pvt.unitee.testobject.lib.loader.group.TestLoader):41:42 -> <init>
     1041:1042:void <init>():161 -> <init>
-pvt.unitee.testobject.lib.loader.group.MLGroup -> com.autocognite.pvt.pg:
+pvt.unitee.testobject.lib.loader.group.MLGroup -> com.autocognite.pvt.ph:
     168:171:void <init>() -> <init>
     1041:1042:void pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(pvt.unitee.testobject.lib.loader.group.TestLoader):41:42 -> <init>
     1041:1042:void <init>():170 -> <init>
-pvt.unitee.testobject.lib.loader.group.MethodPicker -> com.autocognite.pvt.ph:
+pvt.unitee.testobject.lib.loader.group.MethodPicker -> com.autocognite.pvt.pi:
     java.lang.String pkg -> b
     java.lang.String lPkg -> c
     java.lang.String klass -> d
@@ -10294,7 +10293,7 @@ pvt.unitee.testobject.lib.loader.group.MethodPicker -> com.autocognite.pvt.ph:
     507:509:void setClassName(java.lang.String) -> f
     512:512:java.lang.String getClassName() -> d
     516:516:pvt.unitee.enums.PickerTargetType getTargetType() -> b
-pvt.unitee.testobject.lib.loader.group.PackagePicker -> com.autocognite.pvt.pi:
+pvt.unitee.testobject.lib.loader.group.PackagePicker -> com.autocognite.pvt.pj:
     org.apache.log4j.Logger logger -> b
     402:408:void <init>(pvt.unitee.testobject.lib.loader.group.Group,pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig) -> <init>
     1393:1394:void pvt.unitee.testobject.lib.loader.group.BasePicker.setPickerConfig(pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig):393:394 -> <init>
@@ -10306,19 +10305,19 @@ pvt.unitee.testobject.lib.loader.group.PackagePicker -> com.autocognite.pvt.pi:
     421:421:boolean shouldIncludeContainer(java.lang.String) -> c
     425:425:boolean shouldIncludeMethod(java.lang.String) -> d
     429:429:pvt.unitee.enums.PickerTargetType getTargetType() -> b
-pvt.unitee.testobject.lib.loader.group.Picker -> com.autocognite.pvt.pj:
+pvt.unitee.testobject.lib.loader.group.Picker -> com.autocognite.pvt.pk:
     int load(pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator,java.util.List) -> a
     void setConsiderPatterns(java.util.List) -> a
     void setIgnorePatterns(java.util.List) -> b
     void setGroup(pvt.unitee.testobject.lib.loader.group.Group) -> a
     pvt.unitee.enums.PickerTargetType getTargetType() -> b
-pvt.unitee.testobject.lib.loader.group.PickerConfig -> com.autocognite.pvt.pk:
+pvt.unitee.testobject.lib.loader.group.PickerConfig -> com.autocognite.pvt.pl:
     pvt.unitee.enums.PickerTargetType getTargetType() -> g
     pvt.unitee.testobject.lib.loader.group.Picker createPicker() -> h
     void setGroup(pvt.unitee.testobject.lib.loader.group.Group) -> a
     void process() -> l
     pvt.unitee.testobject.lib.loader.group.Group getGroup() -> i
-pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI -> com.autocognite.pvt.pl:
+pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI -> com.autocognite.pvt.pm:
     org.apache.log4j.Logger logger -> k
     java.util.Map options -> l
     15:21:void <init>(java.util.Map) -> <init>
@@ -10429,10 +10428,10 @@ pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI -> com.autocognite.pvt
     20170:20171:void configure(pvt.unitee.enums.TestPickerProperty,java.lang.String):77 -> a
     21166:21167:void pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig.configurePackageName(java.lang.String):166:167 -> a
     21166:21167:void configure(pvt.unitee.enums.TestPickerProperty,java.lang.String):80 -> a
-pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI$1 -> com.autocognite.pvt.pm:
+pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI$1 -> com.autocognite.pvt.pn:
     int[] $SwitchMap$pvt$unitee$enums$TestPickerProperty -> a
     57:57:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.group.PickerConfigForJson -> com.autocognite.pvt.pn:
+pvt.unitee.testobject.lib.loader.group.PickerConfigForJson -> com.autocognite.pvt.po:
     org.apache.log4j.Logger logger -> k
     com.google.gson.JsonElement pickerJson -> l
     22:29:void <init>(pvt.unitee.testobject.lib.loader.group.Group,com.google.gson.JsonElement) -> <init>
@@ -10605,14 +10604,14 @@ pvt.unitee.testobject.lib.loader.group.PickerConfigForJson -> com.autocognite.pv
     30215:30215:void configure(com.google.gson.JsonObject):217 -> a
     31166:31167:void pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig.configurePackageName(java.lang.String):166:167 -> a
     31166:31167:void configure(com.google.gson.JsonObject):222 -> a
-pvt.unitee.testobject.lib.loader.group.PickerConfigForJson$1 -> com.autocognite.pvt.po:
+pvt.unitee.testobject.lib.loader.group.PickerConfigForJson$1 -> com.autocognite.pvt.pp:
     int[] $SwitchMap$pvt$unitee$enums$PickerTargetType -> a
     int[] $SwitchMap$pvt$unitee$enums$JsonTestPickerProperty -> b
     163:182:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.group.PickerMisConfiguration -> com.autocognite.pvt.pp:
+pvt.unitee.testobject.lib.loader.group.PickerMisConfiguration -> com.autocognite.pvt.pq:
     long serialVersionUID -> a
     11:12:void <init>() -> <init>
-pvt.unitee.testobject.lib.loader.group.SkippedJavaTestClassLoader -> com.autocognite.pvt.pq:
+pvt.unitee.testobject.lib.loader.group.SkippedJavaTestClassLoader -> com.autocognite.pvt.pr:
     org.apache.log4j.Logger logger -> a
     pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator execSlotsCreator -> b
     int testMethodCount -> c
@@ -10629,7 +10628,7 @@ pvt.unitee.testobject.lib.loader.group.SkippedJavaTestClassLoader -> com.autocog
     4117:4117:void load():210 -> a
     222:222:pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> b
     227:227:int getTestMethodCount() -> c
-pvt.unitee.testobject.lib.loader.group.TestGroupsDB -> com.autocognite.pvt.pr:
+pvt.unitee.testobject.lib.loader.group.TestGroupsDB -> com.autocognite.pvt.ps:
     org.apache.log4j.Logger logger -> a
     java.util.Map defaultGroups -> b
     java.util.Map customGroupFileNames -> d
@@ -10643,14 +10642,14 @@ pvt.unitee.testobject.lib.loader.group.TestGroupsDB -> com.autocognite.pvt.pr:
     89:122:pvt.unitee.testobject.lib.loader.group.Group getGroup(pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String) -> a
     126:139:void createUserDefinedGroups() -> b
     142:142:pvt.unitee.enums.PickerTargetType getTargetForMagicGroup() -> c
-pvt.unitee.testobject.lib.loader.group.TestGroupsDB$1 -> com.autocognite.pvt.ps:
+pvt.unitee.testobject.lib.loader.group.TestGroupsDB$1 -> com.autocognite.pvt.pt:
     int[] $SwitchMap$pvt$unitee$enums$PickerTargetType -> a
     53:53:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.group.TestLoader -> com.autocognite.pvt.pt:
+pvt.unitee.testobject.lib.loader.group.TestLoader -> com.autocognite.pvt.pu:
     void load() -> a
     pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> b
     int getTestMethodCount() -> c
-pvt.unitee.testobject.lib.loader.group.UnselectedJavaTestClassLoader -> com.autocognite.pvt.pu:
+pvt.unitee.testobject.lib.loader.group.UnselectedJavaTestClassLoader -> com.autocognite.pvt.pv:
     org.apache.log4j.Logger logger -> a
     pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator execSlotsCreator -> b
     int testMethodCount -> c
@@ -10670,7 +10669,7 @@ pvt.unitee.testobject.lib.loader.group.UnselectedJavaTestClassLoader -> com.auto
     4117:4117:void load():284 -> a
     295:295:pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> b
     300:300:int getTestMethodCount() -> c
-pvt.unitee.testobject.lib.loader.group.UserDefinedGroup -> com.autocognite.pvt.pv:
+pvt.unitee.testobject.lib.loader.group.UserDefinedGroup -> com.autocognite.pvt.pw:
     java.lang.String groupFilePath -> e
     19:42:void <init>(pvt.unitee.testobject.lib.loader.session.SessionSubNode,java.lang.String,java.lang.String) -> <init>
     1041:1042:void pvt.unitee.testobject.lib.loader.group.BaseGroup.setLoader(pvt.unitee.testobject.lib.loader.group.TestLoader):41:42 -> <init>
@@ -10687,7 +10686,7 @@ pvt.unitee.testobject.lib.loader.group.UserDefinedGroup -> com.autocognite.pvt.p
     2084:2085:void pvt.unitee.testobject.lib.loader.group.BaseGroup.setPickers(java.util.List):84:85 -> a
     2084:2085:void processJson(com.google.gson.JsonObject):138 -> a
     144:144:java.lang.String getDefinitionFile() -> g
-pvt.unitee.testobject.lib.loader.session.BaseSession -> com.autocognite.pvt.pw:
+pvt.unitee.testobject.lib.loader.session.BaseSession -> com.autocognite.pvt.px:
     org.apache.log4j.Logger logger -> a
     java.util.List nodesQueue -> b
     java.util.Iterator iter -> c
@@ -10709,7 +10708,7 @@ pvt.unitee.testobject.lib.loader.session.BaseSession -> com.autocognite.pvt.pw:
     65:66:void setExecVars(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
     70:70:pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> e
     14:14:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.session.BaseSessionNode -> com.autocognite.pvt.px:
+pvt.unitee.testobject.lib.loader.session.BaseSessionNode -> com.autocognite.pvt.py:
     java.util.List groupNodes -> b
     int testMethodCount -> c
     int groupThreads -> d
@@ -10760,7 +10759,7 @@ pvt.unitee.testobject.lib.loader.session.BaseSessionNode -> com.autocognite.pvt.
     245:245:int getId() -> f
     250:250:pvt.unitee.testobject.lib.loader.session.Session getSession() -> g
     255:255:pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> h
-pvt.unitee.testobject.lib.loader.session.BaseSessionSubNode -> com.autocognite.pvt.py:
+pvt.unitee.testobject.lib.loader.session.BaseSessionSubNode -> com.autocognite.pvt.pz:
     java.util.List groupsQueue -> a
     int testMethodCount -> b
     int groupThreads -> c
@@ -10794,7 +10793,7 @@ pvt.unitee.testobject.lib.loader.session.BaseSessionSubNode -> com.autocognite.p
     124:124:pvt.unitee.testobject.lib.loader.session.Session getSession() -> g
     129:129:pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> h
     133:133:pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> i
-pvt.unitee.testobject.lib.loader.session.MSession -> com.autocognite.pvt.pz:
+pvt.unitee.testobject.lib.loader.session.MSession -> com.autocognite.pvt.qa:
     java.lang.String groupName -> a
     8:13:void <init>(java.lang.String) -> <init>
     16:17:void <init>() -> <init>
@@ -10807,10 +10806,10 @@ pvt.unitee.testobject.lib.loader.session.MSession -> com.autocognite.pvt.pz:
     51:51:java.lang.String getSessionFilePath() -> g
     56:56:com.google.gson.JsonObject getExecVarObject() -> h
     61:61:com.google.gson.JsonObject getUserOptionsObject() -> i
-pvt.unitee.testobject.lib.loader.session.MSession$1 -> com.autocognite.pvt.qa:
+pvt.unitee.testobject.lib.loader.session.MSession$1 -> com.autocognite.pvt.qb:
     int[] $SwitchMap$pvt$unitee$enums$PickerTargetType -> a
     31:31:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.session.Session -> com.autocognite.pvt.qb:
+pvt.unitee.testobject.lib.loader.session.Session -> com.autocognite.pvt.qc:
     int getTestMethodCount() -> b
     pvt.unitee.testobject.lib.loader.session.SessionNode next() -> c
     void load() -> a
@@ -10821,7 +10820,7 @@ pvt.unitee.testobject.lib.loader.session.Session -> com.autocognite.pvt.qb:
     pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> e
     void setExecVars(pvt.batteries.value.DefaultStringKeyValueContainer) -> a
     com.google.gson.JsonObject getUserOptionsObject() -> i
-pvt.unitee.testobject.lib.loader.session.SessionNode -> com.autocognite.pvt.qc:
+pvt.unitee.testobject.lib.loader.session.SessionNode -> com.autocognite.pvt.qd:
     int getTestMethodCount() -> b
     void load() -> a
     java.lang.String getName() -> c
@@ -10831,7 +10830,7 @@ pvt.unitee.testobject.lib.loader.session.SessionNode -> com.autocognite.pvt.qc:
     pvt.unitee.testobject.lib.loader.session.Session getSession() -> g
     void setName(java.lang.String) -> a
     pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> h
-pvt.unitee.testobject.lib.loader.session.SessionSubNode -> com.autocognite.pvt.qd:
+pvt.unitee.testobject.lib.loader.session.SessionSubNode -> com.autocognite.pvt.qe:
     int getTestMethodCount() -> c
     void load() -> a
     pvt.unitee.testobject.lib.loader.group.Group getGroup() -> b
@@ -10841,7 +10840,7 @@ pvt.unitee.testobject.lib.loader.session.SessionSubNode -> com.autocognite.pvt.q
     pvt.unitee.testobject.lib.loader.session.Session getSession() -> g
     pvt.unitee.testobject.lib.loader.session.SessionNode getSessionNode() -> h
     pvt.batteries.value.DefaultStringKeyValueContainer getExecVars() -> i
-pvt.unitee.testobject.lib.loader.session.UserDefinedSession -> com.autocognite.pvt.qe:
+pvt.unitee.testobject.lib.loader.session.UserDefinedSession -> com.autocognite.pvt.qf:
     org.apache.log4j.Logger logger -> a
     java.lang.String sessionFilePath -> b
     com.google.gson.JsonObject arjunaOptionsObj -> c
@@ -10866,7 +10865,7 @@ pvt.unitee.testobject.lib.loader.session.UserDefinedSession -> com.autocognite.p
     134:134:java.lang.String getSessionFilePath() -> g
     139:139:com.google.gson.JsonObject getExecVarObject() -> h
     144:144:com.google.gson.JsonObject getUserOptionsObject() -> i
-pvt.unitee.testobject.lib.loader.tree.AbstractTestMethodNode -> com.autocognite.pvt.qf:
+pvt.unitee.testobject.lib.loader.tree.AbstractTestMethodNode -> com.autocognite.pvt.qg:
     pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition methodDef -> a
     java.lang.String name -> b
     java.util.List edges -> c
@@ -10887,7 +10886,7 @@ pvt.unitee.testobject.lib.loader.tree.AbstractTestMethodNode -> com.autocognite.
     45:45:java.lang.String getName() -> d
     49:50:void setName(java.lang.String) -> a
     53:60:void enumerateEdges() -> e
-pvt.unitee.testobject.lib.loader.tree.DependencyTree -> com.autocognite.pvt.qg:
+pvt.unitee.testobject.lib.loader.tree.DependencyTree -> com.autocognite.pvt.qh:
     java.util.List allNodesQueue -> a
     java.util.Set methodDependencies -> b
     java.util.Map allNodesMap -> c
@@ -10899,7 +10898,7 @@ pvt.unitee.testobject.lib.loader.tree.DependencyTree -> com.autocognite.pvt.qg:
     38:39:void removeMethodDependency(java.lang.String) -> b
     42:43:void removeFromQueue(java.util.ArrayList) -> a
     46:46:pvt.unitee.testobject.lib.loader.tree.TestMethodNode getNode(java.lang.String) -> c
-pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder -> com.autocognite.pvt.qh:
+pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder -> com.autocognite.pvt.qi:
     org.apache.log4j.Logger logger -> d
     pvt.unitee.testobject.lib.loader.tree.TestNode baseNode -> a
     java.util.Set allFilteredMethods -> b
@@ -10959,7 +10958,7 @@ pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder -> com.autocognite.p
     13037:13037:pvt.unitee.testobject.lib.loader.tree.DependencyTree getDepenencyTree(java.util.List):230 -> a
     14033:14033:java.util.List pvt.unitee.testobject.lib.loader.tree.AbstractTestMethodNode.getEdges():33:33 -> a
     14033:14033:pvt.unitee.testobject.lib.loader.tree.DependencyTree getDepenencyTree(java.util.List):247 -> a
-pvt.unitee.testobject.lib.loader.tree.DependencyUtils -> com.autocognite.pvt.qi:
+pvt.unitee.testobject.lib.loader.tree.DependencyUtils -> com.autocognite.pvt.qj:
     org.apache.log4j.Logger logger -> a
     15:15:void <init>() -> <init>
     19:35:java.lang.Class[] getDependencyClasses(java.lang.String,unitee.annotations.ClassDependency) -> a
@@ -10969,7 +10968,7 @@ pvt.unitee.testobject.lib.loader.tree.DependencyUtils -> com.autocognite.pvt.qi:
     1204:1204:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():204:204 -> a
     1204:1204:void validateDependencyMethodNames(java.lang.String,pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition,java.util.List):87 -> a
     16:16:void <clinit>() -> <clinit>
-pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator -> com.autocognite.pvt.qj:
+pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator -> com.autocognite.pvt.qk:
     org.apache.log4j.Logger logger -> a
     java.util.HashMap execMap -> b
     java.util.Map createdContainerObjects -> c
@@ -11030,18 +11029,18 @@ pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator -> com.autocognite.p
     11105:11105:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> a
     11105:11105:java.util.List getContainerList(int,java.util.ArrayList):206 -> a
     244:251:pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> b
-pvt.unitee.testobject.lib.loader.tree.NonTestNode -> com.autocognite.pvt.qk:
+pvt.unitee.testobject.lib.loader.tree.NonTestNode -> com.autocognite.pvt.ql:
     6:7:void <init>(java.lang.String) -> <init>
     10:10:boolean isDummy() -> a
-pvt.unitee.testobject.lib.loader.tree.TestMethodNode -> com.autocognite.pvt.ql:
+pvt.unitee.testobject.lib.loader.tree.TestMethodNode -> com.autocognite.pvt.qm:
     8:9:void <init>(java.lang.String,pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition) -> <init>
-pvt.unitee.testobject.lib.loader.tree.TestNode -> com.autocognite.pvt.qm:
+pvt.unitee.testobject.lib.loader.tree.TestNode -> com.autocognite.pvt.qn:
     boolean isDummy() -> a
     void addEdge(pvt.unitee.testobject.lib.loader.tree.TestNode) -> a
     java.util.List getEdges() -> b
     pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition getCreatorDefinition() -> c
     java.lang.String getName() -> d
-pvt.unitee.validator.lib.check.DefaultCheck -> com.autocognite.pvt.qn:
+pvt.unitee.validator.lib.check.DefaultCheck -> com.autocognite.pvt.qo:
     java.lang.String methodName -> a
     java.lang.String className -> b
     java.lang.String purpose -> c
@@ -11080,10 +11079,10 @@ pvt.unitee.validator.lib.check.DefaultCheck -> com.autocognite.pvt.qn:
     2169:2169:boolean erred():169:169 -> m
     2169:2169:void evaluate():211 -> m
     221:226:void setExceptionMessage(java.lang.String) -> g
-pvt.unitee.validator.lib.exceptions.Pass -> com.autocognite.pvt.qo:
+pvt.unitee.validator.lib.exceptions.Pass -> com.autocognite.pvt.qp:
     long serialVersionUID -> a
     27:28:void <init>(pvt.unitee.interfaces.Check) -> <init>
-pvt.unitee.validator.lib.exceptions.StepResultEvent -> com.autocognite.pvt.qp:
+pvt.unitee.validator.lib.exceptions.StepResultEvent -> com.autocognite.pvt.qq:
     long serialVersionUID -> a
     pvt.unitee.interfaces.Check check -> b
     29:38:void <init>(pvt.unitee.interfaces.Check) -> <init>

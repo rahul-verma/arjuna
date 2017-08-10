@@ -33,21 +33,44 @@ public class PickerConfigForCLI extends AbstractPickerConfig{
 		if (this.isPackageConsiderOrIgnoreOptionProvided()){
 			this.setTargetType(PickerTargetType.PACKAGES);
 		} else if (this.isClassConsiderOrIgnoreOptionProvided()){
+			if (this.getPackageName() == null){
+				throw new PickerMisConfiguration();
+			}
+			
+			if (!this.getPackageName().matches("[\\.a-zA-Z0-9]+")){
+				throw new PickerMisConfiguration();
+			}
 			this.setTargetType(PickerTargetType.CLASSES);
 		} else if (this.isMethodConsiderOrIgnoreOptionProvided()){
+			if (this.getPackageName() == null){
+				throw new PickerMisConfiguration();
+			}
+			
+			if (!this.getPackageName().matches("[\\.a-zA-Z0-9]+")){
+				throw new PickerMisConfiguration();
+			}
+			
+			if (this.getClassName() == null){
+				throw new PickerMisConfiguration();
+			}
+			
+			if (!this.getClassName().matches("[\\.a-zA-Z0-9]+")){
+				throw new PickerMisConfiguration();
+			}
+			
 			this.setTargetType(PickerTargetType.METHODS);
 		} else if ((this.getPackageName() != null) && (this.getClassName() != null)){
 			this.setTargetType(PickerTargetType.CLASSES);
-			if ((!this.getPackageName().matches("[\\.a-zA-Z0-9]+")) || (!this.getClassName().matches("[\\.a-zA-Z0-9]+"))){
+			if ((!this.getPackageName().matches("[\\.a-zA-Z0-9]+")) || (!this.getClassName().matches("[\\a-zA-Z0-9]+"))){
 				throw new PickerMisConfiguration();
 			}
-			this.configureClassConsiderPatterns(Arrays.asList("ARJUNANRX::" + this.getClassName()));
+			this.configureClassConsiderPatterns(Arrays.asList("NONRX::" + this.getClassName()));
 		} else if (this.getPackageName() != null) {
 			this.setTargetType(PickerTargetType.PACKAGES);
 			if (!this.getPackageName().matches("[\\.a-zA-Z0-9]+")){
 				throw new PickerMisConfiguration();
 			}
-			this.configurePackageConsiderPatterns(Arrays.asList("ARJUNANRX::" + this.getPackageName()));			
+			this.configurePackageConsiderPatterns(Arrays.asList("NONRX::" + this.getPackageName()));			
 		}
 	}
 	

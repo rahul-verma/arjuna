@@ -64,7 +64,7 @@ import unitee.annotations.DataMethodContainer;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.2.6";
+	private String version = "0.2.6-b";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -358,7 +358,7 @@ public enum ArjunaSingleton {
 	private void displayPickerConfigError() throws Exception{
 		Console.displayError("Your test picker switches are not valid.");
 		Console.displayError("Evaluate your usage in the light of following rules.");
-		Console.displayError("Note: -pn, and -cn switches take single and actual name as argument.");
+		Console.displayError("Note: -pn, and -cn switches take single and actual name as argument. You can not provide regex patterns. Dot (.) is an allowed character but it is treated as a literal dot and not regex dot.");
 		Console.displayError("Note: -i* and -c* switches take multiple comma separated names or regex patterns.");
 		Console.displayError("Package Picker Valid Switch Combinations");
 		Console.displayError("----------------------------------------");
