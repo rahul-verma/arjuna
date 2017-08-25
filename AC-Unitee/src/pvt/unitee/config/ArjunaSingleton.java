@@ -302,6 +302,8 @@ public enum ArjunaSingleton {
 	}
 	
 	public void loadSession() throws Exception{
+		// Make definitions queu ready for pickers. Report Skip and unpicked
+		TestDefinitionsDB.buildPickerQueueFromDiscoveredQueue();
 		String sessionName = integrator.value(ArjunaProperty.SESSION_NAME).asString();
 		
 		SessionCreator sCreator = null;

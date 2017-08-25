@@ -3,6 +3,7 @@ package pvt.unitee.enums;
 public enum NamesContainerType {
 	TEST,
 	TEST_RESULT,
+	IGNORED_TEST,
 	STEP_RESULT,
 	ISSUE,
 	DEFAULT_FIXTURE_METHODS, 

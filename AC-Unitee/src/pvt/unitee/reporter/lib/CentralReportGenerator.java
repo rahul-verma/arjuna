@@ -9,6 +9,7 @@ import pvt.batteries.config.Batteries;
 import pvt.unitee.interfaces.ReportGenerator;
 import pvt.unitee.reporter.lib.generator.ActivityReportGenerator;
 import pvt.unitee.reporter.lib.generator.FixtureReportGenerator;
+import pvt.unitee.reporter.lib.generator.IgnoredTestReportGenerator;
 import pvt.unitee.reporter.lib.generator.IssueReportGenerator;
 import pvt.unitee.reporter.lib.generator.TestReportGenerator;
 
@@ -18,6 +19,7 @@ public class CentralReportGenerator {
 	private String reportDir = null;
 	
 	TestReportGenerator executionGenerator = null;
+	IgnoredTestReportGenerator ignoredGenerator = null;
 	IssueReportGenerator issueGenerator = null;
 	FixtureReportGenerator fixtureGenerator = null;
 	ActivityReportGenerator activityGenerator = null;
@@ -34,6 +36,7 @@ public class CentralReportGenerator {
 			generator.setUp();
 		}
 		executionGenerator = new TestReportGenerator(generators);
+		ignoredGenerator = new IgnoredTestReportGenerator(generators);
 		issueGenerator = new IssueReportGenerator(generators);
 		fixtureGenerator = new FixtureReportGenerator(generators);
 		activityGenerator = new ActivityReportGenerator(generators); 
@@ -48,6 +51,7 @@ public class CentralReportGenerator {
 
 	public void generate(){		
 		executionGenerator.generate();
+		ignoredGenerator.generate();
 		issueGenerator.generate();
 		fixtureGenerator.generate();
 		activityGenerator.generate();

@@ -121,7 +121,7 @@ public class JavaTestMethodDefinition {
 		return name;
 	}
 
-	public TestVariables getTestVariables() {
+	public InternalTestVariables getTestVariables() {
 		return this.testVars;
 	}
 
@@ -217,9 +217,9 @@ public class JavaTestMethodDefinition {
 		return this.skipCode;
 	}
 
-	public void setSkipped(SkipCode skippedMethodAnnotation) {
+	public void setSkipped(SkipCode code) {
 		this.skipIt = true;
-		this.skipCode = SkipCode.SKIPPED_METHOD_ANNOTATION;
+		this.skipCode = code;
 	}
 
 }

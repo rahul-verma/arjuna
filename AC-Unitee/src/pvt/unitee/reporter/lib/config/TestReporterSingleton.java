@@ -30,6 +30,8 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.EventAttribute;
 import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.IgnoredTestAttribute;
+import pvt.unitee.enums.IgnoredTestStatus;
 import pvt.unitee.enums.IssueAttribute;
 import pvt.unitee.enums.ReportMode;
 import pvt.unitee.enums.StepResultAttribute;
@@ -47,22 +49,26 @@ public enum TestReporterSingleton {
 	private Map<TestResultAttribute, String> testResultPropNamesMap = new HashMap<TestResultAttribute, String>();
 	private Map<StepResultAttribute, String> stepResultPropNamesMap = new HashMap<StepResultAttribute, String>();
 	private Map<IssueAttribute, String> issuePropNamesMap = new HashMap<IssueAttribute, String>();
+	private Map<IgnoredTestAttribute, String> ignoredTestNamesMap = new HashMap<IgnoredTestAttribute, String>();
 	private Map<FixtureResultPropertyType, String> fixtureResultPropNamesMap = new HashMap<FixtureResultPropertyType, String>();
 	private Map<EventAttribute, String> activityPropNamesMap = new HashMap<EventAttribute, String>();
 	
 	private List<TestObjectAttribute> execTestObjectPropsForTestReport = null;
 	private List<TestObjectAttribute> execTestObjectPropsForStepReport = null;
 	private List<TestObjectAttribute> execTestObjectPropsForIssueReport = null;
+	private List<TestObjectAttribute> execTestObjectPropsForIgnoredTestReport = null;
 	private List<TestObjectAttribute> execTestObjectPropsForFixtureReport = null;
 	private List<TestAttribute> execTestProps = null;
 	private List<TestResultAttribute> execTestResultProps = null;
 	private List<StepResultAttribute> execStepResultProps = null;
 	private List<FixtureResultPropertyType> execFixtureResultProps = null;
 	private List<IssueAttribute> execIssueProps = null;
+	private List<IgnoredTestAttribute> execIgnoredTestProps = null;
 	private List<EventAttribute> execActivityProps = null;
 	
 	private List<TestReportSection> allowedSections = new ArrayList<TestReportSection>();
 	private Set<TestResultType> reportableTestResultTypes = new HashSet<TestResultType>();
+	private Set<IgnoredTestStatus> reportableIgnoredTestTypes = new HashSet<IgnoredTestStatus>();
 	
 	private boolean shouldIncludeAnnotatedTestProps = false;
 	private boolean shouldIncludeAttr = false;
@@ -95,6 +101,10 @@ public enum TestReporterSingleton {
 			issuePropNamesMap.put(e, ArjunaInternal.getIssueAttrName(e.toString()));
 		}
 		
+		for (IgnoredTestAttribute e: IgnoredTestAttribute.class.getEnumConstants()){
+			ignoredTestNamesMap.put(e, ArjunaInternal.getIgnoredTestAttrName(e.toString()));
+		}
+		
 		for (EventAttribute e: EventAttribute.class.getEnumConstants()){
 			activityPropNamesMap.put(e, ArjunaInternal.getEventAttrName(e.toString()));
 		}
@@ -103,6 +113,7 @@ public enum TestReporterSingleton {
 		execTestResultProps = Batteries.value(ArjunaProperty.REPORT_TESTS_METADATA_REPORTABLE).asEnumList(TestResultAttribute.class);;
 		execStepResultProps = Batteries.value(ArjunaProperty.REPORT_STEPS_METADATA_REPORTABLE).asEnumList(StepResultAttribute.class);;
 		execIssueProps = Batteries.value(ArjunaProperty.REPORT_ISSUES_METADATA_REPORTABLE).asEnumList(IssueAttribute.class);;
+		execIgnoredTestProps = Batteries.value(ArjunaProperty.REPORT_IGNOREDTESTS_METADATA_REPORTABLE).asEnumList(IgnoredTestAttribute.class);;
 		execFixtureResultProps = Batteries.value(ArjunaProperty.REPORT_FIXTURES_METADATA_REPORTABLE).asEnumList(FixtureResultPropertyType.class);
 		execActivityProps = Batteries.value(ArjunaProperty.REPORT_EVENTS_METADATA_REPORTABLE).asEnumList(EventAttribute.class);;
 				
@@ -113,9 +124,11 @@ public enum TestReporterSingleton {
 			execTestObjectPropsForTestReport = Batteries.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
 			execTestObjectPropsForStepReport = Batteries.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
 			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForIgnoredTestReport = Batteries.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_IGNOREDTESTS).asEnumList(TestObjectAttribute.class);;
 			execTestObjectPropsForFixtureReport = Batteries.value(ArjunaProperty.REPORT_MINIMAL_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
 			allowedSections.addAll(Batteries.value(ArjunaProperty.REPORT_MINIMAL_SECTIONS).asEnumList(TestReportSection.class));
 			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_MINIMAL_INCLUDED_RTYPE).asEnumList(TestResultType.class));
+			reportableIgnoredTestTypes.addAll(Batteries.value(ArjunaProperty.REPORT_MINIMAL_INCLUDED_IGNORETYPE).asEnumList(IgnoredTestStatus.class));
 			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_ANNOTATED_ON).asBoolean();
 			shouldIncludeAttr = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_ATTR_ON).asBoolean();
 			shouldIncludeExecVars = Batteries.value(ArjunaProperty.REPORT_MINIMAL_TESTS_EXECVAR_ON).asBoolean();
@@ -125,10 +138,12 @@ public enum TestReporterSingleton {
 		case BASIC:
 			execTestObjectPropsForTestReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
 			execTestObjectPropsForStepReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);
+			execTestObjectPropsForIgnoredTestReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_IGNOREDTESTS).asEnumList(TestObjectAttribute.class);
 			execTestObjectPropsForFixtureReport = Batteries.value(ArjunaProperty.REPORT_BASIC_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
 			allowedSections.addAll(Batteries.value(ArjunaProperty.REPORT_BASIC_SECTIONS).asEnumList(TestReportSection.class));
 			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_BASIC_INCLUDED_RTYPE).asEnumList(TestResultType.class));
+			reportableIgnoredTestTypes.addAll(Batteries.value(ArjunaProperty.REPORT_BASIC_INCLUDED_IGNORETYPE).asEnumList(IgnoredTestStatus.class));
 			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_ANNOTATED_ON).asBoolean();
 			shouldIncludeAttr = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_ATTR_ON).asBoolean();
 			shouldIncludeExecVars = Batteries.value(ArjunaProperty.REPORT_BASIC_TESTS_EXECVAR_ON).asBoolean();
@@ -138,10 +153,12 @@ public enum TestReporterSingleton {
 		case ADVANCED:
 			execTestObjectPropsForTestReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
 			execTestObjectPropsForStepReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);
+			execTestObjectPropsForIgnoredTestReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_IGNOREDTESTS).asEnumList(TestObjectAttribute.class);
 			execTestObjectPropsForFixtureReport = Batteries.value(ArjunaProperty.REPORT_ADVANCED_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
 			allowedSections.addAll(Batteries.value(ArjunaProperty.REPORT_ADVANCED_SECTIONS).asEnumList(TestReportSection.class));
 			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_ADVANCED_INCLUDED_RTYPE).asEnumList(TestResultType.class));
+			reportableIgnoredTestTypes.addAll(Batteries.value(ArjunaProperty.REPORT_ADVANCED_INCLUDED_IGNORETYPE).asEnumList(IgnoredTestStatus.class));
 			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_ANNOTATED_ON).asBoolean();
 			shouldIncludeAttr = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_ATTR_ON).asBoolean();
 			shouldIncludeExecVars = Batteries.value(ArjunaProperty.REPORT_ADVANCED_TESTS_EXECVAR_ON).asBoolean();
@@ -151,10 +168,12 @@ public enum TestReporterSingleton {
 		case DEBUG:
 			execTestObjectPropsForTestReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_TESTS).asEnumList(TestObjectAttribute.class);
 			execTestObjectPropsForStepReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_STEPS).asEnumList(TestObjectAttribute.class);;
-			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);;
+			execTestObjectPropsForIssueReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_ISSUES).asEnumList(TestObjectAttribute.class);
+			execTestObjectPropsForIgnoredTestReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_IGNOREDTESTS).asEnumList(TestObjectAttribute.class);
 			execTestObjectPropsForFixtureReport = Batteries.value(ArjunaProperty.REPORT_DEBUG_METADATA_TEST_OBJECT_FIXTURES).asEnumList(TestObjectAttribute.class);;
 			allowedSections.addAll(Batteries.value(ArjunaProperty.REPORT_DEBUG_SECTIONS).asEnumList(TestReportSection.class));
 			reportableTestResultTypes.addAll(Batteries.value(ArjunaProperty.REPORT_DEBUG_INCLUDED_RTYPE).asEnumList(TestResultType.class));
+			reportableIgnoredTestTypes.addAll(Batteries.value(ArjunaProperty.REPORT_DEBUG_INCLUDED_IGNORETYPE).asEnumList(IgnoredTestStatus.class));
 			shouldIncludeAnnotatedTestProps = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_ANNOTATED_ON).asBoolean();
 			shouldIncludeAttr = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_ATTR_ON).asBoolean();
 			shouldIncludeExecVars = Batteries.value(ArjunaProperty.REPORT_DEBUG_TESTS_EXECVAR_ON).asBoolean();
@@ -177,6 +196,10 @@ public enum TestReporterSingleton {
 	
 	public List<TestObjectAttribute> getTestObjectAttrListForIssueReport() {
 		return this.execTestObjectPropsForIssueReport;
+	}
+	
+	public List<TestObjectAttribute> getTestObjectAttrListForIgnoredTestReport() {
+		return this.execTestObjectPropsForIgnoredTestReport;
 	}
 	
 	public List<TestObjectAttribute> getTestObjectAttrListForFixtureReport() {
@@ -203,6 +226,10 @@ public enum TestReporterSingleton {
 		return this.execIssueProps;
 	}
 	
+	public List<IgnoredTestAttribute> getIgnoredTestAttrList() {
+		return this.execIgnoredTestProps;
+	}
+	
 	public List<EventAttribute> getEventAttrList(){
 		return this.execActivityProps;
 	}
@@ -217,6 +244,10 @@ public enum TestReporterSingleton {
 	
 	public Set<TestResultType> getReportableTestTypes(){
 		return this.reportableTestResultTypes;
+	}
+	
+	public Set<IgnoredTestStatus> getReportableIgnoredTestTypes() {
+		return this.reportableIgnoredTestTypes;
 	}
 	
 	public boolean isReportableResultType(TestResultType type){
@@ -271,4 +302,7 @@ public enum TestReporterSingleton {
 		return this.activityPropNamesMap;
 	}
 
+	public Map<IgnoredTestAttribute, String> getIgnoredTestAttrNameMap() {
+		return this.ignoredTestNamesMap;
+	}
 }

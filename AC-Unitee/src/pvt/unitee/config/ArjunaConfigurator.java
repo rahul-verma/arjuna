@@ -23,6 +23,9 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.EventAttribute;
 import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.IgnoredTestAttribute;
+import pvt.unitee.enums.IgnoredTestReason;
+import pvt.unitee.enums.IgnoredTestStatus;
 import pvt.unitee.enums.IssueAttribute;
 import pvt.unitee.enums.ReportGenerationFormat;
 import pvt.unitee.enums.ReportListenerFormat;
@@ -136,6 +139,11 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 		registerProperty(prop);		
 	}
 	
+	protected void handleIgnoredTestPropListConfig(String propPath, Value configValue, String purpose, boolean visible) throws Exception{
+		ConfigProperty prop = ConfigPropertyBatteries.createEnumListProperty(codeForPath(propPath), propPath, IgnoredTestAttribute.class, configValue, purpose, visible);
+		registerProperty(prop);		
+	}
+	
 	protected void handleEventPropListConfig(String propPath, Value configValue, String purpose, boolean visible) throws Exception{
 		ConfigProperty prop = ConfigPropertyBatteries.createEnumListProperty(codeForPath(propPath), propPath, EventAttribute.class, configValue, purpose, visible);
 		registerProperty(prop);		
@@ -171,6 +179,11 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 	
 	protected void handleTestResultType(String propPath, Value configValue, String purpose, boolean visible) throws Exception{
 		ConfigProperty prop = ConfigPropertyBatteries.createEnumListProperty(codeForPath(propPath), propPath, TestResultType.class, configValue, purpose, visible);
+		registerProperty(prop);		
+	}
+	
+	protected void handleIgnoredTestStatusType(String propPath, Value configValue, String purpose, boolean visible) throws Exception{
+		ConfigProperty prop = ConfigPropertyBatteries.createEnumListProperty(codeForPath(propPath), propPath, IgnoredTestStatus.class, configValue, purpose, visible);
 		registerProperty(prop);		
 	}
 	
@@ -248,6 +261,9 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_MINIMAL_METADATA_TEST_OBJECT_ISSUES:
 					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Minimal Report - Issues", false);
 					break;
+				case REPORT_MINIMAL_METADATA_TEST_OBJECT_IGNOREDTESTS:
+					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Minimal Report - Ignored Tests", false);
+					break;
 				case REPORT_MINIMAL_METADATA_TEST_OBJECT_FIXTURES:
 					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Minimal Report - Fixtures", false);
 					break;
@@ -259,6 +275,9 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 					break;
 				case REPORT_BASIC_METADATA_TEST_OBJECT_ISSUES:
 					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Basic Report - Issues", false);
+					break;
+				case REPORT_BASIC_METADATA_TEST_OBJECT_IGNOREDTESTS:
+					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Basic Report - Ignored Tests", false);
 					break;
 				case REPORT_BASIC_METADATA_TEST_OBJECT_FIXTURES:
 					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Basic Report - Fixtures", false);
@@ -272,6 +291,9 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_ADVANCED_METADATA_TEST_OBJECT_ISSUES:
 					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Advanced Report - Issues", false);
 					break;
+				case REPORT_ADVANCED_METADATA_TEST_OBJECT_IGNOREDTESTS:
+					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Advanced Report - Ignored Tests", false);
+					break;
 				case REPORT_ADVANCED_METADATA_TEST_OBJECT_FIXTURES:
 					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Advanced Report - Fixtures", false);
 					break;
@@ -283,6 +305,9 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 					break;
 				case REPORT_DEBUG_METADATA_TEST_OBJECT_ISSUES:
 					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Debug Report - Issues", false);
+					break;
+				case REPORT_DEBUG_METADATA_TEST_OBJECT_IGNOREDTESTS:
+					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Debug Report - Ignored Tests", false);
 					break;
 				case REPORT_DEBUG_METADATA_TEST_OBJECT_FIXTURES:
 					handleTestObjectPropListConfig(propPath, cValue, "Test Object Properties for Debug Report - Fixtures", false);
@@ -301,15 +326,27 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 					break;
 				case REPORT_MINIMAL_INCLUDED_RTYPE:
 					handleTestResultType(propPath, cValue, "Included Test Results for Minimal Report Mode", false);
+					break;
+				case REPORT_MINIMAL_INCLUDED_IGNORETYPE:
+					handleIgnoredTestStatusType(propPath, cValue, "Included Ignore Test Types for Minimal Report Mode", false);
 					break;	
 				case REPORT_BASIC_INCLUDED_RTYPE:
 					handleTestResultType(propPath, cValue, "Included Test Results for Basic Report Mode", false);
-					break;		
+					break;	
+				case REPORT_BASIC_INCLUDED_IGNORETYPE:
+					handleIgnoredTestStatusType(propPath, cValue, "Included Ignore Test Types for Basic Report Mode", false);
+					break;
 				case REPORT_ADVANCED_INCLUDED_RTYPE:
 					handleTestResultType(propPath, cValue, "Included Test Results for Basic Report Mode", false);
 					break;	
+				case REPORT_ADVANCED_INCLUDED_IGNORETYPE:
+					handleIgnoredTestStatusType(propPath, cValue, "Included Ignore Test Types for Advanced Report Mode", false);
+					break;
 				case REPORT_DEBUG_INCLUDED_RTYPE:
 					handleTestResultType(propPath, cValue, "Included Test Results for Basic Report Mode", false);
+					break;
+				case REPORT_DEBUG_INCLUDED_IGNORETYPE:
+					handleIgnoredTestStatusType(propPath, cValue, "Included Ignore Test Types for Debug Report Mode", false);
 					break;
 				case REPORT_METADATA_TEST:
 					handleTestPropListConfig(propPath, cValue, "Test Properties for Report", false);
@@ -383,6 +420,9 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_ISSUES_METADATA_REPORTABLE:
 					handleIssuePropListConfig(propPath, cValue, "Result Properties for Issues report", false);
 					break;
+				case REPORT_IGNOREDTESTS_METADATA_REPORTABLE:
+					handleIgnoredTestPropListConfig(propPath, cValue, "Result Properties for Ignored Test report", false);
+					break;
 				case REPORT_FIXTURES_METADATA_REPORTABLE:
 					handleFixturePropListConfig(propPath, cValue, "Fixtures Result Properties for Fixtures report", false);
 					break;
@@ -418,6 +458,9 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 					break;
 				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES:
 					handleStringConfig(propPath, cValue, "Report Directory for JSON Fixture results.", false);
+					break;
+				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_IGNOREDTESTS:
+					handleStringConfig(propPath, cValue, "Report Directory for JSON Ignored Test results.", false);
 					break;
 				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_EVENTS:
 					handleStringConfig(propPath, cValue, "Report Directory for JSON Event results.", false);

@@ -29,6 +29,7 @@ public class TestDefinitionsDB {
 	private static Set<String> allClassNameSet = new HashSet<String>();
 	// For pulling out class definitions by name
 	private static Map<String, JavaTestClassDefinition> testClassDefinitions = new HashMap<String, JavaTestClassDefinition>();
+	private static List<String> discoveredQueue = new ArrayList<String>();
 	// This is what would be got by groups for pickers processing. If a group picks up something, it calls setPicked()
 	private static List<String> forPickerProcessing = new ArrayList<String>();
 	// The following gets populated from above, if classDef.isNotPickedByAnyGroup() is True
@@ -44,19 +45,29 @@ public class TestDefinitionsDB {
 		}
 		allClassNameSet.add(name);
 		testClassDefinitions.put(name, classDef);
-		
-		if (!classDef.shouldBeSkipped()){
-			forPickerProcessing.add(name);
-		}
+		discoveredQueue.add(name);
 		
 		System.out.println(forPickerProcessing);
 	}
 
+	public static synchronized void buildPickerQueueFromDiscoveredQueue() throws Exception{
+		for (String name: discoveredQueue){
+			JavaTestClassDefinition classDef = testClassDefinitions.get(name);
+			if (!classDef.shouldBeSkipped()){
+				forPickerProcessing.add(name);
+			} else {
+				classDef.setSkipCode(SkipCode.SKIPPED_CLASS_ANNOTATION);
+			}
+			
+			classDef.buildPickerQueueFromDiscoveredQueue();
+		}
+	}
+	
 	public static synchronized List<String> getClassDefQueueForDefPickerProcessing(){
 		return forPickerProcessing;
 	}
 	
-	public static synchronized void buildProcessorQueueFromPickerQueue(){
+	public static synchronized void buildProcessorQueueFromPickerQueue() throws Exception{
 		for (String name: forPickerProcessing){
 			JavaTestClassDefinition classDef = testClassDefinitions.get(name);
 			if (classDef.isPicked()){

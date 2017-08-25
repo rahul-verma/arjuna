@@ -18,11 +18,9 @@
  ******************************************************************************/
 package pvt.unitee.enums;
 
-public enum TestResultType {
-	PASS,
-	FAIL,
-	ERROR,
-	EXCLUDED, 
-	UNPICKED, 
-	SKIPPED;
+public enum IgnoredTestReason {
+	UNPICKED_CLASS,
+	UNPICKED_METHOD,
+	SKIPPED_CLASS_ANNOTATION,
+	SKIPPED_METHOD_ANNOTATION
 }

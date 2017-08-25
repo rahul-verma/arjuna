@@ -24,6 +24,7 @@ import pvt.batteries.ds.Name;
 import pvt.batteries.ds.NamesContainer;
 import pvt.unitee.enums.EventAttribute;
 import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.IgnoredTestAttribute;
 import pvt.unitee.enums.IssueAttribute;
 import pvt.unitee.enums.NamesContainerType;
 import pvt.unitee.enums.StepResultAttribute;
@@ -82,6 +83,12 @@ public class UniteeNames {
 		testResultProperties.add(new Name(TestResultAttribute.DESC.toString(), "Result Description"));
 		testResultProperties.add(new Name(TestResultAttribute.ISSUE_ID.toString(), "Issue Id"));
 		containers.add(testResultProperties);
+		
+		NamesContainer ignoredTestProperties = new NamesContainer(NamesContainerType.IGNORED_TEST.toString());
+		ignoredTestProperties.add(new Name(IgnoredTestAttribute.STATUS.toString(), "Status"));
+		ignoredTestProperties.add(new Name(IgnoredTestAttribute.REASON.toString(), "Reason"));
+		ignoredTestProperties.add(new Name(IgnoredTestAttribute.DESC.toString(), "Reason Description"));
+		containers.add(ignoredTestProperties);
 		
 		NamesContainer stepResultProperties = new NamesContainer(NamesContainerType.STEP_RESULT.toString());
 		stepResultProperties.add(new Name(StepResultAttribute.RESULT.toString(), "Step Result"));

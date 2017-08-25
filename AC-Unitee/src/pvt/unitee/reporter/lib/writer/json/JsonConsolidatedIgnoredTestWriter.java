@@ -16,13 +16,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.unitee.enums;
+package pvt.unitee.reporter.lib.writer.json;
 
-public enum TestResultType {
-	PASS,
-	FAIL,
-	ERROR,
-	EXCLUDED, 
-	UNPICKED, 
-	SKIPPED;
+import org.apache.log4j.Logger;
+
+import pvt.batteries.config.Batteries;
+import pvt.unitee.reporter.lib.ignored.IgnoredTest;
+import pvt.unitee.reporter.lib.test.TestResult;
+
+public class JsonConsolidatedIgnoredTestWriter extends JsonConsolidatedResultWriter<IgnoredTest> {
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
+	
+	public JsonConsolidatedIgnoredTestWriter() throws Exception{
+		super("ignored_tests.json");
+	}
+	
+	public void update(IgnoredTest reportable) throws Exception {
+		String jsonString = reportable.asJsonObject().toString();
+		super.update(jsonString);
+	}
+
 }

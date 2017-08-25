@@ -30,6 +30,8 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.EventAttribute;
 import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.IgnoredTestAttribute;
+import pvt.unitee.enums.IgnoredTestStatus;
 import pvt.unitee.enums.IssueAttribute;
 import pvt.unitee.enums.StepResultAttribute;
 import pvt.unitee.enums.TestReportSection;
@@ -38,6 +40,7 @@ import pvt.unitee.enums.TestResultType;
 import pvt.unitee.interfaces.ReportGenerator;
 import pvt.unitee.reporter.lib.event.Event;
 import pvt.unitee.reporter.lib.fixture.FixtureResult;
+import pvt.unitee.reporter.lib.ignored.IgnoredTest;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.step.StepResult;
 import pvt.unitee.reporter.lib.test.TestResult;
@@ -53,15 +56,18 @@ public class ExcelReportGenerator implements ReportGenerator{
 	HSSFCellStyle topRowStyle = null;
 	HSSFCellStyle lastCellStyle = null;
 	private ExcelTestResultWriter testResultSheet = null;
+	private ExcelIgnoredTestWriter ignoredTestSheet = null;
 	private ExcelIssueWriter issuesResultSheet = null;
 	private ExcelEventWriter eventSheet = null;
 	private ExcelFixtureResultWriter fixtureSheet = null;
 	private Set<TestResultType> allowedRTypes = null;
+	private Set<IgnoredTestStatus> allowedIgnoreRTypes = null;
 	
 	public ExcelReportGenerator(String reportDir) throws Exception {
 		FileUtils.forceMkdir(new File(reportDir));
 		fileOut  = new FileOutputStream(reportDir + "/" + Batteries.value(ArjunaProperty.REPORT_NAME_FORMAT).asString() + ".xls");
 		this.allowedRTypes = ArjunaInternal.getReportableTestTypes();
+		this.allowedIgnoreRTypes = ArjunaInternal.getReportableIgnoredTestTypes();
 	}
 	
 	private void createWorkBook() throws Exception{
@@ -111,6 +117,12 @@ public class ExcelReportGenerator implements ReportGenerator{
 			issuesResultSheet.setUp();
 		}
 		
+		if (ArjunaInternal.shouldIncludedReportSection(TestReportSection.IGNORED_TESTS)){
+			ignoredTestSheet = new ExcelIgnoredTestWriter(workbook);
+			ignoredTestSheet.setStyles(cellStyle, topRowStyle, lastCellStyle);
+			ignoredTestSheet.setUp();
+		}
+		
 		
 		if (ArjunaInternal.shouldIncludedReportSection(TestReportSection.FIXTURES)){
 			fixtureSheet = new ExcelFixtureResultWriter(workbook);
@@ -133,6 +145,10 @@ public class ExcelReportGenerator implements ReportGenerator{
 			issuesResultSheet.tearDown();
 		}
 		
+		if (ArjunaInternal.shouldIncludedReportSection(TestReportSection.IGNORED_TESTS)){
+			ignoredTestSheet.tearDown();
+		}
+		
 		if (ArjunaInternal.shouldIncludedReportSection(TestReportSection.FIXTURES)){
 			fixtureSheet.tearDown();
 		}
@@ -150,6 +166,15 @@ public class ExcelReportGenerator implements ReportGenerator{
 		if (ArjunaInternal.shouldIncludedReportSection(TestReportSection.TESTS)){
 			if (allowedRTypes.contains(reportable.resultProps().result())){
 				testResultSheet.update(reportable);
+			}
+		}
+	}
+	
+	@Override
+	public synchronized void update(IgnoredTest reportable) throws Exception {
+		if (ArjunaInternal.shouldIncludedReportSection(TestReportSection.IGNORED_TESTS)){
+			if (allowedIgnoreRTypes.contains(reportable.resultProps().status())){
+				ignoredTestSheet.update(reportable);
 			}
 		}
 	}
@@ -554,6 +579,47 @@ class ExcelIssueWriter extends ExcelResultWriter<Issue> {
 		if (shouldIncludeAnnotatedTestProps){
 			resultArr.addAll(reportable.testPropStrings(this.issueTestProps));
 		}
+		writeData(resultArr);
+	}
+
+}
+
+class ExcelIgnoredTestWriter extends ExcelResultWriter<IgnoredTest> {
+	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
+
+	private List<TestObjectAttribute> ignoredTestObjectProps = null;
+	private List<IgnoredTestAttribute> ignoredTestProps = null;	
+	private List<String> ignoredTestHeaders = new ArrayList<String>();
+
+	public ExcelIgnoredTestWriter(HSSFWorkbook workbook) throws Exception {
+		super(workbook, "Skipped and Unpicked");
+	}
+
+	public void setUp() throws Exception {
+		// Populate meta-data
+		Map<TestObjectAttribute,String> testObjectNames = ArjunaInternal.getTestObjectAttrNameMap();
+		Map<IgnoredTestAttribute,String> ignoredTestPropNameMap = ArjunaInternal.getIgnoredTestAttrNameMap();
+		
+		ignoredTestObjectProps = ArjunaInternal.getTestObjectAttrListForIgnoredTestReport();
+		ignoredTestProps = ArjunaInternal.getIgnoredTestAttrList();
+
+		for (TestObjectAttribute prop: ignoredTestObjectProps){
+			this.ignoredTestHeaders.add(testObjectNames.get(prop));
+		}
+		
+		for (IgnoredTestAttribute prop: ignoredTestProps){
+			this.ignoredTestHeaders.add(ignoredTestPropNameMap.get(prop));
+		}	
+		
+		super.setUp();
+		super.setHeaders(this.ignoredTestHeaders);
+		super.writeHeader();
+	}	
+
+	public void update(IgnoredTest reportable) throws Exception {
+		List<String> resultArr = new ArrayList<String>();
+		resultArr.addAll(reportable.objectPropStrings(this.ignoredTestObjectProps));
+		resultArr.addAll(reportable.resultPropStrings(this.ignoredTestProps));
 		writeData(resultArr);
 	}
 

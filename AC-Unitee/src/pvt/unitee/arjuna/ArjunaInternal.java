@@ -35,6 +35,8 @@ import pvt.batteries.ds.NamesContainer;
 import pvt.unitee.config.ArjunaSingleton;
 import pvt.unitee.enums.EventAttribute;
 import pvt.unitee.enums.FixtureResultPropertyType;
+import pvt.unitee.enums.IgnoredTestAttribute;
+import pvt.unitee.enums.IgnoredTestStatus;
 import pvt.unitee.enums.IssueAttribute;
 import pvt.unitee.enums.NamesContainerType;
 import pvt.unitee.enums.StepResultAttribute;
@@ -121,6 +123,10 @@ public class ArjunaInternal {
 		return TestReporterSingleton.INSTANCE.getIssueAttrNameMap();
 	}
 	
+	public static Map<IgnoredTestAttribute, String> getIgnoredTestAttrNameMap() {
+		return TestReporterSingleton.INSTANCE.getIgnoredTestAttrNameMap();
+	}
+	
 	
 	public static Map<FixtureResultPropertyType, String> getFixtureResultAttrNameMap(){
 		return TestReporterSingleton.INSTANCE.getFixtureResultAttrNameMap();
@@ -156,6 +162,10 @@ public class ArjunaInternal {
 	
 	public static String getIssueAttrName(String name) throws Exception{
 		return Batteries.getConfiguredName(NamesContainerType.ISSUE.toString(), name);
+	}
+	
+	public static String getIgnoredTestAttrName(String name) throws Exception{
+		return Batteries.getConfiguredName(NamesContainerType.IGNORED_TEST.toString(), name);
 	}
 	
 	public static String getFixtureResultAttrName(String name) throws Exception{
@@ -336,6 +346,10 @@ public class ArjunaInternal {
 		return TestReporterSingleton.INSTANCE.getTestObjectAttrListForIssueReport();
 	}
 	
+	public static List<TestObjectAttribute> getTestObjectAttrListForIgnoredTestReport() {
+		return TestReporterSingleton.INSTANCE.getTestObjectAttrListForIgnoredTestReport();
+	}
+	
 	public static List<TestObjectAttribute> getTestObjectAttrListForFixtureReport() {
 		return TestReporterSingleton.INSTANCE.getTestObjectAttrListForFixtureReport();
 	}
@@ -356,6 +370,10 @@ public class ArjunaInternal {
 		return TestReporterSingleton.INSTANCE.getIssueAttrList();
 	}
 	
+	public static List<IgnoredTestAttribute> getIgnoredTestAttrList() {
+		return TestReporterSingleton.INSTANCE.getIgnoredTestAttrList();
+	}
+	
 	public static List<FixtureResultPropertyType> getFixtureResultAttrList() {
 		return TestReporterSingleton.INSTANCE.getFixtureResultAttrList();
 	}
@@ -374,6 +392,10 @@ public class ArjunaInternal {
 	
 	public static Set<TestResultType> getReportableTestTypes(){
 		return TestReporterSingleton.INSTANCE.getReportableTestTypes();
+	}
+	
+	public static Set<IgnoredTestStatus> getReportableIgnoredTestTypes() {
+		return TestReporterSingleton.INSTANCE.getReportableIgnoredTestTypes();
 	}
 	
 	public static boolean isReportableResultType(TestResultType type){

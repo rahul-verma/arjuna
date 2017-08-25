@@ -19,8 +19,16 @@ import pvt.unitee.core.lib.dependency.DependencyHandler;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;
 import pvt.unitee.enums.DependencyTarget;
+import pvt.unitee.enums.IgnoredTestReason;
+import pvt.unitee.enums.IgnoredTestStatus;
+import pvt.unitee.enums.IssueSubType;
+import pvt.unitee.enums.IssueType;
 import pvt.unitee.enums.SkipCode;
 import pvt.unitee.enums.UnpickedCode;
+import pvt.unitee.reporter.lib.ignored.IgnoredTest;
+import pvt.unitee.reporter.lib.ignored.IgnoredTestBuilder;
+import pvt.unitee.reporter.lib.issue.Issue;
+import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.TestClassConstructorType;
 import pvt.unitee.testobject.lib.java.loader.DataMethodsHandler;
@@ -57,6 +65,7 @@ public class JavaTestClassDefinition {
 	private Set<String> allMethodsNameSet = new HashSet<String>();
 	// For pulling out class definitions by name
 	private Map<String, JavaTestMethodDefinition> testMethodDefinitions = new HashMap<String, JavaTestMethodDefinition>();
+	private List<String> dicoveredQueue = new ArrayList<String>();
 	// This is what would be got by groups for pickers processing. If a group picks up something, it calls setPicked()
 	private List<String> forPickerProcessing = new ArrayList<String>();
 	// The following gets populated from above, if classDef.isNotPickedByAnyGroup() is True
@@ -88,10 +97,7 @@ public class JavaTestClassDefinition {
 		}
 		allMethodsNameSet.add(name);
 		testMethodDefinitions.put(name, methodDef);
-		
-		if (!methodDef.shouldBeSkipped()){
-			forPickerProcessing.add(name);
-		}
+		dicoveredQueue.add(name);
 	}
 	
 	public String getPackageName() throws Exception {
@@ -331,9 +337,38 @@ public class JavaTestClassDefinition {
 	public JavaTestMethodDefinition getTestMethodDefinition(String qName) {
 		return this.testMethodDefinitions.get(qName);
 	}
+	
+	public void buildPickerQueueFromDiscoveredQueue() throws Exception{
+		for (String name: this.dicoveredQueue){
+			JavaTestMethodDefinition methodDef = testMethodDefinitions.get(name);
+			if (!this.shouldBeSkipped()){
+				if (!methodDef.shouldBeSkipped()){
+					forPickerProcessing.add(name);
+				} else {
+					methodDef.setSkipped(SkipCode.SKIPPED_METHOD_ANNOTATION);
+				}
+			} else {
+				System.out.println(this.getSkipCode());
+				methodDef.setSkipped(this.getSkipCode());
+				System.out.println(methodDef.getSkipCode());
+			}
+			
+			if (methodDef.shouldBeSkipped()){
+				IgnoredTestBuilder builder = new IgnoredTestBuilder();
+				
+				methodDef.getTestVariables().rawObjectProps().setPackage(this.testVars.rawObjectProps().pkg());
+				methodDef.getTestVariables().rawObjectProps().setClass(this.getName());
+				IgnoredTest it = builder
+				.testVariables(methodDef.getTestVariables())
+				.status(IgnoredTestStatus.SKIPPED)
+				.reason(IgnoredTestReason.valueOf(methodDef.getSkipCode().toString()))
+				.build();
+				ArjunaInternal.getReporter().update(it);
+			}
+		}
+	}
 
-	public void buildProcessorQueueFromPickerQueue(){
-		boolean classPicked = false;
+	public void buildProcessorQueueFromPickerQueue() throws Exception{
 		for (String name: forPickerProcessing){
 			JavaTestMethodDefinition methodDef = testMethodDefinitions.get(name);
 			if (this.isPicked()){
@@ -344,6 +379,18 @@ public class JavaTestClassDefinition {
 				}
 			} else {
 				methodDef.setUnpicked(this.getUnpickCode());
+			}
+			
+			if (methodDef.isUnpicked()){
+				methodDef.getTestVariables().rawObjectProps().setPackage(this.testVars.rawObjectProps().pkg());
+				methodDef.getTestVariables().rawObjectProps().setClass(this.getName());
+				IgnoredTestBuilder builder = new IgnoredTestBuilder();
+				IgnoredTest it = builder
+				.testVariables(methodDef.getTestVariables())
+				.status(IgnoredTestStatus.UNPICKED)
+				.reason(IgnoredTestReason.valueOf(methodDef.getUnpickCode().toString()))
+				.build();
+				ArjunaInternal.getReporter().update(it);
 			}
 		}
 	}

@@ -31,17 +31,20 @@ import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.interfaces.InternlReportableObserver;
 import pvt.unitee.reporter.lib.event.Event;
 import pvt.unitee.reporter.lib.fixture.FixtureResult;
+import pvt.unitee.reporter.lib.ignored.IgnoredTest;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.step.StepResult;
 import pvt.unitee.reporter.lib.test.TestResult;
 import pvt.unitee.reporter.lib.writer.json.JsonEventWriter;
 import pvt.unitee.reporter.lib.writer.json.JsonFixtureResultWriter;
+import pvt.unitee.reporter.lib.writer.json.JsonIgnoredTestWriter;
 import pvt.unitee.reporter.lib.writer.json.JsonIssueWriter;
 import pvt.unitee.reporter.lib.writer.json.JsonTestResultWriter;
 
 public class DefaultReporter implements Reporter{
 	private static Logger logger = RunConfig.logger();
 	private List<InternlReportableObserver<TestResult>> testResultObservers = new ArrayList<InternlReportableObserver<TestResult>>();
+	private List<InternlReportableObserver<IgnoredTest>> ignoredTestObservers = new ArrayList<InternlReportableObserver<IgnoredTest>>();
 	private List<InternlReportableObserver<StepResult>> stepResultObservers = new ArrayList<InternlReportableObserver<StepResult>>();
 	private List<InternlReportableObserver<Issue>> issueObservers = new ArrayList<InternlReportableObserver<Issue>>();
 	private List<InternlReportableObserver<Event>> eventObservers = new ArrayList<InternlReportableObserver<Event>>();
@@ -56,6 +59,7 @@ public class DefaultReporter implements Reporter{
 		FileUtils.forceMkdir(new File(getRunIDReportDir()));	
 		String reportDir = getRunIDReportDir();
 		this.addTestResultObserver(new JsonTestResultWriter());
+		this.addIgnoredTestObserver(new JsonIgnoredTestWriter());
 		this.addIssueObserver(new JsonIssueWriter());
 		this.addEventObserver(new JsonEventWriter());
 		this.addFixtureResultObserver(new JsonFixtureResultWriter());
@@ -65,6 +69,12 @@ public class DefaultReporter implements Reporter{
 	public synchronized void addTestResultObserver(InternlReportableObserver<TestResult> observer) throws Exception {
 		observer.setUp();
 		testResultObservers.add(observer);
+	}
+	
+	@Override
+	public synchronized void addIgnoredTestObserver(InternlReportableObserver<IgnoredTest> observer) throws Exception {
+		observer.setUp();
+		ignoredTestObservers.add(observer);
 	}
 
 	@Override
@@ -93,6 +103,12 @@ public class DefaultReporter implements Reporter{
 	
 	public synchronized void update(Issue reportable) throws Exception{
 		for (InternlReportableObserver<Issue> observer: this.issueObservers) {
+			observer.update(reportable);
+		}		
+	}
+	
+	public synchronized void update(IgnoredTest reportable) throws Exception{
+		for (InternlReportableObserver<IgnoredTest> observer: this.ignoredTestObservers) {
 			observer.update(reportable);
 		}		
 	}
