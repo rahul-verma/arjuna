@@ -46,7 +46,6 @@ import pvt.unitee.lib.strings.UniteeNames;
 import pvt.unitee.reporter.lib.CentralExecutionState;
 import pvt.unitee.reporter.lib.Reporter;
 import pvt.unitee.reporter.lib.config.TestReporterSingleton;
-import pvt.unitee.testobject.lib.loader.group.TestGroupsDB;
 import pvt.unitee.testobject.lib.loader.session.Session;
 import unitee.enums.TestAttribute;
 import unitee.enums.TestObjectAttribute;
@@ -55,12 +54,12 @@ public class ArjunaInternal {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	public static boolean displayReportPrepInfo = false;
 	public static boolean displayDiscoveryInfo = true;
-	public static boolean displayLoadingInfo = false;
-	public static boolean displayDefProcessingInfo = false;
-	public static boolean displayExecTreeLoadingInfo = false;
-	public static boolean displayFixtureProcessingInfo = false;
+	public static boolean displayLoadingInfo = true;
+	public static boolean displayDefProcessingInfo = true;
+	public static boolean displayExecTreeLoadingInfo = true;
+	public static boolean displayFixtureProcessingInfo = true;
 	public static boolean logFixtureExecutionInfo = false;
-	public static boolean displayInstanceProcessingInfo = false;
+	public static boolean displayInstanceProcessingInfo = true;
 	public static boolean displayExecVarProcessingInfo = false;
 	public static boolean displayTestObjConstructionInfo = false;
 	public static boolean logPropInfo = false;
@@ -200,6 +199,8 @@ public class ArjunaInternal {
 	}
 	
 	private static boolean headerPrinted = false;
+	public static boolean displayTestDefLoadingInfo = true;
+	public static boolean displayMetaDataProcessingInfo = true;
 	
 	public static void execute(TestEngine tee){
 		try{
@@ -215,9 +216,9 @@ public class ArjunaInternal {
 		}
 		
 		if (setupsuccessful){
+			ArjunaInternal.initReporter(tee);
 			ArjunaInternal.discover(tee);
 			ArjunaInternal.loadSession(tee);
-			ArjunaInternal.initReporter(tee);
 			ArjunaInternal.run(tee);
 		}
 		
@@ -321,10 +322,6 @@ public class ArjunaInternal {
 			Console.displayExceptionBlock(e);
 			Console.display("Would attempt Test engine teardown before exiting.");
 		}
-	}
-
-	public static TestGroupsDB getGroupLoader() {
-		return ArjunaSingleton.INSTANCE.getTestGroupDB();
 	}
 	
 	public static List<TestObjectAttribute> getTestObjectAttrListForTestReport(){

@@ -18,9 +18,9 @@
  ******************************************************************************/
 package pvt.unitee.api;
 
-import pvt.unitee.testobject.lib.loader.group.TestLoader;
+import pvt.unitee.testobject.lib.loader.group.GroupTestContainerScheduler;
 
 public interface TestRunner{
 	void run() throws Exception;
-	void setTestLoader(TestLoader testLoader) throws Exception;
+	void setTestLoader(GroupTestContainerScheduler testLoader) throws Exception;
 }

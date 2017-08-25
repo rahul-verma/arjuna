@@ -15,7 +15,7 @@ public interface Group {
 
 	int getTestMethodCount();
 
-	void load() throws Exception;
+	void schedule() throws Exception;
 
 	String getSessionName();
 
@@ -40,5 +40,7 @@ public interface Group {
 	void addClassMethodMap(String qualifiedName, List<String> scheduledCreators);
 
 	List<String> getScheduledCreatorsForContainer(String qualifiedName);
+
+	void load() throws Exception;
 
 }

@@ -38,7 +38,7 @@ public class UserDefinedGroup extends BaseGroup{
 		String jsonString = reader.getConfig().root().render();
 		JsonElement root = (new JsonParser()).parse(jsonString);
 		processJson(root.getAsJsonObject());
-		this.setLoader(new JavaTestClassLoader(this));
+		this.setLoader(new JavaTestClassGroupScheduler(this));
 	}
 	
 	private void errorExecVarsNotObject(){

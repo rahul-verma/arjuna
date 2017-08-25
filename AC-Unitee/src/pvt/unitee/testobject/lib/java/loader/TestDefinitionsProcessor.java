@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.unitee.testobject.lib.loader;
+package pvt.unitee.testobject.lib.java.loader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,20 +34,20 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.TestLanguage;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
-import pvt.unitee.testobject.lib.loader.group.TestLoader;
+import pvt.unitee.testobject.lib.loader.group.GroupTestContainerScheduler;
 import unitee.annotations.TestClass;
 
 public class TestDefinitionsProcessor {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private ArrayList<String> classes = null;
 //	ArrayList<AuthoredTest> tests = new ArrayList<AuthoredTest>();
-	private HashMap<TestLanguage, TestDefinitionsLoader> testDefinitionLoaders = new HashMap<TestLanguage, TestDefinitionsLoader>();
-	private HashMap<TestLanguage, TestLoader> testLoaders = new HashMap<TestLanguage, TestLoader>();
+	private HashMap<TestLanguage, TestDefInitializer> testDefinitionLoaders = new HashMap<TestLanguage, TestDefInitializer>();
+	private HashMap<TestLanguage, GroupTestContainerScheduler> testLoaders = new HashMap<TestLanguage, GroupTestContainerScheduler>();
 
 	public TestDefinitionsProcessor() throws Exception {
 	}
 
-	public void setTestDefinitionsLoader(TestLanguage lang, TestDefinitionsLoader loader){
+	public void setTestDefinitionsLoader(TestLanguage lang, TestDefInitializer loader){
 		if (ArjunaInternal.displayLoadingInfo){
 			logger.debug(String.format("Set test loader for %s: %s", lang, loader.getClass()));
 		}
@@ -78,20 +78,16 @@ public class TestDefinitionsProcessor {
 		discoverer.discover();
 		
 		for (TestLanguage lang: this.testDefinitionLoaders.keySet()){
-			testDefinitionLoaders.get(lang).setTestDir(startDir);
+			testDefinitionLoaders.get(lang).init(startDir);
 		}
-		populateClassQueue(aggregator) ;	
-
-		for (TestLanguage lang: this.testDefinitionLoaders.keySet()){
-			testDefinitionLoaders.get(lang).validateDependencies();
-		}
+		populateClassQueue(aggregator) ;
 	}
 
 	private void populateClassQueue(FileAggregator aggregator) throws Exception{
 		Iterator<DiscoveredFile> iter = aggregator.getIterator();
 		//		aggregator.enumerate();
-		TestDefinitionsLoader testDefLoader = null;
-		TestDefinitionsLoader testLoader = null;
+		TestDefInitializer testDefLoader = null;
+		TestDefInitializer testLoader = null;
 		List<DiscoveredFile> testClasses = new ArrayList<DiscoveredFile>();
 		
 		while(iter.hasNext()){
@@ -111,9 +107,9 @@ public class TestDefinitionsProcessor {
 			
 			testDefLoader = this.testDefinitionLoaders.get(lang);
 			
-			testDefLoader.processIfNonTestFileElseStore(f);
+			testDefLoader.handle(f);
 		}
 		
-		testDefLoader.loadTests();
+		testDefLoader.load();
 	}
 }

@@ -18,7 +18,7 @@ import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.TestContainer;
 import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
-import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
+import pvt.unitee.testobject.lib.java.loader.DataMethodsHandler;
 import pvt.unitee.testobject.lib.loader.group.Group;
 import unitee.enums.TestObjectType;
 import unitee.interfaces.TestVariables;

@@ -3,6 +3,8 @@ package pvt.batteries.container;
 import java.util.List;
 import java.util.Map;
 
+import com.rits.cloning.Cloner;
+
 import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
 import pvt.batteries.value.AnyRefValue;
@@ -11,6 +13,7 @@ import pvt.batteries.value.EnumListValue;
 import pvt.batteries.value.EnumValue;
 import pvt.batteries.value.NAValue;
 import pvt.batteries.value.NotSetValue;
+import pvt.batteries.value.NullValue;
 import pvt.batteries.value.NumberListValue;
 import pvt.batteries.value.NumberValue;
 import pvt.batteries.value.StringListValue;
@@ -99,7 +102,19 @@ public abstract class BaseValueContainer<T> extends BaseContainer<T, Value> impl
 	 */
 	@Override
 	public void addObject(T k, Object value) {
-		this.add(this.formatKey(k), new AnyRefValue(value));
+		Object inVal = null;
+		if (value.hashCode() == this.hashCode()){
+			try {
+				Cloner cloner= new Cloner();
+				inVal = cloner.deepClone(value);
+		    } catch (Exception f) {
+		        f.printStackTrace();
+		        inVal = (Object) new NullValue();
+		    }
+		} else {
+			inVal = value;
+		}
+		this.add(this.formatKey(k), new AnyRefValue(inVal));
 	}
 
 	/*

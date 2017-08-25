@@ -9,6 +9,9 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtNewConstructor;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
@@ -24,7 +27,7 @@ import pvt.unitee.testobject.lib.interfaces.TestContainer;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
 import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import pvt.unitee.testobject.lib.interfaces.TestCreator;
-import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
+import pvt.unitee.testobject.lib.java.loader.DataMethodsHandler;
 import unitee.enums.TestObjectType;
 import unitee.interfaces.TestVariables;
 
@@ -70,7 +73,7 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 		
 		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_CLASS_INSTANCE);
 		
-		try{
+		try{		
 			switch(this.getConstructorType()){
 			case NO_ARG:
 				this.setUserTestClassObject(this.getConstructor().newInstance());

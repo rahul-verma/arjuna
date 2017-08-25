@@ -7,8 +7,13 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import arjunasdk.config.RunConfig;
+import arjunasdk.console.Console;
+import pvt.batteries.config.Batteries;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
+import pvt.unitee.arjuna.TestGroupsDB;
 import pvt.unitee.core.lib.exception.SessionNodesFinishedException;
+import pvt.unitee.testobject.lib.java.processor.JavaTestClassDefProcessor;
+import pvt.unitee.testobject.lib.loader.group.PickerMisConfiguration;
 
 public abstract class BaseSession implements Session {
 	private static Logger logger = RunConfig.logger();
@@ -17,25 +22,34 @@ public abstract class BaseSession implements Session {
 	private int testMethodCount = 0;
 	private String name = null;
 	private DefaultStringKeyValueContainer execVars = new DefaultStringKeyValueContainer();
+	private TestGroupsDB testGroupsDB = null;
 	
-	public BaseSession(String name){
+	public BaseSession(String name) throws Exception{
 		this.name = name;
+		this.testGroupsDB = new TestGroupsDB(this);
 	}
 	
+	@Override
 	public void load() throws Exception{
-		logger.debug(String.format("Session %s - Loading", this.getName()));
-		BaseSessionNode beginNode = new BaseSessionNode(this, 1, "mbnode", "mbgroup");
-		nodesQueue.add(0, beginNode);
-		BaseSessionNode endNode = new BaseSessionNode(this, nodesQueue.size() + 1, "mlnode", "mlgroup");
-		endNode.setName("mlnode");
-		nodesQueue.add(endNode);
+		JavaTestClassDefProcessor processor = new JavaTestClassDefProcessor();
+		processor.processMetaData();
+		processor.processDependencies();
 		logger.debug(String.format("%s: Loading nodes", this.getName()));
 		for (SessionNode node: this.nodesQueue){
 			logger.debug("Session Node: " + node.getName());
 			node.load();
+		}		
+	}
+	
+	@Override
+	public void schedule() throws Exception{
+		logger.debug(String.format("%s: Scheduling nodes", this.getName()));
+		for (SessionNode node: this.nodesQueue){
+			logger.debug("Session Node: " + node.getName());
+			node.schedule();
 			this.testMethodCount += node.getTestMethodCount();
 		}
-		iter = nodesQueue.iterator();
+		iter = nodesQueue.iterator();		
 	}
 	
 	public void addNode(BaseSessionNode node){
@@ -68,5 +82,15 @@ public abstract class BaseSession implements Session {
 	@Override 	
 	public DefaultStringKeyValueContainer getExecVars(){
 		return this.execVars;
+	}
+	
+	@Override
+	public boolean isDefaultSession(){
+		return this.getName().toUpperCase().equals("MSESSION");
+	}
+	
+	@Override
+	public TestGroupsDB getGroupsDB() {
+		return this.testGroupsDB;
 	}
 }

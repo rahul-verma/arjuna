@@ -14,6 +14,7 @@ import arjunasdk.ddauto.interfaces.DataReference;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.databroker.DataReferenceFactory;
 import pvt.unitee.arjuna.ArjunaInternal;
+import pvt.unitee.core.lib.datasource.DataSourceType;
 import pvt.unitee.core.lib.dependency.DependencyHandler;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;
@@ -22,9 +23,10 @@ import pvt.unitee.enums.SkipCode;
 import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.TestClassConstructorType;
-import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
-import pvt.unitee.testobject.lib.loader.JavaTestClassDataMethodsHandler;
-import pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor;
+import pvt.unitee.testobject.lib.java.loader.DataMethodsHandler;
+import pvt.unitee.testobject.lib.java.loader.JavaTestClassDataMethodsHandler;
+import pvt.unitee.testobject.lib.java.loader.JavaTestClassFixturesLoader;
+import pvt.unitee.testobject.lib.java.loader.TestPropertyAnnotationsProcessor;
 import unitee.interfaces.TestVariables;
 
 public class JavaTestClassDefinition {
@@ -39,10 +41,6 @@ public class JavaTestClassDefinition {
 	private Constructor<?> constructor;
 	private TestClassConstructorType constructorType;
 	private TestFixtures fixtures = null;
-	private List<String> methodNamesQueue = new ArrayList<String>();
-	private List<String> unscheduledMethodsQueue = new ArrayList<String>();
-	private List<String> scheduled = new ArrayList<String>();
-	private Map<String, JavaTestMethodDefinition> methodDefinitions = new HashMap<String, JavaTestMethodDefinition>();
 	private int instanceThreadCount = 1;
 	private int creatorThreadCount = 1;
 	private boolean skipIt = false;
@@ -51,16 +49,49 @@ public class JavaTestClassDefinition {
 	private UnpickedCode unpickCode = null;
 	private String packageName = null;
 	
-	private Set<String> allMethodNameSet = new HashSet<String>();
-	private Set<String> testMethodNameSet = new HashSet<String>();
-	
 	private Set<String> methodDependencies = new HashSet<String>();
 	private Set<String> classDependencies = new HashSet<String>();
+	private Map<String, DataSourceType> dsMap = null;
+	
+	// For checking whether a method name exists in a given class
+	private Set<String> allMethodsNameSet = new HashSet<String>();
+	// For pulling out class definitions by name
+	private Map<String, JavaTestMethodDefinition> testMethodDefinitions = new HashMap<String, JavaTestMethodDefinition>();
+	// This is what would be got by groups for pickers processing. If a group picks up something, it calls setPicked()
+	private List<String> forPickerProcessing = new ArrayList<String>();
+	// The following gets populated from above, if classDef.isNotPickedByAnyGroup() is True
+	private List<String> forProcessor = new ArrayList<String>();
+	private JavaTestClassFixturesLoader fixtureLoader = null;
 	
 	public JavaTestClassDefinition() throws Exception{
 		this.testVars = new DefaultTestVariables();
 		this.testVars.populateDefaults();
 		this.testVars.rawExecVars().add(Batteries.cloneCentralExecVars());
+		this.fixtureLoader = new JavaTestClassFixturesLoader(this);
+	}
+	
+	public JavaTestClassFixturesLoader getFixturesLoader(){
+		return this.fixtureLoader;
+	}
+	
+	public synchronized List<String> getMethodDefQueueForDefPickerProcessing(){
+		return forPickerProcessing;
+	}
+	
+	public synchronized List<String> getMethodDefQueueForDefProcessor(){
+		return forProcessor;
+	}
+	
+	public void registerTestMethodDefinition(String name, JavaTestMethodDefinition methodDef) {
+		if (ArjunaInternal.displayLoadingInfo){
+			this.logger.debug(String.format("Registering method definition for: %s", name));
+		}
+		allMethodsNameSet.add(name);
+		testMethodDefinitions.put(name, methodDef);
+		
+		if (!methodDef.shouldBeSkipped()){
+			forPickerProcessing.add(name);
+		}
 	}
 	
 	public String getPackageName() throws Exception {
@@ -157,47 +188,10 @@ public class JavaTestClassDefinition {
 	public TestFixtures getFixtures() {
 		return this.fixtures;
 	}
-
-	public void addTestMethodDefinition(String name, JavaTestMethodDefinition methodDef) {
-		this.methodNamesQueue.add(name);
-		this.unscheduledMethodsQueue.add(name);
-		testMethodNameSet.add(name);
-		allMethodNameSet.add(name);
-		this.methodDefinitions.put(name, methodDef);
-	}
-	
-	public synchronized void markScheduled(String sessionName, List<String> creatorNames) throws Exception{
-		for (String cName: creatorNames){
-			JavaTestMethodDefinition classDef = this.getTestCreatorDefinition(cName);
-			classDef.updateSessionInfo(sessionName);
-		}
-		unscheduledMethodsQueue.removeAll(creatorNames);
-	}
-	
-	public void markScheduledNonSkipped(String sessionName, List<String> names) throws Exception {
-		markScheduled(sessionName, names);
-		for (String name: names){
-			if (!scheduled.contains(name)){
-				scheduled.add(name);
-			}
-		}
-	}
-	
-	public synchronized List<String> getUnscheduledCreators(){
-		return unscheduledMethodsQueue;
-	}
-
-	public boolean hasMethodWithName(String depMethodName) {
-		return this.methodDefinitions.containsKey(depMethodName);
-	}
-
-	public List<String> getTestMethodQueue() {
-		return this.methodNamesQueue;
-	}
 	
 	public JavaTestMethodDefinition getTestCreatorDefinition(String name) {
 //		logger.debug(String.format("Fetching definition for test method: %s", name));
-		return this.methodDefinitions.get(name);
+		return this.testMethodDefinitions.get(name);
 	}
 
 	public String getQualifiedName() {
@@ -233,22 +227,22 @@ public class JavaTestClassDefinition {
 	}
 
 	public void addNonTestMethodName(String name) {
-		this.allMethodNameSet.add(name);
+		this.allMethodsNameSet.add(name);
 	}
 	
 	public synchronized boolean isTestMethod(String name) {
-		return this.testMethodNameSet.contains(name);
+		return this.testMethodDefinitions.containsKey(name);
 	}
 	
 	public synchronized boolean hasMethod(String name) {
-		return allMethodNameSet.contains(name);
+		return allMethodsNameSet.contains(name);
 	}
 	
 	public synchronized boolean isTestMethodMarkedForSkipping(String name) throws Exception {
-		if (!testMethodNameSet.contains(name)){
+		if (!isTestMethod(name)){
 			throw new Exception("Not a test method.");
 		} else {
-			return this.methodDefinitions.get(name).shouldBeSkipped();
+			return this.testMethodDefinitions.get(name).shouldBeSkipped();
 		}
 	}
 	
@@ -286,31 +280,27 @@ public class JavaTestClassDefinition {
 		this.testVars.rawObjectProps().setSessionName(sessionName);	
 	}
 	
-	public void setPicked() throws Exception{
+	public void setPicked(){
 		logger.debug(String.format("Mark Class Def picked: %s", this.getQualifiedName()));
 		this.unpicked = false;
 		this.unpickCode = null;
 	}
 	
-	public void setUnpicked(UnpickedCode code) throws Exception{
+	public void setUnpicked(UnpickedCode code){
 		logger.debug(String.format("Mark Class Def Unpicked: %s", this.getQualifiedName()));
 		this.unpicked = true;
 		this.unpickCode = code;
 	}
-	
-	public void setSkipped(SkipCode code) throws Exception{
-		logger.debug(String.format("Mark Class Def Skipped: %s", this.getQualifiedName()));
-		this.skipIt = true;
-		this.skipCode = code;
-		this.unpicked = false;
-		logger.debug("Should Skip?" + this.shouldBeSkipped());
-	}
 
-	public boolean shouldBeSkipped() throws Exception{
+	public boolean shouldBeSkipped(){
 		return this.skipIt;
 	}
 	
-	public boolean isUnpicked() throws Exception{
+	public boolean isPicked(){
+		return !this.unpicked;
+	}
+	
+	public boolean isUnpicked(){
 		return this.unpicked;
 	}
 
@@ -324,6 +314,43 @@ public class JavaTestClassDefinition {
 
 	public String getName() {
 		return klass.getSimpleName();
+	}
+
+	public void setSkipCode(SkipCode code) {
+		this.skipCode = code;
+	}
+
+	public void setDataSourceMap(Map<String, DataSourceType> map) {
+		this.dsMap = map;
+	}
+	
+	public Map<String, DataSourceType> getDataSourceMap(){
+		return this.dsMap;
+	}
+
+	public JavaTestMethodDefinition getTestMethodDefinition(String qName) {
+		return this.testMethodDefinitions.get(qName);
+	}
+
+	public void buildProcessorQueueFromPickerQueue(){
+		boolean classPicked = false;
+		for (String name: forPickerProcessing){
+			JavaTestMethodDefinition methodDef = testMethodDefinitions.get(name);
+			if (this.isPicked()){
+				if (methodDef.isPicked()){
+					forProcessor.add(name);
+				} else {
+					methodDef.setUnpicked(UnpickedCode.UNPICKED_METHOD);
+				}
+			} else {
+				methodDef.setUnpicked(this.getUnpickCode());
+			}
+		}
+	}
+
+	public void setSkipped(SkipCode code) {
+		this.skipIt = true;
+		this.skipCode = code;
 	}
 
 }

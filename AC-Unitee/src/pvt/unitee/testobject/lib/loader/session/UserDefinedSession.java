@@ -84,7 +84,7 @@ public class UserDefinedSession extends BaseSession{
 		return this.arjunaOptionsObj;
 	}
 	
-	public void load() throws Exception{
+	public void schedule() throws Exception{
 		JsonArray jArr = null;
 		try{
 			jArr = sObject.getAsJsonArray("nodes");
@@ -126,7 +126,8 @@ public class UserDefinedSession extends BaseSession{
 			
 			this.addNode(node);
 		}
-		super.load();
+		
+		super.schedule();
 	}
 
 	@Override

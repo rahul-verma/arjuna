@@ -2,28 +2,24 @@ package pvt.unitee.testobject.lib.loader.session;
 
 import com.google.gson.JsonObject;
 
+import pvt.unitee.arjuna.TestGroupsDB;
 import pvt.unitee.enums.PickerTargetType;
+import pvt.unitee.testobject.lib.loader.group.Group;
+import pvt.unitee.testobject.lib.loader.group.PickerConfig;
 
 public class MSession extends BaseSession{
-	private String groupName = null;
+	private PickerConfig config = null;
 	
-	private MSession(String mGroupName) throws Exception{
+	public MSession(PickerConfig config) throws Exception{
 		super("msession");
-		this.groupName = mGroupName;
+		this.config = config;
 	}
 
-	public MSession() throws Exception{
-		this("magroup");		
-	}
-	
-	public void load() throws Exception{
-		BaseSessionNode node = new BaseSessionNode(this, 2, "mnode", groupName);
+	@Override
+	public void schedule() throws Exception{
+		BaseSessionNode node = new BaseSessionNode(this, 1, "mnode", config);
 		this.addNode(node);
-		super.load();
-	}
-	
-	public MSession(PickerTargetType defaultPickerTarget) throws Exception{		
-		this(getMagicGroupName(defaultPickerTarget));
+		super.schedule();
 	}
 	
 	private static String getMagicGroupName(PickerTargetType defaultPickerTarget){

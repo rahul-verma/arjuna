@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.unitee.testobject.lib.loader;
+package pvt.unitee.testobject.lib.java.loader;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

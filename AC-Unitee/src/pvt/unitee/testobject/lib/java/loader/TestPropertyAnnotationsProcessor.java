@@ -1,4 +1,4 @@
-package pvt.unitee.testobject.lib.loader;
+package pvt.unitee.testobject.lib.java.loader;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;

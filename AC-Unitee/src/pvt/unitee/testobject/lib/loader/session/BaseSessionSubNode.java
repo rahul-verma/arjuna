@@ -11,8 +11,10 @@ import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.hocon.HoconStringReader;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import pvt.unitee.arjuna.ArjunaInternal;
+import pvt.unitee.enums.PickerTargetType;
 import pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import pvt.unitee.testobject.lib.loader.group.Group;
+import pvt.unitee.testobject.lib.loader.group.PickerConfig;
 
 public class BaseSessionSubNode implements SessionSubNode{
 	private List<Group> groupsQueue = new ArrayList<Group>();
@@ -34,17 +36,28 @@ public class BaseSessionSubNode implements SessionSubNode{
 		this.execVars.cloneAdd(sessionNode.getExecVars().items());
 	}
 	
+	public BaseSessionSubNode(SessionNode sessionNode, int id, String groupName) throws Exception{
+		this(sessionNode, id);
+		this.group = this.session.getGroupsDB().createGroup(this, groupName);
+		this.group.setSessionName(this.getSession().getName());
+		this.name += "-" + group.getName();
+	}
+	
 	public BaseSessionSubNode(SessionNode sessionNode, int id, Group group) throws Exception{
 		this(sessionNode, id);
 		this.group = group;
 		this.name += "-" + group.getName();
 	}
 	
-	public BaseSessionSubNode(SessionNode sessionNode, int id, String groupName) throws Exception{
+	public BaseSessionSubNode(SessionNode sessionNode, int id, PickerConfig config) throws Exception{
 		this(sessionNode, id);
-		this.group = ArjunaInternal.getGroupLoader().getGroup(this, groupName);
-		this.group.setSessionName(this.getSession().getName());
-		this.name += "-" + group.getName();
+		PickerTargetType pType = config.getTargetType();
+		if (pType == null){
+			this.group = session.getGroupsDB().createAllCapturingGroup(this);
+		} else {
+			this.group = session.getGroupsDB().createMagicFilterGroup(this, config);
+		}
+		this.name += "-" + this.group.getName();
 	}
 	
 	public BaseSessionSubNode(SessionNode sessionNode, int id, JsonObject groupObj) throws Exception{
@@ -65,7 +78,7 @@ public class BaseSessionSubNode implements SessionSubNode{
 		} catch (Exception e){
 			existAsNameIsNotString();
 		}
-		this.group = ArjunaInternal.getGroupLoader().getGroup(this, groupName);
+		this.group = this.session.getGroupsDB().createGroup(this, groupName);
 		this.group.setSessionName(this.getSession().getName());
 		this.name += "-" + group.getName();
 	}
@@ -90,9 +103,15 @@ public class BaseSessionSubNode implements SessionSubNode{
 		System.exit(1);			
 	}
 	
+	@Override
+	public void schedule() throws Exception{
+		group.schedule();
+		this.testMethodCount = group.getTestMethodCount();
+	}
+	
+	@Override
 	public void load() throws Exception{
 		group.load();
-		this.testMethodCount = group.getTestMethodCount();
 	}
 	
 	public Group getGroup(){

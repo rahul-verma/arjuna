@@ -75,7 +75,7 @@ public class DependencyUtils {
 		} else {
 			logger.error(String.format("No class with name %s found in the test directory", containerClass.getName()));
 			logger.error("Classes in DB:");
-			logger.error(DataBatteries.flatten(TestDefinitionsDB.getTestContainerNames()));
+			logger.error(DataBatteries.flatten(TestDefinitionsDB.getAllProjectClassNames()));
 			logger.error(String.format("A dependency defined for %s would be ignored.", testObjectQualifiedName));
 			return null;			
 		}

@@ -1,4 +1,4 @@
-package pvt.unitee.testobject.lib.loader;
+package pvt.unitee.testobject.lib.java.loader;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -21,6 +21,7 @@ import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.StaticFixture;
 import pvt.unitee.testobject.lib.fixture.TestClassFixtures;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
+import pvt.unitee.testobject.lib.java.processor.MethodSignatureType;
 import unitee.annotations.AfterClass;
 import unitee.annotations.AfterClassFragment;
 import unitee.annotations.AfterClassInstance;
@@ -38,6 +39,7 @@ import unitee.interfaces.TestVariables;
 public class JavaTestClassFixturesLoader {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private JavaTestClassDefinition classDef = null;
+	private List<Method> fixtureMethods = new ArrayList<Method>();
 	private Fixture setUpClassFixture = null;
 	private Fixture tearDownClassFixture = null;
 	private Fixture setUpClassInstanceFixture = null;
@@ -150,8 +152,18 @@ public class JavaTestClassFixturesLoader {
 			System.exit(1);			
 		}
 	}
+	
+	public void addFixtureMethod(Method m){
+		this.fixtureMethods.add(m);
+	}
+	
+	public void load() throws Exception{
+		for (Method m: this.fixtureMethods){
+			this.loadFixture(m);
+		}
+	}
 
-	public void loadFixture(Method m) throws Exception{
+	private void loadFixture(Method m) throws Exception{
 		if (ArjunaInternal.displayFixtureProcessingInfo){
 			logger.debug(String.format("Processing fixtures for %s", this.classDef.getQualifiedName()));
 		}

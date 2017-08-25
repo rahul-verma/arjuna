@@ -16,7 +16,7 @@ public class BaseGroup implements Group{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private String sessionName = null;
 	private String name = null;
-	private TestLoader loader = null;
+	private GroupTestContainerScheduler loader = null;
 	private int classThreads = 1;
 	List<Picker> containerPickers = null;
 	private SessionSubNode sessionSubNode;
@@ -37,17 +37,22 @@ public class BaseGroup implements Group{
 		this.name = name;
 	}
 	
-	protected void setLoader(TestLoader loader){
+	protected void setLoader(GroupTestContainerScheduler loader){
 		this.loader = loader;
 	}
 
-	public void load() throws Exception{
+	public void schedule() throws Exception{
 		logger.debug(String.format("%s: Loading containers", this.getName()));
 		if (containerPickers != null){
 			for (Picker picker: containerPickers){
 				picker.setGroup(this);
 			}
 		}
+		this.loader.schedule();
+	}
+	
+	@Override
+	public void load() throws Exception{
 		this.loader.load();
 	}
 	

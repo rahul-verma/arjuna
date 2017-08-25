@@ -4,7 +4,7 @@ import java.util.List;
 
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.JavaTestMethod;
-import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
+import pvt.unitee.testobject.lib.java.loader.DataMethodsHandler;
 
 public interface TestContainerFragment extends TestObject {
 

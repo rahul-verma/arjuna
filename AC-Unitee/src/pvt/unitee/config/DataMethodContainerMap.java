@@ -29,8 +29,8 @@ import arjunasdk.console.Console;
 import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
-import pvt.unitee.testobject.lib.loader.DataMethodsHandler;
-import pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler;
+import pvt.unitee.testobject.lib.java.loader.DataMethodsHandler;
+import pvt.unitee.testobject.lib.java.loader.NonTestDataMethodsHandler;
 import unitee.annotations.DataMethodContainer;
 
 public class DataMethodContainerMap {

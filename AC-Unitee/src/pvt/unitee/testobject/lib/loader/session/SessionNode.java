@@ -6,7 +6,7 @@ public interface SessionNode {
 
 	int getTestMethodCount();
 
-	void load() throws Exception;
+	void schedule() throws Exception;
 
 	String getName();
 
@@ -21,4 +21,6 @@ public interface SessionNode {
 	void setName(String name);
 
 	DefaultStringKeyValueContainer getExecVars();
+
+	void load() throws Exception;
 }

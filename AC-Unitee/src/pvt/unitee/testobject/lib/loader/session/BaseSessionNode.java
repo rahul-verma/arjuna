@@ -14,6 +14,7 @@ import pvt.batteries.hocon.HoconStringReader;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
 import pvt.unitee.testobject.lib.loader.group.Group;
+import pvt.unitee.testobject.lib.loader.group.PickerConfig;
 
 public class BaseSessionNode implements SessionNode{
 	private List<SessionSubNode> groupNodes = new ArrayList<SessionSubNode>();
@@ -37,9 +38,15 @@ public class BaseSessionNode implements SessionNode{
 		this.addGroupNode(groupName);
 	}
 	
-	public BaseSessionNode(Session session, int id, String nodeName, String groupName) throws Exception{
+	public BaseSessionNode(Session session, int id, String nodeName, Group group) throws Exception{
 		this(session, id);
-		this.addGroupNode(groupName);
+		this.addGroupNode(group);
+	}
+	
+	// Used for magic groups
+	public BaseSessionNode(Session session, int id, String nodeName, PickerConfig config) throws Exception{
+		this(session, id);
+		this.addGroupNode(config);
 	}
 	
 	public BaseSessionNode(Session session, int id, JsonObject nodeObj) throws Exception{
@@ -186,21 +193,33 @@ public class BaseSessionNode implements SessionNode{
 		System.exit(1);			
 	}
 	
-	public void load() throws Exception{
+	@Override
+	public void schedule() throws Exception{
 		for (SessionSubNode groupNode: this.groupNodes){
-			groupNode.load();
+			groupNode.schedule();
 			this.testMethodCount += groupNode.getTestMethodCount();
 		}
 		
 		iter = this.groupNodes.iterator();
 	}
 	
-	public void addGroupNode(Group group) throws Exception {
-		this.groupNodes.add(new BaseSessionSubNode(this, this.groupNodes.size() + 1, group));
+	@Override
+	public void load() throws Exception{
+		for (SessionSubNode groupNode: this.groupNodes){
+			groupNode.load();
+		}
 	}
 	
 	public void addGroupNode(String groupName) throws Exception {
 		this.groupNodes.add(new BaseSessionSubNode(this, this.groupNodes.size() + 1, groupName));
+	}
+	
+	public void addGroupNode(Group group) throws Exception {
+		this.groupNodes.add(new BaseSessionSubNode(this, this.groupNodes.size() + 1, group));
+	}
+	
+	public void addGroupNode(PickerConfig config) throws Exception {
+		this.groupNodes.add(new BaseSessionSubNode(this, this.groupNodes.size() + 1, config));
 	}
 	
 	public void addGroupNode(JsonObject groupJsonObj) throws Exception {

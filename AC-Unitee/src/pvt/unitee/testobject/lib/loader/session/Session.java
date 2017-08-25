@@ -3,6 +3,7 @@ package pvt.unitee.testobject.lib.loader.session;
 import com.google.gson.JsonObject;
 
 import pvt.batteries.value.DefaultStringKeyValueContainer;
+import pvt.unitee.arjuna.TestGroupsDB;
 
 public interface Session {
 
@@ -10,7 +11,7 @@ public interface Session {
 
 	SessionNode next() throws Exception;
 
-	void load() throws Exception;
+	void schedule() throws Exception;
 
 	String getName();
 
@@ -25,4 +26,10 @@ public interface Session {
 	void setExecVars(DefaultStringKeyValueContainer execVars);
 
 	JsonObject getUserOptionsObject();
+
+	boolean isDefaultSession();
+
+	TestGroupsDB getGroupsDB();
+
+	void load() throws Exception;
 }

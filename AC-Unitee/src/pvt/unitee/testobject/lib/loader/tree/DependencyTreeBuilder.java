@@ -54,7 +54,7 @@ public class DependencyTreeBuilder {
 			}
 			
 			processedClassDeps.add(dependencyClass.getName());
-			for(String dependencyMethodName: depClassDef.getTestMethodQueue()){
+			for(String dependencyMethodName: depClassDef.getMethodDefQueueForDefProcessor()){
 				addSingleMethodDependencyEdge(dependentMethodQualifiedName, dependencyClass.getName() + "." + dependencyMethodName);
 			}
 		}
@@ -116,7 +116,7 @@ public class DependencyTreeBuilder {
 				if (ArjunaInternal.displayDefProcessingInfo){
 					logger.debug("Parent's class dependency: " + cName);
 				}
-				for (String mName: TestDefinitionsDB.getContainerDefinition(cName).getTestMethodQueue()){
+				for (String mName: TestDefinitionsDB.getContainerDefinition(cName).getMethodDefQueueForDefProcessor()){
 					if (ArjunaInternal.displayDefProcessingInfo){
 						logger.debug(String.format("Parent's class dependency %s -> Method %s",cName, mName));
 					}

@@ -14,6 +14,8 @@ import org.apache.log4j.Logger;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.annotate.None;
+import pvt.unitee.enums.SkipCode;
+import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;
 import pvt.unitee.testobject.lib.loader.tree.DependencyUtils;
 import unitee.annotations.ClassDependency;
@@ -21,13 +23,16 @@ import unitee.annotations.MethodDependency;
 
 public class TestDefinitionsDB {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
-	private static Map<String, JavaTestClassDefinition> classDefinitions = new HashMap<String, JavaTestClassDefinition>();
-	private static Set<String> allClassNameSet = new HashSet<String>();
-	private static Set<String> testClassNameSet =  new HashSet<String>();
 	private static DependencyTreeBuilder depTreeBuilder = new DependencyTreeBuilder();
-	private static List<String> allClassNameQueue = new ArrayList<String>();
-	private static List<String> unscheduled = new ArrayList<String>();
-	private static List<String> scheduled = new ArrayList<String>();
+	
+	// For checking whether a class name exists in the current project
+	private static Set<String> allClassNameSet = new HashSet<String>();
+	// For pulling out class definitions by name
+	private static Map<String, JavaTestClassDefinition> testClassDefinitions = new HashMap<String, JavaTestClassDefinition>();
+	// This is what would be got by groups for pickers processing. If a group picks up something, it calls setPicked()
+	private static List<String> forPickerProcessing = new ArrayList<String>();
+	// The following gets populated from above, if classDef.isNotPickedByAnyGroup() is True
+	private static List<String> forProcessor = new ArrayList<String>();
 
 	public static synchronized JavaTestClassDefinition getClassTestVars(String fullClassName){
 		return null;
@@ -37,60 +42,47 @@ public class TestDefinitionsDB {
 		if (ArjunaInternal.displayLoadingInfo){
 			logger.debug(String.format("Registering class definition for: %s", name));
 		}
-		classDefinitions.put(name, classDef);
-		allClassNameQueue.add(name);
-		unscheduled.add(name);
 		allClassNameSet.add(name);
-		testClassNameSet.add(name);
-	}
-	
-	public static synchronized List<String> getClassNameList(){
-		return allClassNameQueue;
-	}
-	
-	public static synchronized void markScheduled(String sessionName, List<String> containerNames) throws Exception{
-		for (String cName: containerNames){
-			JavaTestClassDefinition classDef = getContainerDefinition(cName);
-			classDef.updateSessionInfo(sessionName);
+		testClassDefinitions.put(name, classDef);
+		
+		if (!classDef.shouldBeSkipped()){
+			forPickerProcessing.add(name);
 		}
-		unscheduled.removeAll(containerNames);
+		
+		System.out.println(forPickerProcessing);
+	}
+
+	public static synchronized List<String> getClassDefQueueForDefPickerProcessing(){
+		return forPickerProcessing;
 	}
 	
-	public static synchronized void markScheduledNonSkipped(String sessionName, List<String> containerNames) throws Exception{
-		markScheduled(sessionName, containerNames);
-		for (String name: containerNames){
-			if (!scheduled.contains(name)){
-				scheduled.add(name);
+	public static synchronized void buildProcessorQueueFromPickerQueue(){
+		for (String name: forPickerProcessing){
+			JavaTestClassDefinition classDef = testClassDefinitions.get(name);
+			if (classDef.isPicked()){
+				forProcessor.add(name);
+			} else {
+				classDef.setUnpicked(UnpickedCode.UNPICKED_CLASS);
 			}
+			
+			classDef.buildProcessorQueueFromPickerQueue();
 		}
 	}
 	
-	public static synchronized void removeAsSkipped(List<String> containerNames){
-		allClassNameQueue.removeAll(containerNames);
-	}
-	
-	public static synchronized List<String> getUnscheduledContainers(){
-		return unscheduled;
-	}
-	
-	public static synchronized List<String> getScheduledContainers(){
-		return scheduled;
-	}
-	
-	public static synchronized Set<String> getTestContainerNames(){
-		return testClassNameSet;
+	public static synchronized List<String> getClassDefQueueForDefProcessor(){
+		return forProcessor;
 	}
 
 	public static synchronized JavaTestClassDefinition getContainerDefinition(String name) {
 		if (ArjunaInternal.displayDefProcessingInfo){
 			logger.debug(String.format("Fetching class definition for: %s", name));
 		}
-		return classDefinitions.get(name);
+		return testClassDefinitions.get(name);
 	}
 	
-	public static synchronized void validateDependencies() throws Exception{
-		for (String name: classDefinitions.keySet()){
-			processClassLevelDependencies(classDefinitions.get(name));
+	public static synchronized void processDependencies() throws Exception{
+		for (String name: testClassDefinitions.keySet()){
+			processClassLevelDependencies(testClassDefinitions.get(name));
 		}
 		depTreeBuilder.processDependencies();
 		depTreeBuilder.validate();
@@ -101,14 +93,14 @@ public class TestDefinitionsDB {
 	}
 
 	public static synchronized boolean isTestClass(String name) {
-		return TestDefinitionsDB.testClassNameSet.contains(name);
+		return TestDefinitionsDB.testClassDefinitions.containsKey(name);
 	}
 	
 	public static synchronized boolean isTestClassMarkedAsSkipped(String name) throws Exception {
 		if (!isTestClass(name)){
 			throw new Exception("Not a test class.");
 		} else {
-			return classDefinitions.get(name).shouldBeSkipped();
+			return testClassDefinitions.get(name).shouldBeSkipped();
 		}
 	}
 	
@@ -195,6 +187,10 @@ public class TestDefinitionsDB {
 		if (ArjunaInternal.displayDependencyDefInfo){
 			logger.debug("Deps processed.");
 		}
+	}
+
+	public static Set<String> getAllProjectClassNames() {
+		return allClassNameSet;
 	}
 
 }

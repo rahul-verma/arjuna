@@ -18,8 +18,8 @@ import pvt.unitee.core.lib.testvars.InternalTestVariables;
 import pvt.unitee.enums.DependencyTarget;
 import pvt.unitee.enums.SkipCode;
 import pvt.unitee.enums.UnpickedCode;
-import pvt.unitee.testobject.lib.loader.MethodSignatureType;
-import pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor;
+import pvt.unitee.testobject.lib.java.loader.TestPropertyAnnotationsProcessor;
+import pvt.unitee.testobject.lib.java.processor.MethodSignatureType;
 import unitee.interfaces.TestVariables;
 
 public class JavaTestMethodDefinition {
@@ -187,29 +187,26 @@ public class JavaTestMethodDefinition {
 		this.testVars.rawObjectProps().setSessionName(sessionName);
 	}
 	
-	public void setPicked() throws Exception{
+	public void setPicked(){
 		this.unpicked = false;
 		this.unpickCode = null;
 	}
 	
-	public void setUnpicked(UnpickedCode code) throws Exception{
+	public void setUnpicked(UnpickedCode code){
 		this.unpicked = true;
 		this.unpickCode = code;
 	}
-	
-	public void setSkipped(SkipCode code){
-		this.skipIt = true;
-		this.selectable = false;
-		this.skipCode = code;
-		this.unpicked = false;
-	}
 
-	public boolean shouldBeSkipped() throws Exception{
+	public boolean shouldBeSkipped(){
 		return this.skipIt;
 	}
 	
-	public boolean isUnpicked() throws Exception{
+	public boolean isUnpicked(){
 		return this.unpicked;
+	}
+	
+	public boolean isPicked() {
+		return !this.unpicked;
 	}
 
 	public UnpickedCode getUnpickCode() {
@@ -219,4 +216,10 @@ public class JavaTestMethodDefinition {
 	public SkipCode getSkipCode() {
 		return this.skipCode;
 	}
+
+	public void setSkipped(SkipCode skippedMethodAnnotation) {
+		this.skipIt = true;
+		this.skipCode = SkipCode.SKIPPED_METHOD_ANNOTATION;
+	}
+
 }

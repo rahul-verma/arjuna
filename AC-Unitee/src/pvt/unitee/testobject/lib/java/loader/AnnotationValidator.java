@@ -1,4 +1,4 @@
-package pvt.unitee.testobject.lib.loader;
+package pvt.unitee.testobject.lib.java.loader;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 
 import arjunasdk.console.Console;
+import pvt.unitee.testobject.lib.java.processor.JavaTestClassDefProcessor;
 
 public class AnnotationValidator {
 	private static Set<String> namedFixtures = new HashSet<String>(Arrays.asList(
@@ -187,7 +188,7 @@ public class AnnotationValidator {
 		boolean depAnomaly = false;
 		String testObjectName = "method";
 		if (m.getName().startsWith("test")){
-			populateAnns("test", annNames, JavaTestClassDefinitionsLoader.METHOD_ANNOTATION_COMPAT, incompatibles, ddtAnns, depAnns);
+			populateAnns("test", annNames, JavaTestClassDefProcessor.METHOD_ANNOTATION_COMPAT, incompatibles, ddtAnns, depAnns);
 			if (incompatibles.size() > 0){
 				annAnomaly = true;
 			}
@@ -207,7 +208,7 @@ public class AnnotationValidator {
 			exitOnDepAnnotationAnomaly(testObjectName, qualifiedName, annNames, depAnns, depAnomaly);
 		} else if (namedFixtures.contains(m.getName())){
 			String fixtureName = m.getName();
-			populateAnns(fixtureName, annNames, JavaTestClassDefinitionsLoader.METHOD_ANNOTATION_COMPAT, incompatibles, ddtAnns, depAnns);
+			populateAnns(fixtureName, annNames, JavaTestClassDefProcessor.METHOD_ANNOTATION_COMPAT, incompatibles, ddtAnns, depAnns);
 			if (incompatibles.size() > 0){
 				annAnomaly = true;
 			}
@@ -250,7 +251,7 @@ public class AnnotationValidator {
 		boolean depAnomaly = false;
 		String testObjectName = "class";
 		if (klass.getSimpleName().startsWith("Test")){
-			populateAnns("PrefixedTestClass", annNames, JavaTestClassDefinitionsLoader.CLASS_ANNOTATION_COMPAT, incompatibles, ddtAnns, depAnns);
+			populateAnns("PrefixedTestClass", annNames, JavaTestClassDefProcessor.CLASS_ANNOTATION_COMPAT, incompatibles, ddtAnns, depAnns);
 			if (incompatibles.size() > 0){
 				annAnomaly = true;
 			}
@@ -275,11 +276,11 @@ public class AnnotationValidator {
 	
 	public static void validateClassAnnotations(Class<?> klass, String qualifiedName){
 		List<String> annNames = getAnnNames(klass.getAnnotations());
-		validateAnns(annNames, JavaTestClassDefinitionsLoader.CLASS_ANNOTATION_COMPAT, "class", qualifiedName);
+		validateAnns(annNames, JavaTestClassDefProcessor.CLASS_ANNOTATION_COMPAT, "class", qualifiedName);
 	}
 
 	public static void validateMethodAnnotations(Method m, String qualifiedName){
 		List<String> annNames = getAnnNames(m.getAnnotations());
-		validateAnns(annNames, JavaTestClassDefinitionsLoader.METHOD_ANNOTATION_COMPAT, "method", qualifiedName);		
+		validateAnns(annNames, JavaTestClassDefProcessor.METHOD_ANNOTATION_COMPAT, "method", qualifiedName);		
 	}
 }

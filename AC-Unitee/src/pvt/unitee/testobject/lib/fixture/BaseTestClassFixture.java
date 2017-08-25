@@ -18,7 +18,7 @@ import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.testobject.lib.interfaces.TestContainerFragment;
 import pvt.unitee.testobject.lib.interfaces.TestContainerInstance;
 import pvt.unitee.testobject.lib.interfaces.TestObject;
-import pvt.unitee.testobject.lib.loader.MethodSignatureType;
+import pvt.unitee.testobject.lib.java.processor.MethodSignatureType;
 
 public abstract class BaseTestClassFixture implements Fixture {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

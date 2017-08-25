@@ -8,7 +8,7 @@ public interface SessionSubNode {
 
 	int getTestMethodCount();
 
-	void load() throws Exception;
+	void schedule() throws Exception;
 
 	Group getGroup() throws Exception;
 
@@ -23,4 +23,6 @@ public interface SessionSubNode {
 	SessionNode getSessionNode();
 
 	DefaultStringKeyValueContainer getExecVars();
+
+	void load() throws Exception;
 }

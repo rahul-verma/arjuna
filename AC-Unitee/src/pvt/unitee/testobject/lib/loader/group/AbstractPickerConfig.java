@@ -101,11 +101,15 @@ public abstract class AbstractPickerConfig implements PickerConfig {
 			return false;
 		}
 		
-		if ( ((CLASS_CONSIDER != null) && (CLASS_IGNORE != null)) || 
-				((CLASS_CONSIDER != null) && (CLASS_NAME != null)) ||
-					((CLASS_IGNORE != null) && (CLASS_NAME != null))){
+		if  ((this.isClassConsiderOrIgnoreOptionProvided()) && (CLASS_NAME != null)){
 			return false;			
 		}
+		
+//		if ( ((CLASS_CONSIDER != null) && (CLASS_IGNORE != null)) || 
+//				((CLASS_CONSIDER != null) && (CLASS_NAME != null)) ||
+//					((CLASS_IGNORE != null) && (CLASS_NAME != null))){
+//			return false;			
+//		}
 		
 		// Validate method level
 		if ((this.isMethodConsiderOrIgnoreOptionProvided()) && 
@@ -119,9 +123,9 @@ public abstract class AbstractPickerConfig implements PickerConfig {
 			return false;			
 		}
 		
-		if ((METHOD_CONSIDER != null) && (METHOD_IGNORE != null)){
-			return false;			
-		}
+//		if ((METHOD_CONSIDER != null) && (METHOD_IGNORE != null)){
+//			return false;			
+//		}
 		
 		return true;
 	}
@@ -311,10 +315,8 @@ abstract class BasePicker implements Picker {
 			for (String m: this.getConsiderPatterns()){
 				logger.debug(m);
 				if (m.startsWith("NONRX::")){
-					System.out.println("String match");
 					consider = targetString.equals(m.replace("NONRX::", ""));
 				} else {
-					System.out.println("Regex match");
 					consider = targetString.matches(m);
 				}
 				if (consider == true) {
@@ -334,55 +336,47 @@ abstract class BasePicker implements Picker {
 	}
 	
 	@Override
-	public int load(ExecutionSlotsCreator execSlotsCreator, List<String> unpickedContainers) throws Exception {
-		logger.debug(unpickedContainers);
-		logger.debug(String.format("%s:%s: Picking containers" , this.getTestGroup().getName(), this.getClass().getSimpleName()));
+	public int pick(ExecutionSlotsCreator execSlotsCreator, JavaTestClassDefinition classDef) throws Exception {
+
 		int testMethodCount = 0;
 		Group group = this.getTestGroup();
-		List<String> containers = new ArrayList<String>();
-		for (String className: unpickedContainers){
-			logger.debug(this.considerPatterns);
-			logger.debug(String.format("Group: %s, Evaluating: %s", group.getName(), className)) ;
-			JavaTestClassDefinition classDef = TestDefinitionsDB.getContainerDefinition(className);
+		String className = classDef.getQualifiedName();
 
-			logger.debug("Check package name: " + classDef.getPackageName());
-			if (!this.shouldIncludePackage(classDef.getPackageName())){
-				continue;
-			}
-			
-			logger.debug("Check class name: " + classDef.getName());
-			if (!this.shouldIncludeContainer(classDef.getName())){
-				continue;
-			}
-			
-			logger.debug(String.format("Group: %s, Including: %s", group.getName(), className)) ;			
-//			logger.debug(String.format("Included Class Loader: %s", classDef.getQualifiedName()));
-			
-			List<String> methodNames = classDef.getTestMethodQueue();
-			logger.debug(methodNames) ;
-			List<String> scheduledCreators = new ArrayList<String>();
-			for (String methodName: methodNames){
-				logger.debug(String.format("Group: %s, Evaluating: %s", group.getName(), methodName)) ;
-				JavaTestMethodDefinition methodDef = classDef.getTestCreatorDefinition(methodName);	
-				if ((methodDef.shouldBeSkipped()) || shouldIncludeMethod(methodName)){
-					logger.debug(String.format("Group: %s, Including: %s", group.getName(), methodName)) ;
-					scheduledCreators.add(methodName);
-					execSlotsCreator.addTestCreatorName(methodDef.getQualifiedName());
-					testMethodCount += 1;
-					methodDef.setPicked();
-				} else {
-					continue;
-				}
-			}
-			classDef.markScheduled(group.getSessionName(), scheduledCreators);
-			classDef.markScheduledNonSkipped(group.getSessionName(), scheduledCreators);
-			containers.add(className);
-			classDef.setPicked();
-			group.addClassMethodMap(classDef.getQualifiedName(), scheduledCreators);
+		logger.debug(String.format("Group: %s, Evaluating: %s", group.getName(), className)) ;
+
+		logger.debug("Check package name: " + classDef.getPackageName());
+		if (!this.shouldIncludePackage(classDef.getPackageName())){
+			return 0;
 		}
 		
-		TestDefinitionsDB.markScheduled(group.getSessionName(), containers);
-		TestDefinitionsDB.markScheduledNonSkipped(group.getSessionName(), containers);
+		logger.debug("Check class name: " + classDef.getName());
+		if (!this.shouldIncludeContainer(classDef.getName())){
+			return 0;
+		}
+		
+		logger.debug(String.format("Group: %s, Including: %s", group.getName(), className)) ;			
+//			logger.debug(String.format("Included Class Loader: %s", classDef.getQualifiedName()));
+		
+		List<String> methodNames = classDef.getMethodDefQueueForDefPickerProcessing();
+		logger.debug(methodNames) ;
+		List<String> scheduledCreators = new ArrayList<String>();
+		for (String methodName: methodNames){
+			logger.debug(String.format("Group: %s, Evaluating: %s", group.getName(), methodName)) ;
+			JavaTestMethodDefinition methodDef = classDef.getTestCreatorDefinition(methodName);	
+			if (shouldIncludeMethod(methodName)){
+				logger.debug(String.format("Group: %s, Including: %s", group.getName(), methodName)) ;
+				scheduledCreators.add(methodName);
+				execSlotsCreator.addTestCreatorName(methodDef.getQualifiedName());
+				testMethodCount += 1;
+				methodDef.setPicked();
+			} else {
+				continue;
+			}
+		}
+		
+		classDef.setPicked();
+		group.addClassMethodMap(classDef.getQualifiedName(), scheduledCreators);
+
 		return testMethodCount;
 	}
 	

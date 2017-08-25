@@ -1,4 +1,4 @@
-package pvt.unitee.testobject.lib.loader;
+package pvt.unitee.testobject.lib.java.processor;
 
 public enum MethodSignatureType {
 	SINGLEARG_TESTVARS,

@@ -46,8 +46,8 @@ import pvt.unitee.reporter.lib.test.TestResult;
 import pvt.unitee.reporter.lib.writer.console.ConsoleEventWriter;
 import pvt.unitee.reporter.lib.writer.console.ConsoleTestResultWriter;
 import pvt.unitee.reporter.lib.writer.excel.ExcelReportGenerator;
-import pvt.unitee.testobject.lib.loader.JavaTestClassDefinitionsLoader;
-import pvt.unitee.testobject.lib.loader.TestDefinitionsProcessor;
+import pvt.unitee.testobject.lib.java.loader.JavaTestClassDefLoader;
+import pvt.unitee.testobject.lib.java.loader.TestDefinitionsProcessor;
 import pvt.unitee.testobject.lib.loader.session.Session;
 
 public class ArjunaTestEngine implements TestEngine{
@@ -67,7 +67,7 @@ public class ArjunaTestEngine implements TestEngine{
 	@Override
 	public void discover() throws Exception {
 		TestDefinitionsProcessor testQueueBuilder = new TestDefinitionsProcessor();
-		testQueueBuilder.setTestDefinitionsLoader(TestLanguage.JAVA, new JavaTestClassDefinitionsLoader());
+		testQueueBuilder.setTestDefinitionsLoader(TestLanguage.JAVA, new JavaTestClassDefLoader());
 		testQueueBuilder.populate();		
 	}
 	
