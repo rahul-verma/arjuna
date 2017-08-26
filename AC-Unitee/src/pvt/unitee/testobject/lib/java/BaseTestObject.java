@@ -24,13 +24,13 @@ public abstract class BaseTestObject implements TestObject {
 	private String exclusionDesc = null;
 	private int issueId;
 	
-	private boolean notSelected = false;
-	private TestResultCode notSelectedType = null;
-	private String notSelectedDesc = null;
-	
-	private boolean skipped = false;
-	private TestResultCode skipType = null;
-	private String skipDesc = null;
+//	private boolean notSelected = false;
+//	private TestResultCode notSelectedType = null;
+//	private String notSelectedDesc = null;
+//	
+//	private boolean skipped = false;
+//	private TestResultCode skipType = null;
+//	private String skipDesc = null;
 	
 	private Fixture setUpFixture = null;
 	private Fixture tearDownFixture = null;
@@ -102,49 +102,49 @@ public abstract class BaseTestObject implements TestObject {
 		return this.issueId;
 	}
 
-	@Override
-	public void markUnSelected(TestResultCode type, String desc) {
-		this.notSelected = true;
-		this.notSelectedType = type;
-		this.notSelectedDesc = desc;
-	}
-
-	@Override
-	public boolean wasUnSelected() {
-		return this.notSelected;
-	}
-
-	@Override
-	public TestResultCode getUnSelectedType() {
-		return this.notSelectedType;
-	}
-
-	@Override
-	public String getUnSelectedDesc() {
-		return this.notSelectedDesc;
-	}
-	
-	@Override
-	public void markSkipped(TestResultCode type, String desc) {
-		this.skipped = true;
-		this.skipType = type;
-		this.skipDesc = desc;
-	}
-
-	@Override
-	public boolean wasSkipped() {
-		return this.skipped;
-	}
-
-	@Override
-	public TestResultCode getSkipType() {
-		return this.skipType;
-	}
-
-	@Override
-	public String getSkipDesc() {
-		return this.skipDesc;
-	}
+//	@Override
+//	public void markUnSelected(TestResultCode type, String desc) {
+//		this.notSelected = true;
+//		this.notSelectedType = type;
+//		this.notSelectedDesc = desc;
+//	}
+//
+//	@Override
+//	public boolean wasUnSelected() {
+//		return this.notSelected;
+//	}
+//
+//	@Override
+//	public TestResultCode getUnSelectedType() {
+//		return this.notSelectedType;
+//	}
+//
+//	@Override
+//	public String getUnSelectedDesc() {
+//		return this.notSelectedDesc;
+//	}
+//	
+//	@Override
+//	public void markSkipped(TestResultCode type, String desc) {
+//		this.skipped = true;
+//		this.skipType = type;
+//		this.skipDesc = desc;
+//	}
+//
+//	@Override
+//	public boolean wasSkipped() {
+//		return this.skipped;
+//	}
+//
+//	@Override
+//	public TestResultCode getSkipType() {
+//		return this.skipType;
+//	}
+//
+//	@Override
+//	public String getSkipDesc() {
+//		return this.skipDesc;
+//	}
 	
 	@Override
 	public void setThreadId(String id) throws Exception{
@@ -187,13 +187,15 @@ public abstract class BaseTestObject implements TestObject {
 	}
 	
 	public boolean shouldExecuteSetUp(){
-		return !(this.excluded || this.notSelected || this.skipped);
+		return !this.excluded; //|| this.notSelected || this.skipped);
 	}
 	
 	public boolean shouldExecuteTearDown(){
-		if (this.wasUnSelected() || this.wasSkipped()){
-			return false;
-		} else if (this.wasExcluded() && (this.getExclusionType() != this.getIgnoreExclusionTestResultCode())){
+//		if (this.wasUnSelected() || this.wasSkipped()){
+//			return false;
+//		} else 
+		
+		if (this.wasExcluded() && (this.getExclusionType() != this.getIgnoreExclusionTestResultCode())){
 			return false;
 		}
 		

@@ -118,19 +118,20 @@ public abstract class AbstractTestObjectExecutor {
 	}
 
 	protected boolean copySchedulingStatusFromParentAndReturnFalseIfNotApplicable(TestObject parent, TestObject testObj){
-		if (parent.wasSkipped()){
-			testObj.markSkipped(
-					parent.getSkipType(),
-					parent.getSkipDesc()
-					);
-			return true;
-		} else if (parent.wasUnSelected()){
-			testObj.markUnSelected(
-					parent.getUnSelectedType(),
-					parent.getUnSelectedDesc()
-					);
-			return true;
-		} else if (parent.wasExcluded()){
+//		if (parent.wasSkipped()){
+//			testObj.markSkipped(
+//					parent.getSkipType(),
+//					parent.getSkipDesc()
+//					);
+//			return true;
+//		} else if (parent.wasUnSelected()){
+//			testObj.markUnSelected(
+//					parent.getUnSelectedType(),
+//					parent.getUnSelectedDesc()
+//					);
+//			return true;
+//		} else 
+		if (parent.wasExcluded()){
 			testObj.markExcluded(
 					parent.getExclusionType(),
 					parent.getExclusionDesc(),

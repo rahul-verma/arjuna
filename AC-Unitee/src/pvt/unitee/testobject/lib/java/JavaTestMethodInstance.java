@@ -165,9 +165,11 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 	}
 	
 	public boolean shouldExecuteSetUpMethodInstanceFixture(){
-		if (this.wasUnSelected() || this.wasSkipped()){
-			return false;
-		} else if (this.wasExcluded() && (this.getExclusionType() != TestResultCode.ERROR_IN_SETUP_METHOD_INSTANCE)){
+//		if (this.wasUnSelected() || this.wasSkipped()){
+//			return false;
+//		} else 
+			
+		if (this.wasExcluded() && (this.getExclusionType() != TestResultCode.ERROR_IN_SETUP_METHOD_INSTANCE)){
 			return false;
 		}
 		
@@ -175,9 +177,11 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 	}
 	
 	public boolean shouldExecuteTearDownMethodInstanceFixture(){
-		if (this.wasUnSelected() || this.wasSkipped()){
-			return false;
-		} else if (this.wasExcluded() && (this.getExclusionType() != TestResultCode.ERROR_IN_SETUP_METHOD_INSTANCE)){
+//		if (this.wasUnSelected() || this.wasSkipped()){
+//			return false;
+//		} else 
+			
+		if (this.wasExcluded() && (this.getExclusionType() != TestResultCode.ERROR_IN_SETUP_METHOD_INSTANCE)){
 			return false;
 		}
 		

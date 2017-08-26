@@ -180,19 +180,19 @@ public class ExecutionSlotsCreator {
 					currentContainer.setGroup(this.group);
 					currentContainer.setAllScheduledCreators(this.group.getScheduledCreatorsForContainer(currentContainer.getQualifiedName()));
 					logger.debug(classDef.getQualifiedName());
-					 if (classDef.shouldBeSkipped()){
-							logger.debug("Should be Skipped.");
-							currentContainer.markSkipped(
-									  TestResultCode.valueOf(SkipCode.SKIPPED_CLASS_ANNOTATION.toString()),
-									  String.format("%s has @Skip.", classDef.getQualifiedName())
-							);							
-					} else if (classDef.isUnpicked()){
-						logger.debug("Was Filtered.");
-						currentContainer.markUnSelected(
-								  TestResultCode.valueOf(UnpickedCode.UNPICKED_CLASS.toString()),
-								  String.format("%s not selected.", classDef.getQualifiedName())
-						);						
-					} 
+//					 if (classDef.shouldBeSkipped()){
+//							logger.debug("Should be Skipped.");
+//							currentContainer.markSkipped(
+//									  TestResultCode.valueOf(SkipCode.SKIPPED_CLASS_ANNOTATION.toString()),
+//									  String.format("%s has @Skip.", classDef.getQualifiedName())
+//							);							
+//					} else if (classDef.isUnpicked()){
+//						logger.debug("Was Filtered.");
+//						currentContainer.markUnSelected(
+//								  TestResultCode.valueOf(UnpickedCode.UNPICKED_CLASS.toString()),
+//								  String.format("%s not selected.", classDef.getQualifiedName())
+//						);						
+//					} 
 					this.createdContainerObjects.put(className, currentContainer);
 				}
 			} else {

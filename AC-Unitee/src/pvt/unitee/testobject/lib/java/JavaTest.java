@@ -80,17 +80,17 @@ public class JavaTest extends BaseTestObject implements Test{
 	
 	public void execute() throws Exception{		
 		this.initTimeStamp();
-		if (this.wasUnSelected()){
-			this.endTimeStamp();
-			reportUnselected();
-			return;
-		}
-		
-		if (this.wasSkipped()){
-			this.endTimeStamp();
-			reportSkipped();
-			return;
-		}
+//		if (this.wasUnSelected()){
+//			this.endTimeStamp();
+//			reportUnselected();
+//			return;
+//		}
+//		
+//		if (this.wasSkipped()){
+//			this.endTimeStamp();
+//			reportSkipped();
+//			return;
+//		}
 		
 		if (this.wasExcluded()){
 			this.endTimeStamp();
@@ -177,31 +177,31 @@ public class JavaTest extends BaseTestObject implements Test{
 		ArjunaInternal.getReporter().update(result);
 	}
 	
-	private void reportUnselected() throws Exception {
-		TestResultBuilder builder = new TestResultBuilder();
-		TestResult result = builder
-		.testVariables(this.getTestVariables())
-		.result(TestResultType.UNPICKED)
-		.code(this.getUnSelectedType())
-		.desc(this.getUnSelectedDesc())
-		.build();
-		ArjunaInternal.getCentralExecState().update(result);
-		ArjunaInternal.getCentralExecState().getCurrentThreadState().endTest();		
-		ArjunaInternal.getReporter().update(result);
-	}
-	
-	private void reportSkipped() throws Exception {
-		TestResultBuilder builder = new TestResultBuilder();
-		TestResult result = builder
-		.testVariables(this.getTestVariables())
-		.result(TestResultType.SKIPPED)
-		.code(this.getSkipType())
-		.desc(this.getSkipDesc())
-		.build();
-		ArjunaInternal.getCentralExecState().update(result);
-		ArjunaInternal.getCentralExecState().getCurrentThreadState().endTest();		
-		ArjunaInternal.getReporter().update(result);
-	}
+//	private void reportUnselected() throws Exception {
+//		TestResultBuilder builder = new TestResultBuilder();
+//		TestResult result = builder
+//		.testVariables(this.getTestVariables())
+//		.result(TestResultType.UNPICKED)
+//		.code(this.getUnSelectedType())
+//		.desc(this.getUnSelectedDesc())
+//		.build();
+//		ArjunaInternal.getCentralExecState().update(result);
+//		ArjunaInternal.getCentralExecState().getCurrentThreadState().endTest();		
+//		ArjunaInternal.getReporter().update(result);
+//	}
+//	
+//	private void reportSkipped() throws Exception {
+//		TestResultBuilder builder = new TestResultBuilder();
+//		TestResult result = builder
+//		.testVariables(this.getTestVariables())
+//		.result(TestResultType.SKIPPED)
+//		.code(this.getSkipType())
+//		.desc(this.getSkipDesc())
+//		.build();
+//		ArjunaInternal.getCentralExecState().update(result);
+//		ArjunaInternal.getCentralExecState().getCurrentThreadState().endTest();		
+//		ArjunaInternal.getReporter().update(result);
+//	}
 
 	private void beginTest() throws Exception{
 		ArjunaInternal.getCentralExecState().getCurrentThreadState().beginTest(this);

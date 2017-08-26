@@ -77,17 +77,17 @@ public class JavaTestMethod extends BaseTestObject implements TestCreator{
 
 		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_METHOD);
 		
-		if (methodDef.isUnpicked()){
-			this.markUnSelected(
-					  TestResultCode.valueOf(UnpickedCode.UNPICKED_METHOD.toString()),
-					  String.format("%s not selected.", methodDef.getQualifiedName())
-			);						
-		} else if (methodDef.shouldBeSkipped()){
-			this.markSkipped(
-					  TestResultCode.valueOf(SkipCode.SKIPPED_METHOD_ANNOTATION.toString()),
-					  String.format("%s has @Skip.", methodDef.getQualifiedName())
-			);							
-		}
+//		if (methodDef.isUnpicked()){
+//			this.markUnSelected(
+//					  TestResultCode.valueOf(UnpickedCode.UNPICKED_METHOD.toString()),
+//					  String.format("%s not selected.", methodDef.getQualifiedName())
+//			);						
+//		} else if (methodDef.shouldBeSkipped()){
+//			this.markSkipped(
+//					  TestResultCode.valueOf(SkipCode.SKIPPED_METHOD_ANNOTATION.toString()),
+//					  String.format("%s has @Skip.", methodDef.getQualifiedName())
+//			);							
+//		}
 	}
 
 	public TestFixtures getTestFixtures() {

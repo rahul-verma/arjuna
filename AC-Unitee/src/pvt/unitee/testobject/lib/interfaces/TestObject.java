@@ -29,21 +29,21 @@ public interface TestObject {
 	
 	int getExclusionIssueId();
 
-	void markUnSelected(TestResultCode type, String desc);
-
-	boolean wasUnSelected();
-
-	TestResultCode getUnSelectedType();
-
-	String getUnSelectedDesc();
-	
-	void markSkipped(TestResultCode type, String desc);
-
-	boolean wasSkipped();
-
-	TestResultCode getSkipType();
-
-	String getSkipDesc();
+//	void markUnSelected(TestResultCode type, String desc);
+//
+//	boolean wasUnSelected();
+//
+//	TestResultCode getUnSelectedType();
+//
+//	String getUnSelectedDesc();
+//	
+//	void markSkipped(TestResultCode type, String desc);
+//
+//	boolean wasSkipped();
+//
+//	TestResultCode getSkipType();
+//
+//	String getSkipDesc();
 
 	void setThreadId(String id) throws Exception;
 	
