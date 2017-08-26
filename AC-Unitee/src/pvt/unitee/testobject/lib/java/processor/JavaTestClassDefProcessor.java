@@ -35,8 +35,10 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.SkipCode;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
+import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.JavaTestClass;
 import pvt.unitee.testobject.lib.java.TestClassConstructorType;
+import pvt.unitee.testobject.lib.java.loader.JavaTestClassFixturesLoader;
 import pvt.unitee.testobject.lib.java.loader.JavaTestLoadingUtils;
 import pvt.unitee.testobject.lib.java.loader.TestCreatorLoader;
 import pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;
@@ -105,6 +107,11 @@ public class JavaTestClassDefProcessor implements TestDefProcessor {
 
 		try {
 			Class<?> userClass = classDef.getUserTestClass();
+			
+			JavaTestClassFixturesLoader fixtureLoader = classDef.getFixturesLoader();
+			fixtureLoader.load();
+			TestFixtures fixtures = fixtureLoader.build(); 
+			classDef.setFixtures(fixtures);
 			
 			int creatorThreadCount = JavaTestLoadingUtils.getCreatorThreadCount(userClass);
 			if (creatorThreadCount < 1){

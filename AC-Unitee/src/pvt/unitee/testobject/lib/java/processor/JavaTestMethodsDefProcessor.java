@@ -53,20 +53,15 @@ public class JavaTestMethodsDefProcessor implements TestCreatorProcessor {
 			this.process(
 					testClassDef.getTestMethodDefinition(qualifiedName),
 					userTestClass,
-					testClassDef.getFixturesLoader(),
 					testClassDef.getDataSourceMap()
 			);
 		}
 	}
 	
-	private void process(JavaTestMethodDefinition methodDef, Class<?> userTestClass, JavaTestClassFixturesLoader fixtureLoader, Map<String,DataSourceType> methodDSMap) throws Exception{
+	private void process(JavaTestMethodDefinition methodDef, Class<?> userTestClass, Map<String,DataSourceType> methodDSMap) throws Exception{
 		Method m =  methodDef.getMethod();
 		String mName = m.getName();
 		String mQualifiedName = methodDef.getQualifiedName();
-		
-		fixtureLoader.load();
-		TestFixtures fixtures = fixtureLoader.build(); 
-		this.getTestClassDef().setFixtures(fixtures);
 
 		int testThreadCount = JavaTestLoadingUtils.getTestThreadCount(m);
 		if (testThreadCount < 1){

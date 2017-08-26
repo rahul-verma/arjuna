@@ -158,6 +158,7 @@ public class JavaTestClassFixturesLoader {
 	}
 	
 	public void load() throws Exception{
+		System.out.println("Called load" + this.fixtureMethods);
 		for (Method m: this.fixtureMethods){
 			this.loadFixture(m);
 		}

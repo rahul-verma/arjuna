@@ -37,6 +37,10 @@ public class TestContainerInstanceExecutor extends AbstractTestObjectExecutor im
 		currentTestContainerInstance = slotTestContainerInstance.getContainerInstance();
 		currentTestContainerInstance.setThreadId(Thread.currentThread().getName());
 		currentTestContainerInstance.populateUserProps();
+		
+		if (!currentTestContainerInstance.wasExcluded()){
+			currentTestContainerInstance.constructUserTestClass();
+		}
 
 		this.executeSetUp(currentTestContainerInstance);
 

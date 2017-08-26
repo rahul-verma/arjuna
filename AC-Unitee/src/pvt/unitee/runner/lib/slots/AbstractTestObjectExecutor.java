@@ -38,9 +38,9 @@ public abstract class AbstractTestObjectExecutor {
 	}
 
 	protected void executeSetUp(TestObject testObj) throws Exception{
-		if ((!testObj.getTestVariables().object().group().toLowerCase().equals("mlgroup")
-				&&
-				(testObj.shouldExecuteSetUp()))){
+//		if ((!testObj.getTestVariables().object().group().toLowerCase().equals("mlgroup")
+//				&&
+		if (testObj.shouldExecuteSetUp()){
 			if (ArjunaInternal.displayFixtureExecInfo){
 				logger.debug(String.format("Attempting Set Up Class for Test Class %s in Slot# %d", 
 						testObj.getQualifiedName(),
@@ -58,8 +58,8 @@ public abstract class AbstractTestObjectExecutor {
 	}
 
 	protected void executeTearDown(TestObject testObj) throws Exception{
-		if ((!testObj.getTestVariables().object().group().toLowerCase().equals("mlgroup") &&
-				(testObj.shouldExecuteTearDown()))){
+//		if ((!testObj.getTestVariables().object().group().toLowerCase().equals("mlgroup") &&
+		if (testObj.shouldExecuteTearDown()){
 			if (testObj.hasCompleted()){
 				this.executeTearDownWrapper(testObj);
 				if (ArjunaInternal.displaySlotsInfo){

@@ -48,6 +48,8 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 	private int currentFragmentNumber = 0;
 	private TestContainerFragment currentFragment = null;
 	
+	private boolean userTestClassConstructed = false;
+	
 	public JavaTestClassInstance(int instanceNumber, String objectId, JavaTestClassDefinition classDef, JavaTestClass container) throws Exception {
 		super(objectId, TestObjectType.TEST_CLASS_INSTANCE);
 		this.instanceNumber = instanceNumber;
@@ -72,53 +74,6 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 		}
 		
 		this.setIgnoreExclusionTestResultCode(TestResultCode.ERROR_IN_SETUP_CLASS_INSTANCE);
-		
-		try{		
-			switch(this.getConstructorType()){
-			case NO_ARG:
-				this.setUserTestClassObject(this.getConstructor().newInstance());
-				break;
-			case SINGLEARG_TESTVARS:
-				if (ArjunaInternal.displayTestObjConstructionInfo){
-					logger.debug(String.format("Calling Test Var constructor for %s", this.getQualifiedName()));
-					logger.debug(this.getTestVariables().execVars().strItems());
-				}
-				this.setUserTestClassObject(this.getConstructor().newInstance(this.getTestVariables()));
-				break;	
-			}
-		} catch (java.lang.reflect.InvocationTargetException g) {
-			Throwable f = null;
-			if (g.getTargetException().getCause() == null){
-				logger.debug(g.getTargetException().getMessage());
-				f = g.getTargetException();
-			} else {
-				logger.debug(g.getTargetException().getMessage());
-				f = g.getTargetException().getCause();
-				g.getTargetException().getCause().printStackTrace();
-			}
-			processContainerConstructorException(f);
-		}catch (Throwable e){
-			logger.debug(e.getMessage());
-			Console.displayExceptionBlock(e);
-			processContainerConstructorException(e);
-		}
-	}
-	
-	private void processContainerConstructorException(Throwable e) throws Exception{
-		int issueId = ArjunaInternal.getCentralExecState().getIssueId();
-		IssueBuilder builder = new IssueBuilder();
-		Issue issue = builder
-		.testVariables(this.getTestVariables())
-		.exception(e)
-		.type(IssueType.CONSTRUCTOR)
-		.subType(IssueSubType.CONSTRUCTOR)
-		.id(issueId)
-		.build();
-		ArjunaInternal.getReporter().update(issue);
-		this.markExcluded(
-				TestResultCode.TEST_CONTAINER_CONSTRUCTOR_ERROR, 
-				String.format("Error in constructor of %s", this.getUserTestContainer().getSimpleName()),
-				issueId);		
 	}
 
 	@Override
@@ -218,5 +173,59 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 			this.allScheduledCreators.remove(m.getName());
 		}
 		currentFragment = null;
+	}
+
+	@Override
+	public void constructUserTestClass() throws Exception{
+		if (userTestClassConstructed) return;
+		
+		try{		
+			switch(this.getConstructorType()){
+			case NO_ARG:
+				this.setUserTestClassObject(this.getConstructor().newInstance());
+				break;
+			case SINGLEARG_TESTVARS:
+				if (ArjunaInternal.displayTestObjConstructionInfo){
+					logger.debug(String.format("Calling Test Var constructor for %s", this.getQualifiedName()));
+					logger.debug(this.getTestVariables().execVars().strItems());
+				}
+				this.setUserTestClassObject(this.getConstructor().newInstance(this.getTestVariables()));
+				break;	
+			}
+		} catch (java.lang.reflect.InvocationTargetException g) {
+			Throwable f = null;
+			if (g.getTargetException().getCause() == null){
+				logger.debug(g.getTargetException().getMessage());
+				f = g.getTargetException();
+			} else {
+				logger.debug(g.getTargetException().getMessage());
+				f = g.getTargetException().getCause();
+				g.getTargetException().getCause().printStackTrace();
+			}
+			processContainerConstructorException(f);
+		}catch (Throwable e){
+			logger.debug(e.getMessage());
+			Console.displayExceptionBlock(e);
+			processContainerConstructorException(e);
+		}
+		
+		userTestClassConstructed = true;
+	}
+	
+	private void processContainerConstructorException(Throwable e) throws Exception{
+		int issueId = ArjunaInternal.getCentralExecState().getIssueId();
+		IssueBuilder builder = new IssueBuilder();
+		Issue issue = builder
+		.testVariables(this.getTestVariables())
+		.exception(e)
+		.type(IssueType.CONSTRUCTOR)
+		.subType(IssueSubType.CONSTRUCTOR)
+		.id(issueId)
+		.build();
+		ArjunaInternal.getReporter().update(issue);
+		this.markExcluded(
+				TestResultCode.TEST_CONTAINER_CONSTRUCTOR_ERROR, 
+				String.format("Error in constructor of %s", this.getUserTestContainer().getSimpleName()),
+				issueId);		
 	}
 }

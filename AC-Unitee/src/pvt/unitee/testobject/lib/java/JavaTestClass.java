@@ -153,8 +153,7 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 				logger.debug(String.format("Configuring test methods: %s", this.executableCreatorNames));
 			}
 			instance.loadFragment(executableCreatorNames);			
-		}
-		
+		}	
 	}
 
 	@Override
