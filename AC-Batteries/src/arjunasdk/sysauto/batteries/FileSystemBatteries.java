@@ -19,6 +19,7 @@
 package arjunasdk.sysauto.batteries;
 
 import java.io.File;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -28,9 +29,9 @@ import org.apache.commons.io.FilenameUtils;
 
 public class FileSystemBatteries {
 
-	public static String getJarFilePathForObject(Object obj) {
-		URL location = obj.getClass().getProtectionDomain().getCodeSource().getLocation();
-		return location.getFile();
+	public static String getJarFilePathForObject(Object obj) throws URISyntaxException {
+		File f = new File(obj.getClass().getProtectionDomain().getCodeSource().getLocation().toURI());
+		return f.getAbsolutePath();
 	}
 
 	// The toURL() call is deprecated. However, not using this construct

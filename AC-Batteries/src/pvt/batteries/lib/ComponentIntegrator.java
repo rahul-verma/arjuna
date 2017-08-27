@@ -1,5 +1,6 @@
 package pvt.batteries.lib;
 
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -35,7 +36,7 @@ public class ComponentIntegrator {
 	private DefaultStringKeyValueContainer execVarMap = new DefaultStringKeyValueContainer();
 	private DefaultStringKeyValueContainer userOptionMap = new DefaultStringKeyValueContainer();
 
-	public void init() {
+	public void init() throws Exception {
 		setRefDir(FileSystemBatteries.getJarFilePathForObject(this));
 	}
 
