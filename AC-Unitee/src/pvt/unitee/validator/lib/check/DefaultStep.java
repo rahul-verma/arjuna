@@ -20,55 +20,23 @@ package pvt.unitee.validator.lib.check;
 
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.interfaces.Check;
+import pvt.unitee.interfaces.Step;
 import pvt.unitee.validator.lib.exceptions.Pass;
 import unitee.exceptions.Error;
 import unitee.exceptions.Failure;
 
-public class DefaultCheck implements Check {
-	private String methodName = "NOT_SET";
-	private String className = "NOT_SET";
+public class DefaultStep implements Step{
 	private String purpose = "NOT_SET";
 	private String benchmark = "NOT_SET";
 	private String actual = "NOT_SET";
-	private String assertion = "NOT_SET";
-	//private Throwable exception = null;
 	private String message = "NOT_SET";
+	private String assertion = "NOT_SET";
 	private boolean isFailed = false;
 	private boolean isError = false;
 	
-	public DefaultCheck(String className, String methodName){
-		this.className = className;
-		this.methodName = methodName;
+	public DefaultStep(){
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#getSourceMethodName()
-	 */
-	@Override
-	public String getSourceMethodName() {
-		return methodName;
-	}
-	/* (non-Javadoc)
-	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#setSourceMethodName(java.lang.String)
-	 */
-	@Override
-	public void setSourceMethodName(String methodName) {
-		this.methodName = methodName;
-	}
-	/* (non-Javadoc)
-	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#getSourceClassName()
-	 */
-	@Override
-	public String getSourceClassName() {
-		return className;
-	}
-	/* (non-Javadoc)
-	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#setSourceClassName(java.lang.String)
-	 */
-	@Override
-	public void setSourceClassName(String className) {
-		this.className = className;
-	}
+
 	/* (non-Javadoc)
 	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#getPurpose()
 	 */
@@ -81,7 +49,9 @@ public class DefaultCheck implements Check {
 	 */
 	@Override
 	public void setPurpose(String purpose) {
-		if (purpose != null){
+		if ((purpose != null) && (purpose.length() > 25000)){
+			this.purpose = "TEXT_EXCEEDS_25000CHARRS";
+		} else {
 			this.purpose = purpose;
 		}
 	}
@@ -121,9 +91,7 @@ public class DefaultCheck implements Check {
 			this.actual = actual;
 		}
 	}
-	/* (non-Javadoc)
-	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#getText()
-	 */
+	
 	@Override
 	public String getText() {
 		return assertion;
@@ -139,19 +107,17 @@ public class DefaultCheck implements Check {
 			this.assertion = assertion;
 		}
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#passed()
-	 */
-	@Override
-	public boolean passed(){
+
+	private boolean passed(){
 		return ((!this.failed()) && (!this.erred()));
 	}
-	/* (non-Javadoc)
-	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#failed()
-	 */
-	@Override
-	public boolean failed(){
+
+
+	private boolean erred(){
+		return this.isError;
+	}
+	
+	private boolean failed(){
 		return this.isFailed;
 	}
 	
@@ -162,14 +128,7 @@ public class DefaultCheck implements Check {
 	public void setFailure(){
 		this.isFailed = true;
 	}
-	
-	/* (non-Javadoc)
-	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#erred()
-	 */
-	@Override
-	public boolean erred(){
-		return this.isError;
-	}
+
 	
 	/* (non-Javadoc)
 	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#setError()
@@ -186,26 +145,7 @@ public class DefaultCheck implements Check {
 	public String getExceptionMessage(){
 		return this.message;
 	}
-	
-//	public String getExceptionTraceAsString(){
-//		if (passed()){
-//			return "NOT_SET";
-//		} else {
-//			return ExceptionBatteries.getStackTraceAsString(this.exception);
-//		}
-//	}
-	
-//	public Throwable getException(){
-//		return this.exception;
-//	}
-//
-//	public void setException(Throwable e){
-//		this.exception = e;
-//	}
-	
-	/* (non-Javadoc)
-	 * @see com.autocognite.pvt.unitee.validator.lib.check.IC#evaluate()
-	 */
+
 	@Override
 	public void evaluate() throws Exception{
 		if (failed()){

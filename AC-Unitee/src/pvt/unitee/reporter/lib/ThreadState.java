@@ -11,6 +11,8 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.IssueSubType;
 import pvt.unitee.enums.IssueType;
 import pvt.unitee.enums.StepResultType;
+import pvt.unitee.interfaces.Check;
+import pvt.unitee.interfaces.Step;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.reporter.lib.step.StepResult;
@@ -56,6 +58,21 @@ public class ThreadState {
 		StepResult stepResult = createStepResultForException(getStepId(), e);
 		addStepResult(stepResult);
 	}
+	
+	public void addStepSuccessForPassedCheck(Step step) throws Exception{
+		StepResult stepResult = createACPassResult(getStepId(), step);
+		addStepResult(stepResult);	
+	}
+	
+	private StepResult createACPassResult(int stepNum, Step step) throws Exception{
+		StepResultBuilder builder = new StepResultBuilder();
+		
+		return builder
+		.stepEvent(step)
+		.result(StepResultType.PASS)
+		.stepNum(stepNum)
+		.build();
+	}
 
 	public void addStepSuccess(
 			String asserterClassName,
@@ -69,10 +86,6 @@ public class ThreadState {
 	private StepResult createStepResultForException(int stepNum, Throwable e) throws Exception{
 		try{
 			throw e;
-		}
-		
-		catch (Pass f) {
-			return createACPassResult(stepNum, f);
 		}
 		
 		catch (Failure f) {
@@ -89,11 +102,7 @@ public class ThreadState {
 				actualException = g.getTargetException().getCause();
 			}
 			
-			if (actualException.getClass() == Pass.class) {
-//				logger.debug("Test Fail Exception in Reflected Method.");
-				return createACPassResult(stepNum, (Pass) actualException);
-			}
-			else if (actualException.getClass() == Failure.class) {
+			if (actualException.getClass() == Failure.class) {
 //				logger.debug("Test Fail Exception in Reflected Method.");
 				return createACFailure(stepNum, (Failure) actualException);
 			} else if (actualException.getClass().isAssignableFrom(AssertionError.class)) {
@@ -173,16 +182,6 @@ public class ThreadState {
 		return builder
 		.result(StepResultType.FAIL)
 		.issueId(issueId)
-		.stepNum(stepNum)
-		.build();
-	}
-	
-	private StepResult createACPassResult(int stepNum, Pass e) throws Exception{
-		StepResultBuilder builder = new StepResultBuilder();
-		
-		return builder
-		.stepEvent(e)
-		.result(StepResultType.PASS)
 		.stepNum(stepNum)
 		.build();
 	}

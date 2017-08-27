@@ -6,6 +6,8 @@ import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
 import pvt.unitee.enums.StepResultAttribute;
 import pvt.unitee.enums.StepResultType;
+import pvt.unitee.interfaces.Check;
+import pvt.unitee.interfaces.Step;
 import pvt.unitee.validator.lib.exceptions.StepResultEvent;
 
 public class StepResultBuilder {
@@ -37,6 +39,12 @@ public class StepResultBuilder {
 	public StepResultBuilder stepEvent(StepResultEvent e) throws Exception{
 		this.purpose(e.getPurpose());
 		this.checkInfo(e.getCheckText(), e.getBenchmark(), e.getActualObservation());
+		return this;
+	}
+	
+	public StepResultBuilder stepEvent(Step step) throws Exception{
+		this.purpose(step.getPurpose());
+		this.checkInfo(step.getText(), step.getBenchmark(), step.getActualObservation());
 		return this;
 	}
 	

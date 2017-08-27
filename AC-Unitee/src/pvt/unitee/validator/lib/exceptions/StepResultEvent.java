@@ -20,44 +20,45 @@ package pvt.unitee.validator.lib.exceptions;
 
 import pvt.batteries.exceptions.ArjunaException;
 import pvt.unitee.interfaces.Check;
+import pvt.unitee.interfaces.Step;
 
 public class StepResultEvent extends ArjunaException {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -3029394135447054950L;
-	private Check check = null;
+	private Step step = null;
 	    /**
 	 * 
 	 */
 	
 	//Constructor that accepts a message
-	public StepResultEvent(Check check){
-		super(check.getExceptionMessage());
-		this.check = check;
+	public StepResultEvent(Step step){
+		super(step.getExceptionMessage());
+		this.step = step;
 	}
-	
-	public String getMethodName(){
-		return check.getSourceMethodName();
-	}
-	
-	public String getClassName(){
-		return check.getSourceClassName();
-	}
+//	
+//	public String getMethodName(){
+//		return check.getSourceMethodName();
+//	}
+//	
+//	public String getClassName(){
+//		return check.getSourceClassName();
+//	}
 	
 	public String getPurpose(){
-		return check.getPurpose();
+		return step.getPurpose();
 	}
 
 	public String getBenchmark() {
-		return check.getBenchmark();
+		return step.getBenchmark();
 	}
 
 	public String getActualObservation() {
-		return check.getActualObservation();
+		return step.getActualObservation();
 	}
 
 	public String getCheckText() {
-		return check.getText();
+		return step.getText();
 	}
 }

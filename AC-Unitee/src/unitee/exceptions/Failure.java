@@ -19,13 +19,14 @@
 package unitee.exceptions;
 
 import pvt.unitee.interfaces.Check;
+import pvt.unitee.interfaces.Step;
 import pvt.unitee.validator.lib.exceptions.StepResultEvent;
 
 public class Failure extends StepResultEvent {
 	private static final long serialVersionUID = 1102796489599386194L;
 
-	public Failure(Check check) {
-		super(check);
+	public Failure(Step step) {
+		super(step);
 	}
 
 }

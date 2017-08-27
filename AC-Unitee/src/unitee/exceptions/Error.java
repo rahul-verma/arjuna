@@ -19,6 +19,7 @@
 package unitee.exceptions;
 
 import pvt.unitee.interfaces.Check;
+import pvt.unitee.interfaces.Step;
 import pvt.unitee.validator.lib.exceptions.StepResultEvent;
 
 public class Error extends StepResultEvent {
@@ -27,8 +28,8 @@ public class Error extends StepResultEvent {
 	 */
 	private static final long serialVersionUID = -3029394135447054950L;
 	
-	public Error(Check check) {
-		super(check);
+	public Error(Step step) {
+		super(step);
 	}
 
 }

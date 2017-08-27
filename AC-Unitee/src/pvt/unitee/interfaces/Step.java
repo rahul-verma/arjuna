@@ -1,14 +1,6 @@
 package pvt.unitee.interfaces;
 
-public interface Check extends Step{
-
-	String getSourceMethodName();
-
-	void setSourceMethodName(String methodName);
-
-	String getSourceClassName();
-
-	void setSourceClassName(String className);
+public interface Step {
 
 	String getPurpose();
 
@@ -21,18 +13,12 @@ public interface Check extends Step{
 	String getActualObservation();
 
 	void setActualObservation(String actual);
-
+	
 	String getText();
 
 	void setText(String assertion);
 
-	boolean passed();
-
-	boolean failed();
-
 	void setFailure();
-
-	boolean erred();
 
 	void setError();
 
@@ -41,5 +27,4 @@ public interface Check extends Step{
 	void evaluate() throws Exception;
 
 	void setExceptionMessage(String message);
-
 }
