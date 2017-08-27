@@ -57,7 +57,7 @@ public class ArjunaInternal {
 	public static boolean displayReportPrepInfo = false;
 	public static boolean displayDiscoveryInfo = false;
 	public static boolean displayLoadingInfo = false;
-	public static boolean displayDefProcessingInfo = false;
+	public static boolean displayDefProcessingInfo = true;
 	public static boolean displayExecTreeLoadingInfo = false;
 	public static boolean displayFixtureProcessingInfo = false;
 	public static boolean logFixtureExecutionInfo = false;

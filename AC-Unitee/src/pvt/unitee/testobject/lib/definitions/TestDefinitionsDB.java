@@ -141,8 +141,8 @@ public class TestDefinitionsDB {
 				if (containerClass == None.class){
 					logger.error(String.format("A dependency defined for %s is invalid.", classDef.getQualifiedName()));
 					logger.error("Dependency Target Type: TEST_METHODS");
-					logger.error("Error: Did not provide \"containerClass\" attribute for @Dependency annotation on Test Class.");
-					logger.error("Solution: Provide \"containerClass\" attribute for @Dependency annotation to tell about the test class, that contains the dependency methods.");
+					logger.error("Error: Did not provide \"containerClass\" attribute for @MethodDependency annotation on Test Class.");
+					logger.error("Solution: Provide \"containerClass\" attribute for @MethodDependency annotation to tell about the test class, that contains the dependency methods.");
 					logger.error("Exiting...");
 					System.exit(1);
 				} else {

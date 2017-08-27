@@ -45,9 +45,9 @@ public class DependencyTreeBuilder {
 		allNodesMap.get(dependentMethodQualifiedName).addEdge(allNodesMap.get(dependencyMethodQualifiedName));
 	}
 	
-	private List<String> addDependencyEdgesForClassesDependency(JavaTestMethodDefinition dependentMethodDef, String dependentMethodQualifiedName, ClassDependency depAnn) throws Exception{
+	private List<String> addDependencyEdgesForClassesDependency(JavaTestMethodDefinition dependentMethodDef, String dependentMethodQualifiedName, Class<?>[] depClasses) throws Exception{
 		List<String> processedClassDeps = new ArrayList<String>();
-		for (Class<?> dependencyClass: depAnn.testClasses()){
+		for (Class<?> dependencyClass: depClasses){
 			JavaTestClassDefinition depClassDef = DependencyUtils.getClassDefForDependencyClass(dependentMethodQualifiedName, dependencyClass);
 			if (depClassDef == null){
 				continue;
@@ -156,7 +156,7 @@ public class DependencyTreeBuilder {
 				}
 				
 				if (depClasses.length > 0){
-					processedClassDeps = this.addDependencyEdgesForClassesDependency(methodDef, targetNodeName, depAnn);
+					processedClassDeps = this.addDependencyEdgesForClassesDependency(methodDef, targetNodeName, depClasses);
 				}
 				
 				if (processedClassDeps.size() != 0){

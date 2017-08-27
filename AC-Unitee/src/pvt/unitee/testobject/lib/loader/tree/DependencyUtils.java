@@ -1,5 +1,6 @@
 package pvt.unitee.testobject.lib.loader.tree;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -21,8 +22,8 @@ public class DependencyUtils {
 			if (depAnn.value().length == 0){
 				logger.error(String.format("A dependency defined for %s is invalid.", testObjectQualifiedName));
 				logger.error("Dependency Target Type: TEST_CLASSES");
-				logger.error("Error: Provided empty \"testClasses\" attribute for @Dependency annotation");
-				logger.error("Solution: Provide \"testClasses\" attribute for @Dependency annotation with a class array of length > 0");
+				logger.error("Error: Provided empty \"testClasses\" attribute for @ClassDependency annotation");
+				logger.error("Solution: Provide \"testClasses\" attribute for @ClassDependency annotation with a class array of length > 0");
 				logger.error("Exiting...");
 				System.exit(1);
 			} else {
@@ -31,7 +32,6 @@ public class DependencyUtils {
 		} else {
 			depClasses = depAnn.testClasses();
 		}
-		
 		return depClasses;
 	}
 	
