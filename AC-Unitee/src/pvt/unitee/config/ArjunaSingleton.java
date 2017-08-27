@@ -67,7 +67,7 @@ import pvt.unitee.arjuna.TestGroupsDB;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.3.1-b";
+	private String version = "0.3.2-b";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();

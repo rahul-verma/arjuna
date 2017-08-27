@@ -220,10 +220,13 @@ public abstract class BaseTestObject implements TestObject {
 		if (this.getTearDownFixture() != null){
 			boolean success = getTearDownFixture().execute();
 			if (!success){
-				this.markExcluded(
-						this.getTearDownFixture().getTestResultCodeForFixtureError(),
-						String.format("Error in \"%s.%s\" fixture", this.getTearDownFixture().getFixtureClassName(), this.getTearDownFixture().getName()),
-				this.getTearDownFixture().getIssueId());
+				// Tear down of a Test object should not mark itself as excluded with this status.
+				if (!(this.objectType == TestObjectType.TEST)){
+					this.markExcluded(
+							this.getTearDownFixture().getTestResultCodeForFixtureError(),
+							String.format("Error in \"%s.%s\" fixture", this.getTearDownFixture().getFixtureClassName(), this.getTearDownFixture().getName()),
+					this.getTearDownFixture().getIssueId());
+				}
 			}
 		}
 	}

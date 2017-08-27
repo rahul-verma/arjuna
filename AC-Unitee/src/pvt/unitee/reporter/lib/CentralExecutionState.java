@@ -45,6 +45,10 @@ public class CentralExecutionState {
 		return this.threadStates.get(Thread.currentThread().getName());
 	}
 	
+	public ThreadState getThreadState(String parentTestThreadName) {
+		return this.threadStates.get(parentTestThreadName);
+	}
+	
 	public synchronized void update(TestResult reportable) throws Exception{
 		this.update(reportable.objectProps(), reportable);
 	}
@@ -197,4 +201,5 @@ public class CentralExecutionState {
 	public synchronized int getIssueId(){
 		return ++currentIssueCounter;
 	}
+
 }

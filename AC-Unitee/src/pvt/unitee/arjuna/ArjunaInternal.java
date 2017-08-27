@@ -57,13 +57,13 @@ public class ArjunaInternal {
 	public static boolean displayReportPrepInfo = false;
 	public static boolean displayDiscoveryInfo = false;
 	public static boolean displayLoadingInfo = false;
-	public static boolean displayDefProcessingInfo = true;
+	public static boolean displayDefProcessingInfo = false;
 	public static boolean displayExecTreeLoadingInfo = false;
 	public static boolean displayFixtureProcessingInfo = false;
 	public static boolean logFixtureExecutionInfo = false;
 	public static boolean displayInstanceProcessingInfo = false;
 	public static boolean displayExecVarProcessingInfo = false;
-	public static boolean displayTestObjConstructionInfo = true;
+	public static boolean displayTestObjConstructionInfo = false;
 	public static boolean logPropInfo = false;
 	public static boolean logTestExceptionTraces = false;
 	public static boolean displayDependencyDefInfo = false;

@@ -26,6 +26,7 @@ public class ThreadState {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private Test currentTest = null;
 	private List<StepResult> currentStepResults =  null;
+	private boolean testThreadFlag = false;
 	
 	public void beginTest(Test test){
 		this.currentTest =  test;
@@ -244,5 +245,17 @@ public class ThreadState {
 		.result(StepResultType.PASS)
 		.stepNum(stepNum)
 		.build();
+	}
+	
+	public boolean isTestThread(){
+		return this.testThreadFlag;
+	}
+
+	public void enableTestThreadFlag() {
+		this.testThreadFlag = true;
+	}
+
+	public void disableTestThreadFlag() {
+		this.testThreadFlag = false;
 	}
 }

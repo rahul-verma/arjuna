@@ -61,8 +61,22 @@ public class TestExecutor extends AbstractTestObjectExecutor implements Runnable
 				copySchedulingStatusFromParentAndReturnFalseIfNotApplicable(creatorInstance, test);
 				
 				test.populateUserProps();
+				
+				ArjunaInternal.getCentralExecState().getCurrentThreadState().enableTestThreadFlag();
+				
+				test.beginTest();
+				
+				test.initTimeStamp();
 
 				this.executeSetUp(test);
+				
+				if (test.wasExcluded()){
+					this.executeTearDown(test);
+					test.endTimeStamp();
+					test.reportExclusion();
+					test.endTest();
+					continue;
+				}
 
 				try{
 					test.execute();
@@ -71,6 +85,10 @@ public class TestExecutor extends AbstractTestObjectExecutor implements Runnable
 				}
 
 				this.executeTearDown(test);
+				test.reportExecuted();
+				test.endTest();
+				
+				ArjunaInternal.getCentralExecState().getCurrentThreadState().disableTestThreadFlag();
 			} catch (Exception e){
 				Console.displayExceptionBlock(e);
 			}

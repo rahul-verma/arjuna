@@ -24,4 +24,12 @@ public interface Test extends TestObject{
 	JavaTestMethodInstance getParentCreatorInstance();
 
 	JavaTestClassFragment getTestContainerFragment();
+
+	void beginTest() throws Exception;
+
+	void endTest() throws Exception;
+
+	void reportExclusion() throws Exception;
+
+	void reportExecuted() throws Exception;
 }

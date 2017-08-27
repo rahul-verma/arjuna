@@ -22,6 +22,7 @@ simple example build file
 			<!-- rt.jar on other platforms -->
 			<libraryjar name="${3rd_party_batteries_jars}/commons-cli-1.3.jar" /> 
 			<libraryjar name="${3rd_party_batteries_jars}/commons-io-2.4.jar" />
+			<libraryjar name="${3rd_party_batteries_jars}/cloning-1.7.4.jar" />
 					<libraryjar name="${3rd_party_batteries_jars}/commons-lang3-3.4.jar" /><!-- crypto stuff -->
 					<libraryjar name="${3rd_party_batteries_jars}/config-1.3.1.jar" /><!-- crypto stuff -->
 					<libraryjar name="${3rd_party_batteries_jars}/gson-2.8.0.jar" />

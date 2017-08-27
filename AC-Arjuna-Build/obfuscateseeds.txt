@@ -1291,6 +1291,10 @@ pvt.unitee.arjuna.ArjunaInternal$info
 pvt.unitee.arjuna.ArjunaInternal$problem
 pvt.unitee.arjuna.ArjunaTestEngine
 pvt.unitee.arjuna.ArjunaTestEngine$1
+pvt.unitee.arjuna.DefaultTestGroup
+pvt.unitee.arjuna.SessionCreator
+pvt.unitee.arjuna.TestGroupsDB
+pvt.unitee.arjuna.TestGroupsDB$1
 pvt.unitee.cli.UniteeCLI
 pvt.unitee.cli.UniteeCliConfigurator
 pvt.unitee.cli.UniteeCliConfigurator$1
@@ -1299,7 +1303,6 @@ pvt.unitee.config.ArjunaConfigurator$1
 pvt.unitee.config.ArjunaSingleton
 pvt.unitee.config.DataGeneratorMap
 pvt.unitee.config.DataMethodContainerMap
-pvt.unitee.config.SessionCreator
 pvt.unitee.core.lib.annotate.None
 pvt.unitee.core.lib.datasource.DataArrayDataSource
 pvt.unitee.core.lib.datasource.DataMethodDataSource
@@ -1341,6 +1344,7 @@ pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty DIRECTORY_PROJE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ROOT
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_TESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_IGNOREDTESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_EVENTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_FIXTURES
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty FIXTURE_TESTCLASS_SETUPCLASS_NAME
@@ -1362,18 +1366,22 @@ pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MODE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_METADATA_TEST_OBJECT_TESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_METADATA_TEST_OBJECT_STEPS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_METADATA_TEST_OBJECT_ISSUES
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_METADATA_TEST_OBJECT_IGNOREDTESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_METADATA_TEST_OBJECT_FIXTURES
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_METADATA_TEST_OBJECT_TESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_METADATA_TEST_OBJECT_STEPS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_METADATA_TEST_OBJECT_ISSUES
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_METADATA_TEST_OBJECT_IGNOREDTESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_METADATA_TEST_OBJECT_FIXTURES
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_METADATA_TEST_OBJECT_TESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_METADATA_TEST_OBJECT_STEPS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_METADATA_TEST_OBJECT_ISSUES
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_METADATA_TEST_OBJECT_IGNOREDTESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_METADATA_TEST_OBJECT_FIXTURES
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_METADATA_TEST_OBJECT_TESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_METADATA_TEST_OBJECT_STEPS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_METADATA_TEST_OBJECT_ISSUES
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_METADATA_TEST_OBJECT_IGNOREDTESTS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_METADATA_TEST_OBJECT_FIXTURES
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_ANNOTATED_ON
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_TESTS_ATTR_ON
@@ -1400,13 +1408,18 @@ pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_SE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_SECTIONS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_SECTIONS
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_INCLUDED_RTYPE
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_MINIMAL_INCLUDED_IGNORETYPE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_INCLUDED_RTYPE
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_BASIC_INCLUDED_IGNORETYPE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_INCLUDED_RTYPE
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ADVANCED_INCLUDED_IGNORETYPE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_INCLUDED_RTYPE
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_DEBUG_INCLUDED_IGNORETYPE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_METADATA_TEST
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_TESTS_METADATA_REPORTABLE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_STEPS_METADATA_REPORTABLE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_ISSUES_METADATA_REPORTABLE
+pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_IGNOREDTESTS_METADATA_REPORTABLE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_FIXTURES_METADATA_REPORTABLE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty REPORT_EVENTS_METADATA_REPORTABLE
 pvt.unitee.enums.ArjunaProperty: pvt.unitee.enums.ArjunaProperty[] $VALUES
@@ -1457,6 +1470,27 @@ pvt.unitee.enums.FixtureResultType: pvt.unitee.enums.FixtureResultType NOT_EXECU
 pvt.unitee.enums.FixtureResultType: pvt.unitee.enums.FixtureResultType[] $VALUES
 pvt.unitee.enums.FixtureResultType: pvt.unitee.enums.FixtureResultType[] values()
 pvt.unitee.enums.FixtureResultType: pvt.unitee.enums.FixtureResultType valueOf(java.lang.String)
+pvt.unitee.enums.IgnoredTestAttribute
+pvt.unitee.enums.IgnoredTestAttribute: pvt.unitee.enums.IgnoredTestAttribute STATUS
+pvt.unitee.enums.IgnoredTestAttribute: pvt.unitee.enums.IgnoredTestAttribute REASON
+pvt.unitee.enums.IgnoredTestAttribute: pvt.unitee.enums.IgnoredTestAttribute DESC
+pvt.unitee.enums.IgnoredTestAttribute: pvt.unitee.enums.IgnoredTestAttribute[] $VALUES
+pvt.unitee.enums.IgnoredTestAttribute: pvt.unitee.enums.IgnoredTestAttribute[] values()
+pvt.unitee.enums.IgnoredTestAttribute: pvt.unitee.enums.IgnoredTestAttribute valueOf(java.lang.String)
+pvt.unitee.enums.IgnoredTestReason
+pvt.unitee.enums.IgnoredTestReason: pvt.unitee.enums.IgnoredTestReason UNPICKED_CLASS
+pvt.unitee.enums.IgnoredTestReason: pvt.unitee.enums.IgnoredTestReason UNPICKED_METHOD
+pvt.unitee.enums.IgnoredTestReason: pvt.unitee.enums.IgnoredTestReason SKIPPED_CLASS_ANNOTATION
+pvt.unitee.enums.IgnoredTestReason: pvt.unitee.enums.IgnoredTestReason SKIPPED_METHOD_ANNOTATION
+pvt.unitee.enums.IgnoredTestReason: pvt.unitee.enums.IgnoredTestReason[] $VALUES
+pvt.unitee.enums.IgnoredTestReason: pvt.unitee.enums.IgnoredTestReason[] values()
+pvt.unitee.enums.IgnoredTestReason: pvt.unitee.enums.IgnoredTestReason valueOf(java.lang.String)
+pvt.unitee.enums.IgnoredTestStatus
+pvt.unitee.enums.IgnoredTestStatus: pvt.unitee.enums.IgnoredTestStatus UNPICKED
+pvt.unitee.enums.IgnoredTestStatus: pvt.unitee.enums.IgnoredTestStatus SKIPPED
+pvt.unitee.enums.IgnoredTestStatus: pvt.unitee.enums.IgnoredTestStatus[] $VALUES
+pvt.unitee.enums.IgnoredTestStatus: pvt.unitee.enums.IgnoredTestStatus[] values()
+pvt.unitee.enums.IgnoredTestStatus: pvt.unitee.enums.IgnoredTestStatus valueOf(java.lang.String)
 pvt.unitee.enums.IssueAttribute
 pvt.unitee.enums.IssueAttribute: pvt.unitee.enums.IssueAttribute ID
 pvt.unitee.enums.IssueAttribute: pvt.unitee.enums.IssueAttribute TYPE
@@ -1515,6 +1549,7 @@ pvt.unitee.enums.JsonTestPickerProperty: pvt.unitee.enums.JsonTestPickerProperty
 pvt.unitee.enums.NamesContainerType
 pvt.unitee.enums.NamesContainerType: pvt.unitee.enums.NamesContainerType TEST
 pvt.unitee.enums.NamesContainerType: pvt.unitee.enums.NamesContainerType TEST_RESULT
+pvt.unitee.enums.NamesContainerType: pvt.unitee.enums.NamesContainerType IGNORED_TEST
 pvt.unitee.enums.NamesContainerType: pvt.unitee.enums.NamesContainerType STEP_RESULT
 pvt.unitee.enums.NamesContainerType: pvt.unitee.enums.NamesContainerType ISSUE
 pvt.unitee.enums.NamesContainerType: pvt.unitee.enums.NamesContainerType DEFAULT_FIXTURE_METHODS
@@ -1636,6 +1671,7 @@ pvt.unitee.enums.TestPickerProperty: pvt.unitee.enums.TestPickerProperty[] value
 pvt.unitee.enums.TestPickerProperty: pvt.unitee.enums.TestPickerProperty valueOf(java.lang.String)
 pvt.unitee.enums.TestReportSection
 pvt.unitee.enums.TestReportSection: pvt.unitee.enums.TestReportSection TESTS
+pvt.unitee.enums.TestReportSection: pvt.unitee.enums.TestReportSection IGNORED_TESTS
 pvt.unitee.enums.TestReportSection: pvt.unitee.enums.TestReportSection STEPS
 pvt.unitee.enums.TestReportSection: pvt.unitee.enums.TestReportSection ISSUES
 pvt.unitee.enums.TestReportSection: pvt.unitee.enums.TestReportSection FIXTURES
@@ -1686,7 +1722,6 @@ pvt.unitee.enums.TestResultType: pvt.unitee.enums.TestResultType PASS
 pvt.unitee.enums.TestResultType: pvt.unitee.enums.TestResultType FAIL
 pvt.unitee.enums.TestResultType: pvt.unitee.enums.TestResultType ERROR
 pvt.unitee.enums.TestResultType: pvt.unitee.enums.TestResultType EXCLUDED
-pvt.unitee.enums.TestResultType: pvt.unitee.enums.TestResultType NOT_EXECUTED
 pvt.unitee.enums.TestResultType: pvt.unitee.enums.TestResultType UNPICKED
 pvt.unitee.enums.TestResultType: pvt.unitee.enums.TestResultType SKIPPED
 pvt.unitee.enums.TestResultType: pvt.unitee.enums.TestResultType[] $VALUES
@@ -1707,6 +1742,7 @@ pvt.unitee.enums.UnpickedCode: pvt.unitee.enums.UnpickedCode valueOf(java.lang.S
 pvt.unitee.interfaces.Check
 pvt.unitee.interfaces.InternlReportableObserver
 pvt.unitee.interfaces.ReportGenerator
+pvt.unitee.interfaces.Step
 pvt.unitee.interfaces.TestResultObserver
 pvt.unitee.lib.engine.TestEngine
 pvt.unitee.lib.engine.TestSessionNodeRunner
@@ -1741,9 +1777,16 @@ pvt.unitee.reporter.lib.fixture.FixtureResultProperties$1
 pvt.unitee.reporter.lib.fixture.FixtureResultSerializer
 pvt.unitee.reporter.lib.generator.ActivityReportGenerator
 pvt.unitee.reporter.lib.generator.FixtureReportGenerator
+pvt.unitee.reporter.lib.generator.IgnoredTestReportGenerator
 pvt.unitee.reporter.lib.generator.IssueReportGenerator
 pvt.unitee.reporter.lib.generator.JsonResultsReader
 pvt.unitee.reporter.lib.generator.TestReportGenerator
+pvt.unitee.reporter.lib.ignored.IgnoredTest
+pvt.unitee.reporter.lib.ignored.IgnoredTestBuilder
+pvt.unitee.reporter.lib.ignored.IgnoredTestDeserializer
+pvt.unitee.reporter.lib.ignored.IgnoredTestProperties
+pvt.unitee.reporter.lib.ignored.IgnoredTestProperties$1
+pvt.unitee.reporter.lib.ignored.IgnoredTestSerializer
 pvt.unitee.reporter.lib.issue.Issue
 pvt.unitee.reporter.lib.issue.IssueBuilder
 pvt.unitee.reporter.lib.issue.IssueDeserializer
@@ -1778,6 +1821,7 @@ pvt.unitee.reporter.lib.writer.console.ConsoleEventWriter
 pvt.unitee.reporter.lib.writer.console.ConsoleTestResultWriter
 pvt.unitee.reporter.lib.writer.excel.ExcelEventWriter
 pvt.unitee.reporter.lib.writer.excel.ExcelFixtureResultWriter
+pvt.unitee.reporter.lib.writer.excel.ExcelIgnoredTestWriter
 pvt.unitee.reporter.lib.writer.excel.ExcelIssueWriter
 pvt.unitee.reporter.lib.writer.excel.ExcelReportGenerator
 pvt.unitee.reporter.lib.writer.excel.ExcelResultWriter
@@ -1785,11 +1829,13 @@ pvt.unitee.reporter.lib.writer.excel.ExcelStepResultWriter
 pvt.unitee.reporter.lib.writer.excel.ExcelTestResultWriter
 pvt.unitee.reporter.lib.writer.json.JsonConsolidatedEventWriter
 pvt.unitee.reporter.lib.writer.json.JsonConsolidatedFixtureResultWriter
+pvt.unitee.reporter.lib.writer.json.JsonConsolidatedIgnoredTestWriter
 pvt.unitee.reporter.lib.writer.json.JsonConsolidatedIssueWriter
 pvt.unitee.reporter.lib.writer.json.JsonConsolidatedResultWriter
 pvt.unitee.reporter.lib.writer.json.JsonConsolidatedTestResultWriter
 pvt.unitee.reporter.lib.writer.json.JsonEventWriter
 pvt.unitee.reporter.lib.writer.json.JsonFixtureResultWriter
+pvt.unitee.reporter.lib.writer.json.JsonIgnoredTestWriter
 pvt.unitee.reporter.lib.writer.json.JsonIssueWriter
 pvt.unitee.reporter.lib.writer.json.JsonResultWriter
 pvt.unitee.reporter.lib.writer.json.JsonTestResultWriter
@@ -1837,32 +1883,34 @@ pvt.unitee.testobject.lib.java.JavaTestClassInstance$1
 pvt.unitee.testobject.lib.java.JavaTestMethod
 pvt.unitee.testobject.lib.java.JavaTestMethodInstance
 pvt.unitee.testobject.lib.java.TestClassConstructorType
-pvt.unitee.testobject.lib.loader.AnnotationValidator
-pvt.unitee.testobject.lib.loader.ConstructorDef
-pvt.unitee.testobject.lib.loader.DataMethodsHandler
-pvt.unitee.testobject.lib.loader.DefaultDataMethodsHandler
-pvt.unitee.testobject.lib.loader.EmptyBenchmarkClass
-pvt.unitee.testobject.lib.loader.JavaTestClassDataMethodsHandler
-pvt.unitee.testobject.lib.loader.JavaTestClassDefinitionsLoader
-pvt.unitee.testobject.lib.loader.JavaTestClassFixturesLoader
-pvt.unitee.testobject.lib.loader.JavaTestLoadingUtils
-pvt.unitee.testobject.lib.loader.JavaTestMethodsDefinitionLoader
-pvt.unitee.testobject.lib.loader.MethodSignatureType
-pvt.unitee.testobject.lib.loader.NonTestDataMethodsHandler
-pvt.unitee.testobject.lib.loader.TestCreatorLoader
-pvt.unitee.testobject.lib.loader.TestDefinitionsLoader
-pvt.unitee.testobject.lib.loader.TestDefinitionsProcessor
-pvt.unitee.testobject.lib.loader.TestPropertyAnnotationsProcessor
+pvt.unitee.testobject.lib.java.loader.AnnotationValidator
+pvt.unitee.testobject.lib.java.loader.DataMethodsHandler
+pvt.unitee.testobject.lib.java.loader.DefaultDataMethodsHandler
+pvt.unitee.testobject.lib.java.loader.JavaTestClassDataMethodsHandler
+pvt.unitee.testobject.lib.java.loader.JavaTestClassDefLoader
+pvt.unitee.testobject.lib.java.loader.JavaTestClassFixturesLoader
+pvt.unitee.testobject.lib.java.loader.JavaTestLoadingUtils
+pvt.unitee.testobject.lib.java.loader.JavaTestMethodsDefLoader
+pvt.unitee.testobject.lib.java.loader.NonTestDataMethodsHandler
+pvt.unitee.testobject.lib.java.loader.TestCreatorLoader
+pvt.unitee.testobject.lib.java.loader.TestDefInitializer
+pvt.unitee.testobject.lib.java.loader.TestDefinitionsProcessor
+pvt.unitee.testobject.lib.java.loader.TestPropertyAnnotationsProcessor
+pvt.unitee.testobject.lib.java.processor.ConstructorDef
+pvt.unitee.testobject.lib.java.processor.EmptyBenchmarkClass
+pvt.unitee.testobject.lib.java.processor.JavaTestClassDefProcessor
+pvt.unitee.testobject.lib.java.processor.JavaTestMethodsDefProcessor
+pvt.unitee.testobject.lib.java.processor.MethodSignatureType
+pvt.unitee.testobject.lib.java.processor.TestCreatorProcessor
+pvt.unitee.testobject.lib.java.processor.TestDefProcessor
 pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig
 pvt.unitee.testobject.lib.loader.group.AbstractPickerConfig$1
 pvt.unitee.testobject.lib.loader.group.BaseGroup
 pvt.unitee.testobject.lib.loader.group.BasePicker
 pvt.unitee.testobject.lib.loader.group.ClassPicker
-pvt.unitee.testobject.lib.loader.group.DefaultTestGroup
 pvt.unitee.testobject.lib.loader.group.Group
-pvt.unitee.testobject.lib.loader.group.JavaTestClassLoader
-pvt.unitee.testobject.lib.loader.group.MBGroup
-pvt.unitee.testobject.lib.loader.group.MLGroup
+pvt.unitee.testobject.lib.loader.group.GroupTestContainerScheduler
+pvt.unitee.testobject.lib.loader.group.JavaTestClassGroupScheduler
 pvt.unitee.testobject.lib.loader.group.MethodPicker
 pvt.unitee.testobject.lib.loader.group.PackagePicker
 pvt.unitee.testobject.lib.loader.group.Picker
@@ -1872,11 +1920,6 @@ pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI$1
 pvt.unitee.testobject.lib.loader.group.PickerConfigForJson
 pvt.unitee.testobject.lib.loader.group.PickerConfigForJson$1
 pvt.unitee.testobject.lib.loader.group.PickerMisConfiguration
-pvt.unitee.testobject.lib.loader.group.SkippedJavaTestClassLoader
-pvt.unitee.testobject.lib.loader.group.TestGroupsDB
-pvt.unitee.testobject.lib.loader.group.TestGroupsDB$1
-pvt.unitee.testobject.lib.loader.group.TestLoader
-pvt.unitee.testobject.lib.loader.group.UnselectedJavaTestClassLoader
 pvt.unitee.testobject.lib.loader.group.UserDefinedGroup
 pvt.unitee.testobject.lib.loader.session.BaseSession
 pvt.unitee.testobject.lib.loader.session.BaseSessionNode
@@ -1896,11 +1939,10 @@ pvt.unitee.testobject.lib.loader.tree.NonTestNode
 pvt.unitee.testobject.lib.loader.tree.TestMethodNode
 pvt.unitee.testobject.lib.loader.tree.TestNode
 pvt.unitee.validator.lib.check.DefaultCheck
+pvt.unitee.validator.lib.check.DefaultStep
 pvt.unitee.validator.lib.exceptions.Pass
 pvt.unitee.validator.lib.exceptions.StepResultEvent
-pvt.unitee.validator.lib.exceptions.StepResultEvent: StepResultEvent(pvt.unitee.interfaces.Check)
-pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getMethodName()
-pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getClassName()
+pvt.unitee.validator.lib.exceptions.StepResultEvent: StepResultEvent(pvt.unitee.interfaces.Step)
 pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getPurpose()
 pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getBenchmark()
 pvt.unitee.validator.lib.exceptions.StepResultEvent: java.lang.String getActualObservation()
@@ -2067,9 +2109,9 @@ unitee.enums.TestObjectType: unitee.enums.TestObjectType[] $VALUES
 unitee.enums.TestObjectType: unitee.enums.TestObjectType[] values()
 unitee.enums.TestObjectType: unitee.enums.TestObjectType valueOf(java.lang.String)
 unitee.exceptions.Error
-unitee.exceptions.Error: Error(pvt.unitee.interfaces.Check)
+unitee.exceptions.Error: Error(pvt.unitee.interfaces.Step)
 unitee.exceptions.Failure
-unitee.exceptions.Failure: Failure(pvt.unitee.interfaces.Check)
+unitee.exceptions.Failure: Failure(pvt.unitee.interfaces.Step)
 unitee.interfaces.TestObjectProperties
 unitee.interfaces.TestObjectProperties: java.lang.String objectId()
 unitee.interfaces.TestObjectProperties: unitee.enums.TestObjectType objectType()
@@ -2114,3 +2156,15 @@ unitee.interfaces.TestVariables: arjunasdk.interfaces.StringKeyValueContainer ex
 unitee.interfaces.TestVariables: arjunasdk.ddauto.interfaces.DataRecord record()
 unitee.interfaces.TestVariables: arjunasdk.ddauto.interfaces.DataReference refer(java.lang.String)
 unitee.interfaces.TestVariables: java.util.Map references()
+unitee.steps.Steps
+unitee.steps.Steps: Steps()
+unitee.steps.Steps: void pass(java.lang.String)
+unitee.steps.Steps: void pass(java.lang.String,java.lang.String)
+unitee.steps.Steps: void pass(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+unitee.steps.Steps: void fail(java.lang.String)
+unitee.steps.Steps: void fail(java.lang.String,java.lang.String)
+unitee.steps.Steps: void fail(java.lang.String,java.lang.String,java.lang.String)
+unitee.steps.Steps: void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+unitee.steps.Steps: void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+unitee.steps.Steps: void error(java.lang.String)
+unitee.steps.Steps: void error(java.lang.String,java.lang.String)

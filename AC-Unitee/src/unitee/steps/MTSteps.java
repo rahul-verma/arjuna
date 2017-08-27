@@ -4,13 +4,19 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.StepResultType;
 import pvt.unitee.validator.lib.check.DefaultStep;;
 
-public class Steps {
+public class MTSteps {
+	String parentTestThreadName = null;
 	
-	private static void step(StepResultType type, String purpose, String checkText, String benchmark, String observation, String excMessage) throws Exception{
-		if (!ArjunaInternal.getCentralExecState().getCurrentThreadState().isTestThread()){
-			throw new Exception("You can not call Steps methods outside of test context. Confine these calls to setUpTest, test method or tearDownTest in Test class. In libraries confine these calls to lifespan of said methods.");
+	public MTSteps() throws Exception{
+		if (!ArjunaInternal.getCentralExecState().getThreadState(parentTestThreadName).isTestThread()){
+			throw new Exception("You can not declare a multi-threaded steps object outside of test context. Declare it either in setUpTest or test method.");
 		}
-		DefaultStep step = new DefaultStep();
+		this.parentTestThreadName = Thread.currentThread().getName();
+		
+	}
+	
+	private void step(StepResultType type, String purpose, String checkText, String benchmark, String observation, String excMessage) throws Exception{
+		DefaultStep step = new DefaultStep(this.parentTestThreadName);
 		step.setPurpose(purpose);
 		if (checkText != null){
 			step.setText(checkText);
@@ -55,43 +61,43 @@ public class Steps {
 	}
 	
 	
-	public static void pass(String purpose) throws Exception{
+	public void pass(String purpose) throws Exception{
 		step(StepResultType.PASS, purpose, null, null, null, null);
 	}
 	
-	public static void pass(String purpose, String checkText) throws Exception{
+	public void pass(String purpose, String checkText) throws Exception{
 		step(StepResultType.PASS, purpose, checkText, null, null, null);
 	}
 	
-	public static void pass(String purpose, String checkText, String benchmark, String actual) throws Exception{
+	public void pass(String purpose, String checkText, String benchmark, String actual) throws Exception{
 		step(StepResultType.PASS, purpose, checkText, benchmark, actual, null);
 	}
 	
-	public static void fail(String purpose) throws Exception{
+	public void fail(String purpose) throws Exception{
 		step(StepResultType.FAIL, purpose, null, null, null, null);
 	}
 	
-	public static void fail(String purpose, String checkText) throws Exception{
+	public void fail(String purpose, String checkText) throws Exception{
 		step(StepResultType.FAIL, purpose, checkText, null, null, null);
 	}
 	
-	public static void fail(String purpose, String checkText, String excMessage) throws Exception{
+	public void fail(String purpose, String checkText, String excMessage) throws Exception{
 		step(StepResultType.FAIL, purpose, checkText, null, null, excMessage);
 	}
 	
-	public static void fail(String purpose, String checkText, String benchmark, String actual) throws Exception{
+	public void fail(String purpose, String checkText, String benchmark, String actual) throws Exception{
 		step(StepResultType.FAIL, purpose, checkText, benchmark, actual, null);
 	}
 	
-	public static void fail(String purpose, String checkText, String benchmark, String actual, String excMessage) throws Exception{
+	public void fail(String purpose, String checkText, String benchmark, String actual, String excMessage) throws Exception{
 		step(StepResultType.FAIL, purpose, checkText, benchmark, actual, excMessage);
 	}
 	
-	public static void error(String purpose) throws Exception{
+	public void error(String purpose) throws Exception{
 		step(StepResultType.ERROR, purpose, null, null, null, null);
 	}
 	
-	public static void error(String purpose, String excMessage) throws Exception{
+	public void error(String purpose, String excMessage) throws Exception{
 		step(StepResultType.ERROR, purpose, null, null, null, excMessage);
 	}
 	

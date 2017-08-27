@@ -33,8 +33,15 @@ public class DefaultStep implements Step{
 	private String assertion = "NOT_SET";
 	private boolean isFailed = false;
 	private boolean isError = false;
+	private String parentTestThreadName = null;
+	
 	
 	public DefaultStep(){
+		this.parentTestThreadName = Thread.currentThread().getName();
+	}
+	
+	public DefaultStep(String parentThreadName){
+		this.parentTestThreadName = parentThreadName;
 	}
 
 	/* (non-Javadoc)
@@ -153,7 +160,7 @@ public class DefaultStep implements Step{
 		} else if (erred()){
 			throw new Error(this);
 		} else {
-			ArjunaInternal.getCentralExecState().getCurrentThreadState().addStepSuccessForPassedStep(this);
+			ArjunaInternal.getCentralExecState().getThreadState(parentTestThreadName).addStepSuccessForPassedStep(this);
 		}
 	}
 
