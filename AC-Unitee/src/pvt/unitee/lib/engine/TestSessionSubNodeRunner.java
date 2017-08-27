@@ -43,12 +43,13 @@ public class TestSessionSubNodeRunner implements Runnable {
 			try{
 				subNode = this.sessionNode.next();
 				String threadName = String.format("%s|G-%s", Thread.currentThread().getName(), subNode.getName());
+				subNode.setID(threadName);
 				try{
 					Thread t = ThreadBatteries.createThread(threadName, new TestSessionSubNodeSlotsRunner(subNode));
-					ArjunaInternal.getCentralExecState().registerThread(t.getName());
+					ArjunaInternal.getGlobalState().registerThread(t.getName());
 					t.start();
 					t.join();
-					ArjunaInternal.getCentralExecState().deregisterThread(threadName);
+					ArjunaInternal.getGlobalState().deregisterThread(threadName);
 				} catch (Exception e){
 					System.err.println("Critical Error: Exception occured while creating Test Slot Execution Thread.");
 					Console.displayExceptionBlock(e);

@@ -197,7 +197,7 @@ public abstract class BaseTestClassFixture implements Fixture {
 	}
 	
 	private Issue getFixtureIssueResult(Throwable e) throws Exception{
-		int issueId = ArjunaInternal.getCentralExecState().getIssueId();
+		int issueId = ArjunaInternal.getGlobalState().getIssueId();
 		this.setIssueId(issueId);
 		IssueBuilder builder = new IssueBuilder();
 		return builder

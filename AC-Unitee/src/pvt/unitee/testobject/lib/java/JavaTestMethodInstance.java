@@ -51,7 +51,7 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 		try{
 			this.dataSource =  this.methodDef.getDataSource();
 		} catch (DataSourceConstructionException e){
-			int issueId = ArjunaInternal.getCentralExecState().getIssueId();
+			int issueId = ArjunaInternal.getGlobalState().getIssueId();
 			IssueBuilder builder = new IssueBuilder();
 			Issue issue = builder
 			.testVariables(this.getTestVariables())
@@ -123,7 +123,7 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 			throw new SubTestsFinishedException("All Done.");
 		} catch (Throwable e){
 				dataSourceIssue = true;
-				issueId = ArjunaInternal.getCentralExecState().getIssueId();
+				issueId = ArjunaInternal.getGlobalState().getIssueId();
 				IssueBuilder builder = new IssueBuilder();
 				Issue issue = builder
 				.testVariables(this.getTestVariables())
@@ -142,6 +142,7 @@ public class JavaTestMethodInstance extends BaseTestObject implements TestCreato
 		this.currentTestNumber += 1;
 		String testObjectId = String.format("%s|TestNumber-%d", this.getObjectId(), this.currentTestNumber);
 		Test test = new JavaTest(currentTestNumber, testObjectId, this, methodDef);
+		test.setGroup(this.getGroup());
 		lastTest = test;
 		if (dataSourceIssue){
 			test.setDataRecord(new MapDataRecord());

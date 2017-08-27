@@ -34,7 +34,7 @@ public class TestSessionNodeRunner implements Runnable {
 			try{
 				t = ThreadBatteries.createThread(threadName, new TestSessionSubNodeRunner(this.sessionNode));
 				threadNames.add(t.getName());
-				ArjunaInternal.getCentralExecState().registerThread(t.getName());
+				ArjunaInternal.getGlobalState().registerThread(t.getName());
 				t.start();
 				groupThreads.add(t);
 			} catch (Exception e){
@@ -54,7 +54,7 @@ public class TestSessionNodeRunner implements Runnable {
 		}
 		
 		for (String tName: threadNames){
-			ArjunaInternal.getCentralExecState().deregisterThread(tName);
+			ArjunaInternal.getGlobalState().deregisterThread(tName);
 		}
 		
 		logger.debug(String.format("Session Node: %s:: Run end", sessionNode.getName()));

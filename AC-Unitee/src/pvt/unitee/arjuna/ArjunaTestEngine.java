@@ -37,10 +37,11 @@ import pvt.unitee.enums.TestLanguage;
 import pvt.unitee.interfaces.InternlReportableObserver;
 import pvt.unitee.lib.engine.TestEngine;
 import pvt.unitee.lib.engine.TestSessionRunner;
-import pvt.unitee.reporter.lib.CentralExecutionState;
+import pvt.unitee.reporter.lib.GlobalState;
 import pvt.unitee.reporter.lib.CentralReportGenerator;
 import pvt.unitee.reporter.lib.DefaultReporter;
 import pvt.unitee.reporter.lib.Reporter;
+import pvt.unitee.reporter.lib.SummaryResult;
 import pvt.unitee.reporter.lib.event.Event;
 import pvt.unitee.reporter.lib.test.TestResult;
 import pvt.unitee.reporter.lib.writer.console.ConsoleEventWriter;
@@ -76,8 +77,8 @@ public class ArjunaTestEngine implements TestEngine{
 		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTRUNNER_CREATE_START));
 		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTREPORTER_CREATE_START));
 		archive();
-		
-		ArjunaSingleton.INSTANCE.setCentralExecState(new CentralExecutionState());
+		SummaryResult.init();
+		ArjunaSingleton.INSTANCE.setCentralExecState(new GlobalState());
 		Reporter reporter = new DefaultReporter();
 		List<String> reportFormats = Batteries.value(ArjunaProperty.REPORT_LISTENERS_BUILTIN).asStringList();
 		for (String reportFormatName: reportFormats) {
@@ -206,7 +207,7 @@ public class ArjunaTestEngine implements TestEngine{
 			t.start();
 			t.join();
 		} catch (Exception e){
-			System.err.println("Critical Error: Exception occured while session Thread.");
+			System.err.println("Critical Error: Exception occured in session Thread.");
 			Console.displayExceptionBlock(e);
 			System.err.println("Exiting...");
 			System.exit(1);

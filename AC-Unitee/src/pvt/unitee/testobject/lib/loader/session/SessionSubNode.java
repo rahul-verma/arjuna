@@ -25,4 +25,6 @@ public interface SessionSubNode {
 	DefaultStringKeyValueContainer getExecVars();
 
 	void load() throws Exception;
+
+	void setID(String id);
 }

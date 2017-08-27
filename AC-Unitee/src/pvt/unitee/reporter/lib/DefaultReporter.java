@@ -55,7 +55,6 @@ public class DefaultReporter implements Reporter{
 	}
 	
 	public DefaultReporter() throws Exception{
-		SummaryResult.init();
 		FileUtils.forceMkdir(new File(getRunIDReportDir()));	
 		String reportDir = getRunIDReportDir();
 		this.addTestResultObserver(new JsonTestResultWriter());

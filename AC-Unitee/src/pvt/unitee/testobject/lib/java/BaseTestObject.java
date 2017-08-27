@@ -11,6 +11,7 @@ import pvt.unitee.enums.TestResultCode;
 import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.interfaces.TestObject;
+import pvt.unitee.testobject.lib.loader.group.Group;
 import unitee.enums.TestObjectType;
 
 public abstract class BaseTestObject implements TestObject {
@@ -23,6 +24,7 @@ public abstract class BaseTestObject implements TestObject {
 	private TestResultCode exType = null;
 	private String exclusionDesc = null;
 	private int issueId;
+	private Group group = null;
 	
 //	private boolean notSelected = false;
 //	private TestResultCode notSelectedType = null;
@@ -308,5 +310,13 @@ public abstract class BaseTestObject implements TestObject {
 	@Override
 	public void populateUserProps() throws Exception {
 		this.testVarsHandler.populateUserProps();
+	}
+
+	public Group getGroup() {
+		return group;
+	}
+
+	public void setGroup(Group group) throws Exception {
+		this.group = group;
 	}
 }

@@ -83,6 +83,7 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 		String fragmentObjectId = String.format("%s|Fragment-%d", this.getObjectId(), ++currentFragmentNumber);
 		
 		this.currentFragment = new JavaTestClassFragment(currentFragmentNumber, fragmentObjectId, this.classDef, this.container, this);
+		currentFragment.setGroup(this.getGroup());
 		currentFragment.setCreatorNames(methods);
 		currentFragment.loadTestCreators();
 	}
@@ -210,7 +211,7 @@ public class JavaTestClassInstance extends BaseTestObject implements TestContain
 	}
 	
 	private void processContainerConstructorException(Throwable e) throws Exception{
-		int issueId = ArjunaInternal.getCentralExecState().getIssueId();
+		int issueId = ArjunaInternal.getGlobalState().getIssueId();
 		IssueBuilder builder = new IssueBuilder();
 		Issue issue = builder
 		.testVariables(this.getTestVariables())

@@ -75,6 +75,8 @@ public class JavaTestClassFragment extends BaseTestObject implements TestContain
 			}
 			String methodObjectId = String.format("%s|%s", this.getObjectId(), creatorName);
 			testMethod = new JavaTestMethod(methodObjectId, this, classDef.getTestCreatorDefinition(creatorName));
+			testMethod.setGroup(this.getGroup());
+			testMethod.loadInstances();
 			this.methodsQueue.add(testMethod);
 		}
 	}

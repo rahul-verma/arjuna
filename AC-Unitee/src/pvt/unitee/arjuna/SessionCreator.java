@@ -82,9 +82,15 @@ public class SessionCreator {
 	}
 	
 	private PickerConfig createPickerConfigForCLIConfig() throws Exception{
-		PickerConfig config = new PickerConfigForCLI(this.cliPickerOptions);
-		config.process();
-		return config;
+		try{
+			PickerConfig config = new PickerConfigForCLI(this.cliPickerOptions);
+			config.process();
+			return config;
+		} catch (Exception e){
+			displayCLIPickerConfigError();
+		}
+		
+		return null;
 	}
 	
 	public Session getSession() throws Exception {

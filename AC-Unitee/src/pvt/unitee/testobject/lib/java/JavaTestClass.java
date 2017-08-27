@@ -67,6 +67,7 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 	
 	@Override
 	public void setGroup(Group g) throws Exception{
+		super.setGroup(g);
 		this.getTestVariables().rawExecVars().add(g.getExecVars());
 		this.getTestVariables().rawObjectProps().setSessionNodeName(g.getSessionNode().getName());
 		this.getTestVariables().rawObjectProps().setSessionNodeId(g.getSessionNode().getId());
@@ -84,7 +85,7 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 			logger.debug(String.format("Check whether dependencies are met for %s.", this.getQualifiedName()));
 		}
 		for (DependencyHandler dep: dependencies){
-			if (!dep.isMet(outId)){
+			if (!dep.isMet(this, outId)){
 				if (ArjunaInternal.displayDependencyDefInfo){
 					logger.debug("Dependencies NOT met for " + this.getQualifiedName());
 				}
@@ -137,6 +138,7 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 	public JavaTestClassInstance createInstance(int instanceNumber) throws Exception {
 		String instanceId = String.format("%s|TCC%d", this.getObjectId(), instanceNumber);
 		JavaTestClassInstance classClone = new JavaTestClassInstance(instanceNumber, instanceId, this.classDef, this);
+		classClone.setGroup(this.getGroup());
 		this.instanceExecTracker.put(instanceId, classClone);
 		this.instanceQueue.add(classClone);
 		return classClone;

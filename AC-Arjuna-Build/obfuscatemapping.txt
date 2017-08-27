@@ -5301,9 +5301,9 @@ pvt.unitee.arjuna.ArjunaInternal -> com.autocognite.pvt.gp:
     313:322:void loadSession$1cbd1cf7() -> G
     14306:14343:void pvt.unitee.config.ArjunaSingleton.loadSession():306:343 -> G
     14306:14343:void loadSession$1cbd1cf7():314 -> G
-    15091:15091:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.arjuna.SessionCreator.getSession():91:91 -> G
-    15091:15091:void pvt.unitee.config.ArjunaSingleton.loadSession():312 -> G
-    15091:15091:void loadSession$1cbd1cf7():314 -> G
+    15097:15097:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.arjuna.SessionCreator.getSession():97:97 -> G
+    15097:15097:void pvt.unitee.config.ArjunaSingleton.loadSession():312 -> G
+    15097:15097:void loadSession$1cbd1cf7():314 -> G
     326:334:void run(pvt.unitee.lib.engine.TestEngine) -> e
     337:337:java.util.List getTestObjectAttrListForTestReport() -> k
     15190:15190:java.util.List pvt.unitee.reporter.lib.config.TestReporterSingleton.getTestObjectAttrListForTestReport():190:190 -> k
@@ -5444,18 +5444,11 @@ pvt.unitee.arjuna.SessionCreator -> com.autocognite.pvt.gt:
     pvt.unitee.testobject.lib.loader.session.Session session -> a
     java.util.Map cliPickerOptions -> c
     21:82:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String) -> <init>
-    1085:1087:pvt.unitee.testobject.lib.loader.group.PickerConfig createPickerConfigForCLIConfig():85:87 -> <init>
-    1085:1087:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String):28 -> <init>
-    1095:1119:void displayCLIPickerConfigError():95:119 -> <init>
-    1095:1119:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String):34 -> <init>
-    1421:1421:pvt.batteries.cli.CLIConfigurator pvt.unitee.config.ArjunaSingleton.getCliConfigurator():421:421 -> <init>
-    1421:1421:void displayCLIPickerConfigError():117 -> <init>
-    1421:1421:void <init>(pvt.batteries.lib.ComponentIntegrator,java.util.Map,java.lang.String):34 -> <init>
-    85:87:pvt.unitee.testobject.lib.loader.group.PickerConfig createPickerConfigForCLIConfig() -> b
-    91:91:pvt.unitee.testobject.lib.loader.session.Session getSession() -> a
-    95:119:void displayCLIPickerConfigError() -> c
-    2421:2421:pvt.batteries.cli.CLIConfigurator pvt.unitee.config.ArjunaSingleton.getCliConfigurator():421:421 -> c
-    2421:2421:void displayCLIPickerConfigError():117 -> c
+    86:93:pvt.unitee.testobject.lib.loader.group.PickerConfig createPickerConfigForCLIConfig() -> b
+    97:97:pvt.unitee.testobject.lib.loader.session.Session getSession() -> a
+    101:125:void displayCLIPickerConfigError() -> c
+    1421:1421:pvt.batteries.cli.CLIConfigurator pvt.unitee.config.ArjunaSingleton.getCliConfigurator():421:421 -> c
+    1421:1421:void displayCLIPickerConfigError():123 -> c
 pvt.unitee.arjuna.TestGroupsDB -> com.autocognite.pvt.gu:
     org.apache.log4j.Logger logger -> a
     java.util.Map defaultGroups -> b
@@ -5603,8 +5596,8 @@ pvt.unitee.config.ArjunaSingleton -> com.autocognite.pvt.hb:
     4053:4065:void initlogger():351 -> b
     4053:4065:void freeze():301 -> b
     306:343:void loadSession() -> c
-    4091:4091:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.arjuna.SessionCreator.getSession():91:91 -> c
-    4091:4091:void loadSession():312 -> c
+    4097:4097:pvt.unitee.testobject.lib.loader.session.Session pvt.unitee.arjuna.SessionCreator.getSession():97:97 -> c
+    4097:4097:void loadSession():312 -> c
     346:346:java.lang.String getVersion() -> d
     350:357:void initlogger() -> e
     5068:5072:void pvt.batteries.logging.Log.configure(org.apache.log4j.Level,org.apache.log4j.Level,java.lang.String,java.lang.String):68:72 -> e
@@ -6786,73 +6779,74 @@ pvt.unitee.reporter.lib.CentralExecutionState -> com.autocognite.pvt.jx:
     java.util.HashMap threadStates -> j
     17:42:void <init>() -> <init>
     45:45:pvt.unitee.reporter.lib.ThreadState getCurrentThreadState() -> a
-    49:50:void update(pvt.unitee.reporter.lib.test.TestResult) -> a
-    1173:1187:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):173:187 -> a
-    1173:1187:void update(pvt.unitee.reporter.lib.test.TestResult):49 -> a
+    49:49:pvt.unitee.reporter.lib.ThreadState getThreadState(java.lang.String) -> a
+    53:54:void update(pvt.unitee.reporter.lib.test.TestResult) -> a
+    1177:1191:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):177:191 -> a
+    1177:1191:void update(pvt.unitee.reporter.lib.test.TestResult):53 -> a
     2035:2035:pvt.unitee.reporter.lib.test.TestResultProperties pvt.unitee.reporter.lib.test.TestResult.resultProps():35:35 -> a
-    2035:2035:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):178 -> a
-    2035:2035:void update(pvt.unitee.reporter.lib.test.TestResult):49 -> a
+    2035:2035:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):182 -> a
+    2035:2035:void update(pvt.unitee.reporter.lib.test.TestResult):53 -> a
     3035:3035:pvt.unitee.reporter.lib.test.TestResultProperties pvt.unitee.reporter.lib.test.TestResult.resultProps():35:35 -> a
-    3035:3035:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):179 -> a
-    3035:3035:void update(pvt.unitee.reporter.lib.test.TestResult):49 -> a
+    3035:3035:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):183 -> a
+    3035:3035:void update(pvt.unitee.reporter.lib.test.TestResult):53 -> a
     3103:3107:int pvt.unitee.reporter.lib.test.TestResultProperties.issueId():103:107 -> a
-    3103:3107:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):179 -> a
-    3103:3107:void update(pvt.unitee.reporter.lib.test.TestResult):49 -> a
-    3127:3140:void updateTestCreatorState(java.lang.String,pvt.unitee.enums.TestResultType,int):127:140 -> a
-    3127:3140:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):182 -> a
-    3127:3140:void update(pvt.unitee.reporter.lib.test.TestResult):49 -> a
-    3150:3162:void updateTestClassState(java.lang.String,pvt.unitee.enums.TestResultType,int):150:162 -> a
-    3150:3162:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):183 -> a
-    3150:3162:void update(pvt.unitee.reporter.lib.test.TestResult):49 -> a
-    3165:3170:void updateSessionState(java.lang.String,pvt.unitee.enums.TestResultType):165:170 -> a
-    3165:3170:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):184 -> a
-    3165:3170:void update(pvt.unitee.reporter.lib.test.TestResult):49 -> a
-    53:76:void update(pvt.unitee.reporter.lib.issue.Issue) -> a
+    3103:3107:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):183 -> a
+    3103:3107:void update(pvt.unitee.reporter.lib.test.TestResult):53 -> a
+    3131:3144:void updateTestCreatorState(java.lang.String,pvt.unitee.enums.TestResultType,int):131:144 -> a
+    3131:3144:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):186 -> a
+    3131:3144:void update(pvt.unitee.reporter.lib.test.TestResult):53 -> a
+    3154:3166:void updateTestClassState(java.lang.String,pvt.unitee.enums.TestResultType,int):154:166 -> a
+    3154:3166:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):187 -> a
+    3154:3166:void update(pvt.unitee.reporter.lib.test.TestResult):53 -> a
+    3169:3174:void updateSessionState(java.lang.String,pvt.unitee.enums.TestResultType):169:174 -> a
+    3169:3174:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):188 -> a
+    3169:3174:void update(pvt.unitee.reporter.lib.test.TestResult):53 -> a
+    57:80:void update(pvt.unitee.reporter.lib.issue.Issue) -> a
     4022:4022:pvt.unitee.reporter.lib.issue.IssueProperties pvt.unitee.reporter.lib.issue.Issue.resultProps():22:22 -> a
-    4022:4022:void update(pvt.unitee.reporter.lib.issue.Issue):55 -> a
+    4022:4022:void update(pvt.unitee.reporter.lib.issue.Issue):59 -> a
     5022:5022:pvt.unitee.reporter.lib.issue.IssueProperties pvt.unitee.reporter.lib.issue.Issue.resultProps():22:22 -> a
-    5022:5022:void update(pvt.unitee.reporter.lib.issue.Issue):58 -> a
+    5022:5022:void update(pvt.unitee.reporter.lib.issue.Issue):62 -> a
     6022:6022:pvt.unitee.reporter.lib.issue.IssueProperties pvt.unitee.reporter.lib.issue.Issue.resultProps():22:22 -> a
-    6022:6022:void update(pvt.unitee.reporter.lib.issue.Issue):61 -> a
+    6022:6022:void update(pvt.unitee.reporter.lib.issue.Issue):65 -> a
     7022:7022:pvt.unitee.reporter.lib.issue.IssueProperties pvt.unitee.reporter.lib.issue.Issue.resultProps():22:22 -> a
-    7022:7022:void update(pvt.unitee.reporter.lib.issue.Issue):64 -> a
+    7022:7022:void update(pvt.unitee.reporter.lib.issue.Issue):68 -> a
     8022:8022:pvt.unitee.reporter.lib.issue.IssueProperties pvt.unitee.reporter.lib.issue.Issue.resultProps():22:22 -> a
-    8022:8022:void update(pvt.unitee.reporter.lib.issue.Issue):65 -> a
+    8022:8022:void update(pvt.unitee.reporter.lib.issue.Issue):69 -> a
     9022:9022:pvt.unitee.reporter.lib.issue.IssueProperties pvt.unitee.reporter.lib.issue.Issue.resultProps():22:22 -> a
-    9022:9022:void update(pvt.unitee.reporter.lib.issue.Issue):68 -> a
+    9022:9022:void update(pvt.unitee.reporter.lib.issue.Issue):72 -> a
     10022:10022:pvt.unitee.reporter.lib.issue.IssueProperties pvt.unitee.reporter.lib.issue.Issue.resultProps():22:22 -> a
-    10022:10022:void update(pvt.unitee.reporter.lib.issue.Issue):69 -> a
+    10022:10022:void update(pvt.unitee.reporter.lib.issue.Issue):73 -> a
     11022:11022:pvt.unitee.reporter.lib.issue.IssueProperties pvt.unitee.reporter.lib.issue.Issue.resultProps():22:22 -> a
-    11022:11022:void update(pvt.unitee.reporter.lib.issue.Issue):72 -> a
+    11022:11022:void update(pvt.unitee.reporter.lib.issue.Issue):76 -> a
     12022:12022:pvt.unitee.reporter.lib.issue.IssueProperties pvt.unitee.reporter.lib.issue.Issue.resultProps():22:22 -> a
-    12022:12022:void update(pvt.unitee.reporter.lib.issue.Issue):73 -> a
-    79:79:boolean wasTestMethodSuccessful(java.lang.String) -> c
-    83:94:boolean didTestCreatorsSucceed(java.util.Set,pvt.unitee.reporter.lib.IssueId) -> a
-    98:116:boolean didTestContainersSucceed(java.util.Set,pvt.unitee.reporter.lib.IssueId) -> b
-    120:124:void addCreatorIssue(java.lang.String,int) -> a
-    127:140:void updateTestCreatorState(java.lang.String,pvt.unitee.enums.TestResultType,int) -> a
-    143:147:void addContainerIssue(java.lang.String,int) -> b
-    150:162:void updateTestClassState(java.lang.String,pvt.unitee.enums.TestResultType,int) -> b
-    165:170:void updateSessionState(java.lang.String,pvt.unitee.enums.TestResultType) -> a
-    173:187:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult) -> a
+    12022:12022:void update(pvt.unitee.reporter.lib.issue.Issue):77 -> a
+    83:83:boolean wasTestMethodSuccessful(java.lang.String) -> d
+    87:98:boolean didTestCreatorsSucceed(java.util.Set,pvt.unitee.reporter.lib.IssueId) -> a
+    102:120:boolean didTestContainersSucceed(java.util.Set,pvt.unitee.reporter.lib.IssueId) -> b
+    124:128:void addCreatorIssue(java.lang.String,int) -> a
+    131:144:void updateTestCreatorState(java.lang.String,pvt.unitee.enums.TestResultType,int) -> a
+    147:151:void addContainerIssue(java.lang.String,int) -> b
+    154:166:void updateTestClassState(java.lang.String,pvt.unitee.enums.TestResultType,int) -> b
+    169:174:void updateSessionState(java.lang.String,pvt.unitee.enums.TestResultType) -> a
+    177:191:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult) -> a
     12035:12035:pvt.unitee.reporter.lib.test.TestResultProperties pvt.unitee.reporter.lib.test.TestResult.resultProps():35:35 -> a
-    12035:12035:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):178 -> a
+    12035:12035:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):182 -> a
     13035:13035:pvt.unitee.reporter.lib.test.TestResultProperties pvt.unitee.reporter.lib.test.TestResult.resultProps():35:35 -> a
-    13035:13035:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):179 -> a
+    13035:13035:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):183 -> a
     13103:13107:int pvt.unitee.reporter.lib.test.TestResultProperties.issueId():103:107 -> a
-    13103:13107:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):179 -> a
-    13127:13140:void updateTestCreatorState(java.lang.String,pvt.unitee.enums.TestResultType,int):127:140 -> a
-    13127:13140:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):182 -> a
-    13150:13162:void updateTestClassState(java.lang.String,pvt.unitee.enums.TestResultType,int):150:162 -> a
-    13150:13162:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):183 -> a
-    13165:13170:void updateSessionState(java.lang.String,pvt.unitee.enums.TestResultType):165:170 -> a
-    13165:13170:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):184 -> a
-    190:191:void registerThread(java.lang.String) -> a
-    194:195:void deregisterThread(java.lang.String) -> b
-    198:198:int getIssueId() -> b
+    13103:13107:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):183 -> a
+    13131:13144:void updateTestCreatorState(java.lang.String,pvt.unitee.enums.TestResultType,int):131:144 -> a
+    13131:13144:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):186 -> a
+    13154:13166:void updateTestClassState(java.lang.String,pvt.unitee.enums.TestResultType,int):154:166 -> a
+    13154:13166:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):187 -> a
+    13169:13174:void updateSessionState(java.lang.String,pvt.unitee.enums.TestResultType):169:174 -> a
+    13169:13174:void update(unitee.interfaces.TestObjectProperties,pvt.unitee.reporter.lib.test.TestResult):188 -> a
+    194:195:void registerThread(java.lang.String) -> b
+    198:199:void deregisterThread(java.lang.String) -> c
+    202:202:int getIssueId() -> b
 pvt.unitee.reporter.lib.CentralExecutionState$1 -> com.autocognite.pvt.jy:
     int[] $SwitchMap$unitee$enums$TestObjectType -> a
-    53:53:void <clinit>() -> <clinit>
+    57:57:void <clinit>() -> <clinit>
 pvt.unitee.reporter.lib.CentralReportGenerator -> com.autocognite.pvt.jz:
     org.apache.log4j.Logger logger -> f
     java.util.List generators -> g
@@ -6924,52 +6918,56 @@ pvt.unitee.reporter.lib.SummaryResult -> com.autocognite.pvt.ke:
     11:12:void <clinit>() -> <clinit>
 pvt.unitee.reporter.lib.ThreadState -> com.autocognite.pvt.kf:
     org.apache.log4j.Logger logger -> c
-    pvt.unitee.testobject.lib.interfaces.Test currentTest -> a
-    java.util.List currentStepResults -> b
-    25:28:void <init>() -> <init>
-    31:33:void beginTest(pvt.unitee.testobject.lib.interfaces.Test) -> a
-    36:38:void endTest() -> a
-    41:41:pvt.unitee.testobject.lib.interfaces.Test getCurrentTest() -> c
-    45:45:java.util.List getCurrentTestStepResults() -> b
-    49:50:void addStepResult(pvt.unitee.reporter.lib.step.StepResult) -> a
-    53:53:int getStepId() -> d
-    58:60:void addStepException(java.lang.Throwable) -> a
-    63:65:void addStepSuccessForPassedStep(pvt.unitee.interfaces.Step) -> a
-    1068:1074:pvt.unitee.reporter.lib.step.StepResult createACPassResult(int,pvt.unitee.interfaces.Step):68:74 -> a
-    1068:1074:void addStepSuccessForPassedStep(pvt.unitee.interfaces.Step):63 -> a
+    pvt.unitee.testobject.lib.interfaces.Test currentTest -> d
+    java.util.List currentStepResults -> a
+    boolean testThreadFlag -> b
+    25:29:void <init>() -> <init>
+    32:34:void beginTest(pvt.unitee.testobject.lib.interfaces.Test) -> a
+    37:39:void endTest() -> e
+    42:42:pvt.unitee.testobject.lib.interfaces.Test getCurrentTest() -> f
+    46:46:java.util.List getCurrentTestStepResults() -> a
+    50:51:void addStepResult(pvt.unitee.reporter.lib.step.StepResult) -> a
+    54:54:int getStepId() -> g
+    59:61:void addStepException(java.lang.Throwable) -> a
+    64:66:void addStepSuccessForPassedStep(pvt.unitee.interfaces.Step) -> a
+    1069:1075:pvt.unitee.reporter.lib.step.StepResult createACPassResult(int,pvt.unitee.interfaces.Step):69:75 -> a
+    1069:1075:void addStepSuccessForPassedStep(pvt.unitee.interfaces.Step):64 -> a
     2046:2048:pvt.unitee.reporter.lib.step.StepResultBuilder pvt.unitee.reporter.lib.step.StepResultBuilder.stepEvent(pvt.unitee.interfaces.Step):46:48 -> a
-    2046:2048:pvt.unitee.reporter.lib.step.StepResult createACPassResult(int,pvt.unitee.interfaces.Step):71 -> a
-    2046:2048:void addStepSuccessForPassedStep(pvt.unitee.interfaces.Step):63 -> a
-    68:74:pvt.unitee.reporter.lib.step.StepResult createACPassResult(int,pvt.unitee.interfaces.Step) -> a
+    2046:2048:pvt.unitee.reporter.lib.step.StepResult createACPassResult(int,pvt.unitee.interfaces.Step):72 -> a
+    2046:2048:void addStepSuccessForPassedStep(pvt.unitee.interfaces.Step):64 -> a
+    69:75:pvt.unitee.reporter.lib.step.StepResult createACPassResult(int,pvt.unitee.interfaces.Step) -> a
     3046:3048:pvt.unitee.reporter.lib.step.StepResultBuilder pvt.unitee.reporter.lib.step.StepResultBuilder.stepEvent(pvt.unitee.interfaces.Step):46:48 -> a
-    3046:3048:pvt.unitee.reporter.lib.step.StepResult createACPassResult(int,pvt.unitee.interfaces.Step):71 -> a
-    82:84:void addStepSuccess(java.lang.String,java.lang.String,java.lang.String) -> a
-    3241:3246:pvt.unitee.reporter.lib.step.StepResult createPassStepResult$337912c1(int):241:246 -> a
-    3241:3246:void addStepSuccess(java.lang.String,java.lang.String,java.lang.String):82 -> a
-    88:138:pvt.unitee.reporter.lib.step.StepResult createStepResultForException(int,java.lang.Throwable) -> a
-    142:153:int createIssue(int,java.lang.Throwable,pvt.unitee.enums.StepResultType) -> a
+    3046:3048:pvt.unitee.reporter.lib.step.StepResult createACPassResult(int,pvt.unitee.interfaces.Step):72 -> a
+    83:85:void addStepSuccess(java.lang.String,java.lang.String,java.lang.String) -> a
+    3242:3247:pvt.unitee.reporter.lib.step.StepResult createPassStepResult$337912c1(int):242:247 -> a
+    3242:3247:void addStepSuccess(java.lang.String,java.lang.String,java.lang.String):83 -> a
+    89:139:pvt.unitee.reporter.lib.step.StepResult createStepResultForException(int,java.lang.Throwable) -> a
+    143:154:int createIssue(int,java.lang.Throwable,pvt.unitee.enums.StepResultType) -> a
     4107:4108:pvt.unitee.reporter.lib.issue.IssueBuilder pvt.unitee.reporter.lib.issue.IssueBuilder.testVariables(unitee.interfaces.TestVariables):107:108 -> a
-    4107:4108:int createIssue(int,java.lang.Throwable,pvt.unitee.enums.StepResultType):145 -> a
-    4157:4163:pvt.unitee.enums.IssueSubType getIssueSubTypeForStep(pvt.unitee.enums.StepResultType):157:163 -> a
-    4157:4163:int createIssue(int,java.lang.Throwable,pvt.unitee.enums.StepResultType):148 -> a
+    4107:4108:int createIssue(int,java.lang.Throwable,pvt.unitee.enums.StepResultType):146 -> a
+    4158:4164:pvt.unitee.enums.IssueSubType getIssueSubTypeForStep(pvt.unitee.enums.StepResultType):158:164 -> a
+    4158:4164:int createIssue(int,java.lang.Throwable,pvt.unitee.enums.StepResultType):149 -> a
     5025:5026:pvt.unitee.reporter.lib.issue.IssueBuilder pvt.unitee.reporter.lib.issue.IssueBuilder.stepNum(int):25:26 -> a
-    5025:5026:int createIssue(int,java.lang.Throwable,pvt.unitee.enums.StepResultType):150 -> a
-    157:163:pvt.unitee.enums.IssueSubType getIssueSubTypeForStep(pvt.unitee.enums.StepResultType) -> a
-    167:175:pvt.unitee.reporter.lib.step.StepResult createACFailure(int,unitee.exceptions.Failure) -> a
-    179:186:pvt.unitee.reporter.lib.step.StepResult createXUnitFailStepResult(int,java.lang.AssertionError) -> a
-    190:198:pvt.unitee.reporter.lib.step.StepResult createErrorStepResult(int,unitee.exceptions.Error) -> a
-    202:210:pvt.unitee.reporter.lib.step.StepResult createProblemStepResult(int,pvt.batteries.exceptions.Problem) -> a
+    5025:5026:int createIssue(int,java.lang.Throwable,pvt.unitee.enums.StepResultType):151 -> a
+    158:164:pvt.unitee.enums.IssueSubType getIssueSubTypeForStep(pvt.unitee.enums.StepResultType) -> a
+    168:176:pvt.unitee.reporter.lib.step.StepResult createACFailure(int,unitee.exceptions.Failure) -> a
+    180:187:pvt.unitee.reporter.lib.step.StepResult createXUnitFailStepResult(int,java.lang.AssertionError) -> a
+    191:199:pvt.unitee.reporter.lib.step.StepResult createErrorStepResult(int,unitee.exceptions.Error) -> a
+    203:211:pvt.unitee.reporter.lib.step.StepResult createProblemStepResult(int,pvt.batteries.exceptions.Problem) -> a
     5052:5056:pvt.unitee.reporter.lib.step.StepResultBuilder pvt.unitee.reporter.lib.step.StepResultBuilder.problem(pvt.batteries.exceptions.Problem):52:56 -> a
-    5052:5056:pvt.unitee.reporter.lib.step.StepResult createProblemStepResult(int,pvt.batteries.exceptions.Problem):206 -> a
+    5052:5056:pvt.unitee.reporter.lib.step.StepResult createProblemStepResult(int,pvt.batteries.exceptions.Problem):207 -> a
     5107:5107:java.lang.String pvt.batteries.exceptions.Problem.getProblemText():107:107 -> a
     5107:5107:pvt.unitee.reporter.lib.step.StepResultBuilder pvt.unitee.reporter.lib.step.StepResultBuilder.problem(pvt.batteries.exceptions.Problem):52 -> a
-    5107:5107:pvt.unitee.reporter.lib.step.StepResult createProblemStepResult(int,pvt.batteries.exceptions.Problem):206 -> a
-    214:221:pvt.unitee.reporter.lib.step.StepResult createJavaExceptionStepResult(int,java.lang.Exception) -> a
-    225:232:pvt.unitee.reporter.lib.step.StepResult createJavaErrorStepResult(int,java.lang.Throwable) -> b
-    241:246:pvt.unitee.reporter.lib.step.StepResult createPassStepResult$337912c1(int) -> a
+    5107:5107:pvt.unitee.reporter.lib.step.StepResult createProblemStepResult(int,pvt.batteries.exceptions.Problem):207 -> a
+    215:222:pvt.unitee.reporter.lib.step.StepResult createJavaExceptionStepResult(int,java.lang.Exception) -> a
+    226:233:pvt.unitee.reporter.lib.step.StepResult createJavaErrorStepResult(int,java.lang.Throwable) -> b
+    242:247:pvt.unitee.reporter.lib.step.StepResult createPassStepResult$337912c1(int) -> a
+    251:251:boolean isTestThread() -> b
+    255:256:void enableTestThreadFlag() -> c
+    259:260:void disableTestThreadFlag() -> d
 pvt.unitee.reporter.lib.ThreadState$1 -> com.autocognite.pvt.kg:
     int[] $SwitchMap$pvt$unitee$enums$StepResultType -> a
-    157:157:void <clinit>() -> <clinit>
+    158:158:void <clinit>() -> <clinit>
 pvt.unitee.reporter.lib.config.TestReporterSingleton -> com.autocognite.pvt.kh:
     pvt.unitee.reporter.lib.config.TestReporterSingleton INSTANCE -> a
     java.util.Map testObjectPropNamesMap -> b
@@ -8101,9 +8099,13 @@ pvt.unitee.runner.lib.slots.TestExecutor -> com.autocognite.pvt.nn:
     23:23:int getChildThreadCount() -> b
     27:27:java.lang.String getThreadNameSuffix(int) -> a
     31:31:java.lang.Runnable createRunnable() -> c
-    35:76:void run() -> run
+    35:94:void run() -> run
     1020:1020:pvt.unitee.testobject.lib.interfaces.Test pvt.unitee.runner.lib.slots.TestSlotTestCreatorInstance.next():20:20 -> run
     1020:1020:void run():39 -> run
+    1255:1256:void pvt.unitee.reporter.lib.ThreadState.enableTestThreadFlag():255:256 -> run
+    1255:1256:void run():65 -> run
+    1259:1260:void pvt.unitee.reporter.lib.ThreadState.disableTestThreadFlag():259:260 -> run
+    1259:1260:void run():91 -> run
     13:13:void <clinit>() -> <clinit>
 pvt.unitee.runner.lib.slots.TestSlot -> com.autocognite.pvt.no:
     int slotNum -> b
@@ -8953,6 +8955,10 @@ pvt.unitee.testobject.lib.interfaces.Test -> com.autocognite.pvt.oi:
     void setDataRecord(arjunasdk.ddauto.interfaces.DataRecord) -> a
     pvt.unitee.testobject.lib.java.JavaTestMethodInstance getParentCreatorInstance() -> g
     pvt.unitee.testobject.lib.java.JavaTestClassFragment getTestContainerFragment() -> h
+    void beginTest() -> i
+    void endTest() -> j
+    void reportExclusion() -> k
+    void reportExecuted() -> b_
 pvt.unitee.testobject.lib.interfaces.TestContainer -> com.autocognite.pvt.oj:
     void loadInstances() -> b
     int getInstanceCount() -> c
@@ -9097,57 +9103,57 @@ pvt.unitee.testobject.lib.java.BaseTestObject -> com.autocognite.pvt.op:
     6166:6166:void setUp():212 -> y
     7166:7166:pvt.unitee.testobject.lib.fixture.Fixture getSetUpFixture():166:166 -> y
     7166:7166:void setUp():213 -> y
-    220:229:void tearDown() -> z
+    220:232:void tearDown() -> z
     7174:7174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> z
     7174:7174:void tearDown():220 -> z
     8174:8174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> z
     8174:8174:void tearDown():221 -> z
     9174:9174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> z
-    9174:9174:void tearDown():224 -> z
+    9174:9174:void tearDown():226 -> z
     10174:10174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> z
-    10174:10174:void tearDown():225 -> z
+    10174:10174:void tearDown():227 -> z
     11174:11174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> z
-    11174:11174:void tearDown():225 -> z
+    11174:11174:void tearDown():227 -> z
     12174:12174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> z
-    12174:12174:void tearDown():226 -> z
-    233:236:boolean wasSetUpExecuted() -> A
+    12174:12174:void tearDown():228 -> z
+    236:239:boolean wasSetUpExecuted() -> A
     13166:13166:pvt.unitee.testobject.lib.fixture.Fixture getSetUpFixture():166:166 -> A
-    13166:13166:boolean wasSetUpExecuted():233 -> A
+    13166:13166:boolean wasSetUpExecuted():236 -> A
     14166:14166:pvt.unitee.testobject.lib.fixture.Fixture getSetUpFixture():166:166 -> A
-    14166:14166:boolean wasSetUpExecuted():234 -> A
-    242:245:boolean wasTearDownExecuted() -> B
+    14166:14166:boolean wasSetUpExecuted():237 -> A
+    245:248:boolean wasTearDownExecuted() -> B
     14174:14174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> B
-    14174:14174:boolean wasTearDownExecuted():242 -> B
+    14174:14174:boolean wasTearDownExecuted():245 -> B
     15174:15174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> B
-    15174:15174:boolean wasTearDownExecuted():243 -> B
-    251:254:boolean wasSetUpSuccessful() -> C
+    15174:15174:boolean wasTearDownExecuted():246 -> B
+    254:257:boolean wasSetUpSuccessful() -> C
     16166:16166:pvt.unitee.testobject.lib.fixture.Fixture getSetUpFixture():166:166 -> C
-    16166:16166:boolean wasSetUpSuccessful():251 -> C
+    16166:16166:boolean wasSetUpSuccessful():254 -> C
     17166:17166:pvt.unitee.testobject.lib.fixture.Fixture getSetUpFixture():166:166 -> C
-    17166:17166:boolean wasSetUpSuccessful():252 -> C
-    260:263:boolean wasTearDownSuccessful() -> D
+    17166:17166:boolean wasSetUpSuccessful():255 -> C
+    263:266:boolean wasTearDownSuccessful() -> D
     17174:17174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> D
-    17174:17174:boolean wasTearDownSuccessful():260 -> D
+    17174:17174:boolean wasTearDownSuccessful():263 -> D
     18174:18174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> D
-    18174:18174:boolean wasTearDownSuccessful():261 -> D
-    269:272:pvt.unitee.enums.FixtureResultType getSetUpResult() -> G
+    18174:18174:boolean wasTearDownSuccessful():264 -> D
+    272:275:pvt.unitee.enums.FixtureResultType getSetUpResult() -> G
     19166:19166:pvt.unitee.testobject.lib.fixture.Fixture getSetUpFixture():166:166 -> G
-    19166:19166:pvt.unitee.enums.FixtureResultType getSetUpResult():269 -> G
+    19166:19166:pvt.unitee.enums.FixtureResultType getSetUpResult():272 -> G
     20166:20166:pvt.unitee.testobject.lib.fixture.Fixture getSetUpFixture():166:166 -> G
-    20166:20166:pvt.unitee.enums.FixtureResultType getSetUpResult():270 -> G
-    278:281:pvt.unitee.enums.FixtureResultType getTearDownResult() -> H
+    20166:20166:pvt.unitee.enums.FixtureResultType getSetUpResult():273 -> G
+    281:284:pvt.unitee.enums.FixtureResultType getTearDownResult() -> H
     20174:20174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> H
-    20174:20174:pvt.unitee.enums.FixtureResultType getTearDownResult():278 -> H
+    20174:20174:pvt.unitee.enums.FixtureResultType getTearDownResult():281 -> H
     21174:21174:pvt.unitee.testobject.lib.fixture.Fixture getTearDownFixture():174:174 -> H
-    21174:21174:pvt.unitee.enums.FixtureResultType getTearDownResult():279 -> H
-    286:297:void initFixtures(pvt.unitee.enums.TestClassFixtureType,pvt.unitee.enums.TestClassFixtureType) -> a
+    21174:21174:pvt.unitee.enums.FixtureResultType getTearDownResult():282 -> H
+    289:300:void initFixtures(pvt.unitee.enums.TestClassFixtureType,pvt.unitee.enums.TestClassFixtureType) -> a
     22170:22171:void setSetUpFixture(pvt.unitee.testobject.lib.fixture.Fixture):170:171 -> a
-    22170:22171:void initFixtures(pvt.unitee.enums.TestClassFixtureType,pvt.unitee.enums.TestClassFixtureType):289 -> a
+    22170:22171:void initFixtures(pvt.unitee.enums.TestClassFixtureType,pvt.unitee.enums.TestClassFixtureType):292 -> a
     22178:22179:void setTearDownFixture(pvt.unitee.testobject.lib.fixture.Fixture):178:179 -> a
-    22178:22179:void initFixtures(pvt.unitee.enums.TestClassFixtureType,pvt.unitee.enums.TestClassFixtureType):295 -> a
+    22178:22179:void initFixtures(pvt.unitee.enums.TestClassFixtureType,pvt.unitee.enums.TestClassFixtureType):298 -> a
     pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> e
-    302:302:boolean hasCompleted() -> l
-    307:308:void populateUserProps() -> I
+    305:305:boolean hasCompleted() -> l
+    310:311:void populateUserProps() -> I
     16:16:unitee.interfaces.TestVariables getTestVariables() -> o
 pvt.unitee.testobject.lib.java.JavaTest -> com.autocognite.pvt.oq:
     org.apache.log4j.Logger logger -> j
@@ -9198,121 +9204,82 @@ pvt.unitee.testobject.lib.java.JavaTest -> com.autocognite.pvt.oq:
     10104:10104:java.lang.String pvt.unitee.testobject.lib.java.JavaTestMethodInstance.getName():159 -> c
     10104:10104:java.lang.String getName():74 -> c
     78:79:void addStepException(java.lang.Throwable) -> a
-    82:121:void execute() -> f
-    11087:11087:boolean pvt.unitee.testobject.lib.java.BaseTestObject.wasExcluded():87:87 -> f
-    11087:11087:void execute():95 -> f
-    11167:11178:void reportExclusion():167:178 -> f
-    11167:11178:void execute():97 -> f
-    12037:12038:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.testVariables(unitee.interfaces.TestVariables):37:38 -> f
-    12037:12038:void reportExclusion():169 -> f
-    12037:12038:void execute():97 -> f
-    13017:13018:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.result(pvt.unitee.enums.TestResultType):17:18 -> f
-    13017:13018:void reportExclusion():170 -> f
-    13017:13018:void execute():97 -> f
-    13092:13092:pvt.unitee.enums.TestResultCode pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():92:92 -> f
-    13092:13092:void reportExclusion():171 -> f
-    13092:13092:void execute():97 -> f
-    14022:14023:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.code(pvt.unitee.enums.TestResultCode):22:23 -> f
-    14022:14023:void reportExclusion():171 -> f
-    14022:14023:void execute():97 -> f
-    14097:14097:java.lang.String pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionDesc():97:97 -> f
-    14097:14097:void reportExclusion():172 -> f
-    14097:14097:void execute():97 -> f
-    15027:15028:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.desc(java.lang.String):27:28 -> f
-    15027:15028:void reportExclusion():172 -> f
-    15027:15028:void execute():97 -> f
-    15102:15102:int pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionIssueId():102:102 -> f
-    15102:15102:void reportExclusion():173 -> f
-    15102:15102:void execute():97 -> f
-    16032:16033:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.issueId(int):32:33 -> f
-    16032:16033:void reportExclusion():173 -> f
-    16032:16033:void execute():97 -> f
-    16207:16208:void beginTest():207:208 -> f
-    16207:16208:void execute():103 -> f
-    17031:17033:void pvt.unitee.reporter.lib.ThreadState.beginTest(pvt.unitee.testobject.lib.interfaces.Test):31:33 -> f
-    17031:17033:void beginTest():207 -> f
-    17031:17033:void execute():103 -> f
-    17124:17135:void run():124:135 -> f
-    17124:17135:void execute():104 -> f
-    18105:18105:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> f
-    18105:18105:void run():124 -> f
-    18105:18105:void execute():104 -> f
-    19104:19104:pvt.unitee.testobject.lib.interfaces.TestCreator pvt.unitee.testobject.lib.java.JavaTestMethodInstance.getParentTestCreator():104:104 -> f
-    19104:19104:void run():125 -> f
-    19104:19104:void execute():104 -> f
-    19147:19147:pvt.unitee.testobject.lib.interfaces.TestContainerInstance pvt.unitee.testobject.lib.java.JavaTestClassFragment.getContainerInstance():147:147 -> f
-    19147:19147:void run():125 -> f
-    19147:19147:void execute():104 -> f
-    19155:19155:pvt.unitee.testobject.lib.java.processor.MethodSignatureType pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethodSignatureType():155:155 -> f
-    19155:19155:void run():127 -> f
-    19155:19155:void execute():104 -> f
-    19211:19216:void endTest():211:216 -> f
-    19211:19216:void execute():119 -> f
-    20045:20045:java.util.List pvt.unitee.reporter.lib.ThreadState.getCurrentTestStepResults():45:45 -> f
-    20045:20045:void endTest():212 -> f
-    20045:20045:void execute():119 -> f
-    124:135:void run() -> d
-    20105:20105:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> d
-    20105:20105:void run():124 -> d
-    21104:21104:pvt.unitee.testobject.lib.interfaces.TestCreator pvt.unitee.testobject.lib.java.JavaTestMethodInstance.getParentTestCreator():104:104 -> d
-    21104:21104:void run():125 -> d
-    21147:21147:pvt.unitee.testobject.lib.interfaces.TestContainerInstance pvt.unitee.testobject.lib.java.JavaTestClassFragment.getContainerInstance():147:147 -> d
-    21147:21147:void run():125 -> d
-    21155:21155:pvt.unitee.testobject.lib.java.processor.MethodSignatureType pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethodSignatureType():155:155 -> d
-    21155:21155:void run():127 -> d
-    138:138:java.lang.String getTestMethodName() -> i
-    22142:22142:java.lang.reflect.Method getTestMethod():142:142 -> i
-    22142:22142:java.lang.String getTestMethodName():138 -> i
-    23105:23105:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> i
-    23105:23105:java.lang.reflect.Method getTestMethod():142 -> i
-    23105:23105:java.lang.String getTestMethodName():138 -> i
-    142:142:java.lang.reflect.Method getTestMethod() -> j
-    24105:24105:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> j
-    24105:24105:java.lang.reflect.Method getTestMethod():142 -> j
-    147:147:unitee.interfaces.TestVariables getTestVariablesDefinition() -> m
-    24125:24125:pvt.unitee.core.lib.testvars.InternalTestVariables pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getTestVariables():125:125 -> m
-    24125:24125:unitee.interfaces.TestVariables getTestVariablesDefinition():147 -> m
-    152:152:pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> e
-    25088:25088:pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> e
-    25088:25088:pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():152 -> e
-    25195:25195:pvt.unitee.testobject.lib.fixture.TestFixtures pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():195:195 -> e
-    25195:25195:pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():152 -> e
-    157:159:void setDataRecord(arjunasdk.ddauto.interfaces.DataRecord) -> a
-    163:163:pvt.unitee.testobject.lib.java.JavaTestMethodInstance getParentCreatorInstance() -> g
-    167:178:void reportExclusion() -> k
-    26037:26038:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.testVariables(unitee.interfaces.TestVariables):37:38 -> k
-    26037:26038:void reportExclusion():169 -> k
-    27017:27018:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.result(pvt.unitee.enums.TestResultType):17:18 -> k
-    27017:27018:void reportExclusion():170 -> k
-    27092:27092:pvt.unitee.enums.TestResultCode pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():92:92 -> k
-    27092:27092:void reportExclusion():171 -> k
-    28022:28023:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.code(pvt.unitee.enums.TestResultCode):22:23 -> k
-    28022:28023:void reportExclusion():171 -> k
-    28097:28097:java.lang.String pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionDesc():97:97 -> k
-    28097:28097:void reportExclusion():172 -> k
-    29027:29028:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.desc(java.lang.String):27:28 -> k
-    29027:29028:void reportExclusion():172 -> k
-    29102:29102:int pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionIssueId():102:102 -> k
-    29102:29102:void reportExclusion():173 -> k
-    30032:30033:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.issueId(int):32:33 -> k
-    30032:30033:void reportExclusion():173 -> k
-    207:208:void beginTest() -> K
-    31031:31033:void pvt.unitee.reporter.lib.ThreadState.beginTest(pvt.unitee.testobject.lib.interfaces.Test):31:33 -> K
-    31031:31033:void beginTest():207 -> K
-    211:216:void endTest() -> L
-    31045:31045:java.util.List pvt.unitee.reporter.lib.ThreadState.getCurrentTestStepResults():45:45 -> L
-    31045:31045:void endTest():212 -> L
-    31084:31130:void pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):84:130 -> L
-    31084:31130:void endTest():212 -> L
-    32062:32065:void pvt.unitee.reporter.lib.test.TestResult.updatePassInfo(pvt.unitee.reporter.lib.test.TestResultProperties):62:65 -> L
-    32062:32065:void pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):94 -> L
-    32062:32065:void endTest():212 -> L
-    33018:33018:pvt.unitee.reporter.lib.step.StepResultProperties pvt.unitee.reporter.lib.step.StepResult.resultProps():18:18 -> L
-    33018:33018:void pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):100 -> L
-    33018:33018:void endTest():212 -> L
+    104:122:void execute() -> f
+    10125:10136:void run():125:136 -> f
+    10125:10136:void execute():104 -> f
+    11105:11105:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> f
+    11105:11105:void run():125 -> f
+    11105:11105:void execute():104 -> f
+    12104:12104:pvt.unitee.testobject.lib.interfaces.TestCreator pvt.unitee.testobject.lib.java.JavaTestMethodInstance.getParentTestCreator():104:104 -> f
+    12104:12104:void run():126 -> f
+    12104:12104:void execute():104 -> f
+    12147:12147:pvt.unitee.testobject.lib.interfaces.TestContainerInstance pvt.unitee.testobject.lib.java.JavaTestClassFragment.getContainerInstance():147:147 -> f
+    12147:12147:void run():126 -> f
+    12147:12147:void execute():104 -> f
+    12155:12155:pvt.unitee.testobject.lib.java.processor.MethodSignatureType pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethodSignatureType():155:155 -> f
+    12155:12155:void run():128 -> f
+    12155:12155:void execute():104 -> f
+    125:136:void run() -> d
+    13105:13105:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> d
+    13105:13105:void run():125 -> d
+    14104:14104:pvt.unitee.testobject.lib.interfaces.TestCreator pvt.unitee.testobject.lib.java.JavaTestMethodInstance.getParentTestCreator():104:104 -> d
+    14104:14104:void run():126 -> d
+    14147:14147:pvt.unitee.testobject.lib.interfaces.TestContainerInstance pvt.unitee.testobject.lib.java.JavaTestClassFragment.getContainerInstance():147:147 -> d
+    14147:14147:void run():126 -> d
+    14155:14155:pvt.unitee.testobject.lib.java.processor.MethodSignatureType pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethodSignatureType():155:155 -> d
+    14155:14155:void run():128 -> d
+    139:139:java.lang.String getTestMethodName() -> K
+    15143:15143:java.lang.reflect.Method getTestMethod():143:143 -> K
+    15143:15143:java.lang.String getTestMethodName():139 -> K
+    16105:16105:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> K
+    16105:16105:java.lang.reflect.Method getTestMethod():143 -> K
+    16105:16105:java.lang.String getTestMethodName():139 -> K
+    143:143:java.lang.reflect.Method getTestMethod() -> L
+    17105:17105:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():105:105 -> L
+    17105:17105:java.lang.reflect.Method getTestMethod():143 -> L
+    148:148:unitee.interfaces.TestVariables getTestVariablesDefinition() -> m
+    17125:17125:pvt.unitee.core.lib.testvars.InternalTestVariables pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getTestVariables():125:125 -> m
+    17125:17125:unitee.interfaces.TestVariables getTestVariablesDefinition():148 -> m
+    153:153:pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures() -> e
+    18088:18088:pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():88:88 -> e
+    18088:18088:pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():153 -> e
+    18195:18195:pvt.unitee.testobject.lib.fixture.TestFixtures pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getFixtures():195:195 -> e
+    18195:18195:pvt.unitee.testobject.lib.fixture.TestFixtures getTestFixtures():153 -> e
+    158:160:void setDataRecord(arjunasdk.ddauto.interfaces.DataRecord) -> a
+    164:164:pvt.unitee.testobject.lib.java.JavaTestMethodInstance getParentCreatorInstance() -> g
+    194:195:void beginTest() -> i
+    198:199:void endTest() -> j
+    202:207:void reportExecuted() -> b_
+    19046:19046:java.util.List pvt.unitee.reporter.lib.ThreadState.getCurrentTestStepResults():46:46 -> b_
+    19046:19046:void reportExecuted():203 -> b_
+    19084:19130:void pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):84:130 -> b_
+    19084:19130:void reportExecuted():203 -> b_
+    20062:20065:void pvt.unitee.reporter.lib.test.TestResult.updatePassInfo(pvt.unitee.reporter.lib.test.TestResultProperties):62:65 -> b_
+    20062:20065:void pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):94 -> b_
+    20062:20065:void reportExecuted():203 -> b_
+    21018:21018:pvt.unitee.reporter.lib.step.StepResultProperties pvt.unitee.reporter.lib.step.StepResult.resultProps():18:18 -> b_
+    21018:21018:void pvt.unitee.reporter.lib.test.TestResult.buildFromStepResults(java.util.List):100 -> b_
+    21018:21018:void reportExecuted():203 -> b_
+    210:221:void reportExclusion() -> k
+    21037:21038:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.testVariables(unitee.interfaces.TestVariables):37:38 -> k
+    21037:21038:void reportExclusion():212 -> k
+    22017:22018:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.result(pvt.unitee.enums.TestResultType):17:18 -> k
+    22017:22018:void reportExclusion():213 -> k
+    22092:22092:pvt.unitee.enums.TestResultCode pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionType():92:92 -> k
+    22092:22092:void reportExclusion():214 -> k
+    23022:23023:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.code(pvt.unitee.enums.TestResultCode):22:23 -> k
+    23022:23023:void reportExclusion():214 -> k
+    23097:23097:java.lang.String pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionDesc():97:97 -> k
+    23097:23097:void reportExclusion():215 -> k
+    24027:24028:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.desc(java.lang.String):27:28 -> k
+    24027:24028:void reportExclusion():215 -> k
+    24102:24102:int pvt.unitee.testobject.lib.java.BaseTestObject.getExclusionIssueId():102:102 -> k
+    24102:24102:void reportExclusion():216 -> k
+    25032:25033:pvt.unitee.reporter.lib.test.TestResultBuilder pvt.unitee.reporter.lib.test.TestResultBuilder.issueId(int):32:33 -> k
+    25032:25033:void reportExclusion():216 -> k
 pvt.unitee.testobject.lib.java.JavaTest$1 -> com.autocognite.pvt.or:
     int[] $SwitchMap$pvt$unitee$testobject$lib$java$processor$MethodSignatureType -> a
-    127:127:void <clinit>() -> <clinit>
+    128:128:void <clinit>() -> <clinit>
 pvt.unitee.testobject.lib.java.JavaTestClass -> com.autocognite.pvt.os:
     org.apache.log4j.Logger logger -> j
     pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition classDef -> k
@@ -12016,31 +11983,33 @@ pvt.unitee.validator.lib.check.DefaultStep -> com.autocognite.pvt.rd:
     java.lang.String assertion -> g
     boolean isFailed -> a
     boolean isError -> b
-    29:38:void <init>() -> <init>
-    45:45:java.lang.String getPurpose() -> c
-    52:57:void setPurpose(java.lang.String) -> c
-    63:63:java.lang.String getBenchmark() -> d
-    70:75:void setBenchmark(java.lang.String) -> d
-    81:81:java.lang.String getActualObservation() -> e
-    88:93:void setActualObservation(java.lang.String) -> e
-    97:97:java.lang.String getText() -> f
-    104:109:void setText(java.lang.String) -> f
-    112:112:boolean passed() -> a
-    1121:1121:boolean failed():121:121 -> a
-    1121:1121:boolean passed():112 -> a
-    2117:2117:boolean erred():117:117 -> a
-    2117:2117:boolean passed():112 -> a
-    117:117:boolean erred() -> b
-    121:121:boolean failed() -> g
-    129:130:void setFailure() -> i
-    138:139:void setError() -> k
-    146:146:java.lang.String getExceptionMessage() -> l
-    151:158:void evaluate() -> m
-    2121:2121:boolean failed():121:121 -> m
-    2121:2121:void evaluate():151 -> m
-    3117:3117:boolean erred():117:117 -> m
-    3117:3117:void evaluate():153 -> m
-    165:170:void setExceptionMessage(java.lang.String) -> g
+    java.lang.String parentTestThreadName -> h
+    29:41:void <init>() -> <init>
+    29:45:void <init>(java.lang.String) -> <init>
+    52:52:java.lang.String getPurpose() -> c
+    59:64:void setPurpose(java.lang.String) -> c
+    70:70:java.lang.String getBenchmark() -> d
+    77:82:void setBenchmark(java.lang.String) -> d
+    88:88:java.lang.String getActualObservation() -> e
+    95:100:void setActualObservation(java.lang.String) -> e
+    104:104:java.lang.String getText() -> f
+    111:116:void setText(java.lang.String) -> f
+    119:119:boolean passed() -> a
+    1128:1128:boolean failed():128:128 -> a
+    1128:1128:boolean passed():119 -> a
+    2124:2124:boolean erred():124:124 -> a
+    2124:2124:boolean passed():119 -> a
+    124:124:boolean erred() -> b
+    128:128:boolean failed() -> g
+    136:137:void setFailure() -> i
+    145:146:void setError() -> k
+    153:153:java.lang.String getExceptionMessage() -> l
+    158:165:void evaluate() -> m
+    2128:2128:boolean failed():128:128 -> m
+    2128:2128:void evaluate():158 -> m
+    3124:3124:boolean erred():124:124 -> m
+    3124:3124:void evaluate():160 -> m
+    172:177:void setExceptionMessage(java.lang.String) -> g
 pvt.unitee.validator.lib.exceptions.Pass -> com.autocognite.pvt.re:
     long serialVersionUID -> a
     27:28:void <init>(pvt.unitee.interfaces.Check) -> <init>
@@ -12269,23 +12238,48 @@ unitee.interfaces.TestVariables -> unitee.interfaces.TestVariables:
     arjunasdk.ddauto.interfaces.DataRecord record() -> record
     arjunasdk.ddauto.interfaces.DataReference refer(java.lang.String) -> refer
     java.util.Map references() -> references
-unitee.steps.Steps -> unitee.steps.Steps:
-    6:6:void <init>() -> <init>
-    9:51:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
-    1129:1130:void pvt.unitee.validator.lib.check.DefaultStep.setFailure():129:130 -> a
-    1129:1130:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String):27 -> a
-    1138:1139:void pvt.unitee.validator.lib.check.DefaultStep.setError():138:139 -> a
-    1138:1139:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String):30 -> a
-    55:56:void pass(java.lang.String) -> pass
-    59:60:void pass(java.lang.String,java.lang.String) -> pass
-    63:64:void pass(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> pass
-    67:68:void fail(java.lang.String) -> fail
-    71:72:void fail(java.lang.String,java.lang.String) -> fail
-    75:76:void fail(java.lang.String,java.lang.String,java.lang.String) -> fail
-    79:80:void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> fail
-    83:84:void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> fail
-    87:88:void error(java.lang.String) -> error
-    91:92:void error(java.lang.String,java.lang.String) -> error
-unitee.steps.Steps$1 -> unitee.steps.a:
+unitee.steps.MTSteps -> unitee.steps.MTSteps:
+    java.lang.String parentTestThreadName -> a
+    8:16:void <init>() -> <init>
+    1251:1251:boolean pvt.unitee.reporter.lib.ThreadState.isTestThread():251:251 -> <init>
+    1251:1251:void <init>():11 -> <init>
+    19:61:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
+    2136:2137:void pvt.unitee.validator.lib.check.DefaultStep.setFailure():136:137 -> a
+    2136:2137:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String):37 -> a
+    2145:2146:void pvt.unitee.validator.lib.check.DefaultStep.setError():145:146 -> a
+    2145:2146:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String):40 -> a
+    65:66:void pass(java.lang.String) -> pass
+    69:70:void pass(java.lang.String,java.lang.String) -> pass
+    73:74:void pass(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> pass
+    77:78:void fail(java.lang.String) -> fail
+    81:82:void fail(java.lang.String,java.lang.String) -> fail
+    85:86:void fail(java.lang.String,java.lang.String,java.lang.String) -> fail
+    89:90:void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> fail
+    93:94:void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> fail
+    97:98:void error(java.lang.String) -> error
+    101:102:void error(java.lang.String,java.lang.String) -> error
+unitee.steps.MTSteps$1 -> unitee.steps.a:
     int[] $SwitchMap$pvt$unitee$enums$StepResultType -> a
-    23:23:void <clinit>() -> <clinit>
+    33:33:void <clinit>() -> <clinit>
+unitee.steps.Steps -> unitee.steps.Steps:
+    7:7:void <init>() -> <init>
+    10:55:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> a
+    1251:1251:boolean pvt.unitee.reporter.lib.ThreadState.isTestThread():251:251 -> a
+    1251:1251:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String):10 -> a
+    2136:2137:void pvt.unitee.validator.lib.check.DefaultStep.setFailure():136:137 -> a
+    2136:2137:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String):31 -> a
+    2145:2146:void pvt.unitee.validator.lib.check.DefaultStep.setError():145:146 -> a
+    2145:2146:void step(pvt.unitee.enums.StepResultType,java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String):34 -> a
+    59:60:void pass(java.lang.String) -> pass
+    63:64:void pass(java.lang.String,java.lang.String) -> pass
+    67:68:void pass(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> pass
+    71:72:void fail(java.lang.String) -> fail
+    75:76:void fail(java.lang.String,java.lang.String) -> fail
+    79:80:void fail(java.lang.String,java.lang.String,java.lang.String) -> fail
+    83:84:void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> fail
+    87:88:void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String) -> fail
+    91:92:void error(java.lang.String) -> error
+    95:96:void error(java.lang.String,java.lang.String) -> error
+unitee.steps.Steps$1 -> unitee.steps.b:
+    int[] $SwitchMap$pvt$unitee$enums$StepResultType -> a
+    27:27:void <clinit>() -> <clinit>

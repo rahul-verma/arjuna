@@ -75,7 +75,7 @@ public class JavaTest extends BaseTestObject implements Test{
 	}
 	
 	private static void addStepException(Throwable e) throws Exception{
-		ArjunaInternal.getCentralExecState().getCurrentThreadState().addStepException(e);	
+		ArjunaInternal.getGlobalState().getCurrentThreadState().addStepException(e);	
 	}
 	
 	public void execute() throws Exception{		
@@ -191,17 +191,17 @@ public class JavaTest extends BaseTestObject implements Test{
 //	}
 
 	public void beginTest() throws Exception{
-		ArjunaInternal.getCentralExecState().getCurrentThreadState().beginTest(this);
+		ArjunaInternal.getGlobalState().getCurrentThreadState().beginTest(this);
 	}
 	
 	public void endTest() throws Exception{
-		ArjunaInternal.getCentralExecState().getCurrentThreadState().beginTest(this);
+		ArjunaInternal.getGlobalState().getCurrentThreadState().beginTest(this);
 	}
 
 	public void reportExecuted() throws Exception{
 		TestResult result = new TestResult(new TestResultProperties(), this.getTestVariables());
-		result.buildFromStepResults(ArjunaInternal.getCentralExecState().getCurrentThreadState().getCurrentTestStepResults());
-		ArjunaInternal.getCentralExecState().update(result);
+		result.buildFromStepResults(ArjunaInternal.getGlobalState().getCurrentThreadState().getCurrentTestStepResults());
+		ArjunaInternal.getGlobalState().getGroupState(this.getGroup().getID()).update(result);		
 		//ArjunaInternal.getCentralExecState().getCurrentThreadState().endTest();
 		ArjunaInternal.getReporter().update(result);
 	}
@@ -215,7 +215,7 @@ public class JavaTest extends BaseTestObject implements Test{
 		.desc(this.getExclusionDesc())
 		.issueId(this.getExclusionIssueId())
 		.build();
-		ArjunaInternal.getCentralExecState().update(result);
+		ArjunaInternal.getGlobalState().getGroupState(this.getGroup().getID()).update(result);
 		//ArjunaInternal.getCentralExecState().getCurrentThreadState().endTest();		
 		ArjunaInternal.getReporter().update(result);
 	}

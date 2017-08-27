@@ -54,7 +54,7 @@ public class TestSlotExecutor{
 			try{
 				t = ThreadBatteries.createThread(threadName, new TestContainerExecutor(this.slotNum, this.testSlot));
 				threadNames.add(t.getName());
-				ArjunaInternal.getCentralExecState().registerThread(t.getName());
+				ArjunaInternal.getGlobalState().registerThread(t.getName());
 			} catch (Exception e){
 				System.err.println("Critical Error: Exception occured while creating Test Slot Execution Thread.");
 				Console.displayExceptionBlock(e);
@@ -73,7 +73,7 @@ public class TestSlotExecutor{
 		}
 		
 		for (String tName: threadNames){
-			ArjunaInternal.getCentralExecState().deregisterThread(tName);
+			ArjunaInternal.getGlobalState().deregisterThread(tName);
 		}
 	}
 

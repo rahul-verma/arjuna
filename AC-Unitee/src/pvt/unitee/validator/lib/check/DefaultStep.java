@@ -160,7 +160,7 @@ public class DefaultStep implements Step{
 		} else if (erred()){
 			throw new Error(this);
 		} else {
-			ArjunaInternal.getCentralExecState().getThreadState(parentTestThreadName).addStepSuccessForPassedStep(this);
+			ArjunaInternal.getGlobalState().getThreadState(parentTestThreadName).addStepSuccessForPassedStep(this);
 		}
 	}
 

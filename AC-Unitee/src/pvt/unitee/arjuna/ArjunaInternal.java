@@ -45,7 +45,7 @@ import pvt.unitee.enums.TestResultAttribute;
 import pvt.unitee.enums.TestResultType;
 import pvt.unitee.lib.engine.TestEngine;
 import pvt.unitee.lib.strings.UniteeNames;
-import pvt.unitee.reporter.lib.CentralExecutionState;
+import pvt.unitee.reporter.lib.GlobalState;
 import pvt.unitee.reporter.lib.Reporter;
 import pvt.unitee.reporter.lib.config.TestReporterSingleton;
 import pvt.unitee.testobject.lib.loader.session.Session;
@@ -86,6 +86,7 @@ public class ArjunaInternal {
 	public static boolean displayUserTestLoadingInfo = false;
 	public static boolean logExclusionInfo = false;
 	public static boolean centralStateUpdateInfo = false;
+	public static boolean groupStateUpdateInfo = false;
 	private static boolean headerPrinted = false;
 	public static boolean displayTestDefLoadingInfo = false;
 	public static boolean displayMetaDataProcessingInfo = false;
@@ -104,6 +105,11 @@ public class ArjunaInternal {
 		ArjunaSingleton.INSTANCE.init();
 		ArjunaSingleton.INSTANCE.freeze();
 		logger = Logger.getLogger(Batteries.getCentralLogName());
+	}
+	
+	public static boolean isGlobalDepModeOn(){
+		// This should be tied to a property so that users can enabled it at will.
+		return false;
 	}
 	
 	public static Map<TestObjectAttribute, String> getTestObjectAttrNameMap(){
@@ -203,7 +209,7 @@ public class ArjunaInternal {
 		return ArjunaSingleton.INSTANCE.getReporter();
 	}
 	
-	public static CentralExecutionState getCentralExecState(){
+	public static GlobalState getGlobalState(){
 		return ArjunaSingleton.INSTANCE.getCentralExecState();
 	}
 	

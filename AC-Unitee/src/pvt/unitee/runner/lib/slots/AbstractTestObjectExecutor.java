@@ -94,7 +94,7 @@ public abstract class AbstractTestObjectExecutor {
 			try{
 				t = ThreadBatteries.createThread(threadName, createRunnable());
 				threadNames.add(t.getName());
-				ArjunaInternal.getCentralExecState().registerThread(t.getName());
+				ArjunaInternal.getGlobalState().registerThread(t.getName());
 				t.start();
 				threads.add(t);
 			} catch (Exception e){
@@ -113,7 +113,7 @@ public abstract class AbstractTestObjectExecutor {
 		}
 
 		for (String tName: threadNames){
-			ArjunaInternal.getCentralExecState().deregisterThread(tName);
+			ArjunaInternal.getGlobalState().deregisterThread(tName);
 		}		
 	}
 

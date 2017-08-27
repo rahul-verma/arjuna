@@ -4,6 +4,7 @@ import pvt.unitee.enums.FixtureResultType;
 import pvt.unitee.enums.TestResultCode;
 import pvt.unitee.testobject.lib.fixture.Fixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
+import pvt.unitee.testobject.lib.loader.group.Group;
 import unitee.enums.TestObjectType;
 import unitee.interfaces.TestVariables;
 
@@ -80,4 +81,8 @@ public interface TestObject {
 	boolean hasCompleted();
 	
 	void populateUserProps() throws Exception;
+	
+	void setGroup(Group g) throws Exception;
+	
+	Group getGroup();
 }

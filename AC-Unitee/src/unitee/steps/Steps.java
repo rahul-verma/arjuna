@@ -7,7 +7,7 @@ import pvt.unitee.validator.lib.check.DefaultStep;;
 public class Steps {
 	
 	private static void step(StepResultType type, String purpose, String checkText, String benchmark, String observation, String excMessage) throws Exception{
-		if (!ArjunaInternal.getCentralExecState().getCurrentThreadState().isTestThread()){
+		if (!ArjunaInternal.getGlobalState().getCurrentThreadState().isTestThread()){
 			throw new Exception("You can not call Steps methods outside of test context. Confine these calls to setUpTest, test method or tearDownTest in Test class. In libraries confine these calls to lifespan of said methods.");
 		}
 		DefaultStep step = new DefaultStep();

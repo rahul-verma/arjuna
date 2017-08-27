@@ -2156,6 +2156,18 @@ unitee.interfaces.TestVariables: arjunasdk.interfaces.StringKeyValueContainer ex
 unitee.interfaces.TestVariables: arjunasdk.ddauto.interfaces.DataRecord record()
 unitee.interfaces.TestVariables: arjunasdk.ddauto.interfaces.DataReference refer(java.lang.String)
 unitee.interfaces.TestVariables: java.util.Map references()
+unitee.steps.MTSteps
+unitee.steps.MTSteps: MTSteps()
+unitee.steps.MTSteps: void pass(java.lang.String)
+unitee.steps.MTSteps: void pass(java.lang.String,java.lang.String)
+unitee.steps.MTSteps: void pass(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+unitee.steps.MTSteps: void fail(java.lang.String)
+unitee.steps.MTSteps: void fail(java.lang.String,java.lang.String)
+unitee.steps.MTSteps: void fail(java.lang.String,java.lang.String,java.lang.String)
+unitee.steps.MTSteps: void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+unitee.steps.MTSteps: void fail(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)
+unitee.steps.MTSteps: void error(java.lang.String)
+unitee.steps.MTSteps: void error(java.lang.String,java.lang.String)
 unitee.steps.Steps
 unitee.steps.Steps: Steps()
 unitee.steps.Steps: void pass(java.lang.String)

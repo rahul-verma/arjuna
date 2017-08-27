@@ -44,16 +44,6 @@ public class JavaTestMethod extends BaseTestObject implements TestCreator{
 		// Override object properties
 //		this.getTestVariables().rawObjectProps().setName(mName);
 		
-		this.instanceCount = methodDef.getInstanceCount();
-		
-		// Create Instances
-		if (ArjunaInternal.displayLoadingInfo){
-			logger.debug("Creating Method instances");
-		}
-		for (int i=1; i <= instanceCount; i++){
-			this.createInstance(i);
-		}
-		
 		if (ArjunaInternal.displayLoadingInfo){
 			logger.debug(String.format("Number of dependencies for %s: %s", this.getQualifiedName(), this.methodDef.getDependencies().size()));
 		}
@@ -93,10 +83,24 @@ public class JavaTestMethod extends BaseTestObject implements TestCreator{
 	public TestFixtures getTestFixtures() {
 		return this.containerFragment.getTestFixtures();
 	}
+	
+	@Override
+	public void loadInstances() throws Exception{
+		this.instanceCount = methodDef.getInstanceCount();
+		
+		// Create Instances
+		if (ArjunaInternal.displayLoadingInfo){
+			logger.debug("Creating Method instances");
+		}
+		for (int i=1; i <= instanceCount; i++){
+			this.createInstance(i);
+		}		
+	}
 
 	private void createInstance(int i) throws Exception {
 		String instanceId = String.format("%s|Instance-%d", this.getObjectId(), i);
 		JavaTestMethodInstance methodInstance = new JavaTestMethodInstance(i, instanceId, this, this.methodDef);
+		methodInstance.setGroup(this.getGroup());
 		this.methodInstanceQueue.add(methodInstance);
 	}
 
@@ -125,7 +129,7 @@ public class JavaTestMethod extends BaseTestObject implements TestCreator{
 			logger.debug(String.format("Check whether dependencies are met for %s.", this.getQualifiedName()));
 		}
 		for (DependencyHandler dep: dependencies){
-			if (!dep.isMet(outId)){
+			if (!dep.isMet(this, outId)){
 				if (ArjunaInternal.displayDependencyDefInfo){
 					logger.debug("Dependencies NOT met for " + this.getQualifiedName());
 				}

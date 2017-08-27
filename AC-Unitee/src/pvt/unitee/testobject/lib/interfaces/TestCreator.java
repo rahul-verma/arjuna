@@ -17,4 +17,6 @@ public interface TestCreator extends TestObject{
 	String getName();
 
 	JavaTestClassFragment getTestContainerFragment();
+
+	void loadInstances() throws Exception;
 }

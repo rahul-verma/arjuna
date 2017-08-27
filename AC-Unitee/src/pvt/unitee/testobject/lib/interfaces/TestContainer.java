@@ -31,8 +31,6 @@ public interface TestContainer extends TestObject {
 
 	boolean shouldExecute(IssueId outId);
 
-	void setGroup(Group g) throws Exception;
-
 	boolean hasCompleted();
 
 	void markTestClassInstanceCompleted(TestContainerInstance instance);

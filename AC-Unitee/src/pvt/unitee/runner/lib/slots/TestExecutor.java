@@ -62,7 +62,7 @@ public class TestExecutor extends AbstractTestObjectExecutor implements Runnable
 				
 				test.populateUserProps();
 				
-				ArjunaInternal.getCentralExecState().getCurrentThreadState().enableTestThreadFlag();
+				ArjunaInternal.getGlobalState().getCurrentThreadState().enableTestThreadFlag();
 				
 				test.beginTest();
 				
@@ -88,7 +88,7 @@ public class TestExecutor extends AbstractTestObjectExecutor implements Runnable
 				test.reportExecuted();
 				test.endTest();
 				
-				ArjunaInternal.getCentralExecState().getCurrentThreadState().disableTestThreadFlag();
+				ArjunaInternal.getGlobalState().getCurrentThreadState().disableTestThreadFlag();
 			} catch (Exception e){
 				Console.displayExceptionBlock(e);
 			}

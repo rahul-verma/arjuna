@@ -140,7 +140,7 @@ public class ThreadState {
 	}
 	
 	private int createIssue(int stepNum, Throwable e, StepResultType rType) throws Exception{
-		int issueId = ArjunaInternal.getCentralExecState().getIssueId();
+		int issueId = ArjunaInternal.getGlobalState().getIssueId();
 		IssueBuilder builder = new IssueBuilder();
 		Issue issue = builder
 		.testVariables(this.currentTest.getTestVariables())

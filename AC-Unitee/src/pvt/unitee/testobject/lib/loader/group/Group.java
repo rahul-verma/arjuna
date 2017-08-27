@@ -43,4 +43,8 @@ public interface Group {
 
 	void load() throws Exception;
 
+	void setID(String id);
+
+	String getID();
+
 }

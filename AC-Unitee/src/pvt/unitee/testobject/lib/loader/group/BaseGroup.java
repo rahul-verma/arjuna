@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import pvt.batteries.config.Batteries;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import pvt.unitee.testobject.lib.loader.session.SessionNode;
 import pvt.unitee.testobject.lib.loader.session.SessionSubNode;
@@ -22,6 +23,7 @@ public class BaseGroup implements Group{
 	private SessionSubNode sessionSubNode;
 	private DefaultStringKeyValueContainer execVars = new DefaultStringKeyValueContainer();
 	private Map<String,List<String>> classMethodMap = new HashMap<String,List<String>>();
+	private String id = null;
 	
 	public BaseGroup(String name) throws Exception{
 		this.name = name;
@@ -129,5 +131,16 @@ public class BaseGroup implements Group{
 	@Override
 	public List<String> getScheduledCreatorsForContainer(String qualifiedName) {
 		return this.classMethodMap.get(qualifiedName);
+	}
+
+	@Override
+	public void setID(String id) {
+		this.id = id;
+		ArjunaInternal.getGlobalState().registerGroupState(this);
+	}
+	
+	@Override
+	public String getID() {
+		return this.id;
 	}
 }

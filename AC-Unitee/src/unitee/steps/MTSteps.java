@@ -8,7 +8,7 @@ public class MTSteps {
 	String parentTestThreadName = null;
 	
 	public MTSteps() throws Exception{
-		if (!ArjunaInternal.getCentralExecState().getThreadState(parentTestThreadName).isTestThread()){
+		if (!ArjunaInternal.getGlobalState().getThreadState(parentTestThreadName).isTestThread()){
 			throw new Exception("You can not declare a multi-threaded steps object outside of test context. Declare it either in setUpTest or test method.");
 		}
 		this.parentTestThreadName = Thread.currentThread().getName();

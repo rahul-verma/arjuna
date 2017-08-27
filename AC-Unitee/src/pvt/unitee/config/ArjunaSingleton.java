@@ -52,7 +52,7 @@ import pvt.batteries.value.StringValue;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.PickerTargetType;
 import pvt.unitee.enums.TestPickerProperty;
-import pvt.unitee.reporter.lib.CentralExecutionState;
+import pvt.unitee.reporter.lib.GlobalState;
 import pvt.unitee.reporter.lib.Reporter;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import pvt.unitee.testobject.lib.java.processor.JavaTestClassDefProcessor;
@@ -67,7 +67,7 @@ import pvt.unitee.arjuna.TestGroupsDB;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.3.2-b";
+	private String version = "0.3.3-b";
 
 	private HashMap<String,String> cliHashMap = null;
 	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -81,7 +81,7 @@ public enum ArjunaSingleton {
 	private DataGeneratorMap dataGenerators =  new DataGeneratorMap();
 	private Reporter reporter = null;
 
-	private CentralExecutionState execState;
+	private GlobalState execState;
 	private CLIConfigurator cliConfigurator = null;
 	private Session session = null;
 	private boolean initUiAuto = false;
@@ -409,11 +409,11 @@ public enum ArjunaSingleton {
 		return this.dataGenerators.getDataSource(dataGenName);
 	}
 
-	public void setCentralExecState(CentralExecutionState execState) {
+	public void setCentralExecState(GlobalState execState) {
 		this.execState = execState;
 	}
 	
-	public CentralExecutionState getCentralExecState() {
+	public GlobalState getCentralExecState() {
 		return this.execState;
 	}
 	

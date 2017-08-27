@@ -8,6 +8,7 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.DependencyCondition;
 import pvt.unitee.enums.DependencyTarget;
 import pvt.unitee.reporter.lib.IssueId;
+import pvt.unitee.testobject.lib.interfaces.TestObject;
 
 public class DependencyHandler implements Cloneable{
 	private DependencyTarget dType = null;
@@ -37,15 +38,25 @@ public class DependencyHandler implements Cloneable{
 		this.targets.addAll(names);
 	}
 	
-	public synchronized boolean isMet(IssueId outId){
+	public synchronized boolean isMet(TestObject testObject, IssueId outId){
 		if ((this.targets == null) || (this.targets .size() == 0)){
 			return true;
 		}
 		switch(this.getType()){
 		case TEST_METHODS:
-			return ArjunaInternal.getCentralExecState().didTestCreatorsSucceed(this.targets, outId);
+			if (ArjunaInternal.isGlobalDepModeOn()){
+				return ArjunaInternal.getGlobalState().didTestCreatorsSucceed(this.targets, outId);	
+			} else {
+				return ArjunaInternal.getGlobalState().getGroupState(testObject.getGroup().getID()).didTestCreatorsSucceed(this.targets, outId);
+			}
+			
 		case TEST_CLASSES:
-			return ArjunaInternal.getCentralExecState().didTestContainersSucceed(this.targets, outId);
+			if (ArjunaInternal.isGlobalDepModeOn()){
+				return ArjunaInternal.getGlobalState().didTestContainersSucceed(this.targets, outId);	
+			} else {
+				return ArjunaInternal.getGlobalState().getGroupState(testObject.getGroup().getID()).didTestContainersSucceed(this.targets, outId);
+			}
+			
 		}
 		return true;
 	}

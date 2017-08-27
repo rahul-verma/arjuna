@@ -17,9 +17,9 @@ import pvt.unitee.testobject.lib.loader.group.Group;
 import pvt.unitee.testobject.lib.loader.group.PickerConfig;
 
 public class BaseSessionSubNode implements SessionSubNode{
-	private List<Group> groupsQueue = new ArrayList<Group>();
+	//private List<Group> groupsQueue = new ArrayList<Group>();
 	private int testMethodCount = 0;
-	private int groupThreads = 1;
+	//private int groupThreads = 1;
 	private int id;
 	private Iterator<Group> iter = null;
 	private Group group = null;
@@ -150,6 +150,11 @@ public class BaseSessionSubNode implements SessionSubNode{
 	@Override
 	public DefaultStringKeyValueContainer getExecVars() {
 		return this.execVars;
+	}
+
+	@Override
+	public void setID(String id) {
+		this.group.setID(id);
 	}
  
 }
