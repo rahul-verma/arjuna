@@ -16,6 +16,7 @@ import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.reporter.lib.step.StepResult;
 import pvt.unitee.reporter.lib.step.StepResultBuilder;
 import pvt.unitee.testobject.lib.interfaces.Test;
+import pvt.unitee.validator.lib.exceptions.Pass;
 import unitee.exceptions.Error;
 import unitee.exceptions.Failure;
 
@@ -69,6 +70,11 @@ public class ThreadState {
 		try{
 			throw e;
 		}
+		
+		catch (Pass f) {
+			return createACPassResult(stepNum, f);
+		}
+		
 		catch (Failure f) {
 //			logger.debug("Test Fail Exception.");
 			return createACFailure(stepNum, f);
@@ -82,7 +88,12 @@ public class ThreadState {
 			} else {
 				actualException = g.getTargetException().getCause();
 			}
-			if (actualException.getClass() == Failure.class) {
+			
+			if (actualException.getClass() == Pass.class) {
+//				logger.debug("Test Fail Exception in Reflected Method.");
+				return createACPassResult(stepNum, (Pass) actualException);
+			}
+			else if (actualException.getClass() == Failure.class) {
 //				logger.debug("Test Fail Exception in Reflected Method.");
 				return createACFailure(stepNum, (Failure) actualException);
 			} else if (actualException.getClass().isAssignableFrom(AssertionError.class)) {
@@ -162,6 +173,16 @@ public class ThreadState {
 		return builder
 		.result(StepResultType.FAIL)
 		.issueId(issueId)
+		.stepNum(stepNum)
+		.build();
+	}
+	
+	private StepResult createACPassResult(int stepNum, Pass e) throws Exception{
+		StepResultBuilder builder = new StepResultBuilder();
+		
+		return builder
+		.stepEvent(e)
+		.result(StepResultType.PASS)
 		.stepNum(stepNum)
 		.build();
 	}

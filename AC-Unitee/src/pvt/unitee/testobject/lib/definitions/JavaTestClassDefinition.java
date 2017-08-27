@@ -348,9 +348,7 @@ public class JavaTestClassDefinition {
 					methodDef.setSkipped(SkipCode.SKIPPED_METHOD_ANNOTATION);
 				}
 			} else {
-				System.out.println(this.getSkipCode());
 				methodDef.setSkipped(this.getSkipCode());
-				System.out.println(methodDef.getSkipCode());
 			}
 			
 			if (methodDef.shouldBeSkipped()){

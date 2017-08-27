@@ -9,9 +9,6 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtNewConstructor;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;

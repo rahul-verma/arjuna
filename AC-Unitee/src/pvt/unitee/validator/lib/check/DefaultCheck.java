@@ -18,7 +18,9 @@
  ******************************************************************************/
 package pvt.unitee.validator.lib.check;
 
+import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.interfaces.Check;
+import pvt.unitee.validator.lib.exceptions.Pass;
 import unitee.exceptions.Error;
 import unitee.exceptions.Failure;
 
@@ -210,6 +212,8 @@ public class DefaultCheck implements Check {
 			throw new Failure(this);
 		} else if (erred()){
 			throw new Error(this);
+		} else {
+			throw new Pass(this);
 		}
 	}
 

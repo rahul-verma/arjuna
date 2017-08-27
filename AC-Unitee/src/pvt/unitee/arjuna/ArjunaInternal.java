@@ -55,15 +55,15 @@ import unitee.enums.TestObjectAttribute;
 public class ArjunaInternal {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	public static boolean displayReportPrepInfo = false;
-	public static boolean displayDiscoveryInfo = true;
-	public static boolean displayLoadingInfo = true;
-	public static boolean displayDefProcessingInfo = true;
-	public static boolean displayExecTreeLoadingInfo = true;
-	public static boolean displayFixtureProcessingInfo = true;
+	public static boolean displayDiscoveryInfo = false;
+	public static boolean displayLoadingInfo = false;
+	public static boolean displayDefProcessingInfo = false;
+	public static boolean displayExecTreeLoadingInfo = false;
+	public static boolean displayFixtureProcessingInfo = false;
 	public static boolean logFixtureExecutionInfo = false;
-	public static boolean displayInstanceProcessingInfo = true;
+	public static boolean displayInstanceProcessingInfo = false;
 	public static boolean displayExecVarProcessingInfo = false;
-	public static boolean displayTestObjConstructionInfo = false;
+	public static boolean displayTestObjConstructionInfo = true;
 	public static boolean logPropInfo = false;
 	public static boolean logTestExceptionTraces = false;
 	public static boolean displayDependencyDefInfo = false;
@@ -86,6 +86,9 @@ public class ArjunaInternal {
 	public static boolean displayUserTestLoadingInfo = false;
 	public static boolean logExclusionInfo = false;
 	public static boolean centralStateUpdateInfo = false;
+	private static boolean headerPrinted = false;
+	public static boolean displayTestDefLoadingInfo = false;
+	public static boolean displayMetaDataProcessingInfo = false;
 	
 	private static boolean setupsuccessful = false;
 	private static boolean runSuccessful = false;
@@ -207,10 +210,6 @@ public class ArjunaInternal {
 	public static class problem{
 		public static final String REPORT_WRONG_FORMAT = "problem.report.wrong.format";
 	}
-	
-	private static boolean headerPrinted = false;
-	public static boolean displayTestDefLoadingInfo = true;
-	public static boolean displayMetaDataProcessingInfo = true;
 	
 	public static void execute(TestEngine tee){
 		try{

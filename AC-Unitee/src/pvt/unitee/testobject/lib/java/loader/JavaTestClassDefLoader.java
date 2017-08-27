@@ -13,19 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.Code;
-import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
 import arjunasdk.interfaces.Value;
 import arjunasdk.sysauto.batteries.DataBatteries;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtConstructor;
-import javassist.CtNewConstructor;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discoverer.DiscoveredFile;
 import pvt.batteries.discoverer.DiscoveredFileAttribute;

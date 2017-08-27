@@ -13,19 +13,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.apache.bcel.Repository;
-import org.apache.bcel.classfile.Code;
-import org.apache.bcel.classfile.JavaClass;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
 import arjunasdk.interfaces.Value;
 import arjunasdk.sysauto.batteries.DataBatteries;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtConstructor;
-import javassist.CtNewConstructor;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discoverer.DiscoveredFile;
 import pvt.batteries.discoverer.DiscoveredFileAttribute;
@@ -35,6 +28,7 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.SkipCode;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
+import pvt.unitee.testobject.lib.fixture.StaticFixture;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.JavaTestClass;
 import pvt.unitee.testobject.lib.java.TestClassConstructorType;
@@ -45,6 +39,7 @@ import pvt.unitee.testobject.lib.loader.tree.DependencyTreeBuilder;
 import unitee.annotations.Instances;
 import unitee.annotations.Skip;
 import unitee.annotations.TestClass;
+import unitee.interfaces.TestVariables;
 
 public class JavaTestClassDefProcessor implements TestDefProcessor {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
@@ -54,21 +49,12 @@ public class JavaTestClassDefProcessor implements TestDefProcessor {
 	String testDir = null;
 	public static Map<String, Set<String>> CLASS_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
 	public static Map<String, Set<String>> METHOD_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
-	byte[] emptyCodeCheck = null;
 	
 	private void emptyMethodBenchMark(){
 		
 	}
 	
 	public JavaTestClassDefProcessor() throws Exception{
-		// Empty method processor
-		JavaClass emptyKlass =  Repository.lookupClass(EmptyBenchmarkClass.class);
-		org.apache.bcel.classfile.Method[]  jMethods = emptyKlass.getMethods();
-		for (org.apache.bcel.classfile.Method jMethod: jMethods){
-			if (jMethod.getName().equals("<init>")){
-				emptyCodeCheck = jMethod.getCode().getCode();
-			}
-		}
 		
 		HoconReader reader1 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/class_annotations_compatibility.conf"));
 		reader1.process();
@@ -203,45 +189,53 @@ public class JavaTestClassDefProcessor implements TestDefProcessor {
 		  return classList;
 	}
 	
-	private Constructor<?> getConstructor(Class<?> userClass, ConstructorDef constructorType, boolean userHasSuppliedProperties, boolean userHasSuppliedDataRef) throws Exception{
-		boolean constDefFound = false;
+	public Constructor<?> getConstructor(Class<?> klass, ConstructorDef constructorType, boolean userHasSuppliedProperties, boolean userHasSuppliedDataRef) throws Exception{
+		
+		Constructor<?>[] constructors = klass.getConstructors();
+		if (constructors.length > 1){
+			Console.displayError(String.format("Critical Error. Multiple constructors found for test class: %s",klass.getSimpleName()));
+			System.err.println(String.format("You can define one and only one of the following public constructors for %s: ",klass.getSimpleName()));
+			System.err.println(String.format("Option 1: public %s(TestVariables testClassVars)",klass.getSimpleName()));
+			System.err.println(String.format("Option 2: public %s()",klass.getSimpleName()));
+			System.err.println("Exiting...");
+			System.exit(1);					
+		}
+		
+		Constructor<?> constructor = constructors[0];
+		
+		Class<?>[] paramTypes = constructor.getParameterTypes();
+		
+		if (paramTypes.length == 0){
+			constructor =  klass.getConstructor();
+			constructorType.type = TestClassConstructorType.NO_ARG;
+			return constructor;
+		} else if ((paramTypes.length == 1) && (TestVariables.class.equals(paramTypes[0]))){
+			constructor =  klass.getConstructor(TestVariables.class);
+			constructorType.type = TestClassConstructorType.SINGLEARG_TESTVARS;
+			return constructor;
+		} else {
+			List<String> tStrings =  new ArrayList<String>();
+			for (Class<?> t: paramTypes){
+				tStrings.add(t.getSimpleName());
+			}
 
-		List<Class<?>> jClasses =  new ArrayList<Class<?>>();
-		jClasses.add(userClass);
-		System.out.println(this.getSuperClasses(userClass));
-		for (Class<?> parent: this.getSuperClasses(userClass)){
-			System.out.println(parent.getName());
-			if(parent.getName().equals("java.lang.Object")){
-				continue;
+			String argString = null;
+			if (tStrings.size() == 0){
+				argString = "";
+			} else {
+				argString = DataBatteries.join(tStrings, ",");
 			}
-			jClasses.add(parent);
+			
+			Console.displayError(String.format("Critical Error. Incompatible constructor found for test class: %s",klass.getSimpleName()));
+			Console.displayError(String.format("Your current constructor signature is: %s(%s)", klass.getSimpleName(), argString));
+			System.err.println(String.format("You can define one and only one of the following public constructors for %s: ",klass.getSimpleName()));
+			System.err.println(String.format("Option 1: public %s(TestVariables testClassVars)",klass.getSimpleName()));
+			System.err.println(String.format("Option 2: public %s()",klass.getSimpleName()));
+			System.err.println("Exiting...");
+			System.exit(1);
 		}
 		
-		for (Class<?> jClass: jClasses){
-			System.out.println(jClass.getName());
-			Constructor<?>[]  constructors = jClass.getDeclaredConstructors();
-			System.out.println(Arrays.toString(constructors));
-			if (constructors.length > 1){
-				constDefFound = true;
-				break;
-			} else if (constructors[0].getParameterTypes().length > 0){
-				constDefFound = true;	
-				break;
-			}
-		}
-		
-		if (constDefFound){
-			Console.displayError(String.format("Critical Error. Constructor definition found for test class: %s",userClass.getSimpleName()));
-			Console.displayError(String.format("Arjuna Test classes or their base classes should not define any constructor."));
-			Console.displayError(String.format("Please remove any constructors from %s and its base classes, if any.", userClass.getSimpleName()));
-			Console.displayError(String.format("Modify your logic to use an appropriate set-up fixture provisioned by Arjuna Test classes."));
-			Console.displayError("Exiting...");
-			System.exit(1);	
-		}
-		
-		constructorType.type = TestClassConstructorType.NO_ARG;
-		
-		return userClass.getConstructor();
+		return null;
 			
 	}
 

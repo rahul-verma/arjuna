@@ -158,7 +158,6 @@ public class JavaTestClassFixturesLoader {
 	}
 	
 	public void load() throws Exception{
-		System.out.println("Called load" + this.fixtureMethods);
 		for (Method m: this.fixtureMethods){
 			this.loadFixture(m);
 		}
@@ -267,7 +266,11 @@ public class JavaTestClassFixturesLoader {
 	public void populateSignatureTypes(){
 		for (Fixture fixture: this.allFixtures){
 			Class<?>[] paramTypes = fixture.getMethod().getParameterTypes();
-			if ((paramTypes.length > 1) || ((paramTypes.length == 1) && (!TestVariables.class.equals(paramTypes[0])))){
+			if (paramTypes.length == 0){
+				fixture.setSignatureType(MethodSignatureType.NO_ARG);
+			} else if ((paramTypes.length == 1) && (TestVariables.class.equals(paramTypes[0]))){
+				fixture.setSignatureType(MethodSignatureType.SINGLEARG_TESTVARS);
+			} else {
 				List<String> tStrings =  new ArrayList<String>();
 				for (Class<?> t: paramTypes){
 					tStrings.add(t.getSimpleName());
@@ -296,15 +299,8 @@ public class JavaTestClassFixturesLoader {
 				Console.displayError(String.format("Option 2: %s", option2));
 				Console.displayError("Exiting...");
 				System.exit(1);	
-
+				
 			}
-
-			if (paramTypes.length == 0){
-				fixture.setSignatureType(MethodSignatureType.NO_ARG);
-			} else if (paramTypes.length == 1){
-				fixture.setSignatureType(MethodSignatureType.SINGLEARG_TESTVARS);
-			}
-
 		}
 	}
 

@@ -46,8 +46,6 @@ public class TestDefinitionsDB {
 		allClassNameSet.add(name);
 		testClassDefinitions.put(name, classDef);
 		discoveredQueue.add(name);
-		
-		System.out.println(forPickerProcessing);
 	}
 
 	public static synchronized void buildPickerQueueFromDiscoveredQueue() throws Exception{

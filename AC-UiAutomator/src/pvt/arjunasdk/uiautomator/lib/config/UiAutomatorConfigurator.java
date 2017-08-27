@@ -43,11 +43,23 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 	
 	protected void handleIntConfig(String propPath, Value configValue, String purpose, boolean visible) throws Exception{
 		ConfigProperty prop = ConfigPropertyBatteries.createNumberProperty(codeForPath(propPath), propPath, configValue, purpose, visible);
+		if (prop.value().asInt() < 0){
+			System.err.println(String.format("Critical Error. %s property should be a positive integer.", propPath));
+			System.err.println(String.format("You provided: %s", prop.value().asInt()));
+			System.err.println("Exiting...");
+			System.exit(1);	
+		}
 		registerProperty(prop);		
 	}
 	
 	protected void handleDoubleConfig(String propPath, Value configValue, String purpose, boolean visible) throws Exception{
 		ConfigProperty prop = ConfigPropertyBatteries.createNumberProperty(codeForPath(propPath), propPath, configValue, purpose, visible);
+		if (prop.value().asDouble() < 0.0){
+			System.err.println(String.format("Critical Error. %s property should be a positive number.", propPath));
+			System.err.println(String.format("You provided: %s", prop.value().asInt()));
+			System.err.println("Exiting...");
+			System.exit(1);	
+		}
 		registerProperty(prop);		
 	}
 	
@@ -84,19 +96,19 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 					handleStringConfig(propPath, cValue, "Appium Hub URL", false);
 					break;
 				case APP_MOBILE_MAXWAIT:
-					handleIntConfig(propPath, cValue, "Mobile App Max Wait Time for Element Identification", false);
+					handleDoubleConfig(propPath, cValue, "Mobile App Max Wait Time for Element Identification", false);
 					break;
 				case APP_MOBILE_PATH:
 					handleStringConfig(propPath, cValue, "Mobile App Path on Test Machine", false);
 					break;
 				case APP_PC_MAXWAIT:
-					handleIntConfig(propPath, cValue, "PC App Max Wait Time for Element Identification", true);
+					handleDoubleConfig(propPath, cValue, "PC App Max Wait Time for Element Identification", true);
 					break;
 				case BROWSER_MOBILE_DEFAULT:
 					handleStringConfig(propPath, cValue, "Default Mobile Web Browser", false);
 					break;
 				case BROWSER_MOBILE_MAXWAIT:
-					handleIntConfig(propPath, cValue, "Mobile Web Browser Max Wait Time for Element Identification", false);
+					handleDoubleConfig(propPath, cValue, "Mobile Web Browser Max Wait Time for Element Identification", false);
 					break;
 				case BROWSER_MOBILE_PROXY_HOST:
 					handleStringConfig(propPath, cValue, "Mobile Web Browser Proxy Host Name", false);
@@ -114,7 +126,7 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 					handleStringConfig(propPath, cValue, "Default Web Browser for PC", true);
 					break;
 				case BROWSER_PC_MAXWAIT:
-					handleIntConfig(propPath, cValue, "PC Web Browser Max Wait Time for Element Identification", true);
+					handleDoubleConfig(propPath, cValue, "PC Web Browser Max Wait Time for Element Identification", true);
 					break;
 				case BROWSER_PC_PROXY_HOST:
 					handleStringConfig(propPath, cValue, "PC Web Browser Proxy Host Name", true);
@@ -162,7 +174,7 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 					handleDoubleConfig(propPath, cValue, "Sikuli Min Comparison Score for successful match", false);
 					break;
 				case SIKULI_MAXWAIT:
-					handleIntConfig(propPath, cValue, "Sikuli Max Wait Time for Image Identification", false);
+					handleDoubleConfig(propPath, cValue, "Sikuli Max Wait Time for Image Identification", false);
 					break;
 				case UIAUTO_RUNCONTEXT:
 					handleUiContextConfig(propPath, cValue, "Current UI Automation Context", true);
