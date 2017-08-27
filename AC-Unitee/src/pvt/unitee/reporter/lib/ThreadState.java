@@ -59,7 +59,7 @@ public class ThreadState {
 		addStepResult(stepResult);
 	}
 	
-	public void addStepSuccessForPassedCheck(Step step) throws Exception{
+	public void addStepSuccessForPassedStep(Step step) throws Exception{
 		StepResult stepResult = createACPassResult(getStepId(), step);
 		addStepResult(stepResult);	
 	}

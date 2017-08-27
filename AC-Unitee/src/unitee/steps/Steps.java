@@ -33,8 +33,20 @@ public class Steps {
 		
 		if (excMessage != null){
 			step.setExceptionMessage(excMessage);
-		}
-		
+		} else {
+			switch(type){
+			case FAIL:
+				if (checkText == null){
+					step.setExceptionMessage(String.format("Failure: %s", purpose));
+				} else {
+					step.setExceptionMessage(String.format("Failure: %s", checkText));
+				}
+				break;
+			case ERROR:
+				step.setExceptionMessage(String.format("Error: %s", purpose));
+				break;
+			}
+		}		
 		step.evaluate();
 	}
 	

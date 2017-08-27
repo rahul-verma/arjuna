@@ -213,7 +213,7 @@ public class DefaultCheck implements Check {
 		} else if (erred()){
 			throw new Error(this);
 		} else {
-			ArjunaInternal.getCentralExecState().getCurrentThreadState().addStepSuccessForPassedCheck(this);
+			ArjunaInternal.getCentralExecState().getCurrentThreadState().addStepSuccessForPassedStep(this);
 		}
 	}
 
