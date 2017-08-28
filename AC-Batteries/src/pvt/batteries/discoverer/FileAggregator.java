@@ -21,22 +21,35 @@ package pvt.batteries.discoverer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
+import arjunasdk.console.Console;
 import pvt.batteries.config.Batteries;
 
 public class FileAggregator {
 	public Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	List<DiscoveredFile> files = new ArrayList<DiscoveredFile>();
+	Set<String> foundClassNames = new HashSet<String>();
 	Map<String, DiscoveredFile> tempMap = new HashMap<String, DiscoveredFile>();
 
 	public void addFile(DiscoveredFile file) {
 		String key = file.getAttribute(DiscoveredFileAttribute.DIRECTORY_ABSOLUTE_PATH) + "/"
 				+ file.getAttribute(DiscoveredFileAttribute.FULL_NAME);
+		key = key.toUpperCase();
+		if ((foundClassNames.contains(key)) || (tempMap.containsKey(key))){
+			String msg = String.format("Duplicate test file found with name: %s\n", file.getAttribute(DiscoveredFileAttribute.FULL_NAME));
+			msg += "Check package and class names in test directory as well as JAR files.";
+			msg += "Arjuna follows a case-INSENSITIVE approach for test names.";
+			Console.displayError(msg);
+			Console.displayError("Exiting...");
+			System.exit(1);
+		}
 		tempMap.put(key, file);
 	}
 

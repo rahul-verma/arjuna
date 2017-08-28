@@ -94,11 +94,11 @@ public class JavaTestMethodsDefLoader implements TestCreatorLoader {
 			if (isTestMethod || anyDataDriveAnnPresent){
 				methodMap.put(mName, m);
 				methodNames.add(mName);
-				if (testMethodCountMap.containsKey(mName)){
+				if (testMethodCountMap.containsKey(mName.toUpperCase())){
 					multiSameTestDefFound = true;
-					testMethodCountMap.put(mName, testMethodCountMap.get(mName) + 1);
+					testMethodCountMap.put(mName.toUpperCase(), testMethodCountMap.get(mName.toUpperCase()) + 1);
 				} else {
-					testMethodCountMap.put(mName, 1);
+					testMethodCountMap.put(mName.toUpperCase(), 1);
 				}
 			} else {
 				getTestClassDef().getFixturesLoader().addFixtureMethod(m);
@@ -108,13 +108,14 @@ public class JavaTestMethodsDefLoader implements TestCreatorLoader {
 
 		if (multiSameTestDefFound){
 			Console.displayError(String.format("There is a critical error with your test class: %s", userTestClass.getName()));
-			Console.displayError(String.format("Arjuna found test method(s) with overloaded definitions."));
+			Console.displayError(String.format("Arjuna found duplicate test method(s)."));
 			Console.displayError(String.format("Test Method names should be unique in a class."));
 			Console.displayError(String.format("For each of the following test method names, include only one definition of method."));
-			for (String m: testMethodCountMap.keySet()){
-				if (testMethodCountMap.get(m) > 1){
+			Console.displayError(String.format("Arjuna follows case-insenstive approach for method naming."));
+			for (String m: methodNames){
+				if (testMethodCountMap.get(m.toUpperCase()) > 1){
 					Console.displayError("- " + m);
-				}
+				}	
 			}
 			Console.display("");
 			Console.displayError("Exiting...");

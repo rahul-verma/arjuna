@@ -2,6 +2,7 @@ package pvt.batteries.lib;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -76,7 +77,10 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 	@SuppressWarnings("unchecked")
 	public void processConfigProperties(Map<String, Value> properties) throws Exception {
 		Set<String> keys = properties.keySet();
-		for (String propPath : keys) {
+		Iterator<String> iter = keys.iterator();
+		List<String> handledProps = new ArrayList<String>();
+		while(iter.hasNext()) {
+			String propPath = iter.next();
 			String ucPropPath = propPath.toUpperCase();
 			Value cValue = properties.get(propPath);
 			if (pathToEnumMap.containsKey(ucPropPath)) {
@@ -132,10 +136,13 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 
 				}
 
-				properties.remove(propPath);
+				handledProps.add(propPath);
 			}
 		}
 
+		for(String prop: handledProps){
+			properties.remove(prop);
+		}
 	}
 
 	public void processDefaults() throws Exception {
