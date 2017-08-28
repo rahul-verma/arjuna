@@ -67,7 +67,7 @@ public class JavaTestClassDefLoader implements TestDefInitializer {
 	}
 	
 	private boolean isTestClass(Class<?> klass){
-		return klass.isAnnotationPresent(TestClass.class) || klass.getSimpleName().startsWith("Test");
+		return klass.isAnnotationPresent(TestClass.class) || klass.getSimpleName().toUpperCase().startsWith("TEST");
 	}
 	
 	public void handle(DiscoveredFile f){

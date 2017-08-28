@@ -35,7 +35,7 @@ public class JavaTestMethodsDefLoader implements TestCreatorLoader {
 	}
 	
 	private boolean isTestMethod(Method m){
-		return m.isAnnotationPresent(TestMethod.class) || m.getName().startsWith("test");
+		return m.isAnnotationPresent(TestMethod.class) || m.getName().toUpperCase().startsWith("TEST");
 	}
 	
 	private void processSkip(Method m, JavaTestMethodDefinition methodDef){
