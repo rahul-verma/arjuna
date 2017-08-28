@@ -84,7 +84,7 @@ public abstract class AbstractTestObjectExecutor {
 	protected abstract Runnable createRunnable();
 
 	protected void execute(){
-		ArrayList<Thread> threads = new ArrayList<Thread>();
+		List<Thread> threads = new ArrayList<Thread>();
 		Thread t;
 		List<String> threadNames = new ArrayList<String>();
 

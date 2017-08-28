@@ -19,14 +19,12 @@
 package arjunasdk.uiauto.interfaces;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
-import pvt.arjunasdk.selenium.api.WDMediator;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.enums.UiElementType;
 
@@ -56,10 +54,10 @@ public interface SeleniumUiDriver {
 	boolean isSelectedValue(List<WebElement> elements, String value) throws Exception;
 	boolean isDropDownSelectedIndex(Select selectControl, int index) throws Exception;
 	boolean isSelectedIndex(List<WebElement> elements, int index) throws Exception;
-	ArrayList<String> getDropDownOptionLabels(Select selectControl) throws Exception;
-	ArrayList<String> getRadioButtonLabels(List<WebElement> elements) throws Exception;
-	ArrayList<String> getDropDownOptionValues(Select selectControl) throws Exception;
-	ArrayList<String> getRadioButtonValues(List<WebElement> elements) throws Exception;
+	List<String> getDropDownOptionLabels(Select selectControl) throws Exception;
+	List<String> getRadioButtonLabels(List<WebElement> elements) throws Exception;
+	List<String> getDropDownOptionValues(Select selectControl) throws Exception;
+	List<String> getRadioButtonValues(List<WebElement> elements) throws Exception;
 	int getDropDownOptionCount(Select selectControl) throws Exception;
 	WebElement chooseElementBasedOnParentText(List<WebElement> elements,String text) throws Exception;
 	int getWaitTime() throws Exception;

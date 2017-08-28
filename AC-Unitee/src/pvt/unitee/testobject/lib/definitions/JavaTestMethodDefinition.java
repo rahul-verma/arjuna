@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import arjunasdk.ddauto.interfaces.DataReference;
@@ -28,7 +29,7 @@ public class JavaTestMethodDefinition {
 	private int instanceCount = 1;
 	private int instanceThreadCount = 1;
 	private InternalTestVariables testVars = null;
-	private HashMap<Integer, InternalTestVariables> testMethodInstanceTestVars = new HashMap<Integer, InternalTestVariables>();
+	private Map<Integer, InternalTestVariables> testMethodInstanceTestVars = new HashMap<Integer, InternalTestVariables>();
 	private JavaTestClassDefinition parentClassDefinition = null;
 	private Method method = null;
 	private Set<String> methodDependencies = new HashSet<String>();
@@ -126,7 +127,7 @@ public class JavaTestMethodDefinition {
 	}
 
 	public List<DependencyHandler> getDependencies() {
-		ArrayList<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
+		List<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
 		DependencyHandler methodDep = new DependencyHandler();
 		methodDep.setTargets(this.methodDependencies);
 		methodDep.setType(DependencyTarget.TEST_METHODS);

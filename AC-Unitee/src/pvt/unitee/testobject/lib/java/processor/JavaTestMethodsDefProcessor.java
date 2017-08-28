@@ -2,7 +2,6 @@ package pvt.unitee.testobject.lib.java.processor;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,21 +15,11 @@ import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.datasource.DataSourceBuilder;
 import pvt.unitee.core.lib.datasource.DataSourceType;
-import pvt.unitee.enums.SkipCode;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
-import pvt.unitee.testobject.lib.fixture.TestFixtures;
-import pvt.unitee.testobject.lib.java.loader.JavaTestClassFixturesLoader;
 import pvt.unitee.testobject.lib.java.loader.JavaTestLoadingUtils;
-import unitee.annotations.DriveWithData;
-import unitee.annotations.DriveWithDataArray;
-import unitee.annotations.DriveWithDataFile;
-import unitee.annotations.DriveWithDataGenerator;
-import unitee.annotations.DriveWithDataMethod;
 import unitee.annotations.Instances;
-import unitee.annotations.Skip;
-import unitee.annotations.TestMethod;
 import unitee.interfaces.TestVariables;
 
 public class JavaTestMethodsDefProcessor implements TestCreatorProcessor {
@@ -115,7 +104,7 @@ public class JavaTestMethodsDefProcessor implements TestCreatorProcessor {
 			logger.debug("Instances Annotation Present? " + instancesAnnotationPresent);
 		}
 		Instances instancesAnn = null;
-		HashMap<Integer,HashMap<String,String>> instanceProps = new HashMap<Integer,HashMap<String,String>>();
+		Map<Integer,HashMap<String,String>> instanceProps = new HashMap<Integer,HashMap<String,String>>();
 		if (instancesAnnotationPresent){
 			if (ArjunaInternal.displayLoadingInfo){
 				logger.debug("Found @Instances Annotation");

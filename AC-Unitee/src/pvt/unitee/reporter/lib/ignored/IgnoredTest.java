@@ -5,7 +5,6 @@ import java.util.List;
 import com.google.gson.JsonObject;
 
 import pvt.unitee.enums.IgnoredTestAttribute;
-import pvt.unitee.enums.IssueAttribute;
 import pvt.unitee.reporter.lib.reportable.TestRelatedResult;
 import unitee.interfaces.TestVariables;
 

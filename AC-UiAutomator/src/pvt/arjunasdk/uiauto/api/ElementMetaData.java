@@ -18,8 +18,8 @@
  ******************************************************************************/
 package pvt.arjunasdk.uiauto.api;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 
@@ -31,15 +31,15 @@ public interface ElementMetaData {
 
 	String get(String propName);
 
-	HashMap<String, String> getAllProperties();
+	Map<String, String> getAllProperties();
 
 	void addIdentifier(String key, String value);
 
 	void process(UiAutomationContext identificationContext) throws Exception;
 
-	ArrayList<String> getAllowedIdentifiers() throws Exception;
+	List<String> getAllowedIdentifiers() throws Exception;
 
-	ArrayList<Identifier> getIdentifiers();
+	List<Identifier> getIdentifiers();
 
 	void processStrictly(UiAutomationContext automationContext) throws Exception;
 

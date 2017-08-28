@@ -20,6 +20,7 @@ package arjunasdk.uiauto.pageobject;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
@@ -47,7 +48,7 @@ import pvt.batteries.exceptions.Problem;
 public class BasePage implements Page{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private UiDriver automator = null;
-	private HashMap<String, UiElement> uiElementMap = new HashMap<String, UiElement>();
+	private Map<String, UiElement> uiElementMap = new HashMap<String, UiElement>();
 	private UiAutomationContext context = null;
 	private String label;
 	private Page parent = null;
@@ -56,7 +57,7 @@ public class BasePage implements Page{
 	private String name = null;
 	private CentralPageMap uiMap = null;
 	
-//	private HashMap<String, Object> childUiEntities = new  HashMap<String, Object>();
+//	private Map<String, Object> childUiEntities = new  HashMap<String, Object>();
 	
 	public BasePage(){
 	}
@@ -190,7 +191,7 @@ public class BasePage implements Page{
 	}
 
 	@Override
-	public void processUiProperties(String elementName, HashMap<String, String> properties) throws Exception {
+	public void processUiProperties(String elementName, Map<String, String> properties) throws Exception {
 		if (this.getParent() != null){
 			this.processElementProperties(elementName, properties);
 			if (properties != null){
@@ -200,13 +201,13 @@ public class BasePage implements Page{
 	}
 	
 	@Override
-	public void processElementProperties(String elementName, HashMap<String, String> properties) throws Exception  {
+	public void processElementProperties(String elementName, Map<String, String> properties) throws Exception  {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void processElementPropertiesForLabel(String uiName, String elementName, HashMap<String, String> properties) throws Exception {
+	public void processElementPropertiesForLabel(String uiName, String elementName, Map<String, String> properties) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -217,9 +218,9 @@ public class BasePage implements Page{
 
 	public void populate(PageMapper uiMapper) throws Exception {
 		getUiMap().populateRawPageMap(this.getName(), uiMapper);
-		HashMap<String, HashMap<String,String>> rawMap = getUiMap().getRawMap(this.getName());
+		Map<String, HashMap<String,String>> rawMap = getUiMap().getRawMap(this.getName());
 		for (String uiElementName: rawMap.keySet()){
-			HashMap<String,String> elemMap = rawMap.get(uiElementName);
+			Map<String,String> elemMap = rawMap.get(uiElementName);
 			try{
 				processUiProperties(uiElementName, elemMap);
 			} catch (IgnoreElementException e){
@@ -259,7 +260,7 @@ public class BasePage implements Page{
 		return uiElement;
 	}
 
-	public void addElement(String elementName, HashMap<String, String> elementMap) throws Exception {
+	public void addElement(String elementName, Map<String, String> elementMap) throws Exception {
 		ElementMetaData elementMetaData = new DefaultElementMetaData(elementMap);
 		elementMetaData.process(this.getContext());
 		if (elementMetaData.isRelevantForPage()){

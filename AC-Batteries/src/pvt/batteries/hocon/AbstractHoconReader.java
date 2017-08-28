@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -24,7 +25,7 @@ import pvt.batteries.value.NumberValue;
 import pvt.batteries.value.StringValue;
 
 public abstract class AbstractHoconReader implements HoconReader {
-	private HashMap<String, Value> map = new HashMap<String, Value>();
+	private Map<String, Value> map = new HashMap<String, Value>();
 	private static Set<Entry<String, ConfigValue>> systemSet = null;
 	private static Set<String> systemKeys = new HashSet<String>();
 	private Config loadedConf = null;
@@ -147,7 +148,7 @@ public abstract class AbstractHoconReader implements HoconReader {
 	 * @see com.autocognite.batteries.config.HoconReader#getProperties()
 	 */
 	@Override
-	public HashMap<String, Value> getProperties() {
+	public Map<String, Value> getProperties() {
 		return map;
 	}
 }

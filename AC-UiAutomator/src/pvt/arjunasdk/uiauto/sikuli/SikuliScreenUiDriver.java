@@ -21,8 +21,9 @@ package pvt.arjunasdk.uiauto.sikuli;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import javax.imageio.ImageIO;
 
@@ -70,7 +71,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 	}
 
 	@Override
-	public Object getIdentifierType(HashMap<ScreenIdentifyBy, String> map) throws Exception {
+	public Object getIdentifierType(Map<ScreenIdentifyBy, String> map) throws Exception {
 		return ScreenIdentifyBy.IMAGE;
 	}
 
@@ -409,12 +410,12 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 	 * @see com.autocognite.support.sikuli.lib.Itemp#findElements(java.lang.String)
 	 */
 	@Override
-	public ArrayList<Match> findElements(String imagePath)  throws Exception{
+	public List<Match> findElements(String imagePath)  throws Exception{
 		Screen screen = new Screen();
 		Pattern pattern = new Pattern(imagePath);
 		Iterator<Match> matches = screen.findAll(pattern);
 		if (matches != null){
-			ArrayList<Match> matchedElements = new ArrayList<Match>();
+			List<Match> matchedElements = new ArrayList<Match>();
 			while(matches.hasNext()){
 				matchedElements.add(matches.next());
 			}

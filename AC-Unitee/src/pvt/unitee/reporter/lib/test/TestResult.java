@@ -122,7 +122,7 @@ public class TestResult extends TestRelatedResult {
 				break;
 			}
 
-//			ArrayList<String> sPaths = stepResult.getScreenshotPaths();
+//			List<String> sPaths = stepResult.getScreenshotPaths();
 //			if(sPaths != null){
 //				result.getScreenshotPaths().addAll(sPaths);
 //			}

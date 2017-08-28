@@ -1751,11 +1751,12 @@ pvt.unitee.lib.engine.TestSessionSubNodeRunner
 pvt.unitee.lib.engine.TestSessionSubNodeSlotsRunner
 pvt.unitee.lib.strings.UniteeNames
 pvt.unitee.license.LicenseChecker
-pvt.unitee.reporter.lib.CentralExecutionState
-pvt.unitee.reporter.lib.CentralExecutionState$1
 pvt.unitee.reporter.lib.CentralReportGenerator
 pvt.unitee.reporter.lib.DefaultObserver
 pvt.unitee.reporter.lib.DefaultReporter
+pvt.unitee.reporter.lib.GlobalState
+pvt.unitee.reporter.lib.GroupState
+pvt.unitee.reporter.lib.GroupState$1
 pvt.unitee.reporter.lib.IssueId
 pvt.unitee.reporter.lib.Reporter
 pvt.unitee.reporter.lib.SummaryResult

@@ -12,7 +12,6 @@ import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.TestResultType;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.test.TestResult;
-import pvt.unitee.testobject.lib.interfaces.Test;
 import pvt.unitee.testobject.lib.loader.group.Group;
 import unitee.interfaces.TestObjectProperties;
 
@@ -21,8 +20,8 @@ public class GroupState {
 	
 	private Group group = null;
 	private SummaryResult groupSummary = new SummaryResult();
-	private HashMap<String,SummaryResult> testClassResultMap = new HashMap<String,SummaryResult>();
-	private HashMap<String,HashMap<String,SummaryResult>> methodResultMap = new HashMap<String,HashMap<String,SummaryResult>>();
+	private Map<String,SummaryResult> testClassResultMap = new HashMap<String,SummaryResult>();
+	private Map<String,HashMap<String,SummaryResult>> methodResultMap = new HashMap<String,HashMap<String,SummaryResult>>();
 
 	/*
 	 * For LookUp - Classes

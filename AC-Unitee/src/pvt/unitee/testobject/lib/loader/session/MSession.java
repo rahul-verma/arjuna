@@ -2,9 +2,7 @@ package pvt.unitee.testobject.lib.loader.session;
 
 import com.google.gson.JsonObject;
 
-import pvt.unitee.arjuna.TestGroupsDB;
 import pvt.unitee.enums.PickerTargetType;
-import pvt.unitee.testobject.lib.loader.group.Group;
 import pvt.unitee.testobject.lib.loader.group.PickerConfig;
 
 public class MSession extends BaseSession{

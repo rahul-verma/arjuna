@@ -19,6 +19,7 @@
 package arjunasdk.uiauto.pageobject;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.uiauto.interfaces.App;
 import arjunasdk.uiauto.interfaces.Page;
@@ -32,7 +33,7 @@ import pvt.batteries.exceptions.Problem;
 
 public class BaseApp implements App{
 	private String name = null;
-	private HashMap<String, Page> pageMap = new HashMap<String, Page>();
+	private Map<String, Page> pageMap = new HashMap<String, Page>();
 
 	public BaseApp(String templateName){
 		this.setName(templateName);
@@ -102,14 +103,14 @@ public class BaseApp implements App{
 
 
 	@Override
-	public void addElement(String elementName, HashMap<String,String> elementProps) throws Exception {
+	public void addElement(String elementName, Map<String,String> elementProps) throws Exception {
 		for (String name: getPageMap().keySet()){
 			getPageMap().get(name.toUpperCase()).addElement(elementName, elementProps);
 		}
 	}
 
 	@Override
-	public void addElement(String uiLabel, String elementName, HashMap<String, String> elemMap) throws Exception {
+	public void addElement(String uiLabel, String elementName, Map<String, String> elemMap) throws Exception {
 		if (uiLabel == null){
 			throwNullUiException("addElement");
 		}
@@ -133,11 +134,11 @@ public class BaseApp implements App{
 		}
 	}
 
-	protected HashMap<String, Page> getPageMap() {
+	protected Map<String, Page> getPageMap() {
 		return pageMap;
 	}
 
-	protected void setPageMap(HashMap<String, Page> pageMap) {
+	protected void setPageMap(Map<String, Page> pageMap) {
 		this.pageMap = pageMap;
 	}
 	

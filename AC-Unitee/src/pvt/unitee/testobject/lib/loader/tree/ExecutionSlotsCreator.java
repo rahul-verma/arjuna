@@ -13,9 +13,6 @@ import pvt.batteries.config.Batteries;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.exception.SubTestsFinishedException;
-import pvt.unitee.enums.SkipCode;
-import pvt.unitee.enums.TestResultCode;
-import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
@@ -26,17 +23,17 @@ import pvt.unitee.testobject.lib.loader.group.Group;
 
 public class ExecutionSlotsCreator {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
-	private HashMap<Integer,ArrayList<JavaTestMethodDefinition>> execMap = new HashMap<Integer,ArrayList<JavaTestMethodDefinition>>();
+	private Map<Integer,ArrayList<JavaTestMethodDefinition>> execMap = new HashMap<Integer,ArrayList<JavaTestMethodDefinition>>();
 	private Map<String, TestContainer> createdContainerObjects = new HashMap<String, TestContainer>();
 	private DependencyTree depTree =  null;
 	private Group group = null;
 	
 	private List<String> scheduledMethods = new ArrayList<String>();
-	private ArrayList<Integer> slots = new ArrayList<Integer>();
+	private List<Integer> slots = new ArrayList<Integer>();
 	private Iterator<Integer> slotIter = null;
 	private Iterator<TestMethodNode> slotCreatorIter = null;
 	private int currentSlotNum = 0;
-	private HashMap<String,Integer> methodToSlotMap = new HashMap<String,Integer>();
+	private Map<String,Integer> methodToSlotMap = new HashMap<String,Integer>();
 	private DefaultStringKeyValueContainer execVars = new DefaultStringKeyValueContainer();
 //	
 	public ExecutionSlotsCreator(Group group) throws Exception{
@@ -101,7 +98,7 @@ public class ExecutionSlotsCreator {
 			slots.add(currentSlotNum);
 			execMap.put(currentSlotNum, new ArrayList<JavaTestMethodDefinition>());
 			Iterator<String> iter = this.depTree.iterator();
-			ArrayList<String> scheduled = new ArrayList<String>();
+			List<String> scheduled = new ArrayList<String>();
 			while(iter.hasNext()){
 				TestMethodNode node = this.depTree.getNode(iter.next());
 				boolean depMet = false;
@@ -145,7 +142,7 @@ public class ExecutionSlotsCreator {
 		this.slotIter = slots.iterator();
 	}
 
-	public List<TestContainer> getContainerList (int slotNum, ArrayList<JavaTestMethodDefinition> methodDefQueue) throws Exception{
+	public List<TestContainer> getContainerList (int slotNum, List<JavaTestMethodDefinition> methodDefQueue) throws Exception{
 		// From Slot 2, onwards, the executor names must be reset if the container was already created in previous slots
 		for (String name: this.createdContainerObjects.keySet()){
 			this.createdContainerObjects.get(name).resetExecutorCreatorQueue();

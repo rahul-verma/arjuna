@@ -1,6 +1,7 @@
 package pvt.unitee.reporter.lib.fixture;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
@@ -14,7 +15,7 @@ public class FixtureResultProperties
 				extends EnumKeyValueContainer<FixtureResultPropertyType>{
 
 	public FixtureResultProperties(){
-		HashMap<FixtureResultPropertyType,Value> map = new HashMap<FixtureResultPropertyType,Value>();
+		Map<FixtureResultPropertyType,Value> map = new HashMap<FixtureResultPropertyType,Value>();
 		map.put(FixtureResultPropertyType.RESULT, notSetValue);
 		map.put(FixtureResultPropertyType.FIXTURE_TYPE, notSetValue);
 		map.put(FixtureResultPropertyType.FIXTURE_METHOD, notSetValue);

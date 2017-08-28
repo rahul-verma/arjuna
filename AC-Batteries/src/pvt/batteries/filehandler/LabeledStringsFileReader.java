@@ -21,13 +21,15 @@ package pvt.batteries.filehandler;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class LabeledStringsFileReader {
 	FileLineReader reader = null;
-	private ArrayList<String> labels = new ArrayList<String>();
-	private HashMap<String, ArrayList<String>> labeledStrings = new HashMap<String, ArrayList<String>>();
+	private List<String> labels = new ArrayList<String>();
+	private Map<String, ArrayList<String>> labeledStrings = new HashMap<String, ArrayList<String>>();
 	private String currentLabel = null;
 
 	public LabeledStringsFileReader(String filePath) throws IOException {
@@ -64,7 +66,7 @@ public class LabeledStringsFileReader {
 	}
 
 	private void init() {
-		ArrayList<String> lines = reader.all();
+		List<String> lines = reader.all();
 		for (String line : lines) {
 			handleLine(line);
 		}
@@ -74,15 +76,15 @@ public class LabeledStringsFileReader {
 		this.reader.close();
 	}
 
-	public ArrayList<String> getLabels() {
+	public List<String> getLabels() {
 		return labels;
 	}
 
-	public HashMap<String, ArrayList<String>> getAllLabeledStrings() {
+	public Map<String, ArrayList<String>> getAllLabeledStrings() {
 		return labeledStrings;
 	}
 
-	public ArrayList<String> getStringsForLabel(String label) {
+	public List<String> getStringsForLabel(String label) {
 		return labeledStrings.get(label);
 	}
 }

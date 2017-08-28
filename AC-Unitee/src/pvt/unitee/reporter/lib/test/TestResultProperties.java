@@ -1,6 +1,7 @@
 package pvt.unitee.reporter.lib.test;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
@@ -18,7 +19,7 @@ public class TestResultProperties
 	private Throwable exc;
 
 	public TestResultProperties(){
-		HashMap<TestResultAttribute,Value> map = new HashMap<TestResultAttribute,Value>();
+		Map<TestResultAttribute,Value> map = new HashMap<TestResultAttribute,Value>();
 		map.put(TestResultAttribute.RESULT, notSetValue);
 		map.put(TestResultAttribute.CODE, notSetValue);
 		map.put(TestResultAttribute.DESC, notSetValue);
@@ -88,7 +89,11 @@ public class TestResultProperties
 	}
 	
 	public void setIssueId(int id) throws Exception {
-		this.add(TestResultAttribute.ISSUE_ID, new IntValue(id));
+		if (id == -1){
+			// retain na value
+		} else {
+			this.add(TestResultAttribute.ISSUE_ID, new IntValue(id));
+		}
 	}
 
 	public String desc() throws Exception {

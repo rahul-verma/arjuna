@@ -19,9 +19,7 @@
 package pvt.unitee.validator.lib.check;
 
 import pvt.unitee.arjuna.ArjunaInternal;
-import pvt.unitee.interfaces.Check;
 import pvt.unitee.interfaces.Step;
-import pvt.unitee.validator.lib.exceptions.Pass;
 import unitee.exceptions.Error;
 import unitee.exceptions.Failure;
 

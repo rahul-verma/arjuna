@@ -21,14 +21,10 @@ import pvt.unitee.core.lib.testvars.InternalTestVariables;
 import pvt.unitee.enums.DependencyTarget;
 import pvt.unitee.enums.IgnoredTestReason;
 import pvt.unitee.enums.IgnoredTestStatus;
-import pvt.unitee.enums.IssueSubType;
-import pvt.unitee.enums.IssueType;
 import pvt.unitee.enums.SkipCode;
 import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.reporter.lib.ignored.IgnoredTest;
 import pvt.unitee.reporter.lib.ignored.IgnoredTestBuilder;
-import pvt.unitee.reporter.lib.issue.Issue;
-import pvt.unitee.reporter.lib.issue.IssueBuilder;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import pvt.unitee.testobject.lib.java.TestClassConstructorType;
 import pvt.unitee.testobject.lib.java.loader.DataMethodsHandler;
@@ -44,7 +40,7 @@ public class JavaTestClassDefinition {
 	private boolean dataRefPresent = false;
 	private int instanceCount = 1;
 	private InternalTestVariables testVars = null;
-	private HashMap<Integer, InternalTestVariables> testClassInstanceTestVars = new HashMap<Integer, InternalTestVariables>();
+	private Map<Integer, InternalTestVariables> testClassInstanceTestVars = new HashMap<Integer, InternalTestVariables>();
 	private Class<?> klass;
 	private Constructor<?> constructor;
 	private TestClassConstructorType constructorType;
@@ -269,7 +265,7 @@ public class JavaTestClassDefinition {
 	}
 	
 	public List<DependencyHandler> getDependencies() {
-		ArrayList<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
+		List<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
 		DependencyHandler methodDep = new DependencyHandler();
 		methodDep.setTargets(this.methodDependencies);
 		methodDep.setType(DependencyTarget.TEST_METHODS);

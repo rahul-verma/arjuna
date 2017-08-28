@@ -20,6 +20,8 @@ package pvt.batteries.filehandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import arjunasdk.sysauto.batteries.DataBatteries;
 
@@ -52,7 +54,7 @@ public class FileLine2MapReader {
 		return this.headers;
 	}
 
-	protected HashMap<String, String> zip(String[] lineParts) throws Exception {
+	protected Map<String, String> zip(String[] lineParts) throws Exception {
 		if (lineParts.length != this.headers.length) {
 			throw new Exception("Invalid input file data. Number of headers and data values do not match.\r\n"
 					+ DataBatteries.flatten(this.headers) + "\r\n" + DataBatteries.flatten(lineParts) + "\r\n");
@@ -61,9 +63,9 @@ public class FileLine2MapReader {
 		}
 	}
 
-	public HashMap<String, String> next() throws Exception {
+	public Map<String, String> next() throws Exception {
 		String[] lineParts = reader.next();
-		HashMap<String, String> zipped = null;
+		Map<String, String> zipped = null;
 		if (lineParts == null) {
 			return null;
 		} else {
@@ -82,10 +84,10 @@ public class FileLine2MapReader {
 		}
 	}
 
-	public ArrayList<HashMap<String, String>> all() throws Exception {
-		ArrayList<HashMap<String, String>> allLines = new ArrayList<HashMap<String, String>>();
+	public List<HashMap<String, String>> all() throws Exception {
+		List<HashMap<String, String>> allLines = new ArrayList<HashMap<String, String>>();
 		for (String[] line : reader.all()) {
-			allLines.add(this.zip(line));
+			allLines.add((HashMap<String, String>)this.zip(line));
 		}
 		return allLines;
 	}

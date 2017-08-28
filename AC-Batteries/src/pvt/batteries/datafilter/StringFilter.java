@@ -63,7 +63,7 @@ public abstract class StringFilter extends Filter {
 		}
 	}
 
-	public void addFilterStrings(final ArrayList<String> strings) {
+	public void addFilterStrings(final List<String> strings) {
 		if (strings != null) {
 			for (String string : strings) {
 				addFilterString(string);

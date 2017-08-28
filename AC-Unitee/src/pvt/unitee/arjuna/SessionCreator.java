@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.Map;
 
 import arjunasdk.console.Console;
-import pvt.batteries.config.Batteries;
 import pvt.batteries.lib.ComponentIntegrator;
 import pvt.unitee.config.ArjunaSingleton;
 import pvt.unitee.enums.ArjunaProperty;

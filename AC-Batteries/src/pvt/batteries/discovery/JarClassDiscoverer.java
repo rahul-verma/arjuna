@@ -20,8 +20,8 @@ package pvt.batteries.discovery;
 
 import java.net.URL;
 import java.net.URLClassLoader;
-import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
@@ -88,7 +88,7 @@ public class JarClassDiscoverer {
 
 				DiscoveredFile df = new DiscoveredFile();
 				String[] classBaseNameParts = className.split("\\.");
-				ArrayList<String> parts = DataBatteries.arrayToArrayList(classBaseNameParts);
+				List<String> parts = DataBatteries.arrayToArrayList(classBaseNameParts);
 				String classBaseName = classBaseNameParts[classBaseNameParts.length - 1];
 				df.setAttribute(DiscoveredFileAttribute.NAME, classBaseName);
 				df.setAttribute(DiscoveredFileAttribute.EXTENSION, "class");

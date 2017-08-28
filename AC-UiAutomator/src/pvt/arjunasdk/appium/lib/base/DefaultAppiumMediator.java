@@ -40,7 +40,7 @@ public class DefaultAppiumMediator extends BaseUiMediator implements AppiumMedia
 	public MobileElement toolElement = null;
 	private Select selectElement = null;
 	private List<MobileElement> toolElements = null;
-	private ArrayList<By> toolFindByQueue = null;
+	private List<By> toolFindByQueue = null;
 	
 	public DefaultAppiumMediator(UiElement uiElement) {
 		super(uiElement);
@@ -120,17 +120,17 @@ public class DefaultAppiumMediator extends BaseUiMediator implements AppiumMedia
 	}
 
 	@Override
-	public ArrayList<By> getToolFindersQueue() {
+	public List<By> getToolFindersQueue() {
 		return toolFindByQueue;		
 	}
 
 	@Override
-	public ArrayList<By> getToolFindersQueueObject() {
+	public List<By> getToolFindersQueueObject() {
 		return getToolFindersQueue();		
 	}
 
 	@Override
-	public void setFindersQueue(ArrayList<By> findByQueue) {
+	public void setFindersQueue(List<By> findByQueue) {
 		this.toolFindByQueue = findByQueue;
 	}
 
@@ -663,7 +663,7 @@ public class DefaultAppiumMediator extends BaseUiMediator implements AppiumMedia
 	 * @see com.autocognite.unitee.pvt.uiautomator.appium.IAppiumMediator#getDropDownLabels()
 	 */
 	@Override
-	public ArrayList<String> getDropDownLabels() throws Exception{
+	public List<String> getDropDownLabels() throws Exception{
 		Select selectControl = this.getSelectElementWithRetry();
 		return getAppiumUiDriver().getDropDownOptionLabels(selectControl);		
 	}
@@ -671,7 +671,7 @@ public class DefaultAppiumMediator extends BaseUiMediator implements AppiumMedia
 	 * @see com.autocognite.unitee.pvt.uiautomator.appium.IAppiumMediator#getRadioLabels()
 	 */
 	@Override
-	public ArrayList<String> getRadioLabels() throws Exception{
+	public List<String> getRadioLabels() throws Exception{
 		return getAppiumUiDriver().getRadioButtonLabels(this.getToolElements());
 	}
 
@@ -679,7 +679,7 @@ public class DefaultAppiumMediator extends BaseUiMediator implements AppiumMedia
 	 * @see com.autocognite.unitee.pvt.uiautomator.appium.IAppiumMediator#getDropDownValues()
 	 */
 	@Override
-	public ArrayList<String> getDropDownValues() throws Exception{
+	public List<String> getDropDownValues() throws Exception{
 		Select selectControl = this.getSelectElementWithRetry();
 		return getAppiumUiDriver().getDropDownOptionValues(selectControl);		
 	}
@@ -687,7 +687,7 @@ public class DefaultAppiumMediator extends BaseUiMediator implements AppiumMedia
 	 * @see com.autocognite.unitee.pvt.uiautomator.appium.IAppiumMediator#getRadioValues()
 	 */
 	@Override
-	public ArrayList<String> getRadioValues() throws Exception{
+	public List<String> getRadioValues() throws Exception{
 		return getAppiumUiDriver().getRadioButtonValues(this.getToolElements());		
 	}
 

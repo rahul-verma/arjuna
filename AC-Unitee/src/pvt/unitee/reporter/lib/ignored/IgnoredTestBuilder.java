@@ -1,21 +1,10 @@
 package pvt.unitee.reporter.lib.ignored;
 
-import pvt.batteries.exceptions.Problem;
-import pvt.batteries.utils.ExceptionBatteries;
 import pvt.batteries.value.EnumValue;
-import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
-import pvt.unitee.enums.IssueAttribute;
-import pvt.unitee.enums.IssueSubType;
-import pvt.unitee.enums.IssueType;
-import pvt.unitee.enums.IgnoredTestReason;
 import pvt.unitee.enums.IgnoredTestAttribute;
+import pvt.unitee.enums.IgnoredTestReason;
 import pvt.unitee.enums.IgnoredTestStatus;
-import pvt.unitee.enums.TestResultCode;
-import pvt.unitee.enums.TestResultType;
-import pvt.unitee.reporter.lib.test.TestResult;
-import pvt.unitee.reporter.lib.test.TestResultProperties;
-import pvt.unitee.validator.lib.exceptions.StepResultEvent;
 import unitee.interfaces.TestVariables;
 
 public class IgnoredTestBuilder {

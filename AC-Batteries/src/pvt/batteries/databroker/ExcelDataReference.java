@@ -18,9 +18,9 @@
  ******************************************************************************/
 package pvt.batteries.databroker;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import arjunasdk.ddauto.interfaces.DataRecord;
@@ -29,11 +29,11 @@ import arjunasdk.ddauto.lib.MapDataRecord;
 import pvt.batteries.filehandler.ExcelFileLine2ArrayReader;
 
 public class ExcelDataReference implements DataReference {
-	private HashMap<String, DataRecord> map = new HashMap<String, DataRecord>();
+	private Map<String, DataRecord> map = new HashMap<String, DataRecord>();
 	private ExcelFileLine2ArrayReader reader = null;
 	private String keyColumn = null;
 	private int keyIndex = -1;
-	private ArrayList<String> headers = null;
+	private List<String> headers = null;
 	private Object path;
 
 	public ExcelDataReference(String path, String keyColumn) throws Exception {
@@ -63,7 +63,7 @@ public class ExcelDataReference implements DataReference {
 			this.keyColumn = reader.getHeaders().get(0);
 		}
 
-		ArrayList<Object> dataRecord = reader.next();
+		List<Object> dataRecord = reader.next();
 		String keyColumnValue = null;
 		while (dataRecord != null) {
 			keyColumnValue = (String) dataRecord.get(this.keyIndex);

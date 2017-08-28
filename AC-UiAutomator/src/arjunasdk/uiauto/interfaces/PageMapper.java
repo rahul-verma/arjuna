@@ -19,7 +19,8 @@
 package arjunasdk.uiauto.interfaces;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public interface PageMapper {
-	HashMap<String, HashMap<String, String>>  getPageMap() throws Exception;
+	Map<String, HashMap<String, String>>  getPageMap() throws Exception;
 }

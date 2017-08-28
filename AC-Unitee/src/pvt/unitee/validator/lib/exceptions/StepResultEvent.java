@@ -19,7 +19,6 @@
 package pvt.unitee.validator.lib.exceptions;
 
 import pvt.batteries.exceptions.ArjunaException;
-import pvt.unitee.interfaces.Check;
 import pvt.unitee.interfaces.Step;
 
 public class StepResultEvent extends ArjunaException {

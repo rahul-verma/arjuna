@@ -1,7 +1,5 @@
 package arjunasdk.ddauto.lib;
 
-import arjunasdk.ddauto.exceptions.MapDataRecordLookUpException;
-import arjunasdk.interfaces.Value;
 import pvt.batteries.ddt.datarecord.BaseDataRecordContainer;
 
 public class MapDataRecordContainer extends BaseDataRecordContainer {

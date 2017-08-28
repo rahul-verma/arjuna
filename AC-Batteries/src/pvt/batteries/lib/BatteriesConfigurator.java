@@ -2,6 +2,9 @@ package pvt.batteries.lib;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import arjunasdk.enums.LoggingLevel;
 import arjunasdk.interfaces.Value;
@@ -20,8 +23,8 @@ import pvt.batteries.integration.AbstractComponentConfigurator;
 
 public class BatteriesConfigurator extends AbstractComponentConfigurator {
 	private ConfigPropertyBuilder<BatteriesPropertyType> builder = new ConfigPropertyBuilder<BatteriesPropertyType>();
-	private HashMap<String, BatteriesPropertyType> pathToEnumMap = new HashMap<String, BatteriesPropertyType>();
-	private HashMap<BatteriesPropertyType, String> enumToPathMap = new HashMap<BatteriesPropertyType, String>();
+	private Map<String, BatteriesPropertyType> pathToEnumMap = new HashMap<String, BatteriesPropertyType>();
+	private Map<BatteriesPropertyType, String> enumToPathMap = new HashMap<BatteriesPropertyType, String>();
 
 	public BatteriesConfigurator() {
 		super("Batteries");
@@ -71,11 +74,11 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 	}
 
 	@SuppressWarnings("unchecked")
-	public void processConfigProperties(HashMap<String, Value> properties) throws Exception {
-		HashMap<String, Value> tempMap = (HashMap<String, Value>) properties.clone();
-		for (String propPath : tempMap.keySet()) {
+	public void processConfigProperties(Map<String, Value> properties) throws Exception {
+		Set<String> keys = properties.keySet();
+		for (String propPath : keys) {
 			String ucPropPath = propPath.toUpperCase();
-			Value cValue = tempMap.get(propPath);
+			Value cValue = properties.get(propPath);
 			if (pathToEnumMap.containsKey(ucPropPath)) {
 				switch (pathToEnumMap.get(ucPropPath)) {
 				case CONFIG_CENTRAL_FILE_NAME:
@@ -145,8 +148,8 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 		BatteriesSingleton.INSTANCE.loadDataReferences();
 	}
 
-	public ArrayList<MessagesContainer> getAllMessages() {
-		ArrayList<MessagesContainer> containers = new ArrayList<MessagesContainer>();
+	public List<MessagesContainer> getAllMessages() {
+		List<MessagesContainer> containers = new ArrayList<MessagesContainer>();
 
 		MessagesContainer infoMessages = new MessagesContainer("INFO_MESSAGES");
 		infoMessages.add(new Message(Batteries.info.EXIT_ON_ERROR, "Critical Error. Exiting."));
@@ -155,8 +158,8 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 		return containers;
 	}
 
-	public ArrayList<NamesContainer> getAllNames() {
-		ArrayList<NamesContainer> containers = new ArrayList<NamesContainer>();
+	public List<NamesContainer> getAllNames() {
+		List<NamesContainer> containers = new ArrayList<NamesContainer>();
 
 		NamesContainer objectNames = new NamesContainer("COMPONENT_NAMES");
 

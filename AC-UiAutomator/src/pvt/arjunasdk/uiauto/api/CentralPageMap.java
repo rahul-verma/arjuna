@@ -19,6 +19,7 @@
 package pvt.arjunasdk.uiauto.api;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.uiauto.interfaces.PageMapper;
 
@@ -26,11 +27,11 @@ public interface CentralPageMap {
 
 	boolean isRawMapPresent(String uiFullName);
 
-	HashMap<String, HashMap<String, String>> populateRawPageMap(String uiFullName, PageMapper mapper)
+	Map<String, HashMap<String, String>> populateRawPageMap(String uiFullName, PageMapper mapper)
 			throws Exception;
 
-	HashMap<String, HashMap<String, String>> getRawMap(String uiFullName) throws Exception;
+	Map<String, HashMap<String, String>> getRawMap(String uiFullName) throws Exception;
 
-	HashMap<String, HashMap<String, HashMap<String, String>>> getRawMap();
+	Map<String, HashMap<String, HashMap<String, String>>> getRawMap();
 
 }

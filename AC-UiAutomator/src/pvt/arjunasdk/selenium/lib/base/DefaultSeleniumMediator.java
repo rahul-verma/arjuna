@@ -40,7 +40,7 @@ public class DefaultSeleniumMediator extends BaseUiMediator implements WDMediato
 	private WebElement toolElement = null;
 	private Select selectElement = null;
 	private List<WebElement> toolElements = null;
-	private ArrayList<By> toolFindByQueue = null;
+	private List<By> toolFindByQueue = null;
 	
 	public DefaultSeleniumMediator(SeleniumUiDriver uiDriver, UiElement uiElement){
 		super(uiElement);
@@ -120,17 +120,17 @@ public class DefaultSeleniumMediator extends BaseUiMediator implements WDMediato
 	}
 
 	@Override
-	public ArrayList<By> getToolFindersQueue() {
+	public List<By> getToolFindersQueue() {
 		return toolFindByQueue;		
 	}
 
 	@Override
-	public ArrayList<By> getToolFindersQueueObject() {
+	public List<By> getToolFindersQueueObject() {
 		return getToolFindersQueue();		
 	}
 
 	@Override
-	public void setFindersQueue(ArrayList<By> findByQueue) {
+	public void setFindersQueue(List<By> findByQueue) {
 		this.toolFindByQueue = findByQueue;
 	}
 
@@ -695,7 +695,7 @@ public class DefaultSeleniumMediator extends BaseUiMediator implements WDMediato
 	 * @see com.autocognite.unitee.pvt.uiautomator.webdriver.IWDMediator#getDropDownLabels()
 	 */
 	@Override
-	public ArrayList<String> getDropDownLabels() throws Exception{
+	public List<String> getDropDownLabels() throws Exception{
 		Select selectControl = this.getSelectElementWithRetry();
 		return getSeleniumUiDriver().getDropDownOptionLabels(selectControl);		
 	}
@@ -703,7 +703,7 @@ public class DefaultSeleniumMediator extends BaseUiMediator implements WDMediato
 	 * @see com.autocognite.unitee.pvt.uiautomator.webdriver.IWDMediator#getRadioLabels()
 	 */
 	@Override
-	public ArrayList<String> getRadioLabels() throws Exception{
+	public List<String> getRadioLabels() throws Exception{
 		return getSeleniumUiDriver().getRadioButtonLabels(this.getToolElements());
 	}
 
@@ -711,7 +711,7 @@ public class DefaultSeleniumMediator extends BaseUiMediator implements WDMediato
 	 * @see com.autocognite.unitee.pvt.uiautomator.webdriver.IWDMediator#getDropDownValues()
 	 */
 	@Override
-	public ArrayList<String> getDropDownValues() throws Exception{
+	public List<String> getDropDownValues() throws Exception{
 		Select selectControl = this.getSelectElementWithRetry();
 		return getSeleniumUiDriver().getDropDownOptionValues(selectControl);		
 	}
@@ -719,7 +719,7 @@ public class DefaultSeleniumMediator extends BaseUiMediator implements WDMediato
 	 * @see com.autocognite.unitee.pvt.uiautomator.webdriver.IWDMediator#getRadioValues()
 	 */
 	@Override
-	public ArrayList<String> getRadioValues() throws Exception{
+	public List<String> getRadioValues() throws Exception{
 		return getSeleniumUiDriver().getRadioButtonValues(this.getToolElements());		
 	}
 
@@ -768,7 +768,7 @@ public class DefaultSeleniumMediator extends BaseUiMediator implements WDMediato
 		boolean success = false;
 		SeleniumUiDriver automator = getSeleniumUiDriver();
 		for (By by1: this.getToolFindersQueue()){
-			for(By by2: (ArrayList<By>) uiElement.getMediator().getToolFindersQueueObject()){
+			for(By by2: (List<By>) uiElement.getMediator().getToolFindersQueueObject()){
 				try{
 					automator.hoverAndClick(by1, by2);
 					success = true;
@@ -796,7 +796,7 @@ public class DefaultSeleniumMediator extends BaseUiMediator implements WDMediato
 		boolean success = false;
 		SeleniumUiDriver automator = getSeleniumUiDriver();
 		for (By by1: this.getToolFindersQueue()){
-			for(By by2: (ArrayList<By>) uiElement.getMediator().getToolFindersQueueObject()){
+			for(By by2: (List<By>) uiElement.getMediator().getToolFindersQueueObject()){
 				try{
 					automator.rightClickAndClick(by1, by2);
 					success = true;

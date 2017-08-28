@@ -19,7 +19,6 @@
 package pvt.unitee.arjuna;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -28,7 +27,6 @@ import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
 import arjunasdk.ddauto.interfaces.DataSource;
-import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.cli.CLIConfigurator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.ds.NamesContainer;
@@ -185,7 +183,7 @@ public class ArjunaInternal {
 		return Batteries.getConfiguredName(NamesContainerType.EVENT.toString(), name);
 	}
 	
-	public static ArrayList<NamesContainer> getAllNames(){
+	public static List<NamesContainer> getAllNames(){
 		return UniteeNames.getAllNames();
 	}
 	

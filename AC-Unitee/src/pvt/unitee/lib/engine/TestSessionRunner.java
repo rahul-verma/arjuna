@@ -38,7 +38,7 @@ public class TestSessionRunner implements Runnable {
 	
 	public void run(){
 		if (session.getTestMethodCount() == 0){
-			logger.fatal("No tests found as per provided configuration. Exiting.");
+			Console.displayError("No tests found as per provided configuration. Would exit post engine tear down.");
 			return;
 		}
 		if (ArjunaInternal.displayLoadingInfo){

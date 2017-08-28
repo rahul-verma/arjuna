@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.arjunasdk.uiauto.api.actions;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface SelectAndRadioActionHandler {
 	void select(String text) throws Exception;
@@ -28,7 +28,7 @@ public interface SelectAndRadioActionHandler {
 	boolean hasSelectedLabel(String text) throws Exception;
 	boolean hasSelectedValue(String value) throws Exception;
 	boolean hasSelectedIndex(int index) throws Exception;
-	ArrayList<String> getAllLabels() throws Exception;
-	ArrayList<String> getAllValues() throws Exception;
+	List<String> getAllLabels() throws Exception;
+	List<String> getAllValues() throws Exception;
 	int getOptionCount() throws Exception;
 }

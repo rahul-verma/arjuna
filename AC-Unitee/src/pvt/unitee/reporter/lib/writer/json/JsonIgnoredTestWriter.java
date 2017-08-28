@@ -23,7 +23,6 @@ import org.apache.log4j.Logger;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.reporter.lib.ignored.IgnoredTest;
-import pvt.unitee.reporter.lib.test.TestResult;
 
 public class JsonIgnoredTestWriter extends JsonResultWriter<IgnoredTest> {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

@@ -21,7 +21,8 @@ package pvt.batteries.filehandler;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
@@ -41,9 +42,9 @@ public class ExcelFileReader {
 	private int rowCount;
 	private int colCount;
 	private int currentRowIndex = 1;
-	private ArrayList<String> headers = new ArrayList<String>();
+	private List<String> headers = new ArrayList<String>();
 
-	public ArrayList<String> getHeaders() {
+	public List<String> getHeaders() {
 		return this.headers;
 	}
 
@@ -72,8 +73,8 @@ public class ExcelFileReader {
 		}
 	}
 
-	protected ArrayList<Object> getRowAsArrayList(int rowIndex) {
-		ArrayList<Object> cellArray = new ArrayList<Object>();
+	protected List<Object> getRowAsArrayList(int rowIndex) {
+		List<Object> cellArray = new ArrayList<Object>();
 		DataFormatter fmt = new DataFormatter();
 		HSSFRow row = getSheet().getRow(rowIndex);
 		if (row == null){
@@ -90,7 +91,7 @@ public class ExcelFileReader {
 		return cellArray;
 	}
 
-	protected HashMap<String, Object> zip(ArrayList<Object> values) {
+	protected Map<String, Object> zip(List<Object> values) {
 		return DataBatteries.zipObjectValues(this.getHeaders(), values);
 	}
 
@@ -156,7 +157,7 @@ public class ExcelFileReader {
 		this.sheet = sheet;
 	}
 
-	protected void setHeaders(ArrayList<String> headers) {
+	protected void setHeaders(List<String> headers) {
 		this.headers = headers;
 	}
 }

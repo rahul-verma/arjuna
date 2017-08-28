@@ -25,11 +25,11 @@ public class DependencyTreeBuilder {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	TestNode baseNode = null;
 	Set<String> allFilteredMethods = new HashSet<String>();
-	HashMap<String, TestMethodNode> allNodesMap = new HashMap<String, TestMethodNode>();
+	Map<String, TestMethodNode> allNodesMap = new HashMap<String, TestMethodNode>();
 	
-	ArrayList<TestNode> resolved = new ArrayList<TestNode>();
+	List<TestNode> resolved = new ArrayList<TestNode>();
 	Set<TestNode> resolvedSet = new HashSet<TestNode>();
-	ArrayList<TestNode> unresolved = new ArrayList<TestNode>();
+	List<TestNode> unresolved = new ArrayList<TestNode>();
 	Set<TestNode> unResolvedSet = new HashSet<TestNode>();
 	
 	public DependencyTreeBuilder(){

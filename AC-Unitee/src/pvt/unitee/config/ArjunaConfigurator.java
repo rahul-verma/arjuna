@@ -2,6 +2,9 @@ package pvt.unitee.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -24,7 +27,6 @@ import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.EventAttribute;
 import pvt.unitee.enums.FixtureResultPropertyType;
 import pvt.unitee.enums.IgnoredTestAttribute;
-import pvt.unitee.enums.IgnoredTestReason;
 import pvt.unitee.enums.IgnoredTestStatus;
 import pvt.unitee.enums.IssueAttribute;
 import pvt.unitee.enums.ReportGenerationFormat;
@@ -42,8 +44,8 @@ import unitee.enums.TestObjectAttribute;
 
 public class ArjunaConfigurator extends AbstractComponentConfigurator{
 	private ConfigPropertyBuilder<ArjunaProperty> builder = new ConfigPropertyBuilder<ArjunaProperty>();
-	private HashMap<String, ArjunaProperty> pathToEnumMap = new HashMap<String, ArjunaProperty>();
-	private HashMap<ArjunaProperty, String> enumToPathMap = new HashMap<ArjunaProperty, String>();
+	private Map<String, ArjunaProperty> pathToEnumMap = new HashMap<String, ArjunaProperty>();
+	private Map<ArjunaProperty, String> enumToPathMap = new HashMap<ArjunaProperty, String>();
 	
 	public ArjunaConfigurator() {
 		super("Unitee");
@@ -187,12 +189,12 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 		registerProperty(prop);		
 	}
 	
-	public void processConfigProperties(HashMap<String, Value> properties) throws Exception{
+	public void processConfigProperties(Map<String, Value> properties) throws Exception{
 		@SuppressWarnings("unchecked")
-		HashMap<String, Value> tempMap = (HashMap<String, Value>) properties.clone();
-		for (String propPath: tempMap.keySet()){
+		Set<String> keys = properties.keySet();
+		for (String propPath: keys){
 			String ucPropPath = propPath.toUpperCase();
-			Value cValue = tempMap.get(propPath);
+			Value cValue = properties.get(propPath);
 			if (pathToEnumMap.containsKey(ucPropPath)){
 				switch(pathToEnumMap.get(ucPropPath)){
 				case SESSION_NAME:
@@ -498,8 +500,8 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 	}
 
 	@Override
-	protected ArrayList<MessagesContainer> getAllMessages() {
-		ArrayList<MessagesContainer> containers = new ArrayList<MessagesContainer>();
+	protected List<MessagesContainer> getAllMessages() {
+		List<MessagesContainer> containers = new ArrayList<MessagesContainer>();
 		
 		MessagesContainer problemMessages = new MessagesContainer("PROBLEM_MESSAGES");
 		problemMessages.add(new Message(	
@@ -566,7 +568,7 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 	}
 
 	@Override
-	protected ArrayList<NamesContainer> getAllNames() {
+	protected List<NamesContainer> getAllNames() {
 		return UniteeNames.getAllNames();
 	}
 	

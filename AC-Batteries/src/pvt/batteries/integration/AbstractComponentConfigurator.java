@@ -1,6 +1,6 @@
 package pvt.batteries.integration;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import pvt.arjunasdk.property.ConfigProperty;
 import pvt.batteries.ds.MessagesContainer;
@@ -56,15 +56,15 @@ public abstract class AbstractComponentConfigurator implements ComponentConfigur
 		configureMessages(getAllMessages());
 	}
 
-	protected abstract ArrayList<MessagesContainer> getAllMessages();
+	protected abstract List<MessagesContainer> getAllMessages();
 
-	protected abstract ArrayList<NamesContainer> getAllNames();
+	protected abstract List<NamesContainer> getAllNames();
 
-	public void configureMessages(ArrayList<MessagesContainer> messages) {
+	public void configureMessages(List<MessagesContainer> messages) {
 		this.integrator.populateMessages(messages);
 	}
 
-	public void configureNames(ArrayList<NamesContainer> names) {
+	public void configureNames(List<NamesContainer> names) {
 		this.integrator.populateNames(names);
 	}
 }

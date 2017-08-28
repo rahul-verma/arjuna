@@ -2,6 +2,9 @@ package pvt.arjunasdk.uiautomator.lib.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import arjunasdk.interfaces.Value;
 import pvt.arjunasdk.property.ConfigProperty;
@@ -20,8 +23,8 @@ import pvt.batteries.integration.AbstractComponentConfigurator;
 
 public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 	private ConfigPropertyBuilder<UiAutomatorPropertyType> builder = new ConfigPropertyBuilder<UiAutomatorPropertyType>();
-	private HashMap<String, UiAutomatorPropertyType> pathToEnumMap = new HashMap<String, UiAutomatorPropertyType>();
-	private HashMap<UiAutomatorPropertyType, String> enumToPathMap = new HashMap<UiAutomatorPropertyType, String>();
+	private Map<String, UiAutomatorPropertyType> pathToEnumMap = new HashMap<String, UiAutomatorPropertyType>();
+	private Map<UiAutomatorPropertyType, String> enumToPathMap = new HashMap<UiAutomatorPropertyType, String>();
 	
 	public UiAutomatorConfigurator() {
 		super("UiAutomator");
@@ -78,12 +81,12 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 		registerProperty(prop);	
 	}
 		
-	public void processConfigProperties(HashMap<String, Value> properties) throws Exception{
+	public void processConfigProperties(Map<String, Value> properties) throws Exception{
 		@SuppressWarnings("unchecked")
-		HashMap<String, Value> tempMap = (HashMap<String, Value>) properties.clone();
-		for (String propPath: tempMap.keySet()){
+		Set<String> keys = properties.keySet();
+		for (String propPath: keys){
 			String ucPropPath = propPath.toUpperCase();
-			Value cValue = tempMap.get(propPath);
+			Value cValue = properties.get(propPath);
 			if (pathToEnumMap.containsKey(ucPropPath)){
 				switch(pathToEnumMap.get(ucPropPath)){
 				case APPIUM_HUB_HOST:
@@ -204,8 +207,8 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 	}
 
 	@Override
-	protected ArrayList<MessagesContainer> getAllMessages() {
-		ArrayList<MessagesContainer> containers = new ArrayList<MessagesContainer>();
+	protected List<MessagesContainer> getAllMessages() {
+		List<MessagesContainer> containers = new ArrayList<MessagesContainer>();
 
 		MessagesContainer problemMessages = new MessagesContainer("PROBLEM_MESSAGES");
 		problemMessages.add(new Message(	
@@ -414,8 +417,8 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 	}
 
 	@Override
-	protected ArrayList<NamesContainer> getAllNames() {
-		ArrayList<NamesContainer> containers = new ArrayList<NamesContainer>();
+	protected List<NamesContainer> getAllNames() {
+		List<NamesContainer> containers = new ArrayList<NamesContainer>();
 		NamesContainer objectNames = new NamesContainer("COMPONENT_NAMES");	
 		objectNames.add(new Name("UI_AUTOMATOR", "UI Automator"));
 		objectNames.add(new Name("APPIUM_AUTOMATOR", "Appium Automator"));

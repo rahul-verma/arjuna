@@ -18,7 +18,6 @@
  ******************************************************************************/
 package pvt.batteries.config;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.log4j.Level;
@@ -67,7 +66,7 @@ public class Batteries {
 		integrator.processDefaults();
 	}
 
-	public static void processArjunaOptions(HashMap<String, Value> properties) throws Exception {
+	public static void processArjunaOptions(Map<String, Value> properties) throws Exception {
 		integrator.processConfigProperties(properties);
 	}
 

@@ -36,7 +36,6 @@ import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.arjunasdk.enums.BatteriesPropertyType;
 import pvt.arjunasdk.integration.UiAutoIntegrator;
 import pvt.arjunasdk.property.ConfigPropertyBatteries;
-import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.cli.CLIConfigurator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.hocon.HoconConfigObjectReader;
@@ -44,33 +43,26 @@ import pvt.batteries.hocon.HoconFileReader;
 import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.hocon.HoconResourceReader;
 import pvt.batteries.hocon.HoconStringReader;
-import pvt.batteries.integration.ComponentConfigurator;
 import pvt.batteries.lib.ComponentIntegrator;
 import pvt.batteries.logging.Log;
 import pvt.batteries.utils.ResourceStreamBatteries;
 import pvt.batteries.value.StringValue;
+import pvt.unitee.arjuna.SessionCreator;
 import pvt.unitee.enums.ArjunaProperty;
-import pvt.unitee.enums.PickerTargetType;
 import pvt.unitee.enums.TestPickerProperty;
 import pvt.unitee.reporter.lib.GlobalState;
 import pvt.unitee.reporter.lib.Reporter;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
-import pvt.unitee.testobject.lib.java.processor.JavaTestClassDefProcessor;
-import pvt.unitee.testobject.lib.loader.group.PickerMisConfiguration;
-import pvt.unitee.testobject.lib.loader.session.MSession;
 import pvt.unitee.testobject.lib.loader.session.Session;
-import pvt.unitee.testobject.lib.loader.session.UserDefinedSession;
 import unitee.annotations.DataGenerator;
 import unitee.annotations.DataMethodContainer;
-import pvt.unitee.arjuna.SessionCreator;
-import pvt.unitee.arjuna.TestGroupsDB;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.3.3-b";
+	private String version = "0.3.4-b";
 
-	private HashMap<String,String> cliHashMap = null;
-	private HashMap<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
+	private Map<String,String> cliHashMap = null;
+	private Map<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
 
 	private String[] cliArgs;
 	
@@ -177,7 +169,7 @@ public enum ArjunaSingleton {
 		cliConfigurator.setIntegrator(integrator);
 		cliConfigurator.setArgs(cliArgs);
 		cliConfigurator.processUserOptions();
-		HashMap<String,Value> options = cliConfigurator.getUserOptions();
+		Map<String,Value> options = cliConfigurator.getUserOptions();
 		try{
 			Batteries.processArjunaOptions(options);
 		} catch (Exception e){
@@ -285,7 +277,7 @@ public enum ArjunaSingleton {
 				Console.displayError("");
 				System.exit(1);					
 			}
-			HashMap<String, Value> testOptions = new HashMap<String, Value>();
+			Map<String, Value> testOptions = new HashMap<String, Value>();
 			testOptions.put(
 			ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_TESTS),
 			new StringValue(customTestDir)

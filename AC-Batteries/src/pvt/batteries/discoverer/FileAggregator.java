@@ -22,6 +22,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -29,8 +31,8 @@ import pvt.batteries.config.Batteries;
 
 public class FileAggregator {
 	public Logger logger = Logger.getLogger(Batteries.getCentralLogName());
-	ArrayList<DiscoveredFile> files = new ArrayList<DiscoveredFile>();
-	HashMap<String, DiscoveredFile> tempMap = new HashMap<String, DiscoveredFile>();
+	List<DiscoveredFile> files = new ArrayList<DiscoveredFile>();
+	Map<String, DiscoveredFile> tempMap = new HashMap<String, DiscoveredFile>();
 
 	public void addFile(DiscoveredFile file) {
 		String key = file.getAttribute(DiscoveredFileAttribute.DIRECTORY_ABSOLUTE_PATH) + "/"
@@ -39,7 +41,7 @@ public class FileAggregator {
 	}
 
 	public void freeze() {
-		ArrayList<String> paths = new ArrayList<String>();
+		List<String> paths = new ArrayList<String>();
 		paths.addAll(this.tempMap.keySet());
 		Collections.sort(paths);
 		for (String path : paths) {

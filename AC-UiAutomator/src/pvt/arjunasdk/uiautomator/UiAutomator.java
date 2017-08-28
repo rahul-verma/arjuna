@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.arjunasdk.uiautomator;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import pvt.arjunasdk.uiauto.enums.AppiumMobilePlatformType;
 import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
@@ -34,11 +34,11 @@ public class UiAutomator {
 		return UiAutomatorSingleton.INSTANCE.getAutomationContextName(context);
 	}
 
-	public static ArrayList<String> getAllowedIdentifiers(UiAutomationContext identificationContext) throws Exception {
+	public static List<String> getAllowedIdentifiers(UiAutomationContext identificationContext) throws Exception {
 		return UiAutomatorSingleton.INSTANCE.getAllowedIdentifiers(identificationContext) ;
 	}
 
-	public static ArrayList<String> getAllAllowedUiElementTypes() {
+	public static List<String> getAllAllowedUiElementTypes() {
 		return UiAutomatorSingleton.INSTANCE.getAllAllowedUiElementTypes();
 	}
 	

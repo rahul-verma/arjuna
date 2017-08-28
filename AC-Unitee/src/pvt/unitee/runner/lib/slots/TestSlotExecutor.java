@@ -45,7 +45,7 @@ public class TestSlotExecutor{
 	}
 
 	public void run() {
-		ArrayList<Thread> testContainerThreads = new ArrayList<Thread>();
+		List<Thread> testContainerThreads = new ArrayList<Thread>();
 		Thread t = null;
 		List<String> threadNames = new ArrayList<String>();
 		for (int i = 1; i <= this.classThreadCount; i++){

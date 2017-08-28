@@ -19,6 +19,7 @@
 package pvt.unitee.lib.strings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import pvt.batteries.ds.Name;
 import pvt.batteries.ds.NamesContainer;
@@ -36,8 +37,8 @@ import unitee.enums.TestObjectType;
 
 public class UniteeNames {
 	
-	public static ArrayList<NamesContainer> getAllNames(){
-		ArrayList<NamesContainer> containers = new ArrayList<NamesContainer>();
+	public static List<NamesContainer> getAllNames(){
+		List<NamesContainer> containers = new ArrayList<NamesContainer>();
 		
 		NamesContainer testObjectProperties = new NamesContainer(NamesContainerType.TEST_OBJECT.toString());
 		testObjectProperties.add(new Name(TestObjectAttribute.OTYPE.toString(), "Test Object Enum Type"));

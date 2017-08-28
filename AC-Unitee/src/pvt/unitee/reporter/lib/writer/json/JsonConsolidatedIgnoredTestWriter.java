@@ -22,7 +22,6 @@ import org.apache.log4j.Logger;
 
 import pvt.batteries.config.Batteries;
 import pvt.unitee.reporter.lib.ignored.IgnoredTest;
-import pvt.unitee.reporter.lib.test.TestResult;
 
 public class JsonConsolidatedIgnoredTestWriter extends JsonConsolidatedResultWriter<IgnoredTest> {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

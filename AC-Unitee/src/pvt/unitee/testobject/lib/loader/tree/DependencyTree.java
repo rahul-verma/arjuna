@@ -38,8 +38,8 @@ public class DependencyTree {
 		this.methodDependencies.remove(name);
 	}
 
-	public void removeFromQueue(ArrayList<String> names) {
-		this.allNodesQueue.removeAll(names);
+	public void removeFromQueue(List<String> scheduled) {
+		this.allNodesQueue.removeAll(scheduled);
 	}
 
 	public TestMethodNode getNode(String name) {

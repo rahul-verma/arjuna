@@ -1,6 +1,7 @@
 package pvt.unitee.reporter.lib;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -10,7 +11,7 @@ import pvt.unitee.enums.TestResultType;
 public class SummaryResult {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private static HashMap<TestResultType, Integer> template = null;
-	private HashMap<TestResultType, Integer> summary = new HashMap<TestResultType, Integer>();
+	private Map<TestResultType, Integer> summary = new HashMap<TestResultType, Integer>();
 	
 	public static void init(){
 		if (template == null){

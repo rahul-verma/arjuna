@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.batteries.filehandler;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public class ExcelFileLine2MapReader extends ExcelFileReader {
 
@@ -27,9 +27,9 @@ public class ExcelFileLine2MapReader extends ExcelFileReader {
 		// TODO Auto-generated constructor stub
 	}
 
-	public HashMap<String, Object> next() throws Exception {
+	public Map<String, Object> next() throws Exception {
 		if (this.getCurrentRowIndex() < this.getRowCount()) {
-			HashMap<String, Object> zipped = zip(getRowAsArrayList(this.getCurrentRowIndex()));
+			Map<String, Object> zipped = zip(getRowAsArrayList(this.getCurrentRowIndex()));
 			this.setCurrentRowIndex(this.getCurrentRowIndex() + 1);
 			if (zipped.containsKey("EXCLUDE")) {
 				String exclude = ((String) zipped.get("EXCLUDE")).toLowerCase().trim();

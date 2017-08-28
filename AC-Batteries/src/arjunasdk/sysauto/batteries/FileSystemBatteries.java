@@ -20,9 +20,9 @@ package arjunasdk.sysauto.batteries;
 
 import java.io.File;
 import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -56,9 +56,9 @@ public class FileSystemBatteries {
 		}
 	}
 
-	public static String createFilePath(String parentPath, ArrayList<String> childParts, String fileName,
+	public static String createFilePath(String parentPath, List<String> childParts, String fileName,
 			String extension) {
-		ArrayList<String> fullPath = new ArrayList<String>();
+		List<String> fullPath = new ArrayList<String>();
 		fullPath.add(parentPath);
 		fullPath.add(DataBatteries.join(childParts, "\\"));
 		String finalPath = DataBatteries.join(fullPath, "\\");

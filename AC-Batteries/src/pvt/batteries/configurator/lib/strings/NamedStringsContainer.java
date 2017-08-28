@@ -19,10 +19,11 @@
 package pvt.batteries.configurator.lib.strings;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NamedStringsContainer {
 	private String containerName = null;
-	ArrayList<NamedString> names = new ArrayList<NamedString>();
+	List<NamedString> names = new ArrayList<NamedString>();
 
 	public NamedStringsContainer(String name) {
 		this.containerName = name;
@@ -36,7 +37,7 @@ public class NamedStringsContainer {
 		return containerName;
 	}
 
-	public ArrayList<NamedString> getNamedStrings() {
+	public List<NamedString> getNamedStrings() {
 		return names;
 	}
 }

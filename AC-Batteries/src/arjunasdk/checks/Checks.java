@@ -18,9 +18,9 @@
  ******************************************************************************/
 package arjunasdk.checks;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class Checks {
 
@@ -177,7 +177,7 @@ public class Checks {
 		return parent.contains(child);
 	}
 
-	public static boolean contains(ArrayList<String> parent, String child) throws NullPointerException {
+	public static boolean contains(List<String> parent, String child) throws NullPointerException {
 		return parent.contains(child);
 	}
 
@@ -185,7 +185,7 @@ public class Checks {
 		return Arrays.asList(parent).contains(child);
 	}
 
-	public static boolean contains(HashMap<String, Object> parent, String child) throws NullPointerException {
+	public static boolean contains(Map<String, Object> parent, String child) throws NullPointerException {
 		return parent.keySet().contains(child);
 	}
 
@@ -193,7 +193,7 @@ public class Checks {
 		return !contains(parent, child);
 	}
 
-	public static boolean doesNotContain(ArrayList<String> parent, String child) throws NullPointerException {
+	public static boolean doesNotContain(List<String> parent, String child) throws NullPointerException {
 		return !contains(parent, child);
 	}
 
@@ -201,7 +201,7 @@ public class Checks {
 		return !contains(parent, child);
 	}
 
-	public static boolean doesNotContain(HashMap<String, Object> parent, String child) throws NullPointerException {
+	public static boolean doesNotContain(Map<String, Object> parent, String child) throws NullPointerException {
 		return !contains(parent, child);
 	}
 }

@@ -19,7 +19,7 @@
 package pvt.arjunasdk.uiautomator.lib.base;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import arjunasdk.uiauto.interfaces.UiElement;
@@ -284,13 +284,13 @@ public abstract class BaseUiScreenMediator implements UiMediator{
 	}
 
 	@Override
-	public ArrayList<String> getAllLabels() throws Exception {
-		return (ArrayList<String>) this.getUiElement().throwUnsupportedActionException("getAllLabels");
+	public List<String> getAllLabels() throws Exception {
+		return (List<String>) this.getUiElement().throwUnsupportedActionException("getAllLabels");
 	}
 
 	@Override
-	public ArrayList<String> getAllValues() throws Exception {
-		return (ArrayList<String>) this.getUiElement().throwUnsupportedActionException("getAllValues");
+	public List<String> getAllValues() throws Exception {
+		return (List<String>) this.getUiElement().throwUnsupportedActionException("getAllValues");
 	}
 
 	@Override

@@ -1,7 +1,7 @@
 package pvt.unitee.testobject.lib.java.loader;
 
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
+import java.util.List;
 
 import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.unitee.core.lib.testvars.InternalTestVariables;
@@ -81,7 +81,7 @@ public class TestPropertyAnnotationsProcessor {
 	
 	private static void setTestAttr(InternalTestVariables testVars, String[] testAttr) throws Exception{
 		for (String kv: testAttr){
-			ArrayList<String> pKV = DataBatteries.split(kv, "=");
+			List<String> pKV = DataBatteries.split(kv, "=");
 			String propName = pKV.get(0);
 			String propValue = pKV.get(1);
 			testVars.attr().add(propName, propValue);

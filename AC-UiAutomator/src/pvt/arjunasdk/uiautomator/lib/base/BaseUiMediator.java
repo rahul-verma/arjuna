@@ -19,7 +19,7 @@
 package pvt.arjunasdk.uiautomator.lib.base;
 
 import java.io.File;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import arjunasdk.uiauto.interfaces.UiElement;
@@ -311,10 +311,10 @@ public abstract class BaseUiMediator extends BaseUiScreenMediator implements UiM
 	protected abstract boolean isRadioValueSelected(String label) throws Exception;
 	protected abstract boolean isDropDownOptionSelectedAtIndex(int index) throws Exception;
 	protected abstract boolean isRadioOptionSelectedAtIndex(int index) throws Exception;
-	protected abstract ArrayList<String> getDropDownLabels() throws Exception;
-	protected abstract ArrayList<String> getRadioLabels() throws Exception;
-	protected abstract ArrayList<String> getDropDownValues() throws Exception;
-	protected abstract ArrayList<String> getRadioValues() throws Exception;
+	protected abstract List<String> getDropDownLabels() throws Exception;
+	protected abstract List<String> getRadioLabels() throws Exception;
+	protected abstract List<String> getDropDownValues() throws Exception;
+	protected abstract List<String> getRadioValues() throws Exception;
 	protected abstract int getDropDownOptionCount() throws Exception;
 	protected abstract int getRadioOptionCount() throws Exception;
 		
@@ -396,26 +396,26 @@ public abstract class BaseUiMediator extends BaseUiScreenMediator implements UiM
 	}
 	
 	@Override
-	public ArrayList<String> getAllLabels() throws Exception {
+	public List<String> getAllLabels() throws Exception {
 		identifyIfNull();
 		switch (this.getElementType()){
 		case DROPDOWN:
 			return getDropDownLabels();
 		case RADIO:
 			return getRadioLabels();
-		default: return (ArrayList<String>) this.getUiElement().throwUnsupportedSelectActionException("getAllLabels");
+		default: return (List<String>) this.getUiElement().throwUnsupportedSelectActionException("getAllLabels");
 		}
 	}
 	
 	@Override
-	public ArrayList<String> getAllValues() throws Exception {
+	public List<String> getAllValues() throws Exception {
 		identifyIfNull();
 		switch (this.getElementType()){
 		case DROPDOWN:
 			return getDropDownValues();
 		case RADIO:
 			return getRadioValues();
-		default: return (ArrayList<String>) this.getUiElement().throwUnsupportedSelectActionException("getAllValues");
+		default: return (List<String>) this.getUiElement().throwUnsupportedSelectActionException("getAllValues");
 		}
 	}
 	

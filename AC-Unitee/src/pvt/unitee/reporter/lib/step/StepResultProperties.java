@@ -1,6 +1,7 @@
 package pvt.unitee.reporter.lib.step;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
@@ -15,7 +16,7 @@ public class StepResultProperties
 	private Throwable exc;
 
 	public StepResultProperties(){
-		HashMap<StepResultAttribute,Value> map = new HashMap<StepResultAttribute,Value>();
+		Map<StepResultAttribute,Value> map = new HashMap<StepResultAttribute,Value>();
 		map.put(StepResultAttribute.RESULT, notSetValue);
 		map.put(StepResultAttribute.NUM, new IntValue(1));
 		map.put(StepResultAttribute.PURPOSE, notSetValue);
@@ -95,7 +96,11 @@ public class StepResultProperties
 	}
 
 	public void setIssueId(int issueId) {
-		this.add(StepResultAttribute.ISSUE_ID, new IntValue(issueId));
+		if (issueId == -1){
+			// retain na value
+		} else {
+			this.add(StepResultAttribute.ISSUE_ID, new IntValue(issueId));
+		}
 	}
 
 	public int issueId() throws Exception {

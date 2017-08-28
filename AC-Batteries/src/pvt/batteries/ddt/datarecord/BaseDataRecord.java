@@ -19,6 +19,7 @@
 package pvt.batteries.ddt.datarecord;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.ddauto.interfaces.DataRecord;
 import arjunasdk.interfaces.Value;
@@ -27,7 +28,7 @@ import pvt.batteries.value.AnyRefValue;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 
 public abstract class BaseDataRecord extends DefaultStringKeyValueContainer implements ReadOnlyContainer<String, Value>, DataRecord {
-	HashMap<Integer, String> indexToKeyMap = new HashMap<Integer, String>();
+	Map<Integer, String> indexToKeyMap = new HashMap<Integer, String>();
 	private int counter = 0;
 	
 	public BaseDataRecord() {

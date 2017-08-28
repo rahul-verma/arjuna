@@ -20,6 +20,7 @@ package arjunasdk.sysauto.file;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import org.ini4j.Profile.Section;
@@ -48,8 +49,8 @@ public class IniFileReader {
 		return this.reader.keySet();
 	}
 
-	public HashMap<String, Object> getSectionDataObjects(String section) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
+	public Map<String, Object> getSectionDataObjects(String section) {
+		Map<String, Object> map = new HashMap<String, Object>();
 		Section sec = this.reader.get(section);
 		for (String key : sec.keySet()) {
 			map.put(key, sec.get(key));
@@ -57,8 +58,8 @@ public class IniFileReader {
 		return map;
 	}
 
-	public HashMap<String, String> getSectionData(String section) {
-		HashMap<String, String> map = new HashMap<String, String>();
+	public Map<String, String> getSectionData(String section) {
+		Map<String, String> map = new HashMap<String, String>();
 		Section sec = this.reader.get(section);
 		for (String key : sec.keySet()) {
 			map.put(key, (String) sec.get(key));

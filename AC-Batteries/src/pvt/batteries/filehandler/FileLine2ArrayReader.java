@@ -19,6 +19,7 @@
 package pvt.batteries.filehandler;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FileLine2ArrayReader {
 	private FileLineReader reader = null;
@@ -65,8 +66,8 @@ public class FileLine2ArrayReader {
 		return reader.next();
 	}
 
-	public ArrayList<String[]> all() {
-		ArrayList<String[]> allLines = new ArrayList<String[]>();
+	public List<String[]> all() {
+		List<String[]> allLines = new ArrayList<String[]>();
 		for (String line : reader.all()) {
 			allLines.add(this.splitLine(line));
 		}

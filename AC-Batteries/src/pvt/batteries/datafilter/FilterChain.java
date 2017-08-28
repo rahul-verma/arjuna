@@ -19,9 +19,10 @@
 package pvt.batteries.datafilter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class FilterChain extends Filter {
-	private ArrayList<IFilter> filters = new ArrayList<IFilter>();
+	private List<IFilter> filters = new ArrayList<IFilter>();
 	// private TestFilterTarget target = TestFilterTarget.ALL;
 
 	public void add(IFilter filter) {

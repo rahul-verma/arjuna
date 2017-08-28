@@ -21,7 +21,7 @@ public class TestSessionNodeRunner implements Runnable {
 
 	public void run() {
 		logger.debug(String.format("Session Node: %s:: Run begin", sessionNode.getName()));
-		ArrayList<Thread> groupThreads = new ArrayList<Thread>();
+		List<Thread> groupThreads = new ArrayList<Thread>();
 		Thread t;
 		List<String> threadNames = new ArrayList<String>();
 		if (ArjunaInternal.displaySlotsInfo){

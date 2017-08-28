@@ -1,22 +1,16 @@
 package pvt.unitee.reporter.lib.ignored;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
 import pvt.batteries.container.EnumKeyValueContainer;
 import pvt.batteries.value.EnumValue;
-import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
-import pvt.unitee.enums.IgnoredTestReason;
 import pvt.unitee.enums.IgnoredTestAttribute;
+import pvt.unitee.enums.IgnoredTestReason;
 import pvt.unitee.enums.IgnoredTestStatus;
-import pvt.unitee.enums.IssueAttribute;
-import pvt.unitee.enums.IssueSubType;
-import pvt.unitee.enums.IssueType;
-import pvt.unitee.enums.TestResultAttribute;
-import pvt.unitee.enums.TestResultCode;
-import pvt.unitee.enums.TestResultType;
 
 public class IgnoredTestProperties 
 extends EnumKeyValueContainer<IgnoredTestAttribute>{
@@ -24,7 +18,7 @@ extends EnumKeyValueContainer<IgnoredTestAttribute>{
 	private Throwable exc;
 
 	public IgnoredTestProperties(){
-		HashMap<IgnoredTestAttribute,Value> map = new HashMap<IgnoredTestAttribute,Value>();
+		Map<IgnoredTestAttribute,Value> map = new HashMap<IgnoredTestAttribute,Value>();
 		map.put(IgnoredTestAttribute.STATUS, notSetValue);
 		map.put(IgnoredTestAttribute.REASON, notSetValue);
 		map.put(IgnoredTestAttribute.DESC, notSetValue);

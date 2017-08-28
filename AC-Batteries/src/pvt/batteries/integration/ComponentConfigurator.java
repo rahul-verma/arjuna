@@ -1,6 +1,6 @@
 package pvt.batteries.integration;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.interfaces.Value;
 import pvt.batteries.lib.ComponentIntegrator;
@@ -8,7 +8,7 @@ import pvt.batteries.lib.ComponentIntegrator;
 public interface ComponentConfigurator {
 	void processDefaults() throws Exception;
 
-	void processConfigProperties(HashMap<String, Value> properties) throws Exception;
+	void processConfigProperties(Map<String, Value> map) throws Exception;
 
 	void loadComponent() throws Exception;
 

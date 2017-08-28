@@ -19,9 +19,10 @@
 package pvt.batteries.discoverer;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class DiscoveredFile {
-	private HashMap<DiscoveredFileAttribute, String> props = new HashMap<DiscoveredFileAttribute, String>();
+	private Map<DiscoveredFileAttribute, String> props = new HashMap<DiscoveredFileAttribute, String>();
 	Class<?> klass = null;
 
 	public String getAttribute(DiscoveredFileAttribute attr) {

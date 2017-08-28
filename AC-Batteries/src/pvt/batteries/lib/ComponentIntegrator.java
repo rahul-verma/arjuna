@@ -1,6 +1,5 @@
 package pvt.batteries.lib;
 
-import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -24,14 +23,14 @@ public class ComponentIntegrator {
 	private String refDir = null;
 	private String projDir = null;
 	private List<ComponentConfigurator> configurators = new ArrayList<ComponentConfigurator>();
-	private HashMap<String, ComponentConfigurator> configuratorMap = new HashMap<String, ComponentConfigurator>();
-	private HashMap<String, String> propEnumToPropPathMap = new HashMap<String, String>();
-	private HashMap<String, String> propNameToComponentMap = new HashMap<String, String>();
-	private HashMap<String, ValueType> propNameExpectedTypeMap = new HashMap<String, ValueType>();
-	private HashMap<String, ConfigProperty> fworkProperties = new HashMap<String, ConfigProperty>();
+	private Map<String, ComponentConfigurator> configuratorMap = new HashMap<String, ComponentConfigurator>();
+	private Map<String, String> propEnumToPropPathMap = new HashMap<String, String>();
+	private Map<String, String> propNameToComponentMap = new HashMap<String, String>();
+	private Map<String, ValueType> propNameExpectedTypeMap = new HashMap<String, ValueType>();
+	private Map<String, ConfigProperty> fworkProperties = new HashMap<String, ConfigProperty>();
 	private Set<String> overrideableProperties = new HashSet<String>();
 	private Set<String> visiableProperties = new HashSet<String>();
-	private HashMap<String, String> readableNames = new HashMap<String, String>();
+	private Map<String, String> readableNames = new HashMap<String, String>();
 	private StringsManager stringsManager = new StringsManager();
 	private DefaultStringKeyValueContainer execVarMap = new DefaultStringKeyValueContainer();
 	private DefaultStringKeyValueContainer userOptionMap = new DefaultStringKeyValueContainer();
@@ -122,9 +121,9 @@ public class ComponentIntegrator {
 		this.refDir = refDir;
 	}
 
-	public void processConfigProperties(HashMap<String, Value> properties) throws Exception {
+	public void processConfigProperties(Map<String, Value> properties) throws Exception {
 		for (ComponentConfigurator configurator : configurators) {
-			configurator.processConfigProperties(properties);
+			configurator.processConfigProperties((HashMap<String, Value>) properties);
 		}
 	}
 
@@ -152,11 +151,11 @@ public class ComponentIntegrator {
 		return configuration;
 	}
 
-	public void populateMessages(ArrayList<MessagesContainer> messages) {
+	public void populateMessages(List<MessagesContainer> messages) {
 		this.stringsManager.populateMessages(messages);
 	}
 
-	public void populateNames(ArrayList<NamesContainer> names) {
+	public void populateNames(List<NamesContainer> names) {
 		this.stringsManager.populateNames(names);
 	}
 

@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.text.WordUtils;
@@ -30,24 +31,24 @@ import arjunasdk.console.Console;
 
 public class DataBatteries {
 
-	public static HashMap<String, String> zip(String[] left, String[] right) {
-		HashMap<String, String> zipped = new HashMap<String, String>();
+	public static Map<String, String> zip(String[] left, String[] right) {
+		Map<String, String> zipped = new HashMap<String, String>();
 		for (int i = 0; i < left.length; i++) {
 			zipped.put(left[i], right[i]);
 		}
 		return zipped;
 	}
 
-	public static HashMap<String, String> zip(ArrayList<String> left, ArrayList<String> right) {
-		HashMap<String, String> zipped = new HashMap<String, String>();
+	public static Map<String, String> zip(List<String> left, List<String> right) {
+		Map<String, String> zipped = new HashMap<String, String>();
 		for (int i = 0; i < left.size(); i++) {
 			zipped.put(left.get(i), right.get(i));
 		}
 		return zipped;
 	}
 
-	public static HashMap<String, Object> zipObjectValues(ArrayList<String> left, ArrayList<Object> right) {
-		HashMap<String, Object> zipped = new HashMap<String, Object>();
+	public static Map<String, Object> zipObjectValues(List<String> left, List<Object> right) {
+		Map<String, Object> zipped = new HashMap<String, Object>();
 		for (int i = 0; i < left.size(); i++) {
 			zipped.put(left.get(i), right.get(i));
 		}
@@ -58,16 +59,6 @@ public class DataBatteries {
 		StringBuffer sb = new StringBuffer();
 		for (int i = 0; i < inArray.length; i++) {
 			sb.append(inArray[i]);
-			sb.append(delimiter);
-		}
-		sb.deleteCharAt(sb.length() - 1);
-		return sb.toString();
-	}
-
-	public static String join(ArrayList<String> inArray, String delimiter) {
-		StringBuffer sb = new StringBuffer();
-		for (int i = 0; i < inArray.size(); i++) {
-			sb.append(inArray.get(i));
 			sb.append(delimiter);
 		}
 		sb.deleteCharAt(sb.length() - 1);
@@ -109,7 +100,7 @@ public class DataBatteries {
 	}
 
 	public static String toString(int[] inArray) {
-		ArrayList<String> sb = new ArrayList<String>();
+		List<String> sb = new ArrayList<String>();
 		for (int i = 0; i < inArray.length; i++) {
 			sb.add(Integer.toString(inArray[i]));
 		}
@@ -125,7 +116,7 @@ public class DataBatteries {
 		return sb.toString();
 	}
 
-	public static String flatten(HashMap<String, String> inHashMap) {
+	public static String flatten(Map<String, String> inHashMap) {
 		StringBuffer sb = new StringBuffer();
 		for (String key : inHashMap.keySet()) {
 			sb.append(String.format("[%s]\t", key) + inHashMap.get(key) + "\n");
@@ -137,15 +128,15 @@ public class DataBatteries {
 		Console.display(flatten(inArray));
 	}
 
-	public static void print(ArrayList<String> inArrayList) {
+	public static void print(List<String> inArrayList) {
 		Console.display(flatten(inArrayList));
 	}
 
-	public static void print(HashMap<String, String> inHashMap) {
+	public static void print(Map<String, String> inHashMap) {
 		Console.display(flatten(inHashMap));
 	}
 
-	public static ArrayList<String> arrayToArrayList(String[] array) {
+	public static List<String> arrayToArrayList(String[] array) {
 		return new ArrayList<String>(Arrays.asList(array));
 	}
 
@@ -154,8 +145,8 @@ public class DataBatteries {
 		return WordUtils.capitalizeFully(processedString);
 	}
 
-	public static ArrayList<String> splitAndConvertToUpperCase(String inString) {
-		ArrayList<String> retValues = new ArrayList<String>();
+	public static List<String> splitAndConvertToUpperCase(String inString) {
+		List<String> retValues = new ArrayList<String>();
 		String[] values = inString.split(",");
 		for (String v : values) {
 			retValues.add(v.trim().toUpperCase());
@@ -163,8 +154,8 @@ public class DataBatteries {
 		return retValues;
 	}
 
-	public static ArrayList<String> split(String inString, String delimiter) {
-		ArrayList<String> retValues = new ArrayList<String>();
+	public static List<String> split(String inString, String delimiter) {
+		List<String> retValues = new ArrayList<String>();
 		String[] values = inString.split(delimiter);
 		for (String v : values) {
 			retValues.add(v.trim());
@@ -172,7 +163,7 @@ public class DataBatteries {
 		return retValues;
 	}
 
-	public static ArrayList<String> split(String inString) {
+	public static List<String> split(String inString) {
 		return split(inString, ",");
 	}
 

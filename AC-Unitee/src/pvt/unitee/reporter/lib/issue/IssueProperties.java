@@ -1,6 +1,7 @@
 package pvt.unitee.reporter.lib.issue;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
@@ -14,7 +15,7 @@ public class IssueProperties
 				extends EnumKeyValueContainer<IssueAttribute>{
 
 	public IssueProperties(){
-		HashMap<IssueAttribute,Value> map = new HashMap<IssueAttribute,Value>();
+		Map<IssueAttribute,Value> map = new HashMap<IssueAttribute,Value>();
 		map.put(IssueAttribute.TYPE, notSetValue);
 		map.put(IssueAttribute.SUB_TYPE, notSetValue);
 		map.put(IssueAttribute.ENAME, naValue);

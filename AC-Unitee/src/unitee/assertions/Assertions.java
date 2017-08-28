@@ -19,9 +19,9 @@
 package unitee.assertions;
 
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import arjunasdk.checks.Checks;
 import arjunasdk.sysauto.batteries.DataBatteries;
@@ -904,10 +904,10 @@ public class Assertions {
 //		assertContains(null, parent, child);
 //	}
 
-	public static void assertContains(String purpose, ArrayList<String> parent, String child) throws Exception {
+	public static void assertContains(String purpose, List<String> parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
-		check.setText("ArrayList should contain given item.");
+		check.setText("List should contain given item.");
 		try{
 			if (Checks.isNull(parent)) {
 				updateCheckForNullExpectedObject(check);
@@ -927,7 +927,7 @@ public class Assertions {
 		
 	}
 
-//	public static void assertContains(ArrayList<String> parent, String child) throws Exception {
+//	public static void assertContains(List<String> parent, String child) throws Exception {
 //		assertContains(null, parent, child);
 //	}
 
@@ -958,10 +958,10 @@ public class Assertions {
 //		assertContains(null,parent, child);
 //	}
 
-	public static void assertContains(String purpose, HashMap<String, Object> parent, String child) throws Exception {
+	public static void assertContains(String purpose, Map<String, Object> parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
-		check.setText("HashMap should contain given key.");
+		check.setText("Map should contain given key.");
 		try{
 			if (Checks.isNull(parent)) {
 				updateCheckForNullExpectedObject(check);
@@ -969,8 +969,8 @@ public class Assertions {
 			}
 			if (Checks.doesNotContain(parent, child)) {
 				check.setFailure();
-				check.setBenchmark( String.format("Any HashMap containing the key: \"%s\"", child));
-				check.setActualObservation("Keys in HashMap: \n" + DataBatteries.flatten(parent.keySet()));
+				check.setBenchmark( String.format("Any Map containing the key: \"%s\"", child));
+				check.setActualObservation("Keys in Map: \n" + DataBatteries.flatten(parent.keySet()));
 				check.setExceptionMessage(parent + " does not contain \"" + child + "\" key.");
 			}
 		} catch (Exception e){
@@ -1012,10 +1012,10 @@ public class Assertions {
 //		assertDoesNotContain(null, parent, child);
 //	}
 
-	public static void assertDoesNotContain(String purpose, ArrayList<String> parent, String child) throws Exception {
+	public static void assertDoesNotContain(String purpose, List<String> parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
-		check.setText("ArrayList should NOT contain given item.");
+		check.setText("List should NOT contain given item.");
 		try{
 			if (Checks.isNull(parent)) {
 				updateCheckForNullExpectedObject(check);
@@ -1035,7 +1035,7 @@ public class Assertions {
 		
 	}
 
-//	public static void assertDoesNotContain(ArrayList<String> parent, String child) throws Exception {
+//	public static void assertDoesNotContain(List<String> parent, String child) throws Exception {
 //		assertDoesNotContain(null, parent, child);
 //	}
 
@@ -1066,10 +1066,10 @@ public class Assertions {
 //		assertDoesNotContain(null, parent, child);
 //	}
 
-	public static void assertDoesNotContain(String purpose, HashMap<String, Object> parent, String child) throws Exception {
+	public static void assertDoesNotContain(String purpose, Map<String, Object> parent, String child) throws Exception {
 		Check check = new DefaultCheck(StackBatteries.getCurrentSimpleClasseName(), StackBatteries.getCurrentMethodName());
 		check.setPurpose(purpose);
-		check.setText("HashMap should NOT contain given key.");
+		check.setText("Map should NOT contain given key.");
 		try{
 			if (Checks.isNull(parent)) {
 				updateCheckForNullExpectedObject(check);
@@ -1077,8 +1077,8 @@ public class Assertions {
 			}
 			if (Checks.contains(parent, child)) {
 				check.setFailure();
-				check.setBenchmark( String.format("Any HashMap NOT containing the key: \"%s\"", child));
-				check.setActualObservation("Keys in HashMap: \n" + DataBatteries.flatten(parent.keySet()));
+				check.setBenchmark( String.format("Any Map NOT containing the key: \"%s\"", child));
+				check.setActualObservation("Keys in Map: \n" + DataBatteries.flatten(parent.keySet()));
 				check.setExceptionMessage(parent + " contains \"" + child + "\" key.");
 			}
 		} catch (Exception e){

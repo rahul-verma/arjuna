@@ -19,14 +19,13 @@
 package pvt.unitee.config;
 
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
-import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.testobject.lib.java.loader.DataMethodsHandler;
@@ -35,9 +34,9 @@ import unitee.annotations.DataMethodContainer;
 
 public class DataMethodContainerMap {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
-	HashMap<String,DataMethodsHandler> wrappers = new HashMap<String, DataMethodsHandler>();
-	HashMap<String,Class<?>> containerMapper = new HashMap<String,Class<?>>();
-	HashMap<String,String> containerNameMapper = new HashMap<String,String>();
+	Map<String,DataMethodsHandler> wrappers = new HashMap<String, DataMethodsHandler>();
+	Map<String,Class<?>> containerMapper = new HashMap<String,Class<?>>();
+	Map<String,String> containerNameMapper = new HashMap<String,String>();
 	
 	public void process(Class<?> klass) throws Exception{
 		if (ArjunaInternal.displayDataMethodProcessingInfo){

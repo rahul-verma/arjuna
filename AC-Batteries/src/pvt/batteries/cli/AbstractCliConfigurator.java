@@ -19,13 +19,14 @@
 package pvt.batteries.cli;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.interfaces.Value;
 
 public abstract class AbstractCliConfigurator implements CLIConfigurator {
 	private CLI cli = null;
-	private HashMap<String, String> rawMap = new HashMap<String, String>();
-	private HashMap<String, Value> userOptionMap = new HashMap<String, Value>();
+	private Map<String, String> rawMap = new HashMap<String, String>();
+	private Map<String, Value> userOptionMap = new HashMap<String, Value>();
 
 	public AbstractCliConfigurator(CLI cli) throws Exception {
 		this.cli = cli;
@@ -36,7 +37,7 @@ public abstract class AbstractCliConfigurator implements CLIConfigurator {
 	}
 
 	@Override
-	public HashMap<String, Value> getUserOptions() {
+	public Map<String, Value> getUserOptions() {
 		return this.userOptionMap;
 	}
 

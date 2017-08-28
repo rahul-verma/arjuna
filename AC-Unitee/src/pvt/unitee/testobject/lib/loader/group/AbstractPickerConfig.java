@@ -19,7 +19,6 @@ import pvt.batteries.config.Batteries;
 import pvt.unitee.enums.PickerTargetType;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
-import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator;
 
 public abstract class AbstractPickerConfig implements PickerConfig {

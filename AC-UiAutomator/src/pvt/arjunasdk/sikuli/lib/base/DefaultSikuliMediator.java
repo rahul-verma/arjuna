@@ -193,7 +193,7 @@ public class DefaultSikuliMediator extends BaseUiScreenMediator implements Sikul
 	@Override
 	public void identifyAll() throws Exception {
 		SikuliUiDriver automator = this.getSikuliUiDriver();
-		ArrayList<Match> sikuliElements = null;
+		List<Match> sikuliElements = null;
 		try{
 			sikuliElements = automator.findElements(getImagePath());
 		} catch (Exception e){

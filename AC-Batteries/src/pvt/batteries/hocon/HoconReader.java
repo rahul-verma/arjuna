@@ -1,6 +1,6 @@
 package pvt.batteries.hocon;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
@@ -17,7 +17,7 @@ public interface HoconReader {
 
 	Config getConfig();
 
-	HashMap<String, Value> getProperties();
+	Map<String, Value> getProperties();
 	
 	 void loadConfig() throws Exception;
 	 

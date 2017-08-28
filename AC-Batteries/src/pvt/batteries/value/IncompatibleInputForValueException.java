@@ -18,7 +18,6 @@
  ******************************************************************************/
 package pvt.batteries.value;
 
-import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
 
 public class IncompatibleInputForValueException extends Exception {

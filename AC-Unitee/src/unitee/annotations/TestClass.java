@@ -23,9 +23,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import arjunasdk.ddauto.interfaces.DataSource;
-import pvt.unitee.core.lib.annotate.None;
-
 @Retention(RetentionPolicy.RUNTIME) 
 @Target({ElementType.TYPE})
 public @interface TestClass {

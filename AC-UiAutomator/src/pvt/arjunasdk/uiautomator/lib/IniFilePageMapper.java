@@ -19,6 +19,7 @@
 package pvt.arjunasdk.uiautomator.lib;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 import arjunasdk.sysauto.file.IniFileReader;
@@ -30,13 +31,13 @@ public class IniFilePageMapper extends FileBasedPageMapper{
 		super(mapFilePath);
 	}
 	
-	public HashMap<String, HashMap<String,String>> getPageMap() throws Exception{
+	public Map<String, HashMap<String,String>> getPageMap() throws Exception{
 		reader = new IniFileReader(getMapFilePath());
 		Set<String> elements = reader.getAllSections();
 		
-		HashMap<String, HashMap<String,String>> elementHM =  new HashMap<String, HashMap<String,String>>();
+		Map<String, HashMap<String,String>> elementHM =  new HashMap<String, HashMap<String,String>>();
 		for (String element: elements){
-			elementHM.put(element, reader.getSectionData(element));
+			elementHM.put(element, (HashMap<String,String>) reader.getSectionData(element));
 		}
 		return elementHM;		
 	}

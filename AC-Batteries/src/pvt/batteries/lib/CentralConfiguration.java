@@ -1,6 +1,7 @@
 package pvt.batteries.lib;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.interfaces.ReadOnlyStringKeyValueContainer;
 import arjunasdk.interfaces.Value;
@@ -8,9 +9,9 @@ import pvt.batteries.config.Configuration;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 
 public class CentralConfiguration {
-	private static HashMap<String, String> propEnumToPropPathMap = new HashMap<String, String>();
+	private static Map<String, String> propEnumToPropPathMap = new HashMap<String, String>();
 	private static BaseConfiguration centralConfig = null;
-	private static HashMap<String, BaseConfiguration> threadMap = new HashMap<String, BaseConfiguration>();
+	private static Map<String, BaseConfiguration> threadMap = new HashMap<String, BaseConfiguration>();
 	private static StringsManager stringsManager = null;
 	private static DefaultStringKeyValueContainer execVarMap = null;
 	private static DefaultStringKeyValueContainer userOptionMap = null;
@@ -69,8 +70,8 @@ public class CentralConfiguration {
 		}
 	}
 
-	public static void setPropEnumToPropPathNameMap(HashMap<String, String> map) {
-		propEnumToPropPathMap = map;
+	public static void setPropEnumToPropPathNameMap(Map<String, String> propEnumToPropPathMap2) {
+		propEnumToPropPathMap = propEnumToPropPathMap2;
 	}
 
 	public static <T extends Enum<T>> String getPropPathForEnum(T propEnum) {

@@ -1,6 +1,7 @@
 package pvt.unitee.reporter.lib.event;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.enums.ValueType;
 import arjunasdk.interfaces.Value;
@@ -13,7 +14,7 @@ public class EventProperties
 				extends EnumKeyValueContainer<EventAttribute>{
 	
 	public EventProperties(){
-		HashMap<EventAttribute,Value> map = new HashMap<EventAttribute,Value>();
+		Map<EventAttribute,Value> map = new HashMap<EventAttribute,Value>();
 		map.put(EventAttribute.TEXT, notSetValue);
 		map.put(EventAttribute.COMPONENT, notSetValue);
 		map.put(EventAttribute.SUCCESS, new BooleanValue(true));

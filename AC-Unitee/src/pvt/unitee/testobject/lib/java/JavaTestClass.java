@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -30,11 +31,11 @@ public class JavaTestClass extends BaseTestObject implements TestContainer {
 	private Constructor<?> constructor = null;
 	private TestClassConstructorType constructorType = null;
 	private List<String> instanceObjectIDs = new ArrayList<String>();
-	private HashMap<String,JavaTestClassInstance> instanceExecTracker = new HashMap<String,JavaTestClassInstance>();
+	private Map<String,JavaTestClassInstance> instanceExecTracker = new HashMap<String,JavaTestClassInstance>();
 	private List<JavaTestClassInstance> instanceQueue = new ArrayList<JavaTestClassInstance>();
 	private List<String> executableCreatorNames = new ArrayList<String>();
 	private boolean instancesCreated = false;
-	private ArrayList<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
+	private List<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
 	private List<String> allScheduledCreators = null;
 	
 	public JavaTestClass(JavaTestClassDefinition classDef) throws Exception{

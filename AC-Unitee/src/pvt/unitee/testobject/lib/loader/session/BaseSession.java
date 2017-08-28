@@ -7,13 +7,10 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import arjunasdk.config.RunConfig;
-import arjunasdk.console.Console;
-import pvt.batteries.config.Batteries;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
 import pvt.unitee.arjuna.TestGroupsDB;
 import pvt.unitee.core.lib.exception.SessionNodesFinishedException;
 import pvt.unitee.testobject.lib.java.processor.JavaTestClassDefProcessor;
-import pvt.unitee.testobject.lib.loader.group.PickerMisConfiguration;
 
 public abstract class BaseSession implements Session {
 	private static Logger logger = RunConfig.logger();

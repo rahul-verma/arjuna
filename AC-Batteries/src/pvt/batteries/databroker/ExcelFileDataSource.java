@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.batteries.databroker;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import arjunasdk.ddauto.exceptions.DataSourceFinishedException;
 import arjunasdk.ddauto.interfaces.DataRecord;
@@ -29,7 +29,7 @@ import pvt.batteries.utils.ExceptionBatteries;
 
 public class ExcelFileDataSource extends BaseDataSource {
 	ExcelFileLine2ArrayReader reader = null;
-	ArrayList<String> headers = null;
+	List<String> headers = null;
 
 	public ExcelFileDataSource(String path) throws Exception {
 		if (path.toLowerCase().endsWith("xls")) {
@@ -46,7 +46,7 @@ public class ExcelFileDataSource extends BaseDataSource {
 			throw new DataSourceFinishedException("Records Finished.");			
 		}
 		
-		ArrayList<Object> dataRecord = null;
+		List<Object> dataRecord = null;
 		try {
 			dataRecord = reader.next();
 		} catch (Exception e) {

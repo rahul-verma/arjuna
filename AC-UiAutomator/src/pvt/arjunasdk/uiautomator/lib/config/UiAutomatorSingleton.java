@@ -20,6 +20,8 @@ package pvt.arjunasdk.uiautomator.lib.config;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.arjunasdk.uiauto.api.CentralPageMap;
@@ -41,18 +43,18 @@ public enum UiAutomatorSingleton {
 
 	CentralPageMap uicentralMap = new DefaultCentralUiMap();
 	// UI Automator
-	private static ArrayList<String> allowedGenericIdentifiers = null;
-	private static ArrayList<String> allowedWebIdentifiers = null;
-	private static ArrayList<String> allowedNativeIdentifiers = null;
-	private static ArrayList<String> allowedMobileWebIdentifiers = null;
-	private static ArrayList<String> allowedMobileNativeIdentifiers = null;
-	private static ArrayList<String> allowedScreenIdentifiers = null;
-	private static ArrayList<String> allAllowedUiElementTypes = null;
-	private static HashMap<UiAutomationContext, String> automationContextNames = null;
+	private static List<String> allowedGenericIdentifiers = null;
+	private static List<String> allowedWebIdentifiers = null;
+	private static List<String> allowedNativeIdentifiers = null;
+	private static List<String> allowedMobileWebIdentifiers = null;
+	private static List<String> allowedMobileNativeIdentifiers = null;
+	private static List<String> allowedScreenIdentifiers = null;
+	private static List<String> allAllowedUiElementTypes = null;
+	private static Map<UiAutomationContext, String> automationContextNames = null;
 	// Appium
-	private static ArrayList<String> allowedAppiumPlatforms = new ArrayList<String>();;
-	private static ArrayList<String> allowedAppiumAndroidBrowsers = new ArrayList<String>();;
-	private static ArrayList<String> allowedAppiumIosBrowsers = new ArrayList<String>();
+	private static List<String> allowedAppiumPlatforms = new ArrayList<String>();;
+	private static List<String> allowedAppiumAndroidBrowsers = new ArrayList<String>();;
+	private static List<String> allowedAppiumIosBrowsers = new ArrayList<String>();
 
 	public void init() throws Exception{
 		/* Appium */
@@ -121,35 +123,35 @@ public enum UiAutomatorSingleton {
 		return automationContextNames.get(type);
 	}
 
-	public ArrayList<String> getAllowedGenericIdentifiers(){
+	public List<String> getAllowedGenericIdentifiers(){
 		return allowedGenericIdentifiers;
 	}
 
-	public ArrayList<String> getAllAllowedUiElementTypes(){
+	public List<String> getAllAllowedUiElementTypes(){
 		return allAllowedUiElementTypes;
 	}
 
-	public ArrayList<String> getAllowedScreenIdentifiers(){
+	public List<String> getAllowedScreenIdentifiers(){
 		return allowedScreenIdentifiers;
 	}
 
-	public ArrayList<String> getAllowedNativeIdentifiers() {
+	public List<String> getAllowedNativeIdentifiers() {
 		return allowedNativeIdentifiers;
 	}
 
-	public ArrayList<String> getAllowedMobileNativeIdentifiers() {
+	public List<String> getAllowedMobileNativeIdentifiers() {
 		return allowedMobileNativeIdentifiers;
 	}
 
-	public ArrayList<String> getAllowedWebIdentifiers() {
+	public List<String> getAllowedWebIdentifiers() {
 		return allowedWebIdentifiers;
 	}
 
-	public ArrayList<String> getAllowedMobileWebIdentifiers() {
+	public List<String> getAllowedMobileWebIdentifiers() {
 		return allowedMobileWebIdentifiers;
 	}
 
-	public ArrayList<String> getAllowedIdentifiers(UiAutomationContext context) throws Exception{
+	public List<String> getAllowedIdentifiers(UiAutomationContext context) throws Exception{
 		switch(context){
 		case PC_WEB: return getAllowedWebIdentifiers();
 		case PC_NATIVE: return getAllowedNativeIdentifiers();
@@ -165,11 +167,11 @@ public enum UiAutomatorSingleton {
 	 * Appium Inquiry Methods
 	 */
 
-	private ArrayList<String> getAllowedPlatformsForAppium(){
+	private List<String> getAllowedPlatformsForAppium(){
 		return allowedAppiumPlatforms;
 	}
 
-	private ArrayList<String> getAllowedBrowsersForAppium(AppiumMobilePlatformType platform) throws Exception{
+	private List<String> getAllowedBrowsersForAppium(AppiumMobilePlatformType platform) throws Exception{
 		switch (platform){
 		case ANDROID: return allowedAppiumAndroidBrowsers;
 		case IOS: return allowedAppiumIosBrowsers;

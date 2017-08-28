@@ -19,7 +19,6 @@
 package pvt.arjunasdk.selenium.api;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -58,11 +57,11 @@ public interface WDMediator extends UiMediator{
 
 	void setSelectElement(Select selectElement);
 
-	ArrayList<By> getToolFindersQueue();
+	List<By> getToolFindersQueue();
 
-	ArrayList<By> getToolFindersQueueObject();
+	List<By> getToolFindersQueueObject();
 
-	void setFindersQueue(ArrayList<By> findByQueue);
+	void setFindersQueue(List<By> findByQueue);
 
 	boolean isCompositeElementIdentified() throws Exception;
 
@@ -133,13 +132,13 @@ public interface WDMediator extends UiMediator{
 
 	boolean isRadioOptionSelectedAtIndex(int index) throws Exception;
 
-	ArrayList<String> getDropDownLabels() throws Exception;
+	List<String> getDropDownLabels() throws Exception;
 
-	ArrayList<String> getRadioLabels() throws Exception;
+	List<String> getRadioLabels() throws Exception;
 
-	ArrayList<String> getDropDownValues() throws Exception;
+	List<String> getDropDownValues() throws Exception;
 
-	ArrayList<String> getRadioValues() throws Exception;
+	List<String> getRadioValues() throws Exception;
 
 	int getDropDownOptionCount() throws Exception;
 

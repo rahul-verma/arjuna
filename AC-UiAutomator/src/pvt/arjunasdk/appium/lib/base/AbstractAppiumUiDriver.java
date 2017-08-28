@@ -252,7 +252,7 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 	@Override
 	public UiElement declareElement(ElementMetaData elementMetaData) throws Exception {
 		UiElement uiElement = createDefaultElementSkeleton(elementMetaData);
-		ArrayList<By> finderQueue = new ArrayList<By>();
+		List<By> finderQueue = new ArrayList<By>();
 		for (Identifier id: elementMetaData.getIdentifiers()){
 			finderQueue.add(getFinderType(id.NAME, id.VALUE));
 		}
@@ -650,16 +650,16 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 		return options.get(index).isSelected();
 	}
 
-	public ArrayList<String> getDropDownOptionLabels(Select selectControl) {
-		ArrayList<String> texts = new ArrayList<String>();
+	public List<String> getDropDownOptionLabels(Select selectControl) {
+		List<String> texts = new ArrayList<String>();
 		for (WebElement option: selectControl.getOptions()){
 			texts.add(option.getText());
 		}
 		return texts;
 	}
 	
-	public ArrayList<String> getDropDownOptionValues(Select selectControl) {
-		ArrayList<String> texts = new ArrayList<String>();
+	public List<String> getDropDownOptionValues(Select selectControl) {
+		List<String> texts = new ArrayList<String>();
 		for (WebElement option: selectControl.getOptions()){
 			texts.add(option.getAttribute("value"));
 		}
@@ -741,16 +741,16 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 		return false;
 	}
 
-	public ArrayList<String> getRadioButtonLabels(List<MobileElement> wdElements) {
-		ArrayList<String> texts = new ArrayList<String>();
+	public List<String> getRadioButtonLabels(List<MobileElement> wdElements) {
+		List<String> texts = new ArrayList<String>();
 		for (MobileElement option: wdElements){
 			texts.add(getText(option));
 		}
 		return texts;
 	}
 
-	public ArrayList<String> getRadioButtonValues(List<MobileElement> wdElements) throws Exception {
-		ArrayList<String> texts = new ArrayList<String>();
+	public List<String> getRadioButtonValues(List<MobileElement> wdElements) throws Exception {
+		List<String> texts = new ArrayList<String>();
 		for (MobileElement option: wdElements){
 			texts.add(getValue(option));
 		}

@@ -20,6 +20,7 @@ package pvt.arjunasdk.uiautomator.lib.base;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.uiauto.interfaces.UiDriver;
 import arjunasdk.uiauto.interfaces.UiElement;
@@ -136,7 +137,7 @@ public abstract class BaseUiDriver implements UiDriver{
 	return (UiElement) throwUnsupportedActionException("declareElement");}
 
 	private ElementMetaData createMetaDataObject(String idType, String idValue) throws Exception {
-		HashMap<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new HashMap<String, String>();
 		map.put(idType, idValue);
 		ElementMetaData metaData = new DefaultElementMetaData(map);
 		metaData.processStrictly(this.getContext());

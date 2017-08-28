@@ -18,15 +18,15 @@
  ******************************************************************************/
 package arjunasdk.uiauto.interfaces;
 
-import java.util.HashMap;
+import java.util.Map;
 
 public interface App{
 	
 	String getName();
 	void setName(String name);
 
-	void addElement(String uiElementName, HashMap<String, String> elemMap) throws Exception;
-	void addElement(String uiLabel, String uiElementName, HashMap<String, String> elemMap) throws Exception;
+	void addElement(String uiElementName, Map<String, String> elemMap) throws Exception;
+	void addElement(String uiLabel, String uiElementName, Map<String, String> elemMap) throws Exception;
 
 	void registerPage(String uiLabel, UiDriver uiDriver, String mapPath) throws Exception;
 	//void registerPage(String uiLabel, UiDriver uiDriver, PageMapper mapper) throws Exception;

@@ -10,10 +10,8 @@ import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.core.lib.dependency.DependencyHandler;
 import pvt.unitee.core.lib.metadata.DefaultTestVarsHandler;
-import pvt.unitee.enums.SkipCode;
 import pvt.unitee.enums.TestClassFixtureType;
 import pvt.unitee.enums.TestResultCode;
-import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.reporter.lib.IssueId;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 import pvt.unitee.testobject.lib.fixture.TestFixtures;
@@ -29,7 +27,7 @@ public class JavaTestMethod extends BaseTestObject implements TestCreator{
 	private List<JavaTestMethodInstance> methodInstanceQueue = new ArrayList<JavaTestMethodInstance>();
 	private int instanceCount;
 	private JavaTestClassFragment containerFragment;
-	private ArrayList<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
+	private List<DependencyHandler> dependencies = new ArrayList<DependencyHandler>();
 	private TestFixtures fixtures = null;
 	
 	public JavaTestMethod(String objectId, JavaTestClassFragment containerFragment, JavaTestMethodDefinition methodDef) throws Exception {

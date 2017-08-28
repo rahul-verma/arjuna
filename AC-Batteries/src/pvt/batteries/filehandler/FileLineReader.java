@@ -21,10 +21,10 @@ package pvt.batteries.filehandler;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import arjunasdk.console.Console;
-import pvt.batteries.utils.ExceptionBatteries;
 
 public class FileLineReader {
 	Scanner reader = null;
@@ -49,9 +49,9 @@ public class FileLineReader {
 		}
 	}
 
-	public ArrayList<String> all() {
+	public List<String> all() {
 		try {
-			ArrayList<String> al = new ArrayList<String>();
+			List<String> al = new ArrayList<String>();
 			String line = null;
 			while ((line = (String) this.next()) != null) {
 				al.add(line);

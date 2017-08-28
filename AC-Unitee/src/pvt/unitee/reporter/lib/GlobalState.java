@@ -10,11 +10,7 @@ import org.apache.log4j.Logger;
 import arjunasdk.config.RunConfig;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.TestResultType;
-import pvt.unitee.reporter.lib.issue.Issue;
-import pvt.unitee.reporter.lib.test.TestResult;
-import pvt.unitee.testobject.lib.interfaces.Test;
 import pvt.unitee.testobject.lib.loader.group.Group;
-import unitee.interfaces.TestObjectProperties;
 
 public class GlobalState {
 	private Logger logger = RunConfig.logger();
@@ -23,7 +19,7 @@ public class GlobalState {
 	/*
 	 * For Results Capturing
 	 */
-	private HashMap<String,ThreadState> threadStates = new HashMap<String,ThreadState>();
+	private Map<String,ThreadState> threadStates = new HashMap<String,ThreadState>();
 	
 	// Group States
 	private Map<String,GroupState> groupStateMap = new HashMap<String,GroupState>();

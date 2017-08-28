@@ -18,8 +18,9 @@
  ******************************************************************************/
 package pvt.batteries.lib;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import pvt.batteries.configurator.lib.strings.NamedString;
 import pvt.batteries.ds.MessagesContainer;
@@ -27,30 +28,30 @@ import pvt.batteries.ds.NamesContainer;
 import pvt.batteries.exceptions.Problem;
 
 public class StringsManager {
-	HashMap<String, HashMap<String, String>> msgMap = new HashMap<String, HashMap<String, String>>();
-	HashMap<String, HashMap<String, String>> nameMap = new HashMap<String, HashMap<String, String>>();
-	HashMap<String, String> propMap = new HashMap<String, String>();
-	HashMap<String, String> flattenedNames = new HashMap<String, String>();
+	Map<String, HashMap<String, String>> msgMap = new HashMap<String, HashMap<String, String>>();
+	Map<String, HashMap<String, String>> nameMap = new HashMap<String, HashMap<String, String>>();
+	Map<String, String> propMap = new HashMap<String, String>();
+	Map<String, String> flattenedNames = new HashMap<String, String>();
 
-	private static void populate(HashMap<String, String> map, String[][] codes) {
+	private static void populate(Map<String, String> map, String[][] codes) {
 		for (int i = 0; i < codes.length; i++) {
 			map.put(codes[i][0].toUpperCase().trim(), codes[i][1]);
 		}
 	}
 
-	private static void populate(HashMap<String, String> map, HashMap<String, String> codes) {
+	private static void populate(Map<String, String> map, Map<String, String> codes) {
 		for (String key : codes.keySet()) {
 			map.put(key.toUpperCase(), codes.get(key));
 		}
 	}
 
-	private static void populate(HashMap<String, String> map, ArrayList<NamedString> namedStrings) {
+	private static void populate(Map<String, String> map, List<NamedString> namedStrings) {
 		for (NamedString namedString : namedStrings) {
 			map.put(namedString.getCode().toUpperCase(), namedString.getName());
 		}
 	}
 
-	public void populateNames(ArrayList<NamesContainer> containers) {
+	public void populateNames(List<NamesContainer> containers) {
 		for (NamesContainer container : containers) {
 			if (!nameMap.containsKey(container.getName())) {
 				nameMap.put(container.getName(), new HashMap<String, String>());
@@ -59,7 +60,7 @@ public class StringsManager {
 		}
 	}
 
-	public void populateMessages(ArrayList<MessagesContainer> containers) {
+	public void populateMessages(List<MessagesContainer> containers) {
 		for (MessagesContainer container : containers) {
 			if (!msgMap.containsKey(container.getName())) {
 				msgMap.put(container.getName(), new HashMap<String, String>());
@@ -76,15 +77,15 @@ public class StringsManager {
 		}
 	}
 
-	public HashMap<String, HashMap<String, String>> getAllNames() {
+	public Map<String, HashMap<String, String>> getAllNames() {
 		return this.nameMap;
 	}
 
-	public HashMap<String, HashMap<String, String>> getAllMessages() {
+	public Map<String, HashMap<String, String>> getAllMessages() {
 		return this.msgMap;
 	}
 
-	public HashMap<String, String> getFlattnededNames() {
+	public Map<String, String> getFlattnededNames() {
 		return this.flattenedNames;
 	}
 

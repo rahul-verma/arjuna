@@ -1,9 +1,10 @@
 package pvt.unitee.testobject.lib.java.loader;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import arjunasdk.sysauto.batteries.DataBatteries;
 import arjunasdk.sysauto.batteries.FileSystemBatteries;
@@ -136,8 +137,8 @@ public class JavaTestLoadingUtils {
 		}		
 	}
 	
-	public static HashMap<Integer,HashMap<String,String>> loadExecVarsFromInstancesAnnotation(Instances instancesAnnotation, int instanceCount, boolean userHasSuppliedProperties){
-		HashMap<Integer,HashMap<String,String>> invocationWiseProps = new HashMap<Integer,HashMap<String,String>>();
+	public static Map<Integer,HashMap<String,String>> loadExecVarsFromInstancesAnnotation(Instances instancesAnnotation, int instanceCount, boolean userHasSuppliedProperties){
+		Map<Integer,HashMap<String,String>> invocationWiseProps = new HashMap<Integer,HashMap<String,String>>();
 		for (int i=1; i <= instanceCount; i++){
 			invocationWiseProps.put(i, new HashMap<String,String>());
 		}
@@ -149,7 +150,7 @@ public class JavaTestLoadingUtils {
 		String[] properties = instancesAnnotation.execVars();
 		
 		for(String propString: properties){
-			ArrayList<String> parts = DataBatteries.split(propString,"=");
+			List<String> parts = DataBatteries.split(propString,"=");
 			String propKey = parts.get(0);
 			String propValuesString = parts.get(1);
 			for (int i=1; i <= instanceCount; i++){
@@ -158,7 +159,7 @@ public class JavaTestLoadingUtils {
 			
 			// We need to be careful here. Instance count is human count, starts with 1.
 			// Prop Values is computer counting, starts from 0
-			ArrayList<String> propValues = DataBatteries.split(propValuesString,",");
+			List<String> propValues = DataBatteries.split(propValuesString,",");
 			String lastValue = null;
 			for (int i=1; i <= instanceCount; i++){
 				if (i <= propValues.size()){

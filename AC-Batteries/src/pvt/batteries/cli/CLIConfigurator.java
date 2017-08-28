@@ -18,7 +18,7 @@
  ******************************************************************************/
 package pvt.batteries.cli;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.interfaces.Value;
 import pvt.batteries.lib.ComponentIntegrator;
@@ -27,7 +27,7 @@ public interface CLIConfigurator extends CLIOptions {
 
 	void processUserOptions() throws Exception;
 
-	HashMap<String, Value> getUserOptions();
+	Map<String, Value> getUserOptions();
 
 	void addValue(String propPath, Value value) throws Exception;
 

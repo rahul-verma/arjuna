@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -33,16 +34,13 @@ import pvt.batteries.discoverer.FileDiscoverer;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.TestLanguage;
-import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import pvt.unitee.testobject.lib.loader.group.GroupTestContainerScheduler;
-import unitee.annotations.TestClass;
 
 public class TestDefinitionsProcessor {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
-	private ArrayList<String> classes = null;
-//	ArrayList<AuthoredTest> tests = new ArrayList<AuthoredTest>();
-	private HashMap<TestLanguage, TestDefInitializer> testDefinitionLoaders = new HashMap<TestLanguage, TestDefInitializer>();
-	private HashMap<TestLanguage, GroupTestContainerScheduler> testLoaders = new HashMap<TestLanguage, GroupTestContainerScheduler>();
+	private List<String> classes = null;
+	private Map<TestLanguage, TestDefInitializer> testDefinitionLoaders = new HashMap<TestLanguage, TestDefInitializer>();
+	private Map<TestLanguage, GroupTestContainerScheduler> testLoaders = new HashMap<TestLanguage, GroupTestContainerScheduler>();
 
 	public TestDefinitionsProcessor() throws Exception {
 	}

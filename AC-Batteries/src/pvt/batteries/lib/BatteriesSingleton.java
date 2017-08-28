@@ -20,6 +20,7 @@ package pvt.batteries.lib;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
 
@@ -32,7 +33,7 @@ import pvt.batteries.databroker.DataReferenceFactory;
 public enum BatteriesSingleton {
 	INSTANCE;
 
-	HashMap<String, DataReference> dataReferences = new HashMap<String, DataReference>();
+	Map<String, DataReference> dataReferences = new HashMap<String, DataReference>();
 
 	public void loadDataReferences() throws Exception {
 		String mapRefDir = Batteries.getCentralProperty(BatteriesPropertyType.DIRECTORY_PROJECT_DATA_REFERENCES).asString();

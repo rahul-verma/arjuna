@@ -19,18 +19,17 @@
 package arjunasdk.uiauto.interfaces;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.sikuli.script.Match;
 
-import pvt.arjunasdk.sikuli.api.SikuliMediator;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy;
 
 public interface SikuliUiDriver {
 	void focusOnApp() throws Exception;
-	Object getIdentifierType(HashMap<ScreenIdentifyBy, String> map) throws Exception;
+	Object getIdentifierType(Map<ScreenIdentifyBy, String> map) throws Exception;
 	void click(String imagePath) throws Exception;
 	void doubleClick(String imagePath) throws Exception;
 	void rightClick(String imagePath) throws Exception;
@@ -50,7 +49,7 @@ public interface SikuliUiDriver {
 	boolean isElementPresent(String imagePath) throws Exception;
 	boolean isElementAbsent(String imagePath) throws Exception;
 	Match findElement(String imagePath) throws Exception;
-	ArrayList<Match> findElements(String imagePath) throws Exception;
+	List<Match> findElements(String imagePath) throws Exception;
 	void sendKeysToScreen(String text) throws Exception;
 	void waitForElementPresence(String imagePath) throws Exception;
 	void waitForElementAbsence(String imagePath) throws Exception;

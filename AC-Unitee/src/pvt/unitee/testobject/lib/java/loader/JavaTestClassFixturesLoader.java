@@ -5,6 +5,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -55,7 +56,7 @@ public class JavaTestClassFixturesLoader {
 	String sep = SystemBatteries.getLineSeparator();
 	private List<Fixture> allFixtures = new ArrayList<Fixture>();
 
-	private HashMap<TestClassFixtureType, ArrayList<String>> fixtureCounts = new HashMap<TestClassFixtureType, ArrayList<String>>();
+	private Map<TestClassFixtureType, ArrayList<String>> fixtureCounts = new HashMap<TestClassFixtureType, ArrayList<String>>();
 	private boolean fixtureAnomaly = false;
 
 	public JavaTestClassFixturesLoader(JavaTestClassDefinition container) throws Exception{
@@ -122,7 +123,7 @@ public class JavaTestClassFixturesLoader {
 				m.getName().equals(Batteries.getCentralProperty(ArjunaProperty.FIXTURE_TESTCLASS_TEARDOWNTEST_NAME).asString()));	
 	}
 
-	public void incrementFixtureCount(HashMap<TestClassFixtureType, ArrayList<String>> tracker, TestClassFixtureType type, String fixtureName){
+	public void incrementFixtureCount(Map<TestClassFixtureType, ArrayList<String>> tracker, TestClassFixtureType type, String fixtureName){
 		if (!tracker.containsKey(type)){
 			tracker.put(type, new ArrayList<String>());
 		} else {
@@ -245,7 +246,7 @@ public class JavaTestClassFixturesLoader {
 		if (fixtureAnomaly){
 			StringBuilder sb = new StringBuilder();
 			for (TestClassFixtureType fixture: fixtureCounts.keySet()){
-				ArrayList<String> names = fixtureCounts.get(fixture);
+				List<String> names = fixtureCounts.get(fixture);
 				if (names.size() > 1){
 					sb.append(String.format("Fixture Type: %s%s", fixture.toString(), sep));
 					sb.append(DataBatteries.flatten(names));

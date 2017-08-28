@@ -6,7 +6,6 @@ import pvt.batteries.value.IntValue;
 import pvt.batteries.value.StringValue;
 import pvt.unitee.enums.StepResultAttribute;
 import pvt.unitee.enums.StepResultType;
-import pvt.unitee.interfaces.Check;
 import pvt.unitee.interfaces.Step;
 import pvt.unitee.validator.lib.exceptions.StepResultEvent;
 

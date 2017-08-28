@@ -19,13 +19,14 @@
 package pvt.arjunasdk.uiautomator.lib;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import arjunasdk.uiauto.interfaces.PageMapper;
 import pvt.arjunasdk.uiauto.api.CentralPageMap;
 
 public class DefaultCentralUiMap implements CentralPageMap {
 
-	private HashMap<String, HashMap<String, HashMap<String,String>>> rawMap =  new HashMap<String, HashMap<String, HashMap<String,String>>>();
+	private Map<String, HashMap<String, HashMap<String,String>>> rawMap =  new HashMap<String, HashMap<String, HashMap<String,String>>>();
 	
 	/* (non-Javadoc)
 	 * @see com.autocognite.unitee.pvt.uiautomator.map.ICentralUiMap#isRawMapPresent(java.lang.String)
@@ -36,10 +37,10 @@ public class DefaultCentralUiMap implements CentralPageMap {
 	}
 	
 	@Override
-	public HashMap<String, HashMap<String,String>> populateRawPageMap(String uiFullName, PageMapper mapper) throws Exception{
+	public Map<String, HashMap<String,String>> populateRawPageMap(String uiFullName, PageMapper mapper) throws Exception{
 		if(!rawMap.containsKey(uiFullName)){
-			HashMap<String, HashMap<String,String>> pMap = mapper.getPageMap();
-			rawMap.put(uiFullName, pMap);
+			Map<String, HashMap<String,String>> pMap = mapper.getPageMap();
+			rawMap.put(uiFullName, (HashMap<String, HashMap<String,String>>) pMap);
 		}
 		return rawMap.get(uiFullName);
 	}
@@ -48,7 +49,7 @@ public class DefaultCentralUiMap implements CentralPageMap {
 	 * @see com.autocognite.unitee.pvt.uiautomator.map.ICentralUiMap#getRawMap(java.lang.String)
 	 */
 	@Override
-	public HashMap<String, HashMap<String,String>> getRawMap(String uiFullName) throws Exception{
+	public Map<String, HashMap<String,String>> getRawMap(String uiFullName) throws Exception{
 		return rawMap.get(uiFullName);
 	}
 
@@ -56,7 +57,7 @@ public class DefaultCentralUiMap implements CentralPageMap {
 	 * @see com.autocognite.unitee.pvt.uiautomator.map.ICentralUiMap#getRawMap()
 	 */
 	@Override
-	public HashMap<String, HashMap<String, HashMap<String,String>>> getRawMap() {
+	public Map<String, HashMap<String, HashMap<String,String>>> getRawMap() {
 		return this.rawMap;
 	}
 	

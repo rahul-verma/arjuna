@@ -5,30 +5,24 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
-import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
-import pvt.unitee.core.lib.datasource.DataSourceBuilder;
 import pvt.unitee.core.lib.datasource.DataSourceType;
 import pvt.unitee.enums.SkipCode;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
-import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
-import pvt.unitee.testobject.lib.fixture.TestFixtures;
 import unitee.annotations.DriveWithData;
 import unitee.annotations.DriveWithDataArray;
 import unitee.annotations.DriveWithDataFile;
 import unitee.annotations.DriveWithDataGenerator;
 import unitee.annotations.DriveWithDataMethod;
-import unitee.annotations.Instances;
 import unitee.annotations.Skip;
 import unitee.annotations.TestMethod;
-import unitee.interfaces.TestVariables;
 
 public class JavaTestMethodsDefLoader implements TestCreatorLoader {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
@@ -51,16 +45,16 @@ public class JavaTestMethodsDefLoader implements TestCreatorLoader {
 	}
 	
 	public void load() throws Exception{
-		HashMap<String,Method> methodMap = new HashMap<String,Method>();
-		ArrayList<String> methodNames = new ArrayList<String>();
+		Map<String,Method> methodMap = new HashMap<String,Method>();
+		List<String> methodNames = new ArrayList<String>();
 		
 		JavaTestClassFixturesLoader fixtureLoader = new JavaTestClassFixturesLoader(testClassDef);
 
 		Class<?> userTestClass = this.getTestClassDef().getUserTestClass();
 		
-		HashMap<String,DataSourceType> methodDSMap = new HashMap<String,DataSourceType>();
+		Map<String,DataSourceType> methodDSMap = new HashMap<String,DataSourceType>();
 		
-		HashMap<String,Integer> testMethodCountMap = new HashMap<String,Integer>();
+		Map<String,Integer> testMethodCountMap = new HashMap<String,Integer>();
 		
 		boolean multiSameTestDefFound = false;
 		

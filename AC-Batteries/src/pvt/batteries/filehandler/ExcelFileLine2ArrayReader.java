@@ -18,8 +18,8 @@
  ******************************************************************************/
 package pvt.batteries.filehandler;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ExcelFileLine2ArrayReader extends ExcelFileReader {
 
@@ -27,9 +27,9 @@ public class ExcelFileLine2ArrayReader extends ExcelFileReader {
 		super(path);
 	}
 
-	public synchronized ArrayList<Object> next() throws Exception {
+	public synchronized List<Object> next() throws Exception {
 		if (this.getCurrentRowIndex() < this.getRowCount()) {
-			ArrayList<Object> retArray = null;
+			List<Object> retArray = null;
 			while (true) {
 				retArray = getRowAsArrayList(this.getCurrentRowIndex());
 				this.setCurrentRowIndex(this.getCurrentRowIndex() + 1);
@@ -44,7 +44,7 @@ public class ExcelFileLine2ArrayReader extends ExcelFileReader {
 				}
 			}
 			
-			HashMap<String, Object> zipped = zip(retArray);
+			Map<String, Object> zipped = zip(retArray);
 			if (zipped.containsKey("EXCLUDE")) {
 				String exclude = ((String) zipped.get("EXCLUDE")).toLowerCase().trim();
 				if (exclude.equals("y") || exclude.equals("yes") || exclude.equals("true")) {

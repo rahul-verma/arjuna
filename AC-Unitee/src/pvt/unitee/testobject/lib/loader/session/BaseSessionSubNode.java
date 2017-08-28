@@ -1,8 +1,6 @@
 package pvt.unitee.testobject.lib.loader.session;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import com.google.gson.JsonObject;
 
@@ -10,7 +8,6 @@ import arjunasdk.console.Console;
 import pvt.batteries.hocon.HoconReader;
 import pvt.batteries.hocon.HoconStringReader;
 import pvt.batteries.value.DefaultStringKeyValueContainer;
-import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.PickerTargetType;
 import pvt.unitee.runner.lib.slots.TestSlotExecutor;
 import pvt.unitee.testobject.lib.loader.group.Group;

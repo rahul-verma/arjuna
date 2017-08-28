@@ -39,7 +39,7 @@ public abstract class BaseContainer<T, V> implements ReadOnlyContainer<T, V>, Re
 		}
 	}
 
-	public BaseContainer(HashMap<T, V> map) {
+	public BaseContainer(Map<T, V> map) {
 		this.addAllKeysToKeyList(this.map.keySet());
 		this.map = map;
 	}

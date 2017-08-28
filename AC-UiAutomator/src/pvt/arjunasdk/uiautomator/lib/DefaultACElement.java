@@ -20,7 +20,7 @@ package pvt.arjunasdk.uiautomator.lib;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import pvt.arjunasdk.uiauto.api.ACElement;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
@@ -568,10 +568,10 @@ public abstract class DefaultACElement implements  ACElement{
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<String> getAllLabels() throws Exception {
+	public List<String> getAllLabels() throws Exception {
 		try {
 			return getMediator().getAllLabels();} catch (Exception e){
-			return (ArrayList<String>) throwElementGetAttributeException(
+			return (List<String>) throwElementGetAttributeException(
 					e, "getAllLabels",
 					String.format("all labels for %s", this.getType().toString().toLowerCase())
 					);
@@ -579,10 +579,10 @@ public abstract class DefaultACElement implements  ACElement{
 	}
 
 	@SuppressWarnings("unchecked")
-	public ArrayList<String> getAllValues() throws Exception {
+	public List<String> getAllValues() throws Exception {
 		try {
 			return getMediator().getAllValues();} catch (Exception e){
-			return (ArrayList<String>) throwElementGetAttributeException(
+			return (List<String>) throwElementGetAttributeException(
 					e, "getAllValues",
 					String.format("all values for %s", this.getType().toString().toLowerCase())
 					);

@@ -19,8 +19,9 @@
 package pvt.batteries.filehandler;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PropertyFileReader {
 	FileLineReader reader = null;
@@ -35,9 +36,9 @@ public class PropertyFileReader {
 		this.excludePrefixes = excludePrefixes;
 	}
 
-	public HashMap<String, String> getAllProperties() {
-		HashMap<String, String> retMap = new HashMap<String, String>();
-		ArrayList<String> lines = reader.all();
+	public Map<String, String> getAllProperties() {
+		Map<String, String> retMap = new HashMap<String, String>();
+		List<String> lines = reader.all();
 		for (String line : lines) {
 			String[] lineParts = line.split("=", 2);
 			if (lineParts.length == 2) {

@@ -21,6 +21,7 @@ package pvt.unitee.config;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -32,7 +33,7 @@ import unitee.annotations.DataGenerator;
 
 public class DataGeneratorMap {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
-	HashMap<String,Class<? extends DataSource>> dataSources = new HashMap<String, Class<? extends DataSource>>();
+		Map<String,Class<? extends DataSource>> dataSources = new HashMap<String, Class<? extends DataSource>>();
 	//HashMap<String,String> dataGenClassNames = new HashMap<String,String>();
 	//HashMap<Class<? extends DataSource>,String> dataGenClassToNameMapper = new HashMap<Class<? extends DataSource>,String>();
 	

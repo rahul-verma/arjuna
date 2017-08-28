@@ -18,8 +18,8 @@
  ******************************************************************************/
 package arjunasdk.ddauto.lib;
 
-import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import arjunasdk.ddauto.exceptions.MapDataRecordLookUpException;
 import arjunasdk.ddauto.interfaces.DataRecord;
@@ -55,7 +55,7 @@ public class MapDataRecord extends BaseDataRecord implements DataRecord {
 		}	
 	}
 	
-	public MapDataRecord(HashMap<String, Object> nvMap){
+	public MapDataRecord(Map<String, Object> nvMap){
 		for (String name : nvMap.keySet()) {
 			this.addWithKey(name, nvMap.get(name));
 		}

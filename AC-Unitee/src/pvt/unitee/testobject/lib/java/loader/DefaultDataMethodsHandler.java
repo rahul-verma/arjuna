@@ -24,6 +24,7 @@ import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 
@@ -32,13 +33,11 @@ import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.ddt.datarecord.BaseDataRecordContainer;
 import pvt.unitee.arjuna.ArjunaInternal;
-import pvt.unitee.testobject.lib.fixture.StaticFixture;
 import unitee.annotations.DataMethod;
-import unitee.interfaces.TestVariables;
 
 public abstract class DefaultDataMethodsHandler implements DataMethodsHandler {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
-	private HashMap<String,Method> methods = new HashMap<String,Method>();
+	private Map<String,Method> methods = new HashMap<String,Method>();
 	public static Object[][] sampleArr = {};
 
 	protected abstract boolean shouldInclude(Method m);

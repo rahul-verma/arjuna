@@ -29,7 +29,7 @@ public interface ACElement extends BasicActionHandler{
 	void setCompositePageName(String name);
 	UiElementType getType();
 	boolean isComposite();
-//	HashMap<String,String> getRawMetaData();
+//	Map<String,String> getRawMetaData();
 	String property(String propName);
 	String getProperty(String propName);
 	void setProperty(String propName, String value);

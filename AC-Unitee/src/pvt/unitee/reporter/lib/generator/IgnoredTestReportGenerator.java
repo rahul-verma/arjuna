@@ -12,8 +12,6 @@ import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.interfaces.ReportGenerator;
 import pvt.unitee.reporter.lib.ignored.IgnoredTest;
 import pvt.unitee.reporter.lib.ignored.IgnoredTestDeserializer;
-import pvt.unitee.reporter.lib.test.TestResult;
-import pvt.unitee.reporter.lib.test.TestResultDeserializer;
 
 public class IgnoredTestReportGenerator extends JsonResultsReader{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

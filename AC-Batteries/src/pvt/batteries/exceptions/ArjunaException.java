@@ -19,10 +19,11 @@
 package pvt.batteries.exceptions;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ArjunaException extends Exception {
 	private String screenshotPath = null;
-	private ArrayList<Throwable> childThrowables = new ArrayList<Throwable>();
+	private List<Throwable> childThrowables = new ArrayList<Throwable>();
 	private static final long serialVersionUID = -6553255112253599186L;
 
 	// Parameterless Constructor
@@ -86,7 +87,7 @@ public class ArjunaException extends Exception {
 		insertChildThrowable(e);
 	}
 
-	public ArrayList<Throwable> getChildThrowables() {
+	public List<Throwable> getChildThrowables() {
 		return this.childThrowables;
 	}
 }

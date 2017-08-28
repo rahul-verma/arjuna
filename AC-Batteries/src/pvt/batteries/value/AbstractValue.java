@@ -5,7 +5,6 @@ import java.util.List;
 import arjunasdk.enums.ValueType;
 import arjunasdk.exceptions.UnsupportedRepresentationException;
 import arjunasdk.interfaces.Value;
-import pvt.batteries.utils.StackBatteries;
 
 public class AbstractValue implements Value {
 	private Object object = null;

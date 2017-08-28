@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 public class DelimitedDataParser {
 
 	public static List<String> parse(String inString) {
-		ArrayList<String> matchList = new ArrayList<String>();
+		List<String> matchList = new ArrayList<String>();
 		Pattern regex = Pattern.compile("[^\\s\"']+|\"([^\"]*)\"|'([^']*)'");
 		Matcher regexMatcher = regex.matcher(inString);
 		while (regexMatcher.find()) {

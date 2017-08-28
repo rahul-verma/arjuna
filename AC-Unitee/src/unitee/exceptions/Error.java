@@ -18,7 +18,6 @@
  ******************************************************************************/
 package unitee.exceptions;
 
-import pvt.unitee.interfaces.Check;
 import pvt.unitee.interfaces.Step;
 import pvt.unitee.validator.lib.exceptions.StepResultEvent;
 

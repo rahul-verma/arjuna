@@ -1,10 +1,8 @@
 package pvt.unitee.arjuna;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.io.FilenameUtils;
@@ -12,17 +10,9 @@ import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
 import pvt.batteries.config.Batteries;
-import pvt.unitee.arjuna.ArjunaInternal;
-import pvt.unitee.config.ArjunaSingleton;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.PickerTargetType;
-import pvt.unitee.enums.SkipCode;
 import pvt.unitee.enums.TestPickerProperty;
-import pvt.unitee.enums.UnpickedCode;
-import pvt.unitee.runner.lib.slots.TestSlotExecutor;
-import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
-import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
-import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import pvt.unitee.testobject.lib.loader.group.BaseGroup;
 import pvt.unitee.testobject.lib.loader.group.Group;
 import pvt.unitee.testobject.lib.loader.group.GroupTestContainerScheduler;
@@ -33,7 +23,6 @@ import pvt.unitee.testobject.lib.loader.group.PickerConfigForCLI;
 import pvt.unitee.testobject.lib.loader.group.UserDefinedGroup;
 import pvt.unitee.testobject.lib.loader.session.Session;
 import pvt.unitee.testobject.lib.loader.session.SessionSubNode;
-import pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator;
 
 public class TestGroupsDB {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());

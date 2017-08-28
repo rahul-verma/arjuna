@@ -18,7 +18,7 @@
  ******************************************************************************/
 package arjunasdk.uiauto.interfaces;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import pvt.arjunasdk.uiauto.api.BaseUiDriver;
 import pvt.arjunasdk.uiauto.api.CentralPageMap;
@@ -36,8 +36,8 @@ ImageComparator, NativeWindowActionHandler, BrowserActionHandler{
 	void setName(String name);
 	
 	void populate(PageMapper mapper) throws Exception;
-	void addElement(String uiElementName, HashMap<String, String> elemMap) throws Exception;
-	void processUiProperties(String elementName, HashMap<String,String> properties) throws Exception;
+	void addElement(String uiElementName, Map<String, String> elemMap) throws Exception;
+	void processUiProperties(String elementName, Map<String,String> properties) throws Exception;
 	
 //	String getImagesDirectory();
 	
@@ -60,7 +60,7 @@ ImageComparator, NativeWindowActionHandler, BrowserActionHandler{
 	public void switchToWebContext() throws Exception;
 	public void switchToNativeContext() throws Exception;
 
-	void processElementProperties(String elementName, HashMap<String, String> properties) throws Exception;
-	void processElementPropertiesForLabel(String uiName, String elementName, HashMap<String, String> properties)
+	void processElementProperties(String elementName, Map<String, String> properties) throws Exception;
+	void processElementPropertiesForLabel(String uiName, String elementName, Map<String, String> properties)
 			throws Exception;
 }

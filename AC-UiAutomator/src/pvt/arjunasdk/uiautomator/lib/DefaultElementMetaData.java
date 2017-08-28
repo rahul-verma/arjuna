@@ -20,6 +20,8 @@ package pvt.arjunasdk.uiautomator.lib;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.api.Identifier;
@@ -31,14 +33,14 @@ import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
 
 public class DefaultElementMetaData implements ElementMetaData {
-	private HashMap<String, String> metaData = new HashMap<String, String>();
-	ArrayList<Identifier> identifiers = new ArrayList<Identifier>();
-	// private ArrayList<String> identificationOrder = new ArrayList<String>();
+	private Map<String, String> metaData = new HashMap<String, String>();
+	List<Identifier> identifiers = new ArrayList<Identifier>();
+	// private List<String> identificationOrder = new ArrayList<String>();
 	private boolean relevant = false;
 	//private boolean multiId = false;
 	private UiAutomationContext identificationContext = null;
 	
-	public DefaultElementMetaData(HashMap<String, String> map) {
+	public DefaultElementMetaData(Map<String, String> map) {
 		for (String key: map.keySet()){
 			set(key, map.get(key));
 		}
@@ -48,7 +50,7 @@ public class DefaultElementMetaData implements ElementMetaData {
 //	 * @see com.autocognite.uiautomator.base.metadata.IElementMetaData#getIdentificationOrder()
 //	 */
 //	@Override
-//	public ArrayList<String> getIdentificationOrder(){
+//	public List<String> getIdentificationOrder(){
 //		return this.identificationOrder;
 //	}
 	
@@ -92,7 +94,7 @@ public class DefaultElementMetaData implements ElementMetaData {
 	 * @see com.autocognite.uiautomator.base.metadata.IElementMetaData#getAllProperties()
 	 */
 	@Override
-	public HashMap<String, String> getAllProperties() {
+	public Map<String, String> getAllProperties() {
 		return metaData;
 	}
 //	
@@ -116,7 +118,7 @@ public class DefaultElementMetaData implements ElementMetaData {
 	 * @see com.autocognite.uiautomator.base.metadata.IElementMetaData#getAllowedIdentifiers()
 	 */
 	@Override
-	public ArrayList<String> getAllowedIdentifiers() throws Exception{
+	public List<String> getAllowedIdentifiers() throws Exception{
 		return UiAutomator.getAllowedIdentifiers(identificationContext);
 	}
 	
@@ -226,7 +228,7 @@ public class DefaultElementMetaData implements ElementMetaData {
 	 * @see com.autocognite.uiautomator.base.metadata.IWebElementMetaData#getIdentifiers()
 	 */
 	@Override
-	public ArrayList<Identifier> getIdentifiers(){
+	public List<Identifier> getIdentifiers(){
 		return identifiers;
 	}
 
