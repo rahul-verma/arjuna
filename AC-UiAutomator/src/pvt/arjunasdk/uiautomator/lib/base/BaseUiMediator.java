@@ -117,7 +117,7 @@ public abstract class BaseUiMediator extends BaseUiScreenMediator implements UiM
 		identifyAllIfNull();
 		Random rn = new Random();
 		int retValue = -1;
-		if (isCompositeElementIdentified() && (getElementCountForCompositeElement() > 1)){
+		if (isCompositeElementIdentified() && (getElementCountForCompositeElement() > 0)){
 			retValue = rn.nextInt(getElementCountForCompositeElement());
 		} else {
 			return (int) this.getUiElement().throwEmptyElementQueueException("getRandomElementIndex");
@@ -129,7 +129,7 @@ public abstract class BaseUiMediator extends BaseUiScreenMediator implements UiM
 	public int getLastIndex() throws Exception {
 		identifyAllIfNull();
 		int retValue = -1;
-		if (isCompositeElementIdentified() && (getElementCountForCompositeElement() > 1)){
+		if (isCompositeElementIdentified() && (getElementCountForCompositeElement() > 0)){
 			retValue = getElementCountForCompositeElement() - 1;
 		} else {
 			return (int) this.getUiElement().throwEmptyElementQueueException("getLastIndex");

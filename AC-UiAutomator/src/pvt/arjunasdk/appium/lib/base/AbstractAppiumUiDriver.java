@@ -156,7 +156,7 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 		capabilities.setCapability(MobileCapabilityType.PLATFORM_VERSION, Batteries.value(UiAutomatorPropertyType.MOBILE_PLATFORM_VERSION).asString());
 		capabilities.setCapability(MobileCapabilityType.APP, this.getAppPath());
 		capabilities.setCapability(MobileCapabilityType.DEVICE_NAME, Batteries.value(UiAutomatorPropertyType.MOBILE_DEVICE_NAME).asString());
-		if (!Batteries.value(UiAutomatorPropertyType.MOBILE_PLATFORM_NAME).isNull()){
+		if (!Batteries.value(UiAutomatorPropertyType.MOBILE_DEVICE_UDID).isNull()){
 			capabilities.setCapability(MobileCapabilityType.UDID, Batteries.value(UiAutomatorPropertyType.MOBILE_DEVICE_UDID).asString());
 		}
 	}

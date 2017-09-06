@@ -176,7 +176,7 @@ public class ExecutionSlotsCreator {
 					currentContainer = new JavaTestClass(classDef);
 					currentContainer.setGroup(this.group);
 					currentContainer.setAllScheduledCreators(this.group.getScheduledCreatorsForContainer(currentContainer.getQualifiedName()));
-					logger.debug(classDef.getQualifiedName());
+//					logger.debug(classDef.getQualifiedName());
 //					 if (classDef.shouldBeSkipped()){
 //							logger.debug("Should be Skipped.");
 //							currentContainer.markSkipped(

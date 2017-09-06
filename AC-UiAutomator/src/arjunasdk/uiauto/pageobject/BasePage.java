@@ -190,14 +190,18 @@ public class BasePage implements Page{
 		}
 	}
 
-	@Override
-	public void processUiProperties(String elementName, Map<String, String> properties) throws Exception {
-		if (this.getParent() != null){
-			this.processElementProperties(elementName, properties);
-			if (properties != null){
-				this.processElementPropertiesForLabel(this.getLabel(), elementName, properties);
-			}
-		}
+	protected void processUiProperties(String elementName, Map<String, String> properties) throws Exception {
+//		if (this.getParent() != null){
+//			this.processElementProperties(elementName, properties);
+//			if (properties != null){
+//				this.processElementPropertiesForLabel(this.getLabel(), elementName, properties);
+//			}
+//		}
+		
+		this.processElementProperties(elementName, properties);
+//		if (properties != null){
+//			this.processElementPropertiesForLabel(this.getLabel(), elementName, properties);
+//		}
 	}
 	
 	@Override
@@ -206,7 +210,6 @@ public class BasePage implements Page{
 		
 	}
 
-	@Override
 	public void processElementPropertiesForLabel(String uiName, String elementName, Map<String, String> properties) throws Exception {
 		// TODO Auto-generated method stub
 		

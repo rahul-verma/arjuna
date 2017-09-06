@@ -406,12 +406,7 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 	
 	@Override
 	public void waitForElementAbsence(By findBy) throws Exception {
-		try{
-			getWaiter().until(ExpectedConditions.presenceOfElementLocated(findBy));
-			throw new Exception("Not able to establish absence of element after polling for same.");
-		} catch (Exception e){
-			// Do nothing.
-		}
+		getWaiter().until(ExpectedConditions.invisibilityOfElementLocated(findBy));
 	}
 	
 	public void waitForElementClickability(By findBy) throws Exception {

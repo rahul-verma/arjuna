@@ -37,7 +37,7 @@ ImageComparator, NativeWindowActionHandler, BrowserActionHandler{
 	
 	void populate(PageMapper mapper) throws Exception;
 	void addElement(String uiElementName, Map<String, String> elemMap) throws Exception;
-	void processUiProperties(String elementName, Map<String,String> properties) throws Exception;
+//	void processUiProperties(String elementName, Map<String,String> properties) throws Exception;
 	
 //	String getImagesDirectory();
 	
@@ -61,6 +61,6 @@ ImageComparator, NativeWindowActionHandler, BrowserActionHandler{
 	public void switchToNativeContext() throws Exception;
 
 	void processElementProperties(String elementName, Map<String, String> properties) throws Exception;
-	void processElementPropertiesForLabel(String uiName, String elementName, Map<String, String> properties)
-			throws Exception;
+//	void processElementPropertiesForLabel(String uiName, String elementName, Map<String, String> properties)
+//			throws Exception;
 }

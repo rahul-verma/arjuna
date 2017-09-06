@@ -129,7 +129,7 @@ public abstract class BaseUiScreenMediator implements UiMediator{
 	public int getLastIndex() throws Exception {
 		identifyAllIfNull();
 		int retValue = -1;
-		if (isCompositeElementIdentified() && (getElementCountForCompositeElement() > 1)){
+		if (isCompositeElementIdentified() && (getElementCountForCompositeElement() > 0)){
 			retValue = getElementCountForCompositeElement() - 1;
 		} else {
 			return (int) this.getUiElement().throwEmptyElementQueueException("getLastIndex");

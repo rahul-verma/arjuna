@@ -1491,55 +1491,55 @@ pvt.arjunasdk.property.ConfigPropertyBatteries -> com.autocognite.pvt.n:
     18:34:java.lang.String pathToCoreAbsolutePath(java.lang.String) -> pathToCoreAbsolutePath
     38:48:java.lang.String pathToProjectAbsolutePath(java.lang.String) -> pathToProjectAbsolutePath
     52:52:java.lang.String enumToPropPath(java.lang.Enum) -> a
-    56:66:boolean isNotSet(arjunasdk.interfaces.Value) -> a
-    71:77:pvt.arjunasdk.property.ConfigProperty createStringProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,java.lang.Object,java.lang.reflect.Method,boolean) -> a
-    82:87:pvt.arjunasdk.property.ConfigProperty createStringListProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,java.lang.Object,java.lang.reflect.Method,boolean) -> b
+    56:68:boolean isNotSet(arjunasdk.interfaces.Value) -> a
+    73:79:pvt.arjunasdk.property.ConfigProperty createStringProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,java.lang.Object,java.lang.reflect.Method,boolean) -> a
+    84:89:pvt.arjunasdk.property.ConfigProperty createStringListProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,java.lang.Object,java.lang.reflect.Method,boolean) -> b
     1028:1032:void pvt.batteries.value.StringListValue.process(java.lang.Object,java.lang.reflect.Method):28:32 -> b
-    1028:1032:pvt.arjunasdk.property.ConfigProperty createStringListProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,java.lang.Object,java.lang.reflect.Method,boolean):86 -> b
-    91:91:java.lang.String getSame(java.lang.String) -> getSame
-    96:97:pvt.arjunasdk.property.ConfigProperty createCoreDirPath(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> a
-    102:103:pvt.arjunasdk.property.ConfigProperty createProjectDirPath(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> b
-    108:109:pvt.arjunasdk.property.ConfigProperty createStringListProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> c
-    114:115:pvt.arjunasdk.property.ConfigProperty createDirectoriesProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> g
-    120:120:pvt.arjunasdk.property.ConfigProperty createStringProperty(java.lang.Enum,java.lang.String,java.lang.String,java.lang.String,boolean) -> a
-    126:127:pvt.arjunasdk.property.ConfigProperty createStringProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> d
-    132:133:pvt.arjunasdk.property.ConfigProperty createEnumProperty(java.lang.Enum,java.lang.String,java.lang.Class,arjunasdk.interfaces.Value,java.lang.String,boolean) -> a
-    138:142:pvt.arjunasdk.property.ConfigProperty createEnumListProperty(java.lang.Enum,java.lang.String,java.lang.Class,arjunasdk.interfaces.Value,java.lang.String,boolean) -> b
-    147:152:pvt.arjunasdk.property.ConfigProperty createBooleanProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> e
-    157:162:pvt.arjunasdk.property.ConfigProperty createNumberProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> a
-    167:167:pvt.arjunasdk.property.ConfigProperty createIntProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> h
-    172:172:pvt.arjunasdk.property.ConfigProperty createLongProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> i
-    177:177:pvt.arjunasdk.property.ConfigProperty createFloatProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> j
-    182:182:pvt.arjunasdk.property.ConfigProperty createDoubleProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> k
-    187:187:pvt.arjunasdk.property.ConfigProperty createNumberProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> f
-    192:193:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> b
+    1028:1032:pvt.arjunasdk.property.ConfigProperty createStringListProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,java.lang.Object,java.lang.reflect.Method,boolean):88 -> b
+    93:93:java.lang.String getSame(java.lang.String) -> getSame
+    98:99:pvt.arjunasdk.property.ConfigProperty createCoreDirPath(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> a
+    104:105:pvt.arjunasdk.property.ConfigProperty createProjectDirPath(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> b
+    110:111:pvt.arjunasdk.property.ConfigProperty createStringListProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> c
+    116:117:pvt.arjunasdk.property.ConfigProperty createDirectoriesProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> g
+    122:122:pvt.arjunasdk.property.ConfigProperty createStringProperty(java.lang.Enum,java.lang.String,java.lang.String,java.lang.String,boolean) -> a
+    128:129:pvt.arjunasdk.property.ConfigProperty createStringProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> d
+    134:135:pvt.arjunasdk.property.ConfigProperty createEnumProperty(java.lang.Enum,java.lang.String,java.lang.Class,arjunasdk.interfaces.Value,java.lang.String,boolean) -> a
+    140:144:pvt.arjunasdk.property.ConfigProperty createEnumListProperty(java.lang.Enum,java.lang.String,java.lang.Class,arjunasdk.interfaces.Value,java.lang.String,boolean) -> b
+    149:154:pvt.arjunasdk.property.ConfigProperty createBooleanProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> e
+    159:164:pvt.arjunasdk.property.ConfigProperty createNumberProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> a
+    169:169:pvt.arjunasdk.property.ConfigProperty createIntProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> h
+    174:174:pvt.arjunasdk.property.ConfigProperty createLongProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> i
+    179:179:pvt.arjunasdk.property.ConfigProperty createFloatProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> j
+    184:184:pvt.arjunasdk.property.ConfigProperty createDoubleProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> k
+    189:189:pvt.arjunasdk.property.ConfigProperty createNumberProperty(java.lang.Enum,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> f
+    194:195:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean) -> b
     1050:1051:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.text(java.lang.String):50:51 -> b
-    1050:1051:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):193 -> b
+    1050:1051:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):195 -> b
     1065:1066:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.value(arjunasdk.interfaces.Value):65:66 -> b
-    1065:1066:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):193 -> b
+    1065:1066:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):195 -> b
     2060:2061:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.visible(boolean):60:61 -> b
-    2060:2061:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):193 -> b
+    2060:2061:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):195 -> b
     2070:2071:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.expectedValueType(arjunasdk.enums.ValueType):70:71 -> b
-    2070:2071:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):193 -> b
-    198:200:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean) -> a
+    2070:2071:pvt.arjunasdk.property.ConfigProperty createProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,arjunasdk.interfaces.Value,java.lang.String,boolean):195 -> b
+    200:202:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean) -> a
     3050:3051:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.text(java.lang.String):50:51 -> a
-    3050:3051:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean):199 -> a
+    3050:3051:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean):201 -> a
     3065:3066:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.value(arjunasdk.interfaces.Value):65:66 -> a
-    3065:3066:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean):199 -> a
+    3065:3066:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean):201 -> a
     4060:4061:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.visible(boolean):60:61 -> a
-    4060:4061:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean):199 -> a
+    4060:4061:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean):201 -> a
     4070:4071:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.expectedValueType(arjunasdk.enums.ValueType):70:71 -> a
-    4070:4071:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean):200 -> a
-    204:205:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value,java.lang.String) -> a
+    4070:4071:pvt.arjunasdk.property.ConfigProperty createNullProperty(java.lang.Enum,arjunasdk.enums.ValueType,java.lang.String,java.lang.String,boolean):202 -> a
+    206:207:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value,java.lang.String) -> a
     5050:5051:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.text(java.lang.String):50:51 -> a
-    5050:5051:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value,java.lang.String):205 -> a
+    5050:5051:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value,java.lang.String):207 -> a
     5065:5066:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.value(arjunasdk.interfaces.Value):65:66 -> a
-    5065:5066:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value,java.lang.String):205 -> a
-    209:210:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value) -> a
+    5065:5066:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value,java.lang.String):207 -> a
+    211:212:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value) -> a
     6050:6051:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.text(java.lang.String):50:51 -> a
-    6050:6051:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value):210 -> a
+    6050:6051:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value):212 -> a
     6065:6066:pvt.arjunasdk.property.ConfigPropertyBuilder pvt.arjunasdk.property.ConfigPropertyBuilder.value(arjunasdk.interfaces.Value):65:66 -> a
-    6065:6066:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value):210 -> a
+    6065:6066:pvt.arjunasdk.property.ConfigProperty createSimpleProperty(java.lang.String,arjunasdk.interfaces.Value):212 -> a
 pvt.arjunasdk.property.ConfigPropertyBuilder -> com.autocognite.pvt.o:
     java.lang.String definer -> f
     java.lang.String propCodeName -> g
