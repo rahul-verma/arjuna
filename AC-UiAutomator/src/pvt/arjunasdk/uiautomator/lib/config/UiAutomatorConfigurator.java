@@ -93,37 +93,37 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 			if (pathToEnumMap.containsKey(ucPropPath)){
 				switch(pathToEnumMap.get(ucPropPath)){
 				case APPIUM_HUB_HOST:
-					handleStringConfig(propPath, cValue, "Appium Hub Host Name", false);
+					handleStringConfig(propPath, cValue, "Appium Hub Host Name", true);
 					break;
 				case APPIUM_HUB_PORT:
-					handleIntConfig(propPath, cValue, "Appium Hub Port Number", false);
+					handleIntConfig(propPath, cValue, "Appium Hub Port Number", true);
 					break;
 				case APPIUM_HUB_URL:
 					handleStringConfig(propPath, cValue, "Appium Hub URL", false);
 					break;
 				case APP_MOBILE_MAXWAIT:
-					handleDoubleConfig(propPath, cValue, "Mobile App Max Wait Time for Element Identification", false);
+					handleDoubleConfig(propPath, cValue, "Mobile App Max Wait Time for Element Identification", true);
 					break;
 				case APP_MOBILE_PATH:
-					handleStringConfig(propPath, cValue, "Mobile App Path on Test Machine", false);
+					handleStringConfig(propPath, cValue, "Mobile App Path on Test Machine", true);
 					break;
 				case APP_PC_MAXWAIT:
 					handleDoubleConfig(propPath, cValue, "PC App Max Wait Time for Element Identification", true);
 					break;
 				case BROWSER_MOBILE_DEFAULT:
-					handleStringConfig(propPath, cValue, "Default Mobile Web Browser", false);
+					handleStringConfig(propPath, cValue, "Default Mobile Web Browser", true);
 					break;
 				case BROWSER_MOBILE_MAXWAIT:
-					handleDoubleConfig(propPath, cValue, "Mobile Web Browser Max Wait Time for Element Identification", false);
+					handleDoubleConfig(propPath, cValue, "Mobile Web Browser Max Wait Time for Element Identification", true);
 					break;
 				case BROWSER_MOBILE_PROXY_HOST:
-					handleStringConfig(propPath, cValue, "Mobile Web Browser Proxy Host Name", false);
+					handleStringConfig(propPath, cValue, "Mobile Web Browser Proxy Host Name", true);
 					break;
 				case BROWSER_MOBILE_PROXY_ON:
-					handleBooleanConfig(propPath, cValue, "Should enable proxy for Web Browser on Mobile?", false);
+					handleBooleanConfig(propPath, cValue, "Should enable proxy for Web Browser on Mobile?", true);
 					break;
 				case BROWSER_MOBILE_PROXY_PORT:
-					handleIntConfig(propPath, cValue, "Mobile Web Browser Proxy Port Number", false);
+					handleIntConfig(propPath, cValue, "Mobile Web Browser Proxy Port Number", true);
 					break;
 				case BROWSER_MOBILE_PROXY_URL:
 					handleStringConfig(propPath, cValue, "Mobile Web Browser Proxy URL", false);
@@ -162,25 +162,25 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 					handleStringConfig(propPath, cValue, "Firefox Web Browser's Window Name", false);
 					break;
 				case MOBILE_DEVICE_UDID:
-					handleStringConfig(propPath, cValue, "Mobile Device UDID", false);
+					handleStringConfig(propPath, cValue, "Mobile Device UDID", true);
 					break;
 				case MOBILE_DEVICE_NAME:
-					handleStringConfig(propPath, cValue, "Mobile Device Name", false);
+					handleStringConfig(propPath, cValue, "Mobile Device Name", true);
 					break;
 				case MOBILE_PLATFORM_NAME:
-					handleStringConfig(propPath, cValue, "Mobile Platform Name", false);
+					handleStringConfig(propPath, cValue, "Mobile Platform Name", true);
 					break;
 				case MOBILE_PLATFORM_VERSION:
-					handleStringConfig(propPath, cValue, "Mobile Platform Version", false);
+					handleStringConfig(propPath, cValue, "Mobile Platform Version", true);
 					break;
 				case SAFARI_WINDOWNAME:
 					handleStringConfig(propPath, cValue, "Safari Web Browser's Window Name", false);
 					break;
 				case SIKULI_COMPARISON_SCORE:
-					handleDoubleConfig(propPath, cValue, "Sikuli Min Comparison Score for successful match", false);
+					handleDoubleConfig(propPath, cValue, "Sikuli Min Comparison Score for successful match", true);
 					break;
 				case SIKULI_MAXWAIT:
-					handleDoubleConfig(propPath, cValue, "Sikuli Max Wait Time for Image Identification", false);
+					handleDoubleConfig(propPath, cValue, "Sikuli Max Wait Time for Image Identification", true);
 					break;
 				case UIAUTO_RUNCONTEXT:
 					handleUiContextConfig(propPath, cValue, "Current UI Automation Context", true);

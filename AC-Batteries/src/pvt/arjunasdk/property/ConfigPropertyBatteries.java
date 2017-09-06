@@ -61,6 +61,8 @@ public class ConfigPropertyBatteries {
 			String val = configValue.asString();
 			if (val.toLowerCase().equals("not_set")) {
 				return true;
+			} else if (val.toLowerCase().equals("na")) {
+				return true;
 			}
 		}
 		return false;
