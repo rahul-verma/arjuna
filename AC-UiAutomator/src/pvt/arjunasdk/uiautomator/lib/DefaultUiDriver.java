@@ -18,6 +18,8 @@
  ******************************************************************************/
 package pvt.arjunasdk.uiautomator.lib;
 
+import java.util.Map;
+
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
 import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiautomator.lib.base.BaseUiDriver;
@@ -36,5 +38,22 @@ public class DefaultUiDriver extends BaseUiDriver{
 		super();
 	}
 
+	@Override
+	public void load() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void setCapabilities(Map<String, ?> caps) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void init() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

@@ -238,9 +238,9 @@ public enum ArjunaSingleton {
 		//String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString();
 		String projDir = Batteries.getBaseDir();
 		String runID =  integrator.value(ArjunaProperty.RUNID).asString();
-		String timestampedRunID = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date()) + "-" + runID;
+//		String timestampedRunID = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date()) + "-" + runID;
 		String updates = ResourceStreamBatteries.streamToString(ArjunaSingleton.class.getResourceAsStream("/com/autocognite/pvt/text/arjuna_invisible.conf"));
-		String replaced = updates.replace("%%slugProjDir", projDir).replace("%%slugRUNID", timestampedRunID);
+		String replaced = updates.replace("%%slugProjDir", projDir).replace("%%slugRUNID", runID);
 		HoconReader uReader = new HoconStringReader(replaced);
 		uReader.process();
 		Batteries.processArjunaOptions(uReader.getProperties());

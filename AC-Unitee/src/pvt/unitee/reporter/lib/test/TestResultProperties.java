@@ -83,6 +83,10 @@ public class TestResultProperties
 	public void setResultCode(TestResultCode code) {
 		this.add(TestResultAttribute.CODE, new EnumValue<TestResultCode>(code));
 	}
+	
+	public TestResultCode code() throws Exception {
+		return this.value(TestResultAttribute.CODE).asEnum(TestResultCode.class);
+	}
 
 	public void setDescription(String desc) {
 		this.add(TestResultAttribute.DESC, new StringValue(desc));

@@ -19,6 +19,8 @@
 package pvt.unitee.arjuna;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.io.FileUtils;
@@ -47,6 +49,7 @@ import pvt.unitee.reporter.lib.test.TestResult;
 import pvt.unitee.reporter.lib.writer.console.ConsoleEventWriter;
 import pvt.unitee.reporter.lib.writer.console.ConsoleTestResultWriter;
 import pvt.unitee.reporter.lib.writer.excel.ExcelReportGenerator;
+import pvt.unitee.reporter.lib.writer.jxml.JXmlReportGenerator;
 import pvt.unitee.testobject.lib.java.loader.JavaTestClassDefLoader;
 import pvt.unitee.testobject.lib.java.loader.TestDefinitionsProcessor;
 import pvt.unitee.testobject.lib.loader.session.Session;
@@ -127,6 +130,10 @@ public class ArjunaTestEngine implements TestEngine{
 				FileUtils.forceMkdir(new File(reportDir + "/excel"));
 				generator.addReportGenerator(new ExcelReportGenerator(reportDir + "/excel"));
 				break;
+			case JXML:
+				FileUtils.forceMkdir(new File(reportDir + "/jxml"));
+				generator.addReportGenerator(new JXmlReportGenerator(reportDir + "/jxml"));
+				break;
 			default:
 				String msg = "Unrecognized report format option: " + reportFormatName + ". Exiting now...";
 				logger.fatal(msg);
@@ -170,11 +177,17 @@ public class ArjunaTestEngine implements TestEngine{
 			//dirObj.mkdirs();
 		}
 		
-		FileUtils.forceMkdir(new File(getArchivesDir()));
-		for (File f: (new File(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString())).listFiles()){
+		File centralReportDir = new File(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString());
+		String lastRuntimestamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date(centralReportDir.lastModified()));
+		String archiveDirForLatestTest = getArchivesDir() + "/" + lastRuntimestamp + "-" +  Batteries.value(ArjunaProperty.RUNID).asString();
+		FileUtils.forceMkdir(new File(archiveDirForLatestTest));
+		
+		File runReportDir = new File(this.getReportDir());
+
+		for (File f: runReportDir.listFiles()){
 			if (f.isHidden()) continue;
 			if (f.isDirectory()){
-				String targetPath = getArchivesDir() + "/" + f.getName();
+				String targetPath = archiveDirForLatestTest + "/" + f.getName();
 				File targetDir = new File(targetPath);
 				try{
 					FileUtils.moveDirectory(f, targetDir);
@@ -183,12 +196,12 @@ public class ArjunaTestEngine implements TestEngine{
 					Console.displayError("Arjuna faced a critical issue in archiving contents of report directory.");
 					Console.displayError("Please close any files that you have opened from the report directory and execute the run again.");
 					Console.displayError("Now Arjuna would attempt to delete any partial archive created and exit.");
+					Console.displayExceptionBlock(e);
 					try{
 						FileSystemBatteries.deleteDirectory(targetPath);
 					} catch (Throwable g){
-						
+						//Console.displayError("Arjuna archives previous run's report contents at beginning of new run.");
 					}
-					SystemBatteries.exit();
 				}
 			}
 		}

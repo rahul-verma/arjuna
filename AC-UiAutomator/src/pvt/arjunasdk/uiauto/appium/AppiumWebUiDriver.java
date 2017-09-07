@@ -20,6 +20,7 @@ package pvt.arjunasdk.uiauto.appium;
 
 import pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver;
 import pvt.arjunasdk.uiauto.enums.MobileWebIdentifyBy;
+import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 
 public class AppiumWebUiDriver extends AbstractAppiumUiDriver {
 	public AppiumWebUiDriver() throws Exception{
@@ -38,5 +39,9 @@ public class AppiumWebUiDriver extends AbstractAppiumUiDriver {
 	public void switchToWebContext() throws Exception{
 		// do nothing
 	}
-
+	
+	public void init() throws Exception{
+		super.init(UiAutomationContext.MOBILE_WEB, null);		
+	}
+	
 }

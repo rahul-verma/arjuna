@@ -195,10 +195,11 @@ public class JavaTest extends BaseTestObject implements Test{
 	}
 	
 	public void endTest() throws Exception{
-		ArjunaInternal.getGlobalState().getCurrentThreadState().beginTest(this);
+		ArjunaInternal.getGlobalState().getCurrentThreadState().endTest();
 	}
 
 	public void reportExecuted() throws Exception{
+		this.endTimeStamp();
 		TestResult result = new TestResult(new TestResultProperties(), this.getTestVariables());
 		result.buildFromStepResults(ArjunaInternal.getGlobalState().getCurrentThreadState().getCurrentTestStepResults());
 		ArjunaInternal.getGlobalState().getGroupState(this.getGroup().getID()).update(result);		
@@ -207,6 +208,7 @@ public class JavaTest extends BaseTestObject implements Test{
 	}
 	
 	public void reportExclusion() throws Exception {
+		this.endTimeStamp();
 		TestResultBuilder builder = new TestResultBuilder();
 		TestResult result = builder
 		.testVariables(this.getTestVariables())

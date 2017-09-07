@@ -18,8 +18,11 @@
  ******************************************************************************/
 package pvt.arjunasdk.uiauto.appium;
 
+import org.openqa.selenium.remote.DesiredCapabilities;
+
 import pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver;
 import pvt.arjunasdk.uiauto.enums.MobileNativeIdentifyBy;
+import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.config.Batteries;
 
@@ -32,7 +35,7 @@ public class AppiumNativeUiDriver extends AbstractAppiumUiDriver {
 	public AppiumNativeUiDriver(String appPath) throws Exception{
 		super(appPath);
 	}
-	
+
 	protected boolean checkNullIdentifier(String identifier, String idValue) throws Exception{
 		return MobileNativeIdentifyBy.valueOf(identifier) == null;
 	}
@@ -45,6 +48,11 @@ public class AppiumNativeUiDriver extends AbstractAppiumUiDriver {
 	@Override
 	public void switchToNativeContext() throws Exception{
 		// do nothing
+	}
+	
+	@Override
+	public void init() throws Exception{
+		super.init(UiAutomationContext.MOBILE_WEB, this.getAppPath());		
 	}
 
 }

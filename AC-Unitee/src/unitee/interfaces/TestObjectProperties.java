@@ -54,4 +54,6 @@ public interface TestObjectProperties {
 	List<String> strings(List<TestObjectAttribute> props)  throws Exception;
 
 	Map<String, String> strItems(List<TestObjectAttribute> props)  throws Exception;
+
+	Double time() throws Exception;
 }

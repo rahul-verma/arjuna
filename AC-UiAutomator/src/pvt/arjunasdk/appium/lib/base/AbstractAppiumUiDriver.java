@@ -19,9 +19,11 @@
 package pvt.arjunasdk.appium.lib.base;
 
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -71,10 +73,11 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 	private int waitTime = -1;
 	private String appPath = null;
 	UiAutomationContext context = null;
+	private DesiredCapabilities capabilities = null;
+	private AppiumMobilePlatformType platformType = null;
 	
 	public AbstractAppiumUiDriver() throws Exception{
 		super(UiAutomationContext.MOBILE_WEB, ElementLoaderType.AUTOMATOR);
-		init(UiAutomationContext.MOBILE_WEB, null);
 	}
 
 	public AbstractAppiumUiDriver(String appPath, UiAutomationContext context, ElementLoaderType loaderType) throws Exception{
@@ -82,7 +85,6 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 		if (appPath == null){
 			throw new Exception("Null value supplied for appPath");
 		}
-		init(context, appPath);
 	}
 	
 	public AbstractAppiumUiDriver(String appPath) throws Exception{
@@ -91,7 +93,6 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 	
 	public AbstractAppiumUiDriver(UiAutomationContext context, ElementLoaderType loaderType) throws Exception{
 		super(context, loaderType);
-		init(context, null);
 	}
 	
 	private AppiumMediator createMediatorSkeleton(UiElement element) throws Exception {
@@ -116,7 +117,7 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 		//		service.start();
 	}
 
-	protected void init(UiAutomationContext context, String appPath) throws Exception {
+	public void init(UiAutomationContext context, String appPath) throws Exception {
 		this.context = context;
 		this.setAppPath(appPath);
 		switch(context){
@@ -125,7 +126,22 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 		default: this.setWaitTime(Batteries.value(UiAutomatorPropertyType.APP_MOBILE_MAXWAIT).asInt());
 		}
 		this.setUiTestEngineName(UiDriverEngine.APPIUM);	
-		DesiredCapabilities capabilities = new DesiredCapabilities();
+		capabilities = new DesiredCapabilities();
+		String platform = Batteries.value(UiAutomatorPropertyType.MOBILE_PLATFORM_NAME).asString();
+		if (!UiAutomator.isAllowedAppiumPlatform(platform)){
+			throwUnsupportedPlatformException("constructor", platform);
+		}
+		platformType = AppiumMobilePlatformType.valueOf(platform.toUpperCase());
+		populateDefaultCapabilities(platformType, capabilities);
+	}
+	
+	@Override
+	public void setCapabilities(Map<String,?> caps){
+		this.capabilities.merge(new DesiredCapabilities(caps));
+	}
+	
+	@Override
+	public void load() throws Exception{
 		URL hubUrl = new URL(
 				String.format(
 						Batteries.value(UiAutomatorPropertyType.APPIUM_HUB_URL).asString(),
@@ -133,12 +149,6 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 						Batteries.value(UiAutomatorPropertyType.APPIUM_HUB_PORT).asString()
 						)
 				);
-		String platform = Batteries.value(UiAutomatorPropertyType.MOBILE_PLATFORM_NAME).asString();
-		if (!UiAutomator.isAllowedAppiumPlatform(platform)){
-			throwUnsupportedPlatformException("constructor", platform);
-		}
-		AppiumMobilePlatformType platformType = AppiumMobilePlatformType.valueOf(platform.toUpperCase());
-		setCapabilities(platformType, capabilities);
 		try{
 			switch(platformType){
 			case ANDROID: driver = new AndroidDriver<MobileElement>(hubUrl, capabilities); break;
@@ -148,7 +158,7 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 		}catch (UnreachableBrowserException e){
 			throwUnreachableBrowserException(platformType, e);
 		}
-		this.setWaiter(new WebDriverWait(this.getDriver(), this.getWaitTime()));
+		this.setWaiter(new WebDriverWait(this.getDriver(), this.getWaitTime()));		
 	}
 
 	public void setMobileNativeCapabilities(AppiumMobilePlatformType platform, DesiredCapabilities capabilities) throws Exception {		
@@ -175,7 +185,7 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 		}
 	}
 
-	public void setCapabilities(AppiumMobilePlatformType platform, DesiredCapabilities capabilities) throws Exception {
+	public void populateDefaultCapabilities(AppiumMobilePlatformType platform, DesiredCapabilities capabilities) throws Exception {
 		if (Batteries.value(UiAutomatorPropertyType.BROWSER_MOBILE_PROXY_ON).asBoolean()){
 			Proxy proxy = new Proxy();
 			String p = Batteries.value(UiAutomatorPropertyType.BROWSER_MOBILE_PROXY_HOST).asString() + ":" + Batteries.value(UiAutomatorPropertyType.BROWSER_MOBILE_PROXY_PORT).asString();

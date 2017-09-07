@@ -409,7 +409,6 @@ arjunasdk.uiauto.interfaces.Page: java.lang.String getName()
 arjunasdk.uiauto.interfaces.Page: void setName(java.lang.String)
 arjunasdk.uiauto.interfaces.Page: void populate(arjunasdk.uiauto.interfaces.PageMapper)
 arjunasdk.uiauto.interfaces.Page: void addElement(java.lang.String,java.util.Map)
-arjunasdk.uiauto.interfaces.Page: void processUiProperties(java.lang.String,java.util.Map)
 arjunasdk.uiauto.interfaces.Page: pvt.arjunasdk.uiauto.enums.UiAutomationContext getContext()
 arjunasdk.uiauto.interfaces.Page: boolean isAutomatorPresent()
 arjunasdk.uiauto.interfaces.Page: arjunasdk.uiauto.interfaces.Page getParent()
@@ -423,7 +422,6 @@ arjunasdk.uiauto.interfaces.Page: void setContext(pvt.arjunasdk.uiauto.enums.UiA
 arjunasdk.uiauto.interfaces.Page: void switchToWebContext()
 arjunasdk.uiauto.interfaces.Page: void switchToNativeContext()
 arjunasdk.uiauto.interfaces.Page: void processElementProperties(java.lang.String,java.util.Map)
-arjunasdk.uiauto.interfaces.Page: void processElementPropertiesForLabel(java.lang.String,java.lang.String,java.util.Map)
 arjunasdk.uiauto.interfaces.PageMapper
 arjunasdk.uiauto.interfaces.PageMapper: java.util.Map getPageMap()
 arjunasdk.uiauto.interfaces.PageSection

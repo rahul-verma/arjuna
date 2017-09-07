@@ -20,6 +20,7 @@ package pvt.arjunasdk.uiauto.appium;
 
 import pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver;
 import pvt.arjunasdk.uiauto.enums.IdentifyBy;
+import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.config.Batteries;
 
@@ -50,5 +51,10 @@ public class AppiumHybridUiDriver extends AbstractAppiumUiDriver{
 	@Override
 	public String getName() {
 		return "Appium Hybrid UiDriver";
+	}
+	
+	@Override
+	public void init() throws Exception{
+		super.init(UiAutomationContext.MOBILE_WEB, this.getAppPath());		
 	}
 }

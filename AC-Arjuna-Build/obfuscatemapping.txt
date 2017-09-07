@@ -492,7 +492,6 @@ arjunasdk.uiauto.interfaces.Page -> arjunasdk.uiauto.interfaces.Page:
     void setName(java.lang.String) -> setName
     void populate(arjunasdk.uiauto.interfaces.PageMapper) -> populate
     void addElement(java.lang.String,java.util.Map) -> addElement
-    void processUiProperties(java.lang.String,java.util.Map) -> processUiProperties
     pvt.arjunasdk.uiauto.enums.UiAutomationContext getContext() -> getContext
     boolean isAutomatorPresent() -> isAutomatorPresent
     arjunasdk.uiauto.interfaces.Page getParent() -> getParent
@@ -506,7 +505,6 @@ arjunasdk.uiauto.interfaces.Page -> arjunasdk.uiauto.interfaces.Page:
     void switchToWebContext() -> switchToWebContext
     void switchToNativeContext() -> switchToNativeContext
     void processElementProperties(java.lang.String,java.util.Map) -> processElementProperties
-    void processElementPropertiesForLabel(java.lang.String,java.lang.String,java.util.Map) -> processElementPropertiesForLabel
 arjunasdk.uiauto.interfaces.PageMapper -> arjunasdk.uiauto.interfaces.PageMapper:
     java.util.Map getPageMap() -> getPageMap
 arjunasdk.uiauto.interfaces.PageSection -> arjunasdk.uiauto.interfaces.PageSection:
@@ -663,63 +661,63 @@ arjunasdk.uiauto.pageobject.BasePage -> arjunasdk.uiauto.pageobject.BasePage:
     176:177:void setParent(arjunasdk.uiauto.interfaces.Page) -> setParent
     181:181:arjunasdk.uiauto.interfaces.UiDriver getUiDriver() -> getUiDriver
     186:191:void setUiDriver(arjunasdk.uiauto.interfaces.UiDriver) -> setUiDriver
-    195:201:void processUiProperties(java.lang.String,java.util.Map) -> processUiProperties
-    207:207:void processElementProperties(java.lang.String,java.util.Map) -> processElementProperties
-    213:213:void processElementPropertiesForLabel(java.lang.String,java.lang.String,java.util.Map) -> processElementPropertiesForLabel
-    216:216:arjunasdk.uiauto.interfaces.UiElement element(java.lang.String) -> element
-    220:233:void populate(arjunasdk.uiauto.interfaces.PageMapper) -> populate
-    236:237:void populate(java.lang.String) -> populate
-    240:245:arjunasdk.uiauto.interfaces.UiElement getElement(java.lang.String) -> getElement
-    250:260:arjunasdk.uiauto.interfaces.UiElement registerElement(java.lang.String,pvt.arjunasdk.uiauto.api.ElementMetaData) -> a
-    264:273:void addElement(java.lang.String,java.util.Map) -> addElement
-    1250:1260:arjunasdk.uiauto.interfaces.UiElement registerElement(java.lang.String,pvt.arjunasdk.uiauto.api.ElementMetaData):250:260 -> addElement
-    1250:1260:void addElement(java.lang.String,java.util.Map):268 -> addElement
-    277:277:boolean isAutomatorPresent() -> isAutomatorPresent
-    281:283:java.lang.Object throwDefaultUiException(java.lang.String,java.lang.String,java.lang.String) -> throwDefaultUiException
-    291:296:java.lang.Object throwNullAutomatorException(java.lang.String) -> throwNullAutomatorException
-    302:308:java.lang.Object throwUndefinedElementException(java.lang.String,java.lang.String) -> throwUndefinedElementException
-    316:321:java.lang.Object throwNullElementException(java.lang.String,java.lang.String) -> throwNullElementException
-    330:330:java.lang.Object getUnderlyingEngine() -> getUnderlyingEngine
-    335:335:arjunasdk.uiauto.interfaces.UiElement elementWithId(java.lang.String) -> elementWithId
-    340:340:arjunasdk.uiauto.interfaces.UiElement elementWithName(java.lang.String) -> elementWithName
-    345:345:arjunasdk.uiauto.interfaces.UiElement elementWithClass(java.lang.String) -> elementWithClass
-    350:350:arjunasdk.uiauto.interfaces.UiElement elementWithCss(java.lang.String) -> elementWithCss
-    355:355:arjunasdk.uiauto.interfaces.UiElement elementWithLinkText(java.lang.String) -> elementWithLinkText
-    360:360:arjunasdk.uiauto.interfaces.UiElement elementWithPartialLinkText(java.lang.String) -> elementWithPartialLinkText
-    365:365:arjunasdk.uiauto.interfaces.UiElement elementWithXPath(java.lang.String) -> elementWithXPath
-    370:370:arjunasdk.uiauto.interfaces.UiElement elementWithXText(java.lang.String) -> elementWithXText
-    375:375:arjunasdk.uiauto.interfaces.UiElement elementWithXPartialText(java.lang.String) -> elementWithXPartialText
-    380:380:arjunasdk.uiauto.interfaces.UiElement elementWithXValue(java.lang.String) -> elementWithXValue
-    385:385:arjunasdk.uiauto.interfaces.UiElement elementWithXImageSource(java.lang.String) -> elementWithXImageSource
-    390:390:arjunasdk.uiauto.interfaces.UiElement elementOfXType(pvt.arjunasdk.uiauto.enums.UiElementType) -> elementOfXType
-    395:395:arjunasdk.uiauto.interfaces.UiElement elementBasedOnImage(java.lang.String) -> elementBasedOnImage
-    400:400:pvt.arjunasdk.uiauto.enums.UiDriverEngine getUiDriverEngineName() -> getUiDriverEngineName
-    405:405:java.lang.Object getUiDriverEngine() -> getUiDriverEngine
-    410:410:java.io.File takeScreenshot() -> takeScreenshot
-    415:416:void setAppTitle(java.lang.String) -> setAppTitle
-    420:420:java.lang.String getAppTitle() -> getAppTitle
-    425:426:void focusOnApp() -> focusOnApp
-    432:433:void confirmAlertIfPresent() -> confirmAlertIfPresent
-    437:438:void close() -> close
-    442:442:java.lang.String getCurrentWindow() -> getCurrentWindow
-    447:448:void switchToNewWindow() -> switchToNewWindow
-    452:453:void switchToWindow(java.lang.String) -> switchToWindow
-    457:458:void closeCurrentWindow() -> closeCurrentWindow
-    462:463:void goTo(java.lang.String) -> goTo
-    467:468:void refresh() -> refresh
-    472:473:void back() -> back
-    477:478:void forward() -> forward
-    482:483:void waitForBody() -> waitForBody
-    487:488:void switchToFrame(int) -> switchToFrame
-    492:493:void switchToFrame(java.lang.String) -> switchToFrame
-    497:498:void switchToDefaultFrame() -> switchToDefaultFrame
-    502:502:boolean areImagesSimilar(java.io.File,java.io.File,java.lang.Double) -> areImagesSimilar
-    507:507:boolean areImagesSimilar(java.lang.String,java.io.File) -> areImagesSimilar
-    512:512:boolean areImagesSimilar(java.lang.String,java.io.File,java.lang.Double) -> areImagesSimilar
-    517:517:boolean areImagesSimilar(java.lang.String,java.lang.String) -> areImagesSimilar
-    522:522:boolean areImagesSimilar(java.io.File,java.io.File) -> areImagesSimilar
-    527:528:void switchToWebContext() -> switchToWebContext
-    532:533:void switchToNativeContext() -> switchToNativeContext
+    201:205:void processUiProperties(java.lang.String,java.util.Map) -> processUiProperties
+    211:211:void processElementProperties(java.lang.String,java.util.Map) -> processElementProperties
+    216:216:void processElementPropertiesForLabel(java.lang.String,java.lang.String,java.util.Map) -> processElementPropertiesForLabel
+    219:219:arjunasdk.uiauto.interfaces.UiElement element(java.lang.String) -> element
+    223:236:void populate(arjunasdk.uiauto.interfaces.PageMapper) -> populate
+    239:240:void populate(java.lang.String) -> populate
+    243:248:arjunasdk.uiauto.interfaces.UiElement getElement(java.lang.String) -> getElement
+    253:263:arjunasdk.uiauto.interfaces.UiElement registerElement(java.lang.String,pvt.arjunasdk.uiauto.api.ElementMetaData) -> a
+    267:276:void addElement(java.lang.String,java.util.Map) -> addElement
+    1253:1263:arjunasdk.uiauto.interfaces.UiElement registerElement(java.lang.String,pvt.arjunasdk.uiauto.api.ElementMetaData):253:263 -> addElement
+    1253:1263:void addElement(java.lang.String,java.util.Map):271 -> addElement
+    280:280:boolean isAutomatorPresent() -> isAutomatorPresent
+    284:286:java.lang.Object throwDefaultUiException(java.lang.String,java.lang.String,java.lang.String) -> throwDefaultUiException
+    294:299:java.lang.Object throwNullAutomatorException(java.lang.String) -> throwNullAutomatorException
+    305:311:java.lang.Object throwUndefinedElementException(java.lang.String,java.lang.String) -> throwUndefinedElementException
+    319:324:java.lang.Object throwNullElementException(java.lang.String,java.lang.String) -> throwNullElementException
+    333:333:java.lang.Object getUnderlyingEngine() -> getUnderlyingEngine
+    338:338:arjunasdk.uiauto.interfaces.UiElement elementWithId(java.lang.String) -> elementWithId
+    343:343:arjunasdk.uiauto.interfaces.UiElement elementWithName(java.lang.String) -> elementWithName
+    348:348:arjunasdk.uiauto.interfaces.UiElement elementWithClass(java.lang.String) -> elementWithClass
+    353:353:arjunasdk.uiauto.interfaces.UiElement elementWithCss(java.lang.String) -> elementWithCss
+    358:358:arjunasdk.uiauto.interfaces.UiElement elementWithLinkText(java.lang.String) -> elementWithLinkText
+    363:363:arjunasdk.uiauto.interfaces.UiElement elementWithPartialLinkText(java.lang.String) -> elementWithPartialLinkText
+    368:368:arjunasdk.uiauto.interfaces.UiElement elementWithXPath(java.lang.String) -> elementWithXPath
+    373:373:arjunasdk.uiauto.interfaces.UiElement elementWithXText(java.lang.String) -> elementWithXText
+    378:378:arjunasdk.uiauto.interfaces.UiElement elementWithXPartialText(java.lang.String) -> elementWithXPartialText
+    383:383:arjunasdk.uiauto.interfaces.UiElement elementWithXValue(java.lang.String) -> elementWithXValue
+    388:388:arjunasdk.uiauto.interfaces.UiElement elementWithXImageSource(java.lang.String) -> elementWithXImageSource
+    393:393:arjunasdk.uiauto.interfaces.UiElement elementOfXType(pvt.arjunasdk.uiauto.enums.UiElementType) -> elementOfXType
+    398:398:arjunasdk.uiauto.interfaces.UiElement elementBasedOnImage(java.lang.String) -> elementBasedOnImage
+    403:403:pvt.arjunasdk.uiauto.enums.UiDriverEngine getUiDriverEngineName() -> getUiDriverEngineName
+    408:408:java.lang.Object getUiDriverEngine() -> getUiDriverEngine
+    413:413:java.io.File takeScreenshot() -> takeScreenshot
+    418:419:void setAppTitle(java.lang.String) -> setAppTitle
+    423:423:java.lang.String getAppTitle() -> getAppTitle
+    428:429:void focusOnApp() -> focusOnApp
+    435:436:void confirmAlertIfPresent() -> confirmAlertIfPresent
+    440:441:void close() -> close
+    445:445:java.lang.String getCurrentWindow() -> getCurrentWindow
+    450:451:void switchToNewWindow() -> switchToNewWindow
+    455:456:void switchToWindow(java.lang.String) -> switchToWindow
+    460:461:void closeCurrentWindow() -> closeCurrentWindow
+    465:466:void goTo(java.lang.String) -> goTo
+    470:471:void refresh() -> refresh
+    475:476:void back() -> back
+    480:481:void forward() -> forward
+    485:486:void waitForBody() -> waitForBody
+    490:491:void switchToFrame(int) -> switchToFrame
+    495:496:void switchToFrame(java.lang.String) -> switchToFrame
+    500:501:void switchToDefaultFrame() -> switchToDefaultFrame
+    505:505:boolean areImagesSimilar(java.io.File,java.io.File,java.lang.Double) -> areImagesSimilar
+    510:510:boolean areImagesSimilar(java.lang.String,java.io.File) -> areImagesSimilar
+    515:515:boolean areImagesSimilar(java.lang.String,java.io.File,java.lang.Double) -> areImagesSimilar
+    520:520:boolean areImagesSimilar(java.lang.String,java.lang.String) -> areImagesSimilar
+    525:525:boolean areImagesSimilar(java.io.File,java.io.File) -> areImagesSimilar
+    530:531:void switchToWebContext() -> switchToWebContext
+    535:536:void switchToNativeContext() -> switchToNativeContext
 arjunasdk.uiauto.pageobject.BasePageSection -> arjunasdk.uiauto.pageobject.BasePageSection:
     31:32:void <init>(java.lang.String,arjunasdk.uiauto.interfaces.Page,arjunasdk.uiauto.interfaces.UiDriver) -> <init>
     39:40:void <init>(java.lang.String,arjunasdk.uiauto.interfaces.Page,arjunasdk.uiauto.interfaces.UiDriver,java.lang.String) -> <init>
@@ -2709,10 +2707,10 @@ pvt.arjunasdk.uiauto.selenium.SeleniumWebUiDriver -> com.autocognite.pvt.bj:
     230:231:void setHttpProxy(org.openqa.selenium.Proxy,java.lang.String) -> a
     234:235:void setSslProxy(org.openqa.selenium.Proxy,java.lang.String) -> b
     241:252:arjunasdk.uiauto.interfaces.UiElement declareElement(pvt.arjunasdk.uiauto.api.ElementMetaData) -> declareElement
-    21777:21777:arjunasdk.uiauto.interfaces.UiElement createDefaultElementSkeleton(pvt.arjunasdk.uiauto.api.ElementMetaData):777:777 -> declareElement
-    21777:21777:arjunasdk.uiauto.interfaces.UiElement declareElement(pvt.arjunasdk.uiauto.api.ElementMetaData):241 -> declareElement
-    22773:22773:pvt.arjunasdk.selenium.api.WDMediator createMediatorSkeleton(arjunasdk.uiauto.interfaces.UiElement):773:773 -> declareElement
-    22773:22773:arjunasdk.uiauto.interfaces.UiElement declareElement(pvt.arjunasdk.uiauto.api.ElementMetaData):247 -> declareElement
+    21772:21772:arjunasdk.uiauto.interfaces.UiElement createDefaultElementSkeleton(pvt.arjunasdk.uiauto.api.ElementMetaData):772:772 -> declareElement
+    21772:21772:arjunasdk.uiauto.interfaces.UiElement declareElement(pvt.arjunasdk.uiauto.api.ElementMetaData):241 -> declareElement
+    22768:22768:pvt.arjunasdk.selenium.api.WDMediator createMediatorSkeleton(arjunasdk.uiauto.interfaces.UiElement):768:768 -> declareElement
+    22768:22768:arjunasdk.uiauto.interfaces.UiElement declareElement(pvt.arjunasdk.uiauto.api.ElementMetaData):247 -> declareElement
     257:277:org.openqa.selenium.By getFinderType(java.lang.String,java.lang.String) -> a
     281:287:pvt.arjunasdk.uiauto.enums.UiElementType getElementType(org.openqa.selenium.WebElement) -> getElementType
     292:292:org.openqa.selenium.TakesScreenshot getScreenshotAugmentedDriver() -> m
@@ -2777,85 +2775,85 @@ pvt.arjunasdk.uiauto.selenium.SeleniumWebUiDriver -> com.autocognite.pvt.bj:
     404:405:void waitForElementPresence(org.openqa.selenium.By) -> waitForElementPresence
     40187:40187:org.openqa.selenium.support.ui.WebDriverWait getWaiter():187:187 -> waitForElementPresence
     40187:40187:void waitForElementPresence(org.openqa.selenium.By):404 -> waitForElementPresence
-    410:415:void waitForElementAbsence(org.openqa.selenium.By) -> waitForElementAbsence
+    409:410:void waitForElementAbsence(org.openqa.selenium.By) -> waitForElementAbsence
     41187:41187:org.openqa.selenium.support.ui.WebDriverWait getWaiter():187:187 -> waitForElementAbsence
-    41187:41187:void waitForElementAbsence(org.openqa.selenium.By):410 -> waitForElementAbsence
-    418:419:void waitForElementClickability(org.openqa.selenium.By) -> a
+    41187:41187:void waitForElementAbsence(org.openqa.selenium.By):409 -> waitForElementAbsence
+    413:414:void waitForElementClickability(org.openqa.selenium.By) -> a
     42187:42187:org.openqa.selenium.support.ui.WebDriverWait getWaiter():187:187 -> a
-    42187:42187:void waitForElementClickability(org.openqa.selenium.By):418 -> a
-    422:423:void waitForElementClickability(org.openqa.selenium.WebElement) -> a
+    42187:42187:void waitForElementClickability(org.openqa.selenium.By):413 -> a
+    417:418:void waitForElementClickability(org.openqa.selenium.WebElement) -> a
     43187:43187:org.openqa.selenium.support.ui.WebDriverWait getWaiter():187:187 -> a
-    43187:43187:void waitForElementClickability(org.openqa.selenium.WebElement):422 -> a
-    427:428:void waitForElementVisibility(org.openqa.selenium.By) -> waitForElementVisibility
+    43187:43187:void waitForElementClickability(org.openqa.selenium.WebElement):417 -> a
+    422:423:void waitForElementVisibility(org.openqa.selenium.By) -> waitForElementVisibility
     44187:44187:org.openqa.selenium.support.ui.WebDriverWait getWaiter():187:187 -> waitForElementVisibility
-    44187:44187:void waitForElementVisibility(org.openqa.selenium.By):427 -> waitForElementVisibility
-    432:433:void waitForElementInvisibility(org.openqa.selenium.By) -> waitForElementInvisibility
+    44187:44187:void waitForElementVisibility(org.openqa.selenium.By):422 -> waitForElementVisibility
+    427:428:void waitForElementInvisibility(org.openqa.selenium.By) -> waitForElementInvisibility
     45187:45187:org.openqa.selenium.support.ui.WebDriverWait getWaiter():187:187 -> waitForElementInvisibility
-    45187:45187:void waitForElementInvisibility(org.openqa.selenium.By):432 -> waitForElementInvisibility
-    438:441:boolean isElementPresent(org.openqa.selenium.By) -> isElementPresent
-    449:452:boolean isElementAbsent(org.openqa.selenium.By) -> isElementAbsent
-    460:463:boolean isElementVisible(org.openqa.selenium.By) -> isElementVisible
-    471:474:boolean isElementInvisible(org.openqa.selenium.By) -> isElementInvisible
-    483:484:void focus(org.openqa.selenium.WebElement) -> focus
-    487:487:boolean isSelected(org.openqa.selenium.WebElement) -> b
-    491:498:void click(org.openqa.selenium.WebElement) -> click
-    501:503:org.openqa.selenium.WebElement click(org.openqa.selenium.By) -> b
-    508:512:org.openqa.selenium.WebElement clickIfPresent(org.openqa.selenium.By) -> c
-    45501:45503:org.openqa.selenium.WebElement click(org.openqa.selenium.By):501:503 -> c
-    45501:45503:org.openqa.selenium.WebElement clickIfPresent(org.openqa.selenium.By):508 -> c
-    516:519:void clickIfNotSelected(org.openqa.selenium.WebElement) -> clickIfNotSelected
-    46487:46487:boolean isSelected(org.openqa.selenium.WebElement):487:487 -> clickIfNotSelected
-    46487:46487:void clickIfNotSelected(org.openqa.selenium.WebElement):516 -> clickIfNotSelected
-    522:525:void enterText(org.openqa.selenium.WebElement,java.lang.String) -> enterText
-    528:532:void setText(org.openqa.selenium.WebElement,java.lang.String) -> setText
-    535:536:void clearText(org.openqa.selenium.WebElement) -> clearText
-    539:539:boolean isChecked(org.openqa.selenium.WebElement) -> c
-    47487:47487:boolean isSelected(org.openqa.selenium.WebElement):487:487 -> c
-    47487:47487:boolean isChecked(org.openqa.selenium.WebElement):539 -> c
-    543:546:void check(org.openqa.selenium.WebElement) -> check
-    549:552:void uncheck(org.openqa.selenium.WebElement) -> uncheck
-    555:556:void toggle(org.openqa.selenium.WebElement) -> toggle
-    562:563:void selectDropDownLabel(org.openqa.selenium.support.ui.Select,java.lang.String) -> selectDropDownLabel
-    566:567:void selectDropDownValue(org.openqa.selenium.support.ui.Select,java.lang.String) -> selectDropDownValue
-    570:571:void selectDropDownOptionAtIndex(org.openqa.selenium.support.ui.Select,int) -> selectDropDownOptionAtIndex
-    574:578:boolean isDropDownSelectedText(org.openqa.selenium.support.ui.Select,java.lang.String) -> isDropDownSelectedText
-    582:586:boolean isDropDownSelectedValue(org.openqa.selenium.support.ui.Select,java.lang.String) -> isDropDownSelectedValue
-    590:591:boolean isDropDownSelectedIndex(org.openqa.selenium.support.ui.Select,int) -> isDropDownSelectedIndex
-    595:599:java.util.List getDropDownOptionLabels(org.openqa.selenium.support.ui.Select) -> getDropDownOptionLabels
-    603:607:java.util.List getDropDownOptionValues(org.openqa.selenium.support.ui.Select) -> getDropDownOptionValues
-    611:611:int getDropDownOptionCount(org.openqa.selenium.support.ui.Select) -> getDropDownOptionCount
-    615:615:org.openqa.selenium.support.ui.Select convertToSelectElement(org.openqa.selenium.WebElement) -> convertToSelectElement
-    622:627:org.openqa.selenium.WebElement chooseElementBasedOnText(java.util.List,java.lang.String) -> a
-    631:636:org.openqa.selenium.WebElement chooseElementBasedOnValue(java.util.List,java.lang.String) -> chooseElementBasedOnValue
-    640:640:org.openqa.selenium.WebElement getParent(org.openqa.selenium.WebElement) -> d
-    644:650:org.openqa.selenium.WebElement chooseElementBasedOnParentText(java.util.List,java.lang.String) -> chooseElementBasedOnParentText
-    654:659:boolean isSelectedText(java.util.List,java.lang.String) -> b
-    663:668:boolean isSelectedValue(java.util.List,java.lang.String) -> isSelectedValue
-    672:672:boolean isSelectedIndex(java.util.List,int) -> isSelectedIndex
-    676:682:boolean isSelectedElementParentText(java.util.List,java.lang.String) -> isSelectedElementParentText
-    686:690:java.util.List getRadioButtonLabels(java.util.List) -> getRadioButtonLabels
-    694:698:java.util.List getRadioButtonValues(java.util.List) -> getRadioButtonValues
-    703:703:java.lang.String getText(org.openqa.selenium.WebElement) -> getText
-    707:707:java.lang.String getValue(org.openqa.selenium.WebElement) -> getValue
-    711:711:java.lang.String getAttribute(org.openqa.selenium.WebElement,java.lang.String) -> getAttribute
-    717:717:org.openqa.selenium.interactions.Actions getActionChain() -> n
+    45187:45187:void waitForElementInvisibility(org.openqa.selenium.By):427 -> waitForElementInvisibility
+    433:436:boolean isElementPresent(org.openqa.selenium.By) -> isElementPresent
+    444:447:boolean isElementAbsent(org.openqa.selenium.By) -> isElementAbsent
+    455:458:boolean isElementVisible(org.openqa.selenium.By) -> isElementVisible
+    466:469:boolean isElementInvisible(org.openqa.selenium.By) -> isElementInvisible
+    478:479:void focus(org.openqa.selenium.WebElement) -> focus
+    482:482:boolean isSelected(org.openqa.selenium.WebElement) -> b
+    486:493:void click(org.openqa.selenium.WebElement) -> click
+    496:498:org.openqa.selenium.WebElement click(org.openqa.selenium.By) -> b
+    503:507:org.openqa.selenium.WebElement clickIfPresent(org.openqa.selenium.By) -> c
+    45496:45498:org.openqa.selenium.WebElement click(org.openqa.selenium.By):496:498 -> c
+    45496:45498:org.openqa.selenium.WebElement clickIfPresent(org.openqa.selenium.By):503 -> c
+    511:514:void clickIfNotSelected(org.openqa.selenium.WebElement) -> clickIfNotSelected
+    46482:46482:boolean isSelected(org.openqa.selenium.WebElement):482:482 -> clickIfNotSelected
+    46482:46482:void clickIfNotSelected(org.openqa.selenium.WebElement):511 -> clickIfNotSelected
+    517:520:void enterText(org.openqa.selenium.WebElement,java.lang.String) -> enterText
+    523:527:void setText(org.openqa.selenium.WebElement,java.lang.String) -> setText
+    530:531:void clearText(org.openqa.selenium.WebElement) -> clearText
+    534:534:boolean isChecked(org.openqa.selenium.WebElement) -> c
+    47482:47482:boolean isSelected(org.openqa.selenium.WebElement):482:482 -> c
+    47482:47482:boolean isChecked(org.openqa.selenium.WebElement):534 -> c
+    538:541:void check(org.openqa.selenium.WebElement) -> check
+    544:547:void uncheck(org.openqa.selenium.WebElement) -> uncheck
+    550:551:void toggle(org.openqa.selenium.WebElement) -> toggle
+    557:558:void selectDropDownLabel(org.openqa.selenium.support.ui.Select,java.lang.String) -> selectDropDownLabel
+    561:562:void selectDropDownValue(org.openqa.selenium.support.ui.Select,java.lang.String) -> selectDropDownValue
+    565:566:void selectDropDownOptionAtIndex(org.openqa.selenium.support.ui.Select,int) -> selectDropDownOptionAtIndex
+    569:573:boolean isDropDownSelectedText(org.openqa.selenium.support.ui.Select,java.lang.String) -> isDropDownSelectedText
+    577:581:boolean isDropDownSelectedValue(org.openqa.selenium.support.ui.Select,java.lang.String) -> isDropDownSelectedValue
+    585:586:boolean isDropDownSelectedIndex(org.openqa.selenium.support.ui.Select,int) -> isDropDownSelectedIndex
+    590:594:java.util.List getDropDownOptionLabels(org.openqa.selenium.support.ui.Select) -> getDropDownOptionLabels
+    598:602:java.util.List getDropDownOptionValues(org.openqa.selenium.support.ui.Select) -> getDropDownOptionValues
+    606:606:int getDropDownOptionCount(org.openqa.selenium.support.ui.Select) -> getDropDownOptionCount
+    610:610:org.openqa.selenium.support.ui.Select convertToSelectElement(org.openqa.selenium.WebElement) -> convertToSelectElement
+    617:622:org.openqa.selenium.WebElement chooseElementBasedOnText(java.util.List,java.lang.String) -> a
+    626:631:org.openqa.selenium.WebElement chooseElementBasedOnValue(java.util.List,java.lang.String) -> chooseElementBasedOnValue
+    635:635:org.openqa.selenium.WebElement getParent(org.openqa.selenium.WebElement) -> d
+    639:645:org.openqa.selenium.WebElement chooseElementBasedOnParentText(java.util.List,java.lang.String) -> chooseElementBasedOnParentText
+    649:654:boolean isSelectedText(java.util.List,java.lang.String) -> b
+    658:663:boolean isSelectedValue(java.util.List,java.lang.String) -> isSelectedValue
+    667:667:boolean isSelectedIndex(java.util.List,int) -> isSelectedIndex
+    671:677:boolean isSelectedElementParentText(java.util.List,java.lang.String) -> isSelectedElementParentText
+    681:685:java.util.List getRadioButtonLabels(java.util.List) -> getRadioButtonLabels
+    689:693:java.util.List getRadioButtonValues(java.util.List) -> getRadioButtonValues
+    698:698:java.lang.String getText(org.openqa.selenium.WebElement) -> getText
+    702:702:java.lang.String getValue(org.openqa.selenium.WebElement) -> getValue
+    706:706:java.lang.String getAttribute(org.openqa.selenium.WebElement,java.lang.String) -> getAttribute
+    712:712:org.openqa.selenium.interactions.Actions getActionChain() -> n
     48179:48179:org.openqa.selenium.WebDriver getDriver():179:179 -> n
-    48179:48179:org.openqa.selenium.interactions.Actions getActionChain():717 -> n
-    721:723:void moveToElementAndClick(org.openqa.selenium.WebElement) -> e
-    726:729:void hover(org.openqa.selenium.By) -> d
-    733:735:void hover(org.openqa.selenium.WebElement) -> hover
-    739:746:void hoverAndClick(org.openqa.selenium.WebElement) -> hoverAndClick
+    48179:48179:org.openqa.selenium.interactions.Actions getActionChain():712 -> n
+    716:718:void moveToElementAndClick(org.openqa.selenium.WebElement) -> e
+    721:724:void hover(org.openqa.selenium.By) -> d
+    728:730:void hover(org.openqa.selenium.WebElement) -> hover
+    734:741:void hoverAndClick(org.openqa.selenium.WebElement) -> hoverAndClick
     48187:48187:org.openqa.selenium.support.ui.WebDriverWait getWaiter():187:187 -> hoverAndClick
-    48187:48187:void hoverAndClick(org.openqa.selenium.WebElement):741 -> hoverAndClick
-    48721:48723:void moveToElementAndClick(org.openqa.selenium.WebElement):721:723 -> hoverAndClick
-    48721:48723:void hoverAndClick(org.openqa.selenium.WebElement):744 -> hoverAndClick
-    749:759:void hoverAndClick(org.openqa.selenium.By,org.openqa.selenium.By) -> hoverAndClick
+    48187:48187:void hoverAndClick(org.openqa.selenium.WebElement):736 -> hoverAndClick
+    48716:48718:void moveToElementAndClick(org.openqa.selenium.WebElement):716:718 -> hoverAndClick
+    48716:48718:void hoverAndClick(org.openqa.selenium.WebElement):739 -> hoverAndClick
+    744:754:void hoverAndClick(org.openqa.selenium.By,org.openqa.selenium.By) -> hoverAndClick
     49187:49187:org.openqa.selenium.support.ui.WebDriverWait getWaiter():187:187 -> hoverAndClick
-    49187:49187:void hoverAndClick(org.openqa.selenium.By,org.openqa.selenium.By):753 -> hoverAndClick
-    763:765:void rightClick(org.openqa.selenium.WebElement) -> rightClick
-    768:770:void rightClickAndClick(org.openqa.selenium.By,org.openqa.selenium.By) -> rightClickAndClick
-    773:773:pvt.arjunasdk.selenium.api.WDMediator createMediatorSkeleton(arjunasdk.uiauto.interfaces.UiElement) -> a
-    777:777:arjunasdk.uiauto.interfaces.UiElement createDefaultElementSkeleton(pvt.arjunasdk.uiauto.api.ElementMetaData) -> a
+    49187:49187:void hoverAndClick(org.openqa.selenium.By,org.openqa.selenium.By):748 -> hoverAndClick
+    758:760:void rightClick(org.openqa.selenium.WebElement) -> rightClick
+    763:765:void rightClickAndClick(org.openqa.selenium.By,org.openqa.selenium.By) -> rightClickAndClick
+    768:768:pvt.arjunasdk.selenium.api.WDMediator createMediatorSkeleton(arjunasdk.uiauto.interfaces.UiElement) -> a
+    772:772:arjunasdk.uiauto.interfaces.UiElement createDefaultElementSkeleton(pvt.arjunasdk.uiauto.api.ElementMetaData) -> a
 pvt.arjunasdk.uiauto.selenium.SeleniumWebUiDriver$1 -> com.autocognite.pvt.bk:
     int[] $SwitchMap$arjunasdk$enums$Browser -> a
     int[] $SwitchMap$pvt$arjunasdk$uiauto$enums$WebIdentifyBy -> b
@@ -11975,10 +11973,8 @@ pvt.unitee.testobject.lib.loader.tree.ExecutionSlotsCreator -> com.autocognite.p
     7089:7089:java.util.List getContainerList(int,java.util.List):165 -> a
     8089:8089:pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getClassDefinition():89:89 -> a
     8089:8089:java.util.List getContainerList(int,java.util.List):175 -> a
-    8200:8200:java.lang.String pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition.getQualifiedName():200:200 -> a
-    8200:8200:java.util.List getContainerList(int,java.util.List):179 -> a
-    9106:9106:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():106:106 -> a
-    9106:9106:java.util.List getContainerList(int,java.util.List):203 -> a
+    8106:8106:java.lang.reflect.Method pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition.getMethod():106:106 -> a
+    8106:8106:java.util.List getContainerList(int,java.util.List):203 -> a
     241:248:pvt.unitee.runner.lib.slots.TestSlotExecutor next() -> b
 pvt.unitee.testobject.lib.loader.tree.NonTestNode -> com.autocognite.pvt.ra:
     6:7:void <init>(java.lang.String) -> <init>

@@ -22,6 +22,7 @@ import java.awt.Toolkit;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
@@ -75,25 +76,39 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 	
 	public SeleniumWebUiDriver(ElementLoaderType loaderType) throws Exception{
 		super(UiAutomationContext.PC_WEB, loaderType);
-		initDriver();
+	}
+		
+	public SeleniumWebUiDriver() throws Exception{
+		this(ElementLoaderType.AUTOMATOR);
+	}
+	
+	@Override
+	public void init() throws Exception{
+		//this.setBrowser(Browser.valueOf(Batteries.value(UiAutomatorPropertyType.BROWSER_PC_DEFAULT).asString().toUpperCase()));
+		this.setWaitTime(Batteries.value(UiAutomatorPropertyType.BROWSER_PC_MAXWAIT).asInt());
+		this.setUiTestEngineName(UiDriverEngine.WEBDRIVER);		
+	}
+	
+	@Override
+	public void setCapabilities(Map<String,?> caps){
+		this.capabilities = new DesiredCapabilities(caps);
+	}
+	
+	@Override
+	public void load(){
 		switch (this.getBrowser()){
 		case FIREFOX:
-			setDriver(getFirefoxDriver());
+			setDriver(new FirefoxDriver(capabilities));
 			break;
 		case CHROME:
-			setDriver(getChromeDriver());
+			setDriver(new ChromeDriver(capabilities));
 			break;
 		case SAFARI:
-			setDriver(getSafariDriver());
-			break;
-		default:; 
+			setDriver(new SafariDriver(capabilities));
+			break; 
 		}
 		initWait();
 		maximizeWindow();
-	}
-	
-	public SeleniumWebUiDriver() throws Exception{
-		this(ElementLoaderType.AUTOMATOR);
 	}
 
 	public void maximizeWindow(){
@@ -105,67 +120,6 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 			// This dimension is webdriver Dimension
 			getDriver().manage().window().setSize(new Dimension((int)d.getWidth(), (int) d.getHeight()));
 		}
-	}
-
-	public DesiredCapabilities getFireFoxCapabilitiesSkeleton() { 
-		return DesiredCapabilities.firefox();
-	}
-
-	public DesiredCapabilities getChromeCapabilitiesSkeleton() {
-		return DesiredCapabilities.chrome();
-	}
-
-	public DesiredCapabilities getSafariCapabilitiesSkeleton() {
-		return DesiredCapabilities.safari();
-	}
-
-	public WebDriver getFirefoxDriver() throws Exception {
-		this.setAppTitle(Batteries.value(UiAutomatorPropertyType.FIREFOX_WINDOWNAME).asString());
-		String os = SystemBatteries.getOSName();
-		String binaryName = null;
-		if (os.startsWith("Window")){
-			binaryName = "geckodriver.exe";
-		} else if (os.startsWith("Mac")) {
-			binaryName = "geckodriver";
-		}
-		System.setProperty("webdriver.gecko.driver", Batteries.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + binaryName);
-
-		capabilities = getFireFoxCapabilitiesSkeleton();
-		//driver = new FirefoxDriver(capabilities);
-		FirefoxProfile profile = new FirefoxProfile();
-		//profile..setEnableNativeEvents(true);
-		capabilities.setCapability(FirefoxDriver.PROFILE, profile);
-		setCapabilities(capabilities);
-		return new FirefoxDriver(capabilities);
-	}
-
-	public WebDriver getChromeDriver() throws Exception {
-		this.setAppTitle(Batteries.value(UiAutomatorPropertyType.CHROME_WINDOWNAME).asString());
-		String os = SystemBatteries.getOSName();
-		String chromeDriverBinaryName = null;
-		if (os.startsWith("Window")){
-			chromeDriverBinaryName = "chromedriver.exe";
-		} else if (os.startsWith("Mac")) {
-			chromeDriverBinaryName = "chromedriver";
-		}
-
-		System.setProperty("webdriver.chrome.driver", Batteries.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + chromeDriverBinaryName);
-		capabilities = getChromeCapabilitiesSkeleton();
-		setCapabilities(capabilities);
-		return new ChromeDriver(capabilities);
-	}
-
-	public WebDriver getSafariDriver() throws Exception {
-		this.setAppTitle(Batteries.value(UiAutomatorPropertyType.SAFARI_WINDOWNAME).asString());
-		capabilities = getSafariCapabilitiesSkeleton();
-		setCapabilities(capabilities);
-		return new SafariDriver(capabilities);
-	}
-
-	public void initDriver() throws Exception {
-		this.setBrowser(Browser.valueOf(Batteries.value(UiAutomatorPropertyType.BROWSER_PC_DEFAULT).asString().toUpperCase()));
-		this.setWaitTime(Batteries.value(UiAutomatorPropertyType.BROWSER_PC_MAXWAIT).asInt());
-		this.setUiTestEngineName(UiDriverEngine.WEBDRIVER);		
 	}
 
 	public void initWait() {

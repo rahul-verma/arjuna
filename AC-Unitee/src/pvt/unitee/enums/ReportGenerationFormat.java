@@ -23,5 +23,6 @@ package pvt.unitee.enums;
  */
 
 public enum ReportGenerationFormat {
-	EXCEL
+	EXCEL,
+	JXML
 }

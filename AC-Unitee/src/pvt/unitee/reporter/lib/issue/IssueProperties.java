@@ -86,6 +86,14 @@ public class IssueProperties
 	public String ename() throws Exception {
 		return this.value(IssueAttribute.ENAME).asString();
 	}
+	
+	public String emessage() throws Exception {
+		return this.value(IssueAttribute.EMSG).asString();
+	}
+	
+	public String etrace() throws Exception {
+		return this.value(IssueAttribute.ETRACE).asString();
+	}
 
 	public int id() throws Exception {
 		Value issue = this.value(IssueAttribute.ID);

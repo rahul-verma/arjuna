@@ -18,6 +18,8 @@
  ******************************************************************************/
 package arjunasdk.uiauto.interfaces;
 
+import java.util.Map;
+
 import pvt.arjunasdk.uiauto.api.BaseUiDriver;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.api.appactions.BrowserActionHandler;
@@ -37,4 +39,10 @@ public interface UiDriver extends BaseUiDriver, NativeWindowActionHandler, Eleme
 	void switchToNativeContext() throws Exception;
 	ElementLoaderType getElementLoaderType() throws Exception;
 	void setElementLoaderType(ElementLoaderType loaderType) throws Exception;
+
+	void load() throws Exception;
+
+	void setCapabilities(Map<String, ?> caps);
+
+	void init() throws Exception;
 }

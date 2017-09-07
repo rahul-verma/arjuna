@@ -50,9 +50,9 @@ public class CentralReportGenerator {
 	}
 
 	public void generate(){		
+		issueGenerator.generate();
 		executionGenerator.generate();
 		ignoredGenerator.generate();
-		issueGenerator.generate();
 		fixtureGenerator.generate();
 		activityGenerator.generate();
 	}
