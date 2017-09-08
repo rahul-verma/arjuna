@@ -25,6 +25,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.io.FileUtils;
+
 import com.typesafe.config.ConfigException;
 import com.typesafe.config.ConfigObject;
 
@@ -59,7 +61,7 @@ import unitee.annotations.DataMethodContainer;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.3.5-b";
+	private String version = "0.3.6-b";
 
 	private Map<String,String> cliHashMap = null;
 	private Map<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -244,6 +246,7 @@ public enum ArjunaSingleton {
 		HoconReader uReader = new HoconStringReader(replaced);
 		uReader.process();
 		Batteries.processArjunaOptions(uReader.getProperties());
+		createReportDir();
 		//integrator.enumerate();
 		
 //		Log log = new Log();
@@ -283,6 +286,29 @@ public enum ArjunaSingleton {
 			new StringValue(customTestDir)
 			);
 			Batteries.processArjunaOptions(testOptions);
+		}
+	}
+	
+	
+	private void createReportDir() throws Exception {
+		String centralReportDirPath = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString(); 
+		
+		File centralDirObj = new File(centralReportDirPath);
+		//FileUtils.forceMkdir(arg0 );
+		if (!centralDirObj.exists()){
+			FileUtils.forceMkdir(centralDirObj);
+			//dirObj.mkdirs();
+		} else {
+			FileSystemBatteries.deleteDirectory(centralReportDirPath);
+		}
+		
+		String dirPath = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT).asString(); 
+		
+		File dirObj = new File(dirPath);
+		//FileUtils.forceMkdir(arg0 );
+		if (!dirObj.exists()){
+			FileUtils.forceMkdir(dirObj);
+			//dirObj.mkdirs();
 		}
 	}
 	

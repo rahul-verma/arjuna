@@ -27,13 +27,10 @@ import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.config.Batteries;
 
 public class AppiumNativeUiDriver extends AbstractAppiumUiDriver {
-	
-	public AppiumNativeUiDriver() throws Exception{
-		super(Batteries.value(UiAutomatorPropertyType.APP_MOBILE_PATH).asString());
-	}
-	
-	public AppiumNativeUiDriver(String appPath) throws Exception{
-		super(appPath);
+
+	public AppiumNativeUiDriver() throws Exception {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	protected boolean checkNullIdentifier(String identifier, String idValue) throws Exception{
@@ -50,9 +47,10 @@ public class AppiumNativeUiDriver extends AbstractAppiumUiDriver {
 		// do nothing
 	}
 	
-	@Override
+	
 	public void init() throws Exception{
-		super.init(UiAutomationContext.MOBILE_WEB, this.getAppPath());		
+		super.init();
+		this.setAutomationContext(UiAutomationContext.MOBILE_NATIVE);
 	}
 
 }

@@ -56,7 +56,6 @@ public class DefaultReporter implements Reporter{
 	
 	public DefaultReporter() throws Exception{
 		FileUtils.forceMkdir(new File(getRunIDReportDir()));	
-		String reportDir = getRunIDReportDir();
 		this.addTestResultObserver(new JsonTestResultWriter());
 		this.addIgnoredTestObserver(new JsonIgnoredTestWriter());
 		this.addIssueObserver(new JsonIssueWriter());

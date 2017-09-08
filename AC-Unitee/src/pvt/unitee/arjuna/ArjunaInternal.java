@@ -93,6 +93,8 @@ public class ArjunaInternal {
 	private static boolean runSuccessful = false;
 	private static boolean tearDownSuccessful = false;
 	
+	public static boolean displayPageElementProcessing = false;
+	
 	public static void setCliConfigurator(CLIConfigurator cliConfigurator){
 		ArjunaSingleton.INSTANCE.setCliConfigurator(cliConfigurator);
 	}

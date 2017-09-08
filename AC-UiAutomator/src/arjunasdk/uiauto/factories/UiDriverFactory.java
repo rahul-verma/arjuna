@@ -46,45 +46,26 @@ public class UiDriverFactory {
 	
 	public static UiDriver getSelenium() throws Exception{
 		SeleniumBuilder builder = new DefaultSeleniumBuilder();
-		UiDriver driver = builder.build();
-		driver.init();
-		driver.load();
-		return driver;
+		return builder.build();
 	}
 	
 	private static UiDriver getAppiumWeb() throws Exception{
-		UiDriver driver =  new AppiumWebUiDriver();
-		driver.init();
-		driver.load();
-		return driver;
+		AppiumBuilder builder = new DefaultAppiumBuilder();
+		builder.context(UiAutomationContext.MOBILE_WEB);
+		return builder.build();
 	}
 	
 	private static UiDriver getAppiumNative() throws Exception{
-		UiDriver driver =  new AppiumNativeUiDriver();
-		driver.init();
-		driver.load();
-		return driver;
+		AppiumBuilder builder = new DefaultAppiumBuilder();
+		builder.context(UiAutomationContext.MOBILE_NATIVE);
+		return builder.build();
 	}
 	
 	private static UiDriver getAppiumNative(String appPath) throws Exception{
-		UiDriver driver =  new AppiumNativeUiDriver(appPath);
-		driver.init();
-		driver.load();
-		return driver;
-	}
-	
-	private static UiDriver getAppiumHybrid() throws Exception{
-		UiDriver driver =  new AppiumHybridUiDriver();
-		driver.init();
-		driver.load();
-		return driver;
-	}
-	
-	private static UiDriver getAppiumHybrid(String appPath) throws Exception{
-		UiDriver driver =  new AppiumHybridUiDriver(appPath);
-		driver.init();
-		driver.load();
-		return driver;
+		AppiumBuilder builder = new DefaultAppiumBuilder();
+		builder.context(UiAutomationContext.MOBILE_NATIVE);
+		builder.appPath(appPath);
+		return builder.build();
 	}
 	
 	private static UiDriver getSikuli() throws Exception{
@@ -103,10 +84,6 @@ public class UiDriverFactory {
 		return getAppiumNative();
 	}
 	
-	public static UiDriver getMobileHybridUiDriver() throws Exception{
-		return getAppiumHybrid();
-	}
-	
 	public static UiDriver getMobileNativeUiDriver(String appPath) throws Exception{
 		if (appPath == null){
 			throw new Problem(
@@ -119,18 +96,6 @@ public class UiDriverFactory {
 		return getAppiumNative(appPath);
 	}
 	
-	public static UiDriver getMobileHybridUiDriver(String appPath) throws Exception{
-		if (appPath == null){
-			throw new Problem(
-					Batteries.getComponentName("UI_AUTOMATOR"),
-					"UiDriver Factory",
-					"getMobileNativeAutomator",
-					UiAutomator.problem.FACTORY_AUTOMATOR_MOBILE_NULL_APP_PATH,
-					Batteries.getProblemText(UiAutomator.problem.FACTORY_AUTOMATOR_MOBILE_NULL_APP_PATH));
-			}
-		return getAppiumHybrid(appPath);
-	}
-	
 	public static UiDriver getScreenUiDriver() throws Exception{
 		return getSikuli();
 	}
@@ -140,7 +105,7 @@ public class UiDriverFactory {
 		case PC_WEB: return getSelenium();
 		case MOBILE_WEB: return getAppiumWeb();
 		case MOBILE_NATIVE: return getAppiumNative();
-		case SCREEN: return getAppiumHybrid();
+		case SCREEN: return getScreenUiDriver();
 		default: 
 			return throwUnsupportedAutomationContextException(context);
 		}

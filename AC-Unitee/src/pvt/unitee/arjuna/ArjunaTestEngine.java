@@ -79,7 +79,6 @@ public class ArjunaTestEngine implements TestEngine{
 	public void initReporter() throws Exception {
 		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTRUNNER_CREATE_START));
 		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTREPORTER_CREATE_START));
-		archive();
 		SummaryResult.init();
 		ArjunaSingleton.INSTANCE.setCentralExecState(new GlobalState());
 		Reporter reporter = new DefaultReporter();
@@ -148,19 +147,11 @@ public class ArjunaTestEngine implements TestEngine{
 		generator.setUp();
 		generator.generate();
 		generator.tearDown();
+		archive();
 	}
 	
 	protected String getReportDir() throws Exception {
-		String dirPath = Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT).asString(); 
-		
-		File dirObj = new File(dirPath);
-		//FileUtils.forceMkdir(arg0 );
-		if (!dirObj.exists()){
-			FileUtils.forceMkdir(dirObj);
-			//dirObj.mkdirs();
-		}
-		
-		return dirPath;
+		return Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT).asString();
 	}
 	
 	private String getArchivesDir() throws Exception{
@@ -168,43 +159,46 @@ public class ArjunaTestEngine implements TestEngine{
 	}
 	
 	protected void archive() throws Exception{
-		String dirPath = Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString(); 
-		
-		File dirObj = new File(dirPath);
-		//FileUtils.forceMkdir(arg0 );
-		if (!dirObj.exists()){
-			FileUtils.forceMkdir(dirObj);
-			//dirObj.mkdirs();
-		}
+//		String dirPath = Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString(); 
+//		
+//		File dirObj = new File(dirPath);
+//		//FileUtils.forceMkdir(arg0 );
+//		if (!dirObj.exists()){
+//			FileUtils.forceMkdir(dirObj);
+//			//dirObj.mkdirs();
+//		}
 		
 		File centralReportDir = new File(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString());
 		String lastRuntimestamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date(centralReportDir.lastModified()));
 		String archiveDirForLatestTest = getArchivesDir() + "/" + lastRuntimestamp + "-" +  Batteries.value(ArjunaProperty.RUNID).asString();
-		FileUtils.forceMkdir(new File(archiveDirForLatestTest));
+		//FileUtils.forceMkdir(new File(archiveDirForLatestTest));
 		
 		File runReportDir = new File(this.getReportDir());
+		
+		FileUtils.copyDirectory(runReportDir, new File(archiveDirForLatestTest));
 
-		for (File f: runReportDir.listFiles()){
-			if (f.isHidden()) continue;
-			if (f.isDirectory()){
-				String targetPath = archiveDirForLatestTest + "/" + f.getName();
-				File targetDir = new File(targetPath);
-				try{
-					FileUtils.moveDirectory(f, targetDir);
-				} catch (Throwable e){
-					Console.displayError("Arjuna archives previous run's report contents at beginning of new run.");
-					Console.displayError("Arjuna faced a critical issue in archiving contents of report directory.");
-					Console.displayError("Please close any files that you have opened from the report directory and execute the run again.");
-					Console.displayError("Now Arjuna would attempt to delete any partial archive created and exit.");
-					Console.displayExceptionBlock(e);
-					try{
-						FileSystemBatteries.deleteDirectory(targetPath);
-					} catch (Throwable g){
-						//Console.displayError("Arjuna archives previous run's report contents at beginning of new run.");
-					}
-				}
-			}
-		}
+//		for (File f: runReportDir.listFiles()){
+//			if (f.isHidden()) continue;
+//			if (f.isDirectory()){
+//				String targetPath = archiveDirForLatestTest + "/" + f.getName();
+//				File targetDir = new File(targetPath);
+//				FileUtils.copyDirectory(srcDir, destDir);(f, targetDir);
+////				try{
+////					FileUtils.moveDirectory(f, targetDir);
+////				} catch (Throwable e){
+////					Console.displayError("Arjuna archives previous run's report contents at beginning of new run.");
+////					Console.displayError("Arjuna faced a critical issue in archiving contents of report directory.");
+////					Console.displayError("Please close any files that you have opened from the report directory and execute the run again.");
+////					Console.displayError("Now Arjuna would attempt to delete any partial archive created and exit.");
+////					Console.displayExceptionBlock(e);
+////					try{
+////						FileSystemBatteries.deleteDirectory(targetPath);
+////					} catch (Throwable g){
+////						//Console.displayError("Arjuna archives previous run's report contents at beginning of new run.");
+////					}
+////				}
+//			}
+//		}
 	}
 
 	/* (non-Javadoc)

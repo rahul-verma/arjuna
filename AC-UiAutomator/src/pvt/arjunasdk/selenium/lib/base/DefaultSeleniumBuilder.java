@@ -26,16 +26,17 @@ import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;
 
 public class DefaultSeleniumBuilder implements SeleniumBuilder {
-	private DesiredCapabilities caps = new DesiredCapabilities();
+	private DesiredCapabilities browserCaps = new DesiredCapabilities();
+	private DesiredCapabilities otherCaps = new DesiredCapabilities();
 	private UiAutomationContext context = UiAutomationContext.PC_WEB;
 	private String appTitle = null;
 	private Browser browser = null;
 	
 	public DefaultSeleniumBuilder() throws Exception{
-		caps = new DesiredCapabilities();
 		this.browser = Batteries.value(UiAutomatorPropertyType.BROWSER_PC_DEFAULT).asEnum(Browser.class);
 	}
 	
+	@Override
 	public void browser(Browser browser){
 		this.browser = browser;
 	}
@@ -45,7 +46,7 @@ public class DefaultSeleniumBuilder implements SeleniumBuilder {
 	 */
 	@Override
 	public void capabilities(DesiredCapabilities caps){
-		caps.merge(caps);
+		otherCaps.merge(caps);
 	}
 	
 	/* (non-Javadoc)
@@ -68,7 +69,9 @@ public class DefaultSeleniumBuilder implements SeleniumBuilder {
 			break;	
 		}
 		
-		selenium.setCapabilities(caps.asMap());
+		browserCaps.merge(otherCaps);
+		selenium.setCapabilities(browserCaps.asMap());
+		selenium.load();
 		return selenium;
 	}
 
@@ -96,11 +99,11 @@ public class DefaultSeleniumBuilder implements SeleniumBuilder {
 		}
 		System.setProperty("webdriver.gecko.driver", Batteries.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + binaryName);
 
-		caps = getFireFoxCapabilitiesSkeleton();
+		browserCaps = getFireFoxCapabilitiesSkeleton();
 		//driver = new FirefoxDriver(capabilities);
 		FirefoxProfile profile = new FirefoxProfile();
 		//profile..setEnableNativeEvents(true);
-		caps.setCapability(FirefoxDriver.PROFILE, profile);
+		browserCaps.setCapability(FirefoxDriver.PROFILE, profile);
 	}
 
 	private void setChromeCaps() throws Exception {
@@ -114,11 +117,12 @@ public class DefaultSeleniumBuilder implements SeleniumBuilder {
 		}
 
 		System.setProperty("webdriver.chrome.driver", Batteries.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + chromeDriverBinaryName);
-		caps = getChromeCapabilitiesSkeleton();
+		browserCaps = getChromeCapabilitiesSkeleton();
 	}
 
 	private void setSafariCaps() throws Exception {
 		this.appTitle = Batteries.value(UiAutomatorPropertyType.SAFARI_WINDOWNAME).asString();
-		caps = getSafariCapabilitiesSkeleton();
+		browserCaps = getSafariCapabilitiesSkeleton();
 	}
+
 }

@@ -23,9 +23,11 @@ import pvt.arjunasdk.uiauto.enums.MobileWebIdentifyBy;
 import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 
 public class AppiumWebUiDriver extends AbstractAppiumUiDriver {
-	public AppiumWebUiDriver() throws Exception{
-	}
 	
+	public AppiumWebUiDriver() throws Exception {
+		super();
+	}
+
 	protected boolean checkNullIdentifier(String identifier, String idValue) throws Exception{
 		return MobileWebIdentifyBy.valueOf(identifier) == null;
 	}
@@ -41,7 +43,8 @@ public class AppiumWebUiDriver extends AbstractAppiumUiDriver {
 	}
 	
 	public void init() throws Exception{
-		super.init(UiAutomationContext.MOBILE_WEB, null);		
+		super.init();
+		this.setAutomationContext(UiAutomationContext.MOBILE_WEB);
 	}
 	
 }

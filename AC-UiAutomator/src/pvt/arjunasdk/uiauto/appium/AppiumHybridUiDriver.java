@@ -26,14 +26,11 @@ import pvt.batteries.config.Batteries;
 
 public class AppiumHybridUiDriver extends AbstractAppiumUiDriver{
 	
-	public AppiumHybridUiDriver() throws Exception{
-		super(Batteries.value(UiAutomatorPropertyType.APP_MOBILE_PATH).asString());
+	public AppiumHybridUiDriver() throws Exception {
+		super();
+		// TODO Auto-generated constructor stub
 	}
-	
-	public AppiumHybridUiDriver(String appPath) throws Exception{
-		super(appPath);
-	}
-	
+
 	@Override
 	public void switchToWebContext() throws Exception{
 		getDriver().context("WEBVIEW");
@@ -53,8 +50,8 @@ public class AppiumHybridUiDriver extends AbstractAppiumUiDriver{
 		return "Appium Hybrid UiDriver";
 	}
 	
-	@Override
 	public void init() throws Exception{
-		super.init(UiAutomationContext.MOBILE_WEB, this.getAppPath());		
+		super.init();
+		this.setAutomationContext(UiAutomationContext.MOBILE_NATIVE);
 	}
 }

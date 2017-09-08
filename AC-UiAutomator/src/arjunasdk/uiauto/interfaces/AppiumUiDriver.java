@@ -20,15 +20,17 @@ package arjunasdk.uiauto.interfaces;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import io.appium.java_client.MobileElement;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
+import pvt.arjunasdk.uiauto.enums.AppiumMobilePlatformType;
 import pvt.arjunasdk.uiauto.enums.UiElementType;
 
-public interface AppiumUiDriver{
+public interface AppiumUiDriver extends UiDriver{
 
 	void focus(MobileElement appiumElement) throws Exception;
 	void enterText(MobileElement appiumElement, String text)throws Exception;
@@ -78,4 +80,6 @@ public interface AppiumUiDriver{
 	boolean isElementAbsent(By findBy);
 	boolean isElementVisible(By findBy);
 	boolean isElementInvisible(By findBy);
+	void setPlatformType(AppiumMobilePlatformType platformType);
+	void setWaitTime(int waitTime);
 }

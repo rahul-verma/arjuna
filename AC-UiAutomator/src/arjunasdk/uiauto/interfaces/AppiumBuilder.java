@@ -6,7 +6,7 @@ import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 
 public interface AppiumBuilder {
 
-	void automationContext(UiAutomationContext context);
+	void context(UiAutomationContext context);
 
 	void appPath(String path);
 

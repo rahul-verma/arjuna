@@ -26,6 +26,8 @@ import pvt.arjunasdk.uiautomator.lib.config.UiAutomatorSingleton;
 
 public class UiAutomator {
 	
+	public static final boolean displayPageElementProcessing = false;
+	
 	public static void init() throws Exception{
 		UiAutomatorSingleton.INSTANCE.init();
 	}

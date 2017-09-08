@@ -250,15 +250,23 @@ public class BasePage implements Page{
 	}
 
 	private UiElement registerElement(String elementName, ElementMetaData elementMap) throws Exception {
-		logger.debug("Declaring element");
+		if (UiAutomator.displayPageElementProcessing){
+			logger.debug("Declaring element");
+		}
 		UiElement uiElement = getUiDriver().declareElement(elementMap);
-		logger.debug("Set element name as " + elementName);		
+		if (UiAutomator.displayPageElementProcessing){
+		logger.debug("Set element name as " + elementName);
+		}
 		uiElement.setName(elementName);
 		if (this.getParent() != null){
-			logger.debug("Set element entity as " + this.getParent().getName());	
+			if (UiAutomator.displayPageElementProcessing){
+				logger.debug("Set element entity as " + this.getParent().getName());
+			}
 			uiElement.setCompositePageName(this.getParent().getName());
 		}
-		logger.debug("Verifying entity: " + uiElement.getCompositePageName());
+		if (UiAutomator.displayPageElementProcessing){
+			logger.debug("Verifying entity: " + uiElement.getCompositePageName());
+		}
 		uiElementMap.put(elementName, uiElement);
 		return uiElement;
 	}

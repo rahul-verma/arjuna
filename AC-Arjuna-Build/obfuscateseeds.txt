@@ -336,13 +336,13 @@ arjunasdk.uiauto.factories.PageFactory: arjunasdk.uiauto.interfaces.App getSimpl
 arjunasdk.uiauto.factories.PageFactory: arjunasdk.uiauto.interfaces.Page getPage(arjunasdk.uiauto.interfaces.UiDriver,java.lang.String)
 arjunasdk.uiauto.factories.UiDriverFactory
 arjunasdk.uiauto.factories.UiDriverFactory: UiDriverFactory()
+arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.AppiumBuilder getAppiumBuilder()
+arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.SeleniumBuilder getSeleniumBuilder()
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getSelenium()
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getWebUiDriver()
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getMobileWebUiDriver()
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getMobileNativeUiDriver()
-arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getMobileHybridUiDriver()
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getMobileNativeUiDriver(java.lang.String)
-arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getMobileHybridUiDriver(java.lang.String)
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getScreenUiDriver()
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getUiDriver(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getUiDriver(pvt.arjunasdk.uiauto.enums.UiAutomationContext,java.lang.String)
@@ -355,6 +355,15 @@ arjunasdk.uiauto.interfaces.App: void addElement(java.lang.String,java.util.Map)
 arjunasdk.uiauto.interfaces.App: void addElement(java.lang.String,java.lang.String,java.util.Map)
 arjunasdk.uiauto.interfaces.App: void registerPage(java.lang.String,arjunasdk.uiauto.interfaces.UiDriver,java.lang.String)
 arjunasdk.uiauto.interfaces.App: arjunasdk.uiauto.interfaces.Page page(java.lang.String)
+arjunasdk.uiauto.interfaces.AppiumBuilder
+arjunasdk.uiauto.interfaces.AppiumBuilder: void context(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
+arjunasdk.uiauto.interfaces.AppiumBuilder: void appPath(java.lang.String)
+arjunasdk.uiauto.interfaces.AppiumBuilder: void platformName(java.lang.String)
+arjunasdk.uiauto.interfaces.AppiumBuilder: void platformVersion(java.lang.String)
+arjunasdk.uiauto.interfaces.AppiumBuilder: void deviceName(java.lang.String)
+arjunasdk.uiauto.interfaces.AppiumBuilder: void udid(java.lang.String)
+arjunasdk.uiauto.interfaces.AppiumBuilder: void capabilities(org.openqa.selenium.remote.DesiredCapabilities)
+arjunasdk.uiauto.interfaces.AppiumBuilder: arjunasdk.uiauto.interfaces.UiDriver build()
 arjunasdk.uiauto.interfaces.AppiumUiDriver
 arjunasdk.uiauto.interfaces.AppiumUiDriver: void focus(io.appium.java_client.MobileElement)
 arjunasdk.uiauto.interfaces.AppiumUiDriver: void enterText(io.appium.java_client.MobileElement,java.lang.String)
@@ -425,6 +434,10 @@ arjunasdk.uiauto.interfaces.Page: void processElementProperties(java.lang.String
 arjunasdk.uiauto.interfaces.PageMapper
 arjunasdk.uiauto.interfaces.PageMapper: java.util.Map getPageMap()
 arjunasdk.uiauto.interfaces.PageSection
+arjunasdk.uiauto.interfaces.SeleniumBuilder
+arjunasdk.uiauto.interfaces.SeleniumBuilder: void capabilities(org.openqa.selenium.remote.DesiredCapabilities)
+arjunasdk.uiauto.interfaces.SeleniumBuilder: arjunasdk.uiauto.interfaces.UiDriver build()
+arjunasdk.uiauto.interfaces.SeleniumBuilder: void browser(arjunasdk.enums.Browser)
 arjunasdk.uiauto.interfaces.SeleniumUiDriver
 arjunasdk.uiauto.interfaces.SeleniumUiDriver: void focus(org.openqa.selenium.WebElement)
 arjunasdk.uiauto.interfaces.SeleniumUiDriver: void enterText(org.openqa.selenium.WebElement,java.lang.String)
@@ -523,6 +536,9 @@ arjunasdk.uiauto.interfaces.UiDriver: void switchToWebContext()
 arjunasdk.uiauto.interfaces.UiDriver: void switchToNativeContext()
 arjunasdk.uiauto.interfaces.UiDriver: pvt.arjunasdk.uiauto.enums.ElementLoaderType getElementLoaderType()
 arjunasdk.uiauto.interfaces.UiDriver: void setElementLoaderType(pvt.arjunasdk.uiauto.enums.ElementLoaderType)
+arjunasdk.uiauto.interfaces.UiDriver: void load()
+arjunasdk.uiauto.interfaces.UiDriver: void setCapabilities(java.util.Map)
+arjunasdk.uiauto.interfaces.UiDriver: void init()
 arjunasdk.uiauto.interfaces.UiElement
 arjunasdk.uiauto.interfaces.UiElement: java.lang.Object throwUnsupportedActionException(java.lang.String)
 arjunasdk.uiauto.interfaces.UiElement: java.lang.Object throwZeroOrdinalException(java.lang.String)
@@ -627,6 +643,8 @@ com.autocognite.Arjuna: void main(java.lang.String[])
 pvt.arjunasdk.appium.api.AppiumMediator
 pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver
 pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver$1
+pvt.arjunasdk.appium.lib.base.DefaultAppiumBuilder
+pvt.arjunasdk.appium.lib.base.DefaultAppiumBuilder$1
 pvt.arjunasdk.appium.lib.base.DefaultAppiumMediator
 pvt.arjunasdk.appium.lib.base.DefaultAppiumMediator$1
 pvt.arjunasdk.enums.BatteriesPropertyType
@@ -690,6 +708,8 @@ pvt.arjunasdk.property.ConfigPropertyBatteries: java.lang.String getSame(java.la
 pvt.arjunasdk.property.ConfigPropertyBuilder
 pvt.arjunasdk.property.ConfigPropertyMetaData
 pvt.arjunasdk.selenium.api.WDMediator
+pvt.arjunasdk.selenium.lib.base.DefaultSeleniumBuilder
+pvt.arjunasdk.selenium.lib.base.DefaultSeleniumBuilder$1
 pvt.arjunasdk.selenium.lib.base.DefaultSeleniumMediator
 pvt.arjunasdk.selenium.lib.base.DefaultSeleniumMediator$1
 pvt.arjunasdk.sikuli.api.SikuliMediator
@@ -1568,6 +1588,7 @@ pvt.unitee.enums.PickerTargetType: pvt.unitee.enums.PickerTargetType[] values()
 pvt.unitee.enums.PickerTargetType: pvt.unitee.enums.PickerTargetType valueOf(java.lang.String)
 pvt.unitee.enums.ReportGenerationFormat
 pvt.unitee.enums.ReportGenerationFormat: pvt.unitee.enums.ReportGenerationFormat EXCEL
+pvt.unitee.enums.ReportGenerationFormat: pvt.unitee.enums.ReportGenerationFormat JXML
 pvt.unitee.enums.ReportGenerationFormat: pvt.unitee.enums.ReportGenerationFormat[] $VALUES
 pvt.unitee.enums.ReportGenerationFormat: pvt.unitee.enums.ReportGenerationFormat[] values()
 pvt.unitee.enums.ReportGenerationFormat: pvt.unitee.enums.ReportGenerationFormat valueOf(java.lang.String)
@@ -1688,10 +1709,6 @@ pvt.unitee.enums.TestResultCode
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode ALL_STEPS_PASS
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode STEP_FAILURE
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode STEP_ERROR
-pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode UNPICKED_CLASS
-pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode UNPICKED_METHOD
-pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode SKIPPED_CLASS_ANNOTATION
-pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode SKIPPED_METHOD_ANNOTATION
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode SKIPPED_RECORD
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode TEST_CONTAINER_DEPENDENCY_NOTMET
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode TEST_CREATOR_DEPENDENCY_NOTMET
@@ -1708,7 +1725,6 @@ pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode ERROR_IN_TEARDO
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode ERROR_IN_TEARDOWN_METHOD
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode ERROR_IN_TEARDOWN_METHOD_INSTANCE
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode ERROR_IN_TEARDOWN_TEST
-pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode UNSELECTED
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode DATA_SOURCE_CONSTRUCTION_ERROR
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode DATA_SOURCE_NEXT_ERROR
 pvt.unitee.enums.TestResultCode: pvt.unitee.enums.TestResultCode[] $VALUES
@@ -1837,6 +1853,8 @@ pvt.unitee.reporter.lib.writer.json.JsonIgnoredTestWriter
 pvt.unitee.reporter.lib.writer.json.JsonIssueWriter
 pvt.unitee.reporter.lib.writer.json.JsonResultWriter
 pvt.unitee.reporter.lib.writer.json.JsonTestResultWriter
+pvt.unitee.reporter.lib.writer.jxml.JXmlReportGenerator
+pvt.unitee.reporter.lib.writer.jxml.JXmlReportGenerator$1
 pvt.unitee.runner.lib.slots.AbstractTestObjectExecutor
 pvt.unitee.runner.lib.slots.TestContainerExecutor
 pvt.unitee.runner.lib.slots.TestContainerFragmentExecutor
@@ -2134,6 +2152,7 @@ unitee.interfaces.TestObjectProperties: java.lang.String string(unitee.enums.Tes
 unitee.interfaces.TestObjectProperties: boolean hasKey(unitee.enums.TestObjectAttribute)
 unitee.interfaces.TestObjectProperties: java.util.List strings(java.util.List)
 unitee.interfaces.TestObjectProperties: java.util.Map strItems(java.util.List)
+unitee.interfaces.TestObjectProperties: java.lang.Double time()
 unitee.interfaces.TestProperties
 unitee.interfaces.TestProperties: java.lang.String id()
 unitee.interfaces.TestProperties: java.lang.String name()
