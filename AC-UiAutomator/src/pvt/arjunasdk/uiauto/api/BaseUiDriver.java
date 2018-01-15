@@ -20,7 +20,7 @@ package pvt.arjunasdk.uiauto.api;
 
 import java.io.File;
 
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiDriverEngine;
 //
 public interface BaseUiDriver {

@@ -36,7 +36,7 @@ public enum BatteriesSingleton {
 	Map<String, DataReference> dataReferences = new HashMap<String, DataReference>();
 
 	public void loadDataReferences() throws Exception {
-		String mapRefDir = Batteries.getCentralProperty(BatteriesPropertyType.DIRECTORY_PROJECT_DATA_REFERENCES).asString();
+		String mapRefDir = Batteries.getCentralProperty(BatteriesPropertyType.PROJECT_DATA_REFERENCES_DIR).asString();
 		File mapFileDir = new File(mapRefDir);
 		if (mapFileDir.exists() && mapFileDir.isDirectory()) {
 			File[] listOfMapFiles = mapFileDir.listFiles();

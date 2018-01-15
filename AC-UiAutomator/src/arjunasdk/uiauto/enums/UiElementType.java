@@ -16,13 +16,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package pvt.arjunasdk.uiauto.enums;
+package arjunasdk.uiauto.enums;
 
-public enum UiAutomationContext {
-	PC_WEB,
-	PC_NATIVE,
-	MOBILE_WEB,
-	MOBILE_NATIVE,
-	SCREEN,
-	GENERIC
+public enum UiElementType {
+	TEXTBOX, LINK, BUTTON, DROPDOWN, CHECKBOX, RADIO, URL, IMAGE, TITLE, GENERIC, PASSWORD, SUBMIT_BUTTON;
+	
 }

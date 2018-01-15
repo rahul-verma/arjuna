@@ -35,32 +35,9 @@ public class JavaTestClassDefProcessor implements TestDefProcessor {
 	private DependencyTreeBuilder depTreeBuilder = new DependencyTreeBuilder();
 	private List<Class<?>> testClasses = new ArrayList<Class<?>>();
 	String testDir = null;
-	public static Map<String, Set<String>> CLASS_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
-	public static Map<String, Set<String>> METHOD_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
 	
 	private void emptyMethodBenchMark(){
 		
-	}
-	
-	public JavaTestClassDefProcessor() throws Exception{
-		
-		HoconReader reader1 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/class_annotations_compatibility.conf"));
-		reader1.process();
-		Map<String, Value> rules1 = reader1.getProperties();
-		for (String r: rules1.keySet()){
-			Set<String> aSet = new HashSet<String>();
-			aSet.addAll(rules1.get(r).asStringList());
-			CLASS_ANNOTATION_COMPAT.put(r, aSet);
-		}
-		
-		HoconReader reader2 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/method_annotations_compatibility.conf"));
-		reader2.process();
-		Map<String, Value> rules2 = reader2.getProperties();
-		for (String r: rules2.keySet()){
-			Set<String> aSet = new HashSet<String>();
-			aSet.addAll(rules2.get(r).asStringList());
-			METHOD_ANNOTATION_COMPAT.put(r, aSet);
-		}
 	}
 	
 	@Override

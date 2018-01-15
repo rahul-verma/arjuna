@@ -27,8 +27,10 @@ import java.io.StringWriter;
 import arjunasdk.sysauto.batteries.SystemBatteries;
 
 public class ExceptionBatteries {
+	private static boolean internalBuild = false;
+	
 	private static String[] removeThese = new String[] {
-			"com.autocognite.pvt",
+			"com.testmile.pvt",
 			"sun.reflect",
 			"java.lang.reflect",
 			"java.lang.Thread.run"
@@ -73,10 +75,12 @@ public class ExceptionBatteries {
 
 			while((line = bufferedReader.readLine()) != null) {
 				boolean isExcluded = false;
-				for (String excluded : removeThese) {
-					if(line.contains(excluded)) {
-						isExcluded = true;
-						break;
+				if (!internalBuild){
+					for (String excluded : removeThese) {
+						if(line.contains(excluded)) {
+							isExcluded = true;
+							break;
+						}
 					}
 				}
 				if (!isExcluded) {

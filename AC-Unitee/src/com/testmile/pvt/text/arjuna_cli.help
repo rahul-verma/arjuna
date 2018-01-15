@@ -72,7 +72,7 @@ REPORTING:
 
     -rgb, --report-generators-builtin <Comma separated list of built-in report generation formats> 
             Generate Test Reports in the formats supplied as parameters, at the end of the test.
-            Currently supported: EXCEL
+            Currently supported: EXCEL, JXML
       
     -rlb, --report-listeners-builtin <Comma separated list of built-in report listening formats>
             Generate Test Reports in the formats supplied as parameters, *during* the test.

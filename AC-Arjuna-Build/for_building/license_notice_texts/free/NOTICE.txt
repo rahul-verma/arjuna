@@ -1,15 +1,15 @@
-AutoCognite Arjuna
-Copyright 2015-17 AutoCognite Testing Research Pvt Ltd
+TestMile Arjuna
+Copyright 2017-18 Test Mile Software Testing Pvt Ltd
 Product Website: www.ArjunaPro.com
-Email: support@arjunapro.com
+Email: support@testmile.com
 
 This Software includes software developed by
-AutoCognite Testing Research Pvt Ltd
-(Company Website: http://www.autocognite.com, Company Email: sales@autocognite.com)
+Test Mile Software Testing Pvt Ltd
+(Company Website: http://www.testmile.com, Email: sales@testmile.com)
 
-AutoCognite Arjuna, is hereinafter referred to as "Software" or "Arjuna".
+TestMile Arjuna, is hereinafter referred to as "Software" or "Arjuna".
 
-Access and use of Software is governed by AUTOCOGNITE ARJUNA ON-PREMISES END USER LICENSE AGREEMENT.
+Access and use of Software is governed by TEST MILE ON-PREMISES END USER LICENSE AGREEMENT.
 
 Notice Files For 3rd Party Libraries Included in Software
 ---------------------------------------------------------

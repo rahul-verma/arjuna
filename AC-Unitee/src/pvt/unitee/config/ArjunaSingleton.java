@@ -20,6 +20,8 @@ package pvt.unitee.config;
 
 import java.io.File;
 import java.lang.reflect.Method;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -61,7 +63,7 @@ import unitee.annotations.DataMethodContainer;
 
 public enum ArjunaSingleton {
 	INSTANCE;
-	private String version = "0.3.6-b";
+	private String version = "1.1.0-b";
 
 	private Map<String,String> cliHashMap = null;
 	private Map<String, HashMap<String,String>> testBucketProps = new HashMap<String, HashMap<String,String>>();
@@ -114,14 +116,14 @@ public enum ArjunaSingleton {
 		Batteries.processArjunaDefaults();
 		integrator = uConf.getIntegrator();
 		//integrator.enumerate();
-		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/arjuna_visible.conf"));
+		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/testmile/pvt/text/arjuna_visible.conf"));
 		reader.process();		
 		integrator.setProjectDir(Batteries.getBaseDir());
 		Batteries.processArjunaOptions(reader.getProperties());
 		//integrator.enumerate();
 		
 		// arjuna file
-		String arjunaConfPath = integrator.value(BatteriesPropertyType.DIRECTORY_CONFIG).asString() + "/" + integrator.value(BatteriesPropertyType.CONFIG_CENTRAL_FILE_NAME).asString();
+		String arjunaConfPath = integrator.value(BatteriesPropertyType.CONFIG_DIR).asString() + "/" + integrator.value(BatteriesPropertyType.CONFIG_CENTRAL_FILE_NAME).asString();
 //		System.out.println(integrator.value(BatteriesPropertyType.DIRECTORY_CONFIG).asString());
 //		System.out.println(arjunaConfPath);
 		HoconReader reader2 = new HoconFileReader(arjunaConfPath);
@@ -163,8 +165,8 @@ public enum ArjunaSingleton {
 			// userOptions may not be defined. It's ok. It's optional
 		}
 		
-		if (!integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).isNull()){
-			customTestDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).asString();
+		if (!integrator.value(ArjunaProperty.PROJECT_TESTS_DIR).isNull()){
+			customTestDir = integrator.value(ArjunaProperty.PROJECT_TESTS_DIR).asString();
 		}
 		
 		//CLI
@@ -182,8 +184,8 @@ public enum ArjunaSingleton {
 			System.exit(1);
 		}
 		
-		if (!integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).isNull()){
-			customTestDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).asString();
+		if (!integrator.value(ArjunaProperty.PROJECT_TESTS_DIR).isNull()){
+			customTestDir = integrator.value(ArjunaProperty.PROJECT_TESTS_DIR).asString();
 		}
 
 //		HashMap<String, Value> updateOptions = new HashMap<String, Value>();
@@ -240,9 +242,11 @@ public enum ArjunaSingleton {
 		//String projDir = integrator.value(BatteriesPropertyType.DIRECTORY_PROJECT_ROOT).asString();
 		String projDir = Batteries.getBaseDir();
 		String runID =  integrator.value(ArjunaProperty.RUNID).asString();
+		String md5Suffix = createFileID();
+		String internalRunID = String.format("%s-%s", runID, md5Suffix);
 //		String timestampedRunID = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date()) + "-" + runID;
-		String updates = ResourceStreamBatteries.streamToString(ArjunaSingleton.class.getResourceAsStream("/com/autocognite/pvt/text/arjuna_invisible.conf"));
-		String replaced = updates.replace("%%slugProjDir", projDir).replace("%%slugRUNID", runID);
+		String updates = ResourceStreamBatteries.streamToString(ArjunaSingleton.class.getResourceAsStream("/com/testmile/pvt/text/arjuna_invisible.conf"));
+		String replaced = updates.replace("%%slugProjDir", projDir).replace("%%slugRUNID", internalRunID).replace("%%slugInternalRunID", internalRunID);
 		HoconReader uReader = new HoconStringReader(replaced);
 		uReader.process();
 		Batteries.processArjunaOptions(uReader.getProperties());
@@ -282,16 +286,32 @@ public enum ArjunaSingleton {
 			}
 			Map<String, Value> testOptions = new HashMap<String, Value>();
 			testOptions.put(
-			ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.DIRECTORY_PROJECT_TESTS),
+			ConfigPropertyBatteries.enumToPropPath(ArjunaProperty.PROJECT_TESTS_DIR),
 			new StringValue(customTestDir)
 			);
 			Batteries.processArjunaOptions(testOptions);
 		}
 	}
 	
+	private String createFileID() throws NoSuchAlgorithmException{
+
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Date()).getBytes());
+
+        byte byteData[] = md.digest();
+
+        //convert the byte to hex format method 1
+        StringBuffer sb = new StringBuffer();
+        //sb.append(new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss.SSS").format(new Date()));
+        for (int i = 0; i < byteData.length; i++) {
+         sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+        }	
+ 
+        return sb.toString();
+	}
 	
 	private void createReportDir() throws Exception {
-		String centralReportDirPath = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString(); 
+		String centralReportDirPath = integrator.value(ArjunaProperty.PROJECT_REPORT_DIR).asString(); 
 		
 		File centralDirObj = new File(centralReportDirPath);
 		//FileUtils.forceMkdir(arg0 );
@@ -302,7 +322,7 @@ public enum ArjunaSingleton {
 			FileSystemBatteries.deleteDirectory(centralReportDirPath);
 		}
 		
-		String dirPath = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT).asString(); 
+		String dirPath = integrator.value(ArjunaProperty.PROJECT_RUN_REPORT_DIR).asString(); 
 		
 		File dirObj = new File(dirPath);
 		//FileUtils.forceMkdir(arg0 );
@@ -310,6 +330,19 @@ public enum ArjunaSingleton {
 			FileUtils.forceMkdir(dirObj);
 			//dirObj.mkdirs();
 		}
+		
+		String coreTemplateFilePath = integrator.value(ArjunaProperty.PROJECT_CORE_DB_TEMPLATE_RUN_DBFILE).asString(); 
+		String coreDBTargetFilePath = integrator.value(ArjunaProperty.PROJECT_CORE_DB_RUN_DBFILE).asString(); 
+		
+		File coreTemplateFile = new File(coreTemplateFilePath);
+		//FileUtils.forceMkdir(arg0 );
+		if (!coreTemplateFile.exists()){
+			Console.display("Critical: Exception in Test Engine run.");
+			Console.display("The data template file for run was not found. Check your Arjuna structure or reinstall.");
+			SystemBatteries.exit();
+		}
+		
+		FileSystemBatteries.copyFile(coreTemplateFilePath, coreDBTargetFilePath);
 	}
 	
 	public void freeze() throws Exception{
@@ -385,12 +418,12 @@ public enum ArjunaSingleton {
 		Console.display("            |__/                      ");
 		                              
 		Console.marker(60);	
-		Console.display("Copyright (c) 2015-17 AutoCognite Testing Research Pvt Ltd");
+		Console.display("Copyright (c) 2017-18 Test Mile Software Testing Pvt Ltd");
 		Console.marker(60);
 		Console.displayPaddedKeyValue("Product Name", this.edition);
 		Console.displayPaddedKeyValue("Version", this.version);
-		Console.displayPaddedKeyValue("Website", "www.arjunapro.com");
-		Console.displayPaddedKeyValue("Contact", "support@autocognite.com");
+		Console.displayPaddedKeyValue("Website", "arjuna.testmile.com");
+		Console.displayPaddedKeyValue("Contact", "support@testmile.com");
 		Console.marker(60);	
 	}
 

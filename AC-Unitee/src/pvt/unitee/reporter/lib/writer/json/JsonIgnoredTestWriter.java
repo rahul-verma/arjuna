@@ -29,7 +29,7 @@ public class JsonIgnoredTestWriter extends JsonResultWriter<IgnoredTest> {
 	JsonConsolidatedTestResultWriter childWriter = null;
 	
 	public JsonIgnoredTestWriter() throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_IGNOREDTESTS).asString());
+		super(Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_JSON_IGNOREDTESTS_DIR).asString());
 		childWriter = new JsonConsolidatedTestResultWriter();
 	}
 	

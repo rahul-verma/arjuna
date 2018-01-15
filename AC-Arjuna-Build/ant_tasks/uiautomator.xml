@@ -11,9 +11,9 @@ simple example build file
 	<!-- ===================================== AC-Batteries =================================================== -->
 	<!-- ======================================================================================== -->
 
-	<property name="uiautomator.build_version" value="${autocognite.build.version}" />
+	<property name="uiautomator.build_version" value="${arjuna.build.version}" />
 	<property name="uiautomator.proj.name" value="AC-UiAutomator" />
-	<property name="uiautomator.name" value="autocognite-uiautomator" />
+	<property name="uiautomator.name" value="testmile-uiautomator" />
 	<property name="uiautomator.github.rep.name" value="arjuna" />
 	<property name="root.uiautomator.dir" value="${all.sources.dir}/${uiautomator.github.rep.name}" />
 	<property name="proj.uiautomator.dir" value="${root.uiautomator.dir}/${uiautomator.proj.name}" />

@@ -49,7 +49,7 @@ public class PageMapperFactory {
 		}
 		
 		if (!FileSystemBatteries.isFile(consideredPath)){
-			consideredPath = FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_PROJECT_UI_MAPS).asString() + "/" + consideredPath);
+			consideredPath = FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.PROJECT_UI_MAPS_DIR).asString() + "/" + consideredPath);
 			if (FileSystemBatteries.isDir(consideredPath)){
 				throw new Problem(
 						"UI Automator", 

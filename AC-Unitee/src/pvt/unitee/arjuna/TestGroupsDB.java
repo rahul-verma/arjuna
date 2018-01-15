@@ -39,7 +39,7 @@ public class TestGroupsDB {
 	}
 	
 	private void loadAvailableGroupNames() throws Exception{
-		groupsDir = Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_GROUPS).asString();
+		groupsDir = Batteries.value(ArjunaProperty.PROJECT_GROUPS_DIR).asString();
 		File sDir = new File(groupsDir);
 		if (!sDir.isDirectory()){
 			return;
@@ -103,7 +103,7 @@ public class TestGroupsDB {
 			group = this.defaultGroups.get(uName);
 			group.setSessionSubNode(subNode);
 		} else {
-			String sessionFile = Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_SESSIONS).asString() + "/" + subNode.getSession().getName() + ".conf";
+			String sessionFile = Batteries.value(ArjunaProperty.PROJECT_SESSIONS_DIR).asString() + "/" + subNode.getSession().getName() + ".conf";
 			if ((name.toUpperCase().endsWith(".CONF")) && (this.customGroupFileNames.containsKey(uName.replace(".CONF", "")))){
 					Console.displayError(
 							String.format(

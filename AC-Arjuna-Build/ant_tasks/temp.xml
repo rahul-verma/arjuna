@@ -2,8 +2,8 @@ libraryjar
 			
 			
 			
-			<keeppackagename name="com.autocognite.batteries.**" />
-			<keeppackagename name="com.autocognite.pvt.batteries.**" />
+			<keeppackagename name="com.testmile.batteries.**" />
+			<keeppackagename name="com.testmile.pvt.batteries.**" />
 			<!-- don't obfuscate this method -->
 
 			<keepattribute name="*Annotation*" />

@@ -12,13 +12,13 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import arjunasdk.enums.Browser;
 import arjunasdk.sysauto.batteries.SystemBatteries;
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import arjunasdk.uiauto.interfaces.SeleniumBuilder;
 import arjunasdk.uiauto.interfaces.UiDriver;
 import io.appium.java_client.remote.MobileCapabilityType;
 import pvt.arjunasdk.uiauto.appium.AppiumNativeUiDriver;
 import pvt.arjunasdk.uiauto.appium.AppiumWebUiDriver;
 import pvt.arjunasdk.uiauto.enums.AppiumMobilePlatformType;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiauto.selenium.SeleniumWebUiDriver;
 import pvt.arjunasdk.uiautomator.UiAutomator;
@@ -97,7 +97,7 @@ public class DefaultSeleniumBuilder implements SeleniumBuilder {
 		} else if (os.startsWith("Mac")) {
 			binaryName = "geckodriver";
 		}
-		System.setProperty("webdriver.gecko.driver", Batteries.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + binaryName);
+		System.setProperty("webdriver.gecko.driver", Batteries.value(UiAutomatorPropertyType.TOOLS_UIDRIVERS_DIR).asString() + "/" + binaryName);
 
 		browserCaps = getFireFoxCapabilitiesSkeleton();
 		//driver = new FirefoxDriver(capabilities);
@@ -116,7 +116,7 @@ public class DefaultSeleniumBuilder implements SeleniumBuilder {
 			chromeDriverBinaryName = "chromedriver";
 		}
 
-		System.setProperty("webdriver.chrome.driver", Batteries.value(UiAutomatorPropertyType.DIRECTORY_TOOLS_UIDRIVERS).asString() + "/" + chromeDriverBinaryName);
+		System.setProperty("webdriver.chrome.driver", Batteries.value(UiAutomatorPropertyType.TOOLS_UIDRIVERS_DIR).asString() + "/" + chromeDriverBinaryName);
 		browserCaps = getChromeCapabilitiesSkeleton();
 	}
 

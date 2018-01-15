@@ -5,6 +5,7 @@ import java.util.HashMap;
 import org.openqa.selenium.Proxy;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import arjunasdk.uiauto.interfaces.AppiumBuilder;
 import arjunasdk.uiauto.interfaces.AppiumUiDriver;
 import arjunasdk.uiauto.interfaces.UiDriver;
@@ -12,7 +13,6 @@ import io.appium.java_client.remote.MobileCapabilityType;
 import pvt.arjunasdk.uiauto.appium.AppiumNativeUiDriver;
 import pvt.arjunasdk.uiauto.appium.AppiumWebUiDriver;
 import pvt.arjunasdk.uiauto.enums.AppiumMobilePlatformType;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiauto.enums.UiDriverEngine;
 import pvt.arjunasdk.uiautomator.UiAutomator;

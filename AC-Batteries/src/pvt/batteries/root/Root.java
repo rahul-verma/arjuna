@@ -19,7 +19,7 @@
 package pvt.batteries.root;
 
 public interface Root {
-	boolean isAutoCogniteClass() throws Exception;
+	boolean isTestMileClass() throws Exception;
 
 	String getPackageName() throws Exception;
 

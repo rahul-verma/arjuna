@@ -67,10 +67,10 @@ public class TestDefinitionsProcessor {
 	
 	public void populate() throws Exception{
 		if (ArjunaInternal.displayDiscoveryInfo){
-			logger.debug("Now finding tests inside: " + Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).asString());
+			logger.debug("Now finding tests inside: " + Batteries.value(ArjunaProperty.PROJECT_TESTS_DIR).asString());
 			logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TEST_DISCOVERY_START));	
 		}
-		String startDir = Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_TESTS).asString();
+		String startDir = Batteries.value(ArjunaProperty.PROJECT_TESTS_DIR).asString();
 		FileAggregator aggregator = new FileAggregator();
 		FileDiscoverer discoverer = new FileDiscoverer(aggregator, startDir);
 		discoverer.discover();

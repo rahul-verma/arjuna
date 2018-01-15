@@ -151,11 +151,11 @@ public class ArjunaTestEngine implements TestEngine{
 	}
 	
 	protected String getReportDir() throws Exception {
-		return Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT).asString();
+		return Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_DIR).asString();
 	}
 	
 	private String getArchivesDir() throws Exception{
-		return Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_ARCHIVES).asString();
+		return Batteries.value(ArjunaProperty.PROJECT_ARCHIVES_DIR).asString();
 	}
 	
 	protected void archive() throws Exception{
@@ -168,9 +168,9 @@ public class ArjunaTestEngine implements TestEngine{
 //			//dirObj.mkdirs();
 //		}
 		
-		File centralReportDir = new File(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_REPORT).asString());
+		File centralReportDir = new File(Batteries.value(ArjunaProperty.PROJECT_REPORT_DIR).asString());
 		String lastRuntimestamp = new SimpleDateFormat("yyyy.MM.dd-HH.mm.ss").format(new Date(centralReportDir.lastModified()));
-		String archiveDirForLatestTest = getArchivesDir() + "/" + lastRuntimestamp + "-" +  Batteries.value(ArjunaProperty.RUNID).asString();
+		String archiveDirForLatestTest = getArchivesDir() + "/" + lastRuntimestamp + "-" +  Batteries.value(ArjunaProperty.IRUNID).asString();
 		//FileUtils.forceMkdir(new File(archiveDirForLatestTest));
 		
 		File runReportDir = new File(this.getReportDir());

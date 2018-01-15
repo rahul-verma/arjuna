@@ -100,7 +100,7 @@ public class StringsManager {
 	}
 
 	private void throwNotInitializedException(String context, String method) throws Problem {
-		throw new Problem("autocognite", context, method, "LOCALIZER_NOT_INITIALIZED",
+		throw new Problem("batteries", context, method, "LOCALIZER_NOT_INITIALIZED",
 				"Strings Manager not initialized.");
 	}
 

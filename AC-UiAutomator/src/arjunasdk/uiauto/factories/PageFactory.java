@@ -53,7 +53,7 @@ public class PageFactory {
 		App app = new BaseApp(name);
 		String consideredPath = appMapsRootDir;
 		if (!FileSystemBatteries.isDir(consideredPath)){
-			consideredPath = FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_PROJECT_UI_MAPS).asString() + "/" + consideredPath);
+			consideredPath = FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.PROJECT_UI_MAPS_DIR).asString() + "/" + consideredPath);
 			if (!FileSystemBatteries.isDir(consideredPath)){
 				throw new Problem(
 						"UI Automator", 

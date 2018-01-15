@@ -41,6 +41,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import arjunasdk.enums.Browser;
 import arjunasdk.sysauto.batteries.FileSystemBatteries;
+import arjunasdk.uiauto.enums.UiAutomationContext;
+import arjunasdk.uiauto.enums.UiElementType;
 import arjunasdk.uiauto.interfaces.AppiumUiDriver;
 import arjunasdk.uiauto.interfaces.UiElement;
 import io.appium.java_client.AppiumDriver;
@@ -55,10 +57,8 @@ import pvt.arjunasdk.uiauto.api.Identifier;
 import pvt.arjunasdk.uiauto.enums.AppiumMobilePlatformType;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
 import pvt.arjunasdk.uiauto.enums.MobileWebIdentifyBy;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiauto.enums.UiDriverEngine;
-import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.arjunasdk.uiautomator.UiAutomator;
 import pvt.arjunasdk.uiautomator.lib.DefaultUiDriver;
 import pvt.arjunasdk.uiautomator.lib.DefaultUiElement;
@@ -356,7 +356,7 @@ public abstract class AbstractAppiumUiDriver extends DefaultUiDriver implements 
 	public File takeScreenshot() throws Exception {
 		TakesScreenshot augDriver = getScreenshotAugmentedDriver();
         File srcFile = augDriver.getScreenshotAs(OutputType.FILE);
-        return FileSystemBatteries.moveFiletoDir(srcFile, Batteries.value(BatteriesPropertyType.DIRECTORY_PROJECT_SCREENSHOTS).asString());
+        return FileSystemBatteries.moveFiletoDir(srcFile, Batteries.value(BatteriesPropertyType.PROJECT_SCREENSHOTS_DIR).asString());
 	}
 	
 	public void focusOnApp() throws Exception{

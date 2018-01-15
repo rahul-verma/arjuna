@@ -18,9 +18,9 @@
  ******************************************************************************/
 package pvt.arjunasdk.uiauto.api;
 
+import arjunasdk.uiauto.enums.UiElementType;
 import pvt.arjunasdk.uiauto.api.actions.BasicActionHandler;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
-import pvt.arjunasdk.uiauto.enums.UiElementType;
 
 public interface ACElement extends BasicActionHandler{
 	String getName();

@@ -22,13 +22,13 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import arjunasdk.uiauto.enums.UiAutomationContext;
+import arjunasdk.uiauto.enums.UiElementType;
 import arjunasdk.uiauto.interfaces.UiDriver;
 import arjunasdk.uiauto.interfaces.UiElement;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiDriverEngine;
-import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.arjunasdk.uiautomator.UiAutomator;
 import pvt.arjunasdk.uiautomator.lib.DefaultElementMetaData;
 import pvt.batteries.config.Batteries;

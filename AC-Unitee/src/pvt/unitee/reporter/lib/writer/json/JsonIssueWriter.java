@@ -29,7 +29,7 @@ public class JsonIssueWriter extends JsonResultWriter<Issue> {
 	private JsonConsolidatedIssueWriter childWriter;
 	
 	public JsonIssueWriter() throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES).asString());
+		super(Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_JSON_ISSUES_DIR).asString());
 		childWriter = new JsonConsolidatedIssueWriter();
 	}
 	

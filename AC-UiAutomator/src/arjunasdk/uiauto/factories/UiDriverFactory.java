@@ -18,6 +18,7 @@
  ******************************************************************************/
 package arjunasdk.uiauto.factories;
 
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import arjunasdk.uiauto.interfaces.AppiumBuilder;
 import arjunasdk.uiauto.interfaces.SeleniumBuilder;
 import arjunasdk.uiauto.interfaces.UiDriver;
@@ -26,7 +27,6 @@ import pvt.arjunasdk.selenium.lib.base.DefaultSeleniumBuilder;
 import pvt.arjunasdk.uiauto.appium.AppiumHybridUiDriver;
 import pvt.arjunasdk.uiauto.appium.AppiumNativeUiDriver;
 import pvt.arjunasdk.uiauto.appium.AppiumWebUiDriver;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.selenium.SeleniumWebUiDriver;
 import pvt.arjunasdk.uiauto.sikuli.SikuliScreenUiDriver;
 import pvt.arjunasdk.uiautomator.UiAutomator;

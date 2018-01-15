@@ -21,11 +21,11 @@ package arjunasdk.uiauto.pageobject;
 import java.util.HashMap;
 import java.util.Map;
 
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import arjunasdk.uiauto.interfaces.App;
 import arjunasdk.uiauto.interfaces.Page;
 import arjunasdk.uiauto.interfaces.PageMapper;
 import arjunasdk.uiauto.interfaces.UiDriver;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.factories.PageMapperFactory;
 import pvt.arjunasdk.uiautomator.UiAutomator;
 import pvt.batteries.config.Batteries;

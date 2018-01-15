@@ -2,7 +2,7 @@ package arjunasdk.uiauto.interfaces;
 
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import arjunasdk.uiauto.enums.UiAutomationContext;
 
 public interface AppiumBuilder {
 

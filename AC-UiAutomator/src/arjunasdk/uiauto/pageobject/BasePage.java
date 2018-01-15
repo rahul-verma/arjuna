@@ -26,6 +26,8 @@ import java.util.Random;
 import org.apache.log4j.Logger;
 
 import arjunasdk.sysauto.batteries.DataBatteries;
+import arjunasdk.uiauto.enums.UiAutomationContext;
+import arjunasdk.uiauto.enums.UiElementType;
 import arjunasdk.uiauto.interfaces.Page;
 import arjunasdk.uiauto.interfaces.PageMapper;
 import arjunasdk.uiauto.interfaces.UiDriver;
@@ -33,10 +35,8 @@ import arjunasdk.uiauto.interfaces.UiElement;
 import pvt.arjunasdk.uiauto.api.CentralPageMap;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiauto.enums.UiDriverEngine;
-import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.arjunasdk.uiauto.exceptions.IgnoreElementException;
 import pvt.arjunasdk.uiauto.factories.PageMapperFactory;
 import pvt.arjunasdk.uiautomator.UiAutomator;
@@ -68,7 +68,7 @@ public class BasePage implements Page{
 	
 	public BasePage(String uiLabel) throws Exception{
 		this();
-		imagesDirectory = Batteries.value(UiAutomatorPropertyType.DIRECTORY_PROJECT_UI_IMAGES).asString();
+		imagesDirectory = Batteries.value(UiAutomatorPropertyType.PROJECT_UI_IMAGES_DIR).asString();
 		Random rn = new Random();
 		java.util.Date date= new java.util.Date();
 		long millis = date.getTime();

@@ -18,7 +18,7 @@ public class IgnoredTestReportGenerator extends JsonResultsReader{
 	private IgnoredTestDeserializer deserializer = null;
 	
 	public IgnoredTestReportGenerator(List<ReportGenerator> generators) throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_IGNOREDTESTS).asString(), generators);
+		super(Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_JSON_IGNOREDTESTS_DIR).asString(), generators);
 		deserializer = new IgnoredTestDeserializer();
 	}
 	

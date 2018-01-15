@@ -10,9 +10,9 @@ simple example build file
 	<!-- ===================================== AC-arjuna =================================================== -->
 	<!-- ======================================================================================== -->
 
-	<property name="arjunasdk.build_version" value="${autocognite.build.version}" />
+	<property name="arjunasdk.build_version" value="${arjuna.build.version}" />
 	<property name="arjunasdk.proj.name" value="AC-Arjuna-SDK" />
-	<property name="arjunasdk.name" value="autocognite-arjuna-sdk" />
+	<property name="arjunasdk.name" value="testmile-arjuna-sdk" />
 	<property name="arjunasdk.github.rep.name" value="arjuna" />
 	<property name="root.arjunasdk.dir" value="${all.sources.dir}/${arjunasdk.github.rep.name}" />
 	<property name="proj.arjunasdk.dir" value="${root.arjunasdk.dir}/${arjunasdk.proj.name}" />
@@ -173,8 +173,8 @@ simple example build file
 
 		<zip destfile="${public.tools.arjunasdk.dist.file}" basedir="${private.arjunasdk.dist.tools.dir}" />
 		
-		<copy file="${private.arjunasdk.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/autocognite-arjuna/bin/lib/java/arjunasdk.jar"/>
-		<copy file="${private.arjunasdk.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/autocognite-arjuna/lib/java/arjunasdk.jar"/>
+		<copy file="${private.arjunasdk.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/testmile-arjuna/bin/lib/java/arjunasdk.jar"/>
+		<copy file="${private.arjunasdk.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/testmile-arjuna/lib/java/arjunasdk.jar"/>
 
 	</target>
 

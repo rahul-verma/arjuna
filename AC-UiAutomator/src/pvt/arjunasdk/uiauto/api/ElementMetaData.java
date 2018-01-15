@@ -21,7 +21,7 @@ package pvt.arjunasdk.uiauto.api;
 import java.util.List;
 import java.util.Map;
 
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
+import arjunasdk.uiauto.enums.UiAutomationContext;
 
 public interface ElementMetaData {
 

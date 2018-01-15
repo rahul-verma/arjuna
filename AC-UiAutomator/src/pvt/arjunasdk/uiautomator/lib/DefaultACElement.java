@@ -22,11 +22,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 
+import arjunasdk.uiauto.enums.UiElementType;
 import pvt.arjunasdk.uiauto.api.ACElement;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.api.UiMediator;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
-import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.arjunasdk.uiautomator.UiAutomator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.exceptions.Problem;

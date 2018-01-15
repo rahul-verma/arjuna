@@ -51,7 +51,7 @@ public class DefaultReporter implements Reporter{
 	private List<InternlReportableObserver<FixtureResult>> fixtureResultObservers = new ArrayList<InternlReportableObserver<FixtureResult>>();
 	
 	private String getRunIDReportDir() throws Exception{
-		return Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_ROOT).asString();
+		return Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_DIR).asString();
 	}
 	
 	public DefaultReporter() throws Exception{

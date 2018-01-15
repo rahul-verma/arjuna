@@ -5,15 +5,22 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
+import arjunasdk.interfaces.Value;
 import arjunasdk.sysauto.batteries.DataBatteries;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.discoverer.DiscoveredFile;
 import pvt.batteries.discoverer.DiscoveredFileAttribute;
+import pvt.batteries.hocon.HoconReader;
+import pvt.batteries.hocon.HoconResourceReader;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.SkipCode;
 import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
@@ -27,6 +34,29 @@ public class JavaTestClassDefLoader implements TestDefInitializer {
 	private ClassLoader classLoader = null;
 	private List<Class<?>> testClasses = new ArrayList<Class<?>>();
 	String testDir = null;
+	public static Map<String, Set<String>> CLASS_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
+	public static Map<String, Set<String>> METHOD_ANNOTATION_COMPAT = new HashMap<String,Set<String>>();
+	
+	public JavaTestClassDefLoader() throws Exception{
+		
+		HoconReader reader1 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/testmile/pvt/text/class_annotations_compatibility.conf"));
+		reader1.process();
+		Map<String, Value> rules1 = reader1.getProperties();
+		for (String r: rules1.keySet()){
+			Set<String> aSet = new HashSet<String>();
+			aSet.addAll(rules1.get(r).asStringList());
+			CLASS_ANNOTATION_COMPAT.put(r, aSet);
+		}
+		
+		HoconReader reader2 = new HoconResourceReader(this.getClass().getResourceAsStream("/com/testmile/pvt/text/method_annotations_compatibility.conf"));
+		reader2.process();
+		Map<String, Value> rules2 = reader2.getProperties();
+		for (String r: rules2.keySet()){
+			Set<String> aSet = new HashSet<String>();
+			aSet.addAll(rules2.get(r).asStringList());
+			METHOD_ANNOTATION_COMPAT.put(r, aSet);
+		}
+	}
 	
 	@Override
 	public void init(String testDir) throws Exception{

@@ -34,6 +34,7 @@ import org.sikuli.script.Pattern;
 import org.sikuli.script.Screen;
 
 import arjunasdk.sysauto.batteries.FileSystemBatteries;
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import arjunasdk.uiauto.interfaces.SikuliUiDriver;
 import arjunasdk.uiauto.interfaces.UiDriver;
 import arjunasdk.uiauto.interfaces.UiElement;
@@ -43,7 +44,6 @@ import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.api.Identifier;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
 import pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiautomator.UiAutomator;
 import pvt.arjunasdk.uiautomator.lib.DefaultUiDriver;
@@ -188,7 +188,7 @@ public class SikuliScreenUiDriver extends DefaultUiDriver implements UiDriver, S
 		for (Identifier id: elementMetaData.getIdentifiers()){
 			if (id.NAME.equals("IMAGE")){
 				uiElement.setImagePath(
-						FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.DIRECTORY_PROJECT_UI_IMAGES).asString() + "/" + id.VALUE));
+						FileSystemBatteries.getCanonicalPath(Batteries.value(UiAutomatorPropertyType.PROJECT_UI_IMAGES_DIR).asString() + "/" + id.VALUE));
 			}
 		}
 		SikuliMediator mediator = createMediatorSkeleton(uiElement);

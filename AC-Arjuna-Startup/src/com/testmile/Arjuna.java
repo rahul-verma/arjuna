@@ -16,7 +16,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  ******************************************************************************/
-package com.autocognite;
+package com.testmile;
 
 import java.time.LocalDate;
 
@@ -32,7 +32,7 @@ public class Arjuna {
 	public static void main(String[] args) throws Exception {
 		Console.init();
 		ArjunaInternal.setCliConfigurator(new UniteeCliConfigurator());
-		ArjunaInternal.setEdition("AutoCognite Arjuna");
+		ArjunaInternal.setEdition("TestMile Arjuna");
 		ArjunaInternal.shouldInitUiAutomator(true);
 		ArjunaInternal.init(args);
 		TestEngine tee = createEngine(args);

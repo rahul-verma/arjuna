@@ -18,8 +18,8 @@
  ******************************************************************************/
 package pvt.arjunasdk.uiauto.api.appactions;
 
+import arjunasdk.uiauto.enums.UiElementType;
 import arjunasdk.uiauto.interfaces.UiElement;
-import pvt.arjunasdk.uiauto.enums.UiElementType;
 
 public interface ElementCreationHandler {
 	UiElement elementWithId(String id) throws Exception;

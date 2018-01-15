@@ -166,7 +166,7 @@ public class DataSourceBuilder {
 		}
 		
 		if (!FileSystemBatteries.isFile(location)){
-			location = Batteries.value(BatteriesPropertyType.DIRECTORY_PROJECT_DATA_SOURCES).asString() + "/" + location;
+			location = Batteries.value(BatteriesPropertyType.PROJECT_DATA_SOURCES_DIR).asString() + "/" + location;
 			if (!FileSystemBatteries.isFile(location)){
 				throw new Exception(String.format("File path provided using DataFile annotation does not exist: %s", location));
 			}

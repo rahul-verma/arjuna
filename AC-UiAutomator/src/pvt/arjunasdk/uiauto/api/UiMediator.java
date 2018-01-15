@@ -20,6 +20,7 @@ package pvt.arjunasdk.uiauto.api;
 
 import java.io.File;
 
+import arjunasdk.uiauto.enums.UiElementType;
 import arjunasdk.uiauto.interfaces.UiElement;
 import pvt.arjunasdk.uiauto.api.actions.AttributesInquirer;
 import pvt.arjunasdk.uiauto.api.actions.BasicActionHandler;
@@ -30,7 +31,6 @@ import pvt.arjunasdk.uiauto.api.actions.ImageBasedActionHandler;
 import pvt.arjunasdk.uiauto.api.actions.InstanceGetter;
 import pvt.arjunasdk.uiauto.api.actions.SelectAndRadioActionHandler;
 import pvt.arjunasdk.uiauto.api.actions.WebActionHandler;
-import pvt.arjunasdk.uiauto.enums.UiElementType;
 
 public interface UiMediator extends 	AttributesInquirer,
 									BasicActionHandler,

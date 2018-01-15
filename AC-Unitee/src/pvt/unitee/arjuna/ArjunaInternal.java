@@ -27,6 +27,7 @@ import org.apache.log4j.Logger;
 
 import arjunasdk.console.Console;
 import arjunasdk.ddauto.interfaces.DataSource;
+import arjunasdk.sysauto.batteries.SystemBatteries;
 import pvt.batteries.cli.CLIConfigurator;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.ds.NamesContainer;
@@ -52,6 +53,12 @@ import unitee.enums.TestObjectAttribute;
 
 public class ArjunaInternal {
 	private static Logger logger = Logger.getLogger(Batteries.getCentralLogName());
+	private static boolean headerPrinted = false;
+	private static boolean setupsuccessful = false;
+	private static boolean runSuccessful = false;
+	private static boolean tearDownSuccessful = false;
+	
+	
 	public static boolean displayReportPrepInfo = false;
 	public static boolean displayDiscoveryInfo = false;
 	public static boolean displayLoadingInfo = false;
@@ -85,14 +92,8 @@ public class ArjunaInternal {
 	public static boolean logExclusionInfo = false;
 	public static boolean centralStateUpdateInfo = false;
 	public static boolean groupStateUpdateInfo = false;
-	private static boolean headerPrinted = false;
 	public static boolean displayTestDefLoadingInfo = false;
 	public static boolean displayMetaDataProcessingInfo = false;
-	
-	private static boolean setupsuccessful = false;
-	private static boolean runSuccessful = false;
-	private static boolean tearDownSuccessful = false;
-	
 	public static boolean displayPageElementProcessing = false;
 	
 	public static void setCliConfigurator(CLIConfigurator cliConfigurator){
@@ -279,12 +280,31 @@ public class ArjunaInternal {
 			logger.debug("Loading test definitions...");
 			tee.discover();
 			runSuccessful = true;
+		} 
+		
+//		catch (Throwable e){
+//			runSuccessful = false;
+//			Console.display("Critical: Exception in Test Engine run.");
+//			Console.displayExceptionBlock(e);
+//			Console.display("Exiting...");
+//			System.exit(1);
+//		}
+		
+		catch (java.lang.reflect.InvocationTargetException g) {
+			runSuccessful = false;
+			Console.display("Critical: Exception in Test Engine run.");
+			g.printStackTrace();
+			if (Throwable.class.isAssignableFrom(g.getTargetException().getClass())){
+				Console.displayExceptionBlock(g.getTargetException());
+				SystemBatteries.exit();
+			}
+			Console.display("Would attempt Test engine teardown before exiting.");
 		} catch (Throwable e){
 			runSuccessful = false;
 			Console.display("Critical: Exception in Test Engine run.");
+			e.printStackTrace();
 			Console.displayExceptionBlock(e);
-			Console.display("Exiting...");
-			System.exit(1);
+			Console.display("Would attempt Test engine teardown before exiting.");
 		}
 	}
 	
@@ -292,32 +312,82 @@ public class ArjunaInternal {
 		try{
 			logger.debug("Running Test Engine");
 			tee.initReporter();
-		} catch (Throwable e){
-			e.printStackTrace();
-			runSuccessful = false;
-			Console.display("Critical: Exception in Test Engine run.");
-			Console.displayExceptionBlock(e);
-			Console.display("Would attempt Test engine teardown before exiting.");
-		}
+		} 
+//		catch (Throwable e){
+//			e.printStackTrace();
+//			runSuccessful = false;
+//			Console.display("Critical: Exception in Test Engine run.");
+//			Console.displayExceptionBlock(e);
+//			Console.display("Would attempt Test engine teardown before exiting.");
+//		}
+			
+			catch (java.lang.reflect.InvocationTargetException g) {
+				runSuccessful = false;
+				Console.display("Critical: Exception in Test Engine run.");
+				g.printStackTrace();
+				if (Throwable.class.isAssignableFrom(g.getTargetException().getClass())){
+					Console.displayExceptionBlock(g.getTargetException());
+					SystemBatteries.exit();
+				}
+				Console.display("Would attempt Test engine teardown before exiting.");
+			} catch (Throwable e){
+				runSuccessful = false;
+				Console.display("Critical: Exception in Test Engine run.");
+				e.printStackTrace();
+				Console.displayExceptionBlock(e);
+				Console.display("Would attempt Test engine teardown before exiting.");
+			}
 	}
 	
 	public static void report(TestEngine tee) {
 		try{
 			logger.debug("Generating reports");
 			tee.report();
-		} catch (Throwable e){
-			e.printStackTrace();
-			runSuccessful = false;
-			Console.display("Critical: Exception in Test Engine run.");
-			Console.displayExceptionBlock(e);
-			Console.display("Would attempt Test engine teardown before exiting.");
 		}
+//		} catch (Throwable e){
+//			e.printStackTrace();
+//			runSuccessful = false;
+//			Console.display("Critical: Exception in Test Engine run.");
+//			Console.displayExceptionBlock(e);
+//			Console.display("Would attempt Test engine teardown before exiting.");
+//		}
+			catch (java.lang.reflect.InvocationTargetException g) {
+				runSuccessful = false;
+				Console.display("Critical: Exception in Test Engine run.");
+				g.printStackTrace();
+				if (Throwable.class.isAssignableFrom(g.getTargetException().getClass())){
+					Console.displayExceptionBlock(g.getTargetException());
+					SystemBatteries.exit();
+				}
+				Console.display("Would attempt Test engine teardown before exiting.");
+			} catch (Throwable e){
+				runSuccessful = false;
+				Console.display("Critical: Exception in Test Engine run.");
+				e.printStackTrace();
+				Console.displayExceptionBlock(e);
+				Console.display("Would attempt Test engine teardown before exiting.");
+			}
 	}
 	
 	public static void loadSession(TestEngine tee) {
 		try{
 			logger.debug("Loading session...");
 			ArjunaSingleton.INSTANCE.loadSession();
+//		} catch (Throwable e){
+//			runSuccessful = false;
+//			Console.display("Critical: Exception in Test Engine run.");
+//			e.printStackTrace();
+//			Console.displayExceptionBlock(e);
+//			Console.display("Would attempt Test engine teardown before exiting.");
+		} catch (java.lang.reflect.InvocationTargetException g) {
+			runSuccessful = false;
+			Console.display("Critical: Exception in Test Engine run.");
+			g.printStackTrace();
+			if (Throwable.class.isAssignableFrom(g.getTargetException().getClass())){
+				Console.displayExceptionBlock(g.getTargetException());
+				SystemBatteries.exit();
+			}
+			Console.display("Would attempt Test engine teardown before exiting.");
 		} catch (Throwable e){
 			runSuccessful = false;
 			Console.display("Critical: Exception in Test Engine run.");

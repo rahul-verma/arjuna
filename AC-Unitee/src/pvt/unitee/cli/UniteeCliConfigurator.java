@@ -68,7 +68,7 @@ public class UniteeCliConfigurator extends AbstractCliConfigurator {
 		addFilter(TestPickerProperty.METHOD_IGNORE_PATTERNS, "IGNORE-METHODS");
 		
 		this.addUniteeStringProperty("SESSION-NAME", ArjunaProperty.SESSION_NAME);
-		this.addUniteeStringProperty("TEST-DIR", ArjunaProperty.DIRECTORY_PROJECT_TESTS);
+		this.addUniteeStringProperty("TEST-DIR", ArjunaProperty.PROJECT_TESTS_DIR);
 		this.addUniteeStringProperty("DISPLAY-LEVEL", BatteriesPropertyType.LOGGING_CONSOLE_LEVEL);
 		this.addUniteeStringProperty("LOG-LEVEL", BatteriesPropertyType.LOGGING_FILE_LEVEL);
 		this.addUniteeStringProperty("REPORT-GENERATORS-BUILTIN", ArjunaProperty.REPORT_GENERATORS_BUILTIN);

@@ -88,31 +88,31 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 				case CONFIG_CENTRAL_FILE_NAME:
 					handleStringConfig(propPath, cValue, "Central Configuration File", false);
 					break;
-				case DIRECTORY_PROJECT_ROOT:
+				case PROJECT_DIR:
 					handleCoreDirPath(propPath, cValue, "Configuration Directory", false);
 					break;
-				case DIRECTORY_CONFIG:
+				case CONFIG_DIR:
 					handleCoreDirPath(propPath, cValue, "Configuration Directory", false);
 					break;
-				case DIRECTORY_PROJECT_DATA_REFERENCES:
+				case PROJECT_DATA_REFERENCES_DIR:
 					handleProjectDirPath(propPath, cValue, "Data References Directory", false);
 					break;
-				case DIRECTORY_PROJECT_DATA_ROOT:
+				case PROJECT_DATA_DIR:
 					handleProjectDirPath(propPath, cValue, "Data Directory", false);
 					break;
-				case DIRECTORY_PROJECT_DATA_SOURCES:
+				case PROJECT_DATA_SOURCES_DIR:
 					handleProjectDirPath(propPath, cValue, "Data Sources Directory", false);
 					break;
-				case DIRECTORY_PROJECT_LOG:
+				case PROJECT_LOG_DIR:
 					handleProjectDirPath(propPath, cValue, "Log Directory", false);
 					break;
-				case DIRECTORY_PROJECT_SCREENSHOTS:
+				case PROJECT_SCREENSHOTS_DIR:
 					handleProjectDirPath(propPath, cValue, "Screenshots Directory", false);
 					break;
-				case DIRECTORY_PROJECT_TEMP:
+				case PROJECT_TEMP_DIR:
 					handleProjectDirPath(propPath, cValue, "Temporary Directory", false);
 					break;
-				case DIRECTORY_TOOLS_ROOT:
+				case TOOLS_DIR:
 					handleProjectDirPath(propPath, cValue, "Tools Directory", false);
 					break;
 				case LOGGING_CONSOLE_LEVEL:
@@ -126,7 +126,7 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 					break;
 				case LOGGING_NAME:
 					builder.overridable(false).visible(false);
-					handleStringConfig(propPath, cValue, "AutoCognite Log file name", false);
+					handleStringConfig(propPath, cValue, "Log file name", false);
 					break;
 				case LOGGING_FILE_ON:
 					handleBooleanConfig(propPath, cValue, "Should log to file?", true);
@@ -146,7 +146,7 @@ public class BatteriesConfigurator extends AbstractComponentConfigurator {
 	}
 
 	public void processDefaults() throws Exception {
-		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/batteries.conf"));
+		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/testmile/pvt/text/batteries.conf"));
 		super.processDefaults(reader);
 	}
 

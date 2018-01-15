@@ -8,10 +8,10 @@ import java.util.Map;
 import java.util.Set;
 
 import arjunasdk.interfaces.Value;
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.property.ConfigProperty;
 import pvt.arjunasdk.property.ConfigPropertyBatteries;
 import pvt.arjunasdk.property.ConfigPropertyBuilder;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiautomator.UiAutomator;
 import pvt.batteries.ds.Message;
@@ -149,13 +149,13 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 				case CHROME_WINDOWNAME:
 					handleStringConfig(propPath, cValue, "Chrome Web Browser's Window Name", false);
 					break;
-				case DIRECTORY_TOOLS_UIDRIVERS:
+				case TOOLS_UIDRIVERS_DIR:
 					handleCoreDirPath(propPath, cValue, "UI Drivers directory", false);
 					break;
-				case DIRECTORY_PROJECT_UI_IMAGES:
+				case PROJECT_UI_IMAGES_DIR:
 					handleCoreDirPath(propPath, cValue, "UI Images Directory (Identification Images)", false);
 					break;
-				case DIRECTORY_PROJECT_UI_MAPS:
+				case PROJECT_UI_MAPS_DIR:
 					handleCoreDirPath(propPath, cValue, "UI Maps Directory (Page Definitions)", false);
 					break;
 				case FIREFOX_WINDOWNAME:
@@ -203,7 +203,7 @@ public class UiAutomatorConfigurator extends AbstractComponentConfigurator{
 
 	public void processDefaults() throws Exception {
 		UiAutomator.init();
-		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/uiautomator.conf"));
+		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/testmile/pvt/text/uiautomator.conf"));
 		super.processDefaults(reader);
 	}
 

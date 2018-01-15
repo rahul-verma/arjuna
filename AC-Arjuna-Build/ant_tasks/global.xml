@@ -15,7 +15,7 @@ simple example build file for arjuna
 	</property> 
 	<property name="3rd_party_uiauto_jars" location="/Users/rahulverma/Documents/Dropbox/_jars/uiauto_jars"/>
 
-	<property name="autocognite.build.version" value="0.3.6-temp" />
+	<property name="arjuna.build.version" value="1.1.0-b" />
 
 	<property name="autocognite.dir" value="/Users/rahulverma/Documents/_autocognite" />
 	<property name="all.sources.dir" location="/Users/rahulverma/Documents/coding_workbench/eclipse_java_ws_rep_clone" />
@@ -25,7 +25,7 @@ simple example build file for arjuna
 
 	<property name="batteries.depends.jar.dir" location="/Users/rahulverma/Documents/Dropbox/_jars/batteries_jars" />
 
-	<property name="current.dist.private.dir" location="${current.dist.dir}/private/AutoCognite-${autocognite.build.version}" />
+	<property name="current.dist.private.dir" location="${current.dist.dir}/private/TestMile-Arjuna-${arjuna.build.version}" />
 	<property name="current.dist.private.components.dir" location="${current.dist.private.dir}/components" />
 	<property name="current.dist.private.jars.dir" value="${current.dist.private.dir}/component_jars" />
 	<property name="current.dist.private.sources.dir" value="${current.dist.private.dir}/sources" />
@@ -45,7 +45,7 @@ simple example build file for arjuna
 
 	<property name="source.general.acprops.file" value="${all.sources.dir}/arjuna/AC-Arjuna-Build/arjunapro.conf" />
 
-	<property name="current.dist.public.dir" location="${current.dist.dir}/public/AutoCognite-${autocognite.build.version}" />
+	<property name="current.dist.public.dir" location="${current.dist.dir}/public/TestMile-Arjuna-${arjuna.build.version}" />
 	<property name="current.dist.public.tools.dir" location="${current.dist.public.dir}" />
 	
 	<target name="gp">

@@ -29,7 +29,7 @@ public class JsonTestResultWriter extends JsonResultWriter<TestResult> {
 	JsonConsolidatedTestResultWriter childWriter = null;
 	
 	public JsonTestResultWriter() throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_TESTS).asString());
+		super(Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_JSON_TESTS_DIR).asString());
 		childWriter = new JsonConsolidatedTestResultWriter();
 	}
 	

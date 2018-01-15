@@ -10,9 +10,9 @@ simple example build file
 	<!-- ===================================== AC-arjuna =================================================== -->
 	<!-- ======================================================================================== -->
 
-	<property name="arjunafree.build_version" value="${autocognite.build.version}" />
+	<property name="arjunafree.build_version" value="${arjuna.build.version}" />
 	<property name="arjunafree.proj.name" value="AC-Arjuna" />
-	<property name="arjunafree.name" value="autocognite-arjuna" />
+	<property name="arjunafree.name" value="testmile-arjuna" />
 	<property name="arjunafree.github.rep.name" value="arjuna" />
 	<property name="root.arjunafree.dir" value="${all.sources.dir}/${arjunafree.github.rep.name}" />
 	<property name="proj.arjunafree.dir" value="${root.arjunafree.dir}/${arjunafree.proj.name}" />
@@ -200,8 +200,8 @@ simple example build file
 
 		<zip destfile="${public.tools.arjunafree.dist.file}" basedir="${private.arjunafree.dist.tools.dir}" />
 		
-		<copy file="${private.arjunafree.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/autocognite-arjuna/bin/lib/java/arjunafree.jar"/>
-		<copy file="${private.arjunafree.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/autocognite-arjuna/lib/java/arjunafree.jar"/>
+		<copy file="${private.arjunafree.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/testmile-arjuna/bin/lib/java/arjunafree.jar"/>
+		<copy file="${private.arjunafree.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/testmile-arjuna/lib/java/arjunafree.jar"/>
 
 	</target>
 

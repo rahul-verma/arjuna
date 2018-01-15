@@ -18,9 +18,9 @@
  ******************************************************************************/
 package pvt.arjunasdk.uiauto.appium;
 
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver;
 import pvt.arjunasdk.uiauto.enums.IdentifyBy;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.batteries.config.Batteries;
 

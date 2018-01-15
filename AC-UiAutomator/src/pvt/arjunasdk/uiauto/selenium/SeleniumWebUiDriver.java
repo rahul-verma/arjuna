@@ -49,6 +49,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import arjunasdk.enums.Browser;
 import arjunasdk.sysauto.batteries.FileSystemBatteries;
 import arjunasdk.sysauto.batteries.SystemBatteries;
+import arjunasdk.uiauto.enums.UiAutomationContext;
+import arjunasdk.uiauto.enums.UiElementType;
 import arjunasdk.uiauto.interfaces.SeleniumUiDriver;
 import arjunasdk.uiauto.interfaces.UiElement;
 import pvt.arjunasdk.enums.BatteriesPropertyType;
@@ -57,10 +59,8 @@ import pvt.arjunasdk.selenium.lib.base.DefaultSeleniumMediator;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
 import pvt.arjunasdk.uiauto.api.Identifier;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType;
 import pvt.arjunasdk.uiauto.enums.UiDriverEngine;
-import pvt.arjunasdk.uiauto.enums.UiElementType;
 import pvt.arjunasdk.uiauto.enums.WebIdentifyBy;
 import pvt.arjunasdk.uiautomator.lib.DefaultUiDriver;
 import pvt.arjunasdk.uiautomator.lib.DefaultUiElement;
@@ -329,7 +329,7 @@ public class SeleniumWebUiDriver extends DefaultUiDriver implements SeleniumUiDr
 	public File takeScreenshot() throws Exception {
 		TakesScreenshot augDriver = getScreenshotAugmentedDriver();
         File srcFile = augDriver.getScreenshotAs(OutputType.FILE);
-        return FileSystemBatteries.moveFiletoDir(srcFile, Batteries.value(BatteriesPropertyType.DIRECTORY_PROJECT_SCREENSHOTS).asString());
+        return FileSystemBatteries.moveFiletoDir(srcFile, Batteries.value(BatteriesPropertyType.PROJECT_SCREENSHOTS_DIR).asString());
 	}
 	
 	public void focusOnApp() throws Exception{

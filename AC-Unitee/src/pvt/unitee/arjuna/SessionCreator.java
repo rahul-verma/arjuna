@@ -36,7 +36,7 @@ public class SessionCreator {
 			}
 		} else {
 			// User Defined Session Flow
-			String sessionsDir = integrator.value(ArjunaProperty.DIRECTORY_PROJECT_SESSIONS).asString();
+			String sessionsDir = integrator.value(ArjunaProperty.PROJECT_SESSIONS_DIR).asString();
 			File sDir = new File(sessionsDir);
 			boolean matchFound = false;
 			String sFileName = null;

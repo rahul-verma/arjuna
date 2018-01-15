@@ -203,6 +203,9 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case SESSION_NAME:
 					handleStringConfig(propPath, cValue, "Test Session Name", false);
 					break;
+				case IRUNID:
+					handleStringConfig(propPath, cValue, "Internal Run ID", false);
+					break;
 				case RUNID:
 			      String pattern = "^[a-zA-Z0-9\\-_]{3,30}$";
 
@@ -434,43 +437,43 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_STEPS_METADATA_REPORTABLE:
 					handleStepResultPropListConfig(propPath, cValue, "Result Properties for Steps report", false);
 					break;
-				case DIRECTORY_PROJECT_TESTS:
+				case PROJECT_TESTS_DIR:
 					handleProjectDirPath(propPath, cValue, "Test Directory", true);
 					break;
-				case DIRECTORY_PROJECT_REPORT:
+				case PROJECT_REPORT_DIR:
 					handleProjectDirPath(propPath, cValue, "Report Directory", false);
 					break;
-				case DIRECTORY_PROJECT_ARCHIVES:
+				case PROJECT_ARCHIVES_DIR:
 					handleProjectDirPath(propPath, cValue, "Report Archives directory", false);
 					break;
-				case DIRECTORY_PROJECT_SESSIONS:
+				case PROJECT_SESSIONS_DIR:
 					handleProjectDirPath(propPath, cValue, "Session Templates directory", false);
 					break;
-				case DIRECTORY_PROJECT_GROUPS:
+				case PROJECT_GROUPS_DIR:
 					handleProjectDirPath(propPath, cValue, "Group Templates directory", false);
 					break;
-				case DIRECTORY_PROJECT_RUNID_REPORT_ROOT:
+				case PROJECT_RUN_REPORT_DIR:
 					handleStringConfig(propPath, cValue, "Report Directory for the Run ID", false);
 					break;
-				case DIRECTORY_PROJECT_RUNID_REPORT_JDB:
+				case PROJECT_RUN_REPORT_JDB_DIR:
 					handleStringConfig(propPath, cValue, "Report Directory for the Run ID for JDB", false);
 					break;
-				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ROOT:
+				case PROJECT_RUN_REPORT_JSON_DIR:
 					handleStringConfig(propPath, cValue, "Root Raw Report Directory for JSON.", false);
 					break;
-				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_TESTS:
+				case PROJECT_RUN_REPORT_JSON_TESTS_DIR:
 					handleStringConfig(propPath, cValue, "Raw Report Directory for JSON Test Execution results.", false);
 					break;
-				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_ISSUES:
+				case PROJECT_RUN_REPORT_JSON_ISSUES_DIR:
 					handleStringConfig(propPath, cValue, "Report Directory for JSON Fixture results.", false);
 					break;
-				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_IGNOREDTESTS:
+				case PROJECT_RUN_REPORT_JSON_IGNOREDTESTS_DIR:
 					handleStringConfig(propPath, cValue, "Report Directory for JSON Ignored Test results.", false);
 					break;
-				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_EVENTS:
+				case PROJECT_RUN_REPORT_JSON_EVENTS_DIR:
 					handleStringConfig(propPath, cValue, "Report Directory for JSON Event results.", false);
 					break;
-				case DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_FIXTURES:
+				case PROJECT_RUN_REPORT_JSON_FIXTURES_DIR:
 					handleStringConfig(propPath, cValue, "Report Directory for JSON Fixture results.", false);
 					break;
 				case REPORT_NAME_FORMAT:
@@ -482,11 +485,33 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 				case REPORT_LISTENERS_BUILTIN:
 					handleReportListenerFormat(propPath, cValue, "Chosen Built-in Report Listeners", true);
 					break;
+				case PROJECT_CORE_DIR:
+					handleStringConfig(propPath, cValue, "Core Root Directory.", false);
+					break;
+				case PROJECT_CORE_DB_CENTRAL_DIR:
+					handleStringConfig(propPath, cValue, "Core Central DB Directory.", false);
+					break;
+				case PROJECT_CORE_DB_CENTRAL_DBFILE:
+					handleStringConfig(propPath, cValue, "Core Central DB File.", false);
+					break;
+				case PROJECT_CORE_DB_RUN_DIR:
+					handleStringConfig(propPath, cValue, "Core Run DB Directory.", false);
+					break;
+				case PROJECT_CORE_DB_RUN_DBFILE:
+					handleStringConfig(propPath, cValue, "Core Current Run DB File.", false);
+					break;
+				case PROJECT_CORE_DB_TEMPLATE_DIR:
+					handleStringConfig(propPath, cValue, "Core Template DB Directory.", false);
+					break;
+				case PROJECT_CORE_DB_TEMPLATE_CENTRAL_DBFILE:
+					handleStringConfig(propPath, cValue, "Core DB Template for Central DB.", false);
+					break;
+				case PROJECT_CORE_DB_TEMPLATE_RUN_DBFILE:
+					handleStringConfig(propPath, cValue, "Core DB Template for Run DB.", false);
+					break;
 				default:
 					break;
 				}
-				
-
 				handledProps.add(propPath);
 			}
 		}
@@ -497,7 +522,7 @@ public class ArjunaConfigurator extends AbstractComponentConfigurator{
 	}
 
 	public void processDefaults() throws Exception {
-		HoconReader reader =  new HoconResourceReader(this.getClass().getResourceAsStream("/com/autocognite/pvt/text/arjuna_visible.conf"));
+		HoconReader reader =  new HoconResourceReader(this.getClass().getResourceAsStream("/com/testmile/pvt/text/arjuna_visible.conf"));
 		super.processDefaults(reader);
 	}
 	

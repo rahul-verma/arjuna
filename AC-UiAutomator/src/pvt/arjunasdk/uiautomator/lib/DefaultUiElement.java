@@ -20,9 +20,9 @@ package pvt.arjunasdk.uiautomator.lib;
 
 import java.util.List;
 
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import arjunasdk.uiauto.interfaces.UiElement;
 import pvt.arjunasdk.uiauto.api.ElementMetaData;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiautomator.UiAutomator;
 import pvt.batteries.config.Batteries;
 

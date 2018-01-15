@@ -20,13 +20,13 @@ package arjunasdk.uiauto.interfaces;
 
 import java.util.Map;
 
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.api.BaseUiDriver;
 import pvt.arjunasdk.uiauto.api.CentralPageMap;
 import pvt.arjunasdk.uiauto.api.appactions.BrowserActionHandler;
 import pvt.arjunasdk.uiauto.api.appactions.ElementCreationHandler;
 import pvt.arjunasdk.uiauto.api.appactions.ImageComparator;
 import pvt.arjunasdk.uiauto.api.appactions.NativeWindowActionHandler;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 
 public interface Page extends BaseUiDriver, ElementCreationHandler, 
 ImageComparator, NativeWindowActionHandler, BrowserActionHandler{

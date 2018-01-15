@@ -20,8 +20,8 @@ package pvt.arjunasdk.uiautomator.lib;
 
 import java.util.Map;
 
+import arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiauto.enums.ElementLoaderType;
-import pvt.arjunasdk.uiauto.enums.UiAutomationContext;
 import pvt.arjunasdk.uiautomator.lib.base.BaseUiDriver;
 
 public class DefaultUiDriver extends BaseUiDriver{

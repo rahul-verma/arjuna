@@ -135,7 +135,7 @@ public class UniteeCLI extends AbstractCLI {
 			userProject = "/usr/some/dir/tests";			
 		}
 		
-		BufferedReader txtReader = new BufferedReader(new InputStreamReader(UniteeCLI.class.getResourceAsStream("/com/autocognite/pvt/text/arjuna_cli.help")));
+		BufferedReader txtReader = new BufferedReader(new InputStreamReader(UniteeCLI.class.getResourceAsStream("/com/testmile/pvt/text/arjuna_cli.help")));
 		String line = null;
 		while ((line = txtReader.readLine()) != null) {
 			Console.display(line.replace("%%slugShell", shell).replace("%%slugMProjectTests", mproject).replace("%%slugUserProjectTests", userProject));

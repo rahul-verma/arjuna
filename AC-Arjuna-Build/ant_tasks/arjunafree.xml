@@ -10,10 +10,10 @@ simple example build file
 	<!-- ===================================== AC-arjuna =================================================== -->
 	<!-- ======================================================================================== -->
 
-	<property name="arjunafree.build_version" value="${autocognite.build.version}" />
+	<property name="arjunafree.build_version" value="${arjuna.build.version}" />
 	<!-- The name of AC-Arjuna is still AC-Arjuna-Startup in the Github repository-->
 	<property name="arjunafree.proj.name" value="AC-Arjuna-Startup" />
-	<property name="arjunafree.name" value="autocognite-arjuna" />
+	<property name="arjunafree.name" value="testmile-arjuna" />
 	<property name="arjunafree.github.rep.name" value="arjuna" />
 	<property name="root.arjunafree.dir" value="${all.sources.dir}/${arjunafree.github.rep.name}" />
 	<property name="proj.arjunafree.dir" value="${root.arjunafree.dir}/${arjunafree.proj.name}" />
@@ -38,7 +38,7 @@ simple example build file
 	<property name="private.arjunafree.obfuscated.jar.file" value="${private.arjunafree.obfuscated.jar.dir}/obfuscated_${arjunafree.jar.file.name}" />
 
 	<property name="private.arjunafree.dist.tools.dir" value="${current.dist.private.tools.dir}/${arjunafree.name}-dist" />
-	<property name="private.arjunafree.dist.tools.root.dir" value="${private.arjunafree.dist.tools.dir}/autocognite-arjuna" />
+	<property name="private.arjunafree.dist.tools.root.dir" value="${private.arjunafree.dist.tools.dir}/testmile-arjuna" />
 	<property name="private.arjunafree.dist.tools.jar.dir" value="${private.arjunafree.dist.tools.root.dir}/bin/lib/java" />
 	<property name="private.arjunafree.dist.tools.jar.file" value="${private.arjunafree.dist.tools.jar.dir}/${arjunafree.full.jar.file.name}" />
 	<property name="private.arjunafree.dist.jar.file" value="${current.dist.private.jars.dir}/${arjunafree.full.jar.file.name}" />
@@ -92,8 +92,8 @@ simple example build file
 		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/scripts" />
 		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/tests" />
 		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/report" />
-		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/ui_maps" />
-		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/ui_images" />
+		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/uiauto_maps" />
+		<mkdir dir="${private.arjunafree.dist.tools.root.dir}/uiauto_images" />
 
 		<copy todir="${private.arjunafree.dist.tools.root.dir}/docs">
 					<fileset dir="${source.private.meta.docs.common.dir}">
@@ -208,8 +208,8 @@ simple example build file
 
 		<zip destfile="${public.tools.arjunafree.dist.file}" basedir="${private.arjunafree.dist.tools.dir}" />
 		
-		<copy file="${private.arjunafree.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/autocognite-arjuna/bin/lib/java/arjunafree.jar"/>
-		<copy file="${private.arjunafree.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/autocognite-arjuna/lib/java/arjunafree.jar"/>
+		<copy file="${private.arjunafree.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/_autocognite/build_under_test/testmile-arjuna/bin/lib/java/arjunafree.jar"/>
+		<copy file="${private.arjunafree.dist.tools.jar.file}" tofile="/Users/rahulverma/Documents/VirtualBox_VMs/shared_dir/win/testmile-arjuna/lib/java/arjunafree.jar"/>
 
 	</target>
 

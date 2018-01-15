@@ -18,7 +18,7 @@ public class ActivityReportGenerator extends JsonResultsReader{
 	private EventDeserializer deserializer = null;
 	
 	public ActivityReportGenerator(List<ReportGenerator> generators) throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_EVENTS).asString(), generators);
+		super(Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_JSON_EVENTS_DIR).asString(), generators);
 		deserializer = new EventDeserializer();
 	}
 	

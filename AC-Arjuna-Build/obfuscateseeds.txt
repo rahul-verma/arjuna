@@ -330,6 +330,32 @@ arjunasdk.sysauto.process.CommandExecutor: java.lang.String getStdoutText()
 arjunasdk.sysauto.process.CommandExecutor: java.lang.String getStderrText()
 arjunasdk.sysauto.process.CommandExecutor: int getReturnCode()
 arjunasdk.sysauto.process.CommandExecutor: void execute()
+arjunasdk.uiauto.enums.UiAutomationContext
+arjunasdk.uiauto.enums.UiAutomationContext: arjunasdk.uiauto.enums.UiAutomationContext PC_WEB
+arjunasdk.uiauto.enums.UiAutomationContext: arjunasdk.uiauto.enums.UiAutomationContext PC_NATIVE
+arjunasdk.uiauto.enums.UiAutomationContext: arjunasdk.uiauto.enums.UiAutomationContext MOBILE_WEB
+arjunasdk.uiauto.enums.UiAutomationContext: arjunasdk.uiauto.enums.UiAutomationContext MOBILE_NATIVE
+arjunasdk.uiauto.enums.UiAutomationContext: arjunasdk.uiauto.enums.UiAutomationContext SCREEN
+arjunasdk.uiauto.enums.UiAutomationContext: arjunasdk.uiauto.enums.UiAutomationContext GENERIC
+arjunasdk.uiauto.enums.UiAutomationContext: arjunasdk.uiauto.enums.UiAutomationContext[] $VALUES
+arjunasdk.uiauto.enums.UiAutomationContext: arjunasdk.uiauto.enums.UiAutomationContext[] values()
+arjunasdk.uiauto.enums.UiAutomationContext: arjunasdk.uiauto.enums.UiAutomationContext valueOf(java.lang.String)
+arjunasdk.uiauto.enums.UiElementType
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType TEXTBOX
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType LINK
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType BUTTON
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType DROPDOWN
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType CHECKBOX
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType RADIO
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType URL
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType IMAGE
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType TITLE
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType GENERIC
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType PASSWORD
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType SUBMIT_BUTTON
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType[] $VALUES
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType[] values()
+arjunasdk.uiauto.enums.UiElementType: arjunasdk.uiauto.enums.UiElementType valueOf(java.lang.String)
 arjunasdk.uiauto.factories.PageFactory
 arjunasdk.uiauto.factories.PageFactory: PageFactory()
 arjunasdk.uiauto.factories.PageFactory: arjunasdk.uiauto.interfaces.App getSimpleApp(java.lang.String,arjunasdk.uiauto.interfaces.UiDriver,java.lang.String)
@@ -344,10 +370,10 @@ arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getMobileNativeUiDriver()
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getMobileNativeUiDriver(java.lang.String)
 arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getScreenUiDriver()
-arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getUiDriver(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
-arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getUiDriver(pvt.arjunasdk.uiauto.enums.UiAutomationContext,java.lang.String)
-arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver throwAppPathFactoryMethodWronglyUsed(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
-arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver throwUnsupportedAutomationContextException(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
+arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getUiDriver(arjunasdk.uiauto.enums.UiAutomationContext)
+arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver getUiDriver(arjunasdk.uiauto.enums.UiAutomationContext,java.lang.String)
+arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver throwAppPathFactoryMethodWronglyUsed(arjunasdk.uiauto.enums.UiAutomationContext)
+arjunasdk.uiauto.factories.UiDriverFactory: arjunasdk.uiauto.interfaces.UiDriver throwUnsupportedAutomationContextException(arjunasdk.uiauto.enums.UiAutomationContext)
 arjunasdk.uiauto.interfaces.App
 arjunasdk.uiauto.interfaces.App: java.lang.String getName()
 arjunasdk.uiauto.interfaces.App: void setName(java.lang.String)
@@ -356,7 +382,7 @@ arjunasdk.uiauto.interfaces.App: void addElement(java.lang.String,java.lang.Stri
 arjunasdk.uiauto.interfaces.App: void registerPage(java.lang.String,arjunasdk.uiauto.interfaces.UiDriver,java.lang.String)
 arjunasdk.uiauto.interfaces.App: arjunasdk.uiauto.interfaces.Page page(java.lang.String)
 arjunasdk.uiauto.interfaces.AppiumBuilder
-arjunasdk.uiauto.interfaces.AppiumBuilder: void context(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
+arjunasdk.uiauto.interfaces.AppiumBuilder: void context(arjunasdk.uiauto.enums.UiAutomationContext)
 arjunasdk.uiauto.interfaces.AppiumBuilder: void appPath(java.lang.String)
 arjunasdk.uiauto.interfaces.AppiumBuilder: void platformName(java.lang.String)
 arjunasdk.uiauto.interfaces.AppiumBuilder: void platformVersion(java.lang.String)
@@ -397,7 +423,7 @@ arjunasdk.uiauto.interfaces.AppiumUiDriver: int getDropDownOptionCount(org.openq
 arjunasdk.uiauto.interfaces.AppiumUiDriver: io.appium.java_client.MobileElement chooseElementBasedOnParentText(java.util.List,java.lang.String)
 arjunasdk.uiauto.interfaces.AppiumUiDriver: int getWaitTime()
 arjunasdk.uiauto.interfaces.AppiumUiDriver: java.io.File takeScreenshot()
-arjunasdk.uiauto.interfaces.AppiumUiDriver: pvt.arjunasdk.uiauto.enums.UiElementType getElementType(io.appium.java_client.MobileElement)
+arjunasdk.uiauto.interfaces.AppiumUiDriver: arjunasdk.uiauto.enums.UiElementType getElementType(io.appium.java_client.MobileElement)
 arjunasdk.uiauto.interfaces.AppiumUiDriver: java.util.List findElements(org.openqa.selenium.By)
 arjunasdk.uiauto.interfaces.AppiumUiDriver: io.appium.java_client.MobileElement findElement(org.openqa.selenium.By)
 arjunasdk.uiauto.interfaces.AppiumUiDriver: java.lang.String getName()
@@ -412,13 +438,15 @@ arjunasdk.uiauto.interfaces.AppiumUiDriver: void waitForElementInvisibility(org.
 arjunasdk.uiauto.interfaces.AppiumUiDriver: boolean isElementAbsent(org.openqa.selenium.By)
 arjunasdk.uiauto.interfaces.AppiumUiDriver: boolean isElementVisible(org.openqa.selenium.By)
 arjunasdk.uiauto.interfaces.AppiumUiDriver: boolean isElementInvisible(org.openqa.selenium.By)
+arjunasdk.uiauto.interfaces.AppiumUiDriver: void setPlatformType(pvt.arjunasdk.uiauto.enums.AppiumMobilePlatformType)
+arjunasdk.uiauto.interfaces.AppiumUiDriver: void setWaitTime(int)
 arjunasdk.uiauto.interfaces.Page
 arjunasdk.uiauto.interfaces.Page: pvt.arjunasdk.uiauto.api.CentralPageMap getUiMap()
 arjunasdk.uiauto.interfaces.Page: java.lang.String getName()
 arjunasdk.uiauto.interfaces.Page: void setName(java.lang.String)
 arjunasdk.uiauto.interfaces.Page: void populate(arjunasdk.uiauto.interfaces.PageMapper)
 arjunasdk.uiauto.interfaces.Page: void addElement(java.lang.String,java.util.Map)
-arjunasdk.uiauto.interfaces.Page: pvt.arjunasdk.uiauto.enums.UiAutomationContext getContext()
+arjunasdk.uiauto.interfaces.Page: arjunasdk.uiauto.enums.UiAutomationContext getContext()
 arjunasdk.uiauto.interfaces.Page: boolean isAutomatorPresent()
 arjunasdk.uiauto.interfaces.Page: arjunasdk.uiauto.interfaces.Page getParent()
 arjunasdk.uiauto.interfaces.Page: void setParent(arjunasdk.uiauto.interfaces.Page)
@@ -427,7 +455,7 @@ arjunasdk.uiauto.interfaces.Page: void setLabel(java.lang.String)
 arjunasdk.uiauto.interfaces.Page: arjunasdk.uiauto.interfaces.UiElement element(java.lang.String)
 arjunasdk.uiauto.interfaces.Page: arjunasdk.uiauto.interfaces.UiDriver getUiDriver()
 arjunasdk.uiauto.interfaces.Page: void setUiDriver(arjunasdk.uiauto.interfaces.UiDriver)
-arjunasdk.uiauto.interfaces.Page: void setContext(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
+arjunasdk.uiauto.interfaces.Page: void setContext(arjunasdk.uiauto.enums.UiAutomationContext)
 arjunasdk.uiauto.interfaces.Page: void switchToWebContext()
 arjunasdk.uiauto.interfaces.Page: void switchToNativeContext()
 arjunasdk.uiauto.interfaces.Page: void processElementProperties(java.lang.String,java.util.Map)
@@ -471,7 +499,7 @@ arjunasdk.uiauto.interfaces.SeleniumUiDriver: int getDropDownOptionCount(org.ope
 arjunasdk.uiauto.interfaces.SeleniumUiDriver: org.openqa.selenium.WebElement chooseElementBasedOnParentText(java.util.List,java.lang.String)
 arjunasdk.uiauto.interfaces.SeleniumUiDriver: int getWaitTime()
 arjunasdk.uiauto.interfaces.SeleniumUiDriver: java.io.File takeScreenshot()
-arjunasdk.uiauto.interfaces.SeleniumUiDriver: pvt.arjunasdk.uiauto.enums.UiElementType getElementType(org.openqa.selenium.WebElement)
+arjunasdk.uiauto.interfaces.SeleniumUiDriver: arjunasdk.uiauto.enums.UiElementType getElementType(org.openqa.selenium.WebElement)
 arjunasdk.uiauto.interfaces.SeleniumUiDriver: java.util.List findElements(org.openqa.selenium.By)
 arjunasdk.uiauto.interfaces.SeleniumUiDriver: void rightClickAndClick(org.openqa.selenium.By,org.openqa.selenium.By)
 arjunasdk.uiauto.interfaces.SeleniumUiDriver: org.openqa.selenium.WebElement findElement(org.openqa.selenium.By)
@@ -531,7 +559,7 @@ arjunasdk.uiauto.interfaces.SikuliUiDriver: void clearText(java.lang.String)
 arjunasdk.uiauto.interfaces.SikuliUiDriver: arjunasdk.uiauto.interfaces.UiElement declareElement(pvt.arjunasdk.uiauto.api.ElementMetaData)
 arjunasdk.uiauto.interfaces.UiDriver
 arjunasdk.uiauto.interfaces.UiDriver: arjunasdk.uiauto.interfaces.UiElement declareElement(pvt.arjunasdk.uiauto.api.ElementMetaData)
-arjunasdk.uiauto.interfaces.UiDriver: void setContext(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
+arjunasdk.uiauto.interfaces.UiDriver: void setContext(arjunasdk.uiauto.enums.UiAutomationContext)
 arjunasdk.uiauto.interfaces.UiDriver: void switchToWebContext()
 arjunasdk.uiauto.interfaces.UiDriver: void switchToNativeContext()
 arjunasdk.uiauto.interfaces.UiDriver: pvt.arjunasdk.uiauto.enums.ElementLoaderType getElementLoaderType()
@@ -549,7 +577,7 @@ arjunasdk.uiauto.pageobject.BaseApp
 arjunasdk.uiauto.pageobject.BaseApp: BaseApp(java.lang.String)
 arjunasdk.uiauto.pageobject.BaseApp: void registerPage(java.lang.String,arjunasdk.uiauto.interfaces.UiDriver,java.lang.String)
 arjunasdk.uiauto.pageobject.BaseApp: void registerPage(java.lang.String,arjunasdk.uiauto.interfaces.UiDriver,arjunasdk.uiauto.interfaces.PageMapper)
-arjunasdk.uiauto.pageobject.BaseApp: void throwNullAutomatorException(java.lang.String,pvt.arjunasdk.uiauto.enums.UiAutomationContext)
+arjunasdk.uiauto.pageobject.BaseApp: void throwNullAutomatorException(java.lang.String,arjunasdk.uiauto.enums.UiAutomationContext)
 arjunasdk.uiauto.pageobject.BaseApp: arjunasdk.uiauto.interfaces.Page throwUndefinedUiException(java.lang.String,java.lang.String)
 arjunasdk.uiauto.pageobject.BaseApp: arjunasdk.uiauto.interfaces.Page throwNullUiException(java.lang.String)
 arjunasdk.uiauto.pageobject.BaseApp: java.lang.String getName()
@@ -574,8 +602,8 @@ arjunasdk.uiauto.pageobject.BasePage: pvt.arjunasdk.uiauto.enums.ElementLoaderTy
 arjunasdk.uiauto.pageobject.BasePage: void setElementLoaderType(pvt.arjunasdk.uiauto.enums.ElementLoaderType)
 arjunasdk.uiauto.pageobject.BasePage: java.lang.String getLabel()
 arjunasdk.uiauto.pageobject.BasePage: void setLabel(java.lang.String)
-arjunasdk.uiauto.pageobject.BasePage: pvt.arjunasdk.uiauto.enums.UiAutomationContext getContext()
-arjunasdk.uiauto.pageobject.BasePage: void setContext(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
+arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.enums.UiAutomationContext getContext()
+arjunasdk.uiauto.pageobject.BasePage: void setContext(arjunasdk.uiauto.enums.UiAutomationContext)
 arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.interfaces.Page getParent()
 arjunasdk.uiauto.pageobject.BasePage: void setParent(arjunasdk.uiauto.interfaces.Page)
 arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.interfaces.UiDriver getUiDriver()
@@ -605,7 +633,7 @@ arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.interfaces.UiElement elem
 arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.interfaces.UiElement elementWithXPartialText(java.lang.String)
 arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.interfaces.UiElement elementWithXValue(java.lang.String)
 arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.interfaces.UiElement elementWithXImageSource(java.lang.String)
-arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.interfaces.UiElement elementOfXType(pvt.arjunasdk.uiauto.enums.UiElementType)
+arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.interfaces.UiElement elementOfXType(arjunasdk.uiauto.enums.UiElementType)
 arjunasdk.uiauto.pageobject.BasePage: arjunasdk.uiauto.interfaces.UiElement elementBasedOnImage(java.lang.String)
 arjunasdk.uiauto.pageobject.BasePage: pvt.arjunasdk.uiauto.enums.UiDriverEngine getUiDriverEngineName()
 arjunasdk.uiauto.pageobject.BasePage: java.lang.Object getUiDriverEngine()
@@ -637,9 +665,9 @@ arjunasdk.uiauto.pageobject.BasePage: void switchToNativeContext()
 arjunasdk.uiauto.pageobject.BasePageSection
 arjunasdk.uiauto.pageobject.BasePageSection: BasePageSection(java.lang.String,arjunasdk.uiauto.interfaces.Page,arjunasdk.uiauto.interfaces.UiDriver)
 arjunasdk.uiauto.pageobject.BasePageSection: BasePageSection(java.lang.String,arjunasdk.uiauto.interfaces.Page,arjunasdk.uiauto.interfaces.UiDriver,java.lang.String)
-com.autocognite.Arjuna
-com.autocognite.Arjuna: Arjuna()
-com.autocognite.Arjuna: void main(java.lang.String[])
+com.testmile.Arjuna
+com.testmile.Arjuna: Arjuna()
+com.testmile.Arjuna: void main(java.lang.String[])
 pvt.arjunasdk.appium.api.AppiumMediator
 pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver
 pvt.arjunasdk.appium.lib.base.AbstractAppiumUiDriver$1
@@ -719,14 +747,14 @@ pvt.arjunasdk.uiauto.api.ACElement: java.lang.String getName()
 pvt.arjunasdk.uiauto.api.ACElement: void setName(java.lang.String)
 pvt.arjunasdk.uiauto.api.ACElement: java.lang.String getCompositePageName()
 pvt.arjunasdk.uiauto.api.ACElement: void setCompositePageName(java.lang.String)
-pvt.arjunasdk.uiauto.api.ACElement: pvt.arjunasdk.uiauto.enums.UiElementType getType()
+pvt.arjunasdk.uiauto.api.ACElement: arjunasdk.uiauto.enums.UiElementType getType()
 pvt.arjunasdk.uiauto.api.ACElement: boolean isComposite()
 pvt.arjunasdk.uiauto.api.ACElement: java.lang.String property(java.lang.String)
 pvt.arjunasdk.uiauto.api.ACElement: java.lang.String getProperty(java.lang.String)
 pvt.arjunasdk.uiauto.api.ACElement: void setProperty(java.lang.String,java.lang.String)
 pvt.arjunasdk.uiauto.api.ACElement: void switchOnCompositeFlag()
 pvt.arjunasdk.uiauto.api.ACElement: void switchOffCompositeFlag()
-pvt.arjunasdk.uiauto.api.ACElement: void setType(pvt.arjunasdk.uiauto.enums.UiElementType)
+pvt.arjunasdk.uiauto.api.ACElement: void setType(arjunasdk.uiauto.enums.UiElementType)
 pvt.arjunasdk.uiauto.api.ACElement: void setElement(java.lang.Object)
 pvt.arjunasdk.uiauto.api.ACElement: java.lang.Object getElement()
 pvt.arjunasdk.uiauto.api.ACElement: void setElements(java.lang.Object)
@@ -744,7 +772,7 @@ pvt.arjunasdk.uiauto.api.BaseUiDriver
 pvt.arjunasdk.uiauto.api.BaseUiDriver: pvt.arjunasdk.uiauto.enums.UiDriverEngine getUiDriverEngineName()
 pvt.arjunasdk.uiauto.api.BaseUiDriver: java.lang.Object getUiDriverEngine()
 pvt.arjunasdk.uiauto.api.BaseUiDriver: java.io.File takeScreenshot()
-pvt.arjunasdk.uiauto.api.BaseUiDriver: pvt.arjunasdk.uiauto.enums.UiAutomationContext getContext()
+pvt.arjunasdk.uiauto.api.BaseUiDriver: arjunasdk.uiauto.enums.UiAutomationContext getContext()
 pvt.arjunasdk.uiauto.api.BaseUiDriver: void setAppTitle(java.lang.String)
 pvt.arjunasdk.uiauto.api.BaseUiDriver: java.lang.String getAppTitle()
 pvt.arjunasdk.uiauto.api.BaseUiDriver: void focusOnApp()
@@ -760,10 +788,10 @@ pvt.arjunasdk.uiauto.api.ElementMetaData: void set(java.lang.String,java.lang.St
 pvt.arjunasdk.uiauto.api.ElementMetaData: java.lang.String get(java.lang.String)
 pvt.arjunasdk.uiauto.api.ElementMetaData: java.util.Map getAllProperties()
 pvt.arjunasdk.uiauto.api.ElementMetaData: void addIdentifier(java.lang.String,java.lang.String)
-pvt.arjunasdk.uiauto.api.ElementMetaData: void process(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
+pvt.arjunasdk.uiauto.api.ElementMetaData: void process(arjunasdk.uiauto.enums.UiAutomationContext)
 pvt.arjunasdk.uiauto.api.ElementMetaData: java.util.List getAllowedIdentifiers()
 pvt.arjunasdk.uiauto.api.ElementMetaData: java.util.List getIdentifiers()
-pvt.arjunasdk.uiauto.api.ElementMetaData: void processStrictly(pvt.arjunasdk.uiauto.enums.UiAutomationContext)
+pvt.arjunasdk.uiauto.api.ElementMetaData: void processStrictly(arjunasdk.uiauto.enums.UiAutomationContext)
 pvt.arjunasdk.uiauto.api.Identifier
 pvt.arjunasdk.uiauto.api.Identifier: Identifier(java.lang.String,java.lang.String)
 pvt.arjunasdk.uiauto.api.UiMediator
@@ -783,7 +811,7 @@ pvt.arjunasdk.uiauto.api.UiMediator: boolean isSingularElementIdentified()
 pvt.arjunasdk.uiauto.api.UiMediator: int getElementCountForCompositeElement()
 pvt.arjunasdk.uiauto.api.UiMediator: void assignElementAtIndexFromMatches(int)
 pvt.arjunasdk.uiauto.api.UiMediator: arjunasdk.uiauto.interfaces.UiElement getInstanceAtIndex(int)
-pvt.arjunasdk.uiauto.api.UiMediator: pvt.arjunasdk.uiauto.enums.UiElementType getElementType()
+pvt.arjunasdk.uiauto.api.UiMediator: arjunasdk.uiauto.enums.UiElementType getElementType()
 pvt.arjunasdk.uiauto.api.actions.AttributesInquirer
 pvt.arjunasdk.uiauto.api.actions.AttributesInquirer: java.lang.String getText()
 pvt.arjunasdk.uiauto.api.actions.AttributesInquirer: java.lang.String getValue()
@@ -864,7 +892,7 @@ pvt.arjunasdk.uiauto.api.appactions.ElementCreationHandler: arjunasdk.uiauto.int
 pvt.arjunasdk.uiauto.api.appactions.ElementCreationHandler: arjunasdk.uiauto.interfaces.UiElement elementWithXPartialText(java.lang.String)
 pvt.arjunasdk.uiauto.api.appactions.ElementCreationHandler: arjunasdk.uiauto.interfaces.UiElement elementWithXValue(java.lang.String)
 pvt.arjunasdk.uiauto.api.appactions.ElementCreationHandler: arjunasdk.uiauto.interfaces.UiElement elementWithXImageSource(java.lang.String)
-pvt.arjunasdk.uiauto.api.appactions.ElementCreationHandler: arjunasdk.uiauto.interfaces.UiElement elementOfXType(pvt.arjunasdk.uiauto.enums.UiElementType)
+pvt.arjunasdk.uiauto.api.appactions.ElementCreationHandler: arjunasdk.uiauto.interfaces.UiElement elementOfXType(arjunasdk.uiauto.enums.UiElementType)
 pvt.arjunasdk.uiauto.api.appactions.ElementCreationHandler: arjunasdk.uiauto.interfaces.UiElement elementBasedOnImage(java.lang.String)
 pvt.arjunasdk.uiauto.api.appactions.ImageComparator
 pvt.arjunasdk.uiauto.api.appactions.ImageComparator: boolean areImagesSimilar(java.io.File,java.io.File,java.lang.Double)
@@ -981,16 +1009,6 @@ pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy: pvt.arjunasdk.uiauto.enums.ScreenId
 pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy: pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy[] $VALUES
 pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy: pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy[] values()
 pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy: pvt.arjunasdk.uiauto.enums.ScreenIdentifyBy valueOf(java.lang.String)
-pvt.arjunasdk.uiauto.enums.UiAutomationContext
-pvt.arjunasdk.uiauto.enums.UiAutomationContext: pvt.arjunasdk.uiauto.enums.UiAutomationContext PC_WEB
-pvt.arjunasdk.uiauto.enums.UiAutomationContext: pvt.arjunasdk.uiauto.enums.UiAutomationContext PC_NATIVE
-pvt.arjunasdk.uiauto.enums.UiAutomationContext: pvt.arjunasdk.uiauto.enums.UiAutomationContext MOBILE_WEB
-pvt.arjunasdk.uiauto.enums.UiAutomationContext: pvt.arjunasdk.uiauto.enums.UiAutomationContext MOBILE_NATIVE
-pvt.arjunasdk.uiauto.enums.UiAutomationContext: pvt.arjunasdk.uiauto.enums.UiAutomationContext SCREEN
-pvt.arjunasdk.uiauto.enums.UiAutomationContext: pvt.arjunasdk.uiauto.enums.UiAutomationContext GENERIC
-pvt.arjunasdk.uiauto.enums.UiAutomationContext: pvt.arjunasdk.uiauto.enums.UiAutomationContext[] $VALUES
-pvt.arjunasdk.uiauto.enums.UiAutomationContext: pvt.arjunasdk.uiauto.enums.UiAutomationContext[] values()
-pvt.arjunasdk.uiauto.enums.UiAutomationContext: pvt.arjunasdk.uiauto.enums.UiAutomationContext valueOf(java.lang.String)
 pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType
 pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType: pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType DIRECTORY_PROJECT_UI_MAPS
 pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType: pvt.arjunasdk.uiauto.enums.UiAutomatorPropertyType DIRECTORY_PROJECT_UI_IMAGES
@@ -1034,22 +1052,6 @@ pvt.arjunasdk.uiauto.enums.UiDriverEngine: pvt.arjunasdk.uiauto.enums.UiDriverEn
 pvt.arjunasdk.uiauto.enums.UiDriverEngine: pvt.arjunasdk.uiauto.enums.UiDriverEngine[] $VALUES
 pvt.arjunasdk.uiauto.enums.UiDriverEngine: pvt.arjunasdk.uiauto.enums.UiDriverEngine[] values()
 pvt.arjunasdk.uiauto.enums.UiDriverEngine: pvt.arjunasdk.uiauto.enums.UiDriverEngine valueOf(java.lang.String)
-pvt.arjunasdk.uiauto.enums.UiElementType
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType TEXTBOX
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType LINK
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType BUTTON
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType DROPDOWN
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType CHECKBOX
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType RADIO
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType URL
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType IMAGE
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType TITLE
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType GENERIC
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType PASSWORD
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType SUBMIT_BUTTON
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType[] $VALUES
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType[] values()
-pvt.arjunasdk.uiauto.enums.UiElementType: pvt.arjunasdk.uiauto.enums.UiElementType valueOf(java.lang.String)
 pvt.arjunasdk.uiauto.enums.WebIdentifyBy
 pvt.arjunasdk.uiauto.enums.WebIdentifyBy: pvt.arjunasdk.uiauto.enums.WebIdentifyBy ID
 pvt.arjunasdk.uiauto.enums.WebIdentifyBy: pvt.arjunasdk.uiauto.enums.WebIdentifyBy NAME

@@ -29,8 +29,8 @@ public abstract class DefaultRoot {
 		return logger;
 	}
 
-	public boolean isAutoCogniteClass() throws Exception {
-		return this.getFullClassName().startsWith("com.autocognite");
+	public boolean isTestMileClass() throws Exception {
+		return this.getFullClassName().startsWith("com.testmile");
 	}
 
 	public String getPackageName() throws Exception {

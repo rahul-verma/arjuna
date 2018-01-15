@@ -52,7 +52,7 @@ class files -->
 				<method access="protected" name="*" />
 			</keep>
 			
-			<keep name="com.autocognite.ArjunaPro" access="public">
+			<keep name="com.testmile.ArjunaPro" access="public">
 				<method access="public" name="*" />
 			</keep>
 				

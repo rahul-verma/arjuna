@@ -18,7 +18,7 @@ public class FixtureReportGenerator extends JsonResultsReader{
 	private FixtureResultDeserializer deserializer = null;
 	
 	public FixtureReportGenerator(List<ReportGenerator> generators) throws Exception{
-		super(Batteries.value(ArjunaProperty.DIRECTORY_PROJECT_RUNID_REPORT_JSON_RAW_FIXTURES).asString(), generators);
+		super(Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_JSON_FIXTURES_DIR).asString(), generators);
 		deserializer = new FixtureResultDeserializer();
 	}
 	

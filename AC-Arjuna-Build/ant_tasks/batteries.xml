@@ -11,7 +11,7 @@ simple example build file
 	<!-- ======================================================================================== -->
 
 	<property name="batteries.proj.name" value="AC-Batteries" />
-	<property name="batteries.name" value="autocognite-batteries" />
+	<property name="batteries.name" value="tm-batteries" />
 	<property name="batteries.github.rep.name" value="arjuna" />
 	<property name="root.batteries.dir" value="${all.sources.dir}/${batteries.github.rep.name}" />
 	<property name="proj.batteries.dir" value="${root.batteries.dir}/${batteries.proj.name}" />
