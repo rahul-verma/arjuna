@@ -6,6 +6,7 @@ import pvt.unitee.reporter.lib.fixture.FixtureResult;
 import pvt.unitee.reporter.lib.ignored.IgnoredTest;
 import pvt.unitee.reporter.lib.issue.Issue;
 import pvt.unitee.reporter.lib.test.TestResult;
+import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
 
 public interface Reporter {
 

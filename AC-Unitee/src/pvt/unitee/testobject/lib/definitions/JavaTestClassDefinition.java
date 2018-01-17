@@ -1,6 +1,7 @@
 package pvt.unitee.testobject.lib.definitions;
 
 import java.lang.reflect.Constructor;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -14,6 +15,7 @@ import arjunasdk.ddauto.interfaces.DataReference;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.databroker.DataReferenceFactory;
 import pvt.unitee.arjuna.ArjunaInternal;
+import pvt.unitee.config.ArjunaSingleton;
 import pvt.unitee.core.lib.datasource.DataSourceType;
 import pvt.unitee.core.lib.dependency.DependencyHandler;
 import pvt.unitee.core.lib.testvars.DefaultTestVariables;
@@ -61,7 +63,7 @@ public class JavaTestClassDefinition {
 	private Set<String> allMethodsNameSet = new HashSet<String>();
 	// For pulling out class definitions by name
 	private Map<String, JavaTestMethodDefinition> testMethodDefinitions = new HashMap<String, JavaTestMethodDefinition>();
-	private List<String> dicoveredQueue = new ArrayList<String>();
+	private List<String> discoveredQueue = new ArrayList<String>();
 	// This is what would be got by groups for pickers processing. If a group picks up something, it calls setPicked()
 	private List<String> forPickerProcessing = new ArrayList<String>();
 	// The following gets populated from above, if classDef.isNotPickedByAnyGroup() is True
@@ -73,6 +75,12 @@ public class JavaTestClassDefinition {
 		this.testVars.populateDefaults();
 		this.testVars.rawExecVars().add(Batteries.cloneCentralExecVars());
 		this.fixtureLoader = new JavaTestClassFixturesLoader(this);
+	}
+	
+	public void registerWithReporter() throws SQLException, Exception{
+		for(String k: discoveredQueue){
+			ArjunaSingleton.INSTANCE.getReporter().registerMethodDefinition(testMethodDefinitions.get(k));
+		}
 	}
 	
 	public JavaTestClassFixturesLoader getFixturesLoader(){
@@ -93,7 +101,7 @@ public class JavaTestClassDefinition {
 		}
 		allMethodsNameSet.add(name);
 		testMethodDefinitions.put(name, methodDef);
-		dicoveredQueue.add(name);
+		discoveredQueue.add(name);
 	}
 	
 	public String getPackageName() throws Exception {
@@ -335,7 +343,7 @@ public class JavaTestClassDefinition {
 	}
 	
 	public void buildPickerQueueFromDiscoveredQueue() throws Exception{
-		for (String name: this.dicoveredQueue){
+		for (String name: this.discoveredQueue){
 			JavaTestMethodDefinition methodDef = testMethodDefinitions.get(name);
 			if (!this.shouldBeSkipped()){
 				if (!methodDef.shouldBeSkipped()){

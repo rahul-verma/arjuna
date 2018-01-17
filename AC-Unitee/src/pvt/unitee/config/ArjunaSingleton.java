@@ -54,6 +54,7 @@ import pvt.batteries.value.StringValue;
 import pvt.unitee.arjuna.SessionCreator;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.TestPickerProperty;
+import pvt.unitee.reporter.lib.DefaultReporter;
 import pvt.unitee.reporter.lib.GlobalState;
 import pvt.unitee.reporter.lib.Reporter;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
@@ -75,7 +76,7 @@ public enum ArjunaSingleton {
 	
 	private DataMethodContainerMap dataMethodContainers =  new DataMethodContainerMap();
 	private DataGeneratorMap dataGenerators =  new DataGeneratorMap();
-	private Reporter reporter = null;
+	private DefaultReporter reporter = null;
 
 	private GlobalState execState;
 	private CLIConfigurator cliConfigurator = null;
@@ -117,7 +118,7 @@ public enum ArjunaSingleton {
 		integrator = uConf.getIntegrator();
 		//integrator.enumerate();
 		HoconReader reader = new HoconResourceReader(this.getClass().getResourceAsStream("/com/testmile/pvt/text/arjuna_visible.conf"));
-		reader.process();		
+		reader.process();
 		integrator.setProjectDir(Batteries.getBaseDir());
 		Batteries.processArjunaOptions(reader.getProperties());
 		//integrator.enumerate();
@@ -431,11 +432,11 @@ public enum ArjunaSingleton {
 		cliArgs = args;
 	}
 	
-	public Reporter getReporter(){
+	public DefaultReporter getReporter(){
 		return this.reporter;
 	}
 	
-	public void setReporter(Reporter reporter){
+	public void setReporter(DefaultReporter reporter){
 		this.reporter = reporter;
 	}
 

@@ -34,6 +34,7 @@ import pvt.batteries.discoverer.FileDiscoverer;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.TestLanguage;
+import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
 import pvt.unitee.testobject.lib.loader.group.GroupTestContainerScheduler;
 
 public class TestDefinitionsProcessor {
@@ -79,6 +80,7 @@ public class TestDefinitionsProcessor {
 			testDefinitionLoaders.get(lang).init(startDir);
 		}
 		populateClassQueue(aggregator) ;
+		TestDefinitionsDB.registerWithReporter();
 	}
 
 	private void populateClassQueue(FileAggregator aggregator) throws Exception{

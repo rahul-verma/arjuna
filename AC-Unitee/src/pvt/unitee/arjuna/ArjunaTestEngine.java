@@ -81,7 +81,7 @@ public class ArjunaTestEngine implements TestEngine{
 		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTREPORTER_CREATE_START));
 		SummaryResult.init();
 		ArjunaSingleton.INSTANCE.setCentralExecState(new GlobalState());
-		Reporter reporter = new DefaultReporter();
+		DefaultReporter reporter = new DefaultReporter();
 		List<String> reportFormats = Batteries.value(ArjunaProperty.REPORT_LISTENERS_BUILTIN).asStringList();
 		for (String reportFormatName: reportFormats) {
 			if (ArjunaInternal.displayReportPrepInfo){

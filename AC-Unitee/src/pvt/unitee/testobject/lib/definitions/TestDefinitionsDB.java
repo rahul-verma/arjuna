@@ -1,6 +1,7 @@
 package pvt.unitee.testobject.lib.definitions;
 
 import java.lang.annotation.Annotation;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
+import pvt.unitee.config.ArjunaSingleton;
 import pvt.unitee.core.lib.annotate.None;
 import pvt.unitee.enums.SkipCode;
 import pvt.unitee.enums.UnpickedCode;
@@ -37,6 +39,15 @@ public class TestDefinitionsDB {
 
 	public static synchronized JavaTestClassDefinition getClassTestVars(String fullClassName){
 		return null;
+	}
+	
+	public static void registerWithReporter() throws SQLException, Exception{
+		for(String k: discoveredQueue){
+			JavaTestClassDefinition d = testClassDefinitions.get(k);
+			ArjunaSingleton.INSTANCE.getReporter().registerClassDefinition(testClassDefinitions.get(k));
+			d.registerWithReporter();
+		}
+		ArjunaSingleton.INSTANCE.getReporter().finalizeDefinitions();
 	}
 
 	public static void registerTestClassDefinition(String name, JavaTestClassDefinition classDef) {

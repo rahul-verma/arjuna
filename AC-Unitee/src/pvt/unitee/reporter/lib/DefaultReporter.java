@@ -19,6 +19,7 @@
 package pvt.unitee.reporter.lib;
 
 import java.io.File;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +28,7 @@ import org.apache.log4j.Logger;
 
 import arjunasdk.config.RunConfig;
 import pvt.batteries.config.Batteries;
+import pvt.batteries.sqlite.SqliteFileDB;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.interfaces.InternlReportableObserver;
 import pvt.unitee.reporter.lib.event.Event;
@@ -40,6 +42,8 @@ import pvt.unitee.reporter.lib.writer.json.JsonFixtureResultWriter;
 import pvt.unitee.reporter.lib.writer.json.JsonIgnoredTestWriter;
 import pvt.unitee.reporter.lib.writer.json.JsonIssueWriter;
 import pvt.unitee.reporter.lib.writer.json.JsonTestResultWriter;
+import pvt.unitee.testobject.lib.definitions.JavaTestClassDefinition;
+import pvt.unitee.testobject.lib.definitions.JavaTestMethodDefinition;
 
 public class DefaultReporter implements Reporter{
 	private static Logger logger = RunConfig.logger();
@@ -49,6 +53,7 @@ public class DefaultReporter implements Reporter{
 	private List<InternlReportableObserver<Issue>> issueObservers = new ArrayList<InternlReportableObserver<Issue>>();
 	private List<InternlReportableObserver<Event>> eventObservers = new ArrayList<InternlReportableObserver<Event>>();
 	private List<InternlReportableObserver<FixtureResult>> fixtureResultObservers = new ArrayList<InternlReportableObserver<FixtureResult>>();
+	private DBReporter dbReporter = null;
 	
 	private String getRunIDReportDir() throws Exception{
 		return Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_DIR).asString();
@@ -61,6 +66,7 @@ public class DefaultReporter implements Reporter{
 		this.addIssueObserver(new JsonIssueWriter());
 		this.addEventObserver(new JsonEventWriter());
 		this.addFixtureResultObserver(new JsonFixtureResultWriter());
+		dbReporter = new DBReporter();
 	}
 	
 	@Override
@@ -150,6 +156,8 @@ public class DefaultReporter implements Reporter{
 		for (InternlReportableObserver<Event> observer: this.eventObservers) {
 			observer.tearDown();
 		}
+		
+		this.dbReporter.tearDown();
 		logger.debug("Tear Down - Finish");
 	}
 
@@ -160,5 +168,17 @@ public class DefaultReporter implements Reporter{
 	public void setUp() {
 		// TODO Auto-generated method stub
 
+	}
+
+	public void registerMethodDefinition(JavaTestMethodDefinition javaTestMethodDefinition) throws SQLException, Exception {
+		this.dbReporter.registerMethodDefinition(javaTestMethodDefinition);
+	}
+
+	public void registerClassDefinition(JavaTestClassDefinition javaTestClassDefinition) throws SQLException, Exception {
+		this.dbReporter.registerClassDefinition(javaTestClassDefinition);
+	}
+
+	public void finalizeDefinitions() throws SQLException {
+		this.dbReporter.finalizeDefinitions();
 	}
 }

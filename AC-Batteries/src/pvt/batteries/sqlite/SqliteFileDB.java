@@ -25,9 +25,18 @@ public class SqliteFileDB {
 	}
 
 	public ResultSet select(String sql) throws SQLException{
-		PreparedStatement pstmt  = conn.prepareStatement(sql);
+		PreparedStatement pstmt  = prepare(sql);
 		ResultSet rs  = pstmt.executeQuery();
 		return rs;
+	}
+	
+	public PreparedStatement prepare(String sql) throws SQLException{
+		PreparedStatement pstmt  = conn.prepareStatement(sql);
+		return pstmt;
+	}	
+	
+	public void insert(PreparedStatement pstmt) throws SQLException{
+		pstmt.executeUpdate();
 	}
 				
 	public void commit() throws SQLException{
