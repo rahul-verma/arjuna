@@ -54,7 +54,7 @@ import pvt.batteries.value.StringValue;
 import pvt.unitee.arjuna.SessionCreator;
 import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.TestPickerProperty;
-import pvt.unitee.reporter.lib.DefaultReporter;
+import pvt.unitee.reporter.lib.CentralActiveReporter;
 import pvt.unitee.reporter.lib.GlobalState;
 import pvt.unitee.reporter.lib.Reporter;
 import pvt.unitee.testobject.lib.definitions.TestDefinitionsDB;
@@ -76,7 +76,7 @@ public enum ArjunaSingleton {
 	
 	private DataMethodContainerMap dataMethodContainers =  new DataMethodContainerMap();
 	private DataGeneratorMap dataGenerators =  new DataGeneratorMap();
-	private DefaultReporter reporter = null;
+	private CentralActiveReporter reporter = null;
 
 	private GlobalState execState;
 	private CLIConfigurator cliConfigurator = null;
@@ -432,11 +432,11 @@ public enum ArjunaSingleton {
 		cliArgs = args;
 	}
 	
-	public DefaultReporter getReporter(){
+	public CentralActiveReporter getReporter(){
 		return this.reporter;
 	}
 	
-	public void setReporter(DefaultReporter reporter){
+	public void setReporter(CentralActiveReporter reporter){
 		this.reporter = reporter;
 	}
 

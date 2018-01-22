@@ -15,22 +15,22 @@ import arjunasdk.console.Console;
 import pvt.batteries.config.Batteries;
 import pvt.batteries.filehandler.FileReader;
 import pvt.unitee.arjuna.ArjunaInternal;
-import pvt.unitee.interfaces.ReportGenerator;
+import unitee.interfaces.Reporter;
 
 public abstract class JsonResultsReader{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private String reportDir = null;
 	private File[] files = null;
-	private List<ReportGenerator> generators = new ArrayList<ReportGenerator>();
+	private List<Reporter> generators = new ArrayList<Reporter>();
 	
-	public JsonResultsReader(String reportDir, List<ReportGenerator> observers) throws Exception{
+	public JsonResultsReader(String reportDir, List<Reporter> observers) throws Exception{
 		this.reportDir = reportDir;
 		files = (new File(reportDir)).listFiles();
 		Arrays.sort(files);
 		this.getGenerators().addAll(observers);
 	}
 	
-	public void addGenerator(ReportGenerator observer){
+	public void addGenerator(Reporter observer){
 		this.getGenerators().add(observer);
 	}
 	
@@ -68,11 +68,11 @@ public abstract class JsonResultsReader{
 		}			
 	}
 
-	protected List<ReportGenerator> getGenerators() {
+	protected List<Reporter> getGenerators() {
 		return generators;
 	}
 
-	private void setGenerators(List<ReportGenerator> generators) {
+	private void setGenerators(List<Reporter> generators) {
 		this.generators = generators;
 	}
 }

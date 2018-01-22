@@ -9,15 +9,15 @@ import com.google.gson.JsonElement;
 import pvt.batteries.config.Batteries;
 import pvt.unitee.arjuna.ArjunaInternal;
 import pvt.unitee.enums.ArjunaProperty;
-import pvt.unitee.interfaces.ReportGenerator;
 import pvt.unitee.reporter.lib.ignored.IgnoredTest;
 import pvt.unitee.reporter.lib.ignored.IgnoredTestDeserializer;
+import unitee.interfaces.Reporter;
 
 public class IgnoredTestReportGenerator extends JsonResultsReader{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	private IgnoredTestDeserializer deserializer = null;
 	
-	public IgnoredTestReportGenerator(List<ReportGenerator> generators) throws Exception{
+	public IgnoredTestReportGenerator(List<Reporter> generators) throws Exception{
 		super(Batteries.value(ArjunaProperty.PROJECT_RUN_REPORT_JSON_IGNOREDTESTS_DIR).asString(), generators);
 		deserializer = new IgnoredTestDeserializer();
 	}
@@ -28,7 +28,7 @@ public class IgnoredTestReportGenerator extends JsonResultsReader{
 	
 	protected void update(JsonElement jElement) throws Exception {
 		IgnoredTest reportable = this.getResultObject(jElement);
-		for (ReportGenerator generator: this.getGenerators()){
+		for (Reporter generator: this.getGenerators()){
 			if (ArjunaInternal.displayReportGenerationInfo){
 				logger.debug(String.format("%s: Updating: %s.", this.getClass().getSimpleName(), generator.getClass().getSimpleName()));
 				logger.debug(String.format("Result Object: %s.", reportable.asJsonObject().toString()));

@@ -10,6 +10,7 @@ import java.util.Set;
 
 import arjunasdk.ddauto.interfaces.DataReference;
 import arjunasdk.ddauto.interfaces.DataSource;
+import arjunasdk.interfaces.Value;
 import pvt.batteries.databroker.DataReferenceFactory;
 import pvt.unitee.core.lib.datasource.DataSourceBuilder;
 import pvt.unitee.core.lib.datasource.DummyDataSource;
@@ -21,6 +22,7 @@ import pvt.unitee.enums.SkipCode;
 import pvt.unitee.enums.UnpickedCode;
 import pvt.unitee.testobject.lib.java.loader.TestPropertyAnnotationsProcessor;
 import pvt.unitee.testobject.lib.java.processor.MethodSignatureType;
+import unitee.enums.TestAttribute;
 import unitee.interfaces.TestVariables;
 
 public class JavaTestMethodDefinition {
@@ -99,7 +101,8 @@ public class JavaTestMethodDefinition {
 		this.qualifiedName = getClassDefinition().getQualifiedName() + "." + getName();	
 		this.testVars.rawObjectProps().setName(name);
 		this.testVars.rawObjectProps().setMethod(name);
-		TestPropertyAnnotationsProcessor.populateTestProps(this, this.testVars);
+		this.testVars.rawObjectProps().setParentQualifiedName(this.qualifiedName);
+		TestPropertyAnnotationsProcessor.populateTestProps(this.getClassDefinition(), this, this.testVars);
 	}
 	
 	public Method getMethod() {

@@ -1,6 +1,6 @@
 package pvt.unitee.interfaces;
 
-public interface InternlReportableObserver<T> {
+public interface InternalReportableObserver<T> {
 	void initUpdate() throws Exception;
 	void endUpdate() throws Exception;
 	

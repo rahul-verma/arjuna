@@ -30,7 +30,7 @@ public @interface TestClass {
 	String id() default "NOT_SET";
 	String name() default "NOT_SET";
 	String idea() default "NOT_SET";
-	int priority() default 1;
+	int priority() default -51111;
 	int methodThreads() default 1;
 	String[] attr() default {};
 	//Class<? extends Dictionary> attrClass() default None.class;

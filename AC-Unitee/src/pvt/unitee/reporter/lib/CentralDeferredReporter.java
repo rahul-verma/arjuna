@@ -6,16 +6,16 @@ import java.util.List;
 import org.apache.log4j.Logger;
 
 import pvt.batteries.config.Batteries;
-import pvt.unitee.interfaces.ReportGenerator;
 import pvt.unitee.reporter.lib.generator.ActivityReportGenerator;
 import pvt.unitee.reporter.lib.generator.FixtureReportGenerator;
 import pvt.unitee.reporter.lib.generator.IgnoredTestReportGenerator;
 import pvt.unitee.reporter.lib.generator.IssueReportGenerator;
 import pvt.unitee.reporter.lib.generator.TestReportGenerator;
+import unitee.interfaces.Reporter;
 
-public class CentralReportGenerator {
+public class CentralDeferredReporter {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
-	private List<ReportGenerator> generators = new ArrayList<ReportGenerator>();
+	private List<Reporter> generators = new ArrayList<Reporter>();
 	private String reportDir = null;
 	
 	TestReportGenerator executionGenerator = null;
@@ -24,15 +24,15 @@ public class CentralReportGenerator {
 	FixtureReportGenerator fixtureGenerator = null;
 	ActivityReportGenerator activityGenerator = null;
 	
-	public CentralReportGenerator(){
+	public CentralDeferredReporter(){
 	}
 	
-	public synchronized void addReportGenerator(ReportGenerator generator) throws Exception {
+	public synchronized void addReporter(Reporter generator) throws Exception {
 		generators.add(generator);
 	}
 	
 	public void setUp() throws Exception{
-		for (ReportGenerator generator: this.generators){
+		for (Reporter generator: this.generators){
 			generator.setUp();
 		}
 		executionGenerator = new TestReportGenerator(generators);
@@ -44,7 +44,7 @@ public class CentralReportGenerator {
 	
 	
 	public void tearDown() throws Exception{
-		for (ReportGenerator generator: this.generators){
+		for (Reporter generator: this.generators){
 			generator.tearDown();
 		}
 	}

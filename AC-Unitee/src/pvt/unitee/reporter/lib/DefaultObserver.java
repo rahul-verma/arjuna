@@ -1,8 +1,8 @@
 package pvt.unitee.reporter.lib;
 
-import pvt.unitee.interfaces.InternlReportableObserver;
+import pvt.unitee.interfaces.InternalReportableObserver;
 
-public abstract class DefaultObserver<T> implements InternlReportableObserver<T>{
+public abstract class DefaultObserver<T> implements InternalReportableObserver<T>{
 
 	@Override
 	public void initUpdate() throws Exception {

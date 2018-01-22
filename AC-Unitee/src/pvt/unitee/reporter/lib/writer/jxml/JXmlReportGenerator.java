@@ -57,7 +57,6 @@ import pvt.unitee.enums.IgnoredTestStatus;
 import pvt.unitee.enums.TestReportSection;
 import pvt.unitee.enums.TestResultAttribute;
 import pvt.unitee.enums.TestResultType;
-import pvt.unitee.interfaces.ReportGenerator;
 import pvt.unitee.reporter.lib.event.Event;
 import pvt.unitee.reporter.lib.fixture.FixtureResult;
 import pvt.unitee.reporter.lib.ignored.IgnoredTest;
@@ -66,9 +65,10 @@ import pvt.unitee.reporter.lib.issue.IssueProperties;
 import pvt.unitee.reporter.lib.test.TestResult;
 import unitee.enums.TestAttribute;
 import unitee.enums.TestObjectAttribute;
+import unitee.interfaces.Reporter;
 
 
-public class JXmlReportGenerator implements ReportGenerator {
+public class JXmlReportGenerator implements Reporter {
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
 	String name;
 	private int failCount = 0;

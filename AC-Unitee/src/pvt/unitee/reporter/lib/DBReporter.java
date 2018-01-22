@@ -36,15 +36,12 @@ public class DBReporter {
 
 	public void registerMethodDefinition(JavaTestMethodDefinition tmd) throws SQLException, Exception {
 		PreparedStatement stmt = runDB.prepare(this.rsMap.get(RunDBSQLNames.ADD_CREATOR.toString()).asString());
-		System.out.println(this.classIndexMap);
-		System.out.println(tmd.getClassDefinition().getTestVariables().object().qualifiedName());
 		stmt.setInt(1, this.classIndexMap.get(tmd.getClassDefinition().getTestVariables().object().qualifiedName()));
 		stmt.setInt(2, ++currentMethodIndex);
-		stmt.setString(3, "NA");
-		stmt.setString(4, "NA");
-		stmt.setString(5, "NA");
-		stmt.setInt(6, -1);
-		System.out.println(tmd.getQualifiedName());
+		stmt.setString(3, tmd.getTestVariables().test().id());
+		stmt.setString(4, tmd.getTestVariables().test().name());
+		stmt.setString(5, tmd.getTestVariables().test().idea());
+		stmt.setInt(6, tmd.getTestVariables().test().priority());
 		stmt.setString(7, tmd.getQualifiedName());
 		stmt.setString(8, tmd.getTestVariables().object().name());
 		runDB.insert(stmt);
@@ -53,14 +50,27 @@ public class DBReporter {
 	public void registerClassDefinition(JavaTestClassDefinition tcd) throws SQLException, Exception {
 		PreparedStatement stmt = runDB.prepare(this.rsMap.get(RunDBSQLNames.ADD_CONTAINER.toString()).asString());
 		stmt.setInt(1, ++currentClassIndex);
-		stmt.setString(2, "NA");
-		stmt.setString(3, "NA");
-		stmt.setString(4, "NA");
+		stmt.setString(2, tcd.getTestVariables().test().id());
+		stmt.setString(3, tcd.getTestVariables().test().name());
+		stmt.setString(4, tcd.getTestVariables().test().idea());
 		stmt.setString(5, tcd.getTestVariables().object().pkg());
-		stmt.setInt(6, -1);
+		stmt.setInt(6, tcd.getTestVariables().test().priority());
 		stmt.setString(7, tcd.getTestVariables().object().qualifiedName());
 		stmt.setString(8, tcd.getName());
-		System.out.println(currentClassIndex);
+		runDB.insert(stmt);
+		classIndexMap.put(tcd.getTestVariables().object().qualifiedName(), currentClassIndex);
+	}
+	
+	public void addTestResult() throws SQLException, Exception {
+		PreparedStatement stmt = runDB.prepare(this.rsMap.get(RunDBSQLNames.ADD_CONTAINER.toString()).asString());
+		stmt.setInt(1, ++currentClassIndex);
+		stmt.setString(2, tcd.getTestVariables().test().id());
+		stmt.setString(3, tcd.getTestVariables().test().name());
+		stmt.setString(4, tcd.getTestVariables().test().idea());
+		stmt.setString(5, tcd.getTestVariables().object().pkg());
+		stmt.setInt(6, tcd.getTestVariables().test().priority());
+		stmt.setString(7, tcd.getTestVariables().object().qualifiedName());
+		stmt.setString(8, tcd.getName());
 		runDB.insert(stmt);
 		classIndexMap.put(tcd.getTestVariables().object().qualifiedName(), currentClassIndex);
 	}

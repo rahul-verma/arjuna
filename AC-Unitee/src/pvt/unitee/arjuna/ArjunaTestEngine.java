@@ -36,23 +36,24 @@ import pvt.unitee.enums.ArjunaProperty;
 import pvt.unitee.enums.ReportGenerationFormat;
 import pvt.unitee.enums.ReportListenerFormat;
 import pvt.unitee.enums.TestLanguage;
-import pvt.unitee.interfaces.InternlReportableObserver;
+import pvt.unitee.interfaces.InternalReportableObserver;
 import pvt.unitee.lib.engine.TestEngine;
 import pvt.unitee.lib.engine.TestSessionRunner;
-import pvt.unitee.reporter.lib.CentralReportGenerator;
-import pvt.unitee.reporter.lib.DefaultReporter;
+import pvt.unitee.reporter.lib.CentralDeferredReporter;
+import pvt.unitee.reporter.lib.CentralActiveReporter;
 import pvt.unitee.reporter.lib.GlobalState;
-import pvt.unitee.reporter.lib.Reporter;
 import pvt.unitee.reporter.lib.SummaryResult;
 import pvt.unitee.reporter.lib.event.Event;
 import pvt.unitee.reporter.lib.test.TestResult;
 import pvt.unitee.reporter.lib.writer.console.ConsoleEventWriter;
+import pvt.unitee.reporter.lib.writer.console.ConsoleReporter;
 import pvt.unitee.reporter.lib.writer.console.ConsoleTestResultWriter;
-import pvt.unitee.reporter.lib.writer.excel.ExcelReportGenerator;
+import pvt.unitee.reporter.lib.writer.excel.ExcelReporter;
 import pvt.unitee.reporter.lib.writer.jxml.JXmlReportGenerator;
 import pvt.unitee.testobject.lib.java.loader.JavaTestClassDefLoader;
 import pvt.unitee.testobject.lib.java.loader.TestDefinitionsProcessor;
 import pvt.unitee.testobject.lib.loader.session.Session;
+import unitee.interfaces.Reporter;
 
 public class ArjunaTestEngine implements TestEngine{
 	private Logger logger = Logger.getLogger(Batteries.getCentralLogName());
@@ -81,7 +82,7 @@ public class ArjunaTestEngine implements TestEngine{
 		logger.debug(Batteries.getInfoMessageText(ArjunaInternal.info.TESTREPORTER_CREATE_START));
 		SummaryResult.init();
 		ArjunaSingleton.INSTANCE.setCentralExecState(new GlobalState());
-		DefaultReporter reporter = new DefaultReporter();
+		CentralActiveReporter reporter = new CentralActiveReporter();
 		List<String> reportFormats = Batteries.value(ArjunaProperty.REPORT_LISTENERS_BUILTIN).asStringList();
 		for (String reportFormatName: reportFormats) {
 			if (ArjunaInternal.displayReportPrepInfo){
@@ -90,10 +91,8 @@ public class ArjunaTestEngine implements TestEngine{
 			ReportListenerFormat reportFormat = ReportListenerFormat.valueOf(reportFormatName.toUpperCase());
 			switch(reportFormat){
 			case CONSOLE:
-				InternlReportableObserver<TestResult> execConsoleObserver = new ConsoleTestResultWriter();
-				reporter.addTestResultObserver(execConsoleObserver);
-				InternlReportableObserver<Event> acConsoleObserver = new ConsoleEventWriter();
-				reporter.addEventObserver(acConsoleObserver);
+				Reporter execConsoleObserver = new ConsoleReporter();
+				reporter.addReporter(execConsoleObserver);
 				break;
 			default:
 				String msg = "Unrecognized report listener format option: " + reportFormatName + ". Exiting now...";
@@ -117,7 +116,7 @@ public class ArjunaTestEngine implements TestEngine{
 		}
 		
 		String reportDir = this.getReportDir();
-		CentralReportGenerator generator = new CentralReportGenerator();
+		CentralDeferredReporter generator = new CentralDeferredReporter();
 		List<String> reportFormats = Batteries.value(ArjunaProperty.REPORT_GENERATORS_BUILTIN).asStringList();
 		for (String reportFormatName: reportFormats) {
 			if (ArjunaInternal.displayReportGenerationInfo){
@@ -127,11 +126,11 @@ public class ArjunaTestEngine implements TestEngine{
 			switch(reportFormat){
 			case EXCEL:
 				FileUtils.forceMkdir(new File(reportDir + "/excel"));
-				generator.addReportGenerator(new ExcelReportGenerator(reportDir + "/excel"));
+				generator.addReporter(new ExcelReporter(reportDir + "/excel"));
 				break;
 			case JXML:
 				FileUtils.forceMkdir(new File(reportDir + "/jxml"));
-				generator.addReportGenerator(new JXmlReportGenerator(reportDir + "/jxml"));
+				generator.addReporter(new JXmlReportGenerator(reportDir + "/jxml"));
 				break;
 			default:
 				String msg = "Unrecognized report format option: " + reportFormatName + ". Exiting now...";
