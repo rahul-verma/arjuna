@@ -1,4 +1,0 @@
-Left	Right	Sum
-1	2	3
-#4	5	70
-7	8	Wrong
