@@ -1,0 +1,75 @@
+Note: Arjuna supports HOCON syntax for group templates. Equivalent JSON is fine too.
+
+Valid Package Picker JSON formats
+#################################
+
+{
+	target = packages
+	package = pname
+}
+
+---------------------------------
+
+{
+	target = packages
+	consider = [regex1, regex2...]
+}
+
+---------------------------------
+
+{
+	target = packages
+	ignore = [regex1, regex2...]
+}
+
+---------------------------------
+
+{
+	target = packages
+	consider = [regexc1, regexc2...]
+	ignore = [regexi1, regexi2...]
+}
+
+Valid Class Picker JSON formats
+#################################
+
+{
+	target = classes
+	package = pname
+	class = cname
+}
+
+---------------------------------
+
+{
+	target = classes
+	package = pname
+	consider = [regex1, regex2...]
+}
+
+---------------------------------
+
+{
+	target = classes
+	package = pname
+	ignore = [regex1, regex2...]
+}
+
+Valid Method Picker JSON formats
+#################################
+
+{
+	target = tfuncs
+	package = pname
+	class = cname
+	consider = [regex1, regex2...]
+}
+
+---------------------------------
+
+{
+	target = tfuncs
+	package = pname
+	class = cname
+	ignore = [regex1, regex2...]
+}

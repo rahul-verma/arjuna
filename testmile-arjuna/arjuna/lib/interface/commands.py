@@ -1,0 +1,388 @@
+'''
+This file is a part of Test Mile Arjuna
+Copyright 2018 Test Mile Software Testing Pvt Ltd
+
+Website: www.TestMile.com
+Email: support [at] testmile.com
+Creator: Rahul Verma
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+'''
+
+import abc
+import os
+import re
+import argparse
+import tempfile
+import shutil
+import logging
+from functools import partial
+import traceback
+import json
+
+from arjuna.lib.core import ARJUNA_ROOT
+from arjuna.lib.core.enums import *
+from arjuna.lib.unitee.enums import *
+from arjuna.lib.core.utils import sys_utils
+from arjuna.lib.core.reader.hocon import HoconFileReader, HoconConfigDictReader
+from arjuna.lib.core.reader.textfile import TextResourceReader
+from arjuna.lib.unitee import UniteeFacade
+
+def ustr(input):
+    return (str(input)).upper()
+
+vnregex = r'[a-z][a-z_0-9]{2,29}'
+vregex_text = '''
+{} name must be a string of length 3-30 containing lower case letters, digits or _ (underscore).
+It must begin with a letter.
+'''
+
+def lname_check(context, input):
+    if not re.match(vnregex, input):
+        from arjuna.lib.core import ArjunaCore
+        ArjunaCore.console.display_error('Invalid {} name provided.'.format(context))
+        ArjunaCore.console.display_error(vregex_text.format(context))
+        sys_utils.fexit()
+    return input
+
+class Command(metaclass=abc.ABCMeta):
+    PENTRY = '''
+    project.name = {}
+    workspace.dir = "{}"
+    '''
+
+    def __init__(self):
+        self.parser = None
+
+    def get_parser(self):
+        return self.parser
+
+    @abc.abstractmethod
+    def execute(self, integrator, arg_dict):
+        pass
+
+    def _get_ws_info(self, integrator):
+        pcdir = integrator.value(CorePropertyTypeEnum.CONFIG_DIR)
+        wsreader = HoconFileReader(os.path.join(pcdir, "ws.conf"))
+        wsreader.process()
+        return wsreader.get_map()
+
+    def _is_project(self, integrator, pname, info_dict):
+        if "projects.{}".format(pname) in info_dict:
+            return True
+        else:
+            return False
+
+    def _get_proj_dir(self, integrator, pname):
+        wsinfo = self._get_ws_info(integrator)
+        return wsinfo['projects'][pname]
+
+    def __process_conf_file(self, path):
+        from arjuna.lib.core import ArjunaCore
+
+        armap = {}
+        uomap = {}
+        evars = {}
+
+        try:
+            r = HoconFileReader(path)
+            r.process()
+        except Exception as e:
+            strace = traceback.format_exc()
+            ArjunaCore.console.display_exception_block(e, strace)
+            sys_utils.fexit()
+        else:
+            for k,v in r.get_map().items():
+                lk = k.lower()
+                if lk == "arjuna_options":
+                    r = HoconConfigDictReader(v)
+                    r.process()
+                    armap = r.get_flat_map()
+                elif lk == "evars":
+                    uomap = v
+                elif lk == "user_options":
+                    evars = v
+
+        return armap, uomap, evars
+
+    def __process_confs(self, integrator, ppd, pname, cli_map):
+        cfile = os.path.join(integrator.value(CorePropertyTypeEnum.CONFIG_DIR),
+                             integrator.value(CorePropertyTypeEnum.CONFIG_CENTRAL_FILE_NAME))
+
+        armap, uomap, evars = self.__process_conf_file(cfile)
+        armap2, uomap2, evars2 = self.__process_conf_file(os.path.join(ppd, pname, "config", "{}.conf".format(pname)))
+
+        armap.update(armap2); uomap.update(uomap2); evars.update(evars2)
+
+        integrator.process_conf_file_options(armap)
+        integrator.process_interface_options(cli_map)
+
+        integrator.process_user_options(uomap)
+
+        integrator.process_evars(evars)
+
+
+    def _init_components(self, arg_dict):
+        from arjuna.lib.core import ArjunaCore
+        integrator = ArjunaCore.integrator
+        pname = arg_dict['project.name']
+        wsd = self._get_proj_dir(integrator, pname)
+        runid = arg_dict['runid']
+
+        from arjuna.lib.unitee import init
+        init(pname, wsd, runid)
+        self.__process_confs(integrator, wsd, pname, arg_dict)
+
+        ArjunaCore.freeze(integrator)
+        integrator.enumerate()
+
+        # All options are processed, so if components want to do initial processing, it is done here.
+        integrator.load()
+
+class MainCommand(Command):
+    def __init__(self):
+        self.parser = argparse.ArgumentParser(prog='python arjuna_launcher.py', conflict_handler='resolve',
+                                description="This is the CLI of Arjuna. Use the appropriate command and sub-commands as needed.")
+        self.parser.add_argument('-dl', '--display-level', dest='logger.console.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
+                                 help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
+        self.parser.add_argument('-ll', '--log-level', dest='logger.file.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
+                                 help="Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
+
+    def create_subparsers(self):
+        return self.parser.add_subparsers(title="Valid Commands", description="What do you want Arjuna to do?", dest='command')
+
+    def convert_to_dict(self, args):
+        try:
+            args = self.parser.parse_args(args)
+            return vars(args)
+        except Exception as e:
+            print (e)
+            sys_utils.fexit()
+
+    def execute(self, arg_dict):
+        from arjuna.lib.core import init
+        init(arg_dict)
+        # This is the first stage at which integrator can enumerate
+        # integrator.enumerate()
+
+class CreateProject(Command):
+
+    def __init__(self, subparsers):
+        self.parser = subparsers.add_parser('create-project', help="Create a new project")
+        self.parser.add_argument('project_name', type=partial(lname_check, "Project"), help = 'Name of project (Alnum 3-30 length. Only lower case letters.).')
+        self.parser.add_argument('--workspace', dest="workspace_dir", type=str, help='Workspace Directory')
+
+    def execute(self, arg_dict):
+        from arjuna.lib.core import ArjunaCore
+        integrator = ArjunaCore.integrator
+        print (arg_dict)
+        pname = arg_dict['project_name']
+        wd = arg_dict['workspace_dir'] and arg_dict['workspace_dir'] or integrator.value(CorePropertyTypeEnum.WORKSPACE_DIR)
+        pdir = os.path.join(wd, pname)
+        info_dict = self._get_ws_info(integrator)
+        fatal = False
+        reason = None
+        if self._is_project(integrator, pname, info_dict):
+            reason = "A project with name '{}' already exists.".format(pname)
+            fatal = True
+        elif os.path.isdir(pdir):
+            reason = "A non-project directory with name '{}' already exists in '{}'.".format(pname, wd)
+            fatal = True
+        elif os.path.isfile(pdir):
+            reason = "A file with name '{}' already exists in '{}'.".format(pname, wd)
+            fatal = True
+
+        if fatal:
+            ArjunaCore.console.display_error(reason, "Choose another project name.")
+            sys_utils.fexit()
+        else:
+            if not os.path.isdir(wd):
+                os.makedirs(wd)
+            d_names = integrator.value(CorePropertyTypeEnum.PROJECT_DIRS_FILES)
+            with tempfile.TemporaryDirectory() as tdir:
+                ptdir = os.path.join(tdir, pname)
+                os.mkdir(ptdir)
+                for d_name in d_names:
+                    os.mkdir(os.path.join(ptdir, d_name))
+                f = open(os.path.join(ptdir, "__init__.py"), "w")
+                f.close()
+                f = open(os.path.join(ptdir, "config", "{}.conf".format(pname)), "w")
+                f.close()
+                f = open(os.path.join(ptdir, "config", "groups.conf"), "w")
+                f.close()
+                f = open(os.path.join(ptdir, "fixtures", "__init__.py"), "w")
+                f.close()
+                f = open(os.path.join(ptdir, "tests", "modules", "__init__.py"), "w")
+                f.close()
+                shutil.move(ptdir, wd)
+            wsf = None
+            try:
+                wsfile = os.path.join(os.path.join(integrator.value(CorePropertyTypeEnum.CONFIG_DIR), "ws.conf"))
+                wsf = open(wsfile, "w")
+
+                if 'projects' not in info_dict:
+                    info_dict['projects'] = {}
+
+                if 'ws_paths' not in info_dict:
+                    info_dict['ws_paths'] = []
+
+                if 'workspaces' not in info_dict:
+                    info_dict['workspaces'] = []
+
+                if wd not in info_dict['ws_paths']:
+                    info_dict['ws_paths'].append(wd)
+                    info_dict['workspaces'].append({
+                        'path' : wd,
+                        'projects': [pname]
+                        }
+                    )
+                else:
+                    for d in info_dict['workspaces']:
+                        if d['path'] == wd:
+                            d['projects'].append(pname)
+
+                info_dict['projects'][pname] = wd
+
+                wsf.write(json.dumps(info_dict, indent=4))
+                wsf.close()
+                ArjunaCore.console.display("Project {} successfully created.".format(pname))
+            except Exception as e:
+                if wsf:
+                    wsf.write(json.dumps(info_dict, indent=4))
+                    wsf.close()
+                ArjunaCore.console.display_error("Fatal error in creating project.")
+                ArjunaCore.console.display_exception_block(e, traceback.format_exc())
+                sys_utils.fexit()
+class Parser:
+
+    def __init__(self):
+        self.parser = None
+
+
+    def get_parser(self):
+        return self.parser
+
+class RunParser(Parser):
+    def __init__(self, subparsers):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('project_name', type=partial(lname_check, "Project"), help='Name of existing project.')
+        self.parser.add_argument("-rid","--runid", nargs=1, dest="runid", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.')
+        self.parser.add_argument('-ar' '--active-reporters', dest="active.reporters",
+                                 metavar=('R1','R2'), nargs='+',
+                                 type=ustr,
+                                 choices=[i for i in ActiveReporterNames.__members__],
+                                 help='One or more valid active state names: ' + str([i for i in ActiveReporterNames.__members__]))
+        self.parser.add_argument('-dr' '--deferred-reporters', dest="deferred.reporters",
+                                 metavar=('R1','R2'), nargs='+',
+                                 type=ustr,
+                                 choices=[i for i in DeferredReporterNames.__members__],
+                                 help='One or more valid deferred state names: ' + str([i for i in DeferredReporterNames.__members__]))
+
+    def process(self, arg_dict):
+        arg_dict['project.name'] = arg_dict['project_name']
+        del arg_dict['project_name']
+
+class SessionParser(Parser):
+    def __init__(self, subparsers):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('session_name', type=partial(lname_check, "Session"), help='Existing session template name.')
+
+    def process(self, arg_dict):
+        arg_dict['session.name'] = arg_dict['session_name']
+        del arg_dict['session_name']
+
+class GroupParser(Parser):
+    def __init__(self, subparsers):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('group_name', type=partial(lname_check, "Group"), help='Existing group template name.')
+
+    def process(self, arg_dict):
+        arg_dict['group.name'] = arg_dict['group_name']
+        del arg_dict['group_name']
+
+class NamesParser(Parser):
+    def __init__(self, subparsers):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('-cm' '--cmodules', dest="cmodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for considering test modules.')
+        self.parser.add_argument('-im' '--imodules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+',
+                         help='One or more names/patterns for ignoring test modules.')
+        self.parser.add_argument('-cf' '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
+        self.parser.add_argument('-if' '--ifunctions', dest="ifunctions", metavar=('F1','F2'), default=None, nargs='+',
+                         help='One or more names/patterns for ignoring test functions.')
+
+    def process(self, arg_dict):
+        pass
+
+class __RunCommand(Command):
+    def __init__(self, subparsers, sub_parser_name, parents):
+        super().__init__()
+        self.parents = parents
+        self.parser = subparsers.add_parser(sub_parser_name, parents=[parent.get_parser() for parent in parents])
+        self.unitee = None
+
+    def execute(self, arg_dict):
+        for parent in self.parents:
+            parent.process(arg_dict)
+        self._init_components(arg_dict)
+
+        import sys
+        from arjuna.lib.core import ArjunaCore
+        sys.path.append(ArjunaCore.config.value(UniteePropertyEnum.PROJECT_DIR) + "/..")
+        self.unitee = UniteeFacade()
+        self.unitee.load_testdb()
+
+class RunProject(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-project', parents)
+
+    def execute(self, arg_dict):
+        super().execute(arg_dict)
+        self.unitee.load_session_for_all()
+        self.unitee.run()
+        self.unitee.tear_down()
+
+class RunSession(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-session', parents)
+
+    def execute(self, arg_dict):
+        super().execute(arg_dict)
+        from arjuna.lib.core import ArjunaCore
+        self.unitee.load_session(ArjunaCore.config.value(UniteePropertyEnum.SESSION_NAME))
+        self.unitee.run()
+        self.unitee.tear_down()
+
+class RunGroup(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-group', parents)
+
+    def execute(self, arg_dict):
+        super().execute(arg_dict)
+        self.unitee.load_session_for_group(arg_dict['group.name'])
+        self.unitee.run()
+        self.unitee.tear_down()
+
+class RunNames(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-names', parents)
+
+    def execute(self, arg_dict):
+        super().execute(arg_dict)
+        self.unitee.load_session_for_name_pickers(arg_dict['cmodules'],arg_dict['imodules'],arg_dict['cfunctions'],arg_dict['ifunctions'])
+        self.unitee.run()
+        self.unitee.tear_down()
+
