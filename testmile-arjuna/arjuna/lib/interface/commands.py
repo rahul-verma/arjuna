@@ -64,6 +64,9 @@ class Command(metaclass=abc.ABCMeta):
     def __init__(self):
         self.parser = None
 
+    def _set_parser(self, parser):
+        self.parser = parser
+
     def get_parser(self):
         return self.parser
 
@@ -150,20 +153,23 @@ class Command(metaclass=abc.ABCMeta):
         integrator.load()
 
 class MainCommand(Command):
+
     def __init__(self):
-        self.parser = argparse.ArgumentParser(prog='python arjuna_launcher.py', conflict_handler='resolve',
+        super().__init__()
+        parser = argparse.ArgumentParser(prog='python arjuna_launcher.py', conflict_handler='resolve',
                                 description="This is the CLI of Arjuna. Use the appropriate command and sub-commands as needed.")
-        self.parser.add_argument('-dl', '--display-level', dest='logger.console.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
+        parser.add_argument('-dl', '--display-level', dest='logger.console.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
                                  help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
-        self.parser.add_argument('-ll', '--log-level', dest='logger.file.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
+        parser.add_argument('-ll', '--log-level', dest='logger.file.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
                                  help="Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
+        self._set_parser(parser)
 
     def create_subparsers(self):
         return self.parser.add_subparsers(title="Valid Commands", description="What do you want Arjuna to do?", dest='command')
 
     def convert_to_dict(self, args):
         try:
-            args = self.parser.parse_args(args)
+            args = self.parser.parse_args(args[1:])
             return vars(args)
         except Exception as e:
             print (e)
@@ -178,9 +184,11 @@ class MainCommand(Command):
 class CreateProject(Command):
 
     def __init__(self, subparsers):
-        self.parser = subparsers.add_parser('create-project', help="Create a new project")
-        self.parser.add_argument('project_name', type=partial(lname_check, "Project"), help = 'Name of project (Alnum 3-30 length. Only lower case letters.).')
-        self.parser.add_argument('--workspace', dest="workspace_dir", type=str, help='Workspace Directory')
+        super().__init__()
+        parser = subparsers.add_parser('create-project', help="Create a new project")
+        parser.add_argument('project_name', type=partial(lname_check, "Project"), help = 'Name of project (Alnum 3-30 length. Only lower case letters.).')
+        parser.add_argument('--workspace', dest="workspace_dir", type=str, help='Workspace Directory')
+        self._set_parser(parser)
 
     def execute(self, arg_dict):
         from arjuna.lib.core import ArjunaCore
@@ -268,7 +276,6 @@ class Parser:
     def __init__(self):
         self.parser = None
 
-
     def get_parser(self):
         return self.parser
 
@@ -331,7 +338,8 @@ class __RunCommand(Command):
     def __init__(self, subparsers, sub_parser_name, parents):
         super().__init__()
         self.parents = parents
-        self.parser = subparsers.add_parser(sub_parser_name, parents=[parent.get_parser() for parent in parents])
+        parser = subparsers.add_parser(sub_parser_name, parents=[parent.get_parser() for parent in parents])
+        self._set_parser(parser)
         self.unitee = None
 
     def execute(self, arg_dict):

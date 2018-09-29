@@ -43,7 +43,7 @@ class ArjunaCLI:
         self.main_command = MainCommand()
         subparsers = self.main_command.create_subparsers()
 
-        run_parser =  RunParser(subparsers)
+        run_parser = RunParser(subparsers)
         session_parser = SessionParser(subparsers)
         group_parser = GroupParser(subparsers)
         names_parser = NamesParser(subparsers)
