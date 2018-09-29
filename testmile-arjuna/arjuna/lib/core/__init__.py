@@ -24,7 +24,7 @@ import shutil
 import threading
 
 ARJUNA_REF_NAME = "arjuna"
-ARJUNA_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../../..'))
+ARJUNA_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../../../..'))
 ARJUNA_RES_DIR = os.path.join(ARJUNA_ROOT, "arjuna", "res")
 ARJUNA_LOG_DIR = ARJUNA_ROOT + "/log"
 ARJUNA_LOG_NAME = ARJUNA_REF_NAME + ".log"
