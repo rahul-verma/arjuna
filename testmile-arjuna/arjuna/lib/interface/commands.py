@@ -196,6 +196,7 @@ class CreateProject(Command):
         print (arg_dict)
         pname = arg_dict['project_name']
         wd = arg_dict['workspace_dir'] and arg_dict['workspace_dir'] or integrator.value(CorePropertyTypeEnum.WORKSPACE_DIR)
+        print(wd)
         pdir = os.path.join(wd, pname)
         info_dict = self._get_ws_info(integrator)
         fatal = False
