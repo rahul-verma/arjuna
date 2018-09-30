@@ -41,13 +41,17 @@ class ArjunaCLI:
         self._args = args
         self.arg_dict = None
         self.main_command = MainCommand()
+
+        # Create parser for primary commands
         subparsers = self.main_command.create_subparsers()
 
+        # Create re-usable parses for command arguments
         run_parser = RunParser(subparsers)
         session_parser = SessionParser(subparsers)
         group_parser = GroupParser(subparsers)
         names_parser = NamesParser(subparsers)
 
+        # Create primary command handlers
         self.create_project = CreateProject(subparsers)
         self.run_project = RunProject(subparsers, [run_parser])
         self.run_session = RunSession(subparsers, [run_parser, session_parser])
@@ -60,17 +64,40 @@ class ArjunaCLI:
         self.main_command.execute(self.arg_dict)
 
     def execute(self):
-
         command = self.arg_dict['command']
         del self.arg_dict['command']
 
-        cases = {
-            CommandEnum.CREATE_PROJECT : (self.create_project.execute, ),
-            CommandEnum.RUN_PROJECT : (self.run_project.execute, ),
-            CommandEnum.RUN_SESSION : (self.run_session.execute, ),
-            CommandEnum.RUN_GROUP : (self.run_group.execute, ),
-            CommandEnum.RUN_NAMES : (self.run_names.execute, )
+        if not command:
+            print("!!!Fatal Error!!! You did not provide any command.")
+            print()
+            self.main_command.print_help()
+            sys.exit(1)
+
+        # Delegation dictionary for primary command description
+        desc_cases = {
+            CommandEnum.CREATE_PROJECT: "Creating new project",
+            CommandEnum.RUN_PROJECT: "Running the project",
+            CommandEnum.RUN_SESSION: "Running the selected session",
+            CommandEnum.RUN_GROUP: "Running the selected group",
+            CommandEnum.RUN_NAMES: "Running the selected names"
         }
 
-        switch = EnumSwitch(cases, (self.arg_dict,))
-        switch(CommandEnum[command.upper().replace("-","_")])
+        # Hyphens in commands are replaced with underscores for enum conversion
+        # So, create-project is internally referred as CREATE_PROJECT
+        command_enum = CommandEnum[command.upper().replace("-", "_")]
+
+        print(desc_cases[command_enum] + "...")
+
+        # Delegation dictionary for primary command choices
+        # Respective command object's 'execute' method is the handler.
+        execute_cases = {
+            CommandEnum.CREATE_PROJECT: (self.create_project.execute, ),
+            CommandEnum.RUN_PROJECT: (self.run_project.execute, ),
+            CommandEnum.RUN_SESSION: (self.run_session.execute, ),
+            CommandEnum.RUN_GROUP: (self.run_group.execute, ),
+            CommandEnum.RUN_NAMES: (self.run_names.execute, )
+        }
+
+        # Delegation using Arjuna's Enum based switch-case equivalent
+        switch = EnumSwitch(execute_cases, (self.arg_dict,))
+        switch(command_enum)

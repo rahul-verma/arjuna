@@ -25,7 +25,7 @@ from arjuna.lib.core import ArjunaCore
 from arjuna.lib.core.thread.decorators import *
 from arjuna.lib.unitee.reporter.result.types import SteppedResult
 
-class ConsoleReporter:
+class MinimalConsoleReporter:
 
     def __init__(self):
         self.lock = threading.RLock()
@@ -41,27 +41,28 @@ class ConsoleReporter:
                 self.console.display_multiline_key_value(k,v)
 
     def update_info(self, rdict):
-        self.__print("Information Notification", rdict)
+        # Does not print informational messages
+        pass
 
     def update_issue(self, issue):
+        # Prints full issue information
         self.__print("Issue Notification", issue)
 
     def update_test_object_result(self, reportable):
-        if reportable.has_steps():
-            rdict = OrderedDict(reportable.result)
-            for step in reportable.steps:
-                rdict['otype'] = "TestStep"
-                rdict.update(step)
-                print (step.items())
-                rdict['evars'] = "-"
-                rdict['data_record'] = "-"
-                rdict['rcode'] = "-"
-                rdict['props'] = "-"
-                rdict['user_props'] = "-"
-                rdict['tags'] = "-"
-                self.__print("Step Notification", rdict)
-
-        self.__print("Result Notification", reportable.result)
+        # Prints only test result
+        rdict = reportable.result
+        if rdict['otype'] != 'Test': return
+        self.console.display("Result:: [{}:{}] {} || Module:{}.{} Function:{} Test#{} || Stage:{} Group:{}".format(
+            rdict['rtype'],
+            rdict['rcode'],
+            (rdict['rtype'] in {'FAIL', 'ERROR'}) and ("Issue# " + str(rdict['iid'])) or "",
+            rdict['pkg'],
+            rdict['module'],
+            rdict['function'],
+            rdict['test'],
+            rdict['stage'],
+            rdict['group']
+        ))
 
     def set_up(self):
         pass

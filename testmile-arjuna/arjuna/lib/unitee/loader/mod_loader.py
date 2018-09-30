@@ -168,7 +168,6 @@ class ModuleLoader:
 
         self.mdef.threads = tsargs['threads']
         del tsargs['threads']
-        print ("hehe", id(self.mdef), self.mdef.qname, self.mdef.threads)
         self.mdef.set_evars(tsargs['evars'])
         del tsargs['evars']
         if tsargs['tags']:

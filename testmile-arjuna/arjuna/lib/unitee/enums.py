@@ -102,6 +102,7 @@ class UnpickedCodeEnum(Enum):
     UNPICKED_METHOD = auto()
 
 class ActiveReporterNames(Enum):
+    MIN_CONSOLE = auto()
     CONSOLE = auto()
     EXCEL = auto()
 
@@ -241,6 +242,7 @@ class TestObjectTypeEnum(Enum):
     Function = auto()
     Test = auto()
     Fixture = auto()
+    Step = auto()
 
 class InfoType(Enum):
     STARTED = auto()

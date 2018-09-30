@@ -23,13 +23,18 @@ from functools import partial
 from arjuna.lib.unitee.markup.tsmarkup import *
 
 test_function = test_function
+tfunc = test_function
 
 init_module = init_module
 end_module = partial(fixture, "end_module")
 init_each_function = partial(fixture, "init_each_function")
+init_tfunc = init_each_function
 end_each_function = partial(fixture, "end_each_function")
+end_tfunc = end_each_function
 init_each_test = partial(fixture, "init_each_test")
+init_test = init_each_test
 end_each_test = partial(fixture, "end_each_test")
+end_test = end_each_test
 
 skip = skip
 

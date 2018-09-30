@@ -64,6 +64,9 @@ class Command(metaclass=abc.ABCMeta):
     def __init__(self):
         self.parser = None
 
+    def print_help(self):
+        self.parser.print_help()
+
     def _set_parser(self, parser):
         self.parser = parser
 
@@ -172,13 +175,16 @@ class MainCommand(Command):
             args = self.parser.parse_args(args[1:])
             return vars(args)
         except Exception as e:
-            print (e)
+            print("!!!Fatal Error!!!")
+            print(e)
+            import traceback
+            traceback.print_exc()
             sys_utils.fexit()
 
     def execute(self, arg_dict):
         from arjuna.lib.core import init
         init(arg_dict)
-        # This is the first stage at which integrator can enumerate
+        # This is the first stage at which integrator can enumerate properties
         # integrator.enumerate()
 
 class CreateProject(Command):

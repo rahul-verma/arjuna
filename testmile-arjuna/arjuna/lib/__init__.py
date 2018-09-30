@@ -35,7 +35,8 @@ class __arfacade():
         reader.close()
 
         cli = ArjunaCLI(raw_args)
-        cli.init()  # At this stage Arjuna Core is initialized
+        # Initialize the Arjuna Core as per CLI options
+        cli.init()
 
         from arjuna.lib.core import ArjunaCore
         self.console = ArjunaCore.console

@@ -35,7 +35,6 @@ def path_to_core_absolute_path(configured_dir):
         if configured_dir.startswith("*/") or configured_dir.startswith("*\\"):
             ret_path = file_utils.get_canonical_path(ARJUNA_ROOT + configured_dir[1:])
         else:
-            print(configured_dir)
             ret_path = file_utils.get_canonical_path(ARJUNA_ROOT + os.path.sep + configured_dir[1:])
     else:
         ret_path = configured_dir
@@ -48,6 +47,7 @@ def path_to_project_absolute_path(project_dir, configured_dir):
     if file_utils.is_absolute_path(configured_dir):
         ret_path = configured_dir
     else:
+        print(configured_dir)
         ret_path = file_utils.get_canonical_path(project_dir + os.path.sep + configured_dir)
     return ret_path
 

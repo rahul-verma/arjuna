@@ -27,6 +27,7 @@ from arjuna.lib.core.utils import file_utils
 from arjuna.lib.core import ArjunaCore
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.core.thread.decorators import *
+from arjuna.lib.unitee.reporter.mcr import *
 from arjuna.lib.unitee.reporter.cr import *
 from arjuna.lib.unitee.reporter.excel import *
 
@@ -89,7 +90,9 @@ class ActiveReporter(__Reporter):
 
     def set_up(self):
         for afmt in ArjunaCore.config.value(UniteePropertyEnum.ACTIVE_REPORTERS):
-            if afmt == ActiveReporterNames.CONSOLE:
+            if afmt == ActiveReporterNames.MIN_CONSOLE:
+                self._add_reporter(MinimalConsoleReporter())
+            elif afmt == ActiveReporterNames.CONSOLE:
                 self._add_reporter(ConsoleReporter())
             elif afmt == ActiveReporterNames.EXCEL:
                 self._add_reporter(ExcelReporter())

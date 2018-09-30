@@ -36,7 +36,7 @@ def init_module(id=None, *,
                 exclude_if=None,
 
                 name=None, author=None, bugs=None, idea=None, unstable=False,
-                component=None, app_version=1.0,
+                component=None, app_version=None,
 
                 **kwargs):
     clocals = {i:j for i,j in locals().items()}
@@ -59,7 +59,7 @@ def test_function(id=None, *,
                   exclude_if=None,
 
                   name=None, author=None, bugs=None, idea=None, unstable=False,
-                  component=None, app_version=1.0,
+                  component=None, app_version=None,
 
                   **kwargs):
     clocals = {i:j for i,j in locals().items()}
