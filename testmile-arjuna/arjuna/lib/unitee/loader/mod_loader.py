@@ -123,7 +123,7 @@ class ModuleLoader:
 
     def __wrongmultientry(self, mqname, fname, dstr):
         msg = "Fatal Error: Unsupported multi-decoration in module {}."
-        msg += "{} has been decorated with @{} and @{}."
+        msg += "{} has been decorated with {}."
         self.console.display_error(msg.format(mqname, fname, dstr))
         sys_utils.fexit()
 
@@ -144,10 +144,10 @@ class ModuleLoader:
         if kqname in id_dict:
             dstr = ", ".join(["@{}".format(d) for d in ([dec_name] + self._current_kall_decs[kqname])])
             if id(kallable) == id_dict[kqname]:
-                self.logger.debug("Multi-decorator situation", dtype, dec_name, kallable, id(kallable), id_dict[kqname])
+                self.logger.debug("Multi-decorator situation: {} {} {} {} {}".format(dtype, dec_name, kallable, id(kallable), id_dict[kqname]))
                 fmultidec(kallable.__module__, kallable.__qualname__, dstr)
             else:
-                self.logger.fatal("Duplicate name problem", dtype, dec_name, kallable, id(kallable), id_dict[kqname])
+                self.logger.fatal("Duplicate name problem: {} {} {} {} {}".format(dtype, dec_name, kallable, id(kallable), id_dict[kqname]))
                 self.__duplicatefunc(kallable.__module__, kallable.__qualname__, dstr)
         else:
             self.logger.debug("First decorator: {} {} {} {}".format(dtype, dec_name, kallable, id(kallable)))
@@ -234,13 +234,13 @@ class ModuleLoader:
             self.console.display_error(msg)
             sys_utils.fexit()
 
-        def register_skip():
+        def register_skip(*vargs):
             self.__update_tracking(kallable, "skip")
             if kallable.__qualname__ == "__init__":
-                self.mdef.skip_code = SkipCodeEnum.SKIP_MODULE_DEC
+                self.mdef.set_skip_code(SkipCodeEnum.SKIP_MODULE_DEC)
             else:
-                td = self.mdef.fdefs[kallable.__qualname__]
-                td.skip_code = SkipCodeEnum.SKIP_FUNC_DEC
+                td = self.mdef.get_fdef(kallable.__qualname__)
+                td.set_skip_code(SkipCodeEnum.SKIP_FUNC_DEC)
 
         return self.__register_dec(
             "Skipped function",

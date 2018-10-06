@@ -39,6 +39,7 @@ class Issue:
 
 class __BaseTestPoint:
     def __init__(self):
+        self.__otype = None
         self.__tstamp = datetime.datetime.now().timestamp()
         self.__counter = "-"
         self.__exec_context = ExecutionContext.Test
@@ -57,6 +58,14 @@ class __BaseTestPoint:
 
         from arjuna.lib.unitee import Unitee
         self.unitee = Unitee
+
+    @property
+    def otype(self):
+        return self.__otype
+
+    @otype.setter
+    def otype(self, o_type):
+        self.__otype = o_type
 
     @property
     def step_props(self):

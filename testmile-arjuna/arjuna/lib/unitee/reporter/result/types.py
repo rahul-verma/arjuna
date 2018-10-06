@@ -226,6 +226,7 @@ class SteppedResult(TestObjectResult):
 
     def __create_step_result(self, step):
         sr = StepResult()
+        sr.otype = step.otype
         sr.step_rtype = step.rtype == "-" and step.rtype or step.rtype.name
         sr.iid = step.iid
         sr.step_timestamp = step.timestamp

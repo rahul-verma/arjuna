@@ -56,16 +56,26 @@ class DefDB:
     def __iter__(self):
         return iter(self.__mdefs.items())
 
-    def process_unpicked(self):
-        temp = set()
+    def __should_include(self, fname, unpicked_set, skip_set):
+        if fname in unpicked_set:
+            return False
+        if fname in skip_set:
+            return False
+        return True
+
+    def process_unpicked_and_skipped(self):
+        temp1 = set()
+        temp2 = set()
         for mname, mdef in self:
             if mdef.unpicked:
                 self.__unpicked.append((mdef.pkg, mdef.module))
-                temp.add(mname)
+                temp1.add(mname)
+            elif mdef.skipped:
+                self.__skipped.append((mdef.pkg, mdef.module))
+                temp2.add(mname)
             else:
-                for fname, fdef in mdef:
-                    mdef.process_unpicked()
-        self.__mdefs = {i:j for i,j in self.__mdefs.items() if i not in temp}
+                mdef.process_unpicked_and_skipped()
+        self.__mdefs = {i:j for i,j in self.__mdefs.items() if self.__should_include(i, temp1, temp2)}
         self.__mqueue = [i for i in self.__mqueue if i in self.__mdefs]
 
     def process_dependencies(self):
@@ -110,3 +120,7 @@ class DefDB:
 
     def has_class(self, name):
         return name in self.__all_class_name_set
+
+
+    def should_run_module(self, qname):
+        return qname in self.__mqueue

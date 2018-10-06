@@ -119,13 +119,27 @@ class ModDef(TestSourceDef):
     def __iter__(self):
         return iter(self.__fdefs.items())
 
-    def process_unpicked(self):
-        temp = set()
+    def __should_include(self, fname, unpicked_set, skip_set):
+        if fname in unpicked_set:
+            return False
+        if fname in skip_set:
+            return False
+        return True
+
+    def process_unpicked_and_skipped(self):
+        temp1 = set()
         for fname, fdef in self:
             if fdef.unpicked:
                 self.__unpicked.append((fdef.pkg, fdef.module, fdef.name))
-                temp.add(fdef.name)
-        self.__fdefs = {i:j for i,j in self.__fdefs.items() if i not in temp}
+                temp1.add(fdef.name)
+
+        temp2 = set()
+        for fname, fdef in self:
+            if fdef.skipped:
+                self.__skipped.append((fdef.pkg, fdef.module, fdef.name))
+                temp2.add(fdef.name)
+
+        self.__fdefs = {i:j for i, j in self.__fdefs.items() if self.__should_include(i, temp1, temp2)}
         self.__fqueue = [i for i in self.__fqueue if i in self.__fdefs]
 
     def register_fdef(self, fdef):
@@ -140,8 +154,11 @@ class ModDef(TestSourceDef):
         self.console.marker(50, '+')
         self.console.display(self.tvars)
         self.console.marker(50, '+')
-        names = list(self.fdefs.keys())
+        names = list(self.__fdefs.keys())
         names.sort()
         for name in names:
-            fd = self.fdefs[name]
+            fd = self.__fdefs[name]
             fd.enumerate()
+
+    def should_run_func(self, qname):
+        return qname in self.__fqueue

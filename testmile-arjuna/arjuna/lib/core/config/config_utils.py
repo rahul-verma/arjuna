@@ -47,7 +47,6 @@ def path_to_project_absolute_path(project_dir, configured_dir):
     if file_utils.is_absolute_path(configured_dir):
         ret_path = configured_dir
     else:
-        print(configured_dir)
         ret_path = file_utils.get_canonical_path(project_dir + os.path.sep + configured_dir)
     return ret_path
 

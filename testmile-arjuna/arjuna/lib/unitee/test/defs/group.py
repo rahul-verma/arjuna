@@ -129,5 +129,13 @@ class GroupDef(Root):
     def get_picked_mnames(self):
         return self.__mnames
 
-    def get_module_map(self):
-        return self.__mod_fname_map
+    def get_schedule_module_map(self):
+        out_map = {}
+        for mqname, fqnames in self.__mod_fname_map.items():
+            if Unitee.testdb.should_run_module(mqname):
+                out_map[mqname]= []
+                mdef = Unitee.testdb.get_mdef(mqname);
+                for fqname in fqnames:
+                    if mdef.should_run_func(fqname):
+                        out_map[mqname].append(fqname)
+        return out_map

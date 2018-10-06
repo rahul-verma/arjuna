@@ -199,10 +199,8 @@ class CreateProject(Command):
     def execute(self, arg_dict):
         from arjuna.lib.core import ArjunaCore
         integrator = ArjunaCore.integrator
-        print (arg_dict)
         pname = arg_dict['project_name']
         wd = arg_dict['workspace_dir'] and arg_dict['workspace_dir'] or integrator.value(CorePropertyTypeEnum.WORKSPACE_DIR)
-        print(wd)
         pdir = os.path.join(wd, pname)
         info_dict = self._get_ws_info(integrator)
         fatal = False
@@ -291,13 +289,13 @@ class RunParser(Parser):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument('project_name', type=partial(lname_check, "Project"), help='Name of existing project.')
-        self.parser.add_argument("-rid","--runid", nargs=1, dest="runid", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.')
-        self.parser.add_argument('-ar' '--active-reporters', dest="active.reporters",
+        self.parser.add_argument("-rid", "--runid", nargs=1, dest="runid", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.')
+        self.parser.add_argument('-ar', '--active-reporters', dest="active.reporters",
                                  metavar=('R1','R2'), nargs='+',
                                  type=ustr,
                                  choices=[i for i in ActiveReporterNames.__members__],
                                  help='One or more valid active state names: ' + str([i for i in ActiveReporterNames.__members__]))
-        self.parser.add_argument('-dr' '--deferred-reporters', dest="deferred.reporters",
+        self.parser.add_argument('-dr', '--deferred-reporters', dest="deferred.reporters",
                                  metavar=('R1','R2'), nargs='+',
                                  type=ustr,
                                  choices=[i for i in DeferredReporterNames.__members__],
@@ -331,11 +329,11 @@ class NamesParser(Parser):
     def __init__(self, subparsers):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-cm' '--cmodules', dest="cmodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for considering test modules.')
-        self.parser.add_argument('-im' '--imodules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+',
+        self.parser.add_argument('-cm', '--cmodules', dest="cmodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for considering test modules.')
+        self.parser.add_argument('-im', '--imodules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+',
                          help='One or more names/patterns for ignoring test modules.')
-        self.parser.add_argument('-cf' '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
-        self.parser.add_argument('-if' '--ifunctions', dest="ifunctions", metavar=('F1','F2'), default=None, nargs='+',
+        self.parser.add_argument('-cf', '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
+        self.parser.add_argument('-if', '--ifunctions', dest="ifunctions", metavar=('F1','F2'), default=None, nargs='+',
                          help='One or more names/patterns for ignoring test functions.')
 
     def process(self, arg_dict):

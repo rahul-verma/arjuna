@@ -81,6 +81,10 @@ class _ThreadState:
     @sync_method('lock')
     def __add_step(self, step):
         step.exec_context = self.__current_context
+        if self.__current_context == ExecutionContext.Test:
+            step.otype = "TestStep"
+        else:
+            step.otype = "FixtureStep"
         self.__current_steps.append(step)
 
     @sync_method('lock')

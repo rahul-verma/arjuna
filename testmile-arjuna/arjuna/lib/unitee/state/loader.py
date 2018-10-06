@@ -157,7 +157,7 @@ class TestLoader:
         proceed = self.__validate_state(kallable, "@skip")
         if proceed:
             ml = self.__get_ml(kallable)
-            ml.register_skip_func(kallable)
+            ml.register_skip(kallable)
         return kallable
 
     def enumerate(self):

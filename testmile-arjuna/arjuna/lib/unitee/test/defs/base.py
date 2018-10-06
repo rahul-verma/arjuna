@@ -36,8 +36,8 @@ class TestSourceDef:
         self.__dsources = []
         self.__instances = []
 
-        self.__skipped = True
-        self.__skip_code = SkipCodeEnum.SKIP_FUNC_DEC
+        self.__skipped = False
+        self.__skip_code = None
         self.selected = False
         self.__unpicked = True
         self.__unpick_code = None
@@ -104,10 +104,9 @@ class TestSourceDef:
 
     @property
     def skip_code(self):
-        return self.__skipped
+        return self.__skip_code
 
-    @skip_code.setter
-    def skip_code(self, code):
+    def set_skip_code(self, code):
         self.__skipped = True
         self.__skip_code = code
 

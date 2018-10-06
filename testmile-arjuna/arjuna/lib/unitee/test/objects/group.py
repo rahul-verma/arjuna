@@ -46,7 +46,7 @@ class TestGroup(TestObject):
 		self._populate_tvars(base_tvars)
 		picked_mnames = self.defn.get_picked_mnames()
 
-		self.__module_map = self.defn.get_module_map()
+		self.__module_map = self.defn.get_schedule_module_map()
 		from arjuna.lib.unitee import Unitee
 		slots = Unitee.testdb.slot_module_names(picked_mnames)
 

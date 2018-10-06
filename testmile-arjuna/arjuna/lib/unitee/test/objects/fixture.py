@@ -26,6 +26,7 @@ from arjuna.lib.unitee.enums import *
 
 from arjuna.lib.unitee.reporter.result.types import FixtureResult
 from arjuna.lib.unitee.enums import ResultCodeEnum
+from arjuna.lib.unitee.exceptions import *
 
 class Fixture(Root):
     def __init__(self, fixdef):
@@ -57,6 +58,9 @@ class Fixture(Root):
         try:
             Unitee.state_mgr.get_current_thread_state().begin_recording(ExecutionContext.Fixture)
             self.func(self.__tvars.create_utvars())
+        except StepResultEvent as sre:
+            pass
+            # We would assume the step exception added by Step itself
         except Exception as e:
             Unitee.state_mgr.get_current_thread_state().add_step_exception(e, traceback.format_exc())
 

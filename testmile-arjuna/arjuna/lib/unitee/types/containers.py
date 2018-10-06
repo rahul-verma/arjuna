@@ -154,7 +154,7 @@ class TestInfo:
     def clone(self):
         info = self.__class__()
         info.meta = self.meta.clone()
-        info.props = self.props.clone()
+        info.props = ROProxy(self.props.clone())
         return info
 
 class SessionInfo(TestInfo):

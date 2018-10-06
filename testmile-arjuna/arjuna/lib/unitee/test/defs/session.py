@@ -101,8 +101,7 @@ class __SessionDef(Root, metaclass=abc.ABCMeta):
     def pick(self):
         for stage_def in self.stage_defs:
             stage_def.pick()
-
-        Unitee.testdb.process_unpicked()
+        Unitee.testdb.process_unpicked_and_skipped()
         Unitee.testdb.process_dependencies()
 
         return TestSession(self)

@@ -90,7 +90,7 @@ def fixture(dec_name, kallable):
 
 def skip(kallable):
     if obj_utils.callable(kallable):
-        return Unitee.test_loader.register_skip(kallable)
+        return Unitee.test_loader.register_skip_func(kallable)
     else:
         def wrapper(actual_kallable):
             msg = "You are decorating {} in {} module with @skip by providing one or more arguments."

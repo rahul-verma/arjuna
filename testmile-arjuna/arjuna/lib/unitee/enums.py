@@ -297,6 +297,7 @@ class StepType(Enum):
     LogStep = auto()
 
 class StepEntryEnum(Enum):
+    OTYPE = auto()
     STEP_TIMESTAMP = auto()
     STEP_ID = auto()
     STEP_EXEC_CONTEXT = auto()
