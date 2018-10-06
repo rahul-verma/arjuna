@@ -45,14 +45,12 @@ class ConsoleReporter:
 
     def update_issue(self, issue):
         self.__print("Issue Notification", issue)
-        print ("printed issue notification")
 
     def update_test_object_result(self, reportable):
         if reportable.has_steps():
             rdict = OrderedDict(reportable.result)
             for step in reportable.steps:
                 rdict.update(step)
-                print (step.items())
                 rdict['evars'] = "-"
                 rdict['data_record'] = "-"
                 rdict['rcode'] = "-"

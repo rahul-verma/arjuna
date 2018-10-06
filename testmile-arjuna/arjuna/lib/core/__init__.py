@@ -26,7 +26,6 @@ import threading
 ARJUNA_REF_NAME = "arjuna"
 ARJUNA_ROOT = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), '../../..'))
 ARJUNA_RES_DIR = os.path.join(ARJUNA_ROOT, "arjuna", "res")
-ARJUNA_LOG_DIR = ARJUNA_ROOT + "/log"
 ARJUNA_LOG_NAME = ARJUNA_REF_NAME + ".log"
 ARJUNA_CONF = ARJUNA_ROOT + "/config/" + ARJUNA_REF_NAME + ".conf"
 
@@ -365,24 +364,24 @@ class ArjunaCoreFacade:
         self.configurator.process_defaults()
         self.configurator.process_config_properties(arg_dict)
         self.prog = self.integrator.value(CorePropertyTypeEnum.PROG)
-        dl = logging.getLevelName(self.integrator.value(CorePropertyTypeEnum.LOGGER_CONSOLE_LEVEL).name)
-        log_dir = self.integrator.value(CorePropertyTypeEnum.LOGGER_DIR)
-        fl = logging.getLevelName(self.integrator.value(CorePropertyTypeEnum.LOGGER_FILE_LEVEL).name)
-        fname = self.integrator.value(CorePropertyTypeEnum.LOGGER_NAME)
-        self.__init_logger(self.prog, dl, log_dir, fl, fname)
-        self.console = self.create_console(self.prog, dl)
+
+        self.dl = logging.getLevelName(self.integrator.value(CorePropertyTypeEnum.LOGGER_CONSOLE_LEVEL).name)
         self.log_file_discovery_info = False
         self._data_references = {}
         self.central_conf = None
+        self.console = None
 
-    def __init_logger(self, prog, dl, log_dir, fl, fname):
-        logger = logging.getLogger(prog)
+    def __init_logger(self, log_file_dir):
+        dl = self.dl
+        log_dir = self.integrator.value(CorePropertyTypeEnum.LOGGER_DIR)
+        fl = logging.getLevelName(self.integrator.value(CorePropertyTypeEnum.LOGGER_FILE_LEVEL).name)
+        fname = self.integrator.value(CorePropertyTypeEnum.LOGGER_NAME)
+
+        logger = logging.getLogger(self.prog)
         logger.setLevel(logging.DEBUG)
         ch = logging.StreamHandler()
         ch.setLevel(dl)
-        if not os.path.isdir(ARJUNA_LOG_DIR):
-            os.makedirs(ARJUNA_LOG_DIR)
-        fh = logging.FileHandler(os.path.join(ARJUNA_LOG_DIR, ARJUNA_LOG_NAME), "w")
+        fh = logging.FileHandler(os.path.join(log_file_dir, ARJUNA_LOG_NAME), "w")
         fh.setLevel(fl)
         f_fmt = logging.Formatter('[%(levelname)5s]\t%(asctime)s\t%(pathname)s::%(module)s.%(funcName)s:%(lineno)d\t%(message)s')
         c_fmt = logging.Formatter('%(message)s')
@@ -394,7 +393,9 @@ class ArjunaCoreFacade:
     def get_logger(self):
         return logging.getLogger(self.prog)
 
-    def create_console(self, prog, dl):
+    def load_console(self, log_file_dir):
+        dl = self.dl
+        prog = self.prog
 
         class __console:
             lock = threading.RLock()
@@ -527,7 +528,8 @@ class ArjunaCoreFacade:
                     #     self.(message)
 
             display_padded_key_value_exception_trace = display_multiline_key_value
-        return __console()
+        self.__init_logger(log_file_dir)
+        self.console = __console()
 
     def freeze(self, integrator):
         self.config = integrator.freeze()

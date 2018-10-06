@@ -26,8 +26,7 @@ from arjuna.lib.interface.cli import ArjunaCLI
 class __arfacade():
 
     def __init__(self):
-        self.__version = "2.0.1-alpha"
-        self.console = None
+        self.__version = "0.1.1-alpha"
 
     def launch(self, raw_args):
         reader = TextResourceReader("header.txt")
@@ -37,9 +36,6 @@ class __arfacade():
         cli = ArjunaCLI(raw_args)
         # Initialize the Arjuna Core as per CLI options
         cli.init()
-
-        from arjuna.lib.core import ArjunaCore
-        self.console = ArjunaCore.console
 
         cli.execute()
 

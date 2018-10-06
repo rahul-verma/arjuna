@@ -140,9 +140,7 @@ class TestObject(metaclass=abc.ABCMeta):
         # Some test objects have multiple before fixtures e.f. init_each_group and init_group
         for before_fixture in self.before_fixtures:
             fresult = before_fixture.execute(self, self.tvars.clone())
-            print ("before fix rep")
             before_fixture.report()
-            print ("fixture reported")
             self.tvars.evars.update(before_fixture.tvars.evars)
             if fresult.has_issues():
                 self.exclude(ResultCodeEnum["{}_{}".format(fresult.rtype, before_fixture.type.name)], fresult.iid)
@@ -212,12 +210,10 @@ class TestObject(metaclass=abc.ABCMeta):
         self.reported = True
 
     def report_excluded(self, exclusion_type, issue_id):
-        print ("excluded result")
         t = TestObjectResult(self, rtype=ResultTypeEnum.EXCLUDED, rcode=exclusion_type, iid=issue_id)
         self.report(t)
 
     def exclude(self, exclusion_type, issue_id, child_exclusion_type=None):
-        print ("hererererer")
         if not child_exclusion_type:
             child_exclusion_type = exclusion_type
         if self.children:

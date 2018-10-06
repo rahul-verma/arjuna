@@ -14,3 +14,7 @@ def each(my):
 @test_function
 def passing_test(my):
     print(my.info.function.props)
+
+@end_each_function
+def failing(my):
+    my.steps.assert_false("g", True)

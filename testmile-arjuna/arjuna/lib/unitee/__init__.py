@@ -61,6 +61,16 @@ class __UniteeConfigurator(AbstractComponentConfigurator):
         self.irunid = "{}-{}".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3], self.runid)
         self.__overridable = set()
 
+        self.__load_project_console()
+
+    def __load_project_console(self):
+        from arjuna.lib.core import ArjunaCore
+        lpath = os.path.join(self.proj_full_path, "log")
+        if not os.path.isdir(lpath):
+            os.makedirs(lpath)
+        ArjunaCore.load_console(lpath)
+
+
     def _handle_project_dir_path(self, prop_path, config_value, purpose, visible):
         prop = property_factory.create_project_dir_path(self.proj_full_path, self._code_for_path(prop_path), prop_path,
                                                         config_value,
