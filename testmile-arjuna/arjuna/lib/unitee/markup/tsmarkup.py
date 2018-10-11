@@ -88,7 +88,7 @@ def fixture(dec_name, kallable):
         return wrapper
 
 
-def skip(kallable):
+def skip_me(kallable):
     if obj_utils.callable(kallable):
         return Unitee.test_loader.register_skip_func(kallable)
     else:

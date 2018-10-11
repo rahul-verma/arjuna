@@ -6,7 +6,7 @@ from arjuna.tpi.helpers import *
 def passing_test(my):
     pass
 
-@skip
+@skip_me
 @test_function
 def failing_test(my):
     assert 1==2

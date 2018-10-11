@@ -36,5 +36,5 @@ init_test = init_each_test
 end_each_test = partial(fixture, "end_each_test")
 end_test = end_each_test
 
-skip = skip
+skip_me = skip_me
 

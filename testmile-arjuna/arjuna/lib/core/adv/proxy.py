@@ -28,3 +28,6 @@ class ROProxy:
 
     def __setattr__(self, key, value):
         raise Exception("Read-Only Proxy does not support item assignment.")
+
+    def __str__(self):
+        return str(vars(self)['__wrapped'])

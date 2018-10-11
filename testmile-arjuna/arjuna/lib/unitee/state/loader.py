@@ -154,7 +154,7 @@ class TestLoader:
 
     @sync_method('lock')
     def register_skip_func(self, kallable):
-        proceed = self.__validate_state(kallable, "@skip")
+        proceed = self.__validate_state(kallable, "@skip_me")
         if proceed:
             ml = self.__get_ml(kallable)
             ml.register_skip(kallable)
