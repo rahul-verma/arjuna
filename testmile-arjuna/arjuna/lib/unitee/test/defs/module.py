@@ -110,6 +110,9 @@ class ModDef(TestSourceDef):
     def add_fixture_func(self, ftype, func):
         self.__fixtures.add_fixture_func(ftype, func)
 
+    def get_fixture_name(self, ftype):
+        return self.__fixtures.get_fixture_name(ftype)
+
     def get_func_names(self):
         return self.__fqueue
 

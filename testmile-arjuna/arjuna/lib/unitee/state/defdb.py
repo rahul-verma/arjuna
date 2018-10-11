@@ -77,6 +77,7 @@ class DefDB:
                 mdef.process_unpicked_and_skipped()
         self.__mdefs = {i:j for i,j in self.__mdefs.items() if self.__should_include(i, temp1, temp2)}
         self.__mqueue = [i for i in self.__mqueue if i in self.__mdefs]
+        print (self.__mqueue)
 
     def process_dependencies(self):
         for name in self.__mqueue:

@@ -127,7 +127,7 @@ class GroupDef(Root):
         return group_tfunc_count
 
     def get_picked_mnames(self):
-        return self.__mnames
+        return [mname for mname in self.__mnames if Unitee.testdb.should_run_module(mname)]
 
     def get_schedule_module_map(self):
         out_map = {}

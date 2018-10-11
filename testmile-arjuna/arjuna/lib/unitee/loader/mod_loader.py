@@ -236,7 +236,7 @@ class ModuleLoader:
 
         def register_skip(*vargs):
             self.__update_tracking(kallable, "skip")
-            if kallable.__qualname__ == "__init__":
+            if self.mdef.get_fixture_name(FixtureTypeEnum.INIT_MODULE) == kallable.__name__:
                 self.mdef.set_skip_code(SkipCodeEnum.SKIP_MODULE_DEC)
             else:
                 td = self.mdef.get_fdef(kallable.__qualname__)

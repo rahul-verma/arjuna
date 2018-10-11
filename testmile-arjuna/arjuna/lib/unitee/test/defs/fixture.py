@@ -80,6 +80,9 @@ class FixturesDef:
         else:
             return None
 
+    def get_fixture_name(self, ftype):
+        return self.__fixtures[ftype] and self.__fixtures[ftype].name or None
+
 class ConfiguredFixtureHelper:
 
     def configure_fixture(fixdef, fname, f):
