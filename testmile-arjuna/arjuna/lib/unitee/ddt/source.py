@@ -68,12 +68,8 @@ class DataSource(metaclass=abc.ABCMeta):
             else:
                 return record
         except StopIteration as e:
-            print(e)
             raise DataSourceFinished("Records Finished.")
         except Exception as e:
-            print(e)
-            import traceback
-            traceback.print_exc()
             raise DataSourceFinished(
                 "Problem happened in getting next record. No further records would be provided.")
 
@@ -136,10 +132,7 @@ class ExcelFileDataSource(FileDataSource):
         return self.reader.next()
 
     def should_exclude(self, data_record):
-        exclude_value = data_record.named_values().get('exclude', 'n')
-        if exclude_value.lower() == 'y':
-            return True
-        return False
+        return data_record.named_values().get('exclude', 'n') == 'y'
 
     def process(self, data_record):
         return DataRecord(**dict(zip(self.headers, data_record)))
@@ -158,6 +151,9 @@ class DummyDataSource(DataSource):
             self.done = True
             return DummyDataSource.MR
 
+    def should_exclude(self, data_record):
+        return False
+
 class SingleDataRecordSource(DataSource):
     def __init__(self, record):
         super().__init__()
@@ -171,6 +167,9 @@ class SingleDataRecordSource(DataSource):
         else:
             raise DataSourceFinished()
 
+    def should_exclude(self, data_record):
+        return False
+
 
 class DataArrayDataSource(DataSource):
     def __init__(self, records):
@@ -180,6 +179,9 @@ class DataArrayDataSource(DataSource):
 
     def get_next(self):
         return next(self.__iter)
+
+    def should_exclude(self, data_record):
+        return False
 
 
 class DataFunctionDataSource(DataSource):
@@ -208,6 +210,9 @@ class DataFunctionDataSource(DataSource):
         super().terminate()
         # self.ds.terminate()
 
+    def should_exclude(self, data_record):
+        return False
+
 class DataClassDataSource(DataSource):
     def __init__(self, dclass, *vargs, **kwargs):
         super().__init__()
@@ -234,6 +239,9 @@ class DataClassDataSource(DataSource):
         super().terminate()
         # self.ds.terminate()
 
+    def should_exclude(self, data_record):
+        return False
+
 class MultiDataSource(DataSource):
     def __init__(self, dsource_defs):
         super().__init__()
@@ -257,3 +265,6 @@ class MultiDataSource(DataSource):
         except StopIteration as e:
             self.__init_next_source()
             return self.get_next()
+
+    def should_exclude(self, data_record):
+        return False
