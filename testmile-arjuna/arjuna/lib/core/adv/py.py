@@ -35,7 +35,8 @@ class EnumSwitch:
     def __call__(self, econst):
         if econst in self.dispatch_dict:
             f_tuple = self.dispatch_dict[econst]
-            return f_tuple[0](*self.const_args, *f_tuple[1:])
+            arg_list = list(self.const_args) + list(f_tuple[1:])
+            return f_tuple[0](*arg_list)
 
 
 class PropertyEnum(Enum):
