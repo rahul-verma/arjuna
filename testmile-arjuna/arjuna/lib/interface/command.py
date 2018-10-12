@@ -62,12 +62,6 @@ class Command(metaclass=abc.ABCMeta):
     def execute(self, integrator, arg_dict):
         pass
 
-    def _is_project(self, integrator, pname, info_dict):
-        if "projects.{}".format(pname) in info_dict:
-            return True
-        else:
-            return False
-
     def __process_conf_file(self, path):
         from arjuna.lib.core import ArjunaCore
 
@@ -174,29 +168,29 @@ class CreateProject(Command):
         self._set_parser(parser)
 
     def execute(self, arg_dict):
+        for parent in self.parents:
+            parent.process(arg_dict)
         from arjuna.lib.core import ArjunaCore
         integrator = ArjunaCore.integrator
-        pname = arg_dict['project_name']
-        pdir = os.path.join(wd, pname)
-        info_dict = self._get_ws_info(integrator)
+        pname = arg_dict['project.name']
+        wsd = self.get_wsdir(integrator, arg_dict)
+        existing_project_names = os.listdir(wsd)
+        pdir = os.path.join(wsd, pname)
         fatal = False
         reason = None
-        if self._is_project(integrator, pname, info_dict):
-            reason = "A project with name '{}' already exists.".format(pname)
-            fatal = True
-        elif os.path.isdir(pdir):
-            reason = "A non-project directory with name '{}' already exists in '{}'.".format(pname, wd)
+        if pname in existing_project_names:
+            reason = "A directory with name '{}' already exists in workspace:{}.".format(pname, wsd)
             fatal = True
         elif os.path.isfile(pdir):
-            reason = "A file with name '{}' already exists in '{}'.".format(pname, wd)
+            reason = "A file with name '{}' already exists in workspace:{}.".format(pname, wsd)
             fatal = True
 
         if fatal:
             print(reason, "Choose another project name.", file=sys.stderr)
             sys_utils.fexit()
         else:
-            if not os.path.isdir(wd):
-                os.makedirs(wd)
+            if not os.path.isdir(wsd):
+                os.makedirs(wsd)
             d_names = integrator.value(CorePropertyTypeEnum.PROJECT_DIRS_FILES)
             with tempfile.TemporaryDirectory() as tdir:
                 ptdir = os.path.join(tdir, pname)
@@ -213,45 +207,9 @@ class CreateProject(Command):
                 f.close()
                 f = open(os.path.join(ptdir, "tests", "modules", "__init__.py"), "w")
                 f.close()
-                shutil.move(ptdir, wd)
-            wsf = None
-            try:
-                wsfile = os.path.join(os.path.join(integrator.value(CorePropertyTypeEnum.CONFIG_DIR), "ws.conf"))
-                wsf = open(wsfile, "w")
+                shutil.move(ptdir, wsd)
 
-                if 'projects' not in info_dict:
-                    info_dict['projects'] = {}
-
-                if 'ws_paths' not in info_dict:
-                    info_dict['ws_paths'] = []
-
-                if 'workspaces' not in info_dict:
-                    info_dict['workspaces'] = []
-
-                if wd not in info_dict['ws_paths']:
-                    info_dict['ws_paths'].append(wd)
-                    info_dict['workspaces'].append({
-                        'path' : wd,
-                        'projects': [pname]
-                        }
-                    )
-                else:
-                    for d in info_dict['workspaces']:
-                        if d['path'] == wd:
-                            d['projects'].append(pname)
-
-                info_dict['projects'][pname] = wd
-
-                wsf.write(json.dumps(info_dict, indent=4))
-                wsf.close()
-                print("Project {} successfully created.".format(pname))
-            except Exception as e:
-                if wsf:
-                    wsf.write(json.dumps(info_dict, indent=4))
-                    wsf.close()
-                print("Fatal error in creating project.", file=sys.stderr)
-                traceback.print_exc()
-                sys_utils.fexit()
+            print("Project {} successfully created.".format(pname))
 
 class __RunCommand(Command):
     def __init__(self, subparsers, sub_parser_name, parents):
