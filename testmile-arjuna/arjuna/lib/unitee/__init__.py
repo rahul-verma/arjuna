@@ -56,7 +56,7 @@ class __UniteeConfigurator(AbstractComponentConfigurator):
         self._integrator = integrator
         self.project_name = project_name
         self.proj_parent_dir = proj_parent_dir
-        self.proj_full_path = os.path.join(self.proj_parent_dir, self.project_name)
+        self.proj_full_path = file_utils.normalize_path(os.path.join(self.proj_parent_dir, self.project_name))
         self.runid = runid and runid or "mrunid"
         self.irunid = "{}-{}".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3], self.runid)
         self.__overridable = set()

@@ -92,11 +92,12 @@ class Command(metaclass=abc.ABCMeta):
         return armap, uomap, evars
 
     def __process_confs(self, integrator, ppd, pname, cli_map):
-        cfile = os.path.join(integrator.value(CorePropertyTypeEnum.CONFIG_DIR),
-                             integrator.value(CorePropertyTypeEnum.CONFIG_CENTRAL_FILE_NAME))
+        cfile = file_utils.normalize_path(os.path.join(integrator.value(CorePropertyTypeEnum.CONFIG_DIR),
+                             integrator.value(CorePropertyTypeEnum.CONFIG_CENTRAL_FILE_NAME)))
 
         armap, uomap, evars = self.__process_conf_file(cfile)
-        armap2, uomap2, evars2 = self.__process_conf_file(os.path.join(ppd, pname, "config", "{}.conf".format(pname)))
+        armap2, uomap2, evars2 = self.__process_conf_file(
+            file_utils.normalize_path(os.path.join(ppd, pname, "config", "{}.conf".format(pname))))
 
         armap.update(armap2); uomap.update(uomap2); evars.update(evars2)
 
