@@ -43,7 +43,6 @@ class ProjectParser(Parser):
         self.parser.add_argument('-p', '--project-name', dest="project_name", type=partial(lname_check, "Project"), help = 'Name of project (Alnum 3-30 length. Only lower case letters.).')
 
     def process(self, arg_dict):
-        print("dfjgdfkjghdfjkghdfkghfdkg")
         arg_dict['workspace.dir'] = arg_dict['workspace_dir']
         del arg_dict['workspace_dir']
         if arg_dict['project_name'] is None:
