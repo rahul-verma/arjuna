@@ -62,10 +62,18 @@ class DataSource(metaclass=abc.ABCMeta):
             data_record = self.get_next()
             if not data_record:
                 raise StopIteration()
-            return self.process(data_record)
+            record = self.process(data_record)
+            if self.should_exclude(record):
+                return self.next()
+            else:
+                return record
         except StopIteration as e:
+            print(e)
             raise DataSourceFinished("Records Finished.")
         except Exception as e:
+            print(e)
+            import traceback
+            traceback.print_exc()
             raise DataSourceFinished(
                 "Problem happened in getting next record. No further records would be provided.")
 
@@ -75,6 +83,10 @@ class DataSource(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def get_next(self):
         pass
+
+    @abc.abstractmethod
+    def should_exclude(self, data_record):
+        return False
 
 
 class FileDataSource(DataSource):
@@ -87,6 +99,9 @@ class FileDataSource(DataSource):
 
     def get_next(self):
         return self.reader.next()
+
+    def should_exclude(self, data_record):
+        return False
 
 class DsvFileDataSource(FileDataSource):
     def __init__(self, path, delimiter="\t"):
@@ -116,6 +131,15 @@ class ExcelFileDataSource(FileDataSource):
             self.headers = self.reader.get_headers()
         else:
             raise Exception("Unsupported file extension for Excel reading.")
+
+    def get_next(self):
+        return self.reader.next()
+
+    def should_exclude(self, data_record):
+        exclude_value = data_record.named_values().get('exclude', 'n')
+        if exclude_value.lower() == 'y':
+            return True
+        return False
 
     def process(self, data_record):
         return DataRecord(**dict(zip(self.headers, data_record)))
