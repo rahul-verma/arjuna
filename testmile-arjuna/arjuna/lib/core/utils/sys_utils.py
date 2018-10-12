@@ -33,7 +33,7 @@ def cexit():
 
 def fexit():
 	from arjuna.lib.core import ArjunaCore
-	ArjunaCore.console.display_error("Exiting because of Fatal Error...")
+	print("Exiting because of Fatal Error...", file=sys.stderr)
 	import time
 	time.sleep(0.5)
 	sys.exit(1)

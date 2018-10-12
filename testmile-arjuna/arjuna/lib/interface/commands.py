@@ -29,6 +29,7 @@ import logging
 from functools import partial
 import traceback
 import json
+import sys
 
 from arjuna.lib.core import ARJUNA_ROOT
 from arjuna.lib.core.enums import *
@@ -216,7 +217,7 @@ class CreateProject(Command):
             fatal = True
 
         if fatal:
-            ArjunaCore.console.display_error(reason, "Choose another project name.")
+            print(reason, "Choose another project name.", file=sys.stderr)
             sys_utils.fexit()
         else:
             if not os.path.isdir(wd):
@@ -268,13 +269,13 @@ class CreateProject(Command):
 
                 wsf.write(json.dumps(info_dict, indent=4))
                 wsf.close()
-                ArjunaCore.console.display("Project {} successfully created.".format(pname))
+                print("Project {} successfully created.".format(pname))
             except Exception as e:
                 if wsf:
                     wsf.write(json.dumps(info_dict, indent=4))
                     wsf.close()
-                ArjunaCore.console.display_error("Fatal error in creating project.")
-                ArjunaCore.console.display_exception_block(e, traceback.format_exc())
+                print("Fatal error in creating project.", file=sys.stderr)
+                traceback.print_exc()
                 sys_utils.fexit()
 class Parser:
 
