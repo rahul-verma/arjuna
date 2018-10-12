@@ -26,7 +26,6 @@ import argparse
 import tempfile
 import shutil
 import logging
-from functools import partial
 import traceback
 import json
 import sys
@@ -39,22 +38,7 @@ from arjuna.lib.core.reader.hocon import HoconFileReader, HoconConfigDictReader
 from arjuna.lib.core.reader.textfile import TextResourceReader
 from arjuna.lib.unitee import UniteeFacade
 
-def ustr(input):
-    return (str(input)).upper()
-
-vnregex = r'[a-z][a-z_0-9]{2,29}'
-vregex_text = '''
-{} name must be a string of length 3-30 containing lower case letters, digits or _ (underscore).
-It must begin with a letter.
-'''
-
-def lname_check(context, input):
-    if not re.match(vnregex, input):
-        from arjuna.lib.core import ArjunaCore
-        ArjunaCore.console.display_error('Invalid {} name provided.'.format(context))
-        ArjunaCore.console.display_error(vregex_text.format(context))
-        sys_utils.fexit()
-    return input
+from .validation import *
 
 class Command(metaclass=abc.ABCMeta):
     PENTRY = '''
@@ -78,21 +62,11 @@ class Command(metaclass=abc.ABCMeta):
     def execute(self, integrator, arg_dict):
         pass
 
-    def _get_ws_info(self, integrator):
-        pcdir = integrator.value(CorePropertyTypeEnum.CONFIG_DIR)
-        wsreader = HoconFileReader(os.path.join(pcdir, "ws.conf"))
-        wsreader.process()
-        return wsreader.get_map()
-
     def _is_project(self, integrator, pname, info_dict):
         if "projects.{}".format(pname) in info_dict:
             return True
         else:
             return False
-
-    def _get_proj_dir(self, integrator, pname):
-        wsinfo = self._get_ws_info(integrator)
-        return wsinfo['projects'][pname]
 
     def __process_conf_file(self, path):
         from arjuna.lib.core import ArjunaCore
@@ -143,7 +117,7 @@ class Command(metaclass=abc.ABCMeta):
         from arjuna.lib.core import ArjunaCore
         integrator = ArjunaCore.integrator
         pname = arg_dict['project.name']
-        wsd = self._get_proj_dir(integrator, pname)
+        wsd = self.get_wsdir(integrator, arg_dict)
         runid = arg_dict['runid']
 
         from arjuna.lib.unitee import init
@@ -155,6 +129,9 @@ class Command(metaclass=abc.ABCMeta):
 
         # All options are processed, so if components want to do initial processing, it is done here.
         integrator.load()
+
+    def get_wsdir(self, integrator, arg_dict):
+        return arg_dict['workspace.dir'] and arg_dict['workspace.dir'] or integrator.value(CorePropertyTypeEnum.WORKSPACE_DIR)
 
 class MainCommand(Command):
 
@@ -190,18 +167,16 @@ class MainCommand(Command):
 
 class CreateProject(Command):
 
-    def __init__(self, subparsers):
+    def __init__(self, subparsers, parents):
         super().__init__()
-        parser = subparsers.add_parser('create-project', help="Create a new project")
-        parser.add_argument('project_name', type=partial(lname_check, "Project"), help = 'Name of project (Alnum 3-30 length. Only lower case letters.).')
-        parser.add_argument('--workspace', dest="workspace_dir", type=str, help='Workspace Directory')
+        self.parents = parents
+        parser = subparsers.add_parser('create-project', parents=[parent.get_parser() for parent in parents], help="Create a new project")
         self._set_parser(parser)
 
     def execute(self, arg_dict):
         from arjuna.lib.core import ArjunaCore
         integrator = ArjunaCore.integrator
         pname = arg_dict['project_name']
-        wd = arg_dict['workspace_dir'] and arg_dict['workspace_dir'] or integrator.value(CorePropertyTypeEnum.WORKSPACE_DIR)
         pdir = os.path.join(wd, pname)
         info_dict = self._get_ws_info(integrator)
         fatal = False
@@ -277,68 +252,6 @@ class CreateProject(Command):
                 print("Fatal error in creating project.", file=sys.stderr)
                 traceback.print_exc()
                 sys_utils.fexit()
-class Parser:
-
-    def __init__(self):
-        self.parser = None
-
-    def get_parser(self):
-        return self.parser
-
-class RunParser(Parser):
-    def __init__(self, subparsers):
-        super().__init__()
-        self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('project_name', type=partial(lname_check, "Project"), help='Name of existing project.')
-        self.parser.add_argument("-rid", "--runid", nargs=1, dest="runid", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.')
-        self.parser.add_argument('-ar', '--active-reporters', dest="active.reporters",
-                                 metavar=('R1','R2'), nargs='+',
-                                 type=ustr,
-                                 choices=[i for i in ActiveReporterNames.__members__],
-                                 help='One or more valid active state names: ' + str([i for i in ActiveReporterNames.__members__]))
-        self.parser.add_argument('-dr', '--deferred-reporters', dest="deferred.reporters",
-                                 metavar=('R1','R2'), nargs='+',
-                                 type=ustr,
-                                 choices=[i for i in DeferredReporterNames.__members__],
-                                 help='One or more valid deferred state names: ' + str([i for i in DeferredReporterNames.__members__]))
-
-    def process(self, arg_dict):
-        arg_dict['project.name'] = arg_dict['project_name']
-        del arg_dict['project_name']
-
-class SessionParser(Parser):
-    def __init__(self, subparsers):
-        super().__init__()
-        self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('session_name', type=partial(lname_check, "Session"), help='Existing session template name.')
-
-    def process(self, arg_dict):
-        arg_dict['session.name'] = arg_dict['session_name']
-        del arg_dict['session_name']
-
-class GroupParser(Parser):
-    def __init__(self, subparsers):
-        super().__init__()
-        self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('group_name', type=partial(lname_check, "Group"), help='Existing group template name.')
-
-    def process(self, arg_dict):
-        arg_dict['group.name'] = arg_dict['group_name']
-        del arg_dict['group_name']
-
-class NamesParser(Parser):
-    def __init__(self, subparsers):
-        super().__init__()
-        self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-cm', '--cmodules', dest="cmodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for considering test modules.')
-        self.parser.add_argument('-im', '--imodules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+',
-                         help='One or more names/patterns for ignoring test modules.')
-        self.parser.add_argument('-cf', '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
-        self.parser.add_argument('-if', '--ifunctions', dest="ifunctions", metavar=('F1','F2'), default=None, nargs='+',
-                         help='One or more names/patterns for ignoring test functions.')
-
-    def process(self, arg_dict):
-        pass
 
 class __RunCommand(Command):
     def __init__(self, subparsers, sub_parser_name, parents):

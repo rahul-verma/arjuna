@@ -32,7 +32,8 @@ from arjuna.lib.core.reader.textfile import TextResourceReader
 from arjuna.lib.core.types import constants
 from arjuna.lib.core.adv.py import *
 
-from .commands import *
+from .parser import *
+from .command import *
 
 class ArjunaCLI:
 
@@ -46,17 +47,18 @@ class ArjunaCLI:
         subparsers = self.main_command.create_subparsers()
 
         # Create re-usable parses for command arguments
-        run_parser = RunParser(subparsers)
-        session_parser = SessionParser(subparsers)
-        group_parser = GroupParser(subparsers)
-        names_parser = NamesParser(subparsers)
+        project_parser = ProjectParser()
+        run_parser = RunParser()
+        session_parser = SessionParser()
+        group_parser = GroupParser()
+        names_parser = NamesParser()
 
         # Create primary command handlers
-        self.create_project = CreateProject(subparsers)
-        self.run_project = RunProject(subparsers, [run_parser])
-        self.run_session = RunSession(subparsers, [run_parser, session_parser])
-        self.run_group = RunGroup(subparsers, [run_parser, group_parser])
-        self.run_names = RunNames(subparsers, [run_parser, names_parser])
+        self.create_project = CreateProject(subparsers, [project_parser])
+        self.run_project = RunProject(subparsers, [project_parser, run_parser])
+        self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
+        self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])
+        self.run_names = RunNames(subparsers, [project_parser, run_parser, names_parser])
 
     def init(self):
         time.sleep(0.1)
