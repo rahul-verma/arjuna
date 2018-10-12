@@ -34,6 +34,7 @@ from arjuna.lib.core import ARJUNA_ROOT
 from arjuna.lib.core.enums import *
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.core.utils import sys_utils
+from arjuna.lib.core.utils import file_utils
 from arjuna.lib.core.reader.hocon import HoconFileReader, HoconConfigDictReader
 from arjuna.lib.core.reader.textfile import TextResourceReader
 from arjuna.lib.unitee import UniteeFacade
@@ -115,8 +116,8 @@ class Command(metaclass=abc.ABCMeta):
         runid = arg_dict['runid']
 
         from arjuna.lib.unitee import init
-        init(pname, wsd, runid)
-        self.__process_confs(integrator, wsd, pname, arg_dict)
+        init(pname, file_utils.normalize_path(wsd), runid)
+        self.__process_confs(integrator, file_utils.normalize_path(wsd), pname, arg_dict)
 
         ArjunaCore.freeze(integrator)
         integrator.enumerate()
@@ -222,6 +223,19 @@ class __RunCommand(Command):
     def execute(self, arg_dict):
         for parent in self.parents:
             parent.process(arg_dict)
+
+        from arjuna.lib.core import ArjunaCore
+        integrator = ArjunaCore.integrator
+
+        wsd = self.get_wsdir(integrator, arg_dict)
+        existing_project_names = os.listdir(wsd)
+        pname = arg_dict['project.name']
+
+        import sys
+        if pname not in existing_project_names:
+            print("Project with name {} does not exist in {}".format(pname, wsd), file=sys.stderr)
+            sys_utils.fexit();
+
         self._init_components(arg_dict)
 
         import sys

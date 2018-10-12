@@ -94,23 +94,17 @@ class FileDiscoverer:
             self.root_dir = root_dir[0:-1]
         else:
             self.root_dir = root_dir
-        self.root_dir = self.__normalize_path(self.root_dir)
+        self.root_dir = file_utils.normalize_path(self.root_dir)
         self.cdir = None
         self.cabsdir = None
-        self.prefixes = [self.__normalize_path(p) for p in include_prefixes]
-
-    def __normalize_path(self, in_name):
-        import re
-        updated = re.sub(r"[\\]+", "/", in_name)
-        updated = re.sub(r"[/]+", "/", updated)
-        return updated
+        self.prefixes = [file_utils.normalize_path(p) for p in include_prefixes]
 
     def discover(self):
         for d, subdlist, flist in os.walk(self.root_dir):
-            normalized_d = self.__normalize_path(d)
+            normalized_d = file_utils.normalize_path(d)
             if flist:
                 for f in flist:
-                    full_path = self.__normalize_path(os.path.abspath(os.path.join(normalized_d, f)))
+                    full_path = file_utils.normalize_path(os.path.abspath(os.path.join(normalized_d, f)))
                     consider = False
                     for prefix in self.prefixes:
                         if normalized_d.startswith(prefix):
@@ -119,7 +113,7 @@ class FileDiscoverer:
                     if not consider: continue
                     file_ext = file_utils.get_extension(full_path)
                     if file_ext.lower() not in set(['py']): continue
-                    parent_dir = self.__normalize_path(os.path.dirname(full_path))
+                    parent_dir = file_utils.normalize_path(os.path.dirname(full_path))
                     pkg_parent_dir = None  # os.path.commonpath()
                     if parent_dir == self.root_dir:
                         pkg_parent_dir = ""

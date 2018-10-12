@@ -38,7 +38,7 @@ def path_to_core_absolute_path(configured_dir):
             ret_path = file_utils.get_canonical_path(ARJUNA_ROOT + os.path.sep + configured_dir[1:])
     else:
         ret_path = configured_dir
-    return ret_path
+    return file_utils.normalize_path(ret_path)
 
 
 def path_to_project_absolute_path(project_dir, configured_dir):
@@ -48,7 +48,7 @@ def path_to_project_absolute_path(project_dir, configured_dir):
         ret_path = configured_dir
     else:
         ret_path = file_utils.get_canonical_path(project_dir + os.path.sep + configured_dir)
-    return ret_path
+    return file_utils.normalize_path(ret_path)
 
 def enum_to_prop_path(enum_obj):
     return str(enum_obj.name).lower().replace("_", ".")

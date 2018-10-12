@@ -21,7 +21,7 @@ limitations under the License.
 
 import os
 import shutil
-
+import re
 
 def get_canonical_path(file_path):
     return os.path.abspath(file_path)
@@ -127,3 +127,8 @@ def get_extension(fpath):
 
 def get_nonext_basename(fpath):
     return __base_name_parts(fpath)[0]
+
+def normalize_path(in_name):
+    updated = re.sub(r"[\\]+", "/", in_name)
+    updated = re.sub(r"[/]+", "/", updated)
+    return updated
