@@ -94,25 +94,32 @@ class FileDiscoverer:
             self.root_dir = root_dir[0:-1]
         else:
             self.root_dir = root_dir
+        self.root_dir = self.__normalize_path(self.root_dir)
         self.cdir = None
         self.cabsdir = None
-        self.prefixes = include_prefixes
+        self.prefixes = [self.__normalize_path(p) for p in include_prefixes]
+
+    def __normalize_path(self, in_name):
+        import re
+        updated = re.sub(r"[\\]+", "/", in_name)
+        updated = re.sub(r"[/]+", "/", updated)
+        return updated
 
     def discover(self):
         for d, subdlist, flist in os.walk(self.root_dir):
-
+            normalized_d = self.__normalize_path(d)
             if flist:
                 for f in flist:
-                    full_path = os.path.abspath(os.path.join(d, f))
+                    full_path = self.__normalize_path(os.path.abspath(os.path.join(normalized_d, f)))
                     consider = False
                     for prefix in self.prefixes:
-                        if d.startswith(prefix):
+                        if normalized_d.startswith(prefix):
                             consider = True
                             break
                     if not consider: continue
                     file_ext = file_utils.get_extension(full_path)
                     if file_ext.lower() not in set(['py']): continue
-                    parent_dir = os.path.dirname(full_path)
+                    parent_dir = self.__normalize_path(os.path.dirname(full_path))
                     pkg_parent_dir = None  # os.path.commonpath()
                     if parent_dir == self.root_dir:
                         pkg_parent_dir = ""
@@ -125,7 +132,7 @@ class FileDiscoverer:
                     df.set_attr(DiscoveredFileAttributeEnum.EXTENSION, file_ext)
                     df.set_attr(DiscoveredFileAttributeEnum.FULL_NAME, f)
                     df.set_attr(DiscoveredFileAttributeEnum.PACKAGE_DOT_NOTATION,
-                                 pkg_parent_dir.replace(sys_utils.get_path_separator(), "."))
+                                 pkg_parent_dir.replace("/", "."))
                     df.set_attr(DiscoveredFileAttributeEnum.DIRECTORY_RELATIVE_PATH, pkg_parent_dir)
                     df.set_attr(DiscoveredFileAttributeEnum.DIRECTORY_ABSOLUTE_PATH, parent_dir)
                     replaced = df.attr(DiscoveredFileAttributeEnum.DIRECTORY_RELATIVE_PATH).replace("/", "|")

@@ -47,9 +47,9 @@ class TestLoader:
     def load(self):
         self.logger.debug("Now finding tests inside: " + self.proj_dir)
         aggregator = FileAggregator()
-        discoverer = FileDiscoverer(aggregator, self.proj_dir, [self.test_dir])
+        discoverer = FileDiscoverer(aggregator, self.proj_dir, [self.test_dir + "/" + "modules"])
         discoverer.discover()
-        # aggregator.enumerate()
+        aggregator.enumerate()
         for def_file in aggregator:
             file_name = def_file.attr(DiscoveredFileAttributeEnum.FULL_NAME)
             # Arjuna would not import module names that begin with _
