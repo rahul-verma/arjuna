@@ -48,7 +48,7 @@ class UniteeNames:
 
 
 class __UniteeConfigurator(AbstractComponentConfigurator):
-    def __init__(self, integrator, project_name, proj_parent_dir, runid):
+    def __init__(self, integrator, project_name, proj_parent_dir, runid, test_module_import_prefix):
         super().__init__(integrator, "Unitee", UniteePropertyEnum)
         from arjuna.lib.core import ArjunaCore
         self.component = None
@@ -59,6 +59,7 @@ class __UniteeConfigurator(AbstractComponentConfigurator):
         self.proj_full_path = file_utils.normalize_path(os.path.join(self.proj_parent_dir, self.project_name))
         self.runid = runid and runid or "mrunid"
         self.irunid = "{}-{}".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3], self.runid)
+        self.test_module_import_prefix = test_module_import_prefix
         self.__overridable = set()
 
         self.__load_project_console()
@@ -131,6 +132,7 @@ class __UniteeConfigurator(AbstractComponentConfigurator):
             UniteePropertyEnum.IRUNID: (self._handle_string_config, "Internal Run ID", False),
             UniteePropertyEnum.RUNID: (self._handle_string_config, "Test Run ID", True),
             UniteePropertyEnum.FAILFAST: (self._handle_boolean_config, "Stop on first failure/error?", False),
+            UniteePropertyEnum.TEST_MODULE_IMPORT_PREFIX: (self._handle_string_config, "Prefix for Test Module Import", False),
             UniteePropertyEnum.TESTS_DIR: (self._handle_project_dir_path, "Test Directory", True),
             UniteePropertyEnum.REPORT_DIR: (self._handle_project_dir_path, "Report Directory", False),
             UniteePropertyEnum.ARCHIVES_DIR: (self._handle_project_dir_path, "Report Archives directory", False),
@@ -193,7 +195,8 @@ class __UniteeConfigurator(AbstractComponentConfigurator):
         trr.close()
         contents = contents.format(proj_name=self.project_name, proj_dir=self.proj_full_path,
                                    runid=self.runid,
-                                   irunid=self.irunid)
+                                   irunid=self.irunid,
+                                   test_module_import_prefix=self.test_module_import_prefix)
         hrr = HoconStringReader(contents)
         hrr.process()
         self.__process_arjuna_options(hrr.get_flat_map())
@@ -405,7 +408,7 @@ Unitee = UniteeFacade()
 
 def init(pname, ppd, runid="mrunid"):
     integrator = ArjunaCore.integrator
-    configurator = __UniteeConfigurator(integrator, pname, ppd, runid)
+    configurator = __UniteeConfigurator(integrator, pname, ppd, runid, "{}.tests.modules.".format(pname))
     integrator.add_configurator(configurator)
     configurator.process_defaults()
     unitee = UniteeFacade()

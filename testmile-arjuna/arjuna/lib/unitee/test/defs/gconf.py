@@ -20,11 +20,13 @@ limitations under the License.
 '''
 
 import re
+from arjuna.lib.core.enums import *
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.core.reader.hocon import *
 from arjuna.lib.core.reader.textfile import *
 from arjuna.lib.core.utils import sys_utils
+from arjuna.lib.core.utils import file_utils
 from arjuna.lib.unitee.types.root import *
 from arjuna.lib.unitee.test.defs.fixture import *
 
@@ -44,18 +46,28 @@ class Picker:
             }
         )
 
+        from arjuna.lib.core import ArjunaCore
+        self.tm_prefix = ArjunaCore.config.value(UniteePropertyEnum.TEST_MODULE_IMPORT_PREFIX)
+
         for k,v in rule_dict.items():
             if v is not None:
                 try:
                     if type(v) is str:
-                        self._rule_dict[k].append(re.compile(v))
+                        if k in {'cm', 'im'}:
+                            self._rule_dict[k].append(re.compile(self.tm_prefix + v))
+                        else:
+                            self._rule_dict[k].append(re.compile(v))
                     else:
-                        for r in v:
-                            self._rule_dict[k].append(re.compile(r))
+                        if k in {'cm', 'im'}:
+                            for r in v:
+                                self._rule_dict[k].append(re.compile(self.tm_prefix + r))
+                        else:
+                            for r in v:
+                                self._rule_dict[k].append(re.compile(r))
                 except:
-                    from arjuna.lib.core import ArjunaCore
                     ArjunaCore.console.display_error("{} group's picker uses invalid regexes. Fix group definitionfile: {}".format(self.gname, self.fpath))
                     sys_utils.fexit()
+
 
     def include_module(self, mname):
         if self._rule_dict['cm']:

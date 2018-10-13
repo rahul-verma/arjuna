@@ -128,6 +128,7 @@ class UniteePropertyEnum(Enum):
     PROJECT_NAME = auto()
     PROJECT_DIR = auto()
     PROJECT_CONFIG_DIR = auto()
+    TEST_MODULE_IMPORT_PREFIX = auto()
     DATA_DIR = auto()
     DATA_SOURCES_DIR = auto()
     DATA_REFERENCES_DIR = auto()

@@ -19,12 +19,13 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+import sys
 import re
 
 def ustr(input):
     return (str(input)).upper()
 
-VNREGEX = r'[a-z][a-z_0-9]{2,29}'
+VNREGEX = r'[a-z][a-z0-9]{2,29}'
 VNREGEX_TEXT = '''
 {} name must be a string of length 3-30 containing lower case letters, digits or _ (underscore).
 It must begin with a letter.
@@ -32,8 +33,8 @@ It must begin with a letter.
 
 def lname_check(context, input):
     if not re.match(VNREGEX, input):
-        from arjuna.lib.core import ArjunaCore
-        ArjunaCore.console.display_error('Invalid {} name provided.'.format(context))
-        ArjunaCore.console.display_error(VNREGEX_TEXT.format(context))
-        sys_utils.fexit()
+        print('Invalid {} name provided.'.format(context), file=sys.stderr)
+        print(VNREGEX_TEXT.format(context), file=sys.stderr)
+        print('Exiting...', file=sys.stderr)
+        sys.exit(1)
     return input
