@@ -19,28 +19,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import time
-from arjuna.lib.core.reader.textfile import TextResourceReader
-from arjuna.lib.interface.cli import ArjunaCLI
+from arjuna.tpi.markup import *
+from arjuna.tpi.markup_helpers import *
+from arjuna.tpi.helpers import *
 
-class __arfacade():
+@init_each_test
+def each_test_level_setup(my):
+    console.display("Test level setup executed")
 
-    def __init__(self):
-        self.__version = "0.1.4-alpha"
+@end_each_test
+def each_test_level_cleanup(my):
+    console.display("Test level cleanup executed")
 
-    def launch(self, raw_args):
-        reader = TextResourceReader("header.txt")
-        print(reader.read().format(version=self.__version))
-        reader.close()
-
-        cli = ArjunaCLI(raw_args)
-        # Initialize the Arjuna Core as per CLI options
-        cli.init()
-
-        cli.execute()
-
-Arjuna = __arfacade()
-
-from arjuna.lib.unitee.markup import tsmarkup
-
-markup = tsmarkup
+@test_function
+def test1(my):
+    assert 1==1

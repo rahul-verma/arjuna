@@ -266,6 +266,14 @@ class FixtureResult(SteppedResult):
         self.evars = str(fixture.tvars.evars)
         self.data_record = "-"
 
+    def set_steps(self, step_list):
+        if not step_list:
+            self.rtype = "PASS"
+            self.rcode = "NO_STEPS_RECORDED"
+            return
+
+        super().set_steps(step_list)
+
 class TestResult(SteppedResult):
 
     def __init__(self, test_obj):

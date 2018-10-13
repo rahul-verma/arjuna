@@ -151,6 +151,22 @@ class TestObject(metaclass=abc.ABCMeta):
 
         if self.type != TestObjectTypeEnum.Test:
             if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot}:
+                for after_fixture in self.after_fixtures:
+                    fresult = after_fixture.execute(self, self.tvars.clone())
+                    if fresult.has_issues():
+                        if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot} and not self.reported:
+                            result = TestObjectResult(
+                                self, rtype=fresult.rtype,
+                                rcode=ResultCodeEnum["{}_{}".format(fresult.rtype, after_fixture.type.name)],
+                                iid=fresult.iid)
+                            self.report(result)
+                    else:
+                        if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot} and not self.reported:
+                            result = TestObjectResult(self, rtype=ResultTypeEnum.PASS,
+                                                      rcode=ResultCodeEnum.PASS_ALL_CHILD_TEST_OBJECTS)
+                            self.report(result)
+                    after_fixture.report()
+
                 if not self.reported:
                     if self.state.has_failures():
                         result = TestObjectResult(self, rtype=ResultTypeEnum.FAIL,
@@ -164,27 +180,11 @@ class TestObject(metaclass=abc.ABCMeta):
                         result = TestObjectResult(self, rtype=ResultTypeEnum.EXCLUDED_CHILDREN,
                                                   rcode=ResultCodeEnum.EXCLUDED_CHILD_TEST_OBJECT)
                         self.report(result)
-
-            for after_fixture in self.after_fixtures:
-                fresult = after_fixture.execute(self, self.tvars.clone())
-                if fresult.has_issues():
-                    if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot} and not self.reported:
-                        result = TestObjectResult(
-                            self, rtype=fresult.rtype,
-                            rcode=ResultCodeEnum["{}_{}".format(fresult.rtype, after_fixture.type.name)],
-                            iid=fresult.iid)
-                        self.report(result)
-                else:
-                    if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot} and not self.reported:
-                        result = TestObjectResult(self, rtype=ResultTypeEnum.PASS,
-                                                  rcode=ResultCodeEnum.PASS_ALL_CHILD_TEST_OBJECTS)
-                        self.report(result)
-                after_fixture.report()
-            else:
-                if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot} and not self.reported:
-                    result = TestObjectResult(self, rtype=ResultTypeEnum.PASS,
-                                              rcode=ResultCodeEnum.PASS_ALL_CHILD_TEST_OBJECTS)
-                    self.report(result)
+            # else:
+            #     if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot} and not self.reported:
+            #         result = TestObjectResult(self, rtype=ResultTypeEnum.PASS,
+            #                                   rcode=ResultCodeEnum.PASS_ALL_CHILD_TEST_OBJECTS)
+            #         self.report(result)
 
         if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot}:
             info = Info(InfoType.FINISHED, self)
