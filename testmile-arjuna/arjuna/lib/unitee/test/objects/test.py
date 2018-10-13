@@ -66,7 +66,7 @@ class Test(TestObject):
 			self.report(tresult)
 
 		for after_fixture in self.after_fixtures:
-			fresult = after_fixture.execute(self.tvars.clone())
+			fresult = after_fixture.execute(self, self.tvars.clone())
 			if fresult.has_issues():
 				if not test_reported:
 					tresult.rtype = fresult.rtype.name

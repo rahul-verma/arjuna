@@ -19,23 +19,38 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-
 from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
-from arjex.tests.modules.ep05_my_dependencies import failing_module, passing_module
+@init_module
+def module_level_setup(my):
+    console.display("Module level setup executed")
 
-@init_module(
-    exclude_if=problem_in(modules(passing_module,failing_module))
-)
-def setup_module(my):
-    pass
+@init_each_function
+def each_function_level_setup(my):
+    console.display("Function level setup executed")
+
+@init_each_test
+def each_test_level_setup(my):
+    console.display("Test level setup executed")
+
+@end_module
+def module_level_cleanup(my):
+    console.display("Module level cleanup executed")
+
+@end_each_function
+def each_function_level_cleanup(my):
+    console.display("Function level cleanup executed")
+
+@end_each_test
+def each_test_level_cleanup(my):
+    console.display("Test level cleanup executed")
 
 @test_function
-def test_simple1(my):
-    pass
+def test1(my):
+    assert 1==1
 
 @test_function
-def test_simple2(my):
-    pass
+def test2(my):
+    assert 1==1
