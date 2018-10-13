@@ -38,7 +38,7 @@ class TestModuleSlot(TestObject):
 		self._populate_tvars(base_tvars)
 
 		for fname in self.fnames:
-			func = TestFunc(self.group, self.module, self.module.defn.get_fdef(fname))
+			func = TestFunc(self.group, self.module, self, self.module.defn.get_fdef(fname))
 			func.load(self.tvars.clone())
 			self.funcs.append(func)
 
@@ -49,6 +49,7 @@ class TestModuleSlot(TestObject):
 		self.tvars.info.module.meta['slot'] = self.num
 
 	def _execute(self):
+		self.tvars.runtime.update(self.module.tvars.runtime)
 		tp = TestObjectThreadPool(self.thcount, self, "{}::{}".format(self.thname, "f"))
 		tp.run()
 

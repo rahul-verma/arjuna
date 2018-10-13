@@ -28,8 +28,10 @@ from arjuna.tpi.helpers import *
     evars=evars(static_var="s1"),
 )
 def setup_module(my):
-    my.evars['dynamic_var'] = True
+    my.evars['dv'] = True
 
 @test_function
 def demo_immutable_tags(my):
+    console.display(my.evars)
+    my.evars['dv'] = False
     console.display(my.evars)

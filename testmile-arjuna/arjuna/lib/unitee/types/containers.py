@@ -28,7 +28,7 @@ from arjuna.lib.core.adv.proxy import ROProxy
 from arjuna.lib.core.types.descriptors import *
 from arjuna.lib.unitee.validation.steps import Steps
 
-SCALARS = {int, float, str, bool, None}
+SCALARS = {int, float, str, bool}
 
 class SingleObjectVars(CIStringDict):
 
@@ -249,7 +249,7 @@ class TestVars:
     def __init__(self):
         self.info = AllInfo()
         self.evars = SingleObjectVars()
-        self.runtime_props = OnceOnlyKeyCIStringDict()
+        self.runtime = OnceOnlyKeyCIStringDict()
         self.tags = TagSet() # return frozen set
         self.data = Data() #RODataRecord For .pos it should be a tuple, for .map immutable dict
 
@@ -259,7 +259,7 @@ class TestVars:
         nvars.evars = SingleObjectVars({i:j for i,j in self.evars.items()})
         nvars.tags = TagSet(*{i for i in self.tags})
         nvars.data = self.data
-        nvars.runtime_props = self.runtime_props.clone()
+        nvars.runtime = self.runtime.clone()
         return nvars
 
     def create_utvars(self):
@@ -270,7 +270,7 @@ class TestVars:
                 self.tags = frozenset(tvars.tags)
                 # R/W
                 self.evars = tvars.evars
-                self.runtime_props = tvars.runtime_props
+                self.runtime = tvars.runtime
                 # data
                 self.data = ROProxy(tvars.data)
                 # steps

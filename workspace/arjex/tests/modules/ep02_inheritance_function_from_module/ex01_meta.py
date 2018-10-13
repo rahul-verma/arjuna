@@ -24,7 +24,23 @@ from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
 @test_function
-def test_access_function_and_test_meta_data(my):
+def test_access_all_meta_data(my):
+    # Session Info
+    console.display(my.info.session.meta['name'])
+
+    # Stage Info
+    console.display(my.info.stage.meta['name'])
+
+    # Group Info
+    console.display(my.info.group.meta['name'])
+    console.display(my.info.group.meta['slot'])
+
+    # Module Info
+    console.display(my.info.module.meta['pkg'])
+    console.display(my.info.module.meta['name'])
+    console.display(my.info.module.meta['qname'])
+    console.display(my.info.module.meta['slot'])
+
     # Function Info
     console.display(my.info.function.meta['name'])
     console.display(my.info.function.meta['qname'])

@@ -90,8 +90,9 @@ class OnceOnlyKeyCIStringDict(CIStringDict):
 
     def update(self, d):
         if not d: return
-        for k,v in d.items():
-            self[k] = v
+        as_dict = dict(d)
+        for k in as_dict:
+            self[k] = as_dict.get(k)
 
     def __iter__(self):
         return super().__iter__()

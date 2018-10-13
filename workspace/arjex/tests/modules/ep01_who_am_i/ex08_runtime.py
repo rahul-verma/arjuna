@@ -23,15 +23,24 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
+class CustomObject:
+    pass
+
+'''
+Unlike evars, runtime can contain any type of objects.
+runtime objects can only be assigned at run time and not in markup decorators or config files.
+Built-in props, user-props, test meta data and evars could be used to determine what type of object you
+want to create an store in run-time.
+'''
 @test_function
-def test_access_function_and_test_meta_data(my):
-    # Function Info
-    console.display(my.info.function.meta['name'])
-    console.display(my.info.function.meta['qname'])
+def test_simple_runtime(my):
+    my.runtime['int'] = 1
+    my.runtime['dynamic'] = CustomObject()
+    console.display(my.runtime)
 
-    # Object Type (Here it is always Test. However Test is one of the many test object types in Arjuna)
-    console.display(my.info.object_type)
 
-    # Test Number. Usually 1. For data driven tests, it is the incremental counter
-    console.display(my.info.test_num)
-
+@test_function
+def test_disallowed_reassignment_of_runtime_objects(my):
+    my.runtime['ref_name'] = 1
+    # This would raise exception as reference names are once-only. Once set, you can not change their values.
+    my.runtime['ref_name'] = 2

@@ -123,7 +123,7 @@ class TestObject(metaclass=abc.ABCMeta):
     def run(self, base_tvars=None):
         if base_tvars:
             self.tvars.evars.update(base_tvars.evars)
-            self.tvars.dvars.update(base_tvars.dvars)
+            self.tvars.runtime.update(base_tvars.runtime)
 
         try:
             self.evaluate_dependency()
@@ -142,11 +142,11 @@ class TestObject(metaclass=abc.ABCMeta):
             fresult = before_fixture.execute(self, self.tvars.clone())
             before_fixture.report()
             self.tvars.evars.update(before_fixture.tvars.evars)
+            self.tvars.runtime.update(before_fixture.tvars.runtime)
             if fresult.has_issues():
                 self.exclude(ResultCodeEnum["{}_{}".format(fresult.rtype, before_fixture.type.name)], fresult.iid)
                 self.report_finish_info(bstamp)
                 return
-            # self.tvars.dvars.update(self.before_fixture.tvars.dvars)
 
         self._execute()
 

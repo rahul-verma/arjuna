@@ -145,8 +145,8 @@ class TestObjectResult(Result):
                 parts.append("Function Props")
                 parts.append(str(test_obj.tvars.info.function.props))
                 self.props = "\n".join(parts)
-        if not test_obj.tvars.runtime_props.is_empty():
-            self.runtime_props = str(test_obj.tvars.runtime_props)
+        if not test_obj.tvars.runtime.is_empty():
+            self.runtime = str(test_obj.tvars.runtime)
         self.thread_id = thread_utils.get_current_thread_name()
 
     @property

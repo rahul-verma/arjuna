@@ -27,10 +27,11 @@ from arjuna.lib.unitee.state.states import *
 from arjuna.lib.unitee.reporter.result.types import *
 
 class TestFunc(TestObject):
-	def __init__(self, group, module, defn):
+	def __init__(self, group, module, mslot, defn):
 		super().__init__(TestObjectTypeEnum.Function)
 		self.group = group
 		self.module = module
+		self.mslot = mslot
 		self.defn = defn
 		self.func_obj = self.defn.func
 		self.thcount = self.defn.threads
@@ -75,6 +76,7 @@ class TestFunc(TestObject):
 		self.tvars.tags.update(self.defn.tvars.tags)
 
 	def _execute(self):
+		self.tvars.runtime.update(self.mslot.tvars.runtime)
 		tp = TestObjectThreadPool(self.thcount, self, "{}::{}".format(self.thname, "t"))
 		tp.run()
 

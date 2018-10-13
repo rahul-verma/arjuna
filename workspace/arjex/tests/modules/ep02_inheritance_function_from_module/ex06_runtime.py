@@ -19,28 +19,22 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import time
-from arjuna.lib.core.reader.textfile import TextResourceReader
-from arjuna.lib.interface.cli import ArjunaCLI
+from arjuna.tpi.markup import *
+from arjuna.tpi.markup_helpers import *
+from arjuna.tpi.helpers import *
 
-class __arfacade():
+class CustomObject1:
+    pass
 
-    def __init__(self):
-        self.__version = "0.1.7-alpha"
+class CustomObject2:
+    pass
 
-    def launch(self, raw_args):
-        reader = TextResourceReader("header.txt")
-        print(reader.read().format(version=self.__version))
-        reader.close()
+@init_module
+def module_setup(my):
+    my.runtime['co1'] = CustomObject1()
+    console.display(my.runtime)
 
-        cli = ArjunaCLI(raw_args)
-        # Initialize the Arjuna Core as per CLI options
-        cli.init()
-
-        cli.execute()
-
-Arjuna = __arfacade()
-
-from arjuna.lib.unitee.markup import tsmarkup
-
-markup = tsmarkup
+@test_function
+def test_simple_runtime(my):
+    my.runtime['co2'] = CustomObject2()
+    console.display(my.runtime)
