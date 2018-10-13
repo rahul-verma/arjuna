@@ -144,6 +144,7 @@ class TestObject(metaclass=abc.ABCMeta):
             self.tvars.evars.update(before_fixture.tvars.evars)
             if fresult.has_issues():
                 self.exclude(ResultCodeEnum["{}_{}".format(fresult.rtype, before_fixture.type.name)], fresult.iid)
+                self.report_finish_info(bstamp)
                 return
             # self.tvars.dvars.update(self.before_fixture.tvars.dvars)
 
@@ -186,13 +187,16 @@ class TestObject(metaclass=abc.ABCMeta):
             #                                   rcode=ResultCodeEnum.PASS_ALL_CHILD_TEST_OBJECTS)
             #         self.report(result)
 
+        self.report_finish_info(bstamp)
+
+    def report_finish_info(self, bstamp):
         if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot}:
             info = Info(InfoType.FINISHED, self)
             info.btstamp = bstamp
             info.etstamp = datetime.datetime.now().timestamp()
             info.exec_time = info.etstamp - info.btstamp
             Unitee.reporter.update_info(info)
-            
+
     @abc.abstractmethod
     def _execute(self):
         pass

@@ -67,19 +67,22 @@ class Test(TestObject):
 
 		for after_fixture in self.after_fixtures:
 			fresult = after_fixture.execute(self, self.tvars.clone())
-			if not test_reported:
-				if fresult.has_issues():
-					tresult.rtype = fresult.rtype.name
-					tresult.rcode = ResultCodeEnum["{}_{}".format(fresult.rtype, after_fixture.type.name)].name,
+			if fresult.has_issues():
+				after_fixture.report()
+				if not test_reported:
+					tresult.rtype = fresult.rtype
+					tresult.rcode = ResultCodeEnum["{}_{}".format(fresult.rtype, after_fixture.type.name)].name
 					tresult.iid = fresult.iid
 					self.report(tresult)
-				else:
+					test_reported = True
+			else:
+				if not test_reported:
 					if tresult.rtype == "-":
 						tresult.rtype = ResultTypeEnum.PASS.name
 						tresult.rcode = ResultCodeEnum.PASS_ALL_STEPS.name
-				self.report(tresult)
-				test_reported = True
-			after_fixture.report()
+					self.report(tresult)
+					test_reported = True
+					after_fixture.report()
 
 		if not test_reported:
 			if tresult.rtype == "-":
