@@ -40,8 +40,9 @@ class EnumSwitch:
 
 
 class PropertyEnum(Enum):
-    def _generate_next_value_(name, start, count, last_values):
-        return ".".join(name.lower().split("_"))
+    pass
+    # def _generate_next_value_(name, start, count, last_values):
+    #     return ".".join(name.lower().split("_"))
 
 
 class Descriptor(metaclass=abc.ABCMeta):
