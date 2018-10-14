@@ -20,7 +20,7 @@ limitations under the License.
 '''
 
 import inspect
-from decimal import ROUND_HALF_UP
+from decimal import ROUND_HALF_EVEN
 
 from arjuna.lib.core.enums import *
 from .testpoint import *
@@ -153,7 +153,7 @@ class Steps:
         assertion.is_not_equal_to(expected)
 
     @staticmethod
-    def assert_almost_equal(purpose, actual, expected, max_offset=None, rounded_as=ROUND_HALF_UP):
+    def assert_almost_equal(purpose, actual, expected, max_offset=None, rounded_as=ROUND_HALF_EVEN):
         assertion = Assertion(purpose, actual)
         assertion.with_max_offset(max_offset)
         assertion.rounded_as(rounded_as)

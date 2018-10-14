@@ -20,7 +20,7 @@ limitations under the License.
 '''
 
 import inspect
-from decimal import getcontext, Decimal, ROUND_HALF_UP
+from decimal import getcontext, Decimal, ROUND_HALF_EVEN
 
 from arjuna.lib.unitee.validation import checks
 from .testpoint import *
@@ -32,7 +32,7 @@ class Assertion:
         self.__purpose = purpose
         self.__subject = subject
         self.__offset = 0.000000
-        self.__rounding = ROUND_HALF_UP
+        self.__rounding = ROUND_HALF_EVEN
         self._step = None
 
     def __create_step(self):

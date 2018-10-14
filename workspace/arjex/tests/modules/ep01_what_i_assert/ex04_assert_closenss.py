@@ -32,14 +32,18 @@ def asserting_floating_numbers_correct_way(my):
     # This passes because you allow a delta of +/-0.01
     my.steps.assert_almost_equal("Consider offset correction.", 0.34, 1/3, max_offset=0.01)
 
-    # This passes because Arjuna does half-up-rounding as per offset precion.
-    # In this mode of rounding, if >5 digit increments preceding digit by 1.
-    # if <5 digit, then preceding digit is not changed.
-    # For 5, if preceding digit is an odd number, it is incremented else left as such.
-    # Here while rounding to 2 places, there is a '5' after '1', hence making it 2.
-    # So, 0.315 is rounded to 0.32.
-    # This clubbed with allowed delta of -0.01 passes this test.
+    # This passes because Arjuna does ROUND_HALF_EVEN as per offset precision.
     my.steps.assert_almost_equal("Consider offset correction.", 0.315, 1/3, max_offset=0.01)
 
     # You can allow for larger offset as well
     my.steps.assert_almost_equal("Consider offset correction.", 0.3, 1/3, max_offset=0.03)
+
+    # You can also override the rounding strategy by providing a valid strategy from decimal module
+    # E.g. following as per default rounding would fail as actual and expected
+    # get rounded to 0.3 and 0.5 respectively.
+    # my.steps.assert_almost_equal("Consider custom rounding.", 0.35, 0.46, max_offset=0.1)
+
+    # However, choosing rounding ad ROUND_UP would pass this assertion.
+    # So, choose rounding strageies as needed. Default would work most of the times for you.
+    import decimal
+    my.steps.assert_almost_equal("Consider custom rounding.", 0.35, 0.46, max_offset=0.1, rounded_as=decimal.ROUND_UP)

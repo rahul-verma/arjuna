@@ -181,11 +181,11 @@ class TestObject(metaclass=abc.ABCMeta):
                         result = TestObjectResult(self, rtype=ResultTypeEnum.EXCLUDED_CHILDREN,
                                                   rcode=ResultCodeEnum.EXCLUDED_CHILD_TEST_OBJECT)
                         self.report(result)
-            # else:
-            #     if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot} and not self.reported:
-            #         result = TestObjectResult(self, rtype=ResultTypeEnum.PASS,
-            #                                   rcode=ResultCodeEnum.PASS_ALL_CHILD_TEST_OBJECTS)
-            #         self.report(result)
+
+        if self.type not in {TestObjectTypeEnum.Test, TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot} and not self.reported:
+            result = TestObjectResult(self, rtype=ResultTypeEnum.PASS,
+                                      rcode=ResultCodeEnum.PASS_ALL_CHILD_TEST_OBJECTS)
+            self.report(result)
 
         self.report_finish_info(bstamp)
 
