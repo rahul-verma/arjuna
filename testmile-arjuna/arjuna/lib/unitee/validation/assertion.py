@@ -20,17 +20,19 @@ limitations under the License.
 '''
 
 import inspect
+from decimal import getcontext, Decimal, ROUND_HALF_UP
 
 from arjuna.lib.unitee.validation import checks
 from .testpoint import *
+import math
 
 
 class Assertion:
     def __init__(self, purpose, subject):
         self.__purpose = purpose
         self.__subject = subject
-        self.__offset = 0
-        self.__round_places = None
+        self.__offset = 0.000000
+        self.__rounding = ROUND_HALF_UP
         self._step = None
 
     def __create_step(self):
@@ -92,7 +94,7 @@ class Assertion:
         self._step.assert_message = "Error in assertion. {}".format(e)
 
     def is_equal_to(self, expected):
-        if (type(self.__subject) is float):
+        if type(self.__subject) is float or type(expected) is float:
             return self.__is_almost_equal_to(expected)
         self.__create_step()
         has_failed = False
@@ -166,12 +168,14 @@ class Assertion:
 
         self._configure_step()
 
-    def rounded_to(self, places):
-        self.__round_places = places
-        return self
+    def rounded_as(self, strategy):
+        self.__rounding = strategy
 
     def with_max_offset(self, offset):
-        self.__offset = offset
+        if offset <= 0:
+            raise Exception("Max offset can not be less than 0.")
+        if offset is not None:
+            self.__offset = offset
         return self
 
     def __is_almost_equal_to(self, expected):
@@ -180,29 +184,72 @@ class Assertion:
         try:
 
             not_allowed = False
-            if type(expected) in {'int', 'float'}:
+            lhs = self.__subject
+            rhs = expected
+            allowed_type_set = {int, float}
+            if type(expected) in allowed_type_set and type(self.__subject) in allowed_type_set:
                 str_delta = str(self.__offset)
-                zero, *places = str_delta.split('.', 1)
+                zero, places = str_delta.split('.', 1)
                 precision = len(places)
-                diff = self.__round_places and round(self.__subject - expected, self.__round_places) or self.__subject - expected
-                sdiff = "{{:{}f}}".format(diff, self.__round_places)
-                sdelta = "{{:{}f}}".format(self.__offset)
-                has_failed = sdiff == sdelta
+                allowed_diff = Decimal("{{:.{}f}}".format(precision).format(self.__offset))
+                try:
+                    lhs = Decimal(lhs).quantize(allowed_diff, rounding=self.__rounding)
+                except:
+                    # No rounding or offsetting needed as decimal places are less than offset precsion
+                    lhs = Decimal(lhs)
+                try:
+                    rhs = Decimal(rhs).quantize(allowed_diff, rounding=self.__rounding)
+                except:
+                    rhs = Decimal(rhs)
+
+                diff = abs(lhs-rhs)
+                has_failed = diff > allowed_diff
             else:
                 not_allowed = True
 
-            self._step.benchmark = 'Should be equal to approxmiately >{}<. Round to {} places. Max Offset specified: {}'.format(expected, self.__round_places, sdelta)
+            # if self.__offset_specified:
+            #     sdelta = "{{:{}f}}".format(self.__offset)
+            # else:
+            #     sdelta = "{{}}"
+            # if type(expected).__name__ in {'int', 'float'}:
+            #     if self._rounded_places:
+            #         lhs = math.ro
+            #     str_delta = str(self.__offset)
+            #     zero, *places = str_delta.split('.', 1)
+            #     precision = len(places)
+            #     diff = self.__round_places and round(self.__subject - expected, self.__round_places) or self.__subject - expected
+            #     sdiff = "{{:{}f}}".format(diff, self.__round_places)
+            #     print(sdiff)
+            #     print(sdelta)
+            #     has_failed = sdiff == sdelta
+            # else:
+            #     not_allowed = True
+
+            self._step.expectation = 'Should be equal to approxmiately >{}<.{}{}'.format(
+                expected,
+                ' Max Offset specified: {}.'.format(allowed_diff),
+                " Round as per offset with {} strategy.".format(self.__rounding)
+            )
+
             self._step.observation = '>{}<'.format(self.__subject)
 
             if not_allowed:
                 self._step.set_failure()
-                self._step.assert_message = ">{0}<[type:{1}] can not be approxmiately compared to >{2}<[type:{3}]".format(self.__subject,
-                                                                                                              expected)
+                self._step.assert_message = ">{0}<[type:{1}] can not be approxmiately compared to >{2}<[type:{3}]".format(
+                    self.__subject,
+                    type(self.__subject).__name__,
+                    expected,
+                    type(expected).__name__
+                )
             elif has_failed:
                 self._step.set_failure()
                 self._step.assert_message = "Numbers are not equal as per approximation guidelines."
+            else:
+                self._step.assert_message = "Assertion fulfilled."
 
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             self.__set_check_error_for_assertion_issue(e)
 
         self._configure_step()

@@ -30,7 +30,7 @@ def is_false(input):
         raise Exception("Not a boolean")
     return input is False
 
-def __throw_exception_for_incompt_equal_same(context, actual, expected):
+def throw_exception_for_incompt_equal_same(context, actual, expected):
     if actual is None or expected is None:
         return
 
@@ -39,11 +39,11 @@ def __throw_exception_for_incompt_equal_same(context, actual, expected):
         raise Exception(msg)
 
 def is_equal(actual, expected):
-    __throw_exception_for_incompt_equal_same("equal/non-equal", actual, expected)
+    throw_exception_for_incompt_equal_same("equal/non-equal", actual, expected)
     return expected == actual
 
 def is_not_equal(actual, expected):
-    __throw_exception_for_incompt_equal_same("equal/non-equal", actual, expected)
+    throw_exception_for_incompt_equal_same("equal/non-equal", actual, expected)
     return not is_equal(actual, expected)
 
 def is_almost_equal(actual, expected, delta):
@@ -53,12 +53,12 @@ def is_almost_equal(actual, expected, delta):
 
 
 def is_same(actual, expected):
-    __throw_exception_for_incompt_equal_same("same/different", actual, expected)
+    throw_exception_for_incompt_equal_same("same/different", actual, expected)
     return expected is actual
 
 
 def is_different(actual, expected):
-    __throw_exception_for_incompt_equal_same("same/different", actual, expected)
+    throw_exception_for_incompt_equal_same("same/different", actual, expected)
     return expected is not actual
 
 
