@@ -132,6 +132,7 @@ class Steps:
 
     @staticmethod
     def assert_true(purpose, actual):
+        print(purpose, actual)
         assertion = Assertion(purpose, actual)
         assertion.is_true()
 
@@ -159,6 +160,8 @@ class Steps:
     def assert_not_same(purpose, actual, expected):
         assertion = Assertion(purpose, actual)
         assertion.is_not_same_as(expected)
+
+    assert_different = assert_not_same
 
     @staticmethod
     def assert_none(purpose, actual):

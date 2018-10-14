@@ -20,16 +20,28 @@ limitations under the License.
 '''
 
 def is_true(input):
+    if type(input) is not bool:
+        raise Exception("Not a boolean")
     return input is True
 
 
 def is_false(input):
+    if type(input) is not bool:
+        raise Exception("Not a boolean")
     return input is False
 
+def __throw_exception_for_incompt_equal_same(context, actual, expected):
+    if type(actual) != type(expected):
+        msg = 'Checking for {} objects does not work for objects of different types.'.format(context)
+        raise Exception(msg)
 
 def is_equal(actual, expected):
+    __throw_exception_for_incompt_equal_same("equal/non-equal", actual, expected)
     return expected == actual
 
+def is_not_equal(actual, expected):
+    __throw_exception_for_incompt_equal_same("equal/non-equal", actual, expected)
+    return not is_equal(actual, expected)
 
 def is_almost_equal(actual, expected, delta):
     diff = abs(expected - actual)
@@ -38,18 +50,16 @@ def is_almost_equal(actual, expected, delta):
 
 
 def is_same(actual, expected):
+    __throw_exception_for_incompt_equal_same("same/different", actual, expected)
     return expected is actual
 
 
 def is_different(actual, expected):
+    __throw_exception_for_incompt_equal_same("same/different", actual, expected)
     return expected is not actual
 
 
 is_not_same = is_different
-
-
-def is_not_equal(actual, expected):
-    return not is_equal(actual, expected)
 
 def is_none(obj):
     return obj is None

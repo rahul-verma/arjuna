@@ -36,7 +36,7 @@ class Assertion:
     def __create_step(self):
         self._step = Step()
         self._step.purpose = self.__purpose
-        frame = inspect.stack()[2]
+        frame = inspect.stack()[3]
         self._step.source = "{}.py:{}:L{}".format(inspect.getmodule(frame[0]).__name__, frame[3], frame[2])
         self._step.step_type = StepType.AssertStep
 
@@ -50,6 +50,8 @@ class Assertion:
     def is_true(self):
         self.__create_step()
         self._step.expectation = "Should be True"
+        print(self._step.observation)
+        print(self.__subject)
         try:
             if checks.is_true(self.__subject):
                 self._step.observation = "True"
@@ -111,10 +113,10 @@ class Assertion:
                     has_failed = True
                     # we need to handle this
             if not type_mismatch:
-                has_failed = checks.is_not_equal(self.__subject, expected)
-
                 self._step.expectation = 'Should be equal to Object of type={0} and value=>{1}<'.format(type(expected).__name__, expected)
                 self._step.observation = 'Object of type={0} and value=>{1}<'.format(type(self.__subject).__name__, self.__subject)
+
+                has_failed = checks.is_not_equal(self.__subject, expected)
 
                 if has_failed:
                     self._step.set_failure()
@@ -148,10 +150,10 @@ class Assertion:
                     # we need to handle this
 
             if not type_mismatch:
-                has_failed = checks.is_equal(self.__subject, expected)
-
                 self._step.expectation = 'Should not be equal to Object of type={0} and value=>{1}<'.format(type(expected).__name__, expected)
                 self._step.observation = 'Object of type={0} and value=>{1}<'.format(type(self.__subject).__name__, self.__subject)
+
+                has_failed = checks.is_equal(self.__subject, expected)
 
                 if has_failed:
                     self._step.set_failure()
@@ -216,10 +218,10 @@ class Assertion:
                     has_failed = True
 
             else:
-                has_failed = checks.is_not_same(self.__subject, expected)
+                self._step.expectation = "Should be same as Object of type >{0}< and id >{1}<".format(type(expected).__name__, id(expected))
+                self._step.observation = "Object of type >{0}< and id >{1}<".format(type(self.__subject).__name__, id(self.__subject))
 
-                self._step.expectation = "Should be same as Object of type={0} and id=<{1}>".format(type(expected).__name__, id(expected))
-                self._step.observation = "Object of type={0} and id=<{1}>".format(type(self.__subject).__name__, id(self.__subject))
+                has_failed = checks.is_not_same(self.__subject, expected)
 
                 if has_failed:
                     self._step.set_failure()
@@ -244,11 +246,12 @@ class Assertion:
                 else:
                     pass
             else:
+                self._step.expectation = "Should not be same as Object of type >{0}< and id >{1}<".format(type(expected).__name__, id(expected))
+                self._step.observation = "Object of type >{0}< and id >{1}<".format(type(self.__subject).__name__,
+                                                                                  id(self.__subject))
+
                 has_failed = checks.is_same(self.__subject, expected)
 
-                self._step.expectation = "Should not be same as Object of type={0} and id=<{1}>".format(type(expected).__name__, id(expected))
-                self._step.observation = "Object of type={0} and id=<{1}>".format(type(self.__subject).__name__,
-                                                                                  id(self.__subject))
                 if has_failed:
                     self._step.set_failure()
                     self._step.assert_message = "Objects are same."
@@ -256,7 +259,7 @@ class Assertion:
                     self._step.assert_message = "Assertion fulfilled."
 
         except Exception as e:
-            self.__set_check_error_for_assertion_issue(check, e)
+            self.__set_check_error_for_assertion_issue(e)
 
         self._configure_step()
 
