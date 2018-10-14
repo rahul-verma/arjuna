@@ -31,6 +31,9 @@ def is_false(input):
     return input is False
 
 def __throw_exception_for_incompt_equal_same(context, actual, expected):
+    if actual is None or expected is None:
+        return
+
     if type(actual) != type(expected):
         msg = 'Checking for {} objects does not work for objects of different types.'.format(context)
         raise Exception(msg)

@@ -5,6 +5,8 @@ from arjuna.tpi.markup_helpers import *
 '''
 Explore more situations for this.
 '''
+
+
 @test_function
 def assert_content(my):
     # List
