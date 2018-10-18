@@ -67,21 +67,21 @@ class _SoftAsserter(_Asserter):
 class Steps:
 
     @staticmethod
-    def __step(src, step_type, step_result_type, purpose, relation, benchmark, observation, assert_message, **kwargs):
+    def __step(src, step_type, step_result_type, purpose, expectation, observation, assert_message, **kwargs):
         step = Step()
         step.step_type = step_type
         step.purpose = purpose
-        step.relation = relation and relation or "-"
+        step.relation = "-"
         step.step_props = kwargs
         step.source = src
 
-        if benchmark is not None and observation is not None:
-            step.benchmark = benchmark
+        if expectation is not None and observation is not None:
+            step.expectation = expectation
             step.observation = observation
-        elif benchmark is None and observation is None:
+        elif expectation is None and observation is None:
             pass
         else:
-            raise Exception("Benchmark and Actual observation should be provided or ignored together.")
+            raise Exception("Expectation and Actual observation should be provided or ignored together.")
 
         if step_result_type == ResultTypeEnum.NOTHING:
             step.rtype = "-"
@@ -90,33 +90,36 @@ class Steps:
         elif step_result_type == ResultTypeEnum.ERROR:
             step.set_error()
 
-        if assert_message is not None:
-            step.assert_message = "-"
+        step.assert_message = assert_message and assert_message or "-"
 
         step.add_to_state()
         step.evaluate()
 
-    @staticmethod
-    def pstep(purpose, *, relation=None, benchmark=None, observation=None, take_screenshot=False, **kwargs):
-        src = Steps.__get_caller()
-        Steps.__step(src, StepType.ExecStep, ResultTypeEnum.PASS, purpose, relation, benchmark, observation, None, **kwargs)
+    # Plan to include take_screenshot=False as a keyword argument for different steps.
+    # Also plan to have a screenshot step.
+    # Also plan to capture the exception trace in the step and issue info.
 
     @staticmethod
-    def fstep(purpose, *, relation=None, benchmark=None, observation=None, fail_message=None, take_screenshot=False, **kwargs):
+    def passed(purpose, *, expectation=None, observation=None,  **kwargs):
         src = Steps.__get_caller()
-        Steps.__step(src, StepType.ExecStep, ResultTypeEnum.FAIL, purpose, relation, benchmark, observation, fail_message, **kwargs)
+        Steps.__step(src, StepType.ExecStep, ResultTypeEnum.PASS, purpose, expectation, observation, None, **kwargs)
 
     @staticmethod
-    def estep(purpose, error_message=None, take_screenshot=False, **kwargs):
+    def failed(purpose, *, expectation=None, observation=None, message=None, **kwargs):
         src = Steps.__get_caller()
-        Steps.__step(src, StepType.ExecStep, ResultTypeEnum.ERROR, purpose, None, None, None, error_message, **kwargs)
+        Steps.__step(src, StepType.ExecStep, ResultTypeEnum.FAIL, purpose, expectation, observation, message, **kwargs)
+
+    @staticmethod
+    def erred(purpose, message=None, **kwargs):
+        src = Steps.__get_caller()
+        Steps.__step(src, StepType.ExecStep, ResultTypeEnum.ERROR, purpose, None, None, message, **kwargs)
 
     @staticmethod
     def log(purpose, **kwargs):
         logger = ArjunaCore.get_logger()
         logger.debug(purpose)
         src = Steps.__get_caller()
-        Steps.__step(src, StepType.LogStep, ResultTypeEnum.NOTHING, purpose, None,None,None, None, **kwargs)
+        Steps.__step(src, StepType.LogStep, ResultTypeEnum.NOTHING, purpose, None, None, None, **kwargs)
 
     @staticmethod
     def __get_caller():

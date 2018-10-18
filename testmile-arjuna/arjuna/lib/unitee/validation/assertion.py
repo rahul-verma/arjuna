@@ -85,7 +85,6 @@ class Assertion:
 
     def __update_check_for_null_expected_object(step):
         step.set_error()
-        step.benchmark = "None"
         step.assert_message = "Expected object can not be None"
         step.observation = "Error: An error occured before this could be evaluated."
 
