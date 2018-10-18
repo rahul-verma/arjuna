@@ -327,6 +327,8 @@ class Assertion:
 
         self._configure_step()
 
+    is_different_from = is_not_same_as
+
 
     def is_none(self):
         self.__create_step()

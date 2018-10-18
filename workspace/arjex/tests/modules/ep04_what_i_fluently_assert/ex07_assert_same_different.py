@@ -32,31 +32,32 @@ s2 = Sample()
 
 @test_function
 def assert_sameness(my):
-    my.steps.assert_same("Should pass for same objects", s1, s1)
-    my.steps.assert_different("Should pass for different objects", s1, s2)
+    validator = my.steps.validate("Higher purpose")
 
+    validator.assert_that(s1).is_same_as(s1)
+    validator.assert_that(s1).is_not_same_as(s2)
     # You can also use the following instead of assert_different
-    my.steps.assert_not_same("Should pass for different objects", s1, s2)
+    validator.assert_that(s1).is_different_from(s2)
 
 
 @test_function
 def assert_same_fails_for_different_objects(my):
-    my.steps.assert_same("Should fail for different objects.", s1, s2)
+    my.steps.validate("purpose").assert_that(s1).is_same_as(s2)
 
 
 @test_function
 def assert_different_fails_for_same_objects(my):
-    my.steps.assert_different("Should fail for same objects.", s1, s1)
+    my.steps.validate("purpose").assert_that(s1).is_different_from(s1)
 
 
 @test_function
 def assert_same_errs_for_incompatible_values(my):
-    my.steps.assert_same("Should err for int and string comparison", s1, 1)
+    my.steps.validate("purpose").assert_that(s1).is_same_as(1)
 
 
 @test_function
 def assert_different_errs_for_incompatible_values(my):
-    my.steps.assert_different("Should err for int and string comparison", s1, 1)
+    my.steps.validate("purpose").assert_that(s1).is_different_from(1)
 
 
 

@@ -25,16 +25,17 @@ from arjuna.tpi.markup_helpers import *
 
 @test_function
 def assert_nothingness(my):
-    my.steps.assert_none("Business Purpose", None)
-    my.steps.assert_not_none("Business Purpose", 1)
+    validator = my.steps.validate("Higher purpose")
+    validator.assert_that(None).is_none()
+    validator.assert_that(1).is_not_none()
 
 
 @test_function
 def assert_none_fails_for_notnone(my):
-    my.steps.assert_none("Should fail for not None value", 1)
+    my.steps.validate("Higher purpose").assert_that(1).is_none()
 
 
 @test_function
 def assert_notnone_fails_for_none(my):
-    my.steps.assert_not_none("Should fail for None value.", None)
+    my.steps.validate("Higher purpose").assert_that(None).is_not_none()
 
