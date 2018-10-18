@@ -24,10 +24,10 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
-from arjex.tests.modules.ep10_my_dependencies import failing_module, passing_module
+from arjex.tests.modules.ep11_my_dependencies import failing_module
 
 @init_module(
-    exclude_if=problem_in(modules(passing_module,failing_module))
+    exclude_if=problem_in(modules(failing_module))
 )
 def setup_module(my):
     pass

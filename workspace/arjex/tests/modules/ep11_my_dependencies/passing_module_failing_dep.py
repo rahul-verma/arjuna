@@ -24,18 +24,14 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
-from arjex.tests.modules.ep10_my_dependencies import failing_module
+from arjex.tests.modules.ep11_my_dependencies import failing_module
 
 @init_module(
-    exclude_if=problem_in(modules(failing_module))
+    exclude_if = problem_in(modules(failing_module))
 )
-def setup_module(my):
+def init_module(my):
     pass
 
 @test_function
-def test_simple1(my):
-    pass
-
-@test_function
-def test_simple2(my):
-    pass
+def dep_that_passes(my):
+    assert 1==1
