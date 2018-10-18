@@ -24,18 +24,28 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
-from arjex.tests.modules.ep09_my_dependencies import failing_module
 
-@init_module(
-    exclude_if=problem_in(modules(failing_module))
+class MyDataClass:
+
+    def __init__(self, num):
+        self.num = num
+
+    def __iter__(self):
+        return iter(range(self.num))
+
+def myrange(num):
+    return range(num)
+
+# The following decorator binds multiple data sources to the test function.
+# You should see test method executed 1 (record) + 2 (records) + 4 (func) + 7 (class) + 2 (file) = 16 times
+@test_function(
+    drive_with=many_data_sources(
+        record(1,2,3),
+        records(record(4,5,6), record(a=4)),
+        data_function(myrange, 4),
+        data_class(MyDataClass, 7),
+        data_file("input.xls")
+    )
 )
-def setup_module(my):
-    pass
-
-@test_function
-def test_simple1(my):
-    pass
-
-@test_function
-def test_simple2(my):
-    pass
+def test_multiple_data_sources(my):
+    print(my.data.record)
