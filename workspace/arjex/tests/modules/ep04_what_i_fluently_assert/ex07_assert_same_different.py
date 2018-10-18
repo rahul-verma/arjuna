@@ -23,36 +23,42 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 
 
-@test_function
-def assert_truth(my):
-    my.steps.assert_true("Should Pass for True value.", True)
-    my.steps.assert_false("Should Pass for False value.", False)
+class Sample:
+    pass
+
+s1 = Sample()
+s2 = Sample()
 
 
 @test_function
-def assert_true_fail_for_false(my):
-    my.steps.assert_true("Should Fail for False value.", False)
+def assert_sameness(my):
+    my.steps.assert_same("Should pass for same objects", s1, s1)
+    my.steps.assert_different("Should pass for different objects", s1, s2)
+
+    # You can also use the following instead of assert_different
+    my.steps.assert_not_same("Should pass for different objects", s1, s2)
 
 
 @test_function
-def assert_false_fail_for_true(my):
-    my.steps.assert_false("Should Fail for True value.", True)
+def assert_same_fails_for_different_objects(my):
+    my.steps.assert_same("Should fail for different objects.", s1, s2)
 
 
 @test_function
-def assert_true_non_boolean_raises_exception(my):
-    my.steps.assert_true("Should throw error for non-boolean value", "testing")
-
-@test_function
-def assert_false_non_boolean_raises_exception(my):
-    my.steps.assert_false("Should throw error for non-boolean value", "testing")
+def assert_different_fails_for_same_objects(my):
+    my.steps.assert_different("Should fail for same objects.", s1, s1)
 
 
 @test_function
-def assert_true_errs_for_none(my):
-    my.steps.assert_true("Should throw error for non-boolean value.", None)
+def assert_same_errs_for_incompatible_values(my):
+    my.steps.assert_same("Should err for int and string comparison", s1, 1)
 
 
 @test_function
-def assert_false_errs_for_none(my):
-    my.steps.assert_false("Should throw error for non-boolean value.", None)
+def assert_different_errs_for_incompatible_values(my):
+    my.steps.assert_different("Should err for int and string comparison", s1, 1)
+
+
+
+
+

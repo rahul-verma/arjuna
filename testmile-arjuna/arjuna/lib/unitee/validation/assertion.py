@@ -19,19 +19,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+import re
 import inspect
 from decimal import getcontext, Decimal, ROUND_HALF_EVEN
 
 from arjuna.lib.unitee.validation import checks
 from .testpoint import *
 import math
-
+import re
 
 class Assertion:
     def __init__(self, purpose, subject):
         self.__purpose = purpose
         self.__subject = subject
-        self.__offset = 0.000000
+        self.__offset = "0.00000000000000000001"
         self.__rounding = ROUND_HALF_EVEN
         self._step = None
 
@@ -169,12 +170,28 @@ class Assertion:
 
     def rounded_as(self, strategy):
         self.__rounding = strategy
+        return self
 
     def with_max_offset(self, offset):
-        if offset <= 0:
-            raise Exception("Max offset can not be less than 0.")
-        if offset is not None:
-            self.__offset = offset
+        if offset is None:
+            return
+        if type(offset) in {int, float}:
+            f_offset = Decimal(offset).quantize(Decimal("0.0001"))
+            if f_offset <= 0 or f_offset >= 1:
+                raise Exception("Max offset provided as float should be a non-negative value such that 0 < offset < 1 after rounding to 4 decimal places.")
+            self.__offset = re.sub(r"[0]+$", "", str(f_offset))
+        elif type(offset) is str:
+            try:
+                f_offset = float(offset)
+                if f_offset <= 0 or f_offset >= 1:
+                    raise Exception(
+                        "Max offset provided as string should be a non-negative value such that 0 < offset < 1.")
+                else:
+                    self.__offset = offset
+            except:
+                raise Exception("Max offset string must contain a floating number.")
+        else:
+            raise Exception("Max offset can be a float or string")
         return self
 
     def __is_almost_equal_to(self, expected):
@@ -187,14 +204,14 @@ class Assertion:
             rhs = expected
             allowed_type_set = {int, float}
             if type(expected) in allowed_type_set and type(self.__subject) in allowed_type_set:
-                str_delta = str(self.__offset)
-                zero, places = str_delta.split('.', 1)
+                zero, places = self.__offset.split('.', 1)
                 precision = len(places)
-                allowed_diff = Decimal("{{:.{}f}}".format(precision).format(self.__offset))
+                allowed_diff = Decimal(self.__offset)
+                print(allowed_diff)
                 try:
                     lhs = Decimal(lhs).quantize(allowed_diff, rounding=self.__rounding)
                 except:
-                    # No rounding or offsetting needed as decimal places are less than offset precsion
+                    # No rounding or offsetting needed as decimal places are less than offset precision
                     lhs = Decimal(lhs)
                 try:
                     rhs = Decimal(rhs).quantize(allowed_diff, rounding=self.__rounding)
@@ -202,6 +219,7 @@ class Assertion:
                     rhs = Decimal(rhs)
 
                 diff = abs(lhs-rhs)
+                print(diff)
                 has_failed = diff > allowed_diff
             else:
                 not_allowed = True

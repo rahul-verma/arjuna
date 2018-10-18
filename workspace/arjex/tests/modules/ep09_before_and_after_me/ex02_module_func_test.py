@@ -27,21 +27,21 @@ from arjuna.tpi.helpers import *
 def module_level_setup(my):
     console.display("Module level setup executed")
 
-@init_each_function
-def each_function_level_setup(my):
-    console.display("Function level setup executed")
-
-@init_each_test
-def each_test_level_setup(my):
-    console.display("Test level setup executed")
-
 @end_module
 def module_level_cleanup(my):
     console.display("Module level cleanup executed")
 
+@init_each_function
+def each_function_level_setup(my):
+    console.display("Function level setup executed")
+
 @end_each_function
 def each_function_level_cleanup(my):
     console.display("Function level cleanup executed")
+
+@init_each_test
+def each_test_level_setup(my):
+    console.display("Test level setup executed")
 
 @end_each_test
 def each_test_level_cleanup(my):

@@ -21,36 +21,20 @@ limitations under the License.
 
 from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
-from arjuna.tpi.helpers import *
 
-@init_module
-def module_level_setup(my):
-    console.display("Module level setup executed")
-
-@init_each_function
-def each_function_level_setup(my):
-    console.display("Function level setup executed")
-
-@init_each_test
-def each_test_level_setup(my):
-    console.display("Test level setup executed")
-
-@end_module
-def module_level_cleanup(my):
-    console.display("Module level cleanup executed")
-
-@end_each_function
-def each_function_level_cleanup(my):
-    console.display("Function level cleanup executed")
-
-@end_each_test
-def each_test_level_cleanup(my):
-    console.display("Test level cleanup executed")
 
 @test_function
-def test1(my):
-    assert 1==1
+def assert_nothingness(my):
+    my.steps.assert_none("Business Purpose", None)
+    my.steps.assert_not_none("Business Purpose", 1)
+
 
 @test_function
-def test2(my):
-    assert 1==1
+def assert_none_fails_for_notnone(my):
+    my.steps.assert_none("Should fail for not None value", 1)
+
+
+@test_function
+def assert_notnone_fails_for_none(my):
+    my.steps.assert_not_none("Should fail for None value.", None)
+

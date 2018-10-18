@@ -34,7 +34,7 @@ def assert_equality(my):
 
     # Strings
     my.steps.assert_equal("Business purpose", "testing", "testing")
-    my.steps.assert_not_equal("Business purpose", "testing", "dev")
+    my.steps.assert_not_equal("Business purpose", "testing", "easy")
 
     # booleans -> Not suggested. Should use assert_true/assert_false instead
     my.steps.assert_equal("Business purpose", True, True)
@@ -53,7 +53,7 @@ def assert_notequal_fails_for_equal_ints(my):
 
 @test_function
 def assert_equal_fails_for_nonequal_strings(my):
-    my.steps.assert_equal("Should fail for Non equal strings", "testing", "testing ")
+    my.steps.assert_equal("Should fail for Non equal strings", "testing", "easy ")
 
 
 @test_function
