@@ -53,8 +53,6 @@ class Assertion:
     def is_true(self):
         self.__create_step()
         self._step.expectation = "Should be True"
-        print(self._step.observation)
-        print(self.__subject)
         try:
             if checks.is_true(self.__subject):
                 self._step.observation = "True"
