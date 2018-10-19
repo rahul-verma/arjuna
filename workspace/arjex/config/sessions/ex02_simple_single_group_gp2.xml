@@ -2,7 +2,7 @@
     <stages>
         <stage>
             <groups>
-                <group name="g1"/>
+                <group name="gp2"/>
             </groups>  
         </stage> 
     </stages>

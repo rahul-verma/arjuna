@@ -24,13 +24,13 @@
             </fixtures>    
 
             <groups>
-                <group name="gp1">
+                <group name="gpc1">
                     <evars>
                         <evar name="group_evar" value="chrome"/>
                     </evars>
                 </group>
 
-                <group name="gp2">
+                <group name="gpc2">
                     <evars>
                         <evar name="group_evar" value="firefox"/>
                     </evars>

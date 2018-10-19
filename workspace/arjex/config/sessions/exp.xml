@@ -2,7 +2,7 @@
     <stages>
         <stage>
             <groups>
-                <group name="g4"/>
+                <group name="_magroup"/>
             </groups>  
         </stage> 
     </stages>

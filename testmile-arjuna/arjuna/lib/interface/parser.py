@@ -88,7 +88,7 @@ class GroupParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('group_name', type=partial(lname_check, "Group"), help='Existing group template name.')
+        self.parser.add_argument('-g', '--group-name', dest="group_name", type=partial(lname_check, "Group"), help='Existing group template name.')
 
     def process(self, arg_dict):
         arg_dict['group.name'] = arg_dict['group_name']

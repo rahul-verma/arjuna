@@ -1,27 +1,27 @@
 <groups>
     <!-- Selects ex01_module from my_universe package -->
-    <group name="g1">
+    <group name="gp1">
         <pickers>
             <picker type="cm" pattern=".*_picking"/>
         </pickers>
     </group>
 
     <!-- Selects test1_picking and test2_picking from my_universe package -->
-    <group name="g2">
+    <group name="gp2">
         <pickers>
             <picker type="cf" pattern=".*_picking"/>
         </pickers>
     </group>
 
     <!-- Selects ??? -->
-    <group name="g3">
+    <group name="gp3">
         <pickers>
             <picker type="cm" pattern=".*ex01_picking"/>
             <picker type="cf" pattern="test1_picking"/>
         </pickers>
     </group>
 
-    <group name="gp1">
+    <group name="gpc1">
         <evars>
             <evar name="gconfevar" value="4" type="int"/>
         </evars>
@@ -39,7 +39,7 @@
         </pickers>
     </group>
 
-    <group name="gp2">
+    <group name="gpc2">
         <evars>
             <evar name="gconfevar" value="5" type="int"/>
         </evars>
