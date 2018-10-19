@@ -1,0 +1,41 @@
+<session>
+    <evars>
+        <evar name="session_evar" value="2" type="int"/>
+    </evars>
+
+    <fixtures>
+        <fixture type="init_session" module="all" func="init_session"/>
+        <fixture type="end_session" module="all" func="end_session"/>
+        <fixture type="init_each_stage" module="all" func="init_each_stage"/>
+        <fixture type="end_each_stage" module="all" func="end_each_stage"/>
+    </fixtures>
+
+    <stages>
+        <stage threads="2">
+            <evars>
+                <evar name="stage_evar" value="2" type="int"/>
+            </evars>
+
+            <fixtures>
+                <fixture type="init_stage" module="all" func="init_stage_1"/>
+                <fixture type="end_stage" module="all" func="end_stage_1"/>
+                <fixture type="init_each_group" module="all" func="init_each_group"/>
+                <fixture type="end_each_group" module="all" func="end_each_group"/>
+            </fixtures>    
+
+            <groups>
+                <group name="gp1">
+                    <evars>
+                        <evar name="group_evar" value="chrome"/>
+                    </evars>
+                </group>
+
+                <group name="gp2">
+                    <evars>
+                        <evar name="group_evar" value="firefox"/>
+                    </evars>
+                </group>
+            </groups>  
+        </stage> 
+    </stages>
+</session>

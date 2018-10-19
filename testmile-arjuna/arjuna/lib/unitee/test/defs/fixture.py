@@ -23,6 +23,7 @@ import importlib
 from arjuna.lib.unitee.test.objects.fixture import Fixture
 from arjuna.lib.unitee.enums import FixtureTypeEnum
 from arjuna.lib.unitee.loader import kfactory
+from arjuna.lib.unitee.enums import *
 
 class _FixtureDef:
     def __init__(self, ftype, fix_func):
@@ -85,12 +86,9 @@ class FixturesDef:
 
 class ConfiguredFixtureHelper:
 
-    def configure_fixture(fixdef, fname, f):
-        mname, fn = ConfiguredFixtureHelper.__get_module_and_func(f)
-        module = importlib.import_module(mname)
-        func = getattr(module, fn)
-        fixdef.add_fixture_func(FixtureTypeEnum[fname.upper()], kfactory.create_fixture(fname, func))
-
-    def __get_module_and_func(input_name):
-        mname, fn = input_name.rsplit(".", 1)
-        return mname, fn
+    def configure_fixture(fixdef, ftypestr, mname, fname):
+        from arjuna.lib.core import ArjunaCore
+        fix_prefix = ArjunaCore.config.value(UniteePropertyEnum.CONF_FIXTURES_IMPORT_PREFIX)
+        module = importlib.import_module(fix_prefix + mname)
+        func = getattr(module, fname)
+        fixdef.add_fixture_func(FixtureTypeEnum[ftypestr.upper()], kfactory.create_fixture(ftypestr, func))

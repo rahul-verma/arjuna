@@ -1,0 +1,9 @@
+<session>
+    <stages>
+        <stage>
+            <groups>
+                <group name="g4"/>
+            </groups>  
+        </stage> 
+    </stages>
+</session>

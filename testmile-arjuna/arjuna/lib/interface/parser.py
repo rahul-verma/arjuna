@@ -75,9 +75,12 @@ class SessionParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('session_name', type=partial(lname_check, "Session"), help='Existing session template name.')
+        self.parser.add_argument('-s', '--session-name', dest="session_name", type=partial(lname_check, "Session"), help='Existing session template name.')
 
     def process(self, arg_dict):
+        if arg_dict['session_name'] is None:
+            print("Fatal Error in CLI processing. You must provide a valid session name using -s or --session-name switch", file=sys.stderr)
+            sys.exit(1)
         arg_dict['session.name'] = arg_dict['session_name']
         del arg_dict['session_name']
 

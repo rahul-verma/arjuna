@@ -36,7 +36,7 @@ class TestObjectRunner(Thread):
 			except SubTestsFinished as e:
 				return
 			except Exception as e:
-				print  ("Some exc")
+				print  ("An exception occured in thread pooling. Would continue executing.")
 				print (e)
 				import traceback
 				traceback.print_exc()

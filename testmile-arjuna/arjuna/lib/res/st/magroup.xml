@@ -1,0 +1,8 @@
+<group name="_magroup">
+    <pickers>
+        <picker type="cm" pattern=".*"/>
+    </pickers>
+</group>
+
+
+

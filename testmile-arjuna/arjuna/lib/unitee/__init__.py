@@ -48,7 +48,7 @@ class UniteeNames:
 
 
 class __UniteeConfigurator(AbstractComponentConfigurator):
-    def __init__(self, integrator, project_name, proj_parent_dir, runid, test_module_import_prefix):
+    def __init__(self, integrator, project_name, proj_parent_dir, runid):
         super().__init__(integrator, "Unitee", UniteePropertyEnum)
         from arjuna.lib.core import ArjunaCore
         self.component = None
@@ -59,7 +59,8 @@ class __UniteeConfigurator(AbstractComponentConfigurator):
         self.proj_full_path = file_utils.normalize_path(os.path.join(self.proj_parent_dir, self.project_name))
         self.runid = runid and runid or "mrunid"
         self.irunid = "{}-{}".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3], self.runid)
-        self.test_module_import_prefix = test_module_import_prefix
+        self.test_module_import_prefix =  "{}.tests.modules.".format(project_name)
+        self.conf_fixtures_import_prefix = "{}.fixtures.".format(project_name)
         self.__overridable = set()
 
         self.__load_project_console()
@@ -133,6 +134,8 @@ class __UniteeConfigurator(AbstractComponentConfigurator):
             UniteePropertyEnum.RUNID: (self._handle_string_config, "Test Run ID", True),
             UniteePropertyEnum.FAILFAST: (self._handle_boolean_config, "Stop on first failure/error?", False),
             UniteePropertyEnum.TEST_MODULE_IMPORT_PREFIX: (self._handle_string_config, "Prefix for Test Module Import", False),
+            UniteePropertyEnum.CONF_FIXTURES_IMPORT_PREFIX: (
+            self._handle_string_config, "Prefix for Configuration Level Test Fixtures Import", False),
             UniteePropertyEnum.TESTS_DIR: (self._handle_project_dir_path, "Test Directory", True),
             UniteePropertyEnum.REPORT_DIR: (self._handle_project_dir_path, "Report Directory", False),
             UniteePropertyEnum.ARCHIVES_DIR: (self._handle_project_dir_path, "Report Archives directory", False),
@@ -196,7 +199,8 @@ class __UniteeConfigurator(AbstractComponentConfigurator):
         contents = contents.format(proj_name=self.project_name, proj_dir=self.proj_full_path,
                                    runid=self.runid,
                                    irunid=self.irunid,
-                                   test_module_import_prefix=self.test_module_import_prefix)
+                                   test_module_import_prefix=self.test_module_import_prefix,
+                                   conf_fixtures_import_prefix=self.conf_fixtures_import_prefix)
         hrr = HoconStringReader(contents)
         hrr.process()
         self.__process_arjuna_options(hrr.get_flat_map())
@@ -349,7 +353,7 @@ class UniteeFacade:
     def load_session(self, session_name):
         from arjuna.lib.unitee.test.defs.session import UserDefinedSessionDef
         sdir = ArjunaCore.config.value(UniteePropertyEnum.SESSIONS_DIR)
-        session_file_path = os.path.join(sdir, session_name + ".conf")
+        session_file_path = os.path.join(sdir, session_name + ".xml")
         if not file_utils.is_file(session_file_path):
             ArjunaCore.console.display_error("Not able to find session file {}.conf at {}".format(session_name, sdir))
             sys_utils.fexit()
@@ -365,20 +369,30 @@ class UniteeFacade:
         self.__session = sdef.pick()
         self.__session.load()
 
-    def load_session_for_name_pickers(self, cms, ims, cfs, ifs):
-        picker = {}
-        if cms is not None:
-            picker['cm'] = cms
-        if ims is not None:
-            picker['im'] = ims
-        if cfs is not None:
-            picker['cf'] = cfs
-        if ifs is not None:
-            picker['if'] = ifs
-        d = {'picker': picker}
-        gconf = GroupConf('_mngroup', d, "--builtin--")
-        self.__groups['_mngroup'] = gconf
-        self.load_session_for_group('_mngroup')
+    def load_session_for_name_pickers(self, **picker_args):
+        from xml.etree.ElementTree import Element, SubElement, Comment, tostring
+        gname = '_mngroup'
+        group_xml = Element('group')
+        group_xml.attrib['name'] = gname
+
+        pickers = Element('pickers')
+
+        pattern_list = ['cm', 'im', 'cf', 'if']
+
+        for picker in pattern_list:
+            patterns = picker_args[picker]
+            if patterns is not None:
+                for pattern in patterns:
+                    child = Element('picker')
+                    child.attrib['type'] = picker
+                    child.attrib['pattern'] = pattern
+                    pickers.append(child)
+
+        group_xml.append(pickers)
+
+        gconf = GroupConf(gname, group_xml, "(Arjuna generated object)")
+        self.__groups[gname] = gconf
+        self.load_session_for_group(gname)
 
     def run(self):
         Unitee.state_mgr.register_thread(thread_utils.get_current_thread_name())
@@ -408,7 +422,7 @@ Unitee = UniteeFacade()
 
 def init(pname, ppd, runid="mrunid"):
     integrator = ArjunaCore.integrator
-    configurator = __UniteeConfigurator(integrator, pname, ppd, runid, "{}.tests.modules.".format(pname))
+    configurator = __UniteeConfigurator(integrator, pname, ppd, runid)
     integrator.add_configurator(configurator)
     configurator.process_defaults()
     unitee = UniteeFacade()

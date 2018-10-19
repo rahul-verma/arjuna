@@ -223,7 +223,6 @@ class StateWithIssueMgt(SummaryState):
         pass
 
     def raise_on_problem(self, name):
-        print ("checking dep for", name)
         if name in self.__issues_map:
             raise DependencyNotMet(self.__issues_map[name])
 

@@ -1,0 +1,12 @@
+<session>
+    <stages>
+        <stage>
+            <groups>
+                <group name="{gname}"/>
+            </groups>
+        </stage>
+    </stages>
+</session>
+
+
+

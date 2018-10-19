@@ -136,7 +136,6 @@ class Steps:
 
     @staticmethod
     def assert_true(purpose, actual):
-        print(purpose, actual)
         assertion = Assertion(purpose, actual)
         assertion.is_true()
 

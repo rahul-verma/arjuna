@@ -21,7 +21,11 @@ limitations under the License.
 
 import importlib
 
+import xml.etree.ElementTree as ETree
+
 from arjuna.lib.core.utils import sys_utils
+from arjuna.lib.core.utils import etree_utils
+from arjuna.lib.unitee.utils import run_conf_utils
 from arjuna.lib.unitee.types.root import Root
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.core.enums import *
@@ -41,7 +45,8 @@ class __SessionDef(Root, metaclass=abc.ABCMeta):
         super().__init__()
         self.name = sname
         self.fpath = None
-        self.reader = None
+        self.raw_contents = None
+        self.root = None
         self.stage_defs = []
         self.tmcount = 0
         self.evars = SingleObjectVars()
@@ -59,36 +64,42 @@ class __SessionDef(Root, metaclass=abc.ABCMeta):
             sys_utils.fexit()
 
         try:
-            self.reader.process()
-            sdict = CIStringDict(self.reader.get_map())
-        except:
-            display_err_and_exit("Session definition could not be loaded because of syntax errors.")
+            self.root = ETree.fromstring(self.raw_contents)
+        except Exception as e:
+            print(e)
+            display_err_and_exit("Session definition could not be loaded because of errors in XML.")
 
-        if 'stages' not in sdict:
-            display_err_and_exit(">>stages<< attribute must be specified in session template.")
+        if self.root.tag != 'session':
+            display_err_and_exit("Invalid session template file. Root element tag should be session.")
 
-        for cname, conf in sdict.items():
-            cname = cname.lower()
-            ctype = type(conf)
-            if cname == 'evars':
-                if ctype is not ConfigTree:
-                    display_err_and_exit(">>evars<< attribute in session definition should be a dict.")
-                else:
-                    self.evars = conf
-            elif cname == "stages":
-                if ctype is not list or not conf:
-                    display_err_and_exit(">>stages<< attribute in session definition should be a non-empty list.")
-                else:
-                    for index, entry in enumerate(conf):
-                        node = StageDef(self, index + 1, entry)
-                        self.stage_defs.append(node)
-            elif cname in {"init_session", "end_session", "init_each_stage", "end_each_stage"}:
-                if ctype is not str or not conf:
-                    display_err_and_exit(">>{}<< attribute in session definition should be a non-empty string.".format(cname))
-                else:
-                    ConfiguredFixtureHelper.configure_fixture(self.fixture_defs, cname, conf)
+        node_dict = etree_utils.convert_to_cidict(self.root)
+
+        if 'stages' not in node_dict:
+            display_err_and_exit(">>stages<< must be specified in a session template.")
+
+        for child_tag, child in node_dict.items():
+            child_tag = child_tag.lower()
+            if child_tag == 'evars':
+                evars = child
+                for child in evars:
+                    run_conf_utils.validate_evar_xml_child("session", self.fpath, child)
+                    run_conf_utils.add_evar_node_to_evars("session", self.evars, child)
+            elif child_tag == 'fixtures':
+                fixtures = child
+                for child in fixtures:
+                    run_conf_utils.validate_fixture_xml_child("session", "session", self.fpath, child)
+                    run_conf_utils.add_fixture_node_to_fixdefs(self.fixture_defs, child)
+            elif child_tag =='stages':
+                if "stage" not in etree_utils.convert_to_cidict(child):
+                    display_err_and_exit(">>stages<< element in session definition must contain atleast one >>stage<< element.")
+
+                stages = list(child)
+                for index, stage in enumerate(stages):
+                    run_conf_utils.validate_stage_xml_child("session", self.fpath, stage)
+                    node = StageDef(self, index + 1, stage)
+                    self.stage_defs.append(node)
             else:
-                display_err_and_exit("Unexpected attribute {}:{} found in session definition.".format(cname, conf))
+                display_err_and_exit("Unexpected element >>{}<< found in session definition.".format(child.tag))
 
     def schedule(self):
         logger.debug("%s: Scheduling nodes".format(self.name))
@@ -109,13 +120,13 @@ class __SessionDef(Root, metaclass=abc.ABCMeta):
 class __MSessionDef(__SessionDef):
     def __init__(self, gname):
         super().__init__("msession")
-        sr = TextResourceReader("st/msession.conf")
+        sr = TextResourceReader("st/msession.xml")
         contents = sr.read()
         sr.close()
         contents = contents.format(gname=gname)
         self.fpath = os.path.join(self.central_config.value(CorePropertyTypeEnum.ARJUNA_ROOT_DIR),
-                                  "arjuna/lib/res/st/msession.conf")
-        self.reader = HoconStringReader(contents)
+                                  "arjuna/lib/res/st/msession.xml")
+        self.raw_contents = contents
 
 class MSessionAllTests(__MSessionDef):
     def __init__(self):
@@ -129,4 +140,6 @@ class UserDefinedSessionDef(__SessionDef):
     def __init__(self, name, fpath):
         super().__init__(name)
         self.fpath = fpath
-        self.reader = HoconFileReader(fpath)
+        f = open(self.fpath, "r")
+        self.raw_contents = f.read()
+        f.close()

@@ -203,7 +203,7 @@ class CreateProject(Command):
                 f.close()
                 f = open(os.path.join(ptdir, "config", "{}.conf".format(pname)), "w")
                 f.close()
-                f = open(os.path.join(ptdir, "config", "groups.conf"), "w")
+                f = open(os.path.join(ptdir, "config", "groups.xml"), "w")
                 f.close()
                 f = open(os.path.join(ptdir, "fixtures", "__init__.py"), "w")
                 f.close()
@@ -282,7 +282,13 @@ class RunNames(__RunCommand):
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
-        self.unitee.load_session_for_name_pickers(arg_dict['cmodules'],arg_dict['imodules'],arg_dict['cfunctions'],arg_dict['ifunctions'])
+        picker_args = {
+            'cm': arg_dict['cmodules'],
+            'im': arg_dict['imodules'],
+            'cf': arg_dict['cfunctions'],
+            'if': arg_dict['ifunctions'],
+        }
+        self.unitee.load_session_for_name_pickers(**picker_args)
         self.unitee.run()
         self.unitee.tear_down()
 

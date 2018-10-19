@@ -81,7 +81,7 @@ def create_dsource_func(obj):
 	return _DataSourceFunction(obj)
 
 def create_fixture(dec_name, obj):
-		return _FixtureFunction(obj, dec_name)
+	return _FixtureFunction(obj, dec_name)
 
 def create_test_func(obj):
 	return _TestFunction(obj)

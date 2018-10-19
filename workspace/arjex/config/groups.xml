@@ -1,0 +1,52 @@
+<groups>
+    <!-- Selects ex01_module from my_universe package -->
+    <group name="g1">
+        <pickers>
+            <picker type="cm" pattern=".*_picking"/>
+        </pickers>
+    </group>
+
+    <!-- Selects test1_picking and test2_picking from my_universe package -->
+    <group name="g2">
+        <pickers>
+            <picker type="cf" pattern=".*_picking"/>
+        </pickers>
+    </group>
+
+    <!-- Selects ??? -->
+    <group name="g3">
+        <pickers>
+            <picker type="cm" pattern=".*ex01_picking"/>
+            <picker type="cf" pattern="test1_picking"/>
+        </pickers>
+    </group>
+
+    <group name="gp1">
+        <evars>
+            <evar name="gconfevar" value="4" type="int"/>
+        </evars>
+        
+        <fixtures>
+            <fixture type="init_group" module="all" func="init_gp1"/>
+            <fixture type="end_group" module="all" func="end_gp1"/>
+            <fixture type="init_each_module" module="all" func="init_each_module"/>
+            <fixture type="end_each_module" module="all" func="end_each_module"/>
+        </fixtures>
+
+        <pickers>
+            <picker type="cm" pattern=".*gp1"/>
+            <picker type="cf" pattern=".*func2"/>
+        </pickers>
+    </group>
+
+    <group name="gp2">
+        <evars>
+            <evar name="gconfevar" value="5" type="int"/>
+        </evars>
+
+        <pickers>
+            <picker type="cm" pattern=".*gp2"/>
+            <picker type="cf" pattern=".*func1"/>
+        </pickers>
+    </group>
+</groups>

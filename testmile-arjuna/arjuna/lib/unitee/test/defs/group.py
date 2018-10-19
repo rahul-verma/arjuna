@@ -24,14 +24,14 @@ from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.unitee.types.root import *
 
 from arjuna.lib.core.utils import sys_utils
-
-from pyhocon import ConfigTree
+from arjuna.lib.core.utils import etree_utils
+from arjuna.lib.unitee.utils import run_conf_utils
 
 Unitee = None
 
 class GroupDef(Root):
 
-    def __init__(self, sdef, stage_def, id, group_hocon_from_session_file):
+    def __init__(self, sdef, stage_def, id, group_xml_from_session):
         super().__init__()
         from arjuna.lib.unitee import Unitee as unitee
         global Unitee
@@ -39,9 +39,10 @@ class GroupDef(Root):
         self.sdef = sdef
         self.stage_def = stage_def
         self.id = id
+        self.root = group_xml_from_session
         self.__gconf = None
         self.__iter = None
-        self.__process(group_hocon_from_session_file)
+        self.__process()
 
         self.__mnames = []
         self.__mod_fname_map = {}
@@ -57,46 +58,44 @@ class GroupDef(Root):
     def __getattr__(self, item):
         return vars(self.__gconf)[item]
 
-    def __process(self, group_hocon):
+    def __process(self):
         def display_err_and_exit(msg):
             self.console.display_error((msg + " Fix session template file: {}").format(self.sdef.fpath))
             sys_utils.fexit()
 
-        if type(group_hocon) is str:
-            self.__gconf = self.unitee.groups[group_hocon]
+        group_attrs = etree_utils.convert_attribs_to_cidict(self.root)
+        self.name = group_attrs['name'].strip()
+        if not self.name:
+            display_err_and_exit(
+                ">>name<< attribute in group definition can not be empty.")
+
+        if self.name not in Unitee.groups:
+            display_err_and_exit(
+                ">>name<< attribute in group definition is pointing to a non-existing group '{}'.".format(self.name))
         else:
-            r = HoconConfigDictReader(group_hocon)
-            r.process()
+            self.__gconf = Unitee.groups[self.name]
 
-            gdict = CIStringDict(r.get_map())
-
-            if 'name' not in gdict:
-                display_err_and_exit(">>name<< attribute must be specified in group description dict.")
+        threads_err_msg = ">>threads<< attribute in stage definition can be integer >=1."
+        if "threads" in group_attrs:
+            self.threads = group_attrs['threads'].strip()
+            try:
+                self.threads = int(self.threads)
+            except:
+                display_err_and_exit(threads_err_msg)
             else:
-                conf = gdict['name']
-                ctype = type(conf)
-                if ctype is not str or not conf:
-                    display_err_and_exit(">>name<< attribute in group definition should be a non-empty string.")
-                elif conf not in Unitee.groups:
-                    display_err_and_exit(">>name<< attribute in group definition is pointing to a non-existing group '{}'.".format(conf))
-                else:
-                    self.__gconf = Unitee.groups[conf]
-                    del gdict['name']
+                if self.threads <=0:
+                    display_err_and_exit(threads_err_msg)
 
-            for cname, conf in gdict.items():
-                ctype = type(conf)
-                if cname == 'evars':
-                    if ctype is not ConfigTree:
-                        display_err_and_exit(">>evars<< attribute in group definition should be a dict.")
-                    else:
-                        self.__gconf.evars.update(conf)
-                elif cname == "threads":
-                    if ctype is not int and conf <= 1:
-                        display_err_and_exit(">>threads<< attribute in group definition can be integer >=1.")
-                    else:
-                        self.__gconf.threads = conf
-                else:
-                    display_err_and_exit("Unexpected attribute >>" + cname + "<< found in stage definition.")
+        node_dict = etree_utils.convert_to_cidict(self.root)
+
+        for child_name, child in node_dict.items():
+            if child.tag == 'evars':
+                evars = child
+                for child in evars:
+                    run_conf_utils.validate_evar_xml_child("session", self.sdef.fpath, child)
+                    run_conf_utils.add_evar_node_to_evars("session", self.__gconf.evars, child)
+            else:
+                display_err_and_exit("Unexpected element >>{}<< found in >>group<< definition in session file.".format(child.tag))
 
     def pick(self):
         mnames = Unitee.testdb.get_mnames()

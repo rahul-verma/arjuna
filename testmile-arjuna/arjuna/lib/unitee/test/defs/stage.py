@@ -27,10 +27,13 @@ from arjuna.lib.unitee.test.defs.fixture import *
 
 from .group import *
 
-from pyhocon import ConfigTree
+from xml.etree.ElementTree import Element
+
+from arjuna.lib.core.utils import etree_utils
+from arjuna.lib.unitee.utils import run_conf_utils
 
 class StageDef(Root):
-    def __init__(self, sdef, id, stage_hocon):
+    def __init__(self, sdef, id, stage_xml):
         super().__init__()
         self.gdefs = []
         self.tmcount = 0
@@ -39,6 +42,7 @@ class StageDef(Root):
         self.sdef = sdef
         self.__iter = None
         self.__fixtures = FixturesDef()
+        self.root = stage_xml
 
         from arjuna.lib.unitee import UniteeFacade
         self.unitee = UniteeFacade
@@ -47,11 +51,11 @@ class StageDef(Root):
         self.name = "stage{:d}".format(id)
         self.evars.update(sdef.evars)
 
-        if not isinstance(stage_hocon, ConfigTree):
-            self.console.display_error("Fatal: [Arjuna Error] Unsuppored input argument supplied for stage creation: {}".format(stage_hocon))
+        if not isinstance(stage_xml, Element):
+            self.console.display_error("Fatal: [Arjuna Error] Unsuppored input argument supplied for stage creation: {}".format(stage_xml))
             sys_utils.fexit()
         else:
-            self.__process(stage_hocon)
+            self.__process(stage_xml)
             # self.nodes.append(SessionSubNode(self, len(self.nodes) + 1, input))
 
     @property
@@ -63,43 +67,54 @@ class StageDef(Root):
             self.console.display_error((msg + " Fix session template file: {}").format(self.sdef.fpath))
             sys_utils.fexit()
 
-        r = HoconConfigDictReader(group_hocon)
-        r.process()
+        stage_attrs = etree_utils.convert_attribs_to_cidict(self.root)
 
-        node_dict = CIStringDict(r.get_map())
-        for cname, conf in node_dict.items():
-            ctype = type(conf)
-            if cname == 'evars':
-                if ctype is not ConfigTree:
-                    display_err_and_exit(">>execVars<< attribute in stage definition should be a dict.")
-                else:
-                    self.evars.update(conf)
-            elif cname == 'name':
-                if ctype is not str or not conf:
-                    display_err_and_exit(">>name<< attribute in stage definition should be a non-empty string.")
-                else:
-                    self.name = conf
-            elif cname == "threads":
-                if ctype is not int and conf <= 1:
-                    display_err_and_exit(">>threads<< attribute in stage definition can be integer >=1.")
-                else:
-                    self.threads = conf
-            elif cname == "groups":
-                if ctype is not list or not conf:
-                    display_err_and_exit(">>groups<< attribute in stage definition must be a non-empty list.")
-                else:
-                    for gconf in conf:
-                        if type(gconf) in {str, ConfigTree}:
-                            self.gdefs.append(GroupDef(self.sdef, self, len(self.gdefs) + 1, gconf))
-                        else:
-                            display_err_and_exit(">>groups<< attribute in stage can only contain group description dictionaries or names of groups.")
-            elif cname in {"init_stage", "end_stage", "init_each_group", "end_each_group"}:
-                if ctype is not str or not conf:
-                    display_err_and_exit(">>{}<< attribute in session definition should be a non-empty string.".format(cname))
-                else:
-                    ConfiguredFixtureHelper.configure_fixture(self.fixture_defs, cname, conf)
+        if "name" in stage_attrs:
+            self.name = stage_attrs['name'].strip()
+            if not self.name:
+                display_err_and_exit(">>name<< attribute in stage definition should be a non-empty string.")
+
+        threads_err_msg = ">>threads<< attribute in stage definition can be integer >=1."
+        if "threads" in stage_attrs:
+            self.threads = stage_attrs['threads'].strip()
+            try:
+                self.threads = int(self.threads)
+            except:
+                display_err_and_exit(threads_err_msg)
             else:
-                display_err_and_exit("Unexpected attribute >>" + cname + "<< found in stage definition.")
+                if self.threads <=0:
+                    display_err_and_exit(threads_err_msg)
+
+
+        node_dict = etree_utils.convert_to_cidict(self.root)
+
+        if "groups" not in node_dict:
+            display_err_and_exit(">>stage<< element in session definition must contain >>groups<< element.")
+
+        for child_tag, child in node_dict.items():
+            child_tag = child_tag.lower()
+            if child_tag == 'evars':
+                evars = child
+                for child in evars:
+                    run_conf_utils.validate_evar_xml_child("session", self.sdef.fpath, child)
+                    run_conf_utils.add_evar_node_to_evars("session", self.evars, child)
+            elif child_tag == 'fixtures':
+                fixtures = child
+                for child in fixtures:
+                    run_conf_utils.validate_fixture_xml_child("session", "stage", self.sdef.fpath, child)
+                    run_conf_utils.add_fixture_node_to_fixdefs(self.fixture_defs, child)
+            elif child_tag =='groups':
+                if "group" not in etree_utils.convert_to_cidict(child):
+                    display_err_and_exit(">>groups<< element in stage definition must contain atleast one >>group<< element.")
+
+                groups = list(child)
+
+                for index, group in enumerate(groups):
+                    run_conf_utils.validate_group_xml_child("session", self.sdef.fpath, group)
+                    node = GroupDef(self.sdef, self, len(self.gdefs) + 1, group)
+                    self.gdefs.append(node)
+            else:
+                display_err_and_exit("Unexpected element >>{}<< found in >>stage<< definition in session file.".format(child.tag))
 
     def pick(self):
         for gdef in self.gdefs:

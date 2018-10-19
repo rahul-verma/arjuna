@@ -205,7 +205,6 @@ class Assertion:
                 zero, places = self.__offset.split('.', 1)
                 precision = len(places)
                 allowed_diff = Decimal(self.__offset)
-                print(allowed_diff)
                 try:
                     lhs = Decimal(lhs).quantize(allowed_diff, rounding=self.__rounding)
                 except:
@@ -217,28 +216,9 @@ class Assertion:
                     rhs = Decimal(rhs)
 
                 diff = abs(lhs-rhs)
-                print(diff)
                 has_failed = diff > allowed_diff
             else:
                 not_allowed = True
-
-            # if self.__offset_specified:
-            #     sdelta = "{{:{}f}}".format(self.__offset)
-            # else:
-            #     sdelta = "{{}}"
-            # if type(expected).__name__ in {'int', 'float'}:
-            #     if self._rounded_places:
-            #         lhs = math.ro
-            #     str_delta = str(self.__offset)
-            #     zero, *places = str_delta.split('.', 1)
-            #     precision = len(places)
-            #     diff = self.__round_places and round(self.__subject - expected, self.__round_places) or self.__subject - expected
-            #     sdiff = "{{:{}f}}".format(diff, self.__round_places)
-            #     print(sdiff)
-            #     print(sdelta)
-            #     has_failed = sdiff == sdelta
-            # else:
-            #     not_allowed = True
 
             self._step.expectation = 'Should be equal to approxmiately >{}<.{}{}'.format(
                 expected,
