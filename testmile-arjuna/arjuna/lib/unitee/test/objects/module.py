@@ -29,6 +29,7 @@ class TestModule(TestObject):
 	def __init__(self, group, mdef):
 		super().__init__(TestObjectTypeEnum.Module)
 		self.group = group
+		self.rules = self.group.rules
 		self.defn = mdef
 		self.thcount = 1
 		self.fthread_count = self.defn.threads
@@ -78,4 +79,5 @@ class TestModule(TestObject):
 			self.__dependency.evaluate(self.group.state)
 
 	def _evaluate_rules(self):
-		pass
+		if self.rules is not None:
+			self.rules.evaluate(self)

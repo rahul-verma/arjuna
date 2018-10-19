@@ -23,23 +23,21 @@ class ROProxy:
     def __init__(self, wrapped):
         vars(self)['__wrapped'] = wrapped
 
-    def raise_item_absent_exc(item):
-        raise Exception("Object does not contain an attribute/item with name: >>{}<<".format(item))
-
     def __getattr__(self, item):
         try:
             return getattr(vars(self)['__wrapped'], item)
         except AttributeError as e:
-            ROProxy.raise_item_absent_exc(item)
+            raise Exception("Map does not contain attribute: >>{}<<".format(item))
 
     def __getitem__(self, item):
         try:
-            return getattr(vars(self)['__wrapped'], item)
+            return vars(self)['__wrapped'][item]
         except AttributeError as e:
-            ROProxy.raise_item_absent_exc(item)
+            raise Exception("Map does not contain key: >>{}<<".format(item))
 
     def __setattr__(self, key, value):
         raise Exception("Read-Only Proxy does not support item assignment.")
 
     def __str__(self):
         return str(vars(self)['__wrapped'])
+

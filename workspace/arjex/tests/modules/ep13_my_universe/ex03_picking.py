@@ -23,6 +23,11 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
+@init_module(author='Mouli', true_prop=True, false_prop=False, none_prop=None, not_none_prop=2, match_prop="matched", partial_match_prop="partial match")
+def module_setup(my):
+    console.display("ex03 module")
+    console.display(my.info.module.props['author'])
+
 @test_function(author='Mouli', my_prop=123)
 def test1_picking(my):
     console.display("ex03.test1")
@@ -53,8 +58,8 @@ def test7_picking(my):
 
 @test_function(author='Mouli', true_prop=True, false_prop=False, none_prop=None, not_none_prop=2, match_prop="matched", partial_match_prop="partial")
 def test8_picking(my):
-    console.display("ex03.test7")
+    console.display("ex03.test8")
 
 @test_function(author='Mouli', true_prop=True, false_prop=False, none_prop=None, not_none_prop=2, match_prop="matched", partial_match_prop="partial match")
 def test9_picking(my):
-    console.display("ex03.test7")
+    console.display("ex03.test9")

@@ -35,4 +35,7 @@ def setup_module(my):
 
 @test_function
 def demo_inherited_module_props(my):
+    print("Print stmt 1")
     console.display(my.info.module.props)
+    print("Print stmt 2")
+    console.display(my.info.module.props['author'])

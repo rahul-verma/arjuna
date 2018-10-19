@@ -61,7 +61,6 @@
         <pickers>
             <picker type="cm" pattern=".*ex03_picking"/>
         </pickers>
-
         <rules>
             <rule type="inclusion" target="props" object="author" condition="not equal" expression="Rahul"/>
             <rule type="inclusion" target="props" object="true_prop" object_type="bool" condition="true"/>
