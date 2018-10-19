@@ -21,6 +21,16 @@
         </pickers>
     </group>
 
+    <group name="gp4">
+        <pickers>
+            <picker type="cm" pattern=".*picking"/>
+        </pickers>
+
+        <rules>
+            <rule type="inclusion" target="props" object="author" object_type="str" condition="equal" expression="Rahul"/>
+        </rules>
+    </group>
+
     <group name="gpc1">
         <evars>
             <evar name="gconfevar" value="4" type="int"/>

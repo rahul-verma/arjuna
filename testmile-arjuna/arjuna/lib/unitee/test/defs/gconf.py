@@ -33,13 +33,15 @@ from arjuna.lib.unitee.test.defs.fixture import *
 from arjuna.lib.core.utils import sys_utils
 from arjuna.lib.core.utils import etree_utils
 from arjuna.lib.unitee.utils import run_conf_utils
+from arjuna.lib.unitee.validation import checks
+from arjuna.lib.unitee.exceptions import *
 
 class Picker:
 
-    def __init__(self, fpath, gname, picker_node):
+    def __init__(self, fpath, gname, pickers_node):
         self.gname = gname
         self.fpath = fpath
-        self.root = picker_node
+        self.root = pickers_node
         self._rule_dict = CIStringDict(
             {
                 'cm': [],
@@ -56,7 +58,7 @@ class Picker:
 
     def __process(self):
         def display_err_and_exit(msg):
-            self.console.display_error((msg + " Fix session template file: {}").format(self.fpath))
+            self.console.display_error((msg + " Fix groups template file: {}").format(self.fpath))
             sys_utils.fexit()
 
         node_dict = etree_utils.convert_to_cidict(self.root)
@@ -125,6 +127,141 @@ class Picker:
 
         return True
 
+converter_map = {
+    'int': int,
+    'str': str,
+    'float': float,
+    'bool': bool
+}
+
+from enum import Enum, auto
+
+class RuleType(Enum):
+    INCLUSION = auto()
+    EXCLUSION = auto()
+
+class RuleTargetType(Enum):
+    PROPS = auto()
+    EVARS = auto()
+
+class RuleConditionType(Enum):
+    EQUAL = auto()
+    NOT_EQUAL = auto()
+    NONE = auto()
+    NOT_NONE = auto()
+    MATCH = auto()
+    PARTIAL_MATCH = auto()
+    TRUE = auto()
+    FALSE = auto()
+
+import re
+
+single_value_checkers = {
+    RuleConditionType.NONE : checks.is_not_none,
+    RuleConditionType.NOT_NONE : checks.is_none,
+    RuleConditionType.TRUE : checks.is_true,
+    RuleConditionType.FALSE : checks.is_false
+}
+
+multi_value_checkers = {
+    RuleConditionType.EQUAL : checks.are_equal,
+    RuleConditionType.NOT_EQUAL : checks.are_not_equal,
+    RuleConditionType.MATCH : checks.match,
+    RuleConditionType.PARTIAL_MATCH : checks.partially_match,
+}
+
+class Rule:
+    def __init__(self, rtype, target, robject, condition, expression, object_type):
+        self.rtype = RuleType[rtype.upper().strip()]
+        self.target = RuleTargetType[target.upper().strip()]
+        self.robject = str(robject.strip())
+        condition = re.sub(r"\s+", "_", condition.strip())
+        self.condition = RuleConditionType[condition.upper()]
+        self.expression = expression
+        self.converter = converter_map[object_type.lower().strip()]
+
+    def __not_met_exc(self):
+        raise RuleNotMet() #"Run time rule checking did not succeed for the test object.")
+
+    def evaluate(self, test_object):
+        include = False
+        target_object = None
+        if self.target == RuleTargetType.PROPS:
+            o_container = None
+
+            if test_object.type == TestObjectTypeEnum.Module:
+                o_container = test_object.tvars.info.module
+            elif test_object.type == TestObjectTypeEnum.Function:
+                o_container = test_object.tvars.info.function
+            else:
+                return
+
+            try:
+                target_object = o_container.props[self.robject]
+            except Exception as e:
+                self.__not_met_exc()
+            else:
+                if not self.__call_checker(target_object):
+                    self.__not_met_exc()
+        else:
+            raise Exception("Not supported yet.")
+
+    def __call_checker(self, target_object):
+        actual = self.converter(target_object)
+        if self.condition in single_value_checkers:
+            func = single_value_checkers[self.condition]
+            return func(actual)
+        elif self.condition in multi_value_checkers:
+            expected = self.converter(self.expression)
+            func = multi_value_checkers[self.condition]
+            return func(actual, expected)
+
+class Rules:
+
+    def __init__(self, fpath, gname, rules_node):
+        self.gname = gname
+        self.fpath = fpath
+        self.root = rules_node
+        self.__rules = []
+
+        from arjuna.lib.core import ArjunaCore
+        self.console = ArjunaCore.console
+        self.__process()
+
+    def __process(self):
+        def display_err_and_exit(msg):
+            self.console.display_error((msg + " Fix groups template file: {}").format(self.fpath))
+            sys_utils.fexit()
+
+        node_dict = etree_utils.convert_to_cidict(self.root)
+
+        # Validate only picker keys exist.
+        if node_dict.keys() != {'rule'}:
+            display_err_and_exit(">>rules<< element can contain only one or more >>rule<< element. Check group: {}.".format(self.gname))
+        elif not node_dict:
+            display_err_and_exit(">>rules<< element must contain atleast one >>rule<< element.Check group: {}.".format(self.gname))
+
+        for rule in list(self.root):
+            run_conf_utils.validate_rule_xml_child("groups", self.gname, self.fpath, rule)
+            rule_dict = etree_utils.convert_attribs_to_cidict(rule)
+            try:
+                otype = 'object_type' in rule_dict and rule_dict['object_type'] or "str"
+                self.__rules.append(Rule(
+                    rtype=rule_dict['type'],
+                    target=rule_dict['target'],
+                    robject=rule_dict['object'],
+                    condition=rule_dict['condition'],
+                    expression=rule_dict['expression'],
+                    object_type=otype
+                ))
+            except Exception as e:
+                display_err_and_exit(
+                    "Exception in processing >>rule<< element: {}. Check group: {}.".format(e, self.gname))
+
+    def evaluate(self, test_object):
+        for rule in self.__rules:
+            rule.evaluate(test_object)
+
 class GroupConf(Root):
 
     def __init__(self, name, gconf_xml, fpath):
@@ -132,6 +269,7 @@ class GroupConf(Root):
         self.name = name
         self.evars = SingleObjectVars()
         self.picker = None
+        self.__rules = None
         self.threads = 1
         self.fpath = fpath
         self.root = gconf_xml
@@ -141,6 +279,10 @@ class GroupConf(Root):
     @property
     def fixture_defs(self):
         return self.__fixtures
+
+    @property
+    def rules(self):
+        return self.__rules
 
     def __process(self):
         def display_err_and_exit(msg):
@@ -167,6 +309,10 @@ class GroupConf(Root):
                     run_conf_utils.add_fixture_node_to_fixdefs(self.fixture_defs, child)
             elif child_tag =='pickers':
                 self.picker = Picker(self.fpath, self.name, child)
+            elif child_tag =='rules':
+                self.__rules = Rules(self.fpath, self.name, child)
+            else:
+                display_err_and_exit("Unexpected element >>{}<< found in session definition.".format(child.tag))
 
 class GroupConfsLoader:
 

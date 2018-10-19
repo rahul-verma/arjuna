@@ -18,6 +18,9 @@ MANDATORY_GCONF_ATTRS = ALLOWED_GCONF_ATTRS
 ALLOWED_PATTERN_ATTRS = {'type', 'pattern'}
 MANDATORY_PATTERN_ATTRS = ALLOWED_PATTERN_ATTRS
 
+ALLOWED_RULE_ATTRS = {'type', 'target', 'object', 'condition', 'expression', 'object_type'}
+MANDATORY_RULE_ATTRS = {'type', 'target', 'object', 'condition'}
+
 VALID_FIXTURES = {
     "session" : {"init_session", "end_session", "init_each_stage", "end_each_stage"},
     "stage" : {"init_stage", "end_stage", "init_each_group", "end_each_group"},
@@ -122,3 +125,12 @@ def validate_pattern_xml_child(conf_type, group_name, groups_path, pattern_node)
     if not MANDATORY_PATTERN_ATTRS.issubset(etree_utils.convert_attribs_to_cidict(pattern_node)):
         display_err_and_exit(conf_type, groups_path,
                              ">>pattern<< element must define these attributes: {}. Check group: {}".format(MANDATORY_PATTERN_ATTRS, group_name))
+
+def validate_rule_xml_child(conf_type, group_name, groups_path, rule_node):
+    for k, v in rule_node.attrib.items():
+        if k.lower() not in ALLOWED_RULE_ATTRS:
+            display_err_and_exit(conf_type, groups_path,
+                                 ">>patten<< attributes can only be set as: {}. Check group: {}".format(ALLOWED_RULE_ATTRS, group_name))
+    if not MANDATORY_RULE_ATTRS.issubset(etree_utils.convert_attribs_to_cidict(rule_node)):
+        display_err_and_exit(conf_type, groups_path,
+                             ">>pattern<< element must define these attributes: {}. Check group: {}".format(MANDATORY_RULE_ATTRS, group_name))

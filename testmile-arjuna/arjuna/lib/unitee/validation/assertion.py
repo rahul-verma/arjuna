@@ -116,7 +116,7 @@ class Assertion:
                 self._step.expectation = 'Should be equal to Object of type={0} and value=>{1}<'.format(type(expected).__name__, expected)
                 self._step.observation = 'Object of type={0} and value=>{1}<'.format(type(self.__subject).__name__, self.__subject)
 
-                has_failed = checks.is_not_equal(self.__subject, expected)
+                has_failed = checks.are_not_equal(self.__subject, expected)
 
                 if has_failed:
                     self._step.set_failure()
@@ -153,7 +153,7 @@ class Assertion:
                 self._step.expectation = 'Should not be equal to Object of type={0} and value=>{1}<'.format(type(expected).__name__, expected)
                 self._step.observation = 'Object of type={0} and value=>{1}<'.format(type(self.__subject).__name__, self.__subject)
 
-                has_failed = checks.is_equal(self.__subject, expected)
+                has_failed = checks.are_equal(self.__subject, expected)
 
                 if has_failed:
                     self._step.set_failure()
@@ -263,7 +263,7 @@ class Assertion:
                 self._step.expectation = "Should be same as Object of type >{0}< and id >{1}<".format(type(expected).__name__, id(expected))
                 self._step.observation = "Object of type >{0}< and id >{1}<".format(type(self.__subject).__name__, id(self.__subject))
 
-                has_failed = checks.is_not_same(self.__subject, expected)
+                has_failed = checks.are_not_same(self.__subject, expected)
 
                 if has_failed:
                     self._step.set_failure()
@@ -292,7 +292,7 @@ class Assertion:
                 self._step.observation = "Object of type >{0}< and id >{1}<".format(type(self.__subject).__name__,
                                                                                   id(self.__subject))
 
-                has_failed = checks.is_same(self.__subject, expected)
+                has_failed = checks.are_same(self.__subject, expected)
 
                 if has_failed:
                     self._step.set_failure()

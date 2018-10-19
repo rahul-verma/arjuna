@@ -60,7 +60,8 @@ class ResultCodeEnum(Enum):
     DEPENDENCY_NOT_MET = auto()
     PARENT_DEPENDENCY_NOT_MET = auto()
 
-
+    SURRENDERED_RULES_NOT_MET = auto()
+    PARENT_SURRENDERED = auto()
 
     STEP_FAILURE = auto()
     STEP_ERROR = auto()
@@ -228,6 +229,7 @@ class ResultTypeEnum(Enum):
     SKIPPED = auto()
     NOT_A_TEST = auto()
     NOTHING = auto()
+    SURRENDERED = auto()
 
 class ReportableType(Enum):
     INFO = auto()

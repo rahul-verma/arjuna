@@ -125,17 +125,22 @@ class TestObject(metaclass=abc.ABCMeta):
             self.tvars.evars.update(base_tvars.evars)
             self.tvars.runtime.update(base_tvars.runtime)
 
-        try:
-            self.evaluate_dependency()
-        except DependencyNotMet as e:
-            self.exclude(ResultCodeEnum.DEPENDENCY_NOT_MET, e.iid, ResultCodeEnum.PARENT_DEPENDENCY_NOT_MET)
-            return
-
         bstamp = datetime.datetime.now().timestamp()
         if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot}:
             info = Info(InfoType.STARTED, self)
             info.btstamp = bstamp
             Unitee.reporter.update_info(info)
+
+        try:
+            self.should_i_surrender()
+        except DependencyNotMet as e:
+            self.exclude(ResultCodeEnum.DEPENDENCY_NOT_MET, e.iid, ResultCodeEnum.PARENT_DEPENDENCY_NOT_MET)
+            self.report_finish_info(bstamp)
+            return
+        except RuleNotMet as e:
+            self.surrender(ResultCodeEnum.SURRENDERED_RULES_NOT_MET, ResultCodeEnum.PARENT_SURRENDERED)
+            self.report_finish_info(bstamp)
+            return
 
         # Some test objects have multiple before fixtures e.f. init_each_group and init_group
         for before_fixture in self.before_fixtures:
@@ -217,6 +222,10 @@ class TestObject(metaclass=abc.ABCMeta):
         t = TestObjectResult(self, rtype=ResultTypeEnum.EXCLUDED, rcode=exclusion_type, iid=issue_id)
         self.report(t)
 
+    def report_surrendered(self, surrender_type):
+        t = TestObjectResult(self, rtype=ResultTypeEnum.SURRENDERED, rcode=surrender_type)
+        self.report(t)
+
     def exclude(self, exclusion_type, issue_id, child_exclusion_type=None):
         if not child_exclusion_type:
             child_exclusion_type = exclusion_type
@@ -225,5 +234,20 @@ class TestObject(metaclass=abc.ABCMeta):
                 child.exclude(child_exclusion_type, issue_id)
         self.report_excluded(exclusion_type, issue_id)
 
-    def evaluate_dependency(self):
+    def surrender(self, surrender_type, child_surrender_type=None):
+        if not child_surrender_type:
+            child_surrender_type = surrender_type
+        if self.children:
+            for child in self.children:
+                child.surrender(child_surrender_type)
+        self.report_surrendered(surrender_type)
+
+    def _evaluate_dependency(self):
         pass
+
+    def _evaluate_rules(self):
+        pass
+
+    def should_i_surrender(self):
+        self._evaluate_dependency()
+        self._evaluate_rules()

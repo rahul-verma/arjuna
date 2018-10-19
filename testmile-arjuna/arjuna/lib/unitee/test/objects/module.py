@@ -73,6 +73,9 @@ class TestModule(TestObject):
 		self.group.state.update(result)
 		self.group.state.update_test_summary_from_state(self.state)
 
-	def evaluate_dependency(self):
+	def _evaluate_dependency(self):
 		if self.__dependency:
 			self.__dependency.evaluate(self.group.state)
+
+	def _evaluate_rules(self):
+		pass

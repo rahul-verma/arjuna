@@ -31,6 +31,7 @@ class TestGroup(TestObject):
 		self.num = num
 		self.stage = stage
 		self.defn = defn
+		self.rules = self.defn.rules
 		self.thcount = 1
 		self.mthread_count = self.defn.threads
 		self.gslots = []

@@ -30,6 +30,7 @@ class TestFunc(TestObject):
 	def __init__(self, group, module, mslot, defn):
 		super().__init__(TestObjectTypeEnum.Function)
 		self.group = group
+		self.rules = self.group.rules
 		self.module = module
 		self.mslot = mslot
 		self.defn = defn
@@ -85,6 +86,10 @@ class TestFunc(TestObject):
 		self.module.state.update(result)
 		self.module.state.update_test_summary_from_state(self.state)
 
-	def evaluate_dependency(self):
+	def _evaluate_dependency(self):
 		if self.__dependency:
 			self.__dependency.evaluate(self.module.state)
+
+	def _evaluate_rules(self):
+		if self.rules is not None:
+			self.rules.evaluate(self)

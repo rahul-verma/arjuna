@@ -52,6 +52,10 @@ class GroupDef(Root):
         return self.__gconf.fixture_defs
 
     @property
+    def rules(self):
+        return self.__gconf.rules
+
+    @property
     def threads(self):
         return self.__gconf.threads
         

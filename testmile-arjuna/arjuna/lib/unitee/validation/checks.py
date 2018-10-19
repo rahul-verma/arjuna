@@ -19,6 +19,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+import re
+
 def is_true(input):
     if type(input) is not bool:
         raise Exception("Not a boolean")
@@ -38,31 +40,42 @@ def throw_exception_for_incompt_equal_same(context, actual, expected):
         msg = 'Checking for {} objects does not work for objects of different types.'.format(context)
         raise Exception(msg)
 
-def is_equal(actual, expected):
+def are_equal(actual, expected):
     throw_exception_for_incompt_equal_same("equal/non-equal", actual, expected)
     return expected == actual
 
-def is_not_equal(actual, expected):
+def are_not_equal(actual, expected):
     throw_exception_for_incompt_equal_same("equal/non-equal", actual, expected)
-    return not is_equal(actual, expected)
+    return not are_equal(actual, expected)
 
-def is_almost_equal(actual, expected, delta):
+def are_almost_equal(actual, expected, delta):
     diff = abs(expected - actual)
     delta2 = abs(delta)
     return diff <= delta2
 
 
-def is_same(actual, expected):
+def are_same(actual, expected):
     throw_exception_for_incompt_equal_same("same/different", actual, expected)
     return expected is actual
 
 
-def is_different(actual, expected):
+def are_different(actual, expected):
     throw_exception_for_incompt_equal_same("same/different", actual, expected)
     return expected is not actual
 
+def match(actual, expected):
+    if re.match(actual, expected):
+        return True
+    else:
+        return False
 
-is_not_same = is_different
+def partially_match(actual, expected):
+    if re.match(".*" + actual + ".*", expected):
+        return True
+    else:
+        return False
+
+are_not_same = are_different
 
 def is_none(obj):
     return obj is None

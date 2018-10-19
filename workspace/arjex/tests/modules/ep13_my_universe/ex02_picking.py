@@ -23,7 +23,7 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
-@test_function
+@test_function(author='Rahul')
 def test1_picking(my):
     console.display("ex02.test1")
 

@@ -103,3 +103,7 @@ class Failure(StepResultEvent):
 class DependencyNotMet(Exception):
     def __init__(self, iid):
         self.iid = iid
+
+class RuleNotMet(Exception):
+    def __init__(self):
+        super().__init__()
