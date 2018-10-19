@@ -355,7 +355,7 @@ class UniteeFacade:
         sdir = ArjunaCore.config.value(UniteePropertyEnum.SESSIONS_DIR)
         session_file_path = os.path.join(sdir, session_name + ".xml")
         if not file_utils.is_file(session_file_path):
-            ArjunaCore.console.display_error("Not able to find session file {}.conf at {}".format(session_name, sdir))
+            ArjunaCore.console.display_error("Not able to find session file {}.xml at {}".format(session_name, sdir))
             sys_utils.fexit()
         sdef = UserDefinedSessionDef(session_name, session_file_path)
         sdef.process()

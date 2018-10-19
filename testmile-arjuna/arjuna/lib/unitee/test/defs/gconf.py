@@ -127,11 +127,18 @@ class Picker:
 
         return True
 
+def none(value):
+    if type(value) is str:
+        return value.lower() == "none" and None or value
+    else:
+        return value is None and None or value
+
 converter_map = {
     'int': int,
     'str': str,
     'float': float,
-    'bool': bool
+    'bool': bool,
+    'none' : none
 }
 
 from enum import Enum, auto
@@ -149,16 +156,16 @@ class RuleConditionType(Enum):
     NOT_EQUAL = auto()
     NONE = auto()
     NOT_NONE = auto()
-    MATCH = auto()
-    PARTIAL_MATCH = auto()
     TRUE = auto()
     FALSE = auto()
+    MATCH = auto()
+    PARTIAL_MATCH = auto()
 
 import re
 
 single_value_checkers = {
-    RuleConditionType.NONE : checks.is_not_none,
-    RuleConditionType.NOT_NONE : checks.is_none,
+    RuleConditionType.NONE : checks.is_none,
+    RuleConditionType.NOT_NONE : checks.is_not_none,
     RuleConditionType.TRUE : checks.is_true,
     RuleConditionType.FALSE : checks.is_false
 }
@@ -172,7 +179,7 @@ multi_value_checkers = {
 
 class Rule:
     def __init__(self, rtype, target, robject, condition, expression, object_type):
-        self.rtype = RuleType[rtype.upper().strip()]
+        self.is_include_type = RuleType[rtype.upper().strip()] == RuleType.INCLUSION
         self.target = RuleTargetType[target.upper().strip()]
         self.robject = str(robject.strip())
         condition = re.sub(r"\s+", "_", condition.strip())
@@ -182,6 +189,18 @@ class Rule:
 
     def __not_met_exc(self):
         raise RuleNotMet() #"Run time rule checking did not succeed for the test object.")
+
+    def __raise_exception_for_check_result(self, check_result):
+        if check_result:
+            if self.is_include_type:
+                return
+            else:
+                self.__not_met_exc()
+        else:
+            if self.is_include_type:
+                self.__not_met_exc()
+            else:
+                return
 
     def evaluate(self, test_object):
         include = False
@@ -199,10 +218,11 @@ class Rule:
             try:
                 target_object = o_container.props[self.robject]
             except Exception as e:
-                self.__not_met_exc()
+                if self.is_include_type: self.__not_met_exc()
+                return
             else:
-                if not self.__call_checker(target_object):
-                    self.__not_met_exc()
+                self.__raise_exception_for_check_result(self.__call_checker(target_object))
+
         else:
             raise Exception("Not supported yet.")
 
@@ -246,12 +266,13 @@ class Rules:
             rule_dict = etree_utils.convert_attribs_to_cidict(rule)
             try:
                 otype = 'object_type' in rule_dict and rule_dict['object_type'] or "str"
+                exp = 'expression' in rule_dict and rule_dict['expression'] or None
                 self.__rules.append(Rule(
                     rtype=rule_dict['type'],
                     target=rule_dict['target'],
                     robject=rule_dict['object'],
                     condition=rule_dict['condition'],
-                    expression=rule_dict['expression'],
+                    expression=exp,
                     object_type=otype
                 ))
             except Exception as e:

@@ -63,14 +63,14 @@ def are_different(actual, expected):
     throw_exception_for_incompt_equal_same("same/different", actual, expected)
     return expected is not actual
 
-def match(actual, expected):
-    if re.match(actual, expected):
+def match(target, pattern):
+    if re.match(pattern, target):
         return True
     else:
         return False
 
-def partially_match(actual, expected):
-    if re.match(".*" + actual + ".*", expected):
+def partially_match(target, pattern):
+    if re.search(pattern, target):
         return True
     else:
         return False
