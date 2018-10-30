@@ -65,7 +65,7 @@ def test_function(id=None, *,
     clocals = {i:j for i,j in locals().items()}
     if obj_utils.callable(id):
         kallable = id
-        del clocals['name']
+        del clocals['id']
         return Unitee.test_loader.register_tfunc(kallable, **clocals)
     else:
         def wrapper(kallable):

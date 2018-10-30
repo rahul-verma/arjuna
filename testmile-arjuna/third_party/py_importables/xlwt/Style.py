@@ -684,7 +684,7 @@ def _parse_strg_to_obj(strg, obj, parse_dict,
                     if value is not None:
                         break
                 else:
-                    raise EasyXFAuthorError("unknown value rule for attribute %r: %r" % (k, value_rule))
+                    raise EasyXFAuthorError("unknown value rules for attribute %r: %r" % (k, value_rule))
             else:
                 raise EasyXFCallerError("unexpected value %r for %s.%s" % (v, section, k))
             try:

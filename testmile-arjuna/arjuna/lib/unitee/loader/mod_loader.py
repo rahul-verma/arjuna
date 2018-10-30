@@ -32,6 +32,7 @@ from arjuna.lib.unitee.loader import kfactory
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee import Unitee
+from arjuna.lib.unitee.markup import mrules
 
 unitee = Unitee
 
@@ -177,6 +178,12 @@ class ModuleLoader:
         del tsargs['drive_with']
         self.mdef.dependency = tsargs['exclude_if']
         del tsargs['exclude_if']
+
+        # Validate props
+        try:
+            mrules.validate_built_in_props(tsargs)
+        except Exception as e:
+            raise Exception("Error in @init_module decorator on function: {}.{}. {}.".format(self.qname,kallable, e))
         self.mdef.tvars.info.module.set_props(tsargs)
 
     def register_tfunc(self, kallable, **tsargs):
@@ -198,6 +205,13 @@ class ModuleLoader:
             del tsargs['data_ref']
             td.dependency = tsargs['exclude_if']
             del tsargs['exclude_if']
+
+            # Validate props
+            try:
+                mrules.validate_built_in_props(tsargs)
+            except Exception as e:
+                raise Exception("Error in @test decorator of test module: {}. {}.".format(t.qname, e))
+            mrules.validate_built_in_props(tsargs)
             td.tvars.info.function.set_props(tsargs)
 
             self.mdef.register_fdef(td)

@@ -23,43 +23,10 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
-@init_module(author='Mouli', true_prop=True, false_prop=False, none_prop=None, not_none_prop=2, match_prop="matched", partial_match_prop="partial match")
-def module_setup(my):
-    console.display("ex03 module")
-    console.display(my.info.module.props['author'])
-
-@test_function(author='Mouli', my_prop=123)
+@test_function(author='Rahul Verma')
 def test1_picking(my):
-    console.display("ex03.test1")
+    console.display("ex02.test1")
 
-@test_function(author='Mouli', my_prop=456)
+@test_function
 def test2_picking(my):
-    console.display("ex03.test2")
-
-@test_function(author='Mouli', true_prop=False)
-def test3_picking(my):
-    console.display("ex03.test3")
-
-@test_function(author='Mouli', true_prop=True, false_prop=True)
-def test4_picking(my):
-    console.display("ex03.test4")
-
-@test_function(author='Mouli', true_prop=True, false_prop=False, none_prop=2)
-def test5_picking(my):
-    console.display("ex03.test5")
-
-@test_function(author='Mouli', true_prop=True, false_prop=False, none_prop=None, not_none_prop=None)
-def test6_picking(my):
-    console.display("ex03.test6")
-
-@test_function(author='Mouli', true_prop=True, false_prop=False, none_prop=None, not_none_prop=2, match_prop="not_matched")
-def test7_picking(my):
-    console.display("ex03.test7")
-
-@test_function(author='Mouli', true_prop=True, false_prop=False, none_prop=None, not_none_prop=2, match_prop="matched", partial_match_prop="partial")
-def test8_picking(my):
-    console.display("ex03.test8")
-
-@test_function(author='Mouli', true_prop=True, false_prop=False, none_prop=None, not_none_prop=2, match_prop="matched", partial_match_prop="partial match")
-def test9_picking(my):
-    console.display("ex03.test9")
+    console.display("ex02.test2")

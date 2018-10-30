@@ -23,15 +23,15 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
-@test_function(4)
+@test_function("i4")
 def id_test(my):
     console.display(my.info.function.props)
 
-@test_function(id=5)
+@test_function(id="i8")
 def id_test2(my):
     console.display(my.info.function.props)
 
-@test_function(id=91, priority=1,
+@test_function(id="i91", priority=1,
     name='This test demonstrates using of built-in keywords for describing a test function.',
     author='Rahul',
     idea='Explore the test function properties dictionary',
@@ -42,7 +42,7 @@ def id_test2(my):
 def id_test3(my):
     console.display(my.info.function.props)
 
-@test_function(id=91, priority=1,
+@test_function(id="i6", priority=1,
     name='This test demonstrates using of custom keywords for describing a test function.',
     author='Rahul',
     idea='Explore the test function properties dictionary',

@@ -64,13 +64,29 @@ def are_different(actual, expected):
     return expected is not actual
 
 def match(target, pattern):
-    if re.match(pattern, target):
+    if target is None: return False
+    if re.match('^' + pattern + '$', target):
         return True
     else:
         return False
 
 def partially_match(target, pattern):
+    if target is None: return False
     if re.search(pattern, target):
+        return True
+    else:
+        return False
+
+def match_with_ignore_case(target, pattern):
+    if target is None: return False
+    if re.match('^' + pattern + '$', target, re.IGNORECASE):
+        return True
+    else:
+        return False
+
+def partially_match_with_ignore_case(target, pattern):
+    if target is None: return False
+    if re.search(pattern, target, re.IGNORECASE):
         return True
     else:
         return False

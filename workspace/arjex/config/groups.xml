@@ -21,54 +21,22 @@
         </pickers>
     </group>
 
-    <!-- Run-time selection using a single inclusion rule based on pre-defined property -->
+    <!-- Demonstration of different rules. There is an and relationship among rules -->
     <group name="gp4">
-        <pickers>
-            <picker type="cm" pattern=".*picking"/>
-        </pickers>
-
-        <rules>
-            <rule type="inclusion" target="props" object="author" condition="equal" expression="Rahul"/>
-        </rules>
-    </group>
-
-    <!-- Run-time selection using a single exclusion rule based on pre-defined property -->
-    <group name="gp5">
-        <pickers>
-            <picker type="cm" pattern=".*picking"/>
-        </pickers>
-
-        <rules>
-            <rule type="exclusion" target="props" object="author" condition="equal" expression="Rahul"/>
-        </rules>
-    </group>
-
-    <!-- Run-time selection using a combination of inclusion and exclusion rules
-    for built-in and user defined prop with different types -->
-    <group name="gp6">
-        <pickers>
-            <picker type="cm" pattern=".*picking"/>
-        </pickers>
-
-        <rules>
-            <rule type="inclusion" target="props" object="author" condition="equal" expression="Rahul"/>
-            <rule type="exclusion" target="props" object="my_prop" object_type="int" condition="equal" expression="456"/>
-        </rules>
-    </group>
-
-    <!-- Other condition types -->
-    <group name="gp7">
         <pickers>
             <picker type="cm" pattern=".*ex03_picking"/>
         </pickers>
+
         <rules>
-            <rule type="inclusion" target="props" object="author" condition="not equal" expression="Rahul"/>
-            <rule type="inclusion" target="props" object="true_prop" object_type="bool" condition="true"/>
-            <rule type="inclusion" target="props" object="false_prop" object_type="bool" condition="false"/>
-            <rule type="inclusion" target="props" object="none_prop" object_type="none" condition="none"/>
-            <rule type="inclusion" target="props" object="not_none_prop" object_type="none" condition="not none"/>
-            <rule type="inclusion" target="props" object="match_prop" condition="match" expression="match.*"/>
-            <rule type="inclusion" target="props" object="partial_match_prop" condition="partial match" expression="match"/>
+            <functions>
+                <include if="author is Rahul Verma"/>
+                <include if="author = Rahul Verma"/>
+                <include if="author == Rahul Verma"/>
+                <include if="author matches Rahul VERMA"/>
+                <include if="author ~= Rahul VERMA"/>
+                <include if="author contains Rahul VERMA"/>
+                <include if="author *= RaHuL"/>
+            </functions>
         </rules>
     </group>
 

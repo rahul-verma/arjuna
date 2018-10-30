@@ -354,3 +354,15 @@ class IssueEntryEnum(Enum):
     ASSERT_MESSAGE = auto()
     STEP_PROPS = auto()
     THREAD_ID = auto()
+
+class BuiltInProp(Enum):
+    ID = auto()
+    PRIORITY = auto()
+    THREADS = auto()
+    NAME = auto()
+    AUTHOR = auto()
+    BUGS = auto()
+    IDEA = auto()
+    UNSTABLE = auto()
+    COMPONENT = auto()
+    APP_VERSION = auto()

@@ -18,8 +18,8 @@ MANDATORY_GCONF_ATTRS = ALLOWED_GCONF_ATTRS
 ALLOWED_PATTERN_ATTRS = {'type', 'pattern'}
 MANDATORY_PATTERN_ATTRS = ALLOWED_PATTERN_ATTRS
 
-ALLOWED_RULE_ATTRS = {'type', 'target', 'object', 'condition', 'expression', 'object_type'}
-MANDATORY_RULE_ATTRS = {'type', 'target', 'object', 'condition'}
+ALLOWED_RULE_ATTRS = {'if', 'in'}
+MANDATORY_RULE_ATTRS = {'if'}
 
 VALID_FIXTURES = {
     "session" : {"init_session", "end_session", "init_each_stage", "end_each_stage"},

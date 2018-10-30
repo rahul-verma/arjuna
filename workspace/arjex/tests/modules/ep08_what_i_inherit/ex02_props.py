@@ -23,7 +23,7 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
-@init_module(id=91, priority=1,
+@init_module(id="i91", priority=1,
     name='This test demonstrates using of custom keywords for describing a test module.',
     author='Rahul',
     idea='Explore the test module properties dictionary',
