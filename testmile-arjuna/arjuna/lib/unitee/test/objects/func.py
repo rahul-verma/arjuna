@@ -75,6 +75,7 @@ class TestFunc(TestObject):
 		self.tvars.info.function = self.defn.tvars.info.function
 		self.tvars.evars.update(self.defn.tvars.evars)
 		self.tvars.tags.update(self.defn.tvars.tags)
+		self.tvars.bugs.update(self.defn.tvars.bugs)
 
 	def _execute(self):
 		self.tvars.runtime.update(self.mslot.tvars.runtime)

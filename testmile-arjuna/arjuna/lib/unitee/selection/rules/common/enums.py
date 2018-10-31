@@ -19,28 +19,29 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import time
-from arjuna.lib.core.reader.textfile import TextResourceReader
-from arjuna.lib.interface.cli import ArjunaCLI
+from enum import Enum, auto
 
-class __arfacade():
+class RuleNature(Enum):
+    INCLUDE = auto()
+    EXCLUDE = auto()
 
-    def __init__(self):
-        self.__version = "0.6.2-beta"
+class RuleType(Enum):
+    SET = auto()
+    DICT_KEY = auto()
+    DICT_VALUE = auto()
 
-    def launch(self, raw_args):
-        reader = TextResourceReader("header.txt")
-        print(reader.read().format(version=self.__version))
-        reader.close()
+class RuleTargetType(Enum):
+    PROPS = auto()
+    EVARS = auto()
+    TAGS = auto()
+    BUGS = auto()
 
-        cli = ArjunaCLI(raw_args)
-        # Initialize the Arjuna Core as per CLI options
-        cli.init()
-
-        cli.execute()
-
-Arjuna = __arfacade()
-
-from arjuna.lib.unitee.markup import tsmarkup
-
-markup = tsmarkup
+class RuleConditionType(Enum):
+    IS = auto()
+    MATCHES = auto()
+    PARTIALLY_MATCHES = auto()
+    LESS_THAN = auto()
+    LESS_OR_EQUAL = auto()
+    GREATER_THAN = auto()
+    GREATER_OR_EQUAL = auto()
+    CONTAINS = auto()

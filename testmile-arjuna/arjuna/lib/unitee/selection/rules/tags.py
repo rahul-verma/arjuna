@@ -19,28 +19,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import time
-from arjuna.lib.core.reader.textfile import TextResourceReader
-from arjuna.lib.interface.cli import ArjunaCLI
+from .common.rule import *
 
-class __arfacade():
 
-    def __init__(self):
-        self.__version = "0.6.2-beta"
+class TagsDefinedRule(SetEntryPresenceRule):
 
-    def launch(self, raw_args):
-        reader = TextResourceReader("header.txt")
-        print(reader.read().format(version=self.__version))
-        reader.close()
+    def __init__(self, totype, is_inclusion_rule, robject, condition, expression):
+        super().__init__(totype, is_inclusion_rule, robject, condition, expression)
 
-        cli = ArjunaCLI(raw_args)
-        # Initialize the Arjuna Core as per CLI options
-        cli.init()
+    def _get_container(self, test_object):
+       return test_object.tvars.tags
 
-        cli.execute()
+    def _convert_target_value(self, name, provided_value, target_object_value):
+        return (str(i).lower() for i in provided_value)
 
-Arjuna = __arfacade()
-
-from arjuna.lib.unitee.markup import tsmarkup
-
-markup = tsmarkup

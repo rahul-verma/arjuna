@@ -72,7 +72,6 @@ class Picker:
 
         # Validate only pickers keys exist.
         if node_dict.keys() != {'picker'}:
-            print(ETree.tostring(self.root))
             display_err_and_exit(">>pickers<< element can contain only one or more >>picker<< element. Check group: {}".format(self.gname))
         elif not node_dict:
             display_err_and_exit(">>pickers<< element must contain atleast one >>picker<< element.Check group: {}".format(self.gname))

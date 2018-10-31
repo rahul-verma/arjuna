@@ -6,7 +6,6 @@ built_in_prop_type = {
     BuiltInProp.THREADS : int,
     BuiltInProp.NAME : str,
     BuiltInProp.AUTHOR : str,
-    BuiltInProp.BUGS : str,
     BuiltInProp.IDEA : str,
     BuiltInProp.UNSTABLE : bool,
     BuiltInProp.COMPONENT : str,

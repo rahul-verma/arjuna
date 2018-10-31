@@ -358,10 +358,9 @@ class IssueEntryEnum(Enum):
 class BuiltInProp(Enum):
     ID = auto()
     PRIORITY = auto()
-    THREADS = auto()
+    THREADS= auto()
     NAME = auto()
     AUTHOR = auto()
-    BUGS = auto()
     IDEA = auto()
     UNSTABLE = auto()
     COMPONENT = auto()

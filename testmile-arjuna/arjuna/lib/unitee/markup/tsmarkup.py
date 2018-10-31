@@ -31,11 +31,12 @@ def init_module(id=None, *,
                 threads=1,
                 evars=None,
                 tags=None,
+                bugs=None,
                 drive_with=None,
                 data_ref=None,
                 exclude_if=None,
 
-                name=None, author=None, bugs=None, idea=None, unstable=False,
+                name=None, author=None, idea=None, unstable=False,
                 component=None, app_version=None,
 
                 **kwargs):
@@ -54,11 +55,12 @@ def test_function(id=None, *,
                   threads=1,
                   evars=None,
                   tags=None,
+                  bugs=None,
                   drive_with=None,
                   data_ref=None,
                   exclude_if=None,
 
-                  name=None, author=None, bugs=None, idea=None, unstable=False,
+                  name=None, author=None, idea=None, unstable=False,
                   component=None, app_version=None,
 
                   **kwargs):

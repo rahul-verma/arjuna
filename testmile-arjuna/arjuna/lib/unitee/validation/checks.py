@@ -106,3 +106,32 @@ def contains(parent, child):
 
 def does_not_contain(parent, child):
     return child not in parent
+
+numbers = {int, float}
+
+def __validate_args_as_numbers(func, left, right):
+    if type(left) not in numbers or type(right) not in numbers:
+        raise Exception("{} relation check is allowed only for numbers. Received >>{}<< of type: {} and >>{}<< of type {}.".format(
+            func,
+            left,
+            type(left),
+            right,
+            type(right)
+        ))
+
+
+def less_than(left, right):
+    __validate_args_as_numbers("less_than", left, right)
+    return left < right
+
+def less_or_equal(left, right):
+    __validate_args_as_numbers("less_or_equal", left, right)
+    return left <= right
+
+def greater_than(left, right):
+    __validate_args_as_numbers("greater_than", left, right)
+    return left > right
+
+def greater_or_equal(left, right):
+    __validate_args_as_numbers("greater_or_equal", left, right)
+    return left >= right

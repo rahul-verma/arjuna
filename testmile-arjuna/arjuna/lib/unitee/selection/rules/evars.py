@@ -19,28 +19,25 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import time
-from arjuna.lib.core.reader.textfile import TextResourceReader
-from arjuna.lib.interface.cli import ArjunaCLI
+from .common.rule import *
+from .common.utils import *
 
-class __arfacade():
+class EvarsDefinedRule(DictKeyPresenceRule):
 
-    def __init__(self):
-        self.__version = "0.6.2-beta"
+    def _get_container(self, test_object):
+        return test_object.tvars.evars
 
-    def launch(self, raw_args):
-        reader = TextResourceReader("header.txt")
-        print(reader.read().format(version=self.__version))
-        reader.close()
 
-        cli = ArjunaCLI(raw_args)
-        # Initialize the Arjuna Core as per CLI options
-        cli.init()
+class EvarValueRule(DictKeyValueRule):
 
-        cli.execute()
+    def __init__(self, totype, is_inclusion_rule, robject, condition, expression):
+        super().__init__(totype, is_inclusion_rule, robject, condition, expression)
 
-Arjuna = __arfacade()
+    def _get_container(self, test_object):
+        return test_object.tvars.evars
 
-from arjuna.lib.unitee.markup import tsmarkup
-
-markup = tsmarkup
+    def _convert_target_value(self, name, provided_value, target_object_value):
+        target_type = type(target_object_value)
+        if target_type == bool:
+            target_type = custom_bool
+        return target_type(provided_value)

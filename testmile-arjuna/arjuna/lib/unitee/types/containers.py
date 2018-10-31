@@ -81,13 +81,13 @@ class MultiVars:
 class TagSet:
 
     def __init__(self, *vargs):
-        self.__set = {str(i) for i in vargs}
+        self.__set = {str(i).lower() for i in vargs}
 
     def __fv(self, item):
         return str(item).lower()
 
     def __contains__(self, item):
-        return self.__fv(item) not in self.__set
+        return self.__fv(item) in self.__set
 
     def update(self, items):
         for item in items:
@@ -103,6 +103,7 @@ class TagSet:
         return str(self.__set)
 
 tags = TagSet
+bugs = TagSet
 
 class DataRef:
     pass
@@ -250,7 +251,8 @@ class TestVars:
         self.info = AllInfo()
         self.evars = SingleObjectVars()
         self.runtime = OnceOnlyKeyCIStringDict()
-        self.tags = TagSet() # return frozen set
+        self.tags = tags() # return frozen set
+        self.bugs = tags()  # return frozen set
         self.data = Data() #RODataRecord For .pos it should be a tuple, for .map immutable dict
 
     def clone(self):
@@ -258,6 +260,7 @@ class TestVars:
         nvars.info = self.info.clone()
         nvars.evars = SingleObjectVars({i:j for i,j in self.evars.items()})
         nvars.tags = TagSet(*{i for i in self.tags})
+        nvars.bugs = TagSet(*{i for i in self.bugs})
         nvars.data = self.data
         nvars.runtime = self.runtime.clone()
         return nvars
@@ -268,6 +271,7 @@ class TestVars:
                 # RO
                 self.info = tvars.info.create_ro_wrapper()
                 self.tags = frozenset(tvars.tags)
+                self.bugs = frozenset(tvars.bugs)
                 # R/W
                 self.evars = tvars.evars
                 self.runtime = tvars.runtime

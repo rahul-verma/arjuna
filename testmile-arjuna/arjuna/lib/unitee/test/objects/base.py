@@ -26,7 +26,7 @@ from arjuna.lib.unitee import Unitee
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.reporter.result.types import *
 from arjuna.lib.unitee.exceptions import *
-from arjuna.lib.unitee.selection.rules.exceptions import *
+from arjuna.lib.unitee.selection.rules.common.exceptions import *
 
 class TestObject(metaclass=abc.ABCMeta):
     def __init__(self, totype):

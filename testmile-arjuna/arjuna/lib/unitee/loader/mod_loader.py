@@ -174,6 +174,9 @@ class ModuleLoader:
         if tsargs['tags']:
             self.mdef.tvars.tags = tsargs['tags']
         del tsargs['tags']
+        if tsargs['bugs']:
+            self.mdef.tvars.bugs = tsargs['bugs']
+        del tsargs['bugs']
         self.mdef.drive_with = tsargs['drive_with']
         del tsargs['drive_with']
         self.mdef.dependency = tsargs['exclude_if']
@@ -199,6 +202,9 @@ class ModuleLoader:
             if tsargs['tags']:
                 td.tvars.tags = tsargs['tags']
             del tsargs['tags']
+            if tsargs['bugs']:
+                td.tvars.bugs = tsargs['bugs']
+            del tsargs['bugs']
             td.data_driver = tsargs['drive_with']
             del tsargs['drive_with']
             td.data_ref = tsargs['data_ref']

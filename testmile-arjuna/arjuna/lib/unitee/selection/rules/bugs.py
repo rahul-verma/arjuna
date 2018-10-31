@@ -19,14 +19,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna.tpi.markup import *
-from arjuna.tpi.markup_helpers import *
-from arjuna.tpi.helpers import *
+from .common.rule import *
 
-@test_function(author='Rahul Verma')
-def test1_picking(my):
-    console.display("ex02.test1")
 
-@test_function
-def test2_picking(my):
-    console.display("ex02.test2")
+class BugsDefinedRule(SetEntryPresenceRule):
+
+    def __init__(self, totype, is_inclusion_rule, robject, condition, expression):
+        super().__init__(totype, is_inclusion_rule, robject, condition, expression)
+
+    def _get_container(self, test_object):
+        return test_object.tvars.bugs
+
+    def _convert_target_value(self, name, provided_value, target_object_value):
+        return (str(i).lower() for i in provided_value)
+
+
+

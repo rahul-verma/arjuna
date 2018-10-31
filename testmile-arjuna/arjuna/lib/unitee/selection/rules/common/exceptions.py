@@ -19,28 +19,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import time
-from arjuna.lib.core.reader.textfile import TextResourceReader
-from arjuna.lib.interface.cli import ArjunaCLI
-
-class __arfacade():
-
+class RuleNotMet(Exception):
     def __init__(self):
-        self.__version = "0.6.2-beta"
-
-    def launch(self, raw_args):
-        reader = TextResourceReader("header.txt")
-        print(reader.read().format(version=self.__version))
-        reader.close()
-
-        cli = ArjunaCLI(raw_args)
-        # Initialize the Arjuna Core as per CLI options
-        cli.init()
-
-        cli.execute()
-
-Arjuna = __arfacade()
-
-from arjuna.lib.unitee.markup import tsmarkup
-
-markup = tsmarkup
+        super().__init__()

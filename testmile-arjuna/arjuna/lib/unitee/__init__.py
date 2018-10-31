@@ -383,7 +383,7 @@ class UniteeFacade:
             patterns = picker_args[picker]
             if patterns is not None:
                 for pattern in patterns:
-                    child = Element('pickers')
+                    child = Element('picker')
                     child.attrib['type'] = picker
                     child.attrib['pattern'] = pattern
                     pickers.append(child)

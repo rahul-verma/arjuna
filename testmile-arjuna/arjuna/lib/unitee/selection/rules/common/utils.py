@@ -19,28 +19,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import time
-from arjuna.lib.core.reader.textfile import TextResourceReader
-from arjuna.lib.interface.cli import ArjunaCLI
+from arjuna.lib.unitee.enums import *
 
-class __arfacade():
+def is_test_module(test_object):
+    return test_object.type == TestObjectTypeEnum.Module
 
-    def __init__(self):
-        self.__version = "0.6.2-beta"
 
-    def launch(self, raw_args):
-        reader = TextResourceReader("header.txt")
-        print(reader.read().format(version=self.__version))
-        reader.close()
+def is_test_function(test_object):
+    return test_object.type == TestObjectTypeEnum.Function
 
-        cli = ArjunaCLI(raw_args)
-        # Initialize the Arjuna Core as per CLI options
-        cli.init()
+def none(value):
+    if type(value) is str:
+        return value.lower() == "none" and None or value
+    else:
+        return value is None and None or value
 
-        cli.execute()
-
-Arjuna = __arfacade()
-
-from arjuna.lib.unitee.markup import tsmarkup
-
-markup = tsmarkup
+def custom_bool(value):
+    from .ref import BOOL_MAP
+    if type(value) is bool:
+        return value
+    elif value.lower() in BOOL_MAP:
+        return BOOL_MAP[value.lower()]
+    else:
+        raise Exception("Provided unexpected value for boolean context in rule. Allowed: [true/false/on/off/0/1]")
