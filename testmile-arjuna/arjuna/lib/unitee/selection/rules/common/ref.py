@@ -29,7 +29,9 @@ BOOL_MAP = {
     'on': True,
     'off': False,
     '1': True,
-    '0': False
+    '0': False,
+    'yes' : True,
+    'no' : False
 }
 
 SYMBOLS_MAP = {

@@ -42,10 +42,9 @@ class UserPropValueRule(DictKeyValueRule):
         super().__init__(totype, is_inclusion_rule, robject, condition, expression)
 
     def _get_container(self, test_object):
-        print(get_container(test_object))
         return get_container(test_object)
 
-    def _convert_target_value(self, name, provided_value, target_object_value):
+    def _convert_provided_value(self, provided_value, name=None, target_object_value=None):
         target_type = type(target_object_value)
         if target_type == bool:
             target_type = custom_bool

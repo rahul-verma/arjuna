@@ -118,6 +118,7 @@
                 <!-- true/on/1 mean True and false/off/0 mean False (Case insensitive) -->
                 <include if="unstable is On"/>
                 <include if="unstable is 1"/>
+                <include if="unstable = yes"/>
 
             </functions>
         </rules>

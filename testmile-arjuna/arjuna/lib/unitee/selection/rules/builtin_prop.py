@@ -44,8 +44,21 @@ class BuiltInPropValueRule(DictKeyValueRule):
     def __init__(self, totype, is_inclusion_rule, robject, condition, expression):
         super().__init__(totype, is_inclusion_rule, robject, condition, expression)
 
+    def _act_on_incompatible_converter(self, provided_value, name=None):
+        try:
+            self._convert_provided_value(provided_value, name=name)
+        except Exception as e:
+            raise Exception("Incpomatible value >>{}<< supplied for built-in property >>{}<< of type >>{}<<".format(
+                provided_value,
+                name,
+                mrules.get_value_type(name)
+            ))
+
     def _get_container(self, test_object):
         return get_container(test_object)
 
-    def _convert_target_value(self, name, provided_value, target_object_value):
-        return mrules.get_value_type(name)(provided_value)
+    def _convert_provided_value(self, provided_value, name=None, target_object_value=None):
+        target_type = mrules.get_value_type(name)
+        if target_type == bool:
+            target_type = custom_bool
+        return target_type(provided_value)

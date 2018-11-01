@@ -41,4 +41,4 @@ def custom_bool(value):
     elif value.lower() in BOOL_MAP:
         return BOOL_MAP[value.lower()]
     else:
-        raise Exception("Provided unexpected value for boolean context in rule. Allowed: [true/false/on/off/0/1]")
+        raise Exception("Provided unexpected value for boolean context in rule. Allowed: [true/false/on/off/yes/no/0/1]")

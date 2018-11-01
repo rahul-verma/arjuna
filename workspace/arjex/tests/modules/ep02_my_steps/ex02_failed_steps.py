@@ -67,5 +67,6 @@ def test_failed_step_4(my):
                     observation="Some observation",
                     message="Something terrible happened.",
                     abc=123,
-                    testing="something"
+                    testing="something",
+                    another=None
     )

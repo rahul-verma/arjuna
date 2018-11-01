@@ -21,7 +21,7 @@ limitations under the License.
 
 from arjuna.lib.unitee.test.defs.deps import *
 from arjuna.lib.unitee.markup.ds import *
-from arjuna.lib.unitee.types.containers import evars
+from arjuna.lib.unitee.types.containers import evars, tags, bugs
 
 # Callable containers
 modules = modules
@@ -40,3 +40,9 @@ many_data_sources = many_data_sources
 
 # evars
 evars = evars
+
+#tags
+tags = tags
+
+#bugs
+bugs = bugs

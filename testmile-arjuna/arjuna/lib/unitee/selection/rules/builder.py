@@ -19,6 +19,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+import xml.etree.ElementTree as ETree
+
 from arjuna.lib.unitee.markup import mrules
 from arjuna.lib.unitee.enums import *
 
@@ -35,12 +37,16 @@ from .evars import *
 class RuleBuilder:
 
     def __init__(self):
+        self.__xml = None
         self.__totype = None
         self.__is_include_type = RuleNature.INCLUDE
         self.__target = None
         self.__robject = None
         self.__condition = None
         self.__expression = None
+
+    def xml(self, xml):
+        self.__xml = xml
 
     def test_object_type(self, totype):
         self.__totype = TestObjectTypeEnum[totype]
@@ -130,10 +136,17 @@ class RuleBuilder:
                 cls = EvarsDefinedRule
             else:
                 cls = EvarValueRule
-        return cls(
-            self.__totype,
-            self.__is_include_type,
-            self.__robject,
-            self.__condition,
-            self.__expression
-        )
+
+        try:
+            return cls(
+                self.__totype,
+                self.__is_include_type,
+                self.__robject,
+                self.__condition,
+                self.__expression
+            )
+        except Exception as e:
+            raise Exception("Problem in constructing rule object for {}. Message: {}".format(
+                ETree.tostring(self.__xml).strip(),
+                e
+            ))

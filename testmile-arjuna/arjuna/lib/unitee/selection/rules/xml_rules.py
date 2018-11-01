@@ -44,7 +44,7 @@ class XmlRules:
         self.__process()
 
 
-    def __create_rule(self, tobject, rule_type, rcontainer, robject, condition, expression):
+    def __create_rule(self, rule, tobject, rule_type, rcontainer, robject, condition, expression):
         if not robject:
             raise Exception("Target Rule Object not defined.")
         if not condition:
@@ -53,6 +53,7 @@ class XmlRules:
             raise Exception("Target expression not defined.")
 
         rule_builder = RuleBuilder()
+        rule_builder.xml(rule)
         rule_builder.test_object_type(tobject)
         rule_builder.rule_type(rule_type)
         rule_builder.target(rcontainer)
@@ -66,38 +67,38 @@ class XmlRules:
         rule_builder.expression(expression)
         self.__rules.append(rule_builder.build())
 
-    def __create_4_word_rule_for_container(self, tobject, rule_type, match):
+    def __create_4_word_rule_for_container(self, rule, tobject, rule_type, match):
         container = match.group('container').lower()
         if container not in PROPERTY_CONTAINER_MAP:
             raise Exception("Property type in a rule definition can only be one of : {}".format(
                 list(PROPERTY_CONTAINER_MAP.keys())
             ))
-        self.__create_rule(tobject, rule_type, PROPERTY_CONTAINER_MAP[container], match.group('object'), match.group('condition'),match.group('expression'))
+        self.__create_rule(rule, tobject, rule_type, PROPERTY_CONTAINER_MAP[container], match.group('object'), match.group('condition'),match.group('expression'))
 
-    def __create_3_word_value_rule_for_prop(self, tobject, rule_type, match):
-        self.__create_rule(tobject, rule_type, RuleTargetType.PROPS, match.group('object'), match.group('condition'), match.group('expression'))
+    def __create_3_word_value_rule_for_prop(self, rule, tobject, rule_type, match):
+        self.__create_rule(rule, tobject, rule_type, RuleTargetType.PROPS, match.group('object'), match.group('condition'), match.group('expression'))
 
-    def __create_2_word_value_rule_for_tags(self, tobject, rule_type, match):
+    def __create_2_word_value_rule_for_tags(self, rule, tobject, rule_type, match):
         tags = [i.strip().lower() for i in match.group('object').split(',')]
-        self.__create_rule(tobject, rule_type, RuleTargetType.TAGS, tags, 'is', 'defined')
+        self.__create_rule(rule, tobject, rule_type, RuleTargetType.TAGS, tags, 'is', 'defined')
 
-    def __create_4_word_value_rule_for_multi_defined(self, tobject, rule_type, match):
+    def __create_4_word_value_rule_for_multi_defined(self, rule, tobject, rule_type, match):
         container = match.group('container').lower()
         if container not in CONTAINER_MAP:
             raise Exception("Property type in a rule definition for an >>are defined/present<< condition can only be one of : {}".format(
                 list(CONTAINER_MAP.keys())
             ))
         tags = [i.strip().lower() for i in match.group('object').split(',')]
-        self.__create_rule(tobject, rule_type, CONTAINER_MAP[container], tags,
+        self.__create_rule(rule, tobject, rule_type, CONTAINER_MAP[container], tags,
                            RuleConditionType.CONTAINS, match.group('expression'))
 
-    def __create_1_word_boolean_rule(self, tobject, rule_type, match):
+    def __create_1_word_boolean_rule(self, rule, tobject, rule_type, match):
         robject = match.group('object').lower()
         if (mrules.is_builtin_prop(robject) and mrules.get_value_type(robject) is not bool) \
                 or \
                 (not mrules.is_builtin_prop(robject)):
             raise Exception("One word rules are available only for built-in properties of boolean nature.")
-        self.__create_rule(tobject, rule_type, RuleTargetType.PROPS, robject, 'is', 'True')
+        self.__create_rule(rule, tobject, rule_type, RuleTargetType.PROPS, robject, 'is', 'True')
 
     def __process(self):
         def display_err_and_exit(msg):
@@ -143,32 +144,32 @@ class XmlRules:
                 try:
                     match = pattern_1.match(rule_dict['if'])
                     if match:
-                        self.__create_1_word_boolean_rule(tobject, rule.tag, match)
+                        self.__create_1_word_boolean_rule(rule, tobject, rule.tag, match)
                         continue
 
                     match = pattern_2.match(rule_dict['if'])
                     if match:
-                        self.__create_2_word_value_rule_for_tags(tobject, rule.tag, match)
+                        self.__create_2_word_value_rule_for_tags(rule, tobject, rule.tag, match)
                         continue
 
                     match = pattern_3.match(rule_dict['if'])
                     if match:
-                        self.__create_4_word_value_rule_for_multi_defined(tobject, rule.tag, match)
+                        self.__create_4_word_value_rule_for_multi_defined(rule, tobject, rule.tag, match)
                         continue
 
                     match = pattern_4.match(rule_dict['if'])
                     if match:
-                        self.__create_3_word_value_rule_for_prop(tobject, rule.tag, match)
+                        self.__create_3_word_value_rule_for_prop(rule, tobject, rule.tag, match)
                         continue
 
                     match = pattern_5.match(rule_dict['if'])
                     if match:
-                        self.__create_3_word_value_rule_for_prop(tobject, rule.tag, match)
+                        self.__create_3_word_value_rule_for_prop(rule, tobject, rule.tag, match)
                         continue
 
                     match = pattern_6.match(rule_dict['if'])
                     if match:
-                        self.__create_4_word_rule_for_container(tobject, rule.tag, match)
+                        self.__create_4_word_rule_for_container(rule, tobject, rule.tag, match)
                         continue
 
                     # Invalid rule
@@ -178,7 +179,7 @@ class XmlRules:
                     import traceback
                     traceback.print_exc()
                     display_err_and_exit(
-                        "Exception in processing rule: {}. {}. Check group: {}.".format(ETree.tostring(rule),e, self.gname))
+                        "Exception in processing rule: {}. {}. Check group: {}.".format(ETree.tostring(rule).strip(),e, self.gname))
 
     def evaluate(self, test_object):
         for rule in self.__rules:

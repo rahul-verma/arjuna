@@ -37,6 +37,11 @@ class __BaseRule(metaclass=abc.ABCMeta):
         self.condition = condition
         self.expression = expression
 
+        self._act_on_incompatible_converter(self.expression, name=self.robject)
+
+    def _act_on_incompatible_converter(self, provided_value, name=None):
+        pass
+
     def _not_met_exc(self):
         # Run time rules checking did not succeed for the test object
         raise RuleNotMet()
@@ -74,7 +79,7 @@ class __BaseRule(metaclass=abc.ABCMeta):
     def _act_on_value(self):
         pass
 
-    def _convert_target_value(name, provided_value, target_object_value):
+    def _convert_provided_value(self, provided_value, name=None, target_object_value=None):
         return provided_value
 
     def __is_applicable(self, test_object):
@@ -110,7 +115,7 @@ class __BaseRule(metaclass=abc.ABCMeta):
             return
 
         try:
-            provided_value = self._convert_target_value(self.robject, self.expression, target_object_value)
+            provided_value = self._convert_provided_value(self.expression, name=self.robject, target_object_value=target_object_value)
         except Exception as e:
             # This would take place for user defined props/evars at this stage
             # E.g. in test user_prop is of type int and in rule it is given as a string

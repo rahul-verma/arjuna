@@ -30,6 +30,6 @@ class TagsDefinedRule(SetEntryPresenceRule):
     def _get_container(self, test_object):
        return test_object.tvars.tags
 
-    def _convert_target_value(self, name, provided_value, target_object_value):
+    def _convert_provided_value(self, provided_value, name=None, target_object_value=None):
         return (str(i).lower() for i in provided_value)
 

@@ -99,6 +99,7 @@ class ExcelReporter:
         self._update(self.info_sheet, rdict.values())
 
     def update_issue(self, issue):
+        print("HERERERERER")
         self._update(self.issues_sheet, issue.values())
 
     @sync_method('lock')

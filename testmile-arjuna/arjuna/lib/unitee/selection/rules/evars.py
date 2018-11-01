@@ -36,7 +36,7 @@ class EvarValueRule(DictKeyValueRule):
     def _get_container(self, test_object):
         return test_object.tvars.evars
 
-    def _convert_target_value(self, name, provided_value, target_object_value):
+    def _convert_provided_value(self, provided_value, name=None, target_object_value=None):
         target_type = type(target_object_value)
         if target_type == bool:
             target_type = custom_bool
