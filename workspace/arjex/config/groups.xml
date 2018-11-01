@@ -21,10 +21,10 @@
         </pickers>
     </group>
 
-    <!-- Demonstration of multi-tag rules-->
     <!-- Demonstration of different value comparison rules for built-in properties.
     There is an and relationship among rules -->
     <!-- Use exclude rule for negation of a condition -->
+    <!-- You can define rules for test modules and/or functions-->
     <group name="gp4">
         <pickers>
             <picker type="cm" pattern=".*ex03_rules"/>

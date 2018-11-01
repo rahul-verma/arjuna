@@ -41,6 +41,14 @@ from arjuna.lib.unitee import UniteeFacade
 
 from .validation import *
 
+blank_groups_xml = '''<groups>
+    <group name="everything">
+        <pickers>
+            <picker type="cm" pattern=".*"/>
+        </pickers>
+    </group>
+</groups>'''
+
 class Command(metaclass=abc.ABCMeta):
     PENTRY = '''
     project.name = {}
@@ -204,6 +212,7 @@ class CreateProject(Command):
                 f = open(os.path.join(ptdir, "config", "{}.conf".format(pname)), "w")
                 f.close()
                 f = open(os.path.join(ptdir, "config", "groups.xml"), "w")
+                f.write(blank_groups_xml)
                 f.close()
                 f = open(os.path.join(ptdir, "fixtures", "__init__.py"), "w")
                 f.close()
