@@ -22,9 +22,14 @@ limitations under the License.
 from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 
+'''
+The following examples do not use Arjuna's assertion framework
+which is way more advanced than the examples shown.
+'''
+
 @test_function
 def passing_test(my):
-    pass
+    assert 1=1
 
 @test_function
 def failing_test(my):

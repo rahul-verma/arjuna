@@ -431,10 +431,71 @@ class Assertion:
 
         self._configure_step()
 
+    def execute(self):
+        pass
+
 class LinkedAssertion(Assertion):
     def __init__(self, stepper, subject):
         super().__init__(stepper.purpose, subject)
         self._stepper = stepper
+
+    def _configure_step(self):
+        if not self._stepper._is_soft_asserter():
+            super()._configure_step()
+        else:
+            self._step.add_to_state()
+            self._stepper._add_step(self._step)
+
+
+class PendingAssertion(Assertion):
+    def __init__(self, stepper, subject):
+        super().__init__(stepper.purpose, subject)
+        self._stepper = stepper
+        self.__pending_func = None
+        self.__pending_args = None
+
+    def __assign_caller(self, func, args):
+        self.__pending_func = func
+        self.__pending_args = args
+        self._stepper._add_assertion(self)
+
+    def is_true(self, *vargs):
+        self.__assign_caller(super().is_true, vargs)
+
+    def is_false(self, *vargs):
+        self.__assign_caller(super().is_false, vargs)
+
+    def is_equal_to(self, *vargs):
+        self.__assign_caller(super().is_equal_to, vargs)
+
+    def is_not_equal_to(self, *vargs):
+        self.__assign_caller(super().is_not_equal_to, vargs)
+
+    def is_same_as(self, *vargs):
+        self.__assign_caller(super().is_same_as, vargs)
+
+    def is_not_same_as(self, *vargs):
+        self.__assign_caller(super().is_not_same_as, vargs)
+
+    is_different_from = is_not_same_as
+
+    def is_none(self, *vargs):
+        self.__assign_caller(super().is_none, vargs)
+
+    def is_not_none(self, *vargs):
+        self.__assign_caller(super().is_not_none, vargs)
+
+    def includes(self, *vargs):
+        self.__assign_caller(super().includes, vargs)
+
+    def excludes(self, *vargs):
+        self.__assign_caller(super().excludes, vargs)
+
+    def execute(self):
+        if self.__pending_args:
+            self.__pending_func(*self.__pending_args)
+        else:
+            self.__pending_func()
 
     def _configure_step(self):
         if not self._stepper._is_soft_asserter():

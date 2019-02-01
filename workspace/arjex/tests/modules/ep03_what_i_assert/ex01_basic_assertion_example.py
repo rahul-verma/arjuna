@@ -34,3 +34,4 @@ def test_basic_assertion_pass(my):
 @test_function
 def test_basic_assertion_fail(my):
     my.steps.assert_true("Business purpose", False)
+

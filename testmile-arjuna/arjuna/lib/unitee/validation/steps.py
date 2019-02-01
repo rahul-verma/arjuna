@@ -64,6 +64,23 @@ class _SoftAsserter(_Asserter):
         for step in self.__steps:
             step.evaluate()
 
+class _LazyAsserter(_SoftAsserter):
+
+    def __init__(self, purpose):
+        super().__init__(purpose)
+        self.__assertions = []
+
+    def execute(self):
+        for assertion in self.__assertions:
+            assertion.execute()
+
+    def _add_assertion(self, assertion):
+        self.__assertions.append(assertion)
+
+    def assert_that(self, subject):
+        assertion = PendingAssertion(self, subject)
+        return assertion
+
 class Steps:
 
     @staticmethod
@@ -133,6 +150,10 @@ class Steps:
     @staticmethod
     def soft_validate(purpose):
         return _SoftAsserter(purpose)
+
+    @staticmethod
+    def lazy_validate(purpose):
+        return _LazyAsserter(purpose)
 
     @staticmethod
     def assert_true(purpose, actual):

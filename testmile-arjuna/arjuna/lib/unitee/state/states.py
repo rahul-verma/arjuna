@@ -70,6 +70,9 @@ class _ThreadState:
         self.__current_steps = None
         self.__current_context = None
 
+    def get_steps(self):
+        return tuple(self.__current_steps)
+
     def begin_recording(self, context):
         self.__current_steps = []
         self.__current_context = context
