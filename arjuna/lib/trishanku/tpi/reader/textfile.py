@@ -90,6 +90,7 @@ class FileLine2ArrayReader:
     def close(self):
         self.__filereader.close()
 
+
 class FileLine2MapReader:
     def __init__(self, file_path, delimiter="\t"):
         self.__filereader = FileLine2ArrayReader(file_path, delimiter)

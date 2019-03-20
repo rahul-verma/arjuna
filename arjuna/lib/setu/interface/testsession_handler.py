@@ -1,8 +1,8 @@
 from arjuna.lib.setu.core.test.testsession import TestSession
-from .guiautomator_handler import GuiAutomatorHandler
+from arjuna.lib.setu.guiauto.adapter.automator import GuiAutomatorHandler
 from arjuna.lib.setu.core.constants import SetuConfigOption
-from arjuna.lib.setu.dispatcher.testsession import TestSessionDispatcher
-from .gui_handler import GuiHandlerManager
+from arjuna.lib.setu.core.dispatcher.testsession import TestSessionDispatcher
+from arjuna.lib.setu.guiauto.adapter.gui import GuiHandlerManager
 
 class TestSessionHandler:
 

@@ -142,6 +142,7 @@ class HoconResourceReader(HoconFileReader):
         # ArjunaCore.console.display(os.path.abspath(os.path.join(os.path.dirname(__file__), os.sep.join(["../..", "res", name]))))
         super().__init__(os.path.abspath(os.path.join(os.path.dirname(__file__), os.sep.join(["../..", "res", name]))))
 
+
 class HoconStringReader(HoconReader):
     def __init__(self, conf_string):
         super().__init__()
