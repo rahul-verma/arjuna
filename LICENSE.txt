@@ -9,7 +9,7 @@ This Software includes software developed by
 Test Mile Software Testing Pvt Ltd
 (Company Website: www.TestMile.com, Company Email: sales@testmile.com)
 
-AutoCognite Arjuna SDK, is hereinafter referred to as "Software" or "Arjuna".
+Test Mile Arjuna, is hereinafter referred to as "Software" or "Arjuna".
 
 Information on Inclusion of Third Party Software
 ------------------------------------------------

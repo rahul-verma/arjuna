@@ -5,11 +5,9 @@ import time
 def join_paths(*paths):
     return os.path.abspath(os.path.join(*paths))
 
-root_dir = join_paths(os.path.realpath(__file__), "..")
-tm_arjuna_dir = join_paths(root_dir, "testmile-arjuna")
-importables_dir = join_paths(tm_arjuna_dir, "third_party", "py_importables")
+root_dir = os.path.dirname(os.path.realpath(__file__))
+importables_dir = join_paths(root_dir, "third_party")
 
-sys.path.insert(0, tm_arjuna_dir)
 sys.path.insert(0, importables_dir)
 sys.path.insert(0, root_dir)
 
