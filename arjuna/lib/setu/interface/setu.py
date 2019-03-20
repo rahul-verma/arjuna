@@ -2,7 +2,8 @@ from flask import request
 from flask_restful import Resource
 from .objmgr import SetuSvcObjectManager
 from .testsession_handler import TestSessionHandler
-from .setu_action import SetuActionType
+from arjuna.lib.setu.requester.config import SetuActionType
+
 
 class SetuSvc(Resource):
 
@@ -14,27 +15,27 @@ class SetuSvc(Resource):
             action_type = SetuActionType[json_action.upper().strip()]
             print(action_type)
         except:
-            return {'result' : 'error', 'emessage' : 'Invalid Setu action: {}'.format(json_action), 'etrace' : 'NA'}, 500
+            return {'result': 'error', 'emessage': 'Invalid Setu action: {}'.format(json_action), 'etrace': 'NA'}, 500
         else:
             if action_type == SetuActionType.TESTSESSION_INIT:
                 root_dir = json_dict["args"]["rootDir"]
                 res = self.__register_test_session(root_dir)
                 print(res)
-                return {'result' : 'success', 'responseData': res}, 200
+                return {'result': 'success', 'responseData': res}, 200
             elif action_type == SetuActionType.TESTSESSION_FINISH:
                 pass
             else:
                 testsession_handler, err = self.__get_testsession_handler(json_dict)
                 if not testsession_handler:
-                    return {'result' : 'error', 'emessage': err}, 500
+                    return {'result': 'error', 'emessage': err}, 500
                 try:
                     res = self.__call_test_session_handler(testsession_handler, action_type, json_dict)
                 except Exception as e:
                     import traceback
                     ftrace = traceback.format_exc()
-                    return {'result' : 'error', 'emessage': str(e), 'etrace': str(ftrace)}, 500
+                    return {'result': 'error', 'emessage': str(e), 'etrace': str(ftrace)}, 500
                 else:
-                    return {'result' : 'success', 'responseData' : res}, 200
+                    return {'result': 'success', 'responseData': res}, 200
 
     def __register_test_session(self, root_dir):
         handler = TestSessionHandler()
@@ -42,8 +43,8 @@ class SetuSvc(Resource):
         config_id = handler.init(root_dir)
         SetuSvcObjectManager.register_testsession_handler(handler)
         return {
-            'testSessionSetuId' : handler.setu_id,
-            'configSetuId' : config_id
+            'testSessionSetuId': handler.setu_id,
+            'configSetuId': config_id
         }
 
     def __get_testsession_handler(self, json_dict):
@@ -58,31 +59,31 @@ class SetuSvc(Resource):
 
     def __call_test_session_handler(self, handler: TestSessionHandler, action_type, json_dict):
         handler_remove_prefix = {
-            handler.take_session_action : "TESTSESSION_",
-            handler.take_conf_action : "CONFIGURATOR_",
-            handler.take_datasource_action : "DATASOURCE_",
-            handler.take_browser_action : "GUIAUTO_BROWSER_",
-            handler.take_domroot_action : "GUIAUTO_DOMROOT_",
-            handler.take_automator_action : "GUIAUTO_",
-            handler.take_alert_action : "GUIAUTO_WEB_ALERT_",
-            handler.take_element_action : "GUIAUTO_ELEMENT_",
-            handler.take_dropdown_action : "GUIAUTO_DROPDOWN_",
-            handler.take_radiogroup_action : "GUIAUTO_RADIOGROUP_",
-            handler.take_frame_action : "GUIAUTO_FRAME_",
-            handler.take_window_action : "GUIAUTO_WINDOW_",
-            handler.take_main_window_action : "GUIAUTO_MAIN_WINDOW_",
-            handler.take_child_window_action : "GUIAUTO_CHILD_WINDOW_",
+            handler.take_session_action: "TESTSESSION_",
+            handler.take_conf_action: "CONFIGURATOR_",
+            handler.take_datasource_action: "DATASOURCE_",
+            handler.take_browser_action: "GUIAUTO_BROWSER_",
+            handler.take_domroot_action: "GUIAUTO_DOMROOT_",
+            handler.take_automator_action: "GUIAUTO_",
+            handler.take_alert_action: "GUIAUTO_ALERT_",
+            handler.take_element_action: "GUIAUTO_ELEMENT_",
+            handler.take_dropdown_action: "GUIAUTO_DROPDOWN_",
+            handler.take_radiogroup_action: "GUIAUTO_RADIOGROUP_",
+            handler.take_frame_action: "GUIAUTO_FRAME_",
+            handler.take_window_action: "GUIAUTO_WINDOW_",
+            handler.take_main_window_action: "GUIAUTO_MAIN_WINDOW_",
+            handler.take_child_window_action: "GUIAUTO_CHILD_WINDOW_",
         }
 
         action_method_map = {
-            SetuActionType.TESTSESSION_REGISTER_CONFIG : handler.take_session_action,
+            SetuActionType.TESTSESSION_REGISTER_CONFIG: handler.take_session_action,
             
             SetuActionType.TESTSESSION_CREATE_FILE_DATA_SOURCE: handler.take_session_action,
             
             SetuActionType.TESTSESSION_LAUNCH_GUIAUTOMATOR: handler.take_session_action,
             SetuActionType.TESTSESSION_QUIT_GUIAUTOMATOR: handler.take_session_action,
 
-            SetuActionType.TESTSESSION_CREATE_GUI : handler.take_session_action,
+            SetuActionType.TESTSESSION_CREATE_GUI: handler.take_session_action,
             
             SetuActionType.CONFIGURATOR_GET_SETU_OPTION_VALUE: handler.take_conf_action,
             SetuActionType.CONFIGURATOR_GET_USER_OPTION_VALUE: handler.take_conf_action,
@@ -104,58 +105,58 @@ class SetuSvc(Resource):
             SetuActionType.GUIAUTO_CREATE_FRAME: handler.take_automator_action,
             SetuActionType.GUIAUTO_CREATE_ALERT: handler.take_automator_action,
             
-            SetuActionType.GUIAUTO_GET_MAIN_WINDOW : handler.take_automator_action,
-            SetuActionType.GUIAUTO_SET_SLOMO : handler.take_automator_action,
+            SetuActionType.GUIAUTO_GET_MAIN_WINDOW: handler.take_automator_action,
+            SetuActionType.GUIAUTO_SET_SLOMO: handler.take_automator_action,
 
-            SetuActionType.GUIAUTO_WEB_ALERT_CONFIRM : handler.take_alert_action,
-            SetuActionType.GUIAUTO_WEB_ALERT_DISMISS : handler.take_alert_action,
-            SetuActionType.GUIAUTO_WEB_ALERT_GET_TEXT : handler.take_alert_action,
-            SetuActionType.GUIAUTO_WEB_ALERT_SEND_TEXT : handler.take_alert_action,
+            SetuActionType.GUIAUTO_ALERT_CONFIRM: handler.take_alert_action,
+            SetuActionType.GUIAUTO_ALERT_DISMISS: handler.take_alert_action,
+            SetuActionType.GUIAUTO_ALERT_GET_TEXT: handler.take_alert_action,
+            SetuActionType.GUIAUTO_ALERT_SEND_TEXT: handler.take_alert_action,
             
-            SetuActionType.GUIAUTO_GUI_CREATE_GUI : None,
+            SetuActionType.GUIAUTO_GUI_CREATE_GUI: None,
             
-            SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXT : handler.take_element_action,
-            SetuActionType.GUIAUTO_ELEMENT_SET_TEXT : handler.take_element_action,
-            SetuActionType.GUIAUTO_ELEMENT_CLEAR_TEXT : handler.take_element_action,
+            SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXT: handler.take_element_action,
+            SetuActionType.GUIAUTO_ELEMENT_SET_TEXT: handler.take_element_action,
+            SetuActionType.GUIAUTO_ELEMENT_CLEAR_TEXT: handler.take_element_action,
         
-            SetuActionType.GUIAUTO_ELEMENT_CLICK : handler.take_element_action,
+            SetuActionType.GUIAUTO_ELEMENT_CLICK: handler.take_element_action,
             
-            SetuActionType.GUIAUTO_ELEMENT_WAIT_UNTIL_CLICKABLE : handler.take_element_action,
+            SetuActionType.GUIAUTO_ELEMENT_WAIT_UNTIL_CLICKABLE: handler.take_element_action,
             
-            SetuActionType.GUIAUTO_ELEMENT_CHECK : handler.take_element_action,
-            SetuActionType.GUIAUTO_ELEMENT_UNCHECK : handler.take_element_action,
+            SetuActionType.GUIAUTO_ELEMENT_CHECK: handler.take_element_action,
+            SetuActionType.GUIAUTO_ELEMENT_UNCHECK: handler.take_element_action,
             
-            SetuActionType.GUIAUTO_DROPDOWN_HAS_VALUE_SELECTED : handler.take_dropdown_action,
-            SetuActionType.GUIAUTO_DROPDOWN_HAS_INDEX_SELECTED : handler.take_dropdown_action,
-            SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VALUE : handler.take_dropdown_action,
-            SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_INDEX : handler.take_dropdown_action,
-            SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE  : handler.take_dropdown_action,        
-            SetuActionType.GUIAUTO_DROPDOWN_HAS_VISIBLE_TEXT_SELECTED : handler.take_dropdown_action,
-            SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_TEXT : handler.take_dropdown_action,
-            SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VISIBLE_TEXT : handler.take_dropdown_action,
+            SetuActionType.GUIAUTO_DROPDOWN_HAS_VALUE_SELECTED: handler.take_dropdown_action,
+            SetuActionType.GUIAUTO_DROPDOWN_HAS_INDEX_SELECTED: handler.take_dropdown_action,
+            SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VALUE: handler.take_dropdown_action,
+            SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_INDEX: handler.take_dropdown_action,
+            SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE : handler.take_dropdown_action,        
+            SetuActionType.GUIAUTO_DROPDOWN_HAS_VISIBLE_TEXT_SELECTED: handler.take_dropdown_action,
+            SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_TEXT: handler.take_dropdown_action,
+            SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VISIBLE_TEXT: handler.take_dropdown_action,
 
-            SetuActionType.GUIAUTO_RADIOGROUP_HAS_VALUE_SELECTED : handler.take_radiogroup_action,
-            SetuActionType.GUIAUTO_RADIOGROUP_HAS_INDEX_SELECTED : handler.take_radiogroup_action,
-            SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_VALUE : handler.take_radiogroup_action,
-            SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_INDEX : handler.take_radiogroup_action,
-            SetuActionType.GUIAUTO_RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE  : handler.take_radiogroup_action,
+            SetuActionType.GUIAUTO_RADIOGROUP_HAS_VALUE_SELECTED: handler.take_radiogroup_action,
+            SetuActionType.GUIAUTO_RADIOGROUP_HAS_INDEX_SELECTED: handler.take_radiogroup_action,
+            SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_VALUE: handler.take_radiogroup_action,
+            SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_INDEX: handler.take_radiogroup_action,
+            SetuActionType.GUIAUTO_RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE : handler.take_radiogroup_action,
 
-            SetuActionType.GUIAUTO_DOMROOT_FOCUS : handler.take_domroot_action,
-            SetuActionType.GUIAUTO_DOMROOT_CREATE_FRAME : handler.take_domroot_action,
+            SetuActionType.GUIAUTO_DOMROOT_FOCUS: handler.take_domroot_action,
+            SetuActionType.GUIAUTO_DOMROOT_CREATE_FRAME: handler.take_domroot_action,
             
-            SetuActionType.GUIAUTO_FRAME_FOCUS : handler.take_frame_action,
-            SetuActionType.GUIAUTO_FRAME_CREATE_FRAME : handler.take_frame_action,
-            SetuActionType.GUIAUTO_FRAME_GET_PARENT : handler.take_frame_action,
+            SetuActionType.GUIAUTO_FRAME_FOCUS: handler.take_frame_action,
+            SetuActionType.GUIAUTO_FRAME_CREATE_FRAME: handler.take_frame_action,
+            SetuActionType.GUIAUTO_FRAME_GET_PARENT: handler.take_frame_action,
             
-            SetuActionType.GUIAUTO_WINDOW_FOCUS : handler.take_window_action,
-            SetuActionType.GUIAUTO_WINDOW_GET_TITLE : handler.take_window_action,
+            SetuActionType.GUIAUTO_WINDOW_FOCUS: handler.take_window_action,
+            SetuActionType.GUIAUTO_WINDOW_GET_TITLE: handler.take_window_action,
             
-            SetuActionType.GUIAUTO_MAIN_WINDOW_MAXIMIZE : handler.take_main_window_action,
-            SetuActionType.GUIAUTO_MAIN_WINDOW_CREATE_CHILD_WINDOW : handler.take_main_window_action,
-            SetuActionType.GUIAUTO_MAIN_WINDOW_GET_LATEST_CHILD_WINDOW : handler.take_main_window_action,
-            SetuActionType.GUIAUTO_MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS : handler.take_main_window_action,
+            SetuActionType.GUIAUTO_MAIN_WINDOW_MAXIMIZE: handler.take_main_window_action,
+            SetuActionType.GUIAUTO_MAIN_WINDOW_CREATE_CHILD_WINDOW: handler.take_main_window_action,
+            SetuActionType.GUIAUTO_MAIN_WINDOW_GET_LATEST_CHILD_WINDOW: handler.take_main_window_action,
+            SetuActionType.GUIAUTO_MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS: handler.take_main_window_action,
             
-            SetuActionType.GUIAUTO_CHILD_WINDOW_CLOSE : handler.take_child_window_action,
+            SetuActionType.GUIAUTO_CHILD_WINDOW_CLOSE: handler.take_child_window_action,
         }
 
         method = action_method_map[action_type]

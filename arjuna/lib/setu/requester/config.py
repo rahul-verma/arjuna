@@ -1,4 +1,7 @@
 from enum import Enum, auto
+from .connector import BaseSetuObject, SetuArg
+from arjuna.lib.setu.core.constants import SetuConfigOption
+
 
 class SetuActionType(Enum):
     TESTSESSION_INIT = auto()
@@ -36,10 +39,10 @@ class SetuActionType(Enum):
     GUIAUTO_GET_MAIN_WINDOW = auto()
     GUIAUTO_SET_SLOMO = auto()
 
-    GUIAUTO_WEB_ALERT_CONFIRM = auto()
-    GUIAUTO_WEB_ALERT_DISMISS = auto()
-    GUIAUTO_WEB_ALERT_GET_TEXT = auto()
-    GUIAUTO_WEB_ALERT_SEND_TEXT = auto()
+    GUIAUTO_ALERT_CONFIRM = auto()
+    GUIAUTO_ALERT_DISMISS = auto()
+    GUIAUTO_ALERT_GET_TEXT = auto()
+    GUIAUTO_ALERT_SEND_TEXT = auto()
 
     GUIAUTO_GUI_CREATE_GUI = auto()
 
@@ -58,7 +61,7 @@ class SetuActionType(Enum):
     GUIAUTO_DROPDOWN_HAS_INDEX_SELECTED = auto()
     GUIAUTO_DROPDOWN_SELECT_BY_VALUE = auto()
     GUIAUTO_DROPDOWN_SELECT_BY_INDEX = auto()
-    GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE  = auto()        
+    GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE  = auto()
     GUIAUTO_DROPDOWN_HAS_VISIBLE_TEXT_SELECTED = auto()
     GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_TEXT = auto()
     GUIAUTO_DROPDOWN_SELECT_BY_VISIBLE_TEXT = auto()
@@ -85,3 +88,46 @@ class SetuActionType(Enum):
     GUIAUTO_MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS = auto()
 
     GUIAUTO_CHILD_WINDOW_CLOSE = auto()
+
+
+class BaseConfig(BaseSetuObject):
+
+    def __init__(self, test_session, name, setu_id):
+        super().__init__()
+        self.__session = test_session
+        self.__name = name
+
+        self._set_setu_id(setu_id)
+        self._set_self_setu_id_arg("configSetuId")
+        self._set_test_session_setu_id_arg(self.__session.getSetuId())
+
+    def getTestSession(self):
+        return self.__session
+
+    def __fetch_config_option_value(self, setu_action_type, option_str):
+        response = self._send_request(setu_action_type, SetuArg.arg("option", option_str))
+        return response.getValue()
+
+    def __normalize_option_str(self, option_str):
+        return option_str.upper().strip().replace(".", "_")
+
+    def __normalize_setu_option_str(self, option_str):
+        return SetuConfigOption[self.__normalize_option_str(option_str)]
+
+    def getSetuOptionValue(self, option):
+        setu_option = option
+        if type(option) is str:
+            setu_option = self.__normalize_setu_option_str(option)
+        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_GET_SETU_OPTION_VALUE, setu_option.name)
+
+    def getUserOptionValue(self, option):
+        user_option = self.__normalize_option_str(option)
+        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_GET_USER_OPTION_VALUE, user_option)
+
+    def getName(self):
+        return self.__name
+
+
+
+
+
