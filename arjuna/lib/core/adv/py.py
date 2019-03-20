@@ -27,6 +27,7 @@ from functools import partial
 
 from weakref import WeakKeyDictionary
 
+
 class EnumSwitch:
     def __init__(self, cases, const_args):
         self.dispatch_dict = cases
@@ -37,6 +38,7 @@ class EnumSwitch:
             f_tuple = self.dispatch_dict[econst]
             arg_list = list(self.const_args) + list(f_tuple[1:])
             return f_tuple[0](*arg_list)
+
 
 
 class PropertyEnum(Enum):

@@ -47,6 +47,7 @@ class ArjunaCLI:
         subparsers = self.main_command.create_subparsers()
 
         # Create re-usable parses for command arguments
+        setu_parser = SetuParser()
         project_parser = ProjectParser()
         run_parser = RunParser()
         session_parser = SessionParser()
@@ -54,6 +55,7 @@ class ArjunaCLI:
         names_parser = NamesParser()
 
         # Create primary command handlers
+        self.launch_setu = LaunchSetu(subparsers, [setu_parser])
         self.create_project = CreateProject(subparsers, [project_parser])
         self.run_project = RunProject(subparsers, [project_parser, run_parser])
         self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
@@ -77,6 +79,7 @@ class ArjunaCLI:
 
         # Delegation dictionary for primary command description
         desc_cases = {
+            CommandEnum.LAUNCH_SETU: "Launching Setu",
             CommandEnum.CREATE_PROJECT: "Creating new project",
             CommandEnum.RUN_PROJECT: "Running the project",
             CommandEnum.RUN_SESSION: "Running the selected session",
@@ -93,6 +96,7 @@ class ArjunaCLI:
         # Delegation dictionary for primary command choices
         # Respective command object's 'execute' method is the handler.
         execute_cases = {
+            CommandEnum.LAUNCH_SETU: (self.launch_setu.execute,),
             CommandEnum.CREATE_PROJECT: (self.create_project.execute, ),
             CommandEnum.RUN_PROJECT: (self.run_project.execute, ),
             CommandEnum.RUN_SESSION: (self.run_session.execute, ),

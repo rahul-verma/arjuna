@@ -35,6 +35,18 @@ class Parser:
     def get_parser(self):
         return self.parser
 
+
+class SetuParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('-p', '--port', dest="setu_port", default=9000, type=port, help='Setu network port')
+
+    def process(self, arg_dict):
+        arg_dict['setu.port'] = arg_dict['setu_port']
+        del arg_dict['setu_port']
+
+
 class ProjectParser(Parser):
     def __init__(self):
         super().__init__()

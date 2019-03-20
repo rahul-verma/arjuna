@@ -27,3 +27,4 @@ class CommandEnum(Enum):
     RUN_SESSION = auto()
     RUN_GROUP = auto()
     RUN_NAMES = auto()
+    LAUNCH_SETU = auto()

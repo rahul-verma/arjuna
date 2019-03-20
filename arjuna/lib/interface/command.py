@@ -169,6 +169,21 @@ class MainCommand(Command):
         # This is the first stage at which integrator can enumerate properties
         # integrator.enumerate()
 
+
+class LaunchSetu(Command):
+    def __init__(self, subparsers, parents):
+        super().__init__()
+        self.parents = parents
+        parser = subparsers.add_parser('launch-setu', parents=[parent.get_parser() for parent in parents], help="Launch Setu")
+        self._set_parser(parser)
+
+    def execute(self, arg_dict):
+        for parent in self.parents:
+            parent.process(arg_dict)
+        from arjuna.lib.setu.service import launch_setu
+        launch_setu((arg_dict["setu.port"]))
+
+
 class CreateProject(Command):
 
     def __init__(self, subparsers, parents):

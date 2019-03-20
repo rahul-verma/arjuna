@@ -38,3 +38,10 @@ def lname_check(context, input):
         print('Exiting...', file=sys.stderr)
         sys.exit(1)
     return input
+
+
+def port(input):
+    if type(input) is not str or input < 1024:
+        print('Invalid Setu port {} provided. It should be an int such that 1024 < port < 65535')
+        sys.exit(1)
+    return input

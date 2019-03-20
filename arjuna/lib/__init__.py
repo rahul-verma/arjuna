@@ -33,10 +33,13 @@ class __arfacade():
         print(reader.read().format(version=self.__version))
         reader.close()
 
+        print("Parsing CLI Options...")
         cli = ArjunaCLI(raw_args)
         # Initialize the Arjuna Core as per CLI options
+        print("Intializing Arjuna...")
         cli.init()
 
+        print("Executing Arjuna Command...")
         cli.execute()
 
 Arjuna = __arfacade()

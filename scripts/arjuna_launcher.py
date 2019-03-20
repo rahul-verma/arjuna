@@ -5,7 +5,7 @@ import time
 def join_paths(*paths):
     return os.path.abspath(os.path.join(*paths))
 
-root_dir = os.path.dirname(os.path.realpath(__file__))
+root_dir = join_paths(os.path.dirname(os.path.realpath(__file__)), "..")
 importables_dir = join_paths(root_dir, "third_party")
 
 sys.path.insert(0, importables_dir)
