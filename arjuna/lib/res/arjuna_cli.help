@@ -1,3 +1,8 @@
+# This is old. However instead of default help, there should be a way to
+# trigger something similar.
+# One possibility is to create a JSON file with different layers of help.
+# then build interactive help around that. TO DO!!!!!
+
 ---------------------------------------------------------------------------------------------------
 Command Line Interface
 
