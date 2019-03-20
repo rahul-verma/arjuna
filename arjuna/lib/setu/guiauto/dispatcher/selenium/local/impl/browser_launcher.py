@@ -24,7 +24,6 @@ class BrowserLauncher:
 
     @classmethod
     def _create_chrome(cls, config, driver_path, browser_bin_path):
-        print(config)
         from selenium.webdriver import Chrome, ChromeOptions
 
         caps = DesiredCapabilities.CHROME
@@ -57,9 +56,9 @@ class BrowserLauncher:
                 options.add_extension(ext)
 
         caps[ChromeOptions.KEY] = options.to_capabilities()[ChromeOptions.KEY]
-        print(caps)
         return Chrome(executable_path=driver_path, desired_capabilities=caps, 
-        service_args=["--verbose", "--log-path=/Users/rahulverma/Documents/____drivers/cd.log"])
+            #service_args=["--verbose", "--log-path=/Users/rahulverma/Documents/____drivers/cd.log"]
+        )
 
     @classmethod
     def _create_firefox(cls, config, driver_path, browser_bin_path):

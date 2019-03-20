@@ -122,7 +122,7 @@ class DriverCapabilities:
             self.__out_dict["browserExtensions"].extend(dict_from_requester["browserExtensions"])
 
     def __process_for_selenium(self, in_dict):
-        self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = self._config.setu_config.value(SetuConfigOption.BROWSER_NAME).name
+        self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = self._config.setu_config.value(SetuConfigOption.BROWSER_NAME).name.lower()
         if self._config.setu_config.value(SetuConfigOption.BROWSER_VERSION) != "not_set":
             self.__out_dict["driverCapabilities"][self.BROWSER_VERSION] = self._config.setu_config.value(SetuConfigOption.BROWSER_VERSION)
 
