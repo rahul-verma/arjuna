@@ -1,6 +1,6 @@
 from arjuna.lib.setu.core.lib.setu_types import SetuManagedObject
 from arjuna.lib.setu.guiauto.lib.element.guielement import GuiElement
-from arjuna.lib.setu.core.constants import SetuConfigOption
+from arjuna.tpi.enums import ArjunaOption
 
 class WebAlert(SetuManagedObject):
 

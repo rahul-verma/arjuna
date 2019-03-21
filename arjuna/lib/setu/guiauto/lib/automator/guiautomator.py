@@ -2,7 +2,7 @@ import base64
 import os
 import time
 
-from arjuna.lib.setu.core.constants import SetuConfigOption
+from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.setu.guiauto.lib.base.element_container import ElementContainer
 from .drivercaps import DriverCapabilities
 
@@ -14,8 +14,8 @@ class GuiAutomator(ElementContainer):
         self.__automator_uri = "/guiauto/automator/{}".format(self.get_setu_id())
         self.__create_screenshots_dir()
         self.__main_window = None
-        self.__in_slomo = config.setu_config.value(SetuConfigOption.GUIAUTO_SLOMO_ON)
-        self.__slomo_interval = config.setu_config.value(SetuConfigOption.GUIAUTO_SLOMO_INTERVAL)
+        self.__in_slomo = config.setu_config.value(ArjunaOption.GUIAUTO_SLOMO_ON)
+        self.__slomo_interval = config.setu_config.value(ArjunaOption.GUIAUTO_SLOMO_INTERVAL)
 
         from .webalert_handler import WebAlertHandler
         from .automator_conditions import GuiAutomatorConditions
@@ -66,7 +66,7 @@ class GuiAutomator(ElementContainer):
         return self.__conditions_handler
 
     def __create_screenshots_dir(self):
-        sdir = self.config.setu_config.value(SetuConfigOption.SCREENSHOTS_DIR)
+        sdir = self.config.setu_config.value(ArjunaOption.SCREENSHOTS_DIR)
         if not os.path.isdir(sdir):
             os.makedirs(sdir)
 
@@ -90,7 +90,7 @@ class GuiAutomator(ElementContainer):
 
     def __screenshot(self):
         switch_view_context = None
-        if self.config.value(SetuConfigOption.TESTRUN_TARGET_PLATFORM).lower() == "android": 
+        if self.config.value(ArjunaOption.TESTRUN_TARGET_PLATFORM).lower() == "android": 
             view_name = self.view_handler.get_current_view_context()   
             if self.view_handler._does_name_represent_web_view(view_name) :
                 self.view_handler.switch_to_native_view() 
@@ -106,7 +106,7 @@ class GuiAutomator(ElementContainer):
     def take_screenshot(self):
         response = self.__screenshot()
         image = base64.b64decode(response["data"]["codedImage"])
-        path = os.path.join(self.config.value(SetuConfigOption.SCREENSHOTS_DIR), "{}.png".format(str(time.time()).replace(".","-")))
+        path = os.path.join(self.config.value(ArjunaOption.SCREENSHOTS_DIR), "{}.png".format(str(time.time()).replace(".","-")))
         f = open(path, "wb")
         f.write(image)
         f.close()

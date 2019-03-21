@@ -1,5 +1,5 @@
 import inspect
-from arjuna.lib.setu.core.constants import SetuConfigOption
+from arjuna.tpi.enums import ArjunaOption
 from .driverelement import SeleniumDriverElement
 
 class SeleniumDriver:
@@ -35,7 +35,7 @@ class SeleniumDriver:
 
     def launch(self, config):
         self.post_other("/automator/launch", 
-        automatorName=config["setuOptions"][SetuConfigOption.GUIAUTO_AUTOMATOR_NAME.name], 
+        automatorName=config["setuOptions"][ArjunaOption.GUIAUTO_AUTOMATOR_NAME.name], 
         config=config)
 
     def quit(self):

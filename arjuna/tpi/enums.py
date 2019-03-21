@@ -1,6 +1,6 @@
 from enum import Enum, auto
 
-class SetuConfigOption(Enum):
+class ArjunaOption(Enum):
     ROOT_DIR = auto()
     LOG_DIR = auto()
     DATA_DIR = auto()
@@ -68,7 +68,7 @@ class GuiAutomationContext(Enum):
 	ANDROID_NATIVE = auto()
 	IOS_NATIVE = auto()
 
-class Browser(Enum):
+class BrowserName(Enum):
     FIREFOX = auto()
     SAFARI = auto()
     CHROME = auto()

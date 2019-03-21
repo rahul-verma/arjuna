@@ -2,7 +2,7 @@ import inspect
 import os
 import copy
 from urllib3.util import parse_url
-from arjuna.lib.setu.core.constants import *
+from arjuna.tpi.enums import *
 
 class ConfigValidator:
 
@@ -78,7 +78,7 @@ class ConfigValidator:
     @classmethod
     def browser_name(cls, input):
         try:
-            return Browser[input.upper()]
+            return BrowserName[input.upper()]
         except:
             cls.raise_exc(input)
 

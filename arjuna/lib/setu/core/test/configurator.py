@@ -1,6 +1,6 @@
 import json
 from arjuna.lib.setu.core.config.processor import ConfigCreator, CentralConfigLoader, ProjectConfigCreator
-from arjuna.lib.setu.core.constants import SetuConfigOption
+from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.trishanku.tpi.reader.hocon import HoconStringReader, HoconConfigDictReader
 
 class TestConfigurator:
@@ -28,12 +28,12 @@ class TestConfigurator:
         return self.__config_map[setu_id]
 
     def get_setu_option_value(self, config_setu_id, option):
-        sname = SetuConfigOption[option.upper().strip().replace(".","_")]
+        sname = ArjunaOption[option.upper().strip().replace(".","_")]
         rvalue = self.__config_map[config_setu_id].setu_config.value(sname)
         return rvalue
 
     def get_central_setu_option_value(self, option):
-        sname = SetuConfigOption[option.upper().strip().replace(".","_")]
+        sname = ArjunaOption[option.upper().strip().replace(".","_")]
         rvalue = self.__default_ref_config.setu_config.value(sname)
         return rvalue
 

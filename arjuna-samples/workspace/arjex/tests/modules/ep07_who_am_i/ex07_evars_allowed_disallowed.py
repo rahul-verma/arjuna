@@ -54,7 +54,7 @@ def test_disallowed_evar_in_body(my):
 
 '''
 Arjuna does a strict check on the values supplied in markup decorators.
-Uncommenting the following would cause Arjuna's exist.
+Uncommenting the following would cause Arjuna's exit.
 '''
 # @test_function(
 #     evars = evars(

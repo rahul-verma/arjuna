@@ -25,10 +25,12 @@ from arjuna.lib.unitee.engine.pool import TestObjectThreadPool
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.state.states import *
 from arjuna.lib.unitee.reporter.result.types import *
+from arjuna.lib.core.thread import decorators
 
 class TestFunc(TestObject):
 	def __init__(self, group, module, mslot, defn):
 		super().__init__(TestObjectTypeEnum.Function)
+		self.lock = threading.RLock()
 		self.group = group
 		self.rules = self.group.rules
 		self.module = module
@@ -46,6 +48,7 @@ class TestFunc(TestObject):
 	def load(self, base_tvars):
 		self._populate_tvars(base_tvars)
 
+	@decorators.sync_method('lock')
 	def next(self):
 		try:
 			if self.data_source is None:

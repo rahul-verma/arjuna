@@ -1,5 +1,40 @@
-from arjuna.lib.setu.requester.connector import BaseSetuObject, SetuArg
-from arjuna.lib.setu.requester.config import SetuActionType
+from arjuna.lib.setu.core.requester.connector import BaseSetuObject, SetuArg
+from arjuna.lib.setu.core.requester.config import SetuActionType
+
+
+class GuiAutoComponentFactory:
+
+    @staticmethod
+    def Element(session, automator, setuId):
+        return DefaultGuiElement(session, automator, setuId)
+
+    @staticmethod
+    def MultiElement(session, automator, setuId):
+        return DefaultGuiMultiElement(session, automator, setuId)
+
+    @staticmethod
+    def DropDown(session, automator, setuId):
+        return DefaultDropDown(session, automator, setuId)
+
+    @staticmethod
+    def RadioGroup(session, automator, setuId):
+        return DefaultRadioGroup(session, automator, setuId)
+
+    @staticmethod
+    def Alert(session, automator, setuId):
+        return DefaultAlert(session, automator, setuId)
+
+    @staticmethod
+    def MainWindow(session, automator, setuId):
+        return DefaultMainWindow(session, automator, setuId)
+
+    @staticmethod
+    def DomRoot(session, automator):
+        return DefaultDomRoot(session, automator)
+
+    @staticmethod
+    def Browser(session, automator):
+        return DefaultBrowser(session, automator)
 
 
 class BaseComponent(BaseSetuObject):
@@ -67,7 +102,7 @@ class DefaultGuiMultiElement(BaseElement):
         super().__init__(test_session, app_automator, setu_id)
 
     def getInstanceAtIndex(self, index):
-        return DefaultGuiElement(self._get_test_session(), self._get_automator(), self.getSetuId(), index)
+        return GuiAutoComponentFactory.GuiElement(self._get_test_session(), self._get_automator(), self.getSetuId(), index)
 
 
 class DefaultDropDown(BaseElement):
@@ -164,3 +199,89 @@ class DefaultBrowser(BaseElement):
 
     def refresh(self):
         self._send_request(SetuActionType.GUIAUTO_BROWSER_REFRESH)
+
+
+class DefaultFrame(BaseElement):
+
+    def __init__(self, test_session, app_automator, setu_id):
+        super().__init__(test_session, app_automator, setu_id)
+        self._set_self_setu_id_arg("elementSetuId")
+
+    def focus(self):
+        self._send_request(SetuActionType.GUIAUTO_FRAME_FOCUS)
+
+    def frame(self, *withLocators):
+        arg = [l.asMap() for l in withLocators]
+        response = self._send_request(SetuActionType.GUIAUTO_FRAME_CREATE_FRAME, SetuArg.arg("locators", arg))
+        return GuiAutoComponentFactory.Frame(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+
+    def parent(self):
+        response = self._send_request(SetuActionType.GUIAUTO_FRAME_GET_PARENT)
+        return GuiAutoComponentFactory.Frame(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+
+
+class DefaultDomRoot(BaseComponent):
+
+    def __init__(self, test_session, app_automator):
+        super().__init__(test_session, app_automator)
+
+    def focus(self):
+        self._send_request(SetuActionType.GUIAUTO_DOMROOT_FOCUS)
+
+    def frame(self, *locators):
+        arg = [l.asMap() for l in locators]
+        response = self._send_request(SetuActionType.GUIAUTO_DOMROOT_CREATE_FRAME, SetuArg.arg("locators", arg))
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+
+    def parent(self):
+        raise Exception("DOM root does not have a parent frame.")
+
+
+class AbstractBasicWindow(BaseElement):
+
+    def __init__(self, test_session, app_automator, setu_id):
+        super().__init__(test_session, app_automator, setu_id)
+
+    def getTitle(self):
+        response = self._send_request(SetuActionType.GUIAUTO_WINDOW_GET_TITLE)
+        return response.getValueForKey("title").asString()
+
+    def focus(self):
+        self._send_request(SetuActionType.GUIAUTO_WINDOW_FOCUS)
+
+
+class DefaultChildWindow(AbstractBasicWindow):
+
+    def __init__(self, test_session, app_automator, setu_id):
+        super().__init__(test_session, app_automator, setu_id)
+
+    def close(self):
+        self._send_request(SetuActionType.GUIAUTO_CHILD_WINDOW_CLOSE)
+
+    def mainWindow(self):
+        return self.getAutomator().mainWindow()
+
+
+class DefaultMainWindow(AbstractBasicWindow):
+
+    def __init__(self, test_session, app_automator, setu_id):
+        super().__init__(test_session, app_automator, setu_id)
+
+    def maximize(self):
+        self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_MAXIMIZE)
+
+    def _take_element_finding_action(self, setu_action_type, *setu_args):
+        response = self._send_request(setu_action_type, *setu_args)
+        return response.getValueForElementSetuId()
+
+    def childWindow(self, *withLocators):
+        arg = [l.asMap() for l in withLocators]
+        response = self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_CREATE_CHILD_WINDOW, SetuArg.arg("locators", arg))
+        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+
+    def latestChildWindow(self):
+        response = self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_GET_LATEST_CHILD_WINDOW)
+        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+
+    def closeAllChildWindows(self):
+        self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS)

@@ -1,7 +1,7 @@
 import platform
 import os
 from enum import Enum
-from arjuna.lib.setu.core.constants import *
+from arjuna.tpi.enums import *
 
 from arjuna.lib.setu.core.lib.setu_types import SetuManagedObject
 
@@ -54,27 +54,27 @@ class Config(SetuManagedObject):
             return name
 
     def __get_driver_path(self, name):
-        return os.path.join(self.setu_config.value(SetuConfigOption.SELENIUM_DRIVERS_DIR), self.__modify_bin_name_for_windows(name))
+        return os.path.join(self.setu_config.value(ArjunaOption.SELENIUM_DRIVERS_DIR), self.__modify_bin_name_for_windows(name))
 
     def process_setu_options(self):
         for_browser = {
-            Browser.CHROME : {
-                SetuConfigOption.SELENIUM_DRIVER_PROP : "webdriver.chrome.driver",
-                SetuConfigOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("chromedriver")
+            BrowserName.CHROME : {
+                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.chrome.driver",
+                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("chromedriver")
             },
 
-            Browser.FIREFOX : {
-                SetuConfigOption.SELENIUM_DRIVER_PROP : "webdriver.gecko.driver",
-                SetuConfigOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("geckodriver")
+            BrowserName.FIREFOX : {
+                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.gecko.driver",
+                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("geckodriver")
             },
 
-            Browser.SAFARI : {
-                SetuConfigOption.SELENIUM_DRIVER_PROP : "webdriver.safari.driver",
-                SetuConfigOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("safaridriver")
+            BrowserName.SAFARI : {
+                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.safari.driver",
+                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("safaridriver")
             }
         }
 
-        browser = self.setu_config.value(SetuConfigOption.BROWSER_NAME)
+        browser = self.setu_config.value(ArjunaOption.BROWSER_NAME)
         for opt, opt_value in for_browser[browser].items():
             self.setu_config._config_dict[opt] = opt_value
 
@@ -116,7 +116,7 @@ class AbstractConfig:
         return {k:self.__as_enum_name_or_same(v) for k,v in self.as_map().items()}
 
     def get_guiauto_context(self):
-        return GuiAutomationContext[self.value(SetuConfigOption.GUIAUTO_CONTEXT).upper()]
+        return GuiAutomationContext[self.value(ArjunaOption.GUIAUTO_CONTEXT).upper()]
 
     def has_desktop_context(self):
         return self.get_guiauto_context() in Config.DESKTOP_CONTEXTS
@@ -141,8 +141,8 @@ class SetuConfig(AbstractConfig):
         super().__init__(config_dict)
 
     def _validate_key(self, key):
-        if not isinstance(key, SetuConfigOption):
-            raise Exception("Key must be an enum consts of type SetuConfigOption")
+        if not isinstance(key, ArjunaOption):
+            raise Exception("Key must be an enum consts of type ArjunaOption")
 
     def as_json_dict(self):
         out = {k.name: v for k,v in super().as_json_dict().items()}

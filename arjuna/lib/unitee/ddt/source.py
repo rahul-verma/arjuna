@@ -31,7 +31,9 @@ from arjuna.lib.unitee.ddt.record import *
 from arjuna.lib.unitee.exceptions import *
 from arjuna.lib.core.utils import sys_utils
 
+
 class DataSource(metaclass=abc.ABCMeta):
+
     def __init__(self):
         self.lock = threading.RLock()
         self.name = None

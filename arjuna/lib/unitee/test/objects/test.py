@@ -44,12 +44,18 @@ class Test(TestObject):
 	def _populate_tvars(self, base_tvars):
 		self.tvars = base_tvars
 		self.tvars.info.test_num = self.num
+		self.tvars.info.object_type = TestObjectTypeEnum.Test.name
+		# print("while setting", self.num, self.tvars.data.record)
 
 	def _execute(self):
 
 		Unitee.state_mgr.get_current_thread_state().begin_recording(ExecutionContext.Test)
 		try:
-			self.func_obj(self.tvars.create_utvars())
+			utvars = self.tvars.create_utvars()
+			# print(self.func_obj)
+			self.func_obj(utvars)
+			# print("source", self.num, self.tvars.data.record)
+			# print("dest", self.num, utvars.data.record)
 		except StepResultEvent as e:
 			pass
 			# Step addition would have happended as a result of step.evaluate()

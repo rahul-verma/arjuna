@@ -1,13 +1,13 @@
 import uuid
 from arjuna.lib.setu.guiauto.lib.gui.namestore import GuiNameStore
 from arjuna.lib.setu.guiauto.lib.gui.gui import Gui
-from arjuna.lib.setu.core.constants import SetuConfigOption
+from arjuna.tpi.enums import ArjunaOption
 
 class GuiHandlerManager:
 
     def __init__(self, project_config):
         self.__name_store = GuiNameStore()
-        self.__namespace_dir = project_config.setu_config.value(SetuConfigOption.GUIAUTO_NAMESPACE_DIR)
+        self.__namespace_dir = project_config.setu_config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
         self.__gui_map = {}
 
     def create_gui(self, automator_handler, json_dict):

@@ -29,7 +29,7 @@ which is way more advanced than the examples shown.
 
 @test_function
 def passing_test(my):
-    assert 1==1
+    pass
 
 @test_function
 def failing_test(my):

@@ -1,6 +1,7 @@
 from enum import Enum, auto
 from .connector import BaseSetuObject, SetuArg
-from arjuna.lib.setu.core.constants import SetuConfigOption
+from arjuna.tpi.enums import *
+from arjuna.lib.core.value import AnyRefValue
 
 
 class SetuActionType(Enum):
@@ -90,7 +91,7 @@ class SetuActionType(Enum):
     GUIAUTO_CHILD_WINDOW_CLOSE = auto()
 
 
-class BaseConfig(BaseSetuObject):
+class DefaultTestConfig(BaseSetuObject):
 
     def __init__(self, test_session, name, setu_id):
         super().__init__()
@@ -106,15 +107,15 @@ class BaseConfig(BaseSetuObject):
 
     def __fetch_config_option_value(self, setu_action_type, option_str):
         response = self._send_request(setu_action_type, SetuArg.arg("option", option_str))
-        return response.getValue()
+        return AnyRefValue(response.getValue())
 
     def __normalize_option_str(self, option_str):
         return option_str.upper().strip().replace(".", "_")
 
     def __normalize_setu_option_str(self, option_str):
-        return SetuConfigOption[self.__normalize_option_str(option_str)]
+        return ArjunaOption[self.__normalize_option_str(option_str)]
 
-    def getSetuOptionValue(self, option):
+    def getArjunaOptionValue(self, option):
         setu_option = option
         if type(option) is str:
             setu_option = self.__normalize_setu_option_str(option)
@@ -126,6 +127,31 @@ class BaseConfig(BaseSetuObject):
 
     def getName(self):
         return self.__name
+
+    def getGuiAutoContext(self):
+        return self.getSetuOptionValue(ArjunaOption.GUIAUTO_CONTEXT).asEnum(GuiAutomationContext)
+
+    def getBrowserType(self):
+        return self.getSetuOptionValue(ArjunaOption.BROWSER_NAME).asEnum(BrowserName)
+
+    def getBrowerVersion(self):
+        return self.getSetuOptionValue(ArjunaOption.BROWSER_VERSION).asString()
+
+    def getBrowserBinaryPath(self):
+        return self.getSetuOptionValue(ArjunaOption.BROWSER_BIN_PATH).asString()
+
+    def getTestRunEnvName(self):
+        return self.getSetuOptionValue(ArjunaOption.TESTRUN_ENVIRONMENT).asString()
+
+    def getScreenshotsDir(self):
+        return self.getSetuOptionValue(ArjunaOption.SCREENSHOTS_DIR).asString()
+
+    def getLogDir(self):
+        return self.getSetuOptionValue(ArjunaOption.LOG_DIR).asString()
+
+    def getGuiAutoMaxWaitTime(self):
+        return self.getSetuOptionValue(ArjunaOption.GUIAUTO_MAX_WAIT).asInt()
+
 
 
 

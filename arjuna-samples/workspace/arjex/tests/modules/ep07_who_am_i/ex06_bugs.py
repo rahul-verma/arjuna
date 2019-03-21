@@ -32,8 +32,8 @@ def configure_bugs(my):
 @test_function(
     bugs=bugs('B1', 'B2')
 )
-def demo_immutable_tags(my):
+def demo_immutable_bugs(my):
     console.display(my.bugs)
-    # This would throw an exception as tags are not mutable within the body of methods just like props.
-    # Tags are stored as a Frozen Set
+    # This would throw an exception as bugs set is not mutable within the body of methods just like props.
+    # Bug names are stored as a Frozen Set
     my.bugs['runtime_tag'] = "B123"

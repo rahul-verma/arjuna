@@ -19,3 +19,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+
+class Arjuna:
+    DEF_CONF_NAME = "central"
+    ROOT_DIR = None
+    SESSION = None
+    CENTRAL_CONFIG = None
+    TEST_CONTEXT_CONFIG_MAP = {}
+
+    @classmethod
+    def init(cls, root_dir):
+        cls.ROOT_DIR = root_dir
+

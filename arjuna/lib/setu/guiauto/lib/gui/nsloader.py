@@ -3,7 +3,7 @@ import os
 
 from enum import Enum, auto
 
-from arjuna.lib.setu.core.constants import GuiAutomationContext
+from arjuna.tpi.enums import GuiAutomationContext
 from arjuna.lib.setu.guiauto.lib.locator.emd import GuiElementMetaData, Locator
 
 class FileFormat(Enum):

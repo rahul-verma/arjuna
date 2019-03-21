@@ -1,6 +1,6 @@
 from arjuna.lib.setu.core.test.testsession import TestSession
 from arjuna.lib.setu.guiauto.adapter.automator import GuiAutomatorHandler
-from arjuna.lib.setu.core.constants import SetuConfigOption
+from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.setu.core.dispatcher.testsession import TestSessionDispatcher
 from arjuna.lib.setu.guiauto.adapter.gui import GuiHandlerManager
 
@@ -93,7 +93,7 @@ class TestSessionHandler:
     def create_file_data_source(self, json_dict):
         file_name = self.__return_and_remove_arg(json_dict, 'fileName')
         record_type = self.__return_and_remove_arg(json_dict, 'recordType')
-        data_dir = self.__testsession.configurator.get_central_setu_option_value(SetuConfigOption.DATA_SOURCES_DIR.name)
+        data_dir = self.__testsession.configurator.get_central_setu_option_value(ArjunaOption.DATA_SOURCES_DIR.name)
         return {"dataSourceSetuId" : self.__testsession.data_broker.create_file_data_source(data_dir, file_name, record_type, **json_dict)}  
 
     def create_gui(self, json_dict):

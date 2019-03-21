@@ -2,7 +2,7 @@ import os
 import copy
 from arjuna.lib.trishanku.tpi.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
 
-from arjuna.lib.setu.core.constants import SetuConfigOption
+from arjuna.tpi.enums import ArjunaOption
 from .validator import ConfigValidator
 from .config import Config, SetuConfig, UserConfig
 from pprint import pprint
@@ -27,9 +27,9 @@ class ConfigCreator:
     @classmethod
     def __setu_conf_key(cls, key):
         try:
-            return SetuConfigOption[key]
+            return ArjunaOption[key]
         except Exception:
-            raise Exception("Config option [{}] is not a valid SetuConfigOption constant".format(key))
+            raise Exception("Config option [{}] is not a valid ArjunaOption constant".format(key))
 
     @classmethod
     def __get_flat_map_from_hocon_string(cls, hreader):
@@ -161,7 +161,7 @@ class ProjectConfigCreator(BaseConfigProcessor):
 
     def __process(self):
         # Process project conf
-        project_conf_file = self.__central_conf.setu_config.value(SetuConfigOption.PROJECT_CONF_FILE)
+        project_conf_file = self.__central_conf.setu_config.value(ArjunaOption.PROJECT_CONF_FILE)
         project_hreader = HoconFileReader(project_conf_file)
         project_hreader.process()
         cdict = project_hreader.get_map()

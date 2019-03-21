@@ -2,7 +2,7 @@ from flask import request
 from flask_restful import Resource
 from .objmgr import SetuSvcObjectManager
 from .testsession_handler import TestSessionHandler
-from arjuna.lib.setu.requester.config import SetuActionType
+from arjuna.lib.setu.core.requester.config import SetuActionType
 
 
 class SetuSvc(Resource):

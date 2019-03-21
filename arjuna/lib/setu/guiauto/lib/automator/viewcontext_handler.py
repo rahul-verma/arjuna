@@ -1,4 +1,4 @@
-from arjuna.lib.setu.core.constants import SetuConfigOption
+from arjuna.tpi.enums import ArjunaOption
 
 from .guiautomator import GuiAutomator
 from .handler import Handler

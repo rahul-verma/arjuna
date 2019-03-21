@@ -65,7 +65,7 @@ def asserting_floating_numbers_correct_way(my):
     # my.steps.assert_almost_equal("Consider custom rounding.", 0.35, 0.46, max_offset=0.1)
 
     # However, choosing rounding ad ROUND_UP would pass this assertion.
-    # So, choose rounding strageies as needed. Default would work most of the times for you.
+    # So, choose rounding strategies as needed. Default would work most of the times for you.
     import decimal
     my.steps.assert_almost_equal("Consider custom rounding.", 0.35, 0.46, max_offset=0.1, rounded_as=decimal.ROUND_UP)
 
@@ -74,12 +74,12 @@ def asserting_floating_numbers_correct_way(my):
     #my.steps.assert_almost_equal(">4 precision offset", 0.33332, 1/3, max_offset=0.00001)
 
     # To achieve this, pass the number in a string format.
-    my.steps.assert_almost_equal(">4 precision offset", 0.33332, 1/3, max_offset="0.00001")
+    my.steps.assert_almost_equal(">4 precision offset", 0.33332, 0.33333, max_offset="0.00001")
 
     # This gives you the power for much more precision
     my.steps.assert_almost_equal(
-        "60 precision offset",
-        0.333333333333333333333333333333333333333333333333333333333333,
-        1/3,
-        max_offset="0.000000000000000000000000000000000000000000000000000000000001"
+        "16 precision offset",
+        0.3333333333333333,
+        0.3333333333333335,
+        max_offset="0.0000000000000001"
     )
