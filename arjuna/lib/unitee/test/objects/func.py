@@ -28,8 +28,10 @@ from arjuna.lib.unitee.reporter.result.types import *
 from arjuna.lib.core.thread import decorators
 
 class TestFunc(TestObject):
+
 	def __init__(self, group, module, mslot, defn):
 		super().__init__(TestObjectTypeEnum.Function)
+		import threading
 		self.lock = threading.RLock()
 		self.group = group
 		self.rules = self.group.rules
@@ -50,6 +52,7 @@ class TestFunc(TestObject):
 
 	@decorators.sync_method('lock')
 	def next(self):
+		import threading
 		try:
 			if self.data_source is None:
 				self.data_source = self.defn.data_source

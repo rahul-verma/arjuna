@@ -261,7 +261,7 @@ class TestVars:
         nvars.evars = SingleObjectVars({i:j for i,j in self.evars.items()})
         nvars.tags = TagSet(*{i for i in self.tags})
         nvars.bugs = TagSet(*{i for i in self.bugs})
-        nvars.data = self.data
+        nvars.data = Data()
         nvars.runtime = self.runtime.clone()
         return nvars
 
