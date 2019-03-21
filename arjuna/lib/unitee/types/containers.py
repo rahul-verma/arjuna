@@ -253,7 +253,7 @@ class TestVars:
         self.runtime = OnceOnlyKeyCIStringDict()
         self.tags = tags() # return frozen set
         self.bugs = tags()  # return frozen set
-        self.data = Data() #RODataRecord For .pos it should be a tuple, for .map immutable dict
+        self.data = None
 
     def clone(self):
         nvars = TestVars()
@@ -261,7 +261,7 @@ class TestVars:
         nvars.evars = SingleObjectVars({i:j for i,j in self.evars.items()})
         nvars.tags = TagSet(*{i for i in self.tags})
         nvars.bugs = TagSet(*{i for i in self.bugs})
-        nvars.data = Data()
+        nvars.data = Data() #RODataRecord For .pos it should be a tuple, for .map immutable dict
         nvars.runtime = self.runtime.clone()
         return nvars
 
