@@ -53,6 +53,7 @@ class evars:
     def __str__(self):
         return pprint.pformat(self.__dict)
 
+
 class MultiVars:
 
     def __init__(self, child_count, **kwargs):
@@ -77,6 +78,7 @@ class MultiVars:
 
     def __str__(self):
         return pprint.pformat(self.__svars)
+
 
 class TagSet:
 
@@ -105,8 +107,10 @@ class TagSet:
 tags = TagSet
 bugs = TagSet
 
+
 class DataRef:
     pass
+
 
 class DataRefs:
     def __init__(self, **kwargs):
@@ -131,6 +135,7 @@ class DataRefs:
 
     def __str__(self):
         return pprint.pformat(self._drefs, indent=4)
+
 
 class TestInfo:
     def __init__(self, meta):
@@ -158,11 +163,13 @@ class TestInfo:
         info.props = ROProxy(self.props.clone())
         return info
 
+
 class SessionInfo(TestInfo):
     def __init__(self):
         super().__init__(CIStringDict({
             "name": "-"
         }))
+
 
 class StageInfo(TestInfo):
     def __init__(self):
@@ -170,12 +177,14 @@ class StageInfo(TestInfo):
             "name": "-"
         }))
 
+
 class GroupInfo(TestInfo):
     def __init__(self):
         super().__init__(CIStringDict({
             "name": "-",
             "slot": "-"
         }))
+
 
 class ModuleInfo(TestInfo):
     def __init__(self):
@@ -185,6 +194,7 @@ class ModuleInfo(TestInfo):
             "qname": "-",
             "slot" : "-"
         }))
+
 
 class FunctionInfo(TestInfo):
     def __init__(self):
@@ -202,6 +212,7 @@ class FunctionInfo(TestInfo):
 #         else:
 #             self.indexed = None
 #             self.named = None
+
 
 class AllInfo:
 
@@ -236,14 +247,17 @@ class AllInfo:
         info.test_num = self.test_num
         return info
 
+
 class State:
 
     steps = Steps
+
 
 class Data:
 
     def __init__(self):
         self.record = None
+
 
 class TestVars:
 

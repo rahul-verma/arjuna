@@ -78,6 +78,7 @@ class CIStringDict:
     def is_empty(self):
         return len(self.__store) == 0
 
+
 class OnceOnlyKeyCIStringDict(CIStringDict):
 
     def __init__(self, d={}):
