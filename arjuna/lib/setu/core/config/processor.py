@@ -15,7 +15,7 @@ class ConfigCreator:
         if cls.SETU_CONF_DESC_MAP is not None:
             return
         my_dir = os.path.dirname(os.path.realpath(__file__))
-        setu_conf_desc_file = os.path.join(my_dir, "..", "res", "setu_config_desc.conf")  
+        setu_conf_desc_file = os.path.join(my_dir, "res", "arjuna_conf_desc.conf")
         cls.__process_setu_conf_desc(setu_conf_desc_file)  
 
     @classmethod
@@ -34,7 +34,7 @@ class ConfigCreator:
     @classmethod
     def __get_flat_map_from_hocon_string(cls, hreader):
         hreader.process()
-        return {i.upper().strip().replace(".","_"):j for i,j in hreader.get_flat_map().items()}
+        return {i.upper().strip().replace(".", "_"): j for i, j in hreader.get_flat_map().items()}
 
     @classmethod      
     def get_flat_map_from_hocon_string_for_setu_types(cls, hreader):
@@ -57,7 +57,7 @@ class ConfigCreator:
                     else:
                         out_map[conf_name] = validator(raw_value)
             except:
-                raise Exception("Config option value [{}](type:{}) for [{}] option did not pass the validation check: [{}]".format(
+                raise Exception("Config option value <{}>(type:{}) for <{}> option did not pass the validation check: [{}]".format(
                     raw_value, type(raw_value), conf_name, validator_name)
                 )
         return out_map
@@ -130,10 +130,10 @@ class BaseConfigProcessor:
 
 class CentralConfigLoader(BaseConfigProcessor):
 
-    def __init__(self, root_dir):
-        my_dir = os.path.dirname(os.path.realpath(__file__))
-        self.__setu_central_confg_file = os.path.join(my_dir, "..", "res", "setu_central.conf")
-        self.root_dir = root_dir
+    def __init__(self, project_root_dir):
+        self.__my_dir = os.path.dirname(os.path.realpath(__file__))
+        self.__setu_central_confg_file = os.path.join(self.__my_dir, "res", "arjuna.conf")
+        self.__project_root_dir = project_root_dir
         self.__process()
 
     def __process(self):
@@ -141,7 +141,9 @@ class CentralConfigLoader(BaseConfigProcessor):
         f = open(self.__setu_central_confg_file, "r")
         contents = f.read()
         f.close()
-        contents = contents.replace("<ROOT_DIR>", self.root_dir)
+        arjuna_root = os.path.abspath(os.path.join(self.__my_dir, "..", "..", "..", ".."))
+        contents = contents.replace("<ARJUNA_ROOT_DIR>", arjuna_root)
+        contents = contents.replace("<PROJECT_ROOT_DIR>", self.__project_root_dir)
         raw_config_map = ConfigCreator.get_flat_map_from_hocon_string_for_setu_types(
             HoconStringReader(contents)
         )
@@ -161,7 +163,7 @@ class ProjectConfigCreator(BaseConfigProcessor):
 
     def __process(self):
         # Process project conf
-        project_conf_file = self.__central_conf.setu_config.value(ArjunaOption.PROJECT_CONF_FILE)
+        project_conf_file = self.__central_conf.setu_config.value(ArjunaOption.SETU_PROJECT_CONF_FILE)
         project_hreader = HoconFileReader(project_conf_file)
         project_hreader.process()
         cdict = project_hreader.get_map()

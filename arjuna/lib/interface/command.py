@@ -164,11 +164,11 @@ class MainCommand(Command):
             sys_utils.fexit()
 
     def execute(self, arg_dict):
-        from arjuna.lib.core import init
-        init(arg_dict)
+        pass
+        # from arjuna.lib.core import init
+        # init(arg_dict)
         # This is the first stage at which integrator can enumerate properties
         # integrator.enumerate()
-
 
 class LaunchSetu(Command):
     def __init__(self, subparsers, parents):
@@ -248,6 +248,9 @@ class __RunCommand(Command):
     def execute(self, arg_dict):
         for parent in self.parents:
             parent.process(arg_dict)
+
+        from arjuna.tpi import Arjuna
+        Arjuna.init(arg_dict["project.root.dir"])
 
         from arjuna.lib.core import ArjunaCore
         integrator = ArjunaCore.integrator

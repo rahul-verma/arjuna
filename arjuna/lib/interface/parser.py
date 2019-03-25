@@ -20,6 +20,7 @@ limitations under the License.
 '''
 
 import sys
+import os
 import argparse
 from functools import partial
 
@@ -51,18 +52,18 @@ class ProjectParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-w', '--workspace-dir', dest="workspace_dir", type=str, help='Workspace Directory')
-        self.parser.add_argument('-p', '--project-name', dest="project_name", type=partial(lname_check, "Project"), help = 'Name of project (Alnum 3-30 length. Only lower case letters.).')
+        #self.parser.add_argument('-w', '--workspace-dir', dest="workspace_dir", type=str, help='Workspace Directory')
+        self.parser.add_argument('-p', '--project-root-dir', dest="project_root_dir", type=project_dir, help = 'Valid absolute Project root directory. Name of project (Alnum 3-30 length. Only lower case letters.).')
 
     def process(self, arg_dict):
-        arg_dict['workspace.dir'] = arg_dict['workspace_dir']
-        del arg_dict['workspace_dir']
-        if arg_dict['project_name'] is None:
-            print("Fatal Error in CLI processing. You must provide a valid project name using -p or --project-name switch", file=sys.stderr)
+        # arg_dict['workspace.dir'] = arg_dict['workspace_dir']
+        # del arg_dict['workspace_dir']
+        if arg_dict['project_root_dir'] is None:
+            print("Fatal Error in CLI processing. You must provide a valid project root directory using -p or --project-dir switch", file=sys.stderr)
             sys.exit(1)
-        arg_dict['project.name'] = arg_dict['project_name']
+        arg_dict['project.root.dir'] = arg_dict['project_root_dir']
 
-        del arg_dict['project_name']
+        del arg_dict['project_root_dir']
 
 class RunParser(Parser):
     def __init__(self):

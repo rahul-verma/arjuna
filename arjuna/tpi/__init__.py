@@ -19,15 +19,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna.lib.setu.testsession.requester import DefaultTestSession
 
 class Arjuna:
-    DEF_CONF_NAME = "central"
-    ROOT_DIR = None
-    SESSION = None
-    CENTRAL_CONFIG = None
-    TEST_CONTEXT_CONFIG_MAP = {}
+    __PROJECT_ROOT_DIR = None
+    __SESSION = None
+    __CENTRAL_CONFIG = None
+    __TEST_CONTEXT_CONFIG_MAP = {}
 
     @classmethod
-    def init(cls, root_dir):
-        cls.ROOT_DIR = root_dir
+    def init(cls, project_root_dir):
+        cls.__PROJECT_ROOT_DIR = project_root_dir
+        cls.__SESSION = DefaultTestSession()
+        cls.__CENTRAL_CONFIG = cls.__SESSION.init(project_root_dir)
+
+        return cls.__CENTRAL_CONFIG
 

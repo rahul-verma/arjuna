@@ -31,6 +31,22 @@ VNREGEX_TEXT = '''
 It must begin with a letter.
 '''
 
+import os
+
+def project_dir(input):
+    if not os.path.exists(input):
+        print('Project path does not exist: {}'.format(input))
+        print('Exiting...', file=sys.stderr)
+        sys.exit(1)
+    elif not os.path.isdir(input):
+        print('Project path is not a directory: {}'.format(input))
+        print('Exiting...', file=sys.stderr)
+        sys.exit(1)
+    else:
+        proj_name = os.path.basename(input)
+        lname_check("Project", proj_name)
+        return input
+
 def lname_check(context, input):
     if not re.match(VNREGEX, input):
         print('Invalid {} name provided.'.format(context), file=sys.stderr)

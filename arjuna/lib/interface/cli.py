@@ -65,7 +65,7 @@ class ArjunaCLI:
     def init(self):
         time.sleep(0.1)
         self.arg_dict = self.main_command.convert_to_dict(self._args)
-        self.main_command.execute(self.arg_dict)
+        #self.main_command.execute(self.arg_dict)
 
     def execute(self):
         command = self.arg_dict['command']

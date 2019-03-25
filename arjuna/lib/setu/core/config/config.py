@@ -54,27 +54,27 @@ class Config(SetuManagedObject):
             return name
 
     def __get_driver_path(self, name):
-        return os.path.join(self.setu_config.value(ArjunaOption.SELENIUM_DRIVERS_DIR), self.__modify_bin_name_for_windows(name))
+        return os.path.join(self.setu_config.value(ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVERS_DIR), self.__modify_bin_name_for_windows(name))
 
     def process_setu_options(self):
         for_browser = {
             BrowserName.CHROME : {
-                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.chrome.driver",
-                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("chromedriver")
+                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PROP : "webdriver.chrome.driver",
+                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PATH : self.__get_driver_path("chromedriver")
             },
 
             BrowserName.FIREFOX : {
-                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.gecko.driver",
-                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("geckodriver")
+                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PROP : "webdriver.gecko.driver",
+                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PATH : self.__get_driver_path("geckodriver")
             },
 
             BrowserName.SAFARI : {
-                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.safari.driver",
-                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("safaridriver")
+                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PROP : "webdriver.safari.driver",
+                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PATH : self.__get_driver_path("safaridriver")
             }
         }
 
-        browser = self.setu_config.value(ArjunaOption.BROWSER_NAME)
+        browser = self.setu_config.value(ArjunaOption.SETU_GUIAUTO_BROWSER_NAME)
         for opt, opt_value in for_browser[browser].items():
             self.setu_config._config_dict[opt] = opt_value
 

@@ -18,7 +18,7 @@ class SetuSvc(Resource):
             return {'result': 'error', 'emessage': 'Invalid Setu action: {}'.format(json_action), 'etrace': 'NA'}, 500
         else:
             if action_type == SetuActionType.TESTSESSION_INIT:
-                root_dir = json_dict["args"]["rootDir"]
+                root_dir = json_dict["args"]["projectRootDir"]
                 res = self.__register_test_session(root_dir)
                 print(res)
                 return {'result': 'success', 'responseData': res}, 200

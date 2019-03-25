@@ -17,7 +17,7 @@ class SetuActionType(Enum):
 
     TESTSESSION_CREATE_GUI = auto()
 
-    CONFIGURATOR_GET_SETU_OPTION_VALUE = auto()
+    CONFIGURATOR_get_arjuna_option_value = auto()
     CONFIGURATOR_GET_USER_OPTION_VALUE = auto()
 
     DATASOURCE_GET_NEXT_RECORD = auto()
@@ -100,9 +100,9 @@ class DefaultTestConfig(BaseSetuObject):
 
         self._set_setu_id(setu_id)
         self._set_self_setu_id_arg("configSetuId")
-        self._set_test_session_setu_id_arg(self.__session.getSetuId())
+        self._set_test_session_setu_id_arg(self.__session.get_setu_id())
 
-    def getTestSession(self):
+    def get_test_session(self):
         return self.__session
 
     def __fetch_config_option_value(self, setu_action_type, option_str):
@@ -115,42 +115,42 @@ class DefaultTestConfig(BaseSetuObject):
     def __normalize_setu_option_str(self, option_str):
         return ArjunaOption[self.__normalize_option_str(option_str)]
 
-    def getArjunaOptionValue(self, option):
+    def get_arjuna_option_value(self, option):
         setu_option = option
         if type(option) is str:
             setu_option = self.__normalize_setu_option_str(option)
-        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_GET_SETU_OPTION_VALUE, setu_option.name)
+        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_get_arjuna_option_value, setu_option.name)
 
-    def getUserOptionValue(self, option):
+    def get_user_option_value(self, option):
         user_option = self.__normalize_option_str(option)
         return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_GET_USER_OPTION_VALUE, user_option)
 
     def getName(self):
         return self.__name
 
-    def getGuiAutoContext(self):
-        return self.getSetuOptionValue(ArjunaOption.GUIAUTO_CONTEXT).asEnum(GuiAutomationContext)
+    def get_gui_auto_context(self):
+        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).asEnum(GuiAutomationContext)
 
-    def getBrowserType(self):
-        return self.getSetuOptionValue(ArjunaOption.BROWSER_NAME).asEnum(BrowserName)
+    def get_browser_type(self):
+        return self.get_arjuna_option_value(ArjunaOption.BROWSER_NAME).asEnum(BrowserName)
 
-    def getBrowerVersion(self):
-        return self.getSetuOptionValue(ArjunaOption.BROWSER_VERSION).asString()
+    def get_browser_version(self):
+        return self.get_arjuna_option_value(ArjunaOption.BROWSER_VERSION).asString()
 
-    def getBrowserBinaryPath(self):
-        return self.getSetuOptionValue(ArjunaOption.BROWSER_BIN_PATH).asString()
+    def get_browser_binary_path(self):
+        return self.get_arjuna_option_value(ArjunaOption.BROWSER_BIN_PATH).asString()
 
-    def getTestRunEnvName(self):
-        return self.getSetuOptionValue(ArjunaOption.TESTRUN_ENVIRONMENT).asString()
+    def get_test_run_env_name(self):
+        return self.get_arjuna_option_value(ArjunaOption.TESTRUN_ENVIRONMENT).asString()
 
-    def getScreenshotsDir(self):
-        return self.getSetuOptionValue(ArjunaOption.SCREENSHOTS_DIR).asString()
+    def get_screenshots_dir(self):
+        return self.get_arjuna_option_value(ArjunaOption.SCREENSHOTS_DIR).asString()
 
-    def getLogDir(self):
-        return self.getSetuOptionValue(ArjunaOption.LOG_DIR).asString()
+    def get_log_dir(self):
+        return self.get_arjuna_option_value(ArjunaOption.LOG_DIR).asString()
 
-    def getGuiAutoMaxWaitTime(self):
-        return self.getSetuOptionValue(ArjunaOption.GUIAUTO_MAX_WAIT).asInt()
+    def get_gui_auto_max_wait_time(self):
+        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_MAX_WAIT).asInt()
 
 
 
