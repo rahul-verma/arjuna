@@ -46,12 +46,11 @@ class TestSession(TestObject):
 		self.children = self.stages
 
 	def _populate_tvars(self):
-		from arjuna.lib.core import ArjunaCore
-		central_evars = ArjunaCore.config.clone_evars()
+		# central_evars = ArjunaCore.config.clone_evars()
 		self.tvars = TestVars()
 		self.tvars.info.session = SessionInfo()
 		self.tvars.info.session.meta['name'] = self.defn.name
-		self.tvars.evars.update(ArjunaCore.config.clone_evars())
+		# self.tvars.evars.update(ArjunaCore.config.clone_evars())
 		self.tvars.evars.update(self.defn.evars)
 
 	def _execute(self):

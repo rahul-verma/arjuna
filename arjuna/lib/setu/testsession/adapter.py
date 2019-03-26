@@ -1,4 +1,4 @@
-from arjuna.lib.setu.core.test.testsession import TestSession
+from arjuna.lib.setu.testsession.impl import TestSession
 from arjuna.lib.setu.guiauto.adapter.automator import GuiAutomatorHandler
 from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.setu.core.dispatcher.testsession import TestSessionDispatcher
@@ -178,8 +178,8 @@ class TestSessionConfHandler:
     def __init__(self, configurator):
         self.__configurator = configurator
 
-    def get_setu_option_value(self, configSetuId, option):
-        return {"value" : self.__configurator.get_setu_option_value(configSetuId, option)}
+    def get_arjuna_option_value(self, configSetuId, option):
+        return {"value": self.__configurator.get_arjuna_option_value(configSetuId, option)}
 
 class TestSessionDataBrokerHandler:
 

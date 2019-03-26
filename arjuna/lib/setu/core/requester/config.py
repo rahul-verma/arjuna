@@ -3,7 +3,6 @@ from .connector import BaseSetuObject, SetuArg
 from arjuna.tpi.enums import *
 from arjuna.lib.core.value import AnyRefValue
 
-
 class SetuActionType(Enum):
     TESTSESSION_INIT = auto()
     TESTSESSION_FINISH = auto()
@@ -17,7 +16,7 @@ class SetuActionType(Enum):
 
     TESTSESSION_CREATE_GUI = auto()
 
-    CONFIGURATOR_get_arjuna_option_value = auto()
+    CONFIGURATOR_GET_ARJUNA_OPTION_VALUE = auto()
     CONFIGURATOR_GET_USER_OPTION_VALUE = auto()
 
     DATASOURCE_GET_NEXT_RECORD = auto()
@@ -107,7 +106,7 @@ class DefaultTestConfig(BaseSetuObject):
 
     def __fetch_config_option_value(self, setu_action_type, option_str):
         response = self._send_request(setu_action_type, SetuArg.arg("option", option_str))
-        return AnyRefValue(response.getValue())
+        return AnyRefValue(response.get_value())
 
     def __normalize_option_str(self, option_str):
         return option_str.upper().strip().replace(".", "_")
@@ -119,7 +118,7 @@ class DefaultTestConfig(BaseSetuObject):
         setu_option = option
         if type(option) is str:
             setu_option = self.__normalize_setu_option_str(option)
-        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_get_arjuna_option_value, setu_option.name)
+        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_GET_ARJUNA_OPTION_VALUE, setu_option.name)
 
     def get_user_option_value(self, option):
         user_option = self.__normalize_option_str(option)

@@ -7,9 +7,16 @@ class DefaultTestSession(BaseSetuObject):
         super().__init__()
         self.__DEF_CONF_NAME = "central"
 
-    def init(self, project_root_dir):
+    def init(self, project_root_dir, runid=None):
         super().__init__()
-        response = self._send_request(SetuActionType.TESTSESSION_INIT, SetuArg.arg("projectRootDir", project_root_dir))
+        args = [SetuArg.arg("projectRootDir", project_root_dir)]
+        if runid:
+            args.append(SetuArg.arg("runId", runid))
+
+        response = self._send_request(
+            SetuActionType.TESTSESSION_INIT,
+            *args
+        )
         self._set_setu_id(response.get_value_for_testsession_setu_id())
         self._set_self_setu_id_arg("testSessionSetuId")
         config = DefaultTestConfig(self, self.__DEF_CONF_NAME, response.get_value_for_config_setu_id())

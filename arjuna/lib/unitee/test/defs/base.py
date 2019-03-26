@@ -19,9 +19,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna.tpi import Arjuna
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.core.types.descriptors import *
-
 class TestSourceDef:
     def __init__(self):
         self.pkg = None
@@ -44,10 +44,9 @@ class TestSourceDef:
 
         self.consumed = False
 
-        from arjuna.lib.core import ArjunaCore
-        self.console = ArjunaCore.console
-        self.logger = ArjunaCore.get_logger()
-        self.central_config = ArjunaCore.config
+        self.console = Arjuna.get_console()
+        self.logger = Arjuna.get_logger()
+        self.central_config = Arjuna.get_central_config()
 
     @property
     def tvars(self):

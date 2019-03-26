@@ -19,6 +19,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna.tpi import Arjuna
 from arjuna.lib.core.reader.hocon import *
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.unitee.types.root import *
@@ -33,9 +34,7 @@ class GroupDef(Root):
 
     def __init__(self, sdef, stage_def, id, group_xml_from_session):
         super().__init__()
-        from arjuna.lib.unitee import Unitee as unitee
-        global Unitee
-        Unitee = unitee
+        self.unitee = Arjuna.get_unitee_instance()
         self.sdef = sdef
         self.stage_def = stage_def
         self.id = id
@@ -73,11 +72,11 @@ class GroupDef(Root):
             display_err_and_exit(
                 ">>name<< attribute in group definition can not be empty.")
 
-        if self.name not in Unitee.groups:
+        if self.name not in self.unitee.groups:
             display_err_and_exit(
                 ">>name<< attribute in group definition is pointing to a non-existing group '{}'.".format(self.name))
         else:
-            self.__gconf = Unitee.groups[self.name]
+            self.__gconf = self.unitee.groups[self.name]
 
         threads_err_msg = ">>threads<< attribute in stage definition can be integer >=1."
         if "threads" in group_attrs:
@@ -102,13 +101,13 @@ class GroupDef(Root):
                 display_err_and_exit("Unexpected element >>{}<< found in >>group<< definition in session file.".format(child.tag))
 
     def pick(self):
-        mnames = Unitee.testdb.get_mnames()
+        mnames = self.unitee.testdb.get_mnames()
 
         # Pick what you can
         group_tfunc_count = 0
         for mname in mnames:
             if self.picker.include_module(mname):
-                mdef = Unitee.testdb.get_mdef(mname)
+                mdef = self.unitee.testdb.get_mdef(mname)
                 mdef.set_picked()
                 scheduled_fnames = []
                 tfunc_count = 0
@@ -130,14 +129,14 @@ class GroupDef(Root):
         return group_tfunc_count
 
     def get_picked_mnames(self):
-        return [mname for mname in self.__mnames if Unitee.testdb.should_run_module(mname)]
+        return [mname for mname in self.__mnames if self.unitee.testdb.should_run_module(mname)]
 
     def get_schedule_module_map(self):
         out_map = {}
         for mqname, fqnames in self.__mod_fname_map.items():
-            if Unitee.testdb.should_run_module(mqname):
+            if self.unitee.testdb.should_run_module(mqname):
                 out_map[mqname]= []
-                mdef = Unitee.testdb.get_mdef(mqname);
+                mdef = self.unitee.testdb.get_mdef(mqname);
                 for fqname in fqnames:
                     if mdef.should_run_func(fqname):
                         out_map[mqname].append(fqname)

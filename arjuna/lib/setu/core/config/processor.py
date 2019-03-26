@@ -1,5 +1,6 @@
 import os
 import copy
+import datetime
 from arjuna.lib.trishanku.tpi.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
 
 from arjuna.tpi.enums import ArjunaOption
@@ -130,10 +131,12 @@ class BaseConfigProcessor:
 
 class CentralConfigLoader(BaseConfigProcessor):
 
-    def __init__(self, project_root_dir):
+    def __init__(self, project_root_dir, runid=None):
         self.__my_dir = os.path.dirname(os.path.realpath(__file__))
         self.__setu_central_confg_file = os.path.join(self.__my_dir, "res", "arjuna.conf")
         self.__project_root_dir = project_root_dir
+        self.__project_name = os.path.basename(self.__project_root_dir)
+        self.__runid = runid and runid or "mrun"
         self.__process()
 
     def __process(self):
@@ -142,8 +145,17 @@ class CentralConfigLoader(BaseConfigProcessor):
         contents = f.read()
         f.close()
         arjuna_root = os.path.abspath(os.path.join(self.__my_dir, "..", "..", "..", ".."))
+
+        irunid = "{}-{}".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3], self.__runid)
+        test_module_import_prefix = "{}.tests.modules.".format(self.__project_name)
+        conf_fixtures_import_prefix = "{}.fixtures.".format(self.__project_name)
+
         contents = contents.replace("<ARJUNA_ROOT_DIR>", arjuna_root)
         contents = contents.replace("<PROJECT_ROOT_DIR>", self.__project_root_dir)
+        contents = contents.replace("<PROJECT_NAME>", self.__project_name)
+        contents = contents.replace("<IRUNID>", irunid)
+        contents = contents.replace("<TEST_MODULE_IMPORT_PREFIX>", test_module_import_prefix)
+        contents = contents.replace("<FIXTURES_IMPORT_PREFIX>", conf_fixtures_import_prefix)
         raw_config_map = ConfigCreator.get_flat_map_from_hocon_string_for_setu_types(
             HoconStringReader(contents)
         )

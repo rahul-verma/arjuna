@@ -30,16 +30,15 @@ import traceback
 import json
 import sys
 
-from arjuna.lib.core import ARJUNA_ROOT
 from arjuna.lib.core.enums import *
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.core.utils import sys_utils
 from arjuna.lib.core.utils import file_utils
 from arjuna.lib.core.reader.hocon import HoconFileReader, HoconConfigDictReader
-from arjuna.lib.core.reader.textfile import TextResourceReader
-from arjuna.lib.unitee import UniteeFacade
 
 from .validation import *
+
+from arjuna.tpi.enums import ArjunaOption
 
 blank_groups_xml = '''<groups>
     <group name="everything">
@@ -116,27 +115,6 @@ class Command(metaclass=abc.ABCMeta):
 
         integrator.process_evars(evars)
 
-
-    def _init_components(self, arg_dict):
-        from arjuna.lib.core import ArjunaCore
-        integrator = ArjunaCore.integrator
-        pname = arg_dict['project.name']
-        wsd = self.get_wsdir(integrator, arg_dict)
-        runid = arg_dict['runid']
-
-        from arjuna.lib.unitee import init
-        init(pname, file_utils.normalize_path(wsd), runid)
-        self.__process_confs(integrator, file_utils.normalize_path(wsd), pname, arg_dict)
-
-        ArjunaCore.freeze(integrator)
-        integrator.enumerate()
-
-        # All options are processed, so if components want to do initial processing, it is done here.
-        integrator.load()
-
-    def get_wsdir(self, integrator, arg_dict):
-        return arg_dict['workspace.dir'] and arg_dict['workspace.dir'] or integrator.value(CorePropertyTypeEnum.WORKSPACE_DIR)
-
 class MainCommand(Command):
 
     def __init__(self):
@@ -165,10 +143,6 @@ class MainCommand(Command):
 
     def execute(self, arg_dict):
         pass
-        # from arjuna.lib.core import init
-        # init(arg_dict)
-        # This is the first stage at which integrator can enumerate properties
-        # integrator.enumerate()
 
 class LaunchSetu(Command):
     def __init__(self, subparsers, parents):
@@ -252,24 +226,14 @@ class __RunCommand(Command):
         from arjuna.tpi import Arjuna
         Arjuna.init(arg_dict["project.root.dir"])
 
-        from arjuna.lib.core import ArjunaCore
-        integrator = ArjunaCore.integrator
-
-        wsd = self.get_wsdir(integrator, arg_dict)
-        existing_project_names = os.listdir(wsd)
-        pname = arg_dict['project.name']
-
         import sys
-        if pname not in existing_project_names:
-            print("Project with name {} does not exist in {}".format(pname, wsd), file=sys.stderr)
-            sys_utils.fexit();
+        proj_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.SETU_PROJECT_ROOT_DIR).as_string()
+        sys.path.append(proj_dir + "/..")
 
-        self._init_components(arg_dict)
-
-        import sys
-        from arjuna.lib.core import ArjunaCore
-        sys.path.append(ArjunaCore.config.value(UniteePropertyEnum.PROJECT_DIR) + "/..")
-        self.unitee = UniteeFacade()
+        py_3rdparty_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR).as_string()
+        print(py_3rdparty_dir)
+        sys.path.append(py_3rdparty_dir)
+        self.unitee = Arjuna.get_unitee_instance()
         self.unitee.load_testdb()
 
 class RunProject(__RunCommand):
@@ -288,8 +252,8 @@ class RunSession(__RunCommand):
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
-        from arjuna.lib.core import ArjunaCore
-        self.unitee.load_session(ArjunaCore.config.value(UniteePropertyEnum.SESSION_NAME))
+        from arjuna.tpi import Arjuna
+        self.unitee.load_session(arg_dict['session.name'])
         self.unitee.run()
         self.unitee.tear_down()
 

@@ -19,14 +19,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna.tpi import Arjuna
 from threading import Thread
 from arjuna.lib.unitee import Unitee
 from arjuna.lib.unitee.exceptions import *
 
 class TestObjectRunner(Thread):
+
 	def __init__(self, nprefix, wnum, test_obj):
 		Thread.__init__(self, name="{}-{}".format(nprefix, wnum))
-		Unitee.state_mgr.register_thread(self.name)
+		Arjuna.get_unitee_instance().state_mgr.register_thread(self.name)
 		self.test_obj =  test_obj
 
 	def run(self):

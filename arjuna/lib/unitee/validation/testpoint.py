@@ -20,7 +20,6 @@ limitations under the License.
 '''
 
 from arjuna.lib.core.exceptions import *
-from arjuna.lib.core.strings import messages
 from arjuna.lib.core.types import constants
 from arjuna.lib.core.utils import thread_utils
 from arjuna.lib.unitee.exceptions import *

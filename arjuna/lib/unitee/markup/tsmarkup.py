@@ -22,9 +22,9 @@ limitations under the License.
 import inspect
 from copy import deepcopy
 
+from arjuna.tpi import Arjuna
 from arjuna.lib.unitee.state.loader import *
 from arjuna.lib.core.utils import obj_utils
-from arjuna.lib.unitee import Unitee
 
 def init_module(id=None, *,
                 priority=5,
@@ -44,10 +44,10 @@ def init_module(id=None, *,
     if obj_utils.callable(id):
         kallable = id
         del clocals['id']
-        return Unitee.test_loader.register_tmodule(kallable, **clocals)
+        return Arjuna.get_unitee_instance().test_loader.register_tmodule(kallable, **clocals)
     else:
         def wrapper(kallable):
-            return Unitee.test_loader.register_tmodule(kallable, **clocals)
+            return Arjuna.get_unitee_instance().test_loader.register_tmodule(kallable, **clocals)
         return wrapper
 
 def test_function(id=None, *,
@@ -68,20 +68,20 @@ def test_function(id=None, *,
     if obj_utils.callable(id):
         kallable = id
         del clocals['id']
-        return Unitee.test_loader.register_tfunc(kallable, **clocals)
+        return Arjuna.get_unitee_instance().test_loader.register_tfunc(kallable, **clocals)
     else:
         def wrapper(kallable):
-            return Unitee.test_loader.register_tfunc(kallable, **clocals)
+            return Arjuna.get_unitee_instance().test_loader.register_tfunc(kallable, **clocals)
         return wrapper
 
 def fixture(dec_name, kallable):
     if obj_utils.callable(kallable):
-        return Unitee.test_loader.register_fixture(dec_name, kallable)
+        return Arjuna.get_unitee_instance().test_loader.register_fixture(dec_name, kallable)
     else:
         def wrapper(actual_kallable):
             msg = "You are decorating {} in {} module with @{} by providing one or more arguments."
             msg += "Remove the arguments and proceed."
-            ArjunaCore.console.display_error(msg.format(
+            Arjuna.get_console().display_error(msg.format(
                     actual_kallable.__qualname__,
                     actual_kallable.__module__,
                     dec_name
@@ -92,15 +92,15 @@ def fixture(dec_name, kallable):
 
 def skip_me(kallable):
     if obj_utils.callable(kallable):
-        return Unitee.test_loader.register_skip_func(kallable)
+        return Arjuna.get_unitee_instance().test_loader.register_skip_func(kallable)
     else:
         def wrapper(actual_kallable):
             msg = "You are decorating {} in {} module with @skip by providing one or more arguments."
             msg += "Remove the arguments and proceed."
-            ArjunaCore.console.display_error(msg.format(
+            Arjuna.get_console().display_error(msg.format(
                     actual_kallable.__qualname__,
                     actual_kallable.__module__
                 ))
             sys_utils.fexit()
         return wrapper
-    
+

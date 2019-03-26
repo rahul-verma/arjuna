@@ -4,6 +4,7 @@ from enum import Enum
 from arjuna.tpi.enums import *
 
 from arjuna.lib.setu.core.lib.setu_types import SetuManagedObject
+from arjuna.lib.core.types.descriptors import *
 
 class Config(SetuManagedObject):
     DESKTOP_CONTEXTS = {GuiAutomationContext.NATIVE, GuiAutomationContext.WEB}
@@ -74,11 +75,9 @@ class Config(SetuManagedObject):
             }
         }
 
-        browser = self.setu_config.value(ArjunaOption.SETU_GUIAUTO_BROWSER_NAME)
+        browser = self.setu_config.get_browser_name()
         for opt, opt_value in for_browser[browser].items():
             self.setu_config._config_dict[opt] = opt_value
-
-
 
 class AbstractConfig:
 
@@ -101,7 +100,19 @@ class AbstractConfig:
 
     def value(self, key):
         self._validate_key(key)
-        return self.__config_dict[key]
+        v = self.__config_dict[key]
+        if isinstance(v, Enum):
+            return v.name
+        elif type(v) is list:
+            out = []
+            for value in v:
+                if isinstance(value, Enum):
+                    out.append(value.name)
+                else:
+                    out.append(value)
+            return out
+        else:
+            return v
 
     def as_map(self):
         return self.__config_dict
@@ -116,7 +127,10 @@ class AbstractConfig:
         return {k:self.__as_enum_name_or_same(v) for k,v in self.as_map().items()}
 
     def get_guiauto_context(self):
-        return GuiAutomationContext[self.value(ArjunaOption.GUIAUTO_CONTEXT).upper()]
+        return GuiAutomationContext[self.value(ArjunaOption.SETU_GUIAUTO_CONTEXT).upper()]
+
+    def get_browser_name(self):
+        return BrowserName[self.value(ArjunaOption.SETU_GUIAUTO_BROWSER_NAME)]
 
     def has_desktop_context(self):
         return self.get_guiauto_context() in Config.DESKTOP_CONTEXTS
@@ -129,6 +143,37 @@ class AbstractConfig:
 
     def has_web_context(self):
         return self.get_guiauto_context() in Config.ALL_WEB_CONTEXTS
+
+    def enumerate(self):
+        from arjuna.lib.core import ArjunaCore
+        keys = list(self.central_config.arjuna_options.keys())
+        keys.sort()
+        ArjunaCore.console.marker(100)
+        header = " Central Properties Table "
+        mark_length = (50 - len(header)// 2)
+        ArjunaCore.console.marker_on_same_line(mark_length)
+        ArjunaCore.console.display_on_same_line(header)
+        ArjunaCore.console.marker(mark_length)
+        ArjunaCore.console.marker(100)
+        for key in keys:
+            if self.central_config.arjuna_options[key].visible:
+                sval = self.central_config.arjuna_options[key].value
+                if EnumConstant.check(sval):
+                    sval = sval.name
+                elif EnumConstantList.check(sval):
+                    sval = str([i.name for i in sval])
+                else:
+                    if key != "arjuna.root.dir" and String.check(sval):
+                        sval = sval.replace(ARJUNA_ROOT, "<arjuna_root_dir>")
+                    else:
+                        sval = str(sval)
+
+                ArjunaCore.console.display(
+                    "| {:60s}| {}".format(self.central_config.arjuna_options[key].text,
+                                          sval))
+                ArjunaCore.console.display("| {:60s}| {}".format("(" + key + ")", ""))
+                ArjunaCore.console.marker(100)
+        ArjunaCore.console.marker(100)
 
 class UserConfig(AbstractConfig):
 

@@ -1,12 +1,18 @@
 import inspect
 import os
-import copy
+import re
+import sys
 from urllib3.util import parse_url
 from arjuna.tpi.enums import *
 from arjuna.lib.core.enums import *
 from arjuna.lib.unitee.enums import *
 
 class ConfigValidator:
+    VNREGEX = r'[a-z][a-z0-9]{2,29}'
+    VNREGEX_TEXT = '''
+    A Setu name must be a string of length 3-30 containing lower case letters, digits or _ (underscore).
+    It must begin with a letter.
+    '''
 
     @classmethod
     def raise_exc(cls, input):
@@ -173,3 +179,16 @@ class ConfigValidator:
             cls.raise_exc(input)
         return input
 
+    @classmethod
+    def setu_name(cls, input):
+        if not re.match(cls.VNREGEX, input):
+            print('Invalid Setu name provided.', file=sys.stderr)
+            print(cls.VNREGEX_TEXT, file=sys.stderr)
+            cls.raise_exc(input)
+        return input
+
+
+'''
+runid(self, prop_path, config_value, purpose, visible):
+        m = re.match(r"^[a-zA-Z0-9\-_]{3,30}$", config_value)
+'''

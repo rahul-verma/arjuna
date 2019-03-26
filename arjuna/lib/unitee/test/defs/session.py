@@ -23,6 +23,7 @@ import importlib
 
 import xml.etree.ElementTree as ETree
 
+from arjuna.tpi import Arjuna
 from arjuna.lib.core.utils import sys_utils
 from arjuna.lib.core.utils import etree_utils
 from arjuna.lib.unitee.utils import run_conf_utils
@@ -36,10 +37,6 @@ from arjuna.lib.unitee.test.defs.stage import *
 from arjuna.lib.unitee.test.objects.session import *
 from arjuna.lib.unitee.test.defs.fixture import *
 
-from arjuna.lib.unitee import UniteeFacade
-
-Unitee = UniteeFacade()
-
 class __SessionDef(Root, metaclass=abc.ABCMeta):
     def __init__(self, sname):
         super().__init__()
@@ -50,9 +47,11 @@ class __SessionDef(Root, metaclass=abc.ABCMeta):
         self.stage_defs = []
         self.tmcount = 0
         self.evars = SingleObjectVars()
-        self.evars.update(self.central_config.clone_evars())
+        # self.evars.update(self.central_config.clone_evars())
         self.__iter = None
         self.__fixtures = FixturesDef()
+        self.logger = Arjuna.get_logger()
+        self.unitee = Arjuna.get_unitee_instance()
 
     @property
     def fixture_defs(self):
@@ -102,9 +101,9 @@ class __SessionDef(Root, metaclass=abc.ABCMeta):
                 display_err_and_exit("Unexpected element >>{}<< found in session definition.".format(child.tag))
 
     def schedule(self):
-        logger.debug("%s: Scheduling nodes".format(self.name))
+        self.logger.debug("%s: Scheduling nodes".format(self.name))
         for stage in self.stage_defs:
-            logger.debug("Session node: " + node.get_name())
+            self.logger.debug("Session node: " + stage.get_name())
             stage.schedule()
             self.tmcount += stage.get_tmcount()
         self.__iter = iter(self.stage_defs)
@@ -112,19 +111,19 @@ class __SessionDef(Root, metaclass=abc.ABCMeta):
     def pick(self):
         for stage_def in self.stage_defs:
             stage_def.pick()
-        Unitee.testdb.process_unpicked_and_skipped()
-        Unitee.testdb.process_dependencies()
+        self.unitee.testdb.process_unpicked_and_skipped()
+        self.unitee.testdb.process_dependencies()
 
         return TestSession(self)
 
 class __MSessionDef(__SessionDef):
     def __init__(self, gname):
         super().__init__("msession")
-        sr = TextResourceReader("st/msession.xml")
+        sr = TextResourceReader("unitee/res/st/msession.xml")
         contents = sr.read()
         sr.close()
         contents = contents.format(gname=gname)
-        self.fpath = os.path.join(self.central_config.value(CorePropertyTypeEnum.ARJUNA_ROOT_DIR),
+        self.fpath = os.path.join(self.central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_ROOT_DIR).as_string(),
                                   "arjuna/lib/res/st/msession.xml")
         self.raw_contents = contents
 

@@ -19,9 +19,12 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna.tpi import Arjuna
+
+
 class Root:
     def __init__(self):
-        from arjuna.lib.core import ArjunaCore
-        self.logger = ArjunaCore.get_logger()
-        self.console = ArjunaCore.console
-        self.central_config = ArjunaCore.config
+        self.logger = Arjuna.get_logger()
+        self.console = Arjuna.get_console()
+        self.central_config = Arjuna.get_central_config()
+        self.unitee = Arjuna.get_unitee_instance()

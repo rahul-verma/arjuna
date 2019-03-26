@@ -22,10 +22,8 @@ limitations under the License.
 import threading
 import sys
 import xlwt
-import arial10
 
 from collections import OrderedDict
-from arjuna.lib.core import ArjunaCore
 from arjuna.lib.core.thread.decorators import *
 from arjuna.lib.unitee.reporter.result.types import SteppedResult
 from arjuna.lib.unitee.enums import *
@@ -46,6 +44,7 @@ class _ExcelSheet:
         self.__widths = dict()
 
     def __write_row(self, data, style):
+        import arial10
         self.__current_row_counter += 1
         for index, item in enumerate(data):
             item = str(item)

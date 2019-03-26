@@ -3,10 +3,14 @@ from arjuna.lib.setu.core.config.processor import ConfigCreator, CentralConfigLo
 from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.trishanku.tpi.reader.hocon import HoconStringReader, HoconConfigDictReader
 
+from arjuna.lib.setu.core.lib.setu_types import SetuManagedObject
+from arjuna.lib.setu.core.data_broker.databroker import DataBroker
+
+
 class TestConfigurator:
-    
+
     def __init__(self):
-        self.__default_ref_config = None 
+        self.__default_ref_config = None
         self.__config_map = {}
 
     def init(self, root_dir):
@@ -27,26 +31,26 @@ class TestConfigurator:
     def get_config(self, setu_id):
         return self.__config_map[setu_id]
 
-    def get_setu_option_value(self, config_setu_id, option):
-        sname = ArjunaOption[option.upper().strip().replace(".","_")]
+    def get_arjuna_option_value(self, config_setu_id, option):
+        sname = ArjunaOption[option.upper().strip().replace(".", "_")]
         rvalue = self.__config_map[config_setu_id].setu_config.value(sname)
         return rvalue
 
-    def get_central_setu_option_value(self, option):
-        sname = ArjunaOption[option.upper().strip().replace(".","_")]
+    def get_central_arjuna_option_value(self, option):
+        sname = ArjunaOption[option.upper().strip().replace(".", "_")]
         rvalue = self.__default_ref_config.setu_config.value(sname)
         return rvalue
 
     def register_config(self, setu_options, has_parent, user_options, parent_config_id):
         ref = has_parent and self.__config_map[parent_config_id] or self.__default_ref_config
         crawdict = {
-                "setuOptions" : setu_options,
-                "userOptions" : user_options
+            "arjunaOptions": setu_options,
+            "userOptions": user_options
         }
         hreader = HoconStringReader(json.dumps(crawdict))
         hreader.process()
         config = ConfigCreator.create_new_conf(
-            self.__default_ref_config.processor, 
+            self.__default_ref_config.processor,
             ref,
             hreader.get_map()
         )
@@ -55,4 +59,20 @@ class TestConfigurator:
         return config.setu_id
 
 
-    
+class TestSession(SetuManagedObject):
+
+    def __init__(self):
+        super().__init__()
+        self.__configurator = TestConfigurator()
+        self.__data_broker = DataBroker()
+
+    @property
+    def configurator(self):
+        return self.__configurator
+
+    @property
+    def data_broker(self):
+        return self.__data_broker
+
+    def init(self, root_dir):
+        return self.__configurator.init(root_dir)

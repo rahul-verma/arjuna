@@ -10,6 +10,7 @@ class ArjunaOption(Enum):
     ARJUNA_LOG_CONSOLE_LEVEL = auto()
     ARJUNA_LOG_FILE_LEVEL = auto()
 
+    SETU_PROJECT_NAME = auto()
     SETU_PROJECT_ROOT_DIR = auto()
     SETU_PROJECT_DATA_DIR = auto()
     SETU_PROJECT_DATA_SOURCES_DIR = auto()

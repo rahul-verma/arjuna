@@ -1,9 +1,11 @@
 import re
 
+
 class UnsupportedRepresentationException(Exception):
 
     def __init__(self, strSourceValue, targetValueType):
         super("Value: Can not represent value >>{}<< as {}.".format(strSourceValue, targetValueType))
+
 
 class AnyRefValue:
     TRUES = {"YES", "TRUE", "ON", "1"}
@@ -12,45 +14,48 @@ class AnyRefValue:
     def __init__(self, obj):
         self.__obj = obj
         self.__str_obj = None
-        if self.isNull():
+        if self.is_none():
             self.__str_obj = "null"
         else:
             self.__str_obj = str(obj).strip()
 
     def __throw_wrong_repr_exception(self, valueType):
-        raise UnsupportedRepresentationException(self.toString(), valueType)
+        raise UnsupportedRepresentationException(self.to_string(), valueType)
 
     def object(self):
         return self.__obj
 
-    def toString(self):
+    def to_string(self):
         return self.__str_obj
 
     def __fmt_str(self):
         return self.__str_obj.upper().strip()
 
-    asString = toString
+    as_string = to_string
+    __str__ = to_string
 
     @staticmethod
-    def isSet(strValue):
+    def is_set(strValue):
         return not strValue.upper().strip().equals("NOT_SET")
 
-    def isNotSet(self):
+    def is_not_set(self):
         return self.__fmt_str().equals("NOT_SET")
 
-    def isNull(self):
+    def is_none(self):
         return self.__obj == None
 
-    def isNA(self):
+    is_null = is_none
+
+    def is_na(self):
         return self.__fmt_str().equals("NA")
 
-    def asEnum(self, enumKlass):
+    def as_enum(self, enumKlass):
         try:
             return enumKlass[self.__fmt_str()]
         except:
             self.__throw_wrong_repr_exception("enum constant of type " + enumKlass.__name__)
 
-    def asBoolean(self):
+    def as_boolean(self):
         fstr = self.__fmt_str()
         if fstr in self.TRUES:
             return True
@@ -58,7 +63,7 @@ class AnyRefValue:
             return False
         self.__throw_wrong_repr_exception("boolean")
 
-    def asNumber(self):
+    def as_number(self):
         fstr = self.__fmt_str()
         if re.match(r"(\-)?[0-9\.]+", fstr):
             return float(fstr)
@@ -67,51 +72,54 @@ class AnyRefValue:
         else:
             self.__throw_wrong_repr_exception("number")
 
-    def asInt(self):
+    def as_int(self):
         try:
             return int(self.__fmt_str())
         except:
             self.__throw_wrong_repr_exception("int")
 
-    def asLong(self):
+    def as_long(self):
         try:
             return self.asInt()
         except:
             self.__throw_wrong_repr_exception("long")
 
-    def asFloat(self):
+    def as_float(self):
         try:
             return float(self.__fmt_str())
         except:
             self.__throw_wrong_repr_exception("float")
 
-    def asDouble(self):
+    def as_double(self):
         try:
-            return self.asFloat()
+            return self.as_float()
         except:
             self.__throw_wrong_repr_exception("double")
 
-    def asEnumList(self, enumKlass):
+    def as_enum_list(self, enumKlass):
         try:
-            return [self.asEnum(enumKlass)]
+            if type(self.object()) is list:
+                return [enumKlass[i] for i in self.object()]
+            else:
+                return [self.as_enum(enumKlass)]
         except:
             self.__throw_wrong_repr_exception("enum constant list of type " + enumKlass.__name__)
 
-    def asNumberList(self):
+    def as_number_list(self):
         try:
-            return [self.asNumber()]
+            return [self.as_number()]
         except:
             self.__throw_wrong_repr_exception("number list")
 
-    def asIntList(self):
+    def as_int_list(self):
         try:
-            return [self.asInt()]
+            return [self.as_int()]
         except:
             self.__throw_wrong_repr_exception("int list")
 
-    def asStringList(self):
+    def as_string_list(self):
         try:
-            return [self.asString()]
+            return [self.as_string()]
         except:
             self.__throw_wrong_repr_exception("string list")
 
@@ -166,28 +174,28 @@ class AbstractValueList:
             considered = [j for i, j in enumerate(self.__values) if i in indices_set]
         return self.__convert_to_string_list(considered)
 
-    def addAll(self, values):
+    def add_all(self, values):
         self.__values.extend(values)
 
-    def addAllObjects(self, objects):
+    def add_all_objects(self, objects):
         for o in objects:
             self.addObject(o)
 
     def add(self, value):
         self.__values.append(value)
 
-    def addObject(self, obj):
+    def add_object(self, obj):
         self.__values.append(AnyRefValue(obj))
 
-    def hasIndex(self, index):
+    def has_index(self, index):
         return index < self._max_index()
 
-    def valueAt(self, index):
+    def value_at(self, index):
         self.__validate_index(index)
         return self.__values[index]
 
-    def stringAt(self, index):
+    def string_at(self, index):
         return self.valueAt(index).asString()
 
-    def objectAt(self, index):
+    def object_at(self, index):
         return self.objectAt(index).asString()

@@ -27,12 +27,11 @@ def is_os_windows():
     return platform.system() == "Windows"
 
 def cexit():
-	from arjuna.lib.core import ArjunaCore
-	ArjunaCore.console.display_error("Exiting...")
+	from arjuna.tpi import Arjuna
+	Arjuna.get_console().display_error("Exiting...")
 	sys.exit()
 
 def fexit():
-	from arjuna.lib.core import ArjunaCore
 	print("Exiting because of Fatal Error...", file=sys.stderr)
 	import time
 	time.sleep(0.5)

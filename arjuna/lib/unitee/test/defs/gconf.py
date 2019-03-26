@@ -22,6 +22,8 @@ limitations under the License.
 import re
 import xml.etree.ElementTree as ETree
 
+from arjuna.tpi import Arjuna
+from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.core.enums import *
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.types.containers import *
@@ -89,21 +91,27 @@ class GroupConf(Root):
             else:
                 display_err_and_exit("Unexpected element >>{}<< found in session definition.".format(child.tag))
 
+
 class GroupConfsLoader:
 
+    @staticmethod
     def __load_pick_all(gconfs):
-        from arjuna.lib.core import ArjunaCore
-        central_config = ArjunaCore.config
-        fpath = os.path.join(central_config.value(CorePropertyTypeEnum.ARJUNA_ROOT_DIR),
-                                  "arjuna/lib/res/st/magroup.xml")
+        central_config = Arjuna.get_central_config()
+        arjuna_root_dir = central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_ROOT_DIR).as_string()
+        fpath = os.path.join(
+            arjuna_root_dir,
+            "lib/unitee/res/st/magroup.xml"
+        )
+        print(fpath)
         group_xml = ETree.parse(fpath).getroot()
         group_name = group_xml.attrib['name']
         gconfs[group_name] = GroupConf(group_name, group_xml, fpath)
 
+    @staticmethod
     def __load_user_gconfs(gconfs):
-        from arjuna.lib.core import ArjunaCore
-        console = ArjunaCore.console
-        ugcdir = ArjunaCore.config.value(UniteePropertyEnum.PROJECT_CONFIG_DIR)
+        console = Arjuna.get_console()
+        central_config = Arjuna.get_central_config()
+        ugcdir = central_config.get_arjuna_option_value(ArjunaOption.SETU_PROJECT_CONF_DIR).as_string()
         ugfpath = os.path.join(ugcdir, "groups.xml")
 
         def display_err_and_exit(msg):
@@ -135,7 +143,7 @@ class GroupConfsLoader:
                         display_err_and_exit(">>name<< attribute in group definition can not be empty.")
                     gconfs[name] = GroupConf(name, group, ugfpath)
 
-
+    @staticmethod
     def load():
         gconfs = CIStringDict()
         GroupConfsLoader.__load_pick_all(gconfs)

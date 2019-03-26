@@ -26,7 +26,6 @@ from arjuna.lib.core.enums import *
 from .testpoint import *
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.reporter.result.types import *
-from arjuna.lib.core import ArjunaCore
 from .assertion import *
 
 class _Asserter:
@@ -133,7 +132,8 @@ class Steps:
 
     @staticmethod
     def log(purpose, **kwargs):
-        logger = ArjunaCore.get_logger()
+        from arjuna.tpi import Arjuna
+        logger = Arjuna.get_logger()
         logger.debug(purpose)
         src = Steps.__get_caller()
         Steps.__step(src, StepType.LogStep, ResultTypeEnum.NOTHING, purpose, None, None, None, **kwargs)

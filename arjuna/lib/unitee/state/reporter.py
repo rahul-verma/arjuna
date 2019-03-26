@@ -24,12 +24,13 @@ import abc
 import threading
 
 from arjuna.lib.core.utils import file_utils
-from arjuna.lib.core import ArjunaCore
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.core.thread.decorators import *
 from arjuna.lib.unitee.reporter.mcr import *
 from arjuna.lib.unitee.reporter.cr import *
 from arjuna.lib.unitee.reporter.excel import *
+
+from arjuna.tpi.enums import ArjunaOption
 
 class __Reporter(metaclass=abc.ABCMeta):
     def __init__(self):
@@ -67,7 +68,8 @@ class DeferredReporter(NonActiveReporter):
     def __init__(self, rr_dir):
         super().__init__()
         self.__rr_dir = rr_dir
-        for rfmt in ArjunaCore.config.value(UniteePropertyEnum.DEFERRED_REPORTERS):
+        deferred_formats = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.UNITEE_PROJECT_DEFERRED_REPORTERS).as_enum_list(DeferredReporterNames)
+        for rfmt in deferred_formats:
             if rfmt == DeferredReporterNames.EXCEL:
                 rdir = os.path.join(self.__rr_dir, "/excel")
                 os.makedirs(rdir)
@@ -83,13 +85,15 @@ class ActiveReporter(__Reporter):
     def __init__(self):
         super().__init__()
         self.lock = threading.RLock()
-        rdir = ArjunaCore.config.value(UniteePropertyEnum.REPORT_DIR)
+        rdir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.SETU_PROJECT_REPORT_DIR).as_string()
         file_utils.delete_dir_if_exists(rdir)
-        self.__rr_dir = ArjunaCore.config.value(UniteePropertyEnum.RUN_REPORT_DIR)
+        self.__rr_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.UNITEE_PROJECT_RUN_REPORT_DIR).as_string()
         os.makedirs(self.__rr_dir)
 
     def set_up(self):
-        for afmt in ArjunaCore.config.value(UniteePropertyEnum.ACTIVE_REPORTERS):
+        active_formats = Arjuna.get_central_config().get_arjuna_option_value(
+            ArjunaOption.UNITEE_PROJECT_ACTIVE_REPORTERS).as_enum_list(ActiveReporterNames)
+        for afmt in active_formats:
             if afmt == ActiveReporterNames.MIN_CONSOLE:
                 self._add_reporter(MinimalConsoleReporter())
             elif afmt == ActiveReporterNames.CONSOLE:

@@ -22,6 +22,7 @@ limitations under the License.
 import xml.etree.ElementTree as ETree
 import re
 
+from arjuna.tpi import Arjuna
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.core.utils import sys_utils
 from arjuna.lib.core.utils import etree_utils
@@ -39,8 +40,7 @@ class XmlRules:
         self.root = rules_node
         self.__rules = []
 
-        from arjuna.lib.core import ArjunaCore
-        self.console = ArjunaCore.console
+        self.console = Arjuna.get_console()
         self.__process()
 
 

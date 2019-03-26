@@ -1,7 +1,7 @@
 from flask import request
 from flask_restful import Resource
 from .objmgr import SetuSvcObjectManager
-from .testsession_handler import TestSessionHandler
+from arjuna.lib.setu.testsession.adapter import TestSessionHandler
 from arjuna.lib.setu.core.requester.config import SetuActionType
 
 
@@ -85,7 +85,7 @@ class SetuSvc(Resource):
 
             SetuActionType.TESTSESSION_CREATE_GUI: handler.take_session_action,
             
-            SetuActionType.CONFIGURATOR_GET_SETU_OPTION_VALUE: handler.take_conf_action,
+            SetuActionType.CONFIGURATOR_GET_ARJUNA_OPTION_VALUE: handler.take_conf_action,
             SetuActionType.CONFIGURATOR_GET_USER_OPTION_VALUE: handler.take_conf_action,
             
             SetuActionType.DATASOURCE_GET_NEXT_RECORD: handler.take_datasource_action,

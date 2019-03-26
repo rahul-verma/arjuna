@@ -56,15 +56,15 @@ class Fixture(Root):
         issue = False
         steps = None
         try:
-            Unitee.state_mgr.get_current_thread_state().begin_recording(ExecutionContext.Fixture)
+            self.unitee.state_mgr.get_current_thread_state().begin_recording(ExecutionContext.Fixture)
             self.func(self.__tvars.create_utvars())
         except StepResultEvent as sre:
             pass
             # We would assume the step exception added by Step itself
         except Exception as e:
-            Unitee.state_mgr.get_current_thread_state().add_step_exception(e, traceback.format_exc())
+            self.unitee.state_mgr.get_current_thread_state().add_step_exception(e, traceback.format_exc())
 
-        steps = Unitee.state_mgr.get_current_thread_state().end_recording()
+        steps = self.unitee.state_mgr.get_current_thread_state().end_recording()
 
         fresult = FixtureResult(test_obj, self)
         fresult.set_steps(steps)
@@ -73,4 +73,4 @@ class Fixture(Root):
 
     def report(self):
         from arjuna.lib.unitee import Unitee
-        Unitee.reporter.update_result(self._result)
+        self.unitee.reporter.update_result(self._result)

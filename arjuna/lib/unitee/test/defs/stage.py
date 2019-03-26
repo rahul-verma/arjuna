@@ -19,6 +19,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna.tpi import Arjuna
 from arjuna.lib.unitee.types.root import *
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.core.reader.hocon import *
@@ -44,8 +45,7 @@ class StageDef(Root):
         self.__fixtures = FixturesDef()
         self.root = stage_xml
 
-        from arjuna.lib.unitee import UniteeFacade
-        self.unitee = UniteeFacade
+        self.unitee = Arjuna.get_unitee_instance()
 
         self.id = id
         self.name = "stage{:d}".format(id)

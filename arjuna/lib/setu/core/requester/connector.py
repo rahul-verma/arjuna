@@ -122,7 +122,7 @@ class BaseSetuObject:
 
     def __prepare_request_with_core_args(self, request):
         for name, value in self.__core_args.items():
-            request.addArg(name, value)
+            request.add_arg(name, value)
 
     def __prepare_request(self, request, *vargs):
         for arg in vargs:
