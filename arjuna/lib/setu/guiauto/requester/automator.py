@@ -3,6 +3,7 @@ from arjuna.lib.setu.core.requester.config import SetuActionType, SetuArg
 from arjuna.lib.setu.core.requester.connector import BaseSetuObject
 from .component import GuiAutoComponentFactory
 
+
 class GuiAutomatorName(Enum):
     SELENIUM = auto()
     APPIUM = auto()
@@ -27,10 +28,10 @@ class AbstractAppAutomator(BaseSetuObject):
     def _set_automation_context(self, context):
         self.__auto_context = context
 
-    def getAutomationContext(self):
+    def get_automation_context(self):
         return self.__auto_context
 
-    def isGui(self):
+    def is_gui(self):
         return False
 
     def __take_element_finder_action(self, setu_action_type, *setu_args):
@@ -41,72 +42,72 @@ class AbstractAppAutomator(BaseSetuObject):
         arg = [l.asMap() for l in withlocators]
         return self.__take_element_finder_action(setu_action_type, *arg)
 
-    def elememt(self, *locators):
+    def Elememt(self, *locators):
         elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_ELEMENT, locators)
         return GuiAutoComponentFactory.Element(self.__test_session, self, elem_setu_id)
 
-    def multiElement(self, *locators):
+    def MultiElement(self, *locators):
         elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_MULTIELEMENT, locators)
         return GuiAutoComponentFactory.MultiElement(self.__test_session, self, elem_setu_id)
 
-    def dropdown(self, *locators):
+    def DropDown(self, *locators):
         elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_DROPDOWN, locators)
         return GuiAutoComponentFactory.DropDown(self.__test_session, self, elem_setu_id)
 
-    def radioGroup(self, *locators):
+    def RadioGroup(self, *locators):
         elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_RADIOGROUP, locators)
         return GuiAutoComponentFactory.RadioGroup(self.__test_session, self, elem_setu_id)
 
-    def alert(self, *locators):
+    def Alert(self, *locators):
         elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_ALERT, locators)
         return GuiAutoComponentFactory.Alert(self.__test_session, self, elem_setu_id)
 
-    def frame(self, *locators):
-        return self.domRoot().frame(locators)
+    def Frame(self, *locators):
+        return self.DomRoot().Frame(locators)
 
-    def childWindow(self, *locators):
-        return self.mainWindow().childWindow(locators)
+    def ChildWindow(self, *locators):
+        return self.MainWindow().child_window(locators)
 
-    def latestChildWindow(self):
-        return self.mainWindow.latestChildWindow()
+    def LatestChildWindow(self):
+        return self.MainWindow.latest_child_window()
 
-    def closeAllChildWindows(self):
-        self.mainWindow.closeAllChildWindows()
+    def close_all_child_windows(self):
+        self.MainWindow.close_all_child_windows()
 
-    def mainWindow(self):
+    def MainWindow(self):
         return self.__main_window
 
     def _set_main_window(self, window):
         self.__main_window = window
 
-    def getConfig(self):
+    def get_config(self):
         return self.__config
 
     def _set_config(self, config):
         self.__config = config
 
-    def domRoot(self):
+    def DomRoot(self):
         return self.__dom_root
 
     def _set_dom_root(self, root):
         self.__dom_root = root
 
-    def getTestSession(self):
+    def get_test_session(self):
         return self.__test_session
 
-    def browser(self):
+    def Browser(self):
         return self.__browser
 
     def _set_browser(self, browser):
         self.__browser = browser
 
-    def enableSlowMotion(self, on, interval=None):
+    def enable_slow_motion(self, on, interval=None):
         args = [SetuArg.arg("on", on)]
         if interval:
-            args.append(SetuArg.arg("interval", interval)
+            args.append(SetuArg.arg("interval", interval))
         self._send_request(SetuActionType.GUIAUTO_SET_SLOMO, *args)
 
-    def executeJavaScript(self, script):
+    def excute_java_script(self, script):
         self._send_request(SetuActionType.GUIAUTO_BROWSER_EXECUTE_JAVASCRIPT, SetuArg.arg("script", script))
 
 
@@ -135,10 +136,10 @@ class DefaultGuiAutomator(AbstractAppAutomator):
         self.setSelfSetuIdArg("automatorSetuId")
 
         win_response = self._send_request(SetuActionType.GUIAUTO_GET_MAIN_WINDOW)
-        self.setMainWindow(GuiAutoComponentFactory.MainWindow(self.getTestSession(), self, win_response.getValueForElementSetuId()))
+        self.setMainWindow(GuiAutoComponentFactory.MainWindow(self.get_test_session(), self, win_response.getValueForElementSetuId()))
 
-        self.setDomRoot(GuiAutoComponentFactory.DomRoot(self.getTestSession(), self))
-        self.setBrowser(GuiAutoComponentFactory.Browser(self.getTestSession(), self))
+        self.setDomRoot(GuiAutoComponentFactory.DomRoot(self.get_test_session(), self))
+        self.setBrowser(GuiAutoComponentFactory.Browser(self.get_test_session(), self))
 
     def quit(self):
         self._send_request(SetuActionType.TESTSESSION_QUIT_GUIAUTOMATOR)

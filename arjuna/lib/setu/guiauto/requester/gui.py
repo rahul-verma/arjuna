@@ -29,19 +29,19 @@ class BaseGui(AbstractAppAutomator):
         if self.__gui_registered:
             raise Exception("Attempt to change Gui critical attribute post registration with Setu.")
 
-    def isGui(self):
+    def is_gui(self):
         return True
 
-    def setLabel(self, label):
+    def set_label(self, label):
         self.__check_reg_status()
         self.label = label
         self.setDefFileName(label + ".gns")
 
-    def setDefFileName(self, name):
+    def set_def_file_name(self, name):
         self.__check_reg_status()
         self.__def_file_name = name
 
-    def registerWithSetu(self):
+    def register_with_setu(self):
         if self.__gui_registered:
             raise Exception("Attempt to re-register Gui with Setu.")
 
@@ -71,16 +71,16 @@ class BaseGui(AbstractAppAutomator):
 
         self.__load()
 
-    def _getAutomator(self):
+    def _get_automator(self):
         return self.__automator
 
-    def getQualifiedName(self):
+    def get_qualified_name(self):
         return self.__class__.__qualname__
 
-    def addChild(self, label, gui):
+    def add_child(self, label, gui):
         self.__children_map[label.lower()] = gui
 
-    def gui(label):
+    def ChildGui(self, label):
         if label:
             if label.lower() in self.__children_map:
                 return self.__children_map[label.lower()]
@@ -89,26 +89,26 @@ class BaseGui(AbstractAppAutomator):
         else:
             raise Exception("Child Gui label is None.")
 
-    def reachUntil(self):
+    def reach_until(self):
         # Children can override and write any necessary loading instructions
         pass
 
-    def validateReadiness(self):
+    def validate_readiness(self):
         pass
 
     def __load(self):
         try:
-            self.validateReadiness()
+            self.validate_readiness()
         except:
             try:
-                self.reachUntil()
-                self.validateReadiness()
+                self.reach_until()
+                self.validate_readiness()
             except Exception as e:
                 raise Exception(
                     "UI [{}] with SetuId [{}] did not load as expected. Error: {}.",
-                    self.getClass().getName(),
-                    self.getSetuId(),
-                    e.getMessage()
+                    self.__class__.__name__,
+                    self.get_setu_id(),
+                    str(e)
                 )
 
     def elememt(self, name):
