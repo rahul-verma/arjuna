@@ -28,6 +28,7 @@ from arjuna.lib.unitee.enums import *
 
 from .validation import *
 
+
 class Parser:
 
     def __init__(self):
@@ -41,11 +42,10 @@ class SetuParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-p', '--port', dest="setu_port", default=9000, type=port, help='Setu network port')
+        self.parser.add_argument('-p', '--port', dest="setu.port", default=9000, type=port, help='Setu network port')
 
     def process(self, arg_dict):
-        arg_dict['setu.port'] = arg_dict['setu_port']
-        del arg_dict['setu_port']
+        pass
 
 
 class ProjectParser(Parser):
@@ -53,33 +53,54 @@ class ProjectParser(Parser):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         #self.parser.add_argument('-w', '--workspace-dir', dest="workspace_dir", type=str, help='Workspace Directory')
-        self.parser.add_argument('-p', '--project-root-dir', dest="project_root_dir", type=project_dir, help = 'Valid absolute Project root directory. Name of project (Alnum 3-30 length. Only lower case letters.).')
+        self.parser.add_argument('-p', '--project-root-dir', dest="project.root.dir", type=project_dir, help = 'Valid absolute Project root directory. Name of project (Alnum 3-30 length. Only lower case letters.).')
 
     def process(self, arg_dict):
         # arg_dict['workspace.dir'] = arg_dict['workspace_dir']
         # del arg_dict['workspace_dir']
-        if arg_dict['project_root_dir'] is None:
+        if arg_dict['project.root.dir'] is None:
             print("Fatal Error in CLI processing. You must provide a valid project root directory using -p or --project-dir switch", file=sys.stderr)
             sys.exit(1)
-        arg_dict['project.root.dir'] = arg_dict['project_root_dir']
-
-        del arg_dict['project_root_dir']
 
 class RunParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument("-rid", "--runid", nargs=1, dest="runid", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.')
-        self.parser.add_argument('-ar', '--active-reporters', dest="active.reporters",
+        self.parser.add_argument('-ar', '--active-reporters', dest="unitee.project.active.reporters",
                                  metavar=('R1','R2'), nargs='+',
                                  type=ustr,
                                  choices=[i for i in ActiveReporterNames.__members__],
                                  help='One or more valid active state names: ' + str([i for i in ActiveReporterNames.__members__]))
-        self.parser.add_argument('-dr', '--deferred-reporters', dest="deferred.reporters",
+        self.parser.add_argument('-dr', '--deferred-reporters', dest="unitee.project.deferred.reporters",
                                  metavar=('R1','R2'), nargs='+',
                                  type=ustr,
                                  choices=[i for i in DeferredReporterNames.__members__],
                                  help='One or more valid deferred state names: ' + str([i for i in DeferredReporterNames.__members__]))
+
+        self.parser.add_argument('-aco', '--arjuna-central-option', dest="aco",
+                                 nargs=2,
+                                 action='append',
+                                 metavar=('option', 'value'),
+                                 help='Arjuna Central Option. Can pass any number of these switches as -aco x y -aco z t')
+
+        self.parser.add_argument('-ato', '--arjuna-test-option', dest="ato",
+                                 nargs=2,
+                                 action='append',
+                                 metavar=('option', 'value'),
+                                 help='Arjuna Test Option. Can pass any number of these switches as -aco x y -ato z t')
+
+        self.parser.add_argument('-uco', '--user-central-option', dest="uco",
+                                 nargs=2,
+                                 action='append',
+                                 metavar=('option', 'value'),
+                                 help='User Central Option. Can pass any number of these switches as -aco x y -uco z t')
+
+        self.parser.add_argument('-uto', '--user-text-option', dest="uto",
+                                 nargs=2,
+                                 action='append',
+                                 metavar=('option', 'value'),
+                                 help='User Test Option. Can pass any number of these switches as -aco x y -uto z t')
 
     def process(self, arg_dict):
         pass
@@ -88,24 +109,23 @@ class SessionParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-s', '--session-name', dest="session_name", type=partial(lname_check, "Session"), help='Existing session template name.')
+        self.parser.add_argument('-s', '--session-name', dest="unitee.project.session.name", type=partial(lname_check, "Session"), help='Existing session template name.')
 
     def process(self, arg_dict):
-        if arg_dict['session_name'] is None:
+        if arg_dict['unitee.project.session.name'] is None:
             print("Fatal Error in CLI processing. You must provide a valid session name using -s or --session-name switch", file=sys.stderr)
             sys.exit(1)
-        arg_dict['session.name'] = arg_dict['session_name']
-        del arg_dict['session_name']
+
 
 class GroupParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-g', '--group-name', dest="group_name", type=partial(lname_check, "Group"), help='Existing group template name.')
+        self.parser.add_argument('-g', '--group-name', dest="group.name", type=partial(lname_check, "Group"), help='Existing group template name.')
 
     def process(self, arg_dict):
-        arg_dict['group.name'] = arg_dict['group_name']
-        del arg_dict['group_name']
+        pass
+
 
 class NamesParser(Parser):
     def __init__(self):

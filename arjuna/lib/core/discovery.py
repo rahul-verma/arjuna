@@ -21,7 +21,6 @@ limitations under the License.
 
 import os
 
-from arjuna.tpi import Arjuna
 from arjuna.lib.core.enums import *
 from arjuna.lib.core.utils import file_utils
 from arjuna.lib.core.utils import sys_utils
@@ -47,7 +46,7 @@ class FileAggregator:
         self.files = []
         self.found_class_names = set()
         self.temp_map = {}
-
+        from arjuna.tpi import Arjuna
         self.logger = Arjuna.get_logger()
         self.console = Arjuna.get_console()
 

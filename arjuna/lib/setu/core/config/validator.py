@@ -74,6 +74,7 @@ class ConfigValidator:
 
     @classmethod
     def guiauto_automator_name(cls, input):
+        print("=============================>",input)
         try:
             return GuiAutomatorName[input.upper()]
         except:

@@ -19,10 +19,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import inspect
-from copy import deepcopy
-
-from arjuna.tpi import Arjuna
 from arjuna.lib.unitee.state.loader import *
 from arjuna.lib.core.utils import obj_utils
 
@@ -41,6 +37,7 @@ def init_module(id=None, *,
 
                 **kwargs):
     clocals = {i:j for i,j in locals().items()}
+    from arjuna.tpi import Arjuna
     if obj_utils.callable(id):
         kallable = id
         del clocals['id']
@@ -65,6 +62,7 @@ def test_function(id=None, *,
 
                   **kwargs):
     clocals = {i:j for i,j in locals().items()}
+    from arjuna.tpi import Arjuna
     if obj_utils.callable(id):
         kallable = id
         del clocals['id']
@@ -75,6 +73,7 @@ def test_function(id=None, *,
         return wrapper
 
 def fixture(dec_name, kallable):
+    from arjuna.tpi import Arjuna
     if obj_utils.callable(kallable):
         return Arjuna.get_unitee_instance().test_loader.register_fixture(dec_name, kallable)
     else:
@@ -91,6 +90,7 @@ def fixture(dec_name, kallable):
 
 
 def skip_me(kallable):
+    from arjuna.tpi import Arjuna
     if obj_utils.callable(kallable):
         return Arjuna.get_unitee_instance().test_loader.register_skip_func(kallable)
     else:

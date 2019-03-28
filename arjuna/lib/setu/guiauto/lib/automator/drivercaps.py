@@ -36,9 +36,10 @@ class DriverCapabilities:
     IOS_AUTO_ACCEPT_ALERTS = "autoAcceptAlerts"
 
     def __init__(self, config, json_dict):
+        print(config, json_dict)
         self.__config = config
         self.__out_dict = {
-            "setuOptions" : {},
+            "arjunaOptions" : {},
             "userOptions" : config.user_config.as_json_dict(),
             "browserArgs": [],
             "driverCapabilities": {},
@@ -51,9 +52,9 @@ class DriverCapabilities:
         self.__process_config(config)
         self.__process(json_dict)
 
-        aname = self.__config.setu_config.value(ArjunaOption.GUIAUTO_AUTOMATOR_NAME).name.lower()
-        acontext = self.__config.setu_config.value(ArjunaOption.GUIAUTO_CONTEXT).name.lower()
-        aplatform = self.__config.setu_config.value(ArjunaOption.MOBILE_OS_NAME).name.lower()
+        aname = self.__config.setu_config.value(ArjunaOption.AUTOMATOR_NAME).lower()
+        acontext = self.__config.setu_config.value(ArjunaOption.GUIAUTO_CONTEXT).lower()
+        aplatform = self.__config.setu_config.value(ArjunaOption.MOBILE_OS_NAME).lower()
 
         if aname == "selenium":
             self.__process_for_selenium(json_dict)
@@ -98,11 +99,11 @@ class DriverCapabilities:
         return self.__config
 
     def __process_config(self, config):
-        self.__out_dict["automationContext"] = config.setu_config.value(ArjunaOption.GUIAUTO_CONTEXT).name.upper()
+        self.__out_dict["automationContext"] = config.setu_config.value(ArjunaOption.GUIAUTO_CONTEXT).upper()
         temp_d = config.setu_config.as_json_dict()
         for k,v in temp_d.items():
             if k in SetuActorDriverConfigOption.__members__:
-                self.__out_dict["setuOptions"][k] = v
+                self.__out_dict["arjunaOptions"][k] = v
         pprint.pprint(self.__out_dict)
 
     def __process(self, dict_from_requester):
@@ -121,9 +122,10 @@ class DriverCapabilities:
             self.__out_dict["browserExtensions"].extend(dict_from_requester["browserExtensions"])
 
     def __process_for_selenium(self, in_dict):
-        self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = self._config.setu_config.value(ArjunaOption.BROWSER_NAME).name.lower()
-        if self._config.setu_config.value(ArjunaOption.BROWSER_VERSION) != "not_set":
-            self.__out_dict["driverCapabilities"][self.BROWSER_VERSION] = self._config.setu_config.value(ArjunaOption.BROWSER_VERSION)
+        self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = self._config.setu_config.value(ArjunaOption.BROWSER_NAME).lower()
+        browser_version = self._config.setu_config.value(ArjunaOption.BROWSER_VERSION)
+        if browser_version != "not_set":
+            self.__out_dict["driverCapabilities"][self.BROWSER_VERSION] = browser_version
 
     def __process_for_appium(self, dict_from_requester):
         mobile_os_name = self._config.setu_config.value(ArjunaOption.MOBILE_OS_NAME).name
@@ -143,14 +145,15 @@ class DriverCapabilities:
         self.__out_dict["driverCapabilities"][self.ANDROID_RESET_KEYBOARD] = True
 
     def __process_for_android_native(self, dict_from_requester):
-        self.__out_dict["driverCapabilities"][self.ANDROID_APP_ACTIVITY] = self._config.setu_config.value(ArjunaOption.MOBILE_APP_PACKAGE).name
-        self.__out_dict["driverCapabilities"][self.ANDROID_APP_PACKAGE] = self._config.setu_config.value(ArjunaOption.MOBILE_APP_ACTIVITY)
+        pass
+        # self.__out_dict["driverCapabilities"][self.ANDROID_APP_ACTIVITY] = self._config.setu_config.value(ArjunaOption.MOBILE_APP_PACKAGE).name
+        # self.__out_dict["driverCapabilities"][self.ANDROID_APP_PACKAGE] = self._config.setu_config.value(ArjunaOption.MOBILE_APP_ACTIVITY)
         # self.__out_dict["capabilites"][self.ANDROID_WAIT_ACTIVITY] = self._config.setu_config.value(ArjunaOption.MOBILE_APP_ACTIVITY)
         # self.__out_dict["capabilites"][self.ANDROID_WAIT_PACKAGE] = self._config.setu_config.value(ArjunaOption.MOBILE_APP_FILE_PATH)
 
     def __process_for_android_web(self, dict_from_requester):
         # Browser
-        browser_name = self._config.setu_config.value(ArjunaOption.BROWSER_NAME).name
+        browser_name = self._config.setu_config.get_browser_name()
         if browser_name.lower() != "chrome":
             raise Exception("{} is not a valid browser for Android.".format(browser_name))
         self.__out_dict["capabilities"][self.BROWSER_NAME] = browser_name
@@ -166,7 +169,7 @@ class DriverCapabilities:
         pass
 
     def __process_for_ios_web(self, dict_from_requester):
-                self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = self._config.setu_config.value(ArjunaOption.BROWSER_NAME).name
+                self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = self._config.setu_config.get_browser_name()
 
     def __process_for_ios_hybrid(self, dict_from_requester):
         pass

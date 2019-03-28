@@ -24,15 +24,11 @@ from functools import partial
 import inspect
 import traceback
 
-from arjuna.tpi import Arjuna
-from arjuna.lib.core.utils import sys_utils
-from arjuna.lib.core.utils import obj_utils
 from arjuna.lib.unitee.test.defs.module import *
 from arjuna.lib.unitee.test.defs.func import *
 from arjuna.lib.unitee.loader import kfactory
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.unitee.enums import *
-from arjuna.lib.unitee import Unitee
 from arjuna.lib.unitee.markup import mrules
 
 class ModuleLoader:
@@ -40,12 +36,14 @@ class ModuleLoader:
         self.pkg = pkg
         self.module = module
         self.qname = qname
+        from arjuna.tpi import Arjuna
         self.console = Arjuna.get_console()
         self.logger = Arjuna.get_logger()
         self.mdef = ModDef(pkg, module, qname)
         self._current_kall_ids = {}
         self._current_kall_decs = {}
         self.__multidecs = {}
+        from arjuna.tpi import Arjuna
         self.unitee = Arjuna.get_unitee_instance()
 
     def load(self):

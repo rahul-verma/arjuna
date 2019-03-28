@@ -12,6 +12,7 @@ class AnyRefValue:
     FALSES = {"NO", "FALSE", "OFF", "0"}
 
     def __init__(self, obj):
+        print(obj, type(obj))
         self.__obj = obj
         self.__str_obj = None
         if self.is_none():
@@ -97,6 +98,7 @@ class AnyRefValue:
             self.__throw_wrong_repr_exception("double")
 
     def as_enum_list(self, enumKlass):
+        print(type(self.object()) is list)
         try:
             if type(self.object()) is list:
                 return [enumKlass[i] for i in self.object()]

@@ -21,8 +21,8 @@ class AbstractAppAutomator(BaseSetuObject):
         self.__config = None
         if config:
             self._set_config(config)
-            self.__test_session = config.getTestSession()
-            self._set_test_session_setu_id_arg(self.__test_session.getSetuId())
+            self.__test_session = config.get_test_session()
+            self._set_test_session_setu_id_arg(self.__test_session.get_setu_id())
             self.__config = config
 
     def _set_automation_context(self, context):
@@ -129,17 +129,17 @@ class DefaultGuiAutomator(AbstractAppAutomator):
         else:
             response = self._send_request(
                 SetuActionType.TESTSESSION_LAUNCH_GUIAUTOMATOR,
-                SetuArg.configArg(self.getConfig().getSetuId())
+                SetuArg.config_arg("configSetuId", self.get_config().get_setu_id())
             )
 
-        self.setSetuId(response.getValueForGuiAutomatorSetuId())
-        self.setSelfSetuIdArg("automatorSetuId")
+        self._set_setu_id(response.get_value_for_guiautomator_setu_id())
+        self._set_self_setu_id_arg("automatorSetuId")
 
         win_response = self._send_request(SetuActionType.GUIAUTO_GET_MAIN_WINDOW)
-        self.setMainWindow(GuiAutoComponentFactory.MainWindow(self.get_test_session(), self, win_response.getValueForElementSetuId()))
+        self._set_main_window(GuiAutoComponentFactory.MainWindow(self.get_test_session(), self, win_response.get_value_for_element_setu_id()))
 
-        self.setDomRoot(GuiAutoComponentFactory.DomRoot(self.get_test_session(), self))
-        self.setBrowser(GuiAutoComponentFactory.Browser(self.get_test_session(), self))
+        self._set_dom_root(GuiAutoComponentFactory.DomRoot(self.get_test_session(), self))
+        self._set_browser(GuiAutoComponentFactory.Browser(self.get_test_session(), self))
 
     def quit(self):
         self._send_request(SetuActionType.TESTSESSION_QUIT_GUIAUTOMATOR)

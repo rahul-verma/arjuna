@@ -63,10 +63,10 @@ class ArjunaSingleton:
         self.__console = None
         self.__logger = None
 
-    def init(self, project_root_dir, run_id="mrunid"):
+    def init(self, project_root_dir, cli_config, run_id):
         self.__project_root_dir = project_root_dir
         self.__test_session = DefaultTestSession()
-        self.__central_config = self.__test_session.init(project_root_dir, run_id)
+        self.__central_config = self.__test_session.init(project_root_dir, cli_config, run_id)
         self.__load_console()
 
         from arjuna.lib.unitee import Unitee
@@ -146,12 +146,12 @@ class ArjunaSingleton:
         return copy.deepcopy(self.user_options)
 
     def __load_console(self):
-        dl = logging.getLevelName(self.__central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_LOG_CONSOLE_LEVEL).as_string().upper())
-        log_dir = self.__central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_LOG_DIR).as_string()
+        dl = logging.getLevelName(self.__central_config.get_arjuna_option_value(ArjunaOption.LOG_CONSOLE_LEVEL).as_string().upper())
+        log_dir = self.__central_config.get_arjuna_option_value(ArjunaOption.LOG_DIR).as_string()
         if not os.path.isdir(log_dir):
             os.makedirs(log_dir)
-        fl = logging.getLevelName(self.__central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_LOG_FILE_LEVEL).as_string().upper())
-        fname = self.__central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_LOG_NAME).as_string()
+        fl = logging.getLevelName(self.__central_config.get_arjuna_option_value(ArjunaOption.LOG_FILE_LEVEL).as_string().upper())
+        fname = self.__central_config.get_arjuna_option_value(ArjunaOption.PYTHON_LOG_NAME).as_string()
         lpath = os.path.join(log_dir, fname)
 
         logger = logging.getLogger(self.prog)
@@ -307,13 +307,18 @@ class ArjunaSingleton:
     def get_central_config(self):
         return self.__central_config
 
+    def create_gui_automator(self):
+        from arjuna.lib.setu.guiauto.requester.automator import DefaultGuiAutomator
+        return DefaultGuiAutomator(self.__central_config)
+
+
 class Arjuna:
     ARJUNA_SINGLETON = None
 
     @classmethod
-    def init(cls, project_root_dir, run_id=None):
+    def init(cls, project_root_dir, cli_config=None, run_id=None):
         cls.ARJUNA_SINGLETON = ArjunaSingleton()
-        cls.ARJUNA_SINGLETON.init(project_root_dir, run_id)
+        cls.ARJUNA_SINGLETON.init(project_root_dir, cli_config, run_id)
 
     @classmethod
     def get_logger(cls):
@@ -330,3 +335,7 @@ class Arjuna:
     @classmethod
     def get_unitee_instance(cls):
         return cls.ARJUNA_SINGLETON.get_unitee_instance()
+
+    @classmethod
+    def create_gui_automator(cls):
+        return cls.ARJUNA_SINGLETON.create_gui_automator()

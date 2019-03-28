@@ -44,7 +44,7 @@ class Config(SetuManagedObject):
 
     def as_json_dict(self):
         return {
-            "setuOptions" : self.__setu_config.as_json_dict(),
+            "arjunaOptions`" : self.__setu_config.as_json_dict(),
             "userOptions" : self.__user_config.as_json_dict()
         }
 
@@ -55,29 +55,30 @@ class Config(SetuManagedObject):
             return name
 
     def __get_driver_path(self, name):
-        return os.path.join(self.setu_config.value(ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVERS_DIR), self.__modify_bin_name_for_windows(name))
+        return os.path.join(self.setu_config.value(ArjunaOption.SELENIUM_DRIVERS_DIR), self.__modify_bin_name_for_windows(name))
 
     def process_setu_options(self):
         for_browser = {
             BrowserName.CHROME : {
-                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PROP : "webdriver.chrome.driver",
-                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PATH : self.__get_driver_path("chromedriver")
+                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.chrome.driver",
+                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("chromedriver")
             },
 
             BrowserName.FIREFOX : {
-                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PROP : "webdriver.gecko.driver",
-                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PATH : self.__get_driver_path("geckodriver")
+                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.gecko.driver",
+                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("geckodriver")
             },
 
             BrowserName.SAFARI : {
-                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PROP : "webdriver.safari.driver",
-                ArjunaOption.SETU_GUIAUTO_SELENIUM_DRIVER_PATH : self.__get_driver_path("safaridriver")
+                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.safari.driver",
+                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("safaridriver")
             }
         }
 
         browser = self.setu_config.get_browser_name()
         for opt, opt_value in for_browser[browser].items():
             self.setu_config._config_dict[opt] = opt_value
+
 
 class AbstractConfig:
 
@@ -125,24 +126,6 @@ class AbstractConfig:
 
     def as_json_dict(self):
         return {k:self.__as_enum_name_or_same(v) for k,v in self.as_map().items()}
-
-    def get_guiauto_context(self):
-        return GuiAutomationContext[self.value(ArjunaOption.SETU_GUIAUTO_CONTEXT).upper()]
-
-    def get_browser_name(self):
-        return BrowserName[self.value(ArjunaOption.SETU_GUIAUTO_BROWSER_NAME)]
-
-    def has_desktop_context(self):
-        return self.get_guiauto_context() in Config.DESKTOP_CONTEXTS
-
-    def has_mobile_web_context(self):
-        return self.get_guiauto_context() in Config.MOBILE_WEB_CONTEXTS
-
-    def has_mobile_native_context(self):
-        return self.get_guiauto_context() in Config.MOBILE_NATIVE_CONTEXTS
-
-    def has_web_context(self):
-        return self.get_guiauto_context() in Config.ALL_WEB_CONTEXTS
 
     def enumerate(self):
         from arjuna.lib.core import ArjunaCore
@@ -192,3 +175,27 @@ class SetuConfig(AbstractConfig):
     def as_json_dict(self):
         out = {k.name: v for k,v in super().as_json_dict().items()}
         return out
+
+    def get_gui_automator_name(self):
+        return self._config_dict[ArjunaOption.AUTOMATOR_NAME]
+
+    def get_guiauto_actor_mode(self):
+        return self._config_dict[ArjunaOption.SETU_GUIAUTO_ACTOR_MODE]
+
+    def get_guiauto_context(self):
+        return self._config_dict[ArjunaOption.GUIAUTO_CONTEXT]
+
+    def get_browser_name(self):
+        return BrowserName[self.value(ArjunaOption.BROWSER_NAME)]
+
+    def has_desktop_context(self):
+        return self.get_guiauto_context() in Config.DESKTOP_CONTEXTS
+
+    def has_mobile_web_context(self):
+        return self.get_guiauto_context() in Config.MOBILE_WEB_CONTEXTS
+
+    def has_mobile_native_context(self):
+        return self.get_guiauto_context() in Config.MOBILE_NATIVE_CONTEXTS
+
+    def has_web_context(self):
+        return self.get_guiauto_context() in Config.ALL_WEB_CONTEXTS

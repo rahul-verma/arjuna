@@ -127,6 +127,9 @@ class HoconConfigDictReader(HoconReader):
     def _load_config(self):
         pass
 
+    def has_key(self, key):
+        return key in self.get_map()
+
 
 class HoconFileReader(HoconReader):
     def __init__(self, path):

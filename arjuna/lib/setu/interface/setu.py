@@ -19,7 +19,8 @@ class SetuSvc(Resource):
         else:
             if action_type == SetuActionType.TESTSESSION_INIT:
                 root_dir = json_dict["args"]["projectRootDir"]
-                res = self.__register_test_session(root_dir)
+                del json_dict["args"]["projectRootDir"]
+                res = self.__register_test_session(root_dir, **json_dict["args"])
                 print(res)
                 return {'result': 'success', 'responseData': res}, 200
             elif action_type == SetuActionType.TESTSESSION_FINISH:
@@ -37,10 +38,10 @@ class SetuSvc(Resource):
                 else:
                     return {'result': 'success', 'responseData': res}, 200
 
-    def __register_test_session(self, root_dir):
+    def __register_test_session(self, root_dir, cliConfig=None):
         handler = TestSessionHandler()
 
-        config_id = handler.init(root_dir)
+        config_id = handler.init(root_dir, cliConfig)
         SetuSvcObjectManager.register_testsession_handler(handler)
         return {
             'testSessionSetuId': handler.setu_id,

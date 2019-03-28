@@ -44,12 +44,12 @@ class BaseComponent(BaseSetuObject):
         self.__test_session = test_session
         self.__automator = app_automator
 
-        if app_automator.isGui():
-            self._set_gui_setu_id_arg(app_automator.getSetuId())
+        if app_automator.is_gui():
+            self._set_gui_setu_id_arg(app_automator.get_setu_id())
         else:
-            self._set_automator_setu_id_arg(app_automator.getSetuId())
+            self._set_automator_setu_id_arg(app_automator.get_setu_id())
 
-        self._set_test_session_setu_id_arg(test_session.getSetuId())
+        self._set_test_session_setu_id_arg(test_session.get_setu_id())
 
     def _get_automator(self):
         return self.__automator
@@ -60,7 +60,7 @@ class BaseComponent(BaseSetuObject):
 
 class BaseElement(BaseComponent):
 
-    def __init(self, test_session, app_automator, setu_id, index=None):
+    def __init__(self, test_session, app_automator, setu_id, index=None):
         super().__init__(test_session, app_automator)
         self._set_setu_id(setu_id)
         self._set_self_setu_id_arg("elementSetuId")
@@ -183,10 +183,10 @@ class DefaultAlert(BaseElement):
         self._send_request(SetuActionType.GUIAUTO_ALERT_SEND_TEXT, SetuArg.textArg(text))
 
 
-class DefaultBrowser(BaseElement):
+class DefaultBrowser(BaseComponent):
 
-    def __init__(self, test_session, app_automator, setu_id):
-        super().__init__(test_session, app_automator, setu_id)
+    def __init__(self, test_session, app_automator):
+        super().__init__(test_session, app_automator)
 
     def go_to_url(self, url):
         self._send_request(SetuActionType.GUIAUTO_BROWSER_GO_TO_URL, SetuArg.arg("url", url))
@@ -244,7 +244,7 @@ class AbstractBasicWindow(BaseElement):
 
     def get_title(self):
         response = self._send_request(SetuActionType.GUIAUTO_WINDOW_GET_TITLE)
-        return response.getValueForKey("title").asString()
+        return response.get_value_for_key("title").as_string()
 
     def focus(self):
         self._send_request(SetuActionType.GUIAUTO_WINDOW_FOCUS)
@@ -259,7 +259,7 @@ class DefaultChildWindow(AbstractBasicWindow):
         self._send_request(SetuActionType.GUIAUTO_CHILD_WINDOW_CLOSE)
 
     def MainWindow(self):
-        return self.getAutomator().mainWindow()
+        return self._get_automator().MainWindow()
 
 
 class DefaultMainWindow(AbstractBasicWindow):

@@ -1,7 +1,6 @@
 import re
 import xml.etree.ElementTree as ETree
 
-from arjuna.tpi import Arjuna
 from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.unitee.enums import *
@@ -59,6 +58,7 @@ class Picker:
         self.__module_matcher = None
         self.__function_matcher = None
 
+        from arjuna.tpi import Arjuna
         self.console = Arjuna.get_console()
         self.tm_prefix = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.UNITEE_PROJECT_TEST_MODULE_IMPORT_PREFIX).as_string()
         self.__process()

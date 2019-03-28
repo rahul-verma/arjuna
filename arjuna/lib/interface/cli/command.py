@@ -35,7 +35,7 @@ from arjuna.lib.unitee.enums import *
 from arjuna.lib.core.utils import sys_utils
 from arjuna.lib.core.utils import file_utils
 from arjuna.lib.core.reader.hocon import HoconFileReader, HoconConfigDictReader
-
+from arjuna.lib.interface.cli.config import CliArgsConfig
 from .validation import *
 
 from arjuna.tpi.enums import ArjunaOption
@@ -70,60 +70,15 @@ class Command(metaclass=abc.ABCMeta):
     def execute(self, integrator, arg_dict):
         pass
 
-    def __process_conf_file(self, path):
-        from arjuna.lib.core import ArjunaCore
-
-        armap = {}
-        uomap = {}
-        evars = {}
-
-        try:
-            r = HoconFileReader(path)
-            r.process()
-        except Exception as e:
-            strace = traceback.format_exc()
-            ArjunaCore.console.display_exception_block(e, strace)
-            sys_utils.fexit()
-        else:
-            for k,v in r.get_map().items():
-                lk = k.lower()
-                if lk == "arjuna_options":
-                    r = HoconConfigDictReader(v)
-                    r.process()
-                    armap = r.get_flat_map()
-                elif lk == "evars":
-                    uomap = v
-                elif lk == "user_options":
-                    evars = v
-
-        return armap, uomap, evars
-
-    def __process_confs(self, integrator, ppd, pname, cli_map):
-        cfile = file_utils.normalize_path(os.path.join(integrator.value(CorePropertyTypeEnum.CONFIG_DIR),
-                             integrator.value(CorePropertyTypeEnum.CONFIG_CENTRAL_FILE_NAME)))
-
-        armap, uomap, evars = self.__process_conf_file(cfile)
-        armap2, uomap2, evars2 = self.__process_conf_file(
-            file_utils.normalize_path(os.path.join(ppd, pname, "config", "{}.conf".format(pname))))
-
-        armap.update(armap2); uomap.update(uomap2); evars.update(evars2)
-
-        integrator.process_conf_file_options(armap)
-        integrator.process_interface_options(cli_map)
-
-        integrator.process_user_options(uomap)
-
-        integrator.process_evars(evars)
-
 class MainCommand(Command):
 
     def __init__(self):
         super().__init__()
         parser = argparse.ArgumentParser(prog='python arjuna_launcher.py', conflict_handler='resolve',
                                 description="This is the CLI of Arjuna. Use the appropriate command and sub-commands as needed.")
-        parser.add_argument('-dl', '--display-level', dest='logger.console.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
+        parser.add_argument('-dl', '--display-level', dest='arjuna.log.console.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
                                  help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
-        parser.add_argument('-ll', '--log-level', dest='logger.file.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
+        parser.add_argument('-ll', '--log-level', dest='arjuna.log.file.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
                                  help="Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
         self._set_parser(parser)
 
@@ -211,6 +166,7 @@ class CreateProject(Command):
 
             print("Project {} successfully created.".format(pname))
 
+
 class __RunCommand(Command):
     def __init__(self, subparsers, sub_parser_name, parents):
         super().__init__()
@@ -224,17 +180,19 @@ class __RunCommand(Command):
             parent.process(arg_dict)
 
         from arjuna.tpi import Arjuna
-        Arjuna.init(arg_dict["project.root.dir"])
+        project_root_dir = arg_dict["project.root.dir"]
+        del arg_dict["project.root.dir"]
+        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict))
 
         import sys
-        proj_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.SETU_PROJECT_ROOT_DIR).as_string()
+        proj_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.PROJECT_ROOT_DIR).as_string()
         sys.path.append(proj_dir + "/..")
 
         py_3rdparty_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR).as_string()
-        print(py_3rdparty_dir)
         sys.path.append(py_3rdparty_dir)
         self.unitee = Arjuna.get_unitee_instance()
         self.unitee.load_testdb()
+
 
 class RunProject(__RunCommand):
     def __init__(self, subparsers, parents):
@@ -246,16 +204,17 @@ class RunProject(__RunCommand):
         self.unitee.run()
         self.unitee.tear_down()
 
+
 class RunSession(__RunCommand):
     def __init__(self, subparsers, parents):
         super().__init__(subparsers, 'run-session', parents)
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
-        from arjuna.tpi import Arjuna
-        self.unitee.load_session(arg_dict['session.name'])
+        self.unitee.load_session(arg_dict['unitee.project.session.name'])
         self.unitee.run()
         self.unitee.tear_down()
+
 
 class RunGroup(__RunCommand):
     def __init__(self, subparsers, parents):
@@ -267,18 +226,19 @@ class RunGroup(__RunCommand):
         self.unitee.run()
         self.unitee.tear_down()
 
+
 class RunNames(__RunCommand):
     def __init__(self, subparsers, parents):
         super().__init__(subparsers, 'run-names', parents)
 
     def execute(self, arg_dict):
-        super().execute(arg_dict)
         picker_args = {
-            'cm': arg_dict['cmodules'],
-            'im': arg_dict['imodules'],
-            'cf': arg_dict['cfunctions'],
-            'if': arg_dict['ifunctions'],
+            'cm': arg_dict.pop('cmodules'),
+            'im': arg_dict.pop('imodules'),
+            'cf': arg_dict.pop('cfunctions'),
+            'if': arg_dict.pop('ifunctions')
         }
+        super().execute(arg_dict)
         self.unitee.load_session_for_name_pickers(**picker_args)
         self.unitee.run()
         self.unitee.tear_down()

@@ -24,7 +24,7 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
-from arjex.tests.modules.ep11_my_dependencies import failing_module
+from . import failing_module
 
 @init_module(
     exclude_if=problem_in(modules(failing_module))

@@ -22,6 +22,8 @@ limitations under the License.
 import sys
 import re
 
+from arjuna.tpi.enums import ArjunaOption
+
 def ustr(input):
     return (str(input)).upper()
 
@@ -62,4 +64,3 @@ def port(input):
         print('Invalid Setu port {} provided. It should be an int such that 1024 < port < 65535'.format(input))
         sys.exit(1)
     return input
-

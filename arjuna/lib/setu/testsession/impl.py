@@ -12,10 +12,38 @@ class TestConfigurator:
     def __init__(self):
         self.__default_ref_config = None
         self.__config_map = {}
+        self.__cli_central_config = None
+        self.__cli_test_config = None
 
-    def init(self, root_dir):
+    def __create_config_from_option_dicts(self, reference, arjuna_options, user_options):
+        print(arjuna_options)
+        crawdict = {
+            "arjunaOptions": arjuna_options,
+            "userOptions": user_options
+        }
+        print("===============>", crawdict)
+        print(json.dumps(crawdict))
+        hreader = HoconStringReader(json.dumps(crawdict))
+        hreader.process()
+        print(hreader.get_map())
+        config = ConfigCreator.create_new_conf(
+            self.__default_ref_config.processor,
+            reference,
+            hreader.get_map()
+        )
+        return config
+
+    def __init_cli_dicts(self, arjunaCentralOptions={}, arjunaTestOptions={}, userCentralOptions={}, userTestOptions={}):
+        self.__cli_central_config = self.__create_config_from_option_dicts(None, arjunaCentralOptions, userCentralOptions)
+        self.__cli_test_config = self.__create_config_from_option_dicts(None, arjunaTestOptions,
+                                                                        userTestOptions)
+
+    def init(self, root_dir, cli_config):
         self.__default_ref_config = CentralConfigLoader(root_dir).config
         self.__config_map[self.__default_ref_config.setu_id] = self.__default_ref_config
+        cli_config = cli_config and cli_config or {}
+        print(cli_config)
+        self.__init_cli_dicts(**cli_config)
         return self.__default_ref_config.setu_id
 
     def create_project_conf(self):
@@ -41,20 +69,9 @@ class TestConfigurator:
         rvalue = self.__default_ref_config.setu_config.value(sname)
         return rvalue
 
-    def register_config(self, setu_options, has_parent, user_options, parent_config_id):
-        ref = has_parent and self.__config_map[parent_config_id] or self.__default_ref_config
-        crawdict = {
-            "arjunaOptions": setu_options,
-            "userOptions": user_options
-        }
-        hreader = HoconStringReader(json.dumps(crawdict))
-        hreader.process()
-        config = ConfigCreator.create_new_conf(
-            self.__default_ref_config.processor,
-            ref,
-            hreader.get_map()
-        )
-        config.process_setu_options()
+    def register_config(self, arjuna_options, has_parent, user_options, parent_config_id):
+        reference = has_parent and self.__config_map[parent_config_id] or self.__default_ref_config
+        config = self.__create_config_from_option_dicts(reference, arjuna_options, user_options)
         self.__config_map[config.setu_id] = config
         return config.setu_id
 
@@ -74,5 +91,5 @@ class TestSession(SetuManagedObject):
     def data_broker(self):
         return self.__data_broker
 
-    def init(self, root_dir):
-        return self.__configurator.init(root_dir)
+    def init(self, root_dir, cli_config):
+        return self.__configurator.init(root_dir, cli_config)

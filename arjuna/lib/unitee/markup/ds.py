@@ -68,7 +68,7 @@ class _DataFile(_DataMarkUp):
         self.path = path
         self.delimiter = delimiter
 
-        data_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.SETU_PROJECT_DATA_SOURCES_DIR).as_string()
+        data_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.DATA_SOURCES_DIR).as_string()
 
         if file_utils.is_absolute_path(self.path):
             if not file_utils.is_file(self.path):

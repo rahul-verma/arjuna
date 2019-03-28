@@ -85,7 +85,7 @@ class ActiveReporter(__Reporter):
     def __init__(self):
         super().__init__()
         self.lock = threading.RLock()
-        rdir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.SETU_PROJECT_REPORT_DIR).as_string()
+        rdir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.REPORT_DIR).as_string()
         file_utils.delete_dir_if_exists(rdir)
         self.__rr_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.UNITEE_PROJECT_RUN_REPORT_DIR).as_string()
         os.makedirs(self.__rr_dir)

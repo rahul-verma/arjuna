@@ -1,15 +1,18 @@
 from arjuna.lib.setu.core.requester.config import DefaultTestConfig, SetuActionType, SetuArg
 from arjuna.lib.setu.core.requester.connector import BaseSetuObject
 
+
 class DefaultTestSession(BaseSetuObject):
     
     def __init__(self):
         super().__init__()
         self.__DEF_CONF_NAME = "central"
 
-    def init(self, project_root_dir, runid=None):
+    def init(self, project_root_dir, cli_config, runid):
         super().__init__()
         args = [SetuArg.arg("projectRootDir", project_root_dir)]
+        if cli_config:
+            args.append(SetuArg.arg("cliConfig", cli_config.as_map()))
         if runid:
             args.append(SetuArg.arg("runId", runid))
 

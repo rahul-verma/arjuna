@@ -106,7 +106,7 @@ class DefaultTestConfig(BaseSetuObject):
 
     def __fetch_config_option_value(self, setu_action_type, option_str):
         response = self._send_request(setu_action_type, SetuArg.arg("option", option_str))
-        return AnyRefValue(response.get_value())
+        return response.get_value()
 
     def __normalize_option_str(self, option_str):
         return option_str.upper().strip().replace(".", "_")

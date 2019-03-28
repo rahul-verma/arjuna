@@ -1,5 +1,6 @@
 import os
 import copy
+import re
 import datetime
 from arjuna.lib.trishanku.tpi.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
 
@@ -28,13 +29,17 @@ class ConfigCreator:
     @classmethod
     def __setu_conf_key(cls, key):
         try:
+            print(key)
+            key = re.sub(r"\"(.*?)\"", r"\1", key)
+            print(key)
             return ArjunaOption[key]
         except Exception:
-            raise Exception("Config option [{}] is not a valid ArjunaOption constant".format(key))
+            raise Exception("Config option <{}> is not a valid ArjunaOption constant".format(key))
 
     @classmethod
     def __get_flat_map_from_hocon_string(cls, hreader):
         hreader.process()
+        print("dfkgjhdfgkhdfgkdfhgkdfhgjkdhfgkjdhgf", hreader.get_flat_map())
         return {i.upper().strip().replace(".", "_"): j for i, j in hreader.get_flat_map().items()}
 
     @classmethod      
@@ -73,8 +78,8 @@ class ConfigCreator:
 
     @classmethod
     def __create_new_conf(cls, processor, source, setu_dict=None, user_dict=None):
-        out_setu = copy.deepcopy(source.setu_config.as_map())
-        out_user = copy.deepcopy(source.user_config.as_map())
+        out_setu = source and copy.deepcopy(source.setu_config.as_map()) or {}
+        out_user = source and copy.deepcopy(source.user_config.as_map()) or {}
         if setu_dict:
             out_setu.update(setu_dict)
         if user_dict:
@@ -87,18 +92,16 @@ class ConfigCreator:
             return cls.__create_new_conf(processor, source)
 
         custom_setu_conf = None
-        if "setuOptions" in cdict:
+        if "arjunaOptions" in cdict:
             # setuOptions
-            custom_raw_setu_config_map = cls.get_flat_map_from_hocon_string_for_setu_types(
-                HoconConfigDictReader(cdict["setuOptions"])
-            )
+            d = HoconConfigDictReader(cdict["arjunaOptions"])
+            custom_raw_setu_config_map = cls.get_flat_map_from_hocon_string_for_setu_types(d)
             custom_setu_conf = cls.create_config_for_raw_map(custom_raw_setu_config_map, processor.get_setu_option_validator)
 
         custom_user_conf = None
         if "userOptions" in cdict:
-            project_raw_user_config_map = cls.__get_flat_map_from_hocon_string(
-                HoconConfigDictReader(cdict["userOptions"])
-            )
+            d = HoconConfigDictReader(cdict["userOptions"])
+            project_raw_user_config_map = cls.__get_flat_map_from_hocon_string(d)
             custom_user_conf = cls.create_config_for_raw_map(
                 project_raw_user_config_map, 
                 processor.get_user_option_validator
@@ -175,7 +178,7 @@ class ProjectConfigCreator(BaseConfigProcessor):
 
     def __process(self):
         # Process project conf
-        project_conf_file = self.__central_conf.setu_config.value(ArjunaOption.SETU_PROJECT_CONF_FILE)
+        project_conf_file = self.__central_conf.setu_config.value(ArjunaOption.PROJECT_CONF_FILE)
         project_hreader = HoconFileReader(project_conf_file)
         project_hreader.process()
         cdict = project_hreader.get_map()

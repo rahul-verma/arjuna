@@ -21,11 +21,10 @@ limitations under the License.
 
 import re
 import xml.etree.ElementTree as ETree
-
-from arjuna.tpi import Arjuna
-from arjuna.tpi.enums import ArjunaOption
-from arjuna.lib.core.enums import *
-from arjuna.lib.unitee.enums import *
+#
+# from arjuna.tpi.enums import ArjunaOption
+# from arjuna.lib.core.enums import *
+# from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.core.reader.hocon import *
 from arjuna.lib.core.reader.textfile import *
@@ -96,6 +95,7 @@ class GroupConfsLoader:
 
     @staticmethod
     def __load_pick_all(gconfs):
+        from arjuna.tpi import Arjuna
         central_config = Arjuna.get_central_config()
         arjuna_root_dir = central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_ROOT_DIR).as_string()
         fpath = os.path.join(
@@ -109,9 +109,10 @@ class GroupConfsLoader:
 
     @staticmethod
     def __load_user_gconfs(gconfs):
+        from arjuna.tpi import Arjuna
         console = Arjuna.get_console()
         central_config = Arjuna.get_central_config()
-        ugcdir = central_config.get_arjuna_option_value(ArjunaOption.SETU_PROJECT_CONF_DIR).as_string()
+        ugcdir = central_config.get_arjuna_option_value(ArjunaOption.CONFIG_DIR).as_string()
         ugfpath = os.path.join(ugcdir, "groups.xml")
 
         def display_err_and_exit(msg):

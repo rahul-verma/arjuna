@@ -56,7 +56,7 @@ class SetuGuiAutoActorElementActionType(Enum):
 	GET_TEXT_CONTENT = auto()
 
 class SetuActorDriverConfigOption(Enum):
-    GUIAUTO_AUTOMATOR_NAME = auto()
+    AUTOMATOR_NAME = auto()
     GUIAUTO_CONTEXT = auto()
 
     # Browser (Common)

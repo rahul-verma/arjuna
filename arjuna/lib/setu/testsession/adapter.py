@@ -28,9 +28,9 @@ class TestSessionHandler:
     def setu_id(self):
         return self.__testsession.setu_id
 
-    def init(self, root_dir):
+    def init(self, root_dir, cliConfig=None):
         self.__testsession = TestSession()
-        self.__testsession.init(root_dir)
+        self.__testsession.init(root_dir, cliConfig)
         self.__conf_handler = TestSessionConfHandler(self.__testsession.configurator)
         self.__databroker_handler = TestSessionDataBrokerHandler(self.__testsession.data_broker)
         config_setu_id = self.__testsession.configurator.create_project_conf()

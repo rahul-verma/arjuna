@@ -1,6 +1,7 @@
 from enum import Enum, auto
 
 from arjuna.lib.setu.core.webclient.requester import SetuAgentRequester
+from arjuna.lib.core.value import AnyRefValue
 
 
 class ResponseCode:
@@ -25,8 +26,8 @@ class DefaultSetuResponse:
     def get_data(self):
         return self.__response_dict["responseData"]
 
-    def get_value_for_key(self, keyName):
-        return self.get_data()[keyName]
+    def get_value_for_key(self, key):
+        return AnyRefValue(self.get_data()[key])
 
     def get_value(self):
         return self.get_value_for_key("value")
@@ -41,22 +42,22 @@ class DefaultSetuResponse:
         return self.get_value_for_key("checkResult")
 
     def get_value_for_element_setu_id(self):
-        return self.get_value_for_key("elementSetuId")
+        return self.get_value_for_key("elementSetuId").as_string()
 
     def get_value_for_testsession_setu_id(self):
-        return self.get_value_for_key("testSessionSetuId")
+        return self.get_value_for_key("testSessionSetuId").as_string()
 
     def get_value_for_config_setu_id(self):
-        return self.get_value_for_key("configSetuId")
+        return self.get_value_for_key("configSetuId").as_string()
 
     def get_value_for_guiautomator_setu_id(self):
-        return self.get_value_for_key("automatorSetuId")
+        return self.get_value_for_key("automatorSetuId").as_string()
 
     def get_gui_setu_id(self):
-        return self.get_value_for_key("guiSetuId")
+        return self.get_value_for_key("guiSetuId").as_string()
 
     def get_data_source_setu_id(self):
-        return self.get_value_for_key("dataSourceSetuId")
+        return self.get_value_for_key("dataSourceSetuId").as_string()
 
     def add_data_item(self, name, value):
         if not self.getData():
