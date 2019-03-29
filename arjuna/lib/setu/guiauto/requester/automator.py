@@ -39,8 +39,11 @@ class AbstractAppAutomator(BaseSetuObject):
         return response.get_value_for_element_setu_id()
 
     def __create_generic_element(self, setu_action_type, *with_locators):
-        locators = [l.as_map() for l in with_locators]
-        return self.__take_element_finder_action(setu_action_type, SetuArg.arg("locators", locators))
+        if with_locators:
+            locators = [l.as_map() for l in with_locators]
+            return self.__take_element_finder_action(setu_action_type, SetuArg.arg("locators", locators))
+        else:
+            return self.__take_element_finder_action(setu_action_type)
 
     def Element(self, *with_locators):
         elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_ELEMENT, *with_locators)
@@ -58,8 +61,8 @@ class AbstractAppAutomator(BaseSetuObject):
         elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_RADIOGROUP, *with_locators)
         return GuiAutoComponentFactory.RadioGroup(self.__test_session, self, elem_setu_id)
 
-    def Alert(self, *with_locators):
-        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_ALERT, *with_locators)
+    def Alert(self):
+        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_ALERT)
         return GuiAutoComponentFactory.Alert(self.__test_session, self, elem_setu_id)
 
     def Frame(self, *with_locators):
@@ -107,7 +110,7 @@ class AbstractAppAutomator(BaseSetuObject):
             args.append(SetuArg.arg("interval", interval))
         self._send_request(SetuActionType.GUIAUTO_SET_SLOMO, *args)
 
-    def execute_java_script(self, script):
+    def execute_javascript(self, script):
         self._send_request(SetuActionType.GUIAUTO_BROWSER_EXECUTE_JAVASCRIPT, SetuArg.arg("script", script))
 
 

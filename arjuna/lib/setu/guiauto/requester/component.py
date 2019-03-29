@@ -177,10 +177,10 @@ class DefaultAlert(BaseElement):
 
     def get_text(self):
         response = self._send_request(SetuActionType.GUIAUTO_ALERT_GET_TEXT)
-        return response.getValueForText()
+        return response.get_value_for_text()
 
     def send_text(self, text):
-        self._send_request(SetuActionType.GUIAUTO_ALERT_SEND_TEXT, SetuArg.textArg(text))
+        self._send_request(SetuActionType.GUIAUTO_ALERT_SEND_TEXT, SetuArg.text_arg(text))
 
 
 class DefaultBrowser(BaseComponent):

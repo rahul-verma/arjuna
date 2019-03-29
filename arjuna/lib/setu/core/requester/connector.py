@@ -36,7 +36,7 @@ class DefaultSetuResponse:
         return self.get_value_for_key("value")
 
     def get_value_for_text(self):
-        return self.get_value_for_key("text")
+        return self.get_value_for_key("text").as_string()
 
     def get_value_for_check_result(self):
         return self.get_value_for_key("checkResult")
