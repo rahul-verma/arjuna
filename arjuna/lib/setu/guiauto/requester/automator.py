@@ -36,37 +36,37 @@ class AbstractAppAutomator(BaseSetuObject):
 
     def __take_element_finder_action(self, setu_action_type, *setu_args):
         response = self._send_request(setu_action_type, *setu_args)
-        return response.getValueForElementSetuId()
+        return response.get_value_for_element_setu_id()
 
-    def __create_generic_element(self, setu_action_type, *withlocators):
-        arg = [l.asMap() for l in withlocators]
-        return self.__take_element_finder_action(setu_action_type, *arg)
+    def __create_generic_element(self, setu_action_type, *with_locators):
+        locators = [l.as_map() for l in with_locators]
+        return self.__take_element_finder_action(setu_action_type, SetuArg.arg("locators", locators))
 
-    def Elememt(self, *locators):
-        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_ELEMENT, locators)
+    def Element(self, *with_locators):
+        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_ELEMENT, *with_locators)
         return GuiAutoComponentFactory.Element(self.__test_session, self, elem_setu_id)
 
-    def MultiElement(self, *locators):
-        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_MULTIELEMENT, locators)
+    def MultiElement(self, *with_locators):
+        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_MULTIELEMENT, *with_locators)
         return GuiAutoComponentFactory.MultiElement(self.__test_session, self, elem_setu_id)
 
-    def DropDown(self, *locators):
-        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_DROPDOWN, locators)
+    def DropDown(self, *with_locators):
+        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_DROPDOWN, *with_locators)
         return GuiAutoComponentFactory.DropDown(self.__test_session, self, elem_setu_id)
 
-    def RadioGroup(self, *locators):
-        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_RADIOGROUP, locators)
+    def RadioGroup(self, *with_locators):
+        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_RADIOGROUP, *with_locators)
         return GuiAutoComponentFactory.RadioGroup(self.__test_session, self, elem_setu_id)
 
-    def Alert(self, *locators):
-        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_ALERT, locators)
+    def Alert(self, *with_locators):
+        elem_setu_id = self.__create_generic_element(SetuActionType.GUIAUTO_CREATE_ALERT, *with_locators)
         return GuiAutoComponentFactory.Alert(self.__test_session, self, elem_setu_id)
 
-    def Frame(self, *locators):
-        return self.DomRoot().Frame(locators)
+    def Frame(self, *with_locators):
+        return self.DomRoot().Frame(with_locators)
 
-    def ChildWindow(self, *locators):
-        return self.MainWindow().child_window(locators)
+    def ChildWindow(self, *with_locators):
+        return self.MainWindow().child_window(*with_locators)
 
     def LatestChildWindow(self):
         return self.MainWindow.latest_child_window()
@@ -107,7 +107,7 @@ class AbstractAppAutomator(BaseSetuObject):
             args.append(SetuArg.arg("interval", interval))
         self._send_request(SetuActionType.GUIAUTO_SET_SLOMO, *args)
 
-    def excute_java_script(self, script):
+    def execute_java_script(self, script):
         self._send_request(SetuActionType.GUIAUTO_BROWSER_EXECUTE_JAVASCRIPT, SetuArg.arg("script", script))
 
 
@@ -123,13 +123,13 @@ class DefaultGuiAutomator(AbstractAppAutomator):
         if self.__extended_config:
             response = self._send_request(
                 SetuActionType.TESTSESSION_LAUNCH_GUIAUTOMATOR,
-                SetuArg.configArg(self.getConfig().getSetuId()),
+                SetuArg.config_arg(self.get_config().get_setu_id()),
                 SetuArg.arg("extendedConfig", self.__extended_config)
             )
         else:
             response = self._send_request(
                 SetuActionType.TESTSESSION_LAUNCH_GUIAUTOMATOR,
-                SetuArg.config_arg("configSetuId", self.get_config().get_setu_id())
+                SetuArg.config_arg(self.get_config().get_setu_id())
             )
 
         self._set_setu_id(response.get_value_for_guiautomator_setu_id())

@@ -119,7 +119,7 @@ class BaseSetuObject:
 
     def _add_args(self, *vargs):
         for arg in vargs:
-            self.__core_args[arg.getName()] = arg.get_object()
+            self.__core_args[arg.get_name()] = arg.get_object()
 
     def __prepare_request_with_core_args(self, request):
         for name, value in self.__core_args.items():
@@ -130,6 +130,7 @@ class BaseSetuObject:
             request.add_arg(arg.get_name(), arg.get_object())
 
     def _create_request(self, setu_action_type, *vargs):
+        print(vargs)
         request = _DefaultSetuRequest(setu_action_type)
         self.__prepare_request_with_core_args(request)
         self.__prepare_request(request, *vargs)
@@ -156,19 +157,19 @@ class SetuArg:
         return SetuArg(name, obj)
 
     @staticmethod
-    def text_arg(name, obj):
+    def text_arg(obj):
         return SetuArg("text", obj)
 
     @staticmethod
-    def value_arg(name, obj):
+    def value_arg(obj):
         return SetuArg("value", obj)
 
     @staticmethod
-    def index_arg(name, obj):
+    def index_arg(obj):
         return SetuArg("index", obj)
 
     @staticmethod
-    def config_arg(name, obj):
+    def config_arg(obj):
         return SetuArg("configSetuId", obj)
 
     @staticmethod

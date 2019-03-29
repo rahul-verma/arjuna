@@ -18,11 +18,16 @@ class SetuSvc(Resource):
             return {'result': 'error', 'emessage': 'Invalid Setu action: {}'.format(json_action), 'etrace': 'NA'}, 500
         else:
             if action_type == SetuActionType.TESTSESSION_INIT:
-                root_dir = json_dict["args"]["projectRootDir"]
-                del json_dict["args"]["projectRootDir"]
-                res = self.__register_test_session(root_dir, **json_dict["args"])
-                print(res)
-                return {'result': 'success', 'responseData': res}, 200
+                try:
+                    root_dir = json_dict["args"]["projectRootDir"]
+                    del json_dict["args"]["projectRootDir"]
+                    res = self.__register_test_session(root_dir, **json_dict["args"])
+                    print(res)
+                    return {'result': 'success', 'responseData': res}, 200
+                except Exception as e:
+                    import traceback
+                    etrace = traceback.format_exc()
+                    return {'result': 'error', 'emessage': str(e), 'etrace': str(etrace)}, 500
             elif action_type == SetuActionType.TESTSESSION_FINISH:
                 pass
             else:

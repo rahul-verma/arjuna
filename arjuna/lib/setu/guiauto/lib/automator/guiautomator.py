@@ -12,7 +12,7 @@ class GuiAutomator(ElementContainer):
         print(config.setu_config.as_json_dict())
         super().__init__(config)
         self.__extended_config = extended_config
-        self.__automator_uri = "/s02_guiauto/automator/{}".format(self.get_setu_id())
+        self.__automator_uri = "/s02guiauto/automator/{}".format(self.get_setu_id())
         self.__create_screenshots_dir()
         self.__main_window = None
         self.__in_slomo = config.setu_config.value(ArjunaOption.GUIAUTO_SLOMO_ON)

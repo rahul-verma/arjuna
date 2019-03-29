@@ -78,10 +78,10 @@ class DefaultGuiElement(BaseElement):
         super().__init__(test_session, app_automator, setu_id, index)
 
     def enter_text(self, text):
-        self._send_request(SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXTs)
+        self._send_request(SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXT, SetuArg.text_arg(text))
 
     def set_text(self, text):
-        self._send_request(SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXT)
+        self._send_request(SetuActionType.GUIAUTO_ELEMENT_SET_TEXT, SetuArg.text_arg(text))
 
     def click(self):
         self._send_request(SetuActionType.GUIAUTO_ELEMENT_CLICK)
@@ -101,8 +101,8 @@ class DefaultGuiMultiElement(BaseElement):
     def __init__(self, test_session, app_automator, setu_id):
         super().__init__(test_session, app_automator, setu_id)
 
-    def get_instance_at_index(self, index):
-        return GuiAutoComponentFactory.GuiElement(self._get_test_session(), self._get_automator(), self.getSetuId(), index)
+    def IndexedElement(self, index):
+        return DefaultGuiElement(self._get_test_session(), self._get_automator(), self.get_setu_id(), index)
 
 
 class DefaultDropDown(BaseElement):

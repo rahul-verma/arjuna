@@ -64,9 +64,19 @@ class TestConfigurator:
         rvalue = self.__config_map[config_setu_id].setu_config.value(sname)
         return rvalue
 
+    def get_user_option_value(self, config_setu_id, option):
+        sname = option.upper().strip().replace(".", "_")
+        rvalue = self.__config_map[config_setu_id].user_config.value(sname)
+        return rvalue
+
     def get_central_arjuna_option_value(self, option):
         sname = ArjunaOption[option.upper().strip().replace(".", "_")]
         rvalue = self.__default_ref_config.setu_config.value(sname)
+        return rvalue
+
+    def get_central_user_option_value(self, option):
+        sname = option.upper().strip().replace(".", "_")
+        rvalue = self.__default_ref_config.user_config.value(sname)
         return rvalue
 
     def register_config(self, arjuna_options, has_parent, user_options, parent_config_id):
