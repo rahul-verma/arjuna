@@ -19,7 +19,7 @@ def test(my):
     win.focus()
     print(win.get_title())
     win.close()
-    
+
     automator.execute_javascript("window.open('/def')")
     automator.execute_javascript("window.open('/xyz')")
     automator.close_all_child_windows()

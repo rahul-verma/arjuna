@@ -66,7 +66,7 @@ class AbstractAppAutomator(BaseSetuObject):
         return GuiAutoComponentFactory.Alert(self.__test_session, self, elem_setu_id)
 
     def Frame(self, *with_locators):
-        return self.DomRoot().Frame(with_locators)
+        return self.DomRoot().Frame(*with_locators)
 
     def ChildWindow(self, *with_locators):
         return self.MainWindow().ChildWindow(*with_locators)

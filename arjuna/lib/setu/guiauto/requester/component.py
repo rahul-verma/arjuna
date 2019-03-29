@@ -111,33 +111,33 @@ class DefaultDropDown(BaseElement):
         super().__init__(test_session, app_automator, setu_id)
 
     def has_value_selected(self, value):
-        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_VALUE_SELECTED, SetuArg.valueArg(value))
-        return response.getValueForCheckResult()
+        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_VALUE_SELECTED, SetuArg.value_arg(value))
+        return response.get_value_for_check_result()
 
     def has_index_selected(self, index):
-        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_INDEX_SELECTED, SetuArg.indexArg(index))
-        return response.getValueForCheckResult()
+        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_INDEX_SELECTED, SetuArg.index_arg(index))
+        return response.get_value_for_check_result()
 
     def select_by_value(self, value):
-        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VALUE, SetuArg.valueArg(value))
+        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VALUE, SetuArg.value_arg(value))
 
     def select_by_index(self, index):
-        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_INDEX, SetuArg.indexArg(index))
+        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_INDEX, SetuArg.index_arg(index))
 
-    def get_first_elected_option_value(self):
+    def get_first_selected_option_value(self):
         response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE)
-        return response.getValueForValueAttr()
+        return response.get_value_for_value_attr()
 
     def get_first_selected_option_text(self):
         response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_TEXT)
-        return response.getValueForText()
+        return response.get_value_for_text()
 
     def has_visible_text_selected(self, text):
-        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_VISIBLE_TEXT_SELECTED, SetuArg.textArg(text))
-        return response.getValueForCheckResult()
+        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_VISIBLE_TEXT_SELECTED, SetuArg.text_arg(text))
+        return response.get_value_for_check_result()
 
     def select_by_visible_text(self, text):
-        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.textArg(text))
+        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.text_arg(text))
 
 
 class DefaultRadioGroup(BaseElement):
@@ -146,22 +146,22 @@ class DefaultRadioGroup(BaseElement):
         super().__init__(test_session, app_automator, setu_id)
 
     def has_value_selected(self, value):
-        response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_HAS_VALUE_SELECTED, SetuArg.valueArg(value))
-        return response.getValueForCheckResult()
+        response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_HAS_VALUE_SELECTED, SetuArg.value_arg(value))
+        return response.get_value_for_check_result()
 
     def has_index_selected(self, index):
-        response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_HAS_INDEX_SELECTED, SetuArg.indexArg(index))
-        return response.getValueForCheckResult()
+        response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_HAS_INDEX_SELECTED, SetuArg.index_arg(index))
+        return response.get_value_for_check_result()
 
     def select_by_value(self, value):
-        self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_VALUE, SetuArg.valueArg(value))
+        self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_VALUE, SetuArg.value_arg(value))
 
     def select_by_index(self, index):
-        self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_INDEX, SetuArg.indexArg(index))
+        self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_INDEX, SetuArg.index_arg(index))
 
     def get_first_selected_option_value(self):
         response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE)
-        return response.getValueForValueAttr()
+        return response.get_value_for_value_attr()
 
 
 class DefaultAlert(BaseElement):
@@ -213,11 +213,11 @@ class DefaultFrame(BaseElement):
     def Frame(self, *withLocators):
         arg = [l.asMap() for l in withLocators]
         response = self._send_request(SetuActionType.GUIAUTO_FRAME_CREATE_FRAME, SetuArg.arg("locators", arg))
-        return GuiAutoComponentFactory.Frame(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
-    def Parent(self):
+    def ParentFrame(self):
         response = self._send_request(SetuActionType.GUIAUTO_FRAME_GET_PARENT)
-        return GuiAutoComponentFactory.Frame(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
 
 class DefaultDomRoot(BaseComponent):
@@ -228,12 +228,12 @@ class DefaultDomRoot(BaseComponent):
     def focus(self):
         self._send_request(SetuActionType.GUIAUTO_DOMROOT_FOCUS)
 
-    def Frame(self, *locators):
-        arg = [l.asMap() for l in locators]
+    def Frame(self, *with_locators):
+        arg = [l.as_map() for l in with_locators]
         response = self._send_request(SetuActionType.GUIAUTO_DOMROOT_CREATE_FRAME, SetuArg.arg("locators", arg))
-        return DefaultFrame(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
-    def Parent(self):
+    def ParentFrame(self):
         raise Exception("DOM root does not have a parent frame.")
 
 
