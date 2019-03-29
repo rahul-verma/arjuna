@@ -69,13 +69,13 @@ class AbstractAppAutomator(BaseSetuObject):
         return self.DomRoot().Frame(with_locators)
 
     def ChildWindow(self, *with_locators):
-        return self.MainWindow().child_window(*with_locators)
+        return self.MainWindow().ChildWindow(*with_locators)
 
     def LatestChildWindow(self):
-        return self.MainWindow.latest_child_window()
+        return self.MainWindow().LatestChildWindow()
 
     def close_all_child_windows(self):
-        self.MainWindow.close_all_child_windows()
+        self.MainWindow().close_all_child_windows()
 
     def MainWindow(self):
         return self.__main_window

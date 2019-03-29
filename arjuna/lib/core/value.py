@@ -12,7 +12,9 @@ class AnyRefValue:
     FALSES = {"NO", "FALSE", "OFF", "0"}
 
     def __init__(self, obj):
-        print(obj, type(obj))
+        # if type(obj) is str:
+        #     obj = obj.encode("utf-8")
+        # print(obj, type(obj))
         self.__obj = obj
         self.__str_obj = None
         if self.is_none():

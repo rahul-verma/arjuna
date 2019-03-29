@@ -21,7 +21,7 @@ class SetuAgentRequester:
         response_json = json.loads(response.text)
         self.__raise_exception_if_error(response_json)
         print("Response:: ", os.linesep, response.text)
-        return json.loads(response.text)
+        return json.loads(response.text, encoding="utf-8")
 
     def post(self, url, json_dict):
         req_url = self.base_url + url

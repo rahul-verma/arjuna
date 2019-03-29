@@ -277,11 +277,11 @@ class DefaultMainWindow(AbstractBasicWindow):
     def ChildWindow(self, *withLocators):
         arg = [l.asMap() for l in withLocators]
         response = self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_CREATE_CHILD_WINDOW, SetuArg.arg("locators", arg))
-        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
     def LatestChildWindow(self):
         response = self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_GET_LATEST_CHILD_WINDOW)
-        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
     def close_all_child_windows(self):
         self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS)

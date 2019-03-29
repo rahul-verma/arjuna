@@ -21,6 +21,11 @@ limitations under the License.
 
 import copy
 import os
+import codecs
+import sys
+import io
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="UTF-8")
+sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
 
 import logging
 from arjuna.lib.core.utils import thread_utils
@@ -30,6 +35,9 @@ from arjuna.lib.core.utils import sys_utils
 from arjuna.lib.core.adv.proxy import ROProxy
 from arjuna.lib.core.adv.decorators import singleton
 from arjuna.tpi.enums import ArjunaOption
+import codecs
+import sys
+
 
 @singleton
 class ArjunaSingleton:
@@ -156,12 +164,12 @@ class ArjunaSingleton:
 
         logger = logging.getLogger(self.prog)
         logger.setLevel(logging.DEBUG)
-        ch = logging.StreamHandler()
+        ch = logging.StreamHandler(sys.stdout)
         ch.setLevel(dl)
-        fh = logging.FileHandler(lpath, "w")
+        fh = logging.FileHandler(lpath, "w", 'utf-8')
         fh.setLevel(fl)
-        f_fmt = logging.Formatter('[%(levelname)5s]\t%(asctime)s\t%(pathname)s::%(module)s.%(funcName)s:%(lineno)d\t%(message)s')
-        c_fmt = logging.Formatter('%(message)s')
+        f_fmt = logging.Formatter(u'[%(levelname)5s]\t%(asctime)s\t%(pathname)s::%(module)s.%(funcName)s:%(lineno)d\t%(message)s')
+        c_fmt = logging.Formatter(u'[%(levelname)5s]\t%(message)s')
         ch.setFormatter(c_fmt)
         fh.setFormatter(f_fmt)
         logger.addHandler(ch)
@@ -179,17 +187,17 @@ class ArjunaSingleton:
             @sync_method('lock')
             def __log(self, message, err=False):
                 if err:
-                    mparts = message.replace("\r\n", "--|--").replace("\n", "--|--").split('--|--')
+                    mparts = message.replace(u"\r\n", u"--|--").replace(u"\n", u"--|--").split(u'--|--')
                     for mpart in mparts:
                         self.logger.error(mpart)
                 else:
-                    mparts = message.replace("\r\n", "--|--").replace("\n", "--|--").split('--|--')
+                    mparts = message.replace(u"\r\n", u"--|--").replace(u"\n", u"--|--").split(u'--|--')
                     for mpart in mparts:
                         self.logger.info(mpart)
 
             @sync_method('lock')
             def __print(self, message):
-                print (message, end='', file=sys.stdout, flush=True)
+                print(message, end='', file=sys.stdout, flush=True)
 
             @sync_method('lock')
             def __eprint(self, message):
