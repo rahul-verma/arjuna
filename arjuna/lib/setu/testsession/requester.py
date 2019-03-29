@@ -54,7 +54,7 @@ class DefaultTestSession(BaseSetuObject):
         return response.getDataSourceSetuId()
 
     def create_gui(self, automator, *setu_args):
-        args = setu_args + [SetuArg.arg("automatorSetuId", automator.get_setu_id())]
+        args = setu_args + (SetuArg.arg("automatorSetuId", automator.get_setu_id()), )
         response = self._send_request(
             SetuActionType.TESTSESSION_CREATE_GUI,
             *args

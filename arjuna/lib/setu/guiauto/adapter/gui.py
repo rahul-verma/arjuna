@@ -3,6 +3,7 @@ from arjuna.lib.setu.guiauto.lib.gui.namestore import GuiNameStore
 from arjuna.lib.setu.guiauto.lib.gui.gui import Gui
 from arjuna.tpi.enums import ArjunaOption
 
+
 class GuiHandlerManager:
 
     def __init__(self, project_config):
@@ -20,6 +21,7 @@ class GuiHandlerManager:
 
     def get_gui_handler(self, setu_id):
         return self.__gui_map[setu_id]
+
 
 # Arg names of methods show JSON names, so don't follow Python conventions.
 class GuiHandler:

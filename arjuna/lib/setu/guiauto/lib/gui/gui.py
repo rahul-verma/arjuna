@@ -12,7 +12,7 @@ class Gui(SetuConfiguredObject):
         self.__name_store = name_store
         self.__namespace_dir = namespace_dir
         self.__automator = automator
-        self.__auto_context = self.config.setu_config.value(ArjunaOption.GUIAUTO_CONTEXT)
+        self.__auto_context = self.config.setu_config.get_guiauto_context()
         self.__file_def_path = os.path.abspath(os.path.join(self.__namespace_dir, file_def_path.strip()))
         self.__ns = None
         ns_name = "file_ns::" + self.__file_def_path.lower()

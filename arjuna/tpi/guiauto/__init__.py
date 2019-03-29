@@ -1,6 +1,5 @@
 from enum import Enum, auto
 
-
 class _WithType(Enum):
     ID = auto()
     NAME = auto()
@@ -81,3 +80,12 @@ class With:
     @staticmethod
     def assigned_name(name):
         return With(_WithType.ASSIGNED_NAME, name)
+
+
+from arjuna.lib.setu.guiauto.requester.gui import BaseGui
+
+
+class DefaultGui(BaseGui):
+
+    def __init__(self, automator, label, def_file_name, parent=None):
+        super().__init__(automator, label, def_file_name, parent=parent)
