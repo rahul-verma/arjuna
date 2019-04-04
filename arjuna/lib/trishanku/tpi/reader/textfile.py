@@ -76,7 +76,6 @@ class FileLine2ArrayReader:
     def _populate_headers(self):
         try:
             self.headers = self.next()
-            print(self.headers)
         except:
             raise Exception("Invalid input file data. Empty headers line.")
 

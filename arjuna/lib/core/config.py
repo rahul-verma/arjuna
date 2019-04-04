@@ -217,9 +217,6 @@ class DefaultTestContext:
         for config_name, conf in self.__configs.items():
             builder = _ConfigBuilder(self.__test_session, self.__configs, self.__conf_trace, code_mode=False)
             builder.parent_config(conf)
-            print(container)
-            print(container.arjuna_options.items())
-            print(self.__conf_trace)
             amap = container.arjuna_options
             umap = container.user_options
             if config_name in self.__conf_trace:
@@ -276,11 +273,9 @@ class InternalTestContext(DefaultTestContext):
         self.__configs[config.get_name()] = config
 
     def clone(self):
-        print("CSource", self._get_configs())
         out_context = InternalTestContext(self._get_test_session(), self.get_name())
         out_context._add_configs(self._get_configs())
         out_context._add_conf_trace(self._get_conf_trace())
-        print("COut", out_context._get_configs())
         return out_context
 
     def clone_for_user(self):
@@ -296,7 +291,6 @@ class InternalTestContext(DefaultTestContext):
 class CliArgsConfig:
 
     def __init__(self, arg_dict):
-        print(arg_dict)
         self.__aco = {}
         self.__ato = {}
         self.__uco = {}
@@ -322,11 +316,6 @@ class CliArgsConfig:
 
         for akey, avalue in arg_dict.items():
             self.__aco[akey.lower()] = avalue
-
-        print(self.__aco)
-        print(self.__ato)
-        print(self.__uco)
-        print(self.__uto)
 
     def as_map(self):
         return {

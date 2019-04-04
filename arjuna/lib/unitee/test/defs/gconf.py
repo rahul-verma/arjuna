@@ -104,7 +104,6 @@ class GroupConfsLoader:
             arjuna_root_dir,
             "lib/unitee/res/st/magroup.xml"
         )
-        print(fpath)
         group_xml = ETree.parse(fpath).getroot()
         group_name = group_xml.attrib['name']
         gconfs[group_name] = GroupConf(group_name, group_xml, fpath)

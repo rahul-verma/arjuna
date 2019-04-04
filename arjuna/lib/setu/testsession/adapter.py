@@ -107,8 +107,6 @@ class TestSessionHandler:
         auto_handler = self.get_automator_handler(json_dict)
         parent_gui_setu_id = json_dict.pop("parentGuiSetuId")
         parent_gui_handler = self.__guimgr.get_gui_handler(parent_gui_setu_id)
-        print(action)
-        print(json_dict)
         return getattr(parent_gui_handler, action)(auto_handler, **json_dict)
 
     '''
@@ -126,7 +124,6 @@ class TestSessionHandler:
         gui_setu_id = json_dict.get("guiSetuId", None)
         if gui_setu_id is not None:
             handler = self.get_gui_handler(json_dict)
-        print(action, json_dict)
         return getattr(handler, action)(**json_dict)
 
     def take_browser_action(self, action, json_dict):

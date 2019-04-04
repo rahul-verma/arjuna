@@ -59,7 +59,6 @@ def lname_check(context, input):
 
 
 def port(input):
-    print("validating port")
     if type(input) is not str or int(input) < 1024:
         print('Invalid Setu port {} provided. It should be an int such that 1024 < port < 65535'.format(input))
         sys.exit(1)

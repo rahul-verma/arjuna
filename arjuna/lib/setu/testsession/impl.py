@@ -16,16 +16,12 @@ class TestConfigurator:
         self.__cli_test_config = None
 
     def __create_config_from_option_dicts(self, reference, arjuna_options, user_options):
-        print(arjuna_options)
         crawdict = {
             "arjunaOptions": arjuna_options,
             "userOptions": user_options
         }
-        print("===============>", crawdict)
-        print(json.dumps(crawdict))
         hreader = HoconStringReader(json.dumps(crawdict))
         hreader.process()
-        print(hreader.get_map())
         config = ConfigCreator.create_new_conf(
             self.__default_ref_config.processor,
             reference,

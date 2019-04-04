@@ -206,7 +206,6 @@ class Assertion:
                 precision = len(places)
                 allowed_diff = Decimal(self.__offset)
                 try:
-                    print(lhs, allowed_diff)
                     lhs = Decimal(lhs).quantize(allowed_diff, rounding=self.__rounding)
                 except Exception as e:
                     print(e)

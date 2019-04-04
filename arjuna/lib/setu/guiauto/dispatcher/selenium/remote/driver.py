@@ -42,7 +42,6 @@ class SeleniumDriver:
         self.post_action()
 
     def go_to_url(self, url):
-        print("gggg", url)
         self.post_action(url=url)
 
     def go_back_in_browser(self):
@@ -61,7 +60,6 @@ class SeleniumDriver:
         self.post_action()
 
     def find_element(self, child_gui_element_set_id, with_type, with_value):
-        print(child_gui_element_set_id, with_type, with_value)
         self.post_action(
             elementSetuId = child_gui_element_set_id,
             withType = with_type,
@@ -90,7 +88,6 @@ class SeleniumDriver:
 
     def get_current_window_handle(self):
         response = self.post_action()
-        print(response)
         return self.__get_result(response)
 
     def get_current_window_title(self):

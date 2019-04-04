@@ -9,11 +9,10 @@ class SetuSvc(Resource):
 
     def post(self):
         json_dict = request.get_json(force=True)
-        print("From Actor: {}".format(json_dict))
+        print("From Requester: {}".format(json_dict))
         json_action = json_dict["action"]
         try:
             action_type = SetuActionType[json_action.upper().strip()]
-            print(action_type)
         except:
             return {'result': 'error', 'emessage': 'Invalid Setu action: {}'.format(json_action), 'etrace': 'NA'}, 500
         else:

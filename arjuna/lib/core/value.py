@@ -100,7 +100,6 @@ class AnyRefValue:
             self.__throw_wrong_repr_exception("double")
 
     def as_enum_list(self, enumKlass):
-        print(type(self.object()) is list)
         try:
             if type(self.object()) is list:
                 return [enumKlass[i] for i in self.object()]

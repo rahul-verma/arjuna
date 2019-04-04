@@ -36,7 +36,6 @@ class DriverCapabilities:
     IOS_AUTO_ACCEPT_ALERTS = "autoAcceptAlerts"
 
     def __init__(self, config, json_dict):
-        print(config, json_dict)
         self.__config = config
         self.__out_dict = {
             "arjunaOptions" : {},
@@ -46,8 +45,6 @@ class DriverCapabilities:
             "browserPreferences":{},
             "browserExtensions":[]
         }
-
-        pprint.pprint(config.as_json_dict())
 
         self.__process_config(config)
         self.__process(json_dict)
@@ -104,7 +101,6 @@ class DriverCapabilities:
         for k,v in temp_d.items():
             if k in SetuActorDriverConfigOption.__members__:
                 self.__out_dict["arjunaOptions"][k] = v
-        pprint.pprint(self.__out_dict)
 
     def __process(self, dict_from_requester):
         self.__out_dict["driverCapabilities"][self.UNEXPECTED_ALERT_BEHAVIOUR] = "dismiss"

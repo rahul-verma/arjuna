@@ -38,7 +38,6 @@ class DataBroker:
         while True:
             try:
                 record = ds.next().record
-                print(record)
                 out.append(record)
             except:
                 break

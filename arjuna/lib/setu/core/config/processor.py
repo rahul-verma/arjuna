@@ -39,7 +39,6 @@ class ConfigCreator:
     @classmethod
     def __get_flat_map_from_hocon_string(cls, hreader):
         hreader.process()
-        print("dfkgjhdfgkhdfgkdfhgkdfhgjkdhfgkjdhgf", hreader.get_flat_map())
         return {i.upper().strip().replace(".", "_"): j for i, j in hreader.get_flat_map().items()}
 
     @classmethod      
@@ -162,13 +161,11 @@ class CentralConfigLoader(BaseConfigProcessor):
         raw_config_map = ConfigCreator.get_flat_map_from_hocon_string_for_setu_types(
             HoconStringReader(contents)
         )
-        pprint(raw_config_map)
         self._config = ConfigCreator.create_conf(
             self,
             ConfigCreator.create_config_for_raw_map(raw_config_map, self.get_setu_option_validator), 
             {}
         )
-        pprint(self.config.as_json_dict())
 
 class ProjectConfigCreator(BaseConfigProcessor):
 

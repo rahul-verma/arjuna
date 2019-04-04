@@ -130,7 +130,6 @@ class BaseSetuObject:
             request.add_arg(arg.get_name(), arg.get_object())
 
     def _create_request(self, setu_action_type, *vargs):
-        print(vargs)
         request = _DefaultSetuRequest(setu_action_type)
         self.__prepare_request_with_core_args(request)
         self.__prepare_request(request, *vargs)

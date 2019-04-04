@@ -9,7 +9,6 @@ from .drivercaps import DriverCapabilities
 class GuiAutomator(ElementContainer):
 
     def __init__(self, config, extended_config=None):
-        print(config.setu_config.as_json_dict())
         super().__init__(config)
         self.__extended_config = extended_config
         self.__automator_uri = "/s02guiauto/automator/{}".format(self.get_setu_id())
@@ -77,7 +76,6 @@ class GuiAutomator(ElementContainer):
 
     def launch(self):
         caps = DriverCapabilities(self.config, self.__extended_config)
-        print(self.dispatcher, caps.processed_config)
         self.dispatcher.launch(caps.processed_config)
 
         from arjuna.lib.setu.guiauto.lib.element.window import MainWindow
