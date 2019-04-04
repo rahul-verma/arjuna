@@ -35,7 +35,7 @@ from arjuna.lib.unitee.enums import *
 from arjuna.lib.core.utils import sys_utils
 from arjuna.lib.core.utils import file_utils
 from arjuna.lib.core.reader.hocon import HoconFileReader, HoconConfigDictReader
-from arjuna.lib.interface.cli.config import CliArgsConfig
+from arjuna.lib.core.config import CliArgsConfig
 from .validation import *
 
 from arjuna.tpi.enums import ArjunaOption
@@ -47,6 +47,7 @@ blank_groups_xml = '''<groups>
         </pickers>
     </group>
 </groups>'''
+
 
 class Command(metaclass=abc.ABCMeta):
     PENTRY = '''
@@ -69,6 +70,7 @@ class Command(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def execute(self, integrator, arg_dict):
         pass
+
 
 class MainCommand(Command):
 
@@ -98,6 +100,7 @@ class MainCommand(Command):
 
     def execute(self, arg_dict):
         pass
+
 
 class LaunchSetu(Command):
     def __init__(self, subparsers, parents):
@@ -221,8 +224,9 @@ class RunGroup(__RunCommand):
         super().__init__(subparsers, 'run-group', parents)
 
     def execute(self, arg_dict):
+        group_name = arg_dict.pop('group.name')
         super().execute(arg_dict)
-        self.unitee.load_session_for_group(arg_dict['group.name'])
+        self.unitee.load_session_for_group(group_name)
         self.unitee.run()
         self.unitee.tear_down()
 

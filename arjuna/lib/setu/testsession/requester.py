@@ -1,4 +1,6 @@
-from arjuna.lib.setu.core.requester.config import DefaultTestConfig, SetuActionType, SetuArg
+from arjuna.lib.setu.core.requester.config import SetuActionType
+from arjuna.lib.setu.core.requester.connector import SetuArg
+from arjuna.lib.core.config import DefaultTestConfig
 from arjuna.lib.setu.core.requester.connector import BaseSetuObject
 
 
@@ -38,7 +40,7 @@ class DefaultTestSession(BaseSetuObject):
                 SetuArg.arg("setuOptions", setuOptions),
                 SetuArg.arg("userOptions", userOptions)
         )
-        return response.getValueForConfigSetuId()
+        return response.get_value_for_config_setu_id()
 
     def register_config(self, arjuna_options, user_options):
         return self.__register_config(False, None, arjuna_options, user_options)

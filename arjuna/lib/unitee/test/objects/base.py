@@ -125,6 +125,8 @@ class TestObject(metaclass=abc.ABCMeta):
 
     def run(self, base_tvars=None):
         if base_tvars:
+            print("Base vars defined with context configs:", base_tvars.context._get_configs())
+            self.tvars.context = base_tvars.context.clone()
             self.tvars.evars.update(base_tvars.evars)
             self.tvars.runtime.update(base_tvars.runtime)
 
@@ -149,7 +151,10 @@ class TestObject(metaclass=abc.ABCMeta):
         for before_fixture in self.before_fixtures:
             fresult = before_fixture.execute(self, self.tvars.clone())
             before_fixture.report()
-            self.tvars.evars.update(before_fixture.tvars.evars)
+            print("Before", before_fixture.tvars.context._get_configs())
+            self.tvars.context = before_fixture.tvars.context.clone()
+            print("Before", before_fixture.tvars.context._get_configs())
+            #self.tvars.evars.update(before_fixture.tvars.evars)
             self.tvars.runtime.update(before_fixture.tvars.runtime)
             if fresult.has_issues():
                 self.exclude(ResultCodeEnum["{}_{}".format(fresult.rtype, before_fixture.type.name)], fresult.iid)

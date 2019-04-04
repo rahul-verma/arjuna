@@ -28,7 +28,6 @@ from arjuna.lib.core.utils import sys_utils
 from arjuna.lib.core.utils import etree_utils
 from arjuna.lib.unitee.utils import run_conf_utils
 
-Unitee = None
 
 class GroupDef(Root):
 
@@ -95,8 +94,8 @@ class GroupDef(Root):
             if child.tag == 'evars':
                 evars = child
                 for child in evars:
-                    run_conf_utils.validate_evar_xml_child("session", self.sdef.fpath, child)
-                    run_conf_utils.add_evar_node_to_evars("session", self.__gconf.evars, child)
+                    run_conf_utils.validate_config_xml_child("session", self.sdef.fpath, child)
+                    run_conf_utils.add_config_node_to_configuration("session", self.__gconf.evars, child)
             else:
                 display_err_and_exit("Unexpected element >>{}<< found in >>group<< definition in session file.".format(child.tag))
 

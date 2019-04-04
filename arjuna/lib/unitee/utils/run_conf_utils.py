@@ -3,8 +3,8 @@ from arjuna.lib.core.utils import etree_utils
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.unitee.test.defs.fixture import *
 
-ALLOWED_EVAR_ATTRS = {'name', 'value', 'type'}
-MANDATORY_EVAR_ATTRS = {'name', 'value'}
+ALLOWED_CONFIG_ATTRS = {'name', 'value'}
+MANDATORY_CONFIG_ATTRS = {'name', 'value'}
 ALLOWED_FIXTURE_ATTRS = {'type', 'module', 'func'}
 
 ALLOWED_STAGE_ATTRS = {'name', 'threads'}
@@ -40,25 +40,24 @@ def display_err_and_exit(conf_type, conf_path, msg):
     console.display_error(msg + " Fix {} template file: {}".format(conf_type, conf_path))
     sys_utils.fexit()
 
-def validate_evar_xml_child(conf_type, session_path, evar_node):
-    if evar_node.tag.lower() != 'evar':
-        display_err_and_exit(conf_type, session_path, ">>evars<< element can only contain one or more children of type >>evar<<.")
-    for k,v in evar_node.attrib.items():
-        if k.lower() not in ALLOWED_EVAR_ATTRS:
-            display_err_and_exit(conf_type, session_path, ">>evar<< attributes can only be set as: {}.".format(ALLOWED_EVAR_ATTRS))
-    if not MANDATORY_EVAR_ATTRS.issubset(etree_utils.convert_attribs_to_cidict(evar_node)):
-        display_err_and_exit(conf_type, session_path, ">>evar<< element must define >>name<< and >>value<< attributes.")
 
-def add_evar_node_to_evars(conf_type, evars, evar_node):
-    evar_attrs = CIStringDict(evar_node.attrib)
-    converter = str
-    if 'type' in evar_attrs:
-        try:
-            converter = converter_map[evar_attrs['type'].lower().strip()]
-        except:
-            display_err_and_exit(conf_type,
-                                 "Type function for an evar can only be from the following set: {}".format(converter_map.keys()))
-    evars[evar_attrs['name']] = converter(evar_attrs['value'])
+def validate_config_xml_child(conf_type, session_path, config_node):
+    if config_node.tag.lower() not in {'arjuna_option', 'user_option'}:
+        display_err_and_exit(conf_type, session_path, ">>config<< element can only contain one or more children of type >>arjuna_option<< or >>user_option<<.")
+    for k,v in config_node.attrib.items():
+        if k.lower() not in ALLOWED_CONFIG_ATTRS:
+            display_err_and_exit(conf_type, session_path, ">>{}<< element attributes can only be set as: {}.".format(config_node.tag, ALLOWED_CONFIG_ATTRS))
+    if not MANDATORY_CONFIG_ATTRS.issubset(etree_utils.convert_attribs_to_cidict(config_node)):
+        display_err_and_exit(conf_type, session_path, ">>{}<< element must define >>name<< and >>value<< attributes.")
+
+
+def add_config_node_to_configuration(conf_type, config_container, config_node):
+    config_attrs = CIStringDict(config_node.attrib)
+    if config_node.tag.lower() == "arjuna_option":
+        config_container.set_arjuna_option(config_attrs['name'], config_attrs['value'])
+    else:
+        config_container.set_user_option(config_attrs['name'], config_attrs['value'])
+
 
 def validate_fixture_xml_child(conf_type, object_type, session_path, fixture_node):
     if fixture_node.tag.lower() != 'fixture':

@@ -36,17 +36,19 @@ from arjuna.lib.core.reader.hocon import *
 from arjuna.lib.unitee.test.defs.stage import *
 from arjuna.lib.unitee.test.objects.session import *
 from arjuna.lib.unitee.test.defs.fixture import *
+from arjuna.lib.core.config import ConfigContainer
+
 
 class __SessionDef(Root, metaclass=abc.ABCMeta):
     def __init__(self, sname):
         super().__init__()
         self.name = sname
+        self.config = ConfigContainer()
         self.fpath = None
         self.raw_contents = None
         self.root = None
         self.stage_defs = []
         self.tmcount = 0
-        self.evars = SingleObjectVars()
         # self.evars.update(self.central_config.clone_evars())
         self.__iter = None
         self.__fixtures = FixturesDef()
@@ -78,11 +80,11 @@ class __SessionDef(Root, metaclass=abc.ABCMeta):
 
         for child_tag, child in node_dict.items():
             child_tag = child_tag.lower()
-            if child_tag == 'evars':
-                evars = child
-                for child in evars:
-                    run_conf_utils.validate_evar_xml_child("session", self.fpath, child)
-                    run_conf_utils.add_evar_node_to_evars("session", self.evars, child)
+            if child_tag == 'config':
+                config = child
+                for option in config:
+                    run_conf_utils.validate_config_xml_child("session", self.fpath, option)
+                    run_conf_utils.add_config_node_to_configuration("session", self.config, option)
             elif child_tag == 'fixtures':
                 fixtures = child
                 for child in fixtures:

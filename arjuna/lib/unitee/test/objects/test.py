@@ -27,7 +27,9 @@ from arjuna.lib.unitee.reporter.result.types import *
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.exceptions import *
 
+
 class Test(TestObject):
+
 	def __init__(self, num, group, module, func):
 		super().__init__(TestObjectTypeEnum.Test)
 		self.num = num

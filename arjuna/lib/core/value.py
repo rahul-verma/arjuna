@@ -1,5 +1,5 @@
 import re
-
+import abc
 
 class UnsupportedRepresentationException(Exception):
 
@@ -127,24 +127,39 @@ class AnyRefValue:
         except:
             self.__throw_wrong_repr_exception("string list")
 
+
 class EmptyValueListLookUpException:
 
     def __init__(self, index):
         super().__init__("Invalid index [{}] used for ValueList lookup. It is empty.".format(index))
+
+
+class EmptyValueMapLookUpException:
+
+    def __init__(self, key):
+        super().__init__("Invalid key [{}] used for ValueMap lookup. It is empty.".format(key))
+
 
 class ValueListLookUpException:
 
     def __init__(self, index, max_index):
         super().__init__("Invalid index [{}] used for ValueList lookup. Use indices between 0 and {}".format(index, max_index))
 
+
+class ValueMapLookUpException:
+
+    def __init__(self, key):
+        super().__init__("Invalid key/header [{}] used for ValueMap lookup.".format(key))
+
+
 class AbstractValueList:
 
     def __init__(self, *objects):
         self.__values = []
-        self.addAllObjects(*objects)
+        self.add_all_objects(*objects)
 
     def _max_index(self):
-        return len(self.__values) - 1;
+        return len(self.__values) - 1
 
     def __validate_index(self, index):
         if len(self.__values) == 0:
@@ -183,7 +198,7 @@ class AbstractValueList:
 
     def add_all_objects(self, objects):
         for o in objects:
-            self.addObject(o)
+            self.add_object(o)
 
     def add(self, value):
         self.__values.append(value)
@@ -199,7 +214,116 @@ class AbstractValueList:
         return self.__values[index]
 
     def string_at(self, index):
-        return self.valueAt(index).asString()
+        return self.value_at(index).as_string()
 
     def object_at(self, index):
-        return self.objectAt(index).asString()
+        return self.value_at(index).object()
+
+
+class AbstractValueMap(metaclass=abc.ABCMeta):
+
+    def __init__(self, object_map=None, headers=None, objects=None):
+        msg = "For creating a value map, either pass raw dict as object_map arg or pass headers & objects args of same length together."
+        raw_map = None
+        if object_map:
+            if headers or objects:
+                raise Exception(msg)
+            raw_map = object_map
+        else:
+            if not headers and not objects:
+                raw_map = dict()
+            else:
+                if not headers or not objects:
+                    raise Exception(msg)
+                elif len(headers) != len(objects):
+                    raise Exception(msg)
+                else:
+                    raw_map = dict(zip(headers, objects))
+        self.__map = dict()
+        for t,v in raw_map.items():
+            self.add_object(t,v)
+
+    def _format_key(self, key):
+        return key
+
+    def as_map(self):
+        return self.__map
+
+    def keys(self):
+        return self.__map.keys()
+
+    @abc.abstractmethod
+    def _format_key_as_str(self, key):
+        pass
+
+    def items(self, filter_keys=None):
+        if not filter_keys:
+            return self.__map
+
+        self.__validate_keys(filter_keys)
+        fkeyset = set(filter_keys)
+        return {k: v for k, v in self.__map.items() if k in fkeyset}
+
+    def __validate_key(self, key):
+        if not self.__map:
+            raise EmptyValueMapLookUpException(self._format_key_as_str(key))
+        elif key not in self.__map:
+            raise ValueMapLookUpException(self._format_key_as_str(key))
+
+    def __validate_keys(self, keys):
+        for key in keys:
+            self.__validate_key(key)
+
+    def __convert_to_string_map(self, map):
+        return {self._format_key_as_str(k): v.as_string() for k,v in self.__map.items()}
+
+    def str_items(self, filter_keys=None):
+        if not filter_keys:
+            return self.__convert_to_string_map(self.__map)
+        else:
+            return self.__convert_to_string_map(self.items(filter_keys))
+
+    def value(self, key):
+        self.__validate_key(key)
+        return self.__map[key]
+
+    def object(self, key):
+        self.__validate_key(key)
+        return self.__map[key].object()
+
+    def string(self, key):
+        self.__validate_key(key)
+        return self.__map[key].as_string()
+
+    def has_key(self, key):
+        return self._format_key(key) in self.__map
+
+    def add(self, key, value):
+        self.__map[self._format_key(key)] = value
+
+    def add_object(self, key, obj):
+        self.__map[self._format_key(key)] = AnyRefValue(obj)
+
+    def add_all(self, map):
+        for k,v in map.items():
+            self.add(k,v)
+
+    def add_all_objects(self, map):
+        for k, v in map.items():
+            self.add_object(k, map.get(v))
+
+
+class StringKeyValueMap(AbstractValueMap):
+
+    def __init__(self, object_map=None, headers=None, objects=None):
+        super().__init__(object_map, headers, objects)
+
+    def _format_key(self, key):
+        return key.lower().strip()
+
+    def _format_key_as_str(self, key):
+        return key
+
+
+
+

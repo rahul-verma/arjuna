@@ -28,11 +28,12 @@ from arjuna.lib.unitee.types.root import Root
 from arjuna.lib.unitee.test.defs.gconf import GroupConfsLoader, GroupConf
 from arjuna.lib.unitee.state.defdb import *
 from arjuna.lib.core.utils import file_utils, thread_utils
+from arjuna.lib.core.config import InternalTestContext
 
 @singleton
 class Unitee:
 
-    def __init__(self):
+    def __init__(self, setu_test_session, config):
         super().__init__()
         self.__state_mgr = None
         self.__reporter = None
@@ -42,6 +43,8 @@ class Unitee:
         self.__cli_picker_options = None
         self.__frozen = False
         self.__groups = None
+        self.__setu_test_session = setu_test_session
+        self.__config = config
 
         if self.__frozen:
             raise Exception("Unitee has already been loaded.")
@@ -88,9 +91,17 @@ class Unitee:
         sdef = MSessionAllTests()
         sdef.process()
         self.__session = sdef.pick()
+        self.__session.config = self.__config
         self.__session.load()
 
+    def __create_test_context(self):
+        context = InternalTestContext(self.__setu_test_session, "default", parent_config=self.__config)
+        # Populate default config (central config post project conf processing)
+        context.ConfigBuilder(code_mode=False).build()
+        return context
+
     def load_session(self, session_name):
+        from arjuna.tpi import Arjuna
         from arjuna.lib.unitee.test.defs.session import UserDefinedSessionDef
         sdir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.UNITEE_PROJECT_SESSIONS_DIR).as_string()
         session_file_path = os.path.join(sdir, session_name + ".xml")
@@ -100,6 +111,7 @@ class Unitee:
         sdef = UserDefinedSessionDef(session_name, session_file_path)
         sdef.process()
         self.__session = sdef.pick()
+        self.__session.context = self.__create_test_context()
         self.__session.load()
 
     def load_session_for_group(self, group_name):
@@ -107,6 +119,7 @@ class Unitee:
         sdef = MSessionSingleGroup(group_name)
         sdef.process()
         self.__session = sdef.pick()
+        self.__session.context = self.__create_test_context()
         self.__session.load()
 
     def load_session_for_name_pickers(self, **picker_args):

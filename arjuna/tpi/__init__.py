@@ -78,7 +78,7 @@ class ArjunaSingleton:
         self.__load_console()
 
         from arjuna.lib.unitee import Unitee
-        self.__unitee = Unitee()
+        self.__unitee = Unitee(self.__test_session, self.__central_config)
 
         return self.__central_config
 

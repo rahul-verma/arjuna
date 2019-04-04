@@ -1,4 +1,5 @@
-from arjuna.lib.setu.core.requester.config import SetuArg, SetuActionType
+from arjuna.lib.setu.core.requester.config import SetuActionType
+from arjuna.lib.setu.core.requester.connector import SetuArg
 from .automator import AbstractAppAutomator
 
 from arjuna.tpi.guiauto import With

@@ -1,6 +1,6 @@
 from enum import Enum, auto
-from arjuna.lib.setu.core.requester.config import SetuActionType, SetuArg
-from arjuna.lib.setu.core.requester.connector import BaseSetuObject
+from arjuna.lib.setu.core.requester.config import SetuActionType
+from arjuna.lib.setu.core.requester.connector import BaseSetuObject, SetuArg
 from .component import GuiAutoComponentFactory
 
 

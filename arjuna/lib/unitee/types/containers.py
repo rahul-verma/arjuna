@@ -27,6 +27,7 @@ from arjuna.lib.core.adv.types import *
 from arjuna.lib.core.adv.proxy import ROProxy
 from arjuna.lib.core.types.descriptors import *
 from arjuna.lib.unitee.validation.steps import Steps
+from arjuna.lib.core.config import InternalTestContext
 
 SCALARS = {int, float, str, bool}
 
@@ -263,6 +264,7 @@ class TestVars:
 
     def __init__(self):
         self.info = AllInfo()
+        self.context = None
         self.evars = SingleObjectVars()
         self.runtime = OnceOnlyKeyCIStringDict()
         self.tags = tags() # return frozen set
@@ -271,6 +273,10 @@ class TestVars:
 
     def clone(self):
         nvars = TestVars()
+        if self.context is not None:
+            nvars.context = self.context.clone()
+        else:
+            nvars.context = None
         nvars.info = self.info.clone()
         nvars.evars = SingleObjectVars({i:j for i,j in self.evars.items()})
         nvars.tags = TagSet(*{i for i in self.tags})
@@ -286,6 +292,7 @@ class TestVars:
                 self.info = tvars.info.create_ro_wrapper()
                 self.tags = frozenset(tvars.tags)
                 self.bugs = frozenset(tvars.bugs)
+                self.context = tvars.context.clone_for_user()
                 # R/W
                 self.evars = tvars.evars
                 self.runtime = tvars.runtime

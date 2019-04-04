@@ -36,14 +36,16 @@ from arjuna.lib.core.utils import etree_utils
 from arjuna.lib.unitee.utils import run_conf_utils
 from arjuna.lib.unitee.selection.picker import Picker
 from arjuna.lib.unitee.selection.rules.xml_rules import XmlRules
+from arjuna.lib.core.config import ConfigContainer
 from arjuna.lib.unitee.exceptions import *
+
 
 class GroupConf(Root):
 
     def __init__(self, name, gconf_xml, fpath):
         super().__init__()
         self.name = name
-        self.evars = SingleObjectVars()
+        self.config = ConfigContainer()
         self.picker = None
         self.__rules = None
         self.threads = 1
@@ -73,11 +75,11 @@ class GroupConf(Root):
 
         for child_tag, child in node_dict.items():
             child_tag = child_tag.lower()
-            if child_tag == 'evars':
-                evars = child
-                for child in evars:
-                    run_conf_utils.validate_evar_xml_child("groups", self.fpath, child)
-                    run_conf_utils.add_evar_node_to_evars("groups", self.evars, child)
+            if child_tag == 'config':
+                config = child
+                for option in config:
+                    run_conf_utils.validate_config_xml_child("groups", self.fpath, option)
+                    run_conf_utils.add_config_node_to_configuration("groups", self.config, option)
             elif child_tag == 'fixtures':
                 fixtures = child
                 for child in fixtures:

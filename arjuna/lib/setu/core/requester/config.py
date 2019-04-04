@@ -1,7 +1,5 @@
-from enum import Enum, auto
-from .connector import BaseSetuObject, SetuArg
 from arjuna.tpi.enums import *
-from arjuna.lib.core.value import AnyRefValue
+
 
 class SetuActionType(Enum):
     TESTSESSION_INIT = auto()
@@ -88,71 +86,6 @@ class SetuActionType(Enum):
     GUIAUTO_MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS = auto()
 
     GUIAUTO_CHILD_WINDOW_CLOSE = auto()
-
-
-class DefaultTestConfig(BaseSetuObject):
-
-    def __init__(self, test_session, name, setu_id):
-        super().__init__()
-        self.__session = test_session
-        self.__name = name
-
-        self._set_setu_id(setu_id)
-        self._set_self_setu_id_arg("configSetuId")
-        self._set_test_session_setu_id_arg(self.__session.get_setu_id())
-
-    def get_test_session(self):
-        return self.__session
-
-    def __fetch_config_option_value(self, setu_action_type, option_str):
-        response = self._send_request(setu_action_type, SetuArg.arg("option", option_str))
-        return response.get_value()
-
-    def __normalize_option_str(self, option_str):
-        return option_str.upper().strip().replace(".", "_")
-
-    def __normalize_setu_option_str(self, option_str):
-        return ArjunaOption[self.__normalize_option_str(option_str)]
-
-    def get_arjuna_option_value(self, option):
-        setu_option = option
-        if type(option) is str:
-            setu_option = self.__normalize_setu_option_str(option)
-        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_GET_ARJUNA_OPTION_VALUE, setu_option.name)
-
-    def get_user_option_value(self, option):
-        user_option = self.__normalize_option_str(option)
-        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_GET_USER_OPTION_VALUE, user_option)
-
-    def getName(self):
-        return self.__name
-
-    def get_gui_auto_context(self):
-        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).asEnum(GuiAutomationContext)
-
-    def get_browser_type(self):
-        return self.get_arjuna_option_value(ArjunaOption.BROWSER_NAME).asEnum(BrowserName)
-
-    def get_browser_version(self):
-        return self.get_arjuna_option_value(ArjunaOption.BROWSER_VERSION).asString()
-
-    def get_browser_binary_path(self):
-        return self.get_arjuna_option_value(ArjunaOption.BROWSER_BIN_PATH).asString()
-
-    def get_test_run_env_name(self):
-        return self.get_arjuna_option_value(ArjunaOption.TESTRUN_ENVIRONMENT).asString()
-
-    def get_screenshots_dir(self):
-        return self.get_arjuna_option_value(ArjunaOption.SCREENSHOTS_DIR).asString()
-
-    def get_log_dir(self):
-        return self.get_arjuna_option_value(ArjunaOption.LOG_DIR).asString()
-
-    def get_gui_auto_max_wait_time(self):
-        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_MAX_WAIT).asInt()
-
-
-
 
 
 

@@ -6,6 +6,7 @@ from arjuna.tpi.enums import *
 from arjuna.lib.setu.core.lib.setu_types import SetuManagedObject
 from arjuna.lib.core.types.descriptors import *
 
+
 class Config(SetuManagedObject):
     DESKTOP_CONTEXTS = {GuiAutomationContext.NATIVE, GuiAutomationContext.WEB}
     MOBILE_WEB_CONTEXTS = {GuiAutomationContext.ANDROID_WEB, GuiAutomationContext.IOS_WEB}
@@ -79,6 +80,10 @@ class Config(SetuManagedObject):
         for opt, opt_value in for_browser[browser].items():
             self.setu_config._config_dict[opt] = opt_value
 
+    def update(self, override_config):
+        self.setu_config.update(override_config.setu_config)
+        self.user_config.update(override_config.user_config)
+
 
 class AbstractConfig:
 
@@ -127,6 +132,9 @@ class AbstractConfig:
     def as_json_dict(self):
         return {k:self.__as_enum_name_or_same(v) for k,v in self.as_map().items()}
 
+    def update(self, override_config):
+        self.__config_dict.update(override_config.as_map())
+
     def enumerate(self):
         from arjuna.lib.core import ArjunaCore
         keys = list(self.central_config.arjuna_options.keys())
@@ -158,10 +166,12 @@ class AbstractConfig:
                 ArjunaCore.console.marker(100)
         ArjunaCore.console.marker(100)
 
+
 class UserConfig(AbstractConfig):
 
     def __init__(self, config_dict):
         super().__init__(config_dict)
+
 
 class SetuConfig(AbstractConfig):
 

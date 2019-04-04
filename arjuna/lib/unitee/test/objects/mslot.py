@@ -49,6 +49,8 @@ class TestModuleSlot(TestObject):
 		self.tvars.info.module.meta['slot'] = self.num
 
 	def _execute(self):
+		print("mslot exec", self.module.tvars.context._get_configs())
+		self.tvars.context = self.module.tvars.context.clone()
 		self.tvars.runtime.update(self.module.tvars.runtime)
 		tp = TestObjectThreadPool(self.thcount, self, "{}::{}".format(self.thname, "f"))
 		tp.run()
