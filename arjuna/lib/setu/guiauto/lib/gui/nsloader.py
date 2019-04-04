@@ -35,10 +35,11 @@ class GuiNamespaceLoaderFactory:
             else:
                 raise Exception("Unsupported format for namespace: {}".format(file_extension))
 
+
 class GuiNamespace:
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, name):
+        self.__name = name
         # dict <string, dict<GuiAutomationContext, GuiElementMetaData>>
         self.__ns = {}
 
@@ -61,17 +62,18 @@ class GuiNamespace:
     # Returns emd for a context for a given gui name
     def get_meta_data(self, name, context):
         if not self.has(name):
-            raise Exception("Gui namespace does not contain element with name: {}".format(name))
+            raise Exception("Gui namespace >{}< does not contain element with name: {}".format(self.__name, name))
         elif not self.has_context(name, context):
-            raise Exception("Gui namespace does not contain element with name: {} for context {}".format(name, context))
+            raise Exception("Gui namespace >{}< does not contain element with name: {} for context {}".format(self.__name, name, context))
         
         return self.__ns[name.lower()][context]
+
 
 class BaseGuiNamespaceLoader:
 
     def __init__(self, name):
         self.__name = name
-        self.__namespace = GuiNamespace()
+        self.__namespace = GuiNamespace(name)
 
     @property
     def name(self):
@@ -94,10 +96,11 @@ class BaseGuiNamespaceLoader:
     def _raise_relativepath_exception(self, file_path):
         raise Exception("Gui namespace loader does not accept relative file path. {} is not a full file path.".format(file_path))
 
+
 class NamespaceFileLoader(BaseGuiNamespaceLoader):
 
     def __init__(self, ns_file_path):
-        super().__init__("Default Gui Namespace File Loader")
+        super().__init__(os.path.basename(ns_file_path))
         self.__ns_file = None
         self.__ns_path = None
         self.name_pattern = re.compile(r"\[\s*(.*?)\s*\]$")

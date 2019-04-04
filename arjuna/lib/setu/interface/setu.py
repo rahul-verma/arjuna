@@ -79,6 +79,7 @@ class SetuSvc(Resource):
             handler.take_window_action: "GUIAUTO_WINDOW_",
             handler.take_main_window_action: "GUIAUTO_MAIN_WINDOW_",
             handler.take_child_window_action: "GUIAUTO_CHILD_WINDOW_",
+            handler.take_gui_action: "GUIAUTO_GUI_"
         }
 
         action_method_map = {
@@ -119,7 +120,7 @@ class SetuSvc(Resource):
             SetuActionType.GUIAUTO_ALERT_GET_TEXT: handler.take_alert_action,
             SetuActionType.GUIAUTO_ALERT_SEND_TEXT: handler.take_alert_action,
             
-            SetuActionType.GUIAUTO_GUI_CREATE_GUI: None,
+            SetuActionType.GUIAUTO_GUI_CREATE_GUI: handler.take_gui_action,
             
             SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXT: handler.take_element_action,
             SetuActionType.GUIAUTO_ELEMENT_SET_TEXT: handler.take_element_action,

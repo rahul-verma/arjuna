@@ -28,7 +28,6 @@ def test(my):
     # Frame by index
     automator.Frame(With.index(0)).focus()
     automator.Element(tinymce).set_text("This is a test - frame by index.")
-    # Focusing on root from frame itself
     automator.DomRoot().focus()
     automator.Element(publish).click()
 

@@ -27,7 +27,7 @@ class BaseGui(AbstractAppAutomator):
             self.set_def_file_name(def_file_name)
 
         if register:
-            self._register_with_setu()
+            self._register()
 
     def __check_reg_status(self):
         if self.__gui_registered:
@@ -45,7 +45,7 @@ class BaseGui(AbstractAppAutomator):
         self.__check_reg_status()
         self.__def_file_name = name
 
-    def _register_with_setu(self):
+    def _register(self):
         if self.__gui_registered:
             raise Exception("Attempt to re-register Gui with Setu.")
 

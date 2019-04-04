@@ -24,8 +24,8 @@ import os
 import codecs
 import sys
 import io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="UTF-8")
-sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
+# sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="UTF-8")
+# sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
 
 import logging
 from arjuna.lib.core.utils import thread_utils

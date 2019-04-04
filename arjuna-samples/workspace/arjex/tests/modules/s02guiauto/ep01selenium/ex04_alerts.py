@@ -17,7 +17,6 @@ def test(my):
 
     automator.execute_javascript("alert('Sample')")
     alert = automator.Alert()
-    text = alert.get_text()
     assert alert.get_text() == "Sample"
     alert.confirm()
 

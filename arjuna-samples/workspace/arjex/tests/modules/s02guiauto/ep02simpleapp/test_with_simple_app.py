@@ -1,6 +1,5 @@
 from arjuna.tpi import Arjuna
 from arjuna.tpi.markup import *
-from arjuna.tpi.guiauto import With
 from arjuna.tpi.guiauto import DefaultGui
 
 

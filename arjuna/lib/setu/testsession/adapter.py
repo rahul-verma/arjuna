@@ -1,3 +1,4 @@
+import logging
 from arjuna.lib.setu.testsession.impl import TestSession
 from arjuna.lib.setu.guiauto.adapter.automator import GuiAutomatorHandler
 from arjuna.tpi.enums import ArjunaOption
@@ -101,6 +102,15 @@ class TestSessionHandler:
         auto_handler = self.get_automator_handler(json_dict)
         gui = self.__guimgr.create_gui(auto_handler, json_dict)
         return {"guiSetuId" : gui.setu_id}
+
+    def take_gui_action(self, action, json_dict):
+        auto_handler = self.get_automator_handler(json_dict)
+        parent_gui_setu_id = json_dict.pop("parentGuiSetuId")
+        parent_gui_handler = self.__guimgr.get_gui_handler(parent_gui_setu_id)
+        print(action)
+        print(json_dict)
+        return getattr(parent_gui_handler, action)(auto_handler, **json_dict)
+
     '''
         Delegating calls to its handlers.
     '''

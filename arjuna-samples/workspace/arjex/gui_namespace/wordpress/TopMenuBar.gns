@@ -1,6 +1,6 @@
 [PROFILE_LINK]
 #web,android_web
-class = avatar
+class_name = avatar
 
 [LOGOUT_LINK]
 #web,android_web
