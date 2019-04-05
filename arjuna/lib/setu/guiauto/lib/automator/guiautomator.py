@@ -6,6 +6,7 @@ from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.setu.guiauto.lib.base.element_container import ElementContainer
 from .drivercaps import DriverCapabilities
 
+
 class GuiAutomator(ElementContainer):
 
     def __init__(self, config, extended_config=None):

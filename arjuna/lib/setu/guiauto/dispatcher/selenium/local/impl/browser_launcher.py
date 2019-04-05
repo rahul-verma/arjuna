@@ -6,6 +6,8 @@ class BrowserLauncher:
     @classmethod
     def launch(cls, config):
         driver_path = config["arjunaOptions"]["SELENIUM_DRIVER_PATH"]
+        print("PAHTPAHTHTHTHTHTH", driver_path)
+        print(config)
         browser_bin_path = config["arjunaOptions"]["BROWSER_BIN_PATH"]
         browser_name = config["arjunaOptions"]["BROWSER_NAME"]
         return CREATOR_MAP[browser_name](config, driver_path, browser_bin_path)

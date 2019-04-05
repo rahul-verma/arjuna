@@ -62,6 +62,22 @@ class ProjectParser(Parser):
             print("Fatal Error in CLI processing. You must provide a valid project root directory using -p or --project-dir switch", file=sys.stderr)
             sys.exit(1)
 
+
+class NewProjectParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        #self.parser.add_argument('-w', '--workspace-dir', dest="workspace_dir", type=str, help='Workspace Directory')
+        self.parser.add_argument('-p', '--project-root-dir', dest="project.root.dir", type=new_project_dir, help = 'Absolute non-existing Project root directory. Name of project (Alnum 3-30 length. Only lower case letters.).')
+
+    def process(self, arg_dict):
+        # arg_dict['workspace.dir'] = arg_dict['workspace_dir']
+        # del arg_dict['workspace_dir']
+        if arg_dict['project.root.dir'] is None:
+            print("Fatal Error in CLI processing. You must provide a valid project root directory using -p or --project-dir switch", file=sys.stderr)
+            sys.exit(1)
+
+
 class RunParser(Parser):
     def __init__(self):
         super().__init__()

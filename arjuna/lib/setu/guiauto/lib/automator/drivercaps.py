@@ -1,8 +1,14 @@
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.tpi.enums import ArjunaOption, DesktopOS
 from arjuna.lib.setu.guiauto.dispatcher.broker import SetuActorDriverConfigOption
 import pprint
 
 class DriverCapabilities:
+    DRIVER_MAP = {
+        "chrome": "chromedriver",
+        "firefox": "geckodriver",
+        "safari": "safaridriver"
+    }
+
     # Selenium
     UNEXPECTED_ALERT_BEHAVIOUR = "unexpectedAlertBehaviour" # accept,dismiss,ignore
     UNHANDLED_PROMPT_BEHAVIOUR = "unhandledPromptBehavior" # accept,dismiss,ignore
@@ -48,34 +54,34 @@ class DriverCapabilities:
 
         self.__process_config(config)
         self.__process(json_dict)
-
+        self.__host_os = self.__config.setu_config.value(ArjunaOption.TESTRUN_HOST_OS).lower()
         aname = self.__config.setu_config.value(ArjunaOption.AUTOMATOR_NAME).lower()
         acontext = self.__config.setu_config.value(ArjunaOption.GUIAUTO_CONTEXT).lower()
-        aplatform = self.__config.setu_config.value(ArjunaOption.MOBILE_OS_NAME).lower()
+        mobile_platform = self.__config.setu_config.value(ArjunaOption.MOBILE_OS_NAME).lower()
 
         if aname == "selenium":
             self.__process_for_selenium(json_dict)
         elif aname == "appium":
             self.__process_for_appium(json_dict)
-            if aplatform.lower() == "android":
+            if mobile_platform.lower() == "android":
                 self.__process_for_android(json_dict)
-            elif aplatform.lower() == "ios":
+            elif mobile_platform.lower() == "ios":
                 self.__process_for_ios(json_dict)
 
             if acontext.lower() == "mobile_web":
-                if aplatform.lower() == "android":
+                if mobile_platform.lower() == "android":
                     self.__process_for_android_web(json_dict)
-                elif aplatform.lower() == "ios":
+                elif mobile_platform.lower() == "ios":
                     self.__process_for_ios_web(json_dict)
             elif acontext.lower() == "mobile_native":
-                if aplatform.lower() == "android":
+                if mobile_platform.lower() == "android":
                     self.__process_for_android_native(json_dict)
-                elif aplatform.lower() == "ios":
+                elif mobile_platform.lower() == "ios":
                     self.__process_for_ios_native(json_dict)
             elif acontext.lower() == "mobile_hybrid":
-                if aplatform.lower() == "android":
+                if mobile_platform.lower() == "android":
                     self.__process_for_android_hybrid(json_dict)
-                elif aplatform.lower() == "ios":
+                elif mobile_platform.lower() == "ios":
                     self.__process_for_ios_hybrid(json_dict)
         
         if not self.__out_dict["browserArgs"]:
@@ -117,8 +123,15 @@ class DriverCapabilities:
         if "browserExtensions" in dict_from_requester and dict_from_requester["browserExtensions"]:
             self.__out_dict["browserExtensions"].extend(dict_from_requester["browserExtensions"])
 
+    def __modify_for_windows(self, in_name):
+        if self.__host_os == DesktopOS.WINDOWS:
+            return in_name + ".exe"
+        else:
+            return in_name
+
     def __process_for_selenium(self, in_dict):
-        self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = self._config.setu_config.value(ArjunaOption.BROWSER_NAME).lower()
+        browser_name = self._config.setu_config.value(ArjunaOption.BROWSER_NAME).lower()
+        self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = browser_name
         browser_version = self._config.setu_config.value(ArjunaOption.BROWSER_VERSION)
         if browser_version != "not_set":
             self.__out_dict["driverCapabilities"][self.BROWSER_VERSION] = browser_version

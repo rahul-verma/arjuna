@@ -48,6 +48,7 @@ class ArjunaCLI:
 
         # Create re-usable parses for command arguments
         setu_parser = SetuParser()
+        new_project_parser = NewProjectParser()
         project_parser = ProjectParser()
         run_parser = RunParser()
         session_parser = SessionParser()
@@ -56,7 +57,7 @@ class ArjunaCLI:
 
         # Create primary command handlers
         self.launch_setu = LaunchSetu(subparsers, [setu_parser])
-        self.create_project = CreateProject(subparsers, [project_parser])
+        self.create_project = CreateProject(subparsers, [new_project_parser])
         self.run_project = RunProject(subparsers, [project_parser, run_parser])
         self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
         self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])

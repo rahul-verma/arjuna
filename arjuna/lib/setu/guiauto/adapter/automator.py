@@ -2,6 +2,7 @@ import uuid
 from arjuna.lib.setu.guiauto.lib.automator.guiautomator import GuiAutomator
 from arjuna.lib.setu.guiauto.lib.locator.emd import GuiElementMetaData
 
+
 # Arg names of methods show JSON names, so don't follow Python conventions.
 class GuiAutomatorHandler:
 

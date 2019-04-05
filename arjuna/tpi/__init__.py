@@ -75,6 +75,7 @@ class ArjunaSingleton:
         self.__project_root_dir = project_root_dir
         self.__test_session = DefaultTestSession()
         self.__central_config = self.__test_session.init(project_root_dir, cli_config, run_id)
+
         self.__load_console()
 
         from arjuna.lib.unitee import Unitee

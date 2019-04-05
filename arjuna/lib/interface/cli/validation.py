@@ -35,6 +35,17 @@ It must begin with a letter.
 
 import os
 
+
+def new_project_dir(input):
+    if os.path.exists(input):
+        print('Project path already exist: {}'.format(input))
+        print('Exiting...', file=sys.stderr)
+        sys.exit(1)
+    else:
+        proj_name = os.path.basename(input)
+        lname_check("Project", proj_name)
+        return input
+
 def project_dir(input):
     if not os.path.exists(input):
         print('Project path does not exist: {}'.format(input))

@@ -56,21 +56,21 @@ class Config(SetuManagedObject):
             return name
 
     def __get_driver_path(self, name):
-        return os.path.join(self.setu_config.value(ArjunaOption.SELENIUM_DRIVERS_DIR), self.__modify_bin_name_for_windows(name))
+        return self.setu_config.value(ArjunaOption.SELENIUM_DRIVER_PATH).replace("<DRIVER_NAME>", self.__modify_bin_name_for_windows(name))
 
     def process_setu_options(self):
         for_browser = {
-            BrowserName.CHROME : {
+            BrowserName.CHROME: {
                 ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.chrome.driver",
                 ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("chromedriver")
             },
 
-            BrowserName.FIREFOX : {
+            BrowserName.FIREFOX: {
                 ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.gecko.driver",
                 ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("geckodriver")
             },
 
-            BrowserName.SAFARI : {
+            BrowserName.SAFARI: {
                 ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.safari.driver",
                 ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("safaridriver")
             }
@@ -197,6 +197,9 @@ class SetuConfig(AbstractConfig):
 
     def get_browser_name(self):
         return BrowserName[self.value(ArjunaOption.BROWSER_NAME)]
+
+    def get_host_os(self):
+        return DesktopOS[self.value(ArjunaOption.TESTRUN_HOST_OS)]
 
     def has_desktop_context(self):
         return self.get_guiauto_context() in Config.DESKTOP_CONTEXTS

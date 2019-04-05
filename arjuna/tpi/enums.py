@@ -26,11 +26,11 @@ class ArjunaOption(Enum):
     SETU_PROJECT_DIRS_FILES = auto()
     REPORT_DIR = auto()
     ARCHIVES_DIR = auto()
-    GUI_NAMESPACE_DIR = auto()
 
     AUT_URL = auto()
 
     TESTRUN_ENVIRONMENT = auto()
+    TESTRUN_HOST_OS = auto()
 
     SETU_GUIAUTO_ACTOR_MODE = auto()
     SETU_GUIAUTO_ACTOR_URL = auto()
@@ -45,6 +45,8 @@ class ArjunaOption(Enum):
     BROWSER_BIN_PATH = auto()
     BROWSER_PROXY_ON = auto()
 
+    GUIAUTO_INPUT_DIR = auto()
+    GUIAUTO_NAMESPACE_DIR = auto()
     GUIAUTO_CONTEXT = auto()
     SCROLL_PIXELS = auto()
     SWIPE_TOP = auto()
@@ -135,3 +137,8 @@ class BrowserName(Enum):
 class MobileOsName(Enum):
     ANDROID = auto()
     IOS = auto()
+
+class DesktopOS(Enum):
+    WINDOWS = auto()
+    MAC = auto()
+    LINUX = auto()

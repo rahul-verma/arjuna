@@ -1,0 +1,23 @@
+[SETTINGS]
+#web,android_web
+css = .dashicons-admin-settings
+
+[NAVIGATION]
+#web,android_web
+partial_link_text = Comment
+
+[POSTS]
+#web,android_web
+css = .dashicons-admin-post
+
+[CATEGORIES]
+#web,android_web
+link_text = Categories
+
+[MENU_TOGGLE]
+#web,android_web
+css = .ab-icon
+
+[GENERAL]
+#web,android_web
+link_text = General

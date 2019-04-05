@@ -120,6 +120,13 @@ class ConfigValidator:
             cls.raise_exc(input)
 
     @classmethod
+    def desktop_os(cls, input):
+        try:
+            return DesktopOS[input.upper()]
+        except:
+            cls.raise_exc(input)
+
+    @classmethod
     def active_reporter_list(cls, input):
         l = None
         if type(input) is str:

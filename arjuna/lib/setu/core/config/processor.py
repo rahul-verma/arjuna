@@ -2,6 +2,7 @@ import os
 import copy
 import re
 import datetime
+import platform
 from arjuna.lib.trishanku.tpi.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
 
 from arjuna.tpi.enums import ArjunaOption
@@ -131,7 +132,13 @@ class BaseConfigProcessor:
     def get_user_option_validator(self, conf_name):
         return "pass_through", self.pass_through
 
+
 class CentralConfigLoader(BaseConfigProcessor):
+    OS_MAP = {
+        'Windows': 'windows',
+        'Darwin': 'mac',
+        'Linux': 'linux'
+    }
 
     def __init__(self, project_root_dir, runid=None):
         self.__my_dir = os.path.dirname(os.path.realpath(__file__))
@@ -158,6 +165,8 @@ class CentralConfigLoader(BaseConfigProcessor):
         contents = contents.replace("<IRUNID>", irunid)
         contents = contents.replace("<TEST_MODULE_IMPORT_PREFIX>", test_module_import_prefix)
         contents = contents.replace("<FIXTURES_IMPORT_PREFIX>", conf_fixtures_import_prefix)
+        print(CentralConfigLoader.OS_MAP[platform.system()])
+        contents = contents.replace("<HOST_OS>", CentralConfigLoader.OS_MAP[platform.system()])
         raw_config_map = ConfigCreator.get_flat_map_from_hocon_string_for_setu_types(
             HoconStringReader(contents)
         )
@@ -166,6 +175,7 @@ class CentralConfigLoader(BaseConfigProcessor):
             ConfigCreator.create_config_for_raw_map(raw_config_map, self.get_setu_option_validator), 
             {}
         )
+
 
 class ProjectConfigCreator(BaseConfigProcessor):
 

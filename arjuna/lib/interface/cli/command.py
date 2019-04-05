@@ -115,8 +115,43 @@ class LaunchSetu(Command):
         from arjuna.lib.setu.service import launch_setu
         launch_setu((arg_dict["setu.port"]))
 
+class FileObjectType(Enum):
+    DIR = auto()
+    FILE = auto()
 
 class CreateProject(Command):
+
+    UNITEE_DIRS_FILES = (
+        (FileObjectType.DIR, "archives"),
+        (FileObjectType.DIR, "config"),
+        (FileObjectType.DIR, "config/sessions"),
+        (FileObjectType.DIR, "core"),
+        (FileObjectType.DIR, "core/db"),
+        (FileObjectType.DIR, "core/db/central"),
+        (FileObjectType.DIR, "core/db/run"),
+        (FileObjectType.DIR, "data"),
+        (FileObjectType.DIR, "data/sources"),
+        (FileObjectType.DIR, "data/references"),
+        (FileObjectType.DIR, "fixtures"),
+        (FileObjectType.DIR, "guiauto"),
+        (FileObjectType.DIR, "guiauto/drivers"),
+        (FileObjectType.DIR, "guiauto/drivers/linux"),
+        (FileObjectType.DIR, "guiauto/drivers/mac"),
+        (FileObjectType.DIR, "guiauto/drivers/windows"),
+        (FileObjectType.DIR, "guiauto/images"),
+        (FileObjectType.DIR, "guiauto/namespace"),
+        (FileObjectType.DIR, "report"),
+        (FileObjectType.DIR, "screenshots"),
+        (FileObjectType.DIR, "tests"),
+        (FileObjectType.DIR, "tests/modules"),
+        (FileObjectType.FILE, "__init__.py"),
+        (FileObjectType.FILE, "config/project.conf"),
+        (FileObjectType.FILE, "config/groups.xml"),
+        (FileObjectType.FILE, "fixtures/__init__.py"),
+        (FileObjectType.FILE, "fixtures/all.py"),
+        (FileObjectType.FILE, "tests/__init__.py"),
+        (FileObjectType.FILE, "tests/modules/__init__.py"),
+    )
 
     def __init__(self, subparsers, parents):
         super().__init__()
@@ -127,47 +162,22 @@ class CreateProject(Command):
     def execute(self, arg_dict):
         for parent in self.parents:
             parent.process(arg_dict)
-        from arjuna.lib.core import ArjunaCore
-        integrator = ArjunaCore.integrator
-        pname = arg_dict['project.name']
-        wsd = self.get_wsdir(integrator, arg_dict)
-        existing_project_names = os.listdir(wsd)
-        pdir = os.path.join(wsd, pname)
-        fatal = False
-        reason = None
-        if pname in existing_project_names:
-            reason = "A directory with name '{}' already exists in workspace:{}.".format(pname, wsd)
-            fatal = True
-        elif os.path.isfile(pdir):
-            reason = "A file with name '{}' already exists in workspace:{}.".format(pname, wsd)
-            fatal = True
+        # from arjuna.lib.core import ArjunaCore
+        pdir = arg_dict['project.root.dir']
+        parent_dir = os.path.abspath(os.path.join(pdir, ".."))
+        project_name = os.path.basename(pdir)
+        with tempfile.TemporaryDirectory() as tdir:
+            project_temp_dir = os.path.join(tdir, project_name)
+            os.makedirs(project_temp_dir)
+            for ftype, frpath in CreateProject.UNITEE_DIRS_FILES:
+                if ftype == FileObjectType.DIR:
+                    os.makedirs(os.path.join(project_temp_dir, frpath))
+                else:
+                    f = open(os.path.join(project_temp_dir, frpath), "w")
+                    f.close()
+            shutil.move(project_temp_dir, parent_dir)
 
-        if fatal:
-            print(reason, "Choose another project name.", file=sys.stderr)
-            sys_utils.fexit()
-        else:
-            if not os.path.isdir(wsd):
-                os.makedirs(wsd)
-            d_names = integrator.value(CorePropertyTypeEnum.PROJECT_DIRS_FILES)
-            with tempfile.TemporaryDirectory() as tdir:
-                ptdir = os.path.join(tdir, pname)
-                os.mkdir(ptdir)
-                for d_name in d_names:
-                    os.mkdir(os.path.join(ptdir, d_name))
-                f = open(os.path.join(ptdir, "__init__.py"), "w")
-                f.close()
-                f = open(os.path.join(ptdir, "config", "{}.conf".format(pname)), "w")
-                f.close()
-                f = open(os.path.join(ptdir, "config", "groups.xml"), "w")
-                f.write(blank_groups_xml)
-                f.close()
-                f = open(os.path.join(ptdir, "fixtures", "__init__.py"), "w")
-                f.close()
-                f = open(os.path.join(ptdir, "tests", "modules", "__init__.py"), "w")
-                f.close()
-                shutil.move(ptdir, wsd)
-
-            print("Project {} successfully created.".format(pname))
+        print("Project {} successfully created at {}.".format(project_name, parent_dir))
 
 
 class __RunCommand(Command):

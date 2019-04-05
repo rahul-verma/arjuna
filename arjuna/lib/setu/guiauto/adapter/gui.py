@@ -8,7 +8,7 @@ class GuiHandlerManager:
 
     def __init__(self, project_config):
         self.__name_store = GuiNameStore()
-        self.__namespace_dir = project_config.setu_config.value(ArjunaOption.GUI_NAMESPACE_DIR)
+        self.__namespace_dir = project_config.setu_config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
         self.__gui_map = {}
 
     @property
