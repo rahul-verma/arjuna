@@ -51,7 +51,7 @@ class Config(SetuManagedObject):
 
     def __modify_bin_name_for_windows(self, name):
         if platform.system().lower() == "windows":
-            return "name" + ".exe"
+            return name + ".exe"
         else:
             return name
 
