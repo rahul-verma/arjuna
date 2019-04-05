@@ -91,7 +91,7 @@ class Unitee:
         sdef = MSessionAllTests()
         sdef.process()
         self.__session = sdef.pick()
-        self.__session.config = self.__config
+        self.__session.context = self.__create_test_context()
         self.__session.load()
 
     def __create_test_context(self):
