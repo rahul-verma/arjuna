@@ -44,7 +44,7 @@ class TestConfigurator:
     def create_project_conf(self):
         project_conf_loader = ProjectConfigCreator(self.__default_ref_config)
         self.__default_ref_config = project_conf_loader.config
-        self.__default_ref_config.process_setu_options()
+        self.__default_ref_config.process_arjuna_options()
         self.__default_ref_config.update(self.__cli_central_config)
         self.__config_map[self.__default_ref_config.setu_id] = self.__default_ref_config
         return self.__default_ref_config.setu_id
@@ -79,6 +79,7 @@ class TestConfigurator:
         reference = has_parent and self.__config_map[parent_config_id] or self.__default_ref_config
         config = self.__create_config_from_option_dicts(reference, arjuna_options, user_options)
         config.update(self.__cli_test_config)
+        config.process_arjuna_options()
         self.__config_map[config.setu_id] = config
         return config.setu_id
 

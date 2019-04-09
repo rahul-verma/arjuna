@@ -45,8 +45,8 @@ class Config(SetuManagedObject):
 
     def as_json_dict(self):
         return {
-            "arjunaOptions`" : self.__setu_config.as_json_dict(),
-            "userOptions" : self.__user_config.as_json_dict()
+            "arjunaOptions`": self.__setu_config.as_json_dict(),
+            "userOptions": self.__user_config.as_json_dict()
         }
 
     def __modify_bin_name_for_windows(self, name):
@@ -56,9 +56,15 @@ class Config(SetuManagedObject):
             return name
 
     def __get_driver_path(self, name):
-        return self.setu_config.value(ArjunaOption.SELENIUM_DRIVER_PATH).replace("<DRIVER_NAME>", self.__modify_bin_name_for_windows(name))
+        existing_driver_path = self.setu_config.value(ArjunaOption.SELENIUM_DRIVER_PATH)
+        not_set_yet_str = "<DRIVER_NAME>"
+        if existing_driver_path.find(not_set_yet_str) != -1:
+            return self.setu_config.value(ArjunaOption.SELENIUM_DRIVER_PATH).replace(not_set_yet_str, self.__modify_bin_name_for_windows(name))
+        else:
+            # Some other driver might have been set
+            return os.path.join(os.path.dirname(existing_driver_path), name)
 
-    def process_setu_options(self):
+    def process_arjuna_options(self):
         for_browser = {
             BrowserName.CHROME: {
                 ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.chrome.driver",
