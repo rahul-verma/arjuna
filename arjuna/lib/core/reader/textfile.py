@@ -24,6 +24,7 @@ import os
 from arjuna.lib.core.utils import data_utils
 from arjuna.lib.core.types import constants
 
+
 class FileReader:
     def __init__(self, file_path):
         self._fpath = file_path
@@ -42,29 +43,33 @@ class FileReader:
 class TextResourceReader(FileReader):
     def __init__(self, file_name):
         super().__init__(
-            os.path.abspath(os.path.join(os.path.dirname(__file__), os.sep.join(["../..", file_name]))))
+            os.path.abspath(os.path.join(os.path.dirname(__file__), os.sep.join(["../..", "res", file_name]))))
 
 
-class FileLineReader(FileReader):
+class FileLineReader:
+    def __init__(self, file_path):
+        self.__filereader = open(file_path, "r")
+
     def __iter__(self):
         return self
 
     def next(self):
-        l = self._f.readline()
+        l = self.__filereader.readline()
         if not l:
+            self.close()
             raise StopIteration()
         elif l.strip().startswith('#'):
             return self.next()
         else:
             return l.rstrip()
 
-    def read(self):
-        return self._f.readlines()
+    def close(self):
+        self.__filereader.close()
 
 
-class FileLine2ArrayReader(FileLineReader):
+class FileLine2ArrayReader:
     def __init__(self, file_path, delimiter="\t"):
-        super().__init__(file_path)
+        self.__filereader = FileLineReader(file_path)
         self.delimiter = delimiter
         self.headers = None
         self._populate_headers()
@@ -76,39 +81,32 @@ class FileLine2ArrayReader(FileLineReader):
             raise Exception("Invalid input file data. Empty headers line.")
 
     def next(self):
-        l = super().next()
-        rval = self.process(l)
-        return rval
-
-    def process(self, l):
-        return data_utils.split(l.rstrip(), self.delimiter)
+        line = self.__filereader.next()
+        return data_utils.split(line.rstrip(), self.delimiter)
 
     def get_headers(self):
         return self.headers
 
-    def read(self):
-        return [self.process(l) for l in self]
+    def close(self):
+        self.__filereader.close()
 
 
-class FileLine2MapReader(FileLine2ArrayReader):
-    def process(self, l):
-        l_parts = super().process(l)
-        if len(self.headers) != len(l_parts):
-            raise Exception(
-                "Invalid input file data. Number of headers and data values do not match.{0}Headers:{1}{0}Data values:{2}{0}".format(
-                    os.linesep, self.headers, l_parts))
-        else:
-            return dict(zip(self.headers, l_parts))
+class FileLine2MapReader:
+    def __init__(self, file_path, delimiter="\t"):
+        self.__filereader = FileLine2ArrayReader(file_path, delimiter)
 
-    def _populate_headers(self):
-        self.headers = super().next()
+    def get_headers(self):
+        return self.__filereader.headers
+
+    def close(self):
+        self.__filereader.close()
 
     def next(self):
-        data = self.process(super().next())
-        l_keys = {k.lower(): k for k in data}
-        if "exclude" in l_keys:
-            ex = data[l_keys["exclude"]]
-            if ex.upper() in constants.TRUES:
-                self.next()
-            del ex
-        return data
+        line_parts = self.__filereader.next()
+
+        if len(self.get_headers()) != len(line_parts):
+            raise Exception(
+                "Invalid input file data. Number of headers and data values do not match.{0}Headers:{1}{0}Data values:{2}{0}".format(
+                    os.linesep, self.get_headers(), line_parts))
+        else:
+            return dict(zip(self.get_headers(), line_parts))

@@ -101,6 +101,7 @@ class FileDataSource(DataSource):
     def should_exclude(self, data_record):
         return False
 
+
 class DsvFileDataSource(FileDataSource):
     def __init__(self, path, delimiter="\t"):
         super().__init__()
@@ -109,6 +110,7 @@ class DsvFileDataSource(FileDataSource):
 
     def process(self, data_record):
         return DataRecord(**dict(zip(self.headers, data_record)))
+
 
 class IniFileDataSource(FileDataSource):
     def __init__(self, path):
@@ -120,6 +122,7 @@ class IniFileDataSource(FileDataSource):
 
     def process(self, data_record):
         return DataRecord(**data_record)
+
 
 class ExcelFileDataSource(FileDataSource):
     def __init__(self, path):
@@ -139,6 +142,7 @@ class ExcelFileDataSource(FileDataSource):
     def process(self, data_record):
         return DataRecord(**dict(zip(self.headers, data_record)))
 
+
 class DummyDataSource(DataSource):
     MR = DataRecord()
 
@@ -155,6 +159,7 @@ class DummyDataSource(DataSource):
 
     def should_exclude(self, data_record):
         return False
+
 
 class SingleDataRecordSource(DataSource):
     def __init__(self, record):
@@ -215,6 +220,7 @@ class DataFunctionDataSource(DataSource):
     def should_exclude(self, data_record):
         return False
 
+
 class DataClassDataSource(DataSource):
     def __init__(self, dclass, *vargs, **kwargs):
         super().__init__()
@@ -243,6 +249,7 @@ class DataClassDataSource(DataSource):
 
     def should_exclude(self, data_record):
         return False
+
 
 class MultiDataSource(DataSource):
     def __init__(self, dsource_defs):

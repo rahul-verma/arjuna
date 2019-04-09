@@ -3,7 +3,7 @@ import copy
 import re
 import datetime
 import platform
-from arjuna.lib.trishanku.tpi.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
+from arjuna.lib.core.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
 
 from arjuna.tpi.enums import ArjunaOption
 from .validator import ConfigValidator

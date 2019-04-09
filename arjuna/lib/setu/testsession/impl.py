@@ -1,7 +1,7 @@
 import json
 from arjuna.lib.setu.core.config.processor import ConfigCreator, CentralConfigLoader, ProjectConfigCreator
 from arjuna.tpi.enums import ArjunaOption
-from arjuna.lib.trishanku.tpi.reader.hocon import HoconStringReader, HoconConfigDictReader
+from arjuna.lib.core.reader.hocon import HoconStringReader, HoconConfigDictReader
 
 from arjuna.lib.setu.core.lib.setu_types import SetuManagedObject
 from arjuna.lib.setu.core.data_broker.databroker import DataBroker

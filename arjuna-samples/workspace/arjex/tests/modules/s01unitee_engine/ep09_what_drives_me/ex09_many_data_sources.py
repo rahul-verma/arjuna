@@ -33,8 +33,10 @@ class MyDataClass:
     def __iter__(self):
         return iter(range(self.num))
 
+
 def myrange(num):
     return range(num)
+
 
 # The following decorator binds multiple data sources to the test function.
 # You should see test method executed 1 (record) + 2 (records) + 4 (func) + 7 (class) + 2 (file) = 16 times

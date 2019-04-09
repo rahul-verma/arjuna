@@ -2,15 +2,16 @@ import inspect
 from arjuna.tpi.enums import ArjunaOption
 from .driverelement import SeleniumDriverElement
 
+
 class SeleniumDriver:
 
     def __init__(self, setu_id, requester):
         self.__setu_id = setu_id
         self.__requester = requester
 
-    def create_gui_element_dispatacher(self, element_setu_id):
+    def create_gui_element_dispatcher(self, element_setu_id):
         return SeleniumDriverElement()
-        self.__dispatcher.create_gui_element_dispatacher(element_setu_id)
+        self.__dispatcher.create_gui_element_dispatcher(element_setu_id)
 
     def __post_to_actor(self, action, actor_uri, **kwargs):
         input_dict = {"automatorSetuId" : self.setu_id}

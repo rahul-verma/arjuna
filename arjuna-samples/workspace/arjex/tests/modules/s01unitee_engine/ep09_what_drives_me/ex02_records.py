@@ -24,13 +24,13 @@ from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
 
+
 @test_function(
     drive_with=records(
-        record(1,2,3, ver='v1'),
-        record(4,5,6, ver='v2'),
+        record(1, 2, 3, ver='v1'),
+        record(4, 5, 6, ver='v2'),
     )
 )
-
 def drive_with_multiple_records(my):
     console.display(my.data.record)
     console.display(my.data.record.indexed_values())

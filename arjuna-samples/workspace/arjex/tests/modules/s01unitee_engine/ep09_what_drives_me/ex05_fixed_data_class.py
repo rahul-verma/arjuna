@@ -30,6 +30,7 @@ class MyDataClass:
     def __iter__(self):
         return iter(range(5))
 
+
 @test_function(
     drive_with=data_class(MyDataClass)
 )

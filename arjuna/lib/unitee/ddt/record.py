@@ -20,11 +20,13 @@ limitations under the License.
 '''
 
 import types
+from arjuna.lib.core.value import AnyRefValue
+
 
 class DataRecord:
     def __init__(self, *vargs, **kwargs):
-        self.__indexed = vargs
-        self.__named = types.MappingProxyType({i.lower(): j for i,j in kwargs.items()})
+        self.__indexed = tuple([AnyRefValue(v) for v in vargs])
+        self.__named = types.MappingProxyType({i.lower(): AnyRefValue(j) for i, j in kwargs.items()})
 
     def value_at(self, i):
         return self.__indexed[i]
@@ -44,14 +46,29 @@ class DataRecord:
             parts.append("<empty>")
         else:
             for i,v in enumerate(self.indexed_values()):
-                parts.append("[{}] {}".format(i, v))
+                parts.append("[{}] {}".format(i, v.as_string()))
         parts.append("Named")
         if not self.named_values():
             parts.append("<empty>")
         else:
             for i,v in self.named_values().items():
-                parts.append("[{}] {}".format(i, v))
+                parts.append("[{}] {}".format(i, v.as_string()))
         return "\n".join(parts)
 
     def is_empty(self):
         return not self.indexed_values() and not self.named_values()
+
+    def is_list_empty(self):
+        return not self.indexed_values()
+
+    def is_map_empty(self):
+        return not self.named_values()
+
+    def has_key(self, key):
+        return key.lower() in self.__named
+
+    def string(self, key):
+        return self.value_named(key).as_string()
+
+    def has_index(self, index):
+        return len(self.__indexed) > index

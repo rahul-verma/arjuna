@@ -27,7 +27,6 @@ from arjuna.tpi.helpers import *
 @test_function(
     drive_with=record(1,2,3, ver='v1'),
 )
-
 def drive_with_single_record(my):
     console.display(my.data.record)
     console.display(my.data.record.indexed_values())

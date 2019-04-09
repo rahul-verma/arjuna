@@ -29,7 +29,7 @@ class __arfacade():
         self.__version = "0.7.0-beta"
 
     def launch(self, raw_args):
-        reader = TextResourceReader("res/header.txt")
+        reader = TextResourceReader("header.txt")
         print(reader.read().format(version=self.__version))
         reader.close()
 

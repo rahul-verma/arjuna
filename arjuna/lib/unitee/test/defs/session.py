@@ -118,16 +118,18 @@ class __SessionDef(Root, metaclass=abc.ABCMeta):
 
         return TestSession(self)
 
+
 class __MSessionDef(__SessionDef):
     def __init__(self, gname):
         super().__init__("msession")
-        sr = TextResourceReader("unitee/res/st/msession.xml")
+        sr = TextResourceReader("st/msession.xml")
         contents = sr.read()
         sr.close()
         contents = contents.format(gname=gname)
         self.fpath = os.path.join(self.central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_ROOT_DIR).as_string(),
                                   "arjuna/lib/res/st/msession.xml")
         self.raw_contents = contents
+
 
 class MSessionAllTests(__MSessionDef):
     def __init__(self):

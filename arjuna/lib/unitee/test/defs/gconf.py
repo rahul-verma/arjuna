@@ -102,7 +102,7 @@ class GroupConfsLoader:
         arjuna_root_dir = central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_ROOT_DIR).as_string()
         fpath = os.path.join(
             arjuna_root_dir,
-            "lib/unitee/res/st/magroup.xml"
+            "lib/res/st/magroup.xml"
         )
         group_xml = ETree.parse(fpath).getroot()
         group_name = group_xml.attrib['name']

@@ -23,14 +23,15 @@ import abc
 import threading
 import types
 
-from arjuna.lib.trishanku.tpi.reader.excel import *
-from arjuna.lib.trishanku.tpi.reader.ini import *
-from arjuna.lib.trishanku.tpi.reader.textfile import *
-from arjuna.lib.trishanku.tpi.thread import decorators
+from arjuna.lib.core.reader.excel import *
+from arjuna.lib.core.reader.ini import *
+from arjuna.lib.core.reader.textfile import *
+from arjuna.lib.core.thread import decorators
 from .exceptions import *
 from arjuna.lib.setu.core.lib.setu_types import SetuManagedObject
-from arjuna.lib.trishanku.tpi.types import constants
+from arjuna.lib.core.types import constants
 # from arjuna.lib.core.utils import sys_utils
+
 
 class ListDataRecord:
 
@@ -40,6 +41,7 @@ class ListDataRecord:
     @property
     def record(self):
         return self.__data_record
+
 
 class MapDataRecord:
 
@@ -60,6 +62,7 @@ class MapDataRecord:
         else:
             del self.__data_record["exclude"]
             return False
+
 
 class DataSource(SetuManagedObject, metaclass=abc.ABCMeta):
     def __init__(self):
@@ -153,6 +156,7 @@ class FileDataSource(DataSource, metaclass=abc.ABCMeta):
     def _load_file(self):
         pass
 
+
 class DsvFileListDataSource(FileDataSource):
     def __init__(self, path, delimiter="\t"):
         super().__init__(path)
@@ -165,6 +169,7 @@ class DsvFileListDataSource(FileDataSource):
     def _load_file(self):
         self.reader = FileLine2ArrayReader(self.path, self.__delimiter)
 
+
 class DsvFileMapDataSource(FileDataSource):
     def __init__(self, path, delimiter="\t"):
         super().__init__(path)
@@ -176,6 +181,7 @@ class DsvFileMapDataSource(FileDataSource):
 
     def _load_file(self):
         self.reader = FileLine2MapReader(self.path, self.__delimiter)
+
 
 class IniFileDataSource(FileDataSource):
     def __init__(self, path):
@@ -190,6 +196,7 @@ class IniFileDataSource(FileDataSource):
 
     def _load_file(self):
         self.reader = IniFile2MapReader(self.path)
+
 
 class ExcelFileListDataSource(FileDataSource):
     def __init__(self, path):
@@ -207,6 +214,7 @@ class ExcelFileListDataSource(FileDataSource):
 
     def process(self, data_record):
         return ListDataRecord(data_record)
+
 
 class ExcelFileMapDataSource(FileDataSource):
     def __init__(self, path):
