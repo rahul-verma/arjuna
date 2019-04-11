@@ -6,6 +6,7 @@ from urllib3.util import parse_url
 from arjuna.tpi.enums import *
 from arjuna.lib.core.enums import *
 from arjuna.lib.unitee.enums import *
+from arjuna.lib.core.types.constants import *
 
 class ConfigValidator:
     VNREGEX = r'[a-z][a-z0-9]{2,29}'
@@ -30,19 +31,41 @@ class ConfigValidator:
     @classmethod
     def bool(cls, input):
         if type(input) is not bool:
-            cls.raise_exc(input)
+            if type(input) is str:
+                if input in TRUES:
+                    return True
+                elif input in FALSES:
+                    return False
+                else:
+                    cls.raise_exc(input)
+            else:
+                cls.raise_exc(input)
         return input
 
     @classmethod
     def int(cls, input):
         if type(input) is not int:
-            cls.raise_exc(input)
+            if type(input) is str:
+                try:
+                    return int(input)
+                except:
+                    cls.raise_exc(input)
+            else:
+                cls.raise_exc(input)
         return input
 
     @classmethod
     def float(cls, input):
         if type(input) is not float:
-            cls.raise_exc(input)
+            if type(input) is int:
+                return float(input)
+            elif type(input) is str:
+                try:
+                    return float(input)
+                except:
+                    cls.raise_exc(input)
+            else:
+                cls.raise_exc(input)
         return input
 
     @classmethod
@@ -163,14 +186,27 @@ class ConfigValidator:
 
     @classmethod
     def positive_int(cls, input):
-        if type(input) is not int or input <= 1:
+        if type(input) is int and input <= 1:
             cls.raise_exc(input)
+        if type(input) is not int:
+            i = cls.int(input)
+            if i <= 1:
+                cls.raise_exc(input)
+            else:
+                return i
         return input
 
     @classmethod
     def positive_float(cls, input):
-        if type(input) is not float or input < 0.1:
+        if type(input) is float and input < 0.1:
             cls.raise_exc(input)
+
+        if type(input) is not float:
+            i = cls.float(input)
+            if i <= 1:
+                cls.raise_exc(input)
+            else:
+                return i
         return input
 
     @classmethod

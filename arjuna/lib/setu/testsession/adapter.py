@@ -4,7 +4,7 @@ from arjuna.lib.setu.guiauto.adapter.automator import GuiAutomatorHandler
 from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.setu.core.dispatcher.testsession import TestSessionDispatcher
 from arjuna.lib.setu.guiauto.adapter.gui import GuiHandlerManager
-
+from arjuna.lib.setu import Setu
 
 class TestSessionHandler:
 
@@ -35,9 +35,11 @@ class TestSessionHandler:
         self.__testsession.init(root_dir, cliConfig)
         self.__conf_handler = TestSessionConfHandler(self.__testsession.configurator)
         self.__databroker_handler = TestSessionDataBrokerHandler(self.__testsession.data_broker)
-        config_setu_id = self.__testsession.configurator.create_project_conf()
-        self.__guimgr = GuiHandlerManager(self.__testsession.configurator.get_config(config_setu_id))
-        return config_setu_id
+        config = self.__testsession.configurator.create_project_conf()
+        Setu.get_logger().debug("haha")
+        Setu.init_logger(config.setu_config.value(ArjunaOption.LOG_DIR))
+        self.__guimgr = GuiHandlerManager(config)
+        return config.setu_id
 
     def __return_and_remove_arg(self, json_args_dict, key, optional=False):
         try:
@@ -86,11 +88,11 @@ class TestSessionHandler:
     def register_config(self, json_dict):
         # Registering a config is post project conf registration. If no project conf, set it to true.
         self.__project_config_loaded = True
-        setu_options = self.__return_and_remove_arg(json_dict, 'setuOptions')
+        arjuna_options = self.__return_and_remove_arg(json_dict, 'arjunaOptions')
         has_parent = self.__return_and_remove_arg(json_dict, 'hasParent')
         user_options = self.__return_and_remove_arg(json_dict, 'userOptions', optional=True)
         parent_config_id = self.__return_and_remove_arg(json_dict, 'parentConfigId', optional=True)
-        return {"configSetuId" : self.__testsession.configurator.register_config(setu_options, has_parent, user_options, parent_config_id)} 
+        return {"configSetuId" : self.__testsession.configurator.register_config(arjuna_options, has_parent, user_options, parent_config_id)}
 
     def create_file_data_source(self, json_dict):
         file_name = self.__return_and_remove_arg(json_dict, 'fileName')

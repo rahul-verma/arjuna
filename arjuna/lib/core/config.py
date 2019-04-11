@@ -126,58 +126,70 @@ class ConfigContainer:
 
 class _ConfigBuilder:
 
-    def __init__(self, test_session, config_dict, conf_trace, code_mode):
+    def __init__(self, test_session, config_map, conf_trace, code_mode):
         self.__code_mode = code_mode
         self.__test_session = test_session
-        self.__config_dict = config_dict
-        self.__conf_trace = conf_trace
-        if "default_config" in config_dict:
-            self.__parent_config_setu_id =  config_dict["default_config"].get_setu_id()
+        self.__config_container = ConfigContainer()
+
+        self.__config_map = config_map
+        if "default_config" in config_map:
+            self.__parent_config_setu_id = config_map["default_config"].get_setu_id()
         else:
             self.__parent_config_setu_id = None
-        self.__config_container = ConfigContainer()
+
+        # For Unitee
+        self.__conf_trace = conf_trace
 
     def parent_config(self, config):
         self.__parent_config_setu_id = config.get_setu_id()
+
+    def arjuna_option(self, option, obj):
+        self.__config_container.set_arjuna_option(option, obj)
+        return self
+
+    def user_option(self, option, obj):
+        self.__config_container.set_user_option(option, obj)
+        return self
+
+    def options(self, option_map):
+        self.__config_container.set_options(option_map)
+        return self
 
     def selenium(self):
         self.__config_container.set_arjuna_option(ArjunaOption.GUIAUTO_AUTOMATOR_NAME, GuiAutomatorName.SELENIUM.name)
         return self
 
-    def set_arjuna_option(self, option, obj):
-        self.__config_container.set_arjuna_option(option, obj)
-
     def appium(self, context):
-        self.set_arjuna_option(ArjunaOption.GUIAUTO_AUTOMATOR_NAME, GuiAutomatorName.APPIUM.name)
-        self.set_arjuna_option(ArjunaOption.GUIAUTO_CONTEXT, context)
+        self.arjuna_option(ArjunaOption.GUIAUTO_AUTOMATOR_NAME, GuiAutomatorName.APPIUM.name)
+        self.arjuna_option(ArjunaOption.GUIAUTO_CONTEXT, context)
         return self
 
     def chrome(self):
-        self.set_arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.CHROME.name)
+        self.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.CHROME.name)
         return self
 
     def firefox(self):
-        self.set_arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX.name)
+        self.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX.name)
         return self
 
     def headless_mode(self):
-        self.set_arjuna_option(ArjunaOption.BROWSER_HEADLESS_MODE, True)
+        self.arjuna_option(ArjunaOption.BROWSER_HEADLESS_MODE, True)
         return self
 
     def guiauto_max_wait_time(self, seconds):
-        self.set_arjuna_option(ArjunaOption.GUIAUTO_MAX_WAIT, seconds)
+        self.arjuna_option(ArjunaOption.GUIAUTO_MAX_WAIT, seconds)
         return self
 
     def app(self, path):
-        self.set_arjuna_option(ArjunaOption.MOBILE_APP_FILE_PATH, path)
+        self.arjuna_option(ArjunaOption.MOBILE_APP_FILE_PATH, path)
         return self
 
     def mobile_device_name(self, name):
-        self.set_arjuna_option(ArjunaOption.MOBILE_DEVICE_NAME, name)
+        self.arjuna_option(ArjunaOption.MOBILE_DEVICE_NAME, name)
         return self
 
     def mobile_device_udid(self, udid):
-        self.set_arjuna_option(ArjunaOption.MOBILE_DEVICE_UDID, udid)
+        self.arjuna_option(ArjunaOption.MOBILE_DEVICE_UDID, udid)
         return self
 
     def build(self, config_name="default_config"):
@@ -193,7 +205,7 @@ class _ConfigBuilder:
                 self.__config_container.user_options.items()
             )
         config = DefaultTestConfig(self.__test_session, config_name, config_setu_id)
-        self.__config_dict[config_name] = config
+        self.__config_map[config_name] = config
         if self.__code_mode:
             if config_name not in self.__conf_trace:
                 self.__conf_trace[config_name] = {"arjuna_options": set(), "user_options" : set()}
@@ -204,9 +216,9 @@ class _ConfigBuilder:
 class DefaultTestContext:
 
     def __init__(self, test_session, name, parent_config=None):
-        self.__parent_config_setu_id = parent_config and parent_config.get_setu_id() or None
         self.__test_session = test_session
         self.__name = name
+        self.__parent_config_setu_id = parent_config and parent_config.get_setu_id() or None
         self.__configs = dict()
         self.__conf_trace = dict()
 
@@ -215,7 +227,7 @@ class DefaultTestContext:
 
     def update_with_file_config_container(self, container):
         for config_name, conf in self.__configs.items():
-            builder = _ConfigBuilder(self.__test_session, self.__configs, self.__conf_trace, code_mode=False)
+            builder = self.ConfigBuilder(code_mode=False)
             builder.parent_config(conf)
             amap = container.arjuna_options
             umap = container.user_options
@@ -223,23 +235,22 @@ class DefaultTestContext:
                 if "arjuna_options" in self.__conf_trace[config_name]:
                     for k,v in container.arjuna_options.items():
                         if k not in self.__conf_trace[config_name]["arjuna_options"]:
-                            builder.set_arjuna_option(k,v)
+                            builder.arjuna_option(k, v)
                 else:
                     for k, v in container.arjuna_options.items():
-                        builder.set_arjuna_option(k, v)
+                        builder.arjuna_option(k, v)
                 if "user_options" in self.__conf_trace[config_name]:
                     for k,v in container.user_options.items():
                         if k not in self.__conf_trace[config_name]["user_options"]:
-                            builder.set_user_option(k,v)
+                            builder.user_option(k, v)
                 else:
                     for k, v in container.user_options.items():
-                        builder.set_user_option(k, v)
+                        builder.user_option(k, v)
             else:
-                print(type(container.arjuna_options.items()))
                 for k in amap.keys():
-                    builder.set_arjuna_option(k, amap.object(k))
+                    builder.arjuna_option(k, amap.object(k))
                 for k in umap.keys():
-                        builder.set_user_option(k, umap.object(k))
+                        builder.user_option(k, umap.object(k))
             builder.build(config_name=config_name)
 
     def get_config(self, config_name="default_config"):
@@ -264,6 +275,7 @@ class DefaultTestContext:
         return self.__name
 
 
+# For Unitee
 class InternalTestContext(DefaultTestContext):
 
     def __init__(self, test_session, name, parent_config=None):

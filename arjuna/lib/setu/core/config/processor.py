@@ -30,9 +30,7 @@ class ConfigCreator:
     @classmethod
     def __setu_conf_key(cls, key):
         try:
-            print(key)
             key = re.sub(r"\"(.*?)\"", r"\1", key)
-            print(key)
             return ArjunaOption[key]
         except Exception:
             raise Exception("Config option <{}> is not a valid ArjunaOption constant".format(key))
@@ -165,7 +163,6 @@ class CentralConfigLoader(BaseConfigProcessor):
         contents = contents.replace("<IRUNID>", irunid)
         contents = contents.replace("<TEST_MODULE_IMPORT_PREFIX>", test_module_import_prefix)
         contents = contents.replace("<FIXTURES_IMPORT_PREFIX>", conf_fixtures_import_prefix)
-        print(CentralConfigLoader.OS_MAP[platform.system()])
         contents = contents.replace("<HOST_OS>", CentralConfigLoader.OS_MAP[platform.system()])
         raw_config_map = ConfigCreator.get_flat_map_from_hocon_string_for_setu_types(
             HoconStringReader(contents)

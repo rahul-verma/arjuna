@@ -4,12 +4,27 @@ from .objmgr import SetuSvcObjectManager
 from arjuna.lib.setu.testsession.adapter import TestSessionHandler
 from arjuna.lib.setu.core.requester.config import SetuActionType
 
+from arjuna.lib.setu import Setu
+
+
+def create_success_response(data):
+    res = {'result': 'success', 'responseData': data}, 200
+    Setu.get_logger().debug("Setu Action Response: {}".format(res))
+    return res
+
+
+def create_error_response(emsg, etrace=None):
+    etrace = etrace and etrace or "na"
+    res = {'result': 'error', 'emessage': emsg, 'etrace': str(etrace)}, 500
+    Setu.get_logger().debug("Setu Action Response (Error): {}".format(res))
+    return res
+
 
 class SetuSvc(Resource):
 
     def post(self):
         json_dict = request.get_json(force=True)
-        print("From Requester: {}".format(json_dict))
+        Setu.get_logger().debug("Setu Action Request: {}".format(json_dict))
         json_action = json_dict["action"]
         try:
             action_type = SetuActionType[json_action.upper().strip()]
@@ -21,26 +36,25 @@ class SetuSvc(Resource):
                     root_dir = json_dict["args"]["projectRootDir"]
                     del json_dict["args"]["projectRootDir"]
                     res = self.__register_test_session(root_dir, **json_dict["args"])
-                    print(res)
-                    return {'result': 'success', 'responseData': res}, 200
+                    return create_success_response(res)
                 except Exception as e:
                     import traceback
                     etrace = traceback.format_exc()
-                    return {'result': 'error', 'emessage': str(e), 'etrace': str(etrace)}, 500
+                    return create_error_response(str(e), etrace)
             elif action_type == SetuActionType.TESTSESSION_FINISH:
                 pass
             else:
                 testsession_handler, err = self.__get_testsession_handler(json_dict)
                 if not testsession_handler:
-                    return {'result': 'error', 'emessage': err}, 500
+                    return create_error_response(err)
                 try:
                     res = self.__call_test_session_handler(testsession_handler, action_type, json_dict)
-                except Exception as e:
+                except Exception as f:
                     import traceback
                     ftrace = traceback.format_exc()
-                    return {'result': 'error', 'emessage': str(e), 'etrace': str(ftrace)}, 500
+                    return create_error_response(str(f), ftrace)
                 else:
-                    return {'result': 'success', 'responseData': res}, 200
+                    return create_success_response(res)
 
     def __register_test_session(self, root_dir, cliConfig=None):
         handler = TestSessionHandler()

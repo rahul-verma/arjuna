@@ -2,6 +2,9 @@ import requests
 import json
 import os
 
+from arjuna.lib.setu import Setu
+
+
 class SetuAgentRequester:
 
     def __init__(self, base_url):
@@ -16,19 +19,19 @@ class SetuAgentRequester:
 
     def get(self, url):
         req_url = self.base_url + url
-        print("Request URL (GET)::", req_url)
+        Setu.get_logger().debug("Request URL (GET)::", req_url)
         response = requests.get(req_url)
         response_json = json.loads(response.text)
         self.__raise_exception_if_error(response_json)
-        print("Response:: ", os.linesep, response.text)
+        Setu.get_logger().debug("Response:: ", os.linesep, response.text)
         return json.loads(response.text, encoding="utf-8")
 
     def post(self, url, json_dict):
         req_url = self.base_url + url
-        print("Request URL (POST)::", req_url)
-        print("Request Body (POST)::", os.linesep, json_dict)
+        Setu.get_logger().debug("Request URL (POST)::", req_url)
+        Setu.get_logger().debug("Request Body (POST)::", os.linesep, json_dict)
         response = requests.post(req_url, json=json_dict)
-        print("Response:: ", os.linesep, response.text)
+        Setu.get_logger().debug("Response:: ", os.linesep, response.text)
         response_json = json.loads(response.text)
         self.__raise_exception_if_error(response_json)
         return json.loads(response.text)

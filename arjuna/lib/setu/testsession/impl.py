@@ -47,7 +47,7 @@ class TestConfigurator:
         self.__default_ref_config.process_arjuna_options()
         self.__default_ref_config.update(self.__cli_central_config)
         self.__config_map[self.__default_ref_config.setu_id] = self.__default_ref_config
-        return self.__default_ref_config.setu_id
+        return self.__default_ref_config
 
     def get_central_config(self):
         return self.__default_ref_config

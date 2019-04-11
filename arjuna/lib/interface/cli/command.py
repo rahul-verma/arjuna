@@ -115,9 +115,11 @@ class LaunchSetu(Command):
         from arjuna.lib.setu.service import launch_setu
         launch_setu((arg_dict["setu.port"]))
 
+
 class FileObjectType(Enum):
     DIR = auto()
     FILE = auto()
+
 
 class CreateProject(Command):
 

@@ -2,6 +2,8 @@ from arjuna.lib.setu.core.lib.setu_types import SetuManagedObject
 from arjuna.lib.setu.guiauto.lib.element.guielement import GuiElement
 from arjuna.lib.setu.guiauto.lib.locator.emd import SimpleGuiElementMetaData
 
+from arjuna.lib.setu import Setu
+
 class FrameContainer(SetuManagedObject):
     def __init__(self, automator):
         super().__init__()
@@ -62,7 +64,7 @@ class DomRoot(FrameContainer):
 
     def __set_frame_context_str(self, name):
         self.__frame_context = name
-        print("Automator is in {} frame".format(self.__frame_context))
+        Setu.get_logger().debug("Automator is in {} frame".format(self.__frame_context))
 
     def set_frame_context(self, frame):
         self.__set_frame_context_str(frame.get_setu_id())

@@ -1,5 +1,6 @@
 from arjuna.lib.setu.core.webclient.requester import SetuAgentRequester
 
+
 class SetuActorRequester():
 
     def __init__(self, base_url):
