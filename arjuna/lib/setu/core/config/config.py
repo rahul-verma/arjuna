@@ -45,7 +45,7 @@ class Config(SetuManagedObject):
 
     def as_json_dict(self):
         return {
-            "arjunaOptions`": self.__setu_config.as_json_dict(),
+            "arjunaOptions": self.__setu_config.as_json_dict(),
             "userOptions": self.__user_config.as_json_dict()
         }
 
@@ -110,9 +110,7 @@ class AbstractConfig:
     def _validate_key(self, key):
         pass
 
-    def value(self, key):
-        self._validate_key(key)
-        v = self.__config_dict[key]
+    def __value(self, v):
         if isinstance(v, Enum):
             return v.name
         elif type(v) is list:
@@ -126,6 +124,11 @@ class AbstractConfig:
         else:
             return v
 
+    def value(self, key):
+        self._validate_key(key)
+        v = self.__config_dict[key]
+        return self.__value(v)
+
     def as_map(self):
         return self.__config_dict
 
@@ -136,7 +139,7 @@ class AbstractConfig:
             return input
 
     def as_json_dict(self):
-        return {k:self.__as_enum_name_or_same(v) for k,v in self.as_map().items()}
+        return {k:self.__value(v) for k,v in self.as_map().items()}
 
     def update(self, override_config):
         self.__config_dict.update(override_config.as_map())

@@ -3,11 +3,12 @@ from arjuna.lib.setu.core.requester.config import SetuActionType
 from arjuna.lib.setu.core.requester.connector import BaseSetuObject, SetuArg
 from arjuna.tpi.enums import ArjunaOption
 from arjuna.tpi.enums import GuiAutomationContext, BrowserName, GuiAutomatorName
+from arjuna.lib.core.value import AnyRefValue
 
 
 class DefaultTestConfig(BaseSetuObject):
 
-    def __init__(self, test_session, name, setu_id):
+    def __init__(self, test_session, name, setu_id, arjuna_options, user_options):
         super().__init__()
         self.__session = test_session
         self.__name = name
@@ -15,6 +16,8 @@ class DefaultTestConfig(BaseSetuObject):
         self._set_setu_id(setu_id)
         self._set_self_setu_id_arg("configSetuId")
         self._set_test_session_setu_id_arg(self.__session.get_setu_id())
+        self.arjuna_options = {DefaultTestConfig.normalize_arjuna_option_str(k): v for k,v in arjuna_options.items()}
+        self.user_options = user_options
 
     def get_test_session(self):
         return self.__session
@@ -32,14 +35,14 @@ class DefaultTestConfig(BaseSetuObject):
         return ArjunaOption[DefaultTestConfig.normalize_option_str(option_str)]
 
     def get_arjuna_option_value(self, option):
-        setu_option = option
+        arjuna_option = option
         if type(option) is str:
-            setu_option = DefaultTestConfig.normalize_arjuna_option_str(option)
-        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_GET_ARJUNA_OPTION_VALUE, setu_option.name)
+            arjuna_option = DefaultTestConfig.normalize_arjuna_option_str(option)
+        return AnyRefValue(self.arjuna_options[arjuna_option])
 
     def get_user_option_value(self, option):
         user_option = DefaultTestConfig.normalize_option_str(option)
-        return self.__fetch_config_option_value(SetuActionType.CONFIGURATOR_GET_USER_OPTION_VALUE, user_option)
+        return AnyRefValue(self.user_options[user_option])
 
     def get_name(self):
         return self.__name
@@ -133,15 +136,15 @@ class _ConfigBuilder:
 
         self.__config_map = config_map
         if "default_config" in config_map:
-            self.__parent_config_setu_id = config_map["default_config"].get_setu_id()
+            self.__parent_config = config_map["default_config"]
         else:
-            self.__parent_config_setu_id = None
+            self.__parent_config = None
 
         # For Unitee
         self.__conf_trace = conf_trace
 
     def parent_config(self, config):
-        self.__parent_config_setu_id = config.get_setu_id()
+        self.__parent_config = config
 
     def arjuna_option(self, option, obj):
         self.__config_container.set_arjuna_option(option, obj)
@@ -193,18 +196,27 @@ class _ConfigBuilder:
         return self
 
     def build(self, config_name="default_config"):
-        config_setu_id = None
-        if not self.__parent_config_setu_id:
-            config_setu_id = self.__test_session.register_config(
+        if not self.__config_container.arjuna_options.str_items() or not self.__config_container.user_options.items():
+            if not self.__parent_config:
+                if config_name != "default_config":
+                    self.__config_map[config_name] = self.__config_map["default_config"]
+            else:
+                self.__config_map[config_name] = self.__parent_config
+            return
+
+        if not self.__parent_config:
+            config = self.__test_session.register_config(
+                config_name,
                 self.__config_container.arjuna_options.str_items(),
                 self.__config_container.user_options.items())
         else:
-            config_setu_id = self.__test_session.register_child_config(
-                self.__parent_config_setu_id,
+            config = self.__test_session.register_child_config(
+                config_name,
+                self.__parent_config.get_setu_id(),
                 self.__config_container.arjuna_options.str_items(),
                 self.__config_container.user_options.items()
             )
-        config = DefaultTestConfig(self.__test_session, config_name, config_setu_id)
+
         self.__config_map[config_name] = config
         if self.__code_mode:
             if config_name not in self.__conf_trace:

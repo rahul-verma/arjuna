@@ -56,7 +56,7 @@ class TestLoader:
     def __get_pkg_module_qname_for_discovered_file(self, f):
         qname = None
         from arjuna.tpi import Arjuna
-        project = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.PROJECT_NAME).as_string()
+        project = Arjuna.get_central_arjuna_option(ArjunaOption.PROJECT_NAME).as_string()
         pkg = ".".join([project, f.attr(DiscoveredFileAttributeEnum.PACKAGE_DOT_NOTATION).strip()])
         module = f.attr(DiscoveredFileAttributeEnum.NAME).strip()
         qname = ".".join([pkg, module])

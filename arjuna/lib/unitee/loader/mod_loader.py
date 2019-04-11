@@ -48,7 +48,7 @@ class ModuleLoader:
 
     def load(self):
         try:
-            self.console.display("Importing Module in tests directory:", self.qname)
+            self.logger.debug("Importing Module in tests directory: {}".format(self.qname))
             importlib.import_module(self.qname)
         except Exception as e:
             self.console.display_error(

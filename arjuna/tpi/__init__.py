@@ -79,6 +79,7 @@ class ArjunaSingleton:
         self.__load_console()
 
         from arjuna.lib.unitee import Unitee
+        project_name = self.__central_config.get_arjuna_option_value(ArjunaOption.PROJECT_NAME).as_string()
         self.__unitee = Unitee(self.__test_session, self.__central_config)
 
         return self.__central_config
@@ -348,3 +349,11 @@ class Arjuna:
     @classmethod
     def create_gui_automator(cls):
         return cls.ARJUNA_SINGLETON.create_gui_automator()
+
+    @classmethod
+    def get_central_arjuna_option(cls, option):
+        return cls.get_central_config().get_arjuna_option_value(option)
+
+    @classmethod
+    def get_central_user_option(cls, option):
+        return cls.get_central_config().get_user_option_value(option)

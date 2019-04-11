@@ -36,7 +36,7 @@ class SeleniumDriver:
 
     def launch(self, config):
         self.post_other("/automator/launch", 
-        automatorName=config["setuOptions"][ArjunaOption.GUIAUTO_AUTOMATOR_NAME.name], 
+        automatorName=config["arjunaOptions"][ArjunaOption.GUIAUTO_AUTOMATOR_NAME.name], 
         config=config)
 
     def quit(self):

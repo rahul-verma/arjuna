@@ -54,9 +54,9 @@ def validate_config_xml_child(conf_type, session_path, config_node):
 def add_config_node_to_configuration(conf_type, config_container, config_node):
     config_attrs = CIStringDict(config_node.attrib)
     if config_node.tag.lower() == "arjuna_option":
-        config_container.arjuna_option(config_attrs['name'], config_attrs['value'])
+        config_container.set_arjuna_option(config_attrs['name'], config_attrs['value'])
     else:
-        config_container.user_option(config_attrs['name'], config_attrs['value'])
+        config_container.set_user_option(config_attrs['name'], config_attrs['value'])
 
 
 def validate_fixture_xml_child(conf_type, object_type, session_path, fixture_node):

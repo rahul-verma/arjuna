@@ -60,7 +60,7 @@ class DefaultSetuResponse:
         return self.get_value_for_key("dataSourceSetuId").as_string()
 
     def add_data_item(self, name, value):
-        if not self.getData():
+        if not self.get_data():
             self.__response_dict["responseData"] = {}
         self.__response_dict["responseData"][name] = value
 
@@ -138,6 +138,7 @@ class BaseSetuObject:
     def _send_request(self, setu_action_type, *vargs):
         request = self._create_request(setu_action_type, *vargs)
         return self.SETU_CLIENT.post(request)
+
 
 class SetuArg:
 

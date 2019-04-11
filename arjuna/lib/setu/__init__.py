@@ -4,18 +4,19 @@ import inspect
 
 from .guiauto.lib.automator.guiautomator import GuiAutomator
 from .guiauto.lib.locator.emd import GuiElementMetaData, SimpleGuiElementMetaData
-
+from functools import partial
 
 class _DummyLogger:
 
-    def dummy(self, *vargs, **kwargs):
+    def dummy(self, item, *vargs):
+        print("Dummy call", item)
         frame = inspect.stack()[3]
         caller_str = "{}.py:{}:L{}".format(inspect.getmodule(frame[0]).__name__, frame[3], frame[2])
-        print("Dummy logger called by {} with args: ".format(caller_str), vargs, kwargs)
+        print("Dummy logger called by {} with args: ".format(caller_str), str(vargs)[:300], "...")
         pass
 
     def __getattr__(self, item):
-        return self.dummy
+        return partial(self.dummy, item)
 
 
 class Setu:

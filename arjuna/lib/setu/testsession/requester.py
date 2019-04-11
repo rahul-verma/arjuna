@@ -24,29 +24,38 @@ class DefaultTestSession(BaseSetuObject):
         )
         self._set_setu_id(response.get_value_for_testsession_setu_id())
         self._set_self_setu_id_arg("testSessionSetuId")
-        config = DefaultTestConfig(self, self.__DEF_CONF_NAME, response.get_value_for_config_setu_id())
+        return self.__create_config_from_response(response)
 
+    def __create_config_from_response(self, response, name=None):
+        res_data = response.get_data()
+        config = DefaultTestConfig(
+            self,
+            name and name or self.__DEF_CONF_NAME,
+            response.get_value_for_config_setu_id(),
+            res_data["arjunaOptions"],
+            res_data["userOptions"]
+        )
         return config
 
     def finish(self):
         pass
         # To do
 
-    def __register_config(self, hasParent, parentConfigId, setuOptions, userOptions):
+    def __register_config(self, name, hasParent, parentConfigId, arjunaOptions, userOptions):
         response = self._send_request(
                 SetuActionType.TESTSESSION_REGISTER_CONFIG,
                 SetuArg.arg("hasParent", hasParent),
                 SetuArg.arg("parentConfigId", parentConfigId),
-                SetuArg.arg("setuOptions", setuOptions),
+                SetuArg.arg("arjunaOptions", arjunaOptions),
                 SetuArg.arg("userOptions", userOptions)
         )
-        return response.get_value_for_config_setu_id()
+        return self.__create_config_from_response(response, name)
 
-    def register_config(self, arjuna_options, user_options):
-        return self.__register_config(False, None, arjuna_options, user_options)
+    def register_config(self, name, arjuna_options, user_options):
+        return self.__register_config(name, False, None, arjuna_options, user_options)
 
-    def register_child_config(self, parent_conf_id, arjuna_options, user_options):
-        return self.__register_config(True, parent_conf_id, arjuna_options, user_options)
+    def register_child_config(self, name, parent_conf_id, arjuna_options, user_options):
+        return self.__register_config(name, True, parent_conf_id, arjuna_options, user_options)
 
     def create_file_data_source(self, record_type, file_name, *arg_pairs):
         response = self._send_request(

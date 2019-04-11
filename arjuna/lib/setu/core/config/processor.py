@@ -91,7 +91,6 @@ class ConfigCreator:
 
         custom_setu_conf = None
         if "arjunaOptions" in cdict:
-            # setuOptions
             d = HoconConfigDictReader(cdict["arjunaOptions"])
             custom_raw_setu_config_map = cls.get_flat_map_from_hocon_string_for_setu_types(d)
             custom_setu_conf = cls.create_config_for_raw_map(custom_raw_setu_config_map, processor.get_setu_option_validator)

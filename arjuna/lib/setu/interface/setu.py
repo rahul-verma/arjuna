@@ -59,12 +59,16 @@ class SetuSvc(Resource):
     def __register_test_session(self, root_dir, cliConfig=None):
         handler = TestSessionHandler()
 
-        config_id = handler.init(root_dir, cliConfig)
+        config = handler.init(root_dir, cliConfig)
         SetuSvcObjectManager.register_testsession_handler(handler)
-        return {
+        out = {
             'testSessionSetuId': handler.setu_id,
-            'configSetuId': config_id
+            'configSetuId': config.setu_id,
+
         }
+
+        out.update(config.as_json_dict())
+        return out
 
     def __get_testsession_handler(self, json_dict):
         try:

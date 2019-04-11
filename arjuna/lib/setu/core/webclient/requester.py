@@ -19,19 +19,14 @@ class SetuAgentRequester:
 
     def get(self, url):
         req_url = self.base_url + url
-        Setu.get_logger().debug("Request URL (GET)::", req_url)
         response = requests.get(req_url)
         response_json = json.loads(response.text)
         self.__raise_exception_if_error(response_json)
-        Setu.get_logger().debug("Response:: ", os.linesep, response.text)
         return json.loads(response.text, encoding="utf-8")
 
     def post(self, url, json_dict):
         req_url = self.base_url + url
-        Setu.get_logger().debug("Request URL (POST)::", req_url)
-        Setu.get_logger().debug("Request Body (POST)::", os.linesep, json_dict)
         response = requests.post(req_url, json=json_dict)
-        Setu.get_logger().debug("Response:: ", os.linesep, response.text)
         response_json = json.loads(response.text)
         self.__raise_exception_if_error(response_json)
         return json.loads(response.text)

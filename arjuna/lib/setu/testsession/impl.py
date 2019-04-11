@@ -81,7 +81,7 @@ class TestConfigurator:
         config.update(self.__cli_test_config)
         config.process_arjuna_options()
         self.__config_map[config.setu_id] = config
-        return config.setu_id
+        return config
 
 
 class TestSession(SetuManagedObject):

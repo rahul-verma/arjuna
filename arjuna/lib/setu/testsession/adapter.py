@@ -33,13 +33,12 @@ class TestSessionHandler:
     def init(self, root_dir, cliConfig=None):
         self.__testsession = TestSession()
         self.__testsession.init(root_dir, cliConfig)
+        config = self.__testsession.configurator.create_project_conf()
+        Setu.init_logger(config.setu_config.value(ArjunaOption.LOG_DIR))
         self.__conf_handler = TestSessionConfHandler(self.__testsession.configurator)
         self.__databroker_handler = TestSessionDataBrokerHandler(self.__testsession.data_broker)
-        config = self.__testsession.configurator.create_project_conf()
-        Setu.get_logger().debug("haha")
-        Setu.init_logger(config.setu_config.value(ArjunaOption.LOG_DIR))
         self.__guimgr = GuiHandlerManager(config)
-        return config.setu_id
+        return config
 
     def __return_and_remove_arg(self, json_args_dict, key, optional=False):
         try:
@@ -92,7 +91,10 @@ class TestSessionHandler:
         has_parent = self.__return_and_remove_arg(json_dict, 'hasParent')
         user_options = self.__return_and_remove_arg(json_dict, 'userOptions', optional=True)
         parent_config_id = self.__return_and_remove_arg(json_dict, 'parentConfigId', optional=True)
-        return {"configSetuId" : self.__testsession.configurator.register_config(arjuna_options, has_parent, user_options, parent_config_id)}
+        config = self.__testsession.configurator.register_config(arjuna_options, has_parent, user_options, parent_config_id)
+        out_map = {'configSetuId' : config.setu_id}
+        out_map.update(config.as_json_dict())
+        return out_map
 
     def create_file_data_source(self, json_dict):
         file_name = self.__return_and_remove_arg(json_dict, 'fileName')
