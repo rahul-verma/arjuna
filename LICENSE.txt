@@ -16,7 +16,7 @@ Information on Inclusion of Third Party Software
 
 The Software includes the UNMODIFIED version of the following 3rd party libraries as a part of its distribution. The Software makes use of them in their originally released binary versions.
 
-AutoCognite acknowledges the copyrights, licenses, trademarks of these libraries as per the guidelines provided by respective copyright holders and licensors. 
+Test Mile acknowledges the copyrights, licenses, trademarks of these libraries as per the guidelines provided by respective copyright holders and licensors.
 If there is a change needed in the way the names are being mentioned or licensing information is being provided, please write to support@arjunapro.com and the same shall be corrected/modified.
 
 The licensing information of all of the mentioned unique libraries can be found below and the corresponding full reference license files can be found under /docs/licenses directory of the distribution.

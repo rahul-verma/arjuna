@@ -53,7 +53,8 @@ class TestStage(TestObject):
 	def _populate_tvars(self, base_tvars):
 		self.tvars = base_tvars
 		self.tvars.info.stage.meta['name'] = self.defn.name
-		self.tvars.evars.update(self.defn.evars)
+		if not self.defn.config.is_empty():
+			self.tvars.context.update_with_file_config_container(self.defn.config)
 
 	def _execute(self):
 		tp = TestObjectThreadPool(self.thcount, self, "{}::{}".format(self.thname, "g"))

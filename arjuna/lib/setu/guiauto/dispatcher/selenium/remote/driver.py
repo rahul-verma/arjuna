@@ -2,15 +2,16 @@ import inspect
 from arjuna.tpi.enums import ArjunaOption
 from .driverelement import SeleniumDriverElement
 
+
 class SeleniumDriver:
 
     def __init__(self, setu_id, requester):
         self.__setu_id = setu_id
         self.__requester = requester
 
-    def create_gui_element_dispatacher(self, element_setu_id):
+    def create_gui_element_dispatcher(self, element_setu_id):
         return SeleniumDriverElement()
-        self.__dispatcher.create_gui_element_dispatacher(element_setu_id)
+        self.__dispatcher.create_gui_element_dispatcher(element_setu_id)
 
     def __post_to_actor(self, action, actor_uri, **kwargs):
         input_dict = {"automatorSetuId" : self.setu_id}
@@ -35,14 +36,13 @@ class SeleniumDriver:
 
     def launch(self, config):
         self.post_other("/automator/launch", 
-        automatorName=config["setuOptions"][ArjunaOption.GUIAUTO_AUTOMATOR_NAME.name], 
+        automatorName=config["arjunaOptions"][ArjunaOption.GUIAUTO_AUTOMATOR_NAME.name], 
         config=config)
 
     def quit(self):
         self.post_action()
 
     def go_to_url(self, url):
-        print("gggg", url)
         self.post_action(url=url)
 
     def go_back_in_browser(self):
@@ -61,7 +61,6 @@ class SeleniumDriver:
         self.post_action()
 
     def find_element(self, child_gui_element_set_id, with_type, with_value):
-        print(child_gui_element_set_id, with_type, with_value)
         self.post_action(
             elementSetuId = child_gui_element_set_id,
             withType = with_type,
@@ -90,7 +89,6 @@ class SeleniumDriver:
 
     def get_current_window_handle(self):
         response = self.post_action()
-        print(response)
         return self.__get_result(response)
 
     def get_current_window_title(self):

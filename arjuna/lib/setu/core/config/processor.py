@@ -1,6 +1,9 @@
 import os
 import copy
-from arjuna.lib.trishanku.tpi.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
+import re
+import datetime
+import platform
+from arjuna.lib.core.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
 
 from arjuna.tpi.enums import ArjunaOption
 from .validator import ConfigValidator
@@ -15,7 +18,7 @@ class ConfigCreator:
         if cls.SETU_CONF_DESC_MAP is not None:
             return
         my_dir = os.path.dirname(os.path.realpath(__file__))
-        setu_conf_desc_file = os.path.join(my_dir, "..", "res", "setu_config_desc.conf")  
+        setu_conf_desc_file = os.path.join(my_dir, "res", "arjuna_conf_desc.conf")
         cls.__process_setu_conf_desc(setu_conf_desc_file)  
 
     @classmethod
@@ -27,14 +30,15 @@ class ConfigCreator:
     @classmethod
     def __setu_conf_key(cls, key):
         try:
+            key = re.sub(r"\"(.*?)\"", r"\1", key)
             return ArjunaOption[key]
         except Exception:
-            raise Exception("Config option [{}] is not a valid ArjunaOption constant".format(key))
+            raise Exception("Config option <{}> is not a valid ArjunaOption constant".format(key))
 
     @classmethod
     def __get_flat_map_from_hocon_string(cls, hreader):
         hreader.process()
-        return {i.upper().strip().replace(".","_"):j for i,j in hreader.get_flat_map().items()}
+        return {i.upper().strip().replace(".", "_"): j for i, j in hreader.get_flat_map().items()}
 
     @classmethod      
     def get_flat_map_from_hocon_string_for_setu_types(cls, hreader):
@@ -57,7 +61,7 @@ class ConfigCreator:
                     else:
                         out_map[conf_name] = validator(raw_value)
             except:
-                raise Exception("Config option value [{}](type:{}) for [{}] option did not pass the validation check: [{}]".format(
+                raise Exception("Config option value <{}>(type:{}) for <{}> option did not pass the validation check: [{}]".format(
                     raw_value, type(raw_value), conf_name, validator_name)
                 )
         return out_map
@@ -72,8 +76,8 @@ class ConfigCreator:
 
     @classmethod
     def __create_new_conf(cls, processor, source, setu_dict=None, user_dict=None):
-        out_setu = copy.deepcopy(source.setu_config.as_map())
-        out_user = copy.deepcopy(source.user_config.as_map())
+        out_setu = source and copy.deepcopy(source.setu_config.as_map()) or {}
+        out_user = source and copy.deepcopy(source.user_config.as_map()) or {}
         if setu_dict:
             out_setu.update(setu_dict)
         if user_dict:
@@ -86,18 +90,15 @@ class ConfigCreator:
             return cls.__create_new_conf(processor, source)
 
         custom_setu_conf = None
-        if "setuOptions" in cdict:
-            # setuOptions
-            custom_raw_setu_config_map = cls.get_flat_map_from_hocon_string_for_setu_types(
-                HoconConfigDictReader(cdict["setuOptions"])
-            )
+        if "arjunaOptions" in cdict:
+            d = HoconConfigDictReader(cdict["arjunaOptions"])
+            custom_raw_setu_config_map = cls.get_flat_map_from_hocon_string_for_setu_types(d)
             custom_setu_conf = cls.create_config_for_raw_map(custom_raw_setu_config_map, processor.get_setu_option_validator)
 
         custom_user_conf = None
         if "userOptions" in cdict:
-            project_raw_user_config_map = cls.__get_flat_map_from_hocon_string(
-                HoconConfigDictReader(cdict["userOptions"])
-            )
+            d = HoconConfigDictReader(cdict["userOptions"])
+            project_raw_user_config_map = cls.__get_flat_map_from_hocon_string(d)
             custom_user_conf = cls.create_config_for_raw_map(
                 project_raw_user_config_map, 
                 processor.get_user_option_validator
@@ -128,12 +129,20 @@ class BaseConfigProcessor:
     def get_user_option_validator(self, conf_name):
         return "pass_through", self.pass_through
 
-class CentralConfigLoader(BaseConfigProcessor):
 
-    def __init__(self, root_dir):
-        my_dir = os.path.dirname(os.path.realpath(__file__))
-        self.__setu_central_confg_file = os.path.join(my_dir, "..", "res", "setu_central.conf")
-        self.root_dir = root_dir
+class CentralConfigLoader(BaseConfigProcessor):
+    OS_MAP = {
+        'Windows': 'windows',
+        'Darwin': 'mac',
+        'Linux': 'linux'
+    }
+
+    def __init__(self, project_root_dir, runid=None):
+        self.__my_dir = os.path.dirname(os.path.realpath(__file__))
+        self.__setu_central_confg_file = os.path.join(self.__my_dir, "res", "arjuna.conf")
+        self.__project_root_dir = project_root_dir
+        self.__project_name = os.path.basename(self.__project_root_dir)
+        self.__runid = runid and runid or "mrun"
         self.__process()
 
     def __process(self):
@@ -141,17 +150,28 @@ class CentralConfigLoader(BaseConfigProcessor):
         f = open(self.__setu_central_confg_file, "r")
         contents = f.read()
         f.close()
-        contents = contents.replace("<ROOT_DIR>", self.root_dir)
+        arjuna_root = os.path.abspath(os.path.join(self.__my_dir, "..", "..", "..", ".."))
+
+        irunid = "{}-{}".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3], self.__runid)
+        test_module_import_prefix = "{}.tests.modules.".format(self.__project_name)
+        conf_fixtures_import_prefix = "{}.fixtures.".format(self.__project_name)
+
+        contents = contents.replace("<ARJUNA_ROOT_DIR>", arjuna_root)
+        contents = contents.replace("<PROJECT_ROOT_DIR>", self.__project_root_dir)
+        contents = contents.replace("<PROJECT_NAME>", self.__project_name)
+        contents = contents.replace("<IRUNID>", irunid)
+        contents = contents.replace("<TEST_MODULE_IMPORT_PREFIX>", test_module_import_prefix)
+        contents = contents.replace("<FIXTURES_IMPORT_PREFIX>", conf_fixtures_import_prefix)
+        contents = contents.replace("<HOST_OS>", CentralConfigLoader.OS_MAP[platform.system()])
         raw_config_map = ConfigCreator.get_flat_map_from_hocon_string_for_setu_types(
             HoconStringReader(contents)
         )
-        pprint(raw_config_map)
         self._config = ConfigCreator.create_conf(
             self,
             ConfigCreator.create_config_for_raw_map(raw_config_map, self.get_setu_option_validator), 
             {}
         )
-        pprint(self.config.as_json_dict())
+
 
 class ProjectConfigCreator(BaseConfigProcessor):
 

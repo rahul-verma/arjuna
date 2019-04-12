@@ -29,6 +29,7 @@ from arjuna.lib.unitee.state.states import *
 class TestSession(TestObject):
 	def __init__(self, defn):
 		super().__init__(TestObjectTypeEnum.Session)
+		self.__context = None
 		self.defn = defn
 		self.thcount = 1
 		self.stages = []
@@ -36,6 +37,14 @@ class TestSession(TestObject):
 		self.fixture_defs = self.defn.fixture_defs
 		self.append_before_fixture(self.fixture_defs.build(FixtureTypeEnum.INIT_SESSION))
 		self.append_after_fixture(self.fixture_defs.build(FixtureTypeEnum.END_SESSION))
+
+	@property
+	def context(self):
+		return self.__context
+
+	@context.setter
+	def context(self, context):
+		self.__context = context
 
 	def load(self, base_tvars=None):
 		self._populate_tvars()
@@ -46,13 +55,13 @@ class TestSession(TestObject):
 		self.children = self.stages
 
 	def _populate_tvars(self):
-		from arjuna.lib.core import ArjunaCore
-		central_evars = ArjunaCore.config.clone_evars()
+		# central_evars = ArjunaCore.config.clone_evars()
 		self.tvars = TestVars()
+		self.tvars.context = self.__context
 		self.tvars.info.session = SessionInfo()
 		self.tvars.info.session.meta['name'] = self.defn.name
-		self.tvars.evars.update(ArjunaCore.config.clone_evars())
-		self.tvars.evars.update(self.defn.evars)
+		if not self.defn.config.is_empty():
+			self.tvars.context.update_with_file_config_container(self.defn.config)
 
 	def _execute(self):
 		tp = TestObjectThreadPool(self.thcount, self, "st")

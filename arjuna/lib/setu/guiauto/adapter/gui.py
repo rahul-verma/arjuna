@@ -3,6 +3,7 @@ from arjuna.lib.setu.guiauto.lib.gui.namestore import GuiNameStore
 from arjuna.lib.setu.guiauto.lib.gui.gui import Gui
 from arjuna.tpi.enums import ArjunaOption
 
+
 class GuiHandlerManager:
 
     def __init__(self, project_config):
@@ -10,21 +11,34 @@ class GuiHandlerManager:
         self.__namespace_dir = project_config.setu_config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
         self.__gui_map = {}
 
+    @property
+    def name_store(self):
+        return self.__name_store
+
+    @property
+    def namespace_dir(self):
+        return self.__namespace_dir
+
+    def add_to_gui_map(self, setu_id, gui_handler):
+        self.__gui_map[setu_id] = gui_handler
+
     def create_gui(self, automator_handler, json_dict):
         label = json_dict["label"]
         defPath = json_dict["defFileName"]
         gui = Gui(self.__name_store, self.__namespace_dir, automator_handler.automator, label, defPath)
-        gui_handler = GuiHandler(automator_handler, gui)
-        self.__gui_map[gui.setu_id] = gui_handler
+        gui_handler = GuiHandler(self, automator_handler, gui)
+        self.add_to_gui_map(gui.setu_id, gui_handler)
         return gui_handler
 
     def get_gui_handler(self, setu_id):
         return self.__gui_map[setu_id]
 
+
 # Arg names of methods show JSON names, so don't follow Python conventions.
 class GuiHandler:
 
-    def __init__(self, automator_handler, gui):
+    def __init__(self, gui_mgr, automator_handler, gui):
+        self.__guimgr = gui_mgr
         self.__gui = gui
         self.__automator_handler = automator_handler
         self.__automator = None
@@ -40,6 +54,12 @@ class GuiHandler:
     @property
     def automator_handler(self):
         return self.__automator_handler
+
+    def create_gui(self, automator_handler, label=None, name=None, qualName=None, defFileName=None):
+        gui = Gui(self.__guimgr.name_store, self.__guimgr.namespace_dir, automator_handler.automator, label, defFileName)
+        gui_handler = GuiHandler(self.__guimgr, automator_handler, gui)
+        self.__guimgr.add_to_gui_map(gui.setu_id, gui_handler)
+        return {"guiSetuId": gui.setu_id}
 
     def create_element(self, locators):
         emd = self.gui.get_emd(locators)

@@ -27,7 +27,9 @@ from arjuna.lib.unitee.reporter.result.types import *
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.exceptions import *
 
+
 class Test(TestObject):
+
 	def __init__(self, num, group, module, func):
 		super().__init__(TestObjectTypeEnum.Test)
 		self.num = num
@@ -49,7 +51,7 @@ class Test(TestObject):
 
 	def _execute(self):
 
-		Unitee.state_mgr.get_current_thread_state().begin_recording(ExecutionContext.Test)
+		self.unitee.state_mgr.get_current_thread_state().begin_recording(ExecutionContext.Test)
 		try:
 			utvars = self.tvars.create_utvars()
 			# print(self.func_obj)
@@ -60,9 +62,9 @@ class Test(TestObject):
 			pass
 			# Step addition would have happended as a result of step.evaluate()
 		except Exception as e:
-			Unitee.state_mgr.get_current_thread_state().add_step_exception(e, traceback.format_exc())
+			self.unitee.state_mgr.get_current_thread_state().add_step_exception(e, traceback.format_exc())
 
-		steps = Unitee.state_mgr.get_current_thread_state().end_recording()
+		steps = self.unitee.state_mgr.get_current_thread_state().end_recording()
 		tresult = TestResult(self)
 		tresult.set_steps(steps)
 

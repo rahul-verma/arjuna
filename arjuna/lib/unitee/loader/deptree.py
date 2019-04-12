@@ -21,7 +21,6 @@ limitations under the License.
 
 import abc
 
-from arjuna.lib.core import ArjunaCore
 
 class TestNode(metaclass=abc.ABCMeta):
 

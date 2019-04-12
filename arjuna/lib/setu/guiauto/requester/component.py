@@ -44,12 +44,12 @@ class BaseComponent(BaseSetuObject):
         self.__test_session = test_session
         self.__automator = app_automator
 
-        if app_automator.isGui():
-            self._set_gui_setu_id_arg(app_automator.getSetuId())
+        if app_automator.is_gui():
+            self._set_gui_setu_id_arg(app_automator.get_setu_id())
         else:
-            self._set_automator_setu_id_arg(app_automator.getSetuId())
+            self._set_automator_setu_id_arg(app_automator.get_setu_id())
 
-        self._set_test_session_setu_id_arg(test_session.getSetuId())
+        self._set_test_session_setu_id_arg(test_session.get_setu_id())
 
     def _get_automator(self):
         return self.__automator
@@ -60,7 +60,7 @@ class BaseComponent(BaseSetuObject):
 
 class BaseElement(BaseComponent):
 
-    def __init(self, test_session, app_automator, setu_id, index=None):
+    def __init__(self, test_session, app_automator, setu_id, index=None):
         super().__init__(test_session, app_automator)
         self._set_setu_id(setu_id)
         self._set_self_setu_id_arg("elementSetuId")
@@ -77,16 +77,16 @@ class DefaultGuiElement(BaseElement):
     def __init__(self, test_session, app_automator, setu_id, index=None):
         super().__init__(test_session, app_automator, setu_id, index)
 
-    def enterText(self, text):
-        self._send_request(SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXTs)
+    def enter_text(self, text):
+        self._send_request(SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXT, SetuArg.text_arg(text))
 
-    def setText(self, text):
-        self._send_request(SetuActionType.GUIAUTO_ELEMENT_ENTER_TEXT)
+    def set_text(self, text):
+        self._send_request(SetuActionType.GUIAUTO_ELEMENT_SET_TEXT, SetuArg.text_arg(text))
 
     def click(self):
         self._send_request(SetuActionType.GUIAUTO_ELEMENT_CLICK)
 
-    def waitUntilClickable(self):
+    def wait_until_clickable(self):
         self._send_request(SetuActionType.GUIAUTO_ELEMENT_WAIT_UNTIL_CLICKABLE)
 
     def check(self):
@@ -101,8 +101,8 @@ class DefaultGuiMultiElement(BaseElement):
     def __init__(self, test_session, app_automator, setu_id):
         super().__init__(test_session, app_automator, setu_id)
 
-    def getInstanceAtIndex(self, index):
-        return GuiAutoComponentFactory.GuiElement(self._get_test_session(), self._get_automator(), self.getSetuId(), index)
+    def IndexedElement(self, index):
+        return DefaultGuiElement(self._get_test_session(), self._get_automator(), self.get_setu_id(), index)
 
 
 class DefaultDropDown(BaseElement):
@@ -110,34 +110,34 @@ class DefaultDropDown(BaseElement):
     def __init__(self, test_session, app_automator, setu_id):
         super().__init__(test_session, app_automator, setu_id)
 
-    def hasValueSelected(self, value):
-        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_VALUE_SELECTED, SetuArg.valueArg(value))
-        return response.getValueForCheckResult()
+    def has_value_selected(self, value):
+        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_VALUE_SELECTED, SetuArg.value_arg(value))
+        return response.get_value_for_check_result()
 
-    def hasIndexSelected(self, index):
-        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_INDEX_SELECTED, SetuArg.indexArg(index))
-        return response.getValueForCheckResult()
+    def has_index_selected(self, index):
+        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_INDEX_SELECTED, SetuArg.index_arg(index))
+        return response.get_value_for_check_result()
 
-    def selectByValue(self, value):
-        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VALUE, SetuArg.valueArg(value))
+    def select_by_value(self, value):
+        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VALUE, SetuArg.value_arg(value))
 
-    def selectByIndex(self, index):
-        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_INDEX, SetuArg.indexArg(index))
+    def select_by_index(self, index):
+        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_INDEX, SetuArg.index_arg(index))
 
-    def getFirstSelectedOptionValue(self):
+    def get_first_selected_option_value(self):
         response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE)
-        return response.getValueForValueAttr()
+        return response.get_value_for_value_attr()
 
-    def getFirstSelectedOptionText(self):
+    def get_first_selected_option_text(self):
         response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_GET_FIRST_SELECTED_OPTION_TEXT)
-        return response.getValueForText()
+        return response.get_value_for_text()
 
-    def hasVisibleTextSelected(self, text):
-        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_VISIBLE_TEXT_SELECTED, SetuArg.textArg(text))
-        return response.getValueForCheckResult()
+    def has_visible_text_selected(self, text):
+        response = self._send_request(SetuActionType.GUIAUTO_DROPDOWN_HAS_VISIBLE_TEXT_SELECTED, SetuArg.text_arg(text))
+        return response.get_value_for_check_result()
 
-    def selectByVisibleText(self, text):
-        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.textArg(text))
+    def select_by_visible_text(self, text):
+        self._send_request(SetuActionType.GUIAUTO_DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.text_arg(text))
 
 
 class DefaultRadioGroup(BaseElement):
@@ -145,23 +145,23 @@ class DefaultRadioGroup(BaseElement):
     def __init__(self, test_session, app_automator, setu_id):
         super().__init__(test_session, app_automator, setu_id)
 
-    def hasValueSelected(self, value):
-        response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_HAS_VALUE_SELECTED, SetuArg.valueArg(value))
-        return response.getValueForCheckResult()
+    def has_value_selected(self, value):
+        response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_HAS_VALUE_SELECTED, SetuArg.value_arg(value))
+        return response.get_value_for_check_result()
 
-    def hasIndexSelected(self, index):
-        response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_HAS_INDEX_SELECTED, SetuArg.indexArg(index))
-        return response.getValueForCheckResult()
+    def has_index_selected(self, index):
+        response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_HAS_INDEX_SELECTED, SetuArg.index_arg(index))
+        return response.get_value_for_check_result()
 
-    def selectByValue(self, value):
-        self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_VALUE, SetuArg.valueArg(value))
+    def select_by_value(self, value):
+        self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_VALUE, SetuArg.value_arg(value))
 
-    def selectByIndex(self, index):
-        self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_INDEX, SetuArg.indexArg(index))
+    def select_by_index(self, index):
+        self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_SELECT_BY_INDEX, SetuArg.index_arg(index))
 
-    def getFirstSelectedOptionValue(self):
+    def get_first_selected_option_value(self):
         response = self._send_request(SetuActionType.GUIAUTO_RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE)
-        return response.getValueForValueAttr()
+        return response.get_value_for_value_attr()
 
 
 class DefaultAlert(BaseElement):
@@ -175,26 +175,26 @@ class DefaultAlert(BaseElement):
     def dismiss(self):
         self._send_request(SetuActionType.GUIAUTO_ALERT_DISMISS)
 
-    def getText(self):
+    def get_text(self):
         response = self._send_request(SetuActionType.GUIAUTO_ALERT_GET_TEXT)
-        return response.getValueForText()
+        return response.get_value_for_text()
 
-    def sendText(self, text):
-        self._send_request(SetuActionType.GUIAUTO_ALERT_SEND_TEXT, SetuArg.textArg(text))
+    def send_text(self, text):
+        self._send_request(SetuActionType.GUIAUTO_ALERT_SEND_TEXT, SetuArg.text_arg(text))
 
 
-class DefaultBrowser(BaseElement):
+class DefaultBrowser(BaseComponent):
 
-    def __init__(self, test_session, app_automator, setu_id):
-        super().__init__(test_session, app_automator, setu_id)
+    def __init__(self, test_session, app_automator):
+        super().__init__(test_session, app_automator)
 
-    def goToUrl(self, url):
+    def go_to_url(self, url):
         self._send_request(SetuActionType.GUIAUTO_BROWSER_GO_TO_URL, SetuArg.arg("url", url))
 
-    def goBack(self):
+    def go_back(self):
         self._send_request(SetuActionType.GUIAUTO_BROWSER_GO_BACK)
 
-    def goForward(self):
+    def go_forward(self):
         self._send_request(SetuActionType.GUIAUTO_BROWSER_GO_FORWARD)
 
     def refresh(self):
@@ -210,14 +210,14 @@ class DefaultFrame(BaseElement):
     def focus(self):
         self._send_request(SetuActionType.GUIAUTO_FRAME_FOCUS)
 
-    def frame(self, *withLocators):
+    def Frame(self, *withLocators):
         arg = [l.asMap() for l in withLocators]
         response = self._send_request(SetuActionType.GUIAUTO_FRAME_CREATE_FRAME, SetuArg.arg("locators", arg))
-        return GuiAutoComponentFactory.Frame(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
-    def parent(self):
+    def ParentFrame(self):
         response = self._send_request(SetuActionType.GUIAUTO_FRAME_GET_PARENT)
-        return GuiAutoComponentFactory.Frame(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
 
 class DefaultDomRoot(BaseComponent):
@@ -228,12 +228,12 @@ class DefaultDomRoot(BaseComponent):
     def focus(self):
         self._send_request(SetuActionType.GUIAUTO_DOMROOT_FOCUS)
 
-    def frame(self, *locators):
-        arg = [l.asMap() for l in locators]
+    def Frame(self, *with_locators):
+        arg = [l.as_map() for l in with_locators]
         response = self._send_request(SetuActionType.GUIAUTO_DOMROOT_CREATE_FRAME, SetuArg.arg("locators", arg))
-        return DefaultFrame(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
-    def parent(self):
+    def ParentFrame(self):
         raise Exception("DOM root does not have a parent frame.")
 
 
@@ -242,9 +242,9 @@ class AbstractBasicWindow(BaseElement):
     def __init__(self, test_session, app_automator, setu_id):
         super().__init__(test_session, app_automator, setu_id)
 
-    def getTitle(self):
+    def get_title(self):
         response = self._send_request(SetuActionType.GUIAUTO_WINDOW_GET_TITLE)
-        return response.getValueForKey("title").asString()
+        return response.get_value_for_key("title").as_string()
 
     def focus(self):
         self._send_request(SetuActionType.GUIAUTO_WINDOW_FOCUS)
@@ -258,8 +258,8 @@ class DefaultChildWindow(AbstractBasicWindow):
     def close(self):
         self._send_request(SetuActionType.GUIAUTO_CHILD_WINDOW_CLOSE)
 
-    def mainWindow(self):
-        return self.getAutomator().mainWindow()
+    def MainWindow(self):
+        return self._get_automator().MainWindow()
 
 
 class DefaultMainWindow(AbstractBasicWindow):
@@ -274,14 +274,14 @@ class DefaultMainWindow(AbstractBasicWindow):
         response = self._send_request(setu_action_type, *setu_args)
         return response.getValueForElementSetuId()
 
-    def childWindow(self, *withLocators):
+    def ChildWindow(self, *withLocators):
         arg = [l.asMap() for l in withLocators]
         response = self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_CREATE_CHILD_WINDOW, SetuArg.arg("locators", arg))
-        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
-    def latestChildWindow(self):
+    def LatestChildWindow(self):
         response = self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_GET_LATEST_CHILD_WINDOW)
-        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.getValueForElementSetuId())
+        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
 
-    def closeAllChildWindows(self):
+    def close_all_child_windows(self):
         self._send_request(SetuActionType.GUIAUTO_MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS)

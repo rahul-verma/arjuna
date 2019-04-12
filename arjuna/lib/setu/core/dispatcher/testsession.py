@@ -6,4 +6,4 @@ class TestSessionDispatcher:
         return GuiAutomatorDispatcher(config, setu_id)
 
     def create_gui_element_dispatcher(self, atuomator_dispatcher, element_setu_id):
-        return atuomator_dispatcher.create_gui_element_dispatacher(element_setu_id)
+        return atuomator_dispatcher.create_gui_element_dispatcher(element_setu_id)

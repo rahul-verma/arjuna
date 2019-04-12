@@ -19,9 +19,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna.lib.core import ArjunaCore
+from arjuna.tpi import Arjuna
 from arjuna.lib.core.thread.decorators import *
-from arjuna.lib.unitee import Unitee
 from arjuna.lib.unitee.reporter.result import *
 from arjuna.lib.unitee.exceptions import *
 from arjuna.lib.core.exceptions import *
@@ -66,9 +65,10 @@ class _ThreadState:
 
     def __init__(self):
         self.lock = threading.RLock()
-        self.logger = ArjunaCore.get_logger()
+        self.logger = Arjuna.get_logger()
         self.__current_steps = None
         self.__current_context = None
+        self.unitee = Arjuna.get_unitee_instance()
 
     def get_steps(self):
         return tuple(self.__current_steps)
@@ -136,10 +136,10 @@ class _ThreadState:
             return self.__create_py_step_error(step_num, f, traceback.format_exc())
 
     def __create_issue(self, e, strace, i_type):
-        return Unitee.state_mgr.create_issue_from_exception(e, strace, i_type)
+        return self.unitee.state_mgr.create_issue_from_exception(e, strace, i_type)
 
     def __create_issue_for_problem_step(self, i_type):
-        return Unitee.state_mgr.create_issue_for_problem_step(i_type)
+        return self.unitee.state_mgr.create_issue_for_problem_step(i_type)
 
     def __create_step_failure(self, step_num, e, strace):
         issue = self.__create_issue(e, strace, ResultTypeEnum.FAIL)
@@ -181,7 +181,7 @@ class _ThreadState:
 
 class SummaryState:
     def __init__(self):
-        self.logger = ArjunaCore.get_logger()
+        self.logger = Arjuna.get_logger()
         self.summary_result = _SummaryResult()
         self.test_summary = _SummaryResult()
 
@@ -250,7 +250,7 @@ class ModuleState(StateWithIssueMgt):
 class ThreadManager:
     def __init__(self):
         self.lock = threading.RLock()
-        self.logger = ArjunaCore.get_logger()
+        self.logger = Arjuna.get_logger()
 
         self.__thread_states = {}
         self.__current_issue_counter = 0

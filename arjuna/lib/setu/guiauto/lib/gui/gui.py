@@ -5,6 +5,7 @@ from .nsloader import GuiNamespaceLoaderFactory
 from arjuna.lib.setu.core.lib.setu_types import SetuConfiguredObject
 from arjuna.lib.setu.guiauto.lib.locator.emd import SimpleGuiElementMetaData, GuiElementMetaData, Locator
 
+
 class Gui(SetuConfiguredObject):
 
     def __init__(self, name_store, namespace_dir, automator, label, file_def_path):
@@ -12,12 +13,12 @@ class Gui(SetuConfiguredObject):
         self.__name_store = name_store
         self.__namespace_dir = namespace_dir
         self.__automator = automator
-        self.__auto_context = self.config.setu_config.value(ArjunaOption.GUIAUTO_CONTEXT)
+        self.__auto_context = self.config.setu_config.get_guiauto_context()
         self.__file_def_path = os.path.abspath(os.path.join(self.__namespace_dir, file_def_path.strip()))
         self.__ns = None
         ns_name = "file_ns::" + self.__file_def_path.lower()
         if name_store.has_namespace(ns_name):
-            self.__ns =  name_store.get_namespace()
+            self.__ns = name_store.get_namespace(ns_name)
         else:
             self.__ns = name_store.load_namespace(
                 ns_name, 
@@ -57,7 +58,7 @@ class GuiFactory:
             if not os.path.isdir(considered_path):
                 raise Exception("Provided root definition path is not a directory: {}".format(app_def_dir))
 
-        app = Gui(automator, os.path.join(considered_path, "Home.gns"), label=name)
+        app = Gui(automator, os.path.join(considered_path, "HomePage.gns"), label=name)
         children_dir = os.path.join(considered_path, "children")
         if os.path.isdir(children_dir):
             lfiles = os.listdir(children_dir)

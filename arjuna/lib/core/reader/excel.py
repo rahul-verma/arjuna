@@ -35,16 +35,17 @@ class ExcelRowReader:
         return self
 
     def read_next_row(self):
+        self.curent_row_index += 1
         if self.curent_row_index < self.rcount:
             return self.sheet.row(self.curent_row_index)
         else:
             raise Exception("Done")
 
     def next(self):
-        self.curent_row_index += 1
         try:
             return self.process(self.read_next_row())
         except:
+            self.close()
             raise StopIteration()
 
     def read(self):
@@ -57,7 +58,8 @@ class ExcelRowReader:
         pass
 
     def close(self):
-        self.wb.close()
+        pass
+        #self.wb.close()
 
 
 class ExcelRow2ArrayReader(ExcelRowReader):
@@ -70,7 +72,7 @@ class ExcelRow2ArrayReader(ExcelRowReader):
         return self.headers
 
     def _populate_headers(self):
-        self.headers = self.next()
+        self.headers = [h.value for h in self.read_next_row()]
 
     def process(self, row):
         return [h.value for h in row]
@@ -83,11 +85,6 @@ class ExcelRow2ArrayReader(ExcelRowReader):
 class ExcelRow2MapReader(ExcelRow2ArrayReader):
     def __init__(self, path):
         super().__init__(path)
-        self.headers = []
-        self._populate_headers()
-
-    def _populate_headers(self):
-        self.headers = super().process(self.read_next_row())
 
     def process(self, row):
         return zip(self.headers, super().process(row))

@@ -1,18 +1,20 @@
-from arjuna.lib.setu.core.requester.config import SetuArg, SetuActionType
-from arjuna.tpi.guiauto import With
+from arjuna.lib.setu.core.requester.config import SetuActionType
+from arjuna.lib.setu.core.requester.connector import SetuArg
 from .automator import AbstractAppAutomator
+
+from arjuna.tpi.guiauto import With
 
 
 class BaseGui(AbstractAppAutomator):
 
-    def __init__(self, automator, label=None, def_file_name=None, parent=None):
-        super().__init__(automator.getConfig())
+    def __init__(self, automator, label=None, def_file_name=None, parent=None, register=True):
+        super().__init__(automator.get_config())
 
         self.__automator = automator
         self.__children_map = dict()
-        self.__auto_context = automator.getAutomationContext()
-        self.__test_session = automator.getTestSession()
-        self._set_automator_setu_id_arg(automator.getSetuId())
+        self.__auto_context = automator.get_automation_context()
+        self.__test_session = automator.get_test_session()
+        self._set_automator_setu_id_arg(automator.get_setu_id())
         self.__gui_registered = False
         self.__parent = parent
 
@@ -20,67 +22,69 @@ class BaseGui(AbstractAppAutomator):
         self.__def_file_name = None
 
         if label:
-            self.setLabel(label)
+            self.set_label(label)
 
         if def_file_name:
-            self.setDefFileName(def_file_name)
+            self.set_def_file_name(def_file_name)
+
+        if register:
+            self._register()
 
     def __check_reg_status(self):
         if self.__gui_registered:
             raise Exception("Attempt to change Gui critical attribute post registration with Setu.")
 
-    def isGui(self):
+    def is_gui(self):
         return True
 
-    def setLabel(self, label):
+    def set_label(self, label):
         self.__check_reg_status()
-        self.label = label
-        self.setDefFileName(label + ".gns")
+        self.__label = label
+        self.set_def_file_name(label + ".gns")
 
-    def setDefFileName(self, name):
+    def set_def_file_name(self, name):
         self.__check_reg_status()
         self.__def_file_name = name
 
-    def registerWithSetu(self):
+    def _register(self):
         if self.__gui_registered:
             raise Exception("Attempt to re-register Gui with Setu.")
 
         args = [
-            SetuArg.arg("testSessionSetuId", self.testSession.getSetuId()),
-            SetuArg.arg("automatorSetuId", self.__automator.getSetuId()),
+            SetuArg.arg("testSessionSetuId", self.__test_session.get_setu_id()),
+            SetuArg.arg("automatorSetuId", self.__automator.get_setu_id()),
             SetuArg.arg("label", self.__label),
             SetuArg.arg("name", self.__class__.__name__),
             SetuArg.arg("qualName", self.__class__.__qualname__),
             SetuArg.arg("defFileName", self.__def_file_name)
         ]
 
-        gui_setu_id  = None
+        gui_setu_id = None
         if not self.__parent:
-            gui_setu_id = self.testSession.createGui(self.__automator, *args)
+            gui_setu_id = self.__test_session.create_gui(self.__automator, *args)
         else:
-            args.append(SetuArg.arg("parentGuiSetuId", self.__parent.getSetuId()))
+            args.append(SetuArg.arg("parentGuiSetuId", self.__parent.get_setu_id()))
             response = self._send_request(SetuActionType.GUIAUTO_GUI_CREATE_GUI, *args)
-            gui_setu_id = response.getGuiSetuId()
+            gui_setu_id = response.get_gui_setu_id()
 
-
-        self.setSetuId(gui_setu_id)
-        self.setSelfSetuIdArg("guiSetuId")
+        self._set_setu_id(gui_setu_id)
+        self._set_self_setu_id_arg("guiSetuId")
 
         if self.__parent:
-            self.__parent.addChild(self.__label, self)
+            self.__parent.add_child(self.__label, self)
 
         self.__load()
 
-    def _getAutomator(self):
+    def _get_automator(self):
         return self.__automator
 
-    def getQualifiedName(self):
+    def get_qualified_name(self):
         return self.__class__.__qualname__
 
-    def addChild(self, label, gui):
+    def add_child(self, label, gui):
         self.__children_map[label.lower()] = gui
 
-    def gui(label):
+    def get_child(self, label):
         if label:
             if label.lower() in self.__children_map:
                 return self.__children_map[label.lower()]
@@ -89,57 +93,63 @@ class BaseGui(AbstractAppAutomator):
         else:
             raise Exception("Child Gui label is None.")
 
-    def reachUntil(self):
+    def reach_until(self):
         # Children can override and write any necessary loading instructions
         pass
 
-    def validateReadiness(self):
+    def validate_readiness(self):
         pass
 
     def __load(self):
         try:
-            self.validateReadiness()
+            self.validate_readiness()
         except:
             try:
-                self.reachUntil()
-                self.validateReadiness()
+                self.reach_until()
+                self.validate_readiness()
             except Exception as e:
                 raise Exception(
                     "UI [{}] with SetuId [{}] did not load as expected. Error: {}.",
-                    self.getClass().getName(),
-                    self.getSetuId(),
-                    e.getMessage()
+                    self.__class__.__name__,
+                    self.get_setu_id(),
+                    str(e)
                 )
 
-    def elememt(self, name):
-        return self.element(With.assignedName(name))
+    def __convert_with(self, input):
+        if isinstance(input, With):
+            return input
+        else:
+            return With.assigned_name(input)
 
-    def multiElement(self, name):
-        return self.multiElement(With.assignedName(name))
+    def Element(self, name_or_with_obj):
+        return super().Element(self.__convert_with(name_or_with_obj))
 
-    def dropdown(self, name):
-        return self.dropdown(With.assignedName(name))
+    def MultiElement(self, name_or_with_obj):
+        return super().MultiElement(self.__convert_with(name_or_with_obj))
 
-    def radioGroup(self, name):
-        return self.dropdown(With.assignedName(name))
+    def DropDown(self, name_or_with_obj):
+        return super().DropDown(self.__convert_with(name_or_with_obj))
 
-    def alert(self, name):
-        return self.dropdown(With.assignedName(name))
+    def RadioGroup(self, name_or_with_obj):
+        return super().RadioGroup(self.__convert_with(name_or_with_obj))
 
-    def frame(self, name):
-        return self.dropdown(With.assignedName(name))
+    def Alert(self, name_or_with_obj):
+        return super().Alert(self.__convert_with(name_or_with_obj))
 
-    def childWindow(self, name):
-        return self.dropdown(With.assignedName(name))
+    def Frame(self, name_or_with_obj):
+        return super().Frame(self.__convert_with(name_or_with_obj))
 
-    def mainWindow(self):
-        return self.automator.mainWindow()
+    def ChildWindow(self, name_or_with_obj):
+        return super().ChildWindow(self.__convert_with(name_or_with_obj))
 
-    def domRoot(self):
-        return self.automator.domRoot()
+    def MainWindow(self):
+        return self.get_automator().MainWindow()
 
-    def browser(self):
-        return self.automator.browser()
+    def DomRoot(self):
+        return self.get_automator().DomRoot()
 
-    def automator(self):
+    def Browser(self):
+        return self.get_automator().Browser()
+
+    def get_automator(self):
         return self.__automator

@@ -96,7 +96,6 @@ class GuiElement(BaseElement):
         return self.dispatcher.is_visible()
 
     def is_clickable(self):
-        print("isclickable")
         self.find_if_not_found()
         return self.dispatcher.is_clickable()
 

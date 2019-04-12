@@ -32,6 +32,8 @@ class TestFunc(TestObject):
 	def __init__(self, group, module, mslot, defn):
 		super().__init__(TestObjectTypeEnum.Function)
 		import threading
+		from arjuna.tpi import Arjuna
+		self.unitee = Arjuna.get_unitee_instance()
 		self.lock = threading.RLock()
 		self.group = group
 		self.rules = self.group.rules
@@ -57,7 +59,7 @@ class TestFunc(TestObject):
 			if self.data_source is None:
 				self.data_source = self.defn.data_source
 		except Exception as e:
-			issue = Unitee.state_mgr.create_issue_from_exception(e, traceback.format_exc(), ResultTypeEnum.ERROR)
+			issue = self.unitee.state_mgr.create_issue_from_exception(e, traceback.format_exc(), ResultTypeEnum.ERROR)
 			result = TestObjectResult(self, rtype=ResultTypeEnum.ERROR, rcode=ResultCodeEnum.DATASOURCE_CONSTRUCTION_ERROR, iid=issue.iid)
 			result.append_issue(issue)
 			self.report(result)
@@ -84,6 +86,7 @@ class TestFunc(TestObject):
 		self.tvars.bugs.update(self.defn.tvars.bugs)
 
 	def _execute(self):
+		self.tvars.context = self.mslot.tvars.context.clone()
 		self.tvars.runtime.update(self.mslot.tvars.runtime)
 		tp = TestObjectThreadPool(self.thcount, self, "{}::{}".format(self.thname, "t"))
 		tp.run()

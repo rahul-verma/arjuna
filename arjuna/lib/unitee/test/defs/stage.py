@@ -19,6 +19,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna.tpi import Arjuna
 from arjuna.lib.unitee.types.root import *
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.core.reader.hocon import *
@@ -31,25 +32,24 @@ from xml.etree.ElementTree import Element
 
 from arjuna.lib.core.utils import etree_utils
 from arjuna.lib.unitee.utils import run_conf_utils
+from arjuna.lib.core.config import ConfigContainer
 
 class StageDef(Root):
     def __init__(self, sdef, id, stage_xml):
         super().__init__()
         self.gdefs = []
+        self.config = ConfigContainer()
         self.tmcount = 0
         self.threads = 1
-        self.evars = SingleObjectVars()
         self.sdef = sdef
         self.__iter = None
         self.__fixtures = FixturesDef()
         self.root = stage_xml
 
-        from arjuna.lib.unitee import UniteeFacade
-        self.unitee = UniteeFacade
+        self.unitee = Arjuna.get_unitee_instance()
 
         self.id = id
         self.name = "stage{:d}".format(id)
-        self.evars.update(sdef.evars)
 
         if not isinstance(stage_xml, Element):
             self.console.display_error("Fatal: [Arjuna Error] Unsuppored input argument supplied for stage creation: {}".format(stage_xml))
@@ -93,11 +93,11 @@ class StageDef(Root):
 
         for child_tag, child in node_dict.items():
             child_tag = child_tag.lower()
-            if child_tag == 'evars':
-                evars = child
-                for child in evars:
-                    run_conf_utils.validate_evar_xml_child("session", self.sdef.fpath, child)
-                    run_conf_utils.add_evar_node_to_evars("session", self.evars, child)
+            if child_tag == 'config':
+                config = child
+                for option in config:
+                    run_conf_utils.validate_config_xml_child("session", self.sdef.fpath, option)
+                    run_conf_utils.add_config_node_to_configuration("session", self.config, option)
             elif child_tag == 'fixtures':
                 fixtures = child
                 for child in fixtures:

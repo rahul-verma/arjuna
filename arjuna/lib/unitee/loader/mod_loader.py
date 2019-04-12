@@ -24,34 +24,31 @@ from functools import partial
 import inspect
 import traceback
 
-from arjuna.lib.core.utils import sys_utils
-from arjuna.lib.core.utils import obj_utils
 from arjuna.lib.unitee.test.defs.module import *
 from arjuna.lib.unitee.test.defs.func import *
 from arjuna.lib.unitee.loader import kfactory
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.unitee.enums import *
-from arjuna.lib.unitee import Unitee
 from arjuna.lib.unitee.markup import mrules
-
-unitee = Unitee
 
 class ModuleLoader:
     def __init__(self, pkg, module, qname):
         self.pkg = pkg
         self.module = module
         self.qname = qname
-        from arjuna.lib.core import ArjunaCore
-        self.console = ArjunaCore.console
-        self.logger = ArjunaCore.get_logger()
+        from arjuna.tpi import Arjuna
+        self.console = Arjuna.get_console()
+        self.logger = Arjuna.get_logger()
         self.mdef = ModDef(pkg, module, qname)
         self._current_kall_ids = {}
         self._current_kall_decs = {}
         self.__multidecs = {}
+        from arjuna.tpi import Arjuna
+        self.unitee = Arjuna.get_unitee_instance()
 
     def load(self):
         try:
-            self.console.display("Importing Module in tests directory:", self.qname)
+            self.logger.debug("Importing Module in tests directory: {}".format(self.qname))
             importlib.import_module(self.qname)
         except Exception as e:
             self.console.display_error(
@@ -59,8 +56,7 @@ class ModuleLoader:
             self.console.display_exception_block(e, traceback.format_exc())
             sys_utils.fexit()
 
-        unitee.testdb.register_mdef(self.mdef)
-
+        self.unitee.testdb.register_mdef(self.mdef)
 
     def __str(self, obj):
         try:

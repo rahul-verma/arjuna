@@ -14,7 +14,6 @@ class GuiWebRadioGroup(SetuManagedObject):
         if [t for t in tags if t.strip().lower() != 'input']:
             raise Exception("Not a valid radio group. Contains non-input elements.")
         types = self._radios.get_attr_values("type")
-        print(types)
         if [t for t in types if t.strip().lower() != 'radio']:
             raise Exception("Not a valid radio group. Contains non-radio elements.")
         names = self._radios.get_attr_values("name")

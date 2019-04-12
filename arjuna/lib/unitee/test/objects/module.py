@@ -59,7 +59,7 @@ class TestModule(TestObject):
 
 	def _populate_tvars(self, base_tvars):
 		self.tvars = self.defn.tvars.clone()
-		self.tvars.evars.merge_with_parent(base_tvars.evars)
+		self.tvars.context = base_tvars.context
 		self.tvars.runtime.update(base_tvars.evars)
 		self.tvars.info.session = base_tvars.info.session
 		self.tvars.info.stage = base_tvars.info.stage

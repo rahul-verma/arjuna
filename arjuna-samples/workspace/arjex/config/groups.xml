@@ -220,9 +220,6 @@
     </group>
 
     <group name="gpc1">
-        <evars>
-            <evar name="gconfevar" value="4" type="int"/>
-        </evars>
         
         <fixtures>
             <fixture type="init_group" module="all" func="init_gp1"/>
@@ -238,13 +235,20 @@
     </group>
 
     <group name="gpc2">
-        <evars>
-            <evar name="gconfevar" value="5" type="int"/>
-        </evars>
 
         <pickers>
             <picker type="cm" pattern=".*gp2"/>
             <picker type="cf" pattern=".*func1"/>
         </pickers>
     </group>
+
+    <group name="cf1">
+        <pickers>
+            <picker type="cm" pattern=".*s01.*ep14.*ex01.*"/>
+        </pickers>
+                    <config>
+                <arjuna_option name="browser.name" value="firefox"/>
+            </config>
+    </group>
+
 </groups>

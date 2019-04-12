@@ -35,9 +35,8 @@ class TestGroupSlot(TestObject):
 
 	def load(self, base_tvars):
 		self._populate_tvars(base_tvars)
-		from arjuna.lib.unitee import Unitee
 		for index, mname in enumerate(self.mnames):
-			module = TestModule(self.group, Unitee.testdb.get_mdef(mname))
+			module = TestModule(self.group, self.unitee.testdb.get_mdef(mname))
 			module.load(self.tvars.clone())
 			self.modules.append(module)
 		self.children = self.modules

@@ -6,12 +6,13 @@ from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.setu.guiauto.lib.base.element_container import ElementContainer
 from .drivercaps import DriverCapabilities
 
+
 class GuiAutomator(ElementContainer):
 
     def __init__(self, config, extended_config=None):
         super().__init__(config)
         self.__extended_config = extended_config
-        self.__automator_uri = "/guiauto/automator/{}".format(self.get_setu_id())
+        self.__automator_uri = "/s02guiauto/automator/{}".format(self.get_setu_id())
         self.__create_screenshots_dir()
         self.__main_window = None
         self.__in_slomo = config.setu_config.value(ArjunaOption.GUIAUTO_SLOMO_ON)
@@ -76,7 +77,6 @@ class GuiAutomator(ElementContainer):
 
     def launch(self):
         caps = DriverCapabilities(self.config, self.__extended_config)
-        print(self.dispatcher, caps.processed_config)
         self.dispatcher.launch(caps.processed_config)
 
         from arjuna.lib.setu.guiauto.lib.element.window import MainWindow
@@ -90,7 +90,7 @@ class GuiAutomator(ElementContainer):
 
     def __screenshot(self):
         switch_view_context = None
-        if self.config.value(ArjunaOption.TESTRUN_TARGET_PLATFORM).lower() == "android": 
+        if self.config.value(ArjunaOption.MOBILE_OS_NAME).lower() == "android":
             view_name = self.view_handler.get_current_view_context()   
             if self.view_handler._does_name_represent_web_view(view_name) :
                 self.view_handler.switch_to_native_view() 
@@ -106,7 +106,7 @@ class GuiAutomator(ElementContainer):
     def take_screenshot(self):
         response = self.__screenshot()
         image = base64.b64decode(response["data"]["codedImage"])
-        path = os.path.join(self.config.value(ArjunaOption.SCREENSHOTS_DIR), "{}.png".format(str(time.time()).replace(".","-")))
+        path = os.path.join(self.config.value(ArjunaOption.SCREENSHOTS_DIR), "{}.png".format(str(time.time()).replace(".", "-")))
         f = open(path, "wb")
         f.write(image)
         f.close()

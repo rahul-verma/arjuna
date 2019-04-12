@@ -1,0 +1,19 @@
+[BLOG_NAME]
+#web,android_web
+id = blogname
+
+[MEMBERSHIP]
+#web,android_web
+id = users_can_register
+
+[ROLE]
+#web,android_web
+id = default_role
+
+[DATE_FORMAT]
+#web,android_web
+name = date_format
+
+[SUBMIT-SETTINGS]
+#web,android_web
+id = submit

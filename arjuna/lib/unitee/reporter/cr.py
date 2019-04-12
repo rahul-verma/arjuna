@@ -21,7 +21,7 @@ limitations under the License.
 
 import threading
 from collections import OrderedDict
-from arjuna.lib.core import ArjunaCore
+from arjuna.tpi import Arjuna
 from arjuna.lib.core.thread.decorators import *
 from arjuna.lib.unitee.reporter.result.types import SteppedResult
 
@@ -29,7 +29,7 @@ class ConsoleReporter:
 
     def __init__(self):
         self.lock = threading.RLock()
-        self.console = ArjunaCore.console
+        self.console = Arjuna.get_console()
 
     @sync_method('lock')
     def __print(self, heading, rdict={}):

@@ -48,8 +48,7 @@ class TestGroup(TestObject):
 		picked_mnames = self.defn.get_picked_mnames()
 
 		self.__module_map = self.defn.get_schedule_module_map()
-		from arjuna.lib.unitee import Unitee
-		slots = Unitee.testdb.slot_module_names(picked_mnames)
+		slots = self.unitee.testdb.slot_module_names(picked_mnames)
 
 		for index, mnames in enumerate(slots):
 			gslot = TestGroupSlot(index + 1, self, mnames)
@@ -61,7 +60,8 @@ class TestGroup(TestObject):
 	def _populate_tvars(self, base_tvars):
 		self.tvars = base_tvars
 		self.tvars.info.group.meta['name'] = self.defn.name
-		self.tvars.evars.update(self.defn.evars)
+		if not self.defn.config.is_empty():
+			self.tvars.context.update_with_file_config_container(self.defn.config)
 
 	def _execute(self):
 		tp = TestObjectThreadPool(self.thcount, self, "{}::{}".format(self.thname, "gs"))

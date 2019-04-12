@@ -46,16 +46,16 @@ class FileAggregator:
         self.files = []
         self.found_class_names = set()
         self.temp_map = {}
-        from arjuna.lib.core import ArjunaCore
-        self.logger = ArjunaCore.logger()
+        from arjuna.tpi import Arjuna
+        self.logger = Arjuna.get_logger()
+        self.console = Arjuna.get_console()
 
     def add(self, df):
-        from arjuna.lib.core import ArjunaCore
         key = df.attr(DiscoveredFileAttributeEnum.DIRECTORY_ABSOLUTE_PATH) + "/" + df.attr(
             DiscoveredFileAttributeEnum.FULL_NAME).upper()
         if key in self.found_class_names or key in self.temp_map:
             fa_msg1.format(DiscoveredFileAttributeEnum.FULL_NAME)
-            ArjunaCore.console.display_error(fa_msg1)
+            self.console.display_error(fa_msg1)
             sys_utils.fexit()
         self.temp_map[key] = df
 

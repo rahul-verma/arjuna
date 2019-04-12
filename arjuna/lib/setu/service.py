@@ -14,4 +14,4 @@ def launch_setu(port):
     api.add_resource(SetuSvc, '/setu', endpoint='setu')
 
     # api.add_resource(ItemList, '/items', endpoint='items')
-    app.run(port=port, use_evalex=False)
+    app.run(port=port, use_evalex=False) #, debug=True)

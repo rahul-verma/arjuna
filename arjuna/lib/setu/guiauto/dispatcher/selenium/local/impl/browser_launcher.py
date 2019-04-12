@@ -1,13 +1,14 @@
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.proxy import *
 
+
 class BrowserLauncher:
 
     @classmethod
     def launch(cls, config):
-        driver_path = config["setuOptions"]["SELENIUM_DRIVER_PATH"]
-        browser_bin_path = config["setuOptions"]["BROWSER_BIN_PATH"]
-        browser_name = config["setuOptions"]["BROWSER_NAME"]
+        driver_path = config["arjunaOptions"]["SELENIUM_DRIVER_PATH"]
+        browser_bin_path = config["arjunaOptions"]["BROWSER_BIN_PATH"]
+        browser_name = config["arjunaOptions"]["BROWSER_NAME"]
         return CREATOR_MAP[browser_name](config, driver_path, browser_bin_path)
 
     @classmethod
@@ -29,11 +30,11 @@ class BrowserLauncher:
         caps = DesiredCapabilities.CHROME
         caps.update(config["driverCapabilities"])
 
-        if config["setuOptions"]["BROWSER_PROXY_ON"]:
+        if config["arjunaOptions"]["BROWSER_PROXY_ON"]:
             proxy = Proxy()
             proxy_string = "{}.{}".format(
-                config["setuOptions"]["BROWSER_PROXY_HOST"],
-                config["setuOptions"]["BROWSER_PROXY_PORT"]
+                config["arjunaOptions"]["BROWSER_PROXY_HOST"],
+                config["arjunaOptions"]["BROWSER_PROXY_PORT"]
             )
             proxy.http_proxy = proxy_string
             proxy.ssl_proxy = proxy_string
@@ -67,11 +68,11 @@ class BrowserLauncher:
         from selenium.webdriver import FirefoxProfile
 
         profile = FirefoxProfile()
-        if config["setuOptions"]["BROWSER_PROXY_ON"]:
+        if config["arjunaOptions"]["BROWSER_PROXY_ON"]:
             proxy = Proxy()
             proxy_string = "{}.{}".format(
-                config["setuOptions"]["BROWSER_PROXY_HOST"],
-                config["setuOptions"]["BROWSER_PROXY_PORT"]
+                config["arjunaOptions"]["BROWSER_PROXY_HOST"],
+                config["arjunaOptions"]["BROWSER_PROXY_PORT"]
             )
             proxy.http_proxy = proxy_string
             proxy.ssl_proxy = proxy_string

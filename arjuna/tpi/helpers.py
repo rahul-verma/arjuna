@@ -1,3 +1,4 @@
-from arjuna.lib.core import ArjunaCore
+from arjuna.tpi import Arjuna
 
-console = ArjunaCore.console
+logger = Arjuna.get_logger()
+console = Arjuna.get_console()

@@ -21,9 +21,10 @@ limitations under the License.
 
 import re
 import xml.etree.ElementTree as ETree
-
-from arjuna.lib.core.enums import *
-from arjuna.lib.unitee.enums import *
+#
+# from arjuna.tpi.enums import ArjunaOption
+# from arjuna.lib.core.enums import *
+# from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.types.containers import *
 from arjuna.lib.core.reader.hocon import *
 from arjuna.lib.core.reader.textfile import *
@@ -35,14 +36,16 @@ from arjuna.lib.core.utils import etree_utils
 from arjuna.lib.unitee.utils import run_conf_utils
 from arjuna.lib.unitee.selection.picker import Picker
 from arjuna.lib.unitee.selection.rules.xml_rules import XmlRules
+from arjuna.lib.core.config import ConfigContainer
 from arjuna.lib.unitee.exceptions import *
+
 
 class GroupConf(Root):
 
     def __init__(self, name, gconf_xml, fpath):
         super().__init__()
         self.name = name
-        self.evars = SingleObjectVars()
+        self.config = ConfigContainer()
         self.picker = None
         self.__rules = None
         self.threads = 1
@@ -72,11 +75,11 @@ class GroupConf(Root):
 
         for child_tag, child in node_dict.items():
             child_tag = child_tag.lower()
-            if child_tag == 'evars':
-                evars = child
-                for child in evars:
-                    run_conf_utils.validate_evar_xml_child("groups", self.fpath, child)
-                    run_conf_utils.add_evar_node_to_evars("groups", self.evars, child)
+            if child_tag == 'config':
+                config = child
+                for option in config:
+                    run_conf_utils.validate_config_xml_child("groups", self.fpath, option)
+                    run_conf_utils.add_config_node_to_configuration("groups", self.config, option)
             elif child_tag == 'fixtures':
                 fixtures = child
                 for child in fixtures:
@@ -89,21 +92,28 @@ class GroupConf(Root):
             else:
                 display_err_and_exit("Unexpected element >>{}<< found in session definition.".format(child.tag))
 
+
 class GroupConfsLoader:
 
+    @staticmethod
     def __load_pick_all(gconfs):
-        from arjuna.lib.core import ArjunaCore
-        central_config = ArjunaCore.config
-        fpath = os.path.join(central_config.value(CorePropertyTypeEnum.ARJUNA_ROOT_DIR),
-                                  "arjuna/lib/res/st/magroup.xml")
+        from arjuna.tpi import Arjuna
+        central_config = Arjuna.get_central_config()
+        arjuna_root_dir = central_config.get_arjuna_option_value(ArjunaOption.ARJUNA_ROOT_DIR).as_string()
+        fpath = os.path.join(
+            arjuna_root_dir,
+            "lib/res/st/magroup.xml"
+        )
         group_xml = ETree.parse(fpath).getroot()
         group_name = group_xml.attrib['name']
         gconfs[group_name] = GroupConf(group_name, group_xml, fpath)
 
+    @staticmethod
     def __load_user_gconfs(gconfs):
-        from arjuna.lib.core import ArjunaCore
-        console = ArjunaCore.console
-        ugcdir = ArjunaCore.config.value(UniteePropertyEnum.PROJECT_CONFIG_DIR)
+        from arjuna.tpi import Arjuna
+        console = Arjuna.get_console()
+        central_config = Arjuna.get_central_config()
+        ugcdir = central_config.get_arjuna_option_value(ArjunaOption.CONFIG_DIR).as_string()
         ugfpath = os.path.join(ugcdir, "groups.xml")
 
         def display_err_and_exit(msg):
@@ -135,7 +145,7 @@ class GroupConfsLoader:
                         display_err_and_exit(">>name<< attribute in group definition can not be empty.")
                     gconfs[name] = GroupConf(name, group, ugfpath)
 
-
+    @staticmethod
     def load():
         gconfs = CIStringDict()
         GroupConfsLoader.__load_pick_all(gconfs)

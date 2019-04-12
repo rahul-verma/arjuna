@@ -2,6 +2,7 @@ import uuid
 from arjuna.lib.setu.guiauto.lib.automator.guiautomator import GuiAutomator
 from arjuna.lib.setu.guiauto.lib.locator.emd import GuiElementMetaData
 
+
 # Arg names of methods show JSON names, so don't follow Python conventions.
 class GuiAutomatorHandler:
 
@@ -131,9 +132,14 @@ class GuiAutomatorHandler:
         frame =  self.automator.get_element_for_setu_id(elem_setu_id)
         return getattr(FrameHandler, action)(frame, **json_dict)
 
+
 # Separates the underlying structure and names
 # Also builds json response data where applicable
 class ElementHandler:
+
+    @classmethod
+    def enter_text(cls, element, text):
+        element.enter_text(text)
 
     @classmethod
     def set_text(cls, element, text):

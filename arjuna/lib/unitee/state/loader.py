@@ -19,30 +19,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import importlib
-import threading
-
-from arjuna.lib.core.utils import sys_utils
-from arjuna.lib.core.thread.decorators import *
-from arjuna.lib.core.enums import *
-from arjuna.lib.unitee.enums import *
-from arjuna.lib.core import ArjunaCore
 from arjuna.lib.unitee.loader.mod_loader import *
 from arjuna.lib.core.discovery import *
 from arjuna.lib.core.utils import obj_utils
-from .defdb import *
+from arjuna.tpi.enums import ArjunaOption
+
 
 class TestLoader:
     def __init__(self):
         self.lock = threading.RLock()
         self.__loading_completed = False
         self.__mlmap = {}
-        from arjuna.lib.core import ArjunaCore
-        self.arcore = ArjunaCore
-        self.proj_dir = ArjunaCore.config.value(UniteePropertyEnum.PROJECT_DIR)
-        self.test_dir = ArjunaCore.config.value(UniteePropertyEnum.TESTS_DIR)
-        self.logger = ArjunaCore.get_logger()
-        self.console = ArjunaCore.console
+        from arjuna.tpi import Arjuna
+        central_config = Arjuna.get_central_config()
+        self.proj_dir = central_config.get_arjuna_option_value(ArjunaOption.PROJECT_ROOT_DIR).as_string()
+        self.test_dir = central_config.get_arjuna_option_value(ArjunaOption.UNITEE_PROJECT_TESTS_DIR).as_string()
+        self.logger = Arjuna.get_logger()
+        self.console = Arjuna.get_console()
 
     def load(self):
         self.logger.debug("Now finding tests inside: " + self.proj_dir)
@@ -62,7 +55,8 @@ class TestLoader:
 
     def __get_pkg_module_qname_for_discovered_file(self, f):
         qname = None
-        project = self.arcore.config.value(UniteePropertyEnum.PROJECT_NAME)
+        from arjuna.tpi import Arjuna
+        project = Arjuna.get_central_arjuna_option(ArjunaOption.PROJECT_NAME).as_string()
         pkg = ".".join([project, f.attr(DiscoveredFileAttributeEnum.PACKAGE_DOT_NOTATION).strip()])
         module = f.attr(DiscoveredFileAttributeEnum.NAME).strip()
         qname = ".".join([pkg, module])
@@ -103,7 +97,8 @@ class TestLoader:
     def __validate_state(self, kallable, dec_type):
         if self.__loading_completed:
             ktype = type(kallable) is type and "class" or "function"
-            ArjunaCore.console.display_error(
+            from arjuna.tpi import Arjuna
+            Arjuna.get_console().display_error(
                 "You are decorating inner {} {} with {} in {} module. These decorators are ignored by Arjuna.".format(
                     ktype,
                     kallable.__qualname__,

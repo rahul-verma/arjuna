@@ -10,11 +10,11 @@ class GuiAutomatorDispatcher:
         self.__config = config
         self.__setu_id = setu_id
         self.__dispatcher = None
-        self.__automator_name = config.setu_config.value(ArjunaOption.GUIAUTO_AUTOMATOR_NAME)
-        self.__actor_mode = config.setu_config.value(ArjunaOption.SETUACTOR_GUIAUTO_MODE)
+        self.__automator_name = config.setu_config.get_gui_automator_name()
+        self.__actor_mode = config.setu_config.get_guiauto_actor_mode()
 
         if self.__actor_mode == SetuActorMode.REMOTE:
-            actor_url = config.setu_config.value(ArjunaOption.SETUACTOR_GUIAUTO_URL)
+            actor_url = config.setu_config.value(ArjunaOption.SETU_GUIAUTO_ACTOR_URL)
             if (self.__automator_name == GuiAutomatorName.SELENIUM):
                 from arjuna.lib.setu.guiauto.dispatcher.selenium.remote.driver import SeleniumDriver
                 self.__dispatcher = SeleniumDriver(setu_id, SetuActorRequester(actor_url))

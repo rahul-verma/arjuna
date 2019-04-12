@@ -19,8 +19,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna.lib.unitee.ddt import ddt_factory
-from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.loader.deptree import DepTreeBuilder
 
 class DefDB:
@@ -34,9 +32,8 @@ class DefDB:
         self.__mqueue = []
         # The following gets populated from above, if classDef.isNotPickedByAnyGroup() is True
         self.__for_processor = []
-        from arjuna.lib.core import ArjunaCore
-        self.arcore = ArjunaCore
-        self.logger = self.arcore.get_logger()
+        from arjuna.tpi import Arjuna
+        self.logger = Arjuna.get_logger()
 
     def register_mdef(self, mdef):
         qname = mdef.qname

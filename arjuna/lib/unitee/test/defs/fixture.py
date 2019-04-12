@@ -20,6 +20,8 @@ limitations under the License.
 '''
 
 import importlib
+
+from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.unitee.test.objects.fixture import Fixture
 from arjuna.lib.unitee.enums import FixtureTypeEnum
 from arjuna.lib.unitee.loader import kfactory
@@ -86,9 +88,10 @@ class FixturesDef:
 
 class ConfiguredFixtureHelper:
 
+    @staticmethod
     def configure_fixture(fixdef, ftypestr, mname, fname):
-        from arjuna.lib.core import ArjunaCore
-        fix_prefix = ArjunaCore.config.value(UniteePropertyEnum.CONF_FIXTURES_IMPORT_PREFIX)
+        from arjuna.tpi import Arjuna
+        fix_prefix = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.UNITEE_PROJECT_FIXTURES_IMPORT_PREFIX).as_string()
         module = importlib.import_module(fix_prefix + mname)
         func = getattr(module, fname)
         fixdef.add_fixture_func(FixtureTypeEnum[ftypestr.upper()], kfactory.create_fixture(ftypestr, func))

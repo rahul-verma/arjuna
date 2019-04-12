@@ -19,6 +19,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna.tpi import Arjuna
+from arjuna.tpi.enums import ArjunaOption
 from arjuna.lib.unitee.ddt.source import *
 from arjuna.lib.unitee.ddt.ddt_factory import *
 from arjuna.lib.unitee.enums import *
@@ -66,8 +68,7 @@ class _DataFile(_DataMarkUp):
         self.path = path
         self.delimiter = delimiter
 
-        from arjuna.lib.core import ArjunaCore
-        data_dir = ArjunaCore.config.value(UniteePropertyEnum.DATA_SOURCES_DIR)
+        data_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.DATA_SOURCES_DIR).as_string()
 
         if file_utils.is_absolute_path(self.path):
             if not file_utils.is_file(self.path):

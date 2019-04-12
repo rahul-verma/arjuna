@@ -1,9 +1,15 @@
 <session>
+    <config>
+        <arjuna_option name="browser.name" value="safari"/>
+    </config>
     <stages>
         <stage>
             <groups>
-                <group name="gp1"/>
-            </groups>  
+                <group name="cf1"/>
+            </groups>
+            <config>
+                <arjuna_option name="browser.name" value="chrome"/>
+            </config>
         </stage> 
     </stages>
 </session>

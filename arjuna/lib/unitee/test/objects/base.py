@@ -22,6 +22,7 @@ limitations under the License.
 import abc
 import datetime
 
+from arjuna.tpi import Arjuna
 from arjuna.lib.unitee import Unitee
 from arjuna.lib.unitee.enums import *
 from arjuna.lib.unitee.reporter.result.types import *
@@ -30,6 +31,7 @@ from arjuna.lib.unitee.selection.rules.common.exceptions import *
 
 class TestObject(metaclass=abc.ABCMeta):
     def __init__(self, totype):
+        self.unitee = Arjuna.get_unitee_instance()
         self.__type = totype
         self.__tvars = None
         self.__thcount = 1
@@ -123,6 +125,7 @@ class TestObject(metaclass=abc.ABCMeta):
 
     def run(self, base_tvars=None):
         if base_tvars:
+            self.tvars.context = base_tvars.context.clone()
             self.tvars.evars.update(base_tvars.evars)
             self.tvars.runtime.update(base_tvars.runtime)
 
@@ -130,7 +133,7 @@ class TestObject(metaclass=abc.ABCMeta):
         if self.type not in {TestObjectTypeEnum.GSlot, TestObjectTypeEnum.MSlot}:
             info = Info(InfoType.STARTED, self)
             info.btstamp = bstamp
-            Unitee.reporter.update_info(info)
+            self.unitee.reporter.update_info(info)
 
         try:
             self.should_i_surrender()
@@ -147,7 +150,8 @@ class TestObject(metaclass=abc.ABCMeta):
         for before_fixture in self.before_fixtures:
             fresult = before_fixture.execute(self, self.tvars.clone())
             before_fixture.report()
-            self.tvars.evars.update(before_fixture.tvars.evars)
+            self.tvars.context = before_fixture.tvars.context.clone()
+            #self.tvars.evars.update(before_fixture.tvars.evars)
             self.tvars.runtime.update(before_fixture.tvars.runtime)
             if fresult.has_issues():
                 self.exclude(ResultCodeEnum["{}_{}".format(fresult.rtype, before_fixture.type.name)], fresult.iid)
@@ -201,7 +205,7 @@ class TestObject(metaclass=abc.ABCMeta):
             info.btstamp = bstamp
             info.etstamp = datetime.datetime.now().timestamp()
             info.exec_time = info.etstamp - info.btstamp
-            Unitee.reporter.update_info(info)
+            self.unitee.reporter.update_info(info)
 
     @abc.abstractmethod
     def _execute(self):
@@ -216,7 +220,7 @@ class TestObject(metaclass=abc.ABCMeta):
         pass
 
     def report(self, result):
-        Unitee.reporter.update_result(result)
+        self.unitee.reporter.update_result(result)
         self.reported = True
 
     def report_excluded(self, exclusion_type, issue_id):
