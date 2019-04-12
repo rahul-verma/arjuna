@@ -27,7 +27,7 @@ class Setu:
     @classmethod
     def init_logger(cls, testsession_id, log_dir):
         logger = logging.getLogger("setu")
-        logger.setLevel(logging.DEBUG)
+        logger.setLevel(logging.INFO)
         ch = logging.StreamHandler(sys.stdout)
         ch.setLevel(logging.INFO)
         fh = logging.FileHandler(log_dir + "/arjuna-setu-{}-ts-{}.log".format(time.time(), testsession_id), "w", 'utf-8')
