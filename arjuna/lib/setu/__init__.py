@@ -24,12 +24,12 @@ class Setu:
     __DUMMY_LOGGER = _DummyLogger()
 
     @classmethod
-    def init_logger(cls, log_dir):
+    def init_logger(cls, testsession_id, log_dir):
         logger = logging.getLogger("setu")
         logger.setLevel(logging.DEBUG)
         ch = logging.StreamHandler(sys.stdout)
         ch.setLevel(logging.INFO)
-        fh = logging.FileHandler(log_dir + "/setu.log", "w", 'utf-8')
+        fh = logging.FileHandler(log_dir + "/arjuna-setu-ts-{}.log".format(testsession_id), "w", 'utf-8')
         fh.setLevel(logging.DEBUG)
         f_fmt = logging.Formatter(u'[%(levelname)5s]\t%(asctime)s\t%(pathname)s::%(module)s.%(funcName)s:%(lineno)d\t%(message)s')
         c_fmt = logging.Formatter(u'[%(levelname)5s]\t%(message)s')

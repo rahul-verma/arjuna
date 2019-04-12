@@ -34,7 +34,7 @@ class TestSessionHandler:
         self.__testsession = TestSession()
         self.__testsession.init(root_dir, cliConfig)
         config = self.__testsession.configurator.create_project_conf()
-        Setu.init_logger(config.setu_config.value(ArjunaOption.LOG_DIR))
+        Setu.init_logger(self.__testsession.setu_id, config.setu_config.value(ArjunaOption.LOG_DIR))
         self.__conf_handler = TestSessionConfHandler(self.__testsession.configurator)
         self.__databroker_handler = TestSessionDataBrokerHandler(self.__testsession.data_broker)
         self.__guimgr = GuiHandlerManager(config)
