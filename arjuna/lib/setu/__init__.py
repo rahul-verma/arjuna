@@ -1,6 +1,7 @@
 import logging
 import sys
 import inspect
+import time
 
 from .guiauto.lib.automator.guiautomator import GuiAutomator
 from .guiauto.lib.locator.emd import GuiElementMetaData, SimpleGuiElementMetaData
@@ -29,7 +30,7 @@ class Setu:
         logger.setLevel(logging.DEBUG)
         ch = logging.StreamHandler(sys.stdout)
         ch.setLevel(logging.INFO)
-        fh = logging.FileHandler(log_dir + "/arjuna-setu-ts-{}.log".format(testsession_id), "w", 'utf-8')
+        fh = logging.FileHandler(log_dir + "/arjuna-setu-{}-ts-{}.log".format(time.time(), testsession_id), "w", 'utf-8')
         fh.setLevel(logging.DEBUG)
         f_fmt = logging.Formatter(u'[%(levelname)5s]\t%(asctime)s\t%(pathname)s::%(module)s.%(funcName)s:%(lineno)d\t%(message)s')
         c_fmt = logging.Formatter(u'[%(levelname)5s]\t%(message)s')
