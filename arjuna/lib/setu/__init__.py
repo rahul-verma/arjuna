@@ -27,16 +27,16 @@ class Setu:
     @classmethod
     def init_logger(cls, testsession_id, log_dir):
         logger = logging.getLogger("setu")
-        logger.setLevel(logging.INFO)
-        ch = logging.StreamHandler(sys.stdout)
-        ch.setLevel(logging.INFO)
+        logger.setLevel(logging.DEBUG)
+        # ch = logging.StreamHandler(sys.stdout)
+        # ch.setLevel(logging.INFO)
         fh = logging.FileHandler(log_dir + "/arjuna-setu-{}-ts-{}.log".format(time.time(), testsession_id), "w", 'utf-8')
         fh.setLevel(logging.DEBUG)
         f_fmt = logging.Formatter(u'[%(levelname)5s]\t%(asctime)s\t%(pathname)s::%(module)s.%(funcName)s:%(lineno)d\t%(message)s')
         c_fmt = logging.Formatter(u'[%(levelname)5s]\t%(message)s')
-        ch.setFormatter(c_fmt)
+        # ch.setFormatter(c_fmt)
         fh.setFormatter(f_fmt)
-        logger.addHandler(ch)
+        # logger.addHandler(ch)
         logger.addHandler(fh)
         cls.LOGGER = logger
 

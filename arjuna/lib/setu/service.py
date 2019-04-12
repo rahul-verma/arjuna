@@ -15,4 +15,4 @@ def launch_setu(port):
 
     # api.add_resource(ItemList, '/items', endpoint='items')
     #app.run(port=port, use_evalex=False) #, debug=True)
-    serve(app, host="localhost", port=port)
+    serve(app, host="localhost", port=port, _quiet=True)
