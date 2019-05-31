@@ -2,6 +2,9 @@ from arjuna.tpi.enums import *
 
 
 class SetuActionType(Enum):
+    SETU_HELLO = auto()
+    SETU_KILL_EXISTING_TESTSESSION = auto()
+    
     TESTSESSION_INIT = auto()
     TESTSESSION_FINISH = auto()
 

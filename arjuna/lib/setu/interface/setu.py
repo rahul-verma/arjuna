@@ -31,7 +31,16 @@ class SetuSvc(Resource):
         except:
             return {'result': 'error', 'emessage': 'Invalid Setu action: {}'.format(json_action), 'etrace': 'NA'}, 500
         else:
-            if action_type == SetuActionType.TESTSESSION_INIT:
+            if action_type == SetuActionType.SETU_HELLO:
+                return create_success_response({'value' : 'hello'})
+            elif action_type == SetuActionType.SETU_KILL_EXISTING_TESTSESSION:
+                try:
+                    SetuSvcObjectManager.deregister_all_existing_testsessions()
+                    return create_success_response({})
+                except Exception as e:
+                    import traceback
+                    return {'result': 'error', 'emessage': 'Issue in deregistering testsession(s): ' + str(e), 'etrace': traceback.format_exc()}, 500
+            elif action_type == SetuActionType.TESTSESSION_INIT:
                 try:
                     root_dir = json_dict["args"]["projectRootDir"]
                     del json_dict["args"]["projectRootDir"]
