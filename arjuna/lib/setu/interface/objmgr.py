@@ -17,6 +17,10 @@ class SetuSvcObjectManager:
         return cls.TESTSESSION_HANDLERS[setu_id]
 
     @classmethod
+    def has_active_testsession(cls):
+        return len(cls.TESTSESSION_HANDLERS) > 0
+
+    @classmethod
     def deregister_all_existing_testsessions(cls):
         testsession_handles = tuple(cls.TESTSESSION_HANDLERS.values())
         for handler in testsession_handles:

@@ -12,6 +12,12 @@ sys.path.insert(0, importables_dir)
 sys.path.insert(0, root_dir)
 
 try:
+    import signal
+    import sys
+    def signal_handler(sig, frame):
+            print('Exiting...')
+            sys.exit(0)
+    signal.signal(signal.SIGINT, signal_handler)
     from arjuna.lib import Arjuna
     Arjuna.launch(sys.argv)
 except Exception as e:

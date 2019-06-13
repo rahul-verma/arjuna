@@ -4,7 +4,7 @@ from arjuna.lib.setu.core.webclient.requester import SetuAgentRequester
 from arjuna.lib.core.value import AnyRefValue
 
 
-class ResponseCode:
+class ResponseCode(Enum):
     SUCCESS = auto()
     ERROR = auto()
 
@@ -77,8 +77,9 @@ class _DefaultSetuRequester:
 
 class _DefaultSetuRequest:
 
-    def __init__(self, setu_action_type):
+    def __init__(self, component, setu_action_type):
         self.__request_body = dict()
+        self.__request_body["component"] = component.name
         self.__request_body["action"] = setu_action_type.name
         self.__request_body["args"] = dict()
 

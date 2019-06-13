@@ -1,4 +1,3 @@
-from arjuna.lib.setu.core.requester.config import SetuActionType
 from arjuna.lib.setu.core.requester.connector import SetuArg
 from arjuna.lib.core.config import DefaultTestConfig
 from arjuna.lib.setu.core.requester.connector import BaseSetuObject

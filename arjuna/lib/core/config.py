@@ -1,5 +1,4 @@
 from arjuna.lib.core.value import AbstractValueMap, StringKeyValueMap
-from arjuna.lib.setu.core.requester.config import SetuActionType
 from arjuna.lib.setu.core.requester.connector import BaseSetuObject, SetuArg
 from arjuna.tpi.enums import ArjunaOption
 from arjuna.tpi.enums import GuiAutomationContext, BrowserName, GuiAutomatorName

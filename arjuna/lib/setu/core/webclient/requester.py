@@ -10,6 +10,12 @@ class SetuAgentRequester:
     def __init__(self, base_url):
         self.base_url = base_url
 
+    def __convert_response_text_to_json(self, response_text):
+        try:
+            return json.loads(response_text)
+        except:
+            raise Exception("Response text is not JSON. Raw response text: " + response_text)
+
     def __raise_exception_if_error(self, response_dict):
         if response_dict is None:
             raise Exception("Setu Actor's JSON response is null.")
@@ -27,7 +33,7 @@ class SetuAgentRequester:
     def post(self, url, json_dict):
         req_url = self.base_url + url
         response = requests.post(req_url, json=json_dict)
-        response_json = json.loads(response.text)
+        response_json = self.__convert_response_text_to_json(response.text)
         self.__raise_exception_if_error(response_json)
         return json.loads(response.text)
 
