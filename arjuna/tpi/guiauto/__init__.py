@@ -82,7 +82,7 @@ class With:
         return With(_WithType.ASSIGNED_NAME, name)
 
 
-from arjuna.lib.setu.guiauto.requester.gui import BaseGui
+from arjuna.client.guiauto.gui import BaseGui
 
 
 class DefaultGui(BaseGui):

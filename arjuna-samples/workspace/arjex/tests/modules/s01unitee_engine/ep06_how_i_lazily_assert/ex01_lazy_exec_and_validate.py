@@ -44,7 +44,7 @@ def _get_step_count():
 
 @test_function
 def test_lazy(my):
-    from arjuna.lib.unitee import Unitee
+    from arjuna.unitee import Unitee
     unitee = Unitee
 
     # Replace validate() call with soft_validate call

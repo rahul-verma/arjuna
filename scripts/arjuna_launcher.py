@@ -18,7 +18,7 @@ try:
             print('Exiting...')
             sys.exit(0)
     signal.signal(signal.SIGINT, signal_handler)
-    from arjuna.lib import Arjuna
+    from arjuna import Arjuna
     Arjuna.launch(sys.argv)
 except Exception as e:
     # The following sleep is to accommodate a common IDE issue of

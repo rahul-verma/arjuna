@@ -25,7 +25,7 @@ import time
 from arjuna.tpi.markup import *
 from arjuna.tpi.markup_helpers import *
 from arjuna.tpi.helpers import *
-from arjuna.lib.core.utils import thread_utils
+from arjuna.lib.utils import thread_utils
 
 def myrange(num):
     return range(num)

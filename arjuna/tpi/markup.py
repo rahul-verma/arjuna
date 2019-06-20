@@ -20,7 +20,7 @@ limitations under the License.
 '''
 
 from functools import partial
-from arjuna.lib.unitee.markup.tsmarkup import *
+from arjuna.unitee.markup.tsmarkup import *
 
 test_function = test_function
 tfunc = test_function

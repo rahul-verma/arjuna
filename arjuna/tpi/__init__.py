@@ -28,12 +28,12 @@ import io
 # sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
 
 import logging
-from arjuna.lib.core.utils import thread_utils
-from arjuna.lib.setu.testsession.requester import DefaultTestSession
-from arjuna.lib.core.thread.decorators import *
-from arjuna.lib.core.utils import sys_utils
-from arjuna.lib.core.adv.proxy import ROProxy
-from arjuna.lib.core.adv.decorators import singleton
+from arjuna.lib.utils import thread_utils
+from arjuna.client.testsession import DefaultTestSession
+from arjuna.lib.thread.decorators import *
+from arjuna.lib.utils import sys_utils
+from arjuna.lib.adv.proxy import ROProxy
+from arjuna.lib.adv.decorators import singleton
 from arjuna.tpi.enums import ArjunaOption
 import codecs
 import sys
@@ -78,7 +78,7 @@ class ArjunaSingleton:
 
         self.__load_console()
 
-        from arjuna.lib.unitee import Unitee
+        from arjuna.unitee import Unitee
         project_name = self.__central_config.get_arjuna_option_value(ArjunaOption.PROJECT_NAME).as_string()
         self.__unitee = Unitee(self.__test_session, self.__central_config)
 
@@ -318,7 +318,7 @@ class ArjunaSingleton:
         return self.__central_config
 
     def create_gui_automator(self):
-        from arjuna.lib.setu.guiauto.requester.automator import DefaultGuiAutomator
+        from arjuna.client.guiauto.automator import DefaultGuiAutomator
         return DefaultGuiAutomator(self.__central_config)
 
 

@@ -19,9 +19,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna.lib.unitee.test.defs.deps import *
-from arjuna.lib.unitee.markup.ds import *
-from arjuna.lib.unitee.types.containers import evars, tags, bugs
+from arjuna.unitee.test.defs.deps import *
+from arjuna.unitee.markup.ds import *
+from arjuna.unitee.types.containers import evars, tags, bugs
 
 # Callable containers
 modules = modules

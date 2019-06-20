@@ -107,7 +107,7 @@ Multiple Validators in a single test
 '''
 @test_function
 def test_multiple_validators(my):
-    from arjuna.lib.unitee import Unitee
+    from arjuna.unitee import Unitee
     unitee = Unitee
     # Replace validate() call with soft_validate call
     validator_1 = my.steps.soft_validate("Higher purpose")

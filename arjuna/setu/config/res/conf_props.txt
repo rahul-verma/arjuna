@@ -1,0 +1,104 @@
+           CorePropertyTypeEnum.ARJUNA_ROOT_DIR: (
+                self._handle_core_dir_path, "Arjuna Root Directory", False),
+            CorePropertyTypeEnum.CONFIG_PROJECTS_DIR: (
+                self._handle_core_dir_path, "Configuration Directory for Project Information", False),
+            CorePropertyTypeEnum.WORKSPACE_DIR: (
+                self._handle_core_dir_path, "Default Projects Directory", False),
+            CorePropertyTypeEnum.PROJECT_DIRS_FILES: (
+                self._handle_string_list_config, "Arjuna Project Directory Names", False),
+            CorePropertyTypeEnum.PROG: (
+                self._handle_string_config, "Arjuna Reference Name", False),
+            CorePropertyTypeEnum.CONFIG_CENTRAL_FILE_NAME: (
+            self._handle_string_config, "Central Configuration File", False),
+            CorePropertyTypeEnum.CONFIG_DIR: (self._handle_core_dir_path, "Configuration Directory", False),
+            CorePropertyTypeEnum.EXTERNAL_TOOLS_DIR: (self._handle_core_dir_path, "Tools Directory", False),
+            CorePropertyTypeEnum.EXTERNAL_IMP_DIR: (self._handle_core_dir_path, "Tools Directory", False),
+            CorePropertyTypeEnum.LOGGER_CONSOLE_LEVEL: (self._handle_log_level_config, "Minimum Logging Message Level for Console Display", True),
+            CorePropertyTypeEnum.LOGGER_DIR: (self._handle_core_dir_path, "Central Log Directory", False),
+            CorePropertyTypeEnum.LOGGER_FILE_LEVEL: (
+            self._handle_log_level_config, "Minimum Logging Message Level for File Log", True),
+            CorePropertyTypeEnum.LOGGER_NAME: (self._handle_string_config, "Log file name", False),
+
+
+
+         def __cases(self):
+        return {
+            UniteePropertyEnum.PROJECT_NAME: (self._handle_string_config, "Project Name", False),
+            UniteePropertyEnum.PROJECT_DIR: (self._handle_core_dir_path, "Project Root Directory", False),
+            UniteePropertyEnum.PROJECT_CONFIG_DIR: (self._handle_core_dir_path, "Project Config Directory", False),
+            UniteePropertyEnum.DATA_REFERENCES_DIR: (
+                self._handle_project_dir_path, "Data References Directory", False),
+            UniteePropertyEnum.DATA_DIR: (self._handle_project_dir_path, "Data Directory", False),
+            UniteePropertyEnum.DATA_SOURCES_DIR: (
+                self._handle_project_dir_path, "Data Sources Directory", False),
+            UniteePropertyEnum.SCREENSHOTS_DIR: (
+                self._handle_project_dir_path, "Screenshots Directory", False),
+            UniteePropertyEnum.SESSION_NAME: (self._handle_string_config, "Test Session Name", False),
+            UniteePropertyEnum.IRUNID: (self._handle_string_config, "Internal Run ID", False),
+            UniteePropertyEnum.RUNID: (self._handle_string_config, "Test Run ID", True),
+            UniteePropertyEnum.FAILFAST: (self._handle_boolean_config, "Stop on first failure/error?", False),
+            UniteePropertyEnum.TEST_MODULE_IMPORT_PREFIX: (self._handle_string_config, "Prefix for Test Module Import", False),
+            UniteePropertyEnum.CONF_FIXTURES_IMPORT_PREFIX: (
+            self._handle_string_config, "Prefix for Configuration Level Test Fixtures Import", False),
+            UniteePropertyEnum.TESTS_DIR: (self._handle_project_dir_path, "Test Directory", True),
+            UniteePropertyEnum.REPORT_DIR: (self._handle_project_dir_path, "Report Directory", False),
+            UniteePropertyEnum.ARCHIVES_DIR: (self._handle_project_dir_path, "Report Archives directory", False),
+            UniteePropertyEnum.SESSIONS_DIR: (self._handle_project_dir_path, "Session Templates directory", False),
+            UniteePropertyEnum.GROUPS_DIR: (self._handle_project_dir_path, "Group Templates directory", False),
+            UniteePropertyEnum.RUN_REPORT_DIR: (self._handle_string_config, "Report Directory for the Run ID", False),
+            UniteePropertyEnum.RUN_REPORT_JDB_DIR: (
+                self._handle_string_config, "Report Directory for the Run ID for JDB", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_DIR: (
+                self._handle_string_config, "Root Raw Report Directory for JSON.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_TESTS_DIR: (
+                self._handle_string_config, "Raw Report Directory for JSON Test Execution results.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_ISSUES_DIR: (
+                self._handle_string_config, "Report Directory for JSON Fixture results.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_IGNOREDTESTS_DIR: (
+                self._handle_string_config, "Report Directory for JSON Ignored Test results.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_EVENTS_DIR: (
+                self._handle_string_config, "Report Directory for JSON Event results.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_FIXTURES_DIR: (
+                self._handle_string_config, "Report Directory for JSON Fixture results.", False),
+            UniteePropertyEnum.REPORT_NAME_FORMAT: (self._handle_string_config, "Report Name Format", False),
+            UniteePropertyEnum.ACTIVE_REPORTERS: (
+                self._handle_active_reporter_names, "Chosen Built-in Report Generators", True),
+            UniteePropertyEnum.DEFERRED_REPORTERS: (
+                self._handle_deferred_reporter_names, "Chosen Built-in Report Listeners", True),
+            UniteePropertyEnum.CORE_DIR: (self._handle_string_config, "Core Root Directory.", False),
+            UniteePropertyEnum.CORE_DB_CENTRAL_DIR: (self._handle_string_config, "Core Central DB Directory.", False),
+            UniteePropertyEnum.CORE_DB_CENTRAL_DBFILE: (self._handle_string_config, "Core Central DB File.", False),
+            UniteePropertyEnum.CORE_DB_RUN_DIR: (self._handle_string_config, "Core Run DB Directory.", False),
+            UniteePropertyEnum.CORE_DB_RUN_DBFILE: (self._handle_string_config, "Core Current Run DB File.", False),
+            UniteePropertyEnum.CORE_DB_TEMPLATE_DIR: (self._handle_string_config, "Core Template DB Directory.", False),
+            UniteePropertyEnum.CORE_DB_TEMPLATE_CENTRAL_DBFILE: (
+                self._handle_string_config, "Core DB Template for Central DB.", False),
+            UniteePropertyEnum.CORE_DB_TEMPLATE_RUN_DBFILE: (
+                self._handle_string_config, "Core DB Template for Run DB.", False),
+        }
+
+
+def path_to_core_absolute_path(configured_dir):
+    from arjuna import ArjunaCore
+    ret_path = None
+    if configured_dir.startswith("*"):
+        if configured_dir.startswith("*/") or configured_dir.startswith("*\\"):
+            ret_path = file_utils.get_canonical_path(ARJUNA_ROOT + configured_dir[1:])
+        else:
+            ret_path = file_utils.get_canonical_path(ARJUNA_ROOT + os.path.sep + configured_dir[1:])
+    else:
+        ret_path = configured_dir
+    return file_utils.normalize_path(ret_path)
+
+
+def path_to_project_absolute_path(project_dir, configured_dir):
+    from arjuna import ArjunaCore
+    ret_path = None
+    if file_utils.is_absolute_path(configured_dir):
+        ret_path = configured_dir
+    else:
+        ret_path = file_utils.get_canonical_path(project_dir + os.path.sep + configured_dir)
+    return file_utils.normalize_path(ret_path)
+
+
+
