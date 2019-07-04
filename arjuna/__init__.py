@@ -18,7 +18,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 '''
-
+import pkg_resources
 import time
 from arjuna.lib.reader.textfile import TextResourceReader
 from arjuna.interface.cli import ArjunaCLI
@@ -26,7 +26,7 @@ from arjuna.interface.cli import ArjunaCLI
 class __arfacade():
 
     def __init__(self):
-        self.__version = "0.7.1-beta"
+        self.__version = pkg_resources.require("arjuna")[0].version
 
     def launch(self, raw_args):
         reader = TextResourceReader("header.txt")
