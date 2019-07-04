@@ -20,8 +20,8 @@ limitations under the License.
 '''
 import pkg_resources
 import time
-from arjuna.lib.reader.textfile import TextResourceReader
-from arjuna.interface.cli import ArjunaCLI
+from .lib.reader.textfile import TextResourceReader
+from .interface.cli import ArjunaCLI
 
 class __arfacade():
 
