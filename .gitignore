@@ -81,3 +81,7 @@ local.properties
 report/results.ini
 
 act
+.vscode/**
+arjuna.egg-info/**
+build/**
+dist/**

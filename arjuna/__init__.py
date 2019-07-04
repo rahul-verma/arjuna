@@ -26,7 +26,7 @@ from arjuna.interface.cli import ArjunaCLI
 class __arfacade():
 
     def __init__(self):
-        self.__version = "0.7.0-beta"
+        self.__version = "0.7.1-beta"
 
     def launch(self, raw_args):
         reader = TextResourceReader("header.txt")
