@@ -2,15 +2,6 @@ import os
 import sys
 import time
 
-def join_paths(*paths):
-    return os.path.abspath(os.path.join(*paths))
-
-root_dir = join_paths(os.path.dirname(os.path.realpath(__file__)), "..")
-importables_dir = join_paths(root_dir, "third_party")
-
-sys.path.insert(0, importables_dir)
-sys.path.insert(0, root_dir)
-
 try:
     import signal
     import sys

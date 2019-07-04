@@ -1,4 +1,19 @@
-from setuptools import setup
+import os
+from setuptools import setup, find_packages
+
+# my_dir =  os.path.dirname(os.path.realpath(__file__))
+
+# dynamic_dirs = [
+#     os.path.join(my_dir, "arjuna", p) for p in (
+#         "res",
+#         "third_party"
+#     )
+# ]
+
+packages = find_packages()
+# packages.extend(dynamic_dirs)
+
+# print(packages)
 
 setup(
     name = "arjuna",
@@ -7,7 +22,10 @@ setup(
     description = "Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net).",
     author = "Rahul Verma",
     author_email = "rv@testmile.com",
-    packages = ["arjuna"],
+    packages = packages,
+    package_data = {
+        'arjuna' : ["res/st/*.xml", "res/*.help", "res/*.txt", "setu/config/res/*.conf", "setu/config/res/*.txt"]
+    },
     install_requires = ["flask", "flask-RESTful", "waitress", "requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon"],
     keywords = "arjuna setu unitee selenium testing automation page-object",
     license = "Apache License, Version 2.0",

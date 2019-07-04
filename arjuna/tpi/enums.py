@@ -1,6 +1,5 @@
 from enum import Enum, auto
 
-
 class ArjunaOption(Enum):
     ARJUNA_ROOT_DIR = auto()
     ARJUNA_EXTERNAL_TOOLS_DIR = auto()

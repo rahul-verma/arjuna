@@ -29,9 +29,10 @@ def wait_for_port(port):
             sock.bind(server_address)
             sock.close()
             return
-        except:
+        except Exception as e:
+            print("here", e)
             time.sleep(1)
-    print("Port is not open")
+    print("Port is not open. Timeout after 60 seconds.")
     raise RuntimeError("SET_SVC_ERROR:: Another service is running at port {}. Setu could not be launched. Message: ".format(port))
 
 def launch_setu(port):
@@ -41,13 +42,23 @@ def launch_setu(port):
     requester = _DefaultSetuRequester()
     request = _DefaultSetuRequest(ArjunaComponent.SETU, SetuActionType.HELLO)
     response = None
+    # try:
+    #     response = requester.post(request)
+    # except Exception as e:
+    #     print("Waiting for port to be free")
+    #     wait_for_port(port)
+    #     print("Port is open")
+    #     __launch_setu_svc(port)  
+    #     print("Arjuna Setu service launched.") 
+    # else:
+    #     rstring = response.get_value().as_string()
+    #     if rstring.lower().find("hello") == -1:
+    #         raise RuntimeError("SET_SVC_ERROR:: Unexpected Setu error for Hello. Got response: " + rstring)
+    #     else:
+    #         print("Arjuna Setu service is already running.")
+
     try:
-        response = requester.post(request)
-    except:
         wait_for_port(port)
-        print("Port is open")
-        __launch_setu_svc(port)   
-    else:
-        rstring = response.get_value().as_string()
-        if rstring.lower().find("hello") == -1:
-            raise RuntimeError("SET_SVC_ERROR:: Unexpected Setu error for Hello. Got response: " + rstring)
+        __launch_setu_svc(port)          
+    except Exception as e:
+        raise RuntimeError("SET_SVC_ERROR:: Not able to launch Setu Service. Got response: ", e)

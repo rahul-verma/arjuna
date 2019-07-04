@@ -20,8 +20,17 @@ limitations under the License.
 '''
 import pkg_resources
 import time
-from .lib.reader.textfile import TextResourceReader
-from .interface.cli import ArjunaCLI
+import os
+import sys
+
+def join_paths(*paths):
+    return os.path.abspath(os.path.join(*paths))
+
+root_dir = join_paths(os.path.dirname(os.path.realpath(__file__)), "..")
+importables_dir = join_paths(root_dir, "third_party")
+
+sys.path.insert(0, importables_dir)
+sys.path.insert(0, root_dir)
 
 class __arfacade():
 
@@ -29,6 +38,8 @@ class __arfacade():
         self.__version = pkg_resources.require("arjuna")[0].version
 
     def launch(self, raw_args):
+        from arjuna.lib.reader.textfile import TextResourceReader
+        from arjuna.interface.cli import ArjunaCLI
         reader = TextResourceReader("header.txt")
         print(reader.read().format(version=self.__version))
         reader.close()
@@ -44,6 +55,6 @@ class __arfacade():
 
 Arjuna = __arfacade()
 
-from arjuna.unitee.markup import tsmarkup
+# from arjuna.unitee.markup import tsmarkup
 
-markup = tsmarkup
+# markup = tsmarkup

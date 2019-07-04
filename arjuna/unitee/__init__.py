@@ -48,6 +48,7 @@ class Unitee:
 
         if self.__frozen:
             raise Exception("Unitee has already been loaded.")
+
         from arjuna.unitee.state.states import ThreadManager
         from arjuna.unitee.state.reporter import ActiveReporter
         self.__state_mgr = ThreadManager()

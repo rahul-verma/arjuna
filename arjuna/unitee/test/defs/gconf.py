@@ -25,7 +25,6 @@ import xml.etree.ElementTree as ETree
 # from arjuna.tpi.enums import ArjunaOption
 # from arjuna.lib.enums import *
 # from arjuna.unitee.enums import *
-from arjuna.unitee.types.containers import *
 from arjuna.lib.reader.hocon import *
 from arjuna.lib.reader.textfile import *
 from arjuna.unitee.types.root import *
@@ -147,6 +146,7 @@ class GroupConfsLoader:
 
     @staticmethod
     def load():
+        from arjuna.unitee.types.containers import CIStringDict
         gconfs = CIStringDict()
         GroupConfsLoader.__load_pick_all(gconfs)
         GroupConfsLoader.__load_user_gconfs(gconfs)

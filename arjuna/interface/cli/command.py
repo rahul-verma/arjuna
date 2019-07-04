@@ -113,7 +113,7 @@ class LaunchSetu(Command):
         for parent in self.parents:
             parent.process(arg_dict)
         from arjuna.setu.service import launch_setu
-        launch_setu((arg_dict["setu.port"]))
+        launch_setu(int(arg_dict["setu.port"]))
 
 
 class FileObjectType(Enum):
