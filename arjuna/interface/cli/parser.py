@@ -69,6 +69,7 @@ class NewProjectParser(Parser):
         self.parser = argparse.ArgumentParser(add_help=False)
         #self.parser.add_argument('-w', '--workspace-dir', dest="workspace_dir", type=str, help='Workspace Directory')
         self.parser.add_argument('-p', '--project-root-dir', dest="project.root.dir", type=new_project_dir, help = 'Absolute non-existing Project root directory. Name of project (Alnum 3-30 length. Only lower case letters.).')
+        self.parser.add_argument('--non-unitee', dest="project.is_not_unitee", action="store_true", help = 'Pass this switch for creating a non-UniTEE project.')
 
     def process(self, arg_dict):
         # arg_dict['workspace.dir'] = arg_dict['workspace_dir']

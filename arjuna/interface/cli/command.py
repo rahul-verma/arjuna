@@ -123,18 +123,12 @@ class FileObjectType(Enum):
 
 class CreateProject(Command):
 
-    UNITEE_DIRS_FILES = (
+    COMMON_DIRS_FILES = (
         (FileObjectType.DIR, "archives"),
         (FileObjectType.DIR, "config"),
-        (FileObjectType.DIR, "config/sessions"),
-        (FileObjectType.DIR, "core"),
-        (FileObjectType.DIR, "core/db"),
-        (FileObjectType.DIR, "core/db/central"),
-        (FileObjectType.DIR, "core/db/run"),
         (FileObjectType.DIR, "data"),
         (FileObjectType.DIR, "data/sources"),
         (FileObjectType.DIR, "data/references"),
-        (FileObjectType.DIR, "fixtures"),
         (FileObjectType.DIR, "guiauto"),
         (FileObjectType.DIR, "guiauto/drivers"),
         (FileObjectType.DIR, "guiauto/drivers/linux"),
@@ -143,11 +137,20 @@ class CreateProject(Command):
         (FileObjectType.DIR, "guiauto/images"),
         (FileObjectType.DIR, "guiauto/namespace"),
         (FileObjectType.DIR, "report"),
-        (FileObjectType.DIR, "screenshots"),
+        (FileObjectType.FILE, "config/project.conf"),
+        (FileObjectType.FILE, "config/service.properties"),
+    )
+
+    UNITEE_DIRS_FILES = (
+        (FileObjectType.DIR, "config/sessions"),
+        (FileObjectType.DIR, "core"),
+        (FileObjectType.DIR, "core/db"),
+        (FileObjectType.DIR, "core/db/central"),
+        (FileObjectType.DIR, "core/db/run"),
+        (FileObjectType.DIR, "fixtures"),
         (FileObjectType.DIR, "tests"),
         (FileObjectType.DIR, "tests/modules"),
         (FileObjectType.FILE, "__init__.py"),
-        (FileObjectType.FILE, "config/project.conf"),
         (FileObjectType.FILE, "config/groups.xml"),
         (FileObjectType.FILE, "fixtures/__init__.py"),
         (FileObjectType.FILE, "fixtures/all.py"),
@@ -155,28 +158,42 @@ class CreateProject(Command):
         (FileObjectType.FILE, "tests/modules/__init__.py"),
     )
 
+    SERVICE_PROPS = '''
+setu.port = 9000
+python.bin.path = <Provide full path of Python3 binary>
+    '''
+
     def __init__(self, subparsers, parents):
         super().__init__()
         self.parents = parents
         parser = subparsers.add_parser('create-project', parents=[parent.get_parser() for parent in parents], help="Create a new project")
         self._set_parser(parser)
 
+    def __create_file_or_dir(self, project_temp_dir, ftype, frpath):
+        if ftype == FileObjectType.DIR:
+            os.makedirs(os.path.join(project_temp_dir, frpath))
+        else:
+            f = open(os.path.join(project_temp_dir, frpath), "w")
+            if frpath.endswith("service.properties"):
+                f.write(CreateProject.SERVICE_PROPS)
+            f.close()
+
     def execute(self, arg_dict):
         for parent in self.parents:
             parent.process(arg_dict)
         # from arjuna import ArjunaCore
         pdir = arg_dict['project.root.dir']
+        is_unitee = not (arg_dict['project.is_not_unitee'])
         parent_dir = os.path.abspath(os.path.join(pdir, ".."))
         project_name = os.path.basename(pdir)
         with tempfile.TemporaryDirectory() as tdir:
             project_temp_dir = os.path.join(tdir, project_name)
             os.makedirs(project_temp_dir)
-            for ftype, frpath in CreateProject.UNITEE_DIRS_FILES:
-                if ftype == FileObjectType.DIR:
-                    os.makedirs(os.path.join(project_temp_dir, frpath))
-                else:
-                    f = open(os.path.join(project_temp_dir, frpath), "w")
-                    f.close()
+            for ftype, frpath in CreateProject.COMMON_DIRS_FILES:
+                self.__create_file_or_dir(project_temp_dir, ftype, frpath)
+            if is_unitee:
+                for ftype, frpath in CreateProject.UNITEE_DIRS_FILES:
+                    self.__create_file_or_dir(project_temp_dir, ftype, frpath)
             shutil.move(project_temp_dir, parent_dir)
 
         print("Project {} successfully created at {}.".format(project_name, parent_dir))
