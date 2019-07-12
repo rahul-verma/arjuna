@@ -39,11 +39,10 @@ import os
 def new_project_dir(input):
     if os.path.exists(input):
         print('Project path already exist: {}'.format(input))
-        print('Exiting...', file=sys.stderr)
-        sys.exit(1)
     else:
         proj_name = os.path.basename(input)
         lname_check("Project", proj_name)
+        os.makedirs(input)
         return input
 
 def project_dir(input):

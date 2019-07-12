@@ -17,7 +17,7 @@ packages = find_packages()
 
 setup(
     name = "arjuna",
-    version = "0.7.1",
+    version = "0.7.2",
     url = "https://testmile.com/arjuna",
     description = "Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net).",
     author = "Rahul Verma",

@@ -183,6 +183,9 @@ python.bin.path = <Provide full path of Python3 binary>
             parent.process(arg_dict)
         # from arjuna import ArjunaCore
         pdir = arg_dict['project.root.dir']
+        if os.path.exists(os.path.join(pdir, "config/project.conf")):
+            print("Arjuna project already exists at the specified location.")
+            sys.exit(1)
         is_unitee = not (arg_dict['project.is_not_unitee'])
         parent_dir = os.path.abspath(os.path.join(pdir, ".."))
         project_name = os.path.basename(pdir)
