@@ -199,7 +199,7 @@ python.bin.path = <Provide full path of Python3 binary>
                     self.__create_file_or_dir(project_temp_dir, ftype, frpath)
             for f in os.listdir(tdir):
                 try:
-                    shutil.move(os.path.join(tdir, f), pdir)
+                    shutil.move(os.path.join(project_temp_dir, f), pdir)
                 except Exception as e:
                     print(e)
                     pass
