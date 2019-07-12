@@ -27,7 +27,7 @@ from arjuna.tpi.enums import ArjunaOption
 def ustr(input):
     return (str(input)).upper()
 
-VNREGEX = r'[a-z][a-z0-9]{2,29}'
+VNREGEX = r'^[a-z][a-z0-9]{2,29}$'
 VNREGEX_TEXT = '''
 {} name must be a string of length 3-30 containing lower case letters, digits or _ (underscore).
 It must begin with a letter.
