@@ -27,7 +27,7 @@ from arjuna.tpi.enums import ArjunaOption
 def ustr(input):
     return (str(input)).upper()
 
-VNREGEX = r'^[a-z][a-z0-9]{2,29}$'
+VNREGEX = r'^[a-z][_a-z0-9]{2,29}$'
 VNREGEX_TEXT = '''
 {} name must be a string of length 3-30 containing lower case letters, digits or _ (underscore).
 It must begin with a letter.
@@ -39,6 +39,7 @@ import os
 def new_project_dir(input):
     if os.path.exists(input):
         print('Project path already exist: {}'.format(input))
+        return input
     else:
         proj_name = os.path.basename(input)
         lname_check("Project", proj_name)
