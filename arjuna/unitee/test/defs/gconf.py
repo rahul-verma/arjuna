@@ -20,6 +20,7 @@ limitations under the License.
 '''
 
 import re
+import os
 import xml.etree.ElementTree as ETree
 #
 # from arjuna.tpi.enums import ArjunaOption
@@ -118,6 +119,9 @@ class GroupConfsLoader:
         def display_err_and_exit(msg):
             console.display_error((msg + " Fix groups template file: {}").format(ugfpath))
             sys_utils.fexit()
+
+        if not os.path.exists(ugfpath) or not os.path.isfile(ugfpath):
+            return
 
         try:
             tree = ETree.parse(ugfpath)

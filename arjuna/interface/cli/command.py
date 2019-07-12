@@ -151,7 +151,6 @@ class CreateProject(Command):
         (FileObjectType.DIR, "tests"),
         (FileObjectType.DIR, "tests/modules"),
         (FileObjectType.FILE, "__init__.py"),
-        (FileObjectType.FILE, "config/groups.xml"),
         (FileObjectType.FILE, "fixtures/__init__.py"),
         (FileObjectType.FILE, "fixtures/all.py"),
         (FileObjectType.FILE, "tests/__init__.py"),
@@ -197,6 +196,11 @@ python.bin.path = <Provide full path of Python3 binary>
             if is_unitee:
                 for ftype, frpath in CreateProject.UNITEE_DIRS_FILES:
                     self.__create_file_or_dir(project_temp_dir, ftype, frpath)
+            if is_unitee:
+                shutil.copyfile(
+                    os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../res/scripts/arjuna_launcher.py"),
+                    os.path.join(project_temp_dir, "arjuna_launcher.py")
+                    )
             for f in os.listdir(project_temp_dir):
                 try:
                     shutil.move(os.path.join(project_temp_dir, f), pdir)

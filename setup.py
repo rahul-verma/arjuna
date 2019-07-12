@@ -24,7 +24,14 @@ setup(
     author_email = "rv@testmile.com",
     packages = packages,
     package_data = {
-        'arjuna' : ["res/st/*.xml", "res/*.help", "res/*.txt", "setu/config/res/*.conf", "setu/config/res/*.txt"]
+        'arjuna' : [
+                    "res/st/*.xml", 
+                    "res/*.help", 
+                    "res/*.txt", 
+                    "res/scripts/arjuna_launcher.py",
+                    "setu/config/res/*.conf", 
+                    "setu/config/res/*.txt"
+                ]
     },
     install_requires = ["flask", "flask-RESTful", "waitress", "requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon"],
     keywords = "arjuna setu unitee selenium testing automation page-object",
