@@ -37,6 +37,7 @@ import os
 
 
 def new_project_dir(input):
+    input = input.rstrip("/").rstrip("\\")
     proj_name = os.path.basename(input)
     lname_check("Project", proj_name)
     if os.path.exists(input):
