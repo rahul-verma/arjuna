@@ -197,7 +197,7 @@ python.bin.path = <Provide full path of Python3 binary>
             if is_unitee:
                 for ftype, frpath in CreateProject.UNITEE_DIRS_FILES:
                     self.__create_file_or_dir(project_temp_dir, ftype, frpath)
-            for f in os.listdir(tdir):
+            for f in os.listdir(project_temp_dir):
                 try:
                     shutil.move(os.path.join(project_temp_dir, f), pdir)
                 except Exception as e:
