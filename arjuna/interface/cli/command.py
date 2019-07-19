@@ -130,6 +130,7 @@ class CreateProject(Command):
         (FileObjectType.DIR, "data/sources"),
         (FileObjectType.DIR, "data/references"),
         (FileObjectType.DIR, "guiauto"),
+        (FileObjectType.DIR, "log"),
         (FileObjectType.DIR, "guiauto/drivers"),
         (FileObjectType.DIR, "guiauto/drivers/linux"),
         (FileObjectType.DIR, "guiauto/drivers/mac"),
