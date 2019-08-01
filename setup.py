@@ -15,15 +15,26 @@ packages = find_packages()
 
 # print(packages)
 
+this_directory = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
+with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
     name = "arjuna",
-    version = "0.7.2",
+    version = "0.7.6",
     url = "https://testmile.com/arjuna",
     description = "Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net).",
     author = "Rahul Verma",
     author_email = "rv@testmile.com",
     packages = packages,
+    long_description=long_description,
+    long_description_content_type='text/markdown',
     package_data = {
+        '' :  [
+                    "*.txt",
+                    "*.md",
+                    "*.cfg",
+        ],
         'arjuna' : [
                     "res/st/*.xml", 
                     "res/*.help", 
