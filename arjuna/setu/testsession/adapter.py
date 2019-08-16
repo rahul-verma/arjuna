@@ -82,7 +82,7 @@ class TestSessionConfHandler(Handler):
     def register_new_config(self, arjunaOptions, userOptions=None, hasParent=False, parentConfigId=None):
         # Registering a config is post project conf registration. If no project conf, set it to true.
         self.__project_config_loaded = True
-        config = self.__configurator.register_config(arjunaOptions, userOptions, hasParent, parentConfigId)
+        config = self.__configurator.register_config(arjunaOptions, hasParent, userOptions, parentConfigId)
         out_map = {'configSetuId' : config.setu_id}
         out_map.update(config.as_json_dict())
         return out_map

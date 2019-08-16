@@ -10,6 +10,8 @@ class GuiElement(BaseElement):
     def find(self):
         self.parent_container.find_element(self)
 
+    identify = find
+
     #Override
     def find_if_not_found(self):
         if not self.is_found():
@@ -50,6 +52,9 @@ class GuiElement(BaseElement):
         self.find_if_not_found()
         return self.__return_attr_value(self.dispatcher.get_attr_value(attr, optional))
 
+    def get_source(self):
+        return self.get_attr_value("outerHTML")
+
     def get_text_content(self):
         self.find_if_not_found()
         return self.__return_attr_value(self.dispatcher.get_text_content())
@@ -72,13 +77,15 @@ class GuiElement(BaseElement):
     def deselect(self):
         self.__conditional_selected_state_click(True)
 
-    def wait_until_clickable(self):
-        self.find_if_not_found()
-        self.conditions.IsClickable().wait()
+    wait_until_present = find
 
     def wait_until_visible(self):
         self.find_if_not_found()
         self.conditions.IsVisible().wait()
+
+    def wait_until_clickable(self):
+        self.find_if_not_found()
+        self.conditions.IsClickable().wait()
 
     def wait_until_selected(self):
         self.find_if_not_found()

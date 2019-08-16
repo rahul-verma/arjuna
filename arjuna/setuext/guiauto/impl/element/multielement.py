@@ -1,3 +1,5 @@
+import random
+
 from arjuna.setuext.guiauto.impl.element.base_element import BaseElement
 from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
 
@@ -21,7 +23,12 @@ class GuiMultiElement(BaseElement):
         self.__instances = [_GuiPartialElement(self.get_automator(), self, i) for i in range(self.instance_count)]
 
     def get_instance_count(self):
+        self.find_if_not_found()
         return self.instance_count
+
+    def get_random_index(self):
+        self.find_if_not_found()
+        return random.randint(0, self.instance_count-1)
 
     def get_instance_at_index(self, index):
         self.find_if_not_found()

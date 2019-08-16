@@ -177,11 +177,34 @@ class ElementHandler:
         element.uncheck()
 
     @classmethod
+    def identify(cls, element):
+        element.identify()
+
+    @classmethod
+    def wait_until_present(cls, element):
+        element.wait_until_present()
+
+    @classmethod
+    def wait_until_visible(cls, element):
+        element.wait_until_visible()
+
+    @classmethod
     def wait_until_clickable(cls, element):
         element.wait_until_clickable()
 
+    @classmethod
+    def get_source(cls, element):
+        return {"value" : element.get_source()}
+
 class MultiElementHandler:
-    pass
+
+    @classmethod
+    def get_instance_count(cls, element):
+        return {"value" : element.get_instance_count()}
+
+    @classmethod
+    def get_random_index(cls, element):
+        return {"value" : element.get_random_index()}
 
 class DropdownHandler:
 

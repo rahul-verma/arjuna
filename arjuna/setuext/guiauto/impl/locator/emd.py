@@ -1,4 +1,4 @@
-
+import re
 from enum import Enum, auto
 from collections import namedtuple
 
@@ -10,12 +10,12 @@ class MobileNativeLocateWith(Enum):
     LINK_TEXT = auto() 
     PARTIAL_LINK_TEXT = auto() 
     TAG_NAME = auto()
-    X_TEXT = auto() 
-    X_TITLE = auto() 
-    X_PARTIAL_TEXT = auto() 
-    X_TYPE = auto() 
-    X_VALUE = auto() 
-    X_IMAGE_SRC = auto()
+    TEXT = auto() 
+    TITLE = auto() 
+    PARTIAL_TEXT = auto() 
+    TYPE = auto() 
+    VALUE = auto() 
+    IMAGE_SRC = auto()
 
 class MobileWebLocateWith(Enum):
     ID = auto()
@@ -26,12 +26,12 @@ class MobileWebLocateWith(Enum):
     LINK_TEXT = auto() 
     PARTIAL_LINK_TEXT = auto() 
     TAG_NAME = auto()
-    X_TEXT = auto() 
-    X_TITLE = auto() 
-    X_PARTIAL_TEXT = auto() 
-    X_TYPE = auto() 
-    X_VALUE = auto() 
-    X_IMAGE_SRC = auto()
+    TEXT = auto() 
+    TITLE = auto() 
+    PARTIAL_TEXT = auto() 
+    TYPE = auto() 
+    VALUE = auto() 
+    IMAGE_SRC = auto()
 
 class NativeLocateWith(Enum):
     ID = auto()
@@ -40,12 +40,12 @@ class NativeLocateWith(Enum):
     CLASS_NAME = auto() 
     LINK_TEXT = auto() 
     PARTIAL_LINK_TEXT = auto() 
-    X_TEXT = auto() 
-    X_TITLE = auto() 
-    X_PARTIAL_TEXT = auto() 
-    X_TYPE = auto() 
-    X_VALUE = auto() 
-    X_IMAGE_SRC = auto()
+    TEXT = auto() 
+    TITLE = auto() 
+    PARTIAL_TEXT = auto() 
+    TYPE = auto() 
+    VALUE = auto() 
+    IMAGE_SRC = auto()
 
 class VisualLocateWith(Enum):
     IMAGE = auto()
@@ -59,12 +59,15 @@ class WebLocateWith(Enum):
     LINK_TEXT = auto() 
     PARTIAL_LINK_TEXT = auto() 
     TAG_NAME = auto()
-    X_TEXT = auto() 
-    X_TITLE = auto() 
-    X_PARTIAL_TEXT = auto() 
-    X_TYPE = auto() 
-    X_VALUE = auto() 
-    X_IMAGE_SRC = auto()
+    CLASS_NAMES = auto()
+    TEXT = auto() 
+    TITLE = auto() 
+    PARTIAL_TEXT = auto() 
+    ATTR_VALUE = auto()
+    ATTR_PARTIAL_VALUE = auto()
+    TYPE = auto() 
+    VALUE = auto() 
+    IMAGE_SRC = auto()
 
 class GenericLocateWith(Enum):
     ID = auto()
@@ -75,12 +78,15 @@ class GenericLocateWith(Enum):
     LINK_TEXT = auto() 
     PARTIAL_LINK_TEXT = auto() 
     TAG_NAME = auto()
-    X_TEXT = auto() 
-    X_TITLE = auto() 
-    X_PARTIAL_TEXT = auto() 
-    X_TYPE = auto() 
-    X_VALUE = auto() 
-    X_IMAGE_SRC = auto()
+    CLASS_NAMES = auto()
+    TEXT = auto() 
+    TITLE = auto() 
+    PARTIAL_TEXT = auto() 
+    TYPE = auto() 
+    VALUE = auto() 
+    ATTR_VALUE = auto()
+    ATTR_PARTIAL_VALUE = auto()
+    IMAGE_SRC = auto()
     IMAGE = auto()
     INDEX = auto()
 
@@ -99,6 +105,8 @@ class GuiElementType(Enum):
     IMAGE = auto()
 
 class GuiElementMetaData:
+    XPATH_TWO_ARG_VALUE_PATTERN = r'^\s*\[\s*(\w+)\s*\]\s*\[\s*(\w+)\s*\]$'
+
     BASIC_LOCATORS = {
         GenericLocateWith.ID,
         GenericLocateWith.NAME,
@@ -125,11 +133,16 @@ class GuiElementMetaData:
     }
 
     XPATH_LOCATORS = {
-        GenericLocateWith.X_TEXT : "//*[text()='{}}']",
-        GenericLocateWith.X_PARTIAL_TEXT : "//*[contains(text(),'{}')]",
-        GenericLocateWith.X_VALUE : "//*[@value='{}']",
-        GenericLocateWith.X_TITLE : "//*[@title='{}']",
-        GenericLocateWith.X_IMAGE_SRC : "//img[@src='{}']"
+        GenericLocateWith.TEXT : "//*[text()='{}']",
+        GenericLocateWith.PARTIAL_TEXT : "//*[contains(text(),'{}')]",
+        GenericLocateWith.VALUE : "//*[@value='{}']",
+        GenericLocateWith.TITLE : "//*[@title='{}']",
+        GenericLocateWith.IMAGE_SRC : "//img[@src='{}']"
+    }
+
+    XPATH_TWO_ARG_LOCATORS = {
+        GenericLocateWith.ATTR_VALUE : "//*[@{}='{}']",
+        GenericLocateWith.ATTR_PARTIAL_VALUE : "//*[contains(@{},'{}')]"
     }
 
     def __init__(self, raw_locators):
@@ -158,13 +171,23 @@ class GuiElementMetaData:
                     self.__add_locator(generic_locate_with, rlvalue)
                 elif generic_locate_with in self.XPATH_LOCATORS:
                     self.__add_locator(GenericLocateWith.XPATH, self.XPATH_LOCATORS[generic_locate_with].format(rlvalue))
-                elif generic_locate_with == GenericLocateWith.X_TYPE:
+                elif generic_locate_with in self.XPATH_TWO_ARG_LOCATORS:
+                    parts = None
+                    try:
+                        parts =  re.search(GuiElementMetaData.XPATH_TWO_ARG_VALUE_PATTERN, rlvalue).groups()
+                        print(parts)
+                    except:
+                        raise Exception("Value {} for {} is misformatted. Attribute name and attribute value should be supplied as: [<arg>][<value>]".format(rlvalue, rltype))
+                    self.__add_locator(GenericLocateWith.XPATH, self.XPATH_TWO_ARG_LOCATORS[generic_locate_with].format(parts[0], parts[1]))
+                elif generic_locate_with == GenericLocateWith.TYPE:
                     try:
                         elem_type = GuiElementType[rlvalue.upper()]
                     except:
                         raise Exception("Unsupported element type for XTYPE locator: " + rlvalue)
                     else:
                         self.__add_locator(GenericLocateWith.XPATH, self.XTYPE_LOCATORS[elem_type])
+                elif generic_locate_with == GenericLocateWith.CLASS_NAMES:
+                    self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', "." + rlvalue.replace('.', ' ').strip()))
                 else:
                     raise Exception("Locator not supported yet by Setu: " + rltype)
 

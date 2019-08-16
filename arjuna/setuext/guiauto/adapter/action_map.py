@@ -12,7 +12,8 @@ HANDLER_NAME_MAP = {
     8 : ("take_frame_action", "FRAME_"),
     9 : ("take_window_action", "WINDOW_"),
     10 : ("take_main_window_action", "MAIN_WINDOW_"),
-    11 : ("take_child_window_action", "CHILD_WINDOW_")
+    11 : ("take_child_window_action", "CHILD_WINDOW_"),
+    12 : ("take_multielement_action", "MULTIELEMENT_")
 }
 
 HANDLER_MAP = {
@@ -44,10 +45,18 @@ HANDLER_MAP = {
 
     GuiAutoActionType.ELEMENT_CLICK: 4,
     
+    GuiAutoActionType.ELEMENT_IDENTIFY: 4,
+    GuiAutoActionType.ELEMENT_WAIT_UNTIL_PRESENT: 4,
+    GuiAutoActionType.ELEMENT_WAIT_UNTIL_VISIBLE: 4,
     GuiAutoActionType.ELEMENT_WAIT_UNTIL_CLICKABLE: 4,
     
     GuiAutoActionType.ELEMENT_CHECK: 4,
     GuiAutoActionType.ELEMENT_UNCHECK: 4,
+
+    GuiAutoActionType.ELEMENT_GET_SOURCE: 4,
+
+    GuiAutoActionType.MULTIELEMENT_GET_INSTANCE_COUNT: 12,
+    GuiAutoActionType.MULTIELEMENT_GET_RANDOM_INDEX: 12,
     
     GuiAutoActionType.DROPDOWN_HAS_VALUE_SELECTED: 5,
     GuiAutoActionType.DROPDOWN_HAS_INDEX_SELECTED: 5,

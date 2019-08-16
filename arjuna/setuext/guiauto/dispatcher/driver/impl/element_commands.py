@@ -30,7 +30,7 @@ class DriverElementCommands:
         return element.tag_name
 
     @classmethod
-    def is_displayed(cls, element):
+    def is_visible(cls, element):
         return element.is_displayed()
 
     @classmethod
