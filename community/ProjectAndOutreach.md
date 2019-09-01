@@ -13,6 +13,11 @@
   4. Completion of critical docs that supplement video contents.
   5. 3 Sample project implementations of desktop web automation using Arjuna
   6. Critical testing of Arjuna and Arjuna Python, giving confidence about production-readiness, should be completed.
+ * End of June 2020 (Dependent on engineers to come forward as primary project owners)
+  1. Production Release of language bindings for C#, TypeScript and Go.
+  2. Video/Documentations for the bindings.
+  3. 3 Sample project implementations of desktop web automation using Arjuna in these bindings.
+  4. Critical testing of the bindings, giving confidence about production-readiness, should be completed.
   
 (More details about planned features would be added as we achieve the above goals in time).
 
