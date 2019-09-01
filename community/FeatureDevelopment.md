@@ -1,3 +1,4 @@
+# Arjuna Features - Targeted and Under Development
 Following is a high level view of features that are to be developed:
 
 ## Priortized and Sequenced
@@ -18,7 +19,6 @@ Following is a high level view of features that are to be developed:
     * ignore
     * consider
 11. wait for Absence, Invisible and Diabled
-# Arjuna Features - Targeted and Under Development
 
 ## Subsequent Features (Not necessarily in a sequenced order)
 * Classification of Errors and Exceptions
