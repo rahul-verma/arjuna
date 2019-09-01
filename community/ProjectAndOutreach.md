@@ -1,8 +1,8 @@
 ## Arjuna Project - Traget Milestones
 * End of Dec 2019
-  1. Feature Completeness of Java Bindings (Refer [Feature Development page](community/FeatureDevelopment.md))
+  1. Feature Completeness of Java Bindings (Refer [Feature Development](community/FeatureDevelopment.md))
   2. First Production Release of Arjuna and Arjuna-Java (1.0)
-  3. Video series completion for Java bindings
+  3. Completion of Video series completion for Java bindings (Refer [Arjuna Videos](community/ArjunaVideos.md))
   4. Completion of critical docs that supplement video contents.
   5. 3 Sample project implementations of desktop web automation using Arjuna
   6. Critical testing of Arjuna and Arjuna Java, giving confidence about production-readiness, should be completed.
