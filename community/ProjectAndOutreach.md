@@ -31,7 +31,7 @@ Arjuna should be a multi-language test automation framework with stable bindings
   9. Web Security regression testing.
   10. Image based object recognition and advanced diffing.
  
-(More details about planned features would be added as we achieve the above goals in time).
+Ambitious? Yes! Doable? Absolutely! Together we can.
 
 ## Arjuna Project - Community Outreach Activities
 Before reaching out to a wider community, we should plan for Arjuna contributor meetups. That would be a great way to exchange ideas in a quikcer and better fashion.
