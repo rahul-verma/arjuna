@@ -1,8 +1,16 @@
 # Arjuna Features - Targeted and Under Development
 Following is a high level view of features that are to be developed:
 
+The features listed here which are marked as done are available in source code on GitHub, but not available in release distribution yet.
+
 ## Priortized and Sequenced
-1. Param.args() for coded gns `With`
+1. Identifier Parameterization support for `With` -- DONE
+   * In Java bindings, .format() methods have been added
+   * Support both named as well as positional argument strings.
+   * Can be used in Gui model as well along with GNS. Rather than passing element name as string, one would have to use With.gnsName().
+   * Name of With.assignedName method has been changed to With.gnsName. As the former was never externally used, so there is not impact on existing user code.
+   * For named parameters, casing of names as well as order of parameters does not matter.
+   * Example code can be found in arjex.
 2. Element Configuration (code and gns)
     * State checking
     * Type Checking
@@ -19,6 +27,9 @@ Following is a high level view of features that are to be developed:
     * ignore
     * consider
 11. wait for Absence, Invisible and Diabled
+
+## Bug Fixes
+None in known and non-fixed stage as of now.
 
 ## Subsequent Features (Not necessarily in a sequenced order)
 * Classification of Errors and Exceptions
