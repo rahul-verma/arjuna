@@ -14,6 +14,7 @@ The features listed here which are marked as done are available in source code o
 2. Element Configuration (code and gns) - In Progress
     * State checking: Implemented for GuiElement. To be implemented and tested for DropDown and RadioGroup.
     * Type Checking: Not started yet.
+    * Can it be set at automator level?
 3. DropDown methods
     * sendOptionText
     * clickOption
