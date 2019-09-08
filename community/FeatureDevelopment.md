@@ -11,9 +11,9 @@ The features listed here which are marked as done are available in source code o
    * Name of With.assignedName method has been changed to With.gnsName. As the former was never externally used, so there is not impact on existing user code.
    * For named parameters, casing of names as well as order of parameters does not matter.
    * Example code can be found in arjex.
-2. Element Configuration (code and gns)
-    * State checking
-    * Type Checking
+2. Element Configuration (code and gns) - In Progress
+    * State checking: Implemented for GuiElement. To be implemented and tested for DropDown and RadioGroup.
+    * Type Checking: Not started yet.
 3. DropDown methods
     * sendOptionText
     * clickOption
