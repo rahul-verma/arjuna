@@ -141,3 +141,7 @@ class DesktopOS(Enum):
     WINDOWS = auto()
     MAC = auto()
     LINUX = auto()
+
+class ArgsType(Enum):
+    NAMED = auto()
+    POSITIONAL = auto()

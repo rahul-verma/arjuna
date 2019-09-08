@@ -11,7 +11,7 @@ class _WithType(Enum):
 
     INDEX = auto()
     CHILD_LOCATOR = auto()
-    ASSIGNED_NAME = auto()
+    GNS_NAME = auto()
 
 
 class With:

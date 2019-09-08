@@ -44,11 +44,12 @@ class GuiNamespace:
         self.__ns = {}
 
     def add_element_meta_data(self, name, context, raw_locators):
-        emd = GuiElementMetaData(raw_locators)
+        emd = GuiElementMetaData(raw_locators, process_args=False)
         name = name.lower()
         if not self.has(name):
             self.__ns[name] = {}
         self.__ns[name][context] = emd
+        print(self.__ns)
 
     def has(self, name):
         return name.lower() in self.__ns

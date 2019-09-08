@@ -35,11 +35,30 @@ class Gui(SetuConfiguredObject):
     def get_emd(self, locators):
         final_locators = []
         for raw_locator in locators:
-            if raw_locator["withType"].upper().strip() == "ASSIGNED_NAME":
+            print(raw_locator)
+            if raw_locator["withType"].upper().strip() == "GNS_NAME":
                 emd = self.__ns.get_meta_data(raw_locator["withValue"], self.__auto_context)
-                final_locators.extend(emd.raw_locators)
+                print(emd.raw_locators)
+                for loc in emd.raw_locators:
+                    if "argsType" not in raw_locator:
+                        final_locators.append(Locator(ltype=loc.ltype, lvalue=loc.lvalue))
+                    else:
+                        final_locators.append(Locator(
+                            ltype=loc.ltype, 
+                            lvalue=loc.lvalue, 
+                            args_type=raw_locator["argsType"], 
+                            args=raw_locator["args"])
+                        )
             else:
-                final_locators.append(Locator(ltype=raw_locator["withType"], lvalue=raw_locator["withValue"]))
+                if "argsType" not in raw_locator:
+                    final_locators.append(Locator(ltype=raw_locator["withType"], lvalue=raw_locator["withValue"]))
+                else:
+                    final_locators.append(Locator(
+                        ltype=raw_locator["withType"], 
+                        lvalue=raw_locator["withValue"], 
+                        args_type=raw_locator["argsType"], 
+                        args=raw_locator["args"])
+                    )
         return GuiElementMetaData(final_locators)
 
     def create_dispatcher(self):
