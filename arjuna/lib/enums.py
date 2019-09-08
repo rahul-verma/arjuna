@@ -126,3 +126,7 @@ class CorePropertyTypeEnum(Enum):
     LOGGER_FILE_LEVEL = auto()
     LOGGER_NAME = auto()
     PROJECT_DIRS_FILES = auto()
+
+class GuiElementConfigType(Enum):
+	CHECK_STATE = auto()
+	CHECK_TYPE = auto()

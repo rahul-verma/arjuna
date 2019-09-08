@@ -196,6 +196,10 @@ class ElementHandler:
     def get_source(cls, element):
         return {"value" : element.get_source()}
 
+    @classmethod
+    def configure(cls, element, elementConfig):
+        element.configure(elementConfig)
+
 class MultiElementHandler:
 
     @classmethod
@@ -236,6 +240,10 @@ class DropdownHandler:
     def select_by_index(cls, dropdown, index):
         return dropdown.select_by_index(index)
 
+    @classmethod
+    def configure(cls, dropdown, elementConfig):
+        dropdown.configure(elementConfig)
+
 class RadioGroupHandler:
 
     @classmethod
@@ -261,6 +269,10 @@ class RadioGroupHandler:
     @classmethod
     def select_by_index(cls, radiogroup, index):
         return radiogroup.select_by_index(index)
+
+    @classmethod
+    def configure(cls, radiogroup, elementConfig):
+        radiogroup.configure(elementConfig)
 
 class WindowHandler:
 

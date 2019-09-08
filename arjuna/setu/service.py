@@ -6,6 +6,7 @@ import time
 
 def __launch_setu_svc(port):
     from arjuna.setu.interface.setu import SetuSvc
+    from arjuna.narada import NaradaSvc
 
     from arjuna.setu.config.processor import ConfigCreator
     ConfigCreator.init()
@@ -14,6 +15,7 @@ def __launch_setu_svc(port):
     api = Api(app)
 
     api.add_resource(SetuSvc, '/setu', endpoint='setu')
+    api.add_resource(NaradaSvc, '/narada', '/narada/<path:path>')
 
     # api.add_resource(ItemList, '/items', endpoint='items')
     #app.run(port=port, use_evalex=False) #, debug=True)

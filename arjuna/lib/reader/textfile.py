@@ -43,7 +43,7 @@ class FileReader:
 class TextResourceReader(FileReader):
     def __init__(self, file_name):
         super().__init__(
-            os.path.abspath(os.path.join(os.path.dirname(__file__), os.sep.join(["../..", "res", file_name]))))
+        os.path.abspath(os.path.join(os.path.dirname(__file__), os.sep.join(["../..", "res", file_name]))))
 
 
 class FileLineReader:

@@ -41,7 +41,11 @@ setup(
                     "res/*.txt", 
                     "res/scripts/arjuna_launcher.py",
                     "setu/config/res/*.conf", 
-                    "setu/config/res/*.txt"
+                    "setu/config/res/*.txt",
+                    "narada/static/full/*.html",
+                    "narada/static/parts/*.html",
+                    "narada/res/*.js",
+                    "narada/res/*.json", 
                 ]
     },
     install_requires = ["flask", "flask-RESTful", "waitress", "requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon"],

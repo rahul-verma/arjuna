@@ -1,4 +1,5 @@
 from .base_element import BaseElement
+from arjuna.lib.enums import GuiElementConfigType
 
 class GuiElement(BaseElement):
     
@@ -6,6 +7,10 @@ class GuiElement(BaseElement):
         super().__init__(automator, emd, parent)
         from .element_conditions import GuiElementConditions
         self.__conditions_handler = GuiElementConditions(self)
+        self.__settings = {
+            GuiElementConfigType.CHECK_STATE : True,
+            GuiElementConfigType.CHECK_TYPE: True
+            }
 
     def find(self):
         self.parent_container.find_element(self)
@@ -39,7 +44,9 @@ class GuiElement(BaseElement):
         self.dispatcher.send_text(text)
 
     def _only_click(self):
+        print("only click")
         self.dispatcher.click()
+        print("clicked")
 
     def __return_attr_value(self, result):
         return result and result or None
@@ -61,14 +68,14 @@ class GuiElement(BaseElement):
 
     def click(self):
         self.find_if_not_found()
-        self.wait_until_clickable()
+        self.__wait_until_clickable_if_configured()
         self._only_click()
 
     def __conditional_selected_state_click(self, condition_state):
         self.find_if_not_found()
         selected = self.is_selected()
         if selected == condition_state:
-            self.wait_until_clickable()
+            self.__wait_until_clickable_if_configured()
             self._only_click()
 
     def select(self):
@@ -107,6 +114,10 @@ class GuiElement(BaseElement):
         return self.dispatcher.is_clickable()
 
     @property
+    def settings(self):
+        return self.__settings
+
+    @property
     def conditions(self):
         return self.__conditions_handler
 
@@ -122,19 +133,19 @@ class GuiElement(BaseElement):
 
     def clear_text(self):
         self.find_if_not_found()
-        self.wait_until_clickable()
+        self.__wait_until_clickable_if_configured()
         self._only_click()
         self._only_clear_text()
 
     def enter_text(self, text):
         self.find_if_not_found()
-        self.wait_until_clickable()
+        self.__wait_until_clickable_if_configured()
         self._only_click()
         self._only_enter_text(text)
 
     def set_text(self, text):
         self.find_if_not_found()
-        self.wait_until_clickable()
+        self.__wait_until_clickable_if_configured()
         self._only_click()
         self._only_clear_text()
         self._only_enter_text(text)
@@ -159,3 +170,16 @@ class GuiElement(BaseElement):
 
     def is_checked(self):
         return self.is_selected()
+
+    def configure(self, settings):
+        self.__settings = {GuiElementConfigType[k.strip().upper()]: v for k,v in settings.items()}
+
+    def __should_check_state(self):
+        return self.settings[GuiElementConfigType.CHECK_STATE]
+
+    def __wait_until_clickable_if_configured(self):
+        if self.__should_check_state(): self.wait_until_clickable()
+
+    def __should_check_type(self):
+        return self.settings[GuiElementConfigType.CHECK_TYPE]
+

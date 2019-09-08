@@ -1,0 +1,47 @@
+
+<html itemscope itemtype="http://schema.org/QAPage" class="html__responsive">
+
+<head>
+
+    <title>Welcome to Narada - Your Mischievieous Web Test Automation Friend</title>
+
+    <!-- Source od CSS with thanks: https://stackoverflow.com/users/592887/beerwin-->
+    <style>
+        button {
+            border: 1px solid #0066cc;
+            background-color: #0099cc;
+            color: #ffffff;
+            padding: 5px 10px;
+            font-size: 20px;
+        }
+
+        button:hover {
+            border: 1px solid #0099cc;
+            background-color: #00aacc;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+
+        button:disabled,
+            button[disabled]{
+            border: 1px solid #999999;
+            background-color: #cccccc;
+            color: #666666;
+        }
+
+        div {
+            padding: 5px 10px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <button id="target" onclick="alert('Done');">This button would enabled after 5 seconds.</button>
+
+    <script>
+            document.getElementById("target").disabled = true;
+            setTimeout(function(){document.getElementById("target").disabled = false;},5000);
+    </script>
+</body>
+</html>
