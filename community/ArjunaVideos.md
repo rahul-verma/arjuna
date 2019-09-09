@@ -24,9 +24,9 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 13. [User Defined Options - Importance and Considerations](https://www.youtube.com/watch?v=cL9iDpVryJ0)
 14. [User Defined Options - Programmatic Options and Project Config based User Defined Options](https://www.youtube.com/watch?v=tfKxtAI04iA)
 15. [Support for Web Element Identification](https://www.youtube.com/watch?v=gCw7ke7wrzE)
+16. [Basic Web Element Identification using Arjuna's With Object](https://www.youtube.com/watch?v=_O89D37wAc8)
 
 ## Planned Videos
-16. (Lab) Basic Web Element Identification with Arjuna's With Object
 17. (Discussion) Should You Use Tools for Generating XPath or CSS Selectors?
 18. (Lab) Web Element Identification - Xpath and CSS Selectors
 19. (Lab) Arjuna's Higher Level Web Element Identifiers 
