@@ -21,21 +21,21 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 11. [Motivations and Power of Arjuna's Value Type](https://www.youtube.com/watch?v=IJxCeg3_HMM)
 12. [Java Bindings - Retrieving and Handling Configuration Options](https://www.youtube.com/watch?v=p76qhXYYbIQ)
 13. [User Defined Options - Importance and Considerations](https://www.youtube.com/watch?v=cL9iDpVryJ0)
+14. [(Lab) User Defined Options - Programmatic Options and Project Config based User Defined Options](https://www.youtube.com/watch?v=tfKxtAI04iA)
 
 ## Planned Videos
-14. (Lab) User Defined Options - Programmatic Options and Project.conf Options
-15. (Discussion) Element Identification
-16. (Lab) Element Identification with Arjuna's With Object
-17. (Discussion) Should You Use Tools for Generating XPath or CSS Selector?
-18. (Lab) Identification - Xpath and CSS Selectors
-19. (Lab) Arjuna's Higher Level Identifiers 
-20. (Lab) Identification - OR Relationship
-21. (Lab) Basic Interactions (with explicit identify)
-22. (Discussion) Automatic versus Coded Polling for Element's State Readiness 
+15. (Discussion) Web Element Identification
+16. (Lab) Web Element Identification with Arjuna's With Object
+17. (Discussion) Should You Use Tools for Generating XPath or CSS Selectors?
+18. (Lab) Web Element Identification - Xpath and CSS Selectors
+19. (Lab) Arjuna's Higher Level Web Element Identifiers 
+20. (Lab) Web Element Identification - OR Relationship
+21. (Lab) Basic Interactions with Web Elements (with explicit identify)
+22. (Discussion) Automatic versus Coded Polling for Web Element's State Readiness 
 	* Situations where it's obvious which state a test author wants to wait for
 	* Situations where it's not obvious 
-23. (Discussion) Lazy vs Greedy Identification
-24. (Lab) Interactions Revisited 
+23. (Discussion) Lazy vs Greedy Identification of Web Elements
+24. (Lab) Web Element Interactions Revisited 
 25. (Lab) Static Waiting and HardCoded.sleep method
 26. (Lab) Parameterzing With identifiers
 27. (Discussion) Understanding Arjuna's Basic Abstractions for Web Automation
