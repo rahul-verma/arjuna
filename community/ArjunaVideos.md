@@ -19,7 +19,7 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 9. [HOCON-Extended Project Configuration](https://www.youtube.com/watch?v=kfl5LjNJaR8)
 10. [Flexibility of Options in Project Configuration](https://www.youtube.com/watch?v=yK1Mkc4eA4g)
 11. [Motivations and Power of Arjuna's Value Type](https://www.youtube.com/watch?v=IJxCeg3_HMM)
-12. [Java Bindings - Retrieving and Handling Configuration Options](https://www.youtube.com/watch?v=p76qhXYYbIQ)
+12. [Retrieving and Handling Configuration Options](https://www.youtube.com/watch?v=p76qhXYYbIQ)
 13. [User Defined Options - Importance and Considerations](https://www.youtube.com/watch?v=cL9iDpVryJ0)
 14. [User Defined Options - Programmatic Options and Project Config based User Defined Options](https://www.youtube.com/watch?v=tfKxtAI04iA)
 
