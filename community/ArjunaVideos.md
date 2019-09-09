@@ -6,6 +6,7 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 3. [HOCON-Extended Project Configuration](https://www.youtube.com/watch?v=kfl5LjNJaR8)
 4. [Motivations and Power of Arjuna's Value Type](https://www.youtube.com/watch?v=IJxCeg3_HMM)
 5. [User Defined Options - Importance and Considerations](https://www.youtube.com/watch?v=cL9iDpVryJ0)
+6. [Support for Web Element Identification](https://www.youtube.com/watch?v=gCw7ke7wrzE)
 
 ## Published Videos on Arjuna - Java Bindings (Inclusive of Arjuna Videos)
 1. [Aspects of a Test Automation Framework](https://www.youtube.com/watch?v=OF8m6590_LA)
@@ -22,10 +23,10 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 12. [Retrieving and Handling Configuration Options](https://www.youtube.com/watch?v=p76qhXYYbIQ)
 13. [User Defined Options - Importance and Considerations](https://www.youtube.com/watch?v=cL9iDpVryJ0)
 14. [User Defined Options - Programmatic Options and Project Config based User Defined Options](https://www.youtube.com/watch?v=tfKxtAI04iA)
+15. [Support for Web Element Identification](https://www.youtube.com/watch?v=gCw7ke7wrzE)
 
 ## Planned Videos
-15. (Discussion) Web Element Identification
-16. (Lab) Web Element Identification with Arjuna's With Object
+16. (Lab) Basic Web Element Identification with Arjuna's With Object
 17. (Discussion) Should You Use Tools for Generating XPath or CSS Selectors?
 18. (Lab) Web Element Identification - Xpath and CSS Selectors
 19. (Lab) Arjuna's Higher Level Web Element Identifiers 
