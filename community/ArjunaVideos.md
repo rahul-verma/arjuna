@@ -45,8 +45,6 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 * (Lab) MultiElement Abstraction
 * (Lab) DropDown Abstraction
 * (Lab) RadioGroup Abstraction
-* (Lab) Nav Bar and Menu Abstraction
-* (Lab) WebTable Abstraction
 * (Lab) ExecuteJavaScript Execute JS
 * (Lab) Alerts
 * (Discussion) Different Challenges in Frame Handling
@@ -54,6 +52,8 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 * (Discussion) Different Challenges in Window Handling
 * (Lab) Handling Windows
 * (Lab) Action Chains
+* (Lab) Nav Bar and Menu Abstraction
+* (Lab) WebTable Abstraction
 * (Lab) Slow Motion Execution
 * (Lab) Nested Element Finding
 * (Lab) MultiElement Filtering
