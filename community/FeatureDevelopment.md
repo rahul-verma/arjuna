@@ -18,11 +18,11 @@ The features listed here which are marked as done are available in source code o
 3. DropDown methods
     * sendOptionText
     * clickOption
-4. Navigation bar menu Abstraction
-5. WebTable Abstraction
+4. Finding Frames based on content
+5. Finding Windows based on content
 6. Action Chains - Named method for common inetractions
-7. Finding Frames based on content
-8. Finding windows based on content
+7. Navigation bar menu Abstraction
+8. WebTable Abstraction
 9. Nested Elements support
 10. MultiElement filters
     * ignore
