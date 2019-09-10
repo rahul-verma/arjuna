@@ -30,8 +30,7 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 17. XPath and CSS Selector Generation - How to Use Tools like ChroPath Wisely - Part 1
 18. XPath and CSS Selector Generation - How to Use Tools like ChroPath Wisely - Part 2
 19. XPath and CSS Selector Generation - How to Use Tools like ChroPath Wisely - Part 3
-* (Discussion) Should You Use Tools for Generating XPath or CSS Selectors?
-* (Lab) Web Element Identification - Xpath and CSS Selectors
+* (Lab) Web Element Identification - With Methods for XPath and CSS Selectors
 * (Lab) Arjuna's Higher Level Web Element Identifiers 
 * (Lab) Web Element Identification - OR Relationship
 * (Lab) Basic Interactions with Web Elements (with explicit identify)
