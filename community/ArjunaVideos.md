@@ -27,45 +27,38 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 16. [Basic Web Element Identification using Arjuna's With Object](https://www.youtube.com/watch?v=_O89D37wAc8)
 
 ## Planned Videos
-17. (Discussion) Should You Use Tools for Generating XPath or CSS Selectors?
-18. (Lab) Web Element Identification - Xpath and CSS Selectors
-19. (Lab) Arjuna's Higher Level Web Element Identifiers 
-20. (Lab) Web Element Identification - OR Relationship
-21. (Lab) Basic Interactions with Web Elements (with explicit identify)
-22. (Discussion) Automatic versus Coded Polling for Web Element's State Readiness 
+17. XPath and CSS Selector Generation - How to Use Tools like ChroPath Wisely - Part 1
+18. XPath and CSS Selector Generation - How to Use Tools like ChroPath Wisely - Part 2
+19. XPath and CSS Selector Generation - How to Use Tools like ChroPath Wisely - Part 3
+* (Discussion) Should You Use Tools for Generating XPath or CSS Selectors?
+* (Lab) Web Element Identification - Xpath and CSS Selectors
+* (Lab) Arjuna's Higher Level Web Element Identifiers 
+* (Lab) Web Element Identification - OR Relationship
+* (Lab) Basic Interactions with Web Elements (with explicit identify)
+* (Discussion) Automatic versus Coded Polling for Web Element's State Readiness 
 	* Situations where it's obvious which state a test author wants to wait for
 	* Situations where it's not obvious 
-23. (Discussion) Lazy vs Greedy Identification of Web Elements
-24. (Lab) Web Element Interactions Revisited 
-25. (Lab) Static Waiting and HardCoded.sleep method
-26. (Lab) Parameterzing With identifiers
-27. (Discussion) Understanding Arjuna's Basic Abstractions for Web Automation
-	* Gui Automator
-	* Browser
-	* Gui Element
-	* GuiMultiElement
-	* Alerts
-	* Windows - Main Window, Child Window
-	* DropDown
-	* RadioGroup
-	* DomRoot and Frame
-  * and others
-28. (Lab) MultiElement Abstraction
-29. (Lab) DropDown Abstraction
-30. (Lab) RadioGroup Abstraction
-31. (Lab) Nav Bar and Menu Abstraction
-32. (Lab) WebTable Abstraction
-33. (Lab) ExecuteJavaScript Execute JS
-34. (Lab) Alerts
-35. (Discussion) Different Challenges in Frame Handling
-36. (Lab) Handling Frames
-37. (Discussion) Different Challenges in Window Handling
-38. (Lab) Handling Windows
-39. (Lab) Action Chains
-40. (Lab) Slow Motion Execution
-41. (Lab) Nested Element Finding
-42. (Lab) MultiElement Filtering
-43. (Lab) Advanced Execution of JavaScript
+* (Discussion) Lazy vs Greedy Identification of Web Elements
+* (Lab) Web Element Interactions Revisited 
+* (Lab) Static Waiting and HardCoded.sleep method
+* (Lab) Parameterzing With identifiers
+* (Discussion) Understanding Arjuna's Basic Abstractions for Web Automation
+* (Lab) MultiElement Abstraction
+* (Lab) DropDown Abstraction
+* (Lab) RadioGroup Abstraction
+* (Lab) Nav Bar and Menu Abstraction
+* (Lab) WebTable Abstraction
+* (Lab) ExecuteJavaScript Execute JS
+* (Lab) Alerts
+* (Discussion) Different Challenges in Frame Handling
+* (Lab) Handling Frames
+* (Discussion) Different Challenges in Window Handling
+* (Lab) Handling Windows
+* (Lab) Action Chains
+* (Lab) Slow Motion Execution
+* (Lab) Nested Element Finding
+* (Lab) MultiElement Filtering
+* (Lab) Advanced Execution of JavaScript
 
 ### Gui Model
 * (Discussion) Page Object Model 
