@@ -38,6 +38,7 @@ None in known and non-fixed stage as of now.
 * Classification of Errors and Exceptions
 * Single Context GNS
     * Should be the default context
+* Element configuration support in GNS
 * AND relationship for code and gns
 * Option to enable proxy in java bindings
 * File based configuration `loadFromConfFile`
