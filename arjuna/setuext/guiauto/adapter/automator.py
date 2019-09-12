@@ -244,6 +244,14 @@ class DropdownHandler:
     def configure(cls, dropdown, elementConfig):
         dropdown.configure(elementConfig)
 
+    @classmethod
+    def set_option_locators(cls, dropdown, locators):
+        dropdown.set_option_locators(GuiElementMetaData.createEMD(locators))
+
+    @classmethod
+    def set_option_container(cls, dropdown, locators):
+        dropdown.set_option_container(GuiElementMetaData.createEMD(locators))
+
 class RadioGroupHandler:
 
     @classmethod

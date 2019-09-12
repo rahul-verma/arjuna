@@ -10,6 +10,15 @@ class GuiMultiElement(BaseElement):
         self.instance_count = 0
         self.__instances = None
 
+    def configure_partial_elements(self, elem_config):
+        '''
+            This method is supposed to be called when multielement identification is completed.
+            This is not used for usual multi-element.
+            It is used by RadioGroup or DropDown etc which are higher level abstractions that use ME.
+        '''
+        for instance in self.__instances:
+            instance.configure(elem_config)
+
     def find(self):
         self.parent_container.find_multielement(self)
 

@@ -67,7 +67,7 @@ class ElementContainer(SetuConfiguredObject, metaclass=abc.ABCMeta):
                 print(e)
                 continue
         if not found:
-            raise Exception("Could not locate elements with locator(s): {}".format(gui_element.get_locator_meta_data().locators))
+            raise Exception("Could not locate elements with locator(s): {}".format(gui_element.get_locator_meta_data()))
 
     def wait_until_element_found(self, gui_element):
         return self.__container_conditions.PresenceOfElement(gui_element).wait()
@@ -77,6 +77,8 @@ class ElementContainer(SetuConfiguredObject, metaclass=abc.ABCMeta):
 
     def find_multielement(self, gui_element):
         locator_type, locator_value, instance_count = self.wait_until_multielement_found(gui_element)
+        if instance_count == 0:
+            raise Exception("MultiElement could not be found with any of the provided locators.")
         gui_element.set_found_with(locator_type, locator_value)
         gui_element.set_instance_count(instance_count)
 

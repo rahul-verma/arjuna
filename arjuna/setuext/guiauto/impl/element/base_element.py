@@ -1,6 +1,7 @@
 import abc
 
 from arjuna.setuext.guiauto.impl.base.element_container import ElementContainer
+from arjuna.lib.enums import GuiElementConfigType
 
 class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
     def __init__(self, automator, emd, parent=None):
@@ -46,3 +47,33 @@ class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
 
     def get_automator(self):
         return self.__automator
+
+
+class ElementConfig:
+
+    def __init__(self, automator):
+        self.__settings = {
+            GuiElementConfigType.CHECK_TYPE: True,
+            GuiElementConfigType.CHECK_PRE_STATE : True,
+            GuiElementConfigType.CHECK_POST_STATE : True,
+            }
+
+    @property
+    def settings(self):
+        return self.__settings
+
+    def __process_config_key(self, k):
+        return type(k) is str and GuiElementConfigType[k.strip().upper()] or k
+
+    def configure(self, settings):
+        self.__settings.update({self.__process_config_key(k): v for k,v in settings.items()})
+
+    def _should_check_type(self):
+        return self.settings[GuiElementConfigType.CHECK_TYPE]
+
+    def _should_check_pre_state(self):
+        return self.settings[GuiElementConfigType.CHECK_PRE_STATE]
+
+    def _should_check_post_state(self):
+        return self.settings[GuiElementConfigType.CHECK_POST_STATE]
+

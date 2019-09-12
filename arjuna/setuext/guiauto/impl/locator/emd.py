@@ -181,6 +181,12 @@ class GuiElementMetaData:
         if process_args:
             self.process_args()
 
+    def __str__(self):
+        return str([str(l) for l in self.__locators])
+
+    def print_locators(self):
+        print(str(self))
+
     @property
     def locators(self):
         return self.__locators
@@ -191,7 +197,6 @@ class GuiElementMetaData:
 
     def __process(self):
         for raw_locator in self.__raw_locators:
-            print("hhhhhh", raw_locator)
             rltype = raw_locator.ltype
             rlvalue = raw_locator.lvalue
             args_type = raw_locator.args_type
@@ -209,7 +214,6 @@ class GuiElementMetaData:
                     parts = None
                     try:
                         parts =  re.search(GuiElementMetaData.XPATH_TWO_ARG_VALUE_PATTERN, rlvalue).groups()
-                        print(parts)
                     except:
                         raise Exception("Value {} for {} is misformatted. Attribute name and attribute value should be supplied as: [<arg>][<value>]".format(rlvalue, rltype))
                     self.__add_locator(GenericLocateWith.XPATH, self.XPATH_TWO_ARG_LOCATORS[generic_locate_with].format(parts[0], parts[1]), args_type, args)
@@ -229,7 +233,6 @@ class GuiElementMetaData:
         self.locators.append(GuiGenericLocator(locator_type, locator_value, args_type, args))
 
     def process_args(self):
-        print("processing args for identifier...")
         pattern = r"(%\w+%)"
         for locator in self.locators:
             if not locator.args_type: continue
@@ -239,16 +242,12 @@ class GuiElementMetaData:
             matches = re.findall(pattern, fmt_locator_value)
             matches = [match.lower() for match in matches]
 
-            print(type(locator.args_type))
             if locator.args_type == ArgsType.POSITIONAL:
                 for index, match in enumerate(matches):
                     fmt_locator_value = fmt_locator_value.replace(match, "%{}%".format(index + 1))
-
-            print(fmt_locator_value)
                 
             for arg in locator.args:
                 target = "%{}%".format(arg["name"].lower())
-                print(target)
                 fmt_locator_value = fmt_locator_value.replace(target, arg["value"])
 
             locator.set_value(fmt_locator_value)
@@ -257,7 +256,6 @@ class GuiElementMetaData:
     def createEMD(self, locators):
         processed_locators = []
         for locator in locators:
-            print(locator, type(locator))
             p_locator = None
             ltype = locator["withType"]
             lvalue = locator["withValue"]

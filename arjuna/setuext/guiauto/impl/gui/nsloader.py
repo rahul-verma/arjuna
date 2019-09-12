@@ -49,7 +49,6 @@ class GuiNamespace:
         if not self.has(name):
             self.__ns[name] = {}
         self.__ns[name][context] = emd
-        print(self.__ns)
 
     def has(self, name):
         return name.lower() in self.__ns

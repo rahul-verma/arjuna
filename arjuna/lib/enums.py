@@ -128,5 +128,6 @@ class CorePropertyTypeEnum(Enum):
     PROJECT_DIRS_FILES = auto()
 
 class GuiElementConfigType(Enum):
-	CHECK_STATE = auto()
-	CHECK_TYPE = auto()
+    CHECK_TYPE = auto()
+    CHECK_PRE_STATE = auto()
+    CHECK_POST_STATE = auto()

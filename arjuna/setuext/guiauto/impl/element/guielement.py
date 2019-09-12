@@ -1,16 +1,12 @@
-from .base_element import BaseElement
-from arjuna.lib.enums import GuiElementConfigType
+from .base_element import BaseElement, ElementConfig
 
-class GuiElement(BaseElement):
+class GuiElement(BaseElement, ElementConfig):
     
     def __init__(self, automator, emd, parent=None):
-        super().__init__(automator, emd, parent)
+        BaseElement.__init__(self, automator, emd, parent)
+        ElementConfig.__init__(self, automator)
         from .element_conditions import GuiElementConditions
         self.__conditions_handler = GuiElementConditions(self)
-        self.__settings = {
-            GuiElementConfigType.CHECK_STATE : True,
-            GuiElementConfigType.CHECK_TYPE: True
-            }
 
     def find(self):
         self.parent_container.find_element(self)
@@ -44,9 +40,7 @@ class GuiElement(BaseElement):
         self.dispatcher.send_text(text)
 
     def _only_click(self):
-        print("only click")
         self.dispatcher.click()
-        print("clicked")
 
     def __return_attr_value(self, result):
         return result and result or None
@@ -114,10 +108,6 @@ class GuiElement(BaseElement):
         return self.dispatcher.is_clickable()
 
     @property
-    def settings(self):
-        return self.__settings
-
-    @property
     def conditions(self):
         return self.__conditions_handler
 
@@ -171,15 +161,6 @@ class GuiElement(BaseElement):
     def is_checked(self):
         return self.is_selected()
 
-    def configure(self, settings):
-        self.__settings = {GuiElementConfigType[k.strip().upper()]: v for k,v in settings.items()}
-
-    def __should_check_state(self):
-        return self.settings[GuiElementConfigType.CHECK_STATE]
-
     def __wait_until_clickable_if_configured(self):
-        if self.__should_check_state(): self.wait_until_clickable()
-
-    def __should_check_type(self):
-        return self.settings[GuiElementConfigType.CHECK_TYPE]
+        if self._should_check_pre_state(): self.wait_until_clickable()
 

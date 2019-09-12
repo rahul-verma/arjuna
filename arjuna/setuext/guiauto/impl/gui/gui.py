@@ -35,10 +35,8 @@ class Gui(SetuConfiguredObject):
     def get_emd(self, locators):
         final_locators = []
         for raw_locator in locators:
-            print(raw_locator)
             if raw_locator["withType"].upper().strip() == "GNS_NAME":
                 emd = self.__ns.get_meta_data(raw_locator["withValue"], self.__auto_context)
-                print(emd.raw_locators)
                 for loc in emd.raw_locators:
                     if "argsType" not in raw_locator:
                         final_locators.append(Locator(ltype=loc.ltype, lvalue=loc.lvalue))
