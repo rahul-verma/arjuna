@@ -15,6 +15,7 @@ The features listed here which are marked as done are available in source code o
     * State checking: Implemented for GuiElement. To be implemented and tested for DropDown and RadioGroup.
     * Type Checking: Not started yet.
     * Can it be set at automator level?
+3. Element should load specific pieces of DOM belonging to it as well as complete outerHTML.
 3. DropDown methods
     * sendOptionText
     * clickOption
