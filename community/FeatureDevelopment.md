@@ -50,7 +50,13 @@ None in known and non-fixed stage as of now.
     * Sending primititve args to Javascript
     * Sending element to JavaScript
 * Data Reference
-* Overidabiliy and visibility of configuration options
+* Names of CLI options to be changed to baseline and extended
+* Add support for envioronment variables to be consumed in configuration
+* Overidabiliy and visibility of configuration options ---> This needs to be implemented before CLI can be discussed: Following are the levels for which it should be clearly defined. Preferrably all configuration settings should be documented as matrix with the mapping:
+    * Project.conf
+    * Programmatic
+    * CLI - Baseline
+    * CLI - Extended
 * Clean up the setu objects?
 * Documentation
     * Configuration Options
