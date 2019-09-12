@@ -25,11 +25,13 @@ Rahul Verma publishes videos to assist learning of Arjuna on his YouTube channel
 14. [User Defined Options - Programmatic Options and Project Config based User Defined Options](https://www.youtube.com/watch?v=tfKxtAI04iA)
 15. [Support for Web Element Identification](https://www.youtube.com/watch?v=gCw7ke7wrzE)
 16. [Basic Web Element Identification using Arjuna's With Object](https://www.youtube.com/watch?v=_O89D37wAc8)
+17. [Web Element Selectors - The Complex Territory of XPath and CSS Selectors](https://www.youtube.com/watch?v=OzzR8-eAaxk)
 
 ## Planned Videos
-17. XPath and CSS Selector Generation - How to Use Tools like ChroPath Wisely - Part 1
-18. XPath and CSS Selector Generation - How to Use Tools like ChroPath Wisely - Part 2
-19. XPath and CSS Selector Generation - How to Use Tools like ChroPath Wisely - Part 3
+
+18. Web Element Selectors - Overview of DevTools, ChroPath and Selenium IDE
+19. Web Element Selectors - Comparison of DevTools, ChroPath and Selenium IDE
+20. Web Element Selectors - Choice of Selectors is Your Responsbility
 * (Lab) Web Element Identification - With Methods for XPath and CSS Selectors
 * (Lab) Arjuna's Higher Level Web Element Identifiers 
 * (Lab) Web Element Identification - OR Relationship
