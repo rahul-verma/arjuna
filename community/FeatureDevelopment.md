@@ -3,7 +3,9 @@ Following is a high level view of features that are to be developed:
 
 The features listed here which are marked as done are available in source code on GitHub, but not available in release distribution yet.
 
-## Priortized and Sequenced
+# Java-Bindings and Corresponding Support in Arjuna
+
+## Phase 1 - Selenium Core Completion - Target Oct 18, 2019
 1. Identifier Parameterization support for `With` -- DONE
    * In Java bindings, .format() methods have been added
    * Support both named as well as positional argument strings.
@@ -23,18 +25,11 @@ The features listed here which are marked as done are available in source code o
 4. Finding Frames based on content
 5. Finding Windows based on content
 6. Action Chains - Named method for common inetractions
-7. Navigation bar menu Abstraction
-8. WebTable Abstraction
 9. Nested Elements support
-10. MultiElement filters
-    * ignore
-    * consider
-11. wait for Absence, Invisible and Diabled
+11. wait for Absence, Invisible and Disabled
 
-## Bug Fixes
-None in known and non-fixed stage as of now.
-
-## Subsequent Features (Not necessarily in a sequenced order)
+## Phase 2 - Completion of Pending Core Framework Features in Arjuna - Nov 29, 2019
+* Names of CLI options to be changed to baseline and extended
 * Classification of Errors and Exceptions
 * Single Context GNS
     * Should be the default context
@@ -45,15 +40,6 @@ None in known and non-fixed stage as of now.
     * coded 
     * suite.xml
     * CLI
-* WebDriver Manager
-* Logger as Service
-* Visualization of requests & reponses
-* JavaScript 
-    * Finding element or MultiElement `WithJs`
-    * Sending primititve args to Javascript
-    * Sending element to JavaScript
-* Data Reference
-* Names of CLI options to be changed to baseline and extended
 * Add support for envioronment variables to be consumed in configuration
 * Overidabiliy and visibility of configuration options ---> This needs to be implemented before CLI can be discussed: Following are the levels for which it should be clearly defined. Preferrably all configuration settings should be documented as matrix with the mapping:
     * Project.conf
@@ -61,21 +47,49 @@ None in known and non-fixed stage as of now.
     * CLI - Baseline
     * CLI - Extended
 * Clean up the setu objects?
+* Data Reference
+
+## Phase 3 - Additional Abstractions and Features for Selenium - 24 Dec, 2019 (Jan 1 2020 - 1.0 First production Release)
+* Navigation bar menu Abstraction
+* WebTable Abstraction
+* MultiElement filters
+    * ignore
+    * consider
+* WebDriver Manager
+* JavaScript 
+    * Finding element or MultiElement `WithJs`
+    * Sending primititve args to Javascript
+    * Sending element to JavaScript
+
+## Phase 4 - March 31, 2019 (In Parallel to Next Feature Section)
 * Documentation
     * Configuration Options
     * Bindings documentation
-* Proxy support for Java bindings
-* Arjuna Web Interface 
-    * Need help from community contributor who knows web development
-
-## Parallel/Future Tasks
-* UniTEE reporter
-    * Treeview
-    * Summary
-    * See whether html5.Treeview helps?
 * Documentation
     * FaaST protocol
     * Create a sharable Postman collection for FaaST
+    
+# Extended Arjuna Features, Python Bindings and Corresponding Support in Arjuna
+
+## Phase 1 - March 31, 2019
+* Completion of Python Bindings in alignment with Java Bindings
+  * Create a list and high level doc of what is expected from Bindings currently
+  * List the features here and track feature wise completion after critical testing
+* Logger as Service
+* Visualization of requests & responses
+* UniTEE reporter
+    * Treeview
+    * Summary
+    * See whether html5.Treeview helps?   
+## Phase 2 - Tentatively a 6 month schedule
+* Arjuna Web Interface 
+    * Need help from community contributor who knows web development
 * Arjuna as a Remote Service
 * Jenkins and GitHub integration
 * Arjuna docker Image
+
+# Bug Fixes
+None in known and non-fixed stage as of now.
+
+
+
