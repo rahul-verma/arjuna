@@ -22,6 +22,7 @@ The features listed here which are marked as done are available in source code o
     * setOptionContainer - To handle custom Dropdown controls like those in Bootstrap.
     * setOptionLocators - To handle with custom drop down controls implemented using div tags.
     * sendOptionText - To handle unstable drop down lists with a lot of options.
+4. Element should load specific pieces of DOM belonging to it as well as complete outerHTML.
 4. Finding Frames based on content
 5. Finding Windows based on content
 6. Action Chains - Named method for common inetractions
@@ -61,7 +62,6 @@ The features listed here which are marked as done are available in source code o
     * Sending primititve args to Javascript
     * Sending element to JavaScript
 * Support for Multi-select Dropdown list
-* Element should load specific pieces of DOM belonging to it as well as complete outerHTML.
 * Default type checking for enter/set text, check/unckeck, toggle operations etc.
 * Optimization of option level or radio button level state and attribute checking in DropDown and RadioButton abstractions
 * 
