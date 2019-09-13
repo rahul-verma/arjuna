@@ -14,11 +14,10 @@ The features listed here which are marked as done are available in source code o
    * For named parameters, casing of names as well as order of parameters does not matter.
    * Example code can be found in arjex.
 2. Element Configuration (code and gns) - In Progress
-    * State checking: Implemented for GuiElement, DropDown and RadioGroup. Pre-interaction and Post-interaction state checking can be sqitched on and off by the client. - Done
+    * State checking: Implemented for GuiElement, DropDown and RadioGroup. Pre-interaction and Post-interaction state checking can be switched on and off by the client. - Done
     * Type Checking: Client can switch off type checking for controls which Arjuna does for some contexts. - Done
     * Support at automator level.
     * Support at configuration level
-3. Element should load specific pieces of DOM belonging to it as well as complete outerHTML.
 3. DropDown methods
     * setOptionContainer - Done
     * setOptionLocators - Done
@@ -62,7 +61,10 @@ The features listed here which are marked as done are available in source code o
     * Sending primititve args to Javascript
     * Sending element to JavaScript
 * Support for Multi-select Dropdown list
+* Element should load specific pieces of DOM belonging to it as well as complete outerHTML.
+* Default type checking for enter/set text, check/unckeck, toggle operations etc.
 * Optimization of option level or radio button level state and attribute checking in DropDown and RadioButton abstractions
+* 
 
 ## Phase 4 - March 31, 2019 (In Parallel to Next Feature Section)
 * Documentation
