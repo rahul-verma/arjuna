@@ -1,4 +1,5 @@
 from .base_element import BaseElement, ElementConfig
+from arjuna.setuext.guiauto.impl.source.parser import ElementXMLSourceParser
 
 class GuiElement(BaseElement, ElementConfig):
     
@@ -7,9 +8,20 @@ class GuiElement(BaseElement, ElementConfig):
         ElementConfig.__init__(self, automator)
         from .element_conditions import GuiElementConditions
         self.__conditions_handler = GuiElementConditions(self)
+        self.__source_parser = None
+
+    def __get_attr_value_from_remote(self, attr, optional=False):
+        return self.__return_attr_value(self.dispatcher.get_attr_value(attr, optional))
+
+    def __get_source_from_remote(self):
+        return self.__get_attr_value_from_remote("outerHTML")
+
+    def load_source_parser(self):
+        self.__source_parser = ElementXMLSourceParser(self.__get_source_from_remote())
 
     def find(self):
         self.parent_container.find_element(self)
+        self.load_source_parser()
 
     identify = find
 
@@ -44,21 +56,6 @@ class GuiElement(BaseElement, ElementConfig):
 
     def __return_attr_value(self, result):
         return result and result or None
-
-    def get_tag_name(self):
-        self.find_if_not_found()
-        return self.__return_attr_value(self.dispatcher.get_tag_name())
-
-    def get_attr_value(self, attr, optional=False):
-        self.find_if_not_found()
-        return self.__return_attr_value(self.dispatcher.get_attr_value(attr, optional))
-
-    def get_source(self):
-        return self.get_attr_value("outerHTML")
-
-    def get_text_content(self):
-        self.find_if_not_found()
-        return self.__return_attr_value(self.dispatcher.get_text_content())
 
     def click(self):
         self.find_if_not_found()
@@ -127,6 +124,11 @@ class GuiElement(BaseElement, ElementConfig):
         self._only_click()
         self._only_clear_text()
 
+    def send_text(self, text):
+        self.find_if_not_found()
+        self.__wait_until_clickable_if_configured()
+        self._only_enter_text(text)
+
     def enter_text(self, text):
         self.find_if_not_found()
         self.__wait_until_clickable_if_configured()
@@ -163,4 +165,31 @@ class GuiElement(BaseElement, ElementConfig):
 
     def __wait_until_clickable_if_configured(self):
         if self._should_check_pre_state(): self.wait_until_clickable()
+
+    def get_tag_name(self):
+        self.find_if_not_found()
+        return self.__source_parser.get_tag_name()
+
+    def get_attr_value(self, attr, optional=False):
+        self.find_if_not_found()
+        if not self.__source_parser.is_attr_present(attr):
+            return self.__get_attr_value_from_remote(attr, optional)
+        else:
+            return self.__source_parser.get_attr_value(attr, optional)
+
+    def get_full_source(self):
+        self.find_if_not_found()
+        return self.__source_parser.get_full_source()
+
+    def get_inner_source(self):
+        self.find_if_not_found()
+        return self.__source_parser.get_inner_source()
+
+    def get_text(self):
+        self.find_if_not_found()
+        return self.__source_parser.get_text_content()
+
+    def get_source(self):
+        self.find_if_not_found()
+        return self.__source_parser.get_source()
 

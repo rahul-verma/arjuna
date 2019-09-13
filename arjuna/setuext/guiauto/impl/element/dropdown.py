@@ -2,6 +2,7 @@ from arjuna.setu.types import SetuManagedObject
 from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
 from arjuna.setuext.guiauto.impl.locator.emd import SimpleGuiElementMetaData
 from .base_element import ElementConfig
+from arjuna.setuext.guiauto.impl.source.parser import ElementXMLSourceParser
 
 # UUID is for client reference. Agent does not know about this.
 class GuiWebSelect(SetuManagedObject, ElementConfig):
@@ -19,13 +20,18 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
         self.__option_container_same_as_select = True
         self.__option_container = None
 
+        self.__source_parser = None
+
     def __validate_select_control(self, tag):
         if tag.lower() != "select":
             raise Exception("The element should have a 'select' tag for WebSelect element. Found: " + tag)
         self._multi = self.__is_multi_select()
 
+    def __get_root_element(self):
+        return self.__option_container_same_as_select and self._wrapped_main_element or self.__option_container
+
     def __load_options(self):
-        container = self.__option_container_same_as_select and self._wrapped_main_element or self.__option_container
+        container = self.__get_root_element()
         self.__options = container.create_multielement(self.__option_emd)
         self.__options.find_if_not_found()
 
@@ -38,6 +44,7 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
     def __find_if_not_found(self):
         if not self.is_found():
             # This would force the identification of partial elements in the wrapped multi-element.
+            self._wrapped_main_element.configure(self.settings)
             tag = self._wrapped_main_element.get_tag_name()
             self.__check_type_if_configured(tag)
             self.__load_options()
@@ -96,9 +103,13 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
         option = self.__options.get_instance_by_visible_text(text)
         self.__select_option(option)
 
+    def send_option_text(self, text):
+        self.__find_if_not_found()
+        self._wrapped_main_element.send_text(text)
+
     def select_by_value(self, value):
         self.__find_if_not_found()
-        option = self.__options.get_instance_by_value(value).select()
+        option = self.__options.get_instance_by_value(value)
         self.__select_option(option)
 
     # The following methods deal with multi-select and would be implemented later.
@@ -147,3 +158,19 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
 
     def deselect_by_visible_texts(self, text_list):
         pass
+
+    def get_full_source(self):
+        self.__find_if_not_found()
+        return self.__get_root_element().get_full_source()
+
+    def get_inner_source(self):
+        self.__find_if_not_found()
+        return self.__get_root_element().get_inner_source()
+
+    def get_text(self):
+        self.__find_if_not_found()
+        return self.__get_root_element().get_text()
+
+    def get_source(self):
+        self.__find_if_not_found()
+        return self.__get_root_element().get_source()

@@ -193,12 +193,24 @@ class ElementHandler:
         element.wait_until_clickable()
 
     @classmethod
+    def configure(cls, element, elementConfig):
+        element.configure(elementConfig)
+
+    @classmethod
     def get_source(cls, element):
         return {"value" : element.get_source()}
 
     @classmethod
-    def configure(cls, element, elementConfig):
-        element.configure(elementConfig)
+    def get_full_source(cls, element):
+        return {"value" : element.get_full_source()}
+
+    @classmethod
+    def get_inner_source(cls, element):
+        return {"value" : element.get_inner_source()}
+
+    @classmethod
+    def get_text(cls, element):
+        return {"value" : element.get_text()}
 
 class MultiElementHandler:
 
@@ -211,6 +223,17 @@ class MultiElementHandler:
         return {"value" : element.get_random_index()}
 
 class DropdownHandler:
+    @classmethod
+    def configure(cls, dropdown, elementConfig):
+        dropdown.configure(elementConfig)
+
+    @classmethod
+    def set_option_locators(cls, dropdown, locators):
+        dropdown.set_option_locators(GuiElementMetaData.createEMD(locators))
+
+    @classmethod
+    def set_option_container(cls, dropdown, locators):
+        dropdown.set_option_container(GuiElementMetaData.createEMD(locators))
 
     @classmethod
     def has_visible_text_selected(cls, dropdown, text):
@@ -241,16 +264,24 @@ class DropdownHandler:
         return dropdown.select_by_index(index)
 
     @classmethod
-    def configure(cls, dropdown, elementConfig):
-        dropdown.configure(elementConfig)
+    def send_option_text(cls, dropdown, text):
+        return dropdown.send_option_text(text) 
 
     @classmethod
-    def set_option_locators(cls, dropdown, locators):
-        dropdown.set_option_locators(GuiElementMetaData.createEMD(locators))
+    def get_source(cls, dropdown):
+        return {"value" : dropdown.get_source()}
 
     @classmethod
-    def set_option_container(cls, dropdown, locators):
-        dropdown.set_option_container(GuiElementMetaData.createEMD(locators))
+    def get_full_source(cls, dropdown):
+        return {"value" : dropdown.get_full_source()}
+
+    @classmethod
+    def get_inner_source(cls, dropdown):
+        return {"value" : dropdown.get_inner_source()}
+
+    @classmethod
+    def get_text(cls, dropdown):
+        return {"value" : dropdown.get_text()}
 
 class RadioGroupHandler:
 
@@ -281,6 +312,22 @@ class RadioGroupHandler:
     @classmethod
     def configure(cls, radiogroup, elementConfig):
         radiogroup.configure(elementConfig)
+
+    @classmethod
+    def get_source(cls, radiogroup):
+        return {"value" : radiogroup.get_source()}
+
+    @classmethod
+    def get_full_source(cls, radiogroup):
+        return {"value" : radiogroup.get_full_source()}
+
+    @classmethod
+    def get_inner_source(cls, radiogroup):
+        return {"value" : radiogroup.get_inner_source()}
+
+    @classmethod
+    def get_text(cls, radiogroup):
+        return {"value" : radiogroup.get_text()}
 
 class WindowHandler:
 
@@ -366,6 +413,22 @@ class DomRootHandler:
     def create_frame_with_emd(self, dom_root, emd):
         return {"elementSetuId" : dom_root.create_frame(emd).setu_id}
 
+    @classmethod
+    def get_source(cls, dom_root):
+        return {"value" : dom_root.get_source()}
+
+    @classmethod
+    def get_full_source(cls, dom_root):
+        return {"value" : dom_root.get_full_source()}
+
+    @classmethod
+    def get_inner_source(cls, dom_root):
+        return {"value" : dom_root.get_inner_source()}
+
+    @classmethod
+    def get_text(cls, dom_root):
+        return {"value" : dom_root.get_text()}
+
 class FrameHandler:
 
     @classmethod
@@ -379,3 +442,19 @@ class FrameHandler:
     @classmethod
     def create_frame(cls, frame, locators):
         return {"elementSetuId" : frame.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
+
+    @classmethod
+    def get_source(cls, frame):
+        return {"value" : frame.get_source()}
+
+    @classmethod
+    def get_full_source(cls, frame):
+        return {"value" : frame.get_full_source()}
+
+    @classmethod
+    def get_inner_source(cls, frame):
+        return {"value" : frame.get_inner_source()}
+
+    @classmethod
+    def get_text(cls, frame):
+        return {"value" : frame.get_text()}

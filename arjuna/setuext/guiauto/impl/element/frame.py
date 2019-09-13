@@ -76,7 +76,18 @@ class DomRoot(FrameContainer):
         self.automator.dispatcher.focus_on_dom_root()
         self.set_frame_context_as_root() 
 
-# UUID is for client reference. Agent does not know about this.
+    def get_full_source(self):
+        return self.wrapped_element.get_full_source()
+
+    def get_inner_source(self):
+        return self.wrapped_element.get_inner_source()
+
+    def get_text(self):
+        return self.wrapped_element.get_text_content()
+
+    def get_source(self):
+        return self.wrapped_element.get_source()
+
 class IFrame(FrameContainer):
 
     def __init__(self, automator, dom_root, wrapped_element):
@@ -108,6 +119,18 @@ class IFrame(FrameContainer):
         self.wrapped_element.find()
         self.automator.dispatcher.focus_on_frame(self.wrapped_element.setu_id)
         self.dom_root.set_frame_context(self)
+
+    def get_full_source(self):
+        return self.wrapped_element.get_full_source()
+
+    def get_inner_source(self):
+        return self.wrapped_element.get_inner_source()
+
+    def get_text(self):
+        return self.wrapped_element.get_text()
+
+    def get_source(self):
+        return self.wrapped_element.get_source()
 
     # def focus_on_parent(self):
     #     self._act(TestAutomatorActionBodyCreator.jump_to_parent_frame())

@@ -77,3 +77,5 @@ class ElementConfig:
     def _should_check_post_state(self):
         return self.settings[GuiElementConfigType.CHECK_POST_STATE]
 
+
+

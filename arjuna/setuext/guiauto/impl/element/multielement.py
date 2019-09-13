@@ -1,4 +1,5 @@
 import random
+import os
 
 from arjuna.setuext.guiauto.impl.element.base_element import BaseElement
 from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
@@ -26,6 +27,8 @@ class GuiMultiElement(BaseElement):
     def find_if_not_found(self):
         if not self.is_found():
             self.find()
+            for instance in self.__instances:
+                instance.load_source_parser()
 
     def set_instance_count(self, count):
         self.instance_count = count
@@ -135,6 +138,22 @@ class GuiMultiElement(BaseElement):
             raise Exception("No option in drop down is currenlty selected.")
         else:
             return self.get_instance_at_index(first_index)
+
+    def get_full_source(self):
+        self.find_if_not_found()
+        return os.linesep.join([e.get_full_source() for e in self.__instances])
+
+    def get_inner_source(self):
+        self.find_if_not_found()
+        return os.linesep.join([e.get_inner_source() for e in self.__instances])
+
+    def get_text(self):
+        self.find_if_not_found()
+        return os.linesep.join([e.get_text() for e in self.__instances])
+
+    def get_source(self):
+        self.find_if_not_found()
+        return os.linesep.join([e.get_source() for e in self.__instances])
 
 class _GuiPartialElement(GuiElement):
 
