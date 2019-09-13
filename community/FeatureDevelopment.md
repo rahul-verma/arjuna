@@ -61,6 +61,7 @@ The features listed here which are marked as done are available in source code o
     * Finding element or MultiElement `WithJs`
     * Sending primititve args to Javascript
     * Sending element to JavaScript
+* Support for Multi-select Dropdown list
 
 ## Phase 4 - March 31, 2019 (In Parallel to Next Feature Section)
 * Documentation
