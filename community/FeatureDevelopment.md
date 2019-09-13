@@ -16,7 +16,8 @@ The features listed here which are marked as done are available in source code o
 2. Element Configuration (code and gns) - In Progress
     * State checking: Implemented for GuiElement, DropDown and RadioGroup. Pre-interaction and Post-interaction state checking can be sqitched on and off by the client. - Done
     * Type Checking: Client can switch off type checking for controls which Arjuna does for some contexts. - Done
-    * Provide support for these at configuration level and automator level.
+    * Support at automator level.
+    * Support at configuration level
 3. Element should load specific pieces of DOM belonging to it as well as complete outerHTML.
 3. DropDown methods
     * setOptionContainer - Done
