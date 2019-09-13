@@ -18,10 +18,10 @@ The features listed here which are marked as done are available in source code o
     * Type Checking: Client can switch off type checking for controls which Arjuna does for some contexts. - Done
     * Support at automator level.
     * Support at configuration level
-3. DropDown methods
-    * setOptionContainer - Done
-    * setOptionLocators - Done
-    * sendOptionText
+3. DropDown methods - Done
+    * setOptionContainer - To handle custom Dropdown controls like those in Bootstrap.
+    * setOptionLocators - To handle with custom drop down controls implemented using div tags.
+    * sendOptionText - To handle unstable drop down lists with a lot of options.
 4. Finding Frames based on content
 5. Finding Windows based on content
 6. Action Chains - Named method for common inetractions
