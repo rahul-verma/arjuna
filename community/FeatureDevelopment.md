@@ -62,6 +62,7 @@ The features listed here which are marked as done are available in source code o
     * Sending primititve args to Javascript
     * Sending element to JavaScript
 * Support for Multi-select Dropdown list
+* Optimization of option level or radio button level state and attribute checking in DropDown and RadioButton abstractions
 
 ## Phase 4 - March 31, 2019 (In Parallel to Next Feature Section)
 * Documentation
