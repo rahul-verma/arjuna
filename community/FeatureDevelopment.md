@@ -22,7 +22,7 @@ The features listed here which are marked as done are available in source code o
     * setOptionContainer - To handle custom Dropdown controls like those in Bootstrap.
     * setOptionLocators - To handle with custom drop down controls implemented using div tags.
     * sendOptionText - To handle unstable drop down lists with a lot of options.
-4. Element should load specific pieces of DOM belonging to it as well as complete outerHTML.
+4. Load specific pieces of DOM belonging to an GUI component - Element, DropDown, RadioGroup, Frame, DomRoot
 4. Finding Frames based on content
 5. Finding Windows based on content
 6. Action Chains - Named method for common inetractions
