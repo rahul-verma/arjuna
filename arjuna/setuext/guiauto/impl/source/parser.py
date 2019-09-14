@@ -7,19 +7,34 @@ def process_child_html(in_str):
     processed = os.linesep.join([l for l in in_str.splitlines() if l.strip()])
     return "\t" + processed
 
+def remove_empty_lines_from_string(in_str):
+    return ' '.join([l.strip() for l in in_str.splitlines() if l.strip()])
+
+def empty_or_none(in_str):
+    if type(in_str) is str and not in_str.strip():
+        return True
+    else:
+        return in_str is None
+
 class ElementXMLSourceParser:
 
-    def __init__(self, source):
+    def __init__(self, source, root_element="body"):
+        print(source)
         self.__source = source
-        parser = etree.HTMLParser()
+        parser = etree.HTMLParser(remove_comments=True)
         tree = etree.parse(StringIO(source), parser)
-        body = tree.getroot().find('body')
-        elem_node = list(body)[0]
-        non_normalized_text_content = ' '.join(
+        if root_element == "body":
+            body = tree.getroot().find('body')
+            elem_node = list(body)[0]
+        else:
+            body = tree.getroot()
+            elem_node = body
+        print(etree.tostring(elem_node, encoding='unicode'))
+        non_normalized_text_content = os.linesep.join(
             [
-                ' '.join(c.text.splitlines()) 
+                remove_empty_lines_from_string(c.text)
                 for c in elem_node.iter() 
-                if c.text is not None
+                if not empty_or_none(c.text)
             ]).strip()
 
         non_normalized_inner_html = os.linesep.join([
@@ -28,7 +43,7 @@ class ElementXMLSourceParser:
             ])
 
         self.__tag = elem_node.tag
-        self.__text_content = re.sub(r"\s+" , " ", non_normalized_text_content)
+        self.__text_content = non_normalized_text_content
         self.__inner_html = non_normalized_inner_html
         self.__raw_attrs = elem_node.keys()
         self.__attributes = {k.lower():v for k,v in elem_node.items()}
@@ -56,7 +71,7 @@ class ElementXMLSourceParser:
             else:
                 raise Exception("Attribute {} not found for element".format(attr_name))
 
-    def get_source(self):
+    def get_root_source(self):
         return self.__self_source
 
     def get_inner_source(self):

@@ -5,7 +5,7 @@ import time
 from arjuna.tpi.enums import ArjunaOption
 from arjuna.setuext.guiauto.impl.base.element_container import ElementContainer
 from .drivercaps import DriverCapabilities
-
+from arjuna.setuext.guiauto.impl.source.parser import ElementXMLSourceParser
 
 class GuiAutomator(ElementContainer):
 
@@ -25,6 +25,14 @@ class GuiAutomator(ElementContainer):
         self.__conditions_handler = GuiAutomatorConditions(self)
         self.__view_handler = ViewContextHandler(self)
         self.__browser = None
+
+        self.__source_parser = None
+
+    def __get_source_from_remote(self):
+        return self.dispatcher.get_source()
+
+    def load_source_parser(self):
+        self.__source_parser = ElementXMLSourceParser(self.__get_source_from_remote(), root_element="html")
 
     def _create_element_flat_or_nested(self, locator_meta_data):
         from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
@@ -116,3 +124,19 @@ class GuiAutomator(ElementContainer):
 
     def add_frame(self, frame):
         self._add_element(frame.setu_id, frame)
+
+    def get_full_source(self):
+        self.load_source_parser()
+        return self.__source_parser.get_full_source()
+
+    def get_root_source(self):
+        self.load_source_parser()
+        return self.__source_parser.get_root_source()
+
+    def get_inner_source(self):
+        self.load_source_parser()
+        return self.__source_parser.get_inner_source()
+
+    def get_text(self):
+        self.load_source_parser()
+        return self.__source_parser.get_text_content()

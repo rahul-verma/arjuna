@@ -61,6 +61,9 @@ class SeleniumDriver:
     def refersh_browser(self):
         DriverCommands.refersh_browser(self.__driver)
 
+    def get_source(self):
+        return DriverCommands.get_source(self.__driver)
+
     def execute_javascript(self, script):
         DriverCommands.execute_javascript(self.__driver, script)
 

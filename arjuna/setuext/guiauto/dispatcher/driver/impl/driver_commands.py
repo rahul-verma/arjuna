@@ -30,7 +30,7 @@ class DriverCommands:
         return driver
 
     @classmethod
-    def get_page_source(cls, driver):
+    def get_source(cls, driver):
         return driver.page_source
 
     @classmethod

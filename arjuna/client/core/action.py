@@ -32,6 +32,11 @@ class GuiAutoActionType(Enum):
     BROWSER_REFRESH = auto()
     BROWSER_EXECUTE_JAVASCRIPT = auto()
 
+    GET_ROOT_SOURCE = auto()
+    GET_FULL_SOURCE  = auto()
+    GET_INNER_SOURCE = auto()
+    GET_TEXT  = auto()
+
     CREATE_ELEMENT = auto()
     CREATE_MULTIELEMENT = auto()
     CREATE_DROPDOWN = auto()
@@ -56,7 +61,7 @@ class GuiAutoActionType(Enum):
     ELEMENT_CHECK = auto()
     ELEMENT_UNCHECK = auto()
 
-    ELEMENT_GET_SOURCE = auto()
+    ELEMENT_GET_ROOT_SOURCE = auto()
     ELEMENT_GET_FULL_SOURCE  = auto()
     ELEMENT_GET_INNER_SOURCE = auto()
     ELEMENT_GET_TEXT  = auto()
@@ -81,7 +86,7 @@ class GuiAutoActionType(Enum):
     DROPDOWN_SELECT_BY_VISIBLE_TEXT = auto()
     DROPDOWN_SEND_OPTION_TEXT = auto()
 
-    DROPDOWN_GET_SOURCE = auto()
+    DROPDOWN_GET_ROOT_SOURCE = auto()
     DROPDOWN_GET_FULL_SOURCE  = auto()
     DROPDOWN_GET_INNER_SOURCE = auto()
     DROPDOWN_GET_TEXT  = auto()
@@ -94,14 +99,14 @@ class GuiAutoActionType(Enum):
 
     RADIOGROUP_CONFIGURE = auto()
 
-    RADIOGROUP_GET_SOURCE = auto()
+    RADIOGROUP_GET_ROOT_SOURCE = auto()
     RADIOGROUP_GET_FULL_SOURCE  = auto()
     RADIOGROUP_GET_INNER_SOURCE = auto()
     RADIOGROUP_GET_TEXT  = auto()
 
     DOMROOT_FOCUS = auto()
     DOMROOT_CREATE_FRAME = auto()
-    DOMROOT_GET_SOURCE = auto()
+    DOMROOT_GET_ROOT_SOURCE = auto()
     DOMROOT_GET_FULL_SOURCE  = auto()
     DOMROOT_GET_INNER_SOURCE = auto()
     DOMROOT_GET_TEXT  = auto()
@@ -114,7 +119,7 @@ class GuiAutoActionType(Enum):
     FRAME_FOCUS = auto()
     FRAME_CREATE_FRAME = auto()
     FRAME_GET_PARENT = auto()
-    FRAME_GET_SOURCE = auto()
+    FRAME_GET_ROOT_SOURCE = auto()
     FRAME_GET_FULL_SOURCE  = auto()
     FRAME_GET_INNER_SOURCE = auto()
     FRAME_GET_TEXT  = auto()

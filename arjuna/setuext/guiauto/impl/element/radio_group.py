@@ -80,6 +80,6 @@ class GuiWebRadioGroup(SetuManagedObject, ElementConfig):
         self.__find_if_not_found()
         return self._radios.get_text()
 
-    def get_source(self):
+    def get_root_source(self):
         self.__find_if_not_found()
-        return self._radios.get_source()
+        return self._radios.get_root_source()

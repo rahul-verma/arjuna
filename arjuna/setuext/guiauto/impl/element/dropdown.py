@@ -171,6 +171,6 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
         self.__find_if_not_found()
         return self.__get_root_element().get_text()
 
-    def get_source(self):
+    def get_root_source(self):
         self.__find_if_not_found()
-        return self.__get_root_element().get_source()
+        return self.__get_root_element().get_root_source()

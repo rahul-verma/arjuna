@@ -75,6 +75,18 @@ class GuiAutomatorHandler(Handler):
     def define_main_window(self):
         return {"elementSetuId" : self.automator.main_window.setu_id}
 
+    def get_root_source(self):
+        return {"value" : self.automator.get_root_source()}
+
+    def get_full_source(self):
+        return {"value" : self.automator.get_full_source()}
+
+    def get_inner_source(self):
+        return {"value" : self.automator.get_inner_source()}
+
+    def get_text(self):
+        return {"value" : self.automator.get_text()}
+
     def set_slomo(self, on, interval=None):
         self.automator.set_slomo(on, None)
 
@@ -197,8 +209,8 @@ class ElementHandler:
         element.configure(elementConfig)
 
     @classmethod
-    def get_source(cls, element):
-        return {"value" : element.get_source()}
+    def get_root_source(cls, element):
+        return {"value" : element.get_root_source()}
 
     @classmethod
     def get_full_source(cls, element):
@@ -268,8 +280,8 @@ class DropdownHandler:
         return dropdown.send_option_text(text) 
 
     @classmethod
-    def get_source(cls, dropdown):
-        return {"value" : dropdown.get_source()}
+    def get_root_source(cls, dropdown):
+        return {"value" : dropdown.get_root_source()}
 
     @classmethod
     def get_full_source(cls, dropdown):
@@ -314,8 +326,8 @@ class RadioGroupHandler:
         radiogroup.configure(elementConfig)
 
     @classmethod
-    def get_source(cls, radiogroup):
-        return {"value" : radiogroup.get_source()}
+    def get_root_source(cls, radiogroup):
+        return {"value" : radiogroup.get_root_source()}
 
     @classmethod
     def get_full_source(cls, radiogroup):
@@ -414,8 +426,8 @@ class DomRootHandler:
         return {"elementSetuId" : dom_root.create_frame(emd).setu_id}
 
     @classmethod
-    def get_source(cls, dom_root):
-        return {"value" : dom_root.get_source()}
+    def get_root_source(cls, dom_root):
+        return {"value" : dom_root.get_root_source()}
 
     @classmethod
     def get_full_source(cls, dom_root):
@@ -444,8 +456,8 @@ class FrameHandler:
         return {"elementSetuId" : frame.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
 
     @classmethod
-    def get_source(cls, frame):
-        return {"value" : frame.get_source()}
+    def get_root_source(cls, frame):
+        return {"value" : frame.get_root_source()}
 
     @classmethod
     def get_full_source(cls, frame):

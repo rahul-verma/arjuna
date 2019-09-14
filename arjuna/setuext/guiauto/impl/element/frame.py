@@ -77,16 +77,16 @@ class DomRoot(FrameContainer):
         self.set_frame_context_as_root() 
 
     def get_full_source(self):
-        return self.wrapped_element.get_full_source()
+        return self.automator.get_full_source()
+
+    def get_root_source(self):
+        return self.automator.get_root_source()
 
     def get_inner_source(self):
-        return self.wrapped_element.get_inner_source()
+        return self.automator.get_inner_source()
 
     def get_text(self):
-        return self.wrapped_element.get_text_content()
-
-    def get_source(self):
-        return self.wrapped_element.get_source()
+        return self.automator.get_text()
 
 class IFrame(FrameContainer):
 
@@ -121,16 +121,16 @@ class IFrame(FrameContainer):
         self.dom_root.set_frame_context(self)
 
     def get_full_source(self):
-        return self.wrapped_element.get_full_source()
+        return self.get_root_source() + self.get_inner_source()
 
     def get_inner_source(self):
-        return self.wrapped_element.get_inner_source()
+        return self.automator.get_full_source()
 
     def get_text(self):
-        return self.wrapped_element.get_text()
+        return self.automator.get_text()
 
-    def get_source(self):
-        return self.wrapped_element.get_source()
+    def get_root_source(self):
+        return self.wrapped_element.get_root_source()
 
     # def focus_on_parent(self):
     #     self._act(TestAutomatorActionBodyCreator.jump_to_parent_frame())

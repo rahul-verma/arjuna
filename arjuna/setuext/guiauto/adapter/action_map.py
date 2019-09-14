@@ -13,7 +13,7 @@ HANDLER_NAME_MAP = {
     9 : ("take_window_action", "WINDOW_"),
     10 : ("take_main_window_action", "MAIN_WINDOW_"),
     11 : ("take_child_window_action", "CHILD_WINDOW_"),
-    12 : ("take_multielement_action", "MULTIELEMENT_")
+    12 : ("take_multielement_action", "MULTIELEMENT_"),
 }
 
 HANDLER_MAP = {
@@ -24,6 +24,11 @@ HANDLER_MAP = {
     GuiAutoActionType.DEFINE_ALERT: 1,
 
     GuiAutoActionType.QUIT_AUTOMATOR: 1,
+
+    GuiAutoActionType.GET_ROOT_SOURCE: 1,
+    GuiAutoActionType.GET_FULL_SOURCE: 1,
+    GuiAutoActionType.GET_INNER_SOURCE: 1,
+    GuiAutoActionType.GET_TEXT: 1,
     
     GuiAutoActionType.BROWSER_GO_TO_URL: 2,
     GuiAutoActionType.BROWSER_GO_BACK: 2,
@@ -53,7 +58,7 @@ HANDLER_MAP = {
     GuiAutoActionType.ELEMENT_CHECK: 4,
     GuiAutoActionType.ELEMENT_UNCHECK: 4,
 
-    GuiAutoActionType.ELEMENT_GET_SOURCE: 4,
+    GuiAutoActionType.ELEMENT_GET_ROOT_SOURCE: 4,
     GuiAutoActionType.ELEMENT_GET_FULL_SOURCE: 4,
     GuiAutoActionType.ELEMENT_GET_INNER_SOURCE: 4,
     GuiAutoActionType.ELEMENT_GET_TEXT: 4,
@@ -75,7 +80,7 @@ HANDLER_MAP = {
     GuiAutoActionType.DROPDOWN_SELECT_BY_INDEX: 5,
     GuiAutoActionType.DROPDOWN_SELECT_BY_VISIBLE_TEXT: 5,
     GuiAutoActionType.DROPDOWN_SEND_OPTION_TEXT: 5,
-    GuiAutoActionType.DROPDOWN_GET_SOURCE: 5,
+    GuiAutoActionType.DROPDOWN_GET_ROOT_SOURCE: 5,
     GuiAutoActionType.DROPDOWN_GET_FULL_SOURCE: 5,
     GuiAutoActionType.DROPDOWN_GET_INNER_SOURCE: 5,
     GuiAutoActionType.DROPDOWN_GET_TEXT: 5,
@@ -86,22 +91,22 @@ HANDLER_MAP = {
     GuiAutoActionType.RADIOGROUP_SELECT_BY_INDEX: 6,
     GuiAutoActionType.RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE : 6,
     GuiAutoActionType.RADIOGROUP_CONFIGURE : 6,
-    GuiAutoActionType.RADIOGROUP_GET_SOURCE: 6,
+    GuiAutoActionType.RADIOGROUP_GET_ROOT_SOURCE: 6,
     GuiAutoActionType.RADIOGROUP_GET_FULL_SOURCE: 6,
     GuiAutoActionType.RADIOGROUP_GET_INNER_SOURCE: 6,
     GuiAutoActionType.RADIOGROUP_GET_TEXT: 6,
 
     GuiAutoActionType.DOMROOT_FOCUS: 7,
     GuiAutoActionType.DOMROOT_CREATE_FRAME: 7,
-    GuiAutoActionType.DOMROOT_GET_SOURCE: 6,
-    GuiAutoActionType.DOMROOT_GET_FULL_SOURCE: 6,
-    GuiAutoActionType.DOMROOT_GET_INNER_SOURCE: 6,
-    GuiAutoActionType.DOMROOT_GET_TEXT: 6,
+    GuiAutoActionType.DOMROOT_GET_ROOT_SOURCE: 7,
+    GuiAutoActionType.DOMROOT_GET_FULL_SOURCE: 7,
+    GuiAutoActionType.DOMROOT_GET_INNER_SOURCE: 7,
+    GuiAutoActionType.DOMROOT_GET_TEXT: 7,
     
     GuiAutoActionType.FRAME_FOCUS: 8,
     GuiAutoActionType.FRAME_CREATE_FRAME: 8,
     GuiAutoActionType.FRAME_GET_PARENT: 8,
-    GuiAutoActionType.FRAME_GET_SOURCE: 8,
+    GuiAutoActionType.FRAME_GET_ROOT_SOURCE: 8,
     GuiAutoActionType.FRAME_GET_FULL_SOURCE: 8,
     GuiAutoActionType.FRAME_GET_INNER_SOURCE: 8,
     GuiAutoActionType.FRAME_GET_TEXT: 8,

@@ -189,7 +189,7 @@ class GuiElement(BaseElement, ElementConfig):
         self.find_if_not_found()
         return self.__source_parser.get_text_content()
 
-    def get_source(self):
+    def get_root_source(self):
         self.find_if_not_found()
-        return self.__source_parser.get_source()
+        return self.__source_parser.get_root_source()
 
