@@ -18,9 +18,11 @@ class GuiAutomatorHandler(Handler):
         self.__automator.launch()
 
     def take_action(self, action_type, json_args):
-        action_id = HANDLER_MAP[action_type]
+        action_str = self.get_orig_gui_component_type(json_args)
+        action_str += self.process_action_type(action_type, json_args)
+        action_id = HANDLER_MAP[GuiInternalActionType[action_str]]
         method_name, replaceable = HANDLER_NAME_MAP[action_id]
-        return getattr(self, method_name)(action_type.name.replace(replaceable, "").lower(), json_args)
+        return getattr(self, method_name)(action_str.replace(replaceable, "").lower(), json_args)
 
     def take_direct_action(self, action, json_args):
         return getattr(self, action)(**json_args)
@@ -75,20 +77,16 @@ class GuiAutomatorHandler(Handler):
     def define_main_window(self):
         return {"elementSetuId" : self.automator.main_window.setu_id}
 
-    def get_root_source(self):
-        return {"value" : self.automator.get_root_source()}
-
-    def get_full_source(self):
-        return {"value" : self.automator.get_full_source()}
-
-    def get_inner_source(self):
-        return {"value" : self.automator.get_inner_source()}
-
-    def get_text(self):
-        return {"value" : self.automator.get_text()}
+    def get_source(self):
+        return {"textBlobSetuId" : self.automator.get_source().setu_id}
 
     def set_slomo(self, on, interval=None):
         self.automator.set_slomo(on, None)
+
+    def take_source_action(self, action, json_dict):
+        source_setu_id = self.get_text_blob_setu_id(json_dict)
+        source =  self.automator.get_source_for_setu_id(source_setu_id)
+        return getattr(SourceHandler, action)(source, **json_dict)
 
     def take_window_action(self, action, json_dict):
         elem_setu_id = self.get_element_setuid(json_dict)
@@ -209,20 +207,25 @@ class ElementHandler:
         element.configure(elementConfig)
 
     @classmethod
-    def get_root_source(cls, element):
-        return {"value" : element.get_root_source()}
+    def get_source(cls, element):
+        return {"textBlobSetuId" : element.get_source().setu_id}
+
+class SourceHandler:
+    @classmethod
+    def get_root_content(cls, source):
+        return {"value" : source.get_root_source()}
 
     @classmethod
-    def get_full_source(cls, element):
-        return {"value" : element.get_full_source()}
+    def get_full_content(cls, source):
+        return {"value" : source.get_full_content()}
 
     @classmethod
-    def get_inner_source(cls, element):
-        return {"value" : element.get_inner_source()}
+    def get_inner_content(cls, source):
+        return {"value" : source.get_inner_content()}
 
     @classmethod
-    def get_text(cls, element):
-        return {"value" : element.get_text()}
+    def get_text_content(cls, source):
+        return {"value" : source.get_text_content()}
 
 class MultiElementHandler:
 
@@ -351,7 +354,7 @@ class WindowHandler:
     def get_title(cls, window):
         return {"title" : window.get_title()}
 
-class MainWindowHandler:
+class MainWindowHandler(WindowHandler):
 
     @classmethod
     def maximize(cls, window):
@@ -365,7 +368,7 @@ class MainWindowHandler:
     def get_latest_child_window(self, window):
         return {"elementSetuId" : window.get_latest_child_window().setu_id}
 
-class ChildWindowHandler:
+class ChildWindowHandler(WindowHandler):
 
     @classmethod
     def close(cls, window):

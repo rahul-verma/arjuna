@@ -2,6 +2,7 @@ import re
 import os
 from lxml import etree, html
 from io import StringIO
+from arjuna.setu.types import SetuManagedObject
 
 def process_child_html(in_str):
     processed = os.linesep.join([l for l in in_str.splitlines() if l.strip()])
@@ -16,9 +17,10 @@ def empty_or_none(in_str):
     else:
         return in_str is None
 
-class ElementXMLSourceParser:
+class ElementXMLSourceParser(SetuManagedObject):
 
     def __init__(self, source, root_element="body"):
+        super().__init__()
         print(source)
         self.__source = source
         parser = etree.HTMLParser(remove_comments=True)
@@ -71,13 +73,13 @@ class ElementXMLSourceParser:
             else:
                 raise Exception("Attribute {} not found for element".format(attr_name))
 
-    def get_root_source(self):
+    def get_root_content(self):
         return self.__self_source
 
-    def get_inner_source(self):
+    def get_inner_content(self):
         return self.__inner_html
 
-    def get_full_source(self):
+    def get_full_content(self):
         return self.__full_source
 
     def get_text_content(self):

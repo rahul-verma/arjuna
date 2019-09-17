@@ -9,6 +9,7 @@ class GuiElement(BaseElement, ElementConfig):
         from .element_conditions import GuiElementConditions
         self.__conditions_handler = GuiElementConditions(self)
         self.__source_parser = None
+        self.__automator = automator
 
     def __get_attr_value_from_remote(self, attr, optional=False):
         return self.__return_attr_value(self.dispatcher.get_attr_value(attr, optional))
@@ -18,6 +19,7 @@ class GuiElement(BaseElement, ElementConfig):
 
     def load_source_parser(self):
         self.__source_parser = ElementXMLSourceParser(self.__get_source_from_remote())
+        self.__automator.update_source_map(self.__source_parser)
 
     def find(self):
         self.parent_container.find_element(self)
@@ -177,19 +179,7 @@ class GuiElement(BaseElement, ElementConfig):
         else:
             return self.__source_parser.get_attr_value(attr, optional)
 
-    def get_full_source(self):
+    def get_source(self):
         self.find_if_not_found()
-        return self.__source_parser.get_full_source()
-
-    def get_inner_source(self):
-        self.find_if_not_found()
-        return self.__source_parser.get_inner_source()
-
-    def get_text(self):
-        self.find_if_not_found()
-        return self.__source_parser.get_text_content()
-
-    def get_root_source(self):
-        self.find_if_not_found()
-        return self.__source_parser.get_root_source()
+        return self.__source_parser
 

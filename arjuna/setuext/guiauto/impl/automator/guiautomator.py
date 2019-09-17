@@ -27,12 +27,20 @@ class GuiAutomator(ElementContainer):
         self.__browser = None
 
         self.__source_parser = None
+        self.__all_source_map = {}
 
     def __get_source_from_remote(self):
         return self.dispatcher.get_source()
 
+    def update_source_map(self, source):
+        self.__all_source_map[source.setu_id] = source
+
+    def get_source_for_setu_id(self, id):
+        return self.__all_source_map[id]
+
     def load_source_parser(self):
         self.__source_parser = ElementXMLSourceParser(self.__get_source_from_remote(), root_element="html")
+        self.update_source_map(self.__source_parser)
 
     def _create_element_flat_or_nested(self, locator_meta_data):
         from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
@@ -125,18 +133,6 @@ class GuiAutomator(ElementContainer):
     def add_frame(self, frame):
         self._add_element(frame.setu_id, frame)
 
-    def get_full_source(self):
+    def get_source(self):
         self.load_source_parser()
-        return self.__source_parser.get_full_source()
-
-    def get_root_source(self):
-        self.load_source_parser()
-        return self.__source_parser.get_root_source()
-
-    def get_inner_source(self):
-        self.load_source_parser()
-        return self.__source_parser.get_inner_source()
-
-    def get_text(self):
-        self.load_source_parser()
-        return self.__source_parser.get_text_content()
+        return self.__source_parser

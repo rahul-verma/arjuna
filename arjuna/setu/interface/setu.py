@@ -46,11 +46,11 @@ class SetuSvc(Resource):
     def post(self):
         json_dict = request.get_json(force=True)
         Setu.get_logger().debug("Setu Action Request: {}".format(json_dict))
-        json_component = json_dict["component"]
+        json_component = json_dict["arjunaComponent"]
         json_action = json_dict["action"]
         action_type = None
         try:
-            action_type = component_action_map[json_component][json_action.strip().upper()]
+            action_type = component_action_map[json_component.strip().upper()][json_action.strip().upper()]
         except:
             return {'result': 'error', 'emessage': 'Invalid Setu action: Component: {} Action: {}'.format(json_component, json_action), 'etrace': 'NA'}, 500
         else:
@@ -135,13 +135,13 @@ class SetuSvc(Resource):
         return ts_handler.datasource_handler.take_action(action_type, json_args)
 
     def _handle_gui_automator_action(self, ts_handler, action_type, json_args):
-        if action_type == GuiAutoActionType.LAUNCH_AUTOMATOR:
+        if action_type == GuiAutoActionType.LAUNCH:
             config = ts_handler.conf_handler.configurator.get_config(Handler.get_config_setuid(json_args))
             automator_handler = GuiAutomatorHandler(ts_handler.dispatcher)
             automator_handler.launch_automator(config, **json_args)
             ts_handler.register_gui_automator_handler(automator_handler)
             return {'automatorSetuId' : automator_handler.setu_id}
-        elif action_type == GuiAutoActionType.QUIT_AUTOMATOR:
+        elif action_type == GuiAutoActionType.QUIT:
             handler = ts_handler.get_automator_handler(json_args)
             handler.quit_automator()
             ts_handler.deregister_gui_automator_handler(handler) 
