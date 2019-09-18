@@ -46,7 +46,7 @@ class GuiAutomatorHandler(Handler):
         elem = self.automator.create_element(emd)
         return {"elementSetuId" : elem.setu_id}
 
-    def define_multielement(self, locators):
+    def define_multi_element(self, locators):
         elem = self.automator.create_multielement(GuiElementMetaData.createEMD(locators))
         return {"elementSetuId" : elem.setu_id}
 
@@ -127,7 +127,7 @@ class GuiAutomatorHandler(Handler):
             element =  self.automator.get_element_for_setu_id(elem_setu_id)
         return getattr(ElementHandler, action)(element, **json_dict)
 
-    def take_multielement_action(self, action, json_dict):
+    def take_multi_element_action(self, action, json_dict):
         elem_setu_id = self.get_element_setuid(json_dict)
         multi_element =  self.automator.get_multielement_for_setu_id(elem_setu_id)
         return getattr(MultiElementHandler, action)(multi_element, **json_dict)
@@ -213,7 +213,7 @@ class ElementHandler:
 class SourceHandler:
     @classmethod
     def get_root_content(cls, source):
-        return {"value" : source.get_root_source()}
+        return {"value" : source.get_root_content()}
 
     @classmethod
     def get_full_content(cls, source):
@@ -411,7 +411,7 @@ class BrowserHandler:
         browser.refersh()
 
     @classmethod
-    def execute_javascript(self, browser, script):
+    def execute_script(self, browser, script):
         browser.execute_javascript(script) 
 
 class DomRootHandler:

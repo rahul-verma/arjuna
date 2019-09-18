@@ -4,7 +4,7 @@ from enum import Enum, auto
 class GuiInternalActionType(Enum):
 
     DEFINE_ELEMENT  = auto()
-    DEFINE_MULTIELEMENT  = auto()
+    DEFINE_MULTI_ELEMENT  = auto()
     DEFINE_DROPDOWN  = auto()
     DEFINE_RADIOGROUP = auto()
     DEFINE_ALERT = auto()
@@ -22,7 +22,7 @@ class GuiInternalActionType(Enum):
     BROWSER_GO_BACK = auto()
     BROWSER_GO_FORWARD = auto()
     BROWSER_REFRESH = auto()
-    BROWSER_EXECUTE_JAVASCRIPT = auto()
+    EXECUTE_SCRIPT = auto()
     
     DEFINE_MAIN_WINDOW = auto()
     SET_SLOMO = auto()
@@ -54,8 +54,8 @@ class GuiInternalActionType(Enum):
 
     ELEMENT_CONFIGURE = auto()
 
-    MULTIELEMENT_GET_INSTANCE_COUNT = auto()
-    MULTIELEMENT_GET_RANDOM_INDEX = auto()
+    MULTI_ELEMENT_GET_INSTANCE_COUNT = auto()
+    MULTI_ELEMENT_GET_RANDOM_INDEX = auto()
     
     DROPDOWN_CONFIGURE = auto()
     DROPDOWN_SET_OPTION_LOCATORS = auto()
@@ -123,12 +123,12 @@ HANDLER_NAME_MAP = {
     9 : ("take_source_action", "WINDOW_"),
     10 : ("take_main_window_action", "MAIN_WINDOW_"),
     11 : ("take_child_window_action", "CHILD_WINDOW_"),
-    12 : ("take_multielement_action", "MULTIELEMENT_"),
+    12 : ("take_multi_element_action", "MULTI_ELEMENT_"),
 }
 
 HANDLER_MAP = {
     GuiInternalActionType.DEFINE_ELEMENT : 1,
-    GuiInternalActionType.DEFINE_MULTIELEMENT : 1,
+    GuiInternalActionType.DEFINE_MULTI_ELEMENT : 1,
     GuiInternalActionType.DEFINE_DROPDOWN : 1,
     GuiInternalActionType.DEFINE_RADIOGROUP: 1,
     GuiInternalActionType.DEFINE_ALERT: 1,
@@ -146,7 +146,7 @@ HANDLER_MAP = {
     GuiInternalActionType.BROWSER_GO_BACK: 2,
     GuiInternalActionType.BROWSER_GO_FORWARD: 2,
     GuiInternalActionType.BROWSER_REFRESH: 2,
-    GuiInternalActionType.BROWSER_EXECUTE_JAVASCRIPT: 2,
+    GuiInternalActionType.EXECUTE_SCRIPT: 2,
     
     GuiInternalActionType.DEFINE_MAIN_WINDOW: 1,
     GuiInternalActionType.SET_SLOMO: 1,
@@ -178,8 +178,8 @@ HANDLER_MAP = {
 
     GuiInternalActionType.ELEMENT_CONFIGURE: 4,
 
-    GuiInternalActionType.MULTIELEMENT_GET_INSTANCE_COUNT: 12,
-    GuiInternalActionType.MULTIELEMENT_GET_RANDOM_INDEX: 12,
+    GuiInternalActionType.MULTI_ELEMENT_GET_INSTANCE_COUNT: 12,
+    GuiInternalActionType.MULTI_ELEMENT_GET_RANDOM_INDEX: 12,
     
     GuiInternalActionType.DROPDOWN_CONFIGURE: 5,
     GuiInternalActionType.DROPDOWN_SET_OPTION_LOCATORS: 5,
