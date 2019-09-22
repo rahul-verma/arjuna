@@ -22,7 +22,7 @@ The features listed here which are marked as done are available in source code o
     * setOptionContainer - To handle custom Dropdown controls like those in Bootstrap.
     * setOptionLocators - To handle with custom drop down controls implemented using div tags.
     * sendOptionText - To handle unstable drop down lists with a lot of options.
-4. Reduction in GuiActionType options
+4. Reduction in GuiActionType options - Done
     * To control the number of actions, the actions are now qualified with origGuiComponentType JSON parameter in Setu protocol.
     * This measure is to simplify client bindings code by reducing number and complexity of methods needed to be implemented.
     * No impact on test author's code.
