@@ -11,15 +11,13 @@ class GuiWebRadioGroup(SetuManagedObject, ElementConfig):
         self._radios = element_container.create_multielement(emd)
         self.__found = False
 
-    def __validate_radio_buttons(self, tags):
-        if [t for t in tags if t.strip().lower() != 'input']:
+    def __validate_radio_buttons(self, source):
+        if [t for t in source.get_tag_names() if t.strip().lower() != 'input']:
             raise Exception("Not a valid radio group. Contains non-input elements.")
-        types = self._radios.get_attr_values("type")
-        if [t for t in types if t.strip().lower() != 'radio']:
+        if [t for t in source.get_attr_values("type") if t.strip().lower() != 'radio']:
             raise Exception("Not a valid radio group. Contains non-radio elements.")
-        names = self._radios.get_attr_values("name")
-        refer_name = names[0]
-        if [n for n in names if n != refer_name]:
+        names = source.get_attr_values("name")
+        if len(set(names)) != 1:
             raise Exception("Not a valid radio group. Contains radio elements belonging to different radio groups.")
 
     def is_found(self):
@@ -31,8 +29,9 @@ class GuiWebRadioGroup(SetuManagedObject, ElementConfig):
     def __find_if_not_found(self):
         if not self.is_found():
             # This would force the identification of partial elements in the wrapped multi-element.
-            tags = self._radios.get_tag_names()
-            self.__check_type_if_configured(tags)
+            self._radios.find()
+            source = self._radios.get_source(refind=False)
+            self.__check_type_if_configured(source)
             self._radios.configure_partial_elements(self.settings)
             self.__found = True
 
@@ -47,7 +46,7 @@ class GuiWebRadioGroup(SetuManagedObject, ElementConfig):
     def get_first_selected_option_value(self):
         self.__find_if_not_found()
         instance = self._radios.get_first_selected_instance()
-        return instance.get_attr_value("value")
+        return instance.get_source(refind=False, reload=False).get_attr_value("value")
 
     def __select_option(self, option):
         option.select()

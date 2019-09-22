@@ -26,7 +26,6 @@ class GuiElement(BaseElement, ElementConfig):
 
     def find(self):
         self.parent_container.find_element(self)
-        self.load_source_parser()
 
     identify = find
 
@@ -171,19 +170,14 @@ class GuiElement(BaseElement, ElementConfig):
     def __wait_until_clickable_if_configured(self):
         if self._should_check_pre_state(): self.wait_until_clickable()
 
-    def get_tag_name(self):
-        self.find_if_not_found()
-        return self.__source_parser.get_tag_name()
-
-    def get_attr_value(self, attr, optional=False):
-        self.find_if_not_found()
-        if not self.__source_parser.is_attr_present(attr):
-            return self.__get_attr_value_from_remote(attr, optional)
-        else:
-            return self.__source_parser.get_attr_value(attr, optional)
-
-    def get_source(self, refind=True):
+    def get_source(self, refind=True, reload=True):
         if refind:
             self.find_if_not_found()
+        if reload:
+            self.load_source_parser()
         return self.__source_parser
+
+    def get_property_value(self, attr):
+        self.find_if_not_found()
+        return self.__get_attr_value_from_remote(attr)
 

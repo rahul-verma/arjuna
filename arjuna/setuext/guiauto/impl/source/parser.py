@@ -90,8 +90,11 @@ class ElementXMLSourceParser(SetuManagedObject):
 
 class MultiElementSource(SetuManagedObject):
 
-    def __init__(self, instances):
+    def __init__(self):
         super().__init__()
+        self.__instances = None
+
+    def load(self, instances):
         self.__instances = instances
 
     def get_full_content(self):
@@ -106,6 +109,18 @@ class MultiElementSource(SetuManagedObject):
     def get_root_content(self):
         return os.linesep.join([e.get_source().get_root_content() for e in self.__instances])
 
+    def get_tag_names(self):
+        return [e.get_source().get_tag_name() for e in self.__instances]
+
+    def get_text_contents(self):
+        return [e.get_source().get_text_content() for e in self.__instances]
+
+    def get_values(self):
+        return [e.get_source().get_attr_value("value") for e in self.__instances]
+
+    def get_attr_values(self, attr):
+        return [e.get_source().get_attr_value(attr) for e in self.__instances]
+
 class FrameSource(SetuManagedObject):
 
     def __init__(self, frame):
@@ -114,9 +129,16 @@ class FrameSource(SetuManagedObject):
         self.__root_source = None
         self.__html_source = None
 
+    def set_root_source(self, src):
+        '''
+        Once frame switch takes place, this source can not be got. Hence needs to happen
+        explicitly at the time of wrapped element finding.
+        '''
+        self.__root_source = src
+
     def load(self):
         self.__frame.focus()
-        self.__root_source, self.__html_source = self.__frame._get_all_sources()
+        self.__html_source = self.__frame._get_html_content_from_remote()
 
     def get_full_content(self):
         return self.get_root_content() + self.get_inner_content()
@@ -128,5 +150,5 @@ class FrameSource(SetuManagedObject):
         return self.__html_source.get_text_content()
 
     def get_root_content(self):
-        return self.__root_source.get_root_content()
+        return self.__root_source
 

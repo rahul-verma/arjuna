@@ -25,15 +25,19 @@ class GuiMultiElement(BaseElement):
 
     def find(self):
         self.parent_container.find_multielement(self)
-        self.__source_parser = MultiElementSource(self.__instances)
-        self.__automator.update_source_map(self.__source_parser)
 
     #Override
     def find_if_not_found(self):
         if not self.is_found():
             self.find()
-            for instance in self.__instances:
-                instance.load_source_parser()
+
+    def load_source_parser(self):
+        if not self.__source_parser:
+            self.__source_parser = MultiElementSource()
+            self.__automator.update_source_map(self.__source_parser)
+        for instance in self.__instances:
+            instance.load_source_parser()
+        self.__source_parser.load(self.__instances)
 
     def set_instance_count(self, count):
         self.instance_count = count
@@ -75,22 +79,6 @@ class GuiMultiElement(BaseElement):
         else:
             return None
 
-    def get_tag_names(self):
-        self.find_if_not_found()
-        return [instance.get_tag_name() for instance in self.__instances]
-
-    def get_text_contents(self):
-        self.find_if_not_found()
-        return [instance.get_source().get_text_content() for instance in self.__instances]
-
-    def get_values(self):
-        self.find_if_not_found()
-        return [instance.get_attr_value("value") for instance in self.__instances]
-
-    def get_attr_values(self, attr):
-        self.find_if_not_found()
-        return [instance.get_attr_value(attr=attr) for instance in self.__instances]
-
     def are_selected(self):
         self.find_if_not_found()
         return [instance.is_selected() for instance in self.__instances]
@@ -113,7 +101,8 @@ class GuiMultiElement(BaseElement):
 
     def __get_all_texts(self):
         self.find_if_not_found()
-        texts = self.get_text_contents()
+        self.load_source_parser()
+        texts = self.__source_parser.get_text_contents()
         return texts
 
     def __find_first_text_index(self, texts, text):
@@ -124,7 +113,8 @@ class GuiMultiElement(BaseElement):
 
     def __get_all_values(self):
         self.find_if_not_found()
-        values = self.get_values()
+        self.load_source_parser()
+        values = self.__source_parser.get_values()
         return values
 
     def __find_first_value_index(self, values, value):
@@ -135,6 +125,7 @@ class GuiMultiElement(BaseElement):
 
     def get_first_selected_instance(self):
         self.find_if_not_found()
+        self.load_source_parser()
         booleans = self.are_selected()
         first_index = None
         try:
@@ -144,8 +135,11 @@ class GuiMultiElement(BaseElement):
         else:
             return self.get_instance_at_index(first_index)
 
-    def get_source(self):
-        self.find_if_not_found()
+    def get_source(self, refind=True, reload=True):
+        if refind:
+            self.find_if_not_found()
+        if reload:
+            self.load_source_parser()
         return self.__source_parser
 
 class _GuiPartialElement(GuiElement):

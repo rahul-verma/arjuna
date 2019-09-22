@@ -44,14 +44,16 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
         if not self.is_found():
             # This would force the identification of partial elements in the wrapped multi-element.
             self._wrapped_main_element.configure(self.settings)
-            tag = self._wrapped_main_element.get_tag_name()
+            self._wrapped_main_element.find()
+            tag = self._wrapped_main_element.get_source(refind=False).get_tag_name()
             self.__check_type_if_configured(tag)
             self.__load_options()
             self.__options.configure_partial_elements(self.settings)
             self.__found = True
 
     def __is_multi_select(self):
-        return self._wrapped_main_element.get_attr_value("multiple", optional=True) is True or self._wrapped_main_element.get_attr_value("multi", optional=True) is True
+        source = self._wrapped_main_element.get_source(refind=False)
+        return source.get_attr_value("multiple", optional=True) is True or source.get_attr_value("multi", optional=True) is True
 
     def is_multi_select(self):
         return self._multi
