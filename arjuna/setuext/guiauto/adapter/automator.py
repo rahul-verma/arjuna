@@ -344,6 +344,11 @@ class MainWindowHandler(WindowHandler):
     def get_latest_child_window(self, window):
         return {"elementSetuId" : window.get_latest_child_window().setu_id}
 
+    @classmethod
+    def define_child_window(self, window, locators):
+        print(locators)
+        return {"elementSetuId" : window.define_child_window(GuiElementMetaData.createEMD(locators)).setu_id}
+
 class ChildWindowHandler(WindowHandler):
 
     @classmethod

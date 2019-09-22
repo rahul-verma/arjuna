@@ -69,6 +69,8 @@ class WebLocateWith(Enum):
     TYPE = auto() 
     VALUE = auto() 
     IMAGE_SRC = auto()
+    WINDOW_TITLE = auto()
+    PARTIAL_WINDOW_TITLE = auto()
 
 class GenericLocateWith(Enum):
     ID = auto()
@@ -90,6 +92,9 @@ class GenericLocateWith(Enum):
     IMAGE_SRC = auto()
     IMAGE = auto()
     INDEX = auto()
+    WINDOW_TITLE = auto()
+    PARTIAL_WINDOW_TITLE = auto()
+    CHILD_LOCATOR = auto()
 
 class Locator:
 
@@ -114,6 +119,9 @@ class Locator:
     def __str__(self):
         return str(vars(self))
 
+    def is_layered_locator(self):
+        return False
+
 class GuiGenericLocator(Locator):
 
     def __init__(self, ltype, lvalue, args_type=None, args=None):
@@ -121,6 +129,16 @@ class GuiGenericLocator(Locator):
     
     def set_value(self, value):
         self.lvalue = value
+
+class GuiGenericChildLocator(Locator):
+    def __init__(self, ltype, lvalue, args_type=None, args=None):
+        super().__init__(ltype, lvalue, args_type, args)
+    
+    def set_value(self, value):
+        self.lvalue = value    
+
+    def is_layered_locator(self):
+        return True
 
 class GuiElementType(Enum):
     TEXTBOX = auto()
@@ -147,6 +165,8 @@ class GuiElementMetaData:
         GenericLocateWith.TAG_NAME,
         GenericLocateWith.IMAGE,
         GenericLocateWith.INDEX,
+        GenericLocateWith.WINDOW_TITLE,
+        GenericLocateWith.PARTIAL_WINDOW_TITLE
     }
 
     XTYPE_LOCATORS = {
@@ -206,7 +226,9 @@ class GuiElementMetaData:
             except:
                 raise Exception("Invalid locator across all automators: {}".format(rltype))
             else:
-                if generic_locate_with in self.BASIC_LOCATORS:
+                if generic_locate_with == GenericLocateWith.CHILD_LOCATOR:
+                    self.__add_locator(generic_locate_with, rlvalue, args_type, args)
+                elif generic_locate_with in self.BASIC_LOCATORS:
                     self.__add_locator(generic_locate_with, rlvalue, args_type, args)
                 elif generic_locate_with in self.XPATH_LOCATORS:
                     self.__add_locator(GenericLocateWith.XPATH, self.XPATH_LOCATORS[generic_locate_with].format(rlvalue), args_type, args)
@@ -235,6 +257,9 @@ class GuiElementMetaData:
     def process_args(self):
         pattern = r"(%\w+%)"
         for locator in self.locators:
+            if locator.ltype == GenericLocateWith.CHILD_LOCATOR:
+                locator.lvalue.process_args()
+
             if not locator.args_type: continue
 
             fmt_locator_value = locator.lvalue
@@ -252,19 +277,30 @@ class GuiElementMetaData:
 
             locator.set_value(fmt_locator_value)
 
+
     @classmethod
-    def createEMD(self, locators):
+    def __process_single_raw_locator(cls, locator):
+        p_locator = None
+        ltype = locator["withType"]
+        lvalue = locator["withValue"]
+        args_type = None
+        args = None
+        if "argsType" in locator:
+            args_type = ArgsType[locator["argsType"]]
+            args = locator["args"]
+        p_locator = Locator(ltype=ltype, lvalue=lvalue, args_type=args_type, args=args)
+        return p_locator
+
+    @classmethod
+    def createEMD(cls, locators):
         processed_locators = []
         for locator in locators:
-            p_locator = None
-            ltype = locator["withType"]
-            lvalue = locator["withValue"]
-            args_type = None
-            args = None
-            if "argsType" in locator:
-                args_type = ArgsType[locator["argsType"]]
-                args = locator["args"]
-            p_locator = Locator(ltype=ltype, lvalue=lvalue, args_type=args_type, args=args)
+            ltype = locator["withType"].lower()
+            if ltype == "child_locator":
+                child_locator = cls.createEMD([locator["withValue"]])
+                p_locator = Locator(ltype=locator["withType"], lvalue=child_locator)
+            else:
+                p_locator = cls.__process_single_raw_locator(locator)
             processed_locators.append(p_locator)
         return GuiElementMetaData(processed_locators)
 

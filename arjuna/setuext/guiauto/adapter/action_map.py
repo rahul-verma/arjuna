@@ -91,7 +91,7 @@ class GuiInternalActionType(Enum):
     MAIN_WINDOW_FOCUS = auto()
     MAIN_WINDOW_GET_TITLE = auto()
     MAIN_WINDOW_MAXIMIZE = auto()
-    MAIN_WINDOW_CREATE_CHILD_WINDOW = auto()
+    MAIN_WINDOW_DEFINE_CHILD_WINDOW = auto()
     MAIN_WINDOW_GET_LATEST_CHILD_WINDOW = auto()
     MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS = auto()
 
@@ -203,7 +203,7 @@ HANDLER_MAP = {
     GuiInternalActionType.MAIN_WINDOW_FOCUS: 10,  
     GuiInternalActionType.MAIN_WINDOW_GET_TITLE: 10, 
     GuiInternalActionType.MAIN_WINDOW_MAXIMIZE: 10,
-    GuiInternalActionType.MAIN_WINDOW_CREATE_CHILD_WINDOW: 10,
+    GuiInternalActionType.MAIN_WINDOW_DEFINE_CHILD_WINDOW: 10,
     GuiInternalActionType.MAIN_WINDOW_GET_LATEST_CHILD_WINDOW: 10,
     GuiInternalActionType.MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS: 10,
 

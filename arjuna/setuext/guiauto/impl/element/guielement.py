@@ -27,6 +27,9 @@ class GuiElement(BaseElement, ElementConfig):
     def find(self):
         self.parent_container.find_element(self)
 
+    def find_without_wait(self):
+        self.parent_container.find_element_without_wait(self)
+
     identify = find
 
     #Override

@@ -1,6 +1,7 @@
 from arjuna.setu.types import SetuManagedObject
 from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
 from arjuna.tpi.enums import ArjunaOption
+from arjuna.setuext.guiauto.impl.locator.emd import SimpleGuiElementMetaData
 
 class BasicWindow(SetuManagedObject):
 
@@ -100,22 +101,29 @@ class MainWindow(BasicWindow):
         else:
             return self.__setu_id_map[setu_id]
 
-    def get_window_for_locator(self, locator_type, locator_value):
+    def define_child_window(self, locator_meta_data):
         all_child_handles, _ = self.get_all_child_window_handles()
         for handle in all_child_handles:
             cwin = self.__get_child_window(handle)
             cwin.focus()
-            if locator_type.lower() == "window_title":
-                if cwin.get_title() == locator_value:
-                    return cwin
-                else:
-                    try:
-                        element = self.automator.create_element_with_locator(locator_type, locator_value)
-                        element.find()
+            for locator in locator_meta_data.locators:
+                if locator.ltype.name == "WINDOW_TITLE":
+                    if cwin.get_title().lower() == locator.lvalue.lower():
                         return cwin
-                    except:
-                        continue
-        raise Exception("No child window contains an element with locator type: {} and locator value: {}".format(locator_type, locator_value))
+                elif locator.ltype.name == "PARTIAL_WINDOW_TITLE":
+                    if locator.lvalue.lower() in cwin.get_title().lower():
+                        return cwin
+                elif locator.ltype.name == "CHILD_LOCATOR":
+                    for child_locator in locator.lvalue.locators:
+                        try:
+                            emd = SimpleGuiElementMetaData(child_locator.ltype.name, child_locator.lvalue)
+                            contained_element = self.automator.create_element(emd)
+                            contained_element.find()
+                            return cwin
+                        except Exception as e:
+                            print(e)
+                            continue
+        raise Exception("No child window found for locators: {}".format([str(l) for l in locator_meta_data.locators]))
 
     def __resize_window_as_per_config(self):
         # Resize window
