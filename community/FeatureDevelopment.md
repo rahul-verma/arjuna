@@ -39,6 +39,7 @@ The features listed here which are marked as done are available in source code o
 11. wait for Absence, Invisible and Disabled
 
 ## Phase 2 - Completion of Pending Core Framework Features in Arjuna - Nov 29, 2019
+* Explicit wait in Arjuna Setu for Frames and Windows, which works under the total limit of gui max wait.
 * Names of CLI options to be changed to baseline and extended
 * Classification of Errors and Exceptions
 * Single Context GNS
