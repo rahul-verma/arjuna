@@ -22,7 +22,16 @@ The features listed here which are marked as done are available in source code o
     * setOptionContainer - To handle custom Dropdown controls like those in Bootstrap.
     * setOptionLocators - To handle with custom drop down controls implemented using div tags.
     * sendOptionText - To handle unstable drop down lists with a lot of options.
-4. Load specific pieces of DOM belonging to an GUI component - Element, DropDown, RadioGroup, Frame, DomRoot
+4. Reduction in GuiActionType options
+    * To control the number of actions, the actions are now qualified with origGuiComponentType JSON parameter in Setu protocol.
+    * This measure is to simplify client bindings code by reducing number and complexity of methods needed to be implemented.
+    * No impact on test author's code.
+4. GuiSource abstraction - Done
+    * Created a Source() method for Gui automator and other Gui components.
+    * Dealing with precise parts of source, for example, root content, inner content etc should be provided by Source service.
+    * This measure is critical to keep number of API calls in client bindings in control.
+    * In future, it also creates the basis for TextBlob parsing as a service.
+    * There is a slight impact on the test author code. Rather than component.getSource(), the test author would write component.Souce().getFullContent(). Rest of the provisions that were earlier not available at all, are an add-on thereby making it consistent across all gui components. For now getRootContent(), getInnerContent() and getTextContent() methods are other methods supported by GuiSource interface.
 4. Finding Frames based on content
 5. Finding Windows based on content
 6. Action Chains - Named method for common inetractions
