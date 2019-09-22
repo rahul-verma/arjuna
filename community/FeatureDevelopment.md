@@ -32,6 +32,7 @@ The features listed here which are marked as done are available in source code o
     * This measure is critical to keep number of API calls in client bindings in control.
     * In future, it also creates the basis for TextBlob parsing as a service.
     * There is a slight impact on the test author code. Rather than component.getSource(), the test author would write component.Souce().getFullContent(). Rest of the provisions that were earlier not available at all, are an add-on thereby making it consistent across all gui components. For now getRootContent(), getInnerContent() and getTextContent() methods are other methods supported by GuiSource interface.
+4. Bug Fix: Arjuna-Java client does not send unicode strings properly to Setu. - Done
 5. Advanced Window Finding
     * Based on Title
     * Based on partial Title
