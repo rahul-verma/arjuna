@@ -2,7 +2,6 @@ from arjuna.setu.types import SetuManagedObject
 from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
 from arjuna.setuext.guiauto.impl.locator.emd import SimpleGuiElementMetaData
 from .base_element import ElementConfig
-from arjuna.setuext.guiauto.impl.source.parser import ElementXMLSourceParser
 
 # UUID is for client reference. Agent does not know about this.
 class GuiWebSelect(SetuManagedObject, ElementConfig):
@@ -81,7 +80,7 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
     def get_first_selected_option_text(self):
         self.__find_if_not_found()
         option = self.__options.get_first_selected_instance()
-        return option.get_text_content()
+        return option.get_source().get_text_content()
 
     def __select_option(self, option):
         self._wrapped_main_element.click()
@@ -159,18 +158,6 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
     def deselect_by_visible_texts(self, text_list):
         pass
 
-    def get_full_source(self):
+    def get_source(self):
         self.__find_if_not_found()
-        return self.__get_root_element().get_full_source()
-
-    def get_inner_source(self):
-        self.__find_if_not_found()
-        return self.__get_root_element().get_inner_source()
-
-    def get_text(self):
-        self.__find_if_not_found()
-        return self.__get_root_element().get_text()
-
-    def get_root_source(self):
-        self.__find_if_not_found()
-        return self.__get_root_element().get_root_source()
+        return self.__get_root_element().get_source()

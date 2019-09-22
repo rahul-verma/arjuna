@@ -69,10 +69,7 @@ class GuiInternalActionType(Enum):
     DROPDOWN_SELECT_BY_INDEX = auto()
     DROPDOWN_SELECT_BY_VISIBLE_TEXT = auto()
     DROPDOWN_SEND_OPTION_TEXT = auto()
-    DROPDOWN_GET_ROOT_SOURCE = auto()
-    DROPDOWN_GET_FULL_SOURCE = auto()
-    DROPDOWN_GET_INNER_SOURCE = auto()
-    DROPDOWN_GET_TEXT = auto()
+    DROPDOWN_GET_SOURCE = auto()
 
     RADIOGROUP_HAS_VALUE_SELECTED = auto()
     RADIOGROUP_HAS_INDEX_SELECTED = auto()
@@ -80,25 +77,16 @@ class GuiInternalActionType(Enum):
     RADIOGROUP_SELECT_BY_INDEX = auto()
     RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE  = auto()
     RADIOGROUP_CONFIGURE  = auto()
-    RADIOGROUP_GET_ROOT_SOURCE = auto()
-    RADIOGROUP_GET_FULL_SOURCE = auto()
-    RADIOGROUP_GET_INNER_SOURCE = auto()
-    RADIOGROUP_GET_TEXT = auto()
+    RADIOGROUP_GET_SOURCE = auto()
 
     DOMROOT_FOCUS = auto()
-    DOMROOT_CREATE_FRAME = auto()
-    DOMROOT_GET_ROOT_SOURCE = auto()
-    DOMROOT_GET_FULL_SOURCE = auto()
-    DOMROOT_GET_INNER_SOURCE = auto()
-    DOMROOT_GET_TEXT = auto()
+    DOMROOT_DEFINE_FRAME = auto()
+    DOMROOT_GET_SOURCE = auto()
     
     FRAME_FOCUS = auto()
-    FRAME_CREATE_FRAME = auto()
+    FRAME_DEFINE_FRAME = auto()
     FRAME_GET_PARENT = auto()
-    FRAME_GET_ROOT_SOURCE = auto()
-    FRAME_GET_FULL_SOURCE = auto()
-    FRAME_GET_INNER_SOURCE = auto()
-    FRAME_GET_TEXT = auto()
+    FRAME_GET_SOURCE = auto()
     
     MAIN_WINDOW_FOCUS = auto()
     MAIN_WINDOW_GET_TITLE = auto()
@@ -182,6 +170,7 @@ HANDLER_MAP = {
     GuiInternalActionType.MULTI_ELEMENT_GET_RANDOM_INDEX: 12,
     
     GuiInternalActionType.DROPDOWN_CONFIGURE: 5,
+    GuiInternalActionType.DROPDOWN_GET_SOURCE: 5,
     GuiInternalActionType.DROPDOWN_SET_OPTION_LOCATORS: 5,
     GuiInternalActionType.DROPDOWN_SET_OPTION_CONTAINER: 5,
     GuiInternalActionType.DROPDOWN_HAS_VALUE_SELECTED: 5,
@@ -193,10 +182,6 @@ HANDLER_MAP = {
     GuiInternalActionType.DROPDOWN_SELECT_BY_INDEX: 5,
     GuiInternalActionType.DROPDOWN_SELECT_BY_VISIBLE_TEXT: 5,
     GuiInternalActionType.DROPDOWN_SEND_OPTION_TEXT: 5,
-    GuiInternalActionType.DROPDOWN_GET_ROOT_SOURCE: 5,
-    GuiInternalActionType.DROPDOWN_GET_FULL_SOURCE: 5,
-    GuiInternalActionType.DROPDOWN_GET_INNER_SOURCE: 5,
-    GuiInternalActionType.DROPDOWN_GET_TEXT: 5,
 
     GuiInternalActionType.RADIOGROUP_HAS_VALUE_SELECTED: 6,
     GuiInternalActionType.RADIOGROUP_HAS_INDEX_SELECTED: 6,
@@ -204,25 +189,16 @@ HANDLER_MAP = {
     GuiInternalActionType.RADIOGROUP_SELECT_BY_INDEX: 6,
     GuiInternalActionType.RADIOGROUP_GET_FIRST_SELECTED_OPTION_VALUE : 6,
     GuiInternalActionType.RADIOGROUP_CONFIGURE : 6,
-    GuiInternalActionType.RADIOGROUP_GET_ROOT_SOURCE: 6,
-    GuiInternalActionType.RADIOGROUP_GET_FULL_SOURCE: 6,
-    GuiInternalActionType.RADIOGROUP_GET_INNER_SOURCE: 6,
-    GuiInternalActionType.RADIOGROUP_GET_TEXT: 6,
+    GuiInternalActionType.RADIOGROUP_GET_SOURCE: 6,
 
     GuiInternalActionType.DOMROOT_FOCUS: 7,
-    GuiInternalActionType.DOMROOT_CREATE_FRAME: 7,
-    GuiInternalActionType.DOMROOT_GET_ROOT_SOURCE: 7,
-    GuiInternalActionType.DOMROOT_GET_FULL_SOURCE: 7,
-    GuiInternalActionType.DOMROOT_GET_INNER_SOURCE: 7,
-    GuiInternalActionType.DOMROOT_GET_TEXT: 7,
+    GuiInternalActionType.DOMROOT_DEFINE_FRAME: 7,
+    GuiInternalActionType.DOMROOT_GET_SOURCE: 7,
     
     GuiInternalActionType.FRAME_FOCUS: 8,
-    GuiInternalActionType.FRAME_CREATE_FRAME: 8,
+    GuiInternalActionType.FRAME_DEFINE_FRAME: 8,
     GuiInternalActionType.FRAME_GET_PARENT: 8,
-    GuiInternalActionType.FRAME_GET_ROOT_SOURCE: 8,
-    GuiInternalActionType.FRAME_GET_FULL_SOURCE: 8,
-    GuiInternalActionType.FRAME_GET_INNER_SOURCE: 8,
-    GuiInternalActionType.FRAME_GET_TEXT: 8,
+    GuiInternalActionType.FRAME_GET_SOURCE: 8,
 
     GuiInternalActionType.MAIN_WINDOW_FOCUS: 10,  
     GuiInternalActionType.MAIN_WINDOW_GET_TITLE: 10, 

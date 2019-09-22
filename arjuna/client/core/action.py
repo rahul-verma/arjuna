@@ -73,7 +73,7 @@ class GuiAutoActionType(Enum):
 
     CONFIRM = auto()
     DISMISS = auto()
-    
+    GET_TEXT = auto()
     SEND_TEXT = auto()
 
     GET_PARENT = auto()

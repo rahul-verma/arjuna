@@ -283,20 +283,8 @@ class DropdownHandler:
         return dropdown.send_option_text(text) 
 
     @classmethod
-    def get_root_source(cls, dropdown):
-        return {"value" : dropdown.get_root_source()}
-
-    @classmethod
-    def get_full_source(cls, dropdown):
-        return {"value" : dropdown.get_full_source()}
-
-    @classmethod
-    def get_inner_source(cls, dropdown):
-        return {"value" : dropdown.get_inner_source()}
-
-    @classmethod
-    def get_text(cls, dropdown):
-        return {"value" : dropdown.get_text()}
+    def get_source(cls, dropdown):
+        return {"textBlobSetuId" : dropdown.get_source().setu_id}
 
 class RadioGroupHandler:
 
@@ -329,20 +317,8 @@ class RadioGroupHandler:
         radiogroup.configure(elementConfig)
 
     @classmethod
-    def get_root_source(cls, radiogroup):
-        return {"value" : radiogroup.get_root_source()}
-
-    @classmethod
-    def get_full_source(cls, radiogroup):
-        return {"value" : radiogroup.get_full_source()}
-
-    @classmethod
-    def get_inner_source(cls, radiogroup):
-        return {"value" : radiogroup.get_inner_source()}
-
-    @classmethod
-    def get_text(cls, radiogroup):
-        return {"value" : radiogroup.get_text()}
+    def get_source(cls, radiogroup):
+        return {"textBlobSetuId" : radiogroup.get_source().setu_id}
 
 class WindowHandler:
 
@@ -421,7 +397,7 @@ class DomRootHandler:
         return dom_root.focus()
 
     @classmethod
-    def create_frame(cls, dom_root, locators):
+    def define_frame(cls, dom_root, locators):
         return {"elementSetuId" : dom_root.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
 
     @classmethod
@@ -429,20 +405,8 @@ class DomRootHandler:
         return {"elementSetuId" : dom_root.create_frame(emd).setu_id}
 
     @classmethod
-    def get_root_source(cls, dom_root):
-        return {"value" : dom_root.get_root_source()}
-
-    @classmethod
-    def get_full_source(cls, dom_root):
-        return {"value" : dom_root.get_full_source()}
-
-    @classmethod
-    def get_inner_source(cls, dom_root):
-        return {"value" : dom_root.get_inner_source()}
-
-    @classmethod
-    def get_text(cls, dom_root):
-        return {"value" : dom_root.get_text()}
+    def get_source(cls, dom_root):
+        return {"textBlobSetuId" : dom_root.get_source().setu_id}
 
 class FrameHandler:
 
@@ -455,21 +419,9 @@ class FrameHandler:
         return {"elementSetuId" : frame.get_parent().setu_id}
 
     @classmethod
-    def create_frame(cls, frame, locators):
+    def define_frame(cls, frame, locators):
         return {"elementSetuId" : frame.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
 
     @classmethod
-    def get_root_source(cls, frame):
-        return {"value" : frame.get_root_source()}
-
-    @classmethod
-    def get_full_source(cls, frame):
-        return {"value" : frame.get_full_source()}
-
-    @classmethod
-    def get_inner_source(cls, frame):
-        return {"value" : frame.get_inner_source()}
-
-    @classmethod
-    def get_text(cls, frame):
-        return {"value" : frame.get_text()}
+    def get_source(cls, frame):
+        return {"textBlobSetuId" : frame.get_source().setu_id}

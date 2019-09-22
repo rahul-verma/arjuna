@@ -14,12 +14,15 @@ class GuiElement(BaseElement, ElementConfig):
     def __get_attr_value_from_remote(self, attr, optional=False):
         return self.__return_attr_value(self.dispatcher.get_attr_value(attr, optional))
 
-    def __get_source_from_remote(self):
+    def get_source_from_remote(self):
         return self.__get_attr_value_from_remote("outerHTML")
 
     def load_source_parser(self):
-        self.__source_parser = ElementXMLSourceParser(self.__get_source_from_remote())
-        self.__automator.update_source_map(self.__source_parser)
+        raw_source = self.get_source_from_remote()
+        if self.__source_parser is None:
+            self.__source_parser = ElementXMLSourceParser(self)
+            self.__automator.update_source_map(self.__source_parser)
+        self.__source_parser.load()
 
     def find(self):
         self.parent_container.find_element(self)
@@ -179,7 +182,8 @@ class GuiElement(BaseElement, ElementConfig):
         else:
             return self.__source_parser.get_attr_value(attr, optional)
 
-    def get_source(self):
-        self.find_if_not_found()
+    def get_source(self, refind=True):
+        if refind:
+            self.find_if_not_found()
         return self.__source_parser
 

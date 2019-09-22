@@ -19,19 +19,22 @@ def empty_or_none(in_str):
 
 class ElementXMLSourceParser(SetuManagedObject):
 
-    def __init__(self, source, root_element="body"):
+    def __init__(self, root_component, root_element="body"):
         super().__init__()
-        print(source)
-        self.__source = source
+        self.__root_component = root_component
+        self.__root_element = root_element
+
+    def load(self):
+        raw_source = self.__root_component.get_source_from_remote()
         parser = etree.HTMLParser(remove_comments=True)
-        tree = etree.parse(StringIO(source), parser)
-        if root_element == "body":
+        tree = etree.parse(StringIO(raw_source), parser)
+        if self.__root_element == "body":
             body = tree.getroot().find('body')
             elem_node = list(body)[0]
         else:
             body = tree.getroot()
             elem_node = body
-        print(etree.tostring(elem_node, encoding='unicode'))
+        # print(etree.tostring(elem_node, encoding='unicode'))
         non_normalized_text_content = os.linesep.join(
             [
                 remove_empty_lines_from_string(c.text)
@@ -49,7 +52,7 @@ class ElementXMLSourceParser(SetuManagedObject):
         self.__inner_html = non_normalized_inner_html
         self.__raw_attrs = elem_node.keys()
         self.__attributes = {k.lower():v for k,v in elem_node.items()}
-        self.__full_source = source
+        self.__full_source = raw_source
 
         for child in list(elem_node): elem_node.remove(child)
         self.__self_source = ' '.join(etree.tostring(elem_node, encoding=str).splitlines())
@@ -85,4 +88,45 @@ class ElementXMLSourceParser(SetuManagedObject):
     def get_text_content(self):
         return self.__text_content
 
-    
+class MultiElementSource(SetuManagedObject):
+
+    def __init__(self, instances):
+        super().__init__()
+        self.__instances = instances
+
+    def get_full_content(self):
+        return os.linesep.join([e.get_source().get_full_content() for e in self.__instances])
+
+    def get_inner_content(self):
+        return os.linesep.join([e.get_source().get_inner_content() for e in self.__instances])
+
+    def get_text_content(self):
+        return os.linesep.join([e.get_source().get_text_content() for e in self.__instances])
+
+    def get_root_content(self):
+        return os.linesep.join([e.get_source().get_root_content() for e in self.__instances])
+
+class FrameSource(SetuManagedObject):
+
+    def __init__(self, frame):
+        super().__init__()
+        self.__frame = frame
+        self.__root_source = None
+        self.__html_source = None
+
+    def load(self):
+        self.__frame.focus()
+        self.__root_source, self.__html_source = self.__frame._get_all_sources()
+
+    def get_full_content(self):
+        return self.get_root_content() + self.get_inner_content()
+
+    def get_inner_content(self):
+        return self.__html_source.get_full_content()
+
+    def get_text_content(self):
+        return self.__html_source.get_text_content()
+
+    def get_root_content(self):
+        return self.__root_source.get_root_content()
+

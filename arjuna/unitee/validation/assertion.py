@@ -208,7 +208,6 @@ class Assertion:
                 try:
                     lhs = Decimal(lhs).quantize(allowed_diff, rounding=self.__rounding)
                 except Exception as e:
-                    print(e)
                     import traceback
                     traceback.print_exc()
                     # No rounding or offsetting needed as decimal places are less than offset precision
@@ -216,7 +215,6 @@ class Assertion:
                 try:
                     rhs = Decimal(rhs).quantize(allowed_diff, rounding=self.__rounding)
                 except Exception as f:
-                    print(f)
                     rhs = Decimal(rhs)
 
                 diff = abs(lhs-rhs)

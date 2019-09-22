@@ -3,13 +3,16 @@ import os
 
 from arjuna.setuext.guiauto.impl.element.base_element import BaseElement
 from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
+from arjuna.setuext.guiauto.impl.source.parser import *
 
 class GuiMultiElement(BaseElement):
     
     def __init__(self, automator, emd, parent=None):
         super().__init__(automator, emd, parent)
+        self.__automator = automator
         self.instance_count = 0
         self.__instances = None
+        self.__source_parser = None
 
     def configure_partial_elements(self, elem_config):
         '''
@@ -22,6 +25,8 @@ class GuiMultiElement(BaseElement):
 
     def find(self):
         self.parent_container.find_multielement(self)
+        self.__source_parser = MultiElementSource(self.__instances)
+        self.__automator.update_source_map(self.__source_parser)
 
     #Override
     def find_if_not_found(self):
@@ -76,7 +81,7 @@ class GuiMultiElement(BaseElement):
 
     def get_text_contents(self):
         self.find_if_not_found()
-        return [instance.get_text_content() for instance in self.__instances]
+        return [instance.get_source().get_text_content() for instance in self.__instances]
 
     def get_values(self):
         self.find_if_not_found()
@@ -139,21 +144,9 @@ class GuiMultiElement(BaseElement):
         else:
             return self.get_instance_at_index(first_index)
 
-    def get_full_source(self):
-        self.find_if_not_found()
-        return os.linesep.join([e.get_full_source() for e in self.__instances])
-
-    def get_inner_source(self):
-        self.find_if_not_found()
-        return os.linesep.join([e.get_inner_source() for e in self.__instances])
-
-    def get_text(self):
-        self.find_if_not_found()
-        return os.linesep.join([e.get_text() for e in self.__instances])
-
     def get_source(self):
         self.find_if_not_found()
-        return os.linesep.join([e.get_source() for e in self.__instances])
+        return self.__source_parser
 
 class _GuiPartialElement(GuiElement):
 

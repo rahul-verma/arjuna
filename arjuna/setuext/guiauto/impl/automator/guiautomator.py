@@ -29,18 +29,21 @@ class GuiAutomator(ElementContainer):
         self.__source_parser = None
         self.__all_source_map = {}
 
-    def __get_source_from_remote(self):
-        return self.dispatcher.get_source()
-
     def update_source_map(self, source):
         self.__all_source_map[source.setu_id] = source
 
     def get_source_for_setu_id(self, id):
         return self.__all_source_map[id]
 
+    def get_source_from_remote(self):
+        return self.dispatcher.get_source()
+
     def load_source_parser(self):
-        self.__source_parser = ElementXMLSourceParser(self.__get_source_from_remote(), root_element="html")
-        self.update_source_map(self.__source_parser)
+        raw_source = self.get_source_from_remote()
+        if self.__source_parser is None:
+            self.__source_parser = ElementXMLSourceParser(self, root_element="html")
+            self.update_source_map(self.__source_parser)
+        self.__source_parser.load()
 
     def _create_element_flat_or_nested(self, locator_meta_data):
         from arjuna.setuext.guiauto.impl.element.guielement import GuiElement

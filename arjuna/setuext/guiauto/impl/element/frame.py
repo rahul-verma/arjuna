@@ -1,6 +1,7 @@
 from arjuna.setu.types import SetuManagedObject
 from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
 from arjuna.setuext.guiauto.impl.locator.emd import SimpleGuiElementMetaData
+from arjuna.setuext.guiauto.impl.source.parser import FrameSource
 
 from arjuna.setu import Setu
 
@@ -72,21 +73,16 @@ class DomRoot(FrameContainer):
     def set_frame_context_as_root(self):
         self.__set_frame_context_str("root")  
 
+    def is_in_root_context(self):
+        return self.__frame_context == "root"
+
     def focus(self):
         self.automator.dispatcher.focus_on_dom_root()
         self.set_frame_context_as_root() 
 
-    def get_full_source(self):
-        return self.automator.get_full_source()
-
-    def get_root_source(self):
-        return self.automator.get_root_source()
-
-    def get_inner_source(self):
-        return self.automator.get_inner_source()
-
-    def get_text(self):
-        return self.automator.get_text()
+    def get_source(self):
+        self.focus()
+        return self.automator.get_source()
 
 class IFrame(FrameContainer):
 
@@ -95,6 +91,7 @@ class IFrame(FrameContainer):
         self.__dom_root = dom_root
         self.__parent_frames = []
         self.__wrapped_element = wrapped_element
+        self.__source_parser = None
 
     @property
     def dom_root(self):
@@ -116,21 +113,30 @@ class IFrame(FrameContainer):
                 parent.focus()
 
     def focus(self):
+        if not self.dom_root.is_in_root_context():
+            self.dom_root.focus()
+            for parent in self.__parent_frames:
+                parent.focus()
         self.wrapped_element.find()
         self.automator.dispatcher.focus_on_frame(self.wrapped_element.setu_id)
         self.dom_root.set_frame_context(self)
 
-    def get_full_source(self):
-        return self.get_root_source() + self.get_inner_source()
+    def load_source_parser(self):
+        if self.__source_parser is None:
+            self.__source_parser = FrameSource(self)
+            self.automator.update_source_map(self.__source_parser)
+        self.__source_parser.load()
 
-    def get_inner_source(self):
-        return self.automator.get_full_source()
+    def _get_all_sources(self):
+        self.focus()
+        return self.wrapped_element.get_source(refind=False), self.automator.get_source()
 
-    def get_text(self):
-        return self.automator.get_text()
+    def get_wrapped_element(self):
+        return self.wrapped_element
 
-    def get_root_source(self):
-        return self.wrapped_element.get_root_source()
+    def get_source(self):
+        self.load_source_parser()
+        return self.__source_parser
 
     # def focus_on_parent(self):
     #     self._act(TestAutomatorActionBodyCreator.jump_to_parent_frame())

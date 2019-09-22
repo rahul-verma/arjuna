@@ -32,7 +32,6 @@ def wait_for_port(port):
             sock.close()
             return
         except Exception as e:
-            print("here", e)
             time.sleep(1)
     print("Port is not open. Timeout after 60 seconds.")
     raise RuntimeError("SET_SVC_ERROR:: Another service is running at port {}. Setu could not be launched. Message: ".format(port))
