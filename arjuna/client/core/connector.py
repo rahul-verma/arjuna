@@ -79,7 +79,7 @@ class _DefaultSetuRequest:
 
     def __init__(self, component, setu_action_type):
         self.__request_body = dict()
-        self.__request_body["component"] = component.name
+        self.__request_body["arjunaComponent"] = component.name
         self.__request_body["action"] = setu_action_type.name
         self.__request_body["args"] = dict()
 

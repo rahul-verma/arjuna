@@ -44,7 +44,7 @@ class _ExcelSheet:
         self.__widths = dict()
 
     def __write_row(self, data, style):
-        import arial10
+        from arjuna.third_party.py_importables import arial10
         self.__current_row_counter += 1
         for index, item in enumerate(data):
             item = str(item)
@@ -64,7 +64,9 @@ class ExcelReporter:
 
     def __init__(self):
         self.lock = threading.RLock()
-        self.path = ArjunaCore.config.value(UniteePropertyEnum.RUN_REPORT_DIR) + "/ArjunaTestReport.xls"
+        from arjuna.tpi import Arjuna
+        from arjuna.tpi.enums import ArjunaOption
+        self.path = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.UNITEE_PROJECT_RUN_REPORT_DIR).as_string() + "/ArjunaTestReport.xls"
 
     def set_up(self):
         self.wb = xlwt.Workbook()
