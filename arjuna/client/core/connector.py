@@ -41,8 +41,8 @@ class DefaultSetuResponse:
     def get_value_for_check_result(self):
         return self.get_value_for_key("checkResult")
 
-    def get_value_for_element_setu_id(self):
-        return self.get_value_for_key("elementSetuId").as_string()
+    def get_value_for_gui_component_setu_id(self):
+        return self.get_value_for_key("guiComponentSetuId").as_string()
 
     def get_value_for_testsession_setu_id(self):
         return self.get_value_for_key("testSessionSetuId").as_string()

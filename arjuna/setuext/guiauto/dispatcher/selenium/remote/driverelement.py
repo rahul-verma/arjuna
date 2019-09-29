@@ -28,7 +28,7 @@ class SeleniumDriverElement:
     def post(self, **kwargs):
         input_dict = {
             "automatorSetuId" : self.automator_setu_id,
-            "elementSetuId" : self.element_setu_id
+            "guiComponentSetuId" : self.element_setu_id
         }
 
         if self.__partial:

@@ -40,42 +40,42 @@ class GuiAutomatorHandler(Handler):
 
     def define_element(self, locators):
         elem = self.automator.create_element(GuiElementMetaData.createEMD(locators))
-        return {"elementSetuId" : elem.setu_id}
+        return {"guiComponentSetuId" : elem.setu_id}
 
     def define_element_with_emd(self, emd):
         elem = self.automator.create_element(emd)
-        return {"elementSetuId" : elem.setu_id}
+        return {"guiComponentSetuId" : elem.setu_id}
 
     def define_multi_element(self, locators):
         elem = self.automator.create_multielement(GuiElementMetaData.createEMD(locators))
-        return {"elementSetuId" : elem.setu_id}
+        return {"guiComponentSetuId" : elem.setu_id}
 
     def define_multielement_with_emd(self, emd):
         elem = self.automator.create_multielement(emd)
-        return {"elementSetuId" : elem.setu_id}
+        return {"guiComponentSetuId" : elem.setu_id}
 
     def define_dropdown(self, locators):
         dropdown = self.automator.create_dropdown(GuiElementMetaData.createEMD(locators))
-        return {"elementSetuId" : dropdown.setu_id}
+        return {"guiComponentSetuId" : dropdown.setu_id}
 
     def define_dropdown_with_emd(self, emd):
         dropdown = self.automator.create_dropdown(emd)
-        return {"elementSetuId" : dropdown.setu_id}
+        return {"guiComponentSetuId" : dropdown.setu_id}
 
     def define_radiogroup(self, locators):
         radiogroup = self.automator.create_radiogroup(GuiElementMetaData.createEMD(locators))
-        return {"elementSetuId" : radiogroup.setu_id}
+        return {"guiComponentSetuId" : radiogroup.setu_id}
 
     def define_radiogroup_with_emd(self, emd):
         radiogroup = self.automator.create_radiogroup(emd)
-        return {"elementSetuId" : radiogroup.setu_id}
+        return {"guiComponentSetuId" : radiogroup.setu_id}
 
     def define_alert(self):
         alert = self.automator.alert_handler.create_alert()
-        return {"elementSetuId" : alert.setu_id}
+        return {"guiComponentSetuId" : alert.setu_id}
 
     def define_main_window(self):
-        return {"elementSetuId" : self.automator.main_window.setu_id}
+        return {"guiComponentSetuId" : self.automator.main_window.setu_id}
 
     def get_source(self):
         return {"textBlobSetuId" : self.automator.get_source().setu_id}
@@ -342,12 +342,12 @@ class MainWindowHandler(WindowHandler):
 
     @classmethod
     def get_latest_child_window(self, window):
-        return {"elementSetuId" : window.get_latest_child_window().setu_id}
+        return {"guiComponentSetuId" : window.get_latest_child_window().setu_id}
 
     @classmethod
     def define_child_window(self, window, locators):
         print(locators)
-        return {"elementSetuId" : window.define_child_window(GuiElementMetaData.createEMD(locators)).setu_id}
+        return {"guiComponentSetuId" : window.define_child_window(GuiElementMetaData.createEMD(locators)).setu_id}
 
 class ChildWindowHandler(WindowHandler):
 
@@ -403,15 +403,19 @@ class DomRootHandler:
 
     @classmethod
     def define_frame(cls, dom_root, locators):
-        return {"elementSetuId" : dom_root.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
+        return {"guiComponentSetuId" : dom_root.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
 
     @classmethod
     def create_frame_with_emd(self, dom_root, emd):
-        return {"elementSetuId" : dom_root.create_frame(emd).setu_id}
+        return {"guiComponentSetuId" : dom_root.create_frame(emd).setu_id}
 
     @classmethod
     def get_source(cls, dom_root):
         return {"textBlobSetuId" : dom_root.get_source().setu_id}
+
+    @classmethod
+    def enumerate_frames(cls, dom_root):
+        return {"value" : dom_root.enumerate_frames()}
 
 class FrameHandler:
 
@@ -421,12 +425,16 @@ class FrameHandler:
 
     @classmethod
     def get_parent(cls, frame):
-        return {"elementSetuId" : frame.get_parent().setu_id}
+        return {"guiComponentSetuId" : frame.get_parent().setu_id}
 
     @classmethod
     def define_frame(cls, frame, locators):
-        return {"elementSetuId" : frame.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
+        return {"guiComponentSetuId" : frame.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
 
     @classmethod
     def get_source(cls, frame):
         return {"textBlobSetuId" : frame.get_source().setu_id}
+
+    @classmethod
+    def enumerate_frames(cls, frame):
+        return {"value" : frame.enumerate_frames()}

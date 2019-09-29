@@ -1,3 +1,5 @@
+import os
+
 from arjuna.setu.types import SetuManagedObject
 from arjuna.setuext.guiauto.impl.element.guielement import GuiElement
 from arjuna.setuext.guiauto.impl.locator.emd import SimpleGuiElementMetaData
@@ -55,12 +57,20 @@ class FrameContainer(SetuManagedObject):
             self.automator.add_frame(frame)
             return frame
 
+    def enumerate_frames(self):
+        self.focus()
+        emd = SimpleGuiElementMetaData("xpath", "//iframe")
+        multi_element = self.automator.create_multielement(emd)
+        ret_str = os.linesep.join(["--> " + s for s in multi_element.get_source()._get_root_content_as_list()])
+        return self._source_parser.get_root_content() + os.linesep + ret_str
+
 class DomRoot(FrameContainer):
 
     def __init__(self, automator):
         super().__init__(automator)
         self.__frame_context = "root"
         self.automator.add_frame(self)
+        self._source_parser = self.automator.get_source()
 
     @property
     def frame_context(self):
@@ -95,9 +105,8 @@ class IFrame(FrameContainer):
         self.__dom_root = dom_root
         self.__parent_frames = []
         self.__wrapped_element = wrapped_element
-        self.__source_parser = None
-        self.__source_parser = FrameSource(self)
-        self.automator.update_source_map(self.__source_parser)
+        self._source_parser = FrameSource(self)
+        self.automator.update_source_map(self._source_parser)
 
     @property
     def dom_root(self):
@@ -126,7 +135,7 @@ class IFrame(FrameContainer):
             self.dom_root.focus()
             self._focus_on_parents()
         self.wrapped_element.find()
-        self.__source_parser.set_root_source(self.wrapped_element.get_source(refind=False).get_root_content())
+        self._source_parser.set_root_source(self.wrapped_element.get_source(refind=False).get_root_content())
         self.automator.dispatcher.focus_on_frame(self.wrapped_element.setu_id)
         self.dom_root.set_frame_context(self)
 
@@ -137,8 +146,8 @@ class IFrame(FrameContainer):
         return self.wrapped_element
 
     def get_source(self):
-        self.__source_parser.load()
-        return self.__source_parser
+        self._source_parser.load()
+        return self._source_parser
 
     # def focus_on_parent(self):
     #     self._act(TestAutomatorActionBodyCreator.jump_to_parent_frame())

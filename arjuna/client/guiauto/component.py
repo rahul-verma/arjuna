@@ -64,7 +64,7 @@ class BaseElement(BaseComponent):
     def __init__(self, test_session, app_automator, setu_id, index=None):
         super().__init__(test_session, app_automator)
         self._set_setu_id(setu_id)
-        self._set_self_setu_id_arg("elementSetuId")
+        self._set_self_setu_id_arg("guiComponentSetuId")
 
         if index is not None:
             self._add_args(
@@ -206,7 +206,7 @@ class DefaultFrame(BaseElement):
 
     def __init__(self, test_session, app_automator, setu_id):
         super().__init__(test_session, app_automator, setu_id)
-        self._set_self_setu_id_arg("elementSetuId")
+        self._set_self_setu_id_arg("guiComponentSetuId")
 
     def focus(self):
         self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_FOCUS)
@@ -214,11 +214,11 @@ class DefaultFrame(BaseElement):
     def Frame(self, *withLocators):
         arg = [l.asMap() for l in withLocators]
         response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_CREATE_FRAME, SetuArg.arg("locators", arg))
-        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_gui_component_setu_id())
 
     def ParentFrame(self):
         response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_GET_PARENT)
-        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_gui_component_setu_id())
 
 
 class DefaultDomRoot(BaseComponent):
@@ -232,7 +232,7 @@ class DefaultDomRoot(BaseComponent):
     def Frame(self, *with_locators):
         arg = [l.as_map() for l in with_locators]
         response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DOMROOT_CREATE_FRAME, SetuArg.arg("locators", arg))
-        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
+        return DefaultFrame(self._get_test_session(), self._get_automator(), response.get_value_for_gui_component_setu_id())
 
     def ParentFrame(self):
         raise Exception("DOM root does not have a parent frame.")
@@ -273,16 +273,16 @@ class DefaultMainWindow(AbstractBasicWindow):
 
     def _take_element_finding_action(self, setu_action_type, *setu_args):
         response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, setu_action_type, *setu_args)
-        return response.get_value_for_element_setu_id()
+        return response.get_value_for_gui_component_setu_id()
 
     def ChildWindow(self, *withLocators):
         arg = [l.asMap() for l in withLocators]
         response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_CREATE_CHILD_WINDOW, SetuArg.arg("locators", arg))
-        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
+        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_gui_component_setu_id())
 
     def LatestChildWindow(self):
         response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_GET_LATEST_CHILD_WINDOW)
-        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_element_setu_id())
+        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_gui_component_setu_id())
 
     def close_all_child_windows(self):
         self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS)

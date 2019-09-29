@@ -17,7 +17,7 @@ class Handler(metaclass=abc.ABCMeta):
 
     @classmethod
     def get_element_setuid(cls, json_dict):
-        return cls._pop_arg(json_dict, "elementSetuId")
+        return cls._pop_arg(json_dict, "guiComponentSetuId")
 
     @classmethod
     def get_text_blob_setu_id(cls, json_dict):

@@ -69,6 +69,7 @@ class GuiAutoActionType(Enum):
     SELECT_BY_VISIBLE_TEXT = auto()
     SEND_OPTION_TEXT = auto()
 
+    ENUMERATE_FRAMES = auto()
     FOCUS = auto()
 
     CONFIRM = auto()

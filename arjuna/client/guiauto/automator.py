@@ -37,7 +37,7 @@ class AbstractAppAutomator(BaseSetuObject):
 
     def __take_element_finder_action(self, setu_action_type, *setu_args):
         response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, setu_action_type, *setu_args)
-        return response.get_value_for_element_setu_id()
+        return response.get_value_for_gui_component_setu_id()
 
     def __create_generic_element(self, setu_action_type, *with_locators):
         if with_locators:
@@ -142,7 +142,7 @@ class DefaultGuiAutomator(AbstractAppAutomator):
         self._set_self_setu_id_arg("automatorSetuId")
 
         win_response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DEFINE_MAIN_WINDOW)
-        self._set_main_window(GuiAutoComponentFactory.MainWindow(self.get_test_session(), self, win_response.get_value_for_element_setu_id()))
+        self._set_main_window(GuiAutoComponentFactory.MainWindow(self.get_test_session(), self, win_response.get_value_for_gui_component_setu_id()))
 
         self._set_dom_root(GuiAutoComponentFactory.DomRoot(self.get_test_session(), self))
         self._set_browser(GuiAutoComponentFactory.Browser(self.get_test_session(), self))

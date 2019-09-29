@@ -82,11 +82,13 @@ class GuiInternalActionType(Enum):
     DOMROOT_FOCUS = auto()
     DOMROOT_DEFINE_FRAME = auto()
     DOMROOT_GET_SOURCE = auto()
+    DOMROOT_ENUMERATE_FRAMES = auto()
     
     FRAME_FOCUS = auto()
     FRAME_DEFINE_FRAME = auto()
     FRAME_GET_PARENT = auto()
     FRAME_GET_SOURCE = auto()
+    FRAME_ENUMERATE_FRAMES = auto()
     
     MAIN_WINDOW_FOCUS = auto()
     MAIN_WINDOW_GET_TITLE = auto()
@@ -194,11 +196,13 @@ HANDLER_MAP = {
     GuiInternalActionType.DOMROOT_FOCUS: 7,
     GuiInternalActionType.DOMROOT_DEFINE_FRAME: 7,
     GuiInternalActionType.DOMROOT_GET_SOURCE: 7,
+    GuiInternalActionType.DOMROOT_ENUMERATE_FRAMES: 7,
     
     GuiInternalActionType.FRAME_FOCUS: 8,
     GuiInternalActionType.FRAME_DEFINE_FRAME: 8,
     GuiInternalActionType.FRAME_GET_PARENT: 8,
     GuiInternalActionType.FRAME_GET_SOURCE: 8,
+    GuiInternalActionType.FRAME_ENUMERATE_FRAMES: 8,
 
     GuiInternalActionType.MAIN_WINDOW_FOCUS: 10,  
     GuiInternalActionType.MAIN_WINDOW_GET_TITLE: 10, 

@@ -136,6 +136,7 @@ class GuiAutomator(ElementContainer):
     def add_frame(self, frame):
         self._add_element(frame.setu_id, frame)
 
-    def get_source(self):
-        self.load_source_parser()
+    def get_source(self, reload=True):
+        if reload:
+            self.load_source_parser()
         return self.__source_parser

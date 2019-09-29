@@ -23,6 +23,7 @@ class ElementXMLSourceParser(SetuManagedObject):
         super().__init__()
         self.__root_component = root_component
         self.__root_element = root_element
+        self.__fpaths = []
 
     def load(self):
         raw_source = self.__root_component.get_source_from_remote()
@@ -34,6 +35,7 @@ class ElementXMLSourceParser(SetuManagedObject):
         else:
             body = tree.getroot()
             elem_node = body
+
         # print(etree.tostring(elem_node, encoding='unicode'))
         non_normalized_text_content = os.linesep.join(
             [
@@ -108,6 +110,9 @@ class MultiElementSource(SetuManagedObject):
 
     def get_root_content(self):
         return os.linesep.join([e.get_source().get_root_content() for e in self.__instances])
+
+    def _get_root_content_as_list(self):
+        return [e.get_source().get_root_content() for e in self.__instances]
 
     def get_tag_names(self):
         return [e.get_source().get_tag_name() for e in self.__instances]
