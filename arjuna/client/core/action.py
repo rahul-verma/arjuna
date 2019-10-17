@@ -85,6 +85,8 @@ class GuiAutoActionType(Enum):
     GET_LATEST_CHILD_WINDOW = auto()
     CLOSE_ALL_CHILD_WINDOWS = auto()
 
+    PERFORM_ACTION_CHAIN = auto()
+
     CLOSE = auto()
 
 class SetuActionType(Enum):
@@ -94,3 +96,14 @@ class SetuActionType(Enum):
 class TestSessionActionType(Enum):
 	INIT = auto()
 	END = auto()
+
+class PartialActionType(Enum):
+    CLICK = auto()
+    CLICK_AND_HOLD = auto()
+    MOUSE_UP = auto()
+    RIGHT_CLICK = auto()
+    DOUBLE_CLICK = auto()
+    DRAG_AND_DROP = auto()
+    SEND_KEYS = auto()
+    MOVE_TO = auto()
+    PAUSE  = auto()

@@ -2,7 +2,6 @@ from .driverelement import SeleniumDriverElement
 from arjuna.setuext.guiauto.dispatcher.driver.impl.driver_commands import DriverCommands
 from arjuna.setuext.guiauto.dispatcher.driver.impl.element_finder import ElementFinder
 
-
 class SeleniumDriver:
 
     def __init__(self, setu_id):
@@ -124,8 +123,16 @@ class SeleniumDriver:
             element = self.__driver_elements[elem_setu_id]
         DriverCommands.focus_on_frame(self.__driver, element)
 
+    def get_element_for_setu_id(self, id):
+        return self.__driver_elements[id]
+
     def focus_on_parent_frame(self):
         DriverCommands.focus_on_parent_frame(self.__driver)
 
     def focus_on_dom_root(self):
         DriverCommands.focus_on_dom_root(self.__driver)
+
+    def perform_action_chain(self, action_chain):
+        DriverCommands.perform_action_chain(self, self.__driver, action_chain)
+
+

@@ -1,3 +1,4 @@
+from selenium.webdriver.common.action_chains import ActionChains
 
 class DriverCommands:
 
@@ -110,3 +111,20 @@ class DriverCommands:
     @classmethod
     def get_all_winodw_handles(cls, driver):
         return driver.window_handles
+
+    @classmethod
+    def replace_with_element(cls, setu_driver, value_tuple):
+        if value_tuple[1] == True:
+            return setu_driver.get_element_for_setu_id(value_tuple[0])
+        else:
+            return value_tuple[0]
+        
+    @classmethod
+    def perform_action_chain(cls, setu_driver, driver, action_chain):
+        chain = ActionChains(driver)
+        for action in action_chain:
+            kwargs = {k:cls.replace_with_element(setu_driver, v) for k,v in action[1].items()}
+            getattr(chain, action[0])(**kwargs)
+        chain.perform()
+
+

@@ -184,3 +184,8 @@ class GuiElement(BaseElement, ElementConfig):
         self.find_if_not_found()
         return self.__get_attr_value_from_remote(attr)
 
+    def perform_action_chain(self, single_action_chain):
+        from arjuna.setuext.guiauto.impl.automator.actions import SingleActionChain
+        action_chain = SingleActionChain(self.__automator, element=self)
+        action_chain.perform(single_action_chain)
+

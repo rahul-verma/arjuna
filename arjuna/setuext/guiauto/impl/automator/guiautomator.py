@@ -140,3 +140,8 @@ class GuiAutomator(ElementContainer):
         if reload:
             self.load_source_parser()
         return self.__source_parser
+
+    def perform_action_chain(self, single_action_chain):
+        from arjuna.setuext.guiauto.impl.automator.actions import SingleActionChain
+        action_chain = SingleActionChain(self)
+        action_chain.perform(single_action_chain)

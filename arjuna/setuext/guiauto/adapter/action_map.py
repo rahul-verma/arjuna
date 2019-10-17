@@ -26,6 +26,7 @@ class GuiInternalActionType(Enum):
     
     DEFINE_MAIN_WINDOW = auto()
     SET_SLOMO = auto()
+    PERFORM_ACTION_CHAIN = auto()
 
     ALERT_CONFIRM = auto()
     ALERT_DISMISS = auto()
@@ -53,6 +54,7 @@ class GuiInternalActionType(Enum):
     ELEMENT_GET_TEXT = auto()
 
     ELEMENT_CONFIGURE = auto()
+    ELEMENT_PERFORM_ACTION_CHAIN = auto()
 
     MULTI_ELEMENT_GET_INSTANCE_COUNT = auto()
     MULTI_ELEMENT_GET_RANDOM_INDEX = auto()
@@ -140,6 +142,7 @@ HANDLER_MAP = {
     
     GuiInternalActionType.DEFINE_MAIN_WINDOW: 1,
     GuiInternalActionType.SET_SLOMO: 1,
+    GuiInternalActionType.PERFORM_ACTION_CHAIN: 1,
 
     GuiInternalActionType.ALERT_CONFIRM: 3,
     GuiInternalActionType.ALERT_DISMISS: 3,
@@ -167,6 +170,7 @@ HANDLER_MAP = {
     GuiInternalActionType.ELEMENT_GET_TEXT: 4,
 
     GuiInternalActionType.ELEMENT_CONFIGURE: 4,
+    GuiInternalActionType.ELEMENT_PERFORM_ACTION_CHAIN: 4,
 
     GuiInternalActionType.MULTI_ELEMENT_GET_INSTANCE_COUNT: 12,
     GuiInternalActionType.MULTI_ELEMENT_GET_RANDOM_INDEX: 12,

@@ -161,6 +161,8 @@ class GuiAutomatorHandler(Handler):
         frame =  self.automator.get_element_for_setu_id(elem_setu_id)
         return getattr(FrameHandler, action)(frame, **json_dict)
 
+    def perform_action_chain(self, partialActionList):
+        self.automator.perform_action_chain(partialActionList)
 
 # Separates the underlying structure and names
 # Also builds json response data where applicable
@@ -209,6 +211,10 @@ class ElementHandler:
     @classmethod
     def get_source(cls, element):
         return {"textBlobSetuId" : element.get_source().setu_id}
+
+    @classmethod
+    def perform_action_chain(cls, element, partialActionList):
+        element.perform_action_chain(partialActionList)
 
 class SourceHandler:
     @classmethod
