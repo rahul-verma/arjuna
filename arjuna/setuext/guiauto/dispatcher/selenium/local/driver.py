@@ -64,13 +64,17 @@ class SeleniumDriver:
         return DriverCommands.get_source(self.__driver)
 
     def execute_javascript(self, script):
-        DriverCommands.execute_javascript(self.__driver, script)
+        return DriverCommands.execute_javascript(self.__driver, script)
 
     def take_screenshot(self):
         DriverCommands.take_screenshot(self.__driver)
 
     def find_element(self, child_gui_element_setu_id, with_type, with_value):
         element = ElementFinder.find_element(self.__driver, with_type, with_value)
+        self.__driver_elements[child_gui_element_setu_id] = element
+
+    def find_element_with_js(self, child_gui_element_setu_id, js):
+        element = self.execute_javascript(js)
         self.__driver_elements[child_gui_element_setu_id] = element
 
     def find_multielement(self, child_gui_element_setu_id, with_type, with_value):

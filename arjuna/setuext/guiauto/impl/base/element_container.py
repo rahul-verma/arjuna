@@ -61,7 +61,13 @@ class ElementContainer(SetuConfiguredObject, metaclass=abc.ABCMeta):
         found = False
         for locator in gui_element.get_locator_meta_data().locators: 
             try:
-                instance_count = dispatcher_call(gui_element.get_setu_id(), locator.ltype.name, locator.lvalue)
+                if locator.ltype.name == "POINT":
+                    # Assumption here is that this container is automator.
+                    instance_count = self.find_element_with_js(gui_element.get_setu_id(), "return document.elementFromPoint({}, {})".format(*locator.lvalue))
+                elif locator.ltype.name == "JS":
+                    instance_count = self.find_element_with_js(gui_element.get_setu_id(), locator.lvalue)
+                else:
+                    instance_count = dispatcher_call(gui_element.get_setu_id(), locator.ltype.name, locator.lvalue)
                 return locator.ltype.name, locator.lvalue, instance_count
             except Exception as e:
                 print(e)

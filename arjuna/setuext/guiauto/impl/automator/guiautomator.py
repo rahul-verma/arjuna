@@ -145,3 +145,7 @@ class GuiAutomator(ElementContainer):
         from arjuna.setuext.guiauto.impl.automator.actions import SingleActionChain
         action_chain = SingleActionChain(self)
         action_chain.perform(single_action_chain)
+
+    def find_element_with_js(self, gui_elem_setu_id,js):
+        return self.dispatcher.find_element_with_js(gui_elem_setu_id, js)
+

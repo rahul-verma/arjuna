@@ -95,6 +95,8 @@ class GenericLocateWith(Enum):
     WINDOW_TITLE = auto()
     PARTIAL_WINDOW_TITLE = auto()
     CHILD_LOCATOR = auto()
+    POINT = auto()
+    JS = auto()
 
 class Locator:
 
@@ -166,7 +168,9 @@ class GuiElementMetaData:
         GenericLocateWith.IMAGE,
         GenericLocateWith.INDEX,
         GenericLocateWith.WINDOW_TITLE,
-        GenericLocateWith.PARTIAL_WINDOW_TITLE
+        GenericLocateWith.PARTIAL_WINDOW_TITLE,
+        GenericLocateWith.POINT,
+        GenericLocateWith.JS,
     }
 
     XTYPE_LOCATORS = {
