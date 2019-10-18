@@ -14,10 +14,10 @@ The features listed here which are marked as done are available in source code o
     * Content based frame finding for immediate child frames
 3. Initial implementation of Screen and Point abstraction - Done
 4. Support for With.POINT for element identification. - Done
-5. Support for With.JS for element identification - In progress.
+5. Support for With.JS for element identification - Done
   * Single element - If JS returns multiple elements, should return first one.
   * Multi-element - If JS returns single element, should return it as a list.
-6. Action Chains - Named method for common interactions
+6. Action Chains - Named method for common interactions - In progress
    * Client-side interfaces and classes - Mostly done
    * FaaST implementation - In progress
    * Arjuna implementation - In progress
