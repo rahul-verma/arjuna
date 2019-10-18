@@ -34,6 +34,8 @@ The features listed here which are marked as done are available in source code o
 * Element configuration support in GNS
 * AND relationship for code and gns
 * Option to enable proxy in java bindings
+* Taking screenshot - automator level, rect, element, elements
+* Frame config: should be able to change the iframe to e.g. object. Enumerate frames should take an optional argument of With and do a multielement match instead of the default With.INDEX used internally.
 * File based configuration `loadFromConfFile`
     * coded 
     * suite.xml
