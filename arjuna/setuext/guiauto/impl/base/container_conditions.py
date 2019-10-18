@@ -9,7 +9,8 @@ class GuiElementContainerConditions:
         caller = DynamicCaller(
             self.__container._find,  
             self.__container.dispatcher.find_element,
-            gui_element
+            gui_element,
+            context = "ELEMENT"
         )
         return CommandCondition(caller)   
 
@@ -17,6 +18,7 @@ class GuiElementContainerConditions:
         caller = DynamicCaller(
             self.__container._find, 
             self.__container.dispatcher.find_multielement,
-            gui_element
+            gui_element,
+            context = "MULTI_ELEMENT"
         )
         return CommandCondition(caller)  

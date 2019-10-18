@@ -4,7 +4,7 @@ from arjuna.setuext.guiauto.impl.source.parser import ElementXMLSourceParser
 class GuiElement(BaseElement, ElementConfig):
     
     def __init__(self, automator, emd, parent=None):
-        BaseElement.__init__(self, automator, emd, parent)
+        BaseElement.__init__(self, automator, emd, parent, obj_name="GuiElement")
         ElementConfig.__init__(self, automator)
         from .element_conditions import GuiElementConditions
         self.__conditions_handler = GuiElementConditions(self)

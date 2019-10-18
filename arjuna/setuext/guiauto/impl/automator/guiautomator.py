@@ -149,3 +149,6 @@ class GuiAutomator(ElementContainer):
     def find_element_with_js(self, gui_elem_setu_id,js):
         return self.dispatcher.find_element_with_js(gui_elem_setu_id, js)
 
+    def find_multielement_with_js(self, gui_elem_setu_id,js):
+        return self.dispatcher.find_multielement_with_js(gui_elem_setu_id, js)
+

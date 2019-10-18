@@ -4,20 +4,25 @@ import types
 
 class SetuManagedObject:
 
-    def __init__(self):
+    def __init__(self, obj_name=""):
+        self.__obj_name = obj_name
         self.__setu_id = str(uuid.uuid4())
 
     @property
     def setu_id(self):
         return self.__setu_id
 
+    @property
+    def obj_name(self):
+        return self.__obj_name
+
     def get_setu_id(self):
         return self.__setu_id
 
 class SetuConfiguredObject(SetuManagedObject, metaclass=abc.ABCMeta):
 
-    def __init__(self, config):
-        super().__init__()
+    def __init__(self, config, obj_name=""):
+        super().__init__(obj_name)
         self.__dispatcher_creator = None
         self.__dispatcher = None
         self.__config = config

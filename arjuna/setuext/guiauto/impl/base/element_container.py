@@ -3,11 +3,12 @@ import abc
 from arjuna.setu.types import SetuConfiguredObject
 
 from .container_conditions import GuiElementContainerConditions
+from arjuna.setuext.guiauto.impl.base.conditions import *
 
 
 class ElementContainer(SetuConfiguredObject, metaclass=abc.ABCMeta):
-    def __init__(self, config):
-        super().__init__(config)
+    def __init__(self, config, obj_name=""):
+        super().__init__(config, obj_name)
         self.element_map = {}
         self.melement_map = {}
         self.__container_conditions = GuiElementContainerConditions(self)
@@ -57,15 +58,22 @@ class ElementContainer(SetuConfiguredObject, metaclass=abc.ABCMeta):
         self._add_element(rg.get_setu_id(), rg)
         return rg
 
-    def _find(self, dispatcher_call, gui_element):
+    def _find(self, dispatcher_call, gui_element, context="ELEMENT"):
         found = False
-        for locator in gui_element.get_locator_meta_data().locators: 
+        js_call_name = context == "ELEMENT" and "find_element_with_js" or "find_multielement_with_js"
+        js_call = getattr(self, js_call_name)
+        locators = gui_element.get_locator_meta_data().locators
+        if context != "ELEMENT":
+            if "POINT" in {l.ltype.name for l in locators}:
+                raise ConditionException("With.POINT can be used only with GuiElement.")
+
+        for locator in locators: 
             try:
                 if locator.ltype.name == "POINT":
                     # Assumption here is that this container is automator.
-                    instance_count = self.find_element_with_js(gui_element.get_setu_id(), "return document.elementFromPoint({}, {})".format(*locator.lvalue))
+                    instance_count = js_call(gui_element.get_setu_id(), "return document.elementFromPoint({}, {})".format(*locator.lvalue))
                 elif locator.ltype.name == "JS":
-                    instance_count = self.find_element_with_js(gui_element.get_setu_id(), locator.lvalue)
+                    instance_count = js_call(gui_element.get_setu_id(), locator.lvalue)
                 else:
                     instance_count = dispatcher_call(gui_element.get_setu_id(), locator.ltype.name, locator.lvalue)
                 return locator.ltype.name, locator.lvalue, instance_count

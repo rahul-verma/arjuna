@@ -4,8 +4,8 @@ from arjuna.setuext.guiauto.impl.base.element_container import ElementContainer
 from arjuna.lib.enums import GuiElementConfigType
 
 class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
-    def __init__(self, automator, emd, parent=None):
-        super().__init__(automator.config)
+    def __init__(self, automator, emd, parent=None, obj_name=""):
+        super().__init__(automator.config, obj_name)
         self.__automator = automator
         self.__parent = parent
         self.__emd = emd

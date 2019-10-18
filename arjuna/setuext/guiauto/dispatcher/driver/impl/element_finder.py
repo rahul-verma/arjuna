@@ -1,7 +1,5 @@
 from selenium.webdriver.common.by import By
 
-from .melement import MultiElement
-
 class ElementFinder:
     BY_MAP = {
         "ID": By.ID,
@@ -20,4 +18,4 @@ class ElementFinder:
 
     @classmethod
     def find_elements(cls, container, byType, byValue):
-        return MultiElement(container.find_elements(cls.BY_MAP[byType.upper()], byValue))
+        return container.find_elements(cls.BY_MAP[byType.upper()], byValue)

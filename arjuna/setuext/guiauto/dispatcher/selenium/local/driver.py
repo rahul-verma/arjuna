@@ -1,6 +1,8 @@
 from .driverelement import SeleniumDriverElement
 from arjuna.setuext.guiauto.dispatcher.driver.impl.driver_commands import DriverCommands
 from arjuna.setuext.guiauto.dispatcher.driver.impl.element_finder import ElementFinder
+from arjuna.setuext.guiauto.dispatcher.driver.impl.melement import MultiElement
+from selenium.webdriver.remote.webelement import WebElement
 
 class SeleniumDriver:
 
@@ -73,14 +75,51 @@ class SeleniumDriver:
         element = ElementFinder.find_element(self.__driver, with_type, with_value)
         self.__driver_elements[child_gui_element_setu_id] = element
 
+    def __process_single_js_element(self, element):
+        # JS returns null, undefined
+        if element is None:
+            raise Exception("JavaScript could not find element.")
+        elif not isinstance(element, WebElement):
+            raise Exception("JavaScript returned a non-element object.")
+        else:
+            return element
+
+    def __process_js_element_list(self, elements):
+        if not elements: raise Exception("JavaScript could not find element.")
+        return [self.__process_single_js_element(e) for e in elements]
+
+    def __process_js_element(self, element):
+        if type(element) is list:
+            element = self.__process_js_element_list(element)[0]
+        else:
+            element = self.__process_single_js_element(element)
+        return element
+
+    def __process_js_multielement(self, elements):
+        if type(elements) is list:
+            elements = self.__process_js_element_list(elements)
+        else:
+            elements = [self.__process_single_js_element(elements)]
+        return elements
+
     def find_element_with_js(self, child_gui_element_setu_id, js):
         element = self.execute_javascript(js)
+        element = self.__process_js_element(element)
         self.__driver_elements[child_gui_element_setu_id] = element
 
-    def find_multielement(self, child_gui_element_setu_id, with_type, with_value):
-        melement = ElementFinder.find_elements(self.__driver, with_type, with_value)
+    def __process_multielement(self, child_gui_element_setu_id, melement):
         self.__driver_melements[child_gui_element_setu_id] = melement
         return melement.get_instance_count()
+
+    def find_multielement(self, child_gui_element_setu_id, with_type, with_value):
+        melement = MultiElement(ElementFinder.find_elements(self.__driver, with_type, with_value))
+        return self.__process_multielement(child_gui_element_setu_id, melement)
+
+    def find_multielement_with_js(self, child_gui_element_setu_id, js):
+        elem_list = self.execute_javascript(js)
+        elements = self.__process_js_multielement(elem_list)
+        melement = MultiElement(elements)
+        return self.__process_multielement(child_gui_element_setu_id, melement)
 
     def get_current_window_handle(self):
         return DriverCommands.get_current_window_handle(self.__driver)
