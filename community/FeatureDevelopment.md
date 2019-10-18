@@ -12,9 +12,17 @@ The features listed here which are marked as done are available in source code o
 2. Advanced Frame related functionality - In Progress
     * Enumerating immediate frames at Dom Root and Frame level
     * Content based frame finding for immediate child frames
-3. Action Chains - Named method for common interactions
-4. Nested Elements support
-5. wait for Absence, Invisible and Disabled
+3. Initial implementation of Screen and Point abstraction - Done
+4. Support for With.POINT for element identification. - Done
+5. Support for With.JS for element identification - In progress.
+  * Single element - If JS returns multiple elements, should return first one.
+  * Multi-element - If JS returns single element, should return it as a list.
+6. Action Chains - Named method for common interactions
+   * Client-side interfaces and classes - Mostly done
+   * FaaST implementation - In progress
+   * Arjuna implementation - In progress
+7. Nested Elements support
+8. wait for Absence, Invisible and Disabled
 
 ## Phase 2 - Completion of Pending Core Framework Features in Arjuna - Nov 29, 2019
 * Map valid With options to tpye of component. Clear exceptions with troubleshooting to be coded.
