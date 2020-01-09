@@ -1,0 +1,12 @@
+[CAT_NAME]
+#web,android_web
+id = tag-name
+
+[SUBMIT]
+#web,android_web
+id = submit
+
+[CAT_CHECKBOXES]
+#web,android_web
+name = delete_tags[]
+

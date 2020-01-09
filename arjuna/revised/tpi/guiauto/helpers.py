@@ -1,0 +1,3 @@
+
+class GuiDriverExtendedConfig:
+    pass

@@ -1,0 +1,87 @@
+[LOGIN]
+#web,android_web
+id = user_login
+
+[PASSWORD]
+#web,android_web
+id = user_pass
+
+[SUBMIT]
+#web,android_web
+id = wp-submit
+
+[VIEW-SITE]
+#web,android_web
+class_name = welcome-view-site
+ 
+[PROFILE_LINK]
+#web,android_web
+class_name = avatar
+
+[LOGOUT_LINK]
+#web,android_web
+link_text = Log Out
+
+[TOGGLE_MENU]
+#web,android_web
+id =wp-admin-bar-menu-toggle
+
+[POSTS]
+#web,android_web
+X_TEXT =Posts
+
+[SETTINGS]
+#web,android_web
+link_text = Settings
+
+[NAVIGATION]
+#web,android_web
+partial_link_text = Comment
+
+[POSTS]
+#web,android_web
+css_selector = .dashicons-admin-post
+
+[CATEGORIES]
+#web,android_web
+link_text = Categories
+
+[MENU_TOGGLE]
+#web,android_web
+css_selector = .ab-icon
+
+[GENERAL]
+#web,android_web
+link_text = General
+
+[LOGOUT_CONFIRM]
+#web,android_web
+link_text = log out
+
+[CAT_NAME]
+#web,android_web
+id = tag-name
+
+[CAT_CHECKBOXES]
+#web,android_web
+name = delete_tags[]
+
+[BLOG_NAME]
+#web,android_web
+id = blogname
+
+[MEMBERSHIP]
+#web,android_web
+id = users_can_register
+
+[ROLE]
+#web,android_web
+id = default_role
+
+[DATE_FORMAT]
+#web,android_web
+name = date_format
+
+[SUBMIT-SETTINGS]
+#web,android_web
+id = submit

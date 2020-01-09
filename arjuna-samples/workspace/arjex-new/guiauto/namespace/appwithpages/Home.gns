@@ -1,0 +1,15 @@
+[LOGIN]
+#web,android_web
+id = user_login
+
+[PASSWORD]
+#web,android_web
+id = user_pass
+
+[SUBMIT]
+#web,android_web
+id = wp-submit
+
+[LOGOUT_CONFIRM]
+#web,android_web
+link_text = log out

@@ -1,0 +1,1 @@
+This is a placeholder directory for keeping name space files for externalization of identifiers for GUI automation.
