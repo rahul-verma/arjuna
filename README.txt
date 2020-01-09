@@ -1,4 +1,4 @@
-Test Mile Arjuna
+Arjuna
 Copyright 2018 Test Mile Software Testing Pvt Ltd
 
 Website: www.TestMile.com
