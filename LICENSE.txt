@@ -1,23 +1,20 @@
-Test Mile Arjuna
-Copyright 2018 Test Mile Software Testing Pvt Ltd
+Arjuna
+Copyright 2018 Rahul Verma
 
-Website: www.TestMile.com
-Email: support [at] testmile.com
-Creator: Rahul Verma
+Website: www.RahulVerma.net
 
 This Software includes software developed by
-Test Mile Software Testing Pvt Ltd
-(Company Website: www.TestMile.com, Company Email: sales@testmile.com)
+Rahul Verma
 
-Test Mile Arjuna, is hereinafter referred to as "Software" or "Arjuna".
+Arjuna, is hereinafter referred to as "Software" or "Arjuna".
 
 Information on Inclusion of Third Party Software
 ------------------------------------------------
 
 The Software includes the UNMODIFIED version of the following 3rd party libraries as a part of its distribution. The Software makes use of them in their originally released binary versions.
 
-Test Mile acknowledges the copyrights, licenses, trademarks of these libraries as per the guidelines provided by respective copyright holders and licensors.
-If there is a change needed in the way the names are being mentioned or licensing information is being provided, please write to support@arjunapro.com and the same shall be corrected/modified.
+Rahul Verma acknowledges the copyrights, licenses, trademarks of these libraries as per the guidelines provided by respective copyright holders and licensors.
+If there is a change needed in the way the names are being mentioned or licensing information is being provided, please write to Rahul Verma and the same shall be corrected/modified.
 
 The licensing information of all of the mentioned unique libraries can be found below and the corresponding full reference license files can be found under /docs/licenses directory of the distribution.
 
@@ -31,7 +28,7 @@ The only reference to this lib we were able to find was in the Django lib:
 
 https://github.com/juanpex/django-model-report/blob/master/model_report/arial10.py
 
-Please let us know if we can do better by including proper licensing information.
+Please let me know if I can do better by including proper licensing information.
 
 PyHocon
 -------

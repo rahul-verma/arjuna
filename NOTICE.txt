@@ -1,13 +1,10 @@
-Test Mile Arjuna
-Copyright 2018 Test Mile Software Testing Pvt Ltd
+Arjuna
+Copyright 2018 Rahul Verma
 
-Website: www.TestMile.com
-Email: support [at] testmile.com
-Creator: Rahul Verma
+Website: www.RahulVerma.net
 
 This Software includes software developed by
-Test Mile Software Testing Pvt Ltd
-(Company Website: www.TestMile.com, Company Email: sales@testmile.com)
+Rahul Verma
 
 Test Mile Arjuna, is hereinafter referred to as "Software" or "Arjuna".
 
