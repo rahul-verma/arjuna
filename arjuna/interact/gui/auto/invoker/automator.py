@@ -119,7 +119,7 @@ class AbstractAppAutomator:
         self._send_request(GuiAutoActionType.SET_SLOMO, *args)
 
     def execute_javascript(self, script):
-        self._send_request(GuiAutoActionType.BROWSER_EXECUTE_JAVASCRIPT, SetuArg.arg("script", script))
+        return self.impl_automator.browser.execute_javascript(script)
 
     def Source(self):
         return DefaultGuiSource(self, abcde) # abcde should be the impl source

@@ -18,7 +18,7 @@ y14 -> HardCoded.sleep works
 y15 -> Basic element interactions work.
 y16 -> auto finding and state checking works for basic interactions.
 y17 -> multielement works.
-y18 -> 
+y18 -> Java script execution works
 
 
 Deferred and Reason
@@ -42,7 +42,10 @@ Notes for any needed fixes and changes
     The errors should tell -> expecting str/int etc instead of AnyRefValue.
     OR those methods at the correct layer should convert it to the expected value type and use.
 
-7. 
+7. JS execution works and because of local exec can return objects as well. 
+    - should evaluate whether return this object as AnyRefValue makes sense?
+
+8. 
 
 
 What SetuSvc used to do:
