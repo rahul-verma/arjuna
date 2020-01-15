@@ -1,14 +1,14 @@
+import sys
+from pprint import pprint
+from commons import *
+from arjuna.tpi.enums import BrowserName, ArjunaOption
 
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.enums import BrowserName, ArjunaOption
-
-context = Arjuna.init()
-cb = context.config_builder
+context = init_arjuna()
+cb = context.ConfigBuilder()
 cb.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
 cb.build()
 
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(context.get_config())
+automator = launch_automator(context.get_config())
 
 automator.browser.go_to_url("https://google.com")
 print(automator.main_window.title)

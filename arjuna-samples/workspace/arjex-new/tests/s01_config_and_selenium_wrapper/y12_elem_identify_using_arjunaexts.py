@@ -1,13 +1,10 @@
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
+from commons import *
+from arjuna.tpi.guiauto.helpers import With, Screen
 
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
+init_arjuna()
 
-url = automator.config.get_user_option_value("wp.login.url").as_str()
-automator.browser.go_to_url(url)
+automator = launch_automator()
+go_to_wp_home(automator)
 
 # Based on Text
 element = automator.Element(With.text("Lost your password?"))
@@ -15,7 +12,7 @@ element.identify()
 print(element.source.content.root)
 
 # Based on partial text
-element = automator.Element(With.partial_text("Lost"))
+element = automator.Element(With.ptext("Lost"))
 element.identify()
 print(element.source.content.root)
 
@@ -30,12 +27,12 @@ element.identify()
 print(element.source.content.root)
 
 # Based on any attribute e.g. for
-element = automator.Element(With.attr_value("[for][user_login]")
+element = automator.Element(With.attr_value("[for][user_login]"))
 element.identify()
 print(element.source.content.root)
 
 # Based on partial content of an attribute
-element = automator.Element(With.partial_attr_value("[for][_login]"))
+element = automator.Element(With.attr_pvalue("[for][_login]"))
 element.identify()
 print(element.source.content.root)
 
@@ -49,6 +46,7 @@ element = automator.Element(With.compound_class("button button-large"))
 element.identify()
 print(element.source.content.root)
 
+# Based on class names
 element = automator.Element(With.class_names("button", "button-large"))
 element.identify()
 print(element.source.content.root)

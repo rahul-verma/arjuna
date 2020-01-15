@@ -1,21 +1,14 @@
 
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import GuiDriverExtendedConfig
+from commons import *
+from arjuna.tpi.guiauto.helpers import GuiDriverExtendedConfigBuilder
 
-'''
-Code is same as that for launching Chrome.
-To launch Firefox instead, you need to add the following to <arjex/config/project.conf file:
-arjunaOptions = {
-    browser.name = firefox
-}
-'''
-
-Arjuna.init()
-econfig = GuiDriverExtendedConfig()
-econfig.browserArg("--headless")
+init_arjuna()
+eb = GuiDriverExtendedConfigBuilder()
+eb.browser_arg("--headless")
+econfig = eb.build()
 
 # Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config(), econfig)
+automator = launch_automator(Arjuna.get_ref_config(), econfig)
 
 automator.browser.go_to_url("https://google.com")
 print(automator.main_window.title)

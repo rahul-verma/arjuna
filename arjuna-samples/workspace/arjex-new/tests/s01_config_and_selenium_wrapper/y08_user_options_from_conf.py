@@ -1,7 +1,7 @@
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.enums import ArjunaOption
+from commons import *
 
-config = Arjuna.get_central_config()
+
+config = init_arjuna().config
 
 print(config.get_user_option_value("wp.app.url").as_str())
 print(config.get_user_option_value("wp.login.url").as_str())

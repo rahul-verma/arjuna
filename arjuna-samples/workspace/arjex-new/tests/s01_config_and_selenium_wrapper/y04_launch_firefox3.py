@@ -1,5 +1,4 @@
-
-from arjuna.revised.tpi import Arjuna
+from commons import *
 
 '''
 Code is same as that for launching Chrome.
@@ -9,9 +8,9 @@ arjunaOptions = {
 }
 '''
 
-Arjuna.init()
+init_arjuna()
 # Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
+automator = launch_automator(Arjuna.get_ref_config())
 
 automator.browser.go_to_url("https://google.com")
 print(automator.main_window.title)

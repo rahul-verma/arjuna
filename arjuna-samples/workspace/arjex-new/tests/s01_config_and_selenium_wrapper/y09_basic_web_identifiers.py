@@ -1,12 +1,10 @@
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
+from commons import *
+from arjuna.tpi.guiauto.helpers import With
 
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
+init_arjuna()
 
-url = automator.config.get_user_option_value("wp.login.url").as_str()
-automator.browser.go_to_url(url)
+automator = launch_automator()
+go_to_wp_home(automator)
 
 # The following code is for user name field.
 # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
@@ -30,10 +28,10 @@ print(element.source.content.root)
 # Html of link: <a href="http://192.168.56.103/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
 element = automator.Element(With.link_text("Lost your password?"))
 element.identify()
-print(element.source.content.root())
+print(element.source.content.root)
 
-element = automator.Element(With.partial_link_text("password"))
+element = automator.Element(With.link_ptext("password"))
 element.identify()
-print(element.source.content.root())
+print(element.source.content.root)
 
 automator.quit()

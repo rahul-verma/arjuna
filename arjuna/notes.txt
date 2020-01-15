@@ -1,0 +1,152 @@
+Progress
+-------
+Working examples:
+y01 - launch chrome
+y02 - .arjuna_option(firefox details)
+y03 - .firefox()
+y04 - firefox based on project conf
+y05 - headless chrome, extended driver config
+y06 -> getting arjuna property from project conf using a.b.c and A_B_C and as_* value methods.
+y07 -> programmatic user options
+y08 -> user options from project config
+y09 -> basic identifiers. link_ptext needs to be fixed.
+y10 -> xpath examples
+y11 -> css examples
+y12 -> Extended identifiers work (which are not commented in example code.)
+y13 -> OR relationship works
+y14 -> HardCoded.sleep works
+y15 -> Basic element interactions work.
+y16 -> auto finding and state checking works for basic interactions.
+y17 ->
+
+
+Deferred and Reason
+-------------------
+
+
+Notes for any needed fixes and changes
+-------------------------------------
+
+1. Arjuna identifiers:
+- Add support for new identifiers.
+
+2. With.CLASS_NAMES --> Shouldn't we have just one identifier. instead of 2
+- remove With.CLASS_NAME?
+
+3. Setu Log is being created - get rid.
+4. arjuna-py.log --> rename to arjuna.log
+5. include timestamp for arjuna log.
+
+6. Test when different values in sample code are provided as Values rather than as_* conversion.
+    The errors should tell -> expecting str/int etc instead of AnyRefValue.
+    OR those methods at the correct layer should convert it to the expected value type and use.
+
+7. 
+
+
+What SetuSvc used to do:
+
+    def __register_test_session(self, root_dir, cliConfig=None):
+        handler = TestSessionHandler()
+
+        config = handler.init(root_dir, cliConfig)
+        SetuSvcObjectManager.register_testsession_handler(handler)
+        out = {
+            'testSessionSetuId': handler.setu_id,
+            'configSetuId': config.setu_id,
+
+        }
+
+        out.update(config.as_json_dict())
+        return out
+
+    def _handle_configurator_action(self, ts_handler, action_type, json_args):
+        return ts_handler.conf_handler.take_action(action_type.name, json_args)
+
+    def _handle_data_source_action(self, ts_handler, action_type, json_args):
+        return ts_handler.datasource_handler.take_action(action_type, json_args)
+
+    def _handle_gui_automator_action(self, ts_handler, action_type, json_args):
+        if action_type == GuiAutoActionType.LAUNCH:
+            config = ts_handler.conf_handler.configurator.get_config(Handler.get_config_setuid(json_args))
+            automator_handler = GuiAutomatorHandler(ts_handler.dispatcher)
+            automator_handler.launch_automator(config, **json_args)
+            ts_handler.register_gui_automator_handler(automator_handler)
+            return {'automatorSetuId' : automator_handler.setu_id}
+        elif action_type == GuiAutoActionType.QUIT:
+            handler = ts_handler.get_automator_handler(json_args)
+            handler.quit_automator()
+            ts_handler.deregister_gui_automator_handler(handler) 
+        else:
+            gui_setu_id = json_args.get("guiSetuId", None)
+            handler = None
+            if gui_setu_id is not None:
+                handler = ts_handler.get_gui_handler(json_args)
+            else:
+                gui_automator_setu_id = json_args.get("automatorSetuId", None)
+                if gui_automator_setu_id is None:
+                    raise Exception("For gui component action either guiSetuId or automatorSetuId must be provided.")
+                handler = ts_handler.get_automator_handler(json_args)
+            return handler.take_action(action_type, json_args)
+
+    def _handle_gui_action(self, ts_handler, action_type, json_args):
+        automator_handler = ts_handler.get_automator_handler(json_args)
+        return ts_handler.gui_manager.take_action(automator_handler, action_type, json_args)
+
+
+You need to see the following in relation to With object which is now directly used
+in client API instead of a web service call:
+
+    def define_element(self, locators):
+        elem = self.automator.create_element(GuiElementMetaData.createEMD(locators))
+        return {"guiComponentSetuId" : elem.setu_id}
+
+    def define_element_with_emd(self, emd):
+        elem = self.automator.create_element(emd)
+        return {"guiComponentSetuId" : elem.setu_id}
+
+Also look at the following take element action api:
+
+    def take_element_action(self, action, json_dict):
+        elem_setu_id = self.get_element_setuid(json_dict)
+        self.automator.slomo()
+        instance_action = False
+        if "isInstanceAction" in json_dict:
+            instance_action = json_dict["isInstanceAction"]
+            del json_dict["isInstanceAction"]
+        if instance_action:
+            index = json_dict["instanceIndex"]
+            del json_dict["instanceIndex"]
+            multi_element =  self.automator.get_multielement_for_setu_id(elem_setu_id)
+            element = multi_element.get_instance_at_index(index)
+        else:
+            element =  self.automator.get_element_for_setu_id(elem_setu_id)
+        return getattr(ElementHandler, action)(element, **json_dict)
+
+Evaluate the following drop down methods:
+class DropdownHandler:
+    @classmethod
+    def configure(cls, dropdown, elementConfig):
+        dropdown.configure(elementConfig)
+
+    @classmethod
+    def set_option_locators(cls, dropdown, locators):
+        dropdown.set_option_locators(GuiElementMetaData.createEMD(locators))
+
+    @classmethod
+    def set_option_container(cls, dropdown, locators):
+        dropdown.set_option_container(GuiElementMetaData.createEMD(locators))
+
+Following window method:
+    @classmethod
+    def define_child_window(self, window, locators):
+        print(locators)
+        return {"guiComponentSetuId" : window.define_child_window(GuiElementMetaData.createEMD(locators)).setu_id}
+
+
+Following Frame method:
+    @classmethod
+    def define_frame(cls, dom_root, locators):
+        return {"guiComponentSetuId" : dom_root.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
+
+

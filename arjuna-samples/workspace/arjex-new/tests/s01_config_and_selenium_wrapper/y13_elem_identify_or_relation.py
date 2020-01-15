@@ -1,13 +1,10 @@
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
+from commons import *
+from arjuna.tpi.guiauto.helpers import With, Screen
 
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
+init_arjuna()
 
-url = automator.config.get_user_option_value("wp.login.url").as_str()
-automator.browser.go_to_url(url)
+automator = launch_automator()
+go_to_wp_home(automator)
 
 # Two identifiers. Only first one would be tried as it succeeds.
 element = automator.Element(With.id("user_login"), With.name("log"))

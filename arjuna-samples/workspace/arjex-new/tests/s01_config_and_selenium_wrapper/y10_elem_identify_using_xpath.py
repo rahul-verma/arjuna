@@ -1,12 +1,10 @@
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
+from commons import *
+from arjuna.tpi.guiauto.helpers import With
 
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
+init_arjuna()
 
-url = automator.config.get_user_option_value("wp.login.url").as_str()
-automator.browser.go_to_url(url)
+automator = launch_automator()
+go_to_wp_home(automator)
 
 # Based on Text
 element = automator.Element(With.xpath("//*[text() = 'Lost your password?']"))
@@ -31,16 +29,16 @@ print(element.source.content.root)
 # Based on any attribute e.g. for
 element = automator.Element(With.xpath("//*[@for = 'user_login']"))
 element.identify()
-print(element.source.content.root())
+print(element.source.content.root)
 
 # Based on partial content of an attribute
 element = automator.Element(With.xpath("//*[contains(@for, '_login')]"))
 element.identify()
-print(element.source.content.root())
+print(element.source.content.root)
 
 # Based on element type
 element = automator.Element(With.xpath("//*[@type ='password']"))
 element.identify()
-print(element.source.content.root())
+print(element.source.content.root)
 
 automator.quit()

@@ -1,10 +1,8 @@
 '''
 This file is a part of Test Mile Arjuna
-Copyright 2018 Test Mile Software Testing Pvt Ltd
+Copyright 2018 Rahul Verma
 
-Website: www.TestMile.com
-Email: support [at] testmile.com
-Creator: Rahul Verma
+Website: www.RahulVerma.net
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -18,6 +16,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 '''
+
 import pkg_resources
 import time
 import os
@@ -38,7 +37,7 @@ class __arfacade():
         self.__version = pkg_resources.require("arjuna")[0].version
 
     def launch(self, raw_args):
-        from arjuna.lib.reader.textfile import TextResourceReader
+        from arjuna.core.reader.textfile import TextResourceReader
         from arjuna.interface.cli import ArjunaCLI
         reader = TextResourceReader("header.txt")
         print(reader.read().format(version=self.__version))

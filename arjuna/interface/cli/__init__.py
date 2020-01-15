@@ -25,12 +25,12 @@ import abc
 import sys
 import time
 
-from arjuna.lib.utils import sys_utils
-from arjuna.lib.enums import *
-from arjuna.lib.enums import *
-from arjuna.lib.reader.textfile import TextResourceReader
-from arjuna.lib.types import constants
-from arjuna.lib.adv.py import *
+from arjuna.core.utils import sys_utils
+from arjuna.core.enums import *
+from arjuna.core.enums import *
+from arjuna.core.reader.textfile import TextResourceReader
+from arjuna.core.types import constants
+from arjuna.core.adv.py import *
 from arjuna.interface.enums import CommandEnum
 
 from .parser import *
