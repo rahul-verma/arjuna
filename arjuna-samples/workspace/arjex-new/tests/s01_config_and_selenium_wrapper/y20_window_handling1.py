@@ -14,14 +14,14 @@ main_win = automator.main_window
 main_win.maximize()
 print(main_win.title)
 
-automator.execute_script("window.open('/abc')")
+automator.execute_javascript("window.open('/abc')")
 cwin = automator.get_latest_window()
 cwin.focus()
 print(cwin.get_title())
 cwin.close()
 
-automator.execute_script("https://rahulverma.net")
-automator.execute_script("https://google.com")
+automator.execute_javascript("https://rahulverma.net")
+automator.execute_javascript("https://google.com")
 automator.close_all_child_windows()
 print(main_win.title)
 

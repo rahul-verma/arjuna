@@ -207,17 +207,17 @@ class DefaultAlert(BaseComponent):
         super().__init__(automator, GuiComponentType.ALERT, impl)
 
     def confirm(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_CONFIRM)
+        self.impl.confirm()
 
     def dismiss(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_DISMISS)
+        self.impl.dismiss()
 
-    def get_text(self):
-        response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_GET_TEXT)
-        return response.get_value_for_text()
+    @property
+    def text(self):
+        return self.impl.get_text()
 
     def send_text(self, text):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.ALERT_SEND_TEXT, SetuArg.text_arg(text))
+        self.impl.send_text(text)
 
 
 class DefaultBrowser(BaseComponent):
@@ -229,13 +229,14 @@ class DefaultBrowser(BaseComponent):
         self.impl.go_to_url(url)
 
     def go_back(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_GO_BACK)
+        self.impl.go_back()
 
     def go_forward(self):
+        self.impl.go_forward()
         self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_GO_FORWARD)
 
     def refresh(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.BROWSER_REFRESH)
+        self.impl.refresh()
 
 class BaseFrame(BaseComponent):
 

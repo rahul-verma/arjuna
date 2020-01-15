@@ -19,6 +19,7 @@ y15 -> Basic element interactions work.
 y16 -> auto finding and state checking works for basic interactions.
 y17 -> multielement works.
 y18 -> Java script execution works
+y19 -> alerts work
 
 
 Deferred and Reason

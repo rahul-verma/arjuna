@@ -64,10 +64,6 @@ class AbstractAppAutomator:
         elem_setu_id = self.__create_generic_element(GuiAutoActionType.CREATE_RADIOGROUP, *with_locators)
         return GuiAutoComponentFactory.RadioGroup(self.__test_session, self, elem_setu_id)
 
-    def Alert(self):
-        elem_setu_id = self.__create_generic_element(GuiAutoActionType.CREATE_ALERT)
-        return GuiAutoComponentFactory.Alert(self.__test_session, self, elem_setu_id)
-
     def Frame(self, *with_locators):
         return self.DomRoot().Frame(*with_locators)
 
@@ -79,6 +75,11 @@ class AbstractAppAutomator:
 
     def close_all_child_windows(self):
         self.MainWindow().close_all_child_windows()
+
+    @property
+    def alert(self):
+        impl = self.impl_automator.alert_handler.create_alert()
+        return GuiAutoComponentFactory.Alert(self, impl)
 
     @property
     def main_window(self):

@@ -1,11 +1,9 @@
-from arjuna.setu.types import SetuManagedObject
-from arjuna.interact.gui.auto.element.guielement import GuiElement
+from arjuna.interact.gui.auto.impl.element.guielement import GuiElement
 from arjuna.tpi.enums import ArjunaOption
 
-class WebAlert(SetuManagedObject):
+class WebAlert:
 
     def __init__(self, automator):
-        super().__init__()
         self.__automator = automator
 
     @property
