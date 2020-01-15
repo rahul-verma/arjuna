@@ -83,6 +83,9 @@ class BaseComponent:
     def source(self):
         return DefaultGuiSource(self._automator, self.impl.get_source())
 
+    def _emd(self, *locators):
+        return self.impl_automator.create_emd(*locators)
+
 class DefaultGuiElement(BaseComponent):
 
     def __init__(self, automator, impl, index=None):
@@ -285,7 +288,7 @@ class AbstractBasicWindow(BaseComponent):
         return self.impl.title
 
     def focus(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.WINDOW_FOCUS)
+        self.impl.focus()
 
 
 class DefaultChildWindow(AbstractBasicWindow):
@@ -294,10 +297,10 @@ class DefaultChildWindow(AbstractBasicWindow):
         super().__init__(automator, GuiComponentType.CHILD_WINDOW, impl)
 
     def close(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.CHILD_WINDOW_CLOSE)
+        self.impl.close()
 
     def MainWindow(self):
-        return self._get_automator().MainWindow()
+        self._automator.main_window
 
 
 class DefaultMainWindow(AbstractBasicWindow):
@@ -306,20 +309,18 @@ class DefaultMainWindow(AbstractBasicWindow):
         super().__init__(automator, GuiComponentType.MAIN_WINDOW, impl)
 
     def maximize(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_MAXIMIZE)
+        self.impl.maximize()
 
     def _take_element_finding_action(self, setu_action_type, *setu_args):
         response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, setu_action_type, *setu_args)
         return response.get_value_for_gui_component_setu_id()
 
-    def ChildWindow(self, *withLocators):
-        arg = [l.asMap() for l in withLocators]
-        response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_CREATE_CHILD_WINDOW, SetuArg.arg("locators", arg))
-        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_gui_component_setu_id())
+    def ChildWindow(self, *with_locators):
+        win =  self.impl.define_child_window(self._emd(*with_locators))
+        return DefaultChildWindow(self._automator, win)
 
     def LatestChildWindow(self):
-        response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_GET_LATEST_CHILD_WINDOW)
-        return DefaultChildWindow(self._get_test_session(), self._get_automator(), response.get_value_for_gui_component_setu_id())
-
+        return DefaultChildWindow(self._automator, self.impl.get_latest_child_window())
+ 
     def close_all_child_windows(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.MAIN_WINDOW_CLOSE_ALL_CHILD_WINDOWS)
+        self.impl.close_all_child_windows()

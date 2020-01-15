@@ -20,7 +20,8 @@ y16 -> auto finding and state checking works for basic interactions.
 y17 -> multielement works.
 y18 -> Java script execution works
 y19 -> alerts work
-
+y20 -> Basic window handling works
+y21 -> 
 
 Deferred and Reason
 -------------------

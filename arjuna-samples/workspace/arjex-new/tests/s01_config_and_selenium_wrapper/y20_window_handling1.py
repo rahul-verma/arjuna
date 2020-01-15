@@ -1,13 +1,10 @@
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
+from arjuna.tpi import Arjuna
+from arjuna.tpi.guiauto.helpers import With
 
-from .wp_login_logout import *
+from commons import *
 
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
-
+init_arjuna()
+automator = launch_automator()
 login(automator)
 
 main_win = automator.main_window
@@ -15,13 +12,13 @@ main_win.maximize()
 print(main_win.title)
 
 automator.execute_javascript("window.open('/abc')")
-cwin = automator.get_latest_window()
+cwin = automator.latest_child_window
 cwin.focus()
-print(cwin.get_title())
+print(cwin.title)
 cwin.close()
 
-automator.execute_javascript("https://rahulverma.net")
-automator.execute_javascript("https://google.com")
+automator.execute_javascript("window.open('https://rahulverma.net')")
+automator.execute_javascript("window.open('https://google.com')")
 automator.close_all_child_windows()
 print(main_win.title)
 

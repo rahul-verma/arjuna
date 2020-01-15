@@ -63,7 +63,6 @@ class MainWindow(BasicWindow):
                 if handle not in self.__all_child_windows:
                     cwin = ChildWindow(self.automator, self, handle)
                     self.__all_child_windows[handle] = cwin
-                    self.__setu_id_map[cwin.setu_id] = cwin
                     new_handles.append(handle)
         return handles, new_handles
 
@@ -81,9 +80,8 @@ class MainWindow(BasicWindow):
     def __focus_on_window(self, handle):
         self.__get_child_window(handle).jump()
 
-    def delete_window(self, setu_id, handle):
+    def delete_window(self, handle):
         del self.__all_child_windows[handle]
-        del self.__setu_id_map[setu_id]
 
     def close_all_child_windows(self):
         all_child_handles, _ = self.get_all_child_window_handles()
@@ -95,12 +93,6 @@ class MainWindow(BasicWindow):
 
     def get_current_window_handle(self):
         return self.automator.dispatcher.get_current_window_handle()
-
-    def get_window_for_setu_id(self, setu_id):
-        if self.setu_id == setu_id:
-            return self
-        else:
-            return self.__setu_id_map[setu_id]
 
     def define_child_window(self, locator_meta_data):
         all_child_handles, _ = self.get_all_child_window_handles()
@@ -159,5 +151,5 @@ class ChildWindow(BasicWindow):
     def close(self):
         self.focus()
         self.automator.dispatcher.close_current_window()
-        self.__main_window.delete_window(self.setu_id, self.handle)
+        self.__main_window.delete_window(self.handle)
         self.__main_window.focus()

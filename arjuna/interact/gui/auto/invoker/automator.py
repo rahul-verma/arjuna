@@ -70,11 +70,8 @@ class AbstractAppAutomator:
     def ChildWindow(self, *with_locators):
         return self.MainWindow().ChildWindow(*with_locators)
 
-    def LatestChildWindow(self):
-        return self.MainWindow().LatestChildWindow()
-
     def close_all_child_windows(self):
-        self.MainWindow().close_all_child_windows()
+        self.main_window.close_all_child_windows()
 
     @property
     def alert(self):
@@ -87,6 +84,10 @@ class AbstractAppAutomator:
 
     def _set_main_window(self, window):
         self.__main_window = window
+
+    @property
+    def latest_child_window(self):
+        return self.main_window.LatestChildWindow()
 
     @property
     def config(self):
