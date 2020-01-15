@@ -1,15 +1,14 @@
 import random
 import os
 
-from arjuna.interact.gui.auto.element.base_element import BaseElement
-from arjuna.interact.gui.auto.element.guielement import GuiElement
-from arjuna.interact.gui.auto.source.parser import *
+from arjuna.interact.gui.auto.impl.element.base_element import BaseElement
+from arjuna.interact.gui.auto.impl.element.guielement import GuiElement
+from arjuna.interact.gui.auto.impl.source.parser import *
 
 class GuiMultiElement(BaseElement):
     
     def __init__(self, automator, emd, parent=None):
         super().__init__(automator, emd, parent)
-        self.__automator = automator
         self.instance_count = 0
         self.__instances = None
         self.__source_parser = None
@@ -34,14 +33,14 @@ class GuiMultiElement(BaseElement):
     def load_source_parser(self):
         if not self.__source_parser:
             self.__source_parser = MultiElementSource()
-            self.__automator.update_source_map(self.__source_parser)
+            self.automator.update_source_map(self.__source_parser)
         for instance in self.__instances:
             instance.load_source_parser()
         self.__source_parser.load(self.__instances)
 
     def set_instance_count(self, count):
         self.instance_count = count
-        self.__instances = [_GuiPartialElement(self.get_automator(), self, i) for i in range(self.instance_count)]
+        self.__instances = [_GuiPartialElement(self.automator, self, i, self.dispatcher.get_element_at_index(i)) for i in range(self.instance_count)]
 
     def get_instance_count(self):
         self.find_if_not_found()
@@ -144,15 +143,12 @@ class GuiMultiElement(BaseElement):
 
 class _GuiPartialElement(GuiElement):
 
-    def __init__(self, automator, multi_element: GuiMultiElement, instance_number: int):
+    def __init__(self, automator, multi_element: GuiMultiElement, instance_number: int, dispatcher_element):
         super().__init__(automator, multi_element.get_locator_meta_data())
         self.__multi_element = multi_element
         self.__instance_number = instance_number
-        dispatcher = self.__multi_element.dispatcher_creator.create_gui_element_dispatcher(
-            self.__multi_element.get_automator().dispatcher, self.__multi_element.setu_id
-        )
-        dispatcher.set_partial(self.__instance_number)
-        self._set_dispatcher(dispatcher)
+        # dispatcher.set_partial(self.__instance_number)
+        self.dispatcher = dispatcher_element
 
     def create_dispatcher(self):
         pass

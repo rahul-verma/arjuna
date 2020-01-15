@@ -60,7 +60,7 @@ class GuiAutomator(ElementContainer):
         return GuiElement(self, locator_meta_data) 
 
     def _create_multielement_flat_or_nested(self, locator_meta_data):
-        from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
+        from arjuna.interact.gui.auto.impl.element.multielement import GuiMultiElement
         return GuiMultiElement(self, locator_meta_data) 
 
     def create_dispatcher(self):

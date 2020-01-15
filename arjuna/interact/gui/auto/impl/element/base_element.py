@@ -14,6 +14,10 @@ class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
         self.__dispatcher_element = None
 
     @property
+    def automator(self):
+        return self.__automator
+
+    @property
     def dispatcher(self):
         return self.__dispatcher_element
 
@@ -52,9 +56,6 @@ class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
 
     def get_found_with(self, locator_type, locator_value):
         return self.__located_by
-
-    def get_automator(self):
-        return self.__automator
 
 
 class ElementConfig:

@@ -17,7 +17,8 @@ y13 -> OR relationship works
 y14 -> HardCoded.sleep works
 y15 -> Basic element interactions work.
 y16 -> auto finding and state checking works for basic interactions.
-y17 ->
+y17 -> multielement works.
+y18 -> 
 
 
 Deferred and Reason

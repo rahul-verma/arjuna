@@ -82,19 +82,16 @@ class SeleniumDriverDispatcher:
         element = self.__process_js_element(element)
         return 1, self.__create_gui_element_dispatcher(element)
 
-    def __process_multielement(self, child_gui_element_setu_id, melement):
-        self.__driver_melements[child_gui_element_setu_id] = melement
-        return melement.get_instance_count()
+    def find_multielement(self, with_type, with_value):
+        web_elements = ElementFinder.find_elements(self.__driver, with_type, with_value)
+        melement = MultiElement([SeleniumDriverElementDispatcher(self, web_element) for web_element in web_elements])
+        return melement.get_instance_count(), melement
 
-    def find_multielement(self, child_gui_element_setu_id, with_type, with_value):
-        melement = MultiElement(ElementFinder.find_elements(self.__driver, with_type, with_value))
-        return self.__process_multielement(child_gui_element_setu_id, melement)
-
-    def find_multielement_with_js(self, child_gui_element_setu_id, js):
+    def find_multielement_with_js(self, js):
         elem_list = self.execute_javascript(js)
         elements = self.__process_js_multielement(elem_list)
         melement = MultiElement(elements)
-        return self.__process_multielement(child_gui_element_setu_id, melement)
+        return melement.get_instance_count(), melement
 
     def get_current_window_handle(self):
         return DriverCommands.get_current_window_handle(self.__driver)

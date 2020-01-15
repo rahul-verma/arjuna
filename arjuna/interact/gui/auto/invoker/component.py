@@ -1,5 +1,5 @@
 from enum import Enum, auto
-import re
+import random
 
 from arjuna.interact.gui.auto.invoker.source import DefaultGuiSource
 
@@ -126,19 +126,23 @@ class DefaultGuiMultiElement(BaseComponent):
         super().__init__(automator, GuiComponentType.ELEMENT, impl)
 
     def at_index(self, index):
-        return DefaultGuiElement(self._get_test_session(), self._get_automator(), self.get_setu_id(), index)
+        return DefaultGuiElement(self._automator, self.impl.get_instance_at_index(index), index)
 
-    def first(self, index):
+    @property
+    def first(self):
         return self.at_index(0)
 
-    def last(self, index):
-        return self.at_index(self.length() -1)
+    @property
+    def last(self):
+        return self.at_index(self.length -1)
 
-    def random(self, index):
-        return self.at_index(re.randint(0, self.length()))
+    @property
+    def random(self):
+        return self.at_index(random.randint(0, self.length-1))
 
+    @property
     def length(self):
-        return abc
+        return self.impl.get_instance_count()
 
 class MultiElementSelectable(BaseComponent):
 

@@ -88,8 +88,8 @@ class ElementContainer(metaclass=abc.ABCMeta):
         if instance_count == 0:
             raise Exception("MultiElement could not be found with any of the provided locators.")
         gui_element.set_found_with(locator_type, locator_value)
-        gui_element.set_instance_count(instance_count)
         gui_element.dispatcher = dispatcher
+        gui_element.set_instance_count(instance_count)
 
     def find_element(self, gui_element):
         locator_type, locator_value, instance_count, dispatcher = self.wait_until_element_found(gui_element)
