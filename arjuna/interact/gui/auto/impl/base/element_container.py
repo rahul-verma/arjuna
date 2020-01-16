@@ -13,6 +13,10 @@ class ElementContainer(metaclass=abc.ABCMeta):
         self.__container_conditions = GuiElementContainerConditions(self)
 
     @property
+    def max_wait_time(self):
+        return self.config.get_arjuna_option_value("guiauto.max.wait").as_int()
+
+    @property
     def config(self):
         return self.__config
 
@@ -78,13 +82,13 @@ class ElementContainer(metaclass=abc.ABCMeta):
             raise Exception("Could not locate elements with locator(s): {}".format(gui_element.get_locator_meta_data()))
 
     def wait_until_element_found(self, gui_element):
-        return self.__container_conditions.PresenceOfElement(gui_element).wait()
+        return self.__container_conditions.PresenceOfElement(gui_element).wait(max_wait_time=self.max_wait_time)
 
     def wait_until_multielement_found(self, gui_element):
-        return self.__container_conditions.PresenceOfMultiElement(gui_element).wait()
+        return self.__container_conditions.PresenceOfMultiElement(gui_element).wait(max_wait_time=self.max_wait_time)
 
     def find_multielement(self, gui_element):
-        locator_type, locator_value, instance_count, dispatcher = self.wait_until_multielement_found(gui_element)
+        locator_type, locator_value, instance_count, dispatcher = self.wait_time_until_multielement_found(gui_element)
         if instance_count == 0:
             raise Exception("MultiElement could not be found with any of the provided locators.")
         gui_element.set_found_with(locator_type, locator_value)

@@ -1,21 +1,21 @@
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
+from commons import *
+from arjuna.tpi.guiauto.helpers import With
 
-Arjuna.init()
+config = init_arjuna().config
+
 # Default Gui automation engine is Selenium
 automator = None
 element = None
 
 def setup():
     global automator
-    automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
+    automator = launch_automator()
     go_to_wp_home(automator)
 
 def cleanup():
-    print(element.source.content.root)
     global automator
     global element
+    print(element.source.content.root)
     automator.quit()
     element = None
     automator = None
