@@ -1,14 +1,12 @@
-from arjuna.setu.types import SetuManagedObject
 from .multielement import GuiMultiElement
 from .base_element import ElementConfig
 
 # UUID is for client reference. Agent does not know about this.
-class GuiWebRadioGroup(SetuManagedObject, ElementConfig):
+class GuiWebRadioGroup(ElementConfig):
 
     def __init__(self, element_container, emd, parent=None):
-        super().__init__()
-        ElementConfig.__init__(self, element_container)
-        self._radios = element_container.create_multielement(emd)
+        super().__init__(element_container)
+        self._radios = element_container.define_multielement(emd)
         self.__found = False
 
     def __validate_radio_buttons(self, source):
