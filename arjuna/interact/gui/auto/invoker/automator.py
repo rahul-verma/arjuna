@@ -45,15 +45,15 @@ class AbstractAppAutomator:
     def is_gui(self):
         return False
 
-    def __emd(self, *locators):
+    def _create_emd(self, *locators):
         return self.impl_automator.create_emd(*locators)
 
     def Element(self, *with_locators):
-        impl = self.impl_automator.define_element(self.__emd(*with_locators))
+        impl = self.impl_automator.define_element(self._create_emd(*with_locators))
         return GuiAutoComponentFactory.Element(self, impl)
 
     def MultiElement(self, *with_locators):
-        impl = self.impl_automator.define_multielement(self.__emd(*with_locators))
+        impl = self.impl_automator.define_multielement(self._create_emd(*with_locators))
         return GuiAutoComponentFactory.MultiElement(self, impl)
 
     def DropDown(self, *with_locators):
@@ -68,7 +68,7 @@ class AbstractAppAutomator:
         return self.DomRoot().Frame(*with_locators)
 
     def ChildWindow(self, *with_locators):
-        return self.MainWindow().ChildWindow(*with_locators)
+        return self.main_window.ChildWindow(*with_locators)
 
     def close_all_child_windows(self):
         self.main_window.close_all_child_windows()

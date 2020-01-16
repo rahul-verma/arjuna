@@ -97,24 +97,34 @@ class MainWindow(BasicWindow):
     def define_child_window(self, locator_meta_data):
         all_child_handles, _ = self.get_all_child_window_handles()
         for handle in all_child_handles:
+            print("hererer")
             cwin = self.__get_child_window(handle)
             cwin.focus()
             for locator in locator_meta_data.locators:
+                print(locator.ltype.name)
                 if locator.ltype.name == "WINDOW_TITLE":
-                    if cwin.get_title().lower() == locator.lvalue.lower():
+                    if cwin.title.lower() == locator.lvalue.lower():
                         return cwin
-                elif locator.ltype.name == "PARTIAL_WINDOW_TITLE":
-                    if locator.lvalue.lower() in cwin.get_title().lower():
+                elif locator.ltype.name == "WINDOW_PTITLE":
+                    if locator.lvalue.lower() in cwin.title.lower():
                         return cwin
-                elif locator.ltype.name == "CHILD_LOCATOR":
+                elif locator.ltype.name == "CONTENT_LOCATOR":
+                    print("child locator logic")
+                    print(locator, locator.lvalue)
                     for child_locator in locator.lvalue.locators:
                         try:
+                            print(1)
                             emd = SimpleGuiElementMetaData(child_locator.ltype.name, child_locator.lvalue)
-                            contained_element = self.automator.create_element(emd)
+                            print(2)
+                            contained_element = self.automator.define_element(emd)
+                            print(3)
                             contained_element.find()
                             return cwin
                         except Exception as e:
+                            print("inside exception")
                             print(e)
+                            import traceback
+                            traceback.print_exc()
                             continue
         raise Exception("No child window found for locators: {}".format([str(l) for l in locator_meta_data.locators]))
 

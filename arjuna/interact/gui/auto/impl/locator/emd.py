@@ -87,7 +87,7 @@ class GenericLocateWith(Enum):
 
     INDEX = auto()
     WINDOW_TITLE = auto()
-    PARTIAL_WINDOW_TITLE = auto()
+    WINDOW_PTITLE = auto()
     CONTENT_LOCATOR = auto()
     POINT = auto()
     JAVASCRIPT = auto()   
@@ -168,7 +168,7 @@ class GuiElementMetaData:
         GenericLocateWith.IMAGE,
         GenericLocateWith.INDEX,
         GenericLocateWith.WINDOW_TITLE,
-        GenericLocateWith.PARTIAL_WINDOW_TITLE,
+        GenericLocateWith.WINDOW_PTITLE,
         GenericLocateWith.POINT,
         GenericLocateWith.JAVASCRIPT,
     }
@@ -300,17 +300,22 @@ class GuiElementMetaData:
 
     @classmethod
     def convert_to_impl_with_locators(cls, *with_locators):
-        return (l.as_impl_locator() for l in with_locators)
+        out_list = []
+        for locator in with_locators:
+            l = isinstance(locator, ImplWith) and locator or locator.as_impl_locator()
+            out_list.append(l)
+        return out_list
 
     @classmethod
     def create_emd(cls, *locators):
         impl_locators = cls.convert_to_impl_with_locators(*locators)
         processed_locators = []
         for locator in impl_locators:
+            print(locator)
             ltype = locator.wtype.lower()
-            if ltype == "CONTENT_LOCATOR":
+            if ltype == "content_locator":
                 CONTENT_LOCATOR = cls.create_emd(locator.wvalue)
-                p_locator = Locator(ltype=locator.wtype, lvalue=CONTENT_LOCATOR)
+                p_locator = Locator(ltype=locator.wtype, lvalue=CONTENT_LOCATOR, pos_args=None, named_args=None)
             else:
                 p_locator = cls.__process_single_raw_locator(locator)
             processed_locators.append(p_locator)
@@ -318,5 +323,5 @@ class GuiElementMetaData:
 
 class SimpleGuiElementMetaData(GuiElementMetaData):
 
-    def __init__(self, locator_type, locator_value):
-        super().__init__([Locator(ltype=locator_type, lvalue=locator_value)])
+    def __init__(self, locator_type, locator_value, pos_args=tuple(), named_args=dict()):
+        super().__init__([Locator(ltype=locator_type, lvalue=locator_value, pos_args=pos_args, named_args=named_args)])

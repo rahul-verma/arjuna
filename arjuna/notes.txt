@@ -21,7 +21,7 @@ y17 -> multielement works.
 y18 -> Java script execution works
 y19 -> alerts work
 y20 -> Basic window handling works
-y21 -> 
+y21 -> Window with title, partial title and content locator works. check notes for the found issue.
 
 Deferred and Reason
 -------------------
@@ -47,7 +47,12 @@ Notes for any needed fixes and changes
 7. JS execution works and because of local exec can return objects as well. 
     - should evaluate whether return this object as AnyRefValue makes sense?
 
-8. 
+8. Window handling logic needs to be checked for stability with content locator. 
+    Wait time should be overall wait time. Needs to be checked.
+    Also check open windows at any point in time.
+    May be we should check for window readiness and page load when a new window is launched using JavaScript.
+
+9. 
 
 
 What SetuSvc used to do:
