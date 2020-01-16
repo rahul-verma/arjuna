@@ -2,34 +2,32 @@
 3. (Especially for custom select controls) - Click the drop down control and then click the option. 
 '''
 
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
+from commons import *
+from arjuna.tpi.guiauto.helpers import With, GuiActionConfig
 
-from .wp_login_logout import *
+init_arjuna()
 
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
+automator = launch_automator()
 
 url = automator.config.get_user_option_value("narada.ex.dropdown.url").as_str()
 automator.browser.go_to_url(url)
 
-dropdown = automator.element(With.id("DropDown"))
-dropdown.select_visible_text("Another option")
+# # Works. Waits for clickability of select control as well as option.
+# dropdown = automator.dropdown(With.id("test"))
+# dropdown.select_visible_text("Another Option")
 
-# Wrong Tag
-dropdown = automator.element(With.id("Prob1"))
-dropdown.select_index(1)
+# # Wrong Tag
+# dropdown = automator.dropdown(With.id("Prob1"))
+# dropdown.select_index(1)
 
-#State check off
-conf = GuiActionConfig.builder().check_pre_state(False).build()
-dropdown = automator.element(With.id("test").configure(config))
-dropdown.select_index(1)
+# # State check off
+# conf = GuiActionConfig.builder().check_pre_state(False).build()
+# dropdown = automator.dropdown(With.id("test")).configure(conf)
+# dropdown.select_index(1)
 
-# Wrong tag, state check off
-conf = GuiActionConfig.builder().check_pre_state(False).build()
-dropdown = automator.element(With.id("Prob1").configure(config))
-dropdown.select_index(1)
+# # Wrong tag, state check off
+# conf = GuiActionConfig.builder().check_pre_state(False).build()
+# dropdown = automator.dropdown(With.id("Prob1")).configure(conf)
+# dropdown.select_index(1)
 
 automator.quit()

@@ -27,7 +27,8 @@ y23 -> Dropdown works. (Performance is slow. investigate.)
 y24 -> RadioGroup logic works.
 y25 -> Named arg formatting, case-insensitive works.
 y26 -> With.javascript works as expected for success and failure scenarios.
-y27 -> 
+y27 -> Pre state check works for basic element.
+y28 ->
 
 Deferred and Reason
 -------------------
@@ -68,6 +69,7 @@ Notes for any needed fixes and changes
     - With.JS: Description should mention about the problem.
     - 
 
+11. Text case insensitive? by default off. For on more processing is needed so expectation should be set accordingly.
 
 What SetuSvc used to do:
 

@@ -20,6 +20,7 @@ class GuiWebSelect(ElementConfig):
         self.__source_parser = None
 
     def __validate_select_control(self, tag):
+        print(tag)
         if tag.lower() != "select":
             raise Exception("The element should have a 'select' tag for WebSelect element. Found: " + tag)
         self._multi = self.__is_multi_select()

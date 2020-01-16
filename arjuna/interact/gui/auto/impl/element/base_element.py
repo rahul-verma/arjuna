@@ -72,7 +72,6 @@ class ElementConfig:
         return self.__settings
 
     def configure(self, settings):
-        print(settings)
         self.__settings.update(settings)
 
     def _should_check_type(self):

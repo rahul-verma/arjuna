@@ -85,6 +85,10 @@ class BaseComponent:
     def _emd(self, *locators):
         return self._automator._create_emd(*locators)
 
+    def configure(self, config):
+        self.impl.configure(config.settings)
+        return self
+
 class DefaultGuiElement(BaseComponent):
 
     def __init__(self, automator, impl, index=None):
@@ -117,10 +121,6 @@ class DefaultGuiElement(BaseComponent):
 
     def identify(self):
         self.impl.identify()
-
-    def configure(self, config):
-        self.impl.configure(config.settings)
-        return self
 
 class DefaultGuiMultiElement(BaseComponent):
 
@@ -171,9 +171,6 @@ class DefaultDropDown(MultiElementSelectable):
 
     def __init__(self, automator, impl):
         super().__init__(automator, GuiComponentType.DROPDOWN, impl)
-
-    def configure(self, action_config):
-        self.impl.configure(action_config)
 
     @property
     def _option_locators(self):
