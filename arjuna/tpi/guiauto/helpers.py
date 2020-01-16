@@ -34,10 +34,10 @@ class GuiActionConfig:
             settings is a dict of dict of GuiActionConfigType key/value pairs
         '''
         # 
-        self.__settings = dict()
+        self.__settings = settings
 
     @property
-    def settings():
+    def settings(self):
         '''
             Returns the dictionary of configured values for actions configuration.
         '''

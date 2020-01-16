@@ -58,7 +58,6 @@ class GuiAutoComponentFactory:
 class BaseComponent:
 
     def __init__(self, automator, component_type, impl_component):
-        super().__init__()
         self.__automator = automator
         self.__comp_type = component_type
         self.__impl_component = impl_component
@@ -120,7 +119,7 @@ class DefaultGuiElement(BaseComponent):
         self.impl.identify()
 
     def configure(self, config):
-        self.impl.configure(config)
+        self.impl.configure(config.settings)
         return self
 
 class DefaultGuiMultiElement(BaseComponent):

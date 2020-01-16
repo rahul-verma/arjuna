@@ -25,7 +25,7 @@ class WebAlertHandler:
         self.__alert = None
 
     def wait(self):
-        self.automator.conditions.AlertIsPresent().wait()
+        self.automator.conditions.AlertIsPresent().wait(max_wait_time=self.automator.config.get_arjuna_option_value("guiauto.max.wait").as_int())
 
     def is_alert_present(self):
         return self.automator.dispatcher.is_web_alert_present()

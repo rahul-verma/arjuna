@@ -65,17 +65,15 @@ class ElementConfig:
             GuiActionConfigType.CHECK_TYPE: True,
             GuiActionConfigType.CHECK_PRE_STATE : True,
             GuiActionConfigType.CHECK_POST_STATE : True,
-            }
+    }
 
     @property
     def settings(self):
         return self.__settings
 
-    def __process_config_key(self, k):
-        return type(k) is str and GuiActionConfigType[k.strip().upper()] or k
-
     def configure(self, settings):
-        self.__settings.update({self.__process_config_key(k): v for k,v in settings.items()})
+        print(settings)
+        self.__settings.update(settings)
 
     def _should_check_type(self):
         return self.settings[GuiActionConfigType.CHECK_TYPE]
