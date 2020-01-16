@@ -1,23 +1,9 @@
-'''
-Testers use 3 approaches for Dropdown controls in web test automation using Selenium.
-1. Using Selenium's Select class as it provides higher level methods.
-2. Using sendKeys() method of WebElement.
-3. (Especially for custom select controls) - Click the drop down control and then click the option. 
+from commons import *
+from arjuna.tpi.guiauto.helpers import With
 
-Arjuna tries to cater to all of them with a single abstraction - its DropDown object.
+init_arjuna()
 
-3 will be covered later when element configuration has been discussed.
-'''
-
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
-
-from .wp_login_logout import *
-
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
+automator = launch_automator()
 
 url = automator.config.get_user_option_value("narada.ex.elemstate.url").as_str()
 automator.browser.go_to_url(url)

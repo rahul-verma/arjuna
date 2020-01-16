@@ -6,7 +6,7 @@ Website: www.RahulVerma.net
 This Software includes software developed by
 Rahul Verma
 
-Test Mile Arjuna, is hereinafter referred to as "Software" or "Arjuna".
+Arjuna, is hereinafter referred to as "Software" or "Arjuna".
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

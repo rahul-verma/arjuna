@@ -22,7 +22,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 setup(
     name = "arjuna",
     version = "0.8.1",
-    url = "https://testmile.com/arjuna",
+    url = "https://rahulverma.net",
     description = "Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net).",
     author = "Rahul Verma",
     author_email = "",

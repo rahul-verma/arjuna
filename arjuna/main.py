@@ -20,7 +20,7 @@ def main(args=None):
         msg = '''
     {0}
     Sorry. Looks like this is an error Arjuna couldn't handle.
-    If Arjuna should handle this error, write to us: support@testmile.com
+    Create a bug report on GitHub: https://github.com/rahul-verma/arjuna
     {0}
 
     Message: {1}
