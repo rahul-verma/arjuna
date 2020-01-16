@@ -10,7 +10,7 @@ def test(my):
     automator = Arjuna.create_gui_automator()
 
     WPLoginLogout.login(automator)
-    automator.Element(With.link_text("Settings")).click()
+    automator.element(With.link_text("Settings")).click()
 
     role_select = automator.DropDown(With.id("default_role"))
     print(role_select.has_visible_text_selected("Subscriber"))

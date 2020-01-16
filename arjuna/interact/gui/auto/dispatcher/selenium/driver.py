@@ -130,13 +130,8 @@ class SeleniumDriverDispatcher:
     def send_text_to_web_alert(self, text):
         DriverCommands.send_text_to_web_alert(self.__driver, text)
 
-    def focus_on_frame(self, elem_setu_id, is_instance_action=False, instance_index=0):
-        element = None
-        if is_instance_action:
-            element = self.__driver_melements[elem_setu_id].get_element_at_index(instance_index)
-        else:
-            element = self.__driver_elements[elem_setu_id]
-        DriverCommands.focus_on_frame(self.__driver, element)
+    def focus_on_frame(self, element_dispatcher):
+        DriverCommands.focus_on_frame(self.__driver, element_dispatcher.driver_element)
 
     def get_element_for_setu_id(self, id):
         return self.__driver_elements[id]

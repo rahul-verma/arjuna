@@ -37,23 +37,23 @@ String app_url = automator.config.getUserOptionValue("wp.app.url").as_str();
 String page = "wp-login"
 
 # Positional
-GuiElement element = automator.Element(With.xpath(identifier).format(appURL, page))
+GuiElement element = automator.element(With.xpath(identifier).format(appURL, page))
 element.identify()
 print(element.source.content.root)
 
 # Named
-element = automator.Element(With.xpath(identifier).format(app_url=app_url, page=page))
+element = automator.element(With.xpath(identifier).format(app_url=app_url, page=page))
 element.identify()
 print(element.source.content.root)
 
 
 # Named params need not be passed in order, providing you flexibility, readability and preventing positional errors.
-element = automator.Element(With.xpath(identifier).format(page=page, app_url=app_url))
+element = automator.element(With.xpath(identifier).format(page=page, app_url=app_url))
 element.identify()
 print(element.source.content.root)
 
 # Names for parameters are case-insensitive
-element = automator.Element(With.xpath(identifier).format(PaGe=page, aPP_Url=app_url))
+element = automator.element(With.xpath(identifier).format(PaGe=page, aPP_Url=app_url))
 element.identify()
 print(element.source.content.root)
 

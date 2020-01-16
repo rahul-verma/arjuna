@@ -22,6 +22,7 @@ y18 -> Java script execution works
 y19 -> alerts work
 y20 -> Basic window handling works
 y21 -> Window with title, partial title and content locator works. check notes for the found issue.
+y22 -> Frame handling works.
 
 Deferred and Reason
 -------------------

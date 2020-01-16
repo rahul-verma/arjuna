@@ -48,27 +48,28 @@ class AbstractAppAutomator:
     def _create_emd(self, *locators):
         return self.impl_automator.create_emd(*locators)
 
-    def Element(self, *with_locators):
+    def element(self, *with_locators):
         impl = self.impl_automator.define_element(self._create_emd(*with_locators))
         return GuiAutoComponentFactory.Element(self, impl)
 
-    def MultiElement(self, *with_locators):
+    def multi_element(self, *with_locators):
         impl = self.impl_automator.define_multielement(self._create_emd(*with_locators))
         return GuiAutoComponentFactory.MultiElement(self, impl)
 
-    def DropDown(self, *with_locators):
+    def dropdown(self, *with_locators):
         elem_setu_id = self.__create_generic_element(GuiAutoActionType.CREATE_DROPDOWN, *with_locators)
         return GuiAutoComponentFactory.DropDown(self.__test_session, self, elem_setu_id)
 
-    def RadioGroup(self, *with_locators):
+    def radio_group(self, *with_locators):
         elem_setu_id = self.__create_generic_element(GuiAutoActionType.CREATE_RADIOGROUP, *with_locators)
         return GuiAutoComponentFactory.RadioGroup(self.__test_session, self, elem_setu_id)
 
-    def Frame(self, *with_locators):
-        return self.DomRoot().Frame(*with_locators)
+    def frame(self, *with_locators):
+        print("automator", *with_locators)
+        return self.dom_root.frame(*with_locators)
 
-    def ChildWindow(self, *with_locators):
-        return self.main_window.ChildWindow(*with_locators)
+    def child_window(self, *with_locators):
+        return self.main_window.child_window(*with_locators)
 
     def close_all_child_windows(self):
         self.main_window.close_all_child_windows()
@@ -87,7 +88,7 @@ class AbstractAppAutomator:
 
     @property
     def latest_child_window(self):
-        return self.main_window.LatestChildWindow()
+        return self.main_window.latest_child_window
 
     @property
     def config(self):
@@ -123,7 +124,7 @@ class AbstractAppAutomator:
     def execute_javascript(self, script):
         return self.impl_automator.browser.execute_javascript(script)
 
-    def Source(self):
+    def source(self):
         return DefaultGuiSource(self, abcde) # abcde should be the impl source
 
     def new_action_chain(self):

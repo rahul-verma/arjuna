@@ -11,10 +11,10 @@ def test(my):
 
     WPLoginLogout.login(automator);
 
-    automator.Element(With.link_text("Posts")).click()
-    automator.Element(With.link_text("Categories")).click()
+    automator.element(With.link_text("Posts")).click()
+    automator.element(With.link_text("Categories")).click()
 
-    checkboxes = automator.MultiElement(With.name("delete_tags[]"))
+    checkboxes = automator.multi_element(With.name("delete_tags[]"))
     checkboxes.IndexedElement(0).uncheck()
     checkboxes.IndexedElement(0).check()
     checkboxes.IndexedElement(0).check()

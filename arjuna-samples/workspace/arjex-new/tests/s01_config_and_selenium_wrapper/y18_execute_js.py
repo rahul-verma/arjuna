@@ -8,6 +8,6 @@ automator = launch_automator()
 login(automator)
 
 automator.execute_javascript("document.getElementsByClassName('welcome-view-site')[0].click();")
-automator.Element(With.link_text("Site Admin")).wait_until_clickable()
+automator.element(With.link_text("Site Admin")).wait_until_clickable()
 
 logout(automator)

@@ -21,7 +21,7 @@ automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
 
 login(automator)
 
-automator.Element(With.link_text("Settings")).click()
+automator.element(With.link_text("Settings")).click()
 
 role_select = automator.DropDown(With.id("default_role"))
 role_select.select_value("editor")

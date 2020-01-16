@@ -32,12 +32,12 @@ radios.select_index(1)
 
 # state check off
 conf = GuiActionConfig.builder().check_pre_state(False).build()
-radios = automator.Element(With.name("Traditional").configure(config))
+radios = automator.element(With.name("Traditional").configure(config))
 radios.select_index(1)
 
 # tag mix up, state check off
 conf = GuiActionConfig.builder().check_pre_state(False).build()
-radios = automator.Element(With.name("Prob1").configure(config))
+radios = automator.element(With.name("Prob1").configure(config))
 radios.select_index(1)
 
 automator.quit()

@@ -241,22 +241,29 @@ class DefaultBrowser(BaseComponent):
     def refresh(self):
         self.impl.refresh()
 
+    @property
+    def dom_root(self):
+        return DefaultDomRoot(self._automator, self.impl.dom_root)
+
 class BaseFrame(BaseComponent):
 
     def __init__(self, automator, comp_type, impl):
-        super().__init__(automator, comp_type, impl)
-
+        super().__init__(automator, comp_type, impl)    
+        
     def focus(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.FRAME_FOCUS)
+        self.impl.focus()
 
-    def Frame(self, *withLocators):
-        pass
+    def frame(self, *with_locators):
+        print("component", with_locators)
+        print("FFF", self._emd(*with_locators))
+        return GuiAutoComponentFactory.Frame(self._automator, self.impl.define_frame(self._emd(*with_locators)))
 
-    def ParentFrame(self):
-        pass
+    @property
+    def parent(self):
+        return GuiAutoComponentFactory.Frame(self._automator, self.impl.parent)
 
-    def enumerateFrames(self):
-        pass
+    def enumerate_frames(self):
+        return self.impl.enumerate_frames()
 
 class DefaultFrame(BaseFrame):
 
@@ -267,14 +274,9 @@ class DefaultDomRoot(BaseFrame):
 
     def __init__(self, automator, impl):
         super().__init__(automator, GuiComponentType.DOMROOT, impl)
-
-    def focus(self):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DOMROOT_FOCUS)
-
-    def Frame(self, *with_locators):
-        pass
     
-    def ParentFrame(self):
+    @property
+    def parent(self):
         raise Exception("DOM root does not have a parent frame.")
 
 
@@ -299,7 +301,8 @@ class DefaultChildWindow(AbstractBasicWindow):
     def close(self):
         self.impl.close()
 
-    def MainWindow(self):
+    @property
+    def main_window(self):
         self._automator.main_window
 
 
@@ -315,11 +318,12 @@ class DefaultMainWindow(AbstractBasicWindow):
         response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, setu_action_type, *setu_args)
         return response.get_value_for_gui_component_setu_id()
 
-    def ChildWindow(self, *with_locators):
+    def child_window(self, *with_locators):
         win =  self.impl.define_child_window(self._emd(*with_locators))
         return DefaultChildWindow(self._automator, win)
 
-    def LatestChildWindow(self):
+    @property
+    def latest_child_window(self):
         return DefaultChildWindow(self._automator, self.impl.get_latest_child_window())
  
     def close_all_child_windows(self):

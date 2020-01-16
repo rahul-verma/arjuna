@@ -11,7 +11,7 @@ def test(my):
 
     WPLoginLogout.login(automator)
 
-    automator.Element(With.link_text("Settings")).click()
+    automator.element(With.link_text("Settings")).click()
 
     data_format = automator.RadioGroup(With.name("date_format"))
     print(data_format.has_value_selected("Y-m-d"))

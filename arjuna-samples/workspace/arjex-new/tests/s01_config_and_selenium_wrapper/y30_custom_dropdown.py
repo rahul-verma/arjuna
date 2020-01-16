@@ -17,7 +17,7 @@ automator.browser.go_to_url(url)
 
 conf = GuiActionConfig.builder().check_type(False).check_post_state(False).build()
 
-dropdown = automator.Element(With.id("DropDown").configure(config))
+dropdown = automator.element(With.id("DropDown").configure(config))
 dropdown.set_option_container(With.class_name("dropdown"))
 dropdown.set_option_locators(With.class_name("dropdown-item"))
 dropdown.select_index(2)

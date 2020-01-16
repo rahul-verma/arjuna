@@ -25,7 +25,7 @@ print(main_win.title)
 automator.execute_javascript("window.open('https://rahulverma.net')")
 automator.execute_javascript("window.open('https://google.com')")
 
-dwin = automator.ChildWindow(With.window_title("Google"))
+dwin = automator.child_window(With.window_title("Google"))
 dwin.focus()
 dwin.title
 dwin.close()
@@ -33,7 +33,7 @@ dwin.close()
 automator.execute_javascript("window.open('https://rahulverma.net')")
 automator.execute_javascript("window.open('https://google.com')")
 
-dwin = automator.ChildWindow(With.window_ptitle("gle"))
+dwin = automator.child_window(With.window_ptitle("gle"))
 dwin.focus()
 dwin.title
 dwin.close()
@@ -41,7 +41,7 @@ dwin.close()
 automator.execute_javascript("window.open('https://rahulverma.net')")
 automator.execute_javascript("window.open('https://google.com')")
 
-dwin = automator.ChildWindow(With.content_locator(With.value("Google Search")))
+dwin = automator.child_window(With.content_locator(With.value("Google Search")))
 dwin.focus()
 dwin.title
 dwin.close()

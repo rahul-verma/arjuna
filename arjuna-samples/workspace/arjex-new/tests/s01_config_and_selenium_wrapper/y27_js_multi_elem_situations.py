@@ -22,31 +22,31 @@ def cleanup():
     automator = None
 
 setup()
-melement = automator.MultiElement(With.javascript("return document.getElementById('wp-submit')"))
+melement = automator.multi_element(With.javascript("return document.getElementById('wp-submit')"))
 cleanup()
 
 setup()
-melement = automator.MultiElement(With.javascript("return document.getElementsByClassName('input')"))
+melement = automator.multi_element(With.javascript("return document.getElementsByClassName('input')"))
 cleanup()
 
 setup()
-melement = automator.MultiElement(With.javascript("return null"))
+melement = automator.multi_element(With.javascript("return null"))
 cleanup()
 
 setup()
-melement = automator.MultiElement(With.javascript("return [undefined]"))
+melement = automator.multi_element(With.javascript("return [undefined]"))
 cleanup()
 
 setup()
-melement = automator.MultiElement(With.javascript("return []"))
+melement = automator.multi_element(With.javascript("return []"))
 cleanup()
 
 setup()
-melement = automator.MultiElement(With.javascript("return 1"))
+melement = automator.multi_element(With.javascript("return 1"))
 cleanup()
 
 setup()
-melement = automator.MultiElement(With.js("return [document.getElementById('wp-submit'), 2]"))
+melement = automator.multi_element(With.js("return [document.getElementById('wp-submit'), 2]"))
 cleanup()
 
 automator.quit()

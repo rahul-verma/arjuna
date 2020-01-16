@@ -28,12 +28,12 @@ automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
 go_to_wp_home(automator)
 
 
-element = automator.Element(With.id("loginform"))
+element = automator.element(With.id("loginform"))
 print_source_info(element.source)
 
 login(automator)
 
-automator.Element(With.link_text("Settings")).click()
+automator.element(With.link_text("Settings")).click()
 
 # Dopdown
 element = automator.DropDown(With.id("default_role"))
@@ -45,8 +45,8 @@ print_source_info(date_format.source)
 
 
 # Automator source
-automator.Element(With.link_text("Posts")).click()
-automator.Element(With.link_text("Add New")).click()
+automator.element(With.link_text("Posts")).click()
+automator.element(With.link_text("Add New")).click()
 print_source_info(automator.source)
 
 print_source_info(automator.dom_root.source)
@@ -60,7 +60,7 @@ automator.browser.go_to_url(url)
 
 conf = GuiActionConfig.builder().check_type(False).check_post_state(False).build()
 
-dropdown = automator.Element(With.id("DropDown").configure(config))
+dropdown = automator.element(With.id("DropDown").configure(config))
 dropdown.set_option_container(With.class_name("dropdown"))
 dropdown.set_option_locators(With.class_name("dropdown-item"))
 print_source_info(dropdown.source)

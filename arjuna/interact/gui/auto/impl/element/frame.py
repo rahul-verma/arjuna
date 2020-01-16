@@ -1,5 +1,6 @@
 import os
 
+from arjuna.tpi import Arjuna
 from arjuna.interact.gui.auto.impl.element.guielement import GuiElement
 from arjuna.interact.gui.auto.impl.locator.emd import SimpleGuiElementMetaData
 from arjuna.interact.gui.auto.impl.source.parser import FrameSource
@@ -17,7 +18,7 @@ class FrameContainer:
         if tag.lower() != "iframe":
             raise Exception("The element should have a 'iframe' tag for IFrame element. Found: " + tag)
 
-    def create_frame(self, locator_meta_data):
+    def define_frame(self, locator_meta_data):
         found = False
         frame = None
         for locator in locator_meta_data.locators: 
@@ -25,14 +26,14 @@ class FrameContainer:
                 if locator.ltype.name == "INDEX":
                     index = locator.lvalue
                     emd = SimpleGuiElementMetaData("xpath", "//iframe")
-                    multi_element = self.automator.create_multielement(emd)
+                    multi_element = self.automator.define_multielement(emd)
                     multi_element.find()
                     wrapped_element = multi_element.get_instance_at_index(index)
                     self.__check_tag(wrapped_element)
                     frame = IPartialFrame(self.automator, self, multi_element, wrapped_element)
                 else:
                     emd = SimpleGuiElementMetaData(locator.ltype.name, locator.lvalue)
-                    wrapped_element = self.automator.create_element(emd)
+                    wrapped_element = self.automator.define_element(emd)
                     wrapped_element.find()
                     self.__check_tag(wrapped_element)
                     frame = IFrame(self.automator, self, wrapped_element)
@@ -46,9 +47,8 @@ class FrameContainer:
 
         if not found:
             raise Exception("Could not locate frame with locator(s): {}".format([str(l) for l in locator_meta_data.locators]))
-        else:
-            self.automator.add_frame(frame)
-            return frame
+
+        return frame
 
     def enumerate_frames(self):
         self.focus()
@@ -70,11 +70,11 @@ class DomRoot(FrameContainer):
 
     def __set_frame_context_str(self, name):
         self.__frame_context = name
-        Setu.get_logger().debug("Automator is in {} frame".format(self.__frame_context))
+        Arjuna.get_logger().debug("Automator is in {} frame".format(self.__frame_context))
         print("Automator is in {} frame".format(self.__frame_context))
 
     def set_frame_context(self, frame):
-        self.__set_frame_context_str(frame.get_setu_id())
+        self.__set_frame_context_str(frame)
 
     def set_frame_context_as_root(self):
         self.__set_frame_context_str("root")  
@@ -98,7 +98,6 @@ class IFrame(FrameContainer):
         self.__parent_frames = []
         self.__wrapped_element = wrapped_element
         self._source_parser = FrameSource(self)
-        self.automator.update_source_map(self._source_parser)
 
     @property
     def dom_root(self):
@@ -128,7 +127,7 @@ class IFrame(FrameContainer):
             self._focus_on_parents()
         self.wrapped_element.find()
         self._source_parser.set_root_source(self.wrapped_element.get_source(refind=False).get_root_content())
-        self.automator.dispatcher.focus_on_frame(self.wrapped_element.setu_id)
+        self.automator.dispatcher.focus_on_frame(self.wrapped_element.dispatcher)
         self.dom_root.set_frame_context(self)
 
     def _get_html_content_from_remote(self):
@@ -148,7 +147,8 @@ class IFrame(FrameContainer):
     #     else:
     #         self.dom_root.set_frame_context_as_root()
 
-    def get_parent(self):
+    @property
+    def parent(self):
         if self.__parent_frames:
             return self.__parent_frames[-1]
         else:
@@ -163,5 +163,5 @@ class IPartialFrame(IFrame):
 
     def focus(self):
         self.__melement.find()
-        self.automator.dispatcher.focus_on_frame(self.__melement.setu_id, True, self.wrapped_element._get_instance_number())
+        self.automator.dispatcher.focus_on_frame(self.wrapped_element.dispatcher)
         self.dom_root.set_frame_context(self)

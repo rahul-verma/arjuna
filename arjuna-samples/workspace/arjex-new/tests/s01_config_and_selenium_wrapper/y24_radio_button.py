@@ -21,7 +21,7 @@ automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
 
 login(automator)
 
-automator.Element(With.link_text("Settings")).click()
+automator.element(With.link_text("Settings")).click()
 
 date_format = automator.RadioGroup(With.name("date_format"))
 System.out.println(date_format.has_value_selected("Y-m-d"))

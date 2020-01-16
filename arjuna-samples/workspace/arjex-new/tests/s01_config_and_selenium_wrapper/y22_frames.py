@@ -1,39 +1,37 @@
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
+from arjuna.tpi import Arjuna
+from arjuna.tpi.guiauto.helpers import With
 
-from .wp_login_logout import *
+from commons import *
 
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
-
+init_arjuna()
+automator = launch_automator()
 login(automator)
 
-automator.Element(With.link_text("Posts")).click()
-automator.Element(With.link_text("Add New")).click()
+automator.element(With.link_text("Posts")).click()
+automator.element(With.link_text("Add New")).click()
 
-With tinymce = With.id("tinymce")
-With publish = With.id("publish")
+tinymce = With.id("tinymce")
+publish = With.id("publish")
 
 # Frame by identifier and jump to root
-automator.Frame(With.id("content_ifr")).focus()
-automator.Element(tinymce).set_text("This is a test - frame by name.")
-automator.dom_root().focus()
-automator.Element(publish).click()
+automator.frame(With.id("content_ifr")).focus()
+automator.element(tinymce).set_text("This is a test - frame by name.")
+automator.dom_root.focus()
+automator.element(publish).click()
 
 # Frame by index
-automator.Frame(With.index(0)).focus()
-automator.Element(tinymce).set_text("This is a test - frame by index.")
+automator.frame(With.index(0)).focus()
+automator.element(tinymce).set_text("This is a test - frame by index.")
 # Focusing on root from frame itself
 automator.dom_root.focus()
-automator.Element(publish).click()
+automator.element(publish).click()
 
 # jump to parent
-Frame frame = automator.Frame(With.xpath("//iframe"))
+frame = automator.frame(With.xpath("//iframe"))
+print(frame)
 frame.focus()
-automator.Element(tinymce).set_text("This is a test - jumping to parent after this.")
+automator.element(tinymce).set_text("This is a test - jumping to parent after this.")
 frame.parent.focus()
-automator.Element(publish).click()
+automator.element(publish).click()
 
 logout(automator)

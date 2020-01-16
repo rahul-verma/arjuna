@@ -308,6 +308,7 @@ class GuiElementMetaData:
 
     @classmethod
     def create_emd(cls, *locators):
+        print(locators)
         impl_locators = cls.convert_to_impl_with_locators(*locators)
         processed_locators = []
         for locator in impl_locators:

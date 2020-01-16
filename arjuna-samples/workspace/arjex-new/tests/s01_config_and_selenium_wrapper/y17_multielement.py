@@ -7,10 +7,10 @@ init_arjuna()
 automator = launch_automator()
 login(automator)
 
-automator.Element(With.link_text("Posts")).click()
-automator.Element(With.link_text("Categories")).click()
+automator.element(With.link_text("Posts")).click()
+automator.element(With.link_text("Categories")).click()
 
-check_boxes = automator.MultiElement(With.name("delete_tags[]"))
+check_boxes = automator.multi_element(With.name("delete_tags[]"))
 check_boxes.at_index(0).uncheck()
 check_boxes.at_index(0).check()
 check_boxes.at_index(0).check()

@@ -22,11 +22,11 @@ automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
 url = automator.config.get_user_option_value("narada.ex.elemstate.url").as_str()
 automator.browser.go_to_url(url)
 
-automator.Element(With.id("target")).click()
+automator.element(With.id("target")).click()
 automator.alert.confirm()
 
 automator.browser.go_to_url(url)
 conf = GuiActionConfig.builder().check_pre_state(False).build()
 
-automator.Element(With.id("target")).configure(conf).click()
+automator.element(With.id("target")).configure(conf).click()
 automator.alert.confirm()
