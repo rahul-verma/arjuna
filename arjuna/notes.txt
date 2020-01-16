@@ -26,6 +26,7 @@ y22 -> Frame handling works.
 y23 -> Dropdown works. (Performance is slow. investigate.)
 y24 -> RadioGroup logic works.
 y25 -> Named arg formatting, case-insensitive works.
+y26 -> With.javascript works as expected for success and failure scenarios.
 
 
 Deferred and Reason
@@ -61,7 +62,11 @@ Notes for any needed fixes and changes
     With XML parsing in place. It should be very quick. 
     Evaluate.
 
-10. 
+10. Create Arjuna Named Exceptions:
+    - The exception from the tool or other relevant exceptions should be seen in the dig deeper details.
+    - Element Finding -> IdentificationError
+    - With.JS: Description should mention about the problem.
+    - 
 
 
 What SetuSvc used to do:
