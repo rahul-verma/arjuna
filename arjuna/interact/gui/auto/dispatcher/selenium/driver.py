@@ -88,9 +88,9 @@ class SeleniumDriverDispatcher:
         return melement.get_instance_count(), melement
 
     def find_multielement_with_js(self, js):
-        elem_list = self.execute_javascript(js)
-        elements = self.__process_js_multielement(elem_list)
-        melement = MultiElement(elements)
+        web_elements = self.execute_javascript(js)
+        web_elements = self.__process_js_multielement(web_elements)
+        melement = MultiElement([SeleniumDriverElementDispatcher(self, web_element) for web_element in web_elements])
         return melement.get_instance_count(), melement
 
     def get_current_window_handle(self):

@@ -1,9 +1,8 @@
 from commons import *
 from arjuna.tpi.guiauto.helpers import With
 
-config = init_arjuna().config
+init_arjuna()
 
-# Default Gui automation engine is Selenium
 automator = None
 element = None
 

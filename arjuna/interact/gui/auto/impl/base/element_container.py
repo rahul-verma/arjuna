@@ -88,7 +88,7 @@ class ElementContainer(metaclass=abc.ABCMeta):
         return self.__container_conditions.PresenceOfMultiElement(gui_element).wait(max_wait_time=self.max_wait_time)
 
     def find_multielement(self, gui_element):
-        locator_type, locator_value, instance_count, dispatcher = self.wait_time_until_multielement_found(gui_element)
+        locator_type, locator_value, instance_count, dispatcher = self.wait_until_multielement_found(gui_element)
         if instance_count == 0:
             raise Exception("MultiElement could not be found with any of the provided locators.")
         gui_element.set_found_with(locator_type, locator_value)
