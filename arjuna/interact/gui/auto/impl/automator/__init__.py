@@ -43,9 +43,6 @@ class GuiAutomator(ElementContainer):
     def create_emd(self, *locators):
         return GuiElementMetaData.create_emd(*locators)
 
-    def get_source_for_setu_id(self, id):
-        return self.__all_source_map[id]
-
     def get_source_from_remote(self):
         return self.dispatcher.get_source()
 

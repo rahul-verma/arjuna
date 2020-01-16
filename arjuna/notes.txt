@@ -25,6 +25,8 @@ y21 -> Window with title, partial title and content locator works. check notes f
 y22 -> Frame handling works.
 y23 -> Dropdown works. (Performance is slow. investigate.)
 y24 -> RadioGroup logic works.
+y25 -> Named arg formatting, case-insensitive works.
+
 
 Deferred and Reason
 -------------------

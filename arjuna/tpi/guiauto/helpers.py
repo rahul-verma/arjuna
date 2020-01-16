@@ -195,7 +195,6 @@ class With:
         self.__has_content_locator = False
         self.__content_locator = None
         self.__format_called = False
-        self.__pos_args = None
         self.__named_args = None
 
         if with_type == _WithType.CONTENT_LOCATOR:
@@ -211,18 +210,17 @@ class With:
         if (self.__format_called):
             raise Exception("You can not format a With object more than once.")
 
-    def format(*vargs, **kwargs):
-        raise_format_exc()
+    def format(self, **kwargs):
+        self.raise_format_exc()
         self.__format_called = True
-        self.__pos_args = vargs
         self.__named_args = kwargs
+        return self
 
     def as_impl_locator(self):
 
         impl_with = ImplWith(
             wtype = self.__with_type.name,
             wvalue = self.__has_content_locator and self.__content_locator.as_impl_locator() or self.__with_value,
-            pos_args = self.__pos_args,
             named_args = self.__named_args,
             has_content_locator = self.__has_content_locator
         )
@@ -236,9 +234,6 @@ class With:
             map["withValue"] = self.__with_value
         else:
             map["withValue"] = self.__content_locator.as_map()
-
-        if self.__pos_args:
-            map["pos_args"] = self.__pos_args
 
         if self.__named_args:
             map["named_args"] = self.__named_args
