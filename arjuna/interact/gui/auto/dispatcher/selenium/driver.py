@@ -11,7 +11,7 @@ class SeleniumDriverDispatcher:
         self.__driver = None
 
     def __create_gui_element_dispatcher(self, element):
-        return SeleniumDriverElementDispatcher(self, element)
+        return SeleniumDriverElementDispatcher.create_dispatcher(self, element)
 
     @property
     def driver(self):

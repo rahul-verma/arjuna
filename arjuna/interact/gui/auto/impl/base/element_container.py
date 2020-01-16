@@ -43,11 +43,11 @@ class ElementContainer(metaclass=abc.ABCMeta):
         return self._create_multielement_flat_or_nested(locator_meta_data)
 
     def define_dropdown(self, locator_meta_data):
-        from arjuna.interact.gui.auto.element.dropdown import GuiWebSelect
+        from arjuna.interact.gui.auto.impl.element.dropdown import GuiWebSelect
         return GuiWebSelect(self, locator_meta_data)
 
     def define_radiogroup(self, locator_meta_data):
-        from arjuna.interact.gui.auto.element.radio_group import GuiWebRadioGroup
+        from arjuna.interact.gui.auto.impl.element.radio_group import GuiWebRadioGroup
         return GuiWebRadioGroup(self, locator_meta_data)
 
     def _find(self, dispatcher_call, gui_element, context="ELEMENT"):

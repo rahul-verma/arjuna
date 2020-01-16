@@ -9,29 +9,26 @@ Arjuna tries to cater to all of them with a single abstraction - its DropDown ob
 3 will be covered later when element configuration has been discussed.
 '''
 
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
+from arjuna.tpi import Arjuna
+from arjuna.tpi.guiauto.helpers import With
 
-from .wp_login_logout import *
+from commons import *
 
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
-
+init_arjuna()
+automator = launch_automator()
 login(automator)
 
 automator.element(With.link_text("Settings")).click()
 
-role_select = automator.DropDown(With.id("default_role"))
+role_select = automator.dropdown(With.id("default_role"))
 role_select.select_value("editor")
 
 role_select.select_visible_text("Subscriber")
 print(role_select.has_visible_text_selected("Subscriber"))
 print(role_select.has_value_selected("subscriber"))
 print(role_select.has_index_selected(2))
-print(role_select.get_first_selected_option_value())
-print(role_select.get_first_selected_option_text())
+print(role_select.first_selected_option_value)
+print(role_select.first_selected_option_text)
 
 role_select.select_index(4)
 print(role_select.has_index_selected(4))

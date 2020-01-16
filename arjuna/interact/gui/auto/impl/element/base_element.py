@@ -30,11 +30,11 @@ class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
         return self.__parent and self.__parent or self.__automator
 
     def _create_element_flat_or_nested(self, locator_meta_data):
-        from arjuna.interact.gui.auto.element.guielement import GuiElement
+        from arjuna.interact.gui.auto.impl.element.guielement import GuiElement
         return GuiElement(self.__automator, locator_meta_data, parent=self) 
 
     def _create_multielement_flat_or_nested(self, locator_meta_data):
-        from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
+        from arjuna.interact.gui.auto.impl.element.multielement import GuiMultiElement
         return GuiMultiElement(self.__automator, locator_meta_data, parent=self) 
 
     def create_dispatcher(self):

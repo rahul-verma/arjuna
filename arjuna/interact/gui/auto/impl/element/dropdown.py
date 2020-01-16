@@ -1,16 +1,14 @@
-from arjuna.setu.types import SetuManagedObject
-from arjuna.interact.gui.auto.element.guielement import GuiElement
-from arjuna.interact.gui.auto.locator.emd import SimpleGuiElementMetaData
+from arjuna.interact.gui.auto.impl.element.guielement import GuiElement
+from arjuna.interact.gui.auto.impl.locator.emd import SimpleGuiElementMetaData
 from .base_element import ElementConfig
 
 # UUID is for client reference. Agent does not know about this.
-class GuiWebSelect(SetuManagedObject, ElementConfig):
+class GuiWebSelect(ElementConfig):
 
     def __init__(self, automator, emd, parent=None):
-        super().__init__()
-        ElementConfig.__init__(self, automator)
+        super().__init__(automator)
         self.__automator = automator
-        self._wrapped_main_element = automator.create_element(emd)
+        self._wrapped_main_element = automator.define_element(emd)
         self.__found = False
         self.__options = None
         self.__option_emd = SimpleGuiElementMetaData("tag_name", "option")
@@ -31,7 +29,7 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
 
     def __load_options(self):
         container = self.__get_root_element()
-        self.__options = container.create_multielement(self.__option_emd)
+        self.__options = container.define_multielement(self.__option_emd)
         self.__options.find_if_not_found()
 
     def is_found(self):
@@ -83,6 +81,11 @@ class GuiWebSelect(SetuManagedObject, ElementConfig):
         self.__find_if_not_found()
         option = self.__options.get_first_selected_instance()
         return option.get_source().get_text_content()
+
+    def get_first_selected_option_value(self):
+        self.__find_if_not_found()
+        option = self.__options.get_first_selected_instance()
+        return option.get_source().get_attr_value("value")
 
     def __select_option(self, option):
         self._wrapped_main_element.click()

@@ -188,3 +188,9 @@ class GuiElement(BaseElement, ElementConfig):
         action_chain = SingleActionChain(self.__automator, element=self)
         action_chain.perform(single_action_chain)
 
+    def find_element_with_js(self, js):
+        raise Exception("With.JS is currently not supported for nested element finding.")
+
+    def find_multielement_with_js(self, js):
+        raise Exception("With.JS is currently not supported for nested element finding.")
+

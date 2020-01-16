@@ -57,8 +57,8 @@ class AbstractAppAutomator:
         return GuiAutoComponentFactory.MultiElement(self, impl)
 
     def dropdown(self, *with_locators):
-        elem_setu_id = self.__create_generic_element(GuiAutoActionType.CREATE_DROPDOWN, *with_locators)
-        return GuiAutoComponentFactory.DropDown(self.__test_session, self, elem_setu_id)
+        impl = self.impl_automator.define_dropdown(self._create_emd(*with_locators))
+        return GuiAutoComponentFactory.DropDown(self, impl)
 
     def radio_group(self, *with_locators):
         elem_setu_id = self.__create_generic_element(GuiAutoActionType.CREATE_RADIOGROUP, *with_locators)

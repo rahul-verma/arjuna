@@ -33,7 +33,6 @@ class GuiMultiElement(BaseElement):
     def load_source_parser(self):
         if not self.__source_parser:
             self.__source_parser = MultiElementSource()
-            self.automator.update_source_map(self.__source_parser)
         for instance in self.__instances:
             instance.load_source_parser()
         self.__source_parser.load(self.__instances)

@@ -23,6 +23,8 @@ y19 -> alerts work
 y20 -> Basic window handling works
 y21 -> Window with title, partial title and content locator works. check notes for the found issue.
 y22 -> Frame handling works.
+y23 -> Dropdown works. (Performance is slow. investigate.)
+
 
 Deferred and Reason
 -------------------
@@ -53,7 +55,11 @@ Notes for any needed fixes and changes
     Also check open windows at any point in time.
     May be we should check for window readiness and page load when a new window is launched using JavaScript.
 
-9. 
+9. Look at dropdown logic in terms of number of inquiries sent to the browser
+    With XML parsing in place. It should be very quick. 
+    Evaluate.
+
+10. 
 
 
 What SetuSvc used to do:

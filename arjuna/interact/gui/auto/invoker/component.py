@@ -153,48 +153,57 @@ class MultiElementSelectable(BaseComponent):
         super().__init__(automator, comp_type, impl)
 
     def has_value_selected(self, value):
-        response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_HAS_VALUE_SELECTED, SetuArg.value_arg(value))
-        return response.get_value_for_check_result()
+        return self.impl.has_value_selected(value)
 
     def has_index_selected(self, index):
-        response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_HAS_INDEX_SELECTED, SetuArg.index_arg(index))
-        return response.get_value_for_check_result()
+        return self.impl.has_index_selected(index)
 
-    def select_by_value(self, value):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_VALUE, SetuArg.value_arg(value))
+    def select_value(self, value):
+        self.impl.select_by_value(value)
 
-    def select_by_index(self, index):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_INDEX, SetuArg.index_arg(index))
+    def select_index(self, index):
+        self.impl.select_by_index(index)
 
-    def get_first_selected_option_value(self):
-        response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_GET_FIRST_SELECTED_OPTION_VALUE)
-        return response.get_value_for_value_attr()
+    @property
+    def first_selected_option_value(self):
+        return self.impl.get_first_selected_option_value()
 
 class DefaultDropDown(MultiElementSelectable):
 
     def __init__(self, automator, impl):
         super().__init__(automator, GuiComponentType.DROPDOWN, impl)
 
-    def configure(self):
+    def configure(self, action_config):
+        self.impl.configure(action_config)
+
+    @property
+    def _option_locators(self):
         pass
 
-    def set_option_locators(self, *with_locators):
+    @_option_locators.setter
+    def option_locators(self, *with_locators):
+        self.impl.set_option_locators(self.__emd(*with_locators))
+
+    @property
+    def _option_container(self):
         pass
 
-    def set_option_container(self, *with_locators):
-        pass
+    @_option_container.setter
+    def option_container(self, *with_locators):
+        self.impl.set_option_container(self.__emd(*with_locators))
 
-    def get_first_selected_option_text(self):
-        response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_GET_FIRST_SELECTED_OPTION_TEXT)
-        return response.get_value_for_text()
+    @property
+    def first_selected_option_text(self):
+        return self.impl.get_first_selected_option_text()
 
     def has_visible_text_selected(self, text):
-        response = self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_HAS_VISIBLE_TEXT_SELECTED, SetuArg.text_arg(text))
-        return response.get_value_for_check_result()
+        return self.impl.has_visible_text_selected(text)
 
-    def select_by_visible_text(self, text):
-        self._send_request(ArjunaComponent.GUI_AUTOMATOR, GuiAutoActionType.DROPDOWN_SELECT_BY_VISIBLE_TEXT, SetuArg.text_arg(text))
+    def select_visible_text(self, text):
+        self.impl.select_by_visible_text(text)
 
+    def send_option_text(self, text):
+        self.impl.send_option_text(text)
 
 class DefaultRadioGroup(MultiElementSelectable):
 

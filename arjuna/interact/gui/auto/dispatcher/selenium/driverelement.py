@@ -1,5 +1,6 @@
 from arjuna.interact.gui.auto.dispatcher.driver.element_commands import DriverElementCommands
 from arjuna.interact.gui.auto.dispatcher.driver.element_finder import ElementFinder
+from arjuna.interact.gui.auto.dispatcher.driver.melement import MultiElement
 
 class SeleniumDriverElementDispatcher:
 
@@ -13,16 +14,23 @@ class SeleniumDriverElementDispatcher:
     @property
     def driver_element(self):
         return self.__element
+
+    @classmethod
+    def create_dispatcher(cls, automator_dispatcher, web_element):
+        return SeleniumDriverElementDispatcher(automator_dispatcher, web_element)
  
     def set_partial(self, index):
         self.__partial = True
         self.__instance_index = index
 
-    def find_element(self, child_gui_element_setu_id, with_type, with_value):
-        return ElementFinder.find_element(self.element, with_type, with_value)
+    def find_element(self, with_type, with_value):
+        element = ElementFinder.find_element(self.__driver, with_type, with_value)
+        return 1, self.create_dispatcher(self.__driver_dispatcher, element)
 
-    def find_multielement(self, child_gui_element_setu_id, with_type, with_value):
-        return ElementFinder.find_elements(self.element, with_type, with_value)
+    def find_multielement(self, with_type, with_value):
+        web_elements = ElementFinder.find_elements(self.__driver, with_type, with_value)
+        melement = MultiElement([self.create_dispatcher(self.__driver_dispatcher, web_element) for web_element in web_elements])
+        return melement.get_instance_count(), melement
 
     @property
     def driver(self):
