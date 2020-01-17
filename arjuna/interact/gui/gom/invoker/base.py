@@ -1,23 +1,13 @@
-##################################################
-# This is from previous Gui client bindings
-# See how to simplify
-##################################################
-
 from arjuna.tpi.guiauto.helpers import With
-
 
 class BaseGui:
 
     def __init__(self, automator, label=None, def_file_name=None, parent=None, register=True):
-        super().__init__(automator.get_config())
-
         self.__automator = automator
         self.__children_map = dict()
-        self.__auto_context = automator.get_automation_context()
-        self.__test_session = automator.get_test_session()
-        self._set_automator_setu_id_arg(automator.get_setu_id())
         self.__gui_registered = False
         self.__parent = parent
+        self.__impl_gui = None
 
         self.__label = None
         self.__def_file_name = None
@@ -30,6 +20,46 @@ class BaseGui:
 
         if register:
             self._register()
+
+    @property
+    def impl_gui(self):
+        return self.__impl_gui
+
+    @property
+    def automator(self):
+        return self.__automator
+
+    @property
+    def impl_automator(self):
+        return self.automator.impl_automator
+
+    @property
+    def config(self):
+        return self.automator.config
+
+    @property
+    def test_session(self):
+        return self.automator.test_session
+
+    @property
+    def context(self):
+        return self.automator.context
+
+    @property
+    def label(self):
+        return self.__label
+
+    @property
+    def def_file_name(self):
+        return self.__def_file_name
+
+    @property
+    def name(self):
+        return self.__class__.__name__
+
+    @property
+    def qual_name(self):
+        return self.__class__.__qualname__
 
     def __check_reg_status(self):
         if self.__gui_registered:
@@ -51,36 +81,15 @@ class BaseGui:
         if self.__gui_registered:
             raise Exception("Attempt to re-register Gui with Setu.")
 
-        args = [
-            SetuArg.arg("testSessionSetuId", self.__test_session.get_setu_id()),
-            SetuArg.arg("automatorSetuId", self.__automator.get_setu_id()),
-            SetuArg.arg("label", self.__label),
-            SetuArg.arg("name", self.__class__.__name__),
-            SetuArg.arg("qualName", self.__class__.__qualname__),
-            SetuArg.arg("defFileName", self.__def_file_name)
-        ]
-
-        gui_setu_id = None
         if not self.__parent:
-            gui_setu_id = self.__test_session.create_gui(self.__automator, *args)
+            self.__impl_gui = self.test_session.define_gui(self.automator, label=self.label, name=self.name, qual_name=self.qual_name, def_file_name=self.def_file_name)
         else:
-            args.append(SetuArg.arg("parentGuiSetuId", self.__parent.get_setu_id()))
-            response = self._send_request(SetuActionType.GUIAUTO_GUI_CREATE_GUI, *args)
-            gui_setu_id = response.get_gui_setu_id()
-
-        self._set_setu_id(gui_setu_id)
-        self._set_self_setu_id_arg("guiSetuId")
+            self.__impl_gui = self.impl_gui.define_gui(self.automator, label=self.label, name=self.name, qual_name=self.qual_name, def_file_name=self.def_file_name)
 
         if self.__parent:
             self.__parent.add_child(self.__label, self)
 
         self.__load()
-
-    def _get_automator(self):
-        return self.__automator
-
-    def get_qualified_name(self):
-        return self.__class__.__qualname__
 
     def add_child(self, label, gui):
         self.__children_map[label.lower()] = gui
@@ -116,41 +125,45 @@ class BaseGui:
                     str(e)
                 )
 
-    def __convert_with(self, input):
+    def __convert_to_with(self, input):
+        w = None
         if isinstance(input, With):
-            return input
+            w = input
+        elif type(input) is str:
+            w = With.gns_name(input)
         else:
-            return With.assigned_name(input)
+            raise Exception("A With object or name of element is expected as argument.")
+        return w
 
-    def Element(self, name_or_with_obj):
-        return super().Element(self.__convert_with(name_or_with_obj))
+    def element(self, name_or_with_obj):
+        return self.impl_gui.define_element(self.__convert_to_with(name_or_with_obj))
 
-    def MultiElement(self, name_or_with_obj):
-        return super().MultiElement(self.__convert_with(name_or_with_obj))
+    def multi_element(self, name_or_with_obj):
+        return self.impl_gui.define_multi_element(self.__convert_to_with(name_or_with_obj))
 
-    def DropDown(self, name_or_with_obj):
-        return super().DropDown(self.__convert_with(name_or_with_obj))
+    def dropdown(self, name_or_with_obj):
+        return self.impl_gui.define_dropdown(self.__convert_to_with(name_or_with_obj))
 
-    def RadioGroup(self, name_or_with_obj):
-        return super().RadioGroup(self.__convert_with(name_or_with_obj))
+    def radio_group(self, name_or_with_obj):
+        return self.impl_gui.define_radio_group(self.__convert_to_with(name_or_with_obj))
 
-    def Alert(self, name_or_with_obj):
-        return super().Alert(self.__convert_with(name_or_with_obj))
+    def alert(self, name_or_with_obj):
+        return self.impl_gui.define_alert(self.__convert_to_with(name_or_with_obj))
 
-    def Frame(self, name_or_with_obj):
-        return super().Frame(self.__convert_with(name_or_with_obj))
+    def frame(self, name_or_with_obj):
+        return self.impl_gui.define_frame(self.__convert_to_with(name_or_with_obj))
 
-    def ChildWindow(self, name_or_with_obj):
-        return super().ChildWindow(self.__convert_with(name_or_with_obj))
+    def child_window(self, name_or_with_obj):
+        return self.impl_gui.define_child_window(self.__convert_to_with(name_or_with_obj))
 
-    def MainWindow(self):
-        return self.get_automator().MainWindow()
+    @property
+    def main_window(self):
+        return self.impl_gui.define_main_window()
 
-    def DomRoot(self):
-        return self.get_automator().DomRoot()
+    @property
+    def dom_root(self):
+        return self.impl_gui.dom_root
 
-    def Browser(self):
-        return self.get_automator().Browser()
-
-    def get_automator(self):
-        return self.__automator
+    @property
+    def browser(self):
+        return self.impl_gui.browser

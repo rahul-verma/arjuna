@@ -28,7 +28,7 @@ id =wp-admin-bar-menu-toggle
 
 [POSTS]
 #web,android_web
-X_TEXT =Posts
+TEXT =Posts
 
 [SETTINGS]
 #web,android_web
@@ -36,7 +36,7 @@ link_text = Settings
 
 [NAVIGATION]
 #web,android_web
-partial_link_text = Comment
+link_ptext = Comment
 
 [POSTS]
 #web,android_web

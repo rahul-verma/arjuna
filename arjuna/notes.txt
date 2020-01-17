@@ -34,9 +34,19 @@ y30 -> custom dropdown works (example - Bootstrap dropdown control)
 y31 -> Needs work on Narada side for suitable example controls
 y32 -> All source retrieval works.
 
+
+Make existing Gui Model Work
+Make it work as default with single context GNS
+Check support for OR AND parameterized identifiers
+Add localizer
+Add support for GNS parameterization based on on configuration params with localizer.
+
 Deferred and Reason
 -------------------
 
+Concept of Intent and Expression.
+Intent is what a test wants to do -> typically it should talk business.
+Expression is technical implementation -> e.g. ExpressViaWebUI. ExpressViaMobileUI. ExpressViaWebSvc. ExpressViaDB.
 
 Notes for any needed fixes and changes
 -------------------------------------

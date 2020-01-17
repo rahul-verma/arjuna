@@ -143,7 +143,7 @@ class GuiMultiElement(BaseElement):
 class _GuiPartialElement(GuiElement):
 
     def __init__(self, automator, multi_element: GuiMultiElement, instance_number: int, dispatcher_element):
-        super().__init__(automator, multi_element.get_locator_meta_data())
+        super().__init__(automator, multi_element)
         self.__multi_element = multi_element
         self.__instance_number = instance_number
         # dispatcher.set_partial(self.__instance_number)

@@ -206,6 +206,10 @@ class With:
         else:
             self.__with_value = with_value
 
+    @property
+    def wtype(self):
+        return self.__with_type
+
     def raise_format_exc(self):
         if (self.__format_called):
             raise Exception("You can not format a With object more than once.")

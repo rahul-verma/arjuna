@@ -8,7 +8,7 @@ class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
         super().__init__(automator.config, obj_name)
         self.__automator = automator
         self.__parent = parent
-        self.__emd = emd
+        self.__lmd = emd
         self.__found = False
         self.__located_by = None 
         self.__dispatcher_element = None
@@ -44,8 +44,8 @@ class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
     def find_if_not_found(self):
         pass
 
-    def get_locator_meta_data(self):
-        return self.__emd
+    def get_lmd(self):
+        return self.__lmd
 
     def is_found(self):
         return self.__found
@@ -54,7 +54,7 @@ class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
         self.__found = True
         self.__located_by = locator_type, locator_value
 
-    def get_found_with(self, locator_type, locator_value):
+    def get_found_with(self):
         return self.__located_by
 
 

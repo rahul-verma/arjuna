@@ -9,7 +9,7 @@ from arjuna.configure.invoker.config import DefaultTestConfig
 from arjuna.configure.invoker.configurator import TestConfigurator
 from arjuna.drive.invoker.databroker import TestSessionDataBrokerHandler
 from arjuna.interact.gui.auto.invoker.automator import GuiAutomator
-from arjuna.interact.gui.gom.invoker.guimgr import GuiHandlerManager
+from arjuna.interact.gui.gom.impl.guimgr import GuiManager
 
 
 class DefaultTestSession:
@@ -48,7 +48,7 @@ class DefaultTestSession:
         from arjuna.tpi import Arjuna
         Arjuna.init_logger(self.id, config.arjuna_config.value(ArjunaOption.LOG_DIR))
         self.__databroker_handler = TestSessionDataBrokerHandler(self, self.__data_broker)
-        self.__guimgr = GuiHandlerManager(config)
+        self.__guimgr = GuiManager(config)
         return self.__create_config(config)
 
     def __create_config(self, config, name=None):
@@ -61,18 +61,6 @@ class DefaultTestSession:
 
     def finish(self):
         pass
-        # To do
-
-    def __register_config(self, name, hasParent, parentConfigId, arjunaOptions, userOptions):
-        response = self._send_request(
-                ArjunaComponent.CONFIGURATOR,
-                ConfigActionType.REGISTER_NEW_CONFIG,
-                SetuArg.arg("hasParent", hasParent),
-                SetuArg.arg("parentConfigId", parentConfigId),
-                SetuArg.arg("arjunaOptions", arjunaOptions),
-                SetuArg.arg("userOptions", userOptions)
-        )
-        return self.__create_config_from_response(response, name)
 
     def register_config(self, name, arjuna_options, user_options, parent_config=None):
         config = self.configurator.register_new_config(arjuna_options, user_options, parent_config)
@@ -86,11 +74,5 @@ class DefaultTestSession:
         )
         return response.get_data_source_id()
 
-    def create_gui(self, automator, *setu_args):
-        args = setu_args + (SetuArg.arg("automatorSetuId", automator.get_setu_id()), )
-        response = self._send_request(
-            ArjunaComponent.GUI,
-            GuiActionType.CREATE_GUI,
-            *args
-        )
-        return response.get_gui_setu_id()
+    def define_gui(self, automator, label=None, name=None, qual_name=None, def_file_name=None):
+        return self.gui_manager.define_gui(automator, label=label, name=name, qual_name=qual_name, def_file_name=def_file_name)

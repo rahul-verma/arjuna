@@ -5,18 +5,18 @@ from .base_element import ElementConfig
 # UUID is for client reference. Agent does not know about this.
 class GuiWebSelect(ElementConfig):
 
-    def __init__(self, automator, emd, parent=None, option_container_emd=None, option_emd=None):
+    def __init__(self, automator, emd, parent=None, option_container_lmd=None, option_lmd=None):
         super().__init__(automator)
         self.__automator = automator
         self._wrapped_main_element = automator.define_element(emd)
         self.__found = False
         self.__options = None
-        self.__option_emd = option_emd is not None and option_emd or SimpleGuiElementMetaData("tag_name", "option")
+        self.__option_lmd = option_lmd is not None and option_lmd or SimpleGuiElementMetaData("tag_name", "option")
 
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
-        self.__option_container_same_as_select = option_container_emd is None and True or False
+        self.__option_container_same_as_select = option_container_lmd is None and True or False
         if not self.__option_container_same_as_select:
-            self.__option_container = self.__automator.define_element(option_container_emd)
+            self.__option_container = self.__automator.define_element(option_container_lmd)
             # Needs to be loaded so that options can be discovered.
             self.__option_container.find_if_not_found()
 
@@ -32,7 +32,7 @@ class GuiWebSelect(ElementConfig):
 
     def __load_options(self):
         container = self.__get_root_element()
-        self.__options = container.define_multielement(self.__option_emd)
+        self.__options = container.define_multielement(self.__option_lmd)
         self.__options.find_if_not_found()
 
     def is_found(self):
@@ -60,7 +60,7 @@ class GuiWebSelect(ElementConfig):
         return self._multi
 
     def __set_option_locators(self, emd):
-        self.__option_emd = emd
+        self.__option_lmd = emd
 
     def has_index_selected(self, index):
         self.__find_if_not_found()

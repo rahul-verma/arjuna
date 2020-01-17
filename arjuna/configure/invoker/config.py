@@ -123,7 +123,7 @@ class DefaultTestConfig:
     def name(self):
         return self.__name
 
-    def get_gui_auto_context(self):
+    def get_guiauto_context(self):
         return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).as_enum(GuiAutomationContext)
 
     def get_browser_type(self):

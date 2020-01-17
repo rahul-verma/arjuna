@@ -4,7 +4,8 @@ import os
 from enum import Enum, auto
 
 from arjuna.core.enums import GuiAutomationContext
-from arjuna.interact.gui.auto.impl.locator.emd import GuiElementMetaData, Locator
+from arjuna.interact.gui.auto.impl.locator.emd import GuiElementMetaData, Locator, ImplWith
+from arjuna.tpi.guiauto.helpers import With
 
 class FileFormat(Enum):
     GNS = auto()
@@ -44,7 +45,8 @@ class GuiNamespace:
         self.__ns = {}
 
     def add_element_meta_data(self, name, context, raw_locators):
-        emd = GuiElementMetaData(raw_locators, process_args=False)
+        emd = GuiElementMetaData.create_lmd(*raw_locators)
+        #emd = GuiElementMetaData(raw_locators, process_args=False)
         name = name.lower()
         if not self.has(name):
             self.__ns[name] = {}
@@ -168,7 +170,9 @@ class NamespaceFileLoader(BaseGuiNamespaceLoader):
     def __match_locator(self, input):
         match = self.locator_pattern.match(input)
         if match:       
-            locator = Locator(match.group(1), match.group(2))
+            # locator = Locator(match.group(1), match.group(2), named_args=dict())
+            locator = ImplWith(wtype=match.group(1).upper(), wvalue=match.group(2), named_args=dict(), has_content_locator=False)
+            # locator = getattr(With, match.group(1).lower())(match.group(2)) # e.g. getattr(With, "ID".lower())("abc")
             if (self.last_auto_contexts is None):
                 raise Exception("Locators must be preceded with context information as #context1, context2 construct. Current line: " + input)   
 

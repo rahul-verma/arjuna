@@ -33,32 +33,32 @@ class ElementContainer(metaclass=abc.ABCMeta):
         return self.melement_map[id]
 
     @abc.abstractmethod
-    def _create_element_flat_or_nested(self, locator_meta_data):
+    def _create_element_flat_or_nested(self, lmd):
         pass
 
     @abc.abstractmethod
-    def _create_multielement_flat_or_nested(self, locator_meta_data):
+    def _create_multielement_flat_or_nested(self, lmd):
         pass
 
-    def define_element(self, locator_meta_data):
-        return self._create_element_flat_or_nested(locator_meta_data)
+    def define_element(self, lmd):
+        return self._create_element_flat_or_nested(lmd)
 
-    def define_multielement(self, locator_meta_data):
-        return self._create_multielement_flat_or_nested(locator_meta_data)
+    def define_multielement(self, lmd):
+        return self._create_multielement_flat_or_nested(lmd)
 
-    def define_dropdown(self, locator_meta_data, option_container_emd=None, option_emd=None):
+    def define_dropdown(self, lmd, option_container_lmd=None, option_lmd=None):
         from arjuna.interact.gui.auto.impl.element.dropdown import GuiWebSelect
-        return GuiWebSelect(self, locator_meta_data, option_container_emd=option_container_emd, option_emd=option_emd)
+        return GuiWebSelect(self, lmd, option_container_lmd=option_container_lmd, option_lmd=option_lmd)
 
-    def define_radiogroup(self, locator_meta_data):
+    def define_radiogroup(self, lmd):
         from arjuna.interact.gui.auto.impl.element.radio_group import GuiWebRadioGroup
-        return GuiWebRadioGroup(self, locator_meta_data)
+        return GuiWebRadioGroup(self, lmd)
 
     def _find(self, dispatcher_call, gui_element, context="ELEMENT"):
         found = False
         js_call_name = context == "ELEMENT" and "find_element_with_js" or "find_multielement_with_js"
         js_call = getattr(self, js_call_name)
-        locators = gui_element.get_locator_meta_data().locators
+        locators = gui_element.get_lmd().locators
         if context != "ELEMENT":
             if "POINT" in {l.ltype.name for l in locators}:
                 raise ConditionException("With.POINT can be used only with GuiElement.")
@@ -79,7 +79,7 @@ class ElementContainer(metaclass=abc.ABCMeta):
                 traceback.print_exc()
                 continue
         if not found:
-            raise Exception("Could not locate elements with locator(s): {}".format(gui_element.get_locator_meta_data()))
+            raise Exception("Could not locate elements with locator(s): {}".format(gui_element.get_lmd()))
 
     def wait_until_element_found(self, gui_element):
         return self.__container_conditions.PresenceOfElement(gui_element).wait(max_wait_time=self.max_wait_time)

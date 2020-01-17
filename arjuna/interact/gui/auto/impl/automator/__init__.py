@@ -40,8 +40,8 @@ class GuiAutomator(ElementContainer):
     def dispatcher(self):
         return self.__dispatcher
 
-    def create_emd(self, *locators):
-        return GuiElementMetaData.create_emd(*locators)
+    def create_lmd(self, *locators):
+        return GuiElementMetaData.create_lmd(*locators)
 
     def get_source_from_remote(self):
         return self.dispatcher.get_source()

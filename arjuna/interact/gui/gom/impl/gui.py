@@ -1,89 +1,62 @@
-import os
-
-from arjuna.tpi.enums import ArjunaOption
-from .nsloader import GuiNamespaceLoaderFactory
-from arjuna.interact.gui.auto.impl.locator.emd import SimpleGuiElementMetaData, GuiElementMetaData, Locator
-
+from arjuna.tpi.guiauto.helpers import _WithType
 
 class Gui:
 
-    def __init__(self, name_store, namespace_dir, automator, label, file_def_path):
-        super().__init__(automator.config)
-        self.__name_store = name_store
-        self.__namespace_dir = namespace_dir
+    def __init__(self, gui_mgr, automator, gui_def, parent=None):
+        self.__guimgr = gui_mgr
+        self.__guidef = gui_def
         self.__automator = automator
-        self.__auto_context = self.config.setu_config.get_guiauto_context()
-        self.__file_def_path = os.path.abspath(os.path.join(self.__namespace_dir, file_def_path.strip()))
-        self.__ns = None
-        ns_name = "file_ns::" + self.__file_def_path.lower()
-        if name_store.has_namespace(ns_name):
-            self.__ns = name_store.get_namespace(ns_name)
-        else:
-            self.__ns = name_store.load_namespace(
-                ns_name, 
-                GuiNamespaceLoaderFactory.create_namespace_loader(self.__file_def_path)
-        )
+        self.__parent = parent
 
-        self.__children = []
+    @property
+    def gui_def(self):
+        return self.__guidef
 
-    def add_child(self, label, automator, file_def_path):
-        self.__children.append(
-            Gui(self.__name_store, self.__namespace_dir, label, self.__automator, file_def_path)
-    )
+    @property
+    def automator(self):
+        return self.__automator
 
-    def get_emd(self, locators):
-        final_locators = []
-        for raw_locator in locators:
-            if raw_locator["withType"].upper().strip() == "GNS_NAME":
-                emd = self.__ns.get_meta_data(raw_locator["withValue"], self.__auto_context)
-                for loc in emd.raw_locators:
-                    if "argsType" not in raw_locator:
-                        final_locators.append(Locator(ltype=loc.ltype, lvalue=loc.lvalue))
-                    else:
-                        final_locators.append(Locator(
-                            ltype=loc.ltype, 
-                            lvalue=loc.lvalue, 
-                            args_type=raw_locator["argsType"], 
-                            args=raw_locator["args"])
-                        )
+    def create_gui(self, automator, label=None, name=None, qual_name=None, def_file_name=None):
+        gui_def = GuiDef(self.__guimgr.name_store, self.__guimgr.namespace_dir, automator, label, def_file_name)
+        gui = Gui(self, automator, gui_def, parent=self)
+        return gui
+
+    def __lmd(self, *locators):
+        out = []
+        for locator in locators:
+            if locator.wtype == _WithType.GNS_NAME:
+                out.extend(self.gui_def.convert_to_with(locator))
             else:
-                if "argsType" not in raw_locator:
-                    final_locators.append(Locator(ltype=raw_locator["withType"], lvalue=raw_locator["withValue"]))
-                else:
-                    final_locators.append(Locator(
-                        ltype=raw_locator["withType"], 
-                        lvalue=raw_locator["withValue"], 
-                        args_type=raw_locator["argsType"], 
-                        args=raw_locator["args"])
-                    )
-        return GuiElementMetaData(final_locators)
+                out.append(locator)
+        print(out)
+        return out
 
-    def create_dispatcher(self):
-        # Pages don't use any dispatcher
-        pass
+    def define_element(self, *with_locators):
+        return self.automator.element(*self.__lmd(*with_locators))
 
-class GuiFactory:
+    def define_multielement(self, *with_locators):
+        return self.automator.multielement(*self.__lmd(*with_locators))
 
-    @classmethod
-    def create_app_from_dir(cls, name, automator, app_def_dir):
-        considered_path = app_def_dir
-        if not os.path.isdir(considered_path):
-            ns_dir = automator.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
-            full_path = os.path.join(ns_dir, considered_path)
-            considered_path = os.path.abspath(full_path)
-            if not os.path.isdir(considered_path):
-                raise Exception("Provided root definition path is not a directory: {}".format(app_def_dir))
+    def define_dropdown(self, *with_locators):
+        return self.automator.dropdown(*self.__lmd(*with_locators))
 
-        app = Gui(automator, os.path.join(considered_path, "HomePage.gns"), label=name)
-        children_dir = os.path.join(considered_path, "children")
-        if os.path.isdir(children_dir):
-            lfiles = os.listdir(children_dir)
-            for f in lfiles:
-                cpath = os.path.join(children_dir, f)
-                if os.path.isfile(cpath):
-                    base_name = os.path.basename(cpath)
-                    app.add_child(base_name, cpath)
+    def define_radiogroup(self, *with_locators):
+        return self.automator.radiogroup(*self.__lmd(*with_locators))
 
-    @classmethod
-    def create_gui(cls, automator, def_path):
-        return Gui(automator, def_path)
+    def define_frame(self, *with_locators):
+        return self.automator.frame(*self.__lmd(*with_locators))
+
+    @property
+    def alert(self):
+        return self.automator.alert
+
+    @property
+    def main_window(self):
+        return self.automator.main_window
+
+    @property
+    def browser(self):
+        return self.automator.browser
+
+    def set_slomo(self, on, interval=None):
+        self.automator.set_slomo(on, interval)

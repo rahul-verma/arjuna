@@ -83,7 +83,7 @@ class BaseComponent:
         return DefaultGuiSource(self._automator, self.impl.get_source())
 
     def _emd(self, *locators):
-        return self._automator._create_emd(*locators)
+        return self._automator._create_lmd(*locators)
 
     def configure(self, config):
         self.impl.configure(config.settings)

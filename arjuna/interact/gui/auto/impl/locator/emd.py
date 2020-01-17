@@ -4,7 +4,13 @@ from collections import namedtuple
 
 from arjuna.core.enums import GuiElementType
 
-ImplWith = namedtuple('ImplWith' , ["wtype", "wvalue", "named_args", "has_content_locator"])
+class ImplWith:
+    
+    def __init__(self, *, wtype, wvalue, named_args, has_content_locator):
+        self.wtype = wtype
+        self.wvalue = wvalue
+        self.named_args = named_args
+        self.has_content_locator = has_content_locator
 
 class MobileNativeLocateWith(Enum):
     ID = auto()
@@ -302,13 +308,13 @@ class GuiElementMetaData:
         return out_list
 
     @classmethod
-    def create_emd(cls, *locators):
+    def create_lmd(cls, *locators):
         impl_locators = cls.convert_to_impl_with_locators(*locators)
         processed_locators = []
         for locator in impl_locators:
             ltype = locator.wtype.lower()
             if ltype == "content_locator":
-                CONTENT_LOCATOR = cls.create_emd(locator.wvalue)
+                CONTENT_LOCATOR = cls.create_lmd(locator.wvalue)
                 p_locator = Locator(ltype=locator.wtype, lvalue=CONTENT_LOCATOR, named_args=None)
             else:
                 p_locator = cls.__process_single_raw_locator(locator)

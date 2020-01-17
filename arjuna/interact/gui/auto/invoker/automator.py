@@ -10,10 +10,9 @@ class GuiAutomatorName(Enum):
     SELENIUM = auto()
     APPIUM = auto()
 
+class GuiAutomator:
 
-class AbstractAppAutomator:
-
-    def __init__(self, config=None):
+    def __init__(self, config=None, extended_config=None):
         from arjuna.tpi import Arjuna
         self.__config = config and config or Arjuna.get_ref_config()
         self.__test_session = self.config.test_session
@@ -21,6 +20,10 @@ class AbstractAppAutomator:
         self.__main_window = None
         self.__browser = None
         self.__auto_context = None
+        self._set_impl_automator(ImplGuiAutomator(config, extended_config))
+        self._set_main_window(GuiAutoComponentFactory.MainWindow(self, self.impl_automator.main_window))
+        self._set_browser(GuiAutoComponentFactory.Browser(self, self.impl_automator.browser))
+
 
     def _set_impl_automator(self, automator):
         self.__impl_automator = automator
@@ -47,15 +50,15 @@ class AbstractAppAutomator:
     def is_gui(self):
         return False
 
-    def _create_emd(self, *locators):
-        return self.impl_automator.create_emd(*locators)
+    def _create_lmd(self, *locators):
+        return self.impl_automator.create_lmd(*locators)
 
     def element(self, *with_locators):
-        impl = self.impl_automator.define_element(self._create_emd(*with_locators))
+        impl = self.impl_automator.define_element(self._create_lmd(*with_locators))
         return GuiAutoComponentFactory.Element(self, impl)
 
     def multi_element(self, *with_locators):
-        impl = self.impl_automator.define_multielement(self._create_emd(*with_locators))
+        impl = self.impl_automator.define_multielement(self._create_lmd(*with_locators))
         return GuiAutoComponentFactory.MultiElement(self, impl)
 
     def dropdown(self, *with_locators, option_container_locators=None, option_locators=None):
@@ -67,14 +70,14 @@ class AbstractAppAutomator:
             else:
                 raise Exception("Expected a With object or a list/tuple of With objects")
         impl = self.impl_automator.define_dropdown(
-            self._create_emd(*with_locators),
-            option_container_emd= option_container_locators and self._create_emd(*convert_to_tuple(option_container_locators)) or None,
-            option_emd=option_locators and self._create_emd(*convert_to_tuple(option_locators)) or None
+            self._create_lmd(*with_locators),
+            option_container_lmd= option_container_locators and self._create_lmd(*convert_to_tuple(option_container_locators)) or None,
+            option_lmd=option_locators and self._create_lmd(*convert_to_tuple(option_locators)) or None
         )
         return GuiAutoComponentFactory.DropDown(self, impl)
 
     def radio_group(self, *with_locators):
-        impl = self.impl_automator.define_radiogroup(self._create_emd(*with_locators))
+        impl = self.impl_automator.define_radiogroup(self._create_lmd(*with_locators))
         return GuiAutoComponentFactory.RadioGroup(self, impl)
 
     def frame(self, *with_locators):
@@ -146,14 +149,6 @@ class AbstractAppAutomator:
 
     def perform_composite_action(self):
         pass
-
-class GuiAutomator(AbstractAppAutomator):
-
-    def __init__(self, config, extended_config=None):
-        super().__init__(config)
-        self._set_impl_automator(ImplGuiAutomator(config, extended_config))
-        self._set_main_window(GuiAutoComponentFactory.MainWindow(self, self.impl_automator.main_window))
-        self._set_browser(GuiAutoComponentFactory.Browser(self, self.impl_automator.browser))
 
     def quit(self):
         self.impl_automator.quit()
