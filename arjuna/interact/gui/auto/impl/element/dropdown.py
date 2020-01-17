@@ -5,17 +5,21 @@ from .base_element import ElementConfig
 # UUID is for client reference. Agent does not know about this.
 class GuiWebSelect(ElementConfig):
 
-    def __init__(self, automator, emd, parent=None):
+    def __init__(self, automator, emd, parent=None, option_container_emd=None, option_emd=None):
         super().__init__(automator)
         self.__automator = automator
         self._wrapped_main_element = automator.define_element(emd)
         self.__found = False
         self.__options = None
-        self.__option_emd = SimpleGuiElementMetaData("tag_name", "option")
+        print(option_emd)
+        self.__option_emd = option_emd is not None and option_emd or SimpleGuiElementMetaData("tag_name", "option")
 
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
-        self.__option_container_same_as_select = True
-        self.__option_container = None
+        self.__option_container_same_as_select = option_container_emd is None and True or False
+        if not self.__option_container_same_as_select:
+            self.__option_container = self.__automator.define_element(option_container_emd)
+            # Needs to be loaded so that options can be discovered.
+            self.__option_container.find_if_not_found()
 
         self.__source_parser = None
 
@@ -26,10 +30,12 @@ class GuiWebSelect(ElementConfig):
         self._multi = self.__is_multi_select()
 
     def __get_root_element(self):
+        print(self.__option_container_same_as_select)
         return self.__option_container_same_as_select and self._wrapped_main_element or self.__option_container
 
     def __load_options(self):
         container = self.__get_root_element()
+        print(self.__option_emd)
         self.__options = container.define_multielement(self.__option_emd)
         self.__options.find_if_not_found()
 
@@ -57,14 +63,8 @@ class GuiWebSelect(ElementConfig):
     def is_multi_select(self):
         return self._multi
 
-    def set_option_locators(self, emd):
+    def __set_option_locators(self, emd):
         self.__option_emd = emd
-
-    def set_option_container(self, emd):
-        self.__option_container_same_as_select = False
-        self.__option_container = self.__automator.create_element(emd)
-        # Needs to be loaded so that options can be discovered.
-        self.__option_container.find_if_not_found()
 
     def has_index_selected(self, index):
         self.__find_if_not_found()
@@ -97,6 +97,7 @@ class GuiWebSelect(ElementConfig):
     def select_by_index(self, index):
         self.__find_if_not_found()
         option = self.__options.get_instance_at_index(index)
+        print(option.get_source().get_root_content())
         self.__select_option(option)
 
     def select_by_ordinal(self, ordinal):

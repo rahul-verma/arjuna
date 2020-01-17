@@ -28,6 +28,7 @@ class SeleniumDriverElementDispatcher:
         return 1, self.create_dispatcher(self.__driver_dispatcher, element)
 
     def find_multielement(self, with_type, with_value):
+        print(with_type, with_value)
         web_elements = ElementFinder.find_elements(self.__driver, with_type, with_value)
         melement = MultiElement([self.create_dispatcher(self.__driver_dispatcher, web_element) for web_element in web_elements])
         return melement.get_instance_count(), melement

@@ -30,4 +30,4 @@ automator.browser.go_to_url(url)
 # dropdown = automator.dropdown(With.id("Prob1")).configure(conf)
 # dropdown.select_index(1)
 
-automator.quit()
+# automator.quit()

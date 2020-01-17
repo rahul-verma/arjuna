@@ -1,4 +1,5 @@
 from enum import Enum, auto
+from arjuna.tpi.guiauto.helpers import With
 from arjuna.interact.gui.auto.invoker.mkactions import *
 from .component import GuiAutoComponentFactory
 
@@ -56,8 +57,19 @@ class AbstractAppAutomator:
         impl = self.impl_automator.define_multielement(self._create_emd(*with_locators))
         return GuiAutoComponentFactory.MultiElement(self, impl)
 
-    def dropdown(self, *with_locators):
-        impl = self.impl_automator.define_dropdown(self._create_emd(*with_locators))
+    def dropdown(self, *with_locators, option_container_locators=None, option_locators=None):
+        def convert_to_tuple(in_data):
+            if isinstance(in_data, With):
+                return (in_data, )
+            elif type(in_data) in {list, tuple}:
+                return in_data
+            else:
+                raise Exception("Expected a With object or a list/tuple of With objects")
+        impl = self.impl_automator.define_dropdown(
+            self._create_emd(*with_locators),
+            option_container_emd= option_container_locators and self._create_emd(*convert_to_tuple(option_container_locators)) or None,
+            option_emd=option_locators and self._create_emd(*convert_to_tuple(option_locators)) or None
+        )
         return GuiAutoComponentFactory.DropDown(self, impl)
 
     def radio_group(self, *with_locators):
