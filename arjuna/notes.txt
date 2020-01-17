@@ -31,7 +31,8 @@ y27 -> With.javascript works as expected for success and failure scenarios (mult
 y28 -> Pre state check works for basic element.
 y29 -> Dropdown pre state check off works.
 y30 -> custom dropdown works (example - Bootstrap dropdown control)
-y31 -> 
+y31 -> Needs work on Narada side for suitable example controls
+y32 -> All source retrieval works.
 
 Deferred and Reason
 -------------------
@@ -39,6 +40,13 @@ Deferred and Reason
 
 Notes for any needed fixes and changes
 -------------------------------------
+
+Names of CLI options to be changed to baseline and extended
+CLI ->
+aro
+uro
+aeo
+ueo
 
 1. Arjuna identifiers:
 - Add support for new identifiers.
@@ -75,6 +83,86 @@ Notes for any needed fixes and changes
 11. Text case insensitive? by default off. For on more processing is needed so expectation should be set accordingly.
 
 12. Check the dispatcher object in case of select control for options. is it set to automator or element.
+
+Planned Features
+Element Configuration (code and gns)
+    - Support at automator level.
+    - Support at configuration level
+Advanced Frame related functionality - In Progress
+    - Enumerating immediate frames at Dom Root and Frame level
+    - Content based frame finding for immediate child frames
+Action Chains - Named method for common interactions - In progress
+    - Invoker-side interfaces and classes - Mostly done
+    - Impl and dispatcher pending
+    - Look for Pythonic opportunities in Invoker api
+Nested Elements support
+More waits
+    wait for Absence, Invisible and Disabled
+
+Map valid With options to tpye of component. Clear exceptions with troubleshooting to be coded.
+Explicit wait in Arjuna Setu for Frames and Windows, which works under the total limit of gui max wait.
+Classification of Errors and Exceptions
+Single Context GNS
+    Should be the default context
+Element configuration support in GNS
+AND relationship for code and gns
+Option to enable proxy in Selenium dispatcher
+Taking screenshot - automator level, rect, element, elements
+Frame config: should be able to change the iframe to e.g. object. Enumerate frames should take an optional argument of With and do a multielement match instead of the default With.INDEX used internally.
+File based configuration load_from_code_file
+    coded
+    pytest or unitee session file should support this
+    CLI
+Add support for envioronment variables to be consumed in configuration
+Overridabiliy and visibility of configuration options ---> This needs to be implemented before CLI can be discussed: Following are the levels for which it should be clearly defined. Preferrably all configuration settings should be documented as matrix with the mapping:
+    Project.conf
+    Programmatic
+    CLI - Reference
+    CLI - Extended
+Data Reference
+
+
+Phase 3 - Additional Abstractions and Features for Selenium - 24 Dec, 2019 (Jan 1 2020 - 1.0 First production Release)
+Navigation bar menu Abstraction
+WebTable Abstraction
+MultiElement filters
+    ignore
+    consider
+WebDriver Manager
+JavaScript
+    Sending primititve args to Javascript
+    Sending element to JavaScript
+Support for Multi-select Dropdown list
+Default type checking for enter/set text, check/unckeck, toggle operations etc.
+Optimization of option level or radio button level state and attribute checking in DropDown and RadioButton abstractions
+
+Phase 4 - March 31, 2019 (In Parallel to Next Feature Section)
+Documentation
+    Configuration Options
+    Bindings documentation
+Documentation
+    FaaST protocol
+    Create a sharable Postman collection for FaaST
+
+Extended Arjuna Features, Python Bindings and Corresponding Support in Arjuna
+Phase 1 - March 31, 2019
+    Completion of Python Bindings in alignment with Java Bindings
+    Create a list and high level doc of what is expected from Bindings currently
+    List the features here and track feature wise completion after critical testing
+    Logger as Service
+Visualization of requests & responses
+UniTEE reporter
+    Treeview
+    Summary
+    See whether html5.Treeview helps?
+
+Phase 2 - Tentatively a 6 month schedule
+    Arjuna Web Interface
+    Need help from community contributor who knows web development
+    Arjuna as a Remote Service
+    Jenkins and GitHub integration
+    Arjuna docker Image
+
 
 What SetuSvc used to do:
 

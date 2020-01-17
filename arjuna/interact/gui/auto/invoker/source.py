@@ -14,7 +14,7 @@ class SourceContent:
 
     @property
     def all(self):
-        return self.src.get_all_content()
+        return self.src.get_full_content()
 
     @property
     def inner(self):

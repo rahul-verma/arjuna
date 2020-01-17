@@ -42,7 +42,6 @@ class Condition:
             except ConditionException as ce:
                 raise ce
             except Exception as f:
-                print(f)
                 import traceback
                 traceback.print_exc()
                 pass

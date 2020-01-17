@@ -14,8 +14,9 @@ def go_to_wp_home(automator):
     url = automator.config.get_user_option_value("wp.login.url").as_str()
     automator.browser.go_to_url(url)
 
-def login(automator):
-    go_to_wp_home(automator)
+def login(automator,at_home=False):
+    if not at_home:
+        go_to_wp_home(automator)
 
     user, pwd = automator.config.get_user_option_value("wp.users.admin").split_as_str_list()
 

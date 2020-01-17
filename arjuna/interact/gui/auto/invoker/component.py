@@ -259,8 +259,6 @@ class BaseFrame(BaseComponent):
         self.impl.focus()
 
     def frame(self, *with_locators):
-        print("component", with_locators)
-        print("FFF", self._emd(*with_locators))
         return GuiAutoComponentFactory.Frame(self._automator, self.impl.define_frame(self._emd(*with_locators)))
 
     @property

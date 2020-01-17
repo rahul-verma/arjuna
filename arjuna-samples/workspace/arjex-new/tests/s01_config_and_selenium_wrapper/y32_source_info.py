@@ -1,46 +1,32 @@
-'''
-Testers use 3 approaches for Dropdown controls in web test automation using Selenium.
-1. Using Selenium's Select class as it provides higher level methods.
-2. Using sendKeys() method of WebElement.
-3. (Especially for custom select controls) - Click the drop down control and then click the option. 
+from arjuna.tpi import Arjuna
+from arjuna.tpi.guiauto.helpers import With, GuiActionConfig
 
-Arjuna tries to cater to all of them with a single abstraction - its DropDown object.
+from commons import *
 
-3 will be covered later when element configuration has been discussed.
-'''
-
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
-
-from .wp_login_logout import *
-
-def print_source_info(src):
+def print_source_info(source):
     print(source.content.root)
-    print(source.content.all
+    print(source.content.all)
     print(source.content.inner)
-    print(source.content.text)	   
+    print(source.content.text)	
 
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
-
+init_arjuna()
+automator = launch_automator()
 go_to_wp_home(automator)
 
 
 element = automator.element(With.id("loginform"))
 print_source_info(element.source)
 
-login(automator)
+login(automator, at_home=False)
 
 automator.element(With.link_text("Settings")).click()
 
 # Dopdown
-element = automator.DropDown(With.id("default_role"))
+element = automator.dropdown(With.id("default_role"))
 print_source_info(element.source)
 
 # Radio
-date_format = automator.RadioGroup(With.name("date_format"))
+date_format = automator.radio_group(With.name("date_format"))
 print_source_info(date_format.source)
 
 
@@ -51,7 +37,8 @@ print_source_info(automator.source)
 
 print_source_info(automator.dom_root.source)
 
-automator.Frame(With.id("content_ifr")).focus()
+frame = automator.frame(With.id("content_ifr"))
+frame.focus()
 print_source_info(frame.source)
 
 # custom drop down
@@ -60,9 +47,13 @@ automator.browser.go_to_url(url)
 
 conf = GuiActionConfig.builder().check_type(False).check_post_state(False).build()
 
-dropdown = automator.element(With.id("DropDown").configure(config))
-dropdown.set_option_container(With.class_name("dropdown"))
-dropdown.set_option_locators(With.class_name("dropdown-item"))
+dropdown = automator.dropdown(
+    With.id("DropDown"),
+    option_container_locators=With.class_name("dropdown"),
+    option_locators=With.class_name("dropdown-item")
+)
+    
+dropdown.configure(conf)
 print_source_info(dropdown.source)
 
 logout(automator)

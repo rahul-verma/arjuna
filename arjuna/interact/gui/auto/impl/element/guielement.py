@@ -12,7 +12,6 @@ class GuiElement(BaseElement, ElementConfig):
         self.__automator = automator
 
     def __get_attr_value_from_remote(self, attr, optional=False):
-        print(self.dispatcher)
         return self.__return_attr_value(self.dispatcher.get_attr_value(attr, optional))
 
     def get_source_from_remote(self):

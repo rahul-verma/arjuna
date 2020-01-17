@@ -1,33 +1,26 @@
-'''
-3. (Especially for custom select controls) - Click the drop down control and then click the option. 
-'''
+from commons import *
+from arjuna.tpi.guiauto.helpers import With, GuiActionConfig
 
-from arjuna.revised.tpi import Arjuna
-from arjuna.revised.tpi.guiauto.helpers import With
-from arjuna.revised.tpi.guiauto.helpers import Screen
+init_arjuna()
 
-from .wp_login_logout import *
-
-Arjuna.init()
-# Default Gui automation engine is Selenium
-automator = Arjuna.create_gui_automator(Arjuna.get_central_config())
+automator = launch_automator()
 
 url = automator.config.get_user_option_value("narada.ex.radio.url").as_str()
 automator.browser.go_to_url(url)
 
-radios = automator.RadioGroup(With.name("Traditional"))
+radios = automator.radio_group(With.name("Traditional"))
 radios.select_index(1)
 
 # Tag mix up
-radios = automator.RadioGroup(With.name("Prob1"))
+radios = automator.radio_group(With.name("Prob1"))
 radios.select_index(1)
 
 # Type mix up
-radios = automator.RadioGroup(With.name("Prob2"))
+radios = automator.radio_group(With.name("Prob2"))
 radios.select_index(1)
 
 # Group mix up
-radios = automator.RadioGroup(With.class_name("Prob3"))
+radios = automator.radio_group(With.class_name("Prob3"))
 radios.select_index(1)
 
 # state check off

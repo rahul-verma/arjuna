@@ -11,7 +11,6 @@ class GuiWebSelect(ElementConfig):
         self._wrapped_main_element = automator.define_element(emd)
         self.__found = False
         self.__options = None
-        print(option_emd)
         self.__option_emd = option_emd is not None and option_emd or SimpleGuiElementMetaData("tag_name", "option")
 
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
@@ -24,18 +23,15 @@ class GuiWebSelect(ElementConfig):
         self.__source_parser = None
 
     def __validate_select_control(self, tag):
-        print(tag)
         if tag.lower() != "select":
             raise Exception("The element should have a 'select' tag for WebSelect element. Found: " + tag)
         self._multi = self.__is_multi_select()
 
     def __get_root_element(self):
-        print(self.__option_container_same_as_select)
         return self.__option_container_same_as_select and self._wrapped_main_element or self.__option_container
 
     def __load_options(self):
         container = self.__get_root_element()
-        print(self.__option_emd)
         self.__options = container.define_multielement(self.__option_emd)
         self.__options.find_if_not_found()
 
@@ -97,7 +93,6 @@ class GuiWebSelect(ElementConfig):
     def select_by_index(self, index):
         self.__find_if_not_found()
         option = self.__options.get_instance_at_index(index)
-        print(option.get_source().get_root_content())
         self.__select_option(option)
 
     def select_by_ordinal(self, ordinal):

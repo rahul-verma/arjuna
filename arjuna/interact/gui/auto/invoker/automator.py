@@ -4,6 +4,7 @@ from arjuna.interact.gui.auto.invoker.mkactions import *
 from .component import GuiAutoComponentFactory
 
 from arjuna.interact.gui.auto.impl.automator import GuiAutomator as ImplGuiAutomator
+from arjuna.interact.gui.auto.invoker.source import DefaultGuiSource
 
 class GuiAutomatorName(Enum):
     SELENIUM = auto()
@@ -77,7 +78,7 @@ class AbstractAppAutomator:
         return GuiAutoComponentFactory.RadioGroup(self, impl)
 
     def frame(self, *with_locators):
-        print("automator", *with_locators)
+        # Conversion takes place IFrame implementation for locator -> emd
         return self.dom_root.frame(*with_locators)
 
     def child_window(self, *with_locators):
@@ -136,8 +137,9 @@ class AbstractAppAutomator:
     def execute_javascript(self, script):
         return self.impl_automator.browser.execute_javascript(script)
 
+    @property
     def source(self):
-        return DefaultGuiSource(self, abcde) # abcde should be the impl source
+        return DefaultGuiSource(self, self.impl_automator.get_source())
 
     def new_action_chain(self):
         return SingleActionChain(self)
