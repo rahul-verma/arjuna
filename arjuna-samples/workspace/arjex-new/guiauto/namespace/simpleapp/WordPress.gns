@@ -22,6 +22,14 @@ class_name = avatar
 #web,android_web
 link_text = Log Out
 
+[LOGOUT_CONFIRM]
+#web,android_web
+link_text = Log Out
+
+[LOGOUT_MSG]
+#web,android_web
+ptext = logged out
+
 [TOGGLE_MENU]
 #web,android_web
 id =wp-admin-bar-menu-toggle
