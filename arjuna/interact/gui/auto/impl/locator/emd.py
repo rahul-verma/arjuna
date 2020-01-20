@@ -260,7 +260,7 @@ class GuiElementMetaData:
                 elif generic_locate_with == GenericLocateWith.CLASS_NAMES:
                     self.__add_locator(GenericLocateWith.CSS_SELECTOR, "." + ".".join(rlvalue), named_args)
                 else:
-                    raise Exception("Locator not supported yet by Setu: " + rltype)
+                    raise Exception("Locator not supported yet by Arjuna: " + rltype)
 
     def __add_locator(self, locator_type, locator_value, named_args):
         self.locators.append(GuiGenericLocator(locator_type, locator_value, named_args))

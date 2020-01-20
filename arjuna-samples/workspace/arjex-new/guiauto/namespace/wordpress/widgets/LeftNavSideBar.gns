@@ -4,7 +4,7 @@ css_selector = .dashicons-admin-settings
 
 [NAVIGATION]
 #web,android_web
-partial_link_text = Comment
+link_ptext = Comment
 
 [POSTS]
 #web,android_web

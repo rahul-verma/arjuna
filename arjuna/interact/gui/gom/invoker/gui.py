@@ -1,5 +1,5 @@
 import os
-from .base import BaseGui
+from arjuna.interact.gui.gom.impl.base import BaseGui
 from arjuna.tpi.enums import ArjunaOption
 
 class DefaultGui(BaseGui):
@@ -19,11 +19,8 @@ class SimpleBaseGui(BaseGui):
     def __init__(self, automator, ns_dir):
         super().__init__(automator, ns_dir=ns_dir)
 
-class SimpleBaseChildGui(BaseGui):
+class SimpleBaseWidget(BaseGui):
 
-    def __init__(self, automator, parent, app_def_dir=""):
-        super().__init__(automator, parent=parent, register=False)
+    def __init__(self, automator, parent, ns_dir):
+        super().__init__(automator, parent=parent, ns_dir=ns_dir)
         label = self.__class__.__name__
-        self.set_label(label)
-        self.set_def_file_name("{}/{}.gns".format(app_def_dir, label))
-        self._register()

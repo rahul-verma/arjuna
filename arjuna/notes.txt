@@ -37,7 +37,7 @@ y32 -> All source retrieval works.
 GNS
 - Simple app abstraction - Done
 - Simple POM - Done
-- Composite POM
+- Composite POM - Done
 - Single context GNS
 - Check parameterization for identifier pulled from GNS
 - Introduce equivalent of LoadableComponent logic.

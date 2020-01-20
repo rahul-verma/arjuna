@@ -6,6 +6,7 @@ from arjuna.tpi.enums import ArjunaOption
 class BaseGui:
 
     def __init__(self, automator, ns_dir, label=None, def_file_name=None, parent=None, register=True):
+        super().__init__()
         self.__automator = automator
         self.__children_map = dict()
         self.__gui_registered = False
@@ -97,7 +98,7 @@ class BaseGui:
         if not self.__parent:
             self.__impl_gui = self.test_session.define_gui(self.automator, label=self.label, name=self.name, qual_name=self.qual_name, def_file_path=self.def_file_path)
         else:
-            self.__impl_gui = self.impl_gui.define_gui(self.automator, label=self.label, name=self.name, qual_name=self.qual_name, def_file_path=self.def_file_path)
+            self.__impl_gui = self.__parent.impl_gui.define_gui(self.automator, label=self.label, name=self.name, qual_name=self.qual_name, def_file_path=self.def_file_path)
 
         if self.__parent:
             self.__parent.add_child(self.__label, self)

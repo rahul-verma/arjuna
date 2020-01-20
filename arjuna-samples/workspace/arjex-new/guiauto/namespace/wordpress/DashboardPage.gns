@@ -1,11 +1,3 @@
 [SETTINGS]
 #web,android_web
 link_text = Settings
-
-[LOGOUT_CONFIRM]
-#web,android_web
-link_text = log out
-
-[LOGOUT_MSG]
-#web,android_web
-ptext = logged out

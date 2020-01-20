@@ -1,4 +1,5 @@
 from arjuna.tpi.guiauto.helpers import _WithType
+from .guidef import GuiDef
 
 class Gui:
 
@@ -16,8 +17,8 @@ class Gui:
     def automator(self):
         return self.__automator
 
-    def create_gui(self, automator, label=None, name=None, qual_name=None, def_file_name=None):
-        gui_def = GuiDef(self.__guimgr.name_store, self.__guimgr.namespace_dir, automator, label, def_file_name)
+    def define_gui(self, automator, label=None, name=None, qual_name=None, def_file_path=None):
+        gui_def = GuiDef(self.__guimgr.name_store, self.__guimgr.namespace_dir, automator, label, def_file_path)
         gui = Gui(self, automator, gui_def, parent=self)
         return gui
 

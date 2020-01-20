@@ -14,3 +14,5 @@ class WPBasePage(SimpleBaseGui):
 
         self.element("logout_confirm").click()
         self.element("logout_msg").wait_until_visible()
+
+
