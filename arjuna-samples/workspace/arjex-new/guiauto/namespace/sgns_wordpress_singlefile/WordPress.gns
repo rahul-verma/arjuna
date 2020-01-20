@@ -2,6 +2,7 @@
 id = $role$_login
 
 [PASSWORD]
+css_selector = notvalid
 id = $ ROle $_pass
 
 [SUBMIT]

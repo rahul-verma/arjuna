@@ -36,10 +36,13 @@ y32 -> All source retrieval works.
 
 GNS
 - Simple app abstraction - Done
-- Simple POM - Done
-- Composite POM - Done
-- Single context GNS - Done
+- Simple GOM - Done
+- Composite GOM - Done
+- Single context GNS. Make it the default. - Done
 - Check parameterization for identifier pulled from GNS - Done
+
+GNS Desirables
+---------------
 - Introduce equivalent of LoadableComponent logic.
 - Extract with mechanism for pages and separate from the generic logic. It is getting too complicated.
 - An identifier should explicitly look for parameter value:
@@ -56,11 +59,11 @@ GNS
     - One thought is that you can create a Intrapolator class for this.
         Each GuiDef can have an intrapolator object attached to it.
 
-Make existing Gui Model Work
-Make it work as default with single context GNS
 Check support for OR AND parameterized identifiers
+
+Localizer
+---------
 Add localizer
-Add support for GNS parameterization based on on configuration params with localizer.
 
 Deferred and Reason
 -------------------
