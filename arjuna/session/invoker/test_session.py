@@ -8,7 +8,6 @@ from arjuna.configure.invoker.config import DefaultTestConfig
 
 from arjuna.configure.invoker.configurator import TestConfigurator
 from arjuna.drive.invoker.databroker import TestSessionDataBrokerHandler
-from arjuna.interact.gui.auto.invoker.automator import GuiAutomator
 from arjuna.interact.gui.gom.impl.guimgr import GuiManager
 
 
