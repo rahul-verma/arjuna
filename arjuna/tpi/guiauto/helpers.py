@@ -210,6 +210,10 @@ class With:
     def wtype(self):
         return self.__with_type
 
+    @property
+    def named_args(self):
+        return self.__named_args
+
     def raise_format_exc(self):
         if (self.__format_called):
             raise Exception("You can not format a With object more than once.")

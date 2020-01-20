@@ -59,6 +59,8 @@ class GuiDef:
                     final_locators.append(Locator(ltype=raw_locator.wtype, lvalue=raw_locator.wvalue), named_args={})
                 else:
                     final_locators.append(Locator(ltype=raw_locator.ltype, lvalue=raw_locator.lvalue), named_args=raw_locator.named_args)
+        import sys
+        sys.exit(1)
         return GuiElementMetaData(final_locators)
 
     def convert_to_with(self, locator):
@@ -67,6 +69,8 @@ class GuiDef:
         emd = self.__ns.get_meta_data(impl_with.wvalue, self.__auto_context)
         for loc in emd.raw_locators:
             wobj = getattr(With, loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "ID".lower())("abc")
+            if locator.named_args:
+                wobj.format(**locator.named_args)
             out_list.append(wobj)
         return out_list
 

@@ -269,7 +269,7 @@ class GuiElementMetaData:
         '''
             It consumes impl locator list.
         '''
-        pattern = r"\$(\w*?)\$"
+        pattern = r"\$(\s*\w*?\s*)\$"
         for locator in self.locators:
             if locator.ltype == GenericLocateWith.CONTENT_LOCATOR:
                 locator.lvalue.process_args()
@@ -283,7 +283,7 @@ class GuiElementMetaData:
             
             for match in matches:
                 target = "${}$".format(match)
-                repl = "{" + match.lower() + "}"
+                repl = "{" + match.lower().strip() + "}"
                 fmt_locator_value = fmt_locator_value.replace(target, repl)
 
             repl = {k.lower():v for k,v in locator.named_args.items()}

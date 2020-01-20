@@ -29,7 +29,6 @@ class Gui:
                 out.extend(self.gui_def.convert_to_with(locator))
             else:
                 out.append(locator)
-        print(out)
         return out
 
     def define_element(self, *with_locators):

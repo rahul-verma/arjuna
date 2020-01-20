@@ -26,8 +26,8 @@ class WPBaseTest(BaseTest):
         user, pwd = self.config.get_user_option_value("wp.users.admin").split_as_str_list()
 
         # Login
-        self.app.element("login").set_text(user)
-        self.app.element("password").set_text(pwd)
+        self.app.element(With.gns_name("login").format(RoLe="user")).set_text(user)
+        self.app.element(With.gns_name("password").format(roLE="user")).set_text(pwd)
         self.app.element("submit").click()
 
         self.app.element("view-site").wait_until_visible()

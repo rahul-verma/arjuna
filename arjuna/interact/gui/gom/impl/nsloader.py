@@ -191,7 +191,6 @@ class AbstractGNFileLoader(BaseGuiNamespaceLoader):
         return self.last_header is not None
 
     def __validate_duplicate_entry(self, last_name, new_name):
-        print(last_name, new_name)
         if (last_name.lower() == new_name.lower()) or self.__is_defined(new_name):
             raise Exception("Found duplicate namespace definition for {} element.".format(new_name))
 
@@ -221,7 +220,6 @@ class AbstractGNFileLoader(BaseGuiNamespaceLoader):
             return False
 
     def _init_contexts_dict(self, name, contexts):
-        print(name, contexts)
         for context in contexts:
             if context in self.__ns[name]:
                 raise Exception("Found duplicate automation context {} in {} namespace definition.".format(context.name, self.last_header))

@@ -38,8 +38,8 @@ GNS
 - Simple app abstraction - Done
 - Simple POM - Done
 - Composite POM - Done
-- Single context GNS
-- Check parameterization for identifier pulled from GNS
+- Single context GNS - Done
+- Check parameterization for identifier pulled from GNS - Done
 - Introduce equivalent of LoadableComponent logic.
 - Extract with mechanism for pages and separate from the generic logic. It is getting too complicated.
 - An identifier should explicitly look for parameter value:

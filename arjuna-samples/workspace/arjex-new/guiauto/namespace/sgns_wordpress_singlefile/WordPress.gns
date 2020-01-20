@@ -1,8 +1,8 @@
 [LOGIN]
-id = user_login
+id = $role$_login
 
 [PASSWORD]
-id = user_pass
+id = $ ROle $_pass
 
 [SUBMIT]
 id = wp-submit
