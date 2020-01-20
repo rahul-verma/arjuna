@@ -13,7 +13,7 @@ class WPBaseTest(BaseTest):
 
     def setUp(self):
         super().setUp()
-        self.app = DefaultGui(self.automator, "wordpress_singlens", "WordPress.gns")
+        self.app = DefaultGui(self.automator, "mgns_wordpress_singlefile", "WordPress.gns")
         self.login_with_default_creds()
 
     def tearDown(self):

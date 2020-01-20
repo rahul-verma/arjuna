@@ -1,0 +1,8 @@
+[SETTINGS]
+link_text = Settings
+
+[LOGOUT_CONFIRM]
+link_text = log out
+
+[LOGOUT_MSG]
+ptext = logged out

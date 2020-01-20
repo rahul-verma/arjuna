@@ -1,10 +1,12 @@
 import unittest
 from arjuna.interact.gui.gom.invoker.gui import SimpleBaseGui
 
+GNS_FMT = None
+
 class WPBasePage(SimpleBaseGui):
 
     def __init__(self, automator):
-        super().__init__(automator, "wordpress")
+        super().__init__(automator, "{}_wordpress".format(GNS_FMT.lower()))
         # Trick to use assertions outside of a unittest test
         self._asserter = unittest.TestCase('__init__')
 

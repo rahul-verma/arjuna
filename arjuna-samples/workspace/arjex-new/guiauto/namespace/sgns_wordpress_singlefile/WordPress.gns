@@ -1,0 +1,71 @@
+[LOGIN]
+id = user_login
+
+[PASSWORD]
+id = user_pass
+
+[SUBMIT]
+id = wp-submit
+
+[VIEW-SITE]
+class_name = welcome-view-site
+ 
+[PROFILE_LINK]
+class_name = avatar
+
+[LOGOUT_LINK]
+link_text = Log Out
+
+[LOGOUT_CONFIRM]
+link_text = Log Out
+
+[LOGOUT_MSG]
+ptext = logged out
+
+[TOGGLE_MENU]
+id =wp-admin-bar-menu-toggle
+
+[POSTS]
+TEXT =Posts
+
+[SETTINGS]
+link_text = Settings
+
+[NAVIGATION]
+link_ptext = Comment
+
+[POSTS]
+css_selector = .dashicons-admin-post
+
+[CATEGORIES]
+link_text = Categories
+
+[MENU_TOGGLE]
+css_selector = .ab-icon
+
+[GENERAL]
+link_text = General
+
+[LOGOUT_CONFIRM]
+link_text = log out
+
+[CAT_NAME]
+id = tag-name
+
+[CAT_CHECKBOXES]
+name = delete_tags[]
+
+[BLOG_NAME]
+id = blogname
+
+[MEMBERSHIP]
+id = users_can_register
+
+[ROLE]
+id = default_role
+
+[DATE_FORMAT]
+name = date_format
+
+[SUBMIT-SETTINGS]
+id = submit

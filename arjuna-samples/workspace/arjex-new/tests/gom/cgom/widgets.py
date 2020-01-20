@@ -1,10 +1,12 @@
 from arjuna.interact.gui.gom.invoker.gui import SimpleBaseWidget
 from.mixnins import AsserterMixIn
 
+GNS_FMT = None
+
 class WPBaseWidget(SimpleBaseWidget, AsserterMixIn):
 
     def __init__(self, automator, parent):
-        super().__init__(automator, parent, "wordpress/widgets")
+        super().__init__(automator, parent, "{}_wordpress/widgets".format(GNS_FMT.lower()))
 
 
 class LeftNavSideBar(WPBaseWidget):

@@ -5,7 +5,7 @@ from arjuna.tpi.enums import ArjunaOption
 
 class BaseGui:
 
-    def __init__(self, automator, ns_dir, label=None, def_file_name=None, parent=None, register=True):
+    def __init__(self, automator, ns_dir, label=None, def_file_name=None, parent=None, register=True, multi_context=False):
         super().__init__()
         self.__automator = automator
         self.__children_map = dict()

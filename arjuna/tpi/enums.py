@@ -46,6 +46,7 @@ class ArjunaOption(Enum):
 
     GUIAUTO_INPUT_DIR = auto()
     GUIAUTO_NAMESPACE_DIR = auto()
+    GUIAUTO_DEF_MULTICONTEXT = auto()
     GUIAUTO_CONTEXT = auto()
     SCROLL_PIXELS = auto()
     SWIPE_TOP = auto()
