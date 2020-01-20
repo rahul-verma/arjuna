@@ -22,7 +22,8 @@ class BaseTest(unittest.TestCase):
         self.__config = self.automator.config
 
     def tearDown(self):
-        self.automator.quit()
+        pass
+        # self.automator.quit()
 
     @property
     def automator(self):

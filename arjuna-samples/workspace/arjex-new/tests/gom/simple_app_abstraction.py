@@ -13,7 +13,7 @@ class WPBaseTest(BaseTest):
 
     def setUp(self):
         super().setUp()
-        self.app = DefaultGui(self.automator, "WordPress", "simpleapp/WordPress.gns")
+        self.app = DefaultGui(self.automator, "wordpress_singlens", "WordPress.gns")
         self.login_with_default_creds()
 
     def tearDown(self):
@@ -33,7 +33,6 @@ class WPBaseTest(BaseTest):
         self.app.element("view-site").wait_until_visible()
 
     def logout(self):
-        print("print LOGout")
         url = self.config.get_user_option_value("wp.logout.url").as_str()
         self.app.browser.go_to_url(url)
 

@@ -74,5 +74,5 @@ class DefaultTestSession:
         )
         return response.get_data_source_id()
 
-    def define_gui(self, automator, label=None, name=None, qual_name=None, def_file_name=None):
-        return self.gui_manager.define_gui(automator, label=label, name=name, qual_name=qual_name, def_file_name=def_file_name)
+    def define_gui(self, automator, label=None, name=None, qual_name=None, def_file_path=None):
+        return self.gui_manager.define_gui(automator, label=label, name=name, qual_name=qual_name, def_file_path=def_file_path)

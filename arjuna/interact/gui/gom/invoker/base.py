@@ -1,8 +1,11 @@
+import os
+
 from arjuna.tpi.guiauto.helpers import With
+from arjuna.tpi.enums import ArjunaOption
 
 class BaseGui:
 
-    def __init__(self, automator, label=None, def_file_name=None, parent=None, register=True):
+    def __init__(self, automator, ns_dir, label=None, def_file_name=None, parent=None, register=True):
         self.__automator = automator
         self.__children_map = dict()
         self.__gui_registered = False
@@ -14,9 +17,16 @@ class BaseGui:
 
         if label:
             self.set_label(label)
+        else:
+            self.set_label(self.__class__.__name__)
 
         if def_file_name:
             self.set_def_file_name(def_file_name)
+        else:
+            self.set_def_file_name("{}.gns".format(self.label))
+        
+        ns_root_dir = self.config.get_arjuna_option_value(ArjunaOption.GUIAUTO_NAMESPACE_DIR).as_str()
+        self.__def_file_path = os.path.join(ns_root_dir, ns_dir, self.def_file_name)
 
         if register:
             self._register()
@@ -54,6 +64,10 @@ class BaseGui:
         return self.__def_file_name
 
     @property
+    def def_file_path(self):
+        return self.__def_file_path
+
+    @property
     def name(self):
         return self.__class__.__name__
 
@@ -71,7 +85,6 @@ class BaseGui:
     def set_label(self, label):
         self.__check_reg_status()
         self.__label = label
-        self.set_def_file_name(label + ".gns")
 
     def set_def_file_name(self, name):
         self.__check_reg_status()
@@ -82,9 +95,9 @@ class BaseGui:
             raise Exception("Attempt to re-register Gui with Setu.")
 
         if not self.__parent:
-            self.__impl_gui = self.test_session.define_gui(self.automator, label=self.label, name=self.name, qual_name=self.qual_name, def_file_name=self.def_file_name)
+            self.__impl_gui = self.test_session.define_gui(self.automator, label=self.label, name=self.name, qual_name=self.qual_name, def_file_path=self.def_file_path)
         else:
-            self.__impl_gui = self.impl_gui.define_gui(self.automator, label=self.label, name=self.name, qual_name=self.qual_name, def_file_name=self.def_file_name)
+            self.__impl_gui = self.impl_gui.define_gui(self.automator, label=self.label, name=self.name, qual_name=self.qual_name, def_file_path=self.def_file_path)
 
         if self.__parent:
             self.__parent.add_child(self.__label, self)

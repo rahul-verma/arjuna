@@ -34,6 +34,27 @@ y30 -> custom dropdown works (example - Bootstrap dropdown control)
 y31 -> Needs work on Narada side for suitable example controls
 y32 -> All source retrieval works.
 
+GNS
+- Simple app abstraction - Done
+- Simple POM - Done
+- Composite POM
+- Single context GNS
+- Check parameterization for identifier pulled from GNS
+- Introduce equivalent of LoadableComponent logic.
+- Extract with mechanism for pages and separate from the generic logic. It is getting too complicated.
+- An identifier should explicitly look for parameter value:
+    - $kw.abc$ -> This should directly come from With.format() provided keywords.
+    - $dd.abc$ -> This should come from data that is provided to the test.
+    - $l10n.abc$ -> This should come from localizer.
+    - $conf.abc$ -> This should come from config attached to the automator for which this namespace is loaded.
+    - $abc$ -> This will be the least performing but should work. 
+        This should auto look up in the above sequence.
+
+    - Introduce a configuration option where the lookup order can be configured.
+    - There should be a provision where a certain lookup can be completely switched off.
+        E.g. if there is no localizer then that should not be there in the lookup object.
+    - One thought is that you can create a Intrapolator class for this.
+        Each GuiDef can have an intrapolator object attached to it.
 
 Make existing Gui Model Work
 Make it work as default with single context GNS
@@ -43,14 +64,12 @@ Add support for GNS parameterization based on on configuration params with local
 
 Deferred and Reason
 -------------------
-
 Concept of Intent and Expression.
 Intent is what a test wants to do -> typically it should talk business.
 Expression is technical implementation -> e.g. ExpressViaWebUI. ExpressViaMobileUI. ExpressViaWebSvc. ExpressViaDB.
 
 Notes for any needed fixes and changes
 -------------------------------------
-
 Names of CLI options to be changed to baseline and extended
 CLI ->
 aro

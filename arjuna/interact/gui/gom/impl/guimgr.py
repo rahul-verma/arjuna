@@ -18,8 +18,8 @@ class GuiManager:
     def namespace_dir(self):
         return self.__namespace_dir
 
-    def define_gui(self, automator, label=None, name=None, qual_name=None, def_file_name=None):
-        gui_def = GuiDef(self.__name_store, self.__namespace_dir, automator, label, def_file_name)
+    def define_gui(self, automator, label=None, name=None, qual_name=None, def_file_path=None):
+        gui_def = GuiDef(self.__name_store, self.__namespace_dir, automator, label, def_file_path)
         gui = Gui(self, automator, gui_def)
         return gui
 

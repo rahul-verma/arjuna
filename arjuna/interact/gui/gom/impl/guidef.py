@@ -7,13 +7,13 @@ from arjuna.tpi.guiauto.helpers import With
 
 class GuiDef:
 
-    def __init__(self, name_store, namespace_dir, automator, label, file_def_path):
+    def __init__(self, name_store, namespace_dir, automator, label, def_file_path):
         self.__config = automator.config
         self.__name_store = name_store
         self.__namespace_dir = namespace_dir
         self.__automator = automator
         self.__auto_context = self.config.get_guiauto_context()
-        self.__file_def_path = os.path.abspath(os.path.join(self.__namespace_dir, file_def_path.strip()))
+        self.__file_def_path = def_file_path
         self.__ns = None
         ns_name = "file_ns::" + self.__file_def_path.lower()
         if name_store.has_namespace(ns_name):
