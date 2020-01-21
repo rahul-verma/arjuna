@@ -1,4 +1,5 @@
 import os
+from enum import Enum
 
 from arjuna.tpi.guiauto.helpers import With
 from arjuna.tpi.enums import ArjunaOption
@@ -145,6 +146,8 @@ class BaseGui:
             w = input
         elif type(input) is str:
             w = With.gns_name(input)
+        elif isinstance(input, Enum):
+            w = With.gns_name(input.name)
         else:
             raise Exception("A With object or name of element is expected as argument.")
         return w

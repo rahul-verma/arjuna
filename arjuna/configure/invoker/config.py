@@ -97,6 +97,7 @@ class DefaultTestConfig:
 
     @staticmethod
     def normalize_option_str(option_str):
+        option_str = isinstance(option_str, Enum) and option_str.name or option_str
         return option_str.upper().strip().replace(".", "_")
 
     @staticmethod

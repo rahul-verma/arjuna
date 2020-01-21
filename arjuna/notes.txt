@@ -47,7 +47,7 @@ Next Features on Priority
 - unittest core support -> HtmlRunner, Test Suite building.
 - WebDriverManager
 - Support for loading conf from a file. E.g. env based multiple conf files.
-- 
+- Make wait configurable on a per element level. Configure method.
 
 GNS Desirables
 ---------------
