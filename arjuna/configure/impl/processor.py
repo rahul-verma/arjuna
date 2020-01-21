@@ -19,7 +19,7 @@ class ConfigCreator:
         if cls.SETU_CONF_DESC_MAP is not None:
             return
         my_dir = os.path.dirname(os.path.realpath(__file__))
-        setu_conf_desc_file = os.path.join(my_dir, "res", "arjuna_conf_desc.conf")
+        setu_conf_desc_file = os.path.abspath(os.path.join(my_dir, "..", "..", "res", "arjuna_conf_desc.conf"))
         cls.__process_setu_conf_desc(setu_conf_desc_file)  
 
     @classmethod
@@ -141,7 +141,7 @@ class CentralConfigLoader(BaseConfigProcessor):
 
     def __init__(self, project_root_dir, runid=None):
         self.__my_dir = os.path.dirname(os.path.realpath(__file__))
-        self.__setu_central_confg_file = os.path.join(self.__my_dir, "res", "arjuna.conf")
+        self.__setu_central_confg_file = os.path.abspath(os.path.join(self.__my_dir, "..","..","res", "arjuna.conf"))
         self.__project_root_dir = project_root_dir
         self.__project_name = os.path.basename(self.__project_root_dir)
         self.__runid = runid and runid or "mrun"

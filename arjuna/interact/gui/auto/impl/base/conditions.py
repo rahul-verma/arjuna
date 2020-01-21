@@ -1,5 +1,7 @@
 import time
 
+from arjuna.interact.gui.auto.dispatcher.commons.exceptions import *
+
 # This code is inspired by fluent wait concept in Selenium Webdriver
 # Reference code: https://github.com/browserstack/selenium-webdriver-python/edit/master/selenium/webdriver/support/wait.py
 # However, rather than a Selnium WebDriver specific and driver level concept,
@@ -35,19 +37,29 @@ class Condition:
 
     def wait(self, *, max_wait_time=60, poll_interval=0.5):
         end_time = time.time() + max_wait_time
+        e = None
+        etrace = None
         while(True):
             try:
                 if self.is_met():
                     return self.get_call_result()
             except ConditionException as ce:
                 raise ce
+            except WaitLenientException as wle:
+                e = wle
+                import traceback
+                etrace = traceback.format_exc()
+                pass
             except Exception as f:
                 import traceback
                 traceback.print_exc()
-                pass
+                raise("An unexpected exception occured in dynamic wait.")
             time.sleep(poll_interval)
-            if(time.time() > end_time):
+            ctime = time.time()
+            if(ctime > end_time):
                 break
+        print(e)
+        print(etrace)
         raise Exception("Timeout in wait.")
 
     def execute(self):

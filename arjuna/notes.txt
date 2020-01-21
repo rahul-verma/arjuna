@@ -41,9 +41,13 @@ GNS
 - Single context GNS. Make it the default. - Done
 - Check parameterization for identifier pulled from GNS - Done
 
-ActionChains
-
-WebDriverManager
+Next Features on Priority
+-------------------------
+- ActionChains
+- unittest core support -> HtmlRunner, Test Suite building.
+- WebDriverManager
+- Support for loading conf from a file. E.g. env based multiple conf files.
+- 
 
 GNS Desirables
 ---------------
