@@ -31,11 +31,11 @@ import json
 import sys
 
 from arjuna.core.enums import *
-from arjuna.unitee.enums import *
+from arjuna.engine.unitee.enums import *
 from arjuna.core.utils import sys_utils
 from arjuna.core.utils import file_utils
 from arjuna.core.reader.hocon import HoconFileReader, HoconConfigDictReader
-from arjuna.core.config import CliArgsConfig
+from arjuna.configure.invoker.config import CliArgsConfig
 from .validation import *
 
 from arjuna.tpi.enums import ArjunaOption
@@ -78,9 +78,9 @@ class MainCommand(Command):
         super().__init__()
         parser = argparse.ArgumentParser(prog='python arjuna_launcher.py', conflict_handler='resolve',
                                 description="This is the CLI of Arjuna. Use the appropriate command and sub-commands as needed.")
-        parser.add_argument('-dl', '--display-level', dest='arjuna.log.console.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
+        parser.add_argument('-dl', '--display-level', dest='arjuna.log.console.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
                                  help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
-        parser.add_argument('-ll', '--log-level', dest='arjuna.log.file.level', type=ustr, choices=[i for i in LoggingLevelEnum.__members__],
+        parser.add_argument('-ll', '--log-level', dest='arjuna.log.file.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
                                  help="Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
         self._set_parser(parser)
 
@@ -138,8 +138,7 @@ class CreateProject(Command):
         (FileObjectType.DIR, "guiauto/images"),
         (FileObjectType.DIR, "guiauto/namespace"),
         (FileObjectType.DIR, "report"),
-        (FileObjectType.FILE, "config/project.conf"),
-        (FileObjectType.FILE, "config/service.properties"),
+        (FileObjectType.FILE, "config/project.conf")
     )
 
     UNITEE_DIRS_FILES = (
@@ -158,11 +157,6 @@ class CreateProject(Command):
         (FileObjectType.FILE, "tests/modules/__init__.py"),
     )
 
-    SERVICE_PROPS = '''
-setu.port = 9000
-python.bin.path = <Provide full path of Python3 binary>
-    '''
-
     def __init__(self, subparsers, parents):
         super().__init__()
         self.parents = parents
@@ -174,8 +168,6 @@ python.bin.path = <Provide full path of Python3 binary>
             os.makedirs(os.path.join(project_temp_dir, frpath))
         else:
             f = open(os.path.join(project_temp_dir, frpath), "w")
-            if frpath.endswith("service.properties"):
-                f.write(CreateProject.SERVICE_PROPS)
             f.close()
 
     def execute(self, arg_dict):

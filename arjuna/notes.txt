@@ -41,6 +41,10 @@ GNS
 - Single context GNS. Make it the default. - Done
 - Check parameterization for identifier pulled from GNS - Done
 
+ActionChains
+
+WebDriverManager
+
 GNS Desirables
 ---------------
 - Introduce equivalent of LoadableComponent logic.

@@ -21,7 +21,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name = "arjuna",
-    version = "0.8.1",
+    version = "0.8.2",
     url = "https://rahulverma.net",
     description = "Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net).",
     author = "Rahul Verma",
@@ -36,10 +36,10 @@ setup(
                     "*.cfg",
         ],
         'arjuna' : [
-                    "configure/impl/res/*.xml",
-                    "configure/impl/res/*.help",
-                    "configure/impl/res/*.txt",
-                    "configure/impl/res/*.conf",
+                    "res/*.xml",
+                    "res/*.help",
+                    "res/*.txt",
+                    "res/*.conf",
                 ]
     },
     install_requires = ["flask", "flask-RESTful", "waitress", "requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon", "lxml", "wxPython", "protobuf"],

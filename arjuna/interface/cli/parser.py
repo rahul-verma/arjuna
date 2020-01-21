@@ -24,7 +24,7 @@ import os
 import argparse
 from functools import partial
 
-from arjuna.unitee.enums import *
+from arjuna.engine.unitee.enums import *
 
 from .validation import *
 
