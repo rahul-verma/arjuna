@@ -1,6 +1,7 @@
 from arjuna.interact.gui.auto.dispatcher.driver.element_commands import DriverElementCommands
 from arjuna.interact.gui.auto.dispatcher.driver.element_finder import ElementFinder
 from arjuna.interact.gui.auto.dispatcher.driver.melement import MultiElement
+from arjuna.interact.gui.auto.dispatcher.commons.exceptions import *
 
 class SeleniumDriverElementDispatcher:
 
@@ -37,7 +38,13 @@ class SeleniumDriverElementDispatcher:
         return self.__driver_dispatcher.driver
 
     def click(self):
-        DriverElementCommands.click(self.driver_element)
+        try:
+            DriverElementCommands.click(self.driver_element)
+        except Exception as e:
+            raise GuiElementNotReady(str(e))
+
+    def hover(self):
+        self.__driver_dispatcher.hover_on_element(self)
 
     def clear_text(self):
         DriverElementCommands.clear_text(self.driver_element)

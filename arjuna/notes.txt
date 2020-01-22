@@ -41,6 +41,29 @@ GNS
 - Single context GNS. Make it the default. - Done
 - Check parameterization for identifier pulled from GNS - Done
 
+Action Chains (In progress)
+---------------------------
+- As of now introducing the following actions without explicit action chain creation:
+    GuiElement methods
+        - hover
+        - hover_and_click
+
+Fine Tuning
+-----------
+Done
+- User defined options can be provided as any enum constant. 
+- User defined options can be provided as any enum constant.
+- Concept of lenient interaction introduced
+    - It is observed that although selenium returns is clickable true, element may yet not be clickable.
+    - Arjuna post checking clickability, also executes lenient clicking.
+Pending
+- In the CGOM example, introduce loc enum in page
+- In example code introduce user defined option as enum
+- Change element names to valid python names.
+- Normalise element names so that _ and - can be used interchangeably. 
+    Replace with space in storing and retrieving.
+- Introduce 'hold' method in Gui interaction components. It should wait for enter key. input("Press enter to continue")
+
 Next Features on Priority
 -------------------------
 - ActionChains
@@ -138,6 +161,8 @@ Action Chains - Named method for common interactions - In progress
 Nested Elements support
 More waits
     wait for Absence, Invisible and Disabled
+
+ - Create a a method in Gui and GuiAutomator, it should also be able to take a callable and its args. Possibly for recording option to be run in a second thread. launch a tool, whatever.
 
 Map valid With options to tpye of component. Clear exceptions with troubleshooting to be coded.
 Explicit wait in Arjuna Setu for Frames and Windows, which works under the total limit of gui max wait.

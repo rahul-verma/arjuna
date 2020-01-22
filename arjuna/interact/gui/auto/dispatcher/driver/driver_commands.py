@@ -127,4 +127,8 @@ class DriverCommands:
             getattr(chain, action[0])(**kwargs)
         chain.perform()
 
+    @classmethod
+    def hover_on_element(cls, driver, webelement):
+        chain = ActionChains(driver).move_to_element(webelement).perform()
+
 

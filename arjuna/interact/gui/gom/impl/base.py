@@ -77,6 +77,10 @@ class BaseGui:
     def qual_name(self):
         return self.__class__.__qualname__
 
+    @property
+    def parent(self):
+        return self.__parent
+
     def __check_reg_status(self):
         if self.__gui_registered:
             raise Exception("Attempt to change Gui critical attribute post registration with Setu.")
@@ -93,6 +97,7 @@ class BaseGui:
         self.__def_file_name = name
 
     def _register(self):
+        print(self.__class__)
         if self.__gui_registered:
             raise Exception("Attempt to re-register Gui with Setu.")
 

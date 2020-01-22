@@ -145,4 +145,8 @@ class SeleniumDriverDispatcher:
     def perform_action_chain(self, action_chain):
         DriverCommands.perform_action_chain(self, self.__driver, action_chain)
 
+    def hover_on_element(self, element_dispatcher):
+        DriverCommands.hover_on_element(self.__driver, element_dispatcher.driver_element)
+
+
 

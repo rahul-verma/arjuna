@@ -24,7 +24,6 @@ class GuiAutomator:
         self._set_main_window(GuiAutoComponentFactory.MainWindow(self, self.impl_automator.main_window))
         self._set_browser(GuiAutoComponentFactory.Browser(self, self.impl_automator.browser))
 
-
     def _set_impl_automator(self, automator):
         self.__impl_automator = automator
 

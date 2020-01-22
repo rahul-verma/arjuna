@@ -17,3 +17,14 @@ class GuiElementConditions(Handler):
     def IsClickable(self):
         caller = DynamicCaller(self.element.is_clickable)
         return BooleanCondition(caller, True)     
+
+class GuiElementLenientInteraction:
+
+    def __init__(self, gui_element):
+        self.__element = gui_element
+
+    def Click(self):
+        caller = DynamicCaller(
+            self.__element._only_click
+        )
+        return CommandCondition(caller)  

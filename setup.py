@@ -42,7 +42,7 @@ setup(
                     "res/*.conf",
                 ]
     },
-    install_requires = ["flask", "flask-RESTful", "waitress", "requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon", "lxml", "wxPython", "protobuf"],
+    install_requires = ["flask", "flask-RESTful", "waitress", "requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon", "lxml", "wxPython", "protobuf", "ddt"],
     keywords = "arjuna setu unitee selenium testing automation page-object",
     license = "Apache License, Version 2.0",
     classifiers=[

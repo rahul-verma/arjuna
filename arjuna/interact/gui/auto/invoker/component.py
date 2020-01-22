@@ -94,6 +94,7 @@ class DefaultGuiElement(BaseComponent):
     def __init__(self, automator, impl, index=None):
         super().__init__(automator, GuiComponentType.ELEMENT, impl)
         self.__index = index
+        # self.is_gom_element = impl.is_gom_element()
 
     def enter_text(self, text):
         self.impl.enter_text(text)
@@ -121,6 +122,18 @@ class DefaultGuiElement(BaseComponent):
 
     def identify(self):
         self.impl.identify()
+
+    def hover(self):
+        self.impl.hover()
+
+    def _emd(self, *locators):
+        return self._automator._create_lmd(*locators)
+
+    def element(self, *with_locators):
+        return self.impl.define_element(self._emd(*with_locators))
+
+    def multi_element(self, *with_locators):
+        return self.impl.define_multielement(self._emd(*with_locators))
 
 class DefaultGuiMultiElement(BaseComponent):
 

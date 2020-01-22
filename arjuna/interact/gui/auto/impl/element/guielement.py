@@ -6,8 +6,9 @@ class GuiElement(BaseElement, ElementConfig):
     def __init__(self, automator, emd, parent=None):
         BaseElement.__init__(self, automator, emd, parent, obj_name="GuiElement")
         ElementConfig.__init__(self, automator)
-        from .element_conditions import GuiElementConditions
+        from .element_conditions import GuiElementConditions, GuiElementLenientInteraction
         self.__conditions_handler = GuiElementConditions(self)
+        self.__interaction_handler = GuiElementLenientInteraction(self)
         self.__source_parser = None
         self.__automator = automator
 
@@ -66,7 +67,16 @@ class GuiElement(BaseElement, ElementConfig):
     def click(self):
         self.find_if_not_found()
         self.__wait_until_clickable_if_configured()
-        self._only_click()
+        self.interactions.Click().wait()
+        #self._only_click()
+
+    def __only_hover(self):
+        self.dispatcher.hover()
+
+    def hover(self):
+        self.find_if_not_found()
+        self.__wait_until_clickable_if_configured()
+        self.__only_hover()
 
     def __conditional_selected_state_click(self, condition_state):
         self.find_if_not_found()
@@ -113,6 +123,10 @@ class GuiElement(BaseElement, ElementConfig):
     @property
     def conditions(self):
         return self.__conditions_handler
+
+    @property
+    def interactions(self):
+        return self.__interaction_handler
 
     def _only_clear_text(self):
         self.dispatcher.clear_text()
