@@ -82,10 +82,16 @@ class GOMElement:
         self.impl_gui = gui
         self.impl = impl
 
-    def enter_text(self, text):
-        self.impl.enter_text(text)
+    @property
+    def source(self):
+        return self.impl.get_source()
 
-    def set_text(self, text):
+    @property
+    def text(self):
+        return self.source.get_text_content()
+
+    @text.setter
+    def text(self, text):
         self.impl.set_text(text)
 
     def click(self):

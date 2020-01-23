@@ -89,6 +89,7 @@ class BaseComponent:
         self.impl.configure(config.settings)
         return self
 
+
 class DefaultGuiElement(BaseComponent):
 
     def __init__(self, automator, impl, index=None):
@@ -96,11 +97,13 @@ class DefaultGuiElement(BaseComponent):
         self.__index = index
         # self.is_gom_element = impl.is_gom_element()
 
-    def enter_text(self, text):
-        self.impl.enter_text(text)
+    @property
+    def text(self):
+        return self.impl.text
 
-    def set_text(self, text):
-        self.impl.set_text(text)
+    @text.setter
+    def text(self, text):
+        self.impl.text = text
 
     def click(self):
         self.impl.click()
