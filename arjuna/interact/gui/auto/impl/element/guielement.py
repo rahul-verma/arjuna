@@ -55,8 +55,11 @@ class GuiElement(BaseElement, ElementConfig):
     def _noargs(self):
         return self.__append_instance_number({})
 
-    def _only_send_text(self, text):
+    def _only_set_text(self, text):
         self.dispatcher.send_text(text)
+        entered_text = self.dispatcher.get_attr_value("value")
+        if entered_text != text:
+            raise GuiElementTextNotSetError("Expected text: {}. Actual text is {}".format(text, entered_text))
 
     def _only_click(self):
         self.dispatcher.click()
@@ -160,7 +163,8 @@ class GuiElement(BaseElement, ElementConfig):
         self.__wait_until_clickable_if_configured()
         self._only_click()
         self._only_clear_text()
-        self._only_enter_text(text)
+        self.interactions.SetText(text).wait()
+        # self._only_enter_text(text)
 
     def has_entered_text(self, text):
         pass

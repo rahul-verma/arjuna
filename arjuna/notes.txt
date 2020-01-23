@@ -56,6 +56,7 @@ Done
 - Concept of lenient interaction introduced
     - It is observed that although selenium returns is clickable true, element may yet not be clickable.
     - Arjuna post checking clickability, also executes lenient clicking.
+    - Lenient set text introduced.
 Pending
 - In the CGOM example, introduce loc enum in page
 - In example code introduce user defined option as enum

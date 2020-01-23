@@ -1,6 +1,6 @@
 import time
 
-from arjuna.interact.gui.auto.dispatcher.commons.exceptions import *
+from arjuna.tpi.exceptions import *
 
 # This code is inspired by fluent wait concept in Selenium Webdriver
 # Reference code: https://github.com/browserstack/selenium-webdriver-python/edit/master/selenium/webdriver/support/wait.py
@@ -45,8 +45,8 @@ class Condition:
                     return self.get_call_result()
             except ConditionException as ce:
                 raise ce
-            except WaitLenientException as wle:
-                e = wle
+            except WaitableError as we:
+                e = we
                 import traceback
                 etrace = traceback.format_exc()
                 pass

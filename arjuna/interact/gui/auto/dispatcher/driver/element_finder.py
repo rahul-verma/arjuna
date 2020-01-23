@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
-from arjuna.interact.gui.auto.dispatcher.commons.exceptions import *
+from arjuna.tpi.exceptions import *
 
 class ElementFinder:
     BY_MAP = {
@@ -19,7 +19,7 @@ class ElementFinder:
         try:
             return container.find_element(cls.BY_MAP[byType.upper()], byValue)
         except Exception as e:
-            raise GuiElementNotFound(str(e), "By.{}={}".format(byType, byValue))
+            raise GuiElementNotFoundError(str(e), "By.{}={}".format(byType, byValue))
 
 
     @classmethod

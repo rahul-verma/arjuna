@@ -28,3 +28,10 @@ class GuiElementLenientInteraction:
             self.__element._only_click
         )
         return CommandCondition(caller)  
+
+    def SetText(self, text):
+        caller = DynamicCaller(
+            self.__element._only_set_text,
+            text,
+        )
+        return CommandCondition(caller) 

@@ -1,7 +1,7 @@
 from arjuna.interact.gui.auto.dispatcher.driver.element_commands import DriverElementCommands
 from arjuna.interact.gui.auto.dispatcher.driver.element_finder import ElementFinder
 from arjuna.interact.gui.auto.dispatcher.driver.melement import MultiElement
-from arjuna.interact.gui.auto.dispatcher.commons.exceptions import *
+from arjuna.tpi.exceptions import *
 
 class SeleniumDriverElementDispatcher:
 
@@ -41,7 +41,7 @@ class SeleniumDriverElementDispatcher:
         try:
             DriverElementCommands.click(self.driver_element)
         except Exception as e:
-            raise GuiElementNotReady(str(e))
+            raise GuiElementNotReadyError(str(e))
 
     def hover(self):
         self.__driver_dispatcher.hover_on_element(self)
