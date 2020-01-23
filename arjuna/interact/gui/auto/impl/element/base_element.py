@@ -27,7 +27,10 @@ class BaseElement(ElementContainer, metaclass=abc.ABCMeta):
 
     @property
     def parent_container(self):
-        return self.__parent and self.__parent or self.__automator
+        if self.__parent is not None:
+            return self.__parent
+        else:
+            return self.__automator
 
     def _create_element_flat_or_nested(self, locator_meta_data):
         from arjuna.interact.gui.auto.impl.element.guielement import GuiElement

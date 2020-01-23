@@ -25,11 +25,11 @@ class SeleniumDriverElementDispatcher:
         self.__instance_index = index
 
     def find_element(self, with_type, with_value):
-        element = ElementFinder.find_element(self.__driver, with_type, with_value)
+        element = ElementFinder.find_element(self.driver_element, with_type, with_value)
         return 1, self.create_dispatcher(self.__driver_dispatcher, element)
 
     def find_multielement(self, with_type, with_value):
-        web_elements = ElementFinder.find_elements(self.__driver, with_type, with_value)
+        web_elements = ElementFinder.find_elements(self.driver_element, with_type, with_value)
         melement = MultiElement([self.create_dispatcher(self.__driver_dispatcher, web_element) for web_element in web_elements])
         return melement.get_instance_count(), melement
 

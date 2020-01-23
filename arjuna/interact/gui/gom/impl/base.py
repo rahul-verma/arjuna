@@ -2,6 +2,8 @@ import os
 from enum import Enum
 
 from arjuna.tpi.guiauto.helpers import With
+from arjuna.interact.gui.auto.invoker.component import GuiAutoComponentFactory
+from arjuna.interact.gui.auto.impl.locator.emd import GuiElementMetaData
 from arjuna.tpi.enums import ArjunaOption
 
 class BaseGui:
@@ -97,7 +99,6 @@ class BaseGui:
         self.__def_file_name = name
 
     def _register(self):
-        print(self.__class__)
         if self.__gui_registered:
             raise Exception("Attempt to re-register Gui with Setu.")
 
@@ -145,38 +146,27 @@ class BaseGui:
                     str(e)
                 )
 
-    def __convert_to_with(self, input):
-        w = None
-        if isinstance(input, With):
-            w = input
-        elif type(input) is str:
-            w = With.gns_name(input)
-        elif isinstance(input, Enum):
-            w = With.gns_name(input.name)
-        else:
-            raise Exception("A With object or name of element is expected as argument.")
-        return w
+    def element(self, *str_or_with_locators):
+        gom_element = self.impl_gui.define_element(*str_or_with_locators)
+        return GuiAutoComponentFactory.Element(self.automator, gom_element)
 
-    def element(self, name_or_with_obj):
-        return self.impl_gui.define_element(self.__convert_to_with(name_or_with_obj))
+    def multi_element(self, *str_or_with_locators):
+        return self.impl_gui.define_multi_element(*str_or_with_locators)
 
-    def multi_element(self, name_or_with_obj):
-        return self.impl_gui.define_multi_element(self.__convert_to_with(name_or_with_obj))
+    def dropdown(self, *str_or_with_locators):
+        return self.impl_gui.define_dropdown(*str_or_with_locators)
 
-    def dropdown(self, name_or_with_obj):
-        return self.impl_gui.define_dropdown(self.__convert_to_with(name_or_with_obj))
+    def radio_group(self, *str_or_with_locators):
+        return self.impl_gui.define_radio_group(*str_or_with_locators)
 
-    def radio_group(self, name_or_with_obj):
-        return self.impl_gui.define_radio_group(self.__convert_to_with(name_or_with_obj))
+    def alert(self, *str_or_with_locators):
+        return self.impl_gui.define_alert(*str_or_with_locators)
 
-    def alert(self, name_or_with_obj):
-        return self.impl_gui.define_alert(self.__convert_to_with(name_or_with_obj))
+    def frame(self, *str_or_with_locators):
+        return self.impl_gui.define_frame(*str_or_with_locators)
 
-    def frame(self, name_or_with_obj):
-        return self.impl_gui.define_frame(self.__convert_to_with(name_or_with_obj))
-
-    def child_window(self, name_or_with_obj):
-        return self.impl_gui.define_child_window(self.__convert_to_with(name_or_with_obj))
+    def child_window(self, *str_or_with_locators):
+        return self.impl_gui.define_child_window(*str_or_with_locators)
 
     @property
     def main_window(self):

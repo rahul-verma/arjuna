@@ -1,4 +1,7 @@
-from arjuna.tpi.guiauto.helpers import _WithType
+from enum import Enum
+from arjuna.tpi.guiauto.helpers import With, _WithType
+from arjuna.interact.gui.auto.invoker.component import GuiAutoComponentFactory
+from arjuna.interact.gui.auto.impl.locator.emd import GuiElementMetaData
 from .guidef import GuiDef
 
 class Gui:
@@ -22,29 +25,39 @@ class Gui:
         gui = Gui(self, automator, gui_def, parent=self)
         return gui
 
-    def __lmd(self, *locators):
+    def convert_to_with_lmd(self, *raw_str_or_with_locators):
         out = []
-        for locator in locators:
-            if locator.wtype == _WithType.GNS_NAME:
-                out.extend(self.gui_def.convert_to_with(locator))
+        for locator in raw_str_or_with_locators:
+            w = None
+            if isinstance(locator, With):
+                w = locator
+            elif type(locator) is str:
+                w = With.gns_name(locator)
+            elif isinstance(locator, Enum):
+                w = With.gns_name(locator.name)
             else:
-                out.append(locator)
-        return out
+                raise Exception("A With object or name of element is expected as argument.")
 
-    def define_element(self, *with_locators):
-        return self.automator.element(*self.__lmd(*with_locators))
+            if w.wtype == _WithType.GNS_NAME:
+                out.extend(self.gui_def.convert_to_with(w))
+            else:
+                out.append(w)
+        return GuiElementMetaData.create_lmd(*out)
 
-    def define_multielement(self, *with_locators):
-        return self.automator.multielement(*self.__lmd(*with_locators))
+    def define_element(self, *str_or_with_locators):
+        return GOMElement(self, self.automator.impl_automator.define_element(self.convert_to_with_lmd(*str_or_with_locators)))
 
-    def define_dropdown(self, *with_locators):
-        return self.automator.dropdown(*self.__lmd(*with_locators))
+    def define_multielement(self, *str_or_with_locators):
+        return self.automator.multielement(self.convert_to_with_lmd(*str_or_with_locators))
 
-    def define_radiogroup(self, *with_locators):
-        return self.automator.radiogroup(*self.__lmd(*with_locators))
+    def define_dropdown(self, *str_or_with_locators):
+        return self.automator.dropdown(self.convert_to_with_lmd(*str_or_with_locators))
 
-    def define_frame(self, *with_locators):
-        return self.automator.frame(*self.__lmd(*with_locators))
+    def define_radiogroup(self, *str_or_with_locators):
+        return self.automator.radiogroup(self.convert_to_with_lmd(*str_or_with_locators))
+
+    def define_frame(self, *str_or_with_locators):
+        return self.automator.frame(self.convert_to_with_lmd(*str_or_with_locators))
 
     @property
     def alert(self):
@@ -60,3 +73,48 @@ class Gui:
 
     def set_slomo(self, on, interval=None):
         self.automator.set_slomo(on, interval)
+
+
+class GOMElement:
+
+    def __init__(self, gui, impl, index=None):
+        self.__index = index
+        self.impl_gui = gui
+        self.impl = impl
+
+    def enter_text(self, text):
+        self.impl.enter_text(text)
+
+    def set_text(self, text):
+        self.impl.set_text(text)
+
+    def click(self):
+        self.impl.click()
+
+    def wait_until_present(self):
+        self.impl.wait_until_present()
+
+    def wait_until_visible(self):
+        self.impl.wait_until_visible()
+
+    def wait_until_clickable(self):
+        self.impl.wait_until_clickable()
+
+    def check(self):
+        self.impl.check()
+
+    def uncheck(self):
+        self.impl.uncheck()
+
+    def identify(self):
+        self.impl.identify()
+
+    def hover(self):
+        self.impl.hover()
+
+    def element(self, *with_locators):
+        gom_element = self.impl.define_element(self.impl_gui.convert_to_with_lmd(*with_locators))
+        return GuiAutoComponentFactory.Element(self, gom_element)
+
+    def multi_element(self, *with_locators):
+        return self.impl.define_multielement(self.impl_gui.convert_to_with_lmd(*with_locators))
