@@ -79,6 +79,15 @@ class GuiAutomator:
         impl = self.impl_automator.define_radiogroup(self._create_lmd(*with_locators))
         return GuiAutoComponentFactory.RadioGroup(self, impl)
 
+    def tab_group(self, *with_locators, tab_header_locator, content_relation_attr, content_relation_type):
+        impl = self.impl_automator.define_tabgroup(
+            self._create_lmd(*with_locators), 
+            tab_header_lmd=self._create_lmd(tab_header_locator), 
+            content_relation_attr=content_relation_attr, 
+            content_relation_type=content_relation_type
+        )
+        return GuiAutoComponentFactory.TabGroup(self, impl)
+
     def frame(self, *with_locators):
         # Conversion takes place IFrame implementation for locator -> emd
         return self.dom_root.frame(*with_locators)

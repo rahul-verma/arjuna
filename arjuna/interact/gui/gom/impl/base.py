@@ -159,6 +159,15 @@ class BaseGui:
     def radio_group(self, *str_or_with_locators):
         return self.impl_gui.define_radio_group(*str_or_with_locators)
 
+    def tab_group(self, *str_or_with_locators, tab_header_locator, content_relation_attr, content_relation_type):
+        impl = self.impl_gui.define_tabgroup(
+            *str_or_with_locators,
+            tab_header_locator=tab_header_locator, 
+            content_relation_attr=content_relation_attr, 
+            content_relation_type=content_relation_type
+        )
+        return GuiAutoComponentFactory.TabGroup(self.automator, gom_element)
+
     def alert(self, *str_or_with_locators):
         return self.impl_gui.define_alert(*str_or_with_locators)
 

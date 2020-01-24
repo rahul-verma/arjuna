@@ -1,5 +1,5 @@
 from enum import Enum
-from arjuna.tpi.guiauto.helpers import With, _WithType
+from arjuna.tpi.guiauto.helpers import With, WithType
 from arjuna.interact.gui.auto.invoker.component import GuiAutoComponentFactory
 from arjuna.interact.gui.auto.impl.locator.emd import GuiElementMetaData
 from .guidef import GuiDef
@@ -38,7 +38,7 @@ class Gui:
             else:
                 raise Exception("A With object or name of element is expected as argument.")
 
-            if w.wtype == _WithType.GNS_NAME:
+            if w.wtype == WithType.GNS_NAME:
                 out.extend(self.gui_def.convert_to_with(w))
             else:
                 out.append(w)
@@ -55,6 +55,14 @@ class Gui:
 
     def define_radiogroup(self, *str_or_with_locators):
         return self.automator.radiogroup(self.convert_to_with_lmd(*str_or_with_locators))
+
+    def define_tabgroup(self, *str_or_with_locators, tab_header_locator, content_relation_attr, content_relation_type):
+        return self.automator.impl_automator.define_tabgroup(
+            self.convert_to_with_lmd(*str_or_with_locators),
+            tab_header_lmd=self.convert_to_with_lmd(tab_header_locator),
+            content_relation_attr=content_relation_attr, 
+            content_relation_type=content_relation_type
+        )
 
     def define_frame(self, *str_or_with_locators):
         return self.automator.frame(self.convert_to_with_lmd(*str_or_with_locators))

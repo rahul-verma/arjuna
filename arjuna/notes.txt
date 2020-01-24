@@ -336,3 +336,7 @@ Following Frame method:
         return {"guiComponentSetuId" : dom_root.create_frame(GuiElementMetaData.createEMD(locators)).setu_id}
 
 
+Unitee Separatation
+-------------------
+New unitee will be built on top of python's unittest.
+Separated from Arjuna on 24th Jan 2020.

@@ -3,7 +3,6 @@ import abc
 from .container_conditions import GuiElementContainerConditions
 from .conditions import *
 
-
 class ElementContainer(metaclass=abc.ABCMeta):
     def __init__(self, config, obj_name=""):
         self.__config = config
@@ -53,6 +52,16 @@ class ElementContainer(metaclass=abc.ABCMeta):
     def define_radiogroup(self, lmd):
         from arjuna.interact.gui.auto.impl.element.radio_group import GuiWebRadioGroup
         return GuiWebRadioGroup(self, lmd)
+
+    def define_tabgroup(self, lmd, *, tab_header_lmd, content_relation_attr, content_relation_type):
+        from arjuna.interact.gui.auto.impl.element.tabs import TabGroup
+        return TabGroup(
+            self, 
+            lmd, 
+            tab_header_lmd=tab_header_lmd, 
+            content_relation_attr=content_relation_attr, 
+            content_relation_type=content_relation_type
+        )
 
     def _find(self, dispatcher_call, gui_element, context="ELEMENT"):
         found = False

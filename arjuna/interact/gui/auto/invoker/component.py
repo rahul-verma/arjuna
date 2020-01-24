@@ -8,6 +8,7 @@ class GuiComponentType(Enum):
     MULTI_ELEMENT = auto()
     DROPDOWN = auto()
     RADIOGROUP = auto()
+    TABGROUP = auto()
     BROWSER = auto()
     DOMROOT = auto()
     FRAME = auto()
@@ -33,6 +34,10 @@ class GuiAutoComponentFactory:
     @staticmethod
     def RadioGroup(automator, impl_radiogroup):
         return DefaultRadioGroup(automator, impl_radiogroup)
+
+    @staticmethod
+    def TabGroup(automator, impl_tabgroup):
+        return DefaultTabGroup(automator, impl_tabgroup)
 
     @staticmethod
     def Alert(automator, impl_alert):
@@ -224,6 +229,18 @@ class DefaultRadioGroup(MultiElementSelectable):
 
     def configure(self, config):
         pass
+
+class TabGroup(BaseComponent):
+
+    def __init__(self, automator, impl):
+        super().__init__(automator, GuiComponentType.TABGROUP, impl)
+
+    def tab(self, label):
+        return self.impl.tab(label)
+
+    @property
+    def tab_labels(self):
+        return self.impl.tab_labels
 
 class DefaultAlert(BaseComponent):
 

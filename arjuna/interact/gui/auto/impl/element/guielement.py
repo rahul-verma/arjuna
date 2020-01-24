@@ -1,5 +1,7 @@
 from .base_element import BaseElement, ElementConfig
 from arjuna.interact.gui.auto.impl.source.parser import ElementXMLSourceParser
+from arjuna.tpi.exceptions import GuiElementTextNotSetError
+
 
 class GuiElement(BaseElement, ElementConfig):
     
@@ -56,6 +58,7 @@ class GuiElement(BaseElement, ElementConfig):
         return self.__append_instance_number({})
 
     def _only_set_text(self, text):
+        self._only_clear_text()
         self.dispatcher.send_text(text)
         entered_text = self.dispatcher.get_attr_value("value")
         if entered_text != text:
