@@ -124,28 +124,36 @@ class DefaultTestConfig:
     def name(self):
         return self.__name
 
-    def get_guiauto_context(self):
+    @property
+    def guiauto_context(self):
         return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).as_enum(GuiAutomationContext)
 
-    def get_browser_type(self):
+    @property
+    def browser_type(self):
         return self.get_arjuna_option_value(ArjunaOption.BROWSER_NAME).as_enum(BrowserName)
 
-    def get_browser_version(self):
+    @property
+    def browser_version(self):
         return self.get_arjuna_option_value(ArjunaOption.BROWSER_VERSION).as_str()
 
-    def get_browser_binary_path(self):
+    @property
+    def browser_binary_path(self):
         return self.get_arjuna_option_value(ArjunaOption.BROWSER_BIN_PATH).as_str()
 
-    def get_test_run_env_name(self):
+    @property
+    def test_run_env_name(self):
         return self.get_arjuna_option_value(ArjunaOption.TESTRUN_ENVIRONMENT).as_str()
 
-    def get_screenshots_dir(self):
+    @property
+    def screenshots_dir(self):
         return self.get_arjuna_option_value(ArjunaOption.SCREENSHOTS_DIR).as_str()
 
-    def get_log_dir(self):
+    @property
+    def log_dir(self):
         return self.get_arjuna_option_value(ArjunaOption.LOG_DIR).as_str()
 
-    def get_guiauto_max_wait_time(self):
+    @property
+    def guiauto_max_wait_time(self):
         return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_MAX_WAIT).as_int()
 
     def as_map(self):

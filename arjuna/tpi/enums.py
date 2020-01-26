@@ -26,7 +26,7 @@ class ArjunaOption(Enum):
     REPORT_DIR = auto()
     ARCHIVES_DIR = auto()
 
-    AUT_URL = auto()
+    AUT_BASE_URL = auto()
 
     TESTRUN_ENVIRONMENT = auto()
     TESTRUN_HOST_OS = auto()

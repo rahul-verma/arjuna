@@ -1,7 +1,7 @@
 from enum import Enum, auto
 
 from arjuna.core.enums import GuiActionConfigType
-from arjuna.interact.gui.auto.impl.locator.emd import ImplWith
+from arjuna.interact.gui.auto.finder.emd import ImplWith
 
 class _GuiActionConfigBuilder:
 

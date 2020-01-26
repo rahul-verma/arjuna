@@ -12,6 +12,6 @@
 Test Mile Arjuna
 Version: {version}
 Creator: Rahul Verma
-(c) 2015-2019 Test Mile Software Testing Pvt Ltd
-www.testmile.com
+(c) 2015-2020 Rahul Verma
+www.RahulVerma.net
 -------------------------------------------------

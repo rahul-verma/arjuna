@@ -30,18 +30,11 @@ class ArjunaSingleton:
         self.__context_map = dict()
         self.__default_context_name = "default_context"
         self.__run_id = None
-        self.__unitee = None
 
         # From central config
         self.prop_enum_to_prop_path_map = {}
         # It is base config object
         self.arjuna_options = {}
-        # NAme of thread: Base configuration
-        self.thread_map = {}
-        # DefaultStringKeyValueContainer
-        self.exec_var_map = {}
-        # DefaultStringKeyValueContainer
-        self.user_options = {}
 
         # Check relevance of above and following
         self.prog = "Arjuna"
@@ -53,18 +46,17 @@ class ArjunaSingleton:
         self.__console = None
         self.__logger = None
 
+    @property
+    def gui_mgr(self):
+        return self.__test_session.gui_manager
+
     def init(self, project_root_dir, cli_config, run_id):
         from arjuna.configure.impl.processor import ConfigCreator
         ConfigCreator.init()
         self.__project_root_dir = project_root_dir
         self.__test_session = DefaultTestSession()
         self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id)
-
         self.__load_console()
-
-        from arjuna.engine.unitee import Unitee
-        project_name = self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_NAME).as_str()
-        self.__unitee = Unitee(self.__test_session, self.__ref_config)
 
         return self.create_test_context(self.__default_context_name)
 
@@ -295,15 +287,8 @@ class ArjunaSingleton:
         self.__logger = logger
         self.__console = __console()
 
-    def get_unitee_instance(self):
-        return self.__unitee
-
     def get_central_config(self):
         return self.__ref_config
-
-    def create_gui_automator(self, *, config=None, extended_config=None):
-        from arjuna.interact.gui.auto.invoker.automator import GuiAutomator
-        return GuiAutomator(config and config or self.__ref_config, extended_config)
 
     def create_test_context(self, name):
         '''
@@ -370,22 +355,6 @@ class Arjuna:
             Returns the reference configuration.
         '''
         return cls.ARJUNA_SINGLETON.get_central_config()
-
-    @classmethod
-    def get_unitee_instance(cls):
-        '''
-            Returns instance of Unitee singleton.
-        '''
-        return cls.ARJUNA_SINGLETON.get_unitee_instance()
-
-    @classmethod
-    def create_gui_automator(cls, *, config=None, extended_config=None):
-        '''
-            Creates and returns GuiAutomator object for provided config.
-            If no configuration is provided reference configuration is used.
-            You can also provide GuiDriverExtendedConfig for extended configuration for WebDriver family of libs. 
-        '''
-        return cls.ARJUNA_SINGLETON.create_gui_automator(config=config, extended_config=extended_config)
 
     @classmethod
     def get_ref_arjuna_option_value(cls, option):

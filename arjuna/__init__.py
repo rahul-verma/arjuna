@@ -53,7 +53,3 @@ class __arfacade():
         cli.execute()
 
 Arjuna = __arfacade()
-
-# from arjuna.unitee.markup import tsmarkup
-
-# markup = tsmarkup

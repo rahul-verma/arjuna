@@ -6,7 +6,7 @@ import inspect
 import time
 
 from arjuna.interact.gui.auto.automator.guiautomator import GuiAutomator
-from arjuna.interact.gui.auto.locator.emd import GuiElementMetaData, SimpleGuiElementMetaData
+from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData, SimpleGuiElementMetaData
 from functools import partial
 
 class _DummyLogger:

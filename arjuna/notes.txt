@@ -1,38 +1,38 @@
 Progress
 -------
 Working examples:
-y01 - launch chrome
-y02 - .arjuna_option(firefox details)
-y03 - .firefox()
-y04 - firefox based on project conf
-y05 - headless chrome, extended driver config
-y06 -> getting arjuna property from project conf using a.b.c and A_B_C and as_* value methods.
-y07 -> programmatic user options
-y08 -> user options from project config
-y09 -> basic identifiers. link_ptext needs to be fixed.
-y10 -> xpath examples
-y11 -> css examples
-y12 -> Extended identifiers work (which are not commented in example code.)
-y13 -> OR relationship works
-y14 -> HardCoded.sleep works
-y15 -> Basic element interactions work.
-y16 -> auto finding and state checking works for basic interactions.
-y17 -> multielement works.
-y18 -> Java script execution works
-y19 -> alerts work
-y20 -> Basic window handling works
+Done y01 - launch chrome
+Done y02 - .arjuna_option(firefox details)
+Done y03 - .firefox()
+Done y04 - firefox based on project conf
+Done y05 - headless chrome, extended driver config
+Done y06 -> getting arjuna property from project conf using a.b.c and A_B_C and as_* value methods.
+Done y07 -> programmatic user options
+Done y08 -> user options from project config
+Done y09 -> basic identifiers. link_ptext needs to be fixed.
+Done y10 -> xpath examples
+Done y11 -> css examples
+Done y12 -> Extended identifiers work (which are not commented in example code.)
+NOT Working -> y13 -> OR relationship -> Fails after an invalid id without checking next one.
+Done y14 -> HardCoded.sleep
+Done y15 -> Basic element interactions.
+Done y16 -> auto finding and state checking works for basic interactions.
+Done y17 -> multielement.
+y18 -> Java script execution
+y19 -> alerts
+y20 -> Basic window handling
 y21 -> Window with title, partial title and content locator works. check notes for the found issue.
-y22 -> Frame handling works.
+y22 -> Frame handling.
 y23 -> Dropdown works. (Performance is slow. investigate.)
-y24 -> RadioGroup logic works.
-y25 -> Named arg formatting, case-insensitive works.
+y24 -> RadioGroup logic
+y25 -> Named arg formatting, case-insensitive.
 y26 -> With.javascript works as expected for success and failure scenarios (single element)
 y27 -> With.javascript works as expected for success and failure scenarios (multi element)
 y28 -> Pre state check works for basic element.
-y29 -> Dropdown pre state check off works.
+y29 -> Dropdown pre state check off.
 y30 -> custom dropdown works (example - Bootstrap dropdown control)
 y31 -> Needs work on Narada side for suitable example controls
-y32 -> All source retrieval works.
+y32 -> All source retrieval.
 
 GNS
 - Simple app abstraction - Done
@@ -340,3 +340,493 @@ Unitee Separatation
 -------------------
 New unitee will be built on top of python's unittest.
 Separated from Arjuna on 24th Jan 2020.
+
+Following CLI options removed from arjuna/interface/cli/parser.py
+        self.parser.add_argument('-ar', '--active-reporters', dest="unitee.project.active.reporters",
+                                 metavar=('R1','R2'), nargs='+',
+                                 type=ustr,
+                                 choices=[i for i in ActiveReporterNames.__members__],
+                                 help='One or more valid active state names: ' + str([i for i in ActiveReporterNames.__members__]))
+        self.parser.add_argument('-dr', '--deferred-reporters', dest="unitee.project.deferred.reporters",
+                                 metavar=('R1','R2'), nargs='+',
+                                 type=ustr,
+                                 choices=[i for i in DeferredReporterNames.__members__],
+                                 help='One or more valid deferred state names: ' + str([i for i in DeferredReporterNames.__members__]))
+
+
+Parsers removed: arjuna/interface/cli/parser.py
+
+class SessionParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('-s', '--session-name', dest="unitee.project.session.name", type=partial(lname_check, "Session"), help='Existing session template name.')
+
+    def process(self, arg_dict):
+        if arg_dict['unitee.project.session.name'] is None:
+            print("Fatal Error in CLI processing. You must provide a valid session name using -s or --session-name switch", file=sys.stderr)
+            sys.exit(1)
+
+
+class GroupParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('-g', '--group-name', dest="group.name", type=partial(lname_check, "Group"), help='Existing group template name.')
+
+    def process(self, arg_dict):
+        pass
+
+
+class NamesParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('-cm', '--cmodules', dest="cmodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for considering test modules.')
+        self.parser.add_argument('-im', '--imodules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+',
+                         help='One or more names/patterns for ignoring test modules.')
+        self.parser.add_argument('-cf', '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
+        self.parser.add_argument('-if', '--ifunctions', dest="ifunctions", metavar=('F1','F2'), default=None, nargs='+',
+                         help='One or more names/patterns for ignoring test functions.')
+
+    def process(self, arg_dict):
+        pass
+
+class SetuParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('-p', '--port', dest="setu.port", default=9000, type=port, help='Setu network port')
+
+    def process(self, arg_dict):
+        pass
+
+Following content removed from arjuna/interface/cli/command.py:
+
+class RunProject(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-project', parents, "Run a project")
+
+    def execute(self, arg_dict):
+        super().execute(arg_dict)
+        self.unitee.load_session_for_all()
+        self.unitee.run()
+        self.unitee.tear_down()
+
+
+class RunSession(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-session', parents, "Run a session")
+
+    def execute(self, arg_dict):
+        super().execute(arg_dict)
+        self.unitee.load_session(arg_dict['unitee.project.session.name'])
+        self.unitee.run()
+        self.unitee.tear_down()
+
+
+class RunGroup(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-group', parents, "Run a group")
+
+    def execute(self, arg_dict):
+        group_name = arg_dict.pop('group.name')
+        super().execute(arg_dict)
+        self.unitee.load_session_for_group(group_name)
+        self.unitee.run()
+        self.unitee.tear_down()
+
+
+class RunNames(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-names', parents, "Run names (modules/functions)")
+
+    def execute(self, arg_dict):
+        picker_args = {
+            'cm': arg_dict.pop('cmodules'),
+            'im': arg_dict.pop('imodules'),
+            'cf': arg_dict.pop('cfunctions'),
+            'if': arg_dict.pop('ifunctions')
+        }
+        super().execute(arg_dict)
+        self.unitee.load_session_for_name_pickers(**picker_args)
+        self.unitee.run()
+        self.unitee.tear_down()
+
+Statements removed from __RunCommand.execute() method in arjuna/interface/cli/command.py
+        self.unitee = Arjuna.get_unitee_instance()
+        self.unitee.load_testdb()
+
+Options removed from arjuna/res/arjuna.conf
+unitee {
+    project{
+        dirs.files = [
+                    archives,
+                    config,
+                    "config/sessions",
+                    core,
+                    "core/db",
+                    "core/db/central",
+                    "core/db/run",
+                    fixtures,
+                    "report",
+                    tests,
+                    "tests/modules",
+                  ]
+
+
+        sessions.dir = ${project.root.dir}"/config/sessions"
+        groups.dir = ${project.root.dir}"/config/groups"
+
+        tests.dir = ${project.root.dir}"/tests"
+        test.module.import.prefix = "<TEST_MODULE_IMPORT_PREFIX>"
+        fixtures.import.prefix = "<FIXTURES_IMPORT_PREFIX>"
+
+        core {
+            dir = ${project.root.dir}"/core"
+            db.central.dir = ${project.root.dir}"/core/db/central"
+            db.central.dbfile = ${project.root.dir}"/core/db/central.ads"
+            db.allrun.dir = ${project.root.dir}"/core/db/run/"
+            db.template.dir = ${project.root.dir}"/core/db/template"
+            db.template.central.dbfile = ${project.root.dir}"/core/db/template/ctemp.ads"
+            db.template.run.dbfile = ${project.root.dir}"/core/db/template/rtemp.ads"
+        }
+
+        reporter.mode = str
+        active.reporters = [MIN_CONSOLE]
+        deferred.reporters = [EXCEL]
+
+        failfast = false
+
+        report {
+
+                name {
+                    format = ArjunaTestReport
+                }
+
+                headers {
+                    tmeta = [stage, group, pkg, module, minst, mfrag, func, finst, test, thread]
+                    igmeta = [pkg, module, func]
+                    props = [mid, mname, midea, mpriority, fid, fname, fidea, fpriority]
+                    reportable {
+                        test = [result, code, desc, ttime, btstamp, etstamp, issue_id]
+                        step = [num, purpose, result, ctext, cbench, cobserve, issue_id]
+                        issue = [id, type, sub_type, ename, emsg, etrace, step_num, fname, dsname]
+                        ignored = [status, reason]
+                        fixture = [fixture_type, fixture_method, result, issue_id, exec_point]
+                        event = [text, component, success, remarks, exc_msg, exc_trace]
+                    }
+                }
+        }
+
+
+        runid = "<runid>"
+
+        irunid = "<IRUNID>"
+
+        session {
+            name = msession
+        }
+
+        core {
+            db.run.dbfile = ${project.root.dir}"/core/db/run/<IRUNID>.ads"
+        }
+
+        screenshots.run.dir = ${project.root.dir}"/report/<IRUNID>/screenshots"
+
+        run = {
+            report = {
+                dir = ${project.root.dir}"/report/<IRUNID>"
+                jdb.dir = ${project.root.dir}"/report/<IRUNID>/jdb"
+                json = {
+                    dir = ${project.root.dir}"/report/<IRUNID>/json"
+                    tests.dir = ${project.root.dir}"/report/<IRUNID>/json/tests"
+                    ignoredtests.dir = ${project.root.dir}"/report/<IRUNID>/json/ignored_tests"
+                    issues.dir = ${project.root.dir}"/report/<IRUNID>/json/issues"
+                    events.dir = ${project.root.dir}"/report/<IRUNID>/json/events"
+                    fixtures.dir = ${project.root.dir}"/report/<IRUNID>/json/fixtures"
+                }
+            }
+        }
+    }
+}
+
+From: arjuna/res/arjuna_conf_desc.conf
+
+unitee {
+    project{
+        dirs.files = str_list
+
+        sessions.dir = absolute_dir_path
+        groups.dir = absolute_dir_path
+
+        tests.dir = absolute_dir_path
+        test.module.import.prefix = str
+        fixtures.import.prefix = str
+
+        core {
+            dir = absolute_dir_path
+            db.central.dir = absolute_dir_path
+            db.central.dbfile = absolute_dir_path
+            db.allrun.dir = absolute_dir_path
+            db.template.dir = absolute_dir_path
+            db.template.central.dbfile = absolute_dir_path
+            db.template.run.dbfile = absolute_dir_path
+        }
+
+        reporter.mode = str
+        active.reporters = active_reporter_list
+        deferred.reporters = deferred_reporter_list
+
+        failfast =  bool
+
+        report {
+
+                name {
+                    format = str
+                }
+
+                headers {
+                    tmeta = str_list
+                    igmeta = str_list
+                    props = str_list
+                    reportable {
+                        test = str_list
+                        step = str_list
+                        issue = str_list
+                        ignored = str_list
+                        fixture = str_list
+                        event = str_list
+                    }
+                }
+        }
+
+
+        runid = str
+
+        irunid = str
+
+        session {
+            name = str
+        }
+
+        core {
+            db.run.dbfile = absolute_dir_path
+        }
+
+        screenshots.run.dir = absolute_dir_path
+
+        run = {
+            report = {
+                dir = absolute_dir_path
+                jdb.dir = absolute_dir_path
+                json = {
+                    dir = absolute_dir_path
+                    tests.dir = absolute_dir_path
+                    ignoredtests.dir = absolute_dir_path
+                    issues.dir = absolute_dir_path
+                    events.dir = absolute_dir_path
+                    fixtures.dir = absolute_dir_path
+                }
+            }
+        }
+    }
+}
+
+Removed From arjuna/arjuna/tpi/__init__.py:
+
+Removed statements
+    def __init__(self):
+        # NAme of thread: Base configuration
+        self.thread_map = {}
+        # DefaultStringKeyValueContainer
+        self.exec_var_map = {}
+        # DefaultStringKeyValueContainer
+        self.user_options = {}
+
+Removed statements
+    def init(self, project_root_dir, cli_config, run_id):
+        from arjuna.engine.unitee import Unitee
+        project_name = self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_NAME).as_str()
+        self.__unitee = Unitee(self.__test_session, self.__ref_config)
+
+Removed method
+    def get_unitee_instance(self):
+        return self.__unitee
+
+In: arjuna/tpi/__init__.py
+
+Removed:
+
+    @classmethod
+    def get_unitee_instance(cls):
+        '''
+            Returns instance of Unitee singleton.
+        '''
+        return cls.ARJUNA_SINGLETON.get_unitee_instance()
+
+Removed File: arjuna/tpi/unitee/markup.py arjuna/tpi/unitee/markup.py
+
+Removed class from arjuna/configure/invoker/context.py:
+
+# For Unitee
+class UniteeTestContext(DefaultTestContext):
+
+    def __init__(self, test_session, name, parent_config=None):
+        super().__init__(test_session, name, parent_config)
+
+    def add_config(self, config):
+        self.__configs[config.get_name()] = config
+
+    def clone(self):
+        out_context = UniteeTestContext(self._get_test_session(), self.get_name())
+        out_context._add_configs(self._get_configs())
+        out_context._add_conf_trace(self._get_conf_trace())
+        return out_context
+
+    def clone_for_user(self):
+        out_context = DefaultTestContext(self._get_test_session(), self.get_name())
+        out_context._add_configs(self._get_configs())
+        out_context._add_conf_trace(self._get_conf_trace())
+        return out_context
+
+    def update_from_context(self, context):
+        self._add_configs(context._get_configs())
+
+Removed res file conf_props.txt which contained onld prop reference code:
+           CorePropertyTypeEnum.ARJUNA_ROOT_DIR: (
+                self._handle_core_dir_path, "Arjuna Root Directory", False),
+            CorePropertyTypeEnum.CONFIG_PROJECTS_DIR: (
+                self._handle_core_dir_path, "Configuration Directory for Project Information", False),
+            CorePropertyTypeEnum.WORKSPACE_DIR: (
+                self._handle_core_dir_path, "Default Projects Directory", False),
+            CorePropertyTypeEnum.PROJECT_DIRS_FILES: (
+                self._handle_string_list_config, "Arjuna Project Directory Names", False),
+            CorePropertyTypeEnum.PROG: (
+                self._handle_string_config, "Arjuna Reference Name", False),
+            CorePropertyTypeEnum.CONFIG_CENTRAL_FILE_NAME: (
+            self._handle_string_config, "Central Configuration File", False),
+            CorePropertyTypeEnum.CONFIG_DIR: (self._handle_core_dir_path, "Configuration Directory", False),
+            CorePropertyTypeEnum.EXTERNAL_TOOLS_DIR: (self._handle_core_dir_path, "Tools Directory", False),
+            CorePropertyTypeEnum.EXTERNAL_IMP_DIR: (self._handle_core_dir_path, "Tools Directory", False),
+            CorePropertyTypeEnum.LOGGER_CONSOLE_LEVEL: (self._handle_log_level_config, "Minimum Logging Message Level for Console Display", True),
+            CorePropertyTypeEnum.LOGGER_DIR: (self._handle_core_dir_path, "Central Log Directory", False),
+            CorePropertyTypeEnum.LOGGER_FILE_LEVEL: (
+            self._handle_log_level_config, "Minimum Logging Message Level for File Log", True),
+            CorePropertyTypeEnum.LOGGER_NAME: (self._handle_string_config, "Log file name", False),
+
+
+
+         def __cases(self):
+        return {
+            UniteePropertyEnum.PROJECT_NAME: (self._handle_string_config, "Project Name", False),
+            UniteePropertyEnum.PROJECT_DIR: (self._handle_core_dir_path, "Project Root Directory", False),
+            UniteePropertyEnum.PROJECT_CONFIG_DIR: (self._handle_core_dir_path, "Project Config Directory", False),
+            UniteePropertyEnum.DATA_REFERENCES_DIR: (
+                self._handle_project_dir_path, "Data References Directory", False),
+            UniteePropertyEnum.DATA_DIR: (self._handle_project_dir_path, "Data Directory", False),
+            UniteePropertyEnum.DATA_SOURCES_DIR: (
+                self._handle_project_dir_path, "Data Sources Directory", False),
+            UniteePropertyEnum.SCREENSHOTS_DIR: (
+                self._handle_project_dir_path, "Screenshots Directory", False),
+            UniteePropertyEnum.SESSION_NAME: (self._handle_string_config, "Test Session Name", False),
+            UniteePropertyEnum.IRUNID: (self._handle_string_config, "Internal Run ID", False),
+            UniteePropertyEnum.RUNID: (self._handle_string_config, "Test Run ID", True),
+            UniteePropertyEnum.FAILFAST: (self._handle_boolean_config, "Stop on first failure/error?", False),
+            UniteePropertyEnum.TEST_MODULE_IMPORT_PREFIX: (self._handle_string_config, "Prefix for Test Module Import", False),
+            UniteePropertyEnum.CONF_FIXTURES_IMPORT_PREFIX: (
+            self._handle_string_config, "Prefix for Configuration Level Test Fixtures Import", False),
+            UniteePropertyEnum.TESTS_DIR: (self._handle_project_dir_path, "Test Directory", True),
+            UniteePropertyEnum.REPORT_DIR: (self._handle_project_dir_path, "Report Directory", False),
+            UniteePropertyEnum.ARCHIVES_DIR: (self._handle_project_dir_path, "Report Archives directory", False),
+            UniteePropertyEnum.SESSIONS_DIR: (self._handle_project_dir_path, "Session Templates directory", False),
+            UniteePropertyEnum.GROUPS_DIR: (self._handle_project_dir_path, "Group Templates directory", False),
+            UniteePropertyEnum.RUN_REPORT_DIR: (self._handle_string_config, "Report Directory for the Run ID", False),
+            UniteePropertyEnum.RUN_REPORT_JDB_DIR: (
+                self._handle_string_config, "Report Directory for the Run ID for JDB", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_DIR: (
+                self._handle_string_config, "Root Raw Report Directory for JSON.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_TESTS_DIR: (
+                self._handle_string_config, "Raw Report Directory for JSON Test Execution results.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_ISSUES_DIR: (
+                self._handle_string_config, "Report Directory for JSON Fixture results.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_IGNOREDTESTS_DIR: (
+                self._handle_string_config, "Report Directory for JSON Ignored Test results.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_EVENTS_DIR: (
+                self._handle_string_config, "Report Directory for JSON Event results.", False),
+            UniteePropertyEnum.RUN_REPORT_JSON_FIXTURES_DIR: (
+                self._handle_string_config, "Report Directory for JSON Fixture results.", False),
+            UniteePropertyEnum.REPORT_NAME_FORMAT: (self._handle_string_config, "Report Name Format", False),
+            UniteePropertyEnum.ACTIVE_REPORTERS: (
+                self._handle_active_reporter_names, "Chosen Built-in Report Generators", True),
+            UniteePropertyEnum.DEFERRED_REPORTERS: (
+                self._handle_deferred_reporter_names, "Chosen Built-in Report Listeners", True),
+            UniteePropertyEnum.CORE_DIR: (self._handle_string_config, "Core Root Directory.", False),
+            UniteePropertyEnum.CORE_DB_CENTRAL_DIR: (self._handle_string_config, "Core Central DB Directory.", False),
+            UniteePropertyEnum.CORE_DB_CENTRAL_DBFILE: (self._handle_string_config, "Core Central DB File.", False),
+            UniteePropertyEnum.CORE_DB_RUN_DIR: (self._handle_string_config, "Core Run DB Directory.", False),
+            UniteePropertyEnum.CORE_DB_RUN_DBFILE: (self._handle_string_config, "Core Current Run DB File.", False),
+            UniteePropertyEnum.CORE_DB_TEMPLATE_DIR: (self._handle_string_config, "Core Template DB Directory.", False),
+            UniteePropertyEnum.CORE_DB_TEMPLATE_CENTRAL_DBFILE: (
+                self._handle_string_config, "Core DB Template for Central DB.", False),
+            UniteePropertyEnum.CORE_DB_TEMPLATE_RUN_DBFILE: (
+                self._handle_string_config, "Core DB Template for Run DB.", False),
+        }
+
+
+def path_to_core_absolute_path(configured_dir):
+    from arjuna import ArjunaCore
+    ret_path = None
+    if configured_dir.startswith("*"):
+        if configured_dir.startswith("*/") or configured_dir.startswith("*\\"):
+            ret_path = file_utils.get_canonical_path(ARJUNA_ROOT + configured_dir[1:])
+        else:
+            ret_path = file_utils.get_canonical_path(ARJUNA_ROOT + os.path.sep + configured_dir[1:])
+    else:
+        ret_path = configured_dir
+    return file_utils.normalize_path(ret_path)
+
+
+def path_to_project_absolute_path(project_dir, configured_dir):
+    from arjuna import ArjunaCore
+    ret_path = None
+    if file_utils.is_absolute_path(configured_dir):
+        ret_path = configured_dir
+    else:
+        ret_path = file_utils.get_canonical_path(project_dir + os.path.sep + configured_dir)
+    return file_utils.normalize_path(ret_path)
+
+
+Notes on Test Session
+---------------------
+1. Concept of test session in its existing form needs to go away.
+2. One execution of arjuna will be one test session.
+3. Only when master-slave mode is introduced, master will have concept of multiple
+test sessions that run on multiple nodes each running one arjuna execution and hence one session.
+Master acts as a collector of such sessions.
+4. 
+
+
+
+
+Tests to be conducted
+---------------------
+1. Create a new project and verify that structure are created as epected.
+2. tests should be put in modules and new unittest should be enforced to pick them from only there.
+3. 
+
+
+GOM
+---
+The default model for Gui automation in Arjuna.
+- Done with App, pages and widgets.
+- Elements are loaded in a greedy manner. Lazy is too much of state checking.
+- Tentative: Create NestedElement. Nestedlement can not have find feature.
+- PartialElement can not have find feature.
+- A widget is found using automator.
+- Custom controls like tabgroup will be found using automator. Then its root element for further finding.
+- config should be a keyword arg.
+- Move to greedy instead of lazy loading.
+- To remove complex state management, introduce redundancy, but implemenet separate flows:
+    - nested vs direct element finding
+    - first time find (parent finds it), and refinding (element asks for it from parent)

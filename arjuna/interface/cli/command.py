@@ -31,7 +31,6 @@ import json
 import sys
 
 from arjuna.core.enums import *
-from arjuna.engine.unitee.enums import *
 from arjuna.core.utils import sys_utils
 from arjuna.core.utils import file_utils
 from arjuna.core.reader.hocon import HoconFileReader, HoconConfigDictReader
@@ -139,20 +138,8 @@ class CreateProject(Command):
         (FileObjectType.DIR, "guiauto/namespace"),
         (FileObjectType.DIR, "report"),
         (FileObjectType.FILE, "config/project.conf")
-    )
-
-    UNITEE_DIRS_FILES = (
-        (FileObjectType.DIR, "config/sessions"),
-        (FileObjectType.DIR, "core"),
-        (FileObjectType.DIR, "core/db"),
-        (FileObjectType.DIR, "core/db/central"),
-        (FileObjectType.DIR, "core/db/run"),
-        (FileObjectType.DIR, "fixtures"),
         (FileObjectType.DIR, "tests"),
         (FileObjectType.DIR, "tests/modules"),
-        (FileObjectType.FILE, "__init__.py"),
-        (FileObjectType.FILE, "fixtures/__init__.py"),
-        (FileObjectType.FILE, "fixtures/all.py"),
         (FileObjectType.FILE, "tests/__init__.py"),
         (FileObjectType.FILE, "tests/modules/__init__.py"),
     )
@@ -178,7 +165,6 @@ class CreateProject(Command):
         if os.path.exists(os.path.join(pdir, "config/project.conf")):
             print("Arjuna project already exists at the specified location.")
             sys.exit(1)
-        is_unitee = not (arg_dict['project.is_not_unitee'])
         parent_dir = os.path.abspath(os.path.join(pdir, ".."))
         project_name = os.path.basename(pdir)
         with tempfile.TemporaryDirectory() as tdir:
@@ -186,14 +172,10 @@ class CreateProject(Command):
             os.makedirs(project_temp_dir)
             for ftype, frpath in CreateProject.COMMON_DIRS_FILES:
                 self.__create_file_or_dir(project_temp_dir, ftype, frpath)
-            if is_unitee:
-                for ftype, frpath in CreateProject.UNITEE_DIRS_FILES:
-                    self.__create_file_or_dir(project_temp_dir, ftype, frpath)
-            if is_unitee:
-                shutil.copyfile(
-                    os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../res/scripts/arjuna_launcher.py"),
-                    os.path.join(project_temp_dir, "arjuna_launcher.py")
-                    )
+            shutil.copyfile(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../res/scripts/arjuna_launcher.py"),
+                os.path.join(project_temp_dir, "arjuna_launcher.py")
+                )
             for f in os.listdir(project_temp_dir):
                 try:
                     shutil.move(os.path.join(project_temp_dir, f), pdir)
@@ -211,7 +193,6 @@ class __RunCommand(Command):
         self.parents = parents
         parser = subparsers.add_parser(sub_parser_name, parents=[parent.get_parser() for parent in parents], help=help)
         self._set_parser(parser)
-        self.unitee = None
 
     def execute(self, arg_dict):
         for parent in self.parents:
@@ -228,57 +209,4 @@ class __RunCommand(Command):
 
         py_3rdparty_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR).as_str()
         sys.path.append(py_3rdparty_dir)
-        self.unitee = Arjuna.get_unitee_instance()
-        self.unitee.load_testdb()
-
-
-class RunProject(__RunCommand):
-    def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-project', parents, "Run a project")
-
-    def execute(self, arg_dict):
-        super().execute(arg_dict)
-        self.unitee.load_session_for_all()
-        self.unitee.run()
-        self.unitee.tear_down()
-
-
-class RunSession(__RunCommand):
-    def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-session', parents, "Run a session")
-
-    def execute(self, arg_dict):
-        super().execute(arg_dict)
-        self.unitee.load_session(arg_dict['unitee.project.session.name'])
-        self.unitee.run()
-        self.unitee.tear_down()
-
-
-class RunGroup(__RunCommand):
-    def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-group', parents, "Run a group")
-
-    def execute(self, arg_dict):
-        group_name = arg_dict.pop('group.name')
-        super().execute(arg_dict)
-        self.unitee.load_session_for_group(group_name)
-        self.unitee.run()
-        self.unitee.tear_down()
-
-
-class RunNames(__RunCommand):
-    def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-names', parents, "Run names (modules/functions)")
-
-    def execute(self, arg_dict):
-        picker_args = {
-            'cm': arg_dict.pop('cmodules'),
-            'im': arg_dict.pop('imodules'),
-            'cf': arg_dict.pop('cfunctions'),
-            'if': arg_dict.pop('ifunctions')
-        }
-        super().execute(arg_dict)
-        self.unitee.load_session_for_name_pickers(**picker_args)
-        self.unitee.run()
-        self.unitee.tear_down()
 

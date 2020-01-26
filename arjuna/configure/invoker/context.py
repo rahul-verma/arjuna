@@ -2,9 +2,9 @@ from enum import Enum
 from arjuna.configure.impl.container import ConfigContainer
 from arjuna.tpi.enums import ArjunaOption, BrowserName
 
-class _ConfigBuilder:
+class _ConfigCreator:
 
-    def __init__(self, test_session, config_map, conf_trace, code_mode):
+    def __init__(self, test_session, config_map, conf_trace, code_mode=True):
         self.__code_mode = code_mode
         self.__test_session = test_session
         self.__config_container = ConfigContainer()
@@ -72,7 +72,7 @@ class _ConfigBuilder:
         self.arjuna_option(ArjunaOption.MOBILE_DEVICE_UDID, udid)
         return self
 
-    def build(self, config_name="default_config"):
+    def register(self, config_name="default_config"):
         if not self.__config_container.arjuna_options.str_items() and not self.__config_container.user_options.items():
             if not self.__parent_config:
                 if config_name != "default_config":
@@ -105,8 +105,9 @@ class DefaultTestContext:
         self.__configs = {"default_config" : Arjuna.get_ref_config()}
         self.__conf_trace = dict()
 
-    def ConfigBuilder(self, code_mode=True):
-        return _ConfigBuilder(self.__test_session, self.__configs, self.__conf_trace, code_mode)
+    @property
+    def config_creator(self):
+        return _ConfigCreator(self.__test_session, self.__configs, self.__conf_trace) # Sent code_mode=True earlier. Check.
 
     def update_with_file_config_container(self, container):
         for config_name, conf in self.__configs.items():
@@ -160,30 +161,6 @@ class DefaultTestContext:
 
     def get_name(self):
         return self.__name
-
-# For Unitee
-class UniteeTestContext(DefaultTestContext):
-
-    def __init__(self, test_session, name, parent_config=None):
-        super().__init__(test_session, name, parent_config)
-
-    def add_config(self, config):
-        self.__configs[config.get_name()] = config
-
-    def clone(self):
-        out_context = UniteeTestContext(self._get_test_session(), self.get_name())
-        out_context._add_configs(self._get_configs())
-        out_context._add_conf_trace(self._get_conf_trace())
-        return out_context
-
-    def clone_for_user(self):
-        out_context = DefaultTestContext(self._get_test_session(), self.get_name())
-        out_context._add_configs(self._get_configs())
-        out_context._add_conf_trace(self._get_conf_trace())
-        return out_context
-
-    def update_from_context(self, context):
-        self._add_configs(context._get_configs())
 
 # class DefaultTestContext:
 

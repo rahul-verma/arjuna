@@ -1,0 +1,9 @@
+0.8.5
+-----
+1. Renamed sample project to arjex.
+2. Unitee ceases to be a separate entity. It is replaced now with the word engine. The new engine as it develops will be based on python's built-in unittest module for better compatibility with test projects in the wild and its open source plugin system.
+3. Following unitee related files have been removed for now from Arjuna:
+    - arjuna/core/utils/etree_utils.py
+4. unitee related calls and tpi entries removed.
+5. changed header.
+6. 

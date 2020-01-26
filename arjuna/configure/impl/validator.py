@@ -5,7 +5,6 @@ import sys
 from urllib3.util import parse_url
 from arjuna.tpi.enums import *
 from arjuna.core.enums import *
-from arjuna.engine.unitee.enums import *
 from arjuna.core.types.constants import *
 
 class ConfigValidator:
