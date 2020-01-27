@@ -213,6 +213,9 @@ class AbstractGNFileLoader(BaseGuiNamespaceLoader):
             # Initialise for new section found
             self.last_header = current_header
             self.last_auto_contexts = None
+            from arjuna.configure.impl.validator import ConfigValidator
+            print(self.last_header)
+            ConfigValidator.arjuna_name(self.last_header)
             self.__ns[self.last_header] = {}
             return True
         else:

@@ -8,7 +8,7 @@ class HomePage(WPBasePage):
         self.element("password").text = pwd
         self.element("submit").click()
 
-        self.element("view-site").wait_until_visible()
+        self.element("view_site").wait_until_visible()
         return DashboardPage(self.app, self._automator)
 
     def login_with_default_creds(self):

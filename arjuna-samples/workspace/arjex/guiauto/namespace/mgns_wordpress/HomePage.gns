@@ -14,6 +14,6 @@ id = wp-submit
 #web,android_web
 link_text = log out
 
-[VIEW-SITE]
+[VIEW_SITE]
 #web,android_web
 class_name = welcome-view-site

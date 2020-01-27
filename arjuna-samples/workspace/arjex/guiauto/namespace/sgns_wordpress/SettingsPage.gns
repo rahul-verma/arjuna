@@ -10,5 +10,5 @@ id = default_role
 [DATE_FORMAT]
 name = date_format
 
-[SUBMIT-SETTINGS]
+[SUBMIT_SETTINGS]
 id = submit

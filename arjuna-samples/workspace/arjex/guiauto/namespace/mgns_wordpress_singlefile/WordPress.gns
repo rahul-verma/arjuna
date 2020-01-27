@@ -10,7 +10,7 @@ id = user_pass
 #web,android_web
 id = wp-submit
 
-[VIEW-SITE]
+[VIEW_SITE]
 #web,android_web
 class_name = welcome-view-site
  
@@ -90,6 +90,6 @@ id = default_role
 #web,android_web
 name = date_format
 
-[SUBMIT-SETTINGS]
+[SUBMIT_SETTINGS]
 #web,android_web
 id = submit

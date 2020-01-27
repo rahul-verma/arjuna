@@ -10,5 +10,5 @@ id = wp-submit
 [LOGOUT_CONFIRM]
 link_text = log out
 
-[VIEW-SITE]
+[VIEW_SITE]
 class_name = welcome-view-site

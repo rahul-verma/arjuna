@@ -8,10 +8,9 @@ from arjuna.core.enums import *
 from arjuna.core.types.constants import *
 
 class ConfigValidator:
-    VNREGEX = r'[a-z][a-z0-9]{2,29}'
+    VNREGEX = r'^([a-zA-Z][a-zA-Z_0-9]{2,50})$'
     VNREGEX_TEXT = '''
-    A Setu name must be a string of length 3-30 containing lower case letters, digits or _ (underscore).
-    It must begin with a letter.
+    An Arjuna name must be a string of length 3-50 starting with a letter, followed by letters, digits or _ (underscore).
     '''
 
     @classmethod
@@ -221,9 +220,9 @@ class ConfigValidator:
         return input
 
     @classmethod
-    def setu_name(cls, input):
+    def arjuna_name(cls, input):
         if not re.match(cls.VNREGEX, input):
-            print('Invalid Setu name provided.', file=sys.stderr)
+            print('Invalid Arjuna name provided.', file=sys.stderr)
             print(cls.VNREGEX_TEXT, file=sys.stderr)
             cls.raise_exc(input)
         return input

@@ -39,7 +39,7 @@ class WPBaseTest(unittest.TestCase):
         self.wordpress.ui.element(With.gns_name("password").format(roLE="user")).text = pwd
         self.wordpress.ui.element("submit").click()
 
-        self.wordpress.ui.element("view-site").wait_until_visible()
+        self.wordpress.ui.element("view_site").wait_until_visible()
 
     def logout(self):
         url = self.config.get_user_option_value("wp.logout.url").as_str()

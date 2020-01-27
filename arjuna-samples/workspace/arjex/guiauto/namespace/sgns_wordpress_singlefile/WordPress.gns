@@ -7,7 +7,7 @@ id = $ ROle $_pass
 [SUBMIT]
 id = wp-submit
 
-[VIEW-SITE]
+[VIEW_SITE]
 class_name = welcome-view-site
  
 [PROFILE_LINK]
@@ -67,5 +67,5 @@ id = default_role
 [DATE_FORMAT]
 name = date_format
 
-[SUBMIT-SETTINGS]
+[SUBMIT_SETTINGS]
 id = submit

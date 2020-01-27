@@ -14,6 +14,6 @@ id = default_role
 #web,android_web
 name = date_format
 
-[SUBMIT-SETTINGS]
+[SUBMIT_SETTINGS]
 #web,android_web
 id = submit
