@@ -8,15 +8,6 @@ class WPBasePage(Page):
         super().__init__(app=app, automator=automator)
         self.externalize_guidef()
 
-    def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url").as_str()
-        self.browser.go_to_url(url)
-
-        self.element("logout_confirm").click()
-        self.element("logout_msg").wait_until_visible()
-        from sgom.home import HomePage
-        self.app.current_page = HomePage(from_gui=self)
-
 
 class WPFullPage(WPBasePage):
 

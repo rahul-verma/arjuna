@@ -1,14 +1,21 @@
+from enum import Enum, auto
 from .basepage import WPBasePage
 from .dashboard import DashboardPage
 
 class HomePage(WPBasePage):
 
-    def login(self, user, pwd):
-        self.element("login").text = user
-        self.element("password").text = pwd
-        self.element("submit").click()
+    class loc(Enum):
+        login = auto()
+        password = auto()
+        submit = auto()
+        view_site = auto()
 
-        self.element("view-site").wait_until_visible()
+    def login(self, user, pwd):
+        self.element(self.loc.login).text = user
+        self.element(self.loc.password).text = pwd
+        self.element(self.loc.submit).click()
+
+        self.element(self.loc.view_site).wait_until_visible()
         return DashboardPage(self.app, self._automator)
 
     def login_with_default_creds(self):

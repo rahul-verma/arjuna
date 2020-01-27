@@ -1,3 +1,4 @@
+from enum import Enum, auto
 from arjuna.interact.gui.gom import Widget
 
 class WPBaseWidget(Widget):
@@ -8,20 +9,27 @@ class WPBaseWidget(Widget):
 
 class LeftNavSideBar(WPBaseWidget):
 
+    class loc(Enum):
+        settings = auto()
+
     @property
     def settings(self):
         from .settings import SettingsPage
-        self.element("settings").click()
+        self.element(self.loc.settings).click()
         return SettingsPage(self.app, self._automator)
 
 class TopNavBar(WPBaseWidget):
+
+    class loc(Enum):
+        logout_confirm = auto()
+        logout_msg = auto()
 
     def logout(self):
         url = self.config.get_user_option_value("wp.logout.url").as_str()
         self.browser.go_to_url(url)
 
-        self.element("logout_confirm").click()
-        self.element("logout_msg").wait_until_visible()
+        self.element(self.loc.logout_confirm).click()
+        self.element(self.loc.logout_msg).wait_until_visible()
 
         from .home import HomePage
         return HomePage(self.app, self._automator)
