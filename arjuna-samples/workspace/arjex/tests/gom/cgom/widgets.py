@@ -2,8 +2,8 @@ from arjuna.interact.gui.gom import Widget
 
 class WPBaseWidget(Widget):
 
-    def __init__(self, parent):
-        super().__init__(parent)
+    def __init__(self, page):
+        super().__init__(page)
         self.externalize_guidef(ns_dir="{}_wordpress/widgets".format(self.app.gns_format.lower()))
 
 class LeftNavSideBar(WPBaseWidget):
@@ -12,7 +12,7 @@ class LeftNavSideBar(WPBaseWidget):
     def settings(self):
         from .settings import SettingsPage
         self.element("settings").click()
-        return SettingsPage(self.app, self.automator)
+        return SettingsPage(self.app, self._automator)
 
 class TopNavBar(WPBaseWidget):
 
@@ -24,4 +24,4 @@ class TopNavBar(WPBaseWidget):
         self.element("logout_msg").wait_until_visible()
 
         from .home import HomePage
-        return HomePage(self.app, self.automator)
+        return HomePage(self.app, self._automator)

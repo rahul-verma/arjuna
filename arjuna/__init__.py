@@ -31,7 +31,7 @@ importables_dir = join_paths(root_dir, "third_party")
 sys.path.insert(0, importables_dir)
 sys.path.insert(0, root_dir)
 
-class __arfacade():
+class __arfacade:
 
     def __init__(self):
         self.__version = pkg_resources.require("arjuna")[0].version

@@ -1,6 +1,7 @@
 import unittest
 
 from cgom.wordpress import WordPress
+from cgom.home import HomePage
 
 class WPBaseTest(unittest.TestCase):
 

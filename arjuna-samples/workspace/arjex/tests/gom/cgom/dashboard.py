@@ -1,6 +1,7 @@
 from .basepage import WPFullPage
 
 class DashboardPage(WPFullPage):
-    
-    def __init__(self, app, automator):
-        super().__init__(app, automator)
+
+    def go_to_settings(self):
+        self.element("settings").click()
+        return SettingsPage(self.app, self.automator)
