@@ -1,9 +1,6 @@
-from arjuna.tpi import Arjuna
-from arjuna.tpi.guiauto.helpers import With
-from arjuna.tpi.guiauto import WebApp
+from arjuna import *
 
 def init_arjuna():
-    from arjuna.tpi import Arjuna
     return Arjuna.init("/Users/rahulverma/Documents/github_tm/arjuna/arjuna-samples/workspace/arjex")
 
 def create_app():

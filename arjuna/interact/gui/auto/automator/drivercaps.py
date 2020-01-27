@@ -1,4 +1,4 @@
-from arjuna.tpi.enums import ArjunaOption, DesktopOS
+from arjuna.core.enums import ArjunaOption, DesktopOS
 import pprint
 from enum import Enum, auto
 

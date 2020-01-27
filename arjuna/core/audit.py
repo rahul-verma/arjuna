@@ -1,8 +1,6 @@
 import time
 import inspect
 
-from arjuna.tpi import Arjuna
-
 class HardCoded:
 
     @classmethod
@@ -26,6 +24,7 @@ class HardCoded:
 
     @classmethod
     def __log(cls, invoker, why, seconds):
+        from arjuna import Arjuna
         Arjuna.get_logger().warn("Hardcoded sleep executed for {} seconds by {}. Reason by author: {}".format(seconds, invoker, why))
 
     @classmethod

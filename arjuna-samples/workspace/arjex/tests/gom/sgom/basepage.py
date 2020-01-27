@@ -14,6 +14,6 @@ class WPBasePage(Page):
         self.element("logout_confirm").click()
         self.element("logout_msg").wait_until_visible()
         from sgom.home import HomePage
-        return HomePage(self.app, self._automator)
+        return HomePage(self.app, self.automator)
 
 

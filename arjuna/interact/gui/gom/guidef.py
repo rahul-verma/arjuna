@@ -1,9 +1,7 @@
 import os
 
-from arjuna.tpi.enums import ArjunaOption
 from .nsloader import GuiNamespaceLoaderFactory
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData, GuiElementMetaData, Locator
-from arjuna.tpi.enums import ArjunaOption
 
 class GuiDef:
     '''
@@ -63,7 +61,7 @@ class GuiDef:
         return GuiElementMetaData(final_locators)
 
     def convert_to_with(self, locator):
-        from arjuna.tpi.guiauto.helpers import With
+        from arjuna.interact.gui.helpers import With
         out_list = []
         impl_with = locator.as_impl_locator()
         emd = self.__ns.get_meta_data(impl_with.wvalue, self.__auto_context)
@@ -82,6 +80,7 @@ class GuiFactory:
 
     @classmethod
     def create_appdef_from_dir(cls, name, automator, app_def_dir):
+        from arjuna.tpi.enums import ArjunaOption
         considered_path = app_def_dir
         if not os.path.isdir(considered_path):
             ns_dir = automator.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)

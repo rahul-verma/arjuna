@@ -1,5 +1,5 @@
 from commons import *
-from arjuna.tpi.enums import ArjunaOption
+from arjuna import *
 
 context = init_arjuna()
 cc = context.config_creator

@@ -1,6 +1,6 @@
 import os
 
-from arjuna.tpi import Arjuna
+from arjuna import Arjuna
 from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 from arjuna.interact.gui.auto.source.parser import FrameSource

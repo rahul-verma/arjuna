@@ -1,5 +1,5 @@
 from arjuna.interact.gui.auto.element.guielement import GuiElement
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.core.enums import ArjunaOption
 
 class WebAlert:
 

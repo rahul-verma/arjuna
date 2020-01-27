@@ -2,14 +2,14 @@ from .gui import *
 
 class Page(AppPortion):
 
-    def __init__(self, *, app, automator, label=None):
-        super().__init__(app=app, automator=automator, label=label)
-
+    def __init__(self, *, source_gui, label=None):
+        # app = isinstance(source_gui, App) and source_gui or source_gui.app
+        super().__init__(automator=source_gui.automator, label=label)
 
 class Widget(AppPortion):
 
     def __init__(self, page, *, label=None):
-        super().__init__(app=page.app, automator=page._automator, label=label)   
+        super().__init__(automator=page.automator, label=label)   
         self.__page = page
 
     @property
@@ -25,7 +25,7 @@ class App(Gui, metaclass=abc.ABCMeta):
         self.__ns_dir = ns_dir
 
     @property
-    def _automator(self):
+    def automator(self):
         return self.__automator
 
     @property
@@ -35,14 +35,14 @@ class App(Gui, metaclass=abc.ABCMeta):
     def _launchautomator(self):
         # Default Gui automation engine is Selenium
         from arjuna.interact.gui.auto.automator import GuiAutomator
-        self.__automator = GuiAutomator(self.config, self.ext_config)     
+        self.__automator = GuiAutomator(self, self.config, self.ext_config)    
 
     @property
     def ui(self):
         return self.__ui
 
     def _create_default_ui(self):
-        self.__ui = Page(app=self, automator=self._automator, label="{}-Def-UI".format(self.label))
+        self.__ui = Page(source_gui=self, label="{}-Def-UI".format(self.label))
 
     @abc.abstractmethod
     def launch(self):
@@ -60,7 +60,7 @@ class WebApp(App):
             You can also provide GuiDriverExtendedConfig for extended configuration for WebDriver family of libs. 
         '''
         super().__init__(config=config, ext_config=ext_config, label=label, ns_dir=ns_dir)
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.core.enums import ArjunaOption
         self.__base_url = base_url is not None and base_url or self.config.get_arjuna_option_value(ArjunaOption.AUT_BASE_URL).as_str()
 
     @property
@@ -69,8 +69,8 @@ class WebApp(App):
 
     def launch(self, blank_slate=False):
         self._launchautomator()
-        if not blank_slate or home is not None:
-            self._automator.browser.go_to_url(self.base_url)
+        if not blank_slate:
+            self.automator.browser.go_to_url(self.base_url)
         self._create_default_ui()
 
     def quit(self):

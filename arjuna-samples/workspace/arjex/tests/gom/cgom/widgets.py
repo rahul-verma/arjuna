@@ -16,7 +16,7 @@ class LeftNavSideBar(WPBaseWidget):
     def settings(self):
         from .settings import SettingsPage
         self.element(self.loc.settings).click()
-        return SettingsPage(self.app, self._automator)
+        return SettingsPage(self.app, self.automator)
 
 class TopNavBar(WPBaseWidget):
 
@@ -32,4 +32,4 @@ class TopNavBar(WPBaseWidget):
         self.element(self.loc.logout_msg).wait_until_visible()
 
         from .home import HomePage
-        return HomePage(self.app, self._automator)
+        return HomePage(self.app, self.automator)

@@ -1,4 +1,4 @@
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.core.enums import ArjunaOption
 from enum import Enum, auto
 
 

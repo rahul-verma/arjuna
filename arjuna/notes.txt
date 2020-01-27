@@ -1,3 +1,4 @@
+With TPI rearrangement:
 Progress
 -------
 Working examples:
@@ -26,8 +27,9 @@ Done y26 -> With.javascript works as expected for success and failure scenarios 
 Done y27 -> With.javascript works as expected for success and failure scenarios (multi element)
 Done: y28 -> Pre state check works for basic element.
 
+
 GOM
-Done e01 -> SGNS with simple App Model
+e01 -> SGNS with simple App Model
 
 
 PRIORITY: GNS

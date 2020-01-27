@@ -1,6 +1,6 @@
 from enum import Enum
 from arjuna.configure.impl.container import ConfigContainer
-from arjuna.tpi.enums import ArjunaOption, BrowserName
+from arjuna.core.enums import *
 
 class _ConfigCreator:
 
@@ -101,7 +101,7 @@ class DefaultTestContext:
         self.__test_session = test_session
         self.__name = name
         self.__parent_config = parent_config and parent_config or None
-        from arjuna.tpi import Arjuna
+        from arjuna import Arjuna
         self.__configs = {"default_config" : Arjuna.get_ref_config()}
         self.__conf_trace = dict()
 

@@ -1,5 +1,5 @@
 from commons import *
-from arjuna.core.audit import HardCoded
+from arjuna import HardCoded
 
 init_arjuna()
 

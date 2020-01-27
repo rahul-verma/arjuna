@@ -2,7 +2,6 @@ import platform
 import os
 import uuid
 from enum import Enum
-from arjuna.tpi.enums import *
 from arjuna.core.enums import *
 from arjuna.core.types.descriptors import *
 

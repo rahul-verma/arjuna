@@ -1,7 +1,7 @@
 import uuid
 import time
 import logging
-from arjuna.tpi.enums import ArjunaOption
+from arjuna import ArjunaOption
 
 from arjuna.drive.databroker import DataBroker
 from arjuna.configure.invoker.config import DefaultTestConfig
@@ -43,7 +43,7 @@ class DefaultTestSession:
     def init(self, root_dir, cli_config=None, run_id=None):
         self.__configurator.init(root_dir, cli_config)
         config = self.__configurator.create_project_conf()
-        from arjuna.tpi import Arjuna
+        from arjuna import Arjuna
         Arjuna.init_logger(self.id, config.arjuna_config.value(ArjunaOption.LOG_DIR))
         self.__databroker_handler = TestSessionDataBrokerHandler(self, self.__data_broker)
         self.__guimgr = GuiManager(config)

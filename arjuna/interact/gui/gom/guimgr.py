@@ -1,6 +1,6 @@
 import uuid
 from arjuna.interact.gui.gom.namestore import GuiNameStore
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.core.enums import ArjunaOption
 
 class GuiManager:
 

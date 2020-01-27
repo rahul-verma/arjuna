@@ -1,7 +1,5 @@
 from commons import *
-from arjuna.tpi.enums import BrowserName, ArjunaOption
-from arjuna.tpi.guiauto import WebApp
-from arjuna.tpi.guiauto.helpers import GuiDriverExtendedConfigBuilder
+from arjuna import *
 
 context = init_arjuna()
 eb = GuiDriverExtendedConfigBuilder()

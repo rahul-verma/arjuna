@@ -16,4 +16,4 @@ class WordPress(WebApp):
 
     def launch(self):
         super().launch()
-        return HomePage(self, self._automator)
+        return HomePage(self, self.automator)

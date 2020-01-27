@@ -1,7 +1,7 @@
 from arjuna.interact.gui.dispatcher.driver.element_commands import DriverElementCommands
 from arjuna.interact.gui.dispatcher.driver.element_finder import ElementFinder
 from arjuna.interact.gui.dispatcher.driver.melement import MultiElement
-from arjuna.tpi.exceptions import *
+from arjuna.core.exceptions import *
 
 class SeleniumDriverElementDispatcher:
 

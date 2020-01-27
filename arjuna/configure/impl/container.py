@@ -1,5 +1,5 @@
 from arjuna.core.value import AbstractValueMap, StringKeyValueMap
-from arjuna.tpi.enums import ArjunaOption
+from arjuna import ArjunaOption
 
 from .config import Config
 

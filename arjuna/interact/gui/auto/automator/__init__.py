@@ -2,7 +2,7 @@ import base64
 import os
 import time
 
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.core.enums import ArjunaOption
 from arjuna.interact.gui.auto.base.container import ElementContainer
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from .drivercaps import DriverCapabilities
@@ -12,9 +12,10 @@ from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 
 class GuiAutomator(ElementContainer,Dispatchable):
 
-    def __init__(self, config, ext_config=None):
+    def __init__(self, app, config, ext_config=None):
         ElementContainer.__init__(self, config)
         Dispatchable.__init__(self)
+        self.__app = app
         self.__econfig = ext_config
         self.__create_screenshots_dir()
         self.__main_window = None
@@ -36,6 +37,10 @@ class GuiAutomator(ElementContainer,Dispatchable):
         # based on choice of engine to support more libs.
         self.dispatcher = SeleniumDriverDispatcher()
         self.__launch()
+
+    @property
+    def app(self):
+        return self.__app
 
     @property
     def ext_config(self):

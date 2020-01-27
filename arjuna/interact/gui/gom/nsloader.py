@@ -6,7 +6,6 @@ from abc import abstractmethod
 
 from arjuna.core.enums import GuiAutomationContext
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData, Locator, ImplWith
-from arjuna.tpi.enums import ArjunaOption
 
 class FileFormat(Enum):
     GNS = auto()
@@ -19,6 +18,7 @@ class GuiNamespaceLoaderFactory:
     # Returns GuiNamespaceLoader
     @classmethod
     def create_namespace_loader(cls, config, ns_file_path):
+        from arjuna import ArjunaOption
         multi_context_enabled = config.get_arjuna_option_value(ArjunaOption.GUIAUTO_DEF_MULTICONTEXT).as_bool()
         context = multi_context_enabled and None or config.guiauto_context
         _, file_extension = os.path.splitext(ns_file_path)

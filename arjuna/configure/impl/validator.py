@@ -3,7 +3,6 @@ import os
 import re
 import sys
 from urllib3.util import parse_url
-from arjuna.tpi.enums import *
 from arjuna.core.enums import *
 from arjuna.core.types.constants import *
 

@@ -31,7 +31,7 @@ importables_dir = join_paths(root_dir, "third_party")
 sys.path.insert(0, importables_dir)
 sys.path.insert(0, root_dir)
 
-class __arfacade:
+class ArjunFacade:
 
     def __init__(self):
         self.__version = pkg_resources.require("arjuna")[0].version
@@ -52,4 +52,15 @@ class __arfacade:
         print("Executing Arjuna Command...")
         cli.execute()
 
-Arjuna = __arfacade()
+from arjuna.engine import Arjuna
+
+from arjuna.interact.gui.helpers import With, WithType
+from arjuna.interact.gui.helpers import GuiActionConfig, GuiDriverExtendedConfigBuilder
+from arjuna.interact.gui.helpers import Screen
+
+from arjuna.interact.gui.gom import WebApp, Page, Widget
+
+from arjuna.core.exceptions import *
+from arjuna.core.enums import *
+
+from arjuna.core.audit import HardCoded

@@ -70,8 +70,7 @@ class CliArgsConfig:
 
 
 #### From old Setu code
-from arjuna.tpi.enums import ArjunaOption, BrowserName
-from arjuna.core.enums import GuiAutomationContext, GuiAutomatorName
+from arjuna.core.enums import *
 from arjuna.core.value import AnyRefValue
 
 

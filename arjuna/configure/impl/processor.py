@@ -7,7 +7,7 @@ from pprint import pprint
 
 from arjuna.core.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
 
-from arjuna.tpi.enums import ArjunaOption
+from arjuna import ArjunaOption
 from .validator import ConfigValidator
 from .config import Config, ArjunaConfig, UserConfig
 

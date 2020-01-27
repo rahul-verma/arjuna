@@ -1,5 +1,5 @@
 from commons import *
-from arjuna.tpi.enums import ArjunaOption
+from arjuna import *
 
 init_arjuna()
 config = Arjuna.get_ref_config()

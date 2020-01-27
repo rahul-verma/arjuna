@@ -3,7 +3,7 @@
 '''
 
 from commons import *
-from arjuna.tpi.guiauto.helpers import With, GuiActionConfig
+from arjuna.interact.gui.helpers import With, GuiActionConfig
 
 init_arjuna()
 

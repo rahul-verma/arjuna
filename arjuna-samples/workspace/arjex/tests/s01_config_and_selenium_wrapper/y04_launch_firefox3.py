@@ -6,8 +6,7 @@ arjunaOptions = {
 }
 '''
 from commons import *
-
-from arjuna.tpi.guiauto import WebApp
+from arjuna import *
 
 init_arjuna()
 google = WebApp(base_url="https://google.com")

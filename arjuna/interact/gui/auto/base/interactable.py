@@ -1,7 +1,7 @@
 from arjuna.interact.gui.auto.base.configurable import Configurable
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from arjuna.interact.gui.auto.source.parser import ElementXMLSourceParser
-from arjuna.tpi.exceptions import GuiElementTextNotSetError
+from arjuna.core.exceptions import GuiElementTextNotSetError
 
 class Interactable(Configurable, Dispatchable):
 

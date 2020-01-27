@@ -1,5 +1,5 @@
 from arjuna.tpi import Arjuna
-from arjuna.tpi.guiauto.helpers import With, GuiActionConfig
+from arjuna.interact.gui.helpers import With, GuiActionConfig
 
 from commons import *
 
