@@ -9,9 +9,9 @@ class HomePage(WPBasePage):
         user, pwd = self.config.get_user_option_value("wp.users.admin").split_as_str_list()
 
         # Login
-        self.element("login").set_text(user)
-        self.element("password").set_text(pwd)
+        self.element("login").text = user
+        self.element("password").text = pwd
         self.element("submit").click()
 
         self.element("view-site").wait_until_visible()
-        return DashboardPage(self.automator)
+        return DashboardPage(self.app, self._automator)

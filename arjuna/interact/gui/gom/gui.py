@@ -67,11 +67,11 @@ class AppPortion(Gui):
     def gui_def(self):
         return self.__guidef
 
-    def externalize_guidef(self, ns_dir, def_file_name=None):
+    def externalize_guidef(self, def_file_name=None):
         self.__def_file_name = def_file_name is not None and def_file_name or "{}.gns".format(self.label)        
         from arjuna.tpi.enums import ArjunaOption
         ns_root_dir = self.config.get_arjuna_option_value(ArjunaOption.GUIAUTO_NAMESPACE_DIR).as_str()
-        self.__def_file_path = os.path.join(ns_root_dir, ns_dir, self.def_file_name)
+        self.__def_file_path = os.path.join(ns_root_dir, self.app.ns_dir, self.def_file_name)
         self.__guidef = GuiDef(self.__guimgr.name_store, self._automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
         # if register:
         #     self._register()

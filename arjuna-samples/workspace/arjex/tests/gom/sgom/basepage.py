@@ -1,12 +1,11 @@
 import unittest
-from arjuna.interact.gui.gom.invoker.gui import SimpleBaseGui
+from arjuna.interact.gui.gom import Page
 
-GNS_FMT = None
+class WPBasePage(Page):
 
-class WPBasePage(SimpleBaseGui):
-
-    def __init__(self, automator):
-        super().__init__(automator, "{}_wordpress".format(GNS_FMT.lower()))
+    def __init__(self, app, automator):
+        super().__init__(app, automator)
+        self.externalize_guidef()
         # Trick to use assertions outside of a unittest test
         self._asserter = unittest.TestCase('__init__')
 
@@ -16,5 +15,7 @@ class WPBasePage(SimpleBaseGui):
 
         self.element("logout_confirm").click()
         self.element("logout_msg").wait_until_visible()
+        from sgom.home import HomePage
+        return HomePage(self.app, self._automator)
 
 
