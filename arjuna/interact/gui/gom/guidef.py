@@ -80,7 +80,7 @@ class GuiFactory:
 
     @classmethod
     def create_appdef_from_dir(cls, name, automator, app_def_dir):
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.core.enums import ArjunaOption
         considered_path = app_def_dir
         if not os.path.isdir(considered_path):
             ns_dir = automator.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)

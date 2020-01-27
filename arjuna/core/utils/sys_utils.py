@@ -27,7 +27,7 @@ def is_os_windows():
     return platform.system() == "Windows"
 
 def cexit():
-	from arjuna.tpi import Arjuna
+	from arjuna import Arjuna
 	Arjuna.get_console().display_error("Exiting...")
 	sys.exit()
 

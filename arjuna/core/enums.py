@@ -9,9 +9,8 @@ class ArjunaOption(Enum):
     LOG_NAME = auto()
 
     LOG_DIR = auto()
-
-    LOG_CONSOLE_LEVEL = auto()
     LOG_FILE_LEVEL = auto()
+    LOG_CONSOLE_LEVEL = auto()
 
     PROJECT_NAME = auto()
     PROJECT_ROOT_DIR = auto()

@@ -196,7 +196,10 @@ class ArjunaConfig(AbstractConfig):
 
     def _validate_key(self, key):
         if not isinstance(key, ArjunaOption):
-            raise Exception("Key must be an enum consts of type ArjunaOption")
+            try:
+                ArjunaOption[key.name]
+            except:
+                raise Exception("Key must be an enum const of type ArjunaOption")
 
     def as_json_dict(self):
         out = {k.name: v for k,v in super().as_json_dict().items()}

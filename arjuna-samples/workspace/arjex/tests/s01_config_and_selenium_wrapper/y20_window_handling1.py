@@ -1,5 +1,4 @@
-from arjuna.tpi import Arjuna
-from arjuna.interact.gui.helpers import With
+from arjuna import *
 
 from commons import *
 

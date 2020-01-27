@@ -131,7 +131,7 @@ class ArjunaSingleton:
         return copy.deepcopy(self.user_options)
 
     def __load_console(self):
-        from arjuna import ArjunaOption
+        from arjuna.core.enums import ArjunaOption
         dl = logging.getLevelName(self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_CONSOLE_LEVEL).as_str().upper())
         log_dir = self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_DIR).as_str()
         if not os.path.isdir(log_dir):

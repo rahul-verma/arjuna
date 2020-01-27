@@ -46,7 +46,7 @@ class FileAggregator:
         self.files = []
         self.found_class_names = set()
         self.temp_map = {}
-        from arjuna.tpi import Arjuna
+        from arjuna import Arjuna
         self.logger = Arjuna.get_logger()
         self.console = Arjuna.get_console()
 

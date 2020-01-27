@@ -38,6 +38,7 @@ PRIORITY: GNS
 - Composite GOM - Done
 - Single context GNS. Make it the default. - Done
 - Check parameterization for identifier pulled from GNS - Done
+
 PRIORITY: Nested Element Finding
 PRIORITY: Do clean-up of With logic. Simplify.
 

@@ -22,7 +22,7 @@ limitations under the License.
 import sys
 import re
 
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.core.enums import ArjunaOption
 
 def ustr(input):
     return (str(input)).upper()

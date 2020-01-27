@@ -37,8 +37,6 @@ from arjuna.core.reader.hocon import HoconFileReader, HoconConfigDictReader
 from arjuna.configure.invoker.config import CliArgsConfig
 from .validation import *
 
-from arjuna.tpi.enums import ArjunaOption
-
 blank_groups_xml = '''<groups>
     <group name="everything">
         <pickers>
@@ -198,7 +196,7 @@ class __RunCommand(Command):
         for parent in self.parents:
             parent.process(arg_dict)
 
-        from arjuna.tpi import Arjuna
+        from arjuna import Arjuna
         project_root_dir = arg_dict["project.root.dir"]
         del arg_dict["project.root.dir"]
         Arjuna.init(project_root_dir, CliArgsConfig(arg_dict))

@@ -1,4 +1,4 @@
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.core.enums import ArjunaOption
 from arjuna.client.core.action import *
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 

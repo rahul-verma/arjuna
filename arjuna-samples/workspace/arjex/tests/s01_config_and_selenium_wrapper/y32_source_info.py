@@ -1,6 +1,4 @@
-from arjuna.tpi import Arjuna
-from arjuna.interact.gui.helpers import With, GuiActionConfig
-
+from arjuna import *
 from commons import *
 
 def print_source_info(source):

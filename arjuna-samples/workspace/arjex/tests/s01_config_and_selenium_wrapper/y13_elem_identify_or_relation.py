@@ -1,6 +1,5 @@
+from arjuna import *
 from commons import *
-from arjuna.interact.gui.helpers import With
-from arjuna.tpi.guiauto import WebApp
 
 init_arjuna()
 wordpress = create_wordpress_app()
