@@ -1,10 +1,10 @@
 import unittest
-from arjuna.interact.gui.gom import Page
+from arjuna import Page
 
 class WPBasePage(Page):
 
-    def __init__(self, app, automator):
-        super().__init__(app=app, automator=automator)
+    def __init__(self, source_gui):
+        super().__init__(source_gui=source_gui)
         self.externalize_guidef()
 
     def logout(self):
@@ -14,6 +14,6 @@ class WPBasePage(Page):
         self.element("logout_confirm").click()
         self.element("logout_msg").wait_until_visible()
         from sgom.home import HomePage
-        return HomePage(self.app, self.automator)
+        return HomePage(self)
 
 

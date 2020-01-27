@@ -1,9 +1,7 @@
 import unittest
 import time
 
-from arjuna.tpi import Arjuna
-from arjuna.interact.gui.helpers import With
-from arjuna.interact.gui.gom import WebApp
+from arjuna import *
 
 class WPBaseTest(unittest.TestCase):
 

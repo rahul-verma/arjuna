@@ -16,7 +16,7 @@ class HomePage(WPBasePage):
         self.element(self.loc.submit).click()
 
         self.element(self.loc.view_site).wait_until_visible()
-        return DashboardPage(self.app, self.automator)
+        return DashboardPage(self)
 
     def login_with_default_creds(self):
         user, pwd = self.config.get_user_option_value("wp.users.admin").split_as_str_list()

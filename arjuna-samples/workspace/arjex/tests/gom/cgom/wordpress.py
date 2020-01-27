@@ -1,5 +1,4 @@
-from arjuna.tpi import Arjuna
-from arjuna.interact.gui.gom import WebApp
+from arjuna import *
 from .home import HomePage
 
 class WordPress(WebApp):
@@ -16,4 +15,4 @@ class WordPress(WebApp):
 
     def launch(self):
         super().launch()
-        return HomePage(self, self.automator)
+        return HomePage(self)

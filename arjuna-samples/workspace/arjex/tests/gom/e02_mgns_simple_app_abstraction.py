@@ -1,9 +1,7 @@
 import unittest
 import time
 
-from arjuna.tpi import Arjuna
-from arjuna.interact.gui.helpers import With
-from arjuna.interact.gui.gom import WebApp
+from arjuna import *
 
 class WPBaseTest(unittest.TestCase):
 
@@ -40,7 +38,7 @@ class WPBaseTest(unittest.TestCase):
         self.wordpress.ui.element(With.gns_name("password").format(roLE="user")).text = pwd
         self.wordpress.ui.element("submit").click()
 
-        self.wordpress.ui.element("view-site").wait_until_visible()
+        self.wordpress.ui.element("view_site").wait_until_visible()
 
     def logout(self):
         url = self.config.get_user_option_value("wp.logout.url").as_str()

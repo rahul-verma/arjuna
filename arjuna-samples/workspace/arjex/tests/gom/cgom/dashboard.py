@@ -8,4 +8,4 @@ class DashboardPage(WPFullPage):
 
     def go_to_settings(self):
         self.element(self.loc.settings).click()
-        return SettingsPage(self.app, self.automator)
+        return SettingsPage(self)
