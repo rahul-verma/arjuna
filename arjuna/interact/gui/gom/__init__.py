@@ -3,12 +3,13 @@ from .gui import *
 class Page(AppPortion):
 
     def __init__(self, app, automator, *, label=None):
-        super().__init__(app, automator, label=label)
+        super().__init__(app=app, automator=automator, label=label)
 
 class Widget(AppPortion):
 
     def __init__(self, page, *, label=None):
-        super().__init__(page.app, page._automator, label=label)    
+        super().__init__(app=page.app, automator=page.automator, label=label)   
+        self.__page = page
 
     @property
     def page(self):
@@ -24,14 +25,14 @@ class App(Gui, metaclass=abc.ABCMeta):
         self.__ns_dir = ns_dir
 
     @property
-    def _automator(self):
+    def automator(self):
         return self.__automator
 
     @property
     def ns_dir(self):
         return self.__ns_dir
 
-    def _launch_automator(self):
+    def _launchautomator(self):
         # Default Gui automation engine is Selenium
         from arjuna.interact.gui.auto.automator import GuiAutomator
         self.__automator = GuiAutomator(self.config, self.ext_config)
@@ -41,7 +42,7 @@ class App(Gui, metaclass=abc.ABCMeta):
         return self.__ui
 
     def _create_default_ui(self):
-        self.__ui = Page(self, self._automator, label="{}-Def-UI".format(self.label))
+        self.__ui = Page(self, self.automator, label="{}-Def-UI".format(self.label))
 
     @abc.abstractmethod
     def launch(self):
@@ -64,10 +65,10 @@ class WebApp(App):
         return self.__base_url
 
     def launch(self, blank_slate=False):
-        self._launch_automator()
+        self._launchautomator()
         if not blank_slate:
-            self._automator.browser.go_to_url(self.base_url)
+            self.automator.browser.go_to_url(self.base_url)
         self._create_default_ui()
 
     def quit(self):
-        self._automator.quit()
+        self.automator.quit()

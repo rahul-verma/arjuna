@@ -9,6 +9,8 @@ class WPBaseTest(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        Arjuna.init("/Users/rahulverma/Documents/github_tm/arjuna/arjuna-samples/workspace/arjex")
+        self.__config = Arjuna.get_ref_config()
         self.__app = None
 
     @property
@@ -20,7 +22,6 @@ class WPBaseTest(unittest.TestCase):
         return self.__config
 
     def setUp(self):
-        super().setUp()
         self.__app = WebApp(base_url=self.config.get_user_option_value("wp.login.url").as_str())
         self.wordpress.launch()
         self.wordpress.ui.externalize_guidef(ns_dir="sgns_wordpress_singlefile", def_file_name="WordPress.gns")

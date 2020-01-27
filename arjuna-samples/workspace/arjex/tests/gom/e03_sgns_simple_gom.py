@@ -14,7 +14,6 @@ class WPBaseTest(unittest.TestCase):
         return self.__app
 
     def setUp(self):
-        super().setUp()
         self.__app = WordPress()
         home = self.app.launch()
         self.dashboard_page = home.login_with_default_creds()

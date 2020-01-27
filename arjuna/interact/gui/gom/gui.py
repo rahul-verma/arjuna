@@ -1,12 +1,19 @@
 import abc
 import os
 from enum import Enum
+import unittest
 
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 
 from .guidef import *
 
-class Gui:
+class AsserterMixIn:
+
+    def __init__(self):
+        # Trick to use assertions outside of a unittest test
+        self._asserter = unittest.TestCase('__init__')
+
+class Gui(AsserterMixIn):
 
     def __init__(self, *, config=None, ext_config=None, label=None):
         '''
@@ -47,7 +54,7 @@ class Gui:
 
 class AppPortion(Gui):
 
-    def __init__(self, app, automator, *, label=None, parent=None):
+    def __init__(self, *, app, automator, label=None, parent=None):
         super().__init__(config=automator.config, ext_config=automator.ext_config, label=label)
         self.__app = app
         self.__automator = automator
@@ -60,19 +67,23 @@ class AppPortion(Gui):
         self.__def_file_path = None
 
     @property
-    def _automator(self):
+    def automator(self):
         return self.__automator
 
     @property
     def gui_def(self):
         return self.__guidef
 
-    def externalize_guidef(self, def_file_name=None):
+    def externalize_guidef(self, ns_dir=None, def_file_name=None):
+        print(self.__class__.__name__)
         self.__def_file_name = def_file_name is not None and def_file_name or "{}.gns".format(self.label)        
         from arjuna.tpi.enums import ArjunaOption
+        print(self.__class__.__name__)
+        print(ns_dir)
+        ns_dir = ns_dir and ns_dir or self.app.ns_dir
         ns_root_dir = self.config.get_arjuna_option_value(ArjunaOption.GUIAUTO_NAMESPACE_DIR).as_str()
-        self.__def_file_path = os.path.join(ns_root_dir, self.app.ns_dir, self.def_file_name)
-        self.__guidef = GuiDef(self.__guimgr.name_store, self._automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
+        self.__def_file_path = os.path.join(ns_root_dir, ns_dir, self.def_file_name)
+        self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
         # if register:
         #     self._register()
 
@@ -87,10 +98,6 @@ class AppPortion(Gui):
     @property
     def app(self):
         return self.__app
-
-    @property
-    def _automator(self):
-        return self.__automator
 
     def reach_until(self):
         # Children can override and write any necessary loading instructions
@@ -140,19 +147,19 @@ class AppPortion(Gui):
         return self.impl_gui.browser
 
     def element(self, *str_or_with_locators):
-        return self._automator.element(self.convert_to_with_lmd(*str_or_with_locators))
+        return self.automator.element(self.convert_to_with_lmd(*str_or_with_locators))
 
     def multi_element(self, *str_or_with_locators):
-        return self._automator.multi_element(self.convert_to_with_lmd(*str_or_with_locators))
+        return self.automator.multi_element(self.convert_to_with_lmd(*str_or_with_locators))
 
     def dropdown(self, *str_or_with_locators):
-        return self._automator.dropdown(self.convert_to_with_lmd(*str_or_with_locators))
+        return self.automator.dropdown(self.convert_to_with_lmd(*str_or_with_locators))
 
     def radio_group(self, *str_or_with_locators):
-        return self._automator.radio_group(self.convert_to_with_lmd(*str_or_with_locators))
+        return self.automator.radio_group(self.convert_to_with_lmd(*str_or_with_locators))
 
     def tab_group(self, *str_or_with_locators, tab_header_locator, content_relation_attr, content_relation_type):
-        return self._automator.tab_group(
+        return self.automator.tab_group(
             self.convert_to_with_lmd(*str_or_with_locators),
             tab_header_lmd=self.convert_to_with_lmd(tab_header_locator),
             content_relation_attr=content_relation_attr, 
@@ -160,25 +167,25 @@ class AppPortion(Gui):
         )
 
     def frame(self, *str_or_with_locators):
-        return self._automator.frame(self.convert_to_with_lmd(*str_or_with_locators))
+        return self.automator.frame(self.convert_to_with_lmd(*str_or_with_locators))
 
     @property
     def alert(self):
-        return self._automator.alert
+        return self.automator.alert
 
     @property
     def main_window(self):
-        return self._automator.main_window
+        return self.automator.main_window
 
     def child_window(self, *str_or_with_locators):
-        return self._automator.child_window(self.convert_to_with_lmd(*str_or_with_locators))
+        return self.automator.child_window(self.convert_to_with_lmd(*str_or_with_locators))
 
     @property
     def browser(self):
-        return self._automator.browser
+        return self.automator.browser
 
     def set_slomo(self, on, interval=None):
-        self._automator.set_slomo(on, interval)
+        self.automator.set_slomo(on, interval)
 
     def execute_javascript(self, js):
-        return self._automator.execute_javascript(js)
+        return self.automator.execute_javascript(js)

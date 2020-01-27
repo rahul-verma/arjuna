@@ -6,8 +6,6 @@ class WPBasePage(Page):
     def __init__(self, app, automator):
         super().__init__(app, automator)
         self.externalize_guidef()
-        # Trick to use assertions outside of a unittest test
-        self._asserter = unittest.TestCase('__init__')
 
     def logout(self):
         url = self.config.get_user_option_value("wp.logout.url").as_str()
@@ -16,6 +14,6 @@ class WPBasePage(Page):
         self.element("logout_confirm").click()
         self.element("logout_msg").wait_until_visible()
         from sgom.home import HomePage
-        return HomePage(self.app, self._automator)
+        return HomePage(self.app, self.automator)
 
 

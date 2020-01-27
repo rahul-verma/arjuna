@@ -1,20 +1,22 @@
 import unittest
 
-from base import BaseTest
-from cgom import basepage, widgets
-from cgom.home import HomePage
+from cgom.wordpress import WordPress
 
-class WPBaseTest(BaseTest):
+class WPBaseTest(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
-        basepage.GNS_FMT = "MGNS"
-        widgets.GNS_FMT = "MGNS"
         super().__init__(*args, **kwargs)
+        self.__app = None
         self.dashboard_page = None
 
+    @property
+    def app(self):
+        return self.__app
+
     def setUp(self):
-        super().setUp()
-        self.dashboard_page = HomePage(self.automator).login_with_default_creds()
+        self.__app = WordPress(gns_format="mgns")
+        home = self.app.launch()
+        self.dashboard_page = home.login_with_default_creds()
 
     def tearDown(self):
         self.dashboard_page.top_nav.logout()

@@ -1,13 +1,10 @@
-from arjuna.interact.gui.gom.invoker.gui import SimpleBaseWidget
-from.mixnins import AsserterMixIn
+from arjuna.interact.gui.gom import Widget
 
-GNS_FMT = None
+class WPBaseWidget(Widget):
 
-class WPBaseWidget(SimpleBaseWidget, AsserterMixIn):
-
-    def __init__(self, automator, parent):
-        super().__init__(automator, parent, "{}_wordpress/widgets".format(GNS_FMT.lower()))
-
+    def __init__(self, parent):
+        super().__init__(parent)
+        self.externalize_guidef(ns_dir="{}_wordpress/widgets".format(self.app.gns_format.lower()))
 
 class LeftNavSideBar(WPBaseWidget):
 
@@ -15,7 +12,7 @@ class LeftNavSideBar(WPBaseWidget):
     def settings(self):
         from .settings import SettingsPage
         self.element("settings").click()
-        return SettingsPage(self.automator)
+        return SettingsPage(self.app, self.automator)
 
 class TopNavBar(WPBaseWidget):
 
@@ -25,3 +22,6 @@ class TopNavBar(WPBaseWidget):
 
         self.element("logout_confirm").click()
         self.element("logout_msg").wait_until_visible()
+
+        from .home import HomePage
+        return HomePage(self.app, self.automator)

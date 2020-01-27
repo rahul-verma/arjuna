@@ -5,4 +5,4 @@ class DashboardPage(WPBasePage):
 
     def go_to_settings(self):
         self.element("settings").click()
-        return SettingsPage(self.app, self._automator)
+        return SettingsPage(self.app, self.automator)
