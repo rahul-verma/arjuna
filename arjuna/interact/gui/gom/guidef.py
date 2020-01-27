@@ -12,12 +12,12 @@ class GuiDef:
         Arjuna does a lazy loading of Gui Definitions. This means a context A GuiDef will lead to loading of all contexts centrally, but use only the one it needs to avoid repeat processing.
     '''
 
-    def __init__(self, name_store, namespace_dir, automator, label, def_file_path):
+    def __init__(self, name_store, automator, label, def_file_path): # namespace_dir, 
         self.__name_store = name_store
-        self.__namespace_dir = namespace_dir
+        # self.__namespace_dir = namespace_dir
         self.__automator = automator
         self.__config = automator.config
-        self.__auto_context = self.config.get_guiauto_context()
+        self.__auto_context = self.config.guiauto_context
         self.__file_def_path = def_file_path
         self.__ns = None
         ns_name = "file_ns::" + self.__file_def_path.lower()

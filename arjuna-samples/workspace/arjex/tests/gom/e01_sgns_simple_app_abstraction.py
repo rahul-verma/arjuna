@@ -1,19 +1,31 @@
 import unittest
 import time
 
+from arjuna.tpi import Arjuna
 from arjuna.tpi.guiauto.helpers import With
-from arjuna.interact.gui.gom.invoker.gui import DefaultGui
+from arjuna.interact.gui.gom import WebApp
 
-from base import BaseTest
-
-class WPBaseTest(BaseTest):
+class WPBaseTest(unittest.TestCase):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        Arjuna.init("/Users/rahulverma/Documents/github_tm/arjuna/arjuna-samples/workspace/arjex")
+        self.__config = Arjuna.get_ref_config()
+        self.__app = None
+
+    @property
+    def wordpress(self):
+        return self.__app
+
+    @property
+    def config(self):
+        return self.__config
 
     def setUp(self):
         super().setUp()
-        self.app = DefaultGui(self.automator, "sgns_wordpress_singlefile", "WordPress.gns")
+        self.__app = WebApp(base_url=self.config.get_user_option_value("wp.login.url").as_str())
+        self.wordpress.launch()
+        self.wordpress.ui.externalize_guidef(ns_dir="sgns_wordpress_singlefile", def_file_name="WordPress.gns")
         self.login_with_default_creds()
 
     def tearDown(self):
@@ -21,32 +33,30 @@ class WPBaseTest(BaseTest):
         #self.app.automator.quit()
 
     def login_with_default_creds(self):
-        self.app.browser.go_to_url(self.config.get_user_option_value("wp.login.url").as_str())
-
         user, pwd = self.config.get_user_option_value("wp.users.admin").split_as_str_list()
 
         # Login
-        self.app.element(With.gns_name("login").format(RoLe="user")).set_text(user)
-        self.app.element(With.gns_name("password").format(roLE="user")).set_text(pwd)
-        self.app.element("submit").click()
+        self.wordpress.ui.element(With.gns_name("login").format(RoLe="user")).text = user
+        self.wordpress.ui.element(With.gns_name("password").format(roLE="user")).text = pwd
+        self.wordpress.ui.element("submit").click()
 
-        self.app.element("view-site").wait_until_visible()
+        self.wordpress.ui.element("view-site").wait_until_visible()
 
     def logout(self):
         url = self.config.get_user_option_value("wp.logout.url").as_str()
-        self.app.browser.go_to_url(url)
+        self.wordpress.ui.browser.go_to_url(url)
 
-        self.app.element("logout_confirm").click()
-        self.app.element("logout_msg").wait_until_visible()
+        self.wordpress.ui.element("logout_confirm").click()
+        self.wordpress.ui.element("logout_msg").wait_until_visible()
 
 class SimpleAppTest(WPBaseTest):
 
     def test_author_type_selection(self):
-        self.app.element("Settings").click()
+        self.wordpress.ui.element("Settings").click()
 
-        role_select = self.app.dropdown("role")
+        role_select = self.wordpress.ui.dropdown("role")
         role_select.select_value("editor")
 
-        self.assertEqual("editor", role_select.first_selected_option_value, "Author type selection failed.")
+        self.assertEqual("editor", role_select.value, "Author type selection failed.")
 
 unittest.main()

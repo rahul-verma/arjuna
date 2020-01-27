@@ -14,7 +14,7 @@ class WebAlertHandler:
             return self.__alert
         else:
             self.wait()
-            from arjuna.interact.gui.auto.element.webalert import WebAlert
+            from arjuna.interact.gui.auto.component.webalert import WebAlert
             self.__alert_present = True
             alert = WebAlert(self.automator)
             self.__alert = alert

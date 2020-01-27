@@ -1,48 +1,48 @@
 from commons import *
 from arjuna.tpi.guiauto.helpers import With
+from arjuna.tpi.guiauto import WebApp
 
 init_arjuna()
 
-automator = None
+wordpress = None
 element = None
 
 def setup():
-    global automator
-    automator = launch_automator()
-    go_to_wp_home(automator)
+    global wordpress
+    wordpress = create_wordpress_app()
 
 def cleanup():
-    global automator
+    global wordpress
     global element
     print(element.source.content.root)
-    automator.quit()
+    wordpress.quit()
     element = None
-    automator = None
+    wordpress = None
 
 setup()
-element = automator.element(With.javascript("return document.getElementById('wp-submit')"))
+element = wordpress.ui.element(With.javascript("return document.getElementById('wp-submit')"))
 cleanup()
 
 setup()
-element = automator.element(With.javascript("return document.getElementsByClassName('input')"))
+element = wordpress.ui.element(With.javascript("return document.getElementsByClassName('input')"))
 cleanup()
 
 # setup()
-# element = automator.element(With.javascript("return null"))
+# element = wordpress.ui.element(With.javascript("return null"))
 # cleanup()
 
 # setup()
-# element = automator.element(With.javascript("return undefined"))
+# element = wordpress.ui.element(With.javascript("return undefined"))
 # cleanup()
 
 # setup()
-# element = automator.element(With.javascript("return []"))
+# element = wordpress.ui.element(With.javascript("return []"))
 # cleanup()
 
 # setup()
-# element = automator.element(With.javascript("return 1"))
+# element = wordpress.ui.element(With.javascript("return 1"))
 # cleanup()
 
 # setup()
-# element = automator.element(With.javascript("return [1,2]"))
+# element = wordpress.ui.element(With.javascript("return [1,2]"))
 # cleanup()

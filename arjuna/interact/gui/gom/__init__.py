@@ -44,7 +44,7 @@ class App(Gui, metaclass=abc.ABCMeta):
 
 class WebApp(App):
 
-    def __init__(self, *, base_url, config=None, ext_config=None, label=None):
+    def __init__(self, *, base_url=None, blank_slate=False, config=None, ext_config=None, label=None):
         '''
             Creates and returns GuiAutomator object for provided config.
             If no configuration is provided reference configuration is used.
@@ -52,15 +52,16 @@ class WebApp(App):
         '''
         super().__init__(config=config, ext_config=ext_config, label=label)
         from arjuna.tpi.enums import ArjunaOption
-        self.__base_url = base_url is not None and base_url or self.config.get_arjuna_option_value(ArjunaOption.AUT_BASE_URL)
+        self.__base_url = base_url is not None and base_url or self.config.get_arjuna_option_value(ArjunaOption.AUT_BASE_URL).as_str()
 
     @property
     def base_url(self):
         return self.__base_url
 
-    def launch(self):
+    def launch(self, blank_slate=False):
         self._launch_automator()
-        self._automator.browser.go_to_url(self.base_url)
+        if not blank_slate:
+            self._automator.browser.go_to_url(self.base_url)
         self._create_default_ui()
 
     def quit(self):

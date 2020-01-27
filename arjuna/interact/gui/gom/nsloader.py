@@ -20,7 +20,7 @@ class GuiNamespaceLoaderFactory:
     @classmethod
     def create_namespace_loader(cls, config, ns_file_path):
         multi_context_enabled = config.get_arjuna_option_value(ArjunaOption.GUIAUTO_DEF_MULTICONTEXT).as_bool()
-        context = multi_context_enabled and None or config.get_guiauto_context()
+        context = multi_context_enabled and None or config.guiauto_context
         _, file_extension = os.path.splitext(ns_file_path)
         ext = file_extension.upper()[1:]
         considered_path = ns_file_path

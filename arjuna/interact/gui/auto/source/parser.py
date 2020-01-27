@@ -69,7 +69,8 @@ class ElementXMLSourceParser:
 
         self.__content = SourceContent(all=self.__full_source, root=self.__self_source, inner=self.__inner_html, text=self.__text_content)
 
-    def get_tag_name(self):
+    @property
+    def tag(self):
         return self.__tag
 
     def get_attr_names(self):
@@ -109,31 +110,31 @@ class MultiElementSource:
         self.__instances = instances
 
     def get_full_content(self):
-        return os.linesep.join([e.get_source().get_full_content() for e in self.__instances])
+        return os.linesep.join([e.source.content.all for e in self.__instances])
 
     def get_inner_content(self):
-        return os.linesep.join([e.get_source().get_inner_content() for e in self.__instances])
+        return os.linesep.join([e.source.content.inner for e in self.__instances])
 
     def get_text_content(self):
-        return os.linesep.join([e.get_source().get_text_content() for e in self.__instances])
+        return os.linesep.join([e.source.content.root for e in self.__instances])
 
     def get_root_content(self):
-        return os.linesep.join([e.get_source().get_root_content() for e in self.__instances])
+        return os.linesep.join([e.source.content.root for e in self.__instances])
 
     def _get_root_content_as_list(self):
-        return [e.get_source().get_root_content() for e in self.__instances]
+        return [e.source.content.root for e in self.__instances]
 
     def get_tag_names(self):
-        return [e.get_source().get_tag_name() for e in self.__instances]
+        return [e.source.tag for e in self.__instances]
 
     def get_text_contents(self):
-        return [e.get_source().get_text_content() for e in self.__instances]
+        return [e.source.get_text_content() for e in self.__instances]
 
     def get_values(self):
-        return [e.get_source().get_attr_value("value") for e in self.__instances]
+        return [e.source.get_attr_value("value") for e in self.__instances]
 
     def get_attr_values(self, attr):
-        return [e.get_source().get_attr_value(attr) for e in self.__instances]
+        return [e.source.get_attr_value(attr) for e in self.__instances]
 
 class FrameSource:
 

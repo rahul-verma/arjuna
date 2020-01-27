@@ -1,25 +1,23 @@
-from arjuna.tpi import Arjuna
-from arjuna.tpi.guiauto.helpers import With
-
 from commons import *
+from arjuna.tpi.guiauto.helpers import With
+from arjuna.tpi.guiauto import WebApp
 
 init_arjuna()
-automator = launch_automator()
-login(automator)
+wordpress = login()
 
-automator.execute_javascript("alert('dummy')")
-automator.alert.confirm()
-automator.execute_javascript("alert('dummy')")
-automator.alert.dismiss()
+wordpress.ui.execute_javascript("alert('dummy')")
+wordpress.ui.alert.confirm()
+wordpress.ui.execute_javascript("alert('dummy')")
+wordpress.ui.alert.dismiss()
 
-automator.execute_javascript("alert('dummy')")
-alert = automator.alert
+wordpress.ui.execute_javascript("alert('dummy')")
+alert = wordpress.ui.alert
 assert alert.text == "dummy"
 alert.confirm()
 
-automator.execute_javascript("prompt('Are You Sure?')")
-alert = automator.alert
-alert.send_text("Yes")
+wordpress.ui.execute_javascript("prompt('Are You Sure?')")
+alert = wordpress.ui.alert
+alert.text = "Yes"
 alert.confirm()
 
-logout(automator)
+logout(wordpress)

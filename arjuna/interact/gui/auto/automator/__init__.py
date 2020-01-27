@@ -169,15 +169,15 @@ class GuiAutomator(ElementContainer,Dispatchable):
         return m_guielement
 
     def dropdown(self, lmd, option_container_lmd=None, option_lmd=None):
-        from arjuna.interact.gui.auto.element.dropdown import GuiWebSelect
+        from arjuna.interact.gui.auto.component.dropdown import GuiWebSelect
         return GuiWebSelect(self, lmd, option_container_lmd=option_container_lmd, option_lmd=option_lmd)
 
     def radio_group(self, lmd):
-        from arjuna.interact.gui.auto.element.radio_group import GuiWebRadioGroup
+        from arjuna.interact.gui.auto.component.radio_group import GuiWebRadioGroup
         return GuiWebRadioGroup(self, lmd)
 
     def tab_group(self, lmd, *, tab_header_lmd, content_relation_attr, content_relation_type):
-        from arjuna.interact.gui.auto.element.tabs import TabGroup
+        from arjuna.interact.gui.auto.component.tabs import TabGroup
         return TabGroup(
             self, 
             lmd, 
@@ -185,3 +185,14 @@ class GuiAutomator(ElementContainer,Dispatchable):
             content_relation_attr=content_relation_attr, 
             content_relation_type=content_relation_type
         )
+
+    def execute_javascript(self, js):
+        return self.browser.execute_javascript(js)
+
+    ################################
+    # Components
+    ################################
+
+    @property
+    def alert(self):
+        return self.alert_handler.create_alert()

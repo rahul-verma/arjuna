@@ -1,13 +1,11 @@
-from arjuna.tpi import Arjuna
-from arjuna.tpi.guiauto.helpers import With
-
 from commons import *
+from arjuna.tpi.guiauto.helpers import With
+from arjuna.tpi.guiauto import WebApp
 
 init_arjuna()
-automator = launch_automator()
-login(automator)
+wordpress = login()
 
-automator.execute_javascript("document.getElementsByClassName('welcome-view-site')[0].click();")
-automator.element(With.link_text("Site Admin")).wait_until_clickable()
+wordpress.ui.execute_javascript("document.getElementsByClassName('welcome-view-site')[0].click();")
+wordpress.ui.element(With.link_text("Site Admin")).wait_until_clickable()
 
-logout(automator)
+logout(wordpress)

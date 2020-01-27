@@ -3,13 +3,13 @@ import os
 
 from arjuna.interact.gui.auto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
-from arjuna.interact.gui.auto.element.guielement import GuiElement
+from arjuna.interact.gui.auto.base.interactable import Interactable
 from arjuna.interact.gui.auto.source.parser import *
 
-class _GuiPartialElement(GuiElement):
+class _GuiPartialElement(Interactable):
 
     def __init__(self, automator, multi_element, instance_number: int, dispatcher_element):
-        super().__init__(automator, multi_element) #, find=False)
+        Interactable.__init__(self, automator)
         self.__multi_element = multi_element
         self.__instance_number = instance_number
         # dispatcher.set_partial(self.__instance_number)
@@ -98,12 +98,12 @@ class GuiMultiElement(Locatable):
     def get_instance_by_visible_text(self, text):
         texts = self.__get_all_texts()
         first_index = self.__find_first_text_index(texts, text)
-        return self.get_instance_at_index(first_index)
+        return self[first_index]
 
     def get_instance_by_value(self, value):
         values = self.__get_all_values()
         first_index = self.__find_first_value_index(values, value)
-        return self.get_instance_at_index(first_index)
+        return self[first_index]
 
     def wait_until_visible(self):
         self.find_if_not_found()
@@ -116,14 +116,13 @@ class GuiMultiElement(Locatable):
             return None
 
     def are_selected(self):
-        self.find_if_not_found()
         return [instance.is_selected() for instance in self.__instances]
 
     # getting index attribute when it does not exist retursn value attribute.
     # So, not going the Selenium way. Setu would treat index as computer counting.
     def has_index_selected(self, index):
         # self.find_if_not_found()
-        return self.get_instance_at_index(index).is_selected()
+        return self[index].is_selected()
 
     # Ordinal is human counting
     def has_ordinal_selected(self, ordinal):
@@ -169,12 +168,8 @@ class GuiMultiElement(Locatable):
         except:
             raise Exception("No option in drop down is currenlty selected.")
         else:
-            return self.get_instance_at_index(first_index)
+            return self[first_index]
 
     @property
-    def source(self): #, refind=True, reload=True):
-        # if refind:
-        #     self.find_if_not_found()
-        # if reload:
-        #     self.load_source_parser()
+    def source(self):
         return self.__source_parser

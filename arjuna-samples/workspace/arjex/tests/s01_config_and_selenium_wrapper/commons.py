@@ -6,6 +6,11 @@ def init_arjuna():
     from arjuna.tpi import Arjuna
     return Arjuna.init("/Users/rahulverma/Documents/github_tm/arjuna/arjuna-samples/workspace/arjex")
 
+def create_app():
+    app = WebApp()
+    app.launch(blank_slate=True)
+    return app
+    
 def create_wordpress_app():
     url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
     wordpress = WebApp(base_url=url)

@@ -51,7 +51,8 @@ class AppPortion(Gui):
         super().__init__(config=automator.config, ext_config=automator.ext_config, label=label)
         self.__app = app
         self.__automator = automator
-        self.__guimgr = None
+        from arjuna.tpi import Arjuna
+        self.__guimgr = Arjuna.get_gui_mgr()
         self.__guidef = None
 
         self.__gui_registered = False
@@ -71,7 +72,7 @@ class AppPortion(Gui):
         from arjuna.tpi.enums import ArjunaOption
         ns_root_dir = self.config.get_arjuna_option_value(ArjunaOption.GUIAUTO_NAMESPACE_DIR).as_str()
         self.__def_file_path = os.path.join(ns_root_dir, ns_dir, self.def_file_name)
-
+        self.__guidef = GuiDef(self.__guimgr.name_store, self._automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
         # if register:
         #     self._register()
 
@@ -112,11 +113,6 @@ class AppPortion(Gui):
                     self.get_setu_id(),
                     str(e)
                 )
-
-    def define_gui(self, automator, label=None, name=None, qual_name=None, def_file_path=None):
-        gui_def = GuiDef(self.__guimgr.name_store, self.__guimgr.namespace_dir, automator, label, def_file_path)
-        gui = Gui(self, automator, gui_def, parent=self)
-        return gui
 
     def convert_to_with_lmd(self, *raw_str_or_with_locators):
         from arjuna.tpi.guiauto.helpers import With, WithType
@@ -183,3 +179,6 @@ class AppPortion(Gui):
 
     def set_slomo(self, on, interval=None):
         self._automator.set_slomo(on, interval)
+
+    def execute_javascript(self, js):
+        return self._automator.execute_javascript(js)

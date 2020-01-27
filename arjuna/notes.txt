@@ -18,28 +18,26 @@ Done y14 -> HardCoded.sleep
 Done y15 -> Basic element interactions.
 Done y16 -> auto finding and state checking works for basic interactions.
 Done y17 -> multielement.
-y18 -> Java script execution
-y19 -> alerts
-y20 -> Basic window handling
-y21 -> Window with title, partial title and content locator works. check notes for the found issue.
-y22 -> Frame handling.
-y23 -> Dropdown works. (Performance is slow. investigate.)
-y24 -> RadioGroup logic
-y25 -> Named arg formatting, case-insensitive.
-y26 -> With.javascript works as expected for success and failure scenarios (single element)
-y27 -> With.javascript works as expected for success and failure scenarios (multi element)
-y28 -> Pre state check works for basic element.
-y29 -> Dropdown pre state check off.
-y30 -> custom dropdown works (example - Bootstrap dropdown control)
-y31 -> Needs work on Narada side for suitable example controls
-y32 -> All source retrieval.
+Done y18 -> Java script execution
+Done y19 -> alerts
+Done y23 -> Dropdown works.
+Done y25 -> Named arg formatting, case-insensitive.
+Done y26 -> With.javascript works as expected for success and failure scenarios (single element)
+Done y27 -> With.javascript works as expected for success and failure scenarios (multi element)
+Done: y28 -> Pre state check works for basic element.
 
-GNS
+GOM
+Done e01 -> SGNS with simple App Model
+
+
+PRIORITY: GNS
 - Simple app abstraction - Done
 - Simple GOM - Done
 - Composite GOM - Done
 - Single context GNS. Make it the default. - Done
 - Check parameterization for identifier pulled from GNS - Done
+PRIORITY: Nested Element Finding
+PRIORITY: Do clean-up of With logic. Simplify.
 
 Action Chains (In progress)
 ---------------------------
@@ -47,6 +45,17 @@ Action Chains (In progress)
     GuiElement methods
         - hover
         - hover_and_click
+
+y20 -> Basic window handling
+y21 -> Window with title, partial title and content locator works. check notes for the found issue.
+y22 -> Frame handling.
+y24 -> RadioGroup logic
+y29 -> Dropdown pre state check off.
+y30 -> custom dropdown works (example - Bootstrap dropdown control)
+y31 -> Needs work on Narada side for suitable example controls
+y32 -> All source retrieval.
+
+
 
 Fine Tuning
 -----------
@@ -133,10 +142,6 @@ ueo
     Wait time should be overall wait time. Needs to be checked.
     Also check open windows at any point in time.
     May be we should check for window readiness and page load when a new window is launched using JavaScript.
-
-9. Look at dropdown logic in terms of number of inquiries sent to the browser
-    With XML parsing in place. It should be very quick. 
-    Evaluate.
 
 10. Create Arjuna Named Exceptions:
     - The exception from the tool or other relevant exceptions should be seen in the dig deeper details.

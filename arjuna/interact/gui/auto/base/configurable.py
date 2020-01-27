@@ -13,8 +13,10 @@ class Configurable:
     def settings(self):
         return self.__settings
 
-    def configure(self, settings):
-        self.__settings.update(settings)
+    def configure(self, config):
+        config = type(config) is dict and config or config.settings
+        self.__settings.update(config)
+        return self
 
     def _should_check_type(self):
         return self.settings[GuiActionConfigType.CHECK_TYPE]

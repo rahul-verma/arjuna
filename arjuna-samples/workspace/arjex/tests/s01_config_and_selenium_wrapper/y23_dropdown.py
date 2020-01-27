@@ -9,33 +9,31 @@ Arjuna tries to cater to all of them with a single abstraction - its DropDown ob
 3 will be covered later when element configuration has been discussed.
 '''
 
-from arjuna.tpi import Arjuna
-from arjuna.tpi.guiauto.helpers import With
-
 from commons import *
+from arjuna.tpi.guiauto.helpers import With
+from arjuna.tpi.guiauto import WebApp
 
 init_arjuna()
-automator = launch_automator()
-login(automator)
+wordpress = login()
 
-automator.element(With.link_text("Settings")).click()
+wordpress.ui.element(With.link_text("Settings")).click()
 
-role_select = automator.dropdown(With.id("default_role"))
+role_select = wordpress.ui.dropdown(With.id("default_role"))
 role_select.select_value("editor")
 
-role_select.select_visible_text("Subscriber")
+role_select.select_text("Subscriber")
 print(role_select.has_visible_text_selected("Subscriber"))
 print(role_select.has_value_selected("subscriber"))
 print(role_select.has_index_selected(2))
-print(role_select.first_selected_option_value)
-print(role_select.first_selected_option_text)
+print(role_select.value)
+print(role_select.text)
 
 role_select.select_index(4)
 print(role_select.has_index_selected(4))
 
 text = "Subscriber"
 
-role_select.send_option_text(text)
+role_select.text = text
 assert role_select.has_visible_text_selected("Subscriber") is True
 
-logout(automator)
+logout(wordpress)

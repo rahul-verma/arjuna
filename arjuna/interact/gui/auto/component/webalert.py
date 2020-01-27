@@ -18,8 +18,10 @@ class WebAlert:
         self.automator.dispatcher.dismiss_web_alert()
         self.automator.alert_handler.delete_alert()
 
-    def send_text(self, text):
-        self.automator.dispatcher.send_text_to_web_alert(text)
-
-    def get_text(self):
+    @property
+    def text(self):
         return self.automator.dispatcher.get_text_from_web_alert()
+
+    @text.setter
+    def text(self, text):
+        self.automator.dispatcher.send_text_to_web_alert(text)

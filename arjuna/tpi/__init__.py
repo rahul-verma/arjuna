@@ -357,6 +357,13 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.get_central_config()
 
     @classmethod
+    def get_gui_mgr(cls):
+        '''
+            Returns the central GUI Manager object that mangages namespaces.
+        '''
+        return cls.ARJUNA_SINGLETON.gui_mgr
+
+    @classmethod
     def get_ref_arjuna_option_value(cls, option):
         return cls.get_central_config().get_ref_arjuna_option_value(option)
 
