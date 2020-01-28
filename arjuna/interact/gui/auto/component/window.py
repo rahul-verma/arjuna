@@ -4,11 +4,16 @@ from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 
 class BasicWindow:
 
-    def __init__(self, automator):
+    def __init__(self, app, automator):
         super().__init__()
+        self.__app = app
         self.__automator = automator
         self.__window_handle = None
         self.__config = automator.config
+
+    @property
+    def app(self):
+        return self.__app
 
     @property
     def config(self):
@@ -47,8 +52,8 @@ class BasicWindow:
 
 class MainWindow(BasicWindow):
 
-    def __init__(self, automator):
-        super().__init__(automator)
+    def __init__(self, app, automator):
+        super().__init__(app, automator)
         self._set_handle(self.get_current_window_handle()) 
         self.__all_child_windows = {}
         self.__setu_id_map = {}
@@ -61,12 +66,13 @@ class MainWindow(BasicWindow):
         for handle in handles:
             if handle != self.handle:
                 if handle not in self.__all_child_windows:
-                    cwin = ChildWindow(self.automator, self, handle)
+                    cwin = ChildWindow(self.app, self.automator, self, handle)
                     self.__all_child_windows[handle] = cwin
                     new_handles.append(handle)
         return handles, new_handles
 
-    def get_latest_child_window(self):
+    @property
+    def latest_child_window(self):
         _, new_handles = self.get_all_child_window_handles()
         if not new_handles:
             raise Exception("No new window was launched.")
@@ -94,7 +100,7 @@ class MainWindow(BasicWindow):
     def get_current_window_handle(self):
         return self.automator.dispatcher.get_current_window_handle()
 
-    def define_child_window(self, locator_meta_data):
+    def child_window(self, locator_meta_data):
         all_child_handles, _ = self.get_all_child_window_handles()
         for handle in all_child_handles:
             cwin = self.__get_child_window(handle)
@@ -110,8 +116,11 @@ class MainWindow(BasicWindow):
                     for child_locator in locator.lvalue.locators:
                         try:
                             emd = SimpleGuiElementMetaData(child_locator.ltype.name, child_locator.lvalue)
-                            contained_element = self.automator.define_element(emd)
-                            contained_element.find()
+                            # The element for window is created in the context of an app.
+                            # Need to verify this logic.
+                            # and its impact on POM.
+                            contained_element = self.automator.element(self.app,emd)
+                            # contained_element.find()
                             return cwin
                         except Exception as e:
                             print(e)
@@ -145,8 +154,8 @@ class MainWindow(BasicWindow):
 
 class ChildWindow(BasicWindow):
 
-    def __init__(self, automator, main_window, handle):
-        super().__init__(automator)
+    def __init__(self, app, automator, main_window, handle):
+        super().__init__(app, automator)
         self.__main_window = main_window
         self._set_handle(handle) 
 

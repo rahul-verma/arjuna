@@ -147,28 +147,40 @@ class AppPortion(Gui):
     def browser(self):
         return self.impl_gui.browser
 
-    def element(self, *str_or_with_locators):
-        return self.automator.element(self, self.convert_to_with_lmd(*str_or_with_locators))
+    def element(self, *str_or_with_locators, iconfig=None):
+        return self.automator.element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
-    def multi_element(self, *str_or_with_locators):
-        return self.automator.multi_element(self.convert_to_with_lmd(*str_or_with_locators))
+    def multi_element(self, *str_or_with_locators, iconfig=None):
+        return self.automator.multi_element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
-    def dropdown(self, *str_or_with_locators):
-        return self.automator.dropdown(self.convert_to_with_lmd(*str_or_with_locators))
+    def dropdown(self, *str_or_with_locators, option_container_locator=None, option_locator=None, iconfig=None):
+        return self.automator.dropdown(
+            self, 
+            self.convert_to_with_lmd(*str_or_with_locators),
+            option_container_lmd=option_container_locator and self.convert_to_with_lmd(option_container_locator) or None,
+            option_lmd=option_locator and self.convert_to_with_lmd(option_locator) or None,
+            iconfig=iconfig
+        )
 
-    def radio_group(self, *str_or_with_locators):
-        return self.automator.radio_group(self.convert_to_with_lmd(*str_or_with_locators))
+    def radio_group(self, *str_or_with_locators, iconfig=None):
+        return self.automator.radio_group(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
-    def tab_group(self, *str_or_with_locators, tab_header_locator, content_relation_attr, content_relation_type):
+    def tab_group(self, *str_or_with_locators, tab_header_locator, content_relation_attr, content_relation_type, iconfig=None):
         return self.automator.tab_group(
+            self,
             self.convert_to_with_lmd(*str_or_with_locators),
             tab_header_lmd=self.convert_to_with_lmd(tab_header_locator),
             content_relation_attr=content_relation_attr, 
-            content_relation_type=content_relation_type
+            content_relation_type=content_relation_type, 
+            iconfig=iconfig
         )
 
-    def frame(self, *str_or_with_locators):
-        return self.automator.frame(self.convert_to_with_lmd(*str_or_with_locators))
+    @property
+    def dom_root(self):
+        return self.automator.dom_root(self)
+
+    def frame(self, *str_or_with_locators, iconfig=None):
+        return self.automator.frame(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
     @property
     def alert(self):
@@ -180,6 +192,13 @@ class AppPortion(Gui):
 
     def child_window(self, *str_or_with_locators):
         return self.automator.child_window(self.convert_to_with_lmd(*str_or_with_locators))
+
+    @property
+    def latest_child_window(self):
+        return self.automator.latest_child_window
+
+    def close_all_child_windows(self):
+        self.automator.close_all_child_windows()
 
     @property
     def browser(self):

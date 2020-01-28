@@ -1,36 +1,34 @@
+from commons import *
 from arjuna import *
 
-from commons import *
-
 init_arjuna()
-automator = launch_automator()
-login(automator)
+wordpress = login()
 
-automator.element(With.link_text("Posts")).click()
-automator.element(With.link_text("Add New")).click()
+wordpress.ui.element(With.link_text("Posts")).click()
+wordpress.ui.element(With.link_text("Add New")).click()
 
 tinymce = With.id("tinymce")
 publish = With.id("publish")
 
 # Frame by identifier and jump to root
-automator.frame(With.id("content_ifr")).focus()
-automator.element(tinymce).set_text("This is a test - frame by name.")
-automator.dom_root.focus()
-automator.element(publish).click()
+wordpress.ui.frame(With.id("content_ifr")).focus()
+wordpress.ui.element(tinymce).enter_text("This is a test - frame by name.")
+wordpress.ui.dom_root.focus()
+wordpress.ui.element(publish).click()
 
 # Frame by index
-automator.frame(With.index(0)).focus()
-automator.element(tinymce).set_text("This is a test - frame by index.")
+wordpress.ui.frame(With.index(0)).focus()
+wordpress.ui.element(tinymce).enter_text("This is a test - frame by index.")
 # Focusing on root from frame itself
-automator.dom_root.focus()
-automator.element(publish).click()
+wordpress.ui.dom_root.focus()
+wordpress.ui.element(publish).click()
 
 # jump to parent
-frame = automator.frame(With.xpath("//iframe"))
+frame = wordpress.ui.frame(With.xpath("//iframe"))
 print(frame)
 frame.focus()
-automator.element(tinymce).set_text("This is a test - jumping to parent after this.")
+wordpress.ui.element(tinymce).enter_text("This is a test - jumping to parent after this.")
 frame.parent.focus()
-automator.element(publish).click()
+wordpress.ui.element(publish).click()
 
-logout(automator)
+logout(wordpress)

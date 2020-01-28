@@ -1,0 +1,7 @@
+0.8.6
+-----
+- Automator is created in the context of an App.
+- Elements are created in the context of a GUI (App/Page/Widget)
+- Nested Element Finding.
+- Partial Element can be used to find elements as well.
+- Drodown, radiogroup, windows, frame etc work with new logic.

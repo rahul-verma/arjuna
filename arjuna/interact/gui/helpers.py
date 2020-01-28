@@ -1,37 +1,37 @@
 from enum import Enum, auto
 
-from arjuna.core.enums import GuiActionConfigType
+from arjuna.core.enums import GuiInteractionConfigType
 from arjuna.interact.gui.auto.finder.emd import ImplWith
 
-class _GuiActionConfigBuilder:
+class _GuiInteractionConfigBuilder:
 
     def __init__(self):
         self.__settings = dict()
 
     def check_type(self, flag):
-        self.__settings[GuiActionConfigType.CHECK_TYPE] = flag
+        self.__settings[GuiInteractionConfigType.CHECK_TYPE] = flag
         return self
 
     def check_pre_state(self, flag):
-        self.__settings[GuiActionConfigType.CHECK_PRE_STATE] = flag
+        self.__settings[GuiInteractionConfigType.CHECK_PRE_STATE] = flag
         return self
 
     def check_post_state(self, flag):
-        self.__settings[GuiActionConfigType.CHECK_POST_STATE] = flag
+        self.__settings[GuiInteractionConfigType.CHECK_POST_STATE] = flag
         return self
 
     def build(self):
-        return GuiActionConfig(self.__settings)
+        return GuiInteractionConfig(self.__settings)
 
 
-class GuiActionConfig:
+class GuiInteractionConfig:
     '''
         Stores configured values for behavior of actions on a given GuiElement.
     '''
 
     def __init__(self, settings):
         '''
-            settings is a dict of dict of GuiActionConfigType key/value pairs
+            settings is a dict of dict of GuiInteractionConfigType key/value pairs
         '''
         # 
         self.__settings = settings
@@ -48,7 +48,7 @@ class GuiActionConfig:
         '''
             Returns a builder object to construct object of this class incrementally.
         '''
-        return _GuiActionConfigBuilder()
+        return _GuiInteractionConfigBuilder()
 
 class GuiDriverExtendedConfig:
 

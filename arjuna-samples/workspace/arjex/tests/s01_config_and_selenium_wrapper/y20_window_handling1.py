@@ -1,24 +1,22 @@
+from commons import *
 from arjuna import *
 
-from commons import *
-
 init_arjuna()
-automator = launch_automator()
-login(automator)
+wordpress = login()
 
-main_win = automator.main_window
+main_win = wordpress.ui.main_window
 main_win.maximize()
 print(main_win.title)
 
-automator.execute_javascript("window.open('/abc')")
-cwin = automator.latest_child_window
+wordpress.ui.execute_javascript("window.open('/abc')")
+cwin = wordpress.ui.latest_child_window
 cwin.focus()
 print(cwin.title)
 cwin.close()
 
-automator.execute_javascript("window.open('https://rahulverma.net')")
-automator.execute_javascript("window.open('https://google.com')")
-automator.close_all_child_windows()
+wordpress.ui.execute_javascript("window.open('https://rahulverma.net')")
+wordpress.ui.execute_javascript("window.open('https://google.com')")
+wordpress.ui.close_all_child_windows()
 print(main_win.title)
 
-logout(automator)
+logout(wordpress)

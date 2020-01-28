@@ -1,13 +1,22 @@
-from .multielement import GuiMultiElement
-from .base_element import ElementConfig
+from arjuna.interact.gui.auto.base.configurable import Configurable
 
-# UUID is for client reference. Agent does not know about this.
-class GuiWebRadioGroup(ElementConfig):
+class GuiWebRadioGroup(Configurable):
 
-    def __init__(self, element_container, emd, parent=None):
-        super().__init__(element_container)
-        self._radios = element_container.define_multielement(emd)
-        self.__found = False
+    def __init__(self, gui, lmd, parent=None):
+        super().__init__(gui)
+        self.__gui = gui
+        self.__automator = gui.automator
+        self.__finder = parent and parent or self.automator
+        self.__radios = None
+        self.__find(self.__finder, lmd)
+
+    @property
+    def gui(self):
+        return self.__gui
+
+    @property
+    def automator(self):
+        return self.__automator
 
     def __validate_radio_buttons(self, source):
         if [t for t in source.get_tag_names() if t.strip().lower() != 'input']:
@@ -18,53 +27,42 @@ class GuiWebRadioGroup(ElementConfig):
         if len(set(names)) != 1:
             raise Exception("Not a valid radio group. Contains radio elements belonging to different radio groups.")
 
-    def is_found(self):
-        return self.__found
-
     def __check_type_if_configured(self, tags):
         if self._should_check_type(): self.__validate_radio_buttons(tags)
 
-    def __find_if_not_found(self):
-        if not self.is_found():
-            # This would force the identification of partial elements in the wrapped multi-element.
-            self._radios.find()
-            source = self._radios.get_source(refind=False)
-            self.__check_type_if_configured(source)
-            self._radios.configure_partial_elements(self.settings)
-            self.__found = True
+    def __find(self, finder, lmd):
+        # This would force the identification of partial elements in the wrapped multi-element.
+        self.__radios = finder.multi_element(self.gui, lmd)
+        self.__check_type_if_configured(self.source)
+        self.__radios.configure_partial_elements(self.settings)
 
     def has_index_selected(self, index):
-        self.__find_if_not_found()
-        return self._radios.get_instance_at_index(index).is_selected()
+        return self.__radios[index].is_selected()
 
     def has_value_selected(self, value):
-        self.__find_if_not_found()
-        return self._radios.get_instance_by_value(value).is_selected()
+        return self.__radios.get_instance_by_value(value).is_selected()
 
-    def get_first_selected_option_value(self):
-        self.__find_if_not_found()
-        instance = self._radios.get_first_selected_instance()
-        return instance.get_source(refind=False, reload=False).get_attr_value("value")
+    @property
+    def value(self):
+        instance = self.__radios.get_first_selected_instance()
+        return instance.source.get_attr_value("value")
 
     def __select_option(self, option):
         option.select()
         if self._should_check_post_state() and not option.is_selected():
             raise Exception("The attempt to select the radio button was not successful.")
 
-    def select_by_index(self, index):
-        self.__find_if_not_found()
-        option = self._radios.get_instance_at_index(index)
+    def select_index(self, index):
+        option = self.__radios[index]
         self.__select_option(option)
 
-    def select_by_ordinal(self, ordinal):
-        self.__find_if_not_found()
+    def select_ordinal(self, ordinal):
         return self.select_by_index(ordinal-1)
 
-    def select_by_value(self, value):
-        self.__find_if_not_found()
-        option = self._radios.get_instance_by_value(value)
+    def select_value(self, value):
+        option = self.__radios.get_instance_by_value(value)
         self.__select_option(option)
 
-    def get_source(self):
-        self.__find_if_not_found()
-        return self._radios.get_source()
+    @property
+    def source(self):
+        return self.__radios.source

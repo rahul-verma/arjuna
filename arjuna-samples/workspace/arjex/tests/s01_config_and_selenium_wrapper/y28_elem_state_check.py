@@ -12,8 +12,8 @@ narada.ui.element(With.id("target")).click()
 narada.ui.alert.confirm()
 
 narada.ui.browser.go_to_url(url)
-conf = GuiActionConfig.builder().check_pre_state(False).build()
+conf = GuiInteractionConfig.builder().check_pre_state(False).build()
 print(conf.settings)
 
-narada.ui.element(With.id("target")).configure(conf).click()
+narada.ui.element(With.id("target"), iconfig=conf).click()
 narada.ui.alert.confirm()

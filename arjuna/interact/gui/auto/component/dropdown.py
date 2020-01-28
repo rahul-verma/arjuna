@@ -5,10 +5,12 @@ from arjuna.interact.gui.auto.base.configurable import Configurable
 # UUID is for client reference. Agent does not know about this.
 class GuiWebSelect(Configurable):
 
-    def __init__(self, automator, emd, parent=None, option_container_lmd=None, option_lmd=None):
-        super().__init__(automator)
-        self.__automator = automator
-        self._wrapped_main_element = automator.element(emd)
+    def __init__(self, gui, emd, parent=None, option_container_lmd=None, option_lmd=None, iconfig=None):
+        super().__init__(gui, iconfig)
+        self.__gui = gui
+        self.__automator = gui.automator
+        self.__finder = parent and parent or gui.automator
+        self._wrapped_main_element = self.automator.element(self.gui, emd)
         self.__found = False
         self.__options = None
         self.__option_lmd = option_lmd is not None and option_lmd or SimpleGuiElementMetaData("tag_name", "option")
@@ -16,13 +18,21 @@ class GuiWebSelect(Configurable):
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
         self.__option_container_same_as_select = option_container_lmd is None and True or False
         if not self.__option_container_same_as_select:
-            self.__option_container = self.__automator.element(option_container_lmd)
+            self.__option_container = self.__finder.element_with_lmd(self.gui, option_container_lmd, iconfig=self.settings)
             # # Needs to be loaded so that options can be discovered.
             # self.__option_container.find_if_not_found()
 
         self.__source_parser = None
 
         self.__find()
+
+    @property
+    def gui(self):
+        return self.__gui
+
+    @property
+    def automator(self):
+        return self.__automator
 
     def __validate_select_control(self, tag):
         if tag.lower() != "select":
@@ -42,15 +52,13 @@ class GuiWebSelect(Configurable):
 
         def load_options():
             container = get_root_element()
-            self.__options = container.multi_element(self.__option_lmd)
+            self.__options = container.multi_element_with_lmd(self.gui, self.__option_lmd, iconfig=self.settings)
             # self.__options.find_if_not_found()
 
-        self._wrapped_main_element.configure(self.settings)
         # self._wrapped_main_element.find()
         tag = self._wrapped_main_element.source.tag
         check_type_if_configured(tag)
         load_options()
-        self.__options.configure_partial_elements(self.settings)
 
     def __is_multi_select(self):
         source = self._wrapped_main_element.source

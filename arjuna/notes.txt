@@ -1,58 +1,62 @@
 0.8.6
 -----
-- Automator should be created in the context of an App.
-- Elements are always creating in the context of a Gui (App/Page/Widget).
-- Clean-up With
-- Nested Element Finding
-- All example code to work
 - Solve OR relationship for coded as well as GNS With option.
 - Integrate unittest suite builder and runner preferably with a CLI.
+
+Content based window searching is not working.
+Check. it might be related to OR logic.
+
+Next
+----
+- Clean-up With
 - The config which is a part of context should be a simple RO proxy on top of the internal config. Reduce redundancy.
 - See if you can introduce value_as_* methods in containers. This means one can do value.as_str() or container.value_as_str(name)
 
 With TPI rearrangement:
 Progress
 -------
-Working examples:
-Done y01 - launch chrome
-Done y02 - .arjuna_option(firefox details)
-Done y03 - .firefox()
-Done y04 - firefox based on project conf
-Done y05 - headless chrome, extended driver config
-Done y06 -> getting arjuna property from project conf using a.b.c and A_B_C and as_* value methods.
-Done y07 -> programmatic user options
-Done y08 -> user options from project config
-Done y09 -> basic identifiers. link_ptext needs to be fixed.
-Done y10 -> xpath examples
-Done y11 -> css examples
-Done y12 -> Extended identifiers work (which are not commented in example code.)
-NOT Working -> y13 -> OR relationship -> Fails after an invalid id without checking next one.
-Done y14 -> HardCoded.sleep
-Done y15 -> Basic element interactions.
-Done y16 -> auto finding and state checking works for basic interactions.
-Done y17 -> multielement.
-Done y18 -> Java script execution
-Done y19 -> alerts
-Done y23 -> Dropdown works.
-Done y25 -> Named arg formatting, case-insensitive.
-Done y26 -> With.javascript works as expected for success and failure scenarios (single element)
-Done y27 -> With.javascript works as expected for success and failure scenarios (multi element)
-Done: y28 -> Pre state check works for basic element.
 
+Config and Selenium Examples
+y01 - launch chrome
+y02 - .arjuna_option(firefox details)
+y03 - .firefox()
+y04 - firefox based on project conf
+y05 - headless chrome, extended driver config
+y06 -> getting arjuna property from project conf using a.b.c and A_B_C and as_* value methods.
+y07 -> programmatic user options
+y08 -> user options from project config
+y09 -> basic identifiers. link_ptext needs to be fixed.
+y10 -> xpath examples
+y11 -> css examples
+y12 -> Extended identifiers work (which are not commented in example code.)
+Pending y13 -> OR relationship -> Fails after an invalid id without checking next one.
+y14 -> HardCoded.sleep
+y15 -> Basic element interactions.
+y16 -> auto finding and state checking works for basic interactions.
+y17 -> multielement.
+y18 -> Java script execution
+y19 -> alerts
+y20 -> Basic window handling
+y21 -> Window with title, partial title and content locator works. check notes for the found issue.
+y22 -> Frame handling.
+y23 -> Dropdown
+y24 -> RadioGroup logic
+y25 -> Named arg formatting, case-insensitive.
+y26 -> With.javascript for success and failure scenarios (single element)
+y27 -> With.javascript for success and failure scenarios (multi element)
+y28 -> Pre state check for basic element.
+y29 -> Dropdown pre state check off.
+y30 -> custom dropdown works (example - Bootstrap dropdown control)
+y31 -> Needs work on Narada side for suitable example controls
+y32 -> All source retrieval.
 
 GOM
 e01 -> SGNS with simple App Model
-
-
-PRIORITY: GNS
-- Simple app abstraction - Done
-- Simple GOM - Done
-- Composite GOM - Done
-- Single context GNS. Make it the default. - Done
-- Check parameterization for identifier pulled from GNS - Done
-
-PRIORITY: Nested Element Finding
-PRIORITY: Do clean-up of With logic. Simplify.
+e02 -> MGNS
+e03 -> SGNS with simple page model
+e04 -> MGNS
+e05 -> SNGS with Composite Page Model, loc enum
+e06 -> MGNS
 
 Action Chains (In progress)
 ---------------------------
@@ -61,14 +65,8 @@ Action Chains (In progress)
         - hover
         - hover_and_click
 
-y20 -> Basic window handling
-y21 -> Window with title, partial title and content locator works. check notes for the found issue.
-y22 -> Frame handling.
-y24 -> RadioGroup logic
-y29 -> Dropdown pre state check off.
-y30 -> custom dropdown works (example - Bootstrap dropdown control)
-y31 -> Needs work on Narada side for suitable example controls
-y32 -> All source retrieval.
+
+
 
 
 

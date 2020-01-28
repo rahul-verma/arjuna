@@ -55,7 +55,7 @@ class ArjunFacade:
 from arjuna.engine import Arjuna
 
 from arjuna.interact.gui.helpers import With, WithType
-from arjuna.interact.gui.helpers import GuiActionConfig, GuiDriverExtendedConfigBuilder
+from arjuna.interact.gui.helpers import GuiInteractionConfig, GuiDriverExtendedConfigBuilder
 from arjuna.interact.gui.helpers import Screen
 
 from arjuna.interact.gui.gom import WebApp, Page, Widget

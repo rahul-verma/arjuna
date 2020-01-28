@@ -1,18 +1,16 @@
+from commons import *
 from arjuna import *
 
-from commons import *
-
 init_arjuna()
-automator = launch_automator()
-login(automator)
+wordpress = login()
 
-automator.element(With.link_text("Settings")).click()
+wordpress.ui.element(With.link_text("Settings")).click()
 
-date_format = automator.radio_group(With.name("date_format"))
+date_format = wordpress.ui.radio_group(With.name("date_format"))
 print(date_format.has_value_selected("Y-m-d"))
 print(date_format.has_index_selected(1))
-print(date_format.first_selected_option_value)
+print(date_format.value)
 date_format.select_value(r"\c\u\s\t\o\m")
 date_format.select_index(2)
 
-logout(automator)
+logout(wordpress)

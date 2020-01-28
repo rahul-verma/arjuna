@@ -7,6 +7,7 @@ def print_source_info(source):
     print(source.content.inner)
     print(source.content.text)	
 
+
 init_arjuna()
 automator = launch_automator()
 go_to_wp_home(automator)
@@ -43,7 +44,7 @@ print_source_info(frame.source)
 url = automator.config.get_user_option_value("narada.ex.dropdown.url").as_str()
 automator.browser.go_to_url(url)
 
-conf = GuiActionConfig.builder().check_type(False).check_post_state(False).build()
+conf = GuiInteractionConfig.builder().check_type(False).check_post_state(False).build()
 
 dropdown = automator.dropdown(
     With.id("DropDown"),

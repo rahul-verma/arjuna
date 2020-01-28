@@ -6,19 +6,24 @@ from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 from arjuna.interact.gui.auto.source.parser import FrameSource
 
 class FrameContainer:
-    def __init__(self, automator):
-        self.__automator = automator
+    def __init__(self, gui):
+        self.__gui = gui
+        self.__automator = gui.automator
+
+    @property
+    def gui(self):
+        return self.__gui
 
     @property
     def automator(self):
         return self.__automator
 
     def __check_tag(self, wrapped_element):
-        tag = wrapped_element.get_source(refind=False).get_tag_name()
+        tag = wrapped_element.source.tag
         if tag.lower() != "iframe":
             raise Exception("The element should have a 'iframe' tag for IFrame element. Found: " + tag)
 
-    def define_frame(self, locator_meta_data):
+    def frame(self, locator_meta_data):
         found = False
         frame = None
         for locator in locator_meta_data.locators: 
@@ -26,17 +31,17 @@ class FrameContainer:
                 if locator.ltype.name == "INDEX":
                     index = locator.lvalue
                     emd = SimpleGuiElementMetaData("xpath", "//iframe")
-                    multi_element = self.automator.define_multielement(emd)
-                    multi_element.find()
-                    wrapped_element = multi_element.get_instance_at_index(index)
+                    multi_element = self.automator.multi_element(self.gui, emd)
+                    # multi_element.find()
+                    wrapped_element = multi_element[index]
                     self.__check_tag(wrapped_element)
-                    frame = IPartialFrame(self.automator, self, multi_element, wrapped_element)
+                    frame = IPartialFrame(self.gui, self, multi_element, wrapped_element)
                 else:
                     emd = SimpleGuiElementMetaData(locator.ltype.name, locator.lvalue)
-                    wrapped_element = self.automator.define_element(emd)
-                    wrapped_element.find()
+                    wrapped_element = self.automator.element(self.gui, emd)
+                    # wrapped_element.find()
                     self.__check_tag(wrapped_element)
-                    frame = IFrame(self.automator, self, wrapped_element)
+                    frame = IFrame(self.gui, self, wrapped_element)
 
                 found = True
             except Exception as e:
@@ -59,8 +64,8 @@ class FrameContainer:
 
 class DomRoot(FrameContainer):
 
-    def __init__(self, automator):
-        super().__init__(automator)
+    def __init__(self, gui):
+        super().__init__(gui)
         self.__frame_context = "root"
         self._source_parser = self.automator.source
 
@@ -86,14 +91,15 @@ class DomRoot(FrameContainer):
         self.automator.dispatcher.focus_on_dom_root()
         self.set_frame_context_as_root() 
 
+    @property
     def get_source(self):
         self.focus()
-        return self.automator.get_source()
+        return self.automator.source
 
 class IFrame(FrameContainer):
 
-    def __init__(self, automator, dom_root, wrapped_element):
-        super().__init__(automator)
+    def __init__(self, gui, dom_root, wrapped_element):
+        super().__init__(gui)
         self.__dom_root = dom_root
         self.__parent_frames = []
         self.__wrapped_element = wrapped_element
@@ -125,8 +131,8 @@ class IFrame(FrameContainer):
         if not self.dom_root.is_in_root_context():
             self.dom_root.focus()
             self._focus_on_parents()
-        self.wrapped_element.find()
-        self._source_parser.set_root_source(self.wrapped_element.get_source(refind=False).get_root_content())
+        # self.wrapped_element.find()
+        self._source_parser.set_root_source(self.wrapped_element.source.content.root)
         self.automator.dispatcher.focus_on_frame(self.wrapped_element.dispatcher)
         self.dom_root.set_frame_context(self)
 
@@ -136,7 +142,8 @@ class IFrame(FrameContainer):
     def get_wrapped_element(self):
         return self.wrapped_element
 
-    def get_source(self):
+    @property
+    def source(self):
         self._source_parser.load()
         return self._source_parser
 
@@ -157,11 +164,11 @@ class IFrame(FrameContainer):
 
 class IPartialFrame(IFrame):
 
-    def __init__(self, automator, dom_root, melement, wrapped_element):
-        super().__init__(automator, dom_root, wrapped_element)
+    def __init__(self, gui, dom_root, melement, wrapped_element):
+        super().__init__(gui, dom_root, wrapped_element)
         self.__melement = melement
 
     def focus(self):
-        self.__melement.find()
+        # self.__melement.find()
         self.automator.dispatcher.focus_on_frame(self.wrapped_element.dispatcher)
         self.dom_root.set_frame_context(self)

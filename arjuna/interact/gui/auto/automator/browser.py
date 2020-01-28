@@ -4,16 +4,10 @@ class Browser:
 
     def __init__(self, automator):
         self.__automator = automator
-        from arjuna.interact.gui.auto.component.frame import DomRoot
-        self.__dom_root = DomRoot(automator)
 
     @property
     def automator(self):
         return self.__automator
-
-    @property
-    def dom_root(self):
-        return self.__dom_root
 
     def go_to_url(self, url):
         self.automator.dispatcher.go_to_url(url=url)

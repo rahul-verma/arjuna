@@ -405,7 +405,7 @@ class CorePropertyTypeEnum(Enum):
     LOGGER_NAME = auto()
     PROJECT_DIRS_FILES = auto()
 
-class GuiActionConfigType(Enum):
+class GuiInteractionConfigType(Enum):
     CHECK_TYPE = auto()
     CHECK_PRE_STATE = auto()
     CHECK_POST_STATE = auto()

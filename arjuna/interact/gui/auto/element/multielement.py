@@ -3,14 +3,14 @@ import os
 
 from arjuna.interact.gui.auto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
-from arjuna.interact.gui.auto.base.interactable import Interactable
+from arjuna.interact.gui.auto.base.configurable import Configurable
 from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.interact.gui.auto.source.parser import *
 
 class _GuiPartialElement(GuiElement):
 
-    def __init__(self, gui, multi_element, index: int, dispatcher_element):
-        super().__init__(gui, multi_element.lmd)
+    def __init__(self, gui, multi_element, index: int, dispatcher_element, iconfig=None):
+        super().__init__(gui, multi_element.lmd, iconfig=iconfig)
         self.__multi_element = multi_element
         self.__index = index
         self.dispatcher = dispatcher_element
@@ -25,23 +25,26 @@ class _GuiPartialElement(GuiElement):
     def index(self):
         return self.__index
 
-class GuiMultiElement(Locatable):
+class GuiMultiElement(Locatable,Dispatchable,Configurable):
     
-    def __init__(self, gui, lmd): #, parent=None):
+    def __init__(self, gui, lmd, iconfig=None): #, parent=None):
         Locatable.__init__(self, gui, lmd) #, parent)
         Dispatchable.__init__(self)
+        Configurable.__init__(self, gui, iconfig)
         self.__instance_count = 0
         self.__instances = None
         self.__source_parser = None
 
-    def configure_partial_elements(self, elem_config):
-        '''
-            This method is supposed to be called when multielement identification is completed.
-            This is not used for usual multi-element.
-            It is used by RadioGroup or DropDown etc which are higher level abstractions that use ME.
-        '''
-        for instance in self.__instances:
-            instance.configure(elem_config)
+        
+
+    # def configure_partial_elements(self, elem_config):
+    #     '''
+    #         This method is supposed to be called when multielement identification is completed.
+    #         This is not used for usual multi-element.
+    #         It is used by RadioGroup or DropDown etc which are higher level abstractions that use ME.
+    #     '''
+    #     for instance in self.__instances:
+    #         instance.configure(elem_config)
 
     # def find(self):
     #     self.parent_container.find_multielement(self)
@@ -70,7 +73,7 @@ class GuiMultiElement(Locatable):
     @instance_count.setter
     def instance_count(self, count):
         self.__instance_count = count
-        self.__instances = [_GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i)) for i in range(self.instance_count)]
+        self.__instances = [_GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i), iconfig=self.settings) for i in range(self.instance_count)]
 
     length = instance_count
 
