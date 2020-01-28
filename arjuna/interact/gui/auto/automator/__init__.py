@@ -161,15 +161,15 @@ class GuiAutomator(ElementContainer,Dispatchable):
 
     #### Element Finding
 
-    def element(self, lmd):
+    def element(self, gui, lmd):
         from arjuna.interact.gui.auto.element.guielement import GuiElement
-        gui_element = GuiElement(self, lmd) 
+        gui_element = GuiElement(gui, lmd) 
         self.load_element(gui_element)
         return gui_element
 
-    def multi_element(self, lmd):
+    def multi_element(self, gui, lmd):
         from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
-        m_guielement = GuiMultiElement(self, lmd)
+        m_guielement = GuiMultiElement(gui, lmd)
         self.load_multielement(m_guielement)
         return m_guielement
 

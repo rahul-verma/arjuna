@@ -1,3 +1,15 @@
+0.8.6
+-----
+- Automator should be created in the context of an App.
+- Elements are always creating in the context of a Gui (App/Page/Widget).
+- Clean-up With
+- Nested Element Finding
+- All example code to work
+- Solve OR relationship for coded as well as GNS With option.
+- Integrate unittest suite builder and runner preferably with a CLI.
+- The config which is a part of context should be a simple RO proxy on top of the internal config. Reduce redundancy.
+- See if you can introduce value_as_* methods in containers. This means one can do value.as_str() or container.value_as_str(name)
+
 With TPI rearrangement:
 Progress
 -------

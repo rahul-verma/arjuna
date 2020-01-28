@@ -148,7 +148,7 @@ class AppPortion(Gui):
         return self.impl_gui.browser
 
     def element(self, *str_or_with_locators):
-        return self.automator.element(self.convert_to_with_lmd(*str_or_with_locators))
+        return self.automator.element(self, self.convert_to_with_lmd(*str_or_with_locators))
 
     def multi_element(self, *str_or_with_locators):
         return self.automator.multi_element(self.convert_to_with_lmd(*str_or_with_locators))

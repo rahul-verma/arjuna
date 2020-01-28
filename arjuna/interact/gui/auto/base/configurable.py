@@ -2,7 +2,7 @@ from arjuna.core.enums import GuiActionConfigType
 
 class Configurable:
 
-    def __init__(self, automator):
+    def __init__(self, gui):
         self.__settings = {
             GuiActionConfigType.CHECK_TYPE: True,
             GuiActionConfigType.CHECK_PRE_STATE : True,

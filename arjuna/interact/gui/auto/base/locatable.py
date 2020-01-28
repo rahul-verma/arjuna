@@ -1,15 +1,20 @@
 
 class Locatable:
 
-    def __init__(self, automator, emd):
+    def __init__(self, gui, emd):
         # super().__init__(automator.config) #, obj_name)
-        self.__automator = automator
+        self.__gui = gui
+        self.__automator = gui.automator
         self.__lmd = emd
         self.__located = False
         self.__located_by = None 
 
         # self.__parent = parent
 
+    @property
+    def gui(self):
+        return self.__gui
+        
     @property
     def automator(self):
         return self.__automator

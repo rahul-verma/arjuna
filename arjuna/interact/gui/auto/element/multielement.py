@@ -4,35 +4,31 @@ import os
 from arjuna.interact.gui.auto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from arjuna.interact.gui.auto.base.interactable import Interactable
+from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.interact.gui.auto.source.parser import *
 
-class _GuiPartialElement(Interactable):
+class _GuiPartialElement(GuiElement):
 
-    def __init__(self, automator, multi_element, instance_number: int, dispatcher_element):
-        Interactable.__init__(self, automator)
+    def __init__(self, gui, multi_element, index: int, dispatcher_element):
+        super().__init__(gui, multi_element.lmd)
         self.__multi_element = multi_element
-        self.__instance_number = instance_number
-        # dispatcher.set_partial(self.__instance_number)
+        self.__index = index
         self.dispatcher = dispatcher_element
 
     def create_dispatcher(self):
         pass
 
-    #Override
-    def find_if_not_found(self):
-        # Unlike regular item no attempt should be made to indepently identify a part element.
-        pass
-
     def _is_partial_element(self):
         return True
 
-    def _get_instance_number(self):
-        return self.__instance_number
+    @property
+    def index(self):
+        return self.__index
 
 class GuiMultiElement(Locatable):
     
-    def __init__(self, automator, emd): #, parent=None):
-        Locatable.__init__(self, automator, emd) #, parent)
+    def __init__(self, gui, lmd): #, parent=None):
+        Locatable.__init__(self, gui, lmd) #, parent)
         Dispatchable.__init__(self)
         self.__instance_count = 0
         self.__instances = None
@@ -74,7 +70,7 @@ class GuiMultiElement(Locatable):
     @instance_count.setter
     def instance_count(self, count):
         self.__instance_count = count
-        self.__instances = [_GuiPartialElement(self.automator, self, i, self.dispatcher.get_element_at_index(i)) for i in range(self.instance_count)]
+        self.__instances = [_GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i)) for i in range(self.instance_count)]
 
     length = instance_count
 
