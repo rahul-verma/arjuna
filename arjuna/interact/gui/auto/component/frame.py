@@ -4,9 +4,11 @@ from arjuna import Arjuna
 from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 from arjuna.interact.gui.auto.source.parser import FrameSource
+from arjuna.interact.gui.auto.base.configurable import Configurable
 
-class FrameContainer:
-    def __init__(self, gui):
+class FrameContainer(Configurable):
+    def __init__(self, gui, iconfig=None):
+        super().__init__(gui, iconfig)
         self.__gui = gui
         self.__automator = gui.automator
 
@@ -23,7 +25,8 @@ class FrameContainer:
         if tag.lower() != "iframe":
             raise Exception("The element should have a 'iframe' tag for IFrame element. Found: " + tag)
 
-    def frame(self, locator_meta_data):
+    def frame(self, locator_meta_data, iconfig=None):
+        iconfig = iconfig and iconfig or self.settings
         found = False
         frame = None
         for locator in locator_meta_data.locators: 
@@ -35,13 +38,13 @@ class FrameContainer:
                     # multi_element.find()
                     wrapped_element = multi_element[index]
                     self.__check_tag(wrapped_element)
-                    frame = IPartialFrame(self.gui, self, multi_element, wrapped_element)
+                    frame = IPartialFrame(self.gui, self, multi_element, wrapped_element, iconfig=iconfig)
                 else:
                     emd = SimpleGuiElementMetaData(locator.ltype.name, locator.lvalue)
                     wrapped_element = self.automator.element(self.gui, emd)
                     # wrapped_element.find()
                     self.__check_tag(wrapped_element)
-                    frame = IFrame(self.gui, self, wrapped_element)
+                    frame = IFrame(self.gui, self, wrapped_element, iconfig=iconfig)
 
                 found = True
             except Exception as e:
@@ -98,8 +101,8 @@ class DomRoot(FrameContainer):
 
 class IFrame(FrameContainer):
 
-    def __init__(self, gui, dom_root, wrapped_element):
-        super().__init__(gui)
+    def __init__(self, gui, dom_root, wrapped_element, iconfig=None):
+        super().__init__(gui, iconfig=iconfig)
         self.__dom_root = dom_root
         self.__parent_frames = []
         self.__wrapped_element = wrapped_element
@@ -164,8 +167,8 @@ class IFrame(FrameContainer):
 
 class IPartialFrame(IFrame):
 
-    def __init__(self, gui, dom_root, melement, wrapped_element):
-        super().__init__(gui, dom_root, wrapped_element)
+    def __init__(self, gui, dom_root, melement, wrapped_element, iconfig=None):
+        super().__init__(gui, dom_root, wrapped_element, iconfig=iconfig)
         self.__melement = melement
 
     def focus(self):

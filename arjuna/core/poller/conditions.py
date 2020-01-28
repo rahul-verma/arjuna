@@ -43,7 +43,7 @@ class Condition:
             except Exception as f:
                 import traceback
                 traceback.print_exc()
-                raise("An unexpected exception occured in dynamic wait.")
+                raise Exception("An unexpected exception occured in dynamic wait. Message: {}".format(str(f)))
             time.sleep(poll_interval)
             ctime = time.time()
             if(ctime > end_time):

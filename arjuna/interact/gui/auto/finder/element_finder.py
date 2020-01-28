@@ -1,4 +1,5 @@
 import abc
+from arjuna.core.exceptions import WaitableError
 
 class ElementFinder:
     def __init__(self, container): #, obj_name=""):
@@ -31,6 +32,7 @@ class ElementFinder:
             if "POINT" in {l.ltype.name for l in locators}:
                 raise ConditionException("With.POINT can be used only with GuiElement.")
 
+        we = None
         for locator in locators: 
             try:
                 if locator.ltype.name == "POINT":
@@ -41,10 +43,11 @@ class ElementFinder:
                 else:
                     instance_count, dispatcher = dispatcher_call(locator.ltype.name, locator.lvalue)
                 return locator.ltype.name, locator.lvalue, instance_count, dispatcher
-            except Exception as e:
-                print(e)
-                import traceback
-                traceback.print_exc()
-                continue
+            except WaitableError as e:
+                we = e
+            except Exception as f:
+                raise f
+            else:
+                we = None
         if not found:
-            raise Exception("Could not locate elements with locator(s): {}".format(gui_element.get_lmd()))
+            raise Exception("Could not locate elements with locator(s): {}. Error: {}".format(gui_element.lmd, str(we)))
