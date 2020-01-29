@@ -48,9 +48,7 @@ class Condition:
             ctime = time.time()
             if(ctime > end_time):
                 break
-        print(e)
-        print(etrace)
-        raise Exception("Timeout in wait.")
+        raise TimeoutError(self.__class__.__name__, str(e) + etrace)
 
     def execute(self):
         self.__call_result = self.__dynamic_caller.call(*self.__args, **self.__kwargs)

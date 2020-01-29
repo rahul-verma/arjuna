@@ -178,18 +178,18 @@ class GuiAutomator(ElementContainer,Dispatchable):
 
     #### Element Finding
 
-    def element(self, gui, lmd, iconfig=None):
+    def element(self, gui, lmd, iconfig=None, max_wait_time=None):
         from arjuna.interact.gui.auto.element.guielement import GuiElement
         gui_element = GuiElement(gui, lmd, iconfig=iconfig) 
-        self.load_element(gui_element)
+        self.load_element(gui_element, max_wait_time=max_wait_time)
         return gui_element
 
     element_with_lmd = element
 
-    def multi_element(self, gui, lmd, iconfig=None):
+    def multi_element(self, gui, lmd, iconfig=None, max_wait_time=None):
         from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
         m_guielement = GuiMultiElement(gui, lmd, iconfig=iconfig)
-        self.load_multielement(m_guielement)
+        self.load_multielement(m_guielement, max_wait_time=max_wait_time)
         return m_guielement
 
     multi_element_with_lmd = multi_element

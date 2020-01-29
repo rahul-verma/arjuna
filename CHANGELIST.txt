@@ -4,4 +4,8 @@
 - Elements are created in the context of a GUI (App/Page/Widget)
 - Nested Element Finding.
 - Partial Element can be used to find elements as well.
-- Drodown, radiogroup, windows, frame etc work with new logic.
+- Drodown and radiogroup components fixed.
+- OR relationship bug fixed for multiple With identifiers.
+- Window logic works. Improved window waits. All wait is constrained by Gui max wait.
+- Conditions raise TimeoutError which is a WaitableError.
+-  

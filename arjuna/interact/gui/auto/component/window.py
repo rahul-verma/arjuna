@@ -2,6 +2,23 @@ from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.core.enums import ArjunaOption
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 
+from arjuna.core.poller.conditions import *
+from arjuna.core.poller.caller import *
+from arjuna.core.exceptions import ChildWindowNotFound
+
+class WindowConditions:
+
+    def __init__(self, window):
+        self.__window = window
+
+    @property
+    def window(self):
+        return self.__window
+
+    def ChildWindowIsPresent(self, lmd):
+        caller = DynamicCaller(self.window.find_child_window, lmd)
+        return CommandCondition(caller)
+
 class BasicWindow:
 
     def __init__(self, app, automator):
@@ -10,6 +27,10 @@ class BasicWindow:
         self.__automator = automator
         self.__window_handle = None
         self.__config = automator.config
+
+    @property
+    def max_wait_time(self):
+        return self.automator.config.guiauto_max_wait_time
 
     @property
     def app(self):
@@ -58,6 +79,11 @@ class MainWindow(BasicWindow):
         self.__all_child_windows = {}
         self.__setu_id_map = {}
         self.__resize_window_as_per_config()
+        self.__conditions = WindowConditions(self)
+
+    @property
+    def conditions(self):
+        return self.__conditions
 
     def get_all_child_window_handles(self):
         handles = self.automator.dispatcher.get_all_window_handles()
@@ -101,6 +127,9 @@ class MainWindow(BasicWindow):
         return self.automator.dispatcher.get_current_window_handle()
 
     def child_window(self, locator_meta_data):
+        return self.conditions.ChildWindowIsPresent(locator_meta_data).wait(max_wait_time=self.max_wait_time)
+
+    def find_child_window(self, locator_meta_data):
         all_child_handles, _ = self.get_all_child_window_handles()
         for handle in all_child_handles:
             cwin = self.__get_child_window(handle)
@@ -119,15 +148,13 @@ class MainWindow(BasicWindow):
                             # The element for window is created in the context of an app.
                             # Need to verify this logic.
                             # and its impact on POM.
-                            contained_element = self.automator.element(self.app,emd)
+                            contained_element = self.automator.element(self.app,emd, max_wait_time=0.5)
                             # contained_element.find()
                             return cwin
-                        except Exception as e:
-                            print(e)
-                            import traceback
-                            traceback.print_exc()
-                            continue
-        raise Exception("No child window found for locators: {}".format([str(l) for l in locator_meta_data.locators]))
+                        except WaitableError as f:
+                            continue                            
+        
+        raise ChildWindowNotFound("No child window found for locators: {}".format([str(l) for l in locator_meta_data.locators]))
 
     def __resize_window_as_per_config(self):
         # Resize window

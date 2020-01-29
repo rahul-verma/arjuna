@@ -137,3 +137,13 @@ class GuiElementTextNotSetError(WaitableError):
 
     def __init__(self, message):
         super().__init__(". Tool message: {}".format(message))
+
+class ChildWindowNotFound(WaitableError):
+
+    def __init__(self, message):
+        super().__init__(". Tool message: {}".format(message))
+
+class TimeoutError(WaitableError):
+
+    def __init__(self, context, message):
+        super().__init__(". Timeout in {}. Error Message: {}".format(context, message))  

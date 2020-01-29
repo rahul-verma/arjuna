@@ -27,6 +27,8 @@ dwin.focus()
 dwin.title
 dwin.close()
 
+wordpress.ui.close_all_child_windows()
+
 wordpress.ui.execute_javascript("window.open('https://rahulverma.net')")
 wordpress.ui.execute_javascript("window.open('https://google.com')")
 
@@ -35,6 +37,8 @@ dwin.focus()
 dwin.title
 dwin.close()
 
+wordpress.ui.close_all_child_windows()
+
 wordpress.ui.execute_javascript("window.open('https://rahulverma.net')")
 wordpress.ui.execute_javascript("window.open('https://google.com')")
 
@@ -42,5 +46,7 @@ dwin = wordpress.ui.child_window(With.content_locator(With.value("Google Search"
 dwin.focus()
 dwin.title
 dwin.close()
+
+wordpress.ui.close_all_child_windows()
 
 logout(wordpress)

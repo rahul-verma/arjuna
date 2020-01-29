@@ -1,5 +1,5 @@
 import abc
-from arjuna.core.exceptions import WaitableError
+from arjuna.core.exceptions import WaitableError, GuiElementNotFoundError
 
 class ElementFinder:
     def __init__(self, container): #, obj_name=""):
@@ -50,4 +50,4 @@ class ElementFinder:
             else:
                 we = None
         if not found:
-            raise Exception("Could not locate elements with locator(s): {}. Error: {}".format(gui_element.lmd, str(we)))
+            raise GuiElementNotFoundError("None of the locators worked.", gui_element.lmd.locators)

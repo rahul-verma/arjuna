@@ -1,6 +1,5 @@
 0.8.6
 -----
-- Solve OR relationship for coded as well as GNS With option.
 - Integrate unittest suite builder and runner preferably with a CLI.
 
 Content based window searching is not working.
