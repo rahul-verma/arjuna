@@ -4,6 +4,7 @@ import codecs
 import sys
 import io
 import time
+import datetime
 # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="UTF-8")
 # sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
 
@@ -47,6 +48,10 @@ class ArjunaSingleton:
     def gui_mgr(self):
         return self.__test_session.gui_manager
 
+    def __create_dir_if_doesnot_exist(self, d):
+        if not os.path.exists(d):
+            os.makedirs(d)
+
     def init(self, project_root_dir, cli_config, run_id):
         from arjuna.configure.impl.processor import ConfigCreator
         ConfigCreator.init()
@@ -54,15 +59,30 @@ class ArjunaSingleton:
 
         from arjuna.session.invoker.test_session import DefaultTestSession
         self.__test_session = DefaultTestSession()
+        run_id = run_id and run_id or "mrun"
+        run_id = "{}-{}".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3], run_id)
         self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id)
-        self.__load_console()
+
+        from arjuna.core.enums import ArjunaOption
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_DIR).as_str())
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR).as_str())
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR).as_str())
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_LOG_DIR).as_str())
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR).as_str())
+
+        dl = logging.getLevelName(self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_CONSOLE_LEVEL).as_str().upper())
+
+        self.__init_logger(dl)
+        self.__load_console(dl, self.logger)
 
         return self.create_test_context(self.__default_context_name)
 
-    def get_logger(self):
+    @property
+    def logger(self):
         return self.__logger
 
-    def get_console(self):
+    @property
+    def console(self):
         return self.__console
 
     @classmethod
@@ -130,19 +150,19 @@ class ArjunaSingleton:
     def clone_user_options(self):
         return copy.deepcopy(self.user_options)
 
-    def __load_console(self):
+    def __init_logger(self, dl):
         from arjuna.core.enums import ArjunaOption
-        dl = logging.getLevelName(self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_CONSOLE_LEVEL).as_str().upper())
-        log_dir = self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_DIR).as_str()
+        log_dir = self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_LOG_DIR).as_str()
         if not os.path.isdir(log_dir):
             os.makedirs(log_dir)
         fl = logging.getLevelName(self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_FILE_LEVEL).as_str().upper())
-        fname = self.__ref_config.get_arjuna_option_value(ArjunaOption.PYTHON_LOG_NAME).as_str()
+        fname = "arjuna-run.log"
         lpath = os.path.join(log_dir, fname)
 
-        logger = logging.getLogger(self.prog)
+        logger = logging.getLogger("arjuna")
         logger.setLevel(logging.DEBUG)
         ch = logging.StreamHandler(sys.stdout)
+        ch.flush = sys.stdout.flush
         ch.setLevel(dl)
         fh = logging.FileHandler(lpath, "w", 'utf-8')
         fh.setLevel(fl)
@@ -153,6 +173,9 @@ class ArjunaSingleton:
         logger.addHandler(ch)
         logger.addHandler(fh)
 
+        self.__logger = logger
+
+    def __load_console(self, dl, logger):
         class __console:
             lock = threading.RLock()
 
@@ -284,10 +307,10 @@ class ArjunaSingleton:
                     #     self.(message)
 
             display_padded_key_value_exception_trace = display_multiline_key_value
-        self.__logger = logger
         self.__console = __console()
 
-    def get_central_config(self):
+    @property
+    def ref_config(self):
         return self.__ref_config
 
     def create_test_context(self, name):
@@ -322,41 +345,25 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.init(project_root_dir, cli_config, run_id)
 
     @classmethod
-    def init_logger(cls, testsession_id, log_dir):
-        logger = logging.getLogger("setu")
-        logger.setLevel(logging.DEBUG)
-        # ch = logging.StreamHandler(sys.stdout)
-        # ch.setLevel(logging.INFO)
-        fh = logging.FileHandler(log_dir + "/arjuna-setu-{}-ts-{}.log".format(time.time(), testsession_id), "w", 'utf-8')
-        fh.setLevel(logging.DEBUG)
-        f_fmt = logging.Formatter(u'[%(levelname)5s]\t%(asctime)s\t%(pathname)s::%(module)s.%(funcName)s:%(lineno)d\t%(message)s')
-        c_fmt = logging.Formatter(u'[%(levelname)5s]\t%(message)s')
-        # ch.setFormatter(c_fmt)
-        fh.setFormatter(f_fmt)
-        # logger.addHandler(ch)
-        logger.addHandler(fh)
-        cls.LOGGER = logger
-
-    @classmethod
     def get_logger(cls):
         '''
             Returns framework logger.
         '''
-        return cls.ARJUNA_SINGLETON.get_logger()
+        return cls.ARJUNA_SINGLETON.logger
 
     @classmethod
     def get_console(cls):
         '''
             Returns framework console.
         '''
-        return cls.ARJUNA_SINGLETON.get_console()
+        return cls.ARJUNA_SINGLETON.console
 
     @classmethod
     def get_ref_config(cls):
         '''
             Returns the reference configuration.
         '''
-        return cls.ARJUNA_SINGLETON.get_central_config()
+        return cls.ARJUNA_SINGLETON.ref_config
 
     @classmethod
     def get_gui_mgr(cls):

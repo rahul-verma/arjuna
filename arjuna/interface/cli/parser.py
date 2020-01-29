@@ -70,8 +70,8 @@ class RunParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        # self.parser.add_argument("-rid", "--runid", nargs=1, dest="runid", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.')
-        #
+        self.parser.add_argument("-rid", "--runid", dest="run.id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
+        
         # self.parser.add_argument('-aco', '--arjuna-ref-option', dest="aro",
         #                          nargs=2,
         #                          action='append',

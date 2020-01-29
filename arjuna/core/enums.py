@@ -8,7 +8,8 @@ class ArjunaOption(Enum):
     PYTHON_LOG_NAME = auto()
     LOG_NAME = auto()
 
-    LOG_DIR = auto()
+    RUN_ID = auto()
+
     LOG_FILE_LEVEL = auto()
     LOG_CONSOLE_LEVEL = auto()
 
@@ -16,6 +17,12 @@ class ArjunaOption(Enum):
     PROJECT_ROOT_DIR = auto()
     PROJECT_CONF_FILE = auto()
     PROJECT_TESTS_DIR = auto()
+    PROJECT_REPORT_DIR = auto()
+    PROJECT_RUN_REPORT_DIR = auto()
+    PROJECT_RUN_REPORT_XML_DIR = auto()
+    PROJECT_RUN_REPORT_HTML_DIR = auto()
+    PROJECT_RUN_LOG_DIR = auto()
+    PROJECT_RUN_SCREENSHOTS_DIR = auto()
 
     DATA_DIR = auto()
     DATA_SOURCES_DIR = auto()

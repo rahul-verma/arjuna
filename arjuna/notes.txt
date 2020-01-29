@@ -1,9 +1,9 @@
 0.8.7
 -----
-- Integrate HTML Reporting
-- Fix Logging. Remove extraneous logs. Add critical log entries.
+- Add report format switch. By default it should generate both XML and HTML reports.
+- See how difficult it is to integrate Allure reporting. Accordingly see screenshots possibility.
 - For multi-element introduce an arguent min_length. It should be a part of waiting till number of elements are more than the min specified.
-
+- For multi-element, see filter methods. .filter(attr_value(name=, value=))
 
 Next
 ----

@@ -19,7 +19,7 @@ class DefaultTestSession:
         self.__config_map = {}
         self.__cli_central_config = None
         self.__cli_test_config = None
-        self.__configurator = TestConfigurator()
+        self.__configurator = None
         self.__data_broker = DataBroker()
         self.__project_config_loaded = False
         self.__guimgr = None
@@ -41,10 +41,9 @@ class DefaultTestSession:
         return self.__guimgr
 
     def init(self, root_dir, cli_config=None, run_id=None):
+        self.__configurator = TestConfigurator(run_id)
         self.__configurator.init(root_dir, cli_config)
         config = self.__configurator.create_project_conf()
-        from arjuna import Arjuna
-        Arjuna.init_logger(self.id, config.arjuna_config.value(ArjunaOption.LOG_DIR))
         self.__databroker_handler = TestSessionDataBrokerHandler(self, self.__data_broker)
         self.__guimgr = GuiManager(config)
         return self.__create_config(config)

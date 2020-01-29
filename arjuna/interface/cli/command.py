@@ -1,10 +1,13 @@
 '''
-This file is a part of Test Mile Arjuna
-Copyright 2018 Test Mile Software Testing Pvt Ltd
+Arjuna
+Copyright 2015-2020 Rahul Verma
 
-Website: www.TestMile.com
-Email: support [at] testmile.com
-Creator: Rahul Verma
+Website: www.RahulVerma.net
+
+This Software includes software developed by
+Rahul Verma
+
+Arjuna, is hereinafter referred to as "Software" or "Arjuna".
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -17,6 +20,10 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
+
+IF YOU DO NOT AGREE TO THE TERMS AND CONDITIONS MENTIONED IN LICENSE, DO NOT INSTALL,
+ACCESS, OR USE ARJUNA, ITS DOCUMENTATION OR EXAMPLE CODE, AND DELETE ANY COPIES
+THAT YOU HAVE DOWNLOADED TO YOUR SYSTEM.
 '''
 
 import abc
@@ -75,10 +82,10 @@ class MainCommand(Command):
         super().__init__()
         parser = argparse.ArgumentParser(prog='python arjuna_launcher.py', conflict_handler='resolve',
                                 description="This is the CLI of Arjuna. Use the appropriate command and sub-commands as needed.")
-        # parser.add_argument('-dl', '--display-level', dest='arjuna.log.console.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
-        #                          help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
-        # parser.add_argument('-ll', '--log-level', dest='arjuna.log.file.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
-        #                          help="Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
+        parser.add_argument('-dl', '--display-level', dest='log.console.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
+                                 help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')", default=LoggingLevel.INFO.name)
+        parser.add_argument('-ll', '--log-level', dest='log.file.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
+                                 help="Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')", default=LoggingLevel.DEBUG.name)
         self._set_parser(parser)
 
     def create_subparsers(self):
@@ -87,6 +94,7 @@ class MainCommand(Command):
     def convert_to_dict(self, args):
         try:
             args = self.parser.parse_args(args[1:])
+            print(vars(args))
             return vars(args)
         except Exception as e:
             print("!!!Fatal Error!!!")
@@ -199,7 +207,9 @@ class __RunCommand(Command):
         from arjuna import Arjuna
         project_root_dir = arg_dict["project.root.dir"]
         del arg_dict["project.root.dir"]
-        Arjuna.init(project_root_dir) #, CliArgsConfig(arg_dict))
+        runid = arg_dict["run.id"]
+        del arg_dict["run.id"]
+        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid)
 
         import sys
         proj_dir = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_ROOT_DIR).as_str()

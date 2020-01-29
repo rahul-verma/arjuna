@@ -7,7 +7,8 @@ from arjuna.core.value import AnyRefValue
 
 class TestConfigurator:
 
-    def __init__(self):
+    def __init__(self, run_id):
+        self.__run_id = run_id
         self.__default_ref_config = None
         self.__config_map = {}
         self.__cli_central_config = None
@@ -44,7 +45,7 @@ class TestConfigurator:
                                                                         userTestOptions)
 
     def init(self, root_dir, cli_config):
-        self.__default_ref_config = CentralConfigLoader(root_dir).config
+        self.__default_ref_config = CentralConfigLoader(root_dir, self.__run_id).config
         # self.__config_map[self.__default_ref_config.id] = self.__default_ref_config
         cli_config = cli_config and cli_config or {}
         self.__init_cli_dicts(**cli_config)

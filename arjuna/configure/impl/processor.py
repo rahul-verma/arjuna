@@ -154,14 +154,14 @@ class CentralConfigLoader(BaseConfigProcessor):
         f.close()
         arjuna_root = os.path.abspath(os.path.join(self.__my_dir, "..", ".."))
 
-        irunid = "{}-{}".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3], self.__runid)
+        irunid = self.__runid
         test_module_import_prefix = "{}.tests.modules.".format(self.__project_name)
         conf_fixtures_import_prefix = "{}.fixtures.".format(self.__project_name)
 
         contents = contents.replace("<ARJUNA_ROOT_DIR>", arjuna_root)
         contents = contents.replace("<PROJECT_ROOT_DIR>", self.__project_root_dir)
         contents = contents.replace("<PROJECT_NAME>", self.__project_name)
-        contents = contents.replace("<IRUNID>", irunid)
+        contents = contents.replace("<RUNID>", irunid)
         contents = contents.replace("<TEST_MODULE_IMPORT_PREFIX>", test_module_import_prefix)
         contents = contents.replace("<FIXTURES_IMPORT_PREFIX>", conf_fixtures_import_prefix)
         contents = contents.replace("<HOST_OS>", CentralConfigLoader.OS_MAP[platform.system()])

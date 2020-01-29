@@ -1,3 +1,13 @@
+Following is the list of critical additions and updates for a given released version:
+
+0.8.7
+-----
+- Logging functionality is fixed. Extraneous logs removed.
+- Log and screenshots directory is withing Run report directory for a run id.
+- RunID is clubbed with timestamp to form the final run id to avoid any overwriting of reports.
+- Added unittest-xml-reporting and PyUnitReport as dependencies.
+- Support for specifying Run ID added. Default is 'mrun'.
+
 0.8.6
 -----
 - Automator is created in the context of an App.

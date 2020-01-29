@@ -107,7 +107,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         return self.__conditions_handler
 
     def __create_screenshots_dir(self):
-        sdir = self.config.get_arjuna_option_value(ArjunaOption.SCREENSHOTS_DIR).as_str()
+        sdir = self.config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR).as_str()
         if not os.path.isdir(sdir):
             os.makedirs(sdir)
 

@@ -1,5 +1,5 @@
 '''
-This file is a part of Test Mile Arjuna
+This file is a part of Arjuna
 Copyright 2018 Rahul Verma
 
 Website: www.RahulVerma.net
