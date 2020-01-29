@@ -9,7 +9,7 @@
                |__/
 
 -------------------------------------------------
-Test Mile Arjuna
+Arjuna
 Version: {version}
 Creator: Rahul Verma
 (c) 2015-2020 Rahul Verma

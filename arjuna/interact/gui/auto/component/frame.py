@@ -86,7 +86,6 @@ class FrameContainer(Configurable):
             except Exception as e:
                 raise Exception(str(e) + traceback.format_exc()) 
 
-        print(locator_meta_data.locators)
         raise ChildFrameNotFoundError(*locator_meta_data.locators)
 
     def enumerate_frames(self):

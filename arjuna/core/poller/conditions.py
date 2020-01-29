@@ -76,7 +76,6 @@ class BooleanCondition(Condition):
             self.execute()
             return self.__expectation_type == self.get_call_result()
         except Exception as e:
-            print(e)
             import traceback
             traceback.print_exc()
             raise ConditionException("Unexpected exception in boolean condition checking: " + str(e))

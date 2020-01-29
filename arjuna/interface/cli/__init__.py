@@ -48,21 +48,19 @@ class ArjunaCLI:
         subparsers = self.main_command.create_subparsers()
 
         # Create re-usable parses for command arguments
-        setu_parser = SetuParser()
-        new_project_parser = NewProjectParser()
+        # new_project_parser = NewProjectParser()
         project_parser = ProjectParser()
         run_parser = RunParser()
-        session_parser = SessionParser()
-        group_parser = GroupParser()
-        names_parser = NamesParser()
+        # session_parser = SessionParser()
+        # group_parser = GroupParser()
+        # names_parser = NamesParser()
 
         # Create primary command handlers
-        self.launch_setu = LaunchSetu(subparsers, [setu_parser])
-        self.create_project = CreateProject(subparsers, [new_project_parser])
+        # self.create_project = CreateProject(subparsers, [new_project_parser])
         self.run_project = RunProject(subparsers, [project_parser, run_parser])
-        self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
-        self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])
-        self.run_names = RunNames(subparsers, [project_parser, run_parser, names_parser])
+        # self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
+        # self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])
+        # self.run_names = RunNames(subparsers, [project_parser, run_parser, names_parser])
 
     def init(self):
         time.sleep(0.1)
@@ -81,12 +79,12 @@ class ArjunaCLI:
 
         # Delegation dictionary for primary command description
         desc_cases = {
-            CommandEnum.LAUNCH_SETU: "Launching Setu",
-            CommandEnum.CREATE_PROJECT: "Creating new project",
+            # CommandEnum.LAUNCH_SETU: "Launching Setu",
+            # CommandEnum.CREATE_PROJECT: "Creating new project",
             CommandEnum.RUN_PROJECT: "Running the project",
-            CommandEnum.RUN_SESSION: "Running the selected session",
-            CommandEnum.RUN_GROUP: "Running the selected group",
-            CommandEnum.RUN_NAMES: "Running the selected names"
+            # CommandEnum.RUN_SESSION: "Running the selected session",
+            # CommandEnum.RUN_GROUP: "Running the selected group",
+            # CommandEnum.RUN_NAMES: "Running the selected names"
         }
 
         # Hyphens in commands are replaced with underscores for enum conversion
@@ -98,12 +96,12 @@ class ArjunaCLI:
         # Delegation dictionary for primary command choices
         # Respective command object's 'execute' method is the handler.
         execute_cases = {
-            CommandEnum.LAUNCH_SETU: (self.launch_setu.execute,),
-            CommandEnum.CREATE_PROJECT: (self.create_project.execute, ),
+            # CommandEnum.LAUNCH_SETU: (self.launch_setu.execute,),
+            # CommandEnum.CREATE_PROJECT: (self.create_project.execute, ),
             CommandEnum.RUN_PROJECT: (self.run_project.execute, ),
-            CommandEnum.RUN_SESSION: (self.run_session.execute, ),
-            CommandEnum.RUN_GROUP: (self.run_group.execute, ),
-            CommandEnum.RUN_NAMES: (self.run_names.execute, )
+            # CommandEnum.RUN_SESSION: (self.run_session.execute, ),
+            # CommandEnum.RUN_GROUP: (self.run_group.execute, ),
+            # CommandEnum.RUN_NAMES: (self.run_names.execute, )
         }
 
         # Delegation using Arjuna's Enum based switch-case equivalent

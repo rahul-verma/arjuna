@@ -36,6 +36,7 @@ class Parser:
         return self.parser
 
 class ProjectParser(Parser):
+
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
@@ -69,32 +70,47 @@ class RunParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument("-rid", "--runid", nargs=1, dest="runid", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.')
-
-        self.parser.add_argument('-aco', '--arjuna-ref-option', dest="aro",
-                                 nargs=2,
-                                 action='append',
-                                 metavar=('option', 'value'),
-                                 help='Arjuna Reference Option. Can pass any number of these switches as -aco x y -aco z t')
-
-        self.parser.add_argument('-ato', '--arjuna-ext-option', dest="aeo",
-                                 nargs=2,
-                                 action='append',
-                                 metavar=('option', 'value'),
-                                 help='Arjuna Extended Option. Can pass any number of these switches as -aco x y -ato z t')
-
-        self.parser.add_argument('-uco', '--user-ref-option', dest="uro",
-                                 nargs=2,
-                                 action='append',
-                                 metavar=('option', 'value'),
-                                 help='User Reference Option. Can pass any number of these switches as -aco x y -uco z t')
-
-        self.parser.add_argument('-uto', '--user-ext-option', dest="ueo",
-                                 nargs=2,
-                                 action='append',
-                                 metavar=('option', 'value'),
-                                 help='User Extended Option. Can pass any number of these switches as -aco x y -uto z t')
+        # self.parser.add_argument("-rid", "--runid", nargs=1, dest="runid", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.')
+        #
+        # self.parser.add_argument('-aco', '--arjuna-ref-option', dest="aro",
+        #                          nargs=2,
+        #                          action='append',
+        #                          metavar=('option', 'value'),
+        #                          help='Arjuna Reference Option. Can pass any number of these switches as -aco x y -aco z t')
+        #
+        # self.parser.add_argument('-ato', '--arjuna-ext-option', dest="aeo",
+        #                          nargs=2,
+        #                          action='append',
+        #                          metavar=('option', 'value'),
+        #                          help='Arjuna Extended Option. Can pass any number of these switches as -aco x y -ato z t')
+        #
+        # self.parser.add_argument('-uco', '--user-ref-option', dest="uro",
+        #                          nargs=2,
+        #                          action='append',
+        #                          metavar=('option', 'value'),
+        #                          help='User Reference Option. Can pass any number of these switches as -aco x y -uco z t')
+        #
+        # self.parser.add_argument('-uto', '--user-ext-option', dest="ueo",
+        #                          nargs=2,
+        #                          action='append',
+        #                          metavar=('option', 'value'),
+        #                          help='User Extended Option. Can pass any number of these switches as -aco x y -uto z t')
 
     def process(self, arg_dict):
         pass
 
+
+# class NamesParser(Parser):
+#     def __init__(self):
+#         super().__init__()
+#         self.parser = argparse.ArgumentParser(add_help=False)
+#         self.parser.add_argument('-cf', '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
+#         # self.parser.add_argument('-cm', '--cmodules', dest="cmodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for considering test modules.')
+#         # self.parser.add_argument('-im', '--imodules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+',
+#         #                  help='One or more names/patterns for ignoring test modules.')
+#         # self.parser.add_argument('-cf', '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
+#         # self.parser.add_argument('-if', '--ifunctions', dest="ifunctions", metavar=('F1','F2'), default=None, nargs='+',
+#         #                  help='One or more names/patterns for ignoring test functions.')
+
+#     def process(self, arg_dict):
+#         pass

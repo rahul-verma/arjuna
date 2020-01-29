@@ -1,11 +1,9 @@
-0.8.6
+0.8.7
 -----
-- Integrate unittest suite builder and runner preferably with a CLI.
+- Integrate HTML Reporting
+- Fix Logging. Remove extraneous logs. Add critical log entries.
+- For multi-element introduce an arguent min_length. It should be a part of waiting till number of elements are more than the min specified.
 
-Content based window searching is not working.
-Check. it might be related to OR logic.
-
-Possible feature: for multi-element introduce an arguent min_length. It should be a part of waiting till number of elements are more than the min specified.
 
 Next
 ----
@@ -16,7 +14,6 @@ Next
 With TPI rearrangement:
 Progress
 -------
-
 Config and Selenium Examples
 y01 - launch chrome
 y02 - .arjuna_option(firefox details)
@@ -81,20 +78,15 @@ Done
     - Arjuna post checking clickability, also executes lenient clicking.
     - Lenient set text introduced.
 Pending
-- In the CGOM example, introduce loc enum in page
 - In example code introduce user defined option as enum
-- Change element names to valid python names.
-- Normalise element names so that _ and - can be used interchangeably. 
-    Replace with space in storing and retrieving.
 - Introduce 'hold' method in Gui interaction components. It should wait for enter key. input("Press enter to continue")
 
 Next Features on Priority
 -------------------------
 - ActionChains
-- unittest core support -> HtmlRunner, Test Suite building.
+- unittest core support -> HtmlRunner
 - WebDriverManager
 - Support for loading conf from a file. E.g. env based multiple conf files.
-- Make wait configurable on a per element level. Configure method.
 
 GNS Desirables
 ---------------
@@ -164,8 +156,6 @@ ueo
     - 
 
 11. Text case insensitive? by default off. For on more processing is needed so expectation should be set accordingly.
-
-12. Check the dispatcher object in case of select control for options. is it set to automator or element.
 
 Planned Features
 Element Configuration (code and gns)
@@ -396,7 +386,6 @@ class GroupParser(Parser):
     def process(self, arg_dict):
         pass
 
-
 class NamesParser(Parser):
     def __init__(self):
         super().__init__()
@@ -407,15 +396,6 @@ class NamesParser(Parser):
         self.parser.add_argument('-cf', '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
         self.parser.add_argument('-if', '--ifunctions', dest="ifunctions", metavar=('F1','F2'), default=None, nargs='+',
                          help='One or more names/patterns for ignoring test functions.')
-
-    def process(self, arg_dict):
-        pass
-
-class SetuParser(Parser):
-    def __init__(self):
-        super().__init__()
-        self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-p', '--port', dest="setu.port", default=9000, type=port, help='Setu network port')
 
     def process(self, arg_dict):
         pass

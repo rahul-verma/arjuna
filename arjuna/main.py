@@ -2,8 +2,8 @@ import os
 import sys
 import time
 
-
-def main(args=None):
+def main(*args):
+    print("Executing Arjuna command line with args: {}".format(*args))
     try:
         import signal
         import sys
@@ -11,8 +11,9 @@ def main(args=None):
                 print('Exiting...')
                 sys.exit(0)
         signal.signal(signal.SIGINT, signal_handler)
-        from arjuna import Arjuna
-        Arjuna.launch(args and args or sys.argv)
+        from arjuna import ArjunFacade
+        facade = ArjunFacade()
+        facade.launch(args and args or sys.argv)
     except Exception as e:
         # The following sleep is to accommodate a common IDE issue of
         # interspersing main exception with console output.

@@ -15,6 +15,7 @@ class ArjunaOption(Enum):
     PROJECT_NAME = auto()
     PROJECT_ROOT_DIR = auto()
     PROJECT_CONF_FILE = auto()
+    PROJECT_TESTS_DIR = auto()
 
     DATA_DIR = auto()
     DATA_SOURCES_DIR = auto()

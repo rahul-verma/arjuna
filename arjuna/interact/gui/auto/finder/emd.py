@@ -338,7 +338,6 @@ class GuiElementMetaData:
     def locators_as_str(locators):
         out_list = []
         for l in locators:
-            print(l, l.__class__)
             if isinstance(l, GuiGenericLocator):
                 out_list.append(l.as_map())
             else:

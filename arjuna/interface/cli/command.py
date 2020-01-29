@@ -75,10 +75,10 @@ class MainCommand(Command):
         super().__init__()
         parser = argparse.ArgumentParser(prog='python arjuna_launcher.py', conflict_handler='resolve',
                                 description="This is the CLI of Arjuna. Use the appropriate command and sub-commands as needed.")
-        parser.add_argument('-dl', '--display-level', dest='arjuna.log.console.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
-                                 help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
-        parser.add_argument('-ll', '--log-level', dest='arjuna.log.file.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
-                                 help="Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
+        # parser.add_argument('-dl', '--display-level', dest='arjuna.log.console.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
+        #                          help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
+        # parser.add_argument('-ll', '--log-level', dest='arjuna.log.file.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
+        #                          help="Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')")
         self._set_parser(parser)
 
     def create_subparsers(self):
@@ -98,19 +98,19 @@ class MainCommand(Command):
     def execute(self, arg_dict):
         pass
 
-
-class LaunchSetu(Command):
-    def __init__(self, subparsers, parents):
-        super().__init__()
-        self.parents = parents
-        parser = subparsers.add_parser('launch-setu', parents=[parent.get_parser() for parent in parents], help="Launch Setu")
-        self._set_parser(parser)
-
-    def execute(self, arg_dict):
-        for parent in self.parents:
-            parent.process(arg_dict)
-        from arjuna.setu.service import launch_setu
-        launch_setu(int(arg_dict["setu.port"]))
+#
+# class LaunchSetu(Command):
+#     def __init__(self, subparsers, parents):
+#         super().__init__()
+#         self.parents = parents
+#         parser = subparsers.add_parser('launch-setu', parents=[parent.get_parser() for parent in parents], help="Launch Setu")
+#         self._set_parser(parser)
+#
+#     def execute(self, arg_dict):
+#         for parent in self.parents:
+#             parent.process(arg_dict)
+#         from arjuna.setu.service import launch_setu
+#         launch_setu(int(arg_dict["setu.port"]))
 
 
 class FileObjectType(Enum):
@@ -135,7 +135,7 @@ class CreateProject(Command):
         (FileObjectType.DIR, "guiauto/images"),
         (FileObjectType.DIR, "guiauto/namespace"),
         (FileObjectType.DIR, "report"),
-        (FileObjectType.FILE, "config/project.conf")
+        (FileObjectType.FILE, "config/project.conf"),
         (FileObjectType.DIR, "tests"),
         (FileObjectType.DIR, "tests/modules"),
         (FileObjectType.FILE, "tests/__init__.py"),
@@ -199,12 +199,46 @@ class __RunCommand(Command):
         from arjuna import Arjuna
         project_root_dir = arg_dict["project.root.dir"]
         del arg_dict["project.root.dir"]
-        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict))
+        Arjuna.init(project_root_dir) #, CliArgsConfig(arg_dict))
 
         import sys
-        proj_dir = Arjuna.get_central_arjuna_option(ArjunaOption.PROJECT_ROOT_DIR).as_str()
+        proj_dir = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_ROOT_DIR).as_str()
         sys.path.append(proj_dir + "/..")
 
-        py_3rdparty_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR).as_str()
+        py_3rdparty_dir = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR).as_str()
         sys.path.append(py_3rdparty_dir)
+
+
+class RunProject(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-project', parents, "Run all tests in an Arjuna Test Project.")
+
+    def execute(self, arg_dict):
+        print("Now running")
+        super().execute(arg_dict)
+        from arjuna.engine.runner import TestRunner
+        test_runner = TestRunner()
+        test_runner.load_all_tests()
+        test_runner.run()
+
+
+# class RunNames(__RunCommand):
+#     def __init__(self, subparsers, parents):
+#         super().__init__(subparsers, 'run-names', parents, "Run names (modules/functions)")
+#
+#     def execute(self, arg_dict):
+#         picker_args = {
+#             # 'cm': arg_dict.pop('cmodules'),
+#             # 'im': arg_dict.pop('imodules'),
+#             'cf': arg_dict.pop('cfunctions'),
+#             # 'if': arg_dict.pop('ifunctions')
+#         }
+#         super().execute(arg_dict)
+#
+#         from arjuna.engine.runner import TestRunner
+#         test_runner = TestRunner()
+#         test_runner
+#         self.unitee.load_session_for_name_pickers(**picker_args)
+#         self.unitee.run()
+#         self.unitee.tear_down()
 

@@ -7,8 +7,11 @@
 - Drodown and radiogroup components fixed.
 - OR relationship bug fixed for multiple With identifiers.
 - Introduced FrameIsPresent and WindowIsPresent Conditions.
+- Max wait time has been made configurable for some contexts at call level.
 - Window logic works. Improved window waits. All wait is constrained by Gui max wait.
 - Frame logic works. Improved window waits. All wait is constrained by Gui max wait.
 - Conditions raise TimeoutError which is a WaitableError.
 - Exception message contains more string representation of Locator information. 
-- 
+- Basic unittest integration to run all tests in the tests directory of a project.
+- Element names in GNS files are validated as Arjuna names (Valid Python names, 3-50 length)
+- Importing from arjuna has been heavily simplified. from arjuna import * provides all public names.
