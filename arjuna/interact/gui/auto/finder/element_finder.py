@@ -50,4 +50,4 @@ class ElementFinder:
             else:
                 we = None
         if not found:
-            raise GuiElementNotFoundError("None of the locators worked.", gui_element.lmd.locators)
+            raise GuiElementNotFoundError("None of the locators worked.", *gui_element.lmd.locators)

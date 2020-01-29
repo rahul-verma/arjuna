@@ -6,6 +6,9 @@
 - Partial Element can be used to find elements as well.
 - Drodown and radiogroup components fixed.
 - OR relationship bug fixed for multiple With identifiers.
+- Introduced FrameIsPresent and WindowIsPresent Conditions.
 - Window logic works. Improved window waits. All wait is constrained by Gui max wait.
+- Frame logic works. Improved window waits. All wait is constrained by Gui max wait.
 - Conditions raise TimeoutError which is a WaitableError.
--  
+- Exception message contains more string representation of Locator information. 
+- 

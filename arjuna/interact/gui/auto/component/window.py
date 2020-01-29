@@ -1,10 +1,11 @@
+import traceback
 from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.core.enums import ArjunaOption
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
-from arjuna.core.exceptions import ChildWindowNotFound
+from arjuna.core.exceptions import ChildWindowNotFoundError
 
 class WindowConditions:
 
@@ -16,7 +17,7 @@ class WindowConditions:
         return self.__window
 
     def ChildWindowIsPresent(self, lmd):
-        caller = DynamicCaller(self.window.find_child_window, lmd)
+        caller = DynamicCaller(self.window._find_child_window, lmd)
         return CommandCondition(caller)
 
 class BasicWindow:
@@ -129,7 +130,7 @@ class MainWindow(BasicWindow):
     def child_window(self, locator_meta_data):
         return self.conditions.ChildWindowIsPresent(locator_meta_data).wait(max_wait_time=self.max_wait_time)
 
-    def find_child_window(self, locator_meta_data):
+    def _find_child_window(self, locator_meta_data):
         all_child_handles, _ = self.get_all_child_window_handles()
         for handle in all_child_handles:
             cwin = self.__get_child_window(handle)
@@ -152,9 +153,11 @@ class MainWindow(BasicWindow):
                             # contained_element.find()
                             return cwin
                         except WaitableError as f:
-                            continue                            
+                            continue  
+                        except Exception as e:
+                            raise Exception(str(e) + traceback.format_exc())                          
         
-        raise ChildWindowNotFound("No child window found for locators: {}".format([str(l) for l in locator_meta_data.locators]))
+        raise ChildWindowNotFoundError(*locator_meta_data.locators)
 
     def __resize_window_as_per_config(self):
         # Resize window

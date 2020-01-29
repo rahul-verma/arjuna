@@ -144,15 +144,28 @@ class GuiGenericLocator(Locator):
     def set_value(self, value):
         self.lvalue = value
 
-class GuiGenericChildLocator(Locator):
-    def __init__(self, ltype, lvalue, named_args):
-        super().__init__(ltype, lvalue, named_args)
-    
-    def set_value(self, value):
-        self.lvalue = value    
+    def as_map(self):
+        map = dict()
+        map["withType"] = self.ltype.name
+        if self.ltype.name.lower() != "content_locator":
+            map["withValue"] = self.lvalue
+        else:
+            map["withValue"] = [l.as_map() for l in self.lvalue.locators]
 
-    def is_layered_locator(self):
-        return True
+        # if self.__named_args:
+        #     map["named_args"] = self.__named_args
+        
+        return map
+
+# class GuiGenericChildLocator(Locator):
+#     def __init__(self, ltype, lvalue, named_args):
+#         super().__init__(ltype, lvalue, named_args)
+    
+#     def set_value(self, value):
+#         self.lvalue = value    
+
+#     def is_layered_locator(self):
+#         return True
 
 class GuiElementMetaData:
     XPATH_TWO_ARG_VALUE_PATTERN = r'^\s*\[\s*(\w+)\s*\]\s*\[\s*(\w+)\s*\]$'
@@ -320,6 +333,17 @@ class GuiElementMetaData:
                 p_locator = cls.__process_single_raw_locator(locator)
             processed_locators.append(p_locator)
         return GuiElementMetaData(processed_locators)
+
+    @staticmethod
+    def locators_as_str(locators):
+        out_list = []
+        for l in locators:
+            print(l, l.__class__)
+            if isinstance(l, GuiGenericLocator):
+                out_list.append(l.as_map())
+            else:
+                out_list.append(str(l))
+        return out_list
 
 class SimpleGuiElementMetaData(GuiElementMetaData):
 

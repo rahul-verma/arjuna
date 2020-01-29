@@ -5,6 +5,8 @@
 Content based window searching is not working.
 Check. it might be related to OR logic.
 
+Possible feature: for multi-element introduce an arguent min_length. It should be a part of waiting till number of elements are more than the min specified.
+
 Next
 ----
 - Clean-up With

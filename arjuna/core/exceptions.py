@@ -19,6 +19,8 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+
 class ArjunaException(Exception):
     def __init__(self, message, scrreenshots_path=None, child=None):
         # child is child exception
@@ -123,10 +125,16 @@ class WaitableError(BaseException):
     def __init__(self, message):
         super().__init__(message)
 
-class GuiElementNotFoundError(WaitableError):
+class _ElementNotFoundError(WaitableError):
 
-    def __init__(self, message, locator):
-        super().__init__("GuiElement(s) not found using locator: {}. Tool message: {}".format(locator, message))
+    def __init__(self, elem_name, *locators, message=None):
+        message = message and  "Error message: {}".format(message) or ""
+        super().__init__("{} not found using any of the locators: {}.{}".format(elem_name, GuiElementMetaData.locators_as_str(locators), message))
+
+class GuiElementNotFoundError(_ElementNotFoundError):
+
+    def __init__(self, elem_name, *locators, message=None):
+        super().__init__("GuiElement(s)", *locators, message=message)
 
 class GuiElementNotReadyError(WaitableError):
 
@@ -138,10 +146,15 @@ class GuiElementTextNotSetError(WaitableError):
     def __init__(self, message):
         super().__init__(". Tool message: {}".format(message))
 
-class ChildWindowNotFound(WaitableError):
+class ChildWindowNotFoundError(_ElementNotFoundError):
 
-    def __init__(self, message):
-        super().__init__(". Tool message: {}".format(message))
+    def __init__(self, *locators):
+        super().__init__("Child window", *locators)
+
+class ChildFrameNotFoundError(_ElementNotFoundError):
+
+    def __init__(self, *locators):
+        super().__init__("Frame", *locators)
 
 class TimeoutError(WaitableError):
 

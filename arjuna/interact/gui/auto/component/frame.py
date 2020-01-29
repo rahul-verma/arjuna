@@ -6,11 +6,34 @@ from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 from arjuna.interact.gui.auto.source.parser import FrameSource
 from arjuna.interact.gui.auto.base.configurable import Configurable
 
+from arjuna.core.poller.conditions import *
+from arjuna.core.poller.caller import *
+from arjuna.core.exceptions import ChildWindowNotFoundError
+
+class FrameConditions:
+
+    def __init__(self, frame):
+        self.__frame = frame
+
+    @property
+    def frame(self):
+        return self.__frame
+
+    def FrameIsPresent(self, lmd, *args, **kwargs):
+        caller = DynamicCaller(self.frame._find_frame, lmd, *args, **kwargs)
+        return CommandCondition(caller)
+
 class FrameContainer(Configurable):
+
     def __init__(self, gui, iconfig=None):
         super().__init__(gui, iconfig)
         self.__gui = gui
         self.__automator = gui.automator
+        self.__conditions = FrameConditions(self)
+
+    @property
+    def conditions(self):
+        return self.__conditions
 
     @property
     def gui(self):
@@ -20,12 +43,19 @@ class FrameContainer(Configurable):
     def automator(self):
         return self.__automator
 
+    @property
+    def max_wait_time(self):
+        return self.automator.config.guiauto_max_wait_time
+
     def __check_tag(self, wrapped_element):
         tag = wrapped_element.source.tag
         if tag.lower() != "iframe":
             raise Exception("The element should have a 'iframe' tag for IFrame element. Found: " + tag)
 
     def frame(self, locator_meta_data, iconfig=None):
+        return self.conditions.FrameIsPresent(locator_meta_data, iconfig=iconfig).wait(max_wait_time=self.max_wait_time)
+
+    def _find_frame(self, locator_meta_data, iconfig=None):
         iconfig = iconfig and iconfig or self.settings
         found = False
         frame = None
@@ -36,7 +66,11 @@ class FrameContainer(Configurable):
                     emd = SimpleGuiElementMetaData("xpath", "//iframe")
                     multi_element = self.automator.multi_element(self.gui, emd)
                     # multi_element.find()
-                    wrapped_element = multi_element[index]
+                    try:
+                        wrapped_element = multi_element[index]
+                    except:
+                        # In case another identifier is present it should be tried.
+                        continue
                     self.__check_tag(wrapped_element)
                     frame = IPartialFrame(self.gui, self, multi_element, wrapped_element, iconfig=iconfig)
                 else:
@@ -46,17 +80,14 @@ class FrameContainer(Configurable):
                     self.__check_tag(wrapped_element)
                     frame = IFrame(self.gui, self, wrapped_element, iconfig=iconfig)
 
-                found = True
+                return frame
+            except WaitableError as f:
+                continue  
             except Exception as e:
-                import traceback
-                traceback.print_exc()
-                print(e)
-                continue
+                raise Exception(str(e) + traceback.format_exc()) 
 
-        if not found:
-            raise Exception("Could not locate frame with locator(s): {}".format([str(l) for l in locator_meta_data.locators]))
-
-        return frame
+        print(locator_meta_data.locators)
+        raise ChildFrameNotFoundError(*locator_meta_data.locators)
 
     def enumerate_frames(self):
         self.focus()
