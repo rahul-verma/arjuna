@@ -2,11 +2,16 @@ Following is the list of critical additions and updates for a given released ver
 
 0.8.7
 -----
+- Arjuna now uses pytest as its engine instead of unittest. It supports unittest style tests as well.
+- Added pytest and pytest-html as dependencies in setup.py.
+- Reporting: Added support for XML and HTML reporting simultaneously. Both are switched on by default.
+- CLI: Added -rf switch to which one or more of the ReportFormat allowed names can be supplied.
+- Concept of Run ID representing a given run introduced.
+- CLI: Support for specifying Run ID added. Default is 'mrun'.
 - Logging functionality is fixed. Extraneous logs removed.
-- Log and screenshots directory is withing Run report directory for a run id.
+- CLI: Support for -dl (console display level) and -ll (log level) CLI switches.
+- Log and screenshots directory is within Run report directory for a run id.
 - RunID is clubbed with timestamp to form the final run id to avoid any overwriting of reports.
-- Added unittest-xml-reporting and PyUnitReport as dependencies.
-- Support for specifying Run ID added. Default is 'mrun'.
 
 0.8.6
 -----

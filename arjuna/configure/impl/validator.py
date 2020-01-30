@@ -1,3 +1,22 @@
+'''
+This file is a part of Arjuna
+Copyright 2015-2020 Rahul Verma
+
+Website: www.RahulVerma.net
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+'''
+
 import inspect
 import os
 import re
@@ -147,32 +166,19 @@ class ConfigValidator:
             cls.raise_exc(input)
 
     @classmethod
-    def active_reporter_list(cls, input):
+    def report_formats(cls, input):
         l = None
-        if type(input) is str:
-            l = [input]
-        elif type(input) is list:
-            l = input
-        else:
-            cls.raise_exc(input)
         try:
-            return [ActiveReporterNames[i.upper()] for i in input]
+            if type(input) is str:
+                return cls.report_formats([i.upper() for i in input.split(",")])
+            elif type(input) in (list, tuple):
+                return [ReportFormat[i] for i in input]
         except:
             cls.raise_exc(input)
-
-    @classmethod
-    def deferred_reporter_list(cls, input):
-        l = None
-        if type(input) is str:
-            l = [input]
-        elif type(input) is list:
-            l = input
-        else:
-            cls.raise_exc(input)
-        try:
-            return [DeferredReporterNames[i.upper()] for i in input]
-        except:
-            cls.raise_exc(input)
+        # print("comes here", l)
+        #     return [ReportFormat[i.upper()] for i in l]
+        # except:
+        #     cls.raise_exc(input)
 
     @classmethod
     def mobile_os(cls, input):

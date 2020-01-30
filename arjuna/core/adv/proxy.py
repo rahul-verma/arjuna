@@ -1,10 +1,8 @@
 '''
-This file is a part of Test Mile Arjuna
-Copyright 2018 Test Mile Software Testing Pvt Ltd
+This file is a part of Arjuna
+Copyright 2015-2020 Rahul Verma
 
-Website: www.TestMile.com
-Email: support [at] testmile.com
-Creator: Rahul Verma
+Website: www.RahulVerma.net
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

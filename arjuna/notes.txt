@@ -1,15 +1,14 @@
-0.8.7
+0.8.8
 -----
-- Add report format switch. By default it should generate both XML and HTML reports.
-- See how difficult it is to integrate Allure reporting. Accordingly see screenshots possibility.
-- For multi-element introduce an arguent min_length. It should be a part of waiting till number of elements are more than the min specified.
-- For multi-element, see filter methods. .filter(attr_value(name=, value=))
 
 Next
 ----
 - Clean-up With
 - The config which is a part of context should be a simple RO proxy on top of the internal config. Reduce redundancy.
 - See if you can introduce value_as_* methods in containers. This means one can do value.as_str() or container.value_as_str(name)
+- See how difficult it is to integrate Allure reporting. Accordingly see screenshots possibility.
+- For multi-element introduce an arguent min_length. It should be a part of waiting till number of elements are more than the min specified.
+- For multi-element, see filter methods. .filter(attr_value(name=, value=))
 
 With TPI rearrangement:
 Progress

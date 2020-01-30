@@ -3,7 +3,6 @@ from arjuna import *
 
 init_arjuna()
 wordpress = create_wordpress_app()
-
 user, pwd = wordpress.config.get_user_option_value("wp.users.admin").split_as_str_list()
 
 # Login

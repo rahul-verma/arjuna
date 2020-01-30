@@ -1,10 +1,8 @@
 '''
-This file is a part of Test Mile Arjuna
-Copyright 2018 Test Mile Software Testing Pvt Ltd
+This file is a part of Arjuna
+Copyright 2015-2020 Rahul Verma
 
-Website: www.TestMile.com
-Email: support [at] testmile.com
-Creator: Rahul Verma
+Website: www.RahulVerma.net
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -22,7 +20,7 @@ limitations under the License.
 import sys
 import re
 
-from arjuna.core.enums import ArjunaOption
+from arjuna.core.enums import ArjunaOption, ReportFormat
 
 def ustr(input):
     return (str(input)).upper()
@@ -69,9 +67,14 @@ def lname_check(context, input):
         sys.exit(1)
     return input
 
-
-def port(input):
-    if type(input) is not str or int(input) < 1024:
-        print('Invalid Setu port {} provided. It should be an int such that 1024 < port < 65535'.format(input))
+# Argprse sends one argument at a time
+def report_format(input):
+    try:
+        ReportFormat[input.upper()]
+        return input.upper()
+    except Exception as e:
+        print(e)
+        print('Invalid Report Format provided: {}. Allowed values: {}'.format(input, ", ".join([e.name for e in ReportFormat])))
+        print('Exiting...', file=sys.stderr)
         sys.exit(1)
-    return input
+

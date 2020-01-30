@@ -1,10 +1,8 @@
 '''
-This file is a part of Test Mile Arjuna
-Copyright 2018 Test Mile Software Testing Pvt Ltd
+This file is a part of Arjuna
+Copyright 2015-2020 Rahul Verma
 
-Website: www.TestMile.com
-Email: support [at] testmile.com
-Creator: Rahul Verma
+Website: www.RahulVerma.net
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -25,6 +23,7 @@ import argparse
 from functools import partial
 
 from .validation import *
+from arjuna.core.enums import ReportFormat
 
 
 class Parser:
@@ -71,6 +70,7 @@ class RunParser(Parser):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument("-rid", "--runid", dest="run.id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
+        self.parser.add_argument('-rf', '--report-formats', dest="project.report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
         
         # self.parser.add_argument('-aco', '--arjuna-ref-option', dest="aro",
         #                          nargs=2,

@@ -1,6 +1,6 @@
 '''
 This file is a part of Arjuna
-Copyright 2018 Rahul Verma
+Copyright 2015-2020 Rahul Verma
 
 Website: www.RahulVerma.net
 
