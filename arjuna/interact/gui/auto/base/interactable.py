@@ -47,11 +47,11 @@ class Interactable(Configurable, Dispatchable):
     def __get_attr_value_from_remote(self, attr, optional=False):
         return self.__return_attr_value(self.dispatcher.get_attr_value(attr, optional))
 
-    def __get_source_from_remote(self):
+    def get_html(self):
         return self.__get_attr_value_from_remote("outerHTML")
 
     def load_source_parser(self):
-        raw_source = self.__get_source_from_remote()
+        raw_source = self.get_html()
         self.__source_parser = ElementXMLSourceParser(raw_source)
         self.__source_parser.load()
 
@@ -88,10 +88,15 @@ class Interactable(Configurable, Dispatchable):
             raise GuiElementTextNotSetError("Expected text: {}. Actual text is {}".format(text, entered_text))
 
     def _only_click(self):
+        # if self._should_scroll_to_view():
+        #     self.dispatcher.scroll_to_view()
         self.dispatcher.click()
 
     def __return_attr_value(self, result):
         return result and result or None
+
+    def scroll_full_height(self):
+        self.dispatcher.scroll_full_height()
 
     def click(self):
         # self.find_if_not_found()
@@ -103,9 +108,13 @@ class Interactable(Configurable, Dispatchable):
         self.dispatcher.hover()
 
     def hover(self):
-        # self.find_if_not_found()
         self.__wait_until_clickable_if_configured()
         self.__only_hover()
+
+    def hover_and_click(self):
+        self.__only_hover()
+        self.__wait_until_clickable_if_configured()
+        self.dispatcher.mouse_click()
 
     def __conditional_selected_state_click(self, condition_state):
         # self.find_if_not_found()

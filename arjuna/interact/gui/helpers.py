@@ -39,6 +39,10 @@ class _GuiInteractionConfigBuilder:
         self.__settings[GuiInteractionConfigType.CHECK_POST_STATE] = flag
         return self
 
+    def scroll_to_view(self, flag):
+        self.__settings[GuiInteractionConfigType.SCROLL_TO_VIEW] = flag
+        return self
+
     def build(self):
         return GuiInteractionConfig(self.__settings)
 
@@ -228,6 +232,10 @@ class With:
     @property
     def wtype(self):
         return self.__with_type
+
+    @property
+    def wvalue(self):
+        return self.__with_value
 
     @property
     def named_args(self):

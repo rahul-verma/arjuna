@@ -51,7 +51,7 @@ class SeleniumDriverElementDispatcher:
     def find_multielement(self, with_type, with_value):
         web_elements = ElementFinder.find_elements(self.driver_element, with_type, with_value)
         melement = MultiElement([self.create_dispatcher(self.__driver_dispatcher, web_element) for web_element in web_elements])
-        return melement.get_instance_count(), melement
+        return melement.get_size(), melement
 
     @property
     def driver(self):
@@ -65,6 +65,12 @@ class SeleniumDriverElementDispatcher:
 
     def hover(self):
         self.__driver_dispatcher.hover_on_element(self)
+
+    def mouse_click(self):
+        self.__driver_dispatcher.mouse_click_on_element(self)
+
+    def scroll_to_view(self):
+        self.__driver_dispatcher.scroll_to_element(self)
 
     def clear_text(self):
         DriverElementCommands.clear_text(self.driver_element)
@@ -95,3 +101,6 @@ class SeleniumDriverElementDispatcher:
 
     def get_text_content(self):
         return DriverElementCommands.get_text_content(self.driver_element)
+
+    def scroll_full_height(self):
+        self.__driver_dispatcher.execute_javascript("arguments[0].scrollBy(0, arguments[1].scrollHeight)", self.driver_element, self.driver_element)

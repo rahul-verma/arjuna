@@ -40,5 +40,5 @@ class Browser:
     def refresh(self, url):
         self.automator.dispatcher.refresh()
 
-    def execute_javascript(self, js):
-        self.automator.dispatcher.execute_javascript(script=js)
+    def execute_javascript(self, js, *args):
+        return self.automator.dispatcher.execute_javascript(js, *args)

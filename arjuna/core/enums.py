@@ -436,6 +436,7 @@ class GuiInteractionConfigType(Enum):
     CHECK_TYPE = auto()
     CHECK_PRE_STATE = auto()
     CHECK_POST_STATE = auto()
+    SCROLL_TO_VIEW = auto()
 
 class ReportFormat(Enum):
     XML = auto()

@@ -35,7 +35,8 @@ class TestRunner:
         self.__xml_path = os.path.join(Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR).as_str(), "report.xml")
         self.__html_path = os.path.join(Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR).as_str(), "report.html")
         self.__report_formats = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_REPORT_FORMATS).as_enum_list(ReportFormat)
-        self.__pytest_args = ["--rootdir", self.__project_dir, "--no-print-logs"]
+        # -s is to print to console.
+        self.__pytest_args = ["--rootdir", self.__project_dir, "--no-print-logs", "-s"]
 
     @property
     def tests_dir(self):

@@ -26,6 +26,7 @@ class Configurable:
             GuiInteractionConfigType.CHECK_TYPE: True,
             GuiInteractionConfigType.CHECK_PRE_STATE : True,
             GuiInteractionConfigType.CHECK_POST_STATE : True,
+            GuiInteractionConfigType.SCROLL_TO_VIEW : False,
         }
 
         if iconfig:
@@ -44,3 +45,6 @@ class Configurable:
 
     def _should_check_post_state(self):
         return self.settings[GuiInteractionConfigType.CHECK_POST_STATE]
+
+    def _should_scroll_to_view(self):
+        return self.settings[GuiInteractionConfigType.SCROLL_TO_VIEW]

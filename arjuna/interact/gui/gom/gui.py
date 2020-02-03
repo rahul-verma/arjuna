@@ -73,7 +73,7 @@ class Gui(AsserterMixIn):
         return self.__class__.__qualname__
 
 
-class AppPortion(Gui):
+class AppContent(Gui):
 
     def __init__(self, *, automator, label=None):
         super().__init__(config=automator.config, ext_config=automator.ext_config, label=label)
@@ -157,6 +157,8 @@ class AppPortion(Gui):
                 raise Exception("A With object or name of element is expected as argument.")
 
             if w.wtype == WithType.GNS_NAME:
+                if isinstance(w.wvalue, Enum):
+                    w.wvalue = w.wvalue.name
                 out.extend(self.gui_def.convert_to_with(w))
             else:
                 out.append(w)
@@ -195,6 +197,9 @@ class AppPortion(Gui):
             iconfig=iconfig
         )
 
+    def wait_until_element_absent(self, *str_or_with_locators):
+        return self.automator.wait_until_element_absent(self.convert_to_with_lmd(*str_or_with_locators))
+
     @property
     def dom_root(self):
         return self.automator.dom_root(self)
@@ -227,5 +232,5 @@ class AppPortion(Gui):
     def set_slomo(self, on, interval=None):
         self.automator.set_slomo(on, interval)
 
-    def execute_javascript(self, js):
-        return self.automator.execute_javascript(js)
+    def execute_javascript(self, js, *args):
+        return self.automator.execute_javascript(js, *args)

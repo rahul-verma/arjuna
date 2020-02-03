@@ -19,13 +19,13 @@ limitations under the License.
 
 from .gui import *
 
-class Page(AppPortion):
+class Page(AppContent):
 
     def __init__(self, *, source_gui, label=None):
         # app = isinstance(source_gui, App) and source_gui or source_gui.app
         super().__init__(automator=source_gui.automator, label=label)
 
-class Widget(AppPortion):
+class Widget(AppContent):
 
     def __init__(self, page, *, label=None):
         super().__init__(automator=page.automator, label=label)   

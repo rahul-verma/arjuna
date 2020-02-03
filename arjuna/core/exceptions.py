@@ -129,9 +129,20 @@ class _ElementNotFoundError(WaitableError):
         message = message and  "Error message: {}".format(message) or ""
         super().__init__("{} not found using any of the locators: {}.{}".format(elem_name, GuiElementMetaData.locators_as_str(locators), message))
 
+class _ElementPresentError(WaitableError):
+
+    def __init__(self, elem_type, *locators, message=None):
+        message = message and  "Error message: {}".format(message) or ""
+        super().__init__("{} expected to be absent but still present for one of the locators: {}.{}".format(elem_type, GuiElementMetaData.locators_as_str(locators), message))
+
 class GuiElementNotFoundError(_ElementNotFoundError):
 
-    def __init__(self, elem_name, *locators, message=None):
+    def __init__(self, *locators, message=None):
+        super().__init__("GuiElement(s)", *locators, message=message)
+
+class GuiElementPresentError(_ElementPresentError):
+
+    def __init__(self, *locators, message=None):
         super().__init__("GuiElement(s)", *locators, message=message)
 
 class GuiElementNotReadyError(WaitableError):

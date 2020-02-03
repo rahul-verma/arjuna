@@ -60,8 +60,12 @@ class SeleniumDriverDispatcher:
     def get_source(self):
         return DriverCommands.get_source(self.__driver)
 
-    def execute_javascript(self, script):
-        return DriverCommands.execute_javascript(self.__driver, script)
+    def execute_javascript(self, script, *args):
+        return DriverCommands.execute_javascript(self.__driver, script, 
+                *[
+                isinstance(arg, SeleniumDriverElementDispatcher) and arg.driver_element or arg for arg in args
+            ]
+        )
 
     def take_screenshot(self):
         DriverCommands.take_screenshot(self.__driver)
@@ -105,13 +109,13 @@ class SeleniumDriverDispatcher:
     def find_multielement(self, with_type, with_value):
         web_elements = ElementFinder.find_elements(self.__driver, with_type, with_value)
         melement = MultiElement([SeleniumDriverElementDispatcher(self, web_element) for web_element in web_elements])
-        return melement.get_instance_count(), melement
+        return melement.get_size(), melement
 
     def find_multielement_with_js(self, js):
         web_elements = self.execute_javascript(js)
         web_elements = self.__process_js_multielement(web_elements)
         melement = MultiElement([SeleniumDriverElementDispatcher(self, web_element) for web_element in web_elements])
-        return melement.get_instance_count(), melement
+        return melement.get_size(), melement
 
     def get_current_window_handle(self):
         return DriverCommands.get_current_window_handle(self.__driver)
@@ -168,5 +172,10 @@ class SeleniumDriverDispatcher:
     def hover_on_element(self, element_dispatcher):
         DriverCommands.hover_on_element(self.__driver, element_dispatcher.driver_element)
 
+    def mouse_click_on_element(self, element_dispatcher):
+        DriverCommands.mouse_click_on_element(self.__driver, element_dispatcher.driver_element)
+
+    def scroll_to_element(self, element_dispatcher):
+        DriverCommands.scroll_to_element(self.__driver, element_dispatcher.driver_element)
 
 

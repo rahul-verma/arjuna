@@ -28,6 +28,7 @@ from .drivercaps import DriverCapabilities
 from arjuna.interact.gui.auto.source.parser import ElementXMLSourceParser
 from arjuna.interact.gui.dispatcher.selenium.driver import SeleniumDriverDispatcher
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.auto.element.guielement import GuiElement
 
 class GuiAutomator(ElementContainer,Dispatchable):
 
@@ -189,8 +190,6 @@ class GuiAutomator(ElementContainer,Dispatchable):
 
     def find_multielement_with_js(self, js):
         return self.dispatcher.find_multielement_with_js(js)
-
-
     '''
         Public API
     '''
@@ -232,8 +231,12 @@ class GuiAutomator(ElementContainer,Dispatchable):
             iconfig=iconfig
         )
 
-    def execute_javascript(self, js):
-        return self.browser.execute_javascript(js)
+    def execute_javascript(self, js, *args):
+        return self.browser.execute_javascript(js, 
+        *[
+            isinstance(arg, GuiElement) and arg.dispatcher or arg for arg in args
+        ]
+        )
 
     ################################
     # Components

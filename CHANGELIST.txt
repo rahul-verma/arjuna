@@ -1,5 +1,10 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.8.8
+-----
+- wait_until_element_absent method support in Gui.
+- Element filtering support for multi-element. (Example 34).
+
 0.8.7
 -----
 - Arjuna now uses pytest as its engine instead of unittest. It supports unittest style tests as well.

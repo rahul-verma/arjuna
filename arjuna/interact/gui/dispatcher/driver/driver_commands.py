@@ -92,8 +92,8 @@ class DriverCommands:
         driver.switch_to.parent_frame()
 
     @classmethod
-    def execute_javascript(cls, driver, script):
-        return driver.execute_script(script)
+    def execute_javascript(cls, driver, script, *args):
+        return driver.execute_script(script, *args)
 
     @classmethod
     def take_screenshot(cls, driver):
@@ -150,4 +150,10 @@ class DriverCommands:
     def hover_on_element(cls, driver, webelement):
         chain = ActionChains(driver).move_to_element(webelement).perform()
 
+    @classmethod
+    def mouse_click_on_element(cls, driver, webelement):
+        chain = ActionChains(driver).click(webelement).perform()
 
+    @classmethod
+    def scroll_to_element(cls, driver, webelement):
+        cls.execute_javascript(driver, "arguments[0].scrollIntoView(true);", webelement)

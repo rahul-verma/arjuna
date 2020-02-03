@@ -38,9 +38,12 @@ class ElementFinder:
         try:
             return container.find_element(cls.BY_MAP[byType.upper()], byValue)
         except Exception as e:
-            raise GuiElementNotFoundError(str(e), "By.{}={}".format(byType, byValue))
+            raise GuiElementNotFoundError("By.{}={}".format(byType, byValue))
 
 
     @classmethod
     def find_elements(cls, container, byType, byValue):
-        return container.find_elements(cls.BY_MAP[byType.upper()], byValue)
+        elements = container.find_elements(cls.BY_MAP[byType.upper()], byValue)
+        if len(elements) == 0:
+            raise GuiElementNotFoundError("By.{}={}".format(byType, byValue))
+        return elements

@@ -107,6 +107,9 @@ class ElementXMLSourceParser:
             else:
                 raise Exception("Attribute {} not found for element".format(attr_name))
 
+    def get_value(self, optional=False):
+        return self.get_attr_value("value")
+
     def get_root_content(self):
         return self.__self_source
 

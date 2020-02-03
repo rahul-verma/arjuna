@@ -20,6 +20,10 @@ limitations under the License.
 import random
 import os
 
+# Selenium construct. Needs to create wrapper exception and use in dispatcher.
+from selenium.common.exceptions import StaleElementReferenceException
+
+
 from arjuna.interact.gui.auto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from arjuna.interact.gui.auto.base.configurable import Configurable
@@ -33,6 +37,7 @@ class _GuiPartialElement(GuiElement):
         self.__multi_element = multi_element
         self.__index = index
         self.dispatcher = dispatcher_element
+        self.load_source_parser()
 
     def create_dispatcher(self):
         pass
@@ -46,15 +51,15 @@ class _GuiPartialElement(GuiElement):
 
 class GuiMultiElement(Locatable,Dispatchable,Configurable):
     
-    def __init__(self, gui, lmd, iconfig=None): #, parent=None):
+    def __init__(self, gui, lmd, iconfig=None, elements=None): #, parent=None):
         Locatable.__init__(self, gui, lmd) #, parent)
         Dispatchable.__init__(self)
         Configurable.__init__(self, gui, iconfig)
-        self.__instance_count = 0
-        self.__instances = None
+        if elements:
+            self.__elements = elements
+        else:
+            self.__elements = list()   
         self.__source_parser = None
-
-        
 
     # def configure_partial_elements(self, elem_config):
     #     '''
@@ -62,7 +67,7 @@ class GuiMultiElement(Locatable,Dispatchable,Configurable):
     #         This is not used for usual multi-element.
     #         It is used by RadioGroup or DropDown etc which are higher level abstractions that use ME.
     #     '''
-    #     for instance in self.__instances:
+    #     for instance in self.__elements:
     #         instance.configure(elem_config)
 
     # def find(self):
@@ -76,30 +81,33 @@ class GuiMultiElement(Locatable,Dispatchable,Configurable):
 
     def load_source_parser(self):
         self.__source_parser = MultiElementSource()
-        for instance in self.__instances:
-            instance.load_source_parser()
-        self.__source_parser.load(self.__instances)
+        self.__source_parser.load(self.__elements)
 
     def __getitem__(self, index):
         # self.find_if_not_found()
-        return self.__instances[index]
+        return self.__elements[index]
 
     @property
-    def instance_count(self):
+    def size(self):
         # self.find_if_not_found()
-        return self.__instance_count
+        return len(self.__elements)
 
-    @instance_count.setter
-    def instance_count(self, count):
-        self.__instance_count = count
-        self.__instances = [_GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i), iconfig=self.settings) for i in range(self.instance_count)]
+    @size.setter
+    def size(self, count):
+        # The logic ignores stale elements 
+        for i in range(count):
+            try:
+                e = _GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i), iconfig=self.settings)
+                self.__elements.append(e)
+            except StaleElementReferenceException as e:
+                pass
 
-    length = instance_count
+    length = size
 
     @property
     def random_element(self):
         # self.find_if_not_found()
-        return self[random.randint(0, self.instance_count-1)]
+        return self[random.randint(0, self.size-1)]
 
     @property
     def first_element(self):
@@ -111,7 +119,7 @@ class GuiMultiElement(Locatable,Dispatchable,Configurable):
 
     def get_element_at_ordinal(self, ordinal):
         # self.find_if_not_found()
-        return self.__instances[ordinal-1]
+        return self.__elements[ordinal-1]
 
     def get_instance_by_visible_text(self, text):
         texts = self.__get_all_texts()
@@ -134,7 +142,7 @@ class GuiMultiElement(Locatable,Dispatchable,Configurable):
             return None
 
     def are_selected(self):
-        return [instance.is_selected() for instance in self.__instances]
+        return [instance.is_selected() for instance in self.__elements]
 
     # getting index attribute when it does not exist retursn value attribute.
     # So, not going the Selenium way. Setu would treat index as computer counting.
@@ -191,3 +199,73 @@ class GuiMultiElement(Locatable,Dispatchable,Configurable):
     @property
     def source(self):
         return self.__source_parser
+
+    @property
+    def elements(self):
+        return self.__elements
+
+    @property
+    def filter(self):
+        return ElementFilter(self)
+
+class ElementFilter:
+
+    def __init__(self, gui_multi_element):
+        self.__gui = gui_multi_element.gui
+        self.__lmd = gui_multi_element.lmd
+        self.__iconfig = gui_multi_element.settings
+        self.__elements = gui_multi_element.elements
+        self.__filtered_elements = self.__elements
+
+    def build(self):
+        me = GuiMultiElement(self.__gui, self.__lmd, iconfig=self.__iconfig, elements=self.__filtered_elements)
+        self.__filtered_elements = self.__elements
+        return me
+
+    def active(self):
+        out = list()
+        for e in self.__filtered_elements:
+            try:
+                e.get_html()
+                out.append(e)
+            except StaleElementReferenceException as e:
+                pass
+        self.__filtered_elements = out
+        return self
+
+    def visible(self):
+        self.__filtered_elements = [
+            e for e in self.__filtered_elements
+            if e.is_visible()
+        ]
+        return self
+
+    def attr(self, name):
+        self.__filtered_elements = [
+            e for e in self.__filtered_elements
+            if e.source.is_attr_present(name)
+        ]
+        return self        
+
+    def attr_value(self, name, value):
+        self.__filtered_elements = [
+            e for e in self.__filtered_elements
+            if e.source.get_attr_value(name) == value
+        ]
+        return self
+
+    def value(self, value):
+        self.__filtered_elements = [
+            e for e in self.__filtered_elements
+            if e.source.get_value("value") == str(value)
+        ]
+        return self
+
+    def text_content(self, text):
+        self.__filtered_elements = [
+            e for e in self.__filtered_elements
+            if text in e.text
+        ]
+        return self     
+
+    
