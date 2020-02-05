@@ -67,12 +67,12 @@ class TestRunner:
 
         if ic:
             prefix = k_flag and " and " or ""
-            k_args.append(prefix + " or ".join(["not " + c for c in ic]))
+            k_args.append(prefix + " and ".join(["not " + c for c in ic]))
             k_flag = True
 
         if ifn:
             prefix = k_flag and " and " or ""
-            k_args.append(prefix + " or ".join(["not " + c for c in ic]))
+            k_args.append(prefix + " and ".join(["not " + c for c in ifn]))
             k_flag = True
 
         if cm:
@@ -88,7 +88,7 @@ class TestRunner:
 
         if cfn:
             prefix = k_flag and " and " or "" 
-            k_args.append(prefix + " or ".join(cc))
+            k_args.append(prefix + " or ".join(cfn))
             k_flag = True
 
         if k_flag:
