@@ -17,10 +17,10 @@ class PytestHooks:
 
     @classmethod
     def get_html_report_plugin(cls, item):
-        return cls.get_plugin('html')
+        return cls.get_plugin(item, 'html')
 
     @classmethod
-    def take_html_report_item_actions(cls, html_plugin, outcome, *, screenshoter=None):
+    def add_screenshot_for_failed_result(cls, html_plugin, outcome, *, screenshoter=None):
         pytest_html = html_plugin
         report = outcome.get_result()
         extra = getattr(report, 'extra', [])
