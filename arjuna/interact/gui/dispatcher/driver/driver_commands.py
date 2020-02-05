@@ -96,7 +96,11 @@ class DriverCommands:
         return driver.execute_script(script, *args)
 
     @classmethod
-    def take_screenshot(cls, driver):
+    def take_screenshot(cls, driver, file_path):
+        return driver.save_screenshot(file_path)
+
+    @classmethod
+    def take_screenshot_as_base64(cls, driver):
         return driver.get_screenshot_as_base64()
 
     @classmethod

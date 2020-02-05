@@ -24,7 +24,7 @@ class WPBasePage(Page):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
-        self.externalize_guidef()
+        self.externalize_def()
 
     def logout(self):
         url = self.config.get_user_option_value("wp.logout.url").as_str()

@@ -25,7 +25,7 @@ class WPBasePage(Page):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
-        self.externalize_guidef()
+        self.externalize_def()
 
 
 class WPFullPage(WPBasePage):

@@ -21,15 +21,18 @@ from .gui import *
 
 class Page(AppContent):
 
-    def __init__(self, *, source_gui, label=None):
+    def __init__(self, *args, source_gui, label=None, **kwargs):
         # app = isinstance(source_gui, App) and source_gui or source_gui.app
         super().__init__(automator=source_gui.automator, label=label)
+        self.app.ui = self
+        self._load(*args, **kwargs)
 
 class Widget(AppContent):
 
-    def __init__(self, page, *, label=None):
-        super().__init__(automator=page.automator, label=label)   
+    def __init__(self, page, *args, label=None, **kwargs):
+        super().__init__(automator=page.automator, label=label, page=page)   
         self.__page = page
+        self._load(*args, **kwargs)
 
     @property
     def page(self):
@@ -60,6 +63,10 @@ class App(Gui, metaclass=abc.ABCMeta):
     def ui(self):
         return self.__ui
 
+    @ui.setter
+    def ui(self, page):
+        self.__ui = page
+
     def _create_default_ui(self):
         self.__ui = Page(source_gui=self, label="{}-Def-UI".format(self.label))
 
@@ -69,6 +76,7 @@ class App(Gui, metaclass=abc.ABCMeta):
 
     def prepare_widget(self, widget_object):
         return widget_object
+
 
 class WebApp(App):
 
@@ -81,6 +89,7 @@ class WebApp(App):
         super().__init__(config=config, ext_config=ext_config, label=label, ns_dir=ns_dir)
         from arjuna.core.enums import ArjunaOption
         self.__base_url = base_url is not None and base_url or self.config.get_arjuna_option_value(ArjunaOption.AUT_BASE_URL).as_str()
+        # self._load(*args, **kwargs)
 
     @property
     def base_url(self):

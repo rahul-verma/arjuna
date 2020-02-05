@@ -41,7 +41,7 @@ class WPBaseTest(unittest.TestCase):
     def setUp(self):
         self.__app = WebApp(base_url=self.config.get_user_option_value("wp.login.url").as_str())
         self.wordpress.launch()
-        self.wordpress.ui.externalize_guidef(ns_dir="sgns_wordpress_singlefile", def_file_name="WordPress.gns")
+        self.wordpress.ui.externalize_def(ns_dir="sgns_wordpress_singlefile", def_file_name="WordPress.gns")
         self.login_with_default_creds()
 
     def tearDown(self):

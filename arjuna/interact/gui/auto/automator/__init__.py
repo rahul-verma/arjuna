@@ -20,6 +20,7 @@ limitations under the License.
 import base64
 import os
 import time
+import datetime
 
 from arjuna.core.enums import ArjunaOption
 from arjuna.interact.gui.auto.base.container import ElementContainer
@@ -49,6 +50,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         self.__conditions_handler = GuiAutomatorConditions(self)
         self.__view_handler = ViewContextHandler(self)
         self.__browser = None
+        self.__screenshots_dir = config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR).as_str()
 
         self.__source_parser = None
 
@@ -65,6 +67,10 @@ class GuiAutomator(ElementContainer,Dispatchable):
     @property
     def ext_config(self):
         return self.__econfig
+
+    @property
+    def screenshots_dir(self):
+        return self.__screenshots_dir
 
     def create_lmd(self, *locators):
         return GuiElementMetaData.create_lmd(*locators)
@@ -150,28 +156,34 @@ class GuiAutomator(ElementContainer,Dispatchable):
     def quit(self):
         self.dispatcher.quit()
 
-    def __screenshot(self):
-        switch_view_context = None
-        if self.config.value(ArjunaOption.MOBILE_OS_NAME).lower() == "android":
-            view_name = self.view_handler.get_current_view_context()   
-            if self.view_handler._does_name_represent_web_view(view_name) :
-                self.view_handler.switch_to_native_view() 
-                switch_view_context = view_name
+    def __screenshot(self, file_path):
+        # switch_view_context = None
+        # if self.config.value(ArjunaOption.MOBILE_OS_NAME).lower() == "android":
+        #     view_name = self.view_handler.get_current_view_context()   
+        #     if self.view_handler._does_name_represent_web_view(view_name) :
+        #         self.view_handler.switch_to_native_view() 
+        #         switch_view_context = view_name
 
-        response = self.dispatcher.take_screenshot()
+        self.dispatcher.take_screenshot(file_path)
 
-        if switch_view_context:
-            self.view_handler.switch_to_view_context(switch_view_context)
-        
-        return response
+        # if switch_view_context:
+        #     self.view_handler.switch_to_view_context(switch_view_context)
 
-    def take_screenshot(self):
-        response = self.__screenshot()
-        image = base64.b64decode(response["data"]["codedImage"])
-        path = os.path.join(self.config.value(ArjunaOption.SCREENSHOTS_DIR), "{}.png".format(str(time.time()).replace(".", "-")))
-        f = open(path, "wb")
+    def take_screenshot(self, name=None):
+        image_b64 = self.dispatcher.take_screenshot_as_base64()
+        image = base64.b64decode(image_b64)
+
+        ts = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")[:-3]
+        if name:
+            name = name.replace("..", "") + "-"
+        else:
+            name = ""
+        file_name = "{}{}.png".format(name, ts)
+        fpath = os.path.join(self.screenshots_dir, file_name)
+        f = open(fpath, "wb")
         f.write(image)
         f.close()
+        return "../screenshots/{}".format(file_name), image_b64
 
     def focus_on_main_window(self):
         self.main_window.focus()

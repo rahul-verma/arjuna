@@ -24,7 +24,7 @@ class WPBaseWidget(Widget):
 
     def __init__(self, page):
         super().__init__(page)
-        self.externalize_guidef(ns_dir="{}_wordpress/widgets".format(self.app.gns_format.lower()))
+        self.externalize_def(ns_dir="{}_wordpress/widgets".format(self.app.gns_format.lower()))
 
 class LeftNavSideBar(WPBaseWidget):
 

@@ -4,6 +4,10 @@ Following is the list of critical additions and updates for a given released ver
 -----
 - wait_until_element_absent method support in Gui.
 - Element filtering support for multi-element. (Example 34).
+- Support for loadable page and widget via overridable prepare, reach_until and validate_readiness methods.
+- Support for browser level screenshot.
+- Support for automatic screenshot on failure in test and inclusion in HTML report.
+- 
 
 0.8.7
 -----

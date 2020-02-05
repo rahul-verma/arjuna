@@ -75,7 +75,7 @@ class Gui(AsserterMixIn):
 
 class AppContent(Gui):
 
-    def __init__(self, *, automator, label=None):
+    def __init__(self, *args, automator, label=None, **kwargs):
         super().__init__(config=automator.config, ext_config=automator.ext_config, label=label)
         self.__app = automator.app
         self.__automator = automator
@@ -99,7 +99,7 @@ class AppContent(Gui):
     def gui_def(self):
         return self.__guidef
 
-    def externalize_guidef(self, ns_dir=None, def_file_name=None):
+    def externalize_def(self, ns_dir=None, def_file_name=None):
         self.__def_file_name = def_file_name is not None and def_file_name or "{}.gns".format(self.label)        
         from arjuna.core.enums import ArjunaOption
         ns_dir = ns_dir and ns_dir or self.app.ns_dir
@@ -117,6 +117,10 @@ class AppContent(Gui):
     def def_file_path(self):
         return self.__def_file_path
 
+    def prepare(self):
+        # Children can override and write any necessary preparation instructions e.g. externalizing
+        pass
+
     def reach_until(self):
         # Children can override and write any necessary loading instructions
         pass
@@ -124,7 +128,8 @@ class AppContent(Gui):
     def validate_readiness(self):
         pass
 
-    def __load(self):
+    def _load(self, *args, **kwargs):
+        self.prepare(*args, **kwargs)
         try:
             self.validate_readiness()
         except:
@@ -132,12 +137,7 @@ class AppContent(Gui):
                 self.reach_until()
                 self.validate_readiness()
             except Exception as e:
-                raise Exception(
-                    "UI [{}] with SetuId [{}] did not load as expected. Error: {}.",
-                    self.__class__.__name__,
-                    self.get_setu_id(),
-                    str(e)
-                )
+                raise Exception("GUI [{}] did not load as expected. Error: {}.".format(self.qual_name, str(e)))
 
     def transit(self, page):
         pass
@@ -234,3 +234,8 @@ class AppContent(Gui):
 
     def execute_javascript(self, js, *args):
         return self.automator.execute_javascript(js, *args)
+
+    def take_screenshot(self, name=None):
+        return self.automator.take_screenshot(name)
+
+

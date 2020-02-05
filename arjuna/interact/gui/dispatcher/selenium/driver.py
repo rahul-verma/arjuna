@@ -67,8 +67,11 @@ class SeleniumDriverDispatcher:
             ]
         )
 
-    def take_screenshot(self):
-        DriverCommands.take_screenshot(self.__driver)
+    def take_screenshot(self, file_path):
+        DriverCommands.take_screenshot(self.__driver, file_path)
+
+    def take_screenshot_as_base64(self):
+        return DriverCommands.take_screenshot_as_base64(self.__driver)
 
     def find_element(self, with_type, with_value):
         element = ElementFinder.find_element(self.__driver, with_type, with_value)
