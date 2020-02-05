@@ -194,6 +194,7 @@ class __RunCommand(Command):
         self.parents = parents
         parser = subparsers.add_parser(sub_parser_name, parents=[parent.get_parser() for parent in parents], help=help)
         self._set_parser(parser)
+        self.enumerate_only = False
 
     def execute(self, arg_dict):
         for parent in self.parents:
@@ -204,6 +205,9 @@ class __RunCommand(Command):
         del arg_dict["project.root.dir"]
         runid = arg_dict["run.id"]
         del arg_dict["run.id"]
+
+        self.enumerate_only = arg_dict.pop("enumerate")
+
         Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid)
 
         import sys
@@ -223,26 +227,51 @@ class RunProject(__RunCommand):
         from arjuna.engine.runner import TestRunner
         test_runner = TestRunner()
         test_runner.load_all_tests()
-        test_runner.run()
+        test_runner.run(only_enumerate=self.enumerate_only)
 
 
-# class RunNames(__RunCommand):
-#     def __init__(self, subparsers, parents):
-#         super().__init__(subparsers, 'run-names', parents, "Run names (modules/functions)")
-#
-#     def execute(self, arg_dict):
-#         picker_args = {
-#             # 'cm': arg_dict.pop('cmodules'),
-#             # 'im': arg_dict.pop('imodules'),
-#             'cf': arg_dict.pop('cfunctions'),
-#             # 'if': arg_dict.pop('ifunctions')
-#         }
-#         super().execute(arg_dict)
-#
-#         from arjuna.engine.runner import TestRunner
-#         test_runner = TestRunner()
-#         test_runner
-#         self.unitee.load_session_for_name_pickers(**picker_args)
-#         self.unitee.run()
-#         self.unitee.tear_down()
+class RunPickers(__RunCommand):
+
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-pickers', parents, "Run tests based on pickers specified.")
+
+    def execute(self, arg_dict):
+        pickers_dict = dict()
+        pickers = (
+            ('cmodules', 'cm'),
+            ('imodules', 'im'),
+            ('cclasses', 'cc'),
+            ('iclasses', 'ic'),
+            ('cfunctions', 'cfn'),
+            ('ifunctions', 'ifn'),
+            )
+
+        def process_picker(sname, tname):
+            if sname in arg_dict:
+                val = arg_dict.pop(sname)
+                if not val: 
+                    pickers_dict[tname] = list()
+                    return
+                pickers_dict[tname] = val.split(",")
+            else:
+                pickers_dict[tname] = list()
+
+        def add_py_ext(name):
+            if not name.lower().endswith(".py"):
+                return name + ".py"
+            else:
+                return name
+
+        for picker in pickers:
+            process_picker(picker[0], picker[1])
+
+        pickers_dict['cm'] = [add_py_ext(m) for m in pickers_dict['cm']]
+        pickers_dict['im'] = [add_py_ext(m) for m in pickers_dict['im']]
+
+        super().execute(arg_dict)
+
+        from arjuna.engine.runner import TestRunner
+        test_runner = TestRunner()
+        test_runner.load_tests_from_pickers(**pickers_dict)
+        test_runner.run(only_enumerate=self.enumerate_only)
 

@@ -51,14 +51,14 @@ class ArjunaCLI:
         run_parser = RunParser()
         # session_parser = SessionParser()
         # group_parser = GroupParser()
-        # names_parser = NamesParser()
+        pickers_parser = PickersParser()
 
         # Create primary command handlers
         # self.create_project = CreateProject(subparsers, [new_project_parser])
         self.run_project = RunProject(subparsers, [project_parser, run_parser])
         # self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
         # self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])
-        # self.run_names = RunNames(subparsers, [project_parser, run_parser, names_parser])
+        self.run_pickers = RunPickers(subparsers, [project_parser, run_parser, pickers_parser])
 
     def init(self):
         time.sleep(0.1)
@@ -82,7 +82,7 @@ class ArjunaCLI:
             CommandEnum.RUN_PROJECT: "Running the project",
             # CommandEnum.RUN_SESSION: "Running the selected session",
             # CommandEnum.RUN_GROUP: "Running the selected group",
-            # CommandEnum.RUN_NAMES: "Running the selected names"
+            CommandEnum.RUN_PICKERS: "Running tests based on pickers"
         }
 
         # Hyphens in commands are replaced with underscores for enum conversion
@@ -99,7 +99,7 @@ class ArjunaCLI:
             CommandEnum.RUN_PROJECT: (self.run_project.execute, ),
             # CommandEnum.RUN_SESSION: (self.run_session.execute, ),
             # CommandEnum.RUN_GROUP: (self.run_group.execute, ),
-            # CommandEnum.RUN_NAMES: (self.run_names.execute, )
+            CommandEnum.RUN_PICKERS: (self.run_pickers.execute, )
         }
 
         # Delegation using Arjuna's Enum based switch-case equivalent

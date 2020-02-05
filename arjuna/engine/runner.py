@@ -37,6 +37,7 @@ class TestRunner:
         self.__report_formats = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_REPORT_FORMATS).as_enum_list(ReportFormat)
         # -s is to print to console.
         self.__pytest_args = ["--rootdir", self.__project_dir, "--no-print-logs", "-s"]
+        self.__test_args = []
 
     @property
     def tests_dir(self):
@@ -48,8 +49,53 @@ class TestRunner:
     
     def load_all_tests(self):
         self.__pytest_args.insert(0, self.tests_dir)
-    
-    def run(self):
+
+    def load_tests_from_pickers(self, *, cm=None, im=None, cc=None, ic=None, cfn=None, ifn=None):  
+
+        def process_modules(ms):
+            ms = [m.replace(".py", "").replace("*","").replace("/", " and ").replace("\\", " and ") for m in ms]
+            return ["and" in m and "({})".format(m) or m for m in ms]
+
+        k_args = []
+
+        k_flag = False
+
+        if im:            
+            im = process_modules(im)
+            k_args.append(" and ".join(["not " + m for m in im]))
+            k_flag = True
+
+        if ic:
+            prefix = k_flag and " and " or ""
+            k_args.append(prefix + " or ".join(["not " + c for c in ic]))
+            k_flag = True
+
+        if ifn:
+            prefix = k_flag and " and " or ""
+            k_args.append(prefix + " or ".join(["not " + c for c in ic]))
+            k_flag = True
+
+        if cm:
+            prefix = k_flag and " and " or ""            
+            cm = process_modules(cm)
+            k_args.append(prefix + " or ".join(cm))
+            k_flag = True
+
+        if cc:
+            prefix = k_flag and " and " or "" 
+            k_args.append(prefix + " or ".join(cc))
+            k_flag = True
+
+        if cfn:
+            prefix = k_flag and " and " or "" 
+            k_args.append(prefix + " or ".join(cc))
+            k_flag = True
+
+        if k_flag:
+            self.__test_args.append("-k " + "".join(k_args))
+        
+  
+    def run(self, *, only_enumerate):
         from arjuna import Arjuna
         from arjuna.core.enums import ArjunaOption
 
@@ -62,6 +108,11 @@ class TestRunner:
             pytest_report_args.extend(["--html", self.__html_path, "--self-contained-html"])
 
         self.__pytest_args.extend(pytest_report_args)
+        self.__pytest_args.extend(self.__test_args)
+
+        print(only_enumerate)
+        if only_enumerate:
+            self.__pytest_args.append("--collect-only")
 
         print("Executing pytest with args: {}".format(self.__pytest_args))
         pytest.main(self.__pytest_args)

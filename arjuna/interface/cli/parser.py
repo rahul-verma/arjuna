@@ -71,7 +71,8 @@ class RunParser(Parser):
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument("-rid", "--runid", dest="run.id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
         self.parser.add_argument('-rf', '--report-formats', dest="project.report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
-        
+        self.parser.add_argument('-e', '--enumerate-only', dest="enumerate", action='store_true', help = 'Show picked tests without running them.')
+
         # self.parser.add_argument('-aco', '--arjuna-ref-option', dest="aro",
         #                          nargs=2,
         #                          action='append',
@@ -99,6 +100,19 @@ class RunParser(Parser):
     def process(self, arg_dict):
         pass
 
+class PickersParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('-ctm', '--cmodules', dest="cmodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for considering test modules.')
+        self.parser.add_argument('-itm', '--imodules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for ignoring test modules.')
+        self.parser.add_argument('-ctc', '--cclasses', dest="cclasses", metavar=('C1','C2'), default=None, nargs='+', help='One or more names/patterns for considering test classes.')
+        self.parser.add_argument('-itc', '--iclasses', dest="iclasses", metavar=('C1','C2'), default=None, nargs='+', help='One or more names/patterns for ignoring test classes.')
+        self.parser.add_argument('-ctf', '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions/methods.')
+        self.parser.add_argument('-itf', '--ifunctions', dest="ifunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for ignoring test function/methods.')
+
+    def process(self, arg_dict):
+        pass
 
 # class NamesParser(Parser):
 #     def __init__(self):

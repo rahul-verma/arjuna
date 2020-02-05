@@ -1,10 +1,9 @@
 0.8.8
 -----
-- Add support for screenshots at browser level. if possible at element level.
-- Add support for adding screeshots in HTML report.
+- Check: pytest ini file within Arjuna.
+- Other pytest switches of interest to be wrapped in alignment with Arjuna.
+- Integrate Discovery module from earlier code to validate m/c/f/m
 
-- screenshot taking capability
-- addition of screenshot to pytest HTML report.
 
 Next
 ----
@@ -440,7 +439,7 @@ class RunGroup(__RunCommand):
         self.unitee.tear_down()
 
 
-class RunNames(__RunCommand):
+class RunPickers(__RunCommand):
     def __init__(self, subparsers, parents):
         super().__init__(subparsers, 'run-names', parents, "Run names (modules/functions)")
 
@@ -833,3 +832,7 @@ The default model for Gui automation in Arjuna.
 - To remove complex state management, introduce redundancy, but implemenet separate flows:
     - nested vs direct element finding
     - first time find (parent finds it), and refinding (element asks for it from parent)
+
+Explore Py-Needle
+-----------------
+Visual Testing 
