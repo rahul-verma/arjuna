@@ -10,7 +10,7 @@ Following is the list of critical additions and updates for a given released ver
 - Support for -cm -im -cc -ic -cf -if test filtering switches added.
 - Support for -e --enumerate-only switch added to check display picked tests without running.
 - Added @tc and @tm decorators for Arjuna test class and test method respectively.
-- Added support for defining dependencies by provide name and exclude_if args to @tm
+- Added support for defining dependencies by provide id and exclude_if args to @tm
 - Data Driven Testing support using drive_with argument to @tm
 - Support for record as a Data Source type.
 - 

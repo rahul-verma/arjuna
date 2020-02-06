@@ -25,7 +25,7 @@ def simple_dec(func):
         call_func(func, self, request, *args, **kwargs)
     return wrapper
 
-def tm(f=None, *, name=None, drive_with=None, exclude_if=None):
+def tm(f=None, *, id=None, drive_with=None, exclude_if=None):
     if f is not None:
         return simple_dec(f)
 
@@ -33,11 +33,9 @@ def tm(f=None, *, name=None, drive_with=None, exclude_if=None):
         print(func, exclude_if and exclude_if())
         orig_func = func
         if exclude_if:
-            print("here", exclude_if())
-            print(name)
-            func = pytest.mark.dependency(name=name, depends=exclude_if())(func)
+            func = pytest.mark.dependency(name=id, depends=exclude_if())(func)
         else:
-            func = pytest.mark.dependency(name=name)(func)
+            func = pytest.mark.dependency(name=id)(func)
 
         if drive_with:
             func = pytest.mark.parametrize(*drive_with())(func) 
