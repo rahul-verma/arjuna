@@ -62,6 +62,8 @@ class ArjunaSingleton:
         self.central_conf = None
         self.__console = None
         self.__logger = None
+        from arjuna.engine.store import DataStore
+        self.__data_store = DataStore()
 
     @property
     def gui_mgr(self):
@@ -103,6 +105,10 @@ class ArjunaSingleton:
     @property
     def console(self):
         return self.__console
+
+    @property
+    def data_store(self):
+        return self.__data_store
 
     @classmethod
     def get_test_session(cls):
@@ -398,6 +404,10 @@ class Arjuna:
     @classmethod
     def get_ref_user_option_value(cls, option):
         return cls.get_central_config().get_ref_user_option_value(option) 
+
+    @classmethod
+    def get_data_store(cls):
+        return cls.ARJUNA_SINGLETON.data_store
 
     @staticmethod
     def get_test_context(name):

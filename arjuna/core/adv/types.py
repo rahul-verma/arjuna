@@ -32,6 +32,9 @@ class CIStringDict:
     def __getitem__(self, key):
         return self.__store[key.lower()]
 
+    def pop(self, key):
+        return self.__store.pop(key.lower())
+
     def __setitem__(self, key, value):
         self.__store[key.lower()] = value
 
