@@ -19,10 +19,11 @@ limitations under the License.
 
 class PytestHooks:
 
+
     @classmethod
     def get_request_attr(cls, item, obj_name):
         request =  cls.get_request_obj(item)
-        return getattr(request.cls, obj_name)
+        return getattr(cls.get_container_based_on_scope(request), obj_name)
 
     @classmethod
     def get_request_obj(cls, item):

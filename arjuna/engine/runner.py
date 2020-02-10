@@ -110,7 +110,6 @@ class TestRunner:
         self.__pytest_args.extend(pytest_report_args)
         self.__pytest_args.extend(self.__test_args)
 
-        print(only_enumerate)
         if only_enumerate:
             self.__pytest_args.append("--collect-only")
 

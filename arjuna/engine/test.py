@@ -19,23 +19,30 @@ limitations under the License.
 
 
 from arjuna.core.utils import obj_utils
+from arjuna.engine.hook import PytestHooks
 import functools
 import pytest
 
 class Info:
 
-    def __init__(self, func, pytest_request):
+    def __init__(self, pytest_request):
         self.__request = pytest_request
-        self.__func = func
-        self.__mod_name = func.__module__
+        self.__mod_name = pytest_request.module.__name__
         rnode = self.__request.node
-        self.__orig_name = rnode.originalname and rnode.originalname or rnode.name
-        self.__node_name = rnode.name
+        if self.__request.scope == "module":
+            self.__orig_name = rnode.name
+            self.__node_name = rnode.name
+        elif self.__request.scope == "function":
+            self.__orig_name = rnode.originalname and rnode.originalname or rnode.name
+            self.__node_name = rnode.name
 
     def get_qual_name(self, with_params=False):
         # if pytest name has params only then originalname is set else it is None
-        name = with_params and self.__node_name or self.__orig_name
-        return self.__mod_name + "." + name
+        if self.__request.scope == "module":
+            return self.__node_name
+        else:
+            name = with_params and self.__node_name or self.__orig_name
+            return self.__mod_name + "." + name
 
     @property
     def qual_name(self):
@@ -43,16 +50,69 @@ class Info:
 
     @property
     def qual_name_with_data(self):
-        return self.get_qual_name(with_params=True)
+        qname = self.get_qual_name(with_params=True)
+        if self.__request.fixturename:
+            return qname + ":" + self.__request.fixturename
+        else:
+            return qname
+
+    def __getattr__(self, name):
+        return getattr(self.__request, name)
+
+LOOKUP_ORDER = {
+    "session" : ("session", ),
+    "module" : ("session", "module"),
+    "class" : ("function", "cls", "module"),
+    "function" : ("function", "cls", "module", "session")
+}
+
+SCOPE_MAP = {
+    "function" : "function",
+    "class"    : "cls",
+    "module"   : "module",
+    "session"  : "session"
+}
+
+class Resources:
+
+    def __init__(self, pytest_request):
+        vars(self)['_request'] = pytest_request
+
+    def __getitem__(self, name):
+        scopes = LOOKUP_ORDER[self._request.scope]
+        for scope in scopes:
+            try:
+                container = getattr(self._request, SCOPE_MAP[scope])
+                return getattr(container, name)
+            except Exception as e:
+                continue
+        raise Exception("Attribute with name {} does not exist in request scope for {}".format(name, containers))
+
+    def __setitem__(self, name, value):
+        container = getattr(self._request, SCOPE_MAP[self._request.scope])
+        setattr(container, name, value)
+
+    def __getattr__(self, name):
+        if type(name) is str and not name.startswith("__"):
+            return self[name]
+
+    def __setattr__(self, name, value):
+        container = getattr(self._request, SCOPE_MAP[self._request.scope])
+        setattr(container, name, value)
+
+    @property
+    def raw_request(self):
+        return self._request
 
 class My:
 
-    def __init__(self, func):
-        self.__func = func
+    def __init__(self):
         self.__data = None
         self.__info = None
+        self.__resources = None
         self.__handler = None
         self.__qual_name = None
+        self.__request =  None
 
     @property
     def data(self):
@@ -63,34 +123,53 @@ class My:
         self.__data = record
 
     def set_req_obj(self, pytest_request):
-        self.__info = Info(self.__func, pytest_request)
+        self.__request = pytest_request
+        self.__info = Info(pytest_request)
+        self.__resources = Resources(pytest_request)
 
     @property
     def info(self):
         return self.__info
 
+    @property
+    def resources(self):
+        return self.__resources
+
+    @property
+    def raw_request(self):
+        return self.__request
+
 def tc(cls):
     setattr(cls, 'get_test_qual_name', get_test_qual_name)
     return cls
 
-def call_func(func, my, request):
+def call_func(func, my, request, *args, **kwargs):
     from arjuna import Arjuna
     my.set_req_obj(request) 
     qual_name = my.info.qual_name_with_data
     Arjuna.get_logger().info("Begin test function: {}".format(qual_name))        
-    func(my, request)
+    func(my, request, *args, **kwargs)
     Arjuna.get_logger().info("End test function: {}".format(qual_name))
 
 def simple_dec(func):
     @functools.wraps(func)
-    def wrapper(my, request):
+    def wrapper(my, request, *args, **kwargs):
         my.handler = request
-        call_func(func, self, my, request)
+        call_func(func, self, my, request, *args, **kwargs)
     return wrapper
 
-def tf(f=None, *, id=None, drive_with=None, exclude_if=None):
+def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
     if f is not None:
+        func = pytest.mark.parametrize('my', My(func))(func) 
         return simple_dec(f)
+
+    if resources:
+        if type(resources) is str:
+            resources = (resources)
+        elif type(resources) is list:
+            resources = tuple(resources)
+        else:
+            raise Exception("resources value must be a string or list/tuple of strings")
 
     def format_test_func(func):
         orig_func = func
@@ -99,19 +178,22 @@ def tf(f=None, *, id=None, drive_with=None, exclude_if=None):
         else:
             func = pytest.mark.dependency(name=id)(func)
 
+        if resources:
+            func = pytest.mark.usefixtures(*resources)(func)
+
         if drive_with:
             records = drive_with.build().all_records
             my_objects = []
             for record in records:
-                my = My(func)
+                my = My()
                 my.data = record
                 my_objects.append(my)
             func = pytest.mark.parametrize('my', my_objects)(func) 
 
         @functools.wraps(orig_func)
-        def wrapper(my, request):
+        def wrapper(my, request, *args, **kwargs):
             my.handler = request
-            call_func(func, my, request)
+            call_func(func, my, request, *args, **kwargs)
         return wrapper
     
     return format_test_func
