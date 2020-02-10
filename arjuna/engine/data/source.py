@@ -25,41 +25,10 @@ from arjuna.core.reader.excel import *
 from arjuna.core.reader.ini import *
 from arjuna.core.reader.textfile import *
 from arjuna.core.thread import decorators
-from .exceptions import *
+from arjuna.core.exceptions import *
 from arjuna.core.types import constants
+from arjuna.engine.data.record import *
 # from arjuna.core.utils import sys_utils
-
-
-class ListDataRecord:
-
-    def __init__(self, data_record):
-        self.__data_record = data_record
-
-    @property
-    def record(self):
-        return self.__data_record
-
-
-class MapDataRecord:
-
-    def __init__(self, data_record):
-        self.__data_record = {i.lower():j for i,j in dict(data_record).items()}
-
-    @property
-    def record(self):
-        return self.__data_record
-
-    def should_exclude(self):
-        if "exclude" not in self.__data_record:
-            return False
-
-        exclude = self.__data_record['exclude']
-        if exclude.upper() in constants.TRUES:
-            return True
-        else:
-            del self.__data_record["exclude"]
-            return False
-
 
 class DataSource(metaclass=abc.ABCMeta):
     def __init__(self):
@@ -120,6 +89,20 @@ class DataSource(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def reset(self):
         pass
+
+    @property
+    def all_records(self):
+        out = []
+        while True:
+            try:
+                record = self.next() #.record
+                out.append(record)
+            except DataSourceFinished as e:
+                # print(e)
+                # import traceback
+                # traceback.print_exc()
+                break
+        return out
 
 
 class FileDataSource(DataSource, metaclass=abc.ABCMeta):
@@ -229,3 +212,143 @@ class ExcelFileMapDataSource(FileDataSource):
 
     def process(self, data_record):
         return MapDataRecord(data_record)
+
+
+
+class DummyDataSource(DataSource):
+    MR = DataRecord()
+
+    def __init__(self):
+        super().__init__()
+        self.done = False
+
+    def get_next(self):
+        if self.done:
+            raise DataSourceFinished()
+        else:
+            self.done = True
+            return DummyDataSource.MR
+
+    def should_exclude(self, data_record):
+        return False
+
+
+class SingleDataRecordSource(DataSource):
+    def __init__(self, record):
+        super().__init__()
+        self.record = record
+        self.done = False
+
+    def get_next(self):
+        if not self.is_terminated() and not self.done:
+            self.done = True
+            return self.record
+        else:
+            raise DataSourceFinished()
+
+    def should_exclude(self, data_record):
+        return False
+
+    def reset(self):
+        pass
+
+
+class DataArrayDataSource(DataSource):
+    def __init__(self, records):
+        super().__init__()
+        self.records = records
+        self.__iter = iter(self.records)
+
+    def get_next(self):
+        return next(self.__iter)
+
+    def should_exclude(self, data_record):
+        return False
+
+
+class DataFunctionDataSource(DataSource):
+    def __init__(self, func, *vargs, **kwargs):
+        super().__init__()
+        self.func = func
+        self.vargs = vargs
+        self.kwargs = kwargs
+        try:
+            self.__iter = iter(self.func(*self.vargs, **self.kwargs))
+        except:
+            raise Exception("data_function should return an object that is an iterable.")
+
+    def get_next(self):
+        obj = next(self.__iter)
+        if isinstance(obj, DataRecord):
+            return obj
+        elif type(obj) is tuple or type(obj) is list:
+            return DataRecord(*obj)
+        elif type(obj) is dict:
+            return DataRecord(**obj)
+        else:
+            return DataRecord(obj)
+
+    def terminate(self):
+        super().terminate()
+        # self.ds.terminate()
+
+    def should_exclude(self, data_record):
+        return False
+
+
+class DataClassDataSource(DataSource):
+    def __init__(self, dclass, *vargs, **kwargs):
+        super().__init__()
+        self.klass = dclass
+        self.vargs = vargs
+        self.kwargs = kwargs
+        try:
+            self.__iter = iter(self.klass(*self.vargs, **self.kwargs))
+        except:
+            raise Exception("data_class should implement Python iteration protocol.")
+
+    def get_next(self):
+        obj = next(self.__iter)
+        if isinstance(obj, DataRecord):
+            return obj
+        elif type(obj) is tuple or type(obj) is list:
+            return DataRecord(*obj)
+        elif type(obj) is dict:
+            return DataRecord(**obj)
+        else:
+            return DataRecord(obj)
+
+    def terminate(self):
+        super().terminate()
+        # self.ds.terminate()
+
+    def should_exclude(self, data_record):
+        return False
+
+
+class MultiDataSource(DataSource):
+    def __init__(self, dsource_defs):
+        super().__init__()
+        self.dsdefs = dsource_defs
+        self.current_dsource = None
+        self.def_iter = iter(self.dsdefs)
+
+    def __init_next_source(self):
+        try:
+            dsdef = next(self.def_iter)
+            self.current_dsource = dsdef.build()
+        except:
+            raise StopIteration()
+
+    def get_next(self):
+        if self.current_dsource is None:
+            self.__init_next_source()
+
+        try:
+            return self.current_dsource.next()
+        except StopIteration as e:
+            self.__init_next_source()
+            return self.get_next()
+
+    def should_exclude(self, data_record):
+        return False

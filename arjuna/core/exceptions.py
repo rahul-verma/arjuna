@@ -169,3 +169,7 @@ class TimeoutError(WaitableError):
 
     def __init__(self, context, message):
         super().__init__(". Timeout in {}. Error Message: {}".format(context, message))  
+
+class DataSourceFinished(StopIteration):
+    def __init__(self, msg=None):
+        super().__init__(msg is None and "Done" or msg)

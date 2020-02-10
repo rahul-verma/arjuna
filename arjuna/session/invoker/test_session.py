@@ -22,7 +22,7 @@ import time
 import logging
 from arjuna import ArjunaOption
 
-from arjuna.drive.databroker import DataBroker
+
 from arjuna.configure.invoker.config import DefaultTestConfig
 
 from arjuna.configure.invoker.configurator import TestConfigurator
@@ -39,7 +39,6 @@ class DefaultTestSession:
         self.__cli_central_config = None
         self.__cli_test_config = None
         self.__configurator = None
-        self.__data_broker = DataBroker()
         self.__project_config_loaded = False
         self.__guimgr = None
 
@@ -63,7 +62,6 @@ class DefaultTestSession:
         self.__configurator = TestConfigurator(run_id)
         self.__configurator.init(root_dir, cli_config)
         config = self.__configurator.create_project_conf()
-        self.__databroker_handler = TestSessionDataBrokerHandler(self, self.__data_broker)
         self.__guimgr = GuiManager(config)
         return self.__create_config(config)
 

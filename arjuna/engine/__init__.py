@@ -62,7 +62,7 @@ class ArjunaSingleton:
         self.central_conf = None
         self.__console = None
         self.__logger = None
-        from arjuna.engine.store import DataStore
+        from arjuna.engine.data.store import DataStore
         self.__data_store = DataStore()
 
     @property

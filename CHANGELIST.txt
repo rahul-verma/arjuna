@@ -9,13 +9,12 @@ Following is the list of critical additions and updates for a given released ver
 - Support for automatic screenshot on failure in test and inclusion in HTML report.
 - Support for -cm -im -cc -ic -cf -if test filtering switches added.
 - Support for -e --enumerate-only switch added to check display picked tests without running.
-- Added @tc and @tm decorators for Arjuna test class and test method respectively.
-- Added support for defining dependencies by provide id and exclude_if args to @tm
-- Data Driven Testing support using drive_with argument to @tm
-- Support for record as a Data Source type.
-- 
-
-
+- Added @tf decorator for Arjuna test method respectively.
+- Added support for defining dependencies by provide id and exclude_if args to @tf
+- Data Driven Testing support using drive_with argument to @tf
+- Support for a single data record source using record argument.
+- Added support for data store, shared objects and basic data pipeline.
+- Support for 'my' as a single argument containing info and data about test func.
 
 0.8.7
 -----
