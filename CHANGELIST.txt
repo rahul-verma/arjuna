@@ -2,6 +2,8 @@ Following is the list of critical additions and updates for a given released ver
 
 0.8.9
 -----
+- Support for @test decorator withour any args for simple tests.
+- 
 
 
 0.8.8

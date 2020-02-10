@@ -92,6 +92,11 @@ class ListDataRecord:
     def record(self):
         return self.__data_record
 
+class DummyDataRecord(ListDataRecord):
+    
+    def __init__(self):
+        super().__init__(None)
+
 
 class MapDataRecord:
 

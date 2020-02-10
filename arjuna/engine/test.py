@@ -20,6 +20,8 @@ limitations under the License.
 
 from arjuna.core.utils import obj_utils
 from arjuna.engine.hook import PytestHooks
+from arjuna.engine.data.record import DummyDataRecord
+from arjuna.engine.data.store import SharedObjects
 import functools
 import pytest
 
@@ -86,7 +88,7 @@ class Resources:
                 return getattr(container, name)
             except Exception as e:
                 continue
-        raise Exception("Attribute with name {} does not exist in request scope for {}".format(name, containers))
+        raise Exception("Attribute with name >>{}<< does not exist in request scope for {}".format(name, scopes))
 
     def __setitem__(self, name, value):
         container = getattr(self._request, SCOPE_MAP[self._request.scope])
@@ -113,10 +115,15 @@ class My:
         self.__handler = None
         self.__qual_name = None
         self.__request =  None
+        self.__shared_objects = None
 
     @property
     def data(self):
         return self.__data
+
+    @property
+    def module_shared_space(self):
+        return self.__request.module.shared_space
 
     @data.setter
     def data(self, record):
@@ -126,6 +133,13 @@ class My:
         self.__request = pytest_request
         self.__info = Info(pytest_request)
         self.__resources = Resources(pytest_request)
+        if pytest_request.scope in {"session", "module", "class"}:
+            try:
+                getattr(pytest_request.module, "shared_space")
+                print("old", pytest_request)
+            except:
+                print("new", pytest_request)
+                pytest_request.module.shared_space = SharedObjects()
 
     @property
     def info(self):
@@ -155,12 +169,16 @@ def simple_dec(func):
     @functools.wraps(func)
     def wrapper(my, request, *args, **kwargs):
         my.handler = request
-        call_func(func, self, my, request, *args, **kwargs)
+        call_func(func, my, request, *args, **kwargs)
     return wrapper
 
 def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
+
+    # Check if @test is provided without arguments
     if f is not None:
-        func = pytest.mark.parametrize('my', My(func))(func) 
+        my = My()
+        my.data = DummyDataRecord()
+        func = pytest.mark.parametrize('my', [my])(f) 
         return simple_dec(f)
 
     if resources:
@@ -189,6 +207,10 @@ def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
                 my.data = record
                 my_objects.append(my)
             func = pytest.mark.parametrize('my', my_objects)(func) 
+        else:
+            my = My()
+            my.data = DummyDataRecord()
+            func = pytest.mark.parametrize('my', [my])(func) 
 
         @functools.wraps(orig_func)
         def wrapper(my, request, *args, **kwargs):
