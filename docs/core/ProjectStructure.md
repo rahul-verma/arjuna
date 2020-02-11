@@ -1,4 +1,4 @@
-### Arjuna Project Structure
+### Arjuna Test Project Structure
 
 A fixed project structure to be followed for an Arjuna test project. This brings consitency across mutliple test automation implementations within and outside your organization.
 
