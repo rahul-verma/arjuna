@@ -9,6 +9,10 @@ Following is the list of critical additions and updates for a given released ver
     - Launch Chrome
 - Added non-coding documentation:
     - Project Structure
+- CLI Changes
+    - cm/im switches removed based on new test structure.
+    - cf/if changed to ct/it (--consider-tests, --ignore-tests).
+    - run-pickers changed to run-selected.
 
 0.8.9
 -----

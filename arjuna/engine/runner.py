@@ -50,7 +50,7 @@ class TestRunner:
     def load_all_tests(self):
         self.__pytest_args.insert(0, self.tests_dir)
 
-    def load_tests_from_pickers(self, *, cm=None, im=None, cc=None, ic=None, cfn=None, ifn=None):  
+    def load_tests_from_pickers(self, *, cm=None, im=None, ct=None, it=None):  
 
         def process_modules(ms):
             ms = [m.replace(".py", "").replace("*","").replace("/", " and ").replace("\\", " and ") for m in ms]
@@ -65,14 +65,14 @@ class TestRunner:
             k_args.append(" and ".join(["not " + m for m in im]))
             k_flag = True
 
-        if ic:
-            prefix = k_flag and " and " or ""
-            k_args.append(prefix + " and ".join(["not " + c for c in ic]))
-            k_flag = True
+        # if ic:
+        #     prefix = k_flag and " and " or ""
+        #     k_args.append(prefix + " and ".join(["not " + c for c in ic]))
+        #     k_flag = True
 
-        if ifn:
+        if it:
             prefix = k_flag and " and " or ""
-            k_args.append(prefix + " and ".join(["not " + c for c in ifn]))
+            k_args.append(prefix + " and ".join(["not " + c for c in it]))
             k_flag = True
 
         if cm:
@@ -81,14 +81,14 @@ class TestRunner:
             k_args.append(prefix + " or ".join(cm))
             k_flag = True
 
-        if cc:
-            prefix = k_flag and " and " or "" 
-            k_args.append(prefix + " or ".join(cc))
-            k_flag = True
+        # if cc:
+        #     prefix = k_flag and " and " or "" 
+        #     k_args.append(prefix + " or ".join(cc))
+        #     k_flag = True
 
-        if cfn:
+        if ct:
             prefix = k_flag and " and " or "" 
-            k_args.append(prefix + " or ".join(cfn))
+            k_args.append(prefix + " or ".join(ct))
             k_flag = True
 
         if k_flag:

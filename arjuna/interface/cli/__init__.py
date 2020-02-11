@@ -58,7 +58,7 @@ class ArjunaCLI:
         self.run_project = RunProject(subparsers, [project_parser, run_parser])
         # self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
         # self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])
-        self.run_pickers = RunPickers(subparsers, [project_parser, run_parser, pickers_parser])
+        self.run_selected = RunSelected(subparsers, [project_parser, run_parser, pickers_parser])
 
     def init(self):
         time.sleep(0.1)
@@ -82,7 +82,7 @@ class ArjunaCLI:
             CommandEnum.RUN_PROJECT: "Running the project",
             # CommandEnum.RUN_SESSION: "Running the selected session",
             # CommandEnum.RUN_GROUP: "Running the selected group",
-            CommandEnum.RUN_PICKERS: "Running tests based on pickers"
+            CommandEnum.RUN_SELECTED: "Running tests based on selectors"
         }
 
         # Hyphens in commands are replaced with underscores for enum conversion
@@ -99,7 +99,7 @@ class ArjunaCLI:
             CommandEnum.RUN_PROJECT: (self.run_project.execute, ),
             # CommandEnum.RUN_SESSION: (self.run_session.execute, ),
             # CommandEnum.RUN_GROUP: (self.run_group.execute, ),
-            CommandEnum.RUN_PICKERS: (self.run_pickers.execute, )
+            CommandEnum.RUN_SELECTED: (self.run_selected.execute, )
         }
 
         # Delegation using Arjuna's Enum based switch-case equivalent

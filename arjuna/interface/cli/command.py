@@ -230,20 +230,20 @@ class RunProject(__RunCommand):
         test_runner.run(only_enumerate=self.enumerate_only)
 
 
-class RunPickers(__RunCommand):
+class RunSelected(__RunCommand):
 
     def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-pickers', parents, "Run tests based on pickers specified.")
+        super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified.")
 
     def execute(self, arg_dict):
         pickers_dict = dict()
         pickers = (
             ('cmodules', 'cm'),
             ('imodules', 'im'),
-            ('cclasses', 'cc'),
-            ('iclasses', 'ic'),
-            ('cfunctions', 'cfn'),
-            ('ifunctions', 'ifn'),
+            # ('cclasses', 'cc'),
+            # ('iclasses', 'ic'),
+            ('ctests', 'ct'),
+            ('itests', 'it'),
             )
 
         def process_picker(sname, tname):
