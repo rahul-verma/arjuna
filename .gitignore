@@ -85,3 +85,7 @@ act
 arjuna.egg-info/**
 build/**
 dist/**
+
+arjuna-samples/**/report.xml
+arjuna-samples/**/report.html
+arjuna-samples/**/arjuna-run.log
