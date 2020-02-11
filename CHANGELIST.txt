@@ -1,10 +1,13 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.8.10
+------
+
+
 0.8.9
 -----
-- Support for @test decorator withour any args for simple tests.
-- 
-
+- (Critical Fix) Support for @test decorator withour any args for simple tests.
+- Support for module level shared space.
 
 0.8.8
 -----
