@@ -19,10 +19,10 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
     * `pip install arjuna`
 
 ### Arjuna's Core Features
-1. [Arjuna Project Structure](.docs/core/ArjunaProjectStructure.md)
-1. [Arjuna Fundamentals](.docs/core/ArjunaFundamentals.md)
-2. [Custom Configurations and Value Abstraction](.docs/core/CustomConfigurationAndValueAbstraction.md)
-3. [Data Driven Testing](.docs/core/DataDrivenTesting.md)
+1. [Project Structure](.docs/core/ProjectStructure.md)
+2. [Getting Started](.docs/core/GettingStarted.md)
+3. [Custom Configurations and Value Abstraction](.docs/core/CustomConfigurationAndValueAbstraction.md)
+4. [Data Driven Testing](.docs/core/DataDrivenTesting.md)
 
 ### Basic Web UI Automation
 1. [Getting Started with WebApp](.docs//webuibasics/WebUIAutomationGettingStarted.md)
@@ -44,3 +44,6 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 1. [Externalised Gui Namespace (App Level)](.docs/gui_model/ExternalisedGuiNamespace.md)
 2. [App-Page Object Model](.docs/gui_model/AppPageObjectModel].md)
 3. [App-Page-Widget Object Model](.docs/gui_model/AppPageWidgetObjectModel].md)
+
+### Miscellaneous
+1. Using Arjuna With Your Test Framework
