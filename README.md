@@ -21,13 +21,15 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 ### Arjuna's Core Features
 1. [Project Structure](.docs/core/ProjectStructure.md)
 2. [Getting Started](.docs/core/GettingStarted.md)
-3. [Custom Configurations and Value Abstraction](.docs/core/CustomConfigurationAndValueAbstraction.md)
+3. [Value Abstraction](.docs/core/ValueAbstraction.md)
+3. [Creating Custom Configurations](.docs/core/CustomConfigurations.md)
+2. [Command Line Options](.docs/core/CommandLineOptions.md)
 4. [Data Driven Testing](.docs/core/DataDrivenTesting.md)
 
 ### Basic Web UI Automation
-1. [Getting Started with WebApp](.docs//webuibasics/WebUIAutomationGettingStarted.md)
+1. [Getting Started with WebApp](.docs//webui_basics/GettingStartedWithWebApp.md)
 2. [GuiElement Identification and Interactions](.docs/webui_basics/GuiElementIdentificationInteractions.md)
-3. [With - Selenium's By and Beyond](.docs/webui_basics/WithSeleniumByAndBeyond.md)
+3. [Understanding With Locators](.docs/webui_basics/UnderstandingWithLocators.md)
 4. [GuiMultiElement](.docs/webui_basics/GuiMultiElement.md)
 5. [Dropdown and RadioGroup](.docs/webui_basics/DropDownRadioGroup.md)
 
@@ -37,13 +39,13 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 3. [Executing JavaScript](.docs/webui_adv/ExecutingJavaScript.md)
 4. [Alerts, Windows, Frames](.docs/webui_adv/AlertsWindowsFrames.md)
 5. [Configuraing Interactions with GuiInteractionConfig](.docs/webui_adv/GuiInteractionConfig.md)
-6. [Customizing DropDown](.docs/webui_adv/ExecutingJavaScript.md)
+6. [Handling Custom DropDowns](.docs/webui_adv/HandlingCustomDropDowns.md)
 7. [Retrieving Source code with GuiSource](.docs/webui_adv/GuiSource.md)
 
-### Gui Model - App, Page, Widget and Gui Elements
-1. [Externalised Gui Namespace (App Level)](.docs/gui_model/ExternalisedGuiNamespace.md)
-2. [App-Page Object Model](.docs/gui_model/AppPageObjectModel].md)
-3. [App-Page-Widget Object Model](.docs/gui_model/AppPageWidgetObjectModel].md)
+### Gui Abstraction - App, Page, Widget and Gui Elements
+1. [Externalised Gui Namespace (App Level)](.docs/gui_abstraction/ExternalisedGuiNamespace.md)
+2. [App-Page Object Model](.docs/gui_abstraction/AppPageObjectModel.md)
+3. [App-Page-Widget Object Model](.docs/gui_abstraction/AppPageWidgetObjectModel.md)
 
 ### Miscellaneous
 1. Using Arjuna With Your Test Framework
