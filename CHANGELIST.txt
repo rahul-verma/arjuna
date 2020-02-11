@@ -2,7 +2,13 @@ Following is the list of critical additions and updates for a given released ver
 
 0.8.10
 ------
-
+- Added asserter object to 'my'
+- Split Example Project to represent documentation sections.
+- Examples are now tracked based on transformation to @test and doc written.
+- Examples:
+    - Launch Chrome
+- Added non-coding documentation:
+    - Project Structure
 
 0.8.9
 -----

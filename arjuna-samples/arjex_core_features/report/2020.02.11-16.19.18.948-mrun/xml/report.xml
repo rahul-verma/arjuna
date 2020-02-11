@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="1" hostname="Rahuls-MacBook-Pro.local" name="pytest" skipped="0" tests="2" time="7.337" timestamp="2020-02-11T16:19:19.226246"><testcase classname="tests.modules.test_01_launch_chrome" name="test_launch_chrome[my0]" time="7.201"><failure message="AttributeError: &apos;My&apos; object has no attribute &apos;asserter&apos;">my = &lt;arjuna.engine.test.My object at 0x10f14e2e8&gt;
+request = &lt;FixtureRequest for &lt;Function test_launch_chrome[my0]&gt;&gt;
+
+    @test
+    def test_launch_chrome(my, request):
+        google = WebApp(base_url=&quot;https://google.com&quot;)
+        google.launch()
+&gt;       my.asserter.assertEqual(&quot;Google1&quot;, google.ui.main_window.title)
+E       AttributeError: &apos;My&apos; object has no attribute &apos;asserter&apos;
+
+tests/modules/test_01_launch_chrome.py:27: AttributeError</failure></testcase><testcase classname="tests.modules.test_01_launch_chrome" name="test" time="0.000"></testcase></testsuite></testsuites>

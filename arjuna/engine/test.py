@@ -24,6 +24,7 @@ from arjuna.engine.data.record import DummyDataRecord
 from arjuna.engine.data.store import SharedObjects
 import functools
 import pytest
+import unittest
 
 class Info:
 
@@ -116,10 +117,15 @@ class My:
         self.__qual_name = None
         self.__request =  None
         self.__shared_objects = None
+        self.__asserter = unittest.TestCase('__init__')
 
     @property
     def data(self):
         return self.__data
+
+    @property
+    def asserter(self):
+        return self.__asserter
 
     @property
     def module_shared_space(self):
