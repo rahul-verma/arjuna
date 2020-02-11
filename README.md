@@ -19,33 +19,33 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
     * `pip install arjuna`
 
 ### Arjuna's Core Features
-1. [Project Structure](.docs/core/ProjectStructure.md)
-2. [Getting Started](.docs/core/GettingStarted.md)
-3. [Value Abstraction](.docs/core/ValueAbstraction.md)
-3. [Creating Custom Configurations](.docs/core/CustomConfigurations.md)
-2. [Command Line Options](.docs/core/CommandLineOptions.md)
-4. [Data Driven Testing](.docs/core/DataDrivenTesting.md)
+1. [Project Structure](./docs/core/ProjectStructure.md)
+2. [Getting Started](./docs/core/GettingStarted.md)
+3. [Value Abstraction](./docs/core/ValueAbstraction.md)
+3. [Creating Custom Configurations](./docs/core/CustomConfigurations.md)
+2. [Command Line Options](./docs/core/CommandLineOptions.md)
+4. [Data Driven Testing](./docs/core/DataDrivenTesting.md)
 
 ### Basic Web UI Automation
-1. [Getting Started with WebApp](.docs//webui_basics/GettingStartedWithWebApp.md)
-2. [GuiElement Identification and Interactions](.docs/webui_basics/GuiElementIdentificationInteractions.md)
-3. [Understanding With Locators](.docs/webui_basics/UnderstandingWithLocators.md)
-4. [GuiMultiElement](.docs/webui_basics/GuiMultiElement.md)
-5. [Dropdown and RadioGroup](.docs/webui_basics/DropDownRadioGroup.md)
+1. [Getting Started with WebApp](./docs//webui_basics/GettingStartedWithWebApp.md)
+2. [GuiElement Identification and Interactions](./docs/webui_basics/GuiElementIdentificationInteractions.md)
+3. [Understanding With Locators](./docs/webui_basics/UnderstandingWithLocators.md)
+4. [GuiMultiElement](./docs/webui_basics/GuiMultiElement.md)
+5. [Dropdown and RadioGroup](./docs/webui_basics/DropDownRadioGroup.md)
 
 ### Advanced Web UI Automation
-1. [Finding Nested Elements](.docs/webui_adv/FindingNestedElements.md)
-2. [Alternative and Dynamic Identifiers](.docs/webui_adv/AlternativeDynamicIdentifiers.md)
-3. [Executing JavaScript](.docs/webui_adv/ExecutingJavaScript.md)
-4. [Alerts, Windows, Frames](.docs/webui_adv/AlertsWindowsFrames.md)
-5. [Configuraing Interactions with GuiInteractionConfig](.docs/webui_adv/GuiInteractionConfig.md)
-6. [Handling Custom DropDowns](.docs/webui_adv/HandlingCustomDropDowns.md)
-7. [Retrieving Source code with GuiSource](.docs/webui_adv/GuiSource.md)
+1. [Finding Nested Elements](./docs/webui_adv/FindingNestedElements.md)
+2. [Alternative and Dynamic Identifiers](./docs/webui_adv/AlternativeDynamicIdentifiers.md)
+3. [Executing JavaScript](./docs/webui_adv/ExecutingJavaScript.md)
+4. [Alerts, Windows, Frames](./docs/webui_adv/AlertsWindowsFrames.md)
+5. [Configuraing Interactions with GuiInteractionConfig](./docs/webui_adv/GuiInteractionConfig.md)
+6. [Handling Custom DropDowns](./docs/webui_adv/HandlingCustomDropDowns.md)
+7. [Retrieving Source code with GuiSource](./docs/webui_adv/GuiSource.md)
 
 ### Gui Abstraction - App, Page, Widget and Gui Elements
-1. [Externalised Gui Namespace (App Level)](.docs/gui_abstraction/ExternalisedGuiNamespace.md)
-2. [App-Page Object Model](.docs/gui_abstraction/AppPageObjectModel.md)
-3. [App-Page-Widget Object Model](.docs/gui_abstraction/AppPageWidgetObjectModel.md)
+1. [Externalised Gui Namespace (App Level)](./docs/gui_abstraction/ExternalisedGuiNamespace.md)
+2. [App-Page Object Model](./docs/gui_abstraction/AppPageObjectModel.md)
+3. [App-Page-Widget Object Model](./docs/gui_abstraction/AppPageWidgetObjectModel.md)
 
 ### Miscellaneous
 1. Using Arjuna With Your Test Framework
