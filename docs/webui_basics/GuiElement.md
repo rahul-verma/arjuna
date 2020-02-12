@@ -4,7 +4,7 @@ A single HTML node in the DOM of a web UI is represented by a GuiElement object 
 
 Arjuna supports the locators which are supported by Selenium's By object. Apart from these, there are various abstracted locators which Arjuna provides for easier coding.
 
-The locator strategy is expressed by using various factory methods of Arjuna's `With` class.
+The locator strategy is expressed by using various factory methods of Arjuna's **`With`** class.
 
 For this section, we'll use the login page of WordPress CMS. The elements of interest are the **User Name** field and the **Lost Your Password?** link.
 
@@ -50,12 +50,12 @@ def test_basic_identifiers(my, request):
 
 ##### Points to Note
 1. Launch the WebApp. Use a WordPress deployment of choice. For example code creation, a VirtualBox image of Bitnami Wordpress was used.
-2. GuiElement identification if done by calling the `element1 factory method of `ui` object of `WebApp`.
-3. The locator strategy is expressed using factory methods of `With` class which correspond as follows:
-    - With.id - ID attribute
-    - With.name - Name attribute
-    - With.class_name - One of the class names in class attribute
-    - With.tag_name - Tag Name
-    - With.link_text  - Link Text
-    - With.link_ptext - A part of Link's text
+2. GuiElement identification if done by calling the **`element`** factory method of `ui` object of `WebApp`.
+3. The locator strategy is expressed using factory methods of **`With`** class which correspond as follows:
+    - **`With.id`** - ID attribute
+    - **`With.name`** - Name attribute
+    - **`With.class_name`** - One of the class names in class attribute
+    - **`With.tag_name`** - Tag Name
+    - **`With.link_text`**  - Link Text
+    - **`With.link_ptext`** - A part of Link's text
 4. Quit the app using its `quit` method.
