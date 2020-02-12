@@ -114,7 +114,7 @@ class _ConfigCreator:
             self.__conf_trace[config_name]["user_options"].update(self.__config_container.user_options.items().keys())
 
 
-class DefaultTestContext:
+class RunContext:
 
     def __init__(self, test_session, name, parent_config=None):
         self.__test_session = test_session
@@ -181,7 +181,7 @@ class DefaultTestContext:
     def get_name(self):
         return self.__name
 
-# class DefaultTestContext:
+# class Context:
 
 #     def __init__(self, test_session, name, parent_context=None):
 #         self.__test_session = test_session

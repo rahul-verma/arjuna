@@ -7,13 +7,18 @@ Following is the list of critical additions and updates for a given released ver
 - Examples are now tracked based on transformation to @test and doc written.
 - Examples:
     - Launch Chrome
+    - Writing Your First Test
+    - Value abstraction
+    - 
 - Added non-coding documentation:
     - Project Structure
 - CLI Changes
     - cm/im switches removed based on new test structure.
     - cf/if changed to ct/it (--consider-tests, --ignore-tests).
     - run-pickers changed to run-selected.
-- Name of AnyRefValue changed to Value. It is now a direct arjuna import.
+- Name and importing changes
+    - AnyRefValue changed to Value. It is now a direct arjuna import.
+    - DefaultTestContext -> RunContext
 - 
 
 0.8.9

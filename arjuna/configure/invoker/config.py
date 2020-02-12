@@ -93,7 +93,7 @@ from arjuna.core.enums import *
 from arjuna.core.value import Value
 
 
-class DefaultTestConfig:
+class Configuration:
 
     def __init__(self, test_session, name, config):
         super().__init__()
@@ -120,16 +120,16 @@ class DefaultTestConfig:
 
     @staticmethod
     def normalize_arjuna_option_str(option_str):
-        return ArjunaOption[DefaultTestConfig.normalize_option_str(option_str)]
+        return ArjunaOption[Configuration.normalize_option_str(option_str)]
 
     def get_arjuna_option_value(self, option):
         arjuna_option = option
         if type(option) is str:
-            arjuna_option = DefaultTestConfig.normalize_arjuna_option_str(option)
+            arjuna_option = Configuration.normalize_arjuna_option_str(option)
         return Value(self.__wrapped_config.arjuna_config.value(arjuna_option))
 
     def get_user_option_value(self, option):
-        user_option = DefaultTestConfig.normalize_option_str(option)
+        user_option = Configuration.normalize_option_str(option)
         return Value(self.__wrapped_config.user_config.value(user_option))
 
     def get_arjuna_options_as_map(self):

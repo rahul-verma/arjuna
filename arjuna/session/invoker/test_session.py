@@ -23,7 +23,7 @@ import logging
 from arjuna import ArjunaOption
 
 
-from arjuna.configure.invoker.config import DefaultTestConfig
+from arjuna.configure.invoker.config import Configuration
 
 from arjuna.configure.invoker.configurator import TestConfigurator
 from arjuna.drive.invoker.databroker import TestSessionDataBrokerHandler
@@ -66,7 +66,7 @@ class DefaultTestSession:
         return self.__create_config(config)
 
     def __create_config(self, config, name=None):
-        config = DefaultTestConfig(
+        config = Configuration(
             self,
             name and name or self.__DEF_CONF_NAME,
             config

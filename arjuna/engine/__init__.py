@@ -43,7 +43,7 @@ class ArjunaSingleton:
     def __init__(self):
         self.__project_root_dir = None
         self.__test_session = None
-        self.__ref_context = None
+        self.__run_context = None
         self.__ref_config = None
         self.__context_map = dict()
         self.__default_context_name = "default_context"
@@ -97,8 +97,8 @@ class ArjunaSingleton:
         self.__init_logger(dl)
         self.__load_console(dl, self.logger)
 
-        self.__ref_context = self.create_test_context(self.__default_context_name)
-        return self.__ref_context
+        self.__run_context = self.create_test_context(self.__default_context_name)
+        return self.__run_context
 
     @property
     def logger(self):
@@ -337,8 +337,8 @@ class ArjunaSingleton:
         self.__console = __console()
 
     @property
-    def ref_context(self):
-        return self.__ref_context
+    def run_context(self):
+        return self.__run_context
 
     @property
     def ref_config(self):
@@ -350,8 +350,8 @@ class ArjunaSingleton:
             ?? Does it take central config??
         '''
 
-        from arjuna.configure.invoker.context import DefaultTestContext
-        context = DefaultTestContext(self.__test_session, name)
+        from arjuna.configure.invoker.context import RunContext
+        context = RunContext(self.__test_session, name)
         self.__context_map[name] = context
         return context
 
@@ -390,11 +390,11 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.console
 
     @classmethod
-    def get_ref_context(cls):
+    def get_run_context(cls):
         '''
-            Returns the reference context.
+            Returns the run context.
         '''
-        return cls.ARJUNA_SINGLETON.ref_context
+        return cls.ARJUNA_SINGLETON.run_context
 
     @classmethod
     def get_ref_config(cls):

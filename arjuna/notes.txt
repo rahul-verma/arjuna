@@ -672,7 +672,7 @@ Removed File: arjuna/tpi/unitee/markup.py arjuna/tpi/unitee/markup.py
 Removed class from arjuna/configure/invoker/context.py:
 
 # For Unitee
-class UniteeTestContext(DefaultTestContext):
+class UniteeTestContext(Context):
 
     def __init__(self, test_session, name, parent_config=None):
         super().__init__(test_session, name, parent_config)
@@ -687,7 +687,7 @@ class UniteeTestContext(DefaultTestContext):
         return out_context
 
     def clone_for_user(self):
-        out_context = DefaultTestContext(self._get_test_session(), self.get_name())
+        out_context = RunContext(self._get_test_session(), self.get_name())
         out_context._add_configs(self._get_configs())
         out_context._add_conf_trace(self._get_conf_trace())
         return out_context

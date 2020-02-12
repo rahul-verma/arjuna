@@ -24,8 +24,8 @@ Code is kept redundant across methods for the purpose of easier learning.
 '''
 
 @test
-def test_custom_config(my, request):
-    context = Arjuna.get_ref_context()
+def test_update_config(my, request):
+    context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
     cc.register()
