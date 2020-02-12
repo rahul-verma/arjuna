@@ -19,10 +19,6 @@ limitations under the License.
 
 from arjuna import *
 
-'''
-Code is kept redundant across methods for the purpose of easier learning.
-'''
-
 @test
 def test_webpp_nobase_url(my, request):
     google = WebApp()

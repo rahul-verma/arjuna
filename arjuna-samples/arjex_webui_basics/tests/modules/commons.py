@@ -19,9 +19,6 @@ limitations under the License.
 
 from arjuna import *
 
-def init_arjuna():
-    return Arjuna.init("/Users/rahulverma/Documents/github_tm/arjuna/arjuna-samples/workspace/arjex")
-
 def create_app():
     app = WebApp()
     app.launch(blank_slate=True)

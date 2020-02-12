@@ -24,29 +24,21 @@ Code is kept redundant across methods for the purpose of easier learning.
 '''
 
 @test
-def test_webpp_nobase_url(my, request):
-    google = WebApp()
-    google.launch(blank_slate=True)
-    google.ui.browser.go_to_url("https://google.com")
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
-    google.quit()
+def test_basic_identifiers(my, request):
+    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+    wordpress = WebApp(base_url=wp_url)
+    wordpress.launch()
 
+    # user name field.
+    # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
+    element = wordpress.ui.element(With.id("user_login"))
+    element = wordpress.ui.element(With.name("log"))
+    element = wordpress.ui.element(With.class_name("input"))
+    element = wordpress.ui.element(With.tag_name("input"))
 
-@test
-def test_webpp_base_url_arg(my, request):
-    google = WebApp(base_url="https://google.com")
-    google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
-    google.quit()
+    # Lost your password link
+    # Html of link: <a href="/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
+    element = wordpress.ui.element(With.link_text("Lost your password?"))
+    element = wordpress.ui.element(With.link_ptext("password"))
 
-@test
-def test_webpp_base_url_in_custom_config(my, request):
-    context = Arjuna.get_run_context()
-    cc = context.config_creator
-    cc.arjuna_option(ArjunaOption.AUT_BASE_URL, "https://google.com")
-    cc.register()
-
-    google = WebApp(config=context.get_config())
-    google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
-    google.quit()
+    wordpress.quit()
