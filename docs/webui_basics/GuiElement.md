@@ -128,16 +128,16 @@ def test_xpath(my, request):
 #### Identification using Arjuna's Locator Extensions
 
 Arjuna's `With` object provides various higher level locator strategies in addition to wrapping Selenium's By-style strategies. Following is the list of these extensions:
-    - **`With.text`** : Generates Text based XPath
-    - **`With.ptext`** : Generates Text Content based XPath
-    - **`With.title`** : Generates Title Match CSS Selector
-    - **`With.value`** : Generates Value Match CSS Selector
-    - **`With.attr_value`** : Generates Attribute Value Match CSS Selector
-    - **`With.attr_pvalue`** : Generates Attribute Value Content Match CSS Selector
-    - **`With.compound_class`** : Generates Compund Class Match CSS Selector (from a string)
-    - **`With.class_names`** : Generates Compund Class Match CSS Selector (from multiple strings)
-    - **`With.point`** : Runs a JavaScript to find the GuiElement under an XY coordinate
-    - **`With.javascript`** : Runs the supplied JavaScript and returns GuiElement representing the element it returns.
+- **`With.text`** : Generates Text based XPath
+- **`With.ptext`** : Generates Text Content based XPath
+- **`With.title`** : Generates Title Match CSS Selector
+- **`With.value`** : Generates Value Match CSS Selector
+- **`With.attr_value`** : Generates Attribute Value Match CSS Selector
+- **`With.attr_pvalue`** : Generates Attribute Value Content Match CSS Selector
+- **`With.compound_class`** : Generates Compund Class Match CSS Selector (from a string)
+- **`With.class_names`** : Generates Compund Class Match CSS Selector (from multiple strings)
+- **`With.point`** : Runs a JavaScript to find the GuiElement under an XY coordinate
+- **`With.javascript`** : Runs the supplied JavaScript and returns GuiElement representing the element it returns.
     
 Following is the example code:
 
