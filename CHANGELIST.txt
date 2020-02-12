@@ -19,6 +19,7 @@ Following is the list of critical additions and updates for a given released ver
 - Name and importing changes
     - AnyRefValue changed to Value. It is now a direct arjuna import.
     - DefaultTestContext -> RunContext
+    - guiauto_max_wait property method -> guiauto_max_wait
 - 
 
 0.8.9

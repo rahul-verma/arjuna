@@ -171,7 +171,7 @@ class Configuration:
         return self.get_arjuna_option_value(ArjunaOption.LOG_DIR).as_str()
 
     @property
-    def guiauto_max_wait_time(self):
+    def guiauto_max_wait(self):
         return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_MAX_WAIT).as_int()
 
     def as_map(self):

@@ -50,7 +50,7 @@ class BasicWindow:
 
     @property
     def max_wait_time(self):
-        return self.automator.config.guiauto_max_wait_time
+        return self.automator.config.guiauto_max_wait
 
     @property
     def app(self):

@@ -75,7 +75,7 @@ class _ConfigCreator:
         self.arjuna_option(ArjunaOption.BROWSER_HEADLESS_MODE, True)
         return self
 
-    def guiauto_max_wait_time(self, seconds):
+    def guiauto_max_wait(self, seconds):
         self.arjuna_option(ArjunaOption.GUIAUTO_MAX_WAIT, seconds)
         return self
 

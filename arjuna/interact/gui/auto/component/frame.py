@@ -64,7 +64,7 @@ class FrameContainer(Configurable):
 
     @property
     def max_wait_time(self):
-        return self.automator.config.guiauto_max_wait_time
+        return self.automator.config.guiauto_max_wait
 
     def __check_tag(self, wrapped_element):
         tag = wrapped_element.source.tag
