@@ -1,6 +1,6 @@
 ### GuiElement - Identification and Interactions
 
-A single HTML node in the DOM of a web UI is represented by a GuiElement object in Arjuna, irrespective of its type. This is unless you need specialized methods which we will see later.
+A single node in the DOM of a web UI is represented by a GuiElement object in Arjuna, irrespective of its type. This is unless you need specialized methods which we will see later.
 
 Arjuna supports the locators which are supported by Selenium's By object. Apart from these, there are various abstracted locators which Arjuna provides for easier coding.
 
@@ -59,3 +59,42 @@ def test_basic_identifiers(my, request):
     - **`With.link_text`**  - Link Text
     - **`With.link_ptext`** - A part of Link's text
 4. Quit the app using its `quit` method.
+
+#### Identification using XPath
+
+We use **`With.xpath`** for identification using XPath. Following are various samples.
+
+```python
+# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+
+@test
+def test_xpath(my, request):
+    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+    wordpress = WebApp(base_url=wp_url)
+    wordpress.launch()
+
+    # Based on Text
+    element = wordpress.ui.element(With.xpath("//*[text() = 'Lost your password?']"))
+
+    # Based on partial text
+    element = wordpress.ui.element(With.xpath("//*[contains(text(), 'Lost')]"))
+
+    # Based on Title
+    element = wordpress.ui.element(With.xpath("//*[@title = 'Password Lost and Found']"))
+
+    # Based on Value
+    element = wordpress.ui.element(With.xpath("//*[@value = 'Log In']"))
+
+    # Based on any attribute e.g. for
+    element = wordpress.ui.element(With.xpath("//*[@for = 'user_login']"))
+
+    # Based on partial content of an attribute
+    element = wordpress.ui.element(With.xpath("//*[contains(@for, '_login')]"))
+
+    # Based on element type
+    element = wordpress.ui.element(With.xpath("//*[@type ='password']"))
+
+    wordpress.quit()
+```
+
+
