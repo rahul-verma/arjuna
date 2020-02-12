@@ -19,6 +19,9 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
     * `pip install arjuna`
 
 ### Arjuna's Core Features
+
+You can find the example code used on this section in [arjuna_core_features project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_core_features/tests/modules).
+
 1. [Project Structure](./docs/core/ProjectStructure.md)
 2. [Writing Your First Test](./docs/core/WritingFirstTest.md)
 3. [Value Abstraction](./docs/core/ValueAbstraction.md)
