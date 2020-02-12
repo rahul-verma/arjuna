@@ -150,6 +150,7 @@ def test_xpath(my, request):
     wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
     wordpress = WebApp(base_url=wp_url)
     wordpress.launch()
+    
     # Based on Text
     element = wordpress.ui.element(With.text("Lost your password?"))
 
@@ -183,13 +184,6 @@ def test_xpath(my, request):
     # With Javascript
     element = wordpress.ui.element(With.javascript("return document.getElementById('wp-submit')"))
 
+
     wordpress.quit()
 ```
-
-##### Points to Note
-1. **`With.attr_value`** and **`With.attr_pvalue`** 
-
-
-    
-
-
