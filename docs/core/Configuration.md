@@ -136,3 +136,47 @@ def test_simpler_builder_method(my, request):
  ```
 
 Some Arjuna options are so commonly tweaked that Configuration creator provides direct named methods for tweaking them. Changing browser to Firefox instead of Chrome is one of them. In the above code, we directly call `firefox()` builder method instead of the longer `arjuna_option` call version in previous example.
+
+
+### User Options
+
+Just like Arjuna options, you can define your own options in `project.conf` file as well as programmatically. Rest of the fundamentals remain same as Arjuna options. That's the key point! Arjuna provides you the same facilities for your own defined options that it provides to built-in `ArjunaOption`s.
+
+In Arjuna you can define your own option under `userOptions` section in `<Project root directory>/config/project.conf` file.
+
+```javascript
+
+userOptions {
+    target.url = "https://google.com"
+}
+```
+
+In addition to this we will also define an option `target.title` programmatically.
+
+```python
+# arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+
+@test
+def test_user_options(my, request):
+    '''
+        For this test:
+        You must add target.url = "https://google.com" to userOptions in project.conf to see the impact.
+    '''
+    context = Arjuna.get_run_context()
+    cc = context.config_creator
+    cc.user_option("target.title", "Google")
+    cc.register()
+
+    config = context.get_config()
+
+    url = config.get_user_option_value("target.url").as_str()
+    title = config.get_user_option_value("target.title").as_str()
+
+    google = WebApp(base_url=url, config=config)
+    google.launch()
+    my.asserter.assertEqual(title, google.ui.main_window.title)
+    google.quit()
+
+```
+
+The code for this example is exactly same as the code that used Chrome for this use case. But instead of launching Chrome, the WebApp launches Firefox browser.

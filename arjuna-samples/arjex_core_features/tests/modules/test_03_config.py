@@ -81,3 +81,25 @@ def test_project_conf(my, request):
     google.launch()
     my.asserter.assertEqual("Google", google.ui.main_window.title)
     google.quit()
+
+
+@test
+def test_user_options(my, request):
+    '''
+        For this test:
+        You must add target.url = "https://google.com" to userOptions in project.conf to see the impact.
+    '''
+    context = Arjuna.get_run_context()
+    cc = context.config_creator
+    cc.user_option("target.title", "Google")
+    cc.register()
+
+    config = context.get_config()
+
+    url = config.get_user_option_value("target.url").as_str()
+    title = config.get_user_option_value("target.title").as_str()
+
+    google = WebApp(base_url=url, config=config)
+    google.launch()
+    my.asserter.assertEqual(title, google.ui.main_window.title)
+    google.quit()
