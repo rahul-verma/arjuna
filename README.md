@@ -33,7 +33,7 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 
 You can find the example code used on this section in [arjuna_core_features project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/tests/modules).
 
-1. [Getting Started with WebApp](./docs//webui_basics/GettingStartedWithWebApp.md)
+1. [Getting Started with WebApp](./docs//webui_basics/WebApp.md)
 2. [GuiElement - Identification and Interactions](./docs/webui_basics/GuiElement.md)
 3. [GuiMultiElement](./docs/webui_basics/GuiMultiElement.md)
 4. [Dropdown and RadioGroup](./docs/webui_basics/DropDownRadioGroup.md)
