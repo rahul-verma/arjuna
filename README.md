@@ -20,7 +20,7 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 
 ### Arjuna's Core Features
 
-You can find the example code used on this section in [arjuna_core_features project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_core_features/tests/modules).
+You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_core_features/tests/modules).
 
 1. [Project Structure](./docs/core/ProjectStructure.md)
 2. [Writing Your First Test](./docs/core/WritingFirstTest.md)
@@ -34,10 +34,9 @@ You can find the example code used on this section in [arjuna_core_features proj
 You can find the example code used on this section in [arjuna_core_features project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/tests/modules).
 
 1. [Getting Started with WebApp](./docs//webui_basics/GettingStartedWithWebApp.md)
-2. [GuiElement Identification and Interactions](./docs/webui_basics/GuiElementIdentificationInteractions.md)
-3. [Understanding With Locators](./docs/webui_basics/UnderstandingWithLocators.md)
-4. [GuiMultiElement](./docs/webui_basics/GuiMultiElement.md)
-5. [Dropdown and RadioGroup](./docs/webui_basics/DropDownRadioGroup.md)
+2. [GuiElement - Identification and Interactions](./docs/webui_basics/GuiElement.md)
+3. [GuiMultiElement](./docs/webui_basics/GuiMultiElement.md)
+4. [Dropdown and RadioGroup](./docs/webui_basics/DropDownRadioGroup.md)
 
 ### Advanced Web UI Automation
 1. [Finding Nested Elements](./docs/webui_adv/FindingNestedElements.md)
