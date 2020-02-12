@@ -22,7 +22,7 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 1. [Project Structure](./docs/core/ProjectStructure.md)
 2. [Writing Your First Test](./docs/core/WritingFirstTest.md)
 3. [Value Abstraction](./docs/core/ValueAbstraction.md)
-3. [Creating Custom Configurations](./docs/core/CustomConfigurations.md)
+3. [Tweaking Configuration Options](./docs/core/TweakingConfigurationOptions.md)
 2. [Command Line Options](./docs/core/CommandLineOptions.md)
 4. [Data Driven Testing](./docs/core/DataDrivenTesting.md)
 
