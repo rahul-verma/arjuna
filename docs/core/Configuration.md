@@ -1,4 +1,4 @@
-### Tweaking Configuration Options
+### Configurations in Arjuna
 
 #### Understanding Configuration System of Arjuna
 - Arjuna supports tweaking its built in options which are represented by `ArjunaOption` enum. 
@@ -17,8 +17,10 @@
 
 ```python
 # arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+ 
+from arjuna import *
 
-@test
+@testBrowserName.CHROME
 def test_config_retrieval(my, request):
     config = Arjuna.get_ref_config()
 
@@ -45,16 +47,47 @@ def test_config_retrieval(my, request):
 1. First, we retrieve the reference config by calling `Arjuna.get_ref_config()`
 2. You can retrieve value of an `ArjunaOption` by calling the `get_arjuna_option_value(<Arjuna Option or string>)` method of a `Configuration` object. The argument to this call can be an `ArjunaOption` enum constant or a string representing the option. 
 3. The option name string is considered by Arjuna as **case-insensitive**. Also, **. (dot)** and **_ (underscore)** are interchangeable. So, following are equivalent arguments:
-        - ArjunaOption.GUIAUTO_MAX_WAIT
-        - GUIAUTO_MAX_WAIT
-        - GuIAuTo_MaX_WaIt
-        - guiauto.max.wait
-        - guiauto.max.wait
+        - ArjunaOption.BROWSER_NAME
+        - BROWSER_NAME
+        - BrOwSeR_NaMe
+        - browser.name
+        - Browser.Name
         - and so on
-4. The `Configuration` object also has named properties for commonly used Arjuna options. The name of property is same as the lower-case enum constant text, for example, `guiauto_max_wait`.
-5. The last part of the code demonstrates a boolean option - `ArjunaOption.BROWSER_MAXIMIZE`.
+4. `get_arjuna_option_value` call always returns a `Value` object which should be converted to an appropriate type before use.
+5. The `Configuration` object also has named properties for commonly used Arjuna options. The name of property is same as the lower-case enum constant text, for example, `browser_name`. Such direct named methods return appropriate objects rather than `Value`s. For example, this call returns BrowserName.CHROME enum constant which is the real representation of browser name in Arjuna.
 
-#### Change Configuration Settings
+### Project Level Configuration Settings
+
+Many a times, it is useful to change the defaults of Arjuna at project level to avoid writing code every time. It is also a much better way when you need to tweak quite a few settings and you know that those settings are applicable to most of your tests.
+
+In Arjuna you can do this by providing options under `arjunaOptions` section in `<Project root directory>/config/project.conf` file.
+
+```javascript
+
+arjunaOptions {
+    browser.name = firefox
+}
+```
+
+Add the above content to `project.conf` file. We want to tweak `ArjunaOption.BROWSER_NAME`. Correspondingly you can add entry for `BROWSER_NAME` in `arjunaOptions`. For being more intuitive and less mistake prone, Arjuna supports keys in this section as **case-insensitive** and treats **. (dot)** and **_ (underscore)** as interchangeable. This is similar to the behavior of option name string seen in previous section.
+
+Please note that the contents of `arjunaOptions` follow [HOCON](https://github.com/lightbend/config/blob/master/HOCON.md) syntax. This means that you can write settings in properties syntax, as JSON or as human-readable JSON syntax supported by HOCON.
+
+```python
+# arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+
+@test
+def test_project_conf(my, request):
+    google = WebApp(base_url="https://google.com")
+    google.launch()
+    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    google.quit()
+
+```
+
+The code for this example is exactly same as the code that used Chrome for this use case. But instead of launching Chrome, the WebApp launches Firefox browser.
+
+#### Change Configuration Settings Programmatically
   
  ```python
  # arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
@@ -103,44 +136,3 @@ def test_simpler_builder_method(my, request):
  ```
 
 Some Arjuna options are so commonly tweaked that Configuration creator provides direct named methods for tweaking them. Changing browser to Firefox instead of Chrome is one of them. In the above code, we directly call `firefox()` builder method instead of the longer `arjuna_option` call version in previous example.
-
-### Project Level Configuration Settings
-
-Many a times, it is useful to change the defaults of Arjuna at project level to avoid writing code every time. It is also a much better way when you need to tweak quite a few settings and you know that those settings are applicable to most of your tests.
-
-In Arjuna you can do this by providing options under `arjunaOptions` section in `<Project root directory>/config/project.conf` file.
-
-```javascript
-
-arjunaOptions {
-    browser.name = firefox
-}
-```
-
-Add the above content to `project.conf` file. We want to tweak `ArjunaOption.BROWSER_NAME`. Correspondingly you can add entry for `BROWSER_NAME` in `arjunaOptions`. For being more intuitive and less mistake prone, Arjuna supports keys in this section as **case-insensitive** and treats **. (dot)** and **_ (underscore)** as interchangeable. So, following are equivalent:
-        - BROWSER_NAME
-        - browser_NaMe
-        - browser.name
-        - Browser.Name
-        - and so on
-
-Please note that the contents of `arjunaOptions` follow [HOCON](https://github.com/lightbend/config/blob/master/HOCON.md) syntax. This means that you can write settings in properties syntax, as JSON or as human-readable JSON syntax supported by HOCON.
-
-```python
-# arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
-
-@test
-def test_project_conf(my, request):
-    google = WebApp(base_url="https://google.com")
-    google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
-    google.quit()
-
-```
-
-The code for this example is exactly same as the code that used Chrome for this use case. But instead of launching Chrome, the WebApp launches Firefox browser.
-
-   
-   
-   
-  
