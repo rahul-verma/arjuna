@@ -18,14 +18,14 @@ limitations under the License.
 '''
 
 import types
-from arjuna.core.value import AnyRefValue
+from arjuna.core.value import Value
 
 
 class DataRecord:
 
     def __init__(self, *vargs, **kwargs):
-        self.__indexed = tuple([AnyRefValue(v) for v in vargs])
-        self.__named = types.MappingProxyType({i.lower(): AnyRefValue(j) for i, j in kwargs.items()})
+        self.__indexed = tuple([Value(v) for v in vargs])
+        self.__named = types.MappingProxyType({i.lower(): Value(j) for i, j in kwargs.items()})
 
     def __getitem__(self, i):
         if type(i) is int:

@@ -90,7 +90,7 @@ class CliArgsConfig:
 
 #### From old Setu code
 from arjuna.core.enums import *
-from arjuna.core.value import AnyRefValue
+from arjuna.core.value import Value
 
 
 class DefaultTestConfig:
@@ -126,11 +126,11 @@ class DefaultTestConfig:
         arjuna_option = option
         if type(option) is str:
             arjuna_option = DefaultTestConfig.normalize_arjuna_option_str(option)
-        return AnyRefValue(self.__wrapped_config.arjuna_config.value(arjuna_option))
+        return Value(self.__wrapped_config.arjuna_config.value(arjuna_option))
 
     def get_user_option_value(self, option):
         user_option = DefaultTestConfig.normalize_option_str(option)
-        return AnyRefValue(self.__wrapped_config.user_config.value(user_option))
+        return Value(self.__wrapped_config.user_config.value(user_option))
 
     def get_arjuna_options_as_map(self):
         return self.__wrapped_config.arjuna_config.as_json_dict()

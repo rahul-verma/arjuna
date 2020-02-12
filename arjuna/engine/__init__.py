@@ -43,6 +43,7 @@ class ArjunaSingleton:
     def __init__(self):
         self.__project_root_dir = None
         self.__test_session = None
+        self.__ref_context = None
         self.__ref_config = None
         self.__context_map = dict()
         self.__default_context_name = "default_context"
@@ -96,7 +97,8 @@ class ArjunaSingleton:
         self.__init_logger(dl)
         self.__load_console(dl, self.logger)
 
-        return self.create_test_context(self.__default_context_name)
+        self.__ref_context = self.create_test_context(self.__default_context_name)
+        return self.__ref_context
 
     @property
     def logger(self):
@@ -335,6 +337,10 @@ class ArjunaSingleton:
         self.__console = __console()
 
     @property
+    def ref_context(self):
+        return self.__ref_context
+
+    @property
     def ref_config(self):
         return self.__ref_config
 
@@ -382,6 +388,13 @@ class Arjuna:
             Returns framework console.
         '''
         return cls.ARJUNA_SINGLETON.console
+
+    @classmethod
+    def get_ref_context(cls):
+        '''
+            Returns the reference context.
+        '''
+        return cls.ARJUNA_SINGLETON.ref_context
 
     @classmethod
     def get_ref_config(cls):

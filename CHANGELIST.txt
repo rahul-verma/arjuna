@@ -13,6 +13,8 @@ Following is the list of critical additions and updates for a given released ver
     - cm/im switches removed based on new test structure.
     - cf/if changed to ct/it (--consider-tests, --ignore-tests).
     - run-pickers changed to run-selected.
+- Name of AnyRefValue changed to Value. It is now a direct arjuna import.
+- 
 
 0.8.9
 -----

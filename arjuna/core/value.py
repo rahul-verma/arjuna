@@ -25,10 +25,10 @@ from arjuna.core.utils import data_utils
 class UnsupportedRepresentationException(Exception):
 
     def __init__(self, strSourceValue, targetValueType):
-        super("Value: Can not represent value >>{}<< as {}.".format(strSourceValue, targetValueType))
+        super().__init__("Value: Can not represent value >>{}<< as {}.".format(strSourceValue, targetValueType))
 
 
-class AnyRefValue:
+class Value:
     TRUES = {"YES", "TRUE", "ON", "1"}
     FALSES = {"NO", "FALSE", "OFF", "0"}
 
@@ -98,27 +98,15 @@ class AnyRefValue:
 
     def as_int(self):
         try:
-            return int(self.__fmt_str())
+            return int(float(self.__fmt_str()))
         except:
             self.__throw_wrong_repr_exception("int")
-
-    def as_long(self):
-        try:
-            return self.asInt()
-        except:
-            self.__throw_wrong_repr_exception("long")
 
     def as_float(self):
         try:
             return float(self.__fmt_str())
         except:
             self.__throw_wrong_repr_exception("float")
-
-    def as_double(self):
-        try:
-            return self.as_float()
-        except:
-            self.__throw_wrong_repr_exception("double")
 
     def as_enum_list(self, enumKlass):
         try:
@@ -229,7 +217,7 @@ class AbstractValueList:
         self.__values.append(value)
 
     def add_object(self, obj):
-        self.__values.append(AnyRefValue(obj))
+        self.__values.append(Value(obj))
 
     def has_index(self, index):
         return index < self._max_index()
@@ -327,7 +315,7 @@ class AbstractValueMap(metaclass=abc.ABCMeta):
         self.__map[self._format_key(key)] = value
 
     def add_object(self, key, obj):
-        self.__map[self._format_key(key)] = AnyRefValue(obj)
+        self.__map[self._format_key(key)] = Value(obj)
 
     def add_all(self, map):
         for k,v in map.items():

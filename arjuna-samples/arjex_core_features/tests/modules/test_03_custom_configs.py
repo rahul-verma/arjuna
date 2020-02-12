@@ -19,12 +19,18 @@ limitations under the License.
 
 from arjuna import *
 
+'''
+Code is kept redundant across methods for the purpose of easier learning.
+'''
+
 @test
-def test_launch_chrome(my, request):
-    google = WebApp(base_url="https://google.com")
+def test_custom_config(my, request):
+    context = Arjuna.get_ref_context()
+    cc = context.config_creator
+    cc.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
+    cc.register()
+
+    google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assertEqual("Google1", google.ui.main_window.title)
+    my.asserter.assertEqual("Google", google.ui.main_window.title)
     google.quit()
-
-
-

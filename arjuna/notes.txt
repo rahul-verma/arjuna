@@ -141,11 +141,11 @@ ueo
 5. include timestamp for arjuna log.
 
 6. Test when different values in sample code are provided as Values rather than as_* conversion.
-    The errors should tell -> expecting str/int etc instead of AnyRefValue.
+    The errors should tell -> expecting str/int etc instead of Value.
     OR those methods at the correct layer should convert it to the expected value type and use.
 
 7. JS execution works and because of local exec can return objects as well. 
-    - should evaluate whether return this object as AnyRefValue makes sense?
+    - should evaluate whether return this object as Value makes sense?
 
 8. Window handling logic needs to be checked for stability with content locator. 
     Wait time should be overall wait time. Needs to be checked.

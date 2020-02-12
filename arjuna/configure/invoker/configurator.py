@@ -22,7 +22,7 @@ from enum import Enum
 
 from arjuna.configure.impl.processor import ConfigCreator, CentralConfigLoader, ProjectConfigCreator
 from arjuna.core.reader.hocon import HoconStringReader, HoconConfigDictReader
-from arjuna.core.value import AnyRefValue
+from arjuna.core.value import Value
 
 class TestConfigurator:
 
@@ -36,7 +36,7 @@ class TestConfigurator:
 
     def __create_config_from_option_dicts(self, reference, arjuna_options, user_options):
         def format_value(val):
-            if isinstance(val, AnyRefValue):
+            if isinstance(val, Value):
                 return val.as_str()
             elif isinstance(val, Enum):
                 return val.name
