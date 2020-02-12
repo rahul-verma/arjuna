@@ -10,11 +10,10 @@ For exploring Arjuna fundamentals, we will consider a very basic web UI test aut
 
 #### Pre-requisites
 
-
 Place Selenium **Chromedriver** and **Geckodriver** excutables in the [drivers directory for your OS](ProjectStructure.md).
 
 ```python
-# arjuna-samples/arjex_core_features/tests/modules/test_01_go_to_google.py
+# arjuna-samples/arjex_core_features/tests/modules/test_01_simple_test.py
 
 from arjuna import *
 
