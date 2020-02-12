@@ -12,9 +12,52 @@
 - Arjuna's `RunContext` object contains one or more `Configuration`s. By default it contains a configuration which is a deep copy of the reference Configuration.
 - `RunContext` can be used to create and update custom configurations.
 - You can retrieve the run context from Arjuna facade by making `Arjuna.get_run_context()`.
-  
-  
-#### Update Configuration
+
+#### Retrieving value of Arjuna options in Code
+
+```python
+# arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+
+@test
+def test_config_retrieval(my, request):
+    config = Arjuna.get_ref_config()
+
+    wait_value = config.get_arjuna_option_value(ArjunaOption.GUIAUTO_MAX_WAIT)
+    print(wait_value.as_int())
+
+    wait_value = config.get_arjuna_option_value("GUIAUTO_MAX_WAIT")
+    print(wait_value.as_int())
+
+    wait_value = config.get_arjuna_option_value("GuIAuTo_MaX_WaIt")
+    print(wait_value.as_int())
+
+    wait_value = config.get_arjuna_option_value("guiauto.max.wait")
+    print(wait_value.as_int())
+
+    wait_value = config.get_arjuna_option_value("guiauto.max.wait")
+    print(wait_value.as_int())
+
+    wait_time = config.guiauto_max_wait
+    print(wait_time)
+
+    should_maximize_browser = config.get_arjuna_option_value(ArjunaOption.BROWSER_MAXIMIZE)
+    print(should_maximize_browser.as_bool())
+ ```
+
+##### Points to Note
+1. First, we retrieve the reference config by calling `Arjuna.get_ref_config()`
+2. You can retrieve value of an `ArjunaOption` by calling the `get_arjuna_option_value(<Arjuna Option or string>)` method of a `Configuration` object. The argument to this call can be an `ArjunaOption` enum constant or a string representing the option. 
+3. The option name string is considered by Arjuna as **case-insensitive**. Also, **. (dot)** and **_ (underscore)** are interchangeable. So, following are equivalent arguments:
+        - ArjunaOption.GUIAUTO_MAX_WAIT
+        - GUIAUTO_MAX_WAIT
+        - GuIAuTo_MaX_WaIt
+        - guiauto.max.wait
+        - guiauto.max.wait
+        - and so on
+4. The `Configuration` object also has named properties for commonly used Arjuna options. The name of property is same as the lower-case enum constant text, for example, `guiauto_max_wait`.
+5. The last part of the code demonstrates a boolean option - `ArjunaOption.BROWSER_MAXIMIZE`.
+
+#### Change Configuration Settings
   
  ```python
  # arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
@@ -85,6 +128,20 @@ Add the above content to `project.conf` file. We want to tweak `ArjunaOption.BRO
         - and so on
 
 Please note that the contents of `arjunaOptions` follow [HOCON](https://github.com/lightbend/config/blob/master/HOCON.md) syntax. This means that you can write settings in properties syntax, as JSON or as human-readable JSON syntax supported by HOCON.
+
+```python
+# arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+
+@test
+def test_project_conf(my, request):
+    google = WebApp(base_url="https://google.com")
+    google.launch()
+    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    google.quit()
+
+```
+
+The code for this example is exactly same as the code that used Chrome for this use case. But instead of launching Chrome, the WebApp launches Firefox browser.
 
    
    
