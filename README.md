@@ -8,7 +8,9 @@ You'd need Python 3.5+ to make use of Arjuna.
 
 Note: On Linux, the built-in Python3 build has issues with the Python's built-in enum module which is heavily used in Arjuna. One alternative is to install ActiveState Python on linux. Advanced users can go for installing a custom Python build.
 
-### Arjuna Installation
+## Tutorial
+
+### 1. Arjuna Installation
 
 1. Download and install latest Python (3.5+) from https://python.org
     * If you are insterested to learn python Following are links for tutorials and docs.
@@ -18,18 +20,16 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 3. Install Arjuna using the following command
     * `pip install arjuna`
 
-### Arjuna's Core Features
+### 2. Arjuna's Core Features
 
 You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_core_features/tests/modules).
-
 1. [Project Structure](./docs/core/ProjectStructure.md)
 2. [Writing Your First Test](./docs/core/WritingFirstTest.md)
 3. [Value Abstraction](./docs/core/ValueAbstraction.md)
-3. [Configuration](./docs/core/Configuration.md)
-2. [Command Line Options](./docs/core/CommandLineOptions.md)
-4. [Data Driven Testing](./docs/core/DataDrivenTesting.md)
+4. [Configuration](./docs/core/Configuration.md)
+5. [Data Driven Testing](./docs/core/DataDrivenTesting.md)
 
-### Basic Web UI Automation
+### 3. Basic Web UI Automation
 
 You can find the example code used on this section in [arjuna_core_features project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/tests/modules).
 
@@ -38,7 +38,7 @@ You can find the example code used on this section in [arjuna_core_features proj
 3. [GuiMultiElement](./docs/webui_basics/GuiMultiElement.md)
 4. [Dropdown and RadioGroup](./docs/webui_basics/DropDownRadioGroup.md)
 
-### Advanced Web UI Automation
+### 4. Advanced Web UI Automation
 1. [Finding Nested Elements](./docs/webui_adv/FindingNestedElements.md)
 2. [Alternative and Dynamic Identifiers](./docs/webui_adv/AlternativeDynamicIdentifiers.md)
 3. [Executing JavaScript](./docs/webui_adv/ExecutingJavaScript.md)
@@ -47,10 +47,13 @@ You can find the example code used on this section in [arjuna_core_features proj
 6. [Handling Custom DropDowns](./docs/webui_adv/HandlingCustomDropDowns.md)
 7. [Retrieving Source code with GuiSource](./docs/webui_adv/GuiSource.md)
 
-### Gui Abstraction - App, Page, Widget and Gui Elements
+### 5. Gui Abstraction - App, Page, Widget and Gui Elements
 1. [Externalised Gui Namespace (App Level)](./docs/gui_abstraction/ExternalisedGuiNamespace.md)
 2. [App-Page Object Model](./docs/gui_abstraction/AppPageObjectModel.md)
 3. [App-Page-Widget Object Model](./docs/gui_abstraction/AppPageWidgetObjectModel.md)
+
+## Reference
+1. [Command Line Options](./docs/core/CommandLineOptions.md)
 
 ### Miscellaneous
 1. Using Arjuna With Your Test Framework
