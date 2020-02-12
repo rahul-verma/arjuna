@@ -2,8 +2,6 @@
 
 Writing a basic test in Arjuna is very easy. 
 
-You can find the example code used on this page in [arjuna_core_features project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_core_features/tests/modules).
-
 For exploring Arjuna fundamentals, we will consider a very basic web UI test automation case:
 1. Open a browser.
 2. Go to a URL.
