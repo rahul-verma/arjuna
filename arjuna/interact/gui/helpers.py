@@ -328,23 +328,23 @@ class With:
         return With(WithType.TITLE, title)
 
     @staticmethod
-    def attr_value(value):
-        return With(WithType.ATTR_VALUE, value)
+    def attr_value(attr, value):
+        return With(WithType.ATTR_VALUE, "[{}][{}]".format(attr, value))
 
     @staticmethod
-    def attr_pvalue(value):
-        return With(WithType.ATTR_PVALUE, value)
+    def attr_pvalue(attr, content):
+        return With(WithType.ATTR_PVALUE, "[{}][{}]".format(attr, content))
 
     @staticmethod
-    def attr_bvalue(value):
-        return With(WithType.ATTR_BVALUE, value)
+    def attr_bvalue(attr, content):
+        return With(WithType.ATTR_BVALUE, "[{}][{}]".format(attr, content))
 
     @staticmethod
-    def attr_evalue(value):
-        return With(WithType.ATTR_EVALUE, value)
+    def attr_evalue(attr, content):
+        return With(WithType.ATTR_EVALUE, "[{}][{}]".format(attr, content))
 
     @staticmethod
-    def attr_word(value):
+    def attr_word(attr, word):
         return With(WithType.ATTR_WORD, value)
 
     @staticmethod

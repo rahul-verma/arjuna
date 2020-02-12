@@ -4,7 +4,6 @@
 - Other pytest switches of interest to be wrapped in alignment with Arjuna.
 - Integrate Discovery module from earlier code to validate m/c/f/m
 
-
 Next
 ----
 - Clean-up With
@@ -13,6 +12,20 @@ Next
 - See how difficult it is to integrate Allure reporting. Accordingly see screenshots possibility.
 - For multi-element introduce an arguent min_length. It should be a part of waiting till number of elements are more than the min specified.
 - For multi-element, see filter methods. .filter(attr_value(name=, value=))
+- Reassess With.class_names and With.class_name and With.compound_class. Can be done with one.
+- Create an attr() call. One should be able to supply any number of attrs to With.attr* methods
+- One thing which can be done for With cleanup is that With can tranform itself based on who it is etc.
+- Another thing which can be done is introduction, 
+    With.conditions which can take various args of type
+        - value
+        - title
+        - attr
+    Conditions can be 
+    Different With share an OR relationship like earlier.
+    Within a With.locators, they share an and relationship.
+    With.conditions() -- Can take only condition arguments e.g. attr, text, value, etc. not xpath or this style. A subset of conditions supported.
+        - Most likely will lead to an XPath generation.
+    See how this and MultiElement Filters work together.
 
 With TPI rearrangement:
 Progress
