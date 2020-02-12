@@ -158,10 +158,6 @@ In addition to this we will also define an option `target.title` programmaticall
 
 @test
 def test_user_options(my, request):
-    '''
-        For this test:
-        You must add target.url = "https://google.com" to userOptions in project.conf to see the impact.
-    '''
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.user_option("target.title", "Google")
@@ -172,11 +168,15 @@ def test_user_options(my, request):
     url = config.get_user_option_value("target.url").as_str()
     title = config.get_user_option_value("target.title").as_str()
 
-    google = WebApp(base_url=url, config=config)
+    google = WebApp(base_url=url)
     google.launch()
     my.asserter.assertEqual(title, google.ui.main_window.title)
     google.quit()
 
 ```
 
-The code for this example is exactly same as the code that used Chrome for this use case. But instead of launching Chrome, the WebApp launches Firefox browser.
+##### Points to Note
+1. Creating a user option is same as earlier with the only difference that you need to call the `user_option` builder method of `config_creator`.
+2. For retrieving the value, call `get_user_option_value` method of `Configuration`. Like in case of `ArjunaOption`s, the value is returned as `Value` object. Use its methods for appropriate processing.
+3. Rest of the code is similar to the basic use case code used so far. It uses the values retrieved from user options in `Configuration`.
+
