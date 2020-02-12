@@ -23,11 +23,11 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 ### 2. Arjuna's Core Features
 
 You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_core_features/tests/modules).
-
+1. [Project Structure](./docs/core/ProjectStructure.md)
 2. [Writing Your First Test](./docs/core/WritingFirstTest.md)
 3. [Value Abstraction](./docs/core/ValueAbstraction.md)
-3. [Configuration](./docs/core/Configuration.md)
-4. [Data Driven Testing](./docs/core/DataDrivenTesting.md)
+4. [Configuration](./docs/core/Configuration.md)
+5. [Data Driven Testing](./docs/core/DataDrivenTesting.md)
 
 ### 3. Basic Web UI Automation
 
@@ -53,8 +53,7 @@ You can find the example code used on this section in [arjuna_core_features proj
 3. [App-Page-Widget Object Model](./docs/gui_abstraction/AppPageWidgetObjectModel.md)
 
 ## Reference
-1. [Project Structure](./docs/core/ProjectStructure.md)
-2. [Command Line Options](./docs/core/CommandLineOptions.md)
+1. [Command Line Options](./docs/core/CommandLineOptions.md)
 
 ### Miscellaneous
 1. Using Arjuna With Your Test Framework
