@@ -2,6 +2,8 @@ Following is the list of critical additions and updates for a given released ver
 
 0.8.10
 ------
+Primary Goal: Document Usage of Key Features. Make code changes to support doc flow and intuitive names/usage.
+
 - Added asserter object to 'my'
 - Split Example Project to represent documentation sections.
 - Examples are now tracked based on transformation to @test and doc written.
@@ -9,7 +11,7 @@ Following is the list of critical additions and updates for a given released ver
     - Launch Chrome
     - Writing Your First Test
     - Value abstraction
-    - Configuration - Arjuna Options
+    - Configuration - Arjuna Options and User Defined Options
 - Added non-coding documentation:
     - Project Structure
 - CLI Changes
