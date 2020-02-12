@@ -147,7 +147,7 @@ class Configuration:
         return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).as_enum(GuiAutomationContext)
 
     @property
-    def browser_type(self):
+    def browser_name(self):
         return self.get_arjuna_option_value(ArjunaOption.BROWSER_NAME).as_enum(BrowserName)
 
     @property

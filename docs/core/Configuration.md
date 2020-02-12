@@ -22,26 +22,23 @@
 def test_config_retrieval(my, request):
     config = Arjuna.get_ref_config()
 
-    wait_value = config.get_arjuna_option_value(ArjunaOption.GUIAUTO_MAX_WAIT)
+    wait_value = config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME)
     print(wait_value.as_int())
 
-    wait_value = config.get_arjuna_option_value("GUIAUTO_MAX_WAIT")
+    wait_value = config.get_arjuna_option_value("BROWSER_NAME")
     print(wait_value.as_int())
 
-    wait_value = config.get_arjuna_option_value("GuIAuTo_MaX_WaIt")
+    wait_value = config.get_arjuna_option_value("BrOwSeR_NaMe")
     print(wait_value.as_int())
 
-    wait_value = config.get_arjuna_option_value("guiauto.max.wait")
+    wait_value = config.get_arjuna_option_value("browser.name")
     print(wait_value.as_int())
 
-    wait_value = config.get_arjuna_option_value("guiauto.max.wait")
+    wait_value = config.get_arjuna_option_value("Browser.Name")
     print(wait_value.as_int())
 
-    wait_time = config.guiauto_max_wait
+    wait_time = config.browser_name
     print(wait_time)
-
-    should_maximize_browser = config.get_arjuna_option_value(ArjunaOption.BROWSER_MAXIMIZE)
-    print(should_maximize_browser.as_bool())
  ```
 
 ##### Points to Note
