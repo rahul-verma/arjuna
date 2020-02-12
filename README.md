@@ -30,6 +30,9 @@ You can find the example code used on this section in [arjuna_core_features proj
 4. [Data Driven Testing](./docs/core/DataDrivenTesting.md)
 
 ### Basic Web UI Automation
+
+You can find the example code used on this section in [arjuna_core_features project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/tests/modules).
+
 1. [Getting Started with WebApp](./docs//webui_basics/GettingStartedWithWebApp.md)
 2. [GuiElement Identification and Interactions](./docs/webui_basics/GuiElementIdentificationInteractions.md)
 3. [Understanding With Locators](./docs/webui_basics/UnderstandingWithLocators.md)
