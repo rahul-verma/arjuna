@@ -22,18 +22,51 @@ and for **Lost Your Password?** link is:
 <a href="/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
 ```
 
+#### Test Fixture for Examples in This Page
+
+We are going to use a test-level fixture for the examples.
+
+Following user options have been added to `project.conf` for this fixture to work
+
+```javascript
+        userOptions {
+	        wp.app.url = "IP address"
+	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
+        }
+```
+
+Below is the `@for_test` fixture code:
+
+```python
+# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+
+@for_test
+def wordpress(request):
+    # Setup
+    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+    wordpress = WebApp(base_url=wp_url)
+    wordpress.launch()
+    
+    yield wordpress
+    
+    # Teadown    
+    wordpress.quit()
+```
+
+##### Points to Note
+1. We retrieve the Login page URL for Wordpress from `Configuration`.
+2. We create a `WebApp` instance and supply the above URL as the `base_url` argument.
+3. We launch the app.
+4. We yield this app object so that it is available in the tests.
+5. In the teadown section, we quit the app.
+
 #### Identification using ID, Name, Class Name, Tag Name, Link Text, Partial Link Text
-
-
 
 ```python
 # arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
 
 @test
-def test_basic_identifiers(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_basic_identifiers(my, request, wordpress):
 
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
@@ -72,10 +105,7 @@ We use **`With.xpath`** for identification using XPath. It is a direct wrapper o
 # arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
 
 @test
-def test_xpath(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_xpath(my, request, wordpress):
 
     # Based on Text
     element = wordpress.element(With.xpath("//*[text() = 'Lost your password?']"))
@@ -109,10 +139,7 @@ We use **`With.selector`** for identification using CSS Selector. It is a direct
 # arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
 
 @test
-def test_xpath(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_xpath(my, request, wordpress):
 
     # Based on any attribute e.g. for
     element = wordpress.element(With.selector("*[for = 'user_login']"))
@@ -149,10 +176,7 @@ Following is the example code:
 # arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
 
 @test
-def test_xpath(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_xpath(my, request, wordpress):
 
     # Based on partial text
     element = wordpress.element(With.text("Lost"))
@@ -186,4 +210,99 @@ def test_xpath(my, request):
     element = wordpress.element(With.js("return document.getElementById('wp-submit')"))
 
     wordpress.quit()
+```
+
+#### Basic GuiElement Interactions - Setting Text, Clicking and Waits
+
+To interact with a GuiElement, from automation angle it must be in an interactable state. In the usual automation code, a test author writes a lot of waiting related code (and let's not even touch the `time.sleep`.).
+
+Arjuna does a granular automatic waiting of three types:
+- Waiting for the presence of an element when it is attempting to identify a GuiElement
+- Waiting for the right state (for example, clickability of an GuiElement when you enter text or want to click it)
+- Waiting for interaction to succeed (Arjuna, for example, retries click if interaction exception is raised).
+
+Following user options have been added to `project.conf` for this test to work:
+
+```javascript
+        userOptions {
+	        wp.app.url = "IP address"
+	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
+	        wp.logout.url = ${userOptions.wp.app.url}"/wp-login.php?action=logout"
+
+            wp.admin {
+                name = "<username>"
+                pwd = "<password>"
+            }
+        }
+```
+
+We will simulate WordPress login. Following are the steps:
+1. Enter user name and password.
+2. Click Submit button.
+3. As mouse actions have not been discussed so far, we will directly go to the logout URL.
+4. In the process, WordPress shows some confirmation and success messages.
+
+```python
+# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+
+@test
+def test_wp_login(my, request, wordpress):
+
+    user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
+    pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
+    
+    # Login
+    user_field = wordpress.element(With.id("user_login"))
+    user_field.text = user
+
+    pwd_field = wordpress.element(With.id("user_pass"))
+    pwd_field.text = pwd
+
+    submit = wordpress.element(With.id("wp-submit"))
+    submit.click()
+
+    wordpress.element(With.classes("welcome-view-site"))
+
+    # Logout
+    url = wordpress.config.get_user_option_value("wp.logout.url").as_str()
+    wordpress.go_to_url(url)
+
+    confirmation = wordpress.element(With.link("log out"))
+    confirmation.click()
+
+    wordpress.element(With.text("logged out"))
+```
+
+##### Points to Note
+1. We retrieve user name and password from the user options specified in `project.conf`.
+2. We identify different elements as discussed earlier.
+3. For setting text of an element we can set the value for its `text` attribute.
+4. To click an element, we can call its `click` method.
+5. What you will notice is that there is no waiting logic in the test code.
+
+#### Basic GuiElement Interactions - You Can Write Concise Code If You Wish
+
+Code style could be a very personal thing. If you are looking for a conside coding option, you can write the previous code as follows with exact same functionality:
+
+```python
+# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+
+@test
+def test_wp_login(my, request, wordpress):
+
+    user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
+    pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
+    
+    # Login
+    wordpress.element(With.id("user_login")).text = user
+    wordpress.element(With.id("user_pass")).text = pwd
+    wordpress.element(With.id("wp-submit")).click()
+    wordpress.element(With.classes("welcome-view-site"))
+
+    # Logout
+    url = wordpress.config.get_user_option_value("wp.logout.url").as_str()
+    wordpress.go_to_url(url)
+    wordpress.element(With.link("log out")).click()
+    wordpress.element(With.text("logged out"))
+    
 ```
