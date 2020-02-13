@@ -35,6 +35,7 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 
 1. [Getting Started with WebApp](./docs//webui_basics/WebApp.md)
 2. [GuiElement - Identification and Interactions](./docs/webui_basics/GuiElement.md)
+3. [Creating a Self-Contained WebApp](./docs/webui_basics/SelfContainedWebApp.md)
 3. [GuiMultiElement](./docs/webui_basics/GuiMultiElement.md)
 4. [Dropdown and RadioGroup](./docs/webui_basics/DropDownRadioGroup.md)
 
