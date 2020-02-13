@@ -24,13 +24,7 @@ and for **Lost Your Password?** link is:
 
 #### Identification using ID, Name, Class Name, Tag Name, Link Text, Partial Link Text
 
-Arjuna's With object supports all Selenium's `By` identifiers, with slight modifications:
-- **`With.id`** : Wraps By.id
-- **`With.name`** : Wraps By.name
-- **`With.tag`** : Wraps By.tag_name
-- **`With.classes`** : Wraps By.class_name, however it supports compound classes. See Locator Extensions section on this page.
-- **`With.link`** : Wraps By.partial_link_text. Note that all content/text matches in Arjuna are partial matches (opposite of Selenium).
-- **`With.flink`** : Wraps By.link_text (short for Full Link)
+
 
 ```python
 # arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
@@ -60,14 +54,14 @@ def test_basic_identifiers(my, request):
 
 ##### Points to Note
 1. Launch the WebApp. Use a WordPress deployment of choice. For example code creation, a VirtualBox image of Bitnami Wordpress was used.
-2. GuiElement identification if done by calling the **`element`** factory method of `ui` object of `WebApp`.
-3. The locator strategy is expressed using factory methods of **`With`** class which correspond as follows:
-    - **`With.id`** - ID attribute
-    - **`With.name`** - Name attribute
-    - **`With.class_name`** - One of the class names in class attribute
-    - **`With.tag_name`** - Tag Name
-    - **`With.link_text`**  - Link Text
-    - **`With.link_ptext`** - A part of Link's text
+2. GuiElement identification if done by calling the **`element`** factory method of of `WebApp`.
+3. The locator strategy is expressed using factory methods of **`With`** class.Arjuna's With object supports all Selenium's `By` identifiers, with slight modifications:
+- **`With.id`** : Wraps By.id
+- **`With.name`** : Wraps By.name
+- **`With.tag`** : Wraps By.tag_name
+- **`With.classes`** : Wraps By.class_name, however it supports compound classes. See Locator Extensions section on this page.
+- **`With.link`** : Wraps By.partial_link_text. Note that all content/text matches in Arjuna are partial matches (opposite of Selenium).
+- **`With.flink`** : Wraps By.link_text (short for Full Link)
 4. Quit the app using its `quit` method.
 
 #### Identification using XPath
