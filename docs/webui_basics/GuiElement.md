@@ -55,7 +55,7 @@ def test_basic_identifiers(my, request):
 ##### Points to Note
 1. Launch the WebApp. Use a WordPress deployment of choice. For example code creation, a VirtualBox image of Bitnami Wordpress was used.
 2. GuiElement identification if done by calling the **`element`** factory method of of `WebApp`.
-3. The locator strategy is expressed using factory methods of **`With`** class.Arjuna's With object supports all Selenium's `By` identifiers, with slight modifications:
+3. The locator strategy is expressed using factory methods of **`With`** class. Arjuna's `With` object supports all Selenium's `By` identifiers, with slight modifications:
 - **`With.id`** : Wraps By.id
 - **`With.name`** : Wraps By.name
 - **`With.tag`** : Wraps By.tag_name
