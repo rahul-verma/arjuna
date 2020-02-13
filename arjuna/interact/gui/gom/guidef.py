@@ -63,7 +63,7 @@ class GuiDef:
     def convert_to_lmd(self, *locators):
         final_locators = []
         for raw_locator in locators:
-            if raw_locator.wtype.upper().strip() == "GNS_NAME":
+            if raw_locator.wtype.upper().strip() == "META":
                 emd = self.__ns.get_meta_data(raw_locator.wvalue, self.__auto_context)
                 for loc in emd.raw_locators:
                     if not raw_locator.named_args:
@@ -85,7 +85,8 @@ class GuiDef:
         impl_with = locator.as_impl_locator()
         emd = self.__ns.get_meta_data(impl_with.wvalue, self.__auto_context)
         for loc in emd.raw_locators:
-            wobj = getattr(With, loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "ID".lower())("abc")
+            underscore = loc.ltype.lower().endswith("attr") and "_" or ""
+            wobj = getattr(With, underscore + loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "_" + "ID".lower())("abc")
             if locator.named_args:
                 wobj.format(**locator.named_args)
             out_list.append(wobj)

@@ -1,5 +1,13 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.8.11
+------
+
+- With.meta -> changed to With.label
+- Fix for GNS for attr based identification.
+- 
+
+
 0.8.10
 ------
 Primary Goal: Document Usage of Key Features. Make code changes to support doc flow and intuitive names/usage.

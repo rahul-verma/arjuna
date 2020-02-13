@@ -53,8 +53,8 @@ class WPBaseTest(unittest.TestCase):
         user, pwd = self.config.get_user_option_value("wp.users.admin").split_as_str_list()
 
         # Login
-        self.wordpress.ui.element(With.gns_name("login").format(RoLe="user")).text = user
-        self.wordpress.ui.element(With.gns_name("password").format(roLE="user")).text = pwd
+        self.wordpress.ui.element(With.meta("login").format(RoLe="user")).text = user
+        self.wordpress.ui.element(With.meta("password").format(roLE="user")).text = pwd
         self.wordpress.ui.element("submit").click()
 
         self.wordpress.ui.element("view_site").wait_until_visible()

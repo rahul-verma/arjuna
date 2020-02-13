@@ -145,13 +145,13 @@ class AppContent(Gui):
             if isinstance(locator, With):
                 w = locator
             elif type(locator) is str:
-                w = With.gns_name(locator)
+                w = With.label(locator)
             elif isinstance(locator, Enum):
-                w = With.gns_name(locator.name)
+                w = With.label(locator.name)
             else:
                 raise Exception("A With object or name of element is expected as argument.")
 
-            if w.wtype == WithType.META:
+            if w.wtype == WithType.LABEL:
                 if isinstance(w.wvalue, Enum):
                     w.wvalue = w.wvalue.name
                 out.extend(self.gui_def.convert_to_with(w))

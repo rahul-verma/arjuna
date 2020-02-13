@@ -140,7 +140,7 @@ class Keyboard:
         def parts(self):
             return self.__parts
 
-    @staticmethod
+    @classmethod
     def chord(self):
         '''
             Returns a new KeyChord object.
@@ -201,7 +201,7 @@ class WithType(Enum):
     WINDOW_TITLE = auto()
     WINDOW_PTITLE = auto()
     ELEMENT = auto()
-    META = auto()
+    LABEL = auto()
 
 class With:
 
@@ -273,106 +273,126 @@ class With:
         
         return map
 
-    @staticmethod
-    def id(id):
+    @classmethod
+    def id(cls, id):
         return With(WithType.ID, id)
 
-    @staticmethod
-    def name(name):
+    @classmethod
+    def name(cls, name):
         return With(WithType.NAME, name)
 
-    @staticmethod
-    def classes(*names):
+    @classmethod
+    def classes(cls, *names):
         return With(WithType.CLASSES, names)
 
-    @staticmethod
-    def link(text):
+    @classmethod
+    def link(cls, text):
         return With(WithType.LINK, text)
 
-    @staticmethod
-    def flink(text):
+    @classmethod
+    def flink(cls, text):
         return With(WithType.FLINK, text)
 
-    @staticmethod
-    def selector(selector):
+    @classmethod
+    def selector(cls, selector):
         return With(WithType.SELECTOR, selector)
 
-    @staticmethod
-    def tag(selector):
+    @classmethod
+    def tag(cls, selector):
         return With(WithType.TAG, selector)
 
-    @staticmethod
-    def xpath(xpath):
+    @classmethod
+    def xpath(cls, xpath):
         return With(WithType.XPATH, xpath)
 
-    @staticmethod
-    def text(text):
+    @classmethod
+    def text(cls, text):
         return With(WithType.TEXT, text)
 
-    @staticmethod
-    def ftext(text):
+    @classmethod
+    def ftext(cls, text):
         return With(WithType.FTEXT, text)
 
-    @staticmethod
-    def btext(text):
+    @classmethod
+    def btext(cls, text):
         return With(WithType.BTEXT, text)
 
-    @staticmethod
-    def etext(text):
+    @classmethod
+    def etext(cls, text):
         return With(WithType.ETEXT, text)
 
-    @staticmethod
-    def title(title):
+    @classmethod
+    def title(cls, title):
         return With(WithType.TITLE, title)
 
-    @staticmethod
-    def attr(attr, value):
-        return With(WithType.ATTR, "[{}][{}]".format(attr, value))
+    @classmethod
+    def __fmt_attr(cls, attr, value):
+        return "[{}][{}]".format(attr, value)
 
-    @staticmethod
-    def fattr(attr, content):
-        return With(WithType.FATTR, "[{}][{}]".format(attr, content))
+    @classmethod
+    def _attr(cls, fmt):
+        return With(WithType.ATTR, fmt)
 
-    @staticmethod
-    def battr(attr, content):
-        return With(WithType.BATTR, "[{}][{}]".format(attr, content))
+    @classmethod
+    def _fattr(cls, fmt):
+        return With(WithType.FATTR, fmt)
 
-    @staticmethod
-    def eattr(attr, content):
-        return With(WithType.EATTR, "[{}][{}]".format(attr, content))
+    @classmethod
+    def _battr(cls, fmt):
+        return With(WithType.BATTR, fmt)
 
-    @staticmethod
-    def value(value):
+    @classmethod
+    def _eattr(cls, fmt):
+        return With(WithType.EATTR, fmt)   
+
+    @classmethod
+    def attr(cls, attr, value):
+        return _attr(cls.__fmt_attr(attr_value))
+
+    @classmethod
+    def fattr(cls, attr, content):
+        return _fattr(cls.__fmt_attr(attr_value))
+
+    @classmethod
+    def battr(cls, attr, content):
+        return _battr(cls.__fmt_attr(attr_value))
+
+    @classmethod
+    def eattr(cls, attr, content):
+        return _eattr(cls.__fmt_attr(attr_value))
+
+    @classmethod
+    def value(cls, value):
         return With(WithType.VALUE, value)
 
-    @staticmethod
-    def type(type):
+    @classmethod
+    def type(cls, type):
         return With(WithType.TYPE, type)
 
-    @staticmethod
-    def point(point):
+    @classmethod
+    def point(cls, point):
         return With(WithType.POINT, point.location)
 
-    @staticmethod
-    def js(js):
+    @classmethod
+    def js(cls, js):
         return With(WithType.JS, js)
 
-    @staticmethod
-    def index(index):
+    @classmethod
+    def index(cls, index):
         return With(WithType.INDEX, index)
 
-    @staticmethod
-    def window_title(title):
+    @classmethod
+    def window_title(cls, title):
         return With(WithType.WINDOW_TITLE, title)
 
-    @staticmethod
-    def window_ptitle(ptitle):
+    @classmethod
+    def window_ptitle(cls, ptitle):
         return With(WithType.WINDOW_PTITLE, ptitle)
 
-    @staticmethod
-    def element(with_obj):
+    @classmethod
+    def element(cls, with_obj):
         return With(WithType.ELEMENT, with_obj)
 
-    @staticmethod
-    def meta(name):
-        return With(WithType.META, name)
+    @classmethod
+    def label(cls, name):
+        return With(WithType.LABEL, name)
