@@ -8,13 +8,15 @@ Primary Goal: Document Usage of Key Features. Make code changes to support doc f
 - Split Example Project to represent documentation sections.
 - Examples are now tracked based on transformation to @test and doc written.
 - Examples:
-    - Launch Chrome
-    - Writing Your First Test
-    - Value abstraction
-    - Configuration - Arjuna Options and User Defined Options
-    - WebApp
-    - GuiElement - Selenium By's Equivalent, Arjuna Extensions, Basic Interactions
-    - GuiMultiElement
+    - Core Features
+        - Writing First Test
+        - Value abstraction
+        - Configuration - Arjuna Options and User Defined Options
+    - Web UI Automation Basics
+        - Getting Started with WebApp
+        - GuiElement - Selenium By's Equivalent, Arjuna Extensions, Basic Interactions
+        - Creating a Self-Contained App Class
+        - GuiMultiElement
 - Added non-coding documentation:
     - Project Structure
 - CLI Changes
