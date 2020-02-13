@@ -18,15 +18,14 @@ from arjuna import *
 @test
 def test_value(my, request):
     v = Value("1")
-    my.asserter.assertEqual(1, v.as_int())
+    my.asserter.assert_equal(1, v.as_int(), "Value")
     v = Value("1.1")
-    my.asserter.assertEqual(1, v.as_int())
-
+    my.asserter.assert_equal(1, v.as_int(), "Value")
 ```
 
 #### Points to Note
 1. The test is coded as usual.
 2. An object of Value is created by providing the object. Here were provide a string containing an integer.
 3. `as_int` method of Value object is used for conversion of string to an int.
-4. `my.asserter`'s `assertEqual` is used for equality assertion.
+4. `my.asserter`'s `assert_equal` is used for equality assertion.
 5. Same steps are repeated, but this time the string contains a float.
