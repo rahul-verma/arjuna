@@ -103,3 +103,6 @@ class WebApp(App):
 
     def quit(self):
         self.automator.quit()
+
+    def __getattr__(self, name):
+        return getattr(self.ui, name)

@@ -104,36 +104,36 @@ class GenericLocateWith(Enum):
     ID = auto()
     NAME = auto() 
     XPATH = auto() 
-    CSS_SELECTOR = auto()
-    CLASS_NAME = auto() 
-    LINK_TEXT = auto() 
-    LINK_PTEXT = auto() 
-    TAG_NAME = auto()
+    SELECTOR = auto()
+    CLASSES = auto() 
+    LINK = auto() 
+    FLINK = auto()
+    PLINK = auto() 
+    TAG = auto()
 
     INDEX = auto()
     WINDOW_TITLE = auto()
     WINDOW_PTITLE = auto()
-    CONTENT_LOCATOR = auto()
+    ELEMENT = auto()
     POINT = auto()
-    JAVASCRIPT = auto()   
-
-    #Translated to CSS Selectors
-    COMPOUND_CLASS = auto()
-    CLASS_NAMES = auto()
+    JS = auto() 
 
     # Translated to XPath
     TEXT = auto() 
+    FTEXT = auto() 
     TITLE = auto() 
-    PTEXT = auto() 
     TYPE = auto() 
     VALUE = auto() 
-    ATTR_VALUE = auto()
-    ATTR_PVALUE = auto()
+    ATTR = auto()
+    FATTR = auto()
     IMAGE_SRC = auto()
     IMAGE = auto()
 
-    # These need to be translated to
+    # Translated 1-1 to Selenium
     PARTIAL_LINK_TEXT = auto()
+    LINK_TEXT = auto()
+    TAG_NAME = auto()
+    CSS_SELECTOR = auto()
 
 class Locator:
 
@@ -192,21 +192,20 @@ class GuiElementMetaData:
     BASIC_LOCATORS = {
         GenericLocateWith.ID,
         GenericLocateWith.NAME,
-        GenericLocateWith.CLASS_NAME,
-        GenericLocateWith.LINK_TEXT,
         GenericLocateWith.XPATH,
-        GenericLocateWith.CSS_SELECTOR,
-        GenericLocateWith.TAG_NAME,
         GenericLocateWith.IMAGE,
         GenericLocateWith.INDEX,
         GenericLocateWith.WINDOW_TITLE,
         GenericLocateWith.WINDOW_PTITLE,
         GenericLocateWith.POINT,
-        GenericLocateWith.JAVASCRIPT,
+        GenericLocateWith.JS,
     }
 
     NEED_TRANSLATION = {
-        GenericLocateWith.LINK_PTEXT : GenericLocateWith.PARTIAL_LINK_TEXT
+        GenericLocateWith.TAG : GenericLocateWith.TAG_NAME,
+        GenericLocateWith.LINK : GenericLocateWith.PARTIAL_LINK_TEXT,
+        GenericLocateWith.FLINK : GenericLocateWith.LINK_TEXT,
+        GenericLocateWith.SELECTOR : GenericLocateWith.CSS_SELECTOR,
     }
 
     XTYPE_LOCATORS = {
@@ -222,16 +221,16 @@ class GuiElementMetaData:
     }
 
     XPATH_LOCATORS = {
-        GenericLocateWith.TEXT : "//*[text()='{}']",
-        GenericLocateWith.PTEXT : "//*[contains(text(),'{}')]",
+        GenericLocateWith.TEXT : "//*[contains(text(),'{}')]",
+        GenericLocateWith.FTEXT : "//*[text()='{}']",
         GenericLocateWith.VALUE : "//*[@value='{}']",
         GenericLocateWith.TITLE : "//*[@title='{}']",
         GenericLocateWith.IMAGE_SRC : "//img[@src='{}']"
     }
 
     XPATH_TWO_ARG_LOCATORS = {
-        GenericLocateWith.ATTR_VALUE : "//*[@{}='{}']",
-        GenericLocateWith.ATTR_PVALUE : "//*[contains(@{},'{}')]"
+        GenericLocateWith.ATTR : "//*[contains(@{},'{}')]",
+        GenericLocateWith.FATTR : "//*[@{}='{}']",
     }
 
     def __init__(self, raw_locators, process_args=True):
@@ -265,7 +264,7 @@ class GuiElementMetaData:
             except:
                 raise Exception("Invalid locator across all automators: {}".format(rltype))
             else:
-                if generic_locate_with == GenericLocateWith.CONTENT_LOCATOR:
+                if generic_locate_with == GenericLocateWith.ELEMENT:
                     self.__add_locator(generic_locate_with, rlvalue, named_args)
                 elif generic_locate_with in self.BASIC_LOCATORS:
                     self.__add_locator(generic_locate_with, rlvalue, named_args)
@@ -287,10 +286,17 @@ class GuiElementMetaData:
                         raise Exception("Unsupported element type for XTYPE locator: " + rlvalue)
                     else:
                         self.__add_locator(GenericLocateWith.XPATH, self.XTYPE_LOCATORS[elem_type], named_args)
-                elif generic_locate_with == GenericLocateWith.COMPOUND_CLASS:
-                    self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', "." + rlvalue.replace('.', ' ').strip()), named_args)
-                elif generic_locate_with == GenericLocateWith.CLASS_NAMES:
-                    self.__add_locator(GenericLocateWith.CSS_SELECTOR, "." + ".".join(rlvalue), named_args)
+                # elif generic_locate_with == GenericLocateWith.COMPOUND_CLASS:
+                #     self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', ), named_args)
+                elif generic_locate_with == GenericLocateWith.CLASSES:
+                    css_string = None
+                    if len(rlvalue) == 0:
+                        raise Exception("You must pass atleast one class name.")
+                    elif len(rlvalue) == 1:
+                        css_string = "." + rlvalue[0].replace('.', ' ').strip()
+                    else:
+                        css_string = "." + ".".join(rlvalue)
+                    self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', css_string), named_args)
                 else:
                     raise Exception("Locator not supported yet by Arjuna: " + rltype)
 
@@ -303,7 +309,7 @@ class GuiElementMetaData:
         '''
         pattern = r"\$(\s*\w*?\s*)\$"
         for locator in self.locators:
-            if locator.ltype == GenericLocateWith.CONTENT_LOCATOR:
+            if locator.ltype == GenericLocateWith.ELEMENT:
                 locator.lvalue.process_args()
 
             if not locator.named_args: continue

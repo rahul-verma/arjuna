@@ -13,17 +13,30 @@ Primary Goal: Document Usage of Key Features. Make code changes to support doc f
     - Value abstraction
     - Configuration - Arjuna Options and User Defined Options
     - WebApp
+    - GuiElement - Selenium By's Equivalent, Arjuna Extensions
 - Added non-coding documentation:
     - Project Structure
 - CLI Changes
     - cm/im switches removed based on new test structure.
     - cf/if changed to ct/it (--consider-tests, --ignore-tests).
     - run-pickers changed to run-selected.
+- Simplification of With
+    - class_name, class_names, compound_class -> With.classes
+    - css_selector -> selector
+    - tag_name -> tag
+    - link_text -> flink (Full text of link)
+    - link_ptext -> link (Default match in Arjuna is Partial)
+    - javascript -> js
+    - attr_value -> fattr (Full attribute)
+    - attr_pvalue -> attr (Default match in Arjuna is Partial)
+
+- WebApp delegates all calls which it does not contain to its 'ui' obj. It simplifies the App abstraction code in tests.
 - Name and importing changes
     - AnyRefValue changed to Value. It is now a direct arjuna import.
     - DefaultTestContext -> RunContext
     - guiauto_max_wait property method -> guiauto_max_wait
-- 
+- With.attr* now take two arguments and simple strings rather than [attr][value] string.
+-  
 
 0.8.9
 -----

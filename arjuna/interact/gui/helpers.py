@@ -175,35 +175,33 @@ class Screen:
 class WithType(Enum):
     ID = auto()
     NAME = auto()
-    CLASS_NAME = auto()
-    LINK_TEXT = auto()
-    LINK_PTEXT = auto()
+    CLASSES = auto()
+    LINK = auto()
+    FLINK = auto()
+    TAG = auto()
     XPATH = auto()
-    CSS_SELECTOR = auto()
-    TAG_NAME = auto()
-    COMPOUND_CLASS = auto()
-    CLASS_NAMES = auto()
+    SELECTOR = auto()
 
     TEXT = auto()
-    TITLE = auto()
-    PTEXT = auto()
+    FTEXT = auto()
     BTEXT = auto()
     ETEXT = auto()
-    ATTR_VALUE = auto()
-    ATTR_PVALUE = auto()
-    ATTR_BVALUE = auto()
-    ATTR_EVALUE = auto()
+    TITLE = auto()
+    ATTR = auto()
+    FATTR = auto()
+    BATTR = auto()
+    EATTR = auto()
     ATTR_WORD = auto()
     TYPE = auto()
     VALUE = auto()
     POINT = auto()
-    JAVASCRIPT = auto()
+    JS = auto()
 
     INDEX = auto()
     WINDOW_TITLE = auto()
     WINDOW_PTITLE = auto()
-    CONTENT_LOCATOR = auto()
-    GNS_NAME = auto()
+    ELEMENT = auto()
+    META = auto()
 
 class With:
 
@@ -220,7 +218,7 @@ class With:
         self.__format_called = False
         self.__named_args = None
 
-        if with_type == WithType.CONTENT_LOCATOR:
+        if with_type == WithType.ELEMENT:
             if not isinstance(with_value, With):
                 raise Exception("For identification with element locator, the argument must be a With object.")
             else:
@@ -284,24 +282,24 @@ class With:
         return With(WithType.NAME, name)
 
     @staticmethod
-    def class_name(name):
-        return With(WithType.CLASS_NAME, name)
+    def classes(*names):
+        return With(WithType.CLASSES, names)
 
     @staticmethod
-    def link_text(text):
-        return With(WithType.LINK_TEXT, text)
+    def link(text):
+        return With(WithType.LINK, text)
 
     @staticmethod
-    def link_ptext(text):
-        return With(WithType.LINK_PTEXT, text)
+    def flink(text):
+        return With(WithType.FLINK, text)
 
     @staticmethod
-    def css_selector(selector):
-        return With(WithType.CSS_SELECTOR, selector)
+    def selector(selector):
+        return With(WithType.SELECTOR, selector)
 
     @staticmethod
-    def tag_name(selector):
-        return With(WithType.TAG_NAME, selector)
+    def tag(selector):
+        return With(WithType.TAG, selector)
 
     @staticmethod
     def xpath(xpath):
@@ -312,8 +310,8 @@ class With:
         return With(WithType.TEXT, text)
 
     @staticmethod
-    def ptext(text):
-        return With(WithType.PTEXT, text)
+    def ftext(text):
+        return With(WithType.FTEXT, text)
 
     @staticmethod
     def btext(text):
@@ -328,24 +326,20 @@ class With:
         return With(WithType.TITLE, title)
 
     @staticmethod
-    def attr_value(attr, value):
-        return With(WithType.ATTR_VALUE, "[{}][{}]".format(attr, value))
+    def attr(attr, value):
+        return With(WithType.ATTR, "[{}][{}]".format(attr, value))
 
     @staticmethod
-    def attr_pvalue(attr, content):
-        return With(WithType.ATTR_PVALUE, "[{}][{}]".format(attr, content))
+    def fattr(attr, content):
+        return With(WithType.FATTR, "[{}][{}]".format(attr, content))
 
     @staticmethod
-    def attr_bvalue(attr, content):
-        return With(WithType.ATTR_BVALUE, "[{}][{}]".format(attr, content))
+    def battr(attr, content):
+        return With(WithType.BATTR, "[{}][{}]".format(attr, content))
 
     @staticmethod
-    def attr_evalue(attr, content):
-        return With(WithType.ATTR_EVALUE, "[{}][{}]".format(attr, content))
-
-    @staticmethod
-    def attr_word(attr, word):
-        return With(WithType.ATTR_WORD, value)
+    def eattr(attr, content):
+        return With(WithType.EATTR, "[{}][{}]".format(attr, content))
 
     @staticmethod
     def value(value):
@@ -356,20 +350,12 @@ class With:
         return With(WithType.TYPE, type)
 
     @staticmethod
-    def compound_class(classes_str):
-        return With(WithType.COMPOUND_CLASS, classes_str)
-
-    @staticmethod
-    def class_names(*class_names):
-        return With(WithType.CLASS_NAMES, class_names)
-
-    @staticmethod
     def point(point):
         return With(WithType.POINT, point.location)
 
     @staticmethod
-    def javascript(js):
-        return With(WithType.JAVASCRIPT, js)
+    def js(js):
+        return With(WithType.JS, js)
 
     @staticmethod
     def index(index):
@@ -384,9 +370,9 @@ class With:
         return With(WithType.WINDOW_PTITLE, ptitle)
 
     @staticmethod
-    def content_locator(with_obj):
-        return With(WithType.CONTENT_LOCATOR, with_obj)
+    def element(with_obj):
+        return With(WithType.ELEMENT, with_obj)
 
     @staticmethod
-    def gns_name(name):
-        return With(WithType.GNS_NAME, name)
+    def meta(name):
+        return With(WithType.META, name)

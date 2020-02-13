@@ -16,7 +16,7 @@ Next
 - Create an attr() call. One should be able to supply any number of attrs to With.attr* methods
 - One thing which can be done for With cleanup is that With can tranform itself based on who it is etc.
 - Another thing which can be done is introduction, 
-    With.conditions which can take various args of type
+    With.conditions or Just Call it "Which"? which can take various args of type
         - value
         - title
         - attr

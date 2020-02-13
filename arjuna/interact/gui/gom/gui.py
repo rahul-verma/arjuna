@@ -156,7 +156,7 @@ class AppContent(Gui):
             else:
                 raise Exception("A With object or name of element is expected as argument.")
 
-            if w.wtype == WithType.GNS_NAME:
+            if w.wtype == WithType.META:
                 if isinstance(w.wvalue, Enum):
                     w.wvalue = w.wvalue.name
                 out.extend(self.gui_def.convert_to_with(w))
