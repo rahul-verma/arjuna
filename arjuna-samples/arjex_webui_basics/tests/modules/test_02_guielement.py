@@ -23,12 +23,16 @@ from arjuna import *
 Code is kept redundant across methods for the purpose of easier learning.
 '''
 
-@test
-def test_basic_identifiers(my, request):
+@for_test
+def wordpress(request):
     wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
     wordpress = WebApp(base_url=wp_url)
     wordpress.launch()
+    yield wordpress
+    wordpress.quit()
 
+@test
+def test_basic_identifiers(my, request, wordpress):
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
     element = wordpress.element(With.id("user_login"))
@@ -43,15 +47,9 @@ def test_basic_identifiers(my, request):
     # Full Link text match
     element = wordpress.element(With.flink("Lost your password?"))
 
-    wordpress.quit()
-
 
 @test
-def test_xpath(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
-
+def test_xpath(my, request, wordpress):
     # Based on Text
     element = wordpress.element(With.xpath("//*[text() = 'Lost your password?']"))
 
@@ -73,14 +71,9 @@ def test_xpath(my, request):
     # Based on element type
     element = wordpress.element(With.xpath("//*[@type ='password']"))
 
-    wordpress.quit()
-
 
 @test
-def test_selector(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_selector(my, request, wordpress):
 
     # Based on any attribute e.g. for
     element = wordpress.element(With.selector("*[for = 'user_login']"))
@@ -94,14 +87,9 @@ def test_selector(my, request):
     # Based on compound classes
     element = wordpress.element(With.selector(".button.button-large"))
 
-    wordpress.quit()
-
 
 @test
-def test_arjuna_exts(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_arjuna_exts(my, request, wordpress):
 
     # Based on partial text
     element = wordpress.element(With.text("Lost"))
@@ -134,4 +122,47 @@ def test_arjuna_exts(my, request):
     # With Javascript
     element = wordpress.element(With.js("return document.getElementById('wp-submit')"))
 
-    wordpress.quit()
+
+@test
+def test_basic_interactions(my, request, wordpress):
+    '''
+        For this test:
+        Wordpress related user options have been added to the project.conf
+        You should replace the details with those corresponding to your own deployment of WordPress.
+        userOptions {
+	        wp.app.url = "IP address"
+	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
+	        wp.logout.url = ${userOptions.wp.app.url}"/wp-login.php?action=logout"
+
+            wp.admin {
+                name = "<username>"
+                pwd = "<password>"
+            }
+        }
+    '''
+
+    user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
+    pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
+    
+    # Login
+    user_field = wordpress.element(With.id("user_login"))
+    user_field.text = user
+
+    pwd_field = wordpress.element(With.id("user_pass"))
+    pwd_field.text = pwd
+
+    submit = wordpress.element(With.id("wp-submit"))
+    submit.click()
+
+    wordpress.element(With.classes("welcome-view-site")).wait_until_visible()
+
+    # Logout
+    url = wordpress.config.get_user_option_value("wp.logout.url").as_str()
+    wordpress.go_to_url(url)
+
+    confirmation = wordpress.element(With.link("log out"))
+    confirmation.click()
+
+    message = wordpress.element(With.text("logged out"))
+    message.wait_until_visible()
+
