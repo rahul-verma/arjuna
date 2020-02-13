@@ -45,6 +45,20 @@ def test_config_retrieval(my, request):
     browser = config.browser_name
     print(browser)
 
+
+@test
+def test_project_conf(my, request):
+    '''
+        For this test:
+        You must add browser.name = firefox to arjunaOptions in project.conf to see the impact.
+        It changes the default browser from Chrome to Firefox across the project.
+    '''
+    google = WebApp(base_url="https://google.com")
+    google.launch()
+    my.asserter.assert_equal("Google", google.title, "Page title")
+    google.quit()
+
+
 @test
 def test_update_config(my, request):
     context = Arjuna.get_run_context()
@@ -54,7 +68,7 @@ def test_update_config(my, request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assertEqual("Google", google.title)
+    my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 @test
@@ -65,19 +79,6 @@ def test_simpler_builder_method(my, request):
     cc.register()
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
-    google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
-    google.quit()
-
-
-@test
-def test_project_conf(my, request):
-    '''
-        For this test:
-        You must add browser.name = firefox to arjunaOptions in project.conf to see the impact.
-        It changes the default browser from Chrome to Firefox across the project.
-    '''
-    google = WebApp(base_url="https://google.com")
     google.launch()
     my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
