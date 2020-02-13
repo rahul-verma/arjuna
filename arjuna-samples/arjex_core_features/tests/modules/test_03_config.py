@@ -42,8 +42,8 @@ def test_config_retrieval(my, request):
     wait_value = config.get_arjuna_option_value("Browser.Name")
     print(wait_value.as_str())
 
-    wait_time = config.browser_name
-    print(wait_time)
+    browser = config.browser_name
+    print(browser)
 
 @test
 def test_update_config(my, request):
@@ -54,7 +54,7 @@ def test_update_config(my, request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    my.asserter.assertEqual("Google", google.title)
     google.quit()
 
 @test
@@ -66,7 +66,7 @@ def test_simpler_builder_method(my, request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 
@@ -79,7 +79,7 @@ def test_project_conf(my, request):
     '''
     google = WebApp(base_url="https://google.com")
     google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 
@@ -101,5 +101,5 @@ def test_user_options(my, request):
 
     google = WebApp(base_url=url, config=config)
     google.launch()
-    my.asserter.assertEqual(title, google.ui.main_window.title)
+    my.asserter.assert_equal(title, google.title, "Page Title")
     google.quit()

@@ -23,16 +23,15 @@ from arjuna import *
 def test_webpp_nobase_url(my, request):
     google = WebApp()
     google.launch(blank_slate=True)
-    google.ui.browser.go_to_url("https://google.com")
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    google.go_to_url("https://google.com")
+    my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
-
 
 @test
 def test_webpp_base_url_arg(my, request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 @test
@@ -44,5 +43,5 @@ def test_webpp_base_url_in_custom_config(my, request):
 
     google = WebApp(config=context.get_config())
     google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()

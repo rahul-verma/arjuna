@@ -22,9 +22,9 @@ from arjuna import *
 @test
 def test_value(my, request):
     v = Value("1")
-    my.asserter.assertEqual(1, v.as_int())
+    my.asserter.assert_equal(1, v.as_int(), "Value")
     v = Value("1.1")
-    my.asserter.assertEqual(1, v.as_int())
+    my.asserter.assert_equal(1, v.as_int(), "Value")
 
 
 

@@ -26,12 +26,7 @@ import unittest
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 
 from .guidef import *
-
-class AsserterMixIn:
-
-    def __init__(self):
-        # Trick to use assertions outside of a unittest test
-        self._asserter = unittest.TestCase('__init__')
+from arjuna.engine.asserter import AsserterMixIn
 
 class Gui(AsserterMixIn):
 
@@ -210,6 +205,10 @@ class AppContent(Gui):
     @property
     def alert(self):
         return self.automator.alert
+
+    @property
+    def title(self):
+        return self.main_window.title
 
     @property
     def main_window(self):

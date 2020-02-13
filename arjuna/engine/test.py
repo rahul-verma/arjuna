@@ -22,6 +22,7 @@ from arjuna.core.utils import obj_utils
 from arjuna.engine.hook import PytestHooks
 from arjuna.engine.data.record import DummyDataRecord
 from arjuna.engine.data.store import SharedObjects
+from arjuna.engine.asserter import Asserter
 import functools
 import pytest
 import unittest
@@ -117,7 +118,7 @@ class My:
         self.__qual_name = None
         self.__request =  None
         self.__shared_objects = None
-        self.__asserter = unittest.TestCase('__init__')
+        self.__asserter = Asserter() #unittest.TestCase('__init__')
 
     @property
     def data(self):

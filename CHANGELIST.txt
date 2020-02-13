@@ -29,14 +29,16 @@ Primary Goal: Document Usage of Key Features. Make code changes to support doc f
     - javascript -> js
     - attr_value -> fattr (Full attribute)
     - attr_pvalue -> attr (Default match in Arjuna is Partial)
-
-- WebApp delegates all calls which it does not contain to its 'ui' obj. It simplifies the App abstraction code in tests.
+- WebApp Interface Improvements
+    - delegates all calls which it does not contain to its 'ui' obj. It simplifies the App abstraction code in tests.
+    - title is a direct inquirable attribute
+    - go_to_url is a direct call.
 - Name and importing changes
     - AnyRefValue changed to Value. It is now a direct arjuna import.
     - DefaultTestContext -> RunContext
     - guiauto_max_wait property method -> guiauto_max_wait
 - With.attr* now take two arguments and simple strings rather than [attr][value] string.
--  
+- test.my and Gui have Arjuna's asserter object. More assertions to be added. AsserterMixin moved to asserter module.
 
 0.8.9
 -----
