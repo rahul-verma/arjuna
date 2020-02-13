@@ -22,18 +22,51 @@ and for **Lost Your Password?** link is:
 <a href="/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
 ```
 
+#### Test Fixture for Examples in This Page
+
+We are going to use a test-level fixture for the examples.
+
+Following user options have been added to `project.conf` for this fixture to work
+
+```javascript
+        userOptions {
+	        wp.app.url = "IP address"
+	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
+        }
+```
+
+Below is the `@for_test` fixture code:
+
+```python
+# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+
+@for_test
+def wordpress(request):
+    # Setup
+    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+    wordpress = WebApp(base_url=wp_url)
+    wordpress.launch()
+    
+    yield wordpress
+    
+    # Teadown    
+    wordpress.quit()
+```
+
+##### Points to Note
+1. We retrieve the Login page URL for Wordpress from `Configuration`.
+2. We create a `WebApp` instance and supply the above URL as the `base_url` argument.
+3. We launch the app.
+4. We yield this app object so that it is available in the tests.
+5. In the teadown section, we quit the app.
+
 #### Identification using ID, Name, Class Name, Tag Name, Link Text, Partial Link Text
-
-
 
 ```python
 # arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
 
 @test
-def test_basic_identifiers(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_basic_identifiers(my, request, wordpress):
 
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
@@ -72,10 +105,7 @@ We use **`With.xpath`** for identification using XPath. It is a direct wrapper o
 # arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
 
 @test
-def test_xpath(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_xpath(my, request, wordpress):
 
     # Based on Text
     element = wordpress.element(With.xpath("//*[text() = 'Lost your password?']"))
@@ -109,10 +139,7 @@ We use **`With.selector`** for identification using CSS Selector. It is a direct
 # arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
 
 @test
-def test_xpath(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_xpath(my, request, wordpress):
 
     # Based on any attribute e.g. for
     element = wordpress.element(With.selector("*[for = 'user_login']"))
@@ -149,10 +176,7 @@ Following is the example code:
 # arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
 
 @test
-def test_xpath(my, request):
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
+def test_xpath(my, request, wordpress):
 
     # Based on partial text
     element = wordpress.element(With.text("Lost"))
