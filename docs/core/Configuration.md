@@ -25,22 +25,22 @@ def test_config_retrieval(my, request):
     config = Arjuna.get_ref_config()
 
     wait_value = config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME)
-    print(wait_value.as_int())
+    print(wait_value.as_str())
 
     wait_value = config.get_arjuna_option_value("BROWSER_NAME")
-    print(wait_value.as_int())
+    print(wait_value.as_str())
 
     wait_value = config.get_arjuna_option_value("BrOwSeR_NaMe")
-    print(wait_value.as_int())
+    print(wait_value.as_str())
 
     wait_value = config.get_arjuna_option_value("browser.name")
-    print(wait_value.as_int())
+    print(wait_value.as_str())
 
     wait_value = config.get_arjuna_option_value("Browser.Name")
-    print(wait_value.as_int())
+    print(wait_value.as_str())
 
-    wait_time = config.browser_name
-    print(wait_time)
+    browser = config.browser_name
+    print(browser)
  ```
 
 ##### Points to Note
@@ -80,7 +80,7 @@ Please note that the contents of `arjunaOptions` follow [HOCON](https://github.c
 def test_project_conf(my, request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 ```
@@ -103,7 +103,7 @@ def test_update_config(my, request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
  ```
    
@@ -131,7 +131,7 @@ def test_simpler_builder_method(my, request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assertEqual("Google", google.ui.main_window.title)
+    my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
  ```
 
@@ -168,11 +168,10 @@ def test_user_options(my, request):
     url = config.get_user_option_value("target.url").as_str()
     title = config.get_user_option_value("target.title").as_str()
 
-    google = WebApp(base_url=url)
+    google = WebApp(base_url=url, config=config)
     google.launch()
-    my.asserter.assertEqual(title, google.ui.main_window.title)
+    my.asserter.assert_equal(title, google.title, "Page Title")
     google.quit()
-
 ```
 
 ##### Points to Note
