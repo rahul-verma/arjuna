@@ -18,7 +18,7 @@ Place Selenium **Chromedriver** and **Geckodriver** excutables in the [drivers d
 from arjuna import *
 
 @test
-def test_go_to_google(my, request):
+def test_go_to_url(my, request):
     google = WebApp(base_url="https://google.com")
     google.launch()
     my.asserter.assert_equal("Google1", google.title, "Page title")
@@ -38,6 +38,6 @@ def test_go_to_google(my, request):
 #### Running the test
 You can run this test by running `arjuna_launcher.py` Python script at the root of the project and passing the `-ct` or `--consider-tests` command line option:
 
-`python arjuna_launcher.py run-selected -ct test_go_to_google`
+`python arjuna_launcher.py run-selected -ct test_go_to_url`
 
 
