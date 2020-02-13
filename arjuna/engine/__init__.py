@@ -74,7 +74,7 @@ class ArjunaSingleton:
         if not os.path.exists(d):
             os.makedirs(d)
 
-    def init(self, project_root_dir, cli_config, run_id):
+    def init(self, project_root_dir, cli_config, run_id, *, static_rid):
         from arjuna.configure.impl.processor import ConfigCreator
         ConfigCreator.init()
         self.__project_root_dir = project_root_dir
@@ -82,7 +82,10 @@ class ArjunaSingleton:
         from arjuna.session.invoker.test_session import DefaultTestSession
         self.__test_session = DefaultTestSession()
         run_id = run_id and run_id or "mrun"
-        run_id = "{}-{}".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3], run_id)
+        prefix = ""
+        if not static_rid:
+            prefix = "{}-".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3])
+        run_id = "{}{}".format(prefix, run_id)
         self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id)
 
         from arjuna.core.enums import ArjunaOption
@@ -365,7 +368,7 @@ class Arjuna:
     LOGGER = None
 
     @classmethod
-    def init(cls, project_root_dir, cli_config=None, run_id=None):
+    def init(cls, project_root_dir, cli_config=None, run_id=None, *, static_rid=False):
         '''
             Returns reference test context which contains reference configuration.
             This reference test context merges central conf, project conf and central CLI options.
@@ -373,7 +376,7 @@ class Arjuna:
             You can also provide an alternative root directory for test project.
         '''
         cls.ARJUNA_SINGLETON = ArjunaSingleton()
-        return cls.ARJUNA_SINGLETON.init(project_root_dir, cli_config, run_id)
+        return cls.ARJUNA_SINGLETON.init(project_root_dir, cli_config, run_id, static_rid=static_rid)
 
     @classmethod
     def get_logger(cls):

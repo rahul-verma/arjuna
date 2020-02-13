@@ -201,14 +201,12 @@ class __RunCommand(Command):
             parent.process(arg_dict)
 
         from arjuna import Arjuna
-        project_root_dir = arg_dict["project.root.dir"]
-        del arg_dict["project.root.dir"]
-        runid = arg_dict["run.id"]
-        del arg_dict["run.id"]
-
+        project_root_dir = arg_dict.pop("project.root.dir")
+        runid = arg_dict.pop("run.id")
+        static_rid = arg_dict.pop("static.rid")
         self.enumerate_only = arg_dict.pop("enumerate")
 
-        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid)
+        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid, static_rid=static_rid)
 
         import sys
         proj_dir = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_ROOT_DIR).as_str()

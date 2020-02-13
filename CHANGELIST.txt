@@ -5,7 +5,7 @@ Following is the list of critical additions and updates for a given released ver
 
 - With.meta -> changed to With.label
 - Fix for GNS for attr based identification.
-- 
+- Support for static RunID when --static-rid switch is passed. Useful during script development. Default is dynamic timestamped runid.
 
 
 0.8.10
