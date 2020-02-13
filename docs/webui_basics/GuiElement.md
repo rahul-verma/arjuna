@@ -280,4 +280,29 @@ def test_wp_login(my, request, wordpress):
 4. To click an element, we can call its `click` method.
 5. What you will notice is that there is no waiting logic in the test code.
 
+#### Basic GuiElement Interactions - You Can Write Concise Code If You Wish
 
+Code style could be a very personal thing. If you are looking for a conside coding option, you can write the previous code as follows with exact same functionality:
+
+```python
+# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+
+@test
+def test_wp_login(my, request, wordpress):
+
+    user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
+    pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
+    
+    # Login
+    wordpress.element(With.id("user_login")).text = user
+    wordpress.element(With.id("user_pass")).text = pwd
+    wordpress.element(With.id("wp-submit")).click()
+    wordpress.element(With.classes("welcome-view-site"))
+
+    # Logout
+    url = wordpress.config.get_user_option_value("wp.logout.url").as_str()
+    wordpress.go_to_url(url)
+    wordpress.element(With.link("log out")).click()
+    wordpress.element(With.text("logged out"))
+    
+```
