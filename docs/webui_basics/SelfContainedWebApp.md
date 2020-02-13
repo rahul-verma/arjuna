@@ -38,7 +38,7 @@ class WordPress(WebApp):
 2. The class inherits from WebApp.
 3. In its `__init__` method we do a `super().__init__` call and provide the `base_url`. We launch the app here itself to avoid a separate call.
 4. It has two methods `login` and `logout` which represent functionality specific to our app.
-5. As app can reference its own attributes, we use `self.launch`, `self.element`,, `self.quit` calls.
+5. As app can reference its own attributes, we use `self.launch`, `self.element`, `self.quit` calls.
 6. All the code here is taken from the previous GuiElement interaction example.
 
 #### Using the App in Test Code
