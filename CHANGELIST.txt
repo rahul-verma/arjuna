@@ -40,6 +40,10 @@ Primary Goal: Document Usage of Key Features. Make code changes to support doc f
     - guiauto_max_wait property method -> guiauto_max_wait
 - With.attr* now take two arguments and simple strings rather than [attr][value] string.
 - test.my and Gui have Arjuna's asserter object. More assertions to be added. AsserterMixin moved to asserter module.
+- Current working directory is changed to project directory before pytest is launched.
+- pytest.ini now present inside arjuna deployment.
+- conftest.py now resides inside tests directory.
+- Basic proof of concept done w.r.t. creating session level fixtures outside of conftest. Will build on this in upcoming versions.
 
 0.8.9
 -----

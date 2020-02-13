@@ -40,6 +40,7 @@ setup(
                     "res/*.help",
                     "res/*.txt",
                     "res/*.conf",
+                    "res/*.ini",
                 ]
     },
     install_requires = ["flask", "flask-RESTful", "waitress", "requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon", "lxml", "wxPython", "protobuf", "pytest", "pytest-dependency"],

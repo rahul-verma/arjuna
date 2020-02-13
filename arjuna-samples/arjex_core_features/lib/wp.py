@@ -27,8 +27,8 @@ class WordPress(WebApp):
         self.launch()
 
     def login(self):
-        user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
-        pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
+        user = self.config.get_user_option_value("wp.admin.name").as_str()
+        pwd = self.config.get_user_option_value("wp.admin.pwd").as_str()
 
         # Login
         self.element(With.id("user_login")).text = user
@@ -37,7 +37,7 @@ class WordPress(WebApp):
         self.element(With.classes("welcome-view-site"))
 
     def logout(self):
-        url = wordpress.config.get_user_option_value("wp.logout.url").as_str()
+        url = self.config.get_user_option_value("wp.logout.url").as_str()
         self.go_to_url(url)
         self.element(With.link("log out")).click()
         self.element(With.text("logged out"))

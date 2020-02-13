@@ -20,9 +20,24 @@ limitations under the License.
 from arjuna import *
 from arjex_webui_basics.lib.wp import WordPress
 
-
-@test
-def test_selfcontained_wp(my, request):
+@for_test
+def wordpress(request):
+    # Setup
     wordpress = WordPress()
     wordpress.login()
+    yield wordpress
+
+    # Teadown
     wordpress.logout()
+
+@test
+def test_multielement(my, request, wordpress):
+    wordpress.element(With.link("Posts")).click()
+    wordpress.element(With.link("Categories")).click()
+
+    check_boxes = wordpress.multi_element(With.name("delete_tags[]"))
+    check_boxes[1].check()
+    check_boxes[1].uncheck()
+    check_boxes.first_element.uncheck()
+    check_boxes.last_element.uncheck()
+    check_boxes.random_element.uncheck()

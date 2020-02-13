@@ -19,6 +19,7 @@ limitations under the License.
 
 import os
 import pytest
+import sys
 
 from arjuna.core.enums import ReportFormat
 
@@ -31,12 +32,17 @@ class TestRunner:
         from arjuna import Arjuna
         from arjuna.core.enums import ArjunaOption
         self.__project_dir = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_ROOT_DIR).as_str()
+        # import sys
+        # sys.path.insert(0, self.__project_dir + "/..")
         self.__tests_dir = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_TESTS_DIR).as_str()
         self.__xml_path = os.path.join(Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR).as_str(), "report.xml")
         self.__html_path = os.path.join(Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR).as_str(), "report.html")
         self.__report_formats = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_REPORT_FORMATS).as_enum_list(ReportFormat)
+        res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
+        pytest_ini_path = res_path + "/pytest.ini"
+
         # -s is to print to console.
-        self.__pytest_args = ["--rootdir", self.__project_dir, "--no-print-logs", "-s"]
+        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "-s"]
         self.__test_args = []
 
     @property
@@ -113,5 +119,6 @@ class TestRunner:
         if only_enumerate:
             self.__pytest_args.append("--collect-only")
 
-        print("Executing pytest with args: {}".format(self.__pytest_args))
+        os.chdir(self.__project_dir)
+        print("Executing pytest with args: {}".format(" ".join(self.__pytest_args)))
         pytest.main(self.__pytest_args)

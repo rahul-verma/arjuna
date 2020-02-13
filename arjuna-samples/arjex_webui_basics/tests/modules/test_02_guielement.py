@@ -19,9 +19,6 @@ limitations under the License.
 
 from arjuna import *
 
-'''
-Code is kept redundant across methods for the purpose of easier learning.
-'''
 
 @for_test
 def wordpress(request):
