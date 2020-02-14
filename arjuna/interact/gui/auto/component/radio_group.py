@@ -51,9 +51,8 @@ class GuiWebRadioGroup(Configurable):
 
     def __find(self, finder, lmd):
         # This would force the identification of partial elements in the wrapped multi-element.
-        self.__radios = finder.multi_element(self.gui, lmd)
+        self.__radios = finder.multi_element(self.gui, lmd, iconfig=self.settings)
         self.__check_type_if_configured(self.source)
-        self.__radios.configure_partial_elements(self.settings)
 
     def has_index_selected(self, index):
         return self.__radios[index].is_selected()

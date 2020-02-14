@@ -7,7 +7,10 @@ Following is the list of critical additions and updates for a given released ver
 - Cleanup of arjuna central conf and description files.
 - Examples:
     - Web UI Automation Basics
-- Added 'fail' method to Asserter.
+        - DropDown
+        - 
+- Added 'fail', 'assert_not_equal', 'assert_true', 'assert_false methods to Asserter.
+- Dropdown bug fix as per With.tag instead of With.tag_name
 - 
 
 

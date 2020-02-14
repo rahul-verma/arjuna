@@ -47,3 +47,18 @@ def test_dropdown(my, request, wordpress):
     role_select.select_value("editor")
     role_select.select_index(4)
     role_select.text = "Subscriber"
+
+
+@test
+def test_radiogroup(my, request, wordpress):
+    wordpress.element(With.link("Settings")).click()
+
+    date_format = wordpress.radio_group(With.name("date_format"))
+
+    context = "Selection of m/d/Y date format"
+    my.asserter.assert_true(date_format.has_value_selected("m/d/Y"), context)
+    my.asserter.assert_true(date_format.has_index_selected(2), context)
+    my.asserter.assert_equal(date_format.value, "m/d/Y", "Value attribute of Date Format")
+
+    date_format.select_value(r"\c\u\s\t\o\m")
+    date_format.select_index(2)
