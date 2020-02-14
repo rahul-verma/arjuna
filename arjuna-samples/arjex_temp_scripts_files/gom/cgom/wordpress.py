@@ -26,7 +26,7 @@ class WordPress(WebApp):
         self.__gns_format = gns_format
         Arjuna.init("/Users/rahulverma/Documents/github_tm/arjuna/arjuna-samples/workspace/arjex")
         config = Arjuna.get_ref_config()
-        super().__init__(config=config, base_url=config.get_user_option_value("wp.login.url").as_str(), ns_dir="{}_wordpress".format(gns_format.lower()))
+        super().__init__(config=config, base_url=config.get_user_option_value("wp.login.url").as_str(), gns_dir="{}_wordpress".format(gns_format.lower()))
 
     @property
     def gns_format(self):

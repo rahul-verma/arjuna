@@ -1,7 +1,0 @@
-[PROFILE_LINK]
-#web,android_web
-class = avatar
-
-[LOGOUT_LINK]
-#web,android_web
-link_text = Log Out

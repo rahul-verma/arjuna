@@ -103,8 +103,8 @@ class GuiFactory:
         from arjuna.core.enums import ArjunaOption
         considered_path = app_def_dir
         if not os.path.isdir(considered_path):
-            ns_dir = automator.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
-            full_path = os.path.join(ns_dir, considered_path)
+            gns_dir = automator.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
+            full_path = os.path.join(gns_dir, considered_path)
             considered_path = os.path.abspath(full_path)
             if not os.path.isdir(considered_path):
                 raise Exception("Provided root definition path is not a directory: {}".format(app_def_dir))

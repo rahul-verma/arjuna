@@ -40,19 +40,23 @@ class Widget(AppContent):
 
 class App(Gui, metaclass=abc.ABCMeta):
 
-    def __init__(self, *, config=None, ext_config=None, label=None, ns_dir=None):
+    def __init__(self, *, config=None, ext_config=None, label=None, gns_dir=None):
         super().__init__(config=config, ext_config=ext_config, label=label)
         self.__ui = None
         self.__automator = None
-        self.__ns_dir = ns_dir
+        self.__gns_dir = gns_dir
 
     @property
     def automator(self):
         return self.__automator
 
     @property
-    def ns_dir(self):
-        return self.__ns_dir
+    def gns_dir(self):
+        return self.__gns_dir
+
+    @gns_dir.setter
+    def gns_dir(self, d):
+        self.__gns_dir = d
 
     def _launchautomator(self):
         # Default Gui automation engine is Selenium
@@ -80,16 +84,18 @@ class App(Gui, metaclass=abc.ABCMeta):
 
 class WebApp(App):
 
-    def __init__(self, *, base_url=None, blank_slate=False, config=None, ext_config=None, label=None, ns_dir=None):
+    def __init__(self, *args, base_url=None, blank_slate=False, config=None, ext_config=None, label=None, gns_dir=None, **kwargs):
         '''
             Creates and returns GuiAutomator object for provided config.
             If no configuration is provided reference configuration is used.
             You can also provide GuiDriverExtendedConfig for extended configuration for WebDriver family of libs. 
         '''
-        super().__init__(config=config, ext_config=ext_config, label=label, ns_dir=ns_dir)
+        super().__init__(config=config, ext_config=ext_config, label=label, gns_dir=gns_dir)
         from arjuna.core.enums import ArjunaOption
         self.__base_url = base_url is not None and base_url or self.config.get_arjuna_option_value(ArjunaOption.AUT_BASE_URL).as_str()
         # self._load(*args, **kwargs)
+        self.__args = args
+        self.__kwargs = kwargs
 
     @property
     def base_url(self):
@@ -100,6 +106,7 @@ class WebApp(App):
         if not blank_slate:
             self.automator.browser.go_to_url(self.base_url)
         self._create_default_ui()
+        self._load(*self.__args, **self.__kwargs)
 
     def quit(self):
         self.automator.quit()
@@ -109,3 +116,12 @@ class WebApp(App):
 
     def __getattr__(self, name):
         return getattr(self.ui, name)
+
+    def externalize(self, *, gns_dir=None, gns_file_name=None):
+        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.gns".format(self.label)        
+        from arjuna.core.enums import ArjunaOption   
+        self.gns_dir = gns_dir and gns_dir or self.gns_dir
+        if not self.gns_dir:
+            self.gns_dir = ""
+        print(self.gns_dir, self.__gns_file_name)
+        self.ui.externalize(gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)

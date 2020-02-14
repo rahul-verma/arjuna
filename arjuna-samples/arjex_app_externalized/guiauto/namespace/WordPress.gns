@@ -1,0 +1,23 @@
+[login]
+id = user_login
+
+[pwd]
+id = user_pass
+
+[submit]
+id = wp-submit
+
+[view_site]
+classes = welcome-view-site
+
+[logout_confirm]
+link = log out
+
+[logout_msg]
+text = logged out
+
+[settings]
+link = Settings
+
+[role]
+id = default_role

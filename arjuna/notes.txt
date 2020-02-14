@@ -769,7 +769,7 @@ Removed res file conf_props.txt which contained onld prop reference code:
             UniteePropertyEnum.TESTS_DIR: (self._handle_project_dir_path, "Test Directory", True),
             UniteePropertyEnum.REPORT_DIR: (self._handle_project_dir_path, "Report Directory", False),
             UniteePropertyEnum.ARCHIVES_DIR: (self._handle_project_dir_path, "Report Archives directory", False),
-            UniteePropertyEnum.SESSIONS_DIR: (self._handle_project_dir_path, "Session Templates directory", False),
+            UniteePropertyEnum.SESSIOgns_dir: (self._handle_project_dir_path, "Session Templates directory", False),
             UniteePropertyEnum.GROUPS_DIR: (self._handle_project_dir_path, "Group Templates directory", False),
             UniteePropertyEnum.RUN_REPORT_DIR: (self._handle_string_config, "Report Directory for the Run ID", False),
             UniteePropertyEnum.RUN_REPORT_JDB_DIR: (

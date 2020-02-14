@@ -67,6 +67,27 @@ class Gui(AsserterMixIn):
     def qual_name(self):
         return self.__class__.__qualname__
 
+    def _load(self, *args, **kwargs):
+        self.prepare(*args, **kwargs)
+        try:
+            self.validate_readiness()
+        except:
+            try:
+                self.reach_until()
+                self.validate_readiness()
+            except Exception as e:
+                raise Exception("GUI [{}] did not load as expected. Error: {}.".format(self.qual_name, str(e)))
+
+    def prepare(self):
+        # Children can override and write any necessary preparation instructions e.g. externalizing
+        pass
+
+    def reach_until(self):
+        # Children can override and write any necessary loading instructions
+        pass
+
+    def validate_readiness(self):
+        pass
 
 class AppContent(Gui):
 
@@ -79,7 +100,7 @@ class AppContent(Gui):
         self.__guidef = None
 
         self.__gui_registered = False
-        self.__def_file_name = None
+        self.__gns_file_name = None
         self.__def_file_path = None
 
     @property
@@ -94,45 +115,23 @@ class AppContent(Gui):
     def gui_def(self):
         return self.__guidef
 
-    def externalize_def(self, ns_dir=None, def_file_name=None):
-        self.__def_file_name = def_file_name is not None and def_file_name or "{}.gns".format(self.label)        
+    def externalize(self, gns_dir=None, gns_file_name=None):
+        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.gns".format(self.label)        
         from arjuna.core.enums import ArjunaOption
-        ns_dir = ns_dir and ns_dir or self.app.ns_dir
+        gns_dir = gns_dir and gns_dir or self.app.gns_dir
         ns_root_dir = self.config.get_arjuna_option_value(ArjunaOption.GUIAUTO_NAMESPACE_DIR).as_str()
-        self.__def_file_path = os.path.join(ns_root_dir, ns_dir, self.def_file_name)
+        self.__def_file_path = os.path.join(ns_root_dir, gns_dir, self.gns_file_name)
         self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
         # if register:
         #     self._register()
 
     @property
-    def def_file_name(self):
-        return self.__def_file_name
+    def gns_file_name(self):
+        return self.__gns_file_name
 
     @property
     def def_file_path(self):
         return self.__def_file_path
-
-    def prepare(self):
-        # Children can override and write any necessary preparation instructions e.g. externalizing
-        pass
-
-    def reach_until(self):
-        # Children can override and write any necessary loading instructions
-        pass
-
-    def validate_readiness(self):
-        pass
-
-    def _load(self, *args, **kwargs):
-        self.prepare(*args, **kwargs)
-        try:
-            self.validate_readiness()
-        except:
-            try:
-                self.reach_until()
-                self.validate_readiness()
-            except Exception as e:
-                raise Exception("GUI [{}] did not load as expected. Error: {}.".format(self.qual_name, str(e)))
 
     def transit(self, page):
         pass

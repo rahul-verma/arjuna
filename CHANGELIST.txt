@@ -7,10 +7,14 @@ Following is the list of critical additions and updates for a given released ver
 - Cleanup of arjuna central conf and description files.
 - Examples:
     - Web UI Automation Basics
-        - DropDown
+        - DropDown and RadioGroup
         - 
 - Added 'fail', 'assert_not_equal', 'assert_true', 'assert_false methods to Asserter.
 - Dropdown bug fix as per With.tag instead of With.tag_name
+- Name changes for consistency:
+    ns_dir -> gns_dir
+    def_file_name -> gns_file_name
+- WebApp externalization with prepare() method fixed. Loadable WebApp should work but needs to be verified.
 - 
 
 
