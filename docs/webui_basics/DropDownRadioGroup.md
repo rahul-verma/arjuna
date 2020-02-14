@@ -46,8 +46,40 @@ def test_dropdown(my, request, wordpress):
 #### Points to Note
 1. To create an object of a DropDown, we use the `dropdown` factory method of the `WebApp`.
 2. We can select an option by its visible text by calling `select_text` method of DropDown.
-3. DropDown provides various enquiry methods - `has_visible_text_selected`, ``has_value_selected`, has_index_selected`.
+3. DropDown provides various enquiry methods - `has_visible_text_selected`, `has_value_selected`, has_index_selected`.
 4. DropDown also has enquirable properties - `value` and `text`.
 5. We assert using `my.asserter`'s appropriate assertion methods.
 6. There are other ways of selection as well - `select_value` to select by value attribute of an option, `select_index` to select an option present at provided index.
 7. DropDown also has a way of selecting an option by setting its `text` property. This is similar to `.text` property setting of a text-box. It is different from `select_text` method in terms of implementation. `select_text` uses DOM inquiry to match the text of an option and then clicks it to select it. Setting the `.text` property similuates the user action where the user types a string in a focused/highlighted select control to select an option (in technical terms it is equivalent of sendkeys).
+
+
+### RadioGroup
+
+RadioGroup object in Arjuna represents the Radio Buttons in the UI that belong to a single selection group (have the same name). Here, we cover handling of a default-HTML RadioGroup control which represents multiple `<input type='radio'>` elements which have the same `name` attribute value.
+
+
+```python
+# arjuna-samples/arjex_webui_basics/tests/modules/test_05_dropdown_radiogroup.py
+@test
+def test_radiogroup(my, request, wordpress):
+    wordpress.element(With.link("Settings")).click()
+
+    date_format = wordpress.radio_group(With.name("date_format"))
+
+    context = "Selection of m/d/Y date format"
+    my.asserter.assert_true(date_format.has_value_selected("m/d/Y"), context)
+    my.asserter.assert_true(date_format.has_index_selected(2), context)
+    my.asserter.assert_equal(date_format.value, "m/d/Y", "Value attribute of Date Format")
+
+    date_format.select_value(r"\c\u\s\t\o\m")
+    date_format.select_index(2)
+```
+
+#### Points to Note
+1. To create an object of a RadioGroup, we use the `radio_group` factory method of the `WebApp`.
+2. We can select a a by its visible text by calling `select_text` method of DropDown.
+3. DropDown provides various enquiry methods - `has_value_selected`, `has_index_selected`.
+4. DropDown also has `value` enquirable property.
+5. We assert using `my.asserter`'s appropriate assertion methods.
+6. You can use two ways of selecting a radio button - `select_value` to select by value attribute of an option, `select_index` to select a radio button present at provided index.
+
