@@ -1,1 +1,0 @@
-This is a placeholder directory for keeping images used for image recognition based GUI automation.
