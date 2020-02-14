@@ -19,27 +19,26 @@ limitations under the License.
 
 from arjuna import *
 
-class WordPress(WebApp):
+def create_wordpress_app():
+    url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+    wordpress = WebApp(base_url=url)
+    wordpress.launch()
+    return wordpress
 
-    def __init__(self):
-        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
-        super().__init__(base_url=url)
-        self.launch()
+def login(wordpress):
+    user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
+    pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
 
-    def login(self):
-        user = self.config.get_user_option_value("wp.admin.name").as_str()
-        pwd = self.config.get_user_option_value("wp.admin.pwd").as_str()
+    # Login
+    wordpress.element(With.id("user_login")).text = user
+    wordpress.element(With.id("user_pass")).text = pwd
+    wordpress.element(With.id("wp-submit")).click()
+    wordpress.element(With.classes("welcome-view-site"))
 
-        # Login
-        self.element(With.id("user_login")).text = user
-        self.element(With.id("user_pass")).text = pwd
-        self.element(With.id("wp-submit")).click()
-        self.element(With.classes("welcome-view-site"))
+def logout(wordpress):
+    url = wordpress.config.get_user_option_value("wp.logout.url").as_str()
+    wordpress.go_to_url(url)
+    wordpress.element(With.link("log out")).click()
+    wordpress.element(With.text("logged out"))
 
-    def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url").as_str()
-        self.go_to_url(url)
-        self.element(With.link("log out")).click()
-        self.element(With.text("logged out"))
-
-        self.quit()
+    wordpress.quit()

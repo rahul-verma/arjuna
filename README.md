@@ -35,7 +35,7 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 
 1. [Getting Started with WebApp](./docs//webui_basics/WebApp.md)
 2. [GuiElement - Identification and Interactions](./docs/webui_basics/GuiElement.md)
-3. [Creating a Self-Contained WebApp](./docs/webui_basics/SelfContainedWebApp.md)
+2. [Creating WordPress Module - Separation of Resuable Functions](./docs/webui_basics/WordPressModule.md)
 3. [GuiMultiElement](./docs/webui_basics/GuiMultiElement.md)
 4. [Dropdown and RadioGroup](./docs/webui_basics/DropDownRadioGroup.md)
 
@@ -52,8 +52,9 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 
 If you have reached this stage of implementation of test automation, you will understand that the following models need a customized project setup. Each one of them has an example project implementing the abstraction.
 
-1. [Externalised Gui Namespace (App Level)](./docs/gui_abstraction/ExternalisedGuiNamespace.md)
-2. [App-Page Object Model](./docs/gui_abstraction/AppPageObjectModel.md)
+1. [Creating a Self-Contained WebApp](./docs/gui_abstraction/SelfContainedWebApp.md)
+2. [Externalised Gui Namespace (App Level)](./docs/gui_abstraction/ExternalisedGuiNamespace.md)
+3. [App-Page Object Model](./docs/gui_abstraction/AppPageObjectModel.md)
 3. [App-Page-Widget Object Model](./docs/gui_abstraction/AppPageWidgetObjectModel.md)
 
 ## Reference

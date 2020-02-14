@@ -18,17 +18,17 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_webui_basics.lib.wp import WordPress
+from arjex_webui_basics.lib.wp import *
 
 @for_test
 def wordpress(request):
     # Setup
-    wordpress = WordPress()
-    wordpress.login()
+    wordpress = create_wordpress_app()
+    login(wordpress)
     yield wordpress
 
     # Teadown
-    wordpress.logout()
+    logout(wordpress)
 
 @test
 def test_multielement(my, request, wordpress):

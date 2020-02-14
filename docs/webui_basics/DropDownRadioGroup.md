@@ -1,19 +1,21 @@
 ### DropDown and RadioButton Abstractions
 
-We will use the logged in WordPress app fixture that we used in previous example(s).
+Below is the `@for_test` fixture code to get logged-in WordPress for a test using the reusable module that we created earlier:
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_05_dropdown_radiogroup.py
+# arjuna-samples/arjex_webui_basics/tests/modules/test_04_gui_multielement.py
+from arjuna import *
+from arjex_webui_basics.lib.wp import WordPress
 
 @for_test
 def wordpress(request):
     # Setup
-    wordpress = WordPress()
-    wordpress.login()
+    wordpress = create_wordpress_app()
+    login(wordpress)
     yield wordpress
 
     # Teadown
-    wordpress.logout()
+    logout(wordpress)
 ```
 
 ### DropDown
