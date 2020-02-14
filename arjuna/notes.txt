@@ -1,5 +1,20 @@
-0.8.8
------
+
+Project creation:
+- Project name itself need not follow python convention.
+- Arjuna project is a Python name and it is created *inside* the IDE project.
+- The structure helps in importable names in IDEs for the core lib.
+- Directories and files to be created -
+    - project dir, __init__.py
+     - config / project.conf (Add sections for arjunaOptions and userOptions)
+     - data/sources / references
+     - guiauto / drivers (/windows/mac/linux) /images /namespace
+     - lib /__init__.py
+     - fixtures.py in lib
+     - enums.py in lib (enum for user options pre-created?)
+     - scripts /arjuna_launcher.py
+     - tests /modules __init__.py, conftest.py
+
+
 - Check: pytest ini file within Arjuna.
 - Other pytest switches of interest to be wrapped in alignment with Arjuna.
 - Integrate Discovery module from earlier code to validate m/c/f/m

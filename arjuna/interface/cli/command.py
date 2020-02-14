@@ -124,13 +124,11 @@ class FileObjectType(Enum):
 class CreateProject(Command):
 
     COMMON_DIRS_FILES = (
-        (FileObjectType.DIR, "archives"),
         (FileObjectType.DIR, "config"),
         (FileObjectType.DIR, "data"),
         (FileObjectType.DIR, "data/sources"),
         (FileObjectType.DIR, "data/references"),
         (FileObjectType.DIR, "guiauto"),
-        (FileObjectType.DIR, "log"),
         (FileObjectType.DIR, "guiauto/drivers"),
         (FileObjectType.DIR, "guiauto/drivers/linux"),
         (FileObjectType.DIR, "guiauto/drivers/mac"),

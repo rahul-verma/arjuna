@@ -1,5 +1,13 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.8.12
+------
+- arjuna_launcher.py moved to scripts directory and updated to support new structure.
+- archives directory is not created now.
+- Cleanup of arjuna central conf and description files.
+- 
+
+
 0.8.11
 ------
 
