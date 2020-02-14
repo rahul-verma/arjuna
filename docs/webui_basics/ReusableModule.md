@@ -1,4 +1,4 @@
-### Separating Reusable Functions
+### Creating Reusable Module - Separating Reusable Functions
 
 Although not strictly a part of learning Arjuna, it is a good practice to separate reusable functions. Arjuna structurally supports it so it will be a good learning in that direction. Also, this will form the basis of more involved models in later sections.
 
@@ -6,7 +6,7 @@ For this section, it is more about avoiding repeated code across examples.
 
 Here, we are following a traditional style of programming. For more advanced constructs, OOP is the key. We'll explore that in depth in the section on GUI abstractions.
 
-#### The App Code
+#### The Module Code
 
 ```python
 # arjuna-samples/arjex_webui_basics/lib/wp.py
