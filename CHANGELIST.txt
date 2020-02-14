@@ -5,6 +5,9 @@ Following is the list of critical additions and updates for a given released ver
 - arjuna_launcher.py moved to scripts directory and updated to support new structure.
 - archives directory is not created now.
 - Cleanup of arjuna central conf and description files.
+- Examples:
+    - Web UI Automation Basics
+- Added 'fail' method to Asserter.
 - 
 
 

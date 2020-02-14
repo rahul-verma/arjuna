@@ -1,8 +1,8 @@
 import sys
 import os
 
-# local_arj_path = "/Users/rahulverma/Documents/github_tm/arjuna"
-# sys.path.insert(0, local_arj_path)
+local_arj_path = "/Users/rahulverma/Documents/github_tm/arjuna"
+sys.path.insert(0, local_arj_path)
 
 from arjuna.main import main
 args = sys.argv

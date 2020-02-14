@@ -32,7 +32,7 @@ class GuiWebSelect(Configurable):
         self._wrapped_main_element = self.automator.element(self.gui, emd)
         self.__found = False
         self.__options = None
-        self.__option_lmd = option_lmd is not None and option_lmd or SimpleGuiElementMetaData("tag_name", "option")
+        self.__option_lmd = option_lmd is not None and option_lmd or SimpleGuiElementMetaData("tag", "option")
 
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
         self.__option_container_same_as_select = option_container_lmd is None and True or False
