@@ -48,14 +48,15 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 6. [Handling Custom DropDowns](./docs/webui_adv/HandlingCustomDropDowns.md)
 7. [Retrieving Source code with GuiSource](./docs/webui_adv/GuiSource.md)
 
-### 5. Gui Abstraction - App, Page, Widget and Gui Elements
+### 5. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
 
 If you have reached this stage of implementation of test automation, you will understand that the following models need a customized project setup. Each one of them has an example project implementing the abstraction.
 
-1. [Creating a Self-Contained WebApp](./docs/gui_abstraction/SelfContainedWebApp.md)
-2. [Externalised Gui Namespace (App Level)](./docs/gui_abstraction/ExternalisedGuiNamespace.md)
-3. [App-Page Object Model](./docs/gui_abstraction/AppPageObjectModel.md)
-3. [App-Page-Widget Object Model](./docs/gui_abstraction/AppPageWidgetObjectModel.md)
+1. [Gui Namespace (GNS) - Externalized Identifiers](./docs/gui_abstraction/GuiNamespace.md)
+2. [Creating App Class](./docs/gui_abstraction/AppObjectModel.md)
+3. [App Object Model](./docs/gui_abstraction/AppObjectModel.md)
+4. [App-Page Object Model](./docs/gui_abstraction/AppPageObjectModel.md)
+5. [App-Page-Widget Object Model](./docs/gui_abstraction/AppPageWidgetObjectModel.md)
 
 ## Reference
 1. [Command Line Options](./docs/core/CommandLineOptions.md)
