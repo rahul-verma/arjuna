@@ -49,6 +49,9 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 7. [Retrieving Source code with GuiSource](./docs/webui_adv/GuiSource.md)
 
 ### 5. Gui Abstraction - App, Page, Widget and Gui Elements
+
+If you have reached this stage of implementation of test automation, you will understand that the following models need a customized project setup. Each one of them has an example project implementing the abstraction.
+
 1. [Externalised Gui Namespace (App Level)](./docs/gui_abstraction/ExternalisedGuiNamespace.md)
 2. [App-Page Object Model](./docs/gui_abstraction/AppPageObjectModel.md)
 3. [App-Page-Widget Object Model](./docs/gui_abstraction/AppPageWidgetObjectModel.md)
