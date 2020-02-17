@@ -1,4 +1,4 @@
-### Creating a Self-Contained App
+### Arjuna's App Model for Gui Abstraction
 
 In this section, we discuss the App Model of Gui Abstraction.
 
