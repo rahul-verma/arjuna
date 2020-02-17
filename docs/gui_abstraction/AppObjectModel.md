@@ -6,7 +6,7 @@ We can implement a class as a `WebApp` by using inheritance. This is the suggest
 
 This is the simplest way to get started with an equivalent of Page Object Model (POM), Page Factories, Loadable Component, all clubbed into one concept. We represent the complete appplication as a single class which is attached to a a single GNS file for externalization. It should work well for small apps or where you are automating only a small sub-set of the application. 
 
-`WebApp` is a child of `Gui` in Arjuna. So, it follows the following internal Gui-loading mechanism of Arjuna. 
+`WebApp` is a child of `Gui` in Arjuna. So, it follows the Gui-loading mechanism of Arjuna. 
 
 #### The GNS File
 
