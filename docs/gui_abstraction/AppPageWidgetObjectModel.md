@@ -1,26 +1,44 @@
-### Arjuna's App-Page Model for Gui Abstraction
+### Arjuna's App-Page-Widget Model for Gui Abstraction
 
-For professional test automation, where you automate multiple use cases across different pages/screens, a simple App Model will not suffice. In the simple App Model, the GNS file will be cluttered with labels from multiple pages and the `WebApp` class will have so many methods that it will impact code mainteance and understandability.
+Consider the following before going into the technicalities of the model:
+1. Typcally, the web applications follow a set of a templates for different pages. Such templates have some repetitive sections across multiple pages. Examples: Left navigation bars, Top Menus, Sidebars etc.
+2. Some application pages might be two complex to be represented as a single page.
+3. Some similar HTML components like tables etc. are resued across multiple pages as a part of their contents.
 
-One step forward from Arjuna's App Model is the App-Page Model:
+Unless we address the above in the way we implement the Gui abstraction, the code will not clearly represent the Gui. Also, even if externalized, this could result in repeated identifiers across different GNS files.
+
+One step forward from Arjuna's App-Page Model is the App-Page-Widget Model:
 1. We implement the web application as a child of `WebApp`class.
 2. We implemented each web page of interest as a child of `Page` class.
-3. The `Page` classes have methods to move from one page to another. 
+3. Pages inherit from different template base pages to represent common structures.
+4. Reusables page portions are implemented as `Widgets` and a correct composition relationship is established between a `Page` and its `Widgets` using OOP.
+5. In short, Apps have pages and a page can have widgets (or sections or parts or portions for want of a better word.).
 
-We are going to create the following 3 pages:
-1. Home
-2. Dashboard
-3. Settings
+There is another change which is optional but suggested which we are going to do - rather than using strings for element labels, we are going to implement an `Enum` in each `Page/Widget` class. This goes a long way in eliminating typing errors in the code.
 
-You can find the example code and files used on this section in [arjuna_app_page project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_app_page).
+We will create 2 types of base pages:
+1. WPBasePage - A base page **without** top and left navigation widgets.
+2. WPFullPage - A base page **with** top and left navigation widgets.
 
-You will see that this approach is more involved than the previous approaches discussed so far. Professional test automation code is more than exercise/raw code seen on the web. This is a step in the right direction, in case you are dealing with test automation professionally.
+We will create 2 types of widgets:
+1. LeftNav - A widget representing left navigation sidebar in WordPress.
+2. TopNav - A widget representing top navigation bar.
+
+We are going to create the retain 3 pages, but implement inheritance as follows to represent the strucutre:
+1. Home (a child of WPBasePage)
+2. Dashboard (a child of WPFullPage)
+3. Settings (a child of WPFullPage)
+
+You can find the example code and files used on this section in [arjuna_app_page_widget project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_app_page_widget).
+
+You will see that this approach is the most involved than the previous approaches discussed so far. Professional test automation code is more than exercise/raw code seen on the web. This is a step in the right direction, in case you are dealing with test automation of medium to high complexity apps.
 
 #### The GNS Files
 
-So far we represented the complete application as a single `WebApp` and hence all identifiers were put in a single `GNS` file. Now, we put them in page-wise GNS files:
+In `App-Page Model` we had put identifiers in page-wise GNS files. The challenge was where to put the identifiers corresponding to page areas common across pages. Now, we have the solution. We put them in corresponding widget GNS files. Specifically, compare the flawed GNS file for Dashaboard with this new approach.
 
-**Home.gns**
+Page: **Home.gns**
+
 ```INI
 [login]
 id = user_login
@@ -32,15 +50,30 @@ id = user_pass
 id = wp-submit
 ```
 
-**Dashbaord.gns**
+Page: **Dashbaord.gns**
 
 ```INI
 [view_site]
 classes = welcome-view-site
+```
 
+Page: **Settings.gns**
+
+```INI
+[role]
+id = default_role
+```
+
+Widget: **LeftNav.gns**
+
+```INI
 [settings]
 link = Settings
+```
 
+Widget: **TopNav.gns**
+
+```INI
 [logout_confirm]
 link = log out
 
@@ -48,21 +81,12 @@ link = log out
 text = logged out
 ```
 
-**Settings.gns**
-
-```INI
-[role]
-id = default_role
-```
-
-Please note that the above is not an accurate representation of screens. The logout related confirmation link and success messages are common across multiple pages (but not Home page). We'll discuss this problem in the next section with the next model in Arjuna.
-
-#### The Model Classes for App and Pages
+#### The Model Classes for App, Pages and Widgets
 
 **WebApp**
 
 ```python
-# arjuna-samples/arjex_app_page/lib/gom/app.py
+# arjuna-samples/arjex_app_page_widget/lib/gom/app.py
 
 from arjuna import *
 
@@ -80,17 +104,19 @@ class WordPress(WebApp):
  ```
  
 #### Points to Note
-1. The `WordPress` class itself is now a very simple class. It does not use externalization. That will be done at page level.
-2. The `launch` method is separated from the `__init__` as it is supposed to act as a transition method to return the `Home` page. As an alternative, `home` property can be created to store the home page, however it may not be an accurate representation when the pages change beyond home page.
-3. To create the instance, it passes itself as argument. Pages in Arjuna are need a `Source GUI`, which can be a `WebApp` or a `Page`.
+1. Same code as App-Page Model.
  
- **Base Page**
+ **Base Pages**
 
  ```python
- # arjuna-samples/arjex_app_page/lib/gom/pages/base.py
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/base.py
  
 import abc
 from arjuna import Page
+
+from .widgets.topnav import TopNav
+from .widgets.leftnav import LeftNav
+
 
 class WPBasePage(Page, metaclass=abc.ABCMeta):
 
@@ -100,43 +126,50 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
     def prepare(self):
         self.externalize()
 
-    def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url").as_str()
-        self.go_to_url(url)
 
-        self.element("logout_confirm").click()
-        self.element("logout_msg").wait_until_visible()
+class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
 
-        from .home import Home
-        return Home(self)
+    def __init__(self, source_gui):
+        super().__init__(source_gui=source_gui)
+        self.__top_nav = TopNav(self)
+        self.__left_nav = LeftNav(self)
 
+    @property
+    def top_nav(self):
+        return self.__top_nav
+
+    @property
+    def left_nav(self):
+        return self.__left_nav
 ```
 
 #### Points to Note
-1. A Base Page class will help us in placing resuable functionality across all classes inheriting from it. 
-2. It inherits from Arjuna's `Page` class.
-3. As it is not supposed to instantiated directly, we make it an abstract class by using Python's `abc` module.
-4. `prepare` method is called by Arjuna as a part of loading the page. We place the `externalize` call here. It will automatically associate the object of a Page class with name `Xyz` with `Xyz.gns` file in the `namespace` directory.
-5. The `logout` method has the usual logic used earlier. One kye difference is that now it is a page transition method. It returns the `Home` page. Notice how, a `Page` can pass itself as an argument while instantiating another `Page` class.
-6. As the page transitions might refer to each other and can cause import conflicts, it is suggested that you add the import for the same, for example, `from .home import Home` only where it is needed within a method.
+1. `WPBase` is the base class without widgets.
+2. `WPFullPage` has `top_nav` and `left_nav` widgets available as properties.
 
 
  **Home Page**
 
  ```python
- # arjuna-samples/arjex_app_page/lib/gom/pages/home.py
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/home.py
  
+from enum import Enum, auto
 from .base import WPBasePage
 
 class Home(WPBasePage):
 
+    class labels(Enum):
+        login = auto()
+        pwd = auto()
+        submit = auto()
+
     def validate_readiness(self):
-        self.element("submit").wait_until_visible()
+        self.element(self.labels.submit).wait_until_visible()
 
     def login(self, user, pwd):
-        self.element("login").text = user
-        self.element("pwd").text = pwd
-        self.element("submit").click()
+        self.element(self.labels.login).text = user
+        self.element(self.labels.pwd).text = pwd
+        self.element(self.labels.submit).click()
 
         from .dashboard import Dashboard
         return Dashboard(self)
@@ -149,84 +182,173 @@ class Home(WPBasePage):
 ```
 
 #### Points to Note
-1. `validate_readiness` method is called by Arjuna as a part of its page-loading mechanism. It is an optional method, but we implement it for a proper Page class.
-2. `login` returns `Dashboard` page.
-3. `login_with_default_creds` logins with the admin credentials configured in `project.conf`.
+1. Inherits from `WPBasePage` (No widgets).
+2. Implements inner class `labels` to represent externalized identifier labels as enum constants.
+3. Rest is same code.
 
  **Dashboard Page**
 
  ```python
- # arjuna-samples/arjex_app_page/lib/gom/pages/dashboard.py
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/dashboard.py
  
-from .base import WPBasePage
+from enum import Enum, auto
+from .base import WPFullPage
 
-class Dashboard(WPBasePage):
+class Dashboard(WPFullPage):
+
+    class labels(Enum):
+        view_site = auto()
 
     def validate_readiness(self):
-        self.element("view_site").wait_until_visible()
-
-    @property
-    def settings(self):
-        self.element("settings").click()
-
-        from .settings import Settings
-        return Settings(self)
+        self.element(self.labels.view_site).wait_until_visible()
 ```
 
 #### Points to Note
-1. `validate_readiness` method is implemented just like Home page.
-2. Instead of a method like `go_to_settings`, we can also implement simple page transitions as Python properties. Here `settings` property implementation is an example of this style.
+1. Inherits from `WPFullPage` and hence has the `top_nav` and `left_nav` widget properties.
+2. Does not have `settings` property anymore.
+3. Implements `labels` as discussed for Home page.
 
  **Settings Page**
 
  ```python
- # arjuna-samples/arjex_app_page/lib/gom/pages/settings.py
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/settings.py
  
+from enum import Enum, auto
 from .base import WPBasePage
 
-class Settings(WPBasePage):
+class Settings(WPFullPage):
+
+    class labels(Enum):
+        role = auto()
 
     def validate_readiness(self):
-        self.element("role").wait_until_visible()
+        self.element(self.labels.role).wait_until_visible()
 
     def tweak_role_value(self, value):
-        role_select = self.dropdown("role")
+        role_select = self.dropdown(self.labels.role)
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+        return self
 ```
 
 #### Points to Note
-1. As tweaking of user role happens in `Settings` page, its name is simplified from `tweak_role_value_in_settings` to `tweak_role_value`.
+1. Inherits from `WPFullPage` and hence has the `top_nav` and `left_nav` widget properties.
+3. Implements `labels` as discussed for Home page.
 
-#### Using the App-Page Model in Test Code
+**Base Widget**
+
+ ```python
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/widgets/base.py
+ 
+import abc
+from arjuna import Widget
+
+class WPBaseWidget(Widget, metaclass=abc.ABCMeta):
+
+    def __init__(self, page):
+        super().__init__(page)
+
+    def prepare(self):
+        self.externalize(gns_dir="widgets")
+```
+
+#### Points to Note
+1. Inherits from Arjuna's `Widget` class and is implemented as abstract class.
+2. Needs to be passed an instance of the parent `Page`.
+3. We have placed the widget related GNS files in `widgets` subdirectory of `namespace` directory. So, it passes the name of the sub-directory in the call to `externalize`.
+
+
+**LeftNav Widget**
+
+ ```python
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/widgets/leftnav.py
+ 
+from enum import Enum, auto
+from .base import WPBaseWidget
+
+class LeftNav(WPBaseWidget):
+
+    class labels(Enum):
+        settings = auto()
+
+    def validate_readiness(self):
+        self.element(self.labels.settings)
+
+    @property
+    def settings(self):
+        from arjex_app_page_widget.lib.gom.pages.settings import Settings
+        self.element(self.labels.settings).click()
+        return Settings(self)
+```
+
+#### Points to Note
+1. Inherits from `WPBaseWidget`.
+2. Implements `labels` as discussed for Home page.
+3. The `settings` proerty is moved from `Dashboard` page to here for accurate representation of Gui.
+
+**TopNav Widget**
+
+ ```python
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/widgets/topnav.py
+ 
+from enum import Enum, auto
+from .base import WPBaseWidget
+
+class TopNav(WPBaseWidget):
+
+    class labels(Enum):
+        logout_confirm = auto()
+        logout_msg = auto()
+
+    def logout(self):
+        url = self.config.get_user_option_value("wp.logout.url").as_str()
+        self.go_to_url(url)
+
+        self.element(self.labels.logout_confirm).click()
+        self.element(self.labels.logout_msg).wait_until_visible()
+
+        from arjex_app_page_widget.lib.gom.pages.home import Home
+        return Home(self)
+```
+
+#### Points to Note
+1. Inherits from `WPBaseWidget`.
+2. Implements `labels` as discussed for Home page.
+3. The `logout` method is moved from `WPBasePage` page to here for accurate representation of Gui.
+
+#### Using the App-Page-Widget Model in Test Code
 
 ```python
-# arjuna-samples/arjex_app_page/tests/modules/test_01_app_page_model.py
+# arjuna-samples/arjex_app_page_widget/tests/modules/test_01_app_page_widget_model.py
 
 from arjuna import *
-from arjex_app_page.lib.gom.app import WordPress
+from arjex_app_page_widget.lib.gom.app import WordPress
 
 @for_test
-def dashboard(request):
+def settings(request):
     # Setup
     wordpress = WordPress()
     home = wordpress.launch()
     dashboard = home.login_with_default_creds()
-    yield dashboard
+    settings = dashboard.left_nav.settings
+    yield settings
 
     # Teadown
-    dashboard.logout()
+    settings.top_nav.logout()
 
 @test
-def test_with_wp_app_page(my, request, dashboard):
-    dashboard.settings.tweak_role_value("editor")
+def test_with_wp_app_page_widget(my, request, settings):
+    settings.tweak_role_value("editor")
 ```
 
 ##### Points to Note
-1. The fixture now yields `Dashboard` object instead of app. We change the name to reflect this.
-2. In the setup part, we create the WordPress instance as earlier, it now refers to the new class that we created.
+1. With this modularity, we are no more dependent on Dashboard page for logging out. As per the template structure, just like the Gui of WordPress, this method is available in `TopNav` widget which in turn is available to a page which is `WPFullPage` (inherits from it).
+2. The test's actual need is the `Settings` page. We have changed the test fixture name to `settings`.
+3. In the setup part, we create the WordPress instance as earlier, it now refers to the new class that we created.
 3. `wordpress.launch` launches the web application (opens browser and goes to the `base_url`). It returns the `Home` object.
-4. We login with default credentials using `home.login_with_default_creds()` call. It returns `Dashboard` which is then yielded.
-5. In the teardown part of fixture, we logout using `dashboard.logout()` call.
-6. In the test, the argument is changed from `wordpress` to `dashbaord`.
-7. `dashboard.settings.tweak_role_value("editor")` gets the `settings` property of `Dashboard` object, which returns the `Settings` object and calls its `tweak_role_value` method.
+4. We login with default credentials using `home.login_with_default_creds()` call. It returns `Dashboard` object.
+5. We go to settings by using `left_nav` widget of `dashboard`: `dashboard.left_nav.settings`.
+5. In the teardown part of fixture, we logout using `top_nav` widget of `settings`: `settings.top_nav.logout`.
+6. In the test, the argument is changed from `dashboard` to `settings`.
+7. `settings.tweak_role_value("editor")` is now  direct call to the settings object.
+8. From test and Gui abstraction perspective, this is the most accurate representation of the Gui as well as the most intuitive version of the test automation code.
