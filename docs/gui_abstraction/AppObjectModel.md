@@ -1,8 +1,10 @@
 ### Creating a Self-Contained App
 
-Python is an OOP language. OOP simplifies API signatures and some of the best of the features of Python can be explored only with OOP.
+In this section, we discuss the App Model of Gui Abstraction.
 
-Please note that this is not the suggested implementation. Consider this as an interim implementation, a step towards the right one. We'll explore the suggested way in the next section.
+We can implement a class as a `WebApp` by using inheritance. This is the suggested way of implenting a web application abstraction in Arjuna. 
+
+This is the simplest way to get started with an equivalent of Page Object Model (POM), Page Factories, Loadable Component, all clubbed into one concept. We represent the complete appplication as a single class which is attached to a a single GNS file for externalization. It should work well for small apps or where you are automating only a small sub-set of the application. 
 
 #### The GNS File
 
@@ -13,15 +15,41 @@ We will use the same GNS file as the previous section.
 ```python
 # arjuna-samples/arjex_app/lib/wp_app_model.py
 
+from arjuna import *
 
+class WordPress(WebApp):
+
+    def __init__(self):
+        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+        super().__init__(base_url=url)
+        self.launch()
+        self.externalize()
+
+    def login(self):
+        user = self.config.get_user_option_value("wp.admin.name").as_str()
+        pwd = self.config.get_user_option_value("wp.admin.pwd").as_str()
+
+        # Login
+        self.element("login").text = user
+        self.element("pwd").text = pwd
+        self.element("submit").click()
+        self.element("view_site")
+
+    def logout(self):
+        url = self.config.get_user_option_value("wp.logout.url").as_str()
+        self.go_to_url(url)
+        self.element("logout_confirm").click()
+        self.element("logout_msg")
+
+        self.quit()
 ```
 
 #### Points to Note
-1. The code is a basic restructuring of the procedural style of code, written in the previous section into the WordPress class.
-2. The functionality `create_wordpress_app` function is now dealt in the `__init__` method and will be triggered when you create an object of `WordPress` class.
-3. This is an example of a `Wrapper` object, which wraps another object (in other words, it is a `HAS-A` or `Composition` relationship). The `WordPress` class wraps the `WebApp` class which is available in the code as `self.app` because we set it as a property with the `@property` decorator of Python.
-4. `login` and `logout` are bound methods and hence you dont need to supply the wordpress app as the argument, thereby simplying the call signatures.
-5. In the methods, `WordPress` code makes calls to the `WebApp` object to achieve its functionality.
+1. Rather than a composition relationship with `WebApp` object in previous example, the `WordPress` class inherits from `WebApp` class.
+2. This means all `WebApp` methods are directly callable by `WordPress` as now `WordPress` **IS** `WebApp`.
+3. `self.app.element`, for example, now becomes `self.element`, thereby simplifying the code.
+4. Rest of the code is exactly like earlier example code.
+
 
 #### Using the App Class in Test Code
 
