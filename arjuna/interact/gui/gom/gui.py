@@ -30,7 +30,7 @@ from arjuna.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
-from arjuna.core.exceptions import ChildWindowNotFoundError
+from arjuna.core.exceptions import WaitableError, GuiNotLoadedError
 
 class GuiConditions:
 
@@ -93,12 +93,13 @@ class Gui(AsserterMixIn):
         self.prepare(*args, **kwargs)
         try:
             self.validate_readiness()
-        except:
+        except WaitableError:
             try:
                 self.reach_until()
                 self.conditions.GuiReady().wait(max_wait_time=self.config.guiauto_max_wait)
             except Exception as e:
-                raise Exception("GUI [{}] did not load as expected. Error: {}.".format(self.qual_name, str(e)))
+                import traceback
+                raise GuiNotLoadedError(self, str(e) + "\n" + traceback.format_exc())
 
     def prepare(self):
         # Children can override and write any necessary preparation instructions e.g. externalizing

@@ -53,6 +53,7 @@ Please refer the pages for respective example projects.
 
 1. [Gui Namespace (GNS) - Externalized Identifiers](./docs/gui_abstraction/GuiNamespace.md)
 2. [Creating App Class](./docs/gui_abstraction/AppClass.md)
+3. [Gui and Its Loading Model in Arjuna](./docs/gui_abstraction/GuiLoadingModel.md)
 3. [App Object Model](./docs/gui_abstraction/AppObjectModel.md)
 4. [App-Page Object Model](./docs/gui_abstraction/AppPageObjectModel.md)
 5. [App-Page-Widget Object Model](./docs/gui_abstraction/AppPageWidgetObjectModel.md)

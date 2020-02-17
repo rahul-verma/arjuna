@@ -18,8 +18,7 @@ Following is the list of critical additions and updates for a given released ver
 - Name changes for consistency:
     ns_dir -> gns_dir
     def_file_name -> gns_file_name
-- WebApp externalization with prepare() method fixed. Loadable WebApp should work but needs to be verified.
-- 
+- Formalized Gui Loading Model and implemented GuiConditions, GuiReady condition and GuiNotLoadedError exception.
 
 
 0.8.11

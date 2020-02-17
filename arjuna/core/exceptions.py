@@ -173,3 +173,9 @@ class TimeoutError(WaitableError):
 class DataSourceFinished(StopIteration):
     def __init__(self, msg=None):
         super().__init__(msg is None and "Done" or msg)
+
+class GuiNotLoadedError(WaitableError):
+
+    def __init__(self, gui, msg):
+        message = msg and  "Error message: {}".format(msg) or ""
+        super().__init__("GUI [{}] did not load as expected. Error: {}.".format(gui.qual_name, message))
