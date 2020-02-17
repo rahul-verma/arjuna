@@ -83,5 +83,5 @@ def test_with_wp_app_interim(my, request, wordpress):
 ##### Points to Note
 1. In the test fixture, we instantiate the `WordPress` class, call its `login` method and yield the object so that test can receive it. In its teardown section (after the `yield`), we call the `logout` method of `wordpress` object.
 2. The fixture is mentioned as an argument of the test function.
-3. In the test function we can call any of its methods as seen above.
+3. In the test function we can call any of its methods as seen above. The `app` property is public, so it can be used in the test code as `wordpresss.app`
 
