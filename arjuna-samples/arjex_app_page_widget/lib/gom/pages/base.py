@@ -17,22 +17,34 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import unittest
+import abc
 from arjuna import Page
 
-class WPBasePage(Page):
+from .widgets.topnav import TopNav
+from .widgets.leftnav import LeftNav
+
+
+class WPBasePage(Page, metaclass=abc.ABCMeta):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
+
+    def prepare(self):
         self.externalize()
 
-    def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url").as_str()
-        self.browser.go_to_url(url)
 
-        self.element("logout_confirm").click()
-        self.element("logout_msg").wait_until_visible()
-        from sgom.home import HomePage
-        return HomePage(self)
+class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
 
+    def __init__(self, source_gui):
+        super().__init__(source_gui=source_gui)
+        self.__top_nav = TopNav(self)
+        self.__left_nav = LeftNav(self)
+
+    @property
+    def top_nav(self):
+        return self.__top_nav
+
+    @property
+    def left_nav(self):
+        return self.__left_nav
 

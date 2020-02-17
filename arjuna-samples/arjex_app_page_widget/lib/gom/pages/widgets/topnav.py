@@ -17,3 +17,21 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from enum import Enum, auto
+from .base import WPBaseWidget
+
+class TopNav(WPBaseWidget):
+
+    class labels(Enum):
+        logout_confirm = auto()
+        logout_msg = auto()
+
+    def logout(self):
+        url = self.config.get_user_option_value("wp.logout.url").as_str()
+        self.go_to_url(url)
+
+        self.element(self.labels.logout_confirm).click()
+        self.element(self.labels.logout_msg).wait_until_visible()
+
+        from arjex_app_page_widget.lib.gom.pages.home import Home
+        return Home(self)

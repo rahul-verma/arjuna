@@ -17,16 +17,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna import Arjuna, WebApp
-from .home import HomePage
+from arjuna import *
+from arjex_app_page_widget.lib.gom.app import WordPress
 
-class WordPress(WebApp):
+@for_test
+def dashboard(request):
+    # Setup
+    wordpress = WordPress()
+    home = wordpress.launch()
+    dashboard = home.login_with_default_creds()
+    yield dashboard
 
-    def __init__(self, gns_format="sgns"):
-        Arjuna.init("/Users/rahulverma/Documents/github_tm/arjuna/arjuna-samples/workspace/arjex")
-        config = Arjuna.get_ref_config()
-        super().__init__(config=config, base_url=config.get_user_option_value("wp.login.url").as_str(), gns_dir="{}_wordpress".format(gns_format.lower()))
+    # Teadown
+    dashboard.top_nav.logout()
 
-    def launch(self):
-        super().launch()
-        return HomePage(self)
+@test
+def test_with_wp_app_page_widget(my, request, dashboard):
+    dashboard.left_nav.settings.tweak_role_value("editor")

@@ -16,3 +16,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 '''
+
+from enum import Enum, auto
+from .base import WPFullPage
+
+class Dashboard(WPFullPage):
+
+    class labels(Enum):
+        view_site = auto()
+
+    def validate_readiness(self):
+        self.element(self.labels.view_site).wait_until_visible()

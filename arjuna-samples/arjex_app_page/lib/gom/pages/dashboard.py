@@ -22,7 +22,6 @@ from .base import WPBasePage
 class Dashboard(WPBasePage):
 
     def validate_readiness(self):
-        print("df")
         self.element("view_site").wait_until_visible()
 
     @property

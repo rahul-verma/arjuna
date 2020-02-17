@@ -17,19 +17,31 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from .basepage import WPBasePage
-from .dashboard import DashboardPage
+from enum import Enum, auto
+from .base import WPBasePage
 
-class HomePage(WPBasePage):
+class Home(WPBasePage):
+
+    class labels(Enum):
+        login = auto()
+        pwd = auto()
+        submit = auto()
+
+    def validate_readiness(self):
+        self.element(self.labels.submit).wait_until_visible()
 
     def login(self, user, pwd):
-        self.element("login").text = user
-        self.element("password").text = pwd
-        self.element("submit").click()
+        self.element(self.labels.login).text = user
+        self.element(self.labels.pwd).text = pwd
+        self.element(self.labels.submit).click()
 
-        self.element("view_site").wait_until_visible()
-        return DashboardPage(self)
+        from .dashboard import Dashboard
+        return Dashboard(self)
 
     def login_with_default_creds(self):
-        user, pwd = self.config.get_user_option_value("wp.users.admin").split_as_str_list()
+        user = self.config.get_user_option_value("wp.admin.name").as_str()
+        pwd = self.config.get_user_option_value("wp.admin.pwd").as_str()
+
         return self.login(user, pwd)
+
+

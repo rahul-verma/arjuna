@@ -55,3 +55,4 @@ class WordPress(WebApp):
         role_select = self.app.dropdown("role")
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+        return self

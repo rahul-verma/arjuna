@@ -17,12 +17,19 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from .basepage import WPBasePage
+from enum import Enum, auto
+from .base import WPBaseWidget
 
-class SettingsPage(WPBasePage):
+class LeftNav(WPBaseWidget):
 
-    def tweak_settings(self):
-        role_select = self.dropdown("role")
-        role_select.select_value("editor")
-        self._asserter.assertEqual("editor", role_select.value, "Author type selection failed.")
-        return self
+    class labels(Enum):
+        settings = auto()
+
+    def validate_readiness(self):
+        self.element(self.labels.settings)
+
+    @property
+    def settings(self):
+        from arjex_app_page_widget.lib.gom.pages.settings import Settings
+        self.element(self.labels.settings).click()
+        return Settings(self)

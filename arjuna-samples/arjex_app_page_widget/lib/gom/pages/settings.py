@@ -18,13 +18,18 @@ limitations under the License.
 '''
 
 from enum import Enum, auto
-from .basepage import WPFullPage
+from .base import WPBasePage
 
-class DashboardPage(WPFullPage):
+class Settings(WPBasePage):
 
-    class loc(Enum):
-        settings = auto()
+    class labels(Enum):
+        role = auto()
 
-    def go_to_settings(self):
-        self.element(self.loc.settings).click()
-        return SettingsPage(self)
+    def validate_readiness(self):
+        self.element(self.labels.role).wait_until_visible()
+
+    def tweak_role_value(self, value):
+        role_select = self.dropdown(self.labels.role)
+        role_select.select_value(value)
+        self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+        return self

@@ -145,6 +145,7 @@ class AppContent(Gui):
         if not gns_dir:
             gns_dir = ""
         ns_root_dir = self.config.get_arjuna_option_value(ArjunaOption.GUIAUTO_NAMESPACE_DIR).as_str()
+        
         self.__def_file_path = os.path.join(ns_root_dir, gns_dir, self.gns_file_name)
         self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
         # if register:

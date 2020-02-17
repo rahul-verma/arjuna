@@ -17,11 +17,16 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from .basepage import WPBasePage
-from .settings import SettingsPage
+from arjuna import *
 
-class DashboardPage(WPBasePage):
+class WordPress(WebApp):
 
-    def go_to_settings(self):
-        self.element("settings").click()
-        return SettingsPage(self)
+    def __init__(self):
+        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+        super().__init__(base_url=url)
+
+    def launch(self):
+        super().launch()
+
+        from .pages.home import Home
+        return Home(self)
