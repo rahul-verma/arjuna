@@ -89,3 +89,35 @@ def logout(wordpress):
 5. Labels are treated as **case-insensitive** by Arjuna. 
 6. Rest of the code is exactly the same. It means you can move to an externalization approach in Arjuna very easily with or without creating a full fledged Page object model like most other implementations.
 
+#### Using the Module in Test Code
+
+```python
+# arjuna-samples/arjex_app/tests/modules/test_01_gns.py
+
+from arjuna import *
+from arjex_app.lib.wp_gns import *
+
+@for_test
+def wordpress(request):
+    # Setup
+    wordpress = create_wordpress_app()
+    login(wordpress)
+    yield wordpress
+
+    # Teadown
+    logout(wordpress)
+
+@test
+def test_with_wp_gns(my, request, wordpress):
+    wordpress.element("Settings").click()
+    role_select = wordpress.dropdown("role")
+    role_select.select_value("editor")
+    my.asserter.assert_true(role_select.has_value_selected("editor"), "Selection of editor as Role")
+```
+
+##### Points to Note
+1. In the test fixture, we create the `WebApp` representing WordPress by calling `create_wordpress_app` function from the module that we created. Then, we call the `login` function and yield the `WebApp` object so that test can receive it. In its teardown section (after the `yield`), we call the `logout` function of `wordpress` module.
+2. The fixture is mentioned as an argument of the test function.
+3. In the test function we can call any of its methods of the `WebApp` object as seen above. 
+
+

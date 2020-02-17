@@ -8,7 +8,11 @@ Following is the list of critical additions and updates for a given released ver
 - Examples:
     - Web UI Automation Basics
         - DropDown and RadioGroup
-    
+    - GUI abstraction
+        - Gui Namespace
+        - Creating an App Class
+        - App Model
+        - 
 - Added 'fail', 'assert_not_equal', 'assert_true', 'assert_false methods to Asserter.
 - Dropdown bug fix as per With.tag instead of With.tag_name
 - Name changes for consistency:
