@@ -28,6 +28,23 @@ from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 from .guidef import *
 from arjuna.engine.asserter import AsserterMixIn
 
+from arjuna.core.poller.conditions import *
+from arjuna.core.poller.caller import *
+from arjuna.core.exceptions import ChildWindowNotFoundError
+
+class GuiConditions:
+
+    def __init__(self, gui):
+        self.__gui = gui
+
+    @property
+    def gui(self):
+        return self.__gui
+
+    def GuiReady(self):
+        caller = DynamicCaller(self.gui.validate_readiness)
+        return CommandCondition(caller)
+
 class Gui(AsserterMixIn):
 
     def __init__(self, *, config=None, ext_config=None, label=None):
@@ -38,6 +55,7 @@ class Gui(AsserterMixIn):
         from arjuna import Arjuna
         self.__config = config is not None and config or Arjuna.get_ref_config()
         self.__econfig = ext_config
+        self.__conditions = GuiConditions(self)
         if ext_config is None:
             self.__econfig = dict()
         else:
@@ -46,6 +64,10 @@ class Gui(AsserterMixIn):
             else:
                 self.__econfig = ext_config.config
         self.__label = label is not None and label or self.__class__.__name__
+
+    @property
+    def conditions(self):
+        return self.__conditions
 
     @property
     def config(self):
@@ -74,7 +96,7 @@ class Gui(AsserterMixIn):
         except:
             try:
                 self.reach_until()
-                self.validate_readiness()
+                self.conditions.GuiReady().wait(max_wait_time=self.config.guiauto_max_wait)
             except Exception as e:
                 raise Exception("GUI [{}] did not load as expected. Error: {}.".format(self.qual_name, str(e)))
 

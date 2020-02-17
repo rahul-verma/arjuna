@@ -17,10 +17,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import unittest
+import abc
 from arjuna import Page
 
-class WPBasePage(Page):
+class WPBasePage(Page, metaclass=abc.ABCMeta):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
@@ -37,5 +37,4 @@ class WPBasePage(Page):
 
         from .home import Home
         return Home(self)
-
 
