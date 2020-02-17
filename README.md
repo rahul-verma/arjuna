@@ -49,7 +49,7 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 7. [Retrieving Source code with GuiSource](./docs/webui_adv/GuiSource.md)
 
 ### 5. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
-Please refer the pages for respective example projects.
+The following tutorial sub-sections have multiple example projects corresponding to them. Please refer the pages for respective example projects.
 
 1. [Gui Namespace (GNS) - Externalized Identifiers](./docs/gui_abstraction/GuiNamespace.md)
 2. [Creating App Class](./docs/gui_abstraction/AppClass.md)

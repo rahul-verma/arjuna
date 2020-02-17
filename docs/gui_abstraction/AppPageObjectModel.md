@@ -7,6 +7,8 @@ One step forward from Arjuna's App Model is the App-Page Model:
 2. We implemented each web page of interest as a child of `Page` class.
 3. The `Page` classes have methods to move from one page to another. 
 
+`Page` just like `WebApp` is a type of `Gui` in Arjuna. So, it follows the Gui-loading mechanis of Arjuna. 
+
 We are going to create the following 3 pages:
 1. Home
 2. Dashboard
