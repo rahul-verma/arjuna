@@ -25,7 +25,12 @@ class WordPress(WebApp):
         url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
         super().__init__(base_url=url)
         self.launch()
+
+    def prepare(self):
         self.externalize()
+
+    def validate_readiness(self):
+        self.element("submit").wait_until_visible()
 
     def login(self):
         user = self.config.get_user_option_value("wp.admin.name").as_str()
