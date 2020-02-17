@@ -6,17 +6,7 @@ We can implement a class as a `WebApp` by using inheritance. This is the suggest
 
 This is the simplest way to get started with an equivalent of Page Object Model (POM), Page Factories, Loadable Component, all clubbed into one concept. We represent the complete appplication as a single class which is attached to a a single GNS file for externalization. It should work well for small apps or where you are automating only a small sub-set of the application. 
 
-#### GUI Loading Model in Arjuna
-
-`WebApp` is a child of `Gui` in Arjuna. So, it follows the following internal Gui-loading mechanism of Arjuna. All of these methods are optional in nature. It draws inspiration from Selenium Java's implementation of Loadable Component but it is Arjuna's custom implementation using its own conditions and wait mechanism.
-
-1. Gui's `prepare` method is called with any `*args` and `**kwargs` provided in the `__init__` implementation of a child `Gui`. This is the method which you use for externalization of Gui definitions.
-2. `validate_readiness` method is called. If it does not raise any exception, then the loading mechanism stops here.
-3. If in step two, an exception of type `arjuna.core.exceptions.WaitableError` (or its sub-type) is raised, then the next steps as mentioned in Step 4 and 5 are performed, else `GuiNotLoadedError` exception is raised.
-4. Gui's `reach_until` method is called. If any exception is raised by it, then `GuiNotLoadedError` exception is raised, else step 5 is executed.
-5. This time `validate_readiness` is called, but not directly. It is tied to the `GuiReady` condition which is polling wait-based caller. If `validate_readiness` raises an exception of type `arjuna.core.exceptions.WaitableError` (or its sub-type), `GuiReady` condition keeps calling it until `ArjunaOption.GUI_MAX_WAIT` number of seconds are passed in `Gui`'s configuration. If successful, during the wait time, then Gui is considered loaded, else `GuiNotLoadedError` exception is raised.
-
-You can find the example code and files used on this section in [arjuna_app project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_app).
+`WebApp` is a child of `Gui` in Arjuna. So, it follows the following internal Gui-loading mechanism of Arjuna. 
 
 #### The GNS File
 
