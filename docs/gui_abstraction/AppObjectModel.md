@@ -6,6 +6,8 @@ We can implement a class as a `WebApp` by using inheritance. This is the suggest
 
 This is the simplest way to get started with an equivalent of Page Object Model (POM), Page Factories, Loadable Component, all clubbed into one concept. We represent the complete appplication as a single class which is attached to a a single GNS file for externalization. It should work well for small apps or where you are automating only a small sub-set of the application. 
 
+You can find the example code and files used on this section in [arjuna_app project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_app).
+
 #### The GNS File
 
 We will use the same GNS file as the previous section.
