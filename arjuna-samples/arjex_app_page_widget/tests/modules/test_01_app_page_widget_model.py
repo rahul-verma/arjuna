@@ -21,16 +21,17 @@ from arjuna import *
 from arjex_app_page_widget.lib.gom.app import WordPress
 
 @for_test
-def dashboard(request):
+def settings(request):
     # Setup
     wordpress = WordPress()
     home = wordpress.launch()
     dashboard = home.login_with_default_creds()
-    yield dashboard
+    settings = dashboard.left_nav.settings
+    yield settings
 
     # Teadown
-    dashboard.top_nav.logout()
+    settings.top_nav.logout()
 
 @test
-def test_with_wp_app_page_widget(my, request, dashboard):
-    dashboard.left_nav.settings.tweak_role_value("editor")
+def test_with_wp_app_page_widget(my, request, settings):
+    settings.tweak_role_value("editor")

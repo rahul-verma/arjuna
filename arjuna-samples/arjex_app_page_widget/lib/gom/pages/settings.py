@@ -18,9 +18,9 @@ limitations under the License.
 '''
 
 from enum import Enum, auto
-from .base import WPBasePage
+from .base import WPFullPage
 
-class Settings(WPBasePage):
+class Settings(WPFullPage):
 
     class labels(Enum):
         role = auto()
