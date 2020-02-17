@@ -1,4 +1,4 @@
-### Creating a Self-Contained App
+### Arjuna's App Model for Gui Abstraction
 
 In this section, we discuss the App Model of Gui Abstraction.
 
@@ -10,7 +10,7 @@ This is the simplest way to get started with an equivalent of Page Object Model 
 
 We will use the same GNS file as the previous section.
 
-#### The App Class Code
+#### The App Model Class Code
 
 ```python
 # arjuna-samples/arjex_app/lib/wp_app_model.py
