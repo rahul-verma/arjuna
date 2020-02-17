@@ -32,7 +32,4 @@ def wordpress(request):
 
 @test
 def test_with_wp_app_model(my, request, wordpress):
-    wordpress.element("Settings").click()
-    role_select = wordpress.dropdown("role")
-    role_select.select_value("editor")
-    my.asserter.assert_true(role_select.has_value_selected("editor"), "Selection of editor as Role")
+    wordpress.tweat_role_value_in_settings("editor")

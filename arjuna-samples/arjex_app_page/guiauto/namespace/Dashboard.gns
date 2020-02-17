@@ -1,0 +1,5 @@
+[view_site]
+classes = welcome-view-site
+
+[settings]
+link = Settings

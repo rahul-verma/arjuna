@@ -47,6 +47,12 @@ class WordPress:
 
         self.app.quit()
 
+    def tweat_role_value_in_settings(self, value):
+        self.app.element("Settings").click()
+        role_select = self.app.dropdown("role")
+        role_select.select_value(value)
+        self.app.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+
 ```
 
 #### Points to Note
@@ -55,6 +61,7 @@ class WordPress:
 3. This is an example of a `Wrapper` object, which wraps another object (in other words, it is a `HAS-A` or `Composition` relationship). The `WordPress` class wraps the `WebApp` class which is available in the code as `self.app` because we set it as a property with the `@property` decorator of Python.
 4. `login` and `logout` are bound methods and hence you dont need to supply the wordpress app as the argument, thereby simplying the call signatures.
 5. In the methods, `WordPress` code makes calls to the `WebApp` object to achieve its functionality.
+6. The `tweat_role_value_in_settings` has a much simpler signature than earlier, because the class wraps the app and uses the `asserter` of `WebApp`.
 
 #### Using the App Class in Test Code
 
@@ -76,14 +83,12 @@ def wordpress(request):
 
 @test
 def test_with_wp_app_interim(my, request, wordpress):
-    wordpress.app.element("Settings").click()
-    role_select = wordpress.app.dropdown("role")
-    role_select.select_value("editor")
-    my.asserter.assert_true(role_select.has_value_selected("editor"), "Selection of editor as Role")
+    wordpress.tweat_role_value_in_settings("editor")
 ```
 
 ##### Points to Note
 1. In the test fixture, we instantiate the `WordPress` class, call its `login` method and yield the object so that test can receive it. In its teardown section (after the `yield`), we call the `logout` method of `wordpress` object.
 2. The fixture is mentioned as an argument of the test function.
 3. In the test function we can call any of its methods as seen above. The `app` property is public, so it can be used in the test code as `wordpresss.app`
+4. The call to `tweat_role_value_in_settings` is much simplified and intuitive because of the WordPress class implementation.
 

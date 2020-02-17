@@ -48,3 +48,10 @@ class WordPress:
         self.app.element("logout_msg")
 
         self.app.quit()
+
+    def tweat_role_value_in_settings(self, value):
+        self.app.element("Settings").click()
+        role_select = self.app.dropdown("role")
+        role_select.select_value(value)
+        self.app.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+

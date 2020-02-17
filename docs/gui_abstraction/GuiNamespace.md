@@ -79,6 +79,14 @@ def logout(wordpress):
     wordpress.element("logout_msg")
 
     wordpress.quit()
+
+
+def tweat_role_value_in_settings(wordpress, asserter, value):
+    wordpress.element("Settings").click()
+    role_select = wordpress.dropdown("role")
+    role_select.select_value(value)
+    asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+
 ```
 
 ##### Points to Note
@@ -87,7 +95,8 @@ def logout(wordpress):
 3. **`wordpress.externalize(gns_file_name="WordPress.gns")`** invokes the externalization logic and locates the GNS file automatically in the test project's namespace directory: `arjuna-samples/arjex_app/guiauto/namespace`.
 4. Other key change is that now the `element` factory call is supplied the `label` from the GNS file. So, `wordpress.element(With.id("user_login")` becomes `wordpress.element("login")`.
 5. Labels are treated as **case-insensitive** by Arjuna. 
-6. Rest of the code is exactly the same. It means you can move to an externalization approach in Arjuna very easily with or without creating a full fledged Page object model like most other implementations.
+6. We have implemented an additional method `tweat_role_value_in_settings` to change the user role on settings page to a chosen value. It takes 3 arguments - the web app, the asserter and the value for the role to be selected.
+7. Rest of the code is exactly the same. It means you can move to an externalization approach in Arjuna very easily with or without creating a full fledged Page object model like most other implementations.
 
 #### Using the Module in Test Code
 
@@ -109,15 +118,12 @@ def wordpress(request):
 
 @test
 def test_with_wp_gns(my, request, wordpress):
-    wordpress.element("Settings").click()
-    role_select = wordpress.dropdown("role")
-    role_select.select_value("editor")
-    my.asserter.assert_true(role_select.has_value_selected("editor"), "Selection of editor as Role")
+    tweat_role_value_in_settings(wordpress, my.asserter, "editor")
 ```
 
 ##### Points to Note
 1. In the test fixture, we create the `WebApp` representing WordPress by calling `create_wordpress_app` function from the module that we created. Then, we call the `login` function and yield the `WebApp` object so that test can receive it. In its teardown section (after the `yield`), we call the `logout` function of `wordpress` module.
 2. The fixture is mentioned as an argument of the test function.
-3. In the test function we can call any of its methods of the `WebApp` object as seen above. 
+3. In the test function, we call the tweat_role_value_in_settings, and pass the appropriate 3 arguments expected by the call.
 
 
