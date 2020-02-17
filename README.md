@@ -49,8 +49,7 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 7. [Retrieving Source code with GuiSource](./docs/webui_adv/GuiSource.md)
 
 ### 5. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
-
-If you have reached this stage of implementation of test automation, you will understand that the following models need a customized project setup. Each one of them has an example project implementing the abstraction.
+Please refer the pages for respective example projects.
 
 1. [Gui Namespace (GNS) - Externalized Identifiers](./docs/gui_abstraction/GuiNamespace.md)
 2. [Creating App Class](./docs/gui_abstraction/AppObjectModel.md)
