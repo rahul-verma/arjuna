@@ -24,6 +24,8 @@ class WPBasePage(Page):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
+
+    def prepare(self):
         self.externalize()
 
     def logout(self):
@@ -34,6 +36,6 @@ class WPBasePage(Page):
         self.element("logout_msg").wait_until_visible()
 
         from .home import Home
-        return HomePage(self)
+        return Home(self)
 
 

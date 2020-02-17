@@ -6,9 +6,3 @@ id = user_pass
 
 [submit]
 id = wp-submit
-
-[logout_confirm]
-link = log out
-
-[logout_msg]
-text = logged out

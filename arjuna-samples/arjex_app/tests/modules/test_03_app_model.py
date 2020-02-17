@@ -32,4 +32,4 @@ def wordpress(request):
 
 @test
 def test_with_wp_app_model(my, request, wordpress):
-    wordpress.tweat_role_value_in_settings("editor")
+    wordpress.tweak_role_value_in_settings("editor")

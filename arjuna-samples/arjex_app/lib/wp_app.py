@@ -49,7 +49,7 @@ class WordPress:
 
         self.app.quit()
 
-    def tweat_role_value_in_settings(self, value):
+    def tweak_role_value_in_settings(self, value):
         self.app.element("Settings").click()
         role_select = self.app.dropdown("role")
         role_select.select_value(value)

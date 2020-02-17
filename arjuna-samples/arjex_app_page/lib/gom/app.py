@@ -28,5 +28,5 @@ class WordPress(WebApp):
     def launch(self):
         super().launch()
 
-        from .home import Home
-        return HomePage(self)
+        from .pages.home import Home
+        return Home(self)

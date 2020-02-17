@@ -47,7 +47,7 @@ class WordPress:
 
         self.app.quit()
 
-    def tweat_role_value_in_settings(self, value):
+    def tweak_role_value_in_settings(self, value):
         self.app.element("Settings").click()
         role_select = self.app.dropdown("role")
         role_select.select_value(value)
@@ -83,7 +83,7 @@ def wordpress(request):
 
 @test
 def test_with_wp_app_interim(my, request, wordpress):
-    wordpress.tweat_role_value_in_settings("editor")
+    wordpress.tweak_role_value_in_settings("editor")
 ```
 
 ##### Points to Note

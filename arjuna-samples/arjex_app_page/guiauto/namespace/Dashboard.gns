@@ -3,3 +3,9 @@ classes = welcome-view-site
 
 [settings]
 link = Settings
+
+[logout_confirm]
+link = log out
+
+[logout_msg]
+text = logged out

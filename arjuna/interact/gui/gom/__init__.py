@@ -111,9 +111,6 @@ class WebApp(App):
     def quit(self):
         self.automator.quit()
 
-    def go_to_url(self, url):
-        self.browser.go_to_url(url)
-
     def __getattr__(self, name):
         return getattr(self.ui, name)
 

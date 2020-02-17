@@ -44,7 +44,7 @@ def logout(wordpress):
 
     wordpress.quit()
 
-def tweat_role_value_in_settings(wordpress, asserter, value):
+def tweak_role_value_in_settings(wordpress, asserter, value):
     wordpress.element("Settings").click()
     role_select = wordpress.dropdown("role")
     role_select.select_value(value)

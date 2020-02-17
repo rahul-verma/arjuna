@@ -18,14 +18,18 @@ limitations under the License.
 '''
 
 from .basepage import WPBasePage
-from .dashboard import DashboardPage
 
 class Home(WPBasePage):
 
+    def validate_readiness(self):
+        self.element("submit").wait_until_visible()
+
     def login(self, user, pwd):
         self.element("login").text = user
-        self.element("password").text = pwd
+        self.element("pwd").text = pwd
         self.element("submit").click()
+
+        from .dashboard import Dashboard
         return Dashboard(self)
 
     def login_with_default_creds(self):

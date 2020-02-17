@@ -119,6 +119,8 @@ class AppContent(Gui):
         self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.gns".format(self.label)        
         from arjuna.core.enums import ArjunaOption
         gns_dir = gns_dir and gns_dir or self.app.gns_dir
+        if not gns_dir:
+            gns_dir = ""
         ns_root_dir = self.config.get_arjuna_option_value(ArjunaOption.GUIAUTO_NAMESPACE_DIR).as_str()
         self.__def_file_path = os.path.join(ns_root_dir, gns_dir, self.gns_file_name)
         self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
@@ -235,5 +237,8 @@ class AppContent(Gui):
 
     def take_screenshot(self, name=None):
         return self.automator.take_screenshot(name)
+
+    def go_to_url(self, url):
+        self.browser.go_to_url(url)
 
 
