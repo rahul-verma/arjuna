@@ -36,8 +36,8 @@ def test_go_to_url(my, request):
   - Quit the app using its `quit` method.
 
 #### Running the test
-You can run this test by running `arjuna_launcher.py` Python script at the root of the project and passing the `-ct` or `--consider-tests` command line option:
+You can run this test by running `arjuna_launcher.py` Python script at the root of the project and passing the `-it` or `--include-tests` command line option:
 
-`python arjuna_launcher.py run-selected -ct test_go_to_url`
+`python arjuna_launcher.py run-selected -it test_go_to_url`
 
 
