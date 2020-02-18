@@ -29,10 +29,32 @@ class Page(AppContent):
 
 class Widget(AppContent):
 
-    def __init__(self, page, *args, label=None, **kwargs):
+    def __init__(self, page, root_element_locators=None, *args, label=None, **kwargs):
         super().__init__(automator=page.automator, label=label, page=page)   
         self.__page = page
+        self.__root_element_locators = root_element_locators
+        self.__root_element = None
         self._load(*args, **kwargs)
+
+    def load_root_element(self):
+        if self.__root_element_locators is not None:
+            if type(self.__root_element_locators) not in {list, tuple}:
+                self.__root_element_locators = (self.__root_element_locators,)
+            print("nested", self.__root_element_locators, self.label)
+            self.__root_element = super().element(*self.__root_element_locators)
+
+    @property
+    def root(self):
+        return self.__root_element
+
+    def element(self, *str_or_with_locators, iconfig=None):
+        if self.root:
+            return self.root.element(*str_or_with_locators, iconfig=iconfig)
+        else:
+            return super().element(*str_or_with_locators, iconfig=iconfig)
+
+    def multi_element(self, *str_or_with_locators, iconfig=None):
+        return self.automator.multi_element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
     @property
     def page(self):

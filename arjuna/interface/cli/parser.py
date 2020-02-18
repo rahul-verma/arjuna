@@ -72,7 +72,7 @@ class RunParser(Parser):
         self.parser.add_argument("-rid", "--runid", dest="run.id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
         self.parser.add_argument('--static-rid', dest="static.rid", action='store_true', help = 'Use static RunID. Will result in overwriting of report files. Useful during script development.')
         self.parser.add_argument('-rf', '--report-formats', dest="project.report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
-        self.parser.add_argument('--enumerate-only', dest="enumerate", action='store_true', help = 'Show picked tests without running them.')
+        self.parser.add_argument('--dry-run', dest="dry_run", action='store_true', help = 'Launch Arjuna, enumerate tests, but do not execute tests.')
 
         # self.parser.add_argument('-aco', '--arjuna-ref-option', dest="aro",
         #                          nargs=2,
@@ -105,27 +105,12 @@ class PickersParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-cm', '--consider-modules', dest="cmodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for considering test modules.')
-        self.parser.add_argument('-im', '--ignore-modules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for ignoring test modules.')
+        self.parser.add_argument('-im', '--ignore-modules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for including test modules.')
+        self.parser.add_argument('-em', '--exclude-modules', dest="emodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for excluding test modules.')
         # self.parser.add_argument('-cc', '--cclasses', dest="cclasses", metavar=('C1','C2'), default=None, nargs='+', help='One or more names/patterns for considering test classes.')
         # self.parser.add_argument('-ic', '--iclasses', dest="iclasses", metavar=('C1','C2'), default=None, nargs='+', help='One or more names/patterns for ignoring test classes.')
-        self.parser.add_argument('-ct', '--consider-tests', dest="ctests", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
-        self.parser.add_argument('-it', '--ignore-tests', dest="itests", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for ignoring test functions.')
+        self.parser.add_argument('-it', '--include-tests', dest="itests", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for including test functions.')
+        self.parser.add_argument('-et', '--exclude-tests', dest="etests", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for excluding test functions.')
 
     def process(self, arg_dict):
         pass
-
-# class NamesParser(Parser):
-#     def __init__(self):
-#         super().__init__()
-#         self.parser = argparse.ArgumentParser(add_help=False)
-#         self.parser.add_argument('-cf', '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
-#         # self.parser.add_argument('-cm', '--cmodules', dest="cmodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for considering test modules.')
-#         # self.parser.add_argument('-im', '--imodules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+',
-#         #                  help='One or more names/patterns for ignoring test modules.')
-#         # self.parser.add_argument('-cf', '--cfunctions', dest="cfunctions", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for considering test functions.')
-#         # self.parser.add_argument('-if', '--ifunctions', dest="ifunctions", metavar=('F1','F2'), default=None, nargs='+',
-#         #                  help='One or more names/patterns for ignoring test functions.')
-
-#     def process(self, arg_dict):
-#         pass

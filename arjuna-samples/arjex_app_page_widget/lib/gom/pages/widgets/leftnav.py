@@ -18,12 +18,16 @@ limitations under the License.
 '''
 
 from enum import Enum, auto
+from arjuna import *
 from .base import WPBaseWidget
 
 class LeftNav(WPBaseWidget):
 
     class labels(Enum):
         settings = auto()
+
+    def __init__(self, page):
+        super().__init__(page, With.id("adminmenu"))
 
     def validate_readiness(self):
         self.element(self.labels.settings)

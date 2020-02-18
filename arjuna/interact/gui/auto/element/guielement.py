@@ -30,11 +30,11 @@ class GuiElement(ElementContainer, Locatable, Interactable):
 
     def element(self, *str_or_with_locators, iconfig=None):
         lmd = self.gui.convert_to_with_lmd(*str_or_with_locators)
-        return element_with_lmd(self.gui, lmd, iconfig=iconfig)
+        return self.element_with_lmd(self.gui, lmd, iconfig=iconfig)
 
     def element_with_lmd(self, gui, lmd, iconfig=None):
         from arjuna.interact.gui.auto.element.guielement import GuiElement
-        gui_element = GuiElement(self.gui, lmd, iconfig=iconfig)
+        gui_element = GuiElement(gui, lmd, iconfig=iconfig)
         self.load_element(gui_element)
         return gui_element        
 
@@ -44,7 +44,7 @@ class GuiElement(ElementContainer, Locatable, Interactable):
 
     def multi_element_with_lmd(self, gui, lmd, iconfig=None):
         from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
-        m_guielement = GuiMultiElement(self.gui, lmd, iconfig=iconfig)
+        m_guielement = GuiMultiElement(gui, lmd, iconfig=iconfig)
         self.load_multielement(m_guielement)
         return m_guielement
 

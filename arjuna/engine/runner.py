@@ -56,7 +56,7 @@ class TestRunner:
     def load_all_tests(self):
         self.__pytest_args.insert(0, self.tests_dir)
 
-    def load_tests_from_pickers(self, *, cm=None, im=None, ct=None, it=None):  
+    def load_tests_from_pickers(self, *, im=None, em=None, it=None, et=None):  
 
         def process_modules(ms):
             ms = [m.replace(".py", "").replace("*","").replace("/", " and ").replace("\\", " and ") for m in ms]
@@ -66,9 +66,9 @@ class TestRunner:
 
         k_flag = False
 
-        if im:            
-            im = process_modules(im)
-            k_args.append(" and ".join(["not " + m for m in im]))
+        if em:            
+            em = process_modules(em)
+            k_args.append(" and ".join(["not " + m for m in em]))
             k_flag = True
 
         # if ic:
@@ -76,15 +76,15 @@ class TestRunner:
         #     k_args.append(prefix + " and ".join(["not " + c for c in ic]))
         #     k_flag = True
 
-        if it:
+        if et:
             prefix = k_flag and " and " or ""
-            k_args.append(prefix + " and ".join(["not " + c for c in it]))
+            k_args.append(prefix + " and ".join(["not " + c for c in et]))
             k_flag = True
 
-        if cm:
+        if im:
             prefix = k_flag and " and " or ""            
-            cm = process_modules(cm)
-            k_args.append(prefix + " or ".join(cm))
+            cm = process_modules(im)
+            k_args.append(prefix + " or ".join(im))
             k_flag = True
 
         # if cc:
@@ -92,16 +92,16 @@ class TestRunner:
         #     k_args.append(prefix + " or ".join(cc))
         #     k_flag = True
 
-        if ct:
+        if it:
             prefix = k_flag and " and " or "" 
-            k_args.append(prefix + " or ".join(ct))
+            k_args.append(prefix + " or ".join(it))
             k_flag = True
 
         if k_flag:
             self.__test_args.append("-k " + "".join(k_args))
         
   
-    def run(self, *, only_enumerate):
+    def run(self, *, dry_run):
         from arjuna import Arjuna
         from arjuna.core.enums import ArjunaOption
 
@@ -116,7 +116,7 @@ class TestRunner:
         self.__pytest_args.extend(pytest_report_args)
         self.__pytest_args.extend(self.__test_args)
 
-        if only_enumerate:
+        if dry_run:
             self.__pytest_args.append("--collect-only")
 
         os.chdir(self.__project_dir)

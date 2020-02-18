@@ -22,8 +22,8 @@ from arjuna import Widget
 
 class WPBaseWidget(Widget, metaclass=abc.ABCMeta):
 
-    def __init__(self, page):
-        super().__init__(page)
+    def __init__(self, page, root_element_locator=None):
+        super().__init__(page, root_element_locators=root_element_locator)
 
     def prepare(self):
         self.externalize(gns_dir="widgets")

@@ -202,7 +202,7 @@ class __RunCommand(Command):
         project_root_dir = arg_dict.pop("project.root.dir")
         runid = arg_dict.pop("run.id")
         static_rid = arg_dict.pop("static.rid")
-        self.enumerate_only = arg_dict.pop("enumerate")
+        self.dry_run = arg_dict.pop("dry_run")
 
         Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid, static_rid=static_rid)
 
@@ -223,8 +223,7 @@ class RunProject(__RunCommand):
         from arjuna.engine.runner import TestRunner
         test_runner = TestRunner()
         test_runner.load_all_tests()
-        test_runner.run(only_enumerate=self.enumerate_only)
-
+        test_runner.run(dry_run=self.dry_run)
 
 class RunSelected(__RunCommand):
 
@@ -234,12 +233,12 @@ class RunSelected(__RunCommand):
     def execute(self, arg_dict):
         pickers_dict = dict()
         pickers = (
-            ('cmodules', 'cm'),
             ('imodules', 'im'),
+            ('emodules', 'em'),
             # ('cclasses', 'cc'),
             # ('iclasses', 'ic'),
-            ('ctests', 'ct'),
             ('itests', 'it'),
+            ('etests', 'et'),
             )
 
         def process_picker(sname, tname):
@@ -261,13 +260,13 @@ class RunSelected(__RunCommand):
         for picker in pickers:
             process_picker(picker[0], picker[1])
 
-        pickers_dict['cm'] = [add_py_ext(m) for m in pickers_dict['cm']]
         pickers_dict['im'] = [add_py_ext(m) for m in pickers_dict['im']]
+        pickers_dict['em'] = [add_py_ext(m) for m in pickers_dict['em']]
 
         super().execute(arg_dict)
 
         from arjuna.engine.runner import TestRunner
         test_runner = TestRunner()
         test_runner.load_tests_from_pickers(**pickers_dict)
-        test_runner.run(only_enumerate=self.enumerate_only)
+        test_runner.run(dry_run=self.dry_run)
 

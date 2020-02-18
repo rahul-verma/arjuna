@@ -91,6 +91,7 @@ class Gui(AsserterMixIn):
 
     def _load(self, *args, **kwargs):
         self.prepare(*args, **kwargs)
+        self.load_root_element()
         try:
             self.validate_readiness()
         except WaitableError:
@@ -110,6 +111,9 @@ class Gui(AsserterMixIn):
         pass
 
     def validate_readiness(self):
+        pass
+
+    def load_root_element(self):
         pass
 
 class AppContent(Gui):
@@ -162,7 +166,7 @@ class AppContent(Gui):
     def transit(self, page):
         pass
 
-    def convert_to_with_lmd(self, *raw_str_or_with_locators):
+    def convert_to_with_lmd(self, *raw_str_or_with_locators, nested_element=False):
         from arjuna.interact.gui.helpers import With, WithType
         out = []
         for locator in raw_str_or_with_locators:

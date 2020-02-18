@@ -160,6 +160,15 @@ class My:
     def raw_request(self):
         return self.__request
 
+    @staticmethod
+    def repr(my):
+        print("called")
+        repr = "{}".format(my.data)
+        if not repr:
+            return "-"
+        else:
+            return repr
+
 def tc(cls):
     setattr(cls, 'get_test_qual_name', get_test_qual_name)
     return cls
@@ -185,7 +194,7 @@ def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
     if f is not None:
         my = My()
         my.data = DummyDataRecord()
-        func = pytest.mark.parametrize('my', [my])(f) 
+        func = pytest.mark.parametrize('my', [my], ids=My.repr)(f) 
         return simple_dec(f)
 
     if resources:
@@ -213,11 +222,11 @@ def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
                 my = My()
                 my.data = record
                 my_objects.append(my)
-            func = pytest.mark.parametrize('my', my_objects)(func) 
+            func = pytest.mark.parametrize('my', my_objects, ids=My.repr)(func) 
         else:
             my = My()
             my.data = DummyDataRecord()
-            func = pytest.mark.parametrize('my', [my])(func) 
+            func = pytest.mark.parametrize('my', [my], ids=My.repr)(func) 
 
         @functools.wraps(orig_func)
         def wrapper(my, request, *args, **kwargs):

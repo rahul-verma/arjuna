@@ -23,9 +23,15 @@ from arjuna.core.value import Value
 
 class DataRecord:
 
-    def __init__(self, *vargs, **kwargs):
-        self.__indexed = tuple([Value(v) for v in vargs])
-        self.__named = types.MappingProxyType({i.lower(): Value(j) for i, j in kwargs.items()})
+    def __init__(self, *vargs, process=True, **kwargs):
+        self.__indexed = None
+        self.__named = None
+        if process:
+            self.__indexed = tuple([Value(v) for v in vargs])
+            self.__named = types.MappingProxyType({i.lower(): Value(j) for i, j in kwargs.items()})
+        else:
+            self.__indexed = tuple()
+            self.__named = types.MappingProxyType({})  
 
     def __getitem__(self, i):
         if type(i) is int:
@@ -83,6 +89,27 @@ class DataRecord:
     def has_index(self, index):
         return len(self.__indexed) > index
 
+    def __str__(self):
+        print(self.indexed_values)
+        print(self.named_values)
+        if not self.indexed_values and not self.named_values:
+            return ""
+        if self.indexed_values:
+            indexed = " Indexed:{}".format(str([i.object() for i in self.indexed_values]))
+        else:
+            indexed = ""
+        if self.named_values:
+            named =  " Named:{{{}}}".format(', '.join(['{0}={1}'.format(k, v.object()) for k,v in self.named_values.items()]))
+        else:
+            named = ""
+        return "Data->{}{}".format(indexed, named)
+
+
+class DummyDataRecord(DataRecord):
+    
+    def __init__(self):
+        super().__init__(process=False)
+
 class ListDataRecord:
 
     def __init__(self, data_record):
@@ -91,11 +118,6 @@ class ListDataRecord:
     @property
     def record(self):
         return self.__data_record
-
-class DummyDataRecord(ListDataRecord):
-    
-    def __init__(self):
-        super().__init__(None)
 
 
 class MapDataRecord:

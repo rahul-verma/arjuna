@@ -22,8 +22,10 @@ class PytestHooks:
 
     @classmethod
     def get_request_attr(cls, item, obj_name):
+        from .test import Resources
         request =  cls.get_request_obj(item)
-        return getattr(cls.get_container_based_on_scope(request), obj_name)
+        res = Resources(request)
+        return getattr(res, obj_name)
 
     @classmethod
     def get_request_obj(cls, item):
@@ -38,7 +40,8 @@ class PytestHooks:
         return cls.get_plugin(item, 'html')
 
     @classmethod
-    def add_screenshot_for_failed_result(cls, html_plugin, outcome, *, screenshoter=None):
+    def add_screenshot_for_failed_result(cls, item, outcome, *, screenshoter=None):
+        html_plugin = cls.get_html_report_plugin(item)
         pytest_html = html_plugin
         report = outcome.get_result()
         extra = getattr(report, 'extra', [])

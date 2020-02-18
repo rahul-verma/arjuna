@@ -1,5 +1,23 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.8.13
+------
+- Added arjex_internals examples project to create example code that reflects/tests internal workings of Arjuna.
+- CLI changes based on community discussion
+    - c/consider prefix changed to i/include
+    - i/ignore prefix changed to e/exclude
+    - --enumerate-only change to --dry-run
+- My.repr method is used for including test data in test name. No more of the staple 'my0' in the names.
+- Fix in PyTestHooks. Still need to look for a better solution. request object is not retrievable when error happens in fixture.
+- 
+
+To Do
+    - assertion methods for elements
+        - Multielement - assert_not_empty, assert_size
+        - While filtering, if the element count becomes zero an exception should be raised.
+        - Filter should maintain the sequence of conditions to provide a chain of filters which led to the zero count.
+    - Root element concept for the Widget.
+
 0.8.12
 ------
 - arjuna_launcher.py moved to scripts directory and updated to support new structure.
