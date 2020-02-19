@@ -296,4 +296,17 @@ class AppContent(Gui):
     def go_to_url(self, url):
         self.browser.go_to_url(url)
 
+    def load_state_element(self):
+        if self.externalized:
+            locators = self.gui_def.state_element_with_locators
+
+            from arjuna import Arjuna
+            Arjuna.get_logger().debug("Loading State Element for {} widget. __state__ locators in GNS: {}.".format(
+                self.label,
+                GuiElementMetaData.locators_as_str(locators),
+            ))
+
+            if locators is not None:
+                self.element(*locators)
+
 

@@ -64,19 +64,6 @@ class Widget(AppContent):
         if self.__root_element_locators is not None:
             self.__root_element = super().element(*self.__root_element_locators)
 
-    def load_state_element(self):
-        if self.externalized:
-            locators = self.gui_def.state_element_with_locators
-
-            from arjuna import Arjuna
-            Arjuna.get_logger().debug("Loading State Element for {} widget. __state__ locators in GNS: {}.".format(
-                self.label,
-                GuiElementMetaData.locators_as_str(locators),
-            ))
-
-            if locators is not None:
-                super().element(*locators)
-
     @property
     def root(self):
         return self.__root_element
