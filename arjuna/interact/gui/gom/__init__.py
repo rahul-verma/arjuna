@@ -163,6 +163,5 @@ class WebApp(App):
         self.gns_dir = gns_dir and gns_dir or self.gns_dir
         if not self.gns_dir:
             self.gns_dir = ""
-        print(self.gns_dir, self.__gns_file_name)
         self.ui.externalize(gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)
         self._set_externalized()

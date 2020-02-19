@@ -21,10 +21,6 @@ def rrr(request):
 
 @test(id="t1", drive_with=record(1,2, number=1, sname="s1"))
 def test_1(my, request, sss, rrr):
-    print(my.data.number, my.data.sname)
-    print(my.resources.something)
-    print(request.function.something)
-    print(request.module.something)
     Arjuna.get_data_store().store_shared_object(my.data.sname.as_str(), my.data.number.as_int())
     # 1/0
     my.module_shared_space.test = 3
@@ -34,7 +30,6 @@ def test_1(my, request, sss, rrr):
 def test_2(my, request, sss, rrr):
     shared_obj = Arjuna.get_data_store().get_shared_object(my.data.sname.as_str())
     Arjuna.get_logger().info(shared_obj)
-    print(my.module_shared_space.test)
 
 
 @test(id="t3", drive_with=record(sname="s1"), exclude_if=problem_in("t1"))

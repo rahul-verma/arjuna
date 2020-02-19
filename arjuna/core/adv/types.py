@@ -50,7 +50,6 @@ class CIStringDict:
         return key.lower() in self.__store
 
     def __getattr__(self, attr):
-        print(self.__store)
         return getattr(self.__store, attr)
 
     def __len__(self):

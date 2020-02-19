@@ -77,7 +77,7 @@ SCOPE_MAP = {
     "session"  : "session"
 }
 
-class Resources:
+class Space:
 
     def __init__(self, pytest_request):
         vars(self)['_request'] = pytest_request
@@ -108,61 +108,73 @@ class Resources:
     def raw_request(self):
         return self._request
 
+class Module:
+
+    def __init__(self, py_request):
+        self._space = Space(py_request)
+
+    @property
+    def space(self):
+        return self._space
+
 class My:
 
     def __init__(self):
-        self.__data = None
-        self.__info = None
-        self.__resources = None
-        self.__handler = None
-        self.__qual_name = None
-        self.__request =  None
-        self.__shared_objects = None
-        self.__asserter = Asserter() #unittest.TestCase('__init__')
+        self._data = None
+        self._info = None
+        self._handler = None
+        self._qual_name = None
+        self._request =  None
+        self._shared_objects = None
+        self._asserter = Asserter() #unittest.TestCase('__init__')
+        self._space = None
+        self._module = None
+
+    @property
+    def module(self):
+        return self._module
 
     @property
     def data(self):
-        return self.__data
+        return self._data
 
     @property
     def asserter(self):
-        return self.__asserter
-
-    @property
-    def module_shared_space(self):
-        return self.__request.module.shared_space
+        return self._asserter
 
     @data.setter
     def data(self, record):
-        self.__data = record
+        self._data = record
+
+    @property
+    def space(self):
+        return self._space
 
     def set_req_obj(self, pytest_request):
-        self.__request = pytest_request
-        self.__info = Info(pytest_request)
-        self.__resources = Resources(pytest_request)
+        self._request = pytest_request
+        self._info = Info(pytest_request)
+        self._space = Space(pytest_request)
+        self._module = Module(pytest_request)
         if pytest_request.scope in {"session", "module", "class"}:
             try:
-                getattr(pytest_request.module, "shared_space")
-                print("old", pytest_request)
+                getattr(self._request.module, "space")
             except:
-                print("new", pytest_request)
-                pytest_request.module.shared_space = SharedObjects()
+                self._request.module.space = SharedObjects()
 
     @property
     def info(self):
-        return self.__info
+        return self._info
 
     @property
     def resources(self):
-        return self.__resources
+        return self._resources
 
     @property
     def raw_request(self):
-        return self.__request
+        return self._request
 
     @staticmethod
     def repr(my):
-        print("called")
         repr = "{}".format(my.data)
         if not repr:
             return "-"

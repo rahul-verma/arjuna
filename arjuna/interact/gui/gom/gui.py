@@ -165,8 +165,7 @@ class AppContent(Gui):
             raise GuiNamespaceLoadingError(self, str(e))
 
         from arjuna import Arjuna
-        Arjuna.get_logger().info("GNS Def loading completed for {}.".format(self.label))
-        print(self.gui_def, self.label)
+        Arjuna.get_logger().debug("Gui Namespace loading completed for {}.".format(self.label))
         self._set_externalized()
 
     @property

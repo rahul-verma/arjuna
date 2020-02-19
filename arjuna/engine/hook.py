@@ -22,9 +22,9 @@ class PytestHooks:
 
     @classmethod
     def get_request_attr(cls, item, obj_name):
-        from .test import Resources
+        from .test import Space
         request =  cls.get_request_obj(item)
-        res = Resources(request)
+        res = Space(request)
         return getattr(res, obj_name)
 
     @classmethod

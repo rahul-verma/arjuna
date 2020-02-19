@@ -90,8 +90,6 @@ class DataRecord:
         return len(self.__indexed) > index
 
     def __str__(self):
-        print(self.indexed_values)
-        print(self.named_values)
         if not self.indexed_values and not self.named_values:
             return ""
         if self.indexed_values:
