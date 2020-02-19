@@ -23,10 +23,10 @@ Minor - Doc links in main README.md made abolsute because for PyPi.
     - If root element is specified in any of the above manner, it is used to find elements when factory methods of Widget are used (e.g. .element())
     - If root element is NOT specified, automator is used as the finder.
 - Test Object Space (earlier called Shared Spaces)
-    - my.modules_shared_space is changed to my.module.store for better code structure.
-    - my.store in test refers to the current test's scope.
-    - In fixtures, request.store refers to the scope as per the fixture scope.
-    - With my.store, and request.store, storing is done for scope, retrieval is from current test object up the parent chain.
+    - my.modules_shared_space is changed to my.module.space for better code structure.
+    - my.space in test refers to the current test's scope.
+    - In fixtures, request.space refers to the scope as per the fixture scope.
+    - With my.space, and request.space, storing is done for scope, retrieval is from current test object up the parent chain.
 
 0.8.12
 ------
