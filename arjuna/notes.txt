@@ -1,5 +1,26 @@
-GNS
+GNS - Random raw ideas. Need careful thinking before implementation.
+
     - xgns format.
+    - Concept of Template - can be thought of in many ways, but one needs to be chose. Let's say Table is a template.
+        - Xgns can have a <table> element. Table as a template can define its mandatory and optional params.
+        - xgns can be at a a page or widget level. Table loads its critical params by name association programmatically from the same definition.
+        - Table has its own definition. It can be in a page or a widget.
+        - Template elements can be included in commons and referred anywhere in a GNS:
+            e.g. [books_table=table]
+            in this case the section content will be treated as a dict of params to be passed to the table. e.g. header_id = abc will replace lets say [header]'s id = $header_id$ value.
+            if any params directly match the requirements of template i.e. lets header_id itself is the need then it will be directly used in the context. i.e. [header_id] takes the content of the caller.
+
+            Templates can be of various types:
+                if not provided it is treated as an element. If used with a non-element call, special params are ignored or exception is thrown.
+                dropdown
+                radio_group
+                multielement
+    - concept of commons.gns.
+        - Can the App have a GNS which acts as the commons? 
+        - These definitions are common to all pages but not repeated. 
+        - Lookup done at a page level and then in commons.
+        - any commonly used elements can be put here.
+        E.g. [__root__ = abc] if in current format.
 
 To Do
     - assertion methods for elements
