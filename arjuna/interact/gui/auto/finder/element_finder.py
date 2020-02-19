@@ -69,7 +69,11 @@ class ElementFinder:
                 elif locator.ltype.name == "JS":
                     size, dispatcher = js_call(locator.lvalue)
                 else:
-                    size, dispatcher = dispatcher_call(locator.ltype.name, locator.lvalue)
+                    lvalue = locator.lvalue
+                    if locator.ltype.name == "XPATH":
+                        if not lvalue.startswith("."):
+                            lvalue = "." + lvalue
+                    size, dispatcher = dispatcher_call(locator.ltype.name, lvalue)
                 return locator.ltype.name, locator.lvalue, size, dispatcher
             except WaitableError as e:
                 we = e

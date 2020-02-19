@@ -292,9 +292,13 @@ class GuiElementMetaData:
 
     @staticmethod
     def locators_as_str(locators):
+        if not locators:
+            return list()
+
+        from arjuna.interact.gui.helpers import With
         out_list = []
         for l in locators:
-            if isinstance(l, GuiGenericLocator):
+            if isinstance(l, GuiGenericLocator) or isinstance(l, With):
                 out_list.append(l.as_map())
             else:
                 out_list.append(str(l))

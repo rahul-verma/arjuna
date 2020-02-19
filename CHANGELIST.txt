@@ -9,14 +9,15 @@ Following is the list of critical additions and updates for a given released ver
     - --enumerate-only change to --dry-run
 - My.repr method is used for including test data in test name. No more of the staple 'my0' in the names.
 - Fix in PyTestHooks. Still need to look for a better solution. request object is not retrievable when error happens in fixture.
-- 
-
-To Do
-    - assertion methods for elements
-        - Multielement - assert_not_empty, assert_size
-        - While filtering, if the element count becomes zero an exception should be raised.
-        - Filter should maintain the sequence of conditions to provide a chain of filters which led to the zero count.
-    - Root element concept for the Widget.
+- To support nested element finding across all With locators that use XPath, "." is automatically pre-fixed if not present.
+- New named exceptions introduced for better information: GuiNotLoadedError, GuiLabelNotPresentError, GuiNamespaceLoadingError
+- Concept of root element introduced for Widget. 
+    - Widget takes a keyword argument 'root_element_locators' in its __init__method.
+    - You can specify a single locator (With object) or a list of locators.
+    - You can also specifiy it in corresponding GNS file with a special label: __root__
+    - If both are specified, then one passed in init overrides the GNS entry.
+    - If root element is specified in any of the above manner, it is used to find elements when factory methods of Widget are used (e.g. .element())
+    - If root element is NOT specified, automator is used as the finder.
 
 0.8.12
 ------

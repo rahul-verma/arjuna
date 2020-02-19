@@ -1,4 +1,12 @@
 
+
+To Do
+    - assertion methods for elements
+        - Multielement - assert_not_empty, assert_size
+        - While filtering, if the element count becomes zero an exception should be raised.
+        - Filter should maintain the sequence of conditions to provide a chain of filters which led to the zero count.
+
+
 Project creation:
 - Project name itself need not follow python convention.
 - Arjuna project is a Python name and it is created *inside* the IDE project.
@@ -15,7 +23,6 @@ Project creation:
      - tests /modules __init__.py, conftest.py
 
 
-- Check: pytest ini file within Arjuna.
 - Other pytest switches of interest to be wrapped in alignment with Arjuna.
 - Integrate Discovery module from earlier code to validate m/c/f/m
 
@@ -27,7 +34,6 @@ Next
 - See how difficult it is to integrate Allure reporting. Accordingly see screenshots possibility.
 - For multi-element introduce an arguent min_length. It should be a part of waiting till number of elements are more than the min specified.
 - For multi-element, see filter methods. .filter(attr_value(name=, value=))
-- Reassess With.class_names and With.class_name and With.compound_class. Can be done with one.
 - Create an attr() call. One should be able to supply any number of attrs to With.attr* methods
 - One thing which can be done for With cleanup is that With can tranform itself based on who it is etc.
 - Another thing which can be done is introduction, 
@@ -42,62 +48,12 @@ Next
         - Most likely will lead to an XPath generation.
     See how this and MultiElement Filters work together.
 
-With TPI rearrangement:
-Progress
--------
-Config and Selenium Examples
-y01 - launch chrome
-y02 - .arjuna_option(firefox details)
-y03 - .firefox()
-y04 - firefox based on project conf
-y05 - headless chrome, extended driver config
-y06 -> getting arjuna property from project conf using a.b.c and A_B_C and as_* value methods.
-y07 -> programmatic user options
-y08 -> user options from project config
-y09 -> basic identifiers. link_ptext needs to be fixed.
-y10 -> xpath examples
-y11 -> css examples
-y12 -> Extended identifiers work (which are not commented in example code.)
-Pending y13 -> OR relationship -> Fails after an invalid id without checking next one.
-y14 -> HardCoded.sleep
-y15 -> Basic element interactions.
-y16 -> auto finding and state checking works for basic interactions.
-y17 -> multielement.
-y18 -> Java script execution
-y19 -> alerts
-y20 -> Basic window handling
-y21 -> Window with title, partial title and content locator works. check notes for the found issue.
-y22 -> Frame handling.
-y23 -> Dropdown
-y24 -> RadioGroup logic
-y25 -> Named arg formatting, case-insensitive.
-y26 -> With.javascript for success and failure scenarios (single element)
-y27 -> With.javascript for success and failure scenarios (multi element)
-y28 -> Pre state check for basic element.
-y29 -> Dropdown pre state check off.
-y30 -> custom dropdown works (example - Bootstrap dropdown control)
-y31 -> Needs work on Narada side for suitable example controls
-y32 -> All source retrieval.
-
-GOM
-e01 -> SGNS with simple App Model
-e02 -> MGNS
-e03 -> SGNS with simple page model
-e04 -> MGNS
-e05 -> SNGS with Composite Page Model, loc enum
-e06 -> MGNS
-
 Action Chains (In progress)
 ---------------------------
 - As of now introducing the following actions without explicit action chain creation:
     GuiElement methods
         - hover
         - hover_and_click
-
-
-
-
-
 
 Fine Tuning
 -----------
@@ -115,13 +71,11 @@ Pending
 Next Features on Priority
 -------------------------
 - ActionChains
-- unittest core support -> HtmlRunner
 - WebDriverManager
 - Support for loading conf from a file. E.g. env based multiple conf files.
 
 GNS Desirables
 ---------------
-- Introduce equivalent of LoadableComponent logic.
 - Extract with mechanism for pages and separate from the generic logic. It is getting too complicated.
 - An identifier should explicitly look for parameter value:
     - $kw.abc$ -> This should directly come from With.format() provided keywords.
@@ -161,13 +115,6 @@ ueo
 1. Arjuna identifiers:
 - Add support for new identifiers.
 
-2. With.CLASS_NAMES --> Shouldn't we have just one identifier. instead of 2
-- remove With.CLASS_NAME?
-
-3. Setu Log is being created - get rid.
-4. arjuna-py.log --> rename to arjuna.log
-5. include timestamp for arjuna log.
-
 6. Test when different values in sample code are provided as Values rather than as_* conversion.
     The errors should tell -> expecting str/int etc instead of Value.
     OR those methods at the correct layer should convert it to the expected value type and use.
@@ -179,12 +126,6 @@ ueo
     Wait time should be overall wait time. Needs to be checked.
     Also check open windows at any point in time.
     May be we should check for window readiness and page load when a new window is launched using JavaScript.
-
-10. Create Arjuna Named Exceptions:
-    - The exception from the tool or other relevant exceptions should be seen in the dig deeper details.
-    - Element Finding -> IdentificationError
-    - With.JS: Description should mention about the problem.
-    - 
 
 11. Text case insensitive? by default off. For on more processing is needed so expectation should be set accordingly.
 

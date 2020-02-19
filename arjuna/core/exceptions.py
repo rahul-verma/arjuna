@@ -177,5 +177,17 @@ class DataSourceFinished(StopIteration):
 class GuiNotLoadedError(WaitableError):
 
     def __init__(self, gui, msg):
-        message = msg and  "Error message: {}".format(msg) or ""
-        super().__init__("GUI [{}] did not load as expected. Error: {}.".format(gui.qual_name, message))
+        message = msg and  " Error message: {}.".format(msg) or ""
+        super().__init__("GUI [{}] did not load as expected.{}".format(gui.qual_name, message))
+
+class GuiLabelNotPresentError(BaseException):
+
+    def __init__(self, gns_name, label, context=None):
+        context_msg = context and  " for context {}".format(context) or ""
+        super().__init__("Gui namespace >{}< does not contain element with name: {}{}.".format(gns_name, label, context_msg))
+
+class GuiNamespaceLoadingError(BaseException):
+
+    def __init__(self, gui, msg):
+        message = msg and  " Error message: {}".format(msg) or ""
+        super().__init__("Gui namespace was not loaded for >{}<.{}".format(gui.qual_name, message))

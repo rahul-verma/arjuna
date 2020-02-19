@@ -24,6 +24,7 @@ from enum import Enum, auto
 from abc import abstractmethod
 
 from arjuna.core.enums import GuiAutomationContext
+from arjuna.core.exceptions import GuiLabelNotPresentError
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData, Locator, ImplWith
 
 class FileFormat(Enum):
@@ -88,13 +89,13 @@ class GuiNamespace:
 
     # Needs to be thread-safe
     # Returns emd for a context for a given gui name
-    def get_meta_data(self, name, context):
-        if not self.has(name):
-            raise Exception("Gui namespace >{}< does not contain element with name: {}".format(self.__name, name))
-        elif not self.has_context(name, context):
-            raise Exception("Gui namespace >{}< does not contain element with name: {} for context {}".format(self.__name, name, context))
+    def get_meta_data(self, label, context):
+        if not self.has(label):
+            raise GuiLabelNotPresentError(self.__name, label)
+        elif not self.has_context(label, context):
+            raise GuiLabelNotPresentError(self.__name, label, context)
         
-        return self.__ns[name.lower()][context]
+        return self.__ns[label.lower()][context]
 
 
 class BaseGuiNamespaceLoader:
@@ -232,8 +233,9 @@ class AbstractGNFileLoader(BaseGuiNamespaceLoader):
             # Initialise for new section found
             self.last_header = current_header
             self.last_auto_contexts = None
-            from arjuna.configure.impl.validator import ConfigValidator
-            ConfigValidator.arjuna_name(self.last_header)
+            if self.last_header.lower() != "__root__":
+                from arjuna.configure.impl.validator import ConfigValidator
+                ConfigValidator.arjuna_name(self.last_header)
             self.__ns[self.last_header] = {}
             return True
         else:

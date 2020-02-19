@@ -21,6 +21,8 @@ import os
 
 from .nsloader import GuiNamespaceLoaderFactory
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData, GuiElementMetaData, Locator
+from arjuna.interact.gui.helpers import With
+from arjuna.core.exceptions import GuiLabelNotPresentError
 
 class GuiDef:
     '''
@@ -63,7 +65,7 @@ class GuiDef:
     def convert_to_lmd(self, *locators):
         final_locators = []
         for raw_locator in locators:
-            if raw_locator.wtype.upper().strip() == "META":
+            if raw_locator.wtype.upper().strip() == "LABEL":
                 emd = self.__ns.get_meta_data(raw_locator.wvalue, self.__auto_context)
                 for loc in emd.raw_locators:
                     if not raw_locator.named_args:
@@ -79,18 +81,34 @@ class GuiDef:
         sys.exit(1)
         return GuiElementMetaData(final_locators)
 
+    def __gns_locators_as_with_locators(self, label):
+        emd = self.__ns.get_meta_data(label, self.__auto_context)
+        out = []
+        for loc in emd.raw_locators:
+            underscore = loc.ltype.lower().endswith("attr") and "_" or ""
+            wobj = getattr(With, underscore + loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "_" + "ID".lower())("abc")
+            out.append(wobj)
+        return out
+
     def convert_to_with(self, locator):
         from arjuna.interact.gui.helpers import With
         out_list = []
         impl_with = locator.as_impl_locator()
-        emd = self.__ns.get_meta_data(impl_with.wvalue, self.__auto_context)
-        for loc in emd.raw_locators:
-            underscore = loc.ltype.lower().endswith("attr") and "_" or ""
-            wobj = getattr(With, underscore + loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "_" + "ID".lower())("abc")
+        for wobj in self.__gns_locators_as_with_locators(impl_with.wvalue):
+            # underscore = loc.ltype.lower().endswith("attr") and "_" or ""
+            # wobj = getattr(With, underscore + loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "_" + "ID".lower())("abc")
             if locator.named_args:
                 wobj.format(**locator.named_args)
             out_list.append(wobj)
         return out_list
+
+    @property
+    def root_element_with_locators(self):
+        try:
+            return self.__gns_locators_as_with_locators("__root__")
+        except GuiLabelNotPresentError:
+            # Defining __root__ is optional for GNS files.
+            return None
 
     def create_dispatcher(self):
         # Pages don't use any dispatcher

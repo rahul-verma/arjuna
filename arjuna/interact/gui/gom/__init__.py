@@ -18,6 +18,7 @@ limitations under the License.
 '''
 
 from .gui import *
+from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 
 class Page(AppContent):
 
@@ -37,10 +38,30 @@ class Widget(AppContent):
         self._load(*args, **kwargs)
 
     def load_root_element(self):
+        gns_re_locators = None
+        coded_re_locators = None
+        # From GUI Def
+        if self.externalized:
+            gns_re_locators = self.gui_def.root_element_with_locators
+
+        # From constructor. Overrides Gui Def if both places have the def.        
         if self.__root_element_locators is not None:
             if type(self.__root_element_locators) not in {list, tuple}:
                 self.__root_element_locators = (self.__root_element_locators,)
-            print("nested", self.__root_element_locators, self.label)
+            coded_re_locators = self.__root_element_locators
+
+        self.__root_element_locators = self.__root_element_locators and coded_re_locators or coded_re_locators or gns_re_locators
+
+        from arjuna import Arjuna
+        Arjuna.get_logger().debug("Loaded Root Element for {} widget. Loaded as: {}. Externalized: {}. RE locators in GNS: {}. RE in __init__: {}.".format(
+            self.label,
+            GuiElementMetaData.locators_as_str(self.__root_element_locators),
+            self.externalized,
+            GuiElementMetaData.locators_as_str(gns_re_locators),
+            GuiElementMetaData.locators_as_str(coded_re_locators)
+        ))
+
+        if self.__root_element_locators is not None:
             self.__root_element = super().element(*self.__root_element_locators)
 
     @property
@@ -144,3 +165,4 @@ class WebApp(App):
             self.gns_dir = ""
         print(self.gns_dir, self.__gns_file_name)
         self.ui.externalize(gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)
+        self._set_externalized()

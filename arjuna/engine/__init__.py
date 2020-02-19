@@ -186,7 +186,7 @@ class ArjunaSingleton:
         if not os.path.isdir(log_dir):
             os.makedirs(log_dir)
         fl = logging.getLevelName(self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_FILE_LEVEL).as_str().upper())
-        fname = "arjuna-run.log"
+        fname = "arjuna.log"
         lpath = os.path.join(log_dir, fname)
 
         logger = logging.getLogger("arjuna")

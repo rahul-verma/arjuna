@@ -30,7 +30,7 @@ from arjuna.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
-from arjuna.core.exceptions import WaitableError, GuiNotLoadedError
+from arjuna.core.exceptions import WaitableError, GuiNotLoadedError, GuiNamespaceLoadingError
 
 class GuiConditions:
 
@@ -64,6 +64,7 @@ class Gui(AsserterMixIn):
             else:
                 self.__econfig = ext_config.config
         self.__label = label is not None and label or self.__class__.__name__
+        self.__externalized = False
 
     @property
     def conditions(self):
@@ -116,6 +117,13 @@ class Gui(AsserterMixIn):
     def load_root_element(self):
         pass
 
+    @property
+    def externalized(self):
+        return self.__externalized
+
+    def _set_externalized(self):
+        self.__externalized = True
+
 class AppContent(Gui):
 
     def __init__(self, *args, automator, label=None, **kwargs):
@@ -151,9 +159,15 @@ class AppContent(Gui):
         ns_root_dir = self.config.get_arjuna_option_value(ArjunaOption.GUIAUTO_NAMESPACE_DIR).as_str()
         
         self.__def_file_path = os.path.join(ns_root_dir, gns_dir, self.gns_file_name)
-        self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
-        # if register:
-        #     self._register()
+        try:
+            self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
+        except Exception as e:
+            raise GuiNamespaceLoadingError(self, str(e))
+
+        from arjuna import Arjuna
+        Arjuna.get_logger().info("GNS Def loading completed for {}.".format(self.label))
+        print(self.gui_def, self.label)
+        self._set_externalized()
 
     @property
     def gns_file_name(self):
