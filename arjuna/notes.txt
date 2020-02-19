@@ -1,11 +1,15 @@
-
+GNS
+    - xgns format.
 
 To Do
     - assertion methods for elements
         - Multielement - assert_not_empty, assert_size
         - While filtering, if the element count becomes zero an exception should be raised.
         - Filter should maintain the sequence of conditions to provide a chain of filters which led to the zero count.
-
+    - Expansion of concept of GNS 
+        - Can it contain more than identifiers.
+        - E.g. state --> presence is default. clickable
+        - Other checks like tag_check_off, click_check_off etc.
 
 Project creation:
 - Project name itself need not follow python convention.

@@ -110,6 +110,14 @@ class GuiDef:
             # Defining __root__ is optional for GNS files.
             return None
 
+    @property
+    def state_element_with_locators(self):
+        try:
+            return self.__gns_locators_as_with_locators("__state__")
+        except GuiLabelNotPresentError:
+            # Defining __load__ is optional for GNS files.
+            return None
+
     def create_dispatcher(self):
         # Pages don't use any dispatcher
         pass

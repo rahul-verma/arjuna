@@ -1,5 +1,13 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.8.15
+------
+- Introduce __state__ special label in GNS. This element can be automatically checked as a part of Gui Loading Protocol. Avoids the need for writing a validate_readiness method for simple single element loading need.
+
+To Do
+-----
+    - Support for commons. Elements like spinners which have common defs.
+
 0.8.14
 ------
 Minor - Doc links in main README.md made abolsute because for PyPi.

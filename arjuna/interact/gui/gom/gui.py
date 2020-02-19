@@ -92,7 +92,18 @@ class Gui(AsserterMixIn):
 
     def _load(self, *args, **kwargs):
         self.prepare(*args, **kwargs)
-        self.load_root_element()
+        try:
+            self.load_root_element()
+        except Exception as e:
+            import traceback
+            raise GuiNotLoadedError(self, "Root Element not Loaded. " + str(e) + "\n" + traceback.format_exc())
+
+        try:
+            self.load_state_element()
+        except BaseException as e:
+            import traceback
+            raise GuiNotLoadedError(self, "State Element not Loaded." + str(e) + "\n" + traceback.format_exc())
+
         try:
             self.validate_readiness()
         except WaitableError:
@@ -115,6 +126,9 @@ class Gui(AsserterMixIn):
         pass
 
     def load_root_element(self):
+        pass
+
+    def load_state_element(self):
         pass
 
     @property

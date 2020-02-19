@@ -1,2 +1,5 @@
 [settings]
 link = Settings
+
+[__state__]
+link = Appearance
