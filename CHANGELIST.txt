@@ -1,5 +1,9 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.8.14
+------
+Minor - Doc links in main README.md made abolsute because for PyPi.
+
 0.8.13
 ------
 - Added arjex_internals examples project to create example code that reflects/tests internal workings of Arjuna.
