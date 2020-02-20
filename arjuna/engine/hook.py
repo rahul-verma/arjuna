@@ -22,6 +22,7 @@ class PytestHooks:
 
     @classmethod
     def get_request_attr(cls, item, obj_name):
+        print(item)
         from .test import Space
         request =  cls.get_request_obj(item)
         res = Space(request)
