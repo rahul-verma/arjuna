@@ -84,16 +84,22 @@ class Space:
 
     def __getitem__(self, name):
         scopes = LOOKUP_ORDER[self._request.scope]
+        from arjuna import Arjuna
         for scope in scopes:
+            Arjuna.get_logger().debug("Space: Getting value for {} from {} scope".format(name, scope))
             try:
                 container = getattr(self._request, SCOPE_MAP[scope])
                 return getattr(container, name)
             except Exception as e:
+                Arjuna.get_logger().debug("Space: No value for {} in {} scope".format(name, scope))
                 continue
         raise Exception("Attribute with name >>{}<< does not exist in request scope for {}".format(name, scopes))
 
+    def _get_container_for_scope(self):
+        return getattr(self._request, SCOPE_MAP[self._request.scope])
+
     def __setitem__(self, name, value):
-        container = getattr(self._request, SCOPE_MAP[self._request.scope])
+        container = self._get_container_for_scope()
         setattr(container, name, value)
 
     def __getattr__(self, name):
@@ -101,17 +107,27 @@ class Space:
             return self[name]
 
     def __setattr__(self, name, value):
-        container = getattr(self._request, SCOPE_MAP[self._request.scope])
+        container = self._get_container_for_scope()
+        from arjuna import Arjuna
+        Arjuna.get_logger().debug("Space: Setting {}={} in {} scope".format(name, value, self._request.scope))
         setattr(container, name, value)
 
     @property
     def raw_request(self):
         return self._request
 
+class ModuleSpace(Space):
+
+    def __init__(self, pytest_request):
+        super().__init__(pytest_request)
+
+    def _get_container_for_scope(self):
+        return getattr(self._request, "module")
+
 class Module:
 
     def __init__(self, py_request):
-        self._space = Space(py_request)
+        self._space = ModuleSpace(py_request)
 
     @property
     def space(self):
