@@ -15,28 +15,33 @@ class Asserter:
     def __init__(self):
         self.__asserter = unittest.TestCase('__init__')
 
-    def __msg(self, msg):
-        return msg and " {}".format(msg) or ""
+    @classmethod
+    def format_msg(cls, msg):
+        return msg and " {}.".format(msg) or ""
 
-    def __equality_msg(self, context, msg, expected, relation=""):
-        if relation:
-            relation = relation + " "
-        return "{} was {}expected to be {}".format(context, relation, expected, self.__msg(msg))
+    def assert_equal(self, actual, expected, msg):
+        self.__asserter.assertEqual(actual, expected, msg)
 
-    def __format_bool_msg(self, context, msg, expected):
-        return "{} was expected to be {}.{}".format(context, expected, self.__msg(msg))
+    def assert_lesser(self, left, right, msg):
+        self.__asserter.assertLess(left, right, msg)
 
-    def assert_equal(self, actual, expected, context, msg=None):
-        self.__asserter.assertEqual(actual, expected, self.__equality_msg(context, msg, expected))
+    def assert_greater(self, left, right, msg):
+        self.__asserter.assertGreater(left, right, msg)
 
-    def assert_not_equal(self, actual, expected, context, msg=None):
-        self.__asserter.assertNotEqual(actual, expected, self.__equality_msg(context, msg, expected, "NOT"))
+    def assert_min(self, left, right, msg):
+        self.__asserter.assertGreaterEqual(left, right, msg)
 
-    def assert_true(self, actual, context, msg=None):
-        self.__asserter.assertTrue(actual, self.__format_bool_msg(context, msg, True))
+    def assert_max(self, left, right, msg):
+        self.__asserter.assertLessEqual(left, right, msg)
 
-    def assert_false(self, actual, context, msg=None):
-        self.__asserter.assertFalse(actual, self.__format_bool_msg(context, msg, False))
+    def assert_not_equal(self, left, right, msg):
+        self.__asserter.assertNotEqual(actual, expected, msg)
+
+    def assert_true(self, actual, msg):
+        self.__asserter.assertTrue(actual, msg)
+
+    def assert_false(self, actual, msg):
+        self.__asserter.assertFalse(actual, msg)
 
     def fail(self, msg):
         self.__asserter.fail(msg)

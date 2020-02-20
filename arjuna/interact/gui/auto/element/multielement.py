@@ -29,6 +29,7 @@ from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from arjuna.interact.gui.auto.base.configurable import Configurable
 from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.interact.gui.auto.source.parser import *
+from arjuna.engine.asserter import AsserterMixIn
 
 class _GuiPartialElement(GuiElement):
 
@@ -49,9 +50,10 @@ class _GuiPartialElement(GuiElement):
     def index(self):
         return self.__index
 
-class GuiMultiElement(Locatable,Dispatchable,Configurable):
+class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
     
     def __init__(self, gui, lmd, iconfig=None, elements=None): #, parent=None):
+        AsserterMixIn.__init__(self)
         Locatable.__init__(self, gui, lmd) #, parent)
         Dispatchable.__init__(self)
         Configurable.__init__(self, gui, iconfig)
@@ -92,6 +94,21 @@ class GuiMultiElement(Locatable,Dispatchable,Configurable):
         # self.find_if_not_found()
         return len(self.__elements)
 
+    def assert_size(self, size, obj_name, msg=None):
+        self.asserter.assert_equal(self.size, size, msg="{} should have exactly {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
+
+    def assert_min_size(self, size, obj_name, msg=None):
+        self.asserter.assert_greater(self.size, size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
+
+    def assert_max_size(self, size, obj_name, msg=None):
+        self.asserter.assert_lesser(self.size, size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
+
+    def assert_empty(self, obj_name, msg=None):
+        self.asserter.assert_equal(self.size, 0, msg="{} should be empty, but was found to have {} elements.".format(obj_name, self.size, self.asserter.format_msg(msg)))
+
+    def assert_not_empty(self, obj_name, msg=None):
+        self.asserter.assert_greater(self.size, 0, msg="{} is expected to have atleat 1 element, but was found to be empty.{}".format(obj_name, self.size, self.asserter.format_msg(msg)))
+
     @size.setter
     def size(self, count):
         # The logic ignores stale elements 
@@ -103,6 +120,8 @@ class GuiMultiElement(Locatable,Dispatchable,Configurable):
                 pass
 
     length = size
+
+
 
     @property
     def random_element(self):

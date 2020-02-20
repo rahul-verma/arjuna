@@ -20,10 +20,12 @@ limitations under the License.
 from arjuna.interact.gui.auto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.interactable import Interactable
 from arjuna.interact.gui.auto.base.container import ElementContainer
+from arjuna.engine.asserter import AsserterMixIn
 
-class GuiElement(ElementContainer, Locatable, Interactable):
+class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     def __init__(self, gui, emd, iconfig=None):
+        AsserterMixIn.__init__(self)
         ElementContainer.__init__(self, gui.automator.config)
         Locatable.__init__(self, gui, emd) #, parent, obj_name="GuiElement")
         Interactable.__init__(self, gui, iconfig)

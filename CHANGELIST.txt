@@ -5,6 +5,7 @@ Following is the list of critical additions and updates for a given released ver
 - Introduced PageWidget, AppWidget, AppDialog and WidgetDialog classes.
 - Fixed name typ and arg bug in browser api.
 - GuiMultiElement gives interface just like GuiElement for source inquiry.
+- GuiMultiElement has many assertions available now: assert_size, assert_min_size, assert_max_size, assert_empty, assert_not_empty
 
 0.8.15
 ------
