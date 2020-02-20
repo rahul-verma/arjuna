@@ -31,14 +31,14 @@ class Browser:
     def go_to_url(self, url):
         self.automator.dispatcher.go_to_url(url=url)
 
-    def go_back(self, url):
-        self.automator.dispatcher.go_back()
+    def go_back(self):
+        self.automator.dispatcher.go_back_in_browser()
 
-    def go_forward(self, url):
-        self.automator.dispatcher.go_forward()
+    def go_forward(self):
+        self.automator.dispatcher.go_forward_in_browser()
 
-    def refresh(self, url):
-        self.automator.dispatcher.refresh()
+    def refresh(self):
+        self.automator.dispatcher.refresh_browser()
 
     def execute_javascript(self, js, *args):
         return self.automator.dispatcher.execute_javascript(js, *args)

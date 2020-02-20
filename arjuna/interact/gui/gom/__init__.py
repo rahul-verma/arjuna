@@ -28,11 +28,10 @@ class Page(AppContent):
         self.app.ui = self
         self._load(*args, **kwargs)
 
-class Widget(AppContent):
+class _Widget(AppContent):
 
-    def __init__(self, page, root_element_locators=None, *args, label=None, **kwargs):
-        super().__init__(automator=page.automator, label=label, page=page)   
-        self.__page = page
+    def __init__(self, automator, root_element_locators=None, *args, label=None, **kwargs):
+        super().__init__(automator=automator, label=label)   
         self.__root_element_locators = root_element_locators
         self.__root_element = None
         self._load(*args, **kwargs)
@@ -80,6 +79,34 @@ class Widget(AppContent):
     @property
     def page(self):
         return self.__page
+
+class PageWidget(_Widget):
+
+    def __init__(self, page, root_element_locators=None, *args, label=None, **kwargs):
+        super().__init__(automator=page.automator, *args, label=label, **kwargs)   
+        self.__page = page
+
+    @property
+    def page(self):
+        return self.__page 
+
+
+class AppWidget(_Widget):
+
+    def __init__(self, app, root_element_locators=None, *args, label=None, **kwargs):
+        super().__init__(automator=app.automator, *args, label=label, **kwargs)
+
+AppDialog = AppWidget
+
+class WidgetDialog(_Widget):
+
+    def __init__(self, widget, root_element_locators=None, *args, label=None, **kwargs):
+        super().__init__(automator=widget.automator, *args, label=label, **kwargs)   
+        self.__widget = widget
+
+    @property
+    def widget(self):
+        return self.__widget 
 
 class App(Gui, metaclass=abc.ABCMeta):
 

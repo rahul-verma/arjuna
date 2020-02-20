@@ -1,12 +1,15 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.8.16
+------
+- Introduced PageWidget, AppWidget, AppDialog and WidgetDialog classes.
+- Fixed name typ and arg bug in browser api.
+- GuiMultiElement gives interface just like GuiElement for source inquiry.
+
 0.8.15
 ------
 - Introduce __state__ special label in GNS. This element can be automatically checked as a part of Gui Loading Protocol. Avoids the need for writing a validate_readiness method for simple single element loading need.
-
-To Do
------
-    - Support for commons. Elements like spinners which have common defs.
+- Module space bug fix.
 
 0.8.14
 ------

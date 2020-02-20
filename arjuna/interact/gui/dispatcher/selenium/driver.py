@@ -54,8 +54,8 @@ class SeleniumDriverDispatcher:
     def go_forward_in_browser(self):
         DriverCommands.go_forward_in_browser(self.__driver)
 
-    def refersh_browser(self):
-        DriverCommands.refersh_browser(self.__driver)
+    def refresh_browser(self):
+        DriverCommands.refresh_browser(self.__driver)
 
     def get_source(self):
         return DriverCommands.get_source(self.__driver)

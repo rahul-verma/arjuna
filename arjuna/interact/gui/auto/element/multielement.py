@@ -59,7 +59,7 @@ class GuiMultiElement(Locatable,Dispatchable,Configurable):
             self.__elements = elements
         else:
             self.__elements = list()   
-        self.__source_parser = None
+        self.load_source_parser()
 
     def configure_partial_elements(self, elem_config):
         '''
@@ -80,8 +80,8 @@ class GuiMultiElement(Locatable,Dispatchable,Configurable):
     #         self.find()
 
     def load_source_parser(self):
-        self.__source_parser = MultiElementSource()
-        self.__source_parser.load(self.__elements)
+        self.__source_parser = MultiElementSource(self.elements)
+        # self.__source_parser.load(self.__elements)
 
     def __getitem__(self, index):
         # self.find_if_not_found()

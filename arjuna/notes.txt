@@ -1,3 +1,8 @@
+
+To Do
+-----
+    - Support for commons. Elements like spinners which have common defs.
+
 GNS - Random raw ideas. Need careful thinking before implementation.
 
     - xgns format.
@@ -15,12 +20,20 @@ GNS - Random raw ideas. Need careful thinking before implementation.
                 dropdown
                 radio_group
                 multielement
+        another idea is the .element .name call itself is a factory 
+            which assumes element by default but can take 'template' 
+            e.g. .element(As.DropDown, ). 
+            Now the arguments are passed as per the template. 
+            For GNS. the template is mentioned in the GNS file.
     - concept of commons.gns.
         - Can the App have a GNS which acts as the commons? 
         - These definitions are common to all pages but not repeated. 
         - Lookup done at a page level and then in commons.
         - any commonly used elements can be put here.
         E.g. [__root__ = abc] if in current format.
+
+Learning, Could help in Arjuna Features
+    - //button[contains(*//text(),'Yes')], a button whose child contains text - Yes
 
 To Do
     - assertion methods for elements

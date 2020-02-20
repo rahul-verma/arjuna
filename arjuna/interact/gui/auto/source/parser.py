@@ -124,12 +124,17 @@ class ElementXMLSourceParser:
 
 class MultiElementSource:
 
-    def __init__(self):
+    def __init__(self, instances):
         super().__init__()
-        self.__instances = None
-
-    def load(self, instances):
         self.__instances = instances
+        self.__content = SourceContent(all=self.get_full_content(), root=self.get_root_content(), inner=self.get_inner_content(), text=self.get_text_content())
+
+    @property
+    def content(self):
+        return self.__content
+
+    # def load(self, instances):
+    #     self.__instances = instances
 
     def get_full_content(self):
         return os.linesep.join([e.source.content.all for e in self.__instances])
