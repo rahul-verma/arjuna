@@ -1,11 +1,17 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.8.17
+------
+- Moving away from the strategy to write wrapper dec on pytest so that Arjuna can be used with pytest out of the box.
+- Where needed, Arjuna would provide only supplemental objects/utilities for pytest based tests.
+
 0.8.16
 ------
 - Introduced PageWidget, AppWidget, AppDialog and WidgetDialog classes.
-- Fixed name typ and arg bug in browser api.
+- Fixed name typo and arg bug in browser api.
 - GuiMultiElement gives interface just like GuiElement for source inquiry.
 - GuiMultiElement has many assertions available now: assert_size, assert_min_size, assert_max_size, assert_empty, assert_not_empty
+- Asserter methods have simpler interface. Goal now is to add higher level assertions in objects themselves.
 
 0.8.15
 ------

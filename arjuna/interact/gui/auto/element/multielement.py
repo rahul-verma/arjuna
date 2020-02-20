@@ -98,10 +98,10 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
         self.asserter.assert_equal(self.size, size, msg="{} should have exactly {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
 
     def assert_min_size(self, size, obj_name, msg=None):
-        self.asserter.assert_greater(self.size, size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
+        self.asserter.assert_min(self.size, size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
 
     def assert_max_size(self, size, obj_name, msg=None):
-        self.asserter.assert_lesser(self.size, size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
+        self.asserter.assert_max(self.size, size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
 
     def assert_empty(self, obj_name, msg=None):
         self.asserter.assert_equal(self.size, 0, msg="{} should be empty, but was found to have {} elements.".format(obj_name, self.size, self.asserter.format_msg(msg)))
