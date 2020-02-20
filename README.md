@@ -2,7 +2,7 @@
 
 Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net). Rahul has implemented smaller variants of features in Arjuna across frameworks and organizations, or given advise around it. However Arjuna being a generic library has the most complete implementation of his ideas, away from project specific contexts and constraints.
 
-Arjuna uses pytest (https://docs.pytest.org/en/latest/) as its recommended test engine. However, you can make use of Arjuna with any other test engine or custom frameworks.
+Arjuna uses **[pytest](https://docs.pytest.org/en/latest/)** as its recommended test engine. However, you can make use of Arjuna with any other test engine or custom frameworks.
 
 You'd need Python 3.5+ to make use of Arjuna.
 
