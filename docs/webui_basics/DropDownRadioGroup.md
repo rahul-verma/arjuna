@@ -3,7 +3,7 @@
 Below is the `@for_test` fixture code to get logged-in WordPress for a test using the reusable module that we created earlier:
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_04_gui_multielement.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_04_gui_multielement.py
 from arjuna import *
 from arjex_webui_basics.lib.wp import WordPress
 
@@ -24,10 +24,10 @@ DropDown object in Arjuna represents the Select-style control in the UI. Here, w
 
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_05_dropdown_radiogroup.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_05_dropdown_radiogroup.py
 
 @test
-def test_dropdown(my, request, wordpress):
+def check_dropdown(my, request, wordpress):
     wordpress.element(With.link("Settings")).click()
 
     role_select = wordpress.dropdown(With.id("default_role"))
@@ -61,9 +61,9 @@ RadioGroup object in Arjuna represents the Radio Buttons in the UI that belong t
 
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_05_dropdown_radiogroup.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_05_dropdown_radiogroup.py
 @test
-def test_radiogroup(my, request, wordpress):
+def check_radiogroup(my, request, wordpress):
     wordpress.element(With.link("Settings")).click()
 
     date_format = wordpress.radio_group(With.name("date_format"))

@@ -18,20 +18,18 @@ limitations under the License.
 '''
 
 from arjuna import *
+from arjex_app.lib.wp_app import WordPress
+
+@for_test
+def wordpress(request):
+    # Setup
+    wordpress = WordPress()
+    wordpress.login()
+    yield wordpress
+
+    # Teadown
+    wordpress.logout()
 
 @test
-def test_no_data(my, request):
-    pass
-
-
-@test(drive_with=record(1,2))
-def test_pos_data(my, request):
-    pass
-
-@test(drive_with=record(a=1,b="abc"))
-def test_named_data(my, request):
-    pass
-
-@test(drive_with=record(1,2, a=1,b="abc"))
-def test_pos_named_data(my, request):
-    pass
+def check_with_wp_app_interim(my, request, wordpress):
+    wordpress.tweak_role_value_in_settings("editor")

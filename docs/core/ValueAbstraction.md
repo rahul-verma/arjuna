@@ -11,12 +11,12 @@ The purpose of Value abstraction is to provide a single interface for all these 
 Understanding Value is critical for working with Arjuna as it is widely used across various other features like configuration, data driven testing etc.
 
 ```python
-# arjuna-samples/arjex_core_features/tests/modules/test_02_value.py
+# arjuna-samples/arjex_core_features/tests/modules/check_02_value.py
 
 from arjuna import *
 
 @test
-def test_value(my, request):
+def check_value(my, request):
     v = Value("1")
     my.asserter.assert_equal(1, v.as_int(), "Value")
     v = Value("1.1")

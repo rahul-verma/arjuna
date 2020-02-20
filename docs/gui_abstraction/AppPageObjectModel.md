@@ -203,7 +203,7 @@ class Settings(WPBasePage):
 #### Using the App-Page Model in Test Code
 
 ```python
-# arjuna-samples/arjex_app_page/tests/modules/test_01_app_page_model.py
+# arjuna-samples/arjex_app_page/tests/modules/check_01_app_page_model.py
 
 from arjuna import *
 from arjex_app_page.lib.gom.app import WordPress
@@ -220,7 +220,7 @@ def dashboard(request):
     dashboard.logout()
 
 @test
-def test_with_wp_app_page(my, request, dashboard):
+def check_with_wp_app_page(my, request, dashboard):
     dashboard.settings.tweak_role_value("editor")
 ```
 

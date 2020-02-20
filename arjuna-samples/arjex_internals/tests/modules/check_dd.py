@@ -20,11 +20,18 @@ limitations under the License.
 from arjuna import *
 
 @test
-def test_go_to_url(my, request):
-    google = WebApp(base_url="https://google.com")
-    google.launch()
-    my.asserter.assert_equal("Google1", google.title, "Page title")
-    google.quit()
+def check_no_data(my, request):
+    pass
 
 
+@test(drive_with=record(1,2))
+def check_pos_data(my, request):
+    pass
 
+@test(drive_with=record(a=1,b="abc"))
+def check_named_data(my, request):
+    pass
+
+@test(drive_with=record(1,2, a=1,b="abc"))
+def check_pos_named_data(my, request):
+    pass

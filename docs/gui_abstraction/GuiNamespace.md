@@ -101,7 +101,7 @@ def tweak_role_value_in_settings(wordpress, asserter, value):
 #### Using the Module in Test Code
 
 ```python
-# arjuna-samples/arjex_app/tests/modules/test_01_gns.py
+# arjuna-samples/arjex_app/tests/modules/check_01_gns.py
 
 from arjuna import *
 from arjex_app.lib.wp_gns import *
@@ -117,7 +117,7 @@ def wordpress(request):
     logout(wordpress)
 
 @test
-def test_with_wp_gns(my, request, wordpress):
+def check_with_wp_gns(my, request, wordpress):
     tweak_role_value_in_settings(wordpress, my.asserter, "editor")
 ```
 

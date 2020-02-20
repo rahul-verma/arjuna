@@ -16,12 +16,12 @@
 #### Retrieving value of Arjuna options in Code
 
 ```python
-# arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+# arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
  
 from arjuna import *
 
 @testBrowserName.CHROME
-def test_config_retrieval(my, request):
+def check_config_retrieval(my, request):
     config = Arjuna.get_ref_config()
 
     wait_value = config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME)
@@ -74,10 +74,10 @@ Add the above content to `project.conf` file. We want to tweak `ArjunaOption.BRO
 Please note that the contents of `arjunaOptions` follow [HOCON](https://github.com/lightbend/config/blob/master/HOCON.md) syntax. This means that you can write settings in properties syntax, as JSON or as human-readable JSON syntax supported by HOCON.
 
 ```python
-# arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+# arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
 
 @test
-def test_project_conf(my, request):
+def check_project_conf(my, request):
     google = WebApp(base_url="https://google.com")
     google.launch()
     my.asserter.assert_equal("Google", google.title, "Page title")
@@ -90,12 +90,12 @@ The code for this example is exactly same as the code that used Chrome for this 
 #### Change Configuration Settings Programmatically
   
  ```python
- # arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+ # arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
  
  from arjuna import *
  
  @test
-def test_update_config(my, request):
+def check_update_config(my, request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
@@ -118,12 +118,12 @@ def test_update_config(my, request):
 ### Simpler Builder Methods
  
  ```python
- # arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+ # arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
  
  from arjuna import *
  
  @test
-def test_simpler_builder_method(my, request):
+def check_simpler_builder_method(my, request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.firefox()
@@ -154,10 +154,10 @@ userOptions {
 In addition to this we will also define an option `target.title` programmatically.
 
 ```python
-# arjuna-samples/arjex_core_features/tests/modules/test_03_tweaking_config.py
+# arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
 
 @test
-def test_user_options(my, request):
+def check_user_options(my, request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.user_option("target.title", "Google")

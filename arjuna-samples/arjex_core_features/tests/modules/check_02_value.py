@@ -18,18 +18,13 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_app.lib.wp_app_model import WordPress
-
-@for_test
-def wordpress(request):
-    # Setup
-    wordpress = WordPress()
-    wordpress.login()
-    yield wordpress
-
-    # Teadown
-    wordpress.logout()
 
 @test
-def test_with_wp_app_model(my, request, wordpress):
-    wordpress.tweak_role_value_in_settings("editor")
+def check_value(my, request):
+    v = Value("1")
+    my.asserter.assert_equal(1, v.as_int(), "Value")
+    v = Value("1.1")
+    my.asserter.assert_equal(1, v.as_int(), "Value")
+
+
+

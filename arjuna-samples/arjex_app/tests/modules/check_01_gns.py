@@ -18,13 +18,18 @@ limitations under the License.
 '''
 
 from arjuna import *
+from arjex_app.lib.wp_gns import *
+
+@for_test
+def wordpress(request):
+    # Setup
+    wordpress = create_wordpress_app()
+    login(wordpress)
+    yield wordpress
+
+    # Teadown
+    logout(wordpress)
 
 @test
-def test_value(my, request):
-    v = Value("1")
-    my.asserter.assert_equal(1, v.as_int(), "Value")
-    v = Value("1.1")
-    my.asserter.assert_equal(1, v.as_int(), "Value")
-
-
-
+def check_with_wp_gns(my, request, wordpress):
+    tweak_role_value_in_settings(wordpress, my.asserter, "editor")

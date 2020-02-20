@@ -46,13 +46,13 @@ def logout(wordpress):
 #### Using the Reusable Functions in Test Code
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_03_wordpress_app.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_03_wordpress_app.py
 
 from arjuna import *
 from arjex_webui_basics.lib.wp import *
 
 @test
-def test_sep_functions(my, request):
+def check_sep_functions(my, request):
     wordpress = create_wordpress_app()
     login(wordpress)
     logout(wordpress)

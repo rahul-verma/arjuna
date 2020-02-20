@@ -38,7 +38,7 @@ Following user options have been added to `project.conf` for this fixture to wor
 Below is the `@for_test` fixture code:
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @for_test
 def wordpress(request):
@@ -63,10 +63,10 @@ def wordpress(request):
 #### Identification using ID, Name, Class Name, Tag Name, Link Text, Partial Link Text
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def test_basic_identifiers(my, request, wordpress):
+def check_basic_identifiers(my, request, wordpress):
 
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
@@ -102,10 +102,10 @@ def test_basic_identifiers(my, request, wordpress):
 We use **`With.xpath`** for identification using XPath. It is a direct wrapper on By.xpath in Selenium. Following are various samples.
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def test_xpath(my, request, wordpress):
+def check_xpath(my, request, wordpress):
 
     # Based on Text
     element = wordpress.element(With.xpath("//*[text() = 'Lost your password?']"))
@@ -136,10 +136,10 @@ def test_xpath(my, request, wordpress):
 We use **`With.selector`** for identification using CSS Selector. It is a direct wrapper on By.css_selector in Selenium. Following are various samples.
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def test_xpath(my, request, wordpress):
+def check_xpath(my, request, wordpress):
 
     # Based on any attribute e.g. for
     element = wordpress.element(With.selector("*[for = 'user_login']"))
@@ -173,10 +173,10 @@ Following is the example code:
 
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def test_xpath(my, request, wordpress):
+def check_xpath(my, request, wordpress):
 
     # Based on partial text
     element = wordpress.element(With.text("Lost"))
@@ -243,10 +243,10 @@ We will simulate WordPress login. Following are the steps:
 4. In the process, WordPress shows some confirmation and success messages.
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def test_wp_login(my, request, wordpress):
+def check_wp_login(my, request, wordpress):
 
     user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
     pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
@@ -285,10 +285,10 @@ def test_wp_login(my, request, wordpress):
 Code style could be a very personal thing. If you are looking for a conside coding option, you can write the previous code as follows with exact same functionality:
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/test_02_guielement.py
+# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def test_wp_login(my, request, wordpress):
+def check_wp_login(my, request, wordpress):
 
     user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
     pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()

@@ -319,7 +319,7 @@ class TopNav(WPBaseWidget):
 #### Using the App-Page-Widget Model in Test Code
 
 ```python
-# arjuna-samples/arjex_app_page_widget/tests/modules/test_01_app_page_widget_model.py
+# arjuna-samples/arjex_app_page_widget/tests/modules/check_01_app_page_widget_model.py
 
 from arjuna import *
 from arjex_app_page_widget.lib.gom.app import WordPress
@@ -337,7 +337,7 @@ def settings(request):
     settings.top_nav.logout()
 
 @test
-def test_with_wp_app_page_widget(my, request, settings):
+def check_with_wp_app_page_widget(my, request, settings):
     settings.tweak_role_value("editor")
 ```
 

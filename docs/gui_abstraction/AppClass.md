@@ -66,7 +66,7 @@ class WordPress:
 #### Using the App Class in Test Code
 
 ```python
-# arjuna-samples/arjex_app/tests/modules/test_02_app.py
+# arjuna-samples/arjex_app/tests/modules/check_02_app.py
 
 from arjuna import *
 from arjex_app.lib.wp_app import WordPress
@@ -82,7 +82,7 @@ def wordpress(request):
     wordpress.logout()
 
 @test
-def test_with_wp_app_interim(my, request, wordpress):
+def check_with_wp_app_interim(my, request, wordpress):
     wordpress.tweak_role_value_in_settings("editor")
 ```
 
