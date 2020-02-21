@@ -58,7 +58,7 @@ from arjuna.interact.gui.helpers import With, WithType
 from arjuna.interact.gui.helpers import GuiInteractionConfig, GuiDriverExtendedConfigBuilder
 from arjuna.interact.gui.helpers import Screen
 
-from arjuna.interact.gui.gom import WebApp, Page, PageWidget, AppWidget, AppDialog, WidgetDialog
+from arjuna.interact.gui.gom import WebApp, Page, Section, Widget, Dialog
 
 from arjuna.core.exceptions import *
 from arjuna.core.enums import *

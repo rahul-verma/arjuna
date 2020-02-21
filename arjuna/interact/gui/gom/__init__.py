@@ -28,13 +28,14 @@ class Page(AppContent):
         self.app.ui = self
         self._load(*args, **kwargs)
 
-class _Widget(AppContent):
+class Section(AppContent):
 
-    def __init__(self, automator, root_element_locators=None, *args, label=None, **kwargs):
-        super().__init__(automator=automator, label=label)   
+    def __init__(self, gui, root_element_locators=None, *args, label=None, **kwargs):
+        super().__init__(automator=gui.automator, label=label)   
         self.__root_element_locators = root_element_locators
         self.__root_element = None
         self._load(*args, **kwargs)
+        self.__parent = gui
 
     def load_root_element(self):
         gns_re_locators = None
@@ -77,36 +78,11 @@ class _Widget(AppContent):
         return self.automator.multi_element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
     @property
-    def page(self):
-        return self.__page
+    def parent(self):
+        return self.__parent
 
-class PageWidget(_Widget):
-
-    def __init__(self, page, root_element_locators=None, *args, label=None, **kwargs):
-        super().__init__(automator=page.automator, *args, label=label, **kwargs)   
-        self.__page = page
-
-    @property
-    def page(self):
-        return self.__page 
-
-
-class AppWidget(_Widget):
-
-    def __init__(self, app, root_element_locators=None, *args, label=None, **kwargs):
-        super().__init__(automator=app.automator, *args, label=label, **kwargs)
-
-AppDialog = AppWidget
-
-class WidgetDialog(_Widget):
-
-    def __init__(self, widget, root_element_locators=None, *args, label=None, **kwargs):
-        super().__init__(automator=widget.automator, *args, label=label, **kwargs)   
-        self.__widget = widget
-
-    @property
-    def widget(self):
-        return self.__widget 
+Widget = Section
+Dialog = Section
 
 class App(Gui, metaclass=abc.ABCMeta):
 

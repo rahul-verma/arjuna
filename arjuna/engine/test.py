@@ -189,40 +189,35 @@ class My:
     def raw_request(self):
         return self._request
 
-    @staticmethod
-    def repr(my):
-        repr = "{}".format(my.data)
-        if not repr:
-            return "-"
-        else:
-            return repr
-
 def tc(cls):
     setattr(cls, 'get_test_qual_name', get_test_qual_name)
     return cls
 
-def call_func(func, my, request, *args, **kwargs):
+def call_func(func, request, data=None, *args, **kwargs):
     from arjuna import Arjuna
-    my.set_req_obj(request) 
-    qual_name = my.info.qual_name_with_data
-    Arjuna.get_logger().info("Begin test function: {}".format(qual_name))        
-    func(my, request, *args, **kwargs)
+    request_wrapper = My()
+    request_wrapper.set_req_obj(request)
+    qual_name = request_wrapper.info.qual_name_with_data
+    Arjuna.get_logger().info("Begin test function: {}".format(qual_name))  
+    if data:      
+        func(request=request_wrapper, data=data, *args, **kwargs)
+    else:
+        func(request=request_wrapper, *args, **kwargs)
     Arjuna.get_logger().info("End test function: {}".format(qual_name))
 
 def simple_dec(func):
     @functools.wraps(func)
-    def wrapper(my, request, *args, **kwargs):
-        my.handler = request
-        call_func(func, my, request, *args, **kwargs)
+    def wrapper(request, *args, **kwargs):
+        call_func(func, request, *args, **kwargs)
     return wrapper
+
+def repr_record(record):
+    return str(record)
 
 def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
 
     # Check if @test is provided without arguments
     if f is not None:
-        my = My()
-        my.data = DummyDataRecord()
-        func = pytest.mark.parametrize('my', [my], ids=My.repr)(f) 
         return simple_dec(f)
 
     if resources:
@@ -250,17 +245,26 @@ def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
                 my = My()
                 my.data = record
                 my_objects.append(my)
-            func = pytest.mark.parametrize('my', my_objects, ids=My.repr)(func) 
-        else:
-            my = My()
-            my.data = DummyDataRecord()
-            func = pytest.mark.parametrize('my', [my], ids=My.repr)(func) 
+            func = pytest.mark.parametrize('data', records, ids=repr_record)(func) 
+        # else:
+        #     my = My()
+        #     my.data = DummyDataRecord()
+        #     func = pytest.mark.parametrize('my', [my], ids=My.repr)(func) 
 
         @functools.wraps(orig_func)
-        def wrapper(my, request, *args, **kwargs):
+        def wrapper_without_data(request, *args, **kwargs):
             my.handler = request
-            call_func(func, my, request, *args, **kwargs)
-        return wrapper
+            call_func(func, request, *args, **kwargs)
+
+        @functools.wraps(orig_func)
+        def wrapper_with_data(request, data, *args, **kwargs):
+            my.handler = request
+            call_func(func, request, data, *args, **kwargs)
+
+        if drive_with:
+            return wrapper_with_data
+        else:
+            return wrapper_without_data
     
     return format_test_func
 
