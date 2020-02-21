@@ -99,7 +99,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
 
     def assert_min_size(self, size, obj_name, msg=None):
         self.asserter.assert_min(self.size, size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
-
+    
     def assert_max_size(self, size, obj_name, msg=None):
         self.asserter.assert_max(self.size, size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
 

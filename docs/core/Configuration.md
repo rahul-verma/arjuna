@@ -21,7 +21,7 @@
 from arjuna import *
 
 @testBrowserName.CHROME
-def check_config_retrieval(my, request):
+def check_config_retrieval(request):
     config = Arjuna.get_ref_config()
 
     wait_value = config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME)
@@ -77,7 +77,7 @@ Please note that the contents of `arjunaOptions` follow [HOCON](https://github.c
 # arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
 
 @test
-def check_project_conf(my, request):
+def check_project_conf(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
     my.asserter.assert_equal("Google", google.title, "Page title")
@@ -95,7 +95,7 @@ The code for this example is exactly same as the code that used Chrome for this 
  from arjuna import *
  
  @test
-def check_update_config(my, request):
+def check_update_config(request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
@@ -123,7 +123,7 @@ def check_update_config(my, request):
  from arjuna import *
  
  @test
-def check_simpler_builder_method(my, request):
+def check_simpler_builder_method(request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.firefox()
@@ -157,7 +157,7 @@ In addition to this we will also define an option `target.title` programmaticall
 # arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
 
 @test
-def check_user_options(my, request):
+def check_user_options(request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.user_option("target.title", "Google")

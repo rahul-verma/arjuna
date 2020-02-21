@@ -170,12 +170,10 @@ class My:
         self._request = pytest_request
         self._info = Info(pytest_request)
         self._space = Space(pytest_request)
-        self._module = Module(pytest_request)
-        if pytest_request.scope in {"session", "module", "class"}:
-            try:
-                getattr(self._request.module, "space")
-            except:
-                self._request.module.space = SharedObjects()
+        if pytest_request.scope in {"session", "module"}:
+            if not self._module:
+                self._module = Module(pytest_request)
+                
 
     @property
     def info(self):
@@ -206,6 +204,8 @@ def call_func(func, request, data=None, *args, **kwargs):
     Arjuna.get_logger().info("End test function: {}".format(qual_name))
 
 def simple_dec(func):
+    func.__name__ = "check_" + func.__name__
+
     @functools.wraps(func)
     def wrapper(request, *args, **kwargs):
         call_func(func, request, *args, **kwargs)

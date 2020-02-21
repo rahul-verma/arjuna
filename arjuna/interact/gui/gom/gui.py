@@ -290,8 +290,8 @@ class AppContent(Gui):
     def execute_javascript(self, js, *args):
         return self.automator.execute_javascript(js, *args)
 
-    def take_screenshot(self, name=None):
-        return self.automator.take_screenshot(name)
+    def take_screenshot(self, prefix=None):
+        return self.automator.take_screenshot(prefix=prefix)
 
     def go_to_url(self, url):
         self.browser.go_to_url(url)

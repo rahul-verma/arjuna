@@ -159,7 +159,7 @@ def logout(dashboard):
     dashboard.app.quit()
 
 @test
-def check_widget_coded_re(my, request):
+def check_widget_coded_re(request):
     '''
         Left Nav has root element passed in __init__.
         Top Nav does not have a root element.
@@ -180,7 +180,7 @@ def check_widget_coded_re(my, request):
             raise(exc)
 
 @test
-def check_widget_gns_re(my, request):
+def check_widget_gns_re(request):
     '''
         Left Nav has root element defined in GNS.
         Top Nav does not have a root element.
@@ -202,7 +202,7 @@ def check_widget_gns_re(my, request):
 
 
 @test
-def check_widget_both_re(my, request):
+def check_widget_both_re(request):
     '''
         Left Nav has root element defined in GNS.
         Top Nav does not have a root element.

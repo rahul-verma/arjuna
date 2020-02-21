@@ -34,9 +34,9 @@ def simple_dec(func):
         request_wrapper = My()
         request_wrapper.set_req_obj(request)
         qual_name = request_wrapper.info.qual_name_with_data
-        Arjuna.get_logger().info("Begin fixture function: {}".format(qual_name))   
+        Arjuna.get_logger().info("(Setup) Begin fixture function: {}".format(qual_name))   
         yield from func(request_wrapper, *args, **kwargs)
-        Arjuna.get_logger().info("End fixture function: {}".format(qual_name))
+        Arjuna.get_logger().info("(Teardown) End fixture function: {}".format(qual_name))
     return call_func
 
 def for_module(func):

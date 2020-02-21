@@ -20,7 +20,7 @@ limitations under the License.
 from arjuna import *
 
 @test
-def test_webpp_nobase_url(my, request):
+def test_webpp_nobase_url(request):
     google = WebApp()
     google.launch(blank_slate=True)
     google.go_to_url("https://google.com")
@@ -28,14 +28,14 @@ def test_webpp_nobase_url(my, request):
     google.quit()
 
 @test
-def test_webpp_base_url_arg(my, request):
+def test_webpp_base_url_arg(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
     my.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 @test
-def test_webpp_base_url_in_custom_config(my, request):
+def test_webpp_base_url_in_custom_config(request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.arjuna_option(ArjunaOption.AUT_BASE_URL, "https://google.com")

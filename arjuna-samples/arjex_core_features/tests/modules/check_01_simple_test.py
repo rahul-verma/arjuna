@@ -20,7 +20,7 @@ limitations under the License.
 from arjuna import *
 
 @test
-def check_go_to_url(my, request):
+def check_go_to_url(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
     my.asserter.assert_equal("Google1", google.title, "Page title")

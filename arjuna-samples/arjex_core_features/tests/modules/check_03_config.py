@@ -24,7 +24,7 @@ Code is kept redundant across methods for the purpose of easier learning.
 '''
 
 @test
-def check_config_retrieval(my, request):
+def check_config_retrieval(request):
     config = Arjuna.get_ref_config()
 
     wait_value = config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME)
@@ -47,7 +47,7 @@ def check_config_retrieval(my, request):
 
 
 @test
-def check_project_conf(my, request):
+def check_project_conf(request):
     '''
         For this test:
         You must add browser.name = firefox to arjunaOptions in project.conf to see the impact.
@@ -60,7 +60,7 @@ def check_project_conf(my, request):
 
 
 @test
-def check_update_config(my, request):
+def check_update_config(request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
@@ -72,7 +72,7 @@ def check_update_config(my, request):
     google.quit()
 
 @test
-def check_simpler_builder_method(my, request):
+def check_simpler_builder_method(request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.firefox()
@@ -85,7 +85,7 @@ def check_simpler_builder_method(my, request):
 
 
 @test
-def check_user_options(my, request):
+def check_user_options(request):
     '''
         For this test:
         You must add target.url = "https://google.com" to userOptions in project.conf to see the impact.

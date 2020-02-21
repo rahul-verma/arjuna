@@ -12,7 +12,7 @@ Web automation facilities in Arjuna use Selenium as the underlying browser autom
 # arjuna-samples/arjex_webui_basics/tests/modules/check_01_webapp.py
 
 @test
-def check_webpp_nobase_url(my, request):
+def check_webpp_nobase_url(request):
     google = WebApp()
     google.launch(blank_slate=True)
     google.go_to_url("https://google.com")
@@ -36,7 +36,7 @@ We can associated the `WebApp` with a base URL by providing `base_url` arg while
 # arjuna-samples/arjex_webui_basics/tests/modules/check_01_webapp.py
 
 @test
-def check_webpp_nobase_url(my, request):
+def check_webpp_nobase_url(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
     my.asserter.assert_equal("Google", google.title, "Page title")
@@ -54,7 +54,7 @@ During initilization, `WebApp` automatically looks for the `ArjunaOption.AUT_BAS
 # arjuna-samples/arjex_webui_basics/tests/modules/check_01_webapp.py
 
  @test
-def check_webpp_base_url_in_custom_config(my, request):
+def check_webpp_base_url_in_custom_config(request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
     cc.arjuna_option(ArjunaOption.AUT_BASE_URL, "https://google.com")

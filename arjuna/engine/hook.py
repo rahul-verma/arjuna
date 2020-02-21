@@ -19,9 +19,11 @@ limitations under the License.
 
 class PytestHooks:
 
-
     @classmethod
     def get_request_attr(cls, item, obj_name):
+        # This works. Now you have add a lookup.
+        # Introduce concept of screen_shooter: any object with take_screenshot(prefix) signture of method.
+        print(type(item.module), item.module.app)
         from .test import Space
         request =  cls.get_request_obj(item)
         res = Space(request)
@@ -40,21 +42,40 @@ class PytestHooks:
         return cls.get_plugin(item, 'html')
 
     @classmethod
-    def add_screenshot_for_failed_result(cls, item, outcome, *, screenshoter=None):
-        html_plugin = cls.get_html_report_plugin(item)
-        pytest_html = html_plugin
-        report = outcome.get_result()
-        extra = getattr(report, 'extra', [])
-        if report.when == 'call':
+    def get_screen_shooter(cls, item):
+        try:
+            return getattr(item.function, "screen_shooter")
+        except:
+            return getattr(item.module, "screen_shooter")
+
+    @classmethod
+    def add_screenshot_for_result(cls, item, result, *, ignore_passed=True, ignore_fixtures=False):
+        try:
+            screen_shooter = cls.get_screen_shooter(item)
+            html_plugin = cls.get_html_report_plugin(item)
+            pytest_html = html_plugin
+            report = result.get_result()
+            extra = getattr(report, 'extra', [])
+
+            if ignore_fixtures:
+                if report.when == 'call':
+                    return
 
             xfail = hasattr(report, 'wasxfail')
-            if (report.skipped and xfail) or (report.failed and not xfail):
+
+            if ignore_passed and report.passed:
+                return
+            # if (report.skipped and xfail) and (report.failed and not xfail):
                 # extra.append(pytest_html.extras.url(app.base_url))
-                fpath, fb64 = screenshoter.automator.take_screenshot()
-                img_elem = '''<img src="data:image/png;base64,{}"/>'''.format(fb64)
-                extra.append(
-                    pytest_html.extras.html(
-                        '''<div class="image"><a href="{}" target="_blank">{}</a>'''.format(fpath, img_elem)
-                    )
+
+
+            fpath, fb64 = screen_shooter.take_screenshot(prefix=report.nodeid)
+            img_elem = '''<img src="data:image/png;base64,{}"/>'''.format(fb64)
+            extra.append(
+                pytest_html.extras.html(
+                    '''<div class="image"><a href="{}" target="_blank">{}</a>'''.format(fpath, img_elem)
                 )
-                report.extra = extra
+            )
+            report.extra = extra
+        except Exception as e:
+            print(e)

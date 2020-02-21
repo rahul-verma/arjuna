@@ -169,16 +169,16 @@ class GuiAutomator(ElementContainer,Dispatchable):
         # if switch_view_context:
         #     self.view_handler.switch_to_view_context(switch_view_context)
 
-    def take_screenshot(self, name=None):
+    def take_screenshot(self, prefix=None):
         image_b64 = self.dispatcher.take_screenshot_as_base64()
         image = base64.b64decode(image_b64)
 
         ts = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")[:-3]
-        if name:
-            name = name.replace("..", "") + "-"
+        if prefix:
+            prefix = prefix.replace(".py", "").replace("..", "").replace("::",".").replace(":", ".").replace("/", ".").replace("\\", ".") + "-"
         else:
-            name = ""
-        file_name = "{}{}.png".format(name, ts)
+            prefix = ""
+        file_name = "{}{}.png".format(prefix, ts)
         fpath = os.path.join(self.screenshots_dir, file_name)
         f = open(fpath, "wb")
         f.write(image)
