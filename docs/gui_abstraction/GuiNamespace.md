@@ -94,7 +94,7 @@ def tweak_role_value_in_settings(wordpress, asserter, value):
 ##### Points to Note
 1. The module is structurally very similar to earlier code. Same function signatures are used.
 2. `WebApp` is created and launched exactly the same way as earlier. One key change is that we make **`externalize`** call for the `WebApp`. 
-3. **`wordpress.externalize(gns_file_name="WordPress.gns")`** invokes the externalization logic and locates the GNS file automatically in the test project's namespace directory: `arjuna-samples/arjex_app/guiauto/namespace`.
+3. **`wordpress.externalize(gns_file_name="WordPress.yaml")`** invokes the externalization logic and locates the GNS file automatically in the test project's namespace directory: `arjuna-samples/arjex_app/guiauto/namespace`.
 4. Other key change is that now the `element` factory call is supplied the `label` from the GNS file. So, `wordpress.element(With.id("user_login")` becomes `wordpress.element("login")`.
 5. Labels are treated as **case-insensitive** by Arjuna. 
 6. We have implemented an additional method `tweat_role_value_in_settings` to change the user role on settings page to a chosen value. It takes 3 arguments - the web app, the asserter and the value for the role to be selected.
