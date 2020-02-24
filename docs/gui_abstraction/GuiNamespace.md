@@ -8,43 +8,45 @@ Here, we will explore a simple example. Let's have a look:
 
 #### The GNS File
 
-Arjuna has a customized externalization format for getting started easily with externalization of identifiers. Such a file looks very similar to an `INI` or `CONFIG` files, but has advanced features which we will discuss in some future sections.
+Arjuna uses YAML as the format for externalization of identifiers. Fow now, we will discuss basic usage of the format.
 
-Location for the following file is `arjuna-samples/arjex_app/guiauto/namespace/WordPress.gns`
+Location for the following file is `arjuna-samples/arjex_app/guiauto/namespace/WordPress.yaml`
 
-```INI
-[login]
-id = user_login
+```YAML
+labels:
 
-[pwd]
-id = user_pass
+  login:
+    id: user_login
 
-[submit]
-id = wp-submit
+  pwd:
+    id: user_pass
 
-[view_site]
-classes = welcome-view-site
+  submit:
+    id: wp-submit
 
-[logout_confirm]
-link = log out
+  view_site:
+    classes: welcome-view-site
 
-[logout_msg]
-text = logged out
+  logout_confirm:
+    link: log out
 
-[settings]
-link = Settings
+  logout_msg:
+    text: logged out
 
-[role]
-id = default_role
+  settings:
+    link: Settings
+
+  role:
+    id: default_role
 ```
 
 ##### Points to note
-1. This file has a `GNS` extension.
-2. The file contains various sections marked with a heading `[name]`.
-3. The content of the heading is a valid Python name and is the `label` for a visual element in GUI.
-4. The section content has the identifier without the `With` reference. For example, `WithType.ID` is mentioned just `id`.
-5. The value of an identifier is mentioned as a normal assigment without the the double quotes.
-6. All of the `WithType` identifiers (or corresponding `With`'s factory methods) can be be accomodated in the `GNS` file.
+1. This file has a `YAML` extension.
+2. All labels are placed under `labels` heading.
+3. Each label represents element identification information which can be later referenced by this label.
+3. The label should be a valid Python name.
+4. The section content has the identifiers as keys without the `With` reference. For example, `WithType.ID` is mentioned just `id`.
+5. All of the `WithType` identifiers (or corresponding `With`'s factory methods) can be be accomodated in the GNS file.
 
 #### The Reusable Module Modified to Accomodate GNS
 
