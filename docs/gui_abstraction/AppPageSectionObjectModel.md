@@ -1,4 +1,4 @@
-### Arjuna's App-Page-Widget Model for Gui Abstraction
+### Arjuna's App-Page-Section Model for Gui Abstraction
 
 Consider the following before going into the technicalities of the model:
 1. Typcally, the web applications follow a set of a templates for different pages. Such templates have some repetitive sections across multiple pages. Examples: Left navigation bars, Top Menus, Sidebars etc.
@@ -7,22 +7,22 @@ Consider the following before going into the technicalities of the model:
 
 Unless we address the above in the way we implement the Gui abstraction, the code will not clearly represent the Gui. Also, even if externalized, this could result in repeated identifiers across different GNS files.
 
-One step forward from Arjuna's App-Page Model is the App-Page-Widget Model:
+One step forward from Arjuna's App-Page Model is the App-Page-Section Model:
 1. We implement the web application as a child of `WebApp`class.
 2. We implemented each web page of interest as a child of `Page` class.
 3. Pages inherit from different template base pages to represent common structures.
-4. Reusables page portions are implemented as `Widgets` and a correct composition relationship is established between a `Page` and its `Widgets` using OOP.
-5. In short, Apps have pages and a page can have widgets (or sections or parts or portions for want of a better word.).
+4. Reusables page portions are implemented as `Sections` and a correct composition relationship is established between a `Page` and its `Sections` using OOP.
+5. In short, Apps have pages and a page can have sections.
 
-There is another change which is optional but suggested which we are going to do - rather than using strings for element labels, we are going to implement an `Enum` in each `Page/Widget` class. This goes a long way in eliminating typing errors in the code.
+There is another change which is optional but suggested which we are going to do - rather than using strings for element labels, we are going to implement an `Enum` in each `Page/Section` class. This goes a long way in eliminating typing errors in the code.
 
 We will create 2 types of base pages:
-1. WPBasePage - A base page **without** top and left navigation widgets.
-2. WPFullPage - A base page **with** top and left navigation widgets.
+1. WPBasePage - A base page **without** top and left navigation sections.
+2. WPFullPage - A base page **with** top and left navigation sections.
 
-We will create 2 types of widgets:
-1. LeftNav - A widget representing left navigation sidebar in WordPress.
-2. TopNav - A widget representing top navigation bar.
+We will create 2 types of sections:
+1. LeftNav - A section representing left navigation sidebar in WordPress.
+2. TopNav - A section representing top navigation bar.
 
 We are going to create the retain 3 pages, but implement inheritance as follows to represent the strucutre:
 1. Home (a child of WPBasePage)
@@ -35,7 +35,7 @@ You will see that this approach is the most involved than the previous approache
 
 #### The GNS Files
 
-In `App-Page Model` we had put identifiers in page-wise GNS files. The challenge was where to put the identifiers corresponding to page areas common across pages. Now, we have the solution. We put them in corresponding widget GNS files. Specifically, compare the flawed GNS file for Dashaboard with this new approach.
+In `App-Page Model` we had put identifiers in page-wise GNS files. The challenge was where to put the identifiers corresponding to page areas common across pages. Now, we have the solution. We put them in corresponding section GNS files. Specifically, compare the flawed GNS file for Dashaboard with this new approach.
 
 Page: **Home.yaml**
 
@@ -70,7 +70,7 @@ labels:
     id: default_role
 ```
 
-Widget: **LeftNav.yaml**
+Section: **LeftNav.yaml**
 
 ```YAML
 labels:
@@ -79,7 +79,7 @@ labels:
     link: Settings
 ```
 
-Widget: **TopNav.yaml**
+Section: **TopNav.yaml**
 
 ```YAML
 labels:
@@ -91,7 +91,7 @@ labels:
     text: logged out
 ```
 
-#### The Model Classes for App, Pages and Widgets
+#### The Model Classes for App, Pages and Sections
 
 **WebApp**
 
@@ -124,8 +124,8 @@ class WordPress(WebApp):
 import abc
 from arjuna import Page
 
-from .widgets.topnav import TopNav
-from .widgets.leftnav import LeftNav
+from .sections.topnav import TopNav
+from .sections.leftnav import LeftNav
 
 
 class WPBasePage(Page, metaclass=abc.ABCMeta):
@@ -154,8 +154,8 @@ class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
 ```
 
 #### Points to Note
-1. `WPBase` is the base class without widgets.
-2. `WPFullPage` has `top_nav` and `left_nav` widgets available as properties.
+1. `WPBase` is the base class without sections.
+2. `WPFullPage` has `top_nav` and `left_nav` sections available as properties.
 
 
  **Home Page**
@@ -242,18 +242,18 @@ class Settings(WPFullPage):
 ```
 
 #### Points to Note
-1. Inherits from `WPFullPage` and hence has the `top_nav` and `left_nav` widget properties.
+1. Inherits from `WPFullPage` and hence has the `top_nav` and `left_nav` section properties.
 3. Implements `labels` as discussed for Home page.
 
-**Base Widget**
+**Base Section**
 
  ```python
- # arjuna-samples/arjex_app_page_widget/lib/gom/pages/widgets/base.py
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/sections/base.py
  
 import abc
 from arjuna import Widget
 
-class WPBaseWidget(Widget, metaclass=abc.ABCMeta):
+class WPBaseSection(Widget, metaclass=abc.ABCMeta):
 
     def __init__(self, page):
         super().__init__(page)
@@ -265,13 +265,13 @@ class WPBaseWidget(Widget, metaclass=abc.ABCMeta):
 #### Points to Note
 1. Inherits from Arjuna's `Widget` class and is implemented as abstract class.
 2. Needs to be passed an instance of the parent `Page`.
-3. We have placed the widget related GNS files in `widgets` subdirectory of `namespace` directory. So, it passes the name of the sub-directory in the call to `externalize`.
+3. We have placed the widget related GNS files in `sections` subdirectory of `namespace` directory. So, it passes the name of the sub-directory in the call to `externalize`.
 
 
-**LeftNav Widget**
+**LeftNav Section**
 
  ```python
- # arjuna-samples/arjex_app_page_widget/lib/gom/pages/widgets/leftnav.py
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/sections/leftnav.py
  
 from enum import Enum, auto
 from .base import WPBaseWidget
@@ -296,10 +296,10 @@ class LeftNav(WPBaseWidget):
 2. Implements `labels` as discussed for Home page.
 3. The `settings` proerty is moved from `Dashboard` page to here for accurate representation of Gui.
 
-**TopNav Widget**
+**TopNav Section**
 
  ```python
- # arjuna-samples/arjex_app_page_widget/lib/gom/pages/widgets/topnav.py
+ # arjuna-samples/arjex_app_page_widget/lib/gom/pages/sections/topnav.py
  
 from enum import Enum, auto
 from .base import WPBaseWidget
@@ -352,13 +352,13 @@ def check_with_wp_app_page_widget(request, settings):
 ```
 
 ##### Points to Note
-1. With this modularity, we are no more dependent on Dashboard page for logging out. As per the template structure, just like the Gui of WordPress, this method is available in `TopNav` widget which in turn is available to a page which is `WPFullPage` (inherits from it).
+1. With this modularity, we are no more dependent on Dashboard page for logging out. As per the template structure, just like the Gui of WordPress, this method is available in `TopNav` section which in turn is available to a page which is `WPFullPage` (inherits from it).
 2. The test's actual need is the `Settings` page. We have changed the test fixture name to `settings`.
 3. In the setup part, we create the WordPress instance as earlier, it now refers to the new class that we created.
 3. `wordpress.launch` launches the web application (opens browser and goes to the `base_url`). It returns the `Home` object.
 4. We login with default credentials using `home.login_with_default_creds()` call. It returns `Dashboard` object.
-5. We go to settings by using `left_nav` widget of `dashboard`: `dashboard.left_nav.settings`.
-5. In the teardown part of fixture, we logout using `top_nav` widget of `settings`: `settings.top_nav.logout`.
+5. We go to settings by using `left_nav` section of `dashboard`: `dashboard.left_nav.settings`.
+5. In the teardown part of fixture, we logout using `top_nav` section of `settings`: `settings.top_nav.logout`.
 6. In the test, the argument is changed from `dashboard` to `settings`.
 7. `settings.tweak_role_value("editor")` is now  direct call to the settings object.
 8. From test and Gui abstraction perspective, this is the most accurate representation of the Gui as well as the most intuitive version of the test automation code.

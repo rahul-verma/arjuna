@@ -17,13 +17,23 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import abc
-from arjuna import Widget
+from enum import Enum, auto
+from arjuna import *
+from .base import WPBaseSection
 
-class WPBaseWidget(Widget, metaclass=abc.ABCMeta):
+class LeftNav(WPBaseSection):
 
-    def __init__(self, page, root_element_locator=None):
-        super().__init__(page, root_element_locators=root_element_locator)
+    class labels(Enum):
+        settings = auto()
 
-    def prepare(self):
-        self.externalize(gns_dir="widgets")
+    def __init__(self, page):
+        super().__init__(page, With.id("adminmenu"))
+
+    def validate_readiness(self):
+        self.element(self.labels.settings)
+
+    @property
+    def settings(self):
+        from arjex_app_page_widget.lib.gom.pages.settings import Settings
+        self.element(self.labels.settings).click()
+        return Settings(self)

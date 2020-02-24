@@ -18,22 +18,20 @@ limitations under the License.
 '''
 
 from enum import Enum, auto
-from arjuna import *
-from .base import WPBaseWidget
+from .base import WPBaseSection
 
-class LeftNav(WPBaseWidget):
+class TopNav(WPBaseSection):
 
     class labels(Enum):
-        settings = auto()
+        logout_confirm = auto()
+        logout_msg = auto()
 
-    def __init__(self, page):
-        super().__init__(page, With.id("adminmenu"))
+    def logout(self):
+        url = self.config.get_user_option_value("wp.logout.url").as_str()
+        self.go_to_url(url)
 
-    def validate_readiness(self):
-        self.element(self.labels.settings)
+        self.element(self.labels.logout_confirm).click()
+        self.element(self.labels.logout_msg).wait_until_visible()
 
-    @property
-    def settings(self):
-        from arjex_app_page_widget.lib.gom.pages.settings import Settings
-        self.element(self.labels.settings).click()
-        return Settings(self)
+        from arjex_app_page_widget.lib.gom.pages.home import Home
+        return Home(self)
