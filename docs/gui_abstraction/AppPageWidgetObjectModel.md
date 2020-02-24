@@ -37,48 +37,58 @@ You will see that this approach is the most involved than the previous approache
 
 In `App-Page Model` we had put identifiers in page-wise GNS files. The challenge was where to put the identifiers corresponding to page areas common across pages. Now, we have the solution. We put them in corresponding widget GNS files. Specifically, compare the flawed GNS file for Dashaboard with this new approach.
 
-Page: **Home.gns**
+Page: **Home.yaml**
 
-```INI
-[login]
-id = user_login
+```YAML
+labels:
 
-[pwd]
-id = user_pass
+  login:
+    id: user_login
 
-[submit]
-id = wp-submit
+  pwd:
+    id: user_pass
+
+  submit:
+    id: wp-submit
 ```
 
-Page: **Dashbaord.gns**
+Page: **Dashbaord.yaml**
 
-```INI
-[view_site]
-classes = welcome-view-site
+```YAML
+labels:
+
+  view_site:
+    classes: welcome-view-site
 ```
 
-Page: **Settings.gns**
+Page: **Settings.yaml**
 
-```INI
-[role]
-id = default_role
+```YAML
+labels:
+
+  role:
+    id: default_role
 ```
 
-Widget: **LeftNav.gns**
+Widget: **LeftNav.yaml**
 
-```INI
-[settings]
-link = Settings
+```YAML
+labels:
+
+  settings:
+    link: Settings
 ```
 
-Widget: **TopNav.gns**
+Widget: **TopNav.yaml**
 
-```INI
-[logout_confirm]
-link = log out
+```YAML
+labels:
 
-[logout_msg]
-text = logged out
+  logout_confirm:
+    link: log out
+
+  logout_msg:
+    text: logged out
 ```
 
 #### The Model Classes for App, Pages and Widgets

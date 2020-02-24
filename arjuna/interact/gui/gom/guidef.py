@@ -111,9 +111,9 @@ class GuiDef:
             return None
 
     @property
-    def state_element_with_locators(self):
+    def anchor_element_with_locators(self):
         try:
-            return self.__gns_locators_as_with_locators("__state__")
+            return self.__gns_locators_as_with_locators("__anchor__")
         except GuiLabelNotPresentError:
             # Defining __load__ is optional for GNS files.
             return None

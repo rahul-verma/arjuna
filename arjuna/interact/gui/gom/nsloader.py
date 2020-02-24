@@ -214,9 +214,9 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                 self.__ns["__root__"][self.__context].extend(self.__ns[self.__load_targets["root"]][self.__context])
 
             if "anchor" in self.__load_targets:
-                self.__ns["__state__"] = dict()
-                self.__ns["__state__"][self.__context] = list()
-                self.__ns["__state__"][self.__context].extend(self.__ns[self.__load_targets["anchor"]][self.__context])
+                self.__ns["__anchor__"] = dict()
+                self.__ns["__anchor__"][self.__context] = list()
+                self.__ns["__anchor__"][self.__context].extend(self.__ns[self.__load_targets["anchor"]][self.__context])
 
         for ename, context_data in self.__ns.items():
             for context, locators in context_data.items():

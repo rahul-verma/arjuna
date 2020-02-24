@@ -22,39 +22,45 @@ You will see that this approach is more involved than the previous approaches di
 
 So far we represented the complete application as a single `WebApp` and hence all identifiers were put in a single `GNS` file. Now, we put them in page-wise GNS files:
 
-**Home.gns**
-```INI
-[login]
-id = user_login
+**Home.yaml**
+```YAML
+labels:
 
-[pwd]
-id = user_pass
+  login:
+    id: user_login
 
-[submit]
-id = wp-submit
+  pwd:
+    id: user_pass
+
+  submit:
+    id: wp-submit
 ```
 
-**Dashbaord.gns**
+**Dashbaord.yaml**
 
-```INI
-[view_site]
-classes = welcome-view-site
+```YAML
+labels:
 
-[settings]
-link = Settings
+  view_site:
+    classes: welcome-view-site
 
-[logout_confirm]
-link = log out
+  logout_confirm:
+    link: log out
 
-[logout_msg]
-text = logged out
+  logout_msg:
+    text: logged out
+
+  settings:
+    link: Settings
 ```
 
 **Settings.gns**
 
-```INI
-[role]
-id = default_role
+```YAML
+labels:
+
+  role:
+    id: default_role
 ```
 
 Please note that the above is not an accurate representation of screens. The logout related confirmation link and success messages are common across multiple pages (but not Home page). We'll discuss this problem in the next section with the next model in Arjuna.
@@ -118,7 +124,7 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
 1. A Base Page class will help us in placing resuable functionality across all classes inheriting from it. 
 2. It inherits from Arjuna's `Page` class.
 3. As it is not supposed to instantiated directly, we make it an abstract class by using Python's `abc` module.
-4. `prepare` method is called by Arjuna as a part of loading the page. We place the `externalize` call here. It will automatically associate the object of a Page class with name `Xyz` with `Xyz.gns` file in the `namespace` directory.
+4. `prepare` method is called by Arjuna as a part of loading the page. We place the `externalize` call here. It will automatically associate the object of a Page class with name `Xyz` with `Xyz.yaml` file in the `namespace` directory.
 5. The `logout` method has the usual logic used earlier. One kye difference is that now it is a page transition method. It returns the `Home` page. Notice how, a `Page` can pass itself as an argument while instantiating another `Page` class.
 6. As the page transitions might refer to each other and can cause import conflicts, it is suggested that you add the import for the same, for example, `from .home import Home` only where it is needed within a method.
 
