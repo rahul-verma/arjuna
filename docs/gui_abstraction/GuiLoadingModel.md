@@ -2,7 +2,7 @@
 
 Arjuna has three types of `Gui`'s, namely `App`, `Page` and `Widget` and any children thereof.
 
-All `Gui`s follow the `Gui Loading Mechanism` in Arjuna. For an `App` loading logic is triggered when it is launched (`launch` method called). For `Page` and `Widget` it takes place as a part of initialization (`super().__init__()` call.)
+All `Gui`s follow the `Gui Loading Mechanism` in Arjuna. For an `App` loading logic is triggered when it is launched (`launch` method called). For `Page` and `Section` it takes place as a part of initialization (`super().__init__()` call.)
 
 We can hook into the mechanism by implementing one or more of the three hooks made available by Arjuna to all `Gui`s. We don't need to do anything special to the `Gui` classes to make it happen. It is available by default. On the other end, if we don't want to use it, we don't need to do anything at all because all the hook methods are optional.
 
