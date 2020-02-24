@@ -4,8 +4,8 @@ Following is the list of critical additions and updates for a given released ver
 ------
 - In test or test scope fixture, item can be added to module scope.
 - GNS default format changed to YAML. Added PyYAML to setup.py as dependency.
-- Introduction of formatters in GNS for cleaner identifiers which share same pattern.
-- Root and anchor element checking refer to existing element labels. Avoids duplicating same locator information.
+- root and anchor element checking refer to existing element labels. Avoids duplicating same locator information.
+- Introduction of "withx" (With Extended) in GNS for cleaner identifiers which share same pattern.
 - 
 
 0.8.17
