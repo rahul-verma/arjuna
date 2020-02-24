@@ -1,0 +1,11 @@
+load:
+
+  anchor: appearance
+
+labels:
+
+  settings:
+    link: Settings
+
+  appearance:
+    link: Appearance

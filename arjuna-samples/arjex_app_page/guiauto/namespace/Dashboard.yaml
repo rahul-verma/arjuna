@@ -1,0 +1,13 @@
+labels:
+
+  view_site:
+    classes: welcome-view-site
+
+  logout_confirm:
+    link: log out
+
+  logout_msg:
+    text: logged out
+
+  settings:
+    link: Settings

@@ -1,0 +1,14 @@
+load:
+
+  root: adminmenu
+
+labels:
+
+  adminmenu:
+    id: adminmenu
+
+  settings:
+    link: Settings
+
+  appearance:
+    link: Appearance

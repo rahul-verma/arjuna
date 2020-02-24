@@ -1,0 +1,14 @@
+load:
+
+  root: wrong
+
+labels:
+
+  wrong:
+    id: wrong
+
+  settings:
+    link: Settings
+
+  appearance:
+    link: Appearance
