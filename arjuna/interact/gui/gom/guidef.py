@@ -135,7 +135,7 @@ class GuiFactory:
             if not os.path.isdir(considered_path):
                 raise Exception("Provided root definition path is not a directory: {}".format(app_def_dir))
 
-        app = GuiDef(automator, os.path.join(considered_path, "HomePage.gns"), label=name)
+        app = GuiDef(automator, os.path.join(considered_path, "HomePage.yaml"), label=name)
         children_dir = os.path.join(considered_path, "children")
         if os.path.isdir(children_dir):
             lfiles = os.listdir(children_dir)

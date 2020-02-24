@@ -1,8 +1,16 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.1
+------
+- In test or test scope fixture, item can be added to module scope.
+- GNS default format changed to YAML. Added PyYAML to setup.py as dependency.
+- Introduction of formatters in GNS for cleaner identifiers which share same pattern.
+- Root and anchor element checking refer to existing element labels. Avoids duplicating same locator information.
+- 
+
 0.8.17
 ------
-- Widget and Dialog are synonyms for Section.
+- Widget class renamed to Section. Widget and Dialog are synonyms for Section.
 - Concept of my is removed. pytest does not allow multi-scope fixtures. request fixture is used the same way in fixtures and tests now.
 - For data driven test, one needs add 'data' as an arg to the test.
 - Common fixtures can be placed in lib.fixtures.
@@ -19,7 +27,6 @@ Following is the list of critical additions and updates for a given released ver
 
 0.8.16
 ------
-- Introduced PageWidget, AppWidget, AppDialog and WidgetDialog classes.
 - Fixed name typo and arg bug in browser api.
 - GuiMultiElement gives interface just like GuiElement for source inquiry.
 - GuiMultiElement has many assertions available now: assert_size, assert_min_size, assert_max_size, assert_empty, assert_not_empty
@@ -32,7 +39,7 @@ Following is the list of critical additions and updates for a given released ver
 
 0.8.14
 ------
-Minor - Doc links in main README.md made abolsute because for PyPi.
+Minor - Doc links in main README.md made absolute because for PyPi.
 
 0.8.13
 ------
@@ -54,9 +61,9 @@ Minor - Doc links in main README.md made abolsute because for PyPi.
     - If root element is NOT specified, automator is used as the finder.
 - Test Object Space (earlier called Shared Spaces)
     - my.modules_shared_space is changed to my.module.space for better code structure.
-    - my.space in test refers to the current test's scope.
+    - request.space in test refers to the current test's scope.
     - In fixtures, request.space refers to the scope as per the fixture scope.
-    - With my.space, and request.space, storing is done for scope, retrieval is from current test object up the parent chain.
+    - With request.space, and request.space, storing is done for scope, retrieval is from current test object up the parent chain.
 
 0.8.12
 ------

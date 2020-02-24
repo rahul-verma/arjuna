@@ -1,0 +1,20 @@
+load:
+  root: submit
+  anchor: pwd
+
+formatters:
+  ex:
+    with_type: id 
+    with_value: user_{}
+
+labels:
+    form:
+      tag: form
+    login:
+      ex:
+        - login
+    pwd:
+      ex:
+        - pass
+    submit:
+        id: wp-submit

@@ -31,5 +31,5 @@ def wordpress(request):
     logout(wordpress)
 
 @test
-def check_with_wp_gns(my, request, wordpress):
+def check_with_wp_gns(request, wordpress):
     tweak_role_value_in_settings(wordpress, my.asserter, "editor")

@@ -42,7 +42,7 @@ def wordpress(request):
     wordpress.quit()
 
 @test
-def test_basic_identifiers(my, request, wordpress):
+def test_basic_identifiers(request, wordpress):
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
     element = wordpress.element(With.id("user_login"))
@@ -59,7 +59,7 @@ def test_basic_identifiers(my, request, wordpress):
 
 
 @test
-def test_xpath(my, request, wordpress):
+def test_xpath(request, wordpress):
     # Based on Text
     element = wordpress.element(With.xpath("//*[text() = 'Lost your password?']"))
 
@@ -83,7 +83,7 @@ def test_xpath(my, request, wordpress):
 
 
 @test
-def test_selector(my, request, wordpress):
+def test_selector(request, wordpress):
 
     # Based on any attribute e.g. for
     element = wordpress.element(With.selector("*[for = 'user_login']"))
@@ -99,7 +99,7 @@ def test_selector(my, request, wordpress):
 
 
 @test
-def test_arjuna_exts(my, request, wordpress):
+def test_arjuna_exts(request, wordpress):
 
     # Based on partial text
     element = wordpress.element(With.text("Lost"))
@@ -134,7 +134,7 @@ def test_arjuna_exts(my, request, wordpress):
 
 
 @test
-def test_wp_login(my, request, wordpress):
+def test_wp_login(request, wordpress):
     '''
         For this test:
         Wordpress related user options have been added to the project.conf
@@ -176,7 +176,7 @@ def test_wp_login(my, request, wordpress):
     wordpress.element(With.text("logged out"))
 
 @test
-def test_wp_login_concise(my, request, wordpress):
+def test_wp_login_concise(request, wordpress):
     
     user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
     pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()

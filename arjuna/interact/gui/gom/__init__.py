@@ -30,7 +30,7 @@ class Page(AppContent):
 
 class Section(AppContent):
 
-    def __init__(self, gui, root_element_locators=None, *args, label=None, **kwargs):
+    def __init__(self, gui, *args, root_element_locators=None, label=None, **kwargs):
         super().__init__(automator=gui.automator, label=label)   
         self.__root_element_locators = root_element_locators
         self.__root_element = None
@@ -161,7 +161,7 @@ class WebApp(App):
         return getattr(self.ui, name)
 
     def externalize(self, *, gns_dir=None, gns_file_name=None):
-        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.gns".format(self.label)        
+        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)        
         from arjuna.core.enums import ArjunaOption   
         self.gns_dir = gns_dir and gns_dir or self.gns_dir
         if not self.gns_dir:

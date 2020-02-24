@@ -25,7 +25,7 @@ class WordPress:
         url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
         self.__app = WebApp(base_url=url)
         self.app.launch()
-        self.app.externalize(gns_file_name="WordPress.gns")
+        self.app.externalize(gns_file_name="WordPress.yaml")
 
     @property
     def app(self):

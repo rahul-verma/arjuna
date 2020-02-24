@@ -66,7 +66,7 @@ def wordpress(request):
 # arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def check_basic_identifiers(my, request, wordpress):
+def check_basic_identifiers(request, wordpress):
 
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
@@ -105,7 +105,7 @@ We use **`With.xpath`** for identification using XPath. It is a direct wrapper o
 # arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def check_xpath(my, request, wordpress):
+def check_xpath(request, wordpress):
 
     # Based on Text
     element = wordpress.element(With.xpath("//*[text() = 'Lost your password?']"))
@@ -139,7 +139,7 @@ We use **`With.selector`** for identification using CSS Selector. It is a direct
 # arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def check_xpath(my, request, wordpress):
+def check_xpath(request, wordpress):
 
     # Based on any attribute e.g. for
     element = wordpress.element(With.selector("*[for = 'user_login']"))
@@ -176,7 +176,7 @@ Following is the example code:
 # arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def check_xpath(my, request, wordpress):
+def check_xpath(request, wordpress):
 
     # Based on partial text
     element = wordpress.element(With.text("Lost"))
@@ -246,7 +246,7 @@ We will simulate WordPress login. Following are the steps:
 # arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def check_wp_login(my, request, wordpress):
+def check_wp_login(request, wordpress):
 
     user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
     pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
@@ -288,7 +288,7 @@ Code style could be a very personal thing. If you are looking for a conside codi
 # arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
 
 @test
-def check_wp_login(my, request, wordpress):
+def check_wp_login(request, wordpress):
 
     user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
     pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()

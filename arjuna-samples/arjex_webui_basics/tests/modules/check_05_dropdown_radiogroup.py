@@ -31,7 +31,7 @@ def wordpress(request):
     logout(wordpress)
 
 @test
-def test_dropdown(my, request, wordpress):
+def test_dropdown(request, wordpress):
     wordpress.element(With.link("Settings")).click()
 
     role_select = wordpress.dropdown(With.id("default_role"))
@@ -50,7 +50,7 @@ def test_dropdown(my, request, wordpress):
 
 
 @test
-def test_radiogroup(my, request, wordpress):
+def test_radiogroup(request, wordpress):
     wordpress.element(With.link("Settings")).click()
 
     date_format = wordpress.radio_group(With.name("date_format"))

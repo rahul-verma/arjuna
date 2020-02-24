@@ -25,13 +25,13 @@ def check_no_data(request):
 
 
 @test(drive_with=record(1,2))
-def check_pos_data(request):
+def check_pos_data(request, data):
     pass
 
 @test(drive_with=record(a=1,b="abc"))
-def check_named_data(request):
+def check_named_data(request, data):
     pass
 
 @test(drive_with=record(1,2, a=1,b="abc"))
-def check_pos_named_data(request):
+def check_pos_named_data(request, data):
     pass

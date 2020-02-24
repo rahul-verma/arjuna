@@ -88,7 +88,7 @@ def wordpress(request):
     wordpress.logout()
 
 @test
-def check_with_wp_app(my, request, wordpress):
+def check_with_wp_app(request, wordpress):
     wordpress.tweak_role_value_in_settings("editor")
 ```
 

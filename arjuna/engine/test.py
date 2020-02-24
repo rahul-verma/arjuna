@@ -170,7 +170,7 @@ class My:
         self._request = pytest_request
         self._info = Info(pytest_request)
         self._space = Space(pytest_request)
-        if pytest_request.scope in {"session", "module"}:
+        if pytest_request.scope in {"function"}:
             if not self._module:
                 self._module = Module(pytest_request)
                 

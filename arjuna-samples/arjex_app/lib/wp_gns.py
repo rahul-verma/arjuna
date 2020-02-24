@@ -23,7 +23,7 @@ def create_wordpress_app():
     url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
     wordpress = WebApp(base_url=url)
     wordpress.launch()
-    wordpress.externalize(gns_file_name="WordPress.gns")
+    wordpress.externalize(gns_file_name="WordPress.yaml")
     return wordpress
 
 def login(wordpress):

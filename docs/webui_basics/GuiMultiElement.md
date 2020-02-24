@@ -31,7 +31,7 @@ def wordpress(request):
 # arjuna-samples/arjex_webui_basics/tests/modules/check_04_gui_multielement.py
 
 @test
-def check_multielement(my, request, wordpress):
+def check_multielement(request, wordpress):
     wordpress.element(With.link("Posts")).click()
     wordpress.element(With.link("Categories")).click()
 

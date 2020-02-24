@@ -28,26 +28,26 @@ def func_fix(request):
     yield
 
 @test
-def check_spaces_1(my, request, mod1_fix, mod2_fix, func_fix):
-    print(my.space.fix_mod1_unique)
-    print(my.space.fix_mod2_unique)
+def check_spaces_1(request, mod1_fix, mod2_fix, func_fix):
+    print(request.space.fix_mod1_unique)
+    print(request.space.fix_mod2_unique)
 
-    print(my.space.fix_mod1_update_inmod2)
+    print(request.space.fix_mod1_update_inmod2)
 
-    print(my.space.fix_mod1_update_func_fix)
-    print(my.space.fix_mod2_update_func_fix)
+    print(request.space.fix_mod1_update_func_fix)
+    print(request.space.fix_mod2_update_func_fix)
 
-    my.module.space.mod_space_add_from_test = "should get in check 2"
+    request.module.space.mod_space_add_from_test = "should get in check 2"
 
 @test
-def check_spaces_2(my, request, func_fix):
-    print(my.space.fix_mod1_unique)
-    print(my.space.fix_mod2_unique)
+def check_spaces_2(request, func_fix):
+    print(request.space.fix_mod1_unique)
+    print(request.space.fix_mod2_unique)
 
-    print(my.space.fix_mod1_update_inmod2)
+    print(request.space.fix_mod1_update_inmod2)
 
-    print(my.space.fix_mod1_update_func_fix)
-    print(my.space.fix_mod2_update_func_fix)
+    print(request.space.fix_mod1_update_func_fix)
+    print(request.space.fix_mod2_update_func_fix)
 
 
-    print(my.space.mod_space_add_from_test)
+    print(request.space.mod_space_add_from_test)

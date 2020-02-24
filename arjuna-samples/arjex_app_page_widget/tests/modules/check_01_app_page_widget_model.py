@@ -33,5 +33,5 @@ def settings(request):
     settings.top_nav.logout()
 
 @test
-def check_with_wp_app_page_widget(my, request, settings):
+def check_with_wp_app_page_widget(request, settings):
     settings.tweak_role_value("editor")

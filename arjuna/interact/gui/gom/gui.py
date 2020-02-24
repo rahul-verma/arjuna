@@ -165,7 +165,7 @@ class AppContent(Gui):
         return self.__guidef
 
     def externalize(self, gns_dir=None, gns_file_name=None):
-        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.gns".format(self.label)        
+        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)        
         from arjuna.core.enums import ArjunaOption
         gns_dir = gns_dir and gns_dir or self.app.gns_dir
         if not gns_dir:
@@ -176,7 +176,8 @@ class AppContent(Gui):
         try:
             self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
         except Exception as e:
-            raise GuiNamespaceLoadingError(self, str(e))
+            import traceback
+            raise GuiNamespaceLoadingError(self, str(e) + traceback.format_exc())
 
         from arjuna import Arjuna
         Arjuna.get_logger().debug("Gui Namespace loading completed for {}.".format(self.label))

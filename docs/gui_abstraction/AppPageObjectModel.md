@@ -220,7 +220,7 @@ def dashboard(request):
     dashboard.logout()
 
 @test
-def check_with_wp_app_page(my, request, dashboard):
+def check_with_wp_app_page(request, dashboard):
     dashboard.settings.tweak_role_value("editor")
 ```
 

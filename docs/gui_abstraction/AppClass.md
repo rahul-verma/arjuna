@@ -23,7 +23,7 @@ class WordPress:
         url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
         self.__app = WebApp(base_url=url)
         self.app.launch()
-        self.app.externalize(gns_file_name="WordPress.gns")
+        self.app.externalize(gns_file_name="WordPress.yaml")
 
     @property
     def app(self):
@@ -82,7 +82,7 @@ def wordpress(request):
     wordpress.logout()
 
 @test
-def check_with_wp_app_interim(my, request, wordpress):
+def check_with_wp_app_interim(request, wordpress):
     wordpress.tweak_role_value_in_settings("editor")
 ```
 

@@ -27,7 +27,7 @@ DropDown object in Arjuna represents the Select-style control in the UI. Here, w
 # arjuna-samples/arjex_webui_basics/tests/modules/check_05_dropdown_radiogroup.py
 
 @test
-def check_dropdown(my, request, wordpress):
+def check_dropdown(request, wordpress):
     wordpress.element(With.link("Settings")).click()
 
     role_select = wordpress.dropdown(With.id("default_role"))
@@ -63,7 +63,7 @@ RadioGroup object in Arjuna represents the Radio Buttons in the UI that belong t
 ```python
 # arjuna-samples/arjex_webui_basics/tests/modules/check_05_dropdown_radiogroup.py
 @test
-def check_radiogroup(my, request, wordpress):
+def check_radiogroup(request, wordpress):
     wordpress.element(With.link("Settings")).click()
 
     date_format = wordpress.radio_group(With.name("date_format"))

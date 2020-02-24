@@ -31,7 +31,7 @@ def wordpress(request):
     logout(wordpress)
 
 @test
-def test_multielement(my, request, wordpress):
+def test_multielement(request, wordpress):
     wordpress.element(With.link("Posts")).click()
     wordpress.element(With.link("Categories")).click()
 

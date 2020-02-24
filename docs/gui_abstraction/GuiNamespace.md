@@ -59,7 +59,7 @@ def create_wordpress_app():
     url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
     wordpress = WebApp(base_url=url)
     wordpress.launch()
-    wordpress.externalize(gns_file_name="WordPress.gns")
+    wordpress.externalize(gns_file_name="WordPress.yaml")
     return wordpress
 
 def login(wordpress):
@@ -117,7 +117,7 @@ def wordpress(request):
     logout(wordpress)
 
 @test
-def check_with_wp_gns(my, request, wordpress):
+def check_with_wp_gns(request, wordpress):
     tweak_role_value_in_settings(wordpress, my.asserter, "editor")
 ```
 

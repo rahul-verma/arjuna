@@ -28,10 +28,11 @@ from arjuna.core.exceptions import GuiLabelNotPresentError
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData, Locator, ImplWith
 
 class FileFormat(Enum):
-    GNS = auto()
-    MGNS = auto()
+    # GNS = auto()
+    # MGNS = auto()
     XLS = auto()
     XLSX = auto()
+    YAML = auto()
 
 class GuiNamespaceLoaderFactory:
 
@@ -54,12 +55,13 @@ class GuiNamespaceLoaderFactory:
                 raise Exception("Namespace file path is a directory and not a file: {}".format(considered_path))
             elif not os.path.isfile(full_file_path):
                 raise Exception("Namespace file path is invalid: {}".format(considered_path))
-
-            if file_format == FileFormat.GNS:
-                if multi_context_enabled:
-                    return MGNSFileLoader(full_file_path)
-                else:
-                    return GNSFileLoader(full_file_path, context)
+            # if file_format == FileFormat.GNS:
+            #     if multi_context_enabled:
+            #         return MGNSFileLoader(full_file_path)
+            #     else:
+            #         return GNSFileLoader(full_file_path, context)
+            if file_format == FileFormat.YAML:
+                return YamlGnsLoader(full_file_path, context)
             else:
                 raise Exception("Unsupported format for namespace: {}".format(file_extension))
 
@@ -136,6 +138,7 @@ class AbstractGNFileLoader(BaseGuiNamespaceLoader):
         self.__header_found = False
         self.__last_header = None
         self.__last_auto_contexts = None # list of auto contexts
+        self.__formatters = dict()
 
         #Map<String, Map<GuiAutomationContext,List<Locator>>>
         self.__ns = {}
@@ -226,6 +229,7 @@ class AbstractGNFileLoader(BaseGuiNamespaceLoader):
         match = self.NAME_PATTERN.match(input)
         if match:
             current_header = match.group(1)
+
             if self.__is_not_first_header():
                 self.__validate_duplicate_entry(self.last_header, current_header)
                 self.__validate_empty_last_section(self.last_header)
@@ -331,3 +335,90 @@ class MGNSFileLoader(AbstractGNFileLoader):
             return
         else:
             raise Exception("Unexpected namespace file entry. Namspace content can either be plaforms or identification definition: " + line)
+
+
+# Temp hook. We'll try YAML format with this. Once it works, then we can change the rest.
+class YamlGnsLoader(BaseGuiNamespaceLoader):
+
+    def __init__(self, ns_file_path, context):
+        super().__init__(os.path.basename(ns_file_path))
+        self.__context = context
+        self.__ns_file = None
+        self.__ns_path = None
+
+        #Map<String, Map<GuiAutomationContext,List<Locator>>>
+        self.__ns = {}
+
+        if not os.path.isabs(ns_file_path):
+            super()._raise_relativepath_exception(ns_file_path)
+        elif not os.path.exists(ns_file_path):
+            super()._raise_filenotfound_exception(ns_file_path)
+        elif not os.path.isfile(ns_file_path):
+            super()._raise_notafile_exception(ns_file_path)
+
+        self.__ns_path = ns_file_path
+        self.__ns_file = open(self.__ns_path, "r")
+        self.__contexts = [context]
+
+        self.__formatters = None
+
+        # self.__process()
+
+    def load(self):
+
+        from arjuna.configure.impl.validator import ConfigValidator
+        import yaml
+
+        ydict = yaml.load(self.__ns_file, Loader=yaml.SafeLoader)
+
+        if not ydict: return
+
+        sections = list(ydict.keys())
+        lsections = [k.lower() for k in sections]
+
+        if "labels" not in lsections:
+            print("No labels configured. Skipping...")
+            return
+
+        if "formatters" in lsections:
+            self.__formatters = {k.lower():v for k,v in ydict[sections[lsections.index("formatters")]].items()}
+        else: 
+            self.__formatters = dict()
+
+        for label, label_map in ydict[sections[lsections.index("labels")]].items():
+            ConfigValidator.arjuna_name(label)
+            self.__ns[label.lower()] = dict()
+            self.__ns[label.lower()][self.__context] = []
+            for loc, loc_obj in label_map.items():
+                if loc.lower() in self.__formatters:
+                    fmt = self.__formatters[loc.lower()]
+                    with_value = fmt["with_value"].strip().format(*loc_obj)
+                    iloc = ImplWith(wtype=fmt["with_type"].strip().upper(), wvalue=with_value, named_args=dict(), has_content_locator=False)
+                    self.__ns[label.lower()][self.__context].append(iloc)
+                else:
+                    if loc in {"attr"}:
+                        with_value = "[{}][{}]".format(loc_obj["name"], loc_obj["value"])
+                    else:
+                        with_value = loc_obj
+                    iloc = ImplWith(wtype=loc.upper(), wvalue=with_value, named_args=dict(), has_content_locator=False)
+                    self.__ns[label.lower()][self.__context].append(iloc)
+            if not self.__ns[label.lower()][self.__context]:
+                raise Exception("No locators defined for label: {}".format(label))
+
+        if "load" in lsections:
+            self.__load_targets = {k.lower():v for k,v in ydict[sections[lsections.index("load")]].items()}        
+
+            if "root" in self.__load_targets:
+                self.__ns["__root__"] = dict()
+                self.__ns["__root__"][self.__context] = list()
+                self.__ns["__root__"][self.__context].extend(self.__ns[self.__load_targets["root"]][self.__context])
+
+            if "anchor" in self.__load_targets:
+                self.__ns["__state__"] = dict()
+                self.__ns["__state__"][self.__context] = list()
+                self.__ns["__state__"][self.__context].extend(self.__ns[self.__load_targets["anchor"]][self.__context])
+
+        for ename, context_data in self.__ns.items():
+            for context, locators in context_data.items():
+                self.add_element_meta_data(ename, context, locators)
+
