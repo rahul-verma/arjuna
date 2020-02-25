@@ -8,6 +8,8 @@ Following is the list of critical additions and updates for a given released ver
 - Introduction of "withx" (With Extended) in GNS for cleaner identifiers which share same pattern.
 - Added mimesis as a dependency in setup.py. Arjuna will use its facilties for faking/generating commonly used data.
 - Introduction of basic Data Generator wrapper class on top of Mimesis.
+- DataRecord values are not Value objects any more.
+- 
 
 0.8.17
 ------

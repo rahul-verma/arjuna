@@ -235,6 +235,10 @@ class With:
     def wvalue(self):
         return self.__with_value
 
+    @wvalue.setter
+    def wvalue(self, value):
+        self.__with_value = value
+
     @property
     def named_args(self):
         return self.__named_args

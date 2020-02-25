@@ -1,4 +1,5 @@
 import uuid
+import random
 from mimesis import Person
 from mimesis import Address
 from mimesis import locales
@@ -56,4 +57,9 @@ class Random:
     @classmethod
     def sentence(cls, locale=Locales.EN):
         return Text(locale).sentence()
+
+    @classmethod
+    def fixed_length_number(cls, size):
+        arr = [str(random.randint(0,9)) for i in range(size)]
+        return "".join(arr)
         

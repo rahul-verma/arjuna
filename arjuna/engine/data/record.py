@@ -27,8 +27,8 @@ class DataRecord:
         self.__indexed = None
         self.__named = None
         if process:
-            self.__indexed = tuple([Value(v) for v in vargs])
-            self.__named = types.MappingProxyType({i.lower(): Value(j) for i, j in kwargs.items()})
+            self.__indexed = tuple(vargs)
+            self.__named = types.MappingProxyType({i.lower(): j for i, j in kwargs.items()})
         else:
             self.__indexed = tuple()
             self.__named = types.MappingProxyType({})  
@@ -62,13 +62,13 @@ class DataRecord:
             parts.append("<empty>")
         else:
             for i,v in enumerate(self.indexed_values()):
-                parts.append("[{}] {}".format(i, v.as_string()))
+                parts.append("[{}] {}".format(i, v))
         parts.append("Named")
         if not self.named_values():
             parts.append("<empty>")
         else:
             for i,v in self.named_values().items():
-                parts.append("[{}] {}".format(i, v.as_string()))
+                parts.append("[{}] {}".format(i, v))
         return "\n".join(parts)
 
     def is_empty(self):
@@ -97,7 +97,7 @@ class DataRecord:
         else:
             indexed = ""
         if self.named_values:
-            named =  " Named:{{{}}}".format(', '.join(['{0}={1}'.format(k, v.object()) for k,v in self.named_values.items()]))
+            named =  " Named:{{{}}}".format(', '.join(['{0}={1}'.format(k, v) for k,v in self.named_values.items()]))
         else:
             named = ""
         return "Data->{}{}".format(indexed, named)
