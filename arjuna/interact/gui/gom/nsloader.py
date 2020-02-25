@@ -167,7 +167,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         lsections = [k.lower() for k in sections]
 
         if "labels" not in lsections:
-            print("No labels configured. Skipping...")
+            # print("No labels configured. Skipping...")
             return
 
         if "withx" in lsections:

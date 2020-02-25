@@ -23,7 +23,7 @@ class PytestHooks:
     def get_request_attr(cls, item, obj_name):
         # This works. Now you have add a lookup.
         # Introduce concept of screen_shooter: any object with take_screenshot(prefix) signture of method.
-        print(type(item.module), item.module.app)
+        # print(type(item.module), item.module.app)
         from .test import Space
         request =  cls.get_request_obj(item)
         res = Space(request)
