@@ -184,23 +184,13 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                     if type(loc_obj) is str:
                         loc_obj = [loc_obj]
                     fmt = self.__withx[loc.lower()]
-                    fmt_wtype =  list(fmt.keys())[0].strip()
-                    fmt_value = fmt[fmt_wtype]
-                    if fmt_wtype.lower() == "attr":
-                        aname = fmt_value["name"]
-                        aval = fmt_value["value"]
-                        fval = aval.strip().format(*loc_obj)
-                        with_value = "[{}][{}]".format(aname, fval)
-                    else:
-                        with_value = fmt_value.strip().format(*loc_obj)
+                    fmt_wtype =  fmt["with_type"].strip().upper()
+                    fmt_value = fmt["with_value"].strip()
+                    with_value = fmt_value.format(*loc_obj)
                     iloc = ImplWith(wtype=fmt_wtype.upper(), wvalue=with_value, named_args=dict(), has_content_locator=False)
                     self.__ns[label.lower()][self.__context].append(iloc)
                 else:
-                    if loc in {"attr"}:
-                        with_value = "[{}][{}]".format(loc_obj["name"], loc_obj["value"])
-                    else:
-                        with_value = loc_obj
-                    iloc = ImplWith(wtype=loc.upper(), wvalue=with_value, named_args=dict(), has_content_locator=False)
+                    iloc = ImplWith(wtype=loc.upper(), wvalue=loc_obj, named_args=dict(), has_content_locator=False)
                     self.__ns[label.lower()][self.__context].append(iloc)
             if not self.__ns[label.lower()][self.__context]:
                 raise Exception("No locators defined for label: {}".format(label))

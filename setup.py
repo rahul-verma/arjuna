@@ -43,7 +43,7 @@ setup(
                     "res/*.ini",
                 ]
     },
-    install_requires = ["flask", "flask-RESTful", "waitress", "requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon", "lxml", "wxPython", "protobuf", "pytest", "pytest-dependency", "PyYAML"],
+    install_requires = ["flask", "flask-RESTful", "waitress", "requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon", "lxml", "wxPython", "protobuf", "pytest", "pytest-dependency", "PyYAML", "mimesis"],
     keywords = "arjuna setu unitee selenium testing automation page-object",
     license = "Apache License, Version 2.0",
     classifiers=[

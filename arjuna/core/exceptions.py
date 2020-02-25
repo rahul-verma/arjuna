@@ -118,7 +118,7 @@ class StringKeyValueContainerLookupException(Exception):
     def __init__(key):
         super().__init__("Invalid Key [{}] used for string key types container lookup.".format(key))
 
-class WaitableError(BaseException):
+class WaitableError(Exception):
 
     def __init__(self, message):
         super().__init__(message)
@@ -180,13 +180,13 @@ class GuiNotLoadedError(WaitableError):
         message = msg and  " Error message: {}.".format(msg) or ""
         super().__init__("GUI [{}] did not load as expected.{}".format(gui.qual_name, message))
 
-class GuiLabelNotPresentError(BaseException):
+class GuiLabelNotPresentError(Exception):
 
     def __init__(self, gns_name, label, context=None):
         context_msg = context and  " for context {}".format(context) or ""
         super().__init__("Gui namespace >{}< does not contain element with name: {}{}.".format(gns_name, label, context_msg))
 
-class GuiNamespaceLoadingError(BaseException):
+class GuiNamespaceLoadingError(Exception):
 
     def __init__(self, gui, msg):
         message = msg and  " Error message: {}".format(msg) or ""

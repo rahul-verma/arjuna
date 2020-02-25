@@ -95,13 +95,11 @@ class Gui(AsserterMixIn):
         try:
             self.load_root_element()
         except Exception as e:
-            import traceback
             raise GuiNotLoadedError(self, "Root Element not Loaded. " + str(e) + "\n" + traceback.format_exc())
 
         try:
             self.load_anchor_element()
-        except BaseException as e:
-            import traceback
+        except Exception as e:
             raise GuiNotLoadedError(self, "Anchor Element not Loaded." + str(e) + "\n" + traceback.format_exc())
 
         try:

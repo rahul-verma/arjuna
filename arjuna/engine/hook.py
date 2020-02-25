@@ -69,7 +69,9 @@ class PytestHooks:
                 # extra.append(pytest_html.extras.url(app.base_url))
 
 
-            fpath, fb64 = screen_shooter.take_screenshot(prefix=report.nodeid)
+            import re
+            rname = re.sub(r"\[.*?\]", "", report.nodeid)
+            fpath, fb64 = screen_shooter.take_screenshot(prefix=rname)
             img_elem = '''<img src="data:image/png;base64,{}"/>'''.format(fb64)
             extra.append(
                 pytest_html.extras.html(

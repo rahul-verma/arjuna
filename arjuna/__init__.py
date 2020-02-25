@@ -70,5 +70,6 @@ from arjuna.engine.hook import PytestHooks
 from arjuna.engine.test import *
 from arjuna.engine.data.markup import *
 from arjuna.engine.data.record import *
+from arjuna.engine.data.generator import Random, Entity, Locales
 from arjuna.engine.relation import *
 from arjuna.engine.fixture import *
