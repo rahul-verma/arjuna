@@ -19,6 +19,7 @@ limitations under the License.
 
 import re
 import os
+import copy
 from lxml import etree, html
 from io import StringIO
 from collections import namedtuple
@@ -36,7 +37,30 @@ def empty_or_none(in_str):
     else:
         return in_str is None
 
-SourceContent = namedtuple('SourceContet', "all root inner text")
+    
+class SourceContent:
+
+    def __init__(self, all, root, inner, text):
+        self.__all = all
+        self.__root = root
+        self.__inner = inner
+        self.__text = text
+
+    @property
+    def all(self):
+        return self.__all
+
+    @property
+    def root(self):
+        return self.__root
+
+    @property
+    def inner(self):
+        return self.__inner
+
+    @property
+    def text(self):
+        return self.__text
 
 class ElementXMLSourceParser:
 
@@ -46,15 +70,23 @@ class ElementXMLSourceParser:
         self.__root_element = root_element
         self.__fpaths = []
         self.__content = None
+        self.__node = None
 
     @property
     def content(self):
         return self.__content
 
+    @property
+    def node(self):
+        return self.__node
+
     def load(self):
         raw_source = self.__raw_source
         parser = etree.HTMLParser(remove_comments=True)
         tree = etree.parse(StringIO(raw_source), parser)
+        # Done separately from above to retain all original content
+        self.__node = etree.parse(StringIO(raw_source), parser)
+        
         if self.__root_element == "body":
             body = tree.getroot().find('body')
             elem_node = list(body)[0]
