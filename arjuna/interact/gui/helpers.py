@@ -351,19 +351,19 @@ class With:
 
     @classmethod
     def attr(cls, attr, value):
-        return _attr(cls.__fmt_attr(attr_value))
+        return cls._attr(cls.__fmt_attr(attr, value))
 
     @classmethod
-    def fattr(cls, attr, content):
-        return _fattr(cls.__fmt_attr(attr_value))
+    def fattr(cls, attr, value):
+        return cls._fattr(cls.__fmt_attr(attr, value))
 
     @classmethod
-    def battr(cls, attr, content):
-        return _battr(cls.__fmt_attr(attr_value))
+    def battr(cls, attr, value):
+        return cls._battr(cls.__fmt_attr(attr, value))
 
     @classmethod
-    def eattr(cls, attr, content):
-        return _eattr(cls.__fmt_attr(attr_value))
+    def eattr(cls, attr, value):
+        return cls._eattr(cls.__fmt_attr(attr, value))
 
     @classmethod
     def value(cls, value):

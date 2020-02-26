@@ -259,17 +259,17 @@ class RunSelected(__RunCommand):
             else:
                 pickers_dict[tname] = list()
 
-        def add_py_ext(name):
+        def remove_py_ext(name):
             if not name.lower().endswith(".py"):
-                return name + ".py"
-            else:
                 return name
+            else:
+                return name.replace(".py","")
 
         for picker in pickers:
             process_picker(picker[0], picker[1])
 
-        pickers_dict['im'] = [add_py_ext(m) for m in pickers_dict['im']]
-        pickers_dict['em'] = [add_py_ext(m) for m in pickers_dict['em']]
+        pickers_dict['im'] = [remove_py_ext(m) for m in pickers_dict['im']]
+        pickers_dict['em'] = [remove_py_ext(m) for m in pickers_dict['em']]
 
         super().execute(arg_dict)
 
