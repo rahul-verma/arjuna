@@ -16,7 +16,7 @@ def check_webpp_nobase_url(request):
     google = WebApp()
     google.launch(blank_slate=True)
     google.go_to_url("https://google.com")
-    request.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 ```
 
@@ -39,7 +39,7 @@ We can associated the `WebApp` with a base URL by providing `base_url` arg while
 def check_webpp_nobase_url(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 ```
 
@@ -62,7 +62,7 @@ def check_webpp_base_url_in_custom_config(request):
 
     google = WebApp(config=context.get_config())
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 ```
  

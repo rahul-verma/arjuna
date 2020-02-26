@@ -45,7 +45,7 @@ def check_project_conf(request):
     '''
     google = WebApp(base_url="https://google.com")
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 
 
@@ -58,7 +58,7 @@ def check_update_config(request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 
 @test
@@ -70,7 +70,7 @@ def check_simpler_builder_method(request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 
 
@@ -92,5 +92,5 @@ def check_user_options(request):
 
     google = WebApp(base_url=url, config=config)
     google.launch()
-    request.asserter.assert_equal(title, google.title, "Page Title")
+    request.asserter.assert_equal(title, google.title, "Page title does not match.")
     google.quit()
