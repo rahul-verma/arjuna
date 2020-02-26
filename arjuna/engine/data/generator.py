@@ -60,6 +60,8 @@ class Random:
 
     @classmethod
     def fixed_length_number(cls, size):
-        arr = [str(random.randint(0,9)) for i in range(size)]
-        return "".join(arr)
+        arr0 = [str(random.randint(1,9))]
+        arr = [str(random.randint(0,9)) for i in range(size-1)]
+        arr0.extend(arr)
+        return "".join(arr0)
         
