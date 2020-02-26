@@ -17,19 +17,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna.core.value import AbstractValueMap, StringKeyValueMap
 from arjuna import ArjunaOption
 
 from .config import Config
 from arjuna.core.adv.types import CIStringDict
 
-class ArjunaOptionMap(AbstractValueMap):
+# class ArjunaOptionMap(AbstractValueMap):
 
-    def __init__(self, object_map=None, headers=None, objects=None):
-        super().__init__(object_map, headers, objects)
+#     def __init__(self, object_map=None, headers=None, objects=None):
+#         super().__init__(object_map, headers, objects)
 
-    def _format_key_as_str(self, key):
-        return str(key)
+#     def _format_key_as_str(self, key):
+#         return str(key)
 
 class ConfigContainer:
 

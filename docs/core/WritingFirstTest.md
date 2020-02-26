@@ -21,7 +21,7 @@ from arjuna import *
 def check_go_to_url(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    my.asserter.assert_equal("Google1", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 ```
 
