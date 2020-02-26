@@ -37,6 +37,43 @@ def empty_or_none(in_str):
     else:
         return in_str is None
 
+class SourceNode:
+
+    def __init__(self, node):
+        self.__node = node
+
+    @property
+    def xml_node(self):
+        return self.__node
+
+    @property
+    def text(self):
+        return self.xml_node.text
+
+    def __str__(self):
+        return etree.tostring(self.xml_node, encoding=str)
+
+    def findall(self, *finders, stop_when_matched=False):
+        out = []
+        for finder in finders:
+            nodes = finder(self.xml_node)
+            out.extend(nodes)
+            if stop_when_matched:
+                if nodes:
+                    break
+        return out
+
+    def find(self, *finders, stop_when_matched=False):
+        matches = self.findall(*finders, stop_when_matched=stop_when_matched)
+        if matches:
+            return matches[0]
+        else:
+            return None
+
+    def find_keyvalue_texts(self, key_finder, value_finder):
+        key = self.find(key_finder).text
+        value = self.find(value_finder).text
+        return key,value
     
 class SourceContent:
 
@@ -85,7 +122,7 @@ class ElementXMLSourceParser:
         parser = etree.HTMLParser(remove_comments=True)
         tree = etree.parse(StringIO(raw_source), parser)
         # Done separately from above to retain all original content
-        self.__node = etree.parse(StringIO(raw_source), parser)
+        self.__node = SourceNode(etree.parse(StringIO(raw_source), parser))
         
         if self.__root_element == "body":
             body = tree.getroot().find('body')

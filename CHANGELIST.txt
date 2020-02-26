@@ -10,7 +10,10 @@ Following is the list of critical additions and updates for a given released ver
 - Introduction of basic Data Generator wrapper class on top of Mimesis.
 - Value class is an overhand of Java version of Arjuna. It is in the process of being completely removed from Arjuna as object wrapper.
     - DataRecord values are not Value objects any more.
-- 
+- Added SourceNode class. 
+    - element.source.node gives an object of this. 
+    - Provides finder methods for directly finding content in element source rather than browser based selenium commands.
+    - Added xfinder in arjuna.core.xml to define finding strategy.
 
 0.8.17
 ------
