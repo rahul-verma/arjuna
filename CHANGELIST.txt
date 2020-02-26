@@ -16,6 +16,7 @@ Following is the list of critical additions and updates for a given released ver
     - Provides finder methods for directly finding content in element source rather than browser based selenium commands.
     - Added xfinder in arjuna.core.xml to define finding strategy.
 - Singular names for all directories.
+- config.get_arjuna_option_value and config.get_user_option_value -> config.arjuna_options.value, config.user_options.value
 
 0.8.17
 ------

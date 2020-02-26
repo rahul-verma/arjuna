@@ -160,7 +160,7 @@ class Configuration:
 
     @property
     def screenshots_dir(self):
-        return self.arjuna_options.value(ArjunaOption.SCREENSHOTS_DIR)
+        return self.arjuna_options.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR)
 
     @property
     def log_dir(self):
