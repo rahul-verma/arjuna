@@ -89,7 +89,7 @@ class TestConfigurator:
     #     rvalue = self.__config_map[config_setu_id].arjuna_options.value(sname)
     #     return rvalue
 
-    # def get_user_option_value(self, config_setu_id, option):
+    # def user_options.value(self, config_setu_id, option):
     #     sname = option.upper().strip().replace(".", "_")
     #     rvalue = self.__config_map[config_setu_id].user_config.value(sname)
     #     return rvalue

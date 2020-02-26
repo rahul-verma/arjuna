@@ -92,7 +92,7 @@ class _ConfigCreator:
         return self
 
     def register(self, config_name="default_config"):
-        if not self.__config_container.arjuna_options.str_items() and not self.__config_container.user_options.items():
+        if not self.__config_container.arjuna_options.items() and not self.__config_container.user_options.items():
             if not self.__parent_config:
                 if config_name != "default_config":
                     self.__config_map[config_name] = self.__config_map["default_config"]
@@ -101,8 +101,8 @@ class _ConfigCreator:
             return
 
         config = self.__test_session.register_config(config_name, 
-                                        self.__config_container.arjuna_options.str_items(),
-                                        self.__config_container.user_options.items(),
+                                        self.__config_container.arjuna_options, #.items(),
+                                        self.__config_container.user_options, #.items(),
                                         self.__parent_config
                                     )
 
@@ -110,8 +110,8 @@ class _ConfigCreator:
         if self.__code_mode:
             if config_name not in self.__conf_trace:
                 self.__conf_trace[config_name] = {"arjuna_options": set(), "user_options" : set()}
-            self.__conf_trace[config_name]["arjuna_options"].update(self.__config_container.arjuna_options.items().keys())
-            self.__conf_trace[config_name]["user_options"].update(self.__config_container.user_options.items().keys())
+            self.__conf_trace[config_name]["arjuna_options"].update(self.__config_container.arjuna_options.keys())
+            self.__conf_trace[config_name]["user_options"].update(self.__config_container.user_options.keys())
 
 
 class RunContext:

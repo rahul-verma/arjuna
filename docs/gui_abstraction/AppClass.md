@@ -20,7 +20,7 @@ from arjuna import *
 class WordPress:
 
     def __init__(self):
-        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
+        url = Arjuna.get_ref_config().user_options.value("wp.login.url")
         self.__app = WebApp(base_url=url)
         self.app.launch()
         self.app.externalize(gns_file_name="WordPress.yaml")
@@ -30,8 +30,8 @@ class WordPress:
         return self.__app
 
     def login(self):
-        user = self.app.config.get_user_option_value("wp.admin.name")
-        pwd = self.app.config.get_user_option_value("wp.admin.pwd")
+        user = self.app.config.user_options.value("wp.admin.name")
+        pwd = self.app.config.user_options.value("wp.admin.pwd")
 
         # Login
         self.app.element("login").text = user
@@ -40,7 +40,7 @@ class WordPress:
         self.app.element("view_site")
 
     def logout(self):
-        url = self.app.config.get_user_option_value("wp.logout.url")
+        url = self.app.config.user_options.value("wp.logout.url")
         self.app.go_to_url(url)
         self.app.element("logout_confirm").click()
         self.app.element("logout_msg")
@@ -66,7 +66,7 @@ class WordPress:
 #### Using the App Class in Test Code
 
 ```python
-# arjuna-samples/arjex_app/tests/modules/check_02_app.py
+# arjuna-samples/arjex_app/test/module/check_02_app.py
 
 from arjuna import *
 from arjex_app.lib.wp_app import WordPress

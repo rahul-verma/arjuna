@@ -60,7 +60,7 @@ frame.focus()
 print_source_info(frame.source)
 
 # custom drop down
-url = automator.config.get_user_option_value("narada.ex.dropdown.url")
+url = automator.config.user_options.value("narada.ex.dropdown.url")
 automator.browser.go_to_url(url)
 
 conf = GuiInteractionConfig.builder().check_type(False).check_post_state(False).build()

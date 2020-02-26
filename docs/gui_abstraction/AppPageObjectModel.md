@@ -77,7 +77,7 @@ from arjuna import *
 class WordPress(WebApp):
 
     def __init__(self, gns_format="sgns"):
-        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
+        url = Arjuna.get_ref_config().user_options.value("wp.login.url")
         super().__init__(base_url=url)
 
     def launch(self):
@@ -109,7 +109,7 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
         self.externalize()
 
     def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url")
+        url = self.config.user_options.value("wp.logout.url")
         self.go_to_url(url)
 
         self.element("logout_confirm").click()
@@ -150,8 +150,8 @@ class Home(WPBasePage):
         return Dashboard(self)
 
     def login_with_default_creds(self):
-        user = self.config.get_user_option_value("wp.admin.name")
-        pwd = self.config.get_user_option_value("wp.admin.pwd")
+        user = self.config.user_options.value("wp.admin.name")
+        pwd = self.config.user_options.value("wp.admin.pwd")
 
         return self.login(user, pwd)
 ```
@@ -209,7 +209,7 @@ class Settings(WPBasePage):
 #### Using the App-Page Model in Test Code
 
 ```python
-# arjuna-samples/arjex_app_page/tests/modules/check_01_app_page_model.py
+# arjuna-samples/arjex_app_page/test/module/check_01_app_page_model.py
 
 from arjuna import *
 from arjex_app_page.lib.gom.app import WordPress

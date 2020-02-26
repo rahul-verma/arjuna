@@ -39,8 +39,8 @@ class Home(WPBasePage):
         return Dashboard(self)
 
     def login_with_default_creds(self):
-        user = self.config.get_user_option_value("wp.admin.name")
-        pwd = self.config.get_user_option_value("wp.admin.pwd")
+        user = self.config.user_options.value("wp.admin.name")
+        pwd = self.config.user_options.value("wp.admin.pwd")
 
         return self.login(user, pwd)
 

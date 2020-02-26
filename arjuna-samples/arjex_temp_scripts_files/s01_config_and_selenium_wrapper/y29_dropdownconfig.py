@@ -28,7 +28,7 @@ init_arjuna()
 
 narada = create_app()
 
-url = narada.ui.config.get_user_option_value("narada.ex.dropdown.url")
+url = narada.ui.config.user_options.value("narada.ex.dropdown.url")
 narada.ui.browser.go_to_url(url)
 
 # # Works. Waits for clickability of select control as well as option.

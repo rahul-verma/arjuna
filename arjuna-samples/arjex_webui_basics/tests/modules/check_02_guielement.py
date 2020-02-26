@@ -33,7 +33,7 @@ def wordpress(request):
     '''
 
     # Setup
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
+    wp_url = Arjuna.get_ref_config().user_options.value("wp.login.url")
     wordpress = WebApp(base_url=wp_url)
     wordpress.launch()
     yield wordpress
@@ -151,8 +151,8 @@ def test_wp_login(request, wordpress):
         }
     '''
 
-    user = wordpress.config.get_user_option_value("wp.admin.name")
-    pwd = wordpress.config.get_user_option_value("wp.admin.pwd")
+    user = wordpress.config.user_options.value("wp.admin.name")
+    pwd = wordpress.config.user_options.value("wp.admin.pwd")
     
     # Login
     user_field = wordpress.element(With.id("user_login"))
@@ -167,7 +167,7 @@ def test_wp_login(request, wordpress):
     wordpress.element(With.classes("welcome-view-site"))
 
     # Logout
-    url = wordpress.config.get_user_option_value("wp.logout.url")
+    url = wordpress.config.user_options.value("wp.logout.url")
     wordpress.go_to_url(url)
 
     confirmation = wordpress.element(With.link("log out"))
@@ -178,8 +178,8 @@ def test_wp_login(request, wordpress):
 @test
 def test_wp_login_concise(request, wordpress):
     
-    user = wordpress.config.get_user_option_value("wp.admin.name")
-    pwd = wordpress.config.get_user_option_value("wp.admin.pwd")
+    user = wordpress.config.user_options.value("wp.admin.name")
+    pwd = wordpress.config.user_options.value("wp.admin.pwd")
     
     # Login
     wordpress.element(With.id("user_login")).text = user
@@ -188,7 +188,7 @@ def test_wp_login_concise(request, wordpress):
     wordpress.element(With.classes("welcome-view-site"))
 
     # Logout
-    url = wordpress.config.get_user_option_value("wp.logout.url")
+    url = wordpress.config.user_options.value("wp.logout.url")
     wordpress.go_to_url(url)
     wordpress.element(With.link("log out")).click()
     wordpress.element(With.text("logged out"))

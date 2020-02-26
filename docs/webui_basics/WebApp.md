@@ -9,14 +9,14 @@ Web automation facilities in Arjuna use Selenium as the underlying browser autom
 #### Launching a `WebApp`
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_01_webapp.py
+# arjuna-samples/arjex_webui_basics/test/module/check_01_webapp.py
 
 @test
 def check_webpp_nobase_url(request):
     google = WebApp()
     google.launch(blank_slate=True)
     google.go_to_url("https://google.com")
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 ```
 
@@ -25,7 +25,7 @@ def check_webpp_nobase_url(request):
 2. We launch the `WebApp`. We pass `blank_slate` as `True` as no base URL is associated as of now with the `WebApp` (see next section).
 3. Here the `WebApp` uses the reference `Configuration` of Arjuna where default browser is Chrome. So, Chrome is launched as the browser.
 4. We use its `go_to_url` method to go to Google search page.
-5. We use `my.asserter` for asserting the title.
+5. We use `request.asserter` for asserting the title.
 6. We quit the app using `quit` method of `WebApp`.
 
 #### Associating a `WebApp` with a Base URL
@@ -33,13 +33,13 @@ def check_webpp_nobase_url(request):
 We can associated the `WebApp` with a base URL by providing `base_url` arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_01_webapp.py
+# arjuna-samples/arjex_webui_basics/test/module/check_01_webapp.py
 
 @test
 def check_webpp_nobase_url(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 ```
 
@@ -51,7 +51,7 @@ During initilization, `WebApp` automatically looks for the `ArjunaOption.AUT_BAS
  
  
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_01_webapp.py
+# arjuna-samples/arjex_webui_basics/test/module/check_01_webapp.py
 
  @test
 def check_webpp_base_url_in_custom_config(request):
@@ -62,7 +62,7 @@ def check_webpp_base_url_in_custom_config(request):
 
     google = WebApp(config=context.get_config())
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 ```
  

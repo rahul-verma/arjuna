@@ -45,7 +45,7 @@ def check_project_conf(request):
     '''
     google = WebApp(base_url="https://google.com")
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 
@@ -58,7 +58,7 @@ def check_update_config(request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 @test
@@ -70,7 +70,7 @@ def check_simpler_builder_method(request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 
@@ -87,10 +87,10 @@ def check_user_options(request):
 
     config = context.get_config()
 
-    url = config.get_user_option_value("target.url")
-    title = config.get_user_option_value("target.title")
+    url = config.user_options.value("target.url")
+    title = config.user_options.value("target.title")
 
     google = WebApp(base_url=url, config=config)
     google.launch()
-    my.asserter.assert_equal(title, google.title, "Page Title")
+    request.asserter.assert_equal(title, google.title, "Page Title")
     google.quit()

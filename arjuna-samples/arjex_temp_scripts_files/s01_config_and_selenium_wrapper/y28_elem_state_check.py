@@ -24,7 +24,7 @@ init_arjuna()
 
 narada = create_app()
 
-url = narada.ui.config.get_user_option_value("narada.ex.elemstate.url")
+url = narada.ui.config.user_options.value("narada.ex.elemstate.url")
 narada.ui.browser.go_to_url(url)
 
 narada.ui.element(With.id("target")).click()

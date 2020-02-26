@@ -16,7 +16,7 @@
 #### Retrieving value of Arjuna options in Code
 
 ```python
-# arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
+# arjuna-samples/arjex_core_features/test/module/check_03_tweaking_config.py
  
 from arjuna import *
 
@@ -63,13 +63,13 @@ Add the above content to `project.conf` file. We want to tweak `ArjunaOption.BRO
 Please note that the contents of `arjunaOptions` follow [HOCON](https://github.com/lightbend/config/blob/master/HOCON.md) syntax. This means that you can write settings in properties syntax, as JSON or as human-readable JSON syntax supported by HOCON.
 
 ```python
-# arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
+# arjuna-samples/arjex_core_features/test/module/check_03_tweaking_config.py
 
 @test
 def check_project_conf(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 ```
@@ -78,12 +78,12 @@ The code for this example is exactly same as the code that used Chrome for this 
 
 #### Change Configuration Settings Programmatically
   
- ```python
- # arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
+```python
+# arjuna-samples/arjex_core_features/test/module/check_03_tweaking_config.py
  
- from arjuna import *
+from arjuna import *
  
- @test
+@test
 def check_update_config(request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
@@ -92,9 +92,9 @@ def check_update_config(request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
- ```
+```
    
 ##### Points to Note
 1. `RunContext` is retrieved by calling `Arjuna.get_run_context()`.
@@ -107,7 +107,7 @@ def check_update_config(request):
 ### Simpler Builder Methods
  
  ```python
- # arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
+ # arjuna-samples/arjex_core_features/test/module/check_03_tweaking_config.py
  
  from arjuna import *
  
@@ -120,7 +120,7 @@ def check_simpler_builder_method(request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
  ```
 
@@ -143,7 +143,7 @@ userOptions {
 In addition to this we will also define an option `target.title` programmatically.
 
 ```python
-# arjuna-samples/arjex_core_features/tests/modules/check_03_tweaking_config.py
+# arjuna-samples/arjex_core_features/test/module/check_03_tweaking_config.py
 
 @test
 def check_user_options(request):
@@ -154,17 +154,17 @@ def check_user_options(request):
 
     config = context.get_config()
 
-    url = config.get_user_option_value("target.url")
-    title = config.get_user_option_value("target.title")
+    url = config.user_options.value("target.url")
+    title = config.user_options.value("target.title")
 
     google = WebApp(base_url=url, config=config)
     google.launch()
-    my.asserter.assert_equal(title, google.title, "Page Title")
+    request.asserter.assert_equal(title, google.title, "Page Title")
     google.quit()
 ```
 
 ##### Points to Note
 1. Creating a user option is same as earlier with the only difference that you need to call the `user_option` builder method of `config_creator`.
-2. For retrieving the value, call `get_user_option_value` method of `Configuration`. Like in case of `ArjunaOption`s, the value is returned as `Value` object. Use its methods for appropriate processing.
+2. For retrieving the value, call `value` method of `Configuration.user_options` object.
 3. Rest of the code is similar to the basic use case code used so far. It uses the values retrieved from user options in `Configuration`.
 

@@ -20,14 +20,14 @@ limitations under the License.
 from arjuna import *
 
 def create_wordpress_app():
-    url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
+    url = Arjuna.get_ref_config().user_options.value("wp.login.url")
     wordpress = WebApp(base_url=url)
     wordpress.launch()
     return wordpress
 
 def login(wordpress):
-    user = wordpress.config.get_user_option_value("wp.admin.name")
-    pwd = wordpress.config.get_user_option_value("wp.admin.pwd")
+    user = wordpress.config.user_options.value("wp.admin.name")
+    pwd = wordpress.config.user_options.value("wp.admin.pwd")
 
     # Login
     wordpress.element(With.id("user_login")).text = user
@@ -36,7 +36,7 @@ def login(wordpress):
     wordpress.element(With.classes("welcome-view-site"))
 
 def logout(wordpress):
-    url = wordpress.config.get_user_option_value("wp.logout.url")
+    url = wordpress.config.user_options.value("wp.logout.url")
     wordpress.go_to_url(url)
     wordpress.element(With.link("log out")).click()
     wordpress.element(With.text("logged out"))

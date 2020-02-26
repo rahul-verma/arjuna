@@ -24,14 +24,14 @@ def test_webpp_nobase_url(request):
     google = WebApp()
     google.launch(blank_slate=True)
     google.go_to_url("https://google.com")
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 @test
 def test_webpp_base_url_arg(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()
 
 @test
@@ -43,5 +43,5 @@ def test_webpp_base_url_in_custom_config(request):
 
     google = WebApp(config=context.get_config())
     google.launch()
-    my.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title")
     google.quit()

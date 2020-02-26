@@ -9,7 +9,7 @@ We are going to use a test-level fixture for the examples.
 Below is the `@for_test` fixture code to get logged-in WordPress for a test using the reusable module that we created in the last section:
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_04_gui_multielement.py
+# arjuna-samples/arjex_webui_basics/test/module/check_04_gui_multielement.py
 
 from arjuna import *
 from arjex_webui_basics.lib.wp import WordPress
@@ -28,7 +28,7 @@ def wordpress(request):
 #### Test Code
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_04_gui_multielement.py
+# arjuna-samples/arjex_webui_basics/test/module/check_04_gui_multielement.py
 
 @test
 def check_multielement(request, wordpress):

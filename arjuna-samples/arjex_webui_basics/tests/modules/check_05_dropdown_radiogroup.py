@@ -38,11 +38,11 @@ def test_dropdown(request, wordpress):
 
     role_select.select_text("Subscriber")
     context = "Selection of Subscriber Role"
-    my.asserter.assert_true(role_select.has_visible_text_selected("Subscriber"), context)
-    my.asserter.assert_true(role_select.has_value_selected("subscriber"), context)
-    my.asserter.assert_true(role_select.has_index_selected(0), context)
-    my.asserter.assert_equal(role_select.value, "subscriber", "Value attribute of Role")
-    my.asserter.assert_equal(role_select.text,"Subscriber",  "Selected Role Text")
+    request.asserter.assert_true(role_select.has_visible_text_selected("Subscriber"), context)
+    request.asserter.assert_true(role_select.has_value_selected("subscriber"), context)
+    request.asserter.assert_true(role_select.has_index_selected(0), context)
+    request.asserter.assert_equal(role_select.value, "subscriber", "Value attribute of Role")
+    request.asserter.assert_equal(role_select.text,"Subscriber",  "Selected Role Text")
 
     role_select.select_value("editor")
     role_select.select_index(4)
@@ -56,9 +56,9 @@ def test_radiogroup(request, wordpress):
     date_format = wordpress.radio_group(With.name("date_format"))
 
     context = "Selection of m/d/Y date format"
-    my.asserter.assert_true(date_format.has_value_selected("m/d/Y"), context)
-    my.asserter.assert_true(date_format.has_index_selected(2), context)
-    my.asserter.assert_equal(date_format.value, "m/d/Y", "Value attribute of Date Format")
+    request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), context)
+    request.asserter.assert_true(date_format.has_index_selected(2), context)
+    request.asserter.assert_equal(date_format.value, "m/d/Y", "Value attribute of Date Format")
 
     date_format.select_value(r"\c\u\s\t\o\m")
     date_format.select_index(2)

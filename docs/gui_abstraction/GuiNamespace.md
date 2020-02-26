@@ -58,15 +58,15 @@ We had earlier created a resuable module for WordPress related functions. Let's 
 from arjuna import *
 
 def create_wordpress_app():
-    url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
+    url = Arjuna.get_ref_config().user_options.value("wp.login.url")
     wordpress = WebApp(base_url=url)
     wordpress.launch()
     wordpress.externalize(gns_file_name="WordPress.yaml")
     return wordpress
 
 def login(wordpress):
-    user = wordpress.config.get_user_option_value("wp.admin.name")
-    pwd = wordpress.config.get_user_option_value("wp.admin.pwd")
+    user = wordpress.config.user_options.value("wp.admin.name")
+    pwd = wordpress.config.user_options.value("wp.admin.pwd")
 
     # Login
     wordpress.element("login").text = user
@@ -75,7 +75,7 @@ def login(wordpress):
     wordpress.element("view_site")
 
 def logout(wordpress):
-    url = wordpress.config.get_user_option_value("wp.logout.url")
+    url = wordpress.config.user_options.value("wp.logout.url")
     wordpress.go_to_url(url)
     wordpress.element("logout_confirm").click()
     wordpress.element("logout_msg")
@@ -103,7 +103,7 @@ def tweak_role_value_in_settings(wordpress, asserter, value):
 #### Using the Module in Test Code
 
 ```python
-# arjuna-samples/arjex_app/tests/modules/check_01_gns.py
+# arjuna-samples/arjex_app/test/module/check_01_gns.py
 
 from arjuna import *
 from arjex_app.lib.wp_gns import *
@@ -120,7 +120,7 @@ def wordpress(request):
 
 @test
 def check_with_wp_gns(request, wordpress):
-    tweak_role_value_in_settings(wordpress, my.asserter, "editor")
+    tweak_role_value_in_settings(wordpress, request.asserter, "editor")
 ```
 
 ##### Points to Note

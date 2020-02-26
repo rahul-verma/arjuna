@@ -24,7 +24,7 @@ RE_LOC = None
 class WordPress(WebApp):
 
     def __init__(self):
-        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
+        url = Arjuna.get_ref_config().user_options.value("wp.login.url")
         super().__init__(base_url=url)
 
     def launch(self):
@@ -79,7 +79,7 @@ class TopNav(WPBaseWidget):
         logout_msg = auto()
 
     def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url")
+        url = self.config.user_options.value("wp.logout.url")
         self.go_to_url(url)
 
         self.element(self.labels.logout_confirm).click()
@@ -135,8 +135,8 @@ class Home(WPBasePage):
         return Dashboard(self)
 
     def login_with_default_creds(self):
-        user = self.config.get_user_option_value("wp.admin.name")
-        pwd = self.config.get_user_option_value("wp.admin.pwd")
+        user = self.config.user_options.value("wp.admin.name")
+        pwd = self.config.user_options.value("wp.admin.pwd")
 
         return self.login(user, pwd)
 
@@ -169,9 +169,9 @@ def check_widget_coded_re(request):
     dashboard = login()
     exc = None
     try:
-        my.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.element(With.xpath("//div")).source.content.root, "Source of First div with Automator")
-        my.asserter.assert_equal('<div class="wp-menu-arrow"/>', dashboard.left_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITH Root")
-        my.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.top_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITHOUT Root")
+        request.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.element(With.xpath("//div")).source.content.root, "Source of First div with Automator")
+        request.asserter.assert_equal('<div class="wp-menu-arrow"/>', dashboard.left_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITH Root")
+        request.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.top_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITHOUT Root")
     except Exception as e:
         exc = e
     finally:
@@ -190,9 +190,9 @@ def check_widget_gns_re(request):
     dashboard = login()
     exc = None
     try:
-        my.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.element(With.xpath("//div")).source.content.root, "Source of First div with Automator")
-        my.asserter.assert_equal('<div class="wp-menu-arrow"/>', dashboard.left_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITH Root")
-        my.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.top_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITHOUT Root")
+        request.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.element(With.xpath("//div")).source.content.root, "Source of First div with Automator")
+        request.asserter.assert_equal('<div class="wp-menu-arrow"/>', dashboard.left_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITH Root")
+        request.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.top_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITHOUT Root")
     except Exception as e:
         exc = e
     finally:
@@ -212,9 +212,9 @@ def check_widget_both_re(request):
     dashboard = login()
     exc = None
     try:
-        my.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.element(With.xpath("//div")).source.content.root, "Source of First div with Automator")
-        my.asserter.assert_equal('<div class="wp-menu-arrow"/>', dashboard.left_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITH Root")
-        my.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.top_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITHOUT Root")
+        request.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.element(With.xpath("//div")).source.content.root, "Source of First div with Automator")
+        request.asserter.assert_equal('<div class="wp-menu-arrow"/>', dashboard.left_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITH Root")
+        request.asserter.assert_equal('<div id="wpwrap"> </div>', dashboard.top_nav.element(With.xpath("//div")).source.content.root, "Source of First div with Widget WITHOUT Root")
     except Exception as e:
         exc = e
     finally:

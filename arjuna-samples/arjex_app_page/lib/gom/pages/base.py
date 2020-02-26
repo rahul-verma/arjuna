@@ -29,7 +29,7 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
         self.externalize()
 
     def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url")
+        url = self.config.user_options.value("wp.logout.url")
         self.go_to_url(url)
 
         self.element("logout_confirm").click()

@@ -32,4 +32,4 @@ def wordpress(request):
 
 @test
 def check_with_wp_gns(request, wordpress):
-    tweak_role_value_in_settings(wordpress, my.asserter, "editor")
+    tweak_role_value_in_settings(wordpress, request.asserter, "editor")

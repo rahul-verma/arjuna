@@ -29,7 +29,7 @@ init_arjuna()
 
 narada = create_app()
 
-url = narada.config.get_user_option_value("narada.ex.dropdown.url")
+url = narada.config.user_options.value("narada.ex.dropdown.url")
 narada.ui.browser.go_to_url(url)
 
 conf = GuiInteractionConfig.builder().check_type(False).check_post_state(False).build()

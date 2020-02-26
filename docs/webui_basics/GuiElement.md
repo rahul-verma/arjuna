@@ -38,12 +38,12 @@ Following user options have been added to `project.conf` for this fixture to wor
 Below is the `@for_test` fixture code:
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
+# arjuna-samples/arjex_webui_basics/test/module/check_02_guielement.py
 
 @for_test
 def wordpress(request):
     # Setup
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
+    wp_url = Arjuna.get_ref_config().user_options.value("wp.login.url")
     wordpress = WebApp(base_url=wp_url)
     wordpress.launch()
     
@@ -63,7 +63,7 @@ def wordpress(request):
 #### Identification using ID, Name, Class Name, Tag Name, Link Text, Partial Link Text
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
+# arjuna-samples/arjex_webui_basics/test/module/check_02_guielement.py
 
 @test
 def check_basic_identifiers(request, wordpress):
@@ -102,7 +102,7 @@ def check_basic_identifiers(request, wordpress):
 We use **`With.xpath`** for identification using XPath. It is a direct wrapper on By.xpath in Selenium. Following are various samples.
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
+# arjuna-samples/arjex_webui_basics/test/module/check_02_guielement.py
 
 @test
 def check_xpath(request, wordpress):
@@ -136,7 +136,7 @@ def check_xpath(request, wordpress):
 We use **`With.selector`** for identification using CSS Selector. It is a direct wrapper on By.css_selector in Selenium. Following are various samples.
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
+# arjuna-samples/arjex_webui_basics/test/module/check_02_guielement.py
 
 @test
 def check_xpath(request, wordpress):
@@ -173,7 +173,7 @@ Following is the example code:
 
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
+# arjuna-samples/arjex_webui_basics/test/module/check_02_guielement.py
 
 @test
 def check_xpath(request, wordpress):
@@ -243,13 +243,13 @@ We will simulate WordPress login. Following are the steps:
 4. In the process, WordPress shows some confirmation and success messages.
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
+# arjuna-samples/arjex_webui_basics/test/module/check_02_guielement.py
 
 @test
 def check_wp_login(request, wordpress):
 
-    user = wordpress.config.get_user_option_value("wp.admin.name")
-    pwd = wordpress.config.get_user_option_value("wp.admin.pwd")
+    user = wordpress.config.user_options.value("wp.admin.name")
+    pwd = wordpress.config.user_options.value("wp.admin.pwd")
     
     # Login
     user_field = wordpress.element(With.id("user_login"))
@@ -264,7 +264,7 @@ def check_wp_login(request, wordpress):
     wordpress.element(With.classes("welcome-view-site"))
 
     # Logout
-    url = wordpress.config.get_user_option_value("wp.logout.url")
+    url = wordpress.config.user_options.value("wp.logout.url")
     wordpress.go_to_url(url)
 
     confirmation = wordpress.element(With.link("log out"))
@@ -285,13 +285,13 @@ def check_wp_login(request, wordpress):
 Code style could be a very personal thing. If you are looking for a conside coding option, you can write the previous code as follows with exact same functionality:
 
 ```python
-# arjuna-samples/arjex_webui_basics/tests/modules/check_02_guielement.py
+# arjuna-samples/arjex_webui_basics/test/module/check_02_guielement.py
 
 @test
 def check_wp_login(request, wordpress):
 
-    user = wordpress.config.get_user_option_value("wp.admin.name")
-    pwd = wordpress.config.get_user_option_value("wp.admin.pwd")
+    user = wordpress.config.user_options.value("wp.admin.name")
+    pwd = wordpress.config.user_options.value("wp.admin.pwd")
     
     # Login
     wordpress.element(With.id("user_login")).text = user
@@ -300,7 +300,7 @@ def check_wp_login(request, wordpress):
     wordpress.element(With.classes("welcome-view-site"))
 
     # Logout
-    url = wordpress.config.get_user_option_value("wp.logout.url")
+    url = wordpress.config.user_options.value("wp.logout.url")
     wordpress.go_to_url(url)
     wordpress.element(With.link("log out")).click()
     wordpress.element(With.text("logged out"))

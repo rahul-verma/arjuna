@@ -22,7 +22,7 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 
 ### 2. Arjuna's Core Features
 
-You can find the example code used on this section in [arjuna_core_features project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_core_features/tests/modules).
+You can find the example code used on this section in [arjuna_core_features project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_core_features/test/module).
 
 1. [Project Structure](https://github.com/rahul-verma/arjuna/blob/master/docs/core/ProjectStructure.md)
 2. [Writing Your First Test](https://github.com/rahul-verma/arjuna/blob/master/docs/core/WritingFirstTest.md)
@@ -31,7 +31,7 @@ You can find the example code used on this section in [arjuna_core_features proj
 
 ### 3. Basic Web UI Automation
 
-You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/tests/modules).
+You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/test/module).
 
 1. [Getting Started with WebApp](https://github.com/rahul-verma/arjuna/blob/master/docs//webui_basics/WebApp.md)
 2. [GuiElement - Identification and Interactions](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiElement.md)

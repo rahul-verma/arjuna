@@ -29,7 +29,7 @@ class BrowserLauncher:
         driver_path = config["arjunaOptions"]["SELENIUM_DRIVER_PATH"]
         browser_bin_path = config["arjunaOptions"]["BROWSER_BIN_PATH"]
         browser_name = config["arjunaOptions"]["BROWSER_NAME"]
-        return CREATOR_MAP[browser_name](config, driver_path, browser_bin_path)
+        return CREATOR_MAP[browser_name.name](config, driver_path, browser_bin_path)
 
     @classmethod
     def are_browser_prefs_set(cls, config):

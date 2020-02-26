@@ -24,7 +24,7 @@ from arjuna import *
 class WordPress(WebApp):
 
     def __init__(self):
-        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
+        url = Arjuna.get_ref_config().user_options.value("wp.login.url")
         super().__init__(base_url=url)
         self.launch()
 
@@ -35,8 +35,8 @@ class WordPress(WebApp):
         self.element("submit").wait_until_visible()
 
     def login(self):
-        user = self.config.get_user_option_value("wp.admin.name")
-        pwd = self.config.get_user_option_value("wp.admin.pwd")
+        user = self.config.user_options.value("wp.admin.name")
+        pwd = self.config.user_options.value("wp.admin.pwd")
 
         # Login
         self.element("login").text = user
@@ -45,7 +45,7 @@ class WordPress(WebApp):
         self.element("view_site")
 
     def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url")
+        url = self.config.user_options.value("wp.logout.url")
         self.go_to_url(url)
         self.element("logout_confirm").click()
         self.element("logout_msg")
@@ -71,7 +71,7 @@ class WordPress(WebApp):
 #### Using the App Class in Test Code
 
 ```python
-# arjuna-samples/arjex_app/tests/modules/check_03_app_model.py
+# arjuna-samples/arjex_app/test/module/check_03_app_model.py
 
 
 from arjuna import *
