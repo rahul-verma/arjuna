@@ -28,19 +28,19 @@ def check_config_retrieval(request):
     config = Arjuna.get_ref_config()
 
     wait_value = config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME)
-    print(wait_value.as_str())
+    print(wait_value)
 
     wait_value = config.get_arjuna_option_value("BROWSER_NAME")
-    print(wait_value.as_str())
+    print(wait_value)
 
     wait_value = config.get_arjuna_option_value("BrOwSeR_NaMe")
-    print(wait_value.as_str())
+    print(wait_value)
 
     wait_value = config.get_arjuna_option_value("browser.name")
-    print(wait_value.as_str())
+    print(wait_value)
 
     wait_value = config.get_arjuna_option_value("Browser.Name")
-    print(wait_value.as_str())
+    print(wait_value)
 
     browser = config.browser_name
     print(browser)
@@ -97,8 +97,8 @@ def check_user_options(request):
 
     config = context.get_config()
 
-    url = config.get_user_option_value("target.url").as_str()
-    title = config.get_user_option_value("target.title").as_str()
+    url = config.get_user_option_value("target.url")
+    title = config.get_user_option_value("target.title")
 
     google = WebApp(base_url=url, config=config)
     google.launch()

@@ -21,6 +21,7 @@ from arjuna.core.value import AbstractValueMap, StringKeyValueMap
 from arjuna import ArjunaOption
 
 from .config import Config
+from arjuna.core.adv.types import CIStringDict
 
 class ArjunaOptionMap(AbstractValueMap):
 
@@ -33,8 +34,8 @@ class ArjunaOptionMap(AbstractValueMap):
 class ConfigContainer:
 
     def __init__(self):
-        self.__arjuna_options = ArjunaOptionMap()
-        self.__user_options = StringKeyValueMap()
+        self.__arjuna_options = CIStringDict()
+        self.__user_options = CIStringDict()
 
     @property
     def arjuna_options(self):
@@ -46,14 +47,14 @@ class ConfigContainer:
 
     def set_arjuna_option(self, arjuna_option, obj):
         if isinstance(arjuna_option, ArjunaOption):
-            self.__arjuna_options.add_object(arjuna_option.name, obj)
+            self.__arjuna_options[arjuna_option.name] = obj
         else:
             normalized_option = Config.normalize_option_str(arjuna_option)
-            self.__arjuna_options.add_object(ArjunaOption[normalized_option], obj)
+            self.__arjuna_options[normalized_option] = obj
         return self
 
     def set_user_option(self, option, obj):
-        self.__user_options.add_object(Config.normalize_option_str(option), obj)
+        self.__user_options[Config.normalize_option_str(option)] = obj
         return self
 
     def set_option(self, option, obj):

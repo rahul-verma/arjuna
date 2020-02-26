@@ -126,11 +126,11 @@ class Configuration:
         arjuna_option = option
         if type(option) is str:
             arjuna_option = Configuration.normalize_arjuna_option_str(option)
-        return Value(self.__wrapped_config.arjuna_config.value(arjuna_option))
+        return self.__wrapped_config.arjuna_config.value(arjuna_option)
 
     def get_user_option_value(self, option):
         user_option = Configuration.normalize_option_str(option)
-        return Value(self.__wrapped_config.user_config.value(user_option))
+        return self.__wrapped_config.user_config.value(user_option)
 
     def get_arjuna_options_as_map(self):
         return self.__wrapped_config.arjuna_config.as_json_dict()
@@ -144,35 +144,35 @@ class Configuration:
 
     @property
     def guiauto_context(self):
-        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).as_enum(GuiAutomationContext)
+        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT) # .as_enum(GuiAutomationContext)
 
     @property
     def browser_name(self):
-        return self.get_arjuna_option_value(ArjunaOption.BROWSER_NAME).as_enum(BrowserName)
+        return self.get_arjuna_option_value(ArjunaOption.BROWSER_NAME) #.as_enum(BrowserName)
 
     @property
     def browser_version(self):
-        return self.get_arjuna_option_value(ArjunaOption.BROWSER_VERSION).as_str()
+        return self.get_arjuna_option_value(ArjunaOption.BROWSER_VERSION)
 
     @property
     def browser_binary_path(self):
-        return self.get_arjuna_option_value(ArjunaOption.BROWSER_BIN_PATH).as_str()
+        return self.get_arjuna_option_value(ArjunaOption.BROWSER_BIN_PATH)
 
     @property
     def test_run_env_name(self):
-        return self.get_arjuna_option_value(ArjunaOption.TESTRUN_ENVIRONMENT).as_str()
+        return self.get_arjuna_option_value(ArjunaOption.TESTRUN_ENVIRONMENT)
 
     @property
     def screenshots_dir(self):
-        return self.get_arjuna_option_value(ArjunaOption.SCREENSHOTS_DIR).as_str()
+        return self.get_arjuna_option_value(ArjunaOption.SCREENSHOTS_DIR)
 
     @property
     def log_dir(self):
-        return self.get_arjuna_option_value(ArjunaOption.LOG_DIR).as_str()
+        return self.get_arjuna_option_value(ArjunaOption.LOG_DIR)
 
     @property
     def guiauto_max_wait(self):
-        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_MAX_WAIT).as_int()
+        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_MAX_WAIT)
 
     def as_map(self):
         return self.__wrapped_config.as_json_dict()

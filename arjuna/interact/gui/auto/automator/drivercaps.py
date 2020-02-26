@@ -92,10 +92,10 @@ class DriverCapabilities:
 
         self.__process_config(config)
         self.__process(json_dict)
-        self.__host_os = self.__config.get_arjuna_option_value(ArjunaOption.TESTRUN_HOST_OS).as_str().lower()
-        aname = self.__config.get_arjuna_option_value(ArjunaOption.AUTOMATOR_NAME).as_str().lower()
-        acontext = self.__config.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).as_str().lower()
-        mobile_platform = self.__config.get_arjuna_option_value(ArjunaOption.MOBILE_OS_NAME).as_str().lower()
+        self.__host_os = self.__config.get_arjuna_option_value(ArjunaOption.TESTRUN_HOST_OS).lower()
+        aname = self.__config.get_arjuna_option_value(ArjunaOption.AUTOMATOR_NAME).lower()
+        acontext = self.__config.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).lower()
+        mobile_platform = self.__config.get_arjuna_option_value(ArjunaOption.MOBILE_OS_NAME).lower()
 
         if aname == "selenium":
             self.__process_for_selenium(json_dict)
@@ -140,7 +140,7 @@ class DriverCapabilities:
         return self.__config
 
     def __process_config(self, config):
-        self.__out_dict["automationContext"] = config.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).as_str().upper()
+        self.__out_dict["automationContext"] = config.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT).upper()
         temp_d = config.get_arjuna_options_as_map()
         for k,v in temp_d.items():
             if k in SetuActorDriverConfigOption.__members__:
@@ -167,14 +167,14 @@ class DriverCapabilities:
             return in_name
 
     def __process_for_selenium(self, in_dict):
-        browser_name = self._config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME).as_str().lower()
+        browser_name = self._config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME).lower()
         self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = browser_name
-        browser_version = self._config.get_arjuna_option_value(ArjunaOption.BROWSER_VERSION).as_str()
+        browser_version = self._config.get_arjuna_option_value(ArjunaOption.BROWSER_VERSION)
         if browser_version != "not_set":
             self.__out_dict["driverCapabilities"][self.BROWSER_VERSION] = browser_version
 
     def __process_for_appium(self, dict_from_requester):
-        mobile_os_name = self._config.get_arjuna_option_value(ArjunaOption.MOBILE_OS_NAME).as_str()
+        mobile_os_name = self._config.get_arjuna_option_value(ArjunaOption.MOBILE_OS_NAME)
         if mobile_os_name.lower() == "android":
             self.__out_dict["driverCapabilities"][self.PLATFORM_NAME] = "Android"
         elif mobile_os_name.lower() == "ios":

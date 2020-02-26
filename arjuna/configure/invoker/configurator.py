@@ -36,9 +36,7 @@ class TestConfigurator:
 
     def __create_config_from_option_dicts(self, reference, arjuna_options, user_options):
         def format_value(val):
-            if isinstance(val, Value):
-                return val.as_str()
-            elif isinstance(val, Enum):
+            if isinstance(val, Enum):
                 return val.name
             else:
                 return str(val)

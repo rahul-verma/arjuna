@@ -89,13 +89,13 @@ class ArjunaSingleton:
         self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id)
 
         from arjuna.core.enums import ArjunaOption
-        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_DIR).as_str())
-        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR).as_str())
-        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR).as_str())
-        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_LOG_DIR).as_str())
-        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR).as_str())
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_LOG_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR))
 
-        dl = logging.getLevelName(self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_CONSOLE_LEVEL).as_str().upper())
+        dl = logging.getLevelName(self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_CONSOLE_LEVEL).upper())
 
         self.__init_logger(dl)
         self.__load_console(dl, self.logger)
@@ -182,10 +182,10 @@ class ArjunaSingleton:
 
     def __init_logger(self, dl):
         from arjuna.core.enums import ArjunaOption
-        log_dir = self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_LOG_DIR).as_str()
+        log_dir = self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_RUN_LOG_DIR)
         if not os.path.isdir(log_dir):
             os.makedirs(log_dir)
-        fl = logging.getLevelName(self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_FILE_LEVEL).as_str().upper())
+        fl = logging.getLevelName(self.__ref_config.get_arjuna_option_value(ArjunaOption.LOG_FILE_LEVEL).upper())
         fname = "arjuna.log"
         lpath = os.path.join(log_dir, fname)
 

@@ -84,7 +84,7 @@ class DataRecord:
         return key.lower() in self.__named
 
     def string(self, key):
-        return self.value_named(key).as_string()
+        return self.value_named(key)
 
     def has_index(self, index):
         return len(self.__indexed) > index

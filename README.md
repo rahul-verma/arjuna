@@ -26,9 +26,8 @@ You can find the example code used on this section in [arjuna_core_features proj
 
 1. [Project Structure](https://github.com/rahul-verma/arjuna/blob/master/docs/core/ProjectStructure.md)
 2. [Writing Your First Test](https://github.com/rahul-verma/arjuna/blob/master/docs/core/WritingFirstTest.md)
-3. [Value Abstraction](https://github.com/rahul-verma/arjuna/blob/master/docs/core/ValueAbstraction.md)
-4. [Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/core/Configuration.md)
-5. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/core/DataDrivenTesting.md)
+3. [Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/core/Configuration.md)
+4. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/core/DataDrivenTesting.md)
 
 ### 3. Basic Web UI Automation
 

@@ -58,15 +58,15 @@ We had earlier created a resuable module for WordPress related functions. Let's 
 from arjuna import *
 
 def create_wordpress_app():
-    url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+    url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
     wordpress = WebApp(base_url=url)
     wordpress.launch()
     wordpress.externalize(gns_file_name="WordPress.yaml")
     return wordpress
 
 def login(wordpress):
-    user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
-    pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
+    user = wordpress.config.get_user_option_value("wp.admin.name")
+    pwd = wordpress.config.get_user_option_value("wp.admin.pwd")
 
     # Login
     wordpress.element("login").text = user
@@ -75,7 +75,7 @@ def login(wordpress):
     wordpress.element("view_site")
 
 def logout(wordpress):
-    url = wordpress.config.get_user_option_value("wp.logout.url").as_str()
+    url = wordpress.config.get_user_option_value("wp.logout.url")
     wordpress.go_to_url(url)
     wordpress.element("logout_confirm").click()
     wordpress.element("logout_msg")

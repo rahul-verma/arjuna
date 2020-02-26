@@ -24,7 +24,7 @@ from arjuna import *
 class WordPress(WebApp):
 
     def __init__(self):
-        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
         super().__init__(base_url=url)
         self.launch()
 
@@ -35,8 +35,8 @@ class WordPress(WebApp):
         self.element("submit").wait_until_visible()
 
     def login(self):
-        user = self.config.get_user_option_value("wp.admin.name").as_str()
-        pwd = self.config.get_user_option_value("wp.admin.pwd").as_str()
+        user = self.config.get_user_option_value("wp.admin.name")
+        pwd = self.config.get_user_option_value("wp.admin.pwd")
 
         # Login
         self.element("login").text = user
@@ -45,7 +45,7 @@ class WordPress(WebApp):
         self.element("view_site")
 
     def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url").as_str()
+        url = self.config.get_user_option_value("wp.logout.url")
         self.go_to_url(url)
         self.element("logout_confirm").click()
         self.element("logout_msg")

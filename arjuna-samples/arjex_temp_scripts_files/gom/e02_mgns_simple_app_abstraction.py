@@ -40,7 +40,7 @@ class WPBaseTest(unittest.TestCase):
 
     def setUp(self):
         super().setUp()
-        self.__app = WebApp(base_url=self.config.get_user_option_value("wp.login.url").as_str())
+        self.__app = WebApp(base_url=self.config.get_user_option_value("wp.login.url"))
         self.wordpress.launch()
         self.wordpress.ui.externalize(gns_dir="mgns_wordpress_singlefile", gns_file_name="WordPress.yaml")
         self.login_with_default_creds()
@@ -60,7 +60,7 @@ class WPBaseTest(unittest.TestCase):
         self.wordpress.ui.element("view_site").wait_until_visible()
 
     def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url").as_str()
+        url = self.config.get_user_option_value("wp.logout.url")
         self.wordpress.ui.browser.go_to_url(url)
 
         self.wordpress.ui.element("logout_confirm").click()

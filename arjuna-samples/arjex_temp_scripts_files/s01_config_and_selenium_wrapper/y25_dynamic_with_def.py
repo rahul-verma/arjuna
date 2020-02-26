@@ -35,7 +35,7 @@ Resulting in http://192.168.56.103/wp-login.php
 
 identifier = r"//*[@action='$app_url$/$page$.php']"
 
-app_url = wordpress.ui.config.get_user_option_value("wp.app.url").as_str()
+app_url = wordpress.ui.config.get_user_option_value("wp.app.url")
 page = "wp-login"
 
 element = wordpress.ui.element(With.xpath(identifier).format(app_url=app_url, page=page))

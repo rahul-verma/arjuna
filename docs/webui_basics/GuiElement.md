@@ -43,7 +43,7 @@ Below is the `@for_test` fixture code:
 @for_test
 def wordpress(request):
     # Setup
-    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+    wp_url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
     wordpress = WebApp(base_url=wp_url)
     wordpress.launch()
     
@@ -248,8 +248,8 @@ We will simulate WordPress login. Following are the steps:
 @test
 def check_wp_login(request, wordpress):
 
-    user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
-    pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
+    user = wordpress.config.get_user_option_value("wp.admin.name")
+    pwd = wordpress.config.get_user_option_value("wp.admin.pwd")
     
     # Login
     user_field = wordpress.element(With.id("user_login"))
@@ -264,7 +264,7 @@ def check_wp_login(request, wordpress):
     wordpress.element(With.classes("welcome-view-site"))
 
     # Logout
-    url = wordpress.config.get_user_option_value("wp.logout.url").as_str()
+    url = wordpress.config.get_user_option_value("wp.logout.url")
     wordpress.go_to_url(url)
 
     confirmation = wordpress.element(With.link("log out"))
@@ -290,8 +290,8 @@ Code style could be a very personal thing. If you are looking for a conside codi
 @test
 def check_wp_login(request, wordpress):
 
-    user = wordpress.config.get_user_option_value("wp.admin.name").as_str()
-    pwd = wordpress.config.get_user_option_value("wp.admin.pwd").as_str()
+    user = wordpress.config.get_user_option_value("wp.admin.name")
+    pwd = wordpress.config.get_user_option_value("wp.admin.pwd")
     
     # Login
     wordpress.element(With.id("user_login")).text = user
@@ -300,7 +300,7 @@ def check_wp_login(request, wordpress):
     wordpress.element(With.classes("welcome-view-site"))
 
     # Logout
-    url = wordpress.config.get_user_option_value("wp.logout.url").as_str()
+    url = wordpress.config.get_user_option_value("wp.logout.url")
     wordpress.go_to_url(url)
     wordpress.element(With.link("log out")).click()
     wordpress.element(With.text("logged out"))

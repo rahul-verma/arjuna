@@ -22,7 +22,7 @@ from arjuna import *
 class WordPress(WebApp):
 
     def __init__(self):
-        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
         super().__init__(base_url=url)
 
     def launch(self):

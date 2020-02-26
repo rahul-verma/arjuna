@@ -24,7 +24,7 @@ init_arjuna()
 
 narada = create_app()
 
-url = narada.config.get_user_option_value("narada.ex.radio.url").as_str()
+url = narada.config.get_user_option_value("narada.ex.radio.url")
 narada.ui.browser.go_to_url(url)
 
 narada.ui.radio_group(With.name("Traditional")).select_index(1)

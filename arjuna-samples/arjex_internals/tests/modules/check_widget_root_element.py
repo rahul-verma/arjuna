@@ -24,7 +24,7 @@ RE_LOC = None
 class WordPress(WebApp):
 
     def __init__(self):
-        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url").as_str()
+        url = Arjuna.get_ref_config().get_user_option_value("wp.login.url")
         super().__init__(base_url=url)
 
     def launch(self):
@@ -79,7 +79,7 @@ class TopNav(WPBaseWidget):
         logout_msg = auto()
 
     def logout(self):
-        url = self.config.get_user_option_value("wp.logout.url").as_str()
+        url = self.config.get_user_option_value("wp.logout.url")
         self.go_to_url(url)
 
         self.element(self.labels.logout_confirm).click()
@@ -135,8 +135,8 @@ class Home(WPBasePage):
         return Dashboard(self)
 
     def login_with_default_creds(self):
-        user = self.config.get_user_option_value("wp.admin.name").as_str()
-        pwd = self.config.get_user_option_value("wp.admin.pwd").as_str()
+        user = self.config.get_user_option_value("wp.admin.name")
+        pwd = self.config.get_user_option_value("wp.admin.pwd")
 
         return self.login(user, pwd)
 
