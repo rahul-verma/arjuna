@@ -37,12 +37,12 @@ def check_config_retrieval(request):
 1. First, we retrieve the reference config by calling `Arjuna.get_ref_config()`
 2. You can retrieve value of an `ArjunaOption` by calling the `value(<Arjuna Option or string>)` method of a `Configuration.arjuna_options` object. The argument to this call can be an `ArjunaOption` enum constant or a string representing the option. 
 3. The option name string is considered by Arjuna as **case-insensitive**. Also, **. (dot)** and **_ (underscore)** are interchangeable. So, following are equivalent arguments:
-        - ArjunaOption.BROWSER_NAME
-        - BROWSER_NAME
-        - BrOwSeR_NaMe
-        - browser.name
-        - Browser.Name
-        - and so on
+    - ArjunaOption.BROWSER_NAME
+    - BROWSER_NAME
+    - BrOwSeR_NaMe
+    - browser.name
+    - Browser.Name
+    - and so on
 4. The `Configuration` object also has named properties for commonly used Arjuna options. The name of property is same as the lower-case enum constant text, for example, `browser_name`.
 
 ### Project Level Configuration Settings
