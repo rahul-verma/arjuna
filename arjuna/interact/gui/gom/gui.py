@@ -22,7 +22,6 @@ import abc
 import os
 from enum import Enum
 import unittest
-import traceback
 
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 
@@ -96,11 +95,13 @@ class Gui(AsserterMixIn):
         try:
             self.load_root_element()
         except Exception as e:
+            import traceback
             raise GuiNotLoadedError(self, "Root Element not Loaded. " + str(e) + "\n" + traceback.format_exc())
 
         try:
             self.load_anchor_element()
         except Exception as e:
+            import traceback
             raise GuiNotLoadedError(self, "Anchor Element not Loaded." + str(e) + "\n" + traceback.format_exc())
 
         try:
