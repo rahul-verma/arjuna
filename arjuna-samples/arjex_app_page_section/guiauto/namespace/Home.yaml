@@ -1,0 +1,10 @@
+labels:
+
+  login:
+    id: user_login
+
+  pwd:
+    id: user_pass
+
+  submit:
+    id: wp-submit

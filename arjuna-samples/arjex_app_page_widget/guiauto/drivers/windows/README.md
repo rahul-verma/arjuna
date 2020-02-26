@@ -1,1 +1,0 @@
-This is a placeholder directory for archival of Selenium browser drivers for windows.
