@@ -93,6 +93,15 @@ from arjuna.core.enums import *
 from arjuna.core.value import Value
 
 
+class ROWrapper:
+
+    def __init__(self, config):
+        self.__config = config
+
+    def value(self, option):
+        return self.__config.value(option)
+
+
 class Configuration:
 
     def __init__(self, test_session, name, config):
@@ -100,6 +109,8 @@ class Configuration:
         self.__session = test_session
         self.__name = name
         self.__wrapped_config = config
+        self.__arjuna_options = ROWrapper(self.__wrapped_config.arjuna_config)
+        self.__user_options = ROWrapper(self.__wrapped_config.user_config)
 
     @property
     def _wrapped_config(self):
@@ -109,28 +120,13 @@ class Configuration:
     def test_session(self):
         return self.__session
 
-    def __fetch_config_option_value(self, setu_action_type, option_str):
-        response = self._send_request(setu_action_type, SetuArg.arg("option", option_str))
-        return response.get_value()
+    @property
+    def arjuna_options(self):
+        return self.__arjuna_options
 
-    @staticmethod
-    def normalize_option_str(option_str):
-        option_str = isinstance(option_str, Enum) and option_str.name or option_str
-        return option_str.upper().strip().replace(".", "_")
-
-    @staticmethod
-    def normalize_arjuna_option_str(option_str):
-        return ArjunaOption[Configuration.normalize_option_str(option_str)]
-
-    def get_arjuna_option_value(self, option):
-        arjuna_option = option
-        if type(option) is str:
-            arjuna_option = Configuration.normalize_arjuna_option_str(option)
-        return self.__wrapped_config.arjuna_config.value(arjuna_option)
-
-    def get_user_option_value(self, option):
-        user_option = Configuration.normalize_option_str(option)
-        return self.__wrapped_config.user_config.value(user_option)
+    @property
+    def user_options(self):
+        return self.__user_options
 
     def get_arjuna_options_as_map(self):
         return self.__wrapped_config.arjuna_config.as_json_dict()
@@ -144,35 +140,35 @@ class Configuration:
 
     @property
     def guiauto_context(self):
-        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_CONTEXT) # .as_enum(GuiAutomationContext)
+        return self.arjuna_options.value(ArjunaOption.GUIAUTO_CONTEXT) # .as_enum(GuiAutomationContext)
 
     @property
     def browser_name(self):
-        return self.get_arjuna_option_value(ArjunaOption.BROWSER_NAME) #.as_enum(BrowserName)
+        return self.arjuna_options.value(ArjunaOption.BROWSER_NAME) #.as_enum(BrowserName)
 
     @property
     def browser_version(self):
-        return self.get_arjuna_option_value(ArjunaOption.BROWSER_VERSION)
+        return self.arjuna_options.value(ArjunaOption.BROWSER_VERSION)
 
     @property
     def browser_binary_path(self):
-        return self.get_arjuna_option_value(ArjunaOption.BROWSER_BIN_PATH)
+        return self.arjuna_options.value(ArjunaOption.BROWSER_BIN_PATH)
 
     @property
     def test_run_env_name(self):
-        return self.get_arjuna_option_value(ArjunaOption.TESTRUN_ENVIRONMENT)
+        return self.arjuna_options.value(ArjunaOption.TESTRUN_ENVIRONMENT)
 
     @property
     def screenshots_dir(self):
-        return self.get_arjuna_option_value(ArjunaOption.SCREENSHOTS_DIR)
+        return self.arjuna_options.value(ArjunaOption.SCREENSHOTS_DIR)
 
     @property
     def log_dir(self):
-        return self.get_arjuna_option_value(ArjunaOption.LOG_DIR)
+        return self.arjuna_options.value(ArjunaOption.LOG_DIR)
 
     @property
     def guiauto_max_wait(self):
-        return self.get_arjuna_option_value(ArjunaOption.GUIAUTO_MAX_WAIT)
+        return self.arjuna_options.value(ArjunaOption.GUIAUTO_MAX_WAIT)
 
     def as_map(self):
         return self.__wrapped_config.as_json_dict()

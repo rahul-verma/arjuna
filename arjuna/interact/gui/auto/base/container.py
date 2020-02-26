@@ -39,7 +39,7 @@ class ElementContainer(metaclass=abc.ABCMeta):
 
     @property
     def max_wait_time(self):
-        return self.config.get_arjuna_option_value("guiauto.max.wait")
+        return self.config.arjuna_options.value("guiauto.max.wait")
 
     def wait_until_element_absent(self, lmd, max_wait_time=None):
         max_wait_time = max_wait_time and max_wait_time or self.max_wait_time

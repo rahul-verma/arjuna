@@ -168,7 +168,7 @@ class AppContent(Gui):
         gns_dir = gns_dir and gns_dir or self.app.gns_dir
         if not gns_dir:
             gns_dir = ""
-        ns_root_dir = self.config.get_arjuna_option_value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
+        ns_root_dir = self.config.arjuna_options.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
         
         self.__def_file_path = os.path.join(ns_root_dir, gns_dir, self.gns_file_name)
         try:

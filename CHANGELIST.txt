@@ -15,6 +15,7 @@ Following is the list of critical additions and updates for a given released ver
     - element.source.node gives an object of this. 
     - Provides finder methods for directly finding content in element source rather than browser based selenium commands.
     - Added xfinder in arjuna.core.xml to define finding strategy.
+- Singular names for all directories.
 
 0.8.17
 ------

@@ -48,7 +48,7 @@ class _DataFile(_DataMarkUp):
         self.path = path
         self.delimiter = delimiter
 
-        data_dir = Arjuna.get_central_config().get_arjuna_option_value(ArjunaOption.DATA_SOURCES_DIR)
+        data_dir = Arjuna.get_central_config().arjuna_options.value(ArjunaOption.DATA_SOURCES_DIR)
 
         if file_utils.is_absolute_path(self.path):
             if not file_utils.is_file(self.path):

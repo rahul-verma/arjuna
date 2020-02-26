@@ -59,7 +59,7 @@ class Value:
         try:
             return enum_class[val]
         except:
-            cls.__wrong_repr("enum constant of type " + enum_class.__name__)
+            cls.__wrong_repr(val, "enum constant of type " + enum_class.__name__)
 
     @classmethod
     def as_bool(cls, val):
@@ -68,7 +68,7 @@ class Value:
             return True
         elif fstr in self.FALSES:
             return False
-        cls.__wrong_repr("boolean")
+        cls.__wrong_repr(val, "boolean")
 
     @classmethod
     def as_number(cls, val):
@@ -78,21 +78,21 @@ class Value:
         elif re.match("(\-)?[0-9]+", fstr):
             return int(fstr)
         else:
-            cls.__wrong_repr("number")
+            cls.__wrong_repr(val, "number")
 
     @classmethod
     def as_int(cls, val):
         try:
             return int(float(str(val)))
         except:
-            cls.__wrong_repr("int")
+            cls.__wrong_repr(val, "int")
 
     @classmethod
     def as_float(cls, val):
         try:
             return float(str(val))
         except:
-            cls.__wrong_repr("float")
+            cls.__wrong_repr(val, "float")
 
     @classmethod
     def as_enum_list(cls, val, enum_class):
@@ -102,30 +102,30 @@ class Value:
             else:
                 return [cls.as_enum(val, enum_class)]
         except:
-            cls.__wrong_repr("enum constant list of type " + enum_class.__name__)
+            cls.__wrong_repr(val, "enum constant list of type " + enum_class.__name__)
 
     @classmethod
     def as_number_list(cls, val):
         try:
             return [cls.as_number(val)]
         except:
-            cls.__wrong_repr("number list")
+            cls.__wrong_repr(val, "number list")
 
     def as_int_list(cls, val):
         try:
             return [cls.as_int(val)]
         except:
-            cls.__wrong_repr("int list")
+            cls.__wrong_repr(val, "int list")
 
     def as_str_list(cls, val):
         try:
             return [str(val)]
         except:
-            cls.__wrong_repr("string list")
+            cls.__wrong_repr(val, "string list")
 
     def split_as_str_list(cls, val, delimiter=","):
         try:
             return data_utils.split(str(val), delimiter=delimiter)
         except:
-            cls.__wrong_repr("string list")
+            cls.__wrong_repr(val, "string list")
 

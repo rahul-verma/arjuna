@@ -84,9 +84,9 @@ class TestConfigurator:
     def get_config(self, id):
         return self.__config_map[id]
 
-    # def get_arjuna_option_value(self, config_setu_id, option):
+    # def arjuna_options.value(self, config_setu_id, option):
     #     sname = ArjunaOption[option.upper().strip().replace(".", "_")]
-    #     rvalue = self.__config_map[config_setu_id].get_arjuna_option_value(sname)
+    #     rvalue = self.__config_map[config_setu_id].arjuna_options.value(sname)
     #     return rvalue
 
     # def get_user_option_value(self, config_setu_id, option):
@@ -96,7 +96,7 @@ class TestConfigurator:
 
     # def get_central_arjuna_option_value(self, option):
     #     sname = ArjunaOption[option.upper().strip().replace(".", "_")]
-    #     rvalue = self.__default_ref_config.get_arjuna_option_value(sname)
+    #     rvalue = self.__default_ref_config.arjuna_options.value(sname)
     #     return rvalue
 
     # def get_central_user_option_value(self, option):

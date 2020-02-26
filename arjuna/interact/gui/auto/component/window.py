@@ -181,9 +181,9 @@ class MainWindow(BasicWindow):
     def __resize_window_as_per_config(self):
         # Resize window
         config = self.config
-        browser_width = config.get_arjuna_option_value(ArjunaOption.BROWSER_DIM_WIDTH)
-        browser_height = config.get_arjuna_option_value(ArjunaOption.BROWSER_DIM_HEIGHT)
-        should_maximize = config.get_arjuna_option_value(ArjunaOption.BROWSER_MAXIMIZE)
+        browser_width = config.arjuna_options.value(ArjunaOption.BROWSER_DIM_WIDTH)
+        browser_height = config.arjuna_options.value(ArjunaOption.BROWSER_DIM_HEIGHT)
+        should_maximize = config.arjuna_options.value(ArjunaOption.BROWSER_MAXIMIZE)
 
         if config.is_arjuna_option_not_set(ArjunaOption.BROWSER_DIM_WIDTH) and config.is_arjuna_option_not_set(ArjunaOption.BROWSER_DIM_HEIGHT):
             if should_maximize:

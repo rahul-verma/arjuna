@@ -137,18 +137,19 @@ class AbstractConfig:
         pass
 
     def __value(self, v):
-        if isinstance(v, Enum):
-            return v.name
-        elif type(v) is list:
-            out = []
-            for value in v:
-                if isinstance(value, Enum):
-                    out.append(value.name)
-                else:
-                    out.append(value)
-            return out
-        else:
-            return v
+        return v
+        # if isinstance(v, Enum):
+        #     return v.name
+        # elif type(v) is list:
+        #     out = []
+        #     for value in v:
+        #         if isinstance(value, Enum):
+        #             out.append(value.name)
+        #         else:
+        #             out.append(value)
+        #     return out
+        # else:
+        #     return v
 
     def value(self, key):
         self._validate_key(key)
@@ -207,11 +208,30 @@ class UserConfig(AbstractConfig):
     def __init__(self, config_dict):
         super().__init__(config_dict)
 
+    @staticmethod
+    def normalize_option_str(option_str):
+        option_str = isinstance(option_str, Enum) and option_str.name or option_str
+        return option_str.upper().strip().replace(".", "_")
+
+    def value(self, option):
+        user_option = UserConfig.normalize_option_str(option)
+        return super().value(user_option)
+
 
 class ArjunaConfig(AbstractConfig):
 
     def __init__(self, config_dict):
         super().__init__(config_dict)
+
+    @staticmethod
+    def normalize_arjuna_option_str(option_str):
+        return ArjunaOption[UserConfig.normalize_option_str(option_str)]
+
+    def value(self, option):
+        arjuna_option = option
+        if type(option) is str:
+            arjuna_option = ArjunaConfig.normalize_arjuna_option_str(option)
+        return super().value(arjuna_option)
 
     def _validate_key(self, key):
         if not isinstance(key, ArjunaOption):
@@ -234,10 +254,10 @@ class ArjunaConfig(AbstractConfig):
         return self._config_dict[ArjunaOption.GUIAUTO_CONTEXT]
 
     def get_browser_name(self):
-        return BrowserName[self.value(ArjunaOption.BROWSER_NAME)]
+        return self.value(ArjunaOption.BROWSER_NAME)
 
     def get_host_os(self):
-        return DesktopOS[self.value(ArjunaOption.TESTRUN_HOST_OS)]
+        return self.value(ArjunaOption.TESTRUN_HOST_OS)
 
     def has_desktop_context(self):
         return self.get_guiauto_context() in Config.DESKTOP_CONTEXTS

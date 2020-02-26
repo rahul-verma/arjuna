@@ -656,7 +656,7 @@ Removed statements
 Removed statements
     def init(self, project_root_dir, cli_config, run_id):
         from arjuna.engine.unitee import Unitee
-        project_name = self.__ref_config.get_arjuna_option_value(ArjunaOption.PROJECT_NAME).as_str()
+        project_name = self.__ref_config.arjuna_options.value(ArjunaOption.PROJECT_NAME).as_str()
         self.__unitee = Unitee(self.__test_session, self.__ref_config)
 
 Removed method

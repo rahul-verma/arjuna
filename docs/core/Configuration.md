@@ -20,32 +20,22 @@
  
 from arjuna import *
 
-@testBrowserName.CHROME
+@test
 def check_config_retrieval(request):
     config = Arjuna.get_ref_config()
 
-    wait_value = config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME)
-    print(wait_value)
+    print(config.arjuna_options.value(ArjunaOption.BROWSER_NAME))
+    print(config.arjuna_options.value("BROWSER_NAME"))
+    print(config.arjuna_options.value("BrOwSeR_NaMe"))
+    print(config.arjuna_options.value("browser.name"))
+    print(config.arjuna_options.value("Browser.Name"))
 
-    wait_value = config.get_arjuna_option_value("BROWSER_NAME")
-    print(wait_value)
-
-    wait_value = config.get_arjuna_option_value("BrOwSeR_NaMe")
-    print(wait_value)
-
-    wait_value = config.get_arjuna_option_value("browser.name")
-    print(wait_value)
-
-    wait_value = config.get_arjuna_option_value("Browser.Name")
-    print(wait_value)
-
-    browser = config.browser_name
-    print(browser)
+    print(config.browser_name)
  ```
 
 ##### Points to Note
 1. First, we retrieve the reference config by calling `Arjuna.get_ref_config()`
-2. You can retrieve value of an `ArjunaOption` by calling the `get_arjuna_option_value(<Arjuna Option or string>)` method of a `Configuration` object. The argument to this call can be an `ArjunaOption` enum constant or a string representing the option. 
+2. You can retrieve value of an `ArjunaOption` by calling the `value(<Arjuna Option or string>)` method of a `Configuration.arjuna_options` object. The argument to this call can be an `ArjunaOption` enum constant or a string representing the option. 
 3. The option name string is considered by Arjuna as **case-insensitive**. Also, **. (dot)** and **_ (underscore)** are interchangeable. So, following are equivalent arguments:
         - ArjunaOption.BROWSER_NAME
         - BROWSER_NAME
@@ -53,8 +43,7 @@ def check_config_retrieval(request):
         - browser.name
         - Browser.Name
         - and so on
-4. `get_arjuna_option_value` call always returns a `Value` object which should be converted to an appropriate type before use.
-5. The `Configuration` object also has named properties for commonly used Arjuna options. The name of property is same as the lower-case enum constant text, for example, `browser_name`. Such direct named methods return appropriate objects rather than `Value`s. For example, this call returns BrowserName.CHROME enum constant which is the real representation of browser name in Arjuna.
+4. The `Configuration` object also has named properties for commonly used Arjuna options. The name of property is same as the lower-case enum constant text, for example, `browser_name`.
 
 ### Project Level Configuration Settings
 

@@ -215,10 +215,10 @@ class __RunCommand(Command):
         Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid, static_rid=static_rid)
 
         import sys
-        proj_dir = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.PROJECT_ROOT_DIR)
+        proj_dir = Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.PROJECT_ROOT_DIR)
         sys.path.append(proj_dir + "/..")
 
-        py_3rdparty_dir = Arjuna.get_ref_config().get_arjuna_option_value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR)
+        py_3rdparty_dir = Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR)
         sys.path.append(py_3rdparty_dir)
 
 

@@ -27,23 +27,13 @@ Code is kept redundant across methods for the purpose of easier learning.
 def check_config_retrieval(request):
     config = Arjuna.get_ref_config()
 
-    wait_value = config.get_arjuna_option_value(ArjunaOption.BROWSER_NAME)
-    print(wait_value)
+    print(config.arjuna_options.value(ArjunaOption.BROWSER_NAME))
+    print(config.arjuna_options.value("BROWSER_NAME"))
+    print(config.arjuna_options.value("BrOwSeR_NaMe"))
+    print(config.arjuna_options.value("browser.name"))
+    print(config.arjuna_options.value("Browser.Name"))
 
-    wait_value = config.get_arjuna_option_value("BROWSER_NAME")
-    print(wait_value)
-
-    wait_value = config.get_arjuna_option_value("BrOwSeR_NaMe")
-    print(wait_value)
-
-    wait_value = config.get_arjuna_option_value("browser.name")
-    print(wait_value)
-
-    wait_value = config.get_arjuna_option_value("Browser.Name")
-    print(wait_value)
-
-    browser = config.browser_name
-    print(browser)
+    print(config.browser_name)
 
 
 @test
