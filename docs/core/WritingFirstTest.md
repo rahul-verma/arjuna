@@ -21,18 +21,18 @@ from arjuna import *
 def check_go_to_url(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 ```
 
 #### Points to Note
 1. Create a test module in `<Project Root Directory>/test/module`. The module name should start with the prefix `check_`
 2. In the python test module file, import all names from Arjuna: `from arjuna import *`. Ofcourse, as you become more aware of Arjuna's TPI (tester programming interface), you can do selective imports using Python.
-3. Create a test. In Arjuna, a test is a function marked with `@test` decorator. It must start with the prefix `check_`. It should take two mandatory arguments - `my` and `request`.
+3. Create a test. In Arjuna, a test is a function marked with `@test` decorator. It must start with the prefix `check_`. It should take **one mandatory argument**: `request`.
 4. The contents of the test function depend on the test that you want to write. Following are the steps in the above test. We will cover more details on Web UI test automation in a later section. For now, just make do with the high level details.
   - Create a WebApp and provide its `base_url` argument as `https://google.com`.
   - Launch the app using its `.launch()` method. It launches **Chrome**, as it is the **default browser in Arjuna**.
-  - We assert the expected title using `request.asserter` object's `assert_equal` method. The actual window title of the browser can be got as `<app object>.title`. The last argument of the assertion method is `context` string which reperesents what you are asserting. You can also pass a `msg` argument to include a message which will be included in the report if this assertion fails.
+  - We assert the expected title using `request.asserter` object's `assert_equal` method. The actual window title of the browser can be got as `<app object>.title`. The last argument of the assertion method is `msg` string which should be used to give proper message in the context of the automated test where you are using this assertion. You can also pass a `msg` argument to include a message which will be included in the report if this assertion fails.
   - Quit the app using its `quit` method.
 
 #### Running the test
