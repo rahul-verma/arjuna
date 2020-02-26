@@ -74,3 +74,4 @@ from arjuna.engine.data.generator import Random, Entity, Locales
 from arjuna.engine.relation import *
 from arjuna.engine.fixture import *
 from arjuna.core.xml import xfinder
+from arjuna.core.adv.types import ProcessedKeyDict

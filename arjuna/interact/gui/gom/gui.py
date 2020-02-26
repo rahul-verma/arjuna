@@ -22,6 +22,7 @@ import abc
 import os
 from enum import Enum
 import unittest
+import traceback
 
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 

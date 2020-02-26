@@ -17,37 +17,39 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+import abc
 import pprint
 from collections import OrderedDict
 
-class CIStringDict:
+class ArDict(metaclass=abc.ABCMeta):
 
-    def __init__(self, d={}, ordered=False):
-        if ordered:
-            self.__store = OrderedDict()
-        else:
-            self.__store = {}
+    def __init__(self, d={}):
+        self.__store = dict()
         self.update(d)
 
+    @abc.abstractmethod
+    def process_key(self, key):
+        pass
+
     def __getitem__(self, key):
-        return self.__store[key.lower()]
+        return self.__store[self.process_key(key)]
 
     def pop(self, key):
-        return self.__store.pop(key.lower())
+        return self.__store.pop(self.process_key(key))
 
     def __setitem__(self, key, value):
-        self.__store[key.lower()] = value
+        self.__store[self.process_key(key)] = value
 
     def __delitem__(self, key):
-        del self.__store[key.lower()]
+        del self.__store[self.process_key(key)]
 
     def update(self, d):
         if not d: return
         for k,v in d.items():
-            self[k.lower()] = v
+            self[self.process_key(k)] = v
 
     def has_key(self, key):
-        return key.lower() in self.__store
+        return self.process_key(key) in self.__store
 
     def __getattr__(self, attr):
         return getattr(self.__store, attr)
@@ -58,14 +60,8 @@ class CIStringDict:
     def __str__(self):
         if not self.__store:
             return "<empty>"
-
-        parts = []
-        keys = list(self.__store.keys())
-        keys.sort()
-        for k in keys:
-            if self.__store[k] is not None:
-                parts.append("[{}] {}".format(k, self.__store[k]))
-        return "\n".join(parts)
+        else:
+            return str(self.__store)
 
     def __iter__(self):
         return iter(self.__store)
@@ -78,6 +74,24 @@ class CIStringDict:
 
     def is_empty(self):
         return len(self.__store) == 0
+
+class CIStringDict(ArDict):
+
+    def __init__(self, d={}):
+        super().__init__(d)
+
+    def process_key(self, key):
+        return key.lower()
+
+
+class ProcessedKeyDict(ArDict):
+
+    def __init__(self, *, processor, seed_dict={}):
+        self.__processor = processor
+        super().__init__(seed_dict)
+
+    def process_key(self, key):
+        return self.__processor(key)    
 
 
 class OnceOnlyKeyCIStringDict(CIStringDict):
