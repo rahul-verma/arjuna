@@ -21,7 +21,7 @@ from arjuna import *
 from arjex_webui_basics.lib.wp import *
 
 @test
-def test_sep_functions(request):
+def check_sep_functions(request):
     wordpress = create_wordpress_app()
     login(wordpress)
     logout(wordpress)

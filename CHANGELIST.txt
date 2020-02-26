@@ -1,5 +1,10 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.2
+-----
+- Bug fix: attr and related With factory methods had a bug post refactoring. Fixed.
+- 
+
 0.9.1
 ------
 - In test or test scope fixture, item can be added to module scope.
