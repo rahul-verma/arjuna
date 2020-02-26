@@ -8,8 +8,9 @@ Following is the list of critical additions and updates for a given released ver
 - Introduction of "withx" (With Extended) in GNS for cleaner identifiers which share same pattern.
 - Added mimesis as a dependency in setup.py. Arjuna will use its facilties for faking/generating commonly used data.
 - Introduction of basic Data Generator wrapper class on top of Mimesis.
-- Value class is an overhand of Java version of Arjuna. It is in the process of being completely removed from Arjuna as object wrapper.
-    - DataRecord values are not Value objects any more.
+- Value class is an overhang of Java version of Arjuna. It is completely removed from Arjuna as object wrapper.
+    - DataRecord or Configuration values are not Value objects any more.
+    - Value class remains to provide any conversion class methods, which can be a useful feature to retain.
 - Added SourceNode class. 
     - element.source.node gives an object of this. 
     - Provides finder methods for directly finding content in element source rather than browser based selenium commands.
