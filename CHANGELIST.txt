@@ -5,6 +5,7 @@ Following is the list of critical additions and updates for a given released ver
 - Bug fix: attr and related With factory methods had a bug post refactoring. Fixed.
 - Bug fix: screenshot path in HTML report hook.
 - Entity -> DataEntity for clarity of purpose.
+- BrowserConditions class added with DocumentReadyState condition automatically called for browser methods.
 
 0.9.1
 ------
