@@ -17,7 +17,7 @@ Following are critical project directories, sub-directories and files. *Arjuna c
       - **screenshot**: Contains screenshots taken for a test run.
       - **xml**: JUnit-style XML report (report.xml) goes here. It is primarily meant for Jenkins or other CI software intergrations with Arjuna.
  - **test**: Contains test files. As of now Arjuna supports coded tests only.
-  - **module**: Coded tests are written as Python modules and are placed here. Sub-packaging of modules is allowed.
-  - **conftest.py**: This is pytest's conftest.py file 
+    - **module**: Coded tests are written as Python modules and are placed here. Sub-packaging of modules is allowed.
+    - **conftest.py**: This is pytest's conftest.py file 
 - **script**: This directory is meant to contain Arjuna scripts (or your own custom scripts or batch files.)
   - **arjuna_launcher.py**: This is the script which is used to run your tests by invoking Arjuna.
