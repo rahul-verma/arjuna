@@ -183,7 +183,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         f = open(fpath, "wb")
         f.write(image)
         f.close()
-        return "../screenshots/{}".format(file_name), image_b64
+        return file_name, image_b64
 
     def focus_on_main_window(self):
         self.main_window.focus()
