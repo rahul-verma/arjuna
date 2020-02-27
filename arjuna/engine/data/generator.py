@@ -7,7 +7,7 @@ from mimesis import Text
 from collections import namedtuple
 
 Locales = locales
-Entity = namedtuple
+DataEntity = namedtuple
 
 class Random:
 

@@ -19,26 +19,51 @@ limitations under the License.
 
 from arjuna.core.enums import ArjunaOption
 
+from arjuna.core.poller.conditions import *
+from arjuna.core.poller.caller import *
+
+class BrowserConditions:
+
+    def __init__(self, browser):
+        self.__browser = browser
+
+    @property
+    def gui(self):
+        return self.__gui
+
+    def DocumentReadyState(self):
+        caller = DynamicCaller(self.__browser.is_document_ready)
+        return BooleanCondition(caller)
+
 class Browser:
 
     def __init__(self, automator):
         self.__automator = automator
+        self.__conditions = BrowserConditions(self)
 
     @property
     def automator(self):
         return self.__automator
 
+    def is_document_ready(self):
+        print(self.execute_javascript("return document.readyState"))
+        return self.execute_javascript("return document.readyState") == "complete"
+
     def go_to_url(self, url):
         self.automator.dispatcher.go_to_url(url=url)
+        self.__conditions.DocumentReadyState().wait()
 
     def go_back(self):
         self.automator.dispatcher.go_back_in_browser()
+        self.__conditions.DocumentReadyState().wait()
 
     def go_forward(self):
         self.automator.dispatcher.go_forward_in_browser()
+        self.__conditions.DocumentReadyState().wait()
 
     def refresh(self):
         self.automator.dispatcher.refresh_browser()
+        self.__conditions.DocumentReadyState().wait()
 
     def execute_javascript(self, js, *args):
         return self.automator.dispatcher.execute_javascript(js, *args)
