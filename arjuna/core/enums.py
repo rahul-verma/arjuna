@@ -183,6 +183,7 @@ class TimeUnit(Enum):
 class DesktopOS(Enum):
     WINDOWS = auto()
     MAC = auto()
+    LINUX = auto()
 
 class SetuActorMode(Enum):
     LOCAL = auto()

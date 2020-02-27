@@ -21,7 +21,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name = "arjuna",
-    version = "0.9.2",
+    version = "0.9.4",
     url = "https://rahulverma.net",
     description = "Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net).",
     author = "Rahul Verma",
@@ -43,7 +43,7 @@ setup(
                     "res/*.ini",
                 ]
     },
-    install_requires = ["requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon", "lxml", "pytest", "pytest-dependency", "PyYAML", "mimesis"],
+    install_requires = ["requests", "selenium", "xlrd", "xlwt", "pyparsing", "pyhocon", "lxml", "pytest", "pytest-html", "pytest-dependency", "PyYAML", "mimesis"],
     keywords = "arjuna setu unitee selenium testing automation page-object",
     license = "Apache License, Version 2.0",
     classifiers=[
