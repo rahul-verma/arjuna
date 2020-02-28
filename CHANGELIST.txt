@@ -1,5 +1,10 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.4
+-----
+- create-project command added to CLI.
+- 
+
 0.9.3
 -----
 - Added Linux to enum.

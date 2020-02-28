@@ -22,7 +22,7 @@ import sys
 import time
 
 def main(*args):
-    print("Executing Arjuna command line with args: {}".format(*args))
+    print("Executing Arjuna command line with args: {}".format(args))
     try:
         import signal
         import sys

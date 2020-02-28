@@ -25,9 +25,9 @@ from arjuna.core.enums import ArjunaOption, ReportFormat
 def ustr(input):
     return (str(input)).upper()
 
-VNREGEX = r'^[a-z][_a-z0-9]{2,29}$'
+VNREGEX = r'^[a-z][_a-z0-9]{2,49}$'
 VNREGEX_TEXT = '''
-{} name must be a string of length 3-30 containing lower case letters, digits or _ (underscore).
+{} name must be a string of length 3-50 containing lower case letters, digits or _ (underscore).
 It must begin with a letter.
 '''
 

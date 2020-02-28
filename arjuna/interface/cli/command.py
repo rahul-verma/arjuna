@@ -139,16 +139,15 @@ class CreateProject(Command):
         (FileObjectType.DIR, "script"),
         (FileObjectType.DIR, "test"),
         (FileObjectType.FILE, "test/__init__.py"),
-        (FileObjectType.FILE, "test/conftest.py"),
         (FileObjectType.DIR, "test/module"),
         (FileObjectType.FILE, "test/module/__init__.py"),
         (FileObjectType.DIR, "lib"),
-        (FileObjectType.DIR, "lib/__init__.py"),
+        (FileObjectType.FILE, "lib/__init__.py"),
         (FileObjectType.DIR, "lib/fixture"),
-        (FileObjectType.DIR, "lib/fixture/__init__.py"),
-        (FileObjectType.DIR, "lib/fixture/session.py"),
-        (FileObjectType.DIR, "lib/fixture/module.py"),
-        (FileObjectType.DIR, "lib/fixture/test.py"),
+        (FileObjectType.FILE, "lib/fixture/__init__.py"),
+        (FileObjectType.FILE, "lib/fixture/session.py"),
+        (FileObjectType.FILE, "lib/fixture/module.py"),
+        (FileObjectType.FILE, "lib/fixture/test.py"),
     )
 
     def __init__(self, subparsers, parents):
@@ -165,11 +164,19 @@ class CreateProject(Command):
             f.close()
 
     def execute(self, arg_dict):
+        def copy_file(src, dest):
+            shutil.copyfile(
+                os.path.join(os.path.dirname(os.path.realpath(__file__)), src),
+                os.path.join(project_temp_dir, dest)
+            )
+
         for parent in self.parents:
             parent.process(arg_dict)
         # from arjuna import ArjunaCore
         pdir = arg_dict['project.root.dir']
+        print(os.path.join(pdir, "config/project.conf"))
         if os.path.exists(os.path.join(pdir, "config/project.conf")):
+            print("dfgjkdfhgk")
             print("Arjuna project already exists at the specified location.")
             sys.exit(1)
         parent_dir = os.path.abspath(os.path.join(pdir, ".."))
@@ -179,10 +186,13 @@ class CreateProject(Command):
             os.makedirs(project_temp_dir)
             for ftype, frpath in CreateProject.COMMON_DIRS_FILES:
                 self.__create_file_or_dir(project_temp_dir, ftype, frpath)
-            shutil.copyfile(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), "../../res/scripts/arjuna_launcher.py"),
-                os.path.join(project_temp_dir, "arjuna_launcher.py")
-                )
+            copy_file("../../res/proj.conf", "config/project.conf")
+            copy_file("../../res/scripts/arjuna_launcher.py", "script/arjuna_launcher.py")
+            copy_file("../../res/conftest.py", "test/conftest.py")
+            for d in [ "data/source", "data/reference", "guiauto/namespace"]:
+                copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
+            for os_name in ["mac", "windows", "linux"]:
+                copy_file("../../res/placeholder.txt", "guiauto/driver/{}/driver.txt".format(os_name))
             for f in os.listdir(project_temp_dir):
                 try:
                     shutil.move(os.path.join(project_temp_dir, f), pdir)

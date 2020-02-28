@@ -46,7 +46,7 @@ class ArjunaCLI:
         subparsers = self.main_command.create_subparsers()
 
         # Create re-usable parses for command arguments
-        # new_project_parser = NewProjectParser()
+        new_project_parser = NewProjectParser()
         project_parser = ProjectParser()
         run_parser = RunParser()
         # session_parser = SessionParser()
@@ -54,7 +54,7 @@ class ArjunaCLI:
         pickers_parser = PickersParser()
 
         # Create primary command handlers
-        # self.create_project = CreateProject(subparsers, [new_project_parser])
+        self.create_project = CreateProject(subparsers, [new_project_parser])
         self.run_project = RunProject(subparsers, [project_parser, run_parser])
         # self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
         # self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])
@@ -78,7 +78,7 @@ class ArjunaCLI:
         # Delegation dictionary for primary command description
         desc_cases = {
             # CommandEnum.LAUNCH_SETU: "Launching Setu",
-            # CommandEnum.CREATE_PROJECT: "Creating new project",
+            CommandEnum.CREATE_PROJECT: "Creating new project",
             CommandEnum.RUN_PROJECT: "Running the project",
             # CommandEnum.RUN_SESSION: "Running the selected session",
             # CommandEnum.RUN_GROUP: "Running the selected group",
@@ -95,7 +95,7 @@ class ArjunaCLI:
         # Respective command object's 'execute' method is the handler.
         execute_cases = {
             # CommandEnum.LAUNCH_SETU: (self.launch_setu.execute,),
-            # CommandEnum.CREATE_PROJECT: (self.create_project.execute, ),
+            CommandEnum.CREATE_PROJECT: (self.create_project.execute, ),
             CommandEnum.RUN_PROJECT: (self.run_project.execute, ),
             # CommandEnum.RUN_SESSION: (self.run_session.execute, ),
             # CommandEnum.RUN_GROUP: (self.run_group.execute, ),
