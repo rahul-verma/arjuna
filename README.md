@@ -56,7 +56,7 @@ The following tutorial sub-sections have multiple example projects corresponding
 3. [Gui and Its Loading Model in Arjuna](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiLoadingModel.md)
 3. [App Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppObjectModel.md)
 4. [App-Page Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageObjectModel.md)
-5. [App-Page-Widget Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageWidgetObjectModel.md)
+5. [App-Page-Section Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageSectionObjectModel.md)
 
 ## Reference
 1. [Command Line Options](https://github.com/rahul-verma/arjuna/blob/master/docs/core/CommandLineOptions.md)
