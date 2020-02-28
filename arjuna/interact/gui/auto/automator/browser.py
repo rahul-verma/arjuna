@@ -46,7 +46,6 @@ class Browser:
         return self.__automator
 
     def is_document_ready(self):
-        print(self.execute_javascript("return document.readyState"))
         return self.execute_javascript("return document.readyState") == "complete"
 
     def go_to_url(self, url):
