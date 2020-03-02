@@ -228,7 +228,7 @@ For the above code to work, there are sample files provided in the directory `<P
 
 **input.xls**
 
-<img src="img/inputxls.png" height="250" width="250">
+<img src="img/inputxls.png">
 
 **input.txt**
 
