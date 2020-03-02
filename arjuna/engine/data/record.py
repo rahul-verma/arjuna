@@ -45,6 +45,11 @@ class DataRecord:
         else:
             super().__getattr__(i)
 
+    def should_exclude(self):
+        if "exclude" in self.__named:
+            if self.__named["exclude"].lower() in {"y","yes","true","1"}:
+                return True
+
     def value_named(self, name):
         return self.__named[name.lower()]
 

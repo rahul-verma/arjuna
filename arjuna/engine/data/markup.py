@@ -97,7 +97,7 @@ class _DataFile(_DataMarkUp):
         self.path = path
         self.delimiter = delimiter
 
-        data_dir = Arjuna.get_central_config().arjuna_options.value(ArjunaOption.DATA_SOURCES_DIR)
+        data_dir = Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.DATA_SOURCES_DIR)
 
         if file_utils.is_absolute_path(self.path):
             if not file_utils.is_file(self.path):
@@ -114,7 +114,7 @@ class _DataFile(_DataMarkUp):
                     raise Exception("File does not exist: {}".format(self.path))
 
     def build(self):
-        source = create_ds(self.path, self.delimiter)
+        source = create_file_data_source(self.path, delimiter=self.delimiter)
         return source
 
 data_file = _DataFile

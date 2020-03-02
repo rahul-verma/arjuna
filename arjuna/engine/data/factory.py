@@ -20,23 +20,22 @@ limitations under the License.
 import os
 from .source import *
 
-def create_file_data_source(data_dir, file_name, record_format="MAP", delimiter="\t"):
+def create_file_data_source(file_path, record_format="MAP", delimiter="\t"):
     ds = None
-    ext = file_name.lower()
-    path = os.path.join(data_dir, file_name)
+    ext = file_path.lower()
     rformat = record_format.upper()
     if ext.endswith(".csv") or ext.endswith(".txt"):
         if rformat == "LIST":
-            ds = DsvFileListDataSource(path, delimiter)
+            ds = DsvFileListDataSource(file_path, delimiter)
         else:
-            ds = DsvFileMapDataSource(path, delimiter)
+            ds = DsvFileMapDataSource(file_path, delimiter)
     elif ext.endswith(".xls"):
         if rformat == "LIST":
-            ds = ExcelFileListDataSource(path)
+            ds = ExcelFileListDataSource(file_path)
         else:
-            ds = ExcelFileMapDataSource(path)
+            ds = ExcelFileMapDataSource(file_path)
     elif ext.endswith(".ini"):
-        ds = IniFileDataSource(path)
+        ds = IniFileDataSource(file_path)
     else:
         raise Exception("This is not a default file format supported as a data source: " + path)
     return ds

@@ -11,6 +11,7 @@ Following is the list of critical additions and updates for a given released ver
     - Support for `records` markup.
     - Support for `data_function` markup.
     - Support for `data_class` markup.
+    - Support for `data_file` markup (Out of the box support for XLS, TSV/CSV and INI formats.)
     - Added example code and docs for data driven testing.
 
 0.9.3

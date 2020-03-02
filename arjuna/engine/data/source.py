@@ -95,12 +95,9 @@ class DataSource(metaclass=abc.ABCMeta):
         out = []
         while True:
             try:
-                record = self.next() #.record
+                record = self.next()
                 out.append(record)
             except DataSourceFinished as e:
-                # print(e)
-                # import traceback
-                # traceback.print_exc()
                 break
         return out
 
@@ -144,7 +141,7 @@ class DsvFileListDataSource(FileDataSource):
         self._load_file()
 
     def process(self, data_record):
-        return ListDataRecord(data_record)
+        return DataRecord(**dict(data_record))
 
     def _load_file(self):
         self.reader = FileLine2ArrayReader(self.path, self.__delimiter)
@@ -157,7 +154,7 @@ class DsvFileMapDataSource(FileDataSource):
         self._load_file()
 
     def process(self, data_record):
-        return MapDataRecord(data_record)
+        return DataRecord(**dict(data_record))
 
     def _load_file(self):
         self.reader = FileLine2MapReader(self.path, self.__delimiter)
@@ -172,7 +169,7 @@ class IniFileDataSource(FileDataSource):
             raise Exception("Unsupported file extension for Ini reading.")
 
     def process(self, data_record):
-        return MapDataRecord(data_record)
+        return DataRecord(**dict(data_record))
 
     def _load_file(self):
         self.reader = IniFile2MapReader(self.path)
@@ -211,9 +208,7 @@ class ExcelFileMapDataSource(FileDataSource):
         return data_record.should_exclude()
 
     def process(self, data_record):
-        return MapDataRecord(data_record)
-
-
+        return DataRecord(**dict(data_record))
 
 class DummyDataSource(DataSource):
     MR = DataRecord()
