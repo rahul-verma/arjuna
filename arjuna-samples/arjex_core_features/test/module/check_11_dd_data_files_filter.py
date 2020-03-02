@@ -19,18 +19,14 @@ limitations under the License.
 
 from arjuna import *
 
-@test(drive_with=data_file("input.xls"))
+@test(drive_with=data_file("input_exclude.xls"))
 def check_drive_with_excel(request, data):
     request.asserter.assert_equal(int(data.left) + int(data.right), int(data.sum), "Calculation failed.")
 
-@test(drive_with=data_file("input.txt"))
+@test(drive_with=data_file("input_exclude.txt"))
 def check_drive_with_tsv(request, data):
     request.asserter.assert_equal(int(data.left) + int(data.right), int(data.sum), "Calculation failed.")
 
-@test(drive_with=data_file("input.csv", delimiter=","))
-def check_drive_with_csv(request, data):
-    request.asserter.assert_equal(int(data.left) + int(data.right), int(data.sum), "Calculation failed.")
-
-@test(drive_with=data_file("input.ini"))
+@test(drive_with=data_file("input_exclude.ini"))
 def check_drive_with_ini(request, data):
     request.asserter.assert_equal(int(data.left) + int(data.right), int(data.sum), "Calculation failed.")
