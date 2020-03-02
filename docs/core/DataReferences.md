@@ -53,5 +53,6 @@ def check_excel_row_data_ref(request):
 #### Points to Note
 1. You can access data references in your test code as `request.data_refs`.
 2. The name of the file is used to refer to a given data reference: `request.data_refs.cusers` or `request.data_refs["cusers"]`.
-3. Now, we can retrieve the values for a context using the `record_for` method of the reference. For example, here we are retrieiving the values for `gold` context.
+3. Now, we can retrieve the values for a context using the `record_for` method of the reference. For example, here we are retrieiving the values for `bronze` context from column data reference and `gold` context from row data reference.
 4. The values are returned as a `DataRecord` object, which should be familiar to you by this time as it is the same object returned for `drive_with` markup.
+5. The only difference between the two styles of references is the format and the way Arjuna loads them. Usage for a test author is exactly the same.
