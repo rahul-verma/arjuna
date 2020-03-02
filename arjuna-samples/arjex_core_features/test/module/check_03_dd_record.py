@@ -19,19 +19,24 @@ limitations under the License.
 
 from arjuna import *
 
-@test
-def check_no_data(request):
-    pass
-
+msg="Unexpected data record."
 
 @test(drive_with=record(1,2))
 def check_pos_data(request, data):
-    pass
+    request.asserter.assert_equal(data[0] + data[1], 3, msg=msg)
 
-@test(drive_with=record(a=1,b="abc"))
+@test(drive_with=record(a=1,b=2))
 def check_named_data(request, data):
-    pass
+    request.asserter.assert_equal(data['a'] + data['b'], 3, msg=msg)
 
-@test(drive_with=record(1,2, a=1,b="abc"))
+@test(drive_with=record(1,2, a=3,b=4))
 def check_pos_named_data(request, data):
-    pass
+    request.asserter.assert_equal(data[0] + data[1] + data['a'] + data['b'], 10, msg=msg)
+
+@test(drive_with=record(a=1,b=2))
+def check_names_args_with_dot(request, data):
+    request.asserter.assert_equal(data.a + data.b, 3, msg=msg)
+
+@test(drive_with=record(a=1,b=2))
+def check_names_args_ci(request, data):
+    request.asserter.assert_equal(data.A + data['B'], 3, msg=msg)

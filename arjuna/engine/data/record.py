@@ -31,13 +31,13 @@ class DataRecord:
             self.__named = types.MappingProxyType({i.lower(): j for i, j in kwargs.items()})
         else:
             self.__indexed = tuple()
-            self.__named = types.MappingProxyType({})  
+            self.__named = types.MappingProxyType({}) 
 
     def __getitem__(self, i):
         if type(i) is int:
             return self.__indexed[i]
         else:
-            return self.__named[i]
+            return self.__named[i.lower()]
 
     def __getattr__(self, i):
         if type(i) is str and not i.startswith('__'):
@@ -93,7 +93,7 @@ class DataRecord:
         if not self.indexed_values and not self.named_values:
             return ""
         if self.indexed_values:
-            indexed = " Indexed:{}".format(str([i.object() for i in self.indexed_values]))
+            indexed = " Indexed:{}".format(str([i for i in self.indexed_values]))
         else:
             indexed = ""
         if self.named_values:
