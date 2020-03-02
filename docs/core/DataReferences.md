@@ -13,7 +13,7 @@ Arjuna supports Excel based data references out of the box. These reference file
 
 There are two types of Excel based Data References that you can create in Arjuna:
 
-** Column Data References **
+**Column Data References**
 
 You place such files in `<Project Root>/data/reference/column` directory. A reference file can be found in this example project.
 
@@ -21,7 +21,7 @@ You place such files in `<Project Root>/data/reference/column` directory. A refe
 
 In a column data reference file, the context of data is represented by columns. Here Account Type's values -  `Bronze`, `Silver` and `Gold` represent the contexts, for which the `User` and `Pwd` values are different.
 
-** Row Data References **
+**Row Data References**
 
 You place such files in `<Project Root>/data/reference/row` directory. A reference file can be found in this example project.
 
