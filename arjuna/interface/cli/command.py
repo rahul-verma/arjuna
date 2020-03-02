@@ -164,11 +164,14 @@ class CreateProject(Command):
             f.close()
 
     def execute(self, arg_dict):
+        def get_src_file_path(src):
+            return os.path.join(os.path.dirname(os.path.realpath(__file__)), src)
+
+        def get_proj_target_path(dest):
+            return os.path.join(project_temp_dir, dest)
+
         def copy_file(src, dest):
-            shutil.copyfile(
-                os.path.join(os.path.dirname(os.path.realpath(__file__)), src),
-                os.path.join(project_temp_dir, dest)
-            )
+            shutil.copyfile(get_src_file_path(src), get_proj_target_path(dest))
 
         for parent in self.parents:
             parent.process(arg_dict)
@@ -176,7 +179,6 @@ class CreateProject(Command):
         pdir = arg_dict['project.root.dir']
         print(os.path.join(pdir, "config/project.conf"))
         if os.path.exists(os.path.join(pdir, "config/project.conf")):
-            print("dfgjkdfhgk")
             print("Arjuna project already exists at the specified location.")
             sys.exit(1)
         parent_dir = os.path.abspath(os.path.join(pdir, ".."))
@@ -188,7 +190,12 @@ class CreateProject(Command):
                 self.__create_file_or_dir(project_temp_dir, ftype, frpath)
             copy_file("../../res/proj.conf", "config/project.conf")
             copy_file("../../res/scripts/arjuna_launcher.py", "script/arjuna_launcher.py")
-            copy_file("../../res/conftest.py", "test/conftest.py")
+            f = open(get_src_file_path("../../res/conftest.txt"), "r")
+            contents = f.read().format(project=project_name)
+            f.close()
+            f = open(get_proj_target_path("test/conftest.py"), "w")
+            f.write(contents)
+            f.close()
             for d in [ "data/source", "data/reference", "guiauto/namespace"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:

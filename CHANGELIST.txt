@@ -3,7 +3,8 @@ Following is the list of critical additions and updates for a given released ver
 0.9.4
 -----
 - create-project command added to CLI.
-- 
+- conftest.py is generated as per project_name.lib.fixture structure.
+- Fixed example codes across projects.
 
 0.9.3
 -----

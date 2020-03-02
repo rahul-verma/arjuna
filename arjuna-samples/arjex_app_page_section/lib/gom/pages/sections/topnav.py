@@ -33,5 +33,5 @@ class TopNav(WPBaseSection):
         self.element(self.labels.logout_confirm).click()
         self.element(self.labels.logout_msg).wait_until_visible()
 
-        from arjex_app_page_widget.lib.gom.pages.home import Home
+        from arjex_app_page_section.lib.gom.pages.home import Home
         return Home(self)

@@ -18,7 +18,7 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_app_page_widget.lib.gom.app import WordPress
+from arjex_app_page_section.lib.gom.app import WordPress
 
 @for_test
 def settings(request):
@@ -33,5 +33,5 @@ def settings(request):
     settings.top_nav.logout()
 
 @test
-def check_with_wp_app_page_widget(request, settings):
+def check_with_wp_app_page_section(request, settings):
     settings.tweak_role_value("editor")

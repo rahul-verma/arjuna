@@ -20,8 +20,8 @@ limitations under the License.
 import abc
 from arjuna import Page
 
-from .widgets.topnav import TopNav
-from .widgets.leftnav import LeftNav
+from .sections.topnav import TopNav
+from .sections.leftnav import LeftNav
 
 
 class WPBasePage(Page, metaclass=abc.ABCMeta):

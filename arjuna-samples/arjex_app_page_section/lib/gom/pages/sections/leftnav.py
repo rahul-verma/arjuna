@@ -34,6 +34,6 @@ class LeftNav(WPBaseSection):
 
     @property
     def settings(self):
-        from arjex_app_page_widget.lib.gom.pages.settings import Settings
+        from arjex_app_page_section.lib.gom.pages.settings import Settings
         self.element(self.labels.settings).click()
         return Settings(self)

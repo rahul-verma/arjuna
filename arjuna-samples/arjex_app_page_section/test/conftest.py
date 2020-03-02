@@ -1,10 +1,11 @@
-from importlib import import_module
+import pytest
 
-mod = import_module("arjex_webui_basics.lib.fixtures")
+from arjuna import *
+from arjex_app_page_section.lib.fixture.session import *
+from arjex_app_page_section.lib.fixture.module import *
+from arjex_app_page_section.lib.fixture.test import *
 
-names = ["get_number"]
-
-for name in names:
-    globals()[name] = getattr(mod, name)
-
-__all__ = names
+@pytest.mark.hookwrapper
+def pytest_runtest_makereport(item, call):
+    result = yield
+    PytestHooks.add_screenshot_for_result(item, result)
