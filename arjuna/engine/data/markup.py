@@ -27,6 +27,24 @@ from arjuna.core.utils import obj_utils
 class _DataMarkUp:
     pass
 
+class _DataRecord(_DataMarkUp):
+
+    from arjuna.engine.data.source import SingleDataRecordSource
+    def __init__(self, *vargs, **kwargs):
+        super().__init__()
+        if not vargs and not kwargs:
+            raise Exception("No data provided in Data")
+        self.__record = DataRecord(*vargs, **kwargs)
+
+    def build(self):
+        source = SingleDataRecordSource(self.__record)
+        return source
+
+    def get_record(self):
+        return self.__record
+
+record = _DataRecord
+
 class _DataRecords(_DataMarkUp):
     from arjuna.engine.data.source import DataArrayDataSource
     def __init__(self, *records):
@@ -41,34 +59,6 @@ class _DataRecords(_DataMarkUp):
         return source
 
 records = _DataRecords
-
-class _DataFile(_DataMarkUp):
-    def __init__(self, path=None, delimiter="\t"):
-        super().__init__()
-        self.path = path
-        self.delimiter = delimiter
-
-        data_dir = Arjuna.get_central_config().arjuna_options.value(ArjunaOption.DATA_SOURCES_DIR)
-
-        if file_utils.is_absolute_path(self.path):
-            if not file_utils.is_file(self.path):
-                if file_utils.is_dir(self.path):
-                    raise Exception("Not a file: {}".format(self.path))
-                else:
-                    raise Exception("File does not exist: {}".format(self.path))
-        else:
-            self.path = os.path.abspath(os.path.join(data_dir, self.path))
-            if not file_utils.is_file(self.path):
-                if file_utils.is_dir(self.path):
-                    raise Exception("Not a file: {}".format(self.path))
-                else:
-                    raise Exception("File does not exist: {}".format(self.path))
-
-    def build(self):
-        source = create_ds(self.path, self.delimiter)
-        return source
-
-data_file = _DataFile
 
 class _DataFunc(_DataMarkUp):
     def __init__(self, func, *vargs, **kwargs):
@@ -100,6 +90,35 @@ class _DataClass(_DataMarkUp):
 
 data_class = _DataClass
 
+
+class _DataFile(_DataMarkUp):
+    def __init__(self, path=None, delimiter="\t"):
+        super().__init__()
+        self.path = path
+        self.delimiter = delimiter
+
+        data_dir = Arjuna.get_central_config().arjuna_options.value(ArjunaOption.DATA_SOURCES_DIR)
+
+        if file_utils.is_absolute_path(self.path):
+            if not file_utils.is_file(self.path):
+                if file_utils.is_dir(self.path):
+                    raise Exception("Not a file: {}".format(self.path))
+                else:
+                    raise Exception("File does not exist: {}".format(self.path))
+        else:
+            self.path = os.path.abspath(os.path.join(data_dir, self.path))
+            if not file_utils.is_file(self.path):
+                if file_utils.is_dir(self.path):
+                    raise Exception("Not a file: {}".format(self.path))
+                else:
+                    raise Exception("File does not exist: {}".format(self.path))
+
+    def build(self):
+        source = create_ds(self.path, self.delimiter)
+        return source
+
+data_file = _DataFile
+
 class _MultiDataSource(_DataMarkUp):
     def __init__(self, *dsources):
         super().__init__()
@@ -115,39 +134,4 @@ class _MultiDataSource(_DataMarkUp):
 
 many_data_sources = _MultiDataSource
 
-class _DataRecord(_DataMarkUp):
 
-    from arjuna.engine.data.source import SingleDataRecordSource
-    def __init__(self, *vargs, **kwargs):
-        super().__init__()
-        if not vargs and not kwargs:
-            raise Exception("No data provided in Data")
-        self.__record = DataRecord(*vargs, **kwargs)
-
-    def build(self):
-        source = SingleDataRecordSource(self.__record)
-        return source
-
-    def get_record(self):
-        return self.__record
-
-record = _DataRecord
-
-# def record(**kwargs):
-#     def call():
-#         return 
-#         keys = []
-#         values = []
-#         for k,v in kwargs.items():
-#             keys.append(k)
-#             values.append(v)
-#         print(",".join(keys), values)
-#         if len(keys) > 1:
-#             return ",".join(keys), [values]
-#         else:
-#             return ",".join(keys), values
-#     return call
-
-
-# def records(*record):
-#     pass

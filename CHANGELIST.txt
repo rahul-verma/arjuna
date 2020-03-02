@@ -9,6 +9,7 @@ Following is the list of critical additions and updates for a given released ver
     - Fixed indexed values in Data Record.
     - Data Record keys/names are now case-insensitive.
     - Added support for `records` markup.
+    - Added support for `data_function` markup.
     - Added example code and docs for data driven testing.
 
 0.9.3

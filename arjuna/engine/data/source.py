@@ -276,9 +276,12 @@ class DataFunctionDataSource(DataSource):
         self.vargs = vargs
         self.kwargs = kwargs
         try:
-            self.__iter = iter(self.func(*self.vargs, **self.kwargs))
+            self.reset()
         except:
             raise Exception("data_function should return an object that is an iterable.")
+
+    def reset(self):
+        self.__iter = iter(self.func(*self.vargs, **self.kwargs))
 
     def get_next(self):
         obj = next(self.__iter)

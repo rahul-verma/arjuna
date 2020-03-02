@@ -19,14 +19,9 @@ limitations under the License.
 
 from arjuna import *
 
-msg="Unexpected data record."
+def fixed_data_func():
+    return range(5)
 
-@test(drive_with=
-    records(
-        record(1,2,sum=3),    # Pass
-        record(4,5,sum=9),    # Pass
-        record(7,8,sum=10),   # Fail
-    )
-)
-def check_records(request, data):
-    request.asserter.assert_equal(data[0] + data[1], data['sum'], msg=msg)
+@test(drive_with=data_function(fixed_data_func))
+def check_fixed_data_func(request, data):
+    Arjuna.get_logger().info(data[0])

@@ -19,14 +19,13 @@ limitations under the License.
 
 from arjuna import *
 
-msg="Unexpected data record."
+def data_generator():
+    l = [1,2,3,4,5]
+    counter = 0
+    while counter < len(l):
+        yield l[counter]
+        counter += 1
 
-@test(drive_with=
-    records(
-        record(1,2,sum=3),    # Pass
-        record(4,5,sum=9),    # Pass
-        record(7,8,sum=10),   # Fail
-    )
-)
-def check_records(request, data):
-    request.asserter.assert_equal(data[0] + data[1], data['sum'], msg=msg)
+@test(drive_with=data_function(data_generator))
+def check_generator_func(request, data):
+    Arjuna.get_logger().info(data[0])
