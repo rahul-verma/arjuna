@@ -5,7 +5,11 @@ Following is the list of critical additions and updates for a given released ver
 - create-project command added to CLI.
 - conftest.py is generated as per project_name.lib.fixture structure.
 - Fixed example codes across projects.
-- Data Record keys/names are now case-insensitive.
+- Data Driven Testing
+    - Fixed indexed values in Data Record.
+    - Data Record keys/names are now case-insensitive.
+    - Added support for `records` markup.
+    - Added example code and docs for data driven testing.
 
 0.9.3
 -----

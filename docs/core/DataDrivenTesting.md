@@ -51,3 +51,30 @@ def check_names_args_ci(request, data):
 6. You can retrieve named values using a dictionary syntax (e.g. `data['a']`) or dot syntax (e.g. `data.a`).
 7. Names are case-insensitive. `data['a']`, `data['A']`, `data.a` and `data.A` mean the same thing.
 
+#### Multiple Data Records
+
+```python
+# arjuna-samples/arjex_core_features/test/module/check_04_dd_records.py
+
+from arjuna import *
+
+msg="Unexpected data record."
+
+@test(drive_with=
+    records(
+        record(1,2,sum=3),    # Pass
+        record(4,5,sum=9),    # Pass
+        record(7,8,sum=10),   # Fail
+    )
+)
+def check_records(request, data):
+    request.asserter.assert_equal(data[0] + data[1], data['sum'], msg=msg)
+```
+
+##### Points to Note
+1. You use the `records` builder function to provide multiple records.
+2. It can contain any number of `record` entries.
+3. This test will be repeated as many times as the number of records (3 in this example.)
+4. The report will contain separate entries for each test. The name will indicate the data used. (e.g. `test/module/check_04_dd_records.py::check_records[Data-> Indexed:[7, 8] Named:{sum=10}]`)
+5. Retrieval of data values is done exactly the same way as in case of a single data record.
+

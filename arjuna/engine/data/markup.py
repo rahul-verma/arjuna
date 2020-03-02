@@ -116,6 +116,7 @@ class _MultiDataSource(_DataMarkUp):
 many_data_sources = _MultiDataSource
 
 class _DataRecord(_DataMarkUp):
+
     from arjuna.engine.data.source import SingleDataRecordSource
     def __init__(self, *vargs, **kwargs):
         super().__init__()
@@ -127,8 +128,8 @@ class _DataRecord(_DataMarkUp):
         source = SingleDataRecordSource(self.__record)
         return source
 
-    # def get_record(self):
-    #     return self.record
+    def get_record(self):
+        return self.__record
 
 record = _DataRecord
 

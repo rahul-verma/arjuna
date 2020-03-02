@@ -265,6 +265,9 @@ class DataArrayDataSource(DataSource):
     def should_exclude(self, data_record):
         return False
 
+    def reset(self):
+        self.__iter = iter(self.records)
+
 
 class DataFunctionDataSource(DataSource):
     def __init__(self, func, *vargs, **kwargs):
