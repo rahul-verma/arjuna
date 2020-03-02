@@ -309,9 +309,12 @@ class DataClassDataSource(DataSource):
         self.vargs = vargs
         self.kwargs = kwargs
         try:
-            self.__iter = iter(self.klass(*self.vargs, **self.kwargs))
+            self.reset()
         except:
             raise Exception("data_class should implement Python iteration protocol.")
+
+    def reset(self):
+        self.__iter = iter(self.klass(*self.vargs, **self.kwargs))
 
     def get_next(self):
         obj = next(self.__iter)

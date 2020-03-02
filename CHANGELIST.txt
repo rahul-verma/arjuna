@@ -8,8 +8,9 @@ Following is the list of critical additions and updates for a given released ver
 - Data Driven Testing
     - Fixed indexed values in Data Record.
     - Data Record keys/names are now case-insensitive.
-    - Added support for `records` markup.
-    - Added support for `data_function` markup.
+    - Support for `records` markup.
+    - Support for `data_function` markup.
+    - Support for `data_class` markup.
     - Added example code and docs for data driven testing.
 
 0.9.3
