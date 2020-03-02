@@ -21,8 +21,8 @@ from arjuna import Arjuna, ArjunaOption
 from arjuna.engine.data.source import *
 from arjuna.engine.data.factory import *
 from arjuna.core.enums import *
-from arjuna.core.utils import file_utils
 from arjuna.core.utils import obj_utils
+from .factory import *
 
 class _DataMarkUp:
     pass
@@ -96,22 +96,6 @@ class _DataFile(_DataMarkUp):
         super().__init__()
         self.path = path
         self.delimiter = delimiter
-
-        data_dir = Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.DATA_SOURCES_DIR)
-
-        if file_utils.is_absolute_path(self.path):
-            if not file_utils.is_file(self.path):
-                if file_utils.is_dir(self.path):
-                    raise Exception("Not a file: {}".format(self.path))
-                else:
-                    raise Exception("File does not exist: {}".format(self.path))
-        else:
-            self.path = os.path.abspath(os.path.join(data_dir, self.path))
-            if not file_utils.is_file(self.path):
-                if file_utils.is_dir(self.path):
-                    raise Exception("Not a file: {}".format(self.path))
-                else:
-                    raise Exception("File does not exist: {}".format(self.path))
 
     def build(self):
         source = create_file_data_source(self.path, delimiter=self.delimiter)

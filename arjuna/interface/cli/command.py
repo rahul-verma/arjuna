@@ -129,6 +129,8 @@ class CreateProject(Command):
         (FileObjectType.DIR, "data"),
         (FileObjectType.DIR, "data/source"),
         (FileObjectType.DIR, "data/reference"),
+        (FileObjectType.DIR, "data/reference/column"),
+        (FileObjectType.DIR, "data/reference/row"),
         (FileObjectType.DIR, "guiauto"),
         (FileObjectType.DIR, "guiauto/driver"),
         (FileObjectType.DIR, "guiauto/driver/linux"),
@@ -196,7 +198,7 @@ class CreateProject(Command):
             f = open(get_proj_target_path("test/conftest.py"), "w")
             f.write(contents)
             f.close()
-            for d in [ "data/source", "data/reference", "guiauto/namespace"]:
+            for d in [ "data/source", "data/reference/row", "data/reference/column", "guiauto/namespace"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:
                 copy_file("../../res/placeholder.txt", "guiauto/driver/{}/driver.txt".format(os_name))

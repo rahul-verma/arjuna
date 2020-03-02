@@ -19,7 +19,7 @@ limitations under the License.
 
 import abc
 
-from arjuna.lib.reader.excel import *
+from arjuna.core.reader.excel import *
 from .record import *
 
 
@@ -34,7 +34,7 @@ class __ExcelDataReference(ContextualDataReference):
         self.map = {}
         self.path = path
         self.key_column = key_column
-        if (path.lower().ends_with("xls")):
+        if (path.lower().endswith("xls")):
             self.reader = ExcelRow2ArrayReader(path)
         else:
             raise Exception("Unsupported file format for Excel reading.")
@@ -57,14 +57,14 @@ class ExcelRowDataReference(__ExcelDataReference):
         super().__init__(path)
 
     def _populate(self):
-        headers = self.reader.next()[1:]
+        names = self.reader.headers[1:]
         while True:
             try:
                 data_record = self.reader.next()
             except StopIteration:
                 break
             else:
-                self.map[data_record[0].lower()] = DataRecord(zip(headers, data_record[1:]))
+                self.map[data_record[0].lower()] = DataRecord(**dict(zip(names, data_record[1:])))
         self.reader.close()
 
 
@@ -74,15 +74,17 @@ class ExcelColumnDataReference(__ExcelDataReference):
         super().__init__(path)
 
     def _populate(self):
-        contexts = self.reader.next()[1:]
-        self.map = {i: {} for i in contexts}
+        contexts = self.reader.headers[1:]
+        cmap = {i: {} for i in contexts}
         while True:
             try:
                 data_record = self.reader.next()
             except StopIteration:
                 break
             else:
-                header = data_record[0]
+                name = data_record[0]
                 for index, context in enumerate(contexts):
-                    self.map[context][header] = data_record[index]
+                    cmap[context][name] = data_record[index+1]
         self.reader.close()
+        for context, kv in cmap.items():
+            self.map[context.lower()] = DataRecord(**kv)

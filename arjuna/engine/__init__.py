@@ -32,6 +32,7 @@ from arjuna.core.utils import thread_utils
 from arjuna.core.thread.decorators import *
 from arjuna.core.utils import sys_utils
 from arjuna.core.adv.proxy import ROProxy
+from arjuna.core.adv.types import CIStringDict
 from arjuna.core.adv.decorators import singleton
 import codecs
 import sys
@@ -59,7 +60,7 @@ class ArjunaSingleton:
 
         self.dl = None
         self.log_file_discovery_info = False
-        self._data_references = {}
+        self.__data_references = None
         self.central_conf = None
         self.__console = None
         self.__logger = None
@@ -101,7 +102,16 @@ class ArjunaSingleton:
         self.__load_console(dl, self.logger)
 
         self.__run_context = self.create_test_context(self.__default_context_name)
+
+        # Load data references
+        from arjuna.engine.data.factory import DataReference
+        self.__data_references = DataReference.load_all(self.__ref_config)
+
         return self.__run_context
+
+    @property
+    def data_references(self):
+        return self.__data_references
 
     @property
     def logger(self):
@@ -412,6 +422,14 @@ class Arjuna:
             Returns the central GUI Manager object that mangages namespaces.
         '''
         return cls.ARJUNA_SINGLETON.gui_mgr
+
+    @classmethod
+    def get_data_references(cls):
+        return cls.ARJUNA_SINGLETON.data_references
+
+    @classmethod
+    def get_data_ref(cls, name):
+        return cls.get_data_references[name]
 
     @classmethod
     def get_ref_arjuna_option_value(cls, option):

@@ -145,6 +145,11 @@ class My:
         self._asserter = Asserter() #unittest.TestCase('__init__')
         self._space = None
         self._module = None
+    
+    @property
+    def data_refs(self):
+        from arjuna import Arjuna
+        return Arjuna.get_data_references()
 
     @property
     def module(self):

@@ -63,14 +63,18 @@ class ExcelRowReader:
 class ExcelRow2ArrayReader(ExcelRowReader):
     def __init__(self, path):
         super().__init__(path)
-        self.headers = []
+        self.__headers = []
         self._populate_headers()
 
     def get_headers(self):
-        return self.headers
+        return self.__headers
+
+    @property
+    def headers(self):
+        return self.__headers
 
     def _populate_headers(self):
-        self.headers = [h.value for h in self.read_next_row()]
+        self.__headers = [h.value for h in self.read_next_row()]
 
     def process(self, row):
         return [h.value for h in row]

@@ -1,5 +1,14 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.5
+-----
+Data References
+    - Introduced concept of Contextual Data References.
+    - Built-in Support for Column and Row Excel Data References.
+    - The Excel data references are automatically loaded by Arjuna during init().
+    - The references are easily accessible using the `request` object in test/fixture functions.
+    - Added example code and doc.
+
 0.9.4
 -----
 - create-project command added to CLI.

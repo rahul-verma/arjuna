@@ -46,6 +46,8 @@ class ArjunaOption(Enum):
     DATA_DIR = auto()
     DATA_SOURCES_DIR = auto()
     DATA_REFERENCES_DIR = auto()
+    DATA_REFERENCES_COLUMN_DIR = auto()
+    DATA_REFERENCES_ROW_DIR = auto()
     SCREENSHOTS_DIR = auto()
     CONFIG_DIR = auto()
 
@@ -400,3 +402,7 @@ class GuiInteractionConfigType(Enum):
 class ReportFormat(Enum):
     XML = auto()
     HTML = auto()
+
+class DataRefContextType(Enum):
+    ROW = auto()
+    COLUMN = auto()
