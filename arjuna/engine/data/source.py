@@ -344,6 +344,9 @@ class MultiDataSource(DataSource):
         except:
             raise StopIteration()
 
+    def reset(self):
+        self.def_iter = iter(self.dsdefs)
+
     def get_next(self):
         if self.current_dsource is None:
             self.__init_next_source()

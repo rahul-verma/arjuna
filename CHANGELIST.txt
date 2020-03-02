@@ -13,6 +13,7 @@ Following is the list of critical additions and updates for a given released ver
     - Support for `data_class` markup.
     - Support for `data_file` markup (Out of the box support for XLS, TSV/CSV and INI formats.)
     - Support for record filtering in data files.
+    - Support for `many_data_sources` builder.
     - Added example code and docs for data driven testing.
 
 0.9.3
