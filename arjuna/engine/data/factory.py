@@ -94,13 +94,14 @@ class DataReference:
         refs = DataReferences()
         column_data_ref_dir = ref_config.arjuna_options.value(ArjunaOption.DATA_REFERENCES_COLUMN_DIR)
         for fname in os.listdir(column_data_ref_dir):
-            refs[os.path.splitext(fname)[0]] = DataReference.create_excel_column_data_ref(fname)
+            if fname.lower().endswith("xls"):
+                refs[os.path.splitext(fname)[0]] = DataReference.create_excel_column_data_ref(fname)
         
         row_data_ref_dir = ref_config.arjuna_options.value(ArjunaOption.DATA_REFERENCES_ROW_DIR)
         for fname in os.listdir(row_data_ref_dir):
-            refs[os.path.splitext(fname)[0]] = DataReference.create_excel_row_data_ref(fname)
-        
-        print(refs)
+            if fname.lower().endswith("xls"):
+                refs[os.path.splitext(fname)[0]] = DataReference.create_excel_row_data_ref(fname)
+
         return refs
 
     @classmethod
