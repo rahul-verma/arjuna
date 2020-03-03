@@ -22,4 +22,8 @@ from arjuna import *
 @test
 def check_excel_localizer(request):
     print(L("Testing"))
-    print(L("Quality", Locale.HI))
+    print(L("Quality", locale=Locale.HI))
+
+    print(L("Correct"))
+    print(L("Correct", bucket="sample1"))
+    print(L("Correct", bucket="sample2"))
