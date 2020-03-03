@@ -135,6 +135,14 @@ class ConfigValidator:
             cls.raise_exc(input)
 
     @classmethod
+    def locale(cls, input):
+        try:
+            return Locale[input.upper()]
+        except Exception as e:
+            print(e)
+            cls.raise_exc(input)
+
+    @classmethod
     def str_list(cls, input):
         if type(input) is not list:
             cls.raise_exc(input)

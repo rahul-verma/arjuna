@@ -21,19 +21,33 @@ import abc
 
 from arjuna.core.reader.excel import *
 from .record import *
-
+from arjuna.core.adv.types import CIStringDict
 
 class ContextualDataReference(metaclass=abc.ABCMeta):
+
+    def __init__(self):
+        self.map = {}
 
     @abc.abstractmethod
     def record_for(self, context):
         pass
 
+    def update(self, data_reference):
+        for context, record in data_reference.map.items():
+            if context not in self.map:
+                self.map[context] = CIStringDict()
+            self.map[context].update(record.named_values)
+
+    def record_for(self, context):
+        if context.lower() in self.map:
+            return self.map[context.lower()]
+        else:
+            raise Exception("Context key {} not found in data reference: {}.".format(context, self.__class__.__name__))
+
 class __ExcelDataReference(ContextualDataReference):
-    def __init__(self, path, key_column=None):
-        self.map = {}
+    def __init__(self, path):
+        super().__init__()
         self.path = path
-        self.key_column = key_column
         if (path.lower().endswith("xls")):
             self.reader = ExcelRow2ArrayReader(path)
         else:
@@ -46,10 +60,11 @@ class __ExcelDataReference(ContextualDataReference):
         pass
 
     def record_for(self, context):
-        if context.lower() in self.map:
-            return self.map[context.lower()]
-        else:
+        try:
+            return super().record_for(context)
+        except:
             raise Exception("{} at {} does not contain {} context key.".format(self.__class__.__name__, self.path, context))
+
 
 class ExcelRowDataReference(__ExcelDataReference):
 

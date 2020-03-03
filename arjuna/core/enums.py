@@ -31,6 +31,8 @@ class ArjunaOption(Enum):
     LOG_FILE_LEVEL = auto()
     LOG_CONSOLE_LEVEL = auto()
 
+    LOCALE = auto()
+
     PROJECT_NAME = auto()
     PROJECT_ROOT_DIR = auto()
     PROJECT_CONF_FILE = auto()
@@ -48,6 +50,8 @@ class ArjunaOption(Enum):
     DATA_REFERENCES_DIR = auto()
     DATA_REFERENCES_COLUMN_DIR = auto()
     DATA_REFERENCES_ROW_DIR = auto()
+    DATA_L10_DIR = auto()
+    DATA_L10_EXCEL_DIR = auto()
     SCREENSHOTS_DIR = auto()
     CONFIG_DIR = auto()
 
@@ -406,3 +410,7 @@ class ReportFormat(Enum):
 class DataRefContextType(Enum):
     ROW = auto()
     COLUMN = auto()
+
+import locale
+locales = [i.upper() for i in locale.locale_alias.keys()]
+Locale = Enum('Locale', dict(zip(locales, range(len(locales)))))

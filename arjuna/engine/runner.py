@@ -123,4 +123,8 @@ class TestRunner:
 
         os.chdir(self.__project_dir)
         print("Executing pytest with args: {}".format(" ".join(self.__pytest_args)))
-        pytest.main(self.__pytest_args)
+
+
+        pytest_retcode = pytest.main(self.__pytest_args)
+        import sys
+        sys.exit(pytest_retcode)

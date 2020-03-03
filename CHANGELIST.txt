@@ -9,6 +9,7 @@ Following is the list of critical additions and updates for a given released ver
     - The references are easily accessible using the `request` object in test/fixture functions.
     - Added example code and doc.
 - Chrome driver creation uses the Service object as the previous signature was deprecated.
+- Arjuna uses sys.exit with the same code as returned by pytest.main
 
 0.9.4
 -----

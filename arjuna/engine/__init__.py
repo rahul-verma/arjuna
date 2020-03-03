@@ -107,11 +107,19 @@ class ArjunaSingleton:
         from arjuna.engine.data.factory import DataReference
         self.__data_references = DataReference.load_all(self.__ref_config)
 
+        # Load localization data
+        from arjuna.engine.data.localizer import Localizer
+        self.__localizer = Localizer.load_all(self.__ref_config)
+
         return self.__run_context
 
     @property
     def data_references(self):
         return self.__data_references
+
+    @property
+    def localizer(self):
+        return self.__localizer
 
     @property
     def logger(self):
@@ -426,6 +434,10 @@ class Arjuna:
     @classmethod
     def get_data_references(cls):
         return cls.ARJUNA_SINGLETON.data_references
+
+    @classmethod
+    def get_localizer(cls):
+        return cls.ARJUNA_SINGLETON.localizer
 
     @classmethod
     def get_data_ref(cls, name):

@@ -143,6 +143,10 @@ class Configuration:
         return self.arjuna_options.value(ArjunaOption.GUIAUTO_CONTEXT) # .as_enum(GuiAutomationContext)
 
     @property
+    def locale(self):
+        return self.arjuna_options.value(ArjunaOption.LOCALE) # .as_enum(GuiAutomationContext)
+
+    @property
     def browser_name(self):
         return self.arjuna_options.value(ArjunaOption.BROWSER_NAME) #.as_enum(BrowserName)
 
