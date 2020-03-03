@@ -6,7 +6,10 @@ Following are critical project directories, sub-directories and files. *Arjuna c
 - **config**: Contains configuration files.
   - **project.conf**: Your projects' configuration file containing project-level configuration settings.
 - **data**: Contains files that act as data sources and data references (WIP).
-  - **source**: Data source files go here.
+    - **source**: Data source files go here.
+    - **reference**: Data reference files go here.
+        - **column**: Excel Column Data References for auto-loading
+        - **row**: Excel Row Data References for auto-loading
 - **guiauto**: Contains GUI automation related files.
   - **driver**: Selenium driver executables go here in respective OS folders (Prone to change in future versions of Arjuna).
   - **namespace**: GNS (Gui Namespace) files go here.
