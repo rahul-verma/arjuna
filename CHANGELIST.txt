@@ -8,6 +8,12 @@ Following is the list of critical additions and updates for a given released ver
     - The Excel data references are automatically loaded by Arjuna during init().
     - The references are easily accessible using the `request` object in test/fixture functions.
     - Added example code and doc.
+- Localizer
+    - Introduced concept of localization
+    - Built-in support for Excel based localization files
+    - Excel localizers are automatically loaded and merged into a single Contextual Data Reference
+    - The `L` function is a special function to easily localize a string as per `Locale`.
+    - Introduced `Locale` enum and ArjunaOption.LOCALE to control configured Locale.
 - Chrome driver creation uses the Service object as the previous signature was deprecated.
 - Arjuna uses sys.exit with the same code as returned by pytest.main
 

@@ -18,7 +18,7 @@ In the example file, the column mentions `hi` which is Locale value for Hindi.
 
 For demonstration purpose, 2 English words are provided with corresponding strings in Hindi.
 
-#### Using Data References in Test
+#### The `L` function for Localization
 
 ```python
 # arjuna-samples/arjex_core_features/test/module/check_14_dd_localizer.py
