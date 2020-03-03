@@ -25,11 +25,15 @@ from selenium.webdriver.common.proxy import *
 class BrowserLauncher:
 
     @classmethod
-    def launch(cls, config):
+    def launch(cls, config, chrome_service_url=None):
         driver_path = config["arjunaOptions"]["SELENIUM_DRIVER_PATH"]
         browser_bin_path = config["arjunaOptions"]["BROWSER_BIN_PATH"]
         browser_name = config["arjunaOptions"]["BROWSER_NAME"]
-        return CREATOR_MAP[browser_name.name](config, driver_path, browser_bin_path)
+        from arjuna.core.enums import BrowserName
+        if browser_name == BrowserName.CHROME:
+            return CREATOR_MAP[browser_name.name](config, driver_path, browser_bin_path, chrome_service_url)
+        else:
+            return CREATOR_MAP[browser_name.name](config, driver_path, browser_bin_path)
 
     @classmethod
     def are_browser_prefs_set(cls, config):
@@ -44,7 +48,7 @@ class BrowserLauncher:
         return "browserExtensions" in config and config["browserExtensions"]
 
     @classmethod
-    def _create_chrome(cls, config, driver_path, browser_bin_path):
+    def _create_chrome(cls, config, driver_path, browser_bin_path, chrome_service_url):
         from selenium.webdriver import Chrome, ChromeOptions
 
         caps = DesiredCapabilities.CHROME
@@ -77,9 +81,11 @@ class BrowserLauncher:
                 options.add_extension(ext)
 
         caps[ChromeOptions.KEY] = options.to_capabilities()[ChromeOptions.KEY]
-        return Chrome(executable_path=driver_path, desired_capabilities=caps, 
-            #service_args=["--verbose", "--log-path=/Users/rahulverma/Documents/____drivers/cd.log"]
-        )
+        from selenium import webdriver
+        return webdriver.Remote(chrome_service_url, caps)
+        # return Chrome(executable_path=driver_path, desired_capabilities=caps, 
+        #     #service_args=["--verbose", "--log-path=/Users/rahulverma/Documents/____drivers/cd.log"]
+        # )
 
     @classmethod
     def _create_firefox(cls, config, driver_path, browser_bin_path):

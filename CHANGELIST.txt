@@ -2,12 +2,13 @@ Following is the list of critical additions and updates for a given released ver
 
 0.9.5
 -----
-Data References
+- Data References
     - Introduced concept of Contextual Data References.
     - Built-in Support for Column and Row Excel Data References.
     - The Excel data references are automatically loaded by Arjuna during init().
     - The references are easily accessible using the `request` object in test/fixture functions.
     - Added example code and doc.
+- Chrome driver creation uses the Service object as the previous signature was deprecated.
 
 0.9.4
 -----

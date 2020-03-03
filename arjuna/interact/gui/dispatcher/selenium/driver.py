@@ -29,6 +29,7 @@ class SeleniumDriverDispatcher:
     def __init__(self):
         self.__config = None
         self.__driver = None
+        self.__chrome_service = None
 
     def __create_gui_element_dispatcher(self, element):
         return SeleniumDriverElementDispatcher.create_dispatcher(self, element)
@@ -40,10 +41,20 @@ class SeleniumDriverDispatcher:
     def launch(self, config):
         self.__config = config
         from .browser_launcher import BrowserLauncher
-        self.__driver = BrowserLauncher.launch(config) 
+
+        svc_url = None
+        from arjuna.core.enums import BrowserName
+        if config["arjunaOptions"]["BROWSER_NAME"] == BrowserName.CHROME:
+            from selenium.webdriver.chrome import service
+            self.__chrome_service = service.Service(config["arjunaOptions"]["SELENIUM_DRIVER_PATH"])
+            self.__chrome_service.start()
+            svc_url = self.__chrome_service.service_url
+        self.__driver = BrowserLauncher.launch(config, chrome_service_url=svc_url) 
 
     def quit(self):
         DriverCommands.quit(self.__driver)
+        if self.__chrome_service:
+            self.__chrome_service.stop()
 
     def go_to_url(self, url):
         DriverCommands.go_to_url(self.__driver, url)
