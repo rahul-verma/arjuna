@@ -1,5 +1,18 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.6
+-----
+- Localizer
+    - Added built-in support for JSON based localization.
+    - Excel and JSON Localizers are automatically loaded and merged into a single Contextual Data Reference
+    - Change `ArjunaOption.LOCALE` to `ArjunaOption.L10_LOCALE`.
+    - Added `ArjunaOption.L10_STRICT` property. By default it is set to False. It means for references with no localization data, no error is raised and reference itself is returned by `L` function.
+    - bucket can be provided as an argument or as a prefix `bucket.`
+- Json
+    - Added Json class with jsonpath support.
+    - Added jsonpath-rw and jsonpath-rw-ext as dependencies.
+
+
 0.9.5
 -----
 - Data References

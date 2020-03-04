@@ -183,10 +183,6 @@ class ConfigValidator:
                 return [ReportFormat[i] for i in input]
         except:
             cls.raise_exc(input)
-        # print("comes here", l)
-        #     return [ReportFormat[i.upper()] for i in l]
-        # except:
-        #     cls.raise_exc(input)
 
     @classmethod
     def mobile_os(cls, input):

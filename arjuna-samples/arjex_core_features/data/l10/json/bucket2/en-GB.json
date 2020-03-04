@@ -1,0 +1,8 @@
+{
+  "error": {
+      "data": {
+        "elapsedTime": "Time elapsed since last data transmission",
+        "lastTransfer": "Last successful data transmission"
+      }
+  }
+}

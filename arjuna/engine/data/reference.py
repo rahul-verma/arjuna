@@ -28,21 +28,29 @@ class ContextualDataReference(metaclass=abc.ABCMeta):
     def __init__(self):
         self.map = {}
 
-    @abc.abstractmethod
-    def record_for(self, context):
-        pass
-
     def update(self, data_reference):
         for context, record in data_reference.map.items():
             if context not in self.map:
                 self.map[context] = CIStringDict()
             self.map[context].update(record.named_values)
 
+    def update_from_dict(self, context, map):
+        if context not in self.map:
+            self.map[context] = dict()
+        self.map[context].update(map)
+
     def record_for(self, context):
         if context.lower() in self.map:
             return self.map[context.lower()]
         else:
             raise Exception("Context key {} not found in data reference: {}.".format(context, self.__class__.__name__))
+
+    def __str__(self):
+        return str({k: str(v) for k,v in self.map.items()})
+
+    def enumerate(self):
+        for k,v in self.map.items():
+            print(k, "::", type(v), str(v))
 
 class __ExcelDataReference(ContextualDataReference):
     def __init__(self, path):

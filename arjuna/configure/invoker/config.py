@@ -144,7 +144,7 @@ class Configuration:
 
     @property
     def locale(self):
-        return self.arjuna_options.value(ArjunaOption.LOCALE) # .as_enum(GuiAutomationContext)
+        return self.arjuna_options.value(ArjunaOption.L10_LOCALE) # .as_enum(GuiAutomationContext)
 
     @property
     def browser_name(self):

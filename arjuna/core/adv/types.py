@@ -23,9 +23,14 @@ from collections import OrderedDict
 
 class ArDict(metaclass=abc.ABCMeta):
 
-    def __init__(self, d={}):
+    def __init__(self, d=None):
         self.__store = dict()
-        self.update(d)
+        if d:
+            self.update(d)
+
+    @property
+    def store(self):
+        return self.__store
 
     @abc.abstractmethod
     def process_key(self, key):
@@ -50,6 +55,9 @@ class ArDict(metaclass=abc.ABCMeta):
 
     def has_key(self, key):
         return self.process_key(key) in self.__store
+
+    def keys(self):
+        return self.__store.keys()
 
     def __getattr__(self, attr):
         return getattr(self.__store, attr)

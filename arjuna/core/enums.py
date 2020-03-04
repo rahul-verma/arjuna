@@ -31,7 +31,8 @@ class ArjunaOption(Enum):
     LOG_FILE_LEVEL = auto()
     LOG_CONSOLE_LEVEL = auto()
 
-    LOCALE = auto()
+    L10_LOCALE = auto()
+    L10_STRICT = auto()
 
     PROJECT_NAME = auto()
     PROJECT_ROOT_DIR = auto()
@@ -52,6 +53,7 @@ class ArjunaOption(Enum):
     DATA_REFERENCES_ROW_DIR = auto()
     DATA_L10_DIR = auto()
     DATA_L10_EXCEL_DIR = auto()
+    DATA_L10_JSON_DIR = auto()
     SCREENSHOTS_DIR = auto()
     CONFIG_DIR = auto()
 

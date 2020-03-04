@@ -22,10 +22,83 @@ from .factory import DataReference
 from .reference import ContextualDataReference
 from arjuna.core.adv.types import CIStringDict
 
+from arjuna.core.utils import file_utils
+from arjuna.core.json import Json
+
+class L10Ref:
+
+    def __init__(self):
+        self.map = {}
+
+    def update_from_excel_ref(self, localizer_ref):
+        for lang, record in localizer_ref.map.items():
+            if lang not in self.map:
+                self.map[lang] = Json()
+            self.map[lang].update(record.named_values)
+
+    def update_from_json_ref(self, json_ref):
+        for lang, map in json_ref.map.items():
+            if lang not in self.map:
+                self.map[lang] = Json()
+            self.map[lang].update(map)
+
+    def lang(self, lang):
+        if lang.lower() in self.map:
+            return self.map[lang.lower()]
+        else:
+            raise Exception("Language key {} not found in localizer: {}.".format(lang, self.__class__.__name__))
+
+    def __str__(self):
+        return str({k: str(v) for k,v in self.map.items()})
+
+    def enumerate(self):
+        for k,v in self.map.items():
+            print(k, "::", type(v), str(v))
+
+    def get_localizer_file_path(self, ldir, fpath):
+        if file_utils.is_absolute_path(fpath):
+            if not file_utils.is_file(fpath):
+                if file_utils.is_dir(fpath):
+                    raise Exception("Not a file: {}".format(fpath))
+                else:
+                    raise Exception("File does not exist: {}".format(fpath))
+            return fpath
+        else:
+            fpath = os.path.abspath(os.path.join(ldir, fpath))
+            if not file_utils.is_file(fpath):
+                if file_utils.is_dir(fpath):
+                    raise Exception("Not a file: {}".format(fpath))
+                else:
+                    raise Exception("File does not exist: {}".format(fpath))
+            return fpath
+
+class ExcelL10Ref(L10Ref):
+
+    def __init__(self, fpath):
+        super().__init__()
+        excel_ref = DataReference.create_excel_column_data_ref(fpath)
+        self.map = excel_ref.map
+
+class JsonL10Ref(L10Ref):
+
+    def __init__(self, ldir):
+        super().__init__()
+        fnames = os.listdir(ldir)
+        fnames.sort()
+        for fname in fnames:
+            if fname.lower().endswith("json"):
+                lang = os.path.splitext(fname)[0].replace("-","_").lower()
+                fpath = self.get_localizer_file_path(ldir, fname)
+                lang_map = Json.from_file(fpath)
+                self.map[lang] = lang_map
+
 class Localizers:
 
     def __init__(self):
         vars(self)['_store'] = CIStringDict()
+
+    def keys(self):
+        return self._store.keys()
 
     def __getitem__(self, name):
         return self._store[name]
@@ -43,44 +116,97 @@ class Localizers:
     def __str__(self):
         return str(self._store)
 
+    def has(self, name):
+        return name.lower() in self._store
+
 class Localizer:
 
-    def __init__(self, global_map, context_wise):
+    def __init__(self, global_map, buckets):
         self.__globals = global_map
-        self.__context_map = context_wise
+        self.__buckets = buckets     
+        self.__bucket_names = self.__buckets.keys()
 
     @property
     def globals(self):
         return self.__globals
 
     @property
-    def context_map(self):
-        return self.__context_map
+    def buckets(self):
+        return self.__buckets
+
+    @property
+    def bucket_names(self):
+        return self.__bucket_names
+
+    @classmethod
+    def __process_json_ref(cls, l10_merged_ref, l10_refs, json_ref, bucket="root"):
+        # Check this logic for locale conversion.
+        l10_merged_ref.update_from_json_ref(json_ref)
+        if not l10_refs.has(bucket):
+            l10_refs[bucket] = json_ref
 
     @classmethod
     def load_all(cls, ref_config):
         from arjuna.core.enums import ArjunaOption
         l10_excel_dir = ref_config.arjuna_options.value(ArjunaOption.DATA_L10_EXCEL_DIR)
-        l10_merged_ref = ContextualDataReference()
+        l10_merged_ref = L10Ref()
         l10_refs = Localizers()
         fnames = os.listdir(l10_excel_dir)
         fnames.sort()
         for fname in fnames:
             if fname.lower().endswith("xls"):
-                print(fname)
-                ref = DataReference.create_excel_column_data_ref(os.path.join(l10_excel_dir, fname))
-                l10_merged_ref.update(ref)
+                ref = ExcelL10Ref(os.path.join(l10_excel_dir, fname))
+                l10_merged_ref.update_from_excel_ref(ref)
                 l10_refs[os.path.splitext(fname)[0]] = ref
+
+        # JSON Localizers
+        l10_json_dir = ref_config.arjuna_options.value(ArjunaOption.DATA_L10_JSON_DIR)
+        json_ref = JsonL10Ref(l10_json_dir)
+        cls.__process_json_ref(l10_merged_ref, l10_refs, json_ref, bucket="root")
+        buckets = os.listdir(l10_json_dir)
+        for bucket in buckets:
+            if os.path.isdir(os.path.join(l10_json_dir, bucket)):
+                dpath = os.path.join(l10_json_dir, bucket)
+                json_ref = JsonL10Ref(dpath)
+                cls.__process_json_ref(l10_merged_ref, l10_refs, json_ref, bucket=bucket)
+
+        # l10_merged_ref.enumerate()
         return Localizer(l10_merged_ref, l10_refs)
 
-def L(in_str, *, bucket=None, locale=None):
-    from arjuna import Arjuna
-    lang = locale and locale.name.lower() or Arjuna.get_ref_config().locale.name.lower()
-    if lang != "en":
-        if not bucket:
-            return Arjuna.get_localizer().globals.record_for(lang)[in_str]
+def L(in_str, *, locale=None, bucket=None, strict=None):
+    from arjuna import Arjuna, ArjunaOption
+    bucket = bucket
+    query = in_str
+    if bucket is None:
+        if in_str.find('.') != -1:
+            bucket, query = in_str.split('.', 1)
+            bucket = bucket.lower()
+            if bucket not in Arjuna.get_localizer().bucket_names:
+                bucket = None
+                query = in_str
         else:
-            return Arjuna.get_localizer().context_map[bucket].record_for(lang)[in_str]
-    else:
-        return in_str
+            query = in_str
+    lang = locale and locale.name.lower() or Arjuna.get_ref_config().locale.name.lower()
+    try:
+        if not bucket:
+            val = Arjuna.get_localizer().globals.lang(lang)[query]
+        else:
+            val = Arjuna.get_localizer().buckets[bucket].lang(lang)[query]
+        if type(val) in {list, tuple}:
+            if not val:
+                raise Exception("No localized string found for: {} for Locale.{}".format(in_str, lang.upper()))
+            else:
+                return val[0]
+        else:
+            return val
+    except Exception as e:
+        if strict is None:
+            strict_mode = Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.L10_STRICT)
+        else:
+            strict_mode = strict
 
+        if strict_mode:
+            import traceback
+            raise Exception("Error in retrieving localized string for: {}. {}. {}".format(in_str, str(e), traceback.format_exc()))
+        else:
+            return in_str
