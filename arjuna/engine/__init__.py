@@ -441,6 +441,14 @@ class Arjuna:
         '''
         return cls.ARJUNA_SINGLETON.get_config_value(name, config)
 
+    @classmethod
+    def get_dataref_value(cls, name, *, bucket=None, context=None):
+        '''
+            Returns the data reference value for a given context.
+        '''
+        from arjuna.engine.data.reference import R
+        return R(name, bucket=bucket, context=context)
+
 
     @classmethod
     def get_gui_mgr(cls):
@@ -450,16 +458,12 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.gui_mgr
 
     @classmethod
-    def get_data_references(cls):
-        return cls.ARJUNA_SINGLETON.data_references
-
-    @classmethod
     def get_localizer(cls):
         return cls.ARJUNA_SINGLETON.localizer
 
     @classmethod
     def get_data_ref(cls, name):
-        return cls.get_data_references[name]
+        return cls.ARJUNA_SINGLETON.data_references[name]
 
     # @classmethod
     # def get_ref_arjuna_option_value(cls, option):

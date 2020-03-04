@@ -79,3 +79,4 @@ from arjuna.core.json import Json
 
 L = Arjuna.get_localized_str
 C = Arjuna.get_config_value
+R = Arjuna.get_dataref_value

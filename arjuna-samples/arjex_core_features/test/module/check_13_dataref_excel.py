@@ -21,13 +21,13 @@ from arjuna import *
 
 @test
 def check_excel_column_data_ref(request):
-    ref = request.data_refs.cusers
-    record = ref.record_for("bronze")
-    print(record.user, record.pwd)
+    print(R("user", bucket="cusers", context="bronze"))
+    print(R("bronze.user", bucket="cusers"))
+    print(R("cusers.bronze.user"))
 
 
 @test
 def check_excel_row_data_ref(request):
-    ref = request.data_refs.rusers
-    record = ref.record_for("gold")
-    print(record.user, record.pwd)
+    print(R("user", bucket="rusers", context="gold"))
+    print(R("gold.user", bucket="rusers"))
+    print(R("rusers.gold.user"))

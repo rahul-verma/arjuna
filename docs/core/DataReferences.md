@@ -38,21 +38,23 @@ from arjuna import *
 
 @test
 def check_excel_column_data_ref(request):
-    ref = request.data_refs.cusers
-    record = ref.record_for("bronze")
-    print(record.user, record.pwd)
+    print(R("user", bucket="cusers", context="bronze"))
+    print(R("bronze.user", bucket="cusers"))
+    print(R("cusers.bronze.user"))
 
 
 @test
 def check_excel_row_data_ref(request):
-    ref = request.data_refs.rusers
-    record = ref.record_for("gold")
-    print(record.user, record.pwd)
+    print(R("user", bucket="rusers", context="gold"))
+    print(R("gold.user", bucket="rusers"))
+    print(R("rusers.gold.user"))
 ```
 
 #### Points to Note
-1. You can access data references in your test code as `request.data_refs`.
-2. The name of the file is used to refer to a given data reference: `request.data_refs.cusers` or `request.data_refs["cusers"]`.
-3. Now, we can retrieve the values for a context using the `record_for` method of the reference. For example, here we are retrieiving the values for `bronze` context from column data reference and `gold` context from row data reference.
-4. The values are returned as a `DataRecord` object, which should be familiar to you by this time as it is the same object returned for `drive_with` markup.
-5. The only difference between the two styles of references is the format and the way Arjuna loads them. Usage for a test author is exactly the same.
+1. You can access data references in your test code with Arjuna's special `R` function (similar to `L` and `C` functions seen in other features).
+2. The name of the file is the `bucket` name. For example, here `cusers` and `rusers` are buckets represenating `cusers.xls` and `rusers.xls` data reference files.
+3. You can retrieve values from the data reference with a combination of `query`, `bucket` and `context` combinations.
+    - Query can contain just the ref name and bucket and context arguments can be provided.
+    - Query can be of format `context.refname` and bucket can be supplied as argument.
+    - Query can be of format `bucket.context.refname` without passing bucket and context arguments separately.
+4. The only difference between the two styles of references is the format and the way Arjuna loads them. Usage for a test author is exactly the same.

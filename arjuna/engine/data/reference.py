@@ -111,3 +111,40 @@ class ExcelColumnDataReference(__ExcelDataReference):
         self.reader.close()
         for context, kv in cmap.items():
             self.map[context.lower()] = DataRecord(**kv)
+
+def R(query, *, bucket=None, context=None):
+    from arjuna import Arjuna, ArjunaOption
+    bucket = bucket
+    context = context
+    query = query
+
+    if bucket is not None:
+        bucket = bucket.lower()
+        if context is not None:
+            context = context.lower()
+            query = query.lower()
+        else:
+            if query.find('.') != -1:
+                context, query = query.split('.', 1)
+                context = context.lower()
+                query = query.lower()
+            else:
+                raise Exception("DataRefError: The query must specify context using dot notation when not passed as argument.")
+    else:
+        if context is not None:
+            raise Exception("bucket must be provided if context arg is passed.")
+        else:
+            if query.find('.') != -1:
+                bucket, context, query = query.split('.', 2)
+                bucket = bucket.lower()
+                context = context.lower()
+                query = query.lower()
+            else:
+                raise Exception("DataRefError: The query must specify bucket and context using dot notation when these are not passed as arguments.")           
+
+    try:
+        return Arjuna.get_data_ref(bucket).record_for(context)[query]
+    except Exception as e:
+        import traceback
+        raise Exception("Error in retrieving reference value for: {} in {} data reference. {}. {}".format(in_str, bucket, traceback.format_exc()))
+
