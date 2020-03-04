@@ -92,10 +92,10 @@ class DriverCapabilities:
 
         self.__process_config(config)
         self.__process(json_dict)
-        self.__host_os = self.__config.arjuna_options.value(ArjunaOption.TESTRUN_HOST_OS).name.lower()
-        aname = self.__config.arjuna_options.value(ArjunaOption.AUTOMATOR_NAME).name.lower()
-        acontext = self.__config.arjuna_options.value(ArjunaOption.GUIAUTO_CONTEXT).name.lower()
-        mobile_platform = self.__config.arjuna_options.value(ArjunaOption.MOBILE_OS_NAME).name.lower()
+        self.__host_os = self.__config.value(ArjunaOption.TESTRUN_HOST_OS).name.lower()
+        aname = self.__config.value(ArjunaOption.AUTOMATOR_NAME).name.lower()
+        acontext = self.__config.value(ArjunaOption.GUIAUTO_CONTEXT).name.lower()
+        mobile_platform = self.__config.value(ArjunaOption.MOBILE_OS_NAME).name.lower()
 
         if aname == "selenium":
             self.__process_for_selenium(json_dict)
@@ -140,7 +140,7 @@ class DriverCapabilities:
         return self.__config
 
     def __process_config(self, config):
-        self.__out_dict["automationContext"] = config.arjuna_options.value(ArjunaOption.GUIAUTO_CONTEXT).name.upper()
+        self.__out_dict["automationContext"] = config.value(ArjunaOption.GUIAUTO_CONTEXT).name.upper()
         temp_d = config.get_arjuna_options_as_map()
         for k,v in temp_d.items():
             if k in SetuActorDriverConfigOption.__members__:
@@ -167,23 +167,23 @@ class DriverCapabilities:
             return in_name
 
     def __process_for_selenium(self, in_dict):
-        browser_name = self._config.arjuna_options.value(ArjunaOption.BROWSER_NAME).name.lower()
+        browser_name = self._config.value(ArjunaOption.BROWSER_NAME).name.lower()
         self.__out_dict["driverCapabilities"][self.BROWSER_NAME] = browser_name
-        browser_version = self._config.arjuna_options.value(ArjunaOption.BROWSER_VERSION)
+        browser_version = self._config.value(ArjunaOption.BROWSER_VERSION)
         if browser_version != "not_set":
             self.__out_dict["driverCapabilities"][self.BROWSER_VERSION] = browser_version
 
     def __process_for_appium(self, dict_from_requester):
-        mobile_os_name = self._config.arjuna_options.value(ArjunaOption.MOBILE_OS_NAME).name.lower()
+        mobile_os_name = self._config.value(ArjunaOption.MOBILE_OS_NAME).name.lower()
         if mobile_os_name.lower() == "android":
             self.__out_dict["driverCapabilities"][self.PLATFORM_NAME] = "Android"
         elif mobile_os_name.lower() == "ios":
             self.__out_dict["driverCapabilities"][self.PLATFORM_NAME] = "iOS"
         self.__out_dict["driverCapabilities"][self.NEW_COMMAND_TIMEOUT] = 300 # 5 minutes 
-        self.__out_dict["driverCapabilities"][self.PLATFORM_VERSION] = self._config.arjuna_options.value(ArjunaOption.MOBILE_OS_VERSION)
-        self.__out_dict["driverCapabilities"][self.DEVICE_NAME] = self._config.arjuna_options.value(ArjunaOption.MOBILE_DEVICE_NAME)
-        self.__out_dict["driverCapabilities"][self.APP_PATH] = self._config.arjuna_options.value(ArjunaOption.MOBILE_APP_FILE_PATH)
-        self.__out_dict["driverCapabilities"][self.DEVICE_UDID] = self._config.arjuna_options.value(ArjunaOption.MOBILE_DEVICE_UDID)
+        self.__out_dict["driverCapabilities"][self.PLATFORM_VERSION] = self._config.value(ArjunaOption.MOBILE_OS_VERSION)
+        self.__out_dict["driverCapabilities"][self.DEVICE_NAME] = self._config.value(ArjunaOption.MOBILE_DEVICE_NAME)
+        self.__out_dict["driverCapabilities"][self.APP_PATH] = self._config.value(ArjunaOption.MOBILE_APP_FILE_PATH)
+        self.__out_dict["driverCapabilities"][self.DEVICE_UDID] = self._config.value(ArjunaOption.MOBILE_DEVICE_UDID)
 
     def __process_for_android(self, dict_from_requester):
         self.__out_dict["driverCapabilities"][self.AUTOMATION_NAME] = "UiAutomator2"
@@ -192,10 +192,10 @@ class DriverCapabilities:
 
     def __process_for_android_native(self, dict_from_requester):
         pass
-        # self.__out_dict["driverCapabilities"][self.ANDROID_APP_ACTIVITY] = self._config.arjuna_options.value(ArjunaOption.MOBILE_APP_PACKAGE).name
-        # self.__out_dict["driverCapabilities"][self.ANDROID_APP_PACKAGE] = self._config.arjuna_options.value(ArjunaOption.MOBILE_APP_ACTIVITY)
-        # self.__out_dict["capabilites"][self.ANDROID_WAIT_ACTIVITY] = self._config.arjuna_options.value(ArjunaOption.MOBILE_APP_ACTIVITY)
-        # self.__out_dict["capabilites"][self.ANDROID_WAIT_PACKAGE] = self._config.arjuna_options.value(ArjunaOption.MOBILE_APP_FILE_PATH)
+        # self.__out_dict["driverCapabilities"][self.ANDROID_APP_ACTIVITY] = self._config.value(ArjunaOption.MOBILE_APP_PACKAGE).name
+        # self.__out_dict["driverCapabilities"][self.ANDROID_APP_PACKAGE] = self._config.value(ArjunaOption.MOBILE_APP_ACTIVITY)
+        # self.__out_dict["capabilites"][self.ANDROID_WAIT_ACTIVITY] = self._config.value(ArjunaOption.MOBILE_APP_ACTIVITY)
+        # self.__out_dict["capabilites"][self.ANDROID_WAIT_PACKAGE] = self._config.value(ArjunaOption.MOBILE_APP_FILE_PATH)
 
     def __process_for_android_web(self, dict_from_requester):
         # Browser

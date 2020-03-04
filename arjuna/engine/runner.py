@@ -32,13 +32,13 @@ class TestRunner:
     def __init__(self):
         from arjuna import Arjuna
         from arjuna.core.enums import ArjunaOption
-        self.__project_dir = Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.PROJECT_ROOT_DIR)
+        self.__project_dir = Arjuna.get_ref_config().value(ArjunaOption.PROJECT_ROOT_DIR)
         # import sys
         # sys.path.insert(0, self.__project_dir + "/..")
-        self.__tests_dir = Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.PROJECT_TESTS_DIR)
-        self.__xml_path = os.path.join(Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR), "report.xml")
-        self.__html_path = os.path.join(Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR), "report.html")
-        self.__report_formats = Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.PROJECT_REPORT_FORMATS)
+        self.__tests_dir = Arjuna.get_ref_config().value(ArjunaOption.PROJECT_TESTS_DIR)
+        self.__xml_path = os.path.join(Arjuna.get_ref_config().value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR), "report.xml")
+        self.__html_path = os.path.join(Arjuna.get_ref_config().value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR), "report.html")
+        self.__report_formats = Arjuna.get_ref_config().value(ArjunaOption.PROJECT_REPORT_FORMATS)
         # self.__report_formats = Value.as_enum_list(rfmts, ReportFormat)
         res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
         pytest_ini_path = res_path + "/pytest.ini"

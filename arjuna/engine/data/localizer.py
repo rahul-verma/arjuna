@@ -148,7 +148,7 @@ class Localizer:
     @classmethod
     def load_all(cls, ref_config):
         from arjuna.core.enums import ArjunaOption
-        l10_excel_dir = ref_config.arjuna_options.value(ArjunaOption.DATA_L10_EXCEL_DIR)
+        l10_excel_dir = ref_config.value(ArjunaOption.DATA_L10_EXCEL_DIR)
         l10_merged_ref = L10Ref()
         l10_refs = Localizers()
         fnames = os.listdir(l10_excel_dir)
@@ -160,7 +160,7 @@ class Localizer:
                 l10_refs[os.path.splitext(fname)[0]] = ref
 
         # JSON Localizers
-        l10_json_dir = ref_config.arjuna_options.value(ArjunaOption.DATA_L10_JSON_DIR)
+        l10_json_dir = ref_config.value(ArjunaOption.DATA_L10_JSON_DIR)
         json_ref = JsonL10Ref(l10_json_dir)
         cls.__process_json_ref(l10_merged_ref, l10_refs, json_ref, bucket="root")
         buckets = os.listdir(l10_json_dir)
@@ -201,7 +201,7 @@ def L(in_str, *, locale=None, bucket=None, strict=None):
             return val
     except Exception as e:
         if strict is None:
-            strict_mode = Arjuna.get_ref_config().arjuna_options.value(ArjunaOption.L10_STRICT)
+            strict_mode = Arjuna.get_ref_config().value(ArjunaOption.L10_STRICT)
         else:
             strict_mode = strict
 

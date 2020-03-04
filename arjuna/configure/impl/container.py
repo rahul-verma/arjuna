@@ -48,7 +48,7 @@ class ConfigContainer:
         if isinstance(arjuna_option, ArjunaOption):
             self.__arjuna_options[arjuna_option.name] = obj
         else:
-            normalized_option = Config.normalize_option_str(arjuna_option)
+            normalized_option = Config.normalize_arjuna_option_str(arjuna_option)
             self.__arjuna_options[normalized_option] = obj
         return self
 
@@ -57,11 +57,9 @@ class ConfigContainer:
         return self
 
     def set_option(self, option, obj):
-        normalized_option = Config.normalize_option_str(option)
         try:
-            arj_option = ArjunaOption[normalized_option]
-            self.set_arjuna_option(arj_option, obj)
-        except:
+            self.set_arjuna_option(option, obj)
+        except Exception as e:
             self.set_user_option(option, obj)
         return self
 

@@ -84,26 +84,6 @@ class TestConfigurator:
     def get_config(self, id):
         return self.__config_map[id]
 
-    # def arjuna_options.value(self, config_setu_id, option):
-    #     sname = ArjunaOption[option.upper().strip().replace(".", "_")]
-    #     rvalue = self.__config_map[config_setu_id].arjuna_options.value(sname)
-    #     return rvalue
-
-    # def user_options.value(self, config_setu_id, option):
-    #     sname = option.upper().strip().replace(".", "_")
-    #     rvalue = self.__config_map[config_setu_id].user_config.value(sname)
-    #     return rvalue
-
-    # def get_central_arjuna_option_value(self, option):
-    #     sname = ArjunaOption[option.upper().strip().replace(".", "_")]
-    #     rvalue = self.__default_ref_config.arjuna_options.value(sname)
-    #     return rvalue
-
-    # def get_central_user_option_value(self, option):
-    #     sname = option.upper().strip().replace(".", "_")
-    #     rvalue = self.__default_ref_config.user_config.value(sname)
-    #     return rvalue
-
     def register_new_config(self, arjuna_options, user_options, parent_config=None):
         # Registering a config is post project conf registration. If no project conf, set it to true.
         self.__project_config_loaded = True

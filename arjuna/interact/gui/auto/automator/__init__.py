@@ -40,8 +40,8 @@ class GuiAutomator(ElementContainer,Dispatchable):
         self.__econfig = ext_config
         self.__create_screenshots_dir()
         self.__main_window = None
-        self.__in_slomo = config.arjuna_options.value(ArjunaOption.GUIAUTO_SLOMO_ON)
-        self.__slomo_interval = config.arjuna_options.value(ArjunaOption.GUIAUTO_SLOMO_INTERVAL)
+        self.__in_slomo = config.value(ArjunaOption.GUIAUTO_SLOMO_ON)
+        self.__slomo_interval = config.value(ArjunaOption.GUIAUTO_SLOMO_INTERVAL)
 
         from .webalert_handler import WebAlertHandler
         from .automator_conditions import GuiAutomatorConditions
@@ -50,7 +50,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         self.__conditions_handler = GuiAutomatorConditions(self)
         self.__view_handler = ViewContextHandler(self)
         self.__browser = None
-        self.__screenshots_dir = config.arjuna_options.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR)
+        self.__screenshots_dir = config.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR)
 
         self.__source_parser = None
 
@@ -133,7 +133,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         return self.__conditions_handler
 
     def __create_screenshots_dir(self):
-        sdir = self.config.arjuna_options.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR)
+        sdir = self.config.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR)
         if not os.path.isdir(sdir):
             os.makedirs(sdir)
 

@@ -112,6 +112,15 @@ class Configuration:
         self.__arjuna_options = ROWrapper(self.__wrapped_config.arjuna_config)
         self.__user_options = ROWrapper(self.__wrapped_config.user_config)
 
+    def value(self, name):
+        try:
+            return self.__arjuna_options.value(name)
+        except:
+            try:
+                return self.__user_options.value(name)
+            except:
+                raise Exception("No config option with name {} found in {} configuration.".format(name, self.name))
+
     @property
     def _wrapped_config(self):
         return self.__wrapped_config
@@ -119,14 +128,6 @@ class Configuration:
     @property
     def test_session(self):
         return self.__session
-
-    @property
-    def arjuna_options(self):
-        return self.__arjuna_options
-
-    @property
-    def user_options(self):
-        return self.__user_options
 
     def get_arjuna_options_as_map(self):
         return self.__wrapped_config.arjuna_config.as_json_dict()
@@ -138,41 +139,14 @@ class Configuration:
     def name(self):
         return self.__name
 
-    @property
-    def guiauto_context(self):
-        return self.arjuna_options.value(ArjunaOption.GUIAUTO_CONTEXT) # .as_enum(GuiAutomationContext)
+    def __getattr__(self, name):
+        return self.value(name)
 
-    @property
-    def locale(self):
-        return self.arjuna_options.value(ArjunaOption.L10_LOCALE) # .as_enum(GuiAutomationContext)
+    def __getitem__(self, name):
+        return self.value(name)
 
-    @property
-    def browser_name(self):
-        return self.arjuna_options.value(ArjunaOption.BROWSER_NAME) #.as_enum(BrowserName)
-
-    @property
-    def browser_version(self):
-        return self.arjuna_options.value(ArjunaOption.BROWSER_VERSION)
-
-    @property
-    def browser_binary_path(self):
-        return self.arjuna_options.value(ArjunaOption.BROWSER_BIN_PATH)
-
-    @property
-    def test_run_env_name(self):
-        return self.arjuna_options.value(ArjunaOption.TESTRUN_ENVIRONMENT)
-
-    @property
-    def screenshots_dir(self):
-        return self.arjuna_options.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR)
-
-    @property
-    def log_dir(self):
-        return self.arjuna_options.value(ArjunaOption.LOG_DIR)
-
-    @property
-    def guiauto_max_wait(self):
-        return self.arjuna_options.value(ArjunaOption.GUIAUTO_MAX_WAIT)
+    def __call__(self, name):
+        return self.value(name)
 
     def as_map(self):
         return self.__wrapped_config.as_json_dict()

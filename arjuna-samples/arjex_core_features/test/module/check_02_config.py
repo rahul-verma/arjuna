@@ -27,14 +27,22 @@ Code is kept redundant across methods for the purpose of easier learning.
 def check_config_retrieval(request):
     config = Arjuna.get_ref_config()
 
-    print(config.arjuna_options.value(ArjunaOption.BROWSER_NAME))
-    print(config.arjuna_options.value("BROWSER_NAME"))
-    print(config.arjuna_options.value("BrOwSeR_NaMe"))
-    print(config.arjuna_options.value("browser.name"))
-    print(config.arjuna_options.value("Browser.Name"))
+    print(config.value(ArjunaOption.BROWSER_NAME))
+
+    print(config.value("BROWSER_NAME"))
+    print(config.value("BrOwSeR_NaMe"))
+    print(config.value("browser.name"))
+    print(config.value("Browser.Name"))
+
+    print(config["browser.name"])
 
     print(config.browser_name)
 
+@test
+def check_config_retrieval_C(request):
+    print(C(ArjunaOption.BROWSER_NAME))
+    print(C("browser.name"))
+    print(C("BROWSER_NAME"))
 
 @test
 def check_project_conf(request):
@@ -51,24 +59,28 @@ def check_project_conf(request):
 
 @test
 def check_update_config(request):
-    context = Arjuna.get_run_context()
-    cc = context.config_creator
-    cc.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
-    cc.register()
+    cc = Arjuna.get_config_creator()
+    cc.option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
+    # or
+    cc.option("browser.name", BrowserName.FIREFOX)
+    # or
+    cc["browser_name"] = "Google"
+    # or
+    cc.browser_name = BrowserName.FIREFOX
+    config = cc.register()
 
-    google = WebApp(base_url="https://google.com", config=context.get_config())
+    google = WebApp(base_url="https://google.com", config=config)
     google.launch()
     request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 
 @test
 def check_simpler_builder_method(request):
-    context = Arjuna.get_run_context()
-    cc = context.config_creator
+    cc = Arjuna.get_config_creator()
     cc.firefox()
-    cc.register()
+    config = cc.register()
 
-    google = WebApp(base_url="https://google.com", config=context.get_config())
+    google = WebApp(base_url="https://google.com", config=config)
     google.launch()
     request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
@@ -80,15 +92,21 @@ def check_user_options(request):
         For this test:
         You must add target.url = "https://google.com" to userOptions in project.conf to see the impact.
     '''
-    context = Arjuna.get_run_context()
-    cc = context.config_creator
-    cc.user_option("target.title", "Google")
-    cc.register()
+    # Just like Arjuna options, C works for user options in reference config
+    url = C("target.url")
 
-    config = context.get_config()
+    cc = Arjuna.get_config_creator()
+    cc.option("target.title", "Google")
+    # or
+    cc["target.title"] = "Google"
+    # or
+    cc.target_title = "Google"
+    config = cc.register()
 
-    url = config.user_options.value("target.url")
-    title = config.user_options.value("target.title")
+    title = config.target_title
+    #or
+    title = config["target.title"] # or config.value("target.title") or other variants seen earlier
+    url = config.value("target.url") # Ref user options are available in new config as well.
 
     google = WebApp(base_url=url, config=config)
     google.launch()

@@ -24,94 +24,87 @@ from arjuna.core.enums import *
 class _ConfigCreator:
 
     def __init__(self, test_session, config_map, conf_trace, code_mode=True):
-        self.__code_mode = code_mode
-        self.__test_session = test_session
-        self.__config_container = ConfigContainer()
+        # vars(self)[__code_mode = code_mode
+        vars(self)['_test_session'] = test_session
+        vars(self)['_config_container'] = ConfigContainer()
 
-        self.__config_map = config_map
+        vars(self)['_config_map'] = config_map
         if "default_config" in config_map:
-            self.__parent_config = config_map["default_config"]
+            vars(self)['_parent_config'] = config_map["default_config"]
         else:
-            self.__parent_config = None
+            vars(self)['_parent_config'] = None
 
-        # For Unitee
-        self.__conf_trace = conf_trace
+        # # For Unitee
+        # self.__conf_trace = conf_trace
 
     def parent_config(self, config):
         self.__parent_config = config
 
-    def arjuna_option(self, option, obj):
-        if isinstance(obj, Enum):
-            obj = obj.name
-        self.__config_container.set_arjuna_option(option, obj)
+    def option(self, option, obj):
+        self._config_container.set_option(option, obj)
         return self
 
-    def user_option(self, option, obj):
-        self.__config_container.set_user_option(option, obj)
+    def __setattr__(self, option, obj):
+        self.option(option, obj)
+        return self
+
+    def __setitem__(self, option, obj):
+        self.option(option, obj)
         return self
 
     def options(self, option_map):
-        self.__config_container.set_options(option_map)
+        self._config_container.set_options(option_map)
         return self
 
     def selenium(self):
-        self.__config_container.set_arjuna_option(ArjunaOption.GUIAUTO_AUTOMATOR_NAME, GuiAutomatorName.SELENIUM.name)
+        self.set_option(ArjunaOption.GUIAUTO_AUTOMATOR_NAME, GuiAutomatorName.SELENIUM)
         return self
 
     def appium(self, context):
-        self.arjuna_option(ArjunaOption.GUIAUTO_AUTOMATOR_NAME, GuiAutomatorName.APPIUM.name)
-        self.arjuna_option(ArjunaOption.GUIAUTO_CONTEXT, context)
+        self.option(ArjunaOption.GUIAUTO_AUTOMATOR_NAME, GuiAutomatorName.APPIUM)
+        self.option(ArjunaOption.GUIAUTO_CONTEXT, context)
         return self
 
     def chrome(self):
-        self.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.CHROME.name)
+        self.option(ArjunaOption.BROWSER_NAME, BrowserName.CHROME)
         return self
 
     def firefox(self):
-        self.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX.name)
-        return self
-
-    def headless_mode(self):
-        self.arjuna_option(ArjunaOption.BROWSER_HEADLESS_MODE, True)
-        return self
-
-    def guiauto_max_wait(self, seconds):
-        self.arjuna_option(ArjunaOption.GUIAUTO_MAX_WAIT, seconds)
+        self.option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
         return self
 
     def app(self, path):
-        self.arjuna_option(ArjunaOption.MOBILE_APP_FILE_PATH, path)
-        return self
-
-    def mobile_device_name(self, name):
-        self.arjuna_option(ArjunaOption.MOBILE_DEVICE_NAME, name)
-        return self
-
-    def mobile_device_udid(self, udid):
-        self.arjuna_option(ArjunaOption.MOBILE_DEVICE_UDID, udid)
+        self.option(ArjunaOption.MOBILE_APP_FILE_PATH, path)
         return self
 
     def register(self, config_name="default_config"):
-        if not self.__config_container.arjuna_options.items() and not self.__config_container.user_options.items():
+        if not self._config_container.arjuna_options.items() and not self._config_container.user_options.items():
             if not self.__parent_config:
                 if config_name != "default_config":
-                    self.__config_map[config_name] = self.__config_map["default_config"]
+                    cfg = self._config_map["default_config"]
+                    self._config_map[config_name] = cfg
+                    return cfg
             else:
-                self.__config_map[config_name] = self.__parent_config
-            return
+                cfg = self._parent_config
+                self._config_map[config_name] = cfg
+                return cfg
 
-        config = self.__test_session.register_config(config_name, 
-                                        self.__config_container.arjuna_options, #.items(),
-                                        self.__config_container.user_options, #.items(),
-                                        self.__parent_config
+        config = self._test_session.register_config(config_name, 
+                                        self._config_container.arjuna_options, #.items(),
+                                        self._config_container.user_options, #.items(),
+                                        self._parent_config
                                     )
 
-        self.__config_map[config_name] = config
-        if self.__code_mode:
-            if config_name not in self.__conf_trace:
-                self.__conf_trace[config_name] = {"arjuna_options": set(), "user_options" : set()}
-            self.__conf_trace[config_name]["arjuna_options"].update(self.__config_container.arjuna_options.keys())
-            self.__conf_trace[config_name]["user_options"].update(self.__config_container.user_options.keys())
+        self._config_map[config_name] = config
+        return config
+
+        # if self.__code_mode:
+        #     if config_name not in self.__conf_trace:
+        #         self.__conf_trace[config_name] = {"arjuna_options": set(), "user_options" : set()}
+        #     self.__conf_trace[config_name]["arjuna_options"].update(self._config_container.arjuna_options.keys())
+        #     self.__conf_trace[config_name]["user_options"].update(self._config_container.user_options.keys())
+
+        
 
 
 class RunContext:

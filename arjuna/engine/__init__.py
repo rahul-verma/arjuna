@@ -90,13 +90,13 @@ class ArjunaSingleton:
         self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id)
 
         from arjuna.core.enums import ArjunaOption
-        self.__create_dir_if_doesnot_exist(self.__ref_config.arjuna_options.value(ArjunaOption.PROJECT_RUN_REPORT_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.arjuna_options.value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.arjuna_options.value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.arjuna_options.value(ArjunaOption.PROJECT_RUN_LOG_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.arjuna_options.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_REPORT_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_LOG_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR))
 
-        dl = logging.getLevelName(self.__ref_config.arjuna_options.value(ArjunaOption.LOG_CONSOLE_LEVEL).name) # logging.getLevelName(
+        dl = logging.getLevelName(self.__ref_config.value(ArjunaOption.LOG_CONSOLE_LEVEL).name) # logging.getLevelName(
 
         self.__init_logger(dl)
         self.__load_console(dl, self.logger)
@@ -140,6 +140,15 @@ class ArjunaSingleton:
     @classmethod
     def has_configuration(cls, config_name):
         return config_name.upper() in cls.thread_map
+
+    def get_config_value(self, name, config=None):
+        if config is None:
+            return self.ref_config.value(name)
+        else:
+            if type(config) is str:
+                return self.run_context.get_config(config_name=config).value(name)
+            else:
+                return config.value(name)
 
     @classmethod
     def has_property(cls, config_name, path):
@@ -200,10 +209,10 @@ class ArjunaSingleton:
 
     def __init_logger(self, dl):
         from arjuna.core.enums import ArjunaOption
-        log_dir = self.__ref_config.arjuna_options.value(ArjunaOption.PROJECT_RUN_LOG_DIR)
+        log_dir = self.__ref_config.value(ArjunaOption.PROJECT_RUN_LOG_DIR)
         if not os.path.isdir(log_dir):
             os.makedirs(log_dir)
-        fl = logging.getLevelName(self.__ref_config.arjuna_options.value(ArjunaOption.LOG_FILE_LEVEL).name)
+        fl = logging.getLevelName(self.__ref_config.value(ArjunaOption.LOG_FILE_LEVEL).name)
         fname = "arjuna.log"
         lpath = os.path.join(log_dir, fname)
 
@@ -411,11 +420,12 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.console
 
     @classmethod
-    def get_run_context(cls):
+    def get_config_creator(cls):
         '''
             Returns the run context.
         '''
-        return cls.ARJUNA_SINGLETON.run_context
+        return cls.ARJUNA_SINGLETON.run_context.config_creator
+    
 
     @classmethod
     def get_ref_config(cls):
@@ -423,6 +433,14 @@ class Arjuna:
             Returns the reference configuration.
         '''
         return cls.ARJUNA_SINGLETON.ref_config
+
+    @classmethod
+    def get_config_value(cls, name, config=None):
+        '''
+            Returns the reference configuration.
+        '''
+        return cls.ARJUNA_SINGLETON.get_config_value(name, config)
+
 
     @classmethod
     def get_gui_mgr(cls):
@@ -443,13 +461,18 @@ class Arjuna:
     def get_data_ref(cls, name):
         return cls.get_data_references[name]
 
-    @classmethod
-    def get_ref_arjuna_option_value(cls, option):
-        return cls.get_central_config().get_ref_arjuna_option_value(option)
+    # @classmethod
+    # def get_ref_arjuna_option_value(cls, option):
+    #     return cls.get_central_config().get_ref_arjuna_option_value(option)
+
+    # @classmethod
+    # def get_ref_user_option_value(cls, option):
+    #     return cls.get_central_config().get_ref_user_option_value(option) 
 
     @classmethod
-    def get_ref_user_option_value(cls, option):
-        return cls.get_central_config().get_ref_user_option_value(option) 
+    def get_localized_str(cls, in_str, *, locale=None, bucket=None, strict=None):
+        from arjuna.engine.data.localizer import L
+        return L(in_str, locale=locale, bucket=bucket, strict=strict)
 
     @classmethod
     def get_data_store(cls):

@@ -11,6 +11,15 @@ Following is the list of critical additions and updates for a given released ver
 - Json
     - Added Json class with jsonpath support.
     - Added jsonpath-rw and jsonpath-rw-ext as dependencies.
+- Easy Aliases (L/R/C)
+    - The `L` function is alias for Arjuna.get_localized_str.
+    - The `C` function is alias for Arjuna.get_config_value.
+- Config Simplification
+    - Arjuna automatically looks up Arjuna options and then user options for a name. This does away with the need for `config.arjuna_options.value` and `config.user_options.value`. Relaced with `config.value` call.
+    - New config creation made simpler. RunContext is now an internal concept.
+    - Docs updated.
+    - . and [] retrieval mechanisms added to config object. For a given name, one can use `config.name` or `config[name]` or config.value(name)` calls interchangeably.
+    - All arjuna options and user options become automatically available with . and [] lookup.
 
 
 0.9.5

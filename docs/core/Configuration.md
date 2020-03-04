@@ -9,14 +9,11 @@
     - Project level settings included in `<Project root directory>/config/project.conf` file.
     - CLI Options for settings (TBD).
 - You can get the reference configuration by calling `Arjuna.get_ref_config()`.
-- Arjuna's `RunContext` object contains one or more `Configuration`s. By default it contains a configuration which is a deep copy of the reference Configuration.
-- `RunContext` can be used to create and update custom configurations.
-- You can retrieve the run context from Arjuna facade by making `Arjuna.get_run_context()`.
 
 #### Retrieving value of Arjuna options in Code
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_03_tweaking_config.py
+# arjuna-samples/arjex_core_features/test/module/check_02_config.py
  
 from arjuna import *
 
@@ -24,18 +21,21 @@ from arjuna import *
 def check_config_retrieval(request):
     config = Arjuna.get_ref_config()
 
-    print(config.arjuna_options.value(ArjunaOption.BROWSER_NAME))
-    print(config.arjuna_options.value("BROWSER_NAME"))
-    print(config.arjuna_options.value("BrOwSeR_NaMe"))
-    print(config.arjuna_options.value("browser.name"))
-    print(config.arjuna_options.value("Browser.Name"))
+    print(config.value(ArjunaOption.BROWSER_NAME))
+
+    print(config.value("BROWSER_NAME"))
+    print(config.value("BrOwSeR_NaMe"))
+    print(config.value("browser.name"))
+    print(config.value("Browser.Name"))
+
+    print(config["browser.name"])
 
     print(config.browser_name)
  ```
 
 ##### Points to Note
 1. First, we retrieve the reference config by calling `Arjuna.get_ref_config()`
-2. You can retrieve value of an `ArjunaOption` by calling the `value(<Arjuna Option or string>)` method of a `Configuration.arjuna_options` object. The argument to this call can be an `ArjunaOption` enum constant or a string representing the option. 
+2. You can retrieve value of an `ArjunaOption` by calling the `value(<Arjuna Option or string>)` method of a `Configuration` object. The argument to this call can be an `ArjunaOption` enum constant or a string representing the option.
 3. The option name string is considered by Arjuna as **case-insensitive**. Also, **. (dot)** and **_ (underscore)** are interchangeable. So, following are equivalent arguments:
     - ArjunaOption.BROWSER_NAME
     - BROWSER_NAME
@@ -43,7 +43,24 @@ def check_config_retrieval(request):
     - browser.name
     - Browser.Name
     - and so on
-4. The `Configuration` object also has named properties for commonly used Arjuna options. The name of property is same as the lower-case enum constant text, for example, `browser_name`.
+4. The `Configuration` object also allows for retrieval of a config option using the `. (dot notation)` or `[name] i.e. (dict-like name based retrieval)`.
+
+
+#### The `C` function
+
+```python
+# arjuna-samples/arjex_core_features/test/module/check_02_config.py
+
+@test
+def check_config_retrieval_C(request):
+    print(C(ArjunaOption.BROWSER_NAME))
+    print(C("browser.name"))
+    print(C("BROWSER_NAME"))
+```
+
+##### Points to Note
+1. Arjuna provides a special function `C` for retrieving values from the reference configuration as it is a very common operation to do on test code.
+2. You can pass an `ArjunaOption` enum constant or an option name. The name string has all the flexibility seen in previous example.
 
 ### Project Level Configuration Settings
 
@@ -79,44 +96,49 @@ The code for this example is exactly same as the code that used Chrome for this 
 #### Change Configuration Settings Programmatically
   
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_03_tweaking_config.py
+# arjuna-samples/arjex_core_features/test/module/check_02_config.py
  
 from arjuna import *
  
 @test
 def check_update_config(request):
-    context = Arjuna.get_run_context()
-    cc = context.config_creator
-    cc.arjuna_option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
-    cc.register()
+    cc = Arjuna.get_config_creator()
+    cc.option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
+    # or
+    cc.option("browser.name", BrowserName.FIREFOX)
+    # or
+    cc["browser_name"] = "Google"
+    # or
+    cc.browser_name = BrowserName.FIREFOX
+    config = cc.register()
 
-    google = WebApp(base_url="https://google.com", config=context.get_config())
+    google = WebApp(base_url="https://google.com", config=config)
     google.launch()
     request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 ```
    
 ##### Points to Note
-1. `RunContext` is retrieved by calling `Arjuna.get_run_context()`.
-2. `context.config_creator` gives a configuration creator.
-3. We can tweak an Arjuna option by calling `arjuna_option` builder method of the `config_creator`. Here, we are specifying browser name as the target option and firefox as the value. We can change more settings in this manner.  
+1. `ConfigCreator` is retrieved by calling `Arjuna.get_config_creator()`.
+2. We can tweak an Arjuna option by calling `option` builder method of the `ConfigCreator`. Here, we are specifying browser name as the target option and firefox as the value. We can change more settings in this manner.  
+3. We can also use the `. dot notation` or `[] dict style` for adding/updating options.
 4. We call the `register` method of the config creator to update the configuration. As configurations are immutable, it means a new `Configuration` object is created and it replaces the original configuration (in this case the default configuration of the RunContext, a copy of the reference Configuration).
-5. `WebApp` by default uses the reference Configuration. You can change this by passing the optional keyword argument `config=context.get_config()` while initializing `WebApp`.
+5. The newly created configuration is returned by the `register` call.
+5. `WebApp` by default uses the reference Configuration. You can change this by passing the optional keyword argument `config=config` while initializing `WebApp`.
 6. All other steps are same as previous code.
 
 ### Simpler Builder Methods
  
  ```python
- # arjuna-samples/arjex_core_features/test/module/check_03_tweaking_config.py
+ # arjuna-samples/arjex_core_features/test/module/check_02_config.py
  
  from arjuna import *
  
  @test
-def check_simpler_builder_method(request):
-    context = Arjuna.get_run_context()
-    cc = context.config_creator
+ def check_simpler_builder_method(request):
+    cc = Arjuna.get_config_creator()
     cc.firefox()
-    cc.register()
+    config = cc.register()
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
@@ -143,19 +165,25 @@ userOptions {
 In addition to this we will also define an option `target.title` programmatically.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_03_tweaking_config.py
+# arjuna-samples/arjex_core_features/test/module/check_02_config.py
 
 @test
 def check_user_options(request):
-    context = Arjuna.get_run_context()
-    cc = context.config_creator
-    cc.user_option("target.title", "Google")
-    cc.register()
+    # Just like Arjuna options, C works for user options in reference config
+    url = C("target.url")
 
-    config = context.get_config()
+    cc = Arjuna.get_config_creator()
+    cc.option("target.title", "Google")
+    # or
+    cc["target.title"] = "Google"
+    # or
+    cc.target_title = "Google"
+    config = cc.register()
 
-    url = config.user_options.value("target.url")
-    title = config.user_options.value("target.title")
+    title = config.target_title
+    #or
+    title = config["target.title"] # or config.value("target.title") or other variants seen earlier
+    url = config.value("target.url") # Ref user options are available in new config as well.
 
     google = WebApp(base_url=url, config=config)
     google.launch()
@@ -164,7 +192,5 @@ def check_user_options(request):
 ```
 
 ##### Points to Note
-1. Creating a user option is same as earlier with the only difference that you need to call the `user_option` builder method of `config_creator`.
-2. For retrieving the value, call `value` method of `Configuration.user_options` object.
-3. Rest of the code is similar to the basic use case code used so far. It uses the values retrieved from user options in `Configuration`.
+1. Creating a user option and retrieving its value is done in exactly the same manner as Arjuna options.
 

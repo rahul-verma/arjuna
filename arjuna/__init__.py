@@ -75,5 +75,7 @@ from arjuna.engine.relation import *
 from arjuna.engine.fixture import *
 from arjuna.core.xml import xfinder
 from arjuna.core.adv.types import ProcessedKeyDict
-from arjuna.engine.data.localizer import L
 from arjuna.core.json import Json
+
+L = Arjuna.get_localized_str
+C = Arjuna.get_config_value
