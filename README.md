@@ -42,13 +42,13 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 4. [Dropdown and RadioGroup](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/DropDownRadioGroup.md)
 
 ### 4. Advanced Web UI Automation
-1. [Finding Nested Elements](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/FindingNestedElements.md)
-2. [Alternative and Dynamic Identifiers](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/AlternativeDynamicIdentifiers.md)
-3. [Executing JavaScript](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/ExecutingJavaScript.md)
-4. [Alerts, Windows, Frames](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/AlertsWindowsFrames.md)
-5. [Configuraing Interactions with GuiInteractionConfig](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/GuiInteractionConfig.md)
-6. [Handling Custom DropDowns](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/HandlingCustomDropDowns.md)
-7. [Retrieving Source code with GuiSource](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/GuiSource.md)
+1. Finding Nested Elements
+2. Alternative and Dynamic Identifiers
+3. Executing JavaScript
+4. Alerts, Windows, Frames
+5. Configuraing Interactions with GuiInteractionConfig
+6. Handling Custom DropDowns
+7. Retrieving Source code with GuiSource
 
 ### 5. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
 The following tutorial sub-sections have multiple example projects corresponding to them. Please refer the pages for respective example projects.
@@ -61,7 +61,7 @@ The following tutorial sub-sections have multiple example projects corresponding
 5. [App-Page-Section Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageSectionObjectModel.md)
 
 ## Reference
-1. [Command Line Options](https://github.com/rahul-verma/arjuna/blob/master/docs/core/CommandLineOptions.md)
+1. Command Line Options
 
 ### Miscellaneous
 1. Using Arjuna With Your Test Framework
