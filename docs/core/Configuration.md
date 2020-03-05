@@ -8,7 +8,7 @@
     - Default settings for Arjuna options
     - Project level settings included in `<Project root directory>/config/project.conf` file.
     - CLI Options for settings (TBD).
-- You can get the reference configuration by calling `Arjuna.get_ref_config()`.
+- You can get the reference configuration by calling `Arjuna.get_config()`.
 
 #### Retrieving value of Arjuna options in Code
 
@@ -19,7 +19,7 @@ from arjuna import *
 
 @test
 def check_config_retrieval(request):
-    config = Arjuna.get_ref_config()
+    config = Arjuna.get_config()
 
     print(config.value(ArjunaOption.BROWSER_NAME))
 
@@ -34,7 +34,7 @@ def check_config_retrieval(request):
  ```
 
 ##### Points to Note
-1. First, we retrieve the reference config by calling `Arjuna.get_ref_config()`
+1. First, we retrieve the reference config by calling `Arjuna.get_config()`
 2. You can retrieve value of an `ArjunaOption` by calling the `value(<Arjuna Option or string>)` method of a `Configuration` object. The argument to this call can be an `ArjunaOption` enum constant or a string representing the option.
 3. The option name string is considered by Arjuna as **case-insensitive**. Also, **. (dot)** and **_ (underscore)** are interchangeable. So, following are equivalent arguments:
     - ArjunaOption.BROWSER_NAME

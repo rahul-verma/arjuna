@@ -20,6 +20,7 @@ limitations under the License.
 from enum import Enum
 from arjuna.configure.impl.container import ConfigContainer
 from arjuna.core.enums import *
+import uuid
 
 class _ConfigCreator:
 
@@ -29,8 +30,8 @@ class _ConfigCreator:
         vars(self)['_config_container'] = ConfigContainer()
 
         vars(self)['_config_map'] = config_map
-        if "default_config" in config_map:
-            vars(self)['_parent_config'] = config_map["default_config"]
+        if "reference" in config_map:
+            vars(self)['_parent_config'] = config_map["reference"]
         else:
             vars(self)['_parent_config'] = None
 
@@ -77,35 +78,30 @@ class _ConfigCreator:
         self.option(ArjunaOption.MOBILE_APP_FILE_PATH, path)
         return self
 
-    def register(self, config_name="default_config"):
+    def register(self, config_name=None):
+        config_name = config_name and config_name or 'c{}'.format(str(uuid.uuid4()).replace("-","_"))
+        if config_name.lower() in self._config_map:
+            raise Exception("You can not re-register a configuration for a name. Config with name {} already exists.".format(config_name))
+
         if not self._config_container.arjuna_options.items() and not self._config_container.user_options.items():
             if not self.__parent_config:
-                if config_name != "default_config":
-                    cfg = self._config_map["default_config"]
-                    self._config_map[config_name] = cfg
+                if config_name != "reference":
+                    cfg = self._config_map["reference"]
+                    self._config_map[config_name.lower()] = cfg
                     return cfg
             else:
                 cfg = self._parent_config
-                self._config_map[config_name] = cfg
+                self._config_map[config_name.lower()] = cfg
                 return cfg
 
-        config = self._test_session.register_config(config_name, 
+        config = self._test_session.register_config(config_name.lower(), 
                                         self._config_container.arjuna_options, #.items(),
                                         self._config_container.user_options, #.items(),
                                         self._parent_config
                                     )
 
-        self._config_map[config_name] = config
+        self._config_map[config_name.lower()] = config
         return config
-
-        # if self.__code_mode:
-        #     if config_name not in self.__conf_trace:
-        #         self.__conf_trace[config_name] = {"arjuna_options": set(), "user_options" : set()}
-        #     self.__conf_trace[config_name]["arjuna_options"].update(self._config_container.arjuna_options.keys())
-        #     self.__conf_trace[config_name]["user_options"].update(self._config_container.user_options.keys())
-
-        
-
 
 class RunContext:
 
@@ -114,7 +110,7 @@ class RunContext:
         self.__name = name
         self.__parent_config = parent_config and parent_config or None
         from arjuna import Arjuna
-        self.__configs = {"default_config" : Arjuna.get_ref_config()}
+        self.__configs = {"reference" : Arjuna.get_config()}
         self.__conf_trace = dict()
 
     @property
@@ -153,7 +149,7 @@ class RunContext:
     def config(self):
         return self.get_config()
 
-    def get_config(self, config_name="default_config"):
+    def get_config(self, config_name="reference"):
         return self.__configs[config_name.lower()]
 
     def add_config(self, config):
@@ -176,49 +172,3 @@ class RunContext:
 
     def get_name(self):
         return self.__name
-
-# class Context:
-
-#     def __init__(self, test_session, name, parent_context=None):
-#         self.__test_session = test_session
-#         self.__name = name
-
-#         # dict of name and TestConfig
-#         if parent_context is not None:
-#             self.__config_map = parent_context.clone_config_map()
-#         else:
-#             self.__config_map = dict()
-#             self.__config_builder = self.ConfigBuilder()
-#             builder.ref_config(Arjuna.get_ref_config());
-#             builder.build(ConfigBuilder.DEFAULT_CONF_NAME)
-
-#     def ConfigBuilder(self):
-#         return ConfigBuilder(self.__test_session, self.__config_map)
-
-#     @property
-#     def config(self):
-#         return self.__config_map[ConfigBuilder.DEFAULT_CONF_NAME]
-
-#     def get_named_config(self, name):
-#         if name is None:
-#             raise Exception("Config name was passed as None.")
-#         else:
-#             try:
-#                 return self.get_named_config[name.lower()]
-#             except:
-#                 raise Exception("No context config found with name: " + name)
-
-#     @property
-#     def name(self):
-#         return self.__name
-
-#     def _update_options(self, option_map):
-#         for conf_name, config in option_map.items():
-#             builder = self.ConfigBuilder()
-#             builder.ref_config(self.__config_map.get(conf_name))
-#             builder.options(option_map)
-#             builder.build(conf_name)
-
-#     def clone_config_map(self):
-#         out_map = dict()
-#         out_map.update(self.__config_map)

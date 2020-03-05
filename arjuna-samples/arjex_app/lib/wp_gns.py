@@ -20,7 +20,7 @@ limitations under the License.
 from arjuna import *
 
 def create_wordpress_app():
-    url = Arjuna.get_ref_config().user_options.value("wp.login.url")
+    url = Arjuna.get_config().user_options.value("wp.login.url")
     wordpress = WebApp(base_url=url)
     wordpress.launch()
     wordpress.externalize(gns_file_name="WordPress.yaml")

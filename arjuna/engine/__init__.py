@@ -433,15 +433,14 @@ class Arjuna:
     
 
     @classmethod
-    def get_ref_config(cls):
+    def get_config(cls, name=None):
         '''
             Returns the reference configuration.
         '''
-        return cls.ARJUNA_SINGLETON.ref_config
-
-    @classmethod
-    def get_config(cls, name):
-        return cls.ARJUNA_SINGLETON.get_config(name)
+        if name is None:
+            return cls.ARJUNA_SINGLETON.ref_config
+        else:
+            return cls.ARJUNA_SINGLETON.get_config(name)
 
     @classmethod
     def get_config_value(cls, name, config=None):

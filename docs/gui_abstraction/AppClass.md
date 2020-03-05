@@ -20,7 +20,7 @@ from arjuna import *
 class WordPress:
 
     def __init__(self):
-        url = Arjuna.get_ref_config().user_options.value("wp.login.url")
+        url = C("wp.login.url")
         self.__app = WebApp(base_url=url)
         self.app.launch()
         self.app.externalize(gns_file_name="WordPress.yaml")

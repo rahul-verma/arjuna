@@ -33,7 +33,7 @@ class DefaultTestSession:
     
     def __init__(self):
         self.__id = uuid.uuid4()
-        self.__DEF_CONF_NAME = "central"
+        self.__DEF_CONF_NAME = "reference"
         self.__default_ref_config = None
         self.__config_map = {}
         self.__cli_central_config = None

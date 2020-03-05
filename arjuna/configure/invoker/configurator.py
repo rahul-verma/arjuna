@@ -36,6 +36,7 @@ class TestConfigurator:
         self.__cli_central_config = None
         self.__cli_test_config = None
         self.__run_conf = None
+        self.__chosen_env_conf = None
         self.__env_confs = dict()
         self.__project_config_loaded = False
 
@@ -47,6 +48,7 @@ class TestConfigurator:
         self.__load_cli_dicts()
         self.__update_ref_config()
         self.__load_env_configurations()
+        self.__load_chosen_env()
         self.__load_run_conf()
         self.__update_ref_config()
         self.__update_env_dicts()
@@ -71,35 +73,51 @@ class TestConfigurator:
             run_conf_loader = PartialConfCreator(self.__run_conf_path)
             self.__run_conf = run_conf_loader.config
 
+    def __create_config_from_option_dicts(self, reference, arjuna_options, user_options):
+        def format_value(val):
+            if isinstance(val, Enum):
+                return val.name
+            else:
+                return str(val)
+
+        # ANCHOR
+        crawdict = {
+            "arjunaOptions": {k:format_value(v) for k,v in arjuna_options.items()},
+            "userOptions": {k:format_value(v) for k,v in user_options.items()}
+        }
+        hreader = HoconStringReader(json.dumps(crawdict))
+        hreader.process()
+
+        config = ConfigCreator.create_new_conf(
+            self.__default_ref_config.processor,
+            reference,
+            hreader.get_map()
+        )
+        return config   
+
     def __load_cli_dicts(self):
-        def config_from_option_dicts(reference, arjuna_options, user_options):
-            def format_value(val):
-                if isinstance(val, Enum):
-                    return val.name
-                else:
-                    return str(val)
-
-            # ANCHOR
-            crawdict = {
-                "arjunaOptions": {k:format_value(v) for k,v in arjuna_options.items()},
-                "userOptions": {k:format_value(v) for k,v in user_options.items()}
-            }
-            hreader = HoconStringReader(json.dumps(crawdict))
-            hreader.process()
-
-            config = ConfigCreator.create_new_conf(
-                self.__default_ref_config.processor,
-                reference,
-                hreader.get_map()
-            )
-            return config   
 
         def load(arjunaCentralOptions={}, arjunaTestOptions={}, userCentralOptions={}, userTestOptions={}):
-            self.__cli_central_config = config_from_option_dicts(None, arjunaCentralOptions, userCentralOptions)
-            self.__cli_test_config = config_from_option_dicts(None, arjunaTestOptions, userTestOptions)
+            self.__cli_central_config = self.__create_config_from_option_dicts(None, arjunaCentralOptions, userCentralOptions)
+            self.__cli_test_config = self.__create_config_from_option_dicts(None, arjunaTestOptions, userTestOptions)
 
         cli_config = self.__cli_config and self.__cli_config or {}
         load(**cli_config)
+
+    def __load_chosen_env(self):
+        from arjuna.core.enums import ArjunaOption
+        env_name = self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_ENV_NAME).lower()
+        if env_name != "not_set":
+            if env_name not in self.__env_confs:
+                raise Exception("No environment configured for name: {}. Check the name and matching conf file in {}".format(
+                                        env_name,
+                                        self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_ENV_CONF_DIR)
+                                ))
+            self.__chosen_env_conf = self.__env_confs[env_name]
+
+    def __update_config_for_env(self, config):
+        if self.__chosen_env_conf:
+            config.update(self.__chosen_env_conf)
 
     def __update_config_for_run_conf(self, config):
         if self.__run_conf:
@@ -109,23 +127,15 @@ class TestConfigurator:
         config.update(self.__cli_central_config)
         config.update(self.__cli_test_config)
 
+    def __update_config(self, config, update_from_chosen_env=False):
+        if update_from_chosen_env:
+            self.__update_config_for_env(config)
+        self.__update_config_for_run_conf(config)
+        self.__update_config_for_cli(config)
+        config.process_arjuna_options()
+
     def __update_ref_config(self):
-
-        def update_ref_config_for_env():
-            from arjuna.core.enums import ArjunaOption
-            env_name = self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_ENV_NAME).lower()
-            if env_name != "not_set":
-                if env_name not in self.__env_confs:
-                    raise Exception("No environment configured for name: {}. Check the name and matching conf file in {}".format(
-                                            env_name,
-                                            self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_ENV_CONF_DIR)
-                                    ))
-                self.__default_ref_config.update(self.__env_confs[env_name])
-
-        update_ref_config_for_env()
-        self.__update_config_for_run_conf(self.__default_ref_config)
-        self.__update_config_for_cli(self.__default_ref_config)
-        self.__default_ref_config.process_arjuna_options()
+        self.__update_config(self.__default_ref_config, update_from_chosen_env=True)
 
     def __update_env_dicts(self):
         out_dict = dict()
@@ -133,9 +143,7 @@ class TestConfigurator:
             conf = EmptyConfCreator().config
             conf.update(self.__default_ref_config)
             conf.update(econf)
-            self.__update_config_for_run_conf(conf)
-            self.__update_config_for_cli(conf)
-            conf.process_arjuna_options()
+            self.__update_config(conf)
             out_dict[name] = conf
         self.__env_confs = out_dict
 
@@ -151,7 +159,6 @@ class TestConfigurator:
         # Registering a config is post project conf registration. If no project conf, set it to true.
         self.__project_config_loaded = True
         reference = parent_config and parent_config._wrapped_config or self.__default_ref_config._wrapped_config
-        config = self.__create_config_from_option_dicts(reference, arjuna_options, user_options)
-        config.update(self.__cli_test_config)
-        config.process_arjuna_options()
-        return config
+        conf = self.__create_config_from_option_dicts(reference, arjuna_options, user_options)
+        self.__update_config(conf)
+        return conf

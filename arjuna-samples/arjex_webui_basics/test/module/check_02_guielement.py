@@ -33,7 +33,7 @@ def wordpress(request):
     '''
 
     # Setup
-    wp_url = Arjuna.get_ref_config().user_options.value("wp.login.url")
+    wp_url = C("wp.login.url")
     wordpress = WebApp(base_url=wp_url)
     wordpress.launch()
     yield wordpress

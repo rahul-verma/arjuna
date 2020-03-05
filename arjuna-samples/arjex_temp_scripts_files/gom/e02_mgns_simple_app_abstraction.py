@@ -27,7 +27,7 @@ class WPBaseTest(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         Arjuna.init("/Users/rahulverma/Documents/github_tm/arjuna/arjuna-samples/workspace/arjex")
-        self.__config = Arjuna.get_ref_config()
+        self.__config = Arjuna.get_config()
         self.__app = None
 
     @property

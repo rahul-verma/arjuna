@@ -103,7 +103,7 @@ from arjuna import *
 class WordPress(WebApp):
 
     def __init__(self, gns_format="sgns"):
-        url = Arjuna.get_ref_config().user_options.value("wp.login.url")
+        url = C("wp.login.url")
         super().__init__(base_url=url)
 
     def launch(self):

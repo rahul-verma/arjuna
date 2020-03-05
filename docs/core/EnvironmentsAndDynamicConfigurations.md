@@ -71,11 +71,11 @@ Provide `--run-env tenv2` and run the following test to see the impact:
 ```python
 @test
 def check_runenv_cli(request):
-    print(Arjuna.get_ref_config().browser_name)
+    print(Arjuna.get_config().browser_name)
     print(C("browser.name"))
 
-    print(Arjuna.get_ref_config().aut_base_url)
-    print(Arjuna.get_ref_config().user)
+    print(Arjuna.get_config().aut_base_url)
+    print(Arjuna.get_config().user)
 
     print(C("aut.base.url"))
     print(C("user"))
@@ -105,11 +105,11 @@ Provide `--run-conf <path of dynamic.conf>` and run the following test to see th
 
 @test
 def check_runconf_cli(request):
-    print(Arjuna.get_ref_config().browser_name)
+    print(Arjuna.get_config().browser_name)
     print(C("browser.name"))
 
-    print(Arjuna.get_ref_config().aut_base_url)
-    print(Arjuna.get_ref_config().user)
+    print(Arjuna.get_config().aut_base_url)
+    print(Arjuna.get_config().user)
 
     print(C("aut.base.url"))
     print(C("user"))
@@ -129,16 +129,16 @@ Provide `--run-env tenv2 --run-conf <path of dynamic.conf>` and run the followin
 
 @test
 def check_runenv_runconf_cli(request):
-    print(Arjuna.get_ref_config().browser_name)
+    print(Arjuna.get_config().browser_name)
     print(C("browser.name"))
 
-    print(Arjuna.get_ref_config().aut_base_url)
-    print(Arjuna.get_ref_config().user)
+    print(Arjuna.get_config().aut_base_url)
+    print(Arjuna.get_config().user)
 
     print(C("aut.base.url"))
     print(C("user"))
 
-    print(Arjuna.get_ref_config().pwd)
+    print(Arjuna.get_config().pwd)
     print(C("pwd"))
 
 ```

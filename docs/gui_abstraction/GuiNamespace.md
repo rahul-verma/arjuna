@@ -58,7 +58,7 @@ We had earlier created a resuable module for WordPress related functions. Let's 
 from arjuna import *
 
 def create_wordpress_app():
-    url = Arjuna.get_ref_config().user_options.value("wp.login.url")
+    url = C("wp.login.url")
     wordpress = WebApp(base_url=url)
     wordpress.launch()
     wordpress.externalize(gns_file_name="WordPress.yaml")

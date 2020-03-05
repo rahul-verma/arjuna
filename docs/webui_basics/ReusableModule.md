@@ -14,14 +14,14 @@ Here, we are following a traditional style of programming. For more advanced con
 from arjuna import *
 
 def create_wordpress_app():
-    url = Arjuna.get_ref_config().user_options.value("wp.login.url")
+    url = C("wp.login.url")
     wordpress = WebApp(base_url=url)
     wordpress.launch()
     return wordpress
 
 def login(wordpress):
-    user = wordpress.config.user_options.value("wp.admin.name")
-    pwd = wordpress.config.user_options.value("wp.admin.pwd")
+    user = wordpress.config.value("wp.admin.name")
+    pwd = wordpress.config.value("wp.admin.pwd")
 
     # Login
     wordpress.element(With.id("user_login")).text = user

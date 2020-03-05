@@ -53,7 +53,7 @@ class Gui(AsserterMixIn):
         '''
         super().__init__()
         from arjuna import Arjuna
-        self.__config = config is not None and config or Arjuna.get_ref_config()
+        self.__config = config is not None and config or Arjuna.get_config()
         self.__econfig = ext_config
         self.__conditions = GuiConditions(self)
         if ext_config is None:

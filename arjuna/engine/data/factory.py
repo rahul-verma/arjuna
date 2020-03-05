@@ -42,7 +42,7 @@ def get_data_file_path(data_dir, fpath):
 
 def create_file_data_source(file_path, record_format="MAP", delimiter="\t"):
     from arjuna import Arjuna, ArjunaOption
-    data_dir = Arjuna.get_ref_config().value(ArjunaOption.DATA_SOURCES_DIR)
+    data_dir = Arjuna.get_config().value(ArjunaOption.DATA_SOURCES_DIR)
     file_path = get_data_file_path(data_dir, file_path)
     ds = None
     ext = file_path.lower()
@@ -112,11 +112,11 @@ class DataReference:
 
         from arjuna import Arjuna, ArjunaOption
         if context == DataRefContextType.COLUMN:
-            data_dir = Arjuna.get_ref_config().value(ArjunaOption.DATA_REFERENCES_COLUMN_DIR)
+            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REFERENCES_COLUMN_DIR)
             file_path = get_data_file_path(data_dir, file_path)
             return ExcelColumnDataReference(file_path)
         elif context == DataRefContextType.ROW:
-            data_dir = Arjuna.get_ref_config().value(ArjunaOption.DATA_REFERENCES_ROW_DIR)
+            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REFERENCES_ROW_DIR)
             file_path = get_data_file_path(data_dir, file_path)
             return ExcelRowDataReference(file_path)
 

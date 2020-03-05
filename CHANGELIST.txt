@@ -21,6 +21,25 @@ Following is the list of critical additions and updates for a given released ver
     - Docs updated.
     - . and [] retrieval mechanisms added to config object. For a given name, one can use `config.name` or `config[name]` or config.value(name)` calls interchangeably.
     - All arjuna options and user options become automatically available with . and [] lookup.
+    - Arjuna.get_config gives reference config by default. If conf name is passed, then that named config object is returned.
+- ConfigCreator Concept Updated
+    - One can not create a configuration with same name again.
+    - creator.register without a name creates a unique config name using uuid4. As it returns the config object it has its use case when direct dealing with config object is needed.
+    - create.register(name) is useful if the name is to be controlled and used by test author.
+- Connfiguration Layer-wsie auto-update:
+    - Reference Config is updated as per following sequence:
+        - Arjuna central config
+        - Project conf
+        - Named env conf if provided
+        - Run Conf if provided
+        - CLI Options
+    - Any new custom configuration is updated as per following sequence:
+        - Parent Conf (by default it is the Reference Configuration)
+        - Programmatic additions
+        - Named env conf if provided
+        - Run Conf if provided
+        - CLI Options
+
 - Data References
     - Arjuna.get_dataref_value method added for easy and simplified value retrieval for a context from a data reference.
     - Simple query format created. Query can be a refname or context.refname or bucket.context.refname.
