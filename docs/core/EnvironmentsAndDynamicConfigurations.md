@@ -66,7 +66,7 @@ You can do a session wide update that the reference configuration should utilize
 
 You do this by providing `--run-env` CLI switch.
 
-Provide `--rune-env tenv2` and run the following test to see the impact:
+Provide `--run-env tenv2` and run the following test to see the impact:
 
 ```python
 @test
@@ -99,7 +99,7 @@ userOptions {
 }
 ```
 
-Provide `--rune-conf <path of dynamic.conf>` and run the following test to see the impact:
+Provide `--run-conf <path of dynamic.conf>` and run the following test to see the impact:
 
 ```python
 
