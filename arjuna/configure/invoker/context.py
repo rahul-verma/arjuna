@@ -154,7 +154,10 @@ class RunContext:
         return self.get_config()
 
     def get_config(self, config_name="default_config"):
-        return self.__configs[config_name]
+        return self.__configs[config_name.lower()]
+
+    def add_config(self, config):
+        self.__configs[config.name.lower()] = config 
 
     def _add_configs(self, configs):
         self.__configs.update(configs)

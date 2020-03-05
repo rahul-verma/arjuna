@@ -210,4 +210,20 @@ class ProjectConfigCreator(BaseConfigProcessor):
         self._config = ConfigCreator.create_new_conf(self, self.__central_conf, cdict)
 
 
+class CustomConfCreator(BaseConfigProcessor):
+
+    def __init__(self, ref_conf, cfpath):
+        self.__ref_conf = ref_conf
+        self.__cfile_path = cfpath
+        self.__process()
+
+    def __process(self):
+        # process conf file
+        hreader = HoconFileReader(self.__cfile_path)
+        hreader.process()
+        cdict = hreader.get_map()
+
+        self._config = ConfigCreator.create_new_conf(self, self.__ref_conf, cdict)
+
+
 

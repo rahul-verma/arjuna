@@ -25,6 +25,21 @@ Following is the list of critical additions and updates for a given released ver
     - Arjuna.get_dataref_value method added for easy and simplified value retrieval for a context from a data reference.
     - Simple query format created. Query can be a refname or context.refname or bucket.context.refname.
 
+To DO for this build before PyPi release:
+- Config Simplication
+    - Many ArjunaOptions have been renamed to simpler, shorter names.
+- Environment Config
+    - Any number of configurations for named environments can be created.
+    - The configurations are loaded by Arjuna automatically.
+    - Programmatically any config can be referred any time.
+    - One can provide --run-env CLI switch which picks up the env config. This superimposes this env config on the reference config itself.
+- New CLI Configuration Switches
+    - --run-env switch as mentioned above.
+    - --run-config Any configuration absolute path can be provided. This is is superimposed on the reference config.
+- request object enahcnements
+    - request.config is by default set to reference config.
+    - One can set a new configuration by using request.config_creator.
+
 
 0.9.5
 -----

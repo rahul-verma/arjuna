@@ -18,9 +18,10 @@ limitations under the License.
 '''
 
 import json
+import os
 from enum import Enum
 
-from arjuna.configure.impl.processor import ConfigCreator, CentralConfigLoader, ProjectConfigCreator
+from arjuna.configure.impl.processor import ConfigCreator, CentralConfigLoader, ProjectConfigCreator, CustomConfCreator
 from arjuna.core.reader.hocon import HoconStringReader, HoconConfigDictReader
 from arjuna.core.value import Value
 
@@ -76,6 +77,20 @@ class TestConfigurator:
         self.__default_ref_config.update(self.__cli_test_config)
         # self.__config_map[self.__default_ref_config.id] = self.__default_ref_config
         return self.__default_ref_config
+
+    def load_env_configurations(self):
+        from arjuna import ArjunaOption
+        env_dir = self.__default_ref_config.arjuna_config.value(ArjunaOption.ENV_CONF_DIR)
+        name_confs = []
+        for fname in os.listdir(env_dir):
+            if fname.lower().endswith(".conf"):
+                env_conf_loader = CustomConfCreator(self.__default_ref_config, os.path.join(env_dir, fname))
+                conf = env_conf_loader.config
+                conf.process_arjuna_options()
+                conf.update(self.__cli_central_config)
+                conf.update(self.__cli_test_config)
+                name_confs.append((os.path.splitext(fname)[0].lower(), conf))
+        return name_confs 
 
     @property
     def ref_config(self):

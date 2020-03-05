@@ -57,6 +57,9 @@ class ArjunaOption(Enum):
     SCREENSHOTS_DIR = auto()
     CONFIG_DIR = auto()
 
+    ENV_NAME = auto()
+    ENV_CONF_DIR = auto()
+
     SETU_PROJECT_DIRS_FILES = auto()
     REPORT_DIR = auto()
     ARCHIVES_DIR = auto()

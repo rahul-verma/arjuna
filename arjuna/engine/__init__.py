@@ -87,7 +87,7 @@ class ArjunaSingleton:
         if not static_rid:
             prefix = "{}-".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3])
         run_id = "{}{}".format(prefix, run_id)
-        self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id)
+        self.__ref_config, env_confs = self.__test_session.init(project_root_dir, cli_config, run_id)
 
         from arjuna.core.enums import ArjunaOption
         self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_REPORT_DIR))
@@ -102,6 +102,8 @@ class ArjunaSingleton:
         self.__load_console(dl, self.logger)
 
         self.__run_context = self.create_test_context(self.__default_context_name)
+        for env_conf in env_confs:
+            self.__run_context.add_config(env_conf)
 
         # Load data references
         from arjuna.engine.data.factory import DataReference
@@ -374,6 +376,9 @@ class ArjunaSingleton:
     def ref_config(self):
         return self.__ref_config
 
+    def get_config(self, name):
+        return self.run_context.get_config(name)
+
     def create_test_context(self, name):
         '''
             Creates test context object.
@@ -435,6 +440,10 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.ref_config
 
     @classmethod
+    def get_config(cls, name):
+        return cls.ARJUNA_SINGLETON.get_config(name)
+
+    @classmethod
     def get_config_value(cls, name, config=None):
         '''
             Returns the reference configuration.
@@ -465,14 +474,6 @@ class Arjuna:
     def get_data_ref(cls, name):
         return cls.ARJUNA_SINGLETON.data_references[name]
 
-    # @classmethod
-    # def get_ref_arjuna_option_value(cls, option):
-    #     return cls.get_central_config().get_ref_arjuna_option_value(option)
-
-    # @classmethod
-    # def get_ref_user_option_value(cls, option):
-    #     return cls.get_central_config().get_ref_user_option_value(option) 
-
     @classmethod
     def get_localized_str(cls, in_str, *, locale=None, bucket=None, strict=None):
         from arjuna.engine.data.localizer import L
@@ -481,42 +482,6 @@ class Arjuna:
     @classmethod
     def get_data_store(cls):
         return cls.ARJUNA_SINGLETON.data_store
-
-    @staticmethod
-    def get_test_context(name):
-        '''
-            Returns test context for a given name (case-insensitive).
-        '''
-        pass
-
-    @staticmethod
-    def register_test_context(context):
-        '''
-            Registers a test context object.
-        '''
-        pass    
-
-    @classmethod
-    def create_test_context(cls, name):
-        '''
-            Creates test context object.
-            ?? Does it take central config??
-        '''
-        return cls.ARJUNA_SINGLETON.create_test_context(name)
-
-    @staticmethod
-    def get_root_dir(context):
-        '''
-            Returns root directory of test project.
-        '''
-        pass
-
-    @staticmethod
-    def create_datasource_builder():
-        '''
-            Creates and returns DataSourceBuilder object.
-        '''
-        pass
 
     @staticmethod
     def exit():

@@ -112,3 +112,12 @@ def check_user_options(request):
     google.launch()
     request.asserter.assert_equal(title, google.title, "Page title does not match.")
     google.quit()
+
+@test
+def check_env_confs(request):
+    print(Arjuna.get_config("tenv1").aut_base_url)
+    print(Arjuna.get_config("tenv2").aut_base_url)
+    print(Arjuna.get_config("tenv1").user)
+    print(Arjuna.get_config("tenv2").user)
+
+    

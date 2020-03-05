@@ -62,8 +62,9 @@ class DefaultTestSession:
         self.__configurator = TestConfigurator(run_id)
         self.__configurator.init(root_dir, cli_config)
         config = self.__configurator.create_project_conf()
+        name_envconfs = self.__configurator.load_env_configurations()
         self.__guimgr = GuiManager(config)
-        return self.__create_config(config)
+        return self.__create_config(config), [self.__create_config(econf, name=name) for name, econf in name_envconfs]
 
     def __create_config(self, config, name=None):
         config = Configuration(
