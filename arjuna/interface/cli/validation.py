@@ -45,6 +45,13 @@ def new_project_dir(input):
         os.makedirs(input)
         return input
 
+def absolute_file_path(input):
+    if not os.path.isabs(input) or not os.path.isfile(input):
+        print('Config file path does not exist or is not a file: {}'.format(input))
+        print('Exiting...', file=sys.stderr)
+        sys.exit(1)
+    return input
+
 def project_dir(input):
     if not os.path.exists(input):
         print('Project path does not exist: {}'.format(input))

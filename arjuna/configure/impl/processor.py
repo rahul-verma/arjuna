@@ -209,11 +209,17 @@ class ProjectConfigCreator(BaseConfigProcessor):
 
         self._config = ConfigCreator.create_new_conf(self, self.__central_conf, cdict)
 
+class EmptyConfCreator(BaseConfigProcessor):
 
-class CustomConfCreator(BaseConfigProcessor):
+    def __init__(self):
+        self.__process()
 
-    def __init__(self, ref_conf, cfpath):
-        self.__ref_conf = ref_conf
+    def __process(self):
+        self._config = ConfigCreator.create_new_conf(self, None, dict())
+
+class PartialConfCreator(BaseConfigProcessor):
+
+    def __init__(self, cfpath):
         self.__cfile_path = cfpath
         self.__process()
 
@@ -223,7 +229,7 @@ class CustomConfCreator(BaseConfigProcessor):
         hreader.process()
         cdict = hreader.get_map()
 
-        self._config = ConfigCreator.create_new_conf(self, self.__ref_conf, cdict)
+        self._config = ConfigCreator.create_new_conf(self, None, cdict)
 
 
 

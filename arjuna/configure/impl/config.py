@@ -172,16 +172,16 @@ class AbstractConfig:
         self.__config_dict.update(override_config.as_map())
 
     def enumerate(self):
-        from arjuna import ArjunaCore
+        from arjuna import Arjuna
         keys = list(self.central_config.arjuna_options.keys())
         keys.sort()
         ArjunaCore.console.marker(100)
         header = " Central Properties Table "
         mark_length = (50 - len(header)// 2)
-        ArjunaCore.console.marker_on_same_line(mark_length)
-        ArjunaCore.console.display_on_same_line(header)
-        ArjunaCore.console.marker(mark_length)
-        ArjunaCore.console.marker(100)
+        Arjuna.console.marker_on_same_line(mark_length)
+        Arjuna.console.display_on_same_line(header)
+        Arjuna.console.marker(mark_length)
+        Arjuna.console.marker(100)
         for key in keys:
             if self.central_config.arjuna_options[key].visible:
                 sval = self.central_config.arjuna_options[key].value

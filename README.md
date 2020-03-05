@@ -27,9 +27,10 @@ You can find the example code used on this section in [arjuna_core_features proj
 1. [Project Structure](https://github.com/rahul-verma/arjuna/blob/master/docs/core/ProjectStructure.md)
 2. [Writing Your First Test](https://github.com/rahul-verma/arjuna/blob/master/docs/core/WritingFirstTest.md)
 3. [Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/core/Configuration.md)
-4. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/core/DataDrivenTesting.md)
-5. [Contextual Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/core/DataReferences.md)
-6. [Localization of Strings](https://github.com/rahul-verma/arjuna/blob/master/docs/core/Localization.md)
+4. [Environments and Dynamic Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/core/EnvironmentsAndDynamicConfigurations.md)
+5. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/core/DataDrivenTesting.md)
+6. [Contextual Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/core/DataReferences.md)
+7. [Localization of Strings](https://github.com/rahul-verma/arjuna/blob/master/docs/core/Localization.md)
 
 ### 3. Basic Web UI Automation
 

@@ -58,13 +58,12 @@ class DefaultTestSession:
     def gui_manager(self):
         return self.__guimgr
 
-    def init(self, root_dir, cli_config=None, run_id=None):
-        self.__configurator = TestConfigurator(run_id)
-        self.__configurator.init(root_dir, cli_config)
-        config = self.__configurator.create_project_conf()
-        name_envconfs = self.__configurator.load_env_configurations()
-        self.__guimgr = GuiManager(config)
-        return self.__create_config(config), [self.__create_config(econf, name=name) for name, econf in name_envconfs]
+    def init(self, root_dir, cli_config=None, run_id=None, run_conf=None):
+        self.__configurator = TestConfigurator(root_dir, cli_config, run_id, run_conf)
+        ref_config = self.__configurator.ref_config
+        env_confs = self.__configurator.env_confs
+        self.__guimgr = GuiManager(ref_config)
+        return self.__create_config(ref_config), [self.__create_config(econf, name=name) for name, econf in env_confs.items()]
 
     def __create_config(self, config, name=None):
         config = Configuration(
