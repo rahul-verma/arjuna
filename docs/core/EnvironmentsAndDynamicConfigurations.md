@@ -14,7 +14,7 @@ The sample project contains two sample environment configurarions. They contain 
 
 **tenv1.conf**
 
-```JSON
+```HOCON
 arjunaOptions {
     aut.base.url = "https://tenv1"
 }
@@ -27,7 +27,7 @@ userOptions {
 
 **tenv2.conf**
 
-```JSON
+```HOCON
 arjunaOptions {
     aut.base.url = "https://tenv2"
 }
@@ -89,7 +89,7 @@ You do this by providing `--run-conf` CLI switch.
 
 **Sample dynamic.conf** 
 
-```JSON
+```HOCON
 arjunaOptions {
     aut.base.url = "https://dyn"
 }
