@@ -24,8 +24,16 @@ Code is kept redundant across methods for the purpose of easier learning.
 '''
 
 @test
-def check_config_retrieval(request):
+def check_ref_config_retrieval(request):
     config = Arjuna.get_config()
+    print(config.name)
+
+    config = request.config
+    print(config.name)
+
+@test
+def check_config_value_retrieval(request):
+    config = request.config
 
     print(config.value(ArjunaOption.BROWSER_NAME))
 
@@ -58,16 +66,33 @@ def check_project_conf(request):
 
 
 @test
-def check_update_config(request):
+def check_create_config(request):
     cc = Arjuna.get_config_creator()
     cc.option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
     # or
     cc.option("browser.name", BrowserName.FIREFOX)
     # or
-    cc["browser_name"] = "Google"
+    cc["browser_name"] = BrowserName.FIREFOX
     # or
     cc.browser_name = BrowserName.FIREFOX
     config = cc.register()
+
+    google = WebApp(base_url="https://google.com", config=config)
+    google.launch()
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    google.quit()
+
+@test
+def check_named_config(request):
+    cc = Arjuna.get_config_creator()
+    cc.browser_name = BrowserName.FIREFOX
+    cc.register("my_config")
+
+    config = Arjuna.get_config("my_config")
+    print(config.name)
+
+    config = request.get_config("my_config")
+    print(config.name) 
 
     google = WebApp(base_url="https://google.com", config=config)
     google.launch()

@@ -78,7 +78,7 @@ class DefaultTestSession:
 
     def register_config(self, name, arjuna_options, user_options, parent_config=None):
         config = self.configurator.register_new_config(arjuna_options, user_options, parent_config)
-        return self.__create_config(config)
+        return self.__create_config(config, name=name)
 
     def create_file_data_source(self, record_type, file_name, *arg_pairs):
         response = self._send_request(
