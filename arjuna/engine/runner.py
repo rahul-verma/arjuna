@@ -35,10 +35,10 @@ class TestRunner:
         self.__project_dir = Arjuna.get_config().value(ArjunaOption.PROJECT_ROOT_DIR)
         # import sys
         # sys.path.insert(0, self.__project_dir + "/..")
-        self.__tests_dir = Arjuna.get_config().value(ArjunaOption.PROJECT_TESTS_DIR)
-        self.__xml_path = os.path.join(Arjuna.get_config().value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR), "report.xml")
-        self.__html_path = os.path.join(Arjuna.get_config().value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR), "report.html")
-        self.__report_formats = Arjuna.get_config().value(ArjunaOption.PROJECT_REPORT_FORMATS)
+        self.__tests_dir = Arjuna.get_config().value(ArjunaOption.TESTS_DIR)
+        self.__xml_path = os.path.join(Arjuna.get_config().value(ArjunaOption.REPORT_XML_DIR), "report.xml")
+        self.__html_path = os.path.join(Arjuna.get_config().value(ArjunaOption.REPORT_HTML_DIR), "report.html")
+        self.__report_formats = Arjuna.get_config().value(ArjunaOption.REPORT_FORMATS)
         # self.__report_formats = Value.as_enum_list(rfmts, ReportFormat)
         res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
         pytest_ini_path = res_path + "/pytest.ini"

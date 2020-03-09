@@ -245,7 +245,7 @@ class ArjunaConfig(AbstractConfig):
         return out
 
     def get_gui_automator_name(self):
-        return self._config_dict[ArjunaOption.AUTOMATOR_NAME]
+        return self._config_dict[ArjunaOption.GUIAUTO_NAME]
 
     def get_guiauto_actor_mode(self):
         return self._config_dict[ArjunaOption.SETU_GUIAUTO_ACTOR_MODE]
@@ -257,7 +257,7 @@ class ArjunaConfig(AbstractConfig):
         return self.value(ArjunaOption.BROWSER_NAME)
 
     def get_host_os(self):
-        return self.value(ArjunaOption.TESTRUN_HOST_OS)
+        return self.value(ArjunaOption.RUN_HOST_OS)
 
     def has_desktop_context(self):
         return self.get_guiauto_context() in Config.DESKTOP_CONTEXTS

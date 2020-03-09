@@ -42,7 +42,7 @@ def get_data_file_path(data_dir, fpath):
 
 def create_file_data_source(file_path, record_format="MAP", delimiter="\t"):
     from arjuna import Arjuna, ArjunaOption
-    data_dir = Arjuna.get_config().value(ArjunaOption.DATA_SOURCES_DIR)
+    data_dir = Arjuna.get_config().value(ArjunaOption.DATA_SRC_DIR)
     file_path = get_data_file_path(data_dir, file_path)
     ds = None
     ext = file_path.lower()
@@ -92,12 +92,12 @@ class DataReference:
     def load_all(cls, ref_config):
         from arjuna.core.enums import ArjunaOption
         refs = DataReferences()
-        column_data_ref_dir = ref_config.value(ArjunaOption.DATA_REFERENCES_COLUMN_DIR)
+        column_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_COLUMN_DIR)
         for fname in os.listdir(column_data_ref_dir):
             if fname.lower().endswith("xls"):
                 refs[os.path.splitext(fname)[0]] = DataReference.create_excel_column_data_ref(fname)
         
-        row_data_ref_dir = ref_config.value(ArjunaOption.DATA_REFERENCES_ROW_DIR)
+        row_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_ROW_DIR)
         for fname in os.listdir(row_data_ref_dir):
             if fname.lower().endswith("xls"):
                 refs[os.path.splitext(fname)[0]] = DataReference.create_excel_row_data_ref(fname)
@@ -112,11 +112,11 @@ class DataReference:
 
         from arjuna import Arjuna, ArjunaOption
         if context == DataRefContextType.COLUMN:
-            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REFERENCES_COLUMN_DIR)
+            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_COLUMN_DIR)
             file_path = get_data_file_path(data_dir, file_path)
             return ExcelColumnDataReference(file_path)
         elif context == DataRefContextType.ROW:
-            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REFERENCES_ROW_DIR)
+            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_ROW_DIR)
             file_path = get_data_file_path(data_dir, file_path)
             return ExcelRowDataReference(file_path)
 

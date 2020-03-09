@@ -16,7 +16,7 @@ The sample project contains two sample environment configurarions. They contain 
 
 ```javascript
 arjunaOptions {
-    aut.base.url = "https://tenv1"
+    app.url = "https://tenv1"
 }
 
 userOptions {
@@ -29,7 +29,7 @@ userOptions {
 
 ```javascript
 arjunaOptions {
-    aut.base.url = "https://tenv2"
+    app.url = "https://tenv2"
 }
 
 userOptions {
@@ -54,8 +54,8 @@ def check_env_confs_with_conf(request):
     print(tenv1.browser_name)
     print(tenv2.browser_name)
 
-    print(tenv1.aut_base_url)
-    print(tenv2.aut_base_url)
+    print(tenv1.app_url)
+    print(tenv2.app_url)
 
     print(tenv1.user)
     print(tenv2.user)
@@ -66,8 +66,8 @@ def check_env_confs_with_conf(request):
     print(tenv1.browser_name)
     print(tenv2.browser_name)
 
-    print(tenv1.aut_base_url)
-    print(tenv2.aut_base_url)
+    print(tenv1.app_url)
+    print(tenv2.app_url)
 
     print(tenv1.user)
     print(tenv2.user)
@@ -87,8 +87,8 @@ def check_env_confs_with_CFunc(request):
     print(C("tenv1.browser_name"))
     print(C("tenv2.browser_name"))
 
-    print(C("tenv1.aut_base_url"))
-    print(C("tenv2.aut_base_url"))
+    print(C("tenv1.app_url"))
+    print(C("tenv2.app_url"))
 
     print(C("tenv1.user"))
     print(C("tenv2.user"))
@@ -115,11 +115,11 @@ def check_runenv_cli(request):
 
     conf = Arjuna.get_config()
     print(conf.browser_name)
-    print(conf.aut_base_url)
+    print(conf.app_url)
     print(conf.user)
 
     print(C("browser.name"))
-    print(C("aut.base.url"))
+    print(C("app.url"))
     print(C("user"))
 ```
 
@@ -133,7 +133,7 @@ You do this by providing `--run-conf` CLI switch.
 
 ```javascript
 arjunaOptions {
-    aut.base.url = "https://dyn"
+    app.url = "https://dyn"
 }
 
 userOptions {
@@ -150,11 +150,11 @@ Provide `--run-conf <path of dynamic.conf>` and run the following test to see th
 def check_runconf_cli(request):
     conf = Arjuna.get_config()
     print(conf.browser_name)
-    print(conf.aut_base_url)
+    print(conf.app_url)
     print(conf.user)
 
     print(C("browser.name"))
-    print(C("aut.base.url"))
+    print(C("app.url"))
     print(C("user"))
 
 ```
@@ -175,12 +175,12 @@ Provide `--run-env tenv2 --run-conf <path of dynamic.conf>` and run the followin
 def check_runenv_runconf_cli(request):
     conf = Arjuna.get_config()
     print(conf.browser_name)
-    print(conf.aut_base_url)
+    print(conf.app_url)
     print(conf.user)
     print(conf.pwd)
 
     print(C("browser.name"))
-    print(C("aut.base.url"))
+    print(C("app.url"))
     print(C("user"))
     print(C("pwd"))
 ```

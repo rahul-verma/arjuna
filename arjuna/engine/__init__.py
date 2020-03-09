@@ -87,11 +87,11 @@ class ArjunaSingleton:
         self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id, run_conf)
 
         from arjuna.core.enums import ArjunaOption
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_REPORT_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_REPORT_XML_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_REPORT_HTML_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_LOG_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.REPORT_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.REPORT_XML_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.REPORT_HTML_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.LOG_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.SCREENSHOTS_DIR))
 
         dl = logging.getLevelName(self.__ref_config.value(ArjunaOption.LOG_CONSOLE_LEVEL).name) # logging.getLevelName(
 
@@ -158,7 +158,7 @@ class ArjunaSingleton:
 
     def __init_logger(self, dl):
         from arjuna.core.enums import ArjunaOption
-        log_dir = self.__ref_config.value(ArjunaOption.PROJECT_RUN_LOG_DIR)
+        log_dir = self.__ref_config.value(ArjunaOption.LOG_DIR)
         if not os.path.isdir(log_dir):
             os.makedirs(log_dir)
         fl = logging.getLevelName(self.__ref_config.value(ArjunaOption.LOG_FILE_LEVEL).name)

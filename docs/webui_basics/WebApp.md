@@ -43,7 +43,7 @@ def check_webpp_nobase_url(request):
     google.quit()
 ```
 
-During initilization, `WebApp` automatically looks for the `ArjunaOption.AUT_BASE_URL` option in the `Configuration` object associated with it. It means you can provide this option in any of the following ways:
+During initilization, `WebApp` automatically looks for the `ArjunaOption.APP_URL` option in the `Configuration` object associated with it. It means you can provide this option in any of the following ways:
 - Modify Reference `Configuration`
   - Add this option in `project.conf` file.
   - Provide it as a CLI option.
@@ -57,7 +57,7 @@ During initilization, `WebApp` automatically looks for the `ArjunaOption.AUT_BAS
 def check_webpp_base_url_in_custom_config(request):
     context = Arjuna.get_run_context()
     cc = context.config_creator
-    cc.arjuna_option(ArjunaOption.AUT_BASE_URL, "https://google.com")
+    cc.arjuna_option(ArjunaOption.APP_URL, "https://google.com")
     cc.register()
 
     google = WebApp(config=context.get_config())

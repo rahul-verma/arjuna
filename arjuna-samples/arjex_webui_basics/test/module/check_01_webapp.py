@@ -37,7 +37,7 @@ def check_webpp_base_url_arg(request):
 @test
 def check_webpp_base_url_in_custom_config(request):
     cb = request.config.builder
-    cb[ArjunaOption.AUT_BASE_URL] = "https://google.com"
+    cb[ArjunaOption.APP_URL] = "https://google.com"
     conf = cb.register()
 
     google = WebApp(config=conf)

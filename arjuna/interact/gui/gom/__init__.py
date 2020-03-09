@@ -138,7 +138,7 @@ class WebApp(App):
         '''
         super().__init__(config=config, ext_config=ext_config, label=label, gns_dir=gns_dir)
         from arjuna.core.enums import ArjunaOption
-        self.__base_url = base_url is not None and base_url or self.config.value(ArjunaOption.AUT_BASE_URL)
+        self.__base_url = base_url is not None and base_url or self.config.value(ArjunaOption.APP_URL)
         # self._load(*args, **kwargs)
         self.__args = args
         self.__kwargs = kwargs

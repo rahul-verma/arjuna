@@ -23,55 +23,48 @@ class ArjunaOption(Enum):
     ARJUNA_ROOT_DIR = auto()
     ARJUNA_EXTERNAL_TOOLS_DIR = auto()
     ARJUNA_EXTERNAL_IMPORTS_DIR = auto()
-    PYTHON_LOG_NAME = auto()
     LOG_NAME = auto()
 
     RUN_ID = auto()
     RUN_ENV_NAME = auto()
     RUN_ENV_CONF_DIR = auto()
+    RUN_HOST_OS = auto()
 
     LOG_FILE_LEVEL = auto()
     LOG_CONSOLE_LEVEL = auto()
 
     L10_LOCALE = auto()
     L10_STRICT = auto()
+    L10_DIR = auto()
+    L10_EXCEL_DIR = auto()
+    L10_JSON_DIR = auto()
 
     PROJECT_NAME = auto()
     PROJECT_ROOT_DIR = auto()
     PROJECT_CONF_FILE = auto()
-    PROJECT_TESTS_DIR = auto()
-    PROJECT_REPORT_DIR = auto()
-    PROJECT_REPORT_FORMATS = auto()
-    PROJECT_RUN_REPORT_DIR = auto()
-    PROJECT_RUN_REPORT_XML_DIR = auto()
-    PROJECT_RUN_REPORT_HTML_DIR = auto()
-    PROJECT_RUN_LOG_DIR = auto()
-    PROJECT_RUN_SCREENSHOTS_DIR = auto()
+
+    TESTS_DIR = auto()
+    REPORTS_DIR = auto()
+    REPORT_FORMATS = auto()
+    REPORT_DIR = auto()
+    REPORT_XML_DIR = auto()
+    REPORT_HTML_DIR = auto()
+    LOG_DIR = auto()
+    SCREENSHOTS_DIR = auto()
+    CONF_DIR = auto()
 
     DATA_DIR = auto()
-    DATA_SOURCES_DIR = auto()
-    DATA_REFERENCES_DIR = auto()
-    DATA_REFERENCES_COLUMN_DIR = auto()
-    DATA_REFERENCES_ROW_DIR = auto()
-    DATA_L10_DIR = auto()
-    DATA_L10_EXCEL_DIR = auto()
-    DATA_L10_JSON_DIR = auto()
-    SCREENSHOTS_DIR = auto()
-    CONFIG_DIR = auto()
+    DATA_SRC_DIR = auto()
+    DATA_REF_DIR = auto()
+    DATA_REF_COLUMN_DIR = auto()
+    DATA_REF_ROW_DIR = auto()
 
     SETU_PROJECT_DIRS_FILES = auto()
-    REPORT_DIR = auto()
-    ARCHIVES_DIR = auto()
 
-    AUT_BASE_URL = auto()
-
-    TESTRUN_ENVIRONMENT = auto()
-    TESTRUN_HOST_OS = auto()
+    APP_URL = auto()
 
     SETU_GUIAUTO_ACTOR_MODE = auto()
     SETU_GUIAUTO_ACTOR_URL = auto()
-
-    AUTOMATOR_NAME = auto()
 
     BROWSER_NAME = auto()
     BROWSER_VERSION = auto()
@@ -81,7 +74,8 @@ class ArjunaOption(Enum):
     BROWSER_BIN_PATH = auto()
     BROWSER_PROXY_ON = auto()
 
-    GUIAUTO_INPUT_DIR = auto()
+    GUIAUTO_NAME = auto()
+    GUIAUTO_DIR = auto()
     GUIAUTO_NAMESPACE_DIR = auto()
     GUIAUTO_DEF_MULTICONTEXT = auto()
     GUIAUTO_CONTEXT = auto()
@@ -106,7 +100,7 @@ class ArjunaOption(Enum):
     APPIUM_HUB_URL = auto()
     APPIUM_AUTO_LAUNCH = auto()
 
-    IMAGE_COMPARISON_MIN_SCORE = auto()
+    IMG_COMP_MIN_SCORE = auto()
 
 
 class Key(Enum):

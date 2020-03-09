@@ -22,7 +22,7 @@ import pprint
 from enum import Enum, auto
 
 class SetuActorDriverConfigOption(Enum):
-    AUTOMATOR_NAME = auto()
+    GUIAUTO_NAME = auto()
     GUIAUTO_CONTEXT = auto()
 
     # Browser (Common)
@@ -92,8 +92,8 @@ class DriverCapabilities:
 
         self.__process_config(config)
         self.__process(json_dict)
-        self.__host_os = self.__config.value(ArjunaOption.TESTRUN_HOST_OS).name.lower()
-        aname = self.__config.value(ArjunaOption.AUTOMATOR_NAME).name.lower()
+        self.__host_os = self.__config.value(ArjunaOption.RUN_HOST_OS).name.lower()
+        aname = self.__config.value(ArjunaOption.GUIAUTO_NAME).name.lower()
         acontext = self.__config.value(ArjunaOption.GUIAUTO_CONTEXT).name.lower()
         mobile_platform = self.__config.value(ArjunaOption.MOBILE_OS_NAME).name.lower()
 

@@ -47,11 +47,11 @@ class ConfigBuilder:
         return self
 
     def selenium(self):
-        self.set_option(ArjunaOption.GUIAUTO_AUTOMATOR_NAME, GuiAutomatorName.SELENIUM)
+        self.set_option(ArjunaOption.GUIAUTO_NAME, GuiAutomatorName.SELENIUM)
         return self
 
     def appium(self, context):
-        self.option(ArjunaOption.GUIAUTO_AUTOMATOR_NAME, GuiAutomatorName.APPIUM)
+        self.option(ArjunaOption.GUIAUTO_NAME, GuiAutomatorName.APPIUM)
         self.option(ArjunaOption.GUIAUTO_CONTEXT, context)
         return self
 

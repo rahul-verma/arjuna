@@ -50,7 +50,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         self.__conditions_handler = GuiAutomatorConditions(self)
         self.__view_handler = ViewContextHandler(self)
         self.__browser = None
-        self.__screenshots_dir = config.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR)
+        self.__screenshots_dir = config.value(ArjunaOption.SCREENSHOTS_DIR)
 
         self.__source_parser = None
 
@@ -133,7 +133,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         return self.__conditions_handler
 
     def __create_screenshots_dir(self):
-        sdir = self.config.value(ArjunaOption.PROJECT_RUN_SCREENSHOTS_DIR)
+        sdir = self.config.value(ArjunaOption.SCREENSHOTS_DIR)
         if not os.path.isdir(sdir):
             os.makedirs(sdir)
 

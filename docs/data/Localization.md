@@ -56,7 +56,7 @@ arjunaOptions {
 
 #### Points to Note
 1. Arjuna provides a special function `L` for localizing a string.
-2. `L("Testing")` localizes the string as per the `ArjunaOption.LOCALE` value in reference configuration. In `project.conf`, we have set it as `HI`.
+2. `L("Testing")` localizes the string as per the `ArjunaOption.L10_LOCALE` value in reference configuration. In `project.conf`, we have set it as `HI`.
 3. You can also explcitily mention the locale as `Locale.HI`.
 4. When a name is repeated across multiple localization files (buckets), the last one holds. `L("Correct")` will give the value from `sample2` file as it is loaded after `sample1`.
 5. You can explcitily refer to a bucket by providing the `bucket` argument. Each Excel localization file represents a bucket and its name without the extension is the bucket name.

@@ -71,7 +71,7 @@ class RunParser(Parser):
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument("-rid", "--runid", dest="run.id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
         self.parser.add_argument('--static-rid', dest="static.rid", action='store_true', help = 'Use static RunID. Will result in overwriting of report files. Useful during script development.')
-        self.parser.add_argument('-rf', '--report-formats', dest="project.report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
+        self.parser.add_argument('-rf', '--report-formats', dest="report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
         self.parser.add_argument('--dry-run', dest="dry_run", action='store_true', help = 'Launch Arjuna, enumerate tests, but do not execute tests.')
         self.parser.add_argument('--run-env', dest="run.env.name", type=str, default="not_set", help = 'Name of environment with its options defined in <env>.conf file in <Project Root>/config/env directory.')
         self.parser.add_argument('--run-conf', dest="run_conf", type=str, default=None, help = 'Absolute path of a conf file to be used for this run.')

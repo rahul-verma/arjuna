@@ -23,6 +23,7 @@ Following is the list of critical additions and updates for a given released ver
     - All arjuna options and user options become automatically available with . and [] lookup.
     - Arjuna.get_config gives reference config by default. If conf name is passed, then that named config object is returned.
     - The `C` function supports config query format i.e. a.b.c will attempt to treat `a` as a configuration name.
+    - Many ArjunaOptions have been renamed to simpler, shorter names.
 - request object enhanced
     - request.config is by default set to reference config at the top level. Can be retrieved at any child layer.
     - request.get_config without name as argument is same as request.config
@@ -60,10 +61,13 @@ Following is the list of critical additions and updates for a given released ver
 - New CLI Configuration Switches
     - --run-env switch as mentioned above.
     - --run-conf: Any configuration file's absolute path can be provided. This is is superimposed on the reference config.
+- Example projects and Docs
+    - All example code and projects verified.
+    - Split the core project into arjuna_start, arjuna_config and arjuna_data projects.
 
 To DO for this build before PyPi release:
-- Config Simplication
-    - Many ArjunaOptions have been renamed to simpler, shorter names.
+- CLI any option (ArjunaOption/User option)
+    
 
 0.9.5
 -----

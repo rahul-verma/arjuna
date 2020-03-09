@@ -17,7 +17,7 @@ def check_builder_file_based_options(request):
     print(config.prog_option)
     print(config.browser_name)
 
-    print(config.aut_base_url)
+    print(config.app_url)
     print(config.user)
  ```
 

@@ -78,7 +78,7 @@ class TestConfigurator:
                     raise Exception("File does not exist: {}".format(fpath))
         else:
             from arjuna import Arjuna, ArjunaOption
-            conf_dir = self.__default_ref_config.arjuna_config.value(ArjunaOption.CONFIG_DIR)
+            conf_dir = self.__default_ref_config.arjuna_config.value(ArjunaOption.CONF_DIR)
             fpath = os.path.abspath(os.path.join(conf_dir, fpath))
             if not file_utils.is_file(fpath):
                 if file_utils.is_dir(fpath):
