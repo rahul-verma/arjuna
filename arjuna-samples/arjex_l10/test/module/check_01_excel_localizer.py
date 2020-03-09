@@ -32,20 +32,3 @@ def check_excel_localizer(request):
 
     print(L("sample1.corr")) # From sample1 excel file (bucket)
     print(L("sample2.corr")) # From sample2 excel file (bucket)
-
-@test
-def check_json_localizer(request):
-    print(L("error.data.lastTransfer", locale=Locale.EN_GB)) # From global l10 container
-    print(L("error.data.lastTransfer", locale=Locale.DE_DE)) # From global l10 container
-
-    print(L("error.data.lastTransfer", locale=Locale.EN_GB, bucket="bucket2")) # From bucket2    
-    print(L("bucket2.error.data.lastTransfer", locale=Locale.EN_GB)) # From bucket2
-
-    print(L("address.coordinates", locale=Locale.EN_GB))
-    print(L("address.coordinates", locale=Locale.EN_GB, bucket="root"))
-    print(L("root.address.coordinates", locale=Locale.EN_GB))
-
-@test
-def check_strict_l10_mode(request):
-    print(L("non_existing"))
-    print(L("non_existing", strict=True, locale=Locale.DE_DE))

@@ -1,4 +1,4 @@
-### The `C` Magic Function
+### The Magic `C` Function
 
 ```python
 # arjuna-samples/arjuna_config/test/module/check_06_Cfunc.py

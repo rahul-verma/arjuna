@@ -40,15 +40,27 @@ You can find the example code used on this section in [arjuna_config project](ht
 7. [Environments and Dynamic Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/config/EnvironmentsAndDynamicConfigurations.md)
 
 
-### 4. Dealing with Data - Driving with Data, References and Localization
+### 4. Data Driven Testing and Contextual Data References
 
 You can find the example code used on this section in [arjuna_data project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_data/test/module).
 
 1. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataDrivenTesting.md)
-2. [Contextual Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataReferences.md)
-3. [Localization of Strings](https://github.com/rahul-verma/arjuna/blob/master/docs/data/Localization.md)
+2. [Driving with Single or Multiple Data Records](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataRecords.md)
+3. [Driving with Data Functions](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataFunctions.md)
+4. [Driving with Data Classes](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataClasses.md)
+5. [Driving with Data Files](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataFiles.md)
+6. [Driving with Multiple Data Sources](https://github.com/rahul-verma/arjuna/blob/master/docs/data/MultipleDataSources.md)
+7. [Contextual Data References and the Magic `R` Function](https://github.com/rahul-verma/arjuna/blob/master/docs/data/ContextualDataReferences.md)
+8. [Excel Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/data/ExcelDataReferences.md)
 
-### 5. Basic Web UI Automation
+### 5. Localization of Strings
+You can find the example code used on this section in [arjuna_l10 project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_l10/test/module).
+
+1. [Excel Localizer and The Magic `L` Function](https://github.com/rahul-verma/arjuna/blob/master/docs/l10/ExcelLocalizerAndTheLMaficFunction.md)
+2. [Json Localizer](https://github.com/rahul-verma/arjuna/blob/master/docs/l10/JsonLocalizer.md)
+3. [Strict vs Non-Strict Mode](https://github.com/rahul-verma/arjuna/blob/master/docs/l10/StrictNonStrictMode.md)
+
+### 6. Basic Web UI Automation
 
 You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/test/module).
 
@@ -58,7 +70,7 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 3. [GuiMultiElement](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiMultiElement.md)
 4. [Dropdown and RadioGroup](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/DropDownRadioGroup.md)
 
-### 6. Advanced Web UI Automation
+### 7. Advanced Web UI Automation
 1. Finding Nested Elements
 2. Alternative and Dynamic Identifiers
 3. Executing JavaScript
@@ -67,7 +79,7 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 6. Handling Custom DropDowns
 7. Retrieving Source code with GuiSource
 
-### 7. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
+### 8. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
 The following tutorial sub-sections have multiple example projects corresponding to them. Please refer the pages for respective example projects.
 
 1. [Gui Namespace (GNS) - Externalized Identifiers](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiNamespace.md)
