@@ -10,7 +10,7 @@ Arjuna supports Excel based localization data out of the box. These files are au
 
 The localization file follows the format of Excel Column Data Reference files.
 
-You place such files in `<Project Root>/data/l10/excel` directory. Two reference files can be found in this example project.
+You place such files in `<Project Root>/data/l10n/excel` directory. Two reference files can be found in this example project.
 
 <img src="img/l10_1.png">
 
@@ -37,7 +37,7 @@ def check_excel_localizer(request):
     print(L("qual", locale=Locale.HI))
     print(L("qual", locale=Locale.EN))
 
-    print(L("corr")) # From global l10 container
+    print(L("corr")) # From global l10n container
 
     print(L("corr", bucket="sample1")) # From sample1 excel file (bucket)
     print(L("corr", bucket="sample2")) # From sample2 excel file (bucket)
@@ -50,7 +50,7 @@ def check_excel_localizer(request):
 # project.conf
 
 arjunaOptions {
-    l10.locale = hi
+    l10n.locale = hi
 }
 ```
 

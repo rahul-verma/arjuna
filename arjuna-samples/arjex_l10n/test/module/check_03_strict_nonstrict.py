@@ -20,13 +20,6 @@ limitations under the License.
 from arjuna import *
 
 @test
-def check_json_localizer(request):
-    print(L("error.data.lastTransfer", locale=Locale.EN_GB)) # From global l10 container
-    print(L("error.data.lastTransfer", locale=Locale.DE_DE)) # From global l10 container
-
-    print(L("error.data.lastTransfer", locale=Locale.EN_GB, bucket="bucket2")) # From bucket2    
-    print(L("bucket2.error.data.lastTransfer", locale=Locale.EN_GB)) # From bucket2
-
-    print(L("address.coordinates", locale=Locale.EN_GB))
-    print(L("address.coordinates", locale=Locale.EN_GB, bucket="root"))
-    print(L("root.address.coordinates", locale=Locale.EN_GB))
+def check_strict_l10n_mode(request):
+    print(L("non_existing"))
+    print(L("non_existing", strict=True, locale=Locale.DE_DE))

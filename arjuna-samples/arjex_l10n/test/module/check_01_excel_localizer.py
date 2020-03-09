@@ -20,6 +20,15 @@ limitations under the License.
 from arjuna import *
 
 @test
-def check_strict_l10_mode(request):
-    print(L("non_existing"))
-    print(L("non_existing", strict=True, locale=Locale.DE_DE))
+def check_excel_localizer(request):
+    print(L("test")) # Default Locale in Config
+    print(L("qual", locale=Locale.HI))
+    print(L("qual", locale=Locale.EN))
+
+    print(L("corr")) # From global l10n container
+
+    print(L("corr", bucket="sample1")) # From sample1 excel file (bucket)
+    print(L("corr", bucket="sample2")) # From sample2 excel file (bucket)
+
+    print(L("sample1.corr")) # From sample1 excel file (bucket)
+    print(L("sample2.corr")) # From sample2 excel file (bucket)

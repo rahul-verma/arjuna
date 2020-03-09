@@ -20,15 +20,13 @@ limitations under the License.
 from arjuna import *
 
 @test
-def check_excel_localizer(request):
-    print(L("test")) # Default Locale in Config
-    print(L("qual", locale=Locale.HI))
-    print(L("qual", locale=Locale.EN))
+def check_json_localizer(request):
+    print(L("error.data.lastTransfer", locale=Locale.EN_GB)) # From global l10n container
+    print(L("error.data.lastTransfer", locale=Locale.DE_DE)) # From global l10n container
 
-    print(L("corr")) # From global l10 container
+    print(L("error.data.lastTransfer", locale=Locale.EN_GB, bucket="bucket2")) # From bucket2    
+    print(L("bucket2.error.data.lastTransfer", locale=Locale.EN_GB)) # From bucket2
 
-    print(L("corr", bucket="sample1")) # From sample1 excel file (bucket)
-    print(L("corr", bucket="sample2")) # From sample2 excel file (bucket)
-
-    print(L("sample1.corr")) # From sample1 excel file (bucket)
-    print(L("sample2.corr")) # From sample2 excel file (bucket)
+    print(L("address.coordinates", locale=Locale.EN_GB))
+    print(L("address.coordinates", locale=Locale.EN_GB, bucket="root"))
+    print(L("root.address.coordinates", locale=Locale.EN_GB))

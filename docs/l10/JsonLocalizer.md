@@ -2,7 +2,7 @@
 
 **Sample Localization Files**
 
-With JSON format, there is a specific structure expected. The files are placed in `<Project Root>/data/l10/json` directory.
+With JSON format, there is a specific structure expected. The files are placed in `<Project Root>/data/l10n/json` directory.
 
 Following is the sample JSON localization structure created in the examples project:
 
@@ -63,8 +63,8 @@ from arjuna import *
 
 @test
 def check_json_localizer(request):
-    print(L("error.data.lastTransfer", locale=Locale.EN_GB)) # From global l10 container
-    print(L("error.data.lastTransfer", locale=Locale.DE_DE)) # From global l10 container
+    print(L("error.data.lastTransfer", locale=Locale.EN_GB)) # From global l10n container
+    print(L("error.data.lastTransfer", locale=Locale.DE_DE)) # From global l10n container
 
     print(L("error.data.lastTransfer", locale=Locale.EN_GB, bucket="bucket2")) # From bucket2    
     print(L("bucket2.error.data.lastTransfer", locale=Locale.EN_GB)) # From bucket2

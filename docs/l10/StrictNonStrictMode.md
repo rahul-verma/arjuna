@@ -8,7 +8,7 @@ By default, Arjuna handles localization in a non-strict mode. This means if loca
 from arjuna import *
 
 @test
-def check_strict_l10_mode(request):
+def check_strict_l10n_mode(request):
     print(L("non_existing"))
     print(L("non_existing", strict=True, locale=Locale.DE_DE))
 ```
@@ -16,4 +16,4 @@ def check_strict_l10_mode(request):
 #### Points to Note
 1. As by default the strict mode if off, `L("non_existing")` returns `non_existing`.
 2. You can enforce strict behavior by providing the `strict=True` argument to the `L` function. The second print statement in above code will raise an exception.
-3. You can switch on strict mode at the project level by including `l10.strict = True` in the `project.conf` file.
+3. You can switch on strict mode at the project level by including `l10n.strict = True` in the `project.conf` file.

@@ -25,7 +25,7 @@ from arjuna.core.adv.types import CIStringDict
 from arjuna.core.utils import file_utils
 from arjuna.core.json import Json
 
-class L10Ref:
+class L10NRef:
 
     def __init__(self):
         self.map = {}
@@ -72,14 +72,14 @@ class L10Ref:
                     raise Exception("File does not exist: {}".format(fpath))
             return fpath
 
-class ExcelL10Ref(L10Ref):
+class ExcelL10NRef(L10NRef):
 
     def __init__(self, fpath):
         super().__init__()
         excel_ref = DataReference.create_excel_column_data_ref(fpath)
         self.map = excel_ref.map
 
-class JsonL10Ref(L10Ref):
+class JsonL10NRef(L10NRef):
 
     def __init__(self, ldir):
         from arjuna import Arjuna
@@ -93,7 +93,7 @@ class JsonL10Ref(L10Ref):
                 try:
                     lang_map = Json.from_file(fpath)
                 except Exception as e:
-                    Arjuna.get_logger().fatal("Error in processing l10 file: {}".format(fpath))
+                    Arjuna.get_logger().fatal("Error in processing l10n file: {}".format(fpath))
                     Arjuna.get_logger().fatal("Error message: {}".format(str(e)))
                     import traceback
                     Arjuna.get_logger().fatal("Trace: {}".format(traceback.format_exc()))
@@ -147,39 +147,39 @@ class Localizer:
         return self.__bucket_names
 
     @classmethod
-    def __process_json_ref(cls, l10_merged_ref, l10_refs, json_ref, bucket="root"):
+    def __process_json_ref(cls, l10n_merged_ref, l10n_refs, json_ref, bucket="root"):
         # Check this logic for locale conversion.
-        l10_merged_ref.update_from_json_ref(json_ref)
-        if not l10_refs.has(bucket):
-            l10_refs[bucket] = json_ref
+        l10n_merged_ref.update_from_json_ref(json_ref)
+        if not l10n_refs.has(bucket):
+            l10n_refs[bucket] = json_ref
 
     @classmethod
     def load_all(cls, ref_config):
         from arjuna.core.enums import ArjunaOption
-        l10_excel_dir = ref_config.value(ArjunaOption.L10_EXCEL_DIR)
-        l10_merged_ref = L10Ref()
-        l10_refs = Localizers()
-        fnames = os.listdir(l10_excel_dir)
+        l10n_excel_dir = ref_config.value(ArjunaOption.L10N_EXCEL_DIR)
+        l10n_merged_ref = L10NRef()
+        l10n_refs = Localizers()
+        fnames = os.listdir(l10n_excel_dir)
         fnames.sort()
         for fname in fnames:
             if fname.lower().endswith("xls"):
-                ref = ExcelL10Ref(os.path.join(l10_excel_dir, fname))
-                l10_merged_ref.update_from_excel_ref(ref)
-                l10_refs[os.path.splitext(fname)[0]] = ref
+                ref = ExcelL10NRef(os.path.join(l10n_excel_dir, fname))
+                l10n_merged_ref.update_from_excel_ref(ref)
+                l10n_refs[os.path.splitext(fname)[0]] = ref
 
         # JSON Localizers
-        l10_json_dir = ref_config.value(ArjunaOption.L10_JSON_DIR)
-        json_ref = JsonL10Ref(l10_json_dir)
-        cls.__process_json_ref(l10_merged_ref, l10_refs, json_ref, bucket="root")
-        buckets = os.listdir(l10_json_dir)
+        l10n_json_dir = ref_config.value(ArjunaOption.L10N_JSON_DIR)
+        json_ref = JsonL10NRef(l10n_json_dir)
+        cls.__process_json_ref(l10n_merged_ref, l10n_refs, json_ref, bucket="root")
+        buckets = os.listdir(l10n_json_dir)
         for bucket in buckets:
-            if os.path.isdir(os.path.join(l10_json_dir, bucket)):
-                dpath = os.path.join(l10_json_dir, bucket)
-                json_ref = JsonL10Ref(dpath)
-                cls.__process_json_ref(l10_merged_ref, l10_refs, json_ref, bucket=bucket)
+            if os.path.isdir(os.path.join(l10n_json_dir, bucket)):
+                dpath = os.path.join(l10n_json_dir, bucket)
+                json_ref = JsonL10NRef(dpath)
+                cls.__process_json_ref(l10n_merged_ref, l10n_refs, json_ref, bucket=bucket)
 
-        # l10_merged_ref.enumerate()
-        return Localizer(l10_merged_ref, l10_refs)
+        # l10n_merged_ref.enumerate()
+        return Localizer(l10n_merged_ref, l10n_refs)
 
 def L(in_str, *, locale=None, bucket=None, strict=None):
     from arjuna import Arjuna, ArjunaOption
@@ -194,7 +194,7 @@ def L(in_str, *, locale=None, bucket=None, strict=None):
                 query = in_str
         else:
             query = in_str
-    lang = locale and locale.name.lower() or Arjuna.get_config().l10_locale.name.lower()
+    lang = locale and locale.name.lower() or Arjuna.get_config().l10n_locale.name.lower()
     try:
         if not bucket:
             val = Arjuna.get_localizer().globals.lang(lang)[query]
@@ -209,7 +209,7 @@ def L(in_str, *, locale=None, bucket=None, strict=None):
             return val
     except Exception as e:
         if strict is None:
-            strict_mode = Arjuna.get_config().value(ArjunaOption.L10_STRICT)
+            strict_mode = Arjuna.get_config().value(ArjunaOption.L10N_STRICT)
         else:
             strict_mode = strict
 
