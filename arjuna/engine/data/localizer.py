@@ -186,7 +186,7 @@ def L(in_str, *, locale=None, bucket=None, strict=None):
                 query = in_str
         else:
             query = in_str
-    lang = locale and locale.name.lower() or Arjuna.get_config().locale.name.lower()
+    lang = locale and locale.name.lower() or Arjuna.get_config().l10_locale.name.lower()
     try:
         if not bucket:
             val = Arjuna.get_localizer().globals.lang(lang)[query]

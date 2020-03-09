@@ -74,7 +74,7 @@ class RunParser(Parser):
         self.parser.add_argument('-rf', '--report-formats', dest="project.report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
         self.parser.add_argument('--dry-run', dest="dry_run", action='store_true', help = 'Launch Arjuna, enumerate tests, but do not execute tests.')
         self.parser.add_argument('--run-env', dest="run.env.name", type=str, default="not_set", help = 'Name of environment with its options defined in <env>.conf file in <Project Root>/config/env directory.')
-        self.parser.add_argument('--run-conf', dest="run_conf", type=absolute_file_path, default=None, help = 'Absolute path of a conf file to be used for this run.')
+        self.parser.add_argument('--run-conf', dest="run_conf", type=str, default=None, help = 'Absolute path of a conf file to be used for this run.')
 
         # self.parser.add_argument('-aco', '--arjuna-ref-option', dest="aro",
         #                          nargs=2,

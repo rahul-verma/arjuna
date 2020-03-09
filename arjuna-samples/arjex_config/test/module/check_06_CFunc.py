@@ -29,10 +29,10 @@ def check_config_retrieval_C(request):
 def check_conf_name_wise_query(request):
     cb = request.config.builder
     cb.browser_name = BrowserName.FIREFOX
-    mconf = cb.register("my_config")
+    mconf = cb.register("nconf")
 
     print(C("browser.name"))
     print(C("reference.browser.name"))
     print(C("reference.browser_name"))
-    print(C("my_config.browser_name"))
-    print(C("my_config.browser.name"))
+    print(C("nconf.browser_name"))
+    print(C("nconf.browser.name"))

@@ -20,7 +20,7 @@ limitations under the License.
 from arjuna import *
 
 @test
-def check_env_confs(request):
+def check_env_confs_with_conf(request):
 
     print(Arjuna.get_config("tenv1").browser_name)
     print(Arjuna.get_config("tenv2").browser_name)
@@ -30,6 +30,19 @@ def check_env_confs(request):
 
     print(Arjuna.get_config("tenv1").user)
     print(Arjuna.get_config("tenv2").user)
+
+
+@test
+def check_env_confs_with_CFunc(request):
+    print(C("tenv1.browser_name"))
+    print(C("tenv2.browser_name"))
+
+    print(C("tenv1.aut_base_url"))
+    print(C("tenv2.aut_base_url"))
+
+    print(C("tenv1.user"))
+    print(C("tenv2.user"))
+
 
 @test
 def check_runenv_cli(request):
