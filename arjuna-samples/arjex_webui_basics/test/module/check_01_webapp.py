@@ -36,12 +36,11 @@ def check_webpp_base_url_arg(request):
 
 @test
 def check_webpp_base_url_in_custom_config(request):
-    context = Arjuna.get_run_context()
-    cc = context.config_creator
-    cc.arjuna_option(ArjunaOption.AUT_BASE_URL, "https://google.com")
-    cc.register()
+    cb = request.config.builder
+    cb[ArjunaOption.AUT_BASE_URL] = "https://google.com"
+    conf = cb.register()
 
-    google = WebApp(config=context.get_config())
+    google = WebApp(config=conf)
     google.launch()
     request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()

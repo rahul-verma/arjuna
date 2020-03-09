@@ -26,8 +26,8 @@ def create_wordpress_app():
     return wordpress
 
 def login(wordpress):
-    user = wordpress.config.value("wp.admin.name")
-    pwd = wordpress.config.value("wp.admin.pwd")
+    user = C("wp.admin.name")
+    pwd = C("wp.admin.pwd")
 
     # Login
     wordpress.element(With.id("user_login")).text = user
@@ -36,7 +36,7 @@ def login(wordpress):
     wordpress.element(With.classes("welcome-view-site"))
 
 def logout(wordpress):
-    url = wordpress.config.user_options.value("wp.logout.url")
+    url = C("wp.logout.url")
     wordpress.go_to_url(url)
     wordpress.element(With.link("log out")).click()
     wordpress.element(With.text("logged out"))
