@@ -1,5 +1,7 @@
 #### Excel Data References
 
+Arjuna supports Excel based data references out of the box. These reference files are automatically loaded when `Arjuna.init()` is called by Arjuna launcher.
+
 There are two types of Excel based Data References that you can create in Arjuna:
 
 **Column Data References**

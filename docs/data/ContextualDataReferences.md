@@ -7,4 +7,4 @@ Consider the following example:
 2. The user account information includes a `User` and `Pwd` to repesented user name and password representing a given account type.
 3. In different situations, you want to use the user accounts and retrieve them by the context name from a single source of information.
 
-Arjuna supports Excel based data references out of the box. These reference files are automatically loaded when `Arjuna.init()` is called by Arjuna launcher.
+You can access data references in your test code with Arjuna's magic `R` function (similar to `L` and `C` functions seen in other features).
