@@ -22,12 +22,15 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 
 ### 2. Arjuna's Core Features
 
-You can find the example code used on this section in [arjuna_core_features project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_core_features/test/module).
+You can find the example code used on this section in [arjuna_start project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_start/test/module).
 
 1. [Project Structure](https://github.com/rahul-verma/arjuna/blob/master/docs/core/ProjectStructure.md)
 2. [Writing Your First Test](https://github.com/rahul-verma/arjuna/blob/master/docs/core/WritingFirstTest.md)
 
 ### 3. Arjuna's Configuration System
+
+You can find the example code used on this section in [arjuna_config project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_config/test/module).
+
 1. [Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/config/Configuration.md)
 2. [proj.conf - Project Level Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/config/ProjectConf.md)
 3. [Configuration Builder - Creating Custom Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/config/ConfigBuilder.md)
@@ -38,9 +41,12 @@ You can find the example code used on this section in [arjuna_core_features proj
 
 
 ### 4. Dealing with Data - Driving with Data, References and Localization
-5. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataDrivenTesting.md)
-6. [Contextual Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataReferences.md)
-7. [Localization of Strings](https://github.com/rahul-verma/arjuna/blob/master/docs/data/Localization.md)
+
+You can find the example code used on this section in [arjuna_data project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_data/test/module).
+
+1. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataDrivenTesting.md)
+2. [Contextual Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataReferences.md)
+3. [Localization of Strings](https://github.com/rahul-verma/arjuna/blob/master/docs/data/Localization.md)
 
 ### 5. Basic Web UI Automation
 
