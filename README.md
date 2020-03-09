@@ -20,7 +20,7 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 3. Install Arjuna using the following command
     * `pip install arjuna`
 
-### 2. Arjuna's Core Features
+### 2. Arjuna - Getting Started
 
 You can find the example code used on this section in [arjuna_start project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_start/test/module).
 
