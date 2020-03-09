@@ -82,6 +82,7 @@ class ExcelL10Ref(L10Ref):
 class JsonL10Ref(L10Ref):
 
     def __init__(self, ldir):
+        from arjuna import Arjuna
         super().__init__()
         fnames = os.listdir(ldir)
         fnames.sort()
@@ -89,7 +90,14 @@ class JsonL10Ref(L10Ref):
             if fname.lower().endswith("json"):
                 lang = os.path.splitext(fname)[0].replace("-","_").lower()
                 fpath = self.get_localizer_file_path(ldir, fname)
-                lang_map = Json.from_file(fpath)
+                try:
+                    lang_map = Json.from_file(fpath)
+                except Exception as e:
+                    Arjuna.get_logger().fatal("Error in processing l10 file: {}".format(fpath))
+                    Arjuna.get_logger().fatal("Error message: {}".format(str(e)))
+                    import traceback
+                    Arjuna.get_logger().fatal("Trace: {}".format(traceback.format_exc()))
+                    raise
                 self.map[lang] = lang_map
 
 class Localizers:
