@@ -63,7 +63,8 @@ Following is the list of critical additions and updates for a given released ver
     - --run-conf: Any configuration file's absolute path can be provided. This is is superimposed on the reference config.
 - Example projects and Docs
     - All example code and projects verified.
-    - Split the core project into arjuna_start, arjuna_config and arjuna_data projects.
+    - Split the core project into arjuna_start, arjuna_config, arjuna_data and arjuna_l10 projects.
+    - Reorganized docs into smaller, focused contents.
 
 To DO for this build before PyPi release:
 - CLI any option (ArjunaOption/User option)
