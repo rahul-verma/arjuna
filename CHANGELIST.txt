@@ -8,7 +8,7 @@ Following is the list of critical additions and updates for a given released ver
     - Change `ArjunaOption.LOCALE` to `ArjunaOption.L10_LOCALE`.
     - Added `ArjunaOption.L10_STRICT` property. By default it is set to False. It means for references with no localization data, no error is raised and reference itself is returned by `L` function.
     - bucket can be provided as an argument or as a prefix `bucket.`
-- Json
+- Json class
     - Added Json class with jsonpath support.
     - Added jsonpath-rw and jsonpath-rw-ext as dependencies.
 - Easy Aliases (L/R/C)
@@ -22,15 +22,18 @@ Following is the list of critical additions and updates for a given released ver
     - . and [] retrieval mechanisms added to config object. For a given name, one can use `config.name` or `config[name]` or config.value(name)` calls interchangeably.
     - All arjuna options and user options become automatically available with . and [] lookup.
     - Arjuna.get_config gives reference config by default. If conf name is passed, then that named config object is returned.
-- request object enahcnements
+- request object enhanced
     - request.config is by default set to reference config at the top level. Can be retrieved at any child layer.
     - request.get_config without name as argument is same as request.config
     - request.get_config(name) gets any configuration registered with that name from anywhere in the run including environment configurations.
-- ConfigCreator Concept Updated
+- RunContext and ConfigCreator Concept
+    - RunContext as a concept is deprecated.
+    - _ConfigCreator Name changed to ConfigBuilder
+    - ConfigBuilder is directly associated with a Config object, which is automatically treated as the source/parent config.
     - One can not create a configuration with same name again.
     - creator.register without a name creates a unique config name using uuid4. As it returns the config object it has its use case when direct dealing with config object is needed.
     - create.register(name) is useful if the name is to be controlled and used by test author.
-- Connfiguration Layer-wsie auto-update:
+- Configuration Layer-wise auto-update:
     - Reference Config is updated as per following sequence:
         - Arjuna central config
         - Project conf
@@ -61,9 +64,10 @@ To DO for this build before PyPi release:
     - Many ArjunaOptions have been renamed to simpler, shorter names.
 - Environment Config
     - Support for config_name.config_option ???
-- Config Creator
-    - should be associated with Configuration. It should take that config as the source.
-    - RunContext --> May be not needed any more. It should be replaced with a config map in Arjuna Singleton.
+- ConfigBuilder
+    - Add config options from file
+- Extended Driver Config
+    - ext_builder to config. Config itself can contain config extensions e.g. for driver.
 
 0.9.5
 -----

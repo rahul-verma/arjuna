@@ -44,10 +44,8 @@ class ArjunaSingleton:
     def __init__(self):
         self.__project_root_dir = None
         self.__test_session = None
-        self.__run_context = None
         self.__ref_config = None
-        self.__context_map = dict()
-        self.__default_context_name = "default_context"
+        self.__config_map = dict()
         self.__run_id = None
 
         # From central config
@@ -61,7 +59,6 @@ class ArjunaSingleton:
         self.dl = None
         self.log_file_discovery_info = False
         self.__data_references = None
-        self.central_conf = None
         self.__console = None
         self.__logger = None
         from arjuna.engine.data.store import DataStore
@@ -87,7 +84,7 @@ class ArjunaSingleton:
         if not static_rid:
             prefix = "{}-".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3])
         run_id = "{}{}".format(prefix, run_id)
-        self.__ref_config, env_confs = self.__test_session.init(project_root_dir, cli_config, run_id, run_conf)
+        self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id, run_conf)
 
         from arjuna.core.enums import ArjunaOption
         self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.PROJECT_RUN_REPORT_DIR))
@@ -101,10 +98,6 @@ class ArjunaSingleton:
         self.__init_logger(dl)
         self.__load_console(dl, self.logger)
 
-        self.__run_context = self.create_test_context(self.__default_context_name)
-        for env_conf in env_confs:
-            self.__run_context.add_config(env_conf)
-
         # Load data references
         from arjuna.engine.data.factory import DataReference
         self.__data_references = DataReference.load_all(self.__ref_config)
@@ -113,7 +106,7 @@ class ArjunaSingleton:
         from arjuna.engine.data.localizer import Localizer
         self.__localizer = Localizer.load_all(self.__ref_config)
 
-        return self.__run_context
+        return self.ref_config
 
     @property
     def data_references(self):
@@ -135,13 +128,9 @@ class ArjunaSingleton:
     def data_store(self):
         return self.__data_store
 
-    @classmethod
-    def get_test_session(cls):
-        return cls.__SESSION
-
-    @classmethod
-    def has_configuration(cls, config_name):
-        return config_name.upper() in cls.thread_map
+    @property
+    def test_session(self):
+        return self.__test_session
 
     def get_config_value(self, name, config=None):
         if config is None:
@@ -151,63 +140,6 @@ class ArjunaSingleton:
                 return self.run_context.get_config(config_name=config).value(name)
             else:
                 return config.value(name)
-
-    @classmethod
-    def has_property(cls, config_name, path):
-        return cls.has_configuration(config_name) and path.upper() in cls.thread_map[config_name]
-
-    @classmethod
-    def merge_configuration(cls, source_config_name, target_config_name):
-        if cls.has_configuration(source_config_name):
-            if cls.has_configuration(target_config_name):
-                cls.thread_map[target_config_name.upper()] = cls.thread_map[source_config_name].clone()
-            else:
-                cls.register_new_configuration(target_config_name.upper())
-                cls.thread_map[target_config_name.upper()] = cls.thread_map[source_config_name.upper()].clone()
-        else:
-            raise Exception("No source configuration found for name: %s".format(source_config_name))
-
-    @classmethod
-    def register_new_configuration(cls, config_name):
-        cls.thread_map[config_name.upper()] = {}
-
-    @classmethod
-    def update_thread_config(cls, config_name, config):
-        cls.thread_map[config_name].clone_add(config)
-
-    @classmethod
-    def value(cls, prop_name):
-        # uc_prop_name = None
-        # if type(prop_name) is not str:
-        #     prop_name = self.__get_prop_path_for_enum(prop_name).upper()
-        uc_prop_name = prop_name.upper()
-        tname = thread_utils.get_current_thread_name()
-        if tname in cls.thread_map and uc_prop_name in cls.thread_map[tname]:
-            return cls.thread_map[tname][uc_prop_name].value
-        elif uc_prop_name in cls.arjuna_options:
-            return cls.arjuna_options[uc_prop_name].value
-        else:
-            raise Exception("No property configred for name: {}".format(prop_name))
-
-    @classmethod
-    def get_configured_name(self, section_name, internal_name):
-        return self.strings_manager.get_configured_name(section_name, internal_name)
-
-    @classmethod
-    def get_problem_text(self, problem_code):
-        return self.strings_manager.get_problem_text(problem_code)
-
-    @classmethod
-    def get_info_message_text(self, code):
-        return self.strings_manager.get_info_message_text(code)
-
-    @classmethod
-    def clone_evars(self):
-        return copy.deepcopy(self.exec_var_map)
-
-    @classmethod
-    def clone_user_options(self):
-        return copy.deepcopy(self.user_options)
 
     def __init_logger(self, dl):
         from arjuna.core.enums import ArjunaOption
@@ -369,26 +301,19 @@ class ArjunaSingleton:
         self.__console = __console()
 
     @property
-    def run_context(self):
-        return self.__run_context
-
-    @property
     def ref_config(self):
         return self.__ref_config
 
     def get_config(self, name):
-        return self.run_context.get_config(name)
+        if not self.has_config(name):
+            raise Exception("There is no registered configuration for name: {}".format(name))
+        return self.__config_map[name.lower()]
 
-    def create_test_context(self, name):
-        '''
-            Creates test context object.
-            ?? Does it take central config??
-        '''
+    def register_config(self, config):
+        self.__config_map[config.name.lower()] = config
 
-        from arjuna.configure.invoker.context import RunContext
-        context = RunContext(self.__test_session, name)
-        self.__context_map[name] = context
-        return context
+    def has_config(self, name):
+        return name.lower() in self.__config_map
 
 class Arjuna:
     '''
@@ -425,12 +350,12 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.console
 
     @classmethod
-    def get_config_creator(cls):
-        '''
-            Returns the run context.
-        '''
-        return cls.ARJUNA_SINGLETON.run_context.config_creator
-    
+    def register_config(cls, config):
+        cls.ARJUNA_SINGLETON.register_config(config)
+
+    @classmethod
+    def has_config(cls, name):
+        return cls.ARJUNA_SINGLETON.has_config(name)
 
     @classmethod
     def get_config(cls, name=None):

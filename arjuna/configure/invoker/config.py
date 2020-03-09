@@ -112,6 +112,11 @@ class Configuration:
         self.__arjuna_options = ROWrapper(self.__wrapped_config.arjuna_config)
         self.__user_options = ROWrapper(self.__wrapped_config.user_config)
 
+    @property
+    def builder(self):
+        from .builder import ConfigBuilder
+        return ConfigBuilder(self.__session, self)
+
     def value(self, name):
         try:
             return self.__arjuna_options.value(name)

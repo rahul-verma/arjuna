@@ -67,15 +67,15 @@ def check_project_conf(request):
 
 @test
 def check_create_config(request):
-    cc = Arjuna.get_config_creator()
-    cc.option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
+    cb = request.config.builder
+    cb.option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
     # or
-    cc.option("browser.name", BrowserName.FIREFOX)
+    cb.option("browser.name", BrowserName.FIREFOX)
     # or
-    cc["browser_name"] = BrowserName.FIREFOX
+    cb["browser_name"] = BrowserName.FIREFOX
     # or
-    cc.browser_name = BrowserName.FIREFOX
-    config = cc.register()
+    cb.browser_name = BrowserName.FIREFOX
+    config = cb.register()
 
     google = WebApp(base_url="https://google.com", config=config)
     google.launch()
@@ -84,9 +84,9 @@ def check_create_config(request):
 
 @test
 def check_named_config(request):
-    cc = Arjuna.get_config_creator()
-    cc.browser_name = BrowserName.FIREFOX
-    cc.register("my_config")
+    cb = request.config.builder
+    cb.browser_name = BrowserName.FIREFOX
+    cb.register("my_config")
 
     config = Arjuna.get_config("my_config")
     print(config.name)
@@ -101,9 +101,9 @@ def check_named_config(request):
 
 @test
 def check_simpler_builder_method(request):
-    cc = Arjuna.get_config_creator()
-    cc.firefox()
-    config = cc.register()
+    cb = request.config.builder
+    cb.firefox()
+    config = cb.register()
 
     google = WebApp(base_url="https://google.com", config=config)
     google.launch()
@@ -120,13 +120,13 @@ def check_user_options(request):
     # Just like Arjuna options, C works for user options in reference config
     url = C("target.url")
 
-    cc = Arjuna.get_config_creator()
-    cc.option("target.title", "Google")
+    cb = request.config.builder
+    cb.option("target.title", "Google")
     # or
-    cc["target.title"] = "Google"
+    cb["target.title"] = "Google"
     # or
-    cc.target_title = "Google"
-    config = cc.register()
+    cb.target_title = "Google"
+    config = cb.register()
 
     title = config.target_title
     #or

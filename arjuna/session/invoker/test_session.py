@@ -63,7 +63,11 @@ class DefaultTestSession:
         ref_config = self.__configurator.ref_config
         env_confs = self.__configurator.env_confs
         self.__guimgr = GuiManager(ref_config)
-        return self.__create_config(ref_config), [self.__create_config(econf, name=name) for name, econf in env_confs.items()]
+        ref_conf = self.__create_config(ref_config)
+        self.__add_to_map(ref_conf)
+        for env_conf in [self.__create_config(econf, name=name) for name, econf in env_confs.items()]:
+            self.__add_to_map(env_conf)
+        return ref_conf
 
     def __create_config(self, config, name=None):
         config = Configuration(
@@ -76,9 +80,15 @@ class DefaultTestSession:
     def finish(self):
         pass
 
+    def __add_to_map(self, config):
+        from arjuna import Arjuna
+        Arjuna.register_config(config)
+
     def register_config(self, name, arjuna_options, user_options, parent_config=None):
         config = self.configurator.register_new_config(arjuna_options, user_options, parent_config)
-        return self.__create_config(config, name=name)
+        conf = self.__create_config(config, name=name)
+        self.__add_to_map(conf)
+        return conf
 
     def create_file_data_source(self, record_type, file_name, *arg_pairs):
         response = self._send_request(
