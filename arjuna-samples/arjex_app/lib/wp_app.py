@@ -22,7 +22,7 @@ from arjuna import *
 class WordPress:
 
     def __init__(self):
-        url = Arjuna.get_config().user_options.value("wp.login.url")
+        url = C("wp.login.url")
         self.__app = WebApp(base_url=url)
         self.app.launch()
         self.app.externalize(gns_file_name="WordPress.yaml")
@@ -32,8 +32,8 @@ class WordPress:
         return self.__app
 
     def login(self):
-        user = self.app.config.user_options.value("wp.admin.name")
-        pwd = self.app.config.user_options.value("wp.admin.pwd")
+        user = C("wp.admin.name")
+        pwd = C("wp.admin.pwd")
 
         # Login
         self.app.element("login").text = user
@@ -42,7 +42,7 @@ class WordPress:
         self.app.element("view_site")
 
     def logout(self):
-        url = self.app.config.user_options.value("wp.logout.url")
+        url = C("wp.logout.url")
         self.app.go_to_url(url)
         self.app.element("logout_confirm").click()
         self.app.element("logout_msg")
