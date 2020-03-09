@@ -1,5 +1,10 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.7
+-----
+
+Minor update. All l10 references are changed to l10n.
+
 0.9.6
 -----
 - Localizer
