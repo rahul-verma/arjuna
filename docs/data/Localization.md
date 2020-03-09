@@ -27,7 +27,7 @@ The second file `sample2.xls` has the same data except the localized string for 
 ##### The `L` function for Localization
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_14_dd_localizer.py
+# arjuna-samples/arjex_data/test/module/check_12_dd_localizer.py
 
 from arjuna import *
 
@@ -46,7 +46,7 @@ def check_excel_localizer(request):
     print(L("sample2.corr")) # From sample2 excel file (bucket)
 ```
 
-```JSON
+```
 # project.conf
 
 arjunaOptions {
@@ -121,7 +121,7 @@ Following is the content of one such file in root directory for German localizat
 #### Using the `L` Function
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_14_dd_localizer.py
+# arjuna-samples/arjex_data/test/module/check_12_dd_localizer.py
 
 from arjuna import *
 
@@ -149,7 +149,7 @@ def check_json_localizer(request):
 By default, Arjuna handles localization in a non-strict mode. This means if localized string is absent for a given reference, it ignores the error and returns the reference as return value.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_14_dd_localizer.py
+# arjuna-samples/arjex_data/test/module/check_12_dd_localizer.py
 
 from arjuna import *
 

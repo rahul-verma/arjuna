@@ -13,8 +13,7 @@ Sometimes, the need is simple. You have a single data record, but want to separa
 This need is solved with the `record` markup of Arjuna.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_03_dd_record.py
-
+# arjuna-samples/arjex_data/test/module/check_01_dd_record.py
 
 from arjuna import *
 
@@ -54,7 +53,7 @@ def check_names_args_ci(request, data):
 #### Multiple Data Records
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_04_dd_records.py
+# arjuna-samples/arjex_data/test/module/check_02_dd_records.py
 
 from arjuna import *
 
@@ -85,7 +84,7 @@ Rather than including static data in Python code, one might want to generate dat
 A simple way to achieve this is to write a data function.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_05_dd_fixed_func.py
+# arjuna-samples/arjex_data/test/module/check_03_dd_fixed_func.py
 
 from arjuna import *
 
@@ -105,7 +104,7 @@ def check_fixed_data_func(request, data):
 You can also use a Python generator instead of a normal function:
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_06_dd_generator.py
+# arjuna-samples/arjex_data/test/module/check_04_dd_generator.py
 
 from arjuna import *
 
@@ -124,7 +123,7 @@ def check_generator_func(request, data):
 Another advanced measure that you can take is creating a data function which acts on the arguments supplied by you to govern the data it generates.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_07_dd_dynamic_func.py
+# arjuna-samples/arjex_data/test/module/check_05_dd_dynamic_func.py
 
 from arjuna import *
 
@@ -147,7 +146,7 @@ def check_dynamic_data_func(request, data):
 Instead of a function, you can also represent your data generation logic as a data class.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_08_dd_class.py
+# arjuna-samples/arjex_data/test/module/check_06_dd_class.py
 
 from arjuna import *
 
@@ -170,7 +169,7 @@ def check_data_class(request, data):
 Another advanced measure that you can take is creating a data class which acts on the arguments supplied by you to govern the data it generates.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_09_dd_dynamic_class.py
+# arjuna-samples/arjex_data/test/module/check_07_dd_dynamic_class.py
 
 from arjuna import *
 
@@ -199,7 +198,7 @@ For large, static data it might be useful to externalize the data completely out
 Arjuna supports data externalization in XLS, TSV/CSV and INI files out of the box.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_10_dd_data_files.py
+# arjuna-samples/arjex_data/test/module/check_08_dd_data_files.py
 
 from arjuna import *
 
@@ -268,7 +267,7 @@ Sum = 8
 At times, you might want to selectively mark records in data files to be excluded from consideration.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_10_dd_data_files.py
+# arjuna-samples/arjex_data/test/module/check_09_dd_data_files_filter.py
 
 from arjuna import *
 
@@ -327,7 +326,7 @@ Sum = 3
 You can also associate multiple data sources with a single test in Arjuna.
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_12_dd_many_data_sources.py
+# arjuna-samples/arjex_data/test/module/check_10_dd_many_data_sources.py
 
 from arjuna import *
 

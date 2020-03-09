@@ -14,7 +14,7 @@ The sample project contains two sample environment configurarions. They contain 
 
 **tenv1.conf**
 
-```HOCON
+```javascript
 arjunaOptions {
     aut.base.url = "https://tenv1"
 }
@@ -27,7 +27,7 @@ userOptions {
 
 **tenv2.conf**
 
-```HOCON
+```javascript
 arjunaOptions {
     aut.base.url = "https://tenv2"
 }
@@ -41,24 +41,61 @@ userOptions {
 #### Progammatically retrieving values from an environment configuration
 
 ```python
+# arjuna-samples/arjex_config/test/module/check_07_env_config.py
+
 from arjuna import *
 
 @test
-def check_env_confs(request):
+def check_env_confs_with_conf(request):
 
-    print(Arjuna.get_config("tenv1").browser_name)
-    print(Arjuna.get_config("tenv2").browser_name)
+    tenv1 = Arjuna.get_config("tenv1")
+    tenv2 = Arjuna.get_config("tenv2")
 
-    print(Arjuna.get_config("tenv1").aut_base_url)
-    print(Arjuna.get_config("tenv2").aut_base_url)
+    print(tenv1.browser_name)
+    print(tenv2.browser_name)
 
-    print(Arjuna.get_config("tenv1").user)
-    print(Arjuna.get_config("tenv2").user)
+    print(tenv1.aut_base_url)
+    print(tenv2.aut_base_url)
+
+    print(tenv1.user)
+    print(tenv2.user)
+
+    tenv1 = request.get_config("tenv1")
+    tenv2 = request.get_config("tenv2")
+
+    print(tenv1.browser_name)
+    print(tenv2.browser_name)
+
+    print(tenv1.aut_base_url)
+    print(tenv2.aut_base_url)
+
+    print(tenv1.user)
+    print(tenv2.user)
 ```
 
 ##### Points To Note
-1. You can retrieve an environment config by its name using `Arjuna.get_config` call.
+1. You can retrieve an environment config by its name using `Arjuna.get_config` or `request.get_config` call.
 2. Now you can inquire the values just like you deal with any configuration in Arjuna.
+
+#### Retrieving Environment configuration options using the `C` Magic function
+
+```python
+# arjuna-samples/arjex_config/test/module/check_07_env_config.py
+
+@test
+def check_env_confs_with_CFunc(request):
+    print(C("tenv1.browser_name"))
+    print(C("tenv2.browser_name"))
+
+    print(C("tenv1.aut_base_url"))
+    print(C("tenv2.aut_base_url"))
+
+    print(C("tenv1.user"))
+    print(C("tenv2.user"))
+```
+
+##### Points To Note
+1. You can use the configuration query syntax `<confname>.<option>` to retrieve configuration values for an environment. 
 
 #### Making an environment configuration as the default
 
@@ -69,14 +106,19 @@ You do this by providing `--run-env` CLI switch.
 Provide `--run-env tenv2` and run the following test to see the impact:
 
 ```python
-@test
+# arjuna-samples/arjex_config/test/module/check_07_env_config.py
+
 def check_runenv_cli(request):
-    print(Arjuna.get_config().browser_name)
+    '''
+        Pass --run-env tenv2 in CLI
+    '''
+
+    conf = Arjuna.get_config()
+    print(conf.browser_name)
+    print(conf.aut_base_url)
+    print(conf.user)
+
     print(C("browser.name"))
-
-    print(Arjuna.get_config().aut_base_url)
-    print(Arjuna.get_config().user)
-
     print(C("aut.base.url"))
     print(C("user"))
 ```
@@ -89,7 +131,7 @@ You do this by providing `--run-conf` CLI switch.
 
 **Sample dynamic.conf** 
 
-```HOCON
+```javascript
 arjunaOptions {
     aut.base.url = "https://dyn"
 }
@@ -102,15 +144,16 @@ userOptions {
 Provide `--run-conf <path of dynamic.conf>` and run the following test to see the impact:
 
 ```python
+# arjuna-samples/arjex_config/test/module/check_07_env_config.py
 
 @test
 def check_runconf_cli(request):
-    print(Arjuna.get_config().browser_name)
+    conf = Arjuna.get_config()
+    print(conf.browser_name)
+    print(conf.aut_base_url)
+    print(conf.user)
+
     print(C("browser.name"))
-
-    print(Arjuna.get_config().aut_base_url)
-    print(Arjuna.get_config().user)
-
     print(C("aut.base.url"))
     print(C("user"))
 
@@ -126,21 +169,20 @@ If you pass the switches together:
 Provide `--run-env tenv2 --run-conf <path of dynamic.conf>` and run the following test to see the impact:
 
 ```python
+# arjuna-samples/arjex_config/test/module/check_07_env_config.py
 
 @test
 def check_runenv_runconf_cli(request):
-    print(Arjuna.get_config().browser_name)
+    conf = Arjuna.get_config()
+    print(conf.browser_name)
+    print(conf.aut_base_url)
+    print(conf.user)
+    print(conf.pwd)
+
     print(C("browser.name"))
-
-    print(Arjuna.get_config().aut_base_url)
-    print(Arjuna.get_config().user)
-
     print(C("aut.base.url"))
     print(C("user"))
-
-    print(Arjuna.get_config().pwd)
     print(C("pwd"))
-
 ```
 
 

@@ -32,7 +32,7 @@ In a row data reference file, the context of data is represented by cells of the
 #### Using Data References in Test
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_13_dataref_excel.py
+# arjuna-samples/arjex_data/test/module/check_11_dataref_excel.py
 
 from arjuna import *
 

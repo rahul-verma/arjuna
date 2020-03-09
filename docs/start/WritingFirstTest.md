@@ -13,7 +13,7 @@ For exploring Arjuna fundamentals, we will consider a very basic web UI test aut
 Place Selenium **Chromedriver** and **Geckodriver** excutables in the [drivers directory for your OS](ProjectStructure.md).
 
 ```python
-# arjuna-samples/arjex_core_features/test/module/check_01_simple_test.py
+# arjuna-samples/arjex_start/test/module/check_01_simple_test.py
 
 from arjuna import *
 
