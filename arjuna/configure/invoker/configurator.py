@@ -24,6 +24,7 @@ from enum import Enum
 from arjuna.configure.impl.processor import ConfigCreator, CentralConfigLoader, ProjectConfigCreator, PartialConfCreator, EmptyConfCreator
 from arjuna.core.reader.hocon import HoconStringReader, HoconConfigDictReader
 from arjuna.core.value import Value
+from arjuna.core.utils import file_utils
 
 class TestConfigurator:
 
@@ -68,10 +69,27 @@ class TestConfigurator:
                 env_conf_loader = PartialConfCreator(os.path.join(env_dir, fname))
                 self.__env_confs[os.path.splitext(fname)[0].lower()] = env_conf_loader.config
 
+    def load_options_from_file(self, fpath):
+        if file_utils.is_absolute_path(fpath):
+            if not file_utils.is_file(fpath):
+                if file_utils.is_dir(fpath):
+                    raise Exception("Not a file: {}".format(fpath))
+                else:
+                    raise Exception("File does not exist: {}".format(fpath))
+        else:
+            from arjuna import Arjuna, ArjunaOption
+            conf_dir = Arjuna.get_config().value(ArjunaOption.CONFIG_DIR)
+            fpath = os.path.abspath(os.path.join(conf_dir, fpath))
+            if not file_utils.is_file(fpath):
+                if file_utils.is_dir(fpath):
+                    raise Exception("Not a file: {}".format(fpath))
+                else:
+                    raise Exception("File does not exist: {}".format(fpath))
+        return PartialConfCreator(fpath).config
+
     def __load_run_conf(self):
         if self.__run_conf_path:
-            run_conf_loader = PartialConfCreator(self.__run_conf_path)
-            self.__run_conf = run_conf_loader.config
+            self.__run_conf = self.load_options_from_file(self.__run_conf_path)
 
     def __create_config_from_option_dicts(self, reference, arjuna_options, user_options):
         def format_value(val):

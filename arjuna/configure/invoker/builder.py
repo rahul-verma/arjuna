@@ -81,34 +81,12 @@ class ConfigBuilder:
 
         return config
 
-    def update_with_file_config_container(self, container):
-        for config_name, conf in self.__configs.items():
-            builder = self.ConfigBuilder(code_mode=False)
-            builder.parent_config(conf)
-            amap = container.arjuna_options
-            umap = container.user_options
-            if config_name in self.__conf_trace:
-                if "arjuna_options" in self.__conf_trace[config_name]:
-                    for k,v in container.arjuna_options.items():
-                        if k not in self.__conf_trace[config_name]["arjuna_options"]:
-                            builder.arjuna_option(k, v)
-                else:
-                    for k, v in container.arjuna_options.items():
-                        builder.arjuna_option(k, v)
-                if "user_options" in self.__conf_trace[config_name]:
-                    for k,v in container.user_options.items():
-                        if k not in self.__conf_trace[config_name]["user_options"]:
-                            builder.user_option(k, v)
-                else:
-                    for k, v in container.user_options.items():
-                        builder.user_option(k, v)
-            else:
-                for k in amap.keys():
-                    builder.arjuna_option(k, amap.object(k))
-                for k in umap.keys():
-                        builder.user_option(k, umap.object(k))
-            builder.build(config_name=config_name)
-
+    def from_file(self, fpath):
+        conf = self._test_session.load_options_from_file(fpath)
+        for k,v in conf.arjuna_config._config_dict.items():
+            self._config_container.set_arjuna_option(k,v)
+        for k,v in conf.user_config._config_dict.items():
+            self._config_container.set_user_option(k,v)
 
 '''
 

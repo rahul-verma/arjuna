@@ -31,6 +31,7 @@ Following is the list of critical additions and updates for a given released ver
     - _ConfigCreator Name changed to ConfigBuilder
     - ConfigBuilder is directly associated with a Config object, which is automatically treated as the source/parent config.
     - One can not create a configuration with same name again.
+    - Builder has the provision to add config options from any conf file which has arjunaOptions and/or userOptions
     - creator.register without a name creates a unique config name using uuid4. As it returns the config object it has its use case when direct dealing with config object is needed.
     - create.register(name) is useful if the name is to be controlled and used by test author.
 - Configuration Layer-wise auto-update:
@@ -64,8 +65,6 @@ To DO for this build before PyPi release:
     - Many ArjunaOptions have been renamed to simpler, shorter names.
 - Environment Config
     - Support for config_name.config_option ???
-- ConfigBuilder
-    - Add config options from file
 - Extended Driver Config
     - ext_builder to config. Config itself can contain config extensions e.g. for driver.
 

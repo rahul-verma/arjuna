@@ -84,6 +84,9 @@ class DefaultTestSession:
         from arjuna import Arjuna
         Arjuna.register_config(config)
 
+    def load_options_from_file(self, fpath):
+        return self.configurator.load_options_from_file(fpath)
+
     def register_config(self, name, arjuna_options, user_options, parent_config=None):
         config = self.configurator.register_new_config(arjuna_options, user_options, parent_config)
         conf = self.__create_config(config, name=name)

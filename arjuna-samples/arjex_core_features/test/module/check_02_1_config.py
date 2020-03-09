@@ -137,3 +137,16 @@ def check_user_options(request):
     google.launch()
     request.asserter.assert_equal(title, google.title, "Page title does not match.")
     google.quit()
+
+@test
+def check_file_based_update(request):
+    cb = request.config.builder
+    cb.option("prog.option", "Programmatic")
+    cb.from_file("dynamic.conf")
+    config = cb.register()
+
+    print(config.prog_option)
+    print(config.browser_name)
+
+    print(config.aut_base_url)
+    print(config.user)
