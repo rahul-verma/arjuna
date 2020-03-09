@@ -59,16 +59,13 @@ Following is the list of critical additions and updates for a given released ver
     - One can provide --run-env CLI switch which picks up the env config. This superimposes this env config on the reference config itself.
     - Doc added.
 - New CLI Configuration Switches
+    - Added -ao/--arjuna-option and -uo/--user-option. These switches can be supplied multiple times to add any number of Arjuna options or user options. These will override all options set by any other means in Arjuna.
     - --run-env switch as mentioned above.
     - --run-conf: Any configuration file's absolute path can be provided. This is is superimposed on the reference config.
 - Example projects and Docs
     - All example code and projects verified.
     - Split the core project into arjuna_start, arjuna_config, arjuna_data and arjuna_l10 projects.
     - Reorganized docs into smaller, focused contents.
-
-To DO for this build before PyPi release:
-- CLI any option (ArjunaOption/User option)
-    
 
 0.9.5
 -----

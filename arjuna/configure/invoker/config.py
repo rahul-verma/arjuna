@@ -159,36 +159,27 @@ class Configuration:
 class CliArgsConfig:
 
     def __init__(self, arg_dict):
-        self.__aco = {}
-        self.__ato = {}
-        self.__uco = {}
-        self.__uto = {}
-
-        kinds = {
-            "aco": self.__aco,
-            "ato": self.__ato,
-            "uco": self.__uco,
-            "uto": self.__uto
+        self.__option_map = {
+            "ao" : dict(),
+            "uo" : dict()
         }
 
-        lower_actual_key_map = {i.lower():i for i in arg_dict}
-        for kind in kinds:
-            if kind in lower_actual_key_map:
-                actual_key = lower_actual_key_map[kind]
-                d_item = arg_dict[actual_key]
-                if d_item:
-                    for entry in d_item:
-                        k,v = entry
-                        kinds[kind][k.lower()] = v
-                del arg_dict[actual_key]
-
-        for akey, avalue in arg_dict.items():
-            self.__aco[akey.lower()] = avalue
+        def update_map(otype, arg_dict):
+            if otype in arg_dict:
+                opt_list = arg_dict[otype]
+                if opt_list is not None:
+                    self.__option_map[otype].update(dict(arg_dict[otype]))
+                del arg_dict[otype]
+            else:
+                self.__option_map[otype] = dict()
+        
+        update_map("ao", arg_dict)
+        update_map("uo", arg_dict)
+        self.__option_map["ao"].update(arg_dict)
+        arg_dict.clear()
 
     def as_map(self):
         return {
-            "arjunaCentralOptions": self.__aco,
-            "arjunaTestOptions": self.__ato,
-            "userCentralOptions": self.__uco,
-            "userTestOptions": self.__uto
+            "arjunaOptions": self.__option_map["ao"],
+            "userOptions": self.__option_map["uo"],
         }

@@ -83,14 +83,16 @@ class MainCommand(Command):
         return self.parser.add_subparsers(title="Valid Commands", description="What do you want Arjuna to do?", dest='command')
 
     def convert_to_dict(self, args):
-        def format_value(v):
+        def format_value(k, v):
+            if k in {"ao", "uo"}:
+                return v
             if type(v) is list:
                 return ",".join([str(i) for i in v])
             else:
                 return v
         try:
             args = self.parser.parse_args(args[1:])
-            return {k:format_value(v) for k,v in vars(args).items()}
+            return {k:format_value(k,v) for k,v in vars(args).items()}
         except Exception as e:
             print("!!!Fatal Error!!!")
             print(e)
@@ -132,8 +134,8 @@ class CreateProject(Command):
         (FileObjectType.DIR, "data/reference"),
         (FileObjectType.DIR, "data/reference/excel_column"),
         (FileObjectType.DIR, "data/reference/excel_row"),
-        (FileObjectType.DIR, "data/l10"),
-        (FileObjectType.DIR, "data/l10/excel"),
+        (FileObjectType.DIR, "l10"),
+        (FileObjectType.DIR, "l10/excel"),
         (FileObjectType.DIR, "guiauto"),
         (FileObjectType.DIR, "guiauto/driver"),
         (FileObjectType.DIR, "guiauto/driver/linux"),
@@ -182,7 +184,6 @@ class CreateProject(Command):
             parent.process(arg_dict)
         # from arjuna import ArjunaCore
         pdir = arg_dict['project.root.dir']
-        print(os.path.join(pdir, "config/project.conf"))
         if os.path.exists(os.path.join(pdir, "config/project.conf")):
             print("Arjuna project already exists at the specified location.")
             sys.exit(1)
@@ -201,7 +202,7 @@ class CreateProject(Command):
             f = open(get_proj_target_path("test/conftest.py"), "w")
             f.write(contents)
             f.close()
-            for d in [ "config/env", "data/source", "data/l10/excel", "data/reference/excel_row", "data/reference/excel_column", "guiauto/namespace"]:
+            for d in [ "config/env", "data/source", "l10/excel", "data/reference/excel_row", "data/reference/excel_column", "guiauto/namespace"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:
                 copy_file("../../res/placeholder.txt", "guiauto/driver/{}/driver.txt".format(os_name))

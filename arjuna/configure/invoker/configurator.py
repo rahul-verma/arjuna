@@ -34,8 +34,6 @@ class TestConfigurator:
         self.__run_id = run_id
         self.__run_conf_path = run_conf
         self.__default_ref_config = None
-        self.__cli_central_config = None
-        self.__cli_test_config = None
         self.__run_conf = None
         self.__chosen_env_conf = None
         self.__env_confs = dict()
@@ -115,9 +113,8 @@ class TestConfigurator:
 
     def __load_cli_dicts(self):
 
-        def load(arjunaCentralOptions={}, arjunaTestOptions={}, userCentralOptions={}, userTestOptions={}):
-            self.__cli_central_config = self.__create_config_from_option_dicts(None, arjunaCentralOptions, userCentralOptions)
-            self.__cli_test_config = self.__create_config_from_option_dicts(None, arjunaTestOptions, userTestOptions)
+        def load(arjunaOptions={}, userOptions={}):
+            self.__cli_config = self.__create_config_from_option_dicts(None, arjunaOptions, userOptions)
 
         cli_config = self.__cli_config and self.__cli_config or {}
         load(**cli_config)
@@ -142,8 +139,7 @@ class TestConfigurator:
             config.update(self.__run_conf)
 
     def __update_config_for_cli(self, config):
-        config.update(self.__cli_central_config)
-        config.update(self.__cli_test_config)
+        config.update(self.__cli_config)
 
     def __update_config(self, config, update_from_chosen_env=False):
         if update_from_chosen_env:
