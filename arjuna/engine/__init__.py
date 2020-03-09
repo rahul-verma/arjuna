@@ -133,13 +133,28 @@ class ArjunaSingleton:
         return self.__test_session
 
     def get_config_value(self, name, config=None):
+        config = config
+        query = name
         if config is None:
-            return self.ref_config.value(name)
+            if type(name) is str:
+                if name.find('.') != -1:
+                    conf, query = name.split(".", 1)
+                    if self.has_config(conf):
+                        config = self.get_config(conf)
+                    else:
+                        config = self.ref_config
+                        query = name
+                else:
+                    config = self.ref_config
+                    query = name
+            else:
+                config = self.ref_config
+                query = name
         else:
             if type(config) is str:
-                return self.run_context.get_config(config_name=config).value(name)
-            else:
-                return config.value(name)
+                config = self.get_config(config)
+
+        return config.value(query)
 
     def __init_logger(self, dl):
         from arjuna.core.enums import ArjunaOption

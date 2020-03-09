@@ -26,13 +26,23 @@ You can find the example code used on this section in [arjuna_core_features proj
 
 1. [Project Structure](https://github.com/rahul-verma/arjuna/blob/master/docs/core/ProjectStructure.md)
 2. [Writing Your First Test](https://github.com/rahul-verma/arjuna/blob/master/docs/core/WritingFirstTest.md)
-3. [Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/core/Configuration.md)
-4. [Environments and Dynamic Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/core/EnvironmentsAndDynamicConfigurations.md)
-5. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/core/DataDrivenTesting.md)
-6. [Contextual Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/core/DataReferences.md)
-7. [Localization of Strings](https://github.com/rahul-verma/arjuna/blob/master/docs/core/Localization.md)
 
-### 3. Basic Web UI Automation
+### 3. Arjuna's Configuration System
+1. [Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/config/Configuration.md)
+2. [proj.conf - Project Level Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/config/ProjectConf.md)
+3. [Configuration Builder - Creating Custom Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/config/ConfigBuilder.md)
+4. [Defining and Handling User Options](https://github.com/rahul-verma/arjuna/blob/master/docs/config/UserOptions.md)
+5. [Using .conf files with Configuration Builder](https://github.com/rahul-verma/arjuna/blob/master/docs/config/UsingFilesInConfigBuilder.md)
+6. [The `C` Magic Function](https://github.com/rahul-verma/arjuna/blob/master/docs/config/EnvironmentsAndDynamicConfigurations.md)
+7. [Environments and Dynamic Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/config/EnvironmentsAndDynamicConfigurations.md)
+
+
+### 4. Dealing with Data - Driving with Data, References and Localization
+5. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataDrivenTesting.md)
+6. [Contextual Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataReferences.md)
+7. [Localization of Strings](https://github.com/rahul-verma/arjuna/blob/master/docs/data/Localization.md)
+
+### 5. Basic Web UI Automation
 
 You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/test/module).
 
@@ -42,7 +52,7 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 3. [GuiMultiElement](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiMultiElement.md)
 4. [Dropdown and RadioGroup](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/DropDownRadioGroup.md)
 
-### 4. Advanced Web UI Automation
+### 6. Advanced Web UI Automation
 1. Finding Nested Elements
 2. Alternative and Dynamic Identifiers
 3. Executing JavaScript
@@ -51,7 +61,7 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 6. Handling Custom DropDowns
 7. Retrieving Source code with GuiSource
 
-### 5. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
+### 7. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
 The following tutorial sub-sections have multiple example projects corresponding to them. Please refer the pages for respective example projects.
 
 1. [Gui Namespace (GNS) - Externalized Identifiers](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiNamespace.md)

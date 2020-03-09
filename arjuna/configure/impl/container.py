@@ -49,7 +49,7 @@ class ConfigContainer:
             self.__arjuna_options[arjuna_option.name] = obj
         else:
             normalized_option = Config.normalize_arjuna_option_str(arjuna_option)
-            self.__arjuna_options[normalized_option] = obj
+            self.__arjuna_options[normalized_option.name] = obj
         return self
 
     def set_user_option(self, option, obj):
@@ -60,6 +60,9 @@ class ConfigContainer:
         try:
             self.set_arjuna_option(option, obj)
         except Exception as e:
+            print(e)
+            import traceback
+            traceback.print_exc()
             self.set_user_option(option, obj)
         return self
 

@@ -1,0 +1,18 @@
+{
+  "address": {
+    "address": "Address",
+    "city": "City",
+    "coordinates": "Coordinates",
+    "country": "Country",
+    "houseNumber": "House number",
+    "latitude": "Latitude",
+    "location": "Location",
+    "longitude": "Longitude",
+    "postalCode": "Postal code",
+    "streetName": "Street name"
+  },
+  "shared": {
+    "back": "Back",
+    "cancel": "Cancel"
+  }
+}

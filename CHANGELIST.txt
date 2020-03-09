@@ -22,6 +22,7 @@ Following is the list of critical additions and updates for a given released ver
     - . and [] retrieval mechanisms added to config object. For a given name, one can use `config.name` or `config[name]` or config.value(name)` calls interchangeably.
     - All arjuna options and user options become automatically available with . and [] lookup.
     - Arjuna.get_config gives reference config by default. If conf name is passed, then that named config object is returned.
+    - The `C` function supports config query format i.e. a.b.c will attempt to treat `a` as a configuration name.
 - request object enhanced
     - request.config is by default set to reference config at the top level. Can be retrieved at any child layer.
     - request.get_config without name as argument is same as request.config
@@ -63,10 +64,6 @@ Following is the list of critical additions and updates for a given released ver
 To DO for this build before PyPi release:
 - Config Simplication
     - Many ArjunaOptions have been renamed to simpler, shorter names.
-- Environment Config
-    - Support for config_name.config_option ???
-- Extended Driver Config
-    - ext_builder to config. Config itself can contain config extensions e.g. for driver.
 
 0.9.5
 -----

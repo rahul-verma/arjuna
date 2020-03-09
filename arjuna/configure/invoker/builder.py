@@ -67,6 +67,13 @@ class ConfigBuilder:
         self.option(ArjunaOption.MOBILE_APP_FILE_PATH, path)
         return self
 
+    def from_file(self, fpath):
+        conf = self._test_session.load_options_from_file(fpath)
+        for k,v in conf.arjuna_config._config_dict.items():
+            self._config_container.set_arjuna_option(k,v)
+        for k,v in conf.user_config._config_dict.items():
+            self._config_container.set_user_option(k,v)
+
     def register(self, config_name=None):
         from arjuna import Arjuna
         config_name = config_name and config_name or 'c{}'.format(str(uuid.uuid4()).replace("-","_"))
@@ -80,13 +87,6 @@ class ConfigBuilder:
                                     )
 
         return config
-
-    def from_file(self, fpath):
-        conf = self._test_session.load_options_from_file(fpath)
-        for k,v in conf.arjuna_config._config_dict.items():
-            self._config_container.set_arjuna_option(k,v)
-        for k,v in conf.user_config._config_dict.items():
-            self._config_container.set_user_option(k,v)
 
 '''
 
