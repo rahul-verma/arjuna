@@ -17,6 +17,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna import *
 from enum import Enum, auto
 from .base import WPBaseSection
 
@@ -27,7 +28,7 @@ class TopNav(WPBaseSection):
         logout_msg = auto()
 
     def logout(self):
-        url = self.config.user_options.value("wp.logout.url")
+        url = C("wp.logout.url")
         self.go_to_url(url)
 
         self.element(self.labels.logout_confirm).click()

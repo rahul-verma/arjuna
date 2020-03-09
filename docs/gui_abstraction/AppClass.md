@@ -30,8 +30,8 @@ class WordPress:
         return self.__app
 
     def login(self):
-        user = self.app.config.user_options.value("wp.admin.name")
-        pwd = self.app.config.user_options.value("wp.admin.pwd")
+        user = C("wp.admin.name")
+        pwd = C("wp.admin.pwd")
 
         # Login
         self.app.element("login").text = user
@@ -40,7 +40,7 @@ class WordPress:
         self.app.element("view_site")
 
     def logout(self):
-        url = self.app.config.user_options.value("wp.logout.url")
+        url = C("wp.logout.url")
         self.app.go_to_url(url)
         self.app.element("logout_confirm").click()
         self.app.element("logout_msg")
@@ -52,7 +52,6 @@ class WordPress:
         role_select = self.app.dropdown("role")
         role_select.select_value(value)
         self.app.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
-
 ```
 
 #### Points to Note

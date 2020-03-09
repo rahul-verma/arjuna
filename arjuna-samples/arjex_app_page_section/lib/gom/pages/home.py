@@ -17,6 +17,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from arjuna import *
 from enum import Enum, auto
 from .base import WPBasePage
 
@@ -39,8 +40,8 @@ class Home(WPBasePage):
         return Dashboard(self)
 
     def login_with_default_creds(self):
-        user = self.config.user_options.value("wp.admin.name")
-        pwd = self.config.user_options.value("wp.admin.pwd")
+        user = C("wp.admin.name")
+        pwd = C("wp.admin.pwd")
 
         return self.login(user, pwd)
 

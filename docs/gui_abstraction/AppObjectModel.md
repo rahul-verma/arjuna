@@ -19,6 +19,7 @@ We will use the same GNS file as the previous section.
 ```python
 # arjuna-samples/arjex_app/lib/wp_app_model.py
 
+
 from arjuna import *
 
 class WordPress(WebApp):
@@ -35,8 +36,8 @@ class WordPress(WebApp):
         self.element("submit").wait_until_visible()
 
     def login(self):
-        user = self.config.user_options.value("wp.admin.name")
-        pwd = self.config.user_options.value("wp.admin.pwd")
+        user = C("wp.admin.name")
+        pwd = C("wp.admin.pwd")
 
         # Login
         self.element("login").text = user
@@ -45,7 +46,7 @@ class WordPress(WebApp):
         self.element("view_site")
 
     def logout(self):
-        url = self.config.user_options.value("wp.logout.url")
+        url = C("wp.logout.url")
         self.go_to_url(url)
         self.element("logout_confirm").click()
         self.element("logout_msg")
@@ -57,6 +58,7 @@ class WordPress(WebApp):
         role_select = self.app.dropdown("role")
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+        return self
 ```
 
 #### Points to Note

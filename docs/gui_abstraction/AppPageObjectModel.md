@@ -96,9 +96,9 @@ class WordPress(WebApp):
 
  ```python
  # arjuna-samples/arjex_app_page/lib/gom/pages/base.py
- 
+
 import abc
-from arjuna import Page
+from arjuna import *
 
 class WPBasePage(Page, metaclass=abc.ABCMeta):
 
@@ -109,7 +109,7 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
         self.externalize()
 
     def logout(self):
-        url = self.config.user_options.value("wp.logout.url")
+        url = C("wp.logout.url")
         self.go_to_url(url)
 
         self.element("logout_confirm").click()
@@ -117,7 +117,6 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
 
         from .home import Home
         return Home(self)
-
 ```
 
 #### Points to Note
@@ -134,6 +133,7 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
  ```python
  # arjuna-samples/arjex_app_page/lib/gom/pages/home.py
  
+from arjuna import *
 from .base import WPBasePage
 
 class Home(WPBasePage):
@@ -150,8 +150,8 @@ class Home(WPBasePage):
         return Dashboard(self)
 
     def login_with_default_creds(self):
-        user = self.config.user_options.value("wp.admin.name")
-        pwd = self.config.user_options.value("wp.admin.pwd")
+        user = C("wp.admin.name")
+        pwd = C("wp.admin.pwd")
 
         return self.login(user, pwd)
 ```

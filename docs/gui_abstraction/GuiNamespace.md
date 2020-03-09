@@ -55,6 +55,7 @@ We had earlier created a resuable module for WordPress related functions. Let's 
 ```python
 # arjuna-samples/arjex_app/lib/wp_gns.py
 
+
 from arjuna import *
 
 def create_wordpress_app():
@@ -65,8 +66,8 @@ def create_wordpress_app():
     return wordpress
 
 def login(wordpress):
-    user = wordpress.config.user_options.value("wp.admin.name")
-    pwd = wordpress.config.user_options.value("wp.admin.pwd")
+    user = C("wp.admin.name")
+    pwd = C("wp.admin.pwd")
 
     # Login
     wordpress.element("login").text = user
@@ -75,20 +76,18 @@ def login(wordpress):
     wordpress.element("view_site")
 
 def logout(wordpress):
-    url = wordpress.config.user_options.value("wp.logout.url")
+    url = C("wp.logout.url")
     wordpress.go_to_url(url)
     wordpress.element("logout_confirm").click()
     wordpress.element("logout_msg")
 
     wordpress.quit()
 
-
 def tweak_role_value_in_settings(wordpress, asserter, value):
     wordpress.element("Settings").click()
     role_select = wordpress.dropdown("role")
     role_select.select_value(value)
     asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
-
 ```
 
 ##### Points to Note

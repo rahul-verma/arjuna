@@ -98,11 +98,12 @@ labels:
 ```python
 # arjuna-samples/arjex_app_page_widget/lib/gom/app.py
 
+
 from arjuna import *
 
 class WordPress(WebApp):
 
-    def __init__(self, gns_format="sgns"):
+    def __init__(self):
         url = C("wp.login.url")
         super().__init__(base_url=url)
 
@@ -163,6 +164,7 @@ class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
  ```python
  # arjuna-samples/arjex_app_page_widget/lib/gom/pages/home.py
  
+from arjuna import *
 from enum import Enum, auto
 from .base import WPBasePage
 
@@ -185,8 +187,8 @@ class Home(WPBasePage):
         return Dashboard(self)
 
     def login_with_default_creds(self):
-        user = self.config.user_options.value("wp.admin.name")
-        pwd = self.config.user_options.value("wp.admin.pwd")
+        user = C("wp.admin.name")
+        pwd = C("wp.admin.pwd")
 
         return self.login(user, pwd)
 ```
@@ -301,23 +303,24 @@ class LeftNav(WPBaseWidget):
  ```python
  # arjuna-samples/arjex_app_page_widget/lib/gom/pages/sections/topnav.py
  
+from arjuna import *
 from enum import Enum, auto
-from .base import WPBaseWidget
+from .base import WPBaseSection
 
-class TopNav(WPBaseWidget):
+class TopNav(WPBaseSection):
 
     class labels(Enum):
         logout_confirm = auto()
         logout_msg = auto()
 
     def logout(self):
-        url = self.config.user_options.value("wp.logout.url")
+        url = C("wp.logout.url")
         self.go_to_url(url)
 
         self.element(self.labels.logout_confirm).click()
         self.element(self.labels.logout_msg).wait_until_visible()
 
-        from arjex_app_page_widget.lib.gom.pages.home import Home
+        from arjex_app_page_section.lib.gom.pages.home import Home
         return Home(self)
 ```
 
