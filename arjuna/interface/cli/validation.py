@@ -68,7 +68,7 @@ def project_dir(input):
 
 def lname_check(context, input):
     if not re.match(VNREGEX, input):
-        print('Invalid {} name provided.'.format(context), file=sys.stderr)
+        print('Invalid {} name {} provided.'.format(context, input), file=sys.stderr)
         print(VNREGEX_TEXT.format(context), file=sys.stderr)
         print('Exiting...', file=sys.stderr)
         sys.exit(1)

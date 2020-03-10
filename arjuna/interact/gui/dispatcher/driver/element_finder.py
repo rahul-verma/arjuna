@@ -35,6 +35,8 @@ class ElementFinder:
     
     @classmethod
     def find_element(cls, container, byType, byValue):
+        from arjuna import Arjuna
+        Arjuna.get_logger().debug(f"Finding element in container:{container} with wtype:{byType} and wvalue:{byValue}")
         try:
             return container.find_element(cls.BY_MAP[byType.upper()], byValue)
         except Exception as e:

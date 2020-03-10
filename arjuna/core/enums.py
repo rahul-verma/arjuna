@@ -87,6 +87,7 @@ class ArjunaOption(Enum):
     GUIAUTO_MAX_WAIT = auto()
     GUIAUTO_SLOMO_ON = auto()
     GUIAUTO_SLOMO_INTERVAL = auto()
+    GUIAUTO_WITHX_YAML = auto()
 
     MOBILE_OS_NAME = auto()
     MOBILE_OS_VERSION = auto()
@@ -202,10 +203,6 @@ class MobileOsName(Enum):
 class BrowserName(Enum):
     CHROME = auto()
     FIREFOX = auto()
-    SAFARI = auto()
-    IE = auto()
-    OPERA = auto()
-    HTML = auto()
 
 class AppiumAndroidBrowserName(Enum):
     BROWSER = auto()

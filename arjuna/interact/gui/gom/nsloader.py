@@ -26,6 +26,7 @@ from abc import abstractmethod
 from arjuna.core.enums import GuiAutomationContext
 from arjuna.core.exceptions import GuiLabelNotPresentError
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData, Locator, ImplWith
+from arjuna.core.yaml import YamlFile
 
 class FileFormat(Enum):
     # GNS = auto()
@@ -147,7 +148,6 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
             super()._raise_notafile_exception(ns_file_path)
 
         self.__ns_path = ns_file_path
-        self.__ns_file = open(self.__ns_path, "r")
         self.__contexts = [context]
 
         self.__withx = None
@@ -155,58 +155,77 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         # self.__process()
 
     def load(self):
-
+        
+        from arjuna import Arjuna
         from arjuna.configure.impl.validator import ConfigValidator
-        import yaml
+        yaml = YamlFile(self.__ns_path)
 
-        ydict = yaml.load(self.__ns_file, Loader=yaml.SafeLoader)
+        if yaml.is_empty(): return
 
-        if not ydict: return
-
-        sections = list(ydict.keys())
-        lsections = [k.lower() for k in sections]
-
-        if "labels" not in lsections:
+        if not yaml.has_section("labels"):
             # print("No labels configured. Skipping...")
             return
 
-        if "withx" in lsections:
-            self.__withx = {k.lower():v for k,v in ydict[sections[lsections.index("withx")]].items()}
+        if yaml.has_section("withx"):
+            self.__withx = yaml.get_section("withx").as_map()
         else: 
             self.__withx = dict()
 
-        for label, label_map in ydict[sections[lsections.index("labels")]].items():
+        common_withx = Arjuna.get_withx_ref().as_map()
+
+        for label, label_map in yaml.get_section("labels").as_map().items():
             ConfigValidator.arjuna_name(label)
             self.__ns[label.lower()] = dict()
             self.__ns[label.lower()][self.__context] = []
             for loc, loc_obj in label_map.items():
-                if loc.lower() in self.__withx:
-                    if type(loc_obj) is str:
-                        loc_obj = [loc_obj]
-                    fmt = self.__withx[loc.lower()]
-                    fmt_wtype =  fmt["with_type"].strip().upper()
-                    fmt_value = fmt["with_value"].strip()
-                    with_value = fmt_value.format(*loc_obj)
-                    iloc = ImplWith(wtype=fmt_wtype.upper(), wvalue=with_value, named_args=dict(), has_content_locator=False)
-                    self.__ns[label.lower()][self.__context].append(iloc)
-                else:
+                loc = loc.lower()
+                if loc not in self.__withx and loc not in common_withx:
                     iloc = ImplWith(wtype=loc.upper(), wvalue=loc_obj, named_args=dict(), has_content_locator=False)
                     self.__ns[label.lower()][self.__context].append(iloc)
+                else:
+                    fmt = None
+                    if loc.lower() in self.__withx:
+                        fmt = self.__withx[loc.lower()]
+                    else:
+                        fmt = common_withx[loc.lower()]
+
+                    vargs = None
+                    kwargs = None
+                    if type(loc_obj) is str:
+                        vargs = [loc_obj]
+                        kwargs = dict()
+                    elif type(loc_obj) in {list, tuple}:
+                        vargs = loc_obj
+                        kwargs = dict()
+                    elif type(loc_obj) is dict:
+                        vargs = []
+                        kwargs = loc_obj
+                    fmt_wtype =  fmt["wtype"].strip().upper()
+                    fmt_value = fmt["value"].strip()
+                    try:
+                        with_value = fmt_value.format(*vargs, **kwargs)
+                    except Exception as e:
+                        from arjuna import Arjuna
+                        Arjuna.get_logger().error(f"Error in processing withx {loc}'s value {fmt_value} for vargs {vargs} and kwargs {kwargs}")
+                        raise
+                    iloc = ImplWith(wtype=fmt_wtype.upper(), wvalue=with_value, named_args=dict(), has_content_locator=False)
+                    self.__ns[label.lower()][self.__context].append(iloc)
+
             if not self.__ns[label.lower()][self.__context]:
                 raise Exception("No locators defined for label: {}".format(label))
 
-        if "load" in lsections:
-            self.__load_targets = {k.lower():v for k,v in ydict[sections[lsections.index("load")]].items()}        
+        if yaml.has_section("load"):
+            self.__load_targets = yaml.get_section("load")
 
-            if "root" in self.__load_targets:
+            if self.__load_targets.has_section("root"):
                 self.__ns["__root__"] = dict()
                 self.__ns["__root__"][self.__context] = list()
-                self.__ns["__root__"][self.__context].extend(self.__ns[self.__load_targets["root"]][self.__context])
+                self.__ns["__root__"][self.__context].extend(self.__ns[self.__load_targets.get_section("root").as_map()][self.__context])
 
-            if "anchor" in self.__load_targets:
+            if self.__load_targets.has_section("anchor"):
                 self.__ns["__anchor__"] = dict()
                 self.__ns["__anchor__"][self.__context] = list()
-                self.__ns["__anchor__"][self.__context].extend(self.__ns[self.__load_targets["anchor"]][self.__context])
+                self.__ns["__anchor__"][self.__context].extend(self.__ns[self.__load_targets.get_section("anchor").as_map()][self.__context])
 
         for ename, context_data in self.__ns.items():
             for context, locators in context_data.items():

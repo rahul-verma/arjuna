@@ -100,11 +100,6 @@ class Config:
             BrowserName.FIREFOX: {
                 ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.gecko.driver",
                 ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("geckodriver")
-            },
-
-            BrowserName.SAFARI: {
-                ArjunaOption.SELENIUM_DRIVER_PROP : "webdriver.safari.driver",
-                ArjunaOption.SELENIUM_DRIVER_PATH : self.__get_driver_path("safaridriver")
             }
         }
 

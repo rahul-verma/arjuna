@@ -1,0 +1,3 @@
+nav_link4:
+  wtype: xpath
+  value: "//li[contains(*//text(), '{lname}')]"

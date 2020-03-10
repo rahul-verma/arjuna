@@ -142,6 +142,8 @@ class CreateProject(Command):
         (FileObjectType.DIR, "guiauto/driver/mac"),
         (FileObjectType.DIR, "guiauto/driver/windows"),
         (FileObjectType.DIR, "guiauto/namespace"),
+        (FileObjectType.DIR, "guiauto/withx"),
+        (FileObjectType.DIR, "guiauto/withx/withx.yaml"),
         (FileObjectType.DIR, "report"),
         (FileObjectType.DIR, "script"),
         (FileObjectType.DIR, "test"),

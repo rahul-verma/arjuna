@@ -1,0 +1,35 @@
+
+withx:
+  nav_link1:
+    wtype: xpath
+    value: "//li[contains(*//text(), '{}')]"
+
+  nav_link2:
+    wtype: xpath
+    value: "//{}[contains(*//text(), '{}')]"
+
+  nav_link3:
+    wtype: xpath
+    value: "//li[contains(*//text(), '{lname}')]"
+
+labels:
+
+  settings:
+    link: Settings
+
+  posts:
+    nav_link1: Posts
+
+  media:
+    nav_link2:
+      - li
+      - Media
+
+  pages:
+    nav_link3: 
+      lname: Pages
+
+  comments:
+    nav_link4: 
+      lname: Comments
+

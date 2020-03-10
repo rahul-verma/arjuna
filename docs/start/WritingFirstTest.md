@@ -14,6 +14,8 @@ Selenium WebDriver is the underlying browser automation engine in Arjuna. It nee
 
 Arjuna automatically downloads drivers as per the browser version installed on your system. This feature can be switched off, but that's for a later discussion.
 
+Arjuna supports only **Chrome** and **Firefox** as the browsers.
+
 ```python
 # arjuna-samples/arjex_start/test/module/check_01_simple_test.py
 

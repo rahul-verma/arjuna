@@ -106,7 +106,15 @@ class ArjunaSingleton:
         from arjuna.engine.data.localizer import Localizer
         self.__localizer = Localizer.load_all(self.__ref_config)
 
+        from arjuna.core.yaml import YamlFile
+        fpath = self.ref_config.value(ArjunaOption.GUIAUTO_WITHX_YAML)
+        self.__common_withx_ref = YamlFile(fpath)
+
         return self.ref_config
+
+    @property
+    def get_withx_ref(self):
+        return self.__common_withx_ref
 
     @property
     def data_references(self):
@@ -421,6 +429,10 @@ class Arjuna:
     @classmethod
     def get_data_store(cls):
         return cls.ARJUNA_SINGLETON.data_store
+
+    @classmethod
+    def get_withx_ref(cls):
+        return cls.ARJUNA_SINGLETON.get_withx_ref
 
     @staticmethod
     def exit():

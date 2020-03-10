@@ -6,6 +6,10 @@ Following is the list of critical additions and updates for a given released ver
 - You can now use an existing Driver service URL. ArjunaOption.SELENIUM_SERVICE_URL is used for the purpose. Works with docker-selenium. /wd/hub is appended automatically to the URL.
 - Arjuna automatically downloads driver for Chrome/Firefox using webdriver_manager package. Added setup.py dependency. Set to True by default. Can be controlled using ArjunaOption.SELENIUM_DRIVER_DOWNLOAD option.
 - Browser headless mode can be controlled with ArjunaOption.BROWSER_HEADLESS option. False by default.
+- BrowserName enum has been changed to contain only Chrome and Firefox as these are the current supported browsers.
+- withx in GNS files supports string, list and dictionary entries in YAML and maps them to vargs and kwargs in formatting the value of withx entry referred by a label.
+- Separated current Yaml parsing as Yaml and YamlFile classes in arjuna.core.yaml module.
+- Provision to add Withx identifiers which can be referred to from any GNS file. These are included in the `<Project Root>/guiauto/withx/withx.yaml` file.
 
 0.9.7
 -----
