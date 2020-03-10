@@ -3,7 +3,7 @@ Following is the list of critical additions and updates for a given released ver
 0.9.8
 -----
 - Firefox driver uses Service object as per Selenium 4. Chrome was updated to use Service earlier.
-- Support for using an existing Driver service URL. Works with docker-selenium. /wd/hub is appended automatically to the URL.
+- Support for using an existing Driver service URL. ArjunaOption.SELENIUM_SERVICE_URL is used for the purpose. Works with docker-selenium. /wd/hub is appended automatically to the URL.
 
 0.9.7
 -----

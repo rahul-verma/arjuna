@@ -3,13 +3,21 @@
 A fixed project structure to be followed for an Arjuna test project. This brings consitency across mutliple test automation implementations within and outside your organization.
 
 Following are critical project directories, sub-directories and files. *Arjuna could be creating other directories corresponding to some in-progress or experimental features. They are not listed here.*
+
+Please also note that some of these directories are mandatory as a part of Arjuna test project structure. When you create project using `create-project` command from Arjuna CLI, Arjuna places `placeholder.txt` files so that when you check-in your code in a code repository, empty directories are not ignored during check-in. It is advised to retain them, until you make use of them by placing files in them as per your project needs.
+
 - **config**: Contains configuration files.
-  - **project.conf**: Your projects' configuration file containing project-level configuration settings.
+  - **project.conf**: Your project's configuration file containing project-level configuration settings.
+  - **env**: This directory can contain any number of conf files that correspond to options for run-environments.
+  - If you place any `.conf` files directly in this directory or in a sub-directory herein, they can be found by Arjuna using the name or relative path.
 - **data**: Contains files that act as data sources and data references (WIP).
     - **source**: Data source files go here.
     - **reference**: Data reference files go here.
         - **column**: Excel Column Data References for auto-loading
         - **row**: Excel Row Data References for auto-loading
+- **l10n**: Contains localizaation files
+    - **excel**: Excel based localization files go here.
+    - **json**: Json based localization directories and files go here.
 - **guiauto**: Contains GUI automation related files.
   - **driver**: Selenium driver executables go here in respective OS folders (Prone to change in future versions of Arjuna).
   - **namespace**: GNS (Gui Namespace) files go here.
