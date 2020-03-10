@@ -27,7 +27,7 @@ from pprint import pprint
 from arjuna.core.reader.hocon import HoconFileReader, HoconStringReader, HoconConfigDictReader
 
 from arjuna.core.enums import ArjunaOption
-from .validator import ConfigValidator
+from .validator import Validator
 from .config import Config, ArjunaConfig, UserConfig
 
 class ConfigCreator:
@@ -145,7 +145,7 @@ class BaseConfigProcessor:
 
     def get_setu_option_validator(self, conf_name):
         validator_name = ConfigCreator.SETU_CONF_DESC_MAP[conf_name]
-        return validator_name, getattr(ConfigValidator, validator_name.lower())
+        return validator_name, getattr(Validator, validator_name.lower())
 
     def get_user_option_validator(self, conf_name):
         return "pass_through", self.pass_through

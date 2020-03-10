@@ -25,7 +25,7 @@ from urllib3.util import parse_url
 from arjuna.core.enums import *
 from arjuna.core.types.constants import *
 
-class ConfigValidator:
+class Validator:
     VNREGEX = r'^([a-zA-Z][a-zA-Z_0-9]{2,50})$'
     VNREGEX_TEXT = '''
     An Arjuna name must be a string of length 3-50 starting with a letter, followed by letters, digits or _ (underscore).

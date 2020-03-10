@@ -5,7 +5,6 @@ from arjuna.core.adv.types import CIStringDict
 class Yaml:
 
     def __init__(self, ydict):
-        print(ydict)
         self.__ydict = ydict
         self.__sections = tuple(self.__ydict.keys())
         self.__ydict = CIStringDict(self.__ydict)

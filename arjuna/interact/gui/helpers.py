@@ -203,7 +203,20 @@ class WithType(Enum):
     ELEMENT = auto()
     LABEL = auto()
 
-class With:
+class _WithXMetaClass(type):
+
+    def __getattr__(cls, mname):
+        from arjuna import Arjuna
+        withx_ref = Arjuna.get_withx_ref()
+        if not withx_ref.has_locator(mname):
+            raise Exception("There is no built-in or extended locator available as With.{}".format(mname))
+
+        def withx(*vargs, **kwargs):
+            wtype, wvalue = withx_ref.format_args(mname, *vargs, **kwargs)
+            return getattr(With, wtype.lower())(wvalue)
+        return withx
+
+class With(metaclass=_WithXMetaClass):
 
     def __init__(self, with_type, with_value):
         '''
@@ -400,3 +413,4 @@ class With:
     @classmethod
     def label(cls, name):
         return With(WithType.LABEL, name)
+

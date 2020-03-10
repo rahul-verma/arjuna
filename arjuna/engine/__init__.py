@@ -107,8 +107,9 @@ class ArjunaSingleton:
         self.__localizer = Localizer.load_all(self.__ref_config)
 
         from arjuna.core.yaml import YamlFile
+        from arjuna.interact.gui.auto.finder.withx import WithX
         fpath = self.ref_config.value(ArjunaOption.GUIAUTO_WITHX_YAML)
-        self.__common_withx_ref = YamlFile(fpath)
+        self.__common_withx_ref = WithX(YamlFile(fpath).as_map())
 
         return self.ref_config
 

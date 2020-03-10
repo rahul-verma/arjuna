@@ -157,7 +157,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
     def load(self):
         
         from arjuna import Arjuna
-        from arjuna.configure.impl.validator import ConfigValidator
+        from arjuna.configure.impl.validator import Validator
         yaml = YamlFile(self.__ns_path)
 
         if yaml.is_empty(): return
@@ -166,50 +166,34 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
             # print("No labels configured. Skipping...")
             return
 
+        from arjuna.interact.gui.auto.finder.withx import WithX
         if yaml.has_section("withx"):
-            self.__withx = yaml.get_section("withx").as_map()
+            self.__withx = WithX(yaml.get_section("withx").as_map())
         else: 
-            self.__withx = dict()
+            self.__withx = WithX()
 
-        common_withx = Arjuna.get_withx_ref().as_map()
+        common_withx = Arjuna.get_withx_ref()
 
         for label, label_map in yaml.get_section("labels").as_map().items():
-            ConfigValidator.arjuna_name(label)
+            Validator.arjuna_name(label)
             self.__ns[label.lower()] = dict()
             self.__ns[label.lower()][self.__context] = []
             for loc, loc_obj in label_map.items():
                 loc = loc.lower()
-                if loc not in self.__withx and loc not in common_withx:
-                    iloc = ImplWith(wtype=loc.upper(), wvalue=loc_obj, named_args=dict(), has_content_locator=False)
-                    self.__ns[label.lower()][self.__context].append(iloc)
+                wtype, wvalue = None, None
+                if not self.__withx.has_locator(loc) and not common_withx.has_locator(loc):
+                    wtype, wvalue = loc.upper(), loc_obj
                 else:
-                    fmt = None
-                    if loc.lower() in self.__withx:
-                        fmt = self.__withx[loc.lower()]
+                    if self.__withx.has_locator(loc):
+                        wx = self.__withx
+                    elif common_withx.has_locator(loc):
+                        wx = common_withx
                     else:
-                        fmt = common_withx[loc.lower()]
+                        raise Exception("No WithX locator with name {} found. Check GNS file at {}.".format(name, self.__ns_path))
+                    wtype, wvalue = wx.format(loc, loc_obj)
 
-                    vargs = None
-                    kwargs = None
-                    if type(loc_obj) is str:
-                        vargs = [loc_obj]
-                        kwargs = dict()
-                    elif type(loc_obj) in {list, tuple}:
-                        vargs = loc_obj
-                        kwargs = dict()
-                    elif type(loc_obj) is dict:
-                        vargs = []
-                        kwargs = loc_obj
-                    fmt_wtype =  fmt["wtype"].strip().upper()
-                    fmt_value = fmt["value"].strip()
-                    try:
-                        with_value = fmt_value.format(*vargs, **kwargs)
-                    except Exception as e:
-                        from arjuna import Arjuna
-                        Arjuna.get_logger().error(f"Error in processing withx {loc}'s value {fmt_value} for vargs {vargs} and kwargs {kwargs}")
-                        raise
-                    iloc = ImplWith(wtype=fmt_wtype.upper(), wvalue=with_value, named_args=dict(), has_content_locator=False)
-                    self.__ns[label.lower()][self.__context].append(iloc)
+                iloc = ImplWith(wtype=wtype, wvalue=wvalue, named_args=dict(), has_content_locator=False)
+                self.__ns[label.lower()][self.__context].append(iloc)
 
             if not self.__ns[label.lower()][self.__context]:
                 raise Exception("No locators defined for label: {}".format(label))
@@ -230,218 +214,3 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         for ename, context_data in self.__ns.items():
             for context, locators in context_data.items():
                 self.add_element_meta_data(ename, context, locators)
-
-'''
-
-class AbstractGNFileLoader(BaseGuiNamespaceLoader):
-    NAME_PATTERN = re.compile(r"\[\s*(.*?)\s*\]$")
-    LOCATOR_PATTERN = re.compile(r"\s*(.*?)\s*=\s*(.*?)\s*$")
-
-    def __init__(self, ns_file_path):
-        super().__init__(os.path.basename(ns_file_path))
-        self.__ns_file = None
-        self.__ns_path = None
-        self.__header_found = False
-        self.__last_header = None
-        self.__last_auto_contexts = None # list of auto contexts
-        self.__withx = dict()
-
-        #Map<String, Map<GuiAutomationContext,List<Locator>>>
-        self.__ns = {}
-
-        if not os.path.isabs(ns_file_path):
-            super()._raise_relativepath_exception(ns_file_path)
-        elif not os.path.exists(ns_file_path):
-            super()._raise_filenotfound_exception(ns_file_path)
-        elif not os.path.isfile(ns_file_path):
-            super()._raise_notafile_exception(ns_file_path)
-
-        self.__ns_path = ns_file_path
-        self.__ns_file = open(self.__ns_path)
-
-    @property
-    def header_found(self):
-        return self.__header_found
-
-    @header_found.setter
-    def header_found(self, flag):
-        self.__header_found = flag
-
-    @property
-    def last_header(self):
-        return self.__last_header
-
-    @last_header.setter
-    def last_header(self, name):
-        self.__last_header = name
-
-    @property
-    def last_auto_contexts(self):
-        return self.__last_auto_contexts
-
-    @last_auto_contexts.setter
-    def last_auto_contexts(self, contexts):
-        self.__last_auto_contexts = contexts
-
-    @property
-    def ns_path(self):
-        return self.__ns_path
-
-    @property
-    def ns_file(self):
-        return self.__ns_file
-
-    def load(self):
-        for line in self.__ns_file.readlines():
-            line = line.strip()
-            if not line: 
-                continue
-            if self._match_header(line):
-                self.header_found = True
-                self._init_section()
-                continue
-            else:
-                if not self.header_found:
-                    raise Exception("Namespace contents must be contained inside a [name] header.")
-                else:
-                    self._load_section_line(line)
-        
-        self.__ns_file.close()
-
-        for ename, context_data in self.__ns.items():
-            for context, locators in context_data.items():
-                self.add_element_meta_data(ename, context, locators)
-
-    def __is_defined(self, name):
-        return name.lower() in self.__ns
-
-    def __is_not_first_header(self):
-        return self.last_header is not None
-
-    def __validate_duplicate_entry(self, last_name, new_name):
-        if (last_name.lower() == new_name.lower()) or self.__is_defined(new_name):
-            raise Exception("Found duplicate namespace definition for {} element.".format(new_name))
-
-    def __validate_empty_last_section(self, name):
-        if len(self.__ns[name]) == 0:
-            raise Exception("Found empty namespace definition for {} element.".format(name))
-        else:
-            for context, data in self.__ns[name].items():
-                if len(data) == 0:
-                    raise Exception("Found empty namespace definition for {} context for {} element.".format(context.name, name))
-
-
-    def _match_header(self, input):
-        match = self.NAME_PATTERN.match(input)
-        if match:
-            current_header = match.group(1)
-
-            if self.__is_not_first_header():
-                self.__validate_duplicate_entry(self.last_header, current_header)
-                self.__validate_empty_last_section(self.last_header)
-            
-            # Initialise for new section found
-            self.last_header = current_header
-            self.last_auto_contexts = None
-            if self.last_header.lower() not in {"__root__", "__state__"}:
-                from arjuna.configure.impl.validator import ConfigValidator
-                ConfigValidator.arjuna_name(self.last_header)
-            self.__ns[self.last_header] = {}
-            return True
-        else:
-            return False
-
-    def _init_contexts_dict(self, name, contexts):
-        for context in contexts:
-            if context in self.__ns[name]:
-                raise Exception("Found duplicate automation context {} in {} namespace definition.".format(context.name, self.last_header))
-            else:
-                self.__ns[name][context] = []
-
-    @abstractmethod
-    def _match_contexts(self, input):
-        pass
-
-    @abstractmethod
-    def _load_section_line(self, input):
-        pass
-
-    @abstractmethod
-    def _init_section(self):
-        pass
-
-    def _match_locator(self, input):
-        match = self.LOCATOR_PATTERN.match(input)
-        if match:       
-            # locator = Locator(match.group(1), match.group(2), named_args=dict())
-            locator = ImplWith(wtype=match.group(1).upper(), wvalue=match.group(2), named_args=dict(), has_content_locator=False)
-            # locator = getattr(With, match.group(1).lower())(match.group(2)) # e.g. getattr(With, "ID".lower())("abc")
-            if (self.last_auto_contexts is None):
-                raise Exception("Locators must be preceded with context information as #context1, context2 construct. Current line: " + input)   
-
-            for context in self.last_auto_contexts:
-                self.__ns[self.last_header][context].append(locator)
-            return True
-        else:
-            return False
-
-class GNSFileLoader(AbstractGNFileLoader):
-
-    def __init__(self, ns_file_path, context):
-        super().__init__(ns_file_path)
-        self.__contexts = [context]
-
-    @property
-    def contexts(self):
-        return self.__contexts
-
-    def _init_section(self):
-        self.last_auto_contexts = self.__contexts
-        self._init_contexts_dict(self.last_header, self.contexts)
-
-    def _match_contexts(self, input):
-        pass
-
-    def _load_section_line(self, line):
-        if self._match_locator(line):
-            return
-        else:
-            raise Exception("Unexpected namespace file entry. Namspace content can either be plaforms or identification definition: " + line)
-
-
-class MGNSFileLoader(AbstractGNFileLoader):
-    PLATFORM_PATTERN = re.compile(r"\s*\#\s*(.*?)\s*$")
-
-    def __init__(self, ns_file_path):
-        super().__init__(ns_file_path)
-
-    def _init_section(self):
-        pass
-
-    def _match_contexts(self, input):
-        match = self.PLATFORM_PATTERN.match(input)
-        if match:        
-            try:
-                raw_contexts = [m.strip().upper() for m in match.group(1).split(",")]
-                contexts = [GuiAutomationContext[n] for n in raw_contexts]
-            except Exception as e:
-                raise Exception("Invalid context name found in header: {}".format(e))
-            else:
-                self._init_contexts_dict(self.last_header, contexts)
-            
-            self.last_auto_contexts = contexts
-            return True
-        else:
-            return False
-
-    def _load_section_line(self, line):
-        if self._match_contexts(line):
-            return
-        elif self._match_locator(line):
-            return
-        else:
-            raise Exception("Unexpected namespace file entry. Namspace content can either be plaforms or identification definition: " + line)
-
-
-# Temp hook. We'll try YAML format with this. Once it works, then we can change the rest.
-'''
