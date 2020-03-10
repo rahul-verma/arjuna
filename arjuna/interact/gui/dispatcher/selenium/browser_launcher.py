@@ -68,6 +68,9 @@ class BrowserLauncher:
         if cls.are_browser_prefs_set(config):
             options.add_experimental_option("prefs", config["browserPreferences"])
 
+        if config["arjunaOptions"]["BROWSER_HEADLESS"]:
+            options.add_argument("--headless")
+
         if cls.are_browser_args_set(config):
             for arg in config["browserArgs"]:
                 options.add_argument(arg)
@@ -109,11 +112,12 @@ class BrowserLauncher:
             for pref, value in config["browserPreferences"].items():
                 options.set_preference(pref, value)
 
+        if config["arjunaOptions"]["BROWSER_HEADLESS"]:
+            options.add_argument("-headless")
+
         if cls.are_browser_args_set(config):
             for arg in config["browserArgs"]:
                 options.add_argument(arg)
-
-
 
         from selenium import webdriver
         return webdriver.Remote(svc_url, browser_profile=profile, options=options)

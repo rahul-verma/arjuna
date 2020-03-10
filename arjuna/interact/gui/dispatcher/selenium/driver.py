@@ -43,17 +43,26 @@ class SeleniumDriverDispatcher:
         from .browser_launcher import BrowserLauncher
 
         svc_url = config["arjunaOptions"]["SELENIUM_SERVICE_URL"]
+        driver_download = config["arjunaOptions"]["SELENIUM_DRIVER_DOWNLOAD"]
+        browser_name = config["arjunaOptions"]["BROWSER_NAME"]
+        driver_path = config["arjunaOptions"]["SELENIUM_DRIVER_PATH"]
         if svc_url.lower() == "not_set":
             from arjuna.core.enums import BrowserName
             driver_service = None
-            if config["arjunaOptions"]["BROWSER_NAME"] == BrowserName.CHROME:
+            driver_downloader = None
+            if browser_name == BrowserName.CHROME:
                 from selenium.webdriver.chrome.service import Service
                 driver_service = Service
-            elif config["arjunaOptions"]["BROWSER_NAME"] == BrowserName.FIREFOX:
+                from webdriver_manager.chrome import ChromeDriverManager
+                driver_downloader = ChromeDriverManager
+            elif browser_name == BrowserName.FIREFOX:
                 from selenium.webdriver.firefox.service import Service
                 driver_service = Service
-
-            self.__driver_service = Service(config["arjunaOptions"]["SELENIUM_DRIVER_PATH"])
+                from webdriver_manager.firefox import GeckoDriverManager
+                driver_downloader = GeckoDriverManager
+            if driver_download:
+                driver_path = driver_downloader().install()
+            self.__driver_service = Service(driver_path)
             self.__driver_service.start()
             svc_url = self.__driver_service.service_url
         else:

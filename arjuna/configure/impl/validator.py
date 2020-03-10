@@ -40,17 +40,17 @@ class ConfigValidator:
 
     @classmethod
     def str(cls, input):
-        if type(input) is not str:
+        if type(input) not in {str, int, float, bool}:
             cls.raise_exc(input)
-        return input
+        return str(input)
 
     @classmethod
     def bool(cls, input):
         if type(input) is not bool:
             if type(input) is str:
-                if input in TRUES:
+                if input.lower() in TRUES:
                     return True
-                elif input in FALSES:
+                elif input.lower() in FALSES:
                     return False
                 else:
                     cls.raise_exc(input)

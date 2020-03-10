@@ -67,6 +67,7 @@ class ArjunaOption(Enum):
     SETU_GUIAUTO_ACTOR_URL = auto()
 
     BROWSER_NAME = auto()
+    BROWSER_HEADLESS = auto()
     BROWSER_VERSION = auto()
     BROWSER_MAXIMIZE = auto()
     BROWSER_DIM_HEIGHT = auto()
@@ -96,6 +97,7 @@ class ArjunaOption(Enum):
     SELENIUM_DRIVER_PROP = auto()
     SELENIUM_DRIVERS_DIR = auto()
     SELENIUM_DRIVER_PATH = auto()
+    SELENIUM_DRIVER_DOWNLOAD = auto()
     SELENIUM_SERVICE_URL = auto()
 
     APPIUM_SERVICE_URL = auto()

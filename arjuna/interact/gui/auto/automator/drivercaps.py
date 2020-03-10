@@ -27,6 +27,7 @@ class SetuActorDriverConfigOption(Enum):
 
     # Browser (Common)
     BROWSER_NAME = auto()
+    BROWSER_HEADLESS = auto()
     BROWSER_BIN_PATH = auto()
     BROWSER_PROXY_ON = auto()
     BROWSER_PROXY_HOST = auto()
@@ -36,6 +37,7 @@ class SetuActorDriverConfigOption(Enum):
     # Selenium
     SELENIUM_DRIVER_PROP = auto()
     SELENIUM_DRIVER_PATH = auto()
+    SELENIUM_DRIVER_DOWNLOAD = auto()
     SELENIUM_SERVICE_URL = auto()
 
     # Appium
