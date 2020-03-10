@@ -205,14 +205,13 @@ class CreateProject(Command):
             for d in [ "config/env", "data/source", "l10n/excel", "data/reference/excel_row", "data/reference/excel_column", "guiauto/namespace"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:
-                copy_file("../../res/placeholder.txt", "guiauto/driver/{}/driver.txt".format(os_name))
+                copy_file("../../res/placeholder.txt", "guiauto/driver/{}/placeholder.txt".format(os_name))
             for f in os.listdir(project_temp_dir):
                 try:
                     shutil.move(os.path.join(project_temp_dir, f), pdir)
                 except Exception as e:
                     print(e)
                     pass
-                
 
         print("Project {} successfully created at {}.".format(project_name, parent_dir))
 

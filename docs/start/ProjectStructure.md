@@ -19,7 +19,7 @@ Please also note that some of these directories are mandatory as a part of Arjun
     - **excel**: Excel based localization files go here.
     - **json**: Json based localization directories and files go here.
 - **guiauto**: Contains GUI automation related files.
-  - **driver**: Selenium driver executables go here in respective OS folders (Prone to change in future versions of Arjuna).
+  - **driver**: Arjuna automatically downloads drivers. In case you switch this off in a configuration, Arjuna picks Selenium driver executables from this directory in respective OS folders.
   - **namespace**: GNS (Gui Namespace) files go here.
  - **report**: Reports are generated here. Each test run is associated with a run-id.
     - **Timestamp-RunID**: Root directory of report for a given run. If `--static-rid` is provided then the directory is named as the run id that you provide with `-rid` CLI option or as the default run id which is `mrun`.

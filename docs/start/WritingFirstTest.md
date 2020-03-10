@@ -10,7 +10,9 @@ For exploring Arjuna fundamentals, we will consider a very basic web UI test aut
 
 #### Pre-requisites
 
-Place Selenium **Chromedriver** and **Geckodriver** excutables in the [drivers directory for your OS](ProjectStructure.md).
+Selenium WebDriver is the underlying browser automation engine in Arjuna. It needs driver executable for a given browser to be found. 
+
+Arjuna automatically downloads drivers as per the browser version installed on your system. This feature can be switched off, but that's for a later discussion.
 
 ```python
 # arjuna-samples/arjex_start/test/module/check_01_simple_test.py
