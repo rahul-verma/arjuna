@@ -36,9 +36,10 @@ class SetuActorDriverConfigOption(Enum):
     # Selenium
     SELENIUM_DRIVER_PROP = auto()
     SELENIUM_DRIVER_PATH = auto()
+    SELENIUM_SERVICE_URL = auto()
 
     # Appium
-    APPIUM_HUB_URL = auto()
+    APPIUM_SERVICE_URL = auto()
     APPIUM_AUTO_LAUNCH = auto()
 
 class DriverCapabilities:

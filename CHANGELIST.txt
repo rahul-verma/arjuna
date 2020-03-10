@@ -1,8 +1,12 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.8
+-----
+- Firefox driver uses Service object as per Selenium 4. Chrome was updated to use Service earlier.
+- Support for using an existing Driver service URL. Works with docker-selenium. /wd/hub is appended automatically to the URL.
+
 0.9.7
 -----
-
 Minor update. All l10 references are changed to l10n.
 
 0.9.6

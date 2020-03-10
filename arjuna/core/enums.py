@@ -96,12 +96,12 @@ class ArjunaOption(Enum):
     SELENIUM_DRIVER_PROP = auto()
     SELENIUM_DRIVERS_DIR = auto()
     SELENIUM_DRIVER_PATH = auto()
+    SELENIUM_SERVICE_URL = auto()
 
-    APPIUM_HUB_URL = auto()
+    APPIUM_SERVICE_URL = auto()
     APPIUM_AUTO_LAUNCH = auto()
 
     IMG_COMP_MIN_SCORE = auto()
-
 
 class Key(Enum):
 	NULL = auto()

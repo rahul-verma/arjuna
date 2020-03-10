@@ -29,7 +29,7 @@ class SeleniumDriverDispatcher:
     def __init__(self):
         self.__config = None
         self.__driver = None
-        self.__chrome_service = None
+        self.__driver_service = None
 
     def __create_gui_element_dispatcher(self, element):
         return SeleniumDriverElementDispatcher.create_dispatcher(self, element)
@@ -42,19 +42,29 @@ class SeleniumDriverDispatcher:
         self.__config = config
         from .browser_launcher import BrowserLauncher
 
-        svc_url = None
-        from arjuna.core.enums import BrowserName
-        if config["arjunaOptions"]["BROWSER_NAME"] == BrowserName.CHROME:
-            from selenium.webdriver.chrome import service
-            self.__chrome_service = service.Service(config["arjunaOptions"]["SELENIUM_DRIVER_PATH"])
-            self.__chrome_service.start()
-            svc_url = self.__chrome_service.service_url
-        self.__driver = BrowserLauncher.launch(config, chrome_service_url=svc_url) 
+        svc_url = config["arjunaOptions"]["SELENIUM_SERVICE_URL"]
+        if svc_url.lower() == "not_set":
+            from arjuna.core.enums import BrowserName
+            driver_service = None
+            if config["arjunaOptions"]["BROWSER_NAME"] == BrowserName.CHROME:
+                from selenium.webdriver.chrome.service import Service
+                driver_service = Service
+            elif config["arjunaOptions"]["BROWSER_NAME"] == BrowserName.FIREFOX:
+                from selenium.webdriver.firefox.service import Service
+                driver_service = Service
+
+            self.__driver_service = Service(config["arjunaOptions"]["SELENIUM_DRIVER_PATH"])
+            self.__driver_service.start()
+            svc_url = self.__driver_service.service_url
+        else:
+            if not svc_url.lower().endswith("/wd/hub"):
+                svc_url += "/wd/hub"
+        self.__driver = BrowserLauncher.launch(config, svc_url=svc_url) 
 
     def quit(self):
         DriverCommands.quit(self.__driver)
-        if self.__chrome_service:
-            self.__chrome_service.stop()
+        if self.__driver_service:
+            self.__driver_service.stop()
 
     def go_to_url(self, url):
         DriverCommands.go_to_url(self.__driver, url)
