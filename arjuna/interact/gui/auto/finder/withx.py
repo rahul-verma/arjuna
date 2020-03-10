@@ -16,7 +16,7 @@ class WithX:
     def has_locator(self, name):
         return name in self.__xdict
 
-    def format_args(self, name, *vargs, **kwargs):
+    def format_args(self, name, vargs, kwargs):
         if not self.has_locator(name):
             raise Exception("No WithX locator with name {} found.".format(name))
         fmt = self.__xdict[name]
@@ -39,7 +39,7 @@ class WithX:
         elif type(loc_obj) is dict:
             vargs = []
             kwargs = loc_obj
-        return self.format_args(name, *vargs, **kwargs)
+        return self.format_args(name, vargs, kwargs)
         
 
     

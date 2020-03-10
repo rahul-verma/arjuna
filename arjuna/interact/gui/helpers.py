@@ -212,7 +212,7 @@ class _WithXMetaClass(type):
             raise Exception("There is no built-in or extended locator available as With.{}".format(mname))
 
         def withx(*vargs, **kwargs):
-            wtype, wvalue = withx_ref.format_args(mname, *vargs, **kwargs)
+            wtype, wvalue = withx_ref.format_args(mname, vargs, kwargs)
             return getattr(With, wtype.lower())(wvalue)
         return withx
 

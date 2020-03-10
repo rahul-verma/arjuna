@@ -199,17 +199,17 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                 raise Exception("No locators defined for label: {}".format(label))
 
         if yaml.has_section("load"):
-            self.__load_targets = yaml.get_section("load")
+            self.__load_targets = yaml.get_section("load").as_map()
 
-            if self.__load_targets.has_section("root"):
+            if "root" in self.__load_targets:
                 self.__ns["__root__"] = dict()
                 self.__ns["__root__"][self.__context] = list()
-                self.__ns["__root__"][self.__context].extend(self.__ns[self.__load_targets.get_section("root").as_map()][self.__context])
+                self.__ns["__root__"][self.__context].extend(self.__ns[self.__load_targets["root"]][self.__context])
 
-            if self.__load_targets.has_section("anchor"):
+            if "anchor" in self.__load_targets:
                 self.__ns["__anchor__"] = dict()
                 self.__ns["__anchor__"][self.__context] = list()
-                self.__ns["__anchor__"][self.__context].extend(self.__ns[self.__load_targets.get_section("anchor").as_map()][self.__context])
+                self.__ns["__anchor__"][self.__context].extend(self.__ns[self.__load_targets["anchor"]][self.__context])
 
         for ename, context_data in self.__ns.items():
             for context, locators in context_data.items():

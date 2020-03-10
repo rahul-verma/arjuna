@@ -1,5 +1,11 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.9
+-----
+- Fix: Handling of Root and Anchor elements in GNS.
+- Fix: An Empty Yaml GNS file is NOT a problem.
+- Fix: Overlap of named parameters for withx in GNS don't conflict with internal arguments passed by Arjuna.
+
 0.9.8
 -----
 - Firefox driver uses Service object as per Selenium 4. Chrome was updated to use Service earlier.
