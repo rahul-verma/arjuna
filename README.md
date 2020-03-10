@@ -36,7 +36,7 @@ You can find the example code used on this section in [arjuna_config project](ht
 3. [Configuration Builder - Creating Custom Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/config/ConfigBuilder.md)
 4. [Defining and Handling User Options](https://github.com/rahul-verma/arjuna/blob/master/docs/config/UserOptions.md)
 5. [Using .conf files with Configuration Builder](https://github.com/rahul-verma/arjuna/blob/master/docs/config/UsingFilesInConfigBuilder.md)
-6. [The `C` Magic Function](https://github.com/rahul-verma/arjuna/blob/master/docs/config/TheCMagicFunction.md)
+6. [The Magic `C` Function](https://github.com/rahul-verma/arjuna/blob/master/docs/config/TheCMagicFunction.md)
 7. [Environments and Dynamic Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/config/EnvironmentsAndDynamicConfigurations.md)
 
 
