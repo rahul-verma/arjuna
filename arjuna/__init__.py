@@ -54,10 +54,6 @@ class ArjunFacade:
 
 from arjuna.engine import Arjuna
 
-from arjuna.interact.gui.helpers import With, WithType
-from arjuna.interact.gui.helpers import GuiInteractionConfig, GuiDriverExtendedConfigBuilder
-from arjuna.interact.gui.helpers import Screen
-
 from arjuna.interact.gui.gom import WebApp, Page, Section, Widget, Dialog
 
 from arjuna.core.exceptions import *
@@ -80,3 +76,10 @@ from arjuna.core.json import Json
 L = Arjuna.get_localized_str
 C = Arjuna.get_config_value
 R = Arjuna.get_dataref_value
+
+class Log:
+    
+    def __call__(self, *args, **kwargs):
+        return Arjuna.get_logger()
+
+logger = Log()
