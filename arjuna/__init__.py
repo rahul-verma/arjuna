@@ -82,4 +82,4 @@ class Log:
     def __call__(self, *args, **kwargs):
         return Arjuna.get_logger()
 
-logger = Log()
+get_logger = Log()
