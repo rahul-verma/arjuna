@@ -23,9 +23,8 @@ class WordPress:
 
     def __init__(self):
         url = C("wp.login.url")
-        self.__app = WebApp(base_url=url)
+        self.__app = WebApp(base_url=url, label="WordPress")
         self.app.launch()
-        self.app.externalize(gns_file_name="WordPress.yaml")
 
     @property
     def app(self):
@@ -36,22 +35,22 @@ class WordPress:
         pwd = C("wp.admin.pwd")
 
         # Login
-        self.app.element("login").text = user
-        self.app.element("pwd").text = pwd
-        self.app.element("submit").click()
-        self.app.element("view_site")
+        self.app.user.text = user
+        self.app.pwd.text = pwd
+        self.app.submit.click()
+        self.app.view_site
 
     def logout(self):
         url = C("wp.logout.url")
         self.app.go_to_url(url)
-        self.app.element("logout_confirm").click()
-        self.app.element("logout_msg")
+        self.app.logout_confirm.click()
+        self.app.logout_msg
 
         self.app.quit()
 
     def tweak_role_value_in_settings(self, value):
-        self.app.element("Settings").click()
-        role_select = self.app.dropdown("role")
+        self.app.settings.click()
+        role_select = self.app.role
         role_select.select_value(value)
         self.app.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
 

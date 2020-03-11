@@ -1,4 +1,5 @@
 labels:
 
   role:
+    template: dropdown
     id: default_role

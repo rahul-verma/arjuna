@@ -1,0 +1,13 @@
+labels:
+
+  user_attr:
+    selector: "*[for = 'user_login']"
+
+  user_attr_content:
+    selector: "*[for *= '_login']"
+
+  pass_type:
+    selector: "*[type ='password']"
+
+  button_compound_class:
+    selector: ".button.button-large"

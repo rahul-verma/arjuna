@@ -1,5 +1,15 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.10
+------
+- Externalization of Guis is mandatory for element access. Direct use of With.x not allowed. It's an internal concept now.
+- Creation of an App/Page can happen without a corresponding GNS file. The Gui definition will be empty in this case.
+- Element Label must be an arjuna name.
+- Elements can be directly access using `. (dot)` operator. from aby Gui.
+- `template` keyword can be used in GNS files to define non-GuiElement object types.
+- All example code updated.
+- Main doc and docs for Web UI basics updated.
+
 0.9.9
 -----
 - Fix: Handling of Root and Anchor elements in GNS.

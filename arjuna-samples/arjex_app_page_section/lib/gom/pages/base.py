@@ -29,22 +29,17 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
 
-    def prepare(self):
-        self.externalize()
-
 
 class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
-        self.__top_nav = TopNav(self)
-        self.__left_nav = LeftNav(self)
 
     @property
     def top_nav(self):
-        return self.__top_nav
+        return TopNav(self)
 
     @property
     def left_nav(self):
-        return self.__left_nav
+        return LeftNav(self)
 

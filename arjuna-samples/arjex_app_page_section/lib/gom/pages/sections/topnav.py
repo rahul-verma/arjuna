@@ -23,16 +23,12 @@ from .base import WPBaseSection
 
 class TopNav(WPBaseSection):
 
-    class labels(Enum):
-        logout_confirm = auto()
-        logout_msg = auto()
-
     def logout(self):
         url = C("wp.logout.url")
         self.go_to_url(url)
 
-        self.element(self.labels.logout_confirm).click()
-        self.element(self.labels.logout_msg).wait_until_visible()
+        self.logout_confirm.click()
+        self.logout_msg
 
         from arjex_app_page_section.lib.gom.pages.home import Home
         return Home(self)

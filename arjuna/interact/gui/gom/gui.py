@@ -47,13 +47,16 @@ class GuiConditions:
 
 class Gui(AsserterMixIn):
 
-    def __init__(self, *, config=None, ext_config=None, label=None):
+    def __init__(self, *, gns_dir, config=None, ext_config=None, label=None):
         '''
             You can either provide automator.
         '''
         super().__init__()
         from arjuna import Arjuna
         self.__config = config is not None and config or Arjuna.get_config()
+        from arjuna.core.enums import ArjunaOption
+        ns_root_dir = self.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
+        self.__gns_dir = os.path.join(ns_root_dir, gns_dir)
         self.__econfig = ext_config
         self.__conditions = GuiConditions(self)
         if ext_config is None:
@@ -65,6 +68,10 @@ class Gui(AsserterMixIn):
                 self.__econfig = ext_config.config
         self.__label = label is not None and label or self.__class__.__name__
         self.__externalized = False
+
+    @property
+    def gns_dir(self):
+        return self.__gns_dir
 
     @property
     def conditions(self):
@@ -140,17 +147,21 @@ class Gui(AsserterMixIn):
 
 class AppContent(Gui):
 
-    def __init__(self, *args, automator, label=None, **kwargs):
-        super().__init__(config=automator.config, ext_config=automator.ext_config, label=label)
+    def __init__(self, *args, automator, label=None, gns_dir=None, gns_file_name=None, **kwargs):
         self.__app = automator.app
         self.__automator = automator
+        print(gns_dir)
+        gns_dir = gns_dir and gns_dir or self.app.gns_dir
+        super().__init__(gns_dir=gns_dir, config=automator.config, ext_config=automator.ext_config, label=label)
+        gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)
+        self.__def_file_path = os.path.join(self.gns_dir, gns_file_name)
+        print(self.__def_file_path)
+
         from arjuna import Arjuna
         self.__guimgr = Arjuna.get_gui_mgr()
         self.__guidef = None
-
         self.__gui_registered = False
-        self.__gns_file_name = None
-        self.__def_file_path = None
+        self._externalize()
 
     @property
     def app(self):
@@ -164,17 +175,9 @@ class AppContent(Gui):
     def gui_def(self):
         return self.__guidef
 
-    def externalize(self, gns_dir=None, gns_file_name=None):
-        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)        
-        from arjuna.core.enums import ArjunaOption
-        gns_dir = gns_dir and gns_dir or self.app.gns_dir
-        if not gns_dir:
-            gns_dir = ""
-        ns_root_dir = self.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
-        
-        self.__def_file_path = os.path.join(ns_root_dir, gns_dir, self.gns_file_name)
+    def _externalize(self):
         try:
-            self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.__def_file_path) # self.__guimgr.namespace_dir, 
+            self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.def_file_path)
         except Exception as e:
             import traceback
             raise GuiNamespaceLoadingError(self, str(e) + traceback.format_exc())
@@ -184,50 +187,46 @@ class AppContent(Gui):
         self._set_externalized()
 
     @property
-    def gns_file_name(self):
-        return self.__gns_file_name
-
-    @property
     def def_file_path(self):
         return self.__def_file_path
 
     def transit(self, page):
         pass
 
-    def convert_to_with_lmd(self, *raw_str_or_with_locators, nested_element=False):
-        from arjuna.interact.gui.helpers import With, WithType
-        out = []
-        for locator in raw_str_or_with_locators:
-            w = None
-            if isinstance(locator, With):
-                w = locator
-            elif type(locator) is str:
-                w = With.label(locator)
-            elif isinstance(locator, Enum):
-                w = With.label(locator.name)
-            else:
-                raise Exception("A With object or name of element is expected as argument.")
+    # def convert_to_with_lmd(self, *raw_str_or_with_locators, nested_element=False):
+    #     from arjuna.interact.gui.helpers import With, WithType
+    #     out = []
+    #     for locator in raw_str_or_with_locators:
+    #         w = None
+    #         if isinstance(locator, With):
+    #             w = locator
+    #         elif type(locator) is str:
+    #             w = With.label(locator)
+    #         elif isinstance(locator, Enum):
+    #             w = With.label(locator.name)
+    #         else:
+    #             raise Exception("A With object or name of element is expected as argument.")
 
-            if w.wtype == WithType.LABEL:
-                if isinstance(w.wvalue, Enum):
-                    w.wvalue = w.wvalue.name
-                out.extend(self.gui_def.convert_to_with(w))
-            else:
-                out.append(w)
-        lmd = GuiElementMetaData.create_lmd(*out)
-        return lmd
+    #         if w.wtype == WithType.LABEL:
+    #             if isinstance(w.wvalue, Enum):
+    #                 w.wvalue = w.wvalue.name
+    #             out.extend(self.gui_def.convert_to_with(w))
+    #         else:
+    #             out.append(w)
+    #     lmd = GuiElementMetaData.create_lmd(*out)
+    #     return lmd
 
     @property
     def browser(self):
         return self.impl_gui.browser
 
-    def element(self, *str_or_with_locators, iconfig=None):
+    def __element(self, *str_or_with_locators, iconfig=None):
         return self.automator.element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
-    def multi_element(self, *str_or_with_locators, iconfig=None):
+    def __multi_element(self, *str_or_with_locators, iconfig=None):
         return self.automator.multi_element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
-    def dropdown(self, *str_or_with_locators, option_container_locator=None, option_locator=None, iconfig=None):
+    def __dropdown(self, *str_or_with_locators, option_container_locator=None, option_locator=None, iconfig=None):
         return self.automator.dropdown(
             self, 
             self.convert_to_with_lmd(*str_or_with_locators),
@@ -236,7 +235,7 @@ class AppContent(Gui):
             iconfig=iconfig
         )
 
-    def radio_group(self, *str_or_with_locators, iconfig=None):
+    def __radio_group(self, *str_or_with_locators, iconfig=None):
         return self.automator.radio_group(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
     def tab_group(self, *str_or_with_locators, tab_header_locator, content_relation_attr, content_relation_type, iconfig=None):
@@ -309,5 +308,11 @@ class AppContent(Gui):
 
             if locators is not None:
                 self.element(*locators)
+
+    def __getattr__(self, name):
+        emd = self.gui_def.get_emd(name)
+        from arjuna import Arjuna
+        Arjuna.get_logger().debug("Finding element for emd: {}".format(emd))
+        return getattr(self.automator, emd.meta.template.name.lower())(self, emd)
 
 

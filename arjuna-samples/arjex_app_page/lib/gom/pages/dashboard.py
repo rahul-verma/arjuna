@@ -21,12 +21,8 @@ from .base import WPBasePage
 
 class Dashboard(WPBasePage):
 
-    def validate_readiness(self):
-        self.element("view_site").wait_until_visible()
-
-    @property
-    def settings(self):
-        self.element("settings").click()
+    def go_to_settings(self):
+        self.settings.click()
 
         from .settings import Settings
         return Settings(self)

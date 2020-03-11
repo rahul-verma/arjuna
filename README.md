@@ -65,10 +65,17 @@ You can find the example code used on this section in [arjuna_l10 project](https
 You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/test/module).
 
 1. [Getting Started with WebApp](https://github.com/rahul-verma/arjuna/blob/master/docs//webui_basics/WebApp.md)
-2. [GuiElement - Identification and Interactions](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiElement.md)
-2. [Creating Reusable Module](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ReusableModule.md)
-3. [GuiMultiElement](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiMultiElement.md)
-4. [Dropdown and RadioGroup](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/DropDownRadioGroup.md)
+2. [Gui Namespace (GNS) - Externalized Identifiers](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiNamespace.md)
+3. [Gui Element Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiElementBasicLocators.md)
+4. [Gui Element Locators - Using XPath](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingXPath.md)
+5. [Gui Element Locators - Using CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingCSSSelectors.md)
+6. [Gui Element Locators - Using Arjuna's Locator Extensions](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ArjunaLocatorExtensions.md)
+7. [Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/BasicInteractions.md)
+8. [Concise Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ConciseBasicInteractions.md)
+9. [Creating Reusable Module](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ReusableModule.md)
+10. [Matching Multiple Elements as GuiMultiElement](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiMultiElement.md)
+11. [Handling Default HTML Select](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/HTMLSelect.md)
+12. [Handling Default HTML Radio Group](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/HTMLRadioGroup.md)
 
 ### 7. Advanced Web UI Automation
 1. Finding Nested Elements
@@ -82,12 +89,11 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 ### 8. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
 The following tutorial sub-sections have multiple example projects corresponding to them. Please refer the pages for respective example projects.
 
-1. [Gui Namespace (GNS) - Externalized Identifiers](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiNamespace.md)
-2. [Creating App Class](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppClass.md)
-3. [Gui and Its Loading Model in Arjuna](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiLoadingModel.md)
-3. [App Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppObjectModel.md)
-4. [App-Page Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageObjectModel.md)
-5. [App-Page-Section Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageSectionObjectModel.md)
+1. [Creating App Class](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppClass.md)
+2. [App Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppObjectModel.md)
+3. [App-Page Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageObjectModel.md)
+4. [App-Page-Section Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageSectionObjectModel.md)
+5. [Gui and Its Loading Model in Arjuna](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiLoadingModel.md)
 
 ## Reference
 1. Command Line Options

@@ -31,6 +31,9 @@ class ImplWith:
         self.named_args = named_args
         self.has_content_locator = has_content_locator
 
+    def __str__(self):
+        return "ImplWith: {}".format(vars(self))
+
 class GenericLocateWith(Enum):
     ID = auto()
     NAME = auto() 
@@ -117,6 +120,29 @@ class GuiGenericLocator(Locator):
 #     def is_layered_locator(self):
 #         return True
 
+from arjuna.core.adv.types import CIStringDict
+
+class Meta:
+
+    def __init__(self, mdict=None):
+        self.__mdict = not mdict and CIStringDict() or CIStringDict(mdict)
+        from arjuna.core.enums import GuiTemplate
+        if "template" in self.__mdict:
+            try:
+                template = self.__mdict["template"]
+                self.__template = GuiTemplate[template.upper()]
+            except:
+                raise Exception("{} is not a valid template type.".format(template))
+        else:
+            self.__template = GuiTemplate.ELEMENT
+
+    @property
+    def template(self):
+        return self.__template
+
+    def __str__(self):
+        return str(self.__mdict)
+
 class GuiElementMetaData:
     XPATH_TWO_ARG_VALUE_PATTERN = r'^\s*\[\s*(\w+)\s*\]\s*\[\s*(\w+)\s*\]$'
 
@@ -164,12 +190,17 @@ class GuiElementMetaData:
         GenericLocateWith.FATTR : "//*[@{}='{}']",
     }
 
-    def __init__(self, raw_locators, process_args=True):
+    def __init__(self, raw_locators, meta=None, process_args=True):
         self.__raw_locators = raw_locators
         self.__locators = []
         self.__process()
         if process_args:
             self.process_args()
+        self.__meta = Meta(meta)
+
+    @property
+    def meta(self):
+        return self.__meta
 
     def __str__(self):
         return str([str(l) for l in self.__locators])
@@ -193,7 +224,7 @@ class GuiElementMetaData:
             try:
                 generic_locate_with = GenericLocateWith[rltype.upper()]
             except:
-                raise Exception("Invalid locator across all automators: {}".format(rltype))
+                raise Exception("Invalid locator across all automators: {}={}".format(rltype, type(rlvalue)))
             else:
                 if generic_locate_with == GenericLocateWith.ELEMENT:
                     self.__add_locator(generic_locate_with, rlvalue, named_args)
@@ -204,12 +235,14 @@ class GuiElementMetaData:
                 elif generic_locate_with in self.XPATH_LOCATORS:
                     self.__add_locator(GenericLocateWith.XPATH, self.XPATH_LOCATORS[generic_locate_with].format(rlvalue), named_args)
                 elif generic_locate_with in self.XPATH_TWO_ARG_LOCATORS:
-                    parts = None
+                    # parts = None
                     try:
-                        parts =  re.search(GuiElementMetaData.XPATH_TWO_ARG_VALUE_PATTERN, rlvalue).groups()
+                        rlvalue["name"]
+                        rlvalue["value"]
+                        #parts =  re.search(GuiElementMetaData.XPATH_TWO_ARG_VALUE_PATTERN, rlvalue).groups()
                     except:
                         raise Exception("Value {} for {} is misformatted. Attribute name and attribute value should be supplied as: [<arg>][<value>]".format(rlvalue, rltype))
-                    self.__add_locator(GenericLocateWith.XPATH, self.XPATH_TWO_ARG_LOCATORS[generic_locate_with].format(parts[0], parts[1]), named_args)
+                    self.__add_locator(GenericLocateWith.XPATH, self.XPATH_TWO_ARG_LOCATORS[generic_locate_with].format(rlvalue["name"], rlvalue["value"]), named_args)
                 elif generic_locate_with == GenericLocateWith.TYPE:
                     try:
                         elem_type = GuiElementType[rlvalue.upper()]
@@ -221,12 +254,13 @@ class GuiElementMetaData:
                 #     self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', ), named_args)
                 elif generic_locate_with == GenericLocateWith.CLASSES:
                     css_string = None
-                    if len(rlvalue) == 0:
-                        raise Exception("You must pass atleast one class name.")
-                    elif len(rlvalue) == 1:
-                        css_string = "." + rlvalue[0].replace('.', ' ').strip()
+                    if type(rlvalue) is str:
+                        css_string = "." + rlvalue.replace('.', ' ').strip()
                     else:
-                        css_string = "." + ".".join(rlvalue)
+                        if type(rlvalue[0]) is str:
+                            css_string = "." + rlvalue[0].replace('.', ' ').strip()
+                        else:
+                            css_string = "." + ".".join(rlvalue[0])
                     self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', css_string), named_args)
                 else:
                     raise Exception("Locator not supported yet by Arjuna: " + rltype)
@@ -277,7 +311,7 @@ class GuiElementMetaData:
         return out_list
 
     @classmethod
-    def create_lmd(cls, *locators):
+    def create_lmd(cls, *locators, meta=None):
         impl_locators = cls.convert_to_impl_with_locators(*locators)
         processed_locators = []
         for locator in impl_locators:
@@ -288,7 +322,7 @@ class GuiElementMetaData:
             else:
                 p_locator = cls.__process_single_raw_locator(locator)
             processed_locators.append(p_locator)
-        return GuiElementMetaData(processed_locators)
+        return GuiElementMetaData(processed_locators, meta)
 
     @staticmethod
     def locators_as_str(locators):

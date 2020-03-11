@@ -23,18 +23,10 @@ from .base import WPBasePage
 
 class Home(WPBasePage):
 
-    class labels(Enum):
-        login = auto()
-        pwd = auto()
-        submit = auto()
-
-    def validate_readiness(self):
-        self.element(self.labels.submit).wait_until_visible()
-
     def login(self, user, pwd):
-        self.element(self.labels.login).text = user
-        self.element(self.labels.pwd).text = pwd
-        self.element(self.labels.submit).click()
+        self.user.text = user
+        self.pwd.text = pwd
+        self.submit.click()
 
         from .dashboard import Dashboard
         return Dashboard(self)

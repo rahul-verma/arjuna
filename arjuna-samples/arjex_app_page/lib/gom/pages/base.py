@@ -25,15 +25,12 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
 
-    def prepare(self):
-        self.externalize()
-
     def logout(self):
         url = C("wp.logout.url")
         self.go_to_url(url)
 
-        self.element("logout_confirm").click()
-        self.element("logout_msg").wait_until_visible()
+        self.logout_confirm.click()
+        self.logout_msg
 
         from .home import Home
         return Home(self)

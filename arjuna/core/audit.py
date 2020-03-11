@@ -44,7 +44,7 @@ class HardCoded:
     @classmethod
     def __log(cls, invoker, why, seconds):
         from arjuna import Arjuna
-        Arjuna.get_logger().warn("Hardcoded sleep executed for {} seconds by {}. Reason by author: {}".format(seconds, invoker, why))
+        Arjuna.get_logger().warning("Hardcoded sleep executed for {} seconds by {}. Reason by author: {}".format(seconds, invoker, why))
 
     @classmethod
     def sleep(cls, why, seconds):

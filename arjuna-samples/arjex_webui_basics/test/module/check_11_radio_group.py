@@ -18,18 +18,19 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_app.lib.wp_gns import *
-
-@for_test
-def wordpress(request):
-    # Setup
-    wordpress = create_wordpress_app()
-    login(wordpress)
-    yield wordpress
-
-    # Teadown
-    logout(wordpress)
+from arjex_webui_basics.lib.wp import *
 
 @test
-def check_with_wp_gns(request, wordpress):
-    tweak_role_value_in_settings(wordpress, request.asserter, "editor")
+def check_radiogroup(request, logged_in_wordpress):
+    wordpress = logged_in_wordpress
+    wordpress.settings.click()
+
+    date_format = wordpress.date_format
+
+    fmsg = "Failed to select m/d/Y date format"
+    request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), fmsg)
+    request.asserter.assert_true(date_format.has_index_selected(2), fmsg)
+    request.asserter.assert_equal(date_format.value, "m/d/Y", "Unpexpected Value attribute of Date Format")
+
+    date_format.select_value(r"\c\u\s\t\o\m")
+    date_format.select_index(2)

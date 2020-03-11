@@ -22,7 +22,7 @@ from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 
 class Page(AppContent):
 
-    def __init__(self, *args, source_gui, label=None, **kwargs):
+    def __init__(self, *args, source_gui, label=None, gns_dir=None, gns_file_name=None, **kwargs):
         # app = isinstance(source_gui, App) and source_gui or source_gui.app
         super().__init__(automator=source_gui.automator, label=label)
         self.app.ui = self
@@ -30,8 +30,8 @@ class Page(AppContent):
 
 class Section(AppContent):
 
-    def __init__(self, gui, *args, root_element_locators=None, label=None, **kwargs):
-        super().__init__(automator=gui.automator, label=label)   
+    def __init__(self, gui, *args, gns_dir=None, root_element_locators=None, label=None, gns_file_name=None, **kwargs):
+        super().__init__(automator=gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
         self.__root_element_locators = root_element_locators
         self.__root_element = None
         self._load(*args, **kwargs)
@@ -86,23 +86,16 @@ Dialog = Section
 
 class App(Gui, metaclass=abc.ABCMeta):
 
-    def __init__(self, *, config=None, ext_config=None, label=None, gns_dir=None):
-        super().__init__(config=config, ext_config=ext_config, label=label)
+    def __init__(self, *, config=None, ext_config=None, label=None, gns_dir=None, gns_file_name=None):
+        gns_dir = gns_dir is not None and gns_dir or ""
+        super().__init__(gns_dir=gns_dir, config=config, ext_config=ext_config, label=label)
         self.__ui = None
         self.__automator = None
-        self.__gns_dir = gns_dir
+        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)
 
     @property
     def automator(self):
         return self.__automator
-
-    @property
-    def gns_dir(self):
-        return self.__gns_dir
-
-    @gns_dir.setter
-    def gns_dir(self, d):
-        self.__gns_dir = d
 
     def _launchautomator(self):
         # Default Gui automation engine is Selenium
@@ -118,7 +111,7 @@ class App(Gui, metaclass=abc.ABCMeta):
         self.__ui = page
 
     def _create_default_ui(self):
-        self.__ui = Page(source_gui=self, label="{}-Def-UI".format(self.label))
+        self.__ui = Page(source_gui=self, label=self.label, gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)
 
     @abc.abstractmethod
     def launch(self):
@@ -130,13 +123,13 @@ class App(Gui, metaclass=abc.ABCMeta):
 
 class WebApp(App):
 
-    def __init__(self, *args, base_url=None, blank_slate=False, config=None, ext_config=None, label=None, gns_dir=None, **kwargs):
+    def __init__(self, *args, base_url=None, blank_slate=False, config=None, ext_config=None, label=None, gns_dir=None, gns_file_name=None, **kwargs):
         '''
             Creates and returns GuiAutomator object for provided config.
             If no configuration is provided reference configuration is used.
             You can also provide GuiDriverExtendedConfig for extended configuration for WebDriver family of libs. 
         '''
-        super().__init__(config=config, ext_config=ext_config, label=label, gns_dir=gns_dir)
+        super().__init__(gns_dir=gns_dir, gns_file_name=gns_file_name, config=config, ext_config=ext_config, label=label is None and self.__class__.__name__ or label)
         from arjuna.core.enums import ArjunaOption
         self.__base_url = base_url is not None and base_url or self.config.value(ArjunaOption.APP_URL)
         # self._load(*args, **kwargs)
@@ -152,6 +145,7 @@ class WebApp(App):
         if not blank_slate:
             self.automator.browser.go_to_url(self.base_url)
         self._create_default_ui()
+        self._set_externalized()
         self._load(*self.__args, **self.__kwargs)
 
     def quit(self):
@@ -159,12 +153,3 @@ class WebApp(App):
 
     def __getattr__(self, name):
         return getattr(self.ui, name)
-
-    def externalize(self, *, gns_dir=None, gns_file_name=None):
-        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)        
-        from arjuna.core.enums import ArjunaOption   
-        self.gns_dir = gns_dir and gns_dir or self.gns_dir
-        if not self.gns_dir:
-            self.gns_dir = ""
-        self.ui.externalize(gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)
-        self._set_externalized()

@@ -55,7 +55,10 @@ class GuiNamespaceLoaderFactory:
             if os.path.isdir(full_file_path):
                 raise Exception("Namespace file path is a directory and not a file: {}".format(considered_path))
             elif not os.path.isfile(full_file_path):
-                raise Exception("Namespace file path is invalid: {}".format(considered_path))
+                from arjuna import Arjuna
+                Arjuna.get_logger().warning("Namespace file path does not exist: {}".format(considered_path))
+                return DummyGnsLoader(considered_path)
+                # raise Exception()
             # if file_format == FileFormat.GNS:
             #     if multi_context_enabled:
             #         return MGNSFileLoader(full_file_path)
@@ -74,13 +77,18 @@ class GuiNamespace:
         # dict <string, dict<GuiAutomationContext, GuiElementMetaData>>
         self.__ns = {}
 
-    def add_element_meta_data(self, name, context, raw_locators):
-        emd = GuiElementMetaData.create_lmd(*raw_locators)
+    def is_empty(self):
+        return not self.__ns
+
+    def add_element_meta_data(self, name, context, raw_locators, meta):
+        emd = GuiElementMetaData.create_lmd(*raw_locators, meta=meta)
         #emd = GuiElementMetaData(raw_locators, process_args=False)
         name = name.lower()
         if not self.has(name):
             self.__ns[name] = {}
         self.__ns[name][context] = emd
+        from arjuna import Arjuna
+        Arjuna.get_logger().debug("Loaded {} label. EMD: {}".format(name, str(emd)))
 
     def has(self, name):
         return name.lower() in self.__ns
@@ -93,13 +101,15 @@ class GuiNamespace:
     # Needs to be thread-safe
     # Returns emd for a context for a given gui name
     def get_meta_data(self, label, context):
+        msg = ""
+        if self.is_empty():
+            msg = "Namespace is empty"
         if not self.has(label):
-            raise GuiLabelNotPresentError(self.__name, label)
+            raise GuiLabelNotPresentError(self.__name, label, msg=msg)
         elif not self.has_context(label, context):
-            raise GuiLabelNotPresentError(self.__name, label, context)
+            raise GuiLabelNotPresentError(self.__name, label, context, msg=msg)
         
         return self.__ns[label.lower()][context]
-
 
 class BaseGuiNamespaceLoader:
 
@@ -116,8 +126,8 @@ class BaseGuiNamespaceLoader:
         return self.__namespace
 
     # Needs to be thread safe
-    def add_element_meta_data(self, name, context, locators):
-        self.__namespace.add_element_meta_data(name, context, locators)
+    def add_element_meta_data(self, name, context, locators, meta):
+        self.__namespace.add_element_meta_data(name, context, locators, meta)
 
     def _raise_notafile_exception(self, file_path):
         raise Exception("{} is not a file.".format(file_path))
@@ -128,6 +138,13 @@ class BaseGuiNamespaceLoader:
     def _raise_relativepath_exception(self, file_path):
         raise Exception("Gui namespace loader does not accept relative file path. {} is not a full file path.".format(file_path))
 
+    def load(self):
+        pass
+
+class DummyGnsLoader(BaseGuiNamespaceLoader):
+
+    def __init__(self, ns_file_path):
+        super().__init__(os.path.basename(ns_file_path))
 
 class YamlGnsLoader(BaseGuiNamespaceLoader):
 
@@ -158,6 +175,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         
         from arjuna import Arjuna
         from arjuna.configure.impl.validator import Validator
+        from arjuna.interact.gui.helpers import WithType
         yaml = YamlFile(self.__ns_path)
 
         if yaml.is_empty(): return
@@ -176,13 +194,17 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
 
         for label, label_map in yaml.get_section("labels").as_map().items():
             Validator.arjuna_name(label)
-            self.__ns[label.lower()] = dict()
-            self.__ns[label.lower()][self.__context] = []
+            self.__ns[label.lower()] = {"locators" : {self.__context: []}, "meta": dict()}
             for loc, loc_obj in label_map.items():
                 loc = loc.lower()
                 wtype, wvalue = None, None
                 if not self.__withx.has_locator(loc) and not common_withx.has_locator(loc):
                     wtype, wvalue = loc.upper(), loc_obj
+                    if wtype in dir(WithType):
+                        iloc = ImplWith(wtype=wtype, wvalue=wvalue, named_args=dict(), has_content_locator=False)
+                        self.__ns[label.lower()]["locators"][self.__context].append(iloc)
+                    else:
+                        self.__ns[label.lower()]["meta"][wtype] = wvalue
                 else:
                     if self.__withx.has_locator(loc):
                         wx = self.__withx
@@ -192,25 +214,25 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                         raise Exception("No WithX locator with name {} found. Check GNS file at {}.".format(name, self.__ns_path))
                     wtype, wvalue = wx.format(loc, loc_obj)
 
-                iloc = ImplWith(wtype=wtype, wvalue=wvalue, named_args=dict(), has_content_locator=False)
-                self.__ns[label.lower()][self.__context].append(iloc)
+                    iloc = ImplWith(wtype=wtype, wvalue=wvalue, named_args=dict(), has_content_locator=False)
+                    self.__ns[label.lower()]["locators"][self.__context].append(iloc)
 
-            if not self.__ns[label.lower()][self.__context]:
+            if not self.__ns[label.lower()]["locators"][self.__context]:
                 raise Exception("No locators defined for label: {}".format(label))
 
         if yaml.has_section("load"):
             self.__load_targets = yaml.get_section("load").as_map()
 
             if "root" in self.__load_targets:
-                self.__ns["__root__"] = dict()
-                self.__ns["__root__"][self.__context] = list()
-                self.__ns["__root__"][self.__context].extend(self.__ns[self.__load_targets["root"]][self.__context])
+                self.__ns["__root__"] = {"locators" : {self.__context: []}, "meta": dict()}
+                self.__ns["__root__"]["locators"][self.__context].extend(self.__ns[self.__load_targets["root"]][self.__context])
 
             if "anchor" in self.__load_targets:
-                self.__ns["__anchor__"] = dict()
-                self.__ns["__anchor__"][self.__context] = list()
-                self.__ns["__anchor__"][self.__context].extend(self.__ns[self.__load_targets["anchor"]][self.__context])
+                self.__ns["__anchor__"] = {"locators" : {self.__context: []}, "meta": dict()}
+                self.__ns["__anchor__"]["locators"][self.__context].extend(self.__ns[self.__load_targets["anchor"]][self.__context])
 
-        for ename, context_data in self.__ns.items():
+        for ename, emd in self.__ns.items():
+            context_data = emd["locators"]
             for context, locators in context_data.items():
-                self.add_element_meta_data(ename, context, locators)
+                self.add_element_meta_data(ename, context, locators, emd["meta"])
+                Arjuna.get_logger().debug("Loading {} label for {} context with locators: {} and meta {}.".format(ename, context, [str(l) for l in locators], emd["meta"]))

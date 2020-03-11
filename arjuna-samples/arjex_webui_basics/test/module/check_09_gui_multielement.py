@@ -18,20 +18,16 @@ limitations under the License.
 '''
 
 from arjuna import *
-from .base import WPBasePage
 
-class Home(WPBasePage):
+@test
+def check_multielement(request, logged_in_wordpress):
+    wordpress = logged_in_wordpress
+    wordpress.posts.click()
+    wordpress.categories.click()
 
-    def login(self, user, pwd):
-        self.user.text = user
-        self.pwd.text = pwd
-        self.submit.click()
-
-        from .dashboard import Dashboard
-        return Dashboard(self)
-
-    def login_with_default_creds(self):
-        user = C("wp.admin.name")
-        pwd = C("wp.admin.pwd")
-
-        return self.login(user, pwd)
+    check_boxes = wordpress.cat_checkboxes
+    check_boxes[1].check()
+    check_boxes[1].uncheck()
+    check_boxes.first_element.uncheck()
+    check_boxes.last_element.uncheck()
+    check_boxes.random_element.uncheck()

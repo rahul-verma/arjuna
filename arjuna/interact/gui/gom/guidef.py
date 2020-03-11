@@ -57,16 +57,22 @@ class GuiDef:
     def config(self):
         return self.__config
 
+    def is_empty(self):
+        return seff.__ns.is_empty()
+
     # def add_child(self, label, automator, file_def_path):
     #     self.__children.append(
     #         Gui(self.__name_store, self.__namespace_dir, label, self.__automator, file_def_path)
     # )
 
+    def get_emd(self, label):
+        return self.__ns.get_meta_data(label, self.__auto_context)
+
     def convert_to_lmd(self, *locators):
         final_locators = []
         for raw_locator in locators:
             if raw_locator.wtype.upper().strip() == "LABEL":
-                emd = self.__ns.get_meta_data(raw_locator.wvalue, self.__auto_context)
+                emd = self.get_emd(raw_locator.wvalue)
                 for loc in emd.raw_locators:
                     if not raw_locator.named_args:
                         final_locators.append(Locator(ltype=loc.ltype, lvalue=loc.lvalue), named_args={})

@@ -26,7 +26,7 @@ def settings(request):
     wordpress = WordPress()
     home = wordpress.launch()
     dashboard = home.login_with_default_creds()
-    settings = dashboard.left_nav.settings
+    settings = dashboard.left_nav.go_to_settings()
     yield settings
 
     # Teadown

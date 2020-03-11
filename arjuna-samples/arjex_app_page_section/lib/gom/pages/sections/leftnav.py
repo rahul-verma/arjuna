@@ -23,17 +23,10 @@ from .base import WPBaseSection
 
 class LeftNav(WPBaseSection):
 
-    class labels(Enum):
-        settings = auto()
-
     def __init__(self, page):
-        super().__init__(page, With.id("adminmenu"))
+        super().__init__(page)
 
-    def validate_readiness(self):
-        self.element(self.labels.settings)
-
-    @property
-    def settings(self):
+    def go_to_settings(self):
         from arjex_app_page_section.lib.gom.pages.settings import Settings
-        self.element(self.labels.settings).click()
+        self.settings.click()
         return Settings(self)

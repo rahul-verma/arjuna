@@ -33,4 +33,4 @@ def dashboard(request):
 
 @test
 def check_with_wp_app_page(request, dashboard):
-    dashboard.settings.tweak_role_value("editor")
+    dashboard.go_to_settings().tweak_role_value("editor")

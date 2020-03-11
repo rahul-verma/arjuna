@@ -22,14 +22,8 @@ from .base import WPFullPage
 
 class Settings(WPFullPage):
 
-    class labels(Enum):
-        role = auto()
-
-    def validate_readiness(self):
-        self.element(self.labels.role).wait_until_visible()
-
     def tweak_role_value(self, value):
-        role_select = self.dropdown(self.labels.role)
+        role_select = self.role
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
         return self

@@ -18,26 +18,31 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_webui_basics.lib.wp import *
 
 @for_test
 def wordpress(request):
     # Setup
-    wordpress = create_wordpress_app()
-    login(wordpress)
+    wp_url = C("wp.login.url")
+    wordpress = WebApp(base_url=wp_url, label="Selector")
+    wordpress.launch()
     yield wordpress
 
     # Teadown
-    logout(wordpress)
+    wordpress.quit()
+
 
 @test
-def check_multielement(request, wordpress):
-    wordpress.element(With.link("Posts")).click()
-    wordpress.element(With.link("Categories")).click()
+def check_selector(request, wordpress):
 
-    check_boxes = wordpress.multi_element(With.name("delete_tags[]"))
-    check_boxes[1].check()
-    check_boxes[1].uncheck()
-    check_boxes.first_element.uncheck()
-    check_boxes.last_element.uncheck()
-    check_boxes.random_element.uncheck()
+    # Based on any attribute e.g. for
+    element = wordpress.user_attr
+
+    # Based on partial content of an attribute
+    element = wordpress.user_attr_content
+
+    # Based on element type
+    element = wordpress.pass_type
+
+    # Based on compound classes
+    element = wordpress.button_compound_class
+

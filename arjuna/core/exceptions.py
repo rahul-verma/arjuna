@@ -182,9 +182,10 @@ class GuiNotLoadedError(WaitableError):
 
 class GuiLabelNotPresentError(Exception):
 
-    def __init__(self, gns_name, label, context=None):
+    def __init__(self, gns_name, label, context=None, msg=None):
+        msg = msg is None and "" or msg
         context_msg = context and  " for context {}".format(context) or ""
-        super().__init__("Gui namespace >{}< does not contain element with name: {}{}.".format(gns_name, label, context_msg))
+        super().__init__("Gui namespace >{}< does not contain element with name: {}{}. {}.".format(gns_name, label, context_msg, msg))
 
 class GuiNamespaceLoadingError(Exception):
 

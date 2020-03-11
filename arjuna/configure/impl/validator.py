@@ -32,11 +32,12 @@ class Validator:
     '''
 
     @classmethod
-    def raise_exc(cls, input):
+    def raise_exc(cls, input, msg=None):
         curframe = inspect.currentframe()
         callframe = inspect.getouterframes(curframe, 2)
         caller = callframe[1][3]
-        raise Exception("{} is not {}".format(input, caller))
+        msg = msg is None and "" or msg + "."
+        raise Exception("{} is not {}. {}".format(input, caller, msg))
 
     @classmethod
     def str(cls, input):
@@ -233,7 +234,7 @@ class Validator:
         if not re.match(cls.VNREGEX, input):
             print('Invalid Arjuna name provided.', file=sys.stderr)
             print(cls.VNREGEX_TEXT, file=sys.stderr)
-            cls.raise_exc(input)
+            cls.raise_exc(input, msg=cls.VNREGEX_TEXT)
         return input
 
 

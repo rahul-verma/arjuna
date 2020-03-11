@@ -52,6 +52,9 @@ class ElementFinder:
             raise GuiElementPresentError(*lmd.locators)
 
     def find(self, dispatcher_call, lmd, context="ELEMENT"):
+        from arjuna import Arjuna
+        Arjuna.get_logger().debug("Finding with emd: {}".format(str(lmd)))
+        from arjuna import Arjuna
         found = False
         js_call_name = context == "ELEMENT" and "find_element_with_js" or "find_multielement_with_js"
         js_call = getattr(self.container, js_call_name)
@@ -61,11 +64,11 @@ class ElementFinder:
                 raise ConditionException("With.POINT can be used only with GuiElement.")
 
         we = None
-        for locator in locators: 
+        for locator in locators:
             try:
                 if locator.ltype.name == "POINT":
                     # Assumption here is that this container is automator.
-                    size, dispatcher = js_call("return document.elementFromPoint({}, {})".format(*locator.lvalue))
+                    size, dispatcher = js_call("return document.elementFromPoint({}, {})".format(locator.lvalue['x'], locator.lvalue['y']))
                 elif locator.ltype.name == "JS":
                     size, dispatcher = js_call(locator.lvalue)
                 else:

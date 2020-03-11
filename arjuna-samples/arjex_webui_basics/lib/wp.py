@@ -21,24 +21,24 @@ from arjuna import *
 
 def create_wordpress_app():
     url = C("wp.login.url")
-    wordpress = WebApp(base_url=url)
+    wordpress = WebApp(base_url=url, label="WordPress")
     wordpress.launch()
     return wordpress
 
 def login(wordpress):
     user = C("wp.admin.name")
     pwd = C("wp.admin.pwd")
-
+    
     # Login
-    wordpress.element(With.id("user_login")).text = user
-    wordpress.element(With.id("user_pass")).text = pwd
-    wordpress.element(With.id("wp-submit")).click()
-    wordpress.element(With.classes("welcome-view-site"))
+    wordpress.user.text = user
+    wordpress.pwd.text = pwd
+    wordpress.submit.click()
+    wordpress.view_site
 
 def logout(wordpress):
     url = C("wp.logout.url")
     wordpress.go_to_url(url)
-    wordpress.element(With.link("log out")).click()
-    wordpress.element(With.text("logged out"))
+    wordpress.logout_confirm.click()
+    wordpress.logout_msg
 
     wordpress.quit()

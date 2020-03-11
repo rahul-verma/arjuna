@@ -1,0 +1,22 @@
+labels:
+
+  lost_pass_text:
+    xpath: "//*[text() = 'Lost your password?']"
+
+  lost_pass_text_content:
+    xpath: "//*[contains(text(), 'Lost')]"
+
+  lost_pass_title:
+    xpath: "//*[@title = 'Password Lost and Found']"
+
+  user_value:
+    xpath: "//*[@value = 'Log In']"
+
+  user_attr:
+    xpath: "//*[@for = 'user_login']"
+
+  user_attr_content:
+    xpath: "//*[contains(@for, '_login')]"
+
+  pass_type:
+    xpath: "//*[@type ='password']"

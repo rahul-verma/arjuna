@@ -387,8 +387,11 @@ class With(metaclass=_WithXMetaClass):
         return With(WithType.TYPE, type)
 
     @classmethod
-    def point(cls, point):
-        return With(WithType.POINT, point.location)
+    def point(cls, point_dict):
+        point = Screen.xy(point_dict['x'], point_dict['y']).location
+        from arjuna import Arjuna
+        Arjuna.get_logger().debug("With.point for {} converted to {}".format(point_dict, point))
+        return With(WithType.POINT, point)
 
     @classmethod
     def js(cls, js):

@@ -26,33 +26,27 @@ class WordPress(WebApp):
         super().__init__(base_url=url)
         self.launch()
 
-    def prepare(self):
-        self.externalize()
-
-    def validate_readiness(self):
-        self.element("submit").wait_until_visible()
-
     def login(self):
         user = C("wp.admin.name")
         pwd = C("wp.admin.pwd")
 
         # Login
-        self.element("login").text = user
-        self.element("pwd").text = pwd
-        self.element("submit").click()
-        self.element("view_site")
+        self.user.text = user
+        self.pwd.text = pwd
+        self.submit.click()
+        self.view_site
 
     def logout(self):
         url = C("wp.logout.url")
         self.go_to_url(url)
-        self.element("logout_confirm").click()
-        self.element("logout_msg")
+        self.logout_confirm.click()
+        self.logout_msg
 
         self.quit()
 
     def tweak_role_value_in_settings(self, value):
-        self.app.element("Settings").click()
-        role_select = self.app.dropdown("role")
+        self.app.settings.click()
+        role_select = self.app.role
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
         return self

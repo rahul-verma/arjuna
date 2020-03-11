@@ -60,7 +60,7 @@ class WordPress:
 3. This is an example of a `Wrapper` object, which wraps another object (in other words, it is a `HAS-A` or `Composition` relationship). The `WordPress` class wraps the `WebApp` class which is available in the code as `self.app` because we set it as a property with the `@property` decorator of Python.
 4. `login` and `logout` are bound methods and hence you dont need to supply the wordpress app as the argument, thereby simplying the call signatures.
 5. In the methods, `WordPress` code makes calls to the `WebApp` object to achieve its functionality.
-6. The `tweat_role_value_in_settings` has a much simpler signature than earlier, because the class wraps the app and uses the `asserter` of `WebApp`.
+6. We have implemented an additional method `tweat_role_value_in_settings` to change the user role on settings page to a chosen value.
 
 #### Using the App Class in Test Code
 

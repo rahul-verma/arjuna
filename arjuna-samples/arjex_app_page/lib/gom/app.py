@@ -21,7 +21,7 @@ from arjuna import *
 
 class WordPress(WebApp):
 
-    def __init__(self, gns_format="sgns"):
+    def __init__(self):
         url = C("wp.login.url")
         super().__init__(base_url=url)
 

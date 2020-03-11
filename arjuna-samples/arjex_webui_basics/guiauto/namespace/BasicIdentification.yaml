@@ -1,0 +1,19 @@
+labels:
+
+  user_id:
+    id: user_login
+
+  user_name:
+    name: log
+
+  user_tag:
+    tag: input
+
+  user_class:
+    classes: input
+
+  lost_pass_link:
+    link: password
+
+  lost_pass_flink:
+    flink: "Lost your password?"

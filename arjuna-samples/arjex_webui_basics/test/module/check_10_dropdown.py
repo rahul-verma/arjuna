@@ -18,23 +18,13 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_webui_basics.lib.wp import *
-
-@for_test
-def wordpress(request):
-    # Setup
-    wordpress = create_wordpress_app()
-    login(wordpress)
-    yield wordpress
-
-    # Teadown
-    logout(wordpress)
 
 @test
-def check_dropdown(request, wordpress):
-    wordpress.element(With.link("Settings")).click()
+def check_dropdown(request, logged_in_wordpress):
+    wordpress = logged_in_wordpress
+    wordpress.settings.click()
 
-    role_select = wordpress.dropdown(With.id("default_role"))
+    role_select = wordpress.role
 
     role_select.select_text("Subscriber")
     fmsg = "Failed to select Subscriber Role"
@@ -47,18 +37,3 @@ def check_dropdown(request, wordpress):
     role_select.select_value("editor")
     role_select.select_index(4)
     role_select.text = "Subscriber"
-
-
-@test
-def check_radiogroup(request, wordpress):
-    wordpress.element(With.link("Settings")).click()
-
-    date_format = wordpress.radio_group(With.name("date_format"))
-
-    fmsg = "Failed to select m/d/Y date format"
-    request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), fmsg)
-    request.asserter.assert_true(date_format.has_index_selected(2), fmsg)
-    request.asserter.assert_equal(date_format.value, "m/d/Y", "Unpexpected Value attribute of Date Format")
-
-    date_format.select_value(r"\c\u\s\t\o\m")
-    date_format.select_index(2)

@@ -19,33 +19,31 @@ limitations under the License.
 
 from arjuna import *
 
-def create_wordpress_app():
-    url = C("wp.login.url")
-    wordpress = WebApp(base_url=url)
+@for_test
+def wordpress(request):
+    # Setup
+    wp_url = C("wp.login.url")
+    wordpress = WebApp(base_url=wp_url, label="WordPress")
     wordpress.launch()
-    wordpress.externalize(gns_file_name="WordPress.yaml")
-    return wordpress
+    yield wordpress
 
-def login(wordpress):
-    user = C("wp.admin.name")
-    pwd = C("wp.admin.pwd")
-
-    # Login
-    wordpress.element("login").text = user
-    wordpress.element("pwd").text = pwd
-    wordpress.element("submit").click()
-    wordpress.element("view_site")
-
-def logout(wordpress):
-    url = C("wp.logout.url")
-    wordpress.go_to_url(url)
-    wordpress.element("logout_confirm").click()
-    wordpress.element("logout_msg")
-
+    # Teadown
     wordpress.quit()
 
-def tweak_role_value_in_settings(wordpress, asserter, value):
-    wordpress.element("Settings").click()
-    role_select = wordpress.dropdown("role")
-    role_select.select_value(value)
-    asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+@test
+def check_wp_login_concise(request, wordpress):
+    
+    user = C("wp.admin.name")
+    pwd = C("wp.admin.pwd")
+    
+    # Login
+    wordpress.user.text = user
+    wordpress.pwd.text = pwd
+    wordpress.submit.click()
+    wordpress.view_site
+
+    # Logout
+    url = C("wp.logout.url")
+    wordpress.go_to_url(url)
+    wordpress.logout_confirm.click()
+    wordpress.logout_msg

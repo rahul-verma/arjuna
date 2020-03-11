@@ -21,9 +21,4 @@ from enum import Enum, auto
 from .base import WPFullPage
 
 class Dashboard(WPFullPage):
-
-    class labels(Enum):
-        view_site = auto()
-
-    def validate_readiness(self):
-        self.element(self.labels.view_site).wait_until_visible()
+    pass

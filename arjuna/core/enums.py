@@ -408,6 +408,12 @@ class DataRefContextType(Enum):
     ROW = auto()
     COLUMN = auto()
 
+class GuiTemplate(Enum):
+    ELEMENT = auto()
+    MULTI_ELEMENT = auto()
+    DROPDOWN = auto()
+    RADIO_GROUP = auto()
+
 import locale
 locales = [i.upper() for i in locale.locale_alias.keys()]
 Locale = Enum('Locale', dict(zip(locales, range(len(locales)))))
