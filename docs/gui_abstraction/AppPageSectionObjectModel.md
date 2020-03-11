@@ -42,7 +42,7 @@ Page: **Home.yaml**
 ```YAML
 labels:
 
-  login:
+  user:
     id: user_login
 
   pwd:
@@ -67,6 +67,7 @@ Page: **Settings.yaml**
 labels:
 
   role:
+    template: dropdown
     id: default_role
 ```
 
@@ -98,6 +99,24 @@ labels:
 ```python
 # arjuna-samples/arjex_app_page_widget/lib/gom/app.py
 
+'''
+This file is a part of Arjuna
+Copyright 2015-2020 Rahul Verma
+
+Website: www.RahulVerma.net
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+'''
 
 from arjuna import *
 
@@ -134,24 +153,19 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
 
-    def prepare(self):
-        self.externalize()
-
 
 class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
-        self.__top_nav = TopNav(self)
-        self.__left_nav = LeftNav(self)
 
     @property
     def top_nav(self):
-        return self.__top_nav
+        return TopNav(self)
 
     @property
     def left_nav(self):
-        return self.__left_nav
+        return LeftNav(self)
 ```
 
 #### Points to Note
@@ -164,24 +178,17 @@ class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
  ```python
  # arjuna-samples/arjex_app_page_widget/lib/gom/pages/home.py
  
+
 from arjuna import *
 from enum import Enum, auto
 from .base import WPBasePage
 
 class Home(WPBasePage):
 
-    class labels(Enum):
-        login = auto()
-        pwd = auto()
-        submit = auto()
-
-    def validate_readiness(self):
-        self.element(self.labels.submit).wait_until_visible()
-
     def login(self, user, pwd):
-        self.element(self.labels.login).text = user
-        self.element(self.labels.pwd).text = pwd
-        self.element(self.labels.submit).click()
+        self.user.text = user
+        self.pwd.text = pwd
+        self.submit.click()
 
         from .dashboard import Dashboard
         return Dashboard(self)
@@ -194,58 +201,42 @@ class Home(WPBasePage):
 ```
 
 #### Points to Note
-1. Inherits from `WPBasePage` (No widgets).
-2. Implements inner class `labels` to represent externalized identifier labels as enum constants.
-3. Rest is same code.
+1. Inherits from `WPBasePage` (No sections).
+2. Rest is same code.
 
  **Dashboard Page**
 
  ```python
  # arjuna-samples/arjex_app_page_widget/lib/gom/pages/dashboard.py
- 
-from enum import Enum, auto
+
 from .base import WPFullPage
 
 class Dashboard(WPFullPage):
-
-    class labels(Enum):
-        view_site = auto()
-
-    def validate_readiness(self):
-        self.element(self.labels.view_site).wait_until_visible()
+    pass
 ```
 
 #### Points to Note
-1. Inherits from `WPFullPage` and hence has the `top_nav` and `left_nav` widget properties.
-2. Does not have `settings` property anymore.
-3. Implements `labels` as discussed for Home page.
+1. Inherits from `WPFullPage` and hence has the `top_nav` and `left_nav` sections.
+2. Does not have `go_to_settings` method anymore.
 
  **Settings Page**
 
  ```python
  # arjuna-samples/arjex_app_page_widget/lib/gom/pages/settings.py
  
-from enum import Enum, auto
-from .base import WPBasePage
+from .base import WPFullPage
 
 class Settings(WPFullPage):
 
-    class labels(Enum):
-        role = auto()
-
-    def validate_readiness(self):
-        self.element(self.labels.role).wait_until_visible()
-
     def tweak_role_value(self, value):
-        role_select = self.dropdown(self.labels.role)
+        role_select = self.role
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
         return self
 ```
 
 #### Points to Note
-1. Inherits from `WPFullPage` and hence has the `top_nav` and `left_nav` section properties.
-3. Implements `labels` as discussed for Home page.
+1. Inherits from `WPFullPage` and hence has the `top_nav` and `left_nav` sections.
 
 **Base Section**
 
@@ -253,89 +244,75 @@ class Settings(WPFullPage):
  # arjuna-samples/arjex_app_page_widget/lib/gom/pages/sections/base.py
  
 import abc
-from arjuna import Widget
+from arjuna import Section
 
-class WPBaseSection(Widget, metaclass=abc.ABCMeta):
+class WPBaseSection(Section, metaclass=abc.ABCMeta):
 
     def __init__(self, page):
-        super().__init__(page)
-
-    def prepare(self):
-        self.externalize(gns_dir="widgets")
+        super().__init__(page, gns_dir="sections")
 ```
 
 #### Points to Note
-1. Inherits from Arjuna's `Widget` class and is implemented as abstract class.
+1. Inherits from Arjuna's `WSectionidget` class and is implemented as abstract class.
 2. Needs to be passed an instance of the parent `Page`.
-3. We have placed the widget related GNS files in `sections` subdirectory of `namespace` directory. So, it passes the name of the sub-directory in the call to `externalize`.
+3. We have placed the widget related GNS files in `sections` sub-directory of `namespace` directory. So, it passes the name of the sub-directory in the call to `__init__` as `gns_dir` keyword argument.
 
 
 **LeftNav Section**
 
  ```python
  # arjuna-samples/arjex_app_page_widget/lib/gom/pages/sections/leftnav.py
- 
-from enum import Enum, auto
-from .base import WPBaseWidget
 
-class LeftNav(WPBaseWidget):
+from arjuna import *
+from .base import WPBaseSection
 
-    class labels(Enum):
-        settings = auto()
+class LeftNav(WPBaseSection):
 
-    def validate_readiness(self):
-        self.element(self.labels.settings)
+    def __init__(self, page):
+        super().__init__(page)
 
-    @property
-    def settings(self):
-        from arjex_app_page_widget.lib.gom.pages.settings import Settings
-        self.element(self.labels.settings).click()
+    def go_to_settings(self):
+        from arjex_app_page_section.lib.gom.pages.settings import Settings
+        self.settings.click()
         return Settings(self)
 ```
 
 #### Points to Note
-1. Inherits from `WPBaseWidget`.
-2. Implements `labels` as discussed for Home page.
-3. The `settings` proerty is moved from `Dashboard` page to here for accurate representation of Gui.
+1. Inherits from `WPBaseSection`.
+2. The `go_to_settings` method is moved from `Dashboard` page to here for accurate representation of Gui.
 
 **TopNav Section**
 
  ```python
  # arjuna-samples/arjex_app_page_widget/lib/gom/pages/sections/topnav.py
- 
+
 from arjuna import *
-from enum import Enum, auto
 from .base import WPBaseSection
 
 class TopNav(WPBaseSection):
-
-    class labels(Enum):
-        logout_confirm = auto()
-        logout_msg = auto()
 
     def logout(self):
         url = C("wp.logout.url")
         self.go_to_url(url)
 
-        self.element(self.labels.logout_confirm).click()
-        self.element(self.labels.logout_msg).wait_until_visible()
+        self.logout_confirm.click()
+        self.logout_msg
 
         from arjex_app_page_section.lib.gom.pages.home import Home
         return Home(self)
 ```
 
 #### Points to Note
-1. Inherits from `WPBaseWidget`.
-2. Implements `labels` as discussed for Home page.
-3. The `logout` method is moved from `WPBasePage` page to here for accurate representation of Gui.
+1. Inherits from `WPBaseSection`.
+2. The `logout` method is moved from `WPBasePage` page to here for accurate representation of Gui.
 
-#### Using the App-Page-Widget Model in Test Code
+#### Using the App-Page-Section Model in Test Code
 
 ```python
-# arjuna-samples/arjex_app_page_widget/test/module/check_01_app_page_widget_model.py
+# arjuna-samples/arjex_app_page_widget/test/module/check_01_app_page_section_model.py
 
 from arjuna import *
-from arjex_app_page_widget.lib.gom.app import WordPress
+from arjex_app_page_section.lib.gom.app import WordPress
 
 @for_test
 def settings(request):
@@ -343,14 +320,14 @@ def settings(request):
     wordpress = WordPress()
     home = wordpress.launch()
     dashboard = home.login_with_default_creds()
-    settings = dashboard.left_nav.settings
+    settings = dashboard.left_nav.go_to_settings()
     yield settings
 
     # Teadown
     settings.top_nav.logout()
 
 @test
-def check_with_wp_app_page_widget(request, settings):
+def check_with_wp_app_page_section(request, settings):
     settings.tweak_role_value("editor")
 ```
 
@@ -360,8 +337,8 @@ def check_with_wp_app_page_widget(request, settings):
 3. In the setup part, we create the WordPress instance as earlier, it now refers to the new class that we created.
 3. `wordpress.launch` launches the web application (opens browser and goes to the `base_url`). It returns the `Home` object.
 4. We login with default credentials using `home.login_with_default_creds()` call. It returns `Dashboard` object.
-5. We go to settings by using `left_nav` section of `dashboard`: `dashboard.left_nav.settings`.
-5. In the teardown part of fixture, we logout using `top_nav` section of `settings`: `settings.top_nav.logout`.
+5. We go to settings by using `left_nav` section of `dashboard`: `dashboard.left_nav.go_to_settings()`.
+5. In the teardown part of fixture, we logout using `top_nav` section of `settings`: `settings.top_nav.logout()`.
 6. In the test, the argument is changed from `dashboard` to `settings`.
 7. `settings.tweak_role_value("editor")` is now  direct call to the settings object.
-8. From test and Gui abstraction perspective, this is the most accurate representation of the Gui as well as the most intuitive version of the test automation code.
+8. So far, from test and Gui abstraction perspective, this is the most accurate representation of the Gui as well as the most intuitive version of the test automation code. We can do even better with more advanced features of Arjuna discussed elsewhere.

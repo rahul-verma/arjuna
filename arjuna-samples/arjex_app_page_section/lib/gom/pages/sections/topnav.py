@@ -18,7 +18,6 @@ limitations under the License.
 '''
 
 from arjuna import *
-from enum import Enum, auto
 from .base import WPBaseSection
 
 class TopNav(WPBaseSection):

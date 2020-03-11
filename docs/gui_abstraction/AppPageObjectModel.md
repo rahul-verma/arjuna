@@ -26,7 +26,7 @@ So far we represented the complete application as a single `WebApp` and hence al
 ```YAML
 labels:
 
-  login:
+  user:
     id: user_login
 
   pwd:
@@ -60,6 +60,7 @@ labels:
 labels:
 
   role:
+    template: dropdown
     id: default_role
 ```
 
@@ -76,7 +77,7 @@ from arjuna import *
 
 class WordPress(WebApp):
 
-    def __init__(self, gns_format="sgns"):
+    def __init__(self):
         url = C("wp.login.url")
         super().__init__(base_url=url)
 
@@ -105,15 +106,12 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
 
-    def prepare(self):
-        self.externalize()
-
     def logout(self):
         url = C("wp.logout.url")
         self.go_to_url(url)
 
-        self.element("logout_confirm").click()
-        self.element("logout_msg").wait_until_visible()
+        self.logout_confirm.click()
+        self.logout_msg
 
         from .home import Home
         return Home(self)
@@ -123,9 +121,8 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
 1. A Base Page class will help us in placing resuable functionality across all classes inheriting from it. 
 2. It inherits from Arjuna's `Page` class.
 3. As it is not supposed to instantiated directly, we make it an abstract class by using Python's `abc` module.
-4. `prepare` method is called by Arjuna as a part of loading the page. We place the `externalize` call here. It will automatically associate the object of a Page class with name `Xyz` with `Xyz.yaml` file in the `namespace` directory.
-5. The `logout` method has the usual logic used earlier. One kye difference is that now it is a page transition method. It returns the `Home` page. Notice how, a `Page` can pass itself as an argument while instantiating another `Page` class.
-6. As the page transitions might refer to each other and can cause import conflicts, it is suggested that you add the import for the same, for example, `from .home import Home` only where it is needed within a method.
+4. The `logout` method has the usual logic used earlier. One kye difference is that now it is a page transition method. It returns the `Home` page. Notice how, a `Page` can pass itself as an argument while instantiating another `Page` class.
+5. As the page transitions might refer to each other and can cause import conflicts, it is suggested that you add the import for the same, for example, `from .home import Home` only where it is needed within a method.
 
 
  **Home Page**
@@ -133,18 +130,16 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
  ```python
  # arjuna-samples/arjex_app_page/lib/gom/pages/home.py
  
+
 from arjuna import *
 from .base import WPBasePage
 
 class Home(WPBasePage):
 
-    def validate_readiness(self):
-        self.element("submit").wait_until_visible()
-
     def login(self, user, pwd):
-        self.element("login").text = user
-        self.element("pwd").text = pwd
-        self.element("submit").click()
+        self.user.text = user
+        self.pwd.text = pwd
+        self.submit.click()
 
         from .dashboard import Dashboard
         return Dashboard(self)
@@ -157,33 +152,24 @@ class Home(WPBasePage):
 ```
 
 #### Points to Note
-1. `validate_readiness` method is called by Arjuna as a part of its page-loading mechanism. It is an optional method, but we implement it for a proper Page class.
-2. `login` returns `Dashboard` page.
-3. `login_with_default_creds` logins with the admin credentials configured in `project.conf`.
+1. `login` returns `Dashboard` page.
+2. `login_with_default_creds` logins with the admin credentials configured in `project.conf`.
 
  **Dashboard Page**
 
  ```python
  # arjuna-samples/arjex_app_page/lib/gom/pages/dashboard.py
- 
+
 from .base import WPBasePage
 
 class Dashboard(WPBasePage):
 
-    def validate_readiness(self):
-        self.element("view_site").wait_until_visible()
-
-    @property
-    def settings(self):
-        self.element("settings").click()
+    def go_to_settings(self):
+        self.settings.click()
 
         from .settings import Settings
         return Settings(self)
 ```
-
-#### Points to Note
-1. `validate_readiness` method is implemented just like Home page.
-2. Instead of a method like `go_to_settings`, we can also implement simple page transitions as Python properties. Here `settings` property implementation is an example of this style.
 
  **Settings Page**
 
@@ -194,13 +180,11 @@ from .base import WPBasePage
 
 class Settings(WPBasePage):
 
-    def validate_readiness(self):
-        self.element("role").wait_until_visible()
-
     def tweak_role_value(self, value):
-        role_select = self.dropdown("role")
+        role_select = self.role
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+        return self
 ```
 
 #### Points to Note
@@ -227,7 +211,7 @@ def dashboard(request):
 
 @test
 def check_with_wp_app_page(request, dashboard):
-    dashboard.settings.tweak_role_value("editor")
+    dashboard.go_to_settings().tweak_role_value("editor")
 ```
 
 ##### Points to Note
@@ -237,5 +221,5 @@ def check_with_wp_app_page(request, dashboard):
 4. We login with default credentials using `home.login_with_default_creds()` call. It returns `Dashboard` which is then yielded.
 5. In the teardown part of fixture, we logout using `dashboard.logout()` call.
 6. In the test, the argument is changed from `wordpress` to `dashbaord`.
-7. `dashboard.settings.tweak_role_value("editor")` gets the `settings` property of `Dashboard` object, which returns the `Settings` object and calls its `tweak_role_value` method.
+7. `dashboard.go_to_settings().tweak_role_value("editor")` gets the `Settings`  object and calls its `tweak_role_value` method.
 

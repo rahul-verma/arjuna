@@ -10,7 +10,6 @@ We use the same test fixture code as from the previous example.
 
 We use the same GNS file `WordPress.yaml` from previous example.
 
-
 ### Usage
 
 ```python

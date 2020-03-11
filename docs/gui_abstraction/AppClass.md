@@ -8,12 +8,42 @@ You can find the example code and files used on this section in [arjuna_app proj
 
 #### The GNS File
 
-We will use the same GNS file as the previous section.
+We will use the following `Wordpress.yaml` GNS file:
+
+```YAML
+labels:
+
+  user:
+    id: user_login
+
+  pwd:
+    id: user_pass
+
+  submit:
+    id: wp-submit
+
+  view_site:
+    classes: welcome-view-site
+
+  logout_confirm:
+    link: log out
+
+  logout_msg:
+    text: logged out
+
+  settings:
+    link: Settings
+
+  role:
+    template: dropdown
+    id: default_role
+```
 
 #### The App Class Code
 
 ```python
 # arjuna-samples/arjex_app/lib/wp_app.py
+
 
 from arjuna import *
 
@@ -21,9 +51,8 @@ class WordPress:
 
     def __init__(self):
         url = C("wp.login.url")
-        self.__app = WebApp(base_url=url)
+        self.__app = WebApp(base_url=url, label="WordPress")
         self.app.launch()
-        self.app.externalize(gns_file_name="WordPress.yaml")
 
     @property
     def app(self):
@@ -34,22 +63,22 @@ class WordPress:
         pwd = C("wp.admin.pwd")
 
         # Login
-        self.app.element("login").text = user
-        self.app.element("pwd").text = pwd
-        self.app.element("submit").click()
-        self.app.element("view_site")
+        self.app.user.text = user
+        self.app.pwd.text = pwd
+        self.app.submit.click()
+        self.app.view_site
 
     def logout(self):
         url = C("wp.logout.url")
         self.app.go_to_url(url)
-        self.app.element("logout_confirm").click()
-        self.app.element("logout_msg")
+        self.app.logout_confirm.click()
+        self.app.logout_msg
 
         self.app.quit()
 
     def tweak_role_value_in_settings(self, value):
-        self.app.element("Settings").click()
-        role_select = self.app.dropdown("role")
+        self.app.settings.click()
+        role_select = self.app.role
         role_select.select_value(value)
         self.app.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
 ```
@@ -65,7 +94,7 @@ class WordPress:
 #### Using the App Class in Test Code
 
 ```python
-# arjuna-samples/arjex_app/test/module/check_02_app.py
+# arjuna-samples/arjex_app/test/module/check_01_app.py
 
 from arjuna import *
 from arjex_app.lib.wp_app import WordPress
@@ -89,5 +118,5 @@ def check_with_wp_app_interim(request, wordpress):
 1. In the test fixture, we instantiate the `WordPress` class, call its `login` method and yield the object so that test can receive it. In its teardown section (after the `yield`), we call the `logout` method of `wordpress` object.
 2. The fixture is mentioned as an argument of the test function.
 3. In the test function we can call any of its methods as seen above. The `app` property is public, so it can be used in the test code as `wordpresss.app`
-4. The call to `tweat_role_value_in_settings` is much simplified and intuitive because of the WordPress class implementation.
+4. The call to `tweat_role_value_in_settings` made to change role to `editor`.
 

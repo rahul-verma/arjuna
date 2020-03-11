@@ -29,33 +29,27 @@ class WordPress(WebApp):
         super().__init__(base_url=url)
         self.launch()
 
-    def prepare(self):
-        self.externalize()
-
-    def validate_readiness(self):
-        self.element("submit").wait_until_visible()
-
     def login(self):
         user = C("wp.admin.name")
         pwd = C("wp.admin.pwd")
 
         # Login
-        self.element("login").text = user
-        self.element("pwd").text = pwd
-        self.element("submit").click()
-        self.element("view_site")
+        self.user.text = user
+        self.pwd.text = pwd
+        self.submit.click()
+        self.view_site
 
     def logout(self):
         url = C("wp.logout.url")
         self.go_to_url(url)
-        self.element("logout_confirm").click()
-        self.element("logout_msg")
+        self.logout_confirm.click()
+        self.logout_msg
 
         self.quit()
 
     def tweak_role_value_in_settings(self, value):
-        self.app.element("Settings").click()
-        role_select = self.app.dropdown("role")
+        self.app.settings.click()
+        role_select = self.app.role
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
         return self
@@ -63,18 +57,14 @@ class WordPress(WebApp):
 
 #### Points to Note
 1. Rather than a composition relationship with `WebApp` object in previous example, the `WordPress` class inherits from `WebApp` class.
-2. This means all `WebApp` methods are directly callable by `WordPress` as now `WordPress` **IS** `WebApp`.
-3. `self.app.element`, for example, now becomes `self.element`, thereby simplifying the code.
-4. We implement the `prepare` method to externalize the `WebApp`.
-5. We implemented the `validate_readiness` method to wait for submit button to be visible as a part of App-loading mechanism.
-4. Rest of the code is exactly like earlier example code.
+2. This means all `WebApp` methods are directly callable by `WordPress` as now `WordPress` **IS** `WebApp`. `self.app`, becomes just `self`, thereby simplifying the code.
+3. Rest of the code is exactly like earlier example code.
 
 
 #### Using the App Class in Test Code
 
 ```python
-# arjuna-samples/arjex_app/test/module/check_03_app_model.py
-
+# arjuna-samples/arjex_app/test/module/check_02_app_model.py
 
 from arjuna import *
 from arjex_app.lib.wp_app_model import WordPress
@@ -90,7 +80,7 @@ def wordpress(request):
     wordpress.logout()
 
 @test
-def check_with_wp_app(request, wordpress):
+def check_with_wp_app_model(request, wordpress):
     wordpress.tweak_role_value_in_settings("editor")
 ```
 

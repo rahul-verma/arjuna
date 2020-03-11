@@ -8,7 +8,7 @@ Following is the list of critical additions and updates for a given released ver
 - Elements can be directly access using `. (dot)` operator. from aby Gui.
 - `template` keyword can be used in GNS files to define non-GuiElement object types.
 - All example code updated.
-- Main doc and docs for Web UI basics updated.
+- All docs updated as per the revised features.
 
 0.9.9
 -----
