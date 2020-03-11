@@ -6,6 +6,10 @@ For this section, it is more about avoiding repeated code across examples.
 
 Here, we are following a traditional style of programming. For more advanced constructs, OOP is the key. We'll explore that in depth in the section on GUI abstractions.
 
+#### The GNS File
+
+We use the same GNS file `WordPress.yaml` from previous example.
+
 #### The Module Code
 
 ```python

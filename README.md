@@ -65,7 +65,7 @@ You can find the example code used on this section in [arjuna_l10 project](https
 You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/test/module).
 
 1. [Getting Started with WebApp](https://github.com/rahul-verma/arjuna/blob/master/docs//webui_basics/WebApp.md)
-2. [Gui Namespace (GNS) - Externalized Identifiers](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiNamespace.md)
+2. [Gui Namespace (GNS) - Externalized Identifiers](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiNamespace.md)
 3. [Gui Element Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiElementBasicLocators.md)
 4. [Gui Element Locators - Using XPath](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingXPath.md)
 5. [Gui Element Locators - Using CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingCSSSelectors.md)
