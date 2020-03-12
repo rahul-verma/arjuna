@@ -90,6 +90,9 @@ class GuiNamespace:
         from arjuna import Arjuna
         Arjuna.get_logger().debug("Loaded {} label. EMD: {}".format(name, str(emd)))
 
+    def add_reference(self, name, value):
+        self.__ns[name] = value
+
     def has(self, name):
         return name.lower() in self.__ns
 
@@ -111,6 +114,14 @@ class GuiNamespace:
         
         return self.__ns[label.lower()][context]
 
+    @property
+    def root_element_name(self):
+        return self.__ns["__root__"]
+
+    @property
+    def anchor_element_name(self):
+        return self.__ns["__anchor__"]
+
 class BaseGuiNamespaceLoader:
 
     def __init__(self, name):
@@ -128,6 +139,9 @@ class BaseGuiNamespaceLoader:
     # Needs to be thread safe
     def add_element_meta_data(self, name, context, locators, meta):
         self.__namespace.add_element_meta_data(name, context, locators, meta)
+
+    def add_reference(self, name, value):
+        self.__namespace.add_reference(name, value)
 
     def _raise_notafile_exception(self, file_path):
         raise Exception("{} is not a file.".format(file_path))
@@ -224,15 +238,34 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
             self.__load_targets = yaml.get_section("load").as_map()
 
             if "root" in self.__load_targets:
-                self.__ns["__root__"] = {"locators" : {self.__context: []}, "meta": dict()}
-                self.__ns["__root__"]["locators"][self.__context].extend(self.__ns[self.__load_targets["root"]][self.__context])
+                self.__ns["__root__"] = self.__load_targets["root"].lower()
+                # self.__ns["__root__"] = {"locators" : {self.__context: []}, "meta": dict()}
+                # target_label = self.__ns[self.__load_targets["root"]]
+                # target_locators = self.__ns[target_label.lower()]["locators"][self.__context]
+                # self.__ns["__root__"]["locators"][self.__context].extend(target_locators)
+            else:
+                self.__ns["__root__"] = None
 
             if "anchor" in self.__load_targets:
-                self.__ns["__anchor__"] = {"locators" : {self.__context: []}, "meta": dict()}
-                self.__ns["__anchor__"]["locators"][self.__context].extend(self.__ns[self.__load_targets["anchor"]][self.__context])
+                self.__ns["__anchor__"] = self.__load_targets["anchor"].lower()
+                # self.__ns["__anchor__"] = {"locators" : {self.__context: []}, "meta": dict()}
+                # target_label = self.__load_targets["anchor"]
+                # print(target_label)
+                # target_locators = self.__ns[target_label.lower()]["locators"][self.__context]
+                # self.__ns["__anchor__"]["locators"][self.__context].extend(target_locators)
+            else:
+                self.__ns["__anchor__"] = None
+
+        else:
+            self.__ns["__root__"] = None
+            self.__ns["__anchor__"] = None
 
         for ename, emd in self.__ns.items():
-            context_data = emd["locators"]
-            for context, locators in context_data.items():
-                self.add_element_meta_data(ename, context, locators, emd["meta"])
-                Arjuna.get_logger().debug("Loading {} label for {} context with locators: {} and meta {}.".format(ename, context, [str(l) for l in locators], emd["meta"]))
+            if ename not in {'__root__', '__anchor__'}:
+                context_data = emd["locators"]
+                for context, locators in context_data.items():
+                    self.add_element_meta_data(ename, context, locators, emd["meta"])
+                    Arjuna.get_logger().debug("Loading {} label for {} context with locators: {} and meta {}.".format(ename, context, [str(l) for l in locators], emd["meta"]))
+        
+        self.add_reference("__root__", self.__ns["__root__"])
+        self.add_reference("__anchor__", self.__ns["__anchor__"])

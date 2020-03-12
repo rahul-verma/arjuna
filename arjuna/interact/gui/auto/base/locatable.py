@@ -22,37 +22,31 @@ class Locatable:
     def __init__(self, gui, emd):
         # super().__init__(automator.config) #, obj_name)
         self.__gui = gui
-        self.__automator = gui.automator
+        self.__automator = gui.get_automator()
         self.__lmd = emd
         self.__located = False
         self.__located_by = None 
 
         # self.__parent = parent
 
-    @property
-    def gui(self):
+    def get_gui(self):
         return self.__gui
         
-    @property
-    def automator(self):
+    def get_automator(self):
         return self.__automator
 
-    @property
-    def lmd(self):
+    def get_lmd(self):
         return self.__lmd
 
-    @property
-    def located(self):
+    def is_located(self):
         return self.__located
 
-    @property
-    def located_with(self):
+    def is_located_with(self):
         return self.__located_by
 
-    @located_with.setter
-    def located_with(self, locator_tuple):
+    def set_located_with(self, locator_type, locator_value):
         self.__located = True
-        self.__located_by = locator_tuple
+        self.__located_by = (locator_type, locator_value)
 
 
 '''

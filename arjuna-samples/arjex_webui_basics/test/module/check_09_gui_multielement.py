@@ -28,6 +28,6 @@ def check_multielement(request, logged_in_wordpress):
     check_boxes = wordpress.cat_checkboxes
     check_boxes[1].check()
     check_boxes[1].uncheck()
-    check_boxes.first_element.uncheck()
-    check_boxes.last_element.uncheck()
-    check_boxes.random_element.uncheck()
+    check_boxes.get_first_element().uncheck()
+    check_boxes.get_last_element().uncheck()
+    check_boxes.get_random_element().uncheck()

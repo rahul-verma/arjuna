@@ -24,18 +24,13 @@ class GuiWebRadioGroup(Configurable):
     def __init__(self, gui, lmd, parent=None):
         super().__init__(gui)
         self.__gui = gui
-        self.__automator = gui.automator
-        self.__finder = parent and parent or self.automator
+        self.__automator = gui.get_automator()
+        self.__finder = parent and parent or self.__automator
         self.__radios = None
         self.__find(self.__finder, lmd)
 
-    @property
-    def gui(self):
+    def get_gui(self):
         return self.__gui
-
-    @property
-    def automator(self):
-        return self.__automator
 
     def __validate_radio_buttons(self, source):
         if [t for t in source.get_tag_names() if t.strip().lower() != 'input']:
@@ -51,8 +46,8 @@ class GuiWebRadioGroup(Configurable):
 
     def __find(self, finder, lmd):
         # This would force the identification of partial elements in the wrapped multi-element.
-        self.__radios = finder.multi_element(self.gui, lmd, iconfig=self.settings)
-        self.__check_type_if_configured(self.source)
+        self.__radios = finder.multi_element(self.get_gui(), lmd, iconfig=self.settings)
+        self.__check_type_if_configured(self.get_source())
 
     def has_index_selected(self, index):
         return self.__radios[index].is_selected()
@@ -81,6 +76,5 @@ class GuiWebRadioGroup(Configurable):
         option = self.__radios.get_instance_by_value(value)
         self.__select_option(option)
 
-    @property
-    def source(self):
-        return self.__radios.source
+    def get_source(self):
+        return self.__radios.get_source()

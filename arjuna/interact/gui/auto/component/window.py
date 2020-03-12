@@ -46,50 +46,43 @@ class BasicWindow:
         self.__app = app
         self.__automator = automator
         self.__window_handle = None
-        self.__config = automator.config
+        self.__config = automator.get_config()
 
-    @property
-    def max_wait_time(self):
-        return self.automator.config.guiauto_max_wait
+    def get_max_wait_time(self):
+        return self.__automator.get_config().guiauto_max_wait
 
-    @property
-    def app(self):
+    def get_app(self):
         return self.__app
 
-    @property
-    def config(self):
+    def get_config(self):
         return self.__config    
 
-    @property
-    def automator(self):
+    def get_automator(self):
         return self.__automator
 
-    @property
-    def handle(self):
+    def get_handle(self):
         return self.__window_handle
 
-    @property
-    def title(self):
-        return self.automator.dispatcher.get_current_window_title()
+    def get_title(self):
+        return self.__automator.dispatcher.get_current_window_title()
 
-    @property
-    def size(self):
-        return self.automator.dispatcher.get_current_window_size()
+    def get_size(self):
+        return self.__automator.dispatcher.get_current_window_size()
 
     def _set_handle(self, handle):
         self.__window_handle = handle
 
     def focus(self):
-        self.automator.dispatcher.focus_on_window(self.handle)
+        self.__automator.dispatcher.focus_on_window(self.handle)
 
     def is_main_window(self):
         return False
 
     def set_window_size(self, width, height):
-        self.automator.dispatcher.set_current_window_size(width, height)
+        self.__automator.dispatcher.set_current_window_size(width, height)
 
     def maximize(self):
-        self.automator.dispatcher.maximize_current_window()
+        self.__automator.dispatcher.maximize_current_window()
 
 class MainWindow(BasicWindow):
 
@@ -106,13 +99,13 @@ class MainWindow(BasicWindow):
         return self.__conditions
 
     def get_all_child_window_handles(self):
-        handles = self.automator.dispatcher.get_all_window_handles()
+        handles = self.__automator.dispatcher.get_all_window_handles()
         handles = [handle for handle in handles if handle != self.handle]
         new_handles = []
         for handle in handles:
             if handle != self.handle:
                 if handle not in self.__all_child_windows:
-                    cwin = ChildWindow(self.app, self.automator, self, handle)
+                    cwin = ChildWindow(self.app, self.__automator, self, handle)
                     self.__all_child_windows[handle] = cwin
                     new_handles.append(handle)
         return handles, new_handles
@@ -144,10 +137,10 @@ class MainWindow(BasicWindow):
         self.focus()
 
     def get_current_window_handle(self):
-        return self.automator.dispatcher.get_current_window_handle()
+        return self.get_automator().dispatcher.get_current_window_handle()
 
     def child_window(self, locator_meta_data):
-        return self.conditions.ChildWindowIsPresent(locator_meta_data).wait(max_wait_time=self.max_wait_time)
+        return self.get_conditions().ChildWindowIsPresent(locator_meta_data).wait(max_wait_time=self.max_wait_time)
 
     def _find_child_window(self, locator_meta_data):
         all_child_handles, _ = self.get_all_child_window_handles()
@@ -168,7 +161,7 @@ class MainWindow(BasicWindow):
                             # The element for window is created in the context of an app.
                             # Need to verify this logic.
                             # and its impact on POM.
-                            contained_element = self.automator.element(self.app,emd, max_wait_time=0.5)
+                            contained_element = self.__automator.element(self.app,emd, max_wait_time=0.5)
                             # contained_element.find()
                             return cwin
                         except WaitableError as f:
@@ -180,7 +173,7 @@ class MainWindow(BasicWindow):
 
     def __resize_window_as_per_config(self):
         # Resize window
-        config = self.config
+        config = self.get_config()
         browser_width = config.value(ArjunaOption.BROWSER_DIM_WIDTH)
         browser_height = config.value(ArjunaOption.BROWSER_DIM_HEIGHT)
         should_maximize = config.value(ArjunaOption.BROWSER_MAXIMIZE)
@@ -210,6 +203,6 @@ class ChildWindow(BasicWindow):
 
     def close(self):
         self.focus()
-        self.automator.dispatcher.close_current_window()
+        self.get_automator().dispatcher.close_current_window()
         self.__main_window.delete_window(self.handle)
         self.__main_window.focus()

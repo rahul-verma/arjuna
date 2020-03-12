@@ -25,7 +25,7 @@ def check_create_config(request):
 
     google = WebApp(base_url="https://google.com", config=config)
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    request.asserter.assert_equal("Google", google.get_title(), "Page title does not match.")
     google.quit()
 ```
    
@@ -61,7 +61,7 @@ def check_named_config(request):
 
     google = WebApp(base_url="https://google.com", config=config)
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    request.asserter.assert_equal("Google", google.get_title(), "Page title does not match.")
     google.quit()
 ```
 
@@ -87,7 +87,7 @@ def check_named_config(request):
 
     google = WebApp(base_url="https://google.com", config=context.get_config())
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    request.asserter.assert_equal("Google", google.get_title(), "Page title does not match.")
     google.quit()
  ```
 

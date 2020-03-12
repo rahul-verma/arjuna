@@ -23,7 +23,7 @@ from arjuna import *
 def check_go_to_url(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    request.asserter.assert_equal("Google", google.get_title(), "Page title does not match.")
     google.quit()
 
 

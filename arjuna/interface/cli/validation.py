@@ -39,7 +39,7 @@ def new_project_dir(input):
     proj_name = os.path.basename(input)
     lname_check("Project", proj_name)
     if os.path.exists(input):
-        print('Project path already exist: {}'.format(input))
+        print('Project path already exists: {}'.format(input))
         return input
     else:
         os.makedirs(input)

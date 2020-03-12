@@ -20,10 +20,10 @@ limitations under the License.
 import time
 import inspect
 
-class HardCoded:
+class Stack:
 
     @classmethod
-    def __get_invoker(cls):
+    def get_invoker(cls):
         frame = inspect.stack()[2]
         mod = inspect.getmodule(frame[0])
         mod_name = mod.__name__
@@ -41,6 +41,8 @@ class HardCoded:
         line = frame[2]
         return "{}{}Line: {}".format(func, mod_script, line)
 
+class HardCoded:
+
     @classmethod
     def __log(cls, invoker, why, seconds):
         from arjuna import Arjuna
@@ -49,4 +51,4 @@ class HardCoded:
     @classmethod
     def sleep(cls, why, seconds):
         time.sleep(seconds)
-        cls.__log(cls.__get_invoker(), why, seconds)
+        cls.__log(Stack.get_invoker(), why, seconds)

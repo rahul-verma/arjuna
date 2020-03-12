@@ -101,7 +101,6 @@ class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)
         self.__top_nav = TopNav(self)
-        print(RE_LOC)
         if RE_LOC == "coded":
             self.__left_nav = LeftNav1(self)
         elif RE_LOC == "gns":

@@ -22,7 +22,7 @@ Please note that the contents of `arjunaOptions` follow [HOCON](https://github.c
 def check_project_conf(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    request.asserter.assert_equal("Google", google.get_title(), "Page title does not match.")
     google.quit()
 
 ```

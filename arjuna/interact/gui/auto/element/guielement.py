@@ -26,13 +26,13 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     def __init__(self, gui, emd, iconfig=None):
         AsserterMixIn.__init__(self)
-        ElementContainer.__init__(self, gui.automator.config)
+        ElementContainer.__init__(self, gui.get_automator().get_config())
         Locatable.__init__(self, gui, emd) #, parent, obj_name="GuiElement")
         Interactable.__init__(self, gui, iconfig)
 
-    def element(self, *str_or_with_locators, iconfig=None):
-        lmd = self.gui.convert_to_with_lmd(*str_or_with_locators)
-        return self.element_with_lmd(self.gui, lmd, iconfig=iconfig)
+    def __element(self, *str_or_with_locators, iconfig=None):
+        lmd = self.get_gui().convert_to_with_lmd(*str_or_with_locators)
+        return self.element_with_lmd(self.get_gui(), lmd, iconfig=iconfig)
 
     def element_with_lmd(self, gui, lmd, iconfig=None):
         from arjuna.interact.gui.auto.element.guielement import GuiElement
@@ -40,9 +40,9 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
         self.load_element(gui_element)
         return gui_element        
 
-    def multi_element(self, *str_or_with_locators, iconfig=None):
-        lmd = self.gui.convert_to_with_lmd(*str_or_with_locators)
-        return self.multi_element_with_lmd(self.gui, lmd, iconfig=iconfig)
+    def __multi_element(self, *str_or_with_locators, iconfig=None):
+        lmd = self.get_gui().convert_to_with_lmd(*str_or_with_locators)
+        return self.multi_element_with_lmd(self.get_gui(), lmd, iconfig=iconfig)
 
     def multi_element_with_lmd(self, gui, lmd, iconfig=None):
         from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
@@ -55,3 +55,23 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     def find_multielement_with_js(self, js):
         raise Exception("With.JS is currently not supported for nested element finding.")
+
+    def __getattr__(self, name):
+        emd = self.get_gui().get_gui_def().get_emd(name)
+        from arjuna import Arjuna
+        Arjuna.get_logger().debug("Finding element with label: {} and emd: {}".format(name, emd))
+        return getattr(self, emd.meta.template.name.lower() + "_with_lmd")(self, emd)
+
+    def element(self, *, template="element", **kwargs):
+        from arjuna import Arjuna
+        from arjuna.interact.gui.helpers import WithType, With
+        with_list = []
+        for k,v in kwargs.items():
+            if k.upper() in WithType.__members__:
+                with_list.append(getattr(With, k.lower())(v))
+        if not with_list:
+            raise Exception("You must provide atleast one locator.")
+        from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+        emd = GuiElementMetaData.create_lmd(*with_list)
+        Arjuna.get_logger().debug("Finding element with emd: {}.".format(emd))
+        return getattr(self, emd.meta.template.name.lower() + "_with_lmd")(self, emd)

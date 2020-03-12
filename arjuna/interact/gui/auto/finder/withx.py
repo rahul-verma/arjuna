@@ -1,3 +1,4 @@
+import copy
 from arjuna.core.adv.types import CIStringDict
 from arjuna.configure.impl.validator import Validator
 
@@ -7,10 +8,8 @@ class WithX:
         self.__xdict = CIStringDict()
         for k,v in xdict.items():
             try:
-                self.__xdict[Validator.arjuna_name(k)] = {"wtype" : xdict[k]["wtype"].strip().upper(), "value" : xdict[k]["value"].strip()}
+                self.__xdict[Validator.arjuna_name(k)] = {"wtype" : xdict[k]["wtype"].strip().upper(), "value" : xdict[k]["value"]}
             except Exception as e:
-                print(e)
-                print(xdict)
                 raise Exception(f"Invalid WithX name >>{k}<<.")
 
     def has_locator(self, name):
@@ -19,9 +18,16 @@ class WithX:
     def format_args(self, name, vargs, kwargs):
         if not self.has_locator(name):
             raise Exception("No WithX locator with name {} found.".format(name))
-        fmt = self.__xdict[name]
+
+        # Critical to create a copy
+        fmt = copy.deepcopy(self.__xdict[name])
         try:
-            return fmt["wtype"], fmt["value"].format(*vargs, **kwargs)
+            if fmt["wtype"] in {'ATTR', 'FATTR'}:
+                for k,v in fmt["value"].items():
+                    fmt["value"][k] = v.format(**kwargs)
+                return fmt["wtype"], fmt["value"]
+            else:
+                return fmt["wtype"], fmt["value"].format(*vargs, **kwargs)
         except Exception as e:
             from arjuna import Arjuna
             Arjuna.get_logger().error(f"Error in processing withx {name} : {fmt} for vargs {vargs} and kwargs {kwargs}")

@@ -31,7 +31,7 @@ class Tab:
         attr_value = label_elem.get_attr_value(content_relation_attr)
         with_obj = getattr(With, content_relation_type.name.lower())(attr_value)
 
-        self.__tab_content_lmd = self.automator.create_lmd(with_obj)
+        self.__tab_content_lmd = self.__automator.create_lmd(with_obj)
         self.__tab_content = None
 
     @property
@@ -62,4 +62,4 @@ class TabGroup(ElementConfig):
 
     @property
     def labels(self):
-        return [t.label for t in self.__tabs]
+        return [t.get_label() for t in self.__tabs]

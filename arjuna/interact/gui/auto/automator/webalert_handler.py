@@ -24,10 +24,6 @@ class WebAlertHandler:
         self.__alert_present = False
         self.__alert = None
 
-    @property
-    def automator(self):
-        return self.__automator
-
     def create_alert(self):
         if self.__alert_present:
             return self.__alert
@@ -35,7 +31,7 @@ class WebAlertHandler:
             self.wait()
             from arjuna.interact.gui.auto.component.webalert import WebAlert
             self.__alert_present = True
-            alert = WebAlert(self.automator)
+            alert = WebAlert(self.__automator)
             self.__alert = alert
             return alert
 
@@ -44,10 +40,10 @@ class WebAlertHandler:
         self.__alert = None
 
     def wait(self):
-        self.automator.conditions.AlertIsPresent().wait(max_wait_time=self.automator.config.value("guiauto.max.wait"))
+        self.__automator.conditions.AlertIsPresent().wait(max_wait_time=self.__automator.get_config().value("guiauto.max.wait"))
 
     def is_alert_present(self):
-        return self.automator.dispatcher.is_web_alert_present()
+        return self.__automator.dispatcher.is_web_alert_present()
 
 
 

@@ -60,7 +60,6 @@ class ConfigContainer:
         try:
             self.set_arjuna_option(option, obj)
         except Exception as e:
-            print(e)
             import traceback
             traceback.print_exc()
             self.set_user_option(option, obj)

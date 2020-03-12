@@ -125,9 +125,10 @@ class WaitableError(Exception):
 
 class _ElementNotFoundError(WaitableError):
 
-    def __init__(self, elem_name, *locators, message=None):
+    def __init__(self, elem_name, *locators, container=None, message=None):
+        container = container and  " in {}".format(container) or ""
         message = message and  "Error message: {}".format(message) or ""
-        super().__init__("{} not found using any of the locators: {}.{}".format(elem_name, GuiElementMetaData.locators_as_str(locators), message))
+        super().__init__("{} not found using any of the locators: {}{}.{}".format(elem_name, GuiElementMetaData.locators_as_str(locators), container, message))
 
 class _ElementPresentError(WaitableError):
 
@@ -137,8 +138,8 @@ class _ElementPresentError(WaitableError):
 
 class GuiElementNotFoundError(_ElementNotFoundError):
 
-    def __init__(self, *locators, message=None):
-        super().__init__("GuiElement(s)", *locators, message=message)
+    def __init__(self, *locators, container=None, message=None):
+        super().__init__("GuiElement(s)", *locators, container=container, message=message)
 
 class GuiElementPresentError(_ElementPresentError):
 
@@ -178,7 +179,7 @@ class GuiNotLoadedError(WaitableError):
 
     def __init__(self, gui, msg):
         message = msg and  " Error message: {}.".format(msg) or ""
-        super().__init__("GUI [{}] did not load as expected.{}".format(gui.qual_name, message))
+        super().__init__("GUI [{}] did not load as expected.{}".format(gui.get_qual_name(), message))
 
 class GuiLabelNotPresentError(Exception):
 
@@ -191,4 +192,4 @@ class GuiNamespaceLoadingError(Exception):
 
     def __init__(self, gui, msg):
         message = msg and  " Error message: {}".format(msg) or ""
-        super().__init__("Gui namespace was not loaded for >{}<.{}".format(gui.qual_name, message))
+        super().__init__("Gui namespace was not loaded for >{}<.{}".format(gui.get_qual_name(), message))

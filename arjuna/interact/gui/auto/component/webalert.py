@@ -30,17 +30,17 @@ class WebAlert:
         return self.__automator
 
     def confirm(self):
-        self.automator.dispatcher.confirm_web_alert()
-        self.automator.alert_handler.delete_alert()
+        self.__automator.dispatcher.confirm_web_alert()
+        self.__automator.alert_handler.delete_alert()
 
     def dismiss(self):
-        self.automator.dispatcher.dismiss_web_alert()
-        self.automator.alert_handler.delete_alert()
+        self.__automator.dispatcher.dismiss_web_alert()
+        self.__automator.alert_handler.delete_alert()
 
     @property
     def text(self):
-        return self.automator.dispatcher.get_text_from_web_alert()
+        return self.__automator.dispatcher.get_text_from_web_alert()
 
     @text.setter
     def text(self, text):
-        self.automator.dispatcher.send_text_to_web_alert(text)
+        self.__automator.dispatcher.send_text_to_web_alert(text)

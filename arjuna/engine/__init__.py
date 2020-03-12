@@ -166,6 +166,14 @@ class ArjunaSingleton:
         return config.value(query)
 
     def __init_logger(self, dl):
+
+        class InvokerFilter(logging.Filter):
+
+            def filter(self, record):
+                if not hasattr(record, "invoker"):
+                    record.invoker = '<no_trace>'
+                return True
+
         from arjuna.core.enums import ArjunaOption
         log_dir = self.__ref_config.value(ArjunaOption.LOG_DIR)
         if not os.path.isdir(log_dir):
@@ -175,14 +183,16 @@ class ArjunaSingleton:
         lpath = os.path.join(log_dir, fname)
 
         logger = logging.getLogger("arjuna")
+        logger.addFilter(InvokerFilter())
         logger.setLevel(logging.DEBUG)
         ch = logging.StreamHandler(sys.stdout)
         ch.flush = sys.stdout.flush
         ch.setLevel(dl)
         fh = logging.FileHandler(lpath, "w", 'utf-8')
         fh.setLevel(fl)
-        f_fmt = logging.Formatter(u'[%(levelname)5s]\t%(asctime)s\t%(pathname)s::%(module)s.%(funcName)s:%(lineno)d\t%(message)s')
-        c_fmt = logging.Formatter(u'[%(levelname)5s]\t%(message)s')
+        #f_fmt = logging.Formatter(u'[%(levelname)5s]\t%(asctime)s\t%(pathname)s::%(module)s.%(funcName)s:%(lineno)d\t%(message)s')
+        f_fmt = logging.Formatter(u'[%(levelname)7s]\t%(asctime)s\t%(invoker)s\t%(message)s')
+        c_fmt = logging.Formatter(u'[%(levelname)7s]\t%(message)s')
         ch.setFormatter(c_fmt)
         fh.setFormatter(f_fmt)
         logger.addHandler(ch)

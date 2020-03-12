@@ -54,6 +54,7 @@ class ArjunFacade:
 
 from arjuna.engine import Arjuna
 
+from arjuna.interact.gui.helpers import With
 from arjuna.interact.gui.gom import WebApp, Page, Section, Widget, Dialog
 
 from arjuna.core.exceptions import *
@@ -77,9 +78,17 @@ L = Arjuna.get_localized_str
 C = Arjuna.get_config_value
 R = Arjuna.get_dataref_value
 
-class Log:
-    
-    def __call__(self, *args, **kwargs):
-        return Arjuna.get_logger()
+class LogCall:
 
-get_logger = Log()
+    def __init__(self, ctype):
+        self.__ctype = ctype.lower()
+    
+    def __call__(self, msg, *args, **kwargs):
+        from arjuna.core.audit import Stack
+        return getattr(Arjuna.get_logger(), self.__ctype)(msg, *args, extra={'invoker': Stack.get_invoker()}, **kwargs)
+
+log_debug = LogCall("debug")
+log_info = LogCall("info")
+log_warning = LogCall("warning")
+log_error = LogCall("error")
+log_fatal = LogCall("fatal")

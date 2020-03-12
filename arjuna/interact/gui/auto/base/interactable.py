@@ -25,7 +25,7 @@ from arjuna.core.exceptions import GuiElementTextNotSetError
 class Interactable(Configurable, Dispatchable):
 
     def __init__(self, gui, iconfig): #, parent=None, find=True):
-        self.__config = gui.automator.config
+        self.__config = gui.get_automator().get_config()
         Configurable.__init__(self, gui, iconfig)
         Dispatchable.__init__(self)
         self.__source = None

@@ -41,28 +41,24 @@ class Browser:
         self.__automator = automator
         self.__conditions = BrowserConditions(self)
 
-    @property
-    def automator(self):
-        return self.__automator
-
     def is_document_ready(self):
         return self.execute_javascript("return document.readyState") == "complete"
 
     def go_to_url(self, url):
-        self.automator.dispatcher.go_to_url(url=url)
+        self.__automator.dispatcher.go_to_url(url=url)
         self.__conditions.DocumentReadyState().wait()
 
     def go_back(self):
-        self.automator.dispatcher.go_back_in_browser()
+        self.__automator.dispatcher.go_back_in_browser()
         self.__conditions.DocumentReadyState().wait()
 
     def go_forward(self):
-        self.automator.dispatcher.go_forward_in_browser()
+        self.__automator.dispatcher.go_forward_in_browser()
         self.__conditions.DocumentReadyState().wait()
 
     def refresh(self):
-        self.automator.dispatcher.refresh_browser()
+        self.__automator.dispatcher.refresh_browser()
         self.__conditions.DocumentReadyState().wait()
 
     def execute_javascript(self, js, *args):
-        return self.automator.dispatcher.execute_javascript(js, *args)
+        return self.__automator.dispatcher.execute_javascript(js, *args)

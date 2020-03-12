@@ -60,16 +60,13 @@ class GuiAutomator(ElementContainer,Dispatchable):
         self.dispatcher = SeleniumDriverDispatcher()
         self.__launch()
 
-    @property
-    def app(self):
+    def get_app(self):
         return self.__app
 
-    @property
-    def ext_config(self):
+    def get_ext_config(self):
         return self.__econfig
 
-    @property
-    def screenshots_dir(self):
+    def get_screenshots_dir(self):
         return self.__screenshots_dir
 
     def create_lmd(self, *locators):
@@ -95,45 +92,39 @@ class GuiAutomator(ElementContainer,Dispatchable):
         if interval is not None:
             self.__slomo_interval = interval
 
-    @property
-    def browser(self):
+    def get_browser(self):
         return self.__browser
 
-    @property
-    def main_window(self):
+    def get_main_window(self):
         return self.__main_window
 
     def child_window(self, lmd):
-        return self.main_window.child_window(lmd)
+        return self.get_main_window().get_child_window(lmd)
 
-    @property
-    def latest_child_window(self):
-        return self.main_window.latest_child_window
+    def get_latest_child_window(self):
+        return self.get_main_window().get_latest_child_window()
 
     def close_all_child_windows(self):
         self.main_window.close_all_child_windows()
 
-    def dom_root(self, gui):
+    def get_dom_root(self, gui):
         from arjuna.interact.gui.auto.component.frame import DomRoot
         return DomRoot(gui)
 
-    def frame(self, gui, lmd, iconfig=None):
+    def get_frame(self, gui, lmd, iconfig=None):
         return self.dom_root(gui).frame(lmd, iconfig=iconfig)
-        
-    @property
-    def alert_handler(self):
+
+    def get_alert_handler(self):
         return self.__alert_handler
 
-    @property
-    def view_handler(self):
+    def get_view_handler(self):
         return self.__view_handler
 
-    @property
-    def conditions(self):
+    def get_conditions(self):
         return self.__conditions_handler
 
     def __create_screenshots_dir(self):
-        sdir = self.config.value(ArjunaOption.SCREENSHOTS_DIR)
+        sdir = self.get_config().value(ArjunaOption.SCREENSHOTS_DIR)
         if not os.path.isdir(sdir):
             os.makedirs(sdir)
 
@@ -142,11 +133,11 @@ class GuiAutomator(ElementContainer,Dispatchable):
     #     return self.__automator_uri
 
     def __launch(self):
-        caps = DriverCapabilities(self.config, self.__econfig)
+        caps = DriverCapabilities(self.get_config(), self.__econfig)
         self.dispatcher.launch(caps.processed_config)
 
         from arjuna.interact.gui.auto.component.window import MainWindow
-        self.__main_window = MainWindow(self.app, self)
+        self.__main_window = MainWindow(self.get_app(), self)
 
         from .browser import Browser
         self.__browser = Browser(self)
@@ -188,8 +179,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
     def focus_on_main_window(self):
         self.main_window.focus()
 
-    @property
-    def source(self): #, reload=True):
+    def get_source(self): #, reload=True):
         return self.__source_parser
 
     def perform_action_chain(self, single_action_chain):
@@ -254,6 +244,5 @@ class GuiAutomator(ElementContainer,Dispatchable):
     # Components
     ################################
 
-    @property
-    def alert(self):
+    def get_alert(self):
         return self.alert_handler.create_alert()

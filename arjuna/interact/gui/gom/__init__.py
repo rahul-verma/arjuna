@@ -24,61 +24,65 @@ class Page(AppContent):
 
     def __init__(self, *args, source_gui, label=None, gns_dir=None, gns_file_name=None, **kwargs):
         # app = isinstance(source_gui, App) and source_gui or source_gui.app
-        super().__init__(automator=source_gui.automator, label=label)
-        self.app.ui = self
+        super().__init__(automator=source_gui.get_automator(), label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)
+        self.get_app().set_ui(self)
         self._load(*args, **kwargs)
 
 class Section(AppContent):
 
-    def __init__(self, gui, *args, gns_dir=None, root_element_locators=None, label=None, gns_file_name=None, **kwargs):
-        super().__init__(automator=gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
-        self.__root_element_locators = root_element_locators
+    def __init__(self, gui, *args, gns_dir=None, root=None, label=None, gns_file_name=None, **kwargs):
+        super().__init__(automator=gui.get_automator(), label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
+        self.__root_label = self.__determine_root(root)
         self.__root_element = None
         self._load(*args, **kwargs)
         self.__parent = gui
 
-    def load_root_element(self):
-        gns_re_locators = None
-        coded_re_locators = None
-        # From GUI Def
-        if self.externalized:
-            gns_re_locators = self.gui_def.root_element_with_locators
-
-        # From constructor. Overrides Gui Def if both places have the def.        
-        if self.__root_element_locators is not None:
-            if type(self.__root_element_locators) not in {list, tuple}:
-                self.__root_element_locators = (self.__root_element_locators,)
-            coded_re_locators = self.__root_element_locators
-
-        self.__root_element_locators = self.__root_element_locators and coded_re_locators or coded_re_locators or gns_re_locators
-
+    def __determine_root(self, root_init):
+        root_label = None
+        root_gns = self.get_gui_def().root_element_name
+        if root_init:
+            root_label = root_init
+        else:
+            root_label = root_gns
         from arjuna import Arjuna
-        Arjuna.get_logger().debug("Loaded Root Element for {} widget. Loaded as: {}. Externalized: {}. RE locators in GNS: {}. RE in __init__: {}.".format(
-            self.label,
-            GuiElementMetaData.locators_as_str(self.__root_element_locators),
-            self.externalized,
-            GuiElementMetaData.locators_as_str(gns_re_locators),
-            GuiElementMetaData.locators_as_str(coded_re_locators)
+        Arjuna.get_logger().debug("Loading Root Element for {} Gui. Label: {}. Root in GNS: {}. Root in __init__: {}.".format(
+            self.get_label(),
+            root_label,
+            root_gns,
+            root_init
         ))
 
-        if self.__root_element_locators is not None:
-            self.__root_element = super().element(*self.__root_element_locators)
+        if root_label:
+            root_label = root_label.lower().strip()
+        return root_label
 
-    @property
-    def root(self):
-        return self.__root_element
+    def load_root_element(self):
+        if self.__root_label:
+            self.__root_element = getattr(self, self.__root_label)
 
-    def element(self, *str_or_with_locators, iconfig=None):
-        if self.root:
-            return self.root.element(*str_or_with_locators, iconfig=iconfig)
+    # def element(self, name):
+    #     if self.__root_element:
+    #         return getattr(self.__root_element, name)
+    #     else:
+    #         return getattr(self, name)
+
+    # def multi_element(self, name):
+    #     if self.__root_element:
+    #         return getattr(self.__root_element, name)
+    #     else:
+    #         return getattr(self, name)
+
+    def __getattr__(self, name):
+        emd = self.get_gui_def().get_emd(name)
+        from arjuna import Arjuna
+        
+        if self.__root_element:
+            Arjuna.get_logger().debug("Finding element for emd: {} in element with label: {}".format(emd, self.__root_label))
+            return getattr(self.__root_element, name)
         else:
-            return super().element(*str_or_with_locators, iconfig=iconfig)
+            return super().__getattr__(name)
 
-    def multi_element(self, *str_or_with_locators, iconfig=None):
-        return self.automator.multi_element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
-
-    @property
-    def parent(self):
+    def get_parent(self):
         return self.__parent
 
 Widget = Section
@@ -91,27 +95,24 @@ class App(Gui, metaclass=abc.ABCMeta):
         super().__init__(gns_dir=gns_dir, config=config, ext_config=ext_config, label=label)
         self.__ui = None
         self.__automator = None
-        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)
+        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.get_label())
 
-    @property
-    def automator(self):
+    def get_automator(self):
         return self.__automator
 
     def _launchautomator(self):
         # Default Gui automation engine is Selenium
         from arjuna.interact.gui.auto.automator import GuiAutomator
-        self.__automator = GuiAutomator(self, self.config, self.ext_config)    
+        self.__automator = GuiAutomator(self, self.get_config(), self.get_ext_config())    
 
-    @property
-    def ui(self):
+    def get_ui(self):
         return self.__ui
 
-    @ui.setter
-    def ui(self, page):
+    def set_ui(self, page):
         self.__ui = page
 
     def _create_default_ui(self):
-        self.__ui = Page(source_gui=self, label=self.label, gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)
+        self.__ui = Page(source_gui=self, label=self.get_label(), gns_dir=self.get_gns_dir(), gns_file_name=self.__gns_file_name)
 
     @abc.abstractmethod
     def launch(self):
@@ -131,25 +132,23 @@ class WebApp(App):
         '''
         super().__init__(gns_dir=gns_dir, gns_file_name=gns_file_name, config=config, ext_config=ext_config, label=label is None and self.__class__.__name__ or label)
         from arjuna.core.enums import ArjunaOption
-        self.__base_url = base_url is not None and base_url or self.config.value(ArjunaOption.APP_URL)
+        self.__base_url = base_url is not None and base_url or self.get_config().value(ArjunaOption.APP_URL)
         # self._load(*args, **kwargs)
         self.__args = args
         self.__kwargs = kwargs
 
-    @property
-    def base_url(self):
+    def get_base_url(self):
         return self.__base_url
 
     def launch(self, blank_slate=False):
         self._launchautomator()
         if not blank_slate:
-            self.automator.browser.go_to_url(self.base_url)
+            self.get_automator().get_browser().go_to_url(self.get_base_url())
         self._create_default_ui()
-        self._set_externalized()
         self._load(*self.__args, **self.__kwargs)
 
     def quit(self):
-        self.automator.quit()
+        self.get_automator().quit()
 
     def __getattr__(self, name):
-        return getattr(self.ui, name)
+        return getattr(self.get_ui(), name)

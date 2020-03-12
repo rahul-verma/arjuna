@@ -35,8 +35,8 @@ class GuiDef:
         self.__name_store = name_store
         # self.__namespace_dir = namespace_dir
         self.__automator = automator
-        self.__config = automator.config
-        self.__auto_context = self.config.guiauto_context
+        self.__config = automator.get_config()
+        self.__auto_context = self.get_config().guiauto_context
         self.__file_def_path = def_file_path
         self.__ns = None
         ns_name = "file_ns::" + self.__file_def_path.lower()
@@ -46,15 +46,14 @@ class GuiDef:
             self.__ns = name_store.load_namespace(
                 ns_name, 
                 GuiNamespaceLoaderFactory.create_namespace_loader(
-                    self.config,
+                    self.get_config(),
                     self.__file_def_path
             )
         )
 
         self.__children = []
 
-    @property
-    def config(self):
+    def get_config(self):
         return self.__config
 
     def is_empty(self):
@@ -109,18 +108,18 @@ class GuiDef:
         return out_list
 
     @property
-    def root_element_with_locators(self):
+    def root_element_name(self):
         try:
-            return self.__gns_locators_as_with_locators("__root__")
-        except GuiLabelNotPresentError:
+            return self.__ns.root_element_name
+        except KeyError:
             # Defining __root__ is optional for GNS files.
             return None
 
     @property
-    def anchor_element_with_locators(self):
+    def anchor_element_name(self):
         try:
-            return self.__gns_locators_as_with_locators("__anchor__")
-        except GuiLabelNotPresentError:
+            return self.__ns.anchor_element_name
+        except KeyError:
             # Defining __load__ is optional for GNS files.
             return None
 
@@ -135,7 +134,7 @@ class GuiFactory:
         from arjuna.core.enums import ArjunaOption
         considered_path = app_def_dir
         if not os.path.isdir(considered_path):
-            gns_dir = automator.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
+            gns_dir = automator.get_config().value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
             full_path = os.path.join(gns_dir, considered_path)
             considered_path = os.path.abspath(full_path)
             if not os.path.isdir(considered_path):

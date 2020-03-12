@@ -23,7 +23,7 @@ from arjuna.core.exceptions import WaitableError, GuiElementNotFoundError, GuiEl
 class ElementFinder:
     def __init__(self, container): #, obj_name=""):
         self.__container = container
-        self.__config = container.config
+        self.__config = container.get_config()
         # self.__obj_name = obj_name
 
     @property
@@ -85,4 +85,4 @@ class ElementFinder:
             else:
                 we = None
         if not found:
-            raise GuiElementNotFoundError(*lmd.locators)
+            raise GuiElementNotFoundError(*lmd.locators, container=self.__container)
