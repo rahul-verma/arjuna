@@ -179,7 +179,7 @@ class GuiNotLoadedError(WaitableError):
 
     def __init__(self, gui, msg):
         message = msg and  " Error message: {}.".format(msg) or ""
-        super().__init__("GUI [{}] did not load as expected.{}".format(gui.get_qual_name(), message))
+        super().__init__("GUI [{}] did not load as expected.{}".format(gui.qual_name, message))
 
 class GuiLabelNotPresentError(Exception):
 
@@ -192,4 +192,4 @@ class GuiNamespaceLoadingError(Exception):
 
     def __init__(self, gui, msg):
         message = msg and  " Error message: {}".format(msg) or ""
-        super().__init__("Gui namespace was not loaded for >{}<.{}".format(gui.get_qual_name(), message))
+        super().__init__("Gui namespace was not loaded for >{}<.{}".format(gui.qual_name, message))

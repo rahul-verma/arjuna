@@ -26,13 +26,13 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     def __init__(self, gui, emd, iconfig=None):
         AsserterMixIn.__init__(self)
-        ElementContainer.__init__(self, gui.get_automator().get_config())
+        ElementContainer.__init__(self, gui.automator.config)
         Locatable.__init__(self, gui, emd) #, parent, obj_name="GuiElement")
         Interactable.__init__(self, gui, iconfig)
 
     def __element(self, *str_or_with_locators, iconfig=None):
-        lmd = self.get_gui().convert_to_with_lmd(*str_or_with_locators)
-        return self.element_with_lmd(self.get_gui(), lmd, iconfig=iconfig)
+        lmd = self.gui.convert_to_with_lmd(*str_or_with_locators)
+        return self.element_with_lmd(self.gui, lmd, iconfig=iconfig)
 
     def element_with_lmd(self, gui, lmd, iconfig=None):
         from arjuna.interact.gui.auto.element.guielement import GuiElement
@@ -41,8 +41,8 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
         return gui_element        
 
     def __multi_element(self, *str_or_with_locators, iconfig=None):
-        lmd = self.get_gui().convert_to_with_lmd(*str_or_with_locators)
-        return self.multi_element_with_lmd(self.get_gui(), lmd, iconfig=iconfig)
+        lmd = self.gui.convert_to_with_lmd(*str_or_with_locators)
+        return self.multi_element_with_lmd(self.gui, lmd, iconfig=iconfig)
 
     def multi_element_with_lmd(self, gui, lmd, iconfig=None):
         from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
@@ -57,7 +57,7 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
         raise Exception("With.JS is currently not supported for nested element finding.")
 
     def __getattr__(self, name):
-        emd = self.get_gui().get_gui_def().get_emd(name)
+        emd = self.gui.gui_def.get_emd(name)
         from arjuna import Arjuna
         Arjuna.get_logger().debug("Finding element with label: {} and emd: {}".format(name, emd))
         return getattr(self, emd.meta.template.name.lower() + "_with_lmd")(self, emd)

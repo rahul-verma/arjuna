@@ -40,7 +40,7 @@ class WebAlertHandler:
         self.__alert = None
 
     def wait(self):
-        self.__automator.conditions.AlertIsPresent().wait(max_wait_time=self.__automator.get_config().value("guiauto.max.wait"))
+        self.__automator.conditions.AlertIsPresent().wait(max_wait_time=self.__automator.config.value("guiauto.max.wait"))
 
     def is_alert_present(self):
         return self.__automator.dispatcher.is_web_alert_present()

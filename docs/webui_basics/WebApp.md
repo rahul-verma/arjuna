@@ -16,7 +16,7 @@ def check_webpp_nobase_url(request):
     google = WebApp()
     google.launch(blank_slate=True)
     google.go_to_url("https://google.com")
-    request.asserter.assert_equal("Google", google.get_title(), "Page title does not match.")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 ```
 
@@ -39,7 +39,7 @@ We can associated the `WebApp` with a base URL by providing `base_url` arg while
 def check_webpp_nobase_url(request):
     google = WebApp(base_url="https://google.com")
     google.launch()
-    request.asserter.assert_equal("Google", google.get_title(), "Page title does not match.")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 ```
 
@@ -55,14 +55,13 @@ During initilization, `WebApp` automatically looks for the `ArjunaOption.APP_URL
 
  @test
 def check_webpp_base_url_in_custom_config(request):
-    context = Arjuna.get_run_context()
-    cc = context.config_creator
-    cc.arjuna_option(ArjunaOption.APP_URL, "https://google.com")
-    cc.register()
+    cb = request.config.builder
+    cb.option(ArjunaOption.APP_URL, "https://google.com")
+    config = cb.register()
 
-    google = WebApp(config=context.get_config())
+    google = WebApp(config=config)
     google.launch()
-    request.asserter.assert_equal("Google", google.get_title(), "Page title does not match.")
+    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
     google.quit()
 ```
  

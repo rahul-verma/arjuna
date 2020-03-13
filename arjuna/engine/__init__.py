@@ -114,7 +114,7 @@ class ArjunaSingleton:
         return self.ref_config
 
     @property
-    def get_withx_ref(self):
+    def withx_ref(self):
         return self.__common_withx_ref
 
     @property
@@ -443,7 +443,7 @@ class Arjuna:
 
     @classmethod
     def get_withx_ref(cls):
-        return cls.ARJUNA_SINGLETON.get_withx_ref
+        return cls.ARJUNA_SINGLETON.withx_ref
 
     @staticmethod
     def exit():

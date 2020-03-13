@@ -34,7 +34,7 @@ from arjuna.engine.asserter import AsserterMixIn
 class _GuiPartialElement(GuiElement):
 
     def __init__(self, gui, multi_element, index: int, dispatcher_element, iconfig=None):
-        super().__init__(gui, multi_element.get_lmd(), iconfig=iconfig)
+        super().__init__(gui, multi_element.lmd, iconfig=iconfig)
         self.__multi_element = multi_element
         self.__index = index
         self.dispatcher = dispatcher_element
@@ -82,63 +82,71 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
     #         self.find()
 
     def load_source_parser(self):
-        self.__source_parser = MultiElementSource(self.get_all_elements())
+        self.__source_parser = MultiElementSource(self.elements)
         # self.__source_parser.load(self.__elements)
 
     def __getitem__(self, index):
         # self.find_if_not_found()
         return self.__elements[index]
 
-    def get_size(self):
+    @property
+    def size(self):
         # self.find_if_not_found()
         return len(self.__elements)
 
-    __len__ = get_size
+    length = size
+
+    def __len__(self):
+        return self.size
 
     def assert_size(self, size, obj_name, msg=None):
-        self.asserter.assert_equal(self.get_size(), size, msg="{} should have exactly {} elements, but was found to have {} elements.".format(obj_name, size, self.get_size(), self.asserter.format_msg(msg)))
+        self.asserter.assert_equal(self.size, size, msg="{} should have exactly {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
 
     def assert_min_size(self, size, obj_name, msg=None):
-        self.asserter.assert_min(self.get_size(), size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.get_size(), self.asserter.format_msg(msg)))
+        self.asserter.assert_min(self.size, size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
     
     def assert_max_size(self, size, obj_name, msg=None):
-        self.asserter.assert_max(self.get_size(), size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.get_size(), self.asserter.format_msg(msg)))
+        self.asserter.assert_max(self.size, size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
 
     def assert_empty(self, obj_name, msg=None):
-        self.asserter.assert_equal(self.get_size(), 0, msg="{} should be empty, but was found to have {} elements.".format(obj_name, self.get_size(), self.asserter.format_msg(msg)))
+        self.asserter.assert_equal(self.size, 0, msg="{} should be empty, but was found to have {} elements.".format(obj_name, self.size, self.asserter.format_msg(msg)))
 
     def assert_not_empty(self, obj_name, msg=None):
-        self.asserter.assert_greater(self.get_size(), 0, msg="{} is expected to have atleat 1 element, but was found to be empty.{}".format(obj_name, self.get_size(), self.asserter.format_msg(msg)))
+        self.asserter.assert_greater(self.size, 0, msg="{} is expected to have atleat 1 element, but was found to be empty.{}".format(obj_name, self.size, self.asserter.format_msg(msg)))
 
-    def set_size(self, count):
+    @size.setter
+    def size(self, count):
         # The logic ignores stale elements 
         for i in range(count):
             try:
-                e = _GuiPartialElement(self.get_gui(), self, i, self.dispatcher.get_element_at_index(i), iconfig=self.settings)
+                e = _GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i), iconfig=self.settings)
                 self.__elements.append(e)
             except StaleElementReferenceException as e:
                 pass
 
-    def get_random_element(self):
+    @property
+    def random_element(self):
         # self.find_if_not_found()
-        return self[random.randint(0, self.get_size()-1)]
+        return self[random.randint(0, self.size-1)]
 
-    def get_first_element(self):
+    @property
+    def first_element(self):
         return self[0]
 
-    def get_last_element(self):
+    @property
+    def last_element(self):
         return self[len(self)-1]
 
     def get_element_at_ordinal(self, ordinal):
         # self.find_if_not_found()
         return self.__elements[ordinal-1]
 
-    def get_instance_by_visible_text(self, text):
+    def get_element_by_visible_text(self, text):
         texts = self.__get_all_texts()
         first_index = self.__find_first_text_index(texts, text)
         return self[first_index]
 
-    def get_instance_by_value(self, value):
+    def get_element_by_value(self, value):
         values = self.__get_all_values()
         first_index = self.__find_first_value_index(values, value)
         return self[first_index]
@@ -208,10 +216,12 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
         else:
             return self[first_index]
 
-    def get_source(self):
+    @property
+    def source(self):
         return self.__source_parser
 
-    def get_all_elements(self):
+    @property
+    def elements(self):
         return self.__elements
 
     def create_filter(self):
@@ -221,7 +231,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
 class ElementFilter:
 
     def __init__(self, gui_multi_element):
-        self.__gui = gui_multi_element.get_gui()
+        self.__gui = gui_multi_element.gui
         self.__lmd = gui_multi_element.lmd
         self.__iconfig = gui_multi_element.settings
         self.__elements = gui_multi_element.elements

@@ -40,7 +40,7 @@ def check_user_options(request):
 
     google = WebApp(base_url=url, config=config)
     google.launch()
-    request.asserter.assert_equal(title, google.get_title(), "Page title does not match.")
+    request.asserter.assert_equal(title, google.title, "Page title does not match.")
     google.quit()
 ```
 

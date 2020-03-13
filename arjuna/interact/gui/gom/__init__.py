@@ -24,14 +24,14 @@ class Page(AppContent):
 
     def __init__(self, *args, source_gui, label=None, gns_dir=None, gns_file_name=None, **kwargs):
         # app = isinstance(source_gui, App) and source_gui or source_gui.app
-        super().__init__(automator=source_gui.get_automator(), label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)
-        self.get_app().set_ui(self)
+        super().__init__(automator=source_gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)
+        self.app.ui = self
         self._load(*args, **kwargs)
 
 class Section(AppContent):
 
     def __init__(self, gui, *args, gns_dir=None, root=None, label=None, gns_file_name=None, **kwargs):
-        super().__init__(automator=gui.get_automator(), label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
+        super().__init__(automator=gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
         self.__root_label = self.__determine_root(root)
         self.__root_element = None
         self._load(*args, **kwargs)
@@ -39,14 +39,14 @@ class Section(AppContent):
 
     def __determine_root(self, root_init):
         root_label = None
-        root_gns = self.get_gui_def().root_element_name
+        root_gns = self.gui_def.root_element_name
         if root_init:
             root_label = root_init
         else:
             root_label = root_gns
         from arjuna import Arjuna
         Arjuna.get_logger().debug("Loading Root Element for {} Gui. Label: {}. Root in GNS: {}. Root in __init__: {}.".format(
-            self.get_label(),
+            self.label,
             root_label,
             root_gns,
             root_init
@@ -73,7 +73,7 @@ class Section(AppContent):
     #         return getattr(self, name)
 
     def __getattr__(self, name):
-        emd = self.get_gui_def().get_emd(name)
+        emd = self.gui_def.get_emd(name)
         from arjuna import Arjuna
         
         if self.__root_element:
@@ -85,9 +85,6 @@ class Section(AppContent):
     def get_parent(self):
         return self.__parent
 
-Widget = Section
-Dialog = Section
-
 class App(Gui, metaclass=abc.ABCMeta):
 
     def __init__(self, *, config=None, ext_config=None, label=None, gns_dir=None, gns_file_name=None):
@@ -95,24 +92,27 @@ class App(Gui, metaclass=abc.ABCMeta):
         super().__init__(gns_dir=gns_dir, config=config, ext_config=ext_config, label=label)
         self.__ui = None
         self.__automator = None
-        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.get_label())
+        self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)
 
-    def get_automator(self):
+    @property
+    def automator(self):
         return self.__automator
 
     def _launchautomator(self):
         # Default Gui automation engine is Selenium
         from arjuna.interact.gui.auto.automator import GuiAutomator
-        self.__automator = GuiAutomator(self, self.get_config(), self.get_ext_config())    
+        self.__automator = GuiAutomator(self, self.config, self.ext_config)
 
-    def get_ui(self):
+    @property
+    def ui(self):
         return self.__ui
 
-    def set_ui(self, page):
+    @ui.setter
+    def ui(self, page):
         self.__ui = page
 
     def _create_default_ui(self):
-        self.__ui = Page(source_gui=self, label=self.get_label(), gns_dir=self.get_gns_dir(), gns_file_name=self.__gns_file_name)
+        self.__ui = Page(source_gui=self, label=self.label, gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)
 
     @abc.abstractmethod
     def launch(self):
@@ -132,23 +132,25 @@ class WebApp(App):
         '''
         super().__init__(gns_dir=gns_dir, gns_file_name=gns_file_name, config=config, ext_config=ext_config, label=label is None and self.__class__.__name__ or label)
         from arjuna.core.enums import ArjunaOption
-        self.__base_url = base_url is not None and base_url or self.get_config().value(ArjunaOption.APP_URL)
+        self.__base_url = base_url is not None and base_url or self.config.value(ArjunaOption.APP_URL)
         # self._load(*args, **kwargs)
         self.__args = args
         self.__kwargs = kwargs
 
-    def get_base_url(self):
+    @property
+    def base_url(self):
         return self.__base_url
 
     def launch(self, blank_slate=False):
         self._launchautomator()
         if not blank_slate:
-            self.get_automator().get_browser().go_to_url(self.get_base_url())
+            print(self.base_url)
+            self.automator.browser.go_to_url(self.base_url)
         self._create_default_ui()
         self._load(*self.__args, **self.__kwargs)
 
     def quit(self):
-        self.get_automator().quit()
+        self.automator.quit()
 
     def __getattr__(self, name):
-        return getattr(self.get_ui(), name)
+        return getattr(self.ui, name)

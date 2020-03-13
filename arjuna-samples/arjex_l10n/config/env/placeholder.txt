@@ -1,1 +1,0 @@
-Placeholder file to retain test project structure when the directory is empty.

@@ -27,9 +27,9 @@ class GuiWebSelect(Configurable):
     def __init__(self, gui, emd, parent=None, option_container_lmd=None, option_lmd=None, iconfig=None):
         super().__init__(gui, iconfig)
         self.__gui = gui
-        self.__automator = gui.get_automator()
-        self.__finder = parent and parent or gui.get_automator()
-        self._wrapped_main_element = self.__automator.element(self.get_gui(), emd)
+        self.__automator = gui.automator
+        self.__finder = parent and parent or gui.automator
+        self._wrapped_main_element = self.__automator.element(self.gui, emd)
         self.__found = False
         self.__options = None
         self.__option_lmd = option_lmd is not None and option_lmd or SimpleGuiElementMetaData("tag", "option")
@@ -37,7 +37,7 @@ class GuiWebSelect(Configurable):
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
         self.__option_container_same_as_select = option_container_lmd is None and True or False
         if not self.__option_container_same_as_select:
-            self.__option_container = self.__finder.element_with_lmd(self.get_gui(), option_container_lmd, iconfig=self.settings)
+            self.__option_container = self.__finder.element_with_lmd(self.gui, option_container_lmd, iconfig=self.settings)
             # # Needs to be loaded so that options can be discovered.
             # self.__option_container.find_if_not_found()
 
@@ -45,7 +45,8 @@ class GuiWebSelect(Configurable):
 
         self.__find()
 
-    def get_gui(self):
+    @property
+    def gui(self):
         return self.__gui
         
     def __validate_select_control(self, tag):
@@ -66,7 +67,7 @@ class GuiWebSelect(Configurable):
 
         def load_options():
             container = get_root_element()
-            self.__options = container.multi_element_with_lmd(self.get_gui(), self.__option_lmd, iconfig=self.settings)
+            self.__options = container.multi_element_with_lmd(self.gui, self.__option_lmd, iconfig=self.settings)
             # self.__options.find_if_not_found()
 
         # self._wrapped_main_element.find()
@@ -88,10 +89,10 @@ class GuiWebSelect(Configurable):
         return self.__options[index].is_selected()
 
     def has_value_selected(self, value):
-        return self.__options.get_instance_by_value(value).is_selected()
+        return self.__options.get_element_by_value(value).is_selected()
 
     def has_visible_text_selected(self, text):
-        return self.__options.get_instance_by_visible_text(text).is_selected()
+        return self.__options.get_element_by_visible_text(text).is_selected()
 
     def __select_option(self, option):
         self._wrapped_main_element.click()
@@ -107,7 +108,7 @@ class GuiWebSelect(Configurable):
         return self.select_by_index(ordinal-1)
 
     def select_text(self, text):
-        option = self.__options.get_instance_by_visible_text(text)
+        option = self.__options.get_element_by_visible_text(text)
         self.__select_option(option)
 
     @property
@@ -121,7 +122,7 @@ class GuiWebSelect(Configurable):
         self._wrapped_main_element.enter_text(text)
 
     def select_value(self, value):
-        option = self.__options.get_instance_by_value(value)
+        option = self.__options.get_element_by_value(value)
         self.__select_option(option)
 
     @property
@@ -137,7 +138,7 @@ class GuiWebSelect(Configurable):
 
     def deselect_by_value(self, value):
         self.__validate_multi_select()
-        return self.__options.get_instance_by_value(value).deselect()
+        return self.__options.get_element_by_value(value).deselect()
 
     def deselect_by_index(self, index):
         pass
@@ -175,6 +176,7 @@ class GuiWebSelect(Configurable):
     def deselect_by_visible_texts(self, text_list):
         pass
 
-    def get_source(self):
+    @property
+    def source(self):
         self.__find_if_not_found()
-        return self.__get_root_element().get_source()
+        return self.__get_root_element().source

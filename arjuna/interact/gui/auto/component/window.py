@@ -46,27 +46,34 @@ class BasicWindow:
         self.__app = app
         self.__automator = automator
         self.__window_handle = None
-        self.__config = automator.get_config()
+        self.__config = automator.config
 
-    def get_max_wait_time(self):
-        return self.__automator.get_config().guiauto_max_wait
+    @property
+    def max_wait_time(self):
+        return self.__automator.config.guiauto_max_wait
 
-    def get_app(self):
+    @property
+    def app(self):
         return self.__app
 
-    def get_config(self):
+    @property
+    def config(self):
         return self.__config    
 
-    def get_automator(self):
+    @property
+    def automator(self):
         return self.__automator
 
-    def get_handle(self):
+    @property
+    def handle(self):
         return self.__window_handle
 
-    def get_title(self):
+    @property
+    def title(self):
         return self.__automator.dispatcher.get_current_window_title()
 
-    def get_size(self):
+    @property
+    def size(self):
         return self.__automator.dispatcher.get_current_window_size()
 
     def _set_handle(self, handle):
@@ -137,7 +144,7 @@ class MainWindow(BasicWindow):
         self.focus()
 
     def get_current_window_handle(self):
-        return self.get_automator().dispatcher.get_current_window_handle()
+        return self.automator.dispatcher.get_current_window_handle()
 
     def child_window(self, locator_meta_data):
         return self.get_conditions().ChildWindowIsPresent(locator_meta_data).wait(max_wait_time=self.max_wait_time)
@@ -173,7 +180,7 @@ class MainWindow(BasicWindow):
 
     def __resize_window_as_per_config(self):
         # Resize window
-        config = self.get_config()
+        config = self.config
         browser_width = config.value(ArjunaOption.BROWSER_DIM_WIDTH)
         browser_height = config.value(ArjunaOption.BROWSER_DIM_HEIGHT)
         should_maximize = config.value(ArjunaOption.BROWSER_MAXIMIZE)
@@ -203,6 +210,6 @@ class ChildWindow(BasicWindow):
 
     def close(self):
         self.focus()
-        self.get_automator().dispatcher.close_current_window()
+        self.automator.dispatcher.close_current_window()
         self.__main_window.delete_window(self.handle)
         self.__main_window.focus()

@@ -51,7 +51,7 @@ class Gui(AsserterMixIn):
         from arjuna import Arjuna
         self.__config = config is not None and config or Arjuna.get_config()
         from arjuna.core.enums import ArjunaOption
-        ns_root_dir = self.get_config().value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
+        ns_root_dir = self.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
         self.__gns_dir = os.path.join(ns_root_dir, gns_dir)
         self.__econfig = ext_config
         self.__conditions = GuiConditions(self)
@@ -64,25 +64,32 @@ class Gui(AsserterMixIn):
                 self.__econfig = ext_config.config
         self.__label = label is not None and label or self.__class__.__name__
 
-    def get_gns_dir(self):
+    @property
+    def gns_dir(self):
         return self.__gns_dir
 
-    def get_conditions(self):
+    @property
+    def conditions(self):
         return self.__conditions
 
-    def get_config(self):
+    @property
+    def config(self):
         return self.__config
 
-    def get_ext_config(self):
+    @property
+    def ext_config(self):
         return self.__econfig
 
-    def get_label(self):
+    @property
+    def label(self):
         return self.__label
 
-    def get_name(self):
+    @property
+    def name(self):
         return self.__class__.__name__
 
-    def get_qual_name(self):
+    @property
+    def qual_name(self):
         return self.__class__.__qualname__
 
     def _load(self, *args, **kwargs):
@@ -104,7 +111,7 @@ class Gui(AsserterMixIn):
         except WaitableError:
             try:
                 self.reach_until()
-                self.conditions.GuiReady().wait(max_wait_time=self.get_config().guiauto_max_wait)
+                self.conditions.GuiReady().wait(max_wait_time=self.config.guiauto_max_wait)
             except Exception as e:
                 import traceback
                 raise GuiNotLoadedError(self, str(e) + "\n" + traceback.format_exc())
@@ -129,12 +136,12 @@ class Gui(AsserterMixIn):
 class AppContent(Gui):
 
     def __init__(self, *args, automator, label=None, gns_dir=None, gns_file_name=None, **kwargs):
-        self.__app = automator.get_app()
+        self.__app = automator.app
         self.__automator = automator
-        gns_dir = gns_dir and gns_dir or self.get_app().get_gns_dir()
-        super().__init__(gns_dir=gns_dir, config=automator.get_config(), ext_config=automator.get_ext_config(), label=label)
-        gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.get_label())
-        self.__def_file_path = os.path.join(self.get_gns_dir(), gns_file_name)
+        gns_dir = gns_dir and gns_dir or self.app.gns_dir
+        super().__init__(gns_dir=gns_dir, config=automator.config, ext_config=automator.ext_config, label=label)
+        gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)
+        self.__def_file_path = os.path.join(self.gns_dir, gns_file_name)
 
         from arjuna import Arjuna
         self.__guimgr = Arjuna.get_gui_mgr()
@@ -142,26 +149,30 @@ class AppContent(Gui):
         self.__gui_registered = False
         self._externalize()
 
-    def get_app(self):
+    @property
+    def app(self):
         return self.__app
 
-    def get_automator(self):
+    @property
+    def automator(self):
         return self.__automator
 
-    def get_gui_def(self):
+    @property
+    def gui_def(self):
         return self.__guidef
 
     def _externalize(self):
         try:
-            self.__guidef = GuiDef(self.__guimgr.name_store, self.get_automator(), self.get_label(), self.get_def_file_path())
+            self.__guidef = GuiDef(self.__guimgr.name_store, self.automator, self.label, self.def_file_path)
         except Exception as e:
             import traceback
             raise GuiNamespaceLoadingError(self, str(e) + traceback.format_exc())
 
         from arjuna import Arjuna
-        Arjuna.get_logger().debug("Gui Namespace loading completed for {}.".format(self.get_label()))
+        Arjuna.get_logger().debug("Gui Namespace loading completed for {}.".format(self.label))
 
-    def get_def_file_path(self):
+    @property
+    def def_file_path(self):
         return self.__def_file_path
 
     def transit(self, page):
@@ -190,17 +201,18 @@ class AppContent(Gui):
     #     lmd = GuiElementMetaData.create_lmd(*out)
     #     return lmd
 
-    def get_browser(self):
-        return self.get_automator().get_browser()
+    @property
+    def browser(self):
+        return self.automator.browser
 
     def __element(self, *str_or_with_locators, iconfig=None):
-        return self.get_automator().element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
+        return self.automator.element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
     def __multi_element(self, *str_or_with_locators, iconfig=None):
-        return self.get_automator().multi_element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
+        return self.automator.multi_element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
     def __dropdown(self, *str_or_with_locators, option_container_locator=None, option_locator=None, iconfig=None):
-        return self.get_automator().dropdown(
+        return self.automator.dropdown(
             self, 
             self.convert_to_with_lmd(*str_or_with_locators),
             option_container_lmd=option_container_locator and self.convert_to_with_lmd(option_container_locator) or None,
@@ -209,10 +221,10 @@ class AppContent(Gui):
         )
 
     def __radio_group(self, *str_or_with_locators, iconfig=None):
-        return self.get_automator().radio_group(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
+        return self.automator.radio_group(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
     def __tab_group(self, *str_or_with_locators, tab_header_locator, content_relation_attr, content_relation_type, iconfig=None):
-        return self.get_automator().tab_group(
+        return self.automator.tab_group(
             self,
             self.convert_to_with_lmd(*str_or_with_locators),
             tab_header_lmd=self.convert_to_with_lmd(tab_header_locator),
@@ -222,61 +234,63 @@ class AppContent(Gui):
         )
 
     def wait_until_element_absent(self, name):
-        return self.get_automator().wait_until_element_absent(self.get_gui_def().get_emd(name))
+        return self.automator.wait_until_element_absent(self.gui_def.get_emd(name))
 
     def get_dom_root(self):
-        return self.get_automator().dom_root(self)
+        return self.automator.dom_root(self)
 
     def frame(self, *str_or_with_locators, iconfig=None):
-        return self.get_automator().frame(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
+        return self.automator.frame(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
 
-    def get_alert(self):
-        return self.get_automator().alert
+    @property
+    def alert(self):
+        return self.automator.alert
 
-    def get_title(self):
-        return self.get_main_window().get_title()
+    @property
+    def title(self):
+        return self.main_window.title
 
-    def get_main_window(self):
-        return self.get_automator().get_main_window()
+    @property
+    def main_window(self):
+        return self.automator.main_window
 
-    def get_child_window(self, *str_or_with_locators):
-        return self.get_automator().child_window(self.convert_to_with_lmd(*str_or_with_locators))
+    def child_window(self, *str_or_with_locators):
+        return self.automator.child_window(self.convert_to_with_lmd(*str_or_with_locators))
 
-    def get_latest_child_window(self):
-        return self.get_automator().latest_child_window
+    def latest_child_window(self):
+        return self.automator.latest_child_window
 
     def close_all_child_windows(self):
-        self.get_automator().close_all_child_windows()
+        self.automator.close_all_child_windows()
 
     def set_slomo(self, on, interval=None):
-        self.get_automator().set_slomo(on, interval)
+        self.automator.set_slomo(on, interval)
 
     def execute_javascript(self, js, *args):
-        return self.get_automator().execute_javascript(js, *args)
+        return self.automator.execute_javascript(js, *args)
 
     def take_screenshot(self, prefix=None):
-        return self.get_automator().take_screenshot(prefix=prefix)
+        return self.automator.take_screenshot(prefix=prefix)
 
     def go_to_url(self, url):
-        self.get_browser().go_to_url(url)
+        self.browser.go_to_url(url)
 
     def load_anchor_element(self):
-        label = self.get_gui_def().anchor_element_name
+        label = self.gui_def.anchor_element_name
 
         from arjuna import Arjuna
         Arjuna.get_logger().debug("Loading Anchor Element for {} Gui. anchor label in GNS: {}.".format(
-            self.get_label(),
-            self.get_gui_def().anchor_element_name,
+            self.label,
+            self.gui_def.anchor_element_name,
         ))
 
         if label is not None:
             getattr(self, label)
 
     def __getattr__(self, name):
-        print(name)
-        emd = self.get_gui_def().get_emd(name)
+        emd = self.gui_def.get_emd(name)
         from arjuna import Arjuna
         Arjuna.get_logger().debug("Finding element for emd: {}".format(emd))
-        return getattr(self.get_automator(), emd.meta.template.name.lower())(self, emd)
+        return getattr(self.automator, emd.meta.template.name.lower())(self, emd)
 
 

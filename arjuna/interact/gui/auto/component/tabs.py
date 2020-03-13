@@ -62,4 +62,4 @@ class TabGroup(ElementConfig):
 
     @property
     def labels(self):
-        return [t.get_label() for t in self.__tabs]
+        return [t.label for t in self.__tabs]

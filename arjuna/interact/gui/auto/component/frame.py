@@ -47,11 +47,12 @@ class FrameContainer(Configurable):
     def __init__(self, gui, iconfig=None):
         super().__init__(gui, iconfig)
         self.__gui = gui
-        self.__automator = gui.get_automator()
+        self.__automator = gui.automator
         self.__conditions = FrameConditions(self)
 
-    def get_max_wait_time(self):
-        return self.__automator.get_config().guiauto_max_wait
+    @property
+    def max_wait_time(self):
+        return self.__automator.config.guiauto_max_wait
 
     def __check_tag(self, wrapped_element):
         tag = wrapped_element.source.tag
@@ -70,7 +71,7 @@ class FrameContainer(Configurable):
                 if locator.ltype.name == "INDEX":
                     index = locator.lvalue
                     emd = SimpleGuiElementMetaData("xpath", "//iframe")
-                    multi_element = self.__automator.multi_element(self.get_gui(), emd)
+                    multi_element = self.__automator.multi_element(self.gui, emd)
                     # multi_element.find()
                     try:
                         wrapped_element = multi_element[index]
@@ -78,13 +79,13 @@ class FrameContainer(Configurable):
                         # In case another identifier is present it should be tried.
                         continue
                     self.__check_tag(wrapped_element)
-                    frame = IPartialFrame(self.get_gui(), self, multi_element, wrapped_element, iconfig=iconfig)
+                    frame = IPartialFrame(self.gui, self, multi_element, wrapped_element, iconfig=iconfig)
                 else:
                     emd = SimpleGuiElementMetaData(locator.ltype.name, locator.lvalue)
-                    wrapped_element = self.__automator.element(self.get_gui(), emd)
+                    wrapped_element = self.__automator.element(self.gui, emd)
                     # wrapped_element.find()
                     self.__check_tag(wrapped_element)
-                    frame = IFrame(self.get_gui(), self, wrapped_element, iconfig=iconfig)
+                    frame = IFrame(self.gui, self, wrapped_element, iconfig=iconfig)
 
                 return frame
             except WaitableError as f:
@@ -98,7 +99,7 @@ class FrameContainer(Configurable):
         self.focus()
         emd = SimpleGuiElementMetaData("xpath", "//iframe")
         multi_element = self.__automator.create_multielement(emd)
-        ret_str = os.linesep.join(["--> " + s for s in multi_element.get_source()._get_root_content_as_list()])
+        ret_str = os.linesep.join(["--> " + s for s in multi_element.source._get_root_content_as_list()])
         return self._source_parser.get_root_content() + os.linesep + ret_str
 
 class DomRoot(FrameContainer):
@@ -131,7 +132,7 @@ class DomRoot(FrameContainer):
         self.set_frame_context_as_root() 
 
     @property
-    def get_source(self):
+    def source(self):
         self.focus()
         return self.__automator.source
 
@@ -176,7 +177,7 @@ class IFrame(FrameContainer):
         self.dom_root.set_frame_context(self)
 
     def _get_html_content_from_remote(self):
-        return self.__automator.get_source()
+        return self.__automator.source
 
     def get_wrapped_element(self):
         return self.wrapped_element

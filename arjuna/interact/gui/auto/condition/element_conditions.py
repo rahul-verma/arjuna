@@ -27,7 +27,7 @@ class Handler(metaclass=abc.ABCMeta):
 
     def __init__(self, element_obj):
         self.__element = element_obj
-        self.__config = element_obj.get_config()
+        self.__config = element_obj.config
 
     @property
     def element(self):
