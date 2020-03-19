@@ -64,12 +64,13 @@ You can find the example code in [arjex project](https://github.com/rahul-verma/
 5. [Gui Element Locators - Using Arjuna's Locator Extensions](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ArjunaLocatorExtensions.md)
 6. [Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/BasicInteractions.md)
 7. [Concise Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ConciseBasicInteractions.md)
-8. [Creating Reusable Module](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ReusableModule.md)
 
 ### 7. Basics of Gui Namespace (GNS) - Externalizing Identifiers
 1. [What is Gui Namespace (GNS)](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/GuiNamespace.md)
-2. Externlizing All Types of Identifiers
-3. Basic Interactions with GNS
+2. [Externalizing ID, Name, Tag, Class, Link Text, Partial Link Text](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/GuiElementBasicLocators.md)
+3. [Externalizing XPath](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/UsingXPath.md)
+4. [Externalizing CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/UsingCSSSelectors.md)
+5. [Externalizing Arjuna's Locator Extensions](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/ArjunaLocatorExtensions.md)
 
 
 ### 8. Advanced Web UI Automation
@@ -91,11 +92,12 @@ You can find the example code in [arjex project](https://github.com/rahul-verma/
 
 ### 10. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
 
-1. [Creating App Class](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppClass.md)
-2. [App Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppObjectModel.md)
-3. [App-Page Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageObjectModel.md)
-4. [App-Page-Section Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageSectionObjectModel.md)
-5. [Gui and Its Loading Model in Arjuna](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiLoadingModel.md)
+1. [Thinking Procedurally -Creating Reusable Module](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ThinkingProcedurally.md)
+2. [Creating App Class](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppClass.md)
+3. [App Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppObjectModel.md)
+4. [App-Page Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageObjectModel.md)
+5. [App-Page-Section Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageSectionObjectModel.md)
+6. [Gui and Its Loading Model in Arjuna](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiLoadingModel.md)
 
 ## Reference
 1. Command Line Options
