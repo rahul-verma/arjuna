@@ -34,32 +34,32 @@ def wordpress(request):
 def check_arjuna_exts(request, wordpress):
 
     # Based on partial text
-    element = wordpress.gns.lost_pass_text
+    wordpress.element(text="Lost")
 
     # Based on Full Text
-    element = wordpress.gns.lost_pass_ftext
+    wordpress.element(ftext="Lost your password?")
 
     # Based on Title
-    element = wordpress.gns.lost_pass_title
+    wordpress.element(title="Password Lost and Found")
 
     # Based on Value
-    element = wordpress.gns.user_value
+    wordpress.element(value="Log In")
 
     # Based on partial match of content of an attribute
-    element = wordpress.gns.user_attr
+    wordpress.element(attr=Attr("for", "_login"))
 
     # Based on full match of an attribute
-    element = wordpress.gns.user_fattr
+    wordpress.element(fattr=Attr("for", "user_login"))
 
     # Based on element type
-    element = wordpress.gns.pass_type
+    wordpress.element(type="password")
 
     # Based on compound classes
-    element = wordpress.gns.button_classes_str
-    element = wordpress.gns.button_classes_list
+    wordpress.element(classes="button button-large")
+    wordpress.element(classes=("button", "button-large"))
 
     # Based on Point (location in terms of X,Y co-ordinates)
-    element = wordpress.gns.elem_xy
+    wordpress.element(point=Point(1043, 458))
 
     # With Javascript
-    element = wordpress.gns.elem_js
+    wordpress.element(js="return document.getElementById('wp-submit')")

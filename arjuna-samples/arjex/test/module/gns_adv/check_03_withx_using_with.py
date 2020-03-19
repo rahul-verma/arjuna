@@ -18,16 +18,20 @@ limitations under the License.
 '''
 
 from arjuna import *
+from arjex.lib.adv_locators.app import WordPress
+
+@for_test
+def dashboard(request):
+    # Setup
+    wordpress = WordPress()
+    home = wordpress.launch()
+    dashboard = home.login_with_default_creds()
+    yield dashboard
+
+    # Teadown
+    dashboard.top_nav.logout()
+    wordpress.quit()
 
 @test
-def check_multielement(request, logged_in_wordpress):
-    wordpress = logged_in_wordpress
-    wordpress.gns.posts.click()
-    wordpress.gns.categories.click()
-
-    check_boxes = wordpress.gns.cat_checkboxes
-    check_boxes[1].check()
-    check_boxes[1].uncheck()
-    check_boxes.first_element.uncheck()
-    check_boxes.last_element.uncheck()
-    check_boxes.random_element.uncheck()
+def check_withx_using_with(request, dashboard):
+    dashboard.left_nav.locate(With.nav_link(lname="Media")).click()

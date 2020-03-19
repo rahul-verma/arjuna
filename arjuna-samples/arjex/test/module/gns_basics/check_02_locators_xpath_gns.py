@@ -18,20 +18,37 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.adv_locators.app import WordPress
 
 @for_test
-def dashboard(request):
+def wordpress(request):
     # Setup
-    wordpress = WordPress()
-    home = wordpress.launch()
-    dashboard = home.login_with_default_creds()
-    yield dashboard
+    wp_url = C("wp.login.url")
+    wordpress = WebApp(base_url=wp_url, label="XPath")
+    wordpress.launch()
+    yield wordpress
 
     # Teadown
-    dashboard.top_nav.logout()
     wordpress.quit()
 
 @test
-def check_withx_using_with(request, dashboard):
-    dashboard.left_nav.element(With.nav_link(lname="Media")).click()
+def check_xpath(request, wordpress):
+    # Based on Text
+    element = wordpress.gns.lost_pass_text
+
+    # Based on partial text
+    element = wordpress.gns.lost_pass_text_content
+
+    # Based on Title
+    element = wordpress.gns.lost_pass_title
+
+    # Based on Value
+    element = wordpress.gns.user_value
+
+    # Based on any attribute e.g. for
+    element = wordpress.gns.user_attr
+
+    # Based on partial content of an attribute
+    element = wordpress.gns.user_attr_content
+
+    # Based on element type
+    element = wordpress.gns.pass_type

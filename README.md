@@ -58,28 +58,38 @@ You can find the example code in [arjex project](https://github.com/rahul-verma/
 ### 6. Basic Web UI Automation
 
 1. [Getting Started with WebApp](https://github.com/rahul-verma/arjuna/blob/master/docs//webui_basics/WebApp.md)
-2. [Gui Namespace (GNS) - Externalized Identifiers](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiNamespace.md)
-3. [Gui Element Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiElementBasicLocators.md)
-4. [Gui Element Locators - Using XPath](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingXPath.md)
-5. [Gui Element Locators - Using CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingCSSSelectors.md)
-6. [Gui Element Locators - Using Arjuna's Locator Extensions](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ArjunaLocatorExtensions.md)
-7. [Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/BasicInteractions.md)
-8. [Concise Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ConciseBasicInteractions.md)
-9. [Creating Reusable Module](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ReusableModule.md)
-10. [Matching Multiple Elements as GuiMultiElement](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiMultiElement.md)
-11. [Handling Default HTML Select](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/HTMLSelect.md)
-12. [Handling Default HTML Radio Group](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/HTMLRadioGroup.md)
+2. [Gui Element Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiElementBasicLocators.md)
+3. [Gui Element Locators - Using XPath](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingXPath.md)
+4. [Gui Element Locators - Using CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingCSSSelectors.md)
+5. [Gui Element Locators - Using Arjuna's Locator Extensions](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ArjunaLocatorExtensions.md)
+6. [Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/BasicInteractions.md)
+7. [Concise Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ConciseBasicInteractions.md)
+8. [Creating Reusable Module](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ReusableModule.md)
 
-### 7. Advanced Web UI Automation
-1. Finding Nested Elements
-2. Alternative and Dynamic Identifiers
-3. Executing JavaScript
-4. Alerts, Windows, Frames
-5. Configuraing Interactions with GuiInteractionConfig
-6. Handling Custom DropDowns
-7. Retrieving Source code with GuiSource
+### 7. Basics of Gui Namespace (GNS) - Externalizing Identifiers
+1. [What is Gui Namespace (GNS)](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/GuiNamespace.md)
+2. Externlizing All Types of Identifiers
+3. Basic Interactions with GNS
 
-### 8. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
+
+### 8. Advanced Web UI Automation
+1. [Matching Multiple Elements as GuiMultiElement](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/GuiMultiElement.md)
+2. [Handling Default HTML Select](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/HTMLSelect.md)
+3. [Handling Default HTML Radio Group](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/HTMLRadioGroup.md)
+4. Finding Nested Elements
+5. Alternative and Dynamic Identifiers
+6. Executing JavaScript
+7. Alerts, Windows, Frames
+8. Configuraing Interactions with GuiInteractionConfig
+9. Handling Custom DropDowns
+10. Retrieving Source code with GuiSource
+
+### 9. Advanced Gui Namespace Constructs
+1. Element Templates - Multi Element, Dropdown and Radio Group
+2. Creating Your Own intra-GNS identifiers
+3. Creating Your Own Global Identifiers for use in code as well as GNS files
+
+### 10. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
 
 1. [Creating App Class](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppClass.md)
 2. [App Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppObjectModel.md)

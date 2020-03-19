@@ -22,8 +22,10 @@ import abc
 import os
 from enum import Enum
 import unittest
+import functools
 
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.helpers import Dictable
 
 from .guidef import *
 from arjuna.engine.asserter import AsserterMixIn
@@ -185,6 +187,22 @@ class AppContent(Gui):
     def transit(self, page):
         pass
 
+    def convert_to_lmd(self, meta=None, **kwargs):
+        from arjuna import Arjuna
+        from arjuna.interact.gui.helpers import WithType, With
+        with_list = []
+        for k,v in kwargs.items():
+            if k.upper() in WithType.__members__:
+                if isinstance(v, Dictable):
+                    v = v.as_dict()
+                    with_list.append(getattr(With, k.lower())(v))
+                else:
+                    with_list.append(getattr(With, k.lower())(v))
+        if not with_list:
+            raise Exception("You must provide atleast one locator.")
+        from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+        return GuiElementMetaData.create_lmd(*with_list, meta=meta)
+
     # def convert_to_with_lmd(self, *raw_str_or_with_locators, nested_element=False):
     #     from arjuna.interact.gui.helpers import With, WithType
     #     out = []
@@ -216,14 +234,32 @@ class AppContent(Gui):
     def browser(self):
         return self.automator.browser
 
-    def element(self, lmd, iconfig=None):
-        return self.automator.element(self, lmd, iconfig=iconfig)
+    def locate(self, *, template="element", **kwargs):
+        from arjuna import log_debug
+        emd = self.convert_to_lmd({"template": template}, **kwargs)
+        log_debug("Finding element with emd: {}.".format(emd))
+        print(kwargs, template, emd.meta.template.name.lower())
+        return getattr(self, "_" +  emd.meta.template.name.lower())(emd)
 
-    def multi_element(self, lmd, iconfig=None):
-        return self.automator.multi_element(self, lmd, iconfig=iconfig)
+    element = locate
 
-    def dropdown(self, lmd, option_container_locator=None, option_locator=None, iconfig=None):
-        return self.automator.dropdown(
+    def multielement(self, **kwargs):
+        return self.locate(template="multi_element", **kwargs)
+
+    def dropdown(self, **kwargs):
+        return self.locate(template="dropdown", **kwargs)
+
+    def radio_button(self, **kwargs):
+        return self.locate(template="radio_group", **kwargs)
+
+    def _element(self, lmd, iconfig=None):
+        return self.automator._element(self, lmd, iconfig=iconfig)
+
+    def _multi_element(self, lmd, iconfig=None):
+        return self.automator._multi_element(self, lmd, iconfig=iconfig)
+
+    def _dropdown(self, lmd, option_container_locator=None, option_locator=None, iconfig=None):
+        return self.automator._dropdown(
             self, 
             lmd,
             option_container_lmd=option_container_locator and self.convert_to_with_lmd(option_container_locator) or None,
@@ -231,8 +267,8 @@ class AppContent(Gui):
             iconfig=iconfig
         )
 
-    def radio_group(self, lmd, iconfig=None):
-        return self.automator.radio_group(self, lmd, iconfig=iconfig)
+    def _radio_group(self, lmd, iconfig=None):
+        return self.automator._radio_group(self, lmd, iconfig=iconfig)
 
     def wait_until_element_absent(self, name):
         return self.automator.wait_until_element_absent(self.gui_def.get_emd(name))

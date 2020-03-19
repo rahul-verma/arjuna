@@ -19,33 +19,26 @@ limitations under the License.
 
 from arjuna import *
 
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="WordPress")
+def create_wordpress_app():
+    url = C("wp.login.url")
+    wordpress = WebApp(base_url=url, label="WordPress")
     wordpress.launch()
-    yield wordpress
+    return wordpress
 
-    # Teadown
-    wordpress.quit()
-
-@test
-def check_wp_login_concise(request, wordpress):
-    
+def login(wordpress):
     user = C("wp.admin.name")
     pwd = C("wp.admin.pwd")
     
     # Login
-    wordpress.element(id="user_login").text = user
-    wordpress.element(id="user_pass").text = pwd
-    wordpress.element(id="wp-submit").click()
-    wordpress.element(classes="welcome-view-site")
+    wordpress.gns.user.text = user
+    wordpress.gns.pwd.text = pwd
+    wordpress.gns.submit.click()
+    wordpress.gns.view_site
 
-    # Logout
+def logout(wordpress):
     url = C("wp.logout.url")
     wordpress.go_to_url(url)
-    wordpress.element(link="log out").click()
-    wordpress.element(text="logged out")
+    wordpress.gns.logout_confirm.click()
+    wordpress.gns.logout_msg
 
-
+    wordpress.quit()

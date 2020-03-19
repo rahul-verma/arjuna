@@ -44,7 +44,7 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
         lmd = self.gui.convert_to_with_lmd(*str_or_with_locators)
         return self.element(self.gui, lmd, iconfig=iconfig)
 
-    def element(self, gui, lmd, iconfig=None):
+    def _element(self, gui, lmd, iconfig=None):
         from arjuna.interact.gui.auto.element.guielement import GuiElement
         gui_element = GuiElement(gui, lmd, iconfig=iconfig)
         self.load_element(gui_element)
@@ -54,7 +54,7 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
         lmd = self.gui.convert_to_with_lmd(*str_or_with_locators)
         return self.multi_element(self.gui, lmd, iconfig=iconfig)
 
-    def multi_element(self, gui, lmd, iconfig=None):
+    def _multi_element(self, gui, lmd, iconfig=None):
         from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
         m_guielement = GuiMultiElement(gui, lmd, iconfig=iconfig)
         self.load_multielement(m_guielement)
@@ -66,16 +66,7 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
     def find_multielement_with_js(self, js):
         raise Exception("With.JS is currently not supported for nested element finding.")
 
-    def locate_with(self, *, template="element", **kwargs):
-        from arjuna import Arjuna
-        from arjuna.interact.gui.helpers import WithType, With
-        with_list = []
-        for k,v in kwargs.items():
-            if k.upper() in WithType.__members__:
-                with_list.append(getattr(With, k.lower())(v))
-        if not with_list:
-            raise Exception("You must provide atleast one locator.")
-        from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
-        emd = GuiElementMetaData.create_lmd(*with_list)
+    def locate(self, *, template="element", **kwargs):
+        emd = self.gui.convert_to_lmd(**kwargs)
         Arjuna.get_logger().debug("Finding element with emd: {}.".format(emd))
-        return getattr(self, emd.meta.template.name.lower())(self.gui, emd)
+        return getattr(self, "_" + emd.meta.template.name.lower())(self.gui, emd)

@@ -18,19 +18,16 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.wp import *
 
 @test
-def check_radiogroup(request, logged_in_wordpress):
+def check_multielement_coded(request, logged_in_wordpress):
     wordpress = logged_in_wordpress
-    wordpress.gns.settings.click()
+    wordpress.element(link="Posts").click()
+    wordpress.element(link="Categories").click()
 
-    date_format = wordpress.gns.date_format
-
-    fmsg = "Failed to select m/d/Y date format"
-    request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), fmsg)
-    request.asserter.assert_true(date_format.has_index_selected(2), fmsg)
-    request.asserter.assert_equal(date_format.value, "m/d/Y", "Unpexpected Value attribute of Date Format")
-
-    date_format.select_value(r"\c\u\s\t\o\m")
-    date_format.select_index(2)
+    check_boxes = wordpress.multielement(name="delete_tags[]")
+    check_boxes[1].check()
+    check_boxes[1].uncheck()
+    check_boxes.first_element.uncheck()
+    check_boxes.last_element.uncheck()
+    check_boxes.random_element.uncheck()

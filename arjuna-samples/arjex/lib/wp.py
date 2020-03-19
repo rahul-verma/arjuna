@@ -29,16 +29,15 @@ def login(wordpress):
     user = C("wp.admin.name")
     pwd = C("wp.admin.pwd")
     
-    # Login
-    wordpress.gns.user.text = user
-    wordpress.gns.pwd.text = pwd
-    wordpress.gns.submit.click()
-    wordpress.gns.view_site
+    wordpress.element(id="user_login").text = user
+    wordpress.element(id="user_pass").text = pwd
+    wordpress.element(id="wp-submit").click()
+    wordpress.element(classes="welcome-view-site")
 
 def logout(wordpress):
     url = C("wp.logout.url")
     wordpress.go_to_url(url)
-    wordpress.gns.logout_confirm.click()
-    wordpress.gns.logout_msg
+    wordpress.element(link="log out").click()
+    wordpress.element(text="logged out")
 
     wordpress.quit()

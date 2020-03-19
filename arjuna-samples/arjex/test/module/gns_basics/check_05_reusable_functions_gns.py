@@ -18,31 +18,10 @@ limitations under the License.
 '''
 
 from arjuna import *
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="Selector")
-    wordpress.launch()
-    yield wordpress
-
-    # Teadown
-    wordpress.quit()
-
+from arjex.lib.wp_gns import *
 
 @test
-def check_selector(request, wordpress):
-
-    # Based on any attribute e.g. for
-    wordpress.element(selector="*[for = 'user_login']")
-
-    # Based on partial content of an attribute
-    wordpress.element(selector="*[for *= '_login']")
-
-    # Based on element type
-    wordpress.element(selector="*[type ='password']")
-
-    # Based on compound classes
-    wordpress.element(selector=".button.button-large")
-
+def check_sep_functions(request):
+    wordpress = create_wordpress_app()
+    login(wordpress)
+    logout(wordpress)

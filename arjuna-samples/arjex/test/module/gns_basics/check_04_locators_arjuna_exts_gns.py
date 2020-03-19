@@ -23,7 +23,7 @@ from arjuna import *
 def wordpress(request):
     # Setup
     wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="XPath")
+    wordpress = WebApp(base_url=wp_url, label="ArjunaExtended")
     wordpress.launch()
     yield wordpress
 
@@ -31,24 +31,35 @@ def wordpress(request):
     wordpress.quit()
 
 @test
-def check_xpath(request, wordpress):
-    # Based on Text
-    wordpress.element(xpath="//*[text() = 'Lost your password?']")
+def check_arjuna_exts(request, wordpress):
 
     # Based on partial text
-    wordpress.element(xpath="//*[contains(text(), 'Lost')]")
+    element = wordpress.gns.lost_pass_text
+
+    # Based on Full Text
+    element = wordpress.gns.lost_pass_ftext
 
     # Based on Title
-    wordpress.element(xpath="//*[@title = 'Password Lost and Found']")
+    element = wordpress.gns.lost_pass_title
 
     # Based on Value
-    wordpress.element(xpath="//*[@value = 'Log In']")
+    element = wordpress.gns.user_value
 
-    # Based on any attribute e.g. for
-    wordpress.element(xpath="//*[@for = 'user_login']")
+    # Based on partial match of content of an attribute
+    element = wordpress.gns.user_attr
 
-    # Based on partial content of an attribute
-    wordpress.element(xpath="//*[contains(@for, '_login')]")
+    # Based on full match of an attribute
+    element = wordpress.gns.user_fattr
 
     # Based on element type
-    wordpress.element(xpath="//*[@type ='password']")
+    element = wordpress.gns.pass_type
+
+    # Based on compound classes
+    element = wordpress.gns.button_classes_str
+    element = wordpress.gns.button_classes_list
+
+    # Based on Point (location in terms of X,Y co-ordinates)
+    element = wordpress.gns.elem_xy
+
+    # With Javascript
+    element = wordpress.gns.elem_js

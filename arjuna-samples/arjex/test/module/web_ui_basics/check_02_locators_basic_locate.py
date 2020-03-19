@@ -21,9 +21,19 @@ from arjuna import *
 
 @for_test
 def wordpress(request):
+    '''
+        For this fixture:
+        Wordpress related user options have been added to the project.conf
+        You should replace the details with those corresponding to your own deployment of WordPress.
+        userOptions {
+	        wp.app.url = "IP address"
+	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
+        }
+    '''
+
     # Setup
     wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="WordPress")
+    wordpress = WebApp(base_url=wp_url, label="BasicIdentification")
     wordpress.launch()
     yield wordpress
 
@@ -31,43 +41,17 @@ def wordpress(request):
     wordpress.quit()
 
 @test
-def check_wp_login(request, wordpress):
-    '''
-        For this test:
-        Wordpress related user options have been added to the project.conf
-        You should replace the details with those corresponding to your own deployment of WordPress.
-        userOptions {
-	        wp.app.url = "IP address"
-	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
-	        wp.logout.url = ${userOptions.wp.app.url}"/wp-login.php?action=logout"
+def check_basic_identifiers(request, wordpress):
+    # user name field.
+    # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
+    wordpress.element(id="user_login")
+    wordpress.element(name="log")
+    wordpress.element(tag="input")
+    wordpress.element(classes="input")
 
-            wp.admin {
-                name = "<username>"
-                pwd = "<password>"
-            }
-        }
-    '''
-
-    user = C("wp.admin.name")
-    pwd = C("wp.admin.pwd")
-    
-    # Login
-    user_field = wordpress.element(id="user_login")
-    user_field.text = user
-
-    pwd_field = wordpress.element(id="user_pass")
-    pwd_field.text = pwd
-
-    submit = wordpress.element(id="wp-submit")
-    submit.click()
-
-    wordpress.element(classes="welcome-view-site")
-
-    # Logout
-    url = C("wp.logout.url")
-    wordpress.go_to_url(url)
-
-    confirmation = wordpress.element(link="log out")
-    confirmation.click()
-
-    wordpress.element(text="logged out")
+    # Lost your password link
+    # Html of link: <a href="/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
+    # Partial Link text match
+    wordpress.element(link="password")
+    # Full Link text match
+    wordpress.element(flink="Lost your password?")

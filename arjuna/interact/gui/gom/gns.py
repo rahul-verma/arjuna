@@ -12,8 +12,8 @@ class GNS:
         from arjuna.interact.gui.gom.gui import Gui
         if isinstance(self.__container, Gui):
             if not self.__container.root_element:
-                return getattr(self.__container, emd.meta.template.name.lower())(emd)
+                return getattr(self.__container, "_" + emd.meta.template.name.lower())(emd)
             else:
-                return getattr(self.__container.root_element, emd.meta.template.name.lower())(self.__container, emd)
+                return getattr(self.__container.root_element, "_" + emd.meta.template.name.lower())(self.__container, emd)
         else:
-            return getattr(self.__container, emd.meta.template.name.lower())(self.__container.gui, emd)
+            return getattr(self.__container, "_" + emd.meta.template.name.lower())(self.__container.gui, emd)

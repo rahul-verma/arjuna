@@ -18,31 +18,19 @@ limitations under the License.
 '''
 
 from arjuna import *
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="Selector")
-    wordpress.launch()
-    yield wordpress
-
-    # Teadown
-    wordpress.quit()
-
+from arjex.lib.wp import *
 
 @test
-def check_selector(request, wordpress):
+def check_radiogroup(request, logged_in_wordpress):
+    wordpress = logged_in_wordpress
+    wordpress.element(link="Settings").click()
 
-    # Based on any attribute e.g. for
-    wordpress.element(selector="*[for = 'user_login']")
+    date_format = wordpress.gns.date_format
 
-    # Based on partial content of an attribute
-    wordpress.element(selector="*[for *= '_login']")
+    fmsg = "Failed to select m/d/Y date format"
+    request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), fmsg)
+    request.asserter.assert_true(date_format.has_index_selected(2), fmsg)
+    request.asserter.assert_equal(date_format.value, "m/d/Y", "Unpexpected Value attribute of Date Format")
 
-    # Based on element type
-    wordpress.element(selector="*[type ='password']")
-
-    # Based on compound classes
-    wordpress.element(selector=".button.button-large")
-
+    date_format.select_value(r"\c\u\s\t\o\m")
+    date_format.select_index(2)

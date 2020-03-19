@@ -208,31 +208,31 @@ class GuiAutomator(ElementContainer,Dispatchable):
 
     #### Element Finding
 
-    def element(self, gui, lmd, iconfig=None, max_wait_time=None):
+    def _element(self, gui, lmd, iconfig=None, max_wait_time=None):
         from arjuna.interact.gui.auto.element.guielement import GuiElement
         gui_element = GuiElement(gui, lmd, iconfig=iconfig) 
         self.load_element(gui_element, max_wait_time=max_wait_time)
         return gui_element
 
-    element_with_lmd = element
+    element_with_lmd = _element
 
-    def multi_element(self, gui, lmd, iconfig=None, max_wait_time=None):
+    def _multi_element(self, gui, lmd, iconfig=None, max_wait_time=None):
         from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
         m_guielement = GuiMultiElement(gui, lmd, iconfig=iconfig)
         self.load_multielement(m_guielement, max_wait_time=max_wait_time)
         return m_guielement
 
-    multi_element_with_lmd = multi_element
+    multi_element_with_lmd = _multi_element
 
-    def dropdown(self, gui, lmd, option_container_lmd=None, option_lmd=None, iconfig=None):
+    def _dropdown(self, gui, lmd, option_container_lmd=None, option_lmd=None, iconfig=None):
         from arjuna.interact.gui.auto.component.dropdown import GuiWebSelect
         return GuiWebSelect(gui, lmd, option_container_lmd=option_container_lmd, option_lmd=option_lmd, iconfig=iconfig)
 
-    def radio_group(self, gui, lmd, iconfig=None):
+    def _radio_group(self, gui, lmd, iconfig=None):
         from arjuna.interact.gui.auto.component.radio_group import GuiWebRadioGroup
         return GuiWebRadioGroup(gui, lmd)
 
-    def tab_group(self, gui, lmd, *, tab_header_lmd, content_relation_attr, content_relation_type, iconfig=None):
+    def _tab_group(self, gui, lmd, *, tab_header_lmd, content_relation_attr, content_relation_type, iconfig=None):
         from arjuna.interact.gui.auto.component.tabs import TabGroup
         return TabGroup(
             gui, 

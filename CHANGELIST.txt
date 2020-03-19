@@ -2,8 +2,9 @@ Following is the list of critical additions and updates for a given released ver
 
 0.9.12
 ------
-- All example code fixed.
-- All docs fixed.
+- Added locate/element/multi_element/dropdown/radio_group factories to Page.
+- The factories provide a more Pythonic syntax than using tuples or factories for every locator type in user API.
+- Example code and documentation updates in progress.
 
 0.9.11
 ------

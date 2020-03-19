@@ -44,7 +44,8 @@ def wordpress(request):
 def check_basic_identifiers(request, wordpress):
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
-    element = wordpress.gns.user_id
+    wordpress.gns.user_id
+     
     element = wordpress.gns.user_name
     element = wordpress.gns.user_tag
     element = wordpress.gns.user_class

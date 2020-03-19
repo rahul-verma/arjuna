@@ -323,63 +323,63 @@ class With(metaclass=_WithXMetaClass):
         return With(WithType.XPATH, xpath)
 
     @classmethod
-    def text(cls, text):
+    def text(cls, text, tag=None):
         return With(WithType.TEXT, text)
 
     @classmethod
-    def ftext(cls, text):
+    def ftext(cls, text, tag=None):
         return With(WithType.FTEXT, text)
 
     @classmethod
-    def btext(cls, text):
+    def btext(cls, text, tag=None):
         return With(WithType.BTEXT, text)
 
     @classmethod
-    def etext(cls, text):
+    def etext(cls, text, tag=None):
         return With(WithType.ETEXT, text)
 
     @classmethod
-    def title(cls, title):
+    def title(cls, title, tag=None):
         return With(WithType.TITLE, title)
 
-    @classmethod
-    def __fmt_attr(cls, attr, value):
-        return "[{}][{}]".format(attr, value)
+    # @classmethod
+    # def __fmt_attr(cls, attr, value):
+    #     return "[{}][{}]".format(attr, value)
 
     @classmethod
-    def _attr(cls, fmt):
-        return With(WithType.ATTR, fmt)
+    def _attr(cls, map):
+        return With(WithType.ATTR, map)
 
     @classmethod
-    def _fattr(cls, fmt):
-        return With(WithType.FATTR, fmt)
+    def _fattr(cls, map):
+        return With(WithType.FATTR, map)
 
     @classmethod
-    def _battr(cls, fmt):
-        return With(WithType.BATTR, fmt)
+    def _battr(cls, map):
+        return With(WithType.BATTR, map)
 
     @classmethod
-    def _eattr(cls, fmt):
-        return With(WithType.EATTR, fmt)   
+    def _eattr(cls, map):
+        return With(WithType.EATTR, map)   
 
     @classmethod
-    def attr(cls, attr, value):
-        return cls._attr(cls.__fmt_attr(attr, value))
+    def attr(cls, map):
+        return cls._attr(map)
 
     @classmethod
-    def fattr(cls, attr, value):
-        return cls._fattr(cls.__fmt_attr(attr, value))
+    def fattr(cls, map):
+        return cls._fattr(map)
 
     @classmethod
-    def battr(cls, attr, value):
-        return cls._battr(cls.__fmt_attr(attr, value))
+    def battr(cls, map):
+        return cls._battr(map)
 
     @classmethod
-    def eattr(cls, attr, value):
-        return cls._eattr(cls.__fmt_attr(attr, value))
+    def eattr(cls, map):
+        return cls._eattr(map)
 
     @classmethod
-    def value(cls, value):
+    def value(cls, value, tag=None):
         return With(WithType.VALUE, value)
 
     @classmethod
@@ -387,10 +387,7 @@ class With(metaclass=_WithXMetaClass):
         return With(WithType.TYPE, type)
 
     @classmethod
-    def point(cls, point_dict):
-        point = Screen.xy(point_dict['x'], point_dict['y']).location
-        from arjuna import Arjuna
-        Arjuna.get_logger().debug("With.point for {} converted to {}".format(point_dict, point))
+    def point(cls, point):
         return With(WithType.POINT, point)
 
     @classmethod
@@ -416,4 +413,40 @@ class With(metaclass=_WithXMetaClass):
     @classmethod
     def label(cls, name):
         return With(WithType.LABEL, name)
+
+class Dictable:
+
+    pass
+
+class NV(Dictable):
+
+    def __init__(self, name, value):
+        self.__name = name
+        self.__value = value
+
+    def as_dict(self):
+        return {"name" : self.__name, "value": self.__value}
+
+class Attr(NV):
+
+    def __init__(self, name, value, tag=None):
+        super().__init__(name, value)
+        self.__tag = tag
+
+    def as_dict(self):
+        d = super().as_dict()
+        d["tag"] = self.__tag
+        return d
+
+
+class Point(Dictable):
+
+    def __init__(self, x, y):
+        self.__x = x
+        self.__y = y
+
+    def as_dict(self):
+        return {"x": self.__x, "y":self.__y}
+
+
 

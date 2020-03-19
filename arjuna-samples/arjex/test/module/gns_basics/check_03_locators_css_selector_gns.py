@@ -23,32 +23,26 @@ from arjuna import *
 def wordpress(request):
     # Setup
     wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="XPath")
+    wordpress = WebApp(base_url=wp_url, label="Selector")
     wordpress.launch()
     yield wordpress
 
     # Teadown
     wordpress.quit()
 
+
 @test
-def check_xpath(request, wordpress):
-    # Based on Text
-    wordpress.element(xpath="//*[text() = 'Lost your password?']")
-
-    # Based on partial text
-    wordpress.element(xpath="//*[contains(text(), 'Lost')]")
-
-    # Based on Title
-    wordpress.element(xpath="//*[@title = 'Password Lost and Found']")
-
-    # Based on Value
-    wordpress.element(xpath="//*[@value = 'Log In']")
+def check_selector(request, wordpress):
 
     # Based on any attribute e.g. for
-    wordpress.element(xpath="//*[@for = 'user_login']")
+    element = wordpress.gns.user_attr
 
     # Based on partial content of an attribute
-    wordpress.element(xpath="//*[contains(@for, '_login')]")
+    element = wordpress.gns.user_attr_content
 
     # Based on element type
-    wordpress.element(xpath="//*[@type ='password']")
+    element = wordpress.gns.pass_type
+
+    # Based on compound classes
+    element = wordpress.gns.button_compound_class
+

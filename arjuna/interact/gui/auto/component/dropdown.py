@@ -28,7 +28,7 @@ class GuiWebSelect(Configurable):
         self.__gui = gui
         self.__automator = gui.automator
         self.__finder = parent and parent or gui.automator
-        self._wrapped_main_element = self.__automator.element(self.gui, emd)
+        self._wrapped_main_element = self.__finder._element(self.gui, emd)
         self.__found = False
         self.__options = None
         self.__option_lmd = option_lmd is not None and option_lmd or SimpleGuiElementMetaData("tag", "option")
@@ -36,7 +36,7 @@ class GuiWebSelect(Configurable):
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
         self.__option_container_same_as_select = option_container_lmd is None and True or False
         if not self.__option_container_same_as_select:
-            self.__option_container = self.__finder.element(self.gui, option_container_lmd, iconfig=self.settings)
+            self.__option_container = self.__finder._element(self.gui, option_container_lmd, iconfig=self.settings)
             # # Needs to be loaded so that options can be discovered.
             # self.__option_container.find_if_not_found()
 
@@ -66,7 +66,7 @@ class GuiWebSelect(Configurable):
 
         def load_options():
             container = get_root_element()
-            self.__options = container.multi_element(self.gui, self.__option_lmd, iconfig=self.settings)
+            self.__options = container._multi_element(self.gui, self.__option_lmd, iconfig=self.settings)
             # self.__options.find_if_not_found()
 
         # self._wrapped_main_element.find()

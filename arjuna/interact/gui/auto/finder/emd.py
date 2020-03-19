@@ -241,7 +241,7 @@ class GuiElementMetaData:
                         rlvalue["value"]
                         #parts =  re.search(GuiElementMetaData.XPATH_TWO_ARG_VALUE_PATTERN, rlvalue).groups()
                     except:
-                        raise Exception("Value {} for {} is misformatted. Attribute name and attribute value should be supplied as: [<arg>][<value>]".format(rlvalue, rltype))
+                        raise Exception("Name and value must be supplied for {}. Got: {}".format(rlvalue, rltype))
                     self.__add_locator(GenericLocateWith.XPATH, self.XPATH_TWO_ARG_LOCATORS[generic_locate_with].format(rlvalue["name"], rlvalue["value"]), named_args)
                 elif generic_locate_with == GenericLocateWith.TYPE:
                     try:
