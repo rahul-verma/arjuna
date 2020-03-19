@@ -36,7 +36,7 @@ Following user options have been added to `project.conf` for this fixture to wor
 Below is the `@for_test` fixture code:
 
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_02_guielement.py
+# arjuna-samples/arjex/test/module/check_02_guielement.py
 
 @for_test
 def wordpress(request):
@@ -91,28 +91,28 @@ labels:
 #### Identification using ID, Name, Class Name, Tag Name, Link Text, Partial Link Text
 
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_02_locators_basic.py
+# arjuna-samples/arjex/test/module/check_02_locators_basic.py
 
 @test
 def check_basic_identifiers(request, wordpress):
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
-    element = wordpress.user_id
-    element = wordpress.user_name
-    element = wordpress.user_tag
-    element = wordpress.user_class
+    element = wordpress.gns.user_id
+    element = wordpress.gns.user_name
+    element = wordpress.gns.user_tag
+    element = wordpress.gns.user_class
 
     # Lost your password link
     # Html of link: <a href="/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
     # Partial Link text match
-    element = wordpress.lost_pass_link
+    element = wordpress.gns.lost_pass_link
     # Full Link text match
-    element = wordpress.lost_pass_flink
+    element = wordpress.gns.lost_pass_flink
 ```
 
 ##### Points to Note
 1. Launch the WebApp. Use a WordPress deployment of choice. For example code creation, a VirtualBox image of Bitnami Wordpress was used.
-2. You can directly create an element by using `<app object>.<GNS label>` syntax. For example, `wordpress.user_id` will find an element with the locator information supplied in GNS file for the label `user_id`.
+2. You can directly create an element by using `<app object>.gns.<GNS label>` syntax. For example, `wordpress.gns.user_id` will find an element with the locator information supplied in GNS file for the label `user_id`.
 3. The locator strategy is expressed using locator type names supported by Arjuna. Here, we are using the following basic locators, which have one to one mapping to Selenium's equivalent identifiers using By object.
 - **`id`** : Wraps By.id
 - **`name`** : Wraps By.name

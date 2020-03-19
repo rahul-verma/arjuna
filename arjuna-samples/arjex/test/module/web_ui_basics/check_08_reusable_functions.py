@@ -18,7 +18,7 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_webui_basics.lib.wp import *
+from arjex.lib.wp import *
 
 @test
 def check_sep_functions(request):

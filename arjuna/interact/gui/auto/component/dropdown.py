@@ -17,7 +17,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 from arjuna.interact.gui.auto.base.configurable import Configurable
 
@@ -37,7 +36,7 @@ class GuiWebSelect(Configurable):
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
         self.__option_container_same_as_select = option_container_lmd is None and True or False
         if not self.__option_container_same_as_select:
-            self.__option_container = self.__finder.element_with_lmd(self.gui, option_container_lmd, iconfig=self.settings)
+            self.__option_container = self.__finder.element(self.gui, option_container_lmd, iconfig=self.settings)
             # # Needs to be loaded so that options can be discovered.
             # self.__option_container.find_if_not_found()
 
@@ -67,7 +66,7 @@ class GuiWebSelect(Configurable):
 
         def load_options():
             container = get_root_element()
-            self.__options = container.multi_element_with_lmd(self.gui, self.__option_lmd, iconfig=self.settings)
+            self.__options = container.multi_element(self.gui, self.__option_lmd, iconfig=self.settings)
             # self.__options.find_if_not_found()
 
         # self._wrapped_main_element.find()

@@ -21,8 +21,9 @@ from .base import WPBasePage
 
 class Dashboard(WPBasePage):
 
-    def go_to_settings(self):
-        self.settings.click()
+    @property
+    def settings_page(self):
+        self.gns.settings.click()
 
         from .settings import Settings
         return Settings(self)

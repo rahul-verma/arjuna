@@ -110,8 +110,8 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
         url = C("wp.logout.url")
         self.go_to_url(url)
 
-        self.logout_confirm.click()
-        self.logout_msg
+        self.gns.logout_confirm.click()
+        self.gns.logout_msg
 
         from .home import Home
         return Home(self)
@@ -137,9 +137,9 @@ from .base import WPBasePage
 class Home(WPBasePage):
 
     def login(self, user, pwd):
-        self.user.text = user
-        self.pwd.text = pwd
-        self.submit.click()
+        self.gns.user.text = user
+        self.gns.pwd.text = pwd
+        self.gns.submit.click()
 
         from .dashboard import Dashboard
         return Dashboard(self)
@@ -164,8 +164,9 @@ from .base import WPBasePage
 
 class Dashboard(WPBasePage):
 
-    def go_to_settings(self):
-        self.settings.click()
+    @property
+    def settings_page(self):
+        self.gns.settings.click()
 
         from .settings import Settings
         return Settings(self)
@@ -181,7 +182,7 @@ from .base import WPBasePage
 class Settings(WPBasePage):
 
     def tweak_role_value(self, value):
-        role_select = self.role
+        role_select = self.gns.role
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
         return self
@@ -211,7 +212,7 @@ def dashboard(request):
 
 @test
 def check_with_wp_app_page(request, dashboard):
-    dashboard.go_to_settings().tweak_role_value("editor")
+    dashboard.settings_page.tweak_role_value("editor")
 ```
 
 ##### Points to Note
@@ -221,5 +222,5 @@ def check_with_wp_app_page(request, dashboard):
 4. We login with default credentials using `home.login_with_default_creds()` call. It returns `Dashboard` which is then yielded.
 5. In the teardown part of fixture, we logout using `dashboard.logout()` call.
 6. In the test, the argument is changed from `wordpress` to `dashbaord`.
-7. `dashboard.go_to_settings().tweak_role_value("editor")` gets the `Settings`  object and calls its `tweak_role_value` method.
+7. `dashboard.settings_page.tweak_role_value("editor")` gets the `Settings`  object and calls its `tweak_role_value` method.
 

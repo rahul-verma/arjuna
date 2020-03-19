@@ -23,7 +23,7 @@ class WordPress(WebApp):
 
     def __init__(self):
         url = C("wp.login.url")
-        super().__init__(base_url=url)
+        super().__init__(base_url=url, gns_dir="app_page/")
 
     def launch_app(self):
         self.launch()

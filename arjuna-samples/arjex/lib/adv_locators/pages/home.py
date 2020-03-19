@@ -24,9 +24,9 @@ from .base import WPBasePage
 class Home(WPBasePage):
 
     def login(self, user, pwd):
-        self.user.text = user
-        self.pwd.text = pwd
-        self.submit.click()
+        self.gns.user.text = user
+        self.gns.pwd.text = pwd
+        self.gns.submit.click()
 
         from .dashboard import Dashboard
         return Dashboard(self)

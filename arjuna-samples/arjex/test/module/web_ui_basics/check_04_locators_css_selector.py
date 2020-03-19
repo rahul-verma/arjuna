@@ -35,14 +35,14 @@ def wordpress(request):
 def check_selector(request, wordpress):
 
     # Based on any attribute e.g. for
-    element = wordpress.user_attr
+    element = wordpress.gns.user_attr
 
     # Based on partial content of an attribute
-    element = wordpress.user_attr_content
+    element = wordpress.gns.user_attr_content
 
     # Based on element type
-    element = wordpress.pass_type
+    element = wordpress.gns.pass_type
 
     # Based on compound classes
-    element = wordpress.button_compound_class
+    element = wordpress.gns.button_compound_class
 

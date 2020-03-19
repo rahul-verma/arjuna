@@ -71,6 +71,6 @@ class ConfigContainer:
         return self
 
     def is_empty(self):
-        if not self.arjuna_options and not self.user_options:
+        if not self.arjuna_options and not self.gns.user_options:
             return True
         return False

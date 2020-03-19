@@ -31,7 +31,7 @@ from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.interact.gui.auto.source.parser import *
 from arjuna.engine.asserter import AsserterMixIn
 
-class _GuiPartialElement(GuiElement):
+class GuiPartialElement(GuiElement):
 
     def __init__(self, gui, multi_element, index: int, dispatcher_element, iconfig=None):
         super().__init__(gui, multi_element.lmd, iconfig=iconfig)
@@ -119,7 +119,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
         # The logic ignores stale elements 
         for i in range(count):
             try:
-                e = _GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i), iconfig=self.settings)
+                e = GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i), iconfig=self.settings)
                 self.__elements.append(e)
             except StaleElementReferenceException as e:
                 pass
@@ -224,7 +224,8 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
     def elements(self):
         return self.__elements
 
-    def create_filter(self):
+    @property
+    def filter(self):
         return ElementFilter(self)
 
 

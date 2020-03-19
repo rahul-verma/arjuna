@@ -9,7 +9,7 @@ Web automation facilities in Arjuna use Selenium as the underlying browser autom
 #### Launching a `WebApp`
 
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_01_webapp.py
+# arjuna-samples/arjex/test/module/check_01_webapp.py
 
 @test
 def check_webpp_nobase_url(request):
@@ -33,7 +33,7 @@ def check_webpp_nobase_url(request):
 We can associated the `WebApp` with a base URL by providing `base_url` arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
 
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_01_webapp.py
+# arjuna-samples/arjex/test/module/check_01_webapp.py
 
 @test
 def check_webpp_nobase_url(request):
@@ -51,7 +51,7 @@ During initilization, `WebApp` automatically looks for the `ArjunaOption.APP_URL
  
  
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_01_webapp.py
+# arjuna-samples/arjex/test/module/check_01_webapp.py
 
  @test
 def check_webpp_base_url_in_custom_config(request):

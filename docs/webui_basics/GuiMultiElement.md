@@ -9,10 +9,10 @@ We are going to use a test-level fixture for the examples.
 Below is the `@for_test` fixture code to get logged-in WordPress for a test using the reusable module that we created in the last section. We place it in the `project.lib.fixture.test` module so that it can be used for a any test. 
 
 ```python
-# arjuna-samples/arjex_webui_basics/lib/fixture/test.py
+# arjuna-samples/arjex/lib/fixture/test.py
 
 from arjuna import *
-from arjex_webui_basics.lib.wp import WordPress
+from arjex.lib.wp import WordPress
 
 @for_test
 def logged_in_wordpress(request):
@@ -41,17 +41,17 @@ The following entry in `WordPress.yaml` is of interest:
 #### Test Code
 
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_09_gui_multielement.py
+# arjuna-samples/arjex/test/module/check_09_gui_multielement.py
 
 from arjuna import *
 
 @test
 def check_multielement(request, logged_in_wordpress):
     wordpress = logged_in_wordpress
-    wordpress.posts.click()
-    wordpress.categories.click()
+    wordpress.gns.posts.click()
+    wordpress.gns.categories.click()
 
-    check_boxes = wordpress.cat_checkboxes
+    check_boxes = wordpress.gns.cat_checkboxes
     check_boxes[1].check()
     check_boxes[1].uncheck()
     check_boxes.first_element.uncheck()

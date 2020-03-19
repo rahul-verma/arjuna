@@ -26,8 +26,8 @@ class TopNav(WPBaseSection):
         url = C("wp.logout.url")
         self.go_to_url(url)
 
-        self.logout_confirm.click()
-        self.logout_msg
+        self.gns.logout_confirm.click()
+        self.gns.logout_msg
 
-        from arjex_app_page_section.lib.gom.pages.home import Home
+        from arjex.lib.app_page_section.pages.home import Home
         return Home(self)

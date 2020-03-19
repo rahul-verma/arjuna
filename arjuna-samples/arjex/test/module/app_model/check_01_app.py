@@ -18,7 +18,7 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_app.lib.wp_app_model import WordPress
+from arjex.lib.app.wp_app import WordPress
 
 @for_test
 def wordpress(request):
@@ -31,5 +31,5 @@ def wordpress(request):
     wordpress.logout()
 
 @test
-def check_with_wp_app_model(request, wordpress):
+def check_with_wp_app_interim(request, wordpress):
     wordpress.tweak_role_value_in_settings("editor")

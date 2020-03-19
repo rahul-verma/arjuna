@@ -31,6 +31,7 @@ from arjuna.engine.asserter import AsserterMixIn
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
 from arjuna.core.exceptions import WaitableError, GuiNotLoadedError, GuiNamespaceLoadingError
+from arjuna.interact.gui.gom.gns import GNS
 
 class GuiConditions:
 
@@ -149,6 +150,12 @@ class AppContent(Gui):
         self.__gui_registered = False
         self._externalize()
 
+        self.__gns = GNS(self, self.gui_def)
+
+    @property
+    def gns(self):
+        return self.__gns
+
     @property
     def app(self):
         return self.__app
@@ -202,41 +209,36 @@ class AppContent(Gui):
     #     return lmd
 
     @property
+    def root_element(self):
+        return None
+
+    @property
     def browser(self):
         return self.automator.browser
 
-    def __element(self, *str_or_with_locators, iconfig=None):
-        return self.automator.element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
+    def element(self, lmd, iconfig=None):
+        return self.automator.element(self, lmd, iconfig=iconfig)
 
-    def __multi_element(self, *str_or_with_locators, iconfig=None):
-        return self.automator.multi_element(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
+    def multi_element(self, lmd, iconfig=None):
+        return self.automator.multi_element(self, lmd, iconfig=iconfig)
 
-    def __dropdown(self, *str_or_with_locators, option_container_locator=None, option_locator=None, iconfig=None):
+    def dropdown(self, lmd, option_container_locator=None, option_locator=None, iconfig=None):
         return self.automator.dropdown(
             self, 
-            self.convert_to_with_lmd(*str_or_with_locators),
+            lmd,
             option_container_lmd=option_container_locator and self.convert_to_with_lmd(option_container_locator) or None,
             option_lmd=option_locator and self.convert_to_with_lmd(option_locator) or None,
             iconfig=iconfig
         )
 
-    def __radio_group(self, *str_or_with_locators, iconfig=None):
-        return self.automator.radio_group(self, self.convert_to_with_lmd(*str_or_with_locators), iconfig=iconfig)
-
-    def __tab_group(self, *str_or_with_locators, tab_header_locator, content_relation_attr, content_relation_type, iconfig=None):
-        return self.automator.tab_group(
-            self,
-            self.convert_to_with_lmd(*str_or_with_locators),
-            tab_header_lmd=self.convert_to_with_lmd(tab_header_locator),
-            content_relation_attr=content_relation_attr, 
-            content_relation_type=content_relation_type, 
-            iconfig=iconfig
-        )
+    def radio_group(self, lmd, iconfig=None):
+        return self.automator.radio_group(self, lmd, iconfig=iconfig)
 
     def wait_until_element_absent(self, name):
         return self.automator.wait_until_element_absent(self.gui_def.get_emd(name))
 
-    def get_dom_root(self):
+    @property
+    def dom_root(self):
         return self.automator.dom_root(self)
 
     def frame(self, *str_or_with_locators, iconfig=None):
@@ -257,6 +259,7 @@ class AppContent(Gui):
     def child_window(self, *str_or_with_locators):
         return self.automator.child_window(self.convert_to_with_lmd(*str_or_with_locators))
 
+    @property
     def latest_child_window(self):
         return self.automator.latest_child_window
 
@@ -285,12 +288,6 @@ class AppContent(Gui):
         ))
 
         if label is not None:
-            getattr(self, label)
-
-    def __getattr__(self, name):
-        emd = self.gui_def.get_emd(name)
-        from arjuna import Arjuna
-        Arjuna.get_logger().debug("Finding element for emd: {}".format(emd))
-        return getattr(self.automator, emd.meta.template.name.lower())(self, emd)
+            getattr(self.gns, label)
 
 

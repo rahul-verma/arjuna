@@ -17,7 +17,6 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.core.enums import ArjunaOption
 
 class WebAlert:

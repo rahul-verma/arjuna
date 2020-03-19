@@ -186,9 +186,9 @@ from .base import WPBasePage
 class Home(WPBasePage):
 
     def login(self, user, pwd):
-        self.user.text = user
-        self.pwd.text = pwd
-        self.submit.click()
+        self.gns.user.text = user
+        self.gns.pwd.text = pwd
+        self.gns.submit.click()
 
         from .dashboard import Dashboard
         return Dashboard(self)
@@ -229,7 +229,7 @@ from .base import WPFullPage
 class Settings(WPFullPage):
 
     def tweak_role_value(self, value):
-        role_select = self.role
+        role_select = self.gns.role
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
         return self
@@ -271,9 +271,10 @@ class LeftNav(WPBaseSection):
     def __init__(self, page):
         super().__init__(page)
 
-    def go_to_settings(self):
-        from arjex_app_page_section.lib.gom.pages.settings import Settings
-        self.settings.click()
+    @property
+    def settings_page(self):
+        from arjex.lib.app_page_section.pages.settings import Settings
+        self.gns.settings.click()
         return Settings(self)
 ```
 
@@ -295,10 +296,10 @@ class TopNav(WPBaseSection):
         url = C("wp.logout.url")
         self.go_to_url(url)
 
-        self.logout_confirm.click()
-        self.logout_msg
+        self.gns.logout_confirm.click()
+        self.gns.logout_msg
 
-        from arjex_app_page_section.lib.gom.pages.home import Home
+        from arjex.lib.app_page_section.pages.home import Home
         return Home(self)
 ```
 
@@ -312,7 +313,7 @@ class TopNav(WPBaseSection):
 # arjuna-samples/arjex_app_page_widget/test/module/check_01_app_page_section_model.py
 
 from arjuna import *
-from arjex_app_page_section.lib.gom.app import WordPress
+from arjex.lib.gom.app import WordPress
 
 @for_test
 def settings(request):
@@ -320,7 +321,7 @@ def settings(request):
     wordpress = WordPress()
     home = wordpress.launch()
     dashboard = home.login_with_default_creds()
-    settings = dashboard.left_nav.go_to_settings()
+    settings = dashboard.left_nav.settings_page
     yield settings
 
     # Teadown
@@ -337,7 +338,7 @@ def check_with_wp_app_page_section(request, settings):
 3. In the setup part, we create the WordPress instance as earlier, it now refers to the new class that we created.
 3. `wordpress.launch` launches the web application (opens browser and goes to the `base_url`). It returns the `Home` object.
 4. We login with default credentials using `home.login_with_default_creds()` call. It returns `Dashboard` object.
-5. We go to settings by using `left_nav` section of `dashboard`: `dashboard.left_nav.go_to_settings()`.
+5. We go to settings by using `left_nav` section of `dashboard`: `dashboard.left_nav.settings_page`.
 5. In the teardown part of fixture, we logout using `top_nav` section of `settings`: `settings.top_nav.logout()`.
 6. In the test, the argument is changed from `dashboard` to `settings`.
 7. `settings.tweak_role_value("editor")` is now  direct call to the settings object.

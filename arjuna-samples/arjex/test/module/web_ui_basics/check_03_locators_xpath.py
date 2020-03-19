@@ -33,22 +33,22 @@ def wordpress(request):
 @test
 def check_xpath(request, wordpress):
     # Based on Text
-    element = wordpress.lost_pass_text
+    element = wordpress.gns.lost_pass_text
 
     # Based on partial text
-    element = wordpress.lost_pass_text_content
+    element = wordpress.gns.lost_pass_text_content
 
     # Based on Title
-    element = wordpress.lost_pass_title
+    element = wordpress.gns.lost_pass_title
 
     # Based on Value
-    element = wordpress.user_value
+    element = wordpress.gns.user_value
 
     # Based on any attribute e.g. for
-    element = wordpress.user_attr
+    element = wordpress.gns.user_attr
 
     # Based on partial content of an attribute
-    element = wordpress.user_attr_content
+    element = wordpress.gns.user_attr_content
 
     # Based on element type
-    element = wordpress.pass_type
+    element = wordpress.gns.pass_type

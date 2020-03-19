@@ -13,7 +13,7 @@ We use the same GNS file `WordPress.yaml` from previous example.
 #### The Module Code
 
 ```python
-# arjuna-samples/arjex_webui_basics/lib/wp.py
+# arjuna-samples/arjex/lib/wp.py
 
 from arjuna import *
 
@@ -28,16 +28,16 @@ def login(wordpress):
     pwd = C("wp.admin.pwd")
     
     # Login
-    wordpress.user.text = user
-    wordpress.pwd.text = pwd
-    wordpress.submit.click()
-    wordpress.view_site
+    wordpress.gns.user.text = user
+    wordpress.gns.pwd.text = pwd
+    wordpress.gns.submit.click()
+    wordpress.gns.view_site
 
 def logout(wordpress):
     url = C("wp.logout.url")
     wordpress.go_to_url(url)
-    wordpress.logout_confirm.click()
-    wordpress.logout_msg
+    wordpress.gns.logout_confirm.click()
+    wordpress.gns.logout_msg
 
     wordpress.quit()
 ```
@@ -49,10 +49,10 @@ def logout(wordpress):
 #### Using the Reusable Functions in Test Code
 
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_08_reusable_functions.py
+# arjuna-samples/arjex/test/module/check_08_reusable_functions.py
 
 from arjuna import *
-from arjex_webui_basics.lib.wp import *
+from arjex.lib.wp import *
 
 @test
 def check_sep_functions(request):

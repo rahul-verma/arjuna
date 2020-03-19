@@ -18,20 +18,19 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_app_page_section.lib.gom.app import WordPress
+from arjex.lib.app_page.app import WordPress
 
 @for_test
-def settings(request):
+def dashboard(request):
     # Setup
     wordpress = WordPress()
     home = wordpress.launch_app()
     dashboard = home.login_with_default_creds()
-    settings = dashboard.left_nav.go_to_settings()
-    yield settings
+    yield dashboard
 
     # Teadown
-    settings.top_nav.logout()
+    dashboard.logout()
 
 @test
-def check_with_wp_app_page_section(request, settings):
-    settings.tweak_role_value("editor")
+def check_with_wp_app_page(request, dashboard):
+    dashboard.settings_page.tweak_role_value("editor")

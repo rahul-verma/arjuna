@@ -27,7 +27,7 @@ from .sections.leftnav import LeftNav
 class WPBasePage(Page, metaclass=abc.ABCMeta):
 
     def __init__(self, source_gui):
-        super().__init__(source_gui=source_gui)
+        super().__init__(source_gui=source_gui, gns_dir="app_page_section")
 
 
 class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):

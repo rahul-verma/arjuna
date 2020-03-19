@@ -22,10 +22,10 @@ from arjuna import *
 @test
 def check_multielement(request, logged_in_wordpress):
     wordpress = logged_in_wordpress
-    wordpress.posts.click()
-    wordpress.categories.click()
+    wordpress.gns.posts.click()
+    wordpress.gns.categories.click()
 
-    check_boxes = wordpress.cat_checkboxes
+    check_boxes = wordpress.gns.cat_checkboxes
     check_boxes[1].check()
     check_boxes[1].uncheck()
     check_boxes.first_element.uncheck()

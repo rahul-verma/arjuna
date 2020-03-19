@@ -22,7 +22,7 @@ from .base import WPBasePage
 class Settings(WPBasePage):
 
     def tweak_role_value(self, value):
-        role_select = self.role
+        role_select = self.gns.role
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
         return self

@@ -1,6 +1,6 @@
 
 from arjuna import *
-from arjex_webui_basics.lib.wp import *
+from arjex.lib.wp import *
 
 @for_test
 def logged_in_wordpress(request):

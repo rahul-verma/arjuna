@@ -18,7 +18,7 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_with_adv.lib.gom.app import WordPress
+from arjex.lib.adv_locators.app import WordPress
 
 @for_test
 def dashboard(request):

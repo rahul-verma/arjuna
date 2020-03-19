@@ -34,32 +34,32 @@ def wordpress(request):
 def check_arjuna_exts(request, wordpress):
 
     # Based on partial text
-    element = wordpress.lost_pass_text
+    element = wordpress.gns.lost_pass_text
 
     # Based on Full Text
-    element = wordpress.lost_pass_ftext
+    element = wordpress.gns.lost_pass_ftext
 
     # Based on Title
-    element = wordpress.lost_pass_title
+    element = wordpress.gns.lost_pass_title
 
     # Based on Value
-    element = wordpress.user_value
+    element = wordpress.gns.user_value
 
     # Based on partial match of content of an attribute
-    element = wordpress.user_attr
+    element = wordpress.gns.user_attr
 
     # Based on full match of an attribute
-    element = wordpress.user_fattr
+    element = wordpress.gns.user_fattr
 
     # Based on element type
-    element = wordpress.pass_type
+    element = wordpress.gns.pass_type
 
     # Based on compound classes
-    element = wordpress.button_classes_str
-    element = wordpress.button_classes_list
+    element = wordpress.gns.button_classes_str
+    element = wordpress.gns.button_classes_list
 
     # Based on Point (location in terms of X,Y co-ordinates)
-    element = wordpress.elem_xy
+    element = wordpress.gns.elem_xy
 
     # With Javascript
-    element = wordpress.elem_js
+    element = wordpress.gns.elem_js

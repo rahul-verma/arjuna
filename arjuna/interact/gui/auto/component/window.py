@@ -18,7 +18,6 @@ limitations under the License.
 '''
 
 import traceback
-from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.core.enums import ArjunaOption
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 

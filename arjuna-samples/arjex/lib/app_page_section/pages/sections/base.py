@@ -23,4 +23,4 @@ from arjuna import Section
 class WPBaseSection(Section, metaclass=abc.ABCMeta):
 
     def __init__(self, page):
-        super().__init__(page, gns_dir="sections")
+        super().__init__(page, gns_dir="app_page_section/sections")

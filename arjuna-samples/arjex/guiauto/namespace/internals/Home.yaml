@@ -1,6 +1,6 @@
 labels:
 
-  login:
+  user:
     id: user_login
 
   pwd:

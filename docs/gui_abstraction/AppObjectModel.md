@@ -34,22 +34,22 @@ class WordPress(WebApp):
         pwd = C("wp.admin.pwd")
 
         # Login
-        self.user.text = user
-        self.pwd.text = pwd
-        self.submit.click()
-        self.view_site
+        self.gns.user.text = user
+        self.gns.pwd.text = pwd
+        self.gns.submit.click()
+        self.gns.view_site
 
     def logout(self):
         url = C("wp.logout.url")
         self.go_to_url(url)
-        self.logout_confirm.click()
-        self.logout_msg
+        self.gns.logout_confirm.click()
+        self.gns.logout_msg
 
         self.quit()
 
     def tweak_role_value_in_settings(self, value):
-        self.app.settings.click()
-        role_select = self.app.role
+        self.app.gns.settings.click()
+        role_select = self.gns.role
         role_select.select_value(value)
         self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
         return self

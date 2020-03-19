@@ -18,7 +18,7 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex_with_adv.lib.gom.app import WordPress
+from arjex.lib.adv_locators.app import WordPress
 
 @for_test
 def dashboard(request):
@@ -34,7 +34,7 @@ def dashboard(request):
 
 @test
 def check_withx_in_leftnav_gns_file(request, dashboard):
-    dashboard.left_nav.posts.click()
-    dashboard.left_nav.media.click()
-    dashboard.left_nav.pages.click()
-    dashboard.left_nav.comments.click()
+    dashboard.left_nav.gns.posts.click()
+    dashboard.left_nav.gns.media.click()
+    dashboard.left_nav.gns.pages.click()
+    dashboard.left_nav.gns.comments.click()

@@ -52,22 +52,22 @@ def check_wp_login(request, wordpress):
     pwd = C("wp.admin.pwd")
     
     # Login
-    user_field = wordpress.user
+    user_field = wordpress.gns.user
     user_field.text = user
 
-    pwd_field = wordpress.pwd
+    pwd_field = wordpress.gns.pwd
     pwd_field.text = pwd
 
-    submit = wordpress.submit
+    submit = wordpress.gns.submit
     submit.click()
 
-    wordpress.view_site
+    wordpress.gns.view_site
 
     # Logout
     url = C("wp.logout.url")
     wordpress.go_to_url(url)
 
-    confirmation = wordpress.logout_confirm
+    confirmation = wordpress.gns.logout_confirm
     confirmation.click()
 
-    wordpress.logout_msg
+    wordpress.gns.logout_msg

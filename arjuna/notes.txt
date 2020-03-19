@@ -651,7 +651,7 @@ Removed statements
         # DefaultStringKeyValueContainer
         self.exec_var_map = {}
         # DefaultStringKeyValueContainer
-        self.user_options = {}
+        self.gns.user_options = {}
 
 Removed statements
     def init(self, project_root_dir, cli_config, run_id):

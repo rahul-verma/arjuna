@@ -25,7 +25,8 @@ class LeftNav(WPBaseSection):
     def __init__(self, page):
         super().__init__(page)
 
-    def go_to_settings(self):
-        from arjex_app_page_section.lib.gom.pages.settings import Settings
-        self.settings.click()
+    @property
+    def settings_page(self):
+        from arjex.lib.app_page_section.pages.settings import Settings
+        self.gns.settings.click()
         return Settings(self)

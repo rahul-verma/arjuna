@@ -20,7 +20,6 @@ limitations under the License.
 import os
 
 from arjuna import Arjuna
-from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 from arjuna.interact.gui.auto.source.parser import FrameSource
 from arjuna.interact.gui.auto.base.configurable import Configurable

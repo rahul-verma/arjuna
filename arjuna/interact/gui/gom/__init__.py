@@ -37,6 +37,10 @@ class Section(AppContent):
         self._load(*args, **kwargs)
         self.__parent = gui
 
+    @property
+    def root_element(self):
+        return self.__root_element
+
     def __determine_root(self, root_init):
         root_label = None
         root_gns = self.gui_def.root_element_name
@@ -58,7 +62,7 @@ class Section(AppContent):
 
     def load_root_element(self):
         if self.__root_label:
-            self.__root_element = getattr(self, self.__root_label)
+            self.__root_element = getattr(self.gns, self.__root_label)
 
     # def element(self, name):
     #     if self.__root_element:
@@ -72,18 +76,12 @@ class Section(AppContent):
     #     else:
     #         return getattr(self, name)
 
-    def __getattr__(self, name):
-        emd = self.gui_def.get_emd(name)
-        from arjuna import Arjuna
-        
-        if self.__root_element:
-            Arjuna.get_logger().debug("Finding element for emd: {} in element with label: {}".format(emd, self.__root_label))
-            return getattr(self.__root_element, name)
-        else:
-            return super().__getattr__(name)
-
-    def get_parent(self):
+    @property
+    def parent(self):
         return self.__parent
+
+Widget = Section
+Dialog = Section
 
 class App(Gui, metaclass=abc.ABCMeta):
 
@@ -144,7 +142,6 @@ class WebApp(App):
     def launch(self, blank_slate=False):
         self._launchautomator()
         if not blank_slate:
-            print(self.base_url)
             self.automator.browser.go_to_url(self.base_url)
         self._create_default_ui()
         self._load(*self.__args, **self.__kwargs)

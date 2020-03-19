@@ -22,9 +22,9 @@ from arjuna import *
 @test
 def check_dropdown(request, logged_in_wordpress):
     wordpress = logged_in_wordpress
-    wordpress.settings.click()
+    wordpress.gns.settings.click()
 
-    role_select = wordpress.role
+    role_select = wordpress.gns.role
 
     role_select.select_text("Subscriber")
     fmsg = "Failed to select Subscriber Role"

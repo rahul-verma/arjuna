@@ -29,8 +29,8 @@ class WPBasePage(Page, metaclass=abc.ABCMeta):
         url = C("wp.logout.url")
         self.go_to_url(url)
 
-        self.logout_confirm.click()
-        self.logout_msg
+        self.gns.logout_confirm.click()
+        self.gns.logout_msg
 
         from .home import Home
         return Home(self)

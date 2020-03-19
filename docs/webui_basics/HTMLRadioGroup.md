@@ -23,17 +23,17 @@ The following entry in `WordPress.yaml` is of interest:
 #### Usage
 
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_11_radio_group.py
+# arjuna-samples/arjex/test/module/check_11_radio_group.py
 
 from arjuna import *
-from arjex_webui_basics.lib.wp import *
+from arjex.lib.wp import *
 
 @test
 def check_radiogroup(request, logged_in_wordpress):
     wordpress = logged_in_wordpress
-    wordpress.settings.click()
+    wordpress.gns.settings.click()
 
-    date_format = wordpress.date_format
+    date_format = wordpress.gns.date_format
 
     fmsg = "Failed to select m/d/Y date format"
     request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), fmsg)

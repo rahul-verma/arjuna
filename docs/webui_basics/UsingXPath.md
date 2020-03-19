@@ -7,7 +7,7 @@ We use **`xpath`** locator for identification using XPath. It is a direct wrappe
 Below is the `@for_test` fixture code:
 
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_03_locators_xpath.py
+# arjuna-samples/arjex/test/module/check_03_locators_xpath.py
 
 @for_test
 def wordpress(request):
@@ -59,29 +59,29 @@ labels:
 ### Usage
 
 ```python
-# arjuna-samples/arjex_webui_basics/test/module/check_03_locators_xpath.py
+# arjuna-samples/arjex/test/module/check_03_locators_xpath.py
 
 @test
 def check_xpath(request, wordpress):
 
     # Based on Text
-    element = wordpress.lost_pass_text
+    element = wordpress.gns.lost_pass_text
 
     # Based on partial text
-    element = wordpress.lost_pass_text_content
+    element = wordpress.gns.lost_pass_text_content
 
     # Based on Title
-    element = wordpress.lost_pass_title
+    element = wordpress.gns.lost_pass_title
 
     # Based on Value
-    element = wordpress.user_value
+    element = wordpress.gns.user_value
 
     # Based on any attribute e.g. for
-    element = wordpress.user_attr
+    element = wordpress.gns.user_attr
 
     # Based on partial content of an attribute
-    element = wordpress.user_attr_content
+    element = wordpress.gns.user_attr_content
 
     # Based on element type
-    element = wordpress.pass_type
+    element = wordpress.gns.pass_type
 ```

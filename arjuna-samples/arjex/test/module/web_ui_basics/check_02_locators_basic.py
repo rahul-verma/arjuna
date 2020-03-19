@@ -44,14 +44,14 @@ def wordpress(request):
 def check_basic_identifiers(request, wordpress):
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
-    element = wordpress.user_id
-    element = wordpress.user_name
-    element = wordpress.user_tag
-    element = wordpress.user_class
+    element = wordpress.gns.user_id
+    element = wordpress.gns.user_name
+    element = wordpress.gns.user_tag
+    element = wordpress.gns.user_class
 
     # Lost your password link
     # Html of link: <a href="/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
     # Partial Link text match
-    element = wordpress.lost_pass_link
+    element = wordpress.gns.lost_pass_link
     # Full Link text match
-    element = wordpress.lost_pass_flink
+    element = wordpress.gns.lost_pass_flink

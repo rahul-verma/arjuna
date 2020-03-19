@@ -20,16 +20,14 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 3. Install Arjuna using the following command
     * `pip install arjuna`
 
-### 2. Arjuna - Getting Started
+You can find the example code in [arjex project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex).
 
-You can find the example code used on this section in [arjuna_start project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_start/test/module).
+### 2. Arjuna - Getting Started
 
 1. [Project Structure](https://github.com/rahul-verma/arjuna/blob/master/docs/start/ProjectStructure.md)
 2. [Writing Your First Test](https://github.com/rahul-verma/arjuna/blob/master/docs/start/WritingFirstTest.md)
 
 ### 3. Arjuna's Configuration System
-
-You can find the example code used on this section in [arjuna_config project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_config/test/module).
 
 1. [Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/config/Configuration.md)
 2. [project.conf - Project Level Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/config/ProjectConf.md)
@@ -42,8 +40,6 @@ You can find the example code used on this section in [arjuna_config project](ht
 
 ### 4. Data Driven Testing and Contextual Data References
 
-You can find the example code used on this section in [arjuna_data project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_data/test/module).
-
 1. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataDrivenTesting.md)
 2. [Driving with Single or Multiple Data Records](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataRecords.md)
 3. [Driving with Data Functions](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataFunctions.md)
@@ -54,15 +50,12 @@ You can find the example code used on this section in [arjuna_data project](http
 8. [Excel Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/data/ExcelDataReferences.md)
 
 ### 5. Localization of Strings
-You can find the example code used on this section in [arjuna_l10 project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex_l10/test/module).
 
 1. [Excel Localizer and The Magic `L` Function](https://github.com/rahul-verma/arjuna/blob/master/docs/l10/ExcelLocalizerAndTheLMaficFunction.md)
 2. [Json Localizer](https://github.com/rahul-verma/arjuna/blob/master/docs/l10/JsonLocalizer.md)
 3. [Strict vs Non-Strict Mode](https://github.com/rahul-verma/arjuna/blob/master/docs/l10/StrictNonStrictMode.md)
 
 ### 6. Basic Web UI Automation
-
-You can find the example code used on this section in [arjuna_webui_basics project](https://github.com/rahul-verma/arjuna//tree/master/arjuna-samples/arjex_webui_basics/test/module).
 
 1. [Getting Started with WebApp](https://github.com/rahul-verma/arjuna/blob/master/docs//webui_basics/WebApp.md)
 2. [Gui Namespace (GNS) - Externalized Identifiers](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiNamespace.md)
@@ -87,7 +80,6 @@ You can find the example code used on this section in [arjuna_webui_basics proje
 7. Retrieving Source code with GuiSource
 
 ### 8. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
-The following tutorial sub-sections have multiple example projects corresponding to them. Please refer the pages for respective example projects.
 
 1. [Creating App Class](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppClass.md)
 2. [App Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppObjectModel.md)

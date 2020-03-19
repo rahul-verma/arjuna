@@ -1,14 +1,19 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.12
+------
+- All example code fixed.
+- All docs fixed.
+
 0.9.11
 ------
 - Direct log msg calls added: log_debug, log_info, log_warning, log_error, log_fatal. Implentation method used could be extended for contextual logging in Arjuna in future.
-- Python __getattr__ conflicts with properties in parent classes of such a class. Introduced Proxy classes for App/Page/Section.
+- Introduced GNS class. Gui and nested element access for labels defined in GNS can be done as `gui.gns.label` and `element.gns.label` respectively.
 - root and anchor elements code optimized to work with direct reference to original element.
 - withx supports attr and fattr with named args support for both name and value arguments.
-- .label support added for nested elements as well.
-- basic .element factory added. Needs to be enhanced to support any advanced non-GNS implementations one might find a need for.
+- basic .locate factory added. Needs to be enhanced to support any advanced non-GNS implementations one might find a need for.
 - Typo fixed in CLI help for -im.
+- All example code has been moved to a single project `arjex`. Code and docs need a fix.
 
 0.9.10
 ------
