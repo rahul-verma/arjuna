@@ -12,7 +12,7 @@ Below is the `@for_test` fixture code to get logged-in WordPress for a test usin
 # arjuna-samples/arjex/lib/fixture/test.py
 
 from arjuna import *
-from arjex.lib.wp import WordPress
+from arjex.lib.procedural.wp import WordPress
 
 @for_test
 def logged_in_wordpress(request):

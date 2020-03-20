@@ -26,7 +26,7 @@ The following entry in `WordPress.yaml` is of interest:
 # arjuna-samples/arjex/test/module/check_11_radio_group.py
 
 from arjuna import *
-from arjex.lib.wp import *
+from arjex.lib.procedural.wp import *
 
 @test
 def check_radiogroup(request, logged_in_wordpress):

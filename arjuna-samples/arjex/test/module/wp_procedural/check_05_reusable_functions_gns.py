@@ -18,7 +18,7 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.wp_gns import *
+from arjex.lib.procedural.wp_gns import *
 
 @test
 def check_sep_functions(request):

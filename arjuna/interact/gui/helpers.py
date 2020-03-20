@@ -206,12 +206,12 @@ class WithType(Enum):
 class _WithXMetaClass(type):
 
     def __getattr__(cls, mname):
-        from arjuna import Arjuna
+        from arjuna import Arjuna 
         withx_ref = Arjuna.get_withx_ref()
         if not withx_ref.has_locator(mname):
             raise Exception("There is no built-in or extended locator available as With.{}".format(mname))
 
-        def withx(*vargs, **kwargs):
+        def withx(*vargs, **kwargs): 
             wtype, wvalue = withx_ref.format_args(mname, vargs, kwargs)
             return getattr(With, wtype.lower())(wvalue)
         return withx
@@ -447,6 +447,14 @@ class Point(Dictable):
 
     def as_dict(self):
         return {"x": self.__x, "y":self.__y}
+
+class Params(Dictable):
+
+    def __init__(self, **kwargs):
+        self.__kwargs = kwargs
+
+    def as_dict(self):
+        return self.__kwargs
 
 
 

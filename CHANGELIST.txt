@@ -4,6 +4,7 @@ Following is the list of critical additions and updates for a given released ver
 ------
 - Added locate/element/multi_element/dropdown/radio_group factories to Page.
 - The factories provide a more Pythonic syntax than using tuples or factories for every locator type in user API.
+- withx works with the revised factory methods. One can provide `withx_name=Params([arg1=val1, arg2=val2, ... argN=valN])` argument to factory methods for identification.
 - Example code and documentation updates in progress.
 
 0.9.11

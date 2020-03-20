@@ -34,4 +34,5 @@ def dashboard(request):
 
 @test
 def check_withx_using_with(request, dashboard):
-    dashboard.left_nav.locate(With.nav_link(lname="Media")).click()
+    print("herer")
+    dashboard.left_nav.element(nav_link=Params(lname="Media")).click()

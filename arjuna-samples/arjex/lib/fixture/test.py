@@ -1,8 +1,5 @@
 
 from arjuna import *
-from arjex.lib.wp import *
-
-from arjuna import *
 
 @for_test
 def wordpress(request):
@@ -18,7 +15,7 @@ def wordpress(request):
 
     # Setup
     wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="BasicIdentification")
+    wordpress = WebApp(base_url=wp_url)
     wordpress.launch()
     yield wordpress
 
@@ -26,8 +23,25 @@ def wordpress(request):
     wordpress.quit()
 
 
+from arjex.lib.procedural.wp import *
+
+
 @for_test
 def logged_in_wordpress(request):
+    # Setup
+    wordpress = create_wordpress_app()
+    login(wordpress)
+    yield wordpress
+
+    # Teadown
+    logout(wordpress)
+
+
+from arjex.lib.procedural.wp_gns import *
+
+
+@for_test
+def logged_in_wordpress_gns(request):
     # Setup
     wordpress = create_wordpress_app()
     login(wordpress)

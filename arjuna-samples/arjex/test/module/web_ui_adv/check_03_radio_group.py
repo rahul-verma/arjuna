@@ -18,7 +18,6 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.wp import *
 
 @test
 def check_radiogroup(request, logged_in_wordpress):

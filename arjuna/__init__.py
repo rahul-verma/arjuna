@@ -54,7 +54,7 @@ class ArjunFacade:
 
 from arjuna.engine import Arjuna
 
-from arjuna.interact.gui.helpers import With, Attr, Point
+from arjuna.interact.gui.helpers import With, Attr, Point, Params
 from arjuna.interact.gui.gom import WebApp, Page, Section, Widget, Dialog
 
 from arjuna.core.exceptions import *

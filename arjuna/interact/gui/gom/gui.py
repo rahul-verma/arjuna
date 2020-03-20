@@ -192,10 +192,10 @@ class AppContent(Gui):
         from arjuna.interact.gui.helpers import WithType, With
         with_list = []
         for k,v in kwargs.items():
-            if k.upper() in WithType.__members__:
+            if k.upper() in WithType.__members__ or Arjuna.get_withx_ref().has_locator(k):
                 if isinstance(v, Dictable):
                     v = v.as_dict()
-                    with_list.append(getattr(With, k.lower())(v))
+                    with_list.append(getattr(With, k.lower())(**v))
                 else:
                     with_list.append(getattr(With, k.lower())(v))
         if not with_list:
@@ -238,7 +238,6 @@ class AppContent(Gui):
         from arjuna import log_debug
         emd = self.convert_to_lmd({"template": template}, **kwargs)
         log_debug("Finding element with emd: {}.".format(emd))
-        print(kwargs, template, emd.meta.template.name.lower())
         return getattr(self, "_" +  emd.meta.template.name.lower())(emd)
 
     element = locate
