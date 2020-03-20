@@ -3,14 +3,14 @@
 All of Arjuna's locator extensions can be externalizd in GNS as well.
 
 - Following are externalized as simple key value pairs:
-    - **`text`**:
+    - **`text`**
     - **`ftext`**
     - **`title`**
     - **`value`**
-    - **`js`** : Runs the supplied JavaScript and returns GuiElement representing the element it returns.
+    - **`js`**
 - Following are externlized with content as a YAML mapping with `name` and `value` keys:
-    - **`attr`** : Generates Partial Attribute Value Match CSS Selector
-    - **`fattr`** : Generates Full Attribute Match CSS Selector
+    - **`attr`**
+    - **`fattr`**
 - **`classes`** is externalized as a single string or a YAML list of strings:
 - **`point`** is externlized with content as a YAML mapping with `x` and `y` keys.
 
