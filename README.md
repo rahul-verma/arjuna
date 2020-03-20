@@ -67,9 +67,9 @@ You can find the example code in [arjex project](https://github.com/rahul-verma/
 
 ### 7. Basics of Gui Namespace (GNS) - Externalizing Identifiers
 1. [What is Gui Namespace (GNS)](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/GuiNamespace.md)
-2. [Externalizing ID, Name, Tag, Class, Link Text, Partial Link Text](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/GuiElementBasicLocators.md)
-3. [Externalizing XPath](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/UsingXPath.md)
-4. [Externalizing CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/UsingCSSSelectors.md)
+2. [Externalizing ID, Name, Tag, Class, Link Text, Partial Link Text](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/BasicLocators.md)
+3. [Externalizing XPath](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/XPath.md)
+4. [Externalizing CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/CSSSelectors.md)
 5. [Externalizing Arjuna's Locator Extensions](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/ArjunaLocatorExtensions.md)
 
 
