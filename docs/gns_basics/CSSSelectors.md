@@ -1,6 +1,6 @@
-### Gui Element Locators - Using CSS Selectors
+### Gui Namespace - Externalizing CSS Selectors
 
-We use **`selector`** locator for identification using CSS Selector. It is a direct wrapper on By.css_selector in Selenium.
+**`selector`** locator can be externalized as well.
 
 #### Test Fixture for Example(s) in This Page
 

@@ -19,17 +19,6 @@ limitations under the License.
 
 from arjuna import *
 
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="Selector")
-    wordpress.launch()
-    yield wordpress
-
-    # Teadown
-    wordpress.quit()
-
 
 @test
 def check_selector(request, wordpress):

@@ -1,15 +1,18 @@
-### Gui Element Locators - Using Arjuna's Locator Extensions
+### Gui Namespace - Externalizing Arjuna's Locator Extensions
 
-Arjuna provides various higher level locator strategies in addition to wrapping Selenium's By-style strategies. Following is the list of these extensions:
-- **`text`** : Generates Partial Text based XPath
-- **`ftext`** : Generates Full Text based XPath
-- **`title`** : Generates Title Match CSS Selector
-- **`value`** : Generates Value Match CSS Selector
-- **`attr`** : Generates Partial Attribute Value Match CSS Selector
-- **`fattr`** : Generates Full Attribute Match CSS Selector
-- **`classes`** : Supports compound classes (supplied as a single string or as multiple separate strings)
-- **`point`** : Runs a JavaScript to find the GuiElement under an XY coordinate
-- **`js`** : Runs the supplied JavaScript and returns GuiElement representing the element it returns.
+All of Arjuna's locator extensions can be externalizd in GNS as well.
+
+- Following are externalized as simple key value pairs:
+    - **`text`**:
+    - **`ftext`**
+    - **`title`**
+    - **`value`**
+    - **`js`** : Runs the supplied JavaScript and returns GuiElement representing the element it returns.
+- Following are externlized with content as a YAML mapping with `name` and `value` keys:
+    - **`attr`** : Generates Partial Attribute Value Match CSS Selector
+    - **`fattr`** : Generates Full Attribute Match CSS Selector
+- **`classes`** is externalized as a single string or a YAML list of strings:
+- **`point`** is externlized with content as a YAML mapping with `x` and `y` keys.
 
 #### Test Fixture for Example(s) in This Page
 

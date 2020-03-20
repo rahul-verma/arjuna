@@ -1,6 +1,6 @@
-### Gui Element Locators - Using XPath
+### Gui Namespace - Externalizing XPath
 
-We use **`xpath`** locator for identification using XPath. It is a direct wrapper on By.xpath in Selenium. Following are various samples.
+**`xpath`** locator can be externalized as well.
 
 #### Test Fixture for Example(s) in This Page
 

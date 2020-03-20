@@ -1,5 +1,33 @@
 ### Gui Namespace - Externalizing ID, Name, Tag, Class, Link Text and Partial Link Text
 
+#### Test Fixture for Example(s) in This Page
+
+Below is the `@for_test` fixture code:
+
+```python
+# arjuna-samples/arjex/test/module/check_02_guielement.py
+
+@for_test
+def wordpress(request):
+    # Setup
+    wp_url = C("wp.login.url")
+    wordpress = WebApp(base_url=wp_url, label="BasicIdentification")
+    wordpress.launch()
+    
+    yield wordpress
+    
+    # Teadown    
+    wordpress.quit()
+```
+
+##### Points to Note
+1. We retrieve the Login page URL for Wordpress from `Configuration`.
+2. We create a `WebApp` instance and supply the above URL as the `base_url` argument. Use a WordPress deployment of choice. For example code creation, a VirtualBox image of Bitnami Wordpress was used.
+3. To instruct Arjuna to pick up a GNS file for a given name, we can provide the `label` argument. Now it will look for `BasicIdentification.yaml` in project's Gui Namespace directory.
+3. We launch the app.
+4. We yield this app object so that it is available in the tests.
+5. In the teadown section, we quit the app using `quit` method of the app.
+
 #### The GNS File
 
 Location for the following file is `arjuna-samples/arjex/guiauto/namespace/BasicIdentification.yaml`
@@ -49,6 +77,5 @@ def check_basic_identifiers(request, wordpress):
 ```
 
 ##### Points to Note
-1. Launch the WebApp. Use a WordPress deployment of choice. For example code creation, a VirtualBox image of Bitnami Wordpress was used.
-2. You can directly create an element by using `<app object>.gns.<GNS label>` syntax. For example, `wordpress.gns.user_id` will find an element with the locator information supplied in GNS file for the label `user_id`.
-3. The locator strategy is expressed using locator type names supported by Arjuna. These are simple locators and hence are expressed as basic key value pairs, almost equivalent to the way you pass them as keyword arguments in `app.element` calls. Functionality is equivalent as well.
+1. You can directly create an element by using `<app object>.gns.<GNS label>` syntax. For example, `wordpress.gns.user_id` will find an element with the locator information supplied in GNS file for the label `user_id`.
+2. The locator strategy is expressed using locator type names supported by Arjuna. These are simple locators and hence are expressed as basic key value pairs, almost equivalent to the way you pass them as keyword arguments in `app.element` calls. Functionality is equivalent as well.

@@ -13,112 +13,46 @@ Arjuna provides various higher level locator strategies in addition to wrapping 
 
 #### Test Fixture for Example(s) in This Page
 
-Below is the `@for_test` fixture code:
-
-```python
-# arjuna-samples/arjex/test/module/check_05_locators_arjuna_exts.py
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="ArjunaExtended")
-    wordpress.launch()
-    yield wordpress
-
-    # Teadown
-    wordpress.quit()
-```
-
-##### Points to Note
-1. Label is changed to `ArjunaExtended`.
-2. Rest of the code is same as earlier.
-
-### The GNS File
-
-Location for the following file is `arjuna-samples/arjex_app/guiauto/namespace/ArjunaExtended.yaml`
-
-```YAML
-labels:
-
-  lost_pass_text:
-    text: Lost
-
-  lost_pass_ftext:
-    ftext: "Lost your password?"
-
-  lost_pass_title:
-    title: Password Lost and Found
-
-  user_value:
-    value: Log In
-
-  user_attr:
-    attr:
-      name: for
-      value: _login
-
-  user_fattr:
-    fattr:
-      name: for
-      value: user_login
-
-  pass_type:
-    type: password
-
-  button_classes_str:
-    classes: button button-large
-
-  button_classes_list:
-    classes: 
-      - button 
-      - button-large
-
-  elem_xy:
-    point:
-      x: 1043
-      y: 458
-
-  elem_js:
-    js: "return document.getElementById('wp-submit')"
-```
+Same as Basic locators example.
 
 ### Usage
 
 ```python
-# arjuna-samples/arjex/test/module/check_05_locators_arjuna_exts.py
+# arjuna-samples/arjex/test/module/web_ui_basics/check_05_locators_arjuna_exts.py
+
+from arjuna import *
 
 @test
 def check_arjuna_exts(request, wordpress):
 
     # Based on partial text
-    element = wordpress.gns.lost_pass_text
+    wordpress.element(text="Lost")
 
     # Based on Full Text
-    element = wordpress.gns.lost_pass_ftext
+    wordpress.element(ftext="Lost your password?")
 
     # Based on Title
-    element = wordpress.gns.lost_pass_title
+    wordpress.element(title="Password Lost and Found")
 
     # Based on Value
-    element = wordpress.gns.user_value
+    wordpress.element(value="Log In")
 
     # Based on partial match of content of an attribute
-    element = wordpress.gns.user_attr
+    wordpress.element(attr=Attr("for", "_login"))
 
     # Based on full match of an attribute
-    element = wordpress.gns.user_fattr
+    wordpress.element(fattr=Attr("for", "user_login"))
 
     # Based on element type
-    element = wordpress.gns.pass_type
+    wordpress.element(type="password")
 
     # Based on compound classes
-    element = wordpress.gns.button_classes_str
-    element = wordpress.gns.button_classes_list
+    wordpress.element(classes="button button-large")
+    wordpress.element(classes=("button", "button-large"))
 
     # Based on Point (location in terms of X,Y co-ordinates)
-    element = wordpress.gns.elem_xy
+    wordpress.element(point=Point(1043, 458))
 
     # With Javascript
-    element = wordpress.gns.elem_js
+    wordpress.element(js="return document.getElementById('wp-submit')")
 ```

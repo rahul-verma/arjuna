@@ -30,59 +30,12 @@ We will simulate WordPress login. Following are the steps:
 
 #### Test Fixture for Example(s) in This Page
 
-Below is the `@for_test` fixture code:
-
-```python
-# arjuna-samples/arjex/test/module/check_03_locators_xpath.py
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="WordPress")
-    wordpress.launch()
-    
-    yield wordpress
-    
-    # Teadown    
-    wordpress.quit()
-```
-
-##### Points to Note
-1. Label is changed to `WordPress`.
-2. Rest of the code is same as earlier.
-
-
-### The GNS File
-
-Location for the following file is `arjuna-samples/arjex_app/guiauto/namespace/WordPress.yaml`
-
-```YAML
-labels:
-
-  user:
-    id: user_login
-
-  pwd:
-    id: user_pass
-
-  submit:
-    id: wp-submit
-
-  view_site:
-    classes: welcome-view-site
-
-  logout_confirm:
-    link: log out
-
-  logout_msg:
-    text: logged out
-```
+Same as Basic locators example.
 
 #### Usage
 
 ```python
-# arjuna-samples/arjex/test/module/check_06_basicinteract_raw.py
+# arjuna-samples/arjex/test/module/web_ui_basics/check_06_basicinteract_raw.py
 
 @test
 def check_wp_login(request, wordpress):
@@ -90,30 +43,30 @@ def check_wp_login(request, wordpress):
     pwd = C("wp.admin.pwd")
     
     # Login
-    user_field = wordpress.gns.user
+    user_field = wordpress.element(id="user_login")
     user_field.text = user
 
-    pwd_field = wordpress.gns.pwd
+    pwd_field = wordpress.element(id="user_pass")
     pwd_field.text = pwd
 
-    submit = wordpress.gns.submit
+    submit = wordpress.element(id="wp-submit")
     submit.click()
 
-    wordpress.gns.view_site
+    wordpress.element(classes="welcome-view-site")
 
     # Logout
     url = C("wp.logout.url")
     wordpress.go_to_url(url)
 
-    confirmation = wordpress.gns.logout_confirm
+    confirmation = wordpress.element(link="log out")
     confirmation.click()
 
-    wordpress.gns.logout_msg
+    wordpress.element(text="logged out")
 ```
 
 ##### Points to Note
 1. We retrieve user name and password from the user options specified in `project.conf`.
 2. We identify different elements as discussed earlier.
-3. For setting text of an element we can set the value for its `text` attribute.
+3. For setting text of an element we can set the value for its `text` property.
 4. To click an element, we can call its `click` method.
 5. What you will notice is that there is no waiting logic in the test code.

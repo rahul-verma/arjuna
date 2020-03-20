@@ -4,65 +4,27 @@ We use **`selector`** locator for identification using CSS Selector. It is a dir
 
 #### Test Fixture for Example(s) in This Page
 
-Below is the `@for_test` fixture code:
-
-```python
-# arjuna-samples/arjex/test/module/check_04_locators_css_selectors.py
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="Selector")
-    wordpress.launch()
-    
-    yield wordpress
-    
-    # Teadown    
-    wordpress.quit()
-```
-
-##### Points to Note
-1. Label is changed to `Selector`.
-2. Rest of the code is same as earlier.
-
-### The GNS File
-
-Location for the following file is `arjuna-samples/arjex_app/guiauto/namespace/Selector.yaml`
-
-```YAML
-labels:
-
-  user_attr:
-    selector: "*[for = 'user_login']"
-
-  user_attr_content:
-    selector: "*[for *= '_login']"
-
-  pass_type:
-    selector: "*[type ='password']"
-
-  button_compound_class:
-    selector: ".button.button-large"
-```
+Same as Basic locators example.
 
 ### Usage
 
 ```python
-# arjuna-samples/arjex/test/module/check_04_locators_css_selectors.py
+# arjuna-samples/arjex/test/module/web_ui_basics/check_04_locators_css_selector.py
+
+from arjuna import *
 
 @test
 def check_selector(request, wordpress):
 
     # Based on any attribute e.g. for
-    element = wordpress.gns.user_attr
+    wordpress.element(selector="*[for = 'user_login']")
 
     # Based on partial content of an attribute
-    element = wordpress.gns.user_attr_content
+    wordpress.element(selector="*[for *= '_login']")
 
     # Based on element type
-    element = wordpress.gns.pass_type
+    wordpress.element(selector="*[type ='password']")
 
     # Based on compound classes
-    element = wordpress.gns.button_compound_class
+    wordpress.element(selector=".button.button-large")
 ```
