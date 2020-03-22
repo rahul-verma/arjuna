@@ -17,29 +17,18 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import abc
-from arjuna import Page
+from arjuna import *
+from enum import Enum, auto
+from .base import WPBaseSection
 
-from .sections.topnav import TopNav
-from .sections.leftnav import LeftNav
+class TopNav(WPBaseSection):
 
+    def logout(self):
+        url = C("wp.logout.url")
+        self.go_to_url(url)
 
-class WPBasePage(Page, metaclass=abc.ABCMeta):
+        self.gns.logout_confirm.click()
+        self.gns.logout_msg
 
-    def __init__(self, source_gui):
-        super().__init__(source_gui=source_gui, gns_dir="adv_locators")
-
-
-class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
-
-    def __init__(self, source_gui):
-        super().__init__(source_gui=source_gui)
-
-    @property
-    def top_nav(self):
-        return TopNav(self)
-
-    @property
-    def left_nav(self):
-        return LeftNav(self)
-
+        from arjex.lib.gns_adv.pages.home import Home
+        return Home(self)

@@ -92,7 +92,7 @@ def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
 
         @functools.wraps(orig_func)
         def wrapper_without_data(request, *args, **kwargs):
-            my.handler = request
+            request.handler = request
             call_func(func, request, *args, **kwargs)
 
         @functools.wraps(orig_func)

@@ -33,8 +33,12 @@ def dashboard(request):
     wordpress.quit()
 
 @test
-def check_withx_in_leftnav_gns_file(request, dashboard):
-    dashboard.left_nav.gns.posts.click()
-    dashboard.left_nav.gns.media.click()
-    dashboard.left_nav.gns.pages.click()
-    dashboard.left_nav.gns.comments.click()
+def check_fmt_gns(request, dashboard):
+    dashboard.left_nav.gns.format(text="Posts").dyn_link.click()
+    dashboard.left_nav.gns.format(text="Media").dyn_link.click()
+    dashboard.left_nav.gns.format(text="Pages").dyn_link.click()
+    dashboard.left_nav.gns.format(text="Comments").dyn_link.click()
+
+@test
+def check_fmt_config_gns(request, dashboard):
+    dashboard.left_nav.gns.dyn_link_proj_conf.click()

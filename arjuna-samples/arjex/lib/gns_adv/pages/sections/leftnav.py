@@ -17,10 +17,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import abc
-from arjuna import Section
+from enum import Enum, auto
+from arjuna import *
+from .base import WPBaseSection
 
-class WPBaseSection(Section, metaclass=abc.ABCMeta):
+class LeftNav(WPBaseSection):
+    
+    def __init__(self, page):
+        super().__init__(page)
 
-    def __init__(self, page, root_element_locator=None):
-        super().__init__(page, gns_dir="adv_locators/sections")
+    @property
+    def settings_page(self):
+        from arjex.lib.gns_adv.pages.settings import Settings
+        self.gns.settings.click()
+        return Settings(self)

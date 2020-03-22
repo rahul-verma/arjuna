@@ -28,6 +28,7 @@ from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 from arjuna.interact.gui.helpers import Dictable
 
 from .guidef import *
+from .formatter import WithFormatter
 from arjuna.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
@@ -234,22 +235,27 @@ class AppContent(Gui):
     def browser(self):
         return self.automator.browser
 
-    def locate(self, *, template="element", **kwargs):
+    def format(self, **kwargs):
+        return WithFormatter(self, **kwargs)
+
+    def locate(self, *, template="element", fargs=None, **kwargs):
+        print(fargs)
         from arjuna import log_debug
         emd = self.convert_to_lmd({"template": template}, **kwargs)
+        fmt_emd = emd.create_formatted_emd(**fargs)
         log_debug("Finding element with emd: {}.".format(emd))
-        return getattr(self, "_" +  emd.meta.template.name.lower())(emd)
+        return getattr(self, "_" +  emd.meta.template.name.lower())(fmt_emd)
 
     element = locate
 
-    def multielement(self, **kwargs):
-        return self.locate(template="multi_element", **kwargs)
+    def multielement(self, fargs=None, **kwargs):
+        return self.locate(template="multi_element", fargs=fargs, **kwargs)
 
-    def dropdown(self, **kwargs):
-        return self.locate(template="dropdown", **kwargs)
+    def dropdown(self, fargs=None, **kwargs):
+        return self.locate(template="dropdown", fargs=fargs, **kwargs)
 
-    def radio_button(self, **kwargs):
-        return self.locate(template="radio_group", **kwargs)
+    def radio_button(self, fargs=None, **kwargs):
+        return self.locate(template="radio_group", fargs=fargs, **kwargs)
 
     def _element(self, lmd, iconfig=None):
         return self.automator._element(self, lmd, iconfig=iconfig)

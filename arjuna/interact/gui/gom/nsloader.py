@@ -82,7 +82,6 @@ class GuiNamespace:
 
     def add_element_meta_data(self, name, context, raw_locators, meta):
         emd = GuiElementMetaData.create_lmd(*raw_locators, meta=meta)
-        #emd = GuiElementMetaData(raw_locators, process_args=False)
         name = name.lower()
         if not self.has(name):
             self.__ns[name] = {}
@@ -215,7 +214,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                 if not self.__withx.has_locator(loc) and not common_withx.has_locator(loc):
                     wtype, wvalue = loc.upper(), loc_obj
                     if wtype in dir(WithType):
-                        iloc = ImplWith(wtype=wtype, wvalue=wvalue, named_args=dict(), has_content_locator=False)
+                        iloc = ImplWith(wtype=wtype, wvalue=wvalue, has_content_locator=False)
                         self.__ns[label.lower()]["locators"][self.__context].append(iloc)
                     else:
                         self.__ns[label.lower()]["meta"][wtype] = wvalue
@@ -228,7 +227,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                         raise Exception("No WithX locator with name {} found. Check GNS file at {}.".format(name, self.__ns_path))
                     wtype, wvalue = wx.format(loc, loc_obj)
 
-                    iloc = ImplWith(wtype=wtype, wvalue=wvalue, named_args=dict(), has_content_locator=False)
+                    iloc = ImplWith(wtype=wtype, wvalue=wvalue, has_content_locator=False)
                     self.__ns[label.lower()]["locators"][self.__context].append(iloc)
 
             if not self.__ns[label.lower()]["locators"][self.__context]:

@@ -33,3 +33,9 @@ labels:
     nav_link: 
       lname: Comments
 
+  dyn_link:
+    link: $text$
+
+  dyn_link_proj_conf:
+    link: $C.fmt.gns$
+

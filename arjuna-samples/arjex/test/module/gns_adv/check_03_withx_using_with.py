@@ -18,7 +18,7 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.adv_locators.app import WordPress
+from arjex.lib.gns_adv.app import WordPress
 
 @for_test
 def dashboard(request):
@@ -34,5 +34,7 @@ def dashboard(request):
 
 @test
 def check_withx_using_with(request, dashboard):
-    print("herer")
+    dashboard.left_nav.element(nav_link=Params(lname="Posts")).click()
     dashboard.left_nav.element(nav_link=Params(lname="Media")).click()
+    dashboard.left_nav.element(nav_link=Params(lname="Pages")).click()
+    dashboard.left_nav.element(nav_link=Params(lname="Comments")).click()

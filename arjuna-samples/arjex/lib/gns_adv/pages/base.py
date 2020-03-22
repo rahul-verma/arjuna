@@ -17,24 +17,29 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna import *
-from arjex.lib.gns_adv.app import WordPress
+import abc
+from arjuna import Page
 
-@for_test
-def dashboard(request):
-    # Setup
-    wordpress = WordPress()
-    home = wordpress.launch()
-    dashboard = home.login_with_default_creds()
-    yield dashboard
+from .sections.topnav import TopNav
+from .sections.leftnav import LeftNav
 
-    # Teadown
-    dashboard.top_nav.logout()
-    wordpress.quit()
 
-@test
-def check_withx_in_leftnav_gns_file(request, dashboard):
-    dashboard.left_nav.gns.posts.click()
-    dashboard.left_nav.gns.media.click()
-    dashboard.left_nav.gns.pages.click()
-    dashboard.left_nav.gns.comments.click()
+class WPBasePage(Page, metaclass=abc.ABCMeta):
+
+    def __init__(self, source_gui):
+        super().__init__(source_gui=source_gui, gns_dir="gns_adv")
+
+
+class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
+
+    def __init__(self, source_gui):
+        super().__init__(source_gui=source_gui)
+
+    @property
+    def top_nav(self):
+        return TopNav(self)
+
+    @property
+    def left_nav(self):
+        return LeftNav(self)
+

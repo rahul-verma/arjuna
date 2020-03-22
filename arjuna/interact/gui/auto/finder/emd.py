@@ -25,10 +25,9 @@ from arjuna.core.enums import GuiElementType
 
 class ImplWith:
     
-    def __init__(self, *, wtype, wvalue, named_args, has_content_locator):
+    def __init__(self, *, wtype, wvalue, has_content_locator):
         self.wtype = wtype
         self.wvalue = wvalue
-        self.named_args = named_args
         self.has_content_locator = has_content_locator
 
     def __str__(self):
@@ -71,17 +70,55 @@ class GenericLocateWith(Enum):
 
 class Locator:
 
-    def __init__(self, ltype, lvalue, named_args):
+    def __init__(self, ltype, lvalue=None):
         self.ltype = ltype
         self.lvalue = lvalue
-        self.__named_args = named_args
 
-    def set_args(self,  named_args):
-        self.__named_args = named_args
+    def set_value(self, value):
+        self.lvalue = value
 
-    @property
-    def named_args(self):
-        return self.__named_args
+    def create_formatted_locator(self, **fargs):
+
+        def get_global_value(in_str):
+            from arjuna import C, L, R
+            gtype, query = in_str.split(".", 1)
+            gtype = gtype.upper()
+            return locals()[gtype](query)
+
+
+        pattern = r"\$(\s*[\w\.]*?\s*)\$"
+        repl_dict = {k.lower():v for k,v in fargs.items()}
+
+        new_locator = Locator(self.ltype)
+
+        if self.ltype == GenericLocateWith.ELEMENT:
+            new_locator.set_value(locator.lvalue.create_formatted_locator(**fargs))
+            return new_locator
+
+        fmt_locator_value = self.lvalue.replace("\{", "__LB__").replace("}", "__RB__")
+
+        # Find params
+        matches = re.findall(pattern, fmt_locator_value)
+        
+        for match in matches:
+            names_set = None
+            target = "${}$".format(match)
+            processed_name = match.lower().strip()
+            repl_value = None
+            if processed_name.startswith("c.") or processed_name.startswith("l.") or processed_name.startswith("r."):
+                repl_value = get_global_value(processed_name)
+            else:
+                if processed_name not in repl_dict:
+                    raise Exception("You must provide a named argument for a custom format string.")
+                repl_value = repl_dict[processed_name]
+
+            print(target, repl_value)
+            fmt_locator_value = fmt_locator_value.replace(target, repl_value)
+            
+
+        fmt_locator_value = fmt_locator_value.replace("__LB__", "{").replace("__RB__", "}")
+        new_locator.set_value(fmt_locator_value)
+        return new_locator
 
     def __str__(self):
         return str(vars(self))
@@ -91,11 +128,8 @@ class Locator:
 
 class GuiGenericLocator(Locator):
 
-    def __init__(self, ltype, lvalue, named_args):
-        super().__init__(ltype, lvalue, named_args)
-    
-    def set_value(self, value):
-        self.lvalue = value
+    def __init__(self, ltype, lvalue=None):
+        super().__init__(ltype, lvalue)
 
     def as_map(self):
         map = dict()
@@ -111,8 +145,8 @@ class GuiGenericLocator(Locator):
         return map
 
 # class GuiGenericChildLocator(Locator):
-#     def __init__(self, ltype, lvalue, named_args):
-#         super().__init__(ltype, lvalue, named_args)
+#     def __init__(self, ltype, lvalue):
+#         super().__init__(ltype, lvalue)
     
 #     def set_value(self, value):
 #         self.lvalue = value    
@@ -135,6 +169,9 @@ class Meta:
                 raise Exception("{} is not a valid template type.".format(template))
         else:
             self.__template = GuiTemplate.ELEMENT
+
+    def items(self):
+        return self.__mdict.items()
 
     @property
     def template(self):
@@ -190,13 +227,14 @@ class GuiElementMetaData:
         GenericLocateWith.FATTR : "//*[@{}='{}']",
     }
 
-    def __init__(self, raw_locators, meta=None, process_args=True):
-        self.__raw_locators = raw_locators
+    def __init__(self, locators, meta=None, process=True):
+        self.__raw_locators = locators
         self.__locators = []
-        self.__process()
-        if process_args:
-            self.process_args()
         self.__meta = Meta(meta)
+        if process:
+            self.__process()
+        else:
+            self.__locators = locators
 
     @property
     def meta(self):
@@ -220,20 +258,19 @@ class GuiElementMetaData:
         for raw_locator in self.__raw_locators:
             rltype = raw_locator.ltype
             rlvalue = raw_locator.lvalue
-            named_args = raw_locator.named_args
             try:
                 generic_locate_with = GenericLocateWith[rltype.upper()]
             except:
                 raise Exception("Invalid locator across all automators: {}={}".format(rltype, type(rlvalue)))
             else:
                 if generic_locate_with == GenericLocateWith.ELEMENT:
-                    self.__add_locator(generic_locate_with, rlvalue, named_args)
+                    self.__add_locator(generic_locate_with, rlvalue)
                 elif generic_locate_with in self.BASIC_LOCATORS:
-                    self.__add_locator(generic_locate_with, rlvalue, named_args)
+                    self.__add_locator(generic_locate_with, rlvalue)
                 elif generic_locate_with in self.NEED_TRANSLATION:
-                    self.__add_locator(self.NEED_TRANSLATION[generic_locate_with], rlvalue, named_args)
+                    self.__add_locator(self.NEED_TRANSLATION[generic_locate_with], rlvalue)
                 elif generic_locate_with in self.XPATH_LOCATORS:
-                    self.__add_locator(GenericLocateWith.XPATH, self.XPATH_LOCATORS[generic_locate_with].format(rlvalue), named_args)
+                    self.__add_locator(GenericLocateWith.XPATH, self.XPATH_LOCATORS[generic_locate_with].format(rlvalue))
                 elif generic_locate_with in self.XPATH_TWO_ARG_LOCATORS:
                     # parts = None
                     try:
@@ -242,16 +279,16 @@ class GuiElementMetaData:
                         #parts =  re.search(GuiElementMetaData.XPATH_TWO_ARG_VALUE_PATTERN, rlvalue).groups()
                     except:
                         raise Exception("Name and value must be supplied for {}. Got: {}".format(rlvalue, rltype))
-                    self.__add_locator(GenericLocateWith.XPATH, self.XPATH_TWO_ARG_LOCATORS[generic_locate_with].format(rlvalue["name"], rlvalue["value"]), named_args)
+                    self.__add_locator(GenericLocateWith.XPATH, self.XPATH_TWO_ARG_LOCATORS[generic_locate_with].format(rlvalue["name"], rlvalue["value"]))
                 elif generic_locate_with == GenericLocateWith.TYPE:
                     try:
                         elem_type = GuiElementType[rlvalue.upper()]
                     except:
                         raise Exception("Unsupported element type for XTYPE locator: " + rlvalue)
                     else:
-                        self.__add_locator(GenericLocateWith.XPATH, self.XTYPE_LOCATORS[elem_type], named_args)
+                        self.__add_locator(GenericLocateWith.XPATH, self.XTYPE_LOCATORS[elem_type])
                 # elif generic_locate_with == GenericLocateWith.COMPOUND_CLASS:
-                #     self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', ), named_args)
+                #     self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', ))
                 elif generic_locate_with == GenericLocateWith.CLASSES:
                     css_string = None
                     if type(rlvalue) is str:
@@ -261,45 +298,25 @@ class GuiElementMetaData:
                             css_string = "." + rlvalue[0].replace('.', ' ').strip()
                         else:
                             css_string = "." + ".".join(rlvalue[0])
-                    self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', css_string), named_args)
+                    self.__add_locator(GenericLocateWith.CSS_SELECTOR, re.sub(r'\s+', '.', css_string))
                 else:
                     raise Exception("Locator not supported yet by Arjuna: " + rltype)
 
-    def __add_locator(self, locator_type, locator_value, named_args):
-        self.locators.append(GuiGenericLocator(locator_type, locator_value, named_args))
+    def __add_locator(self, locator_type, locator_value):
+        self.locators.append(GuiGenericLocator(locator_type, locator_value))
 
-    def process_args(self):
-        '''
-            It consumes impl locator list.
-        '''
-        pattern = r"\$(\s*\w*?\s*)\$"
+    def create_formatted_emd(self, **fargs):
+        formatted_locators = []
         for locator in self.locators:
-            if locator.ltype == GenericLocateWith.ELEMENT:
-                locator.lvalue.process_args()
-
-            if not locator.named_args: continue
-
-            fmt_locator_value = locator.lvalue.replace("\{", "__LB__").replace("}", "__RB__")
-
-            # Find params
-            matches = re.findall(pattern, fmt_locator_value)
-            
-            for match in matches:
-                target = "${}$".format(match)
-                repl = "{" + match.lower().strip() + "}"
-                fmt_locator_value = fmt_locator_value.replace(target, repl)
-
-            repl = {k.lower():v for k,v in locator.named_args.items()}
-            fmt_locator_value = fmt_locator_value.format(**repl)
-            fmt_locator_value = fmt_locator_value.replace("__LB__", "{").replace("__RB__", "}")
-            locator.set_value(fmt_locator_value)
-
+            formatted_locator = locator.create_formatted_locator(**fargs)
+            formatted_locators.append(formatted_locator)
+        return GuiElementMetaData(formatted_locators, meta=self.meta, process=False)
 
     @classmethod
     def __process_single_raw_locator(cls, impl_locator):
         ltype = impl_locator.wtype
         lvalue = impl_locator.wvalue
-        p_locator = Locator(ltype=ltype, lvalue=lvalue, named_args=impl_locator.named_args)
+        p_locator = Locator(ltype=ltype, lvalue=lvalue)
         return p_locator
 
     @classmethod
@@ -318,7 +335,7 @@ class GuiElementMetaData:
             ltype = locator.wtype.lower()
             if ltype == "content_locator":
                 CONTENT_LOCATOR = cls.create_lmd(locator.wvalue)
-                p_locator = Locator(ltype=locator.wtype, lvalue=CONTENT_LOCATOR, named_args=None)
+                p_locator = Locator(ltype=locator.wtype, lvalue=CONTENT_LOCATOR)
             else:
                 p_locator = cls.__process_single_raw_locator(locator)
             processed_locators.append(p_locator)
@@ -340,5 +357,5 @@ class GuiElementMetaData:
 
 class SimpleGuiElementMetaData(GuiElementMetaData):
 
-    def __init__(self, locator_type, locator_value, named_args=dict()):
-        super().__init__([Locator(ltype=locator_type, lvalue=locator_value, named_args=named_args)])
+    def __init__(self, locator_type, locator_value=dict()):
+        super().__init__([Locator(ltype=locator_type, lvalue=locator_value)])

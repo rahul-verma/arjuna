@@ -228,8 +228,6 @@ class With(metaclass=_WithXMetaClass):
         self.__with_value = None
         self.__has_content_locator = False
         self.__content_locator = None
-        self.__format_called = False
-        self.__named_args = None
 
         if with_type == WithType.ELEMENT:
             if not isinstance(with_value, With):
@@ -252,26 +250,11 @@ class With(metaclass=_WithXMetaClass):
     def wvalue(self, value):
         self.__with_value = value
 
-    @property
-    def named_args(self):
-        return self.__named_args
-
-    def raise_format_exc(self):
-        if (self.__format_called):
-            raise Exception("You can not format a With object more than once.")
-
-    def format(self, **kwargs):
-        self.raise_format_exc()
-        self.__format_called = True
-        self.__named_args = kwargs
-        return self
-
     def as_impl_locator(self):
 
         impl_with = ImplWith(
             wtype = self.__with_type.name,
             wvalue = self.__has_content_locator and self.__content_locator.as_impl_locator() or self.__with_value,
-            named_args = self.__named_args,
             has_content_locator = self.__has_content_locator
         )
 
@@ -284,9 +267,6 @@ class With(metaclass=_WithXMetaClass):
             map["withValue"] = self.__with_value
         else:
             map["withValue"] = self.__content_locator.as_map()
-
-        if self.__named_args:
-            map["named_args"] = self.__named_args
         
         return map
 
