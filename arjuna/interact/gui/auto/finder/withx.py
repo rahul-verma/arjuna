@@ -8,9 +8,9 @@ class WithX:
         self.__xdict = CIStringDict()
         for k,v in xdict.items():
             try:
-                self.__xdict[Validator.arjuna_name(k)] = {"wtype" : xdict[k]["wtype"].strip().upper(), "value" : xdict[k]["value"]}
+                self.__xdict[Validator.arjuna_name(k)] = {"wtype" : xdict[k]["wtype"].strip().upper(), "wvalue" : xdict[k]["wvalue"]}
             except Exception as e:
-                raise Exception(f"Invalid WithX name >>{k}<<.")
+                raise Exception(f"Invalid WithX entry for name >>{k}<<.")
 
     def has_locator(self, name):
         return name in self.__xdict
@@ -23,11 +23,11 @@ class WithX:
         fmt = copy.deepcopy(self.__xdict[name])
         try:
             if fmt["wtype"] in {'ATTR', 'FATTR'}:
-                for k,v in fmt["value"].items():
-                    fmt["value"][k] = v.format(**kwargs)
-                return fmt["wtype"], fmt["value"]
+                for k,v in fmt["wvalue"].items():
+                    fmt["wvalue"][k] = v.format(**kwargs)
+                return fmt["wtype"], fmt["wvalue"]
             else:
-                return fmt["wtype"], fmt["value"].format(*vargs, **kwargs)
+                return fmt["wtype"], fmt["wvalue"].format(*vargs, **kwargs)
         except Exception as e:
             from arjuna import Arjuna
             Arjuna.get_logger().error(f"Error in processing withx {name} : {fmt} for vargs {vargs} and kwargs {kwargs}")

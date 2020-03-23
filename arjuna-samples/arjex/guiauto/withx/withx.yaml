@@ -1,3 +1,3 @@
 nav_link:
   wtype: xpath
-  value: "//li[contains(*//text(), '{lname}')]"
+  wvalue: "//li[contains(*//text(), '{lname}')]"
