@@ -32,8 +32,9 @@ class Section(AppContent):
 
     def __init__(self, gui, *args, gns_dir=None, root=None, label=None, gns_file_name=None, **kwargs):
         super().__init__(automator=gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
-        self.__root_label = self.__determine_root(root)
+        self.__root_meta = self.__determine_root(root)
         self.__root_element = None
+        self.__container = self
         self._load(*args, **kwargs)
         self.__parent = gui
 
@@ -42,14 +43,19 @@ class Section(AppContent):
         return self.__root_element
 
     def __determine_root(self, root_init):
+        from arjuna import Locator
         root_label = None
         root_gns = self.gui_def.root_element_name
         if root_init:
-            root_label = root_init
+            # root in __init__ as a Locator instead of GNS Label
+            if isinstance(root_init, Locator):
+                root_label = "anonymous"
+            else:
+                root_label = root_init
         else:
             root_label = root_gns
-        from arjuna import Arjuna
-        Arjuna.get_logger().debug("Loading Root Element for {} Gui. Label: {}. Root in GNS: {}. Root in __init__: {}.".format(
+        from arjuna import log_debug
+        log_debug("Setting Root Element for {} Gui. Label: {}. Root in GNS: {}. Root in __init__: {}.".format(
             self.label,
             root_label,
             root_gns,
@@ -58,23 +64,35 @@ class Section(AppContent):
 
         if root_label:
             root_label = root_label.lower().strip()
-        return root_label
+            return root_label, root_init
+        else:
+            return None
 
     def load_root_element(self):
-        if self.__root_label:
-            self.__root_element = getattr(self.gns, self.__root_label)
+        if self.__root_meta:
+            label, locator = self.__root_meta
+            if self.__root_meta[0] != "anonymous":
+                from arjuna import log_debug
+                log_debug("Loading Root Element {} for Gui Section: {}".format(label, self.label))
+                self.__root_element = getattr(self.gns, label)
+            else:
+                from arjuna import log_debug
+                log_debug("Loading Root Element with Locator {} for Gui Section: {}".format(str(locator), self.label))
+                self.__root_element = self.locate(locator)                
+            
+            self.__container = self.__root_element
 
-    # def element(self, name):
-    #     if self.__root_element:
-    #         return getattr(self.__root_element, name)
-    #     else:
-    #         return getattr(self, name)
+    def element(self, *, template="element", fargs=None, **kwargs):
+        return self.__container.element(template=template, fargs=fargs, **kwargs)
 
-    # def multi_element(self, name):
-    #     if self.__root_element:
-    #         return getattr(self.__root_element, name)
-    #     else:
-    #         return getattr(self, name)
+    def multielement(self, fargs=None, **kwargs):
+        return self.__container.multielement(fargs=fargs, **kwargs)
+
+    def dropdown(self, fargs=None, **kwargs):
+        return self.__container.dropdown(fargs=fargs, **kwargs)
+
+    def radio_group(self, fargs=None, **kwargs):
+        return self.__container.radio_group(fargs=fargs, **kwargs)       
 
     @property
     def parent(self):

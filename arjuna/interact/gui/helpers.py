@@ -450,5 +450,42 @@ class Params(Dictable):
     def as_dict(self):
         return self.__kwargs
 
+class Formatter:
+
+    def __init__(self, **kwargs):
+        self.__fargs = kwargs
+
+    def locator(self, template="element", **kwargs):
+        return Locator(template=template, fargs=self.__fargs, **kwargs)
+
+class Locator(Dictable):
+
+    def __init__(self, template="element", fmt_args=None, **named_args):
+        self.__template = template
+        self.__fmt_args = fmt_args
+        self.__named_args = named_args
+
+    @property
+    def template(self):
+        return self.__template
+
+    @property
+    def fmt_args(self):
+        return self.__fmt_args
+
+    @property
+    def named_args(self):
+        return self.__named_args
+
+    def __str__(self):
+        return str(
+            {
+                "template": self.template,
+                "fmt_args": self.fmt_args,
+                "named_args": self.named_args
+            }
+        )
+
+
 
 

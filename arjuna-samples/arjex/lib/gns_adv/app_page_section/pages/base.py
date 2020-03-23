@@ -21,7 +21,7 @@ import abc
 from arjuna import Page
 
 from .sections.topnav import TopNav
-from .sections.leftnav import LeftNav
+from .sections.leftnav import LeftNav, LeftNavCodedRootLabel, LeftNavCodedRootLocator
 
 
 class WPBasePage(Page, metaclass=abc.ABCMeta):
@@ -42,4 +42,12 @@ class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
     @property
     def left_nav(self):
         return LeftNav(self)
+
+    @property
+    def left_nav_coded_root_label(self):
+        return LeftNavCodedRootLabel(self)
+
+    @property
+    def left_nav_coded_root_locator(self):
+        return LeftNavCodedRootLocator(self)
 

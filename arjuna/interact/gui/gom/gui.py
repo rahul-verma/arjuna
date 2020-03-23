@@ -242,7 +242,7 @@ class AppContent(Gui):
     def format(self, **kwargs):
         return WithFormatter(self, **kwargs)
 
-    def locate(self, *, template="element", fargs=None, **kwargs):
+    def locate_element(self, *, template="element", fargs=None, **kwargs):
         from arjuna import log_debug
         emd = self.convert_to_lmd({"template": template}, **kwargs)
         if fargs is None:
@@ -251,16 +251,22 @@ class AppContent(Gui):
         log_debug("Finding element with emd: {}.".format(emd))
         return getattr(self, "_" +  emd.meta.template.name.lower())(fmt_emd)
 
-    element = locate
+    element = locate_element
+
+    def locate(self, locator):
+        largs = locator.named_args
+        if largs is None:
+            largs = dict()
+        return self.locate_element(template=locator.template, fargs=locator.fmt_args, **largs)
 
     def multielement(self, fargs=None, **kwargs):
-        return self.locate(template="multi_element", fargs=fargs, **kwargs)
+        return self.locate_element(template="multi_element", fargs=fargs, **kwargs)
 
     def dropdown(self, fargs=None, **kwargs):
-        return self.locate(template="dropdown", fargs=fargs, **kwargs)
+        return self.locate_element(template="dropdown", fargs=fargs, **kwargs)
 
     def radio_group(self, fargs=None, **kwargs):
-        return self.locate(template="radio_group", fargs=fargs, **kwargs)
+        return self.locate_element(template="radio_group", fargs=fargs, **kwargs)
 
     def _element(self, lmd, iconfig=None):
         return self.automator._element(self, lmd, iconfig=iconfig)

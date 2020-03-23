@@ -66,13 +66,13 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
     def find_multielement_with_js(self, js):
         raise Exception("With.JS is currently not supported for nested element finding.")
 
-    def locate(self, *, template="element", **kwargs):
+    def locate_element(self, *, template="element", **kwargs):
         from arjuna import log_debug
         emd = self.gui.convert_to_lmd(**kwargs)
-        log_debug("Finding element with emd: {}.".format(emd))
+        log_debug("Finding element with emd: {} in element.".format(emd))
         return getattr(self, "_" + emd.meta.template.name.lower())(self.gui, emd)
 
-    element = locate
+    element = locate_element
 
     def multielement(self, **kwargs):
-        return self.locate(template="multi_element", **kwargs)
+        return self.locate_element(template="multi_element", **kwargs)

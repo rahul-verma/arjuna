@@ -24,7 +24,31 @@ from .base import WPBaseSection
 class LeftNav(WPBaseSection):
     
     def __init__(self, page):
-        super().__init__(page)
+        super().__init__(page, label="LeftNav", root=None)
+
+    @property
+    def settings_page(self):
+        from arjex.lib.gns_adv.app_page_section.pages.settings import Settings
+        self.gns.settings.click()
+        return Settings(self)
+
+
+class LeftNavCodedRootLabel(WPBaseSection):
+    
+    def __init__(self, page):
+        super().__init__(page, label="LeftNav", root="menu")
+
+    @property
+    def settings_page(self):
+        from arjex.lib.gns_adv.app_page_section.pages.settings import Settings
+        self.gns.settings.click()
+        return Settings(self)
+
+
+class LeftNavCodedRootLocator(WPBaseSection):
+    
+    def __init__(self, page):
+        super().__init__(page, label="LeftNav", root=Locator(id="adminmenu"))
 
     @property
     def settings_page(self):

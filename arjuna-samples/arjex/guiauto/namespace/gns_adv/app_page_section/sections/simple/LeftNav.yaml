@@ -1,0 +1,10 @@
+labels:
+
+  menu:
+    id: adminmenu
+
+  settings:
+    link: Settings
+
+  first_div:
+    xpath: "//div"

@@ -1,0 +1,17 @@
+load:
+  root: menu
+  anchor: collapse
+
+labels:
+
+  menu:
+    id: adminmenu
+
+  settings:
+    link: Settings
+
+  first_div:
+    xpath: "//div"
+
+  collapse:
+    id: collapse-menu
