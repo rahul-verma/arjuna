@@ -18,12 +18,12 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.gns_adv.app import WordPress
+from arjex.lib.gns_adv.app_page_section.app import WordPress
 
-@for_test
+@for_module
 def dashboard(request):
     # Setup
-    wordpress = WordPress()
+    wordpress = WordPress(section_dir="dyn")
     home = wordpress.launch()
     dashboard = home.login_with_default_creds()
     yield dashboard
@@ -34,11 +34,16 @@ def dashboard(request):
 
 @test
 def check_fmt_gns(request, dashboard):
-    dashboard.left_nav.gns.format(text="Posts").dyn_link.click()
     dashboard.left_nav.gns.format(text="Media").dyn_link.click()
-    dashboard.left_nav.gns.format(text="Pages").dyn_link.click()
-    dashboard.left_nav.gns.format(text="Comments").dyn_link.click()
 
 @test
 def check_fmt_config_gns(request, dashboard):
-    dashboard.left_nav.gns.dyn_link_proj_conf.click()
+    dashboard.left_nav.gns.dyn_link_conf.click()
+
+@test
+def check_fmt_reference_gns(request, dashboard):
+    dashboard.left_nav.gns.dyn_link_ref.click()
+
+@test
+def check_fmt_reference_l10n_gns(request, dashboard):
+    dashboard.left_nav.gns.dyn_link_l10n.click()

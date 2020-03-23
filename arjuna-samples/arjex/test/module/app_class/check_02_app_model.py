@@ -18,10 +18,18 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.procedural.wp import *
+from arjex.lib.app_class.wp_app_model import WordPress
+
+@for_test
+def wordpress(request):
+    # Setup
+    wordpress = WordPress()
+    wordpress.login()
+    yield wordpress
+
+    # Teadown
+    wordpress.logout()
 
 @test
-def check_sep_functions(request):
-    wordpress = create_wordpress_app()
-    login(wordpress)
-    logout(wordpress)
+def check_with_wp_app_model(request, wordpress):
+    wordpress.tweak_role_value_in_settings("editor")

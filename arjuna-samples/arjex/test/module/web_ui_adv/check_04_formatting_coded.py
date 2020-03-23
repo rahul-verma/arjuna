@@ -17,29 +17,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import abc
-from arjuna import Page
+from arjuna import *
 
-from .sections.topnav import TopNav
-from .sections.leftnav import LeftNav
+@test
+def check_fmt_coded(request, logged_in_wordpress):
+    logged_in_wordpress.format(text="Media").element(link="$text$").click()
 
+@test
+def check_fmt_config_coded(request, logged_in_wordpress):
+    logged_in_wordpress.element(link="$C.link.name$").click()
 
-class WPBasePage(Page, metaclass=abc.ABCMeta):
+@test
+def check_fmt_reference_coded(request, logged_in_wordpress):
+    logged_in_wordpress.element(link="$R.links.test1.navlink$").click()
 
-    def __init__(self, source_gui):
-        super().__init__(source_gui=source_gui, gns_dir="gns_adv")
-
-
-class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
-
-    def __init__(self, source_gui):
-        super().__init__(source_gui=source_gui)
-
-    @property
-    def top_nav(self):
-        return TopNav(self)
-
-    @property
-    def left_nav(self):
-        return LeftNav(self)
-
+@test
+def check_fmt_reference_l10n_coded(request, logged_in_wordpress):
+    logged_in_wordpress.element(link="$L.links.posting$").click()

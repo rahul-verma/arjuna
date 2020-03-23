@@ -193,7 +193,11 @@ class AppContent(Gui):
         from arjuna.interact.gui.helpers import WithType, With
         with_list = []
         for k,v in kwargs.items():
-            if k.upper() in WithType.__members__ or Arjuna.get_withx_ref().has_locator(k):
+            if k.upper() in WithType.__members__:
+                if isinstance(v, Dictable):
+                    v = v.as_dict()
+                with_list.append(getattr(With, k.lower())(v))
+            elif Arjuna.get_withx_ref().has_locator(k):
                 if isinstance(v, Dictable):
                     v = v.as_dict()
                     with_list.append(getattr(With, k.lower())(**v))
@@ -239,9 +243,10 @@ class AppContent(Gui):
         return WithFormatter(self, **kwargs)
 
     def locate(self, *, template="element", fargs=None, **kwargs):
-        print(fargs)
         from arjuna import log_debug
         emd = self.convert_to_lmd({"template": template}, **kwargs)
+        if fargs is None:
+            fargs = dict()
         fmt_emd = emd.create_formatted_emd(**fargs)
         log_debug("Finding element with emd: {}.".format(emd))
         return getattr(self, "_" +  emd.meta.template.name.lower())(fmt_emd)
@@ -254,7 +259,7 @@ class AppContent(Gui):
     def dropdown(self, fargs=None, **kwargs):
         return self.locate(template="dropdown", fargs=fargs, **kwargs)
 
-    def radio_button(self, fargs=None, **kwargs):
+    def radio_group(self, fargs=None, **kwargs):
         return self.locate(template="radio_group", fargs=fargs, **kwargs)
 
     def _element(self, lmd, iconfig=None):

@@ -18,10 +18,20 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.procedural.wp_gns import *
 
-@test
-def check_sep_functions(request):
-    wordpress = create_wordpress_app()
-    login(wordpress)
-    logout(wordpress)
+class WordPress(WebApp):
+
+    def __init__(self, *, section_dir):
+        url = C("wp.login.url")
+        super().__init__(base_url=url)
+        self.__section_dir = section_dir
+
+    @property
+    def section_dir(self):
+        return self.__section_dir
+
+    def launch(self):
+        super().launch()
+
+        from .pages.home import Home
+        return Home(self)

@@ -327,19 +327,33 @@ class With(metaclass=_WithXMetaClass):
     #     return "[{}][{}]".format(attr, value)
 
     @classmethod
+    def __validate_attr_map(self, map):
+        try:
+            rmap = {k.lower():v for k,v in map.items()}
+            rmap["name"]
+            rmap["value"]
+            return rmap
+        except:
+            raise Exception("Name and value must be supplied for {}. Got: {}".format(rlvalue, rltype))
+
+    @classmethod
     def _attr(cls, map):
+        map = cls.__validate_attr_map(map)
         return With(WithType.ATTR, map)
 
     @classmethod
     def _fattr(cls, map):
+        map = cls.__validate_attr_map(map)
         return With(WithType.FATTR, map)
 
     @classmethod
     def _battr(cls, map):
+        map = cls.__validate_attr_map(map)
         return With(WithType.BATTR, map)
 
     @classmethod
     def _eattr(cls, map):
+        map = cls.__validate_attr_map(map)
         return With(WithType.EATTR, map)   
 
     @classmethod

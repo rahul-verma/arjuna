@@ -12,6 +12,12 @@ withx:
     wtype: xpath
     value: "//li[contains(*//text(), '{lname}')]"
 
+  href:
+    wtype: attr
+    value: 
+      name: href
+      value: "{href}"
+
 labels:
 
   settings:
@@ -33,9 +39,8 @@ labels:
     nav_link: 
       lname: Comments
 
-  dyn_link:
-    link: $text$
+  first_steps:
+    href: 
+      href: First_Steps
 
-  dyn_link_proj_conf:
-    link: $C.fmt.gns$
-
+  

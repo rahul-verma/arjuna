@@ -17,17 +17,29 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from enum import Enum, auto
-from arjuna import *
-from .base import WPBaseSection
+import abc
+from arjuna import Page
 
-class LeftNav(WPBaseSection):
-    
-    def __init__(self, page):
-        super().__init__(page)
+from .sections.topnav import TopNav
+from .sections.leftnav import LeftNav
+
+
+class WPBasePage(Page, metaclass=abc.ABCMeta):
+
+    def __init__(self, source_gui):
+        super().__init__(source_gui=source_gui, gns_dir="gns_adv/app_page_section")
+
+
+class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
+
+    def __init__(self, source_gui):
+        super().__init__(source_gui=source_gui)
 
     @property
-    def settings_page(self):
-        from arjex.lib.gns_adv.pages.settings import Settings
-        self.gns.settings.click()
-        return Settings(self)
+    def top_nav(self):
+        return TopNav(self)
+
+    @property
+    def left_nav(self):
+        return LeftNav(self)
+

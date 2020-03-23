@@ -18,31 +18,17 @@ limitations under the License.
 '''
 
 from arjuna import *
+from enum import Enum, auto
+from .base import WPBaseSection
 
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="Selector", gns_dir="gns_basics")
-    wordpress.launch()
-    yield wordpress
+class TopNav(WPBaseSection):
 
-    # Teadown
-    wordpress.quit()
+    def logout(self):
+        url = C("wp.logout.url")
+        self.go_to_url(url)
 
+        self.gns.logout_confirm.click()
+        self.gns.logout_msg
 
-@test
-def check_selector(request, wordpress):
-
-    # Based on any attribute e.g. for
-    element = wordpress.gns.user_attr
-
-    # Based on partial content of an attribute
-    element = wordpress.gns.user_attr_content
-
-    # Based on element type
-    element = wordpress.gns.pass_type
-
-    # Based on compound classes
-    element = wordpress.gns.button_compound_class
-
+        from arjex.lib.gns_adv.app_page_section.pages.home import Home
+        return Home(self)

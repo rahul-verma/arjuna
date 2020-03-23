@@ -112,7 +112,6 @@ class Locator:
                     raise Exception("You must provide a named argument for a custom format string.")
                 repl_value = repl_dict[processed_name]
 
-            print(target, repl_value)
             fmt_locator_value = fmt_locator_value.replace(target, repl_value)
             
 
@@ -191,7 +190,6 @@ class GuiElementMetaData:
         GenericLocateWith.INDEX,
         GenericLocateWith.WINDOW_TITLE,
         GenericLocateWith.WINDOW_PTITLE,
-        GenericLocateWith.POINT,
         GenericLocateWith.JS,
     }
 
@@ -222,9 +220,10 @@ class GuiElementMetaData:
         GenericLocateWith.IMAGE_SRC : "//img[@src='{}']"
     }
 
-    XPATH_TWO_ARG_LOCATORS = {
-        GenericLocateWith.ATTR : "//*[contains(@{},'{}')]",
-        GenericLocateWith.FATTR : "//*[@{}='{}']",
+    NAMED_ARG_LOCATORS = {
+        GenericLocateWith.ATTR : "//*[contains(@{name},'{value}')]",
+        GenericLocateWith.FATTR : "//*[@{name}='{value}']",
+        GenericLocateWith.POINT : "return document.elementFromPoint({x}, {y})",
     }
 
     def __init__(self, locators, meta=None, process=True):
@@ -271,15 +270,10 @@ class GuiElementMetaData:
                     self.__add_locator(self.NEED_TRANSLATION[generic_locate_with], rlvalue)
                 elif generic_locate_with in self.XPATH_LOCATORS:
                     self.__add_locator(GenericLocateWith.XPATH, self.XPATH_LOCATORS[generic_locate_with].format(rlvalue))
-                elif generic_locate_with in self.XPATH_TWO_ARG_LOCATORS:
-                    # parts = None
-                    try:
-                        rlvalue["name"]
-                        rlvalue["value"]
-                        #parts =  re.search(GuiElementMetaData.XPATH_TWO_ARG_VALUE_PATTERN, rlvalue).groups()
-                    except:
-                        raise Exception("Name and value must be supplied for {}. Got: {}".format(rlvalue, rltype))
-                    self.__add_locator(GenericLocateWith.XPATH, self.XPATH_TWO_ARG_LOCATORS[generic_locate_with].format(rlvalue["name"], rlvalue["value"]))
+                elif generic_locate_with == GenericLocateWith.POINT:
+                    self.__add_locator(GenericLocateWith.POINT, self.NAMED_ARG_LOCATORS[generic_locate_with].format(**rlvalue))
+                elif generic_locate_with in self.NAMED_ARG_LOCATORS:
+                    self.__add_locator(GenericLocateWith.XPATH, self.NAMED_ARG_LOCATORS[generic_locate_with].format(**rlvalue))
                 elif generic_locate_with == GenericLocateWith.TYPE:
                     try:
                         elem_type = GuiElementType[rlvalue.upper()]

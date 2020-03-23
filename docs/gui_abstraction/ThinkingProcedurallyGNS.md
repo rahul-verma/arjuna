@@ -52,7 +52,7 @@ def logout(wordpress):
 # arjuna-samples/arjex/test/module/check_08_reusable_functions.py
 
 from arjuna import *
-from arjex.lib.procedural.wp_gns import *
+from arjex.lib.app_procedural.wp_gns import *
 
 @test
 def check_sep_functions(request):

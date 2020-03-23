@@ -51,7 +51,10 @@ class PytestHooks:
     @classmethod
     def add_screenshot_for_result(cls, item, result, *, ignore_passed=True, ignore_fixtures=False):
         try:
-            screen_shooter = cls.get_screen_shooter(item)
+            try:
+                screen_shooter = cls.get_screen_shooter(item)
+            except AttributeError:
+                return
             html_plugin = cls.get_html_report_plugin(item)
             pytest_html = html_plugin
             report = result.get_result()

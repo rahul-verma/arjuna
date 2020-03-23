@@ -24,7 +24,7 @@ def check_radiogroup(request, logged_in_wordpress):
     wordpress = logged_in_wordpress
     wordpress.element(link="Settings").click()
 
-    date_format = wordpress.gns.date_format
+    date_format = wordpress.radio_group(name="date_format")
 
     fmsg = "Failed to select m/d/Y date format"
     request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), fmsg)

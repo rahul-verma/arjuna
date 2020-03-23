@@ -1,0 +1,14 @@
+labels:
+
+  dyn_link:
+    link: $text$
+
+  dyn_link_conf:
+    link: $C.link.name$
+
+  dyn_link_ref:
+    link: $R.links.test1.navlink$
+
+  dyn_link_l10n:
+    link: $L.links.posting$
+

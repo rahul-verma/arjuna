@@ -19,9 +19,20 @@ limitations under the License.
 
 from arjuna import *
 
+from arjex.lib.gns_adv.app.wp import WordPress
+
+@for_test
+def logged_in_wordpress_app(request):
+    wordpress = WordPress()
+    wordpress.login()
+    yield wordpress
+
+    # Teadown
+    wordpress.logout()
+
 @test
-def check_multielement_coded(request, logged_in_wordpress):
-    wordpress = logged_in_wordpress
+def check_multielement_coded(request, logged_in_wordpress_app):
+    wordpress = logged_in_wordpress_app
     wordpress.gns.posts.click()
     wordpress.gns.categories.click()
 
@@ -34,8 +45,8 @@ def check_multielement_coded(request, logged_in_wordpress):
 
 
 @test
-def check_dropdown(request, logged_in_wordpress):
-    wordpress = logged_in_wordpress
+def check_dropdown(request, logged_in_wordpress_app):
+    wordpress = logged_in_wordpress_app
     wordpress.gns.settings.click()
 
     role_select = wordpress.gns.role
@@ -54,8 +65,8 @@ def check_dropdown(request, logged_in_wordpress):
 
 
 @test
-def check_radiogroup(request, logged_in_wordpress):
-    wordpress = logged_in_wordpress
+def check_radiogroup(request, logged_in_wordpress_app):
+    wordpress = logged_in_wordpress_app
     wordpress.gns.settings.click()
 
     date_format = wordpress.gns.date_format

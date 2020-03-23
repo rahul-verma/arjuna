@@ -68,7 +68,7 @@ class ElementFinder:
             try:
                 if locator.ltype.name == "POINT":
                     # Assumption here is that this container is automator.
-                    size, dispatcher = js_call("return document.elementFromPoint({}, {})".format(locator.lvalue['x'], locator.lvalue['y']))
+                    size, dispatcher = js_call(locator.lvalue)
                 elif locator.ltype.name == "JS":
                     size, dispatcher = js_call(locator.lvalue)
                 else:

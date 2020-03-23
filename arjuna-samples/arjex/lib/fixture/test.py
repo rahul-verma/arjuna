@@ -23,11 +23,9 @@ def wordpress(request):
     wordpress.quit()
 
 
-from arjex.lib.procedural.wp import *
-
-
 @for_test
 def logged_in_wordpress(request):
+    from arjex.lib.app_procedural.wp import create_wordpress_app, login, logout
     # Setup
     wordpress = create_wordpress_app()
     login(wordpress)
@@ -37,11 +35,9 @@ def logged_in_wordpress(request):
     logout(wordpress)
 
 
-from arjex.lib.procedural.wp_gns import *
-
-
 @for_test
 def logged_in_wordpress_gns(request):
+    from arjex.lib.app_procedural.wp_gns import create_wordpress_app, login, logout
     # Setup
     wordpress = create_wordpress_app()
     login(wordpress)

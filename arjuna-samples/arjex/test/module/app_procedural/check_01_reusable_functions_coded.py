@@ -17,10 +17,11 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import abc
-from arjuna import Section
+from arjuna import *
+from arjex.lib.app_procedural.wp import *
 
-class WPBaseSection(Section, metaclass=abc.ABCMeta):
-
-    def __init__(self, page, root_element_locator=None):
-        super().__init__(page, gns_dir="gns_adv/sections")
+@test
+def check_sep_functions(request):
+    wordpress = create_wordpress_app()
+    login(wordpress)
+    logout(wordpress)

@@ -17,12 +17,17 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
+from enum import Enum, auto
 from arjuna import *
+from .base import WPBaseSection
 
-@test
-def check_fmt_coded(request, logged_in_wordpress):
-    wordpress = logged_in_wordpress
-    wordpress.format(text="Posts").element(link="$text$").click()
-    wordpress.format(text="Media").element(link="$text$").click()
-    wordpress.format(text="Pages").element(link="$text$").click()
-    wordpress.format(text="Comments").element(link="$text$").click()
+class LeftNav(WPBaseSection):
+    
+    def __init__(self, page):
+        super().__init__(page)
+
+    @property
+    def settings_page(self):
+        from arjex.lib.gns_adv.app_page_section.pages.settings import Settings
+        self.gns.settings.click()
+        return Settings(self)

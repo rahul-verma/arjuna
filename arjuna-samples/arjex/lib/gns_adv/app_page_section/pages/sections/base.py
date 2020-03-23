@@ -17,19 +17,10 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna import *
-from arjex.lib.app.wp_app import WordPress
+import abc
+from arjuna import Section
 
-@for_test
-def wordpress(request):
-    # Setup
-    wordpress = WordPress()
-    wordpress.login()
-    yield wordpress
+class WPBaseSection(Section, metaclass=abc.ABCMeta):
 
-    # Teadown
-    wordpress.logout()
-
-@test
-def check_with_wp_app_interim(request, wordpress):
-    wordpress.tweak_role_value_in_settings("editor")
+    def __init__(self, page, root_element_locator=None):
+        super().__init__(page, gns_dir="gns_adv/app_page_section/sections/{}".format(page.app.section_dir))

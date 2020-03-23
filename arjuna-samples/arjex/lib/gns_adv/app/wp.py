@@ -18,17 +18,35 @@ limitations under the License.
 '''
 
 from arjuna import *
-from enum import Enum, auto
-from .base import WPBaseSection
 
-class TopNav(WPBaseSection):
+class WordPress(WebApp):
+
+    def __init__(self):
+        url = C("wp.login.url")
+        super().__init__(base_url=url, gns_dir="gns_adv/app")
+        self.launch()
+
+    def login(self):
+        user = C("wp.admin.name")
+        pwd = C("wp.admin.pwd")
+
+        # Login
+        self.gns.user.text = user
+        self.gns.pwd.text = pwd
+        self.gns.submit.click()
+        self.gns.view_site
 
     def logout(self):
         url = C("wp.logout.url")
         self.go_to_url(url)
-
         self.gns.logout_confirm.click()
         self.gns.logout_msg
 
-        from arjex.lib.gns_adv.pages.home import Home
-        return Home(self)
+        self.quit()
+
+    def tweak_role_value_in_settings(self, value):
+        self.app.gns.settings.click()
+        role_select = self.gns.role
+        role_select.select_value(value)
+        self.asserter.assert_true(role_select.has_value_selected(value), "Selection of {} as Role".format(value))
+        return self

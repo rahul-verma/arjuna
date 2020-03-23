@@ -18,18 +18,27 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.app.wp_app_model import WordPress
 
-@for_test
-def wordpress(request):
-    # Setup
-    wordpress = WordPress()
-    wordpress.login()
-    yield wordpress
+def create_wordpress_app():
+    url = C("wp.login.url")
+    wordpress = WebApp(base_url=url, label="WordPress", gns_dir="app")
+    wordpress.launch()
+    return wordpress
 
-    # Teadown
-    wordpress.logout()
+def login(wordpress):
+    user = C("wp.admin.name")
+    pwd = C("wp.admin.pwd")
+    
+    # Login
+    wordpress.gns.user.text = user
+    wordpress.gns.pwd.text = pwd
+    wordpress.gns.submit.click()
+    wordpress.gns.view_site
 
-@test
-def check_with_wp_app_model(request, wordpress):
-    wordpress.tweak_role_value_in_settings("editor")
+def logout(wordpress):
+    url = C("wp.logout.url")
+    wordpress.go_to_url(url)
+    wordpress.gns.logout_confirm.click()
+    wordpress.gns.logout_msg
+
+    wordpress.quit()

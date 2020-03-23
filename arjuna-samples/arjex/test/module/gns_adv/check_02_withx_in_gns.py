@@ -18,12 +18,12 @@ limitations under the License.
 '''
 
 from arjuna import *
-from arjex.lib.gns_adv.app import WordPress
+from arjex.lib.gns_adv.app_page_section.app import WordPress
 
 @for_test
 def dashboard(request):
     # Setup
-    wordpress = WordPress()
+    wordpress = WordPress(section_dir="withx")
     home = wordpress.launch()
     dashboard = home.login_with_default_creds()
     yield dashboard
@@ -34,6 +34,9 @@ def dashboard(request):
 
 @test
 def check_withx_in_leftnav_gns_file(request, dashboard):
+    dashboard.left_nav.gns.first_steps.click()
+    dashboard.browser.go_back()
+
     dashboard.left_nav.gns.posts.click()
     dashboard.left_nav.gns.media.click()
     dashboard.left_nav.gns.pages.click()
