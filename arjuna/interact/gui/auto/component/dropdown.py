@@ -37,8 +37,6 @@ class GuiWebSelect(Configurable):
         self.__option_container_same_as_select = option_container_lmd is None and True or False
         if not self.__option_container_same_as_select:
             self.__option_container = self.__finder._element(self.gui, option_container_lmd, iconfig=self.settings)
-            # # Needs to be loaded so that options can be discovered.
-            # self.__option_container.find_if_not_found()
 
         self.__source_parser = None
 
@@ -67,7 +65,6 @@ class GuiWebSelect(Configurable):
         def load_options():
             container = get_root_element()
             self.__options = container._multi_element(self.gui, self.__option_lmd, iconfig=self.settings)
-            # self.__options.find_if_not_found()
 
         # self._wrapped_main_element.find()
         tag = self._wrapped_main_element.source.tag
@@ -177,5 +174,4 @@ class GuiWebSelect(Configurable):
 
     @property
     def source(self):
-        self.__find_if_not_found()
-        return self.__get_root_element().source
+        return self._wrapped_main_element.source

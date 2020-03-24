@@ -23,6 +23,7 @@ import copy
 from lxml import etree, html
 from io import StringIO
 from collections import namedtuple
+from arjuna.core.xml import XmlNode
 
 def process_child_html(in_str):
     processed = os.linesep.join([l for l in in_str.splitlines() if l.strip()])
@@ -36,44 +37,6 @@ def empty_or_none(in_str):
         return True
     else:
         return in_str is None
-
-class SourceNode:
-
-    def __init__(self, node):
-        self.__node = node
-
-    @property
-    def xml_node(self):
-        return self.__node
-
-    @property
-    def text(self):
-        return self.xml_node.text
-
-    def __str__(self):
-        return etree.tostring(self.xml_node, encoding=str)
-
-    def findall(self, *finders, stop_when_matched=False):
-        out = []
-        for finder in finders:
-            nodes = finder(self.xml_node)
-            out.extend(nodes)
-            if stop_when_matched:
-                if nodes:
-                    break
-        return out
-
-    def find(self, *finders, stop_when_matched=False):
-        matches = self.findall(*finders, stop_when_matched=stop_when_matched)
-        if matches:
-            return matches[0]
-        else:
-            return None
-
-    def find_keyvalue_texts(self, key_finder, value_finder):
-        key = self.find(key_finder).text
-        value = self.find(value_finder).text
-        return key,value
     
 class SourceContent:
 
@@ -122,7 +85,7 @@ class ElementXMLSourceParser:
         parser = etree.HTMLParser(remove_comments=True)
         tree = etree.parse(StringIO(raw_source), parser)
         # Done separately from above to retain all original content
-        self.__node = SourceNode(etree.parse(StringIO(raw_source), parser))
+        self.__node = XmlNode(etree.parse(StringIO(raw_source), parser))
         
         if self.__root_element == "body":
             body = tree.getroot().find('body')
@@ -131,22 +94,21 @@ class ElementXMLSourceParser:
             body = tree.getroot()
             elem_node = body
 
-        # print(etree.tostring(elem_node, encoding='unicode'))
-        non_normalized_text_content = os.linesep.join(
+        normalized_text_content = os.linesep.join(
             [
                 remove_empty_lines_from_string(c.text)
                 for c in elem_node.iter() 
                 if not empty_or_none(c.text)
             ]).strip()
 
-        non_normalized_inner_html = os.linesep.join([
+        normalized_inner_html = os.linesep.join([
             process_child_html(etree.tostring(c, encoding='unicode'))
             for c in list(elem_node.iterchildren())
             ])
 
         self.__tag = elem_node.tag
-        self.__text_content = non_normalized_text_content
-        self.__inner_html = non_normalized_inner_html
+        self.__text_content = normalized_text_content
+        self.__inner_html = normalized_inner_html
         self.__raw_attrs = elem_node.keys()
         self.__attributes = {k.lower():v for k,v in elem_node.items()}
         self.__full_source = raw_source

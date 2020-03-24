@@ -99,7 +99,6 @@ class Interactable(Configurable, Dispatchable):
         self.dispatcher.scroll_full_height()
 
     def click(self):
-        # self.find_if_not_found()
         self.__wait_until_clickable_if_configured()
         self.interactions.Click().wait()
         #self._only_click()
@@ -117,7 +116,6 @@ class Interactable(Configurable, Dispatchable):
         self.dispatcher.mouse_click()
 
     def __conditional_selected_state_click(self, condition_state):
-        # self.find_if_not_found()
         selected = self.is_selected()
         if selected == condition_state:
             self.__wait_until_clickable_if_configured()
@@ -135,30 +133,24 @@ class Interactable(Configurable, Dispatchable):
     # wait_until_present = reload
 
     def wait_until_visible(self):
-        # self.find_if_not_found()
         self.conditions.IsVisible().wait()
 
     def wait_until_clickable(self):
-        # self.find_if_not_found()
         self.conditions.IsClickable().wait()
 
     def wait_until_selected(self):
-        # self.find_if_not_found()
-        self.conditions.IsVisible().wait()
+        self.conditions.IsSelected().wait()
 
     #################################
     ### State Checking
     #################################
     def is_selected(self):
-        # self.find_if_not_found()
         return self.dispatcher.is_selected()
 
     def is_visible(self):
-        # self.find_if_not_found()
         return self.dispatcher.is_visible()
 
     def is_clickable(self):
-        # self.find_if_not_found()
         return self.dispatcher.is_clickable()
 
     @property
@@ -229,7 +221,6 @@ class Interactable(Configurable, Dispatchable):
         return self.is_selected()
 
     def get_property_value(self, attr):
-        # self.find_if_not_found()
         return self.__get_attr_value_from_remote(attr)
 
     def perform_action_chain(self, single_action_chain):

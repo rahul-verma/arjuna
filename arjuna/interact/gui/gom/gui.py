@@ -239,7 +239,7 @@ class AppContent(Gui):
 
     element = locate_element
 
-    def multielement(self, fargs=None, **kwargs):
+    def multi_element(self, fargs=None, **kwargs):
         return self.locate_element(template="multi_element", fargs=fargs, **kwargs)
 
     def dropdown(self, fargs=None, **kwargs):
@@ -321,5 +321,9 @@ class AppContent(Gui):
 
         if label is not None:
             getattr(self.gns, label)
+
+    @property
+    def source(self):
+        return self.automator.source
 
 

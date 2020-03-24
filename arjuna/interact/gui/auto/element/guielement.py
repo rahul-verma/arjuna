@@ -85,5 +85,5 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     element = locate_element
 
-    def multielement(self, **kwargs):
+    def multi_element(self, **kwargs):
         return self.locate_element(template="multi_element", **kwargs)

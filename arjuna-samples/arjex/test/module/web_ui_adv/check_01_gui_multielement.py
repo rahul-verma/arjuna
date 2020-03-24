@@ -25,7 +25,7 @@ def check_multielement_coded(request, logged_in_wordpress):
     wordpress.element(link="Posts").click()
     wordpress.element(link="Categories").click()
 
-    check_boxes = wordpress.multielement(name="delete_tags[]")
+    check_boxes = wordpress.multi_element(name="delete_tags[]")
     check_boxes[1].check()
     check_boxes[1].uncheck()
     check_boxes.first_element.uncheck()

@@ -72,26 +72,14 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
         for instance in self.__elements:
             instance.configure(elem_config)
 
-    # def find(self):
-    #     self.parent_container.find_multielement(self)
-    #     self.__load_source_parser()
-
-    # #Override
-    # def find_if_not_found(self):
-    #     if not self.is_found():
-    #         self.find()
-
     def load_source_parser(self):
         self.__source_parser = MultiElementSource(self.elements)
-        # self.__source_parser.load(self.__elements)
 
     def __getitem__(self, index):
-        # self.find_if_not_found()
         return self.__elements[index]
 
     @property
     def size(self):
-        # self.find_if_not_found()
         return len(self.__elements)
 
     length = size
@@ -126,7 +114,6 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
 
     @property
     def random_element(self):
-        # self.find_if_not_found()
         return self[random.randint(0, self.size-1)]
 
     @property
@@ -138,7 +125,6 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
         return self[len(self)-1]
 
     def get_element_at_ordinal(self, ordinal):
-        # self.find_if_not_found()
         return self.__elements[ordinal-1]
 
     def get_element_by_visible_text(self, text):
@@ -150,10 +136,6 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
         values = self.__get_all_values()
         first_index = self.__find_first_value_index(values, value)
         return self[first_index]
-
-    def wait_until_visible(self):
-        self.find_if_not_found()
-        # Should the logic be keptin Setu itself for this????
 
     def __return_attr_values(self, response):
         if "data" in response and "attrValues" in response["data"]:
@@ -167,7 +149,6 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
     # getting index attribute when it does not exist retursn value attribute.
     # So, not going the Selenium way. Setu would treat index as computer counting.
     def has_index_selected(self, index):
-        # self.find_if_not_found()
         return self[index].is_selected()
 
     # Ordinal is human counting
@@ -181,7 +162,6 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
             return -1
 
     def __get_all_texts(self):
-        # self.find_if_not_found()
         self.load_source_parser()
         texts = self.__source_parser.get_text_contents()
         return texts
@@ -193,7 +173,6 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
         return first_index
 
     def __get_all_values(self):
-        # self.find_if_not_found()
         self.load_source_parser()
         values = self.__source_parser.get_values()
         return values
@@ -205,7 +184,6 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
         return first_index
 
     def get_first_selected_instance(self):
-        # self.find_if_not_found()
         self.load_source_parser()
         booleans = self.are_selected()
         first_index = None

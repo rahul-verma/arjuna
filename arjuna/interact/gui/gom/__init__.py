@@ -88,11 +88,11 @@ class Section(AppContent):
         else:
             return self.__container.element(fargs=fargs, **kwargs)
 
-    def multielement(self, fargs=None, **kwargs):
+    def multi_element(self, fargs=None, **kwargs):
         if self.__container is self:
-            return super().multielement(fargs=fargs, **kwargs)
+            return super().multi_element(fargs=fargs, **kwargs)
         else:
-            return self.__container.multielement(fargs=fargs, **kwargs)
+            return self.__container.multi_element(fargs=fargs, **kwargs)
 
     def dropdown(self, fargs=None, **kwargs):
         if self.__container is self:

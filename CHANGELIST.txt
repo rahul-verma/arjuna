@@ -16,6 +16,7 @@ Following is the list of critical additions and updates for a given released ver
         - Localized Strings - Specified as `L.<query>`
 - Example code and documentation updates in progress.
 - With and WithType are now completely internal to Arjuna.
+- XmlSource class added with comprehensive node finding and inquiry support. xfinder name changed to NodeLocator to make it similar to Locator for Gui element finding.
 
 
 0.9.11

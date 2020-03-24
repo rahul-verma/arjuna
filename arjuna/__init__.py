@@ -70,7 +70,7 @@ from arjuna.engine.data.record import *
 from arjuna.engine.data.generator import Random, DataEntity, Locales
 from arjuna.engine.relation import *
 from arjuna.engine.fixture import *
-from arjuna.core.xml import xfinder
+from arjuna.core.xml import NodeLocator
 from arjuna.core.adv.types import ProcessedKeyDict
 from arjuna.core.json import Json
 

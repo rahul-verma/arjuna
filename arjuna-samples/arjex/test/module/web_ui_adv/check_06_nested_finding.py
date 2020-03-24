@@ -17,21 +17,26 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from commons import *
 from arjuna import *
 
-init_arjuna()
-wordpress = create_wordpress_app()
+@test
+def check_nested_element_finding(request, wordpress):
+    # Locate the form and then all input elements
 
-# Locate the form and then all input elements
-form = wordpress.ui.element(With.id("loginform"))
-user_box = form.element(With.tag_name("input"))
-print(user_box.source.content.all)
-labels = form.multi_element(With.tag_name("label"))
-for label in labels:
-    print(label.text)
-    print(label.source.content.all)
-    i = label.element(With.tag_name("input"))
-    print(i.source.content.all)
+    # Level 1 - Element from App
+    form = wordpress.element(id="loginform")
 
-wordpress.quit()
+    # Level 2 - Element in Element
+    user_box = form.element(tag="input")
+    print(user_box.source.content.all)
+
+    # Level 2 - MultiElement in Element
+    labels = form.multi_element(tag="label")
+
+    for label in labels:
+        print(label.text)
+        print(label.source.content.all)
+
+        # Level 3 - Element in Partial Element
+        i = label.element(tag="input")
+        print(i.source.content.all)

@@ -78,11 +78,6 @@ class GuiAutomator(ElementContainer,Dispatchable):
     def get_source_from_remote(self):
         return self.dispatcher.get_source()
 
-    def load_source_parser(self):
-        raw_source = self.get_source_from_remote()
-        self.__source_parser = ElementXMLSourceParser(raw_source, root_element="html")
-        self.__source_parser.load()
-
     # def create_dispatcher(self):
     #     self._set_dispatcher(self.dispatcher_creator.create_gui_automator_dispatcher(self.config, self.setu_id))
 
@@ -151,8 +146,6 @@ class GuiAutomator(ElementContainer,Dispatchable):
         from .browser import Browser
         self.__browser = Browser(self)
 
-        self.load_source_parser()
-
     def quit(self):
         self.dispatcher.quit()
 
@@ -189,8 +182,11 @@ class GuiAutomator(ElementContainer,Dispatchable):
         self.main_window.focus()
 
     @property
-    def source(self): #, reload=True):
-        return self.__source_parser
+    def source(self):
+        raw_source = self.get_source_from_remote()
+        source_parser = ElementXMLSourceParser(raw_source, root_element="html")
+        source_parser.load()
+        return source_parser
 
     def perform_action_chain(self, single_action_chain):
         from arjuna.interact.gui.auto.automator.actions import SingleActionChain
