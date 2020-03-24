@@ -2,12 +2,12 @@ Following is the list of critical additions and updates for a given released ver
 
 0.9.12
 ------
-- Added locate/element/multi_element/dropdown/radio_group factories to Page.
+- Added locate/element/multi_element/dropdown/radio_group factories to Gui and element/multi_element factories to GuiElement.
 - The factories provide a more Pythonic syntax than using tuples or factories for every locator type in user API.
 - withx works with the revised factory methods. One can provide `<withx_name>=Params([arg1=val1, arg2=val2, ... argN=valN])` argument to factory methods for identification.
 - Locator and Formatter class added for providing complex identification constructs as a single argument. `.locate` method added to Gui and GuiElement.
 - Formatted identifiers
-    - Identifiers can container formatter placeholers with the syntax $xyz$ where xyz is a name which you want to replace with a value.
+    - Identifiers can contain formatter placeholers with the syntax $xyz$ where xyz is a name which you want to replace with a value.
     - For using formatted identifiers in code, you can use `gui.format(xyz=<value>).element(locator="$xyz$")` syntax.
     - For using formatted identifiers in GNS, you can use `gui.format(xyz=<value>).label` syntax.
     - Auto-loaded placeholder values: (query syntax is same as that for the magic `C`, `R` and `L` functions.)

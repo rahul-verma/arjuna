@@ -456,7 +456,7 @@ class Formatter:
         self.__fargs = kwargs
 
     def locator(self, template="element", **kwargs):
-        return Locator(template=template, fargs=self.__fargs, **kwargs)
+        return Locator(template=template, fmt_args=self.__fargs, **kwargs)
 
 class Locator(Dictable):
 

@@ -242,22 +242,24 @@ class AppContent(Gui):
     def format(self, **kwargs):
         return WithFormatter(self, **kwargs)
 
-    def locate_element(self, *, template="element", fargs=None, **kwargs):
+    def locate(self, locator):
         from arjuna import log_debug
-        emd = self.convert_to_lmd({"template": template}, **kwargs)
+        largs = locator.named_args
+        if largs is None:
+            largs = dict()
+        emd = self.convert_to_lmd({"template": locator.template}, **largs)
+        fargs = locator.fmt_args
         if fargs is None:
             fargs = dict()
         fmt_emd = emd.create_formatted_emd(**fargs)
         log_debug("Finding element with emd: {}.".format(emd))
         return getattr(self, "_" +  emd.meta.template.name.lower())(fmt_emd)
 
-    element = locate_element
+    def locate_element(self, *, template="element", fargs=None, **kwargs):
+        from arjuna.interact.gui.helpers import Locator
+        return self.locate(Locator(template=template, fmt_args=fargs, **kwargs))
 
-    def locate(self, locator):
-        largs = locator.named_args
-        if largs is None:
-            largs = dict()
-        return self.locate_element(template=locator.template, fargs=locator.fmt_args, **largs)
+    element = locate_element
 
     def multielement(self, fargs=None, **kwargs):
         return self.locate_element(template="multi_element", fargs=fargs, **kwargs)

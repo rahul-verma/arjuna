@@ -34,3 +34,8 @@ def check_basic_identifiers(request, wordpress):
     wordpress.element(link="password")
     # Full Link text match
     wordpress.element(flink="Lost your password?")
+
+
+@test
+def check_basic_identifiers_using_locate(request, wordpress):
+    wordpress.locate(Locator(id="user_login"))

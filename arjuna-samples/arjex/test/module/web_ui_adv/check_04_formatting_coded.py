@@ -34,3 +34,19 @@ def check_fmt_reference_coded(request, logged_in_wordpress):
 @test
 def check_fmt_reference_l10n_coded(request, logged_in_wordpress):
     logged_in_wordpress.element(link="$L.links.posting$").click()
+
+@test
+def check_fmt_coded_fmt_locate(request, logged_in_wordpress):
+    logged_in_wordpress.locate(Formatter(text="Media").locator(link="$text$")).click()
+
+@test
+def check_fmt_config_coded_locate(request, logged_in_wordpress):
+    logged_in_wordpress.locate(Locator(link="$C.link.name$")).click()
+
+@test
+def check_fmt_reference_coded_locate(request, logged_in_wordpress):
+    logged_in_wordpress.locate(Locator(link="$R.links.test1.navlink$")).click()
+
+@test
+def check_fmt_reference_l10n_coded_locate(request, logged_in_wordpress):
+    logged_in_wordpress.locate(Locator(link="$L.links.posting$")).click()

@@ -82,17 +82,29 @@ class Section(AppContent):
             
             self.__container = self.__root_element
 
-    def element(self, *, template="element", fargs=None, **kwargs):
-        return self.__container.element(template=template, fargs=fargs, **kwargs)
+    def element(self, *, fargs=None, **kwargs):
+        if self.__container is self:
+            return super().element(fargs=fargs, **kwargs)
+        else:
+            return self.__container.element(fargs=fargs, **kwargs)
 
     def multielement(self, fargs=None, **kwargs):
-        return self.__container.multielement(fargs=fargs, **kwargs)
+        if self.__container is self:
+            return super().multielement(fargs=fargs, **kwargs)
+        else:
+            return self.__container.multielement(fargs=fargs, **kwargs)
 
     def dropdown(self, fargs=None, **kwargs):
-        return self.__container.dropdown(fargs=fargs, **kwargs)
+        if self.__container is self:
+            return super().dropdown(fargs=fargs, **kwargs)
+        else:
+            return self.__container.dropdown(fargs=fargs, **kwargs)
 
     def radio_group(self, fargs=None, **kwargs):
-        return self.__container.radio_group(fargs=fargs, **kwargs)       
+        if self.__container is self:
+            return super().radio_group(fargs=fargs, **kwargs)
+        else:
+            return self.__container.radio_group(fargs=fargs, **kwargs)       
 
     @property
     def parent(self):

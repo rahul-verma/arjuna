@@ -31,3 +31,17 @@ def check_multielement_coded(request, logged_in_wordpress):
     check_boxes.first_element.uncheck()
     check_boxes.last_element.uncheck()
     check_boxes.random_element.uncheck()
+
+
+@test
+def check_multielement_coded_using_locate(request, logged_in_wordpress):
+    wordpress = logged_in_wordpress
+    wordpress.element(link="Posts").click()
+    wordpress.element(link="Categories").click()
+
+    check_boxes = wordpress.locate(Locator(template="multi_element", name="delete_tags[]"))
+    check_boxes[1].check()
+    check_boxes[1].uncheck()
+    check_boxes.first_element.uncheck()
+    check_boxes.last_element.uncheck()
+    check_boxes.random_element.uncheck()

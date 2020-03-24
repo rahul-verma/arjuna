@@ -20,11 +20,27 @@ limitations under the License.
 from arjuna import *
 
 @test
-def check_radiogroup(request, logged_in_wordpress):
+def check_radiogroup_coded(request, logged_in_wordpress):
     wordpress = logged_in_wordpress
     wordpress.element(link="Settings").click()
 
     date_format = wordpress.radio_group(name="date_format")
+
+    fmsg = "Failed to select m/d/Y date format"
+    request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), fmsg)
+    request.asserter.assert_true(date_format.has_index_selected(2), fmsg)
+    request.asserter.assert_equal(date_format.value, "m/d/Y", "Unpexpected Value attribute of Date Format")
+
+    date_format.select_value(r"\c\u\s\t\o\m")
+    date_format.select_index(2)
+
+
+@test
+def check_radiogroup_coded_using_locate(request, logged_in_wordpress):
+    wordpress = logged_in_wordpress
+    wordpress.element(link="Settings").click()
+
+    date_format = wordpress.locate(Locator(template="radio_group", name="date_format"))
 
     fmsg = "Failed to select m/d/Y date format"
     request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), fmsg)

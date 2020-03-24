@@ -20,11 +20,31 @@ limitations under the License.
 from arjuna import *
 
 @test
-def check_dropdown(request, logged_in_wordpress):
+def check_dropdown_coded(request, logged_in_wordpress):
     wordpress = logged_in_wordpress
     wordpress.element(link="Settings").click()
 
     role_select = wordpress.dropdown(id="default_role")
+
+    role_select.select_text("Subscriber")
+    fmsg = "Failed to select Subscriber Role"
+    request.asserter.assert_true(role_select.has_visible_text_selected("Subscriber"), fmsg)
+    request.asserter.assert_true(role_select.has_value_selected("subscriber"), fmsg)
+    request.asserter.assert_true(role_select.has_index_selected(0), fmsg)
+    request.asserter.assert_equal(role_select.value, "subscriber", "Unexpected Value attribute of Role.")
+    request.asserter.assert_equal(role_select.text,"Subscriber",  "Unexpected Selected Role Text ")
+
+    role_select.select_value("editor")
+    role_select.select_index(4)
+    role_select.text = "Subscriber"
+
+
+@test
+def check_dropdown_coded_using_locate(request, logged_in_wordpress):
+    wordpress = logged_in_wordpress
+    wordpress.element(link="Settings").click()
+
+    role_select = wordpress.locate(Locator(template="dropdown", id="default_role"))
 
     role_select.select_text("Subscriber")
     fmsg = "Failed to select Subscriber Role"
