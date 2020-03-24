@@ -20,19 +20,7 @@ limitations under the License.
 import os
 from setuptools import setup, find_packages
 
-# my_dir =  os.path.dirname(os.path.realpath(__file__))
-
-# dynamic_dirs = [
-#     os.path.join(my_dir, "arjuna", p) for p in (
-#         "res",
-#         "third_party"
-#     )
-# ]
-
 packages = find_packages()
-# packages.extend(dynamic_dirs)
-
-# print(packages)
 
 this_directory = os.path.abspath(os.path.dirname(os.path.realpath(__file__)))
 with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
