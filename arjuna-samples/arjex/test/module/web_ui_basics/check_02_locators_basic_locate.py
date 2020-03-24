@@ -20,7 +20,7 @@ limitations under the License.
 from arjuna import *
 
 @test
-def check_basic_identifiers(request, wordpress):
+def check_basic_identifiers_factory(request, wordpress):
     # user name field.
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
     wordpress.element(id="user_login")

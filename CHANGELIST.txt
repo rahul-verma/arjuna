@@ -15,6 +15,7 @@ Following is the list of critical additions and updates for a given released ver
         - Contextual Data Reference - Specified as `R.<query>`
         - Localized Strings - Specified as `L.<query>`
 - Example code and documentation updates in progress.
+- With and WithType are now completely internal to Arjuna.
 
 
 0.9.11

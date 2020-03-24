@@ -20,8 +20,8 @@ limitations under the License.
 import os
 
 from .nsloader import GuiNamespaceLoaderFactory
-from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData, GuiElementMetaData, Locator
-from arjuna.interact.gui.helpers import With
+from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.auto.finder._with import With, Locator
 from arjuna.core.exceptions import GuiLabelNotPresentError
 
 class GuiDef:
@@ -84,8 +84,6 @@ class GuiDef:
                     final_locators.append(Locator(ltype=raw_locator.wtype, lvalue=raw_locator.wvalue), named_args={})
                 else:
                     final_locators.append(Locator(ltype=raw_locator.ltype, lvalue=raw_locator.lvalue), named_args=raw_locator.named_args)
-        import sys
-        sys.exit(1)
         return GuiElementMetaData(final_locators)
 
     def __gns_locators_as_with_locators(self, label):
@@ -98,7 +96,7 @@ class GuiDef:
         return out
 
     def convert_to_with(self, locator):
-        from arjuna.interact.gui.helpers import With
+        from arjuna.interact.gui.auto.finder._with import With
         out_list = []
         impl_with = locator.as_impl_locator()
         for wobj in self.__gns_locators_as_with_locators(impl_with.wvalue):

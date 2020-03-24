@@ -25,7 +25,8 @@ from abc import abstractmethod
 
 from arjuna.core.enums import GuiAutomationContext
 from arjuna.core.exceptions import GuiLabelNotPresentError
-from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData, Locator, ImplWith
+from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.auto.finder._with import ImplWith
 from arjuna.core.yaml import YamlFile
 
 class FileFormat(Enum):
@@ -167,7 +168,6 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         self.__ns_file = None
         self.__ns_path = None
 
-        #Map<String, Map<GuiAutomationContext,List<Locator>>>
         self.__ns = {}
 
         if not os.path.isabs(ns_file_path):
@@ -188,7 +188,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         
         from arjuna import Arjuna
         from arjuna.configure.impl.validator import Validator
-        from arjuna.interact.gui.helpers import WithType
+        from arjuna.interact.gui.auto.finder._with import WithType
         yaml = YamlFile(self.__ns_path)
 
         if yaml.is_empty(): return
@@ -238,20 +238,11 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
 
             if "root" in self.__load_targets:
                 self.__ns["__root__"] = self.__load_targets["root"].lower()
-                # self.__ns["__root__"] = {"locators" : {self.__context: []}, "meta": dict()}
-                # target_label = self.__ns[self.__load_targets["root"]]
-                # target_locators = self.__ns[target_label.lower()]["locators"][self.__context]
-                # self.__ns["__root__"]["locators"][self.__context].extend(target_locators)
             else:
                 self.__ns["__root__"] = None
 
             if "anchor" in self.__load_targets:
                 self.__ns["__anchor__"] = self.__load_targets["anchor"].lower()
-                # self.__ns["__anchor__"] = {"locators" : {self.__context: []}, "meta": dict()}
-                # target_label = self.__load_targets["anchor"]
-                # print(target_label)
-                # target_locators = self.__ns[target_label.lower()]["locators"][self.__context]
-                # self.__ns["__anchor__"]["locators"][self.__context].extend(target_locators)
             else:
                 self.__ns["__anchor__"] = None
 

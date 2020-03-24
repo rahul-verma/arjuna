@@ -190,7 +190,8 @@ class AppContent(Gui):
 
     def convert_to_lmd(self, meta=None, **kwargs):
         from arjuna import Arjuna
-        from arjuna.interact.gui.helpers import WithType, With
+        from arjuna.interact.gui.auto.finder._with import With
+        from arjuna.interact.gui.auto.finder.enums import WithType
         with_list = []
         for k,v in kwargs.items():
             if k.upper() in WithType.__members__:
@@ -207,29 +208,6 @@ class AppContent(Gui):
             raise Exception("You must provide atleast one locator.")
         from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
         return GuiElementMetaData.create_lmd(*with_list, meta=meta)
-
-    # def convert_to_with_lmd(self, *raw_str_or_with_locators, nested_element=False):
-    #     from arjuna.interact.gui.helpers import With, WithType
-    #     out = []
-    #     for locator in raw_str_or_with_locators:
-    #         w = None
-    #         if isinstance(locator, With):
-    #             w = locator
-    #         elif type(locator) is str:
-    #             w = With.label(locator)
-    #         elif isinstance(locator, Enum):
-    #             w = With.label(locator.name)
-    #         else:
-    #             raise Exception("A With object or name of element is expected as argument.")
-
-    #         if w.wtype == WithType.LABEL:
-    #             if isinstance(w.wvalue, Enum):
-    #                 w.wvalue = w.wvalue.name
-    #             out.extend(self.gui_def.convert_to_with(w))
-    #         else:
-    #             out.append(w)
-    #     lmd = GuiElementMetaData.create_lmd(*out)
-    #     return lmd
 
     @property
     def root_element(self):
