@@ -4,9 +4,10 @@ Following is the list of critical additions and updates for a given released ver
 ------
 - FIX: Import bug in emd.py
 - wait_until_absent call supported
-    - Raises _GuiElementPresentError exception on failure.
     - Can be called with `Gui` as well as `GuiElement` as `.wait_until_absent(**locator_kwargs)`
+        - Raises GuiElementForLabelPresentError exception on failure.
     - Can be called with `Gui` as well as `GuiElement` as `.wait_until_absent(**labels)`
+        - Raises GuiElementPresentError exception on failure.
 - contains call supported
     - Returns True/False.
     - Can be called with `Gui` as well as `GuiElement` as `.contains(**locator_kwargs)`
