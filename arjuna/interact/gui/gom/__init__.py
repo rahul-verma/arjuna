@@ -68,13 +68,19 @@ class Section(AppContent):
         else:
             return None
 
-    def load_root_element(self):
+    def _load_root_element(self):
+        '''
+            Loads root element for Section.
+
+            Root element is always loaded by using Page. Rest of the elements are loaded as nested elements in root.
+        '''
         if self.__root_meta:
             label, locator = self.__root_meta
             if self.__root_meta[0] != "anonymous":
+                emd = self.gui_def.get_emd(label)
                 from arjuna import log_debug
                 log_debug("Loading Root Element {} for Gui Section: {}".format(label, self.label))
-                self.__root_element = getattr(self.gns, label)
+                self.__root_element = self._element(emd)
             else:
                 from arjuna import log_debug
                 log_debug("Loading Root Element with Locator {} for Gui Section: {}".format(str(locator), self.label))

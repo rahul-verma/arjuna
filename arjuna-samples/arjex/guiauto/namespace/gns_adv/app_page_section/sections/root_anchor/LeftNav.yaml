@@ -15,3 +15,6 @@ labels:
 
   collapse:
     id: collapse-menu
+
+  non_existing:
+    id: absent

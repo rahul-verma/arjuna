@@ -99,10 +99,12 @@ class Gui(AsserterMixIn):
     def _load(self, *args, **kwargs):
         self.prepare(*args, **kwargs)
         try:
-            self.load_root_element()
+            self._load_root_element()
         except Exception as e:
             import traceback
             raise GuiNotLoadedError(self, "Root Element not Loaded. " + str(e) + "\n" + traceback.format_exc())
+
+        self._load_gns()
 
         try:
             self.load_anchor_element()
@@ -131,7 +133,7 @@ class Gui(AsserterMixIn):
     def validate_readiness(self):
         pass
 
-    def load_root_element(self):
+    def _load_root_element(self):
         pass
 
     def load_anchor_element(self):
@@ -152,7 +154,9 @@ class AppContent(Gui):
         self.__guidef = None
         self.__gui_registered = False
         self._externalize()
-
+        self.__gns = None
+        
+    def _load_gns(self):
         self.__gns = GNS(self, self.gui_def)
 
     @property
@@ -220,8 +224,7 @@ class AppContent(Gui):
     def format(self, **kwargs):
         return WithFormatter(self, **kwargs)
 
-    def locate(self, locator):
-        from arjuna import log_debug
+    def convert_locator_to_emd(self, locator):
         largs = locator.named_args
         if largs is None:
             largs = dict()
@@ -230,8 +233,13 @@ class AppContent(Gui):
         if fargs is None:
             fargs = dict()
         fmt_emd = emd.create_formatted_emd(**fargs)
+        return fmt_emd 
+
+    def locate(self, locator):
+        from arjuna import log_debug
+        emd = self.convert_locator_to_emd(locator)
         log_debug("Finding element with emd: {}.".format(emd))
-        return getattr(self, "_" +  emd.meta.template.name.lower())(fmt_emd)
+        return getattr(self, "_" +  emd.meta.template.name.lower())(emd)
 
     def locate_element(self, *, template="element", fargs=None, **kwargs):
         from arjuna.interact.gui.helpers import Locator
@@ -266,8 +274,13 @@ class AppContent(Gui):
     def _radio_group(self, lmd, iconfig=None):
         return self.automator._radio_group(self, lmd, iconfig=iconfig)
 
-    def wait_until_element_absent(self, name):
-        return self.automator.wait_until_element_absent(self.gui_def.get_emd(name))
+    def _wait_until_absent(self, emd):
+        return self.automator.wait_until_element_absent(emd)
+
+    def wait_until_absent(self, *, fargs=None, **kwargs):
+        from arjuna.interact.gui.helpers import Locator
+        emd = self.convert_locator_to_emd(Locator(fmt_args=fargs, **kwargs))
+        return self.automator.wait_until_element_absent(emd)
 
     @property
     def dom_root(self):

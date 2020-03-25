@@ -67,17 +67,9 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
         raise Exception("With.JS is currently not supported for nested element finding.")
 
     def locate(self, locator):
-        from arjuna import log_debug
-        largs = locator.named_args
-        if largs is None:
-            largs = dict()
-        emd = self.gui.convert_to_lmd({"template": locator.template}, **largs)
-        fargs = locator.fmt_args
-        if fargs is None:
-            fargs = dict()
-        fmt_emd = emd.create_formatted_emd(**fargs)
+        emd = self.gui.convert_locator_to_emd(locator)
         log_debug("Finding element with emd: {}.".format(emd))
-        return getattr(self, "_" +  emd.meta.template.name.lower())(self.gui, fmt_emd)
+        return getattr(self, "_" +  emd.meta.template.name.lower())(self.gui, emd)
 
     def locate_element(self, *, template="element", fargs=None, **kwargs):
         from arjuna.interact.gui.helpers import Locator
@@ -87,3 +79,11 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     def multi_element(self, **kwargs):
         return self.locate_element(template="multi_element", **kwargs)
+
+    def _wait_until_absent(self, emd):
+        return self.wait_until_element_absent(emd)
+
+    def wait_until_absent(self, *, fargs=None, **kwargs):
+        from arjuna.interact.gui.helpers import Locator
+        emd = self.gui.convert_locator_to_emd(Locator(fmt_args=fargs, **kwargs))
+        return self.wait_until_element_absent(emd)

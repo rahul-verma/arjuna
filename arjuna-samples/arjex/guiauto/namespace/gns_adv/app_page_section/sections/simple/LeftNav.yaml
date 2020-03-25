@@ -8,3 +8,6 @@ labels:
 
   first_div:
     xpath: "//div"
+
+  non_existing:
+    id: absent

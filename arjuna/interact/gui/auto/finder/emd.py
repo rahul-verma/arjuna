@@ -23,7 +23,7 @@ from collections import namedtuple
 
 from .meta import Meta
 from .enums import WithType
-from ._with import With, ImplWith, Locator
+from ._with import With, ImplWith, Locator, GuiGenericLocator
 from .translator import LocatorTranslator
 
 
