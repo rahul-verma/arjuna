@@ -24,3 +24,9 @@ from arjuna import *
 def check_wait_until_absent_nested(request, logged_in_wordpress):
     # Should be validated in root element.
     logged_in_wordpress.element(id="adminmenu").wait_until_absent(id="something")
+
+
+@test
+def check_contains_nested(request, logged_in_wordpress):
+    # Should be validated in root element.
+    print(logged_in_wordpress.element(id="adminmenu").contains(id="something"))

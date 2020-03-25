@@ -20,7 +20,7 @@ limitations under the License.
 from arjuna import *
 from arjex.lib.gns_adv.app_page_section.app import WordPress
 
-@for_test
+@for_module
 def dashboard(request):
     # Setup
     wordpress = WordPress(section_dir="simple")
@@ -39,3 +39,12 @@ def check_wait_until_absent_gns_1(request, dashboard):
 @test
 def check_wait_until_absent_gns_2(request, dashboard):
     dashboard.left_nav.wait_until_absent(id="non_existing")
+
+@test
+def check_contains_gns_1(request, dashboard):
+    print(dashboard.left_nav.gns.contains)
+    print(dashboard.left_nav.gns.contains("non_existing"))
+
+@test
+def check_contains_gns_2(request, dashboard):
+    print(dashboard.left_nav.contains(id="non_existing"))

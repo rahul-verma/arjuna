@@ -1,5 +1,6 @@
 
 from .formatter import GNSFormatter
+from arjuna.core.exceptions import GuiElementPresentError
 
 class GNS:
 
@@ -36,9 +37,17 @@ class GNS:
 
     def wait_until_absent(self, *labels):
         waiter = getattr(self.__container, "_" + "wait_until_absent")
-        emd = self.__get_emd_for_label(label)
         for label in labels:
+            emd = self.__get_emd_for_label(label)
             waiter(emd)
+
+    def contains(self, *labels):
+        try:
+            self.wait_until_absent(*labels)
+        except GuiElementPresentError:
+            return True
+        else:
+            return False
 
     def locate_with_emd(self, emd):
         factory = getattr(self.__container, "_" + emd.meta.template.name.lower())

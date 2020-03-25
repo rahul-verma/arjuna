@@ -22,6 +22,7 @@ from arjuna.interact.gui.auto.base.interactable import Interactable
 from arjuna.interact.gui.auto.base.container import ElementContainer
 from arjuna.engine.asserter import AsserterMixIn
 from arjuna.interact.gui.gom.gns import GNS
+from arjuna.core.exceptions import GuiElementPresentError
 
 class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
@@ -87,3 +88,11 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
         from arjuna.interact.gui.helpers import Locator
         emd = self.gui.convert_locator_to_emd(Locator(fmt_args=fargs, **kwargs))
         return self.wait_until_element_absent(emd)
+
+    def contains(self, *, fargs=None, **kwargs):
+        try:
+            self.wait_until_absent(fargs=fargs, **kwargs)
+        except GuiElementPresentError:
+            return True
+        else:
+            return False

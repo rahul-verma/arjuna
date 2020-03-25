@@ -38,3 +38,14 @@ labels:
   date_format:
     template: radio_group
     name: date_format
+
+  # For nested search
+  login_form:
+    id: loginform
+
+  labels:
+    template: multi_element
+    tag: label
+
+  first_input:
+    tag: input

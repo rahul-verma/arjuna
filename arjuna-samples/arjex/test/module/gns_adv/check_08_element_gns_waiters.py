@@ -20,7 +20,7 @@ limitations under the License.
 from arjuna import *
 from arjex.lib.gns_adv.app_page_section.app import WordPress
 
-@for_test
+@for_module
 def dashboard(request):
     # Setup
     wordpress = WordPress(section_dir="simple")
@@ -32,7 +32,7 @@ def dashboard(request):
     dashboard.top_nav.logout()
     wordpress.quit()
 
-@for_test
+@for_module
 def dashboard_re(request):
     # Setup
     wordpress = WordPress(section_dir="root_anchor")
@@ -55,6 +55,16 @@ def check_wait_until_absent_without_root_2(request, dashboard):
     dashboard.left_nav.gns.menu.wait_until_absent(id="something")
 
 @test
+def check_contains_without_root_1(request, dashboard):
+    # Should be validated in root element.
+    print(dashboard.left_nav.gns.menu.gns.contains("non_existing"))
+
+@test
+def check_contains_without_root_2(request, dashboard):
+    # Should be validated in root element.
+    print(dashboard.left_nav.gns.menu.contains(id="something"))
+
+@test
 def check_wait_until_absent_with_root_1(request, dashboard_re):
     # Should be validated in root element.
     dashboard_re.left_nav.gns.wait_until_absent("non_existing")
@@ -63,3 +73,13 @@ def check_wait_until_absent_with_root_1(request, dashboard_re):
 def check_wait_until_absent_with_root_2(request, dashboard_re):
     # Should be validated in root element.
     dashboard_re.left_nav.wait_until_absent(id="something")
+
+@test
+def check_contains_with_root_1(request, dashboard_re):
+    # Should be validated in root element.
+    print(dashboard_re.left_nav.gns.contains("non_existing"))
+
+@test
+def check_contains_with_root_2(request, dashboard_re):
+    # Should be validated in root element.
+    print(dashboard_re.left_nav.contains(id="something"))
