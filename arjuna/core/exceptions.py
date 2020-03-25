@@ -216,3 +216,15 @@ class GuiElementPresentError(Exception):
         message = format_msg(message)
         super().__init__("Element corresponding to meta data {} in Gui {} is present despite waiting.{}".format(str(emd), gui.label, message))
 
+class GuiElementForLabelNotPresentError(Exception):
+
+    def __init__(self, gui, label, message=None):
+        message = format_msg(message)
+        super().__init__("Element corresponding to Label {} in Gui {} is NOT present despite waiting.{}".format(label, gui.label, message))
+
+
+class GuiElementNotPresentError(Exception):
+
+    def __init__(self, gui, emd, message=None):
+        message = format_msg(message)
+        super().__init__("Element corresponding to meta data {} in Gui {} is NOT present despite waiting.{}".format(str(emd), gui.label, message))

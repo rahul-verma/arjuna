@@ -22,7 +22,7 @@ from arjuna.interact.gui.auto.base.interactable import Interactable
 from arjuna.interact.gui.auto.base.container import ElementContainer
 from arjuna.engine.asserter import AsserterMixIn
 from arjuna.interact.gui.gom.gns import GNS
-from arjuna.core.exceptions import ArjunaTimeoutError, GuiElementPresentError
+from arjuna.core.exceptions import *
 
 class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
@@ -68,9 +68,13 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
         raise Exception("With.JS is currently not supported for nested element finding.")
 
     def locate(self, locator):
+        from arjuna import log_debug
         emd = self.gui.convert_locator_to_emd(locator)
         log_debug("Finding element with emd: {}.".format(emd))
-        return getattr(self, "_" +  emd.meta.template.name.lower())(self.gui, emd)
+        try:
+            return getattr(self, "_" +  emd.meta.template.name.lower())(self.gui, emd)
+        except ArjunaTimeoutError:
+            raise GuiElementNotPresentError(self.gui, emd)        
 
     def locate_element(self, *, template="element", fargs=None, **kwargs):
         from arjuna.interact.gui.helpers import Locator
@@ -94,8 +98,8 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     def contains(self, *, fargs=None, **kwargs):
         try:
-            self.wait_until_absent(fargs=fargs, **kwargs)
-        except GuiElementPresentError:
-            return True
-        else:
+            self.element(fargs=fargs, **kwargs)
+        except GuiElementNotPresentError:
             return False
+        else:
+            return True

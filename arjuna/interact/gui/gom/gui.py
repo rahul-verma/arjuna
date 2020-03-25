@@ -33,7 +33,7 @@ from arjuna.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
-from arjuna.core.exceptions import WaitableError, GuiNotLoadedError, GuiNamespaceLoadingError, _GuiElementPresentError, ArjunaTimeoutError, GuiElementForLabelPresentError
+from arjuna.core.exceptions import *
 from arjuna.interact.gui.gom.gns import GNS
 
 class GuiConditions:
@@ -239,7 +239,10 @@ class AppContent(Gui):
         from arjuna import log_debug
         emd = self.convert_locator_to_emd(locator)
         log_debug("Finding element with emd: {}.".format(emd))
-        return getattr(self, "_" +  emd.meta.template.name.lower())(emd)
+        try:
+            return getattr(self, "_" +  emd.meta.template.name.lower())(emd)
+        except ArjunaTimeoutError:
+            raise GuiElementNotPresentError(self, emd) 
 
     def locate_element(self, *, template="element", fargs=None, **kwargs):
         from arjuna.interact.gui.helpers import Locator
@@ -287,11 +290,11 @@ class AppContent(Gui):
 
     def contains(self, *, fargs=None, **kwargs):
         try:
-            self.wait_until_absent(fargs=fargs, **kwargs)
-        except GuiElementPresentError:
-            return True
-        else:
+            self.element(fargs=fargs, **kwargs)
+        except GuiElementNotPresentError:
             return False
+        else:
+            return True
 
     @property
     def dom_root(self):

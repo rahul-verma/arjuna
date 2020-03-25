@@ -1,6 +1,6 @@
 
 from .formatter import GNSFormatter
-from arjuna.core.exceptions import ArjunaTimeoutError, GuiElementPresentError, GuiElementForLabelPresentError
+from arjuna.core.exceptions import *
 
 class GNS:
 
@@ -42,15 +42,17 @@ class GNS:
             try:
                 waiter(emd)
             except GuiElementPresentError:
-                raise GuiElementForLabelPresentError(self.__gui, label)        
+                raise GuiElementForLabelPresentError(self.__gui, label)    
 
     def contains(self, *labels):
-        try:
-            self.wait_until_absent(*labels)
-        except GuiElementForLabelPresentError:
-            return True
-        else:
-            return False
+        for label in labels:
+            try:
+                getattr(self, label)
+            except GuiElementForLabelNotPresentError:
+                continue
+            else:
+                return True
+        return False
 
     def locate_with_emd(self, emd):
         factory = getattr(self.__container, "_" + emd.meta.template.name.lower())
@@ -58,9 +60,13 @@ class GNS:
             return factory(emd)
         else:
             return factory(self.__gui, emd)
+        
 
     def __getattr__(self, label):
         emd = self.__get_emd_for_label(label)
         from arjuna import log_debug
         log_debug("Finding element with label: {} and emd: {}".format(label, emd))
-        return self.locate_with_emd(emd)
+        try:
+            return self.locate_with_emd(emd)
+        except ArjunaTimeoutError:
+            raise GuiElementForLabelNotPresentError(self.__gui, label)
