@@ -123,17 +123,20 @@ class WaitableError(Exception):
     def __init__(self, message):
         super().__init__(message)
 
+def format_msg(msg):
+    return msg and  "Error message: {}".format(message) or ""
+
 class _ElementNotFoundError(WaitableError):
 
     def __init__(self, elem_name, *locators, container=None, message=None):
         container = container and  " in {}".format(container) or ""
-        message = message and  "Error message: {}".format(message) or ""
+        message = format_msg(message)
         super().__init__("{} not found using any of the locators: {}{}.{}".format(elem_name, GuiElementMetaData.locators_as_str(locators), container, message))
 
 class _ElementPresentError(WaitableError):
 
     def __init__(self, elem_type, *locators, message=None):
-        message = message and  "Error message: {}".format(message) or ""
+        message = message = format_msg(message)
         super().__init__("{} expected to be absent but still present for one of the locators: {}.{}".format(elem_type, GuiElementMetaData.locators_as_str(locators), message))
 
 class GuiElementNotFoundError(_ElementNotFoundError):
@@ -141,7 +144,7 @@ class GuiElementNotFoundError(_ElementNotFoundError):
     def __init__(self, *locators, container=None, message=None):
         super().__init__("GuiElement(s)", *locators, container=container, message=message)
 
-class GuiElementPresentError(_ElementPresentError):
+class _GuiElementPresentError(_ElementPresentError):
 
     def __init__(self, *locators, message=None):
         super().__init__("GuiElement(s)", *locators, message=message)
@@ -166,7 +169,7 @@ class ChildFrameNotFoundError(_ElementNotFoundError):
     def __init__(self, *locators):
         super().__init__("Frame", *locators)
 
-class TimeoutError(WaitableError):
+class ArjunaTimeoutError(WaitableError):
 
     def __init__(self, context, message):
         super().__init__(". Timeout in {}. Error Message: {}".format(context, message))  
@@ -193,3 +196,23 @@ class GuiNamespaceLoadingError(Exception):
     def __init__(self, gui, msg):
         message = msg and  " Error message: {}".format(msg) or ""
         super().__init__("Gui namespace was not loaded for >{}<.{}".format(gui.qual_name, message))
+
+
+
+###############################
+# Raised by top layer user API
+###############################
+
+class GuiElementForLabelPresentError(Exception):
+
+    def __init__(self, gui, label, message=None):
+        message = format_msg(message)
+        super().__init__("Element corresponding to Label {} in Gui {} is present despite waiting.{}".format(label, gui.label, message))
+
+
+class GuiElementPresentError(Exception):
+
+    def __init__(self, gui, emd, message=None):
+        message = format_msg(message)
+        super().__init__("Element corresponding to meta data {} in Gui {} is present despite waiting.{}".format(str(emd), gui.label, message))
+

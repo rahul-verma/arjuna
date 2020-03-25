@@ -67,10 +67,13 @@ class Condition:
             ctime = time.time()
             if(ctime > end_time):
                 break
-        raise TimeoutError(self.__class__.__name__, str(e) + etrace)
+        raise ArjunaTimeoutError(self.__class__.__name__, str(e) + etrace)
 
     def execute(self):
-        self.__call_result = self.__dynamic_caller.call(*self.__args, **self.__kwargs)
+        try:
+            self.__call_result = self.__dynamic_caller.call(*self.__args, **self.__kwargs)
+        except ArjunaTimeoutError as e:
+            raise ArjunaTimeoutError("ArjunaTimeOut: {}".format(str(e)))
 
 class CommandCondition(Condition):
 

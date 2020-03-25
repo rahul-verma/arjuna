@@ -49,19 +49,43 @@ def check_wait_until_absent_without_root_1(request, dashboard):
     # Should be validated in root element.
     dashboard.left_nav.gns.menu.gns.wait_until_absent("non_existing")
 
+    try:
+        # It is present
+        dashboard.left_nav.gns.menu.gns.wait_until_absent("settings")
+    except GuiElementForLabelPresentError as e:
+        print("Exception as Expected")
+        print(str(e))
+    except Exception as e:
+        raise Exception("Unexpected exception raise: ", str(e))
+    else:
+        raise Exception("Exception not raised.")
+
 @test
 def check_wait_until_absent_without_root_2(request, dashboard):
     # Should be validated in root element.
     dashboard.left_nav.gns.menu.wait_until_absent(id="something")
 
+    try:
+        # It is present
+        dashboard.left_nav.gns.menu.wait_until_absent(link="Settings")
+    except GuiElementPresentError as e:
+        print("Exception as Expected")
+        print(str(e))
+    except Exception as e:
+        raise Exception("Unexpected exception raise: ", str(e))
+    else:
+        raise Exception("Exception not raised.")
+
 @test
 def check_contains_without_root_1(request, dashboard):
     # Should be validated in root element.
+    print(dashboard.left_nav.gns.menu.gns.contains("settings"))
     print(dashboard.left_nav.gns.menu.gns.contains("non_existing"))
 
 @test
 def check_contains_without_root_2(request, dashboard):
     # Should be validated in root element.
+    print(dashboard.left_nav.gns.menu.contains(link="Settings"))
     print(dashboard.left_nav.gns.menu.contains(id="something"))
 
 @test
@@ -69,17 +93,41 @@ def check_wait_until_absent_with_root_1(request, dashboard_re):
     # Should be validated in root element.
     dashboard_re.left_nav.gns.wait_until_absent("non_existing")
 
+    try:
+        # It is present
+        dashboard_re.left_nav.gns.wait_until_absent("settings")
+    except GuiElementForLabelPresentError as e:
+        print("Exception as Expected")
+        print(str(e))
+    except Exception as e:
+        raise Exception("Unexpected exception raise: ", str(e))
+    else:
+        raise Exception("Exception not raised.")
+
 @test
 def check_wait_until_absent_with_root_2(request, dashboard_re):
     # Should be validated in root element.
     dashboard_re.left_nav.wait_until_absent(id="something")
 
+    try:
+        # It is present
+        dashboard_re.left_nav.wait_until_absent(link="Settings")
+    except GuiElementPresentError as e:
+        print("Exception as Expected")
+        print(str(e))
+    except Exception as e:
+        raise Exception("Unexpected exception raise: ", str(e))
+    else:
+        raise Exception("Exception not raised.")
+
 @test
 def check_contains_with_root_1(request, dashboard_re):
     # Should be validated in root element.
+    print(dashboard_re.left_nav.gns.contains("settings"))
     print(dashboard_re.left_nav.gns.contains("non_existing"))
 
 @test
 def check_contains_with_root_2(request, dashboard_re):
     # Should be validated in root element.
+    print(dashboard_re.left_nav.contains(tag="div"))
     print(dashboard_re.left_nav.contains(id="something"))

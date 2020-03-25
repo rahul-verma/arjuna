@@ -4,7 +4,7 @@ Following is the list of critical additions and updates for a given released ver
 ------
 - FIX: Import bug in emd.py
 - wait_until_absent call supported
-    - Raises GuiElementPresentError exception on failure.
+    - Raises _GuiElementPresentError exception on failure.
     - Can be called with `Gui` as well as `GuiElement` as `.wait_until_absent(**locator_kwargs)`
     - Can be called with `Gui` as well as `GuiElement` as `.wait_until_absent(**labels)`
 - contains call supported
@@ -388,7 +388,7 @@ Primary Goal: Document Usage of Key Features. Make code changes to support doc f
 - Max wait time has been made configurable for some contexts at call level.
 - Window logic works. Improved window waits. All wait is constrained by Gui max wait.
 - Frame logic works. Improved window waits. All wait is constrained by Gui max wait.
-- Conditions raise TimeoutError which is a WaitableError.
+- Conditions raise ArjunaTimeoutError which is a WaitableError.
 - Exception message contains more string representation of Locator information. 
 - Basic unittest integration to run all tests in the tests directory of a project.
 - Element names in GNS files are validated as Arjuna names (Valid Python names, 3-50 length)

@@ -36,15 +36,38 @@ def dashboard(request):
 def check_wait_until_absent_gns_1(request, dashboard):
     dashboard.left_nav.gns.wait_until_absent("non_existing")
 
+    try:
+        # It is present
+        dashboard.left_nav.gns.wait_until_absent("settings")
+    except GuiElementForLabelPresentError as e:
+        print("Exception as Expected")
+        print(str(e))
+    except Exception as e:
+        raise Exception("Unexpected exception raise: ", str(e))
+    else:
+        raise Exception("Exception not raised.")
+
 @test
 def check_wait_until_absent_gns_2(request, dashboard):
     dashboard.left_nav.wait_until_absent(id="non_existing")
 
+    try:
+        # It is present
+        dashboard.left_nav.wait_until_absent(link="Settings")
+    except GuiElementPresentError as e:
+        print("Exception as Expected")
+        print(str(e))
+    except Exception as e:
+        raise Exception("Unexpected exception raise: ", str(e))
+    else:
+        raise Exception("Exception not raised.")
+
 @test
 def check_contains_gns_1(request, dashboard):
-    print(dashboard.left_nav.gns.contains)
+    print(dashboard.left_nav.gns.contains("settings"))
     print(dashboard.left_nav.gns.contains("non_existing"))
 
 @test
 def check_contains_gns_2(request, dashboard):
+    print(dashboard.left_nav.contains(link="Settings"))
     print(dashboard.left_nav.contains(id="non_existing"))

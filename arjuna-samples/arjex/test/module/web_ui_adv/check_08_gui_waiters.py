@@ -23,6 +23,19 @@ from arjuna import *
 def check_wait_until_absent_locator(request, logged_in_wordpress):
     logged_in_wordpress.wait_until_absent(id="something")
 
+    try:
+        # It is present
+        logged_in_wordpress.wait_until_absent(id="adminmenu")
+    except GuiElementPresentError as e:
+        print("Exception as Expected")
+        print(str(e))
+    except Exception as e:
+        raise Exception("Unexpected exception raise: ", str(e))
+    else:
+        raise Exception("Exception not raised.")
+
 @test
 def check_contains_locator(request, logged_in_wordpress):
+    print(logged_in_wordpress.contains(id="adminmenu"))
     print(logged_in_wordpress.contains(id="something"))
+

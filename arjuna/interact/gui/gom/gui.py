@@ -33,7 +33,7 @@ from arjuna.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
-from arjuna.core.exceptions import WaitableError, GuiNotLoadedError, GuiNamespaceLoadingError, GuiElementPresentError
+from arjuna.core.exceptions import WaitableError, GuiNotLoadedError, GuiNamespaceLoadingError, _GuiElementPresentError, ArjunaTimeoutError, GuiElementForLabelPresentError
 from arjuna.interact.gui.gom.gns import GNS
 
 class GuiConditions:
@@ -275,12 +275,15 @@ class AppContent(Gui):
         return self.automator._radio_group(self, lmd, iconfig=iconfig)
 
     def _wait_until_absent(self, emd):
-        return self.automator.wait_until_element_absent(emd)
+        try:
+            self.automator.wait_until_element_absent(emd)
+        except ArjunaTimeoutError:
+            raise GuiElementPresentError(self, emd)         
 
     def wait_until_absent(self, *, fargs=None, **kwargs):
         from arjuna.interact.gui.helpers import Locator
         emd = self.convert_locator_to_emd(Locator(fmt_args=fargs, **kwargs))
-        return self.automator.wait_until_element_absent(emd)
+        self._wait_until_absent(emd)
 
     def contains(self, *, fargs=None, **kwargs):
         try:

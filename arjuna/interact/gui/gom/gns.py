@@ -1,6 +1,6 @@
 
 from .formatter import GNSFormatter
-from arjuna.core.exceptions import GuiElementPresentError
+from arjuna.core.exceptions import ArjunaTimeoutError, GuiElementPresentError, GuiElementForLabelPresentError
 
 class GNS:
 
@@ -39,12 +39,15 @@ class GNS:
         waiter = getattr(self.__container, "_" + "wait_until_absent")
         for label in labels:
             emd = self.__get_emd_for_label(label)
-            waiter(emd)
+            try:
+                waiter(emd)
+            except GuiElementPresentError:
+                raise GuiElementForLabelPresentError(self.__gui, label)        
 
     def contains(self, *labels):
         try:
             self.wait_until_absent(*labels)
-        except GuiElementPresentError:
+        except GuiElementForLabelPresentError:
             return True
         else:
             return False

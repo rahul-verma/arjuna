@@ -18,7 +18,7 @@ limitations under the License.
 '''
 
 import abc
-from arjuna.core.exceptions import WaitableError, GuiElementNotFoundError, GuiElementPresentError
+from arjuna.core.exceptions import WaitableError, GuiElementNotFoundError, _GuiElementPresentError
 
 class ElementFinder:
     def __init__(self, container): #, obj_name=""):
@@ -49,7 +49,7 @@ class ElementFinder:
             # This is expected
             pass
         else:
-            raise GuiElementPresentError(*lmd.locators)
+            raise _GuiElementPresentError(*lmd.locators)
 
     def find(self, dispatcher_call, lmd, context="ELEMENT"):
         from arjuna import Arjuna

@@ -25,8 +25,20 @@ def check_wait_until_absent_nested(request, logged_in_wordpress):
     # Should be validated in root element.
     logged_in_wordpress.element(id="adminmenu").wait_until_absent(id="something")
 
+    try:
+        # It is present
+        logged_in_wordpress.element(id="adminmenu").wait_until_absent(tag="div")
+    except GuiElementPresentError as e:
+        print("Exception as Expected")
+        print(str(e))
+    except Exception as e:
+        raise Exception("Unexpected exception raise: ", str(e))
+    else:
+        raise Exception("Exception not raised.")
+
 
 @test
 def check_contains_nested(request, logged_in_wordpress):
     # Should be validated in root element.
+    print(logged_in_wordpress.element(id="adminmenu").contains(tag="div"))
     print(logged_in_wordpress.element(id="adminmenu").contains(id="something"))
