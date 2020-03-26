@@ -1,4 +1,133 @@
-# Arjuna Reference
+# Arjuna Features Documentation
+
+- [Arjuna Test Project](#arjuna-test-project)
+- [Arjuna Command Line Interface](#arjuna-command-line-interface)
+- [Defining a Test Function](#defining-a-test-function)
+  * [The `@test` Decorator](#the---test--decorator)
+  * [Running a Specific Test Function](#running-a-specific-test-function)
+- [Defining Test Fixtures](#defining-test-fixtures)
+- [Test Configuration](#test-configuration)
+  * [Understanding Configuration System of Arjuna](#understanding-configuration-system-of-arjuna)
+  * [project.conf - Setting Project Level Configuration Options](#projectconf---setting-project-level-configuration-options)
+  * [Configuration Builder - Creating Custom Configurations](#configuration-builder---creating-custom-configurations)
+  * [Defining and Handling User Options](#defining-and-handling-user-options)
+    + [User Options in Project Conf](#user-options-in-project-conf)
+    + [Adding User Options Programmatically](#adding-user-options-programmatically)
+  * [Configuration Builder - Adding options from a `.conf` File](#configuration-builder---adding-options-from-a--conf--file)
+  * [The Magic `C` Function](#the-magic--c--function)
+    + [Purpose](#purpose)
+    + [Configuration Query Format](#configuration-query-format)
+  * [Environment Configurations](#environment-configurations)
+    + [Purpose](#purpose-1)
+    + [Defining and Using Environment Configurations](#defining-and-using-environment-configurations)
+    + [Making an environment configuration as the default](#making-an-environment-configuration-as-the-default)
+  * [Run Configuration: Overriding Configuration with a Configuration File for a Test Run](#run-configuration--overriding-configuration-with-a-configuration-file-for-a-test-run)
+  * [Combining Environment and Run Configuration](#combining-environment-and-run-configuration)
+- [Data Driven Testing](#data-driven-testing)
+  * [Single data record](#single-data-record)
+  * [Multiple Data Records](#multiple-data-records)
+  * [Driving with Static Data Function](#driving-with-static-data-function)
+  * [Driving with Static Data Generator](#driving-with-static-data-generator)
+  * [Driving with Dynamic Data Function/Generator](#driving-with-dynamic-data-function-generator)
+  * [Driving with Static Data Classes](#driving-with-static-data-classes)
+  * [Driving with Dynamic Data Classes](#driving-with-dynamic-data-classes)
+  * [Driving with Data Files](#driving-with-data-files)
+    + [Driving with Excel File](#driving-with-excel-file)
+    + [Driving with Delimiter-Separated File](#driving-with-delimiter-separated-file)
+    + [Driving with INI File](#driving-with-ini-file)
+  * [Data Files with Exclude Filter for Records](#data-files-with-exclude-filter-for-records)
+  * [Driving with Multiple Data Sources](#driving-with-multiple-data-sources)
+- [Contextual Data References](#contextual-data-references)
+  * [Purpose](#purpose-2)
+  * [Excel Data References](#excel-data-references)
+  * [The Magic `R` Function](#the-magic--r--function)
+- [Localizing Strings](#localizing-strings)
+  * [Purpose](#purpose-3)
+  * [Locale Enum](#locale-enum)
+  * [Excel based Localization](#excel-based-localization)
+  * [The `L` function for Localization](#the--l--function-for-localization)
+  * [JSON Based Localization](#json-based-localization)
+  * [Using the `L` Function with JSON Localizer](#using-the--l--function-with-json-localizer)
+  * [Strict vs Non-strict mode for Localization](#strict-vs-non-strict-mode-for-localization)
+- [Web Gui Automation](#web-gui-automation)
+  * [The `WebApp` class](#the--webapp--class)
+    + [Launching a `WebApp`](#launching-a--webapp-)
+      - [Points to Note](#points-to-note)
+    + [Associating a `WebApp` with a Base URL](#associating-a--webapp--with-a-base-url)
+  * [Element Identification](#element-identification)
+  * [The `element` Template](#the--element--template)
+  * [Gui Element Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text](#gui-element-locators---using-id--name--tag--class--link-text--partial-link-text)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page)
+      - [Points to Note](#points-to-note-1)
+    + [Identification using ID, Name, Class Name, Tag Name, Link Text, Partial Link Text](#identification-using-id--name--class-name--tag-name--link-text--partial-link-text)
+      - [Points to Note](#points-to-note-2)
+  * [Gui Element Locators - Using XPath](#gui-element-locators---using-xpath)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-1)
+  * [Usage](#usage)
+  * [Gui Element Locators - Using CSS Selectors](#gui-element-locators---using-css-selectors)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-2)
+  * [Usage](#usage-1)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-3)
+  * [Usage](#usage-2)
+  * [Interaction with `element`](#interaction-with--element-)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-4)
+    + [Usage](#usage-3)
+      - [Points to Note](#points-to-note-3)
+    + [Concise Basic Interactions with a Gui Element - You Can Write Concise Code If You Wish](#concise-basic-interactions-with-a-gui-element---you-can-write-concise-code-if-you-wish)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-5)
+  * [Usage](#usage-4)
+  * [Gui Namespace (GNS) - Externalizing Locators](#gui-namespace--gns----externalizing-locators)
+    + [The GNS File](#the-gns-file)
+      - [Points to note](#points-to-note)
+    + [Change in project.conf](#change-in-projectconf)
+  * [Gui Namespace - Externalizing ID, Name, Tag, Class, Link Text and Partial Link Text](#gui-namespace---externalizing-id--name--tag--class--link-text-and-partial-link-text)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-6)
+      - [Points to Note](#points-to-note-4)
+    + [The GNS File](#the-gns-file-1)
+    + [Usage in code](#usage-in-code)
+      - [Points to Note](#points-to-note-5)
+  * [Gui Namespace - Externalizing XPath](#gui-namespace---externalizing-xpath)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-7)
+      - [Points to Note](#points-to-note-6)
+  * [The GNS File](#the-gns-file-2)
+  * [Usage](#usage-5)
+  * [Gui Namespace - Externalizing CSS Selectors](#gui-namespace---externalizing-css-selectors)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-8)
+      - [Points to Note](#points-to-note-7)
+  * [The GNS File](#the-gns-file-3)
+  * [Usage](#usage-6)
+  * [Gui Namespace - Externalizing Arjuna's Locator Extensions](#gui-namespace---externalizing-arjuna-s-locator-extensions)
+    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-9)
+      - [Points to Note](#points-to-note-8)
+  * [The GNS File](#the-gns-file-4)
+  * [Usage](#usage-7)
+  * [Element Templates](#element-templates)
+  * [Matching Multiple Elements as GuiMultiElement](#matching-multiple-elements-as-guimultielement)
+    + [Test Fixture for Examples in This Page](#test-fixture-for-examples-in-this-page)
+    + [Important point for GNS](#important-point-for-gns)
+      - [Points to Note](#points-to-note-9)
+    + [Test Code](#test-code)
+      - [Points to Note](#points-to-note-10)
+  * [Arjuna's DropDown Abstraction - Handling Default HTML Select](#arjuna-s-dropdown-abstraction---handling-default-html-select)
+    + [Test Fixture for Examples in This Page](#test-fixture-for-examples-in-this-page-1)
+    + [Important point for GNS](#important-point-for-gns-1)
+      - [Points to Note](#points-to-note-11)
+    + [Usage](#usage-8)
+    + [Points to Note](#points-to-note-12)
+  * [Arjuna's RadioGroup Abstraction - Handling Default HTML Radio Group](#arjuna-s-radiogroup-abstraction---handling-default-html-radio-group)
+    + [Test Fixture for Examples in This Page](#test-fixture-for-examples-in-this-page-2)
+    + [Important point for GNS](#important-point-for-gns-2)
+      - [Points to Note](#points-to-note-13)
+    + [Usage](#usage-9)
+    + [Points to Note](#points-to-note-14)
+  * [Gui Abstraction using `WebApp`, `Page` and `Section` classes](#gui-abstraction-using--webapp----page--and--section--classes)
+  * [Arjuna's Gui Loading Model](#arjuna-s-gui-loading-model)
+  * [Helper Classes, Functions and Enums](#helper-classes--functions-and-enums)
+  * [Arjuna Exceptions](#arjuna-exceptions)
+
+<small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
+
+
 
 ## Arjuna Test Project
 
@@ -39,9 +168,13 @@ Please also note that some of these directories are mandatory as a part of Arjun
 
 ## Arjuna Command Line Interface
 
-## Defining a Test
+Pending
+
+## Defining a Test Function
 
 Writing a basic test in Arjuna is very easy. Following is a simple test skeleton:
+
+### The `@test` Decorator
 
 ```python
 
@@ -52,13 +185,12 @@ def check_test_name(request):
     pass
 ```
 
-### Points to Note
 1. Create a test module in `<Project Root Directory>/test/module`. The module name should start with the prefix `check_`
 2. In the python test module file, import all names from Arjuna: `from arjuna import *`. Ofcourse, as you become more aware of Arjuna's TPI (tester programming interface), you can do selective imports using Python.
 3. Create a test. In Arjuna, a test is a function marked with `@test` decorator. It must start with the prefix `check_`. It should take **one mandatory argument**: `request`.
 4. The contents of the test function depend on the test that you want to write.
 
-### Running the test
+### Running a Specific Test Function
 You can run this test by running `arjuna_launcher.py` Python script in the `script` directory of the project:
 
 `python arjuna_launcher.py run-selected -it check_test_name`
@@ -137,6 +269,7 @@ You can load options from any file using `from_file` method of `ConfigBuilder` a
 
 ### The Magic `C` Function
 
+#### Purpose 
 Arjuna provides a special function `C` for retrieving values from the reference configuration as it is a very common operation to do on test code. You can pass an `ArjunaOption` enum constant or an option name. The name string has all the flexibility seen in previous example.
 
 #### Configuration Query Format
@@ -149,12 +282,14 @@ Let's say we have custom configuration with name `nconf`.
 - `browser.name` refers to the property in reference configuration.
 - You can prefix a configuration name with a configuration name. For example `reference.browser.name` and `nconf.browser.name` will retrieve `browser.name` from `reference` and `nconf` configurations respectively.
 
-### Environments Configuration
+### Environment Configurations
 
+#### Purpose
 In today's Agile environments, typically testers run automated tests on multiple environments. These environments could have their own respective properties (e.g. Application URL, user name, password and so on.)
 
 In Arjuna, you can define configurations for environments and use them very easily in your test automation framework.
 
+#### Defining and Using Environment Configurations
 You can define one or more `environment_name.conf` files exactly like a `project.conf` file. Place these files in `<Project Root>/config/env` directory. Arjuna automatically loads these files.
 
 You can retrieve an environment config by its name using `Arjuna.get_config` or `request.get_config` call. Now you can inquire the values just like you deal with any configuration in Arjuna. You can also retrieve their options using the magic `C` function, for example `C("tevn.browser.name")`
@@ -165,9 +300,15 @@ You can do a session wide update that the reference configuration should utilize
 
 You can do this by providing `--run-env <env_name>` CLI switch.
 
-#### Combining `--run-env` and `--run-conf`
+### Run Configuration: Overriding Configuration with a Configuration File for a Test Run 
 
-If you pass the switches together:
+With today's integration needs, at times you might need to create a configuration outside of Arjuna test project's structure and instruct Arjuna to do a session wide update that the reference configuration should utilize configuration values from a configuration file at a given path.
+
+You can do this by providing `--run-conf <file name or path>` CLI switch.
+
+### Combining Environment and Run Configuration
+
+If you pass the `--run-env` and `run-conf` switches together:
 1. Arjuna first does a reference config update from run-env named conf file.
 2. Then it updates the configuration with the one at run-conf path.
 
@@ -192,7 +333,6 @@ def check_pos_data(request, data):
     pass
 ```
 
-##### Points to Note
 1. We provide `drive_with` argument to the `@test` decorator.
 2. To specify a single data record, we call the `record` factory function.
 3. `record` can take any number of positional or keyword arguments.
@@ -201,7 +341,7 @@ def check_pos_data(request, data):
 6. You can retrieve named values using a dictionary syntax (e.g. `data['a']`) or dot syntax (e.g. `data.a`).
 7. Names are case-insensitive. `data['a']`, `data['A']`, `data.a` and `data.A` mean the same thing.
 
-#### Multiple Data Records
+### Multiple Data Records
 
 You use the `records` factory function to provide multiple records. It can contain any number of `record` entries. The test will be repeated as many times as the number of records (2 in this example.)
 
@@ -411,6 +551,7 @@ The data sources are picked up sequentially with this construct.
 
 ## Contextual Data References
 
+### Purpose
 There are various situations in which you need contextual data. Such a need is catered by the concept of Contextual Data References (or simply Data References) in Arjuna.
 
 Consider the following example:
@@ -418,7 +559,7 @@ Consider the following example:
 2. The user account information includes a `User` and `Pwd` to repesented user name and password representing a given account type.
 3. In different situations, you want to use the user accounts and retrieve them by the context name from a single source of information.
 
-#### Excel Data References
+### Excel Data References
 
 Arjuna supports Excel based data references out of the box. These reference files are automatically loaded when `Arjuna.init()` is called by Arjuna launcher.
 
@@ -458,9 +599,14 @@ R("user", bucket=<bucket_name>, context=<context_name>))
 
 ## Localizing Strings
 
+### Purpose
 As a part of automating tests, a test author might need to deal with localization of strings that are used for various purposes.
 
 Arjuna supports Excel based localization data out of the box. These files are automatically loaded when `Arjuna.init()` is called by Arjuna launcher.
+
+### Locale Enum
+
+Arjuna associates locale for localization with the Locale enum constant which in turn uses the names from Python.
 
 The default locate is `Locale.EN`. It can be changed in a project configuration as follows:
 
@@ -472,7 +618,7 @@ arjunaOptions {
 }
 ```
 
-#### Excel based Localization
+### Excel based Localization
 
 **Sample Localization File**
 
@@ -492,7 +638,7 @@ For demonstration purpose, 3 English words are provided with corresponding strin
 
 The second file `sample2.xls` has the same data except the localized string for `Correct` in Hindi which is different from `sample1.xls`.
 
-##### The `L` function for Localization
+### The `L` function for Localization
 
 You can access data references in your test code with Arjuna's magic `L` function (similar to `C` and `R` functions seen in other features).
 
@@ -508,7 +654,6 @@ L("qual", locale=<local enum constant or string>, bucket=<bucket_name>, strict=<
 - You can explcitily refer to a bucket by providing the `bucket` argument. Each Excel localization file represents a bucket and its name without the extension is the bucket name.
 - You can also provide the bucket name by prefixing it before the reference key, for example `sample1.corr`.
 - `strict` argument is to switch strict node on or off.
-
 
 ### JSON Based Localization
 
@@ -530,7 +675,6 @@ json
 └── en-GB.json
 ```
 
-##### Points to Note
 1. Each directory represents a bucket with the name as that of directory. The concept is similar to an Excel file representing a bucket as discussed above.
 2. The root directory represents the `root` bucket.
 3. For a given bucket, the localization data for a `Locale` is kept in a file named `<locale>.json`.
@@ -561,12 +705,11 @@ Following is the content of one such file in root directory for German localizat
 }
 ```
 
-##### Points to Note
 1. Each JSON path of keys repesents a string to be localized. 
 2. The key names should be kept same across language files.
 3. `Key1.Key2...KeyN` is the flattened syntax to refer a localized string e.g. `address.coordinates`
 
-#### Using the `L` Function
+### Using the `L` Function with JSON Localizer
 
 Consider the following localization calls:
 
@@ -582,7 +725,6 @@ L("address.coordinates", locale=Locale.EN_GB, bucket="root")
 L("root.address.coordinates", locale=Locale.EN_GB)
 ```
 
-##### Points to Note
 1. Use the flattened key syntax as discussed earlier. 
 2. The key names should be kept same across language files.
 3. `Key1.Key2...KeyN` is the flattened syntax to refer a localized string e.g. `address.coordinates`
@@ -597,7 +739,6 @@ L("non_existing")
 L("non_existing", strict=True, locale=Locale.DE_DE)
 ```
 
-#### Points to Note
 1. As by default the strict mode if off, `L("non_existing")` returns `non_existing`.
 2. You can enforce strict behavior by providing the `strict=True` argument to the `L` function. The second print statement in above code will raise an exception.
 3. You can switch on strict mode at the project level by including `l10n.strict = True` in the `project.conf` file.
