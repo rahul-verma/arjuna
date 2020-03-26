@@ -54,7 +54,7 @@
     + [Launching a Web Application](#launching-a-web-application)
     + [Associating a WebApp with a Base URL](#associating-a-webapp-with-a-base-url)
     + [Setting WebApp Base URL in Configuration](#setting-webapp-base-url-in-configuration)
-  * [Element Identification](#element-identification)
+  * [Element Identification and Interaction](#element-identification-and-interaction)
     + [GuiElement and the element Template](#guielement-and-the-element-template)
     + [Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text, XPath and CSS Selectors](#locators---using-id--name--tag--class--link-text--partial-link-text--xpath-and-css-selectors)
     + [Locators - Arjuna's Locator Extensions](#locators---arjunas-locator-extensions)
@@ -754,7 +754,7 @@ google.launch()
 google.quit()
 ```
 
-### Element Identification
+### Element Identification and Interaction
 
 #### GuiElement and the element Template
 
