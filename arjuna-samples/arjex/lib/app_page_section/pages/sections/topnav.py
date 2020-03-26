@@ -18,9 +18,9 @@ limitations under the License.
 '''
 
 from arjuna import *
-from .base import WPBaseSection
+from .base import WPBaseGuiSection
 
-class TopNav(WPBaseSection):
+class TopNav(WPBaseGuiSection):
 
     def logout(self):
         url = C("wp.logout.url")

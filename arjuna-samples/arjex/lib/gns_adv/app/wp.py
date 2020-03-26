@@ -19,7 +19,7 @@ limitations under the License.
 
 from arjuna import *
 
-class WordPress(WebApp):
+class WordPress(GuiApp):
 
     def __init__(self):
         url = C("wp.login.url")

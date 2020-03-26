@@ -18,9 +18,9 @@ limitations under the License.
 '''
 
 from arjuna import *
-from .base import WPBaseSection
+from .base import WPBaseGuiSection
 
-class LeftNav(WPBaseSection):
+class LeftNav(WPBaseGuiSection):
 
     def __init__(self, page):
         super().__init__(page)

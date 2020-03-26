@@ -17,9 +17,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from .base import WPFullPage
+from .base import WPFullGuiPage
 
-class Settings(WPFullPage):
+class Settings(WPFullGuiPage):
 
     def tweak_role_value(self, value):
         role_select = self.gns.role

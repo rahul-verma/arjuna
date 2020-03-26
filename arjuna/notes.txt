@@ -221,7 +221,7 @@ Support for Multi-select Dropdown list
 Default type checking for enter/set text, check/unckeck, toggle operations etc.
 Optimization of option level or radio button level state and attribute checking in DropDown and RadioButton abstractions
 
-Phase 4 - March 31, 2019 (In Parallel to Next Feature Section)
+Phase 4 - March 31, 2019 (In Parallel to Next Feature GuiSection)
 Documentation
     Configuration Options
     Bindings documentation

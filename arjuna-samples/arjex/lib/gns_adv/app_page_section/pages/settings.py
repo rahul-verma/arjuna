@@ -18,9 +18,9 @@ limitations under the License.
 '''
 
 from enum import Enum, auto
-from .base import WPFullPage
+from .base import WPFullGuiPage
 
-class Settings(WPFullPage):
+class Settings(WPFullGuiPage):
 
     def tweak_role_value(self, value):
         role_select = self.gns.role

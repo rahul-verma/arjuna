@@ -23,7 +23,7 @@ from arjuna import *
 def wordpress(request):
     # Setup
     wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="XPath", gns_dir="gns_basics")
+    wordpress = GuiApp(base_url=wp_url, label="XPath", gns_dir="gns_basics")
     wordpress.launch()
     yield wordpress
 

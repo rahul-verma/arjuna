@@ -2,13 +2,14 @@ Following is the list of critical additions and updates for a given released ver
 
 0.9.14
 ------
-
+- Documents updated for a more manageable format instead of tight coupling with example code.
+- `WebApp`, `Page`, `Section` class names are changed to `GuiApp`, `GuiPage` and `GuiSection` for future compatibility.
+ 
 
 (Possibilities) - Could be targeted for this or next build
 - wait argument in locating - on priority for wait apis (wait_until_absent and contains and then others)
 - wait as meta data in GNS for elements
 - log trace option for finer logging in Arjuna (this makes debug level available to test authors without cluttering the output.)
-- Doc update -> Should be done in a more reference style, not mapped to examples (this is too much of effort and causes doc delays.)
 
 0.9.13
 ------
@@ -216,7 +217,7 @@ Minor update. All l10 references are changed to l10n.
 
 0.8.17
 ------
-- Widget class renamed to Section. Widget and Dialog are synonyms for Section.
+- Widget class renamed to GuiSection. Widget and Dialog are synonyms for GuiSection.
 - Concept of my is removed. pytest does not allow multi-scope fixtures. request fixture is used the same way in fixtures and tests now.
 - For data driven test, one needs add 'data' as an arg to the test.
 - Common fixtures can be placed in lib.fixtures.

@@ -18,7 +18,7 @@ limitations under the License.
 '''
 
 from enum import Enum, auto
-from .base import WPFullPage
+from .base import WPFullGuiPage
 
-class Dashboard(WPFullPage):
+class Dashboard(WPFullGuiPage):
     pass

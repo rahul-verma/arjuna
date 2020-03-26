@@ -19,9 +19,9 @@ limitations under the License.
 
 from enum import Enum, auto
 from arjuna import *
-from .base import WPBaseSection
+from .base import WPBaseGuiSection
 
-class LeftNav(WPBaseSection):
+class LeftNav(WPBaseGuiSection):
     
     def __init__(self, page):
         super().__init__(page, label="LeftNav", root=None)
@@ -33,7 +33,7 @@ class LeftNav(WPBaseSection):
         return Settings(self)
 
 
-class LeftNavCodedRootLabel(WPBaseSection):
+class LeftNavCodedRootLabel(WPBaseGuiSection):
     
     def __init__(self, page):
         super().__init__(page, label="LeftNav", root="menu")
@@ -45,7 +45,7 @@ class LeftNavCodedRootLabel(WPBaseSection):
         return Settings(self)
 
 
-class LeftNavCodedRootLocator(WPBaseSection):
+class LeftNavCodedRootLocator(WPBaseGuiSection):
     
     def __init__(self, page):
         super().__init__(page, label="LeftNav", root=Locator(id="adminmenu"))

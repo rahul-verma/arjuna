@@ -41,7 +41,7 @@ def check_user_options(request):
     title = config["target.title"] # or config.value("target.title") or other variants seen earlier
     url = config.value("target.url") # Ref user options are available in new config as well.
 
-    google = WebApp(base_url=url, config=config)
+    google = GuiApp(base_url=url, config=config)
     google.launch()
-    request.asserter.assert_equal(title, google.title, "Page title does not match.")
+    request.asserter.assert_equal(title, google.title, "GuiPage title does not match.")
     google.quit()

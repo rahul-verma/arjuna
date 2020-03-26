@@ -15,7 +15,7 @@ def wordpress(request):
 
     # Setup
     wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url)
+    wordpress = GuiApp(base_url=wp_url)
     wordpress.launch()
     yield wordpress
 

@@ -18,19 +18,19 @@ limitations under the License.
 '''
 
 import abc
-from arjuna import Page
+from arjuna import GuiPage
 
 from .sections.topnav import TopNav
 from .sections.leftnav import LeftNav
 
 
-class WPBasePage(Page, metaclass=abc.ABCMeta):
+class WPBaseGuiPage(GuiPage, metaclass=abc.ABCMeta):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui, gns_dir="app_page_section")
 
 
-class WPFullPage(WPBasePage, metaclass=abc.ABCMeta):
+class WPFullGuiPage(WPBaseGuiPage, metaclass=abc.ABCMeta):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)

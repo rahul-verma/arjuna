@@ -18,9 +18,9 @@ limitations under the License.
 '''
 
 import abc
-from arjuna import Section
+from arjuna import GuiSection
 
-class WPBaseSection(Section, metaclass=abc.ABCMeta):
+class WPBaseGuiSection(GuiSection, metaclass=abc.ABCMeta):
 
     def __init__(self, page):
         super().__init__(page, gns_dir="app_page_section/sections")

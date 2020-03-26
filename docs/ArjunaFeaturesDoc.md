@@ -1,5 +1,3 @@
-# Arjuna Features Documentation
-
 - [Arjuna Test Project](#arjuna-test-project)
 - [Arjuna Command Line Interface](#arjuna-command-line-interface)
 - [Defining a Test Function](#defining-a-test-function)
@@ -50,10 +48,10 @@
   * [Using the L Function with JSON Localizer](#using-the-l-function-with-json-localizer)
   * [Strict vs Non-strict mode for Localization](#strict-vs-non-strict-mode-for-localization)
 - [Web Gui Automation](#web-gui-automation)
-  * [The WebApp class](#the-webapp-class)
+  * [The GuiApp class](#the-guiapp-class)
     + [Launching a Web Application](#launching-a-web-application)
-    + [Associating a WebApp with a Base URL](#associating-a-webapp-with-a-base-url)
-    + [Setting WebApp Base URL in Configuration](#setting-webapp-base-url-in-configuration)
+    + [Associating a App with a Base URL](#associating-a-app-with-a-base-url)
+    + [Setting GuiApp Base URL in Configuration](#setting-guiapp-base-url-in-configuration)
   * [Element Identification and Interaction](#element-identification-and-interaction)
     + [GuiElement and the element Template](#guielement-and-the-element-template)
     + [Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text, XPath and CSS Selectors](#locators---using-id--name--tag--class--link-text--partial-link-text--xpath-and-css-selectors)
@@ -63,7 +61,7 @@
       - [Interaction Methods](#interaction-methods)
   * [Gui Namespace - Externalizing Locators](#gui-namespace---externalizing-locators)
     + [The GNS File](#the-gns-file)
-    + [Associating GNS File with WebApp](#associating-gns-file-with-webapp)
+    + [Associating GNS File with App](#associating-gns-file-with-app)
     + [Externalizing ID, Name, Tag, Class, Link Text, Partial Link Text, Xpath and CSS Selector](#externalizing-id--name--tag--class--link-text--partial-link-text--xpath-and-css-selector)
     + [Externalizing Arjuna's Locator Extensions](#externalizing-arjunas-locator-extensions)
   * [Element Templates](#element-templates)
@@ -79,13 +77,20 @@
       - [Defining and Using a RadioGroup In Code](#defining-and-using-a-radiogroup-in-code)
       - [Defining RadioGroup in GNS and Using it in Code](#defining-radiogroup-in-gns-and-using-it-in-code)
       - [Interacting with DropDown](#interacting-with-dropdown-1)
-  * [Gui Abstraction using WebApp, Page and Section Classes](#gui-abstraction-using-webapp--page-and-section-classes)
-  * [Arjuna's Gui Loading Model](#arjunas-gui-loading-model)
+  * [Gui Abstraction using App, GuiPage and GuiSection Classes](#gui-abstraction-using-app--guipage-and-guisection-classes)
+    + [Concept of Gui in Arjuna](#concept-of-gui-in-arjuna)
+    + [The GuiApp Class](#the-guiapp-class)
+    + [The GuiPage Class](#the-guipage-class)
+    + [The GuiSection Class](#the-guisection-class)
+    + [Gui Abstraction Models](#gui-abstraction-models)
+      - [App Model using App class](#app-model-using-app-class)
+      - [App-Page Model using GuiApp and GuiPage Classes](#app-page-model-using-guiapp-and-guipage-classes)
+      - [App-Page-Section Model using GuiApp, GuiPage and GuiSection Classes](#app-page-section-model-using-guiapp--guipage-and-guisection-classes)
+    + [Arjuna's Gui Loading Model](#arjunas-gui-loading-model)
   * [Helper Classes, Functions and Enums](#helper-classes--functions-and-enums)
   * [Arjuna Exceptions](#arjuna-exceptions)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 ## Arjuna Test Project
 
@@ -703,45 +708,45 @@ L("non_existing", strict=True, locale=Locale.DE_DE)
 
 ## Web Gui Automation
 
-### The WebApp class
+### The GuiApp class
 
-Learning Web UI test automation in Arjuna starts with the concept of `WebApp` object.
+Learning Web UI test automation in Arjuna starts with the concept of `GuiApp` object.
 
-A web application is represented using a `WebApp` object. To automate your web application, you create an instance of `WebApp` and call its methods or methods of its objects for automation purpose.
+A web application is represented using a `GuiApp` object. To automate your web application, you create an instance of `GuiApp` and call its methods or methods of its objects for automation purpose.
 
 Web automation facilities in Arjuna use Selenium WebDriver as the underlying browser automation library.
 
 #### Launching a Web Application
 
 ```python
-google = WebApp()
+google = GuiApp()
 google.launch(blank_slate=True)
 google.go_to_url("https://google.com")
 google.quit()
 ```
 
-1. You can create an object of `WebApp`. By default, `WebApp` uses Arjuna's reference `Configuration`. In turn, it uses the corresponding options to launch the underlying automator. You can change this by passing the `Configuration` object using `config` argument of the WebApp constructor.
-2. You can launch the `WebApp`. Here, we pass `blank_slate` as `True` as no base URL is associated as of now with the `WebApp` (see next section).
-3. Here the `WebApp` uses the reference `Configuration` of Arjuna where default browser is Chrome. So, Chrome is launched as the browser.
+1. You can create an object of `GuiApp`. By default, `GuiApp` uses Arjuna's reference `Configuration`. In turn, it uses the corresponding options to launch the underlying automator. You can change this by passing the `Configuration` object using `config` argument of the App constructor.
+2. You can launch the `GuiApp`. Here, we pass `blank_slate` as `True` as no base URL is associated as of now with the `GuiApp` (see next section).
+3. Here the `GuiApp` uses the reference `Configuration` of Arjuna where default browser is Chrome. So, Chrome is launched as the browser.
 4. You can use its `go_to_url` method to go to Google search page.
-5. You can quit the app using `quit` method of `WebApp`.
+5. You can quit the app using `quit` method of `GuiApp`.
 
-#### Associating a WebApp with a Base URL
+#### Associating a App with a Base URL
 
-You can associate the `WebApp` with a base URL by providing `base_url` arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
+You can associate the `GuiApp` with a base URL by providing `base_url` arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
 
 ```python
-google = WebApp(base_url="https://google.com")
+google = GuiApp(base_url="https://google.com")
 google.launch()
 google.quit()
 ```
 
-#### Setting WebApp Base URL in Configuration
-During initilization, `WebApp` automatically looks for the `ArjunaOption.APP_URL` option in the `Configuration` object associated with it. It means you can provide this option in any of the following ways:
+#### Setting GuiApp Base URL in Configuration
+During initilization, `GuiApp` automatically looks for the `ArjunaOption.APP_URL` option in the `Configuration` object associated with it. It means you can provide this option in any of the following ways:
 - Modify Reference `Configuration`
   - Add this option in `project.conf` file.
   - Provide it as a CLI option.
- - Use `ConfigBuilder` to update or create a new `Configuration`. Pass it as argument while instantiating `WebApp`, for example:
+ - Use `ConfigBuilder` to update or create a new `Configuration`. Pass it as argument while instantiating `GuiApp`, for example:
  
  
 ```python
@@ -749,7 +754,7 @@ cb = Arjuna.get_config().builder
 cb.option(ArjunaOption.APP_URL, "https://google.com")
 config = cb.register()
 
-google = WebApp(config=config)
+google = GuiApp(config=config)
 google.launch()
 google.quit()
 ```
@@ -768,7 +773,7 @@ The template name for `GuiElement` is `element`. This information is not importa
 
 Arjuna supports the locators which are supported by Selenium's By object. Apart from these, there are various abstracted locators which Arjuna provides for easier coding.
 
-For locating `GuiElement`, you can use the `.element` factory method (assume `app` is the `WebApp` object):
+For locating `GuiElement`, you can use the `.element` factory method (assume `app` is the `GuiApp` object):
 
 ```python
     app.element(<locator_type>=<locator_value>)
@@ -849,7 +854,7 @@ element.click()
 
 ### Gui Namespace - Externalizing Locators
 
-After launching a `WebApp`, apart from basic browser operations, most of times an automated test finds and interacts with Gui elements. If locators can be externalized outside of the code, it has a significant impact on the maintainbility of the Gui test automation implementation.
+After launching a `GuiApp`, apart from basic browser operations, most of times an automated test finds and interacts with Gui elements. If locators can be externalized outside of the code, it has a significant impact on the maintainbility of the Gui test automation implementation.
 
 Externalizing of identifiers is built into Arjuna. The object which contains identification information and related meta-data of a Gui is referred to as `GuiNamespace (GNS)` in Arjuna.
 
@@ -879,12 +884,12 @@ labels:
 4. In its basic usage format, the section has a key value pair for a given locator type. For example `id: user_login`.
 5. Labels are treated as **case-insensitive** by Arjuna.
 
-#### Associating GNS File with WebApp
+#### Associating GNS File with App
 
-Arjuna picks up GNS files relative to the defaut GNS directory: `<Project Root>/guiauto/namespace`. You can give the `label` argument while constructing a `WebApp` to associate it with the GNS file as follows:
+Arjuna picks up GNS files relative to the defaut GNS directory: `<Project Root>/guiauto/namespace`. You can give the `label` argument while constructing a `GuiApp` to associate it with the GNS file as follows:
 
 ```python
-app = WebApp(label="SomeName")
+app = GuiApp(label="SomeName")
 ```
 
 There are many advanced ways for this association, which are documented later in this doc.
@@ -923,7 +928,7 @@ labels:
     selector: ".button.button-large"
 ```
 
-You can create elements using these identifiers by using `<app object>.gns.<GNS label>` syntax in your code as follows (assume `app` to be the `WebApp` object). For example:
+You can create elements using these identifiers by using `<app object>.gns.<GNS label>` syntax in your code as follows (assume `app` to be the `GuiApp` object). For example:
 
 ```python
 element = app.gns.user_id
@@ -994,7 +999,7 @@ labels:
     js: "return document.getElementById('wp-submit')"
 ```
 
-You can use them in code just like externalized basic locators. Following is sample code (assume `app` to be a `WebApp` object). For example:
+You can use them in code just like externalized basic locators. Following is sample code (assume `app` to be a `GuiApp` object). For example:
 
 ```python
 element = wordpress.gns.lost_pass_text
@@ -1008,7 +1013,7 @@ Arjuna provides a special abstraction for representing mutliple `GuiElement`s to
 
 ##### Defining and Using a GuiMultiElement In Code
 
-You can create a `GuiElement` using the `multi_element` factory call of a `WebApp` (assume `app` to be `WebApp` object):
+You can create a `GuiElement` using the `multi_element` factory call of a `GuiApp` (assume `app` to be `GuiApp` object):
 
 ```python
 app.multi_element(<locator_type>=<locator_value>)
@@ -1045,7 +1050,7 @@ DropDown object in Arjuna represents the Select-style control in the UI. Here, w
 
 ##### Defining and Using a DropDown In Code
 
-You can create a `DropDown` using the `dropdown` factory call of a `WebApp` (assume `app` to be `WebApp` object):
+You can create a `DropDown` using the `dropdown` factory call of a `GuiApp` (assume `app` to be `GuiApp` object):
 
 ```python
 app.dropdown(<locator_type>=<locator_value>)
@@ -1085,7 +1090,7 @@ RadioGroup object in Arjuna represents the Radio Buttons in the UI that belong t
 
 ##### Defining and Using a RadioGroup In Code
 
-You can create a `RadioGroup` using the `radio_group` factory call of a `WebApp` (assume `app` to be `WebApp` object):
+You can create a `RadioGroup` using the `radio_group` factory call of a `GuiApp` (assume `app` to be `GuiApp` object):
 
 ```python
 app.radio_group(<locator_type>=<locator_value>)
@@ -1118,11 +1123,113 @@ It provides various properties and methods for a higher level interaction with a
 - RadioGroup also has `value` enquirable property.
 - You can use two ways of selecting a radio button - `select_value` to select by value attribute of an option, `select_index` to select a radio button present at provided index.
 
-### Gui Abstraction using WebApp, Page and Section Classes
+### Gui Abstraction using App, GuiPage and GuiSection Classes
 
+#### Concept of Gui in Arjuna
 
-### Arjuna's Gui Loading Model
+Graphical User Interfaces are represented using the `Gui` class in Arjuna. It provides all methods to interact with the Gui as well for creation of objects for its visual elements.
 
+Arjuna has three types of `Gui`'s, namely `GuiApp`, `GuiPage` and `GuiSection` and any children thereof. 
+
+Note that `GuiWidget` and `GuiDialog` are aliases for `GuiSection`currently, but this behavior could change in future.
+
+#### The GuiApp Class
+
+In addition to directly creating an object of App, you can also inherit from it and extend it.
+
+For example:
+
+```python
+class WordPress(GuiApp):
+
+    def __init__(self):
+        url = C("wp.login.url")
+        super().__init__(base_url=url)
+```
+
+Within the class' methods, you can now access its methods directly:
+
+```python
+self.gns.abc # Element for abc label in GNS
+self.launch()
+```
+
+#### The GuiPage Class
+
+You can implement a GuiPage by inheriting from `GuiPage` class:
+
+```python
+class Home(GuiPage):
+
+    def __init__(self, source_gui):
+        url = C("wp.login.url")
+        super().__init__(source_gui=source_gui)
+```
+
+A `GuiPage` must be provided with a `source_gui` i.e. the `Gui` from where the page is being created.
+
+#### The GuiSection Class
+
+You can implement a GuiSection by inheriting from `GuiSection` class:
+
+```python
+class LeftNav(GuiSection):
+
+    def __init__(self, page):
+        url = C("wp.login.url")
+        super().__init__(page=page)
+```
+
+A `GuiSection` must be provided with a `page` i.e. the `GuiPage` for which the section is being created.
+
+#### Gui Abstraction Models
+
+##### App Model using App class
+
+You can implement a class as a `GuiApp` by using inheritance. This is the suggested way of implenting a web application abstraction in Arjuna. 
+
+This is the simplest way to get started with an equivalent of GuiPage Object Model (POM), GuiPage Factories, Loadable Component, all clubbed into one concept. We represent the complete appplication as a single class which is attached to a a single GNS file for externalization. It should work well for small apps or where you are automating only a small sub-set of the application. 
+
+##### App-Page Model using GuiApp and GuiPage Classes
+
+For professional test automation, where you automate multiple use cases across different pages/screens, a simple App Model will not suffice. In the simple App Model, the GNS file will be cluttered with labels from multiple pages and the `GuiApp` class will have so many methods that it will impact code mainteance and understandability.
+
+One step forward from Arjuna's App Model is the App-Page Model:
+1. You  implement the web application as a child of `GuiApp`class.
+2. We implemented each web page of interest as a child of `GuiPage` class.
+3. The `GuiPage` classes have methods to move from one page to another.
+
+##### App-Page-Section Model using GuiApp, GuiPage and GuiSection Classes
+
+Consider the following:
+1. Typcally, the web applications follow a set of a templates for different pages. Such templates have some repetitive sections across multiple pages. Examples: Left navigation bars, Top Menus, Sidebars etc.
+2. Some application pages might be two complex to be represented as a single page.
+3. Some similar HTML components like tables etc. are resued across multiple pages as a part of their contents.
+
+Unless you address the above in the way you implement the Gui abstraction, the code will not clearly represent the Gui. Also, even if externalized, this could result in repeated identifiers across different GNS files.
+
+One step forward from Arjuna's App-GuiPage Model is the App-GuiPage-GuiSection Model:
+1. Implement the web application as a child of `GuiApp`class.
+2. Implement each web page of interest as a child of `GuiPage` class.
+3. GuiPages inherit from different template base pages to represent common structures.
+4. Reusables page portions are implemented as `GuiSection`s and a correct composition relationship is established between a `GuiPage` and its `GuiSection`s using OOP.
+5. In short, Apps have pages and a page can have sections.
+
+#### Arjuna's Gui Loading Model
+
+All `Gui`s follow the `Gui Loading Mechanism` in Arjuna. For a `GuiApp`, loading logic is triggered when it is launched (`launch` method called). For `GuiPage` and `GuiSection` it takes place as a part of initialization (`super().__init__()` call.)
+
+We can hook into the mechanism by implementing one or more of the three hooks made available by Arjuna to all `Gui`s. We don't need to do anything special to the `Gui` classes to make it happen. It is available by default. On the other end, if we don't want to use it, we don't need to do anything at all because all the hook methods are optional.
+
+It draws inspiration from Selenium Java's implementation of Loadable Component but it is Arjuna's custom implementation using its own conditions and wait mechanism.
+
+1. Gui's `prepare` method is called with any `*args` and `**kwargs` provided in the `__init__` implementation of a child `Gui`. This is the method which you use for externalization of Gui definitions.
+2. Root Element is polled for, if defined, until `ArjunaOption.GUIAUTO_MAX_WAIT` number of seconds. In case of exception, loading stops here and `GuiNotLoadedError` is raised.
+3. Anchor Element is polled for, if defined, until `ArjunaOption.GUIAUTO_MAX_WAIT` number of seconds. In case of exception, loading stops here and `GuiNotLoadedError` is raised.
+4. `validate_readiness` method is called. If it does not raise any exception, then the loading mechanism stops here.
+5. If in **step 4**, an exception of type `arjuna.core.exceptions.WaitableError` (or its sub-type) is raised, then the next steps as mentioned in **Step 6 and 7** are performed, else `GuiNotLoadedError` exception is raised.
+6. Gui's `reach_until` method is called. If any exception is raised by it, then `GuiNotLoadedError` exception is raised, else **step 7** is executed.
+7. This time `validate_readiness` is called, but not directly. It is tied to the `GuiReady` condition which is polling wait-based caller. If `validate_readiness` raises an exception of type `arjuna.core.exceptions.WaitableError` (or its sub-type), `GuiReady` condition keeps calling it until `ArjunaOption.GUIAUTO_MAX_WAIT` number of seconds are passed in `Gui`'s configuration. If successful, during the wait time, then Gui is considered loaded, else `GuiNotLoadedError` exception is raised.
 
 ### Helper Classes, Functions and Enums
 

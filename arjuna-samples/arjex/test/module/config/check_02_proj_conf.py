@@ -30,7 +30,7 @@ def check_project_conf(request):
         You must add browser.name = firefox to arjunaOptions in project.conf to see the impact.
         It changes the default browser from Chrome to Firefox across the project.
     '''
-    google = WebApp(base_url="https://google.com")
+    google = GuiApp(base_url="https://google.com")
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()

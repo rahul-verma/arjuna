@@ -17,9 +17,9 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from .base import WPBasePage
+from .base import WPBaseGuiPage
 
-class Dashboard(WPBasePage):
+class Dashboard(WPBaseGuiPage):
 
     @property
     def settings_page(self):

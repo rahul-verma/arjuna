@@ -20,7 +20,7 @@ limitations under the License.
 import unittest
 
 from cgom.wordpress import WordPress
-from cgom.home import HomePage
+from cgom.home import HomeGuiPage
 
 class WPBaseTest(unittest.TestCase):
 

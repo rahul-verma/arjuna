@@ -20,7 +20,7 @@ limitations under the License.
 import abc
 from arjuna import *
 
-class WPBasePage(Page, metaclass=abc.ABCMeta):
+class WPBaseGuiPage(GuiPage, metaclass=abc.ABCMeta):
 
     def __init__(self, source_gui):
         super().__init__(source_gui=source_gui)

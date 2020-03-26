@@ -18,9 +18,9 @@ limitations under the License.
 '''
 
 from arjuna import *
-from .base import WPBasePage
+from .base import WPBaseGuiPage
 
-class Home(WPBasePage):
+class Home(WPBaseGuiPage):
 
     def login(self, user, pwd):
         self.gns.user.text = user

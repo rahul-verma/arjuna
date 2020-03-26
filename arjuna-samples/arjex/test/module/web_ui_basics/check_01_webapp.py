@@ -21,17 +21,17 @@ from arjuna import *
 
 @test
 def check_webpp_nobase_url(request):
-    google = WebApp()
+    google = GuiApp()
     google.launch(blank_slate=True)
     google.go_to_url("https://google.com")
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()
 
 @test
 def check_webpp_base_url_arg(request):
-    google = WebApp(base_url="https://google.com")
+    google = GuiApp(base_url="https://google.com")
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()
 
 @test
@@ -40,7 +40,7 @@ def check_webpp_base_url_in_custom_config(request):
     cb[ArjunaOption.APP_URL] = "https://google.com"
     conf = cb.register()
 
-    google = WebApp(config=conf)
+    google = GuiApp(config=conf)
     google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
+    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()

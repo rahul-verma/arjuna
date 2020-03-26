@@ -54,7 +54,7 @@ You can find the example code in [arjex project](https://github.com/rahul-verma/
 9. Arjuna has comprehenstive support for Web Gui Automation.
     - Arjuna provides highly customized automation on top of Selenium WebDriver for web automation.
     - Arjuna automatically downloads drivers using WebDriver Manager. Currenlty only **Chrome** and **Firefox** are the supported browsers (in normal as well as headless mode).
-    - The starting point for web automation in Arjuna is [the `WebApp` class](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#the-webapp-class).
+    - The starting point for web automation in Arjuna is [the `GuiApp` class](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#the-webapp-class).
     - Arjuna supports various features for element identification and interaction:
         - A single element is represented as a [`GuiElement`](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#guielement-and-the-element-template). It provides very [intuitive and Pythonic interaction methods](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#interaction-with-guielement).
         - You can [locate elements using ID, Name, Tag, Class, Link Text and Partial Link Text, XPath and CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#locators---using-id--name--tag--class--link-text--partial-link-text--xpath-and-css-selectors). These are mostly direct wrappers on what Selenium supports.
@@ -62,7 +62,7 @@ You can find the example code in [arjex project](https://github.com/rahul-verma/
         - Arjuna [automatically does a dynamic wait during locating elements as well as some basic interactions](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#automatic-dynamic-waiting).
         - You can find nested elements i.e. an element within an element.
         - You can define dynamic identifiers i.e. identifiers which contain Arjuna format strings which are replaced with their values at run-time. The Arjuna format strings can be simple names or Configuration queries or Data Reference Queries or Localization queries.
-    - [Gui Namespace (GNS)](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#gui-namespace---externalizing-locators) is used to externalize element locators in a [GNS File](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#the-gns-file) which can be [associated with a `WebApp`](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#associating-gns-file-with-webapp)
+    - [Gui Namespace (GNS)](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#gui-namespace---externalizing-locators) is used to externalize element locators in a [GNS File](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#the-gns-file) which can be [associated with a `GuiApp`](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#associating-gns-file-with-webapp)
         - You can [externalize ID, Name, Tag, Class, Link Text and Partial Link Text, XPath and CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#externalizing-id--name--tag--class--link-text--partial-link-text--xpath-and-css-selector).
         - You can also [externalize Arjuna's locators extensions](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#externalizing-arjunas-locator-extensions).
         - You can define dynamic identifiers i.e. identifiers which contain Arjuna format strings which are replaced with their values at run-time. The Arjuna format strings can be simple names or Configuration queries or Data Reference Queries or Localization queries.
@@ -72,34 +72,21 @@ You can find the example code in [arjex project](https://github.com/rahul-verma/
         - [`DropDown`](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#dropdown---handling-default-html-select) represents an HTML drop-down list. Can be [defined in code](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#defining-and-using-a-dropdown-in-code) as well [define in GNS](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#defining-dropdown-in-gns-and-using-it-in-code)
         - [`RadioGroup`](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#radiogroup---handling-default-html-radio-group) represents an HTML radio group. Can be [defined in code](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#defining-and-using-a-radiogroup-in-code) as well [define in GNS](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#defining-radiogroup-in-gns-and-using-it-in-code)
     - Arjuna provides various classes so that you can build various types of Gui Abstractions.
-        - `WebApp` represents the complete web application. You can create an object of it or inherit from it to add methods and attributes as needed. A `WebApp` can be used with or without externalized identifiers or both (partial externalization).
-        - `Page` class represents a web page and is associated with a `WebApp`. 
-        - `Section` (with aliases `Widget` or `Dialog`) represents part of a web page or a dialog. It can be associated with a `WebApp` or a `Page`.
-        - Arjuna has a comprehensive Gui loading protocol.
-        - `Page` and `Section` can have an `anchor` element defined in corresponding Gui Namespace. 
-        - `Section` can have a `root` element defined in corresponding Gui Namespace.
+        - [`Gui`](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#concept-of-gui-in-arjuna) is a generic abstraction of a Graphical User Interface.
+        - [`GuiApp`](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#the-guiapp-class) represents the complete web application. You can create an object of it or inherit from it to add methods and attributes as needed. A `GuiApp` can be used with or without externalized identifiers or both (partial externalization).
+        - [`GuiPage`](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#the-guipage-class) class represents a web page and is associated with a `GuiApp`. 
+        - [`GuiSection`](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#the-guisection-class) (with aliases `GuiWidget` or `GuiDialog`) represents part of a web page or a dialog. It can be associated with a `GuiApp` or a `GuiPage`.
+        - With Arjuna you can create various [Gui abstraction models](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#gui-abstraction-models), for example:
+            - [The App Model](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#app-model-using-app-class)
+            - [The App-Page Model](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#app-page-model-using-guiapp-and-guipage-classes)
+            - [The App-Page-Section Model](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#app-page-section-model-using-guiapp--guipage-and-guisection-classes)
+        - Arjuna has a comprehensive [Gui loading protocol](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#arjunas-gui-loading-model).
+        - `GuiPage` and `GuiSection` can have an `anchor` element defined in corresponding Gui Namespace. 
+        - `GuiSection` can have a `root` element defined in corresponding Gui Namespace.
 10. Arjuna provides various helper classes, functions and enums to aid in test automation:
     - `XmlNode` and `NodeLocator` for XML parsing.
     - `Formatter` and `Locator` to define locators.
-11. Arjuna Exceptions
-    - TBD
-
+11. Various custom [Arjuna Exceptions](https://github.com/rahul-verma/arjuna/blob/master/docs/ArjunaFeaturesDoc.md#arjuna-exceptions) are implemented to give you precise information about the issues that take place.
 
 ## Arjex - The Arjuna Examples Project
-The `arjex` project contains lots and lots of example code for using Arjuna features. Following is the list of test-packages and what examples they contain:
-    - TBD
-
-### 10. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
-
-1. [Thinking Procedurally -Creating Reusable Module](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ThinkingProcedurally.md)
-2. [Creating App Class](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppClass.md)
-3. [App Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppObjectModel.md)
-4. [App-Page Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageObjectModel.md)
-5. [App-Page-Section Object Model](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/AppPageSectionObjectModel.md)
-6. [Gui and Its Loading Model in Arjuna](https://github.com/rahul-verma/arjuna/blob/master/docs/gui_abstraction/GuiLoadingModel.md)
-
-## Reference
-1. Command Line Options
-
-### Miscellaneous
-1. Using Arjuna With Your Test Framework
+The `arjex` project contains lots and lots of example code for using Arjuna features.

@@ -20,15 +20,15 @@ limitations under the License.
 from .gui import *
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 
-class Page(AppContent):
+class GuiPage(AppContent):
 
     def __init__(self, *args, source_gui, label=None, gns_dir=None, gns_file_name=None, **kwargs):
-        # app = isinstance(source_gui, App) and source_gui or source_gui.app
+        # app = isinstance(source_gui, GuiApp) and source_gui or source_gui.app
         super().__init__(automator=source_gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)
         self.app.ui = self
         self._load(*args, **kwargs)
 
-class Section(AppContent):
+class GuiSection(AppContent):
 
     def __init__(self, gui, *args, gns_dir=None, root=None, label=None, gns_file_name=None, **kwargs):
         super().__init__(automator=gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
@@ -70,20 +70,20 @@ class Section(AppContent):
 
     def _load_root_element(self):
         '''
-            Loads root element for Section.
+            Loads root element for GuiSection.
 
-            Root element is always loaded by using Page. Rest of the elements are loaded as nested elements in root.
+            Root element is always loaded by using GuiPage. Rest of the elements are loaded as nested elements in root.
         '''
         if self.__root_meta:
             label, locator = self.__root_meta
             if self.__root_meta[0] != "anonymous":
                 emd = self.gui_def.get_emd(label)
                 from arjuna import log_debug
-                log_debug("Loading Root Element {} for Gui Section: {}".format(label, self.label))
+                log_debug("Loading Root Element {} for Gui GuiSection: {}".format(label, self.label))
                 self.__root_element = self._element(emd)
             else:
                 from arjuna import log_debug
-                log_debug("Loading Root Element with Locator {} for Gui Section: {}".format(str(locator), self.label))
+                log_debug("Loading Root Element with Locator {} for Gui GuiSection: {}".format(str(locator), self.label))
                 self.__root_element = self.locate(locator)                
             
             self.__container = self.__root_element
@@ -116,10 +116,10 @@ class Section(AppContent):
     def parent(self):
         return self.__parent
 
-Widget = Section
-Dialog = Section
+GuiWidget = GuiSection
+GuiDialog = GuiSection
 
-class App(Gui, metaclass=abc.ABCMeta):
+class _App(Gui, metaclass=abc.ABCMeta):
 
     def __init__(self, *, config=None, ext_config=None, label=None, gns_dir=None, gns_file_name=None):
         gns_dir = gns_dir is not None and gns_dir or ""
@@ -146,7 +146,7 @@ class App(Gui, metaclass=abc.ABCMeta):
         self.__ui = page
 
     def _create_default_ui(self):
-        self.__ui = Page(source_gui=self, label=self.label, gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)
+        self.__ui = GuiPage(source_gui=self, label=self.label, gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)
 
     @abc.abstractmethod
     def launch(self):
@@ -156,7 +156,7 @@ class App(Gui, metaclass=abc.ABCMeta):
         return widget_object
 
 
-class WebApp(App):
+class GuiApp(_App):
 
     def __init__(self, *args, base_url=None, blank_slate=False, config=None, ext_config=None, label=None, gns_dir=None, gns_file_name=None, **kwargs):
         '''

@@ -56,8 +56,8 @@ def check_widget_coded_root_label(request, dashboard_coded_re):
     request.asserter.assert_equal(dashboard.element(xpath="//div").source.content.root, expected_src, "Source of First div with Automator")
 
     expected_src = '<div class="wp-menu-arrow"/>'
-    request.asserter.assert_equal(dashboard.left_nav_coded_root_label.gns.first_div.source.content.root, expected_src, "Source of First div with Widget WITH Root")
-    request.asserter.assert_equal(dashboard.left_nav_coded_root_label.element(xpath="//div").source.content.root, expected_src, "Source of First div with Widget WITH Root")
+    request.asserter.assert_equal(dashboard.left_nav_coded_root_label.gns.first_div.source.content.root, expected_src, "Source of First div with GuiWidget WITH Root")
+    request.asserter.assert_equal(dashboard.left_nav_coded_root_label.element(xpath="//div").source.content.root, expected_src, "Source of First div with GuiWidget WITH Root")
 
 
 @test
@@ -70,8 +70,8 @@ def check_widget_coded_root_locator(request, dashboard_coded_re):
     request.asserter.assert_equal(dashboard.element(xpath="//div").source.content.root, expected_src, "Source of First div with Automator")
 
     expected_src = '<div class="wp-menu-arrow"/>'
-    request.asserter.assert_equal(dashboard.left_nav_coded_root_locator.gns.first_div.source.content.root, expected_src, "Source of First div with Widget WITH Root")
-    request.asserter.assert_equal(dashboard.left_nav_coded_root_locator.element(xpath="//div").source.content.root, expected_src, "Source of First div with Widget WITH Root")
+    request.asserter.assert_equal(dashboard.left_nav_coded_root_locator.gns.first_div.source.content.root, expected_src, "Source of First div with GuiWidget WITH Root")
+    request.asserter.assert_equal(dashboard.left_nav_coded_root_locator.element(xpath="//div").source.content.root, expected_src, "Source of First div with GuiWidget WITH Root")
 
 
 @test
@@ -84,6 +84,6 @@ def check_widget_gns_root(request, dashboard_re):
     request.asserter.assert_equal(dashboard.element(xpath="//div").source.content.root, expected_src, "Source of First div with Automator")
 
     expected_src = '<div class="wp-menu-arrow"/>'
-    request.asserter.assert_equal(dashboard.left_nav.gns.first_div.source.content.root, expected_src, "Source of First div with Widget WITH Root")
-    request.asserter.assert_equal(dashboard.left_nav.element(xpath="//div").source.content.root, expected_src, "Source of First div with Widget WITH Root")
+    request.asserter.assert_equal(dashboard.left_nav.gns.first_div.source.content.root, expected_src, "Source of First div with GuiWidget WITH Root")
+    request.asserter.assert_equal(dashboard.left_nav.element(xpath="//div").source.content.root, expected_src, "Source of First div with GuiWidget WITH Root")
 

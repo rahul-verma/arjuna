@@ -17,7 +17,7 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from .base import WPFullPage
+from .base import WPFullGuiPage
 
-class Dashboard(WPFullPage):
+class Dashboard(WPFullGuiPage):
     pass
