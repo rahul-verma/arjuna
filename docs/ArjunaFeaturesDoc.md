@@ -3,7 +3,7 @@
 - [Arjuna Test Project](#arjuna-test-project)
 - [Arjuna Command Line Interface](#arjuna-command-line-interface)
 - [Defining a Test Function](#defining-a-test-function)
-  * [The `@test` Decorator](#the---test--decorator)
+  * [The @test Decorator](#the--test-decorator)
   * [Running a Specific Test Function](#running-a-specific-test-function)
 - [Defining Test Fixtures](#defining-test-fixtures)
 - [Test Configuration](#test-configuration)
@@ -13,8 +13,8 @@
   * [Defining and Handling User Options](#defining-and-handling-user-options)
     + [User Options in Project Conf](#user-options-in-project-conf)
     + [Adding User Options Programmatically](#adding-user-options-programmatically)
-  * [Configuration Builder - Adding options from a `.conf` File](#configuration-builder---adding-options-from-a--conf--file)
-  * [The Magic `C` Function](#the-magic--c--function)
+  * [Configuration Builder - Adding options from a .conf File](#configuration-builder---adding-options-from-a-conf-file)
+  * [The Magic C Function](#the-magic-c-function)
     + [Purpose](#purpose)
     + [Configuration Query Format](#configuration-query-format)
   * [Environment Configurations](#environment-configurations)
@@ -28,105 +28,63 @@
   * [Multiple Data Records](#multiple-data-records)
   * [Driving with Static Data Function](#driving-with-static-data-function)
   * [Driving with Static Data Generator](#driving-with-static-data-generator)
-  * [Driving with Dynamic Data Function/Generator](#driving-with-dynamic-data-function-generator)
+  * [Driving with Dynamic Data Function or Generator](#driving-with-dynamic-data-function-or-generator)
   * [Driving with Static Data Classes](#driving-with-static-data-classes)
   * [Driving with Dynamic Data Classes](#driving-with-dynamic-data-classes)
   * [Driving with Data Files](#driving-with-data-files)
     + [Driving with Excel File](#driving-with-excel-file)
-    + [Driving with Delimiter-Separated File](#driving-with-delimiter-separated-file)
+    + [Driving with Delimiter Separated File](#driving-with-delimiter-separated-file)
     + [Driving with INI File](#driving-with-ini-file)
   * [Data Files with Exclude Filter for Records](#data-files-with-exclude-filter-for-records)
   * [Driving with Multiple Data Sources](#driving-with-multiple-data-sources)
 - [Contextual Data References](#contextual-data-references)
   * [Purpose](#purpose-2)
   * [Excel Data References](#excel-data-references)
-  * [The Magic `R` Function](#the-magic--r--function)
+  * [The Magic R Function](#the-magic-r-function)
 - [Localizing Strings](#localizing-strings)
   * [Purpose](#purpose-3)
   * [Locale Enum](#locale-enum)
   * [Excel based Localization](#excel-based-localization)
-  * [The `L` function for Localization](#the--l--function-for-localization)
+  * [The L function for Localization](#the-l-function-for-localization)
   * [JSON Based Localization](#json-based-localization)
-  * [Using the `L` Function with JSON Localizer](#using-the--l--function-with-json-localizer)
+  * [Using the L Function with JSON Localizer](#using-the-l-function-with-json-localizer)
   * [Strict vs Non-strict mode for Localization](#strict-vs-non-strict-mode-for-localization)
 - [Web Gui Automation](#web-gui-automation)
-  * [The `WebApp` class](#the--webapp--class)
-    + [Launching a `WebApp`](#launching-a--webapp-)
-      - [Points to Note](#points-to-note)
-    + [Associating a `WebApp` with a Base URL](#associating-a--webapp--with-a-base-url)
+  * [The WebApp class](#the-webapp-class)
+    + [Launching a Web Application](#launching-a-web-application)
+    + [Associating a WebApp with a Base URL](#associating-a-webapp-with-a-base-url)
+    + [Setting WebApp Base URL in Configuration](#setting-webapp-base-url-in-configuration)
   * [Element Identification](#element-identification)
-  * [The `element` Template](#the--element--template)
-  * [Gui Element Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text](#gui-element-locators---using-id--name--tag--class--link-text--partial-link-text)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page)
-      - [Points to Note](#points-to-note-1)
-    + [Identification using ID, Name, Class Name, Tag Name, Link Text, Partial Link Text](#identification-using-id--name--class-name--tag-name--link-text--partial-link-text)
-      - [Points to Note](#points-to-note-2)
-  * [Gui Element Locators - Using XPath](#gui-element-locators---using-xpath)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-1)
-  * [Usage](#usage)
-  * [Gui Element Locators - Using CSS Selectors](#gui-element-locators---using-css-selectors)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-2)
-  * [Usage](#usage-1)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-3)
-  * [Usage](#usage-2)
-  * [Interaction with `element`](#interaction-with--element-)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-4)
-    + [Usage](#usage-3)
-      - [Points to Note](#points-to-note-3)
-    + [Concise Basic Interactions with a Gui Element - You Can Write Concise Code If You Wish](#concise-basic-interactions-with-a-gui-element---you-can-write-concise-code-if-you-wish)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-5)
-  * [Usage](#usage-4)
-  * [Gui Namespace (GNS) - Externalizing Locators](#gui-namespace--gns----externalizing-locators)
+    + [GuiElement and the element Template](#guielement-and-the-element-template)
+    + [Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text, XPath and CSS Selectors](#locators---using-id--name--tag--class--link-text--partial-link-text--xpath-and-css-selectors)
+    + [Locators - Arjuna's Locator Extensions](#locators---arjunas-locator-extensions)
+    + [Interaction with GuiElement](#interaction-with-guielement)
+      - [Automatic Dynamic Waiting](#automatic-dynamic-waiting)
+      - [Interaction Methods](#interaction-methods)
+  * [Gui Namespace - Externalizing Locators](#gui-namespace---externalizing-locators)
     + [The GNS File](#the-gns-file)
-      - [Points to note](#points-to-note)
-    + [Change in project.conf](#change-in-projectconf)
-  * [Gui Namespace - Externalizing ID, Name, Tag, Class, Link Text and Partial Link Text](#gui-namespace---externalizing-id--name--tag--class--link-text-and-partial-link-text)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-6)
-      - [Points to Note](#points-to-note-4)
-    + [The GNS File](#the-gns-file-1)
-    + [Usage in code](#usage-in-code)
-      - [Points to Note](#points-to-note-5)
-  * [Gui Namespace - Externalizing XPath](#gui-namespace---externalizing-xpath)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-7)
-      - [Points to Note](#points-to-note-6)
-  * [The GNS File](#the-gns-file-2)
-  * [Usage](#usage-5)
-  * [Gui Namespace - Externalizing CSS Selectors](#gui-namespace---externalizing-css-selectors)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-8)
-      - [Points to Note](#points-to-note-7)
-  * [The GNS File](#the-gns-file-3)
-  * [Usage](#usage-6)
-  * [Gui Namespace - Externalizing Arjuna's Locator Extensions](#gui-namespace---externalizing-arjuna-s-locator-extensions)
-    + [Test Fixture for Example(s) in This Page](#test-fixture-for-example-s--in-this-page-9)
-      - [Points to Note](#points-to-note-8)
-  * [The GNS File](#the-gns-file-4)
-  * [Usage](#usage-7)
+    + [Associating GNS File with WebApp](#associating-gns-file-with-webapp)
+    + [Externalizing ID, Name, Tag, Class, Link Text, Partial Link Text, Xpath and CSS Selector](#externalizing-id--name--tag--class--link-text--partial-link-text--xpath-and-css-selector)
+    + [Externalizing Arjuna's Locator Extensions](#externalizing-arjunas-locator-extensions)
   * [Element Templates](#element-templates)
-  * [Matching Multiple Elements as GuiMultiElement](#matching-multiple-elements-as-guimultielement)
-    + [Test Fixture for Examples in This Page](#test-fixture-for-examples-in-this-page)
-    + [Important point for GNS](#important-point-for-gns)
-      - [Points to Note](#points-to-note-9)
-    + [Test Code](#test-code)
-      - [Points to Note](#points-to-note-10)
-  * [Arjuna's DropDown Abstraction - Handling Default HTML Select](#arjuna-s-dropdown-abstraction---handling-default-html-select)
-    + [Test Fixture for Examples in This Page](#test-fixture-for-examples-in-this-page-1)
-    + [Important point for GNS](#important-point-for-gns-1)
-      - [Points to Note](#points-to-note-11)
-    + [Usage](#usage-8)
-    + [Points to Note](#points-to-note-12)
-  * [Arjuna's RadioGroup Abstraction - Handling Default HTML Radio Group](#arjuna-s-radiogroup-abstraction---handling-default-html-radio-group)
-    + [Test Fixture for Examples in This Page](#test-fixture-for-examples-in-this-page-2)
-    + [Important point for GNS](#important-point-for-gns-2)
-      - [Points to Note](#points-to-note-13)
-    + [Usage](#usage-9)
-    + [Points to Note](#points-to-note-14)
-  * [Gui Abstraction using `WebApp`, `Page` and `Section` classes](#gui-abstraction-using--webapp----page--and--section--classes)
-  * [Arjuna's Gui Loading Model](#arjuna-s-gui-loading-model)
+    + [GuiMultiElement - Handling Multiple GuiElements Together](#guimultielement---handling-multiple-guielements-together)
+      - [Defining and Using a GuiMultiElement In Code](#defining-and-using-a-guimultielement-in-code)
+      - [Defining GuiMultiElement in GNS and Using it in Code](#defining-guimultielement-in-gns-and-using-it-in-code)
+      - [Interacting with GuiMultiElement](#interacting-with-guimultielement)
+    + [DropDown - Handling Default HTML Select](#dropdown---handling-default-html-select)
+      - [Defining and Using a DropDown In Code](#defining-and-using-a-dropdown-in-code)
+      - [Defining DropDown in GNS and Using it in Code](#defining-dropdown-in-gns-and-using-it-in-code)
+      - [Interacting with DropDown](#interacting-with-dropdown)
+    + [RadioGroup - Handling Default HTML Radio Group](#radiogroup---handling-default-html-radio-group)
+      - [Defining and Using a RadioGroup In Code](#defining-and-using-a-radiogroup-in-code)
+      - [Defining RadioGroup in GNS and Using it in Code](#defining-radiogroup-in-gns-and-using-it-in-code)
+      - [Interacting with DropDown](#interacting-with-dropdown-1)
+  * [Gui Abstraction using WebApp, Page and Section Classes](#gui-abstraction-using-webapp--page-and-section-classes)
+  * [Arjuna's Gui Loading Model](#arjunas-gui-loading-model)
   * [Helper Classes, Functions and Enums](#helper-classes--functions-and-enums)
   * [Arjuna Exceptions](#arjuna-exceptions)
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
-
 
 
 ## Arjuna Test Project
@@ -174,7 +132,7 @@ Pending
 
 Writing a basic test in Arjuna is very easy. Following is a simple test skeleton:
 
-### The `@test` Decorator
+### The @test Decorator
 
 ```python
 
@@ -261,13 +219,13 @@ You can also add user options programmatically using the `ConfigBuilder` object 
 
 Retrieving the values is same as retrieving `ArjunaOption`s.
 
-### Configuration Builder - Adding options from a `.conf` File
+### Configuration Builder - Adding options from a .conf File
 
 `ConfigBuilder` can also load Arjuna options as well user options from `.conf` files. It comes handy when you have a controlled set of configurations which want to create at run-time. It could be also helpful if for some reasons your logic involves clubbing of options from multiple files.
 
 You can load options from any file using `from_file` method of `ConfigBuilder` and providing the file path.
 
-### The Magic `C` Function
+### The Magic C Function
 
 #### Purpose 
 Arjuna provides a special function `C` for retrieving values from the reference configuration as it is a very common operation to do on test code. You can pass an `ArjunaOption` enum constant or an option name. The name string has all the flexibility seen in previous example.
@@ -389,7 +347,7 @@ def check_generator_func(request, data):
     pass
 ```
 
-### Driving with Dynamic Data Function/Generator
+### Driving with Dynamic Data Function or Generator
 Another advanced measure that you can take is creating a data function which acts on the arguments supplied by you to govern the data it returns/generates.
 
 ```python
@@ -455,7 +413,7 @@ def check_drive_with_excel(request, data):
     pass
 ```
 
-#### Driving with Delimiter-Separated File
+#### Driving with Delimiter Separated File
 
 An delimiter-separated data file can contain data in following format. The delim 
 
@@ -581,7 +539,7 @@ You place such files in `<Project Root>/data/reference/row` directory. A referen
 
 In a row data reference file, the context of data is represented by cells of the first column. Here Account Type's values - `Bronze`, `Silver` and `Gold` represent the contexts, for which the `User` and `Pwd` values are different.
 
-### The Magic `R` Function
+### The Magic R Function
 You can access data references in your test code with Arjuna's magic `R` function (similar to `L` and `C` functions seen in other features).
 
 It has the following signature. The first argument is the query. `bucket` and `context` are optional arguments.
@@ -638,7 +596,7 @@ For demonstration purpose, 3 English words are provided with corresponding strin
 
 The second file `sample2.xls` has the same data except the localized string for `Correct` in Hindi which is different from `sample1.xls`.
 
-### The `L` function for Localization
+### The L function for Localization
 
 You can access data references in your test code with Arjuna's magic `L` function (similar to `C` and `R` functions seen in other features).
 
@@ -709,7 +667,7 @@ Following is the content of one such file in root directory for German localizat
 2. The key names should be kept same across language files.
 3. `Key1.Key2...KeyN` is the flattened syntax to refer a localized string e.g. `address.coordinates`
 
-### Using the `L` Function with JSON Localizer
+### Using the L Function with JSON Localizer
 
 Consider the following localization calls:
 
@@ -745,242 +703,101 @@ L("non_existing", strict=True, locale=Locale.DE_DE)
 
 ## Web Gui Automation
 
-### The `WebApp` class
+### The WebApp class
 
 Learning Web UI test automation in Arjuna starts with the concept of `WebApp` object.
 
 A web application is represented using a `WebApp` object. To automate your web application, you create an instance of `WebApp` and call its methods or methods of its objects for automation purpose.
 
-Web automation facilities in Arjuna use Selenium as the underlying browser automation library.
+Web automation facilities in Arjuna use Selenium WebDriver as the underlying browser automation library.
 
-#### Launching a `WebApp`
+#### Launching a Web Application
 
 ```python
-# arjuna-samples/arjex/test/module/check_01_webapp.py
-
-@test
-def check_webpp_nobase_url(request):
-    google = WebApp()
-    google.launch(blank_slate=True)
-    google.go_to_url("https://google.com")
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
-    google.quit()
+google = WebApp()
+google.launch(blank_slate=True)
+google.go_to_url("https://google.com")
+google.quit()
 ```
 
-##### Points to Note
-1. We create an object of `WebApp`. By default, `WebApp` uses Arjuna's reference `Configuration`. In turn, it uses the corresponding options to launch the underlying automator. You can change this by passing the `Configuration` object using `config` argument of the WebApp constructor.
-2. We launch the `WebApp`. We pass `blank_slate` as `True` as no base URL is associated as of now with the `WebApp` (see next section).
+1. You can create an object of `WebApp`. By default, `WebApp` uses Arjuna's reference `Configuration`. In turn, it uses the corresponding options to launch the underlying automator. You can change this by passing the `Configuration` object using `config` argument of the WebApp constructor.
+2. You can launch the `WebApp`. Here, we pass `blank_slate` as `True` as no base URL is associated as of now with the `WebApp` (see next section).
 3. Here the `WebApp` uses the reference `Configuration` of Arjuna where default browser is Chrome. So, Chrome is launched as the browser.
-4. We use its `go_to_url` method to go to Google search page.
-5. We use `request.asserter` for asserting the title.
-6. We quit the app using `quit` method of `WebApp`.
+4. You can use its `go_to_url` method to go to Google search page.
+5. You can quit the app using `quit` method of `WebApp`.
 
-#### Associating a `WebApp` with a Base URL
+#### Associating a WebApp with a Base URL
 
-We can associated the `WebApp` with a base URL by providing `base_url` arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
+You can associate the `WebApp` with a base URL by providing `base_url` arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
 
 ```python
-# arjuna-samples/arjex/test/module/check_01_webapp.py
-
-@test
-def check_webpp_nobase_url(request):
-    google = WebApp(base_url="https://google.com")
-    google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
-    google.quit()
+google = WebApp(base_url="https://google.com")
+google.launch()
+google.quit()
 ```
 
+#### Setting WebApp Base URL in Configuration
 During initilization, `WebApp` automatically looks for the `ArjunaOption.APP_URL` option in the `Configuration` object associated with it. It means you can provide this option in any of the following ways:
 - Modify Reference `Configuration`
   - Add this option in `project.conf` file.
   - Provide it as a CLI option.
- - Use RunContext to update or create a new `Configuration`. Pass it as argument while instantiating `WebApp`. This is what we will for this example:
+ - Use `ConfigBuilder` to update or create a new `Configuration`. Pass it as argument while instantiating `WebApp`, for example:
  
  
 ```python
-# arjuna-samples/arjex/test/module/check_01_webapp.py
+cb = Arjuna.get_config().builder
+cb.option(ArjunaOption.APP_URL, "https://google.com")
+config = cb.register()
 
- @test
-def check_webpp_base_url_in_custom_config(request):
-    cb = request.config.builder
-    cb.option(ArjunaOption.APP_URL, "https://google.com")
-    config = cb.register()
-
-    google = WebApp(config=config)
-    google.launch()
-    request.asserter.assert_equal("Google", google.title, "Page title does not match.")
-    google.quit()
+google = WebApp(config=config)
+google.launch()
+google.quit()
 ```
 
 ### Element Identification
 
-### The `element` Template
+#### GuiElement and the element Template
 
-A single node in the DOM of a web UI is represented by a GuiElement object in Arjuna, irrespective of its type. This is unless you need specialized methods which we will see later.
+Arjuna's Gui automation implementation has different types of Gui elements which are associated with corresponding template types.
 
-### Gui Element Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text
+A single node in the DOM of a web UI is represented by a `GuiElement` object in Arjuna, irrespective of its type. This is unless you need specialized methods which we will see later.
+
+The template name for `GuiElement` is `element`. This information is not important here, but will become relevant when we deal with more complex node types.
+
+#### Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text, XPath and CSS Selectors
 
 Arjuna supports the locators which are supported by Selenium's By object. Apart from these, there are various abstracted locators which Arjuna provides for easier coding.
 
-For this section, we'll use the login page of WordPress CMS. The elements of interest are the **User Name** field and the **Lost Your Password?** link.
-
-<img src="img/wp_login.png" height="500" width="500">
-
-In the above page, the HTML for the **User Name** field is:
-
-```html
-<input type="text" name="log" id="user_login" class="input" value="" size="20">
-```
-
-and for **Lost Your Password?** link is:
-
-```html
-<a href="/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
-```
-
-#### Test Fixture for Example(s) in This Page
-
-We are going to use a test-level fixture for the examples.
-
-Following user options have been added to `project.conf` for this fixture to work
-
-```javascript
-        userOptions {
-	        wp.app.url = "IP address"
-	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
-        }
-```
-
-Below is the `@for_test` fixture code:
+For locating `GuiElement`, you can use the `.element` factory method (assume `app` is the `WebApp` object):
 
 ```python
-# arjuna-samples/arjex/lib/fixture/test.py
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url)
-    wordpress.launch()
-    
-    yield wordpress
-    
-    # Teadown    
-    wordpress.quit()
+    app.element(<locator_type>=<locator_value>)
 ```
 
-##### Points to Note
-1. We retrieve the Login page URL for Wordpress from `Configuration`.
-2. We create a `WebApp` instance and supply the above URL as the `base_url` argument. Use a WordPress deployment of choice. For example code creation, a VirtualBox image of Bitnami Wordpress was used.
-3. We launch the app.
-4. We yield this app object so that it is available in the tests.
-5. In the teadown section, we quit the app using `quit` method of the app.
+The locator strategy is expressed using locator type names supported by Arjuna. You can pass it as a keyword argument `k=v` format to the the `element` call. Following are the basic locators supported and corresponding Selenium `By` locators:
+- **`id`** : Wraps `By.id`
+- **`name`** : Wraps `By.name`
+- **`tag`** : Wraps `By.tag_name`
+- **`classes`** : Wraps `By.class_name`, however it supports compound classes. See Arjuna Locator Extensions page for more information.
+- **`link`** : Wraps `By.partial_link_text`. Note that all content/text matches in Arjuna are partial matches (opposite of Selenium).
+- **`flink`** : Wraps `By.link_text` (short for Full Link)
+- **`xpath`** : Wraps `By.xpath`
+- **`selector`** : Wraps `By.css_selector`
 
-#### Identification using ID, Name, Class Name, Tag Name, Link Text, Partial Link Text
+Following are some examples:
 
 ```python
-# arjuna-samples/arjex/test/module/web_ui_basics/check_02_locators_basic_locate.py
-
-from arjuna import *
-
-def check_basic_identifiers(request, wordpress):
-    # user name field.
-    # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
-    wordpress.element(id="user_login")
-    wordpress.element(name="log")
-    wordpress.element(tag="input")
-    wordpress.element(classes="input")
-
-    # Lost your password link
-    # Html of link: <a href="/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
-    # Partial Link text match
-    wordpress.element(link="password")
-    # Full Link text match
-    wordpress.element(flink="Lost your password?")
+wordpress.element(id="user_login")
+wordpress.element(name="log")
+wordpress.element(tag="input")
+wordpress.element(classes="input")
+wordpress.element(link="password")
+wordpress.element(flink="Lost your password?")
+wordpress.element(xpath="//*[contains(text(), 'Lost')]")
+wordpress.element(selector=".button.button-large")
 ```
 
-##### Points to Note
-1. Launch the WebApp. Use a WordPress deployment of choice. For example code creation, a VirtualBox image of Bitnami Wordpress was used.
-2. You can create an element by using `<app object>.element(<locator_type>=<locator_value>)` syntax. For example, `wordpress.element(id="user_login")` will find an element with id.
-3. The locator strategy is expressed using locator type names supported by Arjuna. You can pass it as a keyword argument `k=v` format to the the `element` call. Here, we are using the following basic locators, which have one to one mapping to Selenium's equivalent identifiers using By object.
-- **`id`** : Wraps By.id
-- **`name`** : Wraps By.name
-- **`tag`** : Wraps By.tag_name
-- **`classes`** : Wraps By.class_name, however it supports compound classes. See Arjuna Locator Extensions page for more information.
-- **`link`** : Wraps By.partial_link_text. Note that all content/text matches in Arjuna are partial matches (opposite of Selenium).
-- **`flink`** : Wraps By.link_text (short for Full Link)
-
-### Gui Element Locators - Using XPath
-
-We use **`xpath`** locator for identification using XPath. It is a direct wrapper on By.xpath in Selenium. Following are various samples.
-
-#### Test Fixture for Example(s) in This Page
-
-Same as Basic locators example.
-
-### Usage
-
-```python
-# arjuna-samples/arjex/test/module/web_ui_basics/check_03_locators_xpath.py
-
-from arjuna import *
-
-@test
-def check_xpath(request, wordpress):
-    # Based on Text
-    wordpress.element(xpath="//*[text() = 'Lost your password?']")
-
-    # Based on partial text
-    wordpress.element(xpath="//*[contains(text(), 'Lost')]")
-
-    # Based on Title
-    wordpress.element(xpath="//*[@title = 'Password Lost and Found']")
-
-    # Based on Value
-    wordpress.element(xpath="//*[@value = 'Log In']")
-
-    # Based on any attribute e.g. for
-    wordpress.element(xpath="//*[@for = 'user_login']")
-
-    # Based on partial content of an attribute
-    wordpress.element(xpath="//*[contains(@for, '_login')]")
-
-    # Based on element type
-    wordpress.element(xpath="//*[@type ='password']")
-```
-
-### Gui Element Locators - Using CSS Selectors
-
-We use **`selector`** locator for identification using CSS Selector. It is a direct wrapper on By.css_selector in Selenium.
-
-#### Test Fixture for Example(s) in This Page
-
-Same as Basic locators example.
-
-### Usage
-
-```python
-# arjuna-samples/arjex/test/module/web_ui_basics/check_04_locators_css_selector.py
-
-from arjuna import *
-
-@test
-def check_selector(request, wordpress):
-
-    # Based on any attribute e.g. for
-    wordpress.element(selector="*[for = 'user_login']")
-
-    # Based on partial content of an attribute
-    wordpress.element(selector="*[for *= '_login']")
-
-    # Based on element type
-    wordpress.element(selector="*[type ='password']")
-
-    # Based on compound classes
-    wordpress.element(selector=".button.button-large")
-```
-
-
+#### Locators - Arjuna's Locator Extensions
 Arjuna provides various higher level locator strategies in addition to wrapping Selenium's By-style strategies. Following is the list of these extensions:
 - **`text`** : Generates Partial Text based XPath
 - **`ftext`** : Generates Full Text based XPath
@@ -992,175 +809,55 @@ Arjuna provides various higher level locator strategies in addition to wrapping 
 - **`point`** : Runs a JavaScript to find the GuiElement under an XY coordinate
 - **`js`** : Runs the supplied JavaScript and returns GuiElement representing the element it returns.
 
-#### Test Fixture for Example(s) in This Page
-
-Same as Basic locators example.
-
-### Usage
+Following are some examples:
 
 ```python
-# arjuna-samples/arjex/test/module/web_ui_basics/check_05_locators_arjuna_exts.py
-
-from arjuna import *
-
-@test
-def check_arjuna_exts(request, wordpress):
-
-    # Based on partial text
-    wordpress.element(text="Lost")
-
-    # Based on Full Text
-    wordpress.element(ftext="Lost your password?")
-
-    # Based on Title
-    wordpress.element(title="Password Lost and Found")
-
-    # Based on Value
-    wordpress.element(value="Log In")
-
-    # Based on partial match of content of an attribute
-    wordpress.element(attr=Attr("for", "_login"))
-
-    # Based on full match of an attribute
-    wordpress.element(fattr=Attr("for", "user_login"))
-
-    # Based on element type
-    wordpress.element(type="password")
-
-    # Based on compound classes
-    wordpress.element(classes="button button-large")
-    wordpress.element(classes=("button", "button-large"))
-
-    # Based on Point (location in terms of X,Y co-ordinates)
-    wordpress.element(point=Point(1043, 458))
-
-    # With Javascript
-    wordpress.element(js="return document.getElementById('wp-submit')")
+wordpress.element(text="Lost")
+wordpress.element(ftext="Lost your password?")
+wordpress.element(title="Password Lost and Found")
+wordpress.element(value="Log In")
+wordpress.element(attr=Attr("for", "_login"))
+wordpress.element(fattr=Attr("for", "user_login"))
+wordpress.element(type="password")
+wordpress.element(classes="button button-large")
+wordpress.element(classes=("button", "button-large"))
+wordpress.element(point=Point(1043, 458))
+wordpress.element(js="return document.getElementById('wp-submit')")
 ```
 
-### Interaction with `element`
-
+#### Interaction with GuiElement
 
 To interact with a GuiElement, from automation angle it must be in an interactable state. In the usual automation code, a test author writes a lot of waiting related code (and let's not even touch the `time.sleep`.).
 
+##### Automatic Dynamic Waiting
 Arjuna does a granular automatic waiting of three types:
 - Waiting for the presence of an element when it is attempting to identify a GuiElement
 - Waiting for the right state (for example, clickability of an GuiElement when you enter text or want to click it)
 - Waiting for interaction to succeed (Arjuna, for example, retries click if interaction exception is raised).
 
-Following user options have been added to `project.conf` for this test to work:
-
-```javascript
-        userOptions {
-	        wp.app.url = "IP address"
-	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
-	        wp.logout.url = ${userOptions.wp.app.url}"/wp-login.php?action=logout"
-
-            wp.admin {
-                name = "<username>"
-                pwd = "<password>"
-            }
-        }
-```
-
-We will simulate WordPress login. Following are the steps:
-1. Enter user name and password.
-2. Click Submit button.
-3. As mouse actions have not been discussed so far, we will directly go to the logout URL.
-4. In the process, WordPress shows some confirmation and success messages.
-
-#### Test Fixture for Example(s) in This Page
-
-Same as Basic locators example.
-
-#### Usage
+##### Interaction Methods
+Once locted `GuiElement` provides various interaction methods. Some are shown below:
 
 ```python
-# arjuna-samples/arjex/test/module/web_ui_basics/check_06_basicinteract_raw.py
-
-@test
-def check_wp_login(request, wordpress):
-    user = C("wp.admin.name")
-    pwd = C("wp.admin.pwd")
-    
-    # Login
-    user_field = wordpress.element(id="user_login")
-    user_field.text = user
-
-    pwd_field = wordpress.element(id="user_pass")
-    pwd_field.text = pwd
-
-    submit = wordpress.element(id="wp-submit")
-    submit.click()
-
-    wordpress.element(classes="welcome-view-site")
-
-    # Logout
-    url = C("wp.logout.url")
-    wordpress.go_to_url(url)
-
-    confirmation = wordpress.element(link="log out")
-    confirmation.click()
-
-    wordpress.element(text="logged out")
+element.text = user
+element.click()
 ```
 
-##### Points to Note
-1. We retrieve user name and password from the user options specified in `project.conf`.
-2. We identify different elements as discussed earlier.
-3. For setting text of an element we can set the value for its `text` property.
-4. To click an element, we can call its `click` method.
-5. What you will notice is that there is no waiting logic in the test code.
+`text` is a property of `GuiElement`. `element.text = "some_string"` is equivalent of setting text of the text box.
 
+`click` method is used to click the element.
 
-#### Concise Basic Interactions with a Gui Element - You Can Write Concise Code If You Wish
+### Gui Namespace - Externalizing Locators
 
-Code style could be a very personal thing. If you are looking for a concise coding option, you can write the previous code as follows with exact same functionality:
-
-#### Test Fixture for Example(s) in This Page
-
-Same as Basic locators example.
-
-### Usage
-
-```python
-# arjuna-samples/arjex/test/module/web_ui_basics/check_07_basicinteract_refined.py
-
-from arjuna import *
-
-@test
-def check_wp_login_concise(request, wordpress):
-    
-    user = C("wp.admin.name")
-    pwd = C("wp.admin.pwd")
-    
-    # Login
-    wordpress.element(id="user_login").text = user
-    wordpress.element(id="user_pass").text = pwd
-    wordpress.element(id="wp-submit").click()
-    wordpress.element(classes="welcome-view-site")
-
-    # Logout
-    url = C("wp.logout.url")
-    wordpress.go_to_url(url)
-    wordpress.element(link="log out").click()
-    wordpress.element(text="logged out")
-```
-
-
-
-### Gui Namespace (GNS) - Externalizing Locators
-
-
-After launching a `WebApp`, apart from basic browser operations, most of times an automated test finds and interacts with Gui elements.
+After launching a `WebApp`, apart from basic browser operations, most of times an automated test finds and interacts with Gui elements. If locators can be externalized outside of the code, it has a significant impact on the maintainbility of the Gui test automation implementation.
 
 Externalizing of identifiers is built into Arjuna. The object which contains identification information and related meta-data of a Gui is referred to as `GuiNamespace (GNS)` in Arjuna.
 
 #### The GNS File
 
-Arjuna uses YAML as the format for externalization of identifiers. Fow now, we will discuss basic usage of the format.
+Arjuna uses `YAML` as the format for externalization of identifiers. Fow now, we will discuss basic usage of the format.
 
-Following is the high level format for simple usage. We will explore practical implementations in the later sections.
+Following is the high level format for simple usage:
 
 ```YAML
 labels:
@@ -1175,7 +872,6 @@ labels:
     <locator type>: <locator data>
 ```
 
-##### Points to note
 1. This file has a `YAML` extension.
 2. All labels are placed under `labels` heading.
 3. Each label represents element identification information which can be later referenced by this label.
@@ -1183,52 +879,21 @@ labels:
 4. In its basic usage format, the section has a key value pair for a given locator type. For example `id: user_login`.
 5. Labels are treated as **case-insensitive** by Arjuna.
 
-#### Change in project.conf
+#### Associating GNS File with WebApp
 
-We are going to use a test-level fixture for the examples.
-
-Following user options have been added to `project.conf` for this fixture to work
-
-```javascript
-        userOptions {
-	        wp.app.url = "IP address"
-	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
-        }
-```
-
-### Gui Namespace - Externalizing ID, Name, Tag, Class, Link Text and Partial Link Text
-
-#### Test Fixture for Example(s) in This Page
-
-Below is the `@for_test` fixture code:
+Arjuna picks up GNS files relative to the defaut GNS directory: `<Project Root>/guiauto/namespace`. You can give the `label` argument while constructing a `WebApp` to associate it with the GNS file as follows:
 
 ```python
-# arjuna-samples/arjex/test/module/check_02_guielement.py
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="BasicIdentification")
-    wordpress.launch()
-    
-    yield wordpress
-    
-    # Teadown    
-    wordpress.quit()
+app = WebApp(label="SomeName")
 ```
 
-##### Points to Note
-1. We retrieve the Login page URL for Wordpress from `Configuration`.
-2. We create a `WebApp` instance and supply the above URL as the `base_url` argument. Use a WordPress deployment of choice. For example code creation, a VirtualBox image of Bitnami Wordpress was used.
-3. To instruct Arjuna to pick up a GNS file for a given name, we can provide the `label` argument. Now it will look for `BasicIdentification.yaml` in project's Gui Namespace directory.
-3. We launch the app.
-4. We yield this app object so that it is available in the tests.
-5. In the teadown section, we quit the app using `quit` method of the app.
+There are many advanced ways for this association, which are documented later in this doc.
 
-#### The GNS File
+#### Externalizing ID, Name, Tag, Class, Link Text, Partial Link Text, Xpath and CSS Selector
 
-Location for the following file is `arjuna-samples/arjex/guiauto/namespace/BasicIdentification.yaml`
+The locator strategy in GNS files is expressed using locator type names supported by Arjuna. These are simple locators and hence are expressed as basic key value pairs, almost equivalent to the way you pass them as keyword arguments in `app.element` calls. Functionality is equivalent as well.
+
+Following is a sample GNS file showing externalized basic locators:
 
 ```YAML
 labels:
@@ -1250,192 +915,23 @@ labels:
 
   lost_pass_flink:
     flink: "Lost your password?"
-```
-
-#### Usage in code
-
-```python
-# arjuna-samples/arjex/test/module/web_ui_basics/check_02_locators_basic.py
-
-@test
-def check_basic_identifiers(request, wordpress):
-    # user name field.
-    # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
-    element = wordpress.gns.user_id
-    element = wordpress.gns.user_name
-    element = wordpress.gns.user_tag
-    element = wordpress.gns.user_class
-
-    # Lost your password link
-    # Html of link: <a href="/wp-login.php?action=lostpassword" title="Password Lost and Found">Lost your password?</a>
-    # Partial Link text match
-    element = wordpress.gns.lost_pass_link
-    # Full Link text match
-    element = wordpress.gns.lost_pass_flink
-```
-
-##### Points to Note
-1. You can directly create an element by using `<app object>.gns.<GNS label>` syntax. For example, `wordpress.gns.user_id` will find an element with the locator information supplied in GNS file for the label `user_id`.
-2. The locator strategy is expressed using locator type names supported by Arjuna. These are simple locators and hence are expressed as basic key value pairs, almost equivalent to the way you pass them as keyword arguments in `app.element` calls. Functionality is equivalent as well.
-
-### Gui Namespace - Externalizing XPath
-
-**`xpath`** locator can be externalized as well.
-
-#### Test Fixture for Example(s) in This Page
-
-Below is the `@for_test` fixture code:
-
-```python
-# arjuna-samples/arjex/test/module/check_03_locators_xpath.py
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="XPath")
-    wordpress.launch()
-    
-    yield wordpress
-    
-    # Teadown    
-    wordpress.quit()
-```
-
-##### Points to Note
-1. Label is changed to `XPath`.
-2. Rest of the code is same as earlier.
-
-### The GNS File
-
-Location for the following file is `arjuna-samples/arjex_app/guiauto/namespace/XPath.yaml`
-
-```YAML
-labels:
-
-  lost_pass_text:
-    xpath: "//*[text() = 'Lost your password?']"
 
   lost_pass_text_content:
     xpath: "//*[contains(text(), 'Lost')]"
-
-  lost_pass_title:
-    xpath: "//*[@title = 'Password Lost and Found']"
-
-  user_value:
-    xpath: "//*[@value = 'Log In']"
-
-  user_attr:
-    xpath: "//*[@for = 'user_login']"
-
-  user_attr_content:
-    xpath: "//*[contains(@for, '_login')]"
-
-  pass_type:
-    xpath: "//*[@type ='password']"
-```
-
-
-### Usage
-
-```python
-# arjuna-samples/arjex/test/module/check_03_locators_xpath.py
-
-@test
-def check_xpath(request, wordpress):
-
-    # Based on Text
-    element = wordpress.gns.lost_pass_text
-
-    # Based on partial text
-    element = wordpress.gns.lost_pass_text_content
-
-    # Based on Title
-    element = wordpress.gns.lost_pass_title
-
-    # Based on Value
-    element = wordpress.gns.user_value
-
-    # Based on any attribute e.g. for
-    element = wordpress.gns.user_attr
-
-    # Based on partial content of an attribute
-    element = wordpress.gns.user_attr_content
-
-    # Based on element type
-    element = wordpress.gns.pass_type
-```
-
-### Gui Namespace - Externalizing CSS Selectors
-
-**`selector`** locator can be externalized as well.
-
-#### Test Fixture for Example(s) in This Page
-
-Below is the `@for_test` fixture code:
-
-```python
-# arjuna-samples/arjex/test/module/check_04_locators_css_selectors.py
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="Selector")
-    wordpress.launch()
-    
-    yield wordpress
-    
-    # Teadown    
-    wordpress.quit()
-```
-
-##### Points to Note
-1. Label is changed to `Selector`.
-2. Rest of the code is same as earlier.
-
-### The GNS File
-
-Location for the following file is `arjuna-samples/arjex_app/guiauto/namespace/Selector.yaml`
-
-```YAML
-labels:
-
-  user_attr:
-    selector: "*[for = 'user_login']"
-
-  user_attr_content:
-    selector: "*[for *= '_login']"
-
-  pass_type:
-    selector: "*[type ='password']"
 
   button_compound_class:
     selector: ".button.button-large"
 ```
 
-### Usage
+You can create elements using these identifiers by using `<app object>.gns.<GNS label>` syntax in your code as follows (assume `app` to be the `WebApp` object). For example:
 
 ```python
-# arjuna-samples/arjex/test/module/check_04_locators_css_selectors.py
-
-@test
-def check_selector(request, wordpress):
-
-    # Based on any attribute e.g. for
-    element = wordpress.gns.user_attr
-
-    # Based on partial content of an attribute
-    element = wordpress.gns.user_attr_content
-
-    # Based on element type
-    element = wordpress.gns.pass_type
-
-    # Based on compound classes
-    element = wordpress.gns.button_compound_class
+element = app.gns.user_id
 ```
 
-### Gui Namespace - Externalizing Arjuna's Locator Extensions
+Arjuna uses operator overloading to tie the `gns` attribute to the `GNS file` label, locates it and creates the `GuiElement`.
+
+#### Externalizing Arjuna's Locator Extensions
 
 All of Arjuna's locator extensions can be externalizd in GNS as well.
 
@@ -1451,32 +947,7 @@ All of Arjuna's locator extensions can be externalizd in GNS as well.
 - **`classes`** is externalized as a single string or a YAML list of strings:
 - **`point`** is externlized with content as a YAML mapping with `x` and `y` keys.
 
-#### Test Fixture for Example(s) in This Page
-
-Below is the `@for_test` fixture code:
-
-```python
-# arjuna-samples/arjex/test/module/check_05_locators_arjuna_exts.py
-
-@for_test
-def wordpress(request):
-    # Setup
-    wp_url = C("wp.login.url")
-    wordpress = WebApp(base_url=wp_url, label="ArjunaExtended")
-    wordpress.launch()
-    yield wordpress
-
-    # Teadown
-    wordpress.quit()
-```
-
-##### Points to Note
-1. Label is changed to `ArjunaExtended`.
-2. Rest of the code is same as earlier.
-
-### The GNS File
-
-Location for the following file is `arjuna-samples/arjex_app/guiauto/namespace/ArjunaExtended.yaml`
+Following is a sample GNS file for the above locators:
 
 ```YAML
 labels:
@@ -1523,78 +994,31 @@ labels:
     js: "return document.getElementById('wp-submit')"
 ```
 
-### Usage
+You can use them in code just like externalized basic locators. Following is sample code (assume `app` to be a `WebApp` object). For example:
 
 ```python
-# arjuna-samples/arjex/test/module/check_05_locators_arjuna_exts.py
-
-@test
-def check_arjuna_exts(request, wordpress):
-
-    # Based on partial text
-    element = wordpress.gns.lost_pass_text
-
-    # Based on Full Text
-    element = wordpress.gns.lost_pass_ftext
-
-    # Based on Title
-    element = wordpress.gns.lost_pass_title
-
-    # Based on Value
-    element = wordpress.gns.user_value
-
-    # Based on partial match of content of an attribute
-    element = wordpress.gns.user_attr
-
-    # Based on full match of an attribute
-    element = wordpress.gns.user_fattr
-
-    # Based on element type
-    element = wordpress.gns.pass_type
-
-    # Based on compound classes
-    element = wordpress.gns.button_classes_str
-    element = wordpress.gns.button_classes_list
-
-    # Based on Point (location in terms of X,Y co-ordinates)
-    element = wordpress.gns.elem_xy
-
-    # With Javascript
-    element = wordpress.gns.elem_js
+element = wordpress.gns.lost_pass_text
 ```
 
 ### Element Templates
 
-### Matching Multiple Elements as GuiMultiElement
+#### GuiMultiElement - Handling Multiple GuiElements Together
 
-Arjuna provides a special abstraction for representing mutliple ```GuiElement```s together rather than a raw Python list. This provides an opportunity to include higher level methods for test code authors.
+Arjuna provides a special abstraction for representing mutliple `GuiElement`s together rather than a raw Python list. This provides an opportunity to include higher level methods for test code authors.
 
-#### Test Fixture for Examples in This Page
+##### Defining and Using a GuiMultiElement In Code
 
-We are going to use a test-level fixture for the examples.
-
-Below is the `@for_test` fixture code to get logged-in WordPress for a test using the reusable module that we created in the last section. We place it in the `project.lib.fixture.test` module so that it can be used for a any test. 
+You can create a `GuiElement` using the `multi_element` factory call of a `WebApp` (assume `app` to be `WebApp` object):
 
 ```python
-# arjuna-samples/arjex/lib/fixture/test.py
-
-from arjuna import *
-from arjex.lib.app_procedural.wp import WordPress
-
-@for_test
-def logged_in_wordpress(request):
-    # Setup
-    wordpress = create_wordpress_app()
-    login(wordpress)
-    yield wordpress
-
-    # Teadown
-    logout(wordpress)
+app.multi_element(<locator_type>=<locator_value>)
 ```
 
-#### Important point for GNS
+##### Defining GuiMultiElement in GNS and Using it in Code
 
-The following entry in `WordPress.yaml` is of interest:
+You can also define a `GuiMultiElement` in a GNS File.
+
+In the GNS file for a label corresponding to a GuiMultiElement, add the `template` entry and set it to `multi_element`, for example:
 
 ```YAML
   cat_checkboxes:
@@ -1602,48 +1026,36 @@ The following entry in `WordPress.yaml` is of interest:
     name: "delete_tags[]"
 ```
 
-##### Points to Note
-1. To instruct Arjuna to treat an element as a multiple element, under the label entry in GNS file, you can mention `template: multi_element`.
-
-#### Test Code
+In your code, you can create an element of this as usual, however this time you'll get a `GuiMultiElement` object instead of `GuiElement`.
 
 ```python
-# arjuna-samples/arjex/test/module/check_09_gui_multielement.py
-
-from arjuna import *
-
-@test
-def check_multielement(request, logged_in_wordpress):
-    wordpress = logged_in_wordpress
-    wordpress.gns.posts.click()
-    wordpress.gns.categories.click()
-
-    check_boxes = wordpress.gns.cat_checkboxes
-    check_boxes[1].check()
-    check_boxes[1].uncheck()
-    check_boxes.first_element.uncheck()
-    check_boxes.last_element.uncheck()
-    check_boxes.random_element.uncheck()
+check_boxes = wordpress.gns.cat_checkboxes
 ```
 
-##### Points to Note
-1. The creation code is same as that for a single element.
-3. `GuiMultiElement` supports index based retrieval just like a regular list. Indexes start from computer counting (0).
-4. In addition to this, it provides methods like `first_element`, `last_element` and `random_element`.
-5. It provides more features that we will cover in advanced section of this tutorial. It also forms the basis of Arjuna's DropDown and RadioGroup abstractions which we cover in next sections.
+##### Interacting with GuiMultiElement
 
+It provides various properties and methods for a higher level interaction with a sequence of `GuiElement`s.
 
-### Arjuna's DropDown Abstraction - Handling Default HTML Select
+- It supports index based retrieval just like a regular list. Indexes start from computer counting (0).
+- In addition to this, it provides propeties like `first_element`, `last_element` and `random_element`.
+
+#### DropDown - Handling Default HTML Select
 
 DropDown object in Arjuna represents the Select-style control in the UI. Here, we cover handling of a default-HTML select control which has `<select>` as the root tag and `option` as the tag for an option.
 
-#### Test Fixture for Examples in This Page
+##### Defining and Using a DropDown In Code
 
-We are going to use `logged_in_wordpress` test fixture from the GuiMultiElement example.
+You can create a `DropDown` using the `dropdown` factory call of a `WebApp` (assume `app` to be `WebApp` object):
 
-#### Important point for GNS
+```python
+app.dropdown(<locator_type>=<locator_value>)
+```
 
-The following entry in `WordPress.yaml` is of interest:
+##### Defining DropDown in GNS and Using it in Code
+
+You can also define a `DropDown` in a GNS File.
+
+In the GNS file for a label corresponding to a GuiMultiElement, add the `template` entry and set it to `dropdown`, for example:
 
 ```YAML
   role:
@@ -1651,57 +1063,39 @@ The following entry in `WordPress.yaml` is of interest:
     id: default_role
 ```
 
-##### Points to Note
-1. To instruct Arjuna to treat an element as a `Dropdown`, under the label entry in GNS file, you can mention `template: dropdown`.
-
-#### Usage
+In your code, you can create an element of this as usual, however this time you'll get a `DropDown` object instead of `GuiElement`.
 
 ```python
-# arjuna-samples/arjex/test/module/check_10_dropdown.py
-
-from arjuna import *
-
-@test
-def check_dropdown(request, logged_in_wordpress):
-    wordpress = logged_in_wordpress
-    wordpress.gns.settings.click()
-
-    role_select = wordpress.gns.role
-
-    role_select.select_text("Subscriber")
-    fmsg = "Failed to select Subscriber Role"
-    request.asserter.assert_true(role_select.has_visible_text_selected("Subscriber"), fmsg)
-    request.asserter.assert_true(role_select.has_value_selected("subscriber"), fmsg)
-    request.asserter.assert_true(role_select.has_index_selected(0), fmsg)
-    request.asserter.assert_equal(role_select.value, "subscriber", "Unexpected Value attribute of Role.")
-    request.asserter.assert_equal(role_select.text,"Subscriber",  "Unexpected Selected Role Text ")
-
-    role_select.select_value("editor")
-    role_select.select_index(4)
-    role_select.text = "Subscriber"
+element = app.gns.role
 ```
 
-#### Points to Note
-1. Creation is same as a Gui Element.
-2. We can select an option by its visible text by calling `select_text` method of DropDown.
-3. DropDown provides various enquiry methods - `has_visible_text_selected`, `has_value_selected`, has_index_selected`.
-4. DropDown also has enquirable properties - `value` and `text`.
-5. We assert using `request.asserter`'s appropriate assertion methods.
-6. There are other ways of selection as well - `select_value` to select by value attribute of an option, `select_index` to select an option present at provided index.
-7. DropDown also has a way of selecting an option by setting its `text` property. This is similar to `.text` property setting of a text-box. It is different from `select_text` method in terms of implementation. `select_text` uses DOM inquiry to match the text of an option and then clicks it to select it. Setting the `.text` property similuates the user action where the user types a string in a focused/highlighted select control to select an option (in technical terms it is equivalent of sendkeys).
+##### Interacting with DropDown
 
-### Arjuna's RadioGroup Abstraction - Handling Default HTML Radio Group
+It provides various properties and methods for a higher level interaction with a drop down list.
+
+- You can select an option by its visible text by calling `select_text` method of DropDown.
+- DropDown provides various enquiry methods - `has_visible_text_selected`, `has_value_selected`, has_index_selected`.
+- DropDown also has enquirable properties - `value` and `text`.
+- There are other ways of selection as well - `select_value` to select by value attribute of an option, `select_index` to select an option present at provided index.
+- DropDown also has a way of selecting an option by setting its `text` property. This is similar to `.text` property setting of a text-box. It is different from `select_text` method in terms of implementation. `select_text` uses DOM inquiry to match the text of an option and then clicks it to select it. Setting the `.text` property similuates the user action where the user types a string in a focused/highlighted select control to select an option (in technical terms it is equivalent of sendkeys).
+
+#### RadioGroup - Handling Default HTML Radio Group
 
 RadioGroup object in Arjuna represents the Radio Buttons in the UI that belong to a single selection group (have the same name). Here, we cover handling of a default-HTML RadioGroup control which represents multiple `<input type='radio'>` elements which have the same `name` attribute value.
 
+##### Defining and Using a RadioGroup In Code
 
-#### Test Fixture for Examples in This Page
+You can create a `RadioGroup` using the `radio_group` factory call of a `WebApp` (assume `app` to be `WebApp` object):
 
-We are going to use `logged_in_wordpress` test fixture from the GuiMultiElement example.
+```python
+app.radio_group(<locator_type>=<locator_value>)
+```
 
-#### Important point for GNS
+##### Defining RadioGroup in GNS and Using it in Code
 
-The following entry in `WordPress.yaml` is of interest:
+You can also define a `RadioGroup` in a GNS File.
+
+In the GNS file for a label corresponding to a GuiMultiElement, add the `template` entry and set it to `radio_group`, for example:
 
 ```YAML
   date_format:
@@ -1709,44 +1103,22 @@ The following entry in `WordPress.yaml` is of interest:
     name: date_format
 ```
 
-##### Points to Note
-1. To instruct Arjuna to treat an element as a `RadioGroup`, under the label entry in GNS file, you can mention `template: radio_group`.
-
-#### Usage
+In your code, you can create an element of this as usual, however this time you'll get a `RadioGroup` object instead of `GuiElement`.
 
 ```python
-# arjuna-samples/arjex/test/module/check_11_radio_group.py
-
-from arjuna import *
-from arjex.lib.app_procedural.wp import *
-
-@test
-def check_radiogroup(request, logged_in_wordpress):
-    wordpress = logged_in_wordpress
-    wordpress.gns.settings.click()
-
-    date_format = wordpress.gns.date_format
-
-    fmsg = "Failed to select m/d/Y date format"
-    request.asserter.assert_true(date_format.has_value_selected("m/d/Y"), fmsg)
-    request.asserter.assert_true(date_format.has_index_selected(2), fmsg)
-    request.asserter.assert_equal(date_format.value, "m/d/Y", "Unpexpected Value attribute of Date Format")
-
-    date_format.select_value(r"\c\u\s\t\o\m")
-    date_format.select_index(2)
+element = app.gns.date_format
 ```
 
-#### Points to Note
-1. Creation is same as a Gui Element.
-2. We can select a a by its visible text by calling `select_text` method of DropDown.
-3. DropDown provides various enquiry methods - `has_value_selected`, `has_index_selected`.
-4. DropDown also has `value` enquirable property.
-5. We assert using `request.asserter`'s appropriate assertion methods.
-6. You can use two ways of selecting a radio button - `select_value` to select by value attribute of an option, `select_index` to select a radio button present at provided index.
+##### Interacting with DropDown
 
+It provides various properties and methods for a higher level interaction with a radio group.
 
+- You can select a a by its visible text by calling `select_text` method of DropDown.
+- RadioGroup provides various enquiry methods - `has_value_selected`, `has_index_selected`.
+- RadioGroup also has `value` enquirable property.
+- You can use two ways of selecting a radio button - `select_value` to select by value attribute of an option, `select_index` to select a radio button present at provided index.
 
-### Gui Abstraction using `WebApp`, `Page` and `Section` classes
+### Gui Abstraction using WebApp, Page and Section Classes
 
 
 ### Arjuna's Gui Loading Model

@@ -55,10 +55,11 @@ You can find the example code in [arjex project](https://github.com/rahul-verma/
     - Arjuna provides highly customized automation on top of Selenium WebDriver for web automation.
     - Arjuna automatically downloads drivers using WebDriver Manager. Currenlty only **Chrome** and **Firefox** are the supported browsers (in normal as well as headless mode).
     - The starting point for web automation in Arjuna is the `WebApp` class.
-    - Arjuna supports various features for element identification:
+    - Arjuna supports various features for element identification and interaction:
         - A single element is represented as an `element`. It provides very intuitive and Pythonic interaction methods.
         - You can locate elements using ID, Name, Tag, Class, Link Text and Partial Link Text. Locating with XPath and CSS Selectors is supported as well. These are mostly direct wrappers on what Selenium supports.
         - Arjuna provides its own advanced locator extensions for simple and powerful identifiers.
+        - Arjuna automatically does a dynamic wait during locating elements as well as some basic interactions.
         - You can find nested elements i.e. an element within an element.
         - You can define dynamic identifiers i.e. identifiers which contain Arjuna format strings which are replaced with their values at run-time. The Arjuna format strings can be simple names or Configuration queries or Data Reference Queries or Localization queries.
     - Gui Namespace (GNS) is used to externalize element locators.
