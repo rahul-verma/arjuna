@@ -8,9 +8,7 @@ You'd need Python 3.5+ to make use of Arjuna.
 
 Note: On Linux, the built-in Python3 build has issues with the Python's built-in enum module which is heavily used in Arjuna. One alternative is to install ActiveState Python on linux. Advanced users can go for installing a custom Python build.
 
-## Tutorial
-
-### 1. Arjuna Installation
+## Arjuna Installation
 
 1. Download and install latest Python (3.5+) from https://python.org
     * If you are insterested to learn python Following are links for tutorials and docs.
@@ -22,73 +20,73 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 
 You can find the example code in [arjex project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex).
 
-### 2. Arjuna - Getting Started
+## Features
+1. Arjuna provides the concept of a test project with a fixed project structure, which gives consistency across implementations as well many re-usable features.
+2. Arjuna provides a comprehensive and intuitive Command Line Interface.
+3. You can easily define a test as a test function.
+4. You can take care of setup and cleanup before and after tests as test fixtures 3 levels - test, module and session. These test fixtures can be coded centrally so that they become available to all tests.
+5. Arjuna provides very comprehensive and advanced features for Test Configuration.
+    - You can define a project level configuration.
+    - You can create any number of custom configurations programmatically.
+    - In addition to Arjuna's built-in options, you can define your own user options.
+    - You can define any number of configuration files to load configuration options from.
+    - Arjuna provides the the magic `C` function with a Configuration query format to easily retrieve configuration values.
+    - You can define environment configuration files and easily specify an active test environment.
+    - You can create a configuration file and super-impose its options on central configuration.
+    - You can use configuration queries in Gui Namespace files to create dynamic identifiers.
+6. You can do data driven testing with a multitude of easy to use and powerful constructs to create data sources in Arjuna:
+    - Driving with single or multiple data recors
+    - Driving with Static Data Functions/Generators and Dynamic Data Functions/Generators.
+    - Driving with Static Data Classes and Dynamic Data Classes
+    - Driving with Data Files (Excel/Delimiter-Separated Files/INI)
+    - Filtering Data Records
+    - Driving by combinig multiple data sources 
+7. You can create Contextual Data References to pull data based on a context string.
+    - Currently Excel format is supported.
+    - Arjuna provides the the magic `R` function with a data reference query format to easily retrieve data reference values anywhere.
+    - You can use data reference queries in Gui Namespace files to create dynamic identifiers.
+8. You can easily localize your strings anywhere in your test project.
+    - Excel localizer
+    - Json localizer
+    - Arjuna provides the the magic `L` function with a localization query format to easily retrieve localized strings anywhere.
+    - Localization can strict or non-strict.
+    - You can use localization queries in Gui Namespace files to create dynamic identifiers.
+9. Arjuna has comprehenstive support for Web Gui Automation.
+    - Arjuna provides highly customized automation on top of Selenium WebDriver for web automation.
+    - Arjuna automatically downloads drivers using WebDriver Manager. Currenlty only **Chrome** and **Firefox** are the supported browsers (in normal as well as headless mode).
+    - The starting point for web automation in Arjuna is the `WebApp` class.
+    - Arjuna supports various features for element identification:
+        - A single element is represented as an `element`. It provides very intuitive and Pythonic interaction methods.
+        - You can locate elements using ID, Name, Tag, Class, Link Text and Partial Link Text. Locating with XPath and CSS Selectors is supported as well. These are mostly direct wrappers on what Selenium supports.
+        - Arjuna provides its own advanced locator extensions for simple and powerful identifiers.
+        - You can find nested elements i.e. an element within an element.
+        - You can define dynamic identifiers i.e. identifiers which contain Arjuna format strings which are replaced with their values at run-time. The Arjuna format strings can be simple names or Configuration queries or Data Reference Queries or Localization queries.
+    - Gui Namespace (GNS) is used to externalize element locators.
+        - You can externalize ID, Name, Tag, Class, Link Text and Partial Link Text, XPath and CSS Selectors.
+        - You can also externalize Arjuna's locators extensions.
+        - You can define dynamic identifiers i.e. identifiers which contain Arjuna format strings which are replaced with their values at run-time. The Arjuna format strings can be simple names or Configuration queries or Data Reference Queries or Localization queries.
+        - You can define your own locators. You define them globally or within a GNS file.
+    - Various higher-level element templates are available. These can directly coded in your test or can be defined in a Gui Namespace.
+        - `multi_element` represents multiple `elements`s together.
+        - `dropdown` represents an HTML drop-down list.
+        - `radio_group` represents an HTML radio group.
+    - Arjuna provides various classes so that you can build various types of Gui Abstractions.
+        - `WebApp` represents the complete web application. You can create an object of it or inherit from it to add methods and attributes as needed. A `WebApp` can be used with or without externalized identifiers or both (partial externalization).
+        - `Page` class represents a web page and is associated with a `WebApp`. 
+        - `Section` (with aliases `Widget` or `Dialog`) represents part of a web page or a dialog. It can be associated with a `WebApp` or a `Page`.
+        - Arjuna has a comprehensive Gui loading protocol.
+        - `Page` and `Section` can have an `anchor` element defined in corresponding Gui Namespace. 
+        - `Section` can have a `root` element defined in corresponding Gui Namespace.
+10. Arjuna provides various helper classes, functions and enums to aid in test automation:
+    - `XmlNode` and `NodeLocator` for XML parsing.
+    - `Formatter` and `Locator` to define locators.
+11. Arjuna Exceptions
+    - TBD
 
-1. [Project Structure](https://github.com/rahul-verma/arjuna/blob/master/docs/start/ProjectStructure.md)
-2. [Writing Your First Test](https://github.com/rahul-verma/arjuna/blob/master/docs/start/WritingFirstTest.md)
 
-### 3. Arjuna's Configuration System
-
-1. [Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/config/Configuration.md)
-2. [project.conf - Project Level Configuration](https://github.com/rahul-verma/arjuna/blob/master/docs/config/ProjectConf.md)
-3. [Configuration Builder - Creating Custom Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/config/ConfigBuilder.md)
-4. [Defining and Handling User Options](https://github.com/rahul-verma/arjuna/blob/master/docs/config/UserOptions.md)
-5. [Using .conf files with Configuration Builder](https://github.com/rahul-verma/arjuna/blob/master/docs/config/UsingFilesInConfigBuilder.md)
-6. [The Magic `C` Function](https://github.com/rahul-verma/arjuna/blob/master/docs/config/TheCMagicFunction.md)
-7. [Environments and Dynamic Configurations](https://github.com/rahul-verma/arjuna/blob/master/docs/config/EnvironmentsAndDynamicConfigurations.md)
-
-
-### 4. Data Driven Testing and Contextual Data References
-
-1. [Data Driven Testing](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataDrivenTesting.md)
-2. [Driving with Single or Multiple Data Records](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataRecords.md)
-3. [Driving with Data Functions](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataFunctions.md)
-4. [Driving with Data Classes](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataClasses.md)
-5. [Driving with Data Files](https://github.com/rahul-verma/arjuna/blob/master/docs/data/DataFiles.md)
-6. [Driving with Multiple Data Sources](https://github.com/rahul-verma/arjuna/blob/master/docs/data/MultipleDataSources.md)
-7. [Contextual Data References and the Magic `R` Function](https://github.com/rahul-verma/arjuna/blob/master/docs/data/ContextualDataReferences.md)
-8. [Excel Data References](https://github.com/rahul-verma/arjuna/blob/master/docs/data/ExcelDataReferences.md)
-
-### 5. Localization of Strings
-
-1. [Excel Localizer and The Magic `L` Function](https://github.com/rahul-verma/arjuna/blob/master/docs/l10/ExcelLocalizerAndTheLMaficFunction.md)
-2. [Json Localizer](https://github.com/rahul-verma/arjuna/blob/master/docs/l10/JsonLocalizer.md)
-3. [Strict vs Non-Strict Mode](https://github.com/rahul-verma/arjuna/blob/master/docs/l10/StrictNonStrictMode.md)
-
-### 6. Basic Web UI Automation
-
-1. [Getting Started with WebApp](https://github.com/rahul-verma/arjuna/blob/master/docs//webui_basics/WebApp.md)
-2. [Gui Element Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/GuiElementBasicLocators.md)
-3. [Gui Element Locators - Using XPath](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingXPath.md)
-4. [Gui Element Locators - Using CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/UsingCSSSelectors.md)
-5. [Gui Element Locators - Using Arjuna's Locator Extensions](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ArjunaLocatorExtensions.md)
-6. [Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/BasicInteractions.md)
-7. [Concise Basic Interactions with a Gui Element](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_basics/ConciseBasicInteractions.md)
-
-### 7. Basics of Gui Namespace (GNS) - Externalizing Identifiers
-1. [What is Gui Namespace (GNS)](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/GuiNamespace.md)
-2. [Externalizing ID, Name, Tag, Class, Link Text, Partial Link Text](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/BasicLocators.md)
-3. [Externalizing XPath](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/XPath.md)
-4. [Externalizing CSS Selectors](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/CSSSelectors.md)
-5. [Externalizing Arjuna's Locator Extensions](https://github.com/rahul-verma/arjuna/blob/master/docs/gns_basics/ArjunaLocatorExtensions.md)
-
-
-### 8. Advanced Web UI Automation
-1. [Matching Multiple Elements as GuiMultiElement](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/GuiMultiElement.md)
-2. [Handling Default HTML Select](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/HTMLSelect.md)
-3. [Handling Default HTML Radio Group](https://github.com/rahul-verma/arjuna/blob/master/docs/webui_adv/HTMLRadioGroup.md)
-4. Finding Nested Elements
-5. Alternative and Dynamic Identifiers
-6. Executing JavaScript
-7. Alerts, Windows, Frames
-8. Configuraing Interactions with GuiInteractionConfig
-9. Handling Custom DropDowns
-10. Retrieving Source code with GuiSource
-
-### 9. Advanced Gui Namespace Constructs
-1. Element Templates - Multi Element, Dropdown and Radio Group
-2. Creating Your Own intra-GNS identifiers
-3. Creating Your Own Global Identifiers for use in code as well as GNS files
+## Arjex - The Arjuna Examples Project
+The `arjex` project contains lots and lots of example code for using Arjuna features. Following is the list of test-packages and what examples they contain:
+    - TBD
 
 ### 10. Gui Abstraction - GNS, App, Page, Widget and Gui Elements
 
