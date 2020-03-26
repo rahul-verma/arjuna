@@ -36,5 +36,5 @@ def dashboard(request):
 def check_withx_using_with(request, dashboard):
     dashboard.left_nav.element(nav_link=Params(lname="Posts")).click()
     dashboard.left_nav.element(nav_link=Params(lname="Media")).click()
-    dashboard.left_nav.element(nav_link=Params(lname="GuiPages")).click()
+    dashboard.left_nav.element(nav_link=Params(lname="Pages")).click()
     dashboard.left_nav.element(nav_link=Params(lname="Comments")).click()
