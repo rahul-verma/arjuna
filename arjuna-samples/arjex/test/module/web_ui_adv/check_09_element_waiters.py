@@ -36,9 +36,34 @@ def check_wait_until_absent_nested(request, logged_in_wordpress):
     else:
         raise Exception("Exception not raised.")
 
+@test
+def check_absent_nested_locator_max_wait(request, logged_in_wordpress):
+    try:
+        b = time.time()
+        logged_in_wordpress.element(id="adminmenu").wait_until_absent(tag="div")
+    except GuiElementPresentError:
+        print(time.time() - b)
+
+    try:
+        b = time.time()
+        logged_in_wordpress.element(id="adminmenu").wait_until_absent(tag="div", max_wait=10)
+    except GuiElementPresentError:
+        print(time.time() - b)
+
 
 @test
 def check_contains_nested(request, logged_in_wordpress):
     # Should be validated in root element.
     print(logged_in_wordpress.element(id="adminmenu").contains(tag="div"))
     print(logged_in_wordpress.element(id="adminmenu").contains(id="something"))
+
+
+@test
+def check_contains_nested_locator_max_wait(request, logged_in_wordpress):
+    b = time.time()
+    logged_in_wordpress.element(id="adminmenu").contains(id="something")
+    print(time.time() - b)
+
+    b = time.time()
+    logged_in_wordpress.element(id="adminmenu").contains(id="something", max_wait=10)
+    print(time.time() - b)

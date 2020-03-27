@@ -130,7 +130,7 @@ class GuiFactory:
 #             wobj.format(**locator.named_args)
 #         out_list.append(wobj)
 #     return out_list
-# def convert_to_lmd(self, *locators):
+# def convert_to_emd(self, *locators):
 #     final_locators = []
 #     for raw_locator in locators:
 #         if raw_locator.wtype.upper().strip() == "LABEL":

@@ -237,7 +237,7 @@ class AppContent(Gui):
         return self.automator.dom_root(self)
 
     def frame(self, *str_or_with_locators):
-        return self.automator.frame(self, self.convert_to_with_lmd(*str_or_with_locators))
+        return self.automator.frame(self, self.convert_to_with_emd(*str_or_with_locators))
 
     @property
     def alert(self):
@@ -252,7 +252,7 @@ class AppContent(Gui):
         return self.automator.main_window
 
     def child_window(self, *str_or_with_locators):
-        return self.automator.child_window(self.convert_to_with_lmd(*str_or_with_locators))
+        return self.automator.child_window(self.convert_to_with_emd(*str_or_with_locators))
 
     @property
     def latest_child_window(self):

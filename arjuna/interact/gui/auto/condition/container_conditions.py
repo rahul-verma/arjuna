@@ -33,7 +33,7 @@ class GuiElementContainerConditions:
         caller = DynamicCaller(
             self.container.element_finder.find,  
             self.__container.dispatcher.find_element,
-            gui_element.lmd,
+            gui_element.emd,
             context = "ELEMENT"
         )
         return CommandCondition(caller)   
@@ -42,16 +42,16 @@ class GuiElementContainerConditions:
         caller = DynamicCaller(
             self.container.element_finder.find, 
             self.container.dispatcher.find_multielement,
-            gui_element.lmd,
+            gui_element.emd,
             context = "MULTI_ELEMENT"
         )
         return CommandCondition(caller)  
 
-    def AbsenceOfElement(self, lmd):
+    def AbsenceOfElement(self, emd):
         caller = DynamicCaller(
             self.container.element_finder.check_for_absence, 
             self.container.dispatcher.find_element,
-            lmd,
+            emd,
             context = "ELEMENT"
         )
         return CommandCondition(caller) 

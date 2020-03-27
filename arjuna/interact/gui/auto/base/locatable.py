@@ -23,7 +23,7 @@ class Locatable:
         # super().__init__(automator.config) #, obj_name)
         self.__gui = gui
         self.__automator = gui.automator
-        self.__lmd = emd
+        self.__emd = emd
         self.__located = False
         self.__located_by = None 
 
@@ -38,8 +38,8 @@ class Locatable:
         return self.__automator
 
     @property
-    def lmd(self):
-        return self.__lmd
+    def emd(self):
+        return self.__emd
 
     @property
     def is_located(self):

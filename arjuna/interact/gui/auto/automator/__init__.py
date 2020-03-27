@@ -72,8 +72,8 @@ class GuiAutomator(ElementContainer,Dispatchable):
     def screenshots_dir(self):
         return self.__screenshots_dir
 
-    def create_lmd(self, *locators):
-        return GuiElementMetaData.create_lmd(*locators)
+    def create_emd(self, *locators):
+        return GuiElementMetaData.create_emd(*locators)
 
     def get_source_from_remote(self):
         return self.dispatcher.get_source()
@@ -98,8 +98,8 @@ class GuiAutomator(ElementContainer,Dispatchable):
     def main_window(self):
         return self.__main_window
 
-    def child_window(self, lmd):
-        return self.get_main_window().get_child_window(lmd)
+    def child_window(self, emd):
+        return self.get_main_window().get_child_window(emd)
 
     @property
     def latest_child_window(self):
@@ -112,8 +112,8 @@ class GuiAutomator(ElementContainer,Dispatchable):
         from arjuna.interact.gui.auto.template.frame import DomRoot
         return DomRoot(gui)
 
-    def get_frame(self, gui, lmd):
-        return self.dom_root(gui).frame(lmd)
+    def get_frame(self, gui, emd):
+        return self.dom_root(gui).frame(emd)
 
     @property
     def alert_handler(self):
@@ -204,25 +204,25 @@ class GuiAutomator(ElementContainer,Dispatchable):
 
     #### Element Finding
 
-    def element(self, gui, lmd):
+    def element(self, gui, emd):
         from arjuna.interact.gui.auto.element.guielement import GuiElement
-        gui_element = GuiElement(gui, lmd) 
+        gui_element = GuiElement(gui, emd) 
         self.load_element(gui_element)
         return gui_element
 
-    def multi_element(self, gui, lmd):
+    def multi_element(self, gui, emd):
         from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
-        m_guielement = GuiMultiElement(gui, lmd)
+        m_guielement = GuiMultiElement(gui, emd)
         self.load_multielement(m_guielement)
         return m_guielement
 
-    def dropdown(self, gui, lmd):
+    def dropdown(self, gui, emd):
         from arjuna.interact.gui.auto.template.dropdown import GuiWebSelect
-        return GuiWebSelect(gui, lmd)
+        return GuiWebSelect(gui, emd)
 
-    def radio_group(self, gui, lmd):
+    def radio_group(self, gui, emd):
         from arjuna.interact.gui.auto.template.radio_group import GuiWebRadioGroup
-        return GuiWebRadioGroup(gui, lmd)
+        return GuiWebRadioGroup(gui, emd)
 
     def execute_javascript(self, js, *args):
         return self.browser.execute_javascript(js, 

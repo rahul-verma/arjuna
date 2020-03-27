@@ -9,8 +9,9 @@ Possibilities - Targeted But Not Coded/Done
 0.9.15
 ------
 - max_wait argument support in
-    - gui.wait_until_absent
-    - 
+    - gui.wait_until_absent, gui.element.wait_until_absent
+    - gui.contains, gui.element.contains
+
 
 
 0.9.14

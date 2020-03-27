@@ -82,9 +82,6 @@ class GuiWebSelect:
     def is_multi_select(self):
         return self._multi
 
-    def __set_option_locators(self, emd):
-        self.__option_lmd = emd
-
     def has_index_selected(self, index):
         return self.__options[index].is_selected()
 

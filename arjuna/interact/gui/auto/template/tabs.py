@@ -31,7 +31,7 @@ class Tab:
         attr_value = label_elem.get_attr_value(content_relation_attr)
         with_obj = getattr(With, content_relation_type.name.lower())(attr_value)
 
-        self.__tab_content_lmd = self.__automator.create_lmd(with_obj)
+        self.__tab_content_emd = self.__automator.create_emd(with_obj)
         self.__tab_content = None
 
     @property
@@ -40,7 +40,7 @@ class Tab:
 
     def click(self):
         self.__label_elem.click()
-        self.__tab_content = self.__tab_grouptab_group.root.element(self.__tab_content_lmd)
+        self.__tab_content = self.__tab_grouptab_group.root.element(self.__tab_content_emd)
 
     def element(self, *with_locators):
         self.__content.element(*with_locators)
@@ -48,10 +48,10 @@ class Tab:
 
 class TabGroup(ElementConfig):
 
-    def __init__(self, automator, emd, *, tab_header_lmd, content_relation_attr, content_relation_type, parent=None):
+    def __init__(self, automator, emd, *, tab_header_emd, content_relation_attr, content_relation_type, parent=None):
         super().__init__(automator)
         self.__root = automator.define_element(emd)
-        tabs = self.root.define_element(tab_header_lmd).identify()
+        tabs = self.root.define_element(tab_header_emd).identify()
         self.__tabs = []
         for i in range(tabs.length):
             self.__tabs.append(Tab(self, tabs.at_index(i), content_relation_attr, content_relation_type))

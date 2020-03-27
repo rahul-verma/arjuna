@@ -44,6 +44,10 @@ class GuiElementMetaData:
     def meta(self):
         return self.__meta
 
+    @property
+    def max_wait(self):
+        return self.meta.max_wait
+
     def __str__(self):
         return str([str(l) for l in self.__locators])
 
@@ -81,13 +85,13 @@ class GuiElementMetaData:
         return out_list
 
     @classmethod
-    def create_lmd(cls, *locators, meta=None):
+    def create_emd(cls, *locators, meta=None):
         impl_locators = cls.convert_to_impl_with_locators(*locators)
         processed_locators = []
         for locator in impl_locators:
             ltype = locator.wtype.lower()
             if ltype == "content_locator":
-                CONTENT_LOCATOR = cls.create_lmd(locator.wvalue)
+                CONTENT_LOCATOR = cls.create_emd(locator.wvalue)
                 p_locator = Locator(ltype=locator.wtype, lvalue=CONTENT_LOCATOR)
             else:
                 p_locator = cls.__process_single_raw_locator(locator)

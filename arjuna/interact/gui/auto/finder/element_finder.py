@@ -35,30 +35,30 @@ class ElementFinder:
         return self.__container
 
     @abc.abstractmethod
-    def _create_element_flat_or_nested(self, lmd):
+    def _create_element_flat_or_nested(self, emd):
         pass
 
     @abc.abstractmethod
-    def _create_multielement_flat_or_nested(self, lmd):
+    def _create_multielement_flat_or_nested(self, emd):
         pass
 
-    def check_for_absence(self, dispatcher_call, lmd, context="ELEMENT"):
+    def check_for_absence(self, dispatcher_call, emd, context="ELEMENT"):
         try:
-            self.find(dispatcher_call, lmd, context)
+            self.find(dispatcher_call, emd, context)
         except GuiElementNotFoundError as e:
             # This is expected
             pass
         else:
-            raise _GuiElementPresentError(*lmd.locators)
+            raise _GuiElementPresentError(*emd.locators)
 
-    def find(self, dispatcher_call, lmd, context="ELEMENT"):
+    def find(self, dispatcher_call, emd, context="ELEMENT"):
         from arjuna import Arjuna
-        Arjuna.get_logger().debug("Finding with emd: {}".format(str(lmd)))
+        Arjuna.get_logger().debug("Finding with emd: {}".format(str(emd)))
         from arjuna import Arjuna
         found = False
         js_call_name = context == "ELEMENT" and "find_element_with_js" or "find_multielement_with_js"
         js_call = getattr(self.container, js_call_name)
-        locators = lmd.locators
+        locators = emd.locators
         if context != "ELEMENT":
             if "POINT" in {l.ltype.name for l in locators}:
                 raise ConditionException("With.POINT can be used only with GuiElement.")
@@ -85,4 +85,4 @@ class ElementFinder:
             else:
                 we = None
         if not found:
-            raise GuiElementNotFoundError(*lmd.locators, container=self.__container)
+            raise GuiElementNotFoundError(*emd.locators, container=self.__container)

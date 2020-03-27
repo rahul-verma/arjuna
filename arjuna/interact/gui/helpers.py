@@ -280,7 +280,7 @@ class Locator(Dictable):
         if not with_list:
             raise Exception("You must provide atleast one locator.")
         from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
-        return GuiElementMetaData.create_lmd(*with_list, meta=self.__meta)
+        return GuiElementMetaData.create_emd(*with_list, meta=self.__meta)
 
     def as_emd(self):
         emd = self.as_raw_emd()

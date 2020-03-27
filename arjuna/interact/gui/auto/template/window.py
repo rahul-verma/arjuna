@@ -34,8 +34,8 @@ class WindowConditions:
     def window(self):
         return self.__window
 
-    def ChildWindowIsPresent(self, lmd):
-        caller = DynamicCaller(self.window._find_child_window, lmd)
+    def ChildWindowIsPresent(self, emd):
+        caller = DynamicCaller(self.window._find_child_window, emd)
         return CommandCondition(caller)
 
 class BasicWindow:

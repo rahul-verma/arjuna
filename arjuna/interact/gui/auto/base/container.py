@@ -41,21 +41,20 @@ class ElementContainer(metaclass=abc.ABCMeta):
     def max_wait(self):
         return self.config.value("guiauto.max.wait")
 
-    def wait_until_element_absent(self, lmd):
-        elem_max_wait = lmd.meta["max_wait"]
-        max_wait = elem_max_wait and elem_max_wait or self.max_wait
-        return self.__container_conditions.AbsenceOfElement(lmd).wait(max_wait=max_wait)
+    def __elem_wait(self, emd):
+        return emd.max_wait and emd.max_wait or self.max_wait
 
-    def wait_until_element_found(self, gui_element, max_wait=None):
-        max_wait = max_wait and max_wait or self.max_wait
-        return self.__container_conditions.PresenceOfElement(gui_element).wait(max_wait=max_wait)
+    def wait_until_element_absent(self, emd):
+        return self.__container_conditions.AbsenceOfElement(emd).wait(max_wait=self.__elem_wait(emd))
 
-    def wait_until_multielement_found(self, multi_guielement, max_wait=None):
-        max_wait = max_wait and max_wait or self.max_wait
-        return self.__container_conditions.PresenceOfMultiElement(multi_guielement).wait(max_wait=max_wait)
+    def wait_until_element_found(self, gui_element):
+        return self.__container_conditions.PresenceOfElement(gui_element).wait(max_wait=self.__elem_wait(gui_element.emd))
 
-    def load_multielement(self, multi_guielement, max_wait=None):
-        locator_type, locator_value, size, dispatcher = self.wait_until_multielement_found(multi_guielement, max_wait=max_wait)
+    def wait_until_multielement_found(self, multi_guielement):
+        return self.__container_conditions.PresenceOfMultiElement(multi_guielement).wait(max_wait=self.__elem_wait(multi_guielement.emd))
+
+    def load_multielement(self, multi_guielement):
+        locator_type, locator_value, size, dispatcher = self.wait_until_multielement_found(multi_guielement)
         if size == 0:
             raise Exception("MultiElement could not be found with any of the provided locators.")
         multi_guielement.located_with = locator_type, locator_value
@@ -63,8 +62,8 @@ class ElementContainer(metaclass=abc.ABCMeta):
         multi_guielement.size = size
         multi_guielement.load_source_parser()
 
-    def load_element(self, gui_element, max_wait=None):
-        locator_type, locator_value, size, dispatcher = self.wait_until_element_found(gui_element, max_wait=max_wait)
+    def load_element(self, gui_element):
+        locator_type, locator_value, size, dispatcher = self.wait_until_element_found(gui_element)
         gui_element.located_with = locator_type, locator_value
         gui_element.dispatcher = dispatcher
         gui_element.load_source_parser()

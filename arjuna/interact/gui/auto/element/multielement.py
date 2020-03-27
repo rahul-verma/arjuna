@@ -33,7 +33,7 @@ from arjuna.engine.asserter import AsserterMixIn
 class GuiPartialElement(GuiElement):
 
     def __init__(self, gui, multi_element, index: int, dispatcher_element):
-        super().__init__(gui, multi_element.lmd)
+        super().__init__(gui, multi_element.emd)
         self.__multi_element = multi_element
         self.__index = index
         self.dispatcher = dispatcher_element
@@ -51,9 +51,9 @@ class GuiPartialElement(GuiElement):
 
 class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
     
-    def __init__(self, gui, lmd, elements=None): #, parent=None):
+    def __init__(self, gui, emd, elements=None): #, parent=None):
         AsserterMixIn.__init__(self)
-        Locatable.__init__(self, gui, lmd) #, parent)
+        Locatable.__init__(self, gui, emd) #, parent)
         Dispatchable.__init__(self)
         if elements:
             self.__elements = elements
@@ -209,12 +209,12 @@ class ElementFilter:
 
     def __init__(self, gui_multi_element):
         self.__gui = gui_multi_element.gui
-        self.__lmd = gui_multi_element.lmd
+        self.__emd = gui_multi_element.emd
         self.__elements = gui_multi_element.elements
         self.__filtered_elements = self.__elements
 
     def build(self):
-        me = GuiMultiElement(self.__gui, self.__lmd, elements=self.__filtered_elements)
+        me = GuiMultiElement(self.__gui, self.__emd, elements=self.__filtered_elements)
         self.__filtered_elements = self.__elements
         return me
 

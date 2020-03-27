@@ -36,8 +36,8 @@ class FrameConditions:
     def frame(self):
         return self.__frame
 
-    def FrameIsPresent(self, lmd, *args, **kwargs):
-        caller = DynamicCaller(self.frame._find_frame, lmd, *args, **kwargs)
+    def FrameIsPresent(self, emd, *args, **kwargs):
+        caller = DynamicCaller(self.frame._find_frame, emd, *args, **kwargs)
         return CommandCondition(caller)
 
 class FrameContainer:
