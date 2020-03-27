@@ -25,7 +25,7 @@ from .meta import Meta
 from .enums import WithType
 from ._with import With, ImplWith, Locator, GuiGenericLocator
 from .translator import LocatorTranslator
-
+from arjuna.core.utils.repr_utils import repr_dict
 
 class GuiElementMetaData:
 
@@ -49,7 +49,10 @@ class GuiElementMetaData:
         return self.meta.max_wait
 
     def __str__(self):
-        return str([str(l) for l in self.__locators])
+        return repr_dict({
+            "locators" : [str(l) for l in self.__locators],
+            "meta" : str(self.__meta)
+        })
 
     def print_locators(self):
         print(str(self))

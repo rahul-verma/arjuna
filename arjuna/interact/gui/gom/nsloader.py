@@ -217,7 +217,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                         iloc = ImplWith(wtype=wtype, wvalue=wvalue, has_content_locator=False)
                         self.__ns[label.lower()]["locators"][self.__context].append(iloc)
                     else:
-                        self.__ns[label.lower()]["meta"][wtype] = wvalue
+                        self.__ns[label.lower()]["meta"][wtype.lower()] = wvalue
                 else:
                     if self.__withx.has_locator(loc):
                         wx = self.__withx

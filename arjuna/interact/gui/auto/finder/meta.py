@@ -20,6 +20,7 @@ limitations under the License.
 from arjuna.core.adv.types import CIStringDict
 
 from arjuna.core.enums import GuiInteractionConfigType
+from arjuna.core.utils.repr_utils import repr_dict
 
 class InteractionConfig:
 
@@ -56,6 +57,9 @@ class InteractionConfig:
 
     def should_scroll_to_view(self):
         return self.__settings[GuiInteractionConfigType.SCROLL_TO_VIEW]
+
+    def __str__(self):
+        return repr_dict(self.__settings)
 
 class Meta:
 
@@ -95,6 +99,6 @@ class Meta:
         self.__mdict[name] = value
 
     def __str__(self):
-        return str(self.__mdict)
+        return repr_dict(self.__mdict)
 
     

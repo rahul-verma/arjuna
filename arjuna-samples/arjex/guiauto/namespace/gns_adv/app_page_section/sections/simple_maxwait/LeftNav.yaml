@@ -1,7 +1,3 @@
-load:
-  root: menu
-  anchor: collapse
-
 labels:
 
   menu:
@@ -16,9 +12,6 @@ labels:
 
   first_div:
     xpath: "//div"
-
-  collapse:
-    id: collapse-menu
 
   non_existing:
     id: absent

@@ -8,9 +8,12 @@ Possibilities - Targeted But Not Coded/Done
 
 0.9.15
 ------
+- Major internal re-architecuring to support meta-data in GNS definition and direct coded locator calls.
 - max_wait argument support in
     - gui.wait_until_absent, gui.element.wait_until_absent
+    - gui.gns.wait_until_absent(label), gui.gns.label.gns.wait_until_absent(label), gui.gns.label.wait_until_absent
     - gui.contains, gui.element.contains
+    - gui.gns.contains(label), gui.gns.label.gns.contains(label), gui.gns.label.contains
 
 
 

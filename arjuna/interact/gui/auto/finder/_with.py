@@ -20,6 +20,7 @@ limitations under the License.
 import re
 
 from .enums import WithType, GenericLocateWith
+from arjuna.core.utils.repr_utils import repr_dict
 
 class _WithXMetaClass(type):
 
@@ -286,7 +287,7 @@ class Locator:
         return new_locator
 
     def __str__(self):
-        return str(vars(self))
+        return repr_dict(vars(self), replace_value_enum=True)
 
     def is_layered_locator(self):
         return False
