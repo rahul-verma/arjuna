@@ -16,7 +16,7 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 '''
-
+import time
 from arjuna import *
 
 @test
@@ -35,7 +35,32 @@ def check_wait_until_absent_locator(request, logged_in_wordpress):
         raise Exception("Exception not raised.")
 
 @test
+def check_wait_until_absent_locator_max_wait(request, logged_in_wordpress):
+    try:
+        b = time.time()
+        logged_in_wordpress.wait_until_absent(id="adminmenu")
+    except GuiElementPresentError:
+        print(time.time() - b)
+
+    try:
+        b = time.time()
+        logged_in_wordpress.wait_until_absent(id="adminmenu", max_wait=10)
+    except GuiElementPresentError:
+        print(time.time() - b)
+
+@test
 def check_contains_locator(request, logged_in_wordpress):
     print(logged_in_wordpress.contains(id="adminmenu"))
     print(logged_in_wordpress.contains(id="something"))
+
+
+@test
+def check_contains_locator_max_wait(request, logged_in_wordpress):
+    b = time.time()
+    logged_in_wordpress.contains(id="something")
+    print(time.time() - b)
+
+    b = time.time()
+    logged_in_wordpress.contains(id="something", max_wait=10)
+    print(time.time() - b)
 

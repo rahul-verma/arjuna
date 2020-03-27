@@ -17,8 +17,45 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-
 from arjuna.core.adv.types import CIStringDict
+
+from arjuna.core.enums import GuiInteractionConfigType
+
+class InteractionConfig:
+
+    def __init__(self, meta_dict):
+        self.__settings = {
+            GuiInteractionConfigType.CHECK_TYPE: True,
+            GuiInteractionConfigType.CHECK_PRE_STATE : True,
+            GuiInteractionConfigType.CHECK_POST_STATE : True,
+            GuiInteractionConfigType.SCROLL_TO_VIEW : False,
+        }   
+
+        loaded = []
+        for k,v in meta_dict.items():
+            try:
+                if isinstance(k, GuiInteractionConfigType):
+                    self.__settings[k] = v
+                else:
+                    self._settings[GuiInteractionConfigType[k.upper()]] = v
+                loaded.append(k)
+            except:
+                pass
+
+        for l in loaded:
+            del meta_dict[l]
+
+    def should_check_type(self):
+        return self.__settings[GuiInteractionConfigType.CHECK_TYPE]
+
+    def should_check_pre_state(self):
+        return self.__settings[GuiInteractionConfigType.CHECK_PRE_STATE]
+
+    def should_check_post_state(self):
+        return self.__settings[GuiInteractionConfigType.CHECK_POST_STATE]
+
+    def should_scroll_to_view(self):
+        return self.__settings[GuiInteractionConfigType.SCROLL_TO_VIEW]
 
 class Meta:
 
@@ -28,18 +65,36 @@ class Meta:
         if "template" in self.__mdict:
             try:
                 template = self.__mdict["template"]
-                self.__template = GuiTemplate[template.upper()]
-            except:
+                if not isinstance(template, GuiTemplate):
+                    self.__mdict["template"] = GuiTemplate[template.upper()]
+            except Exception as e:
                 raise Exception("{} is not a valid template type.".format(template))
         else:
-            self.__template = GuiTemplate.ELEMENT
+            self.__mdict["template"] = GuiTemplate.ELEMENT
+        self.__mdict["settings"] = InteractionConfig(self.__mdict) # Interconfig keys are removed
+
+    def update_settings(self, source_emd):
+        self.settings.update(source_emd.meta.settings)
 
     def items(self):
         return self.__mdict.items()
 
-    @property
-    def template(self):
-        return self.__template
+    def has(self, name):
+        return name.lower() in self.__mdict
+
+    def __getattr__(self, name):
+        return self[name]
+
+    def __getitem__(self, name):
+        if self.has(name):
+            return self.__mdict[name]
+        else:
+            return None
+
+    def __setitem__(self, name, value):
+        self.__mdict[name] = value
 
     def __str__(self):
         return str(self.__mdict)
+
+    

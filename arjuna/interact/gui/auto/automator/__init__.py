@@ -109,11 +109,11 @@ class GuiAutomator(ElementContainer,Dispatchable):
         self.main_window.close_all_child_windows()
 
     def get_dom_root(self, gui):
-        from arjuna.interact.gui.auto.component.frame import DomRoot
+        from arjuna.interact.gui.auto.template.frame import DomRoot
         return DomRoot(gui)
 
-    def get_frame(self, gui, lmd, iconfig=None):
-        return self.dom_root(gui).frame(lmd, iconfig=iconfig)
+    def get_frame(self, gui, lmd):
+        return self.dom_root(gui).frame(lmd)
 
     @property
     def alert_handler(self):
@@ -140,7 +140,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         caps = DriverCapabilities(self.config, self.__econfig)
         self.dispatcher.launch(caps.processed_config)
 
-        from arjuna.interact.gui.auto.component.window import MainWindow
+        from arjuna.interact.gui.auto.template.window import MainWindow
         self.__main_window = MainWindow(self.app, self)
 
         from .browser import Browser
@@ -204,40 +204,25 @@ class GuiAutomator(ElementContainer,Dispatchable):
 
     #### Element Finding
 
-    def _element(self, gui, lmd, iconfig=None, max_wait_time=None):
+    def element(self, gui, lmd):
         from arjuna.interact.gui.auto.element.guielement import GuiElement
-        gui_element = GuiElement(gui, lmd, iconfig=iconfig) 
-        self.load_element(gui_element, max_wait_time=max_wait_time)
+        gui_element = GuiElement(gui, lmd) 
+        self.load_element(gui_element)
         return gui_element
 
-    element_with_lmd = _element
-
-    def _multi_element(self, gui, lmd, iconfig=None, max_wait_time=None):
+    def multi_element(self, gui, lmd):
         from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
-        m_guielement = GuiMultiElement(gui, lmd, iconfig=iconfig)
-        self.load_multielement(m_guielement, max_wait_time=max_wait_time)
+        m_guielement = GuiMultiElement(gui, lmd)
+        self.load_multielement(m_guielement)
         return m_guielement
 
-    multi_element_with_lmd = _multi_element
+    def dropdown(self, gui, lmd):
+        from arjuna.interact.gui.auto.template.dropdown import GuiWebSelect
+        return GuiWebSelect(gui, lmd)
 
-    def _dropdown(self, gui, lmd, option_container_lmd=None, option_lmd=None, iconfig=None):
-        from arjuna.interact.gui.auto.component.dropdown import GuiWebSelect
-        return GuiWebSelect(gui, lmd, option_container_lmd=option_container_lmd, option_lmd=option_lmd, iconfig=iconfig)
-
-    def _radio_group(self, gui, lmd, iconfig=None):
-        from arjuna.interact.gui.auto.component.radio_group import GuiWebRadioGroup
+    def radio_group(self, gui, lmd):
+        from arjuna.interact.gui.auto.template.radio_group import GuiWebRadioGroup
         return GuiWebRadioGroup(gui, lmd)
-
-    def _tab_group(self, gui, lmd, *, tab_header_lmd, content_relation_attr, content_relation_type, iconfig=None):
-        from arjuna.interact.gui.auto.component.tabs import TabGroup
-        return TabGroup(
-            gui, 
-            lmd, 
-            tab_header_lmd=tab_header_lmd, 
-            content_relation_attr=content_relation_attr, 
-            content_relation_type=content_relation_type,
-            iconfig=iconfig
-        )
 
     def execute_javascript(self, js, *args):
         return self.browser.execute_javascript(js, 

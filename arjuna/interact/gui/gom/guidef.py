@@ -61,51 +61,8 @@ class GuiDef:
     def is_empty(self):
         return seff.__ns.is_empty()
 
-    # def add_child(self, label, automator, file_def_path):
-    #     self.__children.append(
-    #         Gui(self.__name_store, self.__namespace_dir, label, self.__automator, file_def_path)
-    # )
-
     def get_emd(self, label):
         return self.__ns.get_meta_data(label, self.__auto_context)
-
-    def convert_to_lmd(self, *locators):
-        final_locators = []
-        for raw_locator in locators:
-            if raw_locator.wtype.upper().strip() == "LABEL":
-                emd = self.get_emd(raw_locator.wvalue)
-                for loc in emd.raw_locators:
-                    if not raw_locator.named_args:
-                        final_locators.append(Locator(ltype=loc.ltype, lvalue=loc.lvalue), named_args={})
-                    else:
-                        final_locators.append(Locator(ltype=loc.ltype, lvalue=loc.lvalue), named_args=raw_locator.named_args)
-            else:
-                if not raw_locator.named_args:
-                    final_locators.append(Locator(ltype=raw_locator.wtype, lvalue=raw_locator.wvalue), named_args={})
-                else:
-                    final_locators.append(Locator(ltype=raw_locator.ltype, lvalue=raw_locator.lvalue), named_args=raw_locator.named_args)
-        return GuiElementMetaData(final_locators)
-
-    def __gns_locators_as_with_locators(self, label):
-        emd = self.__ns.get_meta_data(label, self.__auto_context)
-        out = []
-        for loc in emd.raw_locators:
-            underscore = loc.ltype.lower().endswith("attr") and "_" or ""
-            wobj = getattr(With, underscore + loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "_" + "ID".lower())("abc")
-            out.append(wobj)
-        return out
-
-    def convert_to_with(self, locator):
-        from arjuna.interact.gui.auto.finder._with import With
-        out_list = []
-        impl_with = locator.as_impl_locator()
-        for wobj in self.__gns_locators_as_with_locators(impl_with.wvalue):
-            # underscore = loc.ltype.lower().endswith("attr") and "_" or ""
-            # wobj = getattr(With, underscore + loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "_" + "ID".lower())("abc")
-            if locator.named_args:
-                wobj.format(**locator.named_args)
-            out_list.append(wobj)
-        return out_list
 
     @property
     def root_element_name(self):
@@ -122,10 +79,6 @@ class GuiDef:
         except KeyError:
             # Defining __load__ is optional for GNS files.
             return None
-
-    def create_dispatcher(self):
-        # GuiPages don't use any dispatcher
-        pass
 
 class GuiFactory:
 
@@ -153,3 +106,43 @@ class GuiFactory:
     @classmethod
     def create_guidef(cls, automator, def_path):
         return GuiDef(automator, def_path)
+
+
+# Temp back from GuiDef of older implementation
+
+# def __gns_locators_as_with_locators(self, label):
+#     emd = self.__ns.get_meta_data(label, self.__auto_context)
+#     out = []
+#     for loc in emd.raw_locators:
+#         underscore = loc.ltype.lower().endswith("attr") and "_" or ""
+#         wobj = getattr(With, underscore + loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "_" + "ID".lower())("abc")
+#         out.append(wobj)
+#     return out
+
+# def convert_to_with(self, locator):
+#     from arjuna.interact.gui.auto.finder._with import With
+#     out_list = []
+#     impl_with = locator.as_impl_locator()
+#     for wobj in self.__gns_locators_as_with_locators(impl_with.wvalue):
+#         # underscore = loc.ltype.lower().endswith("attr") and "_" or ""
+#         # wobj = getattr(With, underscore + loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "_" + "ID".lower())("abc")
+#         if locator.named_args:
+#             wobj.format(**locator.named_args)
+#         out_list.append(wobj)
+#     return out_list
+# def convert_to_lmd(self, *locators):
+#     final_locators = []
+#     for raw_locator in locators:
+#         if raw_locator.wtype.upper().strip() == "LABEL":
+#             emd = self.get_emd(raw_locator.wvalue)
+#             for loc in emd.raw_locators:
+#                 if not raw_locator.named_args:
+#                     final_locators.append(Locator(ltype=loc.ltype, lvalue=loc.lvalue), named_args={})
+#                 else:
+#                     final_locators.append(Locator(ltype=loc.ltype, lvalue=loc.lvalue), named_args=raw_locator.named_args)
+#         else:
+#             if not raw_locator.named_args:
+#                 final_locators.append(Locator(ltype=raw_locator.wtype, lvalue=raw_locator.wvalue), named_args={})
+#             else:
+#                 final_locators.append(Locator(ltype=raw_locator.ltype, lvalue=raw_locator.lvalue), named_args=raw_locator.named_args)
+#     return GuiElementMetaData(final_locators)

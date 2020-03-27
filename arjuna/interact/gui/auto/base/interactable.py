@@ -17,16 +17,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna.interact.gui.auto.base.configurable import Configurable
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from arjuna.interact.gui.auto.source.parser import ElementXMLSourceParser
 from arjuna.core.exceptions import GuiElementTextNotSetError
 
-class Interactable(Configurable, Dispatchable):
+class Interactable(Dispatchable):
 
-    def __init__(self, gui, iconfig): #, parent=None, find=True):
+    def __init__(self, gui, emd): #, parent=None, find=True):
         self.__config = gui.automator.config
-        Configurable.__init__(self, gui, iconfig)
+        self.__emd = emd
         Dispatchable.__init__(self)
         self.__source = None
 
@@ -162,7 +161,7 @@ class Interactable(Configurable, Dispatchable):
         return self.__interaction_handler
 
     def __wait_until_clickable_if_configured(self):
-        if self._should_check_pre_state(): self.wait_until_clickable()
+        if self.__emd.meta.settings.should_check_pre_state(): self.wait_until_clickable()
 
     # Properties
     @property

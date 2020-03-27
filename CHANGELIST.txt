@@ -1,9 +1,17 @@
 Following is the list of critical additions and updates for a given released version:
 
-Possibilities - Targeted But Not Coded
+Possibilities - Targeted But Not Coded/Done
 - wait argument in locating - on priority for wait apis (wait_until_absent and contains and then others)
 - wait as meta data in GNS for elements
 - log trace option for finer logging in Arjuna (this makes debug level available to test authors without cluttering the output.)
+- Detail doc creation for Public Classes/Functions/Enums in Arjuna
+
+0.9.15
+------
+- max_wait argument support in
+    - gui.wait_until_absent
+    - 
+
 
 0.9.14
 ------

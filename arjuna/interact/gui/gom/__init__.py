@@ -80,37 +80,34 @@ class GuiSection(AppContent):
                 emd = self.gui_def.get_emd(label)
                 from arjuna import log_debug
                 log_debug("Loading Root Element {} for Gui GuiSection: {}".format(label, self.label))
-                self.__root_element = self._element(emd)
+                self.__root_element = self.emd_finder.element(emd)
             else:
                 from arjuna import log_debug
                 log_debug("Loading Root Element with Locator {} for Gui GuiSection: {}".format(str(locator), self.label))
-                self.__root_element = self.locate(locator)                
+                self.__root_element = self.finder.locate(locator)           
             
             self.__container = self.__root_element
 
-    def element(self, *, fargs=None, **kwargs):
+    def __get_caller(self, name):
         if self.__container is self:
-            return super().element(fargs=fargs, **kwargs)
+            return getattr(super(), name)
         else:
-            return self.__container.element(fargs=fargs, **kwargs)
+            return getattr(self.__container, name)
+
+    def locate(self, locator):
+        return self.__get_caller("locate")(fargs=fargs, **kwargs)
+
+    def element(self, *, fargs=None, **kwargs):
+        return self.__get_caller("element")(fargs=fargs, **kwargs)
 
     def multi_element(self, fargs=None, **kwargs):
-        if self.__container is self:
-            return super().multi_element(fargs=fargs, **kwargs)
-        else:
-            return self.__container.multi_element(fargs=fargs, **kwargs)
+        return self.__get_caller("multi_element")(fargs=fargs, **kwargs)
 
     def dropdown(self, fargs=None, **kwargs):
-        if self.__container is self:
-            return super().dropdown(fargs=fargs, **kwargs)
-        else:
-            return self.__container.dropdown(fargs=fargs, **kwargs)
+        return self.__get_caller("dropdown")(fargs=fargs, **kwargs)
 
     def radio_group(self, fargs=None, **kwargs):
-        if self.__container is self:
-            return super().radio_group(fargs=fargs, **kwargs)
-        else:
-            return self.__container.radio_group(fargs=fargs, **kwargs)       
+        return self.__get_caller("radio_group")(fargs=fargs, **kwargs)     
 
     @property
     def parent(self):

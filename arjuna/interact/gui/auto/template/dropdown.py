@@ -18,29 +18,33 @@ limitations under the License.
 '''
 
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
-from arjuna.interact.gui.auto.base.configurable import Configurable
+from arjuna.interact.gui.helpers import Locator
 
 # UUID is for client reference. Agent does not know about this.
-class GuiWebSelect(Configurable):
+class GuiWebSelect:
 
-    def __init__(self, gui, emd, parent=None, option_container_lmd=None, option_lmd=None, iconfig=None):
-        super().__init__(gui, iconfig)
+    def __init__(self, gui, emd, parent=None):
         self.__gui = gui
+        self.__emd = emd
         self.__automator = gui.automator
-        self.__finder = parent and parent or gui.automator
-        self._wrapped_main_element = self.__finder._element(self.gui, emd)
+        self.__finder = parent and parent or gui
+        self._wrapped_main_element = self.__finder.emd_finder.element(emd)
         self.__found = False
         self.__options = None
-        self.__option_lmd = option_lmd is not None and option_lmd or SimpleGuiElementMetaData("tag", "option")
+        self.__option_locator = self.emd.meta.option_locator is not None and self.emd.meta.option_locator or Locator(template="multi_element", tag="option")
 
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
-        self.__option_container_same_as_select = option_container_lmd is None and True or False
+        self.__option_container_same_as_select = self.emd.meta.option_container_locator is None and True or False
         if not self.__option_container_same_as_select:
-            self.__option_container = self.__finder._element(self.gui, option_container_lmd, iconfig=self.settings)
+            self.__option_container = self.__finder.element(self.emd.meta.option_container_locator)
 
         self.__source_parser = None
 
         self.__find()
+
+    @property
+    def emd(self):
+        return self.__emd
 
     @property
     def gui(self):
@@ -57,14 +61,14 @@ class GuiWebSelect(Configurable):
     def __find(self):
 
         def check_type_if_configured(tag):
-            if self._should_check_type(): self.__validate_select_control(tag)
+            if self.__emd.meta.settings.should_check_type(): self.__validate_select_control(tag)
 
         def get_root_element():
             return self.__option_container_same_as_select and self._wrapped_main_element or self.__option_container
 
         def load_options():
             container = get_root_element()
-            self.__options = container._multi_element(self.gui, self.__option_lmd, iconfig=self.settings)
+            self.__options = container.locate(self.__option_locator)
 
         # self._wrapped_main_element.find()
         tag = self._wrapped_main_element.source.tag
@@ -93,7 +97,7 @@ class GuiWebSelect(Configurable):
     def __select_option(self, option):
         self._wrapped_main_element.click()
         option.select()
-        if self._should_check_post_state() and not option.is_selected():
+        if self.__emd.meta.settings.should_check_post_state() and not option.is_selected():
             raise Exception("The attempt to select the dropdown option was not successful.")
 
     def select_index(self, index):

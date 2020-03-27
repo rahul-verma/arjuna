@@ -226,8 +226,17 @@ class Locator(Dictable):
 
     def __init__(self, template="element", fmt_args=None, **named_args):
         self.__template = template
+
         self.__fmt_args = fmt_args
+        if self.__fmt_args is None:
+            self.__fmt_args = dict()
+
         self.__named_args = named_args
+
+        from arjuna.interact.gui.auto.finder.meta import Meta
+        self.__meta = Meta({
+            "template" : template,
+        })
 
     @property
     def template(self):
@@ -246,10 +255,37 @@ class Locator(Dictable):
             {
                 "template": self.template,
                 "fmt_args": self.fmt_args,
-                "named_args": self.named_args
+                "meta": str(self.__meta)
             }
         )
 
+    def as_raw_emd(self):
+        from arjuna import Arjuna
+        from arjuna.interact.gui.auto.finder._with import With
+        from arjuna.interact.gui.auto.finder.enums import WithType
+        with_list = []
+        for k,v in self.__named_args.items():
+            if k.upper() in WithType.__members__:
+                if isinstance(v, Dictable):
+                    v = v.as_dict()
+                with_list.append(getattr(With, k.lower())(v))
+            elif Arjuna.get_withx_ref().has_locator(k):
+                if isinstance(v, Dictable):
+                    v = v.as_dict()
+                    with_list.append(getattr(With, k.lower())(**v))
+                else:
+                    with_list.append(getattr(With, k.lower())(v))
+            else:
+                self.__meta[k] = v
+        if not with_list:
+            raise Exception("You must provide atleast one locator.")
+        from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+        return GuiElementMetaData.create_lmd(*with_list, meta=self.__meta)
+
+    def as_emd(self):
+        emd = self.as_raw_emd()
+        fmt_emd = emd.create_formatted_emd(**self.__fmt_args)
+        return fmt_emd
 
 
 

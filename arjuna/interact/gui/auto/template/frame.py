@@ -22,7 +22,6 @@ import os
 from arjuna import Arjuna
 from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
 from arjuna.interact.gui.auto.source.parser import FrameSource
-from arjuna.interact.gui.auto.base.configurable import Configurable
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
@@ -41,16 +40,15 @@ class FrameConditions:
         caller = DynamicCaller(self.frame._find_frame, lmd, *args, **kwargs)
         return CommandCondition(caller)
 
-class FrameContainer(Configurable):
+class FrameContainer:
 
-    def __init__(self, gui, iconfig=None):
-        super().__init__(gui, iconfig)
+    def __init__(self, gui):
         self.__gui = gui
         self.__automator = gui.automator
         self.__conditions = FrameConditions(self)
 
     @property
-    def max_wait_time(self):
+    def max_wait(self):
         return self.__automator.config.guiauto_max_wait
 
     def __check_tag(self, wrapped_element):
@@ -58,11 +56,10 @@ class FrameContainer(Configurable):
         if tag.lower() != "iframe":
             raise Exception("The element should have a 'iframe' tag for IFrame element. Found: " + tag)
 
-    def frame(self, locator_meta_data, iconfig=None):
-        return self.__conditions.FrameIsPresent(locator_meta_data, iconfig=iconfig).wait(max_wait_time=self.max_wait_time)
+    def frame(self, locator_meta_data):
+        return self.__conditions.FrameIsPresent(locator_meta_data).wait(max_wait=self.max_wait)
 
-    def _find_frame(self, locator_meta_data, iconfig=None):
-        iconfig = iconfig and iconfig or self.settings
+    def _find_frame(self, locator_meta_data):
         found = False
         frame = None
         for locator in locator_meta_data.locators: 
@@ -78,13 +75,13 @@ class FrameContainer(Configurable):
                         # In case another identifier is present it should be tried.
                         continue
                     self.__check_tag(wrapped_element)
-                    frame = IPartialFrame(self.gui, self, multi_element, wrapped_element, iconfig=iconfig)
+                    frame = IPartialFrame(self.gui, self, multi_element, wrapped_element)
                 else:
                     emd = SimpleGuiElementMetaData(locator.ltype.name, locator.lvalue)
                     wrapped_element = self.__automator.element(self.gui, emd)
                     # wrapped_element.find()
                     self.__check_tag(wrapped_element)
-                    frame = IFrame(self.gui, self, wrapped_element, iconfig=iconfig)
+                    frame = IFrame(self.gui, self, wrapped_element)
 
                 return frame
             except WaitableError as f:
@@ -137,8 +134,8 @@ class DomRoot(FrameContainer):
 
 class IFrame(FrameContainer):
 
-    def __init__(self, gui, dom_root, wrapped_element, iconfig=None):
-        super().__init__(gui, iconfig=iconfig)
+    def __init__(self, gui, dom_root, wrapped_element):
+        super().__init__(gui)
         self.__dom_root = dom_root
         self.__parent_frames = []
         self.__wrapped_element = wrapped_element
@@ -203,8 +200,8 @@ class IFrame(FrameContainer):
 
 class IPartialFrame(IFrame):
 
-    def __init__(self, gui, dom_root, melement, wrapped_element, iconfig=None):
-        super().__init__(gui, dom_root, wrapped_element, iconfig=iconfig)
+    def __init__(self, gui, dom_root, melement, wrapped_element):
+        super().__init__(gui, dom_root, wrapped_element)
         self.__melement = melement
 
     def focus(self):

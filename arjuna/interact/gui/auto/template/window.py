@@ -48,7 +48,7 @@ class BasicWindow:
         self.__config = automator.config
 
     @property
-    def max_wait_time(self):
+    def max_wait(self):
         return self.__automator.config.guiauto_max_wait
 
     @property
@@ -146,7 +146,7 @@ class MainWindow(BasicWindow):
         return self.automator.dispatcher.get_current_window_handle()
 
     def child_window(self, locator_meta_data):
-        return self.get_conditions().ChildWindowIsPresent(locator_meta_data).wait(max_wait_time=self.max_wait_time)
+        return self.get_conditions().ChildWindowIsPresent(locator_meta_data).wait(max_wait=self.max_wait)
 
     def _find_child_window(self, locator_meta_data):
         all_child_handles, _ = self.get_all_child_window_handles()
@@ -167,7 +167,7 @@ class MainWindow(BasicWindow):
                             # The element for window is created in the context of an app.
                             # Need to verify this logic.
                             # and its impact on POM.
-                            contained_element = self.__automator.element(self.app,emd, max_wait_time=0.5)
+                            contained_element = self.__automator.element(self.app,emd, max_wait=0.5)
                             # contained_element.find()
                             return cwin
                         except WaitableError as f:

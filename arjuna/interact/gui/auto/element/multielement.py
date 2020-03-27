@@ -26,15 +26,14 @@ from selenium.common.exceptions import StaleElementReferenceException
 
 from arjuna.interact.gui.auto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
-from arjuna.interact.gui.auto.base.configurable import Configurable
 from arjuna.interact.gui.auto.element.guielement import GuiElement
 from arjuna.interact.gui.auto.source.parser import *
 from arjuna.engine.asserter import AsserterMixIn
 
 class GuiPartialElement(GuiElement):
 
-    def __init__(self, gui, multi_element, index: int, dispatcher_element, iconfig=None):
-        super().__init__(gui, multi_element.lmd, iconfig=iconfig)
+    def __init__(self, gui, multi_element, index: int, dispatcher_element):
+        super().__init__(gui, multi_element.lmd)
         self.__multi_element = multi_element
         self.__index = index
         self.dispatcher = dispatcher_element
@@ -50,13 +49,12 @@ class GuiPartialElement(GuiElement):
     def index(self):
         return self.__index
 
-class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
+class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
     
-    def __init__(self, gui, lmd, iconfig=None, elements=None): #, parent=None):
+    def __init__(self, gui, lmd, elements=None): #, parent=None):
         AsserterMixIn.__init__(self)
         Locatable.__init__(self, gui, lmd) #, parent)
         Dispatchable.__init__(self)
-        Configurable.__init__(self, gui, iconfig)
         if elements:
             self.__elements = elements
         else:
@@ -107,7 +105,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable,Configurable):
         # The logic ignores stale elements 
         for i in range(count):
             try:
-                e = GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i), iconfig=self.settings)
+                e = GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i))
                 self.__elements.append(e)
             except StaleElementReferenceException as e:
                 pass
@@ -212,12 +210,11 @@ class ElementFilter:
     def __init__(self, gui_multi_element):
         self.__gui = gui_multi_element.gui
         self.__lmd = gui_multi_element.lmd
-        self.__iconfig = gui_multi_element.settings
         self.__elements = gui_multi_element.elements
         self.__filtered_elements = self.__elements
 
     def build(self):
-        me = GuiMultiElement(self.__gui, self.__lmd, iconfig=self.__iconfig, elements=self.__filtered_elements)
+        me = GuiMultiElement(self.__gui, self.__lmd, elements=self.__filtered_elements)
         self.__filtered_elements = self.__elements
         return me
 

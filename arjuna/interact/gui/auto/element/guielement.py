@@ -22,16 +22,27 @@ from arjuna.interact.gui.auto.base.interactable import Interactable
 from arjuna.interact.gui.auto.base.container import ElementContainer
 from arjuna.engine.asserter import AsserterMixIn
 from arjuna.interact.gui.gom.gns import GNS
+from arjuna.interact.gui.auto.finder import GuiElementFinder, GuiElementEmdFinder
 from arjuna.core.exceptions import *
 
 class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
-    def __init__(self, gui, emd, iconfig=None):
+    def __init__(self, gui, emd):
         AsserterMixIn.__init__(self)
         ElementContainer.__init__(self, gui.automator.config)
         Locatable.__init__(self, gui, emd) #, parent, obj_name="GuiElement")
-        Interactable.__init__(self, gui, iconfig)
+        Interactable.__init__(self, gui, emd)
         self.__gns = GNS(self, gui.gui_def)
+        self.__finder = GuiElementFinder(self)
+        self.__emd_finder = GuiElementEmdFinder(self)
+
+    @property
+    def finder(self):
+        return self.__finder
+
+    @property
+    def emd_finder(self):
+        return self.__emd_finder
 
     @property
     def gns(self):
@@ -41,49 +52,11 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
     def root_element(self):
         return None
 
-    def __element(self, *str_or_with_locators, iconfig=None):
-        lmd = self.gui.convert_to_with_lmd(*str_or_with_locators)
-        return self.element(self.gui, lmd, iconfig=iconfig)
-
-    def _element(self, gui, lmd, iconfig=None):
-        from arjuna.interact.gui.auto.element.guielement import GuiElement
-        gui_element = GuiElement(gui, lmd, iconfig=iconfig)
-        self.load_element(gui_element)
-        return gui_element        
-
-    def __multi_element(self, *str_or_with_locators, iconfig=None):
-        lmd = self.gui.convert_to_with_lmd(*str_or_with_locators)
-        return self.multi_element(self.gui, lmd, iconfig=iconfig)
-
-    def _multi_element(self, gui, lmd, iconfig=None):
-        from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
-        m_guielement = GuiMultiElement(gui, lmd, iconfig=iconfig)
-        self.load_multielement(m_guielement)
-        return m_guielement
-
     def find_element_with_js(self, js):
         raise Exception("With.JS is currently not supported for nested element finding.")
 
     def find_multielement_with_js(self, js):
         raise Exception("With.JS is currently not supported for nested element finding.")
-
-    def locate(self, locator):
-        from arjuna import log_debug
-        emd = self.gui.convert_locator_to_emd(locator)
-        log_debug("Finding element with emd: {}.".format(emd))
-        try:
-            return getattr(self, "_" +  emd.meta.template.name.lower())(self.gui, emd)
-        except ArjunaTimeoutError:
-            raise GuiElementNotPresentError(self.gui, emd)        
-
-    def locate_element(self, *, template="element", fargs=None, **kwargs):
-        from arjuna.interact.gui.helpers import Locator
-        return self.locate(Locator(template=template, fmt_args=fargs, **kwargs))
-
-    element = locate_element
-
-    def multi_element(self, **kwargs):
-        return self.locate_element(template="multi_element", **kwargs)
 
     def _wait_until_absent(self, emd):
         try:
@@ -93,7 +66,7 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     def wait_until_absent(self, *, fargs=None, **kwargs):
         from arjuna.interact.gui.helpers import Locator
-        emd = self.gui.convert_locator_to_emd(Locator(fmt_args=fargs, **kwargs))
+        emd = Locator(fmt_args=fargs, **kwargs).as_emd()
         self._wait_until_absent(emd)
 
     def contains(self, *, fargs=None, **kwargs):
@@ -103,3 +76,20 @@ class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
             return False
         else:
             return True
+
+    ########## Served by Template ########
+
+    def locate(self, locator):
+        return self.finder.locate(locator)
+
+    def element(self, *, fargs=None, **kwargs):
+        return self.finder.element(fargs=fargs, **kwargs)
+
+    def multi_element(self, fargs=None, **kwargs):
+        return self.finder.multi_element(fargs=fargs, **kwargs)
+
+    def dropdown(self, fargs=None, **kwargs):
+        return self.finder.dropdown(fargs=fargs, **kwargs)
+
+    def radio_group(self, fargs=None, **kwargs):
+        return self.finder.radio_group(fargs=fargs, **kwargs)

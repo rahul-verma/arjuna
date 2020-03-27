@@ -1,6 +1,7 @@
 
 from .formatter import GNSFormatter
 from arjuna.core.exceptions import *
+from arjuna.interact.gui.auto.finder import GuiEmdFinder, GuiElementEmdFinder
 
 class GNS:
 
@@ -10,6 +11,10 @@ class GNS:
         self.__container = None
         self.__process_container(gui_or_element)
         self.__gui_def = gui_def
+        if self.__container_type == "gui":
+            self.__finder = GuiEmdFinder(self.__gui)
+        else:
+            self.__finder = GuiElementEmdFinder(self.__container)
 
     def __process_container(self, gui_or_element):
         from arjuna.interact.gui.gom.gui import Gui
@@ -55,11 +60,8 @@ class GNS:
         return False
 
     def locate_with_emd(self, emd):
-        factory = getattr(self.__container, "_" + emd.meta.template.name.lower())
-        if self.__container_type == "gui":
-            return factory(emd)
-        else:
-            return factory(self.__gui, emd)
+        factory = getattr(self.__finder, emd.meta["template"].name.lower())
+        return factory(emd)
         
 
     def __getattr__(self, label):

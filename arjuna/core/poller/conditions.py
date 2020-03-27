@@ -45,8 +45,8 @@ class Condition:
     def get_call_result(self):
         return self.__call_result
 
-    def wait(self, *, max_wait_time=60, poll_interval=0.5):
-        end_time = time.time() + max_wait_time
+    def wait(self, *, max_wait=60, poll_interval=0.5):
+        end_time = time.time() + max_wait
         e = None
         etrace = None
         while(True):

@@ -17,17 +17,15 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-from arjuna.interact.gui.auto.base.configurable import Configurable
+class GuiWebRadioGroup:
 
-class GuiWebRadioGroup(Configurable):
-
-    def __init__(self, gui, lmd, parent=None):
-        super().__init__(gui)
+    def __init__(self, gui, emd, parent=None):
         self.__gui = gui
+        self.__emd = emd
         self.__automator = gui.automator
-        self.__finder = parent and parent or self.__automator
+        self.__finder = parent and parent or gui
         self.__radios = None
-        self.__find(self.__finder, lmd)
+        self.__find(self.__finder, emd)
 
     @property
     def gui(self):
@@ -43,11 +41,11 @@ class GuiWebRadioGroup(Configurable):
             raise Exception("Not a valid radio group. Contains radio elements belonging to different radio groups.")
 
     def __check_type_if_configured(self, tags):
-        if self._should_check_type(): self.__validate_radio_buttons(tags)
+        if self.__emd.meta.settings.should_check_type(): self.__validate_radio_buttons(tags)
 
-    def __find(self, finder, lmd):
+    def __find(self, finder, emd):
         # This would force the identification of partial elements in the wrapped multi-element.
-        self.__radios = finder._multi_element(self.gui, lmd, iconfig=self.settings)
+        self.__radios = finder.emd_finder.multi_element(emd)
         self.__check_type_if_configured(self.source)
 
     def has_index_selected(self, index):
@@ -63,7 +61,7 @@ class GuiWebRadioGroup(Configurable):
 
     def __select_option(self, option):
         option.select()
-        if self._should_check_post_state() and not option.is_selected():
+        if self.__emd.meta.settings.should_check_post_state() and not option.is_selected():
             raise Exception("The attempt to select the radio button was not successful.")
 
     def select_index(self, index):
