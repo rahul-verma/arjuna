@@ -5,29 +5,22 @@ class Info:
 
     def __init__(self, pytest_request):
         self.__request = pytest_request
-        self.__mod_name = pytest_request.module.__name__
         rnode = self.__request.node
+        self.__node_name = rnode.name
         if self.__request.scope == "module":
             self.__orig_name = rnode.name
-            self.__node_name = rnode.name
         elif self.__request.scope == "function":
             self.__orig_name = rnode.originalname and rnode.originalname or rnode.name
-            self.__node_name = rnode.name
 
     def get_qual_name(self, with_params=False):
         # if pytest name has params only then originalname is set else it is None
-        if self.__request.scope == "module":
+        if self.__request.scope in {"module", "session"}:
             return self.__node_name
         else:
             name = with_params and self.__node_name or self.__orig_name
-            return self.__mod_name + "." + name
+            return self.__request.module.__name__ + "." + name
 
-    @property
-    def qual_name(self):
-        return self.get_qual_name()
-
-    @property
-    def qual_name_with_data(self):
+    def get_qual_name_with_data(self):
         qname = self.get_qual_name(with_params=True)
         if self.__request.fixturename:
             return qname + ":" + self.__request.fixturename

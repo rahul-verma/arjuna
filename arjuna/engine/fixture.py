@@ -33,11 +33,15 @@ def simple_dec(func):
         from arjuna import Arjuna
         request_wrapper = My()
         request_wrapper.set_req_obj(request)
-        qual_name = request_wrapper.info.qual_name_with_data
+        qual_name = request_wrapper.info.get_qual_name_with_data()
         Arjuna.get_logger().info("(Setup) Begin fixture function: {}".format(qual_name))   
         yield from func(request_wrapper, *args, **kwargs)
         Arjuna.get_logger().info("(Teardown) End fixture function: {}".format(qual_name))
     return call_func
+
+def for_session(func):
+    from arjuna import Arjuna
+    return pytest.yield_fixture(scope="session")(simple_dec(func))
 
 def for_module(func):
     from arjuna import Arjuna

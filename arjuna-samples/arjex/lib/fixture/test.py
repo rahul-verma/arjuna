@@ -1,6 +1,18 @@
 
 from arjuna import *
 
+
+@for_test
+def test_resource(request):
+    d = {'a' : 1}
+
+    yield d
+
+    del d['a']
+    assert d == {}
+
+
+
 @for_test
 def wordpress(request):
     '''

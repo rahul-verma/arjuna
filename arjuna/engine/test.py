@@ -34,7 +34,7 @@ def call_func(func, request, data=None, *args, **kwargs):
     from arjuna import Arjuna
     request_wrapper = My()
     request_wrapper.set_req_obj(request)
-    qual_name = request_wrapper.info.qual_name_with_data
+    qual_name = request_wrapper.info.get_qual_name_with_data()
     Arjuna.get_logger().info("Begin test function: {}".format(qual_name))  
     if data:      
         func(request=request_wrapper, data=data, *args, **kwargs)
