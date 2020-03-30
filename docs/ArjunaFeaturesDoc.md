@@ -105,7 +105,7 @@ A fixed project structure to be followed for an Arjuna test project. This brings
 
 Following are critical project directories, sub-directories and files. *Arjuna could be creating other directories corresponding to some in-progress or experimental features. They are not listed here.*
 
-Please also note that some of these directories are mandatory as a part of Arjuna test project structure. When you create project using `create-project` command from Arjuna CLI, Arjuna places `placeholder.txt` files so that when you check-in your code in a code repository, empty directories are not ignored during check-in. It is advised to retain them, until you make use of them by placing files in them as per your project needs.
+Please also note that some of these directories are mandatory as a part of Arjuna test project structure. When you create project using `create-project` command from [Arjuna Command Line Interface](#the-create-project-command---creating-a-new-project-skeleton), Arjuna places `placeholder.txt` files so that when you check-in your code in a code repository, empty directories are not ignored during check-in. It is advised to retain them, until you make use of them by placing files in them as per your project needs.
 
 - **config**: Contains configuration files.
   - **project.conf**: Your project's configuration file containing project-level configuration settings.
@@ -140,13 +140,11 @@ Please also note that some of these directories are mandatory as a part of Arjun
 
 Arjuna provides a very comprehensive yet intuitive Command Line Interface (CLI).
 
-As Arjuna needs a reference to the test project root directory, it is suggested to run the project using the `<project_root>/script/arjuna_launcher.py` script. It automatically picks up the project root directory initializes Arjuna with it along with the other command line options provided.
-
 ### -h or --help
 You can check the available options using `-h` or `--help` switch:
 
 ```bash
-python arjuna_launcher.py -h
+python -m arjuna -h
 ```
 
 ### Control Logging Level using -dl and -ll Options
@@ -165,10 +163,10 @@ Arjuna's CLI is Command-Driven. Following are the current available commands:
 - **run-project**: Run all tests in an Arjuna Test Project.
 - **run-selected**: Run tests selected based on selectors specified.
 
-You can see the help for a given command by running `python arjuna_launcher.py <command> -h`, for example
+You can see the help for a given command by running `python -m arjuna <command> -h`, for example
 
 ```bash
-python arjuna_launcher.py create-project -h
+python -m arjuna create-project -h
 ```
 
 #### The create-project command - Creating a New Project Skeleton
@@ -178,13 +176,17 @@ python arjuna_launcher.py create-project -h
 It is a simple to run command. For example:
 
 ```bash
-python arjuna_launcher.py create-project -p /path/to/proj_name
+python -m arjuna create-project -p /path/to/proj_name
 ```
 
 This command creates a test project with name `proj_name` at the path provided. `proj_name` must be a valid Arjuna name.
 
 #### The run-project command
 This command is used to run all tests in the project. The tests are picked up from the `<Project Root Dir>/test/module` directory.
+
+```bash
+python -m arjuna run-project -p /path/to/proj_name <run_options>
+```
 
 Following run options can be provided in command line:
 
@@ -195,11 +197,15 @@ Following run options can be provided in command line:
 - **--dry-run**: Do not run tests, just enumerate them.
 - **--run-env**: Provide the test environment name (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). Reference configuration is super-imposed with these options.
 - **--run-conf**: Absolute path of a conf file to be used for this run. If a name or relative path is provided, it is considered as relative to `<Project Root Dir>/config` directory. The options take precedence over reference configuration and environment configuration.
-- **-ao or --arjuna-option**: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.
-- **-uo or --user-option**: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.
+- **-ao or --arjuna-option**: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates. You can provide any number of these switches.
+- **-uo or --user-option**: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.  You can provide any number of these switches.
 
 #### The run-selected command
 This command is used to run a sub-set of tests in the project. The tests are picked up from the `<Project Root Dir>/test/module` directory as per the selectors provided.
+
+```bash
+python -m arjuna run-selected -p /path/to/proj_name <run_options> <selectors>
+```
 
 All the command line options specified for [the `run-project` command](#the-run-project-command) are supported. In addition, following selection related options are available:
 
@@ -207,6 +213,18 @@ All the command line options specified for [the `run-project` command](#the-run-
 - **-em or --exclude-modules**: One or more names/patterns for excluding test modules.
 - **-it or --include-tests**: One or more names/patterns for including test functions.
 - **-et or --exclude-tests**: One or more names/patterns for excluding test functions.
+
+### Using arjuna_launcher.py Script instead of python -m arjuna
+As Arjuna needs a reference to the test project root directory, Arjuna provides you with a handy runner script: `<project_root>/script/arjuna_launcher.py` script. It automatically picks up the project root directory initializes Arjuna with it along with the other command line options provided.
+
+You can execute `run-project` or `run-selected` commands as:
+
+```
+python arjuna_launcher.py run-project <run_options>
+python arjuna_launcher.py run-selected <run_options> <selectors>
+```
+
+without providing the `-p` switch for project directory.
 
 ## Defining a Test Function
 
@@ -229,9 +247,12 @@ def check_test_name(request):
 4. The contents of the test function depend on the test that you want to write.
 
 ### Running a Specific Test Function
-You can run this test by running `arjuna_launcher.py` Python script in the `script` directory of the project:
+You can run this test using by running `arjuna` module or running `arjuna_launcher.py` script:
 
-`python arjuna_launcher.py run-selected -it check_test_name`
+```bash
+python -m arjuna run-selected -p path/to-proj_name -it check_test_name
+python arjuna_launcher.py run-selected -it check_test_name
+```
 
 ## Defining Test Fixtures
 

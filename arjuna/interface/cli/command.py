@@ -71,7 +71,7 @@ class MainCommand(Command):
 
     def __init__(self):
         super().__init__()
-        parser = argparse.ArgumentParser(prog='python arjuna_launcher.py', conflict_handler='resolve',
+        parser = argparse.ArgumentParser(prog='python -m arjuna', conflict_handler='resolve',
                                 description="This is the CLI of Arjuna. Use the appropriate command and sub-commands as needed.")
         parser.add_argument('-dl', '--display-level', dest='log.console.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
                                  help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')", default=LoggingLevel.INFO.name)
@@ -136,6 +136,7 @@ class CreateProject(Command):
         (FileObjectType.DIR, "data/reference/excel_row"),
         (FileObjectType.DIR, "l10n"),
         (FileObjectType.DIR, "l10n/excel"),
+        (FileObjectType.DIR, "l10n/json"),
         (FileObjectType.DIR, "guiauto"),
         (FileObjectType.DIR, "guiauto/driver"),
         (FileObjectType.DIR, "guiauto/driver/linux"),
@@ -143,7 +144,7 @@ class CreateProject(Command):
         (FileObjectType.DIR, "guiauto/driver/windows"),
         (FileObjectType.DIR, "guiauto/namespace"),
         (FileObjectType.DIR, "guiauto/withx"),
-        (FileObjectType.DIR, "guiauto/withx/withx.yaml"),
+        (FileObjectType.FILE, "guiauto/withx/withx.yaml"),
         (FileObjectType.DIR, "report"),
         (FileObjectType.DIR, "script"),
         (FileObjectType.DIR, "test"),
@@ -197,14 +198,15 @@ class CreateProject(Command):
             for ftype, frpath in CreateProject.COMMON_DIRS_FILES:
                 self.__create_file_or_dir(project_temp_dir, ftype, frpath)
             copy_file("../../res/proj.conf", "config/project.conf")
-            copy_file("../../res/scripts/arjuna_launcher.py", "script/arjuna_launcher.py")
+            copy_file("../../res/check_dummy.py", "test/module/check_dummy.py")
+            copy_file("../../res/arjuna_launcher.py", "script/arjuna_launcher.py")
             f = open(get_src_file_path("../../res/conftest.txt"), "r")
             contents = f.read().format(project=project_name)
             f.close()
             f = open(get_proj_target_path("test/conftest.py"), "w")
             f.write(contents)
             f.close()
-            for d in [ "config/env", "data/source", "l10n/excel", "data/reference/excel_row", "data/reference/excel_column", "guiauto/namespace"]:
+            for d in [ "config/env", "data/source", "l10n/excel", "l10n/json", "data/reference/excel_row", "data/reference/excel_column", "guiauto/namespace"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:
                 copy_file("../../res/placeholder.txt", "guiauto/driver/{}/placeholder.txt".format(os_name))

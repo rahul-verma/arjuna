@@ -48,6 +48,7 @@ setup(
                     "res/*.txt",
                     "res/*.conf",
                     "res/*.ini",
+                    "res/*.py",
                 ]
     },
     install_requires = ["requests", "selenium", "webdriver_manager", "xlrd", "xlwt", "pyparsing", "pyhocon", "lxml", "pytest", "pytest-html", "pytest-dependency", "PyYAML", "mimesis", "jsonpath-rw", "jsonpath-rw-ext"],
