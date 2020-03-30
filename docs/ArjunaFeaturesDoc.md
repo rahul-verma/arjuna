@@ -1,5 +1,10 @@
 - [Arjuna Test Project](#arjuna-test-project)
 - [Arjuna Command Line Interface](#arjuna-command-line-interface)
+  * [-h or --help](#-h-or---help)
+  * [Arjuna Commands](#arjuna-commands)
+    + [The create-project command - Creating a New Project Skeleton](#the-create-project-command---creating-a-new-project-skeleton)
+    + [The run-project command](#the-run-project-command)
+    + [The run-selected command](#the-run-selected-command)
 - [Defining a Test Function](#defining-a-test-function)
   * [The @test Decorator](#the--test-decorator)
   * [Running a Specific Test Function](#running-a-specific-test-function)
@@ -92,6 +97,7 @@
 
 <small><i><a href='http://ecotrust-canada.github.io/markdown-toc/'>Table of contents generated with markdown-toc</a></i></small>
 
+
 ## Arjuna Test Project
 
 A fixed project structure to be followed for an Arjuna test project. This brings consitency across mutliple test automation implementations within and outside your organization.
@@ -182,12 +188,22 @@ Following run options can be provided in command line:
 - **-h or --help**: To check all the run options
 - **rid or --runid**: The id/name of this test run. It is `mrun` by default. Run ID is used to create the report directory name.
 - **static-rid**: Instructs Arjuna NOT to use the run id without appending timestap to it. It is very helpful to us this during script development as for every run a new report directory is not created.
-- **-rf or __report_formats**: Report formats for test report generation. Allowed values are `XML` and `HTML`.
+- **-rf or --report-formats**: Report formats for test report generation. Allowed values are `XML` and `HTML`.
 - **--dry-run**: Do not run tests, just enumerate them.
 - **--run-env**: Provide the test environment name (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). Reference configuration is super-imposed with these options.
 - **--run-conf**: Absolute path of a conf file to be used for this run. If a name or relative path is provided, it is considered as relative to `<Project Root Dir>/config` directory. The options take precedence over reference configuration and environment configuration.
 - **-ao or --arjuna-option**: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.
 - **-uo or --user-option**: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.
+
+#### The run-selected command
+This command is used to run a sub-set of tests in the project. The tests are picked up from the `<Project Root Dir>/test/module` directory as per the selectors provided.
+
+All the command line options specified for [the `run-project` command](#the-run-project-command) are supported. In addition, following selection related options are available:
+
+- **-im or --include-modules**: One or more names/patterns for including test modules.
+- **-em or --exclude-modules**: One or more names/patterns for excluding test modules.
+- **-it or --include-tests**: One or more names/patterns for including test functions.
+- **-et or --exclude-tests**: One or more names/patterns for excluding test functions.
 
 ## Defining a Test Function
 
