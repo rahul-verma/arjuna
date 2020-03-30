@@ -1,6 +1,7 @@
 - [Arjuna Test Project](#arjuna-test-project)
 - [Arjuna Command Line Interface](#arjuna-command-line-interface)
   * [-h or --help](#-h-or---help)
+  * [Control Logging Level using -dl and -ll Options](#control-logging-level-using--dl-and--ll-options)
   * [Arjuna Commands](#arjuna-commands)
     + [The create-project command - Creating a New Project Skeleton](#the-create-project-command---creating-a-new-project-skeleton)
     + [The run-project command](#the-run-project-command)
@@ -148,10 +149,12 @@ You can check the available options using `-h` or `--help` switch:
 python arjuna_launcher.py -h
 ```
 
-The only three switches which you pass in a non-command mode are:
-- **-h or --help**: To show help
-- **-dl or --display-level** to control which log messages are displayed on console.
-- **-ll or --log-level** to control which log messages are logged in log file.
+### Control Logging Level using -dl and -ll Options
+
+Each to Arjuna logger is associated with console as well as file logging. You can control what gets displayed on console as well as what gets logged in the log file independently of each other. This is done by specifying the minimum message level.
+
+- **-dl or --display-level** to control which log messages are displayed on console. Default is `INFO`.
+- **-ll or --log-level** to control which log messages are logged in log file. Default is `DEBUG`.
 
 Rest of the options are available in respective commands as discussed next.
 
