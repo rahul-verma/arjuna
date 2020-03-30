@@ -131,7 +131,63 @@ Please also note that some of these directories are mandatory as a part of Arjun
 
 ## Arjuna Command Line Interface
 
-Pending
+Arjuna provides a very comprehensive yet intuitive Command Line Interface (CLI).
+
+As Arjuna needs a reference to the test project root directory, it is suggested to run the project using the `<project_root>/script/arjuna_launcher.py` script. It automatically picks up the project root directory initializes Arjuna with it along with the other command line options provided.
+
+### -h or --help
+You can check the available options using `-h` or `--help` switch:
+
+```bash
+python arjuna_launcher.py -h
+```
+
+The only three switches which you pass in a non-command mode are:
+- **-h or --help**: To show help
+- **-dl or --display-level** to control which log messages are displayed on console.
+- **-ll or --log-level** to control which log messages are logged in log file.
+
+Rest of the options are available in respective commands as discussed next.
+
+### Arjuna Commands
+
+Arjuna's CLI is Command-Driven. Following are the current available commands:
+- **create-project**: Create a new project
+- **run-project**: Run all tests in an Arjuna Test Project.
+- **run-selected**: Run tests selected based on selectors specified.
+
+You can see the help for a given command by running `python arjuna_launcher.py <command> -h`, for example
+
+```bash
+python arjuna_launcher.py create-project -h
+```
+
+#### The create-project command - Creating a New Project Skeleton
+
+[Arjuna Test Project](#arjuna-test-project) follows a [strict test project structure](#arjuna-test-project). You can easily create the project skeleton using `create-project` command in Arjuna CLI.
+
+It is a simple to run command. For example:
+
+```bash
+python arjuna_launcher.py create-project -p /path/to/proj_name
+```
+
+This command creates a test project with name `proj_name` at the path provided. `proj_name` must be a valid Arjuna name.
+
+#### The run-project command
+This command is used to run all tests in the project. The tests are picked up from the `<Project Root Dir>/test/module` directory.
+
+Following run options can be provided in command line:
+
+- **-h or --help**: To check all the run options
+- **rid or --runid**: The id/name of this test run. It is `mrun` by default. Run ID is used to create the report directory name.
+- **static-rid**: Instructs Arjuna NOT to use the run id without appending timestap to it. It is very helpful to us this during script development as for every run a new report directory is not created.
+- **-rf or __report_formats**: Report formats for test report generation. Allowed values are `XML` and `HTML`.
+- **--dry-run**: Do not run tests, just enumerate them.
+- **--run-env**: Provide the test environment name (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). Reference configuration is super-imposed with these options.
+- **--run-conf**: Absolute path of a conf file to be used for this run. If a name or relative path is provided, it is considered as relative to `<Project Root Dir>/config` directory. The options take precedence over reference configuration and environment configuration.
+- **-ao or --arjuna-option**: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.
+- **-uo or --user-option**: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.
 
 ## Defining a Test Function
 

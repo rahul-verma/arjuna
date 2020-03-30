@@ -15,8 +15,6 @@ Possibilities - Targeted But Not Coded/Done
     - gui.contains, gui.element.contains
     - gui.gns.contains(label), gui.gns.label.gns.contains(label), gui.gns.label.contains
 
-
-
 0.9.14
 ------
 - Documents updated for a more manageable format instead of tight coupling with example code.
