@@ -305,6 +305,7 @@ class Device(Enum):
 
 
 class LoggingLevel(Enum):
+    TRACE = auto()
     DEBUG = auto()
     INFO = auto()
     WARN = auto()

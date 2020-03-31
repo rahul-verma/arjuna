@@ -87,6 +87,8 @@ class TestConfigurator:
 
     def __load_run_conf(self):
         if self.__run_conf_path:
+            if not self.__run_conf_path.lower().endswith(".conf"):
+                self.__run_conf_path += ".conf"
             self.__run_conf = self.load_options_from_file(self.__run_conf_path)
 
     def __create_config_from_option_dicts(self, reference, arjuna_options, user_options):

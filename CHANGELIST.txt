@@ -4,11 +4,19 @@ Possibilities - Targeted But Not Coded/Done
 - log trace option for finer logging in Arjuna (this makes debug level available to test authors without cluttering the output.)
 - Detail doc creation for Public Classes/Functions/Enums in Arjuna
 
+0.9.17
+------
+- Added `TRACE` level to log. 
+    - `log_trace` is a direct call.
+    - By default trace messages are not included in display or log.
+    - Is configurable from command line, project.conf, --run_env and --run-conf.
+- --run-conf can be provided wihtout .conf extension.
+
+
 0.9.16
 ------
 - Added doc for CLI.
 - @for_session fixture support added.
-- 
 
 0.9.15
 ------

@@ -87,6 +87,7 @@ class LogCall:
         from arjuna.core.audit import Stack
         return getattr(Arjuna.get_logger(), self.__ctype)(msg, *args, extra={'invoker': Stack.get_invoker()}, **kwargs)
 
+log_trace = LogCall("trace")
 log_debug = LogCall("debug")
 log_info = LogCall("info")
 log_warning = LogCall("warning")

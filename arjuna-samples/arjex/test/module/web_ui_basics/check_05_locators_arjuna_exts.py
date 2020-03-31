@@ -24,10 +24,10 @@ from arjuna import *
 def check_arjuna_exts(request, wordpress):
 
     # Based on partial text
-    wordpress.element(text="Lost")
+    wordpress.element(text="Lost") 
 
     # Based on Full Text
-    wordpress.element(ftext="Lost your password?")
+    wordpress.element(ftext="Lost your password?") 
 
     # Based on Title
     wordpress.element(title="Password Lost and Found")
