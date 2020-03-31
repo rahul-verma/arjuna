@@ -10,6 +10,10 @@ Possibilities - Targeted But Not Coded/Done
     - `log_trace` is a direct call.
     - By default trace messages are not included in display or log.
     - Is configurable from command line, project.conf, --run_env and --run-conf.
+- Added support for Contextual Logging
+    - All log messages are of `default` context
+    - You can mark a log message as belonging to one or more contexts.
+    - You can allow contexts by controlling the `ArjunaOption.LOG_ALLOWED_CONTEXTS` which is configurable from command line, project.conf, --run_env and --run-conf.
 - --run-conf can be provided wihtout .conf extension.
 
 

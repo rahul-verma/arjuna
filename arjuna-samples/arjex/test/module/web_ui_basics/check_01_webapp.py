@@ -23,9 +23,8 @@ from arjuna import *
 def check_webpp_nobase_url(request):
     google = GuiApp()
     google.launch(blank_slate=True)
-    request.module.space.screen_shooter = google
     google.go_to_url("https://google.com")
-    request.asserter.assert_equal("Google1", google.title, "GuiPage title does not match.")
+    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()
 
 @test

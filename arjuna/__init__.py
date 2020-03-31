@@ -83,9 +83,14 @@ class LogCall:
     def __init__(self, ctype):
         self.__ctype = ctype.lower()
     
-    def __call__(self, msg, *args, **kwargs):
+    def __call__(self, msg, *args, contexts=None, **kwargs):
         from arjuna.core.audit import Stack
-        return getattr(Arjuna.get_logger(), self.__ctype)(msg, *args, extra={'invoker': Stack.get_invoker()}, **kwargs)
+        if type(contexts) is str:
+            contexts = (contexts,)
+        elif contexts is None:
+            contexts = ("default",)
+        contexts = set(contexts)
+        return getattr(Arjuna.get_logger(), self.__ctype)(msg, *args, extra={'invoker': Stack.get_invoker(), 'contexts':contexts, 'config':Arjuna.get_config()}, **kwargs)
 
 log_trace = LogCall("trace")
 log_debug = LogCall("debug")

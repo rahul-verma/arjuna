@@ -20,6 +20,8 @@ limitations under the License.
 from arjuna import *
 
 @test
-def check_trace_level(request):
-    log_trace("1 - only if level is set to trace.")
-    Arjuna.get_logger().trace("2 - only if level is set to trace.")
+def check_context_logging(request):
+    log_info("default message")
+    log_info("test context 1", contexts="test1")
+    log_info("test context 2", contexts="test2")
+    log_info("test context 3", contexts="test3")

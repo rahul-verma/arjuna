@@ -26,6 +26,11 @@ class _InvokerFilter(logging.Filter):
     def filter(self, record):
         if not hasattr(record, "invoker"):
             record.invoker = '<no_trace>'
+        if hasattr(record, "config"):
+            if hasattr(record, "contexts"):
+                if not record.contexts.intersection(record.config.value("log.allowed.contexts")):
+                    return False
+
         return True
 
 class Logger:

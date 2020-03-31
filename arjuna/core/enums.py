@@ -32,6 +32,7 @@ class ArjunaOption(Enum):
 
     LOG_FILE_LEVEL = auto()
     LOG_CONSOLE_LEVEL = auto()
+    LOG_ALLOWED_CONTEXTS = auto()
 
     L10N_LOCALE = auto()
     L10N_STRICT = auto()
