@@ -1,9 +1,5 @@
 Following is the list of critical additions and updates for a given released version:
 
-Possibilities - Targeted But Not Coded/Done
-- log trace option for finer logging in Arjuna (this makes debug level available to test authors without cluttering the output.)
-- Detail doc creation for Public Classes/Functions/Enums in Arjuna
-
 0.9.17
 ------
 - Added `TRACE` level to log. 
@@ -14,6 +10,13 @@ Possibilities - Targeted But Not Coded/Done
     - All log messages are of `default` context
     - You can mark a log message as belonging to one or more contexts.
     - You can allow contexts by controlling the `ArjunaOption.LOG_ALLOWED_CONTEXTS` which is configurable from command line, project.conf, --run_env and --run-conf.
+- Added `track` decorator. 
+    - It logs begin with args, finish with return and exceptions for Classes, Methods and Functions.
+    - It also supports tracking `@classmethod`s and `@staticmethod`s automatically with class level track or individual track decorating.
+    - Properties can be decorated with `track` as well:
+        - Class level decorating does not cover properties.
+        - Decorating a setter automatically covers the getter.
+    - Default log level associating with tracking is `debug`. Can be controlled in each `track` decorator by providing the `level` argument.
 - --run-conf can be provided wihtout .conf extension.
 
 

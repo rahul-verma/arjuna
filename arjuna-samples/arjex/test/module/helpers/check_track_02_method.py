@@ -17,15 +17,20 @@ See the License for the specific language governing permissions and
 limitations under the License.
 '''
 
-import functools
-import types
-from arjuna.core.utils.obj_utils import get_class_for_method
+from arjuna import *
 
-def singleton(cls):
-    @functools.wraps(cls)
-    def inner(*args, **kwargs):
-        if not hasattr(cls, '_INSTANCE') or cls._INSTANCE is None:
-            cls._INSTANCE = cls(*args, **kwargs)
-        return cls._INSTANCE
+class MethodTrack:
 
-    return inner
+    @track
+    def test1(self, a, *vargs, b=None, **kwargs):
+        log_debug("in test1")
+
+    @track("info")
+    def test2(self, a, *vargs, b=None, **kwargs):
+        log_debug("in test2")
+
+@test
+def check_method_track(request):
+    s = MethodTrack()
+    s.test1(5,6, b=13, divmod="whatever")
+    s.test2(7,8, b=15, divmod="try")

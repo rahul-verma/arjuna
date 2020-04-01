@@ -20,6 +20,11 @@ limitations under the License.
 import logging
 import os
 import sys
+import types
+import inspect
+import functools
+
+from arjuna.core.utils.obj_utils import get_class_for_method
 
 class _InvokerFilter(logging.Filter):
 
@@ -82,6 +87,126 @@ class Logger:
     def arjuna_logger(self):
         return self.__logger
 
+prop_dict_msg = {
+    "fget": ("(Getting Property)","", " Returning: {}"),
+    "fset": ("(Setting Property)", ":: Args: {}, Kwargs: {}.", ""),
+    "fdel": ("(Deleting Property)","", ""),
+}
+
+def  __func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget", **kwargs):
+    import arjuna
+    from arjuna import log_error
+    log_call = getattr(arjuna, "log_{}".format(level.strip().lower()))
+    name = func.__name__
+    qualname = func.__qualname__
+    if name != qualname and not static:
+        pvargs = vargs[1:]
+    else:
+        pvargs = vargs
+
+    if prop:
+        msg_1 = prop_dict_msg[prop_type][0]
+        msg_2 = prop_dict_msg[prop_type][1].format(pvargs, kwargs)
+        log_call("{} {}{}".format(qualname, msg_1, msg_2))
+    else:
+        log_call("{}:: Started with args {} and kwargs {}.".format(qualname, pvargs, kwargs))
+    ret = None
+    try:
+        ret = func(*vargs, **kwargs)
+    except Exception as e:
+        import traceback
+        log_error("{}:: Exception: {}. Trace: {}".format(qualname, e, traceback.format_exc()))
+        raise
+    else:
+        if prop:
+            msg_1 = prop_dict_msg[prop_type][0]
+            msg_3 = prop_dict_msg[prop_type][2].format(ret)
+            log_call("{}:: Finished.{}".format(qualname, msg_3, msg_3))
+        else:
+            log_call("{}:: Finished. Returning: {}".format(qualname, ret))
+        return ret
+
+def __track_func(level="debug", static=False, prop=False, prop_type="fget"):
+
+    def dec(func):
+        fname = func.__name__
+        if prop is True:
+            if not hasattr(func, "_wrapped"):
+                func._wrapped = True
+            elif func._wrapped:
+                return func
+        @functools.wraps(func)
+        def inner(*vargs, **kwargs):
+            return __func_wrapper(func, level, *vargs, static=static, prop=prop, prop_type=prop_type, **kwargs)
+        return inner
+
+    return dec
+
+def __wrap_methods(cls, level, *args, **kwargs):
+    for attr_name, attr in vars(cls).items():
+        if type(attr) is types.FunctionType:
+            setattr(cls, attr_name, __track_func(level)(attr))
+        elif isinstance(attr, classmethod):
+            setattr(cls, attr_name, classmethod(__track_func(level)(attr.__func__)))
+        elif isinstance(attr, staticmethod):
+            setattr(cls, attr_name, staticmethod(__track_func(level, static=True)(attr.__func__)))
+    return cls(*args, **kwargs)
+
+def __track_class(level):
+
+    def deco(cls):
+        @functools.wraps(cls)
+        def class_wrapper(*args, **kwargs):
+            return __wrap_methods(cls, level, *args, **kwargs)
+        return class_wrapper
+
+    return deco
+
+def track(level="not_set"):
+
+    kallable = None
+    kallable_type = None
+    non_arg_track = False
+
+    if inspect.isclass(level) or inspect.isfunction(level) or isinstance(level, classmethod) or isinstance(level, staticmethod) or isinstance(level, property):
+        kallable = level
+        non_arg_track = True
+        level = "debug"
+        if inspect.isclass(kallable):
+            return __track_class(level)(kallable)
+        elif inspect.isfunction(kallable):
+            return __track_func(level)(kallable)
+        elif isinstance(kallable, classmethod):
+            return classmethod(__track_func(level)(kallable.__func__))
+        elif isinstance(kallable, staticmethod):
+            return staticmethod(__track_func(level, static=True)(kallable.__func__))
+        elif isinstance(kallable, property):
+            return property(
+                kallable.fget and __track_func(level, prop=True, prop_type="fget")(kallable.fget) or None,
+                kallable.fset and __track_func(level, prop=True, prop_type="fset")(kallable.fset) or None,
+                kallable.fdel and __track_func(level, prop=True, prop_type="fdel")(kallable.fdel) or None,
+            )
+        else:
+            raise Exception("track decorator is meant for class/method/function only.")    
+    else:
+        level = level is not None and level or "debug"
+
+    def deco(kallable):
+        if inspect.isclass(kallable):
+            return __track_class(level)(kallable)
+        elif inspect.isfunction(kallable) or inspect.ismethod(kallable):
+            return __track_func(level)(kallable)
+        elif isinstance(kallable, classmethod):
+            return classmethod(__track_func(level)(kallable.__func__))
+        elif isinstance(kallable, staticmethod):
+            return staticmethod(__track_func(level, static=True)(kallable.__func__))
+        elif isinstance(kallable, property):
+            return property(
+                kallable.fget and __track_func(level, prop=True, prop_type="fget")(kallable.fget) or None,
+                kallable.fset and __track_func(level, prop=True, prop_type="fset")(kallable.fset) or None,
+                kallable.fdel and __track_func(level, prop=True, prop_type="fdel")(kallable.fdel) or None,
+            )
+    return deco
 
 '''
     def __load_console(self, dl, logger):

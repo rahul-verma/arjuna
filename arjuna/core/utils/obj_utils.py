@@ -90,3 +90,15 @@ def is_my_sig(obj):
         return True
     else:
         return False
+
+def get_class_for_method(meth):
+    '''
+        Based on https://stackoverflow.com/a/3589335 by Alex Martelli
+    '''
+    if inspect.ismethod(meth):
+        for cls in inspect.getmro(meth.__self__.__class__):
+            if cls.__dict__.get(meth.__name__) is meth:
+                return cls.__name__
+        meth = meth.__func__
+    if inspect.isfunction(meth):
+        return meth.__qualname__.rsplit('.', 1)[0]

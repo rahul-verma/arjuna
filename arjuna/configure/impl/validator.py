@@ -155,7 +155,6 @@ class Validator:
 
     @classmethod
     def allowed_log_contexts(cls, input):
-        print(input, type(input))
         if type(input) is str:
             input = [i.strip().lower() for i in input.split(",")]
             input = set(input)

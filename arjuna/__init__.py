@@ -73,6 +73,7 @@ from arjuna.engine.fixture import *
 from arjuna.core.xml import NodeLocator
 from arjuna.core.adv.types import ProcessedKeyDict
 from arjuna.core.json import Json
+from arjuna.engine.logger import track
 
 L = Arjuna.get_localized_str
 C = Arjuna.get_config_value
