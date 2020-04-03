@@ -19,7 +19,7 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 You can find the example code in [arjex project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex).
 
 Tester's Guide
---------------
+==============
 
 .. toctree::
    :maxdepth: 6
