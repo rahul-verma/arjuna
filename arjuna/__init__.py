@@ -33,7 +33,7 @@ To see which command line options are available:
 
     $python -m arjuna -h
 
-All classes, functions and names supposed to be used in test automation code are available in `arjuna.tpi` package.
+All classes, functions and names supposed to be used in test automation code are available in Tester Programming Interface: `arjuna.tpi` package.
 """
 
 import pkg_resources
