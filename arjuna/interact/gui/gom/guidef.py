@@ -1,28 +1,26 @@
-'''
-This file is a part of Arjuna
-Copyright 2015-2020 Rahul Verma
+# This file is a part of Arjuna
+# Copyright 2015-2020 Rahul Verma
 
-Website: www.RahulVerma.net
+# Website: www.RahulVerma.net
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+#   http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-'''
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import os
 
 from .nsloader import GuiNamespaceLoaderFactory
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 from arjuna.interact.gui.auto.finder._with import With, Locator
-from arjuna.core.exceptions import GuiLabelNotPresentError
+from arjuna.tpi.exceptions import GuiLabelNotPresentError
 
 class GuiDef:
     '''
@@ -84,7 +82,7 @@ class GuiFactory:
 
     @classmethod
     def create_appdef_from_dir(cls, name, automator, app_def_dir):
-        from arjuna.core.enums import ArjunaOption
+        from arjuna.tpi.enums import ArjunaOption
         considered_path = app_def_dir
         if not os.path.isdir(considered_path):
             gns_dir = automator.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)

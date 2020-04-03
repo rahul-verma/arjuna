@@ -1,21 +1,19 @@
-'''
-This file is a part of Arjuna
-Copyright 2015-2020 Rahul Verma
+# This file is a part of Arjuna
+# Copyright 2015-2020 Rahul Verma
 
-Website: www.RahulVerma.net
+# Website: www.RahulVerma.net
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+#   http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-'''
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import re
 from enum import Enum, auto
@@ -89,72 +87,8 @@ class CliArgsConfig:
 
 
 #### From old Setu code
-from arjuna.core.enums import *
+from arjuna.tpi.enums import *
 from arjuna.core.value import Value
-
-
-class ROWrapper:
-
-    def __init__(self, config):
-        self.__config = config
-
-    def value(self, option):
-        return self.__config.value(option)
-
-
-class Configuration:
-
-    def __init__(self, test_session, name, config):
-        super().__init__()
-        self.__session = test_session
-        self.__name = name
-        self.__wrapped_config = config
-        self.__arjuna_options = ROWrapper(self.__wrapped_config.arjuna_config)
-        self.__user_options = ROWrapper(self.__wrapped_config.user_config)
-
-    @property
-    def builder(self):
-        from .builder import ConfigBuilder
-        return ConfigBuilder(self.__session, self)
-
-    def value(self, name):
-        try:
-            return self.__arjuna_options.value(name)
-        except:
-            try:
-                return self.__user_options.value(name)
-            except:
-                raise Exception("No config option with name {} found in {} configuration.".format(name, self.name))
-
-    @property
-    def _wrapped_config(self):
-        return self.__wrapped_config
-
-    @property
-    def test_session(self):
-        return self.__session
-
-    def get_arjuna_options_as_map(self):
-        return self.__wrapped_config.arjuna_config.as_json_dict()
-
-    def is_arjuna_option_not_set(self, option):
-        return self.__wrapped_config.arjuna_config.is_not_set(option)
-
-    @property
-    def name(self):
-        return self.__name
-
-    def __getattr__(self, name):
-        return self.value(name)
-
-    def __getitem__(self, name):
-        return self.value(name)
-
-    def __call__(self, name):
-        return self.value(name)
-
-    def as_map(self):
-        return self.__wrapped_config.as_json_dict()
 
 class CliArgsConfig:
 

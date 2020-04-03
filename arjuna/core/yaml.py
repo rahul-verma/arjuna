@@ -1,6 +1,6 @@
 import yaml
 
-from arjuna.core.adv.types import CIStringDict
+from arjuna.tpi.helpers.types import CIStringDict
 
 class Yaml:
 

@@ -1,5 +1,12 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.18
+------
+- Major chnage in internal packaging to aid in controlled API doc generation.
+- License info changed from foc string to line-wise comments.
+
+
+
 0.9.17
 ------
 - Added `TRACE` level to log. 
@@ -239,7 +246,7 @@ Minor update. All l10 references are changed to l10n.
 - Added SourceNode class. 
     - element.source.node gives an object of this. 
     - Provides finder methods for directly finding content in element source rather than browser based selenium commands.
-    - Added xfinder in arjuna.core.xml to define finding strategy.
+    - Added xfinder in arjuna.tpi.helpers.xml to define finding strategy.
 - Singular names for all directories.
 - config.get_arjuna_option_value and config.get_user_option_value -> config.arjuna_options.value, config.user_options.value
 

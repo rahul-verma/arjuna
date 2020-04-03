@@ -1,5 +1,5 @@
 import re
-from arjuna.core.enums import GuiElementType
+from arjuna.tpi.enums import GuiElementType
 
 from ._with import GuiGenericLocator
 from .enums import GenericLocateWith

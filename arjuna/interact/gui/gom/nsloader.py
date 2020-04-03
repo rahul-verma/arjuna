@@ -1,21 +1,19 @@
-'''
-This file is a part of Arjuna
-Copyright 2015-2020 Rahul Verma
+# This file is a part of Arjuna
+# Copyright 2015-2020 Rahul Verma
 
-Website: www.RahulVerma.net
+# Website: www.RahulVerma.net
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+#   http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-'''
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import re
 import os
@@ -23,8 +21,8 @@ import os
 from enum import Enum, auto
 from abc import abstractmethod
 
-from arjuna.core.enums import GuiAutomationContext
-from arjuna.core.exceptions import GuiLabelNotPresentError
+from arjuna.tpi.enums import GuiAutomationContext
+from arjuna.tpi.exceptions import GuiLabelNotPresentError
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 from arjuna.interact.gui.auto.finder._with import ImplWith
 from arjuna.core.yaml import YamlFile
@@ -41,7 +39,7 @@ class GuiNamespaceLoaderFactory:
     # Returns GuiNamespaceLoader
     @classmethod
     def create_namespace_loader(cls, config, ns_file_path):
-        from arjuna.core.enums import ArjunaOption
+        from arjuna.tpi.enums import ArjunaOption
         multi_context_enabled = config.value(ArjunaOption.GUIAUTO_DEF_MULTICONTEXT)
         context = multi_context_enabled and None or config.guiauto_context
         _, file_extension = os.path.splitext(ns_file_path)

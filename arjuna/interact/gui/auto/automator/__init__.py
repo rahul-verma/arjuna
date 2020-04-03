@@ -1,35 +1,33 @@
-'''
-This file is a part of Arjuna
-Copyright 2015-2020 Rahul Verma
+# This file is a part of Arjuna
+# Copyright 2015-2020 Rahul Verma
 
-Website: www.RahulVerma.net
+# Website: www.RahulVerma.net
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+#   http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-'''
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import base64
 import os
 import time
 import datetime
 
-from arjuna.core.enums import ArjunaOption
+from arjuna.tpi.enums import ArjunaOption
 from arjuna.interact.gui.auto.base.container import ElementContainer
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from .drivercaps import DriverCapabilities
-from arjuna.interact.gui.auto.source.parser import ElementXMLSourceParser
+from arjuna.tpi.guiauto.source import ElementXMLSourceParser
 from arjuna.interact.gui.dispatcher.selenium.driver import SeleniumDriverDispatcher
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
-from arjuna.interact.gui.auto.element.guielement import GuiElement
+from arjuna.tpi.guiauto.element import GuiElement
 
 class GuiAutomator(ElementContainer,Dispatchable):
 
@@ -109,7 +107,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         self.main_window.close_all_child_windows()
 
     def get_dom_root(self, gui):
-        from arjuna.interact.gui.auto.template.frame import DomRoot
+        from arjuna.tpi.guiauto.template.frame import DomRoot
         return DomRoot(gui)
 
     def get_frame(self, gui, emd):
@@ -140,7 +138,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         caps = DriverCapabilities(self.config, self.__econfig)
         self.dispatcher.launch(caps.processed_config)
 
-        from arjuna.interact.gui.auto.template.window import MainWindow
+        from arjuna.tpi.guiauto.template.window import MainWindow
         self.__main_window = MainWindow(self.app, self)
 
         from .browser import Browser
@@ -205,23 +203,23 @@ class GuiAutomator(ElementContainer,Dispatchable):
     #### Element Finding
 
     def element(self, gui, emd):
-        from arjuna.interact.gui.auto.element.guielement import GuiElement
+        from arjuna.tpi.guiauto.element import GuiElement
         gui_element = GuiElement(gui, emd) 
         self.load_element(gui_element)
         return gui_element
 
     def multi_element(self, gui, emd):
-        from arjuna.interact.gui.auto.element.multielement import GuiMultiElement
+        from arjuna.tpi.guiauto.template.multielement import GuiMultiElement
         m_guielement = GuiMultiElement(gui, emd)
         self.load_multielement(m_guielement)
         return m_guielement
 
     def dropdown(self, gui, emd):
-        from arjuna.interact.gui.auto.template.dropdown import GuiWebSelect
+        from arjuna.tpi.guiauto.template.dropdown import GuiWebSelect
         return GuiWebSelect(gui, emd)
 
     def radio_group(self, gui, emd):
-        from arjuna.interact.gui.auto.template.radio_group import GuiWebRadioGroup
+        from arjuna.tpi.guiauto.template.radio_group import GuiWebRadioGroup
         return GuiWebRadioGroup(gui, emd)
 
     def execute_javascript(self, js, *args):

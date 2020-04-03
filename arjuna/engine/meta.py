@@ -1,5 +1,5 @@
 
-from arjuna.engine.asserter import Asserter
+from arjuna.tpi.engine.asserter import Asserter
 
 class Info:
 
@@ -30,14 +30,14 @@ class Info:
     def __getattr__(self, name):
         return getattr(self.__request, name)
 
-LOOKUP_ORDER = {
+_LOOKUP_ORDER = {
     "session" : ("session", ),
     "module" : ("session", "module"),
     "class" : ("function", "cls", "module"),
     "function" : ("function", "cls", "module", "session")
 }
 
-SCOPE_MAP = {
+_SCOPE_MAP = {
     "function" : "function",
     "class"    : "cls",
     "module"   : "module",
@@ -55,12 +55,12 @@ class Space:
             self.arj_config = Arjuna.get_config()
 
     def __getitem__(self, name):
-        scopes = LOOKUP_ORDER[self._request.scope]
+        scopes = _LOOKUP_ORDER[self._request.scope]
         from arjuna import Arjuna
         for scope in scopes:
             Arjuna.get_logger().debug("Space: Getting value for {} from {} scope".format(name, scope))
             try:
-                container = getattr(self._request, SCOPE_MAP[scope])
+                container = getattr(self._request, _SCOPE_MAP[scope])
                 return getattr(container, name)
             except Exception as e:
                 Arjuna.get_logger().debug("Space: No value for {} in {} scope".format(name, scope))
@@ -68,7 +68,7 @@ class Space:
         raise Exception("Attribute with name >>{}<< does not exist in request scope for {}".format(name, scopes))
 
     def _get_container_for_scope(self):
-        return getattr(self._request, SCOPE_MAP[self._request.scope])
+        return getattr(self._request, _SCOPE_MAP[self._request.scope])
 
     def __setitem__(self, name, value):
         container = self._get_container_for_scope()

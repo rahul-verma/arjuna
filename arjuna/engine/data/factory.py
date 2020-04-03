@@ -1,27 +1,25 @@
-'''
-This file is a part of Arjuna
-Copyright 2015-2020 Rahul Verma
+# This file is a part of Arjuna
+# Copyright 2015-2020 Rahul Verma
 
-Website: www.RahulVerma.net
+# Website: www.RahulVerma.net
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
 
-  http://www.apache.org/licenses/LICENSE-2.0
+#   http://www.apache.org/licenses/LICENSE-2.0
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-'''
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
 import os
 from .source import *
 from .reference import *
 from arjuna.core.utils import file_utils
-from arjuna.core.enums import DataRefContextType
+from arjuna.tpi.enums import DataRefContextType
 
 def get_data_file_path(data_dir, fpath):
     if file_utils.is_absolute_path(fpath):
@@ -63,7 +61,7 @@ def create_file_data_source(file_path, record_format="MAP", delimiter="\t"):
         raise Exception("This is not a default file format supported as a data source: " + path)
     return ds
 
-from arjuna.core.adv.types import CIStringDict
+from arjuna.tpi.helpers.types import CIStringDict
 
 class DataReferences:
 
@@ -90,7 +88,7 @@ class DataReference:
 
     @classmethod
     def load_all(cls, ref_config):
-        from arjuna.core.enums import ArjunaOption
+        from arjuna.tpi.enums import ArjunaOption
         refs = DataReferences()
         column_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_COLUMN_DIR)
         for fname in os.listdir(column_data_ref_dir):
