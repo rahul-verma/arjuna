@@ -17,6 +17,7 @@ def __join_paths(*paths):
     return os.path.abspath(os.path.join(*paths))
 
 __root_dir = __join_paths(os.path.dirname(os.path.realpath(__file__)), "..", "..")
+import arjuna
 
 import pallets_sphinx_themes
 

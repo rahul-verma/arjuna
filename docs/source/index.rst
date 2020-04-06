@@ -90,6 +90,11 @@ or an easy, simple import that imports all public TPI names from Arjuna:
 
 Following links direct you to documentation for all public names:
 
+Test Configuration
+==================
+* :py:mod:`arjuna.tpi.config.Configuration`
+* :py:mod:`arjuna.tpi.config.ConfigBuilder`
+
 Helpers
 =======
 
