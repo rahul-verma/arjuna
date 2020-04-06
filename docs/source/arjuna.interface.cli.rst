@@ -4,30 +4,11 @@ arjuna.interface.cli package
 Submodules
 ----------
 
-arjuna.interface.cli.command module
------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.interface.cli.command
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.interface.cli.parser module
-----------------------------------
-
-.. automodule:: arjuna.interface.cli.parser
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.interface.cli.validation module
---------------------------------------
-
-.. automodule:: arjuna.interface.cli.validation
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.interface.cli.command
+   arjuna.interface.cli.parser
+   arjuna.interface.cli.validation
 
 Module contents
 ---------------

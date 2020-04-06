@@ -11,22 +11,10 @@ Subpackages
 Submodules
 ----------
 
-arjuna.engine.meta module
--------------------------
+.. toctree::
 
-.. automodule:: arjuna.engine.meta
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.engine.runner module
----------------------------
-
-.. automodule:: arjuna.engine.runner
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.engine.meta
+   arjuna.engine.runner
 
 Module contents
 ---------------

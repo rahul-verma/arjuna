@@ -4,22 +4,10 @@ arjuna.configure.invoker package
 Submodules
 ----------
 
-arjuna.configure.invoker.config module
---------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.configure.invoker.config
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.configure.invoker.configurator module
---------------------------------------------
-
-.. automodule:: arjuna.configure.invoker.configurator
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.configure.invoker.config
+   arjuna.configure.invoker.configurator
 
 Module contents
 ---------------

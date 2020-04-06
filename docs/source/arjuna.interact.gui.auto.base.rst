@@ -4,38 +4,12 @@ arjuna.interact.gui.auto.base package
 Submodules
 ----------
 
-arjuna.interact.gui.auto.base.container module
-----------------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.interact.gui.auto.base.container
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.interact.gui.auto.base.dispatchable module
--------------------------------------------------
-
-.. automodule:: arjuna.interact.gui.auto.base.dispatchable
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.interact.gui.auto.base.interactable module
--------------------------------------------------
-
-.. automodule:: arjuna.interact.gui.auto.base.interactable
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.interact.gui.auto.base.locatable module
-----------------------------------------------
-
-.. automodule:: arjuna.interact.gui.auto.base.locatable
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.interact.gui.auto.base.container
+   arjuna.interact.gui.auto.base.dispatchable
+   arjuna.interact.gui.auto.base.interactable
+   arjuna.interact.gui.auto.base.locatable
 
 Module contents
 ---------------

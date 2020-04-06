@@ -4,14 +4,9 @@ arjuna.drive.invoker package
 Submodules
 ----------
 
-arjuna.drive.invoker.databroker module
---------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.drive.invoker.databroker
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.drive.invoker.databroker
 
 Module contents
 ---------------

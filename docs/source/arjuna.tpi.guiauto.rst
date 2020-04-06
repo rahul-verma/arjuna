@@ -14,14 +14,9 @@ Subpackages
 Submodules
 ----------
 
-arjuna.tpi.guiauto.helpers module
----------------------------------
+.. toctree::
 
-.. automodule:: arjuna.tpi.guiauto.helpers
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.tpi.guiauto.helpers
 
 Module contents
 ---------------

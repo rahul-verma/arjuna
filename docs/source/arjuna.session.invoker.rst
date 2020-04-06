@@ -4,14 +4,9 @@ arjuna.session.invoker package
 Submodules
 ----------
 
-arjuna.session.invoker.test\_session module
--------------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.session.invoker.test_session
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.session.invoker.test_session
 
 Module contents
 ---------------

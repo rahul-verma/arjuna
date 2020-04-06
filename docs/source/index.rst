@@ -68,6 +68,32 @@ Web GUI Automation
 
    guiauto/index
 
+********************************************
+Tester Programming Interface (TPI) Reference
+********************************************
+
+All classes, functions, enums and exceptions that are supposed to be directly used by a test author are a part of Arjuna's Tester Programming Interface (TPI).
+
+This interface is fully encapsulated in :py:mod:`arjuna.tpi` package.
+
+You can either do a fully qualified import for a public name, for example:
+
+.. code-block:: python
+
+    from arjuna.tpi.log import log_info
+
+or an easy, simple import that imports all public TPI names from Arjuna:
+
+.. code-block:: python
+
+    from arjuna import *
+
+Following links direct you to documentation for all public names:
+
+Helpers
+=======
+
+* Logging: Log Module - :py:mod:`arjuna.tpi.log`
 
 
 Indices and tables
@@ -76,3 +102,5 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+

@@ -11,14 +11,9 @@ Subpackages
 Submodules
 ----------
 
-arjuna.interface.enums module
------------------------------
+.. toctree::
 
-.. automodule:: arjuna.interface.enums
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.interface.enums
 
 Module contents
 ---------------

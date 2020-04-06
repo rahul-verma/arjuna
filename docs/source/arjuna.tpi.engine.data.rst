@@ -4,30 +4,11 @@ arjuna.tpi.engine.data package
 Submodules
 ----------
 
-arjuna.tpi.engine.data.generator module
----------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.tpi.engine.data.generator
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.engine.data.markup module
-------------------------------------
-
-.. automodule:: arjuna.tpi.engine.data.markup
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.engine.data.record module
-------------------------------------
-
-.. automodule:: arjuna.tpi.engine.data.record
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.tpi.engine.data.generator
+   arjuna.tpi.engine.data.markup
+   arjuna.tpi.engine.data.record
 
 Module contents
 ---------------

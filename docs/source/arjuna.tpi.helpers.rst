@@ -4,38 +4,12 @@ arjuna.tpi.helpers package
 Submodules
 ----------
 
-arjuna.tpi.helpers.audit module
--------------------------------
+.. toctree::
 
-.. automodule:: arjuna.tpi.helpers.audit
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.helpers.json module
-------------------------------
-
-.. automodule:: arjuna.tpi.helpers.json
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.helpers.types module
--------------------------------
-
-.. automodule:: arjuna.tpi.helpers.types
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.helpers.xml module
------------------------------
-
-.. automodule:: arjuna.tpi.helpers.xml
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.tpi.helpers.audit
+   arjuna.tpi.helpers.json
+   arjuna.tpi.helpers.types
+   arjuna.tpi.helpers.xml
 
 Module contents
 ---------------

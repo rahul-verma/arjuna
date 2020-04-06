@@ -20,14 +20,9 @@ Subpackages
 Submodules
 ----------
 
-arjuna.main module
-------------------
+.. toctree::
 
-.. automodule:: arjuna.main
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.main
 
 Module contents
 ---------------

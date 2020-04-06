@@ -4,14 +4,9 @@ arjuna.validate package
 Submodules
 ----------
 
-arjuna.validate.checks module
------------------------------
+.. toctree::
 
-.. automodule:: arjuna.validate.checks
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.validate.checks
 
 Module contents
 ---------------

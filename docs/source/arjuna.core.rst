@@ -18,46 +18,13 @@ Subpackages
 Submodules
 ----------
 
-arjuna.core.discovery module
-----------------------------
+.. toctree::
 
-.. automodule:: arjuna.core.discovery
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.core.helpers module
---------------------------
-
-.. automodule:: arjuna.core.helpers
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.core.utils module
-------------------------
-
-.. automodule:: arjuna.core.utils
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.core.value module
-------------------------
-
-.. automodule:: arjuna.core.value
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.core.yaml module
------------------------
-
-.. automodule:: arjuna.core.yaml
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.core.discovery
+   arjuna.core.helpers
+   arjuna.core.utils
+   arjuna.core.value
+   arjuna.core.yaml
 
 Module contents
 ---------------

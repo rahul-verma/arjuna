@@ -4,14 +4,9 @@ arjuna.core.writer package
 Submodules
 ----------
 
-arjuna.core.writer.textfile module
-----------------------------------
+.. toctree::
 
-.. automodule:: arjuna.core.writer.textfile
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.core.writer.textfile
 
 Module contents
 ---------------

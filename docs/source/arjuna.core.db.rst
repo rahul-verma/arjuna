@@ -4,14 +4,9 @@ arjuna.core.db package
 Submodules
 ----------
 
-arjuna.core.db.sqlite module
-----------------------------
+.. toctree::
 
-.. automodule:: arjuna.core.db.sqlite
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.core.db.sqlite
 
 Module contents
 ---------------

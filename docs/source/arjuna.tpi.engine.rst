@@ -11,54 +11,14 @@ Subpackages
 Submodules
 ----------
 
-arjuna.tpi.engine.asserter module
----------------------------------
+.. toctree::
 
-.. automodule:: arjuna.tpi.engine.asserter
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.engine.fixture module
---------------------------------
-
-.. automodule:: arjuna.tpi.engine.fixture
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.engine.hook module
------------------------------
-
-.. automodule:: arjuna.tpi.engine.hook
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.engine.logger module
--------------------------------
-
-.. automodule:: arjuna.tpi.engine.logger
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.engine.relation module
----------------------------------
-
-.. automodule:: arjuna.tpi.engine.relation
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.engine.test module
------------------------------
-
-.. automodule:: arjuna.tpi.engine.test
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.tpi.engine.asserter
+   arjuna.tpi.engine.fixture
+   arjuna.tpi.engine.hook
+   arjuna.tpi.engine.logger
+   arjuna.tpi.engine.relation
+   arjuna.tpi.engine.test
 
 Module contents
 ---------------

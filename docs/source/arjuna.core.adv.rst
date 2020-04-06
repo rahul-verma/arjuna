@@ -4,38 +4,12 @@ arjuna.core.adv package
 Submodules
 ----------
 
-arjuna.core.adv.decorators module
----------------------------------
+.. toctree::
 
-.. automodule:: arjuna.core.adv.decorators
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.core.adv.proxy module
-----------------------------
-
-.. automodule:: arjuna.core.adv.proxy
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.core.adv.py module
--------------------------
-
-.. automodule:: arjuna.core.adv.py
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.core.adv.wrappers module
--------------------------------
-
-.. automodule:: arjuna.core.adv.wrappers
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.core.adv.decorators
+   arjuna.core.adv.proxy
+   arjuna.core.adv.py
+   arjuna.core.adv.wrappers
 
 Module contents
 ---------------

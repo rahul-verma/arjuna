@@ -4,62 +4,15 @@ arjuna.tpi.guiauto.template package
 Submodules
 ----------
 
-arjuna.tpi.guiauto.template.dropdown module
--------------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.tpi.guiauto.template.dropdown
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.template.frame module
-----------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.template.frame
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.template.multielement module
------------------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.template.multielement
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.template.radio\_group module
------------------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.template.radio_group
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.template.tabs module
----------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.template.tabs
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.template.webalert module
--------------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.template.webalert
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.template.window module
------------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.template.window
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.tpi.guiauto.template.dropdown
+   arjuna.tpi.guiauto.template.frame
+   arjuna.tpi.guiauto.template.multielement
+   arjuna.tpi.guiauto.template.radio_group
+   arjuna.tpi.guiauto.template.tabs
+   arjuna.tpi.guiauto.template.webalert
+   arjuna.tpi.guiauto.template.window
 
 Module contents
 ---------------

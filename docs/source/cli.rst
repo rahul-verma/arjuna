@@ -13,6 +13,8 @@ You can check the available options using `-h` or `--help` switch:
 
    python -m arjuna -h
 
+.. _cli_dl_ll:
+
 Control Logging Level using -dl and -ll Options
 -----------------------------------------------
 

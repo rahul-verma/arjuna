@@ -4,22 +4,10 @@ arjuna.interact.gui.auto.element package
 Submodules
 ----------
 
-arjuna.interact.gui.auto.element.internal module
-------------------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.interact.gui.auto.element.internal
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.interact.gui.auto.element.nested module
-----------------------------------------------
-
-.. automodule:: arjuna.interact.gui.auto.element.nested
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.interact.gui.auto.element.internal
+   arjuna.interact.gui.auto.element.nested
 
 Module contents
 ---------------

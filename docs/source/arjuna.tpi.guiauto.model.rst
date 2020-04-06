@@ -4,54 +4,14 @@ arjuna.tpi.guiauto.model package
 Submodules
 ----------
 
-arjuna.tpi.guiauto.model.app module
------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.tpi.guiauto.model.app
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.model.formatter module
------------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.model.formatter
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.model.gns module
------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.model.gns
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.model.gui module
------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.model.gui
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.model.page module
-------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.model.page
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.guiauto.model.section module
----------------------------------------
-
-.. automodule:: arjuna.tpi.guiauto.model.section
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.tpi.guiauto.model.app
+   arjuna.tpi.guiauto.model.formatter
+   arjuna.tpi.guiauto.model.gns
+   arjuna.tpi.guiauto.model.gui
+   arjuna.tpi.guiauto.model.page
+   arjuna.tpi.guiauto.model.section
 
 Module contents
 ---------------

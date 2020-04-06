@@ -13,46 +13,14 @@ Subpackages
 Submodules
 ----------
 
-arjuna.tpi.config module
-------------------------
+.. toctree::
 
-.. automodule:: arjuna.tpi.config
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.enums module
------------------------
-
-.. automodule:: arjuna.tpi.enums
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.exceptions module
-----------------------------
-
-.. automodule:: arjuna.tpi.exceptions
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.log module
----------------------
-
-.. automodule:: arjuna.tpi.log
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.tpi.magic module
------------------------
-
-.. automodule:: arjuna.tpi.magic
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.tpi.arjuna_types
+   arjuna.tpi.config
+   arjuna.tpi.enums
+   arjuna.tpi.exceptions
+   arjuna.tpi.log
+   arjuna.tpi.magic
 
 Module contents
 ---------------

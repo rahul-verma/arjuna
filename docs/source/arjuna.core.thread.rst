@@ -4,14 +4,9 @@ arjuna.core.thread package
 Submodules
 ----------
 
-arjuna.core.thread.decorators module
-------------------------------------
+.. toctree::
 
-.. automodule:: arjuna.core.thread.decorators
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
+   arjuna.core.thread.decorators
 
 Module contents
 ---------------
