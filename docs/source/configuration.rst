@@ -50,7 +50,7 @@ Sometimes it is useful to provide your own name to the custom configuration that
 Defining and Handling User Options
 ----------------------------------
 
-Just like Arjuna options, you can define your own options in `project.conf` file as well as programmatically. Rest of the fundamentals remain same as Arjuna options. That's the key point! Arjuna provides you the same facilities for your own defined options that it provides to built-in `ArjunaOption`s.
+Just like Arjuna options, you can define your own options in `project.conf` file as well as programmatically. Rest of the fundamentals remain same as Arjuna options. That's the key point! Arjuna provides you the same facilities for your own defined options that it provides to built-in `ArjunaOptions`.
 
 User Options in Project Conf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -16,19 +16,14 @@ import sys
 def __join_paths(*paths):
     return os.path.abspath(os.path.join(*paths))
 
-__root_dir = __join_paths(os.path.dirname(os.path.realpath(__file__)), "..", "..", "..")
-print(__root_dir)
-print(os.listdir(__root_dir))
-sys.path.insert(0, __root_dir)
-print(sys.path)
-import arjuna
+__root_dir = __join_paths(os.path.dirname(os.path.realpath(__file__)), "..", "..")
 
 import pallets_sphinx_themes
 
 # -- Project information -----------------------------------------------------
 
 project = 'Arjuna'
-copyright = '2020, Rahul Verma'
+copyright = '2015-2020, Rahul Verma'
 author = 'Rahul Verma'
 
 # The full version, including alpha/beta/rc tags
