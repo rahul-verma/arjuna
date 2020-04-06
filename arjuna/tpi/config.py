@@ -138,9 +138,15 @@ class Configuration:
 
     @property
     def builder(self):
+        '''
+            **new** `ConfigBuilder` object which takes this configuration as its reference.
+        '''
         return ConfigBuilder(self.__session, self)
 
     def value(self, name):
+        '''
+            Get the value of a configuration option.
+        '''
         try:
             return self.__arjuna_options.value(name)
         except:
@@ -155,16 +161,28 @@ class Configuration:
 
     @property
     def test_session(self):
+        '''
+            Test Session object for this Configuration.
+        '''
         return self.__session
 
     def get_arjuna_options_as_map(self):
+        '''
+            Get all Arjuna options as a dictionary.
+        '''
         return self.__wrapped_config.arjuna_config.as_json_dict()
 
     def is_arjuna_option_not_set(self, option):
+        '''
+            Check if the value for an Arjuna option was set. (Checks for 'not_set' string.)
+        '''
         return self.__wrapped_config.arjuna_config.is_not_set(option)
 
     @property
     def name(self):
+        '''
+            Name of this configuration object.
+        '''
         return self.__name
 
     def __getattr__(self, name):
@@ -177,4 +195,7 @@ class Configuration:
         return self.value(name)
 
     def as_map(self):
+        '''
+            Get all options as a dictionary.
+        '''
         return self.__wrapped_config.as_json_dict()

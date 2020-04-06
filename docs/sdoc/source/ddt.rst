@@ -134,7 +134,7 @@ Driving with Excel File
 
 An excel data file can contain data in following format. (Only .xls files are supported as of now)
 
-<img src="img/inputxls.png">
+.. image:: _static/inputxls.png
 
 .. code-block:: python
     from arjuna import *

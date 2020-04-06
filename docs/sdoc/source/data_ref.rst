@@ -25,7 +25,7 @@ Column Data References
 
 You place such files in `<Project Root>/data/reference/column` directory. A reference file can be found in this example project.
 
-<img src="img/colref.png">
+.. image:: _static/colref.png
 
 In a column data reference file, the context of data is represented by columns. Here Account Type's values -  `Bronze`, `Silver` and `Gold` represent the contexts, for which the `User` and `Pwd` values are different.
 
@@ -34,7 +34,7 @@ Row Data References
 
 You place such files in `<Project Root>/data/reference/row` directory. A reference file can be found in this example project.
 
-<img src="img/rowref.png">
+.. image:: _static/rowref.png
 
 In a row data reference file, the context of data is represented by cells of the first column. Here Account Type's values - `Bronze`, `Silver` and `Gold` represent the contexts, for which the `User` and `Pwd` values are different.
 

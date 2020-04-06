@@ -33,7 +33,7 @@ The localization file follows the format of Excel Column Data Reference files.
 
 You place such files in `<Project Root>/l10n/excel` directory. Two reference files can be found in this example project.
 
-<img src="img/l10_1.png">
+.. image:: _static/l10_1.png
 
 First column is always the Reference column. The other columns represent the languages mentioned as `Locale` type in column heading.
 
@@ -41,7 +41,7 @@ In the example file, the columns mentions `en` and `hi` which are Locale value f
 
 For demonstration purpose, 3 English words are provided with corresponding strings in Hindi.
 
-<img src="img/l10_2.png">
+.. image:: _static/l10_2.png
 
 The second file `sample2.xls` has the same data except the localized string for `Correct` in Hindi which is different from `sample1.xls`.
 

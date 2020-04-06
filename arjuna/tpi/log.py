@@ -27,19 +27,37 @@ def __log(invoker, level, msg, *args, contexts=None, **kwargs):
     getattr(Arjuna.get_logger(), level)(msg, *args, extra={'invoker': invoker, 'contexts':contexts, 'config':Arjuna.get_config()}, **kwargs)
 
 def log_trace(msg, *args, contexts=None, **kwargs):
+    '''
+        Log a message with `TRACE` level.
+    '''
     __log(Stack.get_invoker(), "trace", msg, *args, contexts=contexts, **kwargs)
 
 def log_debug(msg, *args, contexts=None, **kwargs):
+    '''
+        Log a message with `DEBUG` level.
+    '''
     __log(Stack.get_invoker(), "debug", msg, *args, contexts=contexts, **kwargs)
 
 def log_info(msg, *args, contexts=None, **kwargs):
+    '''
+        Log a message with `INFO` level.
+    '''
     __log(Stack.get_invoker(), "info", msg, *args, contexts=contexts, **kwargs)
 
 def log_warning(msg, *args, contexts=None, **kwargs):
+    '''
+        Log a message with `WARNING` level.
+    '''
     __log(Stack.get_invoker(), "warning", msg, *args, contexts=contexts, **kwargs)
 
 def log_error(msg, *args, contexts=None, **kwargs):
+    '''
+        Log a message with `ERROR` level.
+    '''
     __log(Stack.get_invoker(), "error", msg, *args, contexts=contexts, **kwargs)
 
 def log_fatal(msg, *args, contexts=None, **kwargs):
+    '''
+        Log a message with `FATAL` level.
+    '''
     __log(Stack.get_invoker(), "fatal", msg, *args, contexts=contexts, **kwargs)
