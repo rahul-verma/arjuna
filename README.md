@@ -2,7 +2,9 @@
 
 ![Arjuna](https://github.com/rahul-verma/arjuna/blob/master/Arjuna.png)
 
-Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net). Rahul has implemented smaller variants of features in Arjuna across frameworks and organizations, or given advise around it. However Arjuna being a generic library has the most complete implementation of his ideas, away from project specific contexts and constraints.
+Arjuna is a Python based test automation framework developed by [Rahul Verma](www.rahulverma.net). It is an open source, Apache Licensed software [hosted on GitHub](https://github.com/rahul-verma/arjuna)
+
+Rahul has implemented smaller variants of features in Arjuna across frameworks and organizations, or given advise around it. However Arjuna being a generic library has the most complete implementation of his ideas, away from project specific contexts and constraints.
 
 Arjuna uses **[pytest](https://docs.pytest.org/en/latest/)** as its recommended test engine. Arjuna also provides its markup for some common use cases on top of pytest. If you like, you can make use of Arjuna with any other test engine or custom frameworks as well.
 

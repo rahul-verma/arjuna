@@ -1,5 +1,9 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.19
+------
+
+
 0.9.18
 ------
 - Major change in internal packaging to aid in controlled API doc generation.
