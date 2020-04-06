@@ -12,7 +12,9 @@
 #
 import os
 import sys
-sys.path.insert(0, '../../../../.')
+__root_dir = __join_paths(os.path.dirname(os.path.realpath(__file__)), "..", "..", "..")
+print(__root_dir)
+sys.path.insert(0, __root_dir)
 
 import pallets_sphinx_themes
 
