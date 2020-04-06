@@ -398,5 +398,6 @@ class GuiTemplate(Enum):
     RADIO_GROUP = auto()
 
 import locale
-__locales = [i.upper() for i in locale.locale_alias.keys()]
+import re
+__locales = [i.upper() for i in locale.locale_alias.keys() if re.match('^[\w_]+$', i)]
 Locale = Enum('Locale', dict(zip(__locales, range(len(__locales)))))
