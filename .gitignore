@@ -55,7 +55,7 @@ bin/**
 tools/**
 tmp/**
 tmp/**/*
-docs/sdoc/build/*
+docs/build/*
 *.tmp
 *.bak
 *.swp
