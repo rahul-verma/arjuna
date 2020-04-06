@@ -1,6 +1,6 @@
 # Arjuna
 
-![Arjuna](https://github.com/rahul-verma/arjuna/Arjuna.png)
+![Arjuna](https://github.com/rahul-verma/arjuna/blob/master/Arjuna.png)
 
 Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net). Rahul has implemented smaller variants of features in Arjuna across frameworks and organizations, or given advise around it. However Arjuna being a generic library has the most complete implementation of his ideas, away from project specific contexts and constraints.
 
