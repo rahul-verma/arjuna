@@ -12,7 +12,7 @@
 #
 import os
 import sys
-sys.path.insert(0, '/Users/rahulverma/Documents/github_tm/arjuna')
+sys.path.insert(0, '../.')
 
 import pallets_sphinx_themes
 
