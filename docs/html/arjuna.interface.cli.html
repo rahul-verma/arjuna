@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.interface.cli package &#8212; Arjuna 0.9.18 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 0.9.18 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="arjuna-interface-cli-package">
+<h1>arjuna.interface.cli package<a class="headerlink" href="#arjuna-interface-cli-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-arjuna.interface.cli.command">
+<span id="arjuna-interface-cli-command-module"></span><h2>arjuna.interface.cli.command module<a class="headerlink" href="#module-arjuna.interface.cli.command" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interface.cli.command.Command">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.command.</code><code class="sig-name descname">Command</code><a class="headerlink" href="#arjuna.interface.cli.command.Command" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="attribute">
+<dt id="arjuna.interface.cli.command.Command.PENTRY">
+<code class="sig-name descname">PENTRY</code><em class="property"> = '\n    project.name = {}\n    workspace.dir = &quot;{}&quot;\n    '</em><a class="headerlink" href="#arjuna.interface.cli.command.Command.PENTRY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interface.cli.command.Command.execute">
+<em class="property">abstract </em><code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">integrator</em>, <em class="sig-param">arg_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.Command.execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interface.cli.command.Command.get_parser">
+<code class="sig-name descname">get_parser</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.Command.get_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interface.cli.command.Command.print_help">
+<code class="sig-name descname">print_help</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.Command.print_help" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interface.cli.command.CreateProject">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.command.</code><code class="sig-name descname">CreateProject</code><span class="sig-paren">(</span><em class="sig-param">subparsers</em>, <em class="sig-param">parents</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.CreateProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.interface.cli.command.Command" title="arjuna.interface.cli.command.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interface.cli.command.Command</span></code></a></p>
+<dl class="attribute">
+<dt id="arjuna.interface.cli.command.CreateProject.COMMON_DIRS_FILES">
+<code class="sig-name descname">COMMON_DIRS_FILES</code><em class="property"> = ((&lt;FileObjectType.DIR: 1&gt;, 'config'), (&lt;FileObjectType.DIR: 1&gt;, 'config/env'), (&lt;FileObjectType.FILE: 2&gt;, 'config/project.conf'), (&lt;FileObjectType.DIR: 1&gt;, 'data'), (&lt;FileObjectType.DIR: 1&gt;, 'data/source'), (&lt;FileObjectType.DIR: 1&gt;, 'data/reference'), (&lt;FileObjectType.DIR: 1&gt;, 'data/reference/excel_column'), (&lt;FileObjectType.DIR: 1&gt;, 'data/reference/excel_row'), (&lt;FileObjectType.DIR: 1&gt;, 'l10n'), (&lt;FileObjectType.DIR: 1&gt;, 'l10n/excel'), (&lt;FileObjectType.DIR: 1&gt;, 'l10n/json'), (&lt;FileObjectType.DIR: 1&gt;, 'guiauto'), (&lt;FileObjectType.DIR: 1&gt;, 'guiauto/driver'), (&lt;FileObjectType.DIR: 1&gt;, 'guiauto/driver/linux'), (&lt;FileObjectType.DIR: 1&gt;, 'guiauto/driver/mac'), (&lt;FileObjectType.DIR: 1&gt;, 'guiauto/driver/windows'), (&lt;FileObjectType.DIR: 1&gt;, 'guiauto/namespace'), (&lt;FileObjectType.DIR: 1&gt;, 'guiauto/withx'), (&lt;FileObjectType.FILE: 2&gt;, 'guiauto/withx/withx.yaml'), (&lt;FileObjectType.DIR: 1&gt;, 'report'), (&lt;FileObjectType.DIR: 1&gt;, 'script'), (&lt;FileObjectType.DIR: 1&gt;, 'test'), (&lt;FileObjectType.FILE: 2&gt;, 'test/__init__.py'), (&lt;FileObjectType.DIR: 1&gt;, 'test/module'), (&lt;FileObjectType.FILE: 2&gt;, 'test/module/__init__.py'), (&lt;FileObjectType.DIR: 1&gt;, 'lib'), (&lt;FileObjectType.FILE: 2&gt;, 'lib/__init__.py'), (&lt;FileObjectType.DIR: 1&gt;, 'lib/fixture'), (&lt;FileObjectType.FILE: 2&gt;, 'lib/fixture/__init__.py'), (&lt;FileObjectType.FILE: 2&gt;, 'lib/fixture/session.py'), (&lt;FileObjectType.FILE: 2&gt;, 'lib/fixture/module.py'), (&lt;FileObjectType.FILE: 2&gt;, 'lib/fixture/test.py'))</em><a class="headerlink" href="#arjuna.interface.cli.command.CreateProject.COMMON_DIRS_FILES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interface.cli.command.CreateProject.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">arg_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.CreateProject.execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interface.cli.command.FileObjectType">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.command.</code><code class="sig-name descname">FileObjectType</code><a class="headerlink" href="#arjuna.interface.cli.command.FileObjectType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="arjuna.interface.cli.command.FileObjectType.DIR">
+<code class="sig-name descname">DIR</code><em class="property"> = 1</em><a class="headerlink" href="#arjuna.interface.cli.command.FileObjectType.DIR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interface.cli.command.FileObjectType.FILE">
+<code class="sig-name descname">FILE</code><em class="property"> = 2</em><a class="headerlink" href="#arjuna.interface.cli.command.FileObjectType.FILE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interface.cli.command.MainCommand">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.command.</code><code class="sig-name descname">MainCommand</code><a class="headerlink" href="#arjuna.interface.cli.command.MainCommand" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.interface.cli.command.Command" title="arjuna.interface.cli.command.Command"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interface.cli.command.Command</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.interface.cli.command.MainCommand.convert_to_dict">
+<code class="sig-name descname">convert_to_dict</code><span class="sig-paren">(</span><em class="sig-param">args</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.MainCommand.convert_to_dict" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interface.cli.command.MainCommand.create_subparsers">
+<code class="sig-name descname">create_subparsers</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.MainCommand.create_subparsers" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interface.cli.command.MainCommand.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">arg_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.MainCommand.execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interface.cli.command.RunProject">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.command.</code><code class="sig-name descname">RunProject</code><span class="sig-paren">(</span><em class="sig-param">subparsers</em>, <em class="sig-param">parents</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.RunProject" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interface.cli.command.__RunCommand</span></code></p>
+<dl class="method">
+<dt id="arjuna.interface.cli.command.RunProject.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">arg_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.RunProject.execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interface.cli.command.RunSelected">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.command.</code><code class="sig-name descname">RunSelected</code><span class="sig-paren">(</span><em class="sig-param">subparsers</em>, <em class="sig-param">parents</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.RunSelected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interface.cli.command.__RunCommand</span></code></p>
+<dl class="method">
+<dt id="arjuna.interface.cli.command.RunSelected.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><em class="sig-param">arg_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.command.RunSelected.execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-arjuna.interface.cli.parser">
+<span id="arjuna-interface-cli-parser-module"></span><h2>arjuna.interface.cli.parser module<a class="headerlink" href="#module-arjuna.interface.cli.parser" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interface.cli.parser.NewProjectParser">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.parser.</code><code class="sig-name descname">NewProjectParser</code><a class="headerlink" href="#arjuna.interface.cli.parser.NewProjectParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.interface.cli.parser.Parser" title="arjuna.interface.cli.parser.Parser"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interface.cli.parser.Parser</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.interface.cli.parser.NewProjectParser.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">arg_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.parser.NewProjectParser.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interface.cli.parser.Parser">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.parser.</code><code class="sig-name descname">Parser</code><a class="headerlink" href="#arjuna.interface.cli.parser.Parser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interface.cli.parser.Parser.get_parser">
+<code class="sig-name descname">get_parser</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.parser.Parser.get_parser" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interface.cli.parser.PickersParser">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.parser.</code><code class="sig-name descname">PickersParser</code><a class="headerlink" href="#arjuna.interface.cli.parser.PickersParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.interface.cli.parser.Parser" title="arjuna.interface.cli.parser.Parser"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interface.cli.parser.Parser</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.interface.cli.parser.PickersParser.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">arg_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.parser.PickersParser.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interface.cli.parser.ProjectParser">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.parser.</code><code class="sig-name descname">ProjectParser</code><a class="headerlink" href="#arjuna.interface.cli.parser.ProjectParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.interface.cli.parser.Parser" title="arjuna.interface.cli.parser.Parser"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interface.cli.parser.Parser</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.interface.cli.parser.ProjectParser.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">arg_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.parser.ProjectParser.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interface.cli.parser.RunParser">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.parser.</code><code class="sig-name descname">RunParser</code><a class="headerlink" href="#arjuna.interface.cli.parser.RunParser" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.interface.cli.parser.Parser" title="arjuna.interface.cli.parser.Parser"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interface.cli.parser.Parser</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.interface.cli.parser.RunParser.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">arg_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.parser.RunParser.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-arjuna.interface.cli.validation">
+<span id="arjuna-interface-cli-validation-module"></span><h2>arjuna.interface.cli.validation module<a class="headerlink" href="#module-arjuna.interface.cli.validation" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="arjuna.interface.cli.validation.absolute_file_path">
+<code class="sig-prename descclassname">arjuna.interface.cli.validation.</code><code class="sig-name descname">absolute_file_path</code><span class="sig-paren">(</span><em class="sig-param">input</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.validation.absolute_file_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="arjuna.interface.cli.validation.lname_check">
+<code class="sig-prename descclassname">arjuna.interface.cli.validation.</code><code class="sig-name descname">lname_check</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">input</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.validation.lname_check" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="arjuna.interface.cli.validation.new_project_dir">
+<code class="sig-prename descclassname">arjuna.interface.cli.validation.</code><code class="sig-name descname">new_project_dir</code><span class="sig-paren">(</span><em class="sig-param">input</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.validation.new_project_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="arjuna.interface.cli.validation.project_dir">
+<code class="sig-prename descclassname">arjuna.interface.cli.validation.</code><code class="sig-name descname">project_dir</code><span class="sig-paren">(</span><em class="sig-param">input</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.validation.project_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="arjuna.interface.cli.validation.report_format">
+<code class="sig-prename descclassname">arjuna.interface.cli.validation.</code><code class="sig-name descname">report_format</code><span class="sig-paren">(</span><em class="sig-param">input</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.validation.report_format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="arjuna.interface.cli.validation.ustr">
+<code class="sig-prename descclassname">arjuna.interface.cli.validation.</code><code class="sig-name descname">ustr</code><span class="sig-paren">(</span><em class="sig-param">input</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.validation.ustr" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="module-arjuna.interface.cli">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-arjuna.interface.cli" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interface.cli.ArjunaCLI">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interface.cli.</code><code class="sig-name descname">ArjunaCLI</code><span class="sig-paren">(</span><em class="sig-param">args</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.ArjunaCLI" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interface.cli.ArjunaCLI.execute">
+<code class="sig-name descname">execute</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.ArjunaCLI.execute" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interface.cli.ArjunaCLI.init">
+<code class="sig-name descname">init</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interface.cli.ArjunaCLI.init" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">arjuna.interface.cli package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-arjuna.interface.cli.command">arjuna.interface.cli.command module</a></li>
+<li><a class="reference internal" href="#module-arjuna.interface.cli.parser">arjuna.interface.cli.parser module</a></li>
+<li><a class="reference internal" href="#module-arjuna.interface.cli.validation">arjuna.interface.cli.validation module</a></li>
+<li><a class="reference internal" href="#module-arjuna.interface.cli">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

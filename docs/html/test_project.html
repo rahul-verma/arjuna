@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arjuna Test Project &#8212; Arjuna 0.9.18 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Arjuna Command Line Interface" href="cli.html" />
+    <link rel="prev" title="Installing Arjuna" href="installation.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="cli.html" title="Arjuna Command Line Interface"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="installation.html" title="Installing Arjuna"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 0.9.18 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="arjuna-test-project">
+<span id="test-project"></span><h1>Arjuna Test Project<a class="headerlink" href="#arjuna-test-project" title="Permalink to this headline">¶</a></h1>
+<p>A fixed project structure has to be followed for an Arjuna test project. This brings consitency across mutliple test automation implementations within and outside your organization.</p>
+<p>Following are critical project directories, sub-directories and files. <em>Arjuna could be creating other directories corresponding to some in-progress or experimental features. They are not listed here.</em></p>
+<p>Please also note that some of these directories are mandatory as a part of Arjuna test project structure. When you create project using <cite>create-project</cite> command from [Arjuna Command Line Interface](#the-create-project-command—creating-a-new-project-skeleton), Arjuna places <cite>placeholder.txt</cite> files so that when you check-in your code in a code repository, empty directories are not ignored during check-in. It is advised to retain them, until you make use of them by placing files in them as per your project needs.</p>
+<ul>
+<li><p><strong>config</strong>: Contains configuration files.
+- <strong>project.conf</strong>: Your project’s configuration file containing project-level configuration settings.
+- <strong>env</strong>: This directory can contain any number of conf files that correspond to options for run-environments.
+- If you place any <cite>.conf</cite> files directly in this directory or in a sub-directory herein, they can be found by Arjuna using the name or relative path.</p></li>
+<li><dl class="simple">
+<dt><strong>data</strong>: Contains files that act as data sources and data references (WIP).</dt><dd><ul class="simple">
+<li><p><strong>source</strong>: Data source files go here.</p></li>
+<li><dl class="simple">
+<dt><strong>reference</strong>: Data reference files go here.</dt><dd><ul>
+<li><p><strong>column</strong>: Excel Column Data References for auto-loading</p></li>
+<li><p><strong>row</strong>: Excel Row Data References for auto-loading</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>l10n</strong>: Contains localizaation files</dt><dd><ul class="simple">
+<li><p><strong>excel</strong>: Excel based localization files go here.</p></li>
+<li><p><strong>json</strong>: Json based localization directories and files go here.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><strong>guiauto</strong>: Contains GUI automation related files.
+- <strong>driver</strong>: Arjuna automatically downloads drivers. In case you switch this off in a configuration, Arjuna picks Selenium driver executables from this directory in respective OS folders.
+- <strong>namespace</strong>: GNS (Gui Namespace) files go here.
+- <strong>withx</strong>: Contains With extensions</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>withx.yaml</strong>: You can define custom identifiers in this file in YAML format. These can be referred to across the project in GNS files.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt><strong>report</strong>: Reports are generated here. Each test run is associated with a run-id.</dt><dd><ul>
+<li><p><strong>Timestamp-RunID</strong>: Root directory of report for a given run. If <cite>–static-rid</cite> is provided then the directory is named as the run id that you provide with <cite>-rid</cite> CLI option or as the default run id which is <cite>mrun</cite>.
+- <strong>html</strong>: HTML report (report.html) generated by pytest-html plugin goes here.
+- <strong>log</strong>: arjuna.log file can be found here.
+- <strong>screenshot</strong>: Contains screenshots taken for a test run.
+- <strong>xml</strong>: JUnit-style XML report (report.xml) goes here. It is primarily meant for Jenkins or other CI software intergrations with Arjuna.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><strong>test</strong>: Contains test files. As of now Arjuna supports coded tests only.</dt><dd><ul>
+<li><p><strong>module</strong>: Coded tests are written as Python modules and are placed here. Sub-packaging of modules is allowed.</p></li>
+<li><p><strong>conftest.py</strong>: This is pytest’s conftest.py file</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<ul class="simple">
+<li><p><strong>script</strong>: This directory is meant to contain Arjuna scripts (or your own custom scripts or batch files.)
+- <strong>arjuna_launcher.py</strong>: This is the script which is used to run your tests by invoking Arjuna.</p></li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="installation.html" title="previous chapter">Installing Arjuna</a>
+          <li>Next: <a href="cli.html" title="next chapter">Arjuna Command Line Interface</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

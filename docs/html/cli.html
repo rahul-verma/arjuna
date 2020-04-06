@@ -1,0 +1,182 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Arjuna Command Line Interface &#8212; Arjuna 0.9.18 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Arjuna Test Project" href="test_project.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="test_project.html" title="Arjuna Test Project"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 0.9.18 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="arjuna-command-line-interface">
+<span id="cli"></span><h1>Arjuna Command Line Interface<a class="headerlink" href="#arjuna-command-line-interface" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna provides a very comprehensive yet intuitive Command Line Interface (CLI).</p>
+<div class="section" id="h-or-help">
+<h2>-h or –help<a class="headerlink" href="#h-or-help" title="Permalink to this headline">¶</a></h2>
+<p>You can check the available options using <cite>-h</cite> or <cite>–help</cite> switch:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python</span> <span class="pre">-m</span> <span class="pre">arjuna</span> <span class="pre">-h</span>
+<span class="pre">`</span></code></p>
+</div>
+<div class="section" id="control-logging-level-using-dl-and-ll-options">
+<h2>Control Logging Level using -dl and -ll Options<a class="headerlink" href="#control-logging-level-using-dl-and-ll-options" title="Permalink to this headline">¶</a></h2>
+<p>Each to Arjuna logger is associated with console as well as file logging. You can control what gets displayed on console as well as what gets logged in the log file independently of each other. This is done by specifying the minimum message level.</p>
+<ul class="simple">
+<li><p><strong>-dl or –display-level</strong> to control which log messages are displayed on console. Default is <cite>INFO</cite>.</p></li>
+<li><p><strong>-ll or –log-level</strong> to control which log messages are logged in log file. Default is <cite>DEBUG</cite>.</p></li>
+</ul>
+<p>Rest of the options are available in respective commands as discussed next.</p>
+</div>
+<div class="section" id="arjuna-commands">
+<h2>Arjuna Commands<a class="headerlink" href="#arjuna-commands" title="Permalink to this headline">¶</a></h2>
+<p>Arjuna’s CLI is Command-Driven. Following are the current available commands:
+- <strong>create-project</strong>: Create a new project
+- <strong>run-project</strong>: Run all tests in an Arjuna Test Project.
+- <strong>run-selected</strong>: Run tests selected based on selectors specified.</p>
+<p>You can see the help for a given command by running <cite>python -m arjuna &lt;command&gt; -h</cite>, for example</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python</span> <span class="pre">-m</span> <span class="pre">arjuna</span> <span class="pre">create-project</span> <span class="pre">-h</span>
+<span class="pre">`</span></code></p>
+</div>
+<div class="section" id="the-create-project-command-creating-a-new-project-skeleton">
+<h2>The create-project command - Creating a New Project Skeleton<a class="headerlink" href="#the-create-project-command-creating-a-new-project-skeleton" title="Permalink to this headline">¶</a></h2>
+<p>[Arjuna Test Project](#arjuna-test-project) follows a [strict test project structure](#arjuna-test-project). You can easily create the project skeleton using <cite>create-project</cite> command in Arjuna CLI.</p>
+<p>It is a simple to run command. For example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python</span> <span class="pre">-m</span> <span class="pre">arjuna</span> <span class="pre">create-project</span> <span class="pre">-p</span> <span class="pre">/path/to/proj_name</span>
+<span class="pre">`</span></code></p>
+<p>This command creates a test project with name <cite>proj_name</cite> at the path provided. <cite>proj_name</cite> must be a valid Arjuna name.</p>
+</div>
+<div class="section" id="the-run-project-command">
+<h2>The run-project command<a class="headerlink" href="#the-run-project-command" title="Permalink to this headline">¶</a></h2>
+<p>This command is used to run all tests in the project. The tests are picked up from the <cite>&lt;Project Root Dir&gt;/test/module</cite> directory.</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python</span> <span class="pre">-m</span> <span class="pre">arjuna</span> <span class="pre">run-project</span> <span class="pre">-p</span> <span class="pre">/path/to/proj_name</span> <span class="pre">&lt;run_options&gt;</span>
+<span class="pre">`</span></code></p>
+<p>Following run options can be provided in command line:</p>
+<ul class="simple">
+<li><p><strong>-h or –help</strong>: To check all the run options</p></li>
+<li><p><strong>rid or –runid</strong>: The id/name of this test run. It is <cite>mrun</cite> by default. Run ID is used to create the report directory name.</p></li>
+<li><p><strong>static-rid</strong>: Instructs Arjuna NOT to use the run id without appending timestap to it. It is very helpful to us this during script development as for every run a new report directory is not created.</p></li>
+<li><p><strong>-rf or –report-formats</strong>: Report formats for test report generation. Allowed values are <cite>XML</cite> and <cite>HTML</cite>.</p></li>
+<li><p><strong>–dry-run</strong>: Do not run tests, just enumerate them.</p></li>
+<li><p><strong>–run-env</strong>: Provide the test environment name (e.g. <cite>tenv</cite>). Arjuna automatically picks up the configuration file corresponding to this name from <cite>&lt;Project Root Dir&gt;/config/env</cite> directory (e.g. <cite>tenv.conf</cite>). Reference configuration is super-imposed with these options.</p></li>
+<li><p><strong>–run-conf</strong>: Absolute path of a conf file to be used for this run. If a name or relative path is provided, it is considered as relative to <cite>&lt;Project Root Dir&gt;/config</cite> directory. The options take precedence over reference configuration and environment configuration.</p></li>
+<li><p><strong>-ao or –arjuna-option</strong>: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates. You can provide any number of these switches.</p></li>
+<li><p><strong>-uo or –user-option</strong>: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.  You can provide any number of these switches.</p></li>
+</ul>
+</div>
+<div class="section" id="the-run-selected-command">
+<h2>The run-selected command<a class="headerlink" href="#the-run-selected-command" title="Permalink to this headline">¶</a></h2>
+<p>This command is used to run a sub-set of tests in the project. The tests are picked up from the <cite>&lt;Project Root Dir&gt;/test/module</cite> directory as per the selectors provided.</p>
+<p><code class="docutils literal notranslate"><span class="pre">`bash</span>
+<span class="pre">python</span> <span class="pre">-m</span> <span class="pre">arjuna</span> <span class="pre">run-selected</span> <span class="pre">-p</span> <span class="pre">/path/to/proj_name</span> <span class="pre">&lt;run_options&gt;</span> <span class="pre">&lt;selectors&gt;</span>
+<span class="pre">`</span></code></p>
+<p>All the command line options specified for [the <cite>run-project</cite> command](#the-run-project-command) are supported. In addition, following selection related options are available:</p>
+<ul class="simple">
+<li><p><strong>-im or –include-modules</strong>: One or more names/patterns for including test modules.</p></li>
+<li><p><strong>-em or –exclude-modules</strong>: One or more names/patterns for excluding test modules.</p></li>
+<li><p><strong>-it or –include-tests</strong>: One or more names/patterns for including test functions.</p></li>
+<li><p><strong>-et or –exclude-tests</strong>: One or more names/patterns for excluding test functions.</p></li>
+</ul>
+</div>
+<div class="section" id="using-arjuna-launcher-py-script-instead-of-python-m-arjuna">
+<h2>Using arjuna_launcher.py Script instead of python -m arjuna<a class="headerlink" href="#using-arjuna-launcher-py-script-instead-of-python-m-arjuna" title="Permalink to this headline">¶</a></h2>
+<p>As Arjuna needs a reference to the test project root directory, Arjuna provides you with a handy runner script: <cite>&lt;project_root&gt;/script/arjuna_launcher.py</cite> script. It automatically picks up the project root directory initializes Arjuna with it along with the other command line options provided.</p>
+<p>You can execute <cite>run-project</cite> or <cite>run-selected</cite> commands as:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`</span>
+<span class="pre">python</span> <span class="pre">arjuna_launcher.py</span> <span class="pre">run-project</span> <span class="pre">&lt;run_options&gt;</span>
+<span class="pre">python</span> <span class="pre">arjuna_launcher.py</span> <span class="pre">run-selected</span> <span class="pre">&lt;run_options&gt;</span> <span class="pre">&lt;selectors&gt;</span>
+<span class="pre">`</span></code></p>
+<p>without providing the <cite>-p</cite> switch for project directory.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Arjuna Command Line Interface</a><ul>
+<li><a class="reference internal" href="#h-or-help">-h or –help</a></li>
+<li><a class="reference internal" href="#control-logging-level-using-dl-and-ll-options">Control Logging Level using -dl and -ll Options</a></li>
+<li><a class="reference internal" href="#arjuna-commands">Arjuna Commands</a></li>
+<li><a class="reference internal" href="#the-create-project-command-creating-a-new-project-skeleton">The create-project command - Creating a New Project Skeleton</a></li>
+<li><a class="reference internal" href="#the-run-project-command">The run-project command</a></li>
+<li><a class="reference internal" href="#the-run-selected-command">The run-selected command</a></li>
+<li><a class="reference internal" href="#using-arjuna-launcher-py-script-instead-of-python-m-arjuna">Using arjuna_launcher.py Script instead of python -m arjuna</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="test_project.html" title="previous chapter">Arjuna Test Project</a>
+          
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

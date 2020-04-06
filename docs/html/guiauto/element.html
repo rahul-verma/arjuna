@@ -1,0 +1,195 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Element Identification and Interaction &#8212; Arjuna 0.9.18 documentation</title>
+    <link rel="stylesheet" href="../_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Gui Namespace - Externalizing Locators" href="gns.html" />
+    <link rel="prev" title="The GuiApp class" href="guiapp.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gns.html" title="Gui Namespace - Externalizing Locators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="guiapp.html" title="The GuiApp class"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Arjuna 0.9.18 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">Web GUI Automation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="element-identification-and-interaction">
+<span id="element"></span><h1>Element Identification and Interaction<a class="headerlink" href="#element-identification-and-interaction" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="guielement-and-the-element-template">
+<h2>GuiElement and the element Template<a class="headerlink" href="#guielement-and-the-element-template" title="Permalink to this headline">¶</a></h2>
+<p>Arjuna’s Gui automation implementation has different types of Gui elements which are associated with corresponding template types.</p>
+<p>A single node in the DOM of a web UI is represented by a <cite>GuiElement</cite> object in Arjuna, irrespective of its type. This is unless you need specialized methods which we will see later.</p>
+<p>The template name for <cite>GuiElement</cite> is <cite>element</cite>. This information is not important here, but will become relevant when we deal with more complex node types.</p>
+</div>
+<div class="section" id="locators-using-id-name-tag-class-link-text-partial-link-text-xpath-and-css-selectors">
+<h2>Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text, XPath and CSS Selectors<a class="headerlink" href="#locators-using-id-name-tag-class-link-text-partial-link-text-xpath-and-css-selectors" title="Permalink to this headline">¶</a></h2>
+<p>Arjuna supports the locators which are supported by Selenium’s By object. Apart from these, there are various abstracted locators which Arjuna provides for easier coding.</p>
+<p>For locating <cite>GuiElement</cite>, you can use the <cite>.element</cite> factory method (assume <cite>app</cite> is the <cite>GuiApp</cite> object):</p>
+<dl class="simple">
+<dt><a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>python</dt><dd><p>app.element(&lt;locator_type&gt;=&lt;locator_value&gt;)</p>
+</dd>
+</dl>
+<p><a href="#id5"><span class="problematic" id="id6">``</span></a><a href="#id7"><span class="problematic" id="id8">`</span></a></p>
+<p>The locator strategy is expressed using locator type names supported by Arjuna. You can pass it as a keyword argument <cite>k=v</cite> format to the the <cite>element</cite> call. Following are the basic locators supported and corresponding Selenium <cite>By</cite> locators:
+- <strong>`id`</strong> : Wraps <cite>By.id</cite>
+- <strong>`name`</strong> : Wraps <cite>By.name</cite>
+- <strong>`tag`</strong> : Wraps <cite>By.tag_name</cite>
+- <strong>`classes`</strong> : Wraps <cite>By.class_name</cite>, however it supports compound classes. See Arjuna Locator Extensions page for more information.
+- <strong>`link`</strong> : Wraps <cite>By.partial_link_text</cite>. Note that all content/text matches in Arjuna are partial matches (opposite of Selenium).
+- <strong>`flink`</strong> : Wraps <cite>By.link_text</cite> (short for Full Link)
+- <strong>`xpath`</strong> : Wraps <cite>By.xpath</cite>
+- <strong>`selector`</strong> : Wraps <cite>By.css_selector</cite></p>
+<p>Following are some examples:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">wordpress.element(id=&quot;user_login&quot;)</span>
+<span class="pre">wordpress.element(name=&quot;log&quot;)</span>
+<span class="pre">wordpress.element(tag=&quot;input&quot;)</span>
+<span class="pre">wordpress.element(classes=&quot;input&quot;)</span>
+<span class="pre">wordpress.element(link=&quot;password&quot;)</span>
+<span class="pre">wordpress.element(flink=&quot;Lost</span> <span class="pre">your</span> <span class="pre">password?&quot;)</span>
+<span class="pre">wordpress.element(xpath=&quot;//*[contains(text(),</span> <span class="pre">'Lost')]&quot;)</span>
+<span class="pre">wordpress.element(selector=&quot;.button.button-large&quot;)</span>
+<span class="pre">`</span></code></p>
+</div>
+<div class="section" id="locators-arjuna-s-locator-extensions">
+<h2>Locators - Arjuna’s Locator Extensions<a class="headerlink" href="#locators-arjuna-s-locator-extensions" title="Permalink to this headline">¶</a></h2>
+<p>Arjuna provides various higher level locator strategies in addition to wrapping Selenium’s By-style strategies. Following is the list of these extensions:
+- <strong>`text`</strong> : Generates Partial Text based XPath
+- <strong>`ftext`</strong> : Generates Full Text based XPath
+- <strong>`title`</strong> : Generates Title Match CSS Selector
+- <strong>`value`</strong> : Generates Value Match CSS Selector
+- <strong>`attr`</strong> : Generates Partial Attribute Value Match CSS Selector
+- <strong>`fattr`</strong> : Generates Full Attribute Match CSS Selector
+- <strong>`classes`</strong> : Supports compound classes (supplied as a single string or as multiple separate strings)
+- <strong>`point`</strong> : Runs a JavaScript to find the GuiElement under an XY coordinate
+- <strong>`js`</strong> : Runs the supplied JavaScript and returns GuiElement representing the element it returns.</p>
+<p>Following are some examples:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">wordpress.element(text=&quot;Lost&quot;)</span>
+<span class="pre">wordpress.element(ftext=&quot;Lost</span> <span class="pre">your</span> <span class="pre">password?&quot;)</span>
+<span class="pre">wordpress.element(title=&quot;Password</span> <span class="pre">Lost</span> <span class="pre">and</span> <span class="pre">Found&quot;)</span>
+<span class="pre">wordpress.element(value=&quot;Log</span> <span class="pre">In&quot;)</span>
+<span class="pre">wordpress.element(attr=Attr(&quot;for&quot;,</span> <span class="pre">&quot;_login&quot;))</span>
+<span class="pre">wordpress.element(fattr=Attr(&quot;for&quot;,</span> <span class="pre">&quot;user_login&quot;))</span>
+<span class="pre">wordpress.element(type=&quot;password&quot;)</span>
+<span class="pre">wordpress.element(classes=&quot;button</span> <span class="pre">button-large&quot;)</span>
+<span class="pre">wordpress.element(classes=(&quot;button&quot;,</span> <span class="pre">&quot;button-large&quot;))</span>
+<span class="pre">wordpress.element(point=Point(1043,</span> <span class="pre">458))</span>
+<span class="pre">wordpress.element(js=&quot;return</span> <span class="pre">document.getElementById('wp-submit')&quot;)</span>
+<span class="pre">`</span></code></p>
+</div>
+<div class="section" id="interaction-with-guielement">
+<h2>Interaction with GuiElement<a class="headerlink" href="#interaction-with-guielement" title="Permalink to this headline">¶</a></h2>
+<p>To interact with a GuiElement, from automation angle it must be in an interactable state. In the usual automation code, a test author writes a lot of waiting related code (and let’s not even touch the <cite>time.sleep</cite>.).</p>
+<div class="section" id="automatic-dynamic-waiting">
+<h3>Automatic Dynamic Waiting<a class="headerlink" href="#automatic-dynamic-waiting" title="Permalink to this headline">¶</a></h3>
+<p>Arjuna does a granular automatic waiting of three types:
+- Waiting for the presence of an element when it is attempting to identify a GuiElement
+- Waiting for the right state (for example, clickability of an GuiElement when you enter text or want to click it)
+- Waiting for interaction to succeed (Arjuna, for example, retries click if interaction exception is raised).</p>
+</div>
+<div class="section" id="interaction-methods">
+<h3>Interaction Methods<a class="headerlink" href="#interaction-methods" title="Permalink to this headline">¶</a></h3>
+<p>Once locted <cite>GuiElement</cite> provides various interaction methods. Some are shown below:</p>
+<p><code class="docutils literal notranslate"><span class="pre">`python</span>
+<span class="pre">element.text</span> <span class="pre">=</span> <span class="pre">user</span>
+<span class="pre">element.click()</span>
+<span class="pre">`</span></code></p>
+<p><cite>text</cite> is a property of <cite>GuiElement</cite>. <cite>element.text = “some_string”</cite> is equivalent of setting text of the text box.</p>
+<p><cite>click</cite> method is used to click the element.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Element Identification and Interaction</a><ul>
+<li><a class="reference internal" href="#guielement-and-the-element-template">GuiElement and the element Template</a></li>
+<li><a class="reference internal" href="#locators-using-id-name-tag-class-link-text-partial-link-text-xpath-and-css-selectors">Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text, XPath and CSS Selectors</a></li>
+<li><a class="reference internal" href="#locators-arjuna-s-locator-extensions">Locators - Arjuna’s Locator Extensions</a></li>
+<li><a class="reference internal" href="#interaction-with-guielement">Interaction with GuiElement</a><ul>
+<li><a class="reference internal" href="#automatic-dynamic-waiting">Automatic Dynamic Waiting</a></li>
+<li><a class="reference internal" href="#interaction-methods">Interaction Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="../index.html">Overview</a>
+    <ul>
+      <li><a href="index.html">Web GUI Automation</a>
+        <ul>
+          <li>Previous: <a href="guiapp.html" title="previous chapter">The GuiApp class</a>
+          <li>Next: <a href="gns.html" title="next chapter">Gui Namespace - Externalizing Locators</a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="../_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

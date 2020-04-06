@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contextual Data References &#8212; Arjuna 0.9.18 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Localization of Strings" href="l10n.html" />
+    <link rel="prev" title="Data Driven Testing" href="ddt.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="l10n.html" title="Localization of Strings"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ddt.html" title="Data Driven Testing"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 0.9.18 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="contextual-data-references">
+<span id="data-ref"></span><h1>Contextual Data References<a class="headerlink" href="#contextual-data-references" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>There are various situations in which you need contextual data. Such a need is catered by the concept of Contextual Data References (or simply Data References) in Arjuna.</p>
+<p>Consider the following example:
+1. You have 3 types of user accounts - <cite>Bronze</cite>, <cite>Silver</cite> and <cite>Gold</cite>.
+2. The user account information includes a <cite>User</cite> and <cite>Pwd</cite> to repesented user name and password representing a given account type.
+3. In different situations, you want to use the user accounts and retrieve them by the context name from a single source of information.</p>
+</div>
+<div class="section" id="excel-data-references">
+<h2>Excel Data References<a class="headerlink" href="#excel-data-references" title="Permalink to this headline">¶</a></h2>
+<p>Arjuna supports Excel based data references out of the box. These reference files are automatically loaded when <cite>Arjuna.init()</cite> is called by Arjuna launcher.</p>
+<p>There are two types of Excel based Data References that you can create in Arjuna:</p>
+<div class="section" id="column-data-references">
+<h3>Column Data References<a class="headerlink" href="#column-data-references" title="Permalink to this headline">¶</a></h3>
+<p>You place such files in <cite>&lt;Project Root&gt;/data/reference/column</cite> directory. A reference file can be found in this example project.</p>
+<img alt="_images/colref.png" src="_images/colref.png" />
+<p>In a column data reference file, the context of data is represented by columns. Here Account Type’s values -  <cite>Bronze</cite>, <cite>Silver</cite> and <cite>Gold</cite> represent the contexts, for which the <cite>User</cite> and <cite>Pwd</cite> values are different.</p>
+</div>
+<div class="section" id="row-data-references">
+<h3>Row Data References<a class="headerlink" href="#row-data-references" title="Permalink to this headline">¶</a></h3>
+<p>You place such files in <cite>&lt;Project Root&gt;/data/reference/row</cite> directory. A reference file can be found in this example project.</p>
+<img alt="_images/rowref.png" src="_images/rowref.png" />
+<p>In a row data reference file, the context of data is represented by cells of the first column. Here Account Type’s values - <cite>Bronze</cite>, <cite>Silver</cite> and <cite>Gold</cite> represent the contexts, for which the <cite>User</cite> and <cite>Pwd</cite> values are different.</p>
+</div>
+</div>
+<div class="section" id="the-magic-r-function">
+<h2>The Magic R Function<a class="headerlink" href="#the-magic-r-function" title="Permalink to this headline">¶</a></h2>
+<p>You can access data references in your test code with Arjuna’s magic <cite>R</cite> function (similar to <cite>L</cite> and <cite>C</cite> functions seen in other features).</p>
+<p>It has the following signature. The first argument is the query. <cite>bucket</cite> and <cite>context</cite> are optional arguments.</p>
+<ol class="arabic simple">
+<li><p>The name of the file is the <cite>bucket</cite> name. For example, here <cite>cusers</cite> and <cite>rusers</cite> are buckets represenating <cite>cusers.xls</cite> and <cite>rusers.xls</cite> data reference files.</p></li>
+<li><dl class="simple">
+<dt>You can retrieve values from the data reference with a combination of <cite>query</cite>, <cite>bucket</cite> and <cite>context</cite> combinations.</dt><dd><ul class="simple">
+<li><p>Query can contain just the ref name and bucket and context arguments can be provided.</p></li>
+<li><p>Query can be of format <cite>context.refname</cite> and bucket can be supplied as argument.</p></li>
+<li><p>Query can be of format <cite>bucket.context.refname</cite> without passing bucket and context arguments separately.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>The only difference between the two styles of references is the format and the way Arjuna loads them. Usage for a test author is exactly the same.</p></li>
+</ol>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Contextual Data References</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#excel-data-references">Excel Data References</a><ul>
+<li><a class="reference internal" href="#column-data-references">Column Data References</a></li>
+<li><a class="reference internal" href="#row-data-references">Row Data References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-magic-r-function">The Magic R Function</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="ddt.html" title="previous chapter">Data Driven Testing</a>
+          <li>Next: <a href="l10n.html" title="next chapter">Localization of Strings</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

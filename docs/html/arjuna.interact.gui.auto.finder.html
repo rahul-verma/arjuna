@@ -1,0 +1,641 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.interact.gui.auto.finder package &#8212; Arjuna 0.9.18 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 0.9.18 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="arjuna-interact-gui-auto-finder-package">
+<h1>arjuna.interact.gui.auto.finder package<a class="headerlink" href="#arjuna-interact-gui-auto-finder-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-arjuna.interact.gui.auto.finder.element_finder">
+<span id="arjuna-interact-gui-auto-finder-element-finder-module"></span><h2>arjuna.interact.gui.auto.finder.element_finder module<a class="headerlink" href="#module-arjuna.interact.gui.auto.finder.element_finder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.element_finder.ElementFinder">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.element_finder.</code><code class="sig-name descname">ElementFinder</code><span class="sig-paren">(</span><em class="sig-param">container</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.element_finder.ElementFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.element_finder.ElementFinder.check_for_absence">
+<code class="sig-name descname">check_for_absence</code><span class="sig-paren">(</span><em class="sig-param">dispatcher_call</em>, <em class="sig-param">emd</em>, <em class="sig-param">context='ELEMENT'</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.element_finder.ElementFinder.check_for_absence" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.element_finder.ElementFinder.config">
+<em class="property">property </em><code class="sig-name descname">config</code><a class="headerlink" href="#arjuna.interact.gui.auto.finder.element_finder.ElementFinder.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.element_finder.ElementFinder.container">
+<em class="property">property </em><code class="sig-name descname">container</code><a class="headerlink" href="#arjuna.interact.gui.auto.finder.element_finder.ElementFinder.container" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.element_finder.ElementFinder.find">
+<code class="sig-name descname">find</code><span class="sig-paren">(</span><em class="sig-param">dispatcher_call</em>, <em class="sig-param">emd</em>, <em class="sig-param">context='ELEMENT'</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.element_finder.ElementFinder.find" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-arjuna.interact.gui.auto.finder.emd">
+<span id="arjuna-interact-gui-auto-finder-emd-module"></span><h2>arjuna.interact.gui.auto.finder.emd module<a class="headerlink" href="#module-arjuna.interact.gui.auto.finder.emd" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.emd.</code><code class="sig-name descname">GuiElementMetaData</code><span class="sig-paren">(</span><em class="sig-param">locators</em>, <em class="sig-param">meta=None</em>, <em class="sig-param">process=True</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.convert_to_impl_with_locators">
+<em class="property">classmethod </em><code class="sig-name descname">convert_to_impl_with_locators</code><span class="sig-paren">(</span><em class="sig-param">*with_locators</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.convert_to_impl_with_locators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.create_emd">
+<em class="property">classmethod </em><code class="sig-name descname">create_emd</code><span class="sig-paren">(</span><em class="sig-param">*locators</em>, <em class="sig-param">meta=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.create_emd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.create_formatted_emd">
+<code class="sig-name descname">create_formatted_emd</code><span class="sig-paren">(</span><em class="sig-param">**fargs</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.create_formatted_emd" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.locators">
+<em class="property">property </em><code class="sig-name descname">locators</code><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.locators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.locators_as_str">
+<em class="property">static </em><code class="sig-name descname">locators_as_str</code><span class="sig-paren">(</span><em class="sig-param">locators</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.locators_as_str" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.max_wait">
+<em class="property">property </em><code class="sig-name descname">max_wait</code><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.max_wait" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.meta">
+<em class="property">property </em><code class="sig-name descname">meta</code><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.meta" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.print_locators">
+<code class="sig-name descname">print_locators</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.print_locators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.raw_locators">
+<em class="property">property </em><code class="sig-name descname">raw_locators</code><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData.raw_locators" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.emd.SimpleGuiElementMetaData">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.emd.</code><code class="sig-name descname">SimpleGuiElementMetaData</code><span class="sig-paren">(</span><em class="sig-param">locator_type</em>, <em class="sig-param">locator_value={}</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.emd.SimpleGuiElementMetaData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.interact.gui.auto.finder.emd.GuiElementMetaData" title="arjuna.interact.gui.auto.finder.emd.GuiElementMetaData"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interact.gui.auto.finder.emd.GuiElementMetaData</span></code></a></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-arjuna.interact.gui.auto.finder.enums">
+<span id="arjuna-interact-gui-auto-finder-enums-module"></span><h2>arjuna.interact.gui.auto.finder.enums module<a class="headerlink" href="#module-arjuna.interact.gui.auto.finder.enums" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.enums.</code><code class="sig-name descname">GenericLocateWith</code><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.ATTR">
+<code class="sig-name descname">ATTR</code><em class="property"> = 21</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.ATTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.CLASSES">
+<code class="sig-name descname">CLASSES</code><em class="property"> = 5</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.CLASSES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.CSS_SELECTOR">
+<code class="sig-name descname">CSS_SELECTOR</code><em class="property"> = 28</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.CSS_SELECTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.ELEMENT">
+<code class="sig-name descname">ELEMENT</code><em class="property"> = 13</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.ELEMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.FATTR">
+<code class="sig-name descname">FATTR</code><em class="property"> = 22</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.FATTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.FLINK">
+<code class="sig-name descname">FLINK</code><em class="property"> = 7</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.FLINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.FTEXT">
+<code class="sig-name descname">FTEXT</code><em class="property"> = 17</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.FTEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.ID">
+<code class="sig-name descname">ID</code><em class="property"> = 1</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.IMAGE">
+<code class="sig-name descname">IMAGE</code><em class="property"> = 24</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.IMAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.IMAGE_SRC">
+<code class="sig-name descname">IMAGE_SRC</code><em class="property"> = 23</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.IMAGE_SRC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.INDEX">
+<code class="sig-name descname">INDEX</code><em class="property"> = 10</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.INDEX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.JS">
+<code class="sig-name descname">JS</code><em class="property"> = 15</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.JS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.LINK">
+<code class="sig-name descname">LINK</code><em class="property"> = 6</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.LINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.LINK_TEXT">
+<code class="sig-name descname">LINK_TEXT</code><em class="property"> = 26</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.LINK_TEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.NAME">
+<code class="sig-name descname">NAME</code><em class="property"> = 2</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.PARTIAL_LINK_TEXT">
+<code class="sig-name descname">PARTIAL_LINK_TEXT</code><em class="property"> = 25</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.PARTIAL_LINK_TEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.PLINK">
+<code class="sig-name descname">PLINK</code><em class="property"> = 8</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.PLINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.POINT">
+<code class="sig-name descname">POINT</code><em class="property"> = 14</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.POINT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.SELECTOR">
+<code class="sig-name descname">SELECTOR</code><em class="property"> = 4</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.SELECTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TAG">
+<code class="sig-name descname">TAG</code><em class="property"> = 9</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TAG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TAG_NAME">
+<code class="sig-name descname">TAG_NAME</code><em class="property"> = 27</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TAG_NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TEXT">
+<code class="sig-name descname">TEXT</code><em class="property"> = 16</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TITLE">
+<code class="sig-name descname">TITLE</code><em class="property"> = 18</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TITLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TYPE">
+<code class="sig-name descname">TYPE</code><em class="property"> = 19</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.VALUE">
+<code class="sig-name descname">VALUE</code><em class="property"> = 20</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.WINDOW_PTITLE">
+<code class="sig-name descname">WINDOW_PTITLE</code><em class="property"> = 12</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.WINDOW_PTITLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.WINDOW_TITLE">
+<code class="sig-name descname">WINDOW_TITLE</code><em class="property"> = 11</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.WINDOW_TITLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.GenericLocateWith.XPATH">
+<code class="sig-name descname">XPATH</code><em class="property"> = 3</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.GenericLocateWith.XPATH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.enums.</code><code class="sig-name descname">WithType</code><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>An enumeration.</p>
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.ATTR">
+<code class="sig-name descname">ATTR</code><em class="property"> = 14</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.ATTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.ATTR_WORD">
+<code class="sig-name descname">ATTR_WORD</code><em class="property"> = 18</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.ATTR_WORD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.BATTR">
+<code class="sig-name descname">BATTR</code><em class="property"> = 16</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.BATTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.BTEXT">
+<code class="sig-name descname">BTEXT</code><em class="property"> = 11</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.BTEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.CLASSES">
+<code class="sig-name descname">CLASSES</code><em class="property"> = 3</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.CLASSES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.EATTR">
+<code class="sig-name descname">EATTR</code><em class="property"> = 17</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.EATTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.ELEMENT">
+<code class="sig-name descname">ELEMENT</code><em class="property"> = 26</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.ELEMENT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.ETEXT">
+<code class="sig-name descname">ETEXT</code><em class="property"> = 12</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.ETEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.FATTR">
+<code class="sig-name descname">FATTR</code><em class="property"> = 15</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.FATTR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.FLINK">
+<code class="sig-name descname">FLINK</code><em class="property"> = 5</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.FLINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.FTEXT">
+<code class="sig-name descname">FTEXT</code><em class="property"> = 10</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.FTEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.ID">
+<code class="sig-name descname">ID</code><em class="property"> = 1</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.INDEX">
+<code class="sig-name descname">INDEX</code><em class="property"> = 23</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.INDEX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.JS">
+<code class="sig-name descname">JS</code><em class="property"> = 22</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.JS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.LABEL">
+<code class="sig-name descname">LABEL</code><em class="property"> = 27</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.LABEL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.LINK">
+<code class="sig-name descname">LINK</code><em class="property"> = 4</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.LINK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.NAME">
+<code class="sig-name descname">NAME</code><em class="property"> = 2</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.NAME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.POINT">
+<code class="sig-name descname">POINT</code><em class="property"> = 21</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.POINT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.SELECTOR">
+<code class="sig-name descname">SELECTOR</code><em class="property"> = 8</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.SELECTOR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.TAG">
+<code class="sig-name descname">TAG</code><em class="property"> = 6</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.TAG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.TEXT">
+<code class="sig-name descname">TEXT</code><em class="property"> = 9</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.TEXT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.TITLE">
+<code class="sig-name descname">TITLE</code><em class="property"> = 13</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.TITLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.TYPE">
+<code class="sig-name descname">TYPE</code><em class="property"> = 19</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.TYPE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.VALUE">
+<code class="sig-name descname">VALUE</code><em class="property"> = 20</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.VALUE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.WINDOW_PTITLE">
+<code class="sig-name descname">WINDOW_PTITLE</code><em class="property"> = 25</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.WINDOW_PTITLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.WINDOW_TITLE">
+<code class="sig-name descname">WINDOW_TITLE</code><em class="property"> = 24</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.WINDOW_TITLE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.enums.WithType.XPATH">
+<code class="sig-name descname">XPATH</code><em class="property"> = 7</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.enums.WithType.XPATH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-arjuna.interact.gui.auto.finder.meta">
+<span id="arjuna-interact-gui-auto-finder-meta-module"></span><h2>arjuna.interact.gui.auto.finder.meta module<a class="headerlink" href="#module-arjuna.interact.gui.auto.finder.meta" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.meta.InteractionConfig">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.meta.</code><code class="sig-name descname">InteractionConfig</code><span class="sig-paren">(</span><em class="sig-param">meta_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.meta.InteractionConfig" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.meta.InteractionConfig.should_check_post_state">
+<code class="sig-name descname">should_check_post_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.meta.InteractionConfig.should_check_post_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.meta.InteractionConfig.should_check_pre_state">
+<code class="sig-name descname">should_check_pre_state</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.meta.InteractionConfig.should_check_pre_state" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.meta.InteractionConfig.should_check_type">
+<code class="sig-name descname">should_check_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.meta.InteractionConfig.should_check_type" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.meta.InteractionConfig.should_scroll_to_view">
+<code class="sig-name descname">should_scroll_to_view</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.meta.InteractionConfig.should_scroll_to_view" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.meta.Meta">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.meta.</code><code class="sig-name descname">Meta</code><span class="sig-paren">(</span><em class="sig-param">mdict=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.meta.Meta" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.meta.Meta.has">
+<code class="sig-name descname">has</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.meta.Meta.has" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.meta.Meta.items">
+<code class="sig-name descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.meta.Meta.items" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.meta.Meta.update_settings">
+<code class="sig-name descname">update_settings</code><span class="sig-paren">(</span><em class="sig-param">source_emd</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.meta.Meta.update_settings" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-arjuna.interact.gui.auto.finder.translator">
+<span id="arjuna-interact-gui-auto-finder-translator-module"></span><h2>arjuna.interact.gui.auto.finder.translator module<a class="headerlink" href="#module-arjuna.interact.gui.auto.finder.translator" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.translator.LocatorTranslator">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.translator.</code><code class="sig-name descname">LocatorTranslator</code><a class="headerlink" href="#arjuna.interact.gui.auto.finder.translator.LocatorTranslator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Translates With Constructs to what underlying engines understand.</p>
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.translator.LocatorTranslator.BASIC_LOCATORS">
+<code class="sig-name descname">BASIC_LOCATORS</code><em class="property"> = {&lt;GenericLocateWith.NAME: 2&gt;, &lt;GenericLocateWith.IMAGE: 24&gt;, &lt;GenericLocateWith.JS: 15&gt;, &lt;GenericLocateWith.WINDOW_TITLE: 11&gt;, &lt;GenericLocateWith.WINDOW_PTITLE: 12&gt;, &lt;GenericLocateWith.ID: 1&gt;, &lt;GenericLocateWith.XPATH: 3&gt;, &lt;GenericLocateWith.INDEX: 10&gt;}</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.translator.LocatorTranslator.BASIC_LOCATORS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.translator.LocatorTranslator.NAMED_ARG_LOCATORS">
+<code class="sig-name descname">NAMED_ARG_LOCATORS</code><em class="property"> = {&lt;GenericLocateWith.ATTR: 21&gt;: &quot;//*[contains(&#64;{name},'{value}')]&quot;, &lt;GenericLocateWith.FATTR: 22&gt;: &quot;//*[&#64;{name}='{value}']&quot;, &lt;GenericLocateWith.POINT: 14&gt;: 'return document.elementFromPoint({x}, {y})'}</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.translator.LocatorTranslator.NAMED_ARG_LOCATORS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.translator.LocatorTranslator.NEED_TRANSLATION">
+<code class="sig-name descname">NEED_TRANSLATION</code><em class="property"> = {&lt;GenericLocateWith.TAG: 9&gt;: &lt;GenericLocateWith.TAG_NAME: 27&gt;, &lt;GenericLocateWith.LINK: 6&gt;: &lt;GenericLocateWith.PARTIAL_LINK_TEXT: 25&gt;, &lt;GenericLocateWith.FLINK: 7&gt;: &lt;GenericLocateWith.LINK_TEXT: 26&gt;, &lt;GenericLocateWith.SELECTOR: 4&gt;: &lt;GenericLocateWith.CSS_SELECTOR: 28&gt;}</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.translator.LocatorTranslator.NEED_TRANSLATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.translator.LocatorTranslator.XPATH_LOCATORS">
+<code class="sig-name descname">XPATH_LOCATORS</code><em class="property"> = {&lt;GenericLocateWith.TEXT: 16&gt;: &quot;//*[contains(text(),'{}')]&quot;, &lt;GenericLocateWith.FTEXT: 17&gt;: &quot;//*[text()='{}']&quot;, &lt;GenericLocateWith.VALUE: 20&gt;: &quot;//*[&#64;value='{}']&quot;, &lt;GenericLocateWith.TITLE: 18&gt;: &quot;//*[&#64;title='{}']&quot;, &lt;GenericLocateWith.IMAGE_SRC: 23&gt;: &quot;//img[&#64;src='{}']&quot;}</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.translator.LocatorTranslator.XPATH_LOCATORS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.interact.gui.auto.finder.translator.LocatorTranslator.XTYPE_LOCATORS">
+<code class="sig-name descname">XTYPE_LOCATORS</code><em class="property"> = {&lt;GuiElementType.TEXTBOX: 1&gt;: &quot;//input[&#64;type='text']&quot;, &lt;GuiElementType.PASSWORD: 2&gt;: &quot;//input[&#64;type='password']&quot;, &lt;GuiElementType.LINK: 3&gt;: '//a', &lt;GuiElementType.BUTTON: 4&gt;: &quot;//input[&#64;type='button']&quot;, &lt;GuiElementType.SUBMIT_BUTTON: 5&gt;: &quot;//input[&#64;type='submit']&quot;, &lt;GuiElementType.DROPDOWN: 6&gt;: '//select', &lt;GuiElementType.CHECKBOX: 7&gt;: &quot;//input[&#64;type='checkbox']&quot;, &lt;GuiElementType.RADIO: 8&gt;: &quot;//input[&#64;type='radio']&quot;, &lt;GuiElementType.IMAGE: 9&gt;: '//img'}</em><a class="headerlink" href="#arjuna.interact.gui.auto.finder.translator.LocatorTranslator.XTYPE_LOCATORS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.translator.LocatorTranslator.translate">
+<em class="property">classmethod </em><code class="sig-name descname">translate</code><span class="sig-paren">(</span><em class="sig-param">locator</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.translator.LocatorTranslator.translate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-arjuna.interact.gui.auto.finder.withx">
+<span id="arjuna-interact-gui-auto-finder-withx-module"></span><h2>arjuna.interact.gui.auto.finder.withx module<a class="headerlink" href="#module-arjuna.interact.gui.auto.finder.withx" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.withx.WithX">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.withx.</code><code class="sig-name descname">WithX</code><span class="sig-paren">(</span><em class="sig-param">xdict={}</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.withx.WithX" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.withx.WithX.format">
+<code class="sig-name descname">format</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">loc_obj</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.withx.WithX.format" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.withx.WithX.format_args">
+<code class="sig-name descname">format_args</code><span class="sig-paren">(</span><em class="sig-param">name</em>, <em class="sig-param">vargs</em>, <em class="sig-param">kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.withx.WithX.format_args" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.withx.WithX.has_locator">
+<code class="sig-name descname">has_locator</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.withx.WithX.has_locator" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-arjuna.interact.gui.auto.finder">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-arjuna.interact.gui.auto.finder" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.GuiElementEmdFinder">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.</code><code class="sig-name descname">GuiElementEmdFinder</code><span class="sig-paren">(</span><em class="sig-param">gui_element</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.GuiElementEmdFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.GuiElementEmdFinder.element">
+<code class="sig-name descname">element</code><span class="sig-paren">(</span><em class="sig-param">emd</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.GuiElementEmdFinder.element" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.GuiElementEmdFinder.multi_element">
+<code class="sig-name descname">multi_element</code><span class="sig-paren">(</span><em class="sig-param">emd</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.GuiElementEmdFinder.multi_element" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.GuiElementFinder">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.</code><code class="sig-name descname">GuiElementFinder</code><span class="sig-paren">(</span><em class="sig-param">gui_element</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.GuiElementFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.GuiElementFinder.locate">
+<code class="sig-name descname">locate</code><span class="sig-paren">(</span><em class="sig-param">locator</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.GuiElementFinder.locate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.GuiEmdFinder">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.</code><code class="sig-name descname">GuiEmdFinder</code><span class="sig-paren">(</span><em class="sig-param">gui</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.GuiEmdFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.interact.gui.auto.finder.GuiFinder">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.interact.gui.auto.finder.</code><code class="sig-name descname">GuiFinder</code><span class="sig-paren">(</span><em class="sig-param">gui</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.GuiFinder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.interact.gui.auto.finder.GuiFinder.locate">
+<code class="sig-name descname">locate</code><span class="sig-paren">(</span><em class="sig-param">locator</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.interact.gui.auto.finder.GuiFinder.locate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">arjuna.interact.gui.auto.finder package</a><ul>
+<li><a class="reference internal" href="#submodules">Submodules</a></li>
+<li><a class="reference internal" href="#module-arjuna.interact.gui.auto.finder.element_finder">arjuna.interact.gui.auto.finder.element_finder module</a></li>
+<li><a class="reference internal" href="#module-arjuna.interact.gui.auto.finder.emd">arjuna.interact.gui.auto.finder.emd module</a></li>
+<li><a class="reference internal" href="#module-arjuna.interact.gui.auto.finder.enums">arjuna.interact.gui.auto.finder.enums module</a></li>
+<li><a class="reference internal" href="#module-arjuna.interact.gui.auto.finder.meta">arjuna.interact.gui.auto.finder.meta module</a></li>
+<li><a class="reference internal" href="#module-arjuna.interact.gui.auto.finder.translator">arjuna.interact.gui.auto.finder.translator module</a></li>
+<li><a class="reference internal" href="#module-arjuna.interact.gui.auto.finder.withx">arjuna.interact.gui.auto.finder.withx module</a></li>
+<li><a class="reference internal" href="#module-arjuna.interact.gui.auto.finder">Module contents</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>
