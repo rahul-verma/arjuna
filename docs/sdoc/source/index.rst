@@ -3,8 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
+*****************
 Welcome to Arjuna
-=================
+*****************
 
 .. image:: _static/Arjuna.png
     :align: center
@@ -19,8 +20,12 @@ Note: On Linux, the built-in Python3 build has issues with the Python's built-in
 
 You can find the example code in [arjex project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex).
 
+**************
 Tester's Guide
-==============
+**************
+
+Fundamentals
+============
 
 .. toctree::
    :maxdepth: 6
@@ -29,10 +34,38 @@ Tester's Guide
    test_project
    cli
    test_function
+
+Handling Configuration Options
+==============================
+
+.. toctree::
+   :maxdepth: 6
+
    configuration
+
+Data Driven Testing with Arjuna
+===============================
+
+.. toctree::
+   :maxdepth: 6
+
    ddt
+
+Contextual Data References and Localization
+===========================================
+
+.. toctree::
+   :maxdepth: 6
+
    data_ref
    l10n
+
+Web GUI Automation
+==================
+
+.. toctree::
+   :maxdepth: 6
+
    guiauto/index
 
 

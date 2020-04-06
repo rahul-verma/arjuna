@@ -2,9 +2,10 @@ Following is the list of critical additions and updates for a given released ver
 
 0.9.18
 ------
-- Major chnage in internal packaging to aid in controlled API doc generation.
-- License info changed from foc string to line-wise comments.
-
+- Major change in internal packaging to aid in controlled API doc generation.
+- License info changed from doc string to line-wise comments.
+- Sphinx is now used for docs instead of markdown.
+- Integration of docs with readthedocs.org: https://arjuna-taf.readthedocs.io
 
 
 0.9.17
