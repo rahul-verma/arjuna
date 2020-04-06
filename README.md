@@ -9,3 +9,6 @@ Arjuna uses **[pytest](https://docs.pytest.org/en/latest/)** as its recommended 
 You'd need Python 3.5+ to make use of Arjuna.
 
 Note: On Linux, the built-in Python3 build has issues with the Python's built-in enum module which is heavily used in Arjuna. One alternative is to install ActiveState Python on linux. Advanced users can go for installing a custom Python build.
+
+## Documentation
+Arjuna documentation is integated with ReadTheDocs. You can find the documentation for latest master branch here: https://arjuna-taf.readthedocs.io
