@@ -34,22 +34,6 @@ arjuna.core.helpers module
    :undoc-members:
    :show-inheritance:
 
-arjuna.core.setu\_httpreqester\_for\_ref module
------------------------------------------------
-
-.. automodule:: arjuna.core.setu_httpreqester_for_ref
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-arjuna.core.setu\_logger\_for\_ref module
------------------------------------------
-
-.. automodule:: arjuna.core.setu_logger_for_ref
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
 arjuna.core.utils module
 ------------------------
 
