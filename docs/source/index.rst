@@ -22,7 +22,7 @@ You'd need Python 3.5+ to make use of Arjuna.
 
 Note: On Linux, the built-in Python3 build has issues with the Python's built-in enum module which is heavily used in Arjuna. One alternative is to install ActiveState Python on linux. Advanced users can go for installing a custom Python build.
 
-You can find the example code in [arjex project](https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex).
+You can find a lot of example code for using Arjuna in `Arjex <https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex>`_.
 
 **************
 Tester's Guide
