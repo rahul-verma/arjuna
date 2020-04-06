@@ -6,6 +6,8 @@ Following is the list of critical additions and updates for a given released ver
 - License info changed from doc string to line-wise comments.
 - Sphinx is now used for docs instead of markdown.
 - Integration of docs with readthedocs.org: https://arjuna-taf.readthedocs.io
+- Google Doc Style for Python has been identified for Arjuna API documentation.
+    - Tried for Configuration, ConfigurationBuilder and logging functions. Works well.
 
 
 0.9.17

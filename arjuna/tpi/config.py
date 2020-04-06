@@ -101,12 +101,12 @@ class Configuration:
                 Object of any type, depending on the option.
         '''
         try:
-            return self.__arjuna_options.value(name)
+            return self.__arjuna_options.value(option)
         except:
             try:
-                return self.__user_options.value(name)
+                return self.__user_options.value(option)
             except:
-                raise Exception("No config option with name {} found in {} configuration.".format(name, self.name))
+                raise Exception("No config option with name {} found in {} configuration.".format(option, self.name))
 
     @property
     def _wrapped_config(self):
