@@ -20,6 +20,8 @@ __root_dir = __join_paths(os.path.dirname(os.path.realpath(__file__)), "..", "..
 print(__root_dir)
 print(os.listdir(__root_dir))
 sys.path.insert(0, __root_dir)
+print(sys.path)
+import arjuna
 
 import pallets_sphinx_themes
 
