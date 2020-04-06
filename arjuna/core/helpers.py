@@ -35,6 +35,3 @@ class Time:
     def minutes(self, mins):
         return Time(TimeUnit.MINUTES, mins)
 
-logger = Arjuna.get_logger()
-console = Arjuna.get_console()
-
