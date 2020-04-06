@@ -13,9 +13,9 @@ Defining and Using a GuiMultiElement In Code
 
 You can create a `GuiElement` using the `multi_element` factory call of a `GuiApp` (assume `app` to be `GuiApp` object):
 
-```python
-app.multi_element(<locator_type>=<locator_value>)
-```
+.. code-block:: python
+
+  app.multi_element(<locator_type>=<locator_value>)
 
 Defining GuiMultiElement in GNS and Using it in Code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -24,17 +24,17 @@ You can also define a `GuiMultiElement` in a GNS File.
 
 In the GNS file for a label corresponding to a GuiMultiElement, add the `template` entry and set it to `multi_element`, for example:
 
-```YAML
+.. code-block:: yaml
+
   cat_checkboxes:
     template: multi_element
     name: "delete_tags[]"
-```
 
 In your code, you can create an element of this as usual, however this time you'll get a `GuiMultiElement` object instead of `GuiElement`.
 
-```python
-check_boxes = wordpress.gns.cat_checkboxes
-```
+.. code-block:: python
+
+   check_boxes = wordpress.gns.cat_checkboxes
 
 Interacting with GuiMultiElement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -54,9 +54,9 @@ Defining and Using a DropDown In Code
 
 You can create a `DropDown` using the `dropdown` factory call of a `GuiApp` (assume `app` to be `GuiApp` object):
 
-```python
-app.dropdown(<locator_type>=<locator_value>)
-```
+.. code-block:: python
+
+   app.dropdown(<locator_type>=<locator_value>)
 
 Defining DropDown in GNS and Using it in Code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -65,17 +65,17 @@ You can also define a `DropDown` in a GNS File.
 
 In the GNS file for a label corresponding to a GuiMultiElement, add the `template` entry and set it to `dropdown`, for example:
 
-```YAML
+.. code-block:: python
+
   role:
     template: dropdown
     id: default_role
-```
 
 In your code, you can create an element of this as usual, however this time you'll get a `DropDown` object instead of `GuiElement`.
 
-```python
-element = app.gns.role
-```
+.. code-block:: python
+
+   element = app.gns.role
 
 Interacting with DropDown
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -98,9 +98,9 @@ Defining and Using a RadioGroup In Code
 
 You can create a `RadioGroup` using the `radio_group` factory call of a `GuiApp` (assume `app` to be `GuiApp` object):
 
-```python
-app.radio_group(<locator_type>=<locator_value>)
-```
+.. code-block:: python
+
+   app.radio_group(<locator_type>=<locator_value>)
 
 Defining RadioGroup in GNS and Using it in Code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -109,17 +109,17 @@ You can also define a `RadioGroup` in a GNS File.
 
 In the GNS file for a label corresponding to a GuiMultiElement, add the `template` entry and set it to `radio_group`, for example:
 
-```YAML
+.. code-block:: python
+
   date_format:
     template: radio_group
     name: date_format
-```
 
 In your code, you can create an element of this as usual, however this time you'll get a `RadioGroup` object instead of `GuiElement`.
 
-```python
-element = app.gns.date_format
-```
+.. code-block:: python
+
+   element = app.gns.date_format
 
 Interacting with RadioGroup
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^

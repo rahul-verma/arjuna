@@ -12,12 +12,12 @@ Web automation facilities in Arjuna use Selenium WebDriver as the underlying bro
 Launching a Web Application
 ---------------------------
 
-```python
-google = GuiApp()
-google.launch(blank_slate=True)
-google.go_to_url("https://google.com")
-google.quit()
-```
+.. code-block:: python
+
+   google = GuiApp()
+   google.launch(blank_slate=True)
+   google.go_to_url("https://google.com")
+   google.quit()
 
 1. You can create an object of `GuiApp`. By default, `GuiApp` uses Arjuna's reference `Configuration`. In turn, it uses the corresponding options to launch the underlying automator. You can change this by passing the `Configuration` object using `config` argument of the App constructor.
 2. You can launch the `GuiApp`. Here, we pass `blank_slate` as `True` as no base URL is associated as of now with the `GuiApp` (see next section).
@@ -30,28 +30,28 @@ Associating a App with a Base URL
 
 You can associate the `GuiApp` with a base URL by providing `base_url` arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
 
-```python
-google = GuiApp(base_url="https://google.com")
-google.launch()
-google.quit()
-```
+.. code-block:: python
+
+   google = GuiApp(base_url="https://google.com")
+   google.launch()
+   google.quit()
 
 Setting GuiApp Base URL in Configuration
 ----------------------------------------
 
 During initilization, `GuiApp` automatically looks for the `ArjunaOption.APP_URL` option in the `Configuration` object associated with it. It means you can provide this option in any of the following ways:
-- Modify Reference `Configuration`
-  - Add this option in `project.conf` file.
-  - Provide it as a CLI option.
- - Use `ConfigBuilder` to update or create a new `Configuration`. Pass it as argument while instantiating `GuiApp`, for example:
+    - Modify Reference `Configuration`
+        - Add this option in `project.conf` file.
+        - Provide it as a CLI option.
+    - Use `ConfigBuilder` to update or create a new `Configuration`. Pass it as argument while instantiating `GuiApp`, for example:
  
  
-```python
-cb = Arjuna.get_config().builder
-cb.option(ArjunaOption.APP_URL, "https://google.com")
-config = cb.register()
+.. code-block:: python
 
-google = GuiApp(config=config)
-google.launch()
-google.quit()
-```
+   cb = Arjuna.get_config().builder
+   cb.option(ArjunaOption.APP_URL, "https://google.com")
+   config = cb.register()
+   
+   google = GuiApp(config=config)
+   google.launch()
+   google.quit()

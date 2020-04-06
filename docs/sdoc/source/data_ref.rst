@@ -45,7 +45,8 @@ You can access data references in your test code with Arjuna's magic `R` functio
 
 It has the following signature. The first argument is the query. `bucket` and `context` are optional arguments.
 
-.. code-block::python
+.. code-block:: python
+
     R("user", bucket=<bucket_name>, context=<context_name>))
 
 1. The name of the file is the `bucket` name. For example, here `cusers` and `rusers` are buckets represenating `cusers.xls` and `rusers.xls` data reference files.

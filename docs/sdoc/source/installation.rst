@@ -10,6 +10,6 @@ Installing Arjuna
 2. Confirm the python version installed by running the command `python --version`. If expected version in not shown, fix this by looking into PATH variables and/or to see whether you have multiple versions of Python installed.
 3. Install Arjuna using the following command
 
-    .. code-block::
+    .. code-block:: bash
 
         pip install arjuna

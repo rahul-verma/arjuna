@@ -10,6 +10,7 @@ The @test Decorator
 -------------------
 
 .. code-block:: python
+
     from arjuna import *
 
     @test
@@ -26,6 +27,7 @@ Running a Specific Test Function
 
 You can run this test using by running `arjuna` module or running `arjuna_launcher.py` script:
 
-.. code-block::
+.. code-block:: bash
+
     python -m arjuna run-selected -p path/to-proj_name -it check_test_name
     python arjuna_launcher.py run-selected -it check_test_name

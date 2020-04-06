@@ -9,9 +9,9 @@ Arjuna provides a very comprehensive yet intuitive Command Line Interface (CLI).
 ------------
 You can check the available options using `-h` or `--help` switch:
 
-```bash
-python -m arjuna -h
-```
+.. code-block:: bash
+
+   python -m arjuna -h
 
 Control Logging Level using -dl and -ll Options
 -----------------------------------------------
@@ -33,9 +33,9 @@ Arjuna's CLI is Command-Driven. Following are the current available commands:
 
 You can see the help for a given command by running `python -m arjuna <command> -h`, for example
 
-```bash
-python -m arjuna create-project -h
-```
+.. code-block:: bash
+
+   python -m arjuna create-project -h
 
 The create-project command - Creating a New Project Skeleton
 ------------------------------------------------------------
@@ -44,9 +44,9 @@ The create-project command - Creating a New Project Skeleton
 
 It is a simple to run command. For example:
 
-```bash
-python -m arjuna create-project -p /path/to/proj_name
-```
+.. code-block:: bash
+
+   python -m arjuna create-project -p /path/to/proj_name
 
 This command creates a test project with name `proj_name` at the path provided. `proj_name` must be a valid Arjuna name.
 
@@ -55,9 +55,9 @@ The run-project command
 
 This command is used to run all tests in the project. The tests are picked up from the `<Project Root Dir>/test/module` directory.
 
-```bash
-python -m arjuna run-project -p /path/to/proj_name <run_options>
-```
+.. code-block:: bash
+
+   python -m arjuna run-project -p /path/to/proj_name <run_options>
 
 Following run options can be provided in command line:
 
@@ -76,9 +76,9 @@ The run-selected command
 
 This command is used to run a sub-set of tests in the project. The tests are picked up from the `<Project Root Dir>/test/module` directory as per the selectors provided.
 
-```bash
-python -m arjuna run-selected -p /path/to/proj_name <run_options> <selectors>
-```
+.. code-block:: bash
+
+   python -m arjuna run-selected -p /path/to/proj_name <run_options> <selectors>
 
 All the command line options specified for [the `run-project` command](#the-run-project-command) are supported. In addition, following selection related options are available:
 
@@ -94,9 +94,9 @@ As Arjuna needs a reference to the test project root directory, Arjuna provides 
 
 You can execute `run-project` or `run-selected` commands as:
 
-```
-python arjuna_launcher.py run-project <run_options>
-python arjuna_launcher.py run-selected <run_options> <selectors>
-```
+.. code-block:: bash
+
+   python arjuna_launcher.py run-project <run_options>
+   python arjuna_launcher.py run-selected <run_options> <selectors>
 
 without providing the `-p` switch for project directory.

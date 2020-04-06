@@ -17,6 +17,7 @@ Arjuna associates locale for localization with the Locale enum constant which in
 The default locate is `Locale.EN`. It can be changed in a project configuration as follows:
 
 .. code-block:: javascript
+
     # project.conf
 
     arjunaOptions {
@@ -53,6 +54,7 @@ You can access data references in your test code with Arjuna's magic `L` functio
 It has the following signature. The first argument is the query. `locale`, `bucket` and `strict` are optional arguments.
 
 .. code-block:: python
+
     L("qual", locale=<local enum constant or string>, bucket=<bucket_name>, strict=<True or False>)
 
 - `L("Testing")` localizes the string as per the `ArjunaOption.L10_LOCALE` value in reference configuration. In `project.conf`, we have set it as `HI`.
@@ -73,6 +75,7 @@ With JSON format, there is a specific structure expected. The sample files are p
 Following is the sample JSON localization structure:
 
 .. code-block::
+
     json
     ├── bucket1
     │   ├── de-DE.json
@@ -93,6 +96,7 @@ Sample JSON Content
 Following is the content of one such file in root directory for German localization:
 
 .. code-block:: javascript
+
     {
         "address": {
             "address": "Adresse",
@@ -123,6 +127,7 @@ Using the L Function with JSON Localizer
 Consider the following localization calls:
 
 .. code-block:: python
+
     L("error.data.lastTransfer", locale=Locale.EN_GB) # From global l10n container
     L("error.data.lastTransfer", locale=Locale.DE_DE) # From global l10n container
 
@@ -144,6 +149,7 @@ Strict vs Non-strict mode for Localization
 By default, Arjuna handles localization in a non-strict mode. This means if localized string is absent for a given reference, it ignores the error and returns the reference as return value.
 
 .. code-block:: python
+
     L("non_existing")
     L("non_existing", strict=True, locale=Locale.DE_DE)
 

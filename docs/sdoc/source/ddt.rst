@@ -17,6 +17,7 @@ Sometimes, the need is simple. You have a single data record, but want to separa
 This need is solved with the `record` markup of Arjuna. You can provide any number of positional or named arugments.
 
 .. code-block:: python
+
     from arjuna import *
 
     @test(drive_with=record(1, True, a='something', b='anything'))
@@ -37,6 +38,7 @@ Multiple Data Records
 You use the `records` factory function to provide multiple records. It can contain any number of `record` entries. The test will be repeated as many times as the number of records (2 in this example.)
 
 .. code-block:: python
+
     from arjuna import *
 
     @test(drive_with=
@@ -61,6 +63,7 @@ Rather than including static data in Python code, one might want to generate dat
 A simple way to achieve this is to write a data function. A static data function always behaves in the same manner.
 
 .. code-block:: python
+
     @test(drive_with=data_function(func))
     def check_static_data_func(request, data):
         pass
@@ -73,6 +76,7 @@ Driving with Static Data Generator
 You can also use a Python generator instead of a normal function:
 
 .. code-block:: python
+
     @test(drive_with=data_function(data_generator))
     def check_generator_func(request, data):
         pass
@@ -83,6 +87,7 @@ Driving with Dynamic Data Function or Generator
 Another advanced measure that you can take is creating a data function which acts on the arguments supplied by you to govern the data it returns/generates.
 
 .. code-block:: python
+
     from arjuna import *
 
     @test(drive_with=data_function(dynamic_data_func, 8, "something", a="whatever", b=1))
@@ -98,6 +103,7 @@ Instead of a function, you can also represent your data generation logic as a da
 
 
 .. code-block:: python
+
     @test(drive_with=data_class(MyDataClass))
     def check_data_class(request, data):
         pass
@@ -110,6 +116,7 @@ Driving with Dynamic Data Classes
 Another advanced measure that you can take is creating a data class which acts on the arguments supplied by you to govern the data it generates.
 
 .. code-block:: python
+
     from arjuna import *
 
     @test(drive_with=data_class(MyDataClass, 8, "something", a="whatever", b=1))
@@ -137,6 +144,7 @@ An excel data file can contain data in following format. (Only .xls files are su
 .. image:: _static/inputxls.png
 
 .. code-block:: python
+
     from arjuna import *
 
     @test(drive_with=data_file("input.xls"))
@@ -151,18 +159,21 @@ An delimiter-separated data file can contain data in following format. The delim
 **.txt**
 
 .. code-block::
-    Left	Right	Sum
-    1	2	3
-    4	5	8
+
+   Left	Right	Sum
+   1	2	3
+   4	5	8
 
 **.csv**
 
 .. code-block::
-    Left,Right,Sum
-    1,2,3
-    4,5,8
+
+   Left,Right,Sum
+   1,2,3
+   4,5,8
 
 .. code-block:: python
+
     from arjuna import *
 
     @test(drive_with=data_file("input.txt"))
@@ -180,19 +191,20 @@ Driving with INI File
 
 An INI data file can contain data in following format.
 
-.. code-block::
+.. code-block:: ini
 
-    [Record 1]
-    Left = 1
-    Right = 2
-    Sum = 3
-
-    [Record 2]
-    Left = 4
-    Right = 5
-    Sum = 8
+   [Record 1]
+   Left = 1
+   Right = 2
+   Sum = 3
+   
+   [Record 2]
+   Left = 4
+   Right = 5
+   Sum = 8
 
 .. code-block:: python
+
     from arjuna import *
 
     @test(drive_with=data_file("input.ini"))
@@ -217,7 +229,8 @@ You can associate multiple data sources with a single test in Arjuna.
 
 We can achieve this by using the `many_data_sources` factory function.
 
-.. code-block::python
+.. code-block:: python
+
     from arjuna import *
 
     @test(drive_with=many_data_sources(
