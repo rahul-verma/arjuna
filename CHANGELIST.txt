@@ -2,7 +2,12 @@ Following is the list of critical additions and updates for a given released ver
 
 0.9.19
 ------
-
+- Moved private enums and exceptions to arjuna.core module.
+- Documentation added for:
+    - DDT Classes
+    - Enums
+    - Exceptions
+    - Magic Functions
 
 0.9.18
 ------
