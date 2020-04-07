@@ -18,7 +18,7 @@
 
 import unittest
 
-class AsserterMixIn:
+class _AsserterMixIn:
 
     def __init__(self):
         # Trick to use assertions outside of a unittest test
@@ -29,37 +29,126 @@ class AsserterMixIn:
         return self.__asserter
 
 class Asserter:
+    '''
+        Arjuna's asserter class.
+
+        It can be used directly. It is already included as an attribute for request fixture in test functions and all Guis and Gui Templates.
+    '''
 
     def __init__(self):
         self.__asserter = unittest.TestCase('__init__')
 
     @classmethod
-    def format_msg(cls, msg):
+    def _format_msg(cls, msg):
         return msg and " {}.".format(msg) or ""
 
-    def assert_equal(self, actual, expected, msg):
-        self.__asserter.assertEqual(actual, expected, msg)
+    def assert_equal(self, obj1, obj2, msg):
+        '''
+            Assert obj1 == obj2
 
-    def assert_lesser(self, left, right, msg):
-        self.__asserter.assertLess(left, right, msg)
+            Wrapper on unittest's assertEqual
 
-    def assert_greater(self, left, right, msg):
-        self.__asserter.assertGreater(left, right, msg)
+            Args:
+                obj1: Object of any type which supports == operator for obj2 type
+                obj2: Object meeting the above constraint
+                msg: A context string explaining why this assertion was done.
+        '''
+        self.__asserter.assertEqual(obj1, obj2, msg)
 
-    def assert_min(self, left, right, msg):
-        self.__asserter.assertGreaterEqual(left, right, msg)
+    def assert_lesser(self, obj1, obj2, msg):
+        '''
+            Assert obj1 < obj2
 
-    def assert_max(self, left, right, msg):
-        self.__asserter.assertLessEqual(left, right, msg)
+            Wrapper on unittest's assertLess
 
-    def assert_not_equal(self, left, right, msg):
-        self.__asserter.assertNotEqual(actual, expected, msg)
+            Args:
+                obj1: Object of any type which supports < operator for obj2 type
+                obj2: Object meeting the above constraint
+                msg: A context string explaining why this assertion was done.
+        '''
+        self.__asserter.assertLess(obj1, obj2, msg)
 
-    def assert_true(self, actual, msg):
+    def assert_greater(self, obj1, obj2, msg):
+        '''
+            Assert obj1 > obj2
+
+            Wrapper on unittest's assertLess
+
+            Args:
+                obj1: Object of any type which supports > operator for obj2 type
+                obj2: Object meeting the above constraint
+                msg: A context string explaining why this assertion was done.
+        '''
+        self.__asserter.assertGreater(obj1, obj2, msg)
+
+    def assert_min(self, obj, min_value, msg):
+        '''
+            Asserts a minimum value for an object i.e. obj >= min_value
+
+            Wrapper on unittest's assertGreaterEqual
+
+            Args:
+                obj: Object of any type which supports >= operator for min_value
+                min_value: Object meeting the above constraint
+                msg: A context string explaining why this assertion was done.
+        '''
+        self.__asserter.assertGreaterEqual(obj, min_value, msg)
+
+    def assert_max(self, obj, max_value, msg):
+        '''
+            Asserts a maximum value for an object i.e. obj <= max_value
+
+            Wrapper on unittest's assertLessEqual
+
+            Args:
+                obj: Object of any type which supports <= operator for min_value
+                max_value: Object meeting the above constraint
+                msg: A context string explaining why this assertion was done.
+        '''
+        self.__asserter.assertLessEqual(obj, max_value, msg)
+
+    def assert_not_equal(self, obj1, obj2, msg):
+        '''
+            Assert obj1 != obj2
+
+            Wrapper on unittest's assertNotEqual
+
+            Args:
+                obj1: Object of any type which supports != operator for obj2 type
+                obj2: Object meeting the above constraint
+                msg: A context string explaining why this assertion was done.
+        '''
+        self.__asserter.assertNotEqual(obj1, obj2, msg)
+
+    def assert_true(self, obj, msg):
+        '''
+            Assert obj is True.
+
+            Wrapper on unittest's assertTrue
+
+            Args:
+                obj: Object of any type
+                msg: A context string explaining why this assertion was done.
+        '''
         self.__asserter.assertTrue(actual, msg)
 
-    def assert_false(self, actual, msg):
-        self.__asserter.assertFalse(actual, msg)
+    def assert_false(self, obj, msg):
+        '''
+            Assert obj is False.
+
+            Wrapper on unittest's assertFalse
+
+            Args:
+                obj: Object of any type
+                msg: A context string explaining why this assertion was done.
+        '''
+        self.__asserter.assertFalse(obj, msg)
 
     def fail(self, msg):
+        '''
+            Raises AssertionError with the provided message.
+
+            Args:
+                msg: A context string explaining the failure.
+        '''
         self.__asserter.fail(msg)

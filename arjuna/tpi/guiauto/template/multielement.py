@@ -26,7 +26,7 @@ from arjuna.interact.gui.auto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from arjuna.tpi.guiauto.element import GuiElement
 from arjuna.tpi.guiauto.source import *
-from arjuna.tpi.engine.asserter import AsserterMixIn
+from arjuna.tpi.engine.asserter import _AsserterMixIn
 
 class GuiPartialElement(GuiElement):
 
@@ -47,10 +47,10 @@ class GuiPartialElement(GuiElement):
     def index(self):
         return self.__index
 
-class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
+class GuiMultiElement(_AsserterMixIn, Locatable,Dispatchable):
     
     def __init__(self, gui, emd, elements=None): #, parent=None):
-        AsserterMixIn.__init__(self)
+        _AsserterMixIn.__init__(self)
         Locatable.__init__(self, gui, emd) #, parent)
         Dispatchable.__init__(self)
         if elements:
@@ -84,19 +84,19 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
         return self.size
 
     def assert_size(self, size, obj_name, msg=None):
-        self.asserter.assert_equal(self.size, size, msg="{} should have exactly {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
+        self.asserter.assert_equal(self.size, size, msg="{} should have exactly {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter._format_msg(msg)))
 
     def assert_min_size(self, size, obj_name, msg=None):
-        self.asserter.assert_min(self.size, size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
+        self.asserter.assert_min(self.size, size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter._format_msg(msg)))
     
     def assert_max_size(self, size, obj_name, msg=None):
-        self.asserter.assert_max(self.size, size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter.format_msg(msg)))
+        self.asserter.assert_max(self.size, size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter._format_msg(msg)))
 
     def assert_empty(self, obj_name, msg=None):
-        self.asserter.assert_equal(self.size, 0, msg="{} should be empty, but was found to have {} elements.".format(obj_name, self.size, self.asserter.format_msg(msg)))
+        self.asserter.assert_equal(self.size, 0, msg="{} should be empty, but was found to have {} elements.".format(obj_name, self.size, self.asserter._format_msg(msg)))
 
     def assert_not_empty(self, obj_name, msg=None):
-        self.asserter.assert_greater(self.size, 0, msg="{} is expected to have atleat 1 element, but was found to be empty.{}".format(obj_name, self.size, self.asserter.format_msg(msg)))
+        self.asserter.assert_greater(self.size, 0, msg="{} is expected to have atleat 1 element, but was found to be empty.{}".format(obj_name, self.size, self.asserter._format_msg(msg)))
 
     @size.setter
     def size(self, count):

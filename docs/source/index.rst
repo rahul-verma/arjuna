@@ -94,6 +94,15 @@ or an easy, simple import that imports all public TPI names from Arjuna:
 
 Following links direct you to documentation for all public names:
 
+Test, Fixtures and Assertions
+=============================
+* :py:func:`@test <arjuna.tpi.engine.test.test>`
+* :py:class:`Asserter <arjuna.tpi.engine.asserter.Asserter>`
+* :py:mod:`Test Fixtures <arjuna.tpi.engine.fixture>`
+    * :py:func:`@for_test <arjuna.tpi.engine.fixture.for_test>`
+    * :py:func:`@for_module <arjuna.tpi.engine.fixture.for_module>`
+    * :py:func:`@for_session <arjuna.tpi.engine.fixture.for_session>`
+
 Test Configuration
 ==================
 * :py:class:`ArjunaOption Enum <arjuna.tpi.enums.ArjunaOption>`

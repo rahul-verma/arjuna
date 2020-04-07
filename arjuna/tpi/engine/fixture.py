@@ -15,17 +15,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+'''
+Arjuna Test Fixtures
+
+The test fixtures provided by Arjuna are easy to use decorators which wrap `pytest.fixture` decorator.
+
+Note:
+    For using any of the decorators in this module, the fixture function must have the signature as `f(request)` with `request` as the first argument.
+'''
+
 import pytest
 import itertools
 import functools
 
 from .test import My
-from .test import My
+from typing import Callable
 
-def wraps_safely(obj, attr_names=functools.WRAPPER_ASSIGNMENTS):
-    return functools.wraps(obj, assigned=itertools.ifilter(functools.partial(hasattr, obj), attr_names))
-
-def simple_dec(func):
+def _simple_dec(func):
     @functools.wraps(func)
     def call_func(request, *args, **kwargs):
         from arjuna import Arjuna
@@ -37,14 +43,38 @@ def simple_dec(func):
         Arjuna.get_logger().info("(Teardown) End fixture function: {}".format(qual_name))
     return call_func
 
-def for_session(func):
-    from arjuna import Arjuna
-    return pytest.yield_fixture(scope="session")(simple_dec(func))
+def for_session(func: Callable) -> Callable:
+    '''
+        Decorator for session level test fixture/resource.
 
-def for_module(func):
-    from arjuna import Arjuna
-    return pytest.yield_fixture(scope="module")(simple_dec(func))
+        Wraps `pytest.fixture` to create a fixture with scope=session and provides an Arjuna's decorated version of the function that is marked with `for_session` decorator.
 
-def for_test(func):
+        Args:
+            func: A Function with signature `f(request)`. The name request is mandatory and enforced.
+    '''
     from arjuna import Arjuna
-    return pytest.yield_fixture(scope="function")(simple_dec(func))
+    return pytest.fixture(scope="session")(_simple_dec(func))
+
+def for_module(func: Callable) -> Callable:
+    '''
+        Decorator for module level test fixture/resource.
+
+        Wraps `pytest.fixture` to create a fixture with scope=module and provides an Arjuna's decorated version of the function that is marked with `for_module` decorator.
+
+        Args:
+            func: Function
+    '''
+    from arjuna import Arjuna
+    return pytest.fixture(scope="module")(_simple_dec(func))
+
+def for_test(func: Callable) -> Callable:
+    '''
+        Decorator for test function level test fixture/resource.
+
+        Wraps `pytest.fixture` to create a fixture with scope=function and provides an Arjuna's decorated version of the function that is marked with `for_test` decorator.
+
+        Args:
+            func: A Function with signature `f(request)`. The name request is mandatory and enforced.
+    '''
+    from arjuna import Arjuna
+    return pytest.fixture(scope="function")(_simple_dec(func))

@@ -1,0 +1,11 @@
+Doc generation
+--------------
+
+# cd in docs dir
+sphinx-apidoc -o source ../arjuna -f -e
+sphinx-build -b html source build
+
+# PyPi
+python setup.py sdist bdist_wheel
+twine upload dist/*
+

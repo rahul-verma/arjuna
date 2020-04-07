@@ -23,12 +23,14 @@ from arjuna.tpi.engine.hook import PytestHooks
 from arjuna.engine.data.record import DummyDataRecord
 from arjuna.engine.data.store import SharedObjects
 from arjuna.engine.meta import *
+from typing import Callable
+from arjuna.tpi.arjuna_types import ListOrTuple
 
-def tc(cls):
+def _tc(cls):
     setattr(cls, 'get_test_qual_name', get_test_qual_name)
     return cls
 
-def call_func(func, request, data=None, *args, **kwargs):
+def _call_func(func, request, data=None, *args, **kwargs):
     from arjuna import Arjuna
     request_wrapper = My()
     request_wrapper.set_req_obj(request)
@@ -40,22 +42,45 @@ def call_func(func, request, data=None, *args, **kwargs):
         func(request=request_wrapper, *args, **kwargs)
     Arjuna.get_logger().info("End test function: {}".format(qual_name))
 
-def simple_dec(func):
+def _simple_dec(func):
     func.__name__ = "check_" + func.__name__
 
     @functools.wraps(func)
     def wrapper(request, *args, **kwargs):
-        call_func(func, request, *args, **kwargs)
+        _call_func(func, request, *args, **kwargs)
     return wrapper
 
-def repr_record(record):
+def _repr_record(record):
     return str(record)
 
-def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
+def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_with: 'DataSource'=None, exclude_if: 'Relation'=None):
+    '''
+        Decorator for marking a function as a test function.
+
+        Args:
+            func: A Function with signature `f(request)`. The name request is mandatory and enforced.
+
+        Keyword Arguments:
+            id: (Optional) Alnum string representing an ID which you want to associate with the test.
+            resources: (Optional) Fixtures/Resources that you want to associate this test with. Wraps pytest.mark.usefixtures. Instead of using this, you can also pass the names as direct arguments in the function signature.
+            drive_with: (Optional) Used for data driven testing. Argument can be Arjuna Data Source. Wraps `pytest.mark.parametrize`. If you use this argument, the test function signature must include a `data` argument e.g. 
+
+                .. code-block:: python
+                
+                    @test(drive_with=<DS>)
+                    def check_sample(request, data):
+                        pass
+
+            exclude_if: (Optional) Define exclusion condition. Argument can be an Arjuna Relation. Wraps `pytest.mark.dependency`.
+        Note:
+            The test function name must start with the prefix `check_`
+
+            The test function must have the minimum signature as `check_<some_name>(request)` with `request` as the first argument.
+    '''
 
     # Check if @test is provided without arguments
     if f is not None:
-        return simple_dec(f)
+        return _simple_dec(f)
 
     if resources:
         if type(resources) is str:
@@ -82,7 +107,7 @@ def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
                 my = My()
                 my.data = record
                 my_objects.append(my)
-            func = pytest.mark.parametrize('data', records, ids=repr_record)(func) 
+            func = pytest.mark.parametrize('data', records, ids=_repr_record)(func) 
         # else:
         #     my = My()
         #     my.data = DummyDataRecord()
@@ -91,12 +116,12 @@ def test(f=None, *, id=None, resources=None, drive_with=None, exclude_if=None):
         @functools.wraps(orig_func)
         def wrapper_without_data(request, *args, **kwargs):
             request.handler = request
-            call_func(func, request, *args, **kwargs)
+            _call_func(func, request, *args, **kwargs)
 
         @functools.wraps(orig_func)
         def wrapper_with_data(request, data, *args, **kwargs):
             my.handler = request
-            call_func(func, request, data, *args, **kwargs)
+            _call_func(func, request, data, *args, **kwargs)
 
         if drive_with:
             return wrapper_with_data

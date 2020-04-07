@@ -25,7 +25,7 @@ from arjuna.tpi.guiauto.helpers import Dictable
 
 from arjuna.interact.gui.gom.guidef import *
 from .formatter import WithFormatter
-from arjuna.tpi.engine.asserter import AsserterMixIn
+from arjuna.tpi.engine.asserter import _AsserterMixIn
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
@@ -43,7 +43,7 @@ class GuiConditions:
         caller = DynamicCaller(self.__gui.validate_readiness)
         return CommandCondition(caller)
 
-class Gui(AsserterMixIn):
+class Gui(_AsserterMixIn):
 
     def __init__(self, *, gns_dir, config=None, ext_config=None, label=None):
         '''

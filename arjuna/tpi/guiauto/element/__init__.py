@@ -19,16 +19,16 @@
 from arjuna.interact.gui.auto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.interactable import Interactable
 from arjuna.interact.gui.auto.base.container import ElementContainer
-from arjuna.tpi.engine.asserter import AsserterMixIn
+from arjuna.tpi.engine.asserter import _AsserterMixIn
 from arjuna.tpi.guiauto.model.gns import GNS
 from arjuna.interact.gui.auto.finder import GuiElementFinder, GuiElementEmdFinder
 from arjuna.tpi.exceptions import *
 from arjuna.core.exceptions import *
 
-class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
+class GuiElement(_AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     def __init__(self, gui, emd):
-        AsserterMixIn.__init__(self)
+        _AsserterMixIn.__init__(self)
         ElementContainer.__init__(self, gui.automator.config)
         Locatable.__init__(self, gui, emd) #, parent, obj_name="GuiElement")
         Interactable.__init__(self, gui, emd)
