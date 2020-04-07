@@ -20,7 +20,7 @@ import pytest
 import unittest
 from arjuna.core.utils import obj_utils
 from arjuna.tpi.engine.hook import PytestHooks
-from arjuna.tpi.engine.data.record import DummyDataRecord
+from arjuna.engine.data.record import DummyDataRecord
 from arjuna.engine.data.store import SharedObjects
 from arjuna.engine.meta import *
 

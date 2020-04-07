@@ -21,7 +21,8 @@ import os
 from enum import Enum, auto
 from abc import abstractmethod
 
-from arjuna.tpi.enums import GuiAutomationContext
+from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 from arjuna.tpi.exceptions import GuiLabelNotPresentError
 from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
 from arjuna.interact.gui.auto.finder._with import ImplWith

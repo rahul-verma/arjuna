@@ -28,6 +28,7 @@ ConfigBuilder can be used to create new configuration from an existing one.
 from enum import Enum
 from arjuna.configure.impl.container import ConfigContainer
 from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 import uuid
 from arjuna.tpi.arjuna_types import *
 from typing import *
@@ -45,7 +46,7 @@ class Configuration:
     '''
         Read-only, immutable object that contains a fixed mapping of ArjunaOptions and User defined options.
 
-        Parameters:
+        Args:
             test_session: Current test session object.
             name: Name of this configuration.
             config: WrappedConfiguration object. Configuration provides a read-only interface on top of it.
@@ -94,7 +95,7 @@ class Configuration:
         '''
             Get the value of a configuration option.
 
-            Parameters:
+            Args:
                 option: An ArjunaOption or a string representing ArjunaOption or a user defined option.
 
             Returns:
@@ -132,7 +133,7 @@ class Configuration:
         '''
             Check if the value for an Arjuna option was set. (Checks for 'not_set' string.)
 
-            Parameters:
+            Args:
                 option: An ArjunaOption or a string representing ArjunaOption or a user defined option.
 
             Returns:
@@ -172,7 +173,7 @@ class ConfigBuilder:
     '''
         Helps in constructing a new `Configuration` object from an existing one.
 
-        Parameters:
+        Args:
             parent_config: Parent configuration to be used be used as reference for creation of the new Configuration object.
 
         Note:
@@ -196,7 +197,7 @@ class ConfigBuilder:
         '''
             Add/Change option value.
 
-            Parameters:
+            Args:
                 option: An ArjunaOption or a string representing ArjunaOption or a user defined option.
                 obj: An object of any type as per the option key.
 
@@ -224,7 +225,7 @@ class ConfigBuilder:
         '''
             Add/Change multiple option values.
 
-            Parameters:
+            Args:
                 option_map: A dictionary of options. Keys are ArjunaOptions or strings and values can be of any type as per the option key.
 
             Returns:
@@ -278,7 +279,7 @@ class ConfigBuilder:
         '''
             (Not supported yet) Configure path for mobile app installer.
 
-            Parameters:
+            Args:
                 path: Absolute path of mobile app on test machine.
 
             Returns:
@@ -291,7 +292,7 @@ class ConfigBuilder:
         '''
             Add all options from a .conf file.
 
-            Parameters:
+            Args:
                 fpath: Path of .conf file. 
 
             Returns:
@@ -310,7 +311,7 @@ class ConfigBuilder:
         '''
             Register the new configuration.
 
-            Parameters:
+            Args:
                 config_name: (Optional) Name that you want to assign to the configuration.
 
             Note:

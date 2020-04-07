@@ -48,15 +48,15 @@ class BrowserLauncher:
         caps = DesiredCapabilities.CHROME
         caps.update(config["driverCapabilities"])
 
-        if config["arjunaOptions"]["BROWSER_PROXY_ON"]:
-            proxy = Proxy()
-            proxy_string = "{}.{}".format(
-                config["arjunaOptions"]["BROWSER_PROXY_HOST"],
-                config["arjunaOptions"]["BROWSER_PROXY_PORT"]
-            )
-            proxy.http_proxy = proxy_string
-            proxy.ssl_proxy = proxy_string
-            proxy.add_to_capabilities(caps)
+        # if config["arjunaOptions"]["BROWSER_PROXY_ON"]:
+        #     proxy = Proxy()
+        #     proxy_string = "{}.{}".format(
+        #         config["arjunaOptions"]["BROWSER_PROXY_HOST"],
+        #         config["arjunaOptions"]["BROWSER_PROXY_PORT"]
+        #     )
+        #     proxy.http_proxy = proxy_string
+        #     proxy.ssl_proxy = proxy_string
+        #     proxy.add_to_capabilities(caps)
 
         options = ChromeOptions()
 
@@ -88,15 +88,15 @@ class BrowserLauncher:
         from selenium.webdriver import FirefoxProfile
 
         profile = FirefoxProfile()
-        if config["arjunaOptions"]["BROWSER_PROXY_ON"]:
-            proxy = Proxy()
-            proxy_string = "{}.{}".format(
-                config["arjunaOptions"]["BROWSER_PROXY_HOST"],
-                config["arjunaOptions"]["BROWSER_PROXY_PORT"]
-            )
-            proxy.http_proxy = proxy_string
-            proxy.ssl_proxy = proxy_string
-            profile.set_proxy(proxy)
+        # if config["arjunaOptions"]["BROWSER_PROXY_ON"]:
+        #     proxy = Proxy()
+        #     proxy_string = "{}.{}".format(
+        #         config["arjunaOptions"]["BROWSER_PROXY_HOST"],
+        #         config["arjunaOptions"]["BROWSER_PROXY_PORT"]
+        #     )
+        #     proxy.http_proxy = proxy_string
+        #     proxy.ssl_proxy = proxy_string
+        #     profile.set_proxy(proxy)
 
         caps = DesiredCapabilities.FIREFOX
         caps.update(config["driverCapabilities"])

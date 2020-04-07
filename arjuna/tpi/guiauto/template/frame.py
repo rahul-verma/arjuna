@@ -23,7 +23,7 @@ from arjuna.tpi.guiauto.source import FrameSource
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
-from arjuna.tpi.exceptions import ChildWindowNotFoundError
+from arjuna.core.exceptions import ChildWindowNotFoundError
 
 class FrameConditions:
 

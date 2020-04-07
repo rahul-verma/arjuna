@@ -88,6 +88,7 @@ from arjuna.tpi.guiauto.model.section import GuiSection, GuiWidget, GuiDialog
 
 from arjuna.tpi.exceptions import *
 from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 from arjuna.tpi.helpers.audit import HardCoded
 from arjuna.tpi.helpers.xml import NodeLocator
 from arjuna.tpi.helpers.types import ProcessedKeyDict

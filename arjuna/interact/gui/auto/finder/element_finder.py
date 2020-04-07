@@ -16,7 +16,8 @@
 # limitations under the License.
 
 import abc
-from arjuna.tpi.exceptions import WaitableError, GuiElementNotFoundError, _GuiElementPresentError
+from arjuna.core.exceptions import WaitableError, _GuiElementPresentError
+from arjuna.tpi.exceptions import GuiElementNotFoundError
 
 class ElementFinder:
     def __init__(self, container): #, obj_name=""):

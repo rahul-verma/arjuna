@@ -21,6 +21,8 @@ Submodules
 .. toctree::
 
    arjuna.core.discovery
+   arjuna.core.enums
+   arjuna.core.exceptions
    arjuna.core.helpers
    arjuna.core.utils
    arjuna.core.value

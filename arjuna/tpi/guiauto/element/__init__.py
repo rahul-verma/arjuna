@@ -23,6 +23,7 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 from arjuna.tpi.guiauto.model.gns import GNS
 from arjuna.interact.gui.auto.finder import GuiElementFinder, GuiElementEmdFinder
 from arjuna.tpi.exceptions import *
+from arjuna.core.exceptions import *
 
 class GuiElement(AsserterMixIn, ElementContainer, Locatable, Interactable):
 

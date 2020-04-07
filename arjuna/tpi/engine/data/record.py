@@ -20,6 +20,25 @@ from arjuna.core.value import Value
 
 
 class DataRecord:
+    '''
+        Represents a single Data Record
+
+        When you use drive_with argument in @test decorator to associate a Data Source, the test function is repeated as many times as there are data records. For each such iteration, a `DataRecord` object is passed to the `data` argument of test function.
+
+        Note:
+            For retrieving indexed objects you have to use `[] notation` (just like a list or tuple), for example
+
+            .. code-block:: python
+
+                record[1]
+
+            For retrieving named objects, you can either use `. notation` or `[] notation` (just like a dict), for example
+
+            .. code-block:: python
+
+                record.obj_name
+                record[obj_name]
+    '''
 
     def __init__(self, *vargs, process=True, **kwargs):
         self.__indexed = None
@@ -43,53 +62,50 @@ class DataRecord:
         else:
             super().__getattr__(i)
 
-    def should_exclude(self):
+    def _should_exclude(self):
         if "exclude" in self.__named:
             if self.__named["exclude"].lower() in {"y","yes","true","1"}:
                 return True
 
-    def value_named(self, name):
-        return self.__named[name.lower()]
-
     @property
-    def indexed_values(self):
+    def indexed_values(self) -> tuple:
+        '''
+            Get all indexed/positional objects
+        '''
         return self.__indexed
 
     @property
-    def named_values(self):
+    def named_values(self) -> tuple:
+        '''
+            Get all named objects
+        '''
         return self.__named
 
-    def __str__(self):
-        parts = ["Indexed"]
-        if not self.indexed_values():
-            parts.append("<empty>")
-        else:
-            for i,v in enumerate(self.indexed_values()):
-                parts.append("[{}] {}".format(i, v))
-        parts.append("Named")
-        if not self.named_values():
-            parts.append("<empty>")
-        else:
-            for i,v in self.named_values().items():
-                parts.append("[{}] {}".format(i, v))
-        return "\n".join(parts)
+    def is_empty(self) -> bool:
+        '''
+            Check if `DataRecord` has not indexed or named objects.
 
-    def is_empty(self):
+            Returns:
+                True/False
+        '''
         return not self.indexed_values() and not self.named_values()
 
-    def is_list_empty(self):
-        return not self.indexed_values()
-
-    def is_map_empty(self):
-        return not self.named_values()
-
     def has_key(self, key):
+        '''
+            Check if `DataRecord` has a key/name for which an object is present.
+
+            Returns:
+                True/False
+        '''
         return key.lower() in self.__named
 
-    def string(self, key):
-        return self.value_named(key)
-
     def has_index(self, index):
+        '''
+            Check if `DataRecord` has an index for which an object is present.
+
+            Returns:
+                True/False
+        '''
         return len(self.__indexed) > index
 
     def __str__(self):
@@ -105,38 +121,3 @@ class DataRecord:
             named = ""
         return "Data->{}{}".format(indexed, named)
 
-
-class DummyDataRecord(DataRecord):
-    
-    def __init__(self):
-        super().__init__(process=False)
-
-class ListDataRecord:
-
-    def __init__(self, data_record):
-        self.__data_record = data_record
-
-    @property
-    def record(self):
-        return self.__data_record
-
-
-class MapDataRecord:
-
-    def __init__(self, data_record):
-        self.__data_record = {i.lower():j for i,j in dict(data_record).items()}
-
-    @property
-    def record(self):
-        return self.__data_record
-
-    def should_exclude(self):
-        if "exclude" not in self.__data_record:
-            return False
-
-        exclude = self.__data_record['exclude']
-        if exclude.upper() in constants.TRUES:
-            return True
-        else:
-            del self.__data_record["exclude"]
-            return False

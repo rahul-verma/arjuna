@@ -15,7 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.tpi.enums import ArjunaOption, DesktopOS
+from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 import pprint
 from enum import Enum, auto
 
@@ -27,9 +28,9 @@ class SetuActorDriverConfigOption(Enum):
     BROWSER_NAME = auto()
     BROWSER_HEADLESS = auto()
     BROWSER_BIN_PATH = auto()
-    BROWSER_PROXY_ON = auto()
-    BROWSER_PROXY_HOST = auto()
-    BROWSER_PROXY_PORT = auto()
+    # BROWSER_PROXY_ON = auto()
+    # BROWSER_PROXY_HOST = auto()
+    # BROWSER_PROXY_PORT = auto()
     MOBILE_OS_NAME = auto()
 
     # Selenium

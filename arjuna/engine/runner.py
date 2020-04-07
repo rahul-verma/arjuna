@@ -19,7 +19,7 @@ import os
 import pytest
 import sys
 
-from arjuna.tpi.enums import ReportFormat
+from arjuna.core.enums import ReportFormat
 from arjuna.core.value import Value
 
 class TestRunner:

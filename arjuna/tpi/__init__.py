@@ -17,6 +17,4 @@
 
 """
 Arjuna Tester Programming Interface (TPI)
-
-.. include ./ArjunaFeaturesDoc.md
 """

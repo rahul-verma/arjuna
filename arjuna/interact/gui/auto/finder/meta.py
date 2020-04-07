@@ -17,7 +17,8 @@
 
 from arjuna.tpi.helpers.types import CIStringDict
 
-from arjuna.tpi.enums import GuiInteractionConfigType
+from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 from arjuna.core.utils.repr_utils import repr_dict
 
 class InteractionConfig:
@@ -63,7 +64,7 @@ class Meta:
 
     def __init__(self, mdict=None):
         self.__mdict = not mdict and CIStringDict() or CIStringDict(mdict)
-        from arjuna.tpi.enums import GuiTemplate
+        from arjuna.core.enums import GuiTemplate
         if "template" in self.__mdict:
             try:
                 template = self.__mdict["template"]

@@ -96,13 +96,58 @@ Following links direct you to documentation for all public names:
 
 Test Configuration
 ==================
-* :py:mod:`arjuna.tpi.config.Configuration`
-* :py:mod:`arjuna.tpi.config.ConfigBuilder`
+* :py:class:`ArjunaOption Enum <arjuna.tpi.enums.ArjunaOption>`
+* :py:class:`Configuration<arjuna.tpi.config.Configuration>`
+* :py:class:`ConfigBuilder<arjuna.tpi.config.ConfigBuilder>`
+
+The Magic Functions
+===================
+* :py:func:`The Magic C Function <arjuna.tpi.magic.C>`
+* :py:func:`The Magic L Function <arjuna.tpi.magic.L>`
+* :py:func:`The Magic R Function <arjuna.tpi.magic.R>`
+
+Data Driven Testing
+===================
+* :py:class:`Random <arjuna.tpi.engine.data.generator.Random>`
+* :py:mod:`Data Source Markup <arjuna.tpi.engine.data.markup>`
+    * :py:class:`record <arjuna.tpi.engine.data.markup.record>`
+    * :py:class:`records <arjuna.tpi.engine.data.markup.records>`
+    * :py:class:`data_function <arjuna.tpi.engine.data.markup.data_function>`
+    * :py:class:`data_class <arjuna.tpi.engine.data.markup.data_class>`
+    * :py:class:`data_file <arjuna.tpi.engine.data.markup.data_file>`
+    * :py:class:`many_data_sources <arjuna.tpi.engine.data.markup.many_data_sources>`
+* :py:class:`DataRecord <arjuna.tpi.engine.data.record.DataRecord>`
 
 Helpers
 =======
 
-* Logging: Log Module - :py:mod:`arjuna.tpi.log`
+
+Logging
+=======
+
+* :py:mod:`Log <arjuna.tpi.log>`
+    * :py:func:`log_trace <arjuna.tpi.log.log_trace>`
+    * :py:func:`log_debug <arjuna.tpi.log.log_debug>`
+    * :py:func:`log_info <arjuna.tpi.log.log_info>`
+    * :py:func:`log_warning <arjuna.tpi.log.log_warning>`
+    * :py:func:`log_error <arjuna.tpi.log.log_error>`
+    * :py:func:`log_fatal <arjuna.tpi.log.log_fatal>`
+
+Arjuna Exceptions
+=================
+
+* :py:mod:`Exceptions <arjuna.tpi.exceptions>`
+    * :py:class:`GuiElementForLabelPresentError <arjuna.tpi.exceptions.GuiElementForLabelPresentError>`
+    * :py:class:`GuiElementPresentError <arjuna.tpi.exceptions.GuiElementPresentError>`
+    * :py:class:`GuiElementForLabelNotPresentError <arjuna.tpi.exceptions.GuiElementForLabelNotPresentError>`
+    * :py:class:`GuiElementNotPresentError <arjuna.tpi.exceptions.GuiElementNotPresentError>`
+    * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.exceptions.GuiNamespaceLoadingError>`
+    * :py:class:`GuiNotLoadedError <arjuna.tpi.exceptions.GuiNotLoadedError>`
+    * :py:class:`GuiLabelNotPresentError <arjuna.tpi.exceptions.GuiLabelNotPresentError>`
+
+
+
+
 
 
 Indices and tables

@@ -17,7 +17,7 @@
 
 from enum import Enum, auto
 
-from arjuna.tpi.enums import GuiInteractionConfigType
+from arjuna.core.enums import GuiInteractionConfigType
 
 class _GuiInteractionConfigBuilder:
 

@@ -20,6 +20,7 @@ import os
 import uuid
 from enum import Enum
 from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 from arjuna.core.types.descriptors import *
 
 
@@ -239,9 +240,6 @@ class ArjunaConfig(AbstractConfig):
 
     def get_gui_automator_name(self):
         return self._config_dict[ArjunaOption.GUIAUTO_NAME]
-
-    def get_guiauto_actor_mode(self):
-        return self._config_dict[ArjunaOption.SETU_GUIAUTO_ACTOR_MODE]
 
     def get_guiauto_context(self):
         return self._config_dict[ArjunaOption.GUIAUTO_CONTEXT]

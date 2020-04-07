@@ -88,6 +88,7 @@ class CliArgsConfig:
 
 #### From old Setu code
 from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 from arjuna.core.value import Value
 
 class CliArgsConfig:

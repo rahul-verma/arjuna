@@ -219,7 +219,7 @@ class Arjuna:
     @classmethod
     def get_config_value(cls, name, config=None):
         '''
-            Returns the reference configuration.
+            Returns the reference configuration value.
         '''
         return cls.ARJUNA_SINGLETON.get_config_value(name, config)
 

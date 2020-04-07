@@ -19,7 +19,7 @@ import os
 from .source import *
 from .reference import *
 from arjuna.core.utils import file_utils
-from arjuna.tpi.enums import DataRefContextType
+from arjuna.core.enums import DataRefContextType
 
 def get_data_file_path(data_dir, fpath):
     if file_utils.is_absolute_path(fpath):
@@ -38,23 +38,16 @@ def get_data_file_path(data_dir, fpath):
                 raise Exception("File does not exist: {}".format(fpath))
         return fpath
 
-def create_file_data_source(file_path, record_format="MAP", delimiter="\t"):
+def create_file_data_source(file_path, delimiter="\t"):
     from arjuna import Arjuna, ArjunaOption
     data_dir = Arjuna.get_config().value(ArjunaOption.DATA_SRC_DIR)
     file_path = get_data_file_path(data_dir, file_path)
     ds = None
     ext = file_path.lower()
-    rformat = record_format.upper()
     if ext.endswith(".csv") or ext.endswith(".txt"):
-        if rformat == "LIST":
-            ds = DsvFileListDataSource(file_path, delimiter)
-        else:
-            ds = DsvFileMapDataSource(file_path, delimiter)
+        ds = DsvFileMapDataSource(file_path, delimiter)
     elif ext.endswith(".xls"):
-        if rformat == "LIST":
-            ds = ExcelFileListDataSource(file_path)
-        else:
-            ds = ExcelFileMapDataSource(file_path)
+        ds = ExcelFileMapDataSource(file_path)
     elif ext.endswith(".ini"):
         ds = IniFileDataSource(file_path)
     else:

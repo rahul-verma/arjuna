@@ -15,15 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-'''
-Arjuna Defined Types
+from arjuna.tpi.engine.data.record import DataRecord
 
-These types are used for annotating functions, methods and return types.
-
-In future, they could be used to enforce types. For the time being, the purpose is understandability and documentation.
-'''
-from typing import TypeVar
-from arjuna.tpi.enums import ArjunaOption
-
-ListOrTuple = TypeVar('ListOrTuple', list, tuple)
-ArjunaOptionOrStr = TypeVar('ArjunaOptionOrStr', ArjunaOption, str)
+class DummyDataRecord(DataRecord):
+    
+    def __init__(self):
+        super().__init__(process=False)

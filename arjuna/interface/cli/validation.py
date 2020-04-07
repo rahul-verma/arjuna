@@ -18,7 +18,8 @@
 import sys
 import re
 
-from arjuna.tpi.enums import ArjunaOption, ReportFormat
+from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 
 def ustr(input):
     return (str(input)).upper()

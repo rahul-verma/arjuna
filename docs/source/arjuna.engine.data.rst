@@ -8,6 +8,7 @@ Submodules
 
    arjuna.engine.data.factory
    arjuna.engine.data.localizer
+   arjuna.engine.data.record
    arjuna.engine.data.reference
    arjuna.engine.data.source
    arjuna.engine.data.store

@@ -1,403 +1,238 @@
+# This file is a part of Arjuna
+# Copyright 2015-2020 Rahul Verma
+
+# Website: www.RahulVerma.net
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#   http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
 from enum import Enum, auto
 
 class ArjunaOption(Enum):
+    '''
+        Represents all built-in configuration options for Arjuna.
+
+        Any option name which is does not correspond to ArjunaOption enum constant is treated as a user defined option.
+    '''
+    
     ARJUNA_ROOT_DIR = auto()
-    ARJUNA_EXTERNAL_TOOLS_DIR = auto()
+    '''Root Directory of Arjuna Installed/Imported in a session'''
+
     ARJUNA_EXTERNAL_IMPORTS_DIR = auto()
+    '''Directory of third party libs directly included in Arjuna.'''
+
     LOG_NAME = auto()
+    '''Name of Arjuna's log file'''
 
     RUN_ID = auto()
+    '''An alnum string representing current test run. Default is `mrun`'''
+
     RUN_ENV_NAME = auto()
+    '''Name of the test environment. A corresponding .conf file should exist. Default is None'''
+
     RUN_ENV_CONF_DIR = auto()
+    '''Directory that contains all environemnt configuration .conf files.'''
+
     RUN_HOST_OS = auto()
+    '''Host Operating System type: Windows/Mac/Linux.'''
 
     LOG_FILE_LEVEL = auto()
+    '''Minimum level for a message to be logged to log file.'''
+
     LOG_CONSOLE_LEVEL = auto()
+    '''Minimum level for a message to be displayed on console'''
+
     LOG_ALLOWED_CONTEXTS = auto()
+    '''Allowed context strings for logging (file as well as display). Messages without contexts always get logged.'''
 
     L10N_LOCALE = auto()
+    '''Default Locale type to be used for Localization call. Values as per arjuna.tpi.enums.Locale'''
+
     L10N_STRICT = auto()
+    '''Sets Localization mode to strict. Default is False.'''
+
     L10N_DIR = auto()
+    '''Directory containing Localization files.'''
+
     L10N_EXCEL_DIR = auto()
+    '''Directory containing Excel based Localization files.'''
+
     L10N_JSON_DIR = auto()
+    '''Directory containing Json based Localization files.'''
 
     PROJECT_NAME = auto()
+    '''Test Project Name'''
+
     PROJECT_ROOT_DIR = auto()
+    '''Test Project Root Directory'''
+
     PROJECT_CONF_FILE = auto()
+    '''Project conf file path.'''
 
     TESTS_DIR = auto()
+    '''Directory containing test modules.'''
+
     REPORTS_DIR = auto()
+    '''Root directory for test reports.'''
+
     REPORT_FORMATS = auto()
+    '''Formats for Report Generation. XML/HTML'''
+
     REPORT_DIR = auto()
+    '''Reporting directory for current test run under REPORTS_DIR. Name is generated with RUN_ID and Current Timestamp. With --static-rid CLI switch, timestamp is not appended.'''
+
     REPORT_XML_DIR = auto()
+    '''Directory containing report.xml for current test run.'''
+
     REPORT_HTML_DIR = auto()
+    '''Directory containing report.html for current test run.'''
+
     LOG_DIR = auto()
+    '''Directory containing arjuna.log for current test run.'''
+
     SCREENSHOTS_DIR = auto()
+    '''Directory containing screenshots for current test run.'''
+
     CONF_DIR = auto()
+    '''Test Project configuration directory'''
 
     DATA_DIR = auto()
-    DATA_SRC_DIR = auto()
-    DATA_REF_DIR = auto()
-    DATA_REF_COLUMN_DIR = auto()
-    DATA_REF_ROW_DIR = auto()
+    '''Directory containing data files in test project.'''
 
-    SETU_PROJECT_DIRS_FILES = auto()
+    DATA_SRC_DIR = auto()
+    '''Directory containing data source files in test project.'''
+
+    DATA_REF_DIR = auto()
+    '''Directory containing contextual data reference files in test project.'''
+
+    DATA_REF_COLUMN_DIR = auto()
+    '''Directory containing contextual column data reference Excel files in test project.'''
+
+    DATA_REF_ROW_DIR = auto()
+    '''Directory containing contextual row data reference Excel files in test project.'''
 
     APP_URL = auto()
-
-    SETU_GUIAUTO_ACTOR_MODE = auto()
-    SETU_GUIAUTO_ACTOR_URL = auto()
+    '''Base URL for a Web App. Used by launch() method if base_url is not specified for GuiApp.'''
 
     BROWSER_NAME = auto()
+    '''Browser Name for Gui Automation. Chrome/Firefox. Default is Chrome'''
+
     BROWSER_HEADLESS = auto()
+    '''Sets headless mode for browser for GUI Automation. Default is False.'''
+
     BROWSER_VERSION = auto()
+    '''Browser Version for GUI Automation.'''
+
     BROWSER_MAXIMIZE = auto()
+    '''Browser is maximized in GUI Automation after launch. Default is False.'''
+
     BROWSER_DIM_HEIGHT = auto()
+    '''Browser Height for GUI Automation. If not set, Arjuna does not change the height of browser.'''
+
     BROWSER_DIM_WIDTH = auto()
+    '''Browser Width for GUI Automation. If not set, Arjuna does not change the width of browser.'''
+
     BROWSER_BIN_PATH = auto()
-    BROWSER_PROXY_ON = auto()
+    '''Path of the Browser binary on test system.'''
 
     GUIAUTO_NAME = auto()
+    '''Engine name. Currently set to Selenium which is the only supported engine.'''
+
     GUIAUTO_DIR = auto()
+    '''Root directory of all Gui automation relation directories and files'''
+
     GUIAUTO_NAMESPACE_DIR = auto()
+    '''Root directory of all Gui Namespace (GNS) files.'''
+
     GUIAUTO_DEF_MULTICONTEXT = auto()
+    '''Sets multi context mode for GNS files. Currently not processed.'''
+
     GUIAUTO_CONTEXT = auto()
+    '''Gui Automation Context. Currently not processed.'''
+
     SCROLL_PIXELS = auto()
-    SWIPE_TOP = auto()
-    SWIPE_BOTTOM = auto()
-    SWIPE_MAX_WAIT = auto()
+    '''Number of pixels for each scroll call in Gui Automation. Default is 100.'''
+
     GUIAUTO_MAX_WAIT = auto()
+    '''Maximum time for a Gui element locating or waitable interaction to occur. Uses Dynamic Wait. Expressed in seconds. Default is 60.'''
+
     GUIAUTO_SLOMO_ON = auto()
+    '''Sets slow motion mode for Gui Automation. Default is False.'''
+
     GUIAUTO_SLOMO_INTERVAL = auto()
+    '''Time Interval between successive Gui Automation actions when Slow Motion mode is ON. Expressed in seconds. Default is 2'''
+
     GUIAUTO_WITHX_YAML = auto()
+    '''Path of withx.yaml file used for writing custom locators for Gui Automation.'''
 
     MOBILE_OS_NAME = auto()
+    '''Mobile OS Name. iOs/Android. Default is Android.'''
+
     MOBILE_OS_VERSION = auto()
+    '''Mobile OS Version. No default set.'''
+    
     MOBILE_DEVICE_NAME = auto()
+    '''Mobile Device name. No default set.'''
+
     MOBILE_DEVICE_UDID = auto()
+    '''Mobile Device UDID. No default set.'''
+
     MOBILE_APP_FILE_PATH = auto()
+    '''Mobile App path on test system. No default set.'''
 
     SELENIUM_DRIVER_PROP = auto()
+    '''Selenium Environment variable for browser driver as per chosen browser. Automatically set as per chosen browser. Default is webdriver.chrome.driver'''
+
     SELENIUM_DRIVERS_DIR = auto()
+    '''Root Directory containing OS specific browser drivers for Selenium. Has an impact only if SELENIUM_DRIVER_DOWNLOAD is set to False.'''
+
     SELENIUM_DRIVER_PATH = auto()
+    '''Absolute path of Selenium browser driver. Automatically set to WebDriverManager's downloaded driver if SELENIUM_DRIVER_DOWNLOAD is True, else automatically set as per the test project structure, OS and browser.'''
+
     SELENIUM_DRIVER_DOWNLOAD = auto()
+    '''Instructs Arjuna to automatically download Selenium browser driver for chosen browser. Default is True.'''
+
     SELENIUM_SERVICE_URL = auto()
+    '''Selenium's Service URL. If set, Arjuna does not launch the browser service and uses this URL as the service URL.'''
 
     APPIUM_SERVICE_URL = auto()
+    '''Appium Service URL. Currently not processed.'''
+
     APPIUM_AUTO_LAUNCH = auto()
+    '''Instructs Arjuna to launch Appium programmatically. Default is True. Currently not processed.'''
 
     IMG_COMP_MIN_SCORE = auto()
-
-class Key(Enum):
-	NULL = auto()
-	CANCEL = auto()
-	HELP = auto()
-	BACKSPACE = auto()
-	BACK_SPACE = auto()
-	TAB = auto()
-	CLEAR = auto()
-	RETURN = auto()
-	ENTER = auto()
-	SHIFT = auto()
-	LEFT_SHIFT = auto()
-	CONTROL = auto()
-	LEFT_CONTROL = auto()
-	ALT = auto()
-	LEFT_ALT = auto()
-	PAUSE = auto()
-	ESCAPE = auto()
-	SPACE = auto()
-	PAGE_UP = auto()
-	PAGE_DOWN = auto()
-	END = auto()
-	HOME = auto()
-	LEFT = auto()
-	ARROW_LEFT = auto()
-	UP = auto()
-	ARROW_UP = auto()
-	RIGHT = auto()
-	ARROW_RIGHT = auto()
-	DOWN = auto()
-	ARROW_DOWN = auto()
-	INSERT = auto()
-	DELETE = auto()
-	SEMICOLON = auto()
-	EQUALS = auto()
-
-	NUMPAD0 = auto()
-	NUMPAD1 = auto()
-	NUMPAD2 = auto()
-	NUMPAD3 = auto()
-	NUMPAD4 = auto()
-	NUMPAD5 = auto()
-	NUMPAD6 = auto()
-	NUMPAD7 = auto()
-	NUMPAD8 = auto()
-	NUMPAD9 = auto()
-	MULTIPLY = auto()
-	ADD = auto()
-	SEPARATOR = auto()
-	SUBTRACT = auto()
-	DECIMAL = auto()
-	DIVIDE = auto()
-
-	F1 = auto()
-	F2 = auto()
-	F3 = auto()
-	F4 = auto()
-	F5 = auto()
-	F6 = auto()
-	F7 = auto()
-	F8 = auto()
-	F9 = auto()
-	F10 = auto()
-	F11 = auto()
-	F12 = auto()
-
-	META = auto()
-	COMMAND = auto()
-
-class ModifierKey(Enum):
-    CTRL = auto()
-    CMD = auto()
-    XCTRL = auto()
-    ALT = auto()
-    SHIFT = auto()
+    '''A fraction that represents minimum image comparison score to decide on an image match. Default is 0.7. Currently not processed.'''
 
 class TimeUnit(Enum):
+    '''
+        Allowed time unit types.
+    '''
+
     MILLI_SECONDS = auto()
     SECONDS = auto()
     MINUTES = auto()
 
-class DesktopOS(Enum):
-    WINDOWS = auto()
-    MAC = auto()
-    LINUX = auto()
-
-class SetuActorMode(Enum):
-    LOCAL = auto()
-    REMOTE = auto()
-
-class MobileOsName(Enum):
-    ANDROID = auto()
-    IOS = auto()
-
 class BrowserName(Enum):
+    '''
+        Allowed browser names for Gui Automation.
+    '''
+
     CHROME = auto()
     FIREFOX = auto()
-
-class AppiumAndroidBrowserName(Enum):
-    BROWSER = auto()
-    CHROME = auto()
-
-class AppiumIosBrowserName(Enum):
-    SAFARI = auto()
-
-class FileFormat(Enum):
-    INI = auto()
-    TXT = auto()
-    DELIMITED = auto()
-    XLS = auto()
-    CSV = auto()
-    GNS = auto()
-
-class DataFileFormat(Enum):
-    INI = auto()
-    TXT = auto()
-    DELIMITED = auto()
-    XLS = auto()
-    CSV = auto()
-
-class Order(Enum):
-    RETAIN = auto()
-    BY_NAME = auto()
-    RANDOM = auto()
-
-class Filter(Enum):
-    INCLUDE = auto()
-    EXCLUDE = auto()
-
-class GuiAutomationContext(Enum):
-    WEB = auto()
-    NATIVE = auto()
-    SCREEN = auto()
-    ANDROID_WEB = auto()
-    IOS_WEB = auto()
-    ANDROID_NATIVE = auto()
-    IOS_NATIVE = auto()
-
-    # DESKTOP_CONTEXTS = {GuiAutomationContext.NATIVE, GuiAutomationContext.WEB}
-    # MOBILE_WEB_CONTEXTS = {GuiAutomationContext.ANDROID_WEB, GuiAutomationContext.IOS_WEB}
-    # ALL_WEB_CONTEXTS = {GuiAutomationContext.WEB, GuiAutomationContext.ANDROID_WEB, GuiAutomationContext.IOS_WEB}
-    # MOBILE_NATIVE_CONTEXTS = {GuiAutomationContext.ANDROID_NATIVE, GuiAutomationContext.IOS_NATIVE}
-    
-    @staticmethod
-    def isDesktopContext(context):
-        return context in GuiAutomationContext.DESKTOP_CONTEXTS
-
-    @staticmethod
-    def is_mobile_web_context(context):
-        return context in GuiAutomationContext.MOBILE_WEB_CONTEXTS
-
-    @staticmethod
-    def is_mobile_native_context(context):
-        return context in GuiAutomationContext.MOBILE_NATIVE_CONTEXTS
-
-    @staticmethod
-    def is_web_context(context):
-        return context in GuiAutomationContext.ALL_WEB_CONTEXTS
-
-class GuiAutomatorName(Enum):
-    SELENIUM = auto()
-    APPIUM = auto()
-
-class GuiElementType(Enum):
-    TEXTBOX = auto()
-    PASSWORD = auto()
-    LINK = auto()
-    BUTTON = auto()
-    SUBMIT_BUTTON = auto()
-    DROPDOWN = auto()
-    CHECKBOX = auto()
-    RADIO = auto()
-    IMAGE = auto()
-
-class OS(Enum):
-	WINDOWS = auto()
-	MAC = auto()
-	LINUX = auto()
-	ANDROID = auto()
-	IOS = auto()
-
-class MobileView(Enum):
-    NATIVE_APP = auto()
-    WEBVIEW = auto()
-
-class Device(Enum):
-    PC = auto()
-    MOBILE = auto()
-    GENERIC = auto()    
-
-class Device(Enum):
-    UP = auto()
-    DOWN = auto()
-    LEFT = auto()
-    RIGHT = auto()
-
-
-
-class LoggingLevel(Enum):
-    TRACE = auto()
-    DEBUG = auto()
-    INFO = auto()
-    WARN = auto()
-    ERROR = auto()
-    FATAL = auto()
-
-class ConfigPropertyFormattingTypeEnum(Enum):
-    PATH_TO_ABS_PATH = auto()
-
-class DeviceTypeEnum(Enum):
-    PC = auto()
-    MOBILE = auto()
-    GENERIC = auto()
-
-class HoconSyntaxTypeEnum(Enum):
-    PROPERTIES = auto()
-    JSON = auto()
-    CONF = auto()
-
-
-class FilterTypeEnum(Enum):
-    INCLUDE = auto()
-    EXCLUDE = auto()
-
-
-class DiscoveredFileAttributeEnum(Enum):
-    NAME = auto()
-    EXTENSION = auto()
-    FULL_NAME = auto()
-    DIRECTORY_ABSOLUTE_PATH = auto()
-    DIRECTORY_RELATIVE_PATH = auto()
-    PACKAGE_DOT_NOTATION = auto()
-    COMMA_SEPATARED_RELATIVE_PATH = auto()
-    CONTAINER = auto()
-    CONTAINER_TYPE = auto()
-
-class ValueType(Enum):
-    BOOLEAN = auto()
-    STRING = auto()
-    STRING_LIST = auto()
-    NONE = auto()
-    NUMBER = auto()
-    NUMBER_LIST = auto()
-    LIST = auto()
-    ANYREF = auto()
-    ENUM = auto()
-    ENUM_LIST = auto()
-    INTEGER = auto()
-    OBJECT_LIST = auto()
-    FLOAT = auto()
-    DOUBLE = auto()
-    LONG = auto()
-    NOT_SET = auto()
-    NA = auto()
-    INT_LIST = auto()
-
-class NamesContainerTypeEnum(Enum):
-    TEST = auto()
-    TEST_RESULT = auto()
-    IGNORED_TEST = auto()
-    STEP_RESULT = auto()
-    ISSUE = auto()
-    DEFAULT_FIXTURE_tfuncs = auto()
-    COMPONENT_NAMES = auto()
-    TEST_OBJECT = auto()
-    EXCLUDED_TEST_RESULT = auto()
-    EVENT = auto()
-    TEST_OTYPE_NAMES = auto()
-    FIXTURE_RESULT = auto()
-
-class ConfigPropertyLevelEnum(Enum):
-    CENTRAL = auto()
-    THREAD = auto()
-
-class CorePropertyTypeEnum(Enum):
-    ARJUNA_ROOT_DIR = auto()
-    PROG = auto()
-    CONFIG_CENTRAL_FILE_NAME = auto()
-    CONFIG_PROJECTS_DIR = auto()
-    WORKSPACE_DIR = auto()
-    EXTERNAL_TOOLS_DIR = auto()
-    EXTERNAL_IMP_DIR = auto()
-    LOGGER_DIR = auto()
-    CONFIG_DIR = auto()
-    LOGGER_CONSOLE_LEVEL = auto()
-    LOGGER_FILE_LEVEL = auto()
-    LOGGER_NAME = auto()
-    PROJECT_DIRS_FILES = auto()
-
-class GuiInteractionConfigType(Enum):
-    CHECK_TYPE = auto()
-    CHECK_PRE_STATE = auto()
-    CHECK_POST_STATE = auto()
-    SCROLL_TO_VIEW = auto()
-
-class ReportFormat(Enum):
-    XML = auto()
-    HTML = auto()
-
-class DataRefContextType(Enum):
-    ROW = auto()
-    COLUMN = auto()
-
-class GuiTemplate(Enum):
-    ELEMENT = auto()
-    MULTI_ELEMENT = auto()
-    DROPDOWN = auto()
-    RADIO_GROUP = auto()
 
 import locale
 import re
 __locales = [i.upper() for i in locale.locale_alias.keys() if re.match('^[\w_]+$', i)]
+
 Locale = Enum('Locale', dict(zip(__locales, range(len(__locales)))))
+Locale.__doc__ = '''Allowed locale names in Arjuna.'''

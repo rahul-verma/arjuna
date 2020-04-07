@@ -15,16 +15,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+'''
+Data Driven Testing Markup
+
+Provides data source builder classes that can be provided to drive_with argument of @test decorator.
+
+The names of the classes have been kept in lower case for aesthetic purpose of the @test decorator.
+'''
+
 from arjuna.engine.data.source import *
 from arjuna.engine.data.factory import *
 from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 from arjuna.core.utils import obj_utils
 from arjuna.engine.data.factory import *
 
 class _DataMarkUp:
     pass
 
-class _DataRecord(_DataMarkUp):
+class record(_DataMarkUp):
+    '''
+        Data Record Data Source
+
+        Args:
+            *vargs: Any number of objects
+            *kwargs: Arbitrary keywrod arguments
+    '''
 
     from arjuna.engine.data.source import SingleDataRecordSource
     def __init__(self, *vargs, **kwargs):
@@ -33,16 +49,23 @@ class _DataRecord(_DataMarkUp):
             raise Exception("No data provided in Data")
         self.__record = DataRecord(*vargs, **kwargs)
 
-    def build(self):
-        source = SingleDataRecordSource(self.__record)
-        return source
+    def build(self) -> 'DataSource':
+        '''
+            Create corresponding DataSource
+        '''
+        return SingleDataRecordSource(self.__record)
 
     def get_record(self):
         return self.__record
 
-record = _DataRecord
+class records(_DataMarkUp):
+    '''
+        Multiple Data Record Data Source
 
-class _DataRecords(_DataMarkUp):
+        Args:
+            *records: Any number of record objects
+    '''
+
     from arjuna.engine.data.source import DataArrayDataSource
     def __init__(self, *records):
         super().__init__()
@@ -51,13 +74,22 @@ class _DataRecords(_DataMarkUp):
                 raise Exception("Items in records() must be instances of record.")
         self.records = [i.get_record() for i in records]
 
-    def build(self):
-        source = DataArrayDataSource(self.records)
-        return source
+    def build(self) -> 'DataSource':
+        '''
+            Create corresponding DataSource
+        '''
+        return DataArrayDataSource(self.records)
 
-records = _DataRecords
+class data_function(_DataMarkUp):
+    '''
+        Data Function/Generator Data Source
 
-class _DataFunc(_DataMarkUp):
+        Args:
+            func: Function object to be called.
+            *vargs: Any number of objects to be passed to function when calling it.
+            *kwargs: Arbitrary keywrod arguments to be passed to function when calling it.
+    '''
+
     def __init__(self, func, *vargs, **kwargs):
         super().__init__()
         if not obj_utils.callable(func):
@@ -68,12 +100,23 @@ class _DataFunc(_DataMarkUp):
         self.vargs = vargs
         self.kwargs = kwargs
 
-    def build(self):
+    def build(self) -> 'DataSource':
+        '''
+            Create corresponding DataSource
+        '''
         return DataFunctionDataSource(self.func, *self.vargs, **self.kwargs)
 
-data_function = _DataFunc
 
-class _DataClass(_DataMarkUp):
+class data_class(_DataMarkUp):
+    '''
+        Data Class Data Source
+
+        Args:
+            dsclass: Class to be instantiated
+            *vargs: Any number of objects for instantiating the class.
+            *kwargs: Arbitrary keywrod arguments  for instantiating the class.
+    '''
+
     def __init__(self, dsclass, *vargs, **kwargs):
         super().__init__()
         if not isinstance(type(dsclass), type):
@@ -82,25 +125,46 @@ class _DataClass(_DataMarkUp):
         self.vargs = vargs
         self.kwargs = kwargs
 
-    def build(self):
+    def build(self) -> 'DataSource':
+        '''
+            Create corresponding DataSource
+        '''
         return DataClassDataSource(self.dsclass, *self.vargs, **self.kwargs)
 
-data_class = _DataClass
 
+class data_file(_DataMarkUp):
+    '''
+        Data File Data Source
 
-class _DataFile(_DataMarkUp):
-    def __init__(self, path=None, delimiter="\t"):
+        Args:
+            path: Path of the file
+            
+        Keyword Arguments:
+            delimiter: (Optional) Delimiter to be used for text files. Default is tab (\t)
+    '''
+    def __init__(self, path=None, *, delimiter="\t"):
         super().__init__()
         self.path = path
         self.delimiter = delimiter
 
-    def build(self):
+    def build(self) -> 'DataSource':
+        '''
+            Create corresponding DataSource
+        '''
         source = create_file_data_source(self.path, delimiter=self.delimiter)
         return source
 
-data_file = _DataFile
 
-class _MultiDataSource(_DataMarkUp):
+class many_data_sources(_DataMarkUp):
+    '''
+        Multiple Data Source
+
+        Args:
+            *dsources: Any Arjuna Data Source
+            
+        Keyword Arguments:
+            delimiter: (Optional) Delimiter to be used for text files. Default is tab (\t)
+    '''
     def __init__(self, *dsources):
         super().__init__()
         if not dsources:
@@ -110,9 +174,11 @@ class _MultiDataSource(_DataMarkUp):
                 raise Exception("All arguments of many_data_sources must be data sources.")
         self.dsource_defs = dsources
 
-    def build(self):
+    def build(self) -> 'DataSource':
+        '''
+            Create corresponding DataSource
+        '''
         return MultiDataSource(self.dsource_defs)
 
-many_data_sources = _MultiDataSource
 
 

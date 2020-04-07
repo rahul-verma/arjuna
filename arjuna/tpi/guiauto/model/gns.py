@@ -1,6 +1,7 @@
 
 from .formatter import GNSFormatter
 from arjuna.tpi.exceptions import *
+from arjuna.core.exceptions import *
 from arjuna.interact.gui.auto.finder import GuiEmdFinder, GuiElementEmdFinder
 
 class GNS:

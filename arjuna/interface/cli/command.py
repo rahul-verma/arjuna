@@ -27,6 +27,7 @@ import json
 import sys
 
 from arjuna.tpi.enums import *
+from arjuna.core.enums import *
 from arjuna.core.utils import sys_utils
 from arjuna.core.utils import file_utils
 from arjuna.core.reader.hocon import HoconFileReader, HoconConfigDictReader

@@ -24,8 +24,10 @@ from arjuna.core.reader.ini import *
 from arjuna.core.reader.textfile import *
 from arjuna.core.thread import decorators
 from arjuna.tpi.exceptions import *
+from arjuna.core.exceptions import *
 from arjuna.core.types import constants
 from arjuna.tpi.engine.data.record import *
+from arjuna.engine.data.record import *
 # from arjuna.core.utils import sys_utils
 
 class DataSource(metaclass=abc.ABCMeta):
@@ -131,20 +133,6 @@ class FileDataSource(DataSource, metaclass=abc.ABCMeta):
     def _load_file(self):
         pass
 
-
-class DsvFileListDataSource(FileDataSource):
-    def __init__(self, path, delimiter="\t"):
-        super().__init__(path)
-        self.__delimiter = delimiter
-        self._load_file()
-
-    def process(self, data_record):
-        return DataRecord(**dict(data_record))
-
-    def _load_file(self):
-        self.reader = FileLine2ArrayReader(self.path, self.__delimiter)
-
-
 class DsvFileMapDataSource(FileDataSource):
     def __init__(self, path, delimiter="\t"):
         super().__init__(path)
@@ -173,24 +161,6 @@ class IniFileDataSource(FileDataSource):
         self.reader = IniFile2MapReader(self.path)
 
 
-class ExcelFileListDataSource(FileDataSource):
-    def __init__(self, path):
-        super().__init__(path)
-        if path.lower().endswith("xls"):
-            self._load_file()
-        else:
-            raise Exception("Unsupported file extension for Excel reading.")
-
-    def _load_file(self):
-        self.reader = ExcelRow2ArrayReader(self.path)
-
-    def should_exclude(self, data_record):
-        return False
-
-    def process(self, data_record):
-        return ListDataRecord(data_record)
-
-
 class ExcelFileMapDataSource(FileDataSource):
     def __init__(self, path):
         super().__init__(path)
@@ -203,7 +173,7 @@ class ExcelFileMapDataSource(FileDataSource):
         self.reader = ExcelRow2MapReader(self.path)
 
     def should_exclude(self, data_record):
-        return data_record.should_exclude()
+        return data_record._should_exclude()
 
     def process(self, data_record):
         return DataRecord(**dict(data_record))
