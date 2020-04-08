@@ -72,6 +72,8 @@ Web GUI Automation
 
    guiauto/index
 
+
+
 ********************************************
 Tester Programming Interface (TPI) Reference
 ********************************************
@@ -103,6 +105,10 @@ Test, Fixtures and Assertions
     * :py:func:`@for_module <arjuna.tpi.engine.fixture.for_module>`
     * :py:func:`@for_session <arjuna.tpi.engine.fixture.for_session>`
 
+Test-to-Test Dependency
+=======================
+* :py:func:`problem_in <arjuna.tpi.engine.relation.problem_in>`
+
 Test Configuration
 ==================
 * :py:class:`ArjunaOption Enum <arjuna.tpi.enums.ArjunaOption>`
@@ -127,8 +133,13 @@ Data Driven Testing
     * :py:class:`many_data_sources <arjuna.tpi.engine.data.markup.many_data_sources>`
 * :py:class:`DataRecord <arjuna.tpi.engine.data.record.DataRecord>`
 
+Hooks
+=====
+* :py:meth:`PytestHooks.add_screenshot_for_result <arjuna.tpi.engine.hook.PytestHooks.add_screenshot_for_result>`
+
 Helpers
 =======
+
 
 
 Logging
@@ -141,6 +152,7 @@ Logging
     * :py:func:`log_warning <arjuna.tpi.log.log_warning>`
     * :py:func:`log_error <arjuna.tpi.log.log_error>`
     * :py:func:`log_fatal <arjuna.tpi.log.log_fatal>`
+* :py:func:`@track <arjuna.tpi.tracker.track>`
 
 Arjuna Exceptions
 =================

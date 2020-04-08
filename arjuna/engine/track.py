@@ -1,0 +1,99 @@
+# This file is a part of Arjuna
+# Copyright 2015-2020 Rahul Verma
+
+# Website: www.RahulVerma.net
+
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+
+#   http://www.apache.org/licenses/LICENSE-2.0
+
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+import os
+import sys
+import types
+import inspect
+import functools
+
+from arjuna.core.utils.obj_utils import get_class_for_method
+
+prop_dict_msg = {
+    "fget": ("(Getting Property)","", " Returning: {}"),
+    "fset": ("(Setting Property)", ":: Args: {}, Kwargs: {}.", ""),
+    "fdel": ("(Deleting Property)","", ""),
+}
+
+def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget", **kwargs):
+    import arjuna
+    from arjuna import log_error
+    log_call = getattr(arjuna, "log_{}".format(level.strip().lower()))
+    name = func.__name__
+    qualname = func.__qualname__
+    if name != qualname and not static:
+        pvargs = vargs[1:]
+    else:
+        pvargs = vargs
+
+    if prop:
+        msg_1 = prop_dict_msg[prop_type][0]
+        msg_2 = prop_dict_msg[prop_type][1].format(pvargs, kwargs)
+        log_call("{} {}{}".format(qualname, msg_1, msg_2))
+    else:
+        log_call("{}:: Started with args {} and kwargs {}.".format(qualname, pvargs, kwargs))
+    ret = None
+    try:
+        ret = func(*vargs, **kwargs)
+    except Exception as e:
+        import traceback
+        log_error("{}:: Exception: {}. Trace: {}".format(qualname, e, traceback.format_exc()))
+        raise
+    else:
+        if prop:
+            msg_1 = prop_dict_msg[prop_type][0]
+            msg_3 = prop_dict_msg[prop_type][2].format(ret)
+            log_call("{}:: Finished.{}".format(qualname, msg_3, msg_3))
+        else:
+            log_call("{}:: Finished. Returning: {}".format(qualname, ret))
+        return ret
+
+def track_func(level="debug", static=False, prop=False, prop_type="fget"):
+
+    def dec(func):
+        fname = func.__name__
+        if prop is True:
+            if not hasattr(func, "_wrapped"):
+                func._wrapped = True
+            elif func._wrapped:
+                return func
+        @functools.wraps(func)
+        def inner(*vargs, **kwargs):
+            return func_wrapper(func, level, *vargs, static=static, prop=prop, prop_type=prop_type, **kwargs)
+        return inner
+
+    return dec
+
+def wrap_methods(cls, level, *args, **kwargs):
+    for attr_name, attr in vars(cls).items():
+        if type(attr) is types.FunctionType:
+            setattr(cls, attr_name, track_func(level)(attr))
+        elif isinstance(attr, classmethod):
+            setattr(cls, attr_name, classmethod(track_func(level)(attr.__func__)))
+        elif isinstance(attr, staticmethod):
+            setattr(cls, attr_name, staticmethod(track_func(level, static=True)(attr.__func__)))
+    return cls(*args, **kwargs)
+
+def track_class(level):
+
+    def deco(cls):
+        @functools.wraps(cls)
+        def class_wrapper(*args, **kwargs):
+            return wrap_methods(cls, level, *args, **kwargs)
+        return class_wrapper
+
+    return deco

@@ -76,7 +76,7 @@ from arjuna.tpi.engine.hook import PytestHooks
 from arjuna.tpi.engine.test import *
 from arjuna.tpi.engine.relation import *
 from arjuna.tpi.engine.fixture import *
-from arjuna.tpi.engine.logger import track
+from arjuna.tpi.tracker import track
 from arjuna.tpi.engine.data.markup import *
 from arjuna.tpi.engine.data.record import *
 from arjuna.tpi.engine.data.generator import Random, DataEntity, Locales

@@ -16,7 +16,20 @@
 # limitations under the License.
 
 
-def problem_in(*names):
+def problem_in(*ids):
+    '''
+        Exclusion Relation: Problem based test function exclusion with exclude_if.
+
+        Used to create a dependency of one test function on one or more other test functions.
+
+        Arguments:
+            *ids: One or more test function ids.
+
+        Note:
+            The depended-on test functions must belong to the same module as the dependent test function.
+    '''
+    if not ids:
+        raise Exception("Atleast one test function id must be provided in problem_in call.")
     def call():
-        return names
+        return ids
     return call

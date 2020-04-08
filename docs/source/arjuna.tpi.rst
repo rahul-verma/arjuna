@@ -21,6 +21,7 @@ Submodules
    arjuna.tpi.exceptions
    arjuna.tpi.log
    arjuna.tpi.magic
+   arjuna.tpi.tracker
 
 Module contents
 ---------------
