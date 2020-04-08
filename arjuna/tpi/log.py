@@ -41,7 +41,7 @@ Following Arjuna Options are related to logging:
     * LOG_ALLOWED_CONTEXTS: The context strings which determine log messages belonging to which contexts can be displayed and logged.
 '''
 
-from arjuna.tpi.helpers.audit import Stack
+from arjuna.tpi.helpers.audit import _Stack
 from arjuna.tpi.arjuna_types import *
 
 def __log(invoker, level, msg, contexts=None):
@@ -61,7 +61,7 @@ def log_trace(msg: str, contexts: ListOrTuple=None):
             msg: Log message
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(Stack.get_invoker(), "trace", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "trace", msg, contexts=contexts)
 
 def log_debug(msg: str, contexts: ListOrTuple=None) -> None:
     '''
@@ -71,7 +71,7 @@ def log_debug(msg: str, contexts: ListOrTuple=None) -> None:
             msg: Log message
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(Stack.get_invoker(), "debug", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "debug", msg, contexts=contexts)
 
 def log_info(msg: str, contexts: ListOrTuple=None) -> None:
     '''
@@ -81,7 +81,7 @@ def log_info(msg: str, contexts: ListOrTuple=None) -> None:
             msg: Log message
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(Stack.get_invoker(), "info", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "info", msg, contexts=contexts)
 
 def log_warning(msg: str, contexts: ListOrTuple=None) -> None:
     '''
@@ -91,7 +91,7 @@ def log_warning(msg: str, contexts: ListOrTuple=None) -> None:
             msg: Log message
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(Stack.get_invoker(), "warning", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "warning", msg, contexts=contexts)
 
 def log_error(msg: str, contexts: ListOrTuple=None) -> None:
     '''
@@ -101,7 +101,7 @@ def log_error(msg: str, contexts: ListOrTuple=None) -> None:
             msg: Log message
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(Stack.get_invoker(), "error", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "error", msg, contexts=contexts)
 
 def log_fatal(msg: str, contexts: ListOrTuple=None) -> None:
     '''
@@ -111,4 +111,4 @@ def log_fatal(msg: str, contexts: ListOrTuple=None) -> None:
             msg: Log message
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(Stack.get_invoker(), "fatal", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "fatal", msg, contexts=contexts)

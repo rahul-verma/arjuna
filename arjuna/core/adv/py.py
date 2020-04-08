@@ -18,7 +18,7 @@
 import abc
 import pprint
 from enum import Enum
-from arjuna.tpi.helpers.types import *
+from arjuna.tpi.helpers.dict import *
 from functools import partial
 
 from weakref import WeakKeyDictionary

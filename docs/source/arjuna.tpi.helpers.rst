@@ -7,8 +7,8 @@ Submodules
 .. toctree::
 
    arjuna.tpi.helpers.audit
+   arjuna.tpi.helpers.dict
    arjuna.tpi.helpers.json
-   arjuna.tpi.helpers.types
    arjuna.tpi.helpers.xml
 
 Module contents

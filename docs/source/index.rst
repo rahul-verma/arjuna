@@ -139,6 +139,15 @@ Hooks
 
 Helpers
 =======
+* :py:meth:`HardCoded.sleep <arjuna.tpi.helpers.audit.HardCoded.sleep>`
+* :py:class:`Json <arjuna.tpi.helpers.json.Json>`
+* :py:mod:`XML <arjuna.tpi.helpers.xml>`
+    * :py:class:`XmlNode <arjuna.tpi.helpers.xml.XmlNode>`
+    * :py:class:`NodeLocator <arjuna.tpi.helpers.xml.NodeLocator>`
+* :py:meth:`Arjuna Dictionaries <arjuna.tpi.helpers.dict>`
+    * :py:class:`CIStringDict <arjuna.tpi.helpers.dict.CIStringDict>`
+    * :py:class:`ProcessedKeyDict <arjuna.tpi.helpers.dict.ProcessedKeyDict>`
+    * :py:class:`OnceOnlyKeyCIStringDict <arjuna.tpi.helpers.dict.OnceOnlyKeyCIStringDict>`
 
 
 
@@ -170,9 +179,9 @@ Arjuna Exceptions
 
 
 
-
+******************
 Indices and tables
-==================
+******************
 
 * :ref:`genindex`
 * :ref:`modindex`

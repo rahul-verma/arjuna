@@ -19,7 +19,7 @@
 import os
 from .factory import DataReference
 from .reference import ContextualDataReference
-from arjuna.tpi.helpers.types import CIStringDict
+from arjuna.tpi.helpers.dict import CIStringDict
 
 from arjuna.core.utils import file_utils
 from arjuna.tpi.helpers.json import Json

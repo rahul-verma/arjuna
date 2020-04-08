@@ -91,7 +91,7 @@ from arjuna.tpi.enums import *
 from arjuna.core.enums import *
 from arjuna.tpi.helpers.audit import HardCoded
 from arjuna.tpi.helpers.xml import NodeLocator
-from arjuna.tpi.helpers.types import ProcessedKeyDict
+from arjuna.tpi.helpers.dict import ProcessedKeyDict
 from arjuna.tpi.helpers.json import Json
 
 from arjuna.tpi.log import *

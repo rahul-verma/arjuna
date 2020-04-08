@@ -16,7 +16,7 @@
 # limitations under the License.
 
 
-from arjuna.tpi.helpers.types import CIStringDict
+from arjuna.tpi.helpers.dict import CIStringDict
 
 class PipeLine:
 

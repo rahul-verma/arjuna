@@ -18,7 +18,7 @@
 from arjuna import ArjunaOption
 
 from .config import Config
-from arjuna.tpi.helpers.types import CIStringDict
+from arjuna.tpi.helpers.dict import CIStringDict
 
 # class ArjunaOptionMap(AbstractValueMap):
 

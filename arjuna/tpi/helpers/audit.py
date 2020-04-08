@@ -18,7 +18,7 @@
 import time
 import inspect
 
-class Stack:
+class _Stack:
 
     @classmethod
     def get_invoker(cls):
@@ -40,13 +40,24 @@ class Stack:
         return "{}{}Line: {}".format(func, mod_script, line)
 
 class HardCoded:
+    '''
+        It's sole purpose is to increase responsbility of test author when there is a need for `time.sleep`
+    '''
 
     @classmethod
     def __log(cls, invoker, why, seconds):
-        from arjuna import Arjuna
-        Arjuna.get_logger().warning("Hardcoded sleep executed for {} seconds by {}. Reason by author: {}".format(seconds, invoker, why))
+        from arjuna import log_warning
+        log_warning("Hardcoded sleep executed for {} seconds by {}. Reason by author: {}".format(seconds, invoker, why))
 
     @classmethod
-    def sleep(cls, why, seconds):
+    def sleep(cls, why: str, seconds: float) -> None:
+        '''
+            Fixed/Static sleep.
+
+            Logs a warning message mentioning the caller, reason and number of seconds.
+            Arguments:
+                why: Reason for using static wait instead of dynamic waits that Arjuna provides.
+                seconds: Number of seconds for sleeping.
+        '''
         time.sleep(seconds)
-        cls.__log(Stack.get_invoker(), why, seconds)
+        cls.__log(_Stack.get_invoker(), why, seconds)
