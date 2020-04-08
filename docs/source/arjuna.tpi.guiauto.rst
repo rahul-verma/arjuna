@@ -6,10 +6,10 @@ Subpackages
 
 .. toctree::
 
-   arjuna.tpi.guiauto.element
    arjuna.tpi.guiauto.model
+   arjuna.tpi.guiauto.obj
    arjuna.tpi.guiauto.source
-   arjuna.tpi.guiauto.template
+   arjuna.tpi.guiauto.widget
 
 Submodules
 ----------

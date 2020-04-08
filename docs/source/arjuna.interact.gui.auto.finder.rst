@@ -7,11 +7,11 @@ Submodules
 .. toctree::
 
    arjuna.interact.gui.auto.finder.element_finder
-   arjuna.interact.gui.auto.finder.emd
    arjuna.interact.gui.auto.finder.enums
    arjuna.interact.gui.auto.finder.meta
    arjuna.interact.gui.auto.finder.translator
    arjuna.interact.gui.auto.finder.withx
+   arjuna.interact.gui.auto.finder.wmd
 
 Module contents
 ---------------

@@ -217,13 +217,13 @@ class Formatter:
     def __init__(self, **kwargs):
         self.__fargs = kwargs
 
-    def locator(self, template="element", **kwargs):
-        return Locator(template=template, fmt_args=self.__fargs, **kwargs)
+    def locator(self, type="element", **kwargs):
+        return Locator(type=type, fmt_args=self.__fargs, **kwargs)
 
 class Locator(Dictable):
 
-    def __init__(self, template="element", fmt_args=None, **named_args):
-        self.__template = template
+    def __init__(self, type="element", fmt_args=None, **named_args):
+        self.__widget_type = type
 
         self.__fmt_args = fmt_args
         if self.__fmt_args is None:
@@ -233,12 +233,12 @@ class Locator(Dictable):
 
         from arjuna.interact.gui.auto.finder.meta import Meta
         self.__meta = Meta({
-            "template" : template,
+            "type" : type,
         })
 
     @property
-    def template(self):
-        return self.__template
+    def widget_type(self):
+        return self.__widget_type
 
     @property
     def fmt_args(self):
@@ -251,13 +251,13 @@ class Locator(Dictable):
     def __str__(self):
         return str(
             {
-                "template": self.template,
+                "type": self.widget_type,
                 "fmt_args": self.fmt_args,
                 "meta": str(self.__meta)
             }
         )
 
-    def as_raw_emd(self):
+    def as_raw_wmd(self):
         from arjuna import Arjuna
         from arjuna.interact.gui.auto.finder._with import With
         from arjuna.interact.gui.auto.finder.enums import WithType
@@ -277,13 +277,13 @@ class Locator(Dictable):
                 self.__meta[k] = v
         if not with_list:
             raise Exception("You must provide atleast one locator.")
-        from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
-        return GuiElementMetaData.create_emd(*with_list, meta=self.__meta)
+        from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
+        return GuiWidgetMetaData.create_wmd(*with_list, meta=self.__meta)
 
-    def as_emd(self):
-        emd = self.as_raw_emd()
-        fmt_emd = emd.create_formatted_emd(**self.__fmt_args)
-        return fmt_emd
+    def as_wmd(self):
+        wmd = self.as_raw_wmd()
+        fmt_wmd = wmd.create_formatted_wmd(**self.__fmt_args)
+        return fmt_wmd
 
 
 

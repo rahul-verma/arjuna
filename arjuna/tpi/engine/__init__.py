@@ -90,7 +90,7 @@ class ArjunaSingleton:
         self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.LOG_DIR))
         self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.SCREENSHOTS_DIR))
 
-        from .logger import Logger
+        from arjuna.engine.logger import Logger
         self.__logger = Logger(self.__ref_config)
 
         # Load data references

@@ -17,11 +17,11 @@
 
 class Locatable:
 
-    def __init__(self, gui, emd):
+    def __init__(self, gui, wmd):
         # super().__init__(automator.config) #, obj_name)
         self.__gui = gui
         self.__automator = gui.automator
-        self.__emd = emd
+        self.__wmd = wmd
         self.__located = False
         self.__located_by = None 
 
@@ -36,8 +36,8 @@ class Locatable:
         return self.__automator
 
     @property
-    def emd(self):
-        return self.__emd
+    def wmd(self):
+        return self.__wmd
 
     @property
     def is_located(self):

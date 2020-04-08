@@ -26,8 +26,8 @@ from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from .drivercaps import DriverCapabilities
 from arjuna.tpi.guiauto.source import ElementXMLSourceParser
 from arjuna.interact.gui.dispatcher.selenium.driver import SeleniumDriverDispatcher
-from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
-from arjuna.tpi.guiauto.element import GuiElement
+from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
+from arjuna.tpi.guiauto.widget.element import GuiElement
 
 class GuiAutomator(ElementContainer,Dispatchable):
 
@@ -70,8 +70,8 @@ class GuiAutomator(ElementContainer,Dispatchable):
     def screenshots_dir(self):
         return self.__screenshots_dir
 
-    def create_emd(self, *locators):
-        return GuiElementMetaData.create_emd(*locators)
+    def create_wmd(self, *locators):
+        return GuiWidgetMetaData.create_wmd(*locators)
 
     def get_source_from_remote(self):
         return self.dispatcher.get_source()
@@ -96,8 +96,8 @@ class GuiAutomator(ElementContainer,Dispatchable):
     def main_window(self):
         return self.__main_window
 
-    def child_window(self, emd):
-        return self.get_main_window().get_child_window(emd)
+    def child_window(self, wmd):
+        return self.get_main_window().get_child_window(wmd)
 
     @property
     def latest_child_window(self):
@@ -107,11 +107,11 @@ class GuiAutomator(ElementContainer,Dispatchable):
         self.main_window.close_all_child_windows()
 
     def get_dom_root(self, gui):
-        from arjuna.tpi.guiauto.template.frame import DomRoot
+        from arjuna.tpi.guiauto.widget.frame import DomRoot
         return DomRoot(gui)
 
-    def get_frame(self, gui, emd):
-        return self.dom_root(gui).frame(emd)
+    def get_frame(self, gui, wmd):
+        return self.dom_root(gui).frame(wmd)
 
     @property
     def alert_handler(self):
@@ -138,7 +138,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         caps = DriverCapabilities(self.config, self.__econfig)
         self.dispatcher.launch(caps.processed_config)
 
-        from arjuna.tpi.guiauto.template.window import MainWindow
+        from arjuna.tpi.guiauto.obj.window import MainWindow
         self.__main_window = MainWindow(self.app, self)
 
         from .browser import Browser
@@ -202,25 +202,25 @@ class GuiAutomator(ElementContainer,Dispatchable):
 
     #### Element Finding
 
-    def element(self, gui, emd):
-        from arjuna.tpi.guiauto.element import GuiElement
-        gui_element = GuiElement(gui, emd) 
+    def element(self, gui, wmd):
+        from arjuna.tpi.guiauto.widget.element import GuiElement
+        gui_element = GuiElement(gui, wmd) 
         self.load_element(gui_element)
         return gui_element
 
-    def multi_element(self, gui, emd):
-        from arjuna.tpi.guiauto.template.multielement import GuiMultiElement
-        m_guielement = GuiMultiElement(gui, emd)
+    def multi_element(self, gui, wmd):
+        from arjuna.tpi.guiauto.widget.multielement import GuiMultiElement
+        m_guielement = GuiMultiElement(gui, wmd)
         self.load_multielement(m_guielement)
         return m_guielement
 
-    def dropdown(self, gui, emd):
-        from arjuna.tpi.guiauto.template.dropdown import GuiWebSelect
-        return GuiWebSelect(gui, emd)
+    def dropdown(self, gui, wmd):
+        from arjuna.tpi.guiauto.widget.dropdown import GuiWebSelect
+        return GuiWebSelect(gui, wmd)
 
-    def radio_group(self, gui, emd):
-        from arjuna.tpi.guiauto.template.radio_group import GuiWebRadioGroup
-        return GuiWebRadioGroup(gui, emd)
+    def radio_group(self, gui, wmd):
+        from arjuna.tpi.guiauto.widget.radio_group import GuiWebRadioGroup
+        return GuiWebRadioGroup(gui, wmd)
 
     def execute_javascript(self, js, *args):
         return self.browser.execute_javascript(js, 

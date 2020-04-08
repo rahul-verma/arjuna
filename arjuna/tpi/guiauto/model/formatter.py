@@ -7,11 +7,11 @@ class GNSFormatter:
         self.__fargs = fargs
 
     def __getattr__(self, name):
-        emd = self.__gui_def.get_emd(name)
+        wmd = self.__gui_def.get_wmd(name)
         from arjuna import log_debug
-        log_debug("Finding element with label: {}, emd: {} and fargs: {}".format(name, emd, self.__fargs))
-        fmt_emd = emd.create_formatted_emd(**self.__fargs)
-        return self.__gns.locate_with_emd(fmt_emd)
+        log_debug("Finding element with label: {}, wmd: {} and fargs: {}".format(name, wmd, self.__fargs))
+        fmt_wmd = wmd.create_formatted_wmd(**self.__fargs)
+        return self.__gns.locate_with_wmd(fmt_wmd)
 
 
 class WithFormatter:

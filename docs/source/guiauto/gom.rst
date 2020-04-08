@@ -1,4 +1,4 @@
-.. _element:
+.. _gom:
 
 Advanced Gui Abstraction
 ========================
@@ -10,7 +10,7 @@ Graphical User Interfaces are represented using the `Gui` class in Arjuna. It pr
 
 Arjuna has three types of `Gui`'s, namely `GuiApp`, `GuiPage` and `GuiSection` and any children thereof. 
 
-Note that `GuiWidget` and `GuiDialog` are aliases for `GuiSection`currently, but this behavior could change in future.
+Note that `GuiDialog` is an alias for `GuiSection`currently, but this behavior could change in future.
 
 The GuiApp Class
 ^^^^^^^^^^^^^^^^

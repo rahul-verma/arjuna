@@ -78,14 +78,6 @@ class LocatorTranslator:
             elif gltype in cls.NAMED_ARG_LOCATORS:
                 glvalue = cls.NAMED_ARG_LOCATORS[gltype].format(**rlvalue)
                 gltype = GenericLocateWith.XPATH
-            elif gltype == GenericLocateWith.TYPE:
-                try:
-                    elem_type = GuiElementType[rlvalue.upper()]
-                except:
-                    raise Exception("Unsupported element type for XTYPE locator: " + rlvalue)
-                else:
-                    glvalue = cls.XTYPE_LOCATORS[elem_type]
-                    gltype = GenericLocateWith.XPATH
             elif gltype == GenericLocateWith.CLASSES:
                 css_string = None
                 if type(rlvalue) is str:

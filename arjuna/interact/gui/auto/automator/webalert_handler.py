@@ -27,7 +27,7 @@ class WebAlertHandler:
             return self.__alert
         else:
             self.wait()
-            from arjuna.tpi.guiauto.template.webalert import WebAlert
+            from arjuna.tpi.guiauto.widget.webalert import WebAlert
             self.__alert_present = True
             alert = WebAlert(self.__automator)
             self.__alert = alert

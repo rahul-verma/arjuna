@@ -310,7 +310,7 @@ class LoggingLevel(Enum):
     ERROR = auto()
     FATAL = auto()
 
-class GuiTemplate(Enum):
+class GuiWidgetType(Enum):
     ELEMENT = auto()
     MULTI_ELEMENT = auto()
     DROPDOWN = auto()

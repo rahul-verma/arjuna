@@ -27,12 +27,19 @@ Following is the high level format for simple usage:
     <labelN>:
         <locator type>: <locator data>
 
-1. This file has a `YAML` extension.
-2. All labels are placed under `labels` heading.
-3. Each label represents element identification information which can be later referenced by this label.
-3. The label should be a valid Arjuna name.
-4. In its basic usage format, the section has a key value pair for a given locator type. For example `id: user_login`.
-5. Labels are treated as **case-insensitive** by Arjuna.
+
+#. This file has a `YAML` extension.
+#. All labels are placed under `labels` heading.
+#. Each label represents element identification information which can be later referenced by this label.
+#. The label should be a valid Arjuna name.
+#. In its basic usage format, the section has a key value pair for a given locator type. For example 
+
+    .. code-block:: YAML
+
+        id: user_login
+
+#. Labels are treated as case-insensitive by Arjuna.
+
 
 Associating GNS File with App
 -----------------------------
@@ -132,9 +139,6 @@ Following is a sample GNS file for the above locators:
         fattr:
             name: for
             value: user_login
-   
-    pass_type:
-        type: password
 
     button_classes_str:
         classes: button button-large

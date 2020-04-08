@@ -39,17 +39,17 @@ class ElementContainer(metaclass=abc.ABCMeta):
     def max_wait(self):
         return self.config.value("guiauto.max.wait")
 
-    def __elem_wait(self, emd):
-        return emd.max_wait and emd.max_wait or self.max_wait
+    def __elem_wait(self, wmd):
+        return wmd.max_wait and wmd.max_wait or self.max_wait
 
-    def wait_until_element_absent(self, emd):
-        return self.__container_conditions.AbsenceOfElement(emd).wait(max_wait=self.__elem_wait(emd))
+    def wait_until_element_absent(self, wmd):
+        return self.__container_conditions.AbsenceOfElement(wmd).wait(max_wait=self.__elem_wait(wmd))
 
     def wait_until_element_found(self, gui_element):
-        return self.__container_conditions.PresenceOfElement(gui_element).wait(max_wait=self.__elem_wait(gui_element.emd))
+        return self.__container_conditions.PresenceOfElement(gui_element).wait(max_wait=self.__elem_wait(gui_element.wmd))
 
     def wait_until_multielement_found(self, multi_guielement):
-        return self.__container_conditions.PresenceOfMultiElement(multi_guielement).wait(max_wait=self.__elem_wait(multi_guielement.emd))
+        return self.__container_conditions.PresenceOfMultiElement(multi_guielement).wait(max_wait=self.__elem_wait(multi_guielement.wmd))
 
     def load_multielement(self, multi_guielement):
         locator_type, locator_value, size, dispatcher = self.wait_until_multielement_found(multi_guielement)

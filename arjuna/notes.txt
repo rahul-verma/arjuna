@@ -496,9 +496,9 @@ unitee {
             db.central.dir = ${project.root.dir}"/core/db/central"
             db.central.dbfile = ${project.root.dir}"/core/db/central.ads"
             db.allrun.dir = ${project.root.dir}"/core/db/run/"
-            db.template.dir = ${project.root.dir}"/core/db/template"
-            db.template.central.dbfile = ${project.root.dir}"/core/db/template/ctemp.ads"
-            db.template.run.dbfile = ${project.root.dir}"/core/db/template/rtemp.ads"
+            db.widget.dir = ${project.root.dir}"/core/db/template"
+            db.widget.central.dbfile = ${project.root.dir}"/core/db/template/ctemp.ads"
+            db.widget.run.dbfile = ${project.root.dir}"/core/db/template/rtemp.ads"
         }
 
         reporter.mode = str
@@ -578,9 +578,9 @@ unitee {
             db.central.dir = absolute_dir_path
             db.central.dbfile = absolute_dir_path
             db.allrun.dir = absolute_dir_path
-            db.template.dir = absolute_dir_path
-            db.template.central.dbfile = absolute_dir_path
-            db.template.run.dbfile = absolute_dir_path
+            db.widget.dir = absolute_dir_path
+            db.widget.central.dbfile = absolute_dir_path
+            db.widget.run.dbfile = absolute_dir_path
         }
 
         reporter.mode = str

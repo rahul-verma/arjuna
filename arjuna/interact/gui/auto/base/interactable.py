@@ -17,13 +17,13 @@
 
 from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
 from arjuna.tpi.guiauto.source import ElementXMLSourceParser
-from arjuna.core.exceptions import GuiElementTextNotSetError
+from arjuna.core.exceptions import GuiWidgetTextNotSetError
 
 class Interactable(Dispatchable):
 
-    def __init__(self, gui, emd): #, parent=None, find=True):
+    def __init__(self, gui, wmd): #, parent=None, find=True):
         self.__config = gui.automator.config
-        self.__emd = emd
+        self.__wmd = wmd
         Dispatchable.__init__(self)
         self.__source = None
 
@@ -82,7 +82,7 @@ class Interactable(Dispatchable):
         self._only_send_text(text)
         entered_text = self.dispatcher.get_attr_value("value")
         if entered_text != text:
-            raise GuiElementTextNotSetError("Expected text: {}. Actual text is {}".format(text, entered_text))
+            raise GuiWidgetTextNotSetError("Expected text: {}. Actual text is {}".format(text, entered_text))
 
     def _only_click(self):
         # if self._should_scroll_to_view():
@@ -159,7 +159,7 @@ class Interactable(Dispatchable):
         return self.__interaction_handler
 
     def __wait_until_clickable_if_configured(self):
-        if self.__emd.meta.settings.should_check_pre_state(): self.wait_until_clickable()
+        if self.__wmd.meta.settings.should_check_pre_state(): self.wait_until_clickable()
 
     # Properties
     @property

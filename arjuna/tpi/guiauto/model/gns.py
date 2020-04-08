@@ -37,39 +37,39 @@ class GNS:
     def format(self, **kwargs):
         return GNSFormatter(self, self.__gui_def, **kwargs)
 
-    def __get_emd_for_label(self, label):
-        emd = self.__gui_def.get_emd(label)
-        return emd.create_formatted_emd() # Only globals will be processed.
+    def __get_wmd_for_label(self, label):
+        wmd = self.__gui_def.get_wmd(label)
+        return wmd.create_formatted_wmd() # Only globals will be processed.
 
     def wait_until_absent(self, *labels):
         waiter = getattr(self.__container, "_" + "wait_until_absent")
         for label in labels:
-            emd = self.__get_emd_for_label(label)
+            wmd = self.__get_wmd_for_label(label)
             try:
-                waiter(emd)
-            except GuiElementPresentError:
-                raise GuiElementForLabelPresentError(self.__gui, label)    
+                waiter(wmd)
+            except GuiWidgetPresentError:
+                raise GuiWidgetForLabelPresentError(self.__gui, label)    
 
     def contains(self, *labels):
         for label in labels:
             try:
                 getattr(self, label)
-            except GuiElementForLabelNotPresentError:
+            except GuiWidgetForLabelNotPresentError:
                 continue
             else:
                 return True
         return False
 
-    def locate_with_emd(self, emd):
-        factory = getattr(self.__finder, emd.meta["template"].name.lower())
-        return factory(emd)
+    def locate_with_wmd(self, wmd):
+        factory = getattr(self.__finder, wmd.meta["type"].name.lower())
+        return factory(wmd)
         
 
     def __getattr__(self, label):
-        emd = self.__get_emd_for_label(label)
+        wmd = self.__get_wmd_for_label(label)
         from arjuna import log_debug
-        log_debug("Finding element with label: {} and emd: {}".format(label, emd))
+        log_debug("Finding element with label: {} and wmd: {}".format(label, wmd))
         try:
-            return self.locate_with_emd(emd)
+            return self.locate_with_wmd(wmd)
         except ArjunaTimeoutError:
-            raise GuiElementForLabelNotPresentError(self.__gui, label)
+            raise GuiWidgetForLabelNotPresentError(self.__gui, label)

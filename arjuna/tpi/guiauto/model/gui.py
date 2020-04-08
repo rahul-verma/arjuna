@@ -20,7 +20,7 @@ import os
 from enum import Enum
 import functools
 
-from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.guiauto.helpers import Dictable
 
 from arjuna.interact.gui.gom.guidef import *
@@ -155,7 +155,7 @@ class AppContent(Gui):
         self.__gns = None
 
         self.__finder = GuiFinder(self)
-        self.__emd_finder = GuiEmdFinder(self)
+        self.__wmd_finder = GuiEmdFinder(self)
         
     def _load_gns(self):
         self.__gns = GNS(self, self.gui_def)
@@ -169,8 +169,8 @@ class AppContent(Gui):
         return self.__finder
 
     @property
-    def emd_finder(self):
-        return self.__emd_finder
+    def wmd_finder(self):
+        return self.__wmd_finder
 
     @property
     def app(self):
@@ -212,21 +212,21 @@ class AppContent(Gui):
     def format(self, **kwargs):
         return WithFormatter(self, **kwargs)
 
-    def _wait_until_absent(self, emd):
+    def _wait_until_absent(self, wmd):
         try:
-            self.automator.wait_until_element_absent(emd)
+            self.automator.wait_until_element_absent(wmd)
         except ArjunaTimeoutError:
-            raise GuiElementPresentError(self, emd)         
+            raise GuiWidgetPresentError(self, wmd)         
 
     def wait_until_absent(self, *, fargs=None, **kwargs):
         from arjuna.tpi.guiauto.helpers import Locator
-        emd = Locator(fmt_args=fargs, **kwargs).as_emd()
-        self._wait_until_absent(emd)
+        wmd = Locator(fmt_args=fargs, **kwargs).as_wmd()
+        self._wait_until_absent(wmd)
 
     def contains(self, *, fargs=None, **kwargs):
         try:
             self.element(fargs=fargs, **kwargs)
-        except GuiElementNotPresentError:
+        except GuiWidgetNotPresentError:
             return False
         else:
             return True
@@ -236,7 +236,7 @@ class AppContent(Gui):
         return self.automator.dom_root(self)
 
     def frame(self, *str_or_with_locators):
-        return self.automator.frame(self, self.convert_to_with_emd(*str_or_with_locators))
+        return self.automator.frame(self, self.convert_to_with_wmd(*str_or_with_locators))
 
     @property
     def alert(self):
@@ -251,7 +251,7 @@ class AppContent(Gui):
         return self.automator.main_window
 
     def child_window(self, *str_or_with_locators):
-        return self.automator.child_window(self.convert_to_with_emd(*str_or_with_locators))
+        return self.automator.child_window(self.convert_to_with_wmd(*str_or_with_locators))
 
     @property
     def latest_child_window(self):

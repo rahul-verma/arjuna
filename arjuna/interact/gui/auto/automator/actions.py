@@ -17,7 +17,7 @@
 
 # from arjuna.tpi.enums import ArjunaOption
 # from arjuna.client.core.action import *
-# from arjuna.interact.gui.auto.finder.emd import SimpleGuiElementMetaData
+# from arjuna.interact.gui.auto.finder.wmd import SimpleGuiWidgetMetaData
 
 # from .guiautomator import GuiAutomator
 # from .handler import Handler
@@ -26,7 +26,7 @@
 
 #     def __init__(self, automator, element=None):
 #         super().__init__(automator)
-#         from arjuna.interact.gui.auto.element.frame import DomRoot
+#         from arjuna.interact.gui.auto.widget.frame import DomRoot
 #         self.__automator = automator
 #         self.__element = element
 #         self.__attached_to_element = element is not None
@@ -66,8 +66,8 @@
 #                     target_element_id = self.get_target_element(action)
 #                     target_element = self.__automator.get_element_for_setu_id(target_element_id)
 #                 elif self.contains_target_point(action):
-#                     emd = SimpleGuiElementMetaData("point", self.get_target_point(action))
-#                     element = self.__automator.create_element(emd)
+#                     wmd = SimpleGuiWidgetMetaData("point", self.get_target_point(action))
+#                     element = self.__automator.create_element(wmd)
                 
 #                 if target_element:
 #                     target_element.find_if_not_found()

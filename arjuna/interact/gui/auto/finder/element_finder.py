@@ -16,8 +16,8 @@
 # limitations under the License.
 
 import abc
-from arjuna.core.exceptions import WaitableError, _GuiElementPresentError
-from arjuna.tpi.exceptions import GuiElementNotFoundError
+from arjuna.core.exceptions import WaitableError, _GuiWidgetPresentError
+from arjuna.tpi.exceptions import GuiWidgetNotFoundError
 
 class ElementFinder:
     def __init__(self, container): #, obj_name=""):
@@ -34,30 +34,30 @@ class ElementFinder:
         return self.__container
 
     @abc.abstractmethod
-    def _create_element_flat_or_nested(self, emd):
+    def _create_element_flat_or_nested(self, wmd):
         pass
 
     @abc.abstractmethod
-    def _create_multielement_flat_or_nested(self, emd):
+    def _create_multielement_flat_or_nested(self, wmd):
         pass
 
-    def check_for_absence(self, dispatcher_call, emd, context="ELEMENT"):
+    def check_for_absence(self, dispatcher_call, wmd, context="ELEMENT"):
         try:
-            self.find(dispatcher_call, emd, context)
-        except GuiElementNotFoundError as e:
+            self.find(dispatcher_call, wmd, context)
+        except GuiWidgetNotFoundError as e:
             # This is expected
             pass
         else:
-            raise _GuiElementPresentError(*emd.locators)
+            raise _GuiWidgetPresentError(*wmd.locators)
 
-    def find(self, dispatcher_call, emd, context="ELEMENT"):
+    def find(self, dispatcher_call, wmd, context="ELEMENT"):
         from arjuna import Arjuna
-        Arjuna.get_logger().debug("Finding with emd: {}".format(str(emd)))
+        Arjuna.get_logger().debug("Finding with wmd: {}".format(str(wmd)))
         from arjuna import Arjuna
         found = False
         js_call_name = context == "ELEMENT" and "find_element_with_js" or "find_multielement_with_js"
         js_call = getattr(self.container, js_call_name)
-        locators = emd.locators
+        locators = wmd.locators
         if context != "ELEMENT":
             if "POINT" in {l.ltype.name for l in locators}:
                 raise ConditionException("With.POINT can be used only with GuiElement.")
@@ -84,4 +84,4 @@ class ElementFinder:
             else:
                 we = None
         if not found:
-            raise GuiElementNotFoundError(*emd.locators, container=self.__container)
+            raise GuiWidgetNotFoundError(*wmd.locators, container=self.__container)

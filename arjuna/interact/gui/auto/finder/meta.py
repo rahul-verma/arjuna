@@ -64,20 +64,20 @@ class Meta:
 
     def __init__(self, mdict=None):
         self.__mdict = not mdict and CIStringDict() or CIStringDict(mdict)
-        from arjuna.core.enums import GuiTemplate
-        if "template" in self.__mdict:
+        from arjuna.core.enums import GuiWidgetType
+        if "type" in self.__mdict:
             try:
-                template = self.__mdict["template"]
-                if not isinstance(template, GuiTemplate):
-                    self.__mdict["template"] = GuiTemplate[template.upper()]
+                widget_type = self.__mdict["type"]
+                if not isinstance(widget_type, GuiWidgetType):
+                    self.__mdict["type"] = GuiWidgetType[widget_type.upper()]
             except Exception as e:
-                raise Exception("{} is not a valid template type.".format(template))
+                raise Exception("{} is not a valid Gui widget type.".format(widget_type))
         else:
-            self.__mdict["template"] = GuiTemplate.ELEMENT
+            self.__mdict["type"] = GuiWidgetType.ELEMENT
         self.__mdict["settings"] = InteractionConfig(self.__mdict) # Interconfig keys are removed
 
-    def update_settings(self, source_emd):
-        self.settings.update(source_emd.meta.settings)
+    def update_settings(self, source_wmd):
+        self.settings.update(source_wmd.meta.settings)
 
     def items(self):
         return self.__mdict.items()

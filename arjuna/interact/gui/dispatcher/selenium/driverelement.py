@@ -60,7 +60,7 @@ class SeleniumDriverElementDispatcher:
         try:
             DriverElementCommands.click(self.driver_element)
         except Exception as e:
-            raise GuiElementNotReadyError(str(e))
+            raise GuiWidgetNotReadyError(str(e))
 
     def hover(self):
         self.__driver_dispatcher.hover_on_element(self)

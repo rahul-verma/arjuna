@@ -32,24 +32,24 @@ class GuiEmdFinder:
 class GuiFinder:
 
     def __init__(self, gui):
-        self.__emd_finder = GuiEmdFinder(gui)
+        self.__wmd_finder = GuiEmdFinder(gui)
         self.__gui = gui
 
     def locate(self, locator):
         from arjuna import log_debug
         from arjuna.core.exceptions import ArjunaTimeoutError
-        from arjuna.tpi.exceptions import GuiElementNotPresentError
+        from arjuna.tpi.exceptions import GuiWidgetNotPresentError
         
-        emd = locator.as_emd()
-        log_debug("Finding element with emd: {}.".format(emd))
+        wmd = locator.as_wmd()
+        log_debug("Finding element with wmd: {}.".format(wmd))
         try:
-            return getattr(self.__emd_finder, emd.meta["template"].name.lower())(emd)
+            return getattr(self.__wmd_finder, wmd.meta["type"].name.lower())(wmd)
         except ArjunaTimeoutError:
-            raise GuiElementNotPresentError(self.__gui, emd)         
+            raise GuiWidgetNotPresentError(self.__gui, wmd)         
 
     def __locate_interim(self, name):
         def finder(fargs=None, **kwargs):
-            locator = Locator(template=name, fmt_args=fargs, **kwargs)
+            locator = Locator(type=name, fmt_args=fargs, **kwargs)
             return self.locate(locator)
         return finder
 
@@ -61,39 +61,39 @@ class GuiElementEmdFinder:
     def __init__(self, gui_element):
         self.__gui_element = gui_element
 
-    def element(self, emd):
-        from arjuna.tpi.guiauto.element import GuiElement
-        gui_element = GuiElement(self.__gui_element.gui, emd)
+    def element(self, wmd):
+        from arjuna.tpi.guiauto.widget.element import GuiElement
+        gui_element = GuiElement(self.__gui_element.gui, wmd)
         self.__gui_element.load_element(gui_element)
         return gui_element
 
-    def multi_element(self, emd):
-        from arjuna.tpi.guiauto.template.multielement import GuiMultiElement
-        m_guielement = GuiMultiElement(self.__gui_element.gui, emd)
+    def multi_element(self, wmd):
+        from arjuna.tpi.guiauto.widget.multielement import GuiMultiElement
+        m_guielement = GuiMultiElement(self.__gui_element.gui, wmd)
         self.__gui_element.load_multielement(m_guielement)
         return m_guielement
 
 class GuiElementFinder:
 
     def __init__(self, gui_element):
-        self.__emd_finder = GuiElementEmdFinder(gui_element)
+        self.__wmd_finder = GuiElementEmdFinder(gui_element)
         self.__gui_element = gui_element
 
     def locate(self, locator):
         from arjuna import log_debug
         from arjuna.core.exceptions import ArjunaTimeoutError
-        from arjuna.tpi.exceptions import GuiElementNotPresentError
+        from arjuna.tpi.exceptions import GuiWidgetNotPresentError
 
-        emd = locator.as_emd()
-        log_debug("Finding element with emd: {}.".format(emd))
+        wmd = locator.as_wmd()
+        log_debug("Finding element with wmd: {}.".format(wmd))
         try:
-            return getattr(self.__emd_finder, emd.meta["template"].name.lower())(emd)
+            return getattr(self.__wmd_finder, wmd.meta["type"].name.lower())(wmd)
         except ArjunaTimeoutError:
-            raise GuiElementNotPresentError(self.__gui_element.gui, self.__gui_element)          
+            raise GuiWidgetNotPresentError(self.__gui_element.gui, self.__gui_element)          
 
     def __locate_interim(self, name):
         def finder(fargs=None, **kwargs):
-            locator = Locator(template=name, fmt_args=None, **kwargs)
+            locator = Locator(type=name, fmt_args=None, **kwargs)
             return self.locate(locator)
         return finder
 

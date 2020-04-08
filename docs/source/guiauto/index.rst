@@ -9,5 +9,5 @@ Web GUI Automation
    guiapp
    element
    gns
-   templates
+   widgets
    gom

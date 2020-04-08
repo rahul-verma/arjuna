@@ -18,7 +18,7 @@
 import os
 
 from .nsloader import GuiNamespaceLoaderFactory
-from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.interact.gui.auto.finder._with import With, Locator
 from arjuna.tpi.exceptions import GuiLabelNotPresentError
 
@@ -59,7 +59,7 @@ class GuiDef:
     def is_empty(self):
         return seff.__ns.is_empty()
 
-    def get_emd(self, label):
+    def get_wmd(self, label):
         return self.__ns.get_meta_data(label, self.__auto_context)
 
     @property
@@ -109,9 +109,9 @@ class GuiFactory:
 # Temp back from GuiDef of older implementation
 
 # def __gns_locators_as_with_locators(self, label):
-#     emd = self.__ns.get_meta_data(label, self.__auto_context)
+#     wmd = self.__ns.get_meta_data(label, self.__auto_context)
 #     out = []
-#     for loc in emd.raw_locators:
+#     for loc in wmd.raw_locators:
 #         underscore = loc.ltype.lower().endswith("attr") and "_" or ""
 #         wobj = getattr(With, underscore + loc.ltype.lower()) (loc.lvalue)# e.g. getattr(With, "_" + "ID".lower())("abc")
 #         out.append(wobj)
@@ -128,12 +128,12 @@ class GuiFactory:
 #             wobj.format(**locator.named_args)
 #         out_list.append(wobj)
 #     return out_list
-# def convert_to_emd(self, *locators):
+# def convert_to_wmd(self, *locators):
 #     final_locators = []
 #     for raw_locator in locators:
 #         if raw_locator.wtype.upper().strip() == "LABEL":
-#             emd = self.get_emd(raw_locator.wvalue)
-#             for loc in emd.raw_locators:
+#             wmd = self.get_wmd(raw_locator.wvalue)
+#             for loc in wmd.raw_locators:
 #                 if not raw_locator.named_args:
 #                     final_locators.append(Locator(ltype=loc.ltype, lvalue=loc.lvalue), named_args={})
 #                 else:
@@ -143,4 +143,4 @@ class GuiFactory:
 #                 final_locators.append(Locator(ltype=raw_locator.wtype, lvalue=raw_locator.wvalue), named_args={})
 #             else:
 #                 final_locators.append(Locator(ltype=raw_locator.ltype, lvalue=raw_locator.lvalue), named_args=raw_locator.named_args)
-#     return GuiElementMetaData(final_locators)
+#     return GuiWidgetMetaData(final_locators)

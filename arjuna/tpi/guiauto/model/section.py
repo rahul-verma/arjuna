@@ -17,7 +17,7 @@
 
 
 from .gui import *
-from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 
 
 class GuiSection(AppContent):
@@ -69,10 +69,10 @@ class GuiSection(AppContent):
         if self.__root_meta:
             label, locator = self.__root_meta
             if self.__root_meta[0] != "anonymous":
-                emd = self.gui_def.get_emd(label)
+                wmd = self.gui_def.get_wmd(label)
                 from arjuna import log_debug
                 log_debug("Loading Root Element {} for Gui GuiSection: {}".format(label, self.label))
-                self.__root_element = self.emd_finder.element(emd)
+                self.__root_element = self.wmd_finder.element(wmd)
             else:
                 from arjuna import log_debug
                 log_debug("Loading Root Element with Locator {} for Gui GuiSection: {}".format(str(locator), self.label))
@@ -105,5 +105,4 @@ class GuiSection(AppContent):
     def parent(self):
         return self.__parent
 
-GuiWidget = GuiSection
 GuiDialog = GuiSection

@@ -25,18 +25,18 @@ labels:
     link: Categories
 
   cat_checkboxes:
-    template: multi_element
+    type: multi_element
     name: "delete_tags[]"
 
   settings:
     link: Settings
 
   role:
-    template: dropdown
+    type: dropdown
     id: default_role
 
   date_format:
-    template: radio_group
+    type: radio_group
     name: date_format
 
   # For nested search
@@ -44,7 +44,7 @@ labels:
     id: loginform
 
   labels:
-    template: multi_element
+    type: multi_element
     tag: label
 
   first_input:

@@ -22,5 +22,5 @@ labels:
     link: Settings
 
   role:
-    template: dropdown
+    type: dropdown
     id: default_role

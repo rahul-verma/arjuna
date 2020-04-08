@@ -167,10 +167,10 @@ Arjuna Exceptions
 =================
 
 * :py:mod:`Exceptions <arjuna.tpi.exceptions>`
-    * :py:class:`GuiElementForLabelPresentError <arjuna.tpi.exceptions.GuiElementForLabelPresentError>`
-    * :py:class:`GuiElementPresentError <arjuna.tpi.exceptions.GuiElementPresentError>`
-    * :py:class:`GuiElementForLabelNotPresentError <arjuna.tpi.exceptions.GuiElementForLabelNotPresentError>`
-    * :py:class:`GuiElementNotPresentError <arjuna.tpi.exceptions.GuiElementNotPresentError>`
+    * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.exceptions.GuiWidgetForLabelPresentError>`
+    * :py:class:`GuiWidgetPresentError <arjuna.tpi.exceptions.GuiWidgetPresentError>`
+    * :py:class:`GuiWidgetForLabelNotPresentError <arjuna.tpi.exceptions.GuiWidgetForLabelNotPresentError>`
+    * :py:class:`GuiWidgetNotPresentError <arjuna.tpi.exceptions.GuiWidgetNotPresentError>`
     * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.exceptions.GuiNamespaceLoadingError>`
     * :py:class:`GuiNotLoadedError <arjuna.tpi.exceptions.GuiNotLoadedError>`
     * :py:class:`GuiLabelNotPresentError <arjuna.tpi.exceptions.GuiLabelNotPresentError>`

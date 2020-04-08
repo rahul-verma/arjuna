@@ -191,10 +191,6 @@ class With(metaclass=_WithXMetaClass):
         return With(WithType.VALUE, value)
 
     @classmethod
-    def type(cls, type):
-        return With(WithType.TYPE, type)
-
-    @classmethod
     def point(cls, point):
         return With(WithType.POINT, point)
 

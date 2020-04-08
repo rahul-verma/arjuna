@@ -19,7 +19,7 @@
 # Raised and consumed by internal implementation of Arjuna
 ##########################################################
 
-from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 
 class ArjunaException(Exception):
     def __init__(self, message, scrreenshots_path=None, child=None):
@@ -128,45 +128,45 @@ class WaitableError(Exception):
 def format_msg(msg):
     return msg and  "Error message: {}".format(message) or ""
 
-class _ElementNotFoundError(WaitableError):
+class _WidgetNotFoundError(WaitableError):
 
     def __init__(self, elem_name, *locators, container=None, message=None):
         container = container and  " in {}".format(container) or ""
         message = format_msg(message)
-        super().__init__("{} not found using any of the locators: {}{}.{}".format(elem_name, GuiElementMetaData.locators_as_str(locators), container, message))
+        super().__init__("{} not found using any of the locators: {}{}.{}".format(elem_name, GuiWidgetMetaData.locators_as_str(locators), container, message))
 
-class _ElementPresentError(WaitableError):
+class _WidgetPresentError(WaitableError):
 
     def __init__(self, elem_type, *locators, message=None):
         message = message = format_msg(message)
-        super().__init__("{} expected to be absent but still present for one of the locators: {}.{}".format(elem_type, GuiElementMetaData.locators_as_str(locators), message))
+        super().__init__("{} expected to be absent but still present for one of the locators: {}.{}".format(elem_type, GuiWidgetMetaData.locators_as_str(locators), message))
 
-class GuiElementNotFoundError(_ElementNotFoundError):
+class GuiWidgetNotFoundError(_WidgetNotFoundError):
 
     def __init__(self, *locators, container=None, message=None):
-        super().__init__("GuiElement(s)", *locators, container=container, message=message)
+        super().__init__("GuiWidget", *locators, container=container, message=message)
 
-class _GuiElementPresentError(_ElementPresentError):
+class _GuiWidgetPresentError(_WidgetPresentError):
 
     def __init__(self, *locators, message=None):
-        super().__init__("GuiElement(s)", *locators, message=message)
+        super().__init__("GuiWidget", *locators, message=message)
 
-class GuiElementNotReadyError(WaitableError):
+class GuiWidgetNotReadyError(WaitableError):
 
     def __init__(self, message):
-        super().__init__("GuiElement(s) is/are NOT ready for interaction. Tool message: {}".format(message))
+        super().__init__("GuiWidget is NOT ready for interaction. Tool message: {}".format(message))
 
-class GuiElementTextNotSetError(WaitableError):
+class GuiWidgetTextNotSetError(WaitableError):
 
     def __init__(self, message):
         super().__init__(". Tool message: {}".format(message))
 
-class ChildWindowNotFoundError(_ElementNotFoundError):
+class ChildWindowNotFoundError(_WidgetNotFoundError):
 
     def __init__(self, *locators):
         super().__init__("Child window", *locators)
 
-class ChildFrameNotFoundError(_ElementNotFoundError):
+class ChildFrameNotFoundError(_WidgetNotFoundError):
 
     def __init__(self, *locators):
         super().__init__("Frame", *locators)

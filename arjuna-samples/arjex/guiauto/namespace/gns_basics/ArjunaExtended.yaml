@@ -22,9 +22,6 @@ labels:
       name: for
       value: user_login
 
-  pass_type:
-    type: password
-
   button_classes_str:
     classes: button button-large
 

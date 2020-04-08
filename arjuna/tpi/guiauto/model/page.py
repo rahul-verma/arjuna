@@ -17,7 +17,7 @@
 
 
 from .gui import *
-from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 
 
 class GuiPage(AppContent):

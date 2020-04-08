@@ -27,43 +27,43 @@ This module defines Exception classes that represent different types of run-time
 
 from arjuna.core.exceptions import *
 
-class GuiElementForLabelPresentError(Exception):
+class GuiWidgetForLabelPresentError(Exception):
     '''
-        Raised when an element corresponding to a GNS label is unexpectedly found. Involves Dynamic Waiting for absence.
-    '''
-
-    def __init__(self, gui, label, message=None):
-        message = format_msg(message)
-        super().__init__("Element corresponding to Label {} in Gui {} is present despite waiting.{}".format(label, gui.label, message))
-
-
-class GuiElementPresentError(Exception):
-    '''
-        Raised when an element is unexpectedly found using a Locator object. Involves Dynamic Waiting for absence.
-    '''
-
-    def __init__(self, gui, emd, message=None):
-        message = format_msg(message)
-        super().__init__("Element corresponding to meta data {} in Gui {} is present despite waiting.{}".format(str(emd), gui.label, message))
-
-class GuiElementForLabelNotPresentError(Exception):
-    '''
-        Raised when an element corresponding to a GNS label is NOT found. Involves Dynamic Waiting for presence.
+        Raised when a GuiWidget corresponding to a GNS label is unexpectedly found. Involves Dynamic Waiting for absence.
     '''
 
     def __init__(self, gui, label, message=None):
         message = format_msg(message)
-        super().__init__("Element corresponding to Label {} in Gui {} is NOT present despite waiting.{}".format(label, gui.label, message))
+        super().__init__("GuiWidget corresponding to Label {} in Gui {} is present despite waiting.{}".format(label, gui.label, message))
 
 
-class GuiElementNotPresentError(Exception):
+class GuiWidgetPresentError(Exception):
     '''
-        Raised when an element is NOT found using a Locator object. Involves Dynamic Waiting for presence.
+        Raised when a GuiWidget is unexpectedly found using a Locator object. Involves Dynamic Waiting for absence.
     '''
 
-    def __init__(self, gui, emd, message=None):
+    def __init__(self, gui, wmd, message=None):
         message = format_msg(message)
-        super().__init__("Element corresponding to meta data {} in Gui {} is NOT present despite waiting.{}".format(str(emd), gui.label, message))
+        super().__init__("GuiWidget corresponding to meta data {} in Gui {} is present despite waiting.{}".format(str(wmd), gui.label, message))
+
+class GuiWidgetForLabelNotPresentError(Exception):
+    '''
+        Raised when a GuiWidget corresponding to a GNS label is NOT found. Involves Dynamic Waiting for presence.
+    '''
+
+    def __init__(self, gui, label, message=None):
+        message = format_msg(message)
+        super().__init__("GuiWidget corresponding to Label {} in Gui {} is NOT present despite waiting.{}".format(label, gui.label, message))
+
+
+class GuiWidgetNotPresentError(Exception):
+    '''
+        Raised when a GuiWidget is NOT found using a Locator object. Involves Dynamic Waiting for presence.
+    '''
+
+    def __init__(self, gui, wmd, message=None):
+        message = format_msg(message)
+        super().__init__("GuiWidget corresponding to meta data {} in Gui {} is NOT present despite waiting.{}".format(str(wmd), gui.label, message))
 
 
 class GuiNamespaceLoadingError(Exception):

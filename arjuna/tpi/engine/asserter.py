@@ -130,7 +130,7 @@ class Asserter:
                 obj: Object of any type
                 msg: A context string explaining why this assertion was done.
         '''
-        self.__asserter.assertTrue(actual, msg)
+        self.__asserter.assertTrue(obj, msg)
 
     def assert_false(self, obj, msg):
         '''

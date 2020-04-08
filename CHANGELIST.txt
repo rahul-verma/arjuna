@@ -3,7 +3,7 @@ Following is the list of critical additions and updates for a given released ver
 0.9.19
 ------
 - Moved private enums and exceptions to arjuna.core module.
-- API Documentation added for:
+- Added doc strings for:
     - DDT Classes
     - Enums
     - Exceptions
@@ -17,6 +17,9 @@ Following is the list of critical additions and updates for a given released ver
     - @track
     - Json
     - xml: NodeLocator and XmlNode
+- Elements in Gui are now referred as widgets (taking a cue from wxPython)
+- `template` in GNS is changed to `type` for easy understandability (stands for widget type, default is element.)
+- (Internal) Locator Meta Data concept has evolved. It now contains meta data about the widget beyond locating it. Its now referred as Gui Widget Meta Data. Reflected in internal class names, messages and exception names.
 
 0.9.18
 ------

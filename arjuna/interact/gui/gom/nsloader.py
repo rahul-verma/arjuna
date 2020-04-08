@@ -24,7 +24,7 @@ from abc import abstractmethod
 from arjuna.tpi.enums import *
 from arjuna.core.enums import *
 from arjuna.tpi.exceptions import GuiLabelNotPresentError
-from arjuna.interact.gui.auto.finder.emd import GuiElementMetaData
+from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.interact.gui.auto.finder._with import ImplWith
 from arjuna.core.yaml import YamlFile
 
@@ -74,20 +74,20 @@ class GuiNamespace:
 
     def __init__(self, name):
         self.__name = name
-        # dict <string, dict<GuiAutomationContext, GuiElementMetaData>>
+        # dict <string, dict<GuiAutomationContext, GuiWidgetMetaData>>
         self.__ns = {}
 
     def is_empty(self):
         return not self.__ns
 
     def add_element_meta_data(self, name, context, raw_locators, meta):
-        emd = GuiElementMetaData.create_emd(*raw_locators, meta=meta)
+        wmd = GuiWidgetMetaData.create_wmd(*raw_locators, meta=meta)
         name = name.lower()
         if not self.has(name):
             self.__ns[name] = {}
-        self.__ns[name][context] = emd
+        self.__ns[name][context] = wmd
         from arjuna import Arjuna
-        Arjuna.get_logger().debug("Loaded {} label. EMD: {}".format(name, str(emd)))
+        Arjuna.get_logger().debug("Loaded {} label. EMD: {}".format(name, str(wmd)))
 
     def add_reference(self, name, value):
         self.__ns[name] = value
@@ -101,7 +101,7 @@ class GuiNamespace:
         return False
 
     # Needs to be thread-safe
-    # Returns emd for a context for a given gui name
+    # Returns wmd for a context for a given gui name
     def get_meta_data(self, label, context):
         msg = ""
         if self.is_empty():
@@ -249,12 +249,12 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
             self.__ns["__root__"] = None
             self.__ns["__anchor__"] = None
 
-        for ename, emd in self.__ns.items():
+        for ename, wmd in self.__ns.items():
             if ename not in {'__root__', '__anchor__'}:
-                context_data = emd["locators"]
+                context_data = wmd["locators"]
                 for context, locators in context_data.items():
-                    self.add_element_meta_data(ename, context, locators, emd["meta"])
-                    Arjuna.get_logger().debug("Loading {} label for {} context with locators: {} and meta {}.".format(ename, context, [str(l) for l in locators], emd["meta"]))
+                    self.add_element_meta_data(ename, context, locators, wmd["meta"])
+                    Arjuna.get_logger().debug("Loading {} label for {} context with locators: {} and meta {}.".format(ename, context, [str(l) for l in locators], wmd["meta"]))
         
         self.add_reference("__root__", self.__ns["__root__"])
         self.add_reference("__anchor__", self.__ns["__anchor__"])

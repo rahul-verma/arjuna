@@ -3,14 +3,16 @@
 Element Identification and Interaction
 ======================================
 
-GuiElement and the element Template
------------------------------------
+GuiElement and Widgets
+----------------------
 
-Arjuna's Gui automation implementation has different types of Gui elements which are associated with corresponding template types.
+Arjuna's Gui automation implementation has different types of Gui Widgets which are associated with corresponding Widget types.
 
 A single node in the DOM of a web UI is represented by a `GuiElement` object in Arjuna, irrespective of its type. This is unless you need specialized methods which we will see later.
 
-The template name for `GuiElement` is `element`. This information is not important here, but will become relevant when we deal with more complex node types.
+The Widget type for `GuiElement` is `element`. This information is not important here, but will become relevant when we deal with more complex node types.
+
+All locators discussed here can be used for any type of Gui Widgets.
 
 Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text, XPath and CSS Selectors
 --------------------------------------------------------------------------------------------
@@ -70,7 +72,6 @@ Following are some examples:
    wordpress.element(value="Log In")
    wordpress.element(attr=Attr("for", "_login"))
    wordpress.element(fattr=Attr("for", "user_login"))
-   wordpress.element(type="password")
    wordpress.element(classes="button button-large")
    wordpress.element(classes=("button", "button-large"))
    wordpress.element(point=Point(1043, 458))
