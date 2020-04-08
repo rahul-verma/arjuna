@@ -195,18 +195,18 @@ class Random:
         return Text(locale).sentence()
 
     @classmethod
-    def fixed_length_number(cls, *, size):
+    def fixed_length_number(cls, *, length):
         '''
             Generate a fixed length number
 
             Keyword Arguments:
-                size: (Optional) locale for generating fixed length number
+                length: Number of digits in generated number.
 
             Returns:
                 A generated fixed length number
         '''
         arr0 = [str(random.randint(1,9))]
-        arr = [str(random.randint(0,9)) for i in range(size-1)]
+        arr = [str(random.randint(0,9)) for i in range(length-1)]
         arr0.extend(arr)
         return "".join(arr0)
         

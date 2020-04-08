@@ -26,10 +26,8 @@ class NodeLocator:
     '''
         Locator for finding an XML Node in an `XmlNode`.
 
-        Arguments:
-            tag: (Optional) Tag of the node
-
         Keyword Arguments:
+            tag: (Optional) Tag of the node
             **attrs: Arbitrary number of key value pairs representing attribute name and value.
 
         Raises:
@@ -41,7 +39,7 @@ class NodeLocator:
             Supports nested node finding.
     '''
     
-    def __init__(self, tag=None, **attrs):
+    def __init__(self, *, tag: str=None, **attrs):
 
         if tag is None and not attrs:
             raise Exception("You must provided tag and/or attributes for finding nodes.")
