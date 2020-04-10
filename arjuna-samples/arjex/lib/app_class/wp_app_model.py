@@ -21,7 +21,7 @@ class WordPress(GuiApp):
 
     def __init__(self):
         url = C("wp.login.url")
-        super().__init__(base_url=url, gns_dir="app_class")
+        super().__init__(url=url, gns_dir="app_class")
         self.launch()
 
     def login(self):

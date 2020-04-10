@@ -39,7 +39,7 @@ class GuiWidgetForLabelPresentError(Exception):
 
 class GuiWidgetPresentError(Exception):
     '''
-        Raised when a GuiWidget is unexpectedly found using a Locator object. Involves Dynamic Waiting for absence.
+        Raised when a GuiWidget is unexpectedly found using a GuiWidgetLocator object. Involves Dynamic Waiting for absence.
     '''
 
     def __init__(self, gui, wmd, message=None):
@@ -58,7 +58,7 @@ class GuiWidgetForLabelNotPresentError(Exception):
 
 class GuiWidgetNotPresentError(Exception):
     '''
-        Raised when a GuiWidget is NOT found using a Locator object. Involves Dynamic Waiting for presence.
+        Raised when a GuiWidget is NOT found using a GuiWidgetLocator object. Involves Dynamic Waiting for presence.
     '''
 
     def __init__(self, gui, wmd, message=None):

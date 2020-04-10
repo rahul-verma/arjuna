@@ -20,13 +20,13 @@ class GNS:
     def __process_container(self, gui_or_element):
         from .gui import Gui
         if isinstance(gui_or_element, Gui):
-            if not gui_or_element.root_element:
+            if not gui_or_element._root_element:
                 self.__container_type = "gui"
                 self.__container = gui_or_element
                 self.__gui = gui_or_element
             else:
                 self.__container_type = "element"
-                self.__container = gui_or_element.root_element
+                self.__container = gui_or_element._root_element
                 self.__gui = gui_or_element
         else:
             self.__container_type = "element"

@@ -218,9 +218,9 @@ class Formatter:
         self.__fargs = kwargs
 
     def locator(self, type="element", **kwargs):
-        return Locator(type=type, fmt_args=self.__fargs, **kwargs)
+        return GuiWidgetLocator(type=type, fmt_args=self.__fargs, **kwargs)
 
-class Locator(Dictable):
+class GuiWidgetLocator(Dictable):
 
     def __init__(self, type="element", fmt_args=None, **named_args):
         self.__widget_type = type

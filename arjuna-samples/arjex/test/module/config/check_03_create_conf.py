@@ -29,7 +29,7 @@ def check_create_config(request):
     cb.browser_name = BrowserName.FIREFOX
     config = cb.register()
 
-    google = GuiApp(base_url="https://google.com", config=config)
+    google = GuiApp(url="https://google.com", config=config)
     google.launch()
     request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()
@@ -46,7 +46,7 @@ def check_named_config(request):
     config = request.get_config("my_config")
     print(config.name) 
 
-    google = GuiApp(base_url="https://google.com", config=config)
+    google = GuiApp(url="https://google.com", config=config)
     google.launch()
     request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()
@@ -58,7 +58,7 @@ def check_simpler_builder_method(request):
     cb.firefox()
     config = cb.register()
 
-    google = GuiApp(base_url="https://google.com", config=config)
+    google = GuiApp(url="https://google.com", config=config)
     google.launch()
     request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()

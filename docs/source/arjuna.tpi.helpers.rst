@@ -8,6 +8,7 @@ Submodules
 
    arjuna.tpi.helpers.audit
    arjuna.tpi.helpers.dict
+   arjuna.tpi.helpers.image
    arjuna.tpi.helpers.json
    arjuna.tpi.helpers.xml
 

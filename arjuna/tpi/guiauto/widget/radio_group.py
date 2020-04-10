@@ -43,7 +43,7 @@ class GuiWebRadioGroup:
 
     def __find(self, finder, wmd):
         # This would force the identification of partial elements in the wrapped multi-element.
-        self.__radios = finder.wmd_finder.multi_element(wmd)
+        self.__radios = finder._wmd_finder.multi_element(wmd)
         self.__check_type_if_configured(self.source)
 
     def has_index_selected(self, index):

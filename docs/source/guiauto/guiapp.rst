@@ -28,11 +28,11 @@ Launching a Web Application
 Associating a App with a Base URL
 ---------------------------------
 
-You can associate the `GuiApp` with a base URL by providing `base_url` arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
+You can associate the `GuiApp` with a base URL by providing `url` arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
 
 .. code-block:: python
 
-   google = GuiApp(base_url="https://google.com")
+   google = GuiApp(url="https://google.com")
    google.launch()
    google.quit()
 

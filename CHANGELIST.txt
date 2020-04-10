@@ -1,5 +1,24 @@
 Following is the list of critical additions and updates for a given released version:
 
+Possibilities
+-------------
+- GuiApp commons.yaml
+- simplify nodeid access. request.raw_request.node.nodeid -> request.node_name
+    - optonal request object
+- Can Selenium disable certificate trust checking - Chrome/Firefox.
+- Or how to a certificate to trusted certificates.
+
+0.9.20
+------
+- Implemented ScreenShooter protocol. Created ScreenShooter base class. `GuiAppContent` implements the protocol by inheriting from it.
+- Added Image helper class.
+- Added doc strings for:
+    - Gui, GuiAppContent, GuiApp, GuiPage, GuiSection, GuiDialog
+- GuiDialog is a class of its own now. Rules to follow. Separated in its own module.
+- GuiAppContent separated in its own module.
+- GNS rules have been indicated in the API doc. Coded restrictions need to be done yet for a more closely controlled GNS namespace structure.
+
+
 0.9.19
 ------
 - Moved private enums and exceptions to arjuna.core module.

@@ -121,7 +121,7 @@ class ArjunaOption(Enum):
     '''Directory containing contextual row data reference Excel files in test project.'''
 
     APP_URL = auto()
-    '''Base URL for a Web App. Used by launch() method if base_url is not specified for GuiApp.'''
+    '''Base URL for a Web App. Used by launch() method if url is not specified for GuiApp.'''
 
     BROWSER_NAME = auto()
     '''Browser Name for Gui Automation. Chrome/Firefox. Default is Chrome'''

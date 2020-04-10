@@ -18,7 +18,7 @@
 from arjuna import *
 
 @test
-def check_webpp_nobase_url(request):
+def check_webpp_nourl(request):
     google = GuiApp()
     google.launch(blank_slate=True)
     google.go_to_url("https://google.com")
@@ -26,14 +26,14 @@ def check_webpp_nobase_url(request):
     google.quit()
 
 @test
-def check_webpp_base_url_arg(request):
-    google = GuiApp(base_url="https://google.com")
+def check_webpp_url_arg(request):
+    google = GuiApp(url="https://google.com")
     google.launch()
     request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()
 
 @test
-def check_webpp_base_url_in_custom_config(request):
+def check_webpp_url_in_custom_config(request):
     cb = request.config.builder
     cb[ArjunaOption.APP_URL] = "https://google.com"
     conf = cb.register()

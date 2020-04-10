@@ -38,7 +38,7 @@ class WPBaseTest(unittest.TestCase):
 
     def setUp(self):
         super().setUp()
-        self.__app = GuiApp(base_url=self.config.user_options.value("wp.login.url"))
+        self.__app = GuiApp(url=self.config.user_options.value("wp.login.url"))
         self.wordpress.launch()
         self.wordpress.ui.externalize(gns_dir="mgns_wordpress_singlefile", gns_file_name="WordPress.yaml")
         self.login_with_default_creds()

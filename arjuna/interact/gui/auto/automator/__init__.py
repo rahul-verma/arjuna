@@ -28,6 +28,7 @@ from arjuna.tpi.guiauto.source import ElementXMLSourceParser
 from arjuna.interact.gui.dispatcher.selenium.driver import SeleniumDriverDispatcher
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.guiauto.widget.element import GuiElement
+from arjuna.tpi.helpers.image import Image
 
 class GuiAutomator(ElementContainer,Dispatchable):
 
@@ -174,7 +175,7 @@ class GuiAutomator(ElementContainer,Dispatchable):
         f = open(fpath, "wb")
         f.write(image)
         f.close()
-        return file_name, image_b64
+        return Image(fpath=fpath, b64=image_b64)
 
     def focus_on_main_window(self):
         self.main_window.focus()

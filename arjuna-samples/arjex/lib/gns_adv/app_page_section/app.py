@@ -21,7 +21,7 @@ class WordPress(GuiApp):
 
     def __init__(self, *, section_dir):
         url = C("wp.login.url")
-        super().__init__(base_url=url)
+        super().__init__(url=url)
         self.__section_dir = section_dir
 
     @property

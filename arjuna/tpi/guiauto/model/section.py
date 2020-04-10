@@ -16,28 +16,52 @@
 # limitations under the License.
 
 
-from .gui import *
+from .gui import Gui
+from .content import GuiAppContent
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 
 
-class GuiSection(AppContent):
+class GuiSection(GuiAppContent):
+    '''
+        Represents a GUI Section i.e. a part of the current page in the Gui. 
+        
+        It is an implementation of `GuiAppContent`.
 
-    def __init__(self, gui, *args, gns_dir=None, root=None, label=None, gns_file_name=None, **kwargs):
-        super().__init__(automator=gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
+        Args:
+            *args: Any number of positional argumnts. These are passed to the `prepare()` method if defined in inherited class.
+
+        Keyword Arguments:
+            parent_gui: (Mandatory) The `Gui` object that contains this `GuiSection`.
+            label: Label for the this `GuiSection`. If not provided, the class name is used as the label.
+            root: Root element of this `GuiSection`. Can be `label` string defined in its GNS File or a `Locator` object.
+            gns_dir: Relative Root Directory for GNS file associated with this `GuiSection`. Default is `page/section` directory in associated `GuiApp` namespace. If provided, it is considered relative to the namespace directory of associated `GuiApp`.
+            gns_file_name: Name of GNS file associated with this `GuiSection`. If not provided, default is `<label>.yaml`.
+            kwargs: Arbitrary keyword arugments. These are passed to the `prepare()` method if defined in inherited class.
+
+        Note:
+            A `GuiSection` can have a root element. If defined, all locator calls in this object happen as a nested locating call using the root element.
+
+                - Root element provided in in __init__ call is given preference.
+                - If not provided, Arjuna looks for `root` definition in `load` section of its GNS file.
+                - If above is also not provided, then locating happens from the root of the DOM of current page.
+    '''
+
+    def __init__(self, *args, parent_gui: Gui, label: 'str'=None, root: 'LabelOrLocator'=None, gns_dir: str=None, gns_file_name:str=None, **kwargs):
+        super().__init__(automator=parent_gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
         self.__root_meta = self.__determine_root(root)
         self.__root_element = None
         self.__container = self
         self._load(*args, **kwargs)
-        self.__parent = gui
+        self.__parent = parent_gui
 
     @property
-    def root_element(self):
+    def _root_element(self):
         return self.__root_element
 
     def __determine_root(self, root_init):
         from arjuna import Locator
         root_label = None
-        root_gns = self.gui_def.root_element_name
+        root_gns = self._gui_def.root_element_name
         if root_init:
             # root in __init__ as a Locator instead of GNS Label
             if isinstance(root_init, Locator):
@@ -69,14 +93,14 @@ class GuiSection(AppContent):
         if self.__root_meta:
             label, locator = self.__root_meta
             if self.__root_meta[0] != "anonymous":
-                wmd = self.gui_def.get_wmd(label)
+                wmd = self._gui_def.get_wmd(label)
                 from arjuna import log_debug
                 log_debug("Loading Root Element {} for Gui GuiSection: {}".format(label, self.label))
-                self.__root_element = self.wmd_finder.element(wmd)
+                self.__root_element = self._wmd_finder.element(wmd)
             else:
                 from arjuna import log_debug
                 log_debug("Loading Root Element with Locator {} for Gui GuiSection: {}".format(str(locator), self.label))
-                self.__root_element = self.finder.locate(locator)           
+                self.__root_element = self._finder.locate(locator)           
             
             self.__container = self.__root_element
 
@@ -87,22 +111,72 @@ class GuiSection(AppContent):
             return getattr(self.__container, name)
 
     def locate(self, locator):
+        '''
+           Locate a GuiWidget.
+
+           Arguments:
+            locator: `GuiWidgetLocator` object.
+
+            Returns:
+                An object of type `GuiWidget`. Exact object type depends on the value of `type` attribute in `GuiWidgetLocator`. 
+        '''
         return self.__get_caller("locate")(fargs=fargs, **kwargs)
 
-    def element(self, *, fargs=None, **kwargs):
+    def element(self, *, fargs=None, **kwargs) -> 'GuiElement':
+        '''
+            Locate a `GuiElement`.
+
+            Keyword Arguments:
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use `.format(kwargs).wait_until_absent` for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+
+            Returns:
+                `GuiElement` object.
+        '''
         return self.__get_caller("element")(fargs=fargs, **kwargs)
 
-    def multi_element(self, fargs=None, **kwargs):
+    def multi_element(self, fargs=None, **kwargs) -> 'GuiMultiElement':
+        '''
+            Locate a `GuiMultiElement`.
+
+            Keyword Arguments:
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use `.format(kwargs).wait_until_absent` for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+
+            Returns:
+                `GuiMultiElement` object.
+        '''
         return self.__get_caller("multi_element")(fargs=fargs, **kwargs)
 
-    def dropdown(self, fargs=None, **kwargs):
+    def dropdown(self, fargs=None, **kwargs) -> 'GuiDropDown':
+        '''
+            Locate a `GuiDropDown`.
+
+            Keyword Arguments:
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use `.format(kwargs).wait_until_absent` for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+
+            Returns:
+                `GuiDropDown` object.
+        '''
         return self.__get_caller("dropdown")(fargs=fargs, **kwargs)
 
-    def radio_group(self, fargs=None, **kwargs):
+    def radio_group(self, fargs=None, **kwargs) -> 'GuiRadioGroup':
+        '''
+            Locate a `GuiRadioGroup`
+
+            Keyword Arguments:
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use `.format(kwargs).wait_until_absent` for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+
+            Returns:
+                `GuiRadioGroup` object
+        '''
         return self.__get_caller("radio_group")(fargs=fargs, **kwargs)     
 
     @property
     def parent(self):
+        '''
+            Parent GUI of this `GuiSection`.
+        '''
         return self.__parent
-
-GuiDialog = GuiSection

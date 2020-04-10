@@ -32,16 +32,16 @@ class GuiElement(_AsserterMixIn, ElementContainer, Locatable, Interactable):
         ElementContainer.__init__(self, gui.automator.config)
         Locatable.__init__(self, gui, wmd) #, parent, obj_name="GuiElement")
         Interactable.__init__(self, gui, wmd)
-        self.__gns = GNS(self, gui.gui_def)
+        self.__gns = GNS(self, gui._gui_def)
         self.__finder = GuiElementFinder(self)
         self.__wmd_finder = GuiElementEmdFinder(self)
 
     @property
-    def finder(self):
+    def _finder(self):
         return self.__finder
 
     @property
-    def wmd_finder(self):
+    def _wmd_finder(self):
         return self.__wmd_finder
 
     @property
@@ -80,16 +80,16 @@ class GuiElement(_AsserterMixIn, ElementContainer, Locatable, Interactable):
     ########## Served by Template ########
 
     def locate(self, locator):
-        return self.finder.locate(locator)
+        return self._finder.locate(locator)
 
     def element(self, *, fargs=None, **kwargs):
-        return self.finder.element(fargs=fargs, **kwargs)
+        return self._finder.element(fargs=fargs, **kwargs)
 
     def multi_element(self, fargs=None, **kwargs):
-        return self.finder.multi_element(fargs=fargs, **kwargs)
+        return self._finder.multi_element(fargs=fargs, **kwargs)
 
     def dropdown(self, fargs=None, **kwargs):
-        return self.finder.dropdown(fargs=fargs, **kwargs)
+        return self._finder.dropdown(fargs=fargs, **kwargs)
 
     def radio_group(self, fargs=None, **kwargs):
-        return self.finder.radio_group(fargs=fargs, **kwargs)
+        return self._finder.radio_group(fargs=fargs, **kwargs)

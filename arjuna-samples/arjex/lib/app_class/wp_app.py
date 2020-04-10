@@ -21,7 +21,7 @@ class WordPress:
 
     def __init__(self):
         url = C("wp.login.url")
-        self.__app = GuiApp(base_url=url, label="WordPress", gns_dir="app_class")
+        self.__app = GuiApp(url=url, label="WordPress", gns_dir="app_class")
         self.app.launch()
 
     @property

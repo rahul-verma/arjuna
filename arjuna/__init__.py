@@ -81,10 +81,11 @@ from arjuna.tpi.engine.data.markup import *
 from arjuna.tpi.engine.data.record import *
 from arjuna.tpi.engine.data.generator import Random, DataEntity, Locales
 
-from arjuna.tpi.guiauto.helpers import Attr, Point, Params, Formatter, Locator
+from arjuna.tpi.guiauto.helpers import Attr, Point, Params, Formatter, GuiWidgetLocator
 from arjuna.tpi.guiauto.model.app import GuiApp
 from arjuna.tpi.guiauto.model.page import GuiPage
-from arjuna.tpi.guiauto.model.section import GuiSection, GuiDialog
+from arjuna.tpi.guiauto.model.section import GuiSection
+from arjuna.tpi.guiauto.model.dialog import GuiDialog
 
 from arjuna.tpi.exceptions import *
 from arjuna.tpi.enums import *

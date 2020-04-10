@@ -70,14 +70,7 @@ class PytestHooks:
                     - Module Space
                     - Session Space
 
-                - The screen_shooter attribute should contain a `ScreenShooter` i.e. any object which has a method with the following signatue:
-                
-                    .. code-block:: python
-
-                        take_screenshot(*, prefix=None) -> fpath, fb64
-
-                    
-                    - `fpath` is path of screenshot.png file relative to SCREENSHOTS_DIR as per Configuration and `fb64` is the base64 version of screenshot image.
+                - The screen_shooter attribute should contain a `ScreenShooter` i.e. an object of a class that inherits from ScreenShooter class and completes its protocol.
                 
                 - This is a lenient hook. This means that if any exception happens in it, it ignores the exception and logs a warning message.
         '''
@@ -101,14 +94,14 @@ class PytestHooks:
             if ignore_passed and report.passed:
                 return
             # if (report.skipped and xfail) and (report.failed and not xfail):
-                # extra.append(pytest_html.extras.url(app.base_url))
+                # extra.append(pytest_html.extras.url(app.url))
 
 
             import re
             rname = re.sub(r"\[.*?\]", "", report.nodeid)
-            fpath, fb64 = screen_shooter.take_screenshot(prefix=rname)
-            fpath = "../screenshot/{}".format(fpath)
-            img_elem = '''<img src="data:image/png;base64,{}"/>'''.format(fb64)
+            image = screen_shooter.take_screenshot(prefix=rname)
+            fpath = "../screenshot/{}".format(image.file_name)
+            img_elem = '''<img src="data:image/png;base64,{}"/>'''.format(image.base64)
             extra.append(
                 pytest_html.extras.html(
                     '''<div class="image"><a href="{}" target="_blank">{}</a>'''.format(fpath, img_elem)

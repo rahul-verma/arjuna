@@ -18,7 +18,7 @@
 from functools import partial
 from arjuna.tpi.exceptions import *
 from arjuna.core.exceptions import *
-from arjuna.tpi.guiauto.helpers import Locator
+from arjuna.tpi.guiauto.helpers import GuiWidgetLocator
 
 class GuiEmdFinder:
 
@@ -49,7 +49,7 @@ class GuiFinder:
 
     def __locate_interim(self, name):
         def finder(fargs=None, **kwargs):
-            locator = Locator(type=name, fmt_args=fargs, **kwargs)
+            locator = GuiWidgetLocator(type=name, fmt_args=fargs, **kwargs)
             return self.locate(locator)
         return finder
 
@@ -93,7 +93,7 @@ class GuiElementFinder:
 
     def __locate_interim(self, name):
         def finder(fargs=None, **kwargs):
-            locator = Locator(type=name, fmt_args=None, **kwargs)
+            locator = GuiWidgetLocator(type=name, fmt_args=None, **kwargs)
             return self.locate(locator)
         return finder
 

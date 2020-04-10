@@ -19,7 +19,7 @@ from arjuna import *
 
 def create_wordpress_app():
     url = C("wp.login.url")
-    wordpress = GuiApp(base_url=url, label="WordPress", gns_dir="app_procedural")
+    wordpress = GuiApp(url=url, label="WordPress", gns_dir="app_procedural")
     wordpress.launch()
     return wordpress
 

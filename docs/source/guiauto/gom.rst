@@ -25,7 +25,7 @@ For example:
    
     def __init__(self):
         url = C("wp.login.url")
-        super().__init__(base_url=url)
+        super().__init__(url=url)
 
 Within the class' methods, you can now access its methods directly:
 

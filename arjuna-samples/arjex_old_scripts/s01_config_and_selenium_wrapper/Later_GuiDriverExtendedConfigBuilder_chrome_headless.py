@@ -23,7 +23,7 @@ eb = GuiDriverExtendedConfigBuilder()
 eb.browser_arg("--headless")
 econfig = eb.build()
 
-google = GuiApp(base_url="https://google.com", ext_config=econfig)
+google = GuiApp(url="https://google.com", ext_config=econfig)
 google.launch()
 print(google.ui.main_window.title)
 google.quit()

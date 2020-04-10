@@ -133,6 +133,16 @@ Data Driven Testing
     * :py:class:`many_data_sources <arjuna.tpi.engine.data.markup.many_data_sources>`
 * :py:class:`DataRecord <arjuna.tpi.engine.data.record.DataRecord>`
 
+Web GUI Automation
+==================
+
+* :py:class:`Gui <arjuna.tpi.guiauto.model.gui.Gui>`: It represents all type of Guis and is the base class for the following classes:
+    * :py:class:`GuiApp <arjuna.tpi.guiauto.model.app.GuiApp>`
+    * :py:class:`GuiAppContent <arjuna.tpi.guiauto.model.content.GuiAppContent>`: It represents the content of a `GuiApp` and is the base class of the following classes:
+        * :py:class:`GuiPage <arjuna.tpi.guiauto.model.page.GuiPage>`
+        * :py:class:`GuiSection <arjuna.tpi.guiauto.model.section.GuiSection>`
+        * :py:class:`GuiDialog <arjuna.tpi.guiauto.model.dialog.GuiDialog>`
+
 Hooks
 =====
 * :py:meth:`PytestHooks.add_screenshot_for_result <arjuna.tpi.engine.hook.PytestHooks.add_screenshot_for_result>`
@@ -148,8 +158,6 @@ Helpers
     * :py:class:`CIStringDict <arjuna.tpi.helpers.dict.CIStringDict>`
     * :py:class:`ProcessedKeyDict <arjuna.tpi.helpers.dict.ProcessedKeyDict>`
     * :py:class:`OnceOnlyKeyCIStringDict <arjuna.tpi.helpers.dict.OnceOnlyKeyCIStringDict>`
-
-
 
 Logging
 =======

@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from arjuna.interact.gui.auto.finder.wmd import SimpleGuiWidgetMetaData
-from arjuna.tpi.guiauto.helpers import Locator
+from arjuna.tpi.guiauto.helpers import GuiWidgetLocator
 
 # UUID is for client reference. Agent does not know about this.
 class GuiWebSelect:
@@ -26,7 +26,7 @@ class GuiWebSelect:
         self.__wmd = wmd
         self.__automator = gui.automator
         self.__finder = parent and parent or gui
-        self._wrapped_main_element = self.__finder.wmd_finder.element(wmd)
+        self._wrapped_main_element = self.__finder._wmd_finder.element(wmd)
         self.__found = False
         self.__options = None
         self.__option_locator = self.wmd.meta.option_locator is not None and self.wmd.meta.option_locator or Locator(type="multi_element", tag="option")

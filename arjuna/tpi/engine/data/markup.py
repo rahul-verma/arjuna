@@ -38,7 +38,7 @@ class record(_DataMarkUp):
         Data Record Data Source
 
         Args:
-            *vargs: Any number of objects
+            vargs: Any number of objects
             *kwargs: Arbitrary keywrod arguments
     '''
 
@@ -86,7 +86,7 @@ class data_function(_DataMarkUp):
 
         Args:
             func: Function object to be called.
-            *vargs: Any number of objects to be passed to function when calling it.
+            vargs: Any number of objects to be passed to function when calling it.
             *kwargs: Arbitrary keywrod arguments to be passed to function when calling it.
     '''
 
@@ -113,7 +113,7 @@ class data_class(_DataMarkUp):
 
         Args:
             dsclass: Class to be instantiated
-            *vargs: Any number of objects for instantiating the class.
+            vargs: Any number of objects for instantiating the class.
             *kwargs: Arbitrary keywrod arguments  for instantiating the class.
     '''
 

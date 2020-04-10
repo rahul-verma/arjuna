@@ -61,6 +61,9 @@ class SourceContent:
     def text(self):
         return self.__text
 
+class GuiSource:
+    pass
+
 class ElementXMLSourceParser:
 
     def __init__(self, raw_source, root_element="body"):
