@@ -33,6 +33,7 @@ from arjuna.tpi.exceptions import *
 from arjuna.core.exceptions import *
 from arjuna.tpi.guiauto.model.gns import GNS
 from arjuna.interact.gui.auto.finder import GuiFinder, GuiEmdFinder
+from arjuna.tpi.tracker import track
 
 class _GuiConditions:
 
@@ -43,6 +44,7 @@ class _GuiConditions:
         caller = DynamicCaller(self.__gui.validate_readiness)
         return CommandCondition(caller)
 
+@track("info")
 class Gui(_AsserterMixIn):
     '''
         Represents a GUI.

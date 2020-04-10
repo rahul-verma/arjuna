@@ -24,7 +24,7 @@ class GuiEmdFinder:
 
     def __init__(self, gui):
         self.__gui = gui
-        self.__automator = gui.automator
+        self.__automator = gui._automator
 
     def __getattr__(self, name):
         return partial(getattr(self.__automator, name.lower()), self.__gui)

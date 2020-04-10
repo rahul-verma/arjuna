@@ -30,7 +30,8 @@ def track(level: str="not_set"):
             - End of the call with return value
             - Exception raised if any
 
-        Args:
+        Keywrod Arguments:
+            callable: Callable that is decorated.
             level: (Optional) A string representing a Logging Level (trace/debug/info/warning/error/fatal). Default is debug.
 
         Note:
@@ -54,7 +55,7 @@ def track(level: str="not_set"):
         non_arg_track = True
         level = "debug"
         if inspect.isclass(kallable):
-            return track_class(level)(kallable)
+            return track_class(kallable, level)
         elif inspect.isfunction(kallable):
             return track_func(level)(kallable)
         elif isinstance(kallable, classmethod):
@@ -74,7 +75,7 @@ def track(level: str="not_set"):
 
     def deco(kallable):
         if inspect.isclass(kallable):
-            return track_class(level)(kallable)
+            return track_class(kallable, level)
         elif inspect.isfunction(kallable) or inspect.ismethod(kallable):
             return track_func(level)(kallable)
         elif isinstance(kallable, classmethod):
@@ -87,7 +88,7 @@ def track(level: str="not_set"):
                 kallable.fset and track_func(level, prop=True, prop_type="fset")(kallable.fset) or None,
                 kallable.fdel and track_func(level, prop=True, prop_type="fdel")(kallable.fdel) or None,
             )
-    return deco
+    return deco  
 
 '''
     def __load_console(self, dl, logger):

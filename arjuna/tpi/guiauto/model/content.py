@@ -38,7 +38,9 @@ from .gui import Gui
 from arjuna.tpi.helpers.image import Image
 from arjuna.tpi.protocol.screenshooter import ScreenShooter
 from arjuna.tpi.guiauto.source import GuiSource
+from arjuna.tpi.tracker import track
 
+@track("info")
 class GuiAppContent(Gui, ScreenShooter):
     '''
         Represents content of any type in a `GuiApp`.
@@ -211,7 +213,7 @@ class GuiAppContent(Gui, ScreenShooter):
         '''
             (Not Supported Yet) Title of the window containing this `GuiAppContent`.
         '''
-        return self.main_window.title
+        return self.app.main_window.title
 
     def set_slomo(self, *, on, interval=None):
         '''

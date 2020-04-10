@@ -53,7 +53,7 @@ def __log(invoker, level, msg, contexts=None):
     contexts = set(contexts)
     getattr(Arjuna.get_logger(), level)(msg, extra={'invoker': invoker, 'contexts':contexts, 'config':Arjuna.get_config()})
 
-def log_trace(msg: str, contexts: ListOrTuple=None):
+def log_trace(msg: str, *, contexts: ListOrTuple=None):
     '''
         Log a message with `TRACE` level.
 
@@ -63,7 +63,7 @@ def log_trace(msg: str, contexts: ListOrTuple=None):
     '''
     __log(_Stack.get_invoker(), "trace", msg, contexts=contexts)
 
-def log_debug(msg: str, contexts: ListOrTuple=None) -> None:
+def log_debug(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''
         Log a message with `DEBUG` level.
 
@@ -73,7 +73,7 @@ def log_debug(msg: str, contexts: ListOrTuple=None) -> None:
     '''
     __log(_Stack.get_invoker(), "debug", msg, contexts=contexts)
 
-def log_info(msg: str, contexts: ListOrTuple=None) -> None:
+def log_info(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''
         Log a message with `INFO` level.
 
@@ -83,7 +83,7 @@ def log_info(msg: str, contexts: ListOrTuple=None) -> None:
     '''
     __log(_Stack.get_invoker(), "info", msg, contexts=contexts)
 
-def log_warning(msg: str, contexts: ListOrTuple=None) -> None:
+def log_warning(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''
         Log a message with `WARNING` level.
 
@@ -93,7 +93,7 @@ def log_warning(msg: str, contexts: ListOrTuple=None) -> None:
     '''
     __log(_Stack.get_invoker(), "warning", msg, contexts=contexts)
 
-def log_error(msg: str, contexts: ListOrTuple=None) -> None:
+def log_error(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''
         Log a message with `ERROR` level.
 
@@ -103,7 +103,7 @@ def log_error(msg: str, contexts: ListOrTuple=None) -> None:
     '''
     __log(_Stack.get_invoker(), "error", msg, contexts=contexts)
 
-def log_fatal(msg: str, contexts: ListOrTuple=None) -> None:
+def log_fatal(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''
         Log a message with `FATAL` level.
 

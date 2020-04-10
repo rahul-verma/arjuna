@@ -19,8 +19,9 @@
 from .gui import Gui
 from .content import GuiAppContent
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
+from arjuna.tpi.tracker import track
 
-
+@track("info")
 class GuiSection(GuiAppContent):
     '''
         Represents a GUI Section i.e. a part of the current page in the Gui. 
@@ -47,7 +48,7 @@ class GuiSection(GuiAppContent):
     '''
 
     def __init__(self, *args, parent_gui: Gui, label: 'str'=None, root: 'LabelOrLocator'=None, gns_dir: str=None, gns_file_name:str=None, **kwargs):
-        super().__init__(automator=parent_gui.automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
+        super().__init__(automator=parent_gui._automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)   
         self.__root_meta = self.__determine_root(root)
         self.__root_element = None
         self.__container = self

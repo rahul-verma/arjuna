@@ -32,9 +32,10 @@ prop_dict_msg = {
 def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget", **kwargs):
     import arjuna
     from arjuna import log_error
-    log_call = getattr(arjuna, "log_{}".format(level.strip().lower()))
     name = func.__name__
     qualname = func.__qualname__
+    level = name.startswith("_") and "trace" or level
+    log_call = getattr(arjuna, "log_{}".format(level.strip().lower()))
     if name != qualname and not static:
         pvargs = vargs[1:]
     else:
@@ -78,7 +79,7 @@ def track_func(level="debug", static=False, prop=False, prop_type="fget"):
 
     return dec
 
-def wrap_methods(cls, level, *args, **kwargs):
+def wrap_methods(cls, level): #, *args, **kwargs):
     for attr_name, attr in vars(cls).items():
         if type(attr) is types.FunctionType:
             setattr(cls, attr_name, track_func(level)(attr))
@@ -86,14 +87,19 @@ def wrap_methods(cls, level, *args, **kwargs):
             setattr(cls, attr_name, classmethod(track_func(level)(attr.__func__)))
         elif isinstance(attr, staticmethod):
             setattr(cls, attr_name, staticmethod(track_func(level, static=True)(attr.__func__)))
-    return cls(*args, **kwargs)
+    # return cls(*args, **kwargs)
 
-def track_class(level):
+# def track_class(level):
 
-    def deco(cls):
-        @functools.wraps(cls)
-        def class_wrapper(*args, **kwargs):
-            return wrap_methods(cls, level, *args, **kwargs)
-        return class_wrapper
+#     def deco(cls):
+#         @functools.wraps(cls)
+#         def class_wrapper(*args, **kwargs):
+#             return wrap_methods(cls, level, *args, **kwargs)
+#         return class_wrapper
 
-    return deco
+#     return deco
+
+
+def track_class(cls, level):
+    wrap_methods(cls, level)
+    return cls
