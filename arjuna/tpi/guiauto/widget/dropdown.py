@@ -24,12 +24,12 @@ class GuiWebSelect:
     def __init__(self, gui, wmd, parent=None):
         self.__gui = gui
         self.__wmd = wmd
-        self.__automator = gui.automator
+        self.__automator = gui._automator
         self.__finder = parent and parent or gui
         self._wrapped_main_element = self.__finder._wmd_finder.element(wmd)
         self.__found = False
         self.__options = None
-        self.__option_locator = self.wmd.meta.option_locator is not None and self.wmd.meta.option_locator or Locator(type="multi_element", tag="option")
+        self.__option_locator = self.wmd.meta.option_locator is not None and self.wmd.meta.option_locator or GuiWidgetLocator(type="multi_element", tag="option")
 
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
         self.__option_container_same_as_select = self.wmd.meta.option_container_locator is None and True or False

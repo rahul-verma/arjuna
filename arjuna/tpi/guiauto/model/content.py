@@ -314,7 +314,7 @@ class GuiAppContent(Gui, ScreenShooter):
             Returns:
                 `GuiDropDown` object.
         '''
-        return self.finder.dropdown(fargs=fargs, **kwargs)
+        return self._finder.dropdown(fargs=fargs, **kwargs)
 
     def radio_group(self, fargs=None, **kwargs):
         '''

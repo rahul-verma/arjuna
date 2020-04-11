@@ -20,7 +20,7 @@ class GuiWebRadioGroup:
     def __init__(self, gui, wmd, parent=None):
         self.__gui = gui
         self.__wmd = wmd
-        self.__automator = gui.automator
+        self.__automator = gui._automator
         self.__finder = parent and parent or gui
         self.__radios = None
         self.__find(self.__finder, wmd)
