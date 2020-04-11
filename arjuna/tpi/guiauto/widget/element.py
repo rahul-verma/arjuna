@@ -67,7 +67,7 @@ class GuiElement(_AsserterMixIn, ElementContainer, Locatable, Interactable):
             raise GuiWidgetPresentError(self.gui, wmd) 
 
     def wait_until_absent(self, *, fargs=None, **kwargs):
-        from arjuna.tpi.guiauto.helpers import GuiWidgetLocator
+        from arjuna.tpi.guiauto.locator import GuiWidgetLocator
         wmd = GuiWidgetLocator(fmt_args=fargs, **kwargs).as_wmd()
         self._wait_until_absent(wmd)
 

@@ -142,6 +142,11 @@ Web GUI Automation
         * :py:class:`GuiPage <arjuna.tpi.guiauto.model.page.GuiPage>`
         * :py:class:`GuiSection <arjuna.tpi.guiauto.model.section.GuiSection>`
         * :py:class:`GuiDialog <arjuna.tpi.guiauto.model.dialog.GuiDialog>`
+* Defining and formatting Gui Widget Locators:
+    * :py:class:`GuiWidgetLocator <arjuna.tpi.guiauto.locator.GuiWidgetLocator>`
+    * Classes related to formatting of `GuiWidgetLocator`:
+        * :py:class:`GNSLabelFormatter <arjuna.tpi.guiauto.model.formatter.GNSLabelFormatter>`
+        * :py:class:`GuiWidgetLocatorFormatter <arjuna.tpi.guiauto.model.formatter.GuiWidgetLocatorFormatter>`
 
 Hooks
 =====

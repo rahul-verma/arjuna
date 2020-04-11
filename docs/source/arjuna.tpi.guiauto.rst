@@ -6,6 +6,7 @@ Subpackages
 
 .. toctree::
 
+   arjuna.tpi.guiauto.locator
    arjuna.tpi.guiauto.model
    arjuna.tpi.guiauto.obj
    arjuna.tpi.guiauto.source

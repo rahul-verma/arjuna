@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from arjuna.interact.gui.auto.finder.wmd import SimpleGuiWidgetMetaData
-from arjuna.tpi.guiauto.helpers import GuiWidgetLocator
+from arjuna.tpi.guiauto.locator import GuiWidgetLocator
 
 # UUID is for client reference. Agent does not know about this.
 class GuiWebSelect:
