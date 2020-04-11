@@ -22,7 +22,7 @@ from arjuna.core.exceptions import GuiWidgetTextNotSetError
 class Interactable(Dispatchable):
 
     def __init__(self, gui, wmd): #, parent=None, find=True):
-        self.__config = gui.automator.config
+        self.__config = gui._automator.config
         self.__wmd = wmd
         Dispatchable.__init__(self)
         self.__source = None

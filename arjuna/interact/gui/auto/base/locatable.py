@@ -20,7 +20,7 @@ class Locatable:
     def __init__(self, gui, wmd):
         # super().__init__(automator.config) #, obj_name)
         self.__gui = gui
-        self.__automator = gui.automator
+        self.__automator = gui._automator
         self.__wmd = wmd
         self.__located = False
         self.__located_by = None 

@@ -42,7 +42,7 @@ def check_dropdown_coded_using_locate(request, logged_in_wordpress):
     wordpress = logged_in_wordpress
     wordpress.element(link="Settings").click()
 
-    role_select = wordpress.locate(Locator(type="dropdown", id="default_role"))
+    role_select = wordpress.locate(GuiWidgetLocator(type="dropdown", id="default_role"))
 
     role_select.select_text("Subscriber")
     fmsg = "Failed to select Subscriber Role"

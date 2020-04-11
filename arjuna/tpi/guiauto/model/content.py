@@ -275,7 +275,7 @@ class GuiAppContent(Gui, ScreenShooter):
             Returns:
                 An object of type `GuiWidget`. Exact object type depends on the value of `type` attribute in `GuiWidgetLocator`. 
         '''
-        return self.finder.locate(locator)
+        return self._finder.locate(locator)
 
     def element(self, *, fargs=None, **kwargs):
         '''
@@ -288,7 +288,7 @@ class GuiAppContent(Gui, ScreenShooter):
             Returns:
                 `GuiElement` object.
         '''
-        return self.finder.element(fargs=fargs, **kwargs)
+        return self._finder.element(fargs=fargs, **kwargs)
 
     def multi_element(self, fargs=None, **kwargs):
         '''
@@ -301,7 +301,7 @@ class GuiAppContent(Gui, ScreenShooter):
             Returns:
                 `GuiMultiElement` object.
         '''
-        return self.finder.multi_element(fargs=fargs, **kwargs)
+        return self._finder.multi_element(fargs=fargs, **kwargs)
 
     def dropdown(self, fargs=None, **kwargs):
         '''
@@ -327,6 +327,6 @@ class GuiAppContent(Gui, ScreenShooter):
             Returns:
                 `GuiRadioGroup` object
         '''
-        return self.finder.radio_group(fargs=fargs, **kwargs)
+        return self._finder.radio_group(fargs=fargs, **kwargs)
 
 

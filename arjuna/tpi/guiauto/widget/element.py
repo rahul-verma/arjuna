@@ -24,12 +24,14 @@ from arjuna.tpi.guiauto.model.gns import GNS
 from arjuna.interact.gui.auto.finder import GuiElementFinder, GuiElementEmdFinder
 from arjuna.tpi.exceptions import *
 from arjuna.core.exceptions import *
+from arjuna.tpi.tracker import track
 
+@track("info")
 class GuiElement(_AsserterMixIn, ElementContainer, Locatable, Interactable):
 
     def __init__(self, gui, wmd):
         _AsserterMixIn.__init__(self)
-        ElementContainer.__init__(self, gui.automator.config)
+        ElementContainer.__init__(self, gui._automator.config)
         Locatable.__init__(self, gui, wmd) #, parent, obj_name="GuiElement")
         Interactable.__init__(self, gui, wmd)
         self.__gns = GNS(self, gui._gui_def)
