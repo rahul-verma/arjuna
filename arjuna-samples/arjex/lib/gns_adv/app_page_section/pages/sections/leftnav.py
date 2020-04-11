@@ -46,7 +46,7 @@ class LeftNavCodedRootLabel(WPBaseGuiSection):
 class LeftNavCodedRootLocator(WPBaseGuiSection):
     
     def __init__(self, page):
-        super().__init__(page, label="LeftNav", root=Locator(id="adminmenu"))
+        super().__init__(page, label="LeftNav", root=GuiWidgetLocator(id="adminmenu"))
 
     @property
     def settings_page(self):

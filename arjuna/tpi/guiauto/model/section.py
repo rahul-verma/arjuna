@@ -60,12 +60,12 @@ class GuiSection(GuiAppContent):
         return self.__root_element
 
     def __determine_root(self, root_init):
-        from arjuna import Locator
+        from arjuna import GuiWidgetLocator
         root_label = None
         root_gns = self._gui_def.root_element_name
         if root_init:
             # root in __init__ as a Locator instead of GNS Label
-            if isinstance(root_init, Locator):
+            if isinstance(root_init, GuiWidgetLocator):
                 root_label = "anonymous"
             else:
                 root_label = root_init

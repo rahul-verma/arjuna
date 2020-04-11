@@ -24,7 +24,6 @@ For example:
    class WordPress(GuiApp):
    
     def __init__(self):
-        url = C("wp.login.url")
         super().__init__(url=url)
 
 Within the class' methods, you can now access its methods directly:
@@ -44,7 +43,6 @@ You can implement a GuiPage by inheriting from `GuiPage` class:
    class Home(GuiPage):
    
     def __init__(self, source_gui):
-        url = C("wp.login.url")
         super().__init__(source_gui=source_gui)
 
 A `GuiPage` must be provided with a `source_gui` i.e. the `Gui` from where the page is being created.
@@ -60,7 +58,7 @@ You can implement a GuiSection by inheriting from `GuiSection` class:
    
     def __init__(self, page):
         url = C("wp.login.url")
-        super().__init__(page=page)
+        super().__init__(parent_gui=page)
 
 A `GuiSection` must be provided with a `page` i.e. the `GuiPage` for which the section is being created.
 

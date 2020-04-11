@@ -21,4 +21,4 @@ from arjuna import GuiSection
 class WPBaseGuiSection(GuiSection, metaclass=abc.ABCMeta):
 
     def __init__(self, page):
-        super().__init__(page, gns_dir="app_page_section/sections")
+        super().__init__(parent_gui=page, gns_dir="app_page_section/sections")
