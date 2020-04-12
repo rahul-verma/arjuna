@@ -181,4 +181,5 @@ class Dictable(metaclass=abc.ABCMeta):
         retval = self._as_dict()
         if type(retval) is not dict:
             raise Exception("_as_dict must return a dict type. Got {} of type {}".format(retval, type(retval)))
+        return retval
         

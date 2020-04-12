@@ -148,7 +148,7 @@ class With(metaclass=_WithXMetaClass):
             rmap["value"]
             return rmap
         except:
-            raise Exception("Name and value must be supplied for {}. Got: {}".format(rlvalue, rltype))
+            raise Exception("Name and value must be supplied. Got: {}".format(map))
 
     @classmethod
     def _attr(cls, map):

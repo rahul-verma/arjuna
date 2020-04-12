@@ -170,7 +170,7 @@ class Screen:
     def offset(x, y):
         return _Offset(x,y)
 
-class NV(Dictable):
+class NVPair(Dictable):
 
     def __init__(self, name, value):
         self.__name = name
@@ -179,14 +179,14 @@ class NV(Dictable):
     def _as_dict(self):
         return {"name" : self.__name, "value": self.__value}
 
-class Attr(NV):
+class Attr(NVPair):
 
     def __init__(self, name, value, tag=None):
         super().__init__(name, value)
         self.__tag = tag
 
     def _as_dict(self):
-        d = super().as_dict()
+        d = super()._as_dict()
         d["tag"] = self.__tag
         return d
 
