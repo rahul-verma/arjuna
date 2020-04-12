@@ -42,7 +42,7 @@ class FrameContainer:
 
     def __init__(self, gui):
         self.__gui = gui
-        self.__automator = gui.automator
+        self.__automator = gui._automator
         self.__conditions = FrameConditions(self)
 
     @property

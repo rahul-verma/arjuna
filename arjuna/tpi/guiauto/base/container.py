@@ -60,22 +60,22 @@ class GuiWidgetContainer(metaclass=abc.ABCMeta):
         return self.__container_conditions.AbsenceOfElement(wmd).wait(max_wait=self.__elem_wait(wmd))
 
     def _wait_until_element_found(self, gui_element):
-        return self.__container_conditions.PresenceOfElement(gui_element).wait(max_wait=self.__elem_wait(gui_element.wmd))
+        return self.__container_conditions.PresenceOfElement(gui_element).wait(max_wait=self.__elem_wait(gui_element._wmd))
 
     def _wait_until_multielement_found(self, multi_guielement):
-        return self.__container_conditions.PresenceOfMultiElement(multi_guielement).wait(max_wait=self.__elem_wait(multi_guielement.wmd))
+        return self.__container_conditions.PresenceOfMultiElement(multi_guielement).wait(max_wait=self.__elem_wait(multi_guielement._wmd))
 
     def _load_multielement(self, multi_guielement):
         locator_type, locator_value, size, dispatcher = self._wait_until_multielement_found(multi_guielement)
         if size == 0:
             raise Exception("MultiElement could not be found with any of the provided locators.")
-        multi_guielement.located_with = locator_type, locator_value
-        multi_guielement.dispatcher = dispatcher
+        multi_guielement._located_with = locator_type, locator_value
+        multi_guielement._dispatcher = dispatcher
         multi_guielement.size = size
-        multi_guielement.load_source_parser()
+        multi_guielement._load_source_parser()
 
     def _load_element(self, gui_element):
         locator_type, locator_value, size, dispatcher = self._wait_until_element_found(gui_element)
-        gui_element.located_with = locator_type, locator_value
-        gui_element.dispatcher = dispatcher
-        gui_element.load_source_parser()
+        gui_element._located_with = locator_type, locator_value
+        gui_element._dispatcher = dispatcher
+        gui_element._load_source_parser()

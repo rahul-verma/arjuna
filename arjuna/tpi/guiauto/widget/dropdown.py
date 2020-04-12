@@ -29,19 +29,19 @@ class GuiWebSelect:
         self._wrapped_main_element = self.__finder._wmd_finder.element(wmd)
         self.__found = False
         self.__options = None
-        self.__option_locator = self.wmd.meta.option_locator is not None and self.wmd.meta.option_locator or GuiWidgetLocator(type="multi_element", tag="option")
+        self.__option_locator = self._wmd.meta.option_locator is not None and self._wmd.meta.option_locator or GuiWidgetLocator(type="multi_element", tag="option")
 
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
-        self.__option_container_same_as_select = self.wmd.meta.option_container_locator is None and True or False
+        self.__option_container_same_as_select = self._wmd.meta.option_container_locator is None and True or False
         if not self.__option_container_same_as_select:
-            self.__option_container = self.__finder.element(self.wmd.meta.option_container_locator)
+            self.__option_container = self.__finder.element(self._wmd.meta.option_container_locator)
 
         self.__source_parser = None
 
         self.__find()
 
     @property
-    def wmd(self):
+    def _wmd(self):
         return self.__wmd
 
     @property

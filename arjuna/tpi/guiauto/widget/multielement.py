@@ -23,19 +23,19 @@ from selenium.common.exceptions import StaleElementReferenceException
 
 
 from arjuna.tpi.guiauto.base.locatable import Locatable
-from arjuna.tpi.guiauto.base.dispatchable import Dispatchable
+from arjuna.interact.gui.auto.base.dispatchable import _Dispatchable
 from arjuna.tpi.guiauto.widget.element import GuiElement
 from arjuna.tpi.guiauto.source import *
 from arjuna.tpi.engine.asserter import AsserterMixIn
 
-class GuiPartialElement(GuiElement):
+class _GuiPartialElement(GuiElement):
 
     def __init__(self, gui, multi_element, index: int, dispatcher_element):
-        super().__init__(gui, multi_element.wmd)
+        super().__init__(gui, multi_element._wmd)
         self.__multi_element = multi_element
         self.__index = index
-        self.dispatcher = dispatcher_element
-        self.load_source_parser()
+        self._dispatcher = dispatcher_element
+        self._load_source_parser()
 
     def create_dispatcher(self):
         pass
@@ -47,17 +47,17 @@ class GuiPartialElement(GuiElement):
     def index(self):
         return self.__index
 
-class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
+class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
     
     def __init__(self, gui, wmd, elements=None): #, parent=None):
         AsserterMixIn.__init__(self)
         Locatable.__init__(self, gui, wmd) #, parent)
-        Dispatchable.__init__(self)
+        _Dispatchable.__init__(self)
         if elements:
             self.__elements = elements
         else:
             self.__elements = list()   
-        self.load_source_parser()
+        self._load_source_parser()
 
     def configure_partial_elements(self, elem_config):
         '''
@@ -68,7 +68,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
         for instance in self.__elements:
             instance.configure(elem_config)
 
-    def load_source_parser(self):
+    def _load_source_parser(self):
         self.__source_parser = MultiElementSource(self.elements)
 
     def __getitem__(self, index):
@@ -103,7 +103,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
         # The logic ignores stale elements 
         for i in range(count):
             try:
-                e = GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i))
+                e = _GuiPartialElement(self.gui, self, i, self.dispatcher.get_element_at_index(i))
                 self.__elements.append(e)
             except StaleElementReferenceException as e:
                 pass
@@ -158,7 +158,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
             return -1
 
     def __get_all_texts(self):
-        self.load_source_parser()
+        self._load_source_parser()
         texts = self.__source_parser.get_text_contents()
         return texts
 
@@ -169,7 +169,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
         return first_index
 
     def __get_all_values(self):
-        self.load_source_parser()
+        self._load_source_parser()
         values = self.__source_parser.get_values()
         return values
 
@@ -180,7 +180,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
         return first_index
 
     def get_first_selected_instance(self):
-        self.load_source_parser()
+        self._load_source_parser()
         booleans = self.are_selected()
         first_index = None
         try:
@@ -207,7 +207,7 @@ class ElementFilter:
 
     def __init__(self, gui_multi_element):
         self.__gui = gui_multi_element.gui
-        self.__wmd = gui_multi_element.wmd
+        self.__wmd = gui_multi_element._wmd
         self.__elements = gui_multi_element.elements
         self.__filtered_elements = self.__elements
 
@@ -220,7 +220,7 @@ class ElementFilter:
         out = list()
         for e in self.__filtered_elements:
             try:
-                e.get_html()
+                e._get_html()
                 out.append(e)
             except StaleElementReferenceException as e:
                 pass

@@ -22,7 +22,7 @@ import datetime
 
 from arjuna.tpi.enums import ArjunaOption
 from arjuna.tpi.guiauto.base.container import GuiWidgetContainer
-from arjuna.tpi.guiauto.base.dispatchable import Dispatchable
+from arjuna.interact.gui.auto.base.dispatchable import _Dispatchable
 from .drivercaps import DriverCapabilities
 from arjuna.tpi.guiauto.source import ElementXMLSourceParser
 from arjuna.interact.gui.dispatcher.selenium.driver import SeleniumDriverDispatcher
@@ -30,11 +30,11 @@ from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.guiauto.widget.element import GuiElement
 from arjuna.tpi.helpers.image import Image
 
-class GuiAutomator(GuiWidgetContainer,Dispatchable):
+class GuiAutomator(GuiWidgetContainer,_Dispatchable):
 
     def __init__(self, app, config, ext_config=None):
         GuiWidgetContainer.__init__(self, config)
-        Dispatchable.__init__(self)
+        _Dispatchable.__init__(self)
         self.__app = app
         self.__econfig = ext_config
         self.__create_screenshots_dir()
@@ -56,7 +56,7 @@ class GuiAutomator(GuiWidgetContainer,Dispatchable):
         # As of now it directly connects to Selenium Dispatcher
         # Code should be introduced here which passes through DispatcherPicker
         # based on choice of engine to support more libs.
-        self.dispatcher = SeleniumDriverDispatcher()
+        self._dispatcher = SeleniumDriverDispatcher()
         self.__launch()
 
     @property
@@ -192,10 +192,10 @@ class GuiAutomator(GuiWidgetContainer,Dispatchable):
         action_chain = SingleActionChain(self)
         action_chain.perform(single_action_chain)
 
-    def find_element_with_js(self, js):
+    def _find_element_with_js(self, js):
         return self.dispatcher.find_element_with_js(js)
 
-    def find_multielement_with_js(self, js):
+    def _find_multielement_with_js(self, js):
         return self.dispatcher.find_multielement_with_js(js)
     '''
         Public API

@@ -14,16 +14,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-class Dispatchable:
-
-    def __init__(self):
-        self.__dispatcher = None
-
-    @property
-    def dispatcher(self):
-        return self.__dispatcher
-
-    @dispatcher.setter
-    def dispatcher(self, dispatcher):
-        self.__dispatcher = dispatcher

@@ -58,7 +58,7 @@ class BasicWindow:
         return self.__config    
 
     @property
-    def automator(self):
+    def _automator(self):
         return self.__automator
 
     @property
@@ -141,7 +141,7 @@ class MainWindow(BasicWindow):
         self.focus()
 
     def get_current_window_handle(self):
-        return self.automator.dispatcher.get_current_window_handle()
+        return self._automator.dispatcher.get_current_window_handle()
 
     def child_window(self, wmd):
         return self.get_conditions().ChildWindowIsPresent(wmd).wait(max_wait=self.max_wait)
@@ -207,6 +207,6 @@ class ChildWindow(BasicWindow):
 
     def close(self):
         self.focus()
-        self.automator.dispatcher.close_current_window()
+        self._automator.dispatcher.close_current_window()
         self.__main_window.delete_window(self.handle)
         self.__main_window.focus()

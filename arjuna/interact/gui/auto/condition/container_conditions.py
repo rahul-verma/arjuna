@@ -31,7 +31,7 @@ class GuiGuiWidgetContainerConditions:
         caller = DynamicCaller(
             self.container._element_finder.find,  
             self.__container.dispatcher.find_element,
-            gui_element.wmd,
+            gui_element._wmd,
             context = "ELEMENT"
         )
         return CommandCondition(caller)   
@@ -40,7 +40,7 @@ class GuiGuiWidgetContainerConditions:
         caller = DynamicCaller(
             self.container._element_finder.find, 
             self.container.dispatcher.find_multielement,
-            gui_element.wmd,
+            gui_element._wmd,
             context = "MULTI_ELEMENT"
         )
         return CommandCondition(caller)  

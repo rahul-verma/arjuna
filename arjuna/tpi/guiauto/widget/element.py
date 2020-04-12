@@ -17,7 +17,7 @@
 
 
 from arjuna.tpi.guiauto.base.locatable import Locatable
-from arjuna.tpi.guiauto.base.interactable import Interactable
+from arjuna.tpi.guiauto.base.single_widget import SingleGuiWidget
 from arjuna.tpi.guiauto.base.container import GuiWidgetContainer
 from arjuna.tpi.engine.asserter import AsserterMixIn
 from arjuna.tpi.guiauto.model.gns import GNS
@@ -27,7 +27,7 @@ from arjuna.core.exceptions import *
 from arjuna.tpi.tracker import track
 
 @track("info")
-class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, Interactable):
+class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, SingleGuiWidget):
     '''
         Represents a single element in GUI of any kind.
 
@@ -42,7 +42,7 @@ class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, Interactable):
         AsserterMixIn.__init__(self)
         GuiWidgetContainer.__init__(self, gui._automator.config)
         Locatable.__init__(self, gui, wmd) #, parent, obj_name="GuiElement")
-        Interactable.__init__(self, gui, wmd)
+        SingleGuiWidget.__init__(self, gui, wmd)
         self.__gns = GNS(self, gui._gui_def)
         self.__finder = GuiElementFinder(self)
         self.__wmd_finder = GuiElementEmdFinder(self)
@@ -69,10 +69,10 @@ class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, Interactable):
         '''
         return None
 
-    def find_element_with_js(self, js):
+    def _find_element_with_js(self, js):
         raise Exception("With.JS is currently not supported for nested element finding.")
 
-    def find_multielement_with_js(self, js):
+    def _find_multielement_with_js(self, js):
         raise Exception("With.JS is currently not supported for nested element finding.")
 
     def _wait_until_absent(self, wmd):

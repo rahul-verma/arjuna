@@ -261,7 +261,7 @@ class GuiAppContent(Gui, ScreenShooter):
     @property
     def source(self) -> GuiSource:
         '''
-           Get `GuiSource` object for this `GuiAppContent`.
+           `GuiSource` object for this `GuiAppContent`.
         '''
         return self._automator.source
 
