@@ -7,7 +7,6 @@ Subpackages
 .. toctree::
 
    arjuna.interact.gui.auto.automator
-   arjuna.interact.gui.auto.base
    arjuna.interact.gui.auto.condition
    arjuna.interact.gui.auto.finder
    arjuna.interact.gui.auto.widget

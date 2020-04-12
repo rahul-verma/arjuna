@@ -25,7 +25,7 @@ from arjuna.tpi.guiauto.helpers import Dictable
 
 from arjuna.interact.gui.gom.guidef import *
 from .formatter import GuiWidgetLocatorFormatter
-from arjuna.tpi.engine.asserter import _AsserterMixIn
+from arjuna.tpi.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
@@ -45,7 +45,7 @@ class _GuiConditions:
         return CommandCondition(caller)
 
 @track("info")
-class Gui(_AsserterMixIn):
+class Gui(AsserterMixIn):
     '''
         Represents a GUI.
 

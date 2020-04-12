@@ -64,13 +64,13 @@ class GuiElementEmdFinder:
     def element(self, wmd):
         from arjuna.tpi.guiauto.widget.element import GuiElement
         gui_element = GuiElement(self.__gui_element.gui, wmd)
-        self.__gui_element.load_element(gui_element)
+        self.__gui_element._load_element(gui_element)
         return gui_element
 
     def multi_element(self, wmd):
         from arjuna.tpi.guiauto.widget.multielement import GuiMultiElement
         m_guielement = GuiMultiElement(self.__gui_element.gui, wmd)
-        self.__gui_element.load_multielement(m_guielement)
+        self.__gui_element._load_multielement(m_guielement)
         return m_guielement
 
 class GuiElementFinder:

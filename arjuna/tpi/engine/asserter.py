@@ -18,16 +18,6 @@
 
 import unittest
 
-class _AsserterMixIn:
-
-    def __init__(self):
-        # Trick to use assertions outside of a unittest test
-        self.__asserter = Asserter()
-
-    @property
-    def asserter(self):
-        return self.__asserter
-
 class Asserter:
     '''
         Arjuna's asserter class.
@@ -152,3 +142,21 @@ class Asserter:
                 msg: A context string explaining the failure.
         '''
         self.__asserter.fail(msg)
+
+
+class AsserterMixIn:
+    '''
+        Base class to add `asserter` property to any class which inherits from it.
+    '''
+
+    def __init__(self):
+        # Trick to use assertions outside of a unittest test
+        self.__asserter = Asserter()
+
+    @property
+    def asserter(self) -> Asserter:
+        '''
+            Arjuna's Asserter object for executing assertions.
+        '''
+        return self.__asserter
+

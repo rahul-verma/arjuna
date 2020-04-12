@@ -18,7 +18,7 @@
 from arjuna.core.poller.caller import DynamicCaller
 from arjuna.core.poller.conditions import CommandCondition
 
-class GuiElementContainerConditions:
+class GuiGuiWidgetContainerConditions:
 
     def __init__(self, container):
         self.__container = container
@@ -29,7 +29,7 @@ class GuiElementContainerConditions:
 
     def PresenceOfElement(self, gui_element):
         caller = DynamicCaller(
-            self.container.element_finder.find,  
+            self.container._element_finder.find,  
             self.__container.dispatcher.find_element,
             gui_element.wmd,
             context = "ELEMENT"
@@ -38,7 +38,7 @@ class GuiElementContainerConditions:
 
     def PresenceOfMultiElement(self, gui_element):
         caller = DynamicCaller(
-            self.container.element_finder.find, 
+            self.container._element_finder.find, 
             self.container.dispatcher.find_multielement,
             gui_element.wmd,
             context = "MULTI_ELEMENT"
@@ -47,7 +47,7 @@ class GuiElementContainerConditions:
 
     def AbsenceOfElement(self, wmd):
         caller = DynamicCaller(
-            self.container.element_finder.check_for_absence, 
+            self.container._element_finder.check_for_absence, 
             self.container.dispatcher.find_element,
             wmd,
             context = "ELEMENT"

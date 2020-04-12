@@ -147,6 +147,8 @@ Web GUI Automation
     * Classes related to formatting of `GuiWidgetLocator`:
         * :py:class:`GNSLabelFormatter <arjuna.tpi.guiauto.model.formatter.GNSLabelFormatter>`
         * :py:class:`GuiWidgetLocatorFormatter <arjuna.tpi.guiauto.model.formatter.GuiWidgetLocatorFormatter>`
+* Different Gui Widgets
+    * :py:class:`GuiElement <arjuna.tpi.guiauto.widget.element.GuiElement>`
 
 Hooks
 =====
@@ -159,6 +161,7 @@ Helpers
 * :py:mod:`XML <arjuna.tpi.helpers.xml>`
     * :py:class:`XmlNode <arjuna.tpi.helpers.xml.XmlNode>`
     * :py:class:`NodeLocator <arjuna.tpi.helpers.xml.NodeLocator>`
+* :py:class:`Image <arjuna.tpi.helpers.image.Image>`
 * :py:meth:`Arjuna Dictionaries <arjuna.tpi.helpers.dict>`
     * :py:class:`CIStringDict <arjuna.tpi.helpers.dict.CIStringDict>`
     * :py:class:`ProcessedKeyDict <arjuna.tpi.helpers.dict.ProcessedKeyDict>`

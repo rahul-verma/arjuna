@@ -21,8 +21,8 @@ import time
 import datetime
 
 from arjuna.tpi.enums import ArjunaOption
-from arjuna.interact.gui.auto.base.container import ElementContainer
-from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
+from arjuna.tpi.guiauto.base.container import GuiWidgetContainer
+from arjuna.tpi.guiauto.base.dispatchable import Dispatchable
 from .drivercaps import DriverCapabilities
 from arjuna.tpi.guiauto.source import ElementXMLSourceParser
 from arjuna.interact.gui.dispatcher.selenium.driver import SeleniumDriverDispatcher
@@ -30,10 +30,10 @@ from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.guiauto.widget.element import GuiElement
 from arjuna.tpi.helpers.image import Image
 
-class GuiAutomator(ElementContainer,Dispatchable):
+class GuiAutomator(GuiWidgetContainer,Dispatchable):
 
     def __init__(self, app, config, ext_config=None):
-        ElementContainer.__init__(self, config)
+        GuiWidgetContainer.__init__(self, config)
         Dispatchable.__init__(self)
         self.__app = app
         self.__econfig = ext_config
@@ -206,13 +206,13 @@ class GuiAutomator(ElementContainer,Dispatchable):
     def element(self, gui, wmd):
         from arjuna.tpi.guiauto.widget.element import GuiElement
         gui_element = GuiElement(gui, wmd) 
-        self.load_element(gui_element)
+        self._load_element(gui_element)
         return gui_element
 
     def multi_element(self, gui, wmd):
         from arjuna.tpi.guiauto.widget.multielement import GuiMultiElement
         m_guielement = GuiMultiElement(gui, wmd)
-        self.load_multielement(m_guielement)
+        self._load_multielement(m_guielement)
         return m_guielement
 
     def dropdown(self, gui, wmd):

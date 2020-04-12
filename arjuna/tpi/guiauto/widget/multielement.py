@@ -22,11 +22,11 @@ import os
 from selenium.common.exceptions import StaleElementReferenceException
 
 
-from arjuna.interact.gui.auto.base.locatable import Locatable
-from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
+from arjuna.tpi.guiauto.base.locatable import Locatable
+from arjuna.tpi.guiauto.base.dispatchable import Dispatchable
 from arjuna.tpi.guiauto.widget.element import GuiElement
 from arjuna.tpi.guiauto.source import *
-from arjuna.tpi.engine.asserter import _AsserterMixIn
+from arjuna.tpi.engine.asserter import AsserterMixIn
 
 class GuiPartialElement(GuiElement):
 
@@ -47,10 +47,10 @@ class GuiPartialElement(GuiElement):
     def index(self):
         return self.__index
 
-class GuiMultiElement(_AsserterMixIn, Locatable,Dispatchable):
+class GuiMultiElement(AsserterMixIn, Locatable,Dispatchable):
     
     def __init__(self, gui, wmd, elements=None): #, parent=None):
-        _AsserterMixIn.__init__(self)
+        AsserterMixIn.__init__(self)
         Locatable.__init__(self, gui, wmd) #, parent)
         Dispatchable.__init__(self)
         if elements:

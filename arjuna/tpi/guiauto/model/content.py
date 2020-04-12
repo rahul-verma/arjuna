@@ -25,7 +25,7 @@ from arjuna.tpi.guiauto.helpers import Dictable
 
 from arjuna.interact.gui.gom.guidef import *
 from .formatter import GuiWidgetLocatorFormatter
-from arjuna.tpi.engine.asserter import _AsserterMixIn
+from arjuna.tpi.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
@@ -153,7 +153,7 @@ class GuiAppContent(Gui, ScreenShooter):
 
     def _wait_until_absent(self, wmd):
         try:
-            self._automator.wait_until_element_absent(wmd)
+            self._automator._wait_until_element_absent(wmd)
         except ArjunaTimeoutError:
             raise GuiWidgetPresentError(self, wmd)         
 

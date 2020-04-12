@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.interact.gui.auto.base.dispatchable import Dispatchable
+from arjuna.tpi.guiauto.base.dispatchable import Dispatchable
 from arjuna.tpi.guiauto.source import ElementXMLSourceParser
 from arjuna.core.exceptions import GuiWidgetTextNotSetError
 

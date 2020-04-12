@@ -2,13 +2,20 @@ import os
 import base64
 
 class Image:
+    '''
+        An image object.
+
+        Keyword Arguments:
+            fpath: (Mandatory) Absolute path of the Image file.
+            b64: Base64 representation of the image.
+    '''
 
     def __init__(self, *, fpath: str, b64: str=None):
         self.__fpath = fpath
         self.__b64 = b64
 
     @property
-    def file_name(self):
+    def file_name(self) -> str:
         '''
             File Name of screenshot file.
         '''
@@ -16,15 +23,15 @@ class Image:
         return os.path.basename(self.__fpath)
 
     @property
-    def full_path(self):
+    def full_path(self) -> str:
         '''
-           Abolsute path of screenshot file.
+           Absolute path of screenshot file.
         '''
 
         return self.__fpath
 
     @property
-    def base64(self):
+    def base64(self) ->str:
         '''
             Base64 string for the image.
         '''
