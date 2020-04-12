@@ -14,6 +14,12 @@ Possibilities
 - Added Image helper class.
 - Added doc strings for:
     - Gui, GuiAppContent, GuiApp, GuiPage, GuiSection, GuiDialog
+    - SingleGuiWidget, Locatable, GuiElement
+    - Gui Locator Formatter, GuiWidgetLocator, Dictable
+    - GNS, GNS Formtter
+    - Image
+    - AsserterMixin
+    - ScreenShooter
 - GuiDialog is a class of its own now. Rules to follow. Separated in its own module.
 - GuiAppContent separated in its own module.
 - GNS rules have been indicated in the API doc. Coded restrictions need to be done yet for a more closely controlled GNS namespace structure.
