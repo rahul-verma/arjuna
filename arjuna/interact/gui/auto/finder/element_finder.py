@@ -55,7 +55,7 @@ class ElementFinder:
         Arjuna.get_logger().debug("Finding with wmd: {}".format(str(wmd)))
         from arjuna import Arjuna
         found = False
-        js_call_name = context == "ELEMENT" and "find_element_with_js" or "find_multielement_with_js"
+        js_call_name = context == "ELEMENT" and "_find_element_with_js" or "_find_multielement_with_js"
         js_call = getattr(self.container, js_call_name)
         locators = wmd.locators
         if context != "ELEMENT":
