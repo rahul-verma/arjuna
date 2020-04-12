@@ -18,6 +18,7 @@
 from enum import Enum, auto
 
 from arjuna.core.enums import GuiInteractionConfigType
+from arjuna.tpi.helpers.dict import Dictable
 
 class _GuiInteractionConfigBuilder:
 
@@ -169,18 +170,13 @@ class Screen:
     def offset(x, y):
         return _Offset(x,y)
 
-
-class Dictable:
-
-    pass
-
 class NV(Dictable):
 
     def __init__(self, name, value):
         self.__name = name
         self.__value = value
 
-    def as_dict(self):
+    def _as_dict(self):
         return {"name" : self.__name, "value": self.__value}
 
 class Attr(NV):
@@ -189,7 +185,7 @@ class Attr(NV):
         super().__init__(name, value)
         self.__tag = tag
 
-    def as_dict(self):
+    def _as_dict(self):
         d = super().as_dict()
         d["tag"] = self.__tag
         return d
@@ -201,7 +197,7 @@ class Point(Dictable):
         self.__x = x
         self.__y = y
 
-    def as_dict(self):
+    def _as_dict(self):
         return {"x": self.__x, "y":self.__y}
 
 class Params(Dictable):
@@ -209,5 +205,5 @@ class Params(Dictable):
     def __init__(self, **kwargs):
         self.__kwargs = kwargs
 
-    def as_dict(self):
+    def _as_dict(self):
         return self.__kwargs

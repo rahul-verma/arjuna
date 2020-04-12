@@ -40,7 +40,7 @@ class GuiFinder:
         from arjuna.core.exceptions import ArjunaTimeoutError
         from arjuna.tpi.exceptions import GuiWidgetNotPresentError
         
-        wmd = locator.as_wmd()
+        wmd = locator._as_wmd()
         log_debug("Finding element with wmd: {}.".format(wmd))
         try:
             return getattr(self.__wmd_finder, wmd.meta["type"].name.lower())(wmd)
@@ -84,7 +84,7 @@ class GuiElementFinder:
         from arjuna.core.exceptions import ArjunaTimeoutError
         from arjuna.tpi.exceptions import GuiWidgetNotPresentError
 
-        wmd = locator.as_wmd()
+        wmd = locator._as_wmd()
         log_debug("Finding element with wmd: {}.".format(wmd))
         try:
             return getattr(self.__wmd_finder, wmd.meta["type"].name.lower())(wmd)

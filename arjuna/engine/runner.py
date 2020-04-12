@@ -42,7 +42,7 @@ class TestRunner:
         pytest_ini_path = res_path + "/pytest.ini"
 
         # -s is to print to console.
-        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "-s"]
+        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "--show-capture", "all"] # 
         self.__test_args = []
 
     @property

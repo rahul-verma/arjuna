@@ -25,6 +25,7 @@ import abc
 import pprint
 from collections import OrderedDict
 from typing import Callable
+import abc
 
 class _ArDict(metaclass=abc.ABCMeta):
     '''
@@ -159,3 +160,25 @@ class OnceOnlyKeyCIStringDict(CIStringDict):
 
     def _clone(self):
         return OnceOnlyKeyCIStringDict(self.items())
+
+
+class Dictable(metaclass=abc.ABCMeta):
+    '''
+        Abstract class. Any object which has a method `as_dict` is a `Dictable`.
+    '''
+
+    @abc.abstractmethod
+    def _as_dict(self):
+        pass
+
+    def as_dict(self) -> dict:
+        '''
+            Dictionary representation of this object.
+
+            Returns:
+                A `dict` object.
+        '''
+        retval = self._as_dict()
+        if type(retval) is not dict:
+            raise Exception("_as_dict must return a dict type. Got {} of type {}".format(retval, type(retval)))
+        

@@ -17,6 +17,7 @@ Possibilities
 - GuiDialog is a class of its own now. Rules to follow. Separated in its own module.
 - GuiAppContent separated in its own module.
 - GNS rules have been indicated in the API doc. Coded restrictions need to be done yet for a more closely controlled GNS namespace structure.
+- Log output (from display) is captured in the HTML report. Not displayed on the screen.
 
 
 0.9.19

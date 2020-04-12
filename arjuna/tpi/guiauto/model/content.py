@@ -171,7 +171,7 @@ class GuiAppContent(Gui, ScreenShooter):
                 You can pass `max_wait` argument to change this. Value is considered in seconds.
         '''
         from arjuna.tpi.guiauto.locator import GuiWidgetLocator
-        wmd = GuiWidgetLocator(fmt_args=fargs, **kwargs).as_wmd()
+        wmd = GuiWidgetLocator(fmt_args=fargs, **kwargs)._as_wmd()
         self._wait_until_absent(wmd)
 
     def contains(self, *, fargs=None, **kwargs):
