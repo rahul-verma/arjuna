@@ -62,8 +62,8 @@ class GuiSource:
         return self.__content
 
     @content.setter
-    def _content(self):
-        self.__content
+    def _content(self, content):
+        self.__content = content
 
 @track("debug")
 class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
@@ -84,7 +84,7 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
     def __init__(self, raw_source, root_tag):
         super().__init__()
         self.__raw_source = raw_source
-        self.__root_element = root_element
+        self.__root_tag = root_tag
         self.__fpaths = []
         self.__node = None 
         self.__elem_node = None
@@ -110,7 +110,7 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
         # Done separately from above to retain all original content
         self.__node = XmlNode(etree.parse(StringIO(raw_source), parser))
         
-        if self.__root_element == "body":
+        if self.__root_tag == "body":
             body = tree.getroot().find('body')
             elem_node = list(body)[0]
         else:

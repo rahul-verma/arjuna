@@ -29,7 +29,6 @@ import abc
 
 from arjuna.tpi.tracker import track
 
-@track("trace")
 class _ArDict(metaclass=abc.ABCMeta):
     '''
 
@@ -98,7 +97,7 @@ class _ArDict(metaclass=abc.ABCMeta):
     def is_empty(self):
         return len(self.__store) == 0
 
-@track("trace")
+
 class CIStringDict(_ArDict):
     '''
         Dictionary with case-insensitive keys.
@@ -115,7 +114,7 @@ class CIStringDict(_ArDict):
     def _clone(self):
         return CIStringDict(self.__store)
 
-@track("trace")
+
 class ProcessedKeyDict(_ArDict):
     '''
         Dictionary with case-insensitive keys.
@@ -188,7 +187,7 @@ class Dictable(metaclass=abc.ABCMeta):
             raise Exception("_as_dict must return a dict type. Got {} of type {}".format(retval, type(retval)))
         return retval
 
-class Point:
+class Point(Dictable):
     '''
         Represents an XY coordinate.
 

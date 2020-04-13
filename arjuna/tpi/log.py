@@ -51,7 +51,12 @@ def __log(invoker, level, msg, contexts=None):
     elif contexts is None:
         contexts = ("default",)
     contexts = set(contexts)
-    getattr(Arjuna.get_logger(), level)(msg, extra={'invoker': invoker, 'contexts':contexts, 'config':Arjuna.get_config()})
+    try:
+        getattr(Arjuna.get_logger(), level)(msg, extra={'invoker': invoker, 'contexts':contexts, 'config':Arjuna.get_config()})
+    except AttributeError:
+        # In case the logging is called before the logger is set.
+        # In future versions, see if there can be a fallabck logger.
+        pass
 
 def log_trace(msg: str, *, contexts: ListOrTuple=None):
     '''

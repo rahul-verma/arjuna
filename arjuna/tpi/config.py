@@ -44,7 +44,6 @@ class _ROWrapper:
 
 from arjuna.tpi.tracker import track
 
-@track("debug")
 class Configuration:
     '''
         Read-only, immutable object that contains a fixed mapping of ArjunaOptions and User defined options.
