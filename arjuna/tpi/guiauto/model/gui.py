@@ -21,7 +21,7 @@ from enum import Enum
 import functools
 
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
-from arjuna.tpi.guiauto.helpers import Dictable
+from arjuna.tpi.helper.arjtype import Dictable
 
 from arjuna.interact.gui.gom.guidef import *
 from .formatter import GuiWidgetLocatorFormatter
@@ -44,7 +44,7 @@ class _GuiConditions:
         caller = DynamicCaller(self.__gui.validate_readiness)
         return CommandCondition(caller)
 
-@track("info")
+@track("debug")
 class Gui(AsserterMixIn):
     '''
         Represents a GUI.

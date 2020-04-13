@@ -16,8 +16,10 @@
 # limitations under the License.
 
 import abc
-from arjuna.tpi.helpers.image import Image
+from arjuna.tpi.helper.image import Image
+from arjuna.tpi.tracker import track
 
+@track("debug")
 class ScreenShooter(metaclass=abc.ABCMeta):
 
     def take_screenshot(self, *, prefix: str=None) -> Image:

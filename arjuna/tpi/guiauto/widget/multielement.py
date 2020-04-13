@@ -25,9 +25,11 @@ from selenium.common.exceptions import StaleElementReferenceException
 from arjuna.tpi.guiauto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.dispatchable import _Dispatchable
 from arjuna.tpi.guiauto.widget.element import GuiElement
-from arjuna.tpi.guiauto.source import *
 from arjuna.tpi.engine.asserter import AsserterMixIn
+from arjuna.tpi.guiauto.source.multielement import GuiMultiElementSource
+from arjuna.tpi.tracker import track
 
+@track("debug")
 class _GuiPartialElement(GuiElement):
 
     def __init__(self, gui, multi_element, index: int, dispatcher_element):
@@ -48,6 +50,30 @@ class _GuiPartialElement(GuiElement):
         return self.__index
 
 class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
+    '''
+        Represents multiple GuiElements found using a same GuiWidgetLocator.
+
+        Not meant to be directly created. It is created using calls from `Gui` object or `GuiNamespace` object of `Gui`.
+
+        Arguments:
+            gui: `Gui` object containing this GuiMultiElement.
+            wmd: GuiElementMetaData object.
+            elements: (optional) List of GuiElements to populate this object instead of locating it.
+
+        Note:
+            It supports an index based retrieval of a contained GuiElement:
+
+                .. code-block:: python
+
+                    multielement[<index>]
+
+            It also supports looping:
+
+                .. code-block:: python
+
+                    for element in multi_element:
+                        some element code
+    '''
     
     def __init__(self, gui, wmd, elements=None): #, parent=None):
         AsserterMixIn.__init__(self)
@@ -55,11 +81,12 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
         _Dispatchable.__init__(self)
         if elements:
             self.__elements = elements
+            self._size = len(elements)
         else:
             self.__elements = list()   
         self._load_source_parser()
 
-    def configure_partial_elements(self, elem_config):
+    def _configure_partial_elements(self, elem_config):
         '''
             This method is supposed to be called when multielement identification is completed.
             This is not used for usual multi-element.
@@ -69,37 +96,83 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
             instance.configure(elem_config)
 
     def _load_source_parser(self):
-        self.__source_parser = MultiElementSource(self.elements)
+        self.__source_parser = GuiMultiElementSource(self.elements)
 
     def __getitem__(self, index):
         return self.__elements[index]
 
     @property
-    def size(self):
+    def size(self) -> int:
+        '''
+            Number of GuiElements in this object.
+        '''
         return len(self.__elements)
 
-    length = size
+    @property
+    def length(self) -> int:
+        '''
+            Number of GuiElements in this object.
+        '''
+        return len(self.__elements)
 
-    def __len__(self):
+    def __len__(self) -> int:
         return self.size
 
-    def assert_size(self, size, obj_name, msg=None):
+    def assert_size(self, size, obj_name, msg=None) -> None:
+        '''
+            Assert number of elements in this GuiMultiElement.
+
+            Arguments:
+                size: Expected size.
+                obj_name: Used for making the assertion error message useful.
+                msg: (Optional) Any custom message that you want to included in assertion error message.
+        '''
         self.asserter.assert_equal(self.size, size, msg="{} should have exactly {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter._format_msg(msg)))
 
-    def assert_min_size(self, size, obj_name, msg=None):
+    def assert_min_size(self, size, obj_name, msg=None) -> None:
+        '''
+            Assert minimum number of elements in this GuiMultiElement.
+
+            Arguments:
+                size: Minimum expected size.
+                obj_name: Used for making the assertion error message useful.
+                msg: (Optional) Any custom message that you want to included in assertion error message.
+        '''
         self.asserter.assert_min(self.size, size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter._format_msg(msg)))
     
-    def assert_max_size(self, size, obj_name, msg=None):
+    def assert_max_size(self, size, obj_name, msg=None) -> None:
+        '''
+            Assert maximum number of elements in this GuiMultiElement.
+
+            Arguments:
+                min_size: Maximum expected size.
+                obj_name: Used for making the assertion error message useful.
+                msg: (Optional) Any custom message that you want to included in assertion error message.
+        '''
         self.asserter.assert_max(self.size, size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter._format_msg(msg)))
 
-    def assert_empty(self, obj_name, msg=None):
+    def assert_empty(self, obj_name, msg=None) -> None:
+        '''
+            Assert that this GuiMultiElement has no elements.
+
+            Arguments:
+                obj_name: Used for making the assertion error message useful.
+                msg: (Optional) Any custom message that you want to included in assertion error message.
+        '''
         self.asserter.assert_equal(self.size, 0, msg="{} should be empty, but was found to have {} elements.".format(obj_name, self.size, self.asserter._format_msg(msg)))
 
-    def assert_not_empty(self, obj_name, msg=None):
+    def assert_not_empty(self, obj_name, msg=None) -> None:
+        '''
+            Assert that this GuiMultiElement has atleast one element.
+
+            Arguments:
+                obj_name: Used for making the assertion error message useful.
+                msg: (Optional) Any custom message that you want to included in assertion error message.
+        '''
         self.asserter.assert_greater(self.size, 0, msg="{} is expected to have atleat 1 element, but was found to be empty.{}".format(obj_name, self.size, self.asserter._format_msg(msg)))
 
     @size.setter
-    def size(self, count):
+    def _size(self, count):
         # The logic ignores stale elements 
         for i in range(count):
             try:
@@ -109,26 +182,52 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
                 pass
 
     @property
-    def random_element(self):
+    def random_element(self) -> GuiElement:
+        '''
+            A GuiElement chosen at random from GuiElments in this GuiMultiElement.
+        '''
         return self[random.randint(0, self.size-1)]
 
     @property
-    def first_element(self):
+    def first_element(self) -> GuiElement:
+        '''
+            First GuiElement in this GuiMultiElement.
+        '''
         return self[0]
 
     @property
-    def last_element(self):
+    def last_element(self) -> GuiElement:
+        '''
+            Last GuiElement in this GuiMultiElement.
+        '''
         return self[len(self)-1]
 
-    def get_element_at_ordinal(self, ordinal):
+    def get_element_at_ordinal(self, ordinal: int) -> GuiElement:
+        '''
+            Get GuiElement at an ordinal (position) in this GuiMultiElement.
+
+            Ordinals are as per human counting. First element is at ordinal 1.
+        '''
         return self.__elements[ordinal-1]
 
-    def get_element_by_visible_text(self, text):
+    def get_element_by_visible_text(self, text: str) -> GuiElement:
+        '''
+            Get GuiElement in this GuiMultiElement whose text is as supplied.
+
+            Args:
+                text: Text of this target GuiElement.
+        '''
         texts = self.__get_all_texts()
         first_index = self.__find_first_text_index(texts, text)
         return self[first_index]
 
-    def get_element_by_value(self, value):
+    def get_element_by_value(self, value: str) -> GuiElement:
+        '''
+            Get GuiElement in this GuiMultiElement whose value attribute content is as supplied.
+
+            Args:
+                value: Value attribute content of this target GuiElement.
+        '''
         values = self.__get_all_values()
         first_index = self.__find_first_value_index(values, value)
         return self[first_index]
@@ -139,16 +238,27 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
         else:
             return None
 
-    def are_selected(self):
+    def are_selected(self) -> bool:
+        '''
+            Check if all GuiElements in this GuiMultiElement are in selected state.
+        '''
         return [instance.is_selected() for instance in self.__elements]
 
-    # getting index attribute when it does not exist retursn value attribute.
+    # getting index attribute when it does not exist returns value attribute.
     # So, not going the Selenium way. Setu would treat index as computer counting.
-    def has_index_selected(self, index):
+    def has_index_selected(self, index: int) -> GuiElement:
+        '''
+            Check if GuiElement at the given index is in selected state.
+        '''
         return self[index].is_selected()
 
     # Ordinal is human counting
     def has_ordinal_selected(self, ordinal):
+        '''
+            Check if GuiElement at the given ordinal is in selected state.
+            
+            Ordinals are as per human counting. First element is at ordinal 1.
+        '''
         return self.has_index_selected(ordinal-1)
 
     def __find_first_match_index(self, in_sequence, to_match):
@@ -179,7 +289,11 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
             raise Exception("No option with {} value present in drop down.".format(value))
         return first_index
 
-    def get_first_selected_instance(self):
+    @property
+    def first_selected_element(self) -> GuiElement:
+        '''
+            First GuiElement which is in selected state.
+        '''
         self._load_source_parser()
         booleans = self.are_selected()
         first_index = None
@@ -191,19 +305,34 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
             return self[first_index]
 
     @property
-    def source(self):
+    def source(self) -> GuiMultiElementSource:
+        '''
+            `GuiSource` for this GuiMultiElement.
+        '''
         return self.__source_parser
 
     @property
     def elements(self):
+        '''
+            List of GuiElements in this GuiMultiElement
+        '''
         return self.__elements
 
     @property
     def filter(self):
-        return ElementFilter(self)
+        '''
+            GuiMultiElementFilter object for this GuiMultiElement
+        '''
+        return GuiMultiElementFilter(self)
 
 
-class ElementFilter:
+class GuiMultiElementFilter:
+    '''
+        Build a new GuiMultiElement by filtering an existing one.
+
+        Arguments:
+            gui_multi_element: Existing `GuiMultiElement` object.
+    '''
 
     def __init__(self, gui_multi_element):
         self.__gui = gui_multi_element.gui
@@ -211,12 +340,21 @@ class ElementFilter:
         self.__elements = gui_multi_element.elements
         self.__filtered_elements = self.__elements
 
-    def build(self):
+    def build(self) -> GuiMultiElement:
+        '''
+            Build a new GuiMultiElement.
+        '''
         me = GuiMultiElement(self.__gui, self.__wmd, elements=self.__filtered_elements)
         self.__filtered_elements = self.__elements
         return me
 
-    def active(self):
+    def active(self) -> 'self':
+        '''
+            Choose only active/non-stale GuiElements. 
+
+            Returns:
+                Current GuiMultiElementFilter object
+        '''
         out = list()
         for e in self.__filtered_elements:
             try:
@@ -227,35 +365,78 @@ class ElementFilter:
         self.__filtered_elements = out
         return self
 
-    def visible(self):
+    def visible(self) -> 'self':
+        '''
+            Choose only visible GuiElements. 
+
+            Returns:
+                Current GuiMultiElementFilter object
+        '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements
             if e.is_visible()
         ]
         return self
 
-    def attr(self, name):
+    def attr(self, name) -> 'self':
+        '''
+            Choose only GuiElements which contain the given attribute.
+
+            Arguments:
+                name: Name of attribute
+
+            Returns:
+                Current GuiMultiElementFilter object
+        '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements
             if e.source.is_attr_present(name)
         ]
         return self        
 
-    def attr_value(self, name, value):
+    def attr_value(self, name, value) -> 'self':
+        '''
+            Choose only GuiElements which contain the given attribute and its value.
+
+            Arguments:
+                name: Name of attribute
+                value: Full or partial content of the given attribute
+
+            Returns:
+                Current GuiMultiElementFilter object
+        '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements
-            if e.source.get_attr_value(name) == value
+            if value in e.source.get_attr_value(name)
         ]
         return self
 
-    def value(self, value):
+    def value(self, value) -> 'self':
+        '''
+            Choose only GuiElements whose value attribute matches the value argument provided.
+
+            Arguments:
+                value: Full or partial content of value attribute.
+
+            Returns:
+                Current GuiMultiElementFilter object
+        '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements
-            if e.source.get_value("value") == str(value)
+            if str(value) in e.source.get_value("value")
         ]
         return self
 
-    def text_content(self, text):
+    def text(self, text) -> 'self':
+        '''
+            Choose only GuiElements whose text contains the text provided.
+
+            Arguments:
+                text: Full or partial text.
+
+            Returns:
+                Current GuiMultiElementFilter object
+        '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements
             if text in e.text

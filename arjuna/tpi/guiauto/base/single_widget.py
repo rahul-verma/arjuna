@@ -17,12 +17,11 @@
 
 import abc
 from arjuna.interact.gui.auto.base.dispatchable import _Dispatchable
-from arjuna.tpi.guiauto.source import ElementXMLSourceParser
+from arjuna.tpi.guiauto.source.element import GuiElementSource
 from arjuna.core.exceptions import GuiWidgetTextNotSetError
-from arjuna.tpi.guiauto.source import GuiSource
 from arjuna.tpi.tracker import track
 
-@track("info")
+@track("debug")
 class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
     '''
         Abstract claas for a single GuiWidget in the Gui.
@@ -57,8 +56,8 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
     def _load_source_parser(self):
         raw_source = self._get_html()
-        self.__source_parser = ElementXMLSourceParser(raw_source)
-        self.__source_parser.load()
+        self.__source_parser = GuiElementSource(raw_source)
+        self.__source_parser._load()
 
     def _is_partial_element(self):
         return False
@@ -212,7 +211,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
     # Properties
     @property
-    def source(self) -> GuiSource:
+    def source(self) -> GuiElementSource:
         '''
            `GuiSource` object for this `GuiWidget`.
         '''

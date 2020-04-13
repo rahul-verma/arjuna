@@ -1,5 +1,5 @@
 import copy
-from arjuna.tpi.helpers.dict import CIStringDict
+from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.configure.impl.validator import Validator
 
 class WithX:

@@ -1,7 +1,7 @@
-arjuna.tpi.helpers.xml module
+arjuna.tpi.helper.json module
 =============================
 
-.. automodule:: arjuna.tpi.helpers.xml
+.. automodule:: arjuna.tpi.helper.json
    :members:
    :undoc-members:
    :show-inheritance:

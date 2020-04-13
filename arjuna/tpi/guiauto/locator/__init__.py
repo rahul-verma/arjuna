@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.tpi.helpers.dict import Dictable
+from arjuna.tpi.helper.arjtype import Dictable
 from arjuna.tpi.tracker import track
 
 @track("debug")

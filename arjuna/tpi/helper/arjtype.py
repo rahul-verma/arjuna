@@ -16,9 +16,9 @@
 # limitations under the License.
 
 '''
-Arjuna Dictionaries
+Arjuna Types
 
-Contains many custom implementations of a dict type.
+Contains many general purpose type abstractions.
 '''
 
 import abc
@@ -27,6 +27,9 @@ from collections import OrderedDict
 from typing import Callable
 import abc
 
+from arjuna.tpi.tracker import track
+
+@track("trace")
 class _ArDict(metaclass=abc.ABCMeta):
     '''
 
@@ -95,6 +98,7 @@ class _ArDict(metaclass=abc.ABCMeta):
     def is_empty(self):
         return len(self.__store) == 0
 
+@track("trace")
 class CIStringDict(_ArDict):
     '''
         Dictionary with case-insensitive keys.
@@ -111,7 +115,7 @@ class CIStringDict(_ArDict):
     def _clone(self):
         return CIStringDict(self.__store)
 
-
+@track("trace")
 class ProcessedKeyDict(_ArDict):
     '''
         Dictionary with case-insensitive keys.
@@ -131,7 +135,7 @@ class ProcessedKeyDict(_ArDict):
     def _clone(self):
         return ProcessedKeyDict(self.__processor, self.__store)  
 
-
+@track("trace")
 class OnceOnlyKeyCIStringDict(CIStringDict):
     '''
         Dictionary with case-insensitive keys that allows for immutable key-value pairs.
@@ -162,6 +166,7 @@ class OnceOnlyKeyCIStringDict(CIStringDict):
         return OnceOnlyKeyCIStringDict(self.items())
 
 
+@track("debug")
 class Dictable(metaclass=abc.ABCMeta):
     '''
         Abstract class. Any object which has a method `as_dict` is a `Dictable`.
@@ -182,4 +187,112 @@ class Dictable(metaclass=abc.ABCMeta):
         if type(retval) is not dict:
             raise Exception("_as_dict must return a dict type. Got {} of type {}".format(retval, type(retval)))
         return retval
-        
+
+class Point:
+    '''
+        Represents an XY coordinate.
+
+        Args:
+            x: X co-ordinate
+            y: Y co-ordinate
+    '''
+
+    def __init__(self, x, y):
+        self.__x = x
+        self.__y = y
+
+    @property
+    def location(self):
+        '''
+            Get XY co-ordinates as a tuple -> (x,y)
+        '''
+        return (self.__x, self.__y)
+
+    def _as_dict(self):
+        return {"x": self.__x, "y":self.__y}
+
+class Offset(Point):
+    '''
+        Represents an offset from current `Point` on `Screen` in terms of XY coordinates.
+
+        Args:
+            x: X co-ordinate
+            y: Y co-ordinate
+    '''
+
+    def __init__(self, x, y):
+        super().__init__(x,y)
+
+@track("debug")
+class Screen:
+    '''
+        Represents Gui Screen in terms of its XY coordinates.
+    '''
+
+    @staticmethod
+    def xy(x:int, y:int) -> Point:
+        '''
+            Create a `Point` on Gui Screen in terms of its XY coordinates.
+        '''
+        return _Point(x,y)
+
+    @staticmethod
+    def offset(x, y) -> Offset:
+        '''
+            Create a `Offset` on Gui Screen in terms of its XY coordinates.
+        '''
+        return _Offset(x,y)
+
+@track("debug")
+class NVPair(Dictable):
+    '''
+        Encapsulates a name-value pair. It is an implementation of `Dictable`.
+
+        Args:
+            name: Name of this object
+            value: Value of this object
+    '''
+
+    def __init__(self, name, value):
+        self.__name = name
+        self.__value = value
+
+    def _as_dict(self):
+        return {"name" : self.__name, "value": self.__value}
+
+
+@track("debug")
+class Attr(NVPair):
+    '''
+        A name-value pair with an associated optional tag name. It is an implementation of `Dictable`.
+
+        Keyword Arguments:
+            name: (Mandatory) Name of this object
+            value: (Mandatory) Value of this object
+            tag: Tag associated with this object
+    '''
+
+    def __init__(self, *, name, value, tag=None):
+        super().__init__(name, value)
+        self.__tag = tag
+
+    def _as_dict(self):
+        d = super()._as_dict()
+        d["tag"] = self.__tag
+        return d
+
+
+@track("debug")
+class NVPairs(Dictable):
+    '''
+        Encapsulates arbitrary name-value pairs. It is an implementation of `Dictable`.
+
+        Keyword Arguments:
+            **nvpairs: Arbitrary name-value pairs passed as keyword arguments.
+    '''
+
+    def __init__(self, **nvpairs):
+        self.__kwargs = nvpairs
+
+    def _as_dict(self):
+        return self.__kwargs

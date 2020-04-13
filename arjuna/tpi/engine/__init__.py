@@ -30,7 +30,7 @@ from arjuna.core.utils import thread_utils
 from arjuna.core.thread.decorators import *
 from arjuna.core.utils import sys_utils
 from arjuna.core.adv.proxy import ROProxy
-from arjuna.tpi.helpers.dict import CIStringDict
+from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.core.adv.decorators import singleton
 import codecs
 import sys

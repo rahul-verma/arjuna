@@ -1,7 +1,7 @@
-arjuna.tpi.guiauto.widget.tabs module
+arjuna.tpi.guiauto.source.page module
 =====================================
 
-.. automodule:: arjuna.tpi.guiauto.widget.tabs
+.. automodule:: arjuna.tpi.guiauto.source.page
    :members:
    :undoc-members:
    :show-inheritance:

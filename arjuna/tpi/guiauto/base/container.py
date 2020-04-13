@@ -71,7 +71,7 @@ class GuiWidgetContainer(metaclass=abc.ABCMeta):
             raise Exception("MultiElement could not be found with any of the provided locators.")
         multi_guielement._located_with = locator_type, locator_value
         multi_guielement._dispatcher = dispatcher
-        multi_guielement.size = size
+        multi_guielement._size = size
         multi_guielement._load_source_parser()
 
     def _load_element(self, gui_element):

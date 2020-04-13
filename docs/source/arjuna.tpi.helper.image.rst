@@ -1,7 +1,7 @@
-arjuna.tpi.helpers.dict module
+arjuna.tpi.helper.image module
 ==============================
 
-.. automodule:: arjuna.tpi.helpers.dict
+.. automodule:: arjuna.tpi.helper.image
    :members:
    :undoc-members:
    :show-inheritance:

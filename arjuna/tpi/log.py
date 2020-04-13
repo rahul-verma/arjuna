@@ -41,7 +41,7 @@ Following Arjuna Options are related to logging:
     * LOG_ALLOWED_CONTEXTS: The context strings which determine log messages belonging to which contexts can be displayed and logged.
 '''
 
-from arjuna.tpi.helpers.audit import _Stack
+from arjuna.tpi.helper.audit import _Stack
 from arjuna.tpi.arjuna_types import *
 
 def __log(invoker, level, msg, contexts=None):

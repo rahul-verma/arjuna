@@ -18,7 +18,9 @@
 from enum import Enum, auto
 
 from arjuna.core.enums import GuiInteractionConfigType
-from arjuna.tpi.helpers.dict import Dictable
+from arjuna.tpi.helper.arjtype import Dictable
+from arjuna.tpi.tracker import track
+
 
 class _GuiInteractionConfigBuilder:
 
@@ -45,7 +47,7 @@ class _GuiInteractionConfigBuilder:
         return GuiInteractionConfig(self.__settings)
 
 
-class GuiInteractionConfig:
+class _GuiInteractionConfig:
     '''
         Stores configured values for behavior of actions on a given GuiElement.
     '''
@@ -71,6 +73,8 @@ class GuiInteractionConfig:
         '''
         return _GuiInteractionConfigBuilder()
 
+
+@track("debug")
 class GuiDriverExtendedConfig:
 
     def __init__(self, capabilities, browser_args, browser_prefs, browser_exts):
@@ -91,6 +95,7 @@ class GuiDriverExtendedConfig:
         map["browserExtensions"] = self.__browser_exts
         return map
 
+@track("debug")
 class GuiDriverExtendedConfigBuilder:
 
     def __init__(self):
@@ -119,7 +124,7 @@ class GuiDriverExtendedConfigBuilder:
         return GuiDriverExtendedConfig(self.__capabilities, self.__browser_args, self.__browser_prefs, self.__browser_exts)
 
 
-class Keyboard:
+class _Keyboard:
 
     class KeyChord:
 
@@ -144,66 +149,3 @@ class Keyboard:
             Returns a new KeyChord object.
         '''
         return KeyChord()
-
-class _Point:
-
-    def __init__(self, x, y):
-        self.__x = x
-        self.__y = y
-
-    @property
-    def location(self):
-        return (self.__x, self.__y)
-
-class _Offset(_Point):
-
-    def __init__(self, x, y):
-        super().__init__(x,y)
-
-class Screen:
-
-    @staticmethod
-    def xy(x, y):
-        return _Point(x,y)
-
-    @staticmethod
-    def offset(x, y):
-        return _Offset(x,y)
-
-class NVPair(Dictable):
-
-    def __init__(self, name, value):
-        self.__name = name
-        self.__value = value
-
-    def _as_dict(self):
-        return {"name" : self.__name, "value": self.__value}
-
-class Attr(NVPair):
-
-    def __init__(self, name, value, tag=None):
-        super().__init__(name, value)
-        self.__tag = tag
-
-    def _as_dict(self):
-        d = super()._as_dict()
-        d["tag"] = self.__tag
-        return d
-
-
-class Point(Dictable):
-
-    def __init__(self, x, y):
-        self.__x = x
-        self.__y = y
-
-    def _as_dict(self):
-        return {"x": self.__x, "y":self.__y}
-
-class Params(Dictable):
-
-    def __init__(self, **kwargs):
-        self.__kwargs = kwargs
-
-    def _as_dict(self):
-        return self.__kwargs

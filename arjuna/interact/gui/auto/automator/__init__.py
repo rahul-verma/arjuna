@@ -24,11 +24,11 @@ from arjuna.tpi.enums import ArjunaOption
 from arjuna.tpi.guiauto.base.container import GuiWidgetContainer
 from arjuna.interact.gui.auto.base.dispatchable import _Dispatchable
 from .drivercaps import DriverCapabilities
-from arjuna.tpi.guiauto.source import ElementXMLSourceParser
+from arjuna.tpi.guiauto.source.page import GuiPageSource
 from arjuna.interact.gui.dispatcher.selenium.driver import SeleniumDriverDispatcher
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.guiauto.widget.element import GuiElement
-from arjuna.tpi.helpers.image import Image
+from arjuna.tpi.helper.image import Image
 
 class GuiAutomator(GuiWidgetContainer,_Dispatchable):
 
@@ -181,10 +181,10 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
         self.main_window.focus()
 
     @property
-    def source(self):
+    def source(self) -> GuiPageSource:
         raw_source = self.get_source_from_remote()
-        source_parser = ElementXMLSourceParser(raw_source, root_element="html")
-        source_parser.load()
+        source_parser = GuiPageSource(raw_source)
+        source_parser._load()
         return source_parser
 
     def perform_action_chain(self, single_action_chain):
@@ -216,12 +216,12 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
         return m_guielement
 
     def dropdown(self, gui, wmd):
-        from arjuna.tpi.guiauto.widget.dropdown import GuiWebSelect
-        return GuiWebSelect(gui, wmd)
+        from arjuna.tpi.guiauto.widget.dropdown import GuiDropDown
+        return GuiDropDown(gui, wmd)
 
     def radio_group(self, gui, wmd):
-        from arjuna.tpi.guiauto.widget.radio_group import GuiWebRadioGroup
-        return GuiWebRadioGroup(gui, wmd)
+        from arjuna.tpi.guiauto.widget.radio_group import GuiRadioGroup
+        return GuiRadioGroup(gui, wmd)
 
     def execute_javascript(self, js, *args):
         return self.browser.execute_javascript(js, 

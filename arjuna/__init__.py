@@ -81,7 +81,7 @@ from arjuna.tpi.engine.data.markup import *
 from arjuna.tpi.engine.data.record import *
 from arjuna.tpi.engine.data.generator import Random, DataEntity, Locales
 
-from arjuna.tpi.guiauto.helpers import Attr, Point, Params
+from arjuna.tpi.helper.arjtype import NVPair, NVPairs, Screen, Attr, Point, Offset
 from arjuna.tpi.guiauto.locator import GuiWidgetLocator
 from arjuna.tpi.guiauto.model.app import GuiApp
 from arjuna.tpi.guiauto.model.page import GuiPage
@@ -91,10 +91,10 @@ from arjuna.tpi.guiauto.model.dialog import GuiDialog
 from arjuna.tpi.exceptions import *
 from arjuna.tpi.enums import *
 from arjuna.core.enums import *
-from arjuna.tpi.helpers.audit import HardCoded
-from arjuna.tpi.helpers.xml import NodeLocator
-from arjuna.tpi.helpers.dict import ProcessedKeyDict
-from arjuna.tpi.helpers.json import Json
+from arjuna.tpi.helper.audit import HardCoded
+from arjuna.tpi.helper.xml import NodeLocator
+from arjuna.tpi.helper.arjtype import ProcessedKeyDict
+from arjuna.tpi.helper.json import Json
 
 from arjuna.tpi.log import *
 from arjuna.tpi.magic import C, L, R

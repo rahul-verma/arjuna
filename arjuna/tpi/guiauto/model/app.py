@@ -22,7 +22,7 @@ from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.tracker import track
 from arjuna.tpi.log import *
 
-@track("info")
+@track("debug")
 class _App(Gui, metaclass=abc.ABCMeta):
 
     def __init__(self, *, config=None, ext_config=None, label=None, gns_dir=None, gns_file_name=None):
@@ -59,7 +59,7 @@ class _App(Gui, metaclass=abc.ABCMeta):
     def prepare_widget(self, widget_object):
         return widget_object
 
-@track("info")
+@track("debug")
 class GuiApp(_App):
     '''
         Represents a GUI App.

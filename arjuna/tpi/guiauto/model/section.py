@@ -20,8 +20,9 @@ from .gui import Gui
 from .content import GuiAppContent
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.tracker import track
+from arjuna.tpi.guiauto.source.element import GuiElementSource
 
-@track("info")
+@track("debug")
 class GuiSection(GuiAppContent):
     '''
         Represents a GUI Section i.e. a part of the current page in the Gui. 
@@ -181,3 +182,13 @@ class GuiSection(GuiAppContent):
             Parent GUI of this `GuiSection`.
         '''
         return self.__parent
+
+    @property
+    def source(self) -> GuiElementSource:
+        '''
+           `GuiElementSource` object for the root element of this `GuiSection`.
+
+           Raises:
+            Exception is raised if root element is not defined.
+        '''
+        return self._automator.source

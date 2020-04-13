@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.tpi.helpers.dict import CIStringDict
+from arjuna.tpi.helper.arjtype import CIStringDict
 
 from arjuna.tpi.enums import *
 from arjuna.core.enums import *

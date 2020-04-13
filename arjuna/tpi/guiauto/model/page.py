@@ -20,8 +20,9 @@ from .gui import Gui
 from .content import GuiAppContent
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.tracker import track
+from arjuna.tpi.guiauto.source.page import GuiPageSource
 
-@track("info")
+@track("debug")
 class GuiPage(GuiAppContent):
     '''
         Represents a GUI Page. 
@@ -45,3 +46,10 @@ class GuiPage(GuiAppContent):
         super().__init__(automator=source_gui._automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)
         self.app.ui = self
         self._load(*args, **kwargs)
+
+    @property
+    def source(self) -> GuiPageSource:
+        '''
+           `GuiPageSource` object for this `Gui`.
+        '''
+        return self._automator.source

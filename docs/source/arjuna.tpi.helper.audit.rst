@@ -1,7 +1,7 @@
-arjuna.tpi.helpers.json module
+arjuna.tpi.helper.audit module
 ==============================
 
-.. automodule:: arjuna.tpi.helpers.json
+.. automodule:: arjuna.tpi.helper.audit
    :members:
    :undoc-members:
    :show-inheritance:

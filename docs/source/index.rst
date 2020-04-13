@@ -149,6 +149,15 @@ Web GUI Automation
         * :py:class:`GuiWidgetLocatorFormatter <arjuna.tpi.guiauto.model.formatter.GuiWidgetLocatorFormatter>`
 * Different Gui Widgets
     * :py:class:`GuiElement <arjuna.tpi.guiauto.widget.element.GuiElement>`
+    * :py:class:`GuiMultiElement <arjuna.tpi.guiauto.widget.multielement.GuiMultiElement>`
+        * Filtering a GuiMultiElement - :py:class:`GuiMultiElementFilter <arjuna.tpi.guiauto.widget.multielement.GuiMultiElementFilter>`
+    * :py:class:`GuiDropDown <arjuna.tpi.guiauto.widget.dropdown.GuiDropDown>`
+    * :py:class:`GuiRadioGroup <arjuna.tpi.guiauto.widget.radio_group.GuiRadioGroup>`
+* Inquiring Gui Source
+    * :py:class:`GuiPageSource <arjuna.tpi.guiauto.source.page.GuiPageSource>`
+    * :py:class:`GuiElementSource <arjuna.tpi.guiauto.source.element.GuiElementSource>`
+    * :py:class:`GuiMultiElementSource <arjuna.tpi.guiauto.source.multielement.GuiMultiElementSource>`
+    * :py:class:`GuiSourceContent <arjuna.tpi.guiauto.source.content.GuiSourceContent>` - Encapsulates source content for all Guis and GuiWidgets.
 
 Hooks
 =====
@@ -156,16 +165,23 @@ Hooks
 
 Helpers
 =======
-* :py:meth:`HardCoded.sleep <arjuna.tpi.helpers.audit.HardCoded.sleep>`
-* :py:class:`Json <arjuna.tpi.helpers.json.Json>`
-* :py:mod:`XML <arjuna.tpi.helpers.xml>`
-    * :py:class:`XmlNode <arjuna.tpi.helpers.xml.XmlNode>`
-    * :py:class:`NodeLocator <arjuna.tpi.helpers.xml.NodeLocator>`
-* :py:class:`Image <arjuna.tpi.helpers.image.Image>`
-* :py:meth:`Arjuna Dictionaries <arjuna.tpi.helpers.dict>`
-    * :py:class:`CIStringDict <arjuna.tpi.helpers.dict.CIStringDict>`
-    * :py:class:`ProcessedKeyDict <arjuna.tpi.helpers.dict.ProcessedKeyDict>`
-    * :py:class:`OnceOnlyKeyCIStringDict <arjuna.tpi.helpers.dict.OnceOnlyKeyCIStringDict>`
+* :py:meth:`HardCoded.sleep <arjuna.tpi.helper.audit.HardCoded.sleep>`
+* :py:class:`Json <arjuna.tpi.helper.json.Json>`
+* :py:mod:`XML <arjuna.tpi.helper.xml>`
+    * :py:class:`XmlNode <arjuna.tpi.helper.xml.XmlNode>`
+    * :py:class:`NodeLocator <arjuna.tpi.helper.xml.NodeLocator>`
+* :py:class:`Image <arjuna.tpi.helper.image.Image>`
+* :py:meth:`Arjuna Types <arjuna.tpi.helper.arjtype>`
+    * :py:class:`CIStringDict <arjuna.tpi.helper.arjtype.CIStringDict>`
+    * :py:class:`ProcessedKeyDict <arjuna.tpi.helper.arjtype.ProcessedKeyDict>`
+    * :py:class:`OnceOnlyKeyCIStringDict <arjuna.tpi.helper.arjtype.OnceOnlyKeyCIStringDict>`
+    * :py:class:`Point <arjuna.tpi.helper.arjtype.Point>`
+    * :py:class:`Offset <arjuna.tpi.helper.arjtype.Offset>`
+    * :py:class:`Screen <arjuna.tpi.helper.arjtype.Screen>`
+    * :py:class:`NVPair <arjuna.tpi.helper.arjtype.NVPair>`
+    * :py:class:`NVPairs <arjuna.tpi.helper.arjtype.NVPair>`
+    * :py:class:`Attr <arjuna.tpi.helper.arjtype.Attr>`
+
 
 Logging
 =======

@@ -18,8 +18,23 @@
 from arjuna.interact.gui.auto.finder.wmd import SimpleGuiWidgetMetaData
 from arjuna.tpi.guiauto.locator import GuiWidgetLocator
 
-# UUID is for client reference. Agent does not know about this.
-class GuiWebSelect:
+from arjuna.tpi.guiauto.source.element import GuiElementSource
+from arjuna.tpi.tracker import track
+
+@track("debug")
+class GuiDropDown:
+    '''
+        Represents a drop down list in th Gui.
+
+        Not meant to be directly created. It is created using calls from `Gui` object or `GuiNamespace` object of `Gui`.
+
+        Arguments:
+            gui: `Gui` object containing this GuiDropDown.
+            wmd: `GuiElementMetaData` object for this GuiDropDown.
+
+        Keyword Arguments:
+            parent: `GuiElement` in case it is found inside a `GuiElement`. Default is the `Gui` object.
+    '''
 
     def __init__(self, gui, wmd, parent=None):
         self.__gui = gui
@@ -45,16 +60,16 @@ class GuiWebSelect:
         return self.__wmd
 
     @property
-    def gui(self):
+    def gui(self) -> 'Gui':
+        '''
+            `Gui` object containing this GuiDropDown.
+        '''
         return self.__gui
         
     def __validate_select_control(self, tag):
         if tag.lower() != "select":
             raise Exception("The element should have a 'select' tag for WebSelect element. Found: " + tag)
         self._multi = self.__is_multi_select()
-
-    def is_found(self):
-        return self.__found
 
     def __find(self):
 
@@ -77,16 +92,37 @@ class GuiWebSelect:
         source = self._wrapped_main_element.source
         return source.get_attr_value("multiple", optional=True) is True or source.get_attr_value("multi", optional=True) is True
 
-    def is_multi_select(self):
+    def is_multi_select(self) -> bool:
+        '''
+            Check if this GuiDropDown allows multiple selection of options.
+        '''
         return self._multi
 
-    def has_index_selected(self, index):
+    def has_index_selected(self, index: int) -> bool:
+        '''
+            Check if this GuiDropDown has option selected at given index.
+
+            Args:
+                index: Target index.
+        '''
         return self.__options[index].is_selected()
 
-    def has_value_selected(self, value):
+    def has_value_selected(self, value: str) -> bool:
+        '''
+            Check if this GuiDropDown has option with given value attribute content selected.
+
+            Args:
+                value: Exact content of value attribute.
+        '''
         return self.__options.get_element_by_value(value).is_selected()
 
-    def has_visible_text_selected(self, text):
+    def has_visible_text_selected(self, text: str) -> bool:
+        '''
+            Check if this GuiDropDown has option with visible text selected.
+
+            Args:
+                text: Exact visible text content.
+        '''
         return self.__options.get_element_by_visible_text(text).is_selected()
 
     def __select_option(self, option):
@@ -95,20 +131,56 @@ class GuiWebSelect:
         if self.__wmd.meta.settings.should_check_post_state() and not option.is_selected():
             raise Exception("The attempt to select the dropdown option was not successful.")
 
-    def select_index(self, index):
+    def select_index(self, index: int) -> None:
+        '''
+            Select option at given index.
+
+            Args:
+                index: Target index.
+        '''
         option = self.__options[index]
         self.__select_option(option)
 
-    def select_ordinal(self, ordinal):
+    def select_ordinal(self, ordinal: int) -> None:
+        '''
+            Select option at given ordinal.
+
+            Ordinals are as per human counting. First element is at ordinal 1.
+
+            Args:
+                ordinal: Target ordinal.
+        '''
         return self.select_by_index(ordinal-1)
 
-    def select_text(self, text):
+    def select_text(self, text: str) -> None:
+        '''
+            Select option with given visible text.
+
+            Args:
+                text: Exact visible text content.
+        '''
         option = self.__options.get_element_by_visible_text(text)
         self.__select_option(option)
 
     @property
-    def text(self):
-        option = self.__options.get_first_selected_instance()
+    def text(self) -> str:
+        '''
+            Visible text of selected option
+
+           Note:
+           
+            You can select an option with visible text of this GuiDropDown too using following Python code:
+                .. code-block:: python
+
+                    dropdown.text = "<some_text>"
+
+            **Method used for this diffent from `select_text`**. It uses `send_keys` to simulate this interaction instead of clicking an option.
+            
+            Waits for clickability.
+
+            `ArjunaOption.GUIAUTO_MAX_WAIT` in associated configuration is used as the default. Can be overriden using `max_wait` argument in GuiWidgetLocator or GNS file.
+        '''
+        option = self.__options.first_selected_element
         return option.text
 
     @text.setter
@@ -116,61 +188,71 @@ class GuiWebSelect:
         # Dropdown element does not support clear text.
         self._wrapped_main_element.enter_text(text)
 
-    def select_value(self, value):
+    def select_value(self, value: str) -> None:
+        '''
+            Select option with given content of value attribute.
+
+            Args:
+                value: Exact content of value attribute.
+        '''
         option = self.__options.get_element_by_value(value)
         self.__select_option(option)
 
     @property
-    def value(self):
-        option = self.__options.get_first_selected_instance()
+    def value(self) -> str:
+        '''
+            Content of value attribute of selected option
+        '''
+        option = self.__options.first_selected_element
         return option.source.get_attr_value("value")
 
-    # The following methods deal with multi-select and would be implemented later.
+    @property
+    def source(self) -> GuiElementSource:
+        '''
+            `GuiSource` for this GuiDropDown (source of root element).
+        '''
+        return self._wrapped_main_element.source
 
     def __validate_multi_select(self):
         if not self.is_multi_select():
             raise Exception("Deselect actions are allowed only for a multi-select dropdown.")
 
-    def deselect_by_value(self, value):
+    def _deselect_by_value(self, value):
         self.__validate_multi_select()
         return self.__options.get_element_by_value(value).deselect()
 
-    def deselect_by_index(self, index):
+    def _deselect_by_index(self, index):
         pass
 
-    def deselect_by_visible_text(self, text):
+    def _deselect_by_visible_text(self, text):
         pass
 
-    def get_selected_options(self):
+    def _get_selected_options(self):
         pass
 
-    def are_visible_texts_selected(self, text_list):
+    def _are_visible_texts_selected(self, text_list):
         pass
 
-    def are_values_selected(self, text_list):
+    def _are_values_selected(self, text_list):
         pass
 
-    def all_options(self):
+    def _all_options(self):
         pass
 
-    def select_by_values(self, value_list):
+    def _select_by_values(self, value_list):
         pass
 
-    def deselect_by_values(self, value_list):
+    def _deselect_by_values(self, value_list):
         pass
 
-    def select_by_indices(self, indices):
+    def _select_by_indices(self, indices):
         pass
 
-    def deselect_by_indices(self, indices):
+    def _deselect_by_indices(self, indices):
         pass
 
-    def select_by_visible_texts(self, text_list):
+    def _select_by_visible_texts(self, text_list):
         pass
 
-    def deselect_by_visible_texts(self, text_list):
+    def _deselect_by_visible_texts(self, text_list):
         pass
-
-    @property
-    def source(self):
-        return self._wrapped_main_element.source

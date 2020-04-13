@@ -1,6 +1,9 @@
 import os
 import base64
 
+from arjuna.tpi.tracker import track
+
+@track("trace")
 class Image:
     '''
         An image object.

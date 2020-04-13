@@ -21,7 +21,7 @@ from enum import Enum
 import functools
 
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
-from arjuna.tpi.guiauto.helpers import Dictable
+from arjuna.tpi.helper.arjtype import Dictable
 
 from arjuna.interact.gui.gom.guidef import *
 from .formatter import GuiWidgetLocatorFormatter
@@ -35,12 +35,11 @@ from arjuna.tpi.guiauto.model.gns import GNS
 from arjuna.interact.gui.auto.finder import GuiFinder, GuiEmdFinder
 
 from .gui import Gui
-from arjuna.tpi.helpers.image import Image
+from arjuna.tpi.helper.image import Image
 from arjuna.tpi.protocol.screenshooter import ScreenShooter
-from arjuna.tpi.guiauto.source import GuiSource
 from arjuna.tpi.tracker import track
 
-@track("info")
+@track("debug")
 class GuiAppContent(Gui, ScreenShooter):
     '''
         Represents content of any type in a `GuiApp`.
@@ -257,13 +256,6 @@ class GuiAppContent(Gui, ScreenShooter):
 
         if label is not None:
             getattr(self.gns, label)
-
-    @property
-    def source(self) -> GuiSource:
-        '''
-           `GuiSource` object for this `GuiAppContent`.
-        '''
-        return self._automator.source
 
     def locate(self, locator) -> 'GuiWidget':
         '''

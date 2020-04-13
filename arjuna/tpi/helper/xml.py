@@ -22,6 +22,9 @@ Classes to assist in XML Parsing.
 from lxml import etree, html
 from typing import List, Dict, Tuple
 
+from arjuna.tpi.tracker import track
+
+@track("debug")
 class NodeLocator:
     '''
         Locator for finding an XML Node in an `XmlNode`.
@@ -63,7 +66,7 @@ class NodeLocator:
     def search_node(self, xml_node):
         return [XmlNode(n) for n in xml_node.xpath(self.__xpath)]
 
-
+@track("debug")
 class XmlNode:
     '''
         Represents a single node in a parsed XML.

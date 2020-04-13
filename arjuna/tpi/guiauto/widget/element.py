@@ -26,7 +26,7 @@ from arjuna.tpi.exceptions import *
 from arjuna.core.exceptions import *
 from arjuna.tpi.tracker import track
 
-@track("info")
+@track("debug")
 class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, SingleGuiWidget):
     '''
         Represents a single element in GUI of any kind.

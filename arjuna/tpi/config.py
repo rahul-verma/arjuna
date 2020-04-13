@@ -42,6 +42,9 @@ class _ROWrapper:
     def value(self, option):
         return self.__config.value(option)
 
+from arjuna.tpi.tracker import track
+
+@track("debug")
 class Configuration:
     '''
         Read-only, immutable object that contains a fixed mapping of ArjunaOptions and User defined options.
@@ -169,6 +172,7 @@ class Configuration:
         '''
         return self.__wrapped_config.as_json_dict()
 
+@track("debug")
 class ConfigBuilder:
     '''
         Helps in constructing a new `Configuration` object from an existing one.

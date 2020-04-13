@@ -54,7 +54,7 @@ def create_file_data_source(file_path, delimiter="\t"):
         raise Exception("This is not a default file format supported as a data source: " + path)
     return ds
 
-from arjuna.tpi.helpers.dict import CIStringDict
+from arjuna.tpi.helper.arjtype import CIStringDict
 
 class DataReferences:
 

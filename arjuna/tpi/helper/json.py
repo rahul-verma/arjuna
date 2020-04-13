@@ -16,10 +16,13 @@
 # limitations under the License.
 
 import json
-from arjuna.tpi.helpers.dict import _ArDict
+from arjuna.tpi.helper.arjtype import _ArDict
 from jsonpath_rw import jsonpath, parse
 from typing import Any
 
+from arjuna.tpi.tracker import track
+
+@track("trace")
 class Json(_ArDict):
     '''
         Arjuna's Json Object.

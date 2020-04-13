@@ -19,7 +19,7 @@ import os
 
 from arjuna import Arjuna
 from arjuna.interact.gui.auto.finder.wmd import SimpleGuiWidgetMetaData
-from arjuna.tpi.guiauto.source import FrameSource
+from arjuna.tpi.guiauto.source.frame import _GuiFrameSource
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
@@ -137,7 +137,7 @@ class IFrame(FrameContainer):
         self.__dom_root = dom_root
         self.__parent_frames = []
         self.__wrapped_element = wrapped_element
-        self._source_parser = FrameSource(self)
+        self._source_parser = _GuiFrameSource(self)
 
     @property
     def dom_root(self):
@@ -177,8 +177,8 @@ class IFrame(FrameContainer):
         return self.wrapped_element
 
     @property
-    def source(self):
-        self._source_parser.load()
+    def source(self) -> _GuiFrameSource:
+        self._source_parser._load()
         return self._source_parser
 
     # def focus_on_parent(self):

@@ -7,6 +7,7 @@ Possibilities
     - optonal request object
 - Can Selenium disable certificate trust checking - Chrome/Firefox.
 - Or how to a certificate to trusted certificates.
+- Formalise the concept of DataEntity beyond an alias for tuple.
 
 0.9.20
 ------
@@ -14,16 +15,19 @@ Possibilities
 - Added Image helper class.
 - Added doc strings for:
     - Gui, GuiAppContent, GuiApp, GuiPage, GuiSection, GuiDialog
-    - SingleGuiWidget, Locatable, GuiElement
+    - SingleGuiWidget, Locatable, GuiElement. GuiMultiElement, GuiDropDown, GuiRadioGroup
     - Gui Locator Formatter, GuiWidgetLocator, Dictable
     - GNS, GNS Formtter
+    - GuiSource, SingleEntityGuiSource, GuiPageSource, GuiElementSource, GuiMultiElementSource
     - Image
     - AsserterMixin
     - ScreenShooter
+    - All Arjuna Types in helper.arjtype
 - GuiDialog is a class of its own now. Rules to follow. Separated in its own module.
 - GuiAppContent separated in its own module.
 - GNS rules have been indicated in the API doc. Coded restrictions need to be done yet for a more closely controlled GNS namespace structure.
 - Log output (from display) is captured in the HTML report. Not displayed on the screen.
+- GuiSource concept materialized as a hierarchy. Still work to do.
 
 
 0.9.19
@@ -296,7 +300,7 @@ Minor update. All l10 references are changed to l10n.
 - Added SourceNode class. 
     - element.source.node gives an object of this. 
     - Provides finder methods for directly finding content in element source rather than browser based selenium commands.
-    - Added xfinder in arjuna.tpi.helpers.xml to define finding strategy.
+    - Added xfinder in arjuna.tpi.helper.xml to define finding strategy.
 - Singular names for all directories.
 - config.get_arjuna_option_value and config.get_user_option_value -> config.arjuna_options.value, config.user_options.value
 

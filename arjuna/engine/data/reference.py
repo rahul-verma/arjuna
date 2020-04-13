@@ -19,7 +19,7 @@ import abc
 
 from arjuna.core.reader.excel import *
 from arjuna.tpi.engine.data.record import *
-from arjuna.tpi.helpers.dict import CIStringDict
+from arjuna.tpi.helper.arjtype import CIStringDict
 
 class ContextualDataReference(metaclass=abc.ABCMeta):
 
