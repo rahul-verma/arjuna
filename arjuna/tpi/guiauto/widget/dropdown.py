@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from arjuna.interact.gui.auto.finder.wmd import SimpleGuiWidgetMetaData
-from arjuna.tpi.guiauto.locator import GuiWidgetLocator
+from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
 
 from arjuna.tpi.guiauto.source.element import GuiElementSource
 from arjuna.tpi.tracker import track

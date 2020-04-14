@@ -9,7 +9,6 @@ Submodules
    arjuna.tpi.guiauto.model.app
    arjuna.tpi.guiauto.model.content
    arjuna.tpi.guiauto.model.dialog
-   arjuna.tpi.guiauto.model.formatter
    arjuna.tpi.guiauto.model.gns
    arjuna.tpi.guiauto.model.gui
    arjuna.tpi.guiauto.model.page

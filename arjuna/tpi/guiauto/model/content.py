@@ -24,7 +24,7 @@ from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.helper.arjtype import Dictable
 
 from arjuna.interact.gui.gom.guidef import *
-from .formatter import GuiWidgetLocatorFormatter
+from arjuna.tpi.guiauto.meta.formatter import GuiWidgetLocatorFormatter
 from arjuna.tpi.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
@@ -141,9 +141,9 @@ class GuiAppContent(Gui, ScreenShooter):
         '''
         return self._automator.browser
 
-    def format(self, **fargs) -> GuiWidgetLocatorFormatter:
+    def formatter(self, **fargs) -> GuiWidgetLocatorFormatter:
         '''
-            Create a :class:`~arjuna.tpi.guiauto.model.formatter.GuiWidgetLocatorFormatter` object.
+            Create a :class:`~arjuna.tpi.guiauto.meta.formatter.GuiWidgetLocatorFormatter` object.
 
             Keyword Arguments:
                 **fargs: Arbitrary key-value pairs to be used for formatting identifiers in `GuiWidgetLocator`.
@@ -169,7 +169,7 @@ class GuiAppContent(Gui, ScreenShooter):
 
                 You can pass `max_wait` argument to change this. Value is considered in seconds.
         '''
-        from arjuna.tpi.guiauto.locator import GuiWidgetLocator
+        from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
         wmd = GuiWidgetLocator(fmt_args=fargs, **kwargs)._as_wmd()
         self._wait_until_absent(wmd)
 

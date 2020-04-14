@@ -24,7 +24,7 @@ from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.helper.arjtype import Dictable
 
 from arjuna.interact.gui.gom.guidef import *
-from .formatter import GuiWidgetLocatorFormatter
+from arjuna.tpi.guiauto.meta.formatter import GuiWidgetLocatorFormatter
 from arjuna.tpi.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *

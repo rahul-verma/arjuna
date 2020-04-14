@@ -1,5 +1,5 @@
 
-from .formatter import GNSLabelFormatter
+from arjuna.tpi.guiauto.meta.formatter import GNSLabelFormatter
 from arjuna.tpi.exceptions import *
 from arjuna.core.exceptions import *
 from arjuna.interact.gui.auto.finder import GuiEmdFinder, GuiElementEmdFinder
@@ -66,9 +66,9 @@ class GNS:
             self.__gui = gui_or_element.gui  
         self.__loaded = True         
 
-    def format(self, **fargs) -> GNSLabelFormatter:
+    def formatter(self, **fargs) -> GNSLabelFormatter:
         '''
-            Create a :class:`~arjuna.tpi.guiauto.model.formatter.GNSLabelFormatter` object.
+            Create a :class:`~arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter` object.
 
             Keyword Arguments:
                 **fargs: Arbitrary key-value pairs to be used for formatting identifiers in `GuiWidgetLocator`.

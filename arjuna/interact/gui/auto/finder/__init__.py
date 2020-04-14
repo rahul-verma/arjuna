@@ -18,7 +18,7 @@
 from functools import partial
 from arjuna.tpi.exceptions import *
 from arjuna.core.exceptions import *
-from arjuna.tpi.guiauto.locator import GuiWidgetLocator
+from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
 
 class GuiEmdFinder:
 

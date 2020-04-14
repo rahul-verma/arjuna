@@ -8,10 +8,11 @@ Possibilities
 - Can Selenium disable certificate trust checking - Chrome/Firefox.
 - Or how to a certificate to trusted certificates.
 - Formalise the concept of DataEntity beyond an alias for tuple.
+- browser maximise no happening.
 
 0.9.20
 ------
-- Implemented ScreenShooter protocol. Created ScreenShooter base class. `GuiAppContent` implements the protocol by inheriting from it.
+- Implemented ScreenShooter protocol. Created ScreenShooter base class. `GuiApp` and `GuiPage` support the protocol in Arjuna.
 - Added Image helper class.
 - Added doc strings for:
     - Gui, GuiAppContent, GuiApp, GuiPage, GuiSection, GuiDialog

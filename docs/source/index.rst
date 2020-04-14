@@ -143,10 +143,10 @@ Web GUI Automation
         * :py:class:`GuiSection <arjuna.tpi.guiauto.model.section.GuiSection>`
         * :py:class:`GuiDialog <arjuna.tpi.guiauto.model.dialog.GuiDialog>`
 * Defining and formatting Gui Widget Locators:
-    * :py:class:`GuiWidgetLocator <arjuna.tpi.guiauto.locator.GuiWidgetLocator>`
+    * :py:class:`GuiWidgetLocator <arjuna.tpi.guiauto.meta.locator.GuiWidgetLocator>`
     * Classes related to formatting of `GuiWidgetLocator`:
-        * :py:class:`GNSLabelFormatter <arjuna.tpi.guiauto.model.formatter.GNSLabelFormatter>`
-        * :py:class:`GuiWidgetLocatorFormatter <arjuna.tpi.guiauto.model.formatter.GuiWidgetLocatorFormatter>`
+        * :py:class:`GNSLabelFormatter <arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter>`
+        * :py:class:`GuiWidgetLocatorFormatter <arjuna.tpi.guiauto.meta.formatter.GuiWidgetLocatorFormatter>`
 * Different Gui Widgets
     * :py:class:`GuiElement <arjuna.tpi.guiauto.widget.element.GuiElement>`
     * :py:class:`GuiMultiElement <arjuna.tpi.guiauto.widget.multielement.GuiMultiElement>`

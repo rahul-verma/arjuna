@@ -64,6 +64,7 @@ class GuiMultiElementSource(GuiSource):
         '''
         return [e.source.content.text for e in self.__instances]
 
+    @property
     def values(self) -> list:
         '''
             Content of value attribute of all GuiElements in this `GuiMultiElement`.

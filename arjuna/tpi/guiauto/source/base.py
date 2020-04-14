@@ -131,7 +131,6 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
             for c in list(elem_node.iterchildren())
             ])
 
-        self.__tag = elem_node.tag
         self.__text_content = normalized_text_content
         self.__inner_html = normalized_inner_html
         self.__full_source = raw_source

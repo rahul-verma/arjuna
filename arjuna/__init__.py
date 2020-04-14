@@ -82,7 +82,7 @@ from arjuna.tpi.engine.data.record import *
 from arjuna.tpi.engine.data.generator import Random, DataEntity, Locales
 
 from arjuna.tpi.helper.arjtype import NVPair, NVPairs, Screen, Attr, Point, Offset
-from arjuna.tpi.guiauto.locator import GuiWidgetLocator
+from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
 from arjuna.tpi.guiauto.model.app import GuiApp
 from arjuna.tpi.guiauto.model.page import GuiPage
 from arjuna.tpi.guiauto.model.section import GuiSection

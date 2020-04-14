@@ -25,6 +25,7 @@ from arjuna.interact.gui.auto.finder import GuiElementFinder, GuiElementEmdFinde
 from arjuna.tpi.exceptions import *
 from arjuna.core.exceptions import *
 from arjuna.tpi.tracker import track
+from arjuna.tpi.guiauto.meta.formatter import GuiWidgetLocatorFormatter
 
 @track("debug")
 class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, SingleGuiWidget):
@@ -94,7 +95,7 @@ class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, SingleGuiWidget):
 
                 You can pass `max_wait` argument to change this. Value is considered in seconds.
         '''
-        from arjuna.tpi.guiauto.locator import GuiWidgetLocator
+        from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
         wmd = GuiWidgetLocator(fmt_args=fargs, **kwargs)._as_wmd()
         self._wait_until_absent(wmd)
 
@@ -119,6 +120,15 @@ class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, SingleGuiWidget):
             return True
 
     ########## Served by Template ########
+
+    def formatter(self, **fargs) -> GuiWidgetLocatorFormatter:
+        '''
+            Create a :class:`~arjuna.tpi.guiauto.meta.formatter.GuiWidgetLocatorFormatter` object.
+
+            Keyword Arguments:
+                **fargs: Arbitrary key-value pairs to be used for formatting identifiers in `GuiWidgetLocator`.
+        '''
+        return GuiWidgetLocatorFormatter(self, **fargs)
 
     def locate(self, locator):
         '''

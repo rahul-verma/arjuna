@@ -19,7 +19,7 @@ from arjuna import *
 
 @test
 def check_fmt_coded(request, logged_in_wordpress):
-    logged_in_wordpress.format(text="Media").element(link="$text$").click()
+    logged_in_wordpress.formatter(text="Media").element(link="$text$").click()
 
 @test
 def check_fmt_config_coded(request, logged_in_wordpress):
@@ -35,7 +35,7 @@ def check_fmt_reference_l10n_coded(request, logged_in_wordpress):
 
 @test
 def check_fmt_coded_fmt_locate(request, logged_in_wordpress):
-    logged_in_wordpress.locate(logged_in_wordpress.format(text="Media").locator(link="$text$")).click()
+    logged_in_wordpress.formatter(text="Media").locate(link="$text$").click()
 
 @test
 def check_fmt_config_coded_locate(request, logged_in_wordpress):

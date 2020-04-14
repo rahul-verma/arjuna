@@ -269,7 +269,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
 
     def __get_all_texts(self):
         self._load_source_parser()
-        texts = self.__source_parser.get_text_contents()
+        texts = self.__source_parser.texts
         return texts
 
     def __find_first_text_index(self, texts, text):
@@ -280,7 +280,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
 
     def __get_all_values(self):
         self._load_source_parser()
-        values = self.__source_parser.get_values()
+        values = self.__source_parser.values
         return values
 
     def __find_first_value_index(self, values, value):

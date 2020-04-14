@@ -36,6 +36,7 @@ class GuiElementSource(SingleGuiEntitySource):
 
     def __init__(self, raw_source):
         super().__init__(raw_source, root_tag="body")
+        self.__tag = None
         self.__raw_attrs = None
         self.__attributes = None
 
@@ -47,6 +48,7 @@ class GuiElementSource(SingleGuiEntitySource):
         return self.__tag
 
     def _process_elem_node(self, elem_node):
+        self.__tag = elem_node.tag
         self.__raw_attrs = elem_node.keys()
         self.__attributes = {k.lower():v for k,v in elem_node.items()}
 
