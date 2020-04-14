@@ -1,15 +1,5 @@
 Following is the list of critical additions and updates for a given released version:
 
-Possibilities
--------------
-- GuiApp commons.yaml
-- simplify nodeid access. request.raw_request.node.nodeid -> request.node_name
-    - optonal request object
-- Can Selenium disable certificate trust checking - Chrome/Firefox.
-- Or how to a certificate to trusted certificates.
-- Formalise the concept of DataEntity beyond an alias for tuple.
-- browser maximise no happening.
-
 0.9.20
 ------
 - Implemented ScreenShooter protocol. Created ScreenShooter base class. `GuiApp` and `GuiPage` support the protocol in Arjuna.
@@ -495,3 +485,14 @@ Primary Goal: Document Usage of Key Features. Make code changes to support doc f
 - Basic unittest integration to run all tests in the tests directory of a project.
 - Element names in GNS files are validated as Arjuna names (Valid Python names, 3-50 length)
 - Importing from arjuna has been heavily simplified. from arjuna import * provides all public names.
+
+
+Future Possibilities and Targeted Fixes
+---------------------------------------
+- GuiApp commons.yaml
+- Simplify nodeid access. request.raw_request.node.nodeid -> request.node_name
+    - optonal request object
+- Can Selenium disable certificate trust checking - Chrome/Firefox.
+- Or how to a certificate to trusted certificates.
+- Browser should maximize by default.
+- Formalise the concept of DataEntity beyond an alias for tuple.
