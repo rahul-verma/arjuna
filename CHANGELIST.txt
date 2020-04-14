@@ -1,5 +1,9 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.21
+------
+
+
 0.9.20
 ------
 - Implemented ScreenShooter protocol. Created ScreenShooter base class. `GuiApp` and `GuiPage` support the protocol in Arjuna.
