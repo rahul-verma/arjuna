@@ -32,7 +32,7 @@ def dashboard(request):
 
 @test
 def check_withx_using_with(request, dashboard):
-    dashboard.left_nav.element(nav_link=Params(lname="Posts")).click()
-    dashboard.left_nav.element(nav_link=Params(lname="Media")).click()
-    dashboard.left_nav.element(nav_link=Params(lname="Pages")).click()
-    dashboard.left_nav.element(nav_link=Params(lname="Comments")).click()
+    dashboard.left_nav.element(nav_link=NVPairs(lname="Posts")).click()
+    dashboard.left_nav.element(nav_link=NVPairs(lname="Media")).click()
+    dashboard.left_nav.element(nav_link=NVPairs(lname="Pages")).click()
+    dashboard.left_nav.element(nav_link=NVPairs(lname="Comments")).click()

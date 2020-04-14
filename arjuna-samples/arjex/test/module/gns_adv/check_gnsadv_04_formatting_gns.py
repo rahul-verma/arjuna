@@ -32,7 +32,7 @@ def dashboard(request):
 
 @test
 def check_fmt_gns(request, dashboard):
-    dashboard.left_nav.gns.format(text="Media").dyn_link.click()
+    dashboard.left_nav.gns.formatter(text="Media").dyn_link.click()
 
 @test
 def check_fmt_config_gns(request, dashboard):

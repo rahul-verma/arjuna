@@ -45,8 +45,6 @@ class GNSLabelFormatter:
         self.__fargs = fargs
 
     def __getattr__(self, name):
-        if factory not in self._FACTORIES:
-            raise Exception("Unsupported method for Formatter: {}. Allowed: {}.".format(factory, _FACTORIES))
         wmd = self.__gui_def.get_wmd(name)
         from arjuna import log_debug
         log_debug("Finding element with label: {}, wmd: {} and fargs: {}".format(name, wmd, self.__fargs))
@@ -85,11 +83,11 @@ class GuiWidgetLocatorFormatter:
 
     def locator(type="element", **kwargs) -> GuiWidgetLocator:
         '''
-           Create a GuiWidgetLocator.
+            Create a GuiWidgetLocator.
 
-           Keyword Arguments:
-            type: type of GuiWidget (element, multi_element, dropdown, radio_group)
-            **kwars: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+            Keyword Arguments:
+                type: type of GuiWidget (element, multi_element, dropdown, radio_group)
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
 
             Returns:
                 A `GuiWidgetLocator` as per the arguments to this call and format arugments of this GuiWidgetLocatorFormatter.
@@ -100,11 +98,11 @@ class GuiWidgetLocatorFormatter:
 
     def locate(self, type="element", **kwargs):
         '''
-           Locate a GuiWidget.
+            Locate a GuiWidget.
 
-           Keyword Arguments:
-            type: type of GuiWidget (element, multi_element, dropdown, radio_group)
-            **kwars: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+            Keyword Arguments:
+                type: type of GuiWidget (element, multi_element, dropdown, radio_group)
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
 
             Returns:
                 An object of type `GuiWidget`. Exact object type depends on the value of `type` attribute. 
