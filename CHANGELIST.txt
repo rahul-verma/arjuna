@@ -12,6 +12,7 @@ Following is the list of critical additions and updates for a given released ver
         - CLI options are superimposed
     - The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
     - The name can be used in the `magic C function` query or as the cname argument.
+- Fixtures now allow drive_with argument.
 
 
 0.9.20
@@ -520,18 +521,9 @@ Future Possibilities and Targeted Fixes
 - Diffing two pages on 2 URLs. Comparison of HTML.
 
 
-Run conf vs run env
--------------------
-Reverse the concept
-
-
-- tests which have 
-
-
 Dynamic parameterization
 ------------------------
 
-Step 1
 -   @test needs to change.
 
 - auto_allocate in @test. Enabled by default.

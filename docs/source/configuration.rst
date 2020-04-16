@@ -108,8 +108,8 @@ These configurations could have their own respective properties (e.g. Applicatio
 
 In Arjuna, you can define run configurations and environment configurations very easily in your test automation framework.
 
-Defining and Using Environment Configurations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Defining and Using Run and Environment Configurations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can define any number of run configuration .conf files in `<Project Root Dir>/config/run> directory.
 

@@ -102,11 +102,11 @@ def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_wi
 
         if drive_with:
             records = drive_with.build().all_records
-            my_objects = []
-            for record in records:
-                my = My()
-                my.data = record
-                my_objects.append(my)
+            # my_objects = []
+            # for record in records:
+            #     my = My()
+            #     my.data = record
+            #     my_objects.append(my)
             func = pytest.mark.parametrize('data', records, ids=_repr_record)(func) 
         # else:
         #     my = My()
