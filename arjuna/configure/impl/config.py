@@ -68,7 +68,7 @@ class Config:
     def processor(self, processor):
         self.__processor = processor
 
-    def as_json_dict(self):
+    def items(self):
         return {
             "arjunaOptions": self.arjuna_config.as_json_dict(),
             "userOptions": self.user_config.as_json_dict()
@@ -195,6 +195,9 @@ class AbstractConfig:
                 ArjunaCore.console.display("| {:60s}| {}".format("(" + key + ")", ""))
                 ArjunaCore.console.marker(100)
         ArjunaCore.console.marker(100)
+
+    def items(self):
+        return self.__config_dict.items()
 
 
 class UserConfig(AbstractConfig):

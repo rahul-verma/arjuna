@@ -96,41 +96,44 @@ Let's say we have custom configuration with name `nconf`.
 - `browser.name` refers to the property in reference configuration.
 - You can prefix a configuration name with a configuration name. For example `reference.browser.name` and `nconf.browser.name` will retrieve `browser.name` from `reference` and `nconf` configurations respectively.
 
-Environment Configurations
---------------------------
+Run Configurations and Environment Configurations
+-------------------------------------------------
 
 Purpose
 ^^^^^^^
 
-In today's Agile environments, typically testers run automated tests on multiple environments. These environments could have their own respective properties (e.g. Application URL, user name, password and so on.)
+In today's Agile environments, typically testers run automated tests with multiple configurations on multiple environments. 
 
-In Arjuna, you can define configurations for environments and use them very easily in your test automation framework.
+These configurations could have their own respective properties (e.g. Application URL, user name, password and so on.)
+
+In Arjuna, you can define run configurations and environment configurations very easily in your test automation framework.
 
 Defining and Using Environment Configurations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can define one or more `environment_name.conf` files exactly like a `project.conf` file. Place these files in `<Project Root>/config/env` directory. Arjuna automatically loads these files.
+You can define any number of run configuration .conf files in `<Project Root Dir>/config/run> directory.
 
-You can retrieve an environment config by its name using `Arjuna.get_config` or `request.get_config` call. Now you can inquire the values just like you deal with any configuration in Arjuna. You can also retrieve their options using the magic `C` function, for example `C("tevn.browser.name")`
+You can define any number of environment configuration .conf files in `<Project Root Dir>/config/env> directory.
 
-Making an environment configuration as the default
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Arjuna automatically loads these files as combinations of run confs and env confs when it loads. For each combination:
+    - Reference config is taken as base
+    - run conf is superimposed
+    - env conf is superimposed
+    - CLI options are superimposed
 
-You can do a session wide update that the reference configuration should utilize configuration values from a given environment config.
+The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
 
-You can do this by providing `--run-env <env_name>` CLI switch.
+You can retrieve an environment config by its name using `Arjuna.get_config` or `request.get_config` call. Now you can inquire the values just like you deal with any configuration in Arjuna. 
 
-Run Configuration: Overriding Configuration with a Configuration File for a Test Run 
-------------------------------------------------------------------------------------
+You can also retrieve their options using the magic `C` function, for example `C("run1_env1.browser.name")`
 
-With today's integration needs, at times you might need to create a configuration outside of Arjuna test project's structure and instruct Arjuna to do a session wide update that the reference configuration should utilize configuration values from a configuration file at a given path.
+Default Run Configuration and Environment Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can do this by providing `--run-conf <file name or path>` CLI switch.
+A run configuration with name `run.conf` is considered a default.
 
-Combining Environment and Run Configuration
--------------------------------------------
+An environment configuration with name `env.conf` is considered a default.
 
-If you pass the `--run-env` and `run-conf` switches together:
-1. Arjuna first does a reference config update from run-env named conf file.
-2. Then it updates the configuration with the one at run-conf path.
+What it means is that if these files are defined, then Arjuna uses options contained in them to update the reference configuration.
 
+So, technically, a configuration with name `run_env` is same as the reference configuration.

@@ -30,7 +30,7 @@ def check_conf_name_wise_query(request):
     mconf = cb.register("nconf")
 
     print(C("browser.name"))
-    print(C("reference.browser.name"))
-    print(C("reference.browser_name"))
+    print(C("ref.browser.name"))
+    print(C("ref.browser_name"))
     print(C("nconf.browser_name"))
     print(C("nconf.browser.name"))

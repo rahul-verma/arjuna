@@ -29,18 +29,18 @@ from typing import Any
 from arjuna.tpi.tracker import track
 
 @track("debug")
-def C(query: 'ConfigQuery', *, config: str=None) -> Any:
+def C(query: 'ConfigQuery', *, cname: str=None) -> Any:
     '''
         Get the object for a configuration option.
 
         Args:
             query: Config query representing a config option in reference or custom configuration.
-            config: (Optional keyword arg) Configuration name
+            cname: (Optional keyword arg) Configuration name. If None Arjuna assumes the reference configuration for this query.
 
         Returns:
             An object of Any type depending upon the configuration option query.
     '''
-    return Arjuna.get_config_value(query, config=config)
+    return Arjuna.get_config_value(query, cname=cname)
 
 @track("debug")
 def L(query: "L10nQuery", *, locale: 'Locale'=None, bucket: str=None, strict: bool=None) -> str:

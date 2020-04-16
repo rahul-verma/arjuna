@@ -42,6 +42,9 @@ class _ROWrapper:
     def value(self, option):
         return self.__config.value(option)
 
+    def items(self):
+        return self.__config.items()
+
 from arjuna.tpi.tracker import track
 
 class Configuration:
@@ -109,7 +112,8 @@ class Configuration:
             try:
                 return self.__user_options.value(option)
             except:
-                raise Exception("No config option with name {} found in {} configuration.".format(option, self.name))
+                print(self.__user_options.items())
+                raise Exception("No config option with name '{}' found in {} configuration.".format(option, self.name))
 
     @property
     def _wrapped_config(self):

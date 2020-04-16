@@ -36,11 +36,17 @@ class ArjunaOption(Enum):
     RUN_ID = auto()
     '''An alnum string representing current test run. Default is `mrun`'''
 
-    RUN_ENV_NAME = auto()
-    '''Name of the test environment. A corresponding .conf file should exist. Default is None'''
+    RUN_ENV_NAMES = auto()
+    '''Names of the test environments. Corresponding .conf file should exist in config/evn directory. Default is env'''
 
     RUN_ENV_CONF_DIR = auto()
-    '''Directory that contains all environemnt configuration .conf files.'''
+    '''Directory that contains all environment configuration .conf files.'''
+
+    RUN_CONF_DIR = auto()
+    '''Directory that contains all run configuration .conf files.'''
+
+    RUN_CONF_NAMES = auto()
+    '''Names of the run configurations. Corresponding .conf file should exist in config/run directory. Default is run'''
 
     RUN_HOST_OS = auto()
     '''Host Operating System type: Windows/Mac/Linux.'''

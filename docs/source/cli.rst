@@ -68,8 +68,8 @@ Following run options can be provided in command line:
 - **static-rid**: Instructs Arjuna NOT to use the run id without appending timestap to it. It is very helpful to us this during script development as for every run a new report directory is not created.
 - **-rf or --report-formats**: Report formats for test report generation. Allowed values are `XML` and `HTML`.
 - **--dry-run**: Do not run tests, just enumerate them.
-- **--run-env**: Provide the test environment name (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). Reference configuration is super-imposed with these options.
-- **--run-conf**: Absolute path of a conf file to be used for this run. If a name or relative path is provided, it is considered as relative to `<Project Root Dir>/config` directory. The options take precedence over reference configuration and environment configuration.
+- **--run-envs**: Provide the test environment names (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). 
+- **--run-confs**: Provide the run configuration names (e.g. `trun1`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/run` directory (e.g. `trun1.conf`). 
 - **-ao or --arjuna-option**: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates. You can provide any number of these switches.
 - **-uo or --user-option**: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.  You can provide any number of these switches.
 

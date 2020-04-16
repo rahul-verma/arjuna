@@ -9,3 +9,7 @@ from arjex.lib.fixture.test import *
 def pytest_runtest_makereport(item, call):
     result = yield
     PytestHooks.add_screenshot_for_result(item, result)
+
+def pytest_generate_tests(metafunc):
+    if 'dynamic' in metafunc.fixturenames:
+        metafunc.parametrize('dynamic', ("test"))

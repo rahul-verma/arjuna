@@ -127,6 +127,7 @@ class CreateProject(Command):
     COMMON_DIRS_FILES = (
         (FileObjectType.DIR, "config"),
         (FileObjectType.DIR, "config/env"),
+        (FileObjectType.DIR, "config/run"),
         (FileObjectType.FILE, "config/project.conf"),
         (FileObjectType.DIR, "data"),
         (FileObjectType.DIR, "data/source"),
@@ -205,7 +206,7 @@ class CreateProject(Command):
             f = open(get_proj_target_path("test/conftest.py"), "w")
             f.write(contents)
             f.close()
-            for d in [ "config/env", "data/source", "l10n/excel", "l10n/json", "data/reference/excel_row", "data/reference/excel_column", "guiauto/namespace"]:
+            for d in [ "config/env", "config/run", "data/source", "l10n/excel", "l10n/json", "data/reference/excel_row", "data/reference/excel_column", "guiauto/namespace"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:
                 copy_file("../../res/placeholder.txt", "guiauto/driver/{}/placeholder.txt".format(os_name))
@@ -236,9 +237,8 @@ class __RunCommand(Command):
         runid = arg_dict.pop("run.id")
         static_rid = arg_dict.pop("static.rid")
         self.dry_run = arg_dict.pop("dry_run")
-        self.run_conf = arg_dict.pop("run_conf")
 
-        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid, static_rid=static_rid, run_conf=self.run_conf)
+        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid, static_rid=static_rid)
 
         import sys
         proj_dir = Arjuna.get_config().value(ArjunaOption.PROJECT_ROOT_DIR)

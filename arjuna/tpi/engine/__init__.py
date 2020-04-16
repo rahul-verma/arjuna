@@ -69,7 +69,7 @@ class ArjunaSingleton:
         if not os.path.exists(d):
             os.makedirs(d)
 
-    def init(self, project_root_dir, cli_config, run_id, *, static_rid, run_conf):
+    def init(self, project_root_dir, cli_config, run_id, *, static_rid):
         from arjuna.configure.impl.processor import ConfigCreator
         ConfigCreator.init()
         self.__project_root_dir = project_root_dir
@@ -81,7 +81,7 @@ class ArjunaSingleton:
         if not static_rid:
             prefix = "{}-".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3])
         run_id = "{}{}".format(prefix, run_id)
-        self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id, run_conf)
+        self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id)
 
         from arjuna.tpi.enums import ArjunaOption
         self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.REPORT_DIR))
@@ -132,29 +132,22 @@ class ArjunaSingleton:
     def test_session(self):
         return self.__test_session
 
-    def get_config_value(self, name, config=None):
-        config = config
-        query = name
-        if config is None:
-            if type(name) is str:
-                if name.find('.') != -1:
-                    conf, query = name.split(".", 1)
+    def get_config_value(self, query, *, cname=None):
+        if cname is None:
+            if type(query) is str:
+                if query.find('.') != -1:
+                    conf, _query = query.split(".", 1)
                     if self.has_config(conf):
-                        config = self.get_config(conf)
+                        cname = conf
+                        query = _query
                     else:
-                        config = self.ref_config
-                        query = name
+                        cname = "ref"
                 else:
-                    config = self.ref_config
-                    query = name
+                    cname = "ref"
             else:
-                config = self.ref_config
-                query = name
-        else:
-            if type(config) is str:
-                config = self.get_config(config)
+                cname = "ref"
 
-        return config.value(query)
+        return self.get_config(cname).value(query)
 
     @property
     def ref_config(self):
@@ -162,7 +155,7 @@ class ArjunaSingleton:
 
     def get_config(self, name):
         if not self.has_config(name):
-            raise Exception("There is no registered configuration for name: {}".format(name))
+            raise Exception("There is no registered configuration for name: {}. Registered: {}".format(name, tuple(self.__config_map.keys())))
         return self.__config_map[name.lower()]
 
     def register_config(self, config):
@@ -181,7 +174,7 @@ class Arjuna:
     LOGGER = None
 
     @classmethod
-    def init(cls, project_root_dir, cli_config=None, run_id=None, *, static_rid=False, run_conf=None):
+    def init(cls, project_root_dir, cli_config=None, run_id=None, *, static_rid=False):
         '''
             Returns reference test context which contains reference configuration.
             This reference test context merges central conf, project conf and central CLI options.
@@ -189,7 +182,7 @@ class Arjuna:
             You can also provide an alternative root directory for test project.
         '''
         cls.ARJUNA_SINGLETON = ArjunaSingleton()
-        return cls.ARJUNA_SINGLETON.init(project_root_dir, cli_config, run_id, static_rid=static_rid, run_conf=run_conf)
+        return cls.ARJUNA_SINGLETON.init(project_root_dir, cli_config, run_id, static_rid=static_rid)
 
     @classmethod
     def get_logger(cls):
@@ -217,11 +210,11 @@ class Arjuna:
             return cls.ARJUNA_SINGLETON.get_config(name)
 
     @classmethod
-    def get_config_value(cls, name, config=None):
+    def get_config_value(cls, query, *, cname=None):
         '''
-            Returns the reference configuration value.
+            Returns the configuration value.
         '''
-        return cls.ARJUNA_SINGLETON.get_config_value(name, config)
+        return cls.ARJUNA_SINGLETON.get_config_value(query, cname=cname)
 
     @classmethod
     def get_dataref_value(cls, name, *, bucket=None, context=None):

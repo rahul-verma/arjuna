@@ -2,6 +2,16 @@ Following is the list of critical additions and updates for a given released ver
 
 0.9.21
 ------
+- Run Conf and Run Env conf concepts updated
+    - In a test project, you can define any number of run confs and/or env confs
+    - Arjuna looks for run.conf and env.conf and updates the reference configuration, if these files exist.
+    - Arjuna generates confs for all combinations of run confs and env confs when it loads. For each combination:
+        - Ref config is taken as base
+        - run conf is superimposed
+        - env conf is superimposed
+        - CLI options are superimposed
+    - The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
+    - The name can be used in the `magic C function` query or as the cname argument.
 
 
 0.9.20
@@ -500,3 +510,44 @@ Future Possibilities and Targeted Fixes
 - Or how to a certificate to trusted certificates.
 - Browser should maximize by default.
 - Formalise the concept of DataEntity beyond an alias for tuple.
+- Multi-threaded ---> Urgent Feature.
+- Tagging
+- Web Services
+- Skip known failed test
+- Mark as a bug tag - run only the bug
+- Run last failed tests
+
+- Diffing two pages on 2 URLs. Comparison of HTML.
+
+
+Run conf vs run env
+-------------------
+Reverse the concept
+
+
+- tests which have 
+
+
+Dynamic parameterization
+------------------------
+
+Step 1
+-   @test needs to change.
+
+- auto_allocate in @test. Enabled by default.
+    can add _auto_allocate function variable to True.
+    metafunc hooks checks for its presence and decides on allocation.
+        - Gives the RunConf * RunEnv conf to the fixture.
+            : If paralele CLI option -> paralel
+            : If dist CLI option is set. It splits the tests and provides only one combination of Run conf * run env.
+                > func.module name is checked.
+                    picks one random config first time and allocates.
+                    for same functions, then the same random config is allocated.
+
+If this flow is complete:
+    Fixtures are parameterized with different configurations depending on the CLI options.
+    If multiple configurations are there, then this will lead to multiple execution of a test associated with this fixture.
+    Sequential or parallel is governed by whether -n or num-workers value. Default it not_set.
+        Need to check if workers can be more than the CPUs on a system. (x-dist)
+
+

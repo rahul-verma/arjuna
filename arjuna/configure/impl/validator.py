@@ -166,6 +166,19 @@ class Validator:
         return input 
 
     @classmethod
+    def str_or_strlist(cls, input):
+        if type(input) is str:
+            input = [i.strip().lower() for i in input.split(",")]
+            input = set(input)
+        elif type(input) in {set, list, tuple}:
+            input = set([i.lower() for i in input])
+        else:
+            cls.raise_exc(input)    
+
+        input.add("default")
+        return input 
+
+    @classmethod
     def actor_mode(cls, input):
         try:
             return SetuActorMode[input.upper()]
