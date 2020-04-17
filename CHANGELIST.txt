@@ -15,10 +15,11 @@ Following is the list of critical additions and updates for a given released ver
 - Fixtures now allow drive_with argument.
 - --run-confs has short form -c and --run-envs has short form -e.
 - ArjunaOption.RUN_CONFIGS represents final calculated names for run configs. Default is ['ref'].
-- Tests with `delegate=True` set in `@test`
+- Tests with `delegate=True` can be set in `@test`
     - All run confs from command line are used to parameterize all fixtures associated with this test and hence repeat as many times. 
     - Fixtures can not have a drive_with call for this usage. drive_with can be used for such test functions.
-- Experimental code for centrally controlling delegatable tests works.
+- pytest_generate_tests hook added to test project conftest.py, its Arjuna template and added PytestHooks.delegate
+    - Auto-parameteries fixtures of test functions which have delegate=True set in their @test decorator.
 - Experimental code for writing arjuna hooks works. Tried with `arjuna_config.py`'s register_configs() hook.
 - --runid changed to --run-id for consistency.
 

@@ -113,7 +113,8 @@ class PytestHooks:
             log_warning("Error in add_screenshot_for_result hook: " + str(e))
 
 
-    def delegate(metafunc):
+    @classmethod
+    def delegate(cls, metafunc):
         from arjuna import Arjuna
         from arjuna.tpi.engine.data.markup import record
 
