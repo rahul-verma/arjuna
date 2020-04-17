@@ -68,8 +68,9 @@ Following run options can be provided in command line:
 - `--static-rid`: Instructs Arjuna NOT to use the run id without appending timestap to it. It is very helpful to us this during script development as for every run a new report directory is not created.
 - `-rf` or `--report-formats`: Report formats for test report generation. Allowed values are `XML` and `HTML`.
 - `--dry-run`: Do not run tests, just enumerate them.
-- `-e` or `--run-envs`: Provide the test environment names (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). 
-- `-c` or `--run-confs`: Provide the run configuration names (e.g. `trun1`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/run` directory (e.g. `trun1.conf`). 
+- `-d` or `--delegate-confs`: Provide the delegation configuration object names for this run. All fixtures of test functions with `delegate=True` are parameterized with these configurations. If not provided it is calculated from values of --run-confs and/or --run-envs values.
+- `--run-envs`: Provide the test environment conf file names (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). --confs overrrides this.
+- `--run-confs`: Provide the run conf file names (e.g. `trun1`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/run` directory (e.g. `trun1.conf`). --confs overrrides this.
 - `-ao` or `--arjuna-option`: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates. You can provide any number of these switches.
 - `-uo` or `--user-option`: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.  You can provide any number of these switches.
 

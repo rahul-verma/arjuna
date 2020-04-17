@@ -112,7 +112,6 @@ class Configuration:
             try:
                 return self.__user_options.value(option)
             except:
-                print(self.__user_options.items())
                 raise Exception("No config option with name '{}' found in {} configuration.".format(option, self.name))
 
     @property

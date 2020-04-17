@@ -48,8 +48,8 @@ class ArjunaOption(Enum):
     RUN_CONF_NAMES = auto()
     '''Names of the run configurations. Corresponding .conf file should exist in config/run directory. Default is run'''
 
-    RUN_CONFIGS = auto()
-    '''Names of final run configuration names for current run calculated from RUN_CONF_NAMES and RUN_ENV_NAMES. Default is ref'''
+    RUN_DELEGATION_CONFS = auto()
+    '''Names of delegation configuration names for current run used for auto-delegate logic. Either directly set, else calculated from RUN_CONF_NAMES and RUN_ENV_NAMES. Default is ref'''
 
     RUN_HOST_OS = auto()
     '''Host Operating System type: Windows/Mac/Linux.'''

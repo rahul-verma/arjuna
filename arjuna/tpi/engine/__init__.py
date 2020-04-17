@@ -226,11 +226,11 @@ class Arjuna:
         return [cls.get_config(name) for name in names]
 
     @classmethod
-    def get_run_configs(cls):
+    def get_run_delegation_confs(cls):
         '''
-            Returns the reference configuration.
+            Returns the run configurations used for auto-delegate logic if used.
         '''
-        return [cls.get_config(name) for name in cls.get_config_value("run.configs")]
+        return [cls.get_config(name) for name in cls.get_config_value("run.delegation.confs")]
 
     @classmethod
     def get_config_value(cls, query, *, cname=None):

@@ -13,7 +13,6 @@ Following is the list of critical additions and updates for a given released ver
     - The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
     - The name can be used in the `magic C function` query or as the cname argument.
 - Fixtures now allow drive_with argument.
-- --run-confs has short form -c and --run-envs has short form -e.
 - ArjunaOption.RUN_CONFIGS represents final calculated names for run configs. Default is ['ref'].
 - Tests with `delegate=True` can be set in `@test`
     - All run confs from command line are used to parameterize all fixtures associated with this test and hence repeat as many times. 
@@ -21,7 +20,13 @@ Following is the list of critical additions and updates for a given released ver
 - pytest_generate_tests hook added to test project conftest.py, its Arjuna template and added PytestHooks.delegate
     - Auto-parameteries fixtures of test functions which have delegate=True set in their @test decorator.
 - Experimental code for writing arjuna hooks works. Tried with `arjuna_config.py`'s register_configs() hook.
-- --runid changed to --run-id for consistency.
+- ArjunaOption.RUN_DELEGATE_CONFS:
+    - Repersents the final Configuration object names used auto-delegation logic.
+    - If set, the values of RUN_CONF_NAMES and RUN_ENV_CONF_NAMES are ignored.
+    - Else, it is calculated as product of all names in RUN_CONF_NAMES and RUN_ENV_CONF_NAMES to get delegation configuration names.
+- CLI Changes:
+    - --runid changed to --run-id for consistency.
+    - -d / --delegate-confs option added.
 
 0.9.20
 ------
@@ -535,15 +540,14 @@ Dynamic parameterization
 
 -   @test needs to change.
 
-- auto_allocate in @test. Enabled by default.
-    can add delegate function variable to True.
-    metafunc hooks checks for its presence and decides on allocation.
-        - Gives the RunConf * RunEnv conf to the fixture.
-            : If paralele CLI option -> paralel
-            : If dist CLI option is set. It splits the tests and provides only one combination of Run conf * run env.
-                > func.module name is checked.
-                    picks one random config first time and allocates.
-                    for same functions, then the same random config is allocated.
+auto-delegate pending:
+    - Define a configuration hook to add configurations.
+    - Gives the RunConf * RunEnv conf to the fixture.
+        : If paralele CLI option -> paralel
+        : If dist CLI option is set. It splits the tests and provides only one combination of Run conf * run env.
+            > func.module name is checked.
+                picks one random config first time and allocates.
+                for same functions, then the same random config is allocated.
 
 If this flow is complete:
     Fixtures are parameterized with different configurations depending on the CLI options.

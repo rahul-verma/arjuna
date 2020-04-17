@@ -2,7 +2,9 @@ from arjuna import *
 
 @for_test
 def res(request):
-    yield request.data.run_config['app.url'], request.data.run_config['check']
+    conf = request.data.run_config
+    print(conf.name)
+    yield conf['app.url'], conf['check']
 
 @test(delegate=True)
 def check_delegated_non_dd(request, res):

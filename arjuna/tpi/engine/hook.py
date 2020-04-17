@@ -120,7 +120,7 @@ class PytestHooks:
 
         if hasattr(metafunc.function, '_delegate') and metafunc.function._delegate is True:
             delegated_fix_names = [f for f in metafunc.fixturenames if f not in {'request', 'data'}]
-            run_configs = Arjuna.get_run_configs()
+            run_configs = Arjuna.get_run_delegation_confs()
             ids = ["RunConfig: {} ".format(c.name) for c in run_configs]
 
             if len(delegated_fix_names) == 1:

@@ -68,7 +68,7 @@ Adding User Options Programmatically
 
 You can also add user options programmatically using the `ConfigBuilder` object just like we use it for tweaking Ajuna's builtin-options.
 
-Retrieving the values is same as retrieving `ArjunaOption`s.
+Retrieving the values is same as retrieving an `ArjunaOption`.
 
 Configuration Builder - Adding options from a .conf File
 --------------------------------------------------------
@@ -111,9 +111,9 @@ In Arjuna, you can define run configurations and environment configurations very
 Defining and Using Run and Environment Configurations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can define any number of run configuration .conf files in `<Project Root Dir>/config/run> directory.
+You can define any number of run configuration .conf files in `<Project Root Dir>/config/run>` directory.
 
-You can define any number of environment configuration .conf files in `<Project Root Dir>/config/env> directory.
+You can define any number of environment configuration .conf files in `<Project Root Dir>/config/env>` directory.
 
 Arjuna automatically loads these files as combinations of run confs and env confs when it loads. For each combination:
     - Reference config is taken as base
