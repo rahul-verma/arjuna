@@ -111,3 +111,29 @@ class PytestHooks:
         except Exception as e:
             from arjuna import log_warning
             log_warning("Error in add_screenshot_for_result hook: " + str(e))
+
+
+    def delegate(metafunc):
+        from arjuna import Arjuna
+        from arjuna.tpi.engine.data.markup import record
+
+        if hasattr(metafunc.function, '_delegate') and metafunc.function._delegate is True:
+            delegated_fix_names = [f for f in metafunc.fixturenames if f not in {'request', 'data'}]
+            run_configs = Arjuna.get_run_configs()
+            ids = ["RunConfig: {} ".format(c.name) for c in run_configs]
+
+            if len(delegated_fix_names) == 1:
+                argvalues = [record(run_config=c).build().all_records[0] for c in run_configs]
+                try:
+                    metafunc.parametrize(",".join(delegated_fix_names), argvalues=argvalues, ids=ids, indirect=True)
+                except ValueError as e:
+                    raise Exception("Exception in delegation logic. Most likely you have an already parameterized fixture. You can not use a data driven fixture in an auto-delegated test. Test Function: {}.".format(metafunc.function))
+
+            else:
+                argvalues = []
+                for c in run_configs:
+                    argvalues.append([record(run_config=c).build().all_records[0] for i in delegated_fix_names])
+                try:
+                    metafunc.parametrize(",".join(delegated_fix_names), argvalues=argvalues, ids=ids, indirect=True)
+                except ValueError as e:
+                    raise Exception("Exception in delegation logic. Most likely you have an already parameterized fixture. You can not use a data driven fixture in an auto-delegated test. Test Function: {}.".format(metafunc.function))
