@@ -13,6 +13,13 @@ Following is the list of critical additions and updates for a given released ver
     - The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
     - The name can be used in the `magic C function` query or as the cname argument.
 - Fixtures now allow drive_with argument.
+- --run-confs has short form -c and --run-envs has short form -e.
+- ArjunaOption.RUN_CONFIGS represents final calculated names for run configs. Default is ['ref'].
+- Tests with `delegate=True` set in `@test`
+    - All run confs from command line are used to parameterize all fixtures associated with this test and hence repeat as many times. 
+    - Fixtures can not have a drive_with call for this usage. drive_with can be used for such test functions.
+- Experimental code for centrally controlling delegatable tests works.
+- Experimental code for writing arjuna hooks works. Tried with `arjuna_config.py`'s register_configs() hook.
 
 
 0.9.20
@@ -527,7 +534,7 @@ Dynamic parameterization
 -   @test needs to change.
 
 - auto_allocate in @test. Enabled by default.
-    can add _auto_allocate function variable to True.
+    can add delegate function variable to True.
     metafunc hooks checks for its presence and decides on allocation.
         - Gives the RunConf * RunEnv conf to the fixture.
             : If paralele CLI option -> paralel

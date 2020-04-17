@@ -48,6 +48,9 @@ class ArjunaOption(Enum):
     RUN_CONF_NAMES = auto()
     '''Names of the run configurations. Corresponding .conf file should exist in config/run directory. Default is run'''
 
+    RUN_CONFIGS = auto()
+    '''Names of final run configuration names for current run calculated from RUN_CONF_NAMES and RUN_ENV_NAMES. Default is ref'''
+
     RUN_HOST_OS = auto()
     '''Host Operating System type: Windows/Mac/Linux.'''
 
@@ -86,6 +89,9 @@ class ArjunaOption(Enum):
 
     TESTS_DIR = auto()
     '''Directory containing test modules.'''
+
+    HOOKS_DIR = auto()
+    '''Arjuna Hooks directory.'''
 
     REPORTS_DIR = auto()
     '''Root directory for test reports.'''

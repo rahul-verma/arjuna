@@ -12,7 +12,6 @@ def test_resource(request):
     assert d == {}
 
 
-
 @for_test
 def wordpress(request):
     '''

@@ -89,9 +89,21 @@ class ArjunaSingleton:
         self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.REPORT_HTML_DIR))
         self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.LOG_DIR))
         self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.SCREENSHOTS_DIR))
+        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.HOOKS_DIR))
 
         from arjuna.engine.logger import Logger
         self.__logger = Logger(self.__ref_config)
+
+        # Load configs from config hooks
+        sys.path.append(self.__ref_config.value(ArjunaOption.HOOKS_DIR))
+        try:
+            from arjuna_config import register_configs
+        except ModuleNotFoundError as e: # Module not defined.
+            pass
+        except ImportError as f: # Hook not defined
+            pass
+        else:
+            register_configs()
 
         # Load data references
         from arjuna.engine.data.factory import DataReference
@@ -200,14 +212,25 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.has_config(name)
 
     @classmethod
-    def get_config(cls, name=None):
+    def get_config(cls, name="ref"):
+        '''
+            Returns the configuration.
+        '''
+        return cls.ARJUNA_SINGLETON.get_config(name)
+
+    @classmethod
+    def get_configs(cls, *names):
         '''
             Returns the reference configuration.
         '''
-        if name is None:
-            return cls.ARJUNA_SINGLETON.ref_config
-        else:
-            return cls.ARJUNA_SINGLETON.get_config(name)
+        return [cls.get_config(name) for name in names]
+
+    @classmethod
+    def get_run_configs(cls):
+        '''
+            Returns the reference configuration.
+        '''
+        return [cls.get_config(name) for name in cls.get_config_value("run.configs")]
 
     @classmethod
     def get_config_value(cls, query, *, cname=None):

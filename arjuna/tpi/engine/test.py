@@ -48,12 +48,13 @@ def _simple_dec(func):
     @functools.wraps(func)
     def wrapper(request, *args, **kwargs):
         _call_func(func, request, *args, **kwargs)
+    wrapper._delegate = False
     return wrapper
 
 def _repr_record(record):
     return str(record)
 
-def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_with: 'DataSource'=None, exclude_if: 'Relation'=None):
+def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_with: 'DataSource'=None, exclude_if: 'Relation'=None, delegate=False):
     '''
         Decorator for marking a function as a test function.
 
@@ -72,6 +73,7 @@ def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_wi
                         pass
 
             exclude_if: (Optional) Define exclusion condition. Argument can be an Arjuna Relation. Wraps `pytest.mark.dependency`.
+            delegate: (Optional) Should this test be considered for (auto-)delegation. It means this test and its associated fixtures will go through auto-parameterization, parllel execution (when available) and distribution (when available). Default is True.
         Note:
             The test function name must start with the prefix `check_`
 
@@ -102,11 +104,11 @@ def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_wi
 
         if drive_with:
             records = drive_with.build().all_records
-            # my_objects = []
-            # for record in records:
-            #     my = My()
-            #     my.data = record
-            #     my_objects.append(my)
+            my_objects = []
+            for record in records:
+                my = My()
+                my.data = record
+                my_objects.append(my)
             func = pytest.mark.parametrize('data', records, ids=_repr_record)(func) 
         # else:
         #     my = My()
@@ -124,8 +126,10 @@ def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_wi
             _call_func(func, request, data, *args, **kwargs)
 
         if drive_with:
+            wrapper_with_data._delegate = delegate
             return wrapper_with_data
         else:
+            wrapper_without_data._delegate = delegate
             return wrapper_without_data
     
     return format_test_func

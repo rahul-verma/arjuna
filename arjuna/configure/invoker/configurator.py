@@ -48,8 +48,28 @@ class TestConfigurator:
         self.__default_ref_config.update(self.__run_confs["run"])
         self.__default_ref_config.update(self.__env_confs["env"])
         self.__update_config(self.__default_ref_config)
+        self.__process_run_configs()
 
         self.__load_combinations()
+
+    def __process_run_configs(self):
+        from arjuna.tpi.enums import ArjunaOption
+        # Load run configs
+        l = []
+        for rname in self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_CONF_NAMES):
+            if rname not in self.__run_confs:
+                raise Exception("There is no run conf with name {}".format(rname))
+            for ename in self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_ENV_NAMES):
+                if ename not in self.__env_confs:
+                    raise Exception("There is no env conf with name {}".format(ename))
+                name = "{}_{}".format(rname, ename)
+                if name == "run_env":
+                    name = "ref"
+                l.append(name)
+
+        configs = ",".join([i.lower() for i in l])
+        conf = self.__create_config_from_option_dicts(None, {"run.configs": configs}, None)
+        self.__default_ref_config.update(conf)
 
     def __load_central_conf(self):
         self.__default_ref_config = CentralConfigLoader(self.__root_dir, self.__run_id).config
@@ -81,6 +101,8 @@ class TestConfigurator:
             else:
                 return str(val)
 
+        if user_options is None:
+            user_options = dict()
         # ANCHOR
         crawdict = {
             "arjunaOptions": {k:format_value(v) for k,v in arjuna_options.items()},

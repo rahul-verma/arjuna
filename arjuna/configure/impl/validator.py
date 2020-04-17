@@ -168,15 +168,12 @@ class Validator:
     @classmethod
     def str_or_strlist(cls, input):
         if type(input) is str:
-            input = [i.strip().lower() for i in input.split(",")]
-            input = set(input)
+            input = [i.strip().lower() for  i in input.split(",")]
         elif type(input) in {set, list, tuple}:
-            input = set([i.lower() for i in input])
+            input = [i.lower() for i in input if i not in input]
         else:
-            cls.raise_exc(input)    
-
-        input.add("default")
-        return input 
+            cls.raise_exc(input)
+        return list(dict.fromkeys(input)) 
 
     @classmethod
     def actor_mode(cls, input):
