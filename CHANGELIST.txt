@@ -20,7 +20,7 @@ Following is the list of critical additions and updates for a given released ver
     - Fixtures can not have a drive_with call for this usage. drive_with can be used for such test functions.
 - Experimental code for centrally controlling delegatable tests works.
 - Experimental code for writing arjuna hooks works. Tried with `arjuna_config.py`'s register_configs() hook.
-
+- --runid changed to --run-id for consistency.
 
 0.9.20
 ------
@@ -524,6 +524,7 @@ Future Possibilities and Targeted Fixes
 - Skip known failed test
 - Mark as a bug tag - run only the bug
 - Run last failed tests
+- OR relationship should allow multiple identifiers of same type. Confirm whether it uses a dict or a list.
 
 - Diffing two pages on 2 URLs. Comparison of HTML.
 
@@ -548,5 +549,19 @@ If this flow is complete:
     If multiple configurations are there, then this will lead to multiple execution of a test associated with this fixture.
     Sequential or parallel is governed by whether -n or num-workers value. Default it not_set.
         Need to check if workers can be more than the CPUs on a system. (x-dist)
+
+PytestDeprecationWarning: --no-print-logs is deprecated and scheduled for removal in pytest 6.0.
+  Please use --show-capture instead.
+    _issue_warning_captured(NO_PRINT_LOGS, self._config.hook, stacklevel=2)
+
+
+Contextual Data References -> Add INI format, JSON?
+
+WINDOWS:
+    @track on Windows
+
+    0.9.20 by Stefan:
+        got the "cannot overwrite Chromedriver "error solved again with  rm /home/stefan/.wdm/drivers/chromedriver/81.0.4044.69/linux64/chromedriver
+and this after upgrading to arjuna 0.9.20
 
 
