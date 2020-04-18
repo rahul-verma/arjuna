@@ -65,7 +65,7 @@ Following run options can be provided in command line:
 
 - `-h` or `--help`: To check all the run options
 - `-r` or --run-id`: The id/name of this test run. It is `mrun` by default. Run ID is used to create the report directory name.
-- `-rf` or `--output-formats`: Report formats for test report generation. Allowed values are `XML` and `HTML`.
+- `-o` or `--output-formats`: Report formats for test report generation. Allowed values are `XML` and `HTML`.
 - `--update`: Instructs Arjuna to use the run id without appending timestap to it. It is very helpful to us this during script development as for every run a new report directory is not created.
 - `--dry-run`: Do not run tests, just enumerate them.
 - `-d` or `--delegate`: Provide the delegation configuration object names for this run. All tests which have delegator fixture are subjected to delegation logic. If not provided it is calculated from values of --run-confs and/or --run-envs values.
