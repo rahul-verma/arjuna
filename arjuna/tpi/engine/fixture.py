@@ -80,7 +80,7 @@ def __pytestfix(scope, drive_with=None):
             return pytest.fixture(scope=scope)(_simple_dec(func))
     return wrapper
 
-def for_session(func: Callable) -> Callable:
+def for_session(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
     '''
         Decorator for session level test fixture/resource.
 
@@ -106,7 +106,7 @@ def for_session(func: Callable) -> Callable:
         return __pytestfix("session", drive_with=drive_with)
 
 
-def for_module(func: Callable) -> Callable:
+def for_module(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
     '''
         Decorator for module level test fixture/resource.
 
@@ -157,4 +157,7 @@ def for_test(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
     else:
         return __pytestfix("function", drive_with=drive_with)
 
+@for_module
+def delegator(request):
+    yield request.data.run_config
     

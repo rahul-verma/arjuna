@@ -13,17 +13,13 @@ Following is the list of critical additions and updates for a given released ver
     - The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
     - The name can be used in the `magic C function` query or as the cname argument.
 - Fixtures now allow drive_with argument.
-- ArjunaOption.RUN_CONFIGS represents final calculated names for run configs. Default is ['ref'].
-- Tests with `delegate=True` can be set in `@test`
-    - All run confs from command line are used to parameterize all fixtures associated with this test and hence repeat as many times. 
-    - Fixtures can not have a drive_with call for this usage. drive_with can be used for such test functions.
-- pytest_generate_tests hook added to test project conftest.py, its Arjuna template and added PytestHooks.delegate
-    - Auto-parameteries fixtures of test functions which have delegate=True set in their @test decorator.
 - Experimental code for writing arjuna hooks works. Tried with `arjuna_config.py`'s register_configs() hook.
-- ArjunaOption.RUN_DELEGATE_CONFS:
+- ArjunaOption.RUN_DELEGATOR_CONFS:
     - Repersents the final Configuration object names used auto-delegation logic.
     - If set, the values of RUN_CONF_NAMES and RUN_ENV_CONF_NAMES are ignored.
     - Else, it is calculated as product of all names in RUN_CONF_NAMES and RUN_ENV_CONF_NAMES to get delegation configuration names.
+- pytest_generate_tests hook added to test project conftest.py, its Arjuna template and added PytestHooks.delegate
+    - Auto-parameteries "delegator" built-in Arjuna fixture. The fixture can be added to a test function signature or any of its fixtures.
 - CLI Changes:
     - --runid changed to --run-id for consistency.
     - -d / --delegate-confs option added.
