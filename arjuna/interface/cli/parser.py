@@ -67,13 +67,14 @@ class RunParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument("-rid", "--run-id", dest="run.id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
-        self.parser.add_argument('--static-rid', dest="static.rid", action='store_true', help = 'Use static RunID. Will result in overwriting of report files. Useful during script development.')
-        self.parser.add_argument('-rf', '--report-formats', dest="report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
+        self.parser.add_argument("-r", "--run-id", dest="run.id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
+        self.parser.add_argument('-o', '--output-formats', dest="report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
+        self.parser.add_argument('--update', dest="static.rid", action='store_true', help = 'Will result in overwriting of report files. Useful during script development.')
         self.parser.add_argument('--dry-run', dest="dry_run", action='store_true', help = 'Launch Arjuna, enumerate tests, but do not execute tests.')
-        self.parser.add_argument('-d', '--delegator-confs', nargs='+', dest="run.delegator.confs", type=str, help = 'Delegation configuration object names for this run. All tests which have delegator fixture are subjected to delegation logic. If not provided it is calculated from values of --run-confs and/or --run-envs values.')
-        self.parser.add_argument('--run-envs', nargs='+', dest="run.env.names", type=str, default="env", help = 'Name of environment conf files with options defined in <env>.conf file in <Project Root>/config/env directory.')
-        self.parser.add_argument('--run-confs', nargs='+', dest="run.conf.names", type=str, default="run", help = 'Name of run configuration files with options defined in <run>.conf file in <Project Root>/config/env directory.')
+        self.parser.add_argument('-d', '--delegate', nargs='+', dest="run.delegator.conf.names", type=str, help = 'Configuration object names for this run. Used by Delegator logic. All tests which have delegator fixture are subjected to delegation logic. If not provided it is calculated from values of --run-confs and/or --run-envs values.')
+        self.parser.add_argument('--static-id', dest="static.rid", action='store_true', help = 'Use static RunID. Will result in overwriting of report files. Useful during script development.')
+        self.parser.add_argument('-e', '--run-envs', nargs='+', dest="run.env.names", type=str, default="env", help = 'Name of environment conf files with options defined in <env>.conf file in <Project Root>/config/env directory.')
+        self.parser.add_argument('-c','--run-confs', nargs='+', dest="run.conf.names", type=str, default="run", help = 'Name of run configuration files with options defined in <run>.conf file in <Project Root>/config/env directory.')
         self.parser.add_argument('-ao', '--arjuna-option', dest="ao",
                                  nargs=2,
                                  action='append',

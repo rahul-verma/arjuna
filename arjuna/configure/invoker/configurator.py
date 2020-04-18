@@ -55,7 +55,7 @@ class TestConfigurator:
     def __process_run_configs(self):
         from arjuna.tpi.enums import ArjunaOption
         # Load run configs
-        delegation_confs = self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_DELEGATOR_CONFS)
+        delegation_confs = self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_DELEGATOR_CONF_NAMES)
         if delegation_confs == ['none'] or delegation_confs == "not_set":
             delegation_confs = []
             for rname in self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_CONF_NAMES):
@@ -70,7 +70,7 @@ class TestConfigurator:
                     delegation_confs.append(name)
 
         configs = ",".join([i.lower() for i in delegation_confs])
-        conf = self.__create_config_from_option_dicts(None, {"run.delegator.confs": configs}, None)
+        conf = self.__create_config_from_option_dicts(None, {"run.delegator.conf.names": configs}, None)
         self.__default_ref_config.update(conf)
 
     def __load_central_conf(self):

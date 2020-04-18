@@ -39,5 +39,4 @@ def check_delegated_dd_dix_dd(request, data, delegator, fix_dd):
 
 @test(drive_with=records(record(1,2), record(3,4)))
 def check_delegated_dd_fix_dd_delegator(request, data, fix_dd_delegator):
-    print(fix_dd_delegator)
     print(fix_dd_delegator[0]["app.url"], fix_dd_delegator[0]["check"], fix_dd_delegator[1])
