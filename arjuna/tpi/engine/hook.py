@@ -15,10 +15,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from itertools import cycle
+
 class PytestHooks:
     '''
         Easy hooks to be used in `pytest` configuration file: `conftest.py` placed under `<Project_Root_Dir/test` directory in test project.
     '''
+
+    _PARAMETERIZED_MODULES = dict()
+    _distributor_CYCLE = None
 
     @classmethod
     def _get_request_attr(cls, item, obj_name):
@@ -114,15 +119,34 @@ class PytestHooks:
 
 
     @classmethod
-    def delegate(cls, metafunc):
-        from arjuna import Arjuna, log_debug
+    def dist(cls, metafunc):
+        from arjuna import Arjuna, ArjunaOption, log_debug, C
         from arjuna.tpi.engine.data.markup import record
         log_debug("{} {}".format(metafunc.function, metafunc.fixturenames))
 
-        run_configs = Arjuna.get_run_delegator_confs()
-        argvalues = [record(run_config=c).build().all_records[0] for c in run_configs]
-        ids = ["RunConfig: {} ".format(c.name) for c in run_configs]
+        run_configs = Arjuna.get_run_distributor_confs()
 
-        # "delegator" fixture can be in test signatue or signature of any of other fixtures that it contains.
-        if "delegator" in metafunc.fixturenames:
-            metafunc.parametrize("delegator", argvalues=argvalues, ids=ids, indirect=True)
+        # "distributor" fixture can be in test signatue or signature of any of other fixtures that it contains.
+
+        if "distributor" in metafunc.fixturenames:
+
+
+            if C(ArjunaOption.RUN_DIST_SPLIT):
+                if not cls._distributor_CYCLE:
+                    cls._distributor_CYCLE = cycle(run_configs)
+                conf = None
+                m = metafunc.function.__module__
+                log_debug("Module" + m)
+                if m in cls._PARAMETERIZED_MODULES:
+                    conf = cls._PARAMETERIZED_MODULES[m]
+                    log_debug("Found" + conf.name)
+                else:
+                    conf = next(cls._distributor_CYCLE)
+                    cls._PARAMETERIZED_MODULES[m] = conf
+                    log_debug("Added" + conf.name)
+                log_debug("Parameterizing distributor" + conf.name)
+                metafunc.parametrize("distributor", argvalues=[record(delegated_config=conf).build().all_records[0]], ids=["RunConfig: {} ".format(conf.name)], indirect=True)
+            else:
+                argvalues = [record(delegated_config=c).build().all_records[0] for c in run_configs]
+                ids = ["RunConfig: {} ".format(c.name) for c in run_configs]
+                metafunc.parametrize("distributor", argvalues=argvalues, ids=ids, indirect=True)
