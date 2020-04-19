@@ -70,8 +70,8 @@ Following run options can be provided in command line:
 - `--dry-run`: Do not run tests, just enumerate them.
 - `-d` or `--distribute`: Provide the distribution configuration object names for this run. All tests which have distributor fixture are subjected to distribution logic. If not provided it is calculated from values of --run-confs and/or --run-envs values.
 - `-ds` or `--dist-split`: If passed, distributor confs will be split across modules. Each module is assigned only one configuration object.
-- `-e` or `--run-envs`: Provide the test environment conf file names (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). --confs overrrides this.
-- `-c` or `--run-confs`: Provide the run conf file names (e.g. `trun1`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/run` directory (e.g. `trun1.conf`). --confs overrrides this.
+- `-e` or `--run-envs`: Provide the test environment conf file names (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). --dist overrrides this.
+- `-c` or `--run-confs`: Provide the run conf file names (e.g. `trun1`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/run` directory (e.g. `trun1.conf`). --dist overrrides this.
 - `-ao` or `--arjuna-option`: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates. You can provide any number of these switches.
 - `-uo` or `--user-option`: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.  You can provide any number of these switches.
 
