@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="Rahuls-MacBook-Pro.local" name="pytest" skipped="0" tests="32" time="1.848" timestamp="2020-04-20T13:00:22.328807"><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]" time="0.008"><system-out>[LOG] Space: Getting value for arj_config from session scope
+<?xml version="1.0" encoding="utf-8"?><testsuites><testsuite errors="0" failures="0" hostname="Rahuls-MacBook-Pro.local" name="pytest" skipped="0" tests="32" time="1.974" timestamp="2020-04-20T15:57:56.726593"><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]" time="0.009"><system-out>[LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
 [LOG] Space: No value for arj_config in module scope
-[LOG] Space: Setting arj_config=&lt;arjuna.tpi.config.Configuration object at 0x10a835518&gt; in module scope
+[LOG] Space: Setting arj_config=&lt;arjuna.tpi.config.Configuration object at 0x11222fd30&gt; in module scope
 [LOG] (Setup) Begin fixture function: check_delegate_1.py:group
 [LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
@@ -14,10 +14,10 @@
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-master https://tenv2 run1
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]" time="0.013"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+master http://env run1
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]" time="0.013"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -36,10 +36,10 @@ master https://tenv2 run1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]" time="0.014"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]" time="0.012"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -58,10 +58,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.012"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.010"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -76,10 +76,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -89,10 +89,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]" time="0.017"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]" time="0.015"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -112,10 +112,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-master https://tenv2 run1 2
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.010"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+master http://env run1 2
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.011"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -130,10 +130,10 @@ master https://tenv2 run1 2
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 2
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 2
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -143,10 +143,10 @@ master https://tenv2 run1 2
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 2
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[7, 8]]" time="0.011"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 2
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[7, 8]]" time="0.010"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -161,10 +161,10 @@ master https://tenv2 run1 2
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[7, 8]]
-master https://tenv2 run1
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[7, 8]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[9, 10]]" time="0.003"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[7, 8]]
+master http://env run1
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[7, 8]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[9, 10]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -174,10 +174,10 @@ master https://tenv2 run1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[9, 10]]
-master https://tenv2 run1
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[9, 10]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.011"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[9, 10]]
+master http://env run1
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[9, 10]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.011"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -192,10 +192,10 @@ master https://tenv2 run1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -205,10 +205,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.018"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.016"><system-out>[LOG] (Teardown) End fixture function: check_delegate_1.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -223,7 +223,7 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]:fix_dd_group
+[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]:fix_dd_group
 [LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
@@ -234,11 +234,11 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 9
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]:fix_dd_group
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.009"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 9
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]:fix_dd_group
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.011"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -248,32 +248,7 @@ master https://tenv2 run1 9
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]:fix_dd_group
-[LOG] Space: Getting value for arj_config from function scope
-[LOG] Space: No value for arj_config in function scope
-[LOG] Space: Getting value for arj_config from cls scope
-[LOG] Space: No value for arj_config in cls scope
-[LOG] Space: Getting value for arj_config from module scope
-[LOG] Space: Getting value for arj_config from function scope
-[LOG] Space: No value for arj_config in function scope
-[LOG] Space: Getting value for arj_config from cls scope
-[LOG] Space: No value for arj_config in cls scope
-[LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 9
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]:fix_dd_group
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.012"><system-out>[LOG] Space: Getting value for arj_config from function scope
-[LOG] Space: No value for arj_config in function scope
-[LOG] Space: Getting value for arj_config from cls scope
-[LOG] Space: No value for arj_config in cls scope
-[LOG] Space: Getting value for arj_config from module scope
-[LOG] Space: Getting value for arj_config from function scope
-[LOG] Space: No value for arj_config in function scope
-[LOG] Space: Getting value for arj_config from cls scope
-[LOG] Space: No value for arj_config in cls scope
-[LOG] Space: Getting value for arj_config from module scope
-[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]:fix_dd_group
+[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]:fix_dd_group
 [LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
@@ -284,11 +259,11 @@ master https://tenv2 run1 9
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 10
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]:fix_dd_group
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.020"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 9
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]:fix_dd_group
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.010"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -298,7 +273,7 @@ master https://tenv2 run1 10
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]:fix_dd_group
+[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]:fix_dd_group
 [LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
@@ -309,18 +284,43 @@ master https://tenv2 run1 10
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 10
-[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]:fix_dd_group
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 10
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]:fix_dd_group
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_1" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.019"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Space: No value for arj_config in function scope
+[LOG] Space: Getting value for arj_config from cls scope
+[LOG] Space: No value for arj_config in cls scope
+[LOG] Space: Getting value for arj_config from module scope
+[LOG] Space: Getting value for arj_config from function scope
+[LOG] Space: No value for arj_config in function scope
+[LOG] Space: Getting value for arj_config from cls scope
+[LOG] Space: No value for arj_config in cls scope
+[LOG] Space: Getting value for arj_config from module scope
+[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]:fix_dd_group
+[LOG] Space: Getting value for arj_config from function scope
+[LOG] Space: No value for arj_config in function scope
+[LOG] Space: Getting value for arj_config from cls scope
+[LOG] Space: No value for arj_config in cls scope
+[LOG] Space: Getting value for arj_config from module scope
+[LOG] Space: Getting value for arj_config from function scope
+[LOG] Space: No value for arj_config in function scope
+[LOG] Space: Getting value for arj_config from cls scope
+[LOG] Space: No value for arj_config in cls scope
+[LOG] Space: Getting value for arj_config from module scope
+[LOG] Begin test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 10
+[LOG] End test function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_1.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]:fix_dd_group
 [LOG] (Teardown) End fixture function: check_delegate_1.py:group
 [LOG] (Teardown) End fixture function: check_delegate_1.py:fix_non_dd
 [LOG] (Teardown) End fixture function: check_delegate_1.py:fix_dd
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]" time="0.008"><system-out>[LOG] Space: Getting value for arj_config from session scope
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]" time="0.006"><system-out>[LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
 [LOG] Space: No value for arj_config in module scope
-[LOG] Space: Setting arj_config=&lt;arjuna.tpi.config.Configuration object at 0x10a835518&gt; in module scope
+[LOG] Space: Setting arj_config=&lt;arjuna.tpi.config.Configuration object at 0x11222fd30&gt; in module scope
 [LOG] (Setup) Begin fixture function: check_delegate_2.py:group
 [LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
@@ -332,10 +332,10 @@ master https://tenv2 run1 10
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-master https://tenv2 run1
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]" time="0.013"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+master http://env run1
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]" time="0.013"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -354,10 +354,10 @@ master https://tenv2 run1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]" time="0.016"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]" time="0.017"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -376,10 +376,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.011"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.010"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -394,10 +394,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.003"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.003"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -407,10 +407,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]" time="0.017"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[1]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]" time="0.016"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -430,10 +430,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-master https://tenv2 run1 2
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 ]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.010"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+master http://env run1 2
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_non_dd_fix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env ]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.009"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -448,10 +448,10 @@ master https://tenv2 run1 2
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 2
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 2
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -461,10 +461,10 @@ master https://tenv2 run1 2
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 2
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[7, 8]]" time="0.010"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 2
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_dix_dd[Data-&gt; Indexed:[2]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[7, 8]]" time="0.009"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -479,10 +479,10 @@ master https://tenv2 run1 2
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[7, 8]]
-master https://tenv2 run1
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[7, 8]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[9, 10]]" time="0.003"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[7, 8]]
+master http://env run1
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[7, 8]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[9, 10]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -492,10 +492,10 @@ master https://tenv2 run1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[9, 10]]
-master https://tenv2 run1
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[9, 10]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.010"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[9, 10]]
+master http://env run1
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[9, 10]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.010"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -510,10 +510,10 @@ master https://tenv2 run1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.003"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.002"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -523,10 +523,10 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 1
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.019"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 1
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_non_dd[GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.017"><system-out>[LOG] (Teardown) End fixture function: check_delegate_2.py:group
 [LOG] Space: Getting value for arj_config from session scope
 [LOG] Space: No value for arj_config in session scope
 [LOG] Space: Getting value for arj_config from module scope
@@ -541,7 +541,7 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]:fix_dd_group
+[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]:fix_dd_group
 [LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
@@ -552,11 +552,11 @@ master https://tenv2 run1 1
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 9
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]:fix_dd_group
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.012"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 9
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]:fix_dd_group
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.010"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -566,32 +566,7 @@ master https://tenv2 run1 9
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]:fix_dd_group
-[LOG] Space: Getting value for arj_config from function scope
-[LOG] Space: No value for arj_config in function scope
-[LOG] Space: Getting value for arj_config from cls scope
-[LOG] Space: No value for arj_config in cls scope
-[LOG] Space: Getting value for arj_config from module scope
-[LOG] Space: Getting value for arj_config from function scope
-[LOG] Space: No value for arj_config in function scope
-[LOG] Space: Getting value for arj_config from cls scope
-[LOG] Space: No value for arj_config in cls scope
-[LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 9
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]:fix_dd_group
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]" time="0.011"><system-out>[LOG] Space: Getting value for arj_config from function scope
-[LOG] Space: No value for arj_config in function scope
-[LOG] Space: Getting value for arj_config from cls scope
-[LOG] Space: No value for arj_config in cls scope
-[LOG] Space: Getting value for arj_config from module scope
-[LOG] Space: Getting value for arj_config from function scope
-[LOG] Space: No value for arj_config in function scope
-[LOG] Space: Getting value for arj_config from cls scope
-[LOG] Space: No value for arj_config in cls scope
-[LOG] Space: Getting value for arj_config from module scope
-[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]:fix_dd_group
+[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]:fix_dd_group
 [LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
@@ -602,11 +577,11 @@ master https://tenv2 run1 9
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-master https://tenv2 run1 10
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]
-[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[1, 2]]:fix_dd_group
-</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]" time="0.020"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 9
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[9]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]:fix_dd_group
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]" time="0.010"><system-out>[LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
@@ -616,7 +591,7 @@ master https://tenv2 run1 10
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]:fix_dd_group
+[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]:fix_dd_group
 [LOG] Space: Getting value for arj_config from function scope
 [LOG] Space: No value for arj_config in function scope
 [LOG] Space: Getting value for arj_config from cls scope
@@ -627,10 +602,35 @@ master https://tenv2 run1 10
 [LOG] Space: Getting value for arj_config from cls scope
 [LOG] Space: No value for arj_config in cls scope
 [LOG] Space: Getting value for arj_config from module scope
-[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-master https://tenv2 run1 10
-[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]
-[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_tenv2 -Data-&gt; Indexed:[3, 4]]:fix_dd_group
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+master http://env run1 10
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]
+[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[1, 2]]:fix_dd_group
+</system-out></testcase><testcase classname="test.module.grouping.check_delegate_2" name="check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]" time="0.020"><system-out>[LOG] Space: Getting value for arj_config from function scope
+[LOG] Space: No value for arj_config in function scope
+[LOG] Space: Getting value for arj_config from cls scope
+[LOG] Space: No value for arj_config in cls scope
+[LOG] Space: Getting value for arj_config from module scope
+[LOG] Space: Getting value for arj_config from function scope
+[LOG] Space: No value for arj_config in function scope
+[LOG] Space: Getting value for arj_config from cls scope
+[LOG] Space: No value for arj_config in cls scope
+[LOG] Space: Getting value for arj_config from module scope
+[LOG] (Setup) Begin fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]:fix_dd_group
+[LOG] Space: Getting value for arj_config from function scope
+[LOG] Space: No value for arj_config in function scope
+[LOG] Space: Getting value for arj_config from cls scope
+[LOG] Space: No value for arj_config in cls scope
+[LOG] Space: Getting value for arj_config from module scope
+[LOG] Space: Getting value for arj_config from function scope
+[LOG] Space: No value for arj_config in function scope
+[LOG] Space: Getting value for arj_config from cls scope
+[LOG] Space: No value for arj_config in cls scope
+[LOG] Space: Getting value for arj_config from module scope
+[LOG] Begin test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+master http://env run1 10
+[LOG] End test function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]
+[LOG] (Teardown) End fixture function: test.module.grouping.check_delegate_2.check_delegated_dd_fix_dd_group[Data-&gt; Indexed:[10]-GroupData: gn=mgroup, tn=msession-mstage-t1, conf=run1_env -Data-&gt; Indexed:[3, 4]]:fix_dd_group
 [LOG] (Teardown) End fixture function: check_delegate_2.py:group
 [LOG] (Teardown) End fixture function: check_delegate_2.py:fix_non_dd
 [LOG] (Teardown) End fixture function: check_delegate_2.py:fix_dd

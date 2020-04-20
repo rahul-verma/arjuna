@@ -43,7 +43,6 @@ class ArjunaSingleton:
     def __init__(self):
         self.__project_root_dir = None
         self.__test_session = None
-        self.__ref_config = None
         self.__config_map = dict()
         self.__run_id = None
 
@@ -61,7 +60,8 @@ class ArjunaSingleton:
         self.__logger = None
         from arjuna.engine.data.store import DataStore
         self.__data_store = DataStore()
-        self.__thread_conf_map = dict()
+        self.__thread_wise_group_params_map = dict()
+        self.__thread_wise_ref_conf_map = dict()
 
     @property
     def gui_mgr(self):
@@ -83,21 +83,21 @@ class ArjunaSingleton:
         if not static_rid:
             prefix = "{}-".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3])
         run_id = "{}{}".format(prefix, run_id)
-        self.__ref_config = self.__test_session.init(project_root_dir, cli_config, run_id)
+        self.__thread_wise_ref_conf_map[threading.currentThread().name] = self.__test_session.init(project_root_dir, cli_config, run_id)
 
         from arjuna.tpi.enums import ArjunaOption
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.REPORT_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.REPORT_XML_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.REPORT_HTML_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.LOG_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.SCREENSHOTS_DIR))
-        self.__create_dir_if_doesnot_exist(self.__ref_config.value(ArjunaOption.HOOKS_DIR))
+        self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_DIR))
+        self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_XML_DIR))
+        self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_HTML_DIR))
+        self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.LOG_DIR))
+        self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.SCREENSHOTS_DIR))
+        self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.HOOKS_DIR))
 
         from arjuna.engine.logger import Logger
-        self.__logger = Logger(self.__ref_config)
+        self.__logger = Logger(self.ref_config)
 
         # Load configs from config hooks
-        sys.path.append(self.__ref_config.value(ArjunaOption.HOOKS_DIR))
+        sys.path.append(self.ref_config.value(ArjunaOption.HOOKS_DIR))
         try:
             from arjuna_config import register_configs
         except ModuleNotFoundError as e: # Module not defined.
@@ -109,11 +109,11 @@ class ArjunaSingleton:
 
         # Load data references
         from arjuna.engine.data.factory import DataReference
-        self.__data_references = DataReference.load_all(self.__ref_config)
+        self.__data_references = DataReference.load_all(self.ref_config)
 
         # Load localization data
         from arjuna.engine.data.localizer import Localizer
-        self.__localizer = Localizer.load_all(self.__ref_config)
+        self.__localizer = Localizer.load_all(self.ref_config)
 
         from arjuna.core.yaml import YamlFile
         from arjuna.interact.gui.auto.finder.withx import WithX
@@ -165,12 +165,15 @@ class ArjunaSingleton:
 
     @property
     def ref_config(self):
-        return self.__ref_config
+        return self.__thread_wise_ref_conf_map[threading.currentThread().name]
 
     def get_config(self, name):
-        if not self.has_config(name):
-            raise Exception("There is no registered configuration for name: {}. Registered: {}".format(name, tuple(self.__config_map.keys())))
-        return self.__config_map[name.lower()]
+        if name == "ref":
+            return self.ref_config
+        else:
+            if not self.has_config(name):
+                raise Exception("There is no registered configuration for name: {}. Registered: {}".format(name, tuple(self.__config_map.keys())))
+            return self.__config_map[name.lower()]
 
     def register_config(self, config):
         self.__config_map[config.name.lower()] = config
@@ -179,10 +182,11 @@ class ArjunaSingleton:
         return name.lower() in self.__config_map
 
     def get_group_params(self):
-        return self.__thread_conf_map[threading.current_thread().name]
+        return self.__thread_wise_group_params_map[threading.current_thread().name]
 
     def register_group_params(self, **params):
-        self.__thread_conf_map[threading.current_thread().name] = params
+        self.__thread_wise_group_params_map[threading.current_thread().name] = params
+        self.__thread_wise_ref_conf_map[threading.current_thread().name] = params['config']
 
 class Arjuna:
     '''
