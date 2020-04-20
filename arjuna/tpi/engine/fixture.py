@@ -53,7 +53,7 @@ def __pytestfix(scope, drive_with=None):
     records = None
     ids = None
     if drive_with:
-        records = drive_with.build().all_records
+        records = drive_with.build("Fixture").all_records
         ids = [_repr_record(record) for record in records]
 
     def wrapper(func):

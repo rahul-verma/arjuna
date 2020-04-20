@@ -85,7 +85,7 @@ class ExcelRowDataReference(__ExcelDataReference):
             except StopIteration:
                 break
             else:
-                self.map[data_record[0].lower()] = DataRecord(**dict(zip(names, data_record[1:])))
+                self.map[data_record[0].lower()] = DataRecord(context="Ref", **dict(zip(names, data_record[1:])))
         self.reader.close()
 
 
@@ -108,7 +108,7 @@ class ExcelColumnDataReference(__ExcelDataReference):
                     cmap[context][name] = data_record[index+1]
         self.reader.close()
         for context, kv in cmap.items():
-            self.map[context.lower()] = DataRecord(**kv)
+            self.map[context.lower()] = DataRecord(context="Ref", **kv)
 
 def R(query, *, bucket=None, context=None):
     from arjuna import Arjuna, ArjunaOption

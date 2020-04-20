@@ -237,7 +237,10 @@ class __RunCommand(Command):
         runid = arg_dict.pop("run.id")
         static_rid = arg_dict.pop("static.rid")
         self.dry_run = arg_dict.pop("dry_run")
-        self.group_conf_name = arg_dict.pop("group.conf.name")
+        if "group.conf.name" in arg_dict:
+            self.group_conf_name = arg_dict.pop("group.conf.name")
+        else:
+            self.group_conf_name = None
 
         Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid, static_rid=static_rid)
 
@@ -265,8 +268,9 @@ class RunSession(__RunCommand):
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
+        from arjuna import Arjuna
         session = Arjuna.get_test_session()
-        session.load_tests(dry_run=self.dry_run, group_conf_name=self.self.group_conf_name)
+        session.load_tests(dry_run=self.dry_run, group_conf_name=self.group_conf_name)
         session.run()
 
 class RunSelected(__RunCommand):

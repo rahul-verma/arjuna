@@ -125,6 +125,7 @@ class PytestHooks:
             group_params = Arjuna.get_group_params()
             conf = None
             m = metafunc.function.__module__
-            gid = "GroupData: gn={}, tn={}, conf={} ".format(group_params['name'], group_params['thread_name'], group_params['config'].name)
-            log_debug("Parameterizing distributor for module: {} with group: {}".format(m, gid))
-            metafunc.parametrize("group", argvalues=[record(**group_params).build().all_records[0]], ids=[gid], indirect=True)
+            data = record(**group_params).build(context='Group').all_records[0]
+            # gid = "GroupData: gn={}, tn={}, conf={} ".format(group_params['name'], group_params['thread_name'], group_params['config'].name)
+            log_debug("Parameterizing distributor for module: {} with group: {}".format(m, DeprecationWarning))
+            metafunc.parametrize("group", argvalues=[data], ids=[str(data)], indirect=True)

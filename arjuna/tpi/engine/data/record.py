@@ -40,7 +40,7 @@ class DataRecord:
                 record[obj_name]
     '''
 
-    def __init__(self, *vargs, process=True, **kwargs):
+    def __init__(self, *vargs, context, process=True, **kwargs):
         self.__indexed = None
         self.__named = None
         if process:
@@ -49,6 +49,7 @@ class DataRecord:
         else:
             self.__indexed = tuple()
             self.__named = types.MappingProxyType({}) 
+        self.__context = context
 
     def __getitem__(self, i):
         if type(i) is int:
@@ -119,5 +120,5 @@ class DataRecord:
             named =  " Named:{{{}}}".format(', '.join(['{0}={1}'.format(k, v) for k,v in self.named_values.items()]))
         else:
             named = ""
-        return "Data->{}{}".format(indexed, named)
+        return "{}Data->{}{}".format(self.__context, indexed, named)
 

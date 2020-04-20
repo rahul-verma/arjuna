@@ -2,43 +2,35 @@
 stages:
 
   stage1:
-    parallel = true
+    threads: 1
 
     groups:
 
       gp1:
-        confs:
-          - run1_tenv1
-          - run1_tenv2
+        conf: run1_tenv1
 
-        include-modules:
+        im:
           - check_delegate_1
 
       gp2:
-        confs:
-          - run1_tenv1
-          - run2_tenv2
+        conf: run2_tenv2
 
-        include-modules:
-          - check_delegate_1
-
+        im:
+          - check_delegate_2
 
   stage2:
+    threads: 2
 
     groups:
 
       gp1:
-        confs:
-          - run1_tenv1
-          - run1_tenv2
+        conf: run1_tenv1
 
-        include-modules:
-          - check_delegate_1
+        im:
+          - web_ui_basics
 
       gp2:
-        confs:
-          - run1_tenv1
-          - run2_tenv2
+        conf: run2_tenv2
 
-        include-modules:
-          - check_delegate_1
+        im:
+          - web_ui_basics

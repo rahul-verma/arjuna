@@ -37,12 +37,9 @@ class ProjectParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        #self.parser.add_argument('-w', '--workspace-dir', dest="workspace_dir", type=str, help='Workspace Directory')
         self.parser.add_argument('-p', '--project-root-dir', metavar="test_project_root_dir", dest="project.root.dir", type=project_dir, help = 'Valid absolute path of an existing Arjuna test project. Needed with python -m arjuna call only. With python arjuna_launcher.py you can skip this argument as the script determines its container Arjuna test project automatically.')
 
     def process(self, arg_dict):
-        # arg_dict['workspace.dir'] = arg_dict['workspace_dir']
-        # del arg_dict['workspace_dir']
         if arg_dict['project.root.dir'] is None:
             print("Fatal Error in CLI processing. You must provide a valid project root directory using -p or --project-dir switch", file=sys.stderr)
             sys.exit(1)
@@ -52,12 +49,9 @@ class NewProjectParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        #self.parser.add_argument('-w', '--workspace-dir', dest="workspace_dir", type=str, help='Workspace Directory')
         self.parser.add_argument('-p', '--project-root-dir', metavar="test_project_root_dir", dest="project.root.dir", type=new_project_dir, help = 'Absolute non-existing Project root directory. Last part of directory represents project name. Name of project should be an Alnum 3-30 length with only lower case letters.')
 
     def process(self, arg_dict):
-        # arg_dict['workspace.dir'] = arg_dict['workspace_dir']
-        # del arg_dict['workspace_dir']
         if arg_dict['project.root.dir'] is None:
             print("Fatal Error in CLI processing. You must provide a valid project root directory using -p or --project-dir switch", file=sys.stderr)
             sys.exit(1)
@@ -69,7 +63,7 @@ class RunParser(Parser):
         self.parser.add_argument("-r", "--run-id", dest="run.id", metavar="run_id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
         self.parser.add_argument('-o', '--output-formats', dest="report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
         self.parser.add_argument('--update', dest="static.rid", action='store_true', help = 'Will result in overwriting of report files. Useful during script development.')
-        self.parser.add_argument('--dry-run', dest="dry_run", action='store_true', help = 'Launch Arjuna, enumerate tests, but do not execute tests.')
+        self.parser.add_argument('--dry-run', dest="dry_run", metavar="dry_run_type", type=dry_run_type, help='Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. SHOW_TESTS - enumerate tests. SHOW_PLAN - enumerates tests and fixtures. RUN_FIXTURES - Executes setup/teardown fixtures and emuerates tests.')
         self.parser.add_argument('-ao', '--arjuna-option', dest="ao",
                                  nargs=2,
                                  action='append',
@@ -96,10 +90,12 @@ class SessionParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument("-s", "--session-name", dest="run.session.name", type=partial(lname_check, "Run ID"), help = 'Name of session configuration file. Corresponding <sessionname>.yaml file must exist in <Project Root>/config/session directory', default="msession")
+        self.parser.add_argument("-s", "--session-name", dest="run.session.name", type=partial(lname_check, "Run ID"), help = 'Name of session configuration file. Corresponding <sessionname>.yaml file must exist in <Project Root>/config/session directory')
 
     def process(self, arg_dict):
-        pass
+        if arg_dict['run.session.name'] is None:
+            print("Fatal Error in CLI processing. You must provide a valid session name using -s or --session-name switch", file=sys.stderr)
+            sys.exit(1)
 
 class PickersParser(Parser):
     def __init__(self):

@@ -20,9 +20,10 @@ import pytest
 import sys
 import threading
 
-from arjuna.core.enums import ReportFormat
+from arjuna.core.enums import ReportFormat, DryRunType
 from arjuna.tpi.enums import ArjunaOption
 from arjuna.core.value import Value
+from arjuna.core.yaml import YamlFile
 
 class GroupsFinished(Exception):
     pass
@@ -53,7 +54,6 @@ class PyTestCommand:
         return self.__tests_dir
 
     def run(self):
-        print("here", self.thread_name)
         from arjuna import Arjuna
         from arjuna.tpi.enums import ArjunaOption
         Arjuna.register_group_params(name=self.__group, config=self.__config, thread_name=self.thread_name)
@@ -64,8 +64,7 @@ class PyTestCommand:
 
 
         pytest_retcode = pytest.main(self.__pytest_args)
-        import sys
-        sys.exit(pytest_retcode)
+        return pytest_retcode
 
     def __load_command_line(self):
         from arjuna import Arjuna
@@ -74,15 +73,15 @@ class PyTestCommand:
         # import sys
         # sys.path.insert(0, self.__project_dir + "/..")
         self.__tests_dir = self.config.value(ArjunaOption.TESTS_DIR)
-        self.__xml_path = os.path.join(self.config.value(ArjunaOption.REPORT_XML_DIR), "report-{}.xml".format(self.thread_name))
-        self.__html_path = os.path.join(self.config.value(ArjunaOption.REPORT_HTML_DIR), "report-{}.html".format(self.thread_name))
+        self.__xml_path = os.path.join(self.config.value(ArjunaOption.REPORT_XML_DIR), "report-{}-{}.xml".format(self.thread_name, self.__group))
+        self.__html_path = os.path.join(self.config.value(ArjunaOption.REPORT_HTML_DIR), "report-{}-{}.html".format(self.thread_name, self.__group))
         self.__report_formats = self.config.value(ArjunaOption.REPORT_FORMATS)
         # self.__report_formats = Value.as_enum_list(rfmts, ReportFormat)
         res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
         pytest_ini_path = res_path + "/pytest.ini"
 
         # -s is to print to console.
-        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "--show-capture", "all"] # 
+        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "--show-capture", "all", "--disable-warnings"] # 
         self.__test_args = []
         self.__load_tests(**self.__filters)
         self.__load_meta_args()
@@ -153,8 +152,16 @@ class PyTestCommand:
         self.__pytest_args.extend(pytest_report_args)
         self.__pytest_args.extend(self.__test_args)
 
-        if self.__dry_run:
-            self.__pytest_args.append("--collect-only")
+        if self.__dry_run is not False:
+            if self.__dry_run == DryRunType.SHOW_TESTS:
+                self.__pytest_args.extend(["--collect-only"])
+            elif self.__dry_run == DryRunType.SHOW_PLAN:
+                self.__pytest_args.extend(["--setup-plan"])
+            elif self.__dry_run == DryRunType.RUN_FIXTURES:
+                self.__pytest_args.extend(["--setup-only"])
+
+    def __str__(self):
+        return "Command: config={}, group={}, pickers={}".format(self.config.name, self.__group, self.__filters)
 
 class PytestCommands:
 
@@ -175,7 +182,10 @@ class PytestCommands:
         try:
             return next(self.__iter)
         except StopIteration:
-            return
+            raise GroupsFinished()
+
+    def __str__(self):
+        return str([str(c) for c in self.__commands])
 
 class TestGroupRunner(threading.Thread):
 
@@ -189,20 +199,29 @@ class TestGroupRunner(threading.Thread):
         return self.__commands
 
     def run(self):
+        from arjuna import log_info
+        log_info("Group runner started")
         while True:
             try:
                 child = self.__commands.next()
             except GroupsFinished as e:
+                log_info("Groups finished")
                 return
             except Exception as e:
-                print  ("An exception occured in thread pooling. Would continue executing.")
-                print (e)
+                log_info("An exception occured in thread pooling. Would continue executing.")
+                log_info(e)
                 import traceback
                 traceback.print_exc()
                 return
-
-            child.thread_name = self.name
-            child.run()
+            
+            try:
+                log_info("Running child")
+                child.thread_name = self.name
+                child.run()
+            except Exception as e:
+                log_info(e)
+                continue
+        log_info("Group runner started")
 
 class RunnableStage:
 
@@ -227,11 +246,14 @@ class RunnableStage:
         return self.__name
 
     def run(self):
+        from arjuna import log_info
         for w in self.__workers:
             w.start()
 
         for w in self.__workers:
             w.join()
+
+        log_info("All group runners in stage finished.")
 
 class RunnableSession:
 
@@ -242,8 +264,11 @@ class RunnableSession:
         self.__stages.append(stage)
 
     def run(self):
+        from arjuna import log_info
         for stage in self.__stages:
+            log_info("Executing stage: {} ...".format(stage.name))
             stage.run()
+            log_info("Finished Executing stage: {} ...".format(stage.name))
 
 class BaseTestRunner:
 
@@ -271,16 +296,82 @@ class MSessionRunner(BaseTestRunner):
         command = PyTestCommand(config, group="mgroup", dry_run=dry_run, im=im, em=em, it=it, et=et)
         commands.add_command(command)
         commands.freeze()
-        stage = RunnableStage("mstage", commands, "msession", num_threads=1, dry_run=dry_run)
+        stage = RunnableStage("mstage", commands, name_prefix="msession", num_threads=1, dry_run=dry_run)
         runnable_session = RunnableSession()
         runnable_session.add_stage(stage)
         super().__init__(config, config, runnable_session)
 
 class SessionRunner(BaseTestRunner):
-    def __init__(self, name, config):
-        session_desc = None
-        self.__yaml = YamlFile(os.path.join(config.value(ArjunaOption.RUN_SESSION_CONF_DIR), self.name + ".yaml"))
-        super().__init__(config, session_desc)
+
+    def __init__(self, name, config, dry_run=False):
+        self.__runnable_session = None
+        self.__yaml_file_path = os.path.join(config.value(ArjunaOption.RUN_SESSION_CONF_DIR), name + ".yaml")
+        self.__yaml = YamlFile(self.__yaml_file_path)
+        self.__dry_run = dry_run
+        self.__load(config)
+        super().__init__(name, config, self.__runnable_session)
+
+    def __load(self, config):
+        from arjuna import Arjuna
+
+        def __add_group_command(commands, group_yaml):
+            command_kwargs_dict = {
+                'group': group_yaml.name,
+                'dry_run': self.__dry_run,
+                'im': None,
+                'em': None,
+                'it': None,
+                'et': None,
+            }
+            cmd_config = config
+            for gmd_name in group_yaml.section_names:
+                if gmd_name.lower() == "conf":
+                    cmd_config = Arjuna.get_config(group_yaml.get_value("conf"))
+                elif gmd_name.lower() in {'im', 'em', 'it', 'et'}:
+                    command_kwargs_dict[gmd_name.lower()] = group_yaml.get_value(gmd_name)
+
+            command = PyTestCommand(cmd_config, **command_kwargs_dict)
+            commands.add_command(command)
+
+        def __add_stage(stage_yaml):
+            if "groups" not in stage_yaml.section_names:
+                raise Exception("Invalid session file {}. It must contain 'stages' section.".format(self.__yaml_file_path))
+
+            num_threads = 1
+            for section_name in stage_yaml.section_names:
+                commands = PytestCommands()
+                section_name = section_name.lower()
+                if section_name.lower() != "groups":
+                    if section_name == "threads":
+                        if not self.__dry_run:
+                            num_threads = int(stage_yaml.get_value(section_name))
+                else:
+                    groups = stage_yaml.get_section(section_name)
+                    if not groups.section_names:
+                        raise Exception("Invalid session file {}. 'groups' must contain atlease one group section.".format(self.__yaml_file_path))
+                    for group_name in groups.section_names:
+                        group = groups.get_section(group_name)
+                        __add_group_command(commands, group)
+
+            commands.freeze()
+            stage = RunnableStage(stage_yaml.name, commands, name_prefix=self.__yaml.name, num_threads=num_threads, dry_run=self.__dry_run)
+            self.__runnable_session.add_stage(stage)
+
+        if "stages" not in self.__yaml.section_names:
+            raise Exception("Invalid session file {}. It must contain 'stages' section.".format(self.__yaml_file_path))
+
+        stages_yaml = self.__yaml.get_section("stages")
+        stages = stages_yaml.section_names
+        if not stages:
+            raise Exception("Invalid session file {}. 'stages' section must define atleast one stage.'".format(self.__yaml_file_path))
+        
+        self.__runnable_session = RunnableSession()
+        for stage in stages:
+            __add_stage(stages_yaml.get_section(stage))
+
+
+
+    
 
 
 

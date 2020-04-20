@@ -24,9 +24,9 @@ class TestSessionDataBrokerHandler:
     def take_action(self, action_type, json_dict):
         return getattr(self, action_type.name.lower())(**json_dict) 
 
-    def create_file_data_source(self, fileName, recordType, **json_dict):
+    def create_file_data_source(self, fileName, recordType, context="Test", **json_dict):
         data_dir = self.__testsession_handler.conf_handler.configurator.get_central_arjuna_option_value(ArjunaOption.DATA_SRC_DIR.name)
-        return {"dataSourceSetuId" : self.__data_broker.create_file_data_source(data_dir, fileName, recordType, **json_dict)}  
+        return {"dataSourceSetuId" : self.__data_broker.create_file_data_source(data_dir, fileName, recordType, context=context, **json_dict)}  
 
     def get_next_record(self, sourceSetuId):
         try:

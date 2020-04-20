@@ -31,11 +31,16 @@ from arjuna.engine.data.record import *
 # from arjuna.core.utils import sys_utils
 
 class DataSource(metaclass=abc.ABCMeta):
-    def __init__(self):
+    def __init__(self, *, context):
         super().__init__()
         self.lock = threading.RLock()
         self.name = None
         self.ended = False
+        self.__context = context
+
+    @property
+    def context(self):
+        return self.__context
 
     def get_name(self):
         return self.name
@@ -103,8 +108,8 @@ class DataSource(metaclass=abc.ABCMeta):
 
 
 class FileDataSource(DataSource, metaclass=abc.ABCMeta):
-    def __init__(self, path):
-        super().__init__()
+    def __init__(self, path, *, context):
+        super().__init__(context=context)
         self.__path = path
         self.__reader = None
 
@@ -134,36 +139,36 @@ class FileDataSource(DataSource, metaclass=abc.ABCMeta):
         pass
 
 class DsvFileMapDataSource(FileDataSource):
-    def __init__(self, path, delimiter="\t"):
-        super().__init__(path)
+    def __init__(self, path, delimiter="\t", *, context):
+        super().__init__(path, context=context)
         self.__delimiter = delimiter
         self._load_file()
 
     def process(self, data_record):
-        return DataRecord(**dict(data_record))
+        return DataRecord(context=self.context, **dict(data_record))
 
     def _load_file(self):
         self.reader = FileLine2MapReader(self.path, self.__delimiter)
 
 
 class IniFileDataSource(FileDataSource):
-    def __init__(self, path):
-        super().__init__(path)
+    def __init__(self, path, *, context):
+        super().__init__(path, context=context)
         if path.lower().endswith("ini"):
             self._load_file()
         else:
             raise Exception("Unsupported file extension for Ini reading.")
 
     def process(self, data_record):
-        return DataRecord(**dict(data_record))
+        return DataRecord(context=self.context, **dict(data_record))
 
     def _load_file(self):
         self.reader = IniFile2MapReader(self.path)
 
 
 class ExcelFileMapDataSource(FileDataSource):
-    def __init__(self, path):
-        super().__init__(path)
+    def __init__(self, path, *, context):
+        super().__init__(path, context=context)
         if path.lower().endswith("xls"):
             self._load_file()
         else:
@@ -176,13 +181,12 @@ class ExcelFileMapDataSource(FileDataSource):
         return data_record._should_exclude()
 
     def process(self, data_record):
-        return DataRecord(**dict(data_record))
+        return DataRecord(context=self.context, **dict(data_record))
 
 class DummyDataSource(DataSource):
-    MR = DataRecord()
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *, context):
+        super().__init__(context=context)
         self.done = False
 
     def get_next(self):
@@ -190,15 +194,15 @@ class DummyDataSource(DataSource):
             raise DataSourceFinished()
         else:
             self.done = True
-            return DummyDataSource.MR
+            return DataRecord(context=self.context)
 
     def should_exclude(self, data_record):
         return False
 
 
 class SingleDataRecordSource(DataSource):
-    def __init__(self, record):
-        super().__init__()
+    def __init__(self, record, *, context):
+        super().__init__(context=context)
         self.record = record
         self.done = False
 
@@ -217,8 +221,8 @@ class SingleDataRecordSource(DataSource):
 
 
 class DataArrayDataSource(DataSource):
-    def __init__(self, records):
-        super().__init__()
+    def __init__(self, records, *, context):
+        super().__init__(context=context)
         self.records = records
         self.__iter = iter(self.records)
 
@@ -233,8 +237,8 @@ class DataArrayDataSource(DataSource):
 
 
 class DataFunctionDataSource(DataSource):
-    def __init__(self, func, *vargs, **kwargs):
-        super().__init__()
+    def __init__(self, func, *vargs, context, **kwargs):
+        super().__init__(context=context)
         self.func = func
         self.vargs = vargs
         self.kwargs = kwargs
@@ -251,11 +255,11 @@ class DataFunctionDataSource(DataSource):
         if isinstance(obj, DataRecord):
             return obj
         elif type(obj) is tuple or type(obj) is list:
-            return DataRecord(*obj)
+            return DataRecord(context=self.context, *obj)
         elif type(obj) is dict:
-            return DataRecord(**obj)
+            return DataRecord(context=self.context, **obj)
         else:
-            return DataRecord(obj)
+            return DataRecord(obj, context=self.context)
 
     def terminate(self):
         super().terminate()
@@ -266,8 +270,8 @@ class DataFunctionDataSource(DataSource):
 
 
 class DataClassDataSource(DataSource):
-    def __init__(self, dclass, *vargs, **kwargs):
-        super().__init__()
+    def __init__(self, dclass, *vargs, context, **kwargs):
+        super().__init__(context=context)
         self.klass = dclass
         self.vargs = vargs
         self.kwargs = kwargs
@@ -284,11 +288,11 @@ class DataClassDataSource(DataSource):
         if isinstance(obj, DataRecord):
             return obj
         elif type(obj) is tuple or type(obj) is list:
-            return DataRecord(*obj)
+            return DataRecord(context=self.context, *obj)
         elif type(obj) is dict:
-            return DataRecord(**obj)
+            return DataRecord(context=self.context, **obj)
         else:
-            return DataRecord(obj)
+            return DataRecord(obj, context=self.context)
 
     def terminate(self):
         super().terminate()
@@ -299,8 +303,8 @@ class DataClassDataSource(DataSource):
 
 
 class MultiDataSource(DataSource):
-    def __init__(self, dsource_defs):
-        super().__init__()
+    def __init__(self, dsource_defs, *, context):
+        super().__init__(context=context)
         self.dsdefs = dsource_defs
         self.current_dsource = None
         self.def_iter = iter(self.dsdefs)
@@ -308,7 +312,7 @@ class MultiDataSource(DataSource):
     def __init_next_source(self):
         try:
             dsdef = next(self.def_iter)
-            self.current_dsource = dsdef.build()
+            self.current_dsource = dsdef.build(context=self.context)
         except:
             raise StopIteration()
 

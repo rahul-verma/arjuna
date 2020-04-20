@@ -315,3 +315,8 @@ class GuiWidgetType(Enum):
     MULTI_ELEMENT = auto()
     DROPDOWN = auto()
     RADIO_GROUP = auto()
+
+class DryRunType(Enum):
+    SHOW_TESTS = auto()
+    SHOW_PLAN = auto()
+    RUN_FIXTURES = auto()

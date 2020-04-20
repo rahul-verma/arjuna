@@ -20,6 +20,16 @@ Following is the list of critical additions and updates for a given released ver
     - Built-in fixture `group` can be included in a test signature or fixture signature. It yields group parameters including name of group, thread name and configuration.
     - pytest_generate_tests hook added to test project conftest.py, its Arjuna template and added PytestHooks.add_test_to_group
         - Auto-parameteries "group" built-in Arjuna fixture. The fixture can be added to a test function signature or any of its fixtures. Configuration passed with -c switch is used to parameterize the `group` fixture mentioned above.
+    - run-session switch added to run a named session.
+    - Basic session.yaml support added. Supports stages and groups.
+        - A session can have multiple stages.
+        - Stages are always executed sequentially.
+        - A stage can have any number of groups.
+        - Stage can have groups run in parallel with its threads setting. Default is 1.
+        - A group has a unqiue and it defines pickers. It also can have a conf associated with it.
+- Dry Run Major enhancement
+    - Not a boolen switch any more
+    - Takes SHOW_TESTS/SHOW_PLAN/RUN_FIXTURES arguments.
 - CLI Changes: CLI interface heavily updated for simpler names of switches along with more information in help.
 
 0.9.20
@@ -516,7 +526,6 @@ Future Possibilities and Targeted Fixes
     - optonal request object
 - Can Selenium disable certificate trust checking - Chrome/Firefox.
 - Or how to a certificate to trusted certificates.
-- Browser should maximize by default.
 - Formalise the concept of DataEntity beyond an alias for tuple.
 - Multi-threaded ---> Urgent Feature.
 - Tagging
@@ -531,6 +540,10 @@ Future Possibilities and Targeted Fixes
 
 Dynamic parameterization
 ------------------------
+
+Support for test session, stage, groups
+Multithreadin custom logic in Arjuna
+
 
 -   @test needs to change.
 

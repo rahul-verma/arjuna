@@ -38,18 +38,18 @@ def get_data_file_path(data_dir, fpath):
                 raise Exception("File does not exist: {}".format(fpath))
         return fpath
 
-def create_file_data_source(file_path, delimiter="\t"):
+def create_file_data_source(file_path, *, context, delimiter="\t"):
     from arjuna import Arjuna, ArjunaOption
     data_dir = Arjuna.get_config().value(ArjunaOption.DATA_SRC_DIR)
     file_path = get_data_file_path(data_dir, file_path)
     ds = None
     ext = file_path.lower()
     if ext.endswith(".csv") or ext.endswith(".txt"):
-        ds = DsvFileMapDataSource(file_path, delimiter)
+        ds = DsvFileMapDataSource(file_path, delimiter, context=context)
     elif ext.endswith(".xls"):
-        ds = ExcelFileMapDataSource(file_path)
+        ds = ExcelFileMapDataSource(file_path, context=context)
     elif ext.endswith(".ini"):
-        ds = IniFileDataSource(file_path)
+        ds = IniFileDataSource(file_path, context=context)
     else:
         raise Exception("This is not a default file format supported as a data source: " + path)
     return ds

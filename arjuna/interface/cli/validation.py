@@ -84,6 +84,15 @@ def report_format(input):
         print('Exiting...', file=sys.stderr)
         sys.exit(1)
 
+def dry_run_type(input):
+    try:
+        return DryRunType[input.upper()]
+    except Exception as e:
+        allowed = ", ".join([e.name for e in DryRunType])
+        print('Invalid Dry Run Type provided: {}. Allowed values: {}'.format(input, allowed))
+        print('Exiting...', file=sys.stderr)
+        sys.exit(1)
+
 def int_or_notset(input):
     try:
         return int(input)

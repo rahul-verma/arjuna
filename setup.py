@@ -50,7 +50,7 @@ setup(
                     "res/*.yaml",
                 ]
     },
-    install_requires = ["lxml", "requests", "selenium", "webdriver_manager", "xlrd", "xlwt", "pyparsing", "pyhocon", "pytest", "pytest-html", "pytest-dependency", "pytest-xdist", "PyYAML", "mimesis", "jsonpath-rw", "jsonpath-rw-ext", "Pallets-Sphinx-Themes"],
+    install_requires = ["lxml", "requests", "selenium", "webdriver_manager", "xlrd", "xlwt", "pyparsing", "pyhocon", "pytest", "pytest-html", "pytest-dependency", "PyYAML", "mimesis", "jsonpath-rw", "jsonpath-rw-ext", "Pallets-Sphinx-Themes"],
     keywords = "arjuna selenium testing automation page-object data-driven",
     license = "Apache License, Version 2.0",
     classifiers=[

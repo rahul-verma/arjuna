@@ -174,6 +174,9 @@ class Configuration:
         '''
         return self.__wrapped_config.as_json_dict()
 
+    def __str__(self):
+        return self.name
+
 @track("debug")
 class ConfigBuilder:
     '''

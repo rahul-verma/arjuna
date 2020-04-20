@@ -78,7 +78,7 @@ class DefaultTestSession:
         if session_name == "msession":
             self.__testrunner = MSessionRunner(Arjuna.get_config(group_conf_name), dry_run=dry_run, im=im, em=em, it=it, et=et)
         else:
-            self.__testrunner = SessionRunner(session_name, config)
+            self.__testrunner = SessionRunner(session_name, config, dry_run=dry_run)
 
     def run(self):
         self.__testrunner.run()

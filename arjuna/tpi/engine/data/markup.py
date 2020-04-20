@@ -45,18 +45,19 @@ class record(_DataMarkUp):
     from arjuna.engine.data.source import SingleDataRecordSource
     def __init__(self, *vargs, **kwargs):
         super().__init__()
+        self.__vargs = vargs
+        self.__kwargs = kwargs
         if not vargs and not kwargs:
-            raise Exception("No data provided in Data")
-        self.__record = DataRecord(*vargs, **kwargs)
+            raise Exception("No data provided in Data") 
 
-    def build(self) -> 'DataSource':
+    def build(self, context="Test") -> 'DataSource':
         '''
             Create corresponding DataSource
         '''
-        return SingleDataRecordSource(self.__record)
+        return SingleDataRecordSource(self.get_record(context=context), context=context)
 
-    def get_record(self):
-        return self.__record
+    def get_record(self, *, context="Test"):
+        return DataRecord(context=context, *self.__vargs, **self.__kwargs)
 
 class records(_DataMarkUp):
     '''
@@ -72,13 +73,16 @@ class records(_DataMarkUp):
         for i in records:
             if not isinstance(i, record):
                 raise Exception("Items in records() must be instances of record.")
-        self.records = [i.get_record() for i in records]
+        self.__records = records
 
-    def build(self) -> 'DataSource':
+    def build(self, context="Test") -> 'DataSource':
         '''
             Create corresponding DataSource
         '''
-        return DataArrayDataSource(self.records)
+        return DataArrayDataSource(self.get_records(context=context), context=context)
+
+    def get_records(self, *, context="Test"):
+        return [i.get_record(context=context) for i in self.__records]
 
 class data_function(_DataMarkUp):
     '''
@@ -100,11 +104,11 @@ class data_function(_DataMarkUp):
         self.vargs = vargs
         self.kwargs = kwargs
 
-    def build(self) -> 'DataSource':
+    def build(self, context="Test") -> 'DataSource':
         '''
             Create corresponding DataSource
         '''
-        return DataFunctionDataSource(self.func, *self.vargs, **self.kwargs)
+        return DataFunctionDataSource(self.func, *self.vargs, context=context, **self.kwargs)
 
 
 class data_class(_DataMarkUp):
@@ -125,11 +129,11 @@ class data_class(_DataMarkUp):
         self.vargs = vargs
         self.kwargs = kwargs
 
-    def build(self) -> 'DataSource':
+    def build(self, context="Test") -> 'DataSource':
         '''
             Create corresponding DataSource
         '''
-        return DataClassDataSource(self.dsclass, *self.vargs, **self.kwargs)
+        return DataClassDataSource(self.dsclass, *self.vargs, context=context, **self.kwargs)
 
 
 class data_file(_DataMarkUp):
@@ -147,11 +151,11 @@ class data_file(_DataMarkUp):
         self.path = path
         self.delimiter = delimiter
 
-    def build(self) -> 'DataSource':
+    def build(self, context="Test") -> 'DataSource':
         '''
             Create corresponding DataSource
         '''
-        source = create_file_data_source(self.path, delimiter=self.delimiter)
+        source = create_file_data_source(self.path, delimiter=self.delimiter, context=context)
         return source
 
 
@@ -174,11 +178,11 @@ class many_data_sources(_DataMarkUp):
                 raise Exception("All arguments of many_data_sources must be data sources.")
         self.dsource_defs = dsources
 
-    def build(self) -> 'DataSource':
+    def build(self, context="Test") -> 'DataSource':
         '''
             Create corresponding DataSource
         '''
-        return MultiDataSource(self.dsource_defs)
+        return MultiDataSource(self.dsource_defs, context=context)
 
 
 
