@@ -62,7 +62,6 @@ class NewProjectParser(Parser):
             print("Fatal Error in CLI processing. You must provide a valid project root directory using -p or --project-dir switch", file=sys.stderr)
             sys.exit(1)
 
-
 class RunParser(Parser):
     def __init__(self):
         super().__init__()
@@ -71,11 +70,6 @@ class RunParser(Parser):
         self.parser.add_argument('-o', '--output-formats', dest="report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
         self.parser.add_argument('--update', dest="static.rid", action='store_true', help = 'Will result in overwriting of report files. Useful during script development.')
         self.parser.add_argument('--dry-run', dest="dry_run", action='store_true', help = 'Launch Arjuna, enumerate tests, but do not execute tests.')
-        self.parser.add_argument('-d', '--dist', nargs='+', dest="run.dist.conf.names", metavar=('C1','C2'), type=str, help = 'Configuration object names for this run. Used by distributor logic. All tests which have distributor fixture are subjected to distribution logic. If not provided it is calculated from values of --run-confs and/or --run-envs values.')
-        self.parser.add_argument('-ds', '--dist-split', dest="run.dist.split", action='store_true', help = 'If passed, distributor confs will be split across modules.')
-        self.parser.add_argument('--static-id', dest="static.rid", action='store_true', help = 'Use static RunID. Will result in overwriting of report files. Useful during script development.')
-        self.parser.add_argument('-e', '--run-envs', nargs='+', dest="run.env.names", metavar=('E1','E2'), type=str, default="env", help = 'Name of environment conf files with options defined in <env>.conf file in <Project Root>/config/env directory. --dist overrides this switch.')
-        self.parser.add_argument('-c','--run-confs', nargs='+', dest="run.conf.names", metavar=('R1','R2'), type=str, default="run", help = 'Name of run configuration files with options defined in <run>.conf file in <Project Root>/config/env directory. --dist overrides this switch.')
         self.parser.add_argument('-ao', '--arjuna-option', dest="ao",
                                  nargs=2,
                                  action='append',
@@ -89,12 +83,30 @@ class RunParser(Parser):
     def process(self, arg_dict):
         pass
 
+class RunDefaultGroupParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument('-c', '--conf', nargs='+', dest="group.conf.name", type=str, default="ref", help='Configuration object name for this run.')
+
+    def process(self, arg_dict):
+        pass
+
+class SessionParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument("-s", "--session-name", dest="run.session.name", type=partial(lname_check, "Run ID"), help = 'Name of session configuration file. Corresponding <sessionname>.yaml file must exist in <Project Root>/config/session directory', default="msession")
+
+    def process(self, arg_dict):
+        pass
+
 class PickersParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument('-im', '--include-modules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for including test modules.')
-        self.parser.add_argument('-em', '--exclude-modules', dest="emodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for excluding test modules.')
+        self.parser.add_argument('-em', '--exclude-modules-in-stage', dest="emodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for excluding test modules.')
         # self.parser.add_argument('-cc', '--cclasses', dest="cclasses", metavar=('C1','C2'), default=None, nargs='+', help='One or more names/patterns for considering test classes.')
         # self.parser.add_argument('-ic', '--iclasses', dest="iclasses", metavar=('C1','C2'), default=None, nargs='+', help='One or more names/patterns for ignoring test classes.')
         self.parser.add_argument('-it', '--include-tests', dest="itests", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for including test functions.')

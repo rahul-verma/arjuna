@@ -158,5 +158,5 @@ def for_test(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
         return __pytestfix("function", drive_with=drive_with)
 
 @for_module
-def distributor(request):
-    yield request.data.delegated_config
+def group(request):
+    yield request.data

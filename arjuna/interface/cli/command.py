@@ -237,6 +237,7 @@ class __RunCommand(Command):
         runid = arg_dict.pop("run.id")
         static_rid = arg_dict.pop("static.rid")
         self.dry_run = arg_dict.pop("dry_run")
+        self.group_conf_name = arg_dict.pop("group.conf.name")
 
         Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid, static_rid=static_rid)
 
@@ -250,19 +251,28 @@ class __RunCommand(Command):
 
 class RunProject(__RunCommand):
     def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-project', parents, "Run all tests in an Arjuna Test Project.")
+        super().__init__(subparsers, 'run-project', parents, "Run all tests in an Arjuna Test Project in a single thread.")
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
-        from arjuna.engine.runner import TestRunner
-        test_runner = TestRunner()
-        test_runner.load_all_tests()
-        test_runner.run(dry_run=self.dry_run)
+        session = Arjuna.get_test_session()
+        session.load_tests(dry_run=self.dry_run, group_conf_name=self.self.group_conf_name)
+        session.run()
+
+class RunSession(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-session', parents, "Run tests as per the session configuration file.")
+
+    def execute(self, arg_dict):
+        super().execute(arg_dict)
+        session = Arjuna.get_test_session()
+        session.load_tests(dry_run=self.dry_run, group_conf_name=self.self.group_conf_name)
+        session.run()
 
 class RunSelected(__RunCommand):
 
     def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified.")
+        super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified in a single thread.")
 
     def execute(self, arg_dict):
         pickers_dict = dict()
@@ -299,8 +309,8 @@ class RunSelected(__RunCommand):
 
         super().execute(arg_dict)
 
-        from arjuna.engine.runner import TestRunner
-        test_runner = TestRunner()
-        test_runner.load_tests_from_pickers(**pickers_dict)
-        test_runner.run(dry_run=self.dry_run)
+        from arjuna import Arjuna
+        session = Arjuna.get_test_session()
+        session.load_tests(**pickers_dict, dry_run=self.dry_run, group_conf_name=self.group_conf_name)
+        session.run()
 

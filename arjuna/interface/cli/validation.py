@@ -84,3 +84,14 @@ def report_format(input):
         print('Exiting...', file=sys.stderr)
         sys.exit(1)
 
+def int_or_notset(input):
+    try:
+        return int(input)
+    except:
+        if input.lower() == "not_set":
+            return "not_set"
+        else:
+            print(e)
+            print('Invalid input argument: {}. Expected an int.'.format(input))
+            print('Exiting...', file=sys.stderr)
+            sys.exit(1)

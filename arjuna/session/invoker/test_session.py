@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import uuid
 import time
 import logging
@@ -39,6 +40,7 @@ class DefaultTestSession:
         self.__configurator = None
         self.__project_config_loaded = False
         self.__guimgr = None
+        self.__testrunner = None
 
     @property
     def id(self):
@@ -66,6 +68,20 @@ class DefaultTestSession:
         for run_env_conf in [self.__create_config(econf, name=name) for name, econf in run_env_confs.items()]:
             self.__add_to_map(run_env_conf)
         return ref_conf
+
+    def load_tests(self, *, dry_run=False, group_conf_name="ref", im=None, em=None, it=None, et=None):
+        from arjuna import Arjuna
+        from arjuna.engine.runner import MSessionRunner, SessionRunner
+        config = Arjuna.get_config()
+        print(config.value(ArjunaOption.RUN_SESSION_NAME).lower())
+        session_name = config.value(ArjunaOption.RUN_SESSION_NAME).lower()
+        if session_name == "msession":
+            self.__testrunner = MSessionRunner(Arjuna.get_config(group_conf_name), dry_run=dry_run, im=im, em=em, it=it, et=et)
+        else:
+            self.__testrunner = SessionRunner(session_name, config)
+
+    def run(self):
+        self.__testrunner.run()
 
     def __create_config(self, config, name=None):
         config = Configuration(

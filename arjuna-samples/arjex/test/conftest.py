@@ -1,6 +1,9 @@
 import pytest
+import sys
 
 from arjuna import *
+sys.path.append(C("project.root.dir") + "/..")
+
 from arjex.lib.fixture.session import *
 from arjex.lib.fixture.module import *
 from arjex.lib.fixture.test import *
@@ -11,4 +14,4 @@ def pytest_runtest_makereport(item, call):
     PytestHooks.add_screenshot_for_result(item, result)
 
 def pytest_generate_tests(metafunc):
-    PytestHooks.dist(metafunc)
+    PytestHooks.add_test_to_group(metafunc)

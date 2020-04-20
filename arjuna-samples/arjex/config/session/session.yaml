@@ -1,0 +1,44 @@
+
+stages:
+
+  stage1:
+    parallel = true
+
+    groups:
+
+      gp1:
+        confs:
+          - run1_tenv1
+          - run1_tenv2
+
+        include-modules:
+          - check_delegate_1
+
+      gp2:
+        confs:
+          - run1_tenv1
+          - run2_tenv2
+
+        include-modules:
+          - check_delegate_1
+
+
+  stage2:
+
+    groups:
+
+      gp1:
+        confs:
+          - run1_tenv1
+          - run1_tenv2
+
+        include-modules:
+          - check_delegate_1
+
+      gp2:
+        confs:
+          - run1_tenv1
+          - run2_tenv2
+
+        include-modules:
+          - check_delegate_1

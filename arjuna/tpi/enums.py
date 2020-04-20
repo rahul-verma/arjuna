@@ -36,8 +36,11 @@ class ArjunaOption(Enum):
     RUN_ID = auto()
     '''An alnum string representing current test run. Default is `mrun`'''
 
-    RUN_ENV_NAMES = auto()
-    '''Names of the test environments. Corresponding .conf file should exist in config/evn directory. Default is env'''
+    RUN_SESSION_CONF_DIR = auto()
+    '''Directory that contains all session configuration .yaml files.'''
+
+    RUN_SESSION_NAME = auto()
+    '''Current session name.'''
 
     RUN_ENV_CONF_DIR = auto()
     '''Directory that contains all environment configuration .conf files.'''
@@ -45,23 +48,8 @@ class ArjunaOption(Enum):
     RUN_CONF_DIR = auto()
     '''Directory that contains all run configuration .conf files.'''
 
-    RUN_CONF_NAMES = auto()
-    '''Names of the run configurations. Corresponding .conf file should exist in config/run directory. Default is run'''
-
     RUN_HOST_OS = auto()
     '''Host Operating System type: Windows/Mac/Linux.'''
-
-    RUN_DIST_CONF_NAMES = auto()
-    '''Names of distribution configuration names for current run used for auto-delegate logic. Either directly set, else calculated from RUN_CONF_NAMES and RUN_ENV_NAMES. Default is ref'''
-
-    RUN_DIST_SPLIT = auto()
-    '''Boolean value determining whether distributor confs will be split across modules or all of them will be assigned to each module.'''
-
-    RUN_DIST_PARALLELIZE = auto()
-    '''Boolean value determining whether distributor should delegate tests in parallel to Python sub-processes. Default is False.'''
-
-    RUN_DIST_NUM_WORKERS = auto()
-    '''Number of Local Python subprocesses on a test machine to run tests when distributor is in Parallel mode. Default is equal to the number of CPUs on the local system.'''
 
     LOG_FILE_LEVEL = auto()
     '''Minimum level for a message to be logged to log file.'''

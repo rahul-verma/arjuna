@@ -64,3 +64,11 @@ def check_run_env_confs_with_CFunc(request):
     print(C("run1_env.browser.name"))
     print(C("run1_tenv1.browser.name"))
     print(C("run_tenv1.browser.name"))
+
+
+@test
+def check_default_conf(request):
+    '''
+        With and without the -c switch the result should vary.
+    '''
+    print(C("app.url"))

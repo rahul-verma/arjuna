@@ -48,30 +48,30 @@ class TestConfigurator:
         self.__default_ref_config.update(self.__run_confs["run"])
         self.__default_ref_config.update(self.__env_confs["env"])
         self.__update_config(self.__default_ref_config)
-        self.__process_run_configs()
+        # self.__process_run_configs()
 
         self.__load_combinations()
 
-    def __process_run_configs(self):
-        from arjuna.tpi.enums import ArjunaOption
-        # Load run configs
-        distribution_confs = self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_DIST_CONF_NAMES)
-        if distribution_confs == ['none'] or distribution_confs == "not_set":
-            distribution_confs = []
-            for rname in self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_CONF_NAMES):
-                if rname not in self.__run_confs:
-                    raise Exception("There is no run conf with name {}".format(rname))
-                for ename in self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_ENV_NAMES):
-                    if ename not in self.__env_confs:
-                        raise Exception("There is no env conf with name {}".format(ename))
-                    name = "{}_{}".format(rname, ename)
-                    if name == "run_env":
-                        name = "ref"
-                    distribution_confs.append(name)
+    # def __process_run_configs(self):
+    #     from arjuna.tpi.enums import ArjunaOption
+    #     # Load run configs
+    #     distribution_confs = self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_STAGE_DIST_CONF_NAMES)
+    #     if distribution_confs == ['none'] or distribution_confs == "not_set":
+    #         distribution_confs = []
+    #         for rname in self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_STAGE_DIST_RUN_CONF_NAMES):
+    #             if rname not in self.__run_confs:
+    #                 raise Exception("There is no run conf with name {}".format(rname))
+    #             for ename in self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_STAGE_DIST_ENV_NAMES):
+    #                 if ename not in self.__env_confs:
+    #                     raise Exception("There is no env conf with name {}".format(ename))
+    #                 name = "{}_{}".format(rname, ename)
+    #                 if name == "run_env":
+    #                     name = "ref"
+    #                 distribution_confs.append(name)
 
-        configs = ",".join([i.lower() for i in distribution_confs])
-        conf = self.__create_config_from_option_dicts(None, {"run.dist.conf.names": configs}, None)
-        self.__default_ref_config.update(conf)
+    #     configs = ",".join([i.lower() for i in distribution_confs])
+    #     conf = self.__create_config_from_option_dicts(None, {"run.stage.dist.conf.names": configs}, None)
+    #     self.__default_ref_config.update(conf)
 
     def __load_central_conf(self):
         self.__default_ref_config = CentralConfigLoader(self.__root_dir, self.__run_id).config

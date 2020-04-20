@@ -22,9 +22,6 @@ class PytestHooks:
         Easy hooks to be used in `pytest` configuration file: `conftest.py` placed under `<Project_Root_Dir/test` directory in test project.
     '''
 
-    _PARAMETERIZED_MODULES = dict()
-    _distributor_CYCLE = None
-
     @classmethod
     def _get_request_attr(cls, item, obj_name):
         from .test import Space
@@ -119,34 +116,15 @@ class PytestHooks:
 
 
     @classmethod
-    def dist(cls, metafunc):
+    def add_test_to_group(cls, metafunc):
         from arjuna import Arjuna, ArjunaOption, log_debug, C
         from arjuna.tpi.engine.data.markup import record
         log_debug("{} {}".format(metafunc.function, metafunc.fixturenames))
 
-        run_configs = Arjuna.get_run_distributor_confs()
-
-        # "distributor" fixture can be in test signatue or signature of any of other fixtures that it contains.
-
-        if "distributor" in metafunc.fixturenames:
-
-
-            if C(ArjunaOption.RUN_DIST_SPLIT):
-                if not cls._distributor_CYCLE:
-                    cls._distributor_CYCLE = cycle(run_configs)
-                conf = None
-                m = metafunc.function.__module__
-                log_debug("Module" + m)
-                if m in cls._PARAMETERIZED_MODULES:
-                    conf = cls._PARAMETERIZED_MODULES[m]
-                    log_debug("Found" + conf.name)
-                else:
-                    conf = next(cls._distributor_CYCLE)
-                    cls._PARAMETERIZED_MODULES[m] = conf
-                    log_debug("Added" + conf.name)
-                log_debug("Parameterizing distributor" + conf.name)
-                metafunc.parametrize("distributor", argvalues=[record(delegated_config=conf).build().all_records[0]], ids=["RunConfig: {} ".format(conf.name)], indirect=True)
-            else:
-                argvalues = [record(delegated_config=c).build().all_records[0] for c in run_configs]
-                ids = ["RunConfig: {} ".format(c.name) for c in run_configs]
-                metafunc.parametrize("distributor", argvalues=argvalues, ids=ids, indirect=True)
+        if "group" in metafunc.fixturenames:
+            group_params = Arjuna.get_group_params()
+            conf = None
+            m = metafunc.function.__module__
+            gid = "GroupData: gn={}, tn={}, conf={} ".format(group_params['name'], group_params['thread_name'], group_params['config'].name)
+            log_debug("Parameterizing distributor for module: {} with group: {}".format(m, gid))
+            metafunc.parametrize("group", argvalues=[record(**group_params).build().all_records[0]], ids=[gid], indirect=True)

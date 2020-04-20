@@ -22,6 +22,7 @@ import sys
 import io
 import time
 import datetime
+import threading
 # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="UTF-8")
 # sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
 
@@ -60,6 +61,7 @@ class ArjunaSingleton:
         self.__logger = None
         from arjuna.engine.data.store import DataStore
         self.__data_store = DataStore()
+        self.__thread_conf_map = dict()
 
     @property
     def gui_mgr(self):
@@ -176,6 +178,12 @@ class ArjunaSingleton:
     def has_config(self, name):
         return name.lower() in self.__config_map
 
+    def get_group_params(self):
+        return self.__thread_conf_map[threading.current_thread().name]
+
+    def register_group_params(self, **params):
+        self.__thread_conf_map[threading.current_thread().name] = params
+
 class Arjuna:
     '''
         Facade of Arjuna framework.
@@ -204,6 +212,13 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.logger
 
     @classmethod
+    def get_test_session(cls):
+        '''
+            Returns the current Test Session object.
+        '''
+        return cls.ARJUNA_SINGLETON.test_session
+
+    @classmethod
     def register_config(cls, config):
         cls.ARJUNA_SINGLETON.register_config(config)
 
@@ -224,13 +239,6 @@ class Arjuna:
             Returns the reference configuration.
         '''
         return [cls.get_config(name) for name in names]
-
-    @classmethod
-    def get_run_distributor_confs(cls):
-        '''
-            Returns the run configurations used for auto-delegate logic if used.
-        '''
-        return [cls.get_config(name) for name in cls.get_config_value("run.dist.conf.names")]
 
     @classmethod
     def get_config_value(cls, query, *, cname=None):
@@ -275,6 +283,14 @@ class Arjuna:
     @classmethod
     def get_withx_ref(cls):
         return cls.ARJUNA_SINGLETON.withx_ref
+
+    @classmethod
+    def get_group_params(cls):
+        return cls.ARJUNA_SINGLETON.get_group_params()
+
+    @classmethod
+    def register_group_params(cls, **params):
+        return cls.ARJUNA_SINGLETON.register_group_params(**params)
 
     @staticmethod
     def exit():
