@@ -38,7 +38,7 @@ class ProjectParser(Parser):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         #self.parser.add_argument('-w', '--workspace-dir', dest="workspace_dir", type=str, help='Workspace Directory')
-        self.parser.add_argument('-p', '--project-root-dir', dest="project.root.dir", type=project_dir, help = 'Valid absolute Project root directory. Name of project (Alnum 3-30 length. Only lower case letters.).')
+        self.parser.add_argument('-p', '--project-root-dir', metavar="test_project_root_dir", dest="project.root.dir", type=project_dir, help = 'Valid absolute path of an existing Arjuna test project. Needed with python -m arjuna call only. With python arjuna_launcher.py you can skip this argument as the script determines its container Arjuna test project automatically.')
 
     def process(self, arg_dict):
         # arg_dict['workspace.dir'] = arg_dict['workspace_dir']
@@ -53,7 +53,7 @@ class NewProjectParser(Parser):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         #self.parser.add_argument('-w', '--workspace-dir', dest="workspace_dir", type=str, help='Workspace Directory')
-        self.parser.add_argument('-p', '--project-root-dir', dest="project.root.dir", type=new_project_dir, help = 'Absolute non-existing Project root directory. Name of project (Alnum 3-30 length. Only lower case letters.).')
+        self.parser.add_argument('-p', '--project-root-dir', metavar="test_project_root_dir", dest="project.root.dir", type=new_project_dir, help = 'Absolute non-existing Project root directory. Last part of directory represents project name. Name of project should be an Alnum 3-30 length with only lower case letters.')
 
     def process(self, arg_dict):
         # arg_dict['workspace.dir'] = arg_dict['workspace_dir']
@@ -66,7 +66,7 @@ class RunParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument("-r", "--run-id", dest="run.id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
+        self.parser.add_argument("-r", "--run-id", dest="run.id", metavar="run_id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
         self.parser.add_argument('-o', '--output-formats', dest="report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
         self.parser.add_argument('--update', dest="static.rid", action='store_true', help = 'Will result in overwriting of report files. Useful during script development.')
         self.parser.add_argument('--dry-run', dest="dry_run", action='store_true', help = 'Launch Arjuna, enumerate tests, but do not execute tests.')
@@ -87,7 +87,7 @@ class RunDefaultGroupParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-c', '--conf', nargs='+', dest="group.conf.name", type=str, default="ref", help='Configuration object name for this run.')
+        self.parser.add_argument('-c', '--conf', dest="group.conf.name", metavar="config_name", type=str, default="ref", help='Configuration object name for this run.')
 
     def process(self, arg_dict):
         pass
