@@ -2,12 +2,13 @@ Following is the list of critical additions and updates for a given released ver
 
 0.9.21
 ------
-- Run Conf and Run Env conf concepts updated
-    - In a test project, you can define any number of run confs and/or env confs
-    - Arjuna looks for run.conf and env.conf and updates the reference configuration, if these files exist.
-    - Arjuna generates confs for all combinations of run confs and env confs when it loads. For each combination:
+- Data Conf and  Env conf concepts updated
+    - In a test project, you can define any number of data confs and/or env confs. These are auto-loaded.
+    - The configuration name for them are the file names (minus the .conf extension.)
+    - Arjuna looks for data.conf and env.conf and updates the reference configuration, if these files exist.
+    - Arjuna also generates confs for all combinations of run confs and env confs when it loads. For each combination:
         - Ref config is taken as base
-        - run conf is superimposed
+        - data conf is superimposed
         - env conf is superimposed
         - CLI options are superimposed
     - The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
@@ -27,6 +28,9 @@ Following is the list of critical additions and updates for a given released ver
         - A stage can have any number of groups.
         - Stage can have groups run in parallel with its threads setting. Default is 1.
         - A group has a unqiue and it defines pickers. It also can have a conf associated with it.
+        - Each group is run in a thread.
+        - If conf is defined for a group, the reference configuration is changed to this conf for this group run.
+        - Each group is reported separately in a .html and .xml file.
 - Dry Run Major enhancement
     - Not a boolen switch any more
     - Takes SHOW_TESTS/SHOW_PLAN/RUN_FIXTURES arguments.
