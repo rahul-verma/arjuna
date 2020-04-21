@@ -20,14 +20,6 @@ from arjuna import ArjunaOption
 from .config import Config
 from arjuna.tpi.helper.arjtype import CIStringDict
 
-# class ArjunaOptionMap(AbstractValueMap):
-
-#     def __init__(self, object_map=None, headers=None, objects=None):
-#         super().__init__(object_map, headers, objects)
-
-#     def _format_key_as_str(self, key):
-#         return str(key)
-
 class ConfigContainer:
 
     def __init__(self):

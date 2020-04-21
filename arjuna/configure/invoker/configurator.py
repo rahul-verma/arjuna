@@ -31,7 +31,7 @@ class TestConfigurator:
         self.__cli_config = cli_config
         self.__run_id = run_id
         self.__default_ref_config = None
-        self.__run_confs = {"run" : EmptyConfCreator().config}
+        self.__data_confs = {"data" : EmptyConfCreator().config}
         self.__env_confs = {"env" : EmptyConfCreator().config}
         self.__runconf_enconf_confs = dict()
         self.__project_config_loaded = False
@@ -42,36 +42,15 @@ class TestConfigurator:
         self.__load_central_conf()
         self.__load_project_conf()
         self.__load_cli_dicts()
-        self.__load_run_confs()
-        self.__load_env_configurations()
+        self.__load_data_confs()
+        self.__load_env_confs()
 
-        self.__default_ref_config.update(self.__run_confs["run"])
+        self.__default_ref_config.update(self.__data_confs["data"])
         self.__default_ref_config.update(self.__env_confs["env"])
         self.__update_config(self.__default_ref_config)
-        # self.__process_run_configs()
+        # self.__process_data_configs()
 
         self.__load_combinations()
-
-    # def __process_run_configs(self):
-    #     from arjuna.tpi.enums import ArjunaOption
-    #     # Load run configs
-    #     distribution_confs = self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_STAGE_DIST_CONF_NAMES)
-    #     if distribution_confs == ['none'] or distribution_confs == "not_set":
-    #         distribution_confs = []
-    #         for rname in self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_STAGE_DIST_RUN_CONF_NAMES):
-    #             if rname not in self.__run_confs:
-    #                 raise Exception("There is no run conf with name {}".format(rname))
-    #             for ename in self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_STAGE_DIST_ENV_NAMES):
-    #                 if ename not in self.__env_confs:
-    #                     raise Exception("There is no env conf with name {}".format(ename))
-    #                 name = "{}_{}".format(rname, ename)
-    #                 if name == "run_env":
-    #                     name = "ref"
-    #                 distribution_confs.append(name)
-
-    #     configs = ",".join([i.lower() for i in distribution_confs])
-    #     conf = self.__create_config_from_option_dicts(None, {"run.stage.dist.conf.names": configs}, None)
-    #     self.__default_ref_config.update(conf)
 
     def __load_central_conf(self):
         self.__default_ref_config = CentralConfigLoader(self.__root_dir, self.__run_id).config
@@ -80,17 +59,17 @@ class TestConfigurator:
         project_conf_loader = ProjectConfigCreator(self.__default_ref_config)
         self.__default_ref_config = project_conf_loader.config
 
-    def __load_run_confs(self):
+    def __load_data_confs(self):
         from arjuna import ArjunaOption
-        run_conf_dir = self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_CONF_DIR)
-        for fname in os.listdir(run_conf_dir):
+        data_conf_dir = self.__default_ref_config.arjuna_config.value(ArjunaOption.CONF_DATA_DIR)
+        for fname in os.listdir(data_conf_dir):
             if fname.lower().endswith(".conf"):
-                run_conf_loader = PartialConfCreator(os.path.join(run_conf_dir, fname))
-                self.__run_confs[os.path.splitext(fname)[0].lower()] = run_conf_loader.config
+                data_conf_loader = PartialConfCreator(os.path.join(data_conf_dir, fname))
+                self.__data_confs[os.path.splitext(fname)[0].lower()] = data_conf_loader.config
 
-    def __load_env_configurations(self):
+    def __load_env_confs(self):
         from arjuna import ArjunaOption
-        env_dir = self.__default_ref_config.arjuna_config.value(ArjunaOption.RUN_ENV_CONF_DIR)
+        env_dir = self.__default_ref_config.arjuna_config.value(ArjunaOption.CONF_ENV_DIR)
         for fname in os.listdir(env_dir):
             if fname.lower().endswith(".conf"):
                 env_conf_loader = PartialConfCreator(os.path.join(env_dir, fname))
@@ -150,9 +129,9 @@ class TestConfigurator:
         if self.__chosen_env_conf:
             config.update(self.__chosen_env_conf)
 
-    def __update_config_for_run_conf(self, config):
-        if self.__run_conf:
-            config.update(self.__run_conf)
+    def __update_config_for_data_conf(self, config):
+        if self.__data_conf:
+            config.update(self.__data_conf)
 
     def __update_config_for_cli(self, config):
         config.update(self.__cli_config)
@@ -173,7 +152,7 @@ class TestConfigurator:
         return conf
 
     def __load_combinations(self):
-        for rname, rconf in self.__run_confs.items():
+        for rname, rconf in self.__data_confs.items():
             for ename, econf in self.__env_confs.items():
                 cname = "{}_{}".format(rname, ename)
                 conf = self.__load_one_combo(rconf, econf)

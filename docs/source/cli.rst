@@ -32,6 +32,7 @@ Arjuna's CLI is Command-Driven. Following are the current available commands:
 - **create-project**: Create a new project
 - **run-project**: Run all tests in an Arjuna Test Project.
 - **run-selected**: Run tests selected based on selectors specified.
+- **run-session**: Run a session defined in corresponding .yaml file.
 
 You can see the help for a given command by running `python -m arjuna <command> -h`, for example
 
@@ -67,11 +68,11 @@ Following run options can be provided in command line:
 - `-r` or --run-id`: The id/name of this test run. It is `mrun` by default. Run ID is used to create the report directory name.
 - `-o` or `--output-formats`: Report formats for test report generation. Allowed values are `XML` and `HTML`.
 - `--update`: Instructs Arjuna to use the run id without appending timestap to it. It is very helpful to us this during script development as for every run a new report directory is not created.
-- `--dry-run`: Do not run tests, just enumerate them.
-- `-d` or `--distribute`: Provide the distribution configuration object names for this run. All tests which have distributor fixture are subjected to distribution logic. If not provided it is calculated from values of --run-confs and/or --run-envs values.
-- `-ds` or `--dist-split`: If passed, distributor confs will be split across modules. Each module is assigned only one configuration object.
-- `-e` or `--run-envs`: Provide the test environment conf file names (e.g. `tenv`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/env` directory (e.g. `tenv.conf`). --dist overrrides this.
-- `-c` or `--run-confs`: Provide the run conf file names (e.g. `trun1`). Arjuna automatically picks up the configuration file corresponding to this name from `<Project Root Dir>/config/run` directory (e.g. `trun1.conf`). --dist overrrides this.
+- `--dry-run`: Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. 
+        - **SHOW_TESTS** - enumerate tests. 
+        - **SHOW_PLAN** - enumerates tests fixtures. 
+        - **RUN_FIXTURES** - Executes setup/teardown fixtures and emuerates tests.
+- `-c` or `--conf`: Configuration object name for this run.
 - `-ao` or `--arjuna-option`: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates. You can provide any number of these switches.
 - `-uo` or `--user-option`: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.  You can provide any number of these switches.
 
@@ -90,6 +91,20 @@ All the command line options specified for [the `run-project` command](#the-run-
 - `-em` or `--exclude-modules`: One or more names/patterns for excluding test modules.
 - `-it` or `--include-tests`: One or more names/patterns for including test functions.
 - `-et` or `--exclude-tests`: One or more names/patterns for excluding test functions.
+
+
+The run-session command
+-----------------------
+
+This command is used to run tests as per a session definition.yaml file.
+
+.. code-block:: bash
+
+   python -m arjuna run-session -p /path/to/proj_name -s <session_name>
+
+All the command line options specified for [the `run-project` command](#the-run-project-command) are supported. In addition, following selection related options are available:
+
+- `-s` or `--session-name`: Name of session definition file (without .yaml extension)
 
 Using arjuna_launcher.py Script instead of python -m arjuna
 -----------------------------------------------------------

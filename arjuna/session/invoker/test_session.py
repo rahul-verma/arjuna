@@ -61,11 +61,11 @@ class DefaultTestSession:
     def init(self, root_dir, cli_config=None, run_id=None):
         self.__configurator = TestConfigurator(root_dir, cli_config, run_id)
         ref_config = self.__configurator.ref_config
-        run_env_confs = self.__configurator.file_confs
+        data_env_confs = self.__configurator.file_confs
         self.__guimgr = GuiManager(ref_config)
         ref_conf = self.__create_config(ref_config)
         self.__add_to_map(ref_conf)
-        for run_env_conf in [self.__create_config(econf, name=name) for name, econf in run_env_confs.items()]:
+        for run_env_conf in [self.__create_config(econf, name=name) for name, econf in data_env_confs.items()]:
             self.__add_to_map(run_env_conf)
         return ref_conf
 

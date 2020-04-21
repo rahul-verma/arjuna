@@ -52,7 +52,7 @@ def __log(invoker, level, msg, contexts=None):
         contexts = ("default",)
     contexts = set(contexts)
     try:
-        getattr(Arjuna.get_logger(), level)(msg, extra={'invoker': invoker, 'contexts':contexts, 'config':Arjuna.get_config("run_env")})
+        getattr(Arjuna.get_logger(), level)(msg, extra={'invoker': invoker, 'contexts':contexts, 'config':Arjuna.get_config("data_env")}) # data_env conf is ref config with log settings. available in non-thred map.
     except AttributeError:
         # In case the logging is called before the logger is set.
         # In future versions, see if there can be a fallabck logger.

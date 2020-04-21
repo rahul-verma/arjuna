@@ -36,17 +36,8 @@ class ArjunaOption(Enum):
     RUN_ID = auto()
     '''An alnum string representing current test run. Default is `mrun`'''
 
-    RUN_SESSION_CONF_DIR = auto()
-    '''Directory that contains all session configuration .yaml files.'''
-
     RUN_SESSION_NAME = auto()
     '''Current session name.'''
-
-    RUN_ENV_CONF_DIR = auto()
-    '''Directory that contains all environment configuration .conf files.'''
-
-    RUN_CONF_DIR = auto()
-    '''Directory that contains all run configuration .conf files.'''
 
     RUN_HOST_OS = auto()
     '''Host Operating System type: Windows/Mac/Linux.'''
@@ -113,6 +104,15 @@ class ArjunaOption(Enum):
 
     CONF_DIR = auto()
     '''Test Project configuration directory'''
+
+    CONF_DATA_DIR = auto()
+    '''Directory that contains all data configuration .conf files.'''
+
+    CONF_ENV_DIR = auto()
+    '''Directory that contains all environment configuration .conf files.'''
+
+    CONF_SESSION_DIR = auto()
+    '''Directory that contains all session configuration .yaml files.'''
 
     DATA_DIR = auto()
     '''Directory containing data files in test project.'''

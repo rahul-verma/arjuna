@@ -90,7 +90,7 @@ class SessionParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument("-s", "--session-name", dest="run.session.name", type=partial(lname_check, "Run ID"), help = 'Name of session configuration file. Corresponding <sessionname>.yaml file must exist in <Project Root>/config/session directory')
+        self.parser.add_argument("-s", "--session-name", dest="run.session.name", metavar="session_def_name", type=partial(lname_check, "Run ID"), help = 'Name of session configuration file. Corresponding <sessionname>.yaml file must exist in <Project Root>/config/session directory')
 
     def process(self, arg_dict):
         if arg_dict['run.session.name'] is None:
