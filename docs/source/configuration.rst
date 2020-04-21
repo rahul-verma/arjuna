@@ -6,18 +6,42 @@ Test Configuration
 Understanding Configuration System of Arjuna
 --------------------------------------------
 
+Arjuna has possibly the most advanced configuration system amongst any test frameworks or tools that you will come across.
+
+You can start simple. Even without defining a single configuration file of your own. And as your needs unfold, you can benefit by the variety of options provided by Arjuna.
+
+`Configuration` object and Configuration Options
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+- Options in Arjuna can be defined with various configuration files, command line and/or programmatically.
 - Arjuna supports tweaking its built in options which are represented by `ArjunaOption` enum. 
-- Arjuna also supports user defined options.
+- Arjuna also supports user defined options. So, you can create your own project related options and use the same eco-system which Arjuna uses for its built-in options.
 - A `Configuration` object represents fixed values for configured settings (Arjuna options as well user defined options).
-- A `Configuration` is immutable which means that once created it can not be modified.
+- A `Configuration` is immutable which means that once created it can not be modified. This saves you from a lot of debugging overhead as configuration objects are large global objects. Arjuna makes them read-only.
+
+Reference Configuration (Non-session run)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 - As a part of initialation, Arjuna creates the reference `Configuration` object which combines the following to create the reference :
     - Default settings for Arjuna options
     - Project level settings included in `<Project root directory>/config/project.conf` file.
-    - Environment configuration represented by its name passed as `--run-env` switch.
-    - Run-time configuration file provided with `--run-conf` switch.
+    - Data Configuration options in `<Project root directory>/config/data/data.conf` file.
+    - Environment Configuration options in `<Project root directory>/config/env/env.conf` file.
     - CLI options represtedn by Arjuna's named CLI switches (e.g. for logging options)
-- You can get the reference configuration by calling `Arjuna.get_config()`.
-- Within test or test fixture code, we can also get the reference configuration object (if not re-assigned by test author to a non-reference configuration) using `request.config`.
+- You can get the reference configuration by calling `Arjuna.get_config()` and any other configuration with `Arjuna.get_config(<name>)` call.
+- Within test or test fixture code, you can also get the reference configuration object (if not re-assigned by test author to a non-reference configuration) using `request.config` or use `request.get_config` to retrieve any configuration.
+
+Each `Configuration` object ever created in a run in any manner takes reference configuration as its basis at its root. So, in case of you have a chain of configurations as C1 -> C2 -> C3 where C1 was used to create C2 which was then used to create C3, either C1 is the reference configuration itself or it has reference configuration used by its parent/grandparent.
+
+
+Reference Configuration (Session run)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+When you run tests using a session file, each group in each stage is run separately.
+
+You can attach a group definition with a configuration object of choice.
+
+Once you do this, when this group is executed, all calls to the reference configuration are replaced with the configuration object that you attached. This means that this configuration becomes the reference configuration.
+
+As discussed in above section, the core reference configuration is the basis of all Configuration obejcts. So, you have access to all options in their original form except the ones that were overriden in the Configuration object that you attached to the group.
+
 
 project.conf - Setting Project Level Configuration Options
 ----------------------------------------------------------

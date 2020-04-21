@@ -211,9 +211,6 @@ Arjuna Exceptions
         * :py:class:`GuiLabelNotPresentError <arjuna.tpi.exceptions.GuiLabelNotPresentError>`
 
 
-
-
-
 ******************
 Indices and tables
 ******************
