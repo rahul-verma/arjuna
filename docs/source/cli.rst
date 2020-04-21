@@ -20,8 +20,8 @@ Control Logging Level using -dl and -ll Options
 
 Each to Arjuna logger is associated with console as well as file logging. You can control what gets displayed on console as well as what gets logged in the log file independently of each other. This is done by specifying the minimum message level.
 
-- `-dl` or `--display-level` to control which log messages are displayed on console. Default is `INFO`.
-- `-ll` or `--log-level` to control which log messages are logged in log file. Default is `DEBUG`.
+- **-dl** or **--display-level** to control which log messages are displayed on console. Default is `INFO`.
+- **-ll** or **--log-level** to control which log messages are logged in log file. Default is `DEBUG`.
 
 Rest of the options are available in respective commands as discussed next.
 
@@ -64,17 +64,20 @@ This command is used to run all tests in the project. The tests are picked up fr
 
 Following run options can be provided in command line:
 
-- `-h` or `--help`: To check all the run options
-- `-r` or --run-id`: The id/name of this test run. It is `mrun` by default. Run ID is used to create the report directory name.
-- `-o` or `--output-formats`: Report formats for test report generation. Allowed values are `XML` and `HTML`.
-- `--update`: Instructs Arjuna to use the run id without appending timestap to it. It is very helpful to us this during script development as for every run a new report directory is not created.
-- `--dry-run`: Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. 
-        - **SHOW_TESTS** - enumerate tests. 
-        - **SHOW_PLAN** - enumerates tests fixtures. 
-        - **RUN_FIXTURES** - Executes setup/teardown fixtures and emuerates tests.
-- `-c` or `--conf`: Configuration object name for this run.
-- `-ao` or `--arjuna-option`: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates. You can provide any number of these switches.
-- `-uo` or `--user-option`: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.  You can provide any number of these switches.
+- **-p** or **--project-root-dir**: Valid absolute path of an existing Arjuna test project. 
+    * Needed with python -m arjuna call only. 
+    * (See last section on this page) With python arjuna_launcher.py you can skip this argument as the script determines its container Arjuna test project automatically.
+- **-h** or **--help**: To check all the run options
+- **-r** or **--run-id**: The id/name of this test run. It is `mrun` by default. Run ID is used to create the report directory name.
+- **-o** or **--output-formats**: Report formats for test report generation. Allowed values are `XML` and `HTML`.
+- **--update**: Instructs Arjuna to use the run id without appending timestap to it. It is very helpful to us this during script development as for every run a new report directory is not created.
+- **--dry-run**: Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. 
+        * **SHOW_TESTS** - enumerate tests. 
+        * **SHOW_PLAN** - enumerates tests fixtures. 
+        * **RUN_FIXTURES** - Executes setup/teardown fixtures and emuerates tests.
+- **-c** or **--conf**: Configuration object name for this run.
+- **-ao** or **--arjuna-option**: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates. You can provide any number of these switches.
+- **-uo** or **--user-option**: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.  You can provide any number of these switches.
 
 The run-selected command
 ------------------------
@@ -87,10 +90,10 @@ This command is used to run a sub-set of tests in the project. The tests are pic
 
 All the command line options specified for [the `run-project` command](#the-run-project-command) are supported. In addition, following selection related options are available:
 
-- `-im` or `--include-modules`: One or more names/patterns for including test modules.
-- `-em` or `--exclude-modules`: One or more names/patterns for excluding test modules.
-- `-it` or `--include-tests`: One or more names/patterns for including test functions.
-- `-et` or `--exclude-tests`: One or more names/patterns for excluding test functions.
+- **-im** or **--include-modules**: One or more names/patterns for including test modules.
+- **-em** or **--exclude-modules**: One or more names/patterns for excluding test modules.
+- **-it** or **--include-tests**: One or more names/patterns for including test functions.
+- **-et** or **--exclude-tests**: One or more names/patterns for excluding test functions.
 
 
 The run-session command
@@ -104,7 +107,7 @@ This command is used to run tests as per a session definition.yaml file.
 
 All the command line options specified for [the `run-project` command](#the-run-project-command) are supported. In addition, following selection related options are available:
 
-- `-s` or `--session-name`: Name of session definition file (without .yaml extension)
+- **-s** or **--session-name**: Name of session definition file (without .yaml extension)
 
 Using arjuna_launcher.py Script instead of python -m arjuna
 -----------------------------------------------------------
