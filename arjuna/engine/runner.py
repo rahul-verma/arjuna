@@ -73,8 +73,11 @@ class PyTestCommand:
         # import sys
         # sys.path.insert(0, self.__project_dir + "/..")
         self.__tests_dir = self.config.value(ArjunaOption.TESTS_DIR)
-        self.__xml_path = os.path.join(self.config.value(ArjunaOption.REPORT_XML_DIR), "report-{}-{}.xml".format(self.thread_name, self.__group))
-        self.__html_path = os.path.join(self.config.value(ArjunaOption.REPORT_HTML_DIR), "report-{}-{}.html".format(self.thread_name, self.__group))
+        suffix = ""
+        if self.__group != "mgroup":
+            suffix = "-" + self.thread_name + "-" + self.__group
+        self.__xml_path = os.path.join(self.config.value(ArjunaOption.REPORT_XML_DIR), "report{}.xml".format(suffix))
+        self.__html_path = os.path.join(self.config.value(ArjunaOption.REPORT_HTML_DIR), "report{}.html".format(suffix))
         self.__report_formats = self.config.value(ArjunaOption.REPORT_FORMATS)
         # self.__report_formats = Value.as_enum_list(rfmts, ReportFormat)
         res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
@@ -190,7 +193,7 @@ class PytestCommands:
 class TestGroupRunner(threading.Thread):
 
     def __init__(self, nprefix, wnum, commands):
-        super().__init__(name="{}-t{}".format(nprefix, wnum))
+        super().__init__(name="{}t{}".format(nprefix, wnum))
         #Arjuna.get_unitee_instance().state_mgr.register_thread(self.name)
         self.__commands =  commands
 
@@ -228,9 +231,12 @@ class RunnableStage:
     def __init__(self, name, commands, name_prefix, num_threads=1, dry_run=False):
         self.__name = name
         self.__workers = []
+        pref = ""
+        if name != "mstage":
+            pref = name + "-"
         for i in range(num_threads):
             self.__workers.append(TestGroupRunner(
-                name_prefix + "-" + name,
+                name_prefix + pref,
                 i + 1,
                 commands
             ))
@@ -296,7 +302,7 @@ class MSessionRunner(BaseTestRunner):
         command = PyTestCommand(config, group="mgroup", dry_run=dry_run, im=im, em=em, it=it, et=et)
         commands.add_command(command)
         commands.freeze()
-        stage = RunnableStage("mstage", commands, name_prefix="msession", num_threads=1, dry_run=dry_run)
+        stage = RunnableStage("mstage", commands, name_prefix="", num_threads=1, dry_run=dry_run)
         runnable_session = RunnableSession()
         runnable_session.add_stage(stage)
         super().__init__(config, config, runnable_session)
@@ -354,7 +360,7 @@ class SessionRunner(BaseTestRunner):
                         __add_group_command(commands, group)
 
             commands.freeze()
-            stage = RunnableStage(stage_yaml.name, commands, name_prefix=self.__yaml.name, num_threads=num_threads, dry_run=self.__dry_run)
+            stage = RunnableStage(stage_yaml.name, commands, name_prefix=self.__yaml.name + "-", num_threads=num_threads, dry_run=self.__dry_run)
             self.__runnable_session.add_stage(stage)
 
         if "stages" not in self.__yaml.section_names:

@@ -2,7 +2,7 @@
 stages:
 
   stage1:
-    threads: 1
+    threads: 2
 
     groups:
 
