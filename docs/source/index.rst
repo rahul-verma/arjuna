@@ -199,13 +199,16 @@ Arjuna Exceptions
 =================
 
 * :py:mod:`Exceptions <arjuna.tpi.exceptions>`
-    * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.exceptions.GuiWidgetForLabelPresentError>`
-    * :py:class:`GuiWidgetPresentError <arjuna.tpi.exceptions.GuiWidgetPresentError>`
-    * :py:class:`GuiWidgetForLabelNotPresentError <arjuna.tpi.exceptions.GuiWidgetForLabelNotPresentError>`
-    * :py:class:`GuiWidgetNotPresentError <arjuna.tpi.exceptions.GuiWidgetNotPresentError>`
-    * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.exceptions.GuiNamespaceLoadingError>`
-    * :py:class:`GuiNotLoadedError <arjuna.tpi.exceptions.GuiNotLoadedError>`
-    * :py:class:`GuiLabelNotPresentError <arjuna.tpi.exceptions.GuiLabelNotPresentError>`
+    * Configuration
+        * :py:class:`UndefinedConfigError <arjuna.tpi.exceptions.UndefinedConfigError>`
+    * Gui Automation
+        * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.exceptions.GuiWidgetForLabelPresentError>`
+        * :py:class:`GuiWidgetPresentError <arjuna.tpi.exceptions.GuiWidgetPresentError>`
+        * :py:class:`GuiWidgetForLabelNotPresentError <arjuna.tpi.exceptions.GuiWidgetForLabelNotPresentError>`
+        * :py:class:`GuiWidgetNotPresentError <arjuna.tpi.exceptions.GuiWidgetNotPresentError>`
+        * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.exceptions.GuiNamespaceLoadingError>`
+        * :py:class:`GuiNotLoadedError <arjuna.tpi.exceptions.GuiNotLoadedError>`
+        * :py:class:`GuiLabelNotPresentError <arjuna.tpi.exceptions.GuiLabelNotPresentError>`
 
 
 

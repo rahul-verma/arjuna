@@ -27,6 +27,15 @@ This module defines Exception classes that represent different types of run-time
 
 from arjuna.core.exceptions import *
 
+class UndefinedConfigError(Exception):
+    '''
+        Raised when a configurtion is a referenced by its name in code, externalized files or configuration query.
+    '''
+
+    def __init__(self, referred_conf_name, defined_conf_names):
+        super().__init__("There is no registered configuration for name: {}. Registered: {}".format(referred_conf_name, tuple(defined_conf_names)))
+
+
 class GuiWidgetForLabelPresentError(Exception):
     '''
         Raised when a GuiWidget corresponding to a GNS label is unexpectedly found. Involves Dynamic Waiting for absence.

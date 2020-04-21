@@ -32,6 +32,7 @@ from arjuna.core.thread.decorators import *
 from arjuna.core.utils import sys_utils
 from arjuna.core.adv.proxy import ROProxy
 from arjuna.tpi.helper.arjtype import CIStringDict
+from arjuna.tpi.exceptions import UndefinedConfigError
 from arjuna.core.adv.decorators import singleton
 import codecs
 import sys
@@ -172,7 +173,7 @@ class ArjunaSingleton:
             return self.ref_config
         else:
             if not self.has_config(name):
-                raise Exception("There is no registered configuration for name: {}. Registered: {}".format(name, tuple(self.__config_map.keys())))
+                raise UndefinedConfigError(name, tuple(self.__config_map.keys()))
             return self.__config_map[name.lower()]
 
     def register_config(self, config):

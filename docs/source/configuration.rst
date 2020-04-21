@@ -108,32 +108,61 @@ These configurations could have their own respective properties (e.g. Applicatio
 
 In Arjuna, you can define run configurations and environment configurations very easily in your test automation framework.
 
-Defining and Using Run and Environment Configurations
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Defining Data Configurations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can define any number of run configuration .conf files in `<Project Root Dir>/config/run>` directory.
+Many a times, you end up using Data Driven testing when what you need is a simple data separation. 
+
+Added to this, you might have different sets of data for different runs. 
+
+One simple option in Arjuna is to define such data as user defined options in data configuration files. 
+
+You can define any number of data configuration .conf files in `<Project Root Dir>/config/data>` directory.
+
+Name of the configuration is same as the name of the file minus the extension. For example, **data1** is configuration name corresponding to **data1.conf**
+
+Defining Environment Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You might have multiple test environments or deployments against which you run the tests. 
+
+For example, your web application could have a dev, staging, system and production deployment with respective URLs and other associated options. 
 
 You can define any number of environment configuration .conf files in `<Project Root Dir>/config/env>` directory.
 
-Arjuna automatically loads these files as combinations of run confs and env confs when it loads. For each combination:
-    - Reference config is taken as base
-    - run conf is superimposed
-    - env conf is superimposed
+Name of the configuration is same as the name of the file minus the extension. For example, **tenv1** is configuration name corresponding to **tenv1.conf**
+
+
+Combining Data and Environment Configurations
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Another need is that you might want to use data and environment information in combination.
+
+Arjuna has built-in support for this and does it by default for you.
+
+Arjuna automatically loads these files as combinations of data confs and env confs when it loads. For each combination:
+    - Reference config is taken as base (which means Arjuna's internal defaults + Options that you have passed in project.conf + Default data conf (if defined) + Default env conf (if defined))
+        * For default data and env conf, see the next section.
+    - A given data conf is superimposed
+    - A given env conf is superimposed
     - CLI options are superimposed
 
-The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
+The config name is set to `dataconfname_envconfname` e.g. `data1_tenv1`.
 
-You can retrieve an environment config by its name using `Arjuna.get_config` or `request.get_config` call. Now you can inquire the values just like you deal with any configuration in Arjuna. 
+You can retrieve an environment config by its name using `Arjuna.get_config` (anywhere in your project) or `request.get_config` call (in a test fixture or test function). Now you can inquire the values just like you deal with any configuration in Arjuna. 
 
-You can also retrieve their options using the magic `C` function, for example `C("run1_env1.browser.name")`
+You can also retrieve their options using the magic `C` function, for example `C("data1_tenv1.browser.name")`
 
-Default Run Configuration and Environment Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Default Data Configuration and Environment Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A run configuration with name `run.conf` is considered a default.
+A data configuration with name `data.conf` is considered a default.
 
 An environment configuration with name `env.conf` is considered a default.
 
 What it means is that if these files are defined, then Arjuna uses options contained in them to update the reference configuration.
 
-So, technically, a configuration with name `run_env` is same as the reference configuration.
+This feature has the following side-effects:
+    * A configuration with name `data_env` is same as the reference configuration.
+    * A configuration with name `data1_env` is same as `data1`
+    * A configuration with name `data_tenv1` is same as `tenv1`

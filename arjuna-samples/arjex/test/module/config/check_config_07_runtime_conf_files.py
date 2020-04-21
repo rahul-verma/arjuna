@@ -18,52 +18,69 @@
 from arjuna import *
 
 @test
-def check_default_run_env_update(request):
+def check_data_conf(request):
+
+    assert Arjuna.get_config("data1").check == "run1"
+    assert Arjuna.get_config("data2").check == "run2"
+
+    assert C("data1.check") == "run1"
+    assert C("data2.check") == "run2"
+
+@test
+def check_env_conf(request):
+
+    assert Arjuna.get_config("tenv1").app_url == "https://tenv1"
+    assert Arjuna.get_config("tenv2").app_url == "https://tenv2"
+
+    assert C("tenv1.app.url") == "https://tenv1"
+    assert C("tenv2.app.url") == "https://tenv2"
+
+@test
+def check_default_data_env_update(request):
 
     conf = Arjuna.get_config()
-    assert conf.roption is 1
-    assert conf.eoption is 1
+    assert conf.roption == 1
+    assert conf.eoption == 1
 
-    assert C("roption") is 1
-    assert C("eoption") is 1
+    assert C("roption") == 1
+    assert C("eoption") == 1
 
 @test
-def check_run_env_confs_with_getconf(request):
+def check_data_env_confs_with_getconf(request):
 
-    r1e1 = Arjuna.get_config("run1_tenv1")
-    r1e2 = Arjuna.get_config("run1_tenv2")
-    r2e1 = Arjuna.get_config("run2_tenv1")
-    r2e2 = Arjuna.get_config("run2_tenv2")
+    d1e1 = Arjuna.get_config("data1_tenv1")
+    d1e2 = Arjuna.get_config("data1_tenv2")
+    d2e1 = Arjuna.get_config("data2_tenv1")
+    d2e2 = Arjuna.get_config("data2_tenv2")
 
-    print(r1e1.check)
-    print(r1e2.check)
-    print(r2e1.check)
-    print(r2e2.check)    
+    print(d1e1.check)
+    print(d1e2.check)
+    print(d2e1.check)
+    print(d2e2.check)    
 
-    print(r1e1.app_url)
-    print(r1e2.app_url)
-    print(r2e1.app_url)
-    print(r2e2.app_url)
+    print(d1e1.app_url)
+    print(d1e2.app_url)
+    print(d2e1.app_url)
+    print(d2e2.app_url)
 
     # print(re.user) -> Not present
-    print(r1e1.user)
-    print(r1e2.user)
-    print(r2e1.user)
-    print(r2e2.user)
+    print(d1e1.user)
+    print(d1e2.user)
+    print(d2e1.user)
+    print(d2e2.user)
 
-    assert  r1e1 is request.get_config("run1_tenv1")
+    assert  d1e1 is request.get_config("data1_tenv1")
 
 @test
-def check_run_env_confs_with_CFunc(request):
-    print(C("run_env.browser_name"))
-    print(C("run1_env.browser_name"))
-    print(C("run1_tenv1.browser_name"))
-    print(C("run_tenv1.browser_name"))
+def check_data_env_confs_with_CFunc(request):
+    print(C("data_env.browser_name"))
+    print(C("data.browser_name"))
+    print(C("env.browser_name"))
 
-    print(C("run_env.browser.name"))
-    print(C("run1_env.browser.name"))
-    print(C("run1_tenv1.browser.name"))
-    print(C("run_tenv1.browser.name"))
+    print(C("data1.browser_name"))
+    print(C("tenv1.browser_name"))
+
+    print(C("data1_tenv1.browser_name"))
 
 
 @test

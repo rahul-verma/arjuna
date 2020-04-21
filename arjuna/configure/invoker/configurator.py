@@ -25,15 +25,16 @@ from arjuna.core.value import Value
 from arjuna.core.utils import file_utils
 
 class TestConfigurator:
+    _EMPTY_CONF = EmptyConfCreator().config
 
     def __init__(self, root_dir, cli_config, run_id):
         self.__root_dir = root_dir
         self.__cli_config = cli_config
         self.__run_id = run_id
         self.__default_ref_config = None
-        self.__data_confs = {"data" : EmptyConfCreator().config}
-        self.__env_confs = {"env" : EmptyConfCreator().config}
-        self.__runconf_enconf_confs = dict()
+        self.__data_confs = {"data" : self._EMPTY_CONF}
+        self.__env_confs = {"env" : self._EMPTY_CONF}
+        self.__dataconf_enconf_confs = dict()
         self.__project_config_loaded = False
 
         self.__load()
@@ -143,20 +144,28 @@ class TestConfigurator:
     def __update_ref_config(self):
         self.__update_config(self.__default_ref_config, update_from_chosen_env=True)
 
-    def __load_one_combo(self, rconf, econf):
+    def __load_one_combo(self, dconf, econf):
         conf = EmptyConfCreator().config
         conf.update(self.__default_ref_config)
-        conf.update(rconf)
+        conf.update(dconf)
         conf.update(econf)
         self.__update_config(conf)
         return conf
 
     def __load_combinations(self):
-        for rname, rconf in self.__data_confs.items():
+        for dname, dconf in self.__data_confs.items():
+            conf = self.__load_one_combo(dconf, self._EMPTY_CONF)
+            self.__dataconf_enconf_confs[dname] = conf
+            
+        for ename, econf in self.__env_confs.items():
+            conf = self.__load_one_combo(self._EMPTY_CONF, econf)
+            self.__dataconf_enconf_confs[ename] = conf
+
+        for dname, dconf in self.__data_confs.items():
             for ename, econf in self.__env_confs.items():
-                cname = "{}_{}".format(rname, ename)
-                conf = self.__load_one_combo(rconf, econf)
-                self.__runconf_enconf_confs[cname] = conf
+                cname = "{}_{}".format(dname, ename)
+                conf = self.__load_one_combo(dconf, econf)
+                self.__dataconf_enconf_confs[cname] = conf
 
     @property
     def ref_config(self):
@@ -164,7 +173,7 @@ class TestConfigurator:
 
     @property
     def file_confs(self):
-        return self.__runconf_enconf_confs
+        return self.__dataconf_enconf_confs
 
     def register_new_config(self, arjuna_options, user_options, parent_config=None):
         # Registering a config is post project conf registration. If no project conf, set it to true.
