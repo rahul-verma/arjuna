@@ -14,7 +14,6 @@ Following is the list of critical additions and updates for a given released ver
     - The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
     - The name can be used in the `magic C function` query or as the cname argument.
 - Fixtures now allow drive_with argument.
-- Experimental code for writing arjuna hooks works. Tried with `arjuna_config.py`'s register_configs() hook.
 - `-c` / `--conf` switch added. It becomes the conf object mapped to conf.
 - Arjuna Session, Stage and Test Grouping concept added:
     - run-project and run-selected represent a default session, stage and group as per the CLI switches. It always executes in a single thread.
@@ -35,6 +34,13 @@ Following is the list of critical additions and updates for a given released ver
 - Dry Run Major enhancement
     - Not a boolen switch any more
     - Takes SHOW_TESTS/SHOW_PLAN/RUN_FIXTURES arguments.
+- Arjuna Hooks concept added
+    - `hook` directory in project root directory will contain various Arjuna hook modules and corresponding hook calls.
+    - `arjuna_config.py` is the name for configuration hooks.
+        - `register_configs(configurator)` is the first Arjuna hook created
+        - One can programmatically register any number of configurations by taking existing or these newly created configuration objects as basis.
+        - The hook is executed before sessions file is processed or test execution starts for a non-session run.
+        - The configurations created here can be used with -c / --conf command line switch. They can also be used as group config in session files. 
 - CLI Changes: CLI interface heavily updated for simpler names of switches along with more information in help.
 
 0.9.20

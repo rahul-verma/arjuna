@@ -205,7 +205,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         common_withx = Arjuna.get_withx_ref()
 
         for label, label_map in yaml.get_section("labels").as_map().items():
-            Validator.arjuna_name(label)
+            Validator.name(label)
             self.__ns[label.lower()] = {"locators" : {self.__context: []}, "meta": dict()}
             for loc, loc_obj in label_map.items():
                 loc = loc.lower()

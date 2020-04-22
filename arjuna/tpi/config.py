@@ -182,8 +182,9 @@ class ConfigBuilder:
     '''
         Helps in constructing a new `Configuration` object from an existing one.
 
-        Args:
-            parent_config: Parent configuration to be used be used as reference for creation of the new Configuration object.
+        Keyword Arguments:
+            base_config: Parent configuration to be used be used as reference for creation of the new Configuration object.
+            auto_gen_name: Generate a unique configuration name in `build` call if name is not provided. Default is True.
 
         Note:
             It is not meant to be directly constructed. Use `builder` method of a Configuration object to create the associated ConfigBuilder object.
@@ -197,10 +198,11 @@ class ConfigBuilder:
                 builder[option] = value
     '''
 
-    def __init__(self, parent_config: Configuration):
-        vars(self)['_test_session'] = parent_config.test_session
+    def __init__(self, *, base_config: Configuration, auto_name_gen=True):
+        vars(self)['_test_session'] = base_config.test_session
         vars(self)['_config_container'] = ConfigContainer()
-        vars(self)['_parent_config'] = parent_config
+        vars(self)['_base_config'] = base_config
+        vars(self)['_auto_gen_name'] = auto_name_gen
 
     def option(self, option: ArjunaOptionOrStr, obj: Any) -> 'self':
         '''
@@ -316,11 +318,11 @@ class ConfigBuilder:
         for k,v in conf.user_config._config_dict.items():
             self._config_container.set_user_option(k,v)
 
-    def register(self, config_name=None):
+    def register(self, *, config_name=None):
         '''
             Register the new configuration.
 
-            Args:
+            Keyword Arguments:
                 config_name: (Optional) Name that you want to assign to the configuration.
 
             Note:
@@ -328,15 +330,24 @@ class ConfigBuilder:
                 - A dynamic, unique name is generated if name is not provided.
 
         '''
-        from arjuna import Arjuna
+        from arjuna import Arjuna, ConfigCreationError
+        if config_name is None and not self._auto_gen_name:
+            raise ConfigCreationError("This ConfigBuilder has been created with auto_gen_name setting as False. You must provide a config_name to the build call.")
         config_name = config_name and config_name or 'c{}'.format(str(uuid.uuid4()).replace("-","_"))
+
+        try:
+            from arjuna.configure.impl.validator import Validator
+            Validator.name(config_name)
+        except:
+            raise ConfigCreationError("Unsupported name >>{}<< provided for a Configuration object. {}".format(config_name, Validator.VNREGEX_TEXT))
+
         if Arjuna.has_config(config_name):
-            raise Exception("You can not re-register a configuration for a name. Config with name {} already exists.".format(config_name))
+            raise ConfigCreationError("You can not re-register a configuration for a name. Config with name {} already exists.".format(config_name))
 
         config = self._test_session.register_config(config_name.lower(), 
                                         self._config_container.arjuna_options, #.items(),
                                         self._config_container.user_options, #.items(),
-                                        self._parent_config
+                                        self._base_config
                                     )
 
         return config

@@ -27,7 +27,7 @@ from arjuna.core.types.constants import *
 class Validator:
     VNREGEX = r'^([a-zA-Z][a-zA-Z_0-9]{2,50})$'
     VNREGEX_TEXT = '''
-    An Arjuna name must be a string of length 3-50 starting with a letter, followed by letters, digits or _ (underscore).
+    Name must be a string of length 3-50 starting with a letter, followed by letters, digits or _ (underscore).
     '''
 
     @classmethod
@@ -252,9 +252,9 @@ class Validator:
         return input
 
     @classmethod
-    def arjuna_name(cls, input):
+    def name(cls, input):
         if not re.match(cls.VNREGEX, input):
-            print('Invalid Arjuna name provided.', file=sys.stderr)
+            print('Invalid name provided.', file=sys.stderr)
             print(cls.VNREGEX_TEXT, file=sys.stderr)
             cls.raise_exc(input, msg=cls.VNREGEX_TEXT)
         return input

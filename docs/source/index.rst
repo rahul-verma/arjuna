@@ -204,6 +204,7 @@ Arjuna Exceptions
 * :py:mod:`Exceptions <arjuna.tpi.exceptions>`
     * Configuration
         * :py:class:`UndefinedConfigError <arjuna.tpi.exceptions.UndefinedConfigError>`
+        * :py:class:`ConfigCreationError <arjuna.tpi.exceptions.ConfigCreationError>`
     * Gui Automation
         * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.exceptions.GuiWidgetForLabelPresentError>`
         * :py:class:`GuiWidgetPresentError <arjuna.tpi.exceptions.GuiWidgetPresentError>`

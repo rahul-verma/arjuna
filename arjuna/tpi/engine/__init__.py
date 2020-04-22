@@ -97,6 +97,8 @@ class ArjunaSingleton:
         from arjuna.engine.logger import Logger
         self.__logger = Logger(self.ref_config)
 
+        from arjuna.tpi.hook.config import Configurator
+        configurator = Configurator()
         # Load configs from config hooks
         sys.path.append(self.ref_config.value(ArjunaOption.HOOKS_DIR))
         try:
@@ -106,7 +108,7 @@ class ArjunaSingleton:
         except ImportError as f: # Hook not defined
             pass
         else:
-            register_configs()
+            register_configs(configurator)
 
         # Load data references
         from arjuna.engine.data.factory import DataReference

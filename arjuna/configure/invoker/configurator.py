@@ -81,7 +81,7 @@ class TestConfigurator:
             if isinstance(val, Enum):
                 return val.name
             else:
-                return str(val)
+                return val
 
         if user_options is None:
             user_options = dict()

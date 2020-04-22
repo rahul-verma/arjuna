@@ -35,6 +35,14 @@ class UndefinedConfigError(Exception):
     def __init__(self, referred_conf_name, defined_conf_names):
         super().__init__("There is no registered configuration for name: {}. Registered: {}".format(referred_conf_name, tuple(defined_conf_names)))
 
+class ConfigCreationError(Exception):
+    '''
+        Raised when there is an error in the creation of a configuration object.
+    '''
+
+    def __init__(self, msg):
+        super().__init__(msg)
+
 
 class GuiWidgetForLabelPresentError(Exception):
     '''

@@ -96,5 +96,7 @@ from arjuna.tpi.helper.xml import NodeLocator
 from arjuna.tpi.helper.arjtype import ProcessedKeyDict
 from arjuna.tpi.helper.json import Json
 
+from arjuna.tpi.hook.config import Configurator
+
 from arjuna.tpi.log import *
 from arjuna.tpi.magic import C, L, R

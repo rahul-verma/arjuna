@@ -14,3 +14,30 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+class Configurator:
+
+    def __init__(self):
+        self.__arjuna = None
+
+    @property
+    def _arjuna(self):
+        return self.__arjuna
+
+    @_arjuna.setter
+    def _arjuna(self, singleton):
+        self.__arjuna = singleton
+
+    def builder(self, *, base_config: str) -> 'ConfigBuilder':
+        '''
+            Creates a configuration builder object which takes the provided configuration as its basis.
+
+            Keyword Arguments:
+                base_config: The base `Configuration` object. All its options become a part of the new configuration. Its options can be overriden and new options can be added using the builder to create a new `Configuration` object.
+
+            Returns:
+                **new** `ConfigBuilder` object
+        '''
+        from arjuna import Arjuna
+        from arjuna.tpi.config import ConfigBuilder
+        return ConfigBuilder(base_config=Arjuna.get_config(name=base_config), auto_name_gen=False)

@@ -8,7 +8,7 @@ class WithX:
         self.__xdict = CIStringDict()
         for k,v in xdict.items():
             try:
-                self.__xdict[Validator.arjuna_name(k)] = {"wtype" : xdict[k]["wtype"].strip().upper(), "wvalue" : xdict[k]["wvalue"]}
+                self.__xdict[Validator.name(k)] = {"wtype" : xdict[k]["wtype"].strip().upper(), "wvalue" : xdict[k]["wvalue"]}
             except Exception as e:
                 raise Exception(f"Invalid WithX entry for name >>{k}<<.")
 
