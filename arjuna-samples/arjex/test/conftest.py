@@ -14,4 +14,4 @@ def pytest_runtest_makereport(item, call):
     PytestHooks.add_screenshot_for_result(item, result)
 
 def pytest_generate_tests(metafunc):
-    PytestHooks.add_test_to_group(metafunc)
+    PytestHooks.configure_group_for_test(metafunc)

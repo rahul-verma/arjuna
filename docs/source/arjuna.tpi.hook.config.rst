@@ -1,7 +1,7 @@
-arjuna.tpi.engine.hook module
+arjuna.tpi.hook.config module
 =============================
 
-.. automodule:: arjuna.tpi.engine.hook
+.. automodule:: arjuna.tpi.hook.config
    :members:
    :undoc-members:
    :show-inheritance:

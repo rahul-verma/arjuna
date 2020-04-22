@@ -77,7 +77,7 @@ class ArjunaSingleton:
         ConfigCreator.init()
         self.__project_root_dir = project_root_dir
 
-        from arjuna.session.invoker.test_session import DefaultTestSession
+        from arjuna.engine.session import DefaultTestSession
         self.__test_session = DefaultTestSession()
         run_id = run_id and run_id or "mrun"
         prefix = ""

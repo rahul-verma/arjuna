@@ -116,7 +116,24 @@ class PytestHooks:
 
 
     @classmethod
-    def add_test_to_group(cls, metafunc):
+    def configure_group_for_test(cls, metafunc):
+        '''
+            Configures `group` fixture for a test.
+
+            Acts only if `group` fixture is present in the signature of a test function or signature(s) of any of its fixture(s) in its fixture hierarchy. 
+
+            To be used in `pytest_generate_tests` hook in `conftest.py`.
+
+            Args:
+                metafunc: `pytest`'s MetaFunc object
+
+            Note:
+                The `group` fixture yields a `DataRecord` object containing the following keys:
+                    - **name**: Group name
+                    - **config**: `Configuration` object assigned to the group.
+                    - **thread_name**: Thread name for the thread in which the Test Group is running.
+        '''
+
         from arjuna import Arjuna, ArjunaOption, log_debug, C
         from arjuna.tpi.engine.data.markup import record
         log_debug("{} {}".format(metafunc.function, metafunc.fixturenames))

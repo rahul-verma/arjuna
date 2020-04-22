@@ -15,7 +15,6 @@ Submodules
 
    arjuna.tpi.engine.asserter
    arjuna.tpi.engine.fixture
-   arjuna.tpi.engine.hook
    arjuna.tpi.engine.relation
    arjuna.tpi.engine.test
 

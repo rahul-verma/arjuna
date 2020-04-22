@@ -12,7 +12,6 @@ Subpackages
    arjuna.engine
    arjuna.interact
    arjuna.interface
-   arjuna.session
    arjuna.third_party
    arjuna.tpi
    arjuna.validate

@@ -19,7 +19,7 @@ Following is the list of critical additions and updates for a given released ver
 - Arjuna Session, Stage and Test Grouping concept added:
     - run-project and run-selected represent a default session, stage and group as per the CLI switches. It always executes in a single thread.
     - Built-in fixture `group` can be included in a test signature or fixture signature. It yields group parameters including name of group, thread name and configuration.
-    - pytest_generate_tests hook added to test project conftest.py, its Arjuna template and added PytestHooks.add_test_to_group
+    - pytest_generate_tests hook added to test project conftest.py, its Arjuna template and added PytestHooks.configure_group_for_test
         - Auto-parameteries "group" built-in Arjuna fixture. The fixture can be added to a test function signature or any of its fixtures. Configuration passed with -c switch is used to parameterize the `group` fixture mentioned above.
         - It is optional to use this fixture. However, if group related information (e.g. thread name, group name) is needed run time in fixture functions and test functions, then it can be used.
     - run-session switch added to run a named session.

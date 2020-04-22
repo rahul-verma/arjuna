@@ -9,6 +9,7 @@ Subpackages
    arjuna.tpi.engine
    arjuna.tpi.guiauto
    arjuna.tpi.helper
+   arjuna.tpi.hook
    arjuna.tpi.protocol
 
 Submodules

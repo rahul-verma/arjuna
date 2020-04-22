@@ -161,7 +161,10 @@ Web GUI Automation
 
 Hooks
 =====
-* :py:meth:`PytestHooks.add_screenshot_for_result <arjuna.tpi.engine.hook.PytestHooks.add_screenshot_for_result>`
+
+* :py:class:`PytestHooks <arjuna.tpi.hook.pytest.PytestHooks>`
+    * :py:meth:`PytestHooks.add_screenshot_for_result <arjuna.tpi.hook.pytest.PytestHooks.add_screenshot_for_result>`
+    * :py:meth:`PytestHooks.configure_group_for_test <arjuna.tpi.hook.pytest.PytestHooks.configure_group_for_test>`
 
 Helpers
 =======

@@ -16,6 +16,7 @@ Submodules
    arjuna.engine.logger
    arjuna.engine.meta
    arjuna.engine.runner
+   arjuna.engine.session
    arjuna.engine.track
 
 Module contents
