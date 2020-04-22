@@ -103,7 +103,7 @@ Test, Fixtures and Assertions
 * :py:mod:`Test Fixtures <arjuna.tpi.engine.fixture>`
     * :py:func:`@for_test <arjuna.tpi.engine.fixture.for_test>`
     * :py:func:`@for_module <arjuna.tpi.engine.fixture.for_module>`
-    * :py:func:`@for_session <arjuna.tpi.engine.fixture.for_session>`
+    * :py:func:`@for_group <arjuna.tpi.engine.fixture.for_group>`
 
 Test-to-Test Dependency
 =======================

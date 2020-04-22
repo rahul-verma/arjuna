@@ -112,7 +112,7 @@ Following is the list of critical additions and updates for a given released ver
 0.9.16
 ------
 - Added doc for CLI.
-- @for_session fixture support added.
+- @for_group fixture support added.
 
 0.9.15
 ------

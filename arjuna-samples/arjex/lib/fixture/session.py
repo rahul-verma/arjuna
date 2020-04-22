@@ -1,6 +1,6 @@
 from arjuna import *
 
-@for_session
+@for_group
 def session_resource(request):
     d = {'a' : 1}
 

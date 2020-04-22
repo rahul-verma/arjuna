@@ -80,11 +80,11 @@ def __pytestfix(scope, drive_with=None):
             return pytest.fixture(scope=scope)(_simple_dec(func))
     return wrapper
 
-def for_session(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
+def for_group(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
     '''
         Decorator for session level test fixture/resource.
 
-        Wraps `pytest.fixture` to create a fixture with scope=session and provides an Arjuna's decorated version of the function that is marked with `for_session` decorator.
+        Wraps `pytest.fixture` to create a fixture with scope=session and provides an Arjuna's decorated version of the function that is marked with `for_group` decorator.
 
         Args:
             func: A Function with signature `f(request)`. The name request is mandatory and enforced.
@@ -157,6 +157,6 @@ def for_test(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
     else:
         return __pytestfix("function", drive_with=drive_with)
 
-@for_module
+@for_group
 def group(request):
     yield request.data
