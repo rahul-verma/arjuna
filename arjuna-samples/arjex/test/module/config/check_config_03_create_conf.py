@@ -38,7 +38,7 @@ def check_create_config(request):
 def check_named_config(request):
     cb = request.config.builder
     cb.browser_name = BrowserName.FIREFOX
-    cb.register("my_config")
+    cb.register(config_name="my_config")
 
     config = Arjuna.get_config("my_config")
     print(config.name)

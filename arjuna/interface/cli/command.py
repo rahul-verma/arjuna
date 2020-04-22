@@ -258,8 +258,9 @@ class RunProject(__RunCommand):
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
+        from arjuna import Arjuna
         session = Arjuna.get_test_session()
-        session.load_tests(dry_run=self.dry_run, group_conf_name=self.self.group_conf_name)
+        session.load_tests(dry_run=self.dry_run, group_conf_name=self.group_conf_name)
         session.run()
 
 class RunSession(__RunCommand):

@@ -27,7 +27,7 @@ def check_config_retrieval_C(request):
 def check_conf_name_wise_query(request):
     cb = request.config.builder
     cb.browser_name = BrowserName.FIREFOX
-    mconf = cb.register("nconf")
+    mconf = cb.register(config_name="nconf")
 
     print(C("browser.name"))
     print(C("ref.browser.name"))

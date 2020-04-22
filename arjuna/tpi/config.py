@@ -94,7 +94,7 @@ class Configuration:
             Returns:
                 **new** `ConfigBuilder` object
         '''
-        return ConfigBuilder(self)
+        return ConfigBuilder(base_config=self)
 
     def value(self, option: ArjunaOptionOrStr) -> Any:
         '''
