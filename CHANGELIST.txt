@@ -1,5 +1,8 @@
 Following is the list of critical additions and updates for a given released version:
 
+0.9.22
+------
+
 0.9.21
 ------
 - Data Conf and  Env conf concepts updated
