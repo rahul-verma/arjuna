@@ -27,7 +27,7 @@ ConfigBuilder can be used to create new configuration from an existing one.
 
 from enum import Enum
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 import uuid
 from arjuna.tpi.arjuna_types import *
 from typing import *

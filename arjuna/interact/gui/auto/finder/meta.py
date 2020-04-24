@@ -18,7 +18,7 @@
 from arjuna.tpi.helper.arjtype import CIStringDict
 
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 from arjuna.core.utils.repr_utils import repr_dict
 
 class InteractionConfig:
@@ -64,7 +64,7 @@ class Meta:
 
     def __init__(self, mdict=None):
         self.__mdict = not mdict and CIStringDict() or CIStringDict(mdict)
-        from arjuna.core.enums import GuiWidgetType
+        from arjuna.core.constant import GuiWidgetType
         if "type" in self.__mdict:
             try:
                 widget_type = self.__mdict["type"]

@@ -18,7 +18,7 @@
 import abc
 from arjuna.interact.gui.auto.base.dispatchable import _Dispatchable
 from arjuna.tpi.guiauto.source.element import GuiElementSource
-from arjuna.core.exceptions import GuiWidgetTextNotSetError
+from arjuna.core.error import GuiWidgetTextNotSetError
 from arjuna.tpi.tracker import track
 
 @track("debug")

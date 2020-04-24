@@ -23,7 +23,7 @@ import time
 
 from arjuna.core.utils import sys_utils
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 from arjuna.core.reader.textfile import TextResourceReader
 from arjuna.core.types import constants
 from arjuna.core.adv.py import *

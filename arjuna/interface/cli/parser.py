@@ -21,7 +21,7 @@ import argparse
 from functools import partial
 
 from .validation import *
-from arjuna.core.enums import ReportFormat
+from arjuna.core.constant import ReportFormat
 
 
 class Parser:

@@ -24,7 +24,7 @@ from arjuna.core.reader.ini import *
 from arjuna.core.reader.textfile import *
 from arjuna.core.thread import decorators
 from arjuna.tpi.error import *
-from arjuna.core.exceptions import *
+from arjuna.core.error import *
 from arjuna.core.types import constants
 from arjuna.tpi.engine.data.record import *
 from arjuna.engine.data.record import *

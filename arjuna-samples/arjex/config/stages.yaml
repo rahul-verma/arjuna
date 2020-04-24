@@ -1,0 +1,37 @@
+simple1:
+  threads: 2
+  groups:
+    gp1:
+      conf: data1_env1
+      im:
+        - check_delegate_1
+    gp2:
+      conf: data2_env2
+      im:
+        - check_delegate_2
+
+simple2:
+  threads: 2
+  groups:
+    gp1:
+      conf: data1_env1
+      it:
+        - check_drive_with
+    gp2:
+      conf: data2_env2
+      im:
+        - check_l10n
+
+stage_gp1_gp2:
+  threads: 2
+  groups:
+    include:
+      - gp1
+      - gp2
+
+stage_gp3_gp4:
+  threads: 2
+  groups:
+    include:
+      - gp3
+      - gp4

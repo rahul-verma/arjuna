@@ -2,16 +2,15 @@ import os
 import yaml
 
 from arjuna.tpi.helper.arjtype import CIStringDict
-from arjuna.tpi.error import YamlError
+from arjuna.core.error import YamlError, YamlUndefinedSectionError
 
 class Yaml:
 
-    def __init__(self, *, name, pydict, creation_context=""):
+    def __init__(self, *, name, pydict):
         self.__name = name
         self.__ydict = pydict is not None and pydict or dict()
         self.__sections = tuple(self.__ydict.keys())
         self.__ydict = CIStringDict(self.__ydict)
-        self.__creation_context = creation_context
 
     @property
     def name(self):
@@ -23,15 +22,15 @@ class Yaml:
     def get_section(self, name, *, strict=True):
         val = self.get_value(name, strict=strict)
         if val is not None and type(val) is not dict:
-            raise YamlError(f"Section content must be a dictionary. Found content >>{val}<< in {name} section.", creation_context=self.__creation_context)
-        return Yaml(name=name, pydict=val, creation_context=self.__creation_context)
+            raise YamlError(f"Section content must be a dictionary. Found content >>{val}<< in {name} section.")
+        return Yaml(name=name, pydict=val)
 
     def get_value(self, name, *, strict=True):
         if self.has_section(name):
             return self.__ydict[name]
         else:
             if strict:
-                raise YamlError(f"Yaml object does not have a section with the name: {name}", creation_context=self.__creation_context)
+                raise YamlUndefinedSectionError(f"Yaml object does not have a section with the name: {name}")
             else:
                 return None
 
@@ -53,10 +52,10 @@ class Yaml:
                 absent_sections.append(section_name)
 
         if len(absent_sections) == section_names or (len(absent_sections) < len(section_names) and not atleast_one):
-            raise YamlError(f"Yaml object does not contains mandatory sections: {absent_sections}", creation_context=self.__creation_context) 
+            raise YamlUndefinedSectionError(f"Yaml object does not contains mandatory sections: {absent_sections}") 
 
     @classmethod
-    def from_file(cls, *, file_path, creation_context=""):
+    def from_file(cls, *, file_path):
         yaml_name = os.path.basename(file_path).split(".yaml")[0]
         f = open(file_path, "r")
         ydict = yaml.load(f, Loader=yaml.SafeLoader)
@@ -64,7 +63,7 @@ class Yaml:
         return Yaml(name=yaml_name, pydict=ydict)
 
     @classmethod
-    def from_str(cls, *, name, contents, creation_context=""):
+    def from_str(cls, *, name, contents):
         return Yaml(name=name, pydict=yaml.safe_load(contents))
 
 

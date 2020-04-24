@@ -19,7 +19,7 @@ import time
 import traceback
 
 from arjuna.tpi.error import *
-from arjuna.core.exceptions import *
+from arjuna.core.error import *
 
 # This code is inspired by fluent wait concept in Selenium Webdriver
 # Reference code: https://github.com/browserstack/selenium-webdriver-python/edit/master/selenium/webdriver/support/wait.py

@@ -17,7 +17,7 @@
 
 from functools import partial
 from arjuna.tpi.error import *
-from arjuna.core.exceptions import *
+from arjuna.core.error import *
 from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
 
 class GuiEmdFinder:
@@ -37,7 +37,7 @@ class GuiFinder:
 
     def locate(self, locator):
         from arjuna import log_debug
-        from arjuna.core.exceptions import ArjunaTimeoutError
+        from arjuna.core.error import ArjunaTimeoutError
         from arjuna.tpi.error import GuiWidgetNotPresentError
         
         wmd = locator._as_wmd()
@@ -81,7 +81,7 @@ class GuiElementFinder:
 
     def locate(self, locator):
         from arjuna import log_debug
-        from arjuna.core.exceptions import ArjunaTimeoutError
+        from arjuna.core.error import ArjunaTimeoutError
         from arjuna.tpi.error import GuiWidgetNotPresentError
 
         wmd = locator._as_wmd()

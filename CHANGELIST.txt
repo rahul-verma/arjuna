@@ -48,7 +48,6 @@ Current Themes (In-Progress or Planned):
         - Environment Configurations
         - Session Configurations
     - New Named Exceptions:
-        - YamlError
 
 
 

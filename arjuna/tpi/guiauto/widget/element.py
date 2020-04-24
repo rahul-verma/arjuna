@@ -23,7 +23,7 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 from arjuna.tpi.guiauto.model.gns import GNS
 from arjuna.interact.gui.auto.finder import GuiElementFinder, GuiElementEmdFinder
 from arjuna.tpi.error import *
-from arjuna.core.exceptions import *
+from arjuna.core.error import *
 from arjuna.tpi.tracker import track
 from arjuna.tpi.guiauto.meta.formatter import GuiWidgetLocatorFormatter
 

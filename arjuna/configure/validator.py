@@ -21,7 +21,7 @@ import re
 import sys
 from urllib3.util import parse_url
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 from arjuna.core.types.constants import *
 
 class Validator:

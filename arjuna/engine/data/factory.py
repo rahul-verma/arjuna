@@ -19,7 +19,7 @@ import os
 from .source import *
 from .reference import *
 from arjuna.core.utils import file_utils
-from arjuna.core.enums import DataRefContextType
+from arjuna.core.constant import DataRefContextType
 
 def get_data_file_path(data_dir, fpath):
     if file_utils.is_absolute_path(fpath):

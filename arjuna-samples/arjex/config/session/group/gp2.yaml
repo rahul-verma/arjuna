@@ -1,5 +1,0 @@
-gp2:
-  conf: data2_env2
-
-  im:
-    - check_delegate_2

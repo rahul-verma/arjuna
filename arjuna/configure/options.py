@@ -107,7 +107,8 @@ class ArjunaOptions(Options):
             return
         my_dir = os.path.dirname(os.path.realpath(__file__))
         desc_file = os.path.abspath(os.path.join(my_dir, "..", "res", "arjuna_conf_desc.yaml"))
-        desc_yaml = Yaml.from_file(file_path=desc_file, creation_context=f"This Yaml represents arjuna_conf_desc.yaml configuration file at {desc_file} that describes rules for Arjuna's built-in options.")
+        creation_context=f"This Yaml represents arjuna_conf_desc.yaml configuration file at {desc_file} that describes rules for Arjuna's built-in options."
+        desc_yaml = Yaml.from_file(file_path=desc_file)
         cls.ARJUNA_OPTIONS_DESC_MAP = {cls.process_arjuna_option_name(k): v for k, v in desc_yaml.as_map().items()}
 
     def __init__(self, *, options_dict, creation_context):
@@ -244,7 +245,7 @@ class EditableConfig:
         for rname, rvalue in replacements.items():
             contents = contents.replace("${}$".format(rname), rvalue)
         
-        contents_yaml = Yaml.from_str(name="arjuna_defaults", contents=contents, creation_context="This Yaml represents " + creation_context)
+        contents_yaml = Yaml.from_str(name="arjuna_defaults", contents=contents)
 
         return cls.from_yaml(yaml_obj=contents_yaml, creation_context=creation_context)
 
@@ -292,7 +293,7 @@ class EditableConfig:
 
     @classmethod
     def __multi_confs_file(cls, *, file_path, creation_context):
-        data_yaml = Yaml.from_file(file_path=file_path, creation_context=creation_context)
+        data_yaml = Yaml.from_file(file_path=file_path)
         conf_map = dict()
         for section_name in data_yaml.section_names:
             conf_map[section_name] = cls.from_yaml(yaml_obj=data_yaml.get_section(section_name), creation_context=f"Section {section_name} in {creation_context}")

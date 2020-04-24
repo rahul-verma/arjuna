@@ -1,0 +1,19 @@
+gp1:
+  conf: data1_env1
+  im:
+    - check_delegate_1
+
+gp2:
+  conf: data2_env2
+  im:
+    - check_delegate_2
+
+gp3:
+  conf: data1_env1
+  it:
+    - check_drive_with
+
+gp4:
+  conf: data2_env2
+  im:
+    - check_l10n

@@ -90,7 +90,7 @@ from arjuna.tpi.guiauto.model.dialog import GuiDialog
 
 from arjuna.tpi.error import *
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 from arjuna.tpi.helper.audit import HardCoded
 from arjuna.tpi.helper.xml import NodeLocator
 from arjuna.tpi.helper.arjtype import ProcessedKeyDict

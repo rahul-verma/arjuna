@@ -78,8 +78,8 @@ class ArjunaSingleton:
         
         self.__project_root_dir = project_root_dir
 
-        from arjuna.engine.session import DefaultTestSession
-        self.__test_session = DefaultTestSession()
+        from arjuna.engine.session import TestSessionController
+        self.__test_session = TestSessionController()
         run_id = run_id and run_id or "mrun"
         prefix = ""
         if not static_rid:
@@ -122,7 +122,8 @@ class ArjunaSingleton:
         from arjuna.core.yaml import Yaml
         from arjuna.interact.gui.auto.finder.withx import WithX
         fpath = self.ref_config.value(ArjunaOption.CONF_WITHX_FILE)
-        self.__common_withx_ref = WithX(Yaml.from_file(file_path=fpath, creation_context=f"WithX.yaml file at {fpath}").as_map())
+        creation_context= f"WithX.yaml file at {fpath}"
+        self.__common_withx_ref = WithX(Yaml.from_file(file_path=fpath).as_map())
 
         return self.ref_config
 

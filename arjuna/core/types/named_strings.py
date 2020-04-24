@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from arjuna.tpi.error import *
-from arjuna.core.exceptions import *
+from arjuna.core.error import *
 
 class NamedString:
     def __init__(self, internal, external):

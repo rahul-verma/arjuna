@@ -17,7 +17,7 @@
 
 from enum import Enum, auto
 
-from arjuna.core.enums import GuiInteractionConfigType
+from arjuna.core.constant import GuiInteractionConfigType
 from arjuna.tpi.helper.arjtype import Dictable
 from arjuna.tpi.tracker import track
 

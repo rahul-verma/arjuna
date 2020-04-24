@@ -1,7 +1,7 @@
-arjuna.core.enums module
+arjuna.core.error module
 ========================
 
-.. automodule:: arjuna.core.enums
+.. automodule:: arjuna.core.error
    :members:
    :undoc-members:
    :show-inheritance:

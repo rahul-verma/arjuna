@@ -25,7 +25,7 @@ Arjuna Exceptions
 This module defines Exception classes that represent different types of run-time issues that can happen. The exceptions encapsulate the underlying exception message and stack traces.
 '''
 
-from arjuna.core.exceptions import *
+from arjuna.core.error import *
 
 class UndefinedConfigError(Exception):
     '''
@@ -113,11 +113,20 @@ class GuiLabelNotPresentError(Exception):
         context_msg = context and  " for context {}".format(context) or ""
         super().__init__("Gui namespace >{}< does not contain element with name: {}{}. {}.".format(gns_name, label, context_msg, msg))
 
-
-class YamlError(Exception):
+class GuiLabelNotPresentError(Exception):
     '''
-        Raised when there is an eror in Yaml structure or there is an error in its expected format in the context where it is used in Arjuna.
+        Raised when a non-existing GNS label is referenced.
     '''
 
-    def __init__(self, msg, *, creation_context=""):
-        super().__init__(msg + creation_context)
+    def __init__(self, gns_name, label, context=None, msg=None):
+        msg = msg is None and "" or msg
+        context_msg = context and  " for context {}".format(context) or ""
+        super().__init__(f"No session definition exisits for name {name} in {session_yaml}")
+
+class UndefinedTestSessionError(Exception):
+    '''
+        Raised when there is no definition for a name used as test session name.
+    '''
+
+    def __init__(self, *, session_name, sessions_file_path):
+        super().__init__(f"No session definition exists for name >>{session_name}<< in sessions configuration file at {sessions_file_path}")

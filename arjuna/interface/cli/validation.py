@@ -19,7 +19,7 @@ import sys
 import re
 
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 
 def ustr(input):
     return (str(input)).upper()

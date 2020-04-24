@@ -28,7 +28,7 @@ from arjuna.configure.configurator import TestConfigurator
 from arjuna.drive.invoker.databroker import TestSessionDataBrokerHandler
 from arjuna.interact.gui.gom.guimgr import GuiManager
 
-class DefaultTestSession:
+class TestSessionController:
     
     def __init__(self):
         self.__id = uuid.uuid4()

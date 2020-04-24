@@ -20,10 +20,12 @@ import pytest
 import sys
 import threading
 
-from arjuna.core.enums import ReportFormat, DryRunType
+from arjuna.core.constant import ReportFormat, DryRunType
 from arjuna.tpi.constant import ArjunaOption
 from arjuna.core.value import Value
 from arjuna.core.yaml import Yaml
+from arjuna.core.error import *
+from arjuna.tpi.error import *
 
 class GroupsFinished(Exception):
     pass
@@ -226,6 +228,12 @@ class TestGroupRunner(threading.Thread):
                 continue
         log_info("Group runner started")
 
+
+class TestGroup:
+
+    def __init__(self):
+        pass
+
 class RunnableStage:
 
     def __init__(self, name, commands, name_prefix, num_threads=1, dry_run=False):
@@ -261,7 +269,7 @@ class RunnableStage:
 
         log_info("All group runners in stage finished.")
 
-class RunnableSession:
+class TestSession:
 
     def __init__(self):
         self.__stages = []
@@ -275,47 +283,6 @@ class RunnableSession:
             log_info("Executing stage: {} ...".format(stage.name))
             stage.run()
             log_info("Finished Executing stage: {} ...".format(stage.name))
-
-class BaseTestRunner:
-
-    def __init__(self, name, config, runnable_session):
-        self.__name = name
-        self.__config = config
-        self.__runnable_session = runnable_session
-
-    @property
-    def name(self):
-        return self.__name
-
-    @property
-    def config(self):
-        return self.__config
-  
-    def run(self):
-        self.__runnable_session.run()
-
-
-class MSessionRunner(BaseTestRunner):
-
-    def __init__(self, config, *, dry_run=False, im=None, em=None, it=None, et=None):
-        commands = PytestCommands()
-        command = PyTestCommand(config, group="mgroup", dry_run=dry_run, im=im, em=em, it=it, et=et)
-        commands.add_command(command)
-        commands.freeze()
-        stage = RunnableStage("mstage", commands, name_prefix="", num_threads=1, dry_run=dry_run)
-        runnable_session = RunnableSession()
-        runnable_session.add_stage(stage)
-        super().__init__(config, config, runnable_session)
-
-class SessionRunner(BaseTestRunner):
-
-    def __init__(self, name, config, dry_run=False):
-        self.__runnable_session = None
-        self.__yaml_file_path = os.path.join(config.value(ArjunaOption.CONF_SESSION_DIR), name + ".yaml")
-        self.__yaml = YamlFile(self.__yaml_file_path)
-        self.__dry_run = dry_run
-        self.__load(config)
-        super().__init__(name, config, self.__runnable_session)
 
     def __load(self, config):
         from arjuna import Arjuna
@@ -374,6 +341,51 @@ class SessionRunner(BaseTestRunner):
         self.__runnable_session = RunnableSession()
         for stage in stages:
             __add_stage(stages_yaml.get_section(stage))
+
+class BaseTestRunner:
+
+    def __init__(self, name, config, runnable_session):
+        self.__name = name
+        self.__config = config
+        self.__runnable_session = runnable_session
+
+    @property
+    def name(self):
+        return self.__name
+
+    @property
+    def config(self):
+        return self.__config
+  
+    def run(self):
+        self.__runnable_session.run()
+
+
+class MSessionRunner(BaseTestRunner):
+
+    def __init__(self, config, *, dry_run=False, im=None, em=None, it=None, et=None):
+        commands = PytestCommands()
+        command = PyTestCommand(config, group="mgroup", dry_run=dry_run, im=im, em=em, it=it, et=et)
+        commands.add_command(command)
+        commands.freeze()
+        stage = RunnableStage("mstage", commands, name_prefix="", num_threads=1, dry_run=dry_run)
+        runnable_session = RunnableSession()
+        runnable_session.add_stage(stage)
+        super().__init__(config, config, runnable_session)
+
+class SessionRunner(BaseTestRunner):
+
+    def __init__(self, name, config, dry_run=False):
+        self.__dry_run = dry_run
+        fpath = config.value(ArjunaOption.CONF_SESSIONS_FILE)
+        session_yaml = Yaml.from_file(file_path=fpath)
+        try:
+            section_yaml = session_yaml.get_section(name)
+        except YamlUndefinedSectionError as e:
+            raise UndefinedTestSessionError(session_name=name, sessions_file_path=fpath)
+        else:
+            session = TestSession()
+            super().__init__(name, config, session)
 
 
 

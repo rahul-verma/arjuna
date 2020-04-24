@@ -16,7 +16,7 @@
 # limitations under the License.
 
 import abc
-from arjuna.core.exceptions import WaitableError, _GuiWidgetPresentError
+from arjuna.core.error import WaitableError, _GuiWidgetPresentError
 from arjuna.tpi.error import GuiWidgetNotFoundError
 
 class ElementFinder:

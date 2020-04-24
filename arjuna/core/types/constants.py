@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 
 TRUES = {"on", "ON", "true", "TRUE", "yes", "YES"}
 FALSES = {"off", "OFF", "false", "FALSE", "no", "NO"}

@@ -18,7 +18,7 @@
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from arjuna.tpi.error import *
-from arjuna.core.exceptions import *
+from arjuna.core.error import *
 
 class ElementFinder:
     BY_MAP = {

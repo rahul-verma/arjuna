@@ -20,7 +20,7 @@ from arjuna.interact.gui.dispatcher.driver.element_commands import DriverElement
 from arjuna.interact.gui.dispatcher.driver.element_finder import ElementFinder
 from arjuna.interact.gui.dispatcher.driver.melement import MultiElement
 from arjuna.tpi.error import *
-from arjuna.core.exceptions import *
+from arjuna.core.error import *
 
 class SeleniumDriverElementDispatcher:
 

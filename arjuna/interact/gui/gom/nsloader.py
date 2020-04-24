@@ -22,7 +22,7 @@ from enum import Enum, auto
 from abc import abstractmethod
 
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 from arjuna.tpi.error import GuiLabelNotPresentError
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.interact.gui.auto.finder._with import ImplWith
@@ -188,8 +188,8 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         from arjuna.configure.validator import Validator
         from arjuna.interact.gui.auto.finder._with import WithType
         from arjuna.core.yaml import Yaml
-
-        yaml = Yaml.from_file(file_path=self.__ns_path, creation_context="Gui Namespace file at {}".format(self.__ns_path))
+        creation_context="Gui Namespace file at {}".format(self.__ns_path)
+        yaml = Yaml.from_file(file_path=self.__ns_path)
 
         if yaml.is_empty(): return
 

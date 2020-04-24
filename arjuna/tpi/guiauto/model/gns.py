@@ -1,7 +1,7 @@
 
 from arjuna.tpi.guiauto.meta.formatter import GNSLabelFormatter
 from arjuna.tpi.error import *
-from arjuna.core.exceptions import *
+from arjuna.core.error import *
 from arjuna.interact.gui.auto.finder import GuiEmdFinder, GuiElementEmdFinder
 
 class GNS:

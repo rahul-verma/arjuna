@@ -17,7 +17,7 @@
 
 
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 from arjuna.core.value import Value
 
 class CliArgsConfig:

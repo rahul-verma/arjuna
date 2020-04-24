@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from arjuna.tpi.constant import *
-from arjuna.core.enums import *
+from arjuna.core.constant import *
 import pprint
 from enum import Enum, auto
 

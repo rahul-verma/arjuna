@@ -179,3 +179,20 @@ class ArjunaTimeoutError(WaitableError):
 class DataSourceFinished(StopIteration):
     def __init__(self, msg=None):
         super().__init__(msg is None and "Done" or msg)
+
+
+class YamlError(Exception):
+    '''
+        Raised when there is an eror in Yaml structure or there is an error in its expected format in the context where it is used in Arjuna.
+    '''
+
+    def __init__(self, msg):
+        super().__init__(msg)
+
+class YamlUndefinedSectionError(Exception):
+    '''
+        Raised when there is an eror in Yaml structure or there is an error in its expected format in the context where it is used in Arjuna.
+    '''
+
+    def __init__(self, msg):
+        super().__init__(msg)
