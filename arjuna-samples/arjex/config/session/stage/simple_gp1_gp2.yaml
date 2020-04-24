@@ -1,0 +1,7 @@
+threads: 2
+
+groups:
+
+  include:
+    - gp1
+    - gp2

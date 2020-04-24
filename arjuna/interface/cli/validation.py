@@ -18,7 +18,7 @@
 import sys
 import re
 
-from arjuna.tpi.enums import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
 
 def ustr(input):

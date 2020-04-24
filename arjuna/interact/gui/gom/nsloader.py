@@ -21,12 +21,11 @@ import os
 from enum import Enum, auto
 from abc import abstractmethod
 
-from arjuna.tpi.enums import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
-from arjuna.tpi.exceptions import GuiLabelNotPresentError
+from arjuna.tpi.error import GuiLabelNotPresentError
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.interact.gui.auto.finder._with import ImplWith
-from arjuna.core.yaml import YamlFile
 
 class FileFormat(Enum):
     # GNS = auto()
@@ -40,7 +39,7 @@ class GuiNamespaceLoaderFactory:
     # Returns GuiNamespaceLoader
     @classmethod
     def create_namespace_loader(cls, config, ns_file_path):
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         multi_context_enabled = config.value(ArjunaOption.GUIAUTO_DEF_MULTICONTEXT)
         context = multi_context_enabled and None or config.guiauto_context
         _, file_extension = os.path.splitext(ns_file_path)
@@ -186,9 +185,11 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
     def load(self):
         
         from arjuna import Arjuna
-        from arjuna.configure.impl.validator import Validator
+        from arjuna.configure.validator import Validator
         from arjuna.interact.gui.auto.finder._with import WithType
-        yaml = YamlFile(self.__ns_path)
+        from arjuna.core.yaml import Yaml
+
+        yaml = Yaml.from_file(file_path=self.__ns_path, creation_context="Gui Namespace file at {}".format(self.__ns_path))
 
         if yaml.is_empty(): return
 

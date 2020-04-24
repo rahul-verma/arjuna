@@ -22,7 +22,7 @@ from arjuna import *
 def check_wp_login(request, wordpress):
     '''
         For this test:
-        Wordpress related user options have been added to the project.conf
+        Wordpress related user options have been added to the project.yaml
         You should replace the details with those corresponding to your own deployment of WordPress.
         userOptions {
 	        wp.app.url = "IP address"

@@ -20,7 +20,7 @@ import os
 from .nsloader import GuiNamespaceLoaderFactory
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.interact.gui.auto.finder._with import With, Locator
-from arjuna.tpi.exceptions import GuiLabelNotPresentError
+from arjuna.tpi.error import GuiLabelNotPresentError
 
 class GuiDef:
     '''
@@ -82,7 +82,7 @@ class GuiFactory:
 
     @classmethod
     def create_appdef_from_dir(cls, name, automator, app_def_dir):
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         considered_path = app_def_dir
         if not os.path.isdir(considered_path):
             gns_dir = automator.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)

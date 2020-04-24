@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.tpi.exceptions import *
+from arjuna.tpi.error import *
 from arjuna.core.exceptions import *
 
 class NamedString:

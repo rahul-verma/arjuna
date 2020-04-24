@@ -17,7 +17,7 @@
 
 import os
 
-from arjuna.tpi.enums import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
 from arjuna.core.utils import file_utils
 from arjuna.core.utils import sys_utils

@@ -21,9 +21,9 @@ import sys
 import threading
 
 from arjuna.core.enums import ReportFormat, DryRunType
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.tpi.constant import ArjunaOption
 from arjuna.core.value import Value
-from arjuna.core.yaml import YamlFile
+from arjuna.core.yaml import Yaml
 
 class GroupsFinished(Exception):
     pass
@@ -55,7 +55,7 @@ class PyTestCommand:
 
     def run(self):
         from arjuna import Arjuna
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         Arjuna.register_group_params(name=self.__group, config=self.__config, thread_name=self.thread_name)
         self.__load_command_line()
 
@@ -68,7 +68,7 @@ class PyTestCommand:
 
     def __load_command_line(self):
         from arjuna import Arjuna
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         self.__project_dir = self.config.value(ArjunaOption.PROJECT_ROOT_DIR)
         # import sys
         # sys.path.insert(0, self.__project_dir + "/..")
@@ -311,7 +311,7 @@ class SessionRunner(BaseTestRunner):
 
     def __init__(self, name, config, dry_run=False):
         self.__runnable_session = None
-        self.__yaml_file_path = os.path.join(config.value(ArjunaOption.RUN_SESSION_CONF_DIR), name + ".yaml")
+        self.__yaml_file_path = os.path.join(config.value(ArjunaOption.CONF_SESSION_DIR), name + ".yaml")
         self.__yaml = YamlFile(self.__yaml_file_path)
         self.__dry_run = dry_run
         self.__load(config)
@@ -364,7 +364,7 @@ class SessionRunner(BaseTestRunner):
             self.__runnable_session.add_stage(stage)
 
         if "stages" not in self.__yaml.section_names:
-            raise Exception("Invalid session file {}. It must contain 'stages' section.".format(self.__yaml_file_path))
+            raise Exception("Invalid session file {}. It must contain 'stages' section. Section names found: {}".format(self.__yaml_file_path, tuple(self.__yaml.section_names)))
 
         stages_yaml = self.__yaml.get_section("stages")
         stages = stages_yaml.section_names

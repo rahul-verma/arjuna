@@ -10,7 +10,7 @@ Following are critical project directories, sub-directories and files. *Arjuna c
 Please also note that some of these directories are mandatory as a part of Arjuna test project structure. When you create project using `create-project` command from [Arjuna Command Line Interface](#the-create-project-command---creating-a-new-project-skeleton), Arjuna places `placeholder.txt` files so that when you check-in your code in a code repository, empty directories are not ignored during check-in. It is advised to retain them, until you make use of them by placing files in them as per your project needs.
 
 - **config**: Contains configuration files.
-  - **project.conf**: Your project's configuration file containing project-level configuration settings.
+  - **project.yaml**: Your project's configuration file containing project-level configuration settings.
   - **env**: This directory can contain any number of conf files that correspond to options for run-environments.
   - If you place any `.conf` files directly in this directory or in a sub-directory herein, they can be found by Arjuna using the name or relative path.
 - **data**: Contains files that act as data sources and data references (WIP).

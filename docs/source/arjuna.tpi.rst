@@ -19,8 +19,8 @@ Submodules
 
    arjuna.tpi.arjuna_types
    arjuna.tpi.config
-   arjuna.tpi.enums
-   arjuna.tpi.exceptions
+   arjuna.tpi.constant
+   arjuna.tpi.error
    arjuna.tpi.log
    arjuna.tpi.magic
    arjuna.tpi.tracker

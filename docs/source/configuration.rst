@@ -22,7 +22,7 @@ Reference Configuration (Non-session run)
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 - As a part of initialation, Arjuna creates the reference `Configuration` object which combines the following to create the reference :
     - Default settings for Arjuna options
-    - Project level settings included in `<Project root directory>/config/project.conf` file.
+    - Project level settings included in `<Project root directory>/config/project.yaml` file.
     - Data Configuration options in `<Project root directory>/config/data/data.conf` file.
     - Environment Configuration options in `<Project root directory>/config/env/env.conf` file.
     - CLI options represtedn by Arjuna's named CLI switches (e.g. for logging options)
@@ -43,12 +43,12 @@ Once you do this, when this group is executed, all calls to the reference config
 As discussed in above section, the core reference configuration is the basis of all Configuration obejcts. So, you have access to all options in their original form except the ones that were overriden in the Configuration object that you attached to the group.
 
 
-project.conf - Setting Project Level Configuration Options
+project.yaml - Setting Project Level Configuration Options
 ----------------------------------------------------------
 
 Many a times, it is useful to change the defaults of Arjuna at project level to avoid writing code every time. It is also a much better way when you need to tweak quite a few settings and you know that those settings are applicable to most of your tests.
 
-In Arjuna you can do this by providing options under `arjunaOptions` section in `<Project root directory>/config/project.conf` file. The contents of `arjunaOptions` follow [HOCON](https://github.com/lightbend/config/blob/master/HOCON.md) syntax. This means that you can write settings in properties syntax, as JSON or as human-readable JSON syntax supported by HOCON.
+In Arjuna you can do this by providing options under `arjunaOptions` section in `<Project root directory>/config/project.yaml` file. The contents of `arjunaOptions` follow [HOCON](https://github.com/lightbend/config/blob/master/HOCON.md) syntax. This means that you can write settings in properties syntax, as JSON or as human-readable JSON syntax supported by HOCON.
 
 For example:
 
@@ -58,7 +58,7 @@ For example:
         browser.name = firefox
     }
 
-Add the above content to `project.conf` file. We want to tweak `ArjunaOption.BROWSER_NAME`. Correspondingly you can add entry for `BROWSER_NAME` in `arjunaOptions`. For being more intuitive and less mistake prone, Arjuna supports keys in this section as **case-insensitive** and treats **. (dot)** and **_ (underscore)** as interchangeable. This is similar to the behavior of option name string seen in previous section.
+Add the above content to `project.yaml` file. We want to tweak `ArjunaOption.BROWSER_NAME`. Correspondingly you can add entry for `BROWSER_NAME` in `arjunaOptions`. For being more intuitive and less mistake prone, Arjuna supports keys in this section as **case-insensitive** and treats **. (dot)** and **_ (underscore)** as interchangeable. This is similar to the behavior of option name string seen in previous section.
 
 Configuration Builder - Creating Custom Configurations
 ------------------------------------------------------
@@ -74,12 +74,12 @@ Sometimes it is useful to provide your own name to the custom configuration that
 Defining and Handling User Options
 ----------------------------------
 
-Just like Arjuna options, you can define your own options in `project.conf` file as well as programmatically. Rest of the fundamentals remain same as Arjuna options. That's the key point! Arjuna provides you the same facilities for your own defined options that it provides to built-in `ArjunaOptions`.
+Just like Arjuna options, you can define your own options in `project.yaml` file as well as programmatically. Rest of the fundamentals remain same as Arjuna options. That's the key point! Arjuna provides you the same facilities for your own defined options that it provides to built-in `ArjunaOptions`.
 
 User Options in Project Conf
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-In Arjuna you can define your own option under `userOptions` section in `<Project root directory>/config/project.conf` file.
+In Arjuna you can define your own option under `userOptions` section in `<Project root directory>/config/project.yaml` file.
 
 .. code-block:: javascript
 
@@ -154,7 +154,7 @@ For example, your web application could have a dev, staging, system and producti
 
 You can define any number of environment configuration .conf files in `<Project Root Dir>/config/env>` directory.
 
-Name of the configuration is same as the name of the file minus the extension. For example, **tenv1** is configuration name corresponding to **tenv1.conf**
+Name of the configuration is same as the name of the file minus the extension. For example, **env1** is configuration name corresponding to **env1.conf**
 
 
 Combining Data and Environment Configurations
@@ -165,17 +165,17 @@ Another need is that you might want to use data and environment information in c
 Arjuna has built-in support for this and does it by default for you.
 
 Arjuna automatically loads these files as combinations of data confs and env confs when it loads. For each combination:
-    - Reference config is taken as base (which means Arjuna's internal defaults + Options that you have passed in project.conf + Default data conf (if defined) + Default env conf (if defined))
+    - Reference config is taken as base (which means Arjuna's internal defaults + Options that you have passed in project.yaml + Default data conf (if defined) + Default env conf (if defined))
         * For default data and env conf, see the next section.
     - A given data conf is superimposed
     - A given env conf is superimposed
     - CLI options are superimposed
 
-The config name is set to `dataconfname_envconfname` e.g. `data1_tenv1`.
+The config name is set to `dataconfname_envconfname` e.g. `data1_env1`.
 
 You can retrieve an environment config by its name using `Arjuna.get_config` (anywhere in your project) or `request.get_config` call (in a test fixture or test function). Now you can inquire the values just like you deal with any configuration in Arjuna. 
 
-You can also retrieve their options using the magic `C` function, for example `C("data1_tenv1.browser.name")`
+You can also retrieve their options using the magic `C` function, for example `C("data1_env1.browser.name")`
 
 Default Data Configuration and Environment Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -189,4 +189,4 @@ What it means is that if these files are defined, then Arjuna uses options conta
 This feature has the following side-effects:
     * A configuration with name `data_env` is same as the reference configuration.
     * A configuration with name `data1_env` is same as `data1`
-    * A configuration with name `data_tenv1` is same as `tenv1`
+    * A configuration with name `data_env1` is same as `env1`

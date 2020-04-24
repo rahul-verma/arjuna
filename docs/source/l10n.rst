@@ -18,7 +18,7 @@ The default locate is `Locale.EN`. It can be changed in a project configuration 
 
 .. code-block:: javascript
 
-    # project.conf
+    # project.yaml
 
     arjunaOptions {
         l10n.locale = hi
@@ -57,7 +57,7 @@ It has the following signature. The first argument is the query. `locale`, `buck
 
     L("qual", locale=<local enum constant or string>, bucket=<bucket_name>, strict=<True or False>)
 
-- `L("Testing")` localizes the string as per the `ArjunaOption.L10_LOCALE` value in reference configuration. In `project.conf`, we have set it as `HI`.
+- `L("Testing")` localizes the string as per the `ArjunaOption.L10_LOCALE` value in reference configuration. In `project.yaml`, we have set it as `HI`.
 - You can also explcitily mention the locale as `Locale.HI`.
 - When a name is repeated across multiple localization files (buckets), the last one holds. `L("Correct")` will give the value from `sample2` file as it is loaded after `sample1`.
 - You can explcitily refer to a bucket by providing the `bucket` argument. Each Excel localization file represents a bucket and its name without the extension is the bucket name.
@@ -155,4 +155,4 @@ By default, Arjuna handles localization in a non-strict mode. This means if loca
 
 1. As by default the strict mode if off, `L("non_existing")` returns `non_existing`.
 2. You can enforce strict behavior by providing the `strict=True` argument to the `L` function. The second print statement in above code will raise an exception.
-3. You can switch on strict mode at the project level by including `l10n.strict = True` in the `project.conf` file.
+3. You can switch on strict mode at the project level by including `l10n.strict = True` in the `project.yaml` file.

@@ -21,7 +21,7 @@ from arjuna import *
 def check_user_options(request):
     '''
         For this test:
-        You must add target.url = "https://google.com" to userOptions in project.conf to see the impact.
+        You must add target.url = "https://google.com" to userOptions in project.yaml to see the impact.
     '''
     # Just like Arjuna options, C works for user options in reference config
     url = C("target.url")

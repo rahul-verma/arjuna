@@ -1,7 +1,7 @@
 import pytest
 
 from arjuna import *
-from {project}.lib.fixture.session import *
+from {project}.lib.fixture.group import *
 from {project}.lib.fixture.module import *
 from {project}.lib.fixture.test import *
 

@@ -20,7 +20,7 @@ import os
 import time
 import datetime
 
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.tpi.constant import ArjunaOption
 from arjuna.tpi.guiauto.base.container import GuiWidgetContainer
 from arjuna.interact.gui.auto.base.dispatchable import _Dispatchable
 from .drivercaps import DriverCapabilities

@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.tpi.enums import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
 import pprint
 from enum import Enum, auto
@@ -145,6 +145,7 @@ class DriverCapabilities:
         self.__out_dict["automationContext"] = config.value(ArjunaOption.GUIAUTO_CONTEXT).name.upper()
         temp_d = config.get_arjuna_options_as_map()
         for k,v in temp_d.items():
+            k = k.upper()
             if k in SetuActorDriverConfigOption.__members__:
                 self.__out_dict["arjunaOptions"][k] = v
 

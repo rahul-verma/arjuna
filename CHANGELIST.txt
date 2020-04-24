@@ -1,7 +1,56 @@
 Following is the list of critical additions and updates for a given released version:
 
+Current Themes (In-Progress or Planned):
+    - Add provisions for:
+        - Definitions of reusable stages, include construct in session definition
+        - Definitions of reusable groups, include construct in group definition
+    - Doc updates:
+        - Update exiting docs
+        - Test Fixture docs.
+    - More possibilities:
+        - Provision for vars section in config files 
+        - Stage factory
+        - Group Factory
+            - single conf to all groups
+            - cycle confs over groups
+        - Stage level conf
+            - existing
+            - create new
+        - Group level conf
+            - existing: already there
+            - create new
+        - Support for full names and aliases across conf files (e.g. ao/arjuna-options instead of arjuna_options)
+        - with cleanup.
+        - withx hook for programmatic identifiers.
+        - More fixtures:
+            - for_session
+                - Look for thread safety.
+            - for_stage
+        - Configuration:
+            - History for Configuration (Creation Contexts.)
+            - History for a Configuration Option in a Configuration object.
+            - For a given Configuration:
+                - Viewability
+                - Overrridablity (and level.)
+        - Better Logging
+            - Devise a way for the logger pre and post pytest runs.
+    - Investigate:
+        - @track on Windows.
+        - Bug reported by Stefan.
+
+
 0.9.22
 ------
+    - Move all types of configurations to YAML.
+    - Simplify internal configuration process.
+    - Single file for each of the following:
+        - Data configurations
+        - Environment Configurations
+        - Session Configurations
+    - New Named Exceptions:
+        - YamlError
+
+
 
 0.9.21
 ------
@@ -14,7 +63,7 @@ Following is the list of critical additions and updates for a given released ver
         - data conf is superimposed
         - env conf is superimposed
         - CLI options are superimposed
-    - The config name is set to `runconfname_envconfname` e.g. `run1_env1`.
+    - The config name is set to `runconfname_envconfname` e.g. `data1_env1`.
     - The name can be used in the `magic C function` query or as the cname argument.
 - Fixtures now allow drive_with argument.
 - `-c` / `--conf` switch added. It becomes the conf object mapped to conf.
@@ -551,43 +600,7 @@ Future Possibilities and Targeted Fixes
 
 - Diffing two pages on 2 URLs. Comparison of HTML.
 
-
-Dynamic parameterization
-------------------------
-
-Support for test session, stage, groups
-Multithreadin custom logic in Arjuna
-
-
--   @test needs to change.
-
-auto-delegate pending:
-    - Define a configuration hook to add configurations.
-    - Gives the RunConf * RunEnv conf to the fixture.
-        : If paralele CLI option -> paralel
-        : If dist CLI option is set. It splits the tests and provides only one combination of Run conf * run env.
-            > func.module name is checked.
-                picks one random config first time and allocates.
-                for same functions, then the same random config is allocated.
-
-If this flow is complete:
-    Fixtures are parameterized with different configurations depending on the CLI options.
-    If multiple configurations are there, then this will lead to multiple execution of a test associated with this fixture.
-    Sequential or parallel is governed by whether -n or num-workers value. Default it not_set.
-        Need to check if workers can be more than the CPUs on a system. (x-dist)
-
 PytestDeprecationWarning: --no-print-logs is deprecated and scheduled for removal in pytest 6.0.
   Please use --show-capture instead.
     _issue_warning_captured(NO_PRINT_LOGS, self._config.hook, stacklevel=2)
-
-
-Contextual Data References -> Add INI format, JSON?
-
-WINDOWS:
-    @track on Windows
-
-    0.9.20 by Stefan:
-        got the "cannot overwrite Chromedriver "error solved again with  rm /home/stefan/.wdm/drivers/chromedriver/81.0.4044.69/linux64/chromedriver
-and this after upgrading to arjuna 0.9.20
-
 

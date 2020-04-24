@@ -17,7 +17,7 @@
 
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
-from arjuna.tpi.exceptions import *
+from arjuna.tpi.error import *
 from arjuna.core.exceptions import *
 
 class ElementFinder:

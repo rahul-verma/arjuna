@@ -32,7 +32,7 @@ from arjuna.core.thread.decorators import *
 from arjuna.core.utils import sys_utils
 from arjuna.core.adv.proxy import ROProxy
 from arjuna.tpi.helper.arjtype import CIStringDict
-from arjuna.tpi.exceptions import UndefinedConfigError
+from arjuna.tpi.error import UndefinedConfigError
 from arjuna.core.adv.decorators import singleton
 import codecs
 import sys
@@ -73,8 +73,9 @@ class ArjunaSingleton:
             os.makedirs(d)
 
     def init(self, project_root_dir, cli_config, run_id, *, static_rid):
-        from arjuna.configure.impl.processor import ConfigCreator
-        ConfigCreator.init()
+        from arjuna.configure.options import ArjunaOptions
+        ArjunaOptions.load_desc()
+        
         self.__project_root_dir = project_root_dir
 
         from arjuna.engine.session import DefaultTestSession
@@ -86,7 +87,7 @@ class ArjunaSingleton:
         run_id = "{}{}".format(prefix, run_id)
         self.__thread_wise_ref_conf_map[threading.currentThread().name] = self.__test_session.init(project_root_dir, cli_config, run_id)
 
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_DIR))
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_XML_DIR))
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_HTML_DIR))
@@ -118,10 +119,10 @@ class ArjunaSingleton:
         from arjuna.engine.data.localizer import Localizer
         self.__localizer = Localizer.load_all(self.ref_config)
 
-        from arjuna.core.yaml import YamlFile
+        from arjuna.core.yaml import Yaml
         from arjuna.interact.gui.auto.finder.withx import WithX
-        fpath = self.ref_config.value(ArjunaOption.GUIAUTO_WITHX_YAML)
-        self.__common_withx_ref = WithX(YamlFile(fpath).as_map())
+        fpath = self.ref_config.value(ArjunaOption.CONF_WITHX_FILE)
+        self.__common_withx_ref = WithX(Yaml.from_file(file_path=fpath, creation_context=f"WithX.yaml file at {fpath}").as_map())
 
         return self.ref_config
 

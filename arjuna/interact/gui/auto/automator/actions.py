@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# from arjuna.tpi.enums import ArjunaOption
+# from arjuna.tpi.constant import ArjunaOption
 # from arjuna.client.core.action import *
 # from arjuna.interact.gui.auto.finder.wmd import SimpleGuiWidgetMetaData
 

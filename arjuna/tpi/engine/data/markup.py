@@ -25,7 +25,7 @@ The names of the classes have been kept in lower case for aesthetic purpose of t
 
 from arjuna.engine.data.source import *
 from arjuna.engine.data.factory import *
-from arjuna.tpi.enums import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
 from arjuna.core.utils import obj_utils
 from arjuna.engine.data.factory import *

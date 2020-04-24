@@ -23,7 +23,7 @@ from arjuna.core.reader.excel import *
 from arjuna.core.reader.ini import *
 from arjuna.core.reader.textfile import *
 from arjuna.core.thread import decorators
-from arjuna.tpi.exceptions import *
+from arjuna.tpi.error import *
 from arjuna.core.exceptions import *
 from arjuna.core.types import constants
 from arjuna.tpi.engine.data.record import *

@@ -1,0 +1,83 @@
+arjuna.root.dir: absolute_dir_path
+arjuna.external.imports.dir: absolute_dir_path
+
+log.dir: absolute_dir_path
+log.console.level: logging_level
+log.file.level: logging_level
+log.allowed.contexts: allowed_log_contexts
+
+run.id: name
+run.host.os: desktop_os
+run.session.name: name
+
+l10n.locale: locale
+l10n.strict: bool
+l10n.dir: absolute_dir_path
+l10n.excel.dir: absolute_dir_path
+l10n.json.dir: absolute_dir_path
+
+project.name: name
+project.root.dir: absolute_dir_path_present
+
+conf.dir: absolute_dir_path
+conf.project.file: absolute_file_path
+conf.data.file: absolute_file_path
+conf.envs.file: absolute_file_path
+conf.sessions.file: absolute_file_path
+conf.stages.file: absolute_file_path
+conf.groups.file: absolute_file_path
+conf.withx.file: absolute_file_path
+
+tests.dir: absolute_dir_path
+hooks.dir: absolute_dir_path
+reports.dir: absolute_dir_path
+report.dir: absolute_dir_path
+report.formats: report_formats
+report.xml.dir: absolute_dir_path
+report.html.dir: absolute_dir_path
+screenshots.dir: absolute_dir_path
+
+data.dir: absolute_dir_path
+data.src.dir: absolute_dir_path
+data.ref.dir: absolute_dir_path
+data.ref.column.dir: absolute_dir_path
+data.ref.row.dir: absolute_dir_path
+
+app.url: web_url
+
+guiauto.name: guiauto_automator_name
+guiauto.dir: absolute_dir_path
+guiauto.namespace.dir: absolute_dir_path
+guiauto.def.multicontext: bool
+guiauto.context: guiauto_context_name
+guiauto.max.wait: positive_int
+guiauto.slomo.on: bool
+guiauto.slomo.interval: positive_int
+
+browser.name: browser_name
+browser.version: str
+browser.maximize: bool
+browser.headless: bool
+browser.dim.height: positive_float
+browser.dim.width: positive_float
+browser.bin.path: absolute_file_path
+
+scroll.pixels: positive_int
+
+mobile.os.name: mobile_os
+mobile.os.version: str
+mobile.device.name: str
+mobile.device.udid: str
+mobile.app.file.path: absolute_file_path
+
+selenium.drivers.dir: absolute_dir_path
+selenium.driver.prop: str
+selenium.driver.path: str
+selenium.driver.download: bool
+selenium.service.url: web_url
+
+appium.service.url: web_url
+appium.auto.launch: bool
+
+img.comp.min.score: positive_float
+

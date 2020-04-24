@@ -41,7 +41,7 @@ Setting GuiApp Base URL in Configuration
 
 During initilization, `GuiApp` automatically looks for the `ArjunaOption.APP_URL` option in the `Configuration` object associated with it. It means you can provide this option in any of the following ways:
     - Modify Reference `Configuration`
-        - Add this option in `project.conf` file.
+        - Add this option in `project.yaml` file.
         - Provide it as a CLI option.
     - Use `ConfigBuilder` to update or create a new `Configuration`. Pass it as argument while instantiating `GuiApp`, for example:
  

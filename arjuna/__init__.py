@@ -88,8 +88,8 @@ from arjuna.tpi.guiauto.model.page import GuiPage
 from arjuna.tpi.guiauto.model.section import GuiSection
 from arjuna.tpi.guiauto.model.dialog import GuiDialog
 
-from arjuna.tpi.exceptions import *
-from arjuna.tpi.enums import *
+from arjuna.tpi.error import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
 from arjuna.tpi.helper.audit import HardCoded
 from arjuna.tpi.helper.xml import NodeLocator

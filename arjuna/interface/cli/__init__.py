@@ -22,7 +22,7 @@ import sys
 import time
 
 from arjuna.core.utils import sys_utils
-from arjuna.tpi.enums import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
 from arjuna.core.reader.textfile import TextResourceReader
 from arjuna.core.types import constants

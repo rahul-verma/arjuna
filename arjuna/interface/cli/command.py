@@ -26,21 +26,13 @@ import traceback
 import json
 import sys
 
-from arjuna.tpi.enums import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
 from arjuna.core.utils import sys_utils
 from arjuna.core.utils import file_utils
 from arjuna.core.reader.hocon import HoconFileReader, HoconConfigDictReader
-from arjuna.configure.invoker.config import CliArgsConfig
+from arjuna.configure.cli import CliArgsConfig
 from .validation import *
-
-blank_groups_xml = '''<groups>
-    <group name="everything">
-        <pickers>
-            <picker type="cm" pattern=".*"/>
-        </pickers>
-    </group>
-</groups>'''
 
 
 class Command(metaclass=abc.ABCMeta):
@@ -102,20 +94,6 @@ class MainCommand(Command):
     def execute(self, arg_dict):
         pass
 
-#
-# class LaunchSetu(Command):
-#     def __init__(self, subparsers, parents):
-#         super().__init__()
-#         self.parents = parents
-#         parser = subparsers.add_parser('launch-setu', parents=[parent.get_parser() for parent in parents], help="Launch Setu")
-#         self._set_parser(parser)
-#
-#     def execute(self, arg_dict):
-#         for parent in self.parents:
-#             parent.process(arg_dict)
-#         from arjuna.setu.service import launch_setu
-#         launch_setu(int(arg_dict["setu.port"]))
-
 
 class FileObjectType(Enum):
     DIR = auto()
@@ -128,7 +106,13 @@ class CreateProject(Command):
         (FileObjectType.DIR, "config"),
         (FileObjectType.DIR, "config/env"),
         (FileObjectType.DIR, "config/run"),
-        (FileObjectType.FILE, "config/project.conf"),
+        (FileObjectType.FILE, "config/data.yaml"),
+        (FileObjectType.FILE, "config/envs.yaml"),
+        (FileObjectType.FILE, "config/groups.yaml"),
+        (FileObjectType.FILE, "config/project.yaml"),
+        (FileObjectType.FILE, "config/sessions.yaml"),
+        (FileObjectType.FILE, "config/stages.yaml"),
+        (FileObjectType.FILE, "config/withx.yaml"),
         (FileObjectType.DIR, "data"),
         (FileObjectType.DIR, "data/source"),
         (FileObjectType.DIR, "data/reference"),
@@ -143,8 +127,6 @@ class CreateProject(Command):
         (FileObjectType.DIR, "guiauto/driver/mac"),
         (FileObjectType.DIR, "guiauto/driver/windows"),
         (FileObjectType.DIR, "guiauto/namespace"),
-        (FileObjectType.DIR, "guiauto/withx"),
-        (FileObjectType.FILE, "guiauto/withx/withx.yaml"),
         (FileObjectType.DIR, "report"),
         (FileObjectType.DIR, "script"),
         (FileObjectType.DIR, "test"),
@@ -187,7 +169,7 @@ class CreateProject(Command):
             parent.process(arg_dict)
         # from arjuna import ArjunaCore
         pdir = arg_dict['project.root.dir']
-        if os.path.exists(os.path.join(pdir, "config/project.conf")):
+        if os.path.exists(os.path.join(pdir, "config/project.yaml")):
             print("Arjuna project already exists at the specified location.")
             sys.exit(1)
         parent_dir = os.path.abspath(os.path.join(pdir, ".."))
@@ -197,7 +179,7 @@ class CreateProject(Command):
             os.makedirs(project_temp_dir)
             for ftype, frpath in CreateProject.COMMON_DIRS_FILES:
                 self.__create_file_or_dir(project_temp_dir, ftype, frpath)
-            copy_file("../../res/proj.conf", "config/project.conf")
+            copy_file("../../res/project.yaml", "config/project.yaml")
             copy_file("../../res/check_dummy.py", "test/module/check_dummy.py")
             copy_file("../../res/arjuna_launcher.py", "script/arjuna_launcher.py")
             f = open(get_src_file_path("../../res/conftest.txt"), "r")
@@ -206,7 +188,7 @@ class CreateProject(Command):
             f = open(get_proj_target_path("test/conftest.py"), "w")
             f.write(contents)
             f.close()
-            for d in [ "config/env", "config/run", "data/source", "l10n/excel", "l10n/json", "data/reference/excel_row", "data/reference/excel_column", "guiauto/namespace"]:
+            for d in ["data/source", "l10n/excel", "l10n/json", "data/reference/excel_row", "data/reference/excel_column", "guiauto/namespace"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:
                 copy_file("../../res/placeholder.txt", "guiauto/driver/{}/placeholder.txt".format(os_name))
@@ -242,7 +224,7 @@ class __RunCommand(Command):
         else:
             self.group_conf_name = None
 
-        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict).as_map(), runid, static_rid=static_rid)
+        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict), runid, static_rid=static_rid)
 
         import sys
         proj_dir = Arjuna.get_config().value(ArjunaOption.PROJECT_ROOT_DIR)

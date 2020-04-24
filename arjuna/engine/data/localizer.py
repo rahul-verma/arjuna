@@ -154,7 +154,7 @@ class Localizer:
 
     @classmethod
     def load_all(cls, ref_config):
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         l10n_excel_dir = ref_config.value(ArjunaOption.L10N_EXCEL_DIR)
         l10n_merged_ref = L10NRef()
         l10n_refs = Localizers()

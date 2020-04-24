@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from functools import partial
-from arjuna.tpi.exceptions import *
+from arjuna.tpi.error import *
 from arjuna.core.exceptions import *
 from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
 
@@ -38,7 +38,7 @@ class GuiFinder:
     def locate(self, locator):
         from arjuna import log_debug
         from arjuna.core.exceptions import ArjunaTimeoutError
-        from arjuna.tpi.exceptions import GuiWidgetNotPresentError
+        from arjuna.tpi.error import GuiWidgetNotPresentError
         
         wmd = locator._as_wmd()
         log_debug("Finding element with wmd: {}.".format(wmd))
@@ -82,7 +82,7 @@ class GuiElementFinder:
     def locate(self, locator):
         from arjuna import log_debug
         from arjuna.core.exceptions import ArjunaTimeoutError
-        from arjuna.tpi.exceptions import GuiWidgetNotPresentError
+        from arjuna.tpi.error import GuiWidgetNotPresentError
 
         wmd = locator._as_wmd()
         log_debug("Finding element with wmd: {}.".format(wmd))

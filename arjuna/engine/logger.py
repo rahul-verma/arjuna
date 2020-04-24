@@ -45,7 +45,7 @@ class Logger:
         self.__load()
 
     def __load(self):
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         dl = logging.getLevelName(self.__ref_config.value(ArjunaOption.LOG_CONSOLE_LEVEL).name) # logging.getLevelName(
         log_dir = self.__ref_config.value(ArjunaOption.LOG_DIR)
         if not os.path.isdir(log_dir):

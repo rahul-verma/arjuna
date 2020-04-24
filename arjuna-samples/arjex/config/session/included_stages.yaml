@@ -1,0 +1,5 @@
+stages:
+
+  include:
+    - simple_gp1_gp2
+    - simple_gp3_gp4

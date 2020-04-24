@@ -81,7 +81,7 @@ class DataReference:
 
     @classmethod
     def load_all(cls, ref_config):
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         refs = DataReferences()
         column_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_COLUMN_DIR)
         for fname in os.listdir(column_data_ref_dir):

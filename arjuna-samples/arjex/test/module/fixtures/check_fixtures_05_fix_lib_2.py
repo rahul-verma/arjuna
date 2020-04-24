@@ -26,5 +26,5 @@ def check_2(request, module_resource):
     assert module_resource['a'] == 1
 
 @test
-def check_3(request, session_resource):
-    assert session_resource['a'] == 1
+def check_3(request, group_resource):
+    assert group_resource['a'] == 1

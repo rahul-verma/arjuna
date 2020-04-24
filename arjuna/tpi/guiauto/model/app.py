@@ -88,7 +88,7 @@ class GuiApp(_App):
 
     def __init__(self, *args, url: str=None, config: 'Configuration'=None, ext_config: 'AutomatorExtendedConfig'=None, label: str=None, gns_dir: str=None, gns_file_name: str=None, **kwargs):
         super().__init__(gns_dir=gns_dir, gns_file_name=gns_file_name, config=config, ext_config=ext_config, label=label is None and self.__class__.__name__ or label)
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         self.__url = url is not None and url or self.config.value(ArjunaOption.APP_URL)
         # self._load(*args, **kwargs)
         self.__args = args

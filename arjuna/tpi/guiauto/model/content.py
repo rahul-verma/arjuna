@@ -29,7 +29,7 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
-from arjuna.tpi.exceptions import *
+from arjuna.tpi.error import *
 from arjuna.core.exceptions import *
 from arjuna.tpi.guiauto.model.gns import GNS
 from arjuna.interact.gui.auto.finder import GuiFinder, GuiEmdFinder

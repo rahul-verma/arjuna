@@ -1,13 +1,15 @@
 arjuna.configure package
 ========================
 
-Subpackages
------------
+Submodules
+----------
 
 .. toctree::
 
-   arjuna.configure.impl
-   arjuna.configure.invoker
+   arjuna.configure.cli
+   arjuna.configure.configurator
+   arjuna.configure.options
+   arjuna.configure.validator
 
 Module contents
 ---------------

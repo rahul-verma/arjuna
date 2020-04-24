@@ -18,7 +18,7 @@
 import time
 import traceback
 
-from arjuna.tpi.exceptions import *
+from arjuna.tpi.error import *
 from arjuna.core.exceptions import *
 
 # This code is inspired by fluent wait concept in Selenium Webdriver

@@ -1,0 +1,5 @@
+arjuna_options:
+  browser.name: chrome
+
+user_options:
+  check: 1

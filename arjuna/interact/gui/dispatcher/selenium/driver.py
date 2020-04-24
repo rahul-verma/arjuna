@@ -45,7 +45,7 @@ class SeleniumDriverDispatcher:
         browser_name = config["arjunaOptions"]["BROWSER_NAME"]
         driver_path = config["arjunaOptions"]["SELENIUM_DRIVER_PATH"]
         if svc_url.lower() == "not_set":
-            from arjuna.tpi.enums import BrowserName
+            from arjuna.tpi.constant import BrowserName
             driver_service = None
             driver_downloader = None
             if browser_name == BrowserName.CHROME:

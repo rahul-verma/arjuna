@@ -21,7 +21,7 @@ from arjuna import *
 def check_builder_file_based_options(request):
     cb = request.config.builder
     cb.option("prog.option", "Programmatic")
-    cb.from_file("dynamic.conf")
+    cb.from_file("dynamic.yaml")
     config = cb.register()
 
     print(config.prog_option)

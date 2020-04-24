@@ -29,7 +29,7 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
-from arjuna.tpi.exceptions import *
+from arjuna.tpi.error import *
 from arjuna.core.exceptions import *
 from arjuna.tpi.guiauto.model.gns import GNS
 from arjuna.interact.gui.auto.finder import GuiFinder, GuiEmdFinder
@@ -62,7 +62,7 @@ class Gui(AsserterMixIn):
         super().__init__()
         from arjuna import Arjuna
         self.__config = config is not None and config or Arjuna.get_config()
-        from arjuna.tpi.enums import ArjunaOption
+        from arjuna.tpi.constant import ArjunaOption
         ns_root_dir = self.config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
         self.__gns_dir = os.path.join(ns_root_dir, gns_dir)
         self.__econfig = ext_config

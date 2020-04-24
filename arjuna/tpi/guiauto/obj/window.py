@@ -16,12 +16,12 @@
 # limitations under the License.
 
 import traceback
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.tpi.constant import ArjunaOption
 from arjuna.interact.gui.auto.finder.wmd import SimpleGuiWidgetMetaData
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
-from arjuna.tpi.exceptions import ChildWindowNotFoundError
+from arjuna.tpi.error import ChildWindowNotFoundError
 
 class WindowConditions:
 

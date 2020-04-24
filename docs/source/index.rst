@@ -111,7 +111,7 @@ Test-to-Test Dependency
 
 Test Configuration
 ==================
-* :py:class:`ArjunaOption Enum <arjuna.tpi.enums.ArjunaOption>`
+* :py:class:`ArjunaOption Enum <arjuna.tpi.constant.ArjunaOption>`
 * :py:class:`Configuration<arjuna.tpi.config.Configuration>`
 * :py:class:`ConfigBuilder<arjuna.tpi.config.ConfigBuilder>`
 
@@ -201,18 +201,18 @@ Logging
 Arjuna Exceptions
 =================
 
-* :py:mod:`Exceptions <arjuna.tpi.exceptions>`
+* :py:mod:`Exceptions <arjuna.tpi.error>`
     * Configuration
-        * :py:class:`UndefinedConfigError <arjuna.tpi.exceptions.UndefinedConfigError>`
-        * :py:class:`ConfigCreationError <arjuna.tpi.exceptions.ConfigCreationError>`
+        * :py:class:`UndefinedConfigError <arjuna.tpi.error.UndefinedConfigError>`
+        * :py:class:`ConfigCreationError <arjuna.tpi.error.ConfigCreationError>`
     * Gui Automation
-        * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.exceptions.GuiWidgetForLabelPresentError>`
-        * :py:class:`GuiWidgetPresentError <arjuna.tpi.exceptions.GuiWidgetPresentError>`
-        * :py:class:`GuiWidgetForLabelNotPresentError <arjuna.tpi.exceptions.GuiWidgetForLabelNotPresentError>`
-        * :py:class:`GuiWidgetNotPresentError <arjuna.tpi.exceptions.GuiWidgetNotPresentError>`
-        * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.exceptions.GuiNamespaceLoadingError>`
-        * :py:class:`GuiNotLoadedError <arjuna.tpi.exceptions.GuiNotLoadedError>`
-        * :py:class:`GuiLabelNotPresentError <arjuna.tpi.exceptions.GuiLabelNotPresentError>`
+        * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.error.GuiWidgetForLabelPresentError>`
+        * :py:class:`GuiWidgetPresentError <arjuna.tpi.error.GuiWidgetPresentError>`
+        * :py:class:`GuiWidgetForLabelNotPresentError <arjuna.tpi.error.GuiWidgetForLabelNotPresentError>`
+        * :py:class:`GuiWidgetNotPresentError <arjuna.tpi.error.GuiWidgetNotPresentError>`
+        * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.error.GuiNamespaceLoadingError>`
+        * :py:class:`GuiNotLoadedError <arjuna.tpi.error.GuiNotLoadedError>`
+        * :py:class:`GuiLabelNotPresentError <arjuna.tpi.error.GuiLabelNotPresentError>`
 
 
 ******************

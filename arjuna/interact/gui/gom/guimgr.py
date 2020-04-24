@@ -17,13 +17,13 @@
 
 import uuid
 from arjuna.interact.gui.gom.namestore import GuiNameStore
-from arjuna.tpi.enums import ArjunaOption
+from arjuna.tpi.constant import ArjunaOption
 
 class GuiManager:
 
     def __init__(self, config):
         self.__name_store = GuiNameStore()
-        self.__namespace_dir = config.arjuna_config.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
+        self.__namespace_dir = config.arjuna_options.value(ArjunaOption.GUIAUTO_NAMESPACE_DIR)
 
     @property
     def name_store(self):

@@ -25,7 +25,7 @@ Code is kept redundant across methods for the purpose of easier learning.
 def check_project_conf(request):
     '''
         For this test:
-        You must add browser.name = firefox to arjunaOptions in project.conf to see the impact.
+        You must add browser.name = firefox to arjunaOptions in project.yaml to see the impact.
         It changes the default browser from Chrome to Firefox across the project.
     '''
     google = GuiApp(url="https://google.com")

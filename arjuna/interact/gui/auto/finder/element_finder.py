@@ -17,7 +17,7 @@
 
 import abc
 from arjuna.core.exceptions import WaitableError, _GuiWidgetPresentError
-from arjuna.tpi.exceptions import GuiWidgetNotFoundError
+from arjuna.tpi.error import GuiWidgetNotFoundError
 
 class ElementFinder:
     def __init__(self, container): #, obj_name=""):

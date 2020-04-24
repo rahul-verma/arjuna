@@ -24,7 +24,7 @@ from arjuna import ArjunaOption
 
 from arjuna.tpi.config import Configuration
 
-from arjuna.configure.invoker.configurator import TestConfigurator
+from arjuna.configure.configurator import TestConfigurator
 from arjuna.drive.invoker.databroker import TestSessionDataBrokerHandler
 from arjuna.interact.gui.gom.guimgr import GuiManager
 
@@ -73,7 +73,6 @@ class DefaultTestSession:
         from arjuna import Arjuna
         from arjuna.engine.runner import MSessionRunner, SessionRunner
         config = Arjuna.get_config()
-        print(config.value(ArjunaOption.RUN_SESSION_NAME).lower())
         session_name = config.value(ArjunaOption.RUN_SESSION_NAME).lower()
         if session_name == "msession":
             self.__testrunner = MSessionRunner(Arjuna.get_config(group_conf_name), dry_run=dry_run, im=im, em=em, it=it, et=et)

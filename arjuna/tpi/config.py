@@ -26,8 +26,7 @@ ConfigBuilder can be used to create new configuration from an existing one.
 '''
 
 from enum import Enum
-from arjuna.configure.impl.container import ConfigContainer
-from arjuna.tpi.enums import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
 import uuid
 from arjuna.tpi.arjuna_types import *
@@ -83,8 +82,8 @@ class Configuration:
         self.__session = test_session
         self.__name = name
         self.__wrapped_config = config
-        self.__arjuna_options = _ROWrapper(self.__wrapped_config.arjuna_config)
-        self.__user_options = _ROWrapper(self.__wrapped_config.user_config)
+        self.__arjuna_options = _ROWrapper(self.__wrapped_config.arjuna_options)
+        self.__user_options = _ROWrapper(self.__wrapped_config.user_options)
 
     @property
     def builder(self) -> 'ConfigBuilder':
@@ -132,7 +131,7 @@ class Configuration:
             Returns:
                 A dictionary of all Arjuna Options.
         '''
-        return self.__wrapped_config.arjuna_config.as_json_dict()
+        return self.__wrapped_config.arjuna_options.as_dict()
 
     def is_arjuna_option_not_set(self, option) -> bool:
         '''
@@ -144,7 +143,7 @@ class Configuration:
             Returns:
                 True/False
         '''
-        return self.__wrapped_config.arjuna_config.is_not_set(option)
+        return self.__wrapped_config.arjuna_options.is_not_set(option)
 
     @property
     def name(self) -> str:
@@ -199,8 +198,9 @@ class ConfigBuilder:
     '''
 
     def __init__(self, *, base_config: Configuration, auto_name_gen=True):
+        from arjuna.configure.options import EditableConfig
         vars(self)['_test_session'] = base_config.test_session
-        vars(self)['_config_container'] = ConfigContainer()
+        vars(self)['_config_container'] = EditableConfig.empty_conf()
         vars(self)['_base_config'] = base_config
         vars(self)['_auto_gen_name'] = auto_name_gen
 
@@ -313,9 +313,9 @@ class ConfigBuilder:
                 If instead of full absolute path, a name or relative file path is provided, Arjuna creates the path in relation to the default configuration directory - `<Project Root>/config`.
         '''
         conf = self._test_session.load_options_from_file(fpath)
-        for k,v in conf.arjuna_config._config_dict.items():
+        for k,v in conf.arjuna_options.as_dict().items():
             self._config_container.set_arjuna_option(k,v)
-        for k,v in conf.user_config._config_dict.items():
+        for k,v in conf.user_options.as_dict().items():
             self._config_container.set_user_option(k,v)
 
     def register(self, *, config_name=None):
@@ -336,7 +336,7 @@ class ConfigBuilder:
         config_name = config_name and config_name or 'c{}'.format(str(uuid.uuid4()).replace("-","_"))
 
         try:
-            from arjuna.configure.impl.validator import Validator
+            from arjuna.configure.validator import Validator
             Validator.name(config_name)
         except:
             raise ConfigCreationError("Unsupported name >>{}<< provided for a Configuration object. {}".format(config_name, Validator.VNREGEX_TEXT))

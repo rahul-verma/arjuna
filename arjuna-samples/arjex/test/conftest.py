@@ -4,7 +4,7 @@ import sys
 from arjuna import *
 sys.path.append(C("project.root.dir") + "/..")
 
-from arjex.lib.fixture.session import *
+from arjex.lib.fixture.group import *
 from arjex.lib.fixture.module import *
 from arjex.lib.fixture.test import *
 

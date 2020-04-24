@@ -1,0 +1,85 @@
+arjuna_options: 
+  arjuna.root.dir: $arjuna_root_dir$
+  arjuna.external.imports.dir: $arjuna_root_dir$/third_party/py_importables
+
+  log.dir: $project_root_dir$/report/$run_id$/log
+  log.console.level: info
+  log.file.level: debug
+  log.allowed.contexts: default
+
+  run.id: mrun
+  run.host.os: $host_os$
+  run.session.name: msession
+
+  l10n.locale: en
+  l10n.strict: False
+  l10n.dir: $project_root_dir$/l10n
+  l10n.excel.dir: $project_root_dir$/l10n/excel
+  l10n.json.dir: $project_root_dir$/l10n/json"
+
+  project.name: $project_name$
+  project.root.dir: $project_root_dir$
+
+  conf.dir: $project_root_dir$/config/
+  conf.project.file: $project_root_dir$/config/project.yaml
+  conf.data.file: $project_root_dir$/config/data.yaml
+  conf.envs.file: $project_root_dir$/config/envs.yaml
+  conf.sessions.file: $project_root_dir$/config/sessions.yaml
+  conf.stages.file: $project_root_dir$/config/stages.yaml
+  conf.groups.file: $project_root_dir$/config/groups.yaml
+  conf.withx.file: $project_root_dir$/config/withx.yaml
+
+  tests.dir: $project_root_dir$/test
+  hooks.dir: $project_root_dir$/hook
+  reports.dir: $project_root_dir$/report
+  report.dir: $project_root_dir$/report/$run_id$
+  report.formats:
+    - xml
+    - html
+  report.xml.dir: $project_root_dir$/report/$run_id$/xml
+  report.html.dir: $project_root_dir$/report/$run_id$/html
+  screenshots.dir: $project_root_dir$/report/$run_id$/screenshot
+
+  data.dir: $project_root_dir$/data
+  data.src.dir: $project_root_dir$/data/source
+  data.ref.dir: $project_root_dir$/data/reference
+  data.ref.column.dir: $project_root_dir$/data/reference/excel_column
+  data.ref.row.dir: $project_root_dir$/data/reference/excel_row
+
+  app.url: NOT_SET
+
+  guiauto.name: SELENIUM
+  guiauto.dir: $project_root_dir$/guiauto
+  guiauto.namespace.dir: $project_root_dir$/guiauto/namespace
+  guiauto.def.multicontext: false
+  guiauto.context: "web"
+  guiauto.max.wait: 60
+  guiauto.slomo.on: false
+  guiauto.slomo.interval: 2
+
+  browser.name: chrome
+  browser.version: "not_set"
+  browser.maximize: true
+  browser.headless: false
+  browser.dim.height: NOT_SET
+  browser.dim.width: NOT_SET
+  browser.bin.path: NOT_SET
+
+  scroll.pixels: 100
+
+  mobile.os.name: Android
+  mobile.os.version: NOT_SET
+  mobile.device.name: "Android Emulator"
+  mobile.device.udid: NOT_SET
+  mobile.app.file.path: NOT_SET
+
+  selenium.drivers.dir: $project_root_dir$/guiauto/driver
+  selenium.driver.prop: not_set
+  selenium.driver.path: $project_root_dir$/guiauto/driver/$driver_name$
+  selenium.driver.download: True
+  selenium.service.url: not_set
+
+  appium.service.url: http://127.0.0.1:4723/wd/hub
+  appium.auto.launch: false
+
+  img.comp.min.score: 0.7

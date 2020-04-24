@@ -17,7 +17,7 @@
 
 from arjuna.tpi.helper.arjtype import CIStringDict
 
-from arjuna.tpi.enums import *
+from arjuna.tpi.constant import *
 from arjuna.core.enums import *
 from arjuna.core.utils.repr_utils import repr_dict
 

@@ -1,6 +1,6 @@
 
 from arjuna.tpi.guiauto.meta.formatter import GNSLabelFormatter
-from arjuna.tpi.exceptions import *
+from arjuna.tpi.error import *
 from arjuna.core.exceptions import *
 from arjuna.interact.gui.auto.finder import GuiEmdFinder, GuiElementEmdFinder
 
