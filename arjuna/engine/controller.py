@@ -40,7 +40,7 @@ class TestSessionController:
         self.__configurator = None
         self.__project_config_loaded = False
         self.__guimgr = None
-        self.__testrunner = None
+        self.__session = None
 
     @property
     def id(self):
@@ -71,16 +71,16 @@ class TestSessionController:
 
     def load_tests(self, *, dry_run=False, group_conf_name="ref", im=None, em=None, it=None, et=None):
         from arjuna import Arjuna
-        from arjuna.engine.runner import MSessionRunner, SessionRunner
+        from arjuna.engine.session import MagicTestSession, YamlTestSession
         config = Arjuna.get_config()
         session_name = config.value(ArjunaOption.RUN_SESSION_NAME).lower()
         if session_name == "msession":
-            self.__testrunner = MSessionRunner(Arjuna.get_config(group_conf_name), dry_run=dry_run, im=im, em=em, it=it, et=et)
+            self.__session = MagicTestSession(Arjuna.get_config(group_conf_name), dry_run=dry_run, im=im, em=em, it=it, et=et)
         else:
-            self.__testrunner = SessionRunner(session_name, config, dry_run=dry_run)
+            self.__session = TestSession(session_name, config, dry_run=dry_run)
 
     def run(self):
-        self.__testrunner.run()
+        self.__session.run()
 
     def __create_config(self, config, name=None):
         config = Configuration(

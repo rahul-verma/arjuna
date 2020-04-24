@@ -78,7 +78,7 @@ class ArjunaSingleton:
         
         self.__project_root_dir = project_root_dir
 
-        from arjuna.engine.session import TestSessionController
+        from arjuna.engine.controller import TestSessionController
         self.__test_session = TestSessionController()
         run_id = run_id and run_id or "mrun"
         prefix = ""

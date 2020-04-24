@@ -7,16 +7,16 @@ Subpackages
 .. toctree::
 
    arjuna.engine.data
+   arjuna.engine.session
 
 Submodules
 ----------
 
 .. toctree::
 
+   arjuna.engine.controller
    arjuna.engine.logger
    arjuna.engine.meta
-   arjuna.engine.runner
-   arjuna.engine.session
    arjuna.engine.track
 
 Module contents
