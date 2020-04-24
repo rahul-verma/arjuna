@@ -38,18 +38,21 @@ Current Themes (In-Progress or Planned):
         - @track on Windows.
         - Bug reported by Stefan.
 
+0.9.23
+------
+
 
 0.9.22
 ------
-    - Moved all types of configurations to YAML.
-    - Simplified internal configuration process.
-    - Single file for each of the following:
-        - Data configurations
-        - Environment Configurations
-        - Session Configurations
-    - New Named Exceptions:
-        - UndefinedTestSessionError
-        - InvalidTestSessionDefError
+- Moved all types of configurations to YAML.
+- Simplified internal configuration process.
+- Single file for each of the following:
+    - Data configurations
+    - Environment Configurations
+    - Session Configurations
+- New Named Exceptions:
+    - UndefinedTestSessionError
+    - InvalidTestSessionDefError
 
 0.9.21
 ------
