@@ -26,13 +26,13 @@ from arjuna.tpi.constant import *
 
 class TestGroup:
 
-    def __init__(self, *, name, config, session, stage, dry_run=False, im=None, em=None, it=None, et=None):
+    def __init__(self, *, name, config, session, stage, im=None, em=None, it=None, et=None):
         self.__name = name
         self.__session = session
         self.__stage = stage
         self.__config = config
         self.__thname = None
-        self.__dry_run = dry_run
+        self.__dry_run = session.dry_run
         self.__filters = {'im' : im, 'em': em, 'it': it, 'et': et}
 
     @property
@@ -167,16 +167,29 @@ class TestGroup:
 
 class YamlTestGroup(TestGroup):
 
-    def __init__(self, *, group_yaml, config, dry_run=False):
+    def __init__(self, *, group_yaml, session, stage):
+        self.__config = stage.config
+        self.__filters = {
+            'im': None,
+            'em': None,
+            'it': None,
+            'et': None
+        }
+        self.__process_yaml(group_yaml)
+        super().__init__(name=group_yaml.name, config=self.__config, session=session, stage=stage, **self.__filters)
 
-        self.__filters = {}
-        super().__init__(name=name, config=config, dry_run=dry_run, **self.__filters)
-
+    def __process_yaml(self, group_yaml):
+        from arjuna import Arjuna
+        for gmd_name in group_yaml.section_names:
+            if gmd_name.lower() == "conf":
+                self.__config = Arjuna.get_config(group_yaml.get_value("conf"))
+            elif gmd_name.lower() in {'im', 'em', 'it', 'et'}:
+                self.__filters[gmd_name.lower()] = group_yaml.get_value(gmd_name)
 
 class MagicTestGroup(TestGroup):
 
-    def __init__(self, *, config, session, stage, dry_run=False, im=None, em=None, it=None, et=None):
-        super().__init__(name="mgroup", config=config, session=session, stage=stage, dry_run=dry_run, im=im, em=em, it=it, et=et)
+    def __init__(self, *, session, stage, im=None, em=None, it=None, et=None):
+        super().__init__(name="mgroup", config=stage.config, session=session, stage=stage, im=im, em=em, it=it, et=et)
 
 
 class TestGroups:

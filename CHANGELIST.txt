@@ -49,8 +49,7 @@ Current Themes (In-Progress or Planned):
         - Session Configurations
     - New Named Exceptions:
         - UndefinedTestSessionError
-
-
+        - InvalidTestSessionDefError
 
 0.9.21
 ------

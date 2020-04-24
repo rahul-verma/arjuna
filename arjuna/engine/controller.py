@@ -77,7 +77,7 @@ class TestSessionController:
         if session_name == "msession":
             self.__session = MagicTestSession(Arjuna.get_config(group_conf_name), dry_run=dry_run, im=im, em=em, it=it, et=et)
         else:
-            self.__session = TestSession(session_name, config, dry_run=dry_run)
+            self.__session = YamlTestSession(session_name, config, dry_run=dry_run)
 
     def run(self):
         self.__session.run()

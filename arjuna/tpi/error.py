@@ -130,3 +130,11 @@ class UndefinedTestSessionError(Exception):
 
     def __init__(self, *, session_name, sessions_file_path):
         super().__init__(f"No session definition exists for name >>{session_name}<< in sessions configuration file at {sessions_file_path}")
+
+class InvalidTestSessionDefError(Exception):
+    '''
+        Raised when there is an error in the definition of a test session.
+    '''
+
+    def __init__(self, *, session_name, sessions_file_path, msg):
+        super().__init__(f"Invalid session definition for >>{session_name}<< in sessions file {sessions_file_path}. {msg}")

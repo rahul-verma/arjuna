@@ -66,6 +66,9 @@ class Yaml:
     def from_str(cls, *, name, contents):
         return Yaml(name=name, pydict=yaml.safe_load(contents))
 
+    def as_str(self):
+        return yaml.dump(self.__ydict)
+
 
 
     

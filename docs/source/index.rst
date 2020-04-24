@@ -165,6 +165,8 @@ Hooks
 * :py:class:`PytestHooks <arjuna.tpi.hook.pytest.PytestHooks>`
     * :py:meth:`PytestHooks.add_screenshot_for_result <arjuna.tpi.hook.pytest.PytestHooks.add_screenshot_for_result>`
     * :py:meth:`PytestHooks.configure_group_for_test <arjuna.tpi.hook.pytest.PytestHooks.configure_group_for_test>`
+* Hook Objects
+    * :py:class:`Configurator <arjuna.tpi.hook.config.Configurator>`
 
 Helpers
 =======
@@ -205,6 +207,9 @@ Arjuna Exceptions
     * Configuration
         * :py:class:`UndefinedConfigError <arjuna.tpi.error.UndefinedConfigError>`
         * :py:class:`ConfigCreationError <arjuna.tpi.error.ConfigCreationError>`
+    * Test Session
+        * :py:class:`UndefinedTestSessionError <arjuna.tpi.error.UndefinedTestSessionError>`
+        * :py:class:`InvalidTestSessionDefError <arjuna.tpi.error.InvalidTestSessionDefError>`
     * Gui Automation
         * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.error.GuiWidgetForLabelPresentError>`
         * :py:class:`GuiWidgetPresentError <arjuna.tpi.error.GuiWidgetPresentError>`
