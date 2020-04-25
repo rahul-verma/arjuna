@@ -27,9 +27,9 @@ simple:
 
 include_simple_stages:
 
-  include:
-    - stage1
-    - stage2
+  include: 
+    - simple_stage_1
+    - simple_stage_2
 
 include_ext_stages:
 

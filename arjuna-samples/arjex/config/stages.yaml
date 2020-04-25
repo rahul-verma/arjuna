@@ -1,4 +1,4 @@
-simple1:
+simple_stage_1:
   threads: 2
   groups:
     gp1:
@@ -10,7 +10,7 @@ simple1:
       im:
         - check_delegate_2
 
-simple2:
+simple_stage_2:
   threads: 2
   groups:
     gp1:

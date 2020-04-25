@@ -37,9 +37,24 @@ Current Themes (In-Progress or Planned):
     - Investigate:
         - @track on Windows.
         - Bug reported by Stefan.
+    - Dynamic session, stage and group:
+        - run-session
+            - stage switch multiples can be provided.
+        - run-stage
+            - -group switch multiples can be provided.
+        - run-selected and run-group can be treated as aliases.
+            - -i*, -e* switches to be converted to multiple switchs with nargs.
+        - Provision for vars to create dyanmic Sessions, Stages and Groups.
+            : -var command line switch can parameterize session for run-session, stage for run-stage, group for run-group
+    - common.yaml in Gui Namespace (fallback from page GNS.)
 
 0.9.23
 ------
+- Test Stage
+    - Can be defined in stages.yaml file.
+
+- Test Session
+    - Rather than directly defining stages in session definition, you can use `include:` and provide list of stage names.
 
 
 0.9.22

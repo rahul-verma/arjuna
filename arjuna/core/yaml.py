@@ -6,15 +6,20 @@ from arjuna.core.error import YamlError, YamlUndefinedSectionError
 
 class Yaml:
 
-    def __init__(self, *, name, pydict):
+    def __init__(self, *, name, pydict, file_path=None):
         self.__name = name
         self.__ydict = pydict is not None and pydict or dict()
         self.__sections = tuple(self.__ydict.keys())
         self.__ydict = CIStringDict(self.__ydict)
+        self.__file_path = file_path
 
     @property
     def name(self):
         return self.__name
+
+    @property
+    def file_path(self):
+        return self.__file_path
 
     def is_empty(self):
         return not self.__ydict
@@ -25,9 +30,12 @@ class Yaml:
             raise YamlError(f"Section content must be a dictionary. Found content >>{val}<< in {name} section.")
         return Yaml(name=name, pydict=val)
 
-    def get_value(self, name, *, strict=True):
+    def get_value(self, name, *, strict=True, as_yaml_str=False):
         if self.has_section(name):
-            return self.__ydict[name]
+            if as_yaml_str:
+                return yaml.dump(self.__ydict[name])
+            else:
+                return self.__ydict[name]
         else:
             if strict:
                 raise YamlUndefinedSectionError(f"Yaml object does not have a section with the name: {name}")
@@ -60,7 +68,7 @@ class Yaml:
         f = open(file_path, "r")
         ydict = yaml.load(f, Loader=yaml.SafeLoader)
         f.close()
-        return Yaml(name=yaml_name, pydict=ydict)
+        return Yaml(name=yaml_name, pydict=ydict, file_path=file_path)
 
     @classmethod
     def from_str(cls, *, name, contents):
