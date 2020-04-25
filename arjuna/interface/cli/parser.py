@@ -64,6 +64,7 @@ class RunParser(Parser):
         self.parser.add_argument('-o', '--output-formats', dest="report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
         self.parser.add_argument('--update', dest="static.rid", action='store_true', help = 'Will result in overwriting of report files. Useful during script development.')
         self.parser.add_argument('--dry-run', dest="dry_run", metavar="dry_run_type", type=dry_run_type, help='Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. SHOW_TESTS - enumerate tests. SHOW_PLAN - enumerates tests and fixtures. RUN_FIXTURES - Executes setup/teardown fixtures and emuerates tests.')
+        self.parser.add_argument('-c', '--ref-conf', dest="ref_conf", metavar="config_name", type=str, help="Reference Configuration object name for this run. Default is 'ref'")
         self.parser.add_argument('-ao', '--arjuna-option', dest="ao",
                                  nargs=2,
                                  action='append',
@@ -81,7 +82,6 @@ class RunDefaultGroupParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-c', '--conf', dest="group.conf.name", metavar="config_name", type=str, default="ref", help='Configuration object name for this run.')
 
     def process(self, arg_dict):
         pass
@@ -90,11 +90,22 @@ class SessionParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument("-s", "--session-name", dest="run.session.name", metavar="session_def_name", type=partial(lname_check, "Run ID"), help = 'Name of session configuration file. Corresponding <sessionname>.yaml file must exist in <Project Root>/config/session directory')
+        self.parser.add_argument("-s", "--session-name", dest="run.session.name", metavar="session_def_name", type=partial(lname_check, "Session Name"), help = 'Name of a defined session in test sessions configuration file in <Project Root>/config/sessions.yaml file.')
 
     def process(self, arg_dict):
         if arg_dict['run.session.name'] is None:
             print("Fatal Error in CLI processing. You must provide a valid session name using -s or --session-name switch", file=sys.stderr)
+            sys.exit(1)
+
+class StageParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument("-s", "--stage-name", dest="stage_name", metavar="stage_name", type=partial(lname_check, "Stage Name"), help = 'Name of a defined stage in test stages configuration file in <Project Root>/config/stages.yaml file.')
+
+    def process(self, arg_dict):
+        if arg_dict['stage_name'] is None:
+            print("Fatal Error in CLI processing. You must provide a valid test stage name using -s or --stage-name switch", file=sys.stderr)
             sys.exit(1)
 
 class PickersParser(Parser):

@@ -50,6 +50,8 @@ class BaseTestSession:
             log_info("Executing stage: {} ...".format(stage.name))
             stage.run()
             log_info("Finished Executing stage: {} ...".format(stage.name))
+            import time
+            time.sleep(2)
 
 
 class MagicTestSession(BaseTestSession):
@@ -109,23 +111,39 @@ class YamlTestSession(BaseTestSession):
         except YamlUndefinedSectionError as e:
             raise UndefinedTestGroupError(name=name, file_path=cls.__GROUPS_YAML.file_path)
 
-    def __init__(self, name, config, dry_run=False):
-        super().__init__(name, config, dry_run=dry_run)
+    def __init__(self, name, ref_config_name, dry_run=False):
         self.__yaml = None
         self.load_sessions_file()
         self.load_stages_file()
         self.load_groups_file()
         self.__yaml = self.get_session_yaml(name)
-        self.__load()
 
-    def __load(self):
+        from arjuna import Arjuna
+        self.__config = None
+        if ref_config_name is None:
+            self.__config = Arjuna.get_config()
+        else:
+            self.__config = Arjuna.get_config(ref_config_name)
+        self.__load_metadata()
+        super().__init__(name, self.__config, dry_run=dry_run)
+        self.__load_stages()
+
+    def __load_metadata(self):
+        for section_name in self.__yaml.section_names:
+            section_name = section_name.lower()
+            if section_name.lower() not in {"groups", "include"}:
+                if section_name.lower() == "conf":
+                    from arjuna import Arjuna
+                    self.__config = Arjuna.get_config(self.__yaml.get_value("conf"))
+
+    def __load_stages(self):
         from arjuna import Arjuna
 
-        if "stages" not in self.__yaml.section_names and "include" not in self.__yaml.section_names:
+        if "include" not in self.__yaml.section_names:
             raise InvalidTestSessionDefError(
                             session_name=self.name, 
                             sessions_file_path=cls.__SESSIONS_YAML.file_path, 
-                            msg="It must contain 'include' and/or 'stages' section. Section names found: {}".format(tuple(self.__yaml.section_names))
+                            msg="It must contain 'include' section. Section names found: {}".format(tuple(self.__yaml.section_names))
             )
 
         for section_name in  self.__yaml.section_names:
@@ -139,15 +157,15 @@ class YamlTestSession(BaseTestSession):
                     )
                 for stage_name in stage_names:
                     self.add_stage(YamlTestStage(stage_yaml=self.__STAGES_YAML.get_section(stage_name), session=self))
-            elif section_name.lower() == "stages":
-                stages_yaml = self.__yaml.get_section(section_name)
-                stages = stages_yaml.section_names
-                if not stages:
-                    raise InvalidTestSessionDefError(
-                                    session_name=self.name, 
-                                    sessions_file_path=self.__SESSIONS_YAML.file_path, 
-                                    msg="'stages' section must define atleast one stage."
-                    )
+            # elif section_name.lower() == "stages":
+            #     stages_yaml = self.__yaml.get_section(section_name)
+            #     stages = stages_yaml.section_names
+            #     if not stages:
+            #         raise InvalidTestSessionDefError(
+            #                         session_name=self.name, 
+            #                         sessions_file_path=self.__SESSIONS_YAML.file_path, 
+            #                         msg="'stages' section must define atleast one stage."
+            #         )
                 
-                for stage in stages:
-                    self.add_stage(YamlTestStage(stage_yaml=stages_yaml.get_section(stage), session=self))
+            #     for stage in stages:
+            #         self.add_stage(YamlTestStage(stage_yaml=stages_yaml.get_section(stage), session=self))

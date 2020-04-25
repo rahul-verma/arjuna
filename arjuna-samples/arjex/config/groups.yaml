@@ -11,9 +11,9 @@ gp2:
 gp3:
   conf: data1_env1
   it:
-    - check_drive_with
+    - check_delegate_1
 
 gp4:
   conf: data2_env2
   im:
-    - check_l10n
+    - check_delegate_2

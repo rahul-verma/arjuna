@@ -1,9 +1,6 @@
 Following is the list of critical additions and updates for a given released version:
 
 Current Themes (In-Progress or Planned):
-    - Add provisions for:
-        - Definitions of reusable stages, include construct in session definition
-        - Definitions of reusable groups, include construct in group definition
     - Doc updates:
         - Update exiting docs
         - Test Fixture docs.
@@ -51,11 +48,13 @@ Current Themes (In-Progress or Planned):
 0.9.23
 ------
 - Test Groups
-    - Can be defined in groups.yaml file.
-- Test Stages
-    - Can be defined in stages.yaml file.
-- Test Sessions
-    - Rather than directly defining stages in session definition, you can use `include:` and provide list of stage names.
+    - are defined groups.yaml file.
+- Test Stages 
+    - are defined in stages.yaml file.
+    - use `include:` and provide list of group names.
+- Test Sessions 
+    - are defined in sessions.yaml file.
+    - use `include:` and provide list of stage names.
 - New Named Exceptions:
     - UndefinedTestStageError, InvalidTestStageDefError
     - UndefinedTestGroupError

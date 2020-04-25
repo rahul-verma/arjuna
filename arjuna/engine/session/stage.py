@@ -97,12 +97,12 @@ class YamlTestStage(TestStage):
                     self.__config = Arjuna.get_config(stage_yaml.get_value("conf"))
   
     def __load_groups(self, stage_yaml):
-        if "groups" not in stage_yaml.section_names and "include" not in stage_yaml.section_names:
+        if "include" not in stage_yaml.section_names:
             raise InvalidTestStageDefError(
                             session_name=self.session.name, 
                             stage_name=self.name, 
                             stages_file_path=stage_yaml.file_path, 
-                            msg="It must contain 'include' and/or 'groups' section. Section names found: {}".format(tuple(stage_yaml.section_names))
+                            msg="It must contain 'include' section. Section names found: {}".format(tuple(stage_yaml.section_names))
             )
 
         for section_name in stage_yaml.section_names:
@@ -117,15 +117,15 @@ class YamlTestStage(TestStage):
                     )
                 for group_name in group_names:
                     self.add_group(YamlTestGroup(group_yaml=self.session.get_group_yaml(group_name), session=self.session, stage=self))
-            elif section_name.lower() == "groups":
-                section_name = section_name.lower()
-                if section_name.lower() == section_name:
-                    groups = stage_yaml.get_section(section_name)
-                    if not groups.section_names:
-                        raise Exception("Invalid session file {}. 'groups' must contain atlease one group section.".format(stage_yaml.file_path))
-                    for group_name in groups.section_names:
-                        group_yaml = groups.get_section(group_name)
-                        self.add_group(YamlTestGroup(group_yaml=group_yaml, session=self.session, stage=self))
+            # elif section_name.lower() == "groups":
+            #     section_name = section_name.lower()
+            #     if section_name.lower() == section_name:
+            #         groups = stage_yaml.get_section(section_name)
+            #         if not groups.section_names:
+            #             raise Exception("Invalid session file {}. 'groups' must contain atlease one group section.".format(stage_yaml.file_path))
+            #         for group_name in groups.section_names:
+            #             group_yaml = groups.get_section(group_name)
+            #             self.add_group(YamlTestGroup(group_yaml=group_yaml, session=self.session, stage=self))
 
 class MagicTestStage(TestStage):
 

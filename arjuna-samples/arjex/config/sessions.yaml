@@ -1,38 +1,11 @@
-simple:
-  stages:
-
-    stage1:
-      threads: 2
-      groups:
-        gp1:
-          conf: data1_env1
-          im:
-            - check_delegate_1
-        gp2:
-          conf: data2_env2
-          im:
-            - check_delegate_2
-
-    stage2:
-      threads: 2
-      groups:
-        gp3:
-          conf: data1_env1
-          it:
-            - check_drive_with
-        gp4:
-          conf: data2_env2
-          im:
-            - check_l10n
-
-include_simple_stages:
+simple_stages:
 
   include: 
     - simple_stage_1
     - simple_stage_2
 
-include_ext_stages:
+threaded_stages:
 
-  include:
-    - stage_gp1_gp2
-    - stage_gp3_gp4
+  include: 
+    - threaded_stage_1
+    - threaded_stage_2

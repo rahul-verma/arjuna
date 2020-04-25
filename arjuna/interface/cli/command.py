@@ -25,6 +25,7 @@ import logging
 import traceback
 import json
 import sys
+import abc
 
 from arjuna.tpi.constant import *
 from arjuna.core.constant import *
@@ -137,7 +138,7 @@ class CreateProject(Command):
         (FileObjectType.FILE, "lib/__init__.py"),
         (FileObjectType.DIR, "lib/fixture"),
         (FileObjectType.FILE, "lib/fixture/__init__.py"),
-        (FileObjectType.FILE, "lib/fixture/session.py"),
+        (FileObjectType.FILE, "lib/fixture/group.py"),
         (FileObjectType.FILE, "lib/fixture/module.py"),
         (FileObjectType.FILE, "lib/fixture/test.py"),
     )
@@ -219,10 +220,11 @@ class __RunCommand(Command):
         runid = arg_dict.pop("run.id")
         static_rid = arg_dict.pop("static.rid")
         self.dry_run = arg_dict.pop("dry_run")
-        if "group.conf.name" in arg_dict:
-            self.group_conf_name = arg_dict.pop("group.conf.name")
-        else:
-            self.group_conf_name = None
+        
+        if "ref_conf" in arg_dict:
+            self.ref_conf_name = arg_dict.pop("ref_conf")
+
+        self.pop_command_args(arg_dict)
 
         Arjuna.init(project_root_dir, CliArgsConfig(arg_dict), runid, static_rid=static_rid)
 
@@ -233,17 +235,22 @@ class __RunCommand(Command):
         py_3rdparty_dir = Arjuna.get_config().value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR)
         sys.path.append(py_3rdparty_dir)
 
+    def pop_command_args(self, arg_dict):
+        pass
+
 
 class RunProject(__RunCommand):
     def __init__(self, subparsers, parents):
         super().__init__(subparsers, 'run-project', parents, "Run all tests in an Arjuna Test Project in a single thread.")
+        self.ref_conf_name = None
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
         from arjuna import Arjuna
         session = Arjuna.get_test_session()
-        session.load_tests(dry_run=self.dry_run, group_conf_name=self.group_conf_name)
+        session.load_tests(dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
+
 
 class RunSession(__RunCommand):
     def __init__(self, subparsers, parents):
@@ -253,13 +260,15 @@ class RunSession(__RunCommand):
         super().execute(arg_dict)
         from arjuna import Arjuna
         session = Arjuna.get_test_session()
-        session.load_tests(dry_run=self.dry_run, group_conf_name=self.group_conf_name)
+        session.load_tests(dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
+
 
 class RunSelected(__RunCommand):
 
     def __init__(self, subparsers, parents):
         super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified in a single thread.")
+        self.ref_conf_name = None
 
     def execute(self, arg_dict):
         pickers_dict = dict()
@@ -298,6 +307,6 @@ class RunSelected(__RunCommand):
 
         from arjuna import Arjuna
         session = Arjuna.get_test_session()
-        session.load_tests(**pickers_dict, dry_run=self.dry_run, group_conf_name=self.group_conf_name)
+        session.load_tests(**pickers_dict, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
 
