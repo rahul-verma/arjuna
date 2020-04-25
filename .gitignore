@@ -86,9 +86,7 @@ arjuna.egg-info/**
 build/**
 dist/**
 
-arjuna-samples/**/report.xml
-arjuna-samples/**/report.html
-arjuna-samples/**/arjuna.log
+arjuna-samples/**/report/**
 arjuna-samples/**/*.png
 arjuna-samples/**/chromedriver
 arjuna-samples/**/geckodriver
