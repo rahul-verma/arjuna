@@ -52,9 +52,13 @@ Current Themes (In-Progress or Planned):
 - Test Stages 
     - are defined in stages.yaml file.
     - use `include:` and provide list of group names.
+    - A stage can be run from command line.
 - Test Sessions 
     - are defined in sessions.yaml file.
     - use `include:` and provide list of stage names.
+    - A session can be run from command line.
+- CLI enhancements:
+    - `run-stage` command added. Using it you can directly run a defined test stage.
 - New Named Exceptions:
     - UndefinedTestStageError, InvalidTestStageDefError
     - UndefinedTestGroupError

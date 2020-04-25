@@ -254,7 +254,7 @@ class RunProject(__RunCommand):
 
 class RunSession(__RunCommand):
     def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-session', parents, "Run tests as per the session configuration file.")
+        super().__init__(subparsers, 'run-session', parents, "Run tests as per the named test session definition in sessions.yaml.")
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
@@ -262,6 +262,21 @@ class RunSession(__RunCommand):
         session = Arjuna.get_test_session()
         session.load_tests(dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
+
+class RunStage(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-stage', parents, "Run tests as per the named test stage definition in stages.yaml.")
+        self.__stage_name = None
+
+    def execute(self, arg_dict):
+        super().execute(arg_dict)
+        from arjuna import Arjuna
+        session = Arjuna.get_test_session()
+        session.load_tests_for_stage(stage_name=self.__stage_name, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
+        session.run()
+
+    def pop_command_args(self, arg_dict):
+        self.__stage_name = arg_dict.pop("stage_name")
 
 
 class RunSelected(__RunCommand):

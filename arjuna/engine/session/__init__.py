@@ -62,6 +62,13 @@ class MagicTestSession(BaseTestSession):
         stage = MagicTestStage(session=self, im=im, em=em, it=it, et=et)
         self.add_stage(stage)
 
+class MagicTestSessionForStage(BaseTestSession):
+
+    def __init__(self, stage_name, config, dry_run=False):
+        super().__init__("msession", config, dry_run=dry_run)
+
+        YamlTestSession.load_session_defs()
+        self.add_stage(YamlTestStage(stage_yaml=YamlTestSession.get_stage_yaml(stage_name), session=self))
 
 class YamlTestSession(BaseTestSession):
 
@@ -70,7 +77,7 @@ class YamlTestSession(BaseTestSession):
     __GROUPS_YAML = None
 
     @classmethod
-    def load_sessions_file(cls):
+    def __load_sessions_file(cls):
         from arjuna import C
         if cls.__SESSIONS_YAML is None:
             yaml_file_path = C(ArjunaOption.CONF_SESSIONS_FILE)
@@ -84,7 +91,7 @@ class YamlTestSession(BaseTestSession):
             raise UndefinedTestSessionError(name=name, file_path=cls.__SESSIONS_YAML.file_path)
 
     @classmethod
-    def load_stages_file(cls):
+    def __load_stages_file(cls):
         from arjuna import C
         if cls.__STAGES_YAML is None:
             yaml_file_path = C(ArjunaOption.CONF_STAGES_FILE)
@@ -98,7 +105,7 @@ class YamlTestSession(BaseTestSession):
             raise UndefinedTestStageError(name=name, file_path=cls.__STAGES_YAML.file_path)
 
     @classmethod
-    def load_groups_file(cls):
+    def __load_groups_file(cls):
         from arjuna import C
         if cls.__GROUPS_YAML is None:
             yaml_file_path = C(ArjunaOption.CONF_GROUPS_FILE)
@@ -111,11 +118,15 @@ class YamlTestSession(BaseTestSession):
         except YamlUndefinedSectionError as e:
             raise UndefinedTestGroupError(name=name, file_path=cls.__GROUPS_YAML.file_path)
 
+    @classmethod
+    def load_session_defs(cls):
+        cls.__load_sessions_file()
+        cls.__load_stages_file()
+        cls.__load_groups_file()
+
     def __init__(self, name, ref_config_name, dry_run=False):
         self.__yaml = None
-        self.load_sessions_file()
-        self.load_stages_file()
-        self.load_groups_file()
+        self.load_session_defs()
         self.__yaml = self.get_session_yaml(name)
 
         from arjuna import Arjuna
@@ -156,7 +167,7 @@ class YamlTestSession(BaseTestSession):
                                     msg="'include' section can only contain a YAML list of stage names. Found:\n{}:\n {}".format(section_name, self.__yaml.get_value(section_name, as_yaml_str=True))
                     )
                 for stage_name in stage_names:
-                    self.add_stage(YamlTestStage(stage_yaml=self.__STAGES_YAML.get_section(stage_name), session=self))
+                    self.add_stage(YamlTestStage(stage_yaml=self.get_stage_yaml(stage_name), session=self))
             # elif section_name.lower() == "stages":
             #     stages_yaml = self.__yaml.get_section(section_name)
             #     stages = stages_yaml.section_names

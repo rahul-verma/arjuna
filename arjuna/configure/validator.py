@@ -247,7 +247,6 @@ class Validator:
             try:
                 return parse_url(input).scheme in {'http', 'https'}
             except Exception as e:
-                print(e)
                 return False
         if  type(input) is not str or not check_scheme():
             cls.raise_exc(input)

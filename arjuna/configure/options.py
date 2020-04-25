@@ -49,7 +49,6 @@ class Options(metaclass=abc.ABCMeta):
                     validator_name, validator = self._get_validator_for(option_name)
                     self.__options[option_key] = validator(option_value)
         except Exception as e:
-            print(e)
             raise Exception("Config option value <{}>(type:{}) for <{}> option did not pass the validation check: [{}]".format(
                 option_value, type(option_value), option_name, validator_name)
             )
@@ -98,7 +97,6 @@ class ArjunaOptions(Options):
             else:
                 return name
         except Exception as e:
-            print(e)
             raise Exception("Config option <{}> is not a valid ArjunaOption constant".format(name))
 
     @classmethod
@@ -165,7 +163,6 @@ class UserOptions(Options):
         try:
             return name.upper().strip().replace(".", "_")
         except Exception as e:
-            print(e)
             raise Exception("Config option <{}> is not a valid ArjunaOption constant".format(name))
 
     @classmethod

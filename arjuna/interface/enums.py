@@ -21,6 +21,6 @@ class CommandEnum(Enum):
     CREATE_PROJECT = auto()
     RUN_PROJECT = auto()
     RUN_SESSION = auto()
+    RUN_STAGE = auto()
     RUN_GROUP = auto()
     RUN_SELECTED = auto()
-    LAUNCH_SETU = auto()

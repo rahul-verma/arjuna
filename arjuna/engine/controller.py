@@ -69,18 +69,27 @@ class TestSessionController:
             self.__add_to_map(run_env_conf)
         return ref_conf
 
+    def __msession_config(self, ref_conf_name):
+        from arjuna import Arjuna
+        if ref_conf_name is None:
+            ref_conf_name = "ref"
+        return Arjuna.get_config(ref_conf_name)
+
     def load_tests(self, *, dry_run=False, ref_conf_name=None, im=None, em=None, it=None, et=None):
         from arjuna import Arjuna
         from arjuna.engine.session import MagicTestSession, YamlTestSession
         
         session_name = Arjuna.get_config().value(ArjunaOption.RUN_SESSION_NAME).lower()
         if session_name == "msession":
-            if ref_conf_name is None:
-                ref_conf_name = "ref"
-            ref_config = Arjuna.get_config(ref_conf_name)
+            ref_config = self.__msession_config(ref_conf_name)
             self.__session = MagicTestSession(ref_config, dry_run=dry_run, im=im, em=em, it=it, et=et)
         else:
             self.__session = YamlTestSession(session_name, ref_conf_name, dry_run=dry_run)
+
+    def load_tests_for_stage(self, *, stage_name, dry_run=False, ref_conf_name=None):
+        ref_config = self.__msession_config(ref_conf_name)
+        from arjuna.engine.session import MagicTestSessionForStage
+        self.__session = MagicTestSessionForStage(stage_name, ref_config, dry_run=dry_run)
 
     def run(self):
         self.__session.run()

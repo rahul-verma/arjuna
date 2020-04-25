@@ -115,8 +115,9 @@ class YamlTestStage(TestStage):
                             stages_file_path=stage_yaml.file_path, 
                             msg="'include' section can only contain a YAML list of group names. Found:\n{}:\n {}".format(section_name, stage_yaml.get_value(section_name, as_yaml_str=True))
                     )
+                from arjuna.engine.session import YamlTestSession
                 for group_name in group_names:
-                    self.add_group(YamlTestGroup(group_yaml=self.session.get_group_yaml(group_name), session=self.session, stage=self))
+                    self.add_group(YamlTestGroup(group_yaml=YamlTestSession.get_group_yaml(group_name), session=self.session, stage=self))
             # elif section_name.lower() == "groups":
             #     section_name = section_name.lower()
             #     if section_name.lower() == section_name:
