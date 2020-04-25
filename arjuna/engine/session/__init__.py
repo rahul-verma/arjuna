@@ -75,11 +75,25 @@ class YamlTestSession(BaseTestSession):
             cls.__SESSIONS_YAML = Yaml.from_file(file_path=yaml_file_path)
 
     @classmethod
+    def get_session_yaml(cls, name):
+        try:
+            return cls.__SESSIONS_YAML.get_section(name)
+        except YamlUndefinedSectionError as e:
+            raise UndefinedTestSessionError(name=name, file_path=cls.__SESSIONS_YAML.file_path)
+
+    @classmethod
     def load_stages_file(cls):
         from arjuna import C
         if cls.__STAGES_YAML is None:
             yaml_file_path = C(ArjunaOption.CONF_STAGES_FILE)
             cls.__STAGES_YAML = Yaml.from_file(file_path=yaml_file_path)
+
+    @classmethod
+    def get_stage_yaml(cls, name):
+        try:
+            return cls.__STAGES_YAML.get_section(name)
+        except YamlUndefinedSectionError as e:
+            raise UndefinedTestStageError(name=name, file_path=cls.__STAGES_YAML.file_path)
 
     @classmethod
     def load_groups_file(cls):
@@ -88,16 +102,20 @@ class YamlTestSession(BaseTestSession):
             yaml_file_path = C(ArjunaOption.CONF_GROUPS_FILE)
             cls.__GROUPS_YAML = Yaml.from_file(file_path=yaml_file_path)
 
+    @classmethod
+    def get_group_yaml(cls, name):
+        try:
+            return cls.__GROUPS_YAML.get_section(name)
+        except YamlUndefinedSectionError as e:
+            raise UndefinedTestGroupError(name=name, file_path=cls.__GROUPS_YAML.file_path)
+
     def __init__(self, name, config, dry_run=False):
         super().__init__(name, config, dry_run=dry_run)
         self.__yaml = None
         self.load_sessions_file()
         self.load_stages_file()
         self.load_groups_file()
-        try:
-            self.__yaml = self.__SESSIONS_YAML.get_section(name)
-        except YamlUndefinedSectionError as e:
-            raise UndefinedTestSessionError(session_name=name, sessions_file_path=self.__SESSIONS_YAML.file_path)
+        self.__yaml = self.get_session_yaml(name)
         self.__load()
 
     def __load(self):

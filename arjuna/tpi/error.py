@@ -128,8 +128,8 @@ class UndefinedTestSessionError(Exception):
         Raised when there is no definition for a name used as test session name.
     '''
 
-    def __init__(self, *, session_name, sessions_file_path):
-        super().__init__(f"No session definition exists for name >>{session_name}<< in sessions configuration file at {sessions_file_path}")
+    def __init__(self, *, name, file_path):
+        super().__init__(f"No session definition exists for name >>{name}<< in sessions configuration file at {file_path}")
 
 class InvalidTestSessionDefError(Exception):
     '''
@@ -138,3 +138,29 @@ class InvalidTestSessionDefError(Exception):
 
     def __init__(self, *, session_name, sessions_file_path, msg):
         super().__init__(f"Invalid session definition for >>{session_name}<< in sessions file {sessions_file_path}. {msg}")
+
+
+class UndefinedTestStageError(Exception):
+    '''
+        Raised when there is no definition for a name used as test stage name.
+    '''
+
+    def __init__(self, *, name, file_path):
+        super().__init__(f"No stage definition exists for name >>{name}<< in stages configuration file at {file_path}")
+
+
+class InvalidTestStageDefError(Exception):
+    '''
+        Raised when there is an error in the definition of a test stage.
+    '''
+
+    def __init__(self, *, session_name, stage_name, stages_file_path, msg):
+        super().__init__(f"Invalid stage definition for >>{stage_name}<< in stages file {stages_file_path}. It is referred in {session_name}. {msg}")
+
+class UndefinedTestGroupError(Exception):
+    '''
+        Raised when there is no definition for a name used as test group name.
+    '''
+
+    def __init__(self, *, name, file_path):
+        super().__init__(f"No group definition exists for name >>{name}<< in groups configuration file at {file_path}")

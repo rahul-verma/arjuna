@@ -28,7 +28,7 @@ class Yaml:
         val = self.get_value(name, strict=strict)
         if val is not None and type(val) is not dict:
             raise YamlError(f"Section content must be a dictionary. Found content >>{val}<< in {name} section.")
-        return Yaml(name=name, pydict=val)
+        return Yaml(name=name, pydict=val, file_path=self.file_path)
 
     def get_value(self, name, *, strict=True, as_yaml_str=False):
         if self.has_section(name):

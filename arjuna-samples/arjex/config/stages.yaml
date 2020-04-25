@@ -24,14 +24,12 @@ simple_stage_2:
 
 stage_gp1_gp2:
   threads: 2
-  groups:
-    include:
-      - gp1
-      - gp2
+  include:
+    - gp1
+    - gp2
 
 stage_gp3_gp4:
   threads: 2
-  groups:
-    include:
-      - gp3
-      - gp4
+  include:
+    - gp3
+    - gp4

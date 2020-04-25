@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from arjuna.tpi.error import *
+
 from .group import TestGroups, YamlTestGroup, MagicTestGroup
 from .runner import TestGroupRunner
 
@@ -85,12 +87,9 @@ class YamlTestStage(TestStage):
         self.__load_groups(stage_yaml)
 
     def __load_yaml_meta_data(self, stage_yaml):
-        if "groups" not in stage_yaml.section_names:
-            raise Exception("Invalid stage Yaml for stage with name {}. It must contain 'groups' section.".format(stage_yaml.as_str()))
-
         for section_name in stage_yaml.section_names:
             section_name = section_name.lower()
-            if section_name.lower() != "groups":
+            if section_name.lower() not in {"groups", "include"}:
                 if section_name == "threads":
                     self.__num_threads = int(stage_yaml.get_value(section_name))
                 elif section_name.lower() == "conf":
@@ -98,15 +97,35 @@ class YamlTestStage(TestStage):
                     self.__config = Arjuna.get_config(stage_yaml.get_value("conf"))
   
     def __load_groups(self, stage_yaml):
+        if "groups" not in stage_yaml.section_names and "include" not in stage_yaml.section_names:
+            raise InvalidTestStageDefError(
+                            session_name=self.session.name, 
+                            stage_name=self.name, 
+                            stages_file_path=stage_yaml.file_path, 
+                            msg="It must contain 'include' and/or 'groups' section. Section names found: {}".format(tuple(stage_yaml.section_names))
+            )
+
         for section_name in stage_yaml.section_names:
-            section_name = section_name.lower()
-            if section_name.lower() == "groups":
-                groups = stage_yaml.get_section(section_name)
-                if not groups.section_names:
-                    raise Exception("Invalid session file {}. 'groups' must contain atlease one group section.".format(self.__yaml_file_path))
-                for group_name in groups.section_names:
-                    group_yaml = groups.get_section(group_name)
-                    self.add_group(YamlTestGroup(group_yaml=group_yaml, session=self.session, stage=self))
+            if section_name.lower() == "include":
+                group_names = stage_yaml.get_value(section_name)
+                if type(group_names) is not list or set([type(s) is str for s in group_names]) != {True}:
+                    raise InvalidTestStageDefError(
+                            session_name=self.session.name, 
+                            stage_name=self.name, 
+                            stages_file_path=stage_yaml.file_path, 
+                            msg="'include' section can only contain a YAML list of group names. Found:\n{}:\n {}".format(section_name, stage_yaml.get_value(section_name, as_yaml_str=True))
+                    )
+                for group_name in group_names:
+                    self.add_group(YamlTestGroup(group_yaml=self.session.get_group_yaml(group_name), session=self.session, stage=self))
+            elif section_name.lower() == "groups":
+                section_name = section_name.lower()
+                if section_name.lower() == section_name:
+                    groups = stage_yaml.get_section(section_name)
+                    if not groups.section_names:
+                        raise Exception("Invalid session file {}. 'groups' must contain atlease one group section.".format(stage_yaml.file_path))
+                    for group_name in groups.section_names:
+                        group_yaml = groups.get_section(group_name)
+                        self.add_group(YamlTestGroup(group_yaml=group_yaml, session=self.session, stage=self))
 
 class MagicTestStage(TestStage):
 

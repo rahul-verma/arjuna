@@ -50,11 +50,15 @@ Current Themes (In-Progress or Planned):
 
 0.9.23
 ------
-- Test Stage
+- Test Groups
+    - Can be defined in groups.yaml file.
+- Test Stages
     - Can be defined in stages.yaml file.
-
-- Test Session
+- Test Sessions
     - Rather than directly defining stages in session definition, you can use `include:` and provide list of stage names.
+- New Named Exceptions:
+    - UndefinedTestStageError, InvalidTestStageDefError
+    - UndefinedTestGroupError
 
 
 0.9.22
