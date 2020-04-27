@@ -27,7 +27,7 @@ from arjuna.tpi.tracker import track
 @track("debug")
 class NodeLocator:
     '''
-        Locator for finding an XML Node in an `XmlNode`.
+        Locator for finding an XML Node in an **XmlNode**.
 
         Keyword Arguments:
             tag: (Optional) Tag of the node
@@ -72,7 +72,7 @@ class XmlNode:
         Represents a single node in a parsed XML.
 
         Arguments:
-            node: `lxml` Element object.
+            node: **lxml** Element object.
     '''
 
     def __init__(self, node):
@@ -81,7 +81,7 @@ class XmlNode:
     @property
     def xml_node(self):
         '''
-            Wrapped `lxml` Element
+            Wrapped **lxml** Element
 
             Not supposed to be used directly.
         '''

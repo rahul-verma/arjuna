@@ -49,13 +49,13 @@ class Gui(AsserterMixIn):
     '''
         Represents a GUI.
 
-        This is the base class for `GuiApp`, `GuiPage`, `GuiSection` and `GuiDialog`
+        This is the base class for **GuiApp**, **GuiPage**, **GuiSection** and **GuiDialog**
 
         Keyword Arguments:
             config: Configuration object.
             ext_config: (Not Supported Yet) AutomatorExtendedConfig object for underlying GUI automator.
             label: Label for the GuiApp. If not provided, the class name is used as the label.
-            gns_dir: Relative Root Directory for GNS file(s) associated with the GuiApp. Default is `<ProjectRootDirectory>/guiauto/namespace`. If provided, it is considered relative to the namespace directory.
+            gns_dir: Relative Root Directory for GNS file(s) associated with the GuiApp. Default is **<ProjectRootDirectory>/guiauto/namespace**. If provided, it is considered relative to the namespace directory.
     '''
 
     def __init__(self, *, gns_dir: str=None, config: 'Configuration'=None, ext_config: 'AutomatorExtendedConfig'=None, label: str=None):

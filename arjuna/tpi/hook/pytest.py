@@ -19,7 +19,7 @@ from itertools import cycle
 
 class PytestHooks:
     '''
-        Easy hooks to be used in `pytest` configuration file: `conftest.py` placed under `<Project_Root_Dir/test` directory in test project.
+        Easy hooks to be used in **pytest** configuration file: **conftest.py** placed under **<Project_Root_Dir/test** directory in test project.
     '''
 
     @classmethod
@@ -56,23 +56,23 @@ class PytestHooks:
         '''
             Automatically add screenshot to HTML Report File.
 
-            To be used in `pytest_runtest_makereport` hook in `conftest.py`.
+            To be used in **pytest_runtest_makereport** hook in **conftest.py**.
 
             Args:
-                item: `pytest`'s Item object
-                result: `pytest`'s TestReport object.
+                item: **pytest**'s Item object
+                result: **pytest**'s TestReport object.
 
             Keyword Arguments:
                 ignore_passed: (Optional) If set to True, screenshot is taken when the test function completes. Default is True.
                 ignore_fixtures: (Optional) If set to True, screenshot is not taken for test fixture functions. Default is False.
 
             Note:
-                - For taking the screenshot, it does a look up for a `screen_shooter` attribute in the object spaces in following order:
+                - For taking the screenshot, it does a look up for a **screen_shooter** attribute in the object spaces in following order:
                     - Function Space
                     - Module Space
                     - Session Space
 
-                - The screen_shooter attribute should contain a `ScreenShooter` i.e. an object of a class that inherits from ScreenShooter class and completes its protocol.
+                - The screen_shooter attribute should contain a **ScreenShooter** i.e. an object of a class that inherits from ScreenShooter class and completes its protocol.
                 
                 - This is a lenient hook. This means that if any exception happens in it, it ignores the exception and logs a warning message.
         '''
@@ -118,19 +118,19 @@ class PytestHooks:
     @classmethod
     def configure_group_for_test(cls, metafunc):
         '''
-            Configures `group` fixture for a test.
+            Configures **group** fixture for a test.
 
-            Acts only if `group` fixture is present in the signature of a test function or signature(s) of any of its fixture(s) in its fixture hierarchy. 
+            Acts only if **group** fixture is present in the signature of a test function or signature(s) of any of its fixture(s) in its fixture hierarchy. 
 
-            To be used in `pytest_generate_tests` hook in `conftest.py`.
+            To be used in **pytest_generate_tests** hook in **conftest.py**.
 
             Args:
-                metafunc: `pytest`'s MetaFunc object
+                metafunc: **pytest**'s MetaFunc object
 
             Note:
-                The `group` fixture yields a `DataRecord` object containing the following keys:
+                The **group** fixture yields a **DataRecord** object containing the following keys:
                     - **name**: Group name
-                    - **config**: `Configuration` object assigned to the group.
+                    - **config**: **Configuration** object assigned to the group.
                     - **thread_name**: Thread name for the thread in which the Test Group is running.
         '''
 

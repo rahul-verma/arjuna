@@ -27,7 +27,7 @@ class Json(_ArDict):
     '''
         Arjuna's Json Object.
 
-        Supports dictionary methods as well as `.` access for key.
+        Supports dictionary methods as well as **.** access for key.
 
         Arguments:
             pydict: Python dict.
@@ -48,7 +48,7 @@ class Json(_ArDict):
                 file_path: Absolute path of the json file.
 
             Returns:
-                Arjuna's Json object
+                Arjuna's `Json` object
         '''
 
         with open(file_path, 'r') as f:

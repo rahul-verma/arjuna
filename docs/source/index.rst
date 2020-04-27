@@ -1,7 +1,7 @@
 .. Arjuna documentation master file, created by
    sphinx-quickstart on Fri Apr  3 20:14:29 2020.
    You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+   contain the root **toctree** directive.
 
 *****************
 Welcome to Arjuna
@@ -138,13 +138,13 @@ Web GUI Automation
 
 * :py:class:`Gui <arjuna.tpi.guiauto.model.gui.Gui>`: It represents all type of Guis and is the base class for the following classes:
     * :py:class:`GuiApp <arjuna.tpi.guiauto.model.app.GuiApp>`
-    * :py:class:`GuiAppContent <arjuna.tpi.guiauto.model.content.GuiAppContent>`: It represents the content of a `GuiApp` and is the base class of the following classes:
+    * :py:class:`GuiAppContent <arjuna.tpi.guiauto.model.content.GuiAppContent>`: It represents the content of a **GuiApp** and is the base class of the following classes:
         * :py:class:`GuiPage <arjuna.tpi.guiauto.model.page.GuiPage>`
         * :py:class:`GuiSection <arjuna.tpi.guiauto.model.section.GuiSection>`
         * :py:class:`GuiDialog <arjuna.tpi.guiauto.model.dialog.GuiDialog>`
 * Defining and formatting Gui Widget Locators:
     * :py:class:`GuiWidgetLocator <arjuna.tpi.guiauto.meta.locator.GuiWidgetLocator>`
-    * Classes related to formatting of `GuiWidgetLocator`:
+    * Classes related to formatting of **GuiWidgetLocator**:
         * :py:class:`GNSLabelFormatter <arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter>`
         * :py:class:`GuiWidgetLocatorFormatter <arjuna.tpi.guiauto.meta.formatter.GuiWidgetLocatorFormatter>`
 * Different Gui Widgets

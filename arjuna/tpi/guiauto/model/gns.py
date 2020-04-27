@@ -6,16 +6,16 @@ from arjuna.interact.gui.auto.finder import GuiEmdFinder, GuiElementEmdFinder
 
 class GNS:
     '''
-        Gui Namespace object associated with a `Gui` or `GuiElement`.
+        Gui Namespace object associated with a **Gui** or **GuiElement**.
 
-        Not meant to be directly created. Available as `gns` property of a `Gui`.
+        Not meant to be directly created. Available as **gns** property of a **Gui**.
 
         Arguments:
-            gui_or_element: `Gui` or `GuiElement` object.
+            gui_or_element: **Gui** or **GuiElement** object.
             gui_def: Gui Definition
 
         Note:
-            To locate a GUI Widget using GNS object, you can use the `.` notation. For example:
+            To locate a GUI Widget using GNS object, you can use the **.** notation. For example:
 
                 .. code-block:: python
 
@@ -30,9 +30,9 @@ class GNS:
                         some_label:
                             <metdata dictionary>
 
-            `gui.gns` will locate it in the root GuiWidget of `Gui` if available and allowed.
+            **gui.gns** will locate it in the root GuiWidget of **Gui** if available and allowed.
 
-            `some_element.gns.some_label` will do a nested locating inside `some_element`.
+            **some_element.gns.some_label** will do a nested locating inside **some_element**.
     '''
 
     def __init__(self, gui_or_element, gui_def):
@@ -68,10 +68,10 @@ class GNS:
 
     def formatter(self, **fargs) -> GNSLabelFormatter:
         '''
-            Create a :class:`~arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter` object.
+            Create a :class:**~arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter** object.
 
             Keyword Arguments:
-                **fargs: Arbitrary key-value pairs to be used for formatting identifiers in `GuiWidgetLocator`.
+                **fargs: Arbitrary key-value pairs to be used for formatting identifiers in **GuiWidgetLocator**.
         '''
         return GNSLabelFormatter(self, **fargs)
 
@@ -81,15 +81,15 @@ class GNS:
 
     def wait_until_absent(self, *labels):
         '''
-            Wait until `GuiWidget` corresponding to any of the GNS labels is present.
+            Wait until **GuiWidget** corresponding to any of the GNS labels is present.
 
             Args:
                 *labels: One or more GNS labels.
 
             Note:
-                By default Wait is done until `ArjunaOption.GUIAUTO_MAX_WAIT` in the `Configuration` object associated with this `GuiAppContent`.
+                By default Wait is done until **ArjunaOption.GUIAUTO_MAX_WAIT** in the **Configuration** object associated with this **GuiAppContent**.
 
-                You can provide `max_wait` key-value for GNS label(s) in GNS file to change this. Value is considered in seconds.
+                You can provide **max_wait** key-value for GNS label(s) in GNS file to change this. Value is considered in seconds.
         '''
         waiter = getattr(self.__container, "_" + "wait_until_absent")
         for label in labels:
@@ -101,15 +101,15 @@ class GNS:
 
     def contains(self, *labels):
         '''
-            Check whether this `GuiAppContent` object contains a `GuiWidget` corresponding to any of the GNS labels. Includes dynamic waiting.
+            Check whether this **GuiAppContent** object contains a **GuiWidget** corresponding to any of the GNS labels. Includes dynamic waiting.
 
             Keyword Arguments:
                 *labels: One or more GNS labels.
 
             Note:
-                By default Wait is done until `ArjunaOption.GUIAUTO_MAX_WAIT` in the `Configuration` object associated with this `GuiAppContent`.
+                By default Wait is done until **ArjunaOption.GUIAUTO_MAX_WAIT** in the **Configuration** object associated with this **GuiAppContent**.
 
-                You can provide `max_wait` key-value for GNS label(s) in GNS file to change this. Value is considered in seconds.
+                You can provide **max_wait** key-value for GNS label(s) in GNS file to change this. Value is considered in seconds.
         '''
         for label in labels:
             try:

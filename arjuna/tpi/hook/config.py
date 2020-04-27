@@ -33,7 +33,7 @@ class Configurator:
             Creates a configuration builder object which takes the provided configuration as its basis.
 
             Keyword Arguments:
-                base_config: The base `Configuration` object. All its options become a part of the new configuration. Its options can be overriden and new options can be added using the builder to create a new `Configuration` object.
+                base_config: The base `Configuration` object. All its options become a part of the new configuration. Its options can be overriden and new options can be added using the builder to create a new **Configuration** object.
 
             Returns:
                 **new** `ConfigBuilder` object

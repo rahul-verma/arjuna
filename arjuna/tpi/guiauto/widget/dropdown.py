@@ -26,14 +26,14 @@ class GuiDropDown:
     '''
         Represents a drop down list in th Gui.
 
-        Not meant to be directly created. It is created using calls from `Gui` object or `GuiNamespace` object of `Gui`.
+        Not meant to be directly created. It is created using calls from **Gui** object or **GuiNamespace** object of **Gui**.
 
         Arguments:
-            gui: `Gui` object containing this GuiDropDown.
-            wmd: `GuiElementMetaData` object for this GuiDropDown.
+            gui: **Gui** object containing this GuiDropDown.
+            wmd: **GuiElementMetaData** object for this GuiDropDown.
 
         Keyword Arguments:
-            parent: `GuiElement` in case it is found inside a `GuiElement`. Default is the `Gui` object.
+            parent: **GuiElement** in case it is found inside a **GuiElement**. Default is the **Gui** object.
     '''
 
     def __init__(self, gui, wmd, parent=None):
@@ -62,7 +62,7 @@ class GuiDropDown:
     @property
     def gui(self) -> 'Gui':
         '''
-            `Gui` object containing this GuiDropDown.
+            **Gui** object containing this GuiDropDown.
         '''
         return self.__gui
         
@@ -174,11 +174,11 @@ class GuiDropDown:
 
                     dropdown.text = "<some_text>"
 
-            **Method used for this diffent from `select_text`**. It uses `send_keys` to simulate this interaction instead of clicking an option.
+            **Method used for this diffent from **select_text****. It uses **send_keys** to simulate this interaction instead of clicking an option.
             
             Waits for clickability.
 
-            `ArjunaOption.GUIAUTO_MAX_WAIT` in associated configuration is used as the default. Can be overriden using `max_wait` argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
         '''
         option = self.__options.first_selected_element
         return option.text
@@ -209,7 +209,7 @@ class GuiDropDown:
     @property
     def source(self) -> GuiElementSource:
         '''
-            `GuiSource` for this GuiDropDown (source of root element).
+            **GuiSource** for this GuiDropDown (source of root element).
         '''
         return self._wrapped_main_element.source
 

@@ -64,26 +64,26 @@ class GuiApp(_App):
     '''
         Represents a GUI App.
 
-        It supports all methods of `GuiAppContent` by delegating to a default `GuiPage` which it encapsulates.
+        It supports all methods of **GuiAppContent** by delegating to a default **GuiPage** which it encapsulates.
 
         Args:
-            *args: Any number of positional argumnts. These are passed to the `prepare()` method if defined in inherited class.
+            *args: Any number of positional argumnts. These are passed to the **prepare()** method if defined in inherited class.
 
         Keyword Arguments:
-            url: Base URL for Web application. If not provided, value of `ArjunaOption.APP_URL` is taken from the associated `Configuration` object.
+            url: Base URL for Web application. If not provided, value of **ArjunaOption.APP_URL** is taken from the associated **Configuration** object.
             config: Configuration object.
             ext_config: (Not Supported Yet) AutomatorExtendedConfig object for underlying GUI automator.
             label: Label for the GuiApp. If not provided, the class name is used as the label.
-            gns_dir: Relative Root Directory for GNS file(s) associated with the GuiApp. Default is `<ProjectRootDirectory>/guiauto/namespace`. If provided, it is considered relative to the namespace directory.
-            gns_file_name: Name of GNS file associated with GuiApp. If not provided, default is `<label>.yaml`.
-            kwargs: Arbitrary keyword arugments. These are passed to the `prepare()` method if defined in inherited class.
+            gns_dir: Relative Root Directory for GNS file(s) associated with the GuiApp. Default is **<ProjectRootDirectory>/guiauto/namespace**. If provided, it is considered relative to the namespace directory.
+            gns_file_name: Name of GNS file associated with GuiApp. If not provided, default is **<label>.yaml**.
+            kwargs: Arbitrary keyword arugments. These are passed to the **prepare()** method if defined in inherited class.
 
         Note:
             GuiApp can be used as singular represenation of complete page.
 
-            Through its advanced Python implementation, `GuiApp` supports all methods that are supported by a `GuiPage` by delegating the calls to an internal page object.
+            Through its advanced Python implementation, **GuiApp** supports all methods that are supported by a **GuiPage** by delegating the calls to an internal page object.
 
-            So, although not directly visible in the API docs for GuiApp, you can call all `GuiPage` methods on `GuiApp` as well and they will be executed on the current page in the browser.
+            So, although not directly visible in the API docs for GuiApp, you can call all **GuiPage** methods on **GuiApp** as well and they will be executed on the current page in the browser.
     '''
 
     def __init__(self, *args, url: str=None, config: 'Configuration'=None, ext_config: 'AutomatorExtendedConfig'=None, label: str=None, gns_dir: str=None, gns_file_name: str=None, **kwargs):
@@ -126,7 +126,7 @@ class GuiApp(_App):
     @property
     def main_window(self):
         '''
-           Main window of this `GuiApp`
+           Main window of this **GuiApp**
         '''
         return self._automator.main_window
 

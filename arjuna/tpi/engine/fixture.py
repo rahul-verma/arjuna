@@ -18,10 +18,10 @@
 '''
 Arjuna Test Fixtures
 
-The test fixtures provided by Arjuna are easy to use decorators which wrap `pytest.fixture` decorator.
+The test fixtures provided by Arjuna are easy to use decorators which wrap **pytest.fixture** decorator.
 
 Note:
-    For using any of the decorators in this module, the fixture function must have the signature as `f(request)` with `request` as the first argument.
+    For using any of the decorators in this module, the fixture function must have the signature as **f(request)** with **request** as the first argument.
 '''
 
 import pytest
@@ -84,10 +84,10 @@ def for_group(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable
     '''
         Decorator for session level test fixture/resource.
 
-        Wraps `pytest.fixture` to create a fixture with scope=session and provides an Arjuna's decorated version of the function that is marked with `for_group` decorator.
+        Wraps **pytest.fixture** to create a fixture with scope=session and provides an Arjuna's decorated version of the function that is marked with **for_group** decorator.
 
         Args:
-            func: A Function with signature `f(request)`. The name request is mandatory and enforced.
+            func: A Function with signature **f(request)**. The name request is mandatory and enforced.
 
         Keyword Arguments:
             drive_with: (Optional) Used for data driven testing. Argument can be Arjuna Data Source.
@@ -110,7 +110,7 @@ def for_module(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callabl
     '''
         Decorator for module level test fixture/resource.
 
-        Wraps `pytest.fixture` to create a fixture with scope=module and provides an Arjuna's decorated version of the function that is marked with `for_module` decorator.
+        Wraps **pytest.fixture** to create a fixture with scope=module and provides an Arjuna's decorated version of the function that is marked with **for_module** decorator.
 
         Args:
             func: Function
@@ -136,10 +136,10 @@ def for_test(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
     '''
         Decorator for test function level test fixture/resource.
 
-        Wraps `pytest.fixture` to create a fixture with scope=function and provides an Arjuna's decorated version of the function that is marked with `for_test` decorator.
+        Wraps **pytest.fixture** to create a fixture with scope=function and provides an Arjuna's decorated version of the function that is marked with **for_test** decorator.
 
         Args:
-            func: A Function with signature `f(request)`. The name request is mandatory and enforced.
+            func: A Function with signature **f(request)**. The name request is mandatory and enforced.
 
         Keyword Arguments:
             drive_with: (Optional) Used for data driven testing. Argument can be Arjuna Data Source.

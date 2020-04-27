@@ -27,17 +27,17 @@ class GuiPage(GuiAppContent):
     '''
         Represents a GUI Page. 
         
-        It is an implementation of `GuiAppContent`.
+        It is an implementation of **GuiAppContent**.
 
         Args:
-            *args: Any number of positional argumnts. These are passed to the `prepare()` method if defined in inherited class.
+            *args: Any number of positional argumnts. These are passed to the **prepare()** method if defined in inherited class.
 
         Keyword Arguments:
-            source_gui: (Mandatory) The `Gui` object from where this `GuiPage` is created. 
-            label: Label for the this `GuiPage`. If not provided, the class name is used as the label.
-            gns_dir: Relative Root Directory for GNS file(s) associated with this `GuiPage`. Default is `page` directory in associated `GuiApp` namespace. If provided, it is considered relative to the namespace directory of associated `GuiApp`.
-            gns_file_name: Name of GNS file associated with this `GuiPage`. If not provided, default is `<label>.yaml`.
-            kwargs: Arbitrary keyword arugments. These are passed to the `prepare()` method if defined in inherited class.
+            source_gui: (Mandatory) The **Gui** object from where this **GuiPage** is created. 
+            label: Label for the this **GuiPage**. If not provided, the class name is used as the label.
+            gns_dir: Relative Root Directory for GNS file(s) associated with this **GuiPage**. Default is **page** directory in associated **GuiApp** namespace. If provided, it is considered relative to the namespace directory of associated **GuiApp**.
+            gns_file_name: Name of GNS file associated with this **GuiPage**. If not provided, default is **<label>.yaml**.
+            kwargs: Arbitrary keyword arugments. These are passed to the **prepare()** method if defined in inherited class.
     '''
 
 
@@ -50,6 +50,6 @@ class GuiPage(GuiAppContent):
     @property
     def source(self) -> GuiPageSource:
         '''
-           `GuiPageSource` object for this `Gui`.
+           **GuiPageSource** object for this **Gui**.
         '''
         return self._automator.source

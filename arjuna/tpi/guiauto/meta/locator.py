@@ -99,7 +99,7 @@ class GuiWidgetLocator(Dictable):
 
     def _as_wmd(self):
         '''
-            Convert this `GuiWidgetLocator` to `GuiWidgetMetaData` object
+            Convert this **GuiWidgetLocator** to **GuiWidgetMetaData** object
         '''
         wmd = self._as_raw_wmd()
         fmt_wmd = wmd.create_formatted_wmd(**self.__fmt_args)

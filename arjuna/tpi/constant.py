@@ -34,7 +34,7 @@ class ArjunaOption(Enum):
     '''Name of Arjuna's log file'''
 
     RUN_ID = auto()
-    '''An alnum string representing current test run. Default is `mrun`'''
+    '''An alnum string representing current test run. Default is **mrun**'''
 
     RUN_SESSION_NAME = auto()
     '''Current session name.'''

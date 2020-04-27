@@ -23,14 +23,14 @@ class GuiRadioGroup:
     '''
         Represents a radio group in th Gui.
 
-        Not meant to be directly created. It is created using calls from `Gui` object or `GuiNamespace` object of `Gui`.
+        Not meant to be directly created. It is created using calls from **Gui** object or **GuiNamespace** object of **Gui**.
 
         Arguments:
-            gui: `Gui` object containing this GuiDropDown.
-            wmd: `GuiElementMetaData` object for this GuiDropDown.
+            gui: **Gui** object containing this GuiDropDown.
+            wmd: **GuiElementMetaData** object for this GuiDropDown.
 
         Keyword Arguments:
-            parent: `GuiElement` in case it is found inside a `GuiElement`. Default is the `Gui` object.
+            parent: **GuiElement** in case it is found inside a **GuiElement**. Default is the **Gui** object.
     '''
 
     def __init__(self, gui, wmd, parent=None):
@@ -44,7 +44,7 @@ class GuiRadioGroup:
     @property
     def gui(self) -> 'Gui':
         '''
-            `Gui` object containing this GuiDropDown.
+            **Gui** object containing this GuiDropDown.
         '''
         return self.__gui
 
@@ -130,6 +130,6 @@ class GuiRadioGroup:
     @property
     def source(self) -> GuiMultiElementSource:
         '''
-            `GuiMultiElementSource` for this GuiRadioGroup (source of associated GuiMultiElement)
+            **GuiMultiElementSource** for this GuiRadioGroup (source of associated GuiMultiElement)
         '''
         return self.__radios.source

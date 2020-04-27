@@ -41,7 +41,7 @@ class _Stack:
 
 class HardCoded:
     '''
-        It's sole purpose is to increase responsbility of test author when there is a need for `time.sleep`
+        It's sole purpose is to increase responsbility of test author when there is a need for **time.sleep**
     '''
 
     @classmethod

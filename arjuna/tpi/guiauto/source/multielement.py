@@ -27,7 +27,7 @@ class GuiMultiElementSource(GuiSource):
     '''
         A combined source of all GuiElements in a GuiMultiElement.
 
-        Not meant to be directly constructed by a test author. Use `.source` property of `GuiMultiElement`.
+        Not meant to be directly constructed by a test author. Use **.source** property of **GuiMultiElement**.
     '''
 
     def __init__(self, instances):
@@ -53,27 +53,27 @@ class GuiMultiElementSource(GuiSource):
     @property
     def tag_names(self) -> list:
         '''
-            Tag names of all GuiElements in this `GuiMultiElement`.
+            Tag names of all GuiElements in this **GuiMultiElement**.
         '''
         return [e.source.tag for e in self.__instances]
 
     @property
     def texts(self) -> list:
         '''
-            Text of all GuiElements in this `GuiMultiElement`.
+            Text of all GuiElements in this **GuiMultiElement**.
         '''
         return [e.source.content.text for e in self.__instances]
 
     @property
     def values(self) -> list:
         '''
-            Content of value attribute of all GuiElements in this `GuiMultiElement`.
+            Content of value attribute of all GuiElements in this **GuiMultiElement**.
         '''
         return [e.source.get_attr_value("value") for e in self.__instances]
 
     def get_attr_values(self, attr) -> list:
         '''
-            Content of value of given attribute of all GuiElements in this `GuiMultiElement`.
+            Content of value of given attribute of all GuiElements in this **GuiMultiElement**.
 
             Args:
                 attr: Attribute name

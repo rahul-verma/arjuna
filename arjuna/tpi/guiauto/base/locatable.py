@@ -17,7 +17,7 @@
 
 class Locatable:
     '''
-        Represents an object that is locatable using `GuiWidgetMetaData` in a `Gui`.
+        Represents an object that is locatable using **GuiWidgetMetaData** in a **Gui**.
     '''
 
     def __init__(self, gui, wmd):
@@ -33,7 +33,7 @@ class Locatable:
     @property
     def gui(self):
         '''
-            `Gui` object containing this `Locatable` object.
+            **Gui** object containing this **Locatable** object.
         '''
         return self.__gui
         

@@ -25,7 +25,7 @@ def track(level: str="not_set"):
 
         You can track classes, methods, functions and properties using this decorator.
 
-        Arjuna tracks the following and logs it as per `log_*` function chosen as per provided level. Default is debug.
+        Arjuna tracks the following and logs it as per **log_*** function chosen as per provided level. Default is debug.
             - Begin of call and arguments passed to the call.
             - End of the call with return value
             - Exception raised if any

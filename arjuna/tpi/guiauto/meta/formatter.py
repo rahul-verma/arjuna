@@ -23,7 +23,7 @@ class GNSLabelFormatter:
     '''
         Formattter for the GuiWidgetLocator associated with a GNS Label.
 
-        It is not created directly by a test author. Created using `.format` call of GNS object associated with a `Gui`.
+        It is not created directly by a test author. Created using **.format** call of GNS object associated with a **Gui**.
 
         Args:
             gns: Gui Namespace object
@@ -32,7 +32,7 @@ class GNSLabelFormatter:
             **fargs: Arbitrary key-value pairs to format the GuiWidgetLocator associated with a GNS Label.
 
         Note:
-            Supports `.` notation for a `GuiWidgetLabel` just like a `GNS` object. For example:
+            Supports **.** notation for a **GuiWidgetLabel** just like a **GNS** object. For example:
 
                 .. code-block:: python
 
@@ -56,10 +56,10 @@ class GuiWidgetLocatorFormatter:
     '''
         Formattter for a GuiWidgetLocator created by GuiWidget factory methods.
 
-        It is not created directly by a test author. Created using `.format` call of a `Gui` or `GuiElement`.
+        It is not created directly by a test author. Created using **.format** call of a **Gui** or **GuiElement**.
 
         Args:
-            creator: `Gui` or `GuiElement`
+            creator: **Gui** or **GuiElement**
 
         Keyword Arguments:
             **fargs: Arbitrary key-value pairs to format the GuiWidgetLocator associated with a GNS Label.
@@ -87,13 +87,13 @@ class GuiWidgetLocatorFormatter:
 
             Keyword Arguments:
                 type: type of GuiWidget (element, multi_element, dropdown, radio_group)
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                **kwargs: Arbitrary key-value pairs used to construct a **GuiWidgetLocator**
 
             Returns:
                 A `GuiWidgetLocator` as per the arguments to this call and format arugments of this GuiWidgetLocatorFormatter.
 
             Note:
-                The format key-value pairs of this GuiWidgetLocatorFormatter are used to format the identifiers in the constructed `GuiWidgetLocator`.
+                The format key-value pairs of this `GuiWidgetLocatorFormatter` are used to format the identifiers in the constructed **GuiWidgetLocator**.
         '''        
 
     def locate(self, type="element", **kwargs):
@@ -102,13 +102,13 @@ class GuiWidgetLocatorFormatter:
 
             Keyword Arguments:
                 type: type of GuiWidget (element, multi_element, dropdown, radio_group)
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                **kwargs: Arbitrary key-value pairs used to construct a **GuiWidgetLocator**
 
             Returns:
-                An object of type `GuiWidget`. Exact object type depends on the value of `type` attribute. 
+                An object of type `GuiWidget`. Exact object type depends on the value of **type** attribute. 
 
             Note:
-                The format key-value pairs of this GuiWidgetLocatorFormatter are used to format the identifiers in the constructed `GuiWidgetLocator`.
+                The format key-value pairs of this `GuiWidgetLocatorFormatter` are used to format the identifiers in the constructed **GuiWidgetLocator**.
         '''
         return self.__creator.locate(GuiWidgetLocator(type=type, fmt_args=self.__fargs, **kwargs))
 

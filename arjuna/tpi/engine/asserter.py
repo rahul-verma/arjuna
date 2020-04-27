@@ -146,7 +146,7 @@ class Asserter:
 
 class AsserterMixIn:
     '''
-        Base class to add `asserter` property to any class which inherits from it.
+        Base class to add **asserter** property to any class which inherits from it.
     '''
 
     def __init__(self):

@@ -53,10 +53,10 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
     '''
         Represents multiple GuiElements found using a same GuiWidgetLocator.
 
-        Not meant to be directly created. It is created using calls from `Gui` object or `GuiNamespace` object of `Gui`.
+        Not meant to be directly created. It is created using calls from **Gui** object or **GuiNamespace** object of **Gui**.
 
         Arguments:
-            gui: `Gui` object containing this GuiMultiElement.
+            gui: **Gui** object containing this GuiMultiElement.
             wmd: GuiElementMetaData object.
             elements: (optional) List of GuiElements to populate this object instead of locating it.
 
@@ -307,7 +307,7 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
     @property
     def source(self) -> GuiMultiElementSource:
         '''
-            `GuiSource` for this GuiMultiElement.
+            **GuiSource** for this GuiMultiElement.
         '''
         return self.__source_parser
 
@@ -331,7 +331,7 @@ class GuiMultiElementFilter:
         Build a new GuiMultiElement by filtering an existing one.
 
         Arguments:
-            gui_multi_element: Existing `GuiMultiElement` object.
+            gui_multi_element: Existing **GuiMultiElement** object.
     '''
 
     def __init__(self, gui_multi_element):
@@ -342,7 +342,7 @@ class GuiMultiElementFilter:
 
     def build(self) -> GuiMultiElement:
         '''
-            Build a new GuiMultiElement.
+            Build a new `GuiMultiElement`.
         '''
         me = GuiMultiElement(self.__gui, self.__wmd, elements=self.__filtered_elements)
         self.__filtered_elements = self.__elements
@@ -350,10 +350,10 @@ class GuiMultiElementFilter:
 
     def active(self) -> 'self':
         '''
-            Choose only active/non-stale GuiElements. 
+            Choose only active/non-stale `GuiElement` s. 
 
             Returns:
-                Current GuiMultiElementFilter object
+                Current `GuiMultiElementFilter` object
         '''
         out = list()
         for e in self.__filtered_elements:
@@ -367,10 +367,10 @@ class GuiMultiElementFilter:
 
     def visible(self) -> 'self':
         '''
-            Choose only visible GuiElements. 
+            Choose only visible `GuiElement` objects. 
 
             Returns:
-                Current GuiMultiElementFilter object
+                Current `GuiMultiElementFilter` object
         '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements
@@ -380,13 +380,13 @@ class GuiMultiElementFilter:
 
     def attr(self, name) -> 'self':
         '''
-            Choose only GuiElements which contain the given attribute.
+            Choose only `GuiElement` objects which contain the given attribute.
 
             Arguments:
                 name: Name of attribute
 
             Returns:
-                Current GuiMultiElementFilter object
+                Current `GuiMultiElementFilter` object
         '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements
@@ -396,14 +396,14 @@ class GuiMultiElementFilter:
 
     def attr_value(self, name, value) -> 'self':
         '''
-            Choose only GuiElements which contain the given attribute and its value.
+            Choose only `GuiElement` objects which contain the given attribute and its value.
 
             Arguments:
                 name: Name of attribute
                 value: Full or partial content of the given attribute
 
             Returns:
-                Current GuiMultiElementFilter object
+                Current `GuiMultiElementFilter` object
         '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements
@@ -413,13 +413,13 @@ class GuiMultiElementFilter:
 
     def value(self, value) -> 'self':
         '''
-            Choose only GuiElements whose value attribute matches the value argument provided.
+            Choose only `GuiElement` objects whose value attribute matches the value argument provided.
 
             Arguments:
                 value: Full or partial content of value attribute.
 
             Returns:
-                Current GuiMultiElementFilter object
+                Current `GuiMultiElementFilter` object
         '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements
@@ -429,13 +429,13 @@ class GuiMultiElementFilter:
 
     def text(self, text) -> 'self':
         '''
-            Choose only GuiElements whose text contains the text provided.
+            Choose only `GuiElement` objects whose text contains the text provided.
 
             Arguments:
                 text: Full or partial text.
 
             Returns:
-                Current GuiMultiElementFilter object
+                Current `GuiMultiElementFilter` object
         '''
         self.__filtered_elements = [
             e for e in self.__filtered_elements

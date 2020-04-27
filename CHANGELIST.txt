@@ -42,6 +42,9 @@ Current Themes (In-Progress or Planned):
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Stage to stage dependency.
     - Group to group dependency.
+    - The report directory should contain a confs directory. Whenever a new configuration is created. All its parameters should be dumped in a file for reference.
+    - Support multiple entries for same locator type in YAML file.
+    - Develop the concept of Data Entity beyond named tuple.
 
 0.9.24
 ------
@@ -53,7 +56,9 @@ Primary Goal:
     - Logging switches -dl and -ll moved inside the commands.
     - -o and --dray-run show the allowed enum constants as choices.
 - Doc updates:
-    - Updated CLI docs.
+    - CLI doc.
+    - Configuration doc.
+    - Test Project doc.
 
 
 0.9.23
@@ -63,15 +68,15 @@ Primary Goal:
     - A group can be run from the command line.
 - Test Stages 
     - are defined in stages.yaml file.
-    - use `include:` and provide list of group names.
+    - use **include:** and provide list of group names.
     - A stage can be run from command line.
 - Test Sessions 
     - are defined in sessions.yaml file.
-    - use `include:` and provide list of stage names.
+    - use **include:** and provide list of stage names.
     - A session can be run from command line.
 - CLI enhancements:
-    - `run-stage` command added. Using it you can directly run a defined test stage.
-    - `run-group` command added. Using it you can directly run a defined test group.
+    - **run-stage** command added. Using it you can directly run a defined test stage.
+    - **run-group** command added. Using it you can directly run a defined test group.
 - New Named Exceptions:
     - UndefinedTestStageError, InvalidTestStageDefError
     - UndefinedTestGroupError
@@ -102,15 +107,15 @@ Primary Goal:
         - data conf is superimposed
         - env conf is superimposed
         - CLI options are superimposed
-    - The config name is set to `runconfname_envconfname` e.g. `data1_env1`.
-    - The name can be used in the `magic C function` query or as the cname argument.
+    - The config name is set to **runconfname_envconfname** e.g. **data1_env1**.
+    - The name can be used in the **magic C function** query or as the cname argument.
 - Fixtures now allow drive_with argument.
-- `-c` / `--conf` switch added. It becomes the conf object mapped to conf.
+- **-c** / **--conf** switch added. It becomes the conf object mapped to conf.
 - Arjuna Session, Stage and Test Grouping concept added:
     - run-project and run-selected represent a default session, stage and group as per the CLI switches. It always executes in a single thread.
-    - Built-in fixture `group` can be included in a test signature or fixture signature. It yields group parameters including name of group, thread name and configuration.
+    - Built-in fixture **group** can be included in a test signature or fixture signature. It yields group parameters including name of group, thread name and configuration.
     - pytest_generate_tests hook added to test project conftest.py, its Arjuna template and added PytestHooks.configure_group_for_test
-        - Auto-parameteries "group" built-in Arjuna fixture. The fixture can be added to a test function signature or any of its fixtures. Configuration passed with -c switch is used to parameterize the `group` fixture mentioned above.
+        - Auto-parameteries "group" built-in Arjuna fixture. The fixture can be added to a test function signature or any of its fixtures. Configuration passed with -c switch is used to parameterize the **group** fixture mentioned above.
         - It is optional to use this fixture. However, if group related information (e.g. thread name, group name) is needed run time in fixture functions and test functions, then it can be used.
     - run-session switch added to run a named session.
     - Basic session.yaml support added. Supports stages and groups.
@@ -126,9 +131,9 @@ Primary Goal:
     - Not a boolen switch any more
     - Takes SHOW_TESTS/SHOW_PLAN/RUN_FIXTURES arguments.
 - Arjuna Hooks concept added
-    - `hook` directory in project root directory will contain various Arjuna hook modules and corresponding hook calls.
-    - `arjuna_config.py` is the name for configuration hooks.
-        - `register_configs(configurator)` is the first Arjuna hook created
+    - **hook** directory in project root directory will contain various Arjuna hook modules and corresponding hook calls.
+    - **arjuna_config.py** is the name for configuration hooks.
+        - **register_configs(configurator)** is the first Arjuna hook created
         - One can programmatically register any number of configurations by taking existing or these newly created configuration objects as basis.
         - The hook is executed before sessions file is processed or test execution starts for a non-session run.
         - The configurations created here can be used with -c / --conf command line switch. They can also be used as group config in session files. 
@@ -136,7 +141,7 @@ Primary Goal:
 
 0.9.20
 ------
-- Implemented ScreenShooter protocol. Created ScreenShooter base class. `GuiApp` and `GuiPage` support the protocol in Arjuna.
+- Implemented ScreenShooter protocol. Created ScreenShooter base class. **GuiApp** and **GuiPage** support the protocol in Arjuna.
 - Added Image helper class.
 - Added doc strings for:
     - Gui, GuiAppContent, GuiApp, GuiPage, GuiSection, GuiDialog
@@ -173,7 +178,7 @@ Primary Goal:
     - Json
     - xml: NodeLocator and XmlNode
 - Elements in Gui are now referred as widgets (taking a cue from wxPython)
-- `template` in GNS is changed to `type` for easy understandability (stands for widget type, default is element.)
+- **template** in GNS is changed to **type** for easy understandability (stands for widget type, default is element.)
 - (Internal) Locator Meta Data concept has evolved. It now contains meta data about the widget beyond locating it. Its now referred as Gui Widget Meta Data. Reflected in internal class names, messages and exception names.
 
 0.9.18
@@ -188,21 +193,21 @@ Primary Goal:
 
 0.9.17
 ------
-- Added `TRACE` level to log. 
-    - `log_trace` is a direct call.
+- Added **TRACE** level to log. 
+    - **log_trace** is a direct call.
     - By default trace messages are not included in display or log.
     - Is configurable from command line, project.conf, --run_env and --run-conf.
 - Added support for Contextual Logging
-    - All log messages are of `default` context
+    - All log messages are of **default** context
     - You can mark a log message as belonging to one or more contexts.
-    - You can allow contexts by controlling the `ArjunaOption.LOG_ALLOWED_CONTEXTS` which is configurable from command line, project.conf, --run_env and --run-conf.
-- Added `track` decorator. 
+    - You can allow contexts by controlling the **ArjunaOption.LOG_ALLOWED_CONTEXTS** which is configurable from command line, project.conf, --run_env and --run-conf.
+- Added **track** decorator. 
     - It logs begin with args, finish with return and exceptions for Classes, Methods and Functions.
-    - It also supports tracking `@classmethod`s and `@staticmethod`s automatically with class level track or individual track decorating.
-    - Properties can be decorated with `track` as well:
+    - It also supports tracking **@classmethod**s and **@staticmethod**s automatically with class level track or individual track decorating.
+    - Properties can be decorated with **track** as well:
         - Class level decorating does not cover properties.
         - Decorating a setter automatically covers the getter.
-    - Default log level associating with tracking is `debug`. Can be controlled in each `track` decorator by providing the `level` argument.
+    - Default log level associating with tracking is **debug**. Can be controlled in each **track** decorator by providing the **level** argument.
 - --run-conf can be provided wihtout .conf extension.
 
 
@@ -223,35 +228,35 @@ Primary Goal:
 0.9.14
 ------
 - Documents updated for a more manageable format instead of tight coupling with example code.
-- `WebApp`, `Page`, `Section` class names are changed to `GuiApp`, `GuiPage` and `GuiSection` for future compatibility.
+- **WebApp**, **Page**, **Section** class names are changed to **GuiApp**, **GuiPage** and **GuiSection** for future compatibility.
 
 0.9.13
 ------
 - wait_until_absent call supported
-    - Can be called with `Gui` as well as `GuiElement` as `.wait_until_absent(**locator_kwargs)`
+    - Can be called with **Gui** as well as **GuiElement** as **.wait_until_absent(**locator_kwargs)**
         - Raises GuiElementForLabelPresentError exception on failure.
-    - Can be called with `Gui` as well as `GuiElement` as `.wait_until_absent(**labels)`
+    - Can be called with **Gui** as well as **GuiElement** as **.wait_until_absent(**labels)**
         - Raises GuiElementPresentError exception on failure.
 - contains call supported
     - Returns True/False.
-    - Can be called with `Gui` as well as `GuiElement` as `.contains(**locator_kwargs)`
-    - Can be called with `Gui` as well as `GuiElement` as `.contains(**labels)`
+    - Can be called with **Gui** as well as **GuiElement** as **.contains(**locator_kwargs)**
+    - Can be called with **Gui** as well as **GuiElement** as **.contains(**labels)**
 - FIX: Import bug in emd.py
 
 0.9.12
 ------
 - Added locate/element/multi_element/dropdown/radio_group factories to Gui and element/multi_element factories to GuiElement.
 - The factories provide a more Pythonic syntax than using tuples or factories for every locator type in user API.
-- withx works with the revised factory methods. One can provide `<withx_name>=Params([arg1=val1, arg2=val2, ... argN=valN])` argument to factory methods for identification.
-- Locator and Formatter class added for providing complex identification constructs as a single argument. `.locate` method added to Gui and GuiElement.
+- withx works with the revised factory methods. One can provide **<withx_name>=Params([arg1=val1, arg2=val2, ... argN=valN])** argument to factory methods for identification.
+- Locator and Formatter class added for providing complex identification constructs as a single argument. **.locate** method added to Gui and GuiElement.
 - Formatted identifiers
     - Identifiers can contain formatter placeholers with the syntax $xyz$ where xyz is a name which you want to replace with a value.
-    - For using formatted identifiers in code, you can use `gui.format(xyz=<value>).element(locator="$xyz$")` syntax.
-    - For using formatted identifiers in GNS, you can use `gui.format(xyz=<value>).label` syntax.
-    - Auto-loaded placeholder values: (query syntax is same as that for the magic `C`, `R` and `L` functions.)
-        - Configuration - Specified as `C.<query>`
-        - Contextual Data Reference - Specified as `R.<query>`
-        - Localized Strings - Specified as `L.<query>`
+    - For using formatted identifiers in code, you can use **gui.format(xyz=<value>).element(locator="$xyz$")** syntax.
+    - For using formatted identifiers in GNS, you can use **gui.format(xyz=<value>).label** syntax.
+    - Auto-loaded placeholder values: (query syntax is same as that for the magic **C**, **R** and **L** functions.)
+        - Configuration - Specified as **C.<query>**
+        - Contextual Data Reference - Specified as **R.<query>**
+        - Localized Strings - Specified as **L.<query>**
 - Example code and documentation updates in progress.
 - With and WithType are now completely internal to Arjuna.
 - XmlSource class added with comprehensive node finding and inquiry support. xfinder name changed to NodeLocator to make it similar to Locator for Gui element finding.
@@ -260,20 +265,20 @@ Primary Goal:
 0.9.11
 ------
 - Direct log msg calls added: log_debug, log_info, log_warning, log_error, log_fatal. Implentation method used could be extended for contextual logging in Arjuna in future.
-- Introduced GNS class. Gui and nested element access for labels defined in GNS can be done as `gui.gns.label` and `element.gns.label` respectively.
+- Introduced GNS class. Gui and nested element access for labels defined in GNS can be done as **gui.gns.label** and **element.gns.label** respectively.
 - root and anchor elements code optimized to work with direct reference to original element.
 - withx supports attr and fattr with named args support for both name and value arguments.
 - basic .locate factory added. Needs to be enhanced to support any advanced non-GNS implementations one might find a need for.
 - Typo fixed in CLI help for -im.
-- All example code has been moved to a single project `arjex`. Code and docs need a fix.
+- All example code has been moved to a single project **arjex**. Code and docs need a fix.
 
 0.9.10
 ------
 - Externalization of Guis is mandatory for element access. Direct use of With.x not allowed. It's an internal concept now.
 - Creation of an App/Page can happen without a corresponding GNS file. The Gui definition will be empty in this case.
 - Element Label must be an arjuna name.
-- Elements can be directly access using `. (dot)` operator. from aby Gui.
-- `template` keyword can be used in GNS files to define non-GuiElement object types.
+- Elements can be directly access using **. (dot)** operator. from aby Gui.
+- **template** keyword can be used in GNS files to define non-GuiElement object types.
 - All example code updated.
 - All docs updated as per the revised features.
 
@@ -293,8 +298,8 @@ Primary Goal:
 - withx in GNS files supports string, list and dictionary entries in YAML and maps them to vargs and kwargs in formatting the value of withx entry referred by a label.
 - Separated current Yaml parsing as Yaml and YamlFile classes in arjuna.core.yaml module.
 - Introduced WithX class to handle WithX parsing and processing.
-- Provision to add Withx identifiers which can be referred to from any GNS file. These are included in the `<Project Root>/guiauto/withx/withx.yaml` file.
-- A WithX identifier defined in `withx.yaml` can be used programmatically. It can be thought of as a method which Arjuna defines at run-time with the signature `With.locator(*args, **kwargs)` and can be called from any part of your code.
+- Provision to add Withx identifiers which can be referred to from any GNS file. These are included in the **<Project Root>/guiauto/withx/withx.yaml** file.
+- A WithX identifier defined in **withx.yaml** can be used programmatically. It can be thought of as a method which Arjuna defines at run-time with the signature **With.locator(*args, **kwargs)** and can be called from any part of your code.
 
 0.9.7
 -----
@@ -305,24 +310,24 @@ Minor update. All l10 references are changed to l10n.
 - Localizer
     - Added built-in support for JSON based localization.
     - Excel and JSON Localizers are automatically loaded and merged into a single Contextual Data Reference
-    - Change `ArjunaOption.LOCALE` to `ArjunaOption.L10_LOCALE`.
-    - Added `ArjunaOption.L10_STRICT` property. By default it is set to False. It means for references with no localization data, no error is raised and reference itself is returned by `L` function.
-    - bucket can be provided as an argument or as a prefix `bucket.`
+    - Change **ArjunaOption.LOCALE** to **ArjunaOption.L10_LOCALE**.
+    - Added **ArjunaOption.L10_STRICT** property. By default it is set to False. It means for references with no localization data, no error is raised and reference itself is returned by **L** function.
+    - bucket can be provided as an argument or as a prefix **bucket.**
 - Json class
     - Added Json class with jsonpath support.
     - Added jsonpath-rw and jsonpath-rw-ext as dependencies.
 - Easy Aliases (L/R/C)
-    - The `L` function is alias for Arjuna.get_localized_str.
-    - The `C` function is alias for Arjuna.get_config_value.
-    - The `R` function is alias for Arjuna.get_dataref_value
+    - The **L** function is alias for Arjuna.get_localized_str.
+    - The **C** function is alias for Arjuna.get_config_value.
+    - The **R** function is alias for Arjuna.get_dataref_value
 - Config Simplification
-    - Arjuna automatically looks up Arjuna options and then user options for a name. This does away with the need for `config.arjuna_options.value` and `config.user_options.value`. Relaced with `config.value` call.
+    - Arjuna automatically looks up Arjuna options and then user options for a name. This does away with the need for **config.arjuna_options.value** and **config.user_options.value**. Relaced with **config.value** call.
     - New config creation made simpler. RunContext is now an internal concept.
     - Docs updated.
-    - . and [] retrieval mechanisms added to config object. For a given name, one can use `config.name` or `config[name]` or config.value(name)` calls interchangeably.
+    - . and [] retrieval mechanisms added to config object. For a given name, one can use **config.name** or **config[name]** or config.value(name)** calls interchangeably.
     - All arjuna options and user options become automatically available with . and [] lookup.
     - Arjuna.get_config gives reference config by default. If conf name is passed, then that named config object is returned.
-    - The `C` function supports config query format i.e. a.b.c will attempt to treat `a` as a configuration name.
+    - The **C** function supports config query format i.e. a.b.c will attempt to treat **a** as a configuration name.
     - Many ArjunaOptions have been renamed to simpler, shorter names.
 - request object enhanced
     - request.config is by default set to reference config at the top level. Can be retrieved at any child layer.
@@ -373,14 +378,14 @@ Minor update. All l10 references are changed to l10n.
     - Introduced concept of Contextual Data References.
     - Built-in Support for Column and Row Excel Data References.
     - The Excel data references are automatically loaded by Arjuna during init().
-    - The references are easily accessible using the `request` object in test/fixture functions.
+    - The references are easily accessible using the **request** object in test/fixture functions.
     - Added example code and doc.
 - Localizer
     - Introduced concept of localization
     - Built-in support for Excel based localization files
     - Excel localizers are automatically loaded and merged into a single Contextual Data Reference
-    - The `L` function is a special function to easily localize a string as per `Locale`.
-    - Introduced `Locale` enum and ArjunaOption.LOCALE to control configured Locale.
+    - The **L** function is a special function to easily localize a string as per **Locale**.
+    - Introduced **Locale** enum and ArjunaOption.LOCALE to control configured Locale.
 - Chrome driver creation uses the Service object as the previous signature was deprecated.
 - Arjuna uses sys.exit with the same code as returned by pytest.main
 
@@ -392,12 +397,12 @@ Minor update. All l10 references are changed to l10n.
 - Data Driven Testing
     - Fixed indexed values in Data Record.
     - Data Record keys/names are now case-insensitive.
-    - Support for `records` markup.
-    - Support for `data_function` markup.
-    - Support for `data_class` markup.
-    - Support for `data_file` markup (Out of the box support for XLS, TSV/CSV and INI formats.)
+    - Support for **records** markup.
+    - Support for **data_function** markup.
+    - Support for **data_class** markup.
+    - Support for **data_file** markup (Out of the box support for XLS, TSV/CSV and INI formats.)
     - Support for record filtering in data files.
-    - Support for `many_data_sources` builder.
+    - Support for **many_data_sources** builder.
     - Added example code and docs for data driven testing.
 
 0.9.3

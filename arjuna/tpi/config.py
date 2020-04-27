@@ -69,7 +69,7 @@ class Configuration:
                 - and so on
 
         Note:
-            You can also use `. notation` or `[] dict notation` to retrieve an option value.
+            You can also use **. notation** or **[] dict notation** to retrieve an option value.
 
             .. code-block:: python
 
@@ -179,17 +179,17 @@ class Configuration:
 @track("debug")
 class ConfigBuilder:
     '''
-        Helps in constructing a new `Configuration` object from an existing one.
+        Helps in constructing a new **Configuration** object from an existing one.
 
         Keyword Arguments:
             base_config: Parent configuration to be used be used as reference for creation of the new Configuration object.
-            auto_gen_name: Generate a unique configuration name in `build` call if name is not provided. Default is True.
+            auto_gen_name: Generate a unique configuration name in **build** call if name is not provided. Default is True.
 
         Note:
-            It is not meant to be directly constructed. Use `builder` method of a Configuration object to create the associated ConfigBuilder object.
+            It is not meant to be directly constructed. Use **builder** method of a Configuration object to create the associated ConfigBuilder object.
 
         Note:
-            You can also use `. notation` or `[] dict notation` to add/update an option value.
+            You can also use **. notation** or **[] dict notation** to add/update an option value.
 
             .. code-block:: python
 
@@ -213,21 +213,21 @@ class ConfigBuilder:
                 obj: An object of any type as per the option key.
 
             Returns:
-                Current ConfigBuilder object
+                Current `ConfigBuilder` object
         '''
         self._config_container.set_option(option, obj)
         return self
 
     def __setattr__(self, option, obj) -> 'self':
         '''
-            Enables `. notation` for setting option value. Same as `option` method.
+            Enables **. notation** for setting option value. Same as **option** method.
         '''
         self.option(option, obj)
         return self
 
     def __setitem__(self, option, obj) -> 'self':
         '''
-            Enables `[] dict notation` for setting option value. Same as `option` method.
+            Enables **[] dict notation** for setting option value. Same as **option** method.
         '''
         self.option(option, obj)
         return self
@@ -240,7 +240,7 @@ class ConfigBuilder:
                 option_map: A dictionary of options. Keys are ArjunaOptions or strings and values can be of any type as per the option key.
 
             Returns:
-                Current ConfigBuilder object
+                Current `ConfigBuilder` object
         '''
         self._config_container.set_options(option_map)
         return self
@@ -250,7 +250,7 @@ class ConfigBuilder:
             Configure Selenium as the automation engine.
 
             Returns:
-                Current ConfigBuilder object
+                Current `ConfigBuilder` object
         '''
         self.set_option(ArjunaOption.GUIAUTO_NAME, GuiAutomatorName.SELENIUM)
         return self
@@ -260,7 +260,7 @@ class ConfigBuilder:
             (Not supported yet) Configure Appium as the automation engine.
 
             Returns:
-                Current ConfigBuilder object
+                Current `ConfigBuilder` object
         '''
         self.option(ArjunaOption.GUIAUTO_NAME, GuiAutomatorName.APPIUM)
         self.option(ArjunaOption.GUIAUTO_CONTEXT, context)
@@ -271,7 +271,7 @@ class ConfigBuilder:
             Configure Chrome as the browser.
 
             Returns:
-                Current ConfigBuilder object
+                Current `ConfigBuilder` object
         '''
         self.option(ArjunaOption.BROWSER_NAME, BrowserName.CHROME)
         return self
@@ -281,7 +281,7 @@ class ConfigBuilder:
             Configure Firefox as the browser.
 
             Returns:
-                Current ConfigBuilder object
+                Current `ConfigBuilder` object
         '''
         self.option(ArjunaOption.BROWSER_NAME, BrowserName.FIREFOX)
         return self
@@ -294,7 +294,7 @@ class ConfigBuilder:
                 path: Absolute path of mobile app on test machine.
 
             Returns:
-                Current ConfigBuilder object
+                Current `ConfigBuilder` object
         '''
         self.option(ArjunaOption.MOBILE_APP_FILE_PATH, path)
         return self
@@ -307,10 +307,10 @@ class ConfigBuilder:
                 fpath: Path of .conf file. 
 
             Returns:
-                Current ConfigBuilder object
+                Current `ConfigBuilder` object
 
             Note:
-                If instead of full absolute path, a name or relative file path is provided, Arjuna creates the path in relation to the default configuration directory - `<Project Root>/config`.
+                If instead of full absolute path, a name or relative file path is provided, Arjuna creates the path in relation to the default configuration directory - **<Project Root>/config**.
         '''
         conf = self._test_session.load_options_from_file(fpath)
         for k,v in conf.arjuna_options.as_dict().items():

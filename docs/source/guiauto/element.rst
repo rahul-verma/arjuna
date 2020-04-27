@@ -1,16 +1,16 @@
 .. _element:
 
-Element Identification and Interaction
-======================================
+**Element Identification and Interaction**
+==========================================
 
-GuiElement and Widgets
-----------------------
+**GuiElement and Widgets**
+--------------------------
 
 Arjuna's Gui automation implementation has different types of Gui Widgets which are associated with corresponding Widget types.
 
-A single node in the DOM of a web UI is represented by a `GuiElement` object in Arjuna, irrespective of its type. This is unless you need specialized methods which we will see later.
+A single node in the DOM of a web UI is represented by a **GuiElement** object in Arjuna, irrespective of its type. This is unless you need specialized methods which we will see later.
 
-The Widget type for `GuiElement` is `element`. This information is not important here, but will become relevant when we deal with more complex node types.
+The Widget type for **GuiElement** is **element**. This information is not important here, but will become relevant when we deal with more complex node types.
 
 All locators discussed here can be used for any type of Gui Widgets.
 
@@ -19,21 +19,21 @@ Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text, XPath and C
 
 Arjuna supports the locators which are supported by Selenium's By object. Apart from these, there are various abstracted locators which Arjuna provides for easier coding.
 
-For locating `GuiElement`, you can use the `.element` factory method (assume `app` is the `GuiApp` object):
+For locating **GuiElement**, you can use the **.element** factory method (assume **app** is the **GuiApp** object):
 
 .. code-block:: python
 
    app.element(<locator_type>=<locator_value>)
 
-The locator strategy is expressed using locator type names supported by Arjuna. You can pass it as a keyword argument `k=v` format to the the `element` call. Following are the basic locators supported and corresponding Selenium `By` locators:
-    - **id** : Wraps `By.id`
-    - **name** : Wraps `By.name`
-    - **tag** : Wraps `By.tag_name`
-    - **classes** : Wraps `By.class_name`, however it supports compound classes. See Arjuna Locator Extensions page for more information.
-    - **link** : Wraps `By.partial_link_text`. Note that all content/text matches in Arjuna are partial matches (opposite of Selenium).
-    - **flink** : Wraps `By.link_text` (short for Full Link)
-    - **xpath** : Wraps `By.xpath`
-    - **selector** : Wraps `By.css_selector`
+The locator strategy is expressed using locator type names supported by Arjuna. You can pass it as a keyword argument **k=v** format to the the **element** call. Following are the basic locators supported and corresponding Selenium **By** locators:
+    - **id** : Wraps **By.id**
+    - **name** : Wraps **By.name**
+    - **tag** : Wraps **By.tag_name**
+    - **classes** : Wraps **By.class_name**, however it supports compound classes. See Arjuna Locator Extensions page for more information.
+    - **link** : Wraps **By.partial_link_text**. Note that all content/text matches in Arjuna are partial matches (opposite of Selenium).
+    - **flink** : Wraps **By.link_text** (short for Full Link)
+    - **xpath** : Wraps **By.xpath**
+    - **selector** : Wraps **By.css_selector**
 
 Following are some examples:
 
@@ -48,8 +48,8 @@ Following are some examples:
    wordpress.element(xpath="//*[contains(text(), 'Lost')]")
    wordpress.element(selector=".button.button-large")
 
-Locators - Arjuna's Locator Extensions
---------------------------------------
+Locators - **Arjuna's Locator Extensions**
+------------------------------------------
 
 Arjuna provides various higher level locator strategies in addition to wrapping Selenium's By-style strategies. Following is the list of these extensions:
     - **text** : Generates Partial Text based XPath
@@ -80,10 +80,10 @@ Following are some examples:
 Interaction with GuiElement
 ---------------------------
 
-To interact with a GuiElement, from automation angle it must be in an interactable state. In the usual automation code, a test author writes a lot of waiting related code (and let's not even touch the `time.sleep`.).
+To interact with a GuiElement, from automation angle it must be in an interactable state. In the usual automation code, a test author writes a lot of waiting related code (and let's not even touch the **time.sleep**.).
 
-Automatic Dynamic Waiting
-^^^^^^^^^^^^^^^^^^^^^^^^^
+**Automatic Dynamic Waiting**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Arjuna does a granular automatic waiting of three types:
     - Waiting for the presence of an element when it is attempting to identify a GuiElement
@@ -93,13 +93,13 @@ Arjuna does a granular automatic waiting of three types:
 Interaction Methods
 ^^^^^^^^^^^^^^^^^^^
 
-Once locted `GuiElement` provides various interaction methods. Some are shown below:
+Once locted **GuiElement** provides various interaction methods. Some are shown below:
 
 .. code-block:: python
 
    element.text = user
    element.click()
 
-`text` is a property of `GuiElement`. `element.text = "some_string"` is equivalent of setting text of the text box.
+**text** is a property of **GuiElement**. **element.text = "some_string"** is equivalent of setting text of the text box.
 
-`click` method is used to click the element.
+**click** method is used to click the element.

@@ -22,7 +22,7 @@ from .base import SingleGuiEntitySource
 @track("debug")
 class GuiElementSource(SingleGuiEntitySource):
     '''
-        Abstract Base class for GUI Source of a Singular GUI entity (`GuiPage` or `GuiElement`).
+        Abstract Base class for GUI Source of a Singular GUI entity (**GuiPage** or **GuiElement**).
 
         Not meant to be directly constructed by a test author. Retrieve as:
         

@@ -23,16 +23,16 @@ class DataRecord:
     '''
         Represents a single Data Record
 
-        When you use drive_with argument in @test decorator to associate a Data Source, the test function is repeated as many times as there are data records. For each such iteration, a `DataRecord` object is passed to the `data` argument of test function.
+        When you use drive_with argument in @test decorator to associate a Data Source, the test function is repeated as many times as there are data records. For each such iteration, a **DataRecord** object is passed to the **data** argument of test function.
 
         Note:
-            For retrieving indexed objects you have to use `[] notation` (just like a list or tuple), for example
+            For retrieving indexed objects you have to use **[] notation** (just like a list or tuple), for example
 
             .. code-block:: python
 
                 record[1]
 
-            For retrieving named objects, you can either use `. notation` or `[] notation` (just like a dict), for example
+            For retrieving named objects, you can either use **. notation** or **[] notation** (just like a dict), for example
 
             .. code-block:: python
 
@@ -84,7 +84,7 @@ class DataRecord:
 
     def is_empty(self) -> bool:
         '''
-            Check if `DataRecord` has not indexed or named objects.
+            Check if **DataRecord** has not indexed or named objects.
 
             Returns:
                 True/False
@@ -93,7 +93,7 @@ class DataRecord:
 
     def has_key(self, key):
         '''
-            Check if `DataRecord` has a key/name for which an object is present.
+            Check if **DataRecord** has a key/name for which an object is present.
 
             Returns:
                 True/False
@@ -102,7 +102,7 @@ class DataRecord:
 
     def has_index(self, index):
         '''
-            Check if `DataRecord` has an index for which an object is present.
+            Check if **DataRecord** has an index for which an object is present.
 
             Returns:
                 True/False

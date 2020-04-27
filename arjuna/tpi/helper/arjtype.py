@@ -103,7 +103,7 @@ class CIStringDict(_ArDict):
         Dictionary with case-insensitive keys.
 
         Arguments:
-            pydict: (Optional) A `dict` object.
+            pydict: (Optional) A **dict** object.
     '''
     def __init__(self, pydict={}):
         super().__init__(pydict)
@@ -121,7 +121,7 @@ class ProcessedKeyDict(_ArDict):
 
         Arguments:
             processor: A callable for processing the dictionary key.
-            pydict: (Optional) A `dict` object.
+            pydict: (Optional) A **dict** object.
     '''
 
     def __init__(self, *, processor: Callable, pydict: dict={}):
@@ -141,7 +141,7 @@ class OnceOnlyKeyCIStringDict(CIStringDict):
 
         Arguments:
             processor: A callable for processing the dictionary key.
-            pydict: (Optional) A `dict` object.
+            pydict: (Optional) A **dict** object.
     '''
 
     def __init__(self, d={}):
@@ -168,7 +168,7 @@ class OnceOnlyKeyCIStringDict(CIStringDict):
 @track("debug")
 class Dictable(metaclass=abc.ABCMeta):
     '''
-        Abstract class. Any object which has a method `as_dict` is a `Dictable`.
+        Abstract class. Any object which has a method **as_dict** is a **Dictable**.
     '''
 
     @abc.abstractmethod
@@ -180,7 +180,7 @@ class Dictable(metaclass=abc.ABCMeta):
             Dictionary representation of this object.
 
             Returns:
-                A `dict` object.
+                A **dict** object.
         '''
         retval = self._as_dict()
         if type(retval) is not dict:
@@ -212,7 +212,7 @@ class Point(Dictable):
 
 class Offset(Point):
     '''
-        Represents an offset from current `Point` on `Screen` in terms of XY coordinates.
+        Represents an offset from current **Point** on **Screen** in terms of XY coordinates.
 
         Args:
             x: X co-ordinate
@@ -231,21 +231,21 @@ class Screen:
     @staticmethod
     def xy(x:int, y:int) -> Point:
         '''
-            Create a `Point` on Gui Screen in terms of its XY coordinates.
+            Create a **Point** on Gui Screen in terms of its XY coordinates.
         '''
         return _Point(x,y)
 
     @staticmethod
     def offset(x, y) -> Offset:
         '''
-            Create a `Offset` on Gui Screen in terms of its XY coordinates.
+            Create a **Offset** on Gui Screen in terms of its XY coordinates.
         '''
         return _Offset(x,y)
 
 @track("debug")
 class NVPair(Dictable):
     '''
-        Encapsulates a name-value pair. It is an implementation of `Dictable`.
+        Encapsulates a name-value pair. It is an implementation of **Dictable**.
 
         Args:
             name: Name of this object
@@ -263,7 +263,7 @@ class NVPair(Dictable):
 @track("debug")
 class Attr(NVPair):
     '''
-        A name-value pair with an associated optional tag name. It is an implementation of `Dictable`.
+        A name-value pair with an associated optional tag name. It is an implementation of **Dictable**.
 
         Keyword Arguments:
             name: (Mandatory) Name of this object
@@ -284,7 +284,7 @@ class Attr(NVPair):
 @track("debug")
 class NVPairs(Dictable):
     '''
-        Encapsulates arbitrary name-value pairs. It is an implementation of `Dictable`.
+        Encapsulates arbitrary name-value pairs. It is an implementation of **Dictable**.
 
         Keyword Arguments:
             **nvpairs: Arbitrary name-value pairs passed as keyword arguments.

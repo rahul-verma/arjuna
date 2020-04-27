@@ -57,12 +57,12 @@ def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_wi
         Decorator for marking a function as a test function.
 
         Args:
-            func: A Function with signature `f(request)`. The name request is mandatory and enforced.
+            func: A Function with signature **f(request)**. The name request is mandatory and enforced.
 
         Keyword Arguments:
             id: (Optional) Alnum string representing an ID which you want to associate with the test.
             resources: (Optional) Fixtures/Resources that you want to associate this test with. Wraps pytest.mark.usefixtures. Instead of using this, you can also pass the names as direct arguments in the function signature.
-            drive_with: (Optional) Used for data driven testing. Argument can be Arjuna Data Source. Wraps `pytest.mark.parametrize`. If you use this argument, the test function signature must include a `data` argument e.g. 
+            drive_with: (Optional) Used for data driven testing. Argument can be Arjuna Data Source. Wraps **pytest.mark.parametrize**. If you use this argument, the test function signature must include a **data** argument e.g. 
 
                 .. code-block:: python
                 
@@ -70,11 +70,11 @@ def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_wi
                     def check_sample(request, data):
                         pass
 
-            exclude_if: (Optional) Define exclusion condition. Argument can be an Arjuna Relation. Wraps `pytest.mark.dependency`.
+            exclude_if: (Optional) Define exclusion condition. Argument can be an Arjuna Relation. Wraps **pytest.mark.dependency**.
         Note:
-            The test function name must start with the prefix `check_`
+            The test function name must start with the prefix **check_**
 
-            The test function must have the minimum signature as `check_<some_name>(request)` with `request` as the first argument.
+            The test function must have the minimum signature as **check_<some_name>(request)** with **request** as the first argument.
     '''
 
     # Check if @test is provided without arguments

@@ -7,22 +7,22 @@ Purpose
 -------
 As a part of automating tests, a test author might need to deal with localization of strings that are used for various purposes.
 
-Arjuna supports Excel based localization data out of the box. These files are automatically loaded when `Arjuna.init()` is called by Arjuna launcher.
+Arjuna supports Excel based localization data out of the box. These files are automatically loaded when **Arjuna.init()** is called by Arjuna launcher.
 
 Locale Enum
 -----------
 
 Arjuna associates locale for localization with the Locale enum constant which in turn uses the names from Python.
 
-The default locate is `Locale.EN`. It can be changed in a project configuration as follows:
+The default locate is **Locale.EN**. It can be changed in a project configuration as follows:
 
-.. code-block:: javascript
+.. code-block:: YAML
 
     # project.yaml
 
-    arjunaOptions {
-        l10n.locale = hi
-    }
+    arjuna_options:
+        l10n.locale: hi
+
 
 Excel based Localization
 ------------------------
@@ -32,37 +32,37 @@ Sample Localization File
 
 The localization file follows the format of Excel Column Data Reference files.
 
-You place such files in `<Project Root>/l10n/excel` directory. Two reference files can be found in this example project.
+You place such files in **<Project Root>/l10n/excel** directory. Two reference files can be found in this example project.
 
 .. image:: _static/l10_1.png
 
-First column is always the Reference column. The other columns represent the languages mentioned as `Locale` type in column heading.
+First column is always the Reference column. The other columns represent the languages mentioned as **Locale** type in column heading.
 
-In the example file, the columns mentions `en` and `hi` which are Locale value for English and Hindi respectively.
+In the example file, the columns mentions **en** and **hi** which are Locale value for English and Hindi respectively.
 
 For demonstration purpose, 3 English words are provided with corresponding strings in Hindi.
 
 .. image:: _static/l10_2.png
 
-The second file `sample2.xls` has the same data except the localized string for `Correct` in Hindi which is different from `sample1.xls`.
+The second file **sample2.xls** has the same data except the localized string for **Correct** in Hindi which is different from **sample1.xls**.
 
-The L function for Localization
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+The **L** function for Localization
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can access data references in your test code with Arjuna's magic `L` function (similar to `C` and `R` functions seen in other features).
+You can access data references in your test code with Arjuna's magic **L** function (similar to **C** and **R** functions seen in other features).
 
-It has the following signature. The first argument is the query. `locale`, `bucket` and `strict` are optional arguments.
+It has the following signature. The first argument is the query. **locale**, **bucket** and **strict** are optional arguments.
 
 .. code-block:: python
 
     L("qual", locale=<local enum constant or string>, bucket=<bucket_name>, strict=<True or False>)
 
-- `L("Testing")` localizes the string as per the `ArjunaOption.L10_LOCALE` value in reference configuration. In `project.yaml`, we have set it as `HI`.
-- You can also explcitily mention the locale as `Locale.HI`.
-- When a name is repeated across multiple localization files (buckets), the last one holds. `L("Correct")` will give the value from `sample2` file as it is loaded after `sample1`.
-- You can explcitily refer to a bucket by providing the `bucket` argument. Each Excel localization file represents a bucket and its name without the extension is the bucket name.
-- You can also provide the bucket name by prefixing it before the reference key, for example `sample1.corr`.
-- `strict` argument is to switch strict node on or off.
+- **L("Testing")** localizes the string as per the **ArjunaOption.L10_LOCALE** value in reference configuration. In **project.yaml**, we have set it as **HI**.
+- You can also explcitily mention the locale as **Locale.HI**.
+- When a name is repeated across multiple localization files (buckets), the last one holds. **L("Correct")** will give the value from **sample2** file as it is loaded after **sample1**.
+- You can explcitily refer to a bucket by providing the **bucket** argument. Each Excel localization file represents a bucket and its name without the extension is the bucket name.
+- You can also provide the bucket name by prefixing it before the reference key, for example **sample1.corr**.
+- **strict** argument is to switch strict node on or off.
 
 JSON Based Localization
 -----------------------
@@ -70,7 +70,7 @@ JSON Based Localization
 Sample Localization Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^
 
-With JSON format, there is a specific structure expected. The sample files are placed in `<Project Root>/l10n/json` directory.
+With JSON format, there is a specific structure expected. The sample files are placed in **<Project Root>/l10n/json** directory.
 
 Following is the sample JSON localization structure:
 
@@ -87,8 +87,8 @@ Following is the sample JSON localization structure:
     └── en-GB.json
 
 1. Each directory represents a bucket with the name as that of directory. The concept is similar to an Excel file representing a bucket as discussed above.
-2. The root directory represents the `root` bucket.
-3. For a given bucket, the localization data for a `Locale` is kept in a file named `<locale>.json`.
+2. The root directory represents the **root** bucket.
+3. For a given bucket, the localization data for a **Locale** is kept in a file named **<locale>.json**.
 
 Sample JSON Content
 ^^^^^^^^^^^^^^^^^^^
@@ -119,10 +119,10 @@ Following is the content of one such file in root directory for German localizat
 
 1. Each JSON path of keys repesents a string to be localized. 
 2. The key names should be kept same across language files.
-3. `Key1.Key2...KeyN` is the flattened syntax to refer a localized string e.g. `address.coordinates`
+3. **Key1.Key2...KeyN** is the flattened syntax to refer a localized string e.g. **address.coordinates**
 
-Using the L Function with JSON Localizer
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Using the **L** Function with JSON Localizer
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Consider the following localization calls:
 
@@ -140,8 +140,8 @@ Consider the following localization calls:
 
 1. Use the flattened key syntax as discussed earlier. 
 2. The key names should be kept same across language files.
-3. `Key1.Key2...KeyN` is the flattened syntax to refer a localized string e.g. `address.coordinates`
-4. Files in root localization directory are available in `root` bucket.
+3. **Key1.Key2...KeyN** is the flattened syntax to refer a localized string e.g. **address.coordinates**
+4. Files in root localization directory are available in **root** bucket.
 
 Strict vs Non-strict mode for Localization
 ------------------------------------------
@@ -153,6 +153,6 @@ By default, Arjuna handles localization in a non-strict mode. This means if loca
     L("non_existing")
     L("non_existing", strict=True, locale=Locale.DE_DE)
 
-1. As by default the strict mode if off, `L("non_existing")` returns `non_existing`.
-2. You can enforce strict behavior by providing the `strict=True` argument to the `L` function. The second print statement in above code will raise an exception.
-3. You can switch on strict mode at the project level by including `l10n.strict = True` in the `project.yaml` file.
+1. As by default the strict mode if off, **L("non_existing")** returns **non_existing**.
+2. You can enforce strict behavior by providing the **strict=True** argument to the **L** function. The second print statement in above code will raise an exception.
+3. You can switch on strict mode at the project level by including **l10n.strict = True** in the **project.yaml** file.

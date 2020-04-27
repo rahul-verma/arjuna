@@ -27,24 +27,24 @@ class GuiSection(GuiAppContent):
     '''
         Represents a GUI Section i.e. a part of the current page in the Gui. 
         
-        It is an implementation of `GuiAppContent`.
+        It is an implementation of **GuiAppContent**.
 
         Args:
-            *args: Any number of positional argumnts. These are passed to the `prepare()` method if defined in inherited class.
+            *args: Any number of positional argumnts. These are passed to the **prepare()** method if defined in inherited class.
 
         Keyword Arguments:
-            parent_gui: (Mandatory) The `Gui` object that contains this `GuiSection`.
-            label: Label for the this `GuiSection`. If not provided, the class name is used as the label.
-            root: Root element of this `GuiSection`. Can be `label` string defined in its GNS File or a `Locator` object.
-            gns_dir: Relative Root Directory for GNS file associated with this `GuiSection`. Default is `page/section` directory in associated `GuiApp` namespace. If provided, it is considered relative to the namespace directory of associated `GuiApp`.
-            gns_file_name: Name of GNS file associated with this `GuiSection`. If not provided, default is `<label>.yaml`.
-            kwargs: Arbitrary keyword arugments. These are passed to the `prepare()` method if defined in inherited class.
+            parent_gui: (Mandatory) The **Gui** object that contains this **GuiSection**.
+            label: Label for the this **GuiSection**. If not provided, the class name is used as the label.
+            root: Root element of this **GuiSection**. Can be **label** string defined in its GNS File or a **Locator** object.
+            gns_dir: Relative Root Directory for GNS file associated with this **GuiSection**. Default is **page/section** directory in associated **GuiApp** namespace. If provided, it is considered relative to the namespace directory of associated **GuiApp**.
+            gns_file_name: Name of GNS file associated with this **GuiSection**. If not provided, default is **<label>.yaml**.
+            kwargs: Arbitrary keyword arugments. These are passed to the **prepare()** method if defined in inherited class.
 
         Note:
-            A `GuiSection` can have a root element. If defined, all locator calls in this object happen as a nested locating call using the root element.
+            A **GuiSection** can have a root element. If defined, all locator calls in this object happen as a nested locating call using the root element.
 
                 - Root element provided in in __init__ call is given preference.
-                - If not provided, Arjuna looks for `root` definition in `load` section of its GNS file.
+                - If not provided, Arjuna looks for **root** definition in **load** section of its GNS file.
                 - If above is also not provided, then locating happens from the root of the DOM of current page.
     '''
 
@@ -120,7 +120,7 @@ class GuiSection(GuiAppContent):
             locator: `GuiWidgetLocator` object.
 
             Returns:
-                An object of type `GuiWidget`. Exact object type depends on the value of `type` attribute in `GuiWidgetLocator`. 
+                An object of type `GuiWidget`. Exact object type depends on the value of **type** attribute in `GuiWidgetLocator`. 
         '''
         return self.__get_caller("locate")(fargs=fargs, **kwargs)
 
@@ -129,7 +129,7 @@ class GuiSection(GuiAppContent):
             Locate a `GuiElement`.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use `.format(kwargs).wait_until_absent` for more Pythonic code when formatting.
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
                 **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
 
             Returns:
@@ -142,7 +142,7 @@ class GuiSection(GuiAppContent):
             Locate a `GuiMultiElement`.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use `.format(kwargs).wait_until_absent` for more Pythonic code when formatting.
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
                 **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
 
             Returns:
@@ -155,7 +155,7 @@ class GuiSection(GuiAppContent):
             Locate a `GuiDropDown`.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use `.format(kwargs).wait_until_absent` for more Pythonic code when formatting.
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
                 **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
 
             Returns:
@@ -168,7 +168,7 @@ class GuiSection(GuiAppContent):
             Locate a `GuiRadioGroup`
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use `.format(kwargs).wait_until_absent` for more Pythonic code when formatting.
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
                 **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
 
             Returns:
@@ -179,14 +179,14 @@ class GuiSection(GuiAppContent):
     @property
     def parent(self):
         '''
-            Parent GUI of this `GuiSection`.
+            Parent GUI of this **GuiSection**.
         '''
         return self.__parent
 
     @property
     def source(self) -> GuiElementSource:
         '''
-           `GuiElementSource` object for the root element of this `GuiSection`.
+           `GuiElementSource` object for the root element of this **GuiSection**.
 
            Raises:
             Exception is raised if root element is not defined.

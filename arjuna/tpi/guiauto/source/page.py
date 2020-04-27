@@ -20,7 +20,7 @@ from .base import SingleGuiEntitySource
 
 class GuiPageSource(SingleGuiEntitySource):
     '''
-        Source of a `GuiPage`.
+        Source of a **GuiPage**.
     '''
 
     def __init__(self, raw_source):

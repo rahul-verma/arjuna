@@ -23,10 +23,10 @@ class GuiWidgetContainer(metaclass=abc.ABCMeta):
     '''
         Container of GuiWidgets.
 
-        `GuiAutomator` and `GuiElement` are current implementations of a GuiWidgetContainer.
+        **GuiAutomator** and **GuiElement** are current implementations of a GuiWidgetContainer.
 
         Arguments:
-            config: `Configuration` object.
+            config: **Configuration** object.
     '''
 
     def __init__(self, config):
@@ -38,7 +38,7 @@ class GuiWidgetContainer(metaclass=abc.ABCMeta):
     @property
     def config(self):
         '''
-            `Configuration` object associated with this GuiWidgetContainer.
+            **Configuration** object associated with this GuiWidgetContainer.
         ''' 
         return self.__config
 
@@ -49,7 +49,7 @@ class GuiWidgetContainer(metaclass=abc.ABCMeta):
     @property
     def max_wait(self):
         '''
-            Value of `ArjunaOption.GUIAUTO_MAX_WAIT` for this GuiWidgetContainer.
+            Value of **ArjunaOption.GUIAUTO_MAX_WAIT** for this GuiWidgetContainer.
         ''' 
         return self.config.value("guiauto.max.wait")
 
