@@ -99,7 +99,7 @@ All the command line options specified for [the `run-project` command](#the-run-
 The run-session command
 -----------------------
 
-This command is used to run tests as per a session definition.yaml file.
+This command is used to run tests as per a session definition in `<Project Root Directory>/config/sessions.yaml` file.
 
 .. code-block:: bash
 
@@ -108,6 +108,32 @@ This command is used to run tests as per a session definition.yaml file.
 All the command line options specified for [the `run-project` command](#the-run-project-command) are supported. In addition, following selection related options are available:
 
 - **-s** or **--session-name**: Name of session definition file (without .yaml extension)
+
+The run-stage command
+-----------------------
+
+This command is used to run tests as per a test stage definition in `<Project Root Directory>/config/stages.yaml` file.
+
+.. code-block:: bash
+
+   python -m arjuna run-stage -p /path/to/proj_name -s <stage_name>
+
+All the command line options specified for [the `run-project` command](#the-run-project-command) are supported. In addition, following selection related options are available:
+
+- **-s** or **--stage-name**: Name of a defined stage
+
+The run-session command
+-----------------------
+
+This command is used to run tests as per a test group definition in `<Project Root Directory>/config/groups.yaml` file.
+
+.. code-block:: bash
+
+   python -m arjuna run-group -p /path/to/proj_name -g <group_name>
+
+All the command line options specified for [the `run-project` command](#the-run-project-command) are supported. In addition, following selection related options are available:
+
+- **-g** or **--group-name**: Name of a define group.
 
 Using arjuna_launcher.py Script instead of python -m arjuna
 -----------------------------------------------------------

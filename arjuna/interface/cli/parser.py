@@ -61,7 +61,7 @@ class RunParser(Parser):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument("-r", "--run-id", dest="run.id", metavar="run_id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
-        self.parser.add_argument('-o', '--output-formats', dest="report.formats", type=report_format, metavar=('F1','F2'), default=['XML', 'HTML'], nargs='+', help='One or more report format names.') # choices=['XML', 'HTML'], 
+        self.parser.add_argument('-o', '--output-format', dest="report.formats", type=report_format, metavar='report_format', action="append", help='Output/Report format. Can pass any number of these switches.') # choices=['XML', 'HTML'], 
         self.parser.add_argument('--update', dest="static.rid", action='store_true', help = 'Will result in overwriting of report files. Useful during script development.')
         self.parser.add_argument('--dry-run', dest="dry_run", metavar="dry_run_type", type=dry_run_type, help='Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. SHOW_TESTS - enumerate tests. SHOW_PLAN - enumerates tests and fixtures. RUN_FIXTURES - Executes setup/teardown fixtures and emuerates tests.')
         self.parser.add_argument('-c', '--ref-conf', dest="ref_conf", metavar="config_name", type=str, help="Reference Configuration object name for this run. Default is 'ref'")
@@ -123,12 +123,12 @@ class PickersParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-im', '--include-modules', dest="imodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for including test modules.')
-        self.parser.add_argument('-em', '--exclude-modules-in-stage', dest="emodules", metavar=('M1','M2'), default=None, nargs='+', help='One or more names/patterns for excluding test modules.')
+        self.parser.add_argument('-im', '--include-module', dest="imodules", action="append", metavar="module_full_or_partial_name", default=None, help='Names/pattern for including test modules. Can pass any number of these switches.')
+        self.parser.add_argument('-em', '--exclude-module', dest="emodules", action="append", metavar="module_full_or_partial_name", default=None, help='Names/pattern for  for excluding test modules. Can pass any number of these switches.')
         # self.parser.add_argument('-cc', '--cclasses', dest="cclasses", metavar=('C1','C2'), default=None, nargs='+', help='One or more names/patterns for considering test classes.')
         # self.parser.add_argument('-ic', '--iclasses', dest="iclasses", metavar=('C1','C2'), default=None, nargs='+', help='One or more names/patterns for ignoring test classes.')
-        self.parser.add_argument('-it', '--include-tests', dest="itests", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for including test functions.')
-        self.parser.add_argument('-et', '--exclude-tests', dest="etests", metavar=('F1','F2'), default=None, nargs='+', help='One or more names/patterns for excluding test functions.')
+        self.parser.add_argument('-it', '--include-test', dest="itests", action="append", metavar="test_full_or_partial_name", default=None, help='Names/pattern for for including test functions. Can pass any number of these switches.')
+        self.parser.add_argument('-et', '--exclude-test', dest="etests", action="append", metavar="test_full_or_partial_name", default=None, help='Names/pattern for for excluding test functions. Can pass any number of these switches.')
 
     def process(self, arg_dict):
         pass

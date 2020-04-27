@@ -153,7 +153,7 @@ class TestGroup:
         self.__pytest_args.extend(pytest_report_args)
         self.__pytest_args.extend(self.__test_args)
 
-        if self.__dry_run is not False:
+        if self.__dry_run not in {False, None}:
             print("!!!!!! This is a DRY RUN !!!!!!!")
             if self.__dry_run == DryRunType.SHOW_TESTS:
                 print("Dry Run Type: SHOW TESTS")
