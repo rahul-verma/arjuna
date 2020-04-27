@@ -61,9 +61,9 @@ class RunParser(Parser):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument("-r", "--run-id", dest="run.id", metavar="run_id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
-        self.parser.add_argument('-o', '--output-format', dest="report.formats", type=report_format, metavar='report_format', action="append", help='Output/Report format. Can pass any number of these switches.') # choices=['XML', 'HTML'], 
+        self.parser.add_argument('-o', '--output-format', dest="report.formats", type=report_format, action="append", choices=[i for i in ReportFormat.__members__], help='Output/Report format. Can pass any number of these switches.') # choices=['XML', 'HTML'], 
         self.parser.add_argument('--update', dest="static.rid", action='store_true', help = 'Will result in overwriting of report files. Useful during script development.')
-        self.parser.add_argument('--dry-run', dest="dry_run", metavar="dry_run_type", type=dry_run_type, help='Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. SHOW_TESTS - enumerate tests. SHOW_PLAN - enumerates tests and fixtures. RUN_FIXTURES - Executes setup/teardown fixtures and emuerates tests.')
+        self.parser.add_argument('--dry-run', dest="dry_run", choices=[i for i in DryRunType.__members__], type=dry_run_type, help='Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. SHOW_TESTS - enumerate tests. SHOW_PLAN - enumerates tests and fixtures. RUN_FIXTURES - Executes setup/teardown fixtures and emuerates tests.')
         self.parser.add_argument('-c', '--ref-conf', dest="ref_conf", metavar="config_name", type=str, help="Reference Configuration object name for this run. Default is 'ref'")
         self.parser.add_argument('-ao', '--arjuna-option', dest="ao",
                                  nargs=2,
@@ -75,6 +75,11 @@ class RunParser(Parser):
                                  action='append',
                                  metavar=('option', 'value'),
                                  help='User Option. Can pass any number of these switches.')
+        self.parser.add_argument('-dl', '--display-level', dest='log.console.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
+                                 help="Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')", default=LoggingLevel.INFO.name)
+        self.parser.add_argument('-ll', '--log-level', dest='log.file.level', type=ustr, choices=[i for i in LoggingLevel.__members__],
+                                 help="Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')", default=LoggingLevel.DEBUG.name)
+
     def process(self, arg_dict):
         pass
 

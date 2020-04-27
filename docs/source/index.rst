@@ -207,9 +207,12 @@ Arjuna Exceptions
     * Configuration
         * :py:class:`UndefinedConfigError <arjuna.tpi.error.UndefinedConfigError>`
         * :py:class:`ConfigCreationError <arjuna.tpi.error.ConfigCreationError>`
-    * Test Session
+    * Test Session, Stage and Group
         * :py:class:`UndefinedTestSessionError <arjuna.tpi.error.UndefinedTestSessionError>`
         * :py:class:`InvalidTestSessionDefError <arjuna.tpi.error.InvalidTestSessionDefError>`
+        * :py:class:`UndefinedTestStageError <arjuna.tpi.error.UndefinedTestStageError>`
+        * :py:class:`InvalidTestStageDefError <arjuna.tpi.error.InvalidTestStageDefError>`
+        * :py:class:`UndefinedTestGroupError <arjuna.tpi.error.UndefinedTestGroupError>`
     * Gui Automation
         * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.error.GuiWidgetForLabelPresentError>`
         * :py:class:`GuiWidgetPresentError <arjuna.tpi.error.GuiWidgetPresentError>`
