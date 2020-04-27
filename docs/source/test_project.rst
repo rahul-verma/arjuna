@@ -12,7 +12,7 @@ Please also note that some of these directories are mandatory as a part of Arjun
 - **config**: Contains configuration files.
 
     - **data.yaml**: File containing definitions of Data Configurations.
-    - **data.yaml**: File containing definitions of Data Configurations.
+    - **envs.yaml**: File containing definitions of Environment Configurations.
     - **groups.yaml**: File containing definitions of Test Groups.
     - **project.yaml**: Your project's configuration file containing project-level configuration settings.
     - **sessions.yaml**: File containing definitions of Test Sessions.
