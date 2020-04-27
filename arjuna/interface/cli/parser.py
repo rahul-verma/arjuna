@@ -108,6 +108,17 @@ class StageParser(Parser):
             print("Fatal Error in CLI processing. You must provide a valid test stage name using -s or --stage-name switch", file=sys.stderr)
             sys.exit(1)
 
+class GroupParser(Parser):
+    def __init__(self):
+        super().__init__()
+        self.parser = argparse.ArgumentParser(add_help=False)
+        self.parser.add_argument("-g", "--group-name", dest="group_name", metavar="group_name", type=partial(lname_check, "Group Name"), help = 'Name of a defined group in test groups configuration file in <Project Root>/config/groups.yaml file.')
+
+    def process(self, arg_dict):
+        if arg_dict['group_name'] is None:
+            print("Fatal Error in CLI processing. You must provide a valid test group name using -g or --group-name switch", file=sys.stderr)
+            sys.exit(1)
+
 class PickersParser(Parser):
     def __init__(self):
         super().__init__()

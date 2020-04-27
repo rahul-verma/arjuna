@@ -133,4 +133,11 @@ class MagicTestStage(TestStage):
     def __init__(self, *, session, im=None, em=None, it=None, et=None):
         super().__init__(name="mstage", config=session.config, session=session, num_threads=1)
         self.add_group(MagicTestGroup(session=session, stage=self, im=im, em=em, it=it, et=et))
+
+class MagicTestStageForGroup(TestStage):
+
+    def __init__(self, *, session, group_name):
+        super().__init__(name="mstage", config=session.config, session=session, num_threads=1)
+        from arjuna.engine.session import YamlTestSession
+        self.add_group(YamlTestGroup(group_yaml=YamlTestSession.get_group_yaml(group_name), session=self.session, stage=self))
         

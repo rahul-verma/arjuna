@@ -50,7 +50,7 @@ class ArjunaCLI:
         run_default_group_parser = RunDefaultGroupParser()
         session_parser = SessionParser()
         stage_parser = StageParser()
-        # group_parser = GroupParser()
+        group_parser = GroupParser()
         pickers_parser = PickersParser()
 
         # Create primary command handlers
@@ -58,7 +58,7 @@ class ArjunaCLI:
         self.run_project = RunProject(subparsers, [project_parser, run_parser, run_default_group_parser])
         self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
         self.run_stage = RunStage(subparsers, [project_parser, run_parser, stage_parser])
-        # self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])
+        self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])
         self.run_selected = RunSelected(subparsers, [project_parser, run_parser, run_default_group_parser, pickers_parser])
 
     def init(self):
@@ -83,7 +83,7 @@ class ArjunaCLI:
             CommandEnum.RUN_PROJECT: "Running the project",
             CommandEnum.RUN_SESSION: "Running the selected test session",
             CommandEnum.RUN_STAGE: "Running the selected test stage",
-            # CommandEnum.RUN_GROUP: "Running the selected group",
+            CommandEnum.RUN_GROUP: "Running the selected test group",
             CommandEnum.RUN_SELECTED: "Running tests based on selectors"
         }
 
@@ -101,6 +101,7 @@ class ArjunaCLI:
             CommandEnum.RUN_PROJECT: (self.run_project.execute, ),
             CommandEnum.RUN_SESSION: (self.run_session.execute, ),
             CommandEnum.RUN_STAGE: (self.run_stage.execute, ),
+            CommandEnum.RUN_GROUP: (self.run_group.execute, ),
             # CommandEnum.RUN_GROUP: (self.run_group.execute, ),
             CommandEnum.RUN_SELECTED: (self.run_selected.execute, )
         }

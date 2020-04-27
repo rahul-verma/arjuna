@@ -19,7 +19,7 @@ from arjuna.tpi.constant import ArjunaOption
 from arjuna.core.yaml import Yaml
 from arjuna.core.error import *
 from arjuna.tpi.error import *
-from .stage import TestStage, MagicTestStage, YamlTestStage
+from .stage import TestStage, MagicTestStage, YamlTestStage, MagicTestStageForGroup
 
 class BaseTestSession:
 
@@ -68,7 +68,16 @@ class MagicTestSessionForStage(BaseTestSession):
         super().__init__("msession", config, dry_run=dry_run)
 
         YamlTestSession.load_session_defs()
+        sys.exit(1)
         self.add_stage(YamlTestStage(stage_yaml=YamlTestSession.get_stage_yaml(stage_name), session=self))
+
+class MagicTestSessionForGroup(BaseTestSession):
+
+    def __init__(self, group_name, config, dry_run=False):
+        super().__init__("msession", config, dry_run=dry_run)
+
+        YamlTestSession.load_session_defs()
+        self.add_stage(MagicTestStageForGroup(session=self, group_name=group_name))
 
 class YamlTestSession(BaseTestSession):
 

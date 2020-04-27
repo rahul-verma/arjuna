@@ -154,11 +154,18 @@ class TestGroup:
         self.__pytest_args.extend(self.__test_args)
 
         if self.__dry_run is not False:
+            print("!!!!!! This is a DRY RUN !!!!!!!")
             if self.__dry_run == DryRunType.SHOW_TESTS:
+                print("Dry Run Type: SHOW TESTS")
+                print("You can see the test functions which will be executed as per settings of your command.")
                 self.__pytest_args.extend(["--collect-only"])
             elif self.__dry_run == DryRunType.SHOW_PLAN:
+                print("Dry Run Type: SHOW PLAN")
+                print("You can see the test functions as well as the fixtures which will be executed as per settings of your command.")
                 self.__pytest_args.extend(["--setup-plan"])
             elif self.__dry_run == DryRunType.RUN_FIXTURES:
+                print("Dry Run Type: RUN FIXTURES")
+                print("All fixtures will be executed as per your current command. You can see the test functions which will be executed as per settings of your command.")
                 self.__pytest_args.extend(["--setup-only"])
 
     def __str__(self):

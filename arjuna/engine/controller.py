@@ -91,6 +91,11 @@ class TestSessionController:
         from arjuna.engine.session import MagicTestSessionForStage
         self.__session = MagicTestSessionForStage(stage_name, ref_config, dry_run=dry_run)
 
+    def load_tests_for_group(self, *, group_name, dry_run=False, ref_conf_name=None):
+        ref_config = self.__msession_config(ref_conf_name)
+        from arjuna.engine.session import MagicTestSessionForGroup
+        self.__session = MagicTestSessionForGroup(group_name, ref_config, dry_run=dry_run)
+
     def run(self):
         self.__session.run()
 

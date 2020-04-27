@@ -278,6 +278,21 @@ class RunStage(__RunCommand):
     def pop_command_args(self, arg_dict):
         self.__stage_name = arg_dict.pop("stage_name")
 
+class RunGroup(__RunCommand):
+    def __init__(self, subparsers, parents):
+        super().__init__(subparsers, 'run-group', parents, "Run tests as per the named test group definition in groups.yaml.")
+        self.__group_name = None
+
+    def execute(self, arg_dict):
+        super().execute(arg_dict)
+        from arjuna import Arjuna
+        session = Arjuna.get_test_session()
+        session.load_tests_for_group(group_name=self.__group_name, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
+        session.run()
+
+    def pop_command_args(self, arg_dict):
+        self.__group_name = arg_dict.pop("group_name")
+
 
 class RunSelected(__RunCommand):
 
