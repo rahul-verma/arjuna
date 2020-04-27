@@ -68,7 +68,7 @@ class GNS:
 
     def formatter(self, **fargs) -> GNSLabelFormatter:
         '''
-            Create a :class:**~arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter** object.
+            Create a :class:`~arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter` object.
 
             Keyword Arguments:
                 **fargs: Arbitrary key-value pairs to be used for formatting identifiers in **GuiWidgetLocator**.

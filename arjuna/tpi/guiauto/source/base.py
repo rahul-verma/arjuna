@@ -57,7 +57,7 @@ class GuiSource:
     @property
     def content(self) -> GuiSourceContent:
         '''
-            Source content of associated GUI entity returned as :class:**~arjuna.tpi.guiauto.source.content.GuiSourceContent**.
+            Source content of associated GUI entity returned as :class:`~arjuna.tpi.guiauto.source.content.GuiSourceContent`.
         '''
         return self.__content
 
@@ -92,7 +92,7 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
     @property
     def node(self) -> XmlNode:
         '''
-            Source code as an Arjuna :class:**~arjuna.tpi.helper.xml.XmlNode** for advanced inquiry and parsing.
+            Source code as an Arjuna :class:`~arjuna.tpi.helper.xml.XmlNode` for advanced inquiry and parsing.
         '''
         return self.__node
 

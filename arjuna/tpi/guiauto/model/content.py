@@ -143,7 +143,7 @@ class GuiAppContent(Gui, ScreenShooter):
 
     def formatter(self, **fargs) -> GuiWidgetLocatorFormatter:
         '''
-            Create a :class:**~arjuna.tpi.guiauto.meta.formatter.GuiWidgetLocatorFormatter** object.
+            Create a :class:`~arjuna.tpi.guiauto.meta.formatter.GuiWidgetLocatorFormatter` object.
 
             Keyword Arguments:
                 **fargs: Arbitrary key-value pairs to be used for formatting identifiers in `GuiWidgetLocator`.
