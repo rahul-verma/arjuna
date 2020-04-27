@@ -110,7 +110,7 @@ All the command line options specified for [the `run-project` command](#the-run-
 - **-s** or **--session-name**: Name of session definition file (without .yaml extension)
 
 The run-stage command
------------------------
+---------------------
 
 This command is used to run tests as per a test stage definition in `<Project Root Directory>/config/stages.yaml` file.
 
@@ -122,8 +122,8 @@ All the command line options specified for [the `run-project` command](#the-run-
 
 - **-s** or **--stage-name**: Name of a defined stage
 
-The run-session command
------------------------
+The run-group command
+---------------------
 
 This command is used to run tests as per a test group definition in `<Project Root Directory>/config/groups.yaml` file.
 
