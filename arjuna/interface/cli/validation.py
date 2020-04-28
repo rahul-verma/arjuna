@@ -76,8 +76,7 @@ def lname_check(context, input):
 # Argprse sends one argument at a time
 def report_format(input):
     try:
-        ReportFormat[input.upper()]
-        return input.upper()
+        return ReportFormat[input.upper()].name
     except Exception as e:
         print(e)
         print('Invalid Report Format provided: {}. Allowed values: {}'.format(input, ", ".join([e.name for e in ReportFormat])))
@@ -86,7 +85,7 @@ def report_format(input):
 
 def dry_run_type(input):
     try:
-        return DryRunType[input.upper()]
+        return DryRunType[input.upper()].name
     except Exception as e:
         allowed = ", ".join([e.name for e in DryRunType])
         print('Invalid Dry Run Type provided: {}. Allowed values: {}'.format(input, allowed))

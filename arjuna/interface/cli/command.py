@@ -74,6 +74,8 @@ class MainCommand(Command):
         def format_value(k, v):
             if k in {"ao", "uo"}:
                 return v
+            if k == "report.formats" and v is None:
+                v = ['XML', 'HTML']
             if type(v) is list:
                 return ",".join([str(i) for i in v])
             else:
@@ -87,6 +89,8 @@ class MainCommand(Command):
             import traceback
             traceback.print_exc()
             sys_utils.fexit()
+        import sys
+        sys.exit(1)
 
     def execute(self, arg_dict):
         pass
@@ -101,8 +105,6 @@ class CreateProject(Command):
 
     COMMON_DIRS_FILES = (
         (FileObjectType.DIR, "config"),
-        (FileObjectType.DIR, "config/env"),
-        (FileObjectType.DIR, "config/run"),
         (FileObjectType.FILE, "config/data.yaml"),
         (FileObjectType.FILE, "config/envs.yaml"),
         (FileObjectType.FILE, "config/groups.yaml"),
@@ -124,6 +126,8 @@ class CreateProject(Command):
         (FileObjectType.DIR, "guiauto/driver/mac"),
         (FileObjectType.DIR, "guiauto/driver/windows"),
         (FileObjectType.DIR, "guiauto/namespace"),
+        (FileObjectType.DIR, "hook"),
+        (FileObjectType.FILE, "hook/arjuna_config.py"),
         (FileObjectType.DIR, "report"),
         (FileObjectType.DIR, "script"),
         (FileObjectType.DIR, "test"),

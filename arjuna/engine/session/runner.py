@@ -51,6 +51,7 @@ class TestGroupRunner(threading.Thread):
                 child.thread_name = self.name
                 child.run()
             except Exception as e:
-                log_info(e)
+                import traceback
+                log_info(str(e) + traceback.format_exc())
                 continue
         log_info("Group runner started")

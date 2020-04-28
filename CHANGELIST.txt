@@ -48,10 +48,9 @@ Current Themes (In-Progress or Planned):
 
 0.9.24
 ------
-Primary Goal:
-    - Stability: Regression fixes for impact of changes made in last releases
-    - Docs: Document the new concepts supported by Arjuna.
-
+- Critical Fixes:
+    - dry_run and report format CLI defaults.
+- create-project command changed and fixed as per new project structure for config yamls.
 - CLI Updates
     - Logging switches -dl and -ll moved inside the commands.
     - -o and --dray-run show the allowed enum constants as choices.

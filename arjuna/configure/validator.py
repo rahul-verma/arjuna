@@ -205,7 +205,6 @@ class Validator:
             if type(input) is str:
                 return cls.report_formats([i.upper() for i in input.split(",")])
             elif type(input) in {list, tuple}:
-                print(input)
                 return [ReportFormat[i.upper()] for i in input]
         except:
             cls.raise_exc(input)

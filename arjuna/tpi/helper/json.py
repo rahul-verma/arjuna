@@ -64,7 +64,7 @@ class Json(_ArDict):
                 map: Python dict
 
             Returns:
-                Arjuna's Json object
+                Arjuna's `Json` object
         '''
 
         return Json(d)

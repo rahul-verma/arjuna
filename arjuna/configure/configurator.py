@@ -32,7 +32,7 @@ class TestConfigurator:
         self.__cli_config = cli_config
         self.__run_id = run_id
         self.__default_ref_config = None
-        self.__data_confs = {"data" : self._EMPTY_CONF}
+        self.__data_confs = None
         self.__env_confs = {"env" : self._EMPTY_CONF}
         self.__dataconf_enconf_confs = dict()
         self.__project_config_loaded = False
@@ -61,9 +61,13 @@ class TestConfigurator:
 
     def __load_data_confs(self):
         self.__data_confs = EditableConfig.data_confs(arjuna_conf=self.__default_ref_config)
+        if "data" not in self.__data_confs:
+            self.__data_confs["data"] = self._EMPTY_CONF
 
     def __load_env_confs(self):
         self.__env_confs = EditableConfig.env_confs(arjuna_conf=self.__default_ref_config)
+        if "data" not in self.__env_confs:
+            self.__env_confs["env"] = self._EMPTY_CONF
 
     def load_options_from_file(self, fpath):
         if file_utils.is_absolute_path(fpath):
