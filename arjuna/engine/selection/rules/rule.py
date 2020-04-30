@@ -25,7 +25,7 @@ class Rule:
         self.__target = target
         self.__condition = condition
         self.__expression = expression  
-        self.__expression_type = type(expression).__name__
+        self.__expression_type = type(expression)
         self.__checker = get_value_checker_for_symbol(self.__condition)
 
     @property
@@ -60,7 +60,7 @@ class Rule:
         return getattr(obj, self.container)
 
     def __str__(self):
-        return "{}(rule_str='{}', container={}, target={}, condition={}, expression={}, expression_type={}, checker={})".format(self.__class__.__name__, self.rule_str, self.container, self.target, self.condition, self.expression, self.expression_type, self.checker.__name__)
+        return "{}(rule_str='{}', container={}, target={}, condition={}, expression={}, expression_type={}, checker={})".format(self.__class__.__name__, self.rule_str, self.container, self.target, self.condition, self.expression, self.expression_type.__name__, self.checker.__name__)
 
 class BooleanPropPatternRule(Rule):
     '''
@@ -208,18 +208,19 @@ class PropertyPatternRule(Rule):
     def matches(self, obj):
         container = self._get_container_obj(obj)
         if not hasattr(container, self.target):
-            actual = False
+            actual = get_default_value_for_type(self.expression_type, self.target)
         else:
             actual = getattr(container, self.target)
-        return self.checker(self.expression, actual)
+
+        return self.checker(actual, self.expression)
 
 
-class Rules:
+class Selector:
 
     def __init__(self):
         self.__rules = list()
 
-    def from_str(self, rule_str):
+    def add_rule(self, rule_str):
         self.__rules.append(self.__build_rule(rule_str))
 
     def __build_rule(self, rule_str):

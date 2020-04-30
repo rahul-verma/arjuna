@@ -16,16 +16,18 @@
 # limitations under the License.
 
 from arjuna import *
-from arjuna.engine.selection.rules.rule import Rules
+from arjuna.engine.selection.rules.rule import Selector
 from arjuna.core.constant import *
 
+# Priority is contextually interpreted and not as a usual integer.
+# Priorty 1 in testing is higher than 2.
 
 @test
-def check_rule_creation_int_prop(request):
+def check_rule_creation_priority(request):
     r = "priority is 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -36,9 +38,9 @@ def check_rule_creation_int_prop(request):
     assert rule.checker.__name__ == 'are_equal'
 
     r = "priority eq 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -49,9 +51,9 @@ def check_rule_creation_int_prop(request):
     assert rule.checker.__name__ == 'are_equal'
 
     r = "priority = 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -62,9 +64,9 @@ def check_rule_creation_int_prop(request):
     assert rule.checker.__name__ == 'are_equal'
 
     r = "priority == 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -75,9 +77,9 @@ def check_rule_creation_int_prop(request):
     assert rule.checker.__name__ == 'are_equal'
 
     r = "priority not 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -88,9 +90,9 @@ def check_rule_creation_int_prop(request):
     assert rule.checker.__name__ == 'are_not_equal'
 
     r = "priority != 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -101,9 +103,9 @@ def check_rule_creation_int_prop(request):
     assert rule.checker.__name__ == 'are_not_equal'
 
     r = "priority ne 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -114,74 +116,87 @@ def check_rule_creation_int_prop(request):
     assert rule.checker.__name__ == 'are_not_equal'
 
     r = "priority lt 3"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
     assert rule.container == "properties"
     assert rule.target == "priority"
-    assert rule.condition == RuleConditionType.LESS_THAN
+    assert rule.condition == RuleConditionType.GREATER_THAN
     assert rule.expression == 3
-    assert rule.checker.__name__ == 'less_than'
+    assert rule.checker.__name__ == 'greater_than'
 
     r = "priority < 3"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.rule_str == r
+    assert rule.container == "properties"
+    assert rule.target == "priority"
+    assert rule.condition == RuleConditionType.GREATER_THAN
+    assert rule.expression == 3
+    assert rule.checker.__name__ == 'greater_than'
+
+    r = "priority gt 1"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
     assert rule.container == "properties"
     assert rule.target == "priority"
     assert rule.condition == RuleConditionType.LESS_THAN
-    assert rule.expression == 3
+    assert rule.expression == 1
     assert rule.checker.__name__ == 'less_than'
 
-    r = "priority gt 1"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
-    print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
-    assert rule.rule_str == r
-    assert rule.container == "properties"
-    assert rule.target == "priority"
-    assert rule.condition == RuleConditionType.GREATER_THAN
-    assert rule.expression == 1
-    assert rule.checker.__name__ == 'greater_than'
-
     r = "priority > 1"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
     assert rule.container == "properties"
     assert rule.target == "priority"
-    assert rule.condition == RuleConditionType.GREATER_THAN
+    assert rule.condition == RuleConditionType.LESS_THAN
     assert rule.expression == 1
-    assert rule.checker.__name__ == 'greater_than'
+    assert rule.checker.__name__ == 'less_than'
 
     r = "priority le 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
     assert rule.container == "properties"
     assert rule.target == "priority"
-    assert rule.condition == RuleConditionType.LESS_OR_EQUAL
+    assert rule.condition == RuleConditionType.GREATER_OR_EQUAL
     assert rule.expression == 2
-    assert rule.checker.__name__ == 'less_or_equal'
+    assert rule.checker.__name__ == 'greater_or_equal'
 
     r = "priority <= 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.rule_str == r
+    assert rule.container == "properties"
+    assert rule.target == "priority"
+    assert rule.condition == RuleConditionType.GREATER_OR_EQUAL
+    assert rule.expression == 2
+    assert rule.checker.__name__ == 'greater_or_equal'
+
+    r = "priority ge 2"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -191,29 +206,147 @@ def check_rule_creation_int_prop(request):
     assert rule.expression == 2
     assert rule.checker.__name__ == 'less_or_equal'
 
-    r = "priority ge 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
-    print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
-    assert rule.rule_str == r
-    assert rule.container == "properties"
-    assert rule.target == "priority"
-    assert rule.condition == RuleConditionType.GREATER_OR_EQUAL
-    assert rule.expression == 2
-    assert rule.checker.__name__ == 'greater_or_equal'
-
     r = "priority >= 2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
     assert rule.container == "properties"
     assert rule.target == "priority"
-    assert rule.condition == RuleConditionType.GREATER_OR_EQUAL
+    assert rule.condition == RuleConditionType.LESS_OR_EQUAL
     assert rule.expression == 2
-    assert rule.checker.__name__ == 'greater_or_equal'
+    assert rule.checker.__name__ == 'less_or_equal'
+
+
+class Empty:
+    pass
+
+class Obj:
+    def __init__(self):
+        self.properties = Empty()
+
+@test
+def check_priority_selection(request):
+    r = "priority is 2"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.properties.priority = 2
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.priority = 1
+    assert rule.matches(obj) is False
+
+    r = "priority is 5"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is True
+
+    r = "priority not 2"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.priority = 3
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.priority = 2
+    assert rule.matches(obj) is False
+
+    r = "priority lt 3"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.priority = 4
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.priority = 2
+    assert rule.matches(obj) is False
+
+    r = "priority gt 2"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.properties.priority = 1
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.priority = 3
+    assert rule.matches(obj) is False
+
+    r = "priority le 2"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.priority = 2
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.priority = 1
+    assert rule.matches(obj) is False
+
+    r = "priority ge 2"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.properties.priority = 2
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.priority = 3
+    assert rule.matches(obj) is False
+
+
+
+
+
+
+
+
+
+
 

@@ -43,6 +43,8 @@ built_in_prop_type = {
     BuiltInProp.UNSTABLE : bool,
     BuiltInProp.COMPONENT : str,
     BuiltInProp.APP_VERSION : str,
+    BuiltInProp.LEVEL : str,
+    BuiltInProp.REVIEWED : bool,
 }
 
 BOOL_MAP = {
@@ -75,28 +77,17 @@ SYMBOLS_MAP = {
     '>=': 'greater_or_equal',
 }
 
-__str_rules = {
-    RuleConditionType.EQUAL, 
-    RuleConditionType.MATCHES, 
-    RuleConditionType.CONTAINS, 
-    RuleConditionType.PARTIALLY_MATCHES
-}
-
-__number_rules =  {
-    RuleConditionType.EQUAL,
-    RuleConditionType.NOT_EQUAL,
-    RuleConditionType.LESS_THAN,
-    RuleConditionType.LESS_OR_EQUAL,
-    RuleConditionType.GREATER_THAN,
-    RuleConditionType.GREATER_OR_EQUAL
-}
-
-__str_rules = __str_rules.union(__number_rules)
-
 __str_symbols = {
     'matches',
     '~=',
-    '*='
+    '*=',
+    'is',
+    'not',
+    'eq',
+    'ne',
+    '!=',
+    '=',
+    '==',
 }
 
 __number_symbols =  {
@@ -117,17 +108,53 @@ __number_symbols =  {
     '>='
 }
 
-__str_symbols = __str_symbols.union(__number_symbols)
+__appver_symbols = __str_symbols.union(__number_symbols)
 
-ALLOWED_CONDITIONS = {
-    str : __str_rules,
-    bool : {
-            RuleConditionType.EQUAL, 
-            RuleConditionType.NOT_EQUAL
-        },
-    int : __number_rules,
-    float : __number_rules
+__priority_symbols =  {
+    'is' : 'is',
+    'not': 'not',
+    'eq': 'eq',
+    'ne': 'ne',
+    '=': '=',
+    '==': '==',
+    '!=': '!=',
+    'lt': 'gt',
+    '<': '>',
+    'le': 'ge',
+    '<=': '>=',
+    'gt': 'lt',
+    '>': '<',
+    'ge': 'le',
+    '>=': '<=',
 }
+
+# __str_rules = {
+#     RuleConditionType.EQUAL, 
+#     RuleConditionType.MATCHES, 
+#     RuleConditionType.CONTAINS, 
+#     RuleConditionType.PARTIALLY_MATCHES
+# }
+
+# __number_rules =  {
+#     RuleConditionType.EQUAL,
+#     RuleConditionType.NOT_EQUAL,
+#     RuleConditionType.LESS_THAN,
+#     RuleConditionType.LESS_OR_EQUAL,
+#     RuleConditionType.GREATER_THAN,
+#     RuleConditionType.GREATER_OR_EQUAL
+# }
+
+# __appver_rules = __str_rules.union(__number_rules)
+
+# ALLOWED_CONDITIONS = {
+#     str : __str_rules,
+#     bool : {
+#             RuleConditionType.EQUAL, 
+#             RuleConditionType.NOT_EQUAL
+#         },
+#     int : __number_rules,
+#     float : __number_rules
+# }
 
 ALLOWED_SYMBOLS = {
     str: __str_symbols,
@@ -163,14 +190,21 @@ def _validate_symbol(symbol):
         raise InvalidSelectionRule("Invalid condition symbol >>{}<< used. Allowed: {}".format(symbol, tuple(SYMBOLS_MAP.keys())))
 
 def _validate_allowed_symbol(target, target_type, symbol):
-    if symbol not in ALLOWED_SYMBOLS[target_type]:
+    if target == "app_version":
+        if symbol not in __appver_symbols:
+            raise InvalidSelectionRule("For app_version property, you have used an unexpected condition [{}]. Allowed: {}.".format(symbol, __appver_symbols))
+    elif symbol not in ALLOWED_SYMBOLS[target_type]:
         raise InvalidSelectionRule("[{}] property is of type [{}]. You have used an unexpected condition [{}]. Allowed: {}.".format(target, target_type.__name__, symbol, ALLOWED_SYMBOLS[target_type]))
 
 def convert_to_condition(target, target_type, symbol):
     symbol = symbol.strip().lower()
     _validate_symbol(symbol)
     _validate_allowed_symbol(target, target_type, symbol)
-    return RuleConditionType[SYMBOLS_MAP[symbol].upper()]
+    if target != "priority":
+        return RuleConditionType[SYMBOLS_MAP[symbol].upper()]
+    else:
+        return RuleConditionType[SYMBOLS_MAP[__priority_symbols[symbol]].upper()]
+
 
 def get_value_checker_for_symbol(condition):
     return VALUE_CHECKERS[condition]
@@ -217,3 +251,17 @@ def get_value_type(built_in_prop_name):
 
 def is_builtin_prop(name):
     return name.upper() in BuiltInProp.__members__
+
+__type_defaults = {
+    bool: False,
+    str: None,
+    int: None,
+    float: None
+}
+def get_default_value_for_type(in_type, name):
+    if name == "priority":
+        return 5
+    elif name == "app_version":
+        return "0.0.0"
+    else:
+        return __type_defaults[in_type]

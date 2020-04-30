@@ -84,7 +84,7 @@ class RuleBuilder:
                 converter = mrules.get_value_type(self.__robject)
                 allowed_condition_set = ALLOWED_CONDITIONS[converter]
                 if self.__condition not in allowed_condition_set:
-                    raise Exception("Rules for Built-in property >>{}<< of type {} can only use {} relation(s).".format(
+                    raise Exception("Selector for Built-in property >>{}<< of type {} can only use {} relation(s).".format(
                         self.__robject,
                         converter,
                         ALLOWED_SYMBOLS[converter]

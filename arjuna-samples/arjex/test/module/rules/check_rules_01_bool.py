@@ -16,16 +16,16 @@
 # limitations under the License.
 
 from arjuna import *
-from arjuna.engine.selection.rules.rule import Rules
+from arjuna.engine.selection.rules.rule import Selector
 from arjuna.core.constant import *
 
 @test
 def check_rule_creation_bool_pattern(request):
-    rules = Rules()
+    selector = Selector()
 
     r = "unstable"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "BooleanPropPatternRule"
     assert rule.rule_str == r
@@ -36,10 +36,10 @@ def check_rule_creation_bool_pattern(request):
     assert rule.checker.__name__ == 'are_equal'
 
     # Check NOT
-    rules = Rules()
+    selector = Selector()
     r = "not unstable"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "BooleanPropPatternRule"
     assert rule.rule_str == r
@@ -52,10 +52,10 @@ def check_rule_creation_bool_pattern(request):
 @test
 def check_rule_creation_prop_pattern(request):
     # Check boolean prop
-    rules = Rules()
+    selector = Selector()
     r = "unstable is False"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -65,10 +65,10 @@ def check_rule_creation_prop_pattern(request):
     assert rule.expression == False
     assert rule.checker.__name__ == 'are_equal'
 
-    rules = Rules()
+    selector = Selector()
     r = "unstable not True"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -79,10 +79,10 @@ def check_rule_creation_prop_pattern(request):
     assert rule.checker.__name__ == 'are_not_equal'
 
     # Check boolean prop - value alternatives
-    rules = Rules()
+    selector = Selector()
     r = "unstable is On"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -92,10 +92,10 @@ def check_rule_creation_prop_pattern(request):
     assert rule.expression == True
     assert rule.checker.__name__ == 'are_equal'
 
-    rules = Rules()
+    selector = Selector()
     r = "unstable is oFf"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -106,10 +106,10 @@ def check_rule_creation_prop_pattern(request):
     assert rule.checker.__name__ == 'are_equal'
 
     # Check boolean prop - value alternatives
-    rules = Rules()
+    selector = Selector()
     r = "unstable is YeS"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -119,10 +119,10 @@ def check_rule_creation_prop_pattern(request):
     assert rule.expression == True
     assert rule.checker.__name__ == 'are_equal'
 
-    rules = Rules()
+    selector = Selector()
     r = "unstable is nO"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -135,18 +135,18 @@ def check_rule_creation_prop_pattern(request):
 @test
 def check_rule_creation_invalid(request):
     try:
-        rules = Rules()
+        selector = Selector()
         r = "unstable is anything"
-        rules.from_str(r)
+        selector.add_rule(r)
     except InvalidSelectionRule:
         pass
     else:
         assert 1 == 2
 
     try:
-        rules = Rules()
+        selector = Selector()
         r = "unstable < True"
-        rules.from_str(r)
+        selector.add_rule(r)
     except InvalidSelectionRule:
         pass
     else:
@@ -162,10 +162,10 @@ class Obj:
 
 @test
 def check_rule_evaluation_boolean_pattern(request):
-    rules = Rules()
+    selector = Selector()
     r = "unstable"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
 
     obj = Obj()
@@ -179,10 +179,10 @@ def check_rule_evaluation_boolean_pattern(request):
     obj.properties.unstable = False
     assert rule.matches(obj) is False
 
-    rules = Rules()
+    selector = Selector()
     r = "not unstable"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
 
     obj = Obj()
@@ -199,10 +199,10 @@ def check_rule_evaluation_boolean_pattern(request):
 
 @test
 def check_rule_evaluation_prop_pattern(request):
-    rules = Rules()
+    selector = Selector()
     r = "unstable is true"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
 
     obj = Obj()
@@ -216,10 +216,10 @@ def check_rule_evaluation_prop_pattern(request):
     obj.properties.unstable = False
     assert rule.matches(obj) is False
 
-    rules = Rules()
+    selector = Selector()
     r = "unstable is false"
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
 
     obj = Obj()

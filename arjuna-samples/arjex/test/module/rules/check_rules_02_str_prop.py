@@ -16,16 +16,16 @@
 # limitations under the License.
 
 from arjuna import *
-from arjuna.engine.selection.rules.rule import Rules
+from arjuna.engine.selection.rules.rule import Selector
 from arjuna.core.constant import *
 
 @test
 def check_rule_creation_str_prop_simple(request):
     
     r = "author is Rahul Verma"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -36,9 +36,9 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.checker.__name__ == 'are_equal'
 
     r = "author eq Rahul Verma"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -49,9 +49,9 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.checker.__name__ == 'are_equal'
 
     r = "author = Rahul Verma"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -62,9 +62,9 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.checker.__name__ == 'are_equal'
 
     r = "author == Rahul Verma"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -75,9 +75,9 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.checker.__name__ == 'are_equal'
 
     r = "author != Rahul Verma"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -88,9 +88,9 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.checker.__name__ == 'are_not_equal'
 
     "author not Rahul Verma"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -101,9 +101,9 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.checker.__name__ == 'are_not_equal'
 
     "author ne Rahul Verma"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -114,9 +114,9 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.checker.__name__ == 'are_not_equal'
 
     r = "author matches Rahul VERMA"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -127,9 +127,9 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.checker.__name__ == 'match_with_ignore_case'
 
     r = "author ~= Rahul VERMA"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -140,9 +140,9 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.checker.__name__ == 'match_with_ignore_case'
 
     r = "author *= RaHuL"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "PropertyPatternRule"
     assert rule.rule_str == r
@@ -151,3 +151,98 @@ def check_rule_creation_str_prop_simple(request):
     assert rule.condition == RuleConditionType.PARTIALLY_MATCHES
     assert rule.expression == "RaHuL"
     assert rule.checker.__name__ == 'partially_match_with_ignore_case'
+
+class Empty:
+    pass
+
+class Obj:
+    def __init__(self):
+        self.properties = Empty()
+
+@test
+def check_str_selection(request):
+    r = "author is Rahul Verma"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.author = None
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.properties.author = 'Rahul Verma'
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.author = 'rahul Verma'
+    assert rule.matches(obj) is False
+
+    r = "author != Rahul Verma"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.author = None
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.author = 'Rahul Verma'
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.properties.author = 'rahul Verma'
+    assert rule.matches(obj) is True
+
+    r = "author ~= Rahul VERMA"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.author = None
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.properties.author = 'rahul Verma'
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.author = 'Arjuna'
+    assert rule.matches(obj) is False
+
+    r = "author *= RaHuL"
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
+    print(rule)
+
+    obj = Obj()
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.author = None
+    assert rule.matches(obj) is False
+
+    obj = Obj()
+    obj.properties.author = 'X RAHul Y'
+    assert rule.matches(obj) is True
+
+    obj = Obj()
+    obj.properties.author = 'Rah'
+    assert rule.matches(obj) is False
+
+

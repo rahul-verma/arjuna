@@ -331,6 +331,8 @@ class BuiltInProp(Enum):
     UNSTABLE = auto()
     COMPONENT = auto()
     APP_VERSION = auto()
+    LEVEL = auto()
+    REVIEWED = auto()
 
 class RuleNature(Enum):
     INCLUDE = auto()

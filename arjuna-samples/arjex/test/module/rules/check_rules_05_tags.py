@@ -16,15 +16,15 @@
 # limitations under the License.
 
 from arjuna import *
-from arjuna.engine.selection.rules.rule import Rules
+from arjuna.engine.selection.rules.rule import Selector
 from arjuna.core.constant import *
 
 @test
 def check_rule_creation_tags(request):
     r = "with tags chrome, firefox"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -35,9 +35,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_intersection'
 
     r = "with tag chrome"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -48,9 +48,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_intersection'
 
     r = "withall tags chrome, abc"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -61,9 +61,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'is_subset'
 
     r = "without tags chrome, abc"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -74,9 +74,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_no_intersection'
 
     r = "without tag chrome"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -87,9 +87,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_no_intersection'
 
     r = "with bugs b1,b2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -100,9 +100,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_intersection'
 
     r = "with bug b1"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -113,9 +113,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_intersection'
 
     r = "withall bugs b1,abc"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -126,9 +126,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'is_subset'
 
     r = "without bugs b1,abc"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -139,9 +139,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_no_intersection'
 
     r = "without bug b1"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -152,9 +152,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_no_intersection'
 
     r = "with envs env1, env2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -165,9 +165,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_intersection'
 
     r = "with env env1"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -178,9 +178,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_intersection'
 
     r = "withall envs env1, env2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -191,9 +191,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'is_subset'
 
     r = "without envs env1, env2"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -204,9 +204,9 @@ def check_rule_creation_tags(request):
     assert rule.checker.__name__ == 'has_no_intersection'
 
     r = "without env env1"
-    rules = Rules()    
-    rules.from_str(r)
-    rule = rules.rules[0]
+    selector = Selector()    
+    selector.add_rule(r)
+    rule = selector.rules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r

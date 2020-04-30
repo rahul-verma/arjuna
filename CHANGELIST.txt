@@ -162,7 +162,7 @@ Current Themes (In-Progress or Planned):
     - AsserterMixin
     - ScreenShooter
     - All Arjuna Types in helper.arjtype
-- GuiDialog is a class of its own now. Rules to follow. Separated in its own module.
+- GuiDialog is a class of its own now. Selector to follow. Separated in its own module.
 - GuiAppContent separated in its own module.
 - GNS rules have been indicated in the API doc. Coded restrictions need to be done yet for a more closely controlled GNS namespace structure.
 - Log output (from display) is captured in the HTML report. Not displayed on the screen.

@@ -83,7 +83,7 @@ def match_with_ignore_case(target, pattern):
 
 def partially_match_with_ignore_case(target, pattern):
     if target is None: return False
-    if re.search(pattern, target, re.IGNORECASE):
+    if re.search(pattern, target, re.IGNORECASE) is not None:
         return True
     else:
         return False
@@ -127,17 +127,13 @@ def __validate_args_as_numbers(func, left, right):
 
 
 def less_than(left, right):
-    __validate_args_as_numbers("less_than", left, right)
     return left < right
 
 def less_or_equal(left, right):
-    __validate_args_as_numbers("less_or_equal", left, right)
     return left <= right
 
 def greater_than(left, right):
-    __validate_args_as_numbers("greater_than", left, right)
     return left > right
 
 def greater_or_equal(left, right):
-    __validate_args_as_numbers("greater_or_equal", left, right)
     return left >= right
