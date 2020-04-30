@@ -199,3 +199,15 @@ class YamlUndefinedSectionError(Exception):
 
 class TestGroupsFinished(Exception):
     pass
+
+class RuleNotMet(Exception):
+    pass
+
+class InvalidSelectionRule(Exception):
+    pass
+
+
+class RulePatternDoesNotMatchError(Exception):
+
+    def __init__(self, rule_str, pattern_class, expected_format):
+        super().__init__(f"{rule_str} is not a {pattern_class.__name__}. Expected format: {expected_format}")

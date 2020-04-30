@@ -72,7 +72,7 @@ class MainCommand(Command):
 
     def convert_to_dict(self, args):
         def format_value(k, v):
-            if k in {"ao", "uo"}:
+            if k in {"ao", "uo", "irules", "erules"}:
                 return v
             if k == "report.formats" and v is None:
                 v = ['XML', 'HTML']
@@ -299,6 +299,10 @@ class RunSelected(__RunCommand):
     def __init__(self, subparsers, parents):
         super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified in a single thread.")
         self.ref_conf_name = None
+        self.__rules = {
+            'irules' : None,
+            'erules' : None
+        }
 
     def execute(self, arg_dict):
         pickers_dict = dict()
@@ -340,3 +344,6 @@ class RunSelected(__RunCommand):
         session.load_tests(**pickers_dict, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
 
+    def pop_command_args(self, arg_dict):
+        arg_dict.pop('irules')
+        arg_dict.pop('erules')

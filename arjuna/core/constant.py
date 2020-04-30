@@ -320,3 +320,42 @@ class DryRunType(Enum):
     SHOW_TESTS = auto()
     SHOW_PLAN = auto()
     RUN_FIXTURES = auto()
+
+class BuiltInProp(Enum):
+    ID = auto()
+    PRIORITY = auto()
+    THREADS= auto()
+    NAME = auto()
+    AUTHOR = auto()
+    IDEA = auto()
+    UNSTABLE = auto()
+    COMPONENT = auto()
+    APP_VERSION = auto()
+
+class RuleNature(Enum):
+    INCLUDE = auto()
+    EXCLUDE = auto()
+
+class RuleType(Enum):
+    SET = auto()
+    DICT_KEY = auto()
+    DICT_VALUE = auto()
+
+class RuleTargetType(Enum):
+    PROPS = auto()
+    TAGS = auto()
+    BUGS = auto()
+
+class RuleConditionType(Enum):
+    EQUAL = auto()
+    NOT_EQUAL = auto()
+    MATCHES = auto()
+    PARTIALLY_MATCHES = auto()
+    LESS_THAN = auto()
+    LESS_OR_EQUAL = auto()
+    GREATER_THAN = auto()
+    GREATER_OR_EQUAL = auto()
+    CONTAINS = auto()
+    IS_SUBSET = auto()
+    HAS_INTERSECTION = auto()
+    NO_INTERSECTION = auto()

@@ -1,6 +1,13 @@
 Following is the list of critical additions and updates for a given released version:
 
 Current Themes (In-Progress or Planned):
+    - Tagging:
+        - Defined Tags
+        - Radom Tags
+    - Targeted Fixes:
+        - Flexibility when optional directories and files are missing.
+        - User Option as an enum constant should be allowed.
+        - Screenshot in HTML report.
     - Doc updates:
         - Update exiting docs
         - Test Fixture docs.
@@ -16,7 +23,6 @@ Current Themes (In-Progress or Planned):
         - Group level conf
             - existing: already there
             - create new
-        - Support for full names and aliases across conf files (e.g. ao/arjuna-options instead of arjuna_options)
         - with cleanup.
         - withx hook for programmatic identifiers.
         - More fixtures:
@@ -44,6 +50,7 @@ Current Themes (In-Progress or Planned):
     - Group to group dependency.
     - The report directory should contain a confs directory. Whenever a new configuration is created. All its parameters should be dumped in a file for reference.
     - Support multiple entries for same locator type in YAML file.
+        - As of now a label  
     - Develop the concept of Data Entity beyond named tuple.
 
 0.9.25
@@ -650,3 +657,18 @@ PytestDeprecationWarning: --no-print-logs is deprecated and scheduled for remova
   Please use --show-capture instead.
     _issue_warning_captured(NO_PRINT_LOGS, self._config.hook, stacklevel=2)
 
+
+Properties
+----------
+kwargs passed to decorators become properties.
+e.g. rating = 2
+properties can be pre-defined or custom.
+
+Tagging ideas:
+- author
+- priority
+- 
+
+--if 
+
+--if-not

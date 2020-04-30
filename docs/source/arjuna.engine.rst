@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
 
    arjuna.engine.data
+   arjuna.engine.selection
    arjuna.engine.session
 
 Submodules

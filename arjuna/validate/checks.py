@@ -100,6 +100,15 @@ def is_not_none(obj):
 def contains(parent, child):
     return child in parent
 
+def is_subset(left, right):
+    return left.issubset(right)
+
+def has_intersection(left, right):
+    return bool(left.intersection(right))
+
+def has_no_intersection(left, right):
+    return bool(not left.intersection(right))
+
 def does_not_contain(parent, child):
     return child not in parent
 

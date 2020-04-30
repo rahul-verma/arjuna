@@ -135,5 +135,8 @@ class PickersParser(Parser):
         self.parser.add_argument('-it', '--include-test', dest="itests", action="append", metavar="test_full_or_partial_name", default=None, help='Names/pattern for for including test functions. Can pass any number of these switches.')
         self.parser.add_argument('-et', '--exclude-test', dest="etests", action="append", metavar="test_full_or_partial_name", default=None, help='Names/pattern for for excluding test functions. Can pass any number of these switches.')
 
+        self.parser.add_argument('-ir', '--include-rule', dest="irules", action="append", metavar="rule", default=None, help='Include test functions that match the rule. Can pass any number of these switches.')
+        self.parser.add_argument('-er', '--exclude-rule', dest="erules", action="append", metavar="rule", default=None, help='Exclude test functions that match the rule. Can pass any number of these switches.')
+
     def process(self, arg_dict):
         pass
