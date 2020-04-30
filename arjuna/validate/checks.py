@@ -37,6 +37,7 @@ def throw_exception_for_incompt_equal_same(context, actual, expected):
         raise Exception(msg)
 
 def are_equal(actual, expected):
+    print(actual, expected)
     throw_exception_for_incompt_equal_same("equal/non-equal", actual, expected)
     return expected == actual
 

@@ -50,8 +50,6 @@ BOOL_MAP = {
     'false': False,
     'on': True,
     'off': False,
-    '1': True,
-    '0': False,
     'yes' : True,
     'no' : False
 }

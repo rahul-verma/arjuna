@@ -8,7 +8,7 @@ from arjuna.core.error import *
 class Pattern:
 
     @classmethod
-    def match(cls, pattern, target_str):
+    def extract(cls, pattern, target_str):
         return pattern.match(target_str)
 
 
@@ -56,25 +56,11 @@ class Rule:
     def checker(self):
         return self.__checker 
 
+    def _get_container_obj(self, obj):
+        return getattr(obj, self.container)
+
     def __str__(self):
         return "{}(rule_str='{}', container={}, target={}, condition={}, expression={}, expression_type={}, checker={})".format(self.__class__.__name__, self.rule_str, self.container, self.target, self.condition, self.expression, self.expression_type, self.checker.__name__)
-
-    def _not_met_exc(self):
-        # Run time rules checking did not succeed for the test object
-        raise RuleNotMet()
-
-    def _raise_exception_for_check_result(self, check_result):
-        if check_result:
-            if self.is_include_type:
-                return
-            else:
-                self._not_met_exc()
-        else:
-            if self.is_include_type:
-                self._not_met_exc()
-            else:
-                return
-
 
 class BooleanPropPatternRule(Rule):
     '''
@@ -99,7 +85,7 @@ class BooleanPropPatternRule(Rule):
 
     @classmethod
     def from_str(cls, rule_str):  
-        match = Pattern.match(cls.__NOT_PATTERN, rule_str)
+        match = Pattern.extract(cls.__NOT_PATTERN, rule_str)
         if match:
             target = match.group('target')
             cls._validate(target)
@@ -110,7 +96,7 @@ class BooleanPropPatternRule(Rule):
                 'expression' : True
             })
         else:
-            match = Pattern.match(cls.__PATTERN, rule_str)
+            match = Pattern.extract(cls.__PATTERN, rule_str)
             if match:
                 target = match.group('target')
                 cls._validate(target)
@@ -123,13 +109,13 @@ class BooleanPropPatternRule(Rule):
             else:
                 raise RulePatternDoesNotMatchError(rule_str, cls, "[not] <boolean_object>")
 
-    def evaluate(self, obj):
-        if not hasattr(obj, self.__target):
-            # 
-            self._raise_exception_for_check_result(False)
-
-        check_result = getattr(obj, self.__target)
-        self._raise_exception_for_check_result(check_result)
+    def matches(self, obj):
+        container = self._get_container_obj(obj)
+        if not hasattr(container, self.target):
+            actual = False
+        else:
+            actual = getattr(container, self.target)
+        return self.checker(self.expression, actual)
 
 
 class TagsPatternRule(Rule):
@@ -163,17 +149,16 @@ class TagsPatternRule(Rule):
 
     @classmethod
     def from_str(cls, rule_str):  
-        print(rule_str)
         condition = None
-        match = Pattern.match(cls.__WITH_PATTERN, rule_str)
+        match = Pattern.extract(cls.__WITH_PATTERN, rule_str)
         if match:
             condition = RuleConditionType.HAS_INTERSECTION
         else:
-            match = Pattern.match(cls.__WITHALL_PATTERN, rule_str)
+            match = Pattern.extract(cls.__WITHALL_PATTERN, rule_str)
             if match:
                 condition = RuleConditionType.IS_SUBSET
             else:
-                match = Pattern.match(cls.__WITHOUT_PATTERN, rule_str)
+                match = Pattern.extract(cls.__WITHOUT_PATTERN, rule_str)
                 if match:
                     condition = RuleConditionType.NO_INTERSECTION
                 else:
@@ -207,7 +192,7 @@ class PropertyPatternRule(Rule):
 
     @classmethod
     def from_str(cls, rule_str):  
-        match = Pattern.match(cls.__PATTERN, rule_str)
+        match = Pattern.extract(cls.__PATTERN, rule_str)
         if match:
             target = match.group('target')
             target_type = get_value_type(target) 
@@ -219,6 +204,14 @@ class PropertyPatternRule(Rule):
             })
         else:
             raise RulePatternDoesNotMatchError(rule_str, cls, "<prop_name> <condition> <expression>")
+
+    def matches(self, obj):
+        container = self._get_container_obj(obj)
+        if not hasattr(container, self.target):
+            actual = False
+        else:
+            actual = getattr(container, self.target)
+        return self.checker(self.expression, actual)
 
 
 class Rules:
