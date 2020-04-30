@@ -299,13 +299,19 @@ class RunSelected(__RunCommand):
     def __init__(self, subparsers, parents):
         super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified in a single thread.")
         self.ref_conf_name = None
-        self.__rules = {
-            'irules' : None,
-            'erules' : None
-        }
+        self.__pickers_dict = dict()
+        self.__rules = None
 
     def execute(self, arg_dict):
-        pickers_dict = dict()
+        super().execute(arg_dict)
+
+        from arjuna import Arjuna
+        session = Arjuna.get_test_session()
+        session.load_tests(**self.__pickers_dict, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
+        session.run()
+
+    def pop_command_args(self, arg_dict):
+        self.__rules = arg_dict.pop('rules')
         pickers = (
             ('imodules', 'im'),
             ('emodules', 'em'),
@@ -319,11 +325,11 @@ class RunSelected(__RunCommand):
             if sname in arg_dict:
                 val = arg_dict.pop(sname)
                 if not val: 
-                    pickers_dict[tname] = list()
+                    self.__pickers_dict[tname] = list()
                     return
-                pickers_dict[tname] = val.split(",")
+                self.__pickers_dict[tname] = val.split(",")
             else:
-                pickers_dict[tname] = list()
+                self.__pickers_dict[tname] = list()
 
         def remove_py_ext(name):
             if not name.lower().endswith(".py"):
@@ -333,17 +339,6 @@ class RunSelected(__RunCommand):
 
         for picker in pickers:
             process_picker(picker[0], picker[1])
-
-        pickers_dict['im'] = [remove_py_ext(m) for m in pickers_dict['im']]
-        pickers_dict['em'] = [remove_py_ext(m) for m in pickers_dict['em']]
-
-        super().execute(arg_dict)
-
-        from arjuna import Arjuna
-        session = Arjuna.get_test_session()
-        session.load_tests(**pickers_dict, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
-        session.run()
-
-    def pop_command_args(self, arg_dict):
-        arg_dict.pop('irules')
-        arg_dict.pop('erules')
+        
+        self.__pickers_dict['im'] = [remove_py_ext(m) for m in self.__pickers_dict['im']]
+        self.__pickers_dict['em'] = [remove_py_ext(m) for m in self.__pickers_dict['em']]

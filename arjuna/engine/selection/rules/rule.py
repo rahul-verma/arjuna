@@ -19,9 +19,8 @@ class Rule:
         If container is some other name, a container with that name is located and then target is located in the container.
     '''
 
-    def __init__(self, rule_str, nature, container, target, condition, expression):
+    def __init__(self, rule_str, container, target, condition, expression):
         self.__rule_str = rule_str
-        self.__nature = nature
         self.__container = container
         self.__target = target
         self.__condition = condition
@@ -32,10 +31,6 @@ class Rule:
     @property
     def rule_str(self):
         return self.__rule_str
-
-    @property
-    def nature(self):
-        return self.__nature
 
     @property
     def container(self):
@@ -62,10 +57,7 @@ class Rule:
         return self.__checker 
 
     def __str__(self):
-        return "{}(rule_str='{}', nature={}, container={}, target={}, condition={}, expression={}, expression_type={}, checker={})".format(self.__class__.__name__, self.rule_str, self.nature.name.title(), self.container, self.target, self.condition, self.expression, self.expression_type, self.checker.__name__)
-
-    def is_include_type(self):
-        return nature == RuleNature.INCLUDE
+        return "{}(rule_str='{}', container={}, target={}, condition={}, expression={}, expression_type={}, checker={})".format(self.__class__.__name__, self.rule_str, self.container, self.target, self.condition, self.expression, self.expression_type, self.checker.__name__)
 
     def _not_met_exc(self):
         # Run time rules checking did not succeed for the test object
@@ -97,8 +89,8 @@ class BooleanPropPatternRule(Rule):
     __NOT_PATTERN = re.compile(r"^\s*not\s+(?P<target>\w+)\s*$",re.IGNORECASE)
     __PATTERN = re.compile(r"^\s*(?P<target>\w+)\s*$",re.IGNORECASE)
 
-    def __init__(self, *, rule_str, nature, target, condition, expression):
-        super().__init__(rule_str, nature, "properties", target, condition, expression)
+    def __init__(self, *, rule_str, target, condition, expression):
+        super().__init__(rule_str, "properties", target, condition, expression)
 
     @classmethod
     def _validate(cls, target):
@@ -106,14 +98,13 @@ class BooleanPropPatternRule(Rule):
             raise InvalidSelectionRule("Built-in property {} is not of bool type. It can not be used in a {} construct.".format(target, cls.__name__))
 
     @classmethod
-    def from_str(cls, rule_str, nature):  
+    def from_str(cls, rule_str):  
         match = Pattern.match(cls.__NOT_PATTERN, rule_str)
         if match:
             target = match.group('target')
             cls._validate(target)
             return BooleanPropPatternRule(**{
                 'rule_str':rule_str, 
-                'nature': nature, 
                 'target': target,
                 'condition' : RuleConditionType.NOT_EQUAL,
                 'expression' : True
@@ -125,7 +116,6 @@ class BooleanPropPatternRule(Rule):
                 cls._validate(target)
                 return BooleanPropPatternRule(**{
                 'rule_str':rule_str, 
-                'nature': nature, 
                 'target': target,
                 'condition' : RuleConditionType.EQUAL,
                 'expression' : True
@@ -160,8 +150,8 @@ class TagsPatternRule(Rule):
     __WITHALL_PATTERN = re.compile(r"^\s*withall\s+(?P<container>(.+?))\s+(?P<tags>(.*))$",re.IGNORECASE)
     __WITHOUT_PATTERN = re.compile(r"^\s*without\s+(?P<container>(.+?))\s+(?P<tags>(.*))$",re.IGNORECASE)
 
-    def __init__(self, *, rule_str, nature, container, target, condition, expression):
-        super().__init__(rule_str, nature, container, target, condition, expression)
+    def __init__(self, *, rule_str, container, target, condition, expression):
+        super().__init__(rule_str, container, target, condition, expression)
 
     @property
     def tags(self):
@@ -172,7 +162,7 @@ class TagsPatternRule(Rule):
         return set([p.strip().lower() for p in expression.split(",")])
 
     @classmethod
-    def from_str(cls, rule_str, nature):  
+    def from_str(cls, rule_str):  
         print(rule_str)
         condition = None
         match = Pattern.match(cls.__WITH_PATTERN, rule_str)
@@ -193,7 +183,6 @@ class TagsPatternRule(Rule):
         container = get_tag_container(match.group('container'))
         return TagsPatternRule(**{
             'rule_str':rule_str,
-            'nature': nature,
             'container' : container,
             'target': tags, 
             'condition' : condition,
@@ -213,11 +202,11 @@ class PropertyPatternRule(Rule):
 
     __PATTERN = re.compile(p5_raw, re.IGNORECASE)
 
-    def __init__(self, *, rule_str, target, condition, expression, nature):
-        super().__init__(rule_str, nature, "properties", target, condition, expression)
+    def __init__(self, *, rule_str, target, condition, expression):
+        super().__init__(rule_str, "properties", target, condition, expression)
 
     @classmethod
-    def from_str(cls, rule_str, nature):  
+    def from_str(cls, rule_str):  
         match = Pattern.match(cls.__PATTERN, rule_str)
         if match:
             target = match.group('target')
@@ -227,8 +216,7 @@ class PropertyPatternRule(Rule):
                 'target': target, 
                 'condition' : convert_to_condition(target, target_type, match.group('condition')), 
                 'expression': convert_expression(target, target_type, match.group('expression')),
-                'nature': nature}
-            )
+            })
         else:
             raise RulePatternDoesNotMatchError(rule_str, cls, "<prop_name> <condition> <expression>")
 
@@ -236,35 +224,27 @@ class PropertyPatternRule(Rule):
 class Rules:
 
     def __init__(self):
-        self.__irules = list()
-        self.__erules = list()
+        self.__rules = list()
 
-    def include(self, rule_str):
-        self.__irules.append(self.__build_rule(rule_str, RuleNature.INCLUDE))
+    def from_str(self, rule_str):
+        self.__rules.append(self.__build_rule(rule_str))
 
-    def exclude(self, rule_str):
-        self.__erules.append(self.__build_rule(rule_str, RuleNature.EXCLUDE))
-
-    def __build_rule(self, rule_str, nature):
+    def __build_rule(self, rule_str):
         pattern = None
         try:
-            return BooleanPropPatternRule.from_str(rule_str, nature)
+            return BooleanPropPatternRule.from_str(rule_str)
         except RulePatternDoesNotMatchError:
             try:
-                return TagsPatternRule.from_str(rule_str, nature)
+                return TagsPatternRule.from_str(rule_str)
             except RulePatternDoesNotMatchError:
                 try:
-                    return PropertyPatternRule.from_str(rule_str, nature)
+                    return PropertyPatternRule.from_str(rule_str)
                 except RulePatternDoesNotMatchError:
                     raise Exception("Rule is invalid: " + rule_str)
 
     @property
-    def irules(self):
-        return self.__irules
-
-    @property
-    def erules(self):
-        return self.__erules
+    def rules(self):
+        return self.__rules
 
     def __str__(self):
-        return str([r.matches for r in self.__irules] + [r.matches for r in self.__erules])
+        return str([str(r) for r in self.__rules])
