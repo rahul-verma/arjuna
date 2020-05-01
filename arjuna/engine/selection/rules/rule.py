@@ -13,11 +13,6 @@ class Pattern:
 
 
 class Rule:
-    '''
-        If container is root, target is found in the object passed in evaluate call.
-
-        If container is some other name, a container with that name is located and then target is located in the container.
-    '''
 
     def __init__(self, rule_str, container, target, condition, expression):
         self.__rule_str = rule_str
@@ -128,8 +123,10 @@ class TagsPatternRule(Rule):
             without tags a,b
             with bugs a,b
             without bugs a,b
-            with bugs a,b
-            without bugs a,b
+            with envs a,b
+            without envs a,b
+
+            You can use singular version as well - **tag/bug/env**
     '''
 
     __WITH_PATTERN = re.compile(r"^\s*with\s+(?P<container>(.+?))\s+(?P<tags>(.*))$",re.IGNORECASE)
@@ -173,6 +170,14 @@ class TagsPatternRule(Rule):
             'condition' : condition,
             'expression': tags
         })        
+
+    def matches(self, obj):
+        container = self._get_container_obj(obj)
+        if container is None:
+            container = set()
+        if not container and self.condition == RuleConditionType.IS_SUBSET:
+            return False
+        return self.checker(self.expression, container)
 
 class PropertyPatternRule(Rule):
     '''

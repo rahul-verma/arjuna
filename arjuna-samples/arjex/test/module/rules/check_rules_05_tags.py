@@ -18,6 +18,7 @@
 from arjuna import *
 from arjuna.engine.selection.rules.rule import Selector
 from arjuna.core.constant import *
+from .helpers import *
 
 @test
 def check_rule_creation_tags(request):
@@ -215,3 +216,82 @@ def check_rule_creation_tags(request):
     assert rule.condition == RuleConditionType.NO_INTERSECTION
     assert rule.expression == set({'env1'})
     assert rule.checker.__name__ == 'has_no_intersection'
+
+@test
+def check_tag_selection(request):
+    for tname in ['tag', 'bug' , 'env']:
+        rule = get_rule(f"with {tname}s t1, t2")
+        obj = Obj()
+        assert rule.matches(obj) is False
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('t1')
+        assert rule.matches(obj) is True
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('t2')
+        assert rule.matches(obj) is True
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('abc')
+        assert rule.matches(obj) is False
+
+        rule = get_rule(f"with {tname} t1")
+        obj = Obj()
+        assert rule.matches(obj) is False
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('t1')
+        assert rule.matches(obj) is True
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('abc')
+        assert rule.matches(obj) is False
+
+        rule = get_rule(f"withall {tname}s t1, abc")
+        obj = Obj()
+        assert rule.matches(obj) is False
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('t1')
+        assert rule.matches(obj) is False
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('t2')
+        assert rule.matches(obj) is False
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').update({'t2', 't1'})
+        assert rule.matches(obj) is False
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('abc')
+        assert rule.matches(obj) is False
+
+        rule = get_rule(f"without {tname}s t1, abc")
+        obj = Obj()
+        assert rule.matches(obj) is True
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('t1')
+        assert rule.matches(obj) is False
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('abc')
+        assert rule.matches(obj) is False
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('t2')
+        assert rule.matches(obj) is True
+
+        rule = get_rule(f"without {tname} t1")
+        obj = Obj()
+        assert rule.matches(obj) is True
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('t1')
+        assert rule.matches(obj) is False
+
+        obj = Obj()
+        getattr(obj, f'{tname}s').add('abc')
+        assert rule.matches(obj) is True

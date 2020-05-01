@@ -20,6 +20,7 @@ Submodules
 
 .. toctree::
 
+   arjuna.core.checks
    arjuna.core.constant
    arjuna.core.discovery
    arjuna.core.error

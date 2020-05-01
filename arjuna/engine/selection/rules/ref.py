@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.validate import checks
+from arjuna.core import checks
 from arjuna.core.constant import BuiltInProp, RuleConditionType, RuleTargetType
 from arjuna.core.error import InvalidSelectionRule
 
@@ -26,7 +26,6 @@ def none(value):
         return value is None and None or value
 
 def custom_bool(value):
-    print(value, type(value))
     if type(value) is bool:
         return value
     elif value.lower() in BOOL_MAP:

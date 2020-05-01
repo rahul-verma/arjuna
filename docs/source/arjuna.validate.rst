@@ -1,13 +1,6 @@
 arjuna.validate package
 =======================
 
-Submodules
-----------
-
-.. toctree::
-
-   arjuna.validate.checks
-
 Module contents
 ---------------
 
