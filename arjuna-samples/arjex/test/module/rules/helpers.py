@@ -1,4 +1,4 @@
-from arjuna.engine.selection.rules.rule import Selector
+from arjuna.engine.selection.selector import Selector
 
 def get_rule(r):
     selector = Selector()    

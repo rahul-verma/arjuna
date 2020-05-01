@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from arjuna import *
-from arjuna.engine.selection.rules.rule import Selector
+from arjuna.engine.selection.selector import Selector
 from arjuna.core.constant import *
 
 # Priority is contextually interpreted and not as a usual integer.

@@ -218,32 +218,3 @@ class InfoPatternRule(Rule):
             actual = getattr(container, self.target)
 
         return self.checker(actual, self.expression)
-
-
-class Selector:
-
-    def __init__(self):
-        self.__rules = list()
-
-    def add_rule(self, rule_str):
-        self.__rules.append(self.__build_rule(rule_str))
-
-    def __build_rule(self, rule_str):
-        pattern = None
-        try:
-            return BooleanPropPatternRule.from_str(rule_str)
-        except RulePatternDoesNotMatchError:
-            try:
-                return TagsPatternRule.from_str(rule_str)
-            except RulePatternDoesNotMatchError:
-                try:
-                    return InfoPatternRule.from_str(rule_str)
-                except RulePatternDoesNotMatchError:
-                    raise Exception("Rule is invalid: " + rule_str)
-
-    @property
-    def rules(self):
-        return self.__rules
-
-    def __str__(self):
-        return str([str(r) for r in self.__rules])
