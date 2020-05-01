@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from arjuna.core.error import RuleNotMet
+
 from .rule import *
 
 class Selector:
@@ -41,6 +43,11 @@ class Selector:
     @property
     def rules(self):
         return self.__rules
+
+    def validate(self, obj):
+        for rule in self.rules:
+            if not rule.matches(obj):
+                raise RuleNotMet(rule)
 
     def __str__(self):
         return str([str(r) for r in self.__rules])

@@ -201,7 +201,14 @@ class TestGroupsFinished(Exception):
     pass
 
 class RuleNotMet(Exception):
-    pass
+    
+    def __init__(self, rule):
+        super().__init__("A selctor rule not matched for the object.")
+        self.__rule = rule
+
+    @property
+    def rule(self):
+        return self.__rule
 
 class InvalidSelectionRule(Exception):
     pass
