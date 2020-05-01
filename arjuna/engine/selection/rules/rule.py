@@ -71,7 +71,7 @@ class BooleanPropPatternRule(Rule):
     __PATTERN = re.compile(r"^\s*(?P<target>\w+)\s*$",re.IGNORECASE)
 
     def __init__(self, *, rule_str, target, condition, expression):
-        super().__init__(rule_str, "properties", target, condition, expression)
+        super().__init__(rule_str, "info", target, condition, expression)
 
     @classmethod
     def _validate(cls, target):
@@ -179,9 +179,9 @@ class TagsPatternRule(Rule):
             return False
         return self.checker(self.expression, container)
 
-class PropertyPatternRule(Rule):
+class InfoPatternRule(Rule):
     '''
-        Pattern for executing a condition on a property value.
+        Pattern for executing a condition on an information value.
 
         For example:
 
@@ -193,7 +193,7 @@ class PropertyPatternRule(Rule):
     __PATTERN = re.compile(p5_raw, re.IGNORECASE)
 
     def __init__(self, *, rule_str, target, condition, expression):
-        super().__init__(rule_str, "properties", target, condition, expression)
+        super().__init__(rule_str, "info", target, condition, expression)
 
     @classmethod
     def from_str(cls, rule_str):  
@@ -201,7 +201,7 @@ class PropertyPatternRule(Rule):
         if match:
             target = match.group('target')
             target_type = get_value_type(target) 
-            return PropertyPatternRule  (**{
+            return InfoPatternRule  (**{
                 'rule_str':rule_str,                 
                 'target': target, 
                 'condition' : convert_to_condition(target, target_type, match.group('condition')), 
@@ -237,7 +237,7 @@ class Selector:
                 return TagsPatternRule.from_str(rule_str)
             except RulePatternDoesNotMatchError:
                 try:
-                    return PropertyPatternRule.from_str(rule_str)
+                    return InfoPatternRule.from_str(rule_str)
                 except RulePatternDoesNotMatchError:
                     raise Exception("Rule is invalid: " + rule_str)
 

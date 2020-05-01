@@ -27,9 +27,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == "2.1.1"
@@ -40,9 +40,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == "2.1.1"
@@ -53,9 +53,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == "2.1.1"
@@ -66,9 +66,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == "2.1.1"
@@ -79,9 +79,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.NOT_EQUAL
     assert rule.expression == "2.1.2"
@@ -92,9 +92,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.NOT_EQUAL
     assert rule.expression == "2.1.2"
@@ -105,9 +105,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.NOT_EQUAL
     assert rule.expression == "2.1.2"
@@ -118,9 +118,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.LESS_THAN
     assert rule.expression == "2.1.2"
@@ -131,9 +131,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.LESS_THAN
     assert rule.expression == "2.1.2"
@@ -144,9 +144,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.GREATER_THAN
     assert rule.expression == "2.1.0"
@@ -157,9 +157,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.GREATER_THAN
     assert rule.expression == "2.1.0"
@@ -170,9 +170,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.LESS_OR_EQUAL
     assert rule.expression == "2.1.1"
@@ -183,9 +183,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.LESS_OR_EQUAL
     assert rule.expression == "2.1.1"
@@ -196,9 +196,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.GREATER_OR_EQUAL
     assert rule.expression == "2.1.1"
@@ -209,9 +209,9 @@ def check_rule_creation_str_prop_comp(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "app_version"
     assert rule.condition == RuleConditionType.GREATER_OR_EQUAL
     assert rule.expression == "2.1.1"
@@ -225,11 +225,11 @@ def check_str_comp_selection(request):
     assert rule.matches(obj) is False
 
     obj = Obj()
-    obj.properties.app_version = "2.1.1"
+    obj.info.app_version = "2.1.1"
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.2"
+    obj.info.app_version = "2.1.2"
     assert rule.matches(obj) is False
 
     rule = get_rule("app_version not 2.1.2")
@@ -237,11 +237,11 @@ def check_str_comp_selection(request):
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.1"
+    obj.info.app_version = "2.1.1"
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.2"
+    obj.info.app_version = "2.1.2"
     assert rule.matches(obj) is False
 
     rule = get_rule("app_version lt 2.1.2")
@@ -249,11 +249,11 @@ def check_str_comp_selection(request):
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.3"
+    obj.info.app_version = "2.1.3"
     assert rule.matches(obj) is False
 
     obj = Obj()
-    obj.properties.app_version = "2.1.2"
+    obj.info.app_version = "2.1.2"
     assert rule.matches(obj) is False
 
     rule = get_rule("app_version gt 2.1.2")
@@ -261,11 +261,11 @@ def check_str_comp_selection(request):
     assert rule.matches(obj) is False
 
     obj = Obj()
-    obj.properties.app_version = "2.1.3"
+    obj.info.app_version = "2.1.3"
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.2"
+    obj.info.app_version = "2.1.2"
     assert rule.matches(obj) is False
 
     rule = get_rule("app_version le 2.1.2")
@@ -273,15 +273,15 @@ def check_str_comp_selection(request):
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.1"
+    obj.info.app_version = "2.1.1"
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.2"
+    obj.info.app_version = "2.1.2"
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.3"
+    obj.info.app_version = "2.1.3"
     assert rule.matches(obj) is False
 
     rule = get_rule("app_version ge 2.1.2")
@@ -289,15 +289,15 @@ def check_str_comp_selection(request):
     assert rule.matches(obj) is False
 
     obj = Obj()
-    obj.properties.app_version = "2.1.3"
+    obj.info.app_version = "2.1.3"
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.2"
+    obj.info.app_version = "2.1.2"
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.app_version = "2.1.1"
+    obj.info.app_version = "2.1.1"
     assert rule.matches(obj) is False
 
 

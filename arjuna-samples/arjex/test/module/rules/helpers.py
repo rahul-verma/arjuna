@@ -12,7 +12,7 @@ class Empty:
 
 class Obj:
     def __init__(self):
-        self.properties = Empty()
+        self.info = Empty()
         self.tags = set()
         self.bugs = set()
         self.envs = set()

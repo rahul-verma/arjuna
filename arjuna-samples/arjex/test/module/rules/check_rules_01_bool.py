@@ -29,7 +29,7 @@ def check_rule_creation_bool_pattern(request):
     print(rule)
     assert rule.__class__.__name__ == "BooleanPropPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "unstable"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == True
@@ -43,7 +43,7 @@ def check_rule_creation_bool_pattern(request):
     print(rule)
     assert rule.__class__.__name__ == "BooleanPropPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "unstable"
     assert rule.condition == RuleConditionType.NOT_EQUAL
     assert rule.expression == True
@@ -57,9 +57,9 @@ def check_rule_creation_prop_pattern(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "unstable"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == False
@@ -70,9 +70,9 @@ def check_rule_creation_prop_pattern(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "unstable"
     assert rule.condition == RuleConditionType.NOT_EQUAL
     assert rule.expression == True
@@ -84,9 +84,9 @@ def check_rule_creation_prop_pattern(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "unstable"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == True
@@ -97,9 +97,9 @@ def check_rule_creation_prop_pattern(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "unstable"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == False
@@ -111,9 +111,9 @@ def check_rule_creation_prop_pattern(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "unstable"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == True
@@ -124,9 +124,9 @@ def check_rule_creation_prop_pattern(request):
     selector.add_rule(r)
     rule = selector.rules[0]
     print(rule)
-    assert rule.__class__.__name__ == "PropertyPatternRule"
+    assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
-    assert rule.container == "properties"
+    assert rule.container == "info"
     assert rule.target == "unstable"
     assert rule.condition == RuleConditionType.EQUAL
     assert rule.expression == False
@@ -158,7 +158,7 @@ class Empty:
 
 class Obj:
     def __init__(self):
-        self.properties = Empty()
+        self.info = Empty()
 
 @test
 def check_rule_evaluation_boolean_pattern(request):
@@ -172,11 +172,11 @@ def check_rule_evaluation_boolean_pattern(request):
     assert rule.matches(obj) is False
 
     obj = Obj()
-    obj.properties.unstable = True
+    obj.info.unstable = True
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.unstable = False
+    obj.info.unstable = False
     assert rule.matches(obj) is False
 
     selector = Selector()
@@ -189,11 +189,11 @@ def check_rule_evaluation_boolean_pattern(request):
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.unstable = True
+    obj.info.unstable = True
     assert rule.matches(obj) is False
 
     obj = Obj()
-    obj.properties.unstable = False
+    obj.info.unstable = False
     assert rule.matches(obj) is True
 
 
@@ -209,11 +209,11 @@ def check_rule_evaluation_prop_pattern(request):
     assert rule.matches(obj) is False
 
     obj = Obj()
-    obj.properties.unstable = True
+    obj.info.unstable = True
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.unstable = False
+    obj.info.unstable = False
     assert rule.matches(obj) is False
 
     selector = Selector()
@@ -226,11 +226,11 @@ def check_rule_evaluation_prop_pattern(request):
     assert rule.matches(obj) is True
 
     obj = Obj()
-    obj.properties.unstable = True
+    obj.info.unstable = True
     assert rule.matches(obj) is False
 
     obj = Obj()
-    obj.properties.unstable = False
+    obj.info.unstable = False
     assert rule.matches(obj) is True
 
 

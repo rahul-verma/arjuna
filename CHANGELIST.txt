@@ -55,6 +55,9 @@ Current Themes (In-Progress or Planned):
 
 0.9.25
 ------
+- Selection Rules:
+    - Added Selection grammar for info, tags and boolean info types.
+    - Each rule can return True/False for an object which has these containers.
 
 0.9.24
 ------
