@@ -58,6 +58,8 @@ Current Themes (In-Progress or Planned):
 - Selection Rules:
     - Added Selection grammar for info, tags and boolean info types.
     - Each rule can return True/False for an object which has these containers.
+- Test function default info, tags, bugs, envs get created for inquiry using `request`.
+- Fix in updating options from non-default `env` entry in envs.yaml.
 
 0.9.24
 ------

@@ -3,7 +3,7 @@ data:
     app.url: http://run
 
   user_options:
-    roption: 1
+    doption: 1
 
 
 data1:

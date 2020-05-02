@@ -194,6 +194,13 @@ class EditableConfig:
     def user_options(self):
         return self.__user_options
 
+    def as_dict(self):
+        return {
+            'arjuna_options': self.arjuna_options.as_dict(),
+            'user_options': self.user_options.as_dict()
+        }
+
+
     def update(self, conf):
         self.__arjuna_options.update_all(conf.arjuna_options)
         self.__user_options.update_all(conf.user_options)

@@ -164,14 +164,14 @@ class Configuration:
     def __call__(self, name):
         return self.value(name)
 
-    def as_map(self) -> Dict[str, Any]:
+    def as_dict(self) -> Dict[str, Any]:
         '''
             Get all options.
 
             Returns:
                 A dictionary of all Arjuna Options and User Defined Options
         '''
-        return self.__wrapped_config.as_json_dict()
+        return self.__wrapped_config.as_dict()
 
     def __str__(self):
         return self.name

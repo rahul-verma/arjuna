@@ -3,7 +3,8 @@ from arjuna.tpi.engine.asserter import Asserter
 
 class Info:
 
-    def __init__(self, pytest_request):
+    def __init__(self, pytest_request, attrs=None):
+        self.__attrs = attrs
         self.__request = pytest_request
         rnode = self.__request.node
         self.__node_name = rnode.name
@@ -28,7 +29,13 @@ class Info:
             return qname
 
     def __getattr__(self, name):
-        return getattr(self.__request, name)
+        if name in self.__attrs:
+            return self.__attrs[name]
+        else:
+            try:
+                return getattr(self.__request, name)
+            except:
+                raise Exception("{name} is not a valid test information attribute. Built-in Arjuna attributes: {attrs}".format(name=name, attrs=str(self.__attrs)))
 
 _LOOKUP_ORDER = {
     "session" : ("session", ),
@@ -107,7 +114,7 @@ class Module:
 
 class My:
 
-    def __init__(self):
+    def __init__(self, test_meta_data=None):
         self._data = None
         self._info = None
         self._handler = None
@@ -117,10 +124,33 @@ class My:
         self._asserter = Asserter() #unittest.TestCase('__init__')
         self._space = None
         self._module = None
+        self._attrs = None
+        self._tags = None
+        self._bugs = None
+        self._envs = None
+        if test_meta_data:
+            self._attrs = test_meta_data['info']
+            if self._attrs['id'] is None:
+                self._attrs['id'] = self._attrs['qual_name']
+            self._tags = test_meta_data['tags']
+            self._bugs = test_meta_data['bugs']
+            self._envs = test_meta_data['envs']
 
     @property
     def config(self):
         return self.space.arj_config
+
+    @property
+    def tags(self):
+        return self._tags
+
+    @property
+    def bugs(self):
+        return self._bugs
+
+    @property
+    def envs(self):
+        return self._envs
 
     def get_config(self, name=None):
         if name is None:
@@ -156,7 +186,7 @@ class My:
 
     def set_req_obj(self, pytest_request):
         self._request = pytest_request
-        self._info = Info(pytest_request)
+        self._info = Info(pytest_request, self._attrs)
         self._space = Space(pytest_request)
         if pytest_request.scope in {"function"}:
             if not self._module:

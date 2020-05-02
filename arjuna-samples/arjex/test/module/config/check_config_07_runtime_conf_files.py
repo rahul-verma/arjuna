@@ -39,14 +39,17 @@ def check_env_conf(request):
 def check_default_data_env_update(request):
 
     conf = Arjuna.get_config()
-    assert conf.roption == 1
+    assert conf.doption == 1
     assert conf.eoption == 1
 
-    assert C("roption") == 1
+    assert C("doption") == 1
     assert C("eoption") == 1
 
 @test
 def check_data_env_confs_with_getconf(request):
+    d = Arjuna.get_config("data")
+    e = Arjuna.get_config("env")
+    print(str(e.as_dict()['user_options']))
 
     d1e1 = Arjuna.get_config("data1_env1")
     d1e2 = Arjuna.get_config("data1_env2")

@@ -24,15 +24,15 @@ from arjuna.engine.data.store import SharedObjects
 from arjuna.engine.meta import *
 from typing import Callable
 from arjuna.tpi.arjuna_types import ListOrTuple
+from arjuna.tpi.helper.arjtype import CIStringDict
+from arjuna.core.utils.obj_utils import get_function_meta_data
 
 def _tc(cls):
     setattr(cls, 'get_test_qual_name', get_test_qual_name)
     return cls
 
-def _call_func(func, request, data=None, *args, **kwargs):
+def _call_func(func, request_wrapper, data=None, *args, **kwargs):
     from arjuna import Arjuna
-    request_wrapper = My()
-    request_wrapper.set_req_obj(request)
     qual_name = request_wrapper.info.get_qual_name_with_data()
     Arjuna.get_logger().info("Begin test function: {}".format(qual_name))  
     if data:      
@@ -41,18 +41,38 @@ def _call_func(func, request, data=None, *args, **kwargs):
         func(request=request_wrapper, *args, **kwargs)
     Arjuna.get_logger().info("End test function: {}".format(qual_name))
 
-def _simple_dec(func):
+def _simple_dec(func, test_meta_data):
+    test_meta_data['info'].update(get_function_meta_data(func))
     func.__name__ = "check_" + func.__name__
 
     @functools.wraps(func)
     def wrapper(request, *args, **kwargs):
-        _call_func(func, request, *args, **kwargs)
+        request_wrapper = My(test_meta_data)
+        request_wrapper.set_req_obj(request)
+        _call_func(func, request_wrapper, *args, **kwargs)
     return wrapper
 
 def _repr_record(record):
     return str(record)
 
-def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_with: 'DataSource'=None, exclude_if: 'Relation'=None):
+def test(
+            f:Callable=None, *, 
+            id: str=None, 
+            resources: ListOrTuple=None, 
+            drive_with: 'DataSource'=None, 
+            exclude_if: 'Relation'=None,
+            priority: int=5,
+            author: str=None,
+            idea: str=None,
+            component: str=None,
+            app_version: str='0.0.0',
+            level: str=None,
+            reviewed: bool= False,
+            unstable: bool= False,
+            tags: set=set(),
+            bugs: set=set(),
+            envs: set=set(),
+            **test_attrs):
     '''
         Decorator for marking a function as a test function.
 
@@ -77,9 +97,30 @@ def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_wi
             The test function must have the minimum signature as **check_<some_name>(request)** with **request** as the first argument.
     '''
 
+    info_dict = CIStringDict()
+    info_dict.update({
+        'id': id,
+        'priority': priority,
+        'author': author,
+        'idea': idea,
+        'component': component,
+        'app_version': app_version,
+        'level': level,
+        'reviewed': reviewed,
+        'unstable': unstable,
+    })
+    info_dict.update(test_attrs)
+
+    test_meta_data = {
+        'tags': tags,
+        'bugs': bugs,
+        'envs': envs,
+        'info': info_dict
+    }
+
     # Check if @test is provided without arguments
     if f is not None:
-        return _simple_dec(f)
+        return _simple_dec(f, test_meta_data)
 
     if resources:
         if type(resources) is str:
@@ -90,6 +131,7 @@ def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_wi
             raise Exception("resources value must be a string or list/tuple of strings")
 
     def format_test_func(func):
+        test_meta_data['info'].update(get_function_meta_data(func))
         orig_func = func
         if exclude_if:
             func = pytest.mark.dependency(name=id, depends=exclude_if())(func)
@@ -101,26 +143,19 @@ def test(f:Callable=None, *, id: str=None, resources: ListOrTuple=None, drive_wi
 
         if drive_with:
             records = drive_with.build().all_records
-            my_objects = []
-            for record in records:
-                my = My()
-                my.data = record
-                my_objects.append(my)
             func = pytest.mark.parametrize('data', records, ids=_repr_record)(func) 
-        # else:
-        #     my = My()
-        #     my.data = DummyDataRecord()
-        #     func = pytest.mark.parametrize('my', [my], ids=My.repr)(func) 
+
+        my = My(test_meta_data)
 
         @functools.wraps(orig_func)
         def wrapper_without_data(request, *args, **kwargs):
-            request.handler = request
-            _call_func(func, request, *args, **kwargs)
+            my.set_req_obj(request)
+            _call_func(func, my, *args, **kwargs)
 
         @functools.wraps(orig_func)
         def wrapper_with_data(request, data, *args, **kwargs):
-            my.handler = request
-            _call_func(func, request, data, *args, **kwargs)
+            my.set_req_obj(request)
+            _call_func(func, my, data, *args, **kwargs)
 
         if drive_with:
             return wrapper_with_data

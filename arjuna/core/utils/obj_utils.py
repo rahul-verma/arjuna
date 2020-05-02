@@ -100,3 +100,16 @@ def get_class_for_method(meth):
         meth = meth.__func__
     if inspect.isfunction(meth):
         return meth.__qualname__.rsplit('.', 1)[0]
+
+def get_function_meta_data(func):
+    meta = dict()
+    module_full_name = inspect.getmodule(func).__name__
+    mod_parts = module_full_name.split('.')
+    package = ".".join(mod_parts[0:-1])
+    module = mod_parts[-1]
+    meta['package'] = package
+    meta['module'] = module
+    meta['name'] = func.__name__
+    meta['qual_name'] = "{}.{}".format(module_full_name, func.__name__)
+    print(meta)
+    return meta
