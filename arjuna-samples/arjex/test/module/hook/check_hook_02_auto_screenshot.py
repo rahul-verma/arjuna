@@ -16,21 +16,18 @@
 # limitations under the License.
 
 
-from arjuna.engine.selection.selector import Selector
+from arjuna import *
 
-def get_rule(r):
-    selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
-    print(rule)
-    return rule
-    
-class Empty:
-    pass
+@for_test
+def google(request):
+    google = GuiApp(url="https://google.com")
+    google.launch()
+    request.space.screen_shooter = google
 
-class Obj:
-    def __init__(self):
-        self.info = Empty()
-        self.tags = set()
-        self.bugs = set()
-        self.envs = set()
+    yield google
+
+    google.quit()
+
+@test
+def check_screenshot_on_failure(request, google):
+    request.asserter.assert_equal("Forced Fail", google.title, "GuiPage title does not match.")

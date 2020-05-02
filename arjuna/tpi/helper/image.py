@@ -38,7 +38,7 @@ class Image:
         '''
             Base64 string for the image.
         '''
-        if self._b64:
+        if self.__b64:
             return self.__b64
 
         with open(self.__fpath, "rb") as f:

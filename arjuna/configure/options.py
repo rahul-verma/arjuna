@@ -18,6 +18,7 @@
 import os
 import platform
 import abc
+from enum import Enum
 
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.constant import ArjunaOption
@@ -161,9 +162,12 @@ class UserOptions(Options):
     @classmethod
     def process_option_name(self, name):
         try:
-            return name.upper().strip().replace(".", "_")
+            if isinstance(name, Enum):
+                return name.name.upper()
+            else:
+                return name.upper().strip().replace(".", "_")
         except Exception as e:
-            raise Exception("Config option <{}> is not a valid ArjunaOption constant".format(name))
+            raise Exception("An error occured in processing Config option <{}> as a user option. Error: {}".format(name, str(e)))
 
     @classmethod
     def pass_through(self, input):

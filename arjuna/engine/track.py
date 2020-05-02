@@ -50,10 +50,10 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
     ret = None
     try:
         ret = func(*vargs, **kwargs)
-    except Exception as e:
+    except BaseException as e:
         import traceback
         log_error("{}:: Exception: {}. Trace: {}".format(qualname, e, traceback.format_exc()))
-        raise
+        raise Exception("Error in calling: {}. Error message: {}. Trace: {}".format(qualname, e, traceback.format_exc()))
     else:
         if prop:
             msg_1 = prop_dict_msg[prop_type][0]

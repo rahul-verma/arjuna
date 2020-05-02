@@ -6,8 +6,6 @@ Current Themes (In-Progress or Planned):
         - Radom Tags
     - Targeted Fixes:
         - Flexibility when optional directories and files are missing.
-        - User Option as an enum constant should be allowed.
-        - Screenshot in HTML report.
     - Doc updates:
         - Update exiting docs
         - Test Fixture docs.
@@ -60,6 +58,8 @@ Current Themes (In-Progress or Planned):
     - Each rule can return True/False for an object which has these containers.
 - Test function default info, tags, bugs, envs get created for inquiry using `request`.
 - Fix in updating options from non-default `env` entry in envs.yaml.
+- Fix to allow a user option name as an Enum constant.
+- Fix in auto screenshot in case of failure in HTML report.
 
 0.9.24
 ------

@@ -82,6 +82,7 @@ class PytestHooks:
                 screen_shooter = cls._get_screen_shooter(item)
             except AttributeError:
                 return
+
             html_plugin = cls._get_html_report_plugin(item)
             pytest_html = html_plugin
             report = result.get_result()
