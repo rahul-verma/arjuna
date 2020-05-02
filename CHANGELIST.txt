@@ -51,6 +51,10 @@ Current Themes (In-Progress or Planned):
         - As of now a label  
     - Develop the concept of Data Entity beyond named tuple.
 
+0.9.26
+------
+
+
 0.9.25
 ------
 - Selection Rules:
