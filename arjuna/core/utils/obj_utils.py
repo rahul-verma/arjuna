@@ -111,5 +111,4 @@ def get_function_meta_data(func):
     meta['module'] = module
     meta['name'] = func.__name__
     meta['qual_name'] = "{}.{}".format(module_full_name, func.__name__)
-    print(meta)
     return meta

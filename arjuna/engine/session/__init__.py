@@ -68,7 +68,6 @@ class MagicTestSessionForStage(BaseTestSession):
         super().__init__("msession", config, dry_run=dry_run)
 
         YamlTestSession.load_session_defs()
-        sys.exit(1)
         self.add_stage(YamlTestStage(stage_yaml=YamlTestSession.get_stage_yaml(stage_name), session=self))
 
 class MagicTestSessionForGroup(BaseTestSession):

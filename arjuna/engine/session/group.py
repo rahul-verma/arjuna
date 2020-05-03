@@ -213,22 +213,26 @@ class YamlTestGroup(TestGroup):
 
     def __init__(self, *, group_yaml, session, stage):
         self.__config = stage.config
-        self.__filters = {
-            'im': None,
-            'em': None,
-            'it': None,
-            'et': None
-        }
+        self.__rules = []
         self.__process_yaml(group_yaml)
-        super().__init__(name=group_yaml.name, config=self.__config, session=session, stage=stage, **self.__filters)
+        super().__init__(name=group_yaml.name, config=self.__config, session=session, stage=stage, rules=self.__rules)
 
     def __process_yaml(self, group_yaml):
         from arjuna import Arjuna
         for gmd_name in group_yaml.section_names:
+            pickers = {
+                'ip': None,
+                'ep': None,
+                'im': None,
+                'em': None,
+                'it': None,
+                'et': None,
+            }
             if gmd_name.lower() == "conf":
                 self.__config = Arjuna.get_config(group_yaml.get_value("conf"))
-            elif gmd_name.lower() in {'im', 'em', 'it', 'et'}:
-                self.__filters[gmd_name.lower()] = group_yaml.get_value(gmd_name)
+            elif gmd_name.lower() in pickers:
+                pickers[gmd_name.lower()] = group_yaml.get_value(gmd_name)
+                self.__rules.extend(TestGroup.create_rule_strs(pickers))
 
 class MagicTestGroup(TestGroup):
 

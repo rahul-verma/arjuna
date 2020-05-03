@@ -10,7 +10,7 @@ gp2:
 
 gp3:
   conf: data1_env1
-  it:
+  im:
     - check_delegate_1
 
 gp4:
