@@ -15,3 +15,6 @@ def pytest_runtest_makereport(item, call):
 
 def pytest_generate_tests(metafunc):
     PytestHooks.configure_group_for_test(metafunc)
+
+def pytest_collection_modifyitems(items, config):
+    PytestHooks.select_tests(items, config)

@@ -56,10 +56,10 @@ class BaseTestSession:
 
 class MagicTestSession(BaseTestSession):
 
-    def __init__(self, config, *, dry_run=False, im=None, em=None, it=None, et=None):
+    def __init__(self, config, *, rules=None, dry_run=False):
         super().__init__("msession", config, dry_run=dry_run)
 
-        stage = MagicTestStage(session=self, im=im, em=em, it=it, et=et)
+        stage = MagicTestStage(session=self, rules=rules)
         self.add_stage(stage)
 
 class MagicTestSessionForStage(BaseTestSession):

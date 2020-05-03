@@ -34,6 +34,7 @@ from arjuna.core.adv.proxy import ROProxy
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.error import UndefinedConfigError
 from arjuna.core.adv.decorators import singleton
+from arjuna.tpi.error import TestSelectorNotFoundError
 import codecs
 import sys
 
@@ -63,6 +64,8 @@ class ArjunaSingleton:
         self.__data_store = DataStore()
         self.__thread_wise_group_params_map = dict()
         self.__thread_wise_ref_conf_map = dict()
+        self.__thread_wise_test_selector_map = dict()
+        self.__test_meta_data = dict()
 
     @property
     def gui_mgr(self):
@@ -193,6 +196,22 @@ class ArjunaSingleton:
         self.__thread_wise_group_params_map[threading.current_thread().name] = params
         self.__thread_wise_ref_conf_map[threading.current_thread().name] = params['config']
 
+    def register_test_selector_for_group(self, selector):
+        self.__thread_wise_test_selector_map[threading.current_thread().name] = selector
+
+    def get_test_selector(self):
+        try:
+            return self.__thread_wise_test_selector_map[threading.current_thread().name]
+        except KeyError:
+            raise TestSelectorNotFoundError()
+
+    def register_test_meta_data(self, qual_name, test_meta_data):
+        if qual_name not in self.__test_meta_data:
+            self.__test_meta_data[qual_name] = test_meta_data
+
+    def get_test_meta_data(self, qual_name):
+        return self.__test_meta_data[qual_name]
+
 class Arjuna:
     '''
         Facade of Arjuna framework.
@@ -300,6 +319,22 @@ class Arjuna:
     @classmethod
     def register_group_params(cls, **params):
         return cls.ARJUNA_SINGLETON.register_group_params(**params)
+
+    @classmethod
+    def register_test_selector_for_group(cls, selector):
+        cls.ARJUNA_SINGLETON.register_test_selector_for_group(selector)
+
+    @classmethod
+    def get_test_selector(cls):
+        return cls.ARJUNA_SINGLETON.get_test_selector()
+
+    @classmethod
+    def register_test_meta_data(cls, qual_name, test_meta_data):
+        cls.ARJUNA_SINGLETON.register_test_meta_data(qual_name, test_meta_data)
+
+    @classmethod
+    def get_test_meta_data(cls, qual_name):
+        return cls.ARJUNA_SINGLETON.get_test_meta_data(qual_name)
 
     @staticmethod
     def exit():

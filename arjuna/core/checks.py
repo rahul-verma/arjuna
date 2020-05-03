@@ -80,12 +80,26 @@ def match_with_ignore_case(target, pattern):
     else:
         return False
 
+def does_not_match_with_ignore_case(target, pattern):
+    if target is None: return True
+    if re.match('^' + pattern + '$', target, re.IGNORECASE):
+        return False
+    else:
+        return True
+
 def partially_match_with_ignore_case(target, pattern):
     if target is None: return False
     if re.search(pattern, target, re.IGNORECASE) is not None:
         return True
     else:
         return False
+
+def does_not_partially_match_with_ignore_case(target, pattern):
+    if target is None: return True
+    if re.search(pattern, target, re.IGNORECASE) is not None:
+        return False
+    else:
+        return True
 
 are_not_same = are_different
 

@@ -34,6 +34,10 @@ def custom_bool(value):
         raise InvalidSelectionRule(f"Provided unexpected value >>{value}<< for boolean context in rule. Allowed: [true/false/on/off/yes/no/0/1]")
 
 built_in_prop_type = {
+    BuiltInProp.PACKAGE : str,
+    BuiltInProp.MODULE : str,
+    BuiltInProp.NAME : str,
+    BuiltInProp.QUAL_NAME : str,
     BuiltInProp.ID : str,
     BuiltInProp.PRIORITY : int,
     BuiltInProp.NAME : str,
@@ -64,8 +68,10 @@ SYMBOLS_MAP = {
     '!=': 'not_equal',
     'ne': 'not_equal',
     '~=': 'matches',
+    '!~=': 'does_not_match',
     'matches': 'matches',
     '*=': 'partially_matches',
+    '!*=': 'does_not_partially_match',
     'lt': 'less_than',
     '<': 'less_than',
     'le': 'less_or_equal',
@@ -79,7 +85,9 @@ SYMBOLS_MAP = {
 __str_symbols = {
     'matches',
     '~=',
+    '!~=',
     '*=',
+    '!*=',
     'is',
     'not',
     'eq',
@@ -170,7 +178,9 @@ VALUE_CHECKERS = {
     RuleConditionType.GREATER_THAN : checks.greater_than,
     RuleConditionType.GREATER_OR_EQUAL : checks.greater_or_equal,
     RuleConditionType.MATCHES : checks.match_with_ignore_case,
+    RuleConditionType.DOES_NOT_MATCH : checks.does_not_match_with_ignore_case,
     RuleConditionType.PARTIALLY_MATCHES : checks.partially_match_with_ignore_case,
+    RuleConditionType.DOES_NOT_PARTIALLY_MATCH : checks.does_not_partially_match_with_ignore_case,
     RuleConditionType.CONTAINS : checks.contains,
     RuleConditionType.IS_SUBSET : checks.is_subset,
     RuleConditionType.HAS_INTERSECTION : checks.has_intersection,

@@ -72,14 +72,14 @@ class MainCommand(Command):
 
     def convert_to_dict(self, args):
         def format_value(k, v):
-            if k in {"ao", "uo", "irules", "erules"}:
-                return v
+            # if k in {"ao", "uo", "irules", "erules", 'ip', 'ep', }:
+            #     return v
             if k == "report.formats" and v is None:
                 v = ['XML', 'HTML']
-            if type(v) is list:
-                return ",".join([str(i) for i in v])
-            else:
-                return v
+            # if type(v) is list:
+            #     return ",".join([str(i) for i in v])
+            # else:
+            return v
         try:
             args = self.parser.parse_args(args[1:])
             return {k:format_value(k,v) for k,v in vars(args).items()}
@@ -220,6 +220,8 @@ class __RunCommand(Command):
         runid = arg_dict.pop("run.id")
         static_rid = arg_dict.pop("static.rid")
         self.dry_run = arg_dict.pop("dry_run")
+        if self.dry_run:
+            self.dry_run = DryRunType[self.dry_run]
         
         if "ref_conf" in arg_dict:
             self.ref_conf_name = arg_dict.pop("ref_conf")
@@ -300,45 +302,20 @@ class RunSelected(__RunCommand):
         super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified in a single thread.")
         self.ref_conf_name = None
         self.__pickers_dict = dict()
-        self.__rules = None
+        self.__rules = []
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
 
         from arjuna import Arjuna
         session = Arjuna.get_test_session()
-        session.load_tests(**self.__pickers_dict, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
+        session.load_tests(rules=self.__rules, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
 
     def pop_command_args(self, arg_dict):
-        self.__rules = arg_dict.pop('rules')
-        pickers = (
-            ('imodules', 'im'),
-            ('emodules', 'em'),
-            # ('cclasses', 'cc'),
-            # ('iclasses', 'ic'),
-            ('itests', 'it'),
-            ('etests', 'et'),
-            )
+        from arjuna.engine.session.group import TestGroup
+        self.__rules.extend(TestGroup.create_rule_strs(arg_dict))
+        rule_strs = arg_dict.pop('rules')
+        if rule_strs:
+            self.__rules.extend(rule_strs)
 
-        def process_picker(sname, tname):
-            if sname in arg_dict:
-                val = arg_dict.pop(sname)
-                if not val: 
-                    self.__pickers_dict[tname] = list()
-                    return
-                self.__pickers_dict[tname] = val.split(",")
-            else:
-                self.__pickers_dict[tname] = list()
-
-        def remove_py_ext(name):
-            if not name.lower().endswith(".py"):
-                return name
-            else:
-                return name.replace(".py","")
-
-        for picker in pickers:
-            process_picker(picker[0], picker[1])
-        
-        self.__pickers_dict['im'] = [remove_py_ext(m) for m in self.__pickers_dict['im']]
-        self.__pickers_dict['em'] = [remove_py_ext(m) for m in self.__pickers_dict['em']]

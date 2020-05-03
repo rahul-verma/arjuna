@@ -31,6 +31,7 @@ Current Themes (In-Progress or Planned):
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Support multiple entries for same locator type in YAML file.
         - As of now a label  
+    - Call Walkthroughs and Identify New Named Exceptions to be created.
 
     Later:
         - More possibilities:
@@ -60,6 +61,10 @@ Current Themes (In-Progress or Planned):
 
 0.9.26
 ------
+- New CLI switches -ip, -ep for package based selection added.
+- The -i* and -e* switches are converted to equivalent of --rule to create rule strings.
+- Fix in --dry-run switch.
+- PytestHooks.select_tests hook created to select tests based on Arjuna rules.
 
 
 0.9.25

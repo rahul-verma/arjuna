@@ -25,6 +25,8 @@ Arjuna Exceptions
 This module defines Exception classes that represent different types of run-time issues that can happen. The exceptions encapsulate the underlying exception message and stack traces.
 '''
 
+import threading
+
 from arjuna.core.error import *
 
 class UndefinedConfigError(Exception):
@@ -164,3 +166,17 @@ class UndefinedTestGroupError(Exception):
 
     def __init__(self, *, name, file_path):
         super().__init__(f"No group definition exists for name >>{name}<< in groups configuration file at {file_path}")
+
+class TestSelectorNotFoundError(Exception):
+    '''
+        Test Selector object was not found for current thread (and for current test group creation.)
+
+        Every Test Group is run in a thread either sequentially or parallely.
+
+        A Test Selector object is supposed to be created for every test group.
+
+        This exception is raised when Arjuna is not able to find the registered test Selector object for current thread.
+    '''
+
+    def __init__(self):
+        super().__init__("No test Selector object was found for current test group in thread: {}".format(threading.current_thread().name))

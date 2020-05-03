@@ -130,9 +130,9 @@ class YamlTestStage(TestStage):
 
 class MagicTestStage(TestStage):
 
-    def __init__(self, *, session, im=None, em=None, it=None, et=None):
+    def __init__(self, *, session, rules=None):
         super().__init__(name="mstage", config=session.config, session=session, num_threads=1)
-        self.add_group(MagicTestGroup(session=session, stage=self, im=im, em=em, it=it, et=et))
+        self.add_group(MagicTestGroup(session=session, stage=self, rules=rules))
 
 class MagicTestStageForGroup(TestStage):
 

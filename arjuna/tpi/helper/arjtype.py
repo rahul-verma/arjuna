@@ -74,7 +74,7 @@ class _ArDict(metaclass=abc.ABCMeta):
         return self.__store.keys()
 
     def __getattr__(self, attr):
-        return getattr(self.__store, attr)
+        return self.__store[attr]
 
     def __len__(self):
         return len(self.__store.keys())
@@ -114,6 +114,9 @@ class CIStringDict(_ArDict):
     def _clone(self):
         return CIStringDict(self.__store)
 
+    def __str__(self):
+        return "CIStringDict: " + super().__str__()
+        
 
 class ProcessedKeyDict(_ArDict):
     '''

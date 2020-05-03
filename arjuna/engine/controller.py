@@ -75,14 +75,14 @@ class TestSessionController:
             ref_conf_name = "ref"
         return Arjuna.get_config(ref_conf_name)
 
-    def load_tests(self, *, dry_run=False, ref_conf_name=None, im=None, em=None, it=None, et=None):
+    def load_tests(self, *, dry_run=False, ref_conf_name=None, rules=None):
         from arjuna import Arjuna
         from arjuna.engine.session import MagicTestSession, YamlTestSession
         
         session_name = Arjuna.get_config().value(ArjunaOption.RUN_SESSION_NAME).lower()
         if session_name == "msession":
             ref_config = self.__msession_config(ref_conf_name)
-            self.__session = MagicTestSession(ref_config, dry_run=dry_run, im=im, em=em, it=it, et=et)
+            self.__session = MagicTestSession(ref_config, dry_run=dry_run, rules=rules)
         else:
             self.__session = YamlTestSession(session_name, ref_conf_name, dry_run=dry_run)
 

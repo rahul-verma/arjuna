@@ -147,3 +147,33 @@ class PytestHooks:
             # gid = "GroupData: gn={}, tn={}, conf={} ".format(group_params['name'], group_params['thread_name'], group_params['config'].name)
             log_debug("Parameterizing distributor for module: {} with group: {}".format(m, DeprecationWarning))
             metafunc.parametrize("group", argvalues=[data], ids=[str(data)], indirect=True)
+
+    @classmethod
+    def select_tests(cls, pytest_items, pytest_config):
+        '''
+            Select tests from items collected by pytest, based on Arjuna rules.
+
+            Arguments:
+                pytest_items: List of pytest `Item` objects. Each item represents a collected test function node.
+                pytest_config: pytest Config object
+        '''
+        from arjuna import Arjuna
+        from arjuna.core.error import RuleNotMet
+        selector = Arjuna.get_test_selector()
+        final_selection = []
+        deselected = []
+        for item in pytest_items:
+            qual_name = item.nodeid.split('::')[0].replace("/",".").replace('\\',"").replace(".py","") + "." + item.name.split("[")[0]
+            try:
+                selector.validate(Arjuna.get_test_meta_data(qual_name))
+            except RuleNotMet as e:
+                deselected.append(item)
+            else:
+                final_selection.append(item)
+
+        if deselected:
+            pytest_config.hook.pytest_deselected(items=deselected)
+            pytest_items[:] = final_selection
+
+
+        

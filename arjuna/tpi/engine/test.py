@@ -43,6 +43,8 @@ def _call_func(func, request_wrapper, data=None, *args, **kwargs):
 
 def _simple_dec(func, test_meta_data):
     test_meta_data['info'].update(get_function_meta_data(func))
+    from arjuna import Arjuna
+    Arjuna.register_test_meta_data(test_meta_data['info']['qual_name'], CIStringDict(test_meta_data))
     func.__name__ = "check_" + func.__name__
 
     @functools.wraps(func)
@@ -132,6 +134,8 @@ def test(
 
     def format_test_func(func):
         test_meta_data['info'].update(get_function_meta_data(func))
+        from arjuna import Arjuna
+        Arjuna.register_test_meta_data(test_meta_data['info']['qual_name'], CIStringDict(test_meta_data))
         orig_func = func
         if exclude_if:
             func = pytest.mark.dependency(name=id, depends=exclude_if())(func)

@@ -322,6 +322,9 @@ class DryRunType(Enum):
     RUN_FIXTURES = auto()
 
 class BuiltInProp(Enum):
+    PACKAGE = auto()
+    MODULE = auto()
+    QUAL_NAME = auto()
     ID = auto()
     PRIORITY = auto()
     THREADS= auto()
@@ -352,7 +355,9 @@ class RuleConditionType(Enum):
     EQUAL = auto()
     NOT_EQUAL = auto()
     MATCHES = auto()
+    DOES_NOT_MATCH = auto()
     PARTIALLY_MATCHES = auto()
+    DOES_NOT_PARTIALLY_MATCH = auto()
     LESS_THAN = auto()
     LESS_OR_EQUAL = auto()
     GREATER_THAN = auto()

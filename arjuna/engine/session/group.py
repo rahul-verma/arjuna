@@ -26,14 +26,43 @@ from arjuna.tpi.constant import *
 
 class TestGroup:
 
-    def __init__(self, *, name, config, session, stage, im=None, em=None, it=None, et=None):
+    def __init__(self, *, name, config, session, stage, rules=None):
         self.__name = name
         self.__session = session
         self.__stage = stage
         self.__config = config
         self.__thname = None
         self.__dry_run = session.dry_run
-        self.__filters = {'im' : im, 'em': em, 'it': it, 'et': et}
+        self.__rules = rules
+
+    @classmethod
+    def create_rule_strs(cls, include_exclude_dict):
+        pickers_rulestr = {
+            'ip': "package *= {}",
+            'ep': "package !*= {}",
+            'im': "module *= {}",
+            'em': "module !*= {}",
+            'it': "name *= {}",
+            'et': "name !*= {}",
+        }
+
+        rules = []
+
+        def remove_py_ext(name):
+            if not name.lower().endswith(".py"):
+                return name
+            else:
+                return name.replace(".py","")
+
+        for picker in pickers_rulestr:
+            names = include_exclude_dict.pop(picker)
+            if names:
+                for name in names:
+                    if picker in {'imodules', 'emodules'}:
+                        remove_py_ext(name)
+                    rules.append(pickers_rulestr[picker].format(name))   
+
+        return rules
 
     @property
     def config(self):
@@ -84,62 +113,70 @@ class TestGroup:
         # -s is to print to console.
         self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "--show-capture", "all", "--disable-warnings"] # 
         self.__test_args = []
-        self.__load_tests(**self.__filters)
+        self.__load_tests(rules=self.__rules)
         self.__load_meta_args()
 
+    def __load_tests(self, *, rules):
+        from arjuna import Arjuna
+        from arjuna.engine.selection.selector import Selector
+        selector = Selector()
+        if rules:
+            for rule in rules:
+                selector.add_rule(rule)
 
-    def __load_tests(self, *, im=None, em=None, it=None, et=None):
-        if im is None and em is None and it is None and et is None:
-            self.__load_all_tests()
-        else:
-            self.__load_tests_from_pickers(im=im, em=em, it=it, et=et)
+        Arjuna.register_test_selector_for_group(selector)
+        # if not rules
+        # if im is None and em is None and it is None and et is None:
+        #     self.__load_all_tests()
+        # else:
+        #     self.__load_tests_from_pickers(im=im, em=em, it=it, et=et)
 
-    def __load_all_tests(self):
-        self.__pytest_args.insert(0, self.tests_dir)
+    # def __load_all_tests(self):
+    #     self.__pytest_args.insert(0, self.tests_dir)
 
-    def __load_tests_from_pickers(self, *, im=None, em=None, it=None, et=None):  
+    # def __load_tests_from_pickers(self, *, im=None, em=None, it=None, et=None):  
 
-        def process_modules(ms):
-            ms = [m.replace(".py", "").replace("*","").replace("/", " and ").replace("\\", " and ") for m in ms]
-            return ["and" in m and "({})".format(m) or m for m in ms]
+    #     def process_modules(ms):
+    #         ms = [m.replace(".py", "").replace("*","").replace("/", " and ").replace("\\", " and ") for m in ms]
+    #         return ["and" in m and "({})".format(m) or m for m in ms]
 
-        k_args = []
+    #     k_args = []
 
-        k_flag = False
+    #     k_flag = False
 
-        if em:            
-            em = process_modules(em)
-            k_args.append(" and ".join(["not " + m for m in em]))
-            k_flag = True
+    #     if em:            
+    #         em = process_modules(em)
+    #         k_args.append(" and ".join(["not " + m for m in em]))
+    #         k_flag = True
 
-        # if ic:
-        #     prefix = k_flag and " and " or ""
-        #     k_args.append(prefix + " and ".join(["not " + c for c in ic]))
-        #     k_flag = True
+    #     # if ic:
+    #     #     prefix = k_flag and " and " or ""
+    #     #     k_args.append(prefix + " and ".join(["not " + c for c in ic]))
+    #     #     k_flag = True
 
-        if et:
-            prefix = k_flag and " and " or ""
-            k_args.append(prefix + " and ".join(["not " + c for c in et]))
-            k_flag = True
+    #     if et:
+    #         prefix = k_flag and " and " or ""
+    #         k_args.append(prefix + " and ".join(["not " + c for c in et]))
+    #         k_flag = True
 
-        if im:
-            prefix = k_flag and " and " or ""            
-            cm = process_modules(im)
-            k_args.append(prefix + " or ".join(im))
-            k_flag = True
+    #     if im:
+    #         prefix = k_flag and " and " or ""            
+    #         cm = process_modules(im)
+    #         k_args.append(prefix + " or ".join(im))
+    #         k_flag = True
 
-        # if cc:
-        #     prefix = k_flag and " and " or "" 
-        #     k_args.append(prefix + " or ".join(cc))
-        #     k_flag = True
+    #     # if cc:
+    #     #     prefix = k_flag and " and " or "" 
+    #     #     k_args.append(prefix + " or ".join(cc))
+    #     #     k_flag = True
 
-        if it:
-            prefix = k_flag and " and " or "" 
-            k_args.append(prefix + " or ".join(it))
-            k_flag = True
+    #     if it:
+    #         prefix = k_flag and " and " or "" 
+    #         k_args.append(prefix + " or ".join(it))
+    #         k_flag = True
 
-        if k_flag:
-            self.__test_args.append("-k " + "".join(k_args))
+    #     if k_flag:
+    #         self.__test_args.append("-k " + "".join(k_args))
 
     def __load_meta_args(self):
         pytest_report_args = []
@@ -195,8 +232,8 @@ class YamlTestGroup(TestGroup):
 
 class MagicTestGroup(TestGroup):
 
-    def __init__(self, *, session, stage, im=None, em=None, it=None, et=None):
-        super().__init__(name="mgroup", config=stage.config, session=session, stage=stage, im=im, em=em, it=it, et=et)
+    def __init__(self, *, session, stage, rules=None):
+        super().__init__(name="mgroup", config=stage.config, session=session, stage=stage, rules=rules)
 
 
 class TestGroups:
