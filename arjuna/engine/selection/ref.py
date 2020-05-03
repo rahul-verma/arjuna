@@ -82,12 +82,17 @@ SYMBOLS_MAP = {
     '>=': 'greater_or_equal',
 }
 
+def get_all_symbols():
+    return SYMBOLS_MAP.keys()
+
 __str_symbols = {
     'matches',
     '~=',
     '!~=',
+    '\!~=',
     '*=',
     '!*=',
+    '\!*=',
     'is',
     'not',
     'eq',

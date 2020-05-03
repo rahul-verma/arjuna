@@ -22,13 +22,18 @@ from .rule import *
 class Selector:
 
     def __init__(self):
-        self.__rules = list()
+        self.__irules = list()
+        self.__erules = list()
 
-    def add_rule(self, rule_str):
-        self.__rules.append(self.__build_rule(rule_str))
+    def include(self, rule_str):
+        self.__irules.append(self.__build_rule(rule_str))
+
+    def exclude(self, rule_str):
+        self.__erules.append(self.__build_rule(rule_str))
 
     def __build_rule(self, rule_str):
         pattern = None
+        rule_str = rule_str.replace('\!', '!') # From command line ! has to be escaped
         try:
             return BooleanPropPatternRule.from_str(rule_str)
         except RulePatternDoesNotMatchError:
@@ -41,13 +46,28 @@ class Selector:
                     raise Exception("Rule is invalid: " + rule_str)
 
     @property
-    def rules(self):
-        return self.__rules
+    def irules(self):
+        return self.__irules
+
+    @property
+    def erules(self):
+        return self.__erules
 
     def validate(self, obj):
-        for rule in self.rules:
-            if not rule.matches(obj):
+        for rule in self.erules:
+            if rule.matches(obj):
                 raise RuleNotMet(rule)
+
+        if not self.irules:
+            return
+
+        for rule in self.irules:
+            if not rule.matches(obj):
+                continue
+            else:
+                return
+
+        raise RuleNotMet(rule)
 
     def __str__(self):
         return str([str(r) for r in self.__rules])

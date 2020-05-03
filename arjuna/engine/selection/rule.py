@@ -187,7 +187,7 @@ class InfoPatternRule(Rule):
 
             author is Rahul
     '''
-    condition_str = "is|not|eq|=|==|!=|ne|lt|<|le|<=|gt|>|ge|>=|matches|~=|contains|\*="
+    condition_str = "|".join(get_all_symbols()).replace('*=','\*=') #"is|not|eq|=|==|!=|ne|lt|<|le|<=|gt|>|ge|>=|matches|~=|contains|\*="
     p5_raw = r"^\s*(?P<target>\w+)\s+(?P<condition>({}){{1,1}})\s+(?P<expression>.*?)\s*$".format(condition_str)
 
     __PATTERN = re.compile(p5_raw, re.IGNORECASE)

@@ -39,14 +39,14 @@ class TestGroup:
     def create_rule_strs(cls, include_exclude_dict):
         pickers_rulestr = {
             'ip': "package *= {}",
-            'ep': "package !*= {}",
+            'ep': "package *= {}",
             'im': "module *= {}",
-            'em': "module !*= {}",
+            'em': "module *= {}",
             'it': "name *= {}",
-            'et': "name !*= {}",
+            'et': "name *= {}",
         }
 
-        rules = []
+        rules = {'ir': [], 'er': []}
 
         def remove_py_ext(name):
             if not name.lower().endswith(".py"):
@@ -58,10 +58,12 @@ class TestGroup:
             names = include_exclude_dict.pop(picker)
             if names:
                 for name in names:
-                    if picker in {'imodules', 'emodules'}:
+                    if picker in {'im', 'em'}:
                         remove_py_ext(name)
-                    rules.append(pickers_rulestr[picker].format(name))   
-
+                    if picker.startswith('i'):
+                        rules['ir'].append(pickers_rulestr[picker].format(name))
+                    else:
+                        rules['er'].append(pickers_rulestr[picker].format(name))
         return rules
 
     @property
@@ -121,8 +123,11 @@ class TestGroup:
         from arjuna.engine.selection.selector import Selector
         selector = Selector()
         if rules:
-            for rule in rules:
-                selector.add_rule(rule)
+            for rule in rules['ir']:
+                selector.include(rule)
+            for rule in rules['er']:
+                selector.exclude(rule)
+            
 
         Arjuna.register_test_selector_for_group(selector)
         # if not rules
@@ -213,7 +218,7 @@ class YamlTestGroup(TestGroup):
 
     def __init__(self, *, group_yaml, session, stage):
         self.__config = stage.config
-        self.__rules = []
+        self.__rules = {'ir': [], 'er': []}
         self.__process_yaml(group_yaml)
         super().__init__(name=group_yaml.name, config=self.__config, session=session, stage=stage, rules=self.__rules)
 
@@ -228,11 +233,15 @@ class YamlTestGroup(TestGroup):
                 'it': None,
                 'et': None,
             }
-            if gmd_name.lower() == "conf":
+            gmd_name = gmd_name.lower()
+            if gmd_name == "conf":
                 self.__config = Arjuna.get_config(group_yaml.get_value("conf"))
-            elif gmd_name.lower() in pickers:
-                pickers[gmd_name.lower()] = group_yaml.get_value(gmd_name)
-                self.__rules.extend(TestGroup.create_rule_strs(pickers))
+            elif gmd_name in pickers:
+                pickers[gmd_name] = group_yaml.get_value(gmd_name)
+                if gmd_name.startswith('i'):
+                    self.__rules['ir'].extend(TestGroup.create_rule_strs(pickers))
+                else:
+                    self.__rules['er'].extend(TestGroup.create_rule_strs(pickers))
 
 class MagicTestGroup(TestGroup):
 

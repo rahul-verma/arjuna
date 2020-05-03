@@ -302,7 +302,7 @@ class RunSelected(__RunCommand):
         super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified in a single thread.")
         self.ref_conf_name = None
         self.__pickers_dict = dict()
-        self.__rules = []
+        self.__rules = {'ir': [], 'er': []}
 
     def execute(self, arg_dict):
         super().execute(arg_dict)
@@ -314,8 +314,13 @@ class RunSelected(__RunCommand):
 
     def pop_command_args(self, arg_dict):
         from arjuna.engine.session.group import TestGroup
-        self.__rules.extend(TestGroup.create_rule_strs(arg_dict))
-        rule_strs = arg_dict.pop('rules')
-        if rule_strs:
-            self.__rules.extend(rule_strs)
+        i_e_rules = TestGroup.create_rule_strs(arg_dict)
+        self.__rules['ir'].extend(i_e_rules['ir'])
+        self.__rules['er'].extend(i_e_rules['er'])
+        irule_strs = arg_dict.pop('ir')
+        if irule_strs:
+            self.__rules['ir'].extend(irule_strs)
+        erule_strs = arg_dict.pop('er')
+        if erule_strs:
+            self.__rules['er'].extend(erule_strs)
 

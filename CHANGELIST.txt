@@ -62,7 +62,11 @@ Current Themes (In-Progress or Planned):
 0.9.26
 ------
 - New CLI switches -ip, -ep for package based selection added.
-- The -i* and -e* switches are converted to equivalent of --rule to create rule strings.
+- --rule changed to -ir and -er to add provision for include and exclude rules.
+    - Exclusion rules are evaluated. If a test function meets any of the rules, it is removed from collection.
+    - If the test function meeting any of the inclusion rules, it is included in the collection.
+- Added new symbols: !~= for does not match and !*= does not partially match.
+- The -i* and -e* switches are converted to equivalent of -ir or -er to create rule strings.
 - Fix in --dry-run switch.
 - PytestHooks.select_tests hook created to select tests based on Arjuna rules.
 - All run options work with the rule-based approach.
