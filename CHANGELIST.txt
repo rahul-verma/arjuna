@@ -7,12 +7,6 @@ Current Themes (In-Progress or Planned):
     - Targeted Fixes:
         - Flexibility when optional directories and files are missing.
     - with cleanup.
-    - Configuration:
-        - History for Configuration (Creation Contexts.)
-        - History for a Configuration Option in a Configuration object.
-        - For a given Configuration:
-            - Viewability
-            - Overrridablity (and level.)
     - Better Logging
         - Devise a way for the logger pre and post pytest runs.
     - Investigate:
@@ -20,41 +14,46 @@ Current Themes (In-Progress or Planned):
     - Docs
         - Fixtures -> Should they be called resourcess
             - Resources have a yield.
-            - Fixtures can have just pre-post isntructions.
+            - Fixtures can have just pre-post instructions.
         - Rules
     - common.yaml in Gui Namespace (fallback from page GNS.)
     - Report merging for HTML and XML files.
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
-    - Support multiple entries for same locator type in YAML file.
-        - As of now a label  
     - Call Walkthroughs and Identify New Named Exceptions to be created.
     - Auto screenshot name should consider session, stage and group name.
 
     Later:
-        - More possibilities:
-            - Provision for vars section in config files 
-            - Stage factory
-            - Group Factory
-                - single conf to all groups
-                - cycle confs over groups
-            - Stage level conf
-                - existing
-                - create new
-            - Group level conf
-                - existing: already there
-                - create new
-            - withx hook for programmatic identifiers.
-            - More fixtures:
-                - for_session
-                    - Look for thread safety.
-                - for_stage
-        - Dynamic session, stage and group:
-            - Provision for vars to create dyanmic Sessions, Stages and Groups.
-                : -var command line switch can parameterize session for run-session, stage for run-stage, group for run-group
-        - Stage to stage dependency.
-        - Group to group dependency.
-        - The report directory should contain a confs directory. Whenever a new configuration is created. All its parameters should be dumped in a file for reference.
-        - Develop the concept of Data Entity beyond named tuple.
+    - Configuration:
+        - History for Configuration (Creation Contexts.)
+        - History for a Configuration Option in a Configuration object.
+        - For a given Configuration:
+        - Viewability
+        - Overrridablity (and level.)
+        - Provision for vars section in config files 
+        - Stage factory
+        - Group Factory
+            - single conf to all groups
+            - cycle confs over groups
+        - Stage level conf
+            - existing
+            - create new
+        - Group level conf
+            - existing: already there
+            - create new
+    Fixtures:
+        - for_session
+            - Look for thread safety.
+        - for_stage
+    - GUI Automation
+        - withx hook for programmatic identifiers.
+        - Support multiple entries for same locator type in YAML file.
+    - Dynamic session, stage and group:
+        - Provision for vars to create dyanmic Sessions, Stages and Groups.
+            : -var command line switch can parameterize session for run-session, stage for run-stage, group for run-group
+    - Stage to stage dependency.
+    - Group to group dependency.
+    - The report directory should contain a confs directory. Whenever a new configuration is created. All its parameters should be dumped in a file for reference.
+    - Develop the concept of Data Entity beyond named tuple.
 
 0.9.26
 ------
