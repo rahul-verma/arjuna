@@ -3,10 +3,7 @@ Following is the list of critical additions and updates for a given released ver
 Current Themes (In-Progress or Planned):
     For Production 1.0.0 release:
     - Tagging and Properties
-        - Defining Tags and Properties
-        - CLI selection for tags and properties.
         - CLI selection for user defined properties.
-        - Group.yaml for rules.
     - Targeted Fixes:
         - Flexibility when optional directories and files are missing.
     - with cleanup.
@@ -20,7 +17,6 @@ Current Themes (In-Progress or Planned):
         - Devise a way for the logger pre and post pytest runs.
     - Investigate:
         - @track on Windows.
-        - Bug reported by Stefan.
     - Docs
         - Fixtures -> Should they be called resourcess
             - Resources have a yield.
@@ -32,6 +28,7 @@ Current Themes (In-Progress or Planned):
     - Support multiple entries for same locator type in YAML file.
         - As of now a label  
     - Call Walkthroughs and Identify New Named Exceptions to be created.
+    - Auto screenshot name should consider session, stage and group name.
 
     Later:
         - More possibilities:
@@ -62,13 +59,16 @@ Current Themes (In-Progress or Planned):
 0.9.26
 ------
 - New CLI switches -ip, -ep for package based selection added.
-- --rule changed to -ir and -er to add provision for include and exclude rules.
+- Support for ir (inclusion rules) and er (exclusion rules)
     - Exclusion rules are evaluated. If a test function meets any of the rules, it is removed from collection.
     - If the test function meeting any of the inclusion rules, it is included in the collection.
-- Added new symbols: !~= for does not match and !*= does not partially match.
-- The -i* and -e* switches are converted to equivalent of -ir or -er to create rule strings.
-- Fix in --dry-run switch.
-- PytestHooks.select_tests hook created to select tests based on Arjuna rules.
+    - --rule changed to -ir and -er to add provision for include and exclude rules via CLI. Used for magic group creation.
+    - ir and er sections can be added in a group definition in groups.yaml file.
+    - Internally, the ip/ep/im/em/it/et are converted to to ir/er rules. This means Arjuna is not using pytest markers for test selection. All selection is done based on Arjuna rule set.
+    - PytestHooks.select_tests hook created to select tests based on Arjuna rules. Called in `pytest_collection_modifyitems` pytest hook in conftest.py.
+- New symbols for rule creation:
+    - For string targets:  !~= for does not match and !*= does not partially match.
+- FIX: --dry-run switch.
 - All run options work with the rule-based approach.
 - New Exceptions:
     - TestDecoratorError
@@ -664,19 +664,12 @@ Primary Goal: Document Usage of Key Features. Make code changes to support doc f
 
 Future Possibilities and Targeted Fixes
 ---------------------------------------
-- GuiApp commons.yaml
 - Simplify nodeid access. request.raw_request.node.nodeid -> request.node_name
     - optonal request object
 - Can Selenium disable certificate trust checking - Chrome/Firefox.
 - Or how to a certificate to trusted certificates.
-- Formalise the concept of DataEntity beyond an alias for tuple.
-- Multi-threaded ---> Urgent Feature.
-- Tagging
 - Web Services
-- Skip known failed test
-- Mark as a bug tag - run only the bug
 - Run last failed tests
-- OR relationship should allow multiple identifiers of same type. Confirm whether it uses a dict or a list.
 
 - Diffing two pages on 2 URLs. Comparison of HTML.
 
