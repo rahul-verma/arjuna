@@ -69,3 +69,70 @@ def check_default_containers(request):
 
     assert hasattr(request, 'envs') is True
     assert request.envs == set()
+
+
+@test(
+    id="abc",
+    priority=3,
+    author="Rahul",
+    idea='Sample idea',
+    unstable=True,
+    component="TestComp",
+    app_version="1.2",
+    level="TestLevel",
+    reviewed=True,
+    tags={'t1', 'T2'},
+    bugs={'B1', 'b2'},
+    envs={'EnV1', '     enV2     '}
+)
+def check_updated_containers(request):
+    assert hasattr(request, 'info') is True
+    info = request.info
+
+    assert hasattr(info, 'qual_name') is True
+    assert info.qual_name == 'test.module.rules.check_rules_08_request_object_population.check_updated_containers'
+
+    assert hasattr(info, 'package') is True
+    assert info.package == 'test.module.rules'
+
+    assert hasattr(info, 'module') is True
+    assert info.module == 'check_rules_08_request_object_population'
+
+    assert hasattr(info, 'name') is True
+    assert info.name == 'check_updated_containers'
+
+    assert hasattr(info, 'id') is True
+    assert info.id == 'abc'
+
+    assert hasattr(info, 'priority') is True
+    assert info.priority == 3
+
+    assert hasattr(info, 'author') is True   
+    assert info.author == 'Rahul'
+
+    assert hasattr(info, 'idea') is True   
+    assert info.idea == 'Sample idea'
+
+    assert hasattr(info, 'unstable') is True   
+    assert info.unstable is True
+
+    assert hasattr(info, 'component') is True   
+    assert info.component == "TestComp"
+
+    assert hasattr(info, 'app_version') is True   
+    assert info.app_version == "1.2"
+
+    assert hasattr(info, 'level') is True   
+    assert info.level == "TestLevel"
+
+    assert hasattr(info, 'reviewed') is True   
+    assert info.reviewed is True
+
+    assert hasattr(request, 'tags') is True
+    assert request.tags == {'t1', 't2'}
+
+    assert hasattr(request, 'bugs') is True
+    assert request.bugs == {'b1', 'b2'}
+
+    assert hasattr(request, 'envs') is True
+    assert request.envs == {'env1', 'env2'}

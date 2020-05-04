@@ -28,6 +28,7 @@ This module defines Exception classes that represent different types of run-time
 import threading
 
 from arjuna.core.error import *
+from arjuna.core.utils.obj_utils import get_function_meta_data
 
 class UndefinedConfigError(Exception):
     '''
@@ -180,3 +181,12 @@ class TestSelectorNotFoundError(Exception):
 
     def __init__(self):
         super().__init__("No test Selector object was found for current test group in thread: {}".format(threading.current_thread().name))
+
+
+class TestDecoratorError(Exception):
+    '''
+        Raised when there is an error in @test decorator for a given test function.
+    '''
+
+    def __init__(self, func_qual_name, msg):
+        super().__init__(f"There is an error in @test decoratior for {func_qual_name}. {msg}")

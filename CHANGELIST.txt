@@ -70,6 +70,8 @@ Current Themes (In-Progress or Planned):
 - Fix in --dry-run switch.
 - PytestHooks.select_tests hook created to select tests based on Arjuna rules.
 - All run options work with the rule-based approach.
+- New Exceptions:
+    - TestDecoratorError
 
 0.9.25
 ------

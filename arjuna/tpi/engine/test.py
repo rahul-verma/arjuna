@@ -26,6 +26,8 @@ from typing import Callable
 from arjuna.tpi.arjuna_types import ListOrTuple
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.core.utils.obj_utils import get_function_meta_data
+from arjuna.engine.selection.ref import *
+from arjuna.tpi.error import TestDecoratorError
 
 def _tc(cls):
     setattr(cls, 'get_test_qual_name', get_test_qual_name)
@@ -42,7 +44,7 @@ def _call_func(func, request_wrapper, data=None, *args, **kwargs):
     Arjuna.get_logger().info("End test function: {}".format(qual_name))
 
 def _simple_dec(func, test_meta_data):
-    test_meta_data['info'].update(get_function_meta_data(func))
+    __process_test_meta_data(func, test_meta_data)
     from arjuna import Arjuna
     Arjuna.register_test_meta_data(test_meta_data['info']['qual_name'], CIStringDict(test_meta_data))
     func.__name__ = "check_" + func.__name__
@@ -56,6 +58,37 @@ def _simple_dec(func, test_meta_data):
 
 def _repr_record(record):
     return str(record)
+
+def __process_test_meta_data(func, test_meta_data):
+    func_meta_data = get_function_meta_data(func)
+    qual_name = func_meta_data['qual_name']
+    for name, value in test_meta_data['info'].items():
+        if is_builtin_prop(name):
+            expected_type = get_value_type(name)
+            actual_type = type(value)
+            if value is not None:
+                if actual_type is not expected_type:
+                    raise TestDecoratorError(qual_name, f">>{name}<< attr in @test should be of type >>{expected_type.__name__}<< but was provided value >>{value}<< of type >>{actual_type.__name__}<<")
+
+            if name == "priority":
+                if value not in set(range(1,6,1)):
+                    raise TestDecoratorError(qual_name, f">>priority<< attr in @test can only accept 1/2/3/4/5 as value but was provided value >>{value}<<.")
+
+    for container_name in {'tags', 'bugs', 'envs'}:
+        container = test_meta_data[container_name]
+        expected_types = {'set', 'list', 'tuple'}
+        actual_type = type(container).__name__
+        if actual_type not in expected_types:
+            raise TestDecoratorError(qual_name, f">>{container_name}<< attr in @test can only be a set, list or tuple, but was provided value >>{value}<< of type >>{actual_type}<<")
+
+        for entry in container:
+            if type(entry) is not str:
+                raise TestDecoratorError(qual_name, f">>{container_name}<< attr in @test can only contain strings, but was provided value >>{container}<< containing non-string entry >>{entry}<<.")
+
+        test_meta_data[container_name] = set([s.strip().lower() for s in container])
+
+    test_meta_data['info'].update(func_meta_data)
+
 
 def test(
             f:Callable=None, *, 
@@ -133,7 +166,7 @@ def test(
             raise Exception("resources value must be a string or list/tuple of strings")
 
     def format_test_func(func):
-        test_meta_data['info'].update(get_function_meta_data(func))
+        __process_test_meta_data(func, test_meta_data)
         from arjuna import Arjuna
         Arjuna.register_test_meta_data(test_meta_data['info']['qual_name'], CIStringDict(test_meta_data))
         orig_func = func
