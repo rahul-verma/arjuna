@@ -24,8 +24,8 @@ from .helpers import *
 def check_rule_creation_str_prop_comp(request):
     r = "app_version is 2.1.1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -37,8 +37,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version eq 2.1.1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -50,8 +50,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version = 2.1.1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -63,8 +63,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version == 2.1.1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -76,8 +76,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version not 2.1.2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -89,8 +89,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version != 2.1.2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -102,8 +102,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version ne 2.1.2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -115,8 +115,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version lt 2.1.2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -128,8 +128,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version < 2.1.2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -141,8 +141,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version gt 2.1.0"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -154,8 +154,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version > 2.1.0"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -167,8 +167,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version le 2.1.1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -180,8 +180,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version <= 2.1.1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -193,8 +193,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version ge 2.1.1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -206,8 +206,8 @@ def check_rule_creation_str_prop_comp(request):
 
     r = "app_version >= 2.1.1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r

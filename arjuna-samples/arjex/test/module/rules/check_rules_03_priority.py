@@ -26,8 +26,8 @@ from arjuna.core.constant import *
 def check_rule_creation_priority(request):
     r = "priority is 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -39,8 +39,8 @@ def check_rule_creation_priority(request):
 
     r = "priority eq 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -52,8 +52,8 @@ def check_rule_creation_priority(request):
 
     r = "priority = 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -65,8 +65,8 @@ def check_rule_creation_priority(request):
 
     r = "priority == 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -78,8 +78,8 @@ def check_rule_creation_priority(request):
 
     r = "priority not 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -91,8 +91,8 @@ def check_rule_creation_priority(request):
 
     r = "priority != 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -104,8 +104,8 @@ def check_rule_creation_priority(request):
 
     r = "priority ne 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -117,8 +117,8 @@ def check_rule_creation_priority(request):
 
     r = "priority lt 3"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -130,8 +130,8 @@ def check_rule_creation_priority(request):
 
     r = "priority < 3"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -143,8 +143,8 @@ def check_rule_creation_priority(request):
 
     r = "priority gt 1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -156,8 +156,8 @@ def check_rule_creation_priority(request):
 
     r = "priority > 1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -169,8 +169,8 @@ def check_rule_creation_priority(request):
 
     r = "priority le 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -182,8 +182,8 @@ def check_rule_creation_priority(request):
 
     r = "priority <= 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -195,8 +195,8 @@ def check_rule_creation_priority(request):
 
     r = "priority ge 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -208,8 +208,8 @@ def check_rule_creation_priority(request):
 
     r = "priority >= 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -231,8 +231,8 @@ class Obj:
 def check_priority_selection(request):
     r = "priority is 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -248,8 +248,8 @@ def check_priority_selection(request):
 
     r = "priority is 5"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -257,8 +257,8 @@ def check_priority_selection(request):
 
     r = "priority not 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -274,8 +274,8 @@ def check_priority_selection(request):
 
     r = "priority lt 3"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -291,8 +291,8 @@ def check_priority_selection(request):
 
     r = "priority gt 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -308,8 +308,8 @@ def check_priority_selection(request):
 
     r = "priority le 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -325,8 +325,8 @@ def check_priority_selection(request):
 
     r = "priority ge 2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()

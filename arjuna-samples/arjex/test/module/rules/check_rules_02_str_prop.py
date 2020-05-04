@@ -24,8 +24,8 @@ def check_rule_creation_str_prop_simple(request):
     
     r = "author is Rahul Verma"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -37,8 +37,8 @@ def check_rule_creation_str_prop_simple(request):
 
     r = "author eq Rahul Verma"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -50,8 +50,8 @@ def check_rule_creation_str_prop_simple(request):
 
     r = "author = Rahul Verma"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -63,8 +63,8 @@ def check_rule_creation_str_prop_simple(request):
 
     r = "author == Rahul Verma"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -76,8 +76,8 @@ def check_rule_creation_str_prop_simple(request):
 
     r = "author != Rahul Verma"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -89,8 +89,8 @@ def check_rule_creation_str_prop_simple(request):
 
     "author not Rahul Verma"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -102,8 +102,8 @@ def check_rule_creation_str_prop_simple(request):
 
     "author ne Rahul Verma"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -115,8 +115,8 @@ def check_rule_creation_str_prop_simple(request):
 
     r = "author matches Rahul VERMA"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -128,8 +128,8 @@ def check_rule_creation_str_prop_simple(request):
 
     r = "author ~= Rahul VERMA"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -141,8 +141,8 @@ def check_rule_creation_str_prop_simple(request):
 
     r = "author *= RaHuL"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -163,8 +163,8 @@ class Obj:
 def check_str_selection(request):
     r = "author is Rahul Verma"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -184,8 +184,8 @@ def check_str_selection(request):
 
     r = "author != Rahul Verma"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -205,8 +205,8 @@ def check_str_selection(request):
 
     r = "author ~= Rahul VERMA"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -226,8 +226,8 @@ def check_str_selection(request):
 
     r = "author *= RaHuL"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()

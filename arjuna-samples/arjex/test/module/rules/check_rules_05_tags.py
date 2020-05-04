@@ -24,8 +24,8 @@ from .helpers import *
 def check_rule_creation_tags(request):
     r = "with tags chrome, firefox"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -37,8 +37,8 @@ def check_rule_creation_tags(request):
 
     r = "with tag chrome"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -50,8 +50,8 @@ def check_rule_creation_tags(request):
 
     r = "withall tags chrome, abc"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -63,8 +63,8 @@ def check_rule_creation_tags(request):
 
     r = "without tags chrome, abc"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -76,8 +76,8 @@ def check_rule_creation_tags(request):
 
     r = "without tag chrome"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -89,8 +89,8 @@ def check_rule_creation_tags(request):
 
     r = "with bugs b1,b2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -102,8 +102,8 @@ def check_rule_creation_tags(request):
 
     r = "with bug b1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -115,8 +115,8 @@ def check_rule_creation_tags(request):
 
     r = "withall bugs b1,abc"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -128,8 +128,8 @@ def check_rule_creation_tags(request):
 
     r = "without bugs b1,abc"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -141,8 +141,8 @@ def check_rule_creation_tags(request):
 
     r = "without bug b1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -154,8 +154,8 @@ def check_rule_creation_tags(request):
 
     r = "with envs env1, env2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -167,8 +167,8 @@ def check_rule_creation_tags(request):
 
     r = "with env env1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -180,8 +180,8 @@ def check_rule_creation_tags(request):
 
     r = "withall envs env1, env2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -193,8 +193,8 @@ def check_rule_creation_tags(request):
 
     r = "without envs env1, env2"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r
@@ -206,8 +206,8 @@ def check_rule_creation_tags(request):
 
     r = "without env env1"
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "TagsPatternRule"
     assert rule.rule_str == r

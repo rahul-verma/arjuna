@@ -20,8 +20,8 @@ from arjuna.engine.selection.selector import Selector
 
 def get_rule(r):
     selector = Selector()    
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     return rule
     

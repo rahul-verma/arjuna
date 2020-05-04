@@ -24,8 +24,8 @@ def check_rule_creation_bool_pattern(request):
     selector = Selector()
 
     r = "unstable"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "BooleanPropPatternRule"
     assert rule.rule_str == r
@@ -38,8 +38,8 @@ def check_rule_creation_bool_pattern(request):
     # Check NOT
     selector = Selector()
     r = "not unstable"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "BooleanPropPatternRule"
     assert rule.rule_str == r
@@ -54,8 +54,8 @@ def check_rule_creation_prop_pattern(request):
     # Check boolean prop
     selector = Selector()
     r = "unstable is False"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -67,8 +67,8 @@ def check_rule_creation_prop_pattern(request):
 
     selector = Selector()
     r = "unstable not True"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -81,8 +81,8 @@ def check_rule_creation_prop_pattern(request):
     # Check boolean prop - value alternatives
     selector = Selector()
     r = "unstable is On"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -94,8 +94,8 @@ def check_rule_creation_prop_pattern(request):
 
     selector = Selector()
     r = "unstable is oFf"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -108,8 +108,8 @@ def check_rule_creation_prop_pattern(request):
     # Check boolean prop - value alternatives
     selector = Selector()
     r = "unstable is YeS"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -121,8 +121,8 @@ def check_rule_creation_prop_pattern(request):
 
     selector = Selector()
     r = "unstable is nO"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
     assert rule.__class__.__name__ == "InfoPatternRule"
     assert rule.rule_str == r
@@ -137,7 +137,7 @@ def check_rule_creation_invalid(request):
     try:
         selector = Selector()
         r = "unstable is anything"
-        selector.add_rule(r)
+        selector.include(r)
     except InvalidSelectionRule:
         pass
     else:
@@ -146,7 +146,7 @@ def check_rule_creation_invalid(request):
     try:
         selector = Selector()
         r = "unstable < True"
-        selector.add_rule(r)
+        selector.include(r)
     except InvalidSelectionRule:
         pass
     else:
@@ -164,8 +164,8 @@ class Obj:
 def check_rule_evaluation_boolean_pattern(request):
     selector = Selector()
     r = "unstable"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -181,8 +181,8 @@ def check_rule_evaluation_boolean_pattern(request):
 
     selector = Selector()
     r = "not unstable"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -201,8 +201,8 @@ def check_rule_evaluation_boolean_pattern(request):
 def check_rule_evaluation_prop_pattern(request):
     selector = Selector()
     r = "unstable is true"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()
@@ -218,8 +218,8 @@ def check_rule_evaluation_prop_pattern(request):
 
     selector = Selector()
     r = "unstable is false"
-    selector.add_rule(r)
-    rule = selector.rules[0]
+    selector.include(r)
+    rule = selector.irules[0]
     print(rule)
 
     obj = Obj()

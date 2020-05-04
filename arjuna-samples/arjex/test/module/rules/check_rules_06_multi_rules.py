@@ -30,9 +30,9 @@ def check_3_passing_rules(request):
     obj.tags = {'chrome'}
 
     selector = Selector()    
-    selector.add_rule("unstable")
-    selector.add_rule("priority is 2")
-    selector.add_rule("with tag chrome")
+    selector.include("unstable")
+    selector.include("priority is 2")
+    selector.include("with tag chrome")
     
     selector.validate(obj)
 
@@ -44,9 +44,9 @@ def check_first_mismatch(request):
     obj.tags = {'chrome'}
 
     selector = Selector()    
-    selector.add_rule("not unstable")
-    selector.add_rule("priority is 2")
-    selector.add_rule("with tag chrome")
+    selector.include("not unstable")
+    selector.include("priority is 2")
+    selector.include("with tag chrome")
     
     try:
         selector.validate(obj)
@@ -61,9 +61,9 @@ def check_second_mismatch(request):
     obj.tags = {'chrome'}
 
     selector = Selector()    
-    selector.add_rule("unstable")
-    selector.add_rule("priority is 1")
-    selector.add_rule("with tag chrome")
+    selector.include("unstable")
+    selector.include("priority is 1")
+    selector.include("with tag chrome")
     
     try:
         selector.validate(obj)
@@ -78,9 +78,9 @@ def check_third_mismatch(request):
     obj.tags = {'chrome'}
 
     selector = Selector()    
-    selector.add_rule("unstable")
-    selector.add_rule("priority is 2")
-    selector.add_rule("with tag firefox")
+    selector.include("unstable")
+    selector.include("priority is 2")
+    selector.include("with tag firefox")
     
     try:
         selector.validate(obj)
