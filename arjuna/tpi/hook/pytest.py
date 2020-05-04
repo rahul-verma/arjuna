@@ -158,7 +158,7 @@ class PytestHooks:
                 pytest_config: pytest Config object
         '''
         from arjuna import Arjuna
-        from arjuna.core.error import RuleNotMet
+        from arjuna.core.error import ExclusionRuleMet, NoInclusionRuleMet
         selector = Arjuna.get_test_selector()
         final_selection = []
         deselected = []
@@ -166,7 +166,7 @@ class PytestHooks:
             qual_name = item.nodeid.split('::')[0].replace("/",".").replace('\\',"").replace(".py","") + "." + item.name.split("[")[0]
             try:
                 selector.validate(Arjuna.get_test_meta_data(qual_name))
-            except RuleNotMet as e:
+            except (ExclusionRuleMet, NoInclusionRuleMet) as e:
                 deselected.append(item)
             else:
                 final_selection.append(item)

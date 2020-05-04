@@ -23,13 +23,13 @@ def check_default_containers(request):
     info = request.info
 
     assert hasattr(info, 'qual_name') is True
-    assert info.qual_name == 'test.module.rules.check_rules_07_request_object_population.check_default_containers'
+    assert info.qual_name == 'test.module.rules.check_rules_08_request_object_population.check_default_containers'
 
     assert hasattr(info, 'package') is True
     assert info.package == 'test.module.rules'
 
     assert hasattr(info, 'module') is True
-    assert info.module == 'check_rules_07_request_object_population'
+    assert info.module == 'check_rules_08_request_object_population'
 
     assert hasattr(info, 'name') is True
     assert info.name == 'check_default_containers'

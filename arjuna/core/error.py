@@ -200,15 +200,21 @@ class YamlUndefinedSectionError(Exception):
 class TestGroupsFinished(Exception):
     pass
 
-class RuleNotMet(Exception):
+class ExclusionRuleMet(Exception):
     
     def __init__(self, rule):
-        super().__init__("A selctor rule not matched for the object.")
+        super().__init__("An exclusion rule was met for the object.")
         self.__rule = rule
 
     @property
     def rule(self):
         return self.__rule
+
+class NoInclusionRuleMet(Exception):
+    
+    def __init__(self):
+        super().__init__("None of the include rules were met.")
+
 
 class InvalidSelectionRule(Exception):
     pass

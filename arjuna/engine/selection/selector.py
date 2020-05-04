@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.core.error import RuleNotMet
+from arjuna.core.error import ExclusionRuleMet, NoInclusionRuleMet
 
 from .rule import *
 
@@ -56,7 +56,7 @@ class Selector:
     def validate(self, obj):
         for rule in self.erules:
             if rule.matches(obj):
-                raise RuleNotMet(rule)
+                raise ExclusionRuleMet(rule)
 
         if not self.irules:
             return
@@ -67,7 +67,7 @@ class Selector:
             else:
                 return
 
-        raise RuleNotMet(rule)
+        raise NoInclusionRuleMet()
 
     def __str__(self):
         return str([str(r) for r in self.__rules])
