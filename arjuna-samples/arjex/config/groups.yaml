@@ -19,7 +19,14 @@ gp4:
     - check_delegate_2
 
 gp_rules:
+
   conf: data2_env2
-  rules:
-    - "package *= l10"
-    - "module is check_selection"
+
+  ir:
+    - "package *= data"
+
+  er:
+    - "module !*= excel"
+
+
+    

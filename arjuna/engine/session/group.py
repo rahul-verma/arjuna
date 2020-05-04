@@ -130,58 +130,6 @@ class TestGroup:
             
 
         Arjuna.register_test_selector_for_group(selector)
-        # if not rules
-        # if im is None and em is None and it is None and et is None:
-        #     self.__load_all_tests()
-        # else:
-        #     self.__load_tests_from_pickers(im=im, em=em, it=it, et=et)
-
-    # def __load_all_tests(self):
-    #     self.__pytest_args.insert(0, self.tests_dir)
-
-    # def __load_tests_from_pickers(self, *, im=None, em=None, it=None, et=None):  
-
-    #     def process_modules(ms):
-    #         ms = [m.replace(".py", "").replace("*","").replace("/", " and ").replace("\\", " and ") for m in ms]
-    #         return ["and" in m and "({})".format(m) or m for m in ms]
-
-    #     k_args = []
-
-    #     k_flag = False
-
-    #     if em:            
-    #         em = process_modules(em)
-    #         k_args.append(" and ".join(["not " + m for m in em]))
-    #         k_flag = True
-
-    #     # if ic:
-    #     #     prefix = k_flag and " and " or ""
-    #     #     k_args.append(prefix + " and ".join(["not " + c for c in ic]))
-    #     #     k_flag = True
-
-    #     if et:
-    #         prefix = k_flag and " and " or ""
-    #         k_args.append(prefix + " and ".join(["not " + c for c in et]))
-    #         k_flag = True
-
-    #     if im:
-    #         prefix = k_flag and " and " or ""            
-    #         cm = process_modules(im)
-    #         k_args.append(prefix + " or ".join(im))
-    #         k_flag = True
-
-    #     # if cc:
-    #     #     prefix = k_flag and " and " or "" 
-    #     #     k_args.append(prefix + " or ".join(cc))
-    #     #     k_flag = True
-
-    #     if it:
-    #         prefix = k_flag and " and " or "" 
-    #         k_args.append(prefix + " or ".join(it))
-    #         k_flag = True
-
-    #     if k_flag:
-    #         self.__test_args.append("-k " + "".join(k_args))
 
     def __load_meta_args(self):
         pytest_report_args = []
@@ -242,6 +190,9 @@ class YamlTestGroup(TestGroup):
                     self.__rules['ir'].extend(TestGroup.create_rule_strs(pickers))
                 else:
                     self.__rules['er'].extend(TestGroup.create_rule_strs(pickers))
+            elif gmd_name in {'ir', 'er'}:
+                self.__rules[gmd_name].extend(group_yaml.get_value(gmd_name))
+
 
 class MagicTestGroup(TestGroup):
 
