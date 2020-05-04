@@ -128,12 +128,12 @@ class PickersParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-ip', '--include-package', dest="ip", action="append", metavar="package_name_or_regex", default=None, help='Names/regex pattern for including test packages. Can pass any number of these switches.')
-        self.parser.add_argument('-ep', '--exclude-package', dest="ep", action="append", metavar="package_name_or_regex", default=None, help='Names/regex pattern for excluding test packages. Can pass any number of these switches.')
-        self.parser.add_argument('-im', '--include-module', dest="im", action="append", metavar="module_name_or_regex", default=None, help='Names/regex pattern for including test modules. Can pass any number of these switches.')
-        self.parser.add_argument('-em', '--exclude-module', dest="em", action="append", metavar="module_name_or_regex", default=None, help='Names/regex pattern for excluding test modules. Can pass any number of these switches.')
-        self.parser.add_argument('-it', '--include-test', dest="it", action="append", metavar="test_name_or_regex", default=None, help='Names/regex pattern for including test functions. Can pass any number of these switches.')
-        self.parser.add_argument('-et', '--exclude-test', dest="et", action="append", metavar="test_name_or_regex", default=None, help='Names/regex pattern for excluding test functions. Can pass any number of these switches.')
+        self.parser.add_argument('-ip', '--include-package', dest="ip", action="append", metavar="package_name_or_regex", default=None, help='Name/regex pattern for including test packages. Can pass any number of these switches.')
+        self.parser.add_argument('-ep', '--exclude-package', dest="ep", action="append", metavar="package_name_or_regex", default=None, help='Name/regex pattern for excluding test packages. Can pass any number of these switches.')
+        self.parser.add_argument('-im', '--include-module', dest="im", action="append", metavar="module_name_or_regex", default=None, help='Name/regex pattern for including test modules. Can pass any number of these switches.')
+        self.parser.add_argument('-em', '--exclude-module', dest="em", action="append", metavar="module_name_or_regex", default=None, help='Name/regex pattern for excluding test modules. Can pass any number of these switches.')
+        self.parser.add_argument('-it', '--include-test', dest="it", action="append", metavar="test_name_or_regex", default=None, help='Name/regex pattern for including test functions. Can pass any number of these switches.')
+        self.parser.add_argument('-et', '--exclude-test', dest="et", action="append", metavar="test_name_or_regex", default=None, help='Name/regex pattern for excluding test functions. Can pass any number of these switches.')
 
         self.parser.add_argument('-ir', '--include-rule', dest="ir", action="append", metavar="rule", default=None, help='Include test functions that match the rule. Can pass any number of these switches. Test Function is included if any of the inclusion rules matches.')
         self.parser.add_argument('-er', '--exclude-rule', dest="er", action="append", metavar="rule", default=None, help='Exclude test functions that match the rule. Can pass any number of these switches. Test Function is excluded if any of the exclusion rules matches. Evaluated before any inclusion rules.')
