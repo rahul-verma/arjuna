@@ -34,14 +34,14 @@ def _tc(cls):
     return cls
 
 def _call_func(func, request_wrapper, data=None, *args, **kwargs):
-    from arjuna import Arjuna
+    from arjuna import log_info
     qual_name = request_wrapper.info.get_qual_name_with_data()
-    Arjuna.get_logger().info("Begin test function: {}".format(qual_name))  
+    log_info("Begin test function: {}".format(qual_name))  
     if data:      
         func(request=request_wrapper, data=data, *args, **kwargs)
     else:
         func(request=request_wrapper, *args, **kwargs)
-    Arjuna.get_logger().info("End test function: {}".format(qual_name))
+    log_info("End test function: {}".format(qual_name))
 
 def _simple_dec(func, test_meta_data):
     __process_test_meta_data(func, test_meta_data)

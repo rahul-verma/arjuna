@@ -49,7 +49,7 @@ def _simple_dec(func):
 def _repr_record(record):
     return str(record)
 
-def __pytestfix(scope, drive_with=None):
+def __pytestfix(scope, drive_with=None, default=False):
     records = None
     ids = None
     if drive_with:
@@ -58,29 +58,13 @@ def __pytestfix(scope, drive_with=None):
 
     def wrapper(func):
         orig_func = func
-
-        # @functools.wraps(orig_func)
-        # def wrapper_without_data(request, *args, **kwargs):
-        #     request.handler = request
-        #     yield from _call_func(func, request, *args, **kwargs)
-
-        # @functools.wraps(orig_func)
-        # def wrapper_with_data(request, data, *args, **kwargs):
-        #     my.handler = request
-        #     yield from _call_func(func, request, data=(params, ids), *args, **kwargs)
-
-        # else:
-        #     my = My()
-        #     my.data = DummyDataRecord()
-        #     func = pytest.mark.parametrize('my', [my], ids=My.repr)(func) 
-
         if drive_with:
-            return pytest.fixture(scope=scope, params=records, ids=ids)(_simple_dec(func))
+            return pytest.fixture(scope=scope, params=records, ids=ids, autouse=default)(_simple_dec(func))
         else:
-            return pytest.fixture(scope=scope)(_simple_dec(func))
+            return pytest.fixture(scope=scope, autouse=default)(_simple_dec(func))
     return wrapper
 
-def for_group(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
+def for_group(func: Callable=None, *, drive_with: 'DataSource'=None, default: bool=False) -> Callable:
     '''
         Decorator for session level test fixture/resource.
 
@@ -101,9 +85,9 @@ def for_group(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable
     from arjuna import Arjuna
 
     if func is not None:
-        return pytest.fixture(scope="session")(_simple_dec(func))
+        return pytest.fixture(scope="session", autouse=default)(_simple_dec(func))
     else:
-        return __pytestfix("session", drive_with=drive_with)
+        return __pytestfix("session", drive_with=drive_with, default=default)
 
 
 def for_module(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
@@ -157,6 +141,8 @@ def for_test(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
     else:
         return __pytestfix("function", drive_with=drive_with)
 
-@for_group
+
+@for_group(default=True)
 def group(request):
-    yield request.data
+    getattr(request.raw_request, "session").group_info = request.raw_request.param
+    yield

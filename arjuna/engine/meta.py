@@ -95,6 +95,14 @@ class Space:
     def raw_request(self):
         return self._request
 
+class GroupSpace(Space):
+
+    def __init__(self, pytest_request):
+        super().__init__(pytest_request)
+
+    def _get_container_for_scope(self):
+        return getattr(self._request, "session") # Each Arjuna group represents a Pytest session in a thread.
+
 class ModuleSpace(Space):
 
     def __init__(self, pytest_request):
@@ -111,6 +119,28 @@ class Module:
     @property
     def space(self):
         return self._space
+
+class Group:
+
+    def __init__(self, py_request):
+        self._space = GroupSpace(py_request)
+        self._info = py_request.session.group_info
+
+    @property
+    def space(self):
+        return self._space
+
+    @property
+    def thread_name(self):
+        return self._info.thread_name
+
+    @property
+    def name(self):
+        return self._info.name
+
+    @property
+    def config(self):
+        return self._info.config
 
 class My:
 
@@ -135,6 +165,7 @@ class My:
             self._tags = test_meta_data['tags']
             self._bugs = test_meta_data['bugs']
             self._envs = test_meta_data['envs']
+        self._group = None
 
     @property
     def config(self):
@@ -165,6 +196,16 @@ class My:
         return Arjuna.get_data_references()
 
     @property
+    def group(self):
+        '''
+            This info is available only within the body of a fixture or test function.
+        '''
+        # By this stage the Arjuna's built-in default group fixture has executed and group_info is available as pytest_request.session.group_info
+        if not self._group:
+            self._group = Group(self._request)
+        return self._group
+
+    @property
     def module(self):
         return self._module
 
@@ -190,7 +231,7 @@ class My:
         self._space = Space(pytest_request)
         if pytest_request.scope in {"function"}:
             if not self._module:
-                self._module = Module(pytest_request)          
+                self._module = Module(pytest_request)     
 
     @property
     def info(self):

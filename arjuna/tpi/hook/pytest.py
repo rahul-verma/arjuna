@@ -139,14 +139,12 @@ class PytestHooks:
         from arjuna.tpi.engine.data.markup import record
         log_debug("{} {}".format(metafunc.function, metafunc.fixturenames))
 
-        if "group" in metafunc.fixturenames:
-            group_params = Arjuna.get_group_params()
-            conf = None
-            m = metafunc.function.__module__
-            data = record(**group_params).build(context='Group').all_records[0]
-            # gid = "GroupData: gn={}, tn={}, conf={} ".format(group_params['name'], group_params['thread_name'], group_params['config'].name)
-            log_debug("Parameterizing distributor for module: {} with group: {}".format(m, DeprecationWarning))
-            metafunc.parametrize("group", argvalues=[data], ids=[str(data)], indirect=True)
+        group_params = Arjuna.get_group_params()
+        conf = None
+        m = metafunc.function.__module__
+        group = record(**group_params).build(context='Group').all_records[0]
+        log_debug("Parameterizing distributor for module: {} with group: {}".format(m, group))
+        metafunc.parametrize("group", argvalues=[group], ids=["G"], indirect=True)
 
     @classmethod
     def select_tests(cls, pytest_items, pytest_config):
