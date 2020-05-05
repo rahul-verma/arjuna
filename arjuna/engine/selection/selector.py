@@ -153,20 +153,21 @@ class Selector:
 
     def validate(self, obj):
         '''
-            Rules are segregated as package, module and test rules (inclusion/exclusion).
+        Rules are segregated as package, module and test rules (inclusion/exclusion).
 
-            Following is the test selection process as per Arjuna rules:
-            1. Package check: Specified using ip/ep or ir/er with "package operator operand" grammar.
+        Following is the test selection process as per Arjuna rules:
+
+            #. Package check: Specified using ip/ep or ir/er with "package operator operand" grammar.
                 - if package for a test meets an exclusion rule, it is excluded.
                 - if no inclusion rule is specified, it is included for module validation.
                 - if an inclusion rule is met, it is selected for module validation.
                 - if no inclusion rule is met, it is excluded.
-            2. Module check: Specified using im/em or ir/er with "module operator operand" grammar.
+            #. Module check: Specified using im/em or ir/er with "module operator operand" grammar.
                 - if module for a test meets an exclusion rule, it is excluded.
                 - if no inclusion rule is specified, it is included for test validation.
                 - if an inclusion rule is met, it is selected for test validation.
                 - if no inclusion rule is met, it is excluded.
-            3. Test check: Specified using it/et or ir/er with any rule grammar except "package operator operand" and "module operator operand".
+            #. Test check: Specified using it/et or ir/er with any rule grammar except "package operator operand" and "module operator operand".
                 - if a test meets an exclusion rule, it is excluded.
                 - if no inclusion rule is specified, it is included in test group run.
                 - if an inclusion rule is met, it is included in test group run.
