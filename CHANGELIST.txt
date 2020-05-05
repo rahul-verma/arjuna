@@ -23,6 +23,7 @@ Current Themes (In-Progress or Planned):
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Call Walkthroughs and Identify New Named Exceptions to be created.
     - Auto screenshot name should consider session, stage and group name.
+    - unstable should mark as a test as expected fail.
 
     Later:
     - Configuration:

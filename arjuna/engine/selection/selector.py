@@ -25,6 +25,15 @@ class Selector:
         self.__irules = list()
         self.__erules = list()
 
+        self.__package_erules = list()
+        self.__package_irules = list()
+        self.__module_erules = list()
+        self.__module_irules = list()
+        self.__test_erules = list()
+        self.__test_irules = list()
+
+        self.__frozen = False
+
     def include(self, rule_str):
         self.__irules.append(self.__build_rule(rule_str))
 
@@ -53,21 +62,132 @@ class Selector:
     def erules(self):
         return self.__erules
 
-    def validate(self, obj):
-        for rule in self.erules:
+    @property
+    def package_irules(self):
+        return self.__package_irules
+
+    @property
+    def package_erules(self):
+        return self.__package_erules
+
+    @property
+    def module_irules(self):
+        return self.__module_irules
+
+    @property
+    def module_erules(self):
+        return self.__module_erules
+
+    @property
+    def test_irules(self):
+        return self.__test_irules
+
+    @property
+    def test_erules(self):
+        return self.__test_erules
+
+    def __freeze(self):
+        for irule in self.irules:
+            if irule.target == "package":
+                self.__package_irules.append(irule)
+            elif irule.target == "module":
+                self.__module_irules.append(irule)
+            else:
+                self.__test_irules.append(irule)
+
+        for erule in self.erules:
+            if erule.target == "package":
+                self.__package_erules.append(erule)
+            elif erule.target == "module":
+                self.__module_erules.append(erule)
+            else:
+                self.__test_erules.append(erule)
+
+    def __validate_package_rules(self, obj):
+        for rule in self.__package_erules:
             if rule.matches(obj):
                 raise ExclusionRuleMet(rule)
 
-        if not self.irules:
+        if not self.__package_irules:
             return
 
-        for rule in self.irules:
+        for rule in self.__package_irules:
             if not rule.matches(obj):
                 continue
             else:
                 return
 
         raise NoInclusionRuleMet()
+
+    def __validate_module_rules(self, obj):
+        for rule in self.__module_erules:
+            if rule.matches(obj):
+                raise ExclusionRuleMet(rule)
+
+        if not self.__module_irules:
+            return
+
+        for rule in self.__module_irules:
+            if not rule.matches(obj):
+                continue
+            else:
+                return
+
+        raise NoInclusionRuleMet()
+
+    def __validate_test_rules(self, obj):
+        for rule in self.__test_erules:
+            if rule.matches(obj):
+                raise ExclusionRuleMet(rule)
+
+        if not self.__test_irules:
+            return
+
+        for rule in self.__test_irules:
+            if not rule.matches(obj):
+                continue
+            else:
+                return
+
+        raise NoInclusionRuleMet()
+
+    def validate(self, obj):
+        '''
+            Rules are segregated as package, module and test rules (inclusion/exclusion).
+
+            Following is the test selection process as per Arjuna rules:
+            1. Package check: Specified using ip/ep or ir/er with "package operator operand" grammar.
+                - if package for a test meets an exclusion rule, it is excluded.
+                - if no inclusion rule is specified, it is included for module validation.
+                - if an inclusion rule is met, it is selected for module validation.
+                - if no inclusion rule is met, it is excluded.
+            2. Module check: Specified using im/em or ir/er with "module operator operand" grammar.
+                - if module for a test meets an exclusion rule, it is excluded.
+                - if no inclusion rule is specified, it is included for test validation.
+                - if an inclusion rule is met, it is selected for test validation.
+                - if no inclusion rule is met, it is excluded.
+            3. Test check: Specified using it/et or ir/er with any rule grammar except "package operator operand" and "module operator operand".
+                - if a test meets an exclusion rule, it is excluded.
+                - if no inclusion rule is specified, it is included in test group run.
+                - if an inclusion rule is met, it is included in test group run.
+                - if no inclusion rule is met, it is excluded from test group run.
+        '''
+
+        if not self.__frozen:
+            self.__freeze()
+            self.__frozen = True
+
+        try:
+            self.__validate_package_rules(obj)
+        except (ExclusionRuleMet, NoInclusionRuleMet) as e:
+            raise e
+        else:
+            try:
+                self.__validate_module_rules(obj)
+            except (ExclusionRuleMet, NoInclusionRuleMet) as e:
+                raise e    
+            else:
+                self.__validate_test_rules(obj)
 
     def __str__(self):
         return str([str(r) for r in self.__rules])
