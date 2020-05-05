@@ -2,8 +2,6 @@ Following is the list of critical additions and updates for a given released ver
 
 Current Themes (In-Progress or Planned):
     For Production 1.0.0 release:
-    - Tagging and Properties
-        - CLI selection for user defined properties.
     - Add --retain-conftest switch with default False.
         - Arjuna might play with hooks and integration with pytest. To avoid project updates by test authors, update the file in each run.
     - Targeted Fixes:
@@ -69,6 +67,7 @@ Current Themes (In-Progress or Planned):
     - Internally, the ip/ep/im/em/it/et are converted to to ir/er rules. This means Arjuna is not using pytest markers for test selection. All selection is done based on Arjuna rule set.
     - There is an AND condition between package, module and test rules.
     - PytestHooks.select_tests hook created to select tests based on Arjuna rules. Called in `pytest_collection_modifyitems` pytest hook in conftest.py.
+    - Rules are also supported for user defined attributes.
 - New symbols for rule creation:
     - For string targets:  !~= for does not match and !*= does not partially match.
 - Arjuna built-in `group` fixture is now a default fixture. Group information is directly available in `request.group`. `request.group.space` can be used to store any objects.

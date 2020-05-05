@@ -110,10 +110,15 @@ class BooleanPropPatternRule(Rule):
             actual = False
         else:
             actual = getattr(container, self.target)
-        return self.checker(self.expression, actual)
+
+        if is_builtin_prop(self.target):
+            return self.checker(actual, self.expression)
+        else:
+            # For user define attrs, the value in @test is converted to bool
+            return self.checker(bool(actual), self.expression)
 
 
-class TagsPatternRule(Rule):
+class IterablePatternRule(Rule):
     '''
         Simple Pattern for presence/absence of tag(s).
 
@@ -125,6 +130,8 @@ class TagsPatternRule(Rule):
             without bugs a,b
             with envs a,b
             without envs a,b
+
+            with usertags a,b (found in info rather than object)
 
             You can use singular version as well - **tag/bug/env**
     '''
@@ -163,7 +170,7 @@ class TagsPatternRule(Rule):
 
         tags = cls.__convert_to_tags(match.group('tags'))
         container = get_tag_container(match.group('container'))
-        return TagsPatternRule(**{
+        return IterablePatternRule(**{
             'rule_str':rule_str,
             'container' : container,
             'target': tags, 
@@ -172,16 +179,36 @@ class TagsPatternRule(Rule):
         })        
 
     def matches(self, obj):
-        container = self._get_container_obj(obj)
+        try:
+            container = self._get_container_obj(obj)
+        except AttributeError:
+            # This logic block is executed when the rule looks for an iterable with name self.container in obj.info
+            try:
+                info_obj = getattr(obj, 'info')
+                container = getattr(info_obj, self.container)
+                if container is None:
+                    container = set()
+                elif type(container) == str:
+                    container = {container}
+                else:
+                    try:
+                        container = set([str(i) for i in container])
+                    except:
+                        container = {str(container)}
+            except:
+                # For user defined tag container.
+                container = set()
+
         if container is None:
             container = set()
         if not container and self.condition == RuleConditionType.IS_SUBSET:
             return False
         return self.checker(self.expression, container)
 
-class InfoPatternRule(Rule):
+
+class AttrPatternRule(Rule):
     '''
-        Pattern for executing a condition on an information value.
+        Pattern for executing a condition on an attribute value.
 
         For example:
 
@@ -200,8 +227,12 @@ class InfoPatternRule(Rule):
         match = Pattern.extract(cls.__PATTERN, rule_str)
         if match:
             target = match.group('target')
-            target_type = get_value_type(target) 
-            return InfoPatternRule  (**{
+            # For rule matching in info-pattern, target is always a str type for user-defined attrs.
+            if is_builtin_prop(target):
+                target_type = get_value_type(target) 
+            else:
+                target_type = str
+            return AttrPatternRule  (**{
                 'rule_str':rule_str,                 
                 'target': target, 
                 'condition' : convert_to_condition(target, target_type, match.group('condition')), 
@@ -217,4 +248,11 @@ class InfoPatternRule(Rule):
         else:
             actual = getattr(container, self.target)
 
-        return self.checker(actual, self.expression)
+        if is_builtin_prop(self.target):
+            return self.checker(actual, self.expression)
+        else:
+            # User attr in property rule is always str-to-str
+            # If actual value in @test is None for a user property, the rule is considered not matched.
+            if actual is None:
+                return False
+            return self.checker(str(actual), self.expression)

@@ -47,10 +47,10 @@ class Selector:
             return BooleanPropPatternRule.from_str(rule_str)
         except RulePatternDoesNotMatchError:
             try:
-                return TagsPatternRule.from_str(rule_str)
+                return IterablePatternRule.from_str(rule_str)
             except RulePatternDoesNotMatchError:
                 try:
-                    return InfoPatternRule.from_str(rule_str)
+                    return AttrPatternRule.from_str(rule_str)
                 except RulePatternDoesNotMatchError:
                     raise Exception("Rule is invalid: " + rule_str)
 

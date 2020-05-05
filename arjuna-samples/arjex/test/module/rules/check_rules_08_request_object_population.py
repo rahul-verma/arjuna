@@ -83,7 +83,8 @@ def check_default_containers(request):
     reviewed=True,
     tags={'t1', 'T2'},
     bugs={'B1', 'b2'},
-    envs={'EnV1', '     enV2     '}
+    envs={'EnV1', '     enV2     '},
+    rating=2,
 )
 def check_updated_containers(request):
     assert hasattr(request, 'info') is True
@@ -136,3 +137,12 @@ def check_updated_containers(request):
 
     assert hasattr(request, 'envs') is True
     assert request.envs == {'env1', 'env2'}
+
+    # User Defined
+    assert hasattr(request.info, 'rating') is True
+    assert request.info.rating == 2
+
+
+@test
+def check_case_insensitivity_for_tags_and_attrs(request):
+    raise Exception("Test to be implemented.")

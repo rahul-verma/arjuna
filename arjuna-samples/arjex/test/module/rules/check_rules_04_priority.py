@@ -29,7 +29,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -42,7 +42,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -55,7 +55,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -68,7 +68,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -81,7 +81,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -94,7 +94,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -107,7 +107,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -120,7 +120,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -133,7 +133,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -146,7 +146,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -159,7 +159,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -172,7 +172,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -185,7 +185,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -198,7 +198,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"
@@ -211,7 +211,7 @@ def check_rule_creation_priority(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "InfoPatternRule"
+    assert rule.__class__.__name__ == "AttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "priority"

@@ -144,13 +144,14 @@ def test(
         'reviewed': reviewed,
         'unstable': unstable,
     })
-    info_dict.update(test_attrs)
+
+    info_dict.update({k.lower():v for k,v in test_attrs.items()})
 
     test_meta_data = {
+        'info': info_dict,
         'tags': tags,
         'bugs': bugs,
         'envs': envs,
-        'info': info_dict
     }
 
     # Check if @test is provided without arguments

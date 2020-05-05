@@ -40,9 +40,11 @@ def _simple_dec(func):
         request_wrapper.set_req_obj(request)
         request_wrapper.data = hasattr(request, "param") and request.param or None
         qual_name = request_wrapper.info.get_qual_name_with_data()
-        log_info("(Setup) Begin fixture function: {}".format(qual_name))   
+        if func.__name__ != 'group':
+            log_info("(Setup) Begin fixture function: {}".format(qual_name))   
         yield from func(request_wrapper, *args, **kwargs)
-        log_info("(Teardown) End fixture function: {}".format(qual_name))
+        if func.__name__ != 'group':
+            log_info("(Teardown) End fixture function: {}".format(qual_name))
         
     return call_func
 

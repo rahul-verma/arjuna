@@ -27,7 +27,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "tags"
     assert rule.target == set({'chrome', 'firefox'})
@@ -40,7 +40,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "tags"
     assert rule.target == set({'chrome'})
@@ -53,7 +53,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "tags"
     assert rule.target == set({'chrome', 'abc'})
@@ -66,7 +66,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "tags"
     assert rule.target == set({'chrome', 'abc'})
@@ -79,7 +79,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "tags"
     assert rule.target == set({'chrome'})
@@ -92,7 +92,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "bugs"
     assert rule.target == set({'b1', 'b2'})
@@ -105,7 +105,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "bugs"
     assert rule.target == set({'b1'})
@@ -118,7 +118,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "bugs"
     assert rule.target == set({'b1', 'abc'})
@@ -131,7 +131,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "bugs"
     assert rule.target == set({'b1', 'abc'})
@@ -144,7 +144,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "bugs"
     assert rule.target == set({'b1'})
@@ -157,7 +157,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "envs"
     assert rule.target == set({'env1', 'env2'})
@@ -170,7 +170,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "envs"
     assert rule.target == set({'env1'})
@@ -183,7 +183,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "envs"
     assert rule.target == set({'env1', 'env2'})
@@ -196,7 +196,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "envs"
     assert rule.target == set({'env1', 'env2'})
@@ -209,7 +209,7 @@ def check_rule_creation_tags(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "TagsPatternRule"
+    assert rule.__class__.__name__ == "IterablePatternRule"
     assert rule.rule_str == r
     assert rule.container == "envs"
     assert rule.target == set({'env1'})

@@ -121,6 +121,7 @@ __number_symbols =  {
 }
 
 __appver_symbols = __str_symbols.union(__number_symbols)
+__str_symbols = __str_symbols.union(__number_symbols)
 
 __priority_symbols =  {
     'is' : 'is',
@@ -224,6 +225,8 @@ def get_value_checker_for_symbol(condition):
     return VALUE_CHECKERS[condition]
 
 def convert_expression(target, target_type, expression):
+    if expression.lower().strip() == 'none':
+        return None
     if is_builtin_prop(target):
         return CONVERTER_MAP[target_type](expression)
     else:
@@ -242,10 +245,11 @@ TAG_CONTAINER_MAP = {
 
 def get_tag_container(container):
     container = container.strip().lower()
-    if container not in ALLOWED_TAG_CONTAINERS:
-        raise InvalidSelectionRule("Unrecognized tag container [{}]. Allowed: {}".format(container, ALLOWED_TAG_CONTAINERS))
-    return TAG_CONTAINER_MAP[container]
-
+    if container in ALLOWED_TAG_CONTAINERS:
+        #raise InvalidSelectionRule("Unrecognized tag container [{}]. Allowed: {}".format(container, ALLOWED_TAG_CONTAINERS))
+        return TAG_CONTAINER_MAP[container]
+    else:
+        return container
 
 def validate_built_in_props(props):
     for k,v in props.items():
