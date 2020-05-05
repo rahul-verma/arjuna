@@ -67,10 +67,11 @@ Current Themes (In-Progress or Planned):
     - --rule changed to -ir and -er to add provision for include and exclude rules via CLI. Used for magic group creation.
     - ir and er sections can be added in a group definition in groups.yaml file.
     - Internally, the ip/ep/im/em/it/et are converted to to ir/er rules. This means Arjuna is not using pytest markers for test selection. All selection is done based on Arjuna rule set.
+    - There is an AND condition between package, module and test rules.
     - PytestHooks.select_tests hook created to select tests based on Arjuna rules. Called in `pytest_collection_modifyitems` pytest hook in conftest.py.
 - New symbols for rule creation:
     - For string targets:  !~= for does not match and !*= does not partially match.
-- Arjuna built-in fixture is now a default fixture. Group information is directly available in `request.group`. `request.group.space` can be used to store any objects.
+- Arjuna built-in `group` fixture is now a default fixture. Group information is directly available in `request.group`. `request.group.space` can be used to store any objects.
 - FIX: --dry-run switch.
 - All run options work with the rule-based approach.
 - New Exceptions:
