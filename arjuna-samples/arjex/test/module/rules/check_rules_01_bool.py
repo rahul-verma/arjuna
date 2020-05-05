@@ -27,7 +27,7 @@ def check_rule_creation_bool_pattern(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "BooleanPropPatternRule"
+    assert rule.__class__.__name__ == "BoolAttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "unstable"
@@ -41,7 +41,7 @@ def check_rule_creation_bool_pattern(request):
     selector.include(r)
     rule = selector.irules[0]
     print(rule)
-    assert rule.__class__.__name__ == "BooleanPropPatternRule"
+    assert rule.__class__.__name__ == "BoolAttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "unstable"

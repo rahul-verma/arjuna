@@ -27,7 +27,7 @@ def check_creation_exclude_rule(request):
     selector.exclude(r)
     rule = selector.erules[0]
     print(rule)
-    assert rule.__class__.__name__ == "BooleanPropPatternRule"
+    assert rule.__class__.__name__ == "BoolAttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "unstable"
@@ -41,7 +41,7 @@ def check_creation_exclude_rule(request):
     selector.exclude(r)
     rule = selector.erules[0]
     print(rule)
-    assert rule.__class__.__name__ == "BooleanPropPatternRule"
+    assert rule.__class__.__name__ == "BoolAttrPatternRule"
     assert rule.rule_str == r
     assert rule.container == "info"
     assert rule.target == "unstable"

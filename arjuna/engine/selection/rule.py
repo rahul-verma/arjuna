@@ -57,7 +57,7 @@ class Rule:
     def __str__(self):
         return "{}(rule_str='{}', container={}, target={}, condition={}, expression={}, expression_type={}, checker={})".format(self.__class__.__name__, self.rule_str, self.container, self.target, self.condition, self.expression, self.expression_type.__name__, self.checker.__name__)
 
-class BooleanPropPatternRule(Rule):
+class BoolAttrPatternRule(Rule):
     '''
         Simple Pattern for Boolean built-in property or flags
 
@@ -84,7 +84,7 @@ class BooleanPropPatternRule(Rule):
         if match:
             target = match.group('target')
             cls._validate(target)
-            return BooleanPropPatternRule(**{
+            return BoolAttrPatternRule(**{
                 'rule_str':rule_str, 
                 'target': target,
                 'condition' : RuleConditionType.NOT_EQUAL,
@@ -95,7 +95,7 @@ class BooleanPropPatternRule(Rule):
             if match:
                 target = match.group('target')
                 cls._validate(target)
-                return BooleanPropPatternRule(**{
+                return BoolAttrPatternRule(**{
                 'rule_str':rule_str, 
                 'target': target,
                 'condition' : RuleConditionType.EQUAL,
@@ -214,10 +214,10 @@ class AttrPatternRule(Rule):
 
             author is Rahul
     '''
-    condition_str = "|".join(get_all_symbols()).replace('*=','\*=') #"is|not|eq|=|==|!=|ne|lt|<|le|<=|gt|>|ge|>=|matches|~=|contains|\*="
-    p5_raw = r"^\s*(?P<target>\w+)\s+(?P<condition>({}){{1,1}})\s+(?P<expression>.*?)\s*$".format(condition_str)
+    __condition_str = "|".join(get_all_symbols()).replace('*=','\*=') #"is|not|eq|=|==|!=|ne|lt|<|le|<=|gt|>|ge|>=|matches|~=|contains|\*="
+    __p5_raw = r"^\s*(?P<target>\w+)\s+(?P<condition>({}){{1,1}})\s+(?P<expression>.*?)\s*$".format(__condition_str)
 
-    __PATTERN = re.compile(p5_raw, re.IGNORECASE)
+    __PATTERN = re.compile(__p5_raw, re.IGNORECASE)
 
     def __init__(self, *, rule_str, target, condition, expression):
         super().__init__(rule_str, "info", target, condition, expression)

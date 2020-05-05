@@ -44,7 +44,7 @@ class Selector:
         pattern = None
         rule_str = rule_str.replace('\!', '!') # From command line ! has to be escaped
         try:
-            return BooleanPropPatternRule.from_str(rule_str)
+            return BoolAttrPatternRule.from_str(rule_str)
         except RulePatternDoesNotMatchError:
             try:
                 return IterablePatternRule.from_str(rule_str)
