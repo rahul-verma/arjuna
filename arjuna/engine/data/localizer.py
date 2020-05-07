@@ -158,24 +158,26 @@ class Localizer:
         l10n_excel_dir = ref_config.value(ArjunaOption.L10N_EXCEL_DIR)
         l10n_merged_ref = L10NRef()
         l10n_refs = Localizers()
-        fnames = os.listdir(l10n_excel_dir)
-        fnames.sort()
-        for fname in fnames:
-            if fname.lower().endswith("xls"):
-                ref = ExcelL10NRef(os.path.join(l10n_excel_dir, fname))
-                l10n_merged_ref.update_from_excel_ref(ref)
-                l10n_refs[os.path.splitext(fname)[0]] = ref
+        if os.path.isdir(l10n_excel_dir):
+            fnames = os.listdir(l10n_excel_dir)
+            fnames.sort()
+            for fname in fnames:
+                if fname.lower().endswith("xls"):
+                    ref = ExcelL10NRef(os.path.join(l10n_excel_dir, fname))
+                    l10n_merged_ref.update_from_excel_ref(ref)
+                    l10n_refs[os.path.splitext(fname)[0]] = ref
 
         # JSON Localizers
         l10n_json_dir = ref_config.value(ArjunaOption.L10N_JSON_DIR)
-        json_ref = JsonL10NRef(l10n_json_dir)
-        cls.__process_json_ref(l10n_merged_ref, l10n_refs, json_ref, bucket="root")
-        buckets = os.listdir(l10n_json_dir)
-        for bucket in buckets:
-            if os.path.isdir(os.path.join(l10n_json_dir, bucket)):
-                dpath = os.path.join(l10n_json_dir, bucket)
-                json_ref = JsonL10NRef(dpath)
-                cls.__process_json_ref(l10n_merged_ref, l10n_refs, json_ref, bucket=bucket)
+        if os.path.isdir(l10n_json_dir):
+            json_ref = JsonL10NRef(l10n_json_dir)
+            cls.__process_json_ref(l10n_merged_ref, l10n_refs, json_ref, bucket="root")
+            buckets = os.listdir(l10n_json_dir)
+            for bucket in buckets:
+                if os.path.isdir(os.path.join(l10n_json_dir, bucket)):
+                    dpath = os.path.join(l10n_json_dir, bucket)
+                    json_ref = JsonL10NRef(dpath)
+                    cls.__process_json_ref(l10n_merged_ref, l10n_refs, json_ref, bucket=bucket)
 
         # l10n_merged_ref.enumerate()
         return Localizer(l10n_merged_ref, l10n_refs)

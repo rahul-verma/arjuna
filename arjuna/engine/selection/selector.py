@@ -191,4 +191,4 @@ class Selector:
                 self.__validate_test_rules(obj)
 
     def __str__(self):
-        return str([str(r) for r in self.__rules])
+        return str([str(r) for r in self.irules] + [str(r) for r in self.erules])

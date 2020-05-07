@@ -19,6 +19,7 @@ import os
 import uuid
 import time
 import logging
+import shutil
 from arjuna import ArjunaOption
 
 
@@ -67,6 +68,23 @@ class TestSessionController:
         self.__add_to_map(ref_conf)
         for run_env_conf in [self.__create_config(econf, name=name) for name, econf in data_env_confs.items()]:
             self.__add_to_map(run_env_conf)
+
+        def get_src_file_path(src):
+            return os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), src))
+
+        def get_proj_target_path(dest):
+            return os.path.join(ref_conf.value(ArjunaOption.PROJECT_ROOT_DIR), dest)
+
+        def copy_file(src, dest):
+            shutil.copyfile(get_src_file_path(src), get_proj_target_path(dest))
+
+        f = open(get_src_file_path("../res/conftest.txt"), "r")
+        contents = f.read().format(project=ref_conf.value(ArjunaOption.PROJECT_NAME))
+        f.close()
+        f = open(get_proj_target_path("test/conftest.py"), "w")
+        f.write(contents)
+        f.close()
+
         return ref_conf
 
     def __msession_config(self, ref_conf_name):

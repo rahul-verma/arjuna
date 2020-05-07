@@ -29,8 +29,9 @@ from arjuna.tpi.constant import BrowserName
 
 class Options(metaclass=abc.ABCMeta):
 
-    def __init__(self, *, options_dict, creation_context):
+    def __init__(self, *, options_dict, creation_context, validate=True):
         self.__options = CIStringDict()
+        self.__validate = validate
         if options_dict:
             self.update_all(options_dict)
 
@@ -48,7 +49,13 @@ class Options(metaclass=abc.ABCMeta):
                     self.__options[option_key] = "not_set"
                 else:
                     validator_name, validator = self._get_validator_for(option_name)
-                    self.__options[option_key] = validator(option_value)
+                    if self.__validate:
+                        self.__options[option_key] = validator(option_value)
+                    else:
+                        if validator_name.lower() not in {'absolute_dir_path', 'absolute_file_path'}:
+                            self.__options[option_key] = validator(option_value)
+                        else:
+                            self.__options[option_key] = option_value
         except Exception as e:
             raise Exception("Config option value <{}>(type:{}) for <{}> option did not pass the validation check: [{}]".format(
                 option_value, type(option_value), option_name, validator_name)
@@ -110,8 +117,8 @@ class ArjunaOptions(Options):
         desc_yaml = Yaml.from_file(file_path=desc_file)
         cls.ARJUNA_OPTIONS_DESC_MAP = {cls.process_arjuna_option_name(k): v for k, v in desc_yaml.as_map().items()}
 
-    def __init__(self, *, options_dict, creation_context):
-        super().__init__(options_dict=options_dict, creation_context=creation_context)
+    def __init__(self, *, options_dict, creation_context, validate=True):
+        super().__init__(options_dict=options_dict, creation_context=creation_context, validate=validate)
 
     def _get_validator_for(self, option_name):
         validator_name = self.ARJUNA_OPTIONS_DESC_MAP[option_name]
@@ -186,8 +193,8 @@ class EditableConfig:
         'Linux': 'linux'
     }
 
-    def __init__(self, *, arjuna_options_dict, user_options_dict, creation_context):
-        self.__arjuna_options = ArjunaOptions(options_dict=arjuna_options_dict, creation_context=creation_context)
+    def __init__(self, *, arjuna_options_dict, user_options_dict, creation_context, validate=True):
+        self.__arjuna_options = ArjunaOptions(options_dict=arjuna_options_dict, creation_context=creation_context, validate=validate)
         self.__user_options = UserOptions(options_dict=user_options_dict, creation_context=creation_context)
 
     @property
@@ -244,25 +251,26 @@ class EditableConfig:
        return EditableConfig(arjuna_options_dict=None, user_options_dict=None, creation_context="")
 
     @classmethod
-    def from_file(cls, *, file_path, creation_context, **replacements):
+    def from_file(cls, *, file_path, creation_context, validate=True, **replacements):
         with open(file_path, "r") as f:
-            return cls.from_str(contents=f.read(), creation_context=creation_context, **replacements)
+            return cls.from_str(contents=f.read(), creation_context=creation_context, validate=validate, **replacements)
 
     @classmethod
-    def from_str(cls, *, contents, creation_context, **replacements):
+    def from_str(cls, *, contents, creation_context, validate=True, **replacements):
         for rname, rvalue in replacements.items():
             contents = contents.replace("${}$".format(rname), rvalue)
         
         contents_yaml = Yaml.from_str(name="arjuna_defaults", contents=contents)
 
-        return cls.from_yaml(yaml_obj=contents_yaml, creation_context=creation_context)
+        return cls.from_yaml(yaml_obj=contents_yaml, creation_context=creation_context, validate=validate)
 
     @classmethod
-    def from_yaml(cls, *, yaml_obj, creation_context):
+    def from_yaml(cls, *, yaml_obj, creation_context, validate=True):
         return EditableConfig(
             arjuna_options_dict = yaml_obj.get_section("arjuna_options", strict=False).as_map(),
             user_options_dict = yaml_obj.get_section("user_options", strict=False).as_map(),
-            creation_context = "This configuration represents " + creation_context
+            creation_context = "This configuration represents " + creation_context,
+            validate=validate
         )
 
     @classmethod
@@ -276,7 +284,8 @@ class EditableConfig:
             project_root_dir = project_root_dir,
             project_name = os.path.basename(project_root_dir),
             host_os = cls._OS_MAP[platform.system()],
-            run_id = run_id and run_id or "mrun"
+            run_id = run_id and run_id or "mrun",
+            validate=False
         )
 
     @classmethod
@@ -284,6 +293,8 @@ class EditableConfig:
         location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_PROJECT_FILE)
         proj_conf = cls.empty_conf()
         proj_conf.update(arjuna_conf)
+        if not os.path.isfile(location):
+            return proj_conf
         proj_conf.update(
             cls.from_file(
                 file_path = location,
@@ -312,6 +323,8 @@ class EditableConfig:
     @classmethod
     def data_confs(cls, *, arjuna_conf):
         location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_DATA_FILE)
+        if not os.path.isfile(location):
+            return {}
         return cls.__multi_confs_file(
             file_path=location, creation_context=f"Data Configuration file at {location}"
         )
@@ -319,6 +332,8 @@ class EditableConfig:
     @classmethod
     def env_confs(cls, *, arjuna_conf):
         location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_ENVS_FILE)
+        if not os.path.isfile(location):
+            return {}
         return cls.__multi_confs_file(
             file_path=location, creation_context=f"Environment Configuration file at {location}"
         )

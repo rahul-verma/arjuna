@@ -84,14 +84,16 @@ class DataReference:
         from arjuna.tpi.constant import ArjunaOption
         refs = DataReferences()
         column_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_COLUMN_DIR)
-        for fname in os.listdir(column_data_ref_dir):
-            if fname.lower().endswith("xls"):
-                refs[os.path.splitext(fname)[0]] = DataReference.create_excel_column_data_ref(fname)
+        if os.path.isdir(column_data_ref_dir):
+            for fname in os.listdir(column_data_ref_dir):
+                if fname.lower().endswith("xls"):
+                    refs[os.path.splitext(fname)[0]] = DataReference.create_excel_column_data_ref(fname)
         
         row_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_ROW_DIR)
-        for fname in os.listdir(row_data_ref_dir):
-            if fname.lower().endswith("xls"):
-                refs[os.path.splitext(fname)[0]] = DataReference.create_excel_row_data_ref(fname)
+        if os.path.isdir(row_data_ref_dir):
+            for fname in os.listdir(row_data_ref_dir):
+                if fname.lower().endswith("xls"):
+                    refs[os.path.splitext(fname)[0]] = DataReference.create_excel_row_data_ref(fname)
 
         return refs
 

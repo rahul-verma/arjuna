@@ -126,13 +126,23 @@ class GuiLabelNotPresentError(Exception):
         context_msg = context and  " for context {}".format(context) or ""
         super().__init__(f"No session definition exisits for name {name} in {session_yaml}")
 
+
+class TestSessionsFileNotFoundError(Exception):
+    '''
+        Raised when `run-session` CLI sommand is used and sessions.yaml does not exist in `<Project Root Dir>/config` directory.
+    '''
+
+    def __init__(self, *, file_path):
+        super().__init__(f"Test sessions configuration file does not exist at {file_path}.")
+
+
 class UndefinedTestSessionError(Exception):
     '''
         Raised when there is no definition for a name used as test session name.
     '''
 
     def __init__(self, *, name, file_path):
-        super().__init__(f"No session definition exists for name >>{name}<< in sessions configuration file at {file_path}")
+        super().__init__(f"No session definition exists for name >>{name}<< in sessions configuration file at {file_path}.")
 
 class InvalidTestSessionDefError(Exception):
     '''
@@ -142,6 +152,13 @@ class InvalidTestSessionDefError(Exception):
     def __init__(self, *, session_name, sessions_file_path, msg):
         super().__init__(f"Invalid session definition for >>{session_name}<< in sessions file {sessions_file_path}. {msg}")
 
+class TestStagesFileNotFoundError(Exception):
+    '''
+        Raised when there `run-session/run-stage` CLI sommand is used and stages.yaml is does not exist in `<Project Root Dir>/config` directory.
+    '''
+
+    def __init__(self, *, file_path):
+        super().__init__(f"Test Stages configuration file does not exist at {file_path}.")
 
 class UndefinedTestStageError(Exception):
     '''
@@ -158,7 +175,15 @@ class InvalidTestStageDefError(Exception):
     '''
 
     def __init__(self, *, session_name, stage_name, stages_file_path, msg):
-        super().__init__(f"Invalid stage definition for >>{stage_name}<< in stages file {stages_file_path}. It is referred in {session_name}. {msg}")
+        super().__init__(f"Invalid stage definition for >>{stage_name}<< in stages file {stages_file_path}. It is referred in session >>{session_name}<<. {msg}")
+
+class TestGroupsFileNotFoundError(Exception):
+    '''
+        Raised when there `run-session/run-stage/run-group` CLI sommand is used and `groups.yaml` does not exist at `<Project Root Dir>/config` directory.
+    '''
+
+    def __init__(self, *, file_path):
+        super().__init__(f"Test groups configuration file does not exist at {file_path}.")
 
 class UndefinedTestGroupError(Exception):
     '''

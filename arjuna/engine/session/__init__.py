@@ -89,7 +89,10 @@ class YamlTestSession(BaseTestSession):
         from arjuna import C
         if cls.__SESSIONS_YAML is None:
             yaml_file_path = C(ArjunaOption.CONF_SESSIONS_FILE)
-            cls.__SESSIONS_YAML = Yaml.from_file(file_path=yaml_file_path)
+            try:
+                cls.__SESSIONS_YAML = Yaml.from_file(file_path=yaml_file_path)
+            except FileNotFoundError as e:
+                raise TestSessionsFileNotFoundError(file_path=yaml_file_path)
 
     @classmethod
     def get_session_yaml(cls, name):
@@ -103,7 +106,10 @@ class YamlTestSession(BaseTestSession):
         from arjuna import C
         if cls.__STAGES_YAML is None:
             yaml_file_path = C(ArjunaOption.CONF_STAGES_FILE)
-            cls.__STAGES_YAML = Yaml.from_file(file_path=yaml_file_path)
+            try:
+                cls.__STAGES_YAML = Yaml.from_file(file_path=yaml_file_path)
+            except FileNotFoundError:
+                raise TestStagesFileNotFoundError(file_path=yaml_file_path)
 
     @classmethod
     def get_stage_yaml(cls, name):
@@ -117,7 +123,10 @@ class YamlTestSession(BaseTestSession):
         from arjuna import C
         if cls.__GROUPS_YAML is None:
             yaml_file_path = C(ArjunaOption.CONF_GROUPS_FILE)
-            cls.__GROUPS_YAML = Yaml.from_file(file_path=yaml_file_path)
+            try:
+                cls.__GROUPS_YAML = Yaml.from_file(file_path=yaml_file_path)
+            except FileNotFoundError:
+                raise TestGroupsFileNotFoundError(file_path=yaml_file_path)
 
     @classmethod
     def get_group_yaml(cls, name):
@@ -161,7 +170,7 @@ class YamlTestSession(BaseTestSession):
         if "include" not in self.__yaml.section_names:
             raise InvalidTestSessionDefError(
                             session_name=self.name, 
-                            sessions_file_path=cls.__SESSIONS_YAML.file_path, 
+                            sessions_file_path=self.__yaml.file_path, 
                             msg="It must contain 'include' section. Section names found: {}".format(tuple(self.__yaml.section_names))
             )
 

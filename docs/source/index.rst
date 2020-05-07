@@ -204,14 +204,20 @@ Arjuna Exceptions
 =================
 
 * :py:mod:`Exceptions <arjuna.tpi.error>`
+    * Tests
+        * :py:class:`TestDecoratorError <arjuna.tpi.error.TestDecoratorError>`
+        * :py:class:`TestSelectorNotFoundError <arjuna.tpi.error.TestSelectorNotFoundError>`
     * Configuration
         * :py:class:`UndefinedConfigError <arjuna.tpi.error.UndefinedConfigError>`
         * :py:class:`ConfigCreationError <arjuna.tpi.error.ConfigCreationError>`
     * Test Session, Stage and Group
+        * :py:class:`TestSessionsFileNotFoundError <arjuna.tpi.error.TestSessionsFileNotFoundError>`
         * :py:class:`UndefinedTestSessionError <arjuna.tpi.error.UndefinedTestSessionError>`
         * :py:class:`InvalidTestSessionDefError <arjuna.tpi.error.InvalidTestSessionDefError>`
+        * :py:class:`TestStagesFileNotFoundError <arjuna.tpi.error.TestStagesFileNotFoundError>`
         * :py:class:`UndefinedTestStageError <arjuna.tpi.error.UndefinedTestStageError>`
         * :py:class:`InvalidTestStageDefError <arjuna.tpi.error.InvalidTestStageDefError>`
+        * :py:class:`TestGroupsFileNotFoundError <arjuna.tpi.error.TestGroupsFileNotFoundError>`
         * :py:class:`UndefinedTestGroupError <arjuna.tpi.error.UndefinedTestGroupError>`
     * Gui Automation
         * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.error.GuiWidgetForLabelPresentError>`

@@ -96,7 +96,6 @@ class ArjunaSingleton:
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_HTML_DIR))
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.LOG_DIR))
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.SCREENSHOTS_DIR))
-        self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.HOOKS_DIR))
 
         from arjuna.engine.logger import Logger
         self.__logger = Logger(self.ref_config)
@@ -104,7 +103,9 @@ class ArjunaSingleton:
         from arjuna.tpi.hook.config import Configurator
         configurator = Configurator()
         # Load configs from config hooks
-        sys.path.append(self.ref_config.value(ArjunaOption.HOOKS_DIR))
+        hooks_dir = self.ref_config.value(ArjunaOption.HOOKS_DIR)
+        if os.path.isdir(hooks_dir):
+            sys.path.append(hooks_dir)
         try:
             from arjuna_config import register_configs
         except ModuleNotFoundError as e: # Module not defined.
@@ -126,7 +127,8 @@ class ArjunaSingleton:
         from arjuna.interact.gui.auto.finder.withx import WithX
         fpath = self.ref_config.value(ArjunaOption.CONF_WITHX_FILE)
         creation_context= f"WithX.yaml file at {fpath}"
-        self.__common_withx_ref = WithX(Yaml.from_file(file_path=fpath).as_map())
+        if os.path.isfile(fpath):        
+            self.__common_withx_ref = WithX(Yaml.from_file(file_path=fpath).as_map())
 
         return self.ref_config
 
@@ -210,7 +212,14 @@ class ArjunaSingleton:
             self.__test_meta_data[qual_name] = test_meta_data
 
     def get_test_meta_data(self, qual_name):
-        return self.__test_meta_data[qual_name]
+        try:
+            return self.__test_meta_data[qual_name]
+        except KeyError as e:
+            try:
+                from arjuna import ArjunaOption
+                return self.__test_meta_data[self.get_config("ref").value(ArjunaOption.PROJECT_NAME) + "." + qual_name]
+            except KeyError:
+                raise Exception("Test Meta data not found for test: {}. Existing entries: {}".format(qual_name, self.__test_meta_data.keys()))
 
 class Arjuna:
     '''

@@ -99,8 +99,8 @@ class Validator:
         elif os.path.exists(input):
             if not os.path.isabs(input) or not os.path.isdir(input):
                 cls.raise_exc(input)
-        else:
-            os.makedirs(input)
+        # else:
+        #     os.makedirs(input)
         return input
 
     @classmethod

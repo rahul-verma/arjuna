@@ -144,5 +144,5 @@ def R(query, *, bucket=None, context=None):
         return Arjuna.get_data_ref(bucket).record_for(context)[query]
     except Exception as e:
         import traceback
-        raise Exception("Error in retrieving reference value for: {} in {} data reference. {}. {}".format(in_str, bucket, traceback.format_exc()))
+        raise Exception("Error in retrieving reference value for: bucket: >>{}<<, context: >>{}<< and query >>{}<< in data reference. {}. {}".format(bucket, context, query, str(e), traceback.format_exc()))
 

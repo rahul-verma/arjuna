@@ -15,7 +15,7 @@ arjuna_options:
   l10n.strict: False
   l10n.dir: $project_root_dir$/l10n
   l10n.excel.dir: $project_root_dir$/l10n/excel
-  l10n.json.dir: $project_root_dir$/l10n/json"
+  l10n.json.dir: $project_root_dir$/l10n/json
 
   project.name: $project_name$
   project.root.dir: $project_root_dir$

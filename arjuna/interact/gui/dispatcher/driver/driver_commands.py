@@ -21,7 +21,6 @@ class DriverCommands:
 
     @classmethod
     def go_to_url(cls, driver, url):
-        print("URL", url)
         driver.get(url)
 
     @classmethod

@@ -187,9 +187,9 @@ class YamlTestGroup(TestGroup):
             elif gmd_name in pickers:
                 pickers[gmd_name] = group_yaml.get_value(gmd_name)
                 if gmd_name.startswith('i'):
-                    self.__rules['ir'].extend(TestGroup.create_rule_strs(pickers))
+                    self.__rules['ir'].extend(TestGroup.create_rule_strs(pickers)['ir'])
                 else:
-                    self.__rules['er'].extend(TestGroup.create_rule_strs(pickers))
+                    self.__rules['er'].extend(TestGroup.create_rule_strs(pickers)['er'])
             elif gmd_name in {'ir', 'er'}:
                 self.__rules[gmd_name].extend(group_yaml.get_value(gmd_name))
 

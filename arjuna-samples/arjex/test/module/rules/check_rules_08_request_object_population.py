@@ -23,10 +23,10 @@ def check_default_containers(request):
     info = request.info
 
     assert hasattr(info, 'qual_name') is True
-    assert info.qual_name == 'test.module.rules.check_rules_08_request_object_population.check_default_containers'
+    assert info.qual_name == 'arjex.test.module.rules.check_rules_08_request_object_population.check_default_containers'
 
     assert hasattr(info, 'package') is True
-    assert info.package == 'test.module.rules'
+    assert info.package == 'arjex.test.module.rules'
 
     assert hasattr(info, 'module') is True
     assert info.module == 'check_rules_08_request_object_population'
@@ -91,10 +91,10 @@ def check_updated_containers(request):
     info = request.info
 
     assert hasattr(info, 'qual_name') is True
-    assert info.qual_name == 'test.module.rules.check_rules_08_request_object_population.check_updated_containers'
+    assert info.qual_name == 'arjex.test.module.rules.check_rules_08_request_object_population.check_updated_containers'
 
     assert hasattr(info, 'package') is True
-    assert info.package == 'test.module.rules'
+    assert info.package == 'arjex.test.module.rules'
 
     assert hasattr(info, 'module') is True
     assert info.module == 'check_rules_08_request_object_population'
