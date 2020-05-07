@@ -124,7 +124,7 @@ class GuiLabelNotPresentError(Exception):
     def __init__(self, gns_name, label, context=None, msg=None):
         msg = msg is None and "" or msg
         context_msg = context and  " for context {}".format(context) or ""
-        super().__init__(f"No session definition exisits for name {name} in {session_yaml}")
+        super().__init__(f"No session definition exisits for name {label} in {gns_name}, {context} {msg}")
 
 
 class TestSessionsFileNotFoundError(Exception):
