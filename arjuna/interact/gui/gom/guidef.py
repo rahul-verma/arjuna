@@ -32,6 +32,7 @@ class GuiDef:
     def __init__(self, name_store, automator, label, def_file_path): # namespace_dir, 
         self.__name_store = name_store
         # self.__namespace_dir = namespace_dir
+        self.__app = automator.app
         self.__automator = automator
         self.__config = automator.config
         self.__auto_context = self.config.guiauto_context

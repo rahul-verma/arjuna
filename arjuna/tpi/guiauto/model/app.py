@@ -31,6 +31,7 @@ class _App(Gui, metaclass=abc.ABCMeta):
         self.__ui = None
         self.__automator = None
         self.__gns_file_name = gns_file_name is not None and gns_file_name or "{}.yaml".format(self.label)
+        self.__common_gui_def = None
 
     @property
     def _automator(self):
@@ -49,8 +50,13 @@ class _App(Gui, metaclass=abc.ABCMeta):
     def ui(self, page):
         self.__ui = page
 
+    @property
+    def _common_guidef(self):
+        return self.__common_gui_def
+
     def _create_default_ui(self):
         self.__ui = GuiPage(source_gui=self, label=self.label, gns_dir=self.gns_dir, gns_file_name=self.__gns_file_name)
+        self.__common_gui_def = self.__ui._gui_def
 
     @abc.abstractmethod
     def launch(self):

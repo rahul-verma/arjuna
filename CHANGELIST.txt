@@ -9,7 +9,6 @@ Current Themes (In-Progress or Planned):
             - Resources have a yield.
             - Fixtures can have just pre-post instructions.
         - Rules
-    - common.yaml in Gui Namespace (fallback from page GNS.). Should app's yaml file act as this?
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Call Walkthroughs and Identify New Named Exceptions to be created.
     - Auto screenshot name should consider session, stage and group name.
@@ -67,6 +66,7 @@ Current Themes (In-Progress or Planned):
 - New symbols for rule creation:
     - For string targets:  !~= for does not match and !*= does not partially match.
 - Arjuna built-in `group` fixture is now a default fixture. Group information is directly available in `request.group`. `request.group.space` can be used to store any objects.
+- GuiApp's GuiNamespace acts a common namespace across pages, sections and dialogs.
 - FIX: --dry-run switch.
 - All run options work with the rule-based approach.
 - Support for minimalistic project structure for simple use of Arjuna. 

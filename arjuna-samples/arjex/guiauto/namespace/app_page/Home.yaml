@@ -1,8 +1,5 @@
 labels:
 
-  user:
-    id: user_login
-
   pwd:
     id: user_pass
 

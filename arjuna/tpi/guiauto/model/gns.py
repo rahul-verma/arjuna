@@ -75,8 +75,13 @@ class GNS:
         '''
         return GNSLabelFormatter(self, **fargs)
 
-    def __get_wmd_for_label(self, label):
-        wmd = self.__gui_def.get_wmd(label)
+    def _get_wmd_for_label(self, label):
+        wmd = None
+        try:
+            wmd = self.__gui_def.get_wmd(label)
+        except Exception as e:
+            if self.__gui.app._common_guidef is not self.__gui_def:
+                wmd = self.__gui.app._common_guidef.get_wmd(label)
         return wmd.create_formatted_wmd() # Only globals will be processed.
 
     def wait_until_absent(self, *labels):
@@ -93,7 +98,7 @@ class GNS:
         '''
         waiter = getattr(self.__container, "_" + "wait_until_absent")
         for label in labels:
-            wmd = self.__get_wmd_for_label(label)
+            wmd = self._get_wmd_for_label(label)
             try:
                 waiter(wmd)
             except GuiWidgetPresentError:
@@ -125,7 +130,7 @@ class GNS:
         return factory(wmd)
 
     def __getattr__(self, label):
-        wmd = self.__get_wmd_for_label(label)
+        wmd = self._get_wmd_for_label(label)
         from arjuna import log_debug
         log_debug("Finding element with label: {} and wmd: {}".format(label, wmd))
         try:
