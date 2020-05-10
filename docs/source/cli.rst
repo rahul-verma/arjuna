@@ -70,7 +70,7 @@ Following run options can be provided in command line:
 - **--dry-run**: Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. 
         * **SHOW_TESTS** - enumerate tests. 
         * **SHOW_PLAN** - enumerates tests fixtures. 
-        * **RUN_FIXTURES** - Executes setup/teardown fixtures and emuerates tests.
+        * **CREATE_RES** - Create all resources and emuerates tests.
 - **-c** or **--conf**: Configuration object name for this run.
 - **-ao** or **--arjuna-option**: Provide any arjuna option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates. You can provide any number of these switches.
 - **-uo** or **--user-option**: Provide any user option as a key value pair. Highest precedence amongst all ways of configurations. Superimposed on all configurations that Arjuna creates.  You can provide any number of these switches.
