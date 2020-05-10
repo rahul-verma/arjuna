@@ -96,18 +96,17 @@ or an easy, simple import that imports all public TPI names from Arjuna:
 
 Following links direct you to documentation for all public names:
 
-Test, Fixtures and Assertions
-=============================
+Test, Test Resources and Assertions
+===================================
 * :py:func:`@test <arjuna.tpi.engine.test.test>`
+    * :py:func:`skip <arjuna.tpi.engine.test.skip>`
+    * :py:func:`xfail <arjuna.tpi.engine.test.xfail>`
+    * :py:func:`problem_in <arjuna.tpi.engine.relation.problem_in>`
 * :py:class:`Asserter <arjuna.tpi.engine.asserter.Asserter>`
-* :py:mod:`Test Fixtures <arjuna.tpi.engine.fixture>`
-    * :py:func:`@for_test <arjuna.tpi.engine.fixture.for_test>`
-    * :py:func:`@for_module <arjuna.tpi.engine.fixture.for_module>`
-    * :py:func:`@for_group <arjuna.tpi.engine.fixture.for_group>`
-
-Test-to-Test Dependency
-=======================
-* :py:func:`problem_in <arjuna.tpi.engine.relation.problem_in>`
+* :py:mod:`Test Resources <arjuna.tpi.engine.resource>`
+    * :py:func:`@for_test <arjuna.tpi.engine.resource.for_test>`
+    * :py:func:`@for_module <arjuna.tpi.engine.resource.for_module>`
+    * :py:func:`@for_group <arjuna.tpi.engine.resource.for_group>`
 
 Test Configuration
 ==================

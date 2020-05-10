@@ -57,7 +57,7 @@ def __process_func_for_xfail(func, test_meta_data, xfail_obj):
             return pytest.mark.xfail(True, reason="Expected Failure")(func)
         else:
             return func
-    elif isinstance(xfail_obj, XFail):
+    elif isinstance(xfail_obj, _XFail):
         return pytest.mark.xfail(
             xfail_obj.condition,
             reason = xfail_obj.reason,
@@ -75,7 +75,7 @@ def __process_func_for_skip(func, test_meta_data, skip_obj):
             return pytest.mark.skip()(func)
         else:
             return func
-    elif isinstance(skip_obj, Skip):
+    elif isinstance(skip_obj, _Skip):
         return pytest.mark.skipif(
             skip_obj.condition,
             reason = skip_obj.reason,
@@ -132,14 +132,14 @@ def __process_test_meta_data(func, test_meta_data):
 
 from collections import namedtuple
 
-XFail = namedtuple('XFail', "condition reason raises run strict")
+_XFail = namedtuple('XFail', "condition reason raises run strict")
 
-Skip = namedtuple('Skip', "reason condition")
+_Skip = namedtuple('Skip', "reason condition")
 
 def xfail(condition, *, reason: str="Expected Failure", raises: Exception=None, run: bool=True, strict: bool=False):
     '''
         Builder for an Expected Failure condition and decisions.
-        Directly wraps pytest.mark.xfail https://docs.pytest.org/en/latest/reference.html#pytest-mark-xfail
+        Directly wraps **pytest.mark.xfail** https://docs.pytest.org/en/latest/reference.html#pytest-mark-xfail
 
         Args:
             condition: True/False. You can give a condition code evaluating to bool. You can give such code as a string as well. The string can be just a statement stating the reason.
@@ -150,7 +150,7 @@ def xfail(condition, *, reason: str="Expected Failure", raises: Exception=None, 
             run: Should this test be executed. 
             strict: Test Suite will not be marked as a fail if this is False and this test passes or fails. If True, if this test passes, the test suite is marked as fail.
     '''
-    return XFail(
+    return _XFail(
         condition = condition,
         reason = reason,
         raises = raises,
@@ -160,16 +160,16 @@ def xfail(condition, *, reason: str="Expected Failure", raises: Exception=None, 
 
 def skip(condition: "bool or str", *, reason: str=None):
     '''
-        Builder for an Skip condition.
-        Directly wraps pytest.mark.skipif
+        Builder for a Skip condition.
+        Wraps **pytest.mark.skip** and **pytest.mark.skipif**
 
         Args:
             condition: True/False. You can give a condition code evaluating to bool. You can give such code as a string as well. Or the string can be just a statement stating the reason.
 
         Keyword Arguments:
-            reason: Why this test is expected to fail. Mandatory if condition is a bool.
+            reason: Why this test is to be skipped.
     '''
-    return Skip(
+    return _Skip(
         condition = condition,
         reason = reason,
     )
@@ -180,6 +180,8 @@ def test(
             resources: ListOrTuple=None, 
             drive_with: 'DataSource'=None, 
             exclude_if: 'Relation'=None,
+            xfail: "boolOrXFail"= False,
+            skip: "boolOrSkip"= False,
             priority: int=5,
             author: str=None,
             idea: str=None,
@@ -188,8 +190,6 @@ def test(
             level: str=None,
             reviewed: bool= False,
             unstable: bool= False,
-            xfail: "boolOrXFail"= False,
-            skip: "boolOrSkip"= False,
             tags: set=set(),
             bugs: set=set(),
             envs: set=set(),
@@ -201,9 +201,9 @@ def test(
             func: A Function with signature **f(request)**. The name request is mandatory and enforced.
 
         Keyword Arguments:
-            id: (Optional) Alnum string representing an ID which you want to associate with the test.
-            resources: (Optional) Fixtures/Resources that you want to associate this test with. Wraps pytest.mark.usefixtures. Instead of using this, you can also pass the names as direct arguments in the function signature.
-            drive_with: (Optional) Used for data driven testing. Argument can be Arjuna Data Source. Wraps **pytest.mark.parametrize**. If you use this argument, the test function signature must include a **data** argument e.g. 
+            id: Alnum string representing an ID which you want to associate with the test.
+            resources: Fixtures/Resources that you want to associate this test with. Wraps pytest.mark.usefixtures. Instead of using this, you can also pass the names as direct arguments in the function signature.
+            drive_with: Used for data driven testing. Argument can be Arjuna Data Source. Wraps **pytest.mark.parametrize**. If you use this argument, the test function signature must include a **data** argument e.g. 
 
                 .. code-block:: python
                 
@@ -211,7 +211,22 @@ def test(
                     def check_sample(request, data):
                         pass
 
-            exclude_if: (Optional) Define exclusion condition. Argument can be an Arjuna Relation. Wraps **pytest.mark.dependency**.
+            exclude_if: Define exclusion condition. Argument can be an Arjuna Relation. Wraps **pytest.mark.dependency**.
+            xfail: Mark this test as a expected fail by setting to True. You can also use helper `xfail()` to create an advanced xfail construct. Wraps **pytest.mark.xfail**.
+            skip: Mark this test as a expected skipped by setting to True. You can also use helper `skip()` to create an advanced skip construct. Wraps **pytest.mark.skip** and Wraps **pytest.mark.skipif**.
+            priority: An integer value 1-5 depicting priority of this test, 1 being highest, 5 being lowest.
+            author: Author of this test
+            idea: The idea describing this test
+            component: Primary software component that this test targets.
+            app_version: Version of SUT that this test targets
+            level: Level of this test.
+            reviewed: Has this test been reviewed?
+            unstable: Is this test unstable?
+            tags: Set of tags for this test
+            bugs: Set of bugs associated with this test
+            envs: Set of Environment names on which this test is supposed to run.
+            **test_attrs: Arbitrary name-value pairs to provide further test attributes.
+
         Note:
             The test function name must start with the prefix **check_**
 
