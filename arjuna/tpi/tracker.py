@@ -19,7 +19,7 @@ import inspect
 
 from arjuna.engine.track import *
 
-def track(level: str="not_set"):
+def track(level: str="debug"):
     '''
         Decorator to track a callable.
 

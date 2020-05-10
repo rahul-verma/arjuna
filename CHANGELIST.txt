@@ -71,6 +71,7 @@ Current Themes (In-Progress or Planned):
 - All run options work with the rule-based approach.
 - Support for minimalistic project structure for simple use of Arjuna. 
 - Test Fixtures --> Referred as Test Resources. Have an option setting as default using `default` keyword argument.
+- Support for `xfail` and `skip` keyword arguments in `@test` decorator. `xfail()` and `skip()` helper functions added.
 - New Exceptions:
     - TestDecoratorError
     - TestSessionsFileNotFoundError

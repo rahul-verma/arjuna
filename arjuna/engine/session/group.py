@@ -113,7 +113,7 @@ class TestGroup:
         pytest_ini_path = res_path + "/pytest.ini"
 
         # -s is to print to console.
-        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "--show-capture", "all", "--disable-warnings"] # 
+        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "--show-capture", "all", "--disable-warnings", "-rxX"] # 
         self.__test_args = []
         self.__load_tests(rules=self.__rules)
         self.__load_meta_args()

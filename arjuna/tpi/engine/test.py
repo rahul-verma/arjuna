@@ -37,11 +37,52 @@ def _call_func(func, request_wrapper, data=None, *args, **kwargs):
     from arjuna import log_info
     qual_name = request_wrapper.info.get_qual_name_with_data()
     log_info("Begin test function: {}".format(qual_name))  
-    if data:      
-        func(request=request_wrapper, data=data, *args, **kwargs)
-    else:
-        func(request=request_wrapper, *args, **kwargs)
+    try:
+        if data:      
+            func(request=request_wrapper, data=data, *args, **kwargs)
+        else:
+            func(request=request_wrapper, *args, **kwargs)
+    except Exception as e:
+        log_info("End test function (with failure/error): {}. Exception Message: {}".format(qual_name, str(e)))    
+        raise e
     log_info("End test function: {}".format(qual_name))
+
+
+def __process_func_for_xfail(func, test_meta_data, xfail_obj):
+    from arjuna import log_info
+    log_info(test_meta_data["info"]["qual_name"])
+    log_info(xfail_obj)
+    if type(xfail_obj) is bool:
+        if xfail_obj:
+            return pytest.mark.xfail(True, reason="Expected Failure")(func)
+        else:
+            return func
+    elif isinstance(xfail_obj, XFail):
+        return pytest.mark.xfail(
+            xfail_obj.condition,
+            reason = xfail_obj.reason,
+            raises = xfail_obj.raises,
+            run = xfail_obj.run,
+            strict = xfail_obj.strict
+            )(func)
+    else:
+        raise TestDecoratorError(func_qual_name=test_meta_data["info"]["qual_name"], msg="xfail argument should be of type XFail or bool.")
+
+
+def __process_func_for_skip(func, test_meta_data, skip_obj):
+    if type(skip_obj) is bool:
+        if skip_obj:
+            return pytest.mark.skip()(func)
+        else:
+            return func
+    elif isinstance(skip_obj, Skip):
+        return pytest.mark.skipif(
+            skip_obj.condition,
+            reason = skip_obj.reason,
+            )(func)
+    else:
+        raise TestDecoratorError(func_qual_name=test_meta_data["info"]["qual_name"], msg="skip argument should be of type Skip or bool.")          
+
 
 def _simple_dec(func, test_meta_data):
     __process_test_meta_data(func, test_meta_data)
@@ -89,6 +130,49 @@ def __process_test_meta_data(func, test_meta_data):
 
     test_meta_data['info'].update(func_meta_data)
 
+from collections import namedtuple
+
+XFail = namedtuple('XFail', "condition reason raises run strict")
+
+Skip = namedtuple('Skip', "reason condition")
+
+def xfail(condition, *, reason: str="Expected Failure", raises: Exception=None, run: bool=True, strict: bool=False):
+    '''
+        Builder for an Expected Failure condition and decisions.
+        Directly wraps pytest.mark.xfail https://docs.pytest.org/en/latest/reference.html#pytest-mark-xfail
+
+        Args:
+            condition: True/False. You can give a condition code evaluating to bool. You can give such code as a string as well. The string can be just a statement stating the reason.
+
+        Keyword Arguments:
+            reason: Why this test is expected to fail. Mandatory if condition is a bool.
+            raises: Exception subclass expected to be raised by the test function (reported as XFailed); other exceptions will fail the test (reported as Failed).
+            run: Should this test be executed. 
+            strict: Test Suite will not be marked as a fail if this is False and this test passes or fails. If True, if this test passes, the test suite is marked as fail.
+    '''
+    return XFail(
+        condition = condition,
+        reason = reason,
+        raises = raises,
+        run = run,
+        strict = strict,
+    )
+
+def skip(condition: "bool or str", *, reason: str=None):
+    '''
+        Builder for an Skip condition.
+        Directly wraps pytest.mark.skipif
+
+        Args:
+            condition: True/False. You can give a condition code evaluating to bool. You can give such code as a string as well. Or the string can be just a statement stating the reason.
+
+        Keyword Arguments:
+            reason: Why this test is expected to fail. Mandatory if condition is a bool.
+    '''
+    return Skip(
+        condition = condition,
+        reason = reason,
+    )
 
 def test(
             f:Callable=None, *, 
@@ -104,6 +188,8 @@ def test(
             level: str=None,
             reviewed: bool= False,
             unstable: bool= False,
+            xfail: "boolOrXFail"= False,
+            skip: "boolOrSkip"= False,
             tags: set=set(),
             bugs: set=set(),
             envs: set=set(),
@@ -168,6 +254,8 @@ def test(
 
     def format_test_func(func):
         __process_test_meta_data(func, test_meta_data)
+        func = __process_func_for_xfail(func, test_meta_data, xfail)
+        func = __process_func_for_skip(func, test_meta_data, skip)
         from arjuna import Arjuna
         Arjuna.register_test_meta_data(test_meta_data['info']['qual_name'], CIStringDict(test_meta_data))
         orig_func = func
