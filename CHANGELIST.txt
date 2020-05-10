@@ -1,17 +1,6 @@
 Following is the list of critical additions and updates for a given released version:
 
-Current Themes (In-Progress or Planned):
-    For Production 1.0.0 release:
-    - Investigate:
-        - @track on Windows.
-    - Docs
-        - Fixtures -> Should they be called resourcess
-            - Resources have a yield.
-            - Fixtures can have just pre-post instructions.
-        - Rules
-    - unstable should mark a test as expected fail.
-
-    Later:
+Future Themes (In-Progress or Planned):
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Call Walkthroughs and Identify New Named Exceptions to be created.
     - Auto screenshot name should consider session, stage and group name.
