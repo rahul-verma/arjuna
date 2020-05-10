@@ -58,15 +58,15 @@ def __log(invoker, level, msg, contexts=None):
         # In future versions, see if there can be a fallabck logger.
         pass
 
-def log_trace(msg: str, *, contexts: ListOrTuple=None):
-    '''
-        Log a message with **TRACE** level.
+# def log_trace(msg: str, *, contexts: ListOrTuple=None):
+#     '''
+#         Log a message with **TRACE** level.
 
-        Args: 
-            msg: Log message
-            contexts: (Optional) Context strings for this log message.
-    '''
-    __log(_Stack.get_invoker(), "trace", msg, contexts=contexts)
+#         Args: 
+#             msg: Log message
+#             contexts: (Optional) Context strings for this log message.
+#     '''
+#     __log(_Stack.get_invoker(), "trace", msg, contexts=contexts)
 
 def log_debug(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''

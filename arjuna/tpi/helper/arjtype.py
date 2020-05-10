@@ -137,7 +137,7 @@ class ProcessedKeyDict(_ArDict):
     def _clone(self):
         return ProcessedKeyDict(self.__processor, self.__store)  
 
-@track("trace")
+@track("debug")
 class OnceOnlyKeyCIStringDict(CIStringDict):
     '''
         Dictionary with case-insensitive keys that allows for immutable key-value pairs.

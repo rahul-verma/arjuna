@@ -22,7 +22,7 @@ from typing import Any
 
 from arjuna.tpi.tracker import track
 
-@track("trace")
+@track("debug")
 class Json(_ArDict):
     '''
         Arjuna's Json Object.

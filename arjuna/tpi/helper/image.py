@@ -3,7 +3,7 @@ import base64
 
 from arjuna.tpi.tracker import track
 
-@track("trace")
+@track("debug")
 class Image:
     '''
         An image object.

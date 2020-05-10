@@ -34,7 +34,7 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
     from arjuna import log_error
     name = func.__name__
     qualname = func.__qualname__
-    level = name.startswith("_") and "trace" or level
+    level = name.startswith("_") and "debug" or level
     log_call = getattr(arjuna, "log_{}".format(level.strip().lower()))
     if name != qualname and not static:
         pvargs = vargs[1:]
