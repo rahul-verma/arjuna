@@ -14,8 +14,8 @@ Submodules
 .. toctree::
 
    arjuna.tpi.engine.asserter
-   arjuna.tpi.engine.fixture
    arjuna.tpi.engine.relation
+   arjuna.tpi.engine.resource
    arjuna.tpi.engine.test
 
 Module contents
