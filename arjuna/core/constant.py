@@ -319,7 +319,7 @@ class GuiWidgetType(Enum):
 class DryRunType(Enum):
     SHOW_TESTS = auto()
     SHOW_PLAN = auto()
-    RUN_FIXTURES = auto()
+    CREATE_RES = auto()
 
 class BuiltInProp(Enum):
     PACKAGE = auto()

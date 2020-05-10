@@ -153,9 +153,9 @@ class TestGroup:
                 print("Dry Run Type: SHOW PLAN")
                 print("You can see the test functions as well as the fixtures which will be executed as per settings of your command.")
                 self.__pytest_args.extend(["--setup-plan"])
-            elif self.__dry_run == DryRunType.RUN_FIXTURES:
-                print("Dry Run Type: RUN FIXTURES")
-                print("All fixtures will be executed as per your current command. You can see the test functions which will be executed as per settings of your command.")
+            elif self.__dry_run == DryRunType.CREATE_RES:
+                print("Dry Run Type: CREATE RESOURCES")
+                print("All resources will be created as per your current command. You can see the test functions which will be executed as per settings of your command.")
                 self.__pytest_args.extend(["--setup-only"])
 
     def __str__(self):
