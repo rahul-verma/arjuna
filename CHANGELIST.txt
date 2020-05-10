@@ -9,12 +9,12 @@ Current Themes (In-Progress or Planned):
             - Resources have a yield.
             - Fixtures can have just pre-post instructions.
         - Rules
+    - unstable should mark a test as expected fail.
+
+    Later:
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Call Walkthroughs and Identify New Named Exceptions to be created.
     - Auto screenshot name should consider session, stage and group name.
-    - unstable should mark as a test as expected fail.
-
-    Later:
     - Configuration:
         - History for Configuration (Creation Contexts.)
         - History for a Configuration Option in a Configuration object.
@@ -70,6 +70,7 @@ Current Themes (In-Progress or Planned):
 - FIX: --dry-run switch.
 - All run options work with the rule-based approach.
 - Support for minimalistic project structure for simple use of Arjuna. 
+- Test Fixtures --> Referred as Test Resources. Have an option setting as default using `default` keyword argument.
 - New Exceptions:
     - TestDecoratorError
     - TestSessionsFileNotFoundError

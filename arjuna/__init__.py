@@ -75,7 +75,7 @@ from arjuna.tpi.engine import Arjuna
 from arjuna.tpi.hook.pytest import PytestHooks
 from arjuna.tpi.engine.test import *
 from arjuna.tpi.engine.relation import *
-from arjuna.tpi.engine.fixture import *
+from arjuna.tpi.engine.resource import *
 from arjuna.tpi.tracker import track
 from arjuna.tpi.engine.data.markup import *
 from arjuna.tpi.engine.data.record import *

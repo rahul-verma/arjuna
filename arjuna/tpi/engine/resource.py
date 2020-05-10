@@ -16,12 +16,12 @@
 # limitations under the License.
 
 '''
-Arjuna Test Fixtures
+Arjuna Test Resources
 
-The test fixtures provided by Arjuna are easy to use decorators which wrap **pytest.fixture** decorator.
+The test resources markup provided by Arjuna includes easy-to-use decorators which wrap **pytest.fixture** decorator.
 
 Note:
-    For using any of the decorators in this module, the fixture function must have the signature as **f(request)** with **request** as the first argument.
+    For using any of the decorators in this module, the resource function must have the signature as **f(request)** with **request** as the first argument.
 '''
 
 import pytest
@@ -66,9 +66,10 @@ def __pytestfix(scope, drive_with=None, default=False):
             return pytest.fixture(scope=scope, autouse=default)(_simple_dec(func))
     return wrapper
 
+
 def for_group(func: Callable=None, *, drive_with: 'DataSource'=None, default: bool=False) -> Callable:
     '''
-        Decorator for session level test fixture/resource.
+        Decorator for session level test resource.
 
         Wraps **pytest.fixture** to create a fixture with scope=session and provides an Arjuna's decorated version of the function that is marked with **for_group** decorator.
 
@@ -80,9 +81,11 @@ def for_group(func: Callable=None, *, drive_with: 'DataSource'=None, default: bo
 
                 .. code-block:: python
                 
-                    @test(drive_with=<DS>)
-                    def check_sample(request, data):
+                    @for_group(drive_with=<DS>)
+                    def fix(request, data):
                         pass
+
+            default: Should it be auto-applied?
     '''
     from arjuna import Arjuna
 
@@ -92,33 +95,35 @@ def for_group(func: Callable=None, *, drive_with: 'DataSource'=None, default: bo
         return __pytestfix("session", drive_with=drive_with, default=default)
 
 
-def for_module(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
+def for_module(func: Callable=None, *, drive_with: 'DataSource'=None, default: bool=False) -> Callable:
     '''
         Decorator for module level test fixture/resource.
 
         Wraps **pytest.fixture** to create a fixture with scope=module and provides an Arjuna's decorated version of the function that is marked with **for_module** decorator.
 
         Args:
-            func: Function
+            func: A Function with signature **f(request)**. The name request is mandatory and enforced.
 
         Keyword Arguments:
             drive_with: (Optional) Used for data driven testing. Argument can be Arjuna Data Source.
 
                 .. code-block:: python
                 
-                    @test(drive_with=<DS>)
-                    def check_sample(request, data):
+                    @for_module(drive_with=<DS>)
+                    def fix(request, data):
                         pass
+
+            default: Should it be auto-applied?
     '''
     from arjuna import Arjuna
 
     if func is not None:
-        return pytest.fixture(scope="module")(_simple_dec(func))
+        return pytest.fixture(scope="module", autouse=default)(_simple_dec(func))
     else:
-        return __pytestfix("module", drive_with=drive_with)
+        return __pytestfix("module", drive_with=drive_with, default=default)
 
 
-def for_test(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
+def for_test(func: Callable=None, *, drive_with: 'DataSource'=None, default: bool=False) -> Callable:
     '''
         Decorator for test function level test fixture/resource.
 
@@ -132,16 +137,18 @@ def for_test(func: Callable=None, *, drive_with: 'DataSource'=None) -> Callable:
 
                 .. code-block:: python
                 
-                    @test(drive_with=<DS>)
-                    def check_sample(request, data):
+                    @for_test(drive_with=<DS>)
+                    def fix(request):
                         pass
+
+            default: Should it be auto-applied?
     '''
     from arjuna import Arjuna
 
     if func is not None:
-        return pytest.fixture(scope="function")(_simple_dec(func))
+        return pytest.fixture(scope="function", autouse=default)(_simple_dec(func))
     else:
-        return __pytestfix("function", drive_with=drive_with)
+        return __pytestfix("function", drive_with=drive_with, default=default)
 
 
 @for_group(default=True)
