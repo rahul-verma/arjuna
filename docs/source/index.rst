@@ -219,30 +219,29 @@ Logging
 Arjuna Exceptions
 =================
 
-* :py:mod:`Exceptions <arjuna.tpi.error>`
-    * Tests
-        * :py:class:`TestDecoratorError <arjuna.tpi.error.TestDecoratorError>`
-        * :py:class:`TestSelectorNotFoundError <arjuna.tpi.error.TestSelectorNotFoundError>`
-    * Configuration
-        * :py:class:`UndefinedConfigError <arjuna.tpi.error.UndefinedConfigError>`
-        * :py:class:`ConfigCreationError <arjuna.tpi.error.ConfigCreationError>`
-    * Test Session, Stage and Group
-        * :py:class:`TestSessionsFileNotFoundError <arjuna.tpi.error.TestSessionsFileNotFoundError>`
-        * :py:class:`UndefinedTestSessionError <arjuna.tpi.error.UndefinedTestSessionError>`
-        * :py:class:`InvalidTestSessionDefError <arjuna.tpi.error.InvalidTestSessionDefError>`
-        * :py:class:`TestStagesFileNotFoundError <arjuna.tpi.error.TestStagesFileNotFoundError>`
-        * :py:class:`UndefinedTestStageError <arjuna.tpi.error.UndefinedTestStageError>`
-        * :py:class:`InvalidTestStageDefError <arjuna.tpi.error.InvalidTestStageDefError>`
-        * :py:class:`TestGroupsFileNotFoundError <arjuna.tpi.error.TestGroupsFileNotFoundError>`
-        * :py:class:`UndefinedTestGroupError <arjuna.tpi.error.UndefinedTestGroupError>`
-    * Gui Automation
-        * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.error.GuiWidgetForLabelPresentError>`
-        * :py:class:`GuiWidgetPresentError <arjuna.tpi.error.GuiWidgetPresentError>`
-        * :py:class:`GuiWidgetForLabelNotPresentError <arjuna.tpi.error.GuiWidgetForLabelNotPresentError>`
-        * :py:class:`GuiWidgetNotPresentError <arjuna.tpi.error.GuiWidgetNotPresentError>`
-        * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.error.GuiNamespaceLoadingError>`
-        * :py:class:`GuiNotLoadedError <arjuna.tpi.error.GuiNotLoadedError>`
-        * :py:class:`GuiLabelNotPresentError <arjuna.tpi.error.GuiLabelNotPresentError>`
+* Tests
+    * :py:class:`TestDecoratorError <arjuna.tpi.error.TestDecoratorError>`
+    * :py:class:`TestSelectorNotFoundError <arjuna.tpi.error.TestSelectorNotFoundError>`
+* Configuration
+    * :py:class:`UndefinedConfigError <arjuna.tpi.error.UndefinedConfigError>`
+    * :py:class:`ConfigCreationError <arjuna.tpi.error.ConfigCreationError>`
+* Test Session, Stage and Group
+    * :py:class:`TestSessionsFileNotFoundError <arjuna.tpi.error.TestSessionsFileNotFoundError>`
+    * :py:class:`UndefinedTestSessionError <arjuna.tpi.error.UndefinedTestSessionError>`
+    * :py:class:`InvalidTestSessionDefError <arjuna.tpi.error.InvalidTestSessionDefError>`
+    * :py:class:`TestStagesFileNotFoundError <arjuna.tpi.error.TestStagesFileNotFoundError>`
+    * :py:class:`UndefinedTestStageError <arjuna.tpi.error.UndefinedTestStageError>`
+    * :py:class:`InvalidTestStageDefError <arjuna.tpi.error.InvalidTestStageDefError>`
+    * :py:class:`TestGroupsFileNotFoundError <arjuna.tpi.error.TestGroupsFileNotFoundError>`
+    * :py:class:`UndefinedTestGroupError <arjuna.tpi.error.UndefinedTestGroupError>`
+* Gui Automation
+    * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.error.GuiWidgetForLabelPresentError>`
+    * :py:class:`GuiWidgetPresentError <arjuna.tpi.error.GuiWidgetPresentError>`
+    * :py:class:`GuiWidgetForLabelNotPresentError <arjuna.tpi.error.GuiWidgetForLabelNotPresentError>`
+    * :py:class:`GuiWidgetNotPresentError <arjuna.tpi.error.GuiWidgetNotPresentError>`
+    * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.error.GuiNamespaceLoadingError>`
+    * :py:class:`GuiNotLoadedError <arjuna.tpi.error.GuiNotLoadedError>`
+    * :py:class:`GuiLabelNotPresentError <arjuna.tpi.error.GuiLabelNotPresentError>`
 
 
 ******************
