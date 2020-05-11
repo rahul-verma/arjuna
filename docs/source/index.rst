@@ -39,6 +39,14 @@ Fundamentals
    cli
    test_function
 
+Handling Test Resources
+=======================
+
+.. toctree::
+   :maxdepth: 6
+   
+   resources
+
 Handling Configuration Options
 ==============================
 

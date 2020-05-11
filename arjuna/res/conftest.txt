@@ -2,17 +2,17 @@ import pytest
 
 from arjuna import *
 try:
-    from {project}.lib.fixture.group import *
+    from {project}.lib.resource.group import *
 except ModuleNotFoundError:
     pass
 
 try:
-    from {project}.lib.fixture.module import *
+    from {project}.lib.resource.module import *
 except ModuleNotFoundError:
     pass
 
 try:
-    from {project}.lib.fixture.test import *
+    from {project}.lib.resource.test import *
 except ModuleNotFoundError:
     pass
 
