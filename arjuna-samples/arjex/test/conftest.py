@@ -1,6 +1,7 @@
 import pytest
 
-from arjuna import *
+from arjuna.engine.pytest import PytestHooks
+
 try:
     from arjex.lib.resource.group import *
 except ModuleNotFoundError:

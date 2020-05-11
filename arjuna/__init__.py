@@ -72,7 +72,6 @@ class _ArjunFacade:
         cli.execute()
 
 from arjuna.tpi.engine import Arjuna
-from arjuna.tpi.hook.pytest import PytestHooks
 from arjuna.tpi.engine.test import *
 from arjuna.tpi.engine.relation import *
 from arjuna.tpi.engine.resource import *

@@ -175,14 +175,10 @@ Web GUI Automation
     * :py:class:`GuiMultiElementSource <arjuna.tpi.guiauto.source.multielement.GuiMultiElementSource>`
     * :py:class:`GuiSourceContent <arjuna.tpi.guiauto.source.content.GuiSourceContent>` - Encapsulates source content for all Guis and GuiWidgets.
 
-Hooks
-=====
+Objects In Arjuna Hooks
+=======================
 
-* :py:class:`PytestHooks <arjuna.tpi.hook.pytest.PytestHooks>`
-    * :py:meth:`PytestHooks.add_screenshot_for_result <arjuna.tpi.hook.pytest.PytestHooks.add_screenshot_for_result>`
-    * :py:meth:`PytestHooks.configure_group_for_test <arjuna.tpi.hook.pytest.PytestHooks.configure_group_for_test>`
-* Hook Objects
-    * :py:class:`Configurator <arjuna.tpi.hook.config.Configurator>`
+* :py:class:`Configurator <arjuna.tpi.hook.config.Configurator>`
 
 Helpers
 =======
