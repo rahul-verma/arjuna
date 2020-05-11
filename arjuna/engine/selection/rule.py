@@ -59,7 +59,7 @@ class Rule:
 
 class BoolAttrPatternRule(Rule):
     '''
-        Simple Pattern for Boolean built-in property or flags
+        Simple Pattern for Boolean test attributes.
 
         For example:
 
@@ -120,7 +120,7 @@ class BoolAttrPatternRule(Rule):
 
 class IterablePatternRule(Rule):
     '''
-        Simple Pattern for presence/absence of tag(s).
+        Simple Pattern for presence/absence of strings in iterables.
 
         For example:
 

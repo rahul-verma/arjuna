@@ -19,6 +19,7 @@ from arjuna import *
 
 @test
 def check_dl_fl_default(request):
+    print("from here")
     log_debug("only in log file")
     log_info("should go to both")
     log_warning("should go to both")

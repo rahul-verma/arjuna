@@ -17,6 +17,7 @@
 
 import time
 import inspect
+import os
 
 class _Stack:
 
@@ -24,11 +25,12 @@ class _Stack:
     def get_invoker(cls):
         frame = inspect.stack()[2]
         mod = inspect.getmodule(frame[0])
-        mod_name = mod.__name__
-        mod_file = mod.__file__
+        mod_file = frame.filename
+        mod_name = os.path.basename(mod_file).split(".")[0]
+            
         mod_script = ""
-        if mod_name == "__main__":
-            mod_script = "Script:<{}> at ".format(mod_file)
+        if mod is not None and mod.__name__ == "__main__":
+            mod_script = "Script:<{}> at ".format(mod.__file__)
         else:
             mod_script = "Module:<{}> File:<{}>".format(mod_name, mod_file)
         func = frame[3]

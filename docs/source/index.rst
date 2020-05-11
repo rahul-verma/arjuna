@@ -72,6 +72,16 @@ Data Driven Testing with Arjuna
 
    ddt
 
+
+Test Selection Rules
+====================
+
+.. toctree::
+   :maxdepth: 6
+
+   selection_rules
+
+
 Test Sessions, Stages, Groups
 =============================
 
@@ -79,6 +89,7 @@ Test Sessions, Stages, Groups
    :maxdepth: 6
 
    sessions_stages_groups
+
 
 Contextual Data References and Localization
 ===========================================

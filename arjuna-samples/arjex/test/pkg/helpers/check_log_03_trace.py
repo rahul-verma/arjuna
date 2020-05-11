@@ -17,7 +17,7 @@
 
 from arjuna import *
 
-@test
-def check_trace_level(request):
-    log_trace("1 - only if level is set to trace.")
-    Arjuna.get_logger().trace("2 - only if level is set to trace.")
+# @test
+# def check_trace_level(request):
+#     log_trace("1 - only if level is set to trace.")
+#     Arjuna.get_logger().trace("2 - only if level is set to trace.")
