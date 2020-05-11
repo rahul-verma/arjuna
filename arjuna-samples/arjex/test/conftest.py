@@ -2,17 +2,17 @@ import pytest
 
 from arjuna import *
 try:
-    from arjex.lib.fixture.group import *
+    from arjex.lib.resource.group import *
 except ModuleNotFoundError:
     pass
 
 try:
-    from arjex.lib.fixture.module import *
+    from arjex.lib.resource.module import *
 except ModuleNotFoundError:
     pass
 
 try:
-    from arjex.lib.fixture.test import *
+    from arjex.lib.resource.test import *
 except ModuleNotFoundError:
     pass
 

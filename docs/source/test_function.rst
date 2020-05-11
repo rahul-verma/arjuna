@@ -6,8 +6,9 @@ Tests are Test Functions
 
 Writing a basic test in Arjuna is very easy. Following is a simple test skeleton:
 
-The @test Decorator
--------------------
+
+Basic Usage of @test Decorator
+==============================
 
 .. code-block:: python
 
@@ -22,8 +23,9 @@ The @test Decorator
 3. Create a test. In Arjuna, a test is a function marked with **@test** decorator. It must start with the prefix **check_**. It should take **one mandatory argument**: **request**.
 4. The contents of the test function depend on the test that you want to write.
 
+
 Running a Specific Test Function
---------------------------------
+================================
 
 You can run this test using by running **arjuna** module or running **arjuna_launcher.py** script:
 

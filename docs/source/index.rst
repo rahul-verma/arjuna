@@ -37,14 +37,23 @@ Fundamentals
    installation
    test_project
    cli
+
+
+Writing an Automated Test
+=========================
+
+.. toctree::
+   :maxdepth: 6
+
    test_function
+
 
 Handling Test Resources
 =======================
 
 .. toctree::
    :maxdepth: 6
-   
+
    resources
 
 Handling Configuration Options

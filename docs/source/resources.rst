@@ -52,3 +52,72 @@ Following is an example using **@for_test**:
 Module Specific and Cross-Module Shared Resources
 =================================================
 
+You can place the resource functions in a test module python file. In such a case, these can be used only by the tests present in that module.
+
+You might want to make resource functions available across your project.
+
+To enable this, you can place them as follows as per Arjuna conventions:
+
+* If you have used `create-project` command of Arjuna CLI, you will observe that the command creates some modules in **<Project Root Directory>/lib/resource** package.
+* Resource creators present in these modules are automatically imported and made available to your test project.
+    * **group.py**: Group level resources.
+    * **module.py**: Module level resources.
+    * **test.py**: Test level resources.
+
+
+Data-Driven Test Resources
+==========================
+
+You can data-drive a test resource as well just like you data-drive a test.
+
+    .. code-block:: python
+
+        @for_test(drive_with=<ds>)
+        def db(request):
+            print(request.data)
+
+The resource creator function gets as many times as there are records in the data source.
+
+Within the resource, you can act on data to create a custom resource.
+
+The data can be acces from request object as **request.data** as a **DataRecord** object.
+
+Associating a Resource with a Test
+==================================
+
+To associate a test resource with a test, pass its name as an argument:
+
+
+    .. code-block:: python
+
+        @test:
+        def check_some_sql(request, db):
+            ## Now you can act on what db resource yields. E.g.
+            db.execute(some_sql)
+
+
+Note that if the resource has been created at a higher level already (group/module level), it will not be created again.
+
+
+Setting a Resource as a Default
+===============================
+
+You might-want to auto-create a resource i.e. make it a default at a certain level. When this is done, you don't need to pass the resource creator name as an argument to a test function.
+
+Depending upon whether you have put the resource creator in a test module python file or in project library, these default resources are available to in a given module or across the test project.
+
+To make a resource a default, use the **default** keyword argument:
+
+    .. code-block:: python
+
+    .. code-block:: python
+
+        @for_group(default=True)
+        def db(request):
+            db_handle = create_db_handle()
+
+            yield db_handle
+
+            db_handle.quit()
+
+

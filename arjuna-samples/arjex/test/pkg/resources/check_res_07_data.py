@@ -17,10 +17,6 @@
 
 from arjuna import *
 
-'''
-
-'''
-
 @for_test(
     drive_with=records(
         record(1,2),
@@ -28,7 +24,7 @@ from arjuna import *
     )
 )
 def fixdata(request):
-    yield 123
+    yield request.data
 
 @test
 def check_1(request, fixdata):
