@@ -18,6 +18,7 @@ Submodules
    arjuna.engine.controller
    arjuna.engine.logger
    arjuna.engine.meta
+   arjuna.engine.pytest
    arjuna.engine.track
 
 Module contents

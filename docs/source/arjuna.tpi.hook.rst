@@ -7,7 +7,6 @@ Submodules
 .. toctree::
 
    arjuna.tpi.hook.config
-   arjuna.tpi.hook.pytest
 
 Module contents
 ---------------

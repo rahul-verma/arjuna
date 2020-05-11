@@ -72,6 +72,14 @@ Data Driven Testing with Arjuna
 
    ddt
 
+Test Sessions, Stages, Groups
+=============================
+
+.. toctree::
+   :maxdepth: 6
+
+   sessions_stages_groups
+
 Contextual Data References and Localization
 ===========================================
 
@@ -148,6 +156,7 @@ Data Driven Testing
     * :py:class:`data_file <arjuna.tpi.engine.data.markup.data_file>`
     * :py:class:`many_data_sources <arjuna.tpi.engine.data.markup.many_data_sources>`
 * :py:class:`DataRecord <arjuna.tpi.engine.data.record.DataRecord>`
+
 
 Web GUI Automation
 ==================

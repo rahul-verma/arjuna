@@ -42,7 +42,12 @@ Future Themes (In-Progress or Planned):
 
 1.0.0
 -----
-
+- Docs added for:
+    - Test Functions
+    - Test Resources
+    - Test Sessions, Stages and Groups
+- PytestHooks made a private API.
+- 
 
 
 0.9.26

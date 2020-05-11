@@ -27,7 +27,7 @@ Basic Usage of @test Decorator
 Running a Specific Test Function
 ================================
 
-You can run this test using by running **arjuna** module or running **arjuna_launcher.py** script:
+You can run this test by running **arjuna** module or running **arjuna_launcher.py** script:
 
 .. code-block:: bash
 
