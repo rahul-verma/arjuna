@@ -40,6 +40,10 @@ Future Themes (In-Progress or Planned):
         - Devise a way for the logger pre and post pytest runs.
     - Report merging for HTML and XML files.
 
+1.0.1
+-----
+
+
 1.0.0
 -----
 - Docs added for:

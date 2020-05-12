@@ -26,7 +26,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name = "arjuna",
-    version = "1.0.0",
+    version = "1.0.1",
     url = "https://rahulverma.net",
     description = "Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net).",
     author = "Rahul Verma",
@@ -55,7 +55,7 @@ setup(
     license = "Apache License, Version 2.0",
     classifiers=[
     'Environment :: Console',
-    'Development Status :: 5 - Production/Stable',
+    'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
     'Intended Audience :: Information Technology',
     'Topic :: Software Development :: Quality Assurance',
