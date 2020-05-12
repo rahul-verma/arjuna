@@ -42,7 +42,7 @@ Future Themes (In-Progress or Planned):
 
 1.0.1
 -----
-
+FIX: Dispatcher issue in MultiElement when created using filters.
 
 1.0.0
 -----
