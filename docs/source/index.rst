@@ -16,7 +16,7 @@ It is an open source, Apache Licensed software: `Arjuna on GitHub <https://githu
 
 Rahul has implemented smaller variants of features in Arjuna across frameworks and organizations, or given advice around it. However Arjuna being a generic library has the most complete implementation of his ideas, away from project specific contexts and constraints.
 
-Arjuna uses `pytest <https://docs.pytest.org/en/latest/>`_ as its recommended test engine. Arjuna also provides its own markup for some common use cases on top of pytest. If you like, you can make use of Arjuna with any other test engine or custom frameworks as well.
+Arjuna provides its own markup over `pytest <https://docs.pytest.org/en/latest/>`_ as its underlying test engine. If you like, you can make use of Arjuna with any other test engine or custom frameworks as well.
 
 You'd need Python 3.5+ to make use of Arjuna.
 
