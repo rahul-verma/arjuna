@@ -47,7 +47,6 @@ Future Themes (In-Progress or Planned):
     - Test Resources
     - Test Sessions, Stages and Groups
 - PytestHooks made a private API.
-- 
 
 
 0.9.26
