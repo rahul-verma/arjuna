@@ -75,15 +75,19 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
                         some element code
     '''
     
-    def __init__(self, gui, wmd, elements=None): #, parent=None):
+    def __init__(self, gui, wmd, elements=None, dispatcher=None): #, parent=None):
         AsserterMixIn.__init__(self)
         Locatable.__init__(self, gui, wmd) #, parent)
         _Dispatchable.__init__(self)
+        # When a mulit-element is created using a filter.
+        if dispatcher is not None:
+            self._dispatcher = dispatcher
         if elements:
             self.__elements = elements
             self._size = len(elements)
         else:
             self.__elements = list()   
+
         self._load_source_parser()
 
     def _configure_partial_elements(self, elem_config):
@@ -335,6 +339,7 @@ class GuiMultiElementFilter:
     '''
 
     def __init__(self, gui_multi_element):
+        self.__source_gui_multielement = gui_multi_element
         self.__gui = gui_multi_element.gui
         self.__wmd = gui_multi_element._wmd
         self.__elements = gui_multi_element.elements
@@ -344,7 +349,7 @@ class GuiMultiElementFilter:
         '''
             Build a new `GuiMultiElement`.
         '''
-        me = GuiMultiElement(self.__gui, self.__wmd, elements=self.__filtered_elements)
+        me = GuiMultiElement(self.__gui, self.__wmd, elements=self.__filtered_elements, dispatcher=self.__source_gui_multielement.dispatcher)
         self.__filtered_elements = self.__elements
         return me
 
