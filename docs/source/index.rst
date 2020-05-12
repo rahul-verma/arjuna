@@ -224,7 +224,6 @@ Logging
 =======
 
 * :py:mod:`Log <arjuna.tpi.log>`
-    * :py:func:`log_trace <arjuna.tpi.log.log_trace>`
     * :py:func:`log_debug <arjuna.tpi.log.log_debug>`
     * :py:func:`log_info <arjuna.tpi.log.log_info>`
     * :py:func:`log_warning <arjuna.tpi.log.log_warning>`
