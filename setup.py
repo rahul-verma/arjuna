@@ -55,7 +55,7 @@ setup(
     license = "Apache License, Version 2.0",
     classifiers=[
     'Environment :: Console',
-    'Development Status :: 4 - Beta',
+    'Development Status :: 5 - Production/Stable',
     'Intended Audience :: Developers',
     'Intended Audience :: Information Technology',
     'Topic :: Software Development :: Quality Assurance',
