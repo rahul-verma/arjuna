@@ -42,7 +42,7 @@ Future Themes (In-Progress or Planned):
 
 1.0.3
 -----
-
+- Extraneous log message cleanup.
 
 1.0.2
 -----
