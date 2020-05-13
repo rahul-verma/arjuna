@@ -90,3 +90,4 @@ arjuna-samples/**/report/**
 arjuna-samples/**/*.png
 arjuna-samples/**/chromedriver
 arjuna-samples/**/geckodriver
+arjuna-samples/pvt/**
