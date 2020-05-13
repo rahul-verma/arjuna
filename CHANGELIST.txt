@@ -42,7 +42,7 @@ Future Themes (In-Progress or Planned):
 
 1.0.2
 -----
-
+- Windows 10 logging handle related exception happens unexpectedly. Log message will not be written in such a case. Execution continues.
 
 1.0.1
 -----

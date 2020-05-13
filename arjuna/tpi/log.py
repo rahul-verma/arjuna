@@ -57,6 +57,9 @@ def __log(invoker, level, msg, contexts=None):
         # In case the logging is called before the logger is set.
         # In future versions, see if there can be a fallabck logger.
         pass
+    except OSError:
+        ## On Windows 10, random handle related bugs happen.
+        pass
 
 # def log_trace(msg: str, *, contexts: ListOrTuple=None):
 #     '''
