@@ -50,8 +50,6 @@ def _call_func(func, request_wrapper, data=None, *args, **kwargs):
 
 def __process_func_for_xfail(func, test_meta_data, xfail_obj):
     from arjuna import log_info
-    log_info(test_meta_data["info"]["qual_name"])
-    log_info(xfail_obj)
     if type(xfail_obj) is bool:
         if xfail_obj:
             return pytest.mark.xfail(True, reason="Expected Failure")(func)

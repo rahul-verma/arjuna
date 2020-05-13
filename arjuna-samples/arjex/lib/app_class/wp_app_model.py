@@ -17,8 +17,6 @@
 
 from arjuna import *
 
-log_info(GuiApp)
-
 class WordPress(GuiApp):
 
     def __init__(self):
