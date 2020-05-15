@@ -1,9 +1,12 @@
 Following is the list of critical additions and updates for a given released version:
 
 Future Themes (In-Progress or Planned):
+    - Support for Web services testing.
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Call Walkthroughs and Identify New Named Exceptions to be created.
     - Auto screenshot name should consider session, stage and group name.
+    - Stefan: Can arjuna capture network traffic between server and browser like the network tab in the browsers dev tools?
+    as of this selenium should be able https://www.vskills.in/certification/tutorial/selenium/network-traffic-capture/
     - Configuration:
         - History for Configuration (Creation Contexts.)
         - History for a Configuration Option in a Configuration object.
@@ -43,6 +46,7 @@ Future Themes (In-Progress or Planned):
 1.0.4
 -----
 - Fix in create-project: lib/fixture -> lib/resource
+- Cleanup for extraneous Logging errors caused by pytest. 
 
 1.0.3
 -----
