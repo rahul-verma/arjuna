@@ -46,7 +46,7 @@ Future Themes (In-Progress or Planned):
 1.0.4
 -----
 - Fix in create-project: lib/fixture -> lib/resource
-- Cleanup for extraneous Logging errors caused by pytest. 
+- Cleanup for extraneous Logging errors caused by pytest in stderr entry in reports. 
 
 1.0.3
 -----
