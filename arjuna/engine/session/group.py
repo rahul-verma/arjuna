@@ -159,7 +159,7 @@ class TestGroup:
                 self.__pytest_args.extend(["--setup-only"])
 
     def __str__(self):
-        return "Command: config={}, group={}, pickers={}".format(self.config.name, self.__name, self.__filters)
+        return "TestGroup: name:{}, config={}, rules={}".format(self.__name, self.config.name, self.__rules)
 
 
 class YamlTestGroup(TestGroup):

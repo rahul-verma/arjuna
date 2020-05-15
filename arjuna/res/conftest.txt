@@ -4,8 +4,11 @@ from arjuna.engine.pytest import PytestHooks
 
 try:
     from {project}.lib.resource.group import *
-except ModuleNotFoundError:
-    pass
+except ModuleNotFoundError as e:
+    import traceback
+    traceback.print_exc()
+    import sys
+    sys.exit(1)
 
 try:
     from {project}.lib.resource.module import *
