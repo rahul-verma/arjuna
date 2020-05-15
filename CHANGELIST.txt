@@ -40,6 +40,10 @@ Future Themes (In-Progress or Planned):
         - Devise a way for the logger pre and post pytest runs.
     - Report merging for HTML and XML files.
 
+1.0.4
+-----
+- Fix in create-project: lib/fixture -> lib/resource
+
 1.0.3
 -----
 - Extraneous log message cleanup.

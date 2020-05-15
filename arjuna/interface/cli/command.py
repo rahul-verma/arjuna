@@ -136,11 +136,11 @@ class CreateProject(Command):
         (FileObjectType.FILE, "test/pkg/__init__.py"),
         (FileObjectType.DIR, "lib"),
         (FileObjectType.FILE, "lib/__init__.py"),
-        (FileObjectType.DIR, "lib/fixture"),
-        (FileObjectType.FILE, "lib/fixture/__init__.py"),
-        (FileObjectType.FILE, "lib/fixture/group.py"),
-        (FileObjectType.FILE, "lib/fixture/module.py"),
-        (FileObjectType.FILE, "lib/fixture/test.py"),
+        (FileObjectType.DIR, "lib/resource"),
+        (FileObjectType.FILE, "lib/resource/__init__.py"),
+        (FileObjectType.FILE, "lib/resource/group.py"),
+        (FileObjectType.FILE, "lib/resource/module.py"),
+        (FileObjectType.FILE, "lib/resource/test.py"),
     )
 
     def __init__(self, subparsers, parents):
