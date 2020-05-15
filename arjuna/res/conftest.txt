@@ -5,10 +5,7 @@ from arjuna.engine.pytest import PytestHooks
 try:
     from {project}.lib.resource.group import *
 except ModuleNotFoundError as e:
-    import traceback
-    traceback.print_exc()
-    import sys
-    sys.exit(1)
+    pass
 
 try:
     from {project}.lib.resource.module import *
@@ -24,6 +21,7 @@ except ModuleNotFoundError:
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item, call):
     result = yield
+    PytestHooks.prepare_result(result)
     PytestHooks.add_screenshot_for_result(item, result)
 
 

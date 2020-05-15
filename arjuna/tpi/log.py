@@ -41,6 +41,8 @@ Following Arjuna Options are related to logging:
     * LOG_ALLOWED_CONTEXTS: The context strings which determine log messages belonging to which contexts can be displayed and logged.
 '''
 
+import sys
+
 from arjuna.tpi.helper.audit import _Stack
 from arjuna.tpi.arjuna_types import *
 
@@ -59,7 +61,10 @@ def __log(invoker, level, msg, contexts=None):
         pass
     except OSError:
         ## On Windows 10, random handle related bugs happen.
-        pass
+        if level.lower() in {"info", "debug"} :
+            sys.stdout.write(msg+ "\n")
+        else :
+            sys.stderr.write(msg+"\n")
 
 # def log_trace(msg: str, *, contexts: ListOrTuple=None):
 #     '''

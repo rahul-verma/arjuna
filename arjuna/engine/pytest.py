@@ -52,6 +52,22 @@ class PytestHooks:
                 return getattr(item.session, "screen_shooter")
 
     @classmethod
+    def prepare_result(cls, result):
+        report = result.get_result()
+        import re
+        if report.sections:
+            for index, content in enumerate(report.sections) :
+                name = content[0]
+                if "stderr" in name:
+                    if "Logging error" in content[1]:
+                        revised = re.sub(r"--- Logging error ---.*?Arguments.*?\)\n" , f"\n", content[1], flags=re.S)
+                        revised = revised.strip()
+                        if revised :
+                            report.sections[index] = (name, revised.strip())
+                        else:
+                            report.sections[index] = (name, "NA")
+
+    @classmethod
     def add_screenshot_for_result(cls, item, result, *, ignore_passed=True, ignore_fixtures=False):
         '''
             Automatically add screenshot to HTML Report File.
