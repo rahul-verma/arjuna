@@ -5,17 +5,20 @@ from arjuna.engine.pytest import PytestHooks
 try:
     from {project}.lib.resource.group import *
 except ModuleNotFoundError as e:
-    pass
+    if e.name != 'group':
+        raise
 
 try:
     from {project}.lib.resource.module import *
 except ModuleNotFoundError:
-    pass
+    if e.name != 'module':
+        raise
 
 try:
     from {project}.lib.resource.test import *
 except ModuleNotFoundError:
-    pass
+    if e.name != 'test':
+        raise
 
 
 @pytest.mark.hookwrapper
