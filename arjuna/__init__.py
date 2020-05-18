@@ -87,6 +87,9 @@ from arjuna.tpi.guiauto.model.page import GuiPage
 from arjuna.tpi.guiauto.model.section import GuiSection
 from arjuna.tpi.guiauto.model.dialog import GuiDialog
 
+from arjuna.tpi.httpauto.session import HttpSession
+from arjuna.tpi.httpauto.oauth import OAuthImplicitGrantSession
+
 from arjuna.tpi.error import *
 from arjuna.tpi.constant import *
 from arjuna.core.constant import *
