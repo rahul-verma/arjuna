@@ -43,6 +43,14 @@ Future Themes (In-Progress or Planned):
         - Devise a way for the logger pre and post pytest runs.
     - Report merging for HTML and XML files.
 
+1.0.5
+-----
+--> Check user defined attribute based selection.
+- Auto-generated conftest.py now does a basic if ModuleNotFoundError was for corresponding resource module.
+- HTTP Level Test Automation (Work In Progress, Alpha Quality)
+    - Added basic support for HttpSession along with HttpRequest and HttpResponse classes.
+    - Added support for OAuth2 using Implicit Grant and Client Grant.
+
 1.0.4
 -----
 - Fix in create-project: lib/fixture -> lib/resource
@@ -700,3 +708,11 @@ PytestDeprecationWarning: --no-print-logs is deprecated and scheduled for remova
   Please use --show-capture instead.
     _issue_warning_captured(NO_PRINT_LOGS, self._config.hook, stacklevel=2)
 
+
+Create a doc section on basic YAML.
+
+    & use a variable
+    !join to join.
+    hostname : &HOST portal.exampl.com
+    portal_url : !join [https://, *HOST]
+    callback_URL : !join [https://, *HOST, /index.html]
