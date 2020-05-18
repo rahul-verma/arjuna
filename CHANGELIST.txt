@@ -45,7 +45,7 @@ Future Themes (In-Progress or Planned):
 
 1.0.5
 -----
---> Check user defined attribute based selection.
+--> To be fixed: Check user defined attribute based selection.
 - Auto-generated conftest.py now does a basic if ModuleNotFoundError was for corresponding resource module.
 - HTTP Level Test Automation (Work In Progress, Alpha Quality)
     - Added basic support for HttpSession along with HttpRequest and HttpResponse classes.
