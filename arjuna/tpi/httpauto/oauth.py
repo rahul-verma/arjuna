@@ -72,8 +72,6 @@ class OAuthImplicitGrantSession(OAuthSession):
         super().__init__(session=oauth, url=url)
 
         authorization_url, state = oauth.authorization_url(authorization_url)
-        from arjuna import log_info
-        log_info(oauth.cookies.get_dict())
 
         token = None
         if authorization_handler is None:

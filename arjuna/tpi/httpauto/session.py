@@ -148,8 +148,6 @@ class _HttpRequest(HttpRequest):
         self.__headers.update(session.headers)
         if headers:
             self.__headers.update(headers)
-        from arjuna import log_info
-        log_info(self.__headers)
 
         self.__prepare_content()
         self.__req = self.__build_request()
@@ -163,7 +161,6 @@ class _HttpRequest(HttpRequest):
             self.__prep_content = urlencode(self.__content)
 
     def __build_request(self):
-        from arjuna import log_info
         parsed_uri = urlparse(self.__url)
         #self.__headers['Host'] = parsed_uri.netloc
         if self.__method in {'POST', 'PUT'}:
@@ -172,8 +169,6 @@ class _HttpRequest(HttpRequest):
         if self.__method in {'GET', 'DELETE'}:
             if 'Content-Type' in self.__headers:
                 del self.__headers['Content-Type']
-        log_info(self.__content_type)
-        log_info(type(self.__prep_content))
         req = Request(self.__method, self.__url, data=self.__prep_content, headers=self.__headers, params=self.__query_parms, cookies=self.__session.cookies)
         return req.prepare()
 
