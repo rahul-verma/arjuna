@@ -19,7 +19,7 @@ import json
 from urllib.parse import urlparse, urlencode
 from requests import Request, Session
 
-class HttpResult:
+class HttpResponse:
 
     def __init__(self, session, response):
         self.__session = session
@@ -48,7 +48,7 @@ class HttpResult:
     @property
     def redir_history(self):
         if self.__resp.history is not None:
-            return [HttpResult(self.__session, h) for h in self.__resp.history]
+            return [HttpResponse(self.__session, h) for h in self.__resp.history]
         else:
             return None
 
@@ -97,7 +97,7 @@ class HttpRequest:
     def send(self):
         from arjuna import log_info
         log_info(str(self))
-        result = HttpResult(self.__session, self.__session.send(self.__req))
+        result = HttpResponse(self.__session, self.__session.send(self.__req))
         log_info(str(result))
         if self.__xcodes is not None and result.status_code not in self.__xcodes:
             raise Exception(f"Unexpected status code {result.status_code} for {result.url} in {self.__method} request.")

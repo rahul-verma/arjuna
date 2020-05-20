@@ -36,6 +36,7 @@ class OAuthSession(HttpSession):
 
     def _set_outh_token(self, token):
         self.__token = token
+        self._session.headers.update({'Authorization': 'Bearer ' + self.token})
 
     def create_new_session(self, url, *, content_type=None):
         return HttpSession(url=url, oauth_token=self.token, content_type=content_type)
