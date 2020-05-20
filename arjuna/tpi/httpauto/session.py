@@ -18,6 +18,7 @@
 import json
 from urllib.parse import urlparse, urlencode
 from requests import Request, Session
+from arjuna.tpi.error import HttpUnexpectedStatusCode
 
 class HttpResponse:
 
@@ -97,15 +98,19 @@ class HttpRequest:
     def send(self):
         from arjuna import log_info
         log_info(str(self))
-        result = HttpResponse(self.__session, self.__session.send(self.__req))
-        log_info(str(result))
-        if self.__xcodes is not None and result.status_code not in self.__xcodes:
-            raise Exception(f"Unexpected status code {result.status_code} for {result.url} in {self.__method} request.")
-        return result
+        response = HttpResponse(self.__session, self.__session.send(self.__req))
+        log_info(str(response))
+        if self.__xcodes is not None and response.status_code not in self.__xcodes:
+            raise HttpUnexpectedStatusCode(self.__req, response)
+        return response
 
     @property
     def url(self):
         return self.__request.url
+
+    @property
+    def method(self):
+        return self.__request.method
 
     @property
     def text(self):

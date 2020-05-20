@@ -203,7 +203,10 @@ Objects In Arjuna Hooks
 Helpers
 =======
 * :py:meth:`HardCoded.sleep <arjuna.tpi.helper.audit.HardCoded.sleep>`
-* :py:class:`Json <arjuna.tpi.helper.json.Json>`
+* :py:mod:`JSON <arjuna.tpi.helper.json>`
+    * :py:class:`Json <arjuna.tpi.helper.json.Json>`
+    * :py:class:`JsonDict <arjuna.tpi.helper.json.JsonDict>`
+    * :py:class:`JsonList <arjuna.tpi.helper.json.JsonList>`
 * :py:mod:`XML <arjuna.tpi.helper.xml>`
     * :py:class:`XmlNode <arjuna.tpi.helper.xml.XmlNode>`
     * :py:class:`NodeLocator <arjuna.tpi.helper.xml.NodeLocator>`
@@ -257,6 +260,8 @@ Arjuna Exceptions
     * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.error.GuiNamespaceLoadingError>`
     * :py:class:`GuiNotLoadedError <arjuna.tpi.error.GuiNotLoadedError>`
     * :py:class:`GuiLabelNotPresentError <arjuna.tpi.error.GuiLabelNotPresentError>`
+* HTTP Layer Automation
+    * :py:class:`HttpUnexpectedStatusCode <arjuna.tpi.error.HttpUnexpectedStatusCode>`
 
 
 ******************

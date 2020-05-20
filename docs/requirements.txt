@@ -14,3 +14,6 @@ PyYAML
 mimesis
 jsonpath-rw
 jsonpath-rw-ext
+oauthlib
+requests_oauthlib
+bs4

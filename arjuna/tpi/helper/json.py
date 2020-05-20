@@ -22,8 +22,16 @@ from typing import Any
 
 from arjuna.tpi.tracker import track
 
+class JsonList:
+    '''
+        Arjuna's Json List object.
+    '''
+
+    def __init__(self, pylist: list=None):
+        self.__list = pylist
+
 @track("debug")
-class Json(_ArDict):
+class JsonDict(_ArDict):
     '''
         Arjuna's Json Object.
 
@@ -38,36 +46,6 @@ class Json(_ArDict):
 
     def _process_key(self, key: str):
         return key
-
-    @classmethod
-    def from_file(cls, file_path: str) -> 'Json':
-        '''
-            Creates a Json object from file.
-
-            Arguments:
-                file_path: Absolute path of the json file.
-
-            Returns:
-                Arjuna's `Json` object
-        '''
-
-        with open(file_path, 'r') as f:
-            jobj = json.load(f)
-            return Json(jobj)
-
-    @classmethod
-    def from_map(cls, map):
-        '''
-            Creates a Json object from Python dictionary.
-
-            Arguments:
-                map: Python dict
-
-            Returns:
-                Arjuna's `Json` object
-        '''
-
-        return Json(d)
 
     def find(self, query) -> Any:
         '''
@@ -85,5 +63,74 @@ class Json(_ArDict):
 
     def __getitem__(self, query):
         return self.find(query)
+
+class Json:
+    '''
+        Helper class to create Arjuna's Json object or list.
+    '''
+
+    @classmethod
+    def from_str(cls, json_str: str) -> 'JsonDictOrList':
+        '''
+            Creates a Json object from a JSON string.
+
+            Arguments:
+                file_path: Absolute path of the json file.
+
+            Returns:
+                Arjuna's `JsonDict` or `JsonList` object
+        '''
+        jobj = json.loads(json_str)
+        if type(jobj) is dict:
+            return JsonDict(jobj)
+        elif type(jobj) is list:
+            return JsonList(jobj)
+        elif jobj is None:
+            return JsonDict()
+
+    @classmethod
+    def from_file(cls, file_path: str) -> 'JsonDictOrList':
+        '''
+            Creates a Json object from file.
+
+            Arguments:
+                file_path: Absolute path of the json file.
+
+            Returns:
+                Arjuna's `JsonDict` or `JsonList` object
+        '''
+
+        with open(file_path, 'r') as f:
+            return cls.from_str(f.read())
+
+    @classmethod
+    def from_map(cls, map: dict) -> JsonDict:
+        '''
+            Creates a JsonDict object from Python dictionary.
+
+            Arguments:
+                map: Python dict
+
+            Returns:
+                Arjuna's `JsonDict` object
+        '''
+
+        return JsonDict(d)
+
+    @classmethod
+    def from_iter(cls, iter) -> JsonList:
+        '''
+            Creates a Json object from Python dictionary.
+
+            Arguments:
+                iter: Python iterable
+
+            Returns:
+                Arjuna's `JsonList` object
+        '''
+
+        return JsonList(list(iter))
+
+
 
     

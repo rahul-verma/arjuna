@@ -50,6 +50,10 @@ Future Themes (In-Progress or Planned):
 - HTTP Level Test Automation (Work In Progress, Alpha Quality)
     - Added basic support for HttpSession along with HttpRequest and HttpResponse classes.
     - Added support for OAuth2 using Implicit Grant and Client Grant.
+- JSON
+    - Added JsonDict and JsonList support
+- New Named exceptions:
+    - HttpUnexpectedStatusCode
 
 1.0.4
 -----

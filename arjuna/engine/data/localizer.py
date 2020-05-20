@@ -22,7 +22,7 @@ from .reference import ContextualDataReference
 from arjuna.tpi.helper.arjtype import CIStringDict
 
 from arjuna.core.utils import file_utils
-from arjuna.tpi.helper.json import Json
+from arjuna.tpi.helper.json import Json, JsonDict
 
 class L10NRef:
 
@@ -32,13 +32,13 @@ class L10NRef:
     def update_from_excel_ref(self, localizer_ref):
         for lang, record in localizer_ref.map.items():
             if lang not in self.map:
-                self.map[lang] = Json()
+                self.map[lang] = JsonDict()
             self.map[lang].update(record.named_values)
 
     def update_from_json_ref(self, json_ref):
         for lang, map in json_ref.map.items():
             if lang not in self.map:
-                self.map[lang] = Json()
+                self.map[lang] = JsonDict()
             self.map[lang].update(map)
 
     def lang(self, lang):

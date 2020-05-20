@@ -4,23 +4,27 @@ from arjuna.engine.pytest import PytestHooks
 
 try:
     from arjex.lib.resource.group import *
-except ModuleNotFoundError:
-    pass
+except ModuleNotFoundError as e:
+    if e.name != 'group':
+        raise
 
 try:
     from arjex.lib.resource.module import *
 except ModuleNotFoundError:
-    pass
+    if e.name != 'module':
+        raise
 
 try:
     from arjex.lib.resource.test import *
 except ModuleNotFoundError:
-    pass
+    if e.name != 'test':
+        raise
 
 
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item, call):
     result = yield
+    PytestHooks.prepare_result(result)
     PytestHooks.add_screenshot_for_result(item, result)
 
 
