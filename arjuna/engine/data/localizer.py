@@ -201,11 +201,8 @@ def L(in_str, *, locale=None, bucket=None, strict=None):
             val = Arjuna.get_localizer().globals.lang(lang)[query]
         else:
             val = Arjuna.get_localizer().buckets[bucket].lang(lang)[query]
-        if type(val) in {list, tuple}:
-            if not val:
-                raise Exception("No localized string found for: {} for Locale.{}".format(in_str, lang.upper()))
-            else:
-                return val[0]
+        if not val:
+            raise Exception("No localized string found for: {} for Locale.{}".format(in_str, lang.upper()))
         else:
             return val
     except Exception as e:

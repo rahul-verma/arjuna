@@ -19,6 +19,7 @@ import json
 from urllib.parse import urlparse, urlencode
 from requests import Request, Session
 from arjuna.tpi.error import HttpUnexpectedStatusCode
+from arjuna.tpi.helper.json import Json
 
 class HttpResponse:
 
@@ -44,7 +45,7 @@ class HttpResponse:
 
     @property
     def json(self):
-        return json.loads(self.text)
+        return Json.from_str(self.text)
 
     @property
     def redir_history(self):

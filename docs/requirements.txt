@@ -17,3 +17,5 @@ jsonpath-rw-ext
 oauthlib
 requests_oauthlib
 bs4
+genson
+jsonschema
