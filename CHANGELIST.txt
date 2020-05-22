@@ -57,6 +57,10 @@ Future Themes (In-Progress or Planned):
     - Support for basic schema validation of Json.
 - New Named exceptions:
     - HttpUnexpectedStatusCode
+- Data Entity
+    - Is not an alias of namedtuple
+    - DataEntity is an alias of Arjuna's data_entity call.
+    - Allows setting defaults for entity attributes.
 
 1.0.4
 -----

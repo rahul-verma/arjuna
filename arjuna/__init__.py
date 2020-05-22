@@ -78,7 +78,8 @@ from arjuna.tpi.engine.resource import *
 from arjuna.tpi.tracker import track
 from arjuna.tpi.engine.data.markup import *
 from arjuna.tpi.engine.data.record import *
-from arjuna.tpi.engine.data.generator import Random, DataEntity, Locales
+from arjuna.tpi.engine.data.generator import Random, Locales
+from arjuna.tpi.engine.data.entity import data_entity, DataEntity
 
 from arjuna.tpi.helper.arjtype import NVPair, NVPairs, Screen, Attr, Point, Offset
 from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator

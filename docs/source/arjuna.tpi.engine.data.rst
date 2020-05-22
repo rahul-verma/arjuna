@@ -6,6 +6,7 @@ Submodules
 
 .. toctree::
 
+   arjuna.tpi.engine.data.entity
    arjuna.tpi.engine.data.generator
    arjuna.tpi.engine.data.markup
    arjuna.tpi.engine.data.record

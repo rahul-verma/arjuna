@@ -74,7 +74,8 @@ class JsonList(AsserterMixIn):
     def size(self):
         return len(self)
 
-    def items(self):
+    @property
+    def raw_object(self):
         return copy.deepcopy(self.__list)
 
     def __str__(self):
@@ -87,7 +88,7 @@ class JsonList(AsserterMixIn):
         if type(other) is list:
             pass
         elif type(other) is JsonList:
-            other = other.items()
+            other = other.raw_object
         elif other is None:
             return False
         else:
@@ -96,7 +97,7 @@ class JsonList(AsserterMixIn):
         if len(self) != len(other):
             return False
         else:
-            return self.items() == other
+            return self.raw_object == other
 
 class JsonSchema:
 
@@ -151,7 +152,8 @@ class JsonDict(_ArDict, AsserterMixIn):
     def size(self):
         return len(self)
 
-    def items(self):
+    @property
+    def raw_object(self):
         return dict(super().items())
 
     def _process_key(self, key: str):
@@ -277,7 +279,7 @@ class JsonDict(_ArDict, AsserterMixIn):
         if type(other) is dict:
             pass
         elif type(other) is JsonDict:
-            other = other.items()
+            other = other.raw_object
         elif other is None:
             return False
         else:
@@ -286,7 +288,7 @@ class JsonDict(_ArDict, AsserterMixIn):
         if len(self) != len(other):
             return False
         else:
-            return self.items() == other
+            return self.raw_object == other
 
 class Json:
     '''
@@ -382,7 +384,7 @@ class Json:
         from genson import SchemaBuilder
         builder = SchemaBuilder()
         if type(jobj) in {JsonDict, JsonList}:
-            builder.add_object(jobj.items())
+            builder.add_object(jobj.raw_object)
         else:
             builder.add_object(jobj)
         return JsonSchema(builder.to_schema())

@@ -27,10 +27,8 @@ from mimesis import Person
 from mimesis import Address
 from mimesis import locales
 from mimesis import Text
-from collections import namedtuple
 
 Locales = locales
-DataEntity = namedtuple
 
 class Random:
     '''
