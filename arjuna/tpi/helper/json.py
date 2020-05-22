@@ -38,7 +38,7 @@ class JsonList(AsserterMixIn):
         return str(self.__list)
 
     def __getitem__(self, index):
-        return self.__list[index]
+        return Json.convert_to_json_element(self.__list[index], allow_any=True)
 
     def assert_empty(self):
         length = len(self.__list)
@@ -127,6 +127,9 @@ class JsonSchema:
 
     def as_dict(self):
         return self.__dict
+
+    def __str__(self):
+        return json.dumps(self.__dict, indent=2)
 
 
 @track("debug")

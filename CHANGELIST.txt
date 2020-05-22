@@ -50,11 +50,11 @@ Future Themes (In-Progress or Planned):
 - HTTP Level Test Automation (Work In Progress, Alpha Quality)
     - Added basic support for HttpSession along with HttpRequest and HttpResponse classes.
     - Added support for OAuth2 using Implicit Grant and Client Grant.
-    - Support for JsonDict and JsonList assertions of different types.
-    - Support for auto-extraction of schema from a json string or object.
-    = Support for basic schema validation of Json.
 - JSON
     - Added JsonDict and JsonList support
+    - Support for JsonDict and JsonList assertions of different types.
+    - Support for auto-extraction of schema from a json string or object.
+    - Support for basic schema validation of Json.
 - New Named exceptions:
     - HttpUnexpectedStatusCode
 
