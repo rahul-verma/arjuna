@@ -65,12 +65,8 @@ class HttpResponse:
     def next_request(self):
         return HttpRequest(self.__session, self.__resp.next)
 
-    __OUT = '''
------------Response-----------
-{}
-{}{}
----------End Response----------
-'''
+    __OUT = '''{}
+{}{}'''
 
     def __try_as_json(self):
         if self.text is None: return ""
@@ -87,7 +83,7 @@ class HttpResponse:
             str(self.status_code) + ' ' + self.url,
             '\n'.join('{}: {}'.format(k, v) for k, v in self.headers.items()),
             content
-        )
+        ).strip()
 
 
 class HttpRequest:
@@ -97,13 +93,22 @@ class HttpRequest:
         self.__request = request
 
     def send(self):
-        from arjuna import log_info
-        log_info(str(self))
-        response = HttpResponse(self.__session, self.__session.send(self.__req))
-        log_info(str(response))
-        if self.__xcodes is not None and response.status_code not in self.__xcodes:
-            raise HttpUnexpectedStatusCode(self.__req, response)
-        return response
+        from arjuna import Arjuna
+        from arjuna.tpi.engine.testwise import NetworkPacket
+        try:
+            response = HttpResponse(self.__session, self.__session.send(self.__req))
+        except Exception as e:
+            import traceback
+            response = "Error in sending the request\n"
+            response += e.__class__.__name__ + ":" + str(e) + "\n"
+            response += traceback.format_exc()
+            Arjuna.get_test_wise_container().add_network_packet(NetworkPacket(request=str(self), response=str(response)))
+            raise e
+        else:
+            Arjuna.get_test_wise_container().add_network_packet(NetworkPacket(request=str(self), response=str(response)))
+            if self.__xcodes is not None and response.status_code not in self.__xcodes:
+                raise HttpUnexpectedStatusCode(self.__req, response)
+            return response
 
     @property
     def url(self):
@@ -117,12 +122,8 @@ class HttpRequest:
     def text(self):
         return self.__request.body
 
-    __OUT ='''
------------Request-----------
-{}
-{}{}
----------End Request----------
-'''
+    __OUT ='''{}
+{}{}'''
 
     def __str__(self):
         content = self.text
@@ -134,7 +135,7 @@ class HttpRequest:
             self.__request.method + ' ' + self.url,
             '\n'.join('{}: {}'.format(k, v) for k, v in self.__request.headers.items()),
             content
-        )
+        ).strip()
 
 
 class _HttpRequest(HttpRequest):

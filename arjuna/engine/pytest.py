@@ -23,10 +23,19 @@ function openModal(event){
     var source = event.target || event.srcElement;
     var modal = document.getElementById("modal-packet");
     modal.style.display = "block";
-    var text = "Request: <p/>" + source.getAttribute("data-request") + "<p/> Response: <p/>" + source.getAttribute("data-response");
-    alert(text);
-    var content = document.getElementById("modal-packet-text");
-    content.innerHTML = text;
+    var req = document.getElementById("modal-packet-request");
+    req.innerHTML = ""
+    var h3_req = document.createElement("h3");
+    h3_req.innerHTML = "Request"
+    req.appendChild(h3_req)
+    req.appendChild(document.createTextNode(source.getAttribute("data-request")))
+
+    var res = document.getElementById("modal-packet-response");
+    res.innerHTML = ""
+    var h3_res = document.createElement("h3");
+    h3_res.innerHTML = "Response"
+    req.appendChild(h3_res)
+    res.appendChild(document.createTextNode(source.getAttribute("data-response")))
     var span = document.getElementById(source.id + "modal-packet-span");
     span.onclick = function() {
         modal.style.display = "none";
@@ -67,7 +76,8 @@ IMG_SPAN ='''
   <!-- Modal content -->
   <div class="modal-content">
     <span id="modal-packet-span" class="close">&times;</span>
-    <p id="modal-packet-text"></p>
+    <div class="linebreaks"><p id="modal-packet-request"></p><p id="modal-packet-response"></p>
+    </div>
   </div>
 
 </div>

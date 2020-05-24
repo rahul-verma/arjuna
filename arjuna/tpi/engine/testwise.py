@@ -87,9 +87,12 @@ class CurrentTestWiseContainer:
     def _get_packets_html(self):
         if not self.network_packets: return ""
         html = "<p><p><h3>&nbsp;&nbsp;Network Packets</h3><p>"
+        import html as py_html
         if self.network_packets:
             for np in self.network_packets:
-                html += '<button data-request="{}" data-response="{}" onclick="openModal(event)">Open Modal</button>'.format(str(np.request), str(np.response))
+                req_str = py_html.escape(str(np.request))
+                res_str = py_html.escape(str(np.response))
+                html += f'<button data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">Open Modal</button><p>'
         html += "<p><p>"
         return html
 
