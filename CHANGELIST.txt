@@ -61,6 +61,14 @@ Future Themes (In-Progress or Planned):
     - Is not an alias of namedtuple
     - DataEntity is an alias of Arjuna's data_entity call.
     - Allows setting defaults for entity attributes.
+- Test Wise Container
+    - Added an auto-fixture to add and cleant entry for current test.
+    - Currently contains images and network packets.
+- HTML Reporting
+    - Take screenshshot adds the images to current test container.
+    - HTML report can include all screenshots.
+    - Rather than opening an image in a new window, it is opened in a modal window in the same tab.
+    - The modal window uses the same base64 embedded image.
 
 1.0.4
 -----

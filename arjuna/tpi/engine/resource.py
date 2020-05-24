@@ -155,3 +155,12 @@ def for_test(func: Callable=None, *, drive_with: 'DataSource'=None, default: boo
 def group(request):
     getattr(request.raw_request, "session").group_info = request.raw_request.param
     yield
+
+
+@for_test(default=True)
+def test_resources(request):
+    from arjuna import Arjuna
+    thread_container = Arjuna.get_test_wise_container()
+    getattr(request.raw_request, "function").thread_container = thread_container
+    yield
+    thread_container.clear()

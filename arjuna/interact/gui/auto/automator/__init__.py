@@ -167,6 +167,8 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
 
         ts = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M-%S-%f")[:-3]
         if prefix:
+            import re
+            prefix = re.sub(r"\[.*?\]", "", prefix)
             prefix = prefix.replace(".py", "").replace("..", "").replace("::",".").replace(":", ".").replace("/", ".").replace("\\", ".") + "-"
         else:
             prefix = ""
@@ -175,7 +177,11 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
         f = open(fpath, "wb")
         f.write(image)
         f.close()
-        return Image(fpath=fpath, b64=image_b64)
+        img = Image(fpath=fpath, b64=image_b64)
+
+        from arjuna import Arjuna
+        Arjuna.get_test_wise_container().add_image(img)
+        return img
 
     def focus_on_main_window(self):
         self.main_window.focus()

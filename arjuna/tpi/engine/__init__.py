@@ -67,6 +67,9 @@ class ArjunaSingleton:
         self.__thread_wise_test_selector_map = dict()
         self.__test_meta_data = dict()
 
+        from arjuna.tpi.engine.testwise import CurrentTestWiseContainer
+        self.__current_test_wise_objects = CurrentTestWiseContainer()
+
     @property
     def gui_mgr(self):
         return self.__test_session.gui_manager
@@ -131,6 +134,10 @@ class ArjunaSingleton:
             self.__common_withx_ref = WithX(Yaml.from_file(file_path=fpath).as_map())
 
         return self.ref_config
+
+    @property
+    def test_wise_container(self):
+        return self.__current_test_wise_objects
 
     @property
     def withx_ref(self):
@@ -292,6 +299,9 @@ class Arjuna:
         from arjuna.engine.data.reference import R
         return R(name, bucket=bucket, context=context)
 
+    @classmethod
+    def get_test_wise_container(cls):
+        return cls.ARJUNA_SINGLETON.test_wise_container
 
     @classmethod
     def get_gui_mgr(cls):

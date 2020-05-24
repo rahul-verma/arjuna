@@ -30,4 +30,8 @@ def google(request):
 
 @test
 def check_screenshot_on_failure(request, google):
+    google.take_screenshot()
+    google.take_screenshot()
+    google.take_screenshot()
+    google.take_screenshot()
     request.asserter.assert_equal("Forced Fail", google.title, "GuiPage title does not match.")

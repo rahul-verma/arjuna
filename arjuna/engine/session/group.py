@@ -34,6 +34,7 @@ class TestGroup:
         self.__thname = None
         self.__dry_run = session.dry_run
         self.__rules = rules
+        self.__css_path = config.value(ArjunaOption.ARJUNA_ROOT_DIR) + "/arjuna/res/arjuna.css" 
 
     @classmethod
     def create_rule_strs(cls, include_exclude_dict):
@@ -113,7 +114,7 @@ class TestGroup:
         pytest_ini_path = res_path + "/pytest.ini"
 
         # -s is to print to console.
-        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "--show-capture", "all", "--disable-warnings", "-rxX"] # 
+        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--no-print-logs", "--show-capture", "all", "--disable-warnings", "-rxX", "--css", self.__css_path] # 
         self.__test_args = []
         self.__load_tests(rules=self.__rules)
         self.__load_meta_args()

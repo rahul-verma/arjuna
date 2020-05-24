@@ -27,10 +27,11 @@ def pytest_runtest_makereport(item, call):
     PytestHooks.prepare_result(result)
     PytestHooks.add_screenshot_for_result(item, result)
 
-
 def pytest_generate_tests(metafunc):
     PytestHooks.configure_group_for_test(metafunc)
 
-
 def pytest_collection_modifyitems(items, config):
     PytestHooks.select_tests(items, config)
+
+def pytest_html_results_summary(prefix, summary, postfix):
+    PytestHooks.inject_arjuna_js(prefix)

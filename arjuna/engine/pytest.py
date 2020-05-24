@@ -16,6 +16,55 @@
 # limitations under the License.
 
 from itertools import cycle
+from py.xml import html, raw
+
+ARJUNA_JS = '''
+function openModal(event){
+    var source = event.target || event.srcElement;
+    var modal = document.getElementById(source.id + "-modal");
+    modal.style.display = "block";
+    var span = document.getElementById(source.id + "-span");
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+
+}
+
+function openModalImage(event){
+    var img_link = event.target || event.srcElement;
+    var modal = document.getElementById("modal-image");
+    var modal_image = document.getElementById("modal-image-content");
+    modal.style.display = "block";
+    modal_image.src = img_link.src;
+    var span = document.getElementById("modal-image-span");
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+}
+'''
+
+IMG_SPAN ='''
+<!-- The Modal -->
+<div id="modal-image" class="modal">
+<div class="modal-content">
+  <span id="modal-image-span" class="close">&times;</span>
+  <img id="modal-image-content" class="modal-content">
+  <div id="caption"></div>
+  </div>
+</div>
+'''
 
 class PytestHooks:
     '''
@@ -68,6 +117,11 @@ class PytestHooks:
                             report.sections[index] = (name, "NA")
 
     @classmethod
+    def inject_arjuna_js(cls, prefix):
+        prefix += [html.script(raw(ARJUNA_JS))]
+        prefix += [raw(IMG_SPAN)]
+
+    @classmethod
     def add_screenshot_for_result(cls, item, result, *, ignore_passed=True, ignore_fixtures=False):
         '''
             Automatically add screenshot to HTML Report File.
@@ -94,11 +148,6 @@ class PytestHooks:
         '''
 
         try:
-            try:
-                screen_shooter = cls._get_screen_shooter(item)
-            except AttributeError:
-                return
-
             html_plugin = cls._get_html_report_plugin(item)
             pytest_html = html_plugin
             report = result.get_result()
@@ -111,23 +160,27 @@ class PytestHooks:
             xfail = hasattr(report, 'wasxfail')
 
             if ignore_passed and report.passed:
-                return
-            # if (report.skipped and xfail) and (report.failed and not xfail):
-                # extra.append(pytest_html.extras.url(app.url))
+                pass
+            else:
+                # if (report.skipped and xfail) and (report.failed and not xfail):
+                    # extra.append(pytest_html.extras.url(app.url))
+                try:
+                    screen_shooter = cls._get_screen_shooter(item)
+                except AttributeError:
+                    pass
+                else:
+                    screen_shooter.take_screenshot(prefix=report.nodeid)
 
+            from arjuna import Arjuna
 
-            import re
-            rname = re.sub(r"\[.*?\]", "", report.nodeid)
-            image = screen_shooter.take_screenshot(prefix=rname)
-            fpath = "../screenshot/{}".format(image.file_name)
-            img_elem = '''<img src="data:image/png;base64,{}"/>'''.format(image.base64)
             extra.append(
                 pytest_html.extras.html(
-                    '''<div class="image"><a href="{}" target="_blank">{}</a>'''.format(fpath, img_elem)
+                    Arjuna.get_test_wise_container().as_report_html()
                 )
             )
             report.extra = extra
         except Exception as e:
+            raise
             from arjuna import log_warning
             log_warning("Error in add_screenshot_for_result hook: " + str(e))
 
