@@ -18,7 +18,7 @@
 import threading
 from collections import namedtuple
 
-NetworkPacket = namedtuple("NetworkPacket", "request response")
+NetworkPacketInfo = namedtuple("NetworkPacketInfo", "title request response")
 
 SAMPLE_HTML = '''
 <p><p>
@@ -92,7 +92,8 @@ class CurrentTestWiseContainer:
             for np in self.network_packets:
                 req_str = py_html.escape(str(np.request))
                 res_str = py_html.escape(str(np.response))
-                html += f'<button data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">Open Modal</button><p>'
+                title = np.title
+                html += f'<button style="text-align: left;" data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{title}</button><p>'
         html += "<p><p>"
         return html
 
@@ -112,7 +113,7 @@ class CurrentTestWiseContainer:
             self.__images[tname] = []
         self.__images[tname].append(image)
 
-    def add_network_packet(self, packet):
+    def add_network_packet_info(self, packet):
         tname = threading.current_thread
         if tname not in self.__network_packets:
             self.__network_packets[tname] = []

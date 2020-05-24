@@ -17,6 +17,7 @@ Submodules
    arjuna.tpi.engine.relation
    arjuna.tpi.engine.resource
    arjuna.tpi.engine.test
+   arjuna.tpi.engine.testwise
 
 Module contents
 ---------------

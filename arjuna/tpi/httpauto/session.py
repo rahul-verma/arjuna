@@ -94,7 +94,7 @@ class HttpRequest:
 
     def send(self):
         from arjuna import Arjuna
-        from arjuna.tpi.engine.testwise import NetworkPacket
+        from arjuna.tpi.engine.testwise import NetworkPacketInfo
         try:
             response = HttpResponse(self.__session, self.__session.send(self.__req))
         except Exception as e:
@@ -102,10 +102,14 @@ class HttpRequest:
             response = "Error in sending the request\n"
             response += e.__class__.__name__ + ":" + str(e) + "\n"
             response += traceback.format_exc()
-            Arjuna.get_test_wise_container().add_network_packet(NetworkPacket(request=str(self), response=str(response)))
+            Arjuna.get_report_metadata().add_network_packet_info(
+                NetworkPacketInfo(title="{} {}".format(self.method, self.url), request=str(self), response=str(response))
+            )
             raise e
         else:
-            Arjuna.get_test_wise_container().add_network_packet(NetworkPacket(request=str(self), response=str(response)))
+            Arjuna.get_report_metadata().add_network_packet_info(
+                NetworkPacketInfo(title="{} {}".format(self.method, self.url), request=str(self), response=str(response))
+            )
             if self.__xcodes is not None and response.status_code not in self.__xcodes:
                 raise HttpUnexpectedStatusCode(self.__req, response)
             return response

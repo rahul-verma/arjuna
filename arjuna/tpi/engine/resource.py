@@ -160,7 +160,7 @@ def group(request):
 @for_test(default=True)
 def test_resources(request):
     from arjuna import Arjuna
-    thread_container = Arjuna.get_test_wise_container()
-    getattr(request.raw_request, "function").thread_container = thread_container
+    thread_container = Arjuna.get_report_metadata()
+    getattr(request.raw_request, "function").report_metadata = thread_container
     yield
     thread_container.clear()

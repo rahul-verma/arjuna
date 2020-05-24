@@ -180,7 +180,7 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
         img = Image(fpath=fpath, b64=image_b64)
 
         from arjuna import Arjuna
-        Arjuna.get_test_wise_container().add_image(img)
+        Arjuna.get_report_metadata().add_image(img)
         return img
 
     def focus_on_main_window(self):

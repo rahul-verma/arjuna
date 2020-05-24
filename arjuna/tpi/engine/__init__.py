@@ -300,7 +300,7 @@ class Arjuna:
         return R(name, bucket=bucket, context=context)
 
     @classmethod
-    def get_test_wise_container(cls):
+    def get_report_metadata(cls):
         return cls.ARJUNA_SINGLETON.test_wise_container
 
     @classmethod

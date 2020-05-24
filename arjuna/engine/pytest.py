@@ -199,7 +199,7 @@ class PytestHooks:
 
             from arjuna import Arjuna
 
-            test_container = Arjuna.get_test_wise_container()
+            test_container = Arjuna.get_report_metadata()
             if test_container.has_content():
                 extra.append(pytest_html.extras.html(test_container.as_report_html()))
             

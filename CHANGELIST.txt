@@ -61,14 +61,23 @@ Future Themes (In-Progress or Planned):
     - Is not an alias of namedtuple
     - DataEntity is an alias of Arjuna's data_entity call.
     - Allows setting defaults for entity attributes.
-- Test Wise Container
-    - Added an auto-fixture to add and cleant entry for current test.
+- Test Report Meta Data
+    - Introduced Test-wise report meta data container.
+    - Arjuna.get_report_metadata() can used anywhere in the project to access it.
+    - In test functions and @for_test resource functions, it can also be got using request.report_metadata
+    - Added an auto-fixture to add and clean entry for current test.
     - Currently contains images and network packets.
 - HTML Reporting
-    - Take screenshshot adds the images to current test container.
-    - HTML report can include all screenshots.
-    - Rather than opening an image in a new window, it is opened in a modal window in the same tab.
-    - The modal window uses the same base64 embedded image.
+    - Screenshots and Images:
+        - Take screenshshot adds the images to current test container.
+        - HTML report can include all screenshots.
+        - Rather than opening an image in a new window, it is opened in a modal window in the same tab.
+        - The modal window uses the same base64 embedded image.
+    - Network Traffic
+        - Arjuna Http request sending logic adds network packets to current test container.
+        - HTML report can includes all these packets.
+        - Method and URL are shown as a clickable button.
+        - Request/Response detail is shown in a modal window. 
 
 1.0.4
 -----

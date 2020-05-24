@@ -48,6 +48,7 @@ setup(
                     "res/*.ini",
                     "res/*.py",
                     "res/*.yaml",
+                    "res/*.css",
                 ]
     },
     install_requires = ["lxml", "requests", "selenium", "webdriver_manager", "xlrd", "xlwt", "pyparsing", "pyhocon", "pytest", "pytest-html", "pytest-dependency", "PyYAML", "mimesis", "jsonpath-rw", "jsonpath-rw-ext", "Pallets-Sphinx-Themes", "oauthlib", "requests_oauthlib", "bs4", "genson", "jsonschema"],
