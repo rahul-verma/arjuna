@@ -64,30 +64,44 @@ class CurrentTestWiseContainer:
         except KeyError:
             return tuple()
 
-    def _get_images_html(self):
-        if not self.images: return ""
-        html = "<p><p><h3>Screenshots</h3><p>"
-        for image in self.images:
-            fpath = "../screenshot/{}".format(image.file_name)
-            #img_elem = '''<img src="data:image/png;base64,{}"/>'''.format(image.base64)
-            #html += '<a href="{}" onclick="openModalImage(event)">{}</a>'.format(fpath, img_elem)
-
-            html += '''<img class="screenshot" onclick="openModalImage(event)" href="{}" src="data:image/png;base64,{}"/>'''.format(fpath, image.base64)
-        html += "<p><p>"
-        return html
-
-    def as_report_html(self):
-        html = '<div class="image">'
-        html += self._get_images_html()
-        html += "</div>"
-        return html
-
     @property
     def network_packets(self):
         try:
             return tuple(self.__network_packets[threading.current_thread])
         except KeyError:
             return tuple()
+
+    def _get_images_html(self):
+        if not self.images: return ""
+        html = "<p><p><h3>&nbsp;&nbsp;Screenshots and Images</h3><p>"
+        if self.images:
+            for image in self.images:
+                fpath = "../screenshot/{}".format(image.file_name)
+                #img_elem = '''<img src="data:image/png;base64,{}"/>'''.format(image.base64)
+                #html += '<a href="{}" onclick="openModalImage(event)">{}</a>'.format(fpath, img_elem)
+
+                html += '''<img class="screenshot" onclick="openModalImage(event)" href="{}" src="data:image/png;base64,{}"/>'''.format(fpath, image.base64)
+        html += "<p><p>"
+        return html
+
+    def _get_packets_html(self):
+        if not self.network_packets: return ""
+        html = "<p><p><h3>&nbsp;&nbsp;Network Packets</h3><p>"
+        if self.network_packets:
+            for np in self.network_packets:
+                html += '<button data-request="{}" data-response="{}" onclick="openModal(event)">Open Modal</button>'.format(str(np.request), str(np.response))
+        html += "<p><p>"
+        return html
+
+    def has_content(self):
+        return self.images or self.network_packets
+
+    def as_report_html(self):
+        html = '<div class="image">'
+        html += self._get_images_html()
+        html += self._get_packets_html()
+        html += "</div>"
+        return html
 
     def add_image(self, image):
         tname = threading.current_thread

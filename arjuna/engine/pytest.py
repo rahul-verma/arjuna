@@ -21,9 +21,13 @@ from py.xml import html, raw
 ARJUNA_JS = '''
 function openModal(event){
     var source = event.target || event.srcElement;
-    var modal = document.getElementById(source.id + "-modal");
+    var modal = document.getElementById("modal-packet");
     modal.style.display = "block";
-    var span = document.getElementById(source.id + "-span");
+    var text = "Request: <p/>" + source.getAttribute("data-request") + "<p/> Response: <p/>" + source.getAttribute("data-response");
+    alert(text);
+    var content = document.getElementById("modal-packet-text");
+    content.innerHTML = text;
+    var span = document.getElementById(source.id + "modal-packet-span");
     span.onclick = function() {
         modal.style.display = "none";
     }
@@ -56,6 +60,18 @@ function openModalImage(event){
 '''
 
 IMG_SPAN ='''
+
+<!-- The Network Packet Modal -->
+<div id="modal-packet" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span id="modal-packet-span" class="close">&times;</span>
+    <p id="modal-packet-text"></p>
+  </div>
+
+</div>
+
 <!-- The Modal -->
 <div id="modal-image" class="modal">
 <div class="modal-content">
@@ -173,11 +189,10 @@ class PytestHooks:
 
             from arjuna import Arjuna
 
-            extra.append(
-                pytest_html.extras.html(
-                    Arjuna.get_test_wise_container().as_report_html()
-                )
-            )
+            test_container = Arjuna.get_test_wise_container()
+            if test_container.has_content():
+                extra.append(pytest_html.extras.html(test_container.as_report_html()))
+            
             report.extra = extra
         except Exception as e:
             raise
