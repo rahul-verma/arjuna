@@ -40,35 +40,36 @@ class JsonList(AsserterMixIn):
     def __getitem__(self, index):
         return Json.convert_to_json_element(self.__list[index], allow_any=True)
 
+    def is_empty(self):
+        return len(self.__list) == 0
+
     def assert_empty(self):
-        length = len(self.__list)
-        if length != 0:
-            raise AssertionError(f"Json list is not empty. Length: {length}")
+        if not self.is_empty():
+            raise AssertionError("JsonList is not empty. Length: {}".format(len(self.__list)))
 
     def assert_not_empty(self):
-        length = len(self.__list)
-        if length == 0:
-            raise AssertionError(f"Json list is empty.")
+        if self.is_empty():
+            raise AssertionError(f"JsonList is empty.")
 
     def assert_size(self, size):
         length = len(self)
         if length != size:
-            raise AssertionError(f"Json dict is not of expected size. Expected: {size}. Actual: {length}")
+            raise AssertionError(f"JsonList is not of expected size. Expected: {size}. Actual: {length}")
 
     def assert_min_size(self, size):
         length = len(self)
         if length < size:
-            raise AssertionError(f"Json list is not of minimum expected size. Expected minimum size is {size}. Actual: {length}")
+            raise AssertionError(f"JsonList is not of minimum expected size. Expected minimum size is {size}. Actual: {length}")
 
     def assert_max_size(self, size):
         length = len(self)
         if length > size:
-            raise AssertionError(f"Json list is not of maximum expected size. Expected maximum size is {size}. Actual: {length}")
+            raise AssertionError(f"JsonList is not of maximum expected size. Expected maximum size is {size}. Actual: {length}")
 
     def assert_size_range(self, min_size, max_size):
         length = len(self)
         if length < min_size or length > max_size:
-            raise AssertionError(f"Json list is not in expected size range. Expected maximum size is {size}. Actual: {length}")
+            raise AssertionError(f"JsonList is not in expected size range. Expected maximum size is {size}. Actual: {length}")
 
     @property
     def size(self):
@@ -193,35 +194,36 @@ class JsonDict(_ArDict, AsserterMixIn):
     def __getitem__(self, query):
         return self.find(query)
 
+    def is_empty(self):
+        return len(self) == 0
+
     def assert_empty(self):
-        length = len(self)
-        if length > 0:
-            raise AssertionError(f"Json dict is not empty. Length: {length}")
+        if not self.is_empty():
+            raise AssertionError("JsonDict is not empty. Length: {}".format(len(self)))
 
     def assert_not_empty(self):
-        length = len(self)
-        if length == 0:
-            raise AssertionError(f"Json dict is empty.")
+        if self.is_empty():
+            raise AssertionError(f"JsonDict is empty.")
 
     def assert_size(self, size):
         length = len(self)
         if length != size:
-            raise AssertionError(f"Json dict is not of expected size. Expected: {size}. Actual: {length}")
+            raise AssertionError(f"JsonDict is not of expected size. Expected: {size}. Actual: {length}")
 
     def assert_min_size(self, size):
         length = len(self)
         if length < size:
-            raise AssertionError(f"Json dict is not of minimum expected size. Expected minimum size is {size}. Actual: {length}")
+            raise AssertionError(f"JsonDict is not of minimum expected size. Expected minimum size is {size}. Actual: {length}")
 
     def assert_max_size(self, size):
         length = len(self)
         if length > size:
-            raise AssertionError(f"Json dict is not of maximum expected size. Expected maximum size is {size}. Actual: {length}")
+            raise AssertionError(f"JsonDict is not of maximum expected size. Expected maximum size is {size}. Actual: {length}")
 
     def assert_size_range(self, min_size, max_size):
         length = len(self)
         if length < min_size or length > max_size:
-            raise AssertionError(f"Json dict is not in expected size range. Expected maximum size is {size}. Actual: {length}")
+            raise AssertionError(f"JsonDict is not in expected size range. Expected maximum size is {size}. Actual: {length}")
 
     def assert_contents(self, *, msg, **kwargs):
         for k,v in kwargs.items():

@@ -268,7 +268,7 @@ FIX: Dispatcher issue in MultiElement when created using filters.
         - Fixtures
         - Relation
         - Asserter
-        - PytestHooks.add_screenshot_for_result
+        - PytestHooks.enhance_reports
     - @track
     - Json
     - xml: NodeLocator and XmlNode
@@ -536,14 +536,14 @@ Minor update. All l10 references are changed to l10n.
 - For data driven test, one needs add 'data' as an arg to the test.
 - Common fixtures can be placed in lib.fixtures.
 - HTML report screenshots related changes:
-    - add_screenshot_for_failed_result now add_screenshot_for_result
+    - add_screenshot_for_failed_result now enhance_reports
     - Behavior can be controlled by passing ignore_passed (on by default) or ignore_fixtures (off by default) arguments.
     - Expects a screen_shooter in Function or Module space. Any object with take_screenshot(prefix) is a screen shooter. 
     - Usage is very simple. Include the following in conftest.py:
         @pytest.mark.hookwrapper
         def pytest_runtest_makereport(item, call):
             result = yield
-            PytestHooks.add_screenshot_for_result(item, result)
+            PytestHooks.enhance_reports(item, result)
     - Screenshots are now taken for failures in fixtures as well. Arjuna now does not depend on presence of request fixture in item.funcargs.
 
 0.8.16

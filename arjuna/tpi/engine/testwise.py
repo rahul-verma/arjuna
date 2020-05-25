@@ -56,6 +56,15 @@ class CurrentTestWiseContainer:
     def __init__(self):
         self.__images = {}
         self.__network_packets = {}
+        self.__test_node_id = None
+
+    @property
+    def current_test_node_id(self):
+        return self.__test_node_id
+
+    @current_test_node_id.setter
+    def current_test_node_id(self, node_id):
+        self.__test_node_id = node_id
 
     @property
     def images(self):
@@ -118,6 +127,7 @@ class CurrentTestWiseContainer:
         if tname not in self.__network_packets:
             self.__network_packets[tname] = []
         self.__network_packets[tname].append(packet)
+
 
     def clear(self):
         tname = threading.current_thread

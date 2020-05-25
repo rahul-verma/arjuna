@@ -20,7 +20,7 @@ except ModuleNotFoundError:
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item, call):
     result = yield
-    PytestHooks.add_screenshot_for_result(item, result)
+    PytestHooks.enhance_reports(item, result)
 
 
 def pytest_generate_tests(metafunc):

@@ -148,7 +148,7 @@ class PytestHooks:
         prefix += [raw(IMG_SPAN)]
 
     @classmethod
-    def add_screenshot_for_result(cls, item, result, *, ignore_passed=True, ignore_fixtures=False):
+    def enhance_reports(cls, item, result, *, ignore_passed=True, ignore_fixtures=False):
         '''
             Automatically add screenshot to HTML Report File.
 
@@ -196,18 +196,22 @@ class PytestHooks:
                     pass
                 else:
                     screen_shooter.take_screenshot(prefix=report.nodeid)
-
+            
             from arjuna import Arjuna
-
             test_container = Arjuna.get_report_metadata()
             if test_container.has_content():
                 extra.append(pytest_html.extras.html(test_container.as_report_html()))
+
+            # For fixtures with errors, failures, clean the resources.
+            if report.when in {"setup", "teardown"}:
+                if not report.passed:
+                    Arjuna.get_report_metadata().clear()
             
             report.extra = extra
         except Exception as e:
             raise
             from arjuna import log_warning
-            log_warning("Error in add_screenshot_for_result hook: " + str(e))
+            log_warning("Error in enhance_reports hook: " + str(e))
 
 
     @classmethod

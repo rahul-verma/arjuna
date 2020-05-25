@@ -156,11 +156,12 @@ def group(request):
     getattr(request.raw_request, "session").group_info = request.raw_request.param
     yield
 
-
 @for_test(default=True)
 def test_resources(request):
     from arjuna import Arjuna
     thread_container = Arjuna.get_report_metadata()
+    set_node_id = thread_container.current_test_node_id  
+    thread_container.current_test_node_id = request.raw_request.node.nodeid
     getattr(request.raw_request, "function").report_metadata = thread_container
     yield
     thread_container.clear()

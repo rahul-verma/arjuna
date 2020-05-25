@@ -25,7 +25,7 @@ except ModuleNotFoundError:
 def pytest_runtest_makereport(item, call):
     result = yield
     PytestHooks.prepare_result(result)
-    PytestHooks.add_screenshot_for_result(item, result)
+    PytestHooks.enhance_reports(item, result)
 
 def pytest_generate_tests(metafunc):
     PytestHooks.configure_group_for_test(metafunc)
