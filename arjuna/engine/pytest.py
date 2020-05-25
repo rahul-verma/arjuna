@@ -179,9 +179,9 @@ class PytestHooks:
             report = result.get_result()
             extra = getattr(report, 'extra', [])
 
-            if ignore_fixtures:
-                if report.when == 'call':
-                    return
+            # if ignore_fixtures:
+            #     if report.when == 'call':
+            #         return
 
             xfail = hasattr(report, 'wasxfail')
 
@@ -206,6 +206,8 @@ class PytestHooks:
             if report.when in {"setup", "teardown"}:
                 if not report.passed:
                     Arjuna.get_report_metadata().clear()
+            else:
+                Arjuna.get_report_metadata().clear()
             
             report.extra = extra
         except Exception as e:

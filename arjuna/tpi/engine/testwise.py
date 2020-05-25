@@ -107,7 +107,10 @@ class CurrentTestWiseContainer:
         return html
 
     def has_content(self):
-        return self.images or self.network_packets
+        if self.images or self.network_packets:
+            return True
+        else:
+            return False
 
     def as_report_html(self):
         html = '<div class="image">'
