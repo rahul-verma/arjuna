@@ -155,6 +155,13 @@ class XmlNode:
         '''
         return self.node.get(name)
 
+    @property
+    def value(self) -> str:
+        '''
+            Value of an 'value' attribute of this node.
+        '''
+        return self.attr("value")
+
     def has_attr(self, name):
         '''
             Check if an attribute is present.
@@ -222,7 +229,7 @@ class XmlNode:
                     break
         return out
 
-    def find(self, *node_locators, stop_when_matched: bool=False) -> 'XmlNode':
+    def find(self, *node_locators, stop_when_matched: bool=False, strict: bool=False) -> 'XmlNode':
         '''
             Find first `XmlNode` that match one of more `NodeLocator` s.
 
@@ -231,6 +238,7 @@ class XmlNode:
 
             Keyword Arguments:
                 stop_when_matched: If True, the call returns nodes found by the first `NodeLocator` that locates one or more nodes.
+                strict: If True, the call raises an exception if element is not found, else returns None
 
             Note:
                 In case of no node match, returns None
@@ -239,7 +247,10 @@ class XmlNode:
         if matches:
             return matches[0]
         else:
-            return None
+            if strict:
+                raise Exception("Element could not be found with Node Locators: >><<".format([str(n) for n in node_locators]))
+            else:
+                return None
 
     def find_keyvalue_texts(self, key_locator, value_locator) -> Tuple[str, str]:
         '''
