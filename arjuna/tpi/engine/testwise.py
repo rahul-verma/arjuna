@@ -18,38 +18,7 @@
 import threading
 from collections import namedtuple
 
-NetworkPacketInfo = namedtuple("NetworkPacketInfo", "title request response")
-
-SAMPLE_HTML = '''
-<p><p>
-<!-- Trigger/Open The Modal -->
-<button id="b1" onclick="openModal(event)">Open Modal</button>
-
-<!-- The Modal -->
-<div id="b1-modal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span id="b1-span" class="close">&times;</span>
-    <p>Some text in the Modal..</p>
-  </div>
-
-</div>
-
-<!-- Trigger/Open The Modal -->
-<button id="b2" onclick="openModal(event)">Open Modal</button>
-
-<!-- The Modal -->
-<div id="b2-modal" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span id="b2-span" class="close">&times;</span>
-    <p>Some text b2b2b222b in the Modal..</p>
-  </div>
-
-</div>
-'''
+NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response")
 
 class CurrentTestWiseContainer:
 
@@ -101,8 +70,8 @@ class CurrentTestWiseContainer:
             for np in self.network_packets:
                 req_str = py_html.escape(str(np.request))
                 res_str = py_html.escape(str(np.response))
-                title = np.title
-                html += f'<button style="text-align: left;" data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{title}</button><p>'
+                label = np.label
+                html += f'<button style="text-align: left;" data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button><p>'
         html += "<p><p>"
         return html
 

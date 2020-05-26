@@ -93,15 +93,19 @@ class HttpResponse:
 
 class HttpRequest:
 
-    def __init__(self, session, request):
+    def __init__(self, session, request, label=None):
         self.__session = session
         self.__request = request
+        self.__label = label and label or "{} {}".format(self.method, self.url)
+
+    @property
+    def label(self):
+        return self.__label
 
     def send(self):
         from arjuna import Arjuna, log_info
         from arjuna.tpi.engine.testwise import NetworkPacketInfo
-        title="{} {}".format(self.method, self.url)
-        log_info(title)
+        log_info(self.label)
         try:
             response = HttpResponse(self.__session, self.__session.send(self.__req))
         except Exception as e:
@@ -110,12 +114,12 @@ class HttpRequest:
             response += e.__class__.__name__ + ":" + str(e) + "\n"
             response += traceback.format_exc()
             Arjuna.get_report_metadata().add_network_packet_info(
-                NetworkPacketInfo(title=title, request=str(self), response=str(response))
+                NetworkPacketInfo(label=self.label, request=str(self), response=str(response))
             )
             raise e
         else:
             Arjuna.get_report_metadata().add_network_packet_info(
-                NetworkPacketInfo(title=title, request=str(self), response=str(response))
+                NetworkPacketInfo(label=self.label, request=str(self), response=str(response))
             )
             if self.__xcodes is not None and response.status_code not in self.__xcodes:
                 raise HttpUnexpectedStatusCode(self.__req, response)
@@ -151,7 +155,7 @@ class HttpRequest:
 
 class _HttpRequest(HttpRequest):
 
-    def __init__(self, session, url, method, content=None, content_type=None, xcodes=None, headers=None, **query_params):
+    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, headers=None, **query_params):
         self.__session = session
         self.__method = method.upper()
         self.__url = url
@@ -169,7 +173,7 @@ class _HttpRequest(HttpRequest):
 
         self.__prepare_content()
         self.__req = self.__build_request()
-        super().__init__(self.__session, self.__req)
+        super().__init__(self.__session, self.__req, label=label)
 
     def __prepare_content(self):
         if self.__method in {'GET', 'DELETE'}: return
@@ -228,20 +232,20 @@ class HttpSession:
         else:
             return self.url + route
 
-    def get(self, route, xcodes=None, **query_params):
-        request = _HttpRequest(self._session, self.__route(route), method="get", xcodes=xcodes, **query_params)
+    def get(self, route, label=None, xcodes=None, **query_params):
+        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, **query_params)
         return request.send()
 
-    def delete(self, route, xcodes=None, **query_params):
-        request = _HttpRequest(self._session, self.__route(route), method="delete", xcodes=xcodes, **query_params)
+    def delete(self, route, label=None, xcodes=None, **query_params):
+        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, **query_params)
         return request.send()
 
-    def post(self, route, *, content, content_type=None, xcodes=None, headers=None, **query_params):
-        request = _HttpRequest(self._session, self.__route(route), method="post", content=content, content_type=content_type, xcodes=xcodes, headers=headers, **query_params)
+    def post(self, route, *, label=None, content, content_type=None, xcodes=None, headers=None, **query_params):
+        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, headers=headers, **query_params)
         return request.send()
 
-    def put(self, route, *, content, content_type=None, xcodes=None, **query_params):
-        request = _HttpRequest(self._session, self.__route(route), method="put", content=content, content_type=content_type, xcodes=xcodes, **query_params)
+    def put(self, route, *, label=None, content, content_type=None, xcodes=None, **query_params):
+        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, **query_params)
         return request.send()
 
 
