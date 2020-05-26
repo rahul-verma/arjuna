@@ -43,9 +43,13 @@ Future Themes (In-Progress or Planned):
         - Devise a way for the logger pre and post pytest runs.
     - Report merging for HTML and XML files.
 
-1.0.5
+1.0.6
 -----
 --> To be fixed: Check user defined attribute based selection.
+
+
+1.0.5
+-----
 - Auto-generated conftest.py now does a basic if ModuleNotFoundError was for corresponding resource module.
 - HTTP Level Test Automation (Work In Progress, Alpha Quality)
     - Added basic support for HttpSession along with HttpRequest and HttpResponse classes.
