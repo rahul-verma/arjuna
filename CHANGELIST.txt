@@ -75,9 +75,17 @@ Future Themes (In-Progress or Planned):
         - The modal window uses the same base64 embedded image.
     - Network Traffic
         - Arjuna Http request sending logic adds network packets to current test container.
+        - In case of redirects, all directs are captured.
         - HTML report can includes all these packets.
         - Method and URL are shown as a clickable button.
         - Request/Response detail is shown in a modal window. 
+- Logging
+    - Added Trace level along with log_trace method.
+    - Newlines are removed from message.
+- Track
+    - Long args are truncated to size 100.
+    - Long return vals are truncated to size 200.
+    - Allows `trace` level.
 
 1.0.4
 -----

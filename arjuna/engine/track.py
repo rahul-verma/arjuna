@@ -29,12 +29,25 @@ prop_dict_msg = {
     "fdel": ("(Deleting Property)","", ""),
 }
 
+def trim_arg(arg, max_len=100):
+    arg = str(arg)
+    return len(arg) > max_len and arg[0:max_len] + "<SNIP>" or arg
+
+def trim_args(args):
+    return [trim_arg(arg) for arg in args]
+
+def trim_kwargs(kwargs):
+    return {k:trim_arg(v) for k,v in kwargs.items()}
+
+def trim_ret_value(ret):
+    return trim_arg(ret, max_len=200)
+
 def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget", **kwargs):
     import arjuna
     from arjuna import log_error
     name = func.__name__
     qualname = func.__qualname__
-    level = name.startswith("_") and "debug" or level
+    level = name.startswith("_") and "trace" or level
     log_call = getattr(arjuna, "log_{}".format(level.strip().lower()))
     if name != qualname and not static:
         pvargs = vargs[1:]
@@ -46,7 +59,7 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
         msg_2 = prop_dict_msg[prop_type][1].format(pvargs, kwargs)
         log_call("{} {}{}".format(qualname, msg_1, msg_2))
     else:
-        log_call("{}:: Started with args {} and kwargs {}.".format(qualname, pvargs, kwargs))
+        log_call("{}:: Started with args {} and kwargs {}.".format(qualname, trim_args(pvargs), trim_kwargs(kwargs)))
     ret = None
     try:
         ret = func(*vargs, **kwargs)
@@ -60,7 +73,7 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
             msg_3 = prop_dict_msg[prop_type][2].format(ret)
             log_call("{}:: Finished.{}".format(qualname, msg_3, msg_3))
         else:
-            log_call("{}:: Finished. Returning: {}".format(qualname, ret))
+            log_call("{}:: Finished. Returning: {}".format(qualname, trim_ret_value(ret)))
         return ret
 
 def track_func(level="debug", static=False, prop=False, prop_type="fget"):

@@ -64,3 +64,13 @@ body {font-family: Arial, Helvetica, sans-serif;}
   }
   
 .screenshot:hover {opacity: 0.7;}
+
+button {
+    margin-left: 10px;
+    text-align: left;
+}
+
+button.redir_button {
+    margin-left: 30px;
+    text-align: left;
+}

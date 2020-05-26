@@ -54,7 +54,7 @@ def __log(invoker, level, msg, contexts=None):
         contexts = ("default",)
     contexts = set(contexts)
     try:
-        getattr(Arjuna.get_logger(), level)(msg, extra={'invoker': invoker, 'contexts':contexts, 'config':Arjuna.get_config("data_env")}) # data_env conf is ref config with log settings. available in non-thred map.
+        getattr(Arjuna.get_logger(), level)(msg.replace('\n', ' ').replace('\r', ''), extra={'invoker': invoker, 'contexts':contexts, 'config':Arjuna.get_config("data_env")}) # data_env conf is ref config with log settings. available in non-thred map.
     except AttributeError:
         # In case the logging is called before the logger is set.
         # In future versions, see if there can be a fallabck logger.
@@ -66,15 +66,15 @@ def __log(invoker, level, msg, contexts=None):
         else :
             sys.stderr.write(msg+"\n")
 
-# def log_trace(msg: str, *, contexts: ListOrTuple=None):
-#     '''
-#         Log a message with **TRACE** level.
+def log_trace(msg: str, *, contexts: ListOrTuple=None):
+    '''
+        Log a message with **TRACE** level.
 
-#         Args: 
-#             msg: Log message
-#             contexts: (Optional) Context strings for this log message.
-#     '''
-#     __log(_Stack.get_invoker(), "trace", msg, contexts=contexts)
+        Args: 
+            msg: Log message
+            contexts: (Optional) Context strings for this log message.
+    '''
+    __log(_Stack.get_invoker(), "trace", msg, contexts=contexts)
 
 def log_debug(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''

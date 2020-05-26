@@ -80,9 +80,8 @@ from arjuna.tpi.engine.data.markup import *
 from arjuna.tpi.engine.data.record import *
 from arjuna.tpi.engine.data.generator import Random, Locales
 from arjuna.tpi.engine.data.entity import data_entity, DataEntity
-from arjuna.tpi.engine.testwise import NetworkPacketInfo
 
-from arjuna.tpi.helper.arjtype import NVPair, NVPairs, Screen, Attr, Point, Offset
+from arjuna.tpi.helper.arjtype import NVPair, NVPairs, Screen, Attr, Point, Offset, NetworkPacketInfo
 from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
 from arjuna.tpi.guiauto.model.app import GuiApp
 from arjuna.tpi.guiauto.model.page import GuiPage

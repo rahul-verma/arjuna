@@ -16,9 +16,6 @@
 # limitations under the License.
 
 import threading
-from collections import namedtuple
-
-NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response")
 
 class CurrentTestWiseContainer:
 
@@ -71,7 +68,12 @@ class CurrentTestWiseContainer:
                 req_str = py_html.escape(str(np.request))
                 res_str = py_html.escape(str(np.response))
                 label = np.label
-                html += f'<button style="text-align: left;" data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button><p>'
+                html += f'<button data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button><p>'
+                for redir in np.redir_network_packets:
+                    req_str = py_html.escape(str(redir.request))
+                    res_str = py_html.escape(str(redir.response))
+                    label = redir.label
+                    html += f'<button class="redir_button" data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button><p>'
         html += "<p><p>"
         return html
 

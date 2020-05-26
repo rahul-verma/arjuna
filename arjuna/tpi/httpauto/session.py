@@ -16,11 +16,13 @@
 # limitations under the License.
 
 import json
-from urllib.parse import urlparse, urlencode
+from urllib.parse import urlparse, urlencode, parse_qs
 from requests import Request, Session
 from arjuna.tpi.error import HttpUnexpectedStatusCode
 from arjuna.tpi.helper.json import Json
 from arjuna.tpi.helper.html import Html
+from requests.exceptions import ConnectionError
+import time
 
 class HttpResponse:
 
@@ -35,6 +37,10 @@ class HttpResponse:
     @property
     def status_code(self):
         return self.__resp.status_code
+
+    @property
+    def status(self):
+        return self.__resp.reason
 
     @property
     def headers(self):
@@ -54,21 +60,35 @@ class HttpResponse:
 
     @property
     def redir_history(self):
-        if self.__resp.history is not None:
+        if self.__resp.history:
             return [HttpResponse(self.__session, h) for h in self.__resp.history]
         else:
-            return None
+            return tuple()
 
     @property
     def last_redir_response(self):
-        if self.redir_history is None:
+        if not self.redir_history:
             return None
+        return self.redir_history[-1]
+
+    @property
+    def last_request(self):
+        if self.redir_history:
+            return self.last_redir_response.next_request
         else:
-            return self.redir_history[-1]
+            return self.request
 
     @property
     def next_request(self):
-        return HttpRequest(self.__session, self.__resp.next)
+        next_req = self.__resp.next
+        if next_req:
+            return HttpRequest(self.__session, self.__resp.next)
+        else:
+            return None
+
+    @property
+    def request(self):
+        return HttpRequest(self.__session, self.__resp.request)   
 
     __OUT = '''{}
 {}{}'''
@@ -85,7 +105,7 @@ class HttpResponse:
         if content:
             content = '\n\n{}\n'.format(content)
         return self.__OUT.format(
-            str(self.status_code) + ' ' + self.url,
+            str(self.status_code) + ' ' + self.status,
             '\n'.join('{}: {}'.format(k, v) for k, v in self.headers.items()),
             content
         ).strip()
@@ -96,18 +116,39 @@ class HttpRequest:
     def __init__(self, session, request, label=None):
         self.__session = session
         self.__request = request
-        self.__label = label and label or "{} {}".format(self.method, self.url)
+        req_repr = "{} {}".format(self.method, self.url)
+        self.__label = label and label or req_repr
+        self.__printable_label = label and self.__label + "::" + req_repr or req_repr
+        self.__printable_label = len(self.__printable_label) > 119 and self.__printable_label[:125] + "<SNIP>" or self.__printable_label
 
     @property
     def label(self):
         return self.__label
 
+    @property
+    def query_params(self):
+        return parse_qs(self.url)
+
     def send(self):
         from arjuna import Arjuna, log_info
-        from arjuna.tpi.engine.testwise import NetworkPacketInfo
-        log_info(self.label)
+        from arjuna.tpi.helper.arjtype import NetworkPacketInfo
+        log_info(self.__printable_label)
+        max_connection_retries = 5
         try:
-            response = HttpResponse(self.__session, self.__session.send(self.__req))
+            counter = 0
+            exc_flag = False
+            while counter < max_connection_retries:
+                counter += 1
+                try:
+                    response = HttpResponse(self.__session, self.__session.send(self.__req))
+                except ConnectionError:
+                    exc_flag = True
+                    time.sleep(1)
+                    continue
+                else:
+                    break
+            if exc_flag:
+                raise Exception("Connection error despite trying 5 times.")
         except Exception as e:
             import traceback
             response = "Error in sending the request\n"
@@ -118,8 +159,35 @@ class HttpRequest:
             )
             raise e
         else:
+            # Should be configurable
+            redir_network_packets = []
+            for redir_resp in response.redir_history:
+                redir_req = redir_resp.request
+                redir_network_packets.append(
+                    NetworkPacketInfo(
+                        label="Sub-Request: {} {}".format(redir_req.method, redir_req.url), 
+                        request=str(redir_req), 
+                        response=str(redir_resp),
+                        redir_network_packets=tuple()
+                    )
+                )
+
+            # The request for last response object was the last request and hence the last redirection.
+            if response.redir_history:
+                last_req = response.last_request
+                if not last_req:
+                    last_req = response.request
+                redir_network_packets.append(
+                                    NetworkPacketInfo(
+                                        label="Sub-Request: {} {}".format(last_req.method, last_req.url), 
+                                        request=str(last_req), 
+                                        response=str(response),
+                                        redir_network_packets=tuple()
+                                    )
+                                )                
+
             Arjuna.get_report_metadata().add_network_packet_info(
-                NetworkPacketInfo(label=self.label, request=str(self), response=str(response))
+                NetworkPacketInfo(label=self.label, request=str(self), response=str(response), redir_network_packets=tuple(redir_network_packets))
             )
             if self.__xcodes is not None and response.status_code not in self.__xcodes:
                 raise HttpUnexpectedStatusCode(self.__req, response)

@@ -303,7 +303,7 @@ class DataRefContextType(Enum):
     COLUMN = auto()
 
 class LoggingLevel(Enum):
-    # TRACE = auto()
+    TRACE = auto()
     DEBUG = auto()
     INFO = auto()
     WARN = auto()

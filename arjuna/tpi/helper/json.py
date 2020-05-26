@@ -24,7 +24,7 @@ from typing import Any
 from arjuna.tpi.tracker import track
 from arjuna.tpi.engine.asserter import AsserterMixIn
 
-
+@track("trace")
 class JsonList(AsserterMixIn):
     '''
         Arjuna's Json List object.
@@ -134,7 +134,7 @@ class JsonSchema:
         return json.dumps(self.__dict, indent=2)
 
 
-@track("debug")
+@track("trace")
 class JsonDict(_ArDict, AsserterMixIn):
     '''
         Arjuna's Json Object.

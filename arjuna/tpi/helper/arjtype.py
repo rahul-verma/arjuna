@@ -23,7 +23,7 @@ Contains many general purpose type abstractions.
 
 import abc
 import pprint
-from collections import OrderedDict
+from collections import OrderedDict, namedtuple
 from typing import Callable
 import abc
 
@@ -298,3 +298,6 @@ class NVPairs(Dictable):
 
     def _as_dict(self):
         return self.__kwargs
+
+
+NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response redir_network_packets")

@@ -24,7 +24,7 @@ from typing import List, Dict, Tuple
 
 from arjuna.tpi.tracker import track
 
-@track("debug")
+@track("trace")
 class NodeLocator:
     '''
         Locator for finding an XML Node in an **XmlNode**.
@@ -66,7 +66,7 @@ class NodeLocator:
     def search_node(self, node):
         return [XmlNode(n) for n in node.xpath(self.__xpath)]
 
-@track("debug")
+@track("trace")
 class XmlNode:
     '''
         Represents a single node in a parsed XML.

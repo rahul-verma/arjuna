@@ -40,7 +40,7 @@ class Logger:
 
     def __init__(self, ref_config):
         self.__ref_config = ref_config
-        # self.__add_trace_level()
+        self.__add_trace_level()
         self.__logger = None
         self.__load()
 
@@ -56,7 +56,7 @@ class Logger:
 
         logger = logging.getLogger("arjuna")
         logger.addFilter(_InvokerFilter())
-        logger.setLevel(logging.DEBUG)
+        logger.setLevel(logging.TRACE)
         ch = logging.StreamHandler(sys.stdout)
         ch.flush = sys.stdout.flush
         ch.setLevel(dl)
@@ -72,14 +72,14 @@ class Logger:
 
         self.__logger = logger
 
-    # def __add_trace_level(self):
-    #     logging.TRACE = logging.DEBUG - 1
-    #     logging.addLevelName(logging.TRACE, "TRACE")
-    #     def trace(self, message, *args, **kws):
-    #         if self.isEnabledFor(logging.TRACE):
-    #             # Yes, logger takes its '*args' as 'args'.
-    #             self._log(logging.TRACE, message, args, **kws)
-    #     logging.Logger.trace = trace
+    def __add_trace_level(self):
+        logging.TRACE = logging.DEBUG - 1
+        logging.addLevelName(logging.TRACE, "TRACE")
+        def trace(self, message, *args, **kws):
+            if self.isEnabledFor(logging.TRACE):
+                # Yes, logger takes its '*args' as 'args'.
+                self._log(logging.TRACE, message, args, **kws)
+        logging.Logger.trace = trace
 
     @property
     def arjuna_logger(self):
