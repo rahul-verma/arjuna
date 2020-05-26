@@ -43,10 +43,18 @@ Future Themes (In-Progress or Planned):
         - Devise a way for the logger pre and post pytest runs.
     - Report merging for HTML and XML files.
 
+1.1.0 Goals
+-----------
+To Do
+    --> To be fixed: Check user defined attribute based selection.
+    --> Doc comments for new TPI classes and functions.
+    --> Separation of HTML/JS from code to Arjuna res directory.
+    --> Support for callable in DataEntity for an attr
+    --> Example code for Http Layer automation.
+    --> Production quality Http Layer automation.
+
 1.0.6
 -----
---> To be fixed: Check user defined attribute based selection.
-
 
 1.0.5
 -----
