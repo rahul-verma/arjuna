@@ -19,10 +19,9 @@ import re
 import os
 import copy
 import abc
-from lxml import etree, html
-from io import StringIO
 from collections import namedtuple
-from arjuna.tpi.helper.xml import XmlNode
+from lxml import etree
+from arjuna.tpi.helper.html import Html, HtmlNode
 from arjuna.tpi.tracker import track
 from .content import GuiSourceContent
 
@@ -90,7 +89,7 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
         self.__elem_node = None
 
     @property
-    def node(self) -> XmlNode:
+    def node(self) -> HtmlNode:
         '''
             Source code as an Arjuna :class:`~arjuna.tpi.helper.xml.XmlNode` for advanced inquiry and parsing.
         '''
@@ -105,11 +104,12 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
 
     def _load(self):
         raw_source = self.__raw_source
-        parser = etree.HTMLParser(remove_comments=True)
-        tree = etree.parse(StringIO(raw_source), parser)
-        # Done separately from above to retain all original content
-        self.__node = XmlNode(etree.parse(StringIO(raw_source), parser))
-        
+        # parser = etree.HTMLParser(remove_comments=True)
+        if self.__root_tag == "body":
+            tree = Html.from_str(f"<html><body>{raw_source}</body></html>").node
+        else:
+            tree = Html.from_str(raw_source).node
+
         if self.__root_tag == "body":
             body = tree.getroot().find('body')
             elem_node = list(body)[0]
@@ -117,7 +117,8 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
             body = tree.getroot()
             elem_node = body
 
-        self.__elem_node = elem_node
+        self.__elem_node = Html.from_lxml_node(elem_node)
+        self.__node = self.__elem_node.clone()
 
         normalized_text_content = os.linesep.join(
             [

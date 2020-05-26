@@ -63,8 +63,8 @@ class NodeLocator:
 
         self.__xpath = "{}{}{}".format(prefix, tag, attr_str)
 
-    def search_node(self, xml_node):
-        return [XmlNode(n) for n in xml_node.xpath(self.__xpath)]
+    def search_node(self, node):
+        return [XmlNode(n) for n in node.xpath(self.__xpath)]
 
 @track("debug")
 class XmlNode:
@@ -79,7 +79,7 @@ class XmlNode:
         self.__node = node
 
     @property
-    def xml_node(self):
+    def node(self):
         '''
             Wrapped **lxml** Element
 
@@ -95,7 +95,7 @@ class XmlNode:
             Note:
                 Multiple texts are joined together.
         '''
-        return self.xml_node.text
+        return self.node.text
 
     @property
     def texts(self) -> list:
@@ -105,61 +105,61 @@ class XmlNode:
             Note:
                 Multiple texts are stored separately.
         '''
-        return self.xml_node.xpath("//text()")
+        return self.node.xpath("//text()")
 
     @property
     def tag(self) -> str:
         '''
             Tag of the node.
         '''     
-        return self.xml_node.tag
+        return self.node.tag
 
     @property
     def children(self) -> List['XmlNode']:
         '''
             All Children of this node as a List of XmlNodes
         '''
-        return [XmlNode(c) for c in list(self.xml_node)]
+        return [XmlNode(c) for c in list(self.node)]
 
     @property
     def parent(self) -> 'XmlNode':
         '''
             Parent XmlNode
         '''
-        return XmlNode(self.xml_node.getparent())
+        return XmlNode(self.node.getparent())
 
     @property
     def preceding_sibling(self) -> 'XmlNode':
         '''
             The XmlNode before this node at same hierarchial level.
         '''
-        return XmlNode(self.xml_node.getprevious())
+        return XmlNode(self.node.getprevious())
 
     @property
     def following_sibling(self) -> 'XmlNode':
         '''
             The XmlNode after this node at same hierarchial level.
         '''
-        return XmlNode(self.xml_node.getnext())
+        return XmlNode(self.node.getnext())
 
     @property
     def attrs(self) -> Dict[str,str]:
         '''
             All Attributes of this node as a dictionary.
         '''
-        return dict(self.xml_node.attrib)
+        return dict(self.node.attrib)
 
     def attr(self, name) -> str:
         '''
             Value of an attribute of this node.
         '''
-        return self.xml_node.get(name)
+        return self.node.get(name)
 
     def has_attr(self, name):
         '''
             Check if an attribute is present.
         '''
-        return name in self.xml_node.attrib
+        return name in self.node.attrib
 
     def __xpath(self, xpath):
         if not xpath.startswith("."):
@@ -171,7 +171,7 @@ class XmlNode:
         '''
             Find all XmlNodes that match an XPath.
         '''
-        return [XmlNode(n) for n in self.xml_node.xpath(self.__xpath(xpath))]
+        return [XmlNode(n) for n in self.node.xpath(self.__xpath(xpath))]
 
     def find_with_xpath(self, xpath, position=1):
         '''
@@ -181,16 +181,23 @@ class XmlNode:
                 xpath: XPath string
                 position: XPath index. Default is 1.
         '''
-        return self.findall_with_xpath(xpath)[position]
+        try:
+            all = self.findall_with_xpath(xpath)
+            return all[position-1]
+        except IndexError as e:
+            raise Exception(f"No node match at position >>{position}<< for xpath >>{xpath}<< in xml >>{self}<<")
 
     def as_str(self) -> str:
         '''
             String representation of this node.
         '''
-        return etree.tostring(self.xml_node, encoding=str)
+        return etree.tostring(self.node, encoding='unicode')
 
     def __str__(self):
         return self.as_str()
+
+    def clone(self):
+        return Xml.from_str(str(self))
 
     def findall(self, *node_locators, stop_when_matched: bool=False) -> List['XmlNode']:
         '''
@@ -208,7 +215,7 @@ class XmlNode:
 
         out = []
         for locator in node_locators:
-            nodes = locator.search_node(self.xml_node)
+            nodes = locator.search_node(self.node)
             out.extend(nodes)
             if stop_when_matched:
                 if nodes:
@@ -248,3 +255,14 @@ class XmlNode:
         key = self.find(key_locator).text
         value = self.find(value_locator).text
         return key,value
+
+
+class Xml:
+
+    @classmethod
+    def from_str(self, xml_str):
+        lenient_parser = etree.XMLParser(encoding='utf-8', recover=True)
+        # tree = etree.parse(StringIO(raw_source), parser)
+        # Done separately from above to retain all original content
+        # self.__node = XmlNode(etree.parse(StringIO(raw_source), soupparser))
+        return XmlNode(etree.parse(StringIO(xml_str), lenient_parser))
