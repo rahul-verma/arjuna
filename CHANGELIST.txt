@@ -56,6 +56,8 @@ To Do
 
 1.0.9
 -----
+- Minor changes in OAuth interface.
+- Doc comments added for OAuth classes.
 
 1.0.8
 -----

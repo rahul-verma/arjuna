@@ -200,6 +200,10 @@ HTTP Automation
 * :py:class:`HttpSession <arjuna.tpi.httpauto.session.HttpSession>`
 * :py:class:`HttpRequest <arjuna.tpi.httpauto.session.HttpRequest>`
 * :py:class:`HttpResponse <arjuna.tpi.httpauto.session.HttpResponse>`
+* OAuth Support
+    * :py:class:`OAuthSession <arjuna.tpi.httpauto.oauth.OAuthSession>`
+    * :py:class:`OAuthClientGrantSession <arjuna.tpi.httpauto.oauth.OAuthClientGrantSession>`
+    * :py:class:`OAuthImplicitGrantSession <arjuna.tpi.httpauto.oauth.OAuthImplicitGrantSession>`
 
 Objects In Arjuna Hooks
 =======================
