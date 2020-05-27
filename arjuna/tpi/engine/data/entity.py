@@ -28,7 +28,8 @@ def _init(self, **kwargs):
 
     if wrong_args:
         mandatory_args_missing = mandatory_args_missing and f" Missing mandatory args: {mandatory_args_missing}. Must: {self._MANDATORY}" or ""
-        default_arg_diff = default_arg_diff and f" Unexpected default args: {default_arg_diff}. Allowed: {self._DEFAULT}." or ""
+        allowed = set(self._REFDICT.keys())
+        default_arg_diff = default_arg_diff and f" Unexpected args: {default_arg_diff}. Allowed: {allowed}." or ""
         raise Exception(f"Wrong arguments.{mandatory_args_missing}{default_arg_diff}")
 
     vars(self).update(self._REFDICT)
@@ -48,19 +49,31 @@ def _as_dict(self, remove_none=False):
     else:
         return d
 
+def _str(self):
+    return "{klass}({attrs})".format(
+        klass = self.__class__.__name__,
+        attrs = ", ".join("{}={}".format(k,v) for k,v in self.as_dict().items())
+    )
+
 def data_entity(entity_name, *attrs, **attrs_with_defaults):
     for attr in attrs:
         if type(attr) is not str:
             raise Exception(f"Data Entity fields must be valid Python name strings. Got: {attr}")
+
+    final_attrs = []
+    # In any multiple names in single string are provided like a namedtuple, added as individual names.
+    for attr in attrs:
+        final_attrs.extend(attr.split())
     namespace = dict()
-    namespace['_MANDATORY'] = set(attrs)
+    namespace['_MANDATORY'] = set(final_attrs)
     namespace['_DEFAULT'] = set(attrs_with_defaults.keys())
     namespace['_REFDICT'] = dict()
-    namespace['_REFDICT'].update({f: None for f in attrs})
+    namespace['_REFDICT'].update({f: None for f in final_attrs})
     namespace['_REFDICT'].update(attrs_with_defaults)
     namespace['__init__'] = _init
     namespace['__getattr__'] = _attr
     namespace['as_dict'] = _as_dict
+    namespace['__str__'] = _str
     return type(entity_name, tuple(), namespace)
 
 

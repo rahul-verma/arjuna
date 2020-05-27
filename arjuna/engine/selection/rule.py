@@ -220,6 +220,13 @@ class AttrPatternRule(Rule):
     __PATTERN = re.compile(__p5_raw, re.IGNORECASE)
 
     def __init__(self, *, rule_str, target, condition, expression):
+        def remove_py_ext(name):
+            if not name.lower().endswith(".py"):
+                return name
+            else:
+                return name.replace(".py","")
+        if target == "module":
+            expression = remove_py_ext(expression)
         super().__init__(rule_str, "info", target, condition, expression)
 
     @classmethod

@@ -49,18 +49,10 @@ class TestGroup:
 
         rules = {'ir': [], 'er': []}
 
-        def remove_py_ext(name):
-            if not name.lower().endswith(".py"):
-                return name
-            else:
-                return name.replace(".py","")
-
         for picker in pickers_rulestr:
             names = include_exclude_dict.pop(picker)
             if names:
                 for name in names:
-                    if picker in {'im', 'em'}:
-                        remove_py_ext(name)
                     if picker.startswith('i'):
                         rules['ir'].append(pickers_rulestr[picker].format(name))
                     else:

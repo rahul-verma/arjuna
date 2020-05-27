@@ -60,7 +60,11 @@ To Do
     - HttpSession, HttpRequest, HttpResponse
 - Http Auto
     - Added cusstom headers support for get, delete and put. Post support already existed.
-
+- Data Entity
+    - Allows namedtuple style of multiple attr names in a single string.
+    - Clean string representation.
+- Module based test selection
+    - Allows name with .py in -im, -em, as well as -ir/-er if rule string target is module.
 
 
 1.0.6
