@@ -84,7 +84,7 @@ def check_default_containers(request):
     tags={'t1', 'T2'},
     bugs={'B1', 'b2'},
     envs={'EnV1', '     enV2     '},
-    rating=2,
+    rating=2
 )
 def check_updated_containers(request):
     assert hasattr(request, 'info') is True

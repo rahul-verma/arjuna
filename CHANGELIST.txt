@@ -51,8 +51,9 @@ To Do
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
 
-1.1.10
+1.0.10
 ------
+- User defined test attrs based selection fixed.
 
 1.0.9
 -----

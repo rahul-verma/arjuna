@@ -74,7 +74,10 @@ class _ArDict(metaclass=abc.ABCMeta):
         return self.__store.keys()
 
     def __getattr__(self, attr):
-        return self.__store[attr]
+        try:
+            return self.__store[attr]
+        except KeyError:
+            raise AttributeError(f"No attribute/key with name {attr}.")
 
     def __len__(self):
         return len(self.__store.keys())
