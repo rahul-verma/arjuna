@@ -56,7 +56,7 @@ To Do
 
 1.0.8
 -----
-
+- Fixed generated conftest.py to be lenient w.r.t. missing project structure for resource imports.
 
 1.0.7
 -----
