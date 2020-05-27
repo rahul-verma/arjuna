@@ -25,58 +25,96 @@ from requests.exceptions import ConnectionError
 import time
 
 class HttpResponse:
+    '''
+        Encapsulates HTTP response message.
+
+        Arguments:
+            session: `HttpSession` object which created corresponding `HttpRequest` for this response.
+            response: `requests` library's Response object wrapped by this class.
+    '''
 
     def __init__(self, session, response):
         self.__session = session
         self.__resp = response
 
     @property
-    def url(self):
+    def url(self) -> str:
+        ''' 
+            URL for which this response was generated.
+
+            In case of redirections, this is the last URL requested.
+        '''
         return self.__resp.url
 
     @property
-    def status_code(self):
+    def query_params(self) -> dict:
+        ''' 
+            Query parameters in URL for this response.
+
+            In case of redirections, these are the query parameters in last request.
+        '''
+        return parse_qs(self.__resp.url)
+
+    @property
+    def status_code(self) -> int:
+        ''' 
+            HTTP Status code for this response. For example, 200
+        '''
         return self.__resp.status_code
 
     @property
-    def status(self):
+    def status(self) -> str:
+        ''' 
+            HTTP Status Message for this response. For example, Not Found
+        '''
         return self.__resp.reason
 
     @property
-    def headers(self):
+    def headers(self) -> dict:
+        ''' 
+            HTTP Response Headers for this response.
+        '''
         return self.__resp.headers
 
     @property
-    def text(self):
+    def text(self) -> str:
+        ''' 
+            HTTP Response content as plain text.
+        '''
         return self.__resp.text
 
     @property
-    def json(self):
+    def json(self) -> 'JsonDictOrJsonList':
+        ''' 
+            HTTP Response content as Arjuna's `JsonDict` or `JsonList` object.
+        '''
         return Json.from_str(self.text)
 
     @property
-    def html(self):
+    def html(self) -> 'HtmlNode':
+        ''' 
+            HTTP Response content as Arjuna's `HtmlNode` object.
+        '''
         return Html.from_str(self.text)
 
     @property
-    def redir_history(self):
+    def redir_history(self) -> tuple:
+        '''
+            `HttpResponse` objects for all redirections that led to this response.
+        '''
         if self.__resp.history:
-            return [HttpResponse(self.__session, h) for h in self.__resp.history]
+            return (HttpResponse(self.__session, h) for h in self.__resp.history)
         else:
             return tuple()
 
     @property
-    def last_redir_response(self):
+    def last_redir_response(self) -> 'HttpResponse or None':
+        '''
+            Last `HttpResponse` object in case of redirections. None in case of no reidrections.
+        '''
         if not self.redir_history:
             return None
         return self.redir_history[-1]
-
-    @property
-    def last_request(self):
-        if self.redir_history:
-            return self.last_redir_response.next_request
-        else:
-            return self.request
 
     @property
     def next_request(self):
@@ -174,9 +212,9 @@ class HttpRequest:
 
             # The request for last response object was the last request and hence the last redirection.
             if response.redir_history:
-                last_req = response.last_request
-                if not last_req:
-                    last_req = response.request
+                # last_req = response.last_request
+                # if not last_req:
+                last_req = response.request
                 redir_network_packets.append(
                                     NetworkPacketInfo(
                                         label="Sub-Request: {} {}".format(last_req.method, last_req.url), 

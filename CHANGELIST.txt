@@ -55,6 +55,7 @@ To Do
 
 1.0.6
 -----
+- Removed last_request from HttpResonse. `.request` is the last request.
 
 1.0.5
 -----
