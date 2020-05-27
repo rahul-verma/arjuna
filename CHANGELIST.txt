@@ -1,7 +1,6 @@
 Following is the list of critical additions and updates for a given released version:
 
 Future Themes (In-Progress or Planned):
-    - Support for Web services testing.
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Call Walkthroughs and Identify New Named Exceptions to be created.
     - Auto screenshot name should consider session, stage and group name.
@@ -37,7 +36,6 @@ Future Themes (In-Progress or Planned):
     - Stage to stage dependency.
     - Group to group dependency.
     - The report directory should contain a confs directory. Whenever a new configuration is created. All its parameters should be dumped in a file for reference.
-    - Develop the concept of Data Entity beyond named tuple.
     - with cleanup.
     - Better Logging
         - Devise a way for the logger pre and post pytest runs.
@@ -52,7 +50,9 @@ To Do
     --> Support for callable in DataEntity for an attr
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
-    --> Accept module.py in rules.
+
+1.1.10
+------
 
 1.0.9
 -----
