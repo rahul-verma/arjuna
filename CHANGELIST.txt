@@ -53,9 +53,13 @@ To Do
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
 
+1.0.7
+-----
+
+
 1.0.6
 -----
-- Removed last_request from HttpResonse. `.request` is the last request.
+- Removed last_request from HttpResponse. `.request` is the last request.
 
 1.0.5
 -----
