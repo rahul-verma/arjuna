@@ -52,9 +52,15 @@ To Do
     --> Support for callable in DataEntity for an attr
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
+    --> Accept module.py in rules.
 
 1.0.7
 -----
+- Doc Comments added:
+    - HttpSession, HttpRequest, HttpResponse
+- Http Auto
+    - Added cusstom headers support for get, delete and put. Post support already existed.
+
 
 
 1.0.6

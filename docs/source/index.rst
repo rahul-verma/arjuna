@@ -195,6 +195,12 @@ Web GUI Automation
     * :py:class:`GuiMultiElementSource <arjuna.tpi.guiauto.source.multielement.GuiMultiElementSource>`
     * :py:class:`GuiSourceContent <arjuna.tpi.guiauto.source.content.GuiSourceContent>` - Encapsulates source content for all Guis and GuiWidgets.
 
+HTTP Automation
+===============
+* :py:class:`HttpSession <arjuna.tpi.httpauto.session.HttpSession>`
+* :py:class:`HttpRequest <arjuna.tpi.httpauto.session.HttpRequest>`
+* :py:class:`HttpResponse <arjuna.tpi.httpauto.session.HttpResponse>`
+
 Objects In Arjuna Hooks
 =======================
 
@@ -261,7 +267,7 @@ Arjuna Exceptions
     * :py:class:`GuiNamespaceLoadingError <arjuna.tpi.error.GuiNamespaceLoadingError>`
     * :py:class:`GuiNotLoadedError <arjuna.tpi.error.GuiNotLoadedError>`
     * :py:class:`GuiLabelNotPresentError <arjuna.tpi.error.GuiLabelNotPresentError>`
-* HTTP Layer Automation
+* HTTP Automation
     * :py:class:`HttpUnexpectedStatusCode <arjuna.tpi.error.HttpUnexpectedStatusCode>`
 
 

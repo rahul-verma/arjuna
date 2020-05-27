@@ -26,7 +26,7 @@ import time
 
 class HttpResponse:
     '''
-        Encapsulates HTTP response message.
+        Encapsulates HTTP response message. Contains redirected responses as redirection history, if applicable.
 
         Arguments:
             session: `HttpSession` object which created corresponding `HttpRequest` for this response.
@@ -100,7 +100,7 @@ class HttpResponse:
     @property
     def redir_history(self) -> tuple:
         '''
-            `HttpResponse` objects for all redirections that led to this response.
+            Ordered `HttpResponse` objects for all redirections that led to this response.
         '''
         if self.__resp.history:
             return (HttpResponse(self.__session, h) for h in self.__resp.history)
@@ -118,6 +118,9 @@ class HttpResponse:
 
     @property
     def next_request(self):
+        '''
+            Next `HttpRequest` object if this response redirects to another request. None in case this is the last response in chain.
+        '''
         next_req = self.__resp.next
         if next_req:
             return HttpRequest(self.__session, self.__resp.next)
@@ -126,6 +129,9 @@ class HttpResponse:
 
     @property
     def request(self):
+        '''
+            `HttpRequest` object corresponding to this response object.
+        '''
         return HttpRequest(self.__session, self.__resp.request)   
 
     __OUT = '''{}
@@ -150,6 +156,16 @@ class HttpResponse:
 
 
 class HttpRequest:
+    '''
+        Encapsulates HTTP response message.
+
+        Arguments:
+            session: `HttpSession` object which created this `HttpRequest`.
+            request: `requests` library's Request object wrapped by this class.
+
+        Keyword Arguments:
+            label: Label for this request. If available, it is used in Reports and logs.
+    '''
 
     def __init__(self, session, request, label=None):
         self.__session = session
@@ -160,14 +176,28 @@ class HttpRequest:
         self.__printable_label = len(self.__printable_label) > 119 and self.__printable_label[:125] + "<SNIP>" or self.__printable_label
 
     @property
-    def label(self):
+    def label(self) -> str:
+        '''
+            Label for this request object.
+        '''
         return self.__label
 
     @property
-    def query_params(self):
+    def query_params(self) -> dict:
+        '''
+            URL Query Parameters for this request object.
+        '''
         return parse_qs(self.url)
 
-    def send(self):
+    def send(self) -> HttpResponse:
+        '''
+            Send this request to server.
+
+            In case of ConnectionError, retries the connection 5 times at a gap of 1 second. Currently, not configurable.
+
+            Returns
+                `HttpResponse` object. In case of redirections, this is the last HttpResponse object, which encapsulates all redirections which can be retrieved from it.
+        '''
         from arjuna import Arjuna, log_info
         from arjuna.tpi.helper.arjtype import NetworkPacketInfo
         log_info(self.__printable_label)
@@ -232,15 +262,24 @@ class HttpRequest:
             return response
 
     @property
-    def url(self):
+    def url(self) -> str:
+        '''
+            URL correspnding to this request message.
+        '''
         return self.__request.url
 
     @property
-    def method(self):
+    def method(self) -> str:
+        '''
+            HTTP Method/Verb used by this request.
+        '''
         return self.__request.method
 
     @property
     def text(self):
+        '''
+            Content of this request message as plain text.
+        '''
         return self.__request.body
 
     __OUT ='''{}
@@ -302,6 +341,14 @@ class _HttpRequest(HttpRequest):
 
 
 class HttpSession:
+    '''
+        Encapsulates `requests` lib's Session object. Does automatic cookie management.
+
+        Keyword Arguments:
+            url: (Mandatory) Base URL for this HTTP session. If relative path is used as a route in sender methods like `.get`, then this URL is prefixed to their provided routes.
+            oauth_token: OAuth 2.0 Bearer token for this session.
+            content-type: Default content type for requests sent in this session. Overridable in individual sender methods. Default is `application/x-www-form-urlencoded`
+    '''
 
     def __init__(self, *, url, oauth_token=None, content_type='application/x-www-form-urlencoded', _auto_session=True):
         self.__url = url
@@ -313,7 +360,10 @@ class HttpSession:
             self.__session.headers['Authorization'] = f'Bearer {oauth_token}'
 
     @property
-    def cookies(self):
+    def cookies(self) -> dict:
+        '''
+            All current cookies in this session object.
+        '''
         return self.__session.cookies.get_dict()
 
     def _set_session(self, session):
@@ -322,6 +372,9 @@ class HttpSession:
 
     @property
     def url(self):
+        '''
+            Base URL for this session.
+        '''
         return self.__url
 
     @property
@@ -338,20 +391,72 @@ class HttpSession:
         else:
             return self.url + route
 
-    def get(self, route, label=None, xcodes=None, **query_params):
-        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, **query_params)
+    def get(self, route, label=None, xcodes=None, headers=None, **query_params) -> HttpResponse:
+        '''
+            Sends an HTTP GET request.
+
+            Arguments:
+                route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+
+            Keyword Arguments:
+                label: Label for this request. If available, it is used in reports and logs.
+                xcodes: Expected HTTP response code(s). If expected code is not matched, then HttpUnexpectedStatusCode exception is raised.
+                headers: Mapping of additional HTTP headers to be sent with this request.
+                **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        '''
+        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, headers=headers, **query_params)
         return request.send()
 
-    def delete(self, route, label=None, xcodes=None, **query_params):
-        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, **query_params)
+    def delete(self, route, label=None, xcodes=None, headers=None, **query_params) -> HttpResponse:
+        '''
+            Sends an HTTP DELETE request.
+
+            Arguments:
+                route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+
+            Keyword Arguments:
+                label: Label for this request. If available, it is used in reports and logs.
+                xcodes: Expected HTTP response code(s). If expected code is not matched, then HttpUnexpectedStatusCode exception is raised.
+                headers: Mapping of additional HTTP headers to be sent with this request.
+                **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        '''
+        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, headers=headers, **query_params)
         return request.send()
 
-    def post(self, route, *, label=None, content, content_type=None, xcodes=None, headers=None, **query_params):
+    def post(self, route, *, content, label=None, content_type=None, xcodes=None, headers=None, **query_params) -> HttpResponse:
+        '''
+        Sends an HTTP POST request.
+
+        Arguments:
+            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+
+        Keyword Arguments:
+            label: Label for this request. If available, it is used in reports and logs.
+            content: Content to be sent in this HTTP request.
+            content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
+            xcodes: Expected HTTP response code(s). If expected code is not matched, then HttpUnexpectedStatusCode exception is raised.
+            headers: Mapping of additional HTTP headers to be sent with this request.
+            **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        '''
         request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, headers=headers, **query_params)
         return request.send()
 
-    def put(self, route, *, label=None, content, content_type=None, xcodes=None, **query_params):
-        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, **query_params)
+    def put(self, route, *, content, label=None, content_type=None, xcodes=None, headers=None, **query_params) -> HttpResponse:
+        '''
+        Sends an HTTP PUT request.
+
+        Arguments:
+            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+
+        Keyword Arguments:
+            label: Label for this request. If available, it is used in reports and logs.
+            content: Content to be sent in this HTTP request.
+            content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
+            xcodes: Expected HTTP response code(s). If expected code is not matched, then HttpUnexpectedStatusCode exception is raised.
+            headers: Mapping of additional HTTP headers to be sent with this request.
+            **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        '''
+        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, headers=headers, **query_params)
         return request.send()
 
 
