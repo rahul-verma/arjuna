@@ -54,6 +54,10 @@ To Do
     --> Production quality Http Layer automation.
     --> Accept module.py in rules.
 
+1.0.8
+-----
+
+
 1.0.7
 -----
 - Doc Comments added:
