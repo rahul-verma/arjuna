@@ -24,4 +24,4 @@ class GuiPageSource(SingleGuiEntitySource):
     '''
 
     def __init__(self, raw_source):
-        super().__init__(raw_source, root_tag="html")
+        super().__init__(raw_source)

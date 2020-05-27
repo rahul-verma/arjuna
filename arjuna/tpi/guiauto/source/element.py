@@ -35,9 +35,8 @@ class GuiElementSource(SingleGuiEntitySource):
     '''
 
     def __init__(self, raw_source):
-        super().__init__(raw_source, root_tag="body")
+        super().__init__(raw_source, partial=True)
         self.__tag = None
-        self.__raw_attrs = None
         self.__attributes = None
 
     @property
@@ -49,15 +48,14 @@ class GuiElementSource(SingleGuiEntitySource):
 
     def _process_elem_node(self, elem_node):
         self.__tag = elem_node.tag
-        self.__raw_attrs = elem_node.keys()
-        self.__attributes = {k.lower():v for k,v in elem_node.items()}
+        self.__attributes = elem_node.attrs
 
     @property
     def attrs(self) -> dict:
         '''
             All attributes as a dictionary.
         '''
-        return self.__raw_attrs
+        return self.__attributes
 
     def is_attr_present(self, attr) -> bool:
         '''
@@ -66,7 +64,7 @@ class GuiElementSource(SingleGuiEntitySource):
             Args:
                 attr: Attribute name
         '''
-        return attr in self.__attributes.keys()
+        return attr in self.attrs
 
     def get_attr_value(self, attr, optional=False) -> str:
         '''
@@ -82,7 +80,7 @@ class GuiElementSource(SingleGuiEntitySource):
                 Exception if optional is False and attribute is not found.
         '''
         try:
-            return self.__attributes[attr.lower()]
+            return self.attrs[attr]
         except Exception as e:
             if optional:
                 return None
@@ -101,3 +99,9 @@ class GuiElementSource(SingleGuiEntitySource):
         '''
         return self.get_attr_value("value")
 
+    @property
+    def value(self) -> str:
+        '''
+            Content of value attribute.
+        '''
+        return self.get_value()

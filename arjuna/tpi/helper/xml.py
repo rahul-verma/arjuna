@@ -18,11 +18,14 @@
 '''
 Classes to assist in XML Parsing. 
 '''
-
+import os
+import re
 from lxml import etree, html
 from typing import List, Dict, Tuple
 
 from arjuna.tpi.tracker import track
+from arjuna.tpi.helper.arjtype import CIStringDict
+
 
 @track("trace")
 class NodeLocator:
@@ -63,8 +66,28 @@ class NodeLocator:
 
         self.__xpath = "{}{}{}".format(prefix, tag, attr_str)
 
-    def search_node(self, node):
-        return [XmlNode(n) for n in node.xpath(self.__xpath)]
+    def search_node(self, node: 'XmlNode') -> tuple:
+        '''
+        Search `XmlNode` objects that match this locator in the provided `XmlNode` object.
+        '''
+        return (XmlNode(n) for n in node.xpath(self.__xpath))
+
+
+def _process_child_html(in_str):
+    processed = "\n".join([l for l in in_str.splitlines() if l.strip()])
+    return "\t" + processed
+
+def _remove_empty_lines_from_string(in_str):
+    return '\n'.join(
+        [l.strip() for l in in_str.splitlines() if l.strip()]
+    )
+
+def _empty_or_none(in_str):
+    if type(in_str) is str and not in_str.strip():
+        return True
+    else:
+        return in_str is None
+
 
 @track("trace")
 class XmlNode:
@@ -77,6 +100,7 @@ class XmlNode:
 
     def __init__(self, node):
         self.__node = node
+        self.__attrs = CIStringDict(self.node.attrib)
 
     @property
     def node(self):
@@ -87,15 +111,37 @@ class XmlNode:
         '''
         return self.__node
 
+    def get_text(self, normalize: bool=False) -> str:
+        '''
+            Text of this node.
+
+            Keyword Arguments:
+                normalize: If True, empty lines are removed and individual lines are trimmed.
+        '''
+        if normalize:
+            return "\n".join(
+                            [
+                                _remove_empty_lines_from_string(c.text)
+                                for c in self.__node.iter() 
+                                if not _empty_or_none(c.text)
+                            ]
+                        ).strip()
+        else:
+            return self.node.text 
+
+    @property
+    def normalized_text(self) -> str:
+        '''
+            Text of this node with empty lines removed and individual lines trimmed.
+        '''
+        return self.get_text(normalize=True)
+
     @property
     def text(self) -> str:
         '''
-            Text of the node.
-
-            Note:
-                Multiple texts are joined together.
+            Unaltered text of the node.
         '''
-        return self.node.text
+        return self.get_text()
 
     @property
     def texts(self) -> list:
@@ -106,6 +152,71 @@ class XmlNode:
                 Multiple texts are stored separately.
         '''
         return self.node.xpath("//text()")
+
+    def get_inner_xml(self, normalize=False) -> str:
+        '''
+            Inner XML of this node.
+
+            Keyword Arguments:
+                normalize: If True, empty lines are removed between children nodes.
+        '''
+
+        def same(i):
+            return i
+
+        processor = normalize and _process_child_html or same
+        out = [
+                processor(etree.tostring(c, encoding='unicode'))
+                for c in list(self.__node.iterchildren())
+            ]
+        return "\n".join(out).strip()
+
+    @property
+    def inner_xml(self) -> str:
+        '''
+            Unaltered inner XML of this node
+        '''
+        return self.get_inner_xml()
+
+    @property
+    def normalized_inner_xml(self) -> str:
+        '''
+            Normalized inner XML of this node, with empty lines removed between children nodes.
+        '''
+        return self.get_inner_xml(normalize=True)
+
+    def remove_all_children(self) -> None:
+        '''
+            Remove all chilren nodes from this node.
+        '''
+        for child in list(self.__node): self.__node.remove(child)
+
+    def as_str(self, normalize=False) -> str:
+        '''
+            String representation of this node.
+
+            normalize: If True all new lines are removed and more than one conseuctive space is converted to a single space.
+        '''
+        true_source = etree.tostring(self.node, encoding='unicode')
+        if not normalize:
+            return true_source
+        else:
+            ret_source = ' '.join(true_source.splitlines())
+            return re.sub(r"\s+", " ", ret_source)
+
+    @property
+    def source(self) -> str:
+        '''
+            Unalereted string representation of this node.
+        '''
+        return self.as_str()
+
+    @property
+    def normalized_source(self) -> str:
+        '''
+            String representation of this node with all new lines removed and more than one conseuctive space converted to a single space.
+        '''
+        return self.as_str(normalize=True)
 
     @property
     def tag(self) -> str:
@@ -143,17 +254,17 @@ class XmlNode:
         return XmlNode(self.node.getnext())
 
     @property
-    def attrs(self) -> Dict[str,str]:
+    def attrs(self) -> CIStringDict:
         '''
             All Attributes of this node as a dictionary.
         '''
-        return dict(self.node.attrib)
+        return self.__attrs
 
     def attr(self, name) -> str:
         '''
             Value of an attribute of this node.
         '''
-        return self.node.get(name)
+        return self.__attrs[name]
 
     @property
     def value(self) -> str:
@@ -166,7 +277,7 @@ class XmlNode:
         '''
             Check if an attribute is present.
         '''
-        return name in self.node.attrib
+        return name in self.__attrs
 
     def __xpath(self, xpath):
         if not xpath.startswith("."):
@@ -194,16 +305,13 @@ class XmlNode:
         except IndexError as e:
             raise Exception(f"No node match at position >>{position}<< for xpath >>{xpath}<< in xml >>{self}<<")
 
-    def as_str(self) -> str:
-        '''
-            String representation of this node.
-        '''
-        return etree.tostring(self.node, encoding='unicode')
-
     def __str__(self):
         return self.as_str()
 
-    def clone(self):
+    def clone(self) -> 'XmlNode':
+        '''
+            Create a clone of this XmlNode object.
+        '''
         return Xml.from_str(str(self))
 
     def findall(self, *node_locators, stop_when_matched: bool=False) -> List['XmlNode']:
@@ -239,9 +347,6 @@ class XmlNode:
             Keyword Arguments:
                 stop_when_matched: If True, the call returns nodes found by the first `NodeLocator` that locates one or more nodes.
                 strict: If True, the call raises an exception if element is not found, else returns None
-
-            Note:
-                In case of no node match, returns None
         '''
         matches = self.findall(*node_locators, stop_when_matched=stop_when_matched)
         if matches:
@@ -269,11 +374,27 @@ class XmlNode:
 
 
 class Xml:
+    '''
+        Helper class to create XmlNode objects.
+    '''
 
     @classmethod
     def from_str(self, xml_str):
+        '''
+            Create an `XmlNode` from a string.
+        '''
         lenient_parser = etree.XMLParser(encoding='utf-8', recover=True)
-        # tree = etree.parse(StringIO(raw_source), parser)
-        # Done separately from above to retain all original content
-        # self.__node = XmlNode(etree.parse(StringIO(raw_source), soupparser))
         return XmlNode(etree.parse(StringIO(xml_str), lenient_parser))
+
+    @classmethod
+    def from_lxml_element(self, element, clone=False) -> XmlNode:
+        '''
+            Create an `XmlNode` from an `lxml` element.
+
+            Arguments:
+                element: `lxml` element
+        '''
+        if clone:
+            return XmlNode(element)
+        else:
+            return XmlNode(element).clone()

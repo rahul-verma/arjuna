@@ -52,6 +52,9 @@ To Do
 
 1.0.11
 ------
+- Added more parsing and building capabilities to Xml and Html objects.
+    - Cleaned up GuiSource code to use these capabilities.
+- Added missing doc comments for Xml and Html classes.
 
 
 1.0.10

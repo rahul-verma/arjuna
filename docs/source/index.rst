@@ -218,8 +218,12 @@ Helpers
     * :py:class:`JsonDict <arjuna.tpi.helper.json.JsonDict>`
     * :py:class:`JsonList <arjuna.tpi.helper.json.JsonList>`
 * :py:mod:`XML <arjuna.tpi.helper.xml>`
+    * :py:class:`Xml <arjuna.tpi.helper.xml.Xml>`
     * :py:class:`XmlNode <arjuna.tpi.helper.xml.XmlNode>`
     * :py:class:`NodeLocator <arjuna.tpi.helper.xml.NodeLocator>`
+* :py:mod:`HTML <arjuna.tpi.helper.html>`
+    * :py:class:`Html <arjuna.tpi.helper.html.Html>`
+    * :py:class:`HtmlNode <arjuna.tpi.helper.html.HtmlNode>`
 * :py:class:`Image <arjuna.tpi.helper.image.Image>`
 * :py:meth:`Arjuna Types <arjuna.tpi.helper.arjtype>`
     * :py:class:`CIStringDict <arjuna.tpi.helper.arjtype.CIStringDict>`

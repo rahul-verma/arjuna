@@ -18,6 +18,7 @@
 '''
 Classes to assist in HTML Parsing. 
 '''
+
 from io import StringIO
 from lxml.html import soupparser
 
@@ -34,16 +35,59 @@ class HtmlNode(XmlNode):
     def __init__(self, node):
         super().__init__(node)
 
-    def clone(self):
+    def clone(self) -> 'HtmlNode':
+        '''
+            Create a clone of this HtmlNode object.
+        '''
         return Html.from_str(str(self))
 
+    @property
+    def inner_html(self) -> str:
+        '''
+            Unaltered inner HTML of this node.
+        '''
+        return self.inner_xml
+
+    @property
+    def normalized_inner_html(self) -> str:
+        '''
+            Normalized inner XML of this node, with empty lines removed between children nodes.
+        '''
+        return self.normalized_inner_xml
+
 class Html:
+    '''
+        Helper class to create HtmlNode objects.
+    '''
 
     @classmethod
-    def from_str(self, html_str):
-        return HtmlNode(soupparser.parse(StringIO(html_str)))
+    def from_str(self, html_str, partial=False) -> HtmlNode:
+        '''
+            Create an `HtmlNode` from a string.
+
+            Keyword Arguments:
+                partial: If True, the provided string is considered as a part of HTML for parsing.
+        '''
+        if partial:
+            html_str = f"<html><body>{html_str}</body></html>"
+            lxml_tree = soupparser.parse(StringIO(html_str))
+            body = lxml_tree.getroot().find('body')
+            return HtmlNode(list(body)[0])
+        else:
+            lxml_tree = soupparser.parse(StringIO(html_str))
+            body = lxml_tree.getroot()
+            return HtmlNode(body)
 
     @classmethod
-    def from_lxml_node(self, node, clone=False):
-        return HtmlNode(node)
+    def from_lxml_element(self, element, clone=False) -> HtmlNode:
+        '''
+            Create an `HtmlNode` from an `lxml` element.
+
+            Arguments:
+                element: `lxml` element
+        '''
+        if clone:
+            return HtmlNode(element)
+        else:
+            return HtmlNode(element).clone()
 

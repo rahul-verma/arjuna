@@ -25,20 +25,6 @@ from arjuna.tpi.helper.html import Html, HtmlNode
 from arjuna.tpi.tracker import track
 from .content import GuiSourceContent
 
-
-def _process_child_html(in_str):
-    processed = os.linesep.join([l for l in in_str.splitlines() if l.strip()])
-    return "\t" + processed
-
-def _remove_empty_lines_from_string(in_str):
-    return ' '.join([l.strip() for l in in_str.splitlines() if l.strip()])
-
-def _empty_or_none(in_str):
-    if type(in_str) is str and not in_str.strip():
-        return True
-    else:
-        return in_str is None
-
 @track("debug")
 class GuiSource:
     '''
@@ -80,10 +66,10 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
             root_tag: 'html' for Gui and 'body' for GuiElement.
     '''
 
-    def __init__(self, raw_source, root_tag):
+    def __init__(self, raw_source, partial=False):
         super().__init__()
         self.__raw_source = raw_source
-        self.__root_tag = root_tag
+        self.__partial = partial
         self.__fpaths = []
         self.__node = None 
         self.__elem_node = None
@@ -104,41 +90,12 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
 
     def _load(self):
         raw_source = self.__raw_source
-        # parser = etree.HTMLParser(remove_comments=True)
-        if self.__root_tag == "body":
-            tree = Html.from_str(f"<html><body>{raw_source}</body></html>").node
-        else:
-            tree = Html.from_str(raw_source).node
-
-        if self.__root_tag == "body":
-            body = tree.getroot().find('body')
-            elem_node = list(body)[0]
-        else:
-            body = tree.getroot()
-            elem_node = body
-
-        self.__elem_node = Html.from_lxml_node(elem_node)
+        self.__elem_node = Html.from_str(raw_source, partial=self.__partial)
         self.__node = self.__elem_node.clone()
-
-        normalized_text_content = os.linesep.join(
-            [
-                _remove_empty_lines_from_string(c.text)
-                for c in elem_node.iter() 
-                if not _empty_or_none(c.text)
-            ]).strip()
-
-        normalized_inner_html = os.linesep.join([
-            _process_child_html(etree.tostring(c, encoding='unicode'))
-            for c in list(elem_node.iterchildren())
-            ])
-
-        self.__text_content = normalized_text_content
-        self.__inner_html = normalized_inner_html
+        self.__text_content = self.__elem_node.normalized_text
+        self.__inner_html = self.__elem_node.normalized_inner_html
         self.__full_source = raw_source
-        for child in list(elem_node): elem_node.remove(child)
-        self.__self_source = ' '.join(etree.tostring(elem_node, encoding=str).splitlines())
-        self.__self_source = re.sub(r"\s+", " ", self.__self_source)
-
+        self.__elem_node.remove_all_children()
+        self.__self_source = self.__elem_node.normalized_source
         self._content = GuiSourceContent(all=self.__full_source, root=self.__self_source, inner=self.__inner_html, text=self.__text_content)
-
-        self._process_elem_node(elem_node)
+        self._process_elem_node(self.__elem_node)
