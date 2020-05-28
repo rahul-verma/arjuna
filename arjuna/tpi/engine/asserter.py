@@ -160,3 +160,105 @@ class AsserterMixIn:
         '''
         return self.__asserter
 
+class IterableAsserterMixin:
+
+    '''
+        Base class for adding assertions to iterables.
+
+        Note:
+            Use it in combination with AsserterMixIn.
+            The child class should have `_container` as its attribute or property.
+    '''
+
+    def __init__(self):
+        self.__klass_name = self.__class__.__name__
+
+    def __len__(self):
+        return len(self._container)
+
+    def is_empty(self):
+        '''
+            Returns True if this iterable has no objects.
+        '''
+        return len(self) == 0
+
+    def assert_empty(self, *, msg):
+        '''
+            Assert that there should not be any object in this iterable.
+
+            Keyword Arguments:
+                msg: Purpose of this assertion.
+        '''
+        if not self.is_empty():
+            raise AssertionError("{} is not empty. Length: {}. {}".format(self.__klass_name, len(self), msg))
+
+    def assert_not_empty(self, *, msg):
+        '''
+            Assert that there should be atleast one object in this iterable.
+
+            Keyword Arguments:
+                msg: Purpose of this assertion.
+        '''
+        if self.is_empty():
+            raise AssertionError(f"{self.__klass_name} is empty. {msg}")
+
+    def assert_size(self, size, *, msg):
+        '''
+            Assert that the number of objects in this iterable should match provided size.
+
+            Arguments:
+                size: Expected number of objects.
+            
+            Keyword Arguments:
+                msg: Purpose of this assertion.
+        '''
+        length = len(self)
+        if length != size:
+            raise AssertionError(f"{self.__klass_name} is not of expected size. Expected: {size}. Actual: {length}. {msg}")
+
+    def assert_min_size(self, size, *, msg):
+        '''
+            Assert that the number of objects in this iterable >= provided size.
+
+            Arguments:
+                size: Expected minimum number of objects.
+            
+            Keyword Arguments:
+                msg: Purpose of this assertion.
+        '''
+        length = len(self)
+        if length < size:
+            raise AssertionError(f"{self.__klass_name} is not of minimum expected size. Expected minimum size is {size}. Actual: {length}. {msg}")
+
+    def assert_max_size(self, size, *, msg):
+        '''
+            Assert that the number of objects in this iterable <= provided size.
+
+            Arguments:
+                size: Expected maximum number of objects.
+            
+            Keyword Arguments:
+                msg: Purpose of this assertion.
+        '''
+        length = len(self)
+        if length > size:
+            raise AssertionError(f"{self.__klass_name} is not of maximum expected size. Expected maximum size is {size}. Actual: {length}. {msg}")
+
+    def assert_size_range(self, min_size, max_size, *, msg):
+        '''
+            Assert that the number of objects in this iterable should be in the provided size range.
+
+            Arguments:
+                min_size: Expected minimum number of objects.
+                max_size: Expected maximum number of objects.
+            
+            Keyword Arguments:
+                msg: Purpose of this assertion.
+        '''
+        length = len(self)
+        if length < min_size or length > max_size:
+            raise AssertionError(f"{self.__klass_name} is not in expected size range. Expected maximum size is {size}. Actual: {length}. {msg}")
+
+
+
+

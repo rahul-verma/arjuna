@@ -15,6 +15,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+'''
+Classes to assist in JSON Parsing. 
+'''
+
 import json
 import copy
 from arjuna.tpi.helper.arjtype import _ArDict
@@ -22,61 +26,45 @@ from jsonpath_rw import jsonpath, parse
 from typing import Any
 
 from arjuna.tpi.tracker import track
-from arjuna.tpi.engine.asserter import AsserterMixIn
+from arjuna.tpi.engine.asserter import AsserterMixIn, IterableAsserterMixin
 
 @track("trace")
-class JsonList(AsserterMixIn):
+class JsonList(AsserterMixIn, IterableAsserterMixin):
     '''
-        Arjuna's Json List object.
+        Encapsulates a list object in Json.
+
+        Arguments:
+            list: Python list
+
+        Note:
+            Supports indexing just like a Python list.
+
+            Also supports == operator. Right operand can be a Python list or a `JsonList` object.
     '''
 
-    def __init__(self, pylist: list=None):
-        super().__init__()
+    def __init__(self, pylist: list):
+        AsserterMixIn.__init__(self)
+        IterableAsserterMixin.__init__(self)
         self.__list = pylist
-
-    def __str__(self):
-        return str(self.__list)
+        if pylist is None:
+            self.__list = list()
+        self._container = self.__list
 
     def __getitem__(self, index):
         return Json.convert_to_json_element(self.__list[index], allow_any=True)
 
-    def is_empty(self):
-        return len(self.__list) == 0
-
-    def assert_empty(self):
-        if not self.is_empty():
-            raise AssertionError("JsonList is not empty. Length: {}".format(len(self.__list)))
-
-    def assert_not_empty(self):
-        if self.is_empty():
-            raise AssertionError(f"JsonList is empty.")
-
-    def assert_size(self, size):
-        length = len(self)
-        if length != size:
-            raise AssertionError(f"JsonList is not of expected size. Expected: {size}. Actual: {length}")
-
-    def assert_min_size(self, size):
-        length = len(self)
-        if length < size:
-            raise AssertionError(f"JsonList is not of minimum expected size. Expected minimum size is {size}. Actual: {length}")
-
-    def assert_max_size(self, size):
-        length = len(self)
-        if length > size:
-            raise AssertionError(f"JsonList is not of maximum expected size. Expected maximum size is {size}. Actual: {length}")
-
-    def assert_size_range(self, min_size, max_size):
-        length = len(self)
-        if length < min_size or length > max_size:
-            raise AssertionError(f"JsonList is not in expected size range. Expected maximum size is {size}. Actual: {length}")
-
     @property
     def size(self):
+        '''
+            Number of objects in this list.
+        '''
         return len(self)
 
     @property
     def raw_object(self):
+        '''
+            A copy of the Python list that this object wraps.
+        '''
         return copy.deepcopy(self.__list)
 
     def __str__(self):
@@ -101,11 +89,21 @@ class JsonList(AsserterMixIn):
             return self.raw_object == other
 
 class JsonSchema:
+    '''
+        Encapsulates Json Schema which can be used to validate Json objects.
+    '''
 
     def __init__(self, schema_dict):
         self.__dict = schema_dict
 
     def mark_optional(self, *keys):
+        '''
+            Mark the provided keys as optional in the root of Json Schema.
+
+            Arguments:
+                *keys: Arbitrary key names
+        '''
+
         for key in keys:
             if 'required' in self.__dict:
                 try:
@@ -114,6 +112,13 @@ class JsonSchema:
                     pass
 
     def allow_null(self, *keys):
+        '''
+            Allow None as a value type for the provided keys in the root of Json Schema.
+
+            Arguments:
+                *keys: Arbitrary key names
+        '''
+
         for key in keys:
             if key in self.__dict['properties']:
                 target_dict = self.__dict['properties'][key]
@@ -127,7 +132,10 @@ class JsonSchema:
                     if {"type": "null"} not in target_dict['anyOf']:
                         target_dict['anyOf'].append({"type": "null"})                   
 
-    def as_dict(self):
+    def as_dict(self) -> dict:
+        '''
+            Get this object as a Python dict.
+        '''
         return self.__dict
 
     def __str__(self):
@@ -135,26 +143,38 @@ class JsonSchema:
 
 
 @track("trace")
-class JsonDict(_ArDict, AsserterMixIn):
+class JsonDict(_ArDict, AsserterMixIn, IterableAsserterMixin):
     '''
-        Arjuna's Json Object.
-
-        Supports dictionary methods as well as **.** access for key.
+        Encapsualtes Dictionary object in Json.
 
         Arguments:
             pydict: Python dict.
+
+        Note:
+            Supports dictionary methods as well as **.** access for key.
+
+            Also supports == operator. Right operand can be a Python dict or a `JsonDict` object.
+
     '''
 
     def __init__(self, pydict: dict=None):
         _ArDict.__init__(self, pydict)
         AsserterMixIn.__init__(self)
+        IterableAsserterMixin.__init__(self)
+        self._container = self
 
     @property
     def size(self):
+        '''
+            Number of key-value pairs in this object.
+        '''
         return len(self)
 
     @property
     def raw_object(self):
+        '''
+            A copy of the Python dict that this object wraps.
+        '''
         return dict(super().items())
 
     def _process_key(self, key: str):
@@ -162,7 +182,7 @@ class JsonDict(_ArDict, AsserterMixIn):
 
     def findall(self, query) -> list:
         '''
-            Find all elements with JsonPath.
+            Find all elements with JsonPath query.
 
             Arguments:
                 query: JsonPath Query string
@@ -194,46 +214,39 @@ class JsonDict(_ArDict, AsserterMixIn):
     def __getitem__(self, query):
         return self.find(query)
 
-    def is_empty(self):
-        return len(self) == 0
+    def assert_contents(self, *, msg, **key_values):
+        '''
+            Assert that the values of provided keys match in the root of this dict.
 
-    def assert_empty(self):
-        if not self.is_empty():
-            raise AssertionError("JsonDict is not empty. Length: {}".format(len(self)))
+            Arguments:
+                msg: Purpose of this assertion.
+                **key_values: Arbitrary key-value pairs to match in the root of this dict.
 
-    def assert_not_empty(self):
-        if self.is_empty():
-            raise AssertionError(f"JsonDict is empty.")
-
-    def assert_size(self, size):
-        length = len(self)
-        if length != size:
-            raise AssertionError(f"JsonDict is not of expected size. Expected: {size}. Actual: {length}")
-
-    def assert_min_size(self, size):
-        length = len(self)
-        if length < size:
-            raise AssertionError(f"JsonDict is not of minimum expected size. Expected minimum size is {size}. Actual: {length}")
-
-    def assert_max_size(self, size):
-        length = len(self)
-        if length > size:
-            raise AssertionError(f"JsonDict is not of maximum expected size. Expected maximum size is {size}. Actual: {length}")
-
-    def assert_size_range(self, min_size, max_size):
-        length = len(self)
-        if length < min_size or length > max_size:
-            raise AssertionError(f"JsonDict is not in expected size range. Expected maximum size is {size}. Actual: {length}")
-
-    def assert_contents(self, *, msg, **kwargs):
-        for k,v in kwargs.items():
+        '''
+        for k,v in key_values.items():
             self.asserter.assert_equal(Json.convert_to_json_element(self[k], allow_any=True), v, msg=msg)
 
     def assert_keys_present(self, *keys, msg):
+        '''
+            Assert that the provided keys are present in the root of this dict.
+
+            Arguments:
+                msg: Purpose of this assertion.
+                **keys: Key names to assert
+        '''
         for key in keys:
             self.asserter.assert_true(key in self, "Expected key absent. " + msg)
 
     def matches_schema(self, schema):
+        '''
+            Check if this JsonDict matches the provided schema
+
+            Arguments:
+                schema: Python dict schema or `JsonSchema` object.
+
+            Returns:
+                A 2-element tuple (True/False, List of error strings in matching)
+        '''
         if isinstance(schema, JsonSchema):
             schema = schema.as_dict()
         from jsonschema import Draft7Validator
@@ -247,34 +260,65 @@ class JsonDict(_ArDict, AsserterMixIn):
             return True, None
 
     def assert_schema(self, schema, *, msg):
+        '''
+            Assert that this JsonDict matches the provided schema.
+
+            Arguments:
+                schema: Python dict schema or `JsonSchema` object.
+
+            Keyword Args:
+                msg: Purpose of this assertion.
+        '''
         matched, errors = self.matches_schema(schema)
         if not matched:
             raise AssertionError("JsonDict does not match schema. Found the following errors. {}".format(". ".join(errors)))
 
     def assert_match_schema(self, jobj, *, msg):
+        '''
+            Assert that this JsonDict matches the schema of provided object.
+
+            Arguments:
+                jobj: Json string or Python dict/JsonDict or Python list/JsonList
+
+            Keyword Args:
+                msg: Purpose of this assertion.
+        '''
         matched, errors = self.matches_schema(Json.extract_schema(jobj))
         if not matched:
             raise AssertionError("JsonDict does not match schema. Found the following errors. {}".format(". ".join(errors)))
 
-    def assert_match(self, expected_dict, *, msg, ignore=None):
-        if type(expected_dict) is dict:
-            expected_dict = JsonDict(expected_dict)
-        elif type(expected_dict) is JsonDict:
+    def assert_match(self, jobj, *, msg, ignore_keys=None):
+        '''
+            Assert that this JsonDict matches the provided object.
+
+            Arguments:
+                jobj: Python dict/JsonDict
+
+            Keyword Args:
+                msg: Purpose of this assertion.
+                ignore_keys: Keys to be ignored while matching
+        '''
+        if type(jobj) is dict:
+            jobj = JsonDict(jobj)
+        elif type(jobj) is JsonDict:
             pass
         else:
             raise Exception("JsonDict.assert_match expected_dict argument should be a dictionary or a JsonDict object.")
-        if ignore is None:
-            ignore = set()
-        elif type(ignore) in {set, dict, list, tuple}:
-            ignore = set([i.lower() for i in ignore])
+        if ignore_keys is None:
+            ignore_keys = set()
+        elif type(ignore_keys) in {set, dict, list, tuple}:
+            ignore_keys = set([i.lower() for i in ignore_keys])
         else:
-            ignore = {str(ignore).lower()}
+            ignore_keys = {str(ignore_keys).lower()}
         for k,v in self.items():
-            if k.lower() not in ignore:
-                self.asserter.assert_equal(Json.convert_to_json_element(v, allow_any=True), expected_dict[k], msg=msg)
+            if k.lower() not in ignore_keys:
+                self.asserter.assert_equal(Json.convert_to_json_element(v, allow_any=True), jobj[k], msg=msg)
 
     @property
-    def schema(self):
+    def schema(self) -> 'JsonSchema':
+        '''
+            Schema of this object.
+        '''
         return Json.extract_schema(self)
 
     def __eq__(self, other):
@@ -298,7 +342,13 @@ class Json:
     '''
 
     @classmethod
-    def convert_to_json_element(cls, jobj, allow_any=False):
+    def convert_to_json_element(cls, jobj, *, allow_any=False):
+        '''
+            Convert a Python object to a JsonDict/JsonList object if applicable.
+
+            Keyword Arguments:
+                allow_any: If True, if the object can not be coverted, same object is returned, else an Exception is raised.
+        '''
         if type(jobj) is dict:
             return JsonDict(jobj)
         elif type(jobj) is list:
@@ -310,27 +360,29 @@ class Json:
             raise Exception(f"Not able to convert provided string {jobj} into any appropriate Json element.")
 
     @classmethod
-    def from_str(cls, json_str: str) -> 'JsonDictOrList':
+    def from_str(cls, json_str: str, allow_any: bool=False) -> 'JsonDictOrList':
         '''
             Creates a Json object from a JSON string.
 
             Arguments:
                 file_path: Absolute path of the json file.
+                allow_any: If True, if the object can not be coverted to a JsonDict/JsonList, same object is returned, else an Exception is raised.
 
             Returns:
                 Arjuna's `JsonDict` or `JsonList` object
         '''
         jobj = json.loads(json_str)
-        return cls.convert_to_json_element(jobj)
+        return cls.convert_to_json_element(jobj, allow_any=allow_any)
 
 
     @classmethod
-    def from_file(cls, file_path: str) -> 'JsonDictOrList':
+    def from_file(cls, file_path: str, allow_any: bool=False) -> 'JsonDictOrList':
         '''
             Creates a Json object from file.
 
             Arguments:
                 file_path: Absolute path of the json file.
+                allow_any: If True, if the object can not be coverted to a JsonDict/JsonList, same object is returned, else an Exception is raised.
 
             Returns:
                 Arjuna's `JsonDict` or `JsonList` object
@@ -368,17 +420,36 @@ class Json:
         return JsonList(list(iter))
 
     @classmethod
-    def assert_list_type(cls, obj):
+    def assert_list_type(cls, obj, *, msg):
+        '''
+            Assert that the provided object is a Python list or `JsonList` object.
+
+            Keyword Args:
+                msg: Purpose of this assertion.
+        '''
         if not isinstance(obj, list) and not isinstance(obj, JsonList):
-            raise AssertionError("Object {} is not a list.".format(str(obj)))
+            raise AssertionError("Object {} is not a list. {}".format(str(obj), msg))
 
     @classmethod
-    def assert_dict_type(cls, obj):
+    def assert_dict_type(cls, obj, *, msg):
+        '''
+            Assert that the provided object is a Python dict or `JsonDict` object.
+
+            Keyword Args:
+                msg: Purpose of this assertion.
+        '''
         if not isinstance(obj, dict) and not isinstance(obj, JsonDict):
-            raise AssertionError("Object {} is not a dict.".format(str(obj)))
+            raise AssertionError("Object {} is not a dict. {}".format(str(obj), msg))
 
     @classmethod
-    def extract_schema(cls, jobj_or_str):
+    def extract_schema(cls, jobj_or_str) -> JsonSchema:
+        '''
+            Extracts schema from provide Json object or string to create a `JsonSchema` object.
+
+            Arguments:
+                jobj_or_str: JsonDict/JsonList or a Python str/list/dict.
+
+        '''
         if type(jobj_or_str) is str:
             jobj = cls.from_str(jobj_or_str.strip())
         else:

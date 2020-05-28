@@ -55,6 +55,8 @@ To Do
 - Added more parsing and building capabilities to Xml and Html objects.
     - Cleaned up GuiSource code to use these capabilities.
 - Added missing doc comments for Xml and Html classes.
+- Doc comments for all Json classes.
+- Added IterableAsserterMixin, separating commong assertions in JsonDict and JsonList classes.
 
 
 1.0.10

@@ -138,7 +138,10 @@ Test, Test Resources and Assertions
     * :py:func:`skip <arjuna.tpi.engine.test.skip>`
     * :py:func:`xfail <arjuna.tpi.engine.test.xfail>`
     * :py:func:`problem_in <arjuna.tpi.engine.relation.problem_in>`
-* :py:class:`Asserter <arjuna.tpi.engine.asserter.Asserter>`
+* Assertions
+    * :py:class:`Asserter <arjuna.tpi.engine.asserter.Asserter>`
+    * :py:class:`AsserterMixIn <arjuna.tpi.engine.asserter.AsserterMixIn>`
+    * :py:class:`IterableAsserterMixin <arjuna.tpi.engine.asserter.IterableAsserterMixin>`
 * :py:mod:`Test Resources <arjuna.tpi.engine.resource>`
     * :py:func:`@for_test <arjuna.tpi.engine.resource.for_test>`
     * :py:func:`@for_module <arjuna.tpi.engine.resource.for_module>`
@@ -217,6 +220,7 @@ Helpers
     * :py:class:`Json <arjuna.tpi.helper.json.Json>`
     * :py:class:`JsonDict <arjuna.tpi.helper.json.JsonDict>`
     * :py:class:`JsonList <arjuna.tpi.helper.json.JsonList>`
+    * :py:class:`JsonSchema <arjuna.tpi.helper.json.JsonSchema>`
 * :py:mod:`XML <arjuna.tpi.helper.xml>`
     * :py:class:`Xml <arjuna.tpi.helper.xml.Xml>`
     * :py:class:`XmlNode <arjuna.tpi.helper.xml.XmlNode>`
