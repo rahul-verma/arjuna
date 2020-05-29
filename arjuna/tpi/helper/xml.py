@@ -187,7 +187,7 @@ class XmlNode:
 
     def remove_all_children(self) -> None:
         '''
-            Remove all chilren nodes from this node.
+            Remove all children nodes from this node.
         '''
         for child in list(self.__node): self.__node.remove(child)
 
@@ -226,11 +226,11 @@ class XmlNode:
         return self.node.tag
 
     @property
-    def children(self) -> List['XmlNode']:
+    def children(self) -> Tuple['XmlNode']:
         '''
-            All Children of this node as a List of XmlNodes
+            All Children of this node as a Tuple of XmlNodes
         '''
-        return [XmlNode(c) for c in list(self.node)]
+        return (XmlNode(c) for c in list(self.node))
 
     @property
     def parent(self) -> 'XmlNode':
@@ -305,15 +305,6 @@ class XmlNode:
         except IndexError as e:
             raise Exception(f"No node match at position >>{position}<< for xpath >>{xpath}<< in xml >>{self}<<")
 
-    def __str__(self):
-        return self.as_str()
-
-    def clone(self) -> 'XmlNode':
-        '''
-            Create a clone of this XmlNode object.
-        '''
-        return Xml.from_str(str(self))
-
     def findall(self, *node_locators, stop_when_matched: bool=False) -> List['XmlNode']:
         '''
             Find all XmlNodes that match one of more `NodeLocator` s.
@@ -337,7 +328,7 @@ class XmlNode:
                     break
         return out
 
-    def find(self, *node_locators, stop_when_matched: bool=False, strict: bool=False) -> 'XmlNode':
+    def find(self, *node_locators, strict: bool=False) -> 'XmlNode':
         '''
             Find first `XmlNode` that match one of more `NodeLocator` s.
 
@@ -345,10 +336,9 @@ class XmlNode:
                 *node_locators: One or more `NodeLocator` s
 
             Keyword Arguments:
-                stop_when_matched: If True, the call returns nodes found by the first `NodeLocator` that locates one or more nodes.
                 strict: If True, the call raises an exception if element is not found, else returns None
         '''
-        matches = self.findall(*node_locators, stop_when_matched=stop_when_matched)
+        matches = self.findall(*node_locators, stop_when_matched=True)
         if matches:
             return matches[0]
         else:
@@ -362,8 +352,8 @@ class XmlNode:
             Returns texts of first XmlNodes for a pair of `NodeLocator` s
 
             Args:
-                key_locator: First `NodeLocator` (key)
-                value_locator: First `NodeLocator` (value)
+                key_locator: `NodeLocator` (for key)
+                value_locator: First `NodeLocator` (for value)
 
             Returns:
                 2-element tuple containing the text strings.
@@ -372,7 +362,15 @@ class XmlNode:
         value = self.find(value_locator).text
         return key,value
 
+    def __str__(self):
+        return self.as_str()
 
+    def clone(self) -> 'XmlNode':
+        '''
+            Create a clone of this XmlNode object.
+        '''
+        return Xml.from_str(str(self))
+        
 class Xml:
     '''
         Helper class to create XmlNode objects.
@@ -385,6 +383,22 @@ class Xml:
         '''
         lenient_parser = etree.XMLParser(encoding='utf-8', recover=True)
         return XmlNode(etree.parse(StringIO(xml_str), lenient_parser))
+
+
+    @classmethod
+    def from_file(cls, file_path: str) -> XmlNode:
+        '''
+            Creates an `XmlNode` from file.
+
+            Arguments:
+                file_path: Absolute path of the json file.
+
+            Returns:
+                Arjuna's `XmlNode` object
+        '''
+
+        with open(file_path, 'r') as f:
+            return cls.from_str(f.read())
 
     @classmethod
     def from_lxml_element(self, element, clone=False) -> XmlNode:

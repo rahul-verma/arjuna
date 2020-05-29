@@ -79,6 +79,24 @@ class Html:
             return HtmlNode(body)
 
     @classmethod
+    def from_file(cls, file_path: str, partial=False) -> HtmlNode:
+        '''
+            Creates an `HtmlNode` from file.
+
+            Arguments:
+                file_path: Absolute path of the json file.
+
+            Keyword Arguments:
+                partial: If True, the provided string is considered as a part of HTML for parsing.
+
+            Returns:
+                Arjuna's `HtmlNode` object
+        '''
+
+        with open(file_path, 'r') as f:
+            return cls.from_str(f.read(), partial=partial)
+
+    @classmethod
     def from_lxml_element(self, element, clone=False) -> HtmlNode:
         '''
             Create an `HtmlNode` from an `lxml` element.

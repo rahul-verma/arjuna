@@ -374,7 +374,6 @@ class Json:
         jobj = json.loads(json_str)
         return cls.from_object(jobj, allow_any=allow_any)
 
-
     @classmethod
     def from_file(cls, file_path: str, allow_any: bool=False) -> 'JsonDictOrList':
         '''
@@ -389,7 +388,7 @@ class Json:
         '''
 
         with open(file_path, 'r') as f:
-            return cls.from_str(f.read())
+            return cls.from_str(f.read(), allow_any=allow_any)
 
     @classmethod
     def from_map(cls, map: dict) -> JsonDict:
