@@ -57,6 +57,8 @@ To Do
 - Added missing doc comments for Xml and Html classes.
 - Doc comments for all Json classes.
 - Added IterableAsserterMixin, separating commong assertions in JsonDict and JsonList classes.
+- Added docs:
+    - HTTP Automation
 
 
 1.0.10

@@ -109,6 +109,23 @@ Web GUI Automation
    guiauto/index
 
 
+HTTP Automation
+===============
+
+.. toctree::
+   :maxdepth: 4
+
+   httpauto
+
+Parsing JSON, XML, HTML Files and Strings
+=========================================
+
+.. toctree::
+   :maxdepth: 4
+
+   textparsing
+
+
 
 ********************************************
 Tester Programming Interface (TPI) Reference
@@ -207,6 +224,7 @@ HTTP Automation
     * :py:class:`OAuthSession <arjuna.tpi.httpauto.oauth.OAuthSession>`
     * :py:class:`OAuthClientGrantSession <arjuna.tpi.httpauto.oauth.OAuthClientGrantSession>`
     * :py:class:`OAuthImplicitGrantSession <arjuna.tpi.httpauto.oauth.OAuthImplicitGrantSession>`
+
 
 Objects In Arjuna Hooks
 =======================

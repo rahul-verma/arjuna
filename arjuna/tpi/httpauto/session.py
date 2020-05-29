@@ -21,10 +21,11 @@ from requests import Request, Session
 from arjuna.tpi.error import HttpUnexpectedStatusCode
 from arjuna.tpi.helper.json import Json
 from arjuna.tpi.helper.html import Html
+from arjuna.tpi.engine.asserter import AsserterMixIn
 from requests.exceptions import ConnectionError
 import time
 
-class HttpResponse:
+class HttpResponse(AsserterMixIn):
     '''
         Encapsulates HTTP response message. Contains redirected responses as redirection history, if applicable.
 
@@ -61,6 +62,20 @@ class HttpResponse:
             HTTP Status code for this response. For example, 200
         '''
         return self.__resp.status_code
+
+    def assert_status_codes(self, codes, *, msg):
+        '''
+            Assert that the status code is as expected.
+
+            Arguments:
+                codes: str or iterator
+
+            Keyword Arguments:
+                msg: Purpose of this assertion
+        '''
+        if type(codes) is int:
+            codes = {codes}
+        self.asserter.assert_true(self.status_code in codes, f"HTTP status code {self.status_code} is not expected. Expected: {codes}. {msg}")
 
     @property
     def status(self) -> str:
@@ -165,15 +180,18 @@ class HttpRequest:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in Reports and logs.
+            xcodes: Expected Status Code(s)
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
     '''
 
-    def __init__(self, session, request, label=None):
+    def __init__(self, session, request, label=None, xcodes=None, strict=False):
         self.__session = session
         self.__request = request
         req_repr = "{} {}".format(self.method, self.url)
         self.__label = label and label or req_repr
         self.__printable_label = label and self.__label + "::" + req_repr or req_repr
         self.__printable_label = len(self.__printable_label) > 119 and self.__printable_label[:125] + "<SNIP>" or self.__printable_label
+        self.__strict = strict
 
     @property
     def label(self) -> str:
@@ -223,7 +241,7 @@ class HttpRequest:
             response += e.__class__.__name__ + ":" + str(e) + "\n"
             response += traceback.format_exc()
             Arjuna.get_report_metadata().add_network_packet_info(
-                NetworkPacketInfo(label=self.label, request=str(self), response=str(response))
+                NetworkPacketInfo(label=self.label, request=str(self), response=str(response), redir_network_packets=tuple())
             )
             raise e
         else:
@@ -258,7 +276,10 @@ class HttpRequest:
                 NetworkPacketInfo(label=self.label, request=str(self), response=str(response), redir_network_packets=tuple(redir_network_packets))
             )
             if self.__xcodes is not None and response.status_code not in self.__xcodes:
-                raise HttpUnexpectedStatusCode(self.__req, response)
+                if self.__strict:
+                    raise AssertionError(f"HTTP status code {self.status_code} is not expected. Expected: {self.__xcodes}")
+                else:
+                    raise HttpUnexpectedStatusCode(self.__req, response)
             return response
 
     @property
@@ -300,7 +321,7 @@ class HttpRequest:
 
 class _HttpRequest(HttpRequest):
 
-    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, headers=None, **query_params):
+    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, strict=False, headers=None, **query_params):
         self.__session = session
         self.__method = method.upper()
         self.__url = url
@@ -318,7 +339,7 @@ class _HttpRequest(HttpRequest):
 
         self.__prepare_content()
         self.__req = self.__build_request()
-        super().__init__(self.__session, self.__req, label=label)
+        super().__init__(self.__session, self.__req, label=label, xcodes=self.__xcodes, strict=strict)
 
     def __prepare_content(self):
         if self.__method in {'GET', 'DELETE'}: return
@@ -347,13 +368,15 @@ class HttpSession:
         Keyword Arguments:
             url: (Mandatory) Base URL for this HTTP session. If relative path is used as a route in sender methods like `.get`, then this URL is prefixed to their provided routes.
             oauth_token: OAuth 2.0 Bearer token for this session.
-            content-type: Default content type for requests sent in this session. Overridable in individual sender methods. Default is `application/x-www-form-urlencoded`
+            content_type: Default content type for requests sent in this session. Overridable in individual sender methods. Default is `application/x-www-form-urlencoded`
+            headers: HTTP headers to be added to request headers made by this session.
     '''
 
-    def __init__(self, *, url, oauth_token=None, content_type='application/x-www-form-urlencoded', _auto_session=True):
+    def __init__(self, *, url, oauth_token=None, content_type='application/x-www-form-urlencoded', headers=None, _auto_session=True):
         self.__url = url
         self.__content_type = content_type
         self.__session = None
+        self.__provided_headers = headers
         if _auto_session:
             self._set_session(Session())
         if oauth_token:
@@ -368,6 +391,8 @@ class HttpSession:
 
     def _set_session(self, session):
         self.__session = session
+        if self.__provided_headers is not None:
+            self.__session.headers.update(self.__session.headers)
         self.__session.headers['Content-Type'] = self.__content_type
 
     @property
@@ -391,7 +416,7 @@ class HttpSession:
         else:
             return self.url + route
 
-    def get(self, route, label=None, xcodes=None, headers=None, **query_params) -> HttpResponse:
+    def get(self, route, label=None, xcodes=None, strict=False, headers=None, **query_params) -> HttpResponse:
         '''
             Sends an HTTP GET request.
 
@@ -400,14 +425,15 @@ class HttpSession:
 
             Keyword Arguments:
                 label: Label for this request. If available, it is used in reports and logs.
-                xcodes: Expected HTTP response code(s). If expected code is not matched, then HttpUnexpectedStatusCode exception is raised.
+                xcodes: Expected HTTP response code(s).
+                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
                 headers: Mapping of additional HTTP headers to be sent with this request.
                 **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, headers=headers, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, strict=strict, headers=headers, **query_params)
         return request.send()
 
-    def delete(self, route, label=None, xcodes=None, headers=None, **query_params) -> HttpResponse:
+    def delete(self, route, label=None, xcodes=None, strict=False, headers=None, **query_params) -> HttpResponse:
         '''
             Sends an HTTP DELETE request.
 
@@ -416,14 +442,15 @@ class HttpSession:
 
             Keyword Arguments:
                 label: Label for this request. If available, it is used in reports and logs.
-                xcodes: Expected HTTP response code(s). If expected code is not matched, then HttpUnexpectedStatusCode exception is raised.
+                xcodes: Expected HTTP response code(s).
+                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
                 headers: Mapping of additional HTTP headers to be sent with this request.
                 **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, headers=headers, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, strict=strict, headers=headers, **query_params)
         return request.send()
 
-    def post(self, route, *, content, label=None, content_type=None, xcodes=None, headers=None, **query_params) -> HttpResponse:
+    def post(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, **query_params) -> HttpResponse:
         '''
         Sends an HTTP POST request.
 
@@ -434,14 +461,15 @@ class HttpSession:
             label: Label for this request. If available, it is used in reports and logs.
             content: Content to be sent in this HTTP request.
             content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
-            xcodes: Expected HTTP response code(s). If expected code is not matched, then HttpUnexpectedStatusCode exception is raised.
+            xcodes: Expected HTTP response code(s).
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
             **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, headers=headers, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, **query_params)
         return request.send()
 
-    def put(self, route, *, content, label=None, content_type=None, xcodes=None, headers=None, **query_params) -> HttpResponse:
+    def put(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, **query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -452,11 +480,12 @@ class HttpSession:
             label: Label for this request. If available, it is used in reports and logs.
             content: Content to be sent in this HTTP request.
             content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
-            xcodes: Expected HTTP response code(s). If expected code is not matched, then HttpUnexpectedStatusCode exception is raised.
+            xcodes: Expected HTTP response code(s).
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
             **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, headers=headers, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, **query_params)
         return request.send()
 
 
