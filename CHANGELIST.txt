@@ -59,6 +59,8 @@ To Do
 - Added IterableAsserterMixin, separating commong assertions in JsonDict and JsonList classes.
 - Added docs:
     - HTTP Automation
+    - Json Parsing
+
 
 
 1.0.10

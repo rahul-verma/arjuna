@@ -81,7 +81,11 @@ You can achieve this for all types of session requests. Following is a get examp
 
         svc.get("https://app.com/somepath", a=1, something="test")
 
-In the above example, the URL will be "https://another.com/somepath?a=1&something=test
+In the above example, the URL will be
+
+    .. code-block:: text
+
+        https://another.com/somepath?a=1&something=test
 
 
 Checking Expected HTTP Status Code(s)

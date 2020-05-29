@@ -51,7 +51,7 @@ class JsonList(AsserterMixIn, IterableAsserterMixin):
         self._container = self.__list
 
     def __getitem__(self, index):
-        return Json.convert_to_json_element(self.__list[index], allow_any=True)
+        return Json.from_object(self.__list[index], allow_any=True)
 
     @property
     def size(self):
@@ -192,7 +192,7 @@ class JsonDict(_ArDict, AsserterMixIn, IterableAsserterMixin):
         '''
 
         jsonpath_expr = parse(query)
-        return [Json.convert_to_json_element(match.value, allow_any=True) for match in jsonpath_expr.find(self.store)]
+        return [Json.from_object(match.value, allow_any=True) for match in jsonpath_expr.find(self.store)]
 
 
     def find(self, query) -> Any:
@@ -224,7 +224,7 @@ class JsonDict(_ArDict, AsserterMixIn, IterableAsserterMixin):
 
         '''
         for k,v in key_values.items():
-            self.asserter.assert_equal(Json.convert_to_json_element(self[k], allow_any=True), v, msg=msg)
+            self.asserter.assert_equal(Json.from_object(self[k], allow_any=True), v, msg=msg)
 
     def assert_keys_present(self, *keys, msg):
         '''
@@ -278,7 +278,7 @@ class JsonDict(_ArDict, AsserterMixIn, IterableAsserterMixin):
             Assert that this JsonDict matches the schema of provided object.
 
             Arguments:
-                jobj: Json string or Python dict/JsonDict or Python list/JsonList
+                jobj: Json string or Python dict/JsonDict
 
             Keyword Args:
                 msg: Purpose of this assertion.
@@ -312,7 +312,7 @@ class JsonDict(_ArDict, AsserterMixIn, IterableAsserterMixin):
             ignore_keys = {str(ignore_keys).lower()}
         for k,v in self.items():
             if k.lower() not in ignore_keys:
-                self.asserter.assert_equal(Json.convert_to_json_element(v, allow_any=True), jobj[k], msg=msg)
+                self.asserter.assert_equal(Json.from_object(v, allow_any=True), jobj[k], msg=msg)
 
     @property
     def schema(self) -> 'JsonSchema':
@@ -342,7 +342,7 @@ class Json:
     '''
 
     @classmethod
-    def convert_to_json_element(cls, jobj, *, allow_any=False):
+    def from_object(cls, jobj, *, allow_any=False):
         '''
             Convert a Python object to a JsonDict/JsonList object if applicable.
 
@@ -372,7 +372,7 @@ class Json:
                 Arjuna's `JsonDict` or `JsonList` object
         '''
         jobj = json.loads(json_str)
-        return cls.convert_to_json_element(jobj, allow_any=allow_any)
+        return cls.from_object(jobj, allow_any=allow_any)
 
 
     @classmethod
