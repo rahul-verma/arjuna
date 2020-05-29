@@ -44,11 +44,14 @@ Future Themes (In-Progress or Planned):
 1.1.0 Goals
 -----------
 To Do
-    --> Doc comments for new TPI classes and functions.
     --> Separation of HTML/JS from code to Arjuna res directory.
     --> Support for callable in DataEntity for an attr
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
+
+1.0.12
+------
+
 
 1.0.11
 ------
