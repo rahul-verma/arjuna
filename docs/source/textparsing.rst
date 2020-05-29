@@ -35,8 +35,8 @@ Json Class Assertions
 
 Json class provides the following assertions:
 
-    * **assert_list_type**
-    * **assert_dict_type**
+    * **assert_list_type**: Validate that the object is a JsonList or Python list
+    * **assert_dict_type**: Validate that the object is a JsonDict or Python dict
 
 Automatic Json Schema Extraction
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
