@@ -42,3 +42,64 @@ def check_default_data_entity(request):
     print(person)
     person = Person(name="Rahul", age=99, country="Germany")
     print(person)
+
+@test
+def check_entity_with_simple_generators(request):
+    for i in range(3):
+        Person1 = data_entity("Person1", "age", fname=Random.first_name)
+        print(Person1(age=99))
+        Person2 = data_entity("Person2", "age", fname=generator(Random.first_name))
+        print(Person2(age=99))
+
+@test
+def check_entity_with_simple_gen_args(request):
+    for i in range(3):
+        Person1 = data_entity("Person", "name", debt=generator(Random.fixed_length_number, length=i+1))
+        print(Person1(name='Mac'))
+
+@test
+def check_entity_with_composite_gen(request):
+    for i in range(3):
+        Person1 = data_entity("Person", "name", 
+                info=composite(
+                    Random.last_name,
+                    generator(Random.fixed_length_number, length=i+1),
+                    103
+                )
+        )
+        print(Person1(name='Mac'))
+
+def simple_concat(in_iter):
+    return " ".join(str(i) for i in in_iter)
+
+@test
+def check_entity_with_composite_gen_func_composer(request):
+    for i in range(3):
+        Person1 = data_entity("Person", "name", 
+                info=composite(
+                    Random.last_name,
+                    generator(Random.fixed_length_number, length=i+1),
+                    103,
+                    composer=simple_concat
+                )
+        )
+        print(Person1(name='Mac'))
+
+def concat(in_iter, delimiter):
+    out = in_iter[0] + delimiter
+    value = sum([int(i) for i in in_iter[1:]])
+    out += str(value)
+    return out
+
+@test
+def check_entity_with_composite_gen_arg_composer(request):
+    for i in range(3):
+        Person1 = data_entity("Person", "name", 
+                info=composite(
+                    Random.last_name,
+                    generator(Random.fixed_length_number, length=i+1),
+                    103,
+                    composer=composer(concat, "::")
+                )
+        )
+        print(Person1(name='Mac'))

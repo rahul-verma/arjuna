@@ -178,7 +178,6 @@ The Magic Functions
 
 Data Driven Testing
 ===================
-* :py:class:`Random <arjuna.tpi.engine.data.generator.Random>`
 * :py:mod:`Data Source Markup <arjuna.tpi.engine.data.markup>`
     * :py:class:`record <arjuna.tpi.engine.data.markup.record>`
     * :py:class:`records <arjuna.tpi.engine.data.markup.records>`
@@ -187,6 +186,14 @@ Data Driven Testing
     * :py:class:`data_file <arjuna.tpi.engine.data.markup.data_file>`
     * :py:class:`many_data_sources <arjuna.tpi.engine.data.markup.many_data_sources>`
 * :py:class:`DataRecord <arjuna.tpi.engine.data.record.DataRecord>`
+
+Data Generation and Data Entities
+=================================
+* :py:class:`Random <arjuna.tpi.engine.data.generator.Random>`
+* :py:class:`generator <arjuna.tpi.engine.data.generator.generator>`
+* :py:class:`composite <arjuna.tpi.engine.data.generator.composite>`
+* :py:class:`composer <arjuna.tpi.engine.data.generator.composer>`
+* :py:class:`data_entity <arjuna.tpi.engine.data.entity.data_entity>`
 
 
 Web GUI Automation

@@ -9,8 +9,8 @@ JSON, XML and HTML parsing is a very common need in test automation.
 Arjuna provides its own objects to easy handle these content types in its helper classes in Tester Programming Interface. The corresponding objects are also returned by its other objects.
 
 
-JSON (Javascript Object Notation)
----------------------------------
+**JSON** (Javascript Object Notation)
+-------------------------------------
 
 Json is a popular format used in RESTful services and configurations.
 
@@ -142,8 +142,8 @@ You can currently make two modifications to the **JsonSchema** once created:
     * **mark_optional**: Mark arbitrary keys as optional in the root of the schema.
     * **allow_null**: Allow `null` value for the arbitrary keys.
 
-XML
----
+**XML**
+-------
 
 XML is another popular format used for data exchange.
 
@@ -264,8 +264,8 @@ You can stop `findall` logic at first matched locator by setting `stop_when_matc
         
         node.findall(locator1, locator2, locator3, stop_when_matched=True)
 
-HTML
-----
+**HTML**
+--------
 
 In Web UI automation and HTTP Automation, extracting data from and matching data are common needs.
 

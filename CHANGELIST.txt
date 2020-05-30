@@ -45,13 +45,18 @@ Future Themes (In-Progress or Planned):
 -----------
 To Do
     --> Separation of HTML/JS from code to Arjuna res directory.
-    --> Support for callable in DataEntity for an attr
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
 
 1.0.12
 ------
-
+Data Generation and Data Entities
+    - Added generator, composite and composer classes.
+    - data_entity supports setting an attr to a function, generator or composite. These are called at the time of object initilization with facility for dynamic data generation every time.
+    - Multiple generated data objects can be clubbed into with composite and composer constructs.
+Doc Comments
+    - data_entity
+    - generator, composite and composer classes
 
 1.0.11
 ------

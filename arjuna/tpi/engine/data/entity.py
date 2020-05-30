@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from .generator import _gen
 
 def _init(self, **kwargs):
     wrong_args = False
@@ -32,9 +33,20 @@ def _init(self, **kwargs):
         default_arg_diff = default_arg_diff and f" Unexpected args: {default_arg_diff}. Allowed: {allowed}." or ""
         raise Exception(f"Wrong arguments.{mandatory_args_missing}{default_arg_diff}")
 
-    vars(self).update(self._REFDICT)
-    vars(self).update(kwargs)
+    def update_gen_data(key, value):
+        if hasattr(value, '__call__'):
+            value = value()
+        elif isinstance(value, _gen):
+            value = value.generate()
 
+        vars(self)[key] = value
+
+    final_dict = dict()
+    final_dict.update(self._REFDICT)
+    final_dict.update(kwargs)    
+
+    for k,v in final_dict.items():
+        update_gen_data(k,v)
 
 def _attr(self, name):
     if name in self._REFDICT:
@@ -56,6 +68,23 @@ def _str(self):
     )
 
 def data_entity(entity_name, *attrs, **attrs_with_defaults):
+    '''
+        Create a new Data Entity class with provided name and attributes.
+
+        Arguments:
+            entity_name: The class name for this new Data Entity type.
+            *attrs: Arbitrary names for Python attributes to be associated with objects of this entity.
+
+        Keyword Arguments:
+            **attrs_with_defaults: Arbitrary attributes to be associated with objects of this entity, with the defaults that are provided.
+
+        Note:
+            The defaults that are provided can be any of the following:
+                * Any Python Object
+                * A Python callable
+                * Arjuna `generator`
+                * Arjuna `composite`
+    '''
     for attr in attrs:
         if type(attr) is not str:
             raise Exception(f"Data Entity fields must be valid Python name strings. Got: {attr}")
@@ -75,6 +104,3 @@ def data_entity(entity_name, *attrs, **attrs_with_defaults):
     namespace['as_dict'] = _as_dict
     namespace['__str__'] = _str
     return type(entity_name, tuple(), namespace)
-
-
-DataEntity = data_entity
