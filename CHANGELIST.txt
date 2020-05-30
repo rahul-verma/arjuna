@@ -51,12 +51,15 @@ To Do
 1.0.12
 ------
 Data Generation and Data Entities
-    - Added generator, composite and composer classes.
+    - Added generator, processor, composite and composer classes.
     - data_entity supports setting an attr to a function, generator or composite. These are called at the time of object initilization with facility for dynamic data generation every time.
+    - A single generated data object is processed using the processor provided in generator.
     - Multiple generated data objects can be clubbed into with composite and composer constructs.
 Doc Comments
     - data_entity
     - generator, composite and composer classes
+Docs added:
+    - Random class and Data Entity.
 
 1.0.11
 ------

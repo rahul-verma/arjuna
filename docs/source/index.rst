@@ -91,6 +91,14 @@ Test Sessions, Stages, Groups
    sessions_stages_groups
 
 
+Data Generation and Data Entities
+=================================
+
+.. toctree::
+   :maxdepth: 6
+
+   datagen_entity
+
 Contextual Data References and Localization
 ===========================================
 
