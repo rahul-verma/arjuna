@@ -86,7 +86,7 @@ class composer:
             Arguments:
                 data_iter: Data iterable
         '''
-        return self.__callble(data_iterator, *self.__args, **self.__kwargs)  
+        return self.__callble(data_iter, *self.__args, **self.__kwargs)  
 
 def _same(in_data):
     return in_data

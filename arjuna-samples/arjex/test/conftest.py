@@ -3,28 +3,11 @@ import pytest
 from arjuna.engine.pytest import PytestHooks
 
 
-def get_import_lenient_set(context):
-    return set(["arjex.lib", "arjex.lib.resource", f"arjex.lib.resource." + context])
-
 try:
-    from arjex.lib.resource.group import *
+    from arjex.lib.resource import *
 except ModuleNotFoundError as e:
-    print("Found")
-    if e.name not in get_import_lenient_set("group"):
+    if e.name not in {"arjex.lib", "arjex.lib.resource"}:
         raise Exception(e.name)
-
-try:
-    from arjex.lib.resource.module import *
-except ModuleNotFoundError as e:
-    if e.name not in get_import_lenient_set("module"):
-        raise Exception(e.name)
-
-try:
-    from arjex.lib.resource.test import *
-except ModuleNotFoundError as e:
-    if e.name not in get_import_lenient_set("test"):
-        raise Exception(e.name)
-
 
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item, call):

@@ -34,10 +34,7 @@ Please also note that some of these directories are mandatory as a part of Arjun
     - **json**: Json based localization directories and files go here.
 
 - **lib**: Sub-package for your framework code.
-    - **fixture**: Sub-package for global test fixtures.
-        - **group.py**: Contains global `@for_group` fixtures.
-        - **module.py**: Contains global `@for_module` fixtures.
-        - **test.py**: Contains global `@for_test` fixtures.
+    - **resource.py**: Contains **@for_X** resources to be used across project. Note that for more complex projects you can change it to a package instead of a module and add all importable names to **__all__** in **__init__.py** file in the package.
 
 - **guiauto**: Contains GUI automation related files.
 

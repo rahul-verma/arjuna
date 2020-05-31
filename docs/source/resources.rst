@@ -49,21 +49,28 @@ Following is an example using **@for_test**:
             db_handle.quit()
 
 
-Module Specific and Cross-Module Shared Resources
-=================================================
+Module Specific Resources 
+=========================
 
-You can place the resource functions in a test module python file. In such a case, these can be used only by the tests present in that module.
+You can place the resource functions in a test module python file. 
+
+In such a case, these can be used only by the tests present in that module.
+
+Cross-Module Shared Resources
+=============================
 
 You might want to make resource functions available across your project.
 
-To enable this, you can place them as follows as per Arjuna conventions:
+To enable this, Arjuna tries to automatically import such resource creators with the following import (assume `testproj` as the project name):
 
-* If you have used `create-project` command of Arjuna CLI, you will observe that the command creates some modules in **<Project Root Directory>/lib/resource** package.
-* Resource creators present in these modules are automatically imported and made available to your test project.
-    * **group.py**: Group level resources.
-    * **module.py**: Module level resources.
-    * **test.py**: Test level resources.
+    .. code-block:: python
 
+        from testproj.lib.resource import *
+
+To make use of this feature, you can choose to do one of the following depending on your requirements:
+
+* If you have used `create-project` command of Arjuna CLI, you will observe that the command creates **<Project Root Directory>/lib/resource.py** module. You can add all resource creators here. They will be automnatically made available for your tests across the test modules in the project.
+* For more complex project needs, where the resource creators grow in number, you can convert **resource.py** to a **resource package**. An example of this can be found in the `Arjex project on GitHub <https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex>`_.
 
 Data-Driven Test Resources
 ==========================
