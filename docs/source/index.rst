@@ -246,11 +246,12 @@ Objects In Arjuna Hooks
 
 * :py:class:`Configurator <arjuna.tpi.hook.config.Configurator>`
 
-Helpers
+Parsers
 =======
-* :py:meth:`HardCoded.sleep <arjuna.tpi.helper.audit.HardCoded.sleep>`
+
 * :py:mod:`JSON <arjuna.tpi.helper.json>`
     * :py:class:`Json <arjuna.tpi.helper.json.Json>`
+    * :py:class:`JsonElement <arjuna.tpi.helper.json.JsonElement>`
     * :py:class:`JsonDict <arjuna.tpi.helper.json.JsonDict>`
     * :py:class:`JsonList <arjuna.tpi.helper.json.JsonList>`
     * :py:class:`JsonSchema <arjuna.tpi.helper.json.JsonSchema>`
@@ -261,6 +262,10 @@ Helpers
 * :py:mod:`HTML <arjuna.tpi.helper.html>`
     * :py:class:`Html <arjuna.tpi.helper.html.Html>`
     * :py:class:`HtmlNode <arjuna.tpi.helper.html.HtmlNode>`
+
+Helpers
+=======
+* :py:meth:`HardCoded.sleep <arjuna.tpi.helper.audit.HardCoded.sleep>`
 * :py:class:`Image <arjuna.tpi.helper.image.Image>`
 * :py:meth:`Arjuna Types <arjuna.tpi.helper.arjtype>`
     * :py:class:`CIStringDict <arjuna.tpi.helper.arjtype.CIStringDict>`

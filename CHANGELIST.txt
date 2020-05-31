@@ -64,6 +64,8 @@ Cross-project resource importing
     - Existing way unncessarily complex for beginners and too simplistic for advanced users.
     - By default, all resource creators present in `lib/resource.py` are imported.
     - For advanced usage, change it from module to package and add importable names to __all__ in __init__.py. Check arjex project for example.
+JsonList
+    - Supports JsonPath based find and findall.
 
 1.0.11
 ------

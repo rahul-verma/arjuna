@@ -21,6 +21,7 @@ Classes to assist in JSON Parsing.
 
 import json
 import copy
+import abc
 from arjuna.tpi.helper.arjtype import _ArDict
 from jsonpath_rw import jsonpath, parse
 from typing import Any
@@ -29,7 +30,49 @@ from arjuna.tpi.tracker import track
 from arjuna.tpi.engine.asserter import AsserterMixIn, IterableAsserterMixin
 
 @track("trace")
-class JsonList(AsserterMixIn, IterableAsserterMixin):
+class JsonElement(AsserterMixIn, IterableAsserterMixin, metaclass=abc.ABCMeta):
+    '''
+        Abstract Json Element. Base class for JsonList and JsonDict.
+    '''
+
+    def __init__(self, container):
+        AsserterMixIn.__init__(self)
+        IterableAsserterMixin.__init__(self)
+        self._container = container
+
+    def findall(self, query) -> list:
+        '''
+            Find all elements with JsonPath query.
+
+            Arguments:
+                query: JsonPath Query string
+
+            Returns:
+                python list of found Json elements.
+        '''
+
+        jsonpath_expr = parse(query)
+        return [Json.from_object(match.value, allow_any=True) for match in jsonpath_expr.find(self._container)]
+
+
+    def find(self, query) -> Any:
+        '''
+            Find first element with JsonPath.
+
+            Arguments:
+                query: JsonPath Query string
+
+            Returns:
+                A Json element.
+        '''
+        results = self.findall(query)
+        if not results:
+            raise Exception(f"A Json element could not be found with {query}")
+        return results[0]
+
+
+@track("trace")
+class JsonList(JsonElement):
     '''
         Encapsulates a list object in Json.
 
@@ -43,12 +86,10 @@ class JsonList(AsserterMixIn, IterableAsserterMixin):
     '''
 
     def __init__(self, pylist: list):
-        AsserterMixIn.__init__(self)
-        IterableAsserterMixin.__init__(self)
         self.__list = pylist
         if pylist is None:
             self.__list = list()
-        self._container = self.__list
+        super().__init__(self.__list)
 
     def __getitem__(self, index):
         return Json.from_object(self.__list[index], allow_any=True)
@@ -143,7 +184,7 @@ class JsonSchema:
 
 
 @track("trace")
-class JsonDict(_ArDict, AsserterMixIn, IterableAsserterMixin):
+class JsonDict(_ArDict, JsonElement):
     '''
         Encapsualtes Dictionary object in Json.
 
@@ -159,9 +200,7 @@ class JsonDict(_ArDict, AsserterMixIn, IterableAsserterMixin):
 
     def __init__(self, pydict: dict=None):
         _ArDict.__init__(self, pydict)
-        AsserterMixIn.__init__(self)
-        IterableAsserterMixin.__init__(self)
-        self._container = self
+        JsonElement.__init__(self, self.store)
 
     @property
     def size(self):
@@ -179,37 +218,6 @@ class JsonDict(_ArDict, AsserterMixIn, IterableAsserterMixin):
 
     def _process_key(self, key: str):
         return key
-
-    def findall(self, query) -> list:
-        '''
-            Find all elements with JsonPath query.
-
-            Arguments:
-                query: JsonPath Query string
-
-            Returns:
-                python list of found Json elements.
-        '''
-
-        jsonpath_expr = parse(query)
-        return [Json.from_object(match.value, allow_any=True) for match in jsonpath_expr.find(self.store)]
-
-
-    def find(self, query) -> Any:
-        '''
-            Find first element with JsonPath.
-
-            Arguments:
-                query: JsonPath Query string
-
-            Returns:
-                A Json element.
-        '''
-        results = self.findall(query)
-        if not results:
-            raise Exception(f"A Json element could not be found with {query}")
-        return results[0]
-
 
     def __getitem__(self, query):
         return self.find(query)
