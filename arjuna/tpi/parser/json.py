@@ -25,6 +25,7 @@ import abc
 from arjuna.tpi.helper.arjtype import _ArDict
 from jsonpath_rw import jsonpath
 from jsonpath_rw_ext import parse
+from json.decoder import JSONDecodeError
 from genson import SchemaBuilder
 from typing import Any
 
@@ -330,7 +331,7 @@ class JsonSchemaBuilder:
                 jobj_or_str: JsonDict/JsonList or a Python str/list/dict.
         '''
         if type(jobj_or_str) is str:
-            jobj = Json.from_str(jobj_or_str.strip())
+            jobj = Json.from_str(jobj_or_str.strip(), allow_any=True)
         else:
             jobj = jobj_or_str
 
@@ -488,8 +489,15 @@ class Json:
             Returns:
                 Arjuna's `JsonDict` or `JsonList` object
         '''
-        jobj = json.loads(json_str)
-        return cls.from_object(jobj, allow_any=allow_any)
+        try:
+            jobj = json.loads(json_str)
+        except JSONDecodeError:
+            if not allow_any:
+                raise
+            return cls.from_object(json_str, allow_any=allow_any)
+        else:
+            return cls.from_object(jobj, allow_any=allow_any)
+
 
     @classmethod
     def from_file(cls, file_path: str, allow_any: bool=False) -> 'JsonDictOrList':
