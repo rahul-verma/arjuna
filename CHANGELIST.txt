@@ -57,22 +57,27 @@ Data Generation and Data Entities
     - Multiple generated data objects can be clubbed into with composite and composer constructs.
 Doc Comments
     - data_entity
-    - generator, composite and composer classes
+    - generator, processor, composite and composer classes
 Docs added:
     - Random class and Data Entity.
+    - Usage of generator, processor, composite and composer classes
 Cross-project resource importing
     - Existing way unncessarily complex for beginners and too simplistic for advanced users.
     - By default, all resource creators present in `lib/resource.py` are imported.
     - For advanced usage, change it from module to package and add importable names to __all__ in __init__.py. Check arjex project for example.
 Json
     - Added JsonSchemaBuilder class
+    - Added more methods to JsonSchema class
     - JsonList supports JsonPath based find and findall.
 Re-packaging
     - json, html and xml modules moved to `tpi.parser`.
     - data modules moved to `tpi.data`
-New Tests/Examples
-    - JsonPath (Core and Ext)
+Arjex - New Examples/Tests
     - Data Entity
+    - JsonPath-RW
+    - JsonPath-RW-EXT
+    - Genson-Schema-Creation
+    - Genson-Schema-Extraction
     
 
 1.0.11
