@@ -8,7 +8,7 @@ def __test_cases(test_cases):
         print('parse("%s").find(%s) =?= %s' % (string, data, target))
         result = Json.from_object(data, allow_any=True).findall(string)
         print(result)
-        assert [r for r in result] == target
+        assert result == target
 
 @test
 def check_fields_value(request):

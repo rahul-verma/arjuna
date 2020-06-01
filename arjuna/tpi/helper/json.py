@@ -23,7 +23,8 @@ import json
 import copy
 import abc
 from arjuna.tpi.helper.arjtype import _ArDict
-from jsonpath_ng import jsonpath, parse
+from jsonpath_rw import jsonpath
+from jsonpath_rw_ext import parse
 from typing import Any
 
 from arjuna.tpi.tracker import track
