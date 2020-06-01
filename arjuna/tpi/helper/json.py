@@ -350,7 +350,20 @@ class Json:
     '''
 
     @classmethod
+    def reset_auto_id_key(cls):
+        '''
+            Set Auto ID Key for `jsonpath` lib to None. Has global impact.
+        '''
+        jsonpath.auto_id_field = None
+
+    @classmethod
     def set_auto_id_key(cls, key="id"):
+        '''
+            Set Auto ID Key for `jsonpath` lib to provided key.
+
+            Arguments:
+                key: Name of key. Default is **id**
+        '''
         jsonpath.auto_id_field = key
 
     @classmethod

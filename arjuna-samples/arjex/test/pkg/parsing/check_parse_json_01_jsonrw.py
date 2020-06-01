@@ -1,8 +1,4 @@
 from arjuna import *
-from jsonpath_rw import jsonpath
-from jsonpath_rw.parser import parse
-from jsonpath_rw.jsonpath import *
-from jsonpath_rw.lexer import JsonPathLexerError
 
 # The test are based on tests for jsonpath-rw in https://github.com/kennknowles/python-jsonpath-rw
 
@@ -16,7 +12,7 @@ def __test_cases(test_cases):
 
 @test
 def check_fields_value(request):
-    jsonpath.auto_id_field = None
+    Json.reset_auto_id_key()
     __test_cases([ ('foo', {'foo': 'baz'}, ['baz']),
                         ('foo,baz', {'foo': 1, 'baz': 2}, [1, 2]),
                         ('@foo', {'@foo': 1}, [1]),
@@ -28,7 +24,7 @@ def check_fields_value(request):
 
 @test
 def check_root_value(request):
-    jsonpath.auto_id_field = None
+    Json.reset_auto_id_key()
     __test_cases([ 
         ('$', {'foo': 'baz'}, [{'foo':'baz'}]),
         ('foo.$', {'foo': 'baz'}, [{'foo':'baz'}]),
@@ -38,7 +34,7 @@ def check_root_value(request):
 
 @test
 def check_this_value(request):
-    jsonpath.auto_id_field = None
+    Json.reset_auto_id_key()
     __test_cases([ 
         ('`this`', {'foo': 'baz'}, [{'foo':'baz'}]),
         ('foo.`this`', {'foo': 'baz'}, ['baz']),
@@ -59,7 +55,7 @@ def check_index_value(request):
 @test
 def check_slice_value(request):
     __test_cases([('[*]', [1, 2, 3], [1, 2, 3]),
-                        ('[*]', xrange(1, 4), [1, 2, 3]),
+                        ('[*]', range(1, 4), [1, 2, 3]),
                         ('[1:]', [1, 2, 3, 4], [2, 3, 4]),
                         ('[:2]', [1, 2, 3, 4], [1, 2])])
 
@@ -96,7 +92,7 @@ def check_parent_value(request):
 
 @test
 def check_fields_auto_id(request):
-    jsonpath.auto_id_field = "id"
+    Json.set_auto_id_key()
     __test_cases([ ('foo.id', {'foo': 'baz'}, ['foo']),
                         ('foo.id', {'foo': {'id': 'baz'}}, ['baz']),
                         ('foo,baz.id', {'foo': 1, 'baz': 2}, ['foo', 'baz']),
@@ -128,21 +124,21 @@ def check_this_auto_id(request):
 
 @test
 def check_index_auto_id(request):
-    jsonpath.auto_id_field = "id"
+    Json.set_auto_id_key()
     __test_cases([('[0].id', [42], ['[0]']),
                         ('[2].id', [34, 65, 29, 59], ['[2]'])])
 
 
 @test
 def check_slice_auto_id(request):
-    jsonpath.auto_id_field = "id"
+    Json.set_auto_id_key()
     __test_cases([ ('[*].id', [1, 2, 3], ['[0]', '[1]', '[2]']),
                         ('[1:].id', [1, 2, 3, 4], ['[1]', '[2]', '[3]']) ])
 
 
 @test
 def check_child_auto_id(request):
-    jsonpath.auto_id_field = "id"
+    Json.set_auto_id_key()
     __test_cases([('foo.baz.id', {'foo': {'baz': 3}}, ['foo.baz']),
                         ('foo.baz.id', {'foo': {'baz': [3]}}, ['foo.baz']),
                         ('foo.baz.id', {'foo': {'id': 'bizzle', 'baz': 3}}, ['bizzle.baz']),
@@ -152,7 +148,7 @@ def check_child_auto_id(request):
 
 @test
 def check_descendants_auto_id(request):
-    jsonpath.auto_id_field = "id"
+    Json.set_auto_id_key()
     __test_cases([('foo..baz.id', 
                         {'foo': {
                             'baz': 1, 
