@@ -17,7 +17,7 @@ Json is a popular format used in RESTful services and configurations.
 Creating JSON Objects
 ^^^^^^^^^^^^^^^^^^^^^
 
-Arjuna's :py:class:`Json <arjuna.tpi.helper.json.Json>` class provides with various helper methods to easily create a Json object from various sources:
+Arjuna's :py:class:`Json <arjuna.tpi.parser.json.Json>` class provides with various helper methods to easily create a Json object from various sources:
 
     * **from_file**: Load Json from a file.
     * **from_str**: Load Json from a string.
@@ -26,8 +26,8 @@ Arjuna's :py:class:`Json <arjuna.tpi.helper.json.Json>` class provides with vari
     * **from_object**: Load Json from a Python built-in data type object.
 
 The loaded object is returned as one of the following:
-    * :py:class:`JsonDict <arjuna.tpi.helper.json.JsonDict>`
-    * :py:class:`JsonList <arjuna.tpi.helper.json.JsonList>`
+    * :py:class:`JsonDict <arjuna.tpi.parser.json.JsonDict>`
+    * :py:class:`JsonList <arjuna.tpi.parser.json.JsonList>`
     * If `allow_any` is set to True, then **from_file**, **from_str** and **from_object** calls return the same object as passed, if it is not a mapping or iterable.
 
 Json Class Assertions
@@ -52,7 +52,7 @@ This schema can be used for schema validation for another Json object.
 **JsonDict** Object
 ^^^^^^^^^^^^^^^^^^^
 
-:py:class:`JsonDict <arjuna.tpi.helper.json.JsonDict>` encapsulates the Json dictionary and provides higher level methods for interaction.
+:py:class:`JsonDict <arjuna.tpi.parser.json.JsonDict>` encapsulates the Json dictionary and provides higher level methods for interaction.
 
 It has the following properties:
     * **raw_object**: The underlying dictionary
@@ -71,7 +71,7 @@ You can find Json elements in JsonDict by using a key name or by creating a more
 Matching Schema of a **JsonDict** object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-You can use a custom Json schema dictionary or a :py:class:`JsonSchema <arjuna.tpi.helper.json.JsonSchema>` object to validate schema of a **JsonDict** object.
+You can use a custom Json schema dictionary or a :py:class:`JsonSchema <arjuna.tpi.parser.json.JsonSchema>` object to validate schema of a **JsonDict** object.
 
     .. code-block:: python
 
@@ -94,7 +94,7 @@ Asserting **JsonDict** Object
 **JsonList** Object
 ^^^^^^^^^^^^^^^^^^^
 
-:py:class:`JsonList <arjuna.tpi.helper.json.JsonList>` encapsulates the Json list and provides higher level methods for interaction.
+:py:class:`JsonList <arjuna.tpi.parser.json.JsonList>` encapsulates the Json list and provides higher level methods for interaction.
 
 It has the following properties:
     * **raw_object**: The underlying dictionary
@@ -150,9 +150,9 @@ XML is another popular format used for data exchange.
 Creating an **XmlNode** Object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A loaded full Xml or a part of it is represented using an :py:class:`XmlNode <arjuna.tpi.helper.xml.XmlNode>` object.
+A loaded full Xml or a part of it is represented using an :py:class:`XmlNode <arjuna.tpi.parser.xml.XmlNode>` object.
 
-Arjuna's :py:class:`Xml <arjuna.tpi.helper.xml.Xml>` class provides various helper methods to easily create an XmlNode object from various sources:
+Arjuna's :py:class:`Xml <arjuna.tpi.parser.xml.Xml>` class provides various helper methods to easily create an XmlNode object from various sources:
 
     * **from_file**: Load XmlNode from a file.
     * **from_str**: Load XmlNode from a string.
@@ -273,9 +273,9 @@ In Web UI automation and HTTP Automation, extracting data from and matching data
 Creating an **HtmlNode** Object
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-A loaded full HTML or a part of it is represented using an :py:class:`HtmlNode <arjuna.tpi.helper.html.HtmlNode>` object.
+A loaded full HTML or a part of it is represented using an :py:class:`HtmlNode <arjuna.tpi.parser.html.HtmlNode>` object.
 
-Arjuna's :py:class:`Html <arjuna.tpi.helper.xml.Html>` class provides various helper methods to easily create an HtmlNode object from various sources:
+Arjuna's :py:class:`Html <arjuna.tpi.parser.xml.Html>` class provides various helper methods to easily create an HtmlNode object from various sources:
 
     * **from_file**: Load HtmlNode from a file.
     * **from_str**: Load HtmlNode from a string.

@@ -249,19 +249,19 @@ Objects In Arjuna Hooks
 Parsers
 =======
 
-* :py:mod:`JSON <arjuna.tpi.helper.json>`
-    * :py:class:`Json <arjuna.tpi.helper.json.Json>`
-    * :py:class:`JsonElement <arjuna.tpi.helper.json.JsonElement>`
-    * :py:class:`JsonDict <arjuna.tpi.helper.json.JsonDict>`
-    * :py:class:`JsonList <arjuna.tpi.helper.json.JsonList>`
-    * :py:class:`JsonSchema <arjuna.tpi.helper.json.JsonSchema>`
-* :py:mod:`XML <arjuna.tpi.helper.xml>`
-    * :py:class:`Xml <arjuna.tpi.helper.xml.Xml>`
-    * :py:class:`XmlNode <arjuna.tpi.helper.xml.XmlNode>`
-    * :py:class:`NodeLocator <arjuna.tpi.helper.xml.NodeLocator>`
-* :py:mod:`HTML <arjuna.tpi.helper.html>`
-    * :py:class:`Html <arjuna.tpi.helper.html.Html>`
-    * :py:class:`HtmlNode <arjuna.tpi.helper.html.HtmlNode>`
+* :py:mod:`JSON <arjuna.tpi.parser.json>`
+    * :py:class:`Json <arjuna.tpi.parser.json.Json>`
+    * :py:class:`JsonElement <arjuna.tpi.parser.json.JsonElement>`
+    * :py:class:`JsonDict <arjuna.tpi.parser.json.JsonDict>`
+    * :py:class:`JsonList <arjuna.tpi.parser.json.JsonList>`
+    * :py:class:`JsonSchema <arjuna.tpi.parser.json.JsonSchema>`
+* :py:mod:`XML <arjuna.tpi.parser.xml>`
+    * :py:class:`Xml <arjuna.tpi.parser.xml.Xml>`
+    * :py:class:`XmlNode <arjuna.tpi.parser.xml.XmlNode>`
+    * :py:class:`NodeLocator <arjuna.tpi.parser.xml.NodeLocator>`
+* :py:mod:`HTML <arjuna.tpi.parser.html>`
+    * :py:class:`Html <arjuna.tpi.parser.html.Html>`
+    * :py:class:`HtmlNode <arjuna.tpi.parser.html.HtmlNode>`
 
 Helpers
 =======

@@ -66,6 +66,9 @@ Cross-project resource importing
     - For advanced usage, change it from module to package and add importable names to __all__ in __init__.py. Check arjex project for example.
 JsonList
     - Supports JsonPath based find and findall.
+Re-packaging
+    - json, html and xml modules moved to `tpi.parser`.
+    - data modules moved to `tpi.data`
 
 1.0.11
 ------

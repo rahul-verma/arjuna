@@ -58,7 +58,7 @@ class processor:
                 data: Data object
         '''
         if type(self.__callble) is str:
-            getattr(data, self.__callble)(*self.__args, **self.__kwargs)
+            return getattr(data, self.__callble)(*self.__args, **self.__kwargs)
         else:
             return self.__callble(data_iterator, *self.__args, **self.__kwargs)  
 
@@ -122,7 +122,7 @@ class generator(_gen):
         elif isinstance(self.__processor, processor):
             return self.__processor.process(data)
         else:
-            self.__processor(data)
+            return self.__processor(data)
 
 class composite(_gen):
     '''

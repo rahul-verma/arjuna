@@ -21,7 +21,7 @@ import copy
 import abc
 from collections import namedtuple
 from lxml import etree
-from arjuna.tpi.helper.html import Html, HtmlNode
+from arjuna.tpi.parser.html import Html, HtmlNode
 from arjuna.tpi.tracker import track
 from .content import GuiSourceContent
 
@@ -77,7 +77,7 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
     @property
     def node(self) -> HtmlNode:
         '''
-            Source code as an Arjuna :class:`~arjuna.tpi.helper.xml.XmlNode` for advanced inquiry and parsing.
+            Source code as an Arjuna :class:`~arjuna.tpi.parser.xml.XmlNode` for advanced inquiry and parsing.
         '''
         return self.__node
 

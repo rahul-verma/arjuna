@@ -19,8 +19,8 @@ import json
 from urllib.parse import urlparse, urlencode, parse_qs
 from requests import Request, Session
 from arjuna.tpi.error import HttpUnexpectedStatusCode
-from arjuna.tpi.helper.json import Json
-from arjuna.tpi.helper.html import Html
+from arjuna.tpi.parser.json import Json
+from arjuna.tpi.parser.html import Html
 from arjuna.tpi.engine.asserter import AsserterMixIn
 from requests.exceptions import ConnectionError
 import time

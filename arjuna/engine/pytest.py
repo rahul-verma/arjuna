@@ -236,7 +236,7 @@ class PytestHooks:
         '''
 
         from arjuna import Arjuna, ArjunaOption, log_debug, C
-        from arjuna.tpi.engine.data.markup import record
+        from arjuna.tpi.engine.data_markup import record
         log_debug("{} {}".format(metafunc.function, metafunc.fixturenames))
 
         group_params = Arjuna.get_group_params()

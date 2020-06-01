@@ -6,11 +6,13 @@ Subpackages
 
 .. toctree::
 
+   arjuna.tpi.data
    arjuna.tpi.engine
    arjuna.tpi.guiauto
    arjuna.tpi.helper
    arjuna.tpi.hook
    arjuna.tpi.httpauto
+   arjuna.tpi.parser
    arjuna.tpi.protocol
 
 Submodules

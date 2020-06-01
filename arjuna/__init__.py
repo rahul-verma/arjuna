@@ -72,16 +72,28 @@ class _ArjunFacade:
         cli.execute()
 
 from arjuna.tpi.engine import Arjuna
+
+from arjuna.tpi.error import *
+from arjuna.tpi.constant import *
+from arjuna.core.constant import *
+from arjuna.tpi.tracker import track
+from arjuna.tpi.helper.arjtype import NVPair, NVPairs, Screen, Attr, Point, Offset, NetworkPacketInfo
+from arjuna.tpi.helper.audit import HardCoded
+from arjuna.tpi.helper.arjtype import ProcessedKeyDict
+
+from arjuna.tpi.parser.json import Json
+from arjuna.tpi.parser.xml import Xml, NodeLocator
+from arjuna.tpi.parser.html import Html
+
 from arjuna.tpi.engine.test import *
 from arjuna.tpi.engine.relation import *
 from arjuna.tpi.engine.resource import *
-from arjuna.tpi.tracker import track
-from arjuna.tpi.engine.data.markup import *
-from arjuna.tpi.engine.data.record import *
-from arjuna.tpi.engine.data.generator import Random, Locales, generator, composite, composer
-from arjuna.tpi.engine.data.entity import data_entity
+from arjuna.tpi.engine.data_markup import *
 
-from arjuna.tpi.helper.arjtype import NVPair, NVPairs, Screen, Attr, Point, Offset, NetworkPacketInfo
+from arjuna.tpi.data.record import *
+from arjuna.tpi.data.generator import Random, Locales, generator, composite, composer
+from arjuna.tpi.data.entity import data_entity
+
 from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
 from arjuna.tpi.guiauto.model.app import GuiApp
 from arjuna.tpi.guiauto.model.page import GuiPage
@@ -90,14 +102,6 @@ from arjuna.tpi.guiauto.model.dialog import GuiDialog
 
 from arjuna.tpi.httpauto.session import HttpSession
 from arjuna.tpi.httpauto.oauth import OAuthImplicitGrantSession
-
-from arjuna.tpi.error import *
-from arjuna.tpi.constant import *
-from arjuna.core.constant import *
-from arjuna.tpi.helper.audit import HardCoded
-from arjuna.tpi.helper.xml import NodeLocator
-from arjuna.tpi.helper.arjtype import ProcessedKeyDict
-from arjuna.tpi.helper.json import Json
 
 from arjuna.tpi.hook.config import Configurator
 

@@ -15,9 +15,3 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.tpi.data.record import DataRecord
-
-class DummyDataRecord(DataRecord):
-    
-    def __init__(self):
-        super().__init__(process=False)

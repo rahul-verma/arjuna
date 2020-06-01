@@ -26,7 +26,7 @@ from arjuna.core.thread import decorators
 from arjuna.tpi.error import *
 from arjuna.core.error import *
 from arjuna.core.types import constants
-from arjuna.tpi.engine.data.record import *
+from arjuna.tpi.data.record import *
 from arjuna.engine.data.record import *
 # from arjuna.core.utils import sys_utils
 

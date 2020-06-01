@@ -20,7 +20,7 @@ import os
 from arjuna.tpi.tracker import track
 from .base import GuiSource
 from .content import GuiSourceContent
-from arjuna.tpi.helper.xml import XmlNode
+from arjuna.tpi.parser.xml import XmlNode
 
 @track("debug")
 class GuiMultiElementSource(GuiSource):

@@ -1,4 +1,4 @@
-arjuna.tpi.helper package
+arjuna.tpi.parser package
 =========================
 
 Submodules
@@ -6,14 +6,14 @@ Submodules
 
 .. toctree::
 
-   arjuna.tpi.helper.arjtype
-   arjuna.tpi.helper.audit
-   arjuna.tpi.helper.image
+   arjuna.tpi.parser.html
+   arjuna.tpi.parser.json
+   arjuna.tpi.parser.xml
 
 Module contents
 ---------------
 
-.. automodule:: arjuna.tpi.helper
+.. automodule:: arjuna.tpi.parser
    :members:
    :undoc-members:
    :show-inheritance:

@@ -22,7 +22,7 @@ from .reference import ContextualDataReference
 from arjuna.tpi.helper.arjtype import CIStringDict
 
 from arjuna.core.utils import file_utils
-from arjuna.tpi.helper.json import Json, JsonDict
+from arjuna.tpi.parser.json import Json, JsonDict
 
 class L10NRef:
 

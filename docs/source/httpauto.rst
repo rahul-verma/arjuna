@@ -177,8 +177,8 @@ Handling Response Content
 
 You can get formatted as well as un-formatted response content using following properties:
     * `text`: Unformatted content as plain text
-    * `html`: Response as an :py:class:`HtmlNode <arjuna.tpi.helper.html.HtmlNode>` object.
-    * `json`: Response as a :py:class:`JsonDict <arjuna.tpi.helper.json.JsonDict>` or :py:class:`JsonList <arjuna.tpi.helper.json.JsonList>` object.
+    * `html`: Response as an :py:class:`HtmlNode <arjuna.tpi.parser.html.HtmlNode>` object.
+    * `json`: Response as a :py:class:`JsonDict <arjuna.tpi.parser.json.JsonDict>` or :py:class:`JsonList <arjuna.tpi.parser.json.JsonList>` object.
 
 Check **Parsing JSON, XML, HTML Files and Strings** section in documentation to know more about how to parse and extract data from these content type.
 
