@@ -23,7 +23,7 @@ import json
 import copy
 import abc
 from arjuna.tpi.helper.arjtype import _ArDict
-from jsonpath_rw import jsonpath, parse
+from jsonpath_ng import jsonpath, parse
 from typing import Any
 
 from arjuna.tpi.tracker import track
@@ -337,7 +337,7 @@ class JsonDict(_ArDict, JsonElement):
         elif other is None:
             return False
         else:
-            raise Exception("JsonDict == operator expects dict/JsonDict as right operand.")
+            raise Exception("JsonDict == operator expects dict/JsonDict as right operand. Provided {} of type {}".format(other, type(other)))
 
         if len(self) != len(other):
             return False
@@ -350,17 +350,29 @@ class Json:
     '''
 
     @classmethod
+    def set_auto_id_key(cls, key="id"):
+        jsonpath.auto_id_field = key
+
+    @classmethod
     def from_object(cls, jobj, *, allow_any=False):
         '''
             Convert a Python object to a JsonDict/JsonList object if applicable.
+
+            Any iterable which is not a dict is converted to a JsonList.
 
             Keyword Arguments:
                 allow_any: If True, if the object can not be coverted, same object is returned, else an Exception is raised.
         '''
         if type(jobj) is dict:
             return JsonDict(jobj)
-        elif type(jobj) is list:
+        elif type(jobj) in {list, tuple, set}:
             return JsonList(jobj)
+        elif type(jobj) is not str:
+            try:
+                iter(jobj)
+                return JsonList(jobj)
+            except:
+                pass
 
         if allow_any:
             return jobj
