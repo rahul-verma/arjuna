@@ -81,7 +81,7 @@ from arjuna.tpi.helper.arjtype import NVPair, NVPairs, Screen, Attr, Point, Offs
 from arjuna.tpi.helper.audit import HardCoded
 from arjuna.tpi.helper.arjtype import ProcessedKeyDict
 
-from arjuna.tpi.parser.json import Json
+from arjuna.tpi.parser.json import Json, JsonSchema
 from arjuna.tpi.parser.xml import Xml, NodeLocator
 from arjuna.tpi.parser.html import Html
 

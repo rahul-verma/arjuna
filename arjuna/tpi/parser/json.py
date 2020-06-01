@@ -25,6 +25,7 @@ import abc
 from arjuna.tpi.helper.arjtype import _ArDict
 from jsonpath_rw import jsonpath
 from jsonpath_rw_ext import parse
+from genson import SchemaBuilder
 from typing import Any
 
 from arjuna.tpi.tracker import track
@@ -129,59 +130,6 @@ class JsonList(JsonElement):
             return False
         else:
             return self.raw_object == other
-
-class JsonSchema:
-    '''
-        Encapsulates Json Schema which can be used to validate Json objects.
-    '''
-
-    def __init__(self, schema_dict):
-        self.__dict = schema_dict
-
-    def mark_optional(self, *keys):
-        '''
-            Mark the provided keys as optional in the root of Json Schema.
-
-            Arguments:
-                *keys: Arbitrary key names
-        '''
-
-        for key in keys:
-            if 'required' in self.__dict:
-                try:
-                    self.__dict['required'].remove(key)
-                except ValueError:
-                    pass
-
-    def allow_null(self, *keys):
-        '''
-            Allow None as a value type for the provided keys in the root of Json Schema.
-
-            Arguments:
-                *keys: Arbitrary key names
-        '''
-
-        for key in keys:
-            if key in self.__dict['properties']:
-                target_dict = self.__dict['properties'][key]
-                if 'type' in target_dict:
-                    type_value = target_dict['type']
-                    if type(type_value) is str:
-                        self.__dict['properties'][key]['type'] = [type_value, "null"]
-                    else:
-                        self.__dict['properties'][key]['type'].append('null')
-                elif 'anyOf' in target_dict:
-                    if {"type": "null"} not in target_dict['anyOf']:
-                        target_dict['anyOf'].append({"type": "null"})                   
-
-    def as_dict(self) -> dict:
-        '''
-            Get this object as a Python dict.
-        '''
-        return self.__dict
-
-    def __str__(self):
-        return json.dumps(self.__dict, indent=2)
 
 
 @track("trace")
@@ -345,6 +293,141 @@ class JsonDict(_ArDict, JsonElement):
         else:
             return self.raw_object == other
 
+@track("trace")
+class JsonSchemaBuilder:
+    '''
+        JsonSchema builder class.
+
+        Keyword Arguments:
+            schema_uri: URI to be set for '$schema' key.
+    '''
+
+    def __init__(self, *, schema_uri=None):
+        if schema_uri:
+            self.__builder = SchemaBuilder(schema_uri=schema_uri)
+        else:
+            self.__builder = SchemaBuilder()
+
+    def schema(self, schema):
+        '''
+            Add schema to the overall schema.
+
+            Call multiple times to add more schema.
+
+            Arguments:
+                schema: Json schema dict
+        '''
+        self.__builder.add_schema(schema)
+        return self
+
+    def object(self, jobj_or_str):
+        '''
+            Add schema based on an object to the overall schema.
+
+            Call multiple times to add more objects.
+
+            Arguments:
+                jobj_or_str: JsonDict/JsonList or a Python str/list/dict.
+        '''
+        if type(jobj_or_str) is str:
+            jobj = Json.from_str(jobj_or_str.strip())
+        else:
+            jobj = jobj_or_str
+
+        if type(jobj) in {JsonDict, JsonList}:
+            self.__builder.add_object(jobj.raw_object)
+        else:
+            self.__builder.add_object(jobj)
+        return self
+
+    def build(self):
+        '''
+            Create `JsonSchema` based on the building constructs provided till this point.
+        '''
+        return JsonSchema(self.__builder.to_schema())
+
+@track("trace")
+class JsonSchema:
+    '''
+        Encapsulates Json Schema which can be used to validate Json objects.
+    '''
+
+    def __init__(self, schema_dict):
+        self.__dict = schema_dict
+
+    def set_maximum(self, number):
+        '''
+            Set maximum occurances.
+
+            Arguments:
+                number: Upper limit for occurances.
+        '''
+        self.__dict['maximum'] = number
+
+    def set_allowed_values(self, *values):
+        '''
+            Set allowed values.
+
+            Arguments:
+                *values: Arbitrary allowed values.
+        '''
+        self.__dict['enum'] = values
+
+    def mark_optional(self, *keys):
+        '''
+            Mark the provided keys as optional in the root of Json Schema.
+
+            Arguments:
+                *keys: Arbitrary key names
+        '''
+
+        for key in keys:
+            if 'required' in self.__dict:
+                try:
+                    self.__dict['required'].remove(key)
+                except ValueError:
+                    pass
+
+    def allow_null(self, *keys):
+        '''
+            Allow None as a value type for the provided keys in the root of Json Schema.
+
+            Arguments:
+                *keys: Arbitrary key names
+        '''
+
+        for key in keys:
+            if key in self.__dict['properties']:
+                target_dict = self.__dict['properties'][key]
+                if 'type' in target_dict:
+                    type_value = target_dict['type']
+                    if type(type_value) is str:
+                        self.__dict['properties'][key]['type'] = [type_value, "null"]
+                    else:
+                        self.__dict['properties'][key]['type'].append('null')
+                elif 'anyOf' in target_dict:
+                    if {"type": "null"} not in target_dict['anyOf']:
+                        target_dict['anyOf'].append({"type": "null"})                   
+
+    def as_dict(self) -> dict:
+        '''
+            Get this object as a Python dict.
+        '''
+        return self.__dict
+
+    def __str__(self):
+        return json.dumps(self.__dict, indent=2)
+
+    @classmethod
+    def builder(self, *, schema_uri=None):
+        '''
+            Create a JsonSchemaBuilder.
+
+            Keyword Arguments:
+                schema_uri: URI to be set for '$schema' key.
+        '''
+        return JsonSchemaBuilder(schema_uri=schema_uri)
+
 class Json:
     '''
         Helper class to create Arjuna's Json elements.
@@ -481,18 +564,10 @@ class Json:
 
             Arguments:
                 jobj_or_str: JsonDict/JsonList or a Python str/list/dict.
-
         '''
-        if type(jobj_or_str) is str:
-            jobj = cls.from_str(jobj_or_str.strip())
-        else:
-            jobj = jobj_or_str
-        from genson import SchemaBuilder
-        builder = SchemaBuilder()
-        if type(jobj) in {JsonDict, JsonList}:
-            builder.add_object(jobj.raw_object)
-        else:
-            builder.add_object(jobj)
-        return JsonSchema(builder.to_schema())
+        builder = JsonSchema.builder()
+        builder.object(jobj)
+        return builder.build()
+        
 
     
