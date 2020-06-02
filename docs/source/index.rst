@@ -255,6 +255,7 @@ Parsers
     * :py:class:`JsonDict <arjuna.tpi.parser.json.JsonDict>`
     * :py:class:`JsonList <arjuna.tpi.parser.json.JsonList>`
     * :py:class:`JsonSchema <arjuna.tpi.parser.json.JsonSchema>`
+    * :py:class:`JsonSchemaBuilder <arjuna.tpi.parser.json.JsonSchemaBuilder>`
 * :py:mod:`XML <arjuna.tpi.parser.xml>`
     * :py:class:`Xml <arjuna.tpi.parser.xml.Xml>`
     * :py:class:`XmlNode <arjuna.tpi.parser.xml.XmlNode>`
