@@ -81,7 +81,10 @@ To Do
         - For advanced usage, change it from module to package and add importable names to __all__ in __init__.py. Check arjex project for example.
     - Removed Row Data Reference for Excel. Column ref is the default. /data/reference/excel contains such files. Doc and example code updated
     - L10n files go directly in l10n directory.
-    
+- Data References
+    - Added support for Indexed Data References.
+    - Enhanced Query support allows for a blank query, thereby returning a DataRecord object for more involved coding.
+    - The string representing of such Data Record Shows data reference name and context/index used.
 
 1.0.11
 ------

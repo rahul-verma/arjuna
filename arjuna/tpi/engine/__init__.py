@@ -58,7 +58,8 @@ class ArjunaSingleton:
 
         self.dl = None
         self.log_file_discovery_info = False
-        self.__data_references = None
+        self.__contextual_data_references = None
+        self.__indexed_data_references = None
         self.__logger = None
         from arjuna.engine.data.store import DataStore
         self.__data_store = DataStore()
@@ -120,7 +121,7 @@ class ArjunaSingleton:
 
         # Load data references
         from arjuna.engine.data.factory import DataReference
-        self.__data_references = DataReference.load_all(self.ref_config)
+        self.__contextual_data_references, self.__indexed_data_references  = DataReference.load_all(self.ref_config)
 
         # Load localization data
         from arjuna.engine.data.localizer import Localizer
@@ -144,8 +145,12 @@ class ArjunaSingleton:
         return self.__common_withx_ref
 
     @property
-    def data_references(self):
-        return self.__data_references
+    def contextual_data_references(self):
+        return self.__contextual_data_references
+
+    @property
+    def indexed_data_references(self):
+        return self.__indexed_data_references
 
     @property
     def localizer(self):
@@ -292,12 +297,22 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.get_config_value(query, cname=cname)
 
     @classmethod
-    def get_dataref_value(cls, name, *, bucket=None, context=None):
+    def get_data_ref(cls, name):
+        try:
+            return cls.ARJUNA_SINGLETON.contextual_data_references[name]
+        except:
+            try:
+                return cls.ARJUNA_SINGLETON.indexed_data_references[name]
+            except:
+                raise Exception(f"No data reference found with name: {name}")
+
+    @classmethod
+    def get_dataref_value(cls, query="", *, bucket=None, context=None, index=None):
         '''
             Returns the data reference value for a given context.
         '''
         from arjuna.engine.data.reference import R
-        return R(name, bucket=bucket, context=context)
+        return R(query, bucket=bucket, context=context, index=index)
 
     @classmethod
     def get_report_metadata(cls):
@@ -313,10 +328,6 @@ class Arjuna:
     @classmethod
     def get_localizer(cls):
         return cls.ARJUNA_SINGLETON.localizer
-
-    @classmethod
-    def get_data_ref(cls, name):
-        return cls.ARJUNA_SINGLETON.data_references[name]
 
     @classmethod
     def get_localized_str(cls, in_str, *, locale=None, bucket=None, strict=None):

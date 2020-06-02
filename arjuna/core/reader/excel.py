@@ -44,6 +44,8 @@ class ExcelRowReader:
             self.close()
             raise StopIteration()
 
+    __next__ = next
+
     def read(self):
         return [r for r in iter(self)]
 
@@ -81,10 +83,15 @@ class ExcelRow2ArrayReader(ExcelRowReader):
         if self.rcount == 0:
             raise Exception("Empty or wrongly formattted Excel file. Is first line empty?")
 
+    def __iter__(self):
+        return self
+
+    def next(self):
+        return super().next()
 
 class ExcelRow2MapReader(ExcelRow2ArrayReader):
     def __init__(self, path):
         super().__init__(path)
 
     def process(self, row):
-        return zip(self.headers, super().process(row))
+        return dict(zip(self.headers, super().process(row)))

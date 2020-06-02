@@ -191,7 +191,7 @@ class My:
             return Arjuna.get_config(name)
     
     @property
-    def data_refs(self):
+    def contextual_data_refs(self):
         from arjuna import Arjuna
         return Arjuna.get_data_references()
 

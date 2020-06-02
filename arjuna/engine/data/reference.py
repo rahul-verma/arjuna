@@ -15,11 +15,48 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
 import abc
 
 from arjuna.core.reader.excel import *
 from arjuna.tpi.data.record import *
 from arjuna.tpi.helper.arjtype import CIStringDict
+
+class IndexedDataReference(metaclass=abc.ABCMeta):
+
+    def __init__(self, pydict):
+        self.__records = pydict
+
+    def record_for(self, index):
+        try:
+            return self.__records[index]
+        except KeyError:
+            raise Exception("Index {} not found in data reference: {}.".format(index, self.__class__.__name__))
+
+    def __str__(self):
+        return str({k: str(v) for k,v in self.self.__records.items()})
+
+    def enumerate(self):
+        for k,v in self.__records.items():
+            print(k, "::", type(v), str(v))
+
+
+class ExcelIndexedDataReference(IndexedDataReference):
+
+    def __init__(self, path):
+        self.path = path
+        self.__name = get_file_name(path)
+        if (path.lower().endswith("xls")):
+            self.reader = ExcelRow2MapReader(path)
+        else:
+            raise Exception("Unsupported file format for Excel reading.")
+
+        map = dict()
+        for index, record in enumerate(self.reader):
+            map[index] = DataRecord(context="Ref-{}[{}]".format(self.__name, index), **record)
+        self.reader.close()
+        super().__init__(map)
+
 
 class ContextualDataReference(metaclass=abc.ABCMeta):
 
@@ -58,7 +95,7 @@ class __ExcelDataReference(ContextualDataReference):
             self.reader = ExcelRow2ArrayReader(path)
         else:
             raise Exception("Unsupported file format for Excel reading.")
-
+        self.name = get_file_name(path)
         self._populate()
 
     @abc.abstractmethod
@@ -88,8 +125,11 @@ class __ExcelDataReference(ContextualDataReference):
 #                 self.map[data_record[0].lower()] = DataRecord(context="Ref", **dict(zip(names, data_record[1:])))
 #         self.reader.close()
 
+def get_file_name(path):
+    name = os.path.basename(path)
+    return os.path.splitext(name)[0]
 
-class ExcelColumnDataReference(__ExcelDataReference):
+class ExcelContextualDataReference(__ExcelDataReference):
 
     def __init__(self, path):
         super().__init__(path)
@@ -108,41 +148,89 @@ class ExcelColumnDataReference(__ExcelDataReference):
                     cmap[context][name] = data_record[index+1]
         self.reader.close()
         for context, kv in cmap.items():
-            self.map[context.lower()] = DataRecord(context="Ref", **kv)
+            self.map[context.lower()] = DataRecord(context="Ref-{}[{}]".format(self.name, context), **kv)
 
-def R(query, *, bucket=None, context=None):
+def R(query="", *, bucket=None, context=None, index=None):
+    if context is not None and index is not None:
+        raise Exception("You can either specify context (for contextual references) or index (for indexed references).")
     from arjuna import Arjuna, ArjunaOption
     bucket = bucket
     context = context
+    index = index
     query = query
 
-    if bucket is not None:
-        bucket = bucket.lower()
-        if context is not None:
-            context = context.lower()
-            query = query.lower()
-        else:
-            if query.find('.') != -1:
-                context, query = query.split('.', 1)
-                context = context.lower()
-                query = query.lower()
-            else:
-                raise Exception("DataRefError: The query must specify context using dot notation when not passed as argument.")
+    final_query = ""
+
+    bucket = bucket is not None and bucket.lower() + "." or "."
+    context_or_index = None
+    if context is not None:
+        context_or_index = context.lower() + "."
+    elif index is not None:
+        context_or_index = str(index) + "."
     else:
-        if context is not None:
-            raise Exception("bucket must be provided if context arg is passed.")
-        else:
-            if query.find('.') != -1:
-                bucket, context, query = query.split('.', 2)
-                bucket = bucket.lower()
-                context = context.lower()
-                query = query.lower()
-            else:
-                raise Exception("DataRefError: The query must specify bucket and context using dot notation when these are not passed as arguments.")           
+        context_or_index = "."
+
+    final_query = bucket + context_or_index + query.lower().strip()
+    final_query = final_query.replace("..",".")
+    if final_query.startswith('.'):
+        final_query = final_query[1:]
+
+    if final_query.endswith('.'):
+        final_query = final_query[:-1]
 
     try:
-        return Arjuna.get_data_ref(bucket).record_for(context)[query]
+        bucket, context_or_index, query = final_query.split('.', 2)
+    except ValueError:
+        try:
+            bucket, context_or_index = final_query.split('.', 1)
+            query = ""
+        except:
+            raise Exception("Not able to form a valid reference query with provided data. Invalid query: {}".format(final_query))
+
+    try:
+        context_or_index = int(context_or_index)
+    except:
+        pass
+
+    try:
+        query = int(query)
+    except:
+        if query == "":
+            query = None
+
+    try:
+        if query is None:
+            return Arjuna.get_data_ref(bucket).record_for(context_or_index)
+        else:
+            return Arjuna.get_data_ref(bucket).record_for(context_or_index)[query]
     except Exception as e:
         import traceback
         raise Exception("Error in retrieving reference value for: bucket: >>{}<<, context: >>{}<< and query >>{}<< in data reference. {}. {}".format(bucket, context, query, str(e), traceback.format_exc()))
+
+
+    # if bucket is not None:
+    #     bucket = bucket.lower()
+    #     if context is not None:
+    #         context = context.lower()
+    #         query = query.lower()
+    #     else:
+    #         if query.find('.') != -1:
+    #             context, query = query.split('.', 1)
+    #             context = context.lower()
+    #             query = query.lower()
+    #         else:
+    #             raise Exception("DataRefError: The query must specify context using dot notation when not passed as argument.")
+    # else:
+    #     if context is not None:
+    #         raise Exception("bucket must be provided if context arg is passed.")
+    #     else:
+    #         if query.find('.') != -1:
+    #             bucket, context, query = query.split('.', 2)
+    #             bucket = bucket.lower()
+    #             context = context.lower()
+    #             query = query.lower()
+    #         else:
+    #             raise Exception("DataRefError: The query must specify bucket and context using dot notation when these are not passed as arguments.")           
+
+
 

@@ -59,7 +59,7 @@ def L(query: "L10nQuery", *, locale: 'Locale'=None, bucket: str=None, strict: bo
     return Arjuna.get_localized_str(query, locale=locale, bucket=bucket, strict=strict)
 
 @track("debug")
-def R(query: 'DataRefQuery', *, bucket: str=None, context: str=None) -> Any:
+def R(query: 'DataRefQuery'="", *, bucket: str=None, context: str=None, index: int=None) -> Any:
     '''
         Get the object for a query from Contextual Data Reference.
 
@@ -67,8 +67,9 @@ def R(query: 'DataRefQuery', *, bucket: str=None, context: str=None) -> Any:
             query: Data Reference Query representing a reference for which object has to be retrieved.
             bucket: A string representing Data Reference bucket
             context: A string representing Data Reference context
+            context: An int representing Data Reference index
 
         Returns:
             An object of Any type depending upon the Data Reference query.
     '''
-    return Arjuna.get_dataref_value(query, bucket=bucket, context=context)
+    return Arjuna.get_dataref_value(query, bucket=bucket, context=context, index=index)

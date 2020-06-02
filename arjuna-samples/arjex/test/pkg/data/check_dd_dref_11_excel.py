@@ -18,7 +18,25 @@
 from arjuna import *
 
 @test
-def check_excel_data_ref(request):
+def check_excel_contextual_data_ref_value(request):
     print(R("user", bucket="cusers", context="bronze"))
     print(R("bronze.user", bucket="cusers"))
-    print(R("cusers.bronze.user"))
+    print(R("cusers.bronze.user"))  
+
+@test
+def check_excel_contextual_data_ref_record(request):
+    print(R(bucket="cusers", context="bronze"))
+    print(R("bronze", bucket="cusers"))
+    print(R("cusers.bronze")) 
+
+@test
+def check_excel_indexed_data_ref_value(request):
+    print(R("left", bucket="indexed", index=1))
+    print(R("1.left", bucket="indexed"))
+    print(R("indexed.1.left"))
+
+@test
+def check_excel_indexed_data_ref_record(request):
+    print(R(bucket="indexed", index=1))
+    print(R("1", bucket="indexed"))
+    print(R("indexed.1")) 
