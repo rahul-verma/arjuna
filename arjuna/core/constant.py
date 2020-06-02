@@ -298,6 +298,10 @@ class ReportFormat(Enum):
     XML = auto()
     HTML = auto()
 
+class DataRefType(Enum):
+    CONTEXTUAL = auto()
+    INDEXED = auto()
+
 class LoggingLevel(Enum):
     TRACE = auto()
     DEBUG = auto()

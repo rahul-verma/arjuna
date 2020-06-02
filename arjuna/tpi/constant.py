@@ -60,12 +60,6 @@ class ArjunaOption(Enum):
     L10N_DIR = auto()
     '''Directory containing Localization files.'''
 
-    L10N_EXCEL_DIR = auto()
-    '''Directory containing Excel based Localization files.'''
-
-    L10N_JSON_DIR = auto()
-    '''Directory containing Json based Localization files.'''
-
     PROJECT_NAME = auto()
     '''Test Project Name'''
 
@@ -132,8 +126,11 @@ class ArjunaOption(Enum):
     DATA_REF_DIR = auto()
     '''Directory containing contextual data reference files in test project.'''
 
-    DATA_REF_EXCEL_DIR = auto()
-    '''Directory containing contextual data reference Excel files in test project.'''
+    DATA_REF_CONTEXTUAL_DIR = auto()
+    '''Directory containing contextual data reference files in test project.'''
+
+    DATA_REF_INDEXED_DIR = auto()
+    '''Directory containing indexed data reference files in test project.'''
 
     APP_URL = auto()
     '''Base URL for a Web App. Used by launch() method if url is not specified for GuiApp.'''

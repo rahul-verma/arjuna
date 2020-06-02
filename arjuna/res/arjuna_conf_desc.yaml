@@ -13,8 +13,6 @@ run.session.name: name
 l10n.locale: locale
 l10n.strict: bool
 l10n.dir: absolute_dir_path
-l10n.excel.dir: absolute_dir_path
-l10n.json.dir: absolute_dir_path
 
 project.name: name
 project.root.dir: absolute_dir_path_present
@@ -40,7 +38,8 @@ screenshots.dir: absolute_dir_path
 data.dir: absolute_dir_path
 data.src.dir: absolute_dir_path
 data.ref.dir: absolute_dir_path
-data.ref.excel.dir: absolute_dir_path
+data.ref.contextual.dir: absolute_dir_path
+data.ref.indexed.dir: absolute_dir_path
 
 app.url: web_url
 
