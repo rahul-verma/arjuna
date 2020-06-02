@@ -18,25 +18,11 @@ Excel Data References
 
 Arjuna supports Excel based data references out of the box. These reference files are automatically loaded when **Arjuna.init()** is called by Arjuna launcher.
 
-There are two types of Excel based Data References that you can create in Arjuna:
-
-Column Data References
-^^^^^^^^^^^^^^^^^^^^^^
-
-You place such files in **<Project Root>/data/reference/column** directory. A reference file can be found in this example project.
+You place such files in **<Project Root>/data/reference/excel** directory. A reference file can be found in this example project.
 
 .. image:: _static/colref.png
 
-In a column data reference file, the context of data is represented by columns. Here Account Type's values -  **Bronze**, **Silver** and **Gold** represent the contexts, for which the **User** and **Pwd** values are different.
-
-Row Data References
-^^^^^^^^^^^^^^^^^^^
-
-You place such files in **<Project Root>/data/reference/row** directory. A reference file can be found in this example project.
-
-.. image:: _static/rowref.png
-
-In a row data reference file, the context of data is represented by cells of the first column. Here Account Type's values - **Bronze**, **Silver** and **Gold** represent the contexts, for which the **User** and **Pwd** values are different.
+The context of data is represented by columns. Here Account Type's values -  **Bronze**, **Silver** and **Gold** represent the contexts, for which the **User** and **Pwd** values are different.
 
 The Magic **R** Function
 ------------------------
@@ -54,4 +40,3 @@ It has the following signature. The first argument is the query. **bucket** and 
     - Query can contain just the ref name and bucket and context arguments can be provided.
     - Query can be of format **context.refname** and bucket can be supplied as argument.
     - Query can be of format **bucket.context.refname** without passing bucket and context arguments separately.
-3. The only difference between the two styles of references is the format and the way Arjuna loads them. Usage for a test author is exactly the same.

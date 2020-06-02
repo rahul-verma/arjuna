@@ -19,7 +19,6 @@ import os
 from .source import *
 from .reference import *
 from arjuna.core.utils import file_utils
-from arjuna.core.constant import DataRefContextType
 
 def get_data_file_path(data_dir, fpath):
     if file_utils.is_absolute_path(fpath):
@@ -83,41 +82,34 @@ class DataReference:
     def load_all(cls, ref_config):
         from arjuna.tpi.constant import ArjunaOption
         refs = DataReferences()
-        column_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_COLUMN_DIR)
+        column_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_EXCEL_DIR)
         if os.path.isdir(column_data_ref_dir):
             for fname in os.listdir(column_data_ref_dir):
                 if fname.lower().endswith("xls"):
                     refs[os.path.splitext(fname)[0]] = DataReference.create_excel_column_data_ref(fname)
-        
-        row_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_ROW_DIR)
-        if os.path.isdir(row_data_ref_dir):
-            for fname in os.listdir(row_data_ref_dir):
-                if fname.lower().endswith("xls"):
-                    refs[os.path.splitext(fname)[0]] = DataReference.create_excel_row_data_ref(fname)
 
         return refs
 
     @classmethod
-    def __create_excel_file_data_ref(cls, file_path, context=DataRefContextType.COLUMN):
+    def __create_excel_file_data_ref(cls, file_path): #, context=DataRefContextType.COLUMN):
         ext = file_path.lower()
         if not ext.endswith("xls"):
             raise Exception("Unsupported file extension for Excel data reference: {}".format(file_path))
 
         from arjuna import Arjuna, ArjunaOption
-        if context == DataRefContextType.COLUMN:
-            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_COLUMN_DIR)
-            file_path = get_data_file_path(data_dir, file_path)
-            return ExcelColumnDataReference(file_path)
-        elif context == DataRefContextType.ROW:
-            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_ROW_DIR)
-            file_path = get_data_file_path(data_dir, file_path)
-            return ExcelRowDataReference(file_path)
+        data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_EXCEL_DIR)
+        file_path = get_data_file_path(data_dir, file_path)
+        return ExcelColumnDataReference(file_path)
+        # elif context == DataRefContextType.ROW:
+        #     data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_ROW_DIR)
+        #     file_path = get_data_file_path(data_dir, file_path)
+        #     return ExcelRowDataReference(file_path)
 
     @classmethod
     def create_excel_column_data_ref(cls, file_path):
-        return cls.__create_excel_file_data_ref(file_path, context=DataRefContextType.COLUMN)
+        return cls.__create_excel_file_data_ref(file_path) #, context=DataRefContextType.COLUMN)
 
-    @classmethod
-    def create_excel_row_data_ref(cls, file_path):
-        return cls.__create_excel_file_data_ref(file_path, context=DataRefContextType.ROW)
+    # @classmethod
+    # def create_excel_row_data_ref(cls, file_path):
+    #     return cls.__create_excel_file_data_ref(file_path, context=DataRefContextType.ROW)
 

@@ -72,21 +72,21 @@ class __ExcelDataReference(ContextualDataReference):
             raise Exception("{} at {} does not contain {} context key.".format(self.__class__.__name__, self.path, context))
 
 
-class ExcelRowDataReference(__ExcelDataReference):
+# class ExcelRowDataReference(__ExcelDataReference):
 
-    def __init__(self, path):
-        super().__init__(path)
+#     def __init__(self, path):
+#         super().__init__(path)
 
-    def _populate(self):
-        names = self.reader.headers[1:]
-        while True:
-            try:
-                data_record = self.reader.next()
-            except StopIteration:
-                break
-            else:
-                self.map[data_record[0].lower()] = DataRecord(context="Ref", **dict(zip(names, data_record[1:])))
-        self.reader.close()
+#     def _populate(self):
+#         names = self.reader.headers[1:]
+#         while True:
+#             try:
+#                 data_record = self.reader.next()
+#             except StopIteration:
+#                 break
+#             else:
+#                 self.map[data_record[0].lower()] = DataRecord(context="Ref", **dict(zip(names, data_record[1:])))
+#         self.reader.close()
 
 
 class ExcelColumnDataReference(__ExcelDataReference):

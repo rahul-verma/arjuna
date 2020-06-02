@@ -43,8 +43,7 @@ arjuna_options:
   data.dir: $project_root_dir$/data
   data.src.dir: $project_root_dir$/data/source
   data.ref.dir: $project_root_dir$/data/reference
-  data.ref.column.dir: $project_root_dir$/data/reference/excel_column
-  data.ref.row.dir: $project_root_dir$/data/reference/excel_row
+  data.ref.excel.dir: $project_root_dir$/data/reference/excel
 
   app.url: NOT_SET
 

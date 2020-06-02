@@ -132,11 +132,8 @@ class ArjunaOption(Enum):
     DATA_REF_DIR = auto()
     '''Directory containing contextual data reference files in test project.'''
 
-    DATA_REF_COLUMN_DIR = auto()
-    '''Directory containing contextual column data reference Excel files in test project.'''
-
-    DATA_REF_ROW_DIR = auto()
-    '''Directory containing contextual row data reference Excel files in test project.'''
+    DATA_REF_EXCEL_DIR = auto()
+    '''Directory containing contextual data reference Excel files in test project.'''
 
     APP_URL = auto()
     '''Base URL for a Web App. Used by launch() method if url is not specified for GuiApp.'''

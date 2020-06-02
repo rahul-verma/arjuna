@@ -50,34 +50,38 @@ To Do
 
 1.0.12
 ------
-Data Generation and Data Entities
+- Data Generation and Data Entities
     - Added generator, processor, composite and composer classes.
     - data_entity supports setting an attr to a function, generator or composite. These are called at the time of object initilization with facility for dynamic data generation every time.
     - A single generated data object is processed using the processor provided in generator.
     - Multiple generated data objects can be clubbed into with composite and composer constructs.
-Doc Comments
+- Doc Comments
     - data_entity
     - generator, processor, composite and composer classes
-Docs added:
+- Docs added:
     - Random class and Data Entity.
     - Usage of generator, processor, composite and composer classes
-Cross-project resource importing
+- Cross-project resource importing
     - Existing way unncessarily complex for beginners and too simplistic for advanced users.
     - By default, all resource creators present in `lib/resource.py` are imported.
     - For advanced usage, change it from module to package and add importable names to __all__ in __init__.py. Check arjex project for example.
-Json
+- Json
     - Added JsonSchemaBuilder class
     - Added more methods to JsonSchema class
     - JsonList supports JsonPath based find and findall.
-Re-packaging
+- Repackaging
     - json, html and xml modules moved to `tpi.parser`.
     - data modules moved to `tpi.data`
-Arjex - New Examples/Tests
+- Arjex - New Examples/Tests
     - Data Entity
     - JsonPath-RW
     - JsonPath-RW-EXT
     - Genson-Schema-Creation
     - Genson-Schema-Extraction
+- Data Ref
+    - Removed Row Data Reference for Excel. Column ref is the default.
+    - /data/reference/excel contains such files.
+    - Doc and example code updated
     
 
 1.0.11

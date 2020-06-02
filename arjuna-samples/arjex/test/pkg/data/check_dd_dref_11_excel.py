@@ -18,14 +18,7 @@
 from arjuna import *
 
 @test
-def check_excel_column_data_ref(request):
+def check_excel_data_ref(request):
     print(R("user", bucket="cusers", context="bronze"))
     print(R("bronze.user", bucket="cusers"))
     print(R("cusers.bronze.user"))
-
-
-@test
-def check_excel_row_data_ref(request):
-    print(R("user", bucket="rusers", context="gold"))
-    print(R("gold.user", bucket="rusers"))
-    print(R("rusers.gold.user"))
