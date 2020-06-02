@@ -99,13 +99,20 @@ Data Generation and Data Entities
 
    datagen_entity
 
-Contextual Data References and Localization
-===========================================
+Data References
+===============
 
 .. toctree::
    :maxdepth: 6
 
    data_ref
+
+Localization
+============
+
+.. toctree::
+   :maxdepth: 6
+
    l10n
 
 Web GUI Automation
