@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from arjuna.tpi.constant import ArjunaOption
-from arjuna.core.yaml import Yaml
+from arjuna.tpi.parser.yaml import Yaml
 from arjuna.core.error import *
 from arjuna.tpi.error import *
 from .stage import TestStage, MagicTestStage, YamlTestStage, MagicTestStageForGroup

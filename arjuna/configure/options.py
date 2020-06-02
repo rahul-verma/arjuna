@@ -22,7 +22,7 @@ from enum import Enum
 
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.constant import ArjunaOption
-from arjuna.core.yaml import Yaml
+from arjuna.tpi.parser.yaml import Yaml
 from .validator import Validator
 from enum import Enum
 from arjuna.tpi.constant import BrowserName
@@ -266,9 +266,19 @@ class EditableConfig:
 
     @classmethod
     def from_yaml(cls, *, yaml_obj, creation_context, validate=True):
+        arjuna_options_dict = yaml_obj.get_section("arjuna_options", strict=False, allow_any=True)
+        if arjuna_options_dict is not None:
+            arjuna_options_dict = arjuna_options_dict.as_map()
+        else:
+            arjuna_options_dict = dict()        
+        user_options_dict = yaml_obj.get_section("user_options", strict=False, allow_any=True)
+        if user_options_dict is not None:
+            user_options_dict = user_options_dict.as_map()
+        else:
+            user_options_dict = dict()
         return EditableConfig(
-            arjuna_options_dict = yaml_obj.get_section("arjuna_options", strict=False).as_map(),
-            user_options_dict = yaml_obj.get_section("user_options", strict=False).as_map(),
+            arjuna_options_dict = arjuna_options_dict,
+            user_options_dict = user_options_dict,
             creation_context = "This configuration represents " + creation_context,
             validate=validate
         )

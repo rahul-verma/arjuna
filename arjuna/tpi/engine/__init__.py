@@ -127,7 +127,7 @@ class ArjunaSingleton:
         from arjuna.engine.data.localizer import Localizer
         self.__localizer = Localizer.load_all(self.ref_config)
 
-        from arjuna.core.yaml import Yaml
+        from arjuna.tpi.parser.yaml import Yaml
         from arjuna.interact.gui.auto.finder.withx import WithX
         fpath = self.ref_config.value(ArjunaOption.CONF_WITHX_FILE)
         creation_context= f"WithX.yaml file at {fpath}"

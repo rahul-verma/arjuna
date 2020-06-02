@@ -27,7 +27,6 @@ Submodules
    arjuna.core.helpers
    arjuna.core.utils
    arjuna.core.value
-   arjuna.core.yaml
 
 Module contents
 ---------------

@@ -85,6 +85,7 @@ To Do
     - Added support for Indexed Data References.
     - Enhanced Query support allows for a blank query, thereby returning a DataRecord object for more involved coding.
     - The string representing of such Data Record Shows data reference name and context/index used.
+- Yaml module added to TPI's parser package.
 
 1.0.11
 ------
@@ -485,7 +486,7 @@ FIX: Dispatcher issue in MultiElement when created using filters.
 - Browser headless mode can be controlled with ArjunaOption.BROWSER_HEADLESS option. False by default.
 - BrowserName enum has been changed to contain only Chrome and Firefox as these are the current supported browsers.
 - withx in GNS files supports string, list and dictionary entries in YAML and maps them to vargs and kwargs in formatting the value of withx entry referred by a label.
-- Separated current Yaml parsing as Yaml and YamlFile classes in arjuna.core.yaml module.
+- Separated current Yaml parsing as Yaml and YamlFile classes in arjuna.tpi.parser.yaml module.
 - Introduced WithX class to handle WithX parsing and processing.
 - Provision to add Withx identifiers which can be referred to from any GNS file. These are included in the **<Project Root>/guiauto/withx/withx.yaml** file.
 - A WithX identifier defined in **withx.yaml** can be used programmatically. It can be thought of as a method which Arjuna defines at run-time with the signature **With.locator(*args, **kwargs)** and can be called from any part of your code.

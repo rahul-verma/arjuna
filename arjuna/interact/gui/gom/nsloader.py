@@ -187,7 +187,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         from arjuna import Arjuna
         from arjuna.configure.validator import Validator
         from arjuna.interact.gui.auto.finder._with import WithType
-        from arjuna.core.yaml import Yaml
+        from arjuna.tpi.parser.yaml import Yaml
         creation_context="Gui Namespace file at {}".format(self.__ns_path)
         yaml = Yaml.from_file(file_path=self.__ns_path)
 
