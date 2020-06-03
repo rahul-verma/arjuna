@@ -29,7 +29,9 @@ def check_current_page_source(request, wordpress):
 
 @test
 def check_element_source(request, wordpress):
-    user_box = wordpress.element(id="user_login")
+    node = Html.from_str("<p>abc</p>", partial=True)
+    print(node.normalized_text)
+    user_box = wordpress.element(attr=NVPair("for","user_login"))
     print(user_box.text)
     print_source_info(user_box.source)
 

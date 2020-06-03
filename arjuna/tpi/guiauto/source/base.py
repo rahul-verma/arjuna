@@ -90,6 +90,7 @@ class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
 
     def _load(self):
         raw_source = self.__raw_source
+        print(raw_source)
         self.__elem_node = Html.from_str(raw_source, partial=self.__partial)
         self.__node = self.__elem_node.clone()
         self.__text_content = self.__elem_node.normalized_text

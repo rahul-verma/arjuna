@@ -41,11 +41,24 @@ class YamlElement:
         return not self.__ydict
 
     def as_str(self):
-        return yaml.dump(self.__pyobj)
+        return yaml.dump(self.__pyobj).replace("_ArDict__store:\n","")
 
-class YamlList:
-    pass
+    def __str__(self):
+        return self.as_str()
 
+class YamlList(YamlElement):
+
+    def __init__(self, pylist, *, name="yaml", file_path=None):
+        self.__ylist = pylist is not None and pylist or list()
+        super().__init__(self.__ylist, name=name, file_path=file_path)
+        self.__iter = None    
+
+    def __iter__(self):
+        self.__iter = iter(self.__ylist)
+        return self
+
+    def __next__(self):
+        return self.get_section(next(self.__iter), allow_any=True)    
 
 
 class YamlDict(YamlElement):
@@ -55,6 +68,14 @@ class YamlDict(YamlElement):
         self.__sections = tuple(self.__ydict.keys())
         self.__ydict = CIStringDict(self.__ydict)
         super().__init__(self.__ydict, name=name, file_path=file_path)
+        self.__iter = None
+
+    def __iter__(self):
+        self.__iter = iter(self.__ydict)
+        return self
+
+    def __next__(self):
+        return self.get_section(next(self.__iter), allow_any=True)
 
     def get_section(self, name, *, strict=True, as_yaml_str=False, allow_any=False):
         val = self.__get_value(name, strict=strict)

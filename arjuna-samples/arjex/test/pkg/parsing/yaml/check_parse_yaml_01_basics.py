@@ -22,23 +22,34 @@ from arjuna import *
 from arjuna.tpi.parser.yaml import Yaml
 
 @test
-def check_dict(request):
+def check_dict_loading(request):
     test = '''
 name: sample
 age: sample
 '''
+    yaml_node = Yaml.from_str(test)
+    print(yaml_node)
 
-    test2 = '''
-- name: sample
-- age: sample
+@test
+def check_lis_loading(request):
+    test = '''
+- 12
+- 34
 '''
 
-    # Raw
-    out = yaml.safe_load(test)
-    print(out, type(out))
-    out = yaml.safe_load(test2)
-    print(out, type(out))
-
-    # With Arjuna
-    yaml_node = Yaml.from_str(test, name="test")
+    yaml_node = Yaml.from_str(test)
     print(yaml_node)
+
+@test
+def check_dict_looping(request):
+    test = '''
+name: Mac
+age: 21
+cities: 
+    - Mumbai
+    - Bengaluru
+    - Delhi
+'''
+    yaml_node = Yaml.from_str(test)
+    for item in yaml_node:
+        print(item, type(item))

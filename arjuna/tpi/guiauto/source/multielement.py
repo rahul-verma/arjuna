@@ -42,7 +42,7 @@ class GuiMultiElementSource(GuiSource):
         return os.linesep.join([e.source.content.inner for e in self.__instances])
 
     def __get_text_content(self):
-        return os.linesep.join([e.source.content.root for e in self.__instances])
+        return os.linesep.join([e.source.content.text for e in self.__instances])
 
     def __get_root_content(self):
         return os.linesep.join([e.source.content.root for e in self.__instances])
