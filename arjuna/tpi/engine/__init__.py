@@ -132,7 +132,9 @@ class ArjunaSingleton:
         fpath = self.ref_config.value(ArjunaOption.CONF_WITHX_FILE)
         creation_context= f"WithX.yaml file at {fpath}"
         if os.path.isfile(fpath):        
-            self.__common_withx_ref = WithX(Yaml.from_file(file_path=fpath).as_map())
+            wyaml = Yaml.from_file(file_path=fpath, allow_any=True)
+            if wyaml is not None:
+                self.__common_withx_ref = WithX(wyaml.as_map())
 
         return self.ref_config
 

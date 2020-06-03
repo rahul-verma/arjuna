@@ -322,10 +322,11 @@ class EditableConfig:
 
     @classmethod
     def __multi_confs_file(cls, *, file_path, creation_context):
-        data_yaml = Yaml.from_file(file_path=file_path)
+        yaml = Yaml.from_file(file_path=file_path, allow_any=True)
         conf_map = dict()
-        for section_name in data_yaml.section_names:
-            conf_map[section_name] = cls.from_yaml(yaml_obj=data_yaml.get_section(section_name), creation_context=f"Section {section_name} in {creation_context}")
+        if yaml is not None:
+            for section_name in yaml.section_names:
+                conf_map[section_name] = cls.from_yaml(yaml_obj=yaml.get_section(section_name), creation_context=f"Section {section_name} in {creation_context}")
 
         return conf_map
 

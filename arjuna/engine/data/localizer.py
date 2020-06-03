@@ -63,6 +63,7 @@ class L10NRef:
                     raise Exception("File does not exist: {}".format(fpath))
             return fpath
         else:
+            print(ldir, fpath)
             fpath = os.path.abspath(os.path.join(ldir, fpath))
             if not file_utils.is_file(fpath):
                 if file_utils.is_dir(fpath):
@@ -86,7 +87,7 @@ class JsonL10NRef(L10NRef):
         fnames = os.listdir(ldir)
         fnames.sort()
         for fname in fnames:
-            if fname.lower().endswith("json"):
+            if fname.lower().endswith(".json"):
                 lang = os.path.splitext(fname)[0].replace("-","_").lower()
                 fpath = self.get_localizer_file_path(ldir, fname)
                 try:

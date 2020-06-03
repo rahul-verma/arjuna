@@ -321,7 +321,20 @@ class JsonSchemaBuilder:
         self.__builder.add_schema(schema)
         return self
 
-    def object(self, jobj_or_str):
+    def string(self, jstr):
+        '''
+            Add schema based on an object string to the overall schema.
+
+            Call multiple times to add more objects.
+
+            Arguments:
+                jstr: A string representing a Python object.
+        '''
+        jobj = Json.from_str(jstr.strip(), allow_any=True)
+        self.object(jobj)
+        return self
+
+    def object(self, jobj):
         '''
             Add schema based on an object to the overall schema.
 
@@ -330,11 +343,6 @@ class JsonSchemaBuilder:
             Arguments:
                 jobj_or_str: JsonDict/JsonList or a Python str/list/dict.
         '''
-        if type(jobj_or_str) is str:
-            jobj = Json.from_str(jobj_or_str.strip(), allow_any=True)
-        else:
-            jobj = jobj_or_str
-
         if type(jobj) in {JsonDict, JsonList}:
             self.__builder.add_object(jobj.raw_object)
         else:
@@ -571,10 +579,13 @@ class Json:
             Extracts schema from provide Json object or string to create a `JsonSchema` object.
 
             Arguments:
-                jobj_or_str: JsonDict/JsonList or a Python str/list/dict.
+                jobj_or_str: JsonDict/JsonList or a Python list/dict or a string representing a Python object
         '''
         builder = JsonSchema.builder()
-        builder.object(jobj)
+        if type(jobj_or_str) is str:
+            builder.string(jobj_or_str)
+        else:
+            builder.object(jobj_or_str)
         return builder.build()
         
 
