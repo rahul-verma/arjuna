@@ -118,16 +118,12 @@ class XmlNode:
             Keyword Arguments:
                 normalize: If True, empty lines are removed and individual lines are trimmed.
         '''
+        texts = self.texts
+
         if normalize:
-            return "\n".join(
-                            [
-                                _remove_empty_lines_from_string(c.text)
-                                for c in self.__node.iter() 
-                                if not _empty_or_none(c.text)
-                            ]
-                        ).strip()
+            return "".join([l for l in texts if l !="\n"]).strip()
         else:
-            return self.node.text 
+            return "".join(texts).strip()
 
     @property
     def normalized_text(self) -> str:
@@ -141,7 +137,11 @@ class XmlNode:
         '''
             Unaltered text of the node.
         '''
-        return self.get_text()
+        text = self.get_text()
+        if text is None:
+            return ""
+        else:
+            return text
 
     @property
     def texts(self) -> list:
@@ -151,7 +151,7 @@ class XmlNode:
             Note:
                 Multiple texts are stored separately.
         '''
-        return self.node.xpath("//text()")
+        return self.node.xpath(".//text()")
 
     def get_inner_xml(self, normalize=False) -> str:
         '''
@@ -321,11 +321,15 @@ class XmlNode:
 
         out = []
         for locator in node_locators:
-            nodes = locator.search_node(self.node)
-            out.extend(nodes)
-            if stop_when_matched:
-                if nodes:
-                    break
+            try:
+                nodes = list(locator.search_node(self.node))
+            except:
+                continue
+            else:
+                out.extend(nodes)
+                if stop_when_matched:
+                    if nodes:
+                        break
         return out
 
     def find(self, *node_locators, strict: bool=False) -> 'XmlNode':

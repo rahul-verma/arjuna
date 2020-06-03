@@ -86,6 +86,8 @@ To Do
     - Enhanced Query support allows for a blank query, thereby returning a DataRecord object for more involved coding.
     - The string representing of such Data Record Shows data reference name and context/index used.
 - Yaml module added to TPI's parser package.
+- FIX:
+    - XmlNode's `text` and `texts` methods. lxml returned empty text for some HTML structures. Arjuna now uses .texts for both. Also changed "//text()" to ".//text()" in texts call.
 
 1.0.11
 ------

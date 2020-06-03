@@ -27,9 +27,18 @@ def print_source_info(source):
 def check_current_page_source(request, wordpress):
     print_source_info(wordpress.source)
 
+html1 = '''
+<div role="tab" mattablabelwrapper="" mat-ripple="" cdkmonitorelementfocus="" class="mat-ripple mat-tab-label mat-focus-indicator mat-tab-label-active ng-star-inserted" id="mat-tab-label-0-0" tabindex="0" aria-posinset="1" aria-setsize="2" aria-controls="mat-tab-content-0-0" aria-selected="true" aria-disabled="false"><div class="mat-tab-label-content"><!---->Basic information<!----></div></div>
+'''
+
+@test
+def check_html_source(request):
+    node = Html.from_str(html1, partial=True)
+    print(node.text)
+
 @test
 def check_element_source(request, wordpress):
-    node = Html.from_str("<p>abc</p>", partial=True)
+    node = Html.from_str(html1, partial=True)
     print(node.normalized_text)
     user_box = wordpress.element(attr=NVPair("for","user_login"))
     print(user_box.text)

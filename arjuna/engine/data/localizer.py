@@ -63,7 +63,6 @@ class L10NRef:
                     raise Exception("File does not exist: {}".format(fpath))
             return fpath
         else:
-            print(ldir, fpath)
             fpath = os.path.abspath(os.path.join(ldir, fpath))
             if not file_utils.is_file(fpath):
                 if file_utils.is_dir(fpath):
