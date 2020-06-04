@@ -31,7 +31,7 @@ age: sample
     print(yaml_node)
 
 @test
-def check_lis_loading(request):
+def check_list_loading(request):
     test = '''
 - 12
 - 34
@@ -49,6 +49,23 @@ cities:
     - Mumbai
     - Bengaluru
     - Delhi
+'''
+    yaml_node = Yaml.from_str(test)
+    for item in yaml_node:
+        print(item, type(item))
+
+    for section, item in yaml_node.items():
+        print(section, item, type(item))
+
+
+@test
+def check_list_looping(request):
+    test = '''
+- Mumbai
+- Bengaluru
+- 
+    something: 1
+    another: string
 '''
     yaml_node = Yaml.from_str(test)
     for item in yaml_node:

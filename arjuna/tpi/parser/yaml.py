@@ -18,11 +18,12 @@
 
 import os
 import yaml
+import abc
 
 from arjuna.tpi.helper.arjtype import CIStringDict
-from arjuna.core.error import YamlError, YamlUndefinedSectionError
+from arjuna.core.error import YamlError, YamlUndefinedSectionError, YamlListIndexError
 
-class YamlElement:
+class YamlElement(metaclass=abc.ABCMeta):
 
     def __init__(self, pydict_or_list, *, name="yaml", file_path=None):
         self.__pyobj = pydict_or_list
@@ -46,19 +47,41 @@ class YamlElement:
     def __str__(self):
         return self.as_str()
 
+    def _get_item(self, name, *, strict=True, as_yaml_str=False, allow_any=False):
+        val = self._get_value(name, strict=strict)
+        if as_yaml_str:
+            return yaml.dump(val)
+        return Yaml.from_object(val, name=name, file_path=self.file_path, allow_any=allow_any)
+
+    @abc.abstractmethod
+    def _get_value(self, name_or_index, *, strict=True):
+        pass
+
 class YamlList(YamlElement):
 
     def __init__(self, pylist, *, name="yaml", file_path=None):
         self.__ylist = pylist is not None and pylist or list()
         super().__init__(self.__ylist, name=name, file_path=file_path)
-        self.__iter = None    
+        self.__iter = None   
+
+    def __getitem__(self, index):
+        return self.__ylist[index] 
 
     def __iter__(self):
         self.__iter = iter(self.__ylist)
         return self
 
     def __next__(self):
-        return self.get_section(next(self.__iter), allow_any=True)    
+        return Yaml.from_object(next(self.__iter), name=self.name, file_path=self.file_path, allow_any=True)
+
+    def _get_value(self, index, *, strict=True):
+        if len(self.__ylist) < index:
+            return self.__ylist[index]
+        else:
+            if strict:
+                raise YamlListIndexError(f"YamlList does not contain index: {index}. List: {self.__ylist}")
+            else:
+                return None 
 
 
 class YamlDict(YamlElement):
@@ -70,25 +93,28 @@ class YamlDict(YamlElement):
         super().__init__(self.__ydict, name=name, file_path=file_path)
         self.__iter = None
 
+    def items(self):
+        return {i:self.get_section(i, allow_any=True) for i in self.__ydict}.items()
+
     def __iter__(self):
         self.__iter = iter(self.__ydict)
         return self
 
     def __next__(self):
-        return self.get_section(next(self.__iter), allow_any=True)
+        return Yaml.from_object(next(self.__iter), name=self.name, file_path=self.file_path, allow_any=True)
 
     def get_section(self, name, *, strict=True, as_yaml_str=False, allow_any=False):
-        val = self.__get_value(name, strict=strict)
+        val = self._get_value(name, strict=strict)
         if as_yaml_str:
             return yaml.dump(val)
-        return Yaml.from_object(val, name=name, file_path=self.file_path, allow_any=allow_any)
+        return Yaml.from_object(val, name=self.name + "." + name, file_path=self.file_path, allow_any=allow_any)
 
-    def __get_value(self, name, *, strict=True):
+    def _get_value(self, name, *, strict=True):
         if self.has_section(name):
             return self.__ydict[name]
         else:
             if strict:
-                raise YamlUndefinedSectionError(f"Yaml object does not have a section with the name: {name}")
+                raise YamlUndefinedSectionError(f"YamlDict object does not have a section with the name: {name}. Dict: {self.__ydict}")
             else:
                 return None
 

@@ -50,6 +50,9 @@ To Do
 
 1.0.13
 ------
+Yaml
+    - Implemented iter logic in YList and YDict
+
 
 1.0.12
 ------

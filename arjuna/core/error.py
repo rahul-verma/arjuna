@@ -191,7 +191,15 @@ class YamlError(Exception):
 
 class YamlUndefinedSectionError(Exception):
     '''
-        Raised when there is an eror in Yaml structure or there is an error in its expected format in the context where it is used in Arjuna.
+        Raised when the YamlList does not have the provided section key.
+    '''
+
+    def __init__(self, msg):
+        super().__init__(msg)
+
+class YamlListIndexError(Exception):
+    '''
+        Raised when the YamlList does not have the provided index.
     '''
 
     def __init__(self, msg):
