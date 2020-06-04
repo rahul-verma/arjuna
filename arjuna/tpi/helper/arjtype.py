@@ -30,9 +30,6 @@ import abc
 from arjuna.tpi.tracker import track
 
 class _ArDict(metaclass=abc.ABCMeta):
-    '''
-
-    '''
 
     def __init__(self, d=None):
         self.__store = dict()
@@ -140,7 +137,7 @@ class ProcessedKeyDict(_ArDict):
     def _clone(self):
         return ProcessedKeyDict(self.__processor, self.__store)  
 
-@track("debug")
+@track("trace")
 class OnceOnlyKeyCIStringDict(CIStringDict):
     '''
         Dictionary with case-insensitive keys that allows for immutable key-value pairs.
@@ -171,7 +168,7 @@ class OnceOnlyKeyCIStringDict(CIStringDict):
         return OnceOnlyKeyCIStringDict(self.items())
 
 
-@track("debug")
+@track("trace")
 class Dictable(metaclass=abc.ABCMeta):
     '''
         Abstract class. Any object which has a method **as_dict** is a **Dictable**.
@@ -228,7 +225,7 @@ class Offset(Point):
     def __init__(self, x, y):
         super().__init__(x,y)
 
-@track("debug")
+@track("trace")
 class Screen:
     '''
         Represents Gui Screen in terms of its XY coordinates.
@@ -248,7 +245,7 @@ class Screen:
         '''
         return _Offset(x,y)
 
-@track("debug")
+@track("trace")
 class NVPair(Dictable):
     '''
         Encapsulates a name-value pair. It is an implementation of **Dictable**.
@@ -266,7 +263,7 @@ class NVPair(Dictable):
         return {"name" : self.__name, "value": self.__value}
 
 
-@track("debug")
+@track("trace")
 class Attr(NVPair):
     '''
         A name-value pair with an associated optional tag name. It is an implementation of **Dictable**.
@@ -287,7 +284,7 @@ class Attr(NVPair):
         return d
 
 
-@track("debug")
+@track("trace")
 class NVPairs(Dictable):
     '''
         Encapsulates arbitrary name-value pairs. It is an implementation of **Dictable**.

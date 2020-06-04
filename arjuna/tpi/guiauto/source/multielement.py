@@ -22,7 +22,7 @@ from .base import GuiSource
 from .content import GuiSourceContent
 from arjuna.tpi.parser.xml import XmlNode
 
-@track("debug")
+@track("trace")
 class GuiMultiElementSource(GuiSource):
     '''
         A combined source of all GuiElements in a GuiMultiElement.

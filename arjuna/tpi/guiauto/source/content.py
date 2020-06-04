@@ -17,7 +17,7 @@
 
 from arjuna.tpi.tracker import track
 
-@track("debug")
+@track("trace")
 class GuiSourceContent:
     '''
         Source content of a Gui or GuiWidget.

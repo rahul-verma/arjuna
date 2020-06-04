@@ -25,7 +25,7 @@ from arjuna.tpi.parser.html import Html, HtmlNode
 from arjuna.tpi.tracker import track
 from .content import GuiSourceContent
 
-@track("debug")
+@track("trace")
 class GuiSource:
     '''
         GUI Source of a GUI entity.
@@ -50,7 +50,7 @@ class GuiSource:
     def _content(self, content):
         self.__content = content
 
-@track("debug")
+@track("trace")
 class SingleGuiEntitySource(GuiSource, metaclass=abc.ABCMeta):
     '''
         Abstract Base class for GUI Source of a Singular GUI entity (**GuiPage** or **GuiElement**).

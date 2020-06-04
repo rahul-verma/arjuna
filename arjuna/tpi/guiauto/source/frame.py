@@ -20,7 +20,7 @@ from arjuna.tpi.tracker import track
 from .base import GuiSource
 from .content import GuiSourceContent
 
-@track("debug")
+@track("trace")
 class _GuiFrameSource(GuiSource):
     '''
         Not supported yet.

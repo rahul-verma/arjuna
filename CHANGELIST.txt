@@ -40,6 +40,8 @@ Future Themes (In-Progress or Planned):
     - Better Logging
         - Devise a way for the logger pre and post pytest runs.
     - Report merging for HTML and XML files.
+    - Supprt for custom CSS for HTML reporting in Arjuna test projects.
+    - OAuth related requests to be available in a collapsible group.
 
 1.1.0 Goals
 -----------
@@ -51,8 +53,19 @@ To Do
 1.0.13
 ------
 Yaml
-    - Implemented iter logic in YList and YDict
-
+    - Implemented iter logic in YamlList and YamlDict
+    - YamlDict and YamlList support == operator.
+    - Simplified Yaml API as aligned with other format parsers for consistency.
+HTML Reporting
+    - Log height changed to 500px.
+    - Modal window dimensions chnaged to smaller.
+Data References
+    - Added support for Yaml based contextual as well as indexed data references.
+Docs
+    - Added doc comments for yaml module as it is in TPI.
+    - Added docs for indexed data references. Improved doc for contextual data references.
+    - Added doc for YAML in text parsing.
+- @track within Arjuna uses `trace` level for most classes.
 
 1.0.12
 ------

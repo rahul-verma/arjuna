@@ -21,6 +21,7 @@ import abc
 from arjuna.core.reader.excel import *
 from arjuna.tpi.data.record import *
 from arjuna.tpi.helper.arjtype import CIStringDict
+from arjuna.tpi.parser.yaml import Yaml
 
 class IndexedDataReference(metaclass=abc.ABCMeta):
 
@@ -57,77 +58,101 @@ class ExcelIndexedDataReference(IndexedDataReference):
         self.reader.close()
         super().__init__(map)
 
+class YamlIndexedDataReference(IndexedDataReference):
+
+    def __init__(self, path):
+        self.path = path
+        self.__name = get_file_name(path)
+        if (path.lower().endswith("yaml")):
+            self.__node = Yaml.from_file(path)
+        else:
+            raise Exception("Unsupported file format for Excel reading.")
+
+        map = dict()
+        for index, record in enumerate(self.__node):
+            map[index] = DataRecord(context="Ref-{}[{}]".format(self.__name, index), **dict(record.items()))
+        super().__init__(map)
+
+def get_file_name(path):
+    name = os.path.basename(path)
+    return os.path.splitext(name)[0]
 
 class ContextualDataReference(metaclass=abc.ABCMeta):
 
-    def __init__(self):
-        self.map = {}
+    def __init__(self, path):
+        self.__path = path
+        self.__name = get_file_name(path)
+        self.__map = {}
+        self._populate()
+
+    @property
+    def map(self):
+        return self.__map
+
+    @property
+    def path(self):
+        return self.__path
+
+    @property
+    def name(self):
+        return self.__name
 
     def update(self, data_reference):
         for context, record in data_reference.map.items():
             if context not in self.map:
-                self.map[context] = CIStringDict()
-            self.map[context].update(record.named_values)
+                self.__map[context] = CIStringDict()
+            self.__map[context].update(record.named_values)
 
     def update_from_dict(self, context, map):
         if context not in self.map:
-            self.map[context] = dict()
-        self.map[context].update(map)
+            self.__map[context] = dict()
+        self.__map[context].update(map)
+
+    def add_record(self, context, record):
+        self.__map[context.lower()] = DataRecord(context="Ref-{}[{}]".format(self.name, context), **record)
 
     def record_for(self, context):
-        if context.lower() in self.map:
-            return self.map[context.lower()]
-        else:
-            raise Exception("Context key {} not found in data reference: {}.".format(context, self.__class__.__name__))
+        try:
+            return self.__map[context.lower()]
+        except:
+            raise Exception("{} at {} does not contain {} context key.".format(self.__class__.__name__, self.path, context))
 
     def __str__(self):
-        return str({k: str(v) for k,v in self.map.items()})
+        return str({k: str(v) for k,v in self.__map.items()})
 
     def enumerate(self):
-        for k,v in self.map.items():
+        for k,v in self.__map.items():
             print(k, "::", type(v), str(v))
-
-class __ExcelDataReference(ContextualDataReference):
-    def __init__(self, path):
-        super().__init__()
-        self.path = path
-        if (path.lower().endswith("xls")):
-            self.reader = ExcelRow2ArrayReader(path)
-        else:
-            raise Exception("Unsupported file format for Excel reading.")
-        self.name = get_file_name(path)
-        self._populate()
 
     @abc.abstractmethod
     def _populate(self):
         pass
 
-    def record_for(self, context):
-        try:
-            return super().record_for(context)
-        except:
-            raise Exception("{} at {} does not contain {} context key.".format(self.__class__.__name__, self.path, context))
+class YamlContextualDataReference(ContextualDataReference):
+
+    def __init__(self, path):
+        if (path.lower().endswith("yaml")):
+            self.__node = Yaml.from_file(path)
+        else:
+            raise Exception("Unsupported file format for Excel reading.")
+        super().__init__(path)
+
+    def _populate(self):
+        for context in self.__node:
+            self.add_record(context, dict(self.__node.get_section(context).items()))
 
 
-# class ExcelRowDataReference(__ExcelDataReference):
+class __ExcelDataReference(ContextualDataReference):
+    def __init__(self, path):
+        if (path.lower().endswith("xls")):
+            self.reader = ExcelRow2ArrayReader(path)
+        else:
+            raise Exception("Unsupported file format for Excel reading.")
+        super().__init__(path)
 
-#     def __init__(self, path):
-#         super().__init__(path)
-
-#     def _populate(self):
-#         names = self.reader.headers[1:]
-#         while True:
-#             try:
-#                 data_record = self.reader.next()
-#             except StopIteration:
-#                 break
-#             else:
-#                 self.map[data_record[0].lower()] = DataRecord(context="Ref", **dict(zip(names, data_record[1:])))
-#         self.reader.close()
-
-def get_file_name(path):
-    name = os.path.basename(path)
-    return os.path.splitext(name)[0]
+    @abc.abstractmethod
+    def _populate(self):
+        pass
 
 class ExcelContextualDataReference(__ExcelDataReference):
 
@@ -147,8 +172,8 @@ class ExcelContextualDataReference(__ExcelDataReference):
                 for index, context in enumerate(contexts):
                     cmap[context][name] = data_record[index+1]
         self.reader.close()
-        for context, kv in cmap.items():
-            self.map[context.lower()] = DataRecord(context="Ref-{}[{}]".format(self.name, context), **kv)
+        for context, value in cmap.items():
+            self.add_record(context, value)
 
 def R(query="", *, bucket=None, context=None, index=None):
     if context is not None and index is not None:

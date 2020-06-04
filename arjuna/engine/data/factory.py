@@ -82,41 +82,46 @@ class DataReference:
     @classmethod
     def load_all(cls, ref_config):
         from arjuna.tpi.constant import ArjunaOption
-        refs = DataReferences()
+        crefs = DataReferences()
         contextual_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_CONTEXTUAL_DIR)
         if os.path.isdir(contextual_data_ref_dir):
             for fname in os.listdir(contextual_data_ref_dir):
-                if fname.lower().endswith("xls"):
-                    refs[os.path.splitext(fname)[0]] = cls.create_excel_contextual_data_ref(fname)
+                crefs[os.path.splitext(fname)[0]] = cls.create_contextual_data_ref(fname)
 
+        irefs = DataReferences()
         indexed_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_INDEXED_DIR)
         if os.path.isdir(indexed_data_ref_dir):
             for fname in os.listdir(indexed_data_ref_dir):
-                if fname.lower().endswith("xls"):
-                    refs[os.path.splitext(fname)[0]] = cls.create_excel_indexed_data_ref(fname)
-        return refs, None
+                irefs[os.path.splitext(fname)[0]] = cls.create_indexed_data_ref(fname)
+        return crefs, irefs
 
     @classmethod
-    def __create_excel_file_data_ref(cls, file_path, type):
+    def __create_file_data_ref(cls, file_path, type):
         ext = file_path.lower()
-        if not ext.endswith("xls"):
-            raise Exception("Unsupported file extension for Excel data reference: {}".format(file_path))
+        if not ext.endswith("xls") and not ext.endswith("yaml"):
+            raise Exception("Unsupported file extension for data reference: {}. Allowed: [xls, yaml]".format(file_path))
 
         from arjuna import Arjuna, ArjunaOption
         if type == DataRefType.CONTEXTUAL:
             data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_CONTEXTUAL_DIR)
             file_path = get_data_file_path(data_dir, file_path)
-            return ExcelContextualDataReference(file_path)
+            if file_path.lower().endswith("xls"):
+                return ExcelContextualDataReference(file_path)
+            else:
+                return YamlContextualDataReference(file_path)
         elif type == DataRefType.INDEXED:
             data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_INDEXED_DIR)
             file_path = get_data_file_path(data_dir, file_path)
-            return ExcelIndexedDataReference(file_path)
+            if file_path.lower().endswith("xls"):
+                return ExcelIndexedDataReference(file_path)
+            else:
+                return YamlIndexedDataReference(file_path)
 
     @classmethod
-    def create_excel_contextual_data_ref(cls, file_path):
-        return cls.__create_excel_file_data_ref(file_path, DataRefType.CONTEXTUAL)
+    def create_contextual_data_ref(cls, file_path):
+        return cls.__create_file_data_ref(file_path, DataRefType.CONTEXTUAL)
 
     @classmethod
-    def create_excel_indexed_data_ref(cls, file_path):
-        return cls.__create_excel_file_data_ref(file_path, DataRefType.INDEXED)
+    def create_indexed_data_ref(cls, file_path):
+        return cls.__create_file_data_ref(file_path, DataRefType.INDEXED)
 

@@ -28,7 +28,7 @@ from arjuna.tpi.engine import Arjuna
 from typing import Any
 from arjuna.tpi.tracker import track
 
-@track("debug")
+@track("trace")
 def C(query: 'ConfigQuery', *, cname: str=None) -> Any:
     '''
         Get the object for a configuration option.
@@ -42,7 +42,7 @@ def C(query: 'ConfigQuery', *, cname: str=None) -> Any:
     '''
     return Arjuna.get_config_value(query, cname=cname)
 
-@track("debug")
+@track("trace")
 def L(query: "L10nQuery", *, locale: 'Locale'=None, bucket: str=None, strict: bool=None) -> str:
     '''
         Get the localized string corresponding to Localization Query.
@@ -58,7 +58,7 @@ def L(query: "L10nQuery", *, locale: 'Locale'=None, bucket: str=None, strict: bo
     '''
     return Arjuna.get_localized_str(query, locale=locale, bucket=bucket, strict=strict)
 
-@track("debug")
+@track("trace")
 def R(query: 'DataRefQuery'="", *, bucket: str=None, context: str=None, index: int=None) -> Any:
     '''
         Get the object for a query from Contextual Data Reference.

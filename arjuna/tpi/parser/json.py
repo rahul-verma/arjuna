@@ -80,7 +80,7 @@ class JsonList(JsonElement):
         Encapsulates a list object in Json.
 
         Arguments:
-            list: Python list
+            pylist: Python list
 
         Note:
             Supports indexing just like a Python list.
@@ -96,6 +96,9 @@ class JsonList(JsonElement):
 
     def __getitem__(self, index):
         return Json.from_object(self.__list[index], allow_any=True)
+
+    def __len__(self):
+        return len(self.__list)
 
     @property
     def size(self):
@@ -136,7 +139,7 @@ class JsonList(JsonElement):
 @track("trace")
 class JsonDict(_ArDict, JsonElement):
     '''
-        Encapsualtes Dictionary object in Json.
+        Encapsulates Dictionary object in Json.
 
         Arguments:
             pydict: Python dict.
@@ -466,6 +469,9 @@ class Json:
 
             Any iterable which is not a dict is converted to a JsonList.
 
+            Arguments:
+                jobj: dict/list/tuple/set or a compatible Python object.
+
             Keyword Arguments:
                 allow_any: If True, if the object can not be coverted, same object is returned, else an Exception is raised.
         '''
@@ -486,38 +492,42 @@ class Json:
             raise Exception(f"Not able to convert provided string {jobj} into any appropriate Json element.")
 
     @classmethod
-    def from_str(cls, json_str: str, allow_any: bool=False) -> 'JsonDictOrList':
+    def from_str(cls, jstr: str, *, allow_any: bool=False) -> 'JsonDictOrList':
         '''
             Creates a Json object from a JSON string.
 
             Arguments:
-                file_path: Absolute path of the json file.
+                jstr: A string representing a compatible Python object.
+
+            Keyword Arguments:
                 allow_any: If True, if the object can not be coverted to a JsonDict/JsonList, same object is returned, else an Exception is raised.
 
             Returns:
-                Arjuna's `JsonDict` or `JsonList` object
+                Arjuna's `JsonDict` or `JsonList` object or the same object for allow_any = True
         '''
         try:
-            jobj = json.loads(json_str)
+            jobj = json.loads(jstr)
         except JSONDecodeError:
             if not allow_any:
                 raise
-            return cls.from_object(json_str, allow_any=allow_any)
+            return cls.from_object(jstr, allow_any=allow_any)
         else:
             return cls.from_object(jobj, allow_any=allow_any)
 
 
     @classmethod
-    def from_file(cls, file_path: str, allow_any: bool=False) -> 'JsonDictOrList':
+    def from_file(cls, file_path: str, *, allow_any: bool=False) -> 'JsonDictOrList':
         '''
             Creates a Json object from file.
 
             Arguments:
                 file_path: Absolute path of the json file.
+
+            Keyword Arguments:
                 allow_any: If True, if the object can not be coverted to a JsonDict/JsonList, same object is returned, else an Exception is raised.
 
             Returns:
-                Arjuna's `JsonDict` or `JsonList` object
+                Arjuna's `JsonDict` or `JsonList` object or the same object for allow_any = True
         '''
 
         with open(file_path, 'r') as f:

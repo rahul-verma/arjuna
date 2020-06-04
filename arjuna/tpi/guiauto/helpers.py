@@ -74,7 +74,7 @@ class _GuiInteractionConfig:
         return _GuiInteractionConfigBuilder()
 
 
-@track("debug")
+@track("trace")
 class GuiDriverExtendedConfig:
 
     def __init__(self, capabilities, browser_args, browser_prefs, browser_exts):
@@ -95,7 +95,7 @@ class GuiDriverExtendedConfig:
         map["browserExtensions"] = self.__browser_exts
         return map
 
-@track("debug")
+@track("trace")
 class GuiDriverExtendedConfigBuilder:
 
     def __init__(self):

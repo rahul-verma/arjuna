@@ -1,10 +1,10 @@
 .. _text_parsing:
 
 
-Parsing JSON, XML, HTML Files and Strings
-=========================================
+Parsing JSON, YAML, XML, HTML Files and Strings
+===============================================
 
-JSON, XML and HTML parsing is a very common need in test automation.
+JSON, YAML, XML and HTML parsing is a very common need in test automation.
 
 Arjuna provides its own objects to easy handle these content types in its helper classes in Tester Programming Interface. The corresponding objects are also returned by its other objects.
 
@@ -98,7 +98,7 @@ Asserting **JsonDict** Object
 
 It has the following properties:
     * **raw_object**: The underlying dictionary
-    * **size**: Number of keys in the JsonDict
+    * **size**: Number of keys in the JsonList
 
 
 **==** Operator with **JsonDict** and **JsonList** Objects
@@ -106,7 +106,7 @@ It has the following properties:
 
 **==** operator is overridden for  **JsonDict** and **JsonList** objects.
 
-JsonDict supports comparison with a JsonDoct or Python dict.
+JsonDict supports comparison with a JsonDict or Python dict.
 
 JsonList supports comparision with a JsonList or Python list.
 
@@ -141,6 +141,63 @@ You can currently make two modifications to the **JsonSchema** once created:
 
     * **mark_optional**: Mark arbitrary keys as optional in the root of the schema.
     * **allow_null**: Allow `null` value for the arbitrary keys.
+
+
+**YAML**
+--------
+
+YAML is a popular format used in configurations. It is also the default format for Arjuna configuration and definition files.
+
+Creating YAML Objects
+^^^^^^^^^^^^^^^^^^^^^
+
+Arjuna's :py:class:`Json <arjuna.tpi.parser.yaml.Yaml>` class provides with various helper methods to easily create a YAML object from various sources:
+
+    * **from_file**: Load YAML from a file.
+    * **from_str**: Load YAML from a string.
+    * **from_object**: Load YAML from a Python built-in data type object.
+
+The loaded object is returned as one of the following:
+    * :py:class:`YamlDict <arjuna.tpi.parser.yaml.YamlDict>`
+    * :py:class:`YamlList <arjuna.tpi.parser.yaml.YamlList>`
+    * If `allow_any` is set to True, then **from_file**, **from_str** and **from_object** calls return the same object as passed, if it is not a mapping or iterable.
+
+**YamlDict** Object
+^^^^^^^^^^^^^^^^^^^
+
+:py:class:`YamlDict <arjuna.tpi.parser.yaml.YamlDict>` encapsulates the YAML dictionary and provides higher level methods for interaction.
+
+It has the following properties:
+    * **raw_object**: The underlying dictionary
+    * **size**: Number of keys in the YamlDict
+
+**YamlList** Object
+^^^^^^^^^^^^^^^^^^^
+
+:py:class:`YamlList <arjuna.tpi.parser.yaml.YamlList>` encapsulates the YAML list and provides higher level methods for interaction.
+
+It has the following properties:
+    * **raw_object**: The underlying dictionary
+    * **size**: Number of keys in the JsonList
+
+
+**==** Operator with **YamlDict** and **YamlList** Objects
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**==** operator is overridden for  **YamlDict** and **YamlList** objects.
+
+YamlDict supports comparison with a YamlDict or Python dict.
+
+YamlList supports comparision with a YamlList or Python list.
+
+    .. code-block:: python
+
+        yaml_dict_1 == yaml_dict_2
+        yaml_dict_1 == py_dict
+
+        yaml_list_1 == yaml_list_2
+        yaml_list_1 == py_list
+
 
 **XML**
 -------

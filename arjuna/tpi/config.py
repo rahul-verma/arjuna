@@ -176,7 +176,7 @@ class Configuration:
     def __str__(self):
         return self.name
 
-@track("debug")
+@track("trace")
 class ConfigBuilder:
     '''
         Helps in constructing a new **Configuration** object from an existing one.

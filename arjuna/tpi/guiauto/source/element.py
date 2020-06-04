@@ -19,7 +19,7 @@ from arjuna.tpi.tracker import track
 
 from .base import SingleGuiEntitySource
 
-@track("debug")
+@track("trace")
 class GuiElementSource(SingleGuiEntitySource):
     '''
         Abstract Base class for GUI Source of a Singular GUI entity (**GuiPage** or **GuiElement**).

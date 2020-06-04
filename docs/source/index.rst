@@ -263,6 +263,11 @@ Parsers
     * :py:class:`JsonList <arjuna.tpi.parser.json.JsonList>`
     * :py:class:`JsonSchema <arjuna.tpi.parser.json.JsonSchema>`
     * :py:class:`JsonSchemaBuilder <arjuna.tpi.parser.json.JsonSchemaBuilder>`
+* :py:mod:`YAML <arjuna.tpi.yaml.yaml>`
+    * :py:class:`Yaml <arjuna.tpi.parser.yaml.Yaml>`
+    * :py:class:`YamlElement <arjuna.tpi.parser.yaml.YamlElement>`
+    * :py:class:`YamlDict <arjuna.tpi.parser.yaml.YamlDict>`
+    * :py:class:`YamlList <arjuna.tpi.parser.yaml.YamlList>`
 * :py:mod:`XML <arjuna.tpi.parser.xml>`
     * :py:class:`Xml <arjuna.tpi.parser.xml.Xml>`
     * :py:class:`XmlNode <arjuna.tpi.parser.xml.XmlNode>`

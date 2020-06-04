@@ -65,7 +65,7 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
         ret = func(*vargs, **kwargs)
     except Exception as e:
         import traceback
-        log_error("{}:: Exception: {}. Trace: {}".format(qualname, e, traceback.format_exc()))
+        log_call("{}:: Exception: {}. Trace: {}".format(qualname, e, traceback.format_exc()))
         raise
     else:
         if prop:

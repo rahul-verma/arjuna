@@ -139,7 +139,7 @@ The files are automatically picked up from **Data Sources directory** which is *
 Driving with Excel File
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-An excel data file can contain data in following format. (Only .xls files are supported as of now)
+An excel data file (.xls file) can contain data in following format. (.xlsx files are NOT supported as of now)
 
 .. image:: _static/inputxls.png
 
