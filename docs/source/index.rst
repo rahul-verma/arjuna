@@ -132,8 +132,8 @@ HTTP Automation
 
    httpauto
 
-Parsing JSON, XML, HTML Files and Strings
-=========================================
+Parsing JSON, YAML, XML, HTML Files and Strings
+===============================================
 
 .. toctree::
    :maxdepth: 4
@@ -193,22 +193,22 @@ The Magic Functions
 
 Data Driven Testing
 ===================
-* :py:mod:`Data Source Markup <arjuna.tpi.engine.data.markup>`
-    * :py:class:`record <arjuna.tpi.engine.data.markup.record>`
-    * :py:class:`records <arjuna.tpi.engine.data.markup.records>`
-    * :py:class:`data_function <arjuna.tpi.engine.data.markup.data_function>`
-    * :py:class:`data_class <arjuna.tpi.engine.data.markup.data_class>`
-    * :py:class:`data_file <arjuna.tpi.engine.data.markup.data_file>`
-    * :py:class:`many_data_sources <arjuna.tpi.engine.data.markup.many_data_sources>`
-* :py:class:`DataRecord <arjuna.tpi.engine.data.record.DataRecord>`
+* :py:mod:`Data Source Markup <arjuna.tpi.data_markup>`
+    * :py:class:`record <arjuna.tpi.engine.data_markup.record>`
+    * :py:class:`records <arjuna.tpi.engine.data_markup.records>`
+    * :py:class:`data_function <arjuna.tpi.engine.data_markup.data_function>`
+    * :py:class:`data_class <arjuna.tpi.engine.data_markup.data_class>`
+    * :py:class:`data_file <arjuna.tpi.engine.data_markup.data_file>`
+    * :py:class:`many_data_sources <arjuna.tpi.engine.data_markup.many_data_sources>`
+* :py:class:`DataRecord <arjuna.tpi.data.record.DataRecord>`
 
 Data Generation and Data Entities
 =================================
-* :py:class:`Random <arjuna.tpi.engine.data.generator.Random>`
-* :py:class:`generator <arjuna.tpi.engine.data.generator.generator>`
-* :py:class:`composite <arjuna.tpi.engine.data.generator.composite>`
-* :py:class:`composer <arjuna.tpi.engine.data.generator.composer>`
-* :py:class:`data_entity <arjuna.tpi.engine.data.entity.data_entity>`
+* :py:class:`Random <arjuna.tpi.data.generator.Random>`
+* :py:class:`generator <arjuna.tpi.data.generator.generator>`
+* :py:class:`composite <arjuna.tpi.data.generator.composite>`
+* :py:class:`composer <arjuna.tpi.data.generator.composer>`
+* :py:class:`data_entity <arjuna.tpi.data.entity.data_entity>`
 
 
 Web GUI Automation

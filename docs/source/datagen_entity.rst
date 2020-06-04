@@ -33,11 +33,11 @@ Using its methods you can generate the following:
 Creating a Basic **Data Entity**
 --------------------------------
 
-Arjuna's :py:class:`data_entity <arjuna.tpi.engine.data.entity.data_entity>` gives you an advanced, yet easy way of creating entities that contain associated generated/provided data.
+Arjuna's :py:class:`data_entity <arjuna.tpi.data.entity.data_entity>` gives you an advanced, yet easy way of creating entities that contain associated generated/provided data.
 
 In simple words, a Data Entity is a Python class whose objects when created can contain automatically generated associated data.
 
-In its simplest form, :py:class:`data_entity <arjuna.tpi.engine.data.entity.data_entity>` is a Python class (without custom behaviors/methods) creator without writing a class. In its more involved forms, it starts serving complex data needs of today's automation world.
+In its simplest form, :py:class:`data_entity <arjuna.tpi.data.entity.data_entity>` is a Python class (without custom behaviors/methods) creator without writing a class. In its more involved forms, it starts serving complex data needs of today's automation world.
 
 In the rest of this page, more advanced options will be considered. Here's a simple example of a Data Entity with static data:
 
