@@ -37,7 +37,14 @@ class IndexedDataReference(metaclass=abc.ABCMeta):
 
     def record_for(self, index):
         try:
-            return self.__records[index]
+            # To support negative indices
+            indices = list(self.__records.keys())
+            try:
+                target_index = indices[index]
+            except:
+                raise KeyError()
+            else:
+                return self.__records[target_index]
         except KeyError:
             raise Exception("Index {} not found in data reference: {}.".format(index, self.__class__.__name__))
 
