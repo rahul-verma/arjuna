@@ -144,7 +144,7 @@ class YamlDict(CIStringDict, YamlElement):
 
     def __init__(self, pydict):
         CIStringDict.__init__(self, pydict)
-        YamlElement.__init__(self, self.store)
+        YamlElement.__init__(self, self.orig_dict)
         self.__sections = tuple(self.keys())
         self.__iter = None
 
@@ -169,10 +169,10 @@ class YamlDict(CIStringDict, YamlElement):
         '''
             dictitems object containing key-value pairs in this object.
         '''
-        return {i:self.get_section(i, allow_any=True) for i in self.store}.items()
+        return {i:self.get_section(i, allow_any=True) for i in self.orig_dict}.items()
 
     def __iter__(self):
-        self.__iter = iter(self.store)
+        self.__iter = iter(self.orig_dict)
         return self
 
     def __next__(self):
@@ -195,10 +195,10 @@ class YamlDict(CIStringDict, YamlElement):
 
     def _get_value(self, name, *, strict=True):
         if self.has_section(name):
-            return self.store[name]
+            return super().__getitem__(name)
         else:
             if strict:
-                raise YamlUndefinedSectionError(f"YamlDict object does not have a section with the name: {name}. Dict: {self.store}")
+                raise YamlUndefinedSectionError(f"YamlDict object does not have a section with the name: {name}. Dict: {self.orig_dict}")
             else:
                 return None
 
@@ -212,14 +212,14 @@ class YamlDict(CIStringDict, YamlElement):
         '''
             Check if a key/section name is present. You can also use the 'in' operator instead, like a Python dict.
         '''
-        return name in self.store
+        return name in self
 
     @property
     def section_names(self):
         '''
             All section/key names in this object.
         '''
-        return self.store.keys()
+        return self.keys()
 
     def validate_sections_present(*section_names, atleast_one=False):
         '''
@@ -244,7 +244,7 @@ class YamlDict(CIStringDict, YamlElement):
         if type(other) is dict:
             pass
         elif type(other) is YamlDict:
-            other = other.raw_object
+            other = other.store
         elif other is None:
             return False
         else:
@@ -253,7 +253,7 @@ class YamlDict(CIStringDict, YamlElement):
         if len(self) != len(other):
             return False
         else:
-            return self.raw_object == other
+            return self.store == other
 
 class Yaml:
 

@@ -59,6 +59,11 @@ Data References
     - Support for context/index based value retrieval like a dict/list syntax.
     - Added documentation for these feature enhancements.
     - Added example/test code.
+CIStringDict
+    - Retains case-insensitive inquiries
+    - When all keys or items or raw object is retrieved, original casing of keys is retained.
+DataRecord
+    - .named_values retains original casing of keys.
 
 1.0.13
 ------

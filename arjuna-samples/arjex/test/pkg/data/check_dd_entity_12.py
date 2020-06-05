@@ -54,8 +54,8 @@ def check_entity_with_simple_generators(request):
 @test
 def check_entity_with_simple_gen_args(request):
     for i in range(3):
-        Person1 = data_entity("Person", "name", debt=generator(Random.fixed_length_number, length=i+1))
-        print(Person1(name='Mac'))
+        Person1 = data_entity("Person", "name age", debt=generator(Random.fixed_length_number, length=i+1))
+        print(Person1(name='Mac', age=21))
 
 @test
 def check_entity_with_composite_gen(request):

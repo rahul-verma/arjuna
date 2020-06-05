@@ -45,6 +45,7 @@ class DataRecord:
         self.__named = None
         if process:
             self.__indexed = tuple(vargs)
+            self.__orig_values = types.MappingProxyType(kwargs)
             self.__named = types.MappingProxyType({i.lower(): j for i, j in kwargs.items()})
         else:
             self.__indexed = tuple()
@@ -80,7 +81,7 @@ class DataRecord:
         '''
             Get all named objects
         '''
-        return self.__named
+        return dict(self.__orig_values)
 
     def is_empty(self) -> bool:
         '''

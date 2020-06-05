@@ -9,7 +9,7 @@
 div.image {
 	border: 1px solid #e6e6e6;
 	float: right;
-	height: 240px;
+    height: 500px;
 	margin-left: 5px;
 	overflow: scroll;
 	width: 320px

@@ -17,6 +17,7 @@
 
 import os
 import abc
+import random
 
 from arjuna.core.reader.excel import *
 from arjuna.tpi.data.record import *
@@ -34,6 +35,13 @@ class IndexedDataReference(metaclass=abc.ABCMeta):
 
     def __getitem__(self, index):
         return self.record_for(index)
+
+    def random(self):
+        index = random.randint(0, len(self) -1)
+        return self[index]
+
+    def last(self):
+        return self[-1]
 
     def record_for(self, index):
         try:
@@ -103,7 +111,7 @@ class ContextualDataReference(metaclass=abc.ABCMeta):
     def __init__(self, path):
         self.__path = path
         self.__name = get_file_name(path)
-        self.__map = {}
+        self.__map = CIStringDict()
         self._populate()
         self.__iter = None
 
@@ -150,11 +158,11 @@ class ContextualDataReference(metaclass=abc.ABCMeta):
         self.__map[context].update(map)
 
     def add_record(self, context, record):
-        self.__map[context.lower()] = DataRecord(context="Ref-{}[{}]".format(self.name, context), **record)
+        self.__map[context] = DataRecord(context="Ref-{}[{}]".format(self.name, context), **record)
 
     def record_for(self, context):
         try:
-            return self.__map[context.lower()]
+            return self.__map[context]
         except:
             raise Exception("{} at {} does not contain {} context key.".format(self.__class__.__name__, self.path, context))
 

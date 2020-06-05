@@ -33,42 +33,56 @@ class _ArDict(metaclass=abc.ABCMeta):
 
     def __init__(self, d=None):
         self.__store = dict()
+        self.__key_map = dict()
         if d:
             self.update(d)
 
     @property
+    def orig_dict(self):
+        return self.__create_orig_dict()
+
+    @property
     def store(self):
         return self.__store
+
+    def __create_orig_dict(self):
+        return {self.__key_map[k]: v for k,v in self.store.items()}
+
+    def __process_key_wrapper(self, key):
+        revised_key = self._process_key(key)
+        if revised_key not in self.__key_map:
+            self.__key_map[revised_key] = key
+        return revised_key
 
     @abc.abstractmethod
     def _process_key(self, key):
         pass
 
     def __getitem__(self, key):
-        return self.__store[self._process_key(key)]
+        return self.__store[self.__process_key_wrapper(key)]
 
     def pop(self, key):
-        return self.__store.pop(self._process_key(key))
+        return self.__store.pop(self.__process_key_wrapper(key))
 
     def __setitem__(self, key, value):
-        self.__store[self._process_key(key)] = value
+        self.__store[self.__process_key_wrapper(key)] = value
 
     def __delitem__(self, key):
-        del self.__store[self._process_key(key)]
+        del self.__store[self.__process_key_wrapper(key)]
 
     def _update(self, d):
         if not d: return
         for k,v in d.items():
-            self[self._process_key(k)] = v
+            self[self.__process_key_wrapper(k)] = v
 
     def update(self, d):
         self._update(d)
 
     def has_key(self, key):
-        return self._process_key(key) in self.__store
+        return self.__process_key_wrapper(key) in self.__store
 
     def keys(self):
-        return self.__store.keys()
+        return self.__create_orig_dict().keys()
 
     def __getattr__(self, attr):
         try:
@@ -83,19 +97,22 @@ class _ArDict(metaclass=abc.ABCMeta):
         if not self.__store:
             return "<empty>"
         else:
-            return str(self.__store)
+            return str(self.__create_orig_dict())
 
     def __iter__(self):
-        return iter(self.__store)
+        return iter(self.__create_orig_dict())
 
     def clone(self):
         return self._clone()
 
     def items(self):
-        return self.__store.items()
+        return self.__create_orig_dict().items()
 
     def is_empty(self):
         return len(self.__store) == 0
+
+    def _get_orig_dict(self):
+        return self.__create_orig_dict()
 
 
 class CIStringDict(_ArDict):
@@ -112,7 +129,7 @@ class CIStringDict(_ArDict):
         return key.lower()
 
     def _clone(self):
-        return CIStringDict(self.__store)
+        return CIStringDict(self._get_orig_dict())
 
     def __str__(self):
         return "CIStringDict: " + super().__str__()
