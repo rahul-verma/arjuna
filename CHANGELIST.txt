@@ -49,9 +49,16 @@ To Do
     --> Separation of HTML/JS from code to Arjuna res directory.
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
+    --> Align multi-element assertions with IterableAsserterMixin
 
 1.0.14
 ------
+Data References
+    - Support bucket query which is equivalent to Arjuna.get_data_ref(bucket_name)
+    - Support for iterality in Contextual and Indexed References.
+    - Support for context/index based value retrieval like a dict/list syntax.
+    - Added documentation for these feature enhancements.
+    - Added example/test code.
 
 1.0.13
 ------

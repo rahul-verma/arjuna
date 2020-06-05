@@ -27,6 +27,13 @@ class IndexedDataReference(metaclass=abc.ABCMeta):
 
     def __init__(self, pydict):
         self.__records = pydict
+        self.__iter = None
+
+    def __len__(self):
+        return len(self.__records)
+
+    def __getitem__(self, index):
+        return self.record_for(index)
 
     def record_for(self, index):
         try:
@@ -35,11 +42,18 @@ class IndexedDataReference(metaclass=abc.ABCMeta):
             raise Exception("Index {} not found in data reference: {}.".format(index, self.__class__.__name__))
 
     def __str__(self):
-        return str({k: str(v) for k,v in self.self.__records.items()})
+        return str({k: str(v) for k,v in self.__records.items()})
 
     def enumerate(self):
         for k,v in self.__records.items():
             print(k, "::", type(v), str(v))
+
+    def __iter__(self):
+        self.__iter = iter(self.__records.values())
+        return self
+
+    def __next__(self):
+        return next(self.__iter)
 
 
 class ExcelIndexedDataReference(IndexedDataReference):
@@ -84,6 +98,26 @@ class ContextualDataReference(metaclass=abc.ABCMeta):
         self.__name = get_file_name(path)
         self.__map = {}
         self._populate()
+        self.__iter = None
+
+    def __iter__(self):
+        self.__iter = iter(self.__map)
+        return self
+
+    def __next__(self):
+        return next(self.__iter)
+
+    def __len__(self):
+        return len(self.__map)
+
+    def __getitem__(self, context):
+        return self.record_for(context)
+
+    def keys(self):
+        return self.__map.keys()
+
+    def items(self):
+        return self.__map.items()
 
     @property
     def map(self):
@@ -206,16 +240,21 @@ def R(query="", *, bucket=None, context=None, index=None):
     try:
         bucket, context_or_index, query = final_query.split('.', 2)
     except ValueError:
+        query = ""
         try:
             bucket, context_or_index = final_query.split('.', 1)
-            query = ""
         except:
-            raise Exception("Not able to form a valid reference query with provided data. Invalid query: {}".format(final_query))
+            context_or_index = ""
+            try:
+                bucket = final_query
+            except:
+                raise Exception("Not able to form a valid reference query with provided data. Invalid query: {}".format(final_query))
 
     try:
         context_or_index = int(context_or_index)
     except:
-        pass
+        if context_or_index == "":
+            context_or_index = None
 
     try:
         query = int(query)
@@ -224,10 +263,13 @@ def R(query="", *, bucket=None, context=None, index=None):
             query = None
 
     try:
-        if query is None:
-            return Arjuna.get_data_ref(bucket).record_for(context_or_index)
+        if context_or_index is not None:
+            if query is None:
+                return Arjuna.get_data_ref(bucket).record_for(context_or_index)
+            else:
+                return Arjuna.get_data_ref(bucket).record_for(context_or_index)[query]
         else:
-            return Arjuna.get_data_ref(bucket).record_for(context_or_index)[query]
+            return Arjuna.get_data_ref(bucket)
     except Exception as e:
         import traceback
         raise Exception("Error in retrieving reference value for: bucket: >>{}<<, context: >>{}<< and query >>{}<< in data reference. {}. {}".format(bucket, context, query, str(e), traceback.format_exc()))

@@ -485,11 +485,16 @@ class Json:
                 return JsonList(jobj)
             except:
                 pass
-
-        if allow_any:
-            return jobj
+            if allow_any:
+                return jobj
+            else:
+                raise Exception(f"Not able to convert provided string {jobj} into any appropriate Json element.")
         else:
-            raise Exception(f"Not able to convert provided string {jobj} into any appropriate Json element.")
+            # string
+            if allow_any:
+                return jobj     
+            else:
+                raise Exception(f"Not able to convert provided string {jobj} into any appropriate Json element.")       
 
     @classmethod
     def from_str(cls, jstr: str, *, allow_any: bool=False) -> 'JsonDictOrList':

@@ -49,6 +49,54 @@ def check_contextual_data_ref(request, data):
 @test(drive_with=
     records(
         # Excel
+        record(bucket="eusers", dcontext="bronze", field="user"),
+        record(bucket="eusers", dcontext="bronze", field="pwd"), 
+        record(bucket="eusers", dcontext="silver", field="user"),
+        record(bucket="eusers", dcontext="silver", field="pwd"), 
+        record(bucket="eusers", dcontext="gold", field="user"),
+        record(bucket="eusers", dcontext="gold", field="pwd"), 
+
+        # Yaml
+        record(bucket="yusers", dcontext="bronze", field="user"),
+        record(bucket="yusers", dcontext="bronze", field="pwd"), 
+        record(bucket="yusers", dcontext="silver", field="user"),
+        record(bucket="yusers", dcontext="silver", field="pwd"), 
+        record(bucket="yusers", dcontext="gold", field="user"),
+        record(bucket="yusers", dcontext="gold", field="pwd"), 
+))
+def check_keybased_contextual_data_ref(request, data):
+    print(R(bucket=data.bucket)[data.dcontext][data.field])
+    print(Arjuna.get_data_ref(data.bucket)[data.dcontext][data.field])
+
+
+@test(drive_with=
+    records(
+        record(bucket="eusers"),
+        record(bucket="yusers")
+))
+def check_allrec_contextual_data_ref(request, data):
+    for context in R(bucket=data.bucket):
+        print(context, R(bucket=data.bucket, context=context))
+
+    for context, record in R(bucket=data.bucket).items():
+        print(context, record)
+
+    for context in R(f"{data.bucket}"):
+        print(context, R(bucket=data.bucket, context=context))
+
+    for context, record in R(f"{data.bucket}").items():
+        print(context, record)
+
+    for context in Arjuna.get_data_ref(data.bucket):
+        print(context, R(bucket=data.bucket, context=context))
+
+    for context, record in Arjuna.get_data_ref(data.bucket).items():
+        print(context, record)
+
+
+@test(drive_with=
+    records(
+        # Excel
         record(bucket="eindexed", index=0, field="left"),
         record(bucket="eindexed", index=0, field="right"),
         record(bucket="eindexed", index=0, field="sum"), 
@@ -73,3 +121,40 @@ def check_indexed_data_ref(request, data):
     print(R(f"{data.field}", bucket=data.bucket, index=data.index))
     print(R(f"{data.index}.{data.field}", bucket=data.bucket))
     print(R(f"{data.bucket}.{data.index}.{data.field}"))
+
+@test(drive_with=
+    records(
+        # Excel
+        record(bucket="eindexed", index=0, field="left"),
+        record(bucket="eindexed", index=0, field="right"),
+        record(bucket="eindexed", index=0, field="sum"), 
+        record(bucket="eindexed", index=1, field="left"),
+        record(bucket="eindexed", index=1, field="right"), 
+        record(bucket="eindexed", index=1, field="sum"), 
+
+        # Yaml
+        record(bucket="yindexed", index=0, field="left"),
+        record(bucket="yindexed", index=0, field="right"),
+        record(bucket="yindexed", index=0, field="sum"), 
+        record(bucket="yindexed", index=1, field="left"),
+        record(bucket="yindexed", index=1, field="right"), 
+        record(bucket="yindexed", index=1, field="sum"), 
+))
+def check_indexbased_indexed_data_ref(request, data):
+    print(R(bucket=data.bucket)[data.index][data.field])
+    print(Arjuna.get_data_ref(data.bucket)[data.index][data.field])
+
+@test(drive_with=
+    records(
+        record(bucket="eindexed"),
+        record(bucket="yindexed")
+))
+def check_allrec_indexed_data_ref(request, data):
+    for record in R(bucket=data.bucket):
+        print(record)
+
+    for record in R(f"{data.bucket}"):
+        print(record)
+
+    for context in Arjuna.get_data_ref(data.bucket):
+        print(record)

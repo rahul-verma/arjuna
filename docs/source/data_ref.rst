@@ -230,3 +230,68 @@ You can retrieve object from indexed data reference with a combination of **buck
         .. code-block:: python
 
             R(bucket="eusers", index=1)
+
+
+Retrieving Complete Contextual/Indexed Data Reference
+-----------------------------------------------------
+
+In the above sections we saw retrieving a name/key in the referred object by context or index.
+
+You can also retrieve the complete Data Reference.
+
+Using **R()** and **Query**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    .. code-block:: python
+
+        R(bucket_name)
+
+        # For example
+        R("eusers")
+
+        R(bucket=bucket_name)
+
+        #For Example
+        R(bucket="eusers")
+
+Using **Arjuna.get_data_ref()**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As for this use case the query is not of much use, an easier way is to do the following:
+
+    .. code-block:: python
+
+        Arjuna.get_data_ref(bucket_name)
+
+Contextual Data References Behave Like Python Dicts
+---------------------------------------------------
+
+If you retrieve the a contextual data reference, you can treat it like a Python dict:
+
+    .. code-block:: python
+
+        data_ref[context_key]
+        data_ref.keys()
+        data_ref.items()
+
+        for context in data_ref:
+            # do something
+
+        for context, record in data_ref.items():
+            # do something
+
+Indexed Data References Behave Like Python Tuples (Sequences)
+-------------------------------------------------------------
+
+If you retrieve the an indexed data reference, you can treat it like a Python tuple (sequence):
+
+    .. code-block:: python
+
+        data_ref[index]
+
+        for record in data_ref:
+            # do something
+
+
+
+

@@ -280,11 +280,16 @@ class Yaml:
                 return YamlList(yobj)
             except:
                 pass
-        else:
+
             if allow_any:
                 return yobj
             else:
                 raise Exception("Unknown object type for Yaml: {}".format(type(yobj)))
+        else:
+            if allow_any:
+                return yobj
+            else:
+                raise Exception("Unknown object type for Yaml: {}".format(type(yobj)))            
 
     @classmethod
     def from_file(cls, file_path, *, allow_any=False):
