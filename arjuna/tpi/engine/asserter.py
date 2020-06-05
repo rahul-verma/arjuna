@@ -240,6 +240,8 @@ class IterableAsserterMixin:
             Keyword Arguments:
                 msg: Purpose of this assertion.
         '''
+        if size <0 :
+            raise TypeError("Negative number aren't allowed")
         length = len(self)
         if length > size:
             raise AssertionError(f"{self.__klass_name} is not of maximum expected size. Expected maximum size is {size}. Actual: {length}. {msg}")
