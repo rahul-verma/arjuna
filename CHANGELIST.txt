@@ -64,6 +64,9 @@ CIStringDict
     - When all keys or items or raw object is retrieved, original casing of keys is retained.
 DataRecord
     - .named_values retains original casing of keys.
+HTML Reporting
+    - JS/HTML now in res files.
+    - Collapsible redirected network packets based on Stefan's sample code submission.
 
 1.0.13
 ------

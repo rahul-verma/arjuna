@@ -18,80 +18,6 @@
 from itertools import cycle
 from py.xml import html, raw
 
-ARJUNA_JS = '''
-function openModal(event){
-    var source = event.target || event.srcElement;
-    var modal = document.getElementById("modal-packet");
-    modal.style.display = "block";
-    var req = document.getElementById("modal-packet-request");
-    req.innerHTML = ""
-    var h3_req = document.createElement("h3");
-    h3_req.innerHTML = "Request"
-    req.appendChild(h3_req)
-    req.appendChild(document.createTextNode(source.getAttribute("data-request")))
-
-    var res = document.getElementById("modal-packet-response");
-    res.innerHTML = ""
-    var h3_res = document.createElement("h3");
-    h3_res.innerHTML = "Response"
-    req.appendChild(h3_res)
-    res.appendChild(document.createTextNode(source.getAttribute("data-response")))
-    var span = document.getElementById(source.id + "modal-packet-span");
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-
-}
-
-function openModalImage(event){
-    var img_link = event.target || event.srcElement;
-    var modal = document.getElementById("modal-image");
-    var modal_image = document.getElementById("modal-image-content");
-    modal.style.display = "block";
-    modal_image.src = img_link.src;
-    var span = document.getElementById("modal-image-span");
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
-}
-'''
-
-IMG_SPAN ='''
-
-<!-- The Network Packet Modal -->
-<div id="modal-packet" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span id="modal-packet-span" class="close">&times;</span>
-    <div class="linebreaks"><p id="modal-packet-request"></p><p id="modal-packet-response"></p>
-    </div>
-  </div>
-
-</div>
-
-<!-- The Modal -->
-<div id="modal-image" class="modal">
-<div class="modal-content">
-  <span id="modal-image-span" class="close">&times;</span>
-  <img id="modal-image-content" class="modal-content">
-  <div id="caption"></div>
-  </div>
-</div>
-'''
-
 class PytestHooks:
     '''
         Easy hooks to be used in **pytest** configuration file: **conftest.py** placed under **<Project_Root_Dir/test** directory in test project.
@@ -144,8 +70,11 @@ class PytestHooks:
 
     @classmethod
     def inject_arjuna_js(cls, prefix):
-        prefix += [html.script(raw(ARJUNA_JS))]
-        prefix += [raw(IMG_SPAN)]
+        from arjuna import C
+        with open(C("arjuna.root.dir") + "/arjuna/res/arjuna.js", "r") as f:
+            prefix += [html.script(raw(f.read()))]
+        with open(C("arjuna.root.dir") + "/arjuna/res/arjuna.html", "r") as f:
+            prefix += [raw(f.read())]
 
     @classmethod
     def enhance_reports(cls, item, result, *, ignore_passed=True, ignore_fixtures=False):
