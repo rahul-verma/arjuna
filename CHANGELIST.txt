@@ -46,7 +46,6 @@ Future Themes (In-Progress or Planned):
 1.1.0 Goals
 -----------
 To Do
-    --> Separation of HTML/JS from code to Arjuna res directory.
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
     --> Align multi-element assertions with IterableAsserterMixin

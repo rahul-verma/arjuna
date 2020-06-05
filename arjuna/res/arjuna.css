@@ -75,6 +75,7 @@ button {
 }
 
 button.redir_button {
+    margin-left: 30px;
     text-align: left;
 }
 
@@ -83,5 +84,10 @@ button.redir_button {
 }
 
 .noborder tbody, .noborder tr, .noborder td{
+    text-align: left !important;
     border: 0 !important;
+}
+
+.noborder td{
+    text-align: left !important;
 }
