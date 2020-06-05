@@ -61,20 +61,56 @@ class CurrentTestWiseContainer:
 
     def _get_packets_html(self):
         if not self.network_packets: return ""
-        html = "<p><p><h3>&nbsp;&nbsp;Network Packets</h3><p>"
+        html = '<div class="requets"><h3>&nbsp;&nbsp;Network Packets</h3>'
         import html as py_html
         if self.network_packets:
             for np in self.network_packets:
                 req_str = py_html.escape(str(np.request))
                 res_str = py_html.escape(str(np.response))
                 label = np.label
-                html += f'<button data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button><p>'
+                if np.redir_network_packets:
+                    expander = '<span class="expand">+</span>'
+                else:
+                    expander = ''
+                html += f'<div class="reqcontent"><p>{expander}<button data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button></p>'
                 for redir in np.redir_network_packets:
                     req_str = py_html.escape(str(redir.request))
                     res_str = py_html.escape(str(redir.response))
                     label = redir.label
-                    html += f'<button class="redir_button" data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button><p>'
-        html += "<p><p>"
+                    html += f'<div class="reqcontent"><p><button class="redir_button" data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button></p></div>'
+                html += '</div>' # np
+        html += '</div>' # headline
+        html += '</div>' # id="image"
+        '''
+        This must be added some where... 
+        It's javascript which adds the event to the + item and does the show/hide of the subelements
+        
+        I added it to 
+        .venv/lib/python3.6/site-packages/pytest_html/resources/main.js
+        at the end of the init funtion...
+        function init () {
+            ....
+            HERE about line 124 before the end bracket 
+        }:
+
+
+        find_all('.expand').forEach(function(elem) {
+            elem.addEventListener("click",
+                function(event) {
+                    var list = elem.parentElement.parentNode.childNodes;
+                    list.forEach(function(item){
+                        var somelist = item.getElementsByClassName("redir_button")
+                        for ( let thing of somelist){
+                            if (thing.style.display != "block") {
+                                thing.style.display = "block";
+                            }else {
+                                thing.style.display = "none";
+                            }
+                        }
+                    })
+            }, false)
+        });
+        '''
         return html
 
     def has_content(self):

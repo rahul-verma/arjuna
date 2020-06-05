@@ -77,4 +77,5 @@ button {
 button.redir_button {
     margin-left: 30px;
     text-align: left;
+    display: none;
 }
