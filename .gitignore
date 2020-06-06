@@ -91,3 +91,4 @@ arjuna-samples/**/*.png
 arjuna-samples/**/chromedriver
 arjuna-samples/**/geckodriver
 arjuna-samples/pvt/**
+arjuna-samples/**/tools/**
