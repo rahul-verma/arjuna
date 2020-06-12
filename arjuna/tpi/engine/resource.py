@@ -164,4 +164,9 @@ def test_resources(request):
     thread_container.current_test_node_id = request.raw_request.node.nodeid
     getattr(request.raw_request, "function").report_metadata = thread_container
     yield
+    try:
+        network_recorder = request.space.network_recorder
+        network_recorder.register()
+    except:
+        pass
     thread_container.clear()

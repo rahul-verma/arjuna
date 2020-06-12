@@ -63,14 +63,14 @@ class Space:
 
     def __getitem__(self, name):
         scopes = _LOOKUP_ORDER[self._request.scope]
-        from arjuna import Arjuna
+        from arjuna import log_trace
         for scope in scopes:
-            Arjuna.get_logger().debug("Space: Getting value for {} from {} scope".format(name, scope))
+            log_trace("Space: Getting value for {} from {} scope".format(name, scope))
             try:
                 container = getattr(self._request, _SCOPE_MAP[scope])
                 return getattr(container, name)
             except Exception as e:
-                Arjuna.get_logger().debug("Space: No value for {} in {} scope".format(name, scope))
+                log_trace("Space: No value for {} in {} scope".format(name, scope))
                 continue
         raise Exception("Attribute with name >>{}<< does not exist in request scope for {}".format(name, scopes))
 

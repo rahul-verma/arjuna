@@ -67,8 +67,9 @@ Reporting
         - ArjunaOption.REPORT_NETWORK_FILTER - Only requests with responses with content with html/json/xml are included in report.
 Network Recorder Protocol
     - request spaces can contain `network_recorder` attribute.
-    - A Network Recorder should have start/stop methods. For Web UI automation, it can be set to `<app_object>.network_recorder`.
-    - The recorder is automatically stopped in case of errors in fixture/test.
+    - A Network Recorder should have record/register methods. For Web UI automation, it can be set to `<app_object>.network_recorder`.
+    - The recorded traffic is automatically registered in case of errors in fixture/test.
+    - A `record` call also registers existing recording if any.
 Data References
     - Support bucket query which is equivalent to Arjuna.get_data_ref(bucket_name)
     - Support for iterality in Contextual and Indexed References.

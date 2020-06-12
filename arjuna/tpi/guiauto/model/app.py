@@ -116,7 +116,7 @@ class GuiApp(_App):
         '''
         self._launchautomator()
         if self.config.value(ArjunaOption.BROWSER_NETWORK_RECORDER_AUTOMATIC):
-            self._automator.network_recorder.start(title=self.__class__.__name__ + " - Home")
+            self._automator.network_recorder.record(title=self.__class__.__name__ + " - Home")
         if not blank_slate:
             self._automator.browser.go_to_url(self.url)
         self._create_default_ui()
@@ -128,7 +128,7 @@ class GuiApp(_App):
         '''
         try:
             if self.config.value(ArjunaOption.BROWSER_NETWORK_RECORDER_AUTOMATIC):
-                self._automator.network_recorder.stop()
+                self._automator.network_recorder.register()
         except:
             pass
         self._automator.quit()

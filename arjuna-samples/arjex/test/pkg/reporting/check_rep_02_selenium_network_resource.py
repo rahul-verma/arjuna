@@ -32,8 +32,7 @@ def browser_1(request):
 
     request.space.network_recorder = browser.network_recorder
 
-    browser.network_recorder.start()
-    browser.network_recorder.current_title = "Test Mile"
+    browser.network_recorder.record("Test Mile")
     browser.go_to_url("http://testmile.com")
     yield
     browser.quit()
@@ -50,7 +49,7 @@ def browser_2(request):
 
     request.space.network_recorder = browser.network_recorder
 
-    browser.network_recorder.current_title = "Test Mile"
+    browser.network_recorder.record("Test Mile")
     browser.go_to_url("http://testmile.com")
     yield
     browser.quit()

@@ -99,7 +99,7 @@ class PytestHooks:
         '''
 
         try:
-            from arjuna import Arjuna, ArjunaOption
+            from arjuna import Arjuna, ArjunaOption, log_trace
             ignore_passed_for_screenshots = not Arjuna.get_config().value(ArjunaOption.REPORT_SCREENSHOTS_ALWAYS)
             ignore_passed_for_network = not Arjuna.get_config().value(ArjunaOption.REPORT_NETWORK_ALWAYS)
 
@@ -109,6 +109,10 @@ class PytestHooks:
             html_plugin = cls._get_html_report_plugin(item)
             pytest_html = html_plugin
             report = result.get_result()
+
+            log_trace("Node ID: {}".format(report.nodeid))
+            log_trace("Stage: {}".format(report.when))
+
             extra = getattr(report, 'extra', [])
 
             # if ignore_fixtures:
@@ -129,31 +133,42 @@ class PytestHooks:
                 else:
                     screen_shooter.take_screenshot(prefix=report.nodeid)
 
+            log_trace("Attempting to get network_recorder from request")
             try:
                 network_recorder = cls._get_protocol_object(item, "network_recorder")
-            except AttributeError:
-                pass
+            except AttributeError as e:
+                log_trace("No network_recorder")
             else:
                 try:
-                    network_recorder.stop()
-                except:
-                    pass
+                    log_trace("Registering traffic")
+                    network_recorder.register()
+                    log_trace("Traffic registered.")
+                except Exception as e:
+                    log_trace("Exception in registering network traffic: " + str(e))
 
             if ignore_passed_for_network and report.passed:
                 include_network = False
 
-            test_container = Arjuna.get_report_metadata()
-            if test_container.has_content():
-                extra_html = test_container.as_report_html(include_images=include_images, include_network=include_network)
-                if extra_html:
-                    extra.append(pytest_html.extras.html(extra_html))
-                    report.extra = extra
+            log_trace("Include images {}".format(include_images))
+            log_trace("Include network {}".format(include_network))
+
+            # When this place is reached by a resource that failed/erred or a test (irrespective of result)
+            if (report.when in {"setup", "teardown"} and not report.passed) or report.when =="call":
+                test_container = Arjuna.get_report_metadata()
+                if test_container.has_content():
+                    log_trace("Extra Content Found for HTML Report")
+                    extra_html = test_container.as_report_html(include_images=include_images, include_network=include_network)
+                    if extra_html:
+                        extra.append(pytest_html.extras.html(extra_html))
+                        report.extra = extra
 
             # For fixtures with errors, failures, clean the resources.
             if report.when in {"setup", "teardown"}:
                 if not report.passed:
+                    log_trace("Clearing report extras.")
                     Arjuna.get_report_metadata().clear()
             else:
+                log_trace("Clearing report extras.")
                 Arjuna.get_report_metadata().clear()    
             
         except Exception as e:

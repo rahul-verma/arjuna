@@ -20,28 +20,45 @@ from arjuna.tpi.helper.image import Image
 from arjuna.tpi.tracker import track
 
 
-@track("debug")
+@track("trace")
 class NetworkRecorder(metaclass=abc.ABCMeta):
 
-    def start(self, *, title="Start"):
+    def __init__(self):
+        self.__in_recording_mode = False
+
+    def is_recording(self):
+        return self.__in_recording_mode
+
+    @abc.abstractmethod
+    def _is_active(self):
+        pass
+
+    def record(self, title):
         '''
             Start recording.
 
-            Keyword Arguments:
-                title: Title representing all captured requests/response.
+            Arguments:
+                title: Title representing all captured traffic.
         '''
-        self._start(title=title)
+        if not self._is_active(): return
+        if self.is_recording():
+            self.register()
+        self._record(title=title)
+        self.__in_recording_mode = True
 
     @abc.abstractmethod
-    def _start(self, *, title):
+    def _record(self, title):
         pass
 
-    def stop(self):
+    def register(self):
         '''
-            Stop recording.
+            Register the current recorded traffic with Arjuna.
         '''
-        self._stop()
+        if not self._is_active(): return
+        if not self.is_recording(): return
+        self._register()
+        self.__in_recording_mode = False
 
     @abc.abstractmethod
-    def _stop(self):
+    def _register(self):
         pass

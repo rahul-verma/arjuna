@@ -20,10 +20,8 @@ from arjuna import *
 def __activity(config=None):
     browser = GuiApp(url="https://google.com", config=config)
     browser.launch()
-    browser.network_recorder.start()
-    browser.network_recorder.current_title = "Test Mile"
+    browser.network_recorder.record("Test Mile")
     browser.go_to_url("http://testmile.com")
-    browser.network_recorder.stop()
     browser.quit()
 
 @test
