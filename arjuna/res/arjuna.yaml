@@ -41,7 +41,7 @@ arjuna_options:
   report.network.filter: True
   screenshots.dir: $project_root_dir$/report/$run_id$/screenshot
   tools.dir: $project_root_dir$/tools
-  tools.bmproxy.dir: $project_root_dir$/tools/browsermob-proxy/bin
+  tools.bmproxy.dir: $project_root_dir$/tools/bmproxy
   temp.dir: $temp_dir$
 
   data.dir: $project_root_dir$/data

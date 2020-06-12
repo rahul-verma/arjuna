@@ -81,7 +81,21 @@ class SeleniumDriverDispatcher:
         from browsermobproxy import Server
         capture_traffic = config["arjuna_options"]["BROWSER_NETWORK_RECORDER_ENABLED"]
         if capture_traffic:
-            bmproxy_bin_dir = config["arjuna_options"]["TOOLS_BMPROXY_DIR"]
+            bmproxy_dir = config["arjuna_options"]["TOOLS_BMPROXY_DIR"]
+            sub_dirs = os.listdir(bmproxy_dir)
+            bmproxy_bin_dir = None
+            if "bin" in sub_dirs:
+                bmproxy_bin_dir = os.path.join(bmproxy_dir, "bin")
+            else:
+                sub_dirs.sort(reverse=True) # Last version will be picked.
+                for d in sub_dir:
+                    if d.startswith("browsermob"):
+                        bmproxy_bin_dir = os.path.join(bmproxy_dir, d, "bin")
+                        break
+
+            if bmproxy_bin_dir is None:
+                raise Exception("Network recording is enabled in configuration. There was an error in creating proxy server/server using BrowserMob Proxy. Could not find proxy package at {}".format(bmproxy_dir))
+            
             if platform.system().lower() == "windows":
                 exe = "browsermob-proxy.bat"
             else:

@@ -132,6 +132,8 @@ class CreateProject(Command):
         (FileObjectType.FILE, "test/__init__.py"),
         (FileObjectType.DIR, "test/pkg"),
         (FileObjectType.FILE, "test/pkg/__init__.py"),
+        (FileObjectType.DIR, "tools"),
+        (FileObjectType.DIR, "tools/bmproxy"),
         (FileObjectType.DIR, "lib"),
         (FileObjectType.FILE, "lib/__init__.py"),
         (FileObjectType.FILE, "lib/resource.py")
@@ -183,7 +185,7 @@ class CreateProject(Command):
             f = open(get_proj_target_path("test/conftest.py"), "w")
             f.write(contents)
             f.close()
-            for d in ["data/source",  "l10n", "data/reference/contextual", "data/reference/indexed", "guiauto/namespace"]:
+            for d in ["data/source",  "l10n", "data/reference/contextual", "data/reference/indexed", "guiauto/namespace", "tools/bmproxy"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:
                 copy_file("../../res/placeholder.txt", "guiauto/driver/{}/placeholder.txt".format(os_name))
