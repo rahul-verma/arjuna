@@ -94,7 +94,7 @@ def concat(in_iter, delimiter):
 @test
 def check_entity_with_composite_gen_arg_composer(request):
     for i in range(3):
-        Person1 = data_entity("Person", "name", 
+        Person = data_entity("Person", "name", 
                 info=composite(
                     Random.last_name,
                     generator(Random.fixed_length_number, length=i+1),
@@ -102,4 +102,4 @@ def check_entity_with_composite_gen_arg_composer(request):
                     composer=composer(concat, "::")
                 )
         )
-        print(Person1(name='Mac'))
+        print(Person(name='Mac'))

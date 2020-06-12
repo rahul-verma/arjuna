@@ -19,6 +19,7 @@ import os
 import platform
 import abc
 from enum import Enum
+import tempfile
 
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.constant import ArjunaOption
@@ -295,6 +296,7 @@ class EditableConfig:
             project_name = os.path.basename(project_root_dir),
             host_os = cls._OS_MAP[platform.system()],
             run_id = run_id and run_id or "mrun",
+            temp_dir = tempfile.TemporaryDirectory().name,
             validate=False
         )
 

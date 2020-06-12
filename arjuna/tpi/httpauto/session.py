@@ -152,22 +152,32 @@ class HttpResponse(AsserterMixIn):
     __OUT = '''{}
 {}{}'''
 
-    def __try_as_json(self):
-        if self.text is None: return ""
+    @classmethod
+    def __try_as_json(self, text):
+        if text is None: return ""
         try:
-            return json.dumps(json.loads(self.text), indent=2)
+            return json.dumps(json.loads(text), indent=2)
         except:
-            return self.text
+            return text
 
-    def __str__(self):
-        content = self.__try_as_json()
+    @classmethod
+    def repr_as_str(cls, *, status_code, status_msg, headers, content=None):
+        content = cls.__try_as_json(content)
         if content:
             content = '\n\n{}\n'.format(content)
-        return self.__OUT.format(
-            str(self.status_code) + ' ' + self.status,
-            '\n'.join('{}: {}'.format(k, v) for k, v in self.headers.items()),
+        return cls.__OUT.format(
+            str(status_code) + ' ' + status_msg,
+            '\n'.join('{}: {}'.format(k, v) for k, v in headers.items()),
             content
         ).strip()
+
+    def __str__(self):
+        return self.repr_as_str(
+            status_code = self.status_code,
+            status_msg = self.status,
+            headers = self.headers,
+            content = self.text
+        )
 
 
 class HttpRequest:
@@ -241,20 +251,20 @@ class HttpRequest:
             response += e.__class__.__name__ + ":" + str(e) + "\n"
             response += traceback.format_exc()
             Arjuna.get_report_metadata().add_network_packet_info(
-                NetworkPacketInfo(label=self.label, request=str(self), response=str(response), redir_network_packets=tuple())
+                NetworkPacketInfo(label=self.label, request=str(self), response=str(response), sub_network_packets=tuple())
             )
             raise e
         else:
             # Should be configurable
-            redir_network_packets = []
+            sub_network_packets = []
             for redir_resp in response.redir_history:
                 redir_req = redir_resp.request
-                redir_network_packets.append(
+                sub_network_packets.append(
                     NetworkPacketInfo(
                         label="Sub-Request: {} {}".format(redir_req.method, redir_req.url), 
                         request=str(redir_req), 
                         response=str(redir_resp),
-                        redir_network_packets=tuple()
+                        sub_network_packets=tuple()
                     )
                 )
 
@@ -263,17 +273,17 @@ class HttpRequest:
                 # last_req = response.last_request
                 # if not last_req:
                 last_req = response.request
-                redir_network_packets.append(
+                sub_network_packets.append(
                                     NetworkPacketInfo(
                                         label="Sub-Request: {} {}".format(last_req.method, last_req.url), 
                                         request=str(last_req), 
                                         response=str(response),
-                                        redir_network_packets=tuple()
+                                        sub_network_packets=tuple()
                                     )
                                 )                
 
             Arjuna.get_report_metadata().add_network_packet_info(
-                NetworkPacketInfo(label=self.label, request=str(self), response=str(response), redir_network_packets=tuple(redir_network_packets))
+                NetworkPacketInfo(label=self.label, request=str(self), response=str(response), sub_network_packets=tuple(sub_network_packets))
             )
             if self.__xcodes is not None and response.status_code not in self.__xcodes:
                 if self.__strict:
@@ -306,17 +316,25 @@ class HttpRequest:
     __OUT ='''{}
 {}{}'''
 
-    def __str__(self):
-        content = self.text
+    @classmethod
+    def repr_as_str(cls, *, method, url, headers, content=None):
         if content:
             content = '\n\n{}\n'.format(content)
         else:
             content = ""
-        return self.__OUT.format(
-            self.__request.method + ' ' + self.url,
-            '\n'.join('{}: {}'.format(k, v) for k, v in self.__request.headers.items()),
+        return cls.__OUT.format(
+            method + ' ' + url,
+            '\n'.join('{}: {}'.format(k, v) for k, v in headers.items()),
             content
         ).strip()
+
+    def __str__(self):
+        return self.repr_as_str(
+            method = self.__request.method,
+            url = self.url,
+            headers = self.__request.headers,
+            content = self.text
+        )
 
 
 class _HttpRequest(HttpRequest):

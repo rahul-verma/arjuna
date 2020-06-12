@@ -15,20 +15,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna import *
+import abc
+from arjuna.tpi.helper.image import Image
+from arjuna.tpi.tracker import track
 
-'''
-Code is kept redundant across methods for the purpose of easier learning.
-'''
 
-@test
-def check_project_conf(request):
-    '''
-        For this test:
-        You must add browser.name = firefox to arjuna_options in project.yaml to see the impact.
-        It changes the default browser from Chrome to Firefox across the project.
-    '''
-    google = GuiApp(url="https://google.com")
-    google.launch()
-    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
-    google.quit()
+@track("debug")
+class NetworkRecorder(metaclass=abc.ABCMeta):
+
+    def start(self, *, title="Start"):
+        '''
+            Start recording.
+
+            Keyword Arguments:
+                title: Title representing all captured requests/response.
+        '''
+        self._start(title=title)
+
+    @abc.abstractmethod
+    def _start(self, *, title):
+        pass
+
+    def stop(self):
+        '''
+            Stop recording.
+        '''
+        self._stop()
+
+    @abc.abstractmethod
+    def _stop(self):
+        pass

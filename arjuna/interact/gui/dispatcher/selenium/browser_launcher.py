@@ -23,11 +23,11 @@ from selenium.webdriver.common.proxy import *
 class BrowserLauncher:
 
     @classmethod
-    def launch(cls, config, svc_url=None):
-        driver_path = config["arjunaOptions"]["SELENIUM_DRIVER_PATH"]
-        browser_bin_path = config["arjunaOptions"]["BROWSER_BIN_PATH"]
-        browser_name = config["arjunaOptions"]["BROWSER_NAME"]
-        return CREATOR_MAP[browser_name.name](config, driver_path, browser_bin_path, svc_url)
+    def launch(cls, config, svc_url=None, proxy=None):
+        driver_path = config["arjuna_options"]["SELENIUM_DRIVER_PATH"]
+        browser_bin_path = config["arjuna_options"]["BROWSER_BIN_PATH"]
+        browser_name = config["arjuna_options"]["BROWSER_NAME"]
+        return CREATOR_MAP[browser_name.name](config, driver_path, browser_bin_path, svc_url, proxy=proxy)
 
     @classmethod
     def are_browser_prefs_set(cls, config):
@@ -42,21 +42,25 @@ class BrowserLauncher:
         return "browserExtensions" in config and config["browserExtensions"]
 
     @classmethod
-    def _create_chrome(cls, config, driver_path, browser_bin_path, svc_url):
+    def _create_chrome(cls, config, driver_path, browser_bin_path, svc_url, proxy=None):
         from selenium.webdriver import Chrome, ChromeOptions
 
         caps = DesiredCapabilities.CHROME
         caps.update(config["driverCapabilities"])
 
-        # if config["arjunaOptions"]["BROWSER_PROXY_ON"]:
+        # if config["arjuna_options"]["BROWSER_PROXY_ON"]:
         #     proxy = Proxy()
         #     proxy_string = "{}.{}".format(
-        #         config["arjunaOptions"]["BROWSER_PROXY_HOST"],
-        #         config["arjunaOptions"]["BROWSER_PROXY_PORT"]
+        #         config["arjuna_options"]["BROWSER_PROXY_HOST"],
+        #         config["arjuna_options"]["BROWSER_PROXY_PORT"]
         #     )
         #     proxy.http_proxy = proxy_string
         #     proxy.ssl_proxy = proxy_string
         #     proxy.add_to_capabilities(caps)
+
+        if proxy is not None:
+            proxy.add_to_capabilities(caps)
+            caps['acceptInsecureCerts'] = True
 
         options = ChromeOptions()
 
@@ -66,7 +70,7 @@ class BrowserLauncher:
         if cls.are_browser_prefs_set(config):
             options.add_experimental_option("prefs", config["browserPreferences"])
 
-        if config["arjunaOptions"]["BROWSER_HEADLESS"]:
+        if config["arjuna_options"]["BROWSER_HEADLESS"]:
             options.add_argument("--headless")
 
         if cls.are_browser_args_set(config):
@@ -82,17 +86,17 @@ class BrowserLauncher:
         return webdriver.Remote(svc_url, caps)
 
     @classmethod
-    def _create_firefox(cls, config, driver_path, browser_bin_path, svc_url):
+    def _create_firefox(cls, config, driver_path, browser_bin_path, svc_url, proxy=None):
         from selenium.webdriver import Firefox
         from selenium.webdriver import FirefoxOptions
         from selenium.webdriver import FirefoxProfile
 
         profile = FirefoxProfile()
-        # if config["arjunaOptions"]["BROWSER_PROXY_ON"]:
+        # if config["arjuna_options"]["BROWSER_PROXY_ON"]:
         #     proxy = Proxy()
         #     proxy_string = "{}.{}".format(
-        #         config["arjunaOptions"]["BROWSER_PROXY_HOST"],
-        #         config["arjunaOptions"]["BROWSER_PROXY_PORT"]
+        #         config["arjuna_options"]["BROWSER_PROXY_HOST"],
+        #         config["arjuna_options"]["BROWSER_PROXY_PORT"]
         #     )
         #     proxy.http_proxy = proxy_string
         #     proxy.ssl_proxy = proxy_string
@@ -110,7 +114,7 @@ class BrowserLauncher:
             for pref, value in config["browserPreferences"].items():
                 options.set_preference(pref, value)
 
-        if config["arjunaOptions"]["BROWSER_HEADLESS"]:
+        if config["arjuna_options"]["BROWSER_HEADLESS"]:
             options.add_argument("-headless")
 
         if cls.are_browser_args_set(config):
@@ -127,18 +131,18 @@ class BrowserLauncher:
 
         # return driver
 
-    @classmethod
-    def _create_safari(cls, config, driver_path, browser_bin_path):
-        from selenium.webdriver import Safari
+    # @classmethod
+    # def _create_safari(cls, config, driver_path, browser_bin_path):
+    #     from selenium.webdriver import Safari
 
-        caps = DesiredCapabilities.SAFARI
-        caps.update(config["driverCapabilities"])
+    #     caps = DesiredCapabilities.SAFARI
+    #     caps.update(config["driverCapabilities"])
 
-        return Safari(executable_path=driver_path, desired_capabilities=caps)
+    #     return Safari(executable_path=driver_path, desired_capabilities=caps)
 
 
 CREATOR_MAP = {
     "FIREFOX" : BrowserLauncher._create_firefox,
     "CHROME" : BrowserLauncher._create_chrome,
-    "SAFARI" : BrowserLauncher._create_safari,
+    # "SAFARI" : BrowserLauncher._create_safari,
 }

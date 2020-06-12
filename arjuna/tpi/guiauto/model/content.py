@@ -79,6 +79,10 @@ class GuiAppContent(Gui, ScreenShooter):
         self.__gns = GNS(self, self._gui_def)
 
     @property
+    def network_recorder(self):
+        return self.__automator.network_recorder
+
+    @property
     def gns(self):
         '''
             GNS object associated with this **GuiAppContent** object.

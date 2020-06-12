@@ -15,6 +15,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+import platform
+
+from browsermobproxy.exceptions import ProxyServerError
 
 from .driverelement import SeleniumDriverElementDispatcher
 from arjuna.interact.gui.dispatcher.driver.driver_commands import DriverCommands
@@ -27,6 +31,8 @@ class SeleniumDriverDispatcher:
     def __init__(self):
         self.__config = None
         self.__driver = None
+        self.__proxy_server = None
+        self.__proxy = None
         self.__driver_service = None
 
     def __create_gui_element_dispatcher(self, element):
@@ -36,14 +42,18 @@ class SeleniumDriverDispatcher:
     def driver(self):
         return self.__driver
 
+    @property
+    def proxy(self):
+        return self.__proxy
+
     def launch(self, config):
         self.__config = config
         from .browser_launcher import BrowserLauncher
 
-        svc_url = config["arjunaOptions"]["SELENIUM_SERVICE_URL"]
-        driver_download = config["arjunaOptions"]["SELENIUM_DRIVER_DOWNLOAD"]
-        browser_name = config["arjunaOptions"]["BROWSER_NAME"]
-        driver_path = config["arjunaOptions"]["SELENIUM_DRIVER_PATH"]
+        svc_url = config["arjuna_options"]["SELENIUM_SERVICE_URL"]
+        driver_download = config["arjuna_options"]["SELENIUM_DRIVER_DOWNLOAD"]
+        browser_name = config["arjuna_options"]["BROWSER_NAME"]
+        driver_path = config["arjuna_options"]["SELENIUM_DRIVER_PATH"]
         if svc_url.lower() == "not_set":
             from arjuna.tpi.constant import BrowserName
             driver_service = None
@@ -66,12 +76,34 @@ class SeleniumDriverDispatcher:
         else:
             if not svc_url.lower().endswith("/wd/hub"):
                 svc_url += "/wd/hub"
-        self.__driver = BrowserLauncher.launch(config, svc_url=svc_url) 
+
+        # BrowserMob
+        from browsermobproxy import Server
+        capture_traffic = config["arjuna_options"]["BROWSER_NETWORK_RECORDER_ENABLED"]
+        if capture_traffic:
+            bmproxy_bin_dir = config["arjuna_options"]["TOOLS_BMPROXY_DIR"]
+            if platform.system().lower() == "windows":
+                exe = "browsermob-proxy.bat"
+            else:
+                exe = "browsermob-proxy"
+            bmproxy_exe_path = os.path.join(bmproxy_bin_dir, exe)
+
+            try:
+                self.__proxy_server = Server(bmproxy_exe_path)
+                self.__proxy_server.start()
+                self.__proxy = self.__proxy_server.create_proxy()
+            except ProxyServerError as e:
+                raise Exception("Network recording is enabled in configuration. There was an error in creating proxy server/server using BrowserMob Proxy. Fix and retry. Error message: {}".format(str(e)))
+
+        self.__driver = BrowserLauncher.launch(config, svc_url=svc_url, proxy=self.__proxy) 
 
     def quit(self):
         DriverCommands.quit(self.__driver)
         if self.__driver_service:
             self.__driver_service.stop()
+        if self.__proxy_server:
+            self.__proxy.close()
+            self.__proxy_server.stop()
 
     def go_to_url(self, url):
         DriverCommands.go_to_url(self.__driver, url)

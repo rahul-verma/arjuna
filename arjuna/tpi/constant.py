@@ -90,11 +90,29 @@ class ArjunaOption(Enum):
     REPORT_HTML_DIR = auto()
     '''Directory containing report.html for current test run.'''
 
+    REPORT_SCREENSHOTS_ALWAYS = auto()
+    '''If True, Screenshots are always show in Report, else they are not shown for passed tests. Default is False.'''
+
+    REPORT_NETWORK_ALWAYS = auto()
+    '''If True, Network packets are always show in Report, else they are not shown for passed tests. Default is False.'''
+
+    REPORT_NETWORK_FILTER = auto()
+    '''If True, in reporting, the request/response for static resources like image files, css etc will be excluded. Only HTML/JSON/XML content is included. Default is True'''
+
     LOG_DIR = auto()
     '''Directory containing arjuna.log for current test run.'''
 
     SCREENSHOTS_DIR = auto()
     '''Directory containing screenshots for current test run.'''
+
+    TOOLS_DIR = auto()
+    '''Directory containing external tool binaries in Arjuna test project.'''
+
+    TOOLS_BMPROXY_DIR = auto()
+    '''Directory containing BrowerMob Proxy binaries.'''
+
+    TEMP_DIR = auto()
+    '''Temporary directory for this session.'''
 
     CONF_DIR = auto()
     '''Test Project configuration directory'''
@@ -155,6 +173,12 @@ class ArjunaOption(Enum):
 
     BROWSER_BIN_PATH = auto()
     '''Path of the Browser binary on test system.'''
+
+    BROWSER_NETWORK_RECORDER_ENABLED = auto()
+    '''If True, Arjuna uses BrowserMob proxy, if available in test project, to capture Network requests made by browser. Default is False.'''
+
+    BROWSER_NETWORK_RECORDER_AUTOMATIC = auto()
+    '''If True, when a browser is launched, Arjuna automatically starts capturing all traffic. Default is False'''
 
     GUIAUTO_NAME = auto()
     '''Engine name. Currently set to Selenium which is the only supported engine.'''

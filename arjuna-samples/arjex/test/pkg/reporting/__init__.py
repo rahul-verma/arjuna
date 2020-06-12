@@ -14,21 +14,3 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-from arjuna import *
-
-'''
-Code is kept redundant across methods for the purpose of easier learning.
-'''
-
-@test
-def check_project_conf(request):
-    '''
-        For this test:
-        You must add browser.name = firefox to arjuna_options in project.yaml to see the impact.
-        It changes the default browser from Chrome to Firefox across the project.
-    '''
-    google = GuiApp(url="https://google.com")
-    google.launch()
-    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
-    google.quit()

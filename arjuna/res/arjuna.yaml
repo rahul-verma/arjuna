@@ -36,7 +36,13 @@ arjuna_options:
     - html
   report.xml.dir: $project_root_dir$/report/$run_id$/xml
   report.html.dir: $project_root_dir$/report/$run_id$/html
+  report.screenshots.always: False
+  report.network.always: False
+  report.network.filter: True
   screenshots.dir: $project_root_dir$/report/$run_id$/screenshot
+  tools.dir: $project_root_dir$/tools
+  tools.bmproxy.dir: $project_root_dir$/tools/browsermob-proxy/bin
+  temp.dir: $temp_dir$
 
   data.dir: $project_root_dir$/data
   data.src.dir: $project_root_dir$/data/source
@@ -62,6 +68,8 @@ arjuna_options:
   browser.dim.height: NOT_SET
   browser.dim.width: NOT_SET
   browser.bin.path: NOT_SET
+  browser.network.recorder.enabled: False
+  browser.network.recorder.automatic: False
 
   scroll.pixels: 100
 

@@ -18,9 +18,9 @@ def wordpress(request):
         For this fixture:
         Wordpress related user options have been added to the project.yaml
         You should replace the details with those corresponding to your own deployment of WordPress.
-        userOptions {
+        user_options {
 	        wp.app.url = "IP address"
-	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
+	        wp.login.url = ${user_options.wp.app.url}"/wp-admin"
         }
     '''
 

@@ -33,13 +33,19 @@ report.dir: absolute_dir_path
 report.formats: report_formats
 report.xml.dir: absolute_dir_path
 report.html.dir: absolute_dir_path
+report.screenshots.always: bool
+report.network.always: bool
+report.network.filter: bool
 screenshots.dir: absolute_dir_path
+tools.dir: absolute_dir_path
+tools.bmproxy.dir: absolute_dir_path
 
 data.dir: absolute_dir_path
 data.src.dir: absolute_dir_path
 data.ref.dir: absolute_dir_path
 data.ref.contextual.dir: absolute_dir_path
 data.ref.indexed.dir: absolute_dir_path
+temp.dir: absolute_dir_path
 
 app.url: web_url
 
@@ -59,6 +65,8 @@ browser.headless: bool
 browser.dim.height: positive_float
 browser.dim.width: positive_float
 browser.bin.path: absolute_file_path
+browser.network.recorder.enabled: bool
+browser.network.recorder.automatic: bool
 
 scroll.pixels: positive_int
 

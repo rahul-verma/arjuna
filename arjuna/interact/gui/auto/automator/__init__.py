@@ -19,6 +19,7 @@ import base64
 import os
 import time
 import datetime
+import json
 
 from arjuna.tpi.constant import ArjunaOption
 from arjuna.tpi.guiauto.base.container import GuiWidgetContainer
@@ -29,6 +30,7 @@ from arjuna.interact.gui.dispatcher.selenium.driver import SeleniumDriverDispatc
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.guiauto.widget.element import GuiElement
 from arjuna.tpi.helper.image import Image
+from arjuna.interact.gui.auto.automator.network_recorder import BrowserMobNetworkRecorder
 
 class GuiAutomator(GuiWidgetContainer,_Dispatchable):
 
@@ -57,6 +59,7 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
         # Code should be introduced here which passes through DispatcherPicker
         # based on choice of engine to support more libs.
         self._dispatcher = SeleniumDriverDispatcher()
+        self._network_recorder = BrowserMobNetworkRecorder(self)
         self.__launch()
 
     @property
@@ -66,6 +69,10 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
     @property
     def ext_config(self):
         return self.__econfig
+
+    @property
+    def network_recorder(self):
+        return self._network_recorder
 
     @property
     def screenshots_dir(self):

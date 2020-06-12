@@ -51,7 +51,7 @@ Project creation:
 - The structure helps in importable names in IDEs for the core lib.
 - Directories and files to be created -
     - project dir, __init__.py
-     - config / project.conf (Add sections for arjunaOptions and userOptions)
+     - config / project.conf (Add sections for arjuna_options and user_options)
      - data/sources / references
      - guiauto / drivers (/windows/mac/linux) /images /namespace
      - lib /__init__.py

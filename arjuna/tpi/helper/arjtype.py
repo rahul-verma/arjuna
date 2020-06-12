@@ -317,4 +317,4 @@ class NVPairs(Dictable):
         return self.__kwargs
 
 
-NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response redir_network_packets")
+NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response sub_network_packets")

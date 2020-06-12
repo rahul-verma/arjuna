@@ -43,14 +43,14 @@ class PytestHooks:
         return cls._get_plugin(item, 'html')
 
     @classmethod
-    def _get_screen_shooter(cls, item):
+    def _get_protocol_object(cls, item, name):
         try:
-            return getattr(item.function, "screen_shooter")
+            return getattr(item.function, name)
         except:
             try:
-                return getattr(item.module, "screen_shooter")
+                return getattr(item.module, name)
             except:
-                return getattr(item.session, "screen_shooter")
+                return getattr(item.session, name)
 
     @classmethod
     def prepare_result(cls, result):
@@ -77,7 +77,7 @@ class PytestHooks:
             prefix += [raw(f.read())]
 
     @classmethod
-    def enhance_reports(cls, item, result, *, ignore_passed=True, ignore_fixtures=False):
+    def enhance_reports(cls, item, result):
         '''
             Automatically add screenshot to HTML Report File.
 
@@ -86,10 +86,6 @@ class PytestHooks:
             Args:
                 item: **pytest**'s Item object
                 result: **pytest**'s TestReport object.
-
-            Keyword Arguments:
-                ignore_passed: (Optional) If set to True, screenshot is taken when the test function completes. Default is True.
-                ignore_fixtures: (Optional) If set to True, screenshot is not taken for test fixture functions. Default is False.
 
             Note:
                 - For taking the screenshot, it does a look up for a **screen_shooter** attribute in the object spaces in following order:
@@ -103,6 +99,13 @@ class PytestHooks:
         '''
 
         try:
+            from arjuna import Arjuna, ArjunaOption
+            ignore_passed_for_screenshots = not Arjuna.get_config().value(ArjunaOption.REPORT_SCREENSHOTS_ALWAYS)
+            ignore_passed_for_network = not Arjuna.get_config().value(ArjunaOption.REPORT_NETWORK_ALWAYS)
+
+            include_images = True
+            include_network = True
+
             html_plugin = cls._get_html_report_plugin(item)
             pytest_html = html_plugin
             report = result.get_result()
@@ -114,31 +117,45 @@ class PytestHooks:
 
             xfail = hasattr(report, 'wasxfail')
 
-            if ignore_passed and report.passed:
-                pass
+            if ignore_passed_for_screenshots and report.passed:
+                include_images = False
             else:
                 # if (report.skipped and xfail) and (report.failed and not xfail):
                     # extra.append(pytest_html.extras.url(app.url))
                 try:
-                    screen_shooter = cls._get_screen_shooter(item)
+                    screen_shooter = cls._get_protocol_object(item, "screen_shooter")
                 except AttributeError:
                     pass
                 else:
                     screen_shooter.take_screenshot(prefix=report.nodeid)
-            
-            from arjuna import Arjuna
+
+            try:
+                network_recorder = cls._get_protocol_object(item, "network_recorder")
+            except AttributeError:
+                pass
+            else:
+                try:
+                    network_recorder.stop()
+                except:
+                    pass
+
+            if ignore_passed_for_network and report.passed:
+                include_network = False
+
             test_container = Arjuna.get_report_metadata()
             if test_container.has_content():
-                extra.append(pytest_html.extras.html(test_container.as_report_html()))
+                extra_html = test_container.as_report_html(include_images=include_images, include_network=include_network)
+                if extra_html:
+                    extra.append(pytest_html.extras.html(extra_html))
+                    report.extra = extra
 
             # For fixtures with errors, failures, clean the resources.
             if report.when in {"setup", "teardown"}:
                 if not report.passed:
                     Arjuna.get_report_metadata().clear()
             else:
-                Arjuna.get_report_metadata().clear()
+                Arjuna.get_report_metadata().clear()    
             
-            report.extra = extra
         except Exception as e:
             raise
             from arjuna import log_warning

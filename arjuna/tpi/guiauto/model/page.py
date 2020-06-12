@@ -45,6 +45,9 @@ class GuiPage(GuiAppContent):
         # app = isinstance(source_gui, GuiApp) and source_gui or source_gui.app
         super().__init__(automator=source_gui._automator, label=label, gns_dir=gns_dir, gns_file_name=gns_file_name)
         self.app.ui = self
+        from arjuna import ArjunaOption
+        if self.config.value(ArjunaOption.BROWSER_NETWORK_RECORDER_AUTOMATIC):
+            self._automator.network_recorder.current_title = self.label
         self._load(*args, **kwargs)
 
     @property

@@ -21,6 +21,7 @@ from arjuna import *
 def check_go_to_url(request):
     google = GuiApp(url="https://google.com")
     google.launch()
+    google.go_to_url("https://google.com")
     request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()
 

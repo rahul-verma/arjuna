@@ -68,12 +68,15 @@ class CurrentTestWiseContainer:
                 req_str = py_html.escape(str(np.request))
                 res_str = py_html.escape(str(np.response))
                 label = np.label
-                if np.redir_network_packets:
+                if np.sub_network_packets:
                     expander = '<span class="expand">+</span>'
                 else:
                     expander = ''
-                html += f'<div class="reqcontent"><p><table class="noborder"><tr><td>{expander}</td><td><button data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button></td></tr></p>'
-                for redir in np.redir_network_packets:
+                if req_str != "":
+                    html += f'<div class="reqcontent"><p><table class="noborder"><tr><td>{expander}</td><td><button data-request="{req_str}" data-response="{res_str}" onclick="openModal(event)">{label}</button></td></tr></p>'
+                else:
+                    html += f'<div class="reqcontent"><p><table class="noborder"><tr><td>{expander}</td><td>{label}</td></tr></p>'
+                for redir in np.sub_network_packets:
                     req_str = py_html.escape(str(redir.request))
                     res_str = py_html.escape(str(redir.response))
                     label = redir.label
@@ -89,10 +92,14 @@ class CurrentTestWiseContainer:
         else:
             return False
 
-    def as_report_html(self):
+    def as_report_html(self, *, include_images=True, include_network=True):
+        if (not include_images) and (not include_network):
+            return None
         html = '<div class="image">'
-        html += self._get_images_html()
-        html += self._get_packets_html()
+        if include_images:
+            html += self._get_images_html()
+        if include_network:
+            html += self._get_packets_html()
         html += "</div>"
         return html
 

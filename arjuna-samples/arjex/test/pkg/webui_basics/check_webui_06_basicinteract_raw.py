@@ -24,10 +24,10 @@ def check_wp_login(request, wordpress):
         For this test:
         Wordpress related user options have been added to the project.yaml
         You should replace the details with those corresponding to your own deployment of WordPress.
-        userOptions {
+        user_options {
 	        wp.app.url = "IP address"
-	        wp.login.url = ${userOptions.wp.app.url}"/wp-admin"
-	        wp.logout.url = ${userOptions.wp.app.url}"/wp-login.php?action=logout"
+	        wp.login.url = ${user_options.wp.app.url}"/wp-admin"
+	        wp.logout.url = ${user_options.wp.app.url}"/wp-login.php?action=logout"
 
             wp.admin {
                 name = "<username>"

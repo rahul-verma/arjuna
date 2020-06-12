@@ -28,6 +28,8 @@ class SetuActorDriverConfigOption(Enum):
     BROWSER_NAME = auto()
     BROWSER_HEADLESS = auto()
     BROWSER_BIN_PATH = auto()
+    BROWSER_NETWORK_RECORDER_ENABLED = auto()
+    TOOLS_BMPROXY_DIR = auto()
     # BROWSER_PROXY_ON = auto()
     # BROWSER_PROXY_HOST = auto()
     # BROWSER_PROXY_PORT = auto()
@@ -85,7 +87,7 @@ class DriverCapabilities:
     def __init__(self, config, json_dict):
         self.__config = config
         self.__out_dict = {
-            "arjunaOptions" : {},
+            "arjuna_options" : {},
             "browserArgs": [],
             "driverCapabilities": {},
             "browserPreferences":{},
@@ -147,7 +149,7 @@ class DriverCapabilities:
         for k,v in temp_d.items():
             k = k.upper()
             if k in SetuActorDriverConfigOption.__members__:
-                self.__out_dict["arjunaOptions"][k] = v
+                self.__out_dict["arjuna_options"][k] = v
 
     def __process(self, dict_from_requester):
         self.__out_dict["driverCapabilities"][self.UNEXPECTED_ALERT_BEHAVIOUR] = "dismiss"

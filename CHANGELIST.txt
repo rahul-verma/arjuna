@@ -42,6 +42,7 @@ Future Themes (In-Progress or Planned):
     - Report merging for HTML and XML files.
     - Supprt for custom CSS for HTML reporting in Arjuna test projects.
     - OAuth related requests to be available in a collapsible group.
+    - Tests with bugs should be marked as xfail automatically. (Configurable)
 
 1.1.0 Goals
 -----------
@@ -52,6 +53,22 @@ To Do
 
 1.0.14
 ------
+Network packet capture in Web UI tests
+    - BrowserMob Proxy integration
+    - Any config level options:
+        - ArjunaOption.BROWSER_NETWORK_RECORDER_ENABLED enables network recording. Default is False. 
+        - ArjunaOption.BROWSER_NETWORK_RECORDER_AUTOMATIC instructs to GuiApp to start recording after browser is launched. Also, each GuiPage sets current title to its name. Default is False. 
+    - The packets are captured and shown in HTML Reports just like Web service network packets.
+Reporting
+    - Reference Config level options:
+        - ArjunaOption.REPORT_NETWORK_ALWAYS - Network info will be included even for passed tests.
+        - ArjunaOption.REPORT_SCREENSHOTS_ALWAYS - Screenshots will be included even for passed tests.
+    - Any config level options:
+        - ArjunaOption.REPORT_NETWORK_FILTER - Only requests with responses with content with html/json/xml are included in report.
+Network Recorder Protocol
+    - request spaces can contain `network_recorder` attribute.
+    - A Network Recorder should have start/stop methods. For Web UI automation, it can be set to `<app_object>.network_recorder`.
+    - The recorder is automatically stopped in case of errors in fixture/test.
 Data References
     - Support bucket query which is equivalent to Arjuna.get_data_ref(bucket_name)
     - Support for iterality in Contextual and Indexed References.
@@ -566,7 +583,7 @@ Minor update. All l10 references are changed to l10n.
     - _ConfigCreator Name changed to ConfigBuilder
     - ConfigBuilder is directly associated with a Config object, which is automatically treated as the source/parent config.
     - One can not create a configuration with same name again.
-    - Builder has the provision to add config options from any conf file which has arjunaOptions and/or userOptions
+    - Builder has the provision to add config options from any conf file which has arjuna_options and/or user_options
     - creator.register without a name creates a unique config name using uuid4. As it returns the config object it has its use case when direct dealing with config object is needed.
     - create.register(name) is useful if the name is to be controlled and used by test author.
 - Configuration Layer-wise auto-update:
