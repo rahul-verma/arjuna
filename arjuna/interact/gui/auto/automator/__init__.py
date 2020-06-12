@@ -115,8 +115,9 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
         self.main_window.close_all_child_windows()
 
     def get_dom_root(self, gui):
-        from arjuna.tpi.guiauto.widget.frame import DomRoot
-        return DomRoot(gui)
+        raise NotImplementedError()
+        # from arjuna.tpi.guiauto.widget.frame import DomRoot
+        # return DomRoot(gui)
 
     def get_frame(self, gui, wmd):
         return self.dom_root(gui).frame(wmd)

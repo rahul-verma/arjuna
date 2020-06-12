@@ -168,7 +168,7 @@ class UserOptions(Options):
         super().__init__(options_dict=options_dict, creation_context=creation_context)
 
     @classmethod
-    def process_option_name(self, name):
+    def process_option_name(cls, name):
         try:
             if isinstance(name, Enum):
                 return name.name.upper()
@@ -178,7 +178,7 @@ class UserOptions(Options):
             raise Exception("An error occured in processing Config option <{}> as a user option. Error: {}".format(name, str(e)))
 
     @classmethod
-    def pass_through(self, input):
+    def pass_through(cls, input):
         return input
 
     def _get_validator_for(self, option_name):

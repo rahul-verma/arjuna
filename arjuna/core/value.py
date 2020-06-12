@@ -39,7 +39,7 @@ class Value:
         return val.upper().strip().equals("NOT_SET")
 
     @classmethod
-    def is_none(self, val):
+    def is_none(cls, val):
         return val == None
 
     is_null = is_none
@@ -53,7 +53,7 @@ class Value:
         raise UnsupportedRepresentationException(val, target)
 
     @classmethod
-    def as_enum(self, val, enum_class):
+    def as_enum(cls, val, enum_class):
         try:
             return enum_class[val]
         except:
@@ -62,9 +62,9 @@ class Value:
     @classmethod
     def as_bool(cls, val):
         fstr = str(val)
-        if fstr in self.TRUES:
+        if fstr in cls.TRUES:
             return True
-        elif fstr in self.FALSES:
+        elif fstr in cls.FALSES:
             return False
         cls.__wrong_repr(val, "boolean")
 
@@ -108,19 +108,22 @@ class Value:
             return [cls.as_number(val)]
         except:
             cls.__wrong_repr(val, "number list")
-
+    
+    @classmethod
     def as_int_list(cls, val):
         try:
             return [cls.as_int(val)]
         except:
             cls.__wrong_repr(val, "int list")
-
+    
+    @classmethod
     def as_str_list(cls, val):
         try:
             return [str(val)]
         except:
             cls.__wrong_repr(val, "string list")
 
+    @classmethod
     def split_as_str_list(cls, val, delimiter=","):
         try:
             return data_utils.split(str(val), delimiter=delimiter)
