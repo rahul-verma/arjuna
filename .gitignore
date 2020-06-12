@@ -85,6 +85,8 @@ act
 arjuna.egg-info/**
 build/**
 dist/**
+denv/**
+tenv/**
 
 arjuna-samples/**/report/**
 arjuna-samples/**/*.png
