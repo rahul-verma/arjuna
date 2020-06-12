@@ -79,7 +79,6 @@ class Decorator(metaclass=abc.ABCMeta):
         super().__init__()
         self.__args = CIStringAttrDict(dkwargs)
         self.__kallable = None
-        return self
 
     def __call__(self, kallable):
         self.__kallable = kallable

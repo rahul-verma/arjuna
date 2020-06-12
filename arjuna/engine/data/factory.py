@@ -51,7 +51,7 @@ def create_file_data_source(file_path, *, context, delimiter="\t"):
     elif ext.endswith(".ini"):
         ds = IniFileDataSource(file_path, context=context)
     else:
-        raise Exception("This is not a default file format supported as a data source: " + path)
+        raise Exception("This is not a default file format supported as a data source: " + file_path)
     return ds
 
 from arjuna.tpi.helper.arjtype import CIStringDict

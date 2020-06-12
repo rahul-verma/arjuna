@@ -253,14 +253,16 @@ class Screen:
         '''
             Create a **Point** on Gui Screen in terms of its XY coordinates.
         '''
-        return _Point(x,y)
+        #return  _Point(x,y)
+        raise NotImplementedError()
 
     @staticmethod
     def offset(x, y) -> Offset:
         '''
             Create a **Offset** on Gui Screen in terms of its XY coordinates.
         '''
-        return _Offset(x,y)
+        # return _Offset(x,y)
+        raise NotImplementedError()
 
 @track("trace")
 class NVPair(Dictable):

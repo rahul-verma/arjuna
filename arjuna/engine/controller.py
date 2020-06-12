@@ -142,12 +142,13 @@ class TestSessionController:
         return conf
 
     def create_file_data_source(self, record_type, file_name, *arg_pairs):
-        response = self._send_request(
-            ArjunaComponent.DATA_SOURCE,
-            DataSourceActionType.CREATE_FILE_DATA_SOURCE,
-            *arg_pairs
-        )
-        return response.get_data_source_id()
+        raise NotImplementedError()
+        # response = self._send_request(
+        #     ArjunaComponent.DATA_SOURCE,
+        #     DataSourceActionType.CREATE_FILE_DATA_SOURCE,
+        #     *arg_pairs
+        # )
+        # return response.get_data_source_id()
 
     def define_gui(self, automator, label=None, name=None, qual_name=None, def_file_path=None):
         return self.gui_manager.define_gui(automator, label=label, name=name, qual_name=qual_name, def_file_path=def_file_path)

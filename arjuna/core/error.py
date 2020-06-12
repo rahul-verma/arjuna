@@ -117,7 +117,7 @@ class IncompatibleInputForValueException(Exception):
 
 
 class StringKeyValueContainerLookupException(Exception):
-    def __init__(key):
+    def __init__(self,key):
         super().__init__("Invalid Key [{}] used for string key types container lookup.".format(key))
 
 class WaitableError(Exception):
@@ -126,7 +126,7 @@ class WaitableError(Exception):
         super().__init__(message)
 
 def format_msg(msg):
-    return msg and  "Error message: {}".format(message) or ""
+    return msg and  "Error message: {}".format(msg) or ""
 
 class _WidgetNotFoundError(WaitableError):
 
