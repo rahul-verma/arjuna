@@ -45,6 +45,9 @@ To Do
     --> Production quality Http Layer automation.
     --> Align multi-element assertions with IterableAsserterMixin
 
+1.0.15
+------
+
 1.0.14
 ------
 Network packet capture in Web UI tests
