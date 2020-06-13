@@ -81,7 +81,7 @@ class ExcelL10NRef(L10NRef):
 class JsonL10NRef(L10NRef):
 
     def __init__(self, ldir):
-        from arjuna import Arjuna
+        from arjuna import log_fatal
         super().__init__()
         fnames = os.listdir(ldir)
         fnames.sort()
@@ -92,10 +92,10 @@ class JsonL10NRef(L10NRef):
                 try:
                     lang_map = Json.from_file(fpath)
                 except Exception as e:
-                    Arjuna.get_logger().fatal("Error in processing l10n file: {}".format(fpath))
-                    Arjuna.get_logger().fatal("Error message: {}".format(str(e)))
+                    log_fatal("Error in processing l10n file: {}".format(fpath))
+                    log_fatal("Error message: {}".format(str(e)))
                     import traceback
-                    Arjuna.get_logger().fatal("Trace: {}".format(traceback.format_exc()))
+                    log_fatal("Trace: {}".format(traceback.format_exc()))
                     raise
                 self.map[lang] = lang_map
 

@@ -24,4 +24,4 @@ class MyDataClass:
 
 @test(drive_with=data_class(MyDataClass))
 def check_data_class(request, data):
-    Arjuna.get_logger().info(data[0])
+    log_info(data[0])

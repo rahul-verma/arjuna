@@ -121,8 +121,8 @@ class GuiAppContent(Gui, ScreenShooter):
             import traceback
             raise GuiNamespaceLoadingError(self, str(e) + traceback.format_exc())
 
-        from arjuna import Arjuna
-        Arjuna.get_logger().debug("Gui Namespace loading completed for {}.".format(self.label))
+        from arjuna import log_debug
+        log_debug("Gui Namespace loading completed for {}.".format(self.label))
 
     @property
     def def_file_path(self):
@@ -252,8 +252,8 @@ class GuiAppContent(Gui, ScreenShooter):
     def _load_anchor_element(self):
         label = self._gui_def.anchor_element_name
 
-        from arjuna import Arjuna
-        Arjuna.get_logger().debug("Loading Anchor Element for {} Gui. anchor label in GNS: {}.".format(
+        from arjuna import log_debug
+        log_debug("Loading Anchor Element for {} Gui. anchor label in GNS: {}.".format(
             self.label,
             self._gui_def.anchor_element_name,
         ))

@@ -22,4 +22,4 @@ def fixed_data_func():
 
 @test(drive_with=data_function(fixed_data_func))
 def check_fixed_data_func(request, data):
-    Arjuna.get_logger().info(data[0])
+    log_info(data[0])

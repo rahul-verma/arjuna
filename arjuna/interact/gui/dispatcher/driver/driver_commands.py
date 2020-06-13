@@ -91,8 +91,8 @@ class DriverCommands:
 
     @classmethod
     def execute_javascript(cls, driver, script, *args):
-        from arjuna import Arjuna
-        Arjuna.get_logger().debug("Executing JavaScript {} with args {}.".format(script, args))
+        from arjuna import log_debug
+        log_debug("Executing JavaScript {} with args {}.".format(script, args))
         return driver.execute_script(script, *args)
 
     @classmethod

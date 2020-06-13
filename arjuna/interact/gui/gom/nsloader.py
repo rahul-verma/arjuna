@@ -54,8 +54,8 @@ class GuiNamespaceLoaderFactory:
             if os.path.isdir(full_file_path):
                 raise Exception("Namespace file path is a directory and not a file: {}".format(considered_path))
             elif not os.path.isfile(full_file_path):
-                from arjuna import Arjuna
-                Arjuna.get_logger().warning("Namespace file path does not exist: {}".format(considered_path))
+                from arjuna import log_warning
+                log_warning("Namespace file path does not exist: {}".format(considered_path))
                 return DummyGnsLoader(considered_path)
                 # raise Exception()
             # if file_format == FileFormat.GNS:
@@ -85,8 +85,8 @@ class GuiNamespace:
         if not self.has(name):
             self.__ns[name] = {}
         self.__ns[name][context] = wmd
-        from arjuna import Arjuna
-        Arjuna.get_logger().debug("Loaded {} label. EMD: {}".format(name, str(wmd)))
+        from arjuna import log_debug
+        log_debug("Loaded {} label. EMD: {}".format(name, str(wmd)))
 
     def add_reference(self, name, value):
         self.__ns[name] = value
@@ -184,7 +184,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
 
     def load(self):
         
-        from arjuna import Arjuna
+        from arjuna import Arjuna, log_debug
         from arjuna.configure.validator import Validator
         from arjuna.interact.gui.auto.finder._with import WithType
         from arjuna.tpi.parser.yaml import Yaml
@@ -255,7 +255,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                 context_data = wmd["locators"]
                 for context, locators in context_data.items():
                     self.add_element_meta_data(ename, context, locators, wmd["meta"])
-                    Arjuna.get_logger().debug("Loading {} label for {} context with locators: {} and meta {}.".format(ename, context, [str(l) for l in locators], wmd["meta"]))
+                    log_debug("Loading {} label for {} context with locators: {} and meta {}.".format(ename, context, [str(l) for l in locators], wmd["meta"]))
         
         self.add_reference("__root__", self.__ns["__root__"])
         self.add_reference("__anchor__", self.__ns["__anchor__"])

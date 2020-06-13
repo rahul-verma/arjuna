@@ -26,4 +26,4 @@ def data_generator():
 
 @test(drive_with=data_function(data_generator))
 def check_generator_func(request, data):
-    Arjuna.get_logger().info(data[0])
+    log_info(data[0])

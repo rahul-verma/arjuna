@@ -87,8 +87,8 @@ class Space:
 
     def __setattr__(self, name, value):
         container = self._get_container_for_scope()
-        from arjuna import Arjuna
-        Arjuna.get_logger().debug("Space: Setting {}={} in {} scope".format(name, value, self._request.scope))
+        from arjuna import log_debug
+        log_debug("Space: Setting {}={} in {} scope".format(name, value, self._request.scope))
         setattr(container, name, value)
 
     @property

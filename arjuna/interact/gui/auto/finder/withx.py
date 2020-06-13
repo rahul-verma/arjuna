@@ -29,8 +29,8 @@ class WithX:
             else:
                 return fmt["wtype"], fmt["wvalue"].format(*vargs, **kwargs)
         except Exception as e:
-            from arjuna import Arjuna
-            Arjuna.get_logger().error(f"Error in processing withx {name} : {fmt} for vargs {vargs} and kwargs {kwargs}")
+            from arjuna import log_error
+            log_error(f"Error in processing withx {name} : {fmt} for vargs {vargs} and kwargs {kwargs}")
             raise
 
     def format(self, name, loc_obj):

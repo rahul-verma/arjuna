@@ -22,4 +22,4 @@ def dynamic_data_func(num):
 
 @test(drive_with=data_function(dynamic_data_func, 8))
 def check_dynamic_data_func(request, data):
-    Arjuna.get_logger().info(data[0])
+    log_info(data[0])
