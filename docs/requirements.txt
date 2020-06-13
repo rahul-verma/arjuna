@@ -19,3 +19,5 @@ requests_oauthlib
 bs4
 genson
 jsonschema
+haralyzer
+browsermob-proxy

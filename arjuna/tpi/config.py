@@ -197,12 +197,13 @@ class ConfigBuilder:
                 builder[option] = value
     '''
 
-    def __init__(self, *, base_config: Configuration, auto_name_gen=True):
+    def __init__(self, *, base_config: Configuration, auto_name_gen=True, _conf_stage=ConfigStage.CODED):
         from arjuna.configure.options import EditableConfig
         vars(self)['_test_session'] = base_config.test_session
         vars(self)['_config_container'] = EditableConfig.empty_conf()
         vars(self)['_base_config'] = base_config
         vars(self)['_auto_gen_name'] = auto_name_gen
+        vars(self)['_conf_stage'] = _conf_stage
 
     def option(self, option: ArjunaOptionOrStr, obj: Any) -> 'self':
         '''
@@ -312,7 +313,7 @@ class ConfigBuilder:
             Note:
                 If instead of full absolute path, a name or relative file path is provided, Arjuna creates the path in relation to the default configuration directory - **<Project Root>/config**.
         '''
-        conf = self._test_session.load_options_from_file(fpath)
+        conf = self._test_session.load_options_from_file(fpath, conf_stage=self._conf_stage)
         for k,v in conf.arjuna_options.as_dict().items():
             self._config_container.set_arjuna_option(k,v)
         for k,v in conf.user_options.as_dict().items():
@@ -347,7 +348,7 @@ class ConfigBuilder:
         config = self._test_session.register_config(config_name.lower(), 
                                         self._config_container.arjuna_options, #.items(),
                                         self._config_container.user_options, #.items(),
-                                        self._base_config
+                                        conf_stage=self._conf_stage,
+                                        parent_config=self._base_config
                                     )
-
         return config

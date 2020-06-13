@@ -132,11 +132,11 @@ class TestSessionController:
         from arjuna import Arjuna
         Arjuna.register_config(config)
 
-    def load_options_from_file(self, fpath):
-        return self.configurator.load_options_from_file(fpath)
+    def load_options_from_file(self, fpath, *, conf_stage):
+        return self.configurator.load_options_from_file(fpath, conf_stage=conf_stage)
 
-    def register_config(self, name, arjuna_options, user_options, parent_config=None):
-        config = self.configurator.register_new_config(arjuna_options, user_options, parent_config)
+    def register_config(self, name, arjuna_options, user_options, *, conf_stage, parent_config=None):
+        config = self.configurator.register_new_config(arjuna_options, user_options, parent_config=parent_config, conf_stage=conf_stage)
         conf = self.__create_config(config, name=name)
         self.__add_to_map(conf)
         return conf

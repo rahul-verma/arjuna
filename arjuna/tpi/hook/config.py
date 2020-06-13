@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from arjuna.core.constant import ConfigStage
+
 class Configurator:
 
     def __init__(self):
@@ -40,4 +42,4 @@ class Configurator:
         '''
         from arjuna import Arjuna
         from arjuna.tpi.config import ConfigBuilder
-        return ConfigBuilder(base_config=Arjuna.get_config(name=base_config), auto_name_gen=False)
+        return ConfigBuilder(base_config=Arjuna.get_config(name=base_config), auto_name_gen=False, _conf_stage=ConfigStage.REFERENCE)

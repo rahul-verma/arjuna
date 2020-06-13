@@ -81,59 +81,62 @@ class MagicTestSessionForGroup(BaseTestSession):
 class YamlTestSession(BaseTestSession):
 
     __SESSIONS_YAML = None
+    __SESSIONS_YAML_FILE = None
     __STAGES_YAML = None
+    __STAGES_YAML_FILE = None
     __GROUPS_YAML = None
+    __GROUPS_YAML_FILE = None
 
     @classmethod
     def __load_sessions_file(cls):
         from arjuna import C
         if cls.__SESSIONS_YAML is None:
-            yaml_file_path = C(ArjunaOption.CONF_SESSIONS_FILE)
+            cls.__SESSIONS_YAML_FILE = C(ArjunaOption.CONF_SESSIONS_FILE)
             try:
-                cls.__SESSIONS_YAML = Yaml.from_file(yaml_file_path)
+                cls.__SESSIONS_YAML = Yaml.from_file(cls.__SESSIONS_YAML_FILE)
             except FileNotFoundError as e:
-                raise TestSessionsFileNotFoundError(yaml_file_path)
+                raise TestSessionsFileNotFoundError(cls.__SESSIONS_YAML_FILE)
 
     @classmethod
     def get_session_yaml(cls, name):
         try:
             return cls.__SESSIONS_YAML.get_section(name)
         except YamlUndefinedSectionError as e:
-            raise UndefinedTestSessionError(name=name, file_path=cls.__SESSIONS_YAML.file_path)
+            raise UndefinedTestSessionError(name=name, file_path=cls.__SESSIONS_YAML_FILE)
 
     @classmethod
     def __load_stages_file(cls):
         from arjuna import C
         if cls.__STAGES_YAML is None:
-            yaml_file_path = C(ArjunaOption.CONF_STAGES_FILE)
+            cls.__STAGES_YAML_FILE = C(ArjunaOption.CONF_STAGES_FILE)
             try:
-                cls.__STAGES_YAML = Yaml.from_file(yaml_file_path)
+                cls.__STAGES_YAML = Yaml.from_file(cls.__STAGES_YAML_FILE)
             except FileNotFoundError:
-                raise TestStagesFileNotFoundError(yaml_file_path)
+                raise TestStagesFileNotFoundError(cls.__STAGES_YAML_FILE)
 
     @classmethod
     def get_stage_yaml(cls, name):
         try:
             return cls.__STAGES_YAML.get_section(name)
         except YamlUndefinedSectionError as e:
-            raise UndefinedTestStageError(name=name, file_path=cls.__STAGES_YAML.file_path)
+            raise UndefinedTestStageError(name=name, file_path=cls.__STAGES_YAML_FILE)
 
     @classmethod
     def __load_groups_file(cls):
         from arjuna import C
         if cls.__GROUPS_YAML is None:
-            yaml_file_path = C(ArjunaOption.CONF_GROUPS_FILE)
+            cls.__GROUPS_YAML_FILE = C(ArjunaOption.CONF_GROUPS_FILE)
             try:
-                cls.__GROUPS_YAML = Yaml.from_file(yaml_file_path)
+                cls.__GROUPS_YAML = Yaml.from_file(cls.__GROUPS_YAML_FILE)
             except FileNotFoundError:
-                raise TestGroupsFileNotFoundError(yaml_file_path)
+                raise TestGroupsFileNotFoundError(cls.__GROUPS_YAML_FILE)
 
     @classmethod
     def get_group_yaml(cls, name):
         try:
             return cls.__GROUPS_YAML.get_section(name)
         except YamlUndefinedSectionError as e:
-            raise UndefinedTestGroupError(name=name, file_path=cls.__GROUPS_YAML.file_path)
+            raise UndefinedTestGroupError(name=name, file_path=cls.__GROUPS_YAML_FILE)
 
     @classmethod
     def load_session_defs(cls):

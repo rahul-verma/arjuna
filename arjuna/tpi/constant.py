@@ -118,7 +118,7 @@ class ArjunaOption(Enum):
     '''Test Project configuration directory'''
 
     CONF_DATA_FILE = auto()
-    '''Directory that contains all data configurations.'''
+    '''File that contains all data configurations.'''
 
     CONF_ENVS_FILE = auto()
     '''File that contains all environment configurations.'''

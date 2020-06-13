@@ -22,6 +22,7 @@ from enum import Enum
 from arjuna.configure.options import EditableConfig
 from arjuna.core.value import Value
 from arjuna.core.utils import file_utils
+from arjuna.core.constant import ConfigStage
 
 
 class TestConfigurator:
@@ -69,7 +70,7 @@ class TestConfigurator:
         if "env" not in self.__env_confs:
             self.__env_confs["env"] = self._EMPTY_CONF
 
-    def load_options_from_file(self, fpath):
+    def load_options_from_file(self, fpath, *, conf_stage):
         if file_utils.is_absolute_path(fpath):
             if not file_utils.is_file(fpath):
                 if file_utils.is_dir(fpath):
@@ -85,10 +86,10 @@ class TestConfigurator:
                     raise Exception("Not a file: {}".format(fpath))
                 else:
                     raise Exception("File does not exist: {}".format(fpath))
-        return EditableConfig.from_file(file_path=fpath, creation_context=f"Ad-hoc configuration file at {fpath}")
+        return EditableConfig.from_file(file_path=fpath, creation_context=f"Ad-hoc configuration file at {fpath}", conf_stage=conf_stage)
 
     def __load_cli_dicts(self):
-        self.__cli_config = EditableConfig.from_maps(ref_config=None, arjuna_options=self.__cli_config.arjuna_options, user_options=self.__cli_config.user_options)
+        self.__cli_config = EditableConfig.from_maps(ref_config=None, arjuna_options=self.__cli_config.arjuna_options, user_options=self.__cli_config.user_options, conf_stage=ConfigStage.CLI)
 
     def __update_config_for_env(self, config):
         if self.__chosen_env_conf:
@@ -139,10 +140,10 @@ class TestConfigurator:
     def file_confs(self):
         return self.__dataconf_enconf_confs
 
-    def register_new_config(self, arjuna_options, user_options, parent_config=None):
+    def register_new_config(self, arjuna_options, user_options, *, conf_stage, parent_config=None):
         # Registering a config is post project conf registration. If no project conf, set it to true.
         self.__project_config_loaded = True
         reference = parent_config and parent_config._wrapped_config or self.__default_ref_config._wrapped_config
-        conf = EditableConfig.from_maps(ref_config=reference, arjuna_options=arjuna_options, user_options=user_options)
+        conf = EditableConfig.from_maps(ref_config=reference, conf_stage=conf_stage, arjuna_options=arjuna_options, user_options=user_options)
         self.__update_config(conf)
         return conf

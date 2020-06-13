@@ -6,6 +6,7 @@ Submodules
 
 .. toctree::
 
+   arjuna.tpi.protocol.network_recorder
    arjuna.tpi.protocol.screenshooter
 
 Module contents

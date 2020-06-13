@@ -234,3 +234,19 @@ class HttpUnexpectedStatusCode(Exception):
     @property
     def response(self):
         return self.__response
+
+class DisallowedArjunaOptionError(Exception):
+    '''
+        Raised when there is an attempt to set an ArjunOption value in a configuration stage, where it is not allowed to override the value.
+    '''
+
+    def __init__(self, stage, option):
+        super().__init__("Option {} is not allowed in a {} configuration.".format(option, stage.name.title()))
+
+
+class ArjunaOptionValidationError(Exception):
+
+    def __init__(self, option, name, validator):
+        super().__init__(
+            "Config option value <{}>(type:{}) for <{}> option did not pass the validation check: [{}]".format(
+                    option, type(option), name, validator))

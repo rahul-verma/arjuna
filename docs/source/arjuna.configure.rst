@@ -9,6 +9,7 @@ Submodules
    arjuna.configure.cli
    arjuna.configure.configurator
    arjuna.configure.options
+   arjuna.configure.stage
    arjuna.configure.validator
 
 Module contents

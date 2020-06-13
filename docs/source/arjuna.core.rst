@@ -24,6 +24,7 @@ Submodules
    arjuna.core.constant
    arjuna.core.discovery
    arjuna.core.error
+   arjuna.core.har
    arjuna.core.helpers
    arjuna.core.utils
    arjuna.core.value

@@ -236,6 +236,9 @@ class __RunCommand(Command):
     def pop_command_args(self, arg_dict):
         pass
 
+    def exit(self):
+        from arjuna import Arjuna
+        Arjuna.exit()
 
 class RunProject(__RunCommand):
     def __init__(self, subparsers, parents):
@@ -248,6 +251,7 @@ class RunProject(__RunCommand):
         session = Arjuna.get_test_session()
         session.load_tests(dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
+        super().exit()
 
 
 class RunSession(__RunCommand):
@@ -260,6 +264,7 @@ class RunSession(__RunCommand):
         session = Arjuna.get_test_session()
         session.load_tests(dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
+        super().exit()
 
 class RunStage(__RunCommand):
     def __init__(self, subparsers, parents):
@@ -272,6 +277,7 @@ class RunStage(__RunCommand):
         session = Arjuna.get_test_session()
         session.load_tests_for_stage(stage_name=self.__stage_name, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
+        super().exit()
 
     def pop_command_args(self, arg_dict):
         self.__stage_name = arg_dict.pop("stage_name")
@@ -287,6 +293,7 @@ class RunGroup(__RunCommand):
         session = Arjuna.get_test_session()
         session.load_tests_for_group(group_name=self.__group_name, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
+        super().exit()
 
     def pop_command_args(self, arg_dict):
         self.__group_name = arg_dict.pop("group_name")
@@ -307,6 +314,7 @@ class RunSelected(__RunCommand):
         session = Arjuna.get_test_session()
         session.load_tests(rules=self.__rules, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
         session.run()
+        super().exit()
 
     def pop_command_args(self, arg_dict):
         from arjuna.engine.session.group import TestGroup

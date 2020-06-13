@@ -366,3 +366,9 @@ class RuleConditionType(Enum):
     IS_SUBSET = auto()
     HAS_INTERSECTION = auto()
     NO_INTERSECTION = auto()
+
+class ConfigStage(Enum):
+    DEFAULT = auto()
+    REFERENCE = auto()
+    CODED = auto()
+    CLI = auto()

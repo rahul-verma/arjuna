@@ -24,7 +24,10 @@ import tempfile
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.constant import ArjunaOption
 from arjuna.tpi.parser.yaml import Yaml
+from arjuna.tpi.error import DisallowedArjunaOptionError, ArjunaOptionValidationError
 from .validator import Validator
+from .stage import ConfigStageKeys
+from arjuna.core.constant import ConfigStage
 from enum import Enum
 from arjuna.tpi.constant import BrowserName
 
@@ -58,9 +61,7 @@ class Options(metaclass=abc.ABCMeta):
                         else:
                             self.__options[option_key] = option_value
         except Exception as e:
-            raise Exception("Config option value <{}>(type:{}) for <{}> option did not pass the validation check: [{}]".format(
-                option_value, type(option_value), option_name, validator_name)
-            )
+            raise ArjunaOptionValidationError(option_value, option_name, validator_name)
     
     def __get_option_key(self, option_name):
         return isinstance(option_name, Enum) and option_name.name or option_name
@@ -233,7 +234,12 @@ class EditableConfig:
     def set_option(self, option, obj):
         try:
             self.set_arjuna_option(option, obj)
+        except DisallowedArjunaOptionError:
+            raise
+        except ArjunaOptionValidationError:
+            raise
         except Exception as e:
+            print(e)
             self.set_user_option(option, obj)
         return self
 
@@ -248,25 +254,32 @@ class EditableConfig:
         return False
 
     @classmethod
+    def validate_arjuna_options_for_stage(cls, stage, options):
+        if isinstance(options, ArjunaOptions):
+            options = options.as_dict()
+        for option in options:
+            ConfigStageKeys.validate(stage, UserOptions.process_option_name(option))
+
+    @classmethod
     def empty_conf(cls):
        return EditableConfig(arjuna_options_dict=None, user_options_dict=None, creation_context="")
 
     @classmethod
-    def from_file(cls, *, file_path, creation_context, validate=True, **replacements):
+    def from_file(cls, *, file_path, creation_context, conf_stage, validate=True, **replacements):
         with open(file_path, "r") as f:
-            return cls.from_str(contents=f.read(), creation_context=creation_context, validate=validate, **replacements)
+            return cls.from_str(contents=f.read(), creation_context=creation_context, conf_stage=conf_stage, validate=validate, **replacements)
 
     @classmethod
-    def from_str(cls, *, contents, creation_context, validate=True, **replacements):
+    def from_str(cls, *, contents, creation_context, conf_stage, validate=True, **replacements):
         for rname, rvalue in replacements.items():
             contents = contents.replace("${}$".format(rname), rvalue)
         
         contents_yaml = Yaml.from_str(contents)
 
-        return cls.from_yaml(yaml_obj=contents_yaml, creation_context=creation_context, validate=validate)
+        return cls.from_yaml(yaml_obj=contents_yaml, creation_context=creation_context, conf_stage=conf_stage, validate=validate)
 
     @classmethod
-    def from_yaml(cls, *, yaml_obj, creation_context, validate=True):
+    def from_yaml(cls, *, yaml_obj, creation_context, conf_stage, validate=True):
         arjuna_options_dict = yaml_obj.get_section("arjuna_options", strict=False, allow_any=True)
         if arjuna_options_dict is not None:
             arjuna_options_dict = arjuna_options_dict.as_map()
@@ -277,6 +290,10 @@ class EditableConfig:
             user_options_dict = user_options_dict.as_map()
         else:
             user_options_dict = dict()
+
+        if conf_stage != ConfigStage.DEFAULT:
+            cls.validate_arjuna_options_for_stage(conf_stage, arjuna_options_dict)
+
         return EditableConfig(
             arjuna_options_dict = arjuna_options_dict,
             user_options_dict = user_options_dict,
@@ -291,6 +308,7 @@ class EditableConfig:
         return cls.from_file(
             file_path=location,
             creation_context=f"arjuna.yaml default configuration file at {location}",
+            conf_stage=ConfigStage.DEFAULT,
             arjuna_root_dir = os.path.abspath(os.path.join(my_dir, "..", "..")),
             project_root_dir = project_root_dir,
             project_name = os.path.basename(project_root_dir),
@@ -310,15 +328,18 @@ class EditableConfig:
         proj_conf.update(
             cls.from_file(
                 file_path = location,
-                creation_context = f"project.yaml configuration file at {location}"
+                creation_context = f"project.yaml configuration file at {location}",
+                conf_stage=ConfigStage.REFERENCE,
             )
         )
         return proj_conf
 
     @classmethod
-    def from_maps(cls, *, ref_config, arjuna_options, user_options):
+    def from_maps(cls, *, conf_stage, ref_config, arjuna_options, user_options):
         conf = cls.empty_conf()
-        if ref_config: conf.update(ref_config)
+        if ref_config: conf.update(ref_config)     
+        if arjuna_options:
+            cls.validate_arjuna_options_for_stage(conf_stage, arjuna_options)
         conf.update_from_maps(arjuna_options=arjuna_options, user_options=user_options)
         return conf
 
@@ -328,7 +349,7 @@ class EditableConfig:
         conf_map = dict()
         if yaml is not None:
             for section_name in yaml.section_names:
-                conf_map[section_name] = cls.from_yaml(yaml_obj=yaml.get_section(section_name), creation_context=f"Section {section_name} in {creation_context}")
+                conf_map[section_name] = cls.from_yaml(yaml_obj=yaml.get_section(section_name), creation_context=f"Section {section_name} in {creation_context}", conf_stage=ConfigStage.REFERENCE)
 
         return conf_map
 

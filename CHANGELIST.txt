@@ -4,13 +4,7 @@ Future Themes (In-Progress or Planned):
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Call Walkthroughs and Identify New Named Exceptions to be created.
     - Auto screenshot name should consider session, stage and group name.
-    - Stefan: Can arjuna capture network traffic between server and browser like the network tab in the browsers dev tools?
-    as of this selenium should be able https://www.vskills.in/certification/tutorial/selenium/network-traffic-capture/
     - Configuration:
-        - History for Configuration (Creation Contexts.)
-        - History for a Configuration Option in a Configuration object.
-        - For a given Configuration:
-        - Viewability
         - Overrridablity (and level.)
         - Provision for vars section in config files 
         - Stage factory
@@ -66,6 +60,9 @@ Reporting
         - ArjunaOption.REPORT_SCREENSHOTS_ALWAYS - Screenshots will be included even for passed tests.
     - Any config level options:
         - ArjunaOption.REPORT_NETWORK_FILTER - Only requests with responses with content with html/json/xml are included in report.
+Configuration
+    - Configuration stages defined as Default/Reference/CLI/Coded.
+    - DisallowedArjunaOptionError exception is raised if one attempts to set a config option at a level where it is not allowed.
 Network Recorder Protocol
     - request spaces can contain `network_recorder` attribute.
     - A Network Recorder should have record/register methods. For Web UI automation, it can be set to `<app_object>.network_recorder`.
