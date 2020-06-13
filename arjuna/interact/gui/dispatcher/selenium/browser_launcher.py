@@ -58,6 +58,8 @@ class BrowserLauncher:
         #     proxy.ssl_proxy = proxy_string
         #     proxy.add_to_capabilities(caps)
 
+        from arjuna import log_debug
+        log_debug("Is proxy set for Chrome?: {}".format(proxy is not None))
         if proxy is not None:
             proxy.add_to_capabilities(caps)
             caps['acceptInsecureCerts'] = True

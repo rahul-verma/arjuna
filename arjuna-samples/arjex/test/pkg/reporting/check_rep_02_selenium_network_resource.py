@@ -18,16 +18,14 @@
 from arjuna import *
 
 '''
-    Run these tests with -ao report.network.always true to see network capture for passed tests
+    Try with the following switches to see different behaviors:
+        -ao browser.network.recorder.enabled true
+        -ao report.network.always true
 '''
 
 @for_test
 def browser_1(request):
-    cb = request.config.builder
-    cb["browser.network.recorder.enabled"] = True
-    config = cb.register()
-
-    browser = GuiApp(url="https://google.com", config=config)
+    browser = GuiApp(url="https://google.com")
     browser.launch()
 
     request.space.network_recorder = browser.network_recorder
@@ -40,7 +38,6 @@ def browser_1(request):
 @for_test
 def browser_2(request):
     cb = request.config.builder
-    cb["browser.network.recorder.enabled"] = True
     cb["browser.network.recorder.automatic"] = True
     config = cb.register()
 

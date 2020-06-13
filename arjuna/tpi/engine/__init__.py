@@ -23,6 +23,7 @@ import io
 import time
 import datetime
 import threading
+import platform
 # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="UTF-8")
 # sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
 
@@ -70,6 +71,44 @@ class ArjunaSingleton:
 
         from arjuna.tpi.engine.testwise import CurrentTestWiseContainer
         self.__current_test_wise_objects = CurrentTestWiseContainer()
+        self.__bmproxy_server = None
+
+    def __start_bmproxy(self, config):
+        # BrowserMob
+        from browsermobproxy import Server
+        from arjuna.tpi.constant import ArjunaOption
+        capture_traffic = config.value(ArjunaOption.BROWSER_NETWORK_RECORDER_ENABLED)
+        if capture_traffic:
+            bmproxy_dir = config.value(ArjunaOption.TOOLS_BMPROXY_DIR)
+            sub_dirs = os.listdir(bmproxy_dir)
+            bmproxy_bin_dir = None
+            if "bin" in sub_dirs:
+                bmproxy_bin_dir = os.path.join(bmproxy_dir, "bin")
+            else:
+                sub_dirs.sort(reverse=True) # Last version will be picked.
+                for d in sub_dir:
+                    if d.startswith("browsermob"):
+                        bmproxy_bin_dir = os.path.join(bmproxy_dir, d, "bin")
+                        break
+
+            if bmproxy_bin_dir is None:
+                raise Exception("Network recording is enabled in configuration. There was an error in creating proxy server/server using BrowserMob Proxy. Could not find proxy package at {}".format(bmproxy_dir))
+            
+            if platform.system().lower() == "windows":
+                exe = "browsermob-proxy.bat"
+            else:
+                exe = "browsermob-proxy"
+            bmproxy_exe_path = os.path.join(bmproxy_bin_dir, exe)
+
+            try:
+                self.__bmproxy_server = Server(bmproxy_exe_path)
+                self.__bmproxy_server.start()
+            except ProxyServerError as e:
+                raise Exception("Network recording is enabled in configuration. There was an error in creating proxy server/server using BrowserMob Proxy. Fix and retry. Error message: {}".format(str(e)))
+
+    @property
+    def bmproxy_server(self):
+        return self.__bmproxy_server
 
     @property
     def gui_mgr(self):
@@ -135,6 +174,8 @@ class ArjunaSingleton:
             wyaml = Yaml.from_file(fpath, allow_any=True)
             if wyaml is not None:
                 self.__common_withx_ref = WithX(wyaml.as_map())
+
+        self.__start_bmproxy(self.ref_config)
 
         return self.ref_config
 
@@ -263,6 +304,10 @@ class Arjuna:
         return cls.ARJUNA_SINGLETON.logger
 
     @classmethod
+    def _get_bmproxy_server(cls):
+        return cls.ARJUNA_SINGLETON.bmproxy_server
+
+    @classmethod
     def get_test_session(cls):
         '''
             Returns the current Test Session object.
@@ -368,9 +413,11 @@ class Arjuna:
     def get_test_meta_data(cls, qual_name):
         return cls.ARJUNA_SINGLETON.get_test_meta_data(qual_name)
 
-    @staticmethod
-    def exit():
+    @classmethod
+    def exit(cls):
         '''
             Clean-up and finalise resources currently opened by Arjuna.
         '''
-        pass
+        proxy_server = cls._get_bmproxy_server()
+        if proxy_server is not None:
+            proxy_server.stop()

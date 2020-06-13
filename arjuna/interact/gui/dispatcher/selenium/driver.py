@@ -78,36 +78,10 @@ class SeleniumDriverDispatcher:
                 svc_url += "/wd/hub"
 
         # BrowserMob
-        from browsermobproxy import Server
-        capture_traffic = config["arjuna_options"]["BROWSER_NETWORK_RECORDER_ENABLED"]
-        if capture_traffic:
-            bmproxy_dir = config["arjuna_options"]["TOOLS_BMPROXY_DIR"]
-            sub_dirs = os.listdir(bmproxy_dir)
-            bmproxy_bin_dir = None
-            if "bin" in sub_dirs:
-                bmproxy_bin_dir = os.path.join(bmproxy_dir, "bin")
-            else:
-                sub_dirs.sort(reverse=True) # Last version will be picked.
-                for d in sub_dir:
-                    if d.startswith("browsermob"):
-                        bmproxy_bin_dir = os.path.join(bmproxy_dir, d, "bin")
-                        break
-
-            if bmproxy_bin_dir is None:
-                raise Exception("Network recording is enabled in configuration. There was an error in creating proxy server/server using BrowserMob Proxy. Could not find proxy package at {}".format(bmproxy_dir))
-            
-            if platform.system().lower() == "windows":
-                exe = "browsermob-proxy.bat"
-            else:
-                exe = "browsermob-proxy"
-            bmproxy_exe_path = os.path.join(bmproxy_bin_dir, exe)
-
-            try:
-                self.__proxy_server = Server(bmproxy_exe_path)
-                self.__proxy_server.start()
-                self.__proxy = self.__proxy_server.create_proxy()
-            except ProxyServerError as e:
-                raise Exception("Network recording is enabled in configuration. There was an error in creating proxy server/server using BrowserMob Proxy. Fix and retry. Error message: {}".format(str(e)))
+        from arjuna import Arjuna
+        bmproxy_server = Arjuna._get_bmproxy_server()
+        if bmproxy_server is not None:
+            self.__proxy = bmproxy_server.create_proxy()
 
         self.__driver = BrowserLauncher.launch(config, svc_url=svc_url, proxy=self.__proxy) 
 
@@ -115,9 +89,8 @@ class SeleniumDriverDispatcher:
         DriverCommands.quit(self.__driver)
         if self.__driver_service:
             self.__driver_service.stop()
-        if self.__proxy_server:
+        if self.__proxy:
             self.__proxy.close()
-            self.__proxy_server.stop()
 
     def go_to_url(self, url):
         DriverCommands.go_to_url(self.__driver, url)

@@ -18,7 +18,9 @@
 from arjuna import *
 
 '''
-    Run these tests with -ao report.network.always true to see network capture for passed tests
+    Try with the following switches to see different behaviors:
+        -ao browser.network.recorder.enabled true
+        -ao report.network.always true
 '''
 
 def __activity(config=None):
@@ -43,28 +45,7 @@ def check_explicit_capture_rec_off_auto_off_fail(request):
     1/0
 
 @test
-def check_explicit_capture_rec_on_auto_off_pass(request):
-    # Recording Enabled. Auto recording is off. Filter is on. Inclusion for passed is off.
-    # Test passes, no network packets in report.
-    cb = request.config.builder
-    cb["browser.network.recorder.enabled"] = True
-    config = cb.register()
-
-    __activity(config)
-
-@test
-def check_explicit_capture_rec_on_auto_off_fail(request):
-    # Recording Enabled. Auto recording is off. Filter is on. Inclusion for passed is off.
-    # Test passes, network packets SHOULD be seen in report.
-    cb = request.config.builder
-    cb["browser.network.recorder.enabled"] = True
-    config = cb.register()
-
-    __activity(config)
-    1/0
-
-@test
-def check_explicit_capture_rec_off_auto_on_pass(request):
+def check_explicit_capture_auto_on_pass(request):
     # Recording Disabled. Auto recording is on. Filter is on. Inclusion for passed is off.
     # Test passes, no network packets in report.
     cb = request.config.builder
@@ -74,7 +55,7 @@ def check_explicit_capture_rec_off_auto_on_pass(request):
     __activity(config)
 
 @test
-def check_explicit_capture_rec_off_auto_on_fail(request):
+def check_explicit_capture_auto_on_fail(request):
     # Recording Disabled. Auto recording is on. Filter is on. Inclusion for passed is off.
     # Test fails, no network packets in report.
     cb = request.config.builder
@@ -83,38 +64,3 @@ def check_explicit_capture_rec_off_auto_on_fail(request):
 
     __activity(config)
     1/0
-
-@test
-def check_explicit_capture_rec_on_auto_on_pass(request):
-    # Recording Disabled. Auto recording is on. Filter is on. Inclusion for passed is off.
-    # Test passes, no network packets in report.
-    cb = request.config.builder
-    cb["browser.network.recorder.enabled"] = True
-    cb["browser.network.recorder.automatic"] = True
-    config = cb.register()
-
-    __activity(config)
-
-@test
-def check_explicit_capture_rec_on_auto_on_fail(request):
-    # Recording Disabled. Auto recording is on. Filter is on. Inclusion for passed is off.
-    # Test fails, no network packets in report.
-    cb = request.config.builder
-    cb["browser.network.recorder.enabled"] = True
-    cb["browser.network.recorder.automatic"] = True
-    config = cb.register()
-
-    __activity(config)
-    1/0
-
-
-@test
-def check_explicit_capture_rec_on_auto_on_pass(request):
-    # Recording Disabled. Auto recording is on. Filter is on. Inclusion for passed is off.
-    # Test passes, no network packets in report.
-    cb = request.config.builder
-    cb["browser.network.recorder.enabled"] = True
-    cb["browser.network.recorder.automatic"] = True
-    config = cb.register()
-
-    __activity(config)

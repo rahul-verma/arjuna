@@ -17,6 +17,12 @@
 
 from arjuna import *
 
+'''
+    Try with the following switches to see different behaviors:
+        -ao browser.network.recorder.enabled true
+        -ao report.network.always true
+'''
+
 def __activity(config=None):
     browser = GuiApp(url="https://google.com", config=config)
     browser.launch()
@@ -27,7 +33,6 @@ def __activity(config=None):
 @test
 def check_filter_on(request):
     cb = request.config.builder
-    cb["browser.network.recorder.enabled"] = True
     cb["browser.network.recorder.automatic"] = True
     config = cb.register()
 
@@ -37,7 +42,6 @@ def check_filter_on(request):
 @test
 def check_filter_off(request):
     cb = request.config.builder
-    cb["browser.network.recorder.enabled"] = True
     cb["browser.network.recorder.automatic"] = True
     cb["report.network.filter"] = False
     config = cb.register()

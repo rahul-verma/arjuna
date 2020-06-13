@@ -55,8 +55,9 @@ To Do
 ------
 Network packet capture in Web UI tests
     - BrowserMob Proxy integration
-    - Any config level options:
+    - Reference Config level options:
         - ArjunaOption.BROWSER_NETWORK_RECORDER_ENABLED enables network recording. Default is False. 
+    - Any config level options:
         - ArjunaOption.BROWSER_NETWORK_RECORDER_AUTOMATIC instructs to GuiApp to start recording after browser is launched. Also, each GuiPage sets current title to its name. Default is False. 
     - The packets are captured and shown in HTML Reports just like Web service network packets.
 Reporting
