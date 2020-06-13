@@ -239,7 +239,6 @@ class EditableConfig:
         except ArjunaOptionValidationError:
             raise
         except Exception as e:
-            print(e)
             self.set_user_option(option, obj)
         return self
 
