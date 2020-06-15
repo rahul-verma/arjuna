@@ -170,7 +170,7 @@ Test, Test Resources and Assertions
     * :py:func:`skip <arjuna.tpi.engine.test.skip>`
     * :py:func:`xfail <arjuna.tpi.engine.test.xfail>`
     * :py:func:`problem_in <arjuna.tpi.engine.relation.problem_in>`
-* Assertions
+* **Assertions**
     * :py:class:`Asserter <arjuna.tpi.engine.asserter.Asserter>`
     * :py:class:`AsserterMixIn <arjuna.tpi.engine.asserter.AsserterMixIn>`
     * :py:class:`IterableAsserterMixin <arjuna.tpi.engine.asserter.IterableAsserterMixin>`
@@ -247,6 +247,11 @@ HTTP Automation
     * :py:class:`OAuthClientGrantSession <arjuna.tpi.httpauto.oauth.OAuthClientGrantSession>`
     * :py:class:`OAuthImplicitGrantSession <arjuna.tpi.httpauto.oauth.OAuthImplicitGrantSession>`
 
+Reporting Protocols
+===================
+
+* :py:class:`ScreenShooter <arjuna.tpi.protocol.screen_shooter.ScreenShooter>`
+* :py:class:`NetworkRecorder <arjuna.tpi.httpauto.network_recorder.NetworkRecorder>`
 
 Objects In Arjuna Hooks
 =======================
@@ -313,6 +318,8 @@ Arjuna Exceptions
 * Configuration
     * :py:class:`UndefinedConfigError <arjuna.tpi.error.UndefinedConfigError>`
     * :py:class:`ConfigCreationError <arjuna.tpi.error.ConfigCreationError>`
+    * :py:class:`DisallowedArjunaOptionError <arjuna.tpi.error.DisallowedArjunaOptionError>`
+    * :py:class:`ArjunaOptionValidationError <arjuna.tpi.error.ArjunaOptionValidationError>`
 * Test Session, Stage and Group
     * :py:class:`TestSessionsFileNotFoundError <arjuna.tpi.error.TestSessionsFileNotFoundError>`
     * :py:class:`UndefinedTestSessionError <arjuna.tpi.error.UndefinedTestSessionError>`

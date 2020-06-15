@@ -25,7 +25,7 @@ from selenium.common.exceptions import StaleElementReferenceException
 from arjuna.tpi.guiauto.base.locatable import Locatable
 from arjuna.interact.gui.auto.base.dispatchable import _Dispatchable
 from arjuna.tpi.guiauto.widget.element import GuiElement
-from arjuna.tpi.engine.asserter import AsserterMixIn
+from arjuna.tpi.engine.asserter import AsserterMixIn, IterableAsserterMixin
 from arjuna.tpi.guiauto.source.multielement import GuiMultiElementSource
 from arjuna.tpi.tracker import track
 
@@ -49,7 +49,7 @@ class _GuiPartialElement(GuiElement):
     def index(self):
         return self.__index
 
-class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
+class GuiMultiElement(AsserterMixIn, IterableAsserterMixin, Locatable,_Dispatchable):
     '''
         Represents multiple GuiElements found using a same GuiWidgetLocator.
 
@@ -77,16 +77,19 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
     
     def __init__(self, gui, wmd, elements=None, dispatcher=None): #, parent=None):
         AsserterMixIn.__init__(self)
+        IterableAsserterMixin.__init__(self)
         Locatable.__init__(self, gui, wmd) #, parent)
         _Dispatchable.__init__(self)
         # When a mulit-element is created using a filter.
         if dispatcher is not None:
             self._dispatcher = dispatcher
-        if elements:
-            self.__elements = elements
-            self._size = len(elements)
+        if not elements:
+            self.__elements = list()
         else:
-            self.__elements = list()   
+            self.__elements = list()
+            self._size = len(elements)
+
+        self._container = self.__elements
 
         self._load_source_parser()
 
@@ -121,59 +124,6 @@ class GuiMultiElement(AsserterMixIn, Locatable,_Dispatchable):
 
     def __len__(self) -> int:
         return self.size
-
-    def assert_size(self, size, obj_name, msg=None) -> None:
-        '''
-            Assert number of elements in this GuiMultiElement.
-
-            Arguments:
-                size: Expected size.
-                obj_name: Used for making the assertion error message useful.
-                msg: (Optional) Any custom message that you want to included in assertion error message.
-        '''
-        self.asserter.assert_equal(self.size, size, msg="{} should have exactly {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter._format_msg(msg)))
-
-    def assert_min_size(self, size, obj_name, msg=None) -> None:
-        '''
-            Assert minimum number of elements in this GuiMultiElement.
-
-            Arguments:
-                size: Minimum expected size.
-                obj_name: Used for making the assertion error message useful.
-                msg: (Optional) Any custom message that you want to included in assertion error message.
-        '''
-        self.asserter.assert_min(self.size, size, msg="{} should have minimum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter._format_msg(msg)))
-    
-    def assert_max_size(self, size, obj_name, msg=None) -> None:
-        '''
-            Assert maximum number of elements in this GuiMultiElement.
-
-            Arguments:
-                min_size: Maximum expected size.
-                obj_name: Used for making the assertion error message useful.
-                msg: (Optional) Any custom message that you want to included in assertion error message.
-        '''
-        self.asserter.assert_max(self.size, size, msg="{} should have maximum of {} elements, but was found to have {} elements.".format(obj_name, size, self.size, self.asserter._format_msg(msg)))
-
-    def assert_empty(self, obj_name, msg=None) -> None:
-        '''
-            Assert that this GuiMultiElement has no elements.
-
-            Arguments:
-                obj_name: Used for making the assertion error message useful.
-                msg: (Optional) Any custom message that you want to included in assertion error message.
-        '''
-        self.asserter.assert_equal(self.size, 0, msg="{} should be empty, but was found to have {} elements.".format(obj_name, self.size, self.asserter._format_msg(msg)))
-
-    def assert_not_empty(self, obj_name, msg=None) -> None:
-        '''
-            Assert that this GuiMultiElement has atleast one element.
-
-            Arguments:
-                obj_name: Used for making the assertion error message useful.
-                msg: (Optional) Any custom message that you want to included in assertion error message.
-        '''
-        self.asserter.assert_greater(self.size, 0, msg="{} is expected to have atleat 1 element, but was found to be empty.{}".format(obj_name, self.size, self.asserter._format_msg(msg)))
 
     @size.setter
     def _size(self, count):

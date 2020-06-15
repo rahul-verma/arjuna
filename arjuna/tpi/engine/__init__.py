@@ -24,6 +24,7 @@ import time
 import datetime
 import threading
 import platform
+import multiprocessing
 # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="UTF-8")
 # sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
 
@@ -241,7 +242,11 @@ class ArjunaSingleton:
 
     def get_config(self, name):
         if name == "ref":
-            return self.ref_config
+            current_proc_name = multiprocessing.current_process().name
+            if current_proc_name == "MainProcess":
+                return self.ref_config
+            else:
+                return self.get_group_params()["config"]
         else:
             if not self.has_config(name):
                 raise UndefinedConfigError(name, tuple(self.__config_map.keys()))
@@ -254,18 +259,18 @@ class ArjunaSingleton:
         return name.lower() in self.__config_map
 
     def get_group_params(self):
-        return self.__thread_wise_group_params_map[threading.current_thread().name]
+        return self.__thread_wise_group_params_map[multiprocessing.current_process().name]
 
     def register_group_params(self, **params):
-        self.__thread_wise_group_params_map[threading.current_thread().name] = params
-        self.__thread_wise_ref_conf_map[threading.current_thread().name] = params['config']
+        self.__thread_wise_group_params_map[multiprocessing.current_process().name] = params
+        self.__thread_wise_ref_conf_map[multiprocessing.current_process().name] = params['config']
 
     def register_test_selector_for_group(self, selector):
-        self.__thread_wise_test_selector_map[threading.current_thread().name] = selector
+        self.__thread_wise_test_selector_map[multiprocessing.current_process().name] = selector
 
     def get_test_selector(self):
         try:
-            return self.__thread_wise_test_selector_map[threading.current_thread().name]
+            return self.__thread_wise_test_selector_map[multiprocessing.current_process().name]
         except KeyError:
             raise TestSelectorNotFoundError()
 

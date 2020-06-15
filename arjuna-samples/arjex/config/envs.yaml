@@ -21,3 +21,11 @@ env2:
   user_options:
     user: "env2_user" 
     pwd: "env2_pwd"
+
+chrome:
+  arjuna_options:
+    browser.name: chrome
+
+firefox:
+  arjuna_options:
+    browser.name: firefox

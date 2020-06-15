@@ -36,7 +36,7 @@ from arjuna.interact.gui.auto.finder import GuiFinder, GuiEmdFinder
 
 from .gui import Gui
 from arjuna.tpi.helper.image import Image
-from arjuna.tpi.protocol.screenshooter import ScreenShooter
+from arjuna.tpi.protocol.screen_shooter import ScreenShooter
 from arjuna.tpi.tracker import track
 
 @track("debug")

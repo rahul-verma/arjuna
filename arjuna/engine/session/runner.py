@@ -16,21 +16,27 @@
 # limitations under the License.
 
 import threading
+import multiprocessing
 
 from arjuna.core.error import TestGroupsFinished
+from signal import signal, SIGINT
 
-class TestGroupRunner(threading.Thread):
+class TestGroupRunner(multiprocessing.Process):
 
     def __init__(self, nprefix, wnum, commands):
         super().__init__(name="{}t{}".format(nprefix, wnum))
-        #Arjuna.get_unitee_instance().state_mgr.register_thread(self.name)
         self.__commands =  commands
+        self.daemon = True # The process is killed when Arjuna exits.
 
     @property
     def commands(self):
         return self.__commands
 
+    def handle_interrupt(self, signum, frame):
+        self.terminate()
+
     def run(self):
+        signal(SIGINT, self.handle_interrupt)
         from arjuna import log_info
         log_info("Group runner started")
         while True:

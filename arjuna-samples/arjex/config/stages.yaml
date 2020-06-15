@@ -19,3 +19,9 @@ threaded_stage_2:
   include:
     - gp3
     - gp4
+
+all_tests:
+  threads: 2
+  include:
+    - all_gp1
+    - all_gp2

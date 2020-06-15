@@ -9,3 +9,7 @@ threaded_stages:
   include: 
     - threaded_stage_1
     - threaded_stage_2
+
+all_tests:
+  include:
+    - all_tests

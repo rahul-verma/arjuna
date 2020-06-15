@@ -37,18 +37,20 @@ Future Themes (In-Progress or Planned):
     - Supprt for custom CSS for HTML reporting in Arjuna test projects.
     - OAuth related requests to be available in a collapsible group.
     - Tests with bugs should be marked as xfail automatically. (Configurable)
+    - -ip/im/-it switches should not accept blank string.
 
 1.1.0 Goals
 -----------
 To Do
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
-    --> Align multi-element assertions with IterableAsserterMixin
-
 
 1.0.16
 ------
-
+- Fixed run-session/run-stage/run-group commands as per changes in YAML.
+- Parallel execution uses multiprocessing instead of multithreading now.
+- Different Reference configs can be provided for different groups.
+- GuiMultiElement now inherits from IterableAsserterMixin to support size-related assertions.
 
 1.0.15
 ------

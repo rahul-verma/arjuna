@@ -19,6 +19,7 @@ from arjuna.tpi.error import *
 
 from .group import TestGroups, YamlTestGroup, MagicTestGroup
 from .runner import TestGroupRunner
+from arjuna.tpi.parser.yaml import YamlList
 
 class TestStage:
 
@@ -79,11 +80,11 @@ class TestStage:
 
 class YamlTestStage(TestStage):
 
-    def __init__(self, *, stage_yaml, session):
+    def __init__(self, *, name, stage_yaml, session):
         self.__config = session.config
         self.__num_threads = 1
         self.__load_yaml_meta_data(stage_yaml)
-        super().__init__(name=stage_yaml.name, config=self.__config, session=session, num_threads=self.__num_threads)
+        super().__init__(name=name, config=self.__config, session=session, num_threads=self.__num_threads)
         self.__load_groups(stage_yaml)
 
     def __load_yaml_meta_data(self, stage_yaml):
@@ -91,33 +92,33 @@ class YamlTestStage(TestStage):
             section_name = section_name.lower()
             if section_name.lower() not in {"groups", "include"}:
                 if section_name == "threads":
-                    self.__num_threads = int(stage_yaml.get_value(section_name))
+                    self.__num_threads = int(stage_yaml[section_name])
                 elif section_name.lower() == "conf":
                     from arjuna import Arjuna
-                    self.__config = Arjuna.get_config(stage_yaml.get_value("conf"))
+                    self.__config = Arjuna.get_config(stage_yaml["conf"])
   
     def __load_groups(self, stage_yaml):
+        from arjuna.engine.session import YamlTestSession
         if "include" not in stage_yaml.section_names:
             raise InvalidTestStageDefError(
                             session_name=self.session.name, 
                             stage_name=self.name, 
-                            stages_file_path=stage_yaml.file_path, 
+                            stages_file_path=YamlTestSession.STAGES_YAML_FILE, 
                             msg="It must contain 'include' section. Section names found: {}".format(tuple(stage_yaml.section_names))
             )
 
         for section_name in stage_yaml.section_names:
             if section_name.lower() == "include":
-                group_names = stage_yaml.get_value(section_name)
-                if type(group_names) is not list or set([type(s) is str for s in group_names]) != {True}:
+                group_names = stage_yaml[section_name]
+                if type(group_names) not in {list, YamlList} or set([type(s) is str for s in group_names]) != {True}:
                     raise InvalidTestStageDefError(
                             session_name=self.session.name, 
                             stage_name=self.name, 
-                            stages_file_path=stage_yaml.file_path, 
-                            msg="'include' section can only contain a YAML list of group names. Found:\n{}:\n {}".format(section_name, stage_yaml.get_value(section_name, as_yaml_str=True))
+                            stages_file_path=YamlTestSession.STAGES_YAML_FILE, 
+                            msg="'include' section can only contain a YAML list of group names. Found:\n{}:\n {}".format(section_name, str(stage_yaml[section_name]))
                     )
-                from arjuna.engine.session import YamlTestSession
                 for group_name in group_names:
-                    self.add_group(YamlTestGroup(group_yaml=YamlTestSession.get_group_yaml(group_name), session=self.session, stage=self))
+                    self.add_group(YamlTestGroup(name=group_name, group_yaml=YamlTestSession.get_group_yaml(group_name), session=self.session, stage=self))
             # elif section_name.lower() == "groups":
             #     section_name = section_name.lower()
             #     if section_name.lower() == section_name:
@@ -139,5 +140,5 @@ class MagicTestStageForGroup(TestStage):
     def __init__(self, *, session, group_name):
         super().__init__(name="mstage", config=session.config, session=session, num_threads=1)
         from arjuna.engine.session import YamlTestSession
-        self.add_group(YamlTestGroup(group_yaml=YamlTestSession.get_group_yaml(group_name), session=self.session, stage=self))
+        self.add_group(YamlTestGroup(name=group_name, group_yaml=YamlTestSession.get_group_yaml(group_name), session=self.session, stage=self))
         
