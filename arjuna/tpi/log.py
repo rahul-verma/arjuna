@@ -47,26 +47,26 @@ from arjuna.tpi.helper.audit import _Stack
 from arjuna.tpi.arjuna_types import *
 
 def __log(invoker, level, msg, contexts=None):
-    from arjuna import Arjuna
+    from arjuna import Arjuna, ArjunaOption
     if type(contexts) is str:
         contexts = (contexts,)
     elif contexts is None:
         contexts = ("default",)
     contexts = set(contexts)
     try:
-        getattr(Arjuna.get_logger(), level)(msg.replace('\n', ' ').replace('\r', ''), extra={'invoker': invoker, 'contexts':contexts, 'config':Arjuna.get_config("data_env")}) # data_env conf is ref config with log settings. available in non-thred map.
+        getattr(Arjuna.get_logger(), level)(msg.replace('\n', ' ').replace('\r', ''), extra={'invoker': invoker, 'contexts':contexts})
     except AttributeError:
         # In case the logging is called before the logger is set.
         # In future versions, see if there can be a fallabck logger.
         pass
     except OSError:
         ## On Windows 10, random handle related bugs happen.
-        if level.lower() in {"info", "debug"} :
+        if level.lower() in {"info", "debug", "trace"} :
             sys.stdout.write(msg+ "\n")
         else :
             sys.stderr.write(msg+"\n")
 
-def log_trace(msg: str, *, contexts: ListOrTuple=None):
+def log_trace(msg: str, *, contexts: ListOrTupleOrStr=None):
     '''
         Log a message with **TRACE** level.
 
@@ -76,7 +76,7 @@ def log_trace(msg: str, *, contexts: ListOrTuple=None):
     '''
     __log(_Stack.get_invoker(), "trace", msg, contexts=contexts)
 
-def log_debug(msg: str, *, contexts: ListOrTuple=None) -> None:
+def log_debug(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **DEBUG** level.
 
@@ -86,7 +86,7 @@ def log_debug(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''
     __log(_Stack.get_invoker(), "debug", msg, contexts=contexts)
 
-def log_info(msg: str, *, contexts: ListOrTuple=None) -> None:
+def log_info(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **INFO** level.
 
@@ -96,7 +96,7 @@ def log_info(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''
     __log(_Stack.get_invoker(), "info", msg, contexts=contexts)
 
-def log_warning(msg: str, *, contexts: ListOrTuple=None) -> None:
+def log_warning(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **WARNING** level.
 
@@ -106,7 +106,7 @@ def log_warning(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''
     __log(_Stack.get_invoker(), "warning", msg, contexts=contexts)
 
-def log_error(msg: str, *, contexts: ListOrTuple=None) -> None:
+def log_error(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **ERROR** level.
 
@@ -116,7 +116,7 @@ def log_error(msg: str, *, contexts: ListOrTuple=None) -> None:
     '''
     __log(_Stack.get_invoker(), "error", msg, contexts=contexts)
 
-def log_fatal(msg: str, *, contexts: ListOrTuple=None) -> None:
+def log_fatal(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **FATAL** level.
 

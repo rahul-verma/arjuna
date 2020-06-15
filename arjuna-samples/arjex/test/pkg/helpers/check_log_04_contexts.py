@@ -18,8 +18,8 @@
 from arjuna import *
 
 @test
-def check_context_logging(request):
+def check_contextual_logging(request):
     log_info("default message")
     log_info("test context 1", contexts="test1")
     log_info("test context 2", contexts="test2")
-    log_info("test context 3", contexts="test3")
+    log_info("test context 4", contexts=("test3", "test4"))

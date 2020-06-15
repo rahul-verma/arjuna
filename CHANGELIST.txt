@@ -47,6 +47,13 @@ To Do
 
 1.0.15
 ------
+- Internal logging clean-up.
+- Network recording support for firefox
+- Contextual Logging
+    - Improved logic to allow setting contexts in a reference config.
+    - A logging call marked with contexts does not get logged by default unless it has an intersection of atleast one context with ArjunaOption.LOG_ALLOWED_CONTEXTS in the reference config for the run.
+    - Introduced 3 built-in contexts: report, resource, request.
+    - More contextual logs will be introduced.
 
 1.0.14
 ------

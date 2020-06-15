@@ -67,11 +67,11 @@ _RAW_OPTION_LEVELS = {
         "RUN_SESSION_NAME",
         "LOG_FILE_LEVEL",
         "LOG_CONSOLE_LEVEL",
-        "LOG_ALLOWED_CONTEXTS",
         "REPORT_FORMATS",
     },
 
     ConfigStage.REFERENCE: {
+        "LOG_ALLOWED_CONTEXTS",
         "REPORT_SCREENSHOTS_ALWAYS",
         "REPORT_NETWORK_ALWAYS",
         "L10N_LOCALE",

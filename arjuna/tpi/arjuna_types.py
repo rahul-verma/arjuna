@@ -26,4 +26,5 @@ from typing import TypeVar
 from arjuna.tpi.constant import ArjunaOption
 
 ListOrTuple = TypeVar('ListOrTuple', list, tuple)
+ListOrTupleOrStr = TypeVar('ListOrTupleOrStr', list, tuple, str)
 ArjunaOptionOrStr = TypeVar('ArjunaOptionOrStr', ArjunaOption, str)

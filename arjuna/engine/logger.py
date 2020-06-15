@@ -29,10 +29,10 @@ class _InvokerFilter(logging.Filter):
     def filter(self, record):
         if not hasattr(record, "invoker"):
             record.invoker = '<no_trace>'
-        if hasattr(record, "config"):
-            if hasattr(record, "contexts"):
-                if not record.contexts.intersection(record.config.value("log.allowed.contexts")):
-                    return False
+        from arjuna import Arjuna
+        if hasattr(record, "contexts"):
+            if not record.contexts.intersection(Arjuna._get_allowed_log_contexts()):
+                return False
 
         return True
 
@@ -73,7 +73,7 @@ class Logger:
         self.__logger = logger
 
     def __add_trace_level(self):
-        logging.TRACE = logging.DEBUG - 1
+        logging.TRACE = logging.DEBUG - 5
         logging.addLevelName(logging.TRACE, "TRACE")
         def trace(self, message, *args, **kws):
             if self.isEnabledFor(logging.TRACE):

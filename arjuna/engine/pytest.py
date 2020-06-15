@@ -99,7 +99,7 @@ class PytestHooks:
         '''
 
         try:
-            from arjuna import Arjuna, ArjunaOption, log_trace
+            from arjuna import Arjuna, ArjunaOption, log_debug
             ignore_passed_for_screenshots = not Arjuna.get_config().value(ArjunaOption.REPORT_SCREENSHOTS_ALWAYS)
             ignore_passed_for_network = not Arjuna.get_config().value(ArjunaOption.REPORT_NETWORK_ALWAYS)
 
@@ -110,8 +110,8 @@ class PytestHooks:
             pytest_html = html_plugin
             report = result.get_result()
 
-            log_trace("Node ID: {}".format(report.nodeid))
-            log_trace("Stage: {}".format(report.when))
+            log_debug("Node ID: {}".format(report.nodeid), contexts="report")
+            log_debug("Stage: {}".format(report.when), contexts="report")
 
             extra = getattr(report, 'extra', [])
 
@@ -133,30 +133,30 @@ class PytestHooks:
                 else:
                     screen_shooter.take_screenshot(prefix=report.nodeid)
 
-            log_trace("Attempting to get network_recorder from request")
+            log_debug("Attempting to get network_recorder from request", contexts="report")
             try:
                 network_recorder = cls._get_protocol_object(item, "network_recorder")
             except AttributeError as e:
-                log_trace("No network_recorder")
+                log_debug("No network_recorder", contexts="report")
             else:
                 try:
-                    log_trace("Registering traffic")
+                    log_debug("Registering traffic", contexts="report")
                     network_recorder.register()
-                    log_trace("Traffic registered.")
+                    log_debug("Traffic registered.", contexts="report")
                 except Exception as e:
-                    log_trace("Exception in registering network traffic: " + str(e))
+                    log_debug("Exception in registering network traffic: " + str(e), contexts="report")
 
             if ignore_passed_for_network and report.passed:
                 include_network = False
 
-            log_trace("Include images {}".format(include_images))
-            log_trace("Include network {}".format(include_network))
+            log_debug("Include images {}".format(include_images), contexts="report")
+            log_debug("Include network {}".format(include_network), contexts="report")
 
             # When this place is reached by a resource that failed/erred or a test (irrespective of result)
             if (report.when in {"setup", "teardown"} and not report.passed) or report.when =="call":
                 test_container = Arjuna.get_report_metadata()
                 if test_container.has_content():
-                    log_trace("Extra Content Found for HTML Report")
+                    log_debug("Extra Content Found for HTML Report", contexts="report")
                     extra_html = test_container.as_report_html(include_images=include_images, include_network=include_network)
                     if extra_html:
                         extra.append(pytest_html.extras.html(extra_html))
@@ -165,16 +165,16 @@ class PytestHooks:
             # For fixtures with errors, failures, clean the resources.
             if report.when in {"setup", "teardown"}:
                 if not report.passed:
-                    log_trace("Clearing report extras.")
+                    log_debug("Clearing report extras.", contexts="report")
                     Arjuna.get_report_metadata().clear()
             else:
-                log_trace("Clearing report extras.")
+                log_debug("Clearing report extras.", contexts="report")
                 Arjuna.get_report_metadata().clear()    
             
         except Exception as e:
             raise
             from arjuna import log_warning
-            log_warning("Error in enhance_reports hook: " + str(e))
+            log_warning("Error in enhance_reports hook: " + str(e), contexts="report")
 
 
     @classmethod
@@ -198,13 +198,13 @@ class PytestHooks:
 
         from arjuna import Arjuna, ArjunaOption, log_debug, C
         from arjuna.tpi.engine.data_markup import record
-        log_debug("{} {}".format(metafunc.function, metafunc.fixturenames))
+        log_debug("{} {}".format(metafunc.function, metafunc.fixturenames), contexts="resource")
 
         group_params = Arjuna.get_group_params()
         conf = None
         m = metafunc.function.__module__
         group = record(**group_params).build(context='Group').all_records[0]
-        log_debug("Parameterizing distributor for module: {} with group: {}".format(m, group))
+        log_debug("Parameterizing distributor for module: {} with group: {}".format(m, group), contexts="resource")
         metafunc.parametrize("group", argvalues=[group], ids=["G"], indirect=True)
 
     @classmethod

@@ -71,6 +71,7 @@ class ArjunaSingleton:
 
         from arjuna.tpi.engine.testwise import CurrentTestWiseContainer
         self.__current_test_wise_objects = CurrentTestWiseContainer()
+        self.__allowed_log_contexts = {"default"}
         self.__bmproxy_server = None
 
     def __start_bmproxy(self, config):
@@ -111,6 +112,10 @@ class ArjunaSingleton:
         return self.__bmproxy_server
 
     @property
+    def allowed_log_contexts(self):
+        return self.__allowed_log_contexts
+
+    @property
     def gui_mgr(self):
         return self.__test_session.gui_manager
 
@@ -142,6 +147,8 @@ class ArjunaSingleton:
 
         from arjuna.engine.logger import Logger
         self.__logger = Logger(self.ref_config)
+        from arjuna import ArjunaOption
+        self.__allowed_log_contexts = self.ref_config.value(ArjunaOption.LOG_ALLOWED_CONTEXTS)
 
         from arjuna.tpi.hook.config import Configurator
         configurator = Configurator()
@@ -302,6 +309,10 @@ class Arjuna:
             Returns framework logger.
         '''
         return cls.ARJUNA_SINGLETON.logger
+
+    @classmethod
+    def _get_allowed_log_contexts(cls):
+        return cls.ARJUNA_SINGLETON.allowed_log_contexts
 
     @classmethod
     def _get_bmproxy_server(cls):

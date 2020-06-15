@@ -107,6 +107,12 @@ class BrowserLauncher:
         caps = DesiredCapabilities.FIREFOX
         caps.update(config["driverCapabilities"])
 
+        from arjuna import log_debug
+        log_debug("Is proxy set for Firefox?: {}".format(proxy is not None))
+        if proxy is not None:
+            proxy.add_to_capabilities(caps)
+            caps['acceptInsecureCerts'] = True
+
         options = FirefoxOptions()
 
         if browser_bin_path.lower() != "not_set":
