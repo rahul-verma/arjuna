@@ -47,7 +47,12 @@ To Do
 
 1.0.17
 ------
-
+Http Automation
+    - Added support for HEAD, PATCH, OPTIONS methods.
+    - Request headers property added for inquiry.
+    - is_redirect property added to HttpResponse
+    - Header assertions added.
+    - Support for pretty URL format for query params
 
 1.0.16
 ------

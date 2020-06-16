@@ -286,7 +286,7 @@ class ArjunaSingleton:
                 from arjuna import ArjunaOption
                 return self.__test_meta_data[self.get_config("ref").value(ArjunaOption.PROJECT_NAME) + "." + qual_name]
             except KeyError:
-                raise Exception("Test Meta data not found for test: {}. Existing entries: {}".format(qual_name, self.__test_meta_data.keys()))
+                raise Exception("Test Meta data not found for test: {}. If you have a function with prefix 'check_', verify if it is decorated with @test. Existing entries: {}".format(qual_name, self.__test_meta_data.keys()))
 
 class Arjuna:
     '''

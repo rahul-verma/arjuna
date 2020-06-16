@@ -16,7 +16,8 @@
 # limitations under the License.
 
 import json
-from urllib.parse import urlparse, urlencode, parse_qs
+import abc
+from urllib.parse import urlparse, urlencode, parse_qs, quote
 from requests import Request, Session
 from arjuna.tpi.error import HttpUnexpectedStatusCode
 from arjuna.tpi.parser.json import Json
@@ -25,7 +26,80 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 from requests.exceptions import ConnectionError
 import time
 
-class HttpResponse(AsserterMixIn):
+class HttpMessage(AsserterMixIn, metaclass=abc.ABCMeta):
+
+    def __init__(self, http_msg):
+        super().__init__()
+        self.__http_msg = http_msg
+
+    @property
+    def headers(self) -> dict:
+        ''' 
+            HTTP Headers for this message.
+        '''
+        return self.__http_msg.headers
+
+    def assert_empty_content(self, *, msg):
+        '''
+            Validates if content is empty.
+
+            Keyword Arguments:
+                msg: A context string explaining why this assertion was done.
+        '''
+        if self.headers['Content-Length'] != '0':
+            raise AssertionError("Content is not empty.")
+
+    def assert_non_empty_content(self, *, msg):
+        '''
+            Validates if content is empty.
+
+            Keyword Arguments:
+                msg: A context string explaining why this assertion was done.
+        '''
+        if self.headers['Content-Length'] == '0':
+            raise AssertionError("Content is empty.")
+
+    def assert_header_match(self, header, value=None, *, msg):
+        '''
+            Validates the presence and optionally the value of an HTTP Header.
+
+            Arguments:
+                header: Name of header
+                value: Text contained in header. If not provided, then only presence of header is checked.
+
+            Keyword Arguments:
+                msg: A context string explaining why this assertion was done.
+        '''
+        if header not in self.headers:
+            raise AssertionError(f">>{header}<< not present in HTTP Request. {msg}")
+
+        if value is not None:
+            actual = self.headers[header]
+            if actual != value:
+                raise AssertionError(f"Value >>header<< is {actual} but was expected to be {value}. {msg}.")
+
+    def assert_header_mismatch(self, header, value=None, *, msg):
+        '''
+            Validates the absence of header or mismatch of its content with provided value.
+
+            Arguments:
+                header: Name of header
+                value: Text contained in header. If not provided, then only absence of header is checked.
+
+            Keyword Arguments:
+                msg: A context string explaining why this assertion was done.
+        '''
+
+        if value is None:
+            if header in self.headers:
+                raise AssertionError(f">>{header}<< is present in HTTP Request. {msg}")
+        else:
+            actual = self.headers[header]
+            if actual == value:
+                raise AssertionError(f"Value >>header<< is {actual}. It was expected to be different. {msg}.")
+
+
+class HttpResponse(HttpMessage):
     '''
         Encapsulates HTTP response message. Contains redirected responses as redirection history, if applicable.
 
@@ -35,8 +109,16 @@ class HttpResponse(AsserterMixIn):
     '''
 
     def __init__(self, session, response):
+        super().__init__(response)
         self.__session = session
         self.__resp = response
+
+    @property
+    def is_redirect(self):
+        '''
+        Is True if this is a response is a redirection response.
+        '''
+        return self.__resp.is_redirect
 
     @property
     def url(self) -> str:
@@ -85,13 +167,6 @@ class HttpResponse(AsserterMixIn):
         return self.__resp.reason
 
     @property
-    def headers(self) -> dict:
-        ''' 
-            HTTP Response Headers for this response.
-        '''
-        return self.__resp.headers
-
-    @property
     def text(self) -> str:
         ''' 
             HTTP Response content as plain text.
@@ -118,7 +193,7 @@ class HttpResponse(AsserterMixIn):
             Ordered `HttpResponse` objects for all redirections that led to this response.
         '''
         if self.__resp.history:
-            return (HttpResponse(self.__session, h) for h in self.__resp.history)
+            return tuple([HttpResponse(self.__session, h) for h in self.__resp.history])
         else:
             return tuple()
 
@@ -180,7 +255,7 @@ class HttpResponse(AsserterMixIn):
         )
 
 
-class HttpRequest:
+class HttpRequest(HttpMessage):
     '''
         Encapsulates HTTP response message.
 
@@ -195,6 +270,7 @@ class HttpRequest:
     '''
 
     def __init__(self, session, request, label=None, xcodes=None, strict=False):
+        super().__init__(request)
         self.__session = session
         self.__request = request
         req_repr = "{} {}".format(self.method, self.url)
@@ -313,6 +389,8 @@ class HttpRequest:
         '''
         return self.__request.body
 
+    content = text
+
     __OUT ='''{}
 {}{}'''
 
@@ -339,7 +417,7 @@ class HttpRequest:
 
 class _HttpRequest(HttpRequest):
 
-    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, strict=False, headers=None, **query_params):
+    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params):
         self.__session = session
         self.__method = method.upper()
         self.__url = url
@@ -349,33 +427,48 @@ class _HttpRequest(HttpRequest):
         self.__xcodes = None
         if xcodes is not None:
             self.__xcodes = type(xcodes) in {set, list, tuple} and xcodes or {xcodes}
-        self.__query_parms = query_params
+        self.__query_params = query_params
+        if self.__query_params is None:
+            self.__query_params = dict()
+        self.__pretty_url = pretty_url
         self.__headers = {}
         self.__headers.update(session.headers)
         if headers:
             self.__headers.update(headers)
 
+        self.__prepare_headers()
         self.__prepare_content()
         self.__req = self.__build_request()
         super().__init__(self.__session, self.__req, label=label, xcodes=self.__xcodes, strict=strict)
 
+    def __prepare_headers(self):
+        if self.__method in {'POST', 'PUT', 'PATCH', 'OPTIONS'}:
+            if self.__content_type is not None:
+                self.__headers['Content-Type'] = self.__content_type
+        if self.__method in {'GET', 'HEAD', 'DELETE'}:
+            if 'Content-Type' in self.__headers:
+                del self.__headers['Content-Type']
+
     def __prepare_content(self):
-        if self.__method in {'GET', 'DELETE'}: return
+        if self.__method in {'GET', 'DELETE', 'HEAD'}: return
         if self.__headers['Content-Type'].lower() == 'application/json':
             self.__prep_content = json.dumps(self.__content, indent=2)
+        elif self.__headers['Content-Type'].lower() == 'text/html':
+            self.__prep_content = self.__content
         else:
             self.__prep_content = urlencode(self.__content)
 
     def __build_request(self):
         parsed_uri = urlparse(self.__url)
         #self.__headers['Host'] = parsed_uri.netloc
-        if self.__method in {'POST', 'PUT'}:
-            if self.__content_type is not None:
-                self.__headers['Content-Type'] = self.__content_type
-        if self.__method in {'GET', 'DELETE'}:
-            if 'Content-Type' in self.__headers:
-                del self.__headers['Content-Type']
-        req = Request(self.__method, self.__url, data=self.__prep_content, headers=self.__headers, params=self.__query_parms, cookies=self.__session.cookies)
+        if self.__pretty_url:
+            query = "/".join([quote(f"{k}/{v}") for k,v in self.__query_params.items()])
+            url = self.__url + query
+            query_params = None
+        else:
+            url = self.__url
+            query_params = self.__query_params
+        req = Request(self.__method, url, data=self.__prep_content, headers=self.__headers, params=query_params, cookies=self.__session.cookies)
         return req.prepare()
 
 
@@ -391,7 +484,7 @@ class HttpSession:
     '''
 
     def __init__(self, *, url, oauth_token=None, content_type='application/x-www-form-urlencoded', headers=None, _auto_session=True):
-        self.__url = url
+        self.__url = url.strip()
         self.__content_type = content_type
         self.__session = None
         self.__provided_headers = headers
@@ -429,12 +522,16 @@ class HttpSession:
         return self.__session.headers
 
     def __route(self, route):
+        route = route.strip()
         if route.lower().startswith("http"):
             return route
         else:
-            return self.url + route
+            if route.startswith("/"):
+                return self.url + route
+            else:
+                return self.url + "/" + route
 
-    def get(self, route, label=None, xcodes=None, strict=False, headers=None, **query_params) -> HttpResponse:
+    def get(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
         '''
             Sends an HTTP GET request.
 
@@ -446,12 +543,33 @@ class HttpSession:
                 xcodes: Expected HTTP response code(s).
                 strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
                 headers: Mapping of additional HTTP headers to be sent with this request.
+                pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
                 **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, strict=strict, headers=headers, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
         return request.send()
 
-    def delete(self, route, label=None, xcodes=None, strict=False, headers=None, **query_params) -> HttpResponse:
+
+    def head(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+        '''
+            Sends an HTTP HEAD request.
+
+            Arguments:
+                route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+
+            Keyword Arguments:
+                label: Label for this request. If available, it is used in reports and logs.
+                xcodes: Expected HTTP response code(s).
+                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+                headers: Mapping of additional HTTP headers to be sent with this request.
+                pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
+                **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        '''
+        request = _HttpRequest(self._session, self.__route(route), method="head", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        return request.send()
+
+
+    def delete(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
         '''
             Sends an HTTP DELETE request.
 
@@ -463,12 +581,13 @@ class HttpSession:
                 xcodes: Expected HTTP response code(s).
                 strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
                 headers: Mapping of additional HTTP headers to be sent with this request.
+                pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
                 **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, strict=strict, headers=headers, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
         return request.send()
 
-    def post(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, **query_params) -> HttpResponse:
+    def post(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
         '''
         Sends an HTTP POST request.
 
@@ -482,12 +601,13 @@ class HttpSession:
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
+            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
             **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
         return request.send()
 
-    def put(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, **query_params) -> HttpResponse:
+    def put(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -501,9 +621,50 @@ class HttpSession:
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
+            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
             **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        return request.send()
+
+    def patch(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+        '''
+        Sends an HTTP PUT request.
+
+        Arguments:
+            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+
+        Keyword Arguments:
+            label: Label for this request. If available, it is used in reports and logs.
+            content: Content to be sent in this HTTP request.
+            content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
+            xcodes: Expected HTTP response code(s).
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+            headers: Mapping of additional HTTP headers to be sent with this request.
+            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
+            **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        '''
+        request = _HttpRequest(self._session, self.__route(route), method="patch", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        return request.send()
+
+    def options(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+        '''
+        Sends an HTTP PUT request.
+
+        Arguments:
+            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+
+        Keyword Arguments:
+            label: Label for this request. If available, it is used in reports and logs.
+            content: Content to be sent in this HTTP request.
+            content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
+            xcodes: Expected HTTP response code(s).
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+            headers: Mapping of additional HTTP headers to be sent with this request.
+            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
+            **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        '''
+        request = _HttpRequest(self._session, self.__route(route), method="options", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
         return request.send()
 
 
