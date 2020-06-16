@@ -217,13 +217,31 @@ class TestDecoratorError(Exception):
         super().__init__(f"There is an error in @test decoratior for {func_qual_name}. {msg}")
 
 
-class HttpUnexpectedStatusCode(Exception):
+class HttpUnexpectedStatusCodeError(Exception):
     '''
         Raised when the HTTP status code for a request does not match expected status code(s).
     '''
 
     def __init__(self, request, response):
         super().__init__(f"Unexpected status code {response.status_code} for {response.url} in {request.method} request.")
+        self.__request = request
+        self.__response = response
+
+    @property
+    def request(self):
+        return self.__request
+
+    @property
+    def response(self):
+        return self.__response
+
+class HttpSendError(Exception):
+    '''
+        Raised when there is an error in sending an HTTP request.
+    '''
+
+    def __init__(self, request, response, msg):
+        super().__init__(f"Error in HTTP Request: {request.method} {request.url}. {msg}")
         self.__request = request
         self.__response = response
 

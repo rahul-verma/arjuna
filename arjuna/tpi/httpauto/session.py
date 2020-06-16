@@ -19,11 +19,11 @@ import json
 import abc
 from urllib.parse import urlparse, urlencode, parse_qs, quote
 from requests import Request, Session
-from arjuna.tpi.error import HttpUnexpectedStatusCode
+from arjuna.tpi.error import HttpUnexpectedStatusCodeError, HttpSendError
 from arjuna.tpi.parser.json import Json
 from arjuna.tpi.parser.html import Html
 from arjuna.tpi.engine.asserter import AsserterMixIn
-from requests.exceptions import ConnectionError
+from requests.exceptions import ConnectionError, TooManyRedirects
 import time
 
 class HttpMessage(AsserterMixIn, metaclass=abc.ABCMeta):
@@ -266,7 +266,7 @@ class HttpRequest(HttpMessage):
         Keyword Arguments:
             label: Label for this request. If available, it is used in Reports and logs.
             xcodes: Expected Status Code(s)
-            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
     '''
 
     def __init__(self, session, request, label=None, xcodes=None, strict=False):
@@ -292,6 +292,40 @@ class HttpRequest(HttpMessage):
             URL Query Parameters for this request object.
         '''
         return parse_qs(self.url)
+
+    def __register_network_info(self, response):
+        from arjuna import Arjuna
+        from arjuna.tpi.helper.arjtype import NetworkPacketInfo
+        # Should be configurable
+        sub_network_packets = []
+        for redir_resp in response.redir_history:
+            redir_req = redir_resp.request
+            sub_network_packets.append(
+                NetworkPacketInfo(
+                    label="Sub-Request: {} {}".format(redir_req.method, redir_req.url), 
+                    request=str(redir_req), 
+                    response=str(redir_resp),
+                    sub_network_packets=tuple()
+                )
+            )
+
+        # The request for last response object was the last request and hence the last redirection.
+        if response.redir_history:
+            # last_req = response.last_request
+            # if not last_req:
+            last_req = response.request
+            sub_network_packets.append(
+                                NetworkPacketInfo(
+                                    label="Sub-Request: {} {}".format(last_req.method, last_req.url), 
+                                    request=str(last_req), 
+                                    response=str(response),
+                                    sub_network_packets=tuple()
+                                )
+                            )                
+
+        Arjuna.get_report_metadata().add_network_packet_info(
+            NetworkPacketInfo(label=self.label, request=str(self), response=str(response), sub_network_packets=tuple(sub_network_packets))
+        )
 
     def send(self) -> HttpResponse:
         '''
@@ -321,6 +355,10 @@ class HttpRequest(HttpMessage):
                     break
             if exc_flag:
                 raise Exception("Connection error despite trying 5 times.")
+        except TooManyRedirects as e:
+            response = HttpResponse(self.__session, e.response)
+            self.__register_network_info(response)
+            raise HttpSendError(self, response, str(e) + ". Error redir URL: " + e.response.url)
         except Exception as e:
             import traceback
             response = "Error in sending the request\n"
@@ -331,41 +369,12 @@ class HttpRequest(HttpMessage):
             )
             raise e
         else:
-            # Should be configurable
-            sub_network_packets = []
-            for redir_resp in response.redir_history:
-                redir_req = redir_resp.request
-                sub_network_packets.append(
-                    NetworkPacketInfo(
-                        label="Sub-Request: {} {}".format(redir_req.method, redir_req.url), 
-                        request=str(redir_req), 
-                        response=str(redir_resp),
-                        sub_network_packets=tuple()
-                    )
-                )
-
-            # The request for last response object was the last request and hence the last redirection.
-            if response.redir_history:
-                # last_req = response.last_request
-                # if not last_req:
-                last_req = response.request
-                sub_network_packets.append(
-                                    NetworkPacketInfo(
-                                        label="Sub-Request: {} {}".format(last_req.method, last_req.url), 
-                                        request=str(last_req), 
-                                        response=str(response),
-                                        sub_network_packets=tuple()
-                                    )
-                                )                
-
-            Arjuna.get_report_metadata().add_network_packet_info(
-                NetworkPacketInfo(label=self.label, request=str(self), response=str(response), sub_network_packets=tuple(sub_network_packets))
-            )
+            self.__register_network_info(response)
             if self.__xcodes is not None and response.status_code not in self.__xcodes:
                 if self.__strict:
                     raise AssertionError(f"HTTP status code {self.status_code} is not expected. Expected: {self.__xcodes}")
                 else:
-                    raise HttpUnexpectedStatusCode(self.__req, response)
+                    raise HttpUnexpectedStatusCodeError(self.__req, response)
             return response
 
     @property
@@ -417,7 +426,7 @@ class HttpRequest(HttpMessage):
 
 class _HttpRequest(HttpRequest):
 
-    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params):
+    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params):
         self.__session = session
         self.__method = method.upper()
         self.__url = url
@@ -430,6 +439,7 @@ class _HttpRequest(HttpRequest):
         self.__query_params = query_params
         if self.__query_params is None:
             self.__query_params = dict()
+        self.__query_params.update(named_query_params)
         self.__pretty_url = pretty_url
         self.__headers = {}
         self.__headers.update(session.headers)
@@ -531,7 +541,7 @@ class HttpSession:
             else:
                 return self.url + "/" + route
 
-    def get(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+    def get(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
             Sends an HTTP GET request.
 
@@ -541,16 +551,21 @@ class HttpSession:
             Keyword Arguments:
                 label: Label for this request. If available, it is used in reports and logs.
                 xcodes: Expected HTTP response code(s).
-                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
                 headers: Mapping of additional HTTP headers to be sent with this request.
                 pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-                **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+                query_params: A mapping of key-values to be included in query string.
+                **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+
+            Note:
+                **query_params** and **named_query_params** have the same goal.
+                In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
 
-    def head(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+    def head(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
             Sends an HTTP HEAD request.
 
@@ -560,16 +575,21 @@ class HttpSession:
             Keyword Arguments:
                 label: Label for this request. If available, it is used in reports and logs.
                 xcodes: Expected HTTP response code(s).
-                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
                 headers: Mapping of additional HTTP headers to be sent with this request.
                 pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-                **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+                query_params: A mapping of key-values to be included in query string.
+                **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+
+            Note:
+                **query_params** and **named_query_params** have the same goal.
+                In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="head", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="head", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
 
-    def delete(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+    def delete(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
             Sends an HTTP DELETE request.
 
@@ -579,15 +599,20 @@ class HttpSession:
             Keyword Arguments:
                 label: Label for this request. If available, it is used in reports and logs.
                 xcodes: Expected HTTP response code(s).
-                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
                 headers: Mapping of additional HTTP headers to be sent with this request.
                 pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-                **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+                query_params: A mapping of key-values to be included in query string.
+                **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+
+            Note:
+                **query_params** and **named_query_params** have the same goal.
+                In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
-    def post(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+    def post(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP POST request.
 
@@ -599,15 +624,20 @@ class HttpSession:
             content: Content to be sent in this HTTP request.
             content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
             xcodes: Expected HTTP response code(s).
-            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
             pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+            query_params: A mapping of key-values to be included in query string.
+            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+
+        Note:
+            **query_params** and **named_query_params** have the same goal.
+            In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
-    def put(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+    def put(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -619,15 +649,20 @@ class HttpSession:
             content: Content to be sent in this HTTP request.
             content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
             xcodes: Expected HTTP response code(s).
-            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
             pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+            query_params: A mapping of key-values to be included in query string.
+            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+
+        Note:
+            **query_params** and **named_query_params** have the same goal.
+            In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
-    def patch(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+    def patch(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -639,15 +674,20 @@ class HttpSession:
             content: Content to be sent in this HTTP request.
             content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
             xcodes: Expected HTTP response code(s).
-            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
             pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+            query_params: A mapping of key-values to be included in query string.
+            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+
+        Note:
+            **query_params** and **named_query_params** have the same goal.
+            In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="patch", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="patch", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
-    def options(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, **query_params) -> HttpResponse:
+    def options(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -659,12 +699,17 @@ class HttpSession:
             content: Content to be sent in this HTTP request.
             content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
             xcodes: Expected HTTP response code(s).
-            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCode is raised.
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
             pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            **query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+            query_params: A mapping of key-values to be included in query string.
+            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+
+        Note:
+            **query_params** and **named_query_params** have the same goal.
+            In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="options", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, **query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="options", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
 

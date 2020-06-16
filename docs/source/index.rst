@@ -338,7 +338,8 @@ Arjuna Exceptions
     * :py:class:`GuiNotLoadedError <arjuna.tpi.error.GuiNotLoadedError>`
     * :py:class:`GuiLabelNotPresentError <arjuna.tpi.error.GuiLabelNotPresentError>`
 * HTTP Automation
-    * :py:class:`HttpUnexpectedStatusCode <arjuna.tpi.error.HttpUnexpectedStatusCode>`
+    * :py:class:`HttpSendError <arjuna.tpi.error.HttpSendError>`
+    * :py:class:`HttpUnexpectedStatusCodeError <arjuna.tpi.error.HttpUnexpectedStatusCodeError>`
 
 
 ******************

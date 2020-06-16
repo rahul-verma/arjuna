@@ -53,6 +53,8 @@ Http Automation
     - is_redirect property added to HttpResponse
     - Header assertions added.
     - Support for pretty URL format for query params
+    - Support for query_params as a dict, for use when names are not valid python names.
+    - Added new named exceptions: HttpSendError
 
 1.0.16
 ------
