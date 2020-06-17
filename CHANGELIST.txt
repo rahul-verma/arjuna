@@ -55,6 +55,8 @@ Http Automation
     - Support for pretty URL format for query params
     - Support for query_params as a dict, for use when names are not valid python names.
     - Added new named exceptions: HttpSendError
+    - `content` as an alias for `text` for request and response objects.
+    - Redirections: max_redirects at session level (default 30), allow_redirects at individual send request level (default is True).
 
 1.0.16
 ------

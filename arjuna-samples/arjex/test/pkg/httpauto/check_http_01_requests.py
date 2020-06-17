@@ -139,7 +139,7 @@ def check_http_307_redirect_post_with_seekable(request, httpbin):
 @test
 def check_too_many_redirects(request, httpbin):
     '''
-        requests allows up to 20 redirects
+        requests allows up to 30 redirects
     '''
     try:
         httpbin.get('/', query_params={'relative-redirect' : 50}, pretty_url=True)
@@ -149,3 +149,67 @@ def check_too_many_redirects(request, httpbin):
         assert len(e.response.redir_history) == 30
     else:
         raise AssertionError('Expected redirect to raise HttpSendError but it did not')
+
+@test
+def check_too_many_redirects_custom_limit(request, httpbin):
+    '''
+        requests allows up to 20 redirects
+    '''
+    try:
+        session = HttpSession(url="http://httpbin.org", max_redirects=5)
+        session.get('/', query_params={'relative-redirect' : 50}, pretty_url=True)
+    except HttpSendError as e:
+        assert e.request.url == 'http://httpbin.org/relative-redirect/50'
+        assert e.response.url == 'http://httpbin.org/relative-redirect/45'
+        assert len(e.response.redir_history) == 5
+    else:
+        raise AssertionError('Expected redirect to raise HttpSendError but it did not')
+
+@test
+def check_http_301_changes_post_to_get(request, httpbin):
+    r = httpbin.post("/", status=301, content="", pretty_url=True)
+    assert r.status_code == 200
+    assert r.request.method == 'GET'
+    assert r.redir_history[0].status_code == 301
+    assert r.redir_history[0].is_redirect
+
+@test
+def check_http_301_doesnt_change_head_to_get(request, httpbin):
+    r = httpbin.head("/", status=301, content="", pretty_url=True)
+    print(r.content)
+    assert r.status_code == 200
+    assert r.request.method == 'HEAD'
+    assert r.redir_history[0].status_code == 301
+    assert r.redir_history[0].is_redirect
+
+@test
+def check_http_302_changes_post_to_get(request, httpbin):
+    r = httpbin.post("/", status=302, content="", pretty_url=True)
+    assert r.status_code == 200
+    assert r.request.method == 'GET'
+    assert r.redir_history[0].status_code == 302
+    assert r.redir_history[0].is_redirect
+
+@test
+def check_http_302_doesnt_change_head_to_get(request, httpbin):
+    r = httpbin.head("/", status=302, content="", pretty_url=True)
+    assert r.status_code == 200
+    assert r.request.method == 'HEAD'
+    assert r.redir_history[0].status_code == 302
+    assert r.redir_history[0].is_redirect
+
+@test
+def check_http_303_changes_post_to_get(request, httpbin):
+    r = httpbin.post("/", status=303, content="", pretty_url=True)
+    assert r.status_code == 200
+    assert r.request.method == 'GET'
+    assert r.redir_history[0].status_code == 303
+    assert r.redir_history[0].is_redirect
+
+@test
+def check_http_303_doesnt_change_head_to_get(request, httpbin):
+    r = httpbin.head("/", status=303, content="", pretty_url=True)
+    assert r.status_code == 200
+    assert r.request.method == 'HEAD'
+    assert r.redir_history[0].status_code == 303
+    assert r.redir_history[0].is_redirect

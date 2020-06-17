@@ -341,7 +341,6 @@ Arjuna Exceptions
     * :py:class:`HttpSendError <arjuna.tpi.error.HttpSendError>`
     * :py:class:`HttpUnexpectedStatusCodeError <arjuna.tpi.error.HttpUnexpectedStatusCodeError>`
 
-
 ******************
 Indices and tables
 ******************

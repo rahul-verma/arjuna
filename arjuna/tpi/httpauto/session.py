@@ -173,6 +173,8 @@ class HttpResponse(HttpMessage):
         '''
         return self.__resp.text
 
+    content = text
+
     @property
     def json(self) -> 'JsonDictOrJsonList':
         ''' 
@@ -269,7 +271,7 @@ class HttpRequest(HttpMessage):
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
     '''
 
-    def __init__(self, session, request, label=None, xcodes=None, strict=False):
+    def __init__(self, session, request, label=None, xcodes=None, strict=False, allow_redirects=True):
         super().__init__(request)
         self.__session = session
         self.__request = request
@@ -278,6 +280,7 @@ class HttpRequest(HttpMessage):
         self.__printable_label = label and self.__label + "::" + req_repr or req_repr
         self.__printable_label = len(self.__printable_label) > 119 and self.__printable_label[:125] + "<SNIP>" or self.__printable_label
         self.__strict = strict
+        self.__allow_redirects = allow_redirects
 
     @property
     def label(self) -> str:
@@ -346,7 +349,7 @@ class HttpRequest(HttpMessage):
             while counter < max_connection_retries:
                 counter += 1
                 try:
-                    response = HttpResponse(self.__session, self.__session.send(self.__req))
+                    response = HttpResponse(self.__session, self.__session.send(self.__req, allow_redirects=self.__allow_redirects))
                 except ConnectionError:
                     exc_flag = True
                     time.sleep(1)
@@ -426,7 +429,7 @@ class HttpRequest(HttpMessage):
 
 class _HttpRequest(HttpRequest):
 
-    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params):
+    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, strict=False, headers=None, allow_redirects=True, pretty_url=False, query_params=None, **named_query_params):
         self.__session = session
         self.__method = method.upper()
         self.__url = url
@@ -445,11 +448,10 @@ class _HttpRequest(HttpRequest):
         self.__headers.update(session.headers)
         if headers:
             self.__headers.update(headers)
-
         self.__prepare_headers()
         self.__prepare_content()
         self.__req = self.__build_request()
-        super().__init__(self.__session, self.__req, label=label, xcodes=self.__xcodes, strict=strict)
+        super().__init__(self.__session, self.__req, label=label, xcodes=self.__xcodes, strict=strict, allow_redirects=allow_redirects)
 
     def __prepare_headers(self):
         if self.__method in {'POST', 'PUT', 'PATCH', 'OPTIONS'}:
@@ -491,15 +493,18 @@ class HttpSession:
             oauth_token: OAuth 2.0 Bearer token for this session.
             content_type: Default content type for requests sent in this session. Overridable in individual sender methods. Default is `application/x-www-form-urlencoded`
             headers: HTTP headers to be added to request headers made by this session.
+            max_redirects: Maximum number of redirects allowed for a request. Default is 30.
     '''
 
-    def __init__(self, *, url, oauth_token=None, content_type='application/x-www-form-urlencoded', headers=None, _auto_session=True):
+    def __init__(self, *, url, oauth_token=None, content_type='application/x-www-form-urlencoded', headers=None, max_redirects=None, _auto_session=True):
         self.__url = url.strip()
         self.__content_type = content_type
         self.__session = None
         self.__provided_headers = headers
         if _auto_session:
             self._set_session(Session())
+            if max_redirects is not None:
+                self.__session.max_redirects = max_redirects
         if oauth_token:
             self.__session.headers['Authorization'] = f'Bearer {oauth_token}'
 
@@ -541,78 +546,81 @@ class HttpSession:
             else:
                 return self.url + "/" + route
 
-    def get(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def get(self, route, label=None, xcodes=None, strict=False, headers=None, allow_redirects=True, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
-            Sends an HTTP GET request.
+        Sends an HTTP GET request.
 
-            Arguments:
-                route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+        Arguments:
+            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
 
-            Keyword Arguments:
-                label: Label for this request. If available, it is used in reports and logs.
-                xcodes: Expected HTTP response code(s).
-                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
-                headers: Mapping of additional HTTP headers to be sent with this request.
-                pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-                query_params: A mapping of key-values to be included in query string.
-                **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        Keyword Arguments:
+            label: Label for this request. If available, it is used in reports and logs.
+            xcodes: Expected HTTP response code(s).
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
+            headers: Mapping of additional HTTP headers to be sent with this request.
+            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
+            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
+            query_params: A mapping of key-values to be included in query string.
+            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
 
-            Note:
-                **query_params** and **named_query_params** have the same goal.
-                In case of duplicates, named_query_params override query_params.
+        Note:
+            **query_params** and **named_query_params** have the same goal.
+            In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, strict=strict, headers=headers, allow_redirects=allow_redirects, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
 
-    def head(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def head(self, route, label=None, xcodes=None, strict=False, headers=None, allow_redirects=True, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
-            Sends an HTTP HEAD request.
+        Sends an HTTP HEAD request.
 
-            Arguments:
-                route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+        Arguments:
+            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
 
-            Keyword Arguments:
-                label: Label for this request. If available, it is used in reports and logs.
-                xcodes: Expected HTTP response code(s).
-                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
-                headers: Mapping of additional HTTP headers to be sent with this request.
-                pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-                query_params: A mapping of key-values to be included in query string.
-                **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        Keyword Arguments:
+            label: Label for this request. If available, it is used in reports and logs.
+            xcodes: Expected HTTP response code(s).
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
+            headers: Mapping of additional HTTP headers to be sent with this request.
+            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
+            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
+            query_params: A mapping of key-values to be included in query string.
+            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
 
-            Note:
-                **query_params** and **named_query_params** have the same goal.
-                In case of duplicates, named_query_params override query_params.
+        Note:
+            **query_params** and **named_query_params** have the same goal.
+            In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="head", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="head", label=label, xcodes=xcodes, strict=strict, headers=headers, allow_redirects=allow_redirects, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
 
-    def delete(self, route, label=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def delete(self, route, label=None, xcodes=None, strict=False, headers=None, allow_redirects=True, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
-            Sends an HTTP DELETE request.
+        Sends an HTTP DELETE request.
 
-            Arguments:
-                route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
+        Arguments:
+            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
 
-            Keyword Arguments:
-                label: Label for this request. If available, it is used in reports and logs.
-                xcodes: Expected HTTP response code(s).
-                strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
-                headers: Mapping of additional HTTP headers to be sent with this request.
-                pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-                query_params: A mapping of key-values to be included in query string.
-                **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
+        Keyword Arguments:
+            label: Label for this request. If available, it is used in reports and logs.
+            xcodes: Expected HTTP response code(s).
+            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
+            headers: Mapping of additional HTTP headers to be sent with this request.
+            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
+            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
+            query_params: A mapping of key-values to be included in query string.
+            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
 
-            Note:
-                **query_params** and **named_query_params** have the same goal.
-                In case of duplicates, named_query_params override query_params.
+        Note:
+            **query_params** and **named_query_params** have the same goal.
+            In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, strict=strict, headers=headers, allow_redirects=allow_redirects, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
-    def post(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def post(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, allow_redirects=True, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP POST request.
 
@@ -626,6 +634,7 @@ class HttpSession:
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
+            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
             pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
             query_params: A mapping of key-values to be included in query string.
             **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
@@ -634,10 +643,10 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, allow_redirects=allow_redirects, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
-    def put(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def put(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, allow_redirects=True, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -651,6 +660,7 @@ class HttpSession:
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
+            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
             pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
             query_params: A mapping of key-values to be included in query string.
             **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
@@ -659,10 +669,10 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, allow_redirects=allow_redirects, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
-    def patch(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def patch(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, allow_redirects=True, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -676,6 +686,7 @@ class HttpSession:
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
+            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
             pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
             query_params: A mapping of key-values to be included in query string.
             **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
@@ -684,10 +695,10 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="patch", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="patch", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, allow_redirects=allow_redirects, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
-    def options(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def options(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, allow_redirects=True, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -701,6 +712,7 @@ class HttpSession:
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
+            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
             pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
             query_params: A mapping of key-values to be included in query string.
             **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
@@ -709,7 +721,7 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="options", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        request = _HttpRequest(self._session, self.__route(route), method="options", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, allow_redirects=allow_redirects, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return request.send()
 
 
