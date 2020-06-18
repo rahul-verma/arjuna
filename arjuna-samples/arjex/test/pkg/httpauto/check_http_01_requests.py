@@ -255,3 +255,17 @@ def check_cookie_sent_on_redirect(request, httpbin):
     r = s.get('/redirect/1')
     assert s.cookies['foo'] == 'bar'
     assert 'Cookie' in r.request.headers
+
+@test
+def check_cookie_removed_on_expire(request):
+    s = HttpSession(url="http://httpbin.org")
+    s.get('cookies/set?foo=bar')
+    assert s.cookies['foo'] == 'bar'
+    s.get(
+        'response-headers',
+        query_params={
+            'Set-Cookie':
+                'foo=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT'
+        }
+    )
+    assert 'foo' not in s.cookies
