@@ -213,3 +213,45 @@ def check_http_303_doesnt_change_head_to_get(request, httpbin):
     assert r.request.method == 'HEAD'
     assert r.redir_history[0].status_code == 303
     assert r.redir_history[0].is_redirect
+
+@test
+def check_fragment_maintained_on_redirect(request, httpbin):
+    fragment = "#view=edit&token=hunter2"
+    route = "/redirect-to?url=get" + fragment
+    url = "http://httpbin.org" + route
+    r = httpbin.get(route)
+
+    assert len(r.redir_history) > 0
+    assert r.redir_history[0].request.url == url
+    assert r.url == "http://httpbin.org/get" + fragment
+
+@test
+def check_http_custom_headers(request, httpbin):
+    heads = {'User-agent': 'Mozilla/5.0'}
+
+    r = httpbin.get('/user-agent', headers=heads)
+
+    assert heads['User-agent'] in r.text
+    assert r.status_code == 200
+
+@test
+def check_http_headers_mixed_params(request, httpbin):
+    heads = {'User-agent': 'Mozilla/5.0'}
+
+    r = httpbin.get('/get?test=true', query_params={'q': 'test'}, something=3, headers=heads)
+    assert r.status_code == 200
+    assert r.request.url == "http://httpbin.org/get?test=true&q=test&something=3"
+
+@test
+def check_set_cookie_on_301(request, httpbin):
+    s = HttpSession(url="http://httpbin.org")
+    s.get('cookies/set?foo=bar')
+    assert s.cookies['foo'] == 'bar'
+
+@test
+def check_cookie_sent_on_redirect(request, httpbin):
+    s = HttpSession(url="http://httpbin.org")
+    s.get('cookies/set?foo=bar')
+    r = s.get('/redirect/1')
+    assert s.cookies['foo'] == 'bar'
+    assert 'Cookie' in r.request.headers

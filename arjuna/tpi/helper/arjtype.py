@@ -278,6 +278,20 @@ class NVPair(Dictable):
         self.__name = name
         self.__value = value
 
+    @property
+    def name(self):
+        '''
+        Name of this object.
+        '''
+        return self.__name
+
+    @property
+    def value(self):
+        '''
+        Value of this object.
+        '''
+        return self.__value
+
     def _as_dict(self):
         return {"name" : self.__name, "value": self.__value}
 
