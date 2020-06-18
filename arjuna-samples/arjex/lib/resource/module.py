@@ -8,3 +8,11 @@ def module_resource(request):
 
     del d['a']
     assert d == {}
+
+@for_module
+def httpbin(request):
+    yield HttpSession(url="http://httpbin.org")
+
+@for_module
+def httpsbin(request):
+    yield HttpSession(url="https://httpbin.org")

@@ -60,6 +60,8 @@ Http Automation
     - Added new named exceptions: HttpSendError
     - `content` as an alias for `text` for request and response objects.
     - Redirections: max_redirects at session level (default 30), allow_redirects at individual send request level (default is True).
+    - Cookies can be added/overriden at request level.
+    - HttpResponse.cookies property added.
 
 1.0.16
 ------
