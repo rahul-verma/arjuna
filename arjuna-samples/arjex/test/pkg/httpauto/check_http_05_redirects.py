@@ -133,3 +133,10 @@ def check_fragment_maintained_on_redirect(request, httpbin):
     assert len(r.redir_history) > 0
     assert r.redir_history[0].request.url == url
     assert r.url == "http://httpbin.org/get" + fragment
+
+@test
+def check_requests_in_history_are_not_overridden(request, httpbin):
+    resp = httpbin.get('redirect/3')
+    urls = [r.url for r in resp.redir_history]
+    req_urls = [r.request.url for r in resp.redir_history]
+    assert urls == req_urls

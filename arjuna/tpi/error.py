@@ -235,6 +235,28 @@ class HttpUnexpectedStatusCodeError(Exception):
     def response(self):
         return self.__response
 
+class HttpRequestCreationError(Exception):
+    '''
+    Raised when there is an error in creating an HTTP request.
+    '''
+
+    def __init__(self, msg):
+        super().__init__(f"Error in creating HTTP Request. {msg}")
+
+class HttpConnectError(Exception):
+    '''
+    Raised when there is a connection error.
+    '''
+
+    def __init__(self, request, msg):
+        super().__init__(f"Connection Error: {request.method} {request.url}. {msg}")
+        self.__request = request
+
+    @property
+    def request(self):
+        return self.__request
+
+
 class HttpSendError(Exception):
     '''
         Raised when there is an error in sending an HTTP request.

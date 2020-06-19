@@ -21,6 +21,16 @@ import io
 
 from arjuna import *
 
+@test
+def check_HTTP_200_OK_HEAD(request, httpbin):
+    r = httpbin.head('/get')
+    assert r.status_code == 200
+
+@test
+def check_HTTP_200_OK_PUT(request, httpbin):
+    r = httpbin.put('/put', content="")
+    assert r.status_code == 200
+
 @test(
     drive_with = records(
         record(method='GET'),

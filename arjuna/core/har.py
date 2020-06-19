@@ -17,7 +17,9 @@
 
 import json
 from haralyzer import HarParser, HarPage
-from arjuna.tpi.httpauto.session import HttpRequest, HttpResponse
+from arjuna.tpi.httpauto.request import HttpRequest
+from arjuna.tpi.httpauto.request import HttpResponse
+
 from arjuna.tpi.helper.arjtype import NetworkPacketInfo
 
 class Har:

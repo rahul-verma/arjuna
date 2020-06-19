@@ -37,3 +37,21 @@ def check_http_headers_mixed_params(request, httpbin):
     r = httpbin.get('/get?test=true', query_params={'q': 'test'}, something=3, headers=heads)
     assert r.status_code == 200
     assert r.request.url == "http://httpbin.org/get?test=true&q=test&something=3"
+
+@test
+def check_headers_on_session_with_None_are_not_sent(request, httpbin):
+    """Do not send headers in Session.headers with None values."""
+    s = HttpSession(url="http://httpbin.org", headers={'Accept-Encoding': None})
+    req = s.get('/get')
+    assert 'Accept-Encoding' not in req.headers
+
+
+@test(drive_with=records(
+    record(agent_key='User-agent'),
+    record(agent_key='user-agent'),
+))
+def check_user_agent_transfers(request, httpbin, data):
+    headers = {data.agent_key: 'Mozilla/5.0 (github.com/psf/requests)'}
+    r = httpbin.get('/user-agent', headers=headers)
+    assert data.agent_key in r.request.headers
+    assert headers[data.agent_key] == r.request.headers[data.agent_key]

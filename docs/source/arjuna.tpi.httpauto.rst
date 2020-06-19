@@ -6,7 +6,11 @@ Submodules
 
 .. toctree::
 
+   arjuna.tpi.httpauto.http
+   arjuna.tpi.httpauto.message
    arjuna.tpi.httpauto.oauth
+   arjuna.tpi.httpauto.request
+   arjuna.tpi.httpauto.response
    arjuna.tpi.httpauto.session
 
 Module contents

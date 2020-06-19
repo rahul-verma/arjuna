@@ -18,7 +18,9 @@
 # The tests are based on tests for requests library in https://github.com/psf/requests
 
 import io
+import pytest
 
+from requests.exceptions import *
 from arjuna import *
 
 @test
@@ -44,3 +46,15 @@ def check_slash_added(request):
 def check_mixed_case_scheme_acceptable(request, data):
     session = HttpSession(url=f"{data.scheme}httpbin.org")
     resp = session.get('/', xcodes=200, strict=True)
+
+@test(drive_with=records(
+    # Connecting to an unknown domain should raise a ConnectionError
+    record(url='http://doesnotexist.google.com', exception=HttpConnectError),
+    # Connecting to an invalid port should raise a ConnectionError
+    record(url='http://localhost:1', exception=HttpConnectError),
+    # Inputing a URL that cannot be parsed should raise an InvalidURL error
+    record(url='http://fe80::5054:ff:fe5a:fc0', exception=HttpRequestCreationError)
+))
+def check_errors(request, data):
+    with pytest.raises(data.exception):
+        Http.get(data.url, timeout=1)

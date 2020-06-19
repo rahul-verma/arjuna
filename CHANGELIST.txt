@@ -51,17 +51,21 @@ To Do
 1.0.17
 ------
 Http Automation
+    - Http Facade class added.
+    - Support for basic and digest authentication.
+    - The session module is split into multiple modules for better maintenance as the code became large for single file.
     - Added support for HEAD, PATCH, OPTIONS methods.
     - Request headers property added for inquiry.
     - is_redirect property added to HttpResponse
     - Header assertions added.
     - Support for pretty URL format for query params
     - Support for query_params as a dict, for use when names are not valid python names.
-    - Added new named exceptions: HttpSendError
+    - Added new named exceptions: HttpSendError, HttpConnectError, HttpRequestCreationError
     - `content` as an alias for `text` for request and response objects.
     - Redirections: max_redirects at session level (default 30), allow_redirects at individual send request level (default is True).
     - Cookies can be added/overriden at request level.
     - HttpResponse.cookies property added.
+    - Provision for request timeout.
 
 1.0.16
 ------

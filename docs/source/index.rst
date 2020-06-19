@@ -239,9 +239,10 @@ Web GUI Automation
 
 HTTP Automation
 ===============
+* :py:class:`Http <arjuna.tpi.httpauto.http.Http>`
 * :py:class:`HttpSession <arjuna.tpi.httpauto.session.HttpSession>`
-* :py:class:`HttpRequest <arjuna.tpi.httpauto.session.HttpRequest>`
-* :py:class:`HttpResponse <arjuna.tpi.httpauto.session.HttpResponse>`
+* :py:class:`HttpRequest <arjuna.tpi.httpauto.request.HttpRequest>`
+* :py:class:`HttpResponse <arjuna.tpi.httpauto.response.HttpResponse>`
 * OAuth Support
     * :py:class:`OAuthSession <arjuna.tpi.httpauto.oauth.OAuthSession>`
     * :py:class:`OAuthClientGrantSession <arjuna.tpi.httpauto.oauth.OAuthClientGrantSession>`
@@ -338,6 +339,8 @@ Arjuna Exceptions
     * :py:class:`GuiNotLoadedError <arjuna.tpi.error.GuiNotLoadedError>`
     * :py:class:`GuiLabelNotPresentError <arjuna.tpi.error.GuiLabelNotPresentError>`
 * HTTP Automation
+    * :py:class:`HttpRequestCreationError <arjuna.tpi.error.HttpRequestCreationError>`
+    * :py:class:`HttpConnectError <arjuna.tpi.error.HttpConnectError>`
     * :py:class:`HttpSendError <arjuna.tpi.error.HttpSendError>`
     * :py:class:`HttpUnexpectedStatusCodeError <arjuna.tpi.error.HttpUnexpectedStatusCodeError>`
 
