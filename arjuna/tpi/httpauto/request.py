@@ -23,7 +23,7 @@ from arjuna.tpi.error import HttpUnexpectedStatusCodeError, HttpSendError, HttpC
 from arjuna.tpi.parser.json import Json
 from arjuna.tpi.parser.html import Html
 from arjuna.tpi.engine.asserter import AsserterMixIn
-from requests.exceptions import ConnectionError, TooManyRedirects
+from requests.exceptions import ConnectionError, TooManyRedirects, ProxyError, InvalidProxyURL
 import time
 
 from .message import HttpMessage
@@ -123,7 +123,9 @@ class HttpRequest(HttpMessage):
             while counter < max_connection_retries:
                 counter += 1
                 try:
-                    response = HttpResponse(self.__session, self.__session.send(self.__req, allow_redirects=self.__allow_redirects, timeout=self.__timeout))
+                    response = HttpResponse(self.__session, self.__session.send(self.__req, allow_redirects=self.__allow_redirects, timeout=self.__timeout, proxies=self.__session.proxies))
+                except (ProxyError, InvalidProxyURL) as e:
+                    raise HttpConnectError(self.__req, "There is an error in connecting to the configured proxy. Proxy settings: {}. Error: {}".format(self.__session.proxies, str(e)))
                 except ConnectionError:
                     exc_flag = True
                     time.sleep(1)

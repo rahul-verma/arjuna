@@ -66,6 +66,7 @@ Http Automation
     - Cookies can be added/overriden at request level.
     - HttpResponse.cookies property added.
     - Provision for request timeout.
+    - Support for setting proxy at session level.
 
 1.0.16
 ------

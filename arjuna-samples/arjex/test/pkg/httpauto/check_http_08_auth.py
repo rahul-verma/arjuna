@@ -59,3 +59,23 @@ def check_basicauth_encodes_byte_strings(request):
     r = Http.get('http://httpbin.org', auth=auth)
     assert r.request.headers['Authorization'] == 'Basic xa9zZXJuYW1lOnRlc3TGtg=='
 
+@test
+def check_DIGEST_HTTP_200_OK_GET(request):
+
+    digest_auth_algo = ('MD5', 'SHA-256', 'SHA-512')
+
+    for authtype in digest_auth_algo:
+        auth = Http.auth.digest(user='user', pwd='pass')
+        url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype + '/never'
+
+        r = Http.get(url, auth=auth)
+        assert r.status_code == 200
+
+        r = Http.get(url)
+        assert r.status_code == 401
+        print(r.headers['WWW-Authenticate'])
+
+        s = Http.session(auth=auth)
+        r = s.get(url)
+        assert r.status_code == 200
+

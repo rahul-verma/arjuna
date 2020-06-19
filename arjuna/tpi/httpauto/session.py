@@ -41,9 +41,10 @@ class HttpSession:
             headers: HTTP headers to be added to request headers made by this session.
             max_redirects: Maximum number of redirects allowed for a request. Default is 30.
             auth: HTTP Authentication object: Basic/Digest.
+            proxy: Proxies dict to be associated with this session.
     '''
 
-    def __init__(self, *, url=None, oauth_token=None, content_type='application/x-www-form-urlencoded', headers=None, max_redirects=None, auth=None, _auto_session=True):
+    def __init__(self, *, url=None, oauth_token=None, content_type='application/x-www-form-urlencoded', headers=None, max_redirects=None, auth=None, proxy=None, _auto_session=True):
         self.__url = url is not None and url.strip() or None
         self.__content_type = content_type
         self.__session = None
@@ -54,6 +55,8 @@ class HttpSession:
                 self.__session.max_redirects = max_redirects
             if auth is not None:
                 self.__session.auth = auth
+            if proxy is not None:
+                self.__session.proxies = proxy
         if oauth_token:
             self.__session.headers['Authorization'] = f'Bearer {oauth_token}'
 

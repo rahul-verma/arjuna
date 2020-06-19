@@ -26,7 +26,7 @@ class Http:
     '''
 
     @classmethod
-    def session(cls, *, url=None, oauth_token=None, content_type='application/x-www-form-urlencoded', headers=None, max_redirects=None, auth=None):
+    def session(cls, *, url=None, oauth_token=None, content_type='application/x-www-form-urlencoded', headers=None, max_redirects=None, auth=None, proxy=None):
         '''
             Create an HTTP Session. Does automatic cookie management.
 
@@ -37,8 +37,9 @@ class Http:
                 headers: HTTP headers to be added to request headers made by this session.
                 max_redirects: Maximum number of redirects allowed for a request. Default is 30.
                 auth: HTTP Authentication object: Basic/Digest.
+                proxy: Proxies dict to be associated with this session.
         '''
-        return HttpSession(url=url, oauth_token=oauth_token, content_type=content_type, headers=headers, max_redirects=max_redirects, auth=auth, _auto_session=True)
+        return HttpSession(url=url, oauth_token=oauth_token, content_type=content_type, headers=headers, max_redirects=max_redirects, auth=auth, proxy=proxy, _auto_session=True)
 
     @classmethod
     def get(cls, route, label=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
@@ -236,6 +237,13 @@ class Http:
             In case of duplicates, named_query_params override query_params.
         '''
         return HttpSession().options(route, label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+
+    @classmethod
+    def proxy(cls, url):
+        '''
+        Create a proxy dict.
+        '''
+        return {'http': url, 'https': url}
 
     class auth:
         '''
