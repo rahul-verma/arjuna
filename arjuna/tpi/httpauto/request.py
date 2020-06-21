@@ -18,12 +18,11 @@
 import json
 import abc
 from urllib.parse import urlparse, urlencode, parse_qs, quote
-from requests import Request, Session
-from arjuna.tpi.error import HttpUnexpectedStatusCodeError, HttpSendError, HttpConnectError, HttpRequestCreationError
+from requests import Request
+from arjuna.tpi.error import HttpRequestCreationError
 from arjuna.tpi.parser.json import Json
 from arjuna.tpi.parser.html import Html
 from arjuna.tpi.engine.asserter import AsserterMixIn
-from requests.exceptions import ConnectionError, TooManyRedirects, ProxyError, InvalidProxyURL
 import time
 
 from .message import HttpMessage
@@ -42,19 +41,41 @@ class HttpRequest(HttpMessage):
             xcodes: Expected Status Code(s)
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
+            timeout: How long to wait for the server to send data before giving up.
+            cookies: Cookie dictionary
     '''
 
-    def __init__(self, session, request, label=None, xcodes=None, strict=False, allow_redirects=True, timeout=None):
+    def __init__(self, session, request, label=None, xcodes=None, strict=False, allow_redirects=True, timeout=None, cookies=None):
         super().__init__(request)
         self.__session = session
         self.__request = request
         req_repr = "{} {}".format(self.method, self.url)
         self.__label = label and label or req_repr
-        self.__printable_label = label and self.__label + "::" + req_repr or req_repr
-        self.__printable_label = len(self.__printable_label) > 119 and self.__printable_label[:125] + "<SNIP>" or self.__printable_label
+        printable_label = label and self.__label + "::" + req_repr or req_repr
+        printable_label = len(printable_label) > 119 and printable_label[:125] + "<SNIP>" or printable_label
+        self.__label = printable_label
         self.__strict = strict
         self.__allow_redirects = allow_redirects
         self.__timeout = timeout
+        self.__cookies = cookies
+
+    @property
+    def _request(self):
+        return self.__request
+
+    @property
+    def allow_redirects(self):
+        '''
+        True if redirects are allowed for this request.
+        '''
+        return self.__allow_redirects
+
+    @property
+    def timeout(self):
+        '''
+        Timeout for this request.
+        '''
+        return self.__timeout
 
     @property
     def label(self) -> str:
@@ -70,92 +91,6 @@ class HttpRequest(HttpMessage):
         '''
         return parse_qs(self.url)
 
-    def __register_network_info(self, response):
-        from arjuna import Arjuna
-        from arjuna.tpi.helper.arjtype import NetworkPacketInfo
-        # Should be configurable
-        sub_network_packets = []
-        for redir_resp in response.redir_history:
-            redir_req = redir_resp.request
-            sub_network_packets.append(
-                NetworkPacketInfo(
-                    label="Sub-Request: {} {}".format(redir_req.method, redir_req.url), 
-                    request=str(redir_req), 
-                    response=str(redir_resp),
-                    sub_network_packets=tuple()
-                )
-            )
-
-        # The request for last response object was the last request and hence the last redirection.
-        if response.redir_history:
-            # last_req = response.last_request
-            # if not last_req:
-            last_req = response.request
-            sub_network_packets.append(
-                                NetworkPacketInfo(
-                                    label="Sub-Request: {} {}".format(last_req.method, last_req.url), 
-                                    request=str(last_req), 
-                                    response=str(response),
-                                    sub_network_packets=tuple()
-                                )
-                            )                
-
-        Arjuna.get_report_metadata().add_network_packet_info(
-            NetworkPacketInfo(label=self.label, request=str(self), response=str(response), sub_network_packets=tuple(sub_network_packets))
-        )
-
-    def send(self) -> HttpResponse:
-        '''
-            Send this request to server.
-
-            In case of ConnectionError, retries the connection 5 times at a gap of 1 second. Currently, not configurable.
-
-            Returns
-                `HttpResponse` object. In case of redirections, this is the last HttpResponse object, which encapsulates all redirections which can be retrieved from it.
-        '''
-        from arjuna import Arjuna, log_info
-        from arjuna.tpi.helper.arjtype import NetworkPacketInfo
-        log_info(self.__printable_label)
-        max_connection_retries = 5
-        try:
-            counter = 0
-            exc_flag = False
-            while counter < max_connection_retries:
-                counter += 1
-                try:
-                    response = HttpResponse(self.__session, self.__session.send(self.__req, allow_redirects=self.__allow_redirects, timeout=self.__timeout, proxies=self.__session.proxies))
-                except (ProxyError, InvalidProxyURL) as e:
-                    raise HttpConnectError(self.__req, "There is an error in connecting to the configured proxy. Proxy settings: {}. Error: {}".format(self.__session.proxies, str(e)))
-                except ConnectionError:
-                    exc_flag = True
-                    time.sleep(1)
-                    continue
-                else:
-                    break
-            if exc_flag:
-                raise HttpConnectError(self.__req, "Connection error despite trying 5 times.")
-        except TooManyRedirects as e:
-            response = HttpResponse(self.__session, e.response)
-            self.__register_network_info(response)
-            raise HttpSendError(self, response, str(e) + ". Error redir URL: " + e.response.url)
-        except Exception as e:
-            import traceback
-            response = "Error in sending the request\n"
-            response += e.__class__.__name__ + ":" + str(e) + "\n"
-            response += traceback.format_exc()
-            Arjuna.get_report_metadata().add_network_packet_info(
-                NetworkPacketInfo(label=self.label, request=str(self), response=str(response), sub_network_packets=tuple())
-            )
-            raise e
-        else:
-            self.__register_network_info(response)
-            if self.__xcodes is not None and response.status_code not in self.__xcodes:
-                if self.__strict:
-                    raise AssertionError(f"HTTP status code {self.status_code} is not expected. Expected: {self.__xcodes}")
-                else:
-                    raise HttpUnexpectedStatusCodeError(self.__req, response)
-            return response
-
     @property
     def url(self) -> str:
         '''
@@ -169,6 +104,20 @@ class HttpRequest(HttpMessage):
             HTTP Method/Verb used by this request.
         '''
         return self.__request.method
+
+    @property
+    def xcodes(self) -> set:
+        '''
+        Expected status codes for this request.
+        '''
+        return self.__xcodes
+
+    @property
+    def strict(self) -> bool:
+        '''
+        True if sending this request should raise an Assertion error in case of unexpected status code.
+        '''
+        return self.__strict
 
     @property
     def text(self):
@@ -205,13 +154,16 @@ class HttpRequest(HttpMessage):
 
 class _HttpRequest(HttpRequest):
 
-    def __init__(self, session, url, method, label=None, content=None, content_type=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout=None, pretty_url=False, query_params=None, **named_query_params):
+    def __init__(self, session, url, method, label=None, content=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout=None, pretty_url=False, query_params=None, **named_query_params):
         self.__session = session
         self.__method = method.upper()
         self.__url = url
-        self.__content = content
-        self.__prep_content = content
-        self.__content_type = content_type
+        self.__content_dict = None
+        if content is not None:
+            if type(content) is str:
+                self.__content_dict = self.__session.request_content_handler(content)
+            else:
+                self.__content_dict = content
         self.__xcodes = None
         if xcodes is not None:
             self.__xcodes = type(xcodes) in {set, list, tuple} and xcodes or {xcodes}
@@ -224,29 +176,21 @@ class _HttpRequest(HttpRequest):
         self.__headers.update(session.headers)
         if headers:
             self.__headers.update(headers)
-        self.__cookies = cookies
+        self.__cookies = dict()
+        self.__cookies.update(self.__session.cookies)
+        if cookies is not None:
+            self.__cookies.update(cookies)
         self.__auth = auth is not None and auth or self.__session.auth
         self.__prepare_headers()
-        self.__prepare_content()
         self.__req = self.__build_request()
-        super().__init__(self.__session, self.__req, label=label, xcodes=self.__xcodes, strict=strict, allow_redirects=allow_redirects, timeout=timeout)
+        super().__init__(self.__session, self.__req, label=label, xcodes=self.__xcodes, strict=strict, allow_redirects=allow_redirects, timeout=timeout, cookies=self.__cookies)
 
     def __prepare_headers(self):
         if self.__method in {'POST', 'PUT', 'PATCH', 'OPTIONS'}:
-            if self.__content_type is not None:
-                self.__headers['Content-Type'] = self.__content_type
+            self.__headers['Content-Type'] = self.__content_dict['type']
         if self.__method in {'GET', 'HEAD', 'DELETE'}:
             if 'Content-Type' in self.__headers:
                 del self.__headers['Content-Type']
-
-    def __prepare_content(self):
-        if self.__method in {'GET', 'DELETE', 'HEAD'}: return
-        if self.__headers['Content-Type'].lower() == 'application/json':
-            self.__prep_content = json.dumps(self.__content, indent=2)
-        elif self.__headers['Content-Type'].lower() == 'text/html':
-            self.__prep_content = self.__content
-        else:
-            self.__prep_content = urlencode(self.__content)
 
     def __build_request(self):
         parsed_uri = urlparse(self.__url)
@@ -258,12 +202,13 @@ class _HttpRequest(HttpRequest):
         else:
             url = self.__url
             query_params = self.__query_params
-        cookie_dict = dict()
-        cookie_dict.update(self.__session.cookies)
-        if self.__cookies is not None:
-            cookie_dict.update(self.__cookies)
+
         try:
-            req = Request(self.__method, url, data=self.__prep_content, headers=self.__headers, params=query_params, cookies=cookie_dict, auth=self.__auth)
+            if self.__content_dict:
+                data = self.__content_dict['content']
+            else:
+                data = None
+            req = Request(self.__method, url, data=data, headers=self.__headers, params=query_params, cookies=self.__cookies, auth=self.__auth)
             return req.prepare()
         except Exception as e:
             raise HttpRequestCreationError("{} : {}".format(e.__class__.__name__, str(e)))

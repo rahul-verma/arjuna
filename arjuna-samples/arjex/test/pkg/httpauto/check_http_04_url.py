@@ -25,13 +25,13 @@ from arjuna import *
 
 @test
 def check_whitespaces_are_removed_from_url(request):
-    session = HttpSession(url="  http://httpbin.org  ")
+    session = Http.session(url="  http://httpbin.org  ")
     resp = session.get('/ ')
     assert resp.request.url == 'http://httpbin.org/'
 
 @test
 def check_slash_added(request):
-    session = HttpSession(url="  http://httpbin.org  ")
+    session = Http.session(url="  http://httpbin.org  ")
     resp = session.get('abc')
     assert resp.request.url == 'http://httpbin.org/abc'
 
@@ -44,7 +44,7 @@ def check_slash_added(request):
     )
 )
 def check_mixed_case_scheme_acceptable(request, data):
-    session = HttpSession(url=f"{data.scheme}httpbin.org")
+    session = Http.session(url=f"{data.scheme}httpbin.org")
     resp = session.get('/', xcodes=200, strict=True)
 
 @test(drive_with=records(

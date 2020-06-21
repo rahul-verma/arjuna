@@ -59,10 +59,10 @@ def check_basicauth_encodes_byte_strings(request):
     r = Http.get('http://httpbin.org', auth=auth)
     assert r.request.headers['Authorization'] == 'Basic xa9zZXJuYW1lOnRlc3TGtg=='
 
+digest_auth_algo = ('MD5', 'SHA-256', 'SHA-512')
+
 @test
 def check_DIGEST_HTTP_200_OK_GET(request):
-
-    digest_auth_algo = ('MD5', 'SHA-256', 'SHA-512')
 
     for authtype in digest_auth_algo:
         auth = Http.auth.digest(user='user', pwd='pass')
@@ -79,3 +79,54 @@ def check_DIGEST_HTTP_200_OK_GET(request):
         r = s.get(url)
         assert r.status_code == 200
 
+@test
+def check_DIGEST_AUTH_RETURNS_COOKIE(request):
+
+    for authtype in digest_auth_algo:
+        auth = Http.auth.digest(user='user', pwd='pass')
+        url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype
+
+        r = Http.get(url)
+        #assert r.cookies['fake'] == 'fake_value'
+
+        r = Http.get(url, auth=auth)
+        assert r.status_code == 200
+
+@test
+def check_DIGEST_AUTH_SETS_SESSION_COOKIES(request):
+    for authtype in digest_auth_algo:
+        auth = Http.auth.digest(user='user', pwd='pass')
+        url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype + '/never'
+
+        s = Http.session()
+        s.get(url, auth=auth)
+        assert s.cookies['fake'] == 'fake_value'
+        
+        
+@test
+def check_DIGESTAUTH_WRONG_HTTP_401_GET(request):
+
+    for authtype in digest_auth_algo:
+        auth = Http.auth.digest(user='user', pwd='wrongpass')
+        url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype
+
+        r = Http.get(url, auth=auth)
+        assert r.status_code == 401
+
+        r = Http.get(url)
+        assert r.status_code == 401
+        print(r.headers['WWW-Authenticate'])
+
+        s = Http.session(auth=auth)
+        r = s.get(url)
+        assert r.status_code == 401
+
+@test
+def check_DIGESTAUTH_QUOTES_QOP_VALUE(request):
+
+    for authtype in digest_auth_algo:
+        auth = Http.auth.digest(user='user', pwd='wrongpass')
+        url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype
+
+        r = Http.get(url, auth=auth)
+        assert '"auth"' in r.request.headers['Authorization']

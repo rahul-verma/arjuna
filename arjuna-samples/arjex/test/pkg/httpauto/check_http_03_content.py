@@ -22,6 +22,6 @@ import io
 from arjuna import *
 
 @test
-def check_binary_put(request, httpbin):
-    resp = httpbin.put('http://example.com/',  content=u"ööö".encode("utf-8"), content_type="text/html")
+def check_binary_put(request):
+    resp = Http.put('http://example.com/',  content=Http.content.utf8(u"ööö"))
     assert isinstance(resp.request.content, bytes)

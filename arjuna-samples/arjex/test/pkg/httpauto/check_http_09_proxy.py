@@ -25,7 +25,7 @@ from arjuna import *
 def check_proxy_error(request):
     # any proxy related error (address resolution, no route to host, etc) should result in a ProxyError
     with pytest.raises(HttpConnectError):
-        s = HttpSession(proxy=Http.proxy('non-resolvable-address'))
+        s = Http.session(proxy=Http.proxy('non-resolvable-address'))
         s.get('http://httpbin.org')
 
 @test

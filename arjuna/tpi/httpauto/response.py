@@ -60,13 +60,6 @@ class HttpResponse(HttpMessage):
         return self.__resp.url
 
     @property
-    def cookies(self) -> dict:
-        '''
-        A CookieJar of Cookies the server sent back.
-        '''
-        return self.__resp.json()['cookies']
-
-    @property
     def query_params(self) -> dict:
         ''' 
             Query parameters in URL for this response.

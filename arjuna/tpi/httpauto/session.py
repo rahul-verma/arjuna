@@ -17,13 +17,9 @@
 
 import json
 import abc
-from urllib.parse import urlparse, urlencode, parse_qs, quote
-from requests import Request, Session
-from arjuna.tpi.error import HttpUnexpectedStatusCodeError, HttpSendError
-from arjuna.tpi.parser.json import Json
-from arjuna.tpi.parser.html import Html
-from arjuna.tpi.engine.asserter import AsserterMixIn
-from requests.exceptions import ConnectionError, TooManyRedirects
+from requests import Session
+from arjuna.tpi.error import HttpUnexpectedStatusCodeError, HttpSendError, HttpConnectError
+from requests.exceptions import ConnectionError, TooManyRedirects, ProxyError, InvalidProxyURL
 import time
 
 from .request import _HttpRequest
@@ -37,16 +33,19 @@ class HttpSession:
         Keyword Arguments:
             url: Base URL for this HTTP session. If relative path is used as a route in sender methods like `.get`, then this URL is prefixed to their provided routes.
             oauth_token: OAuth 2.0 Bearer token for this session.
-            content_type: Default content type for requests sent in this session. Overridable in individual sender methods. Default is `application/x-www-form-urlencoded`
+            request_content_handler: Default content type handler for requests sent in this session. Overridable in individual sender methods. Default is Http.content.urlencoded.
             headers: HTTP headers to be added to request headers made by this session.
             max_redirects: Maximum number of redirects allowed for a request. Default is 30.
             auth: HTTP Authentication object: Basic/Digest.
             proxy: Proxies dict to be associated with this session.
     '''
 
-    def __init__(self, *, url=None, oauth_token=None, content_type='application/x-www-form-urlencoded', headers=None, max_redirects=None, auth=None, proxy=None, _auto_session=True):
+    def __init__(self, *, url=None, oauth_token=None, request_content_handler=None, headers=None, max_redirects=None, auth=None, proxy=None, _auto_session=True):
         self.__url = url is not None and url.strip() or None
-        self.__content_type = content_type
+        self.__request_content_handler = request_content_handler
+        from .http import Http
+        if self.__request_content_handler is None:
+            self.__request_content_handler = Http.content.urlencoded
         self.__session = None
         self.__provided_headers = headers
         if _auto_session:
@@ -73,11 +72,34 @@ class HttpSession:
         '''
         self.__session.cookies.update(cookie_dict)
 
+    @property
+    def request_content_handler(self):
+        '''
+        Request content handler for content formatting.
+        '''
+        return self.__request_content_handler
+
     def _set_session(self, session):
         self.__session = session
         if self.__provided_headers is not None:
             self.__session.headers.update(self.__session.headers)
-        self.__session.headers['Content-Type'] = self.__content_type
+        from .http import Http
+        if self.request_content_handler != Http.content.custom:
+            self.__session.headers['Content-Type'] = Http.content.get_content_type(self.request_content_handler)
+
+    @property
+    def headers(self):
+        '''
+        Request headers.
+        '''
+        return self._session.headers
+
+    @property
+    def auth(self):
+        '''
+        HTTP Authentication object.
+        '''
+        return self._session.auth
 
     @property
     def url(self):
@@ -104,6 +126,93 @@ class HttpSession:
             else:
                 return self.url + "/" + route
 
+    def __register_network_info(self, request, response):
+        from arjuna import Arjuna
+        from arjuna.tpi.helper.arjtype import NetworkPacketInfo
+        # Should be configurable
+        sub_network_packets = []
+        for redir_resp in response.redir_history:
+            redir_req = redir_resp.request
+            sub_network_packets.append(
+                NetworkPacketInfo(
+                    label="Sub-Request: {} {}".format(redir_req.method, redir_req.url), 
+                    request=str(redir_req), 
+                    response=str(redir_resp),
+                    sub_network_packets=tuple()
+                )
+            )
+
+        # The request for last response object was the last request and hence the last redirection.
+        if response.redir_history:
+            # last_req = response.last_request
+            # if not last_req:
+            last_req = response.request
+            sub_network_packets.append(
+                                NetworkPacketInfo(
+                                    label="Sub-Request: {} {}".format(last_req.method, last_req.url), 
+                                    request=str(last_req), 
+                                    response=str(response),
+                                    sub_network_packets=tuple()
+                                )
+                            )                
+
+        Arjuna.get_report_metadata().add_network_packet_info(
+            NetworkPacketInfo(label=request.label, request=str(request), response=str(response), sub_network_packets=tuple(sub_network_packets))
+        )
+
+    def send(self, request) -> HttpResponse:
+        '''
+            Send the provided HttpRequest to server.
+
+            In case of ConnectionError, retries the connection 5 times at a gap of 1 second. Currently, not configurable.
+
+            Returns
+                `HttpResponse` object. In case of redirections, this is the last HttpResponse object, which encapsulates all redirections which can be retrieved from it.
+        '''
+        from arjuna import Arjuna, log_info
+        from arjuna.tpi.helper.arjtype import NetworkPacketInfo
+        log_info(request.label)
+        max_connection_retries = 5
+        try:
+            counter = 0
+            exc_flag = False
+            while counter < max_connection_retries:
+                counter += 1
+                try:
+                    response = HttpResponse(self, self._session.send(request._request, allow_redirects=request.allow_redirects, timeout=request.timeout, proxies=self._session.proxies))
+                except (ProxyError, InvalidProxyURL) as e:
+                    raise HttpConnectError(request, "There is an error in connecting to the configured proxy. Proxy settings: {}. Error: {}".format(self.__session.proxies, str(e)))
+                except ConnectionError:
+                    exc_flag = True
+                    time.sleep(1)
+                    continue
+                else:
+                    break
+            if exc_flag:
+                raise HttpConnectError(request, "Connection error despite trying 5 times.")
+        except TooManyRedirects as e:
+            response = HttpResponse(self._session, e.response)
+            self.__register_network_info(request, response)
+            raise HttpSendError(self, response, str(e) + ". Error redir URL: " + e.response.url)
+        except Exception as e:
+            import traceback
+            response = "Error in sending the request\n"
+            response += e.__class__.__name__ + ":" + str(e) + "\n"
+            response += traceback.format_exc()
+            Arjuna.get_report_metadata().add_network_packet_info(
+                NetworkPacketInfo(label=request.label, request=str(request), response=str(response), sub_network_packets=tuple())
+            )
+            raise e
+        else:
+            self.__register_network_info(request, response)
+            if request.xcodes is not None and response.status_code not in request.xcodes:
+                if request.strict:
+                    raise AssertionError(f"HTTP status code {response.status_code} is not expected. Expected: {request.xcodes}")
+                else:
+                    raise HttpUnexpectedStatusCodeError(request, response)
+            return response
+
+
     def get(self, route, label=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP GET request.
@@ -128,8 +237,8 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="get", label=label, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
-        return request.send()
+        request = _HttpRequest(self, self.__route(route), method="get", label=label, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        return self.send(request)
 
 
     def head(self, route, label=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
@@ -156,8 +265,8 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="head", label=label, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
-        return request.send()
+        request = _HttpRequest(self, self.__route(route), method="head", label=label, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        return self.send(request)
 
 
     def delete(self, route, label=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
@@ -184,10 +293,10 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="delete", label=label, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
-        return request.send()
+        request = _HttpRequest(self, self.__route(route), method="delete", label=label, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        return self.send(request)
 
-    def post(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def post(self, route, *, content, label=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP POST request.
 
@@ -196,8 +305,7 @@ class HttpSession:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request.
-            content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
@@ -213,10 +321,10 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="post", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
-        return request.send()
+        request = _HttpRequest(self, self.__route(route), method="post", label=label, content=content, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        return self.send(request)
 
-    def put(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def put(self, route, *, content, label=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -225,8 +333,7 @@ class HttpSession:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request.
-            content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
@@ -242,10 +349,10 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="put", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
-        return request.send()
+        request = _HttpRequest(self, self.__route(route), method="put", label=label, content=content, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        return self.send(request)
 
-    def patch(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def patch(self, route, *, content, label=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -254,8 +361,7 @@ class HttpSession:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request.
-            content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
@@ -271,10 +377,10 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="patch", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
-        return request.send()
+        request = _HttpRequest(self, self.__route(route), method="patch", label=label, content=content, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        return self.send(request)
 
-    def options(self, route, *, content, label=None, content_type=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def options(self, route, *, content, label=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -283,8 +389,7 @@ class HttpSession:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request.
-            content-type: Content type. If not provided, default content type set for this session is used. Default is `application/x-www-form-urlencoded`
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
             xcodes: Expected HTTP response code(s).
             strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             headers: Mapping of additional HTTP headers to be sent with this request.
@@ -300,8 +405,8 @@ class HttpSession:
             **query_params** and **named_query_params** have the same goal.
             In case of duplicates, named_query_params override query_params.
         '''
-        request = _HttpRequest(self._session, self.__route(route), method="options", label=label, content=content, content_type=content_type, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
-        return request.send()
+        request = _HttpRequest(self, self.__route(route), method="options", label=label, content=content, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
+        return self.send(request)
 
 
 

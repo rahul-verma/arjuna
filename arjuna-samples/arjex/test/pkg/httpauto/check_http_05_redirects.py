@@ -30,7 +30,7 @@ def check_302_redirect_get(request, httpbin):
 
 @test
 def check_307_redirect_POST(request, httpbin):
-    r = httpbin.post('/redirect-to?url=post', content='test', content_type="text/html", status_code=307)
+    r = httpbin.post('/redirect-to?url=post', content='test', status_code=307)
     assert r.status_code == 200
     assert r.redir_history[0].status_code == 307
     assert r.redir_history[0].is_redirect
@@ -39,7 +39,7 @@ def check_307_redirect_POST(request, httpbin):
 @test
 def check_http_307_redirect_post_with_seekable(request, httpbin):
     byte_str = b'test'
-    r = httpbin.post('/redirect-to?url=post', content=io.BytesIO(byte_str), content_type="text/html", status_code=307)
+    r = httpbin.post('/redirect-to?url=post', content=b'test', status_code=307)
     assert r.status_code == 200
     assert r.redir_history[0].status_code == 307
     assert r.redir_history[0].is_redirect
@@ -65,7 +65,7 @@ def check_too_many_redirects_custom_limit(request, httpbin):
         requests allows up to 20 redirects
     '''
     try:
-        session = HttpSession(url="http://httpbin.org", max_redirects=5)
+        session = Http.session(url="http://httpbin.org", max_redirects=5)
         session.get('/', query_params={'relative-redirect' : 50}, pretty_url=True)
     except HttpSendError as e:
         assert e.request.url == 'http://httpbin.org/relative-redirect/50'

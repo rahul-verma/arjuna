@@ -11,8 +11,8 @@ def module_resource(request):
 
 @for_module
 def httpbin(request):
-    yield HttpSession(url="http://httpbin.org")
+    yield Http.session(url="http://httpbin.org")
 
 @for_module
 def httpsbin(request):
-    yield HttpSession(url="https://httpbin.org")
+    yield Http.session(url="https://httpbin.org")

@@ -41,7 +41,7 @@ def check_http_headers_mixed_params(request, httpbin):
 @test
 def check_headers_on_session_with_None_are_not_sent(request, httpbin):
     """Do not send headers in Session.headers with None values."""
-    s = HttpSession(url="http://httpbin.org", headers={'Accept-Encoding': None})
+    s = Http.session(url="http://httpbin.org", headers={'Accept-Encoding': None})
     req = s.get('/get')
     assert 'Accept-Encoding' not in req.headers
 
