@@ -44,7 +44,7 @@ def check_multipart_files_and_fields(request):
     r = Http.post(url, content=Http.content.multipart(
         {'a': 1, 'b': 3},
         Http.field('fname', "sample.txt", is_file=True),
-        {'a': 1, 'b': 3},
+        {'a': 7, 'b': 9},
         Http.field('c', 'something')
     ))
     assert r.status_code == 200

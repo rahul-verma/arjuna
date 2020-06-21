@@ -337,17 +337,18 @@ class Http:
         @classmethod
         def multipart(cls, *fields):
             from arjuna import C, ArjunaOption
-            edict = dict()
+            elist = list()
             for field in fields:
                 if type(field) is dict:
-                    edict.update({k:str(v) for k,v in field.items()})
+                    for k,v in field.items():
+                        elist.append((k, str(v)))
                 elif isinstance(field, _HttpField):
                     if field.is_file:
                         file_path = os.path.join(C(ArjunaOption.DATA_FILE_DIR), field.value)
-                        edict[field.name] = (field.value, open(file_path, 'rb'), field.content_type, field.headers)
+                        elist.append((field.name, (field.value, open(file_path, 'rb'), field.content_type, field.headers)))
                     else:
-                        edict[field.name] = str(field.value)
-            encoder = MultipartEncoder(edict)
+                        elist.append((field.name, str(field.value)))
+            encoder = MultipartEncoder(elist)
             return _HttpContent(content=encoder.to_string(), type=encoder.content_type)
 
         @classmethod
