@@ -25,3 +25,26 @@ from arjuna import *
 def check_binary_put(request):
     resp = Http.put('http://example.com/',  content=Http.content.utf8(u"ööö"))
     assert isinstance(resp.request.content, bytes)
+
+@test
+def check_multipart_file(request):
+    url = "http://httpbin.org/post"
+    Http.post(url, content="")
+
+    post1 = Http.post(url, content={'some': 'data'})
+    assert post1.status_code == 200
+
+    post2 = Http.post(url, content=Http.content.file('fname', "sample.txt", headers={'X-A': 'b'}))
+    assert post2.status_code == 200
+
+@test
+def check_multipart_files_and_fields(request):
+    url = "http://httpbin.org/post"
+
+    r = Http.post(url, content=Http.content.multipart(
+        {'a': 1, 'b': 3},
+        Http.field('fname', "sample.txt", is_file=True),
+        {'a': 1, 'b': 3},
+        Http.field('c', 'something')
+    ))
+    assert r.status_code == 200

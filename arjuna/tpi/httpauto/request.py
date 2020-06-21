@@ -144,11 +144,14 @@ class HttpRequest(HttpMessage):
         ).strip()
 
     def __str__(self):
+        content = self.text
+        if isinstance(content, bytes):
+            content = content.decode()
         return self.repr_as_str(
             method = self.__request.method,
             url = self.url,
             headers = self.__request.headers,
-            content = self.text
+            content = content
         )
 
 
@@ -158,12 +161,12 @@ class _HttpRequest(HttpRequest):
         self.__session = session
         self.__method = method.upper()
         self.__url = url
-        self.__content_dict = None
+        self.__content = None
         if content is not None:
-            if type(content) is str:
-                self.__content_dict = self.__session.request_content_handler(content)
+            if type(content) in {str, dict}:
+                self.__content = self.__session.request_content_handler(content)
             else:
-                self.__content_dict = content
+                self.__content = content
         self.__xcodes = None
         if xcodes is not None:
             self.__xcodes = type(xcodes) in {set, list, tuple} and xcodes or {xcodes}
@@ -187,7 +190,7 @@ class _HttpRequest(HttpRequest):
 
     def __prepare_headers(self):
         if self.__method in {'POST', 'PUT', 'PATCH', 'OPTIONS'}:
-            self.__headers['Content-Type'] = self.__content_dict['type']
+            self.__headers['Content-Type'] = self.__content.type
         if self.__method in {'GET', 'HEAD', 'DELETE'}:
             if 'Content-Type' in self.__headers:
                 del self.__headers['Content-Type']
@@ -204,8 +207,8 @@ class _HttpRequest(HttpRequest):
             query_params = self.__query_params
 
         try:
-            if self.__content_dict:
-                data = self.__content_dict['content']
+            if self.__content:
+                data = self.__content.content
             else:
                 data = None
             req = Request(self.__method, url, data=data, headers=self.__headers, params=query_params, cookies=self.__cookies, auth=self.__auth)

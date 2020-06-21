@@ -17,12 +17,19 @@
 
 import json
 import io
+import os
 
 from urllib.parse import urlencode
 from requests.auth import *
+from requests_toolbelt.multipart.encoder import MultipartEncoder
 from .session import HttpSession
 from .response import HttpResponse
 
+from collections import namedtuple
+from arjuna.tpi.data.entity import data_entity
+
+_HttpContent = namedtuple("_HttpContent", "content type")
+_HttpField = namedtuple("_HttpField", "name value is_file content_type headers")
 
 class Http:
     '''
@@ -282,11 +289,11 @@ class Http:
 
         @classmethod
         def blank(cls, content=""):
-            return {'content': "", 'type': cls.get_content_type(cls.blank)}
+            return _HttpContent(content="", type=cls.get_content_type(cls.blank))
 
         @classmethod
         def html(cls, content=""):
-            return {'content': content, 'type': cls.get_content_type(cls.html)}
+            return _HttpContent(content=content, type=cls.get_content_type(cls.html))
 
         text = html
 
@@ -294,30 +301,59 @@ class Http:
         def bytes(cls, content=""):
             if content:
                 content = io.BytesIO(content)
-            return {'content': content, 'type': cls.get_content_type(cls.bytes)}
+            return _HttpContent(content=content, type=cls.get_content_type(cls.bytes))
 
         @classmethod
         def utf8(cls, content=""):
             if content:
                 content = content.encode("utf-8")
-            return {'content': content, 'type': cls.get_content_type(cls.utf8)}
+            return _HttpContent(content=content, type=cls.get_content_type(cls.utf8))
 
         @classmethod
         def urlencoded(cls, content=""):
             if content:
                 content = urlencode(content)
-            return {'content': content, 'type': cls.get_content_type(cls.urlencoded)}
+            return _HttpContent(content=content, type=cls.get_content_type(cls.urlencoded))
 
         @classmethod
         def json(cls, content=""):
             if content:
                 content = json.dumps(content, indent=2)
-            return {'content': content, 'type': cls.get_content_type(cls.json)}
+            return _HttpContent(content=content, type=cls.get_content_type(cls.json))
 
         @classmethod
         def xml(cls, content=""):
-            return {'content': content, 'type': cls.get_content_type(cls.xml)}
+            return _HttpContent(content=content, type=cls.get_content_type(cls.xml))
+
+        @classmethod
+        def file(cls, field_name, file_name, *, content_type='text/plain', headers=None):
+            from arjuna import C, ArjunaOption
+            file_path = os.path.join(C(ArjunaOption.DATA_FILE_DIR), file_name)
+            encoder = MultipartEncoder(
+                {field_name: (file_name, open(file_path, 'rb'), content_type, headers)}
+            )
+            return _HttpContent(content=encoder.to_string(), type=encoder.content_type)
+
+        @classmethod
+        def multipart(cls, *fields):
+            from arjuna import C, ArjunaOption
+            edict = dict()
+            for field in fields:
+                if type(field) is dict:
+                    edict.update({k:str(v) for k,v in field.items()})
+                elif isinstance(field, _HttpField):
+                    if field.is_file:
+                        file_path = os.path.join(C(ArjunaOption.DATA_FILE_DIR), field.value)
+                        edict[field.name] = (field.value, open(file_path, 'rb'), field.content_type, field.headers)
+                    else:
+                        edict[field.name] = str(field.value)
+            encoder = MultipartEncoder(edict)
+            return _HttpContent(content=encoder.to_string(), type=encoder.content_type)
 
         @classmethod
         def custom(self, content, *, type):
-            return {'content': content, 'type': type}
+            return _HttpContent(content=content, type=type)
+
+    @classmethod
+    def field(cls, name, value, is_file=False, content_type="text/plain", headers=None):
+        return _HttpField(name=name, value=value, is_file=is_file, content_type=content_type, headers=headers)

@@ -52,6 +52,7 @@ _RAW_OPTION_LEVELS = {
         "DATA_REF_DIR",
         "DATA_REF_CONTEXTUAL_DIR",
         "DATA_REF_INDEXED_DIR",
+        "DATA_FILE_DIR",
         "GUIAUTO_NAME",
         "GUIAUTO_DIR",
         "GUIAUTO_NAMESPACE_DIR",

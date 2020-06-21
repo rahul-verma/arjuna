@@ -67,6 +67,10 @@ Http Automation
     - HttpResponse.cookies property added.
     - Provision for request timeout.
     - Support for setting proxy at session level.
+    - Support for utf8, bytes, file and multipart content type.
+Configuration
+    - Added ArjunaOption.DATA_FILE_DIR to contain files that are supposed to be used as file data.
+    - create-project command creates project/data/file directory with a placeholder.
 
 1.0.16
 ------

@@ -49,6 +49,7 @@ arjuna_options:
   data.ref.dir: $project_root_dir$/data/reference
   data.ref.contextual.dir: $project_root_dir$/data/reference/contextual
   data.ref.indexed.dir: $project_root_dir$/data/reference/indexed
+  data.file.dir: $project_root_dir$/data/file
 
   app.url: NOT_SET
 

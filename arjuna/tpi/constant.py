@@ -150,6 +150,9 @@ class ArjunaOption(Enum):
     DATA_REF_INDEXED_DIR = auto()
     '''Directory containing indexed data reference files in test project.'''
 
+    DATA_FILE_DIR = auto()
+    '''Directory containing files used as file data.'''
+
     APP_URL = auto()
     '''Base URL for a Web App. Used by launch() method if url is not specified for GuiApp.'''
 

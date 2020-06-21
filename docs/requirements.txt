@@ -1,5 +1,6 @@
 Pallets-Sphinx-Themes
 requests
+requests-toolbelt
 selenium
 webdriver_manager
 xlrd
