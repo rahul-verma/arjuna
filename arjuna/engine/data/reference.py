@@ -17,59 +17,12 @@
 
 import os
 import abc
-import random
 
 from arjuna.core.reader.excel import *
 from arjuna.tpi.data.record import *
-from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.parser.yaml import Yaml
 
-class IndexedDataReference(metaclass=abc.ABCMeta):
-
-    def __init__(self, pydict):
-        self.__records = pydict
-        self.__iter = None
-
-    def __len__(self):
-        return len(self.__records)
-
-    def __getitem__(self, index):
-        return self.record_for(index)
-
-    def random(self):
-        index = random.randint(0, len(self) -1)
-        return self[index]
-
-    def last(self):
-        return self[-1]
-
-    def record_for(self, index):
-        try:
-            # To support negative indices
-            indices = list(self.__records.keys())
-            try:
-                target_index = indices[index]
-            except:
-                raise KeyError()
-            else:
-                return self.__records[target_index]
-        except KeyError:
-            raise Exception("Index {} not found in data reference: {}.".format(index, self.__class__.__name__))
-
-    def __str__(self):
-        return str({k: str(v) for k,v in self.__records.items()})
-
-    def enumerate(self):
-        for k,v in self.__records.items():
-            print(k, "::", type(v), str(v))
-
-    def __iter__(self):
-        self.__iter = iter(self.__records.values())
-        return self
-
-    def __next__(self):
-        return next(self.__iter)
-
+from arjuna.tpi.data.reference import IndexedDataReference, ContextualDataReference
 
 class ExcelIndexedDataReference(IndexedDataReference):
 
@@ -106,77 +59,6 @@ def get_file_name(path):
     name = os.path.basename(path)
     return os.path.splitext(name)[0]
 
-class ContextualDataReference(metaclass=abc.ABCMeta):
-
-    def __init__(self, path):
-        self.__path = path
-        self.__name = get_file_name(path)
-        self.__map = CIStringDict()
-        self._populate()
-        self.__iter = None
-
-    def __iter__(self):
-        self.__iter = iter(self.__map)
-        return self
-
-    def __next__(self):
-        return next(self.__iter)
-
-    def __len__(self):
-        return len(self.__map)
-
-    def __getitem__(self, context):
-        return self.record_for(context)
-
-    def keys(self):
-        return self.__map.keys()
-
-    def items(self):
-        return self.__map.items()
-
-    @property
-    def map(self):
-        return self.__map
-
-    @property
-    def path(self):
-        return self.__path
-
-    @property
-    def name(self):
-        return self.__name
-
-    def update(self, data_reference):
-        for context, record in data_reference.map.items():
-            if context not in self.map:
-                self.__map[context] = CIStringDict()
-            self.__map[context].update(record.named_values)
-
-    def update_from_dict(self, context, map):
-        if context not in self.map:
-            self.__map[context] = dict()
-        self.__map[context].update(map)
-
-    def add_record(self, context, record):
-        self.__map[context] = DataRecord(context="Ref-{}[{}]".format(self.name, context), **record)
-
-    def record_for(self, context):
-        try:
-            return self.__map[context]
-        except:
-            raise Exception("{} at {} does not contain {} context key.".format(self.__class__.__name__, self.path, context))
-
-    def __str__(self):
-        return str({k: str(v) for k,v in self.__map.items()})
-
-    def enumerate(self):
-        for k,v in self.__map.items():
-            print(k, "::", type(v), str(v))
-
-    @abc.abstractmethod
-    def _populate(self):
-        pass
-
 class YamlContextualDataReference(ContextualDataReference):
 
     def __init__(self, path):
@@ -188,7 +70,7 @@ class YamlContextualDataReference(ContextualDataReference):
 
     def _populate(self):
         for context in self.__node:
-            self.add_record(context, dict(self.__node.get_section(context).items()))
+            self._add_record(context, dict(self.__node.get_section(context).items()))
 
 
 class __ExcelDataReference(ContextualDataReference):
@@ -222,7 +104,7 @@ class ExcelContextualDataReference(__ExcelDataReference):
                     cmap[context][name] = data_record[index+1]
         self.reader.close()
         for context, value in cmap.items():
-            self.add_record(context, value)
+            self._add_record(context, value)
 
 def R(query="", *, bucket=None, context=None, index=None):
     if context is not None and index is not None:

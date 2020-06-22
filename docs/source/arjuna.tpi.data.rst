@@ -9,6 +9,7 @@ Submodules
    arjuna.tpi.data.entity
    arjuna.tpi.data.generator
    arjuna.tpi.data.record
+   arjuna.tpi.data.reference
 
 Module contents
 ---------------

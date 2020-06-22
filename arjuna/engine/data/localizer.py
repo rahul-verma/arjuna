@@ -76,7 +76,7 @@ class ExcelL10NRef(L10NRef):
     def __init__(self, fpath):
         super().__init__()
         excel_ref = DataReference.create_contextual_data_ref(fpath)
-        self.map = excel_ref.map
+        self.map = excel_ref._map
 
 class JsonL10NRef(L10NRef):
 

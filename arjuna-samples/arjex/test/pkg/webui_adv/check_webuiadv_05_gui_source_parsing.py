@@ -22,16 +22,16 @@ def check_parse_gui_source(request, wordpress):
     root = wordpress.source.node
 
     # Find first node by tag
-    print(root.find(NodeLocator(tag="input")))
+    print(root.find(Xml.node_locator(tag="input")))
 
     # Find first node by attr
-    print(root.find(NodeLocator(value="1")))
+    print(root.find(Xml.node_locator(value="1")))
 
     # Find first node by tag and attr
-    print(root.find(NodeLocator(tag="input", size="20")))
+    print(root.find(Xml.node_locator(tag="input", size="20")))
 
     # Find first node by tag and multiple attrs
-    print(root.find(NodeLocator(tag="input", size="20", name="log")))
+    print(root.find(Xml.node_locator(tag="input", size="20", name="log")))
 
     # Find first node with xpath
     user = root.find_with_xpath("//input")
@@ -42,7 +42,7 @@ def check_parse_gui_source(request, wordpress):
     print(submit)
 
     # Inquiring
-    link = root.find(NodeLocator(tag="a"))
+    link = root.find(Xml.node_locator(tag="a"))
     print(link)
     print(link.text)
     print(link.tag)
@@ -51,19 +51,19 @@ def check_parse_gui_source(request, wordpress):
     print(link.has_attr("href"))
     print(link.has_attr("nothing"))
 
-    form = root.find(NodeLocator(tag="form"))
+    form = root.find(Xml.node_locator(tag="form"))
     print(form.text)
     print(form.texts)
     print(form.parent)
     for child in form.children:
         print(child)
 
-    redirect = root.find(NodeLocator(name="redirect_to"))
+    redirect = root.find(Xml.node_locator(name="redirect_to"))
     print(redirect.preceding_sibling)
     print(redirect.following_sibling)
 
     # Find all nodes for a locator
-    inputs = root.findall(NodeLocator(tag="input", size="20"))
+    inputs = root.findall(Xml.node_locator(tag="input", size="20"))
     for i in inputs:
         print(i)
 
@@ -73,8 +73,8 @@ def check_parse_gui_source(request, wordpress):
         print(i)
 
     # Nested Node finding.
-    form = root.find(NodeLocator(tag="form"))
-    print(form.find(NodeLocator(type="hidden")))
+    form = root.find(Xml.node_locator(tag="form"))
+    print(form.find(Xml.node_locator(type="hidden")))
 
 
 

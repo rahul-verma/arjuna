@@ -381,7 +381,7 @@ class Xml:
     '''
 
     @classmethod
-    def from_str(self, xml_str):
+    def from_str(cls, xml_str):
         '''
             Create an `XmlNode` from a string.
         '''
@@ -405,7 +405,7 @@ class Xml:
             return cls.from_str(f.read())
 
     @classmethod
-    def from_lxml_element(self, element, clone=False) -> XmlNode:
+    def from_lxml_element(cls, element, clone=False) -> XmlNode:
         '''
             Create an `XmlNode` from an `lxml` element.
 
@@ -416,3 +416,22 @@ class Xml:
             return XmlNode(element)
         else:
             return XmlNode(element).clone()
+
+    @classmethod
+    def node_locator(cls, *, tag: str=None, **attrs):
+        '''
+            Create a locator for finding an XML Node in an **XmlNode**.
+
+            Keyword Arguments:
+                tag: (Optional) Tag of the node
+                **attrs: Arbitrary number of key value pairs representing attribute name and value.
+
+            Raises:
+                Exception: If neither tag nor an attribute is provided.
+
+            Note:
+                You can use tag and attributes in combination.
+
+                Supports nested node finding.
+        '''
+        return NodeLocator(tag=tag, **attrs)

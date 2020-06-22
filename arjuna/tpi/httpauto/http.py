@@ -24,6 +24,7 @@ from requests.auth import *
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from .session import HttpSession
 from .response import HttpResponse
+from .oauth import OAuthImplicitGrantSession, OAuthClientGrantSession
 
 from collections import namedtuple
 from arjuna.tpi.data.entity import data_entity
@@ -358,3 +359,48 @@ class Http:
     @classmethod
     def field(cls, name, value, is_file=False, content_type="text/plain", headers=None):
         return _HttpField(name=name, value=value, is_file=is_file, content_type=content_type, headers=headers)
+
+    @classmethod
+    def oauth_client_grant_session(cls, *, url, client_id, client_secret, token_url):
+        '''
+            Create OAuthClientGrantSession object.
+
+            Creates token using OAuth's Resource Owner Client Credentials Grant Type.
+            Uses BackendApplicationClient from requests_oauthlib.
+
+            Keyword Arguments:
+                url: Base URL for this HTTP session. If relative path is used as a route in sender methods like `.get`, then this URL is prefixed to their provided routes.
+                client_id: Client ID
+                client_secret: Client Secret
+                token_url: Token URL
+        '''
+        return OAuthClientGrantSession(url=url, client_id=client_id, client_secret=client_secret, token_url=token_url)
+
+
+    @classmethod
+    def oauth_implicit_grant_session(cls, *, url, client_id, scope, redirect_uri=None, auth_url, auth_handler=None, **auth_args):
+        '''
+            Create OAuthImplicitGrantSession object.
+
+            Creates token using OAuth's Implicit Code Grant Type.
+            Uses MobileApplicationClient from requests_oauthlib.
+
+            Keyword Arguments:
+                url: Base URL for this HTTP session. If relative path is used as a route in sender methods like `.get`, then this URL is prefixed to their provided routes.
+                client_id: Client ID
+                scope: Scope
+                redirect_uri: Redirect URI
+                auth_url: Authorization URL
+                auth_handler: A callback function to handle custom authroization logic. It will be called by providing session object, authorization URL and auth_args.
+                **auth_args: Arbitray key-value pairs to be passed as arguments to the auth_handler callback.
+
+            Note:
+                Some sample auth_handler signatures:
+
+                    .. code-block:: python
+
+                        auth_handler_1(oauth_session, auth_url, **kwargs)
+                        auth_handler_2(oauth_session, auth_url, some_arg=None, another_arg="some_def_value")
+
+        '''
+        return OAuthImplicitGrantSession(url=url, client_id=client_id, scope=client_id, redirect_uri=redirect_uri, auth_url=auth_url, auth_handler=auth_handler, **auth_args)

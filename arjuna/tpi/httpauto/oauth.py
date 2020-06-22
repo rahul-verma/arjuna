@@ -48,7 +48,7 @@ class OAuthSession(HttpSession):
         self.__token = token
         self._session.headers.update({'Authorization': 'Bearer ' + self.token})
 
-    def create_new_session(self, url, *, content_type=None):
+    def create_new_session(self, url, *, request_content_handler=None):
         '''
             Create a new HttpSession object. OAuth token of this session is attached to the new session.
 
@@ -56,7 +56,8 @@ class OAuthSession(HttpSession):
                 url: Base URL for the new HTTP session.
                 content-type: Default request content type for the new session.
         '''
-        return HttpSession(url=url, oauth_token=self.token, content_type=content_type)
+        from .http import Http
+        return Http.session(url=url, oauth_token=self.token, request_content_handler=request_content_handler)
 
 
 class OAuthClientGrantSession(OAuthSession):

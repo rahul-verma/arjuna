@@ -82,7 +82,7 @@ from arjuna.tpi.helper.audit import HardCoded
 from arjuna.tpi.helper.arjtype import ProcessedKeyDict
 
 from arjuna.tpi.parser.json import Json, JsonSchema
-from arjuna.tpi.parser.xml import Xml, NodeLocator
+from arjuna.tpi.parser.xml import Xml
 from arjuna.tpi.parser.html import Html
 
 from arjuna.tpi.engine.test import *
@@ -101,7 +101,6 @@ from arjuna.tpi.guiauto.model.section import GuiSection
 from arjuna.tpi.guiauto.model.dialog import GuiDialog
 
 from arjuna.tpi.httpauto.http import Http
-from arjuna.tpi.httpauto.session import HttpSession
 from arjuna.tpi.httpauto.oauth import OAuthImplicitGrantSession
 
 from arjuna.tpi.hook.config import Configurator

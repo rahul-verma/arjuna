@@ -266,13 +266,13 @@ Arjuna's **NodeLocator** object helps you in easily defining locating criteria.
     .. code-block:: python
 
         # XmlNode with tag input
-        locator = NodeLocator(tag='input')
+        locator = Xml.node_locatortag='input')
 
         # XmlNode with attr 'a' with value 1
-        locator = NodeLocator(a=1)
+        locator = Xml.node_locatora=1)
 
         # XmlNode with tag input and attr 'a' with value 1
-        locator = NodeLocator(tag='input, a=1)
+        locator = Xml.node_locatortag='input, a=1)
 
 
 You can search for all XMlNodes using this locator in an `XmlNode`:
