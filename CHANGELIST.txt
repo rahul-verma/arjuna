@@ -48,10 +48,11 @@ To Do
     --> Example code for Http Layer automation.
     --> Production quality Http Layer automation.
 
+1.0.18
+------
+
 1.0.17
 ------
----> Add first() to IndexedDataReference.
-
 Http Automation
     - Http Facade class added. Sessions are created using this class. Also supports quick sender methods with temp session creation.
     - Support for basic and digest authentication.
