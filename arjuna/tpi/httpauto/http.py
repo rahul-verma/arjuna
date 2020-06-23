@@ -290,44 +290,68 @@ class Http:
 
         @classmethod
         def blank(cls, content=""):
+            '''
+            Send empty content. Content-Type is sent as “text/html”
+            '''
             return _HttpContent(content="", type=cls.get_content_type(cls.blank))
 
         @classmethod
         def html(cls, content=""):
+            '''
+            Send HTML content. Content-Type is sent as “text/html”
+            '''
             return _HttpContent(content=content, type=cls.get_content_type(cls.html))
 
         text = html
 
         @classmethod
         def bytes(cls, content=""):
+            '''
+            Send bytes string. Content-Type is sent as “text/html”
+            '''
             if content:
                 content = io.BytesIO(content)
             return _HttpContent(content=content, type=cls.get_content_type(cls.bytes))
 
         @classmethod
         def utf8(cls, content=""):
+            '''
+            Send UTF-8 string. Content-Type is sent as “text/html”
+            '''
             if content:
                 content = content.encode("utf-8")
             return _HttpContent(content=content, type=cls.get_content_type(cls.utf8))
 
         @classmethod
         def urlencoded(cls, content=""):
+            '''
+            Send a dictionary of key-values in URL encoded format. Content-Type is sent as “application/x-www-form-urlencoded”
+            '''
             if content:
                 content = urlencode(content)
             return _HttpContent(content=content, type=cls.get_content_type(cls.urlencoded))
 
         @classmethod
         def json(cls, content=""):
+            '''
+            Send a dictionary of key-values as JSON. Content-Type is sent as “application/json”
+            '''
             if content:
                 content = json.dumps(content, indent=2)
             return _HttpContent(content=content, type=cls.get_content_type(cls.json))
 
         @classmethod
         def xml(cls, content=""):
+            '''
+            Send an XML string as XML. Content-Type is sent as “application/xml
+            '''
             return _HttpContent(content=content, type=cls.get_content_type(cls.xml))
 
         @classmethod
         def file(cls, field_name, file_name, *, content_type='text/plain', headers=None):
+            '''
+            Upload a file and send as multipart data. Content-Type is sent as the content type got from multipart encoding.
+            '''
             from arjuna import C, ArjunaOption
             file_path = os.path.join(C(ArjunaOption.DATA_FILE_DIR), file_name)
             encoder = MultipartEncoder(
@@ -337,6 +361,9 @@ class Http:
 
         @classmethod
         def multipart(cls, *fields):
+            '''
+            Send the provided HTTP fields as multipart data. Content-Type is sent as the content type got from multipart encoding.
+            '''
             from arjuna import C, ArjunaOption
             elist = list()
             for field in fields:
@@ -354,6 +381,9 @@ class Http:
 
         @classmethod
         def custom(self, content, *, type):
+            '''
+            Send content with a custom content type.
+            '''
             return _HttpContent(content=content, type=type)
 
     @classmethod

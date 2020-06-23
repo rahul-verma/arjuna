@@ -50,6 +50,8 @@ To Do
 
 1.0.18
 ------
+Docs
+    - Updated HTTP Auto docs to include Http Facade class.
 
 1.0.17
 ------
