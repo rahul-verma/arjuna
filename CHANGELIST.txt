@@ -52,6 +52,10 @@ To Do
 ------
 Docs
     - Updated HTTP Auto docs to include Http Facade class.
+HTTP Auto
+    - Http.content.json implements custom JSON encoder to handle nested structures containing Yaml or Json custom objects.
+Fixes
+    - Fixed oauth_implicit_grant_session in http.py.
 
 1.0.17
 ------

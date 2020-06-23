@@ -23,6 +23,7 @@ import os
 import yaml
 import abc
 import copy
+from json import JSONEncoder
 
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.core.error import YamlError, YamlUndefinedSectionError, YamlListIndexError
@@ -33,6 +34,7 @@ class YamlElement(metaclass=abc.ABCMeta):
     '''
 
     def __init__(self, pydict_or_list):
+        super().__init__()
         self.__pyobj = pydict_or_list
 
     def is_empty(self):
@@ -56,7 +58,7 @@ class YamlElement(metaclass=abc.ABCMeta):
     def _get_value(self, name_or_index, *, strict=True):
         pass
 
-class YamlList(YamlElement):
+class YamlList(YamlElement, JSONEncoder):
     '''
         Encapsulates a list object in YAML.
 
@@ -71,11 +73,15 @@ class YamlList(YamlElement):
 
     def __init__(self, pylist):
         self.__ylist = pylist is not None and pylist or list()
-        super().__init__(self.__ylist)
+        YamlElement.__init__(self, self.__ylist)
+        JSONEncoder.__init__(self)
         self.__iter = None   
 
     def __len__(self):
         return len(self.__ylist)
+
+    def default(self, o):
+        return self.raw_object
 
     @property
     def size(self):

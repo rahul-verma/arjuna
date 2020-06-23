@@ -20,7 +20,7 @@ import abc
 from urllib.parse import urlparse, urlencode, parse_qs, quote
 from requests import Request
 from arjuna.tpi.error import HttpRequestCreationError
-from arjuna.tpi.parser.json import Json
+from arjuna.tpi.parser.json import Json, JsonDict, JsonList
 from arjuna.tpi.parser.html import Html
 from arjuna.tpi.engine.asserter import AsserterMixIn
 import time
@@ -163,7 +163,7 @@ class _HttpRequest(HttpRequest):
         self.__url = url
         self.__content = None
         if content is not None:
-            if type(content) in {str, dict}:
+            if type(content) in {str, dict} or isinstance(content, JsonDict) or isinstance(content, JsonList):
                 self.__content = self.__session.request_content_handler(content)
             else:
                 self.__content = content
