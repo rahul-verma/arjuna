@@ -3,9 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root **toctree** directive.
 
-*****************
-Welcome to Arjuna
-*****************
+****************************************************************
+Welcome to Arjuna - The Framework for Professional Coded Testing
+****************************************************************
 
 .. image:: _static/Arjuna.png
     :align: center
@@ -210,6 +210,10 @@ Data Generation and Data Entities
 * :py:class:`composer <arjuna.tpi.data.generator.composer>`
 * :py:class:`data_entity <arjuna.tpi.data.entity.data_entity>`
 
+Data References
+===============
+* :py:class:`IndexedDataReference <arjuna.tpi.data.reference.IndexedDataReference>`
+* :py:class:`ContextualDataReference <arjuna.tpi.data.reference.ContextualDataReference>`
 
 Web GUI Automation
 ==================
