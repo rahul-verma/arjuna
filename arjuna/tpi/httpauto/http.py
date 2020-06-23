@@ -433,4 +433,4 @@ class Http:
                         auth_handler_2(oauth_session, auth_url, some_arg=None, another_arg="some_def_value")
 
         '''
-        return OAuthImplicitGrantSession(url=url, client_id=client_id, scope=client_id, redirect_uri=redirect_uri, auth_url=auth_url, auth_handler=auth_handler, **auth_args)
+        return OAuthImplicitGrantSession(url=url, client_id=client_id, scope=scope, redirect_uri=redirect_uri, auth_url=auth_url, auth_handler=auth_handler, **auth_args)
