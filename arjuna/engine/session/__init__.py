@@ -48,9 +48,9 @@ class BaseTestSession:
     def run(self):
         from arjuna import log_info
         for stage in self.__stages:
-            log_info("Executing stage: {} ...".format(stage.name))
+            print("Executing stage: {} ...".format(stage.name))
             stage.run()
-            log_info("Finished Executing stage: {} ...".format(stage.name))
+            print("Finished Executing stage: {} ...".format(stage.name))
             import time
             time.sleep(2)
 

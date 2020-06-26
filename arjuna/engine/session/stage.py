@@ -68,14 +68,14 @@ class TestStage:
                 i + 1,
                 self.__groups
             ))
-
+        
         for w in self.__workers:
             w.start()
 
         for w in self.__workers:
             w.join()
 
-        log_info("All group runners in stage finished.")
+        print("All group runners in stage finished.")
 
 
 class YamlTestStage(TestStage):

@@ -38,26 +38,26 @@ class TestGroupRunner(threading.Thread):
     def run(self):
         # signal(SIGINT, self.handle_interrupt)
         from arjuna import log_info
-        log_info("Group runner started")
+        print("Group runner started")
         while True:
             try:
                 child = self.__commands.next()
             except TestGroupsFinished as e:
-                log_info("Groups finished")
+                print("Groups finished")
                 return
             except Exception as e:
-                log_info("An exception occured in thread pooling. Would continue executing.")
-                log_info(e)
+                print("An exception occured in thread pooling. Would continue executing.")
+                print(e)
                 import traceback
                 traceback.print_exc()
                 return
             
             try:
-                log_info("Running child")
+                print("Running Group Thread")
                 child.thread_name = self.name
                 child.run()
             except Exception as e:
                 import traceback
-                log_info(str(e) + traceback.format_exc())
+                print(str(e) + traceback.format_exc())
                 continue
-        log_info("Group runner started")
+        print("Group runner started")
