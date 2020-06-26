@@ -24,7 +24,7 @@ import time
 import datetime
 import threading
 import platform
-import multiprocessing
+# import multiprocessing
 # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="UTF-8")
 # sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
 
@@ -240,10 +240,15 @@ class ArjunaSingleton:
     def ref_config(self):
         return self.__thread_wise_ref_conf_map[threading.currentThread().name]
 
+
+    def __get_thread_name(self):
+        #multiprocessing.current_process().name
+        return threading.current_thread().name
+
     def get_config(self, name):
         if name == "ref":
-            current_proc_name = multiprocessing.current_process().name
-            if current_proc_name == "MainProcess":
+            current_proc_name = self.__get_thread_name()
+            if current_proc_name == "MainThread":
                 return self.ref_config
             else:
                 return self.get_group_params()["config"]
@@ -259,18 +264,18 @@ class ArjunaSingleton:
         return name.lower() in self.__config_map
 
     def get_group_params(self):
-        return self.__thread_wise_group_params_map[multiprocessing.current_process().name]
+        return self.__thread_wise_group_params_map[self.__get_thread_name()]
 
     def register_group_params(self, **params):
-        self.__thread_wise_group_params_map[multiprocessing.current_process().name] = params
-        self.__thread_wise_ref_conf_map[multiprocessing.current_process().name] = params['config']
+        self.__thread_wise_group_params_map[self.__get_thread_name()] = params
+        self.__thread_wise_ref_conf_map[self.__get_thread_name()] = params['config']
 
     def register_test_selector_for_group(self, selector):
-        self.__thread_wise_test_selector_map[multiprocessing.current_process().name] = selector
+        self.__thread_wise_test_selector_map[self.__get_thread_name()] = selector
 
     def get_test_selector(self):
         try:
-            return self.__thread_wise_test_selector_map[multiprocessing.current_process().name]
+            return self.__thread_wise_test_selector_map[self.__get_thread_name()]
         except KeyError:
             raise TestSelectorNotFoundError()
 

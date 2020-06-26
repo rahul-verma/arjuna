@@ -16,12 +16,12 @@
 # limitations under the License.
 
 import threading
-import multiprocessing
+# import multiprocessing
 
 from arjuna.core.error import TestGroupsFinished
 from signal import signal, SIGINT
 
-class TestGroupRunner(multiprocessing.Process):
+class TestGroupRunner(threading.Thread):
 
     def __init__(self, nprefix, wnum, commands):
         super().__init__(name="{}t{}".format(nprefix, wnum))
@@ -32,11 +32,11 @@ class TestGroupRunner(multiprocessing.Process):
     def commands(self):
         return self.__commands
 
-    def handle_interrupt(self, signum, frame):
-        self.terminate()
+    # def handle_interrupt(self, signum, frame):
+    #     self.terminate()
 
     def run(self):
-        signal(SIGINT, self.handle_interrupt)
+        # signal(SIGINT, self.handle_interrupt)
         from arjuna import log_info
         log_info("Group runner started")
         while True:
