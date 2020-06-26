@@ -115,6 +115,15 @@ Localization
 
    l10n
 
+Test Reporting
+==============
+
+.. toctree::
+   :maxdepth: 6
+
+   reporting
+
+
 Web GUI Automation
 ==================
 
@@ -256,7 +265,7 @@ Reporting Protocols
 ===================
 
 * :py:class:`ScreenShooter <arjuna.tpi.protocol.screen_shooter.ScreenShooter>`
-* :py:class:`NetworkRecorder <arjuna.tpi.httpauto.network_recorder.NetworkRecorder>`
+* :py:class:`NetworkRecorder <arjuna.tpi.protocol.network_recorder.NetworkRecorder>`
 
 Objects In Arjuna Hooks
 =======================

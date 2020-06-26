@@ -336,7 +336,6 @@ class Http:
             '''
             Send a dictionary of key-values as JSON. Content-Type is sent as “application/json”
             '''
-            print("HHHHH")
             from json import JSONEncoder
             from arjuna.tpi.parser.yaml import YamlDict, YamlList
             from arjuna.tpi.parser.json import JsonDict, JsonList

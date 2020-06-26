@@ -162,9 +162,9 @@ def R(query="", *, bucket=None, context=None, index=None):
     try:
         if context_or_index is not None:
             if query is None:
-                return Arjuna.get_data_ref(bucket).record_for(context_or_index)
+                return Arjuna.get_data_ref(bucket)._record_for(context_or_index)
             else:
-                return Arjuna.get_data_ref(bucket).record_for(context_or_index)[query]
+                return Arjuna.get_data_ref(bucket)._record_for(context_or_index)[query]
         else:
             return Arjuna.get_data_ref(bucket)
     except Exception as e:

@@ -258,21 +258,21 @@ You can find XmlNodes in a given XmlNode object using XPath:
     * **find_with_xpath**: Find first match using XPath
     * **findall_with_xpath** Find all matches using XPath
 
-Finding XmlNodes in an **XmlNode** Object using **NodeLocator**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Finding XmlNodes in an **XmlNode** Object using **XML.node_locator**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Arjuna's **NodeLocator** object helps you in easily defining locating criteria.
 
     .. code-block:: python
 
         # XmlNode with tag input
-        locator = Xml.node_locatortag='input')
+        locator = Xml.node_locator(tag='input')
 
         # XmlNode with attr 'a' with value 1
-        locator = Xml.node_locatora=1)
+        locator = Xml.node_locator(a=1)
 
         # XmlNode with tag input and attr 'a' with value 1
-        locator = Xml.node_locatortag='input, a=1)
+        locator = Xml.node_locator(tag='input, a=1)
 
 
 You can search for all XMlNodes using this locator in an `XmlNode`:

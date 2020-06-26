@@ -251,6 +251,10 @@ Arjuna supports the following OAuth grant types with its custom HTTP session obj
 OAuth Client Grant Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+    .. code-block:: python
+
+        Http.oauth_client_grant_session
+
 It wraps the `BackendApplicationClient` object from `requests_oauthlib` package.
 
 Once created, the session supports all methods in :py:class:`HttpSession <arjuna.tpi.httpauto.session.HttpSession>` object discussed above.
@@ -259,6 +263,10 @@ Explore :py:class:`OAuthClientGrantSession <arjuna.tpi.httpauto.oauth.OAuthClien
 
 OAuth Implicit Grant Session
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+    .. code-block:: python
+
+        Http.oauth_implicit_grant_session
 
 It wraps the `MobileApplicationClient` object from `requests_oauthlib` package.
 

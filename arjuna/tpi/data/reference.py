@@ -27,6 +27,15 @@ def _get_file_name(path):
     return os.path.splitext(name)[0]
 
 class IndexedDataReference(metaclass=abc.ABCMeta):
+    '''
+        Base class for autoloaded Indexed Data References in Arjuna.
+
+        Arguments:
+            pydict: A python repr of a list with indices as keys.
+
+        Note:
+            It behaves like a Python tuple. So, you get items by index and loop over it.
+    '''
 
     def __init__(self, pydict):
         self.__records = pydict
@@ -36,19 +45,28 @@ class IndexedDataReference(metaclass=abc.ABCMeta):
         return len(self.__records)
 
     def __getitem__(self, index):
-        return self.record_for(index)
+        return self._record_for(index)
 
     def first(self):
+        '''
+        First item in this data reference.
+        '''
         return self[0]
 
     def random(self):
+        '''
+        Random item in this data reference.
+        '''
         index = random.randint(0, len(self) -1)
         return self[index]
 
     def last(self):
+        '''
+        Last item in this data reference.
+        '''
         return self[-1]
 
-    def record_for(self, index):
+    def _record_for(self, index):
         try:
             # To support negative indices
             indices = list(self.__records.keys())
@@ -65,6 +83,9 @@ class IndexedDataReference(metaclass=abc.ABCMeta):
         return str({k: str(v) for k,v in self.__records.items()})
 
     def enumerate(self):
+        '''
+        Print all items in this data reference.
+        '''
         for k,v in self.__records.items():
             print(k, "::", type(v), str(v))
 
@@ -77,6 +98,15 @@ class IndexedDataReference(metaclass=abc.ABCMeta):
 
 
 class ContextualDataReference(metaclass=abc.ABCMeta):
+    '''
+        Base class for autoloaded Contextual data references in Arjuna.
+
+        Arguments:
+            path: Path of the contextual data reference file.
+
+        Note:
+            It behaves like a Python dictionary. So, you get items by names/keys and loop over it.
+    '''
 
     def __init__(self, path):
         self.__path = path
@@ -96,12 +126,18 @@ class ContextualDataReference(metaclass=abc.ABCMeta):
         return len(self.__map)
 
     def __getitem__(self, context):
-        return self.record_for(context)
+        return self._record_for(context)
 
     def keys(self):
+        '''
+        Names of contexts/keys in this reference.
+        '''
         return self.__map.keys()
 
     def items(self):
+        '''
+        Items iterator for this reference.
+        '''
         return self.__map.items()
 
     @property
@@ -110,10 +146,16 @@ class ContextualDataReference(metaclass=abc.ABCMeta):
 
     @property
     def path(self):
+        '''
+        Path of this reference file.
+        '''
         return self.__path
 
     @property
     def name(self):
+        '''
+        Name of this reference.
+        '''
         return self.__name
 
     def _update(self, data_reference):
@@ -130,7 +172,7 @@ class ContextualDataReference(metaclass=abc.ABCMeta):
     def _add_record(self, context, record):
         self.__map[context] = DataRecord(context="Ref-{}[{}]".format(self.name, context), **record)
 
-    def record_for(self, context):
+    def _record_for(self, context):
         try:
             return self.__map[context]
         except:
@@ -140,6 +182,9 @@ class ContextualDataReference(metaclass=abc.ABCMeta):
         return str({k: str(v) for k,v in self.__map.items()})
 
     def enumerate(self):
+        '''
+        Print all items in this data reference.
+        '''
         for k,v in self.__map.items():
             print(k, "::", type(v), str(v))
 

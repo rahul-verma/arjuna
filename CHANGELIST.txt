@@ -50,6 +50,9 @@ To Do
 
 1.0.19
 ------
+Docs
+    - Data reference TPI docs.
+    - Added Test Reporting section.
 
 1.0.18
 ------
