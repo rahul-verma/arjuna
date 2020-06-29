@@ -86,12 +86,16 @@ class DataReference:
         contextual_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_CONTEXTUAL_DIR)
         if os.path.isdir(contextual_data_ref_dir):
             for fname in os.listdir(contextual_data_ref_dir):
+                if not (fname.lower().endswith("xls") or fname.lower().endswith("yaml")) :
+                    continue
                 crefs[os.path.splitext(fname)[0]] = cls.create_contextual_data_ref(fname)
 
         irefs = DataReferences()
         indexed_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_INDEXED_DIR)
         if os.path.isdir(indexed_data_ref_dir):
             for fname in os.listdir(indexed_data_ref_dir):
+                if not (fname.lower().endswith("xls") or fname.lower().endswith("yaml")) :
+                    continue
                 irefs[os.path.splitext(fname)[0]] = cls.create_indexed_data_ref(fname)
         return crefs, irefs
 
