@@ -52,7 +52,7 @@ The name of the report file is generated as:
         report-<session name>-<stage-name>-<group-name>.{html/xml}
 
 Choosing **Report Format(s)**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+-----------------------------
 
 By default both report formats (XML and HTML) are generated.
 
