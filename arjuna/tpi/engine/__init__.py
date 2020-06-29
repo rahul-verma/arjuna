@@ -158,13 +158,13 @@ class ArjunaSingleton:
         if os.path.isdir(hooks_dir):
             sys.path.append(hooks_dir)
         try:
-            from arjuna_config import register_configs
+            from arjuna_config import register_ref_confs
         except ModuleNotFoundError as e: # Module not defined.
             pass
         except ImportError as f: # Hook not defined
             pass
         else:
-            register_configs(configurator)
+            register_ref_confs(configurator)
 
         # Load data references
         from arjuna.engine.data.factory import DataReference

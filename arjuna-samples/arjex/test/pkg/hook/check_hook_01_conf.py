@@ -21,7 +21,7 @@ from arjuna import *
 def check_hook_conf(request):
     '''
         For this test:
-            - arjuna_config.py hook module's register_configs hook creates a hook_conf configuration.
+            - arjuna_config.py hook module's register_ref_confs hook creates a hook_conf configuration.
             - Use -c hook_conf switch to run.
     '''
 
@@ -34,7 +34,7 @@ def check_hook_conf(request):
 def check_hook_conf_as_ref(request):
     '''
         For this test:
-            - arjuna_config.py hook module's register_configs hook creates a hook_conf configuration.
+            - arjuna_config.py hook module's register_ref_confs hook creates a hook_conf configuration.
             - Use -c hook_conf switch to run.
     '''
 

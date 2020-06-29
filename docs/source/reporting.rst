@@ -72,3 +72,84 @@ A suggested pattern to enable this feature is to do the following in a test reso
 
         request.space.screen_shooter = <app object or other screenshooter>
 
+Auto-inclusion of screenshots with **take_screenshot** call
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When you take a screenshot with Arjuna's **GuiApp** or **GuiPage** using **take_screenshot** call, the screenshot is auto-included in the report.
+
+Screenshots for Passed Tests
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To keep the report size in control, by default screenshots are not included for passed tests.
+
+You can ovverride this behavior by setting **ArjunaOption.REPORT_SCREENSHOTS_ALWAYS** to True.
+
+Network Recorder Protocol
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The HTML report can include network packets in the extras section.
+
+A suggested pattern to enable this feature is to do the following in a test resource function:
+
+    .. code-block:: python
+
+        request.space.network_recorder = app_object.network_recorder
+
+Auto-inclusion Network Packets for HTTP Automation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When you do HTTP Automation using Arjuna's HTTP lib, the network packets are auto-included in the report.
+
+The redirections are also captured and reported.
+
+Capturing Network Packets for Web Gui Automation
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+With Arjuna, you can capture network packets during Web Gui Automation as well.
+
+Arjuna makes use of BrowserMobProxy for this.
+
+Download and unarchive the BrowserMobProxy in **<Your Test Project Root>/tools/bmproxy** directory. Make sure it is setup properly with appropriate Java version.
+
+By default, to keep report size in control, network recording is swtiched off. You can switch it on by setting **ArjunaOption.BROWSER_NETWORK_RECORDER_ENABLED** to True.
+
+Reporting Network Packets for Passed Tests
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To keep the report size in control, by default network packets are not included for passed tests.
+
+You can ovverride this behavior by setting **ArjunaOption.REPORT_NETWORK_ALWAYS** to True.
+
+Filtering of Network Packets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Bt default, Arjuna reports only packets which have HTML/JSON/XML as response content type.
+
+To capture and report all packets, set **ArjunaOption.REPORT_NETWORK_FILTER** to False.
+
+Auto-Inclusion of **GuiApp/GuiPage** packets
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+The network recording protocol is integrated with **GuiApp/GuiPage** objects in Arjuna.
+
+To enable this integration, set **ArjunaOption.BROWSER_NETWORK_RECORDER_AUTOMATIC** to True.
+
+Now, each time you launch a GuiApp, the recording will automatically be triggered with a bucket created with the title "Home".
+
+Each time you create a page, a bucket with the page label will be created.
+
+Setting Title for Network Packet bucket
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+In a typical end user flow, there will be many packets sent by the browser.
+
+You can organize these into buckets with titles for better organized reporting to aid in troubleshooting.
+
+Doing this is straight-forward:
+
+    .. code-block:: python
+
+        <app or page>.network_recorder.record("New bucket title")
+
+This single instruction will register all packets in the previous buckets and create a new recording bucket with the tile provided.
+

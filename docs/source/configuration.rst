@@ -15,12 +15,12 @@ You can start simple. Even without defining a single configuration file of your 
 - Options in Arjuna can be defined with various configuration files, command line and/or programmatically.
 - Arjuna supports tweaking its built in options which are represented by **ArjunaOption** enum. 
 - Arjuna also supports user defined options. So, you can create your own project related options and use the same eco-system which Arjuna uses for its built-in options.
-- A **Configuration** object represents fixed values for configured settings (Arjuna options as well user defined options).
-- A **Configuration** is immutable which means that once created it can not be modified. This saves you from a lot of debugging overhead as configuration objects are large global objects. Arjuna makes them read-only.
+- A :py:class:`Configuration<arjuna.tpi.config.Configuration>` object represents fixed values for configured settings (Arjuna options as well user defined options).
+- A :py:class:`Configuration<arjuna.tpi.config.Configuration>` is immutable which means that once created it can not be modified. This saves you from a lot of debugging overhead as configuration objects are large global objects. Arjuna makes them read-only.
 
 Default **Reference Configuration**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-- As a part of initialation, Arjuna creates the reference **Configuration** object which combines the following to create the reference :
+- As a part of initialation, Arjuna creates the reference :py:class:`Configuration<arjuna.tpi.config.Configuration>` object which combines the following to create the reference :
     - Default settings for Arjuna options
     - Project level settings included in **<Project root directory>/config/project.yaml** file.
     - Options in data configuration with name **data** in **<Project root directory>/config/data.yaml** file, if present.
@@ -29,7 +29,7 @@ Default **Reference Configuration**
 - You can get the reference configuration by calling **Arjuna.get_config()** and any other configuration with **Arjuna.get_config(<name>)** call.
 - Within test or test fixture code, you can also get the reference configuration object (if not re-assigned by test author to a non-reference configuration) using **request.config** or use **request.get_config** to retrieve any configuration.
 
-Each **Configuration** object ever created in a run in any manner takes reference configuration as its basis at its root. So, in case of you have a chain of configurations as C1 -> C2 -> C3 where C1 was used to create C2 which was then used to create C3, either C1 is the reference configuration itself or it has reference configuration used by its parent/grandparent.
+Each :py:class:`Configuration<arjuna.tpi.config.Configuration>` object ever created in a run in any manner takes reference configuration as its basis at its root. So, in case of you have a chain of configurations as C1 -> C2 -> C3 where C1 was used to create C2 which was then used to create C3, either C1 is the reference configuration itself or it has reference configuration used by its parent/grandparent.
 
 
 Using a non-default Configuration as Reference Configuration
@@ -40,7 +40,7 @@ You can instruct Arjuna to use any of the following Configuration objects to be 
     * Any Data Configuration
     * Any Environment Configuration
     * Any combination of Data and Enviroment configurations
-    * Any configuration defined in **register_configs** hook in **<Project Root Directory/hook/arjuna_config.py** module.
+    * Any configuration defined in **register_ref_confs** hook in **<Project Root Directory/hook/arjuna_config.py** module.
 
 There are various places to pass on this instruction:
     * Test Run:
@@ -84,7 +84,7 @@ For being more intuitive and less mistake prone, Arjuna supports keys in this se
 
 In Arjuna, you can create your own configurations as well. You can do this by using reference Configuration or any other configuration created by you as the source object.
 
-Given a **Configuration** object (say **config**), you can get a **ConfigBuilder** object with **config.builder** property. You can add options to the builder and then call its **register** method to create a new configuration. This newly created configuration is returned by the **register** call.
+Given a :py:class:`Configuration<arjuna.tpi.config.Configuration>` object (say **config**), you can get a **ConfigBuilder** object with **config.builder** property. You can add options to the builder and then call its **register** method to create a new configuration. This newly created configuration is returned by the **register** call.
 
 Sometimes it is useful to provide your own name to the custom configuration that you are creating. Arjuna helps you in creating the configuration in one place and retrieving it in another place. You need not pass the configuration object around for simple needs of this nature. To achieve this pass the name while registering: **register(<name>)**. It can also now be retrived anywhere in your project with the **Arjuna.get_config(<name>)** call. Within a test, it can also be retrieve by using **request.get_config(<name>)** call.
 
@@ -228,3 +228,124 @@ This feature has the following side-effects:
     * A configuration with name **data_env** is same as the reference configuration.
     * A configuration with name **data1_env** is same as **data1**
     * A configuration with name **data_env1** is same as **env1**
+
+Arjuna Options Reference for Overriding
+---------------------------------------
+
+Arjuna has a well defined control over which options can be overriden in which type of configuration.
+
+Refer :py:class:`ArjunaOption Enum <arjuna.tpi.constant.ArjunaOption>` for purpose of each option.
+
+Options Overridable in a Coded Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+When you create a configuration using :py:class:`ConfigBuilder<arjuna.tpi.config.ConfigBuilder>` in your code, the following options can be overriden:
+
+	* REPORT_NETWORK_FILTER
+	* APP_URL
+	* BROWSER_NAME
+	* BROWSER_HEADLESS
+	* BROWSER_VERSION
+	* BROWSER_MAXIMIZE
+	* BROWSER_DIM_HEIGHT
+	* BROWSER_DIM_WIDTH
+	* BROWSER_BIN_PATH
+	* BROWSER_NETWORK_RECORDER_AUTOMATIC
+	* SCROLL_PIXELS
+	* GUIAUTO_MAX_WAIT
+	* GUIAUTO_SLOMO_ON
+	* GUIAUTO_SLOMO_INTERVAL
+	* MOBILE_OS_NAME
+	* MOBILE_OS_VERSION
+	* MOBILE_DEVICE_NAME
+	* MOBILE_DEVICE_UDID
+	* MOBILE_APP_FILE_PATH
+	* SELENIUM_DRIVER_DOWNLOAD
+	* SELENIUM_SERVICE_URL
+	* APPIUM_SERVICE_URL
+	* APPIUM_AUTO_LAUNCH
+	* IMG_COMP_MIN_SCORE
+
+Options Overridable in a Reference Configuration
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+A reference configuration is defined in any of the following manner and combinations:
+
+    * project.yaml
+    * Entry in data.yaml
+    * Entry in envs.yaml
+    * Configuration created via Arjuna's **register_ref_confs** hook in arjuna_config.py
+
+A reference configuration can override what can be overriden in a coded configuration. In addition, you can also override the following:
+
+	* LOG_ALLOWED_CONTEXTS
+	* REPORT_SCREENSHOTS_ALWAYS
+	* REPORT_NETWORK_ALWAYS
+	* L10N_LOCALE
+	* L10N_STRICT
+	* BROWSER_NETWORK_RECORDER_ENABLED
+
+Options Overridable via Command Line
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Via command line's **-ao** / **--arjuna-option** switches, you can override Arjuna options across every configuration created by Arjuna.
+
+You can override options that you can override in a Reference configuration (and hence a coded configuration too). In addition, you can override the following:
+
+	* RUN_SESSION_NAME
+	* LOG_FILE_LEVEL
+	* LOG_CONSOLE_LEVEL
+	* REPORT_FORMATS
+
+Read-Only Options
+^^^^^^^^^^^^^^^^^
+
+In addition to the overridable options, Arjuna also has various options that are inquirable, but not oveeridable, because of the following reasons:
+
+    * These are auto-determined by Arjuna based on the machine on which the tests are running.
+    * To impose a strict directory structure for an Arjuna test project for consistency across projects.
+    * The values are determined based on other Arjuna options provided by the test author.
+
+Following is the list:
+
+	* ARJUNA_ROOT_DIR
+	* ARJUNA_EXTERNAL_IMPORTS_DIR
+	* LOG_NAME
+	* RUN_HOST_OS
+	* L10N_DIR
+	* PROJECT_NAME
+	* PROJECT_ROOT_DIR
+	* CONF_PROJECT_FILE
+	* TESTS_DIR
+	* HOOKS_DIR
+	* REPORTS_DIR
+	* REPORT_DIR
+	* REPORT_XML_DIR
+	* REPORT_HTML_DIR
+	* LOG_DIR
+	* SCREENSHOTS_DIR
+	* TOOLS_DIR
+	* TOOLS_BMPROXY_DIR
+	* TEMP_DIR
+	* CONF_DIR
+	* CONF_DATA_FILE
+	* CONF_ENVS_FILE
+	* CONF_SESSIONS_FILE
+	* CONF_STAGES_FILE
+	* CONF_GROUPS_FILE
+	* CONF_WITHX_FILE
+	* DATA_DIR
+	* DATA_SRC_DIR
+	* DATA_REF_DIR
+	* DATA_REF_CONTEXTUAL_DIR
+	* DATA_REF_INDEXED_DIR
+	* DATA_FILE_DIR
+	* GUIAUTO_NAME
+	* GUIAUTO_DIR
+	* GUIAUTO_NAMESPACE_DIR
+	* GUIAUTO_DEF_MULTICONTEXT
+	* GUIAUTO_CONTEXT
+	* SELENIUM_DRIVER_PROP
+	* SELENIUM_DRIVERS_DIR
+	* SELENIUM_DRIVER_PATH
+	* RUN_ID
