@@ -229,15 +229,15 @@ This feature has the following side-effects:
     * A configuration with name **data1_env** is same as **data1**
     * A configuration with name **data_env1** is same as **env1**
 
-Arjuna Options Reference for Overriding
----------------------------------------
+**Arjuna Options Reference for Overriding**
+-------------------------------------------
 
 Arjuna has a well defined control over which options can be overriden in which type of configuration.
 
 Refer :py:class:`ArjunaOption Enum <arjuna.tpi.constant.ArjunaOption>` for purpose of each option.
 
-Options Overridable in a Coded Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Options Overridable in a **Coded Configuration**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 When you create a configuration using :py:class:`ConfigBuilder<arjuna.tpi.config.ConfigBuilder>` in your code, the following options can be overriden:
 
@@ -266,8 +266,8 @@ When you create a configuration using :py:class:`ConfigBuilder<arjuna.tpi.config
 	* APPIUM_AUTO_LAUNCH
 	* IMG_COMP_MIN_SCORE
 
-Options Overridable in a Reference Configuration
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Options Overridable in a **Reference Configuration**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A reference configuration is defined in any of the following manner and combinations:
 
@@ -285,8 +285,8 @@ A reference configuration can override what can be overriden in a coded configur
 	* L10N_STRICT
 	* BROWSER_NETWORK_RECORDER_ENABLED
 
-Options Overridable via Command Line
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Options Overridable via **Command Line**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Via command line's **-ao** / **--arjuna-option** switches, you can override Arjuna options across every configuration created by Arjuna.
 
@@ -297,8 +297,8 @@ You can override options that you can override in a Reference configuration (and
 	* LOG_CONSOLE_LEVEL
 	* REPORT_FORMATS
 
-Read-Only Options
-^^^^^^^^^^^^^^^^^
+**Read-Only Options**
+^^^^^^^^^^^^^^^^^^^^^
 
 In addition to the overridable options, Arjuna also has various options that are inquirable, but not oveeridable, because of the following reasons:
 

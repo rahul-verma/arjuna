@@ -115,6 +115,15 @@ Localization
 
    l10n
 
+Logging
+=======
+
+.. toctree::
+   :maxdepth: 6
+
+   logging
+
+
 Test Reporting
 ==============
 
