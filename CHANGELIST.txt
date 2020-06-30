@@ -41,6 +41,9 @@ Future Themes (In-Progress or Planned):
         - ArjunaOption.REPORT_SORT_BY_NAME based on pytest-html option if available Or else auto execte an injected JavaScript to do this.
         - See if a sortable reporting time column and group column can be introduced as well.
 
+1.1.1
+-----
+
 1.1.0
 -----
 Docs
