@@ -1,8 +1,8 @@
 .. _text_parsing:
 
 
-Parsing JSON, YAML, XML, HTML Files and Strings
-===============================================
+Introduction
+------------
 
 JSON, YAML, XML and HTML parsing is a very common need in test automation.
 

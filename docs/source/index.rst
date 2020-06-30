@@ -399,3 +399,37 @@ Licensed under the Apache License, Version 2.0 (the “License”); you may not 
 
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an “AS IS” BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
+*********************
+Third Party Libraries
+*********************
+
+Arjuna makes use of the following third party libraries:
+
+    * lxml
+    * requests
+    * requests-toolbelt
+    * selenium
+    * webdriver_manager
+    * xlrd
+    * xlwt
+    * pyparsing
+    * pyhocon
+    * pytest
+    * pytest-html
+    * pytest-dependency
+    * PyYAML
+    * mimesis
+    * jsonpath-rw
+    * jsonpath-rw-ext
+    * genson
+    * jsonschema
+    * Pallets-Sphinx-Themes
+    * oauthlib
+    * requests_oauthlib
+    * bs4
+    * browsermob-proxy
+    * haralyzer
+
+
+
+

@@ -1,7 +1,7 @@
 .. _data_ref:
 
-Data References
-===============
+Purpose
+-------
 
 Data References represent global data containers which can be accessed from anywhere in your test project.
 
@@ -9,8 +9,8 @@ Arjuna supports two types of data references - Contextual and Indexed - as discu
 
 These reference files are automatically loaded when **Arjuna.init()** is called by Arjuna launcher.
 
-Contextual Data References
---------------------------
+**Contextual Data References**
+------------------------------
 
 There are various situations in which you need contextual data. Such a need is catered by the concept of Contextual Data References in Arjuna.
 
@@ -21,8 +21,8 @@ Consider the following example:
 
 You place such files in **<Project Root>/data/reference/contextual** directory.
 
-Excel based Contextual Data References
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Excel** based Contextual Data References
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A reference file can be found **arjex** project.
 
@@ -30,8 +30,8 @@ A reference file can be found **arjex** project.
 
 The context of data is represented by columns. Here Account Type's values -  **Bronze**, **Silver** and **Gold** represent the contexts, for which the **User** and **Pwd** values are different.
 
-YAML based Contextual Data References
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**YAML** based Contextual Data References
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 For more complex data needs, YAML could be a better format than Excel, with the benefit that you can track changes in a source control system.
 
@@ -92,8 +92,8 @@ It has the following signature. The first argument is the query. **bucket** and 
             R("pwd", bucket="eusers", context="bronze")
 
 
-Indexed Data References
------------------------
+**Indexed Data References**
+---------------------------
 
 There are situations where the data reference is a list/sequence of objects which you want to access by their position rather than against a name/key.
 
@@ -106,8 +106,8 @@ Consider the following example:
 
 You place such files in **<Project Root>/data/reference/indexed** directory.
 
-Excel based Indexed Data References
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Excel** based Indexed Data References
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A reference file can be found **arjex** project.
 
@@ -115,8 +115,8 @@ A reference file can be found **arjex** project.
 
 Each row is mapped to the heading strings in the first row. Indexing starts at 0 and from the first data row.
 
-YAML based Contextual Data References
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**YAML** based Contextual Data References
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A reference file can be found **arjex** project.
 
@@ -172,8 +172,8 @@ It has the following signature. The first argument is the query. **bucket** and 
             R("pwd", bucket="eusers", index=1)
 
 
-Retrieving Complete Referred Object
------------------------------------
+**Retrieving Complete Referred Object**
+---------------------------------------
 
 In the above sections we saw retrieving a name/key in the referred object by context or index.
 
@@ -232,8 +232,8 @@ You can retrieve object from indexed data reference with a combination of **buck
             R(bucket="eusers", index=1)
 
 
-Retrieving Complete Contextual/Indexed Data Reference
------------------------------------------------------
+**Retrieving Complete Contextual/Indexed Data Reference**
+---------------------------------------------------------
 
 In the above sections we saw retrieving a name/key in the referred object by context or index.
 
@@ -263,8 +263,8 @@ As for this use case the query is not of much use, an easier way is to do the fo
 
         Arjuna.get_data_ref(bucket_name)
 
-Contextual Data References Behave Like Python Dicts
----------------------------------------------------
+**Contextual** Data References Behave Like **Python Dicts**
+-----------------------------------------------------------
 
 If you retrieve the a contextual data reference, you can treat it like a Python dict:
 
@@ -280,8 +280,8 @@ If you retrieve the a contextual data reference, you can treat it like a Python 
         for context, record in data_ref.items():
             # do something
 
-Indexed Data References Behave Like Python Tuples (Sequences)
--------------------------------------------------------------
+**Indexed** Data References Behave Like **Python Tuples (Sequences)**
+---------------------------------------------------------------------
 
 If you retrieve the an indexed data reference, you can treat it like a Python tuple (sequence):
 
@@ -291,7 +291,4 @@ If you retrieve the an indexed data reference, you can treat it like a Python tu
 
         for record in data_ref:
             # do something
-
-
-
 

@@ -5,7 +5,6 @@ Future Themes (In-Progress or Planned):
     - Call Walkthroughs and Identify New Named Exceptions to be created.
     - Auto screenshot name should consider session, stage and group name.
     - Configuration:
-        - Overrridablity (and level.)
         - Provision for vars section in config files 
         - Stage factory
         - Group Factory
@@ -44,6 +43,10 @@ Future Themes (In-Progress or Planned):
 
 1.1.0
 -----
+Docs
+    - Updated format of various docs
+    - Included third party library info in index.rst
+    - Updated license and notice files.
 
 1.0.19
 ------

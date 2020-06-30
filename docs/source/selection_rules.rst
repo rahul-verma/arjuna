@@ -15,8 +15,8 @@ The rules are executed on the following:
 * User-defined Properties
 
 
-Inclusion vs Exclusion Rules
-============================
+**Inclusion** vs **Exclusion** Rules
+====================================
 
 The rules are categorized based on their inclusion effect:
 
@@ -33,11 +33,11 @@ The rules are categorized based on their inclusion effect:
 Any number of these rules can be specified in CLI or test group definition.
 
 
-Rules Grammar
-=============
+**Rules Grammar**
+=================
 
-Boolean Pattern Rule
---------------------
+**Boolean Pattern** Rule
+------------------------
 
 Simple Pattern for Boolean test attributes.
 
@@ -47,8 +47,8 @@ Simple Pattern for Boolean test attributes.
     not unstable
 
 
-Iterable Pattern Rule
----------------------
+**Iterable Pattern** Rule
+-------------------------
 
 Simple Pattern for presence/absence of strings in iterables.
 
@@ -64,8 +64,8 @@ Simple Pattern for presence/absence of strings in iterables.
 
 You can use singular version as well - **tag/bug/env** for built-in containers.
 
-Test Attribute Pattern
-----------------------
+**Test Attribute Pattern** Rule
+-------------------------------
 
 Pattern for executing a condition on an attribute value. This is the most advanced of all the patterns.
 
@@ -102,8 +102,8 @@ Following is the list of all operators:
 * Booleans allow only equal/no equal operators. Better to use Boolen Pattern.
 * Operators can be contextual. For example, for priority, priority 1 is higher than priority 2. Arjuna considers this in rule evaluation rather than treating it as just another integer.
 
-Shortcut Rules for Test Package, Module and Function Names
-==========================================================
+**Shortcut Rules** for **Test Package, Module and Function Names**
+==================================================================
 
 A very common use case for test selection is based on packahe, module and/or function names.
 
@@ -134,8 +134,8 @@ Given the common usage of these in test automation world, Arjuna provides shortc
     * Internally translates to unsuccessful partial match for **name** test attribute:  **name !*= function_name_or_pattern**
 
 
-Rule Evaluation Sequence
-========================
+Rule **Evaluation Sequence**
+============================
 
 Arjuna follows a specific order in evaluating rules:
 

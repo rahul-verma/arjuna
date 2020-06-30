@@ -1,7 +1,7 @@
 .. _httpauto:
 
-HTTP Automation
-===============
+Introduction
+------------
 
 Test automation at the HTTP layer in case of web applications and services is increasingly becoming popular and rightly so. 
 
@@ -11,16 +11,16 @@ Arjuna supports writing tests at this layer by wrapping various related Python m
 
 **Note** This is currently a beta quality feature. The TPI for the classes and functions is fairly finalized, but prone to minor changes and extensions.
 
-The Http Facade class
----------------------
+The **Http Facade Class**
+-------------------------
 
 Arjuna provides you with :py:class:`Http <arjuna.tpi.httpauto.http.Http>` as the facade class to start with HTTP automation.
 
 Its features include sending various HTTP method requests, creating a session of requests, handling content types and so on.
 
 
-Supported HTTP Methods 
-----------------------
+Supported **HTTP Methods**
+--------------------------
 
 Currently the following HTTP methods/verbs are supported:
     * :py:func:`GET <arjuna.tpi.httpauto.http.Http.get>`
@@ -51,8 +51,8 @@ All types of requests return an :py:class:`HttpResponse <arjuna.tpi.httpauto.ses
 
 You can set custom headers and content type for invidual requests. Explore the :py:class:`Http <arjuna.tpi.httpauto.http.Http>` class documentation.
 
-Handling Content Types
-----------------------
+Handling **Content Types**
+--------------------------
 
 By default the content is URL encoded. 
 
@@ -75,8 +75,8 @@ Following is a simple example of sending JSON content:
         # Content sent as serialized JSON
         Http.post("/res", content=Http.content.json({'a' : 1, 'b': 2}))
 
-Creating an HTTP Session
-------------------------
+Creating an **HTTP Session**
+----------------------------
 
 Beyond basic automation, you will need to send requests as a part of the same session so that cookie management is done automatically for you.
 
@@ -97,8 +97,8 @@ The **url** argument sets the base/default URL for this HttpSession. If relative
 
 You can add request headers, add OAuth bearer token, set default content handler and so on. Explore the :py:class:`HttpSession <arjuna.tpi.httpauto.session.HttpSession>` class documentation.
 
-Setting a Request Label
------------------------
+Setting a **Request Label**
+---------------------------
 
 All session request methods accept a `label` argument. This is used in reports and logging to give a user-defined representation of an HTTP request.
 
@@ -109,8 +109,8 @@ Following are basic examples of these calls:
         svc.get("/api/res/someid", label="Authorization Request")
 
 
-Setting Arbitrary Query String Parmaters in URL
------------------------------------------------
+Setting **Arbitrary Query String Parmaters** in URL
+---------------------------------------------------
 
 A common need in HTTP automation is to set the query parameters in the URL.
 
@@ -148,11 +148,11 @@ In the above case, the value of a will be 2:
         https://another.com/somepath?a=2&something=test
 
 
-Checking Expected HTTP Status Code(s)
--------------------------------------
+Checking **Expected HTTP Status Code(s)**
+-----------------------------------------
 
-Inquiring
-^^^^^^^^^
+**Inquiring**
+^^^^^^^^^^^^^
 
 Status code can be easily inquired:
 
@@ -162,8 +162,8 @@ Status code can be easily inquired:
         print(response.status_code)    
 
 
-Asserting
-^^^^^^^^^
+**Asserting**
+^^^^^^^^^^^^^
 
 You can also assert status codes by inquiring `HttpResponse` object as follows:
 
@@ -201,8 +201,8 @@ If a session request is successful it returns an :py:class:`HttpResponse <arjuna
 
 It provides you with various properties to assert or extract data.
 
-Basic Data Extraction
-^^^^^^^^^^^^^^^^^^^^^
+Basic **Data Extraction**
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can easily extract the following data using response properties:
 
@@ -223,8 +223,8 @@ You can easily extract the following data using response properties:
         response.url
         response.query_params
 
-Redirections
-^^^^^^^^^^^^
+**Redirections**
+^^^^^^^^^^^^^^^^
 
 An :py:class:`HttpResponse <arjuna.tpi.httpauto.session.HttpResponse>` object maintains all redirect history.
 
@@ -232,8 +232,8 @@ You can get a sequence of all redirect :py:class:`HttpResponse <arjuna.tpi.httpa
 
 You can get the last redirect response using `last_redir_response` property.
 
-Handling Response Content
-^^^^^^^^^^^^^^^^^^^^^^^^^
+Handling **Response Content**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can get formatted as well as un-formatted response content using following properties:
     * `text`: Unformatted content as plain text
@@ -242,14 +242,14 @@ You can get formatted as well as un-formatted response content using following p
 
 Check **Parsing JSON, XML, HTML Files and Strings** section in documentation to know more about how to parse and extract data from these content type.
 
-Support for Open Authentication (OAuth)
----------------------------------------
+Support for **Open Authentication (OAuth)**
+-------------------------------------------
 
 Arjuna supports the following OAuth grant types with its custom HTTP session objects:
 
 
-OAuth Client Grant Session
-^^^^^^^^^^^^^^^^^^^^^^^^^^
+OAuth **Client Grant Session**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     .. code-block:: python
 
@@ -261,8 +261,8 @@ Once created, the session supports all methods in :py:class:`HttpSession <arjuna
 
 Explore :py:class:`OAuthClientGrantSession <arjuna.tpi.httpauto.oauth.OAuthClientGrantSession>` for constructor.
 
-OAuth Implicit Grant Session
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+OAuth **Implicit Grant Session**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     .. code-block:: python
 

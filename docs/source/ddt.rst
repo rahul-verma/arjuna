@@ -1,7 +1,7 @@
 .. _ddt:
 
-Data Driven Testing
-===================
+Purpose
+-------
 
 Driving an automated test with data is a critical feature in test automation frameworks.
 

@@ -1,8 +1,8 @@
 .. _reporting:
 
 
-Test Reporting
-==============
+Introduction
+------------
 
 Arjuna uses **pytest** as its underlying test engine. The core of its reporting is driven by the facilities provided by pytest and its available plugins and options.
 

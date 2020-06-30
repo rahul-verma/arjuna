@@ -1,16 +1,13 @@
 .. _l10n:
 
-Localization of Strings
-=======================
-
 Purpose
 -------
 As a part of automating tests, a test author might need to deal with localization of strings that are used for various purposes.
 
 Arjuna supports Excel based localization data out of the box. These files are automatically loaded when **Arjuna.init()** is called by Arjuna launcher.
 
-Locale Enum
------------
+**Locale Enum**
+---------------
 
 Arjuna associates locale for localization with the Locale enum constant which in turn uses the names from Python.
 
@@ -24,8 +21,8 @@ The default locate is **Locale.EN**. It can be changed in a project configuratio
         l10n.locale: hi
 
 
-Excel based Localization
-------------------------
+**Excel based Localization**
+----------------------------
 
 Sample Localization File
 ^^^^^^^^^^^^^^^^^^^^^^^^
@@ -64,8 +61,8 @@ It has the following signature. The first argument is the query. **locale**, **b
 - You can also provide the bucket name by prefixing it before the reference key, for example **sample1.corr**.
 - **strict** argument is to switch strict node on or off.
 
-JSON Based Localization
------------------------
+**JSON Based Localization**
+---------------------------
 
 Sample Localization Files
 ^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -143,8 +140,8 @@ Consider the following localization calls:
 3. **Key1.Key2...KeyN** is the flattened syntax to refer a localized string e.g. **address.coordinates**
 4. Files in root localization directory are available in **root** bucket.
 
-Strict vs Non-strict mode for Localization
-------------------------------------------
+**Strict vs Non-strict Mode** for Localization
+----------------------------------------------
 
 By default, Arjuna handles localization in a non-strict mode. This means if localized string is absent for a given reference, it ignores the error and returns the reference as return value.
 

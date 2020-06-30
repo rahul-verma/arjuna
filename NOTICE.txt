@@ -19,22 +19,3 @@ distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
-
-Notice Files For 3rd Party Libraries Included in Software
----------------------------------------------------------
-
-The Software includes the UNMODIFIED version of the following 3rd party libraries as a part of its distribution.
-The Software makes use of them in their originally released versions.
-
-The list is in the alphabetical order of names of the third party libraries.
-
-Following are the contents of notice files of all libraries 
-used by this Software. Software which does not have any NOTICE.txt
-file has been skipped.
-
-PyHocon
--------
-
-Source Link: https://github.com/chimpler/pyhocon
-
-Arjuna includes PyHocon, which  is licensed under Apache 2.0 license.

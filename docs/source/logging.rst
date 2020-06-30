@@ -1,8 +1,8 @@
 .. _logging:
 
 
-Logging
-=======
+Introduction
+------------
 
 Arjuna's logging features as provided by :py:mod:`log <arjuna.tpi.log>` module, give you precise control over what is included in console display and log file.
 

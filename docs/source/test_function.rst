@@ -1,14 +1,14 @@
 .. _test_function:
 
 
-Tests are Test Functions
-========================
+Tests are **Test Functions**
+============================
 
 Writing a basic test in Arjuna is very easy. Following is a simple test skeleton:
 
 
-Basic Usage of @test Decorator
-==============================
+Basic Usage of **@test Decorator**
+==================================
 
 .. code-block:: python
 
@@ -24,8 +24,8 @@ Basic Usage of @test Decorator
 4. The contents of the test function depend on the test that you want to write.
 
 
-Running a Specific Test Function
-================================
+**Running** a Specific Test Function
+====================================
 
 You can run this test by running **arjuna** module or running **arjuna_launcher.py** script:
 
@@ -35,8 +35,8 @@ You can run this test by running **arjuna** module or running **arjuna_launcher.
     python arjuna_launcher.py run-selected -it check_test_name
 
 
-Skipping a Test
-===============
+**Skipping** a Test
+===================
 
 You can mark a test as skipped:
 
@@ -60,8 +60,8 @@ You can also do a conditional skipping:
         pass
 
 
-Handling Expected Failures in Tests
-===================================
+Handling **Expected Failures** in Tests
+=======================================
 
 You can mark a test as a test which is expected to fail:
 
@@ -87,8 +87,8 @@ You can also specify advanced conditional expected failures:
 Such a test is reported as XFailed. If it passes, it is reported as XPassed.
 
 
-Specifying Built-in Test Attributes
-===================================
+Specifying **Built-in Test Attributes**
+=======================================
 
 Arjuna tests have many built-in attributes, which can be specified as an argument in **@test**, for example:
 
@@ -118,8 +118,8 @@ Following is the complete list:
     * **name**: Name of this test function
     * **qual_name**: Full qualified name of this test function **<package>.<module>.<function>**
 
-User-Defined Test Attributes
-============================
+**User-Defined Test Attributes**
+================================
 
 You can define any number of your own attributes for a test:
 
@@ -133,8 +133,8 @@ You can define any number of your own attributes for a test:
         pass
 
 
-Specifying Tags, Bugs, Environments
-===================================
+Specifying **Tags, Bugs, Environments**
+=======================================
 
 Arjuna tests have built-in tag containers (sets), which can be specified as an argument in **@test**, for example:
 

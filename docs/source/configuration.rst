@@ -1,8 +1,5 @@
 .. _configuration:
 
-Test Configuration
-==================
-
 Understanding Configuration System of Arjuna
 --------------------------------------------
 

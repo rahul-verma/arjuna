@@ -1,8 +1,8 @@
 .. _sessions_stages_groups:
 
 
-Test Sessions, Stages, Groups
-=============================
+Test **Sessions**, **Stages**, **Groups**
+=========================================
 
 Although Arjuna provides an advanced Command Line Interface, in professional test automation a CLI switch based approach very soon gives up for complex test selection and configuration.
 
@@ -13,8 +13,8 @@ To define what to run needs most of the following features:
 * Precise selection of tests across this definition of what and how to run.
 
 
-Test Groups
-===========
+**Test Groups**
+===============
 
 A test group represents a re-usable, yet indvidually runnable test selection unit in Arjuna. It defines:
 * What all tests should be run by defining selection rules
@@ -63,8 +63,8 @@ You can run a test group by running **arjuna** module or running **arjuna_launch
     python arjuna_launcher.py run-group -g <group_name>
 
 
-Test Stages
-===========
+**Test Stages**
+===============
 
 A test group represents a re-usable, yet indvidually runnable test selection unit in Arjuna. It defines:
 * What all test groups should be included.
@@ -115,8 +115,8 @@ You can run a test stage by running **arjuna** module or running **arjuna_launch
     python arjuna_launcher.py run-stage -s <stage_name>
 
 
-Test Sessions
-=============
+**Test Sessions**
+=================
 
 A test session represents a runnable test selection unit in Arjuna. It defines:
 * What all test stages should be included.
@@ -163,8 +163,8 @@ You can run a test session by running **arjuna** module or running **arjuna_laun
     python arjuna_launcher.py run-session -s <session_name>
 
 
-Default Test Session, Stage and Group
-=====================================
+**Default Test Session, Stage and Group**
+=========================================
 
 Arjuna gives the flexibility to run a project, a test selection, a session, a stage or a group via its Command Line Interface.
 

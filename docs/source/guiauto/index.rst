@@ -1,6 +1,4 @@
 .. _guiauto:
-Web GUI Automation
-==================
 
 .. toctree::
    :caption: Contents:

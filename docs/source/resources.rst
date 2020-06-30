@@ -49,15 +49,15 @@ Following is an example using **@for_test**:
             db_handle.quit()
 
 
-Module Specific Resources 
-=========================
+**Module-Specific** Resources 
+=============================
 
 You can place the resource functions in a test module python file. 
 
 In such a case, these can be used only by the tests present in that module.
 
-Cross-Module Shared Resources
-=============================
+**Cross-Module** Shared Resources
+=================================
 
 You might want to make resource functions available across your project.
 
@@ -72,8 +72,8 @@ To make use of this feature, you can choose to do one of the following depending
 * If you have used `create-project` command of Arjuna CLI, you will observe that the command creates **<Project Root Directory>/lib/resource.py** module. You can add all resource creators here. They will be automnatically made available for your tests across the test modules in the project.
 * For more complex project needs, where the resource creators grow in number, you can convert **resource.py** to a **resource package**. An example of this can be found in the `Arjex project on GitHub <https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex>`_.
 
-Data-Driven Test Resources
-==========================
+**Data-Driven** Test Resources
+==============================
 
 You can data-drive a test resource as well just like you data-drive a test.
 
@@ -89,8 +89,8 @@ Within the resource, you can act on data to create a custom resource.
 
 The data can be acces from request object as **request.data** as a **DataRecord** object.
 
-Associating a Resource with a Test
-==================================
+**Associating a Resource with a Test**
+======================================
 
 To associate a test resource with a test, pass its name as an argument:
 
@@ -106,8 +106,8 @@ To associate a test resource with a test, pass its name as an argument:
 Note that if the resource has been created at a higher level already (group/module level), it will not be created again.
 
 
-Setting a Resource as a Default
-===============================
+Setting a **Resource as a Default**
+===================================
 
 You might-want to auto-create a resource i.e. make it a default at a certain level. When this is done, you don't need to pass the resource creator name as an argument to a test function.
 
