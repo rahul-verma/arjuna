@@ -124,7 +124,7 @@ class GuiDriverExtendedConfigBuilder:
         return GuiDriverExtendedConfig(self.__capabilities, self.__browser_args, self.__browser_prefs, self.__browser_exts)
 
 
-class _Keyboard:
+class Keys:
 
     class KeyChord:
 
@@ -135,17 +135,29 @@ class _Keyboard:
             self.__parts.append(text)
             return self
 
+        def __getattr__(self, name):
+            from selenium.webdriver.common.keys import Keys
+            try:
+                key_str = getattr(Keys, name.upper())
+            except:
+                raise AttributeError("There is no key with name {} defined.".format(name))
+            else:
+                def _dyn_key():
+                    self.__parts.append(key_str)
+                    return self
+                return _dyn_key
+
         def key(self, key):
             self.__parts.append(key.name)
             return self
 
         @property
-        def parts(self):
+        def _parts(self):
             return self.__parts
 
     @classmethod
-    def chord(self):
+    def chord(cls):
         '''
             Returns a new KeyChord object.
         '''
-        return KeyChord()
+        return cls.KeyChord()

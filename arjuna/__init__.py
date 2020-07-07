@@ -99,6 +99,7 @@ from arjuna.tpi.guiauto.model.app import GuiApp
 from arjuna.tpi.guiauto.model.page import GuiPage
 from arjuna.tpi.guiauto.model.section import GuiSection
 from arjuna.tpi.guiauto.model.dialog import GuiDialog
+from arjuna.tpi.guiauto.helper import Keys
 
 from arjuna.tpi.httpauto.http import Http
 from arjuna.tpi.httpauto.oauth import OAuthImplicitGrantSession

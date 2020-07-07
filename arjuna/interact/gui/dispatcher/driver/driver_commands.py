@@ -52,6 +52,11 @@ class DriverCommands:
         return driver.page_source
 
     @classmethod
+    def send_keys(cls, driver, key_str):
+        print(key_str)
+        ActionChains(driver).send_keys(key_str).perform()
+
+    @classmethod
     def is_web_alert_present(cls, driver):
         from selenium.webdriver.support.ui import WebDriverWait
         from selenium.webdriver.support import expected_conditions as EC

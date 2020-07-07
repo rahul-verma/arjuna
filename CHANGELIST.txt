@@ -43,6 +43,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.2
 -----
+- Added support for hard refresh.
 
 1.1.1
 -----

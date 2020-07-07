@@ -264,6 +264,21 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
         self.__wait_until_clickable_if_configured()
         self._only_enter_text(text)
 
+    def send_keys(self, key_chord, wait_clickable=True):
+        '''
+           Send KeyChord to this GuiWidget.
+
+           Waits for clickability. **Click on GuiWidget is NOT executed before send keys operation**.
+
+           **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+        '''
+        keys = ""
+        for key in key_chord._parts:
+            keys = keys + key
+        if wait_clickable:
+            self.__wait_until_clickable_if_configured()
+        self._only_enter_text(keys)
+
     def enter_text(self, text):
         '''
            Send text to this GuiWidget.

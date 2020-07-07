@@ -82,6 +82,12 @@ class GuiAppContent(Gui, ScreenShooter):
     def network_recorder(self):
         return self.__automator.network_recorder
 
+    def send_keys(self, key_chord):
+        from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
+        locator = GuiWidgetLocator(tag="body")
+        body = self.locate(locator)
+        body.send_keys(key_chord)
+
     @property
     def gns(self):
         '''
