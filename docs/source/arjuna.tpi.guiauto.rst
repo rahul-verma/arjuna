@@ -18,7 +18,7 @@ Submodules
 
 .. toctree::
 
-   arjuna.tpi.guiauto.helpers
+   arjuna.tpi.guiauto.helper
 
 Module contents
 ---------------
