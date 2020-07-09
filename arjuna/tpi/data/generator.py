@@ -167,18 +167,19 @@ class Random:
     '''
 
     @classmethod
-    def ustr(cls, *, prefix: str=None) -> str:
+    def ustr(cls, *, prefix: str=None, length=None) -> str:
         '''
             Generate a unique UUID string
 
             Keyword Arguments:
                 prefix: (Optional) prefix to be added to the generated UUID string.
+                length: (Optional) length of the retuned string.
 
             Returns:
                 A string that is unique for current session.
         '''
         prefix = prefix and prefix + "-" or ""
-        return "{}{}".format(prefix, uuid.uuid4())
+        return length and "{}{}".format(prefix, uuid.uuid4())[:int(length)] or "{}{}".format(prefix, uuid.uuid4())
 
     @classmethod
     def first_name(cls, *, locale=Locales.EN):
