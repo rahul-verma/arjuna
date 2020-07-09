@@ -19,6 +19,7 @@ from arjuna.tpi.constant import ArjunaOption
 
 from arjuna.core.poller.conditions import *
 from arjuna.core.poller.caller import *
+from arjuna.tpi.tracker import track
 
 class BrowserConditions:
 
@@ -33,6 +34,7 @@ class BrowserConditions:
         caller = DynamicCaller(self.__browser.is_document_ready)
         return BooleanCondition(caller)
 
+@track("info")
 class Browser:
 
     def __init__(self, automator):
