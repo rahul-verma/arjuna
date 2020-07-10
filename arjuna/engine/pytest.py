@@ -128,7 +128,8 @@ class PytestHooks:
                     # extra.append(pytest_html.extras.url(app.url))
                 try:
                     screen_shooter = cls._get_protocol_object(item, "screen_shooter")
-                except AttributeError:
+                except Exception:
+                    # any error in auto-screen shot is ignored.
                     pass
                 else:
                     screen_shooter.take_screenshot(prefix=report.nodeid)
@@ -172,9 +173,9 @@ class PytestHooks:
                 Arjuna.get_report_metadata().clear()    
             
         except Exception as e:
-            raise
             from arjuna import log_warning
             log_warning("Error in enhance_reports hook: " + str(e), contexts="report")
+            raise
 
 
     @classmethod
