@@ -58,9 +58,9 @@ class Browser:
 
     def refresh(self, hard=False):
         if hard:
-            self.__automator.execute_javascript("location.reload(true);")
+            self.__automator.execute_javascript("window.location.reload(true);")
         else:
-            self.__automator.dispatcher.refresh_browser()
+            self.__automator.execute_javascript("window.location.reload(false);")
         self.__conditions.DocumentReadyState().wait()
 
     def execute_javascript(self, js, *args):
