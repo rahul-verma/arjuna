@@ -12,7 +12,7 @@ Different CLI switches might have a short form or long form or both.
 
 Short form is prefixed with a single hyphen e.g. **-h**. Typically these forms have one or two letters.
 
-Long form is prefixed with a two consecutive hyphens e.g. **--help**. (In this HTML doc it will visually look like a long single hyphen.). These forms are comprized for one or more words.
+Long form is prefixed with a two consecutive hyphens e.g. **--help**. (In this HTML doc it will visually look like a long single hyphen.). These forms are comprised of one or more words.
 
 -h or --help
 ------------
