@@ -128,11 +128,14 @@ class PytestHooks:
                     # extra.append(pytest_html.extras.url(app.url))
                 try:
                     screen_shooter = cls._get_protocol_object(item, "screen_shooter")
-                except Exception:
-                    # any error in auto-screen shot is ignored.
+                except AttributeError:
                     pass
                 else:
-                    screen_shooter.take_screenshot(prefix=report.nodeid)
+                    try:
+                        screen_shooter.take_screenshot(prefix=report.nodeid)
+                    except Exception:
+                        # any error in auto-screen shot is ignored.
+                        pass
 
             log_debug("Attempting to get network_recorder from request", contexts="report")
             try:
