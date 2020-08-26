@@ -40,10 +40,14 @@ Future Themes (In-Progress or Planned):
         - -ip/im/-it switches should not accept blank string.
         - ArjunaOption.REPORT_SORT_BY_NAME based on pytest-html option if available Or else auto execte an injected JavaScript to do this.
         - See if a sortable reporting time column and group column can be introduced as well.
-
+        - --no-print-logs is removed in latest pytest. Needs to be removed from Arjuna as well (--show-capture is the option.)
+    - Discussion with Pierre
+        - Add container assertions to Asserter.
+        - as_json() to data reference. 
 1.1.5
 -----
-
+- Fixed sesssion level header addition in Http Session.
+- Support for Python list as content in Http methods.
 
 1.1.2
 -----

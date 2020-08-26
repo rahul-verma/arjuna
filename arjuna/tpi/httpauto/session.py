@@ -82,7 +82,7 @@ class HttpSession:
     def _set_session(self, session):
         self.__session = session
         if self.__provided_headers is not None:
-            self.__session.headers.update(self.__session.headers)
+            self.__session.headers.update(self.__provided_headers)
         from .http import Http
         if self.request_content_handler != Http.content.custom:
             self.__session.headers['Content-Type'] = Http.content.get_content_type(self.request_content_handler)

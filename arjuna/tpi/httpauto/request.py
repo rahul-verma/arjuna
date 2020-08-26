@@ -163,7 +163,7 @@ class _HttpRequest(HttpRequest):
         self.__url = url
         self.__content = None
         if content is not None:
-            if type(content) in {str, dict} or isinstance(content, JsonDict) or isinstance(content, JsonList):
+            if type(content) in {str, dict, list, tuple} or isinstance(content, JsonDict) or isinstance(content, JsonList):
                 self.__content = self.__session.request_content_handler(content)
             else:
                 self.__content = content
