@@ -44,6 +44,11 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
         - as_json() to data reference. 
+
+1.1.6
+-----
+
+
 1.1.5
 -----
 - Fixed sesssion level header addition in Http Session.
