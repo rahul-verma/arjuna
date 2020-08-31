@@ -78,6 +78,7 @@ _RAW_OPTION_LEVELS = {
         "L10N_LOCALE",
         "L10N_STRICT",
         "BROWSER_NETWORK_RECORDER_ENABLED",
+        "DEPS_DIR"
     },
 
     ConfigStage.CODED: {

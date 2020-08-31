@@ -166,6 +166,10 @@ class ArjunaSingleton:
         else:
             register_ref_confs(configurator)
 
+        deps_dir = self.ref_config.value(ArjunaOption.DEPS_DIR)
+        if os.path.isdir(deps_dir):
+            sys.path.append(deps_dir)
+
         # Load data references
         from arjuna.engine.data.factory import DataReference
         self.__contextual_data_references, self.__indexed_data_references  = DataReference.load_all(self.ref_config)
@@ -261,7 +265,8 @@ class ArjunaSingleton:
         self.__config_map[config.name.lower()] = config
 
     def has_config(self, name):
-        return name.lower() in self.__config_map
+        name = name.lower()
+        return name in self.__config_map
 
     def get_group_params(self):
         return self.__thread_wise_group_params_map[self.__get_thread_name()]

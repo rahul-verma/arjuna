@@ -42,6 +42,7 @@ arjuna_options:
   screenshots.dir: $project_root_dir$/report/$run_id$/screenshot
   tools.dir: $project_root_dir$/tools
   tools.bmproxy.dir: $project_root_dir$/tools/bmproxy
+  deps.dir: $project_root_dir$/dependency
   temp.dir: $temp_dir$
 
   data.dir: $project_root_dir$/data

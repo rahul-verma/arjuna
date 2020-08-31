@@ -47,6 +47,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.6
 -----
+- Added support for Dependency directory (ArjunaOption.DEPS_DIR). Defaults to <project>/dependency. Can be overriden in reference conf.
 
 
 1.1.5

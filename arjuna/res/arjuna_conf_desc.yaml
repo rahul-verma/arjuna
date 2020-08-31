@@ -39,6 +39,7 @@ report.network.filter: bool
 screenshots.dir: absolute_dir_path
 tools.dir: absolute_dir_path
 tools.bmproxy.dir: absolute_dir_path
+deps.dir: absolute_dir_path
 
 data.dir: absolute_dir_path
 data.src.dir: absolute_dir_path

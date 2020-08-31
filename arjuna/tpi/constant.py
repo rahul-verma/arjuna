@@ -111,6 +111,9 @@ class ArjunaOption(Enum):
     TOOLS_BMPROXY_DIR = auto()
     '''Directory containing BrowerMob Proxy binaries.'''
 
+    DEPS_DIR = auto()
+    '''Directory containing external tool binaries in Arjuna test project.'''
+
     TEMP_DIR = auto()
     '''Temporary directory for this session.'''
 
