@@ -45,10 +45,13 @@ Future Themes (In-Progress or Planned):
         - Add container assertions to Asserter.
         - as_json() to data reference. 
 
+1.1.7
+-----
+- Fix in token logic for Client Grant in HTTP.
+
 1.1.6
 -----
 - Added support for Dependency directory (ArjunaOption.DEPS_DIR). Defaults to <project>/dependency. Can be overriden in reference conf.
-
 
 1.1.5
 -----

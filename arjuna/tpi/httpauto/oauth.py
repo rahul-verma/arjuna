@@ -57,7 +57,9 @@ class OAuthSession(HttpSession):
                 content-type: Default request content type for the new session.
         '''
         from .http import Http
-        return Http.session(url=url, oauth_token=self.token, request_content_handler=request_content_handler)
+        session = Http.session(url=url, oauth_token=self.token, request_content_handler=request_content_handler)
+        session.add_cookies(self._session.cookies)
+        return session
 
 
 class OAuthClientGrantSession(OAuthSession):
@@ -79,7 +81,7 @@ class OAuthClientGrantSession(OAuthSession):
         token = oauth.fetch_token(token_url=token_url, 
                                   client_id=client_id,
                                   client_secret=client_secret)
-        self._set_outh_token(token)
+        self._set_outh_token(token['access_token'])
 
 
 class OAuthImplicitGrantSession(OAuthSession):
