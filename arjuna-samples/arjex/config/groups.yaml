@@ -18,6 +18,11 @@ gp4:
   im:
     - check_group_info_2
 
+gp_tag:
+
+  ir:
+    - "with tags slow"
+
 gp_rules:
 
   conf: data2_env2

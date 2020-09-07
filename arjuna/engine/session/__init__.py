@@ -94,9 +94,9 @@ class YamlTestSession(BaseTestSession):
         if cls.__SESSIONS_YAML is None:
             cls.SESSIONS_YAML_FILE = C(ArjunaOption.CONF_SESSIONS_FILE)
             try:
-                cls.__SESSIONS_YAML = Yaml.from_file(cls.SESSIONS_YAML_FILE)
+                cls.__SESSIONS_YAML = Yaml.from_file(cls.SESSIONS_YAML_FILE, allow_any=True)
             except FileNotFoundError as e:
-                raise TestSessionsFileNotFoundError(cls.SESSIONS_YAML_FILE)
+                raise TestSessionsFileNotFoundError(file_path=cls.SESSIONS_YAML_FILE)
 
     @classmethod
     def get_session_yaml(cls, name):
@@ -111,9 +111,9 @@ class YamlTestSession(BaseTestSession):
         if cls.__STAGES_YAML is None:
             cls.STAGES_YAML_FILE = C(ArjunaOption.CONF_STAGES_FILE)
             try:
-                cls.__STAGES_YAML = Yaml.from_file(cls.STAGES_YAML_FILE)
+                cls.__STAGES_YAML = Yaml.from_file(cls.STAGES_YAML_FILE, allow_any=True)
             except FileNotFoundError:
-                raise TestStagesFileNotFoundError(cls.STAGES_YAML_FILE)
+                raise TestStagesFileNotFoundError(file_path=cls.STAGES_YAML_FILE)
 
     @classmethod
     def get_stage_yaml(cls, name):
@@ -128,9 +128,9 @@ class YamlTestSession(BaseTestSession):
         if cls.__GROUPS_YAML is None:
             cls.GROUPS_YAML_FILE = C(ArjunaOption.CONF_GROUPS_FILE)
             try:
-                cls.__GROUPS_YAML = Yaml.from_file(cls.GROUPS_YAML_FILE)
+                cls.__GROUPS_YAML = Yaml.from_file(cls.GROUPS_YAML_FILE, allow_any=True)
             except FileNotFoundError:
-                raise TestGroupsFileNotFoundError(cls.GROUPS_YAML_FILE)
+                raise TestGroupsFileNotFoundError(file_path=cls.GROUPS_YAML_FILE)
 
     @classmethod
     def get_group_yaml(cls, name):

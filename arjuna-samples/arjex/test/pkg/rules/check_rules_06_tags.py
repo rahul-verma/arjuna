@@ -295,3 +295,8 @@ def check_tag_selection(request):
         obj = Obj()
         getattr(obj, f'{tname}s').add('abc')
         assert rule.matches(obj) is True
+
+
+@test(tags={"slow"})
+def check_tag_sel(request):
+    pass

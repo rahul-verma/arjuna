@@ -48,7 +48,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.8
 -----
-
+- run-group option works even if sessions.yaml and stages.yaml are empty.
 
 1.1.7
 -----
