@@ -46,6 +46,9 @@ Future Themes (In-Progress or Planned):
         - Add container assertions to Asserter.
         - as_json() to data reference. 
 
+1.1.9
+-----
+
 1.1.8
 -----
 - run-group option works even if sessions.yaml and stages.yaml are empty.

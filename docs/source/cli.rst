@@ -38,7 +38,8 @@ Arjuna's CLI is Command-Driven. Following are the current available commands:
     - **run-group**: Run a session defined in **<Project Root Directory/config/groups.yaml>**.
 
 .. note::
-    For using **run-session, **run-stage** or **run-group**, the config directory must contain **sessions.yaml**, **stages.yaml** and **groups.yaml** files (even if empty).
+
+    For using **run-session**, **run-stage** or **run-group**, the config directory must contain **sessions.yaml**, **stages.yaml** and **groups.yaml** files (even if empty).
 
 You can see the help for a given command by running **python -m arjuna <command> -h**, for example
 
