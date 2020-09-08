@@ -68,6 +68,7 @@ class ArjunaSingleton:
         self.__thread_wise_group_params_map = dict()
         self.__thread_wise_ref_conf_map = dict()
         self.__thread_wise_test_selector_map = dict()
+        self.__thread_wise_group_command_map = dict()
         self.__test_meta_data = dict()
 
         from arjuna.tpi.engine.testwise import CurrentTestWiseContainer
@@ -166,7 +167,21 @@ class ArjunaSingleton:
         else:
             register_ref_confs(configurator)
 
-        deps_dir = self.ref_config.value(ArjunaOption.DEPS_DIR)
+        def get_deps_dir_path(fpath):
+            from arjuna.core.utils import file_utils
+            if file_utils.is_absolute_path(fpath):
+                if not file_utils.is_dir(fpath):
+                    if file_utils.is_file(fpath):
+                        raise Exception("Not a directory: {}".format(fpath))
+                return fpath
+            else:
+                fpath = os.path.abspath(os.path.join(self.ref_config.value(ArjunaOption.PROJECT_ROOT_DIR), fpath))
+                if not file_utils.is_dir(fpath):
+                    if file_utils.is_file(fpath):
+                        raise Exception("Not a directory: {}".format(fpath))
+                return fpath
+
+        deps_dir = get_deps_dir_path(self.ref_config.value(ArjunaOption.DEPS_DIR))
         if os.path.isdir(deps_dir):
             sys.path.append(deps_dir)
 
@@ -278,6 +293,12 @@ class ArjunaSingleton:
     def register_test_selector_for_group(self, selector):
         self.__thread_wise_test_selector_map[self.__get_thread_name()] = selector
 
+    def register_pytest_command_for_group(self, group_command):
+        self.__thread_wise_group_command_map[self.__get_thread_name()] = group_command
+
+    def get_pytest_command_for_group(self):
+        return self.__thread_wise_group_command_map[self.__get_thread_name()]
+
     def get_test_selector(self):
         try:
             return self.__thread_wise_test_selector_map[self.__get_thread_name()]
@@ -306,6 +327,15 @@ class Arjuna:
 
     ARJUNA_SINGLETON = None
     LOGGER = None
+    __ARJ_COMMAND = None
+
+    @classmethod
+    def _set_command(cls, command):
+        cls.__ARJ_COMMAND = command
+
+    @classmethod
+    def _get_command(cls):
+        return cls.__ARJ_COMMAND
 
     @classmethod
     def init(cls, project_root_dir, cli_config=None, run_id=None, *, static_rid=False):
@@ -438,6 +468,14 @@ class Arjuna:
     @classmethod
     def get_test_meta_data(cls, qual_name):
         return cls.ARJUNA_SINGLETON.get_test_meta_data(qual_name)
+
+    @classmethod
+    def register_pytest_command_for_group(cls, group_command):
+        cls.ARJUNA_SINGLETON.register_pytest_command_for_group(group_command)
+
+    @classmethod
+    def get_pytest_command_for_group(cls):
+        return cls.ARJUNA_SINGLETON.get_pytest_command_for_group()
 
     @classmethod
     def exit(cls):

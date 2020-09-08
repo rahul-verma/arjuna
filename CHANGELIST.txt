@@ -48,6 +48,9 @@ Future Themes (In-Progress or Planned):
 
 1.1.9
 -----
+- HTML report name changed.
+- Added more project meta data to HTML report as well as Arjuna & pytest command line, reference configuration name.
+- DEPS_DIR can be a path relative to the root of an Arjuna Test Project.
 
 1.1.8
 -----

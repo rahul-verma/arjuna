@@ -85,7 +85,7 @@ class TestGroup:
         os.chdir(self.__project_dir)
         print("Executing pytest with args: {}".format(" ".join(self.__pytest_args)))
 
-
+        Arjuna.register_pytest_command_for_group(" ".join(self.__pytest_args))
         pytest_retcode = pytest.main(self.__pytest_args)
         return pytest_retcode
 

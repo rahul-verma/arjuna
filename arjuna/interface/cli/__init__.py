@@ -37,6 +37,8 @@ class ArjunaCLI:
     def __init__(self, args):
         super().__init__()
         self._args = args
+        from arjuna import Arjuna
+        Arjuna._set_command(" ".join(self._args))
         self.arg_dict = None
         self.main_command = MainCommand()
 

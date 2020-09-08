@@ -77,6 +77,20 @@ class PytestHooks:
             prefix += [raw(f.read())]
 
     @classmethod
+    def set_report_title(cls, report):
+        from arjuna import C
+        report.title = "{} Automated Test Report".format(C("project.name").title())
+
+    @classmethod
+    def add_env_data(cls, config):
+        from arjuna import C, Arjuna
+        config._metadata['Arjuna Test Project Directory'] = C("project.root.dir")
+        config._metadata['Arjuna Test Project Name'] = C("project.name")
+        config._metadata['Reference Configuration'] = Arjuna.get_config().name
+        config._metadata['Pytest Command'] = Arjuna.get_pytest_command_for_group()
+        config._metadata['Arjuna Command'] = Arjuna._get_command()
+
+    @classmethod
     def enhance_reports(cls, item, result):
         '''
             Automatically add screenshot to HTML Report File.
