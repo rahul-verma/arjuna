@@ -41,6 +41,7 @@ def check_wp_login(request, wordpress):
     
     # Login
     user_field = wordpress.element(id="user_login")
+    user_field.double_click()
     user_field.text = user
 
     pwd_field = wordpress.element(id="user_pass")
@@ -59,3 +60,20 @@ def check_wp_login(request, wordpress):
     confirmation.click()
 
     wordpress.element(text="logged out")
+
+
+@test
+def check_double_click(request):
+    sample = GuiApp()
+    sample.launch(blank_slate=True)
+    sample.go_to_url("https://www.journaldev.com/wp-content/uploads/jquery/jQuery-double-click-event.html")
+    import time
+    for i in range(5):
+        orig_element = sample.element(classes="divClass1")
+        orig_element.double_click()
+        time.sleep(2)
+        new_elem = sample.element(classes="divClass2")
+        new_elem.double_click()  
+        time.sleep(2) 
+    sample.quit()
+

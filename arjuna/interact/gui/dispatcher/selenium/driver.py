@@ -228,6 +228,9 @@ class SeleniumDriverDispatcher:
     def mouse_click_on_element(self, element_dispatcher):
         DriverCommands.mouse_click_on_element(self.__driver, element_dispatcher.driver_element)
 
+    def double_click_on_element(self, element_dispatcher):
+        DriverCommands.double_click_on_element(self.__driver, element_dispatcher.driver_element)
+
     def scroll_to_element(self, element_dispatcher):
         DriverCommands.scroll_to_element(self.__driver, element_dispatcher.driver_element)
 

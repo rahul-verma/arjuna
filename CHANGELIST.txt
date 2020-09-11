@@ -48,7 +48,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.10
 ------
-
+- Support for double click in GuiElement.
 
 1.1.9
 -----

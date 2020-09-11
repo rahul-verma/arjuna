@@ -164,5 +164,9 @@ class DriverCommands:
         chain = ActionChains(driver).click(webelement).perform()
 
     @classmethod
+    def double_click_on_element(cls, driver, webelement):
+        chain = ActionChains(driver).double_click(webelement).perform()
+
+    @classmethod
     def scroll_to_element(cls, driver, webelement):
         cls.execute_javascript(driver, "arguments[0].scrollIntoView(true);", webelement)

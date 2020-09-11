@@ -68,6 +68,9 @@ class SeleniumDriverElementDispatcher:
     def mouse_click(self):
         self.__driver_dispatcher.mouse_click_on_element(self)
 
+    def double_click(self):
+        self.__driver_dispatcher.double_click_on_element(self)
+
     def scroll_to_view(self):
         self.__driver_dispatcher.scroll_to_element(self)
 

@@ -127,6 +127,17 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
         self.__wait_until_clickable_if_configured()
         self.dispatcher.mouse_click()
 
+    def double_click(self):
+        '''
+            Mouse double click.
+
+            Waits for clickability.
+
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+        '''
+        self.__wait_until_clickable_if_configured()
+        self.dispatcher.double_click()
+
     def __conditional_selected_state_click(self, condition_state):
         selected = self.is_selected()
         if selected == condition_state:
