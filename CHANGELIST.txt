@@ -46,6 +46,9 @@ Future Themes (In-Progress or Planned):
         - Add container assertions to Asserter.
         - as_json() to data reference. 
 
+1.1.12
+------
+
 1.1.11
 ------
 - --rename-report option added to run-group CLI. Reports are generated without session and stage prefix for this option.
