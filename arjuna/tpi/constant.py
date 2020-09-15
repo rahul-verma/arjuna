@@ -90,6 +90,9 @@ class ArjunaOption(Enum):
     REPORT_HTML_DIR = auto()
     '''Directory containing report.html for current test run.'''
 
+    REPORT_GROUP_RENAME = auto()
+    '''If True, for run-group command, reports are created without session and stage prefixes.'''
+
     REPORT_SCREENSHOTS_ALWAYS = auto()
     '''If True, Screenshots are always show in Report, else they are not shown for passed tests. Default is False.'''
 

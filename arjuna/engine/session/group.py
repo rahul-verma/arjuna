@@ -98,7 +98,14 @@ class TestGroup:
         self.__tests_dir = self.config.value(ArjunaOption.TESTS_DIR)
         suffix = ""
         if self.__name != "mgroup":
-            suffix = "-" + self.__session.name + "-" + self.__stage.name + "-" + self.__name
+            rename = False
+            if self.__session.name == "msession" and self.__stage.name == "mstage":
+                if self.config.value(ArjunaOption.REPORT_GROUP_RENAME):
+                    rename = True
+            else:
+                rename = False
+            if not rename:
+                suffix = "-" + self.__session.name + "-" + self.__stage.name + "-" + self.__name
         self.__xml_path = os.path.join(self.config.value(ArjunaOption.REPORT_XML_DIR), "report{}.xml".format(suffix))
         self.__html_path = os.path.join(self.config.value(ArjunaOption.REPORT_HTML_DIR), "report{}.html".format(suffix))
         self.__report_formats = self.config.value(ArjunaOption.REPORT_FORMATS)

@@ -118,6 +118,7 @@ class GroupParser(Parser):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument("-g", "--group-name", dest="group_name", metavar="group_name", type=partial(lname_check, "Group Name"), help = 'Name of a defined group in test groups configuration file in <Project Root>/config/groups.yaml file.')
+        self.parser.add_argument("--rename-report", dest="report.group.rename", action='store_true', help = 'Will result in generation of reports with name without session and stage info. Useful for integration as the name is same as that of run-project and run-selected modes.')
 
     def process(self, arg_dict):
         if arg_dict['group_name'] is None:

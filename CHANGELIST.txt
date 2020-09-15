@@ -48,6 +48,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.11
 ------
+- --rename-report option added to run-group CLI. Reports are generated without session and stage prefix for this option.
 
 1.1.10
 ------

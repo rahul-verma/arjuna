@@ -39,6 +39,7 @@ arjuna_options:
   report.screenshots.always: False
   report.network.always: False
   report.network.filter: True
+  report.group.rename: False
   screenshots.dir: $project_root_dir$/report/$run_id$/screenshot
   tools.dir: $project_root_dir$/tools
   tools.bmproxy.dir: $project_root_dir$/tools/bmproxy

@@ -69,6 +69,7 @@ _RAW_OPTION_LEVELS = {
         "LOG_FILE_LEVEL",
         "LOG_CONSOLE_LEVEL",
         "REPORT_FORMATS",
+        "REPORT_GROUP_RENAME",
     },
 
     ConfigStage.REFERENCE: {
