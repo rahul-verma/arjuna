@@ -53,7 +53,7 @@ setup(
                     "res/*.html"
                 ]
     },
-    install_requires = ["lxml", "requests", "requests-toolbelt", "selenium", "webdriver_manager", "xlrd", "xlwt", "pyparsing", "pyhocon", "pytest", "pytest-html", "pytest-dependency", "PyYAML", "mimesis", "jsonpath-rw", "jsonpath-rw-ext", "genson", "jsonschema", "Pallets-Sphinx-Themes", "oauthlib", "requests_oauthlib", "bs4", "browsermob-proxy", "haralyzer"],
+    install_requires = ["lxml", "requests", "requests-toolbelt", "selenium", "webdriver_manager", "xlrd", "xlwt", "pyparsing", "pyhocon", "pytest", "pytest-html", "pytest-dependency", "PyYAML", "mimesis", "jsonpath-rw", "jsonpath-rw-ext", "genson", "jsonschema", "Pallets-Sphinx-Themes", "oauthlib", "requests_oauthlib", "bs4", "browsermob-proxy", "haralyzer", "mysql-connector-python"],
     keywords = "arjuna selenium testing automation page-object data-driven",
     license = "Apache License, Version 2.0",
     classifiers=[

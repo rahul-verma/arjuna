@@ -117,6 +117,12 @@ class ArjunaOption(Enum):
     DEPS_DIR = auto()
     '''Directory containing external tool binaries in Arjuna test project.'''
 
+    DBAUTO_DIR = auto()
+    '''Directory containing Database interaction automation related input files.'''
+
+    DBAUTO_SQL_DIR = auto()
+    '''Directory containing SQL files for Database interaction automation.'''
+
     TEMP_DIR = auto()
     '''Temporary directory for this session.'''
 

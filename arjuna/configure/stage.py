@@ -40,6 +40,8 @@ _RAW_OPTION_LEVELS = {
         "TOOLS_DIR",
         "TOOLS_BMPROXY_DIR",
         "TEMP_DIR",
+        "DBAUTO_DIR",
+        "DBAUTO_SQL_DIR",
         "CONF_DIR",
         "CONF_DATA_FILE",
         "CONF_ENVS_FILE",

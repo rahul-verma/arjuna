@@ -45,7 +45,9 @@ arjuna_options:
   tools.bmproxy.dir: $project_root_dir$/tools/bmproxy
   deps.dir: $project_root_dir$/dependency
   temp.dir: $temp_dir$
-
+  dbauto.dir: $project_root_dir$/dbauto
+  dbauto.sql.dir: $project_root_dir$/dbauto/sql
+  
   data.dir: $project_root_dir$/data
   data.src.dir: $project_root_dir$/data/source
   data.ref.dir: $project_root_dir$/data/reference

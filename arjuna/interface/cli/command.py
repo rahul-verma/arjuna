@@ -118,6 +118,8 @@ class CreateProject(Command):
         (FileObjectType.DIR, "data/reference/contextual"),
         (FileObjectType.DIR, "data/reference/indexed"),
         (FileObjectType.DIR, "data/file"),
+        (FileObjectType.DIR, "dbauto"),
+        (FileObjectType.DIR, "dbauto/sql"),
         (FileObjectType.DIR, "dependency"),
         (FileObjectType.DIR, "l10n"),
         (FileObjectType.DIR, "guiauto"),
@@ -187,7 +189,7 @@ class CreateProject(Command):
             f = open(get_proj_target_path("test/conftest.py"), "w")
             f.write(contents)
             f.close()
-            for d in ["data/source", "data/file", "data/reference/contextual", "data/reference/indexed", "dependency", "l10n", "guiauto/namespace", "tools/bmproxy"]:
+            for d in ["data/source", "data/file", "data/reference/contextual", "data/reference/indexed", "dbauto", "dbauto/sql", "dependency", "l10n", "guiauto/namespace", "tools/bmproxy"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:
                 copy_file("../../res/placeholder.txt", "guiauto/driver/{}/placeholder.txt".format(os_name))

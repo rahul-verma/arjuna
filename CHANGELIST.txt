@@ -42,12 +42,19 @@ Future Themes (In-Progress or Planned):
         - See if a sortable reporting time column and group column can be introduced as well.
         - --no-print-logs is removed in latest pytest. Needs to be removed from Arjuna as well (--show-capture is the option.)
         - Check groups.yaml rules logic.
+        - Docs:
+            - Rules usage in CLI
+            - Table: Coded Locators and GNS
     - Discussion with Pierre
         - Add container assertions to Asserter.
         - as_json() to data reference. 
 
 1.1.12
 ------
+- Rudimentary support for DB Automation (experimental)
+    - Added DBAUTO_DIR and DBAUTO_SQL_DIR Arjuna options.
+    - DB.mysql factory.
+
 
 1.1.11
 ------

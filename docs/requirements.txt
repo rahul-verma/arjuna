@@ -22,3 +22,4 @@ genson
 jsonschema
 haralyzer
 browsermob-proxy
+mysql-connector-python

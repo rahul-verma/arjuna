@@ -429,6 +429,7 @@ Arjuna makes use of the following third party libraries:
     * bs4
     * browsermob-proxy
     * haralyzer
+    * mysql-connector-python
 
 
 

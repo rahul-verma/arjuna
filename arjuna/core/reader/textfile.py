@@ -43,8 +43,9 @@ class TextResourceReader(FileReader):
 
 
 class FileLineReader:
-    def __init__(self, file_path):
+    def __init__(self, file_path, **formatters):
         self.__filereader = open(file_path, "r")
+        self.__formatters = formatters
 
     def __iter__(self):
         return self
@@ -53,11 +54,16 @@ class FileLineReader:
         l = self.__filereader.readline()
         if not l:
             self.close()
-            raise StopIteration()
+            raise StopIteration()           
         elif l.strip().startswith('#'):
             return self.next()
         else:
-            return l.rstrip()
+            if self.__formatters:
+                return l.rstrip().format(**self.__formatters)
+            else:
+                return l.rstrip()
+
+    __next__ = next
 
     def close(self):
         self.__filereader.close()
