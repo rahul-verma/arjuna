@@ -51,6 +51,9 @@ Future Themes (In-Progress or Planned):
 
 1.1.13
 ------
+- Concept of Linked Arjuna Projects introduced. An Arjuna Project can be linked to other Arjuna Projects (only one level of relationship allowed).
+    - ArjunaOption.LINKED_ARJUNA_PROJECT_DIRS can be defined to link many projects in Project config or CLI (Relative paths to top Arjuna project are accepted).
+    - Support for auto-import of test resources defined in linked projects in the parent project (conftest.py auto-generation is improved to cater to this.)
 
 1.1.12
 ------

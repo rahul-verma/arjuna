@@ -328,7 +328,7 @@ class EditableConfig:
             cls.from_file(
                 file_path = location,
                 creation_context = f"project.yaml configuration file at {location}",
-                conf_stage=ConfigStage.REFERENCE,
+                conf_stage=ConfigStage.PROJECT,
             )
         )
         return proj_conf

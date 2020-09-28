@@ -147,6 +147,8 @@ class Validator:
         if type(input) is not list:
             cls.raise_exc(input)
         else:
+            if not input:
+                return input
             s = {type(i) for i in input}
             if s != {type("")}:
                 cls.raise_exc(input)

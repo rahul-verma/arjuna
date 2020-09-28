@@ -301,5 +301,6 @@ class RuleConditionType(Enum):
 class ConfigStage(Enum):
     DEFAULT = auto()
     REFERENCE = auto()
+    PROJECT = auto()
     CODED = auto()
     CLI = auto()

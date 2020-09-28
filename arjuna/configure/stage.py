@@ -74,14 +74,18 @@ _RAW_OPTION_LEVELS = {
         "REPORT_GROUP_RENAME",
     },
 
-    ConfigStage.REFERENCE: {
+    ConfigStage.PROJECT: {
         "LOG_ALLOWED_CONTEXTS",
+        "DEPS_DIR",
+        "LINKED_ARJUNA_PROJECT_DIRS"
+    },
+
+    ConfigStage.REFERENCE: {
         "REPORT_SCREENSHOTS_ALWAYS",
         "REPORT_NETWORK_ALWAYS",
         "L10N_LOCALE",
         "L10N_STRICT",
-        "BROWSER_NETWORK_RECORDER_ENABLED",
-        "DEPS_DIR"
+        "BROWSER_NETWORK_RECORDER_ENABLED"
     },
 
     ConfigStage.CODED: {
@@ -118,8 +122,9 @@ class ConfigStageKeys:
     __OPTION_LEVELS = {
         ConfigStage.CODED: _RAW_OPTION_LEVELS[ConfigStage.CODED],
         ConfigStage.REFERENCE: _RAW_OPTION_LEVELS[ConfigStage.CODED].union(_RAW_OPTION_LEVELS[ConfigStage.REFERENCE]),
-        ConfigStage.CLI: _RAW_OPTION_LEVELS[ConfigStage.CODED].union(_RAW_OPTION_LEVELS[ConfigStage.REFERENCE]).union(_RAW_OPTION_LEVELS[ConfigStage.CLI]),
-        ConfigStage.DEFAULT: _RAW_OPTION_LEVELS[ConfigStage.CODED].union(_RAW_OPTION_LEVELS[ConfigStage.REFERENCE]).union(_RAW_OPTION_LEVELS[ConfigStage.CLI]).union(_RAW_OPTION_LEVELS[ConfigStage.CLI])
+        ConfigStage.PROJECT: _RAW_OPTION_LEVELS[ConfigStage.REFERENCE].union(_RAW_OPTION_LEVELS[ConfigStage.PROJECT]),
+        ConfigStage.CLI: _RAW_OPTION_LEVELS[ConfigStage.PROJECT].union(_RAW_OPTION_LEVELS[ConfigStage.CLI]),
+        ConfigStage.DEFAULT: _RAW_OPTION_LEVELS[ConfigStage.CLI].union(_RAW_OPTION_LEVELS[ConfigStage.CLI])
     }
 
     @classmethod

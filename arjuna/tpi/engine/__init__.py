@@ -24,6 +24,7 @@ import time
 import datetime
 import threading
 import platform
+from collections import namedtuple
 # import multiprocessing
 # sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="UTF-8")
 # sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding="UTF-8")
@@ -40,6 +41,7 @@ from arjuna.tpi.error import TestSelectorNotFoundError
 import codecs
 import sys
 
+ArjunaProject = namedtuple("ArjunaProject", "name, location")
 
 @singleton
 class ArjunaSingleton:
@@ -75,6 +77,8 @@ class ArjunaSingleton:
         self.__current_test_wise_objects = CurrentTestWiseContainer()
         self.__allowed_log_contexts = {"default"}
         self.__bmproxy_server = None
+
+        self.__linked_projects = None
 
     def __start_bmproxy(self, config):
         # BrowserMob
@@ -140,7 +144,68 @@ class ArjunaSingleton:
         run_id = "{}{}".format(prefix, run_id)
         self.__thread_wise_ref_conf_map[threading.currentThread().name] = self.__test_session.init(project_root_dir, cli_config, run_id)
 
+
+        # Process linked Arjuna projects
+        def get_arjuna_project_path_and_name(fpath):
+            from arjuna.core.utils import file_utils
+            if file_utils.is_absolute_path(fpath):
+                if not file_utils.is_dir(fpath):
+                    if file_utils.is_file(fpath):
+                        raise Exception("Not a directory: {}".format(fpath))
+                return os.path.basename(fpath), os.path.abspath(fpath), os.path.abspath(fpath + "/..")
+            else:
+                fpath = os.path.abspath(os.path.join(self.ref_config.value(ArjunaOption.PROJECT_ROOT_DIR), fpath))
+                if not file_utils.is_dir(fpath):
+                    if file_utils.is_file(fpath):
+                        raise Exception("Not a directory: {}".format(fpath))
+                return os.path.basename(fpath), os.path.abspath(fpath), os.path.abspath(fpath + "/..") 
+
+        self.__linked_projects = list()
+        linked_project_dict = dict()
+
         from arjuna.tpi.constant import ArjunaOption
+
+        unique_paths = list()
+        for arjuna_proj_dir in self.ref_config.value(ArjunaOption.LINKED_ARJUNA_PROJECT_DIRS):
+            proj_name, proj_path, proj_import_path = get_arjuna_project_path_and_name(arjuna_proj_dir)
+            self.__linked_projects.append(ArjunaProject(name=proj_name, location=proj_path))
+            unique_paths.append(proj_import_path)
+        
+        unique_paths = set(unique_paths)
+        for p in unique_paths:
+            sys.path.append(p)
+
+        def get_src_file_path(src):
+            return os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), src))
+
+        def get_proj_target_path(dest):
+            return os.path.join(self.ref_config.value(ArjunaOption.PROJECT_ROOT_DIR), dest)
+
+        def copy_file(src, dest):
+            shutil.copyfile(get_src_file_path(src), get_proj_target_path(dest))
+
+        res_import_block = '''
+try:
+    from {project}.lib.resource import *
+except ModuleNotFoundError as e:
+    if e.name not in {{"{project}.lib", "{project}.lib.resource"}}:
+        raise Exception(e.name)
+'''
+
+        from arjuna import Arjuna
+
+        f = open(get_src_file_path("../../res/conftest.txt"), "r")
+        contents = f.read()
+        f.close()
+        res_import_blocks = list()
+        for proj in self.__linked_projects:
+            res_import_blocks.append(res_import_block.format(project=proj.name))
+        res_import_blocks.append(res_import_block.format(project=self.ref_config.value(ArjunaOption.PROJECT_NAME)))
+        contents = contents.format(res_import_block="".join(res_import_blocks))
+        f = open(get_proj_target_path("test/conftest.py"), "w")
+        f.write(contents)
+        f.close()
+
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_DIR))
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_XML_DIR))
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_HTML_DIR))
@@ -183,7 +248,7 @@ class ArjunaSingleton:
 
         deps_dir = get_deps_dir_path(self.ref_config.value(ArjunaOption.DEPS_DIR))
         if os.path.isdir(deps_dir):
-            sys.path.append(deps_dir)
+            sys.path.append(deps_dir) 
 
         # Load data references
         from arjuna.engine.data.factory import DataReference
@@ -205,6 +270,10 @@ class ArjunaSingleton:
         self.__start_bmproxy(self.ref_config)
 
         return self.ref_config
+
+    @property
+    def linked_projects(self):
+        return self.__linked_projects
 
     @property
     def test_wise_container(self):
@@ -485,3 +554,7 @@ class Arjuna:
         proxy_server = cls._get_bmproxy_server()
         if proxy_server is not None:
             proxy_server.stop()
+
+    @classmethod
+    def get_linked_projects(cls):
+        return cls.ARJUNA_SINGLETON.linked_projects

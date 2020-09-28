@@ -1,0 +1,4 @@
+arjuna_options:
+  linked.arjuna.project.dirs: 
+    - "../arjex_linked1"
+    - "../arjex_linked2"
