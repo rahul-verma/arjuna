@@ -28,7 +28,7 @@ from arjuna.core.constant import ConfigStage
 class TestConfigurator:
     _EMPTY_CONF = EditableConfig.empty_conf()
 
-    def __init__(self, root_dir, cli_config, run_id):
+    def __init__(self, root_dir, cli_config, run_id, linked_projects=[]):
         self.__root_dir = root_dir
         self.__cli_config = cli_config
         self.__run_id = run_id
@@ -37,6 +37,7 @@ class TestConfigurator:
         self.__env_confs = None
         self.__dataconf_enconf_confs = dict()
         self.__project_config_loaded = False
+        self.__linked_projects = linked_projects
 
         self.__load()
 
@@ -58,10 +59,10 @@ class TestConfigurator:
         self.__default_ref_config = EditableConfig.arjuna_conf(project_root_dir=self.__root_dir, run_id=self.__run_id)
 
     def __load_project_conf(self):
-        self.__default_ref_config = EditableConfig.project_conf(arjuna_conf=self.__default_ref_config)
+        self.__default_ref_config = EditableConfig.project_conf(arjuna_conf=self.__default_ref_config, linked_projects=self.__linked_projects)
 
     def __load_data_confs(self):
-        self.__data_confs = EditableConfig.data_confs(arjuna_conf=self.__default_ref_config)
+        self.__data_confs = EditableConfig.data_confs(arjuna_conf=self.__default_ref_config) 
         if "data" not in self.__data_confs:
             self.__data_confs["data"] = self._EMPTY_CONF
 
@@ -118,19 +119,30 @@ class TestConfigurator:
         return conf
 
     def __load_combinations(self):
+        def __add(name, conf):
+            if name not in self.__dataconf_enconf_confs:
+                self.__dataconf_enconf_confs[name] = EditableConfig.empty_conf()
+            self.__dataconf_enconf_confs[name].update(conf)
+
+        # Load combinations from linked projects
+        for linked_project in self.__linked_projects:
+            confs = linked_project.data_env_conf_map
+            for name, conf in confs.items():
+                __add(name, conf)
+
         for dname, dconf in self.__data_confs.items():
             conf = self.__load_one_combo(dconf, self._EMPTY_CONF)
-            self.__dataconf_enconf_confs[dname] = conf
+            __add(dname, conf)
             
         for ename, econf in self.__env_confs.items():
             conf = self.__load_one_combo(self._EMPTY_CONF, econf)
-            self.__dataconf_enconf_confs[ename] = conf
+            __add(ename, conf)
 
         for dname, dconf in self.__data_confs.items():
             for ename, econf in self.__env_confs.items():
                 cname = "{}_{}".format(dname, ename)
                 conf = self.__load_one_combo(dconf, econf)
-                self.__dataconf_enconf_confs[cname] = conf
+                __add(cname, conf)
 
     @property
     def ref_config(self):

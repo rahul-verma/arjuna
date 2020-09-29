@@ -76,8 +76,7 @@ _RAW_OPTION_LEVELS = {
 
     ConfigStage.PROJECT: {
         "LOG_ALLOWED_CONTEXTS",
-        "DEPS_DIR",
-        "LINKED_ARJUNA_PROJECT_DIRS"
+        "DEPS_DIR"
     },
 
     ConfigStage.REFERENCE: {
@@ -116,15 +115,20 @@ _RAW_OPTION_LEVELS = {
         }
     }
 
+in_code = _RAW_OPTION_LEVELS[ConfigStage.CODED]
+in_ref = in_code.union(_RAW_OPTION_LEVELS[ConfigStage.REFERENCE])
+in_proj_conf = in_ref.union(_RAW_OPTION_LEVELS[ConfigStage.PROJECT])
+in_cli = in_proj_conf.union(_RAW_OPTION_LEVELS[ConfigStage.CLI])
+in_defaults = in_cli.union(_RAW_OPTION_LEVELS[ConfigStage.CLI])
 
 class ConfigStageKeys:
 
     __OPTION_LEVELS = {
-        ConfigStage.CODED: _RAW_OPTION_LEVELS[ConfigStage.CODED],
-        ConfigStage.REFERENCE: _RAW_OPTION_LEVELS[ConfigStage.CODED].union(_RAW_OPTION_LEVELS[ConfigStage.REFERENCE]),
-        ConfigStage.PROJECT: _RAW_OPTION_LEVELS[ConfigStage.REFERENCE].union(_RAW_OPTION_LEVELS[ConfigStage.PROJECT]),
-        ConfigStage.CLI: _RAW_OPTION_LEVELS[ConfigStage.PROJECT].union(_RAW_OPTION_LEVELS[ConfigStage.CLI]),
-        ConfigStage.DEFAULT: _RAW_OPTION_LEVELS[ConfigStage.CLI].union(_RAW_OPTION_LEVELS[ConfigStage.CLI])
+        ConfigStage.CODED: in_code,
+        ConfigStage.REFERENCE: in_ref,
+        ConfigStage.PROJECT: in_proj_conf,
+        ConfigStage.CLI: in_cli,
+        ConfigStage.DEFAULT: in_defaults
     }
 
     @classmethod

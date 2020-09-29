@@ -1,0 +1,17 @@
+data:
+  user_options:
+    local.data: parent
+    l1.parent.data: parent
+    l2.parent.data: parent
+
+local_data:
+  user_options:
+    someopt: "parent"
+
+l1_parent_data:
+  user_options:
+    someopt: "parent"
+
+l2_parent_data:
+  user_options:
+    someopt: "parent"

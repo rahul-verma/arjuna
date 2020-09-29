@@ -1,0 +1,22 @@
+env:
+  user_options:
+    l2.env: linked2
+    l1.l2.env: linked2
+    l1.parent.env: linked2
+    l2.parent.env: linked2
+
+l2_env:
+  user_options:
+    someopt: "linked2"
+
+l1_over_l2_env:
+  user_options:
+    someopt: "linked2"
+
+l1_parent_env:
+  user_options:
+    someopt: "linked2"
+
+l2_parent_env:
+  user_options:
+    someopt: "linked2"

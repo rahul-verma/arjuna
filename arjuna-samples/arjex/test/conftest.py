@@ -9,6 +9,7 @@ except ModuleNotFoundError as e:
     if e.name not in {"arjex.lib", "arjex.lib.resource"}:
         raise Exception(e.name)
 
+
 @pytest.mark.hookwrapper
 def pytest_runtest_makereport(item, call):
     result = yield

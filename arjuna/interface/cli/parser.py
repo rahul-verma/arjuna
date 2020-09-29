@@ -62,6 +62,7 @@ class RunParser(Parser):
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument("-r", "--run-id", dest="run.id", metavar="run_id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
         self.parser.add_argument('-o', '--output-format', dest="report.formats", type=report_format, action="append", choices=[i for i in ReportFormat.__members__], help='Output/Report format. Can pass any number of these switches.') # choices=['XML', 'HTML'], 
+        self.parser.add_argument('-l', '--link-project', dest="linked_projects", action="append", help='Linked Arjuna Test Project.')
         self.parser.add_argument('--update', dest="static.rid", action='store_true', help = 'Will result in overwriting of report files. Useful during script development.')
         self.parser.add_argument('--dry-run', dest="dry_run", choices=[i for i in DryRunType.__members__], type=dry_run_type, help='Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. SHOW_TESTS - enumerate tests. SHOW_PLAN - enumerates tests and fixtures. RUN_FIXTURES - Executes setup/teardown fixtures and emuerates tests.')
         self.parser.add_argument('-c', '--ref-conf', dest="ref_conf", metavar="config_name", type=str, help="Reference Configuration object name for this run. Default is 'ref'")

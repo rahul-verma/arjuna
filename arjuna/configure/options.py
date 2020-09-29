@@ -272,6 +272,13 @@ class EditableConfig:
     def from_str(cls, *, contents, creation_context, conf_stage, validate=True, **replacements):
         for rname, rvalue in replacements.items():
             contents = contents.replace("${}$".format(rname), rvalue)
+
+        if not contents:
+            return EditableConfig(
+            arjuna_options_dict = dict(),
+            user_options_dict = dict(),
+            creation_context = "This configuration represents " + creation_context,
+            )
         
         contents_yaml = Yaml.from_str(contents)
 
@@ -318,10 +325,12 @@ class EditableConfig:
         )
 
     @classmethod
-    def project_conf(cls, *, arjuna_conf):
-        location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_PROJECT_FILE)
+    def project_conf(cls, *, arjuna_conf, linked_projects):
         proj_conf = cls.empty_conf()
+        for linked_project in linked_projects:
+            proj_conf.update(linked_project.ref_conf)
         proj_conf.update(arjuna_conf)
+        location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_PROJECT_FILE)
         if not os.path.isfile(location):
             return proj_conf
         proj_conf.update(

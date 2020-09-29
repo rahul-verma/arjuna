@@ -222,13 +222,13 @@ class __RunCommand(Command):
         self.dry_run = arg_dict.pop("dry_run")
         if self.dry_run:
             self.dry_run = DryRunType[self.dry_run]
-        
+        self.linked_projects = arg_dict.pop("linked_projects")
         if "ref_conf" in arg_dict:
             self.ref_conf_name = arg_dict.pop("ref_conf")
 
         self.pop_command_args(arg_dict)
 
-        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict), runid, static_rid=static_rid)
+        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict), runid, static_rid=static_rid, linked_projects=self.linked_projects)
 
         import sys
         proj_dir = Arjuna.get_config().value(ArjunaOption.PROJECT_ROOT_DIR)

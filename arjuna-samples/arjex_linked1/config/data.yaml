@@ -1,0 +1,17 @@
+data:
+  user_options:
+    l1.data: linked1
+    l1.l2.data: linked1
+    l1.parent.data: linked1
+
+l1_data:
+  user_options:
+    someopt: "linked1"
+
+l1_over_l2_data:
+  user_options:
+    someopt: "linked1"
+
+l1_parent_data:
+  user_options:
+    someopt: "linked1"

@@ -1,4 +1,4 @@
-arjuna_options:
-  linked.arjuna.project.dirs: 
-    - "../arjex_linked1"
-    - "../arjex_linked2"
+user_options:
+  local.projopt: 1
+  l1.projopt.over.parent: parent
+  l2.projopt.over.parent: parent

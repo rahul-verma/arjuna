@@ -41,7 +41,6 @@ screenshots.dir: absolute_dir_path
 tools.dir: absolute_dir_path
 tools.bmproxy.dir: absolute_dir_path
 deps.dir: str
-linked.arjuna.project.dirs: str_list
 dbauto.dir: absolute_dir_path
 dbauto.sql.dir: absolute_dir_path
 

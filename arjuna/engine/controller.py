@@ -59,14 +59,14 @@ class TestSessionController:
     def gui_manager(self):
         return self.__guimgr
 
-    def init(self, root_dir, cli_config=None, run_id=None):
-        self.__configurator = TestConfigurator(root_dir, cli_config, run_id)
+    def init(self, root_dir, cli_config=None, run_id=None, linked_projects=[]):
+        self.__configurator = TestConfigurator(root_dir, cli_config, run_id, linked_projects)
         ref_config = self.__configurator.ref_config
         data_env_confs = self.__configurator.file_confs
         self.__guimgr = GuiManager(ref_config)
-        ref_conf = self.__create_config(ref_config)
+        ref_conf = self._create_config(ref_config)
         self.__add_to_map(ref_conf)
-        for run_env_conf in [self.__create_config(econf, name=name) for name, econf in data_env_confs.items()]:
+        for run_env_conf in [self._create_config(econf, name=name) for name, econf in data_env_confs.items()]:
             self.__add_to_map(run_env_conf)
 
         return ref_conf
@@ -101,7 +101,7 @@ class TestSessionController:
     def run(self):
         self.__session.run()
 
-    def __create_config(self, config, name=None):
+    def _create_config(self, config, name=None):
         config = Configuration(
             self,
             name and name or self.__DEF_CONF_NAME,
@@ -121,7 +121,7 @@ class TestSessionController:
 
     def register_config(self, name, arjuna_options, user_options, *, conf_stage, parent_config=None):
         config = self.configurator.register_new_config(arjuna_options, user_options, parent_config=parent_config, conf_stage=conf_stage)
-        conf = self.__create_config(config, name=name)
+        conf = self._create_config(config, name=name)
         self.__add_to_map(conf)
         return conf
 

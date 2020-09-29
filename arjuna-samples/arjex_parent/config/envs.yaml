@@ -1,0 +1,17 @@
+env:
+  user_options:
+    local.env: parent
+    l1.parent.env: parent
+    l2.parent.env: parent
+
+local_env:
+  user_options:
+    someopt: "parent"
+
+l1_parent_env:
+  user_options:
+    someopt: "parent"
+
+l2_parent_env:
+  user_options:
+    someopt: "parent"

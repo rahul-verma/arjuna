@@ -41,7 +41,7 @@ from arjuna.tpi.error import TestSelectorNotFoundError
 import codecs
 import sys
 
-ArjunaProject = namedtuple("ArjunaProject", "name, location")
+LinkedArjunaProject = namedtuple("LinkedArjunaProject", "name, location, ref_conf, data_env_conf_map")
 
 @singleton
 class ArjunaSingleton:
@@ -129,7 +129,7 @@ class ArjunaSingleton:
         if not os.path.exists(d):
             os.makedirs(d)
 
-    def init(self, project_root_dir, cli_config, run_id, *, static_rid):
+    def init(self, project_root_dir, cli_config, run_id, *, static_rid, linked_projects):
         from arjuna.configure.options import ArjunaOptions
         ArjunaOptions.load_desc()
         
@@ -142,8 +142,6 @@ class ArjunaSingleton:
         if not static_rid:
             prefix = "{}-".format(datetime.datetime.now().strftime("%Y.%m.%d-%H.%M.%S.%f")[:-3])
         run_id = "{}{}".format(prefix, run_id)
-        self.__thread_wise_ref_conf_map[threading.currentThread().name] = self.__test_session.init(project_root_dir, cli_config, run_id)
-
 
         # Process linked Arjuna projects
         def get_arjuna_project_path_and_name(fpath):
@@ -154,7 +152,7 @@ class ArjunaSingleton:
                         raise Exception("Not a directory: {}".format(fpath))
                 return os.path.basename(fpath), os.path.abspath(fpath), os.path.abspath(fpath + "/..")
             else:
-                fpath = os.path.abspath(os.path.join(self.ref_config.value(ArjunaOption.PROJECT_ROOT_DIR), fpath))
+                fpath = os.path.abspath(os.path.join(project_root_dir, fpath))
                 if not file_utils.is_dir(fpath):
                     if file_utils.is_file(fpath):
                         raise Exception("Not a directory: {}".format(fpath))
@@ -166,14 +164,23 @@ class ArjunaSingleton:
         from arjuna.tpi.constant import ArjunaOption
 
         unique_paths = list()
-        for arjuna_proj_dir in self.ref_config.value(ArjunaOption.LINKED_ARJUNA_PROJECT_DIRS):
+        for arjuna_proj_dir in linked_projects:
             proj_name, proj_path, proj_import_path = get_arjuna_project_path_and_name(arjuna_proj_dir)
-            self.__linked_projects.append(ArjunaProject(name=proj_name, location=proj_path))
+            from arjuna.configure.configurator import TestConfigurator
+            l_proj_configurator = TestConfigurator(proj_path, cli_config, run_id)
+            #ref_conf = self.__test_session._create_config(l_proj_configurator.ref_config)
+            ref_conf = l_proj_configurator.ref_config
+            data_env_conf_map = l_proj_configurator.file_confs
+            #for run_env_conf in [self.__test_session._create_config(econf, name=name) for name, econf in l_proj_configurator.file_confs.items()]:
+            #    data_env_conf_map[run_env_conf.name] = run_env_conf
+            self.__linked_projects.append(LinkedArjunaProject(name=proj_name, location=proj_path, ref_conf=ref_conf, data_env_conf_map=data_env_conf_map))
             unique_paths.append(proj_import_path)
         
         unique_paths = set(unique_paths)
         for p in unique_paths:
             sys.path.append(p)
+
+        self.__thread_wise_ref_conf_map[threading.currentThread().name] = self.__test_session.init(project_root_dir, cli_config, run_id, self.__linked_projects)
 
         def get_src_file_path(src):
             return os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), src))
@@ -407,7 +414,7 @@ class Arjuna:
         return cls.__ARJ_COMMAND
 
     @classmethod
-    def init(cls, project_root_dir, cli_config=None, run_id=None, *, static_rid=False):
+    def init(cls, project_root_dir, cli_config=None, run_id=None, *, static_rid=False, linked_projects=[]):
         '''
             Returns reference test context which contains reference configuration.
             This reference test context merges central conf, project conf and central CLI options.
@@ -415,7 +422,9 @@ class Arjuna:
             You can also provide an alternative root directory for test project.
         '''
         cls.ARJUNA_SINGLETON = ArjunaSingleton()
-        return cls.ARJUNA_SINGLETON.init(project_root_dir, cli_config, run_id, static_rid=static_rid)
+        if linked_projects is None:
+            linked_projects = list()
+        return cls.ARJUNA_SINGLETON.init(project_root_dir, cli_config, run_id, static_rid=static_rid, linked_projects=linked_projects)
 
     @classmethod
     def get_logger(cls):
