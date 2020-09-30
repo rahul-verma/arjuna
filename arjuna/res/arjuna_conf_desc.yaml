@@ -72,6 +72,7 @@ browser.dim.width: positive_float
 browser.bin.path: absolute_file_path
 browser.network.recorder.enabled: bool
 browser.network.recorder.automatic: bool
+allow.insecure.ssl.cert: bool
 
 scroll.pixels: positive_int
 

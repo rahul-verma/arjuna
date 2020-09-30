@@ -94,6 +94,11 @@ class DriverCapabilities:
             "browserExtensions":[]
         }
 
+        from arjuna import ArjunaOption
+        insecure_ssl_cert_allowed = config.value(ArjunaOption.ALLOW_INSECURE_SSL_CERT)
+        if insecure_ssl_cert_allowed:
+            self.__out_dict["driverCapabilities"]["acceptInsecureCerts"] = True
+
         self.__process_config(config)
         self.__process(json_dict)
         self.__host_os = self.__config.value(ArjunaOption.RUN_HOST_OS).name.lower()

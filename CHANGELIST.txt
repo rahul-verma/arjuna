@@ -51,6 +51,8 @@ Future Themes (In-Progress or Planned):
 
 1.1.14
 ------
+- Added support to ignore insecure SSL certificate in Web Gui Automation.
+- ArjunaOption.ALLOW_INSECURE_SSL_CERT can be set to False to switch this off (True by default). The browser should support this capability.
 
 1.1.13
 ------

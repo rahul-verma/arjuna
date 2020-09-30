@@ -75,6 +75,7 @@ arjuna_options:
   browser.bin.path: NOT_SET
   browser.network.recorder.enabled: False
   browser.network.recorder.automatic: False
+  allow.insecure.ssl.cert: True
 
   scroll.pixels: 100
 

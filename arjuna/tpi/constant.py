@@ -195,6 +195,9 @@ class ArjunaOption(Enum):
     BROWSER_NETWORK_RECORDER_AUTOMATIC = auto()
     '''If True, when a browser is launched, Arjuna automatically starts capturing all traffic. Default is False'''
 
+    ALLOW_INSECURE_SSL_CERT = auto()
+    '''If True, insecure SSL certificates are allowd. Default is True'''
+
     GUIAUTO_NAME = auto()
     '''Engine name. Currently set to Selenium which is the only supported engine.'''
 
