@@ -61,6 +61,9 @@ class DataReferences:
     def __init__(self):
         vars(self)['_store'] = CIStringDict()
 
+    def as_dict(self):
+        return vars(self)['_store'].orig_dict
+
     def __getitem__(self, name):
         return self._store[name]
 
@@ -77,6 +80,10 @@ class DataReferences:
     def __str__(self):
         return str(self._store)
 
+    def update(self, data_refs):
+        vars(self)['_store'].update(data_refs.as_dict())
+
+
 class DataReference:
 
     @classmethod
@@ -88,7 +95,7 @@ class DataReference:
             for fname in os.listdir(contextual_data_ref_dir):
                 if not (fname.lower().endswith("xls") or fname.lower().endswith("yaml")) :
                     continue
-                crefs[os.path.splitext(fname)[0]] = cls.create_contextual_data_ref(fname)
+                crefs[os.path.splitext(fname)[0]] = cls.create_contextual_data_ref(ref_config, fname)
 
         irefs = DataReferences()
         indexed_data_ref_dir = ref_config.value(ArjunaOption.DATA_REF_INDEXED_DIR)
@@ -96,25 +103,25 @@ class DataReference:
             for fname in os.listdir(indexed_data_ref_dir):
                 if not (fname.lower().endswith("xls") or fname.lower().endswith("yaml")) :
                     continue
-                irefs[os.path.splitext(fname)[0]] = cls.create_indexed_data_ref(fname)
+                irefs[os.path.splitext(fname)[0]] = cls.create_indexed_data_ref(ref_config, fname)
         return crefs, irefs
 
     @classmethod
-    def __create_file_data_ref(cls, file_path, type):
+    def __create_file_data_ref(cls, ref_config, file_path, type):
         ext = file_path.lower()
         if not ext.endswith("xls") and not ext.endswith("yaml"):
             raise Exception("Unsupported file extension for data reference: {}. Allowed: [xls, yaml]".format(file_path))
 
         from arjuna import Arjuna, ArjunaOption
         if type == DataRefType.CONTEXTUAL:
-            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_CONTEXTUAL_DIR)
+            data_dir = ref_config.value(ArjunaOption.DATA_REF_CONTEXTUAL_DIR)
             file_path = get_data_file_path(data_dir, file_path)
             if file_path.lower().endswith("xls"):
                 return ExcelContextualDataReference(file_path)
             else:
                 return YamlContextualDataReference(file_path)
         elif type == DataRefType.INDEXED:
-            data_dir = Arjuna.get_config().value(ArjunaOption.DATA_REF_INDEXED_DIR)
+            data_dir = ref_config.value(ArjunaOption.DATA_REF_INDEXED_DIR)
             file_path = get_data_file_path(data_dir, file_path)
             if file_path.lower().endswith("xls"):
                 return ExcelIndexedDataReference(file_path)
@@ -122,10 +129,10 @@ class DataReference:
                 return YamlIndexedDataReference(file_path)
 
     @classmethod
-    def create_contextual_data_ref(cls, file_path):
-        return cls.__create_file_data_ref(file_path, DataRefType.CONTEXTUAL)
+    def create_contextual_data_ref(cls, ref_config, file_path):
+        return cls.__create_file_data_ref(ref_config, file_path, DataRefType.CONTEXTUAL)
 
     @classmethod
-    def create_indexed_data_ref(cls, file_path):
-        return cls.__create_file_data_ref(file_path, DataRefType.INDEXED)
+    def create_indexed_data_ref(cls, ref_config, file_path):
+        return cls.__create_file_data_ref(ref_config, file_path, DataRefType.INDEXED)
 

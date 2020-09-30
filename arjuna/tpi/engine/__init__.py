@@ -41,7 +41,7 @@ from arjuna.tpi.error import TestSelectorNotFoundError
 import codecs
 import sys
 
-LinkedArjunaProject = namedtuple("LinkedArjunaProject", "name, location, ref_conf, data_env_conf_map")
+LinkedArjunaProject = namedtuple("LinkedArjunaProject", "name, location, ref_conf_editable, ref_conf, data_env_conf_map")
 
 @singleton
 class ArjunaSingleton:
@@ -168,12 +168,12 @@ class ArjunaSingleton:
             proj_name, proj_path, proj_import_path = get_arjuna_project_path_and_name(arjuna_proj_dir)
             from arjuna.configure.configurator import TestConfigurator
             l_proj_configurator = TestConfigurator(proj_path, cli_config, run_id)
-            #ref_conf = self.__test_session._create_config(l_proj_configurator.ref_config)
-            ref_conf = l_proj_configurator.ref_config
+            ref_conf_editable = l_proj_configurator.ref_config
+            ref_conf = self.__test_session._create_config(ref_conf_editable)
             data_env_conf_map = l_proj_configurator.file_confs
             #for run_env_conf in [self.__test_session._create_config(econf, name=name) for name, econf in l_proj_configurator.file_confs.items()]:
             #    data_env_conf_map[run_env_conf.name] = run_env_conf
-            self.__linked_projects.append(LinkedArjunaProject(name=proj_name, location=proj_path, ref_conf=ref_conf, data_env_conf_map=data_env_conf_map))
+            self.__linked_projects.append(LinkedArjunaProject(name=proj_name, location=proj_path, ref_conf=ref_conf, ref_conf_editable=ref_conf_editable, data_env_conf_map=data_env_conf_map))
             unique_paths.append(proj_import_path)
         
         unique_paths = set(unique_paths)
@@ -258,8 +258,18 @@ except ModuleNotFoundError as e:
             sys.path.append(deps_dir) 
 
         # Load data references
-        from arjuna.engine.data.factory import DataReference
-        self.__contextual_data_references, self.__indexed_data_references  = DataReference.load_all(self.ref_config)
+        from arjuna.engine.data.factory import DataReference, DataReferences
+        self.__contextual_data_references = DataReferences()
+        self.__indexed_data_references = DataReferences()
+
+        for linked_project in self.__linked_projects:
+            cdrs, idrs = DataReference.load_all(linked_project.ref_conf)
+            self.__contextual_data_references.update(cdrs)
+            self.__indexed_data_references.update(idrs)
+
+        cdrs, idrs  = DataReference.load_all(self.ref_config)
+        self.__contextual_data_references.update(cdrs)
+        self.__indexed_data_references.update(idrs)
 
         # Load localization data
         from arjuna.engine.data.localizer import Localizer

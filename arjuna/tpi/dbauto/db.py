@@ -49,18 +49,18 @@ class Database(metaclass=abc.ABCMeta):
         self._handle.commit()
         cursor.close()
 
-    def __get_sql_file_path(self, fpath):
+    def __get_sql_file_path(self, fname):
         from arjuna.core.utils import file_utils
-        from arjuna import ArjunaOption
-        if file_utils.is_absolute_path(fpath):
-            if not file_utils.is_file(fpath):
-                raise Exception("File not found: {}".format(fpath))
+        from arjuna import Arjuna, ArjunaOption
+        fpath = os.path.abspath(os.path.join(self._config.value(ArjunaOption.DBAUTO_SQL_DIR), fname))
+        if file_utils.is_file(fpath):
             return fpath
         else:
-            fpath = os.path.abspath(os.path.join(self._config.value(ArjunaOption.DBAUTO_SQL_DIR), fpath))
-            if not file_utils.is_file(fpath):
-                raise Exception("File not found: {}".format(fpath))
-            return fpath
+            for linked_project in reversed(Arjuna.get_linked_projects()):
+                fpath = os.path.abspath(os.path.join(linked_project.ref_conf.value(ArjunaOption.DBAUTO_SQL_DIR), fname))
+                if file_utils.is_file(fpath):
+                    return fpath
+        raise Exception("DBAuto SQL File not found: {}".format(fname))
 
     def execute_file(self, fpath, **formatters):
         fpath = self.__get_sql_file_path(fpath)

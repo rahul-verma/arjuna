@@ -328,7 +328,7 @@ class EditableConfig:
     def project_conf(cls, *, arjuna_conf, linked_projects):
         proj_conf = cls.empty_conf()
         for linked_project in linked_projects:
-            proj_conf.update(linked_project.ref_conf)
+            proj_conf.update(linked_project.ref_conf_editable)
         proj_conf.update(arjuna_conf)
         location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_PROJECT_FILE)
         if not os.path.isfile(location):

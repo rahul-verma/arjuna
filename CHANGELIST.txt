@@ -56,6 +56,8 @@ Future Themes (In-Progress or Planned):
     - Support for auto-merger of default ref configuration for parent project with all linked projects (including default data & env options merger with ref.)
     - Support for auto-merger of data and environment configurations. The combinations are also included. However, combinations are created only project-wise (i.e. linked project data or env is not combined with data/env of top or other linked projects.)
     - Support for auto-import of test resources defined in linked projects in the parent project (conftest.py auto-generation is improved to cater to this.)
+    - Support for fallback lookup of DBAuto SQL files from top project to linked projects in reversed order.
+    - Support for auto-merger of data references. If data references have same names, then preference order is top project and then linked projects in reverse order.
 
 1.1.12
 ------

@@ -26,8 +26,9 @@ from arjuna.tpi.parser.json import Json, JsonDict
 
 class L10NRef:
 
-    def __init__(self):
+    def __init__(self, ref_config):
         self.map = {}
+        self.ref_config = ref_config
 
     def update_from_excel_ref(self, localizer_ref):
         for lang, record in localizer_ref.map.items():
@@ -73,16 +74,16 @@ class L10NRef:
 
 class ExcelL10NRef(L10NRef):
 
-    def __init__(self, fpath):
-        super().__init__()
-        excel_ref = DataReference.create_contextual_data_ref(fpath)
+    def __init__(self, ref_config, fpath):
+        super().__init__(ref_config)
+        excel_ref = DataReference.create_contextual_data_ref(self.ref_config, fpath)
         self.map = excel_ref._map
 
 class JsonL10NRef(L10NRef):
 
-    def __init__(self, ldir):
+    def __init__(self, ref_config, ldir):
         from arjuna import log_fatal
-        super().__init__()
+        super().__init__(ref_config)
         fnames = os.listdir(ldir)
         fnames.sort()
         for fname in fnames:
@@ -156,25 +157,25 @@ class Localizer:
     def load_all(cls, ref_config):
         from arjuna.tpi.constant import ArjunaOption
         l10n_dir = ref_config.value(ArjunaOption.L10N_DIR)
-        l10n_merged_ref = L10NRef()
+        l10n_merged_ref = L10NRef(ref_config)
         l10n_refs = Localizers()
         if os.path.isdir(l10n_dir):
             fnames = os.listdir(l10n_dir)
             fnames.sort()
             for fname in fnames:
                 if fname.lower().endswith("xls"):
-                    ref = ExcelL10NRef(os.path.join(l10n_dir, fname))
+                    ref = ExcelL10NRef(ref_config, os.path.join(l10n_dir, fname))
                     l10n_merged_ref.update_from_excel_ref(ref)
                     l10n_refs[os.path.splitext(fname)[0]] = ref
 
         if os.path.isdir(l10n_dir):        
-            json_ref = JsonL10NRef(l10n_dir)
+            json_ref = JsonL10NRef(ref_config, l10n_dir)
             cls.__process_json_ref(l10n_merged_ref, l10n_refs, json_ref, bucket="root")
             buckets = os.listdir(l10n_dir)
             for bucket in buckets:
                 if os.path.isdir(os.path.join(l10n_dir, bucket)):
                     dpath = os.path.join(l10n_dir, bucket)
-                    json_ref = JsonL10NRef(dpath)
+                    json_ref = JsonL10NRef(ref_config, dpath)
                     cls.__process_json_ref(l10n_merged_ref, l10n_refs, json_ref, bucket=bucket)
 
         # l10n_merged_ref.enumerate()
