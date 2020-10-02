@@ -84,6 +84,8 @@ class PytestHooks:
     @classmethod
     def add_env_data(cls, config):
         from arjuna import C, Arjuna
+        import pkg_resources
+        config._metadata['Arjuna Version'] = pkg_resources.require("arjuna")[0].version
         config._metadata['Arjuna Test Project Directory'] = C("project.root.dir")
         config._metadata['Arjuna Test Project Name'] = C("project.name")
         config._metadata['Reference Configuration'] = Arjuna.get_config().name

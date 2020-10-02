@@ -51,6 +51,8 @@ Future Themes (In-Progress or Planned):
 
 1.1.15
 ------
+    - Added versions of dependencies in setup.py
+    - Arjuna version is included in the HTML report.
 
 1.1.14
 ------
