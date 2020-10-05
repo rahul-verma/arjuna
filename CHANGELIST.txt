@@ -49,6 +49,9 @@ Future Themes (In-Progress or Planned):
         - Add container assertions to Asserter.
         - as_json() to data reference. 
 
+1.1.16
+------
+
 1.1.15
 ------
     - Added versions of dependencies in setup.py
