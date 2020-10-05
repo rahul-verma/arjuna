@@ -21,7 +21,7 @@ import types
 
 from arjuna.core.reader.excel import *
 from arjuna.core.reader.ini import *
-from arjuna.core.reader.textfile import *
+from arjuna.tpi.parser.text import *
 from arjuna.core.thread import decorators
 from arjuna.tpi.error import *
 from arjuna.core.error import *

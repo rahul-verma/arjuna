@@ -9,7 +9,6 @@ Submodules
    arjuna.core.reader.excel
    arjuna.core.reader.hocon
    arjuna.core.reader.ini
-   arjuna.core.reader.textfile
 
 Module contents
 ---------------

@@ -8,6 +8,7 @@ Submodules
 
    arjuna.tpi.parser.html
    arjuna.tpi.parser.json
+   arjuna.tpi.parser.text
    arjuna.tpi.parser.xml
    arjuna.tpi.parser.yaml
 

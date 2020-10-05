@@ -53,6 +53,7 @@ Future Themes (In-Progress or Planned):
 ------
     - Added versions of dependencies in setup.py
     - Arjuna version is included in the HTML report.
+    - Added Text parsing class with various File reading formats to TPI.
 
 1.1.14
 ------

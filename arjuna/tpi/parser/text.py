@@ -35,7 +35,6 @@ class FileReader:
     def _get_file(self):
         return self._f
 
-
 class TextResourceReader(FileReader):
     def __init__(self, file_name):
         super().__init__(
@@ -70,15 +69,19 @@ class FileLineReader:
 
 
 class FileLine2ArrayReader:
-    def __init__(self, file_path, delimiter="\t"):
+
+    def __init__(self, file_path, delimiter="\t", *, header_line_present=True):
         self.__filereader = FileLineReader(file_path)
         self.delimiter = delimiter
-        self.headers = None
+        self.__headers = None
         self._populate_headers()
+
+    def __iter__(self):
+        return self
 
     def _populate_headers(self):
         try:
-            self.headers = self.next()
+            self.__headers = self.next()
         except:
             raise Exception("Invalid input file data. Empty headers line.")
 
@@ -86,8 +89,11 @@ class FileLine2ArrayReader:
         line = self.__filereader.next()
         return data_utils.split(line.rstrip(), self.delimiter)
 
-    def get_headers(self):
-        return self.headers
+    __next__ = next
+
+    @property
+    def headers(self):
+        return self.__headers
 
     def close(self):
         self.__filereader.close()
@@ -97,7 +103,11 @@ class FileLine2MapReader:
     def __init__(self, file_path, delimiter="\t"):
         self.__filereader = FileLine2ArrayReader(file_path, delimiter)
 
-    def get_headers(self):
+    def __iter__(self):
+        return self
+
+    @property
+    def headers(self):
         return self.__filereader.headers
 
     def close(self):
@@ -106,9 +116,21 @@ class FileLine2MapReader:
     def next(self):
         line_parts = self.__filereader.next()
 
-        if len(self.get_headers()) != len(line_parts):
+        if len(self.headers) != len(line_parts):
             raise Exception(
                 "Invalid input file data. Number of headers and data values do not match.{0}Headers:{1}{0}Data values:{2}{0}".format(
-                    os.linesep, self.get_headers(), line_parts))
+                    os.linesep, self.headers, line_parts))
         else:
-            return dict(zip(self.get_headers(), line_parts))
+            return dict(zip(self.headers, line_parts))
+
+    __next__ = next
+
+
+class Text:
+
+    @classmethod
+    def delimited_file(cls, fpath, delimiter="\t", header_line_present=True):
+        if header_line_present:
+            return FileLine2MapReader(fpath, delimiter)
+        else:
+            return FileLine2ArrayReader(fpath, delimiter)

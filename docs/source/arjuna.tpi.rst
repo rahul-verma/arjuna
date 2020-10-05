@@ -7,6 +7,7 @@ Subpackages
 .. toctree::
 
    arjuna.tpi.data
+   arjuna.tpi.dbauto
    arjuna.tpi.engine
    arjuna.tpi.guiauto
    arjuna.tpi.helper

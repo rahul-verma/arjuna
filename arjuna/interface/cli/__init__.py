@@ -24,7 +24,7 @@ import time
 from arjuna.core.utils import sys_utils
 from arjuna.tpi.constant import *
 from arjuna.core.constant import *
-from arjuna.core.reader.textfile import TextResourceReader
+from arjuna.tpi.parser.text import TextResourceReader
 from arjuna.core.types import constants
 from arjuna.core.adv.py import *
 from arjuna.interface.enums import CommandEnum
