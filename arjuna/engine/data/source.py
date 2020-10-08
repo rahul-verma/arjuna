@@ -148,7 +148,7 @@ class DsvFileMapDataSource(FileDataSource):
         return DataRecord(context=self.context, **dict(data_record))
 
     def _load_file(self):
-        self.reader = FileLine2MapReader(self.path, self.__delimiter)
+        self.reader = DelimTextFileWithLineAsMap(self.path, delimiter=self.__delimiter)
 
 
 class IniFileDataSource(FileDataSource):

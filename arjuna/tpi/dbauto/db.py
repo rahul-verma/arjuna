@@ -64,8 +64,8 @@ class Database(metaclass=abc.ABCMeta):
 
     def execute_file(self, fpath, **formatters):
         fpath = self.__get_sql_file_path(fpath)
-        from arjuna.tpi.parser.text import FileLineReader
-        reader = FileLineReader(fpath)
+        from arjuna.tpi.parser.text import TextFileAsLines
+        reader = TextFileAsLines(fpath)
         queries = list()
         for query in reader:
             if query != "":

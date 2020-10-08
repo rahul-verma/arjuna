@@ -345,10 +345,15 @@ class Http:
                         return o.raw_object
                     return JSONEncoder.default(self, o)
 
+            if type(content) is tuple:
+                content = list(content)
+
             if content:
                 if isinstance(content, JsonList) or isinstance(content, JsonDict):
                     content = content.raw_object
                 content = json.dumps(content, cls=_CustomEncoder, indent=2)
+            else:
+                content = str(content)
             return _HttpContent(content=content, type=cls.get_content_type(cls.json))
 
         @classmethod

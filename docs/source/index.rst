@@ -150,14 +150,22 @@ HTTP Automation
 
    httpauto
 
-Parsing JSON, YAML, XML, HTML Files and Strings
-===============================================
+Parsing Text, JSON, YAML, XML, HTML Files and Strings
+=====================================================
 
 .. toctree::
    :maxdepth: 4
 
    textparsing
 
+
+Frequently Asked Questions (FAQs)
+=================================
+
+.. toctree::
+   :maxdepth: 4
+
+   faq
 
 
 ********************************************
@@ -284,6 +292,12 @@ Objects In Arjuna Hooks
 Parsers
 =======
 
+* :py:mod:`Text <arjuna.tpi.parser.text>`
+    * :py:class:`Text <arjuna.tpi.parser.text.Text>`
+    * :py:class:`TextFile <arjuna.tpi.parser.text.TextFile>`
+    * :py:class:`TextFileAsLines <arjuna.tpi.parser.text.TextFileAsLines>`
+    * :py:class:`DelimTextFileWithLineAsSeq <arjuna.tpi.parser.text.DelimTextFileWithLineAsSeq>`
+    * :py:class:`DelimTextFileWithLineAsMap <arjuna.tpi.parser.text.DelimTextFileWithLineAsMap>`
 * :py:mod:`JSON <arjuna.tpi.parser.json>`
     * :py:class:`Json <arjuna.tpi.parser.json.Json>`
     * :py:class:`JsonElement <arjuna.tpi.parser.json.JsonElement>`

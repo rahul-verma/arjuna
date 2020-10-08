@@ -21,35 +21,77 @@ from arjuna.core.utils import data_utils
 from arjuna.core.types import constants
 
 
-class FileReader:
-    def __init__(self, file_path):
-        self._fpath = file_path
+class TextFile:
+    '''
+    Represents a text file in Read mode.
+
+    Arguments:
+        fpath: Absolute path of text file.
+    '''
+
+    def __init__(self, fpath):
+        self._fpath = fpath
         self._f = open(self._fpath, "r")
 
     def close(self):
+        '''
+           Close the file handle.
+        '''
         self._f.close()
 
-    def read(self):
+    def read(self) -> str:
+        '''
+           Read contents of text file.
+
+           Returns:
+                Content of text file as a Python str object.
+        '''
         return self._f.read()
 
     def _get_file(self):
         return self._f
 
-class TextResourceReader(FileReader):
+
+class _TextResource(TextFile):
     def __init__(self, file_name):
         super().__init__(
         os.path.abspath(os.path.join(os.path.dirname(__file__), os.sep.join(["../..", "res", file_name]))))
 
 
-class FileLineReader:
-    def __init__(self, file_path, **formatters):
-        self.__filereader = open(file_path, "r")
+class TextFileAsLines:
+    '''
+        Represents a text file in Read mode to get line by line content.
+
+        Arguments:
+            fpath: Absolute path of text file.
+
+        Keyword Arguments:
+            **formatters: Arbitrary key-value arguments to format a line before returning.
+
+        Note:
+            You can loop over this object:
+
+                .. code-block:: python
+
+                    for line in fobj:
+                        # Do something about the content
+                        print(line)
+    '''
+
+    def __init__(self, fpath, **formatters):
+        self.__filereader = open(fpath, "r")
         self.__formatters = formatters
 
     def __iter__(self):
         return self
 
-    def next(self):
+    def next(self) -> str:
+        '''
+            Get next line.
+
+            Returns:
+                Line as a Python str object.
+        '''
         l = self.__filereader.readline()
         if not l:
             self.close()
@@ -65,13 +107,35 @@ class FileLineReader:
     __next__ = next
 
     def close(self):
+        '''
+           Close the file handle.
+        '''
         self.__filereader.close()
 
 
-class FileLine2ArrayReader:
+class DelimTextFileWithLineAsSeq:
+    '''
+        Represents a text file in Read mode to get line by line content split by defined delimiter.
 
-    def __init__(self, file_path, delimiter="\t", *, header_line_present=True):
-        self.__filereader = FileLineReader(file_path)
+        Arguments:
+            fpath: Absolute path of text file.
+
+        Keyword Arguments:
+            delimiter: (Optional) Delimiter that separates different parts of line. Default is tab (\t)
+            header_line_present: (Optional) If True, the first line is treated as a header line.
+
+        Note:
+            You can loop over this object:
+
+                .. code-block:: python
+
+                    for line_parts in fobj:
+                        # Do something about the parts of a current line
+                        print(line_parts)
+    '''
+
+    def __init__(self, fpath, *, delimiter="\t", header_line_present=True):
+        self.__filereader = TextFileAsLines(fpath)
         self.delimiter = delimiter
         self.__headers = None
         self._populate_headers()
@@ -85,35 +149,86 @@ class FileLine2ArrayReader:
         except:
             raise Exception("Invalid input file data. Empty headers line.")
 
-    def next(self):
+    def next(self) -> tuple:
+        '''
+            Get next line parsed based on delimiter as a tuple.
+
+            Returns:
+                Line as a Python tuple object.
+        '''
         line = self.__filereader.next()
         return data_utils.split(line.rstrip(), self.delimiter)
 
     __next__ = next
 
     @property
-    def headers(self):
+    def headers(self) -> tuple:
+        '''
+            Get header line parsed based on delimiter as a tuple.
+
+            Returns:
+                Header line as a Python tuple object. None if header line is not present.
+        '''
         return self.__headers
 
     def close(self):
+        '''
+           Close the file handle.
+        '''
         self.__filereader.close()
 
 
-class FileLine2MapReader:
-    def __init__(self, file_path, delimiter="\t"):
-        self.__filereader = FileLine2ArrayReader(file_path, delimiter)
+class DelimTextFileWithLineAsMap:
+    '''
+        Represents a text file in Read mode to get line by line content split by defined delimiter.
+
+        The first line is treated as a header line.
+
+        Arguments:
+            fpath: Absolute path of text file.
+
+        Keyword Arguments:
+            delimiter: (Optional) Delimiter that separates different parts of line. Default is tab (\t)
+
+        Note:
+            You can loop over this object:
+
+                .. code-block:: python
+
+                    for line_parts in fobj:
+                        # Do something about the parts of a current line
+                        print(line_parts)
+    '''
+
+    def __init__(self, fpath, *, delimiter="\t"):
+        self.__filereader = DelimTextFileWithLineAsSeq(fpath, delimiter=delimiter)
 
     def __iter__(self):
         return self
 
     @property
-    def headers(self):
+    def headers(self) -> tuple:
+        '''
+            Get header line parsed based on delimiter as a tuple.
+
+            Returns:
+                Header line as a Python tuple object.
+        '''
         return self.__filereader.headers
 
     def close(self):
+        '''
+           Close the file handle.
+        '''
         self.__filereader.close()
 
-    def next(self):
+    def next(self) -> dict:
+        '''
+            Get next line parsed based on delimiter converted into a Python dictionary based on header line.
+
+            Returns:
+                Line as a Python dict object.
+        '''
         line_parts = self.__filereader.next()
 
         if len(self.headers) != len(line_parts):
@@ -127,10 +242,69 @@ class FileLine2MapReader:
 
 
 class Text:
+    '''
+    Provides factory methods for dealing with reading text file content in various forms.
+    '''
 
     @classmethod
-    def delimited_file(cls, fpath, delimiter="\t", header_line_present=True):
+    def file_content(cls, fpath) -> str:
+        '''
+            Get content of a text file.
+
+            Arguments:
+                fpath: Absolute path of text file.
+
+            Returns:
+                Content of text file as Python str object.
+        '''
+        f = TextFile(fpath)
+        content = f.read()
+        f.close()
+        return content
+
+    @classmethod
+    def file_lines(cls, fpath) -> TextFileAsLines:
+        '''
+            Get a reader for text file in Read mode to get line by line content.
+
+            Arguments:
+                fpath: Absolute path of text file.
+
+            Returns:
+                Arjuna's TextFileAsLines object.
+
+            Note:
+                You must explicitly close the returned object by calling its **close()** method.
+        '''
+        return TextFileAsLines(fpath)
+
+    @classmethod
+    def delimited_file(cls, fpath, *, delimiter="\t", header_line_present=True) -> 'DelimTextFileWithLineAsMap OR DelimTextFileWithLineAsSeq':
+        '''
+            Represents a text file in Read mode to get line by line content split by defined delimiter.
+
+            Arguments:
+                fpath: Absolute path of text file.
+
+            Keyword Arguments:
+                delimiter: (Optional) Delimiter that separates different parts of line. Default is tab (\t)
+                header_line_present: (Optional) If True, the DelimTextFileWithLineAsMap is created, else DelimTextFileWithLineAsSeq is created to represent the file.
+
+            Note:
+                You can loop over the returned object:
+
+                    .. code-block:: python
+
+                        for line in fobj:
+                            # Do something about the parts of a current line
+                            print(line)
+
+                The line is a tuple of parts for DelimTextFileWithLineAsSeq object and is a dictionary for DelimTextFileWithLineAsMap object.
+
+            Note:
+                You must explicitly close the returned object by calling its **close()** method.
+        '''
         if header_line_present:
-            return FileLine2MapReader(fpath, delimiter)
+            return DelimTextFileWithLineAsMap(fpath, delimiter=delimiter)
         else:
-            return FileLine2ArrayReader(fpath, delimiter)
+            return DelimTextFileWithLineAsSeq(fpath, delimiter=delimiter)

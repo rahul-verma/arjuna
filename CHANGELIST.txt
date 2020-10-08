@@ -41,16 +41,21 @@ Future Themes (In-Progress or Planned):
         - ArjunaOption.REPORT_SORT_BY_NAME based on pytest-html option if available Or else auto execte an injected JavaScript to do this.
         - See if a sortable reporting time column and group column can be introduced as well.
         - --no-print-logs is removed in latest pytest. Needs to be removed from Arjuna as well (--show-capture is the option.)
-        - Check groups.yaml rules logic.
         - Docs:
             - Rules usage in CLI
             - Table: Coded Locators and GNS
     - Discussion with Pierre
         - Add container assertions to Asserter.
-        - as_json() to data reference. 
 
 1.1.16
 ------
+    - Added doc for project linking.
+    - Added doc for using selection rules in CLI and groups.yaml
+    - Doc comments for Text parsing module.
+    - Added documentation for Text parsing under Parsing section.
+    - Names of text parsers have been updated.
+    - Return type of headers in text file changed from list to tuple.
+    - DataRecord - indexed_values_as_json and named_values_as_json properties added.
 
 1.1.15
 ------

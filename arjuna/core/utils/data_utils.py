@@ -18,4 +18,4 @@
 def split(in_string, delimiter="\t", uc=False):
     def upper(i):
         return uc and i.upper() or i
-    return [upper(i.strip()) for i in in_string.split(delimiter)]
+    return tuple([upper(i.strip()) for i in in_string.split(delimiter)])

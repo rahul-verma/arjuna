@@ -191,3 +191,7 @@ class ContextualDataReference(metaclass=abc.ABCMeta):
     @abc.abstractmethod
     def _populate(self):
         pass
+
+    def as_json(self):
+        from arjuna import Json, Http
+        return Json.from_str(Http.content.json(self.named_values).content)

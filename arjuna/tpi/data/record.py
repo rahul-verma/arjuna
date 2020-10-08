@@ -77,11 +77,27 @@ class DataRecord:
         return self.__indexed
 
     @property
-    def named_values(self) -> tuple:
+    def indexed_values_as_json(self) -> 'JsonList':
+        '''
+        Get the indexed values in this Data Record as a JsonList.
+        '''
+        from arjuna import Json, Http
+        return Json.from_str(Http.content.json(self.indexed_values).content)
+
+    @property
+    def named_values(self) -> dict:
         '''
             Get all named objects
         '''
         return dict(self.__orig_values)
+
+    @property
+    def named_values_as_json(self) -> 'JsonDict':
+        '''
+        Get the named values in this Data Record as a JsonDict.
+        '''
+        from arjuna import Json, Http
+        return Json.from_str(Http.content.json(self.named_values).content)
 
     def is_empty(self) -> bool:
         '''

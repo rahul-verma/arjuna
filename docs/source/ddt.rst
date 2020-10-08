@@ -154,7 +154,7 @@ An excel data file (.xls file) can contain data in following format. (.xlsx file
 Driving with Delimiter Separated File
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-An delimiter-separated data file can contain data in following format. The delim 
+An delimiter-separated data file can contain data in following format.
 
 **.txt**
 

@@ -555,7 +555,7 @@ class Json:
     @classmethod
     def from_iter(cls, iter) -> JsonList:
         '''
-            Creates a Json object from Python dictionary.
+            Creates a Json object from Python iterator.
 
             Arguments:
                 iter: Python iterable

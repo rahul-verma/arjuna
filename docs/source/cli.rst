@@ -47,8 +47,8 @@ You can see the help for a given command by running **python -m arjuna <command>
 
    python -m arjuna create-project -h
 
-The **create-project** command
-------------------------------
+**create-project** Command
+--------------------------
 
 :ref:`Arjuna Test Project <test_project>` follows a strict test project structure. You can easily create the project skeleton using **create-project** command in Arjuna CLI.
 
@@ -62,8 +62,8 @@ This command creates a test project with name **proj_name** at the path provided
 
 .. _run_project:
 
-The **run-project** command
----------------------------
+**run-project** Command
+-----------------------
 
 This command is used to run all tests in an :ref:`Arjuna Test Project <test_project>`. The tests are picked up from the **<Project Root Dir>/test/module** directory.
 
@@ -90,8 +90,10 @@ Following run options can be provided in command line:
 - **-dl** or **--display-level** to control which log messages are displayed on console. Default is **INFO**.
 - **-ll** or **--log-level** to control which log messages are logged in log file. Default is **DEBUG**.
 
-The **run-selected** command
-----------------------------
+.. _run_selected:
+
+**run-selected** Command
+------------------------
 
 This command is used to run a sub-set of tests in the project. The tests are picked up from the **<Project Root Dir>/test/module** directory as per the selectors provided.
 
@@ -107,8 +109,8 @@ All the command line options specified for :ref:`the run-project command <run_pr
 - **-et** or **--exclude-tests**: One or more names/patterns for excluding test functions.
 
 
-The **run-session** command
----------------------------
+**run-session** Command
+-----------------------
 
 This command is used to run tests as per a session definition in **<Project Root Directory>/config/sessions.yaml** file.
 
@@ -121,8 +123,8 @@ All the command line options specified for :ref:`the run-project command <run_pr
 - **-s** or **--session-name**: Name of session definition file (without .yaml extension)
 
 
-The **run-stage** command
--------------------------
+**run-stage** Command
+---------------------
 
 This command is used to run tests as per a test stage definition in **<Project Root Directory>/config/stages.yaml** file.
 
@@ -135,8 +137,10 @@ All the command line options specified for :ref:`the run-project command <run_pr
 - **-s** or **--stage-name**: Name of a defined stage
 
 
-The **run-group** command
--------------------------
+.. _run_group:
+
+**run-group** Command
+---------------------
 
 This command is used to run tests as per a test group definition in **<Project Root Directory>/config/groups.yaml** file.
 

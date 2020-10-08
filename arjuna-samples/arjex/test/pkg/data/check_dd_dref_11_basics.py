@@ -46,6 +46,14 @@ def check_contextual_data_ref(request, data):
     print(R(f"{data.dcontext}.{data.field}", bucket=data.bucket))
     print(R(f"{data.bucket}.{data.dcontext}.{data.field}")) 
 
+@test
+def check_context_ref_record_as_json(request):
+    rec = R('eusers.bronze')
+    assert isinstance(rec, DataRecord)
+    from arjuna.tpi.parser.json import JsonDict
+    assert isinstance(rec.named_values_as_json, JsonDict)
+    assert rec.named_values_as_json == {'User': 'B1', 'Pwd': 'BP1'}
+
 @test(drive_with=
     records(
         # Excel
@@ -121,6 +129,14 @@ def check_indexed_data_ref(request, data):
     print(R(f"{data.field}", bucket=data.bucket, index=data.index))
     print(R(f"{data.index}.{data.field}", bucket=data.bucket))
     print(R(f"{data.bucket}.{data.index}.{data.field}"))
+
+@test
+def check_indexed_ref_record_as_json(request):
+    rec = R('eindexed.0')
+    assert isinstance(rec, DataRecord)
+    from arjuna.tpi.parser.json import JsonDict
+    assert isinstance(rec.named_values_as_json, JsonDict)
+    assert rec.named_values_as_json == {'Left': 1.0, 'Right': 2.0, 'Sum': '3'}
 
 @test(drive_with=
     records(

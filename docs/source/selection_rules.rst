@@ -36,6 +36,8 @@ Any number of these rules can be specified in CLI or test group definition.
 **Rules Grammar**
 =================
 
+.. _boolean_pattern_rule:
+
 **Boolean Pattern** Rule
 ------------------------
 
@@ -46,6 +48,7 @@ Simple Pattern for Boolean test attributes.
     unstable
     not unstable
 
+.. _iterable_pattern_rule:
 
 **Iterable Pattern** Rule
 -------------------------
@@ -63,6 +66,8 @@ Simple Pattern for presence/absence of strings in iterables.
 * **with** keyword means an iterable that **DOESNOT** contain **ANY** of the provided names.
 
 You can use singular version as well - **tag/bug/env** for built-in containers.
+
+.. _test_attr_rule:
 
 **Test Attribute Pattern** Rule
 -------------------------------

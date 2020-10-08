@@ -56,9 +56,9 @@ class _ArjunFacade:
         self.__version = pkg_resources.require("arjuna")[0].version
 
     def launch(self, raw_args):
-        from arjuna.tpi.parser.text import TextResourceReader
+        from arjuna.tpi.parser.text import _TextResource
         from arjuna.interface.cli import ArjunaCLI
-        reader = TextResourceReader("header.txt")
+        reader = _TextResource("header.txt")
         print(reader.read().format(version=self.__version))
         reader.close()
 
