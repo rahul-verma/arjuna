@@ -91,6 +91,8 @@ class DB:
             host=host,
             user=user,
             password=password,
+            ssl_disabled = True,
+
         )
         return MySQL(db, config)
 
