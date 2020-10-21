@@ -77,6 +77,8 @@ class ArjunaSingleton:
         self.__current_test_wise_objects = CurrentTestWiseContainer()
         self.__allowed_log_contexts = {"default"}
         self.__bmproxy_server = None
+        from arjuna.interact.gui.auto.finder.withx import WithX
+        self.__common_withx_ref = WithX()
 
         self.__linked_projects = None
 

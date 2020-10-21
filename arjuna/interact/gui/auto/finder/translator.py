@@ -55,6 +55,7 @@ class LocatorTranslator:
 
     @classmethod
     def translate(cls, locator):
+        from arjuna import log_debug
         rltype = locator.ltype
         rlvalue = locator.lvalue
         glvalue = None
@@ -63,6 +64,7 @@ class LocatorTranslator:
         except Exception as e:
             raise Exception("Invalid locator across all automators: {}={}. Error: {}".format(rltype, type(rlvalue), str(e)))
         else:
+            log_debug("Processing locator: Type: {}; Value: {}".format(str(gltype), rlvalue))
             if gltype == GenericLocateWith.ELEMENT:
                 glvalue = rlvalue
             elif gltype in cls.BASIC_LOCATORS:

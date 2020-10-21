@@ -49,7 +49,8 @@ Future Themes (In-Progress or Planned):
 
 1.1.17
 ------
-
+    - Fix for non-existing central withx.yaml.
+    - Fix by Stefan for MySQL connector error.
 
 1.1.16
 ------
