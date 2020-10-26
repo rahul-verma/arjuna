@@ -322,6 +322,12 @@ Helpers
 =======
 * :py:meth:`HardCoded.sleep <arjuna.tpi.helper.audit.HardCoded.sleep>`
 * :py:class:`Image <arjuna.tpi.helper.image.Image>`
+* :py:meth:`Date Time Helper Classes <arjuna.tpi.helper.datetime>`
+    * :py:class:`Time <arjuna.tpi.helper.datetime.Time>`
+    * :py:class:`DateTime <arjuna.tpi.helper.datetime.DateTime>`
+    * :py:class:`DateTimeDelta <arjuna.tpi.helper.datetime.DateTimeDelta>`
+    * :py:class:`DateTimeDeltaBuilder <arjuna.tpi.helper.datetime.DateTimeDeltaBuilder>`
+    * :py:class:`DateTimeStepper <arjuna.tpi.helper.datetime.DateTimeStepper>`
 * :py:meth:`Arjuna Types <arjuna.tpi.helper.arjtype>`
     * :py:class:`CIStringDict <arjuna.tpi.helper.arjtype.CIStringDict>`
     * :py:class:`ProcessedKeyDict <arjuna.tpi.helper.arjtype.ProcessedKeyDict>`

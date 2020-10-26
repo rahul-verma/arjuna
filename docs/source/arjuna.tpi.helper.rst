@@ -8,6 +8,7 @@ Submodules
 
    arjuna.tpi.helper.arjtype
    arjuna.tpi.helper.audit
+   arjuna.tpi.helper.datetime
    arjuna.tpi.helper.image
 
 Module contents
