@@ -49,6 +49,8 @@ Future Themes (In-Progress or Planned):
 
 1.1.18
 ------
+    - Added datetime helper module in TPI
+        - Time, DateTime, DateTimeDelta, DateTimeDeltaBuilder, DateTimeStepper classes.
 
 1.1.17
 ------

@@ -15,23 +15,24 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.tpi.constant import TimeUnit
+from arjuna import *
 
-class Time:
+@test
+def check_datetime_stepper_def(request):
+    dts = DateTimeStepper(max_steps=25)
+    for d in dts:
+        print(d)
+    
 
-    def __init__(self, time_unit, value):
-        self.__unit = time_unit
-        self.__value = value
+@test
+def check_datetime_stepper_back(request):
+    dts = DateTimeStepper(forward=False, max_steps=25)
+    for d in dts:
+        print(d)
 
-    @staticmethod
-    def seconds(self, secs):
-        return Time(TimeUnit.SECONDS, secs)
-
-    @staticmethod
-    def milli_seconds(self, ms):
-        return Time(TimeUnit.MILLI_SECONDS, ms)
-
-    @staticmethod
-    def minutes(self, mins):
-        return Time(TimeUnit.MINUTES, mins)
+@test
+def check_datetime_stepper_timedelta(request):
+    dts = DateTimeStepper(delta=DateTimeDelta.builder().hours(1).minutes(20).build(), max_steps=25)
+    for d in dts:
+        print(d)
 
