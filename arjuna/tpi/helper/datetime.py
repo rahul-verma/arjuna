@@ -215,6 +215,23 @@ class DateTime:
         '''
         return DateTime(datetime.strptime(dtstr, format), format=format)
 
+    @classmethod
+    def convert(self, dtstr: str, *, from_format: str=_DEF_FORMAT, to_format: str=_DEF_FORMAT):
+        '''
+            Factory method to create a DateTime object from provided date time string.
+
+            Arguments:
+                dtstr: Date Time string
+
+            Keyword Arguments:
+                from_format: String format to parse the provided date time string. Default is '%d.%m.%y %H:%M:%S'.
+                to_format: String format to create the converted date time string. Default is '%d.%m.%y %H:%M:%S'.
+
+            Returns:
+                Date Time string as per to_format
+        '''
+        return DateTime.from_str(dtstr, format=from_format).as_str(format=to_format)  
+
     def as_str(self, *, format=None):
         '''
             String representation of this DateTime object.
