@@ -186,9 +186,9 @@ class DateTime:
             Keyword Arguments:
                 delta: A DateTimeDelta object used to create next date time object. If not provided, a delta of 1 second is used.
                 max_steps: Maximum number of steps or iterations of this object. Default is 100000.
-                forward: Boolen value that sets the direction of date time. If True steps are directed towards future else towards past. Default is True.
+                forward: Boolean value that sets the direction of date time. If True steps are directed towards future else towards past. Default is True.
                 format: String format to represent the generated date time object. If not provided, it is taken from this DateTime object.
-                as_str: Boolena value that controls the return type on next calls. If True, the iterable returns the data time object as a string else DateTime object is returned. Default is True.
+                as_str: Boolean value that controls the return type on next calls. If True, the iterable returns the data time object as a string else DateTime object is returned. Default is True.
         '''
         return DateTimeStepper(start=self, delta=delta, max_steps=max_steps, forward=forward, format=format, as_str=as_str)
 
@@ -274,45 +274,108 @@ class DateTime:
 
 
 class DateTimeDeltaBuilder:
+    '''
+        Builder class to flexibly build a DateTimeDelta object.
+    '''
 
     def __init__(self):
         self.__dtdelta_kwargs = dict()
 
-    def weeks(self, count):
+    def weeks(self, count: int):
+        '''
+            Set number of detla weeks.
+
+            Arguments:
+                count: Number of weeks
+        '''
         self.__dtdelta_kwargs['weeks'] = count
         return self
 
-    def days(self, count):
+    def days(self, count: int):
+        '''
+            Set number of detla days.
+
+            Arguments:
+                count: Number of days
+        '''
         self.__dtdelta_kwargs['days'] = count
         return self
 
-    def hours(self, count):
+    def hours(self, count: int):
+        '''
+            Set number of detla hours.
+
+            Arguments:
+                count: Number of hours
+        '''
         self.__dtdelta_kwargs['hours'] = count
         return self
 
-    def minutes(self, count):
+    def minutes(self, count: int):
+        '''
+            Set number of detla minutes.
+
+            Arguments:
+                count: Number of minutes
+        '''
         self.__dtdelta_kwargs['minutes'] = count
         return self
 
-    def seconds(self, count):
+    def seconds(self, count: int):
+        '''
+            Set number of detla seconds.
+
+            Arguments:
+                count: Number of seconds
+        '''
         self.__dtdelta_kwargs['seconds'] = count
         return self
 
-    def milliseconds(self, count):
+    def milliseconds(self, count: int):
+        '''
+            Set number of detla miliseconds.
+
+            Arguments:
+                count: Number of milliseconds
+        '''
         self.__dtdelta_kwargs['milliseconds'] = count
         return self
 
-    def microseconds(self, count):
+    def microseconds(self, count: int):
+        '''
+            Set number of detla microseconds.
+
+            Arguments:
+                count: Number of microseconds
+        '''
         self.__dtdelta_kwargs['microseconds'] = count
         return self
 
     def build(self):
+        '''
+            Build a DateTimeDelta object as per values set in builder.
+
+            Returns:
+                DateTimeDelta object.
+        '''
         return DateTimeDelta(**self.__dtdelta_kwargs)
 
 
 class DateTimeDelta:
+    '''
+        Represents a delta (difference) in date time.
 
-    def __init__(self, *, weeks=0, days=0, hours=0, minutes=0, seconds=0, milliseconds=0, microseconds=0):
+        Keyword Arguments:
+            weeks: Delta number of weeks.
+            days: Delta number of days.
+            hours: Delta number of hours.
+            minutes: Delta number of minutes.
+            seconds: Delta number of seconds.
+            miliseconds: Delta number of miliseconds.
+            microseconds: Delta number of microseconds.
+    '''
+
+    def __init__(self, *, weeks: int=0, days: int=0, hours: int=0, minutes: int=0, seconds: int=0, milliseconds: int=0, microseconds: int=0):
         self.__delta = timedelta(weeks=weeks, days=days, hours=hours, minutes=minutes, seconds=seconds, milliseconds=milliseconds, microseconds=microseconds)
 
     @property
@@ -321,15 +384,32 @@ class DateTimeDelta:
 
     @classmethod
     def builder(cls):
+        '''
+            Create a DateTimeDeltaBuilder object.
+
+            Returns:
+                DateTimeDeltaBuilder object
+        '''
         return DateTimeDeltaBuilder()
 
     @classmethod
     def zero(cls):
+        '''
+            Create a DateTimeDelta object which represents no change in date time.
+
+            Returns:
+                DateTimeDelta object.
+        '''
         return DateTimeDelta()
 
-    def from_now(self, *, forward=True):
+    def from_now(self, *, forward: bool=True, format: str=_DEF_FORMAT):
+        '''
+            Keyword Arguments:
+                forward: Boolen value that sets the direction of date time. If True delta is added else it is subtracted. Default is True.
+                format: String format to represent the generated date time object. Default is '%d.%m.%y %H:%M:%S'.
+        '''
         if forward:
-            return DateTime(datetime.today() + self._value)
+            return DateTime(datetime.today() + self._value, format=format)
         else:
-            return DateTime(datetime.today() - self._value)
+            return DateTime(datetime.today() - self._value, format=format)
 
