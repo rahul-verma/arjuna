@@ -47,6 +47,9 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.1.20
+------
+
 1.1.19
 ------
     - Changed report exception pytest traceback type to line for terse output (experimental)
