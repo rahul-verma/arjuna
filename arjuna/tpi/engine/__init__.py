@@ -148,17 +148,18 @@ class ArjunaSingleton:
         # Process linked Arjuna projects
         def get_arjuna_project_path_and_name(fpath):
             from arjuna.core.utils import file_utils
-            if file_utils.is_absolute_path(fpath):
-                if not file_utils.is_dir(fpath):
-                    if file_utils.is_file(fpath):
-                        raise Exception("Not a directory: {}".format(fpath))
-                return os.path.basename(fpath), os.path.abspath(fpath), os.path.abspath(fpath + "/..")
-            else:
+            if not file_utils.is_absolute_path(fpath):
                 fpath = os.path.abspath(os.path.join(project_root_dir, fpath))
-                if not file_utils.is_dir(fpath):
-                    if file_utils.is_file(fpath):
-                        raise Exception("Not a directory: {}".format(fpath))
-                return os.path.basename(fpath), os.path.abspath(fpath), os.path.abspath(fpath + "/..") 
+            
+            if not file_utils.is_dir(fpath):
+                if file_utils.is_file(fpath):
+                    raise Exception("The Linked Arjuna Project path is a file. It should be a directory: {}".format(fpath))
+                else:
+                    raise Exception("The Linked Arjuna Project path does not exist: {}".format(fpath))
+            else:
+                if not os.path.exists(os.path.join(fpath, "script", "arjuna_launcher.py")):
+                    raise Exception("The Linked Arjuna Project path exists but is not an Arjuna test project: {}".format(fpath))
+                return os.path.basename(fpath), fpath, os.path.abspath(fpath + "/..") 
 
         self.__linked_projects = list()
         linked_project_dict = dict()

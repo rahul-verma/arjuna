@@ -47,8 +47,13 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.1.21
+------
+    - More information in exceptions that are raised when linked projects represent wrong paths.
+
 1.1.20
 ------
+    - Reverted traceback to default.
 
 1.1.19
 ------

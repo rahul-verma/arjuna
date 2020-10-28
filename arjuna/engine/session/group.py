@@ -114,7 +114,7 @@ class TestGroup:
         pytest_ini_path = res_path + "/pytest.ini"
 
         # -s is to print to console.
-        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--disable-warnings", "-rxX", "--css", self.__css_path, '--tb', 'line']
+        self.__pytest_args = ["-c", pytest_ini_path, "--rootdir", self.__project_dir, "--disable-warnings", "-rxX", "--css", self.__css_path]
         if platform.system().casefold() == "Windows".casefold() :
             self.__pytest_args.extend(["--capture", "no"])
         else:
