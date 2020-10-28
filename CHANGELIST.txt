@@ -49,6 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.19
 ------
+    - Changed report exception pytest traceback type to line for terse output (experimental)
 
 1.1.18
 ------

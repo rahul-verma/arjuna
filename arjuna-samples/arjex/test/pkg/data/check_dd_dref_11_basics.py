@@ -17,6 +17,10 @@
 
 from arjuna import *
 
+@test
+def check_missing_ref(request):
+    R('missing')
+
 @test(drive_with=
     records(
         # Excel
