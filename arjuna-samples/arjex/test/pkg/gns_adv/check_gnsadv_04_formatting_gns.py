@@ -18,6 +18,17 @@
 from arjuna import *
 from arjex.lib.gns_adv.app_page_section.app import WordPress
 
+
+@for_module
+def wordpress(request):
+    # Setup
+    wordpress = WordPress(section_dir="dyn")
+    home = wordpress.launch()
+    yield home
+
+    # Teadown
+    wordpress.quit()
+
 @for_module
 def dashboard(request):
     # Setup
@@ -45,3 +56,17 @@ def check_fmt_reference_gns(request, dashboard):
 @test
 def check_fmt_reference_l10n_gns(request, dashboard):
     dashboard.left_nav.gns.dyn_link_l10n.click()
+
+@test
+def check_fmt_gns_node(request, wordpress):
+    e = wordpress.gns.formatter(idx="er_l").user_node_f1
+    print(e.source.content.root)
+
+    e = wordpress.gns.formatter(attr='id', idx="er_l").user_node_f2
+    print(e.source.content.root)
+
+    e = wordpress.gns.formatter(attr1='id', idx="er_l", attr2='size', sz=20).user_node_f3
+    print(e.source.content.root)
+
+    e = wordpress.gns.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).user_node_f4
+    print(e.source.content.root)

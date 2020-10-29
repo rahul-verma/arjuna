@@ -48,3 +48,40 @@ def check_fmt_reference_coded_locate(request, logged_in_wordpress):
 @test
 def check_fmt_reference_l10n_coded_locate(request, logged_in_wordpress):
     logged_in_wordpress.locate(GuiWidgetLocator(link="$L.links.posting$")).click()
+
+
+# Node formatting
+
+@test
+def check_fmt_node_coded(request, wordpress):
+    e = wordpress.formatter(idx="er_l").element(node=node(id="$idx$"))
+    print(e.source.content.root)
+
+    e = wordpress.formatter(idx="er_l").locate(node=node(id="$idx$"))
+
+    # Key and value formatting
+    e = wordpress.formatter(attr='id', idx="er_l").element(node=node(attrs={'$attr$': "$idx$"}))
+    print(e.source.content.root)
+
+    # Multiple attribute
+    e = wordpress.formatter(idx="er_l", sz=20).element(node=node(id="$idx$", size="$sz$"))
+    print(e.source.content.root)
+
+    e = wordpress.formatter(idx="er_l", sz=20).locate(node=node(id="$idx$", size="$sz$"))
+
+    # Key and value formatting
+    e = wordpress.formatter(attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(attrs={'$attr1$': "$idx$", '$attr2$': "$sz$"}))
+    print(e.source.content.root)
+
+    # Multiple attribute and tag
+    e = wordpress.formatter(tg="input", idx="er_l", sz=20).element(node=node(tag="$tg$", id="$idx$", size="$sz$"))
+    print(e.source.content.root)
+
+    e = wordpress.formatter(tg="input", idx="er_l", sz=20).locate(node=node(tag="$tg$", id="$idx$", size="$sz$"))
+
+    # Key and value formatting
+    e = wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(tag="$tg$", attrs={'$attr1$': "$idx$", '$attr2$': "$sz$"}))
+    print(e.source.content.root)
+
+    e = wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(attrs={'tag':"$tg$", '$attr1$': "$idx$", '$attr2$': "$sz$"}))
+    print(e.source.content.root)

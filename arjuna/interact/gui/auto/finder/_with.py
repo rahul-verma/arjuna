@@ -187,6 +187,18 @@ class With(metaclass=_WithXMetaClass):
         return cls._eattr(map)
 
     @classmethod
+    def node(cls, map):
+        return With(WithType.NODE, map)
+
+    @classmethod
+    def fnode(cls, map):
+        return With(WithType.FNODE, map)
+
+    @classmethod
+    def bnode(cls, map):
+        return With(WithType.BNODE, map)
+
+    @classmethod
     def value(cls, value, tag=None):
         return With(WithType.VALUE, value)
 
@@ -273,7 +285,7 @@ class Locator:
                     raise Exception("You must provide a named argument for a custom format string.")
                 repl_value = repl_dict[processed_name]
 
-            fmt_locator_value = fmt_locator_value.replace(target, repl_value)
+            fmt_locator_value = fmt_locator_value.replace(target, str(repl_value))
             
 
         fmt_locator_value = fmt_locator_value.replace("__LB__", "{").replace("__RB__", "}")

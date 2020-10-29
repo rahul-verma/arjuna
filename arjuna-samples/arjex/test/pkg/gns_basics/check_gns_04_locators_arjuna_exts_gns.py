@@ -29,7 +29,7 @@ def wordpress(request):
     wordpress.quit()
 
 @test
-def check_arjuna_exts(request, wordpress):
+def check_arjuna_exts_gns(request, wordpress):
 
     # Based on partial text
     element = wordpress.gns.lost_pass_text
@@ -58,3 +58,14 @@ def check_arjuna_exts(request, wordpress):
 
     # With Javascript
     element = wordpress.gns.elem_js
+
+    # With.NODE
+    element = wordpress.gns.user_node
+    element = wordpress.gns.user_node_tag
+    element = wordpress.gns.user_node_multi
+    element = wordpress.gns.user_bnode
+    element = wordpress.gns.user_bnode_tag
+    element = wordpress.gns.user_bnode_multi
+    element = wordpress.gns.user_fnode
+    element = wordpress.gns.user_fnode_tag
+    element = wordpress.gns.user_fnode_multi

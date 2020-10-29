@@ -8,3 +8,23 @@ labels:
 
   submit:
     id: wp-submit
+
+  user_node_f1:
+    node:
+      id: $idx$
+
+  user_node_f2:
+    node:
+      $attr$: $idx$
+
+  user_node_f3:
+    node:
+      $attr1$: $idx$
+      $attr2$: $sz$
+
+  user_node_f4:
+    node:
+      $attr1$: $idx$
+      $attr2$: $sz$
+      tag: $tg$
+  

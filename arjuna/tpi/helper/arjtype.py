@@ -265,7 +265,7 @@ class Screen:
         raise NotImplementedError()
 
 @track("trace")
-class NVPair(Dictable):
+class nvpair(Dictable):
     '''
         Encapsulates a name-value pair. It is an implementation of **Dictable**.
 
@@ -297,7 +297,7 @@ class NVPair(Dictable):
 
 
 @track("trace")
-class Attr(NVPair):
+class Attr(nvpair):
     '''
         A name-value pair with an associated optional tag name. It is an implementation of **Dictable**.
 
@@ -318,7 +318,7 @@ class Attr(NVPair):
 
 
 @track("trace")
-class NVPairs(Dictable):
+class nvpairs(Dictable):
     '''
         Encapsulates arbitrary name-value pairs. It is an implementation of **Dictable**.
 
@@ -331,6 +331,20 @@ class NVPairs(Dictable):
 
     def _as_dict(self):
         return self.__kwargs
+
+
+@track("trace")
+class node(nvpairs):
+
+    def _as_dict(self):
+        out_dict = dict()
+        d = super()._as_dict()
+        if 'attrs' in d:
+            out_dict.update(d['attrs'])
+        for k,v in d.items():
+            if k != 'attrs':
+                out_dict[k] = v
+        return out_dict
 
 
 NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response sub_network_packets")

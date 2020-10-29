@@ -19,7 +19,7 @@ from arjuna import *
 
 
 @test
-def check_arjuna_exts(request, wordpress):
+def check_arjuna_exts_coded(request, wordpress):
 
     # Based on partial text
     wordpress.element(text="Lost") 
@@ -48,3 +48,57 @@ def check_arjuna_exts(request, wordpress):
 
     # With Javascript
     wordpress.element(js="return document.getElementById('wp-submit')")
+
+    # With.NODE
+    # Based on node (partial matches of attrs and tag)
+    e = wordpress.element(node=node(id="er_l"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tag="input", id="er_l"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tag="input", id="er_l", size=20))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(attrs={'for': 'er_l'}))
+    print(e.source.content.root)
+
+    # Direct args update attrs dict
+    e = wordpress.element(node=node(id="er_l", attrs={'id': "wrong"}))
+    print(e.source.content.root)
+
+    # With.BNODE
+    # Based on node (partial matches at beginning of attrs and tag)
+    e = wordpress.element(node=node(id="user_"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tag="input", id="user_"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tag="input", id="user_", size=20))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(attrs={'for': 'user_'}))
+    print(e.source.content.root)
+
+    # Direct args update attrs dict
+    e = wordpress.element(node=node(id="user_", attrs={'id': "wrong"}))
+    print(e.source.content.root)
+
+    # With.FNODE
+    # Based on full node (full match of attrs and tag)
+    e = wordpress.element(node=node(id="user_login"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tag="input", id="user_login"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tag="input", id="user_login", size=20))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(attrs={'for': 'user_login'}))
+    print(e.source.content.root)
+
+    # Direct args update attrs dict
+    e = wordpress.element(node=node(id="user_login", attrs={'id': "wrong"}))
+    print(e.source.content.root)

@@ -91,6 +91,25 @@ class LocatorTranslator:
                         css_string = "." + ".".join(rlvalue[0])
                 glvalue = re.sub(r'\s+', '.', css_string)
                 gltype = GenericLocateWith.CSS_SELECTOR
+            elif gltype in {GenericLocateWith.NODE, GenericLocateWith.BNODE, GenericLocateWith.FNODE}:
+                xblocks = []
+                tag = '*'
+                for k,v in rlvalue.items():
+                    if k.lower() == 'tag':
+                        tag = v
+                        continue
+                    if gltype == GenericLocateWith.NODE:
+                        xblocks.append(f"contains(@{k},'{v}')")
+                    elif gltype == GenericLocateWith.NODE:
+                        xblocks.append(f"begins_with(@{k},'{v}')")
+                    elif gltype == GenericLocateWith.NODE:
+                        xblocks.append(f"@{k}='{v}'")
+                if xblocks:
+                    xblocks_str = "[" + " and ".join(xblocks) + "]"
+                else:
+                    xblocks_str = ""
+                glvalue = f"//{tag}{xblocks_str}"
+                gltype = GenericLocateWith.XPATH
             else:
                 raise Exception("Locator not supported yet by Arjuna: " + rltype)
     

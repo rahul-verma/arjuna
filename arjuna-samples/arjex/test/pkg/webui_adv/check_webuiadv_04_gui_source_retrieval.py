@@ -40,7 +40,7 @@ def check_html_source(request):
 def check_element_source(request, wordpress):
     node = Html.from_str(html1, partial=True)
     print(node.normalized_text)
-    user_box = wordpress.element(attr=NVPair("for","user_login"))
+    user_box = wordpress.element(attr=nvpair("for","user_login"))
     print(user_box.text)
     print_source_info(user_box.source)
 

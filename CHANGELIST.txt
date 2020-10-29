@@ -49,7 +49,20 @@ Future Themes (In-Progress or Planned):
 
 1.1.22
 ------
-
+    - Support for 'node' as a valid selector (with type)
+        - Can be used programmatically in calls e.g. element(node=node(**kwargs))
+        - If the names of attrs conflict with python keywords (e.g. for), you can also provide an 'attrs' dict: element(node=node(a=b, attrs={'c' : 'd'}))
+        - The values in attrs dict are overriden by the direct kv paris supplied in node call.
+        - 'tag' is a special key and represents the tag name of the node and is not treated as an attribute.
+    - node represents partial match for attribute contents, bnode partial match at beginning of attributes contents and fnode represents full content of node attributes.
+    - There is an AND relationship among all attribute values supplied.
+    - You can use formatters to format the '$$' placeholders within keys and values of node, bnode and fnode.
+    - These selectors can be used in GNS files just like other selectors.
+    - In a few sub-versions down the line, the way attr, fattr are specified in code and GNS is going to change and would break current usage.
+        - Rather than name and value arguments, direct values will be supplied.
+        - Specifying tag in the definition will not be supported.
+        - node selectors will support tag and multiple attributes to bridge this gap and provide more advanced functionality.
+    - 
 
 1.1.21
 ------

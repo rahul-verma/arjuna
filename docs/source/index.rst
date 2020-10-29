@@ -335,8 +335,8 @@ Helpers
     * :py:class:`Point <arjuna.tpi.helper.arjtype.Point>`
     * :py:class:`Offset <arjuna.tpi.helper.arjtype.Offset>`
     * :py:class:`Screen <arjuna.tpi.helper.arjtype.Screen>`
-    * :py:class:`NVPair <arjuna.tpi.helper.arjtype.NVPair>`
-    * :py:class:`NVPairs <arjuna.tpi.helper.arjtype.NVPair>`
+    * :py:class:`nvpair <arjuna.tpi.helper.arjtype.nvpair>`
+    * :py:class:`nvpairs <arjuna.tpi.helper.arjtype.nvpair>`
     * :py:class:`Attr <arjuna.tpi.helper.arjtype.Attr>`
 
 
