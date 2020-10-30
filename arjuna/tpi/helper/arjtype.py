@@ -297,7 +297,7 @@ class nvpair(Dictable):
 
 
 @track("trace")
-class Attr(nvpair):
+class attr(nvpair):
     '''
         A name-value pair with an associated optional tag name. It is an implementation of **Dictable**.
 
@@ -331,6 +331,19 @@ class nvpairs(Dictable):
 
     def _as_dict(self):
         return self.__kwargs
+
+
+@track("trace")
+class withx(nvpairs):
+    '''
+        Encapsulates arbitrary name-value pairs. It is an implementation of **Dictable**.
+
+        This is to be used when using withx locators progammaitcally.
+
+        Keyword Arguments:
+            **nvpairs: Arbitrary name-value pairs passed as keyword arguments.
+    '''
+    pass
 
 
 @track("trace")

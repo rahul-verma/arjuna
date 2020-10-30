@@ -1,3 +1,29 @@
+withx:
+
+  for_node_1:
+    wtype: node
+    wvalue:
+      for: '{val}'
+
+  for_node_2:
+    wtype: node
+    wvalue:
+      '{attr}': '{val}'
+
+  for_node_3:
+    wtype: node
+    wvalue:
+      '{attr1}': '{val1}'
+      size: '{val2}'
+      tag: '{tg}'
+
+  for_node_4:
+    wtype: node
+    wvalue:
+      '{attr1}': '{val1}'
+      size: '$val2$'
+      tag: '{tg}'
+
 labels:
 
   user:
@@ -27,4 +53,25 @@ labels:
       $attr1$: $idx$
       $attr2$: $sz$
       tag: $tg$
-  
+
+  user_node_with1:
+    for_node_1:
+      val: 'er_l'
+
+  user_node_with2:
+    for_node_2:
+      attr: for
+      val: 'er_l'
+
+  user_node_with3:
+    for_node_3:
+      attr1: id
+      val1: 'er_l'
+      val2: 20
+      tg: input
+
+  user_node_with4:
+    for_node_4:
+      attr1: id
+      val1: 'er_l'
+      tg: input

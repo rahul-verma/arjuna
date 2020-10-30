@@ -30,6 +30,16 @@ def dashboard(request):
     dashboard.top_nav.logout()
     wordpress.quit()
 
+@for_test
+def wordpress(request):
+    # Setup
+    wordpress = WordPress(section_dir="withx")
+    home = wordpress.launch()
+    yield home
+
+    # Teadown
+    wordpress.quit()
+
 @test
 def check_withx_in_leftnav_gns_file(request, dashboard):
     dashboard.left_nav.gns.first_steps.click()
@@ -39,3 +49,17 @@ def check_withx_in_leftnav_gns_file(request, dashboard):
     dashboard.left_nav.gns.media.click()
     dashboard.left_nav.gns.pages.click()
     dashboard.left_nav.gns.comments.click()
+
+@test
+def check_withx_gns_home(request, wordpress):
+    e = wordpress.gns.user_node_with1
+    print(e.source.content.root)
+
+    e = wordpress.gns.user_node_with2
+    print(e.source.content.root)
+
+    e = wordpress.gns.user_node_with3
+    print(e.source.content.root)
+
+    e = wordpress.gns.formatter(val2=20).user_node_with4
+    print(e.source.content.root)

@@ -30,9 +30,34 @@ def dashboard(request):
     dashboard.top_nav.logout()
     wordpress.quit()
 
+@for_test
+def home(request):
+    # Setup
+    wordpress = WordPress(section_dir="withx")
+    home = wordpress.launch()
+    yield home
+
+    # Teadown
+    wordpress.quit()
+
 @test
 def check_withx_using_with(request, dashboard):
-    dashboard.left_nav.element(nav_link=nvpairs(lname="Posts")).click()
-    dashboard.left_nav.element(nav_link=nvpairs(lname="Media")).click()
-    dashboard.left_nav.element(nav_link=nvpairs(lname="Pages")).click()
-    dashboard.left_nav.element(nav_link=nvpairs(lname="Comments")).click()
+    dashboard.left_nav.element(nav_link=withx(lname="Posts")).click()
+    dashboard.left_nav.element(nav_link=withx(lname="Media")).click()
+    dashboard.left_nav.element(nav_link=withx(lname="Pages")).click()
+    dashboard.left_nav.element(nav_link=withx(lname="Comments")).click()
+
+
+@test
+def check_withx_home_gns_using_with(request, home):
+    e = home.element(for_node_1=withx(val='er_l'))
+    print(e.source.content.root)
+
+    e = home.element(for_node_2=withx(attr='for', val='er_l'))
+    print(e.source.content.root)
+
+    e = home.element(for_node_3=withx(tg='input', attr1='id', val1='er_l', val2=20))
+    print(e.source.content.root)
+
+    e = home.formatter(val2=20).element(for_node_4=withx(tg='input', attr1='id', val1='er_l'))
+    print(e.source.content.root)

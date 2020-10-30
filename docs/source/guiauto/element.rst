@@ -48,34 +48,147 @@ Following are some examples:
    wordpress.element(xpath="//*[contains(text(), 'Lost')]")
    wordpress.element(selector=".button.button-large")
 
-Locators - **Arjuna's Locator Extensions**
-------------------------------------------
+**Alternative Locators** - Specifying Multiple Locators with **OR Relationship**
+--------------------------------------------------------------------------------
 
-Arjuna provides various higher level locator strategies in addition to wrapping Selenium's By-style strategies. Following is the list of these extensions:
-    - **text** : Generates Partial Text based XPath
-    - **ftext** : Generates Full Text based XPath
-    - **title** : Generates Title Match CSS Selector
-    - **value** : Generates Value Match CSS Selector
-    - **attr** : Generates Partial Attribute Value Match CSS Selector
-    - **fattr** : Generates Full Attribute Match CSS Selector
-    - **classes** : Supports compound classes (supplied as a single string or as multiple separate strings)
-    - **point** : Runs a JavaScript to find the GuiElement under an XY coordinate
-    - **js** : Runs the supplied JavaScript and returns GuiElement representing the element it returns.
+You can also pass multiple locators as arugment in **element** calls. 
 
-Following are some examples:
+Arjuna will try all of these one by one in a dynamic wait mechanism. The total maximum wait time does not add up, it remains same as that for using a single identifier.
 
 .. code-block:: python
 
-   wordpress.element(text="Lost")
-   wordpress.element(ftext="Lost your password?")
-   wordpress.element(title="Password Lost and Found")
-   wordpress.element(value="Log In")
-   wordpress.element(attr=Attr("for", "_login"))
-   wordpress.element(fattr=Attr("for", "user_login"))
-   wordpress.element(classes="button button-large")
-   wordpress.element(classes=("button", "button-large"))
-   wordpress.element(point=Point(1043, 458))
-   wordpress.element(js="return document.getElementById('wp-submit')")
+   wordpress.element(tag="input", classes="someclass")
+
+Locators - **Arjuna's Locator Extensions**
+------------------------------------------
+
+Arjuna provides various higher level locator strategies in addition to wrapping Selenium's By-style strategies. 
+
+Following sections discuss these extensions:
+
+**text** Locator
+^^^^^^^^^^^^^^^^
+
+Generates Partial Text based XPath
+
+.. code-block:: python
+
+    # Using text locator. Can specify part of the text.
+    wordpress.element(text="Lost")
+
+
+**ftext** Locator
+^^^^^^^^^^^^^^^^^
+Generates Full Text based XPath
+
+.. code-block:: python
+
+    # Using ftext locator. Full text is to be specified.
+    wordpress.element(ftext="Lost your password?")
+
+**title** Locator
+^^^^^^^^^^^^^^^^^
+Generates Title Match CSS Selector
+
+.. code-block:: python
+
+    # Using title locator. Full content of title attribute should be specified.   
+    wordpress.element(title="Password Lost and Found")
+
+**value** Locator
+^^^^^^^^^^^^^^^^^
+Generates Value Match CSS Selector
+
+.. code-block:: python
+
+    # Using value locator. Full content of value attribute should be specified.      
+    wordpress.element(value="Log In")
+
+**attr** Locator 
+^^^^^^^^^^^^^^^^
+Generates Partial Attribute Value Match CSS Selector
+
+.. code-block:: python
+
+    # Using attr locator. Value should be supplied as attr call with name and partial content as arguments.
+    wordpress.element(attr=attr("for", "_login"))
+
+
+**fattr** Locator 
+^^^^^^^^^^^^^^^^^
+Generates Full Attribute Match CSS Selector
+
+.. code-block:: python
+
+    # Using fattr locator. Value should be supplied as attr call with name and full content as arguments.
+    wordpress.element(fattr=attr("for", "user_login"))
+
+
+**node** Locator
+^^^^^^^^^^^^^^^^
+Generates Partial Multi Attribute Value Match XPath. Tag name can be optionally specified as well.
+
+.. code-block:: python
+
+    # Using node locator. Value should be supplied as node call with attributes as key value pairs and optionally a tag argument. 
+    # Attribute values can be partial contents.
+    wordpress.element(node=node(tag="input", id="_login", size=20))
+
+
+**fnode** Locator
+^^^^^^^^^^^^^^^^^
+Generates Full Multi Attribute Value Match XPath. Tag name can be optionally specified as well.
+
+.. code-block:: python
+
+    # Using fnode locator. Value should be supplied as node call with attributes as key value pairs and optionally a tag argument. 
+    # Attribute values should be full contents.
+    wordpress.element(fnode=node(tag="input", id="user_login", size=20))
+
+
+**bnode** Locator
+^^^^^^^^^^^^^^^^^
+Generates Partial Multi Attribute Value Match XPath. The match is done at beginning of attribute values. Tag name can be optionally specified as well.
+
+.. code-block:: python
+
+    # Using bnode locator. Value should be supplied as node call with attributes as key value pairs and optionally a tag argument. 
+    # Attribute values can be partial contents at the beginning of the attribute contents.
+    wordpress.element(fnode=node(tag="input", id="user_", size=20))
+
+
+**classes** Locator
+^^^^^^^^^^^^^^^^^^^
+Supports compound classes (supplied as a single string or as multiple separate strings)
+
+.. code-block:: python
+
+    # Using classes locator. Value can be a string containing space separated CSS classes.
+    wordpress.element(classes="button button-large")
+
+    # Using classes locator. Value can also be supplied as a list/tuple of CSS classes.
+    wordpress.element(classes=("button", "button-large"))
+
+
+**point** Locator
+^^^^^^^^^^^^^^^^^
+Runs a JavaScript to find the GuiElement under an XY coordinate
+
+.. code-block:: python
+
+    # Using point locator. Value should be a Point object with x and y coordinates specified.
+    wordpress.element(point=Point(1043, 458))
+
+
+**js** Locator 
+^^^^^^^^^^^^^^
+Runs the supplied JavaScript and returns GuiElement representing the element it returns.
+
+.. code-block:: python
+
+    # Using js locator. Value should be a string containing the JavaScript.
+    wordpress.element(js="return document.getElementById('wp-submit')")
+
 
 Interaction with GuiElement
 ---------------------------

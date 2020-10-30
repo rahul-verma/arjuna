@@ -22,10 +22,11 @@ class WithX:
         # Critical to create a copy
         fmt = copy.deepcopy(self.__xdict[name])
         try:
-            if fmt["wtype"] in {'ATTR', 'FATTR'}:
+            if fmt["wtype"] in {'ATTR', 'FATTR', 'NODE', 'BNODE', 'FNODE'}:
+                out = dict()
                 for k,v in fmt["wvalue"].items():
-                    fmt["wvalue"][k] = v.format(**kwargs)
-                return fmt["wtype"], fmt["wvalue"]
+                    out[k.format(**kwargs)] = v.format(**kwargs)
+                return fmt["wtype"], out
             else:
                 return fmt["wtype"], fmt["wvalue"].format(*vargs, **kwargs)
         except Exception as e:

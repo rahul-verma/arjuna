@@ -1,3 +1,27 @@
 nav_link:
   wtype: xpath
   wvalue: "//li[contains(*//text(), '{lname}')]"
+
+for_node_1:
+  wtype: node
+  wvalue:
+    for: '{val}'
+
+for_node_2:
+  wtype: node
+  wvalue:
+    '{attr}': '{val}'
+
+for_node_3:
+  wtype: node
+  wvalue:
+    '{attr1}': '{val1}'
+    size: '{val2}'
+    tag: '{tg}'
+
+for_node_4:
+  wtype: node
+  wvalue:
+    '{attr1}': '{val1}'
+    size: '$val2$'
+    tag: '{tg}'

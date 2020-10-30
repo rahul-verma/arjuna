@@ -34,10 +34,10 @@ def check_arjuna_exts_coded(request, wordpress):
     wordpress.element(value="Log In")
 
     # Based on partial match of content of an attribute
-    wordpress.element(attr=Attr(name="for", value="_login"))
+    wordpress.element(attr=attr(name="for", value="_login"))
 
     # Based on full match of an attribute
-    wordpress.element(fattr=Attr(name="for", value="user_login"))
+    wordpress.element(fattr=attr(name="for", value="user_login"))
 
     # Based on compound classes
     wordpress.element(classes="button button-large")

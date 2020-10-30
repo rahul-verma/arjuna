@@ -337,7 +337,8 @@ Helpers
     * :py:class:`Screen <arjuna.tpi.helper.arjtype.Screen>`
     * :py:class:`nvpair <arjuna.tpi.helper.arjtype.nvpair>`
     * :py:class:`nvpairs <arjuna.tpi.helper.arjtype.nvpair>`
-    * :py:class:`Attr <arjuna.tpi.helper.arjtype.Attr>`
+    * :py:class:`withx <arjuna.tpi.helper.arjtype.withx>`
+    * :py:class:`attr <arjuna.tpi.helper.arjtype.attr>`
 
 
 Logging
