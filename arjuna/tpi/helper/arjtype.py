@@ -325,7 +325,6 @@ class nvpairs(Dictable):
         Keyword Arguments:
             **nvpairs: Arbitrary name-value pairs passed as keyword arguments.
     '''
-
     def __init__(self, **nvpairs):
         self.__kwargs = nvpairs
 
@@ -349,11 +348,17 @@ class withx(nvpairs):
 @track("trace")
 class node(nvpairs):
 
+    def __init__(self, *attrs, **nvpairs):
+        self.__attrs = attrs
+        self.__kwargs = nvpairs
+
     def _as_dict(self):
         out_dict = dict()
         d = super()._as_dict()
         if 'attrs' in d:
             out_dict.update(d['attrs'])
+        for attr in self.__attrs:
+            out_dict.update(attr.name, attr.value)
         for k,v in d.items():
             if k != 'attrs':
                 out_dict[k] = v

@@ -64,6 +64,8 @@ Future Themes (In-Progress or Planned):
         - node selectors will support tag and multiple attributes to bridge this gap and provide more advanced functionality.
     - Withx can be used to define custom locators using node, bnode and fnode. Placeholders and kwargs work for attr names as well as values.
     - Attr -> attr, NVPairs -> nvpairs 
+    - Withx supports $$ placeholders like normal GNS.
+    - Withx suports C,L,R placeholders.
 
 1.1.21
 ------

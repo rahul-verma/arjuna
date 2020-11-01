@@ -69,17 +69,16 @@ Following sections discuss these extensions:
 **text** Locator
 ^^^^^^^^^^^^^^^^
 
-Generates Partial Text based XPath
+It is used to locate a GuiWidget based on its partial text.
 
 .. code-block:: python
 
-    # Using text locator. Can specify part of the text.
     wordpress.element(text="Lost")
 
 
 **ftext** Locator
 ^^^^^^^^^^^^^^^^^
-Generates Full Text based XPath
+It is used to locate a GuiWidget based on its full text.
 
 .. code-block:: python
 
@@ -88,7 +87,7 @@ Generates Full Text based XPath
 
 **title** Locator
 ^^^^^^^^^^^^^^^^^
-Generates Title Match CSS Selector
+It is used to locate a GuiWidget based on content of its **title** attribute.
 
 .. code-block:: python
 
@@ -97,7 +96,7 @@ Generates Title Match CSS Selector
 
 **value** Locator
 ^^^^^^^^^^^^^^^^^
-Generates Value Match CSS Selector
+It is used to locate a GuiWidget based on content of its **value** attribute.
 
 .. code-block:: python
 
@@ -106,73 +105,119 @@ Generates Value Match CSS Selector
 
 **attr** Locator 
 ^^^^^^^^^^^^^^^^
-Generates Partial Attribute Value Match CSS Selector
+It is used to locate a GuiWidget based on partial content of a specific attribute.
 
 .. code-block:: python
 
-    # Using attr locator. Value should be supplied as attr call with name and partial content as arguments.
+    # Here the 'for' attribute contains the value 'user_login'. Partial content can be passed.
     wordpress.element(attr=attr("for", "_login"))
 
 
 **fattr** Locator 
 ^^^^^^^^^^^^^^^^^
-Generates Full Attribute Match CSS Selector
+It is used to locate a GuiWidget based on full content of a specific attribute.
 
 .. code-block:: python
 
-    # Using fattr locator. Value should be supplied as attr call with name and full content as arguments.
+    # Here the 'for' attribute contains the value 'user_login'. Full content should be passed.
     wordpress.element(fattr=attr("for", "user_login"))
 
 
 **node** Locator
 ^^^^^^^^^^^^^^^^
-Generates Partial Multi Attribute Value Match XPath. Tag name can be optionally specified as well.
+It is used to locate a GuiWidget based on:
+    - Partial content of one or more attributes 
+    - (Optional) the tag name
 
 .. code-block:: python
 
-    # Using node locator. Value should be supplied as node call with attributes as key value pairs and optionally a tag argument. 
-    # Attribute values can be partial contents.
+    # Here a HTML element with tag input is targeted which has id=user_login and size=20. Partial content can be passed.
     wordpress.element(node=node(tag="input", id="_login", size=20))
 
+    # Sometimes names of attributes conflict with Python keywords. 
+    # In such a case 'attr' can be passed as a psitional argument
+    wordpress.element(node=node(attr('for','_login'), tag="label", size=20))
+
+    # You can also pass a dictionary of attributes
+    wordpress.element(node=node(tag="label", size=20, attrs={'for': '_login'}))
+
+.. note::
+
+    In situations where the same attribute name is present in multiple places in the call, following sequence determines what value is finally retained for such an attribute:
+        * First the **attrs** dictionary is processed
+        * Second, the attributes passed as positional arguments are processed.
+        * Third, the attributes passed as direct keyword arguments are processed.
 
 **fnode** Locator
 ^^^^^^^^^^^^^^^^^
-Generates Full Multi Attribute Value Match XPath. Tag name can be optionally specified as well.
+It is used to locate a GuiWidget based on:
+    - Full content of one or more attributes 
+    - (Optional) the tag name
 
 .. code-block:: python
 
-    # Using fnode locator. Value should be supplied as node call with attributes as key value pairs and optionally a tag argument. 
-    # Attribute values should be full contents.
+    # Here a HTML element with tag input is targeted which has id=user_login and size=20. Full content must be passed.
     wordpress.element(fnode=node(tag="input", id="user_login", size=20))
+
+    # Sometimes names of attributes conflict with Python keywords. 
+    # In such a case 'attr' can be passed as a psitional argument
+    wordpress.element(fnode=node(attr('for','user_login'), tag="label", size=20))
+
+    # You can also pass a dictionary of attributes
+    wordpress.element(fnode=node(tag="label", size=20, attrs={'for': 'user_login'}))
+
+.. note::
+
+    In situations where the same attribute name is present in multiple places in the call, following sequence determines what value is finally retained for such an attribute:
+        * First the **attrs** dictionary is processed
+        * Second, the attributes passed as positional arguments are processed.
+        * Third, the attributes passed as direct keyword arguments are processed.
 
 
 **bnode** Locator
 ^^^^^^^^^^^^^^^^^
-Generates Partial Multi Attribute Value Match XPath. The match is done at beginning of attribute values. Tag name can be optionally specified as well.
+It is used to locate a GuiWidget based on:
+    - Partial match at beginning of one or more attributes 
+    - (Optional) the tag name
 
 .. code-block:: python
 
-    # Using bnode locator. Value should be supplied as node call with attributes as key value pairs and optionally a tag argument. 
-    # Attribute values can be partial contents at the beginning of the attribute contents.
-    wordpress.element(fnode=node(tag="input", id="user_", size=20))
+    # Here a HTML element with tag input is targeted which has id=user_login and size=20. Partial content at beginning of attribute(s) can be passed.
+    wordpress.element(bnode=node(tag="input", id="user_", size=20))
+
+    # Sometimes names of attributes conflict with Python keywords. 
+    # In such a case 'attr' can be passed as a psitional argument
+    wordpress.element(bnode=node(attr('for','user_'), tag="label", size=20))
+
+    # You can also pass a dictionary of attributes
+    wordpress.element(bnode=node(tag="label", size=20, attrs={'for': 'user_'}))
+
+.. note::
+
+    In situations where the same attribute name is present in multiple places in the call, following sequence determines what value is finally retained for such an attribute:
+        * First the **attrs** dictionary is processed
+        * Second, the attributes passed as positional arguments are processed.
+        * Third, the attributes passed as direct keyword arguments are processed.
 
 
 **classes** Locator
 ^^^^^^^^^^^^^^^^^^^
+This is used to locate GuiWidget based on class(es) associated with it.
+
 Supports compound classes (supplied as a single string or as multiple separate strings)
 
 .. code-block:: python
 
-    # Using classes locator. Value can be a string containing space separated CSS classes.
+    # Value can be a string containing space separated CSS classes.
     wordpress.element(classes="button button-large")
 
-    # Using classes locator. Value can also be supplied as a list/tuple of CSS classes.
+    # Value can also be supplied as a list/tuple of CSS classes.
     wordpress.element(classes=("button", "button-large"))
 
 
 **point** Locator
 ^^^^^^^^^^^^^^^^^
-Runs a JavaScript to find the GuiElement under an XY coordinate
+This is used to run a JavaScript to find the GuiWidget under an XY coordinate.
 
 .. code-block:: python
 
@@ -182,7 +227,7 @@ Runs a JavaScript to find the GuiElement under an XY coordinate
 
 **js** Locator 
 ^^^^^^^^^^^^^^
-Runs the supplied JavaScript and returns GuiElement representing the element it returns.
+This is used to run the provided JavaScript and returns GuiWidget representing the element it returns.
 
 .. code-block:: python
 
@@ -216,3 +261,11 @@ Once locted **GuiElement** provides various interaction methods. Some are shown 
 **text** is a property of **GuiElement**. **element.text = "some_string"** is equivalent of setting text of the text box.
 
 **click** method is used to click the element.
+
+
+Dynamic Locators
+----------------
+
+There are many situations where you would like to use dyanamic or formattable locators.
+
+Yo

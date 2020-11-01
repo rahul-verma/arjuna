@@ -3,26 +3,26 @@ withx:
   for_node_1:
     wtype: node
     wvalue:
-      for: '{val}'
+      for: $val$
 
   for_node_2:
     wtype: node
     wvalue:
-      '{attr}': '{val}'
+      $attr$: $val$
 
   for_node_3:
     wtype: node
     wvalue:
-      '{attr1}': '{val1}'
-      size: '{val2}'
-      tag: '{tg}'
+      $attr1$: $val1$
+      size: $val2$
+      tag: $tg$
 
   for_node_4:
     wtype: node
     wvalue:
-      '{attr1}': '{val1}'
-      size: '$val2$'
-      tag: '{tg}'
+      $attr1$: $val1$
+      size: $val2$
+      tag: $tg$
 
 labels:
 

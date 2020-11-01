@@ -61,3 +61,7 @@ def check_withx_home_gns_using_with(request, home):
 
     e = home.formatter(val2=20).element(for_node_4=withx(tg='input', attr1='id', val1='er_l'))
     print(e.source.content.root)
+
+    # Has C var
+    e = home.formatter(val2=20).element(for_node_5=withx(tg='input', attr1='id'))
+    print(e.source.content.root)

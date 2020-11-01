@@ -282,7 +282,7 @@ class Locator:
                 repl_value = get_global_value(processed_name)
             else:
                 if processed_name not in repl_dict:
-                    raise Exception("You must provide a named arguments for custom placeholders in locator strings. Placeholder ${}$ does not have corresponding argument passed for locator string {}.".format(processed_name, self.lvalue))
+                    raise Exception("You must provide named arguments for custom placeholders in locator strings. Placeholder ${}$ does not have corresponding argument passed for locator string {}.".format(processed_name, self.lvalue))
                 repl_value = repl_dict[processed_name]
 
             fmt_locator_value = fmt_locator_value.replace(target, str(repl_value))

@@ -65,7 +65,8 @@ def check_fmt_gns_node(request, wordpress):
     e = wordpress.gns.formatter(attr='id', idx="er_l").user_node_f2
     print(e.source.content.root)
 
-    e = wordpress.gns.formatter(attr1='id', idx="er_l", attr2='size', sz=20).user_node_f3
+    # Case insensitive
+    e = wordpress.gns.formatter(ATTR1='id', idx="er_l", attr2='size', sz=20).user_node_f3
     print(e.source.content.root)
 
     e = wordpress.gns.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).user_node_f4

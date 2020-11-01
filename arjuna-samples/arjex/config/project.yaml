@@ -11,3 +11,4 @@ user_options:
   wp.admin.name: user
   wp.admin.pwd: bitnami
   link.name: Posts
+  useridval: user_login
