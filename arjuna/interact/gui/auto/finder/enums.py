@@ -54,11 +54,14 @@ class GenericLocateWith(Enum):
 
     # Translated to XPath
     TEXT = auto() 
-    FTEXT = auto() 
+    FTEXT = auto()
+    BTEXT = auto()
     TITLE = auto() 
     VALUE = auto() 
     ATTR = auto()
     FATTR = auto()
+    BATTR = auto()
+    EATTR = auto()
     NODE = auto()
     FNODE = auto()
     BNODE = auto()

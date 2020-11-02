@@ -132,9 +132,10 @@ class With(metaclass=_WithXMetaClass):
     def btext(cls, text, tag=None):
         return With(WithType.BTEXT, text)
 
-    @classmethod
-    def etext(cls, text, tag=None):
-        return With(WithType.ETEXT, text)
+    # Can not be supported as XPath for ends-with does not work in browsers yet.
+    # @classmethod
+    # def etext(cls, text, tag=None):
+    #     return With(WithType.ETEXT, text)
 
     @classmethod
     def title(cls, title, tag=None):

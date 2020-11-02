@@ -42,14 +42,21 @@ class LocatorTranslator:
     XPATH_LOCATORS = {
         GenericLocateWith.TEXT : "//*[contains(text(),'{}')]",
         GenericLocateWith.FTEXT : "//*[text()='{}']",
+        GenericLocateWith.BTEXT : "//*[starts-with(text(),'{}')]",
         GenericLocateWith.VALUE : "//*[@value='{}']",
         GenericLocateWith.TITLE : "//*[@title='{}']",
         GenericLocateWith.IMAGE_SRC : "//img[@src='{}']"
     }
 
     NAMED_ARG_LOCATORS = {
-        GenericLocateWith.ATTR : "//*[contains(@{name},'{value}')]",
-        GenericLocateWith.FATTR : "//*[@{name}='{value}']",
+        # GenericLocateWith.ATTR : "//*[contains(@{name},'{value}')]",
+        # GenericLocateWith.FATTR : "//*[@{name}='{value}']",
+        # GenericLocateWith.BATTR : "//*[starts-with(@{name},'{value}')]",
+        # GenericLocateWith.EATTR : "//*[ends-with(@{name},'{value}')]",
+        GenericLocateWith.ATTR : "*[{name}*='{value}']",
+        GenericLocateWith.FATTR : "*[{name}='{value}']",
+        GenericLocateWith.BATTR : "*[{name}^='{value}']",
+        GenericLocateWith.EATTR : "*[{name}$='{value}']",
         GenericLocateWith.POINT : "return document.elementFromPoint({x}, {y})",
     }
 
@@ -79,7 +86,7 @@ class LocatorTranslator:
                 glvalue = cls.NAMED_ARG_LOCATORS[gltype].format(**rlvalue)
             elif gltype in cls.NAMED_ARG_LOCATORS:
                 glvalue = cls.NAMED_ARG_LOCATORS[gltype].format(**rlvalue)
-                gltype = GenericLocateWith.XPATH
+                gltype = GenericLocateWith.CSS_SELECTOR
             elif gltype == GenericLocateWith.CLASSES:
                 css_string = None
                 if type(rlvalue) is str:
@@ -98,6 +105,11 @@ class LocatorTranslator:
                     if k.lower() == 'tag':
                         tag = v
                         continue
+
+                    if k.lower() == "text":
+                        xblocks.append(f"contains(text(),'{v}')")
+                        continue
+                    
                     if gltype == GenericLocateWith.NODE:
                         xblocks.append(f"contains(@{k},'{v}')")
                     elif gltype == GenericLocateWith.NODE:

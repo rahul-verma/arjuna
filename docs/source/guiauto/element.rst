@@ -73,7 +73,7 @@ It is used to locate a GuiWidget based on its partial text.
 
 .. code-block:: python
 
-    wordpress.element(text="Lost")
+    wordpress.element(text="your")
 
 
 **ftext** Locator
@@ -84,6 +84,17 @@ It is used to locate a GuiWidget based on its full text.
 
     # Using ftext locator. Full text is to be specified.
     wordpress.element(ftext="Lost your password?")
+
+
+**btext** Locator
+^^^^^^^^^^^^^^^^^
+It is used to locate a GuiWidget based on partial text match at beginning of text.
+
+.. code-block:: python
+
+    # Using ftext locator. Full text is to be specified.
+    wordpress.element(btext="Lost")
+
 
 **title** Locator
 ^^^^^^^^^^^^^^^^^
@@ -123,11 +134,32 @@ It is used to locate a GuiWidget based on full content of a specific attribute.
     wordpress.element(fattr=attr("for", "user_login"))
 
 
+**battr** Locator 
+^^^^^^^^^^^^^^^^^
+It is used to locate a GuiWidget based on partial content at beginning of a specific attribute.
+
+.. code-block:: python
+
+    # Here the 'for' attribute contains the value 'user_login'.
+    wordpress.element(battr=attr("for", "user_"))
+
+
+**eattr** Locator 
+^^^^^^^^^^^^^^^^^
+It is used to locate a GuiWidget based on partial content at end of a specific attribute.
+
+.. code-block:: python
+
+    # Here the 'for' attribute contains the value 'user_login'.
+    wordpress.element(eattr=attr("for", "user_"))
+
+
 **node** Locator
 ^^^^^^^^^^^^^^^^
 It is used to locate a GuiWidget based on:
     - Partial content of one or more attributes 
     - (Optional) the tag name
+    - (Optional) Partial text content
 
 .. code-block:: python
 
@@ -141,6 +173,9 @@ It is used to locate a GuiWidget based on:
     # You can also pass a dictionary of attributes
     wordpress.element(node=node(tag="label", size=20, attrs={'for': '_login'}))
 
+    # You can also use partial text content for matching
+    wordpress.element(node=node(tag="a", text="your password?", title="Found"))
+
 .. note::
 
     In situations where the same attribute name is present in multiple places in the call, following sequence determines what value is finally retained for such an attribute:
@@ -153,6 +188,7 @@ It is used to locate a GuiWidget based on:
 It is used to locate a GuiWidget based on:
     - Full content of one or more attributes 
     - (Optional) the tag name
+    - (Optional) Full text content
 
 .. code-block:: python
 
@@ -165,6 +201,10 @@ It is used to locate a GuiWidget based on:
 
     # You can also pass a dictionary of attributes
     wordpress.element(fnode=node(tag="label", size=20, attrs={'for': 'user_login'}))
+
+    # You can also full text content for matching
+    wordpress.element(fnode=node(tag="a", text="Lost your password?", title="Password Lost and Found"))
+
 
 .. note::
 
@@ -179,6 +219,7 @@ It is used to locate a GuiWidget based on:
 It is used to locate a GuiWidget based on:
     - Partial match at beginning of one or more attributes 
     - (Optional) the tag name
+    - (Optional) Partial text content at beginning
 
 .. code-block:: python
 
@@ -191,6 +232,10 @@ It is used to locate a GuiWidget based on:
 
     # You can also pass a dictionary of attributes
     wordpress.element(bnode=node(tag="label", size=20, attrs={'for': 'user_'}))
+
+    # You can also partial text content at beginning for matching
+    wordpress.element(bnode=node(tag="a", text="Lost", title="Password Lost"))
+
 
 .. note::
 

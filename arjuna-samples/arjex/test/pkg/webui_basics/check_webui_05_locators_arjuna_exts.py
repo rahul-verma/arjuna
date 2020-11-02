@@ -22,10 +22,13 @@ from arjuna import *
 def check_arjuna_exts_coded(request, wordpress):
 
     # Based on partial text
-    wordpress.element(text="Lost") 
+    wordpress.element(text="your") 
 
     # Based on Full Text
     wordpress.element(ftext="Lost your password?") 
+
+    # Based on Full Text
+    wordpress.element(btext="Lost your") 
 
     # Based on Title
     wordpress.element(title="Password Lost and Found")
@@ -34,10 +37,16 @@ def check_arjuna_exts_coded(request, wordpress):
     wordpress.element(value="Log In")
 
     # Based on partial match of content of an attribute
-    wordpress.element(attr=attr(name="for", value="_login"))
+    wordpress.element(attr=attr("for", "er_l"))
 
     # Based on full match of an attribute
-    wordpress.element(fattr=attr(name="for", value="user_login"))
+    wordpress.element(fattr=attr("for", "user_login"))
+
+    # Based on full match of an attribute
+    wordpress.element(battr=attr("for", "user_"))
+
+    # Based on full match of an attribute
+    wordpress.element(eattr=attr("for", "_login"))
 
     # Based on compound classes
     wordpress.element(classes="button button-large")
@@ -87,18 +96,40 @@ def check_arjuna_exts_coded(request, wordpress):
 
     # With.FNODE
     # Based on full node (full match of attrs and tag)
-    e = wordpress.element(node=node(id="user_login"))
+    e = wordpress.element(fnode=node(id="user_login"))
     print(e.source.content.root)
 
-    e = wordpress.element(node=node(tag="input", id="user_login"))
+    e = wordpress.element(fnode=node(tag="input", id="user_login"))
     print(e.source.content.root)
 
-    e = wordpress.element(node=node(tag="input", id="user_login", size=20))
+    e = wordpress.element(fnode=node(tag="input", id="user_login", size=20))
     print(e.source.content.root)
 
-    e = wordpress.element(node=node(attrs={'for': 'user_login'}))
+    e = wordpress.element(fnode=node(attrs={'for': 'user_login'}))
     print(e.source.content.root)
 
     # Direct args update attrs dict
-    e = wordpress.element(node=node(id="user_login", attrs={'id': "wrong"}))
+    e = wordpress.element(fnode=node(id="user_login", attrs={'id': "wrong"}))
+    print(e.source.content.root)
+
+    # With.BNODE
+    # Based on full node (full match of attrs and tag)
+    e = wordpress.element(bnode=node(id="user_"))
+    print(e.source.content.root)
+
+    e = wordpress.element(bnode=node(tag="input", id="user_"))
+    print(e.source.content.root)
+
+    e = wordpress.element(bnode=node(tag="input", id="user_", size=20))
+    print(e.source.content.root)
+
+    e = wordpress.element(bnode=node(attrs={'for': 'user_'}))
+    print(e.source.content.root)
+
+    # Direct args update attrs dict
+    e = wordpress.element(bnode=node(id="user_", attrs={'id': "wrong"}))
+    print(e.source.content.root)
+
+    # Using node with tag, attrs and text
+    e = wordpress.element(node=node(tag="a", text="Lost", href="lostpassword", title="Found"))
     print(e.source.content.root)

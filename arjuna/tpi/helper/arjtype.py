@@ -307,7 +307,7 @@ class attr(nvpair):
             tag: Tag associated with this object
     '''
 
-    def __init__(self, *, name, value, tag=None):
+    def __init__(self, name, value, tag=None):
         super().__init__(name, value)
         self.__tag = tag
 
@@ -350,7 +350,7 @@ class node(nvpairs):
 
     def __init__(self, *attrs, **nvpairs):
         self.__attrs = attrs
-        self.__kwargs = nvpairs
+        super().__init__(**nvpairs)
 
     def _as_dict(self):
         out_dict = dict()

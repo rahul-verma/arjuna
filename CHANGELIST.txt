@@ -54,6 +54,7 @@ Future Themes (In-Progress or Planned):
         - If the names of attrs conflict with python keywords (e.g. for), you can also provide an 'attrs' dict: element(node=node(a=b, attrs={'c' : 'd'}))
         - The values in attrs dict are overriden by the direct kv paris supplied in node call.
         - 'tag' is a special key and represents the tag name of the node and is not treated as an attribute.
+        - 'text' is a special key and represents the text content of the node and is used for matching.
     - node represents partial match for attribute contents, bnode partial match at beginning of attributes contents and fnode represents full content of node attributes.
     - There is an AND relationship among all attribute values supplied.
     - You can use formatters to format the '$$' placeholders within keys and values of node, bnode and fnode.
@@ -66,6 +67,8 @@ Future Themes (In-Progress or Planned):
     - Attr -> attr, NVPairs -> nvpairs 
     - Withx supports $$ placeholders like normal GNS.
     - Withx suports C,L,R placeholders.
+    - battr, eattr support
+    - attr related locators are converted to CSS Selectors instead of XPath.
 
 1.1.21
 ------
