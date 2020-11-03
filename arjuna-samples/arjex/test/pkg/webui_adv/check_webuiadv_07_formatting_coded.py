@@ -77,7 +77,7 @@ def check_fmt_node_coded(request, wordpress):
     e = wordpress.formatter(tg="input", idx="er_l", sz=20).element(node=node(tag="$tg$", id="$idx$", size="$sz$"))
     print(e.source.content.root)
 
-    e = wordpress.formatter(tg="input", idx="er_l", sz=20).locate(node=node(tag="$tg$", id="$idx$", size="$sz$"))
+    e = wordpress.formatter(tg="input", idx="er_l", sz=20).element(node=node(tag="$tg$", id="$idx$", size="$sz$"))
 
     # Key and value formatting
     e = wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(tag="$tg$", attrs={'$attr1$': "$idx$", '$attr2$': "$sz$"}))

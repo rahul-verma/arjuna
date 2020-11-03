@@ -14,8 +14,10 @@ The Widget type for **GuiElement** is **element**. This information is not impor
 
 All locators discussed here can be used for any type of Gui Widgets.
 
-Locators - Using ID, Name, Tag, Class, Link Text, Partial Link Text, XPath and CSS Selectors
---------------------------------------------------------------------------------------------
+.. _locators:
+
+**ID**, **Name**, **Tag**, **Class**, **Link Text**, **Partial Link Text**, **XPath** and **CSS Selector**
+----------------------------------------------------------------------------------------------------------
 
 Arjuna supports the locators which are supported by Selenium's By object. Apart from these, there are various abstracted locators which Arjuna provides for easier coding.
 
@@ -59,8 +61,10 @@ Arjuna will try all of these one by one in a dynamic wait mechanism. The total m
 
    wordpress.element(tag="input", classes="someclass")
 
-Locators - **Arjuna's Locator Extensions**
-------------------------------------------
+.. _coded_locator_exts:
+
+**Arjuna's Locator Extensions**
+-------------------------------
 
 Arjuna provides various higher level locator strategies in addition to wrapping Selenium's By-style strategies. 
 
@@ -307,10 +311,75 @@ Once locted **GuiElement** provides various interaction methods. Some are shown 
 
 **click** method is used to click the element.
 
+.. _dynamic_locators:
 
-Dynamic Locators
-----------------
+**Dynamic/Formatted Locators** 
+------------------------------
 
 There are many situations where you would like to use dyanamic or formattable locators.
 
-Yo
+.. _placeholder_dollars:
+
+Arjuna's **$<name>$** Placeholder
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can use Arjuna's **$<name>$** placeholders in locators to define dynamic locators.
+
+The placeholder is more advanced than Python's **{}** placeholder:
+    * Provides case-insensitive match for names in placeholders
+    * Supports auto-parameterization of the placeholders with the following prefixes:
+        * **C.<query>**: Reference configuation option value. For example C.abc
+        * **L.<query>**: Localized value for the name. For example L.abc
+        * **R.<query>**: Data Reference Value for the name. For example R.abc
+
+    .. note::
+        The **query** in each of the above formats corresponds to the query string format that you use for the magic **C()**, **L()** and **R()** calls.
+
+In the following examples, the values are automatically formatted for dyanmic locators:
+
+.. code-block:: python
+
+    # From Reference Configuration
+    wordpress.element(link="$C.link.name$")
+
+    # From Data Reference
+    wordpress.element(link="$R.links.test1.navlink$")
+
+    # From Localizer
+    wordpress.element(link="$L.links.posting$")
+
+
+Using **Gui**'s **formatter()** Method for Formatting Plaeholders
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Arjuna provides an easy way to programmatically format dynamic identifiers.
+
+Rather than using the **element** method of a **Gui**, you use **formatter** call and use the **element** method of formatter object.
+
+.. code-block:: python
+
+    wordpress.formatter(text="Media").element(link="$text$")
+
+In the above example, **$text$** placeholder is defined for the **link** locator.
+
+Using **formatter** you pass one or more keyword arguments to format the locator.
+
+The above call is equivalent to the following non-dynamic locator call:
+
+.. code-block:: python
+
+    wordpress.element(link="Media")
+
+Following is some more involved examples of the power of dyanmic identifiers:
+
+.. code-block:: python
+    
+    wordpress.formatter(tg="input", idx="er_l", sz=20).element(node=node(tag="$tg$", id="$idx$", size="$sz$"))
+    wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(attrs={'tag':"$tg$", '$attr1$': "$idx$", '$attr2$': "$sz$"}))
+
+
+
+
+
+
+

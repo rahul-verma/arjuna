@@ -69,6 +69,7 @@ Future Themes (In-Progress or Planned):
     - Withx suports C,L,R placeholders.
     - battr, eattr support
     - attr related locators are converted to CSS Selectors instead of XPath.
+    - Comprehensive documentation of locators in coded and GNS formats along with withx documentation.
 
 1.1.21
 ------

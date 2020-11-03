@@ -54,6 +54,12 @@ labels:
       $attr2$: $sz$
       tag: $tg$
 
+  user_node_f5:
+    node:
+      title: Found
+      tag: a
+      text: Lost
+
   user_node_with1:
     for_node_1:
       val: 'er_l'

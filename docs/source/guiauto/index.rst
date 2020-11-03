@@ -7,5 +7,6 @@
    guiapp
    element
    gns
+   withx
    widgets
    gom

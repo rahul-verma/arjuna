@@ -1,6 +1,6 @@
 nav_link:
   wtype: xpath
-  wvalue: "//li[contains(*//text(), '{lname}')]"
+  wvalue: "//li[contains(*//text(), '$lname$')]"
 
 for_node_1:
   wtype: node

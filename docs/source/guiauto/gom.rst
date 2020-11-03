@@ -1,7 +1,7 @@
 .. _gom:
 
-**Advanced Gui Abstraction**
-============================
+**Advanced Gui Abstractions**
+=============================
 
 Concept of **Gui** in Arjuna
 ----------------------------
