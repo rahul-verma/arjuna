@@ -45,9 +45,11 @@ def check_arjuna_exts_gns(request, wordpress):
 
     # Based on partial match of content of an attribute
     element = wordpress.gns.user_attr
+    print(element.source.content.root)
 
     # Based on full match of an attribute
     element = wordpress.gns.user_fattr
+    print(element.source.content.root)
 
     # Based on compound classes
     element = wordpress.gns.button_classes_str

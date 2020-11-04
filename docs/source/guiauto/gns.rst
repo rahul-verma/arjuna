@@ -114,7 +114,7 @@ GNS Locator Externalization Format
     - **title**
     - **value**
     - **js**
-- Following are externlized with content as a YAML mapping with **name** and **value** keys:
+- Following are externlized with content as a YAML mapping attribute specified as a single key value pair:
     - **attr**
     - **fattr**
     - **battr**
@@ -152,23 +152,19 @@ Following is a sample GNS file for the above locators:
    
     user_attr:
         attr:
-            name: for
-            value: _login
+            for: _login
    
     user_fattr:
         fattr:
-            name: for
-            value: user_login
+            for: user_login
 
     user_battr:
         fattr:
-            name: for
-            value: user_
+            for: user_
 
     user_eattr:
-        fattr:
-            name: for
-            value: _login
+        eattr:
+            for: _login
 
     user_node_1:
         node:

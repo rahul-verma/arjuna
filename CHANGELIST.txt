@@ -55,20 +55,22 @@ Future Themes (In-Progress or Planned):
         - The values in attrs dict are overriden by the direct kv paris supplied in node call.
         - 'tag' is a special key and represents the tag name of the node and is not treated as an attribute.
         - 'text' is a special key and represents the text content of the node and is used for matching.
-    - node represents partial match for attribute contents, bnode partial match at beginning of attributes contents and fnode represents full content of node attributes.
-    - There is an AND relationship among all attribute values supplied.
-    - You can use formatters to format the '$$' placeholders within keys and values of node, bnode and fnode.
-    - These selectors can be used in GNS files just like other selectors.
-    - In a few sub-versions down the line, the way attr, fattr are specified in code and GNS is going to change and would break current usage.
-        - Rather than name and value arguments, direct values will be supplied.
+        - node represents partial match for attribute contents, bnode partial match at beginning of attributes contents and fnode represents full content of node attributes.
+        - There is an AND relationship among all attribute values supplied.
+        - You can use formatters to format the '$$' placeholders within keys and values of node, bnode and fnode.
+        - These selectors can be used in GNS files just like other selectors.
+    - Updates in Attribute related locators.
+        - Change in the way attr, fattr are specified in code and GNS. Breaks current usage.
+        - Rather than name and value arguments, direct value will be supplied as key value pair.
         - Specifying tag in the definition will not be supported.
         - node selectors will support tag and multiple attributes to bridge this gap and provide more advanced functionality.
-    - Withx can be used to define custom locators using node, bnode and fnode. Placeholders and kwargs work for attr names as well as values.
-    - Attr -> attr, NVPairs -> nvpairs 
-    - Withx supports $$ placeholders like normal GNS.
-    - Withx suports C,L,R placeholders.
-    - battr, eattr support
-    - attr related locators are converted to CSS Selectors instead of XPath.
+        - battr, eattr support
+        - attr related locators are converted to CSS Selectors instead of XPath.
+    - Withx Enhancements
+        - Withx can be used to define custom locators using node, bnode and fnode. Placeholders and kwargs work for attr names as well as values.
+        - Withx supports $$ placeholders like normal GNS.
+        - Withx suports C,L,R placeholders.
+    - Name changes: Attr -> attr, NVPairs -> nvpairs
     - Comprehensive documentation of locators in coded and GNS formats along with withx documentation.
 
 1.1.21

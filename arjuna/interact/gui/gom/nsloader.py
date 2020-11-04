@@ -214,6 +214,14 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                 if not self.__withx.has_locator(loc) and not common_withx.has_locator(loc):
                     wtype, wvalue = loc.upper(), loc_obj
                     if wtype in dir(WithType):
+                        if wtype in {'ATTR', 'FATTR', 'BATTR', 'EATTR'}:
+                            if len(wvalue) > 1:
+                                raise Exception("attr/fattr/battr/eattr entries in GNS shoul have a single key value pair mapping.")
+                            final_value = dict()
+                            for k,v in wvalue.items():
+                                final_value['name'] = k
+                                final_value['value'] = v
+                            wvalue = final_value
                         iloc = ImplWith(wtype=wtype, wvalue=wvalue, has_content_locator=False)
                         self.__ns[label.lower()]["locators"][self.__context].append(iloc)
                     else:

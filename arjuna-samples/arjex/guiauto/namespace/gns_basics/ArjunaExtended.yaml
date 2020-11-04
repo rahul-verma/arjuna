@@ -14,13 +14,11 @@ labels:
 
   user_attr:
     attr:
-      name: for
-      value: _login
+      for: _login
 
   user_fattr:
     fattr:
-      name: for
-      value: user_login
+      for: user_login
 
   user_node:
     node:
