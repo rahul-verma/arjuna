@@ -47,9 +47,6 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
-1.1.23
-------
-
 1.1.22
 ------
     - Support for 'node' as a valid selector (with type)
