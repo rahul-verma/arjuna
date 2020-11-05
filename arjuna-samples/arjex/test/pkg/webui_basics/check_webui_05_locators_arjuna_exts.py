@@ -68,7 +68,7 @@ def check_arjuna_exts_coded(request, wordpress):
     e = wordpress.element(node=node(id="er_l"))
     print(e.source.content.root)
 
-    e = wordpress.element(node=node(tag="input", id="er_l"))
+    e = wordpress.element(node=node(tags="input", id="er_l"))
     print(e.source.content.root)
 
     e = wordpress.element(node=node(tags="input", id="er_l"))
@@ -80,7 +80,7 @@ def check_arjuna_exts_coded(request, wordpress):
     e = wordpress.element(node=node(tags=('form', 'input'), id="er_l"))
     print(e.source.content.root)
 
-    e = wordpress.element(node=node(tag="input", id="er_l", size=20))
+    e = wordpress.element(node=node(tags="input", id="er_l", size=20))
     print(e.source.content.root)
 
     e = wordpress.element(node=node(attrs={'for': 'er_l'}))
@@ -95,10 +95,10 @@ def check_arjuna_exts_coded(request, wordpress):
     e = wordpress.element(node=node(id="user_"))
     print(e.source.content.root)
 
-    e = wordpress.element(node=node(tag="input", id="user_"))
+    e = wordpress.element(node=node(tags="input", id="user_"))
     print(e.source.content.root)
 
-    e = wordpress.element(node=node(tag="input", id="user_", size=20))
+    e = wordpress.element(node=node(tags="input", id="user_", size=20))
     print(e.source.content.root)
 
     e = wordpress.element(node=node(attrs={'for': 'user_'}))
@@ -160,6 +160,9 @@ def check_arjuna_exts_coded(request, wordpress):
     print(e.source.content.root)
 
     e = wordpress.element(node=node(tags="body form", attrs={'.text' : "Me"}))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tags=("body", "form"), attrs={'.text' : "Me"}))
     print(e.source.content.root)
 
     # Using classes

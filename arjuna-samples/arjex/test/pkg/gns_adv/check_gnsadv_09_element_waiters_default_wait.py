@@ -127,5 +127,5 @@ def check_contains_with_root_1(request, dashboard_re):
 @test
 def check_contains_with_root_2(request, dashboard_re):
     # Should be validated in root element.
-    print(dashboard_re.left_nav.contains(tag="div"))
+    print(dashboard_re.left_nav.contains(tags="div"))
     print(dashboard_re.left_nav.contains(id="something"))

@@ -54,8 +54,8 @@ There are many advanced ways for this association, which are documented later in
 
 .. _basic_locator_gns:
 
-**Externalizing** **ID**, **Name**, **Tag**, **Class**, **Link Text**, **Partial Link Text**, **XPath** and **CSS Selector**
-----------------------------------------------------------------------------------------------------------------------------
+**Externalizing** **ID**, **Name**, **Tags**, **Class**, **Link Text**, **Partial Link Text**, **XPath** and **CSS Selector**
+-----------------------------------------------------------------------------------------------------------------------------
 
 The locator strategy in GNS files is expressed using locator type names supported by Arjuna. These are simple locators and hence are expressed as basic key value pairs, almost equivalent to the way you pass them as keyword arguments in **app.element** calls. Functionality is equivalent as well.
 
@@ -72,7 +72,7 @@ Following is a sample GNS file showing externalized basic locators:
         name: log
    
     user_tag:
-        tag: input
+        tags: input
 
     user_class:
         classes: input
@@ -104,101 +104,359 @@ Arjuna uses operator overloading to tie the **gns** attribute to the **GNS file*
 
 All of Arjuna's locator extensions can be externalizd in GNS as well.
 
-GNS Locator Externalization Format
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**title** Locator
+^^^^^^^^^^^^^^^^^
 
-- Following are externalized as simple key value pairs:
-    - **text**
-    - **ftext**
-    - **btext**
-    - **title**
-    - **value**
-    - **js**
-- Following are externlized with content as a YAML mapping attribute specified as a single key value pair:
-    - **attr**
-    - **fattr**
-    - **battr**
-    - **eattr**
-- Following are externalized with content as a YAML mapping with attribute names as key value pairs and optioanlly a **tag** and/or **text** key.
-    - **node**
-    - **fnode**
-    - **bnode**
-- **classes** is externalized as a single string or a YAML list of strings:
-- **point** is externlized with content as a YAML mapping with **x** and **y** keys.
-
-
-.. _gns_locator_exts:
-
-Examples of Arjuna's Extended Locators in GNS
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Following is a sample GNS file for the above locators:
+Externalization uses a simple format with **title** as key and value as the title content.
 
 .. code-block:: yaml
 
    labels:
    
-    lost_pass_text:
-        text: Lost
-   
-    lost_pass_ftext:
-        ftext: "Lost your password?"
-   
     lost_pass_title:
         title: Password Lost and Found
+
+**value** Locator
+^^^^^^^^^^^^^^^^^
+
+Externalization uses a simple format with **value** as key and value as content of **value** attribute.
+
+.. code-block:: yaml
+
+   labels:
    
     user_value:
         value: Log In
+
+**tags** Locator
+^^^^^^^^^^^^^^^^
+
+This locator is externalized in multiple formats:
+    - a single string with a single word
+    - multiple space separated words
+    - a list of strings
+
+.. code-block:: yaml
+
+   labels:
    
-    user_attr:
-        attr:
-            for: _login
+    tags_1:
+        tags: form
+
+    tags_2:
+        tags: body form
+
+    tags_3:
+        tags: 
+            - body 
+            - form
+
+When you use wildcard '*', you should use quotes around it for valid YAML:
+
+.. code-block:: yaml
+
+   labels:
+
+    tags_4:
+        tags: 
+            - body 
+            - '*'
+
+You can use **any** instead of specifying it as '*'.
+
+.. code-block:: yaml
+
+   labels:
+
+    tags_5:
+        tags: 
+            - body
+            - any
+
+**classes** Locator
+^^^^^^^^^^^^^^^^^^^
+
+This locator is externalized in multiple formats:
+    - a single string with a single word
+    - multiple space separated words
+    - a list of strings
+
+.. code-block:: yaml
+
+   labels:
    
-    user_fattr:
-        fattr:
-            for: user_login
+    cls_1:
+        classes: button-large
 
-    user_battr:
-        fattr:
-            for: user_
-
-    user_eattr:
-        eattr:
-            for: _login
-
-    user_node_1:
-        node:
-            title: Found
-            tag: a
-            text: Lost
-
-    user_node_1:
-        fnode:
-            title: Password Lost and Found
-            tag: a
-            text: Lost your Password?
-
-    user_node_1:
-        bnode:
-            title: Lost
-            tag: a
-            text: Lost
-
-    button_classes_str:
+    tags_2:
         classes: button button-large
 
-    button_classes_list:
+    tags_3:
         classes: 
             - button 
             - button-large
+
+**point** Locator
+^^^^^^^^^^^^^^^^^
+
+This locator is externalized as a YAML mapping with **x** and **y** keys.
+
+
+.. code-block:: yaml
+
+   labels:
    
     elem_xy:
         point:
             x: 1043
             y: 458
-   
+
+**js** Locator 
+^^^^^^^^^^^^^^
+
+Externalization uses a simple format with **js** as key and value as the JavaScript string.
+
+
+.. code-block:: yaml
+
+   labels:
+
     elem_js:
         js: "return document.getElementById('wp-submit')"
+
+
+Text Based Locators
+^^^^^^^^^^^^^^^^^^^
+
+These are externalized as a single key-value pair with key as the locator name and value as the full or partial content based on the locator.
+
+**text** Locator
+""""""""""""""""
+
+.. code-block:: yaml
+
+   labels:
+
+    lost_pass_text:
+        text: Lost
+
+**ftext** Locator
+"""""""""""""""""
+
+.. code-block:: yaml
+
+   labels:
+
+    lost_pass_ftext:
+        ftext: "Lost your password?"
+
+**btext** Locator
+"""""""""""""""""
+
+.. code-block:: yaml
+
+   labels:
+
+    lost_pass_ftext:
+        btext: Lost your
+
+Attribute Based Locators
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+These are externalized as a single key-value pair with key as the attribute name and value as the full or partial content attribute based on the locator.
+
+**attr** Locator 
+""""""""""""""""
+
+.. code-block:: yaml
+
+   labels:
+
+    user_attr:
+        attr:
+            for: _login
+
+
+**fattr** Locator 
+"""""""""""""""""
+
+.. code-block:: yaml
+
+   labels:
+
+    user_fattr:
+        fattr:
+            for: user_login
+
+**battr** Locator 
+"""""""""""""""""
+
+.. code-block:: yaml
+
+   labels:
+
+    user_battr:
+        fattr:
+            for: user_
+
+
+**eattr** Locator 
+"""""""""""""""""
+
+.. code-block:: yaml
+
+   labels:
+
+    user_eattr:
+        eattr:
+            for: _login
+
+Node Definition Based Locators
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Node definition based locators are specified as a YAML mapping that contains:
+    - Full tag names if specified
+    - Full class names if specified
+    - Full or partial attribute values depending on type of node locator.
+    - Full or partial text content depending on type of node locator.
+
+
+**node** Locator
+""""""""""""""""
+
+Following are various samples:
+
+.. code-block:: yaml
+
+    labels:
+
+        n1:
+            node:
+                title: Found
+                tags: a
+                text: Lost
+
+        n2:
+            node:
+                title: Found
+                tags: html *
+                classes: cl1 cl2
+                *text: Lost
+
+        n3:
+            node:
+                title: Found
+                tags: 
+                    - html 
+                    - '*'
+                classes: 
+                    - cl1 
+                    - cl2
+                .text: Lost
+
+        n4:
+            node:
+                title: Found
+                tags: 
+                    - html 
+                    - any
+                classes: 
+                    - cl1 
+                    - cl2
+                .text: Lost
+
+**fnode** Locator
+"""""""""""""""""
+
+Following are various samples:
+
+.. code-block:: yaml
+
+   labels:
+
+    n1:
+        node:
+            title: Password Lost and Found
+            tags: a
+            text: Lost your Password?
+
+    n2:
+        node:
+            title: Password Lost and Found
+            tags: html *
+            classes: cl1 cl2
+            *text: Lost your Password?
+
+    n3:
+        node:
+            title: Password Lost and Found
+            tags: 
+                - html 
+                - '*'
+            classes: 
+                - cl1 
+                - cl2
+            .text: Lost your Password?
+
+    n4:
+        node:
+            title: Password Lost and Found
+            tags: 
+                - html 
+                - any
+            classes: 
+                - cl1 
+                - cl2
+            .text: Lost your Password?
+
+**bnode** Locator
+"""""""""""""""""
+
+Following are various samples:
+
+.. code-block:: yaml
+
+   labels:
+
+    n1:
+        node:
+            title: Password
+            tags: a
+            text: Lost
+
+    n2:
+        node:
+            title: Password
+            tags: html *
+            classes: cl1 cl2
+            *text: Lost
+
+    n3:
+        node:
+            title: Password
+            tags: 
+                - html 
+                - '*'
+            classes: 
+                - cl1 
+                - cl2
+            .text: Lost
+
+    n4:
+        node:
+            title: Password
+            tags: 
+                - html 
+                - any
+            classes: 
+                - cl1 
+                - cl2
+            .text: Lost
+
+.. _gns_locator_exts:
+
+Using Arjuna's Extended Locators in GNS
+---------------------------------------
 
 You can refer the element labels defined using extended locators in code just like those for externalized basic locators. Following is sample code (assume **app** to be a **GuiApp** object). For example:
 
@@ -245,7 +503,7 @@ Placeholdrs can also be defined so that programmatically values can be passed to
 
         password:
             node:
-                tag: $tg$
+                tags: $tg$
                 $attr1$: $idx$
                 $attr2$: $sz$
 

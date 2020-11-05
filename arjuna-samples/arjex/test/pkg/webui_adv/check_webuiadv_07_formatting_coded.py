@@ -74,16 +74,16 @@ def check_fmt_node_coded(request, wordpress):
     print(e.source.content.root)
 
     # Multiple attribute and tag
-    e = wordpress.formatter(tg="input", idx="er_l", sz=20).element(node=node(tag="$tg$", id="$idx$", size="$sz$"))
+    e = wordpress.formatter(tg="input", idx="er_l", sz=20).element(node=node(tags="$tg$", id="$idx$", size="$sz$"))
     print(e.source.content.root)
 
-    e = wordpress.formatter(tg="input", idx="er_l", sz=20).element(node=node(tag="$tg$", id="$idx$", size="$sz$"))
+    e = wordpress.formatter(tg="input", idx="er_l", sz=20).element(node=node(tags="$tg$", id="$idx$", size="$sz$"))
 
     # Key and value formatting
-    e = wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(tag="$tg$", attrs={'$attr1$': "$idx$", '$attr2$': "$sz$"}))
+    e = wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(tags="$tg$", attrs={'$attr1$': "$idx$", '$attr2$': "$sz$"}))
     print(e.source.content.root)
 
-    e = wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(attrs={'tag':"$tg$", '$attr1$': "$idx$", '$attr2$': "$sz$"}))
+    e = wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(attrs={'tags':"$tg$", '$attr1$': "$idx$", '$attr2$': "$sz$"}))
     print(e.source.content.root)
 
     e = wordpress.formatter(tg="html", cl1='locale-en-us', text='Me').element(node=node(tags="$tg$ *", classes=("$cl1$", "wp-core-ui"), attrs={'.text' : "$text$"}))

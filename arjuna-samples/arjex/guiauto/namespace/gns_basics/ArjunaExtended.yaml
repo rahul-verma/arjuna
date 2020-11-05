@@ -27,13 +27,13 @@ labels:
   user_node_tag:
     node:
       id: _login
-      tag: input
+      tags: input
 
   user_node_multi:
     node:
       id: _login
       size: 20
-      tag: input
+      tags: input
 
   user_bnode:
     node:
@@ -42,12 +42,12 @@ labels:
   user_bnode_tag:
     node:
       id: user_
-      tag: input
+      tags: input
 
   user_bnode_multi:
     node:
       id: user_
-      tag: input
+      tags: input
 
   user_fnode:
     node:
@@ -56,13 +56,13 @@ labels:
   user_fnode_tag:
     node:
       id: user_login
-      tag: input
+      tags: input
 
   user_fnode_multi:
     node:
       id: user_login
       size: 20
-      tag: input
+      tags: input
 
   body_node_1:
     node:

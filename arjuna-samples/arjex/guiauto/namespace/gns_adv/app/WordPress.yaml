@@ -45,7 +45,7 @@ labels:
 
   labels:
     type: multi_element
-    tag: label
+    tags: label
 
   first_input:
-    tag: input
+    tags: input

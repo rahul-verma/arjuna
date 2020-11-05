@@ -15,14 +15,14 @@ withx:
     wvalue:
       $attr1$: $val1$
       size: $val2$
-      tag: $tg$
+      tags: $tg$
 
   for_node_4:
     wtype: node
     wvalue:
       $attr1$: $val1$
       size: $val2$
-      tag: $tg$
+      tags: $tg$
 
   body_node:
     wtype: node
@@ -63,12 +63,12 @@ labels:
     node:
       $attr1$: $idx$
       $attr2$: $sz$
-      tag: $tg$
+      tags: $tg$
 
   user_node_f5:
     node:
       title: Found
-      tag: a
+      tags: a
       text: Lost
 
   body_node_1:

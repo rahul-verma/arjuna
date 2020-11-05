@@ -22,16 +22,16 @@ def check_parse_gui_source(request, wordpress):
     root = wordpress.source.node
 
     # Find first node by tag
-    print(root.find(Xml.node_locator(tag="input")))
+    print(root.find(Xml.node_locator(tags="input")))
 
     # Find first node by attr
     print(root.find(Xml.node_locator(value="1")))
 
     # Find first node by tag and attr
-    print(root.find(Xml.node_locator(tag="input", size="20")))
+    print(root.find(Xml.node_locator(tags="input", size="20")))
 
     # Find first node by tag and multiple attrs
-    print(root.find(Xml.node_locator(tag="input", size="20", name="log")))
+    print(root.find(Xml.node_locator(tags="input", size="20", name="log")))
 
     # Find first node with xpath
     user = root.find_with_xpath("//input")
@@ -42,7 +42,7 @@ def check_parse_gui_source(request, wordpress):
     print(submit)
 
     # Inquiring
-    link = root.find(Xml.node_locator(tag="a"))
+    link = root.find(Xml.node_locator(tags="a"))
     print(link)
     print(link.text)
     print(link.tag)
@@ -51,7 +51,7 @@ def check_parse_gui_source(request, wordpress):
     print(link.has_attr("href"))
     print(link.has_attr("nothing"))
 
-    form = root.find(Xml.node_locator(tag="form"))
+    form = root.find(Xml.node_locator(tags="form"))
     print(form.text)
     print(form.texts)
     print(form.parent)
@@ -63,7 +63,7 @@ def check_parse_gui_source(request, wordpress):
     print(redirect.following_sibling)
 
     # Find all nodes for a locator
-    inputs = root.findall(Xml.node_locator(tag="input", size="20"))
+    inputs = root.findall(Xml.node_locator(tags="input", size="20"))
     for i in inputs:
         print(i)
 
@@ -73,7 +73,7 @@ def check_parse_gui_source(request, wordpress):
         print(i)
 
     # Nested Node finding.
-    form = root.find(Xml.node_locator(tag="form"))
+    form = root.find(Xml.node_locator(tags="form"))
     print(form.find(Xml.node_locator(type="hidden")))
 
 

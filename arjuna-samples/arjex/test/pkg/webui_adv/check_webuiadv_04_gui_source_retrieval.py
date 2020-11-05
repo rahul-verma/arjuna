@@ -47,7 +47,7 @@ def check_element_source(request, wordpress):
 
 @test
 def check_multi_element_source(request, wordpress):
-    labels = wordpress.multi_element(tag="label")
+    labels = wordpress.multi_element(tags="label")
     print_source_info(labels.source)
 
 

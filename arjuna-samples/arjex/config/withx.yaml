@@ -17,18 +17,18 @@ for_node_3:
   wvalue:
     $attr1$: $val1$
     size: $val2$
-    tag: $tg$
+    tags: $tg$
 
 for_node_4:
   wtype: node
   wvalue:
     $attr1$: $val1$
     size: $val2$
-    tag: $tg$
+    tags: $tg$
 
 for_node_5:
   wtype: node
   wvalue:
     $attr1$: $C.useridval$
     size: $val2$
-    tag: $tg$
+    tags: $tg$

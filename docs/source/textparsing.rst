@@ -407,7 +407,7 @@ Arjuna's **NodeLocator** object helps you in easily defining locating criteria.
         locator = Xml.node_locator(a=1)
 
         # XmlNode with tag input and attr 'a' with value 1
-        locator = Xml.node_locator(tag='input, a=1)
+        locator = Xml.node_locator(tag='input', a=1)
 
 
 You can search for all XMlNodes using this locator in an `XmlNode`:
