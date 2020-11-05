@@ -66,6 +66,15 @@ def check_arjuna_exts_coded(request, wordpress):
     e = wordpress.element(node=node(tag="input", id="er_l"))
     print(e.source.content.root)
 
+    e = wordpress.element(node=node(tags="input", id="er_l"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tags="form input", id="er_l"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tags=('form', 'input'), id="er_l"))
+    print(e.source.content.root)
+
     e = wordpress.element(node=node(tag="input", id="er_l", size=20))
     print(e.source.content.root)
 
@@ -99,10 +108,10 @@ def check_arjuna_exts_coded(request, wordpress):
     e = wordpress.element(fnode=node(id="user_login"))
     print(e.source.content.root)
 
-    e = wordpress.element(fnode=node(tag="input", id="user_login"))
+    e = wordpress.element(fnode=node(tags="input", id="user_login"))
     print(e.source.content.root)
 
-    e = wordpress.element(fnode=node(tag="input", id="user_login", size=20))
+    e = wordpress.element(fnode=node(tags="input", id="user_login", size=20))
     print(e.source.content.root)
 
     e = wordpress.element(fnode=node(attrs={'for': 'user_login'}))
@@ -117,10 +126,10 @@ def check_arjuna_exts_coded(request, wordpress):
     e = wordpress.element(bnode=node(id="user_"))
     print(e.source.content.root)
 
-    e = wordpress.element(bnode=node(tag="input", id="user_"))
+    e = wordpress.element(bnode=node(tags="input", id="user_"))
     print(e.source.content.root)
 
-    e = wordpress.element(bnode=node(tag="input", id="user_", size=20))
+    e = wordpress.element(bnode=node(tags="input", id="user_", size=20))
     print(e.source.content.root)
 
     e = wordpress.element(bnode=node(attrs={'for': 'user_'}))
@@ -131,5 +140,44 @@ def check_arjuna_exts_coded(request, wordpress):
     print(e.source.content.root)
 
     # Using node with tag, attrs and text
-    e = wordpress.element(node=node(tag="a", text="Lost", href="lostpassword", title="Found"))
+    e = wordpress.element(node=node(tags="a", text="Lost", href="lostpassword", title="Found"))
+    print(e.source.content.root)
+
+    # Using node with star_text
+    e = wordpress.element(node=node(star_text="Me"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(attrs={'*text' : "Me"}))
+    print(e.source.content.root)
+
+    # Using node with dot_text
+    e = wordpress.element(node=node(tags="form", dot_text="Me"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tags="body form", attrs={'.text' : "Me"}))
+    print(e.source.content.root)
+
+    # Using classes
+    e = wordpress.element(node=node(star_text="Me", classes="forgetmenot"))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(classes="wp-core-ui", attrs={'.text' : "Me"}))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(classes="locale-en-us wp-core-ui", attrs={'.text' : "Me"}))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tags="html body", classes=("locale-en-us", "wp-core-ui")))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tags="html *", classes=("locale-en-us", "wp-core-ui")))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(classes=("locale-en-us", "wp-core-ui"), attrs={'.text' : "Me"}))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tags="html body", classes=("locale-en-us", "wp-core-ui"), attrs={'.text' : "Me"}))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(tags="html *", classes=("locale-en-us", "wp-core-ui"), attrs={'.text' : "Me"}))
     print(e.source.content.root)

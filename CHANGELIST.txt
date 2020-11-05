@@ -49,6 +49,12 @@ Future Themes (In-Progress or Planned):
 
 1.1.23
 ------
+    - node Locator
+        - Converts to Xpath or CSS Selector based on condition of text matching (text or star_text or dot_text)
+        - Added provision for star_text which converts to *//text() instead of text() for specified text. It can also be specified as *text.
+        - Added provision for dot_text which converts to . instead of text() for for specified text. It can also be specified as .text.
+        - tags support is added to define multiple tags which are treated as a relative sequence of tags. Either tag or tags should be used. tags can take a single tag, multiple space separated tags as well as a list of tag strings.
+        - classes support is added to define one or more classes as string or sequence. 
 
 1.1.22
 ------

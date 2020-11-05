@@ -60,9 +60,43 @@ class LocatorTranslator:
         GenericLocateWith.POINT : "return document.elementFromPoint({x}, {y})",
     }
 
+    TEXT_TRANSLATIONS = {
+        'text' : "text()",
+        '*text' : "*//text()",
+        'star_text' : "*//text()",
+        '.text' : ".",
+        'dot_text' : ".",
+    }
+
     @classmethod
     def translate(cls, locator):
         from arjuna import log_debug
+
+        def process_selector(cssvalue):
+            css_string = None
+            if type(cssvalue) is str:
+                css_string = "." + cssvalue.replace('.', ' ').strip()
+            else:
+                if type(cssvalue[0]) is str:
+                    # Tuple like ('button button-large',)
+                    cssvalue = " ".join(cssvalue)
+                    css_string = "." + cssvalue.replace('.', ' ').strip()
+                else:
+                    # Tuple is (('button', 'button-large'),)
+                    css_string = "." + ".".join(cssvalue[0])
+            return re.sub(r'\s+', '.', css_string)
+
+        def convert_to_class_list(cssvalue):
+            return process_selector(cssvalue)[1:].split(".")
+
+        def process_tags(tagsvalue):
+            tag_list = None
+            if type(tagsvalue) is str:
+                tag_list = tagsvalue.strip().split()
+            else:
+                tag_list = tagsvalue
+            return tag_list
+
         rltype = locator.ltype
         rlvalue = locator.lvalue
         glvalue = None
@@ -88,40 +122,91 @@ class LocatorTranslator:
                 glvalue = cls.NAMED_ARG_LOCATORS[gltype].format(**rlvalue)
                 gltype = GenericLocateWith.CSS_SELECTOR
             elif gltype == GenericLocateWith.CLASSES:
-                css_string = None
-                if type(rlvalue) is str:
-                    css_string = "." + rlvalue.replace('.', ' ').strip()
-                else:
-                    if type(rlvalue[0]) is str:
-                        css_string = "." + rlvalue[0].replace('.', ' ').strip()
-                    else:
-                        css_string = "." + ".".join(rlvalue[0])
-                glvalue = re.sub(r'\s+', '.', css_string)
+                css_string = process_selector(rlvalue)
+                # if type(rlvalue) is str:
+                #     css_string = "." + rlvalue.replace('.', ' ').strip()
+                # else:
+                #     if type(rlvalue[0]) is str:
+                #         css_string = "." + rlvalue[0].replace('.', ' ').strip()
+                #     else:
+                #         css_string = "." + ".".join(rlvalue[0])
+                glvalue = process_selector(rlvalue)
                 gltype = GenericLocateWith.CSS_SELECTOR
             elif gltype in {GenericLocateWith.NODE, GenericLocateWith.BNODE, GenericLocateWith.FNODE}:
-                xblocks = []
-                tag = '*'
+                lkeys = [k.lower() for k in rlvalue.keys()]
+                if 'tag' in lkeys and 'tags' in lkeys:
+                    raise Exception("node Locator definition can contain either tag or tags.")
+                # Initial processing
+                updated_rlvalue = dict()
+                use_xpath = False
                 for k,v in rlvalue.items():
                     if k.lower() == 'tag':
-                        tag = v
-                        continue
+                        updated_rlvalue['tags'] = process_tags(v)
+                    elif k.lower() == 'tags':
+                        updated_rlvalue['tags'] = process_tags(v)
+                    elif k.lower() == 'classes':
+                        updated_rlvalue['classes'] = convert_to_class_list(v)
+                    elif k.lower() in cls.TEXT_TRANSLATIONS:
+                        updated_rlvalue[k.lower()] = v
+                        use_xpath = True
+                    else:
+                        updated_rlvalue[k] = v
+                rlvalue = updated_rlvalue
+                if use_xpath:
+                    # Create XPath
+                    xblocks = []
+                    tags = '*'
+                    for k,v in rlvalue.items():
+                        if k.lower() == 'tags':
+                            tags = "//".join(v)
+                            continue
 
-                    if k.lower() == "text":
-                        xblocks.append(f"contains(text(),'{v}')")
-                        continue
-                    
-                    if gltype == GenericLocateWith.NODE:
-                        xblocks.append(f"contains(@{k},'{v}')")
-                    elif gltype == GenericLocateWith.NODE:
-                        xblocks.append(f"begins_with(@{k},'{v}')")
-                    elif gltype == GenericLocateWith.NODE:
-                        xblocks.append(f"@{k}='{v}'")
-                if xblocks:
-                    xblocks_str = "[" + " and ".join(xblocks) + "]"
+                        if k == "classes":
+                            for c in v:
+                                xblocks.append(f"contains(@class,'{c}')")
+                            continue
+
+                        if k.lower() in cls.TEXT_TRANSLATIONS:
+                            k = cls.TEXT_TRANSLATIONS[k.lower()]
+                        else:
+                            k = f'@{k}'
+                        if gltype == GenericLocateWith.NODE:
+                            xblocks.append(f"contains({k},'{v}')")
+                        elif gltype == GenericLocateWith.BNODE:
+                            xblocks.append(f"starts-with({k},'{v}')")
+                        elif gltype == GenericLocateWith.FNODE:
+                            xblocks.append(f"{k}='{v}'")
+                    if xblocks:
+                        xblocks_str = "[" + " and ".join(xblocks) + "]"
+                    else:
+                        xblocks_str = ""
+                    glvalue = f"//{tags}{xblocks_str}"
+                    gltype = GenericLocateWith.XPATH
                 else:
-                    xblocks_str = ""
-                glvalue = f"//{tag}{xblocks_str}"
-                gltype = GenericLocateWith.XPATH
+                    cblocks = []
+                    tags = '*'
+                    classes = ""
+                    for k,v in rlvalue.items():
+                        if k.lower() == 'tags':
+                            tags = " ".join(v)
+                            continue
+
+                        if k == "classes":
+                            classes = "." + ".".join(v)
+                            continue
+                        
+                        if gltype == GenericLocateWith.NODE:
+                            cblocks.append(f"[{k}*='{v}']")
+                        elif gltype == GenericLocateWith.BNODE:
+                            cblocks.append(f"[{k}^='{v}']")
+                        elif gltype == GenericLocateWith.FNODE:
+                            cblocks.append(f"[{k}='{v}']")
+                    if cblocks:
+                        cblocks_str = "".join(cblocks)
+                    else:
+                        cblocks_str = ""
+                    glvalue = f"{tags}{classes}{cblocks_str}"
+                    gltype = GenericLocateWith.CSS_SELECTOR
             else:
                 raise Exception("Locator not supported yet by Arjuna: " + rltype)
     
