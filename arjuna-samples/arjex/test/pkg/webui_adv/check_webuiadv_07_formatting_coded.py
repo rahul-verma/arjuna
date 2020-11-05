@@ -85,3 +85,6 @@ def check_fmt_node_coded(request, wordpress):
 
     e = wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(attrs={'tag':"$tg$", '$attr1$': "$idx$", '$attr2$': "$sz$"}))
     print(e.source.content.root)
+
+    e = wordpress.formatter(tg="html", cl1='locale-en-us', text='Me').element(node=node(tags="$tg$ *", classes=("$cl1$", "wp-core-ui"), attrs={'.text' : "$text$"}))
+    print(e.source.content.root)

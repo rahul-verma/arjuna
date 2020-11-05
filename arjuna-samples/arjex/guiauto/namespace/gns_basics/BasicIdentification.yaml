@@ -7,7 +7,7 @@ labels:
     name: log
 
   user_tag:
-    tag: input
+    tags: input
 
   user_class:
     classes: input

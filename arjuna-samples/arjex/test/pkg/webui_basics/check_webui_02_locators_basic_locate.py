@@ -23,7 +23,7 @@ def check_basic_identifiers_factory(request, wordpress):
     # Html of user name: <input type="text" name="log" id="user_login" class="input" value="" size="20">
     wordpress.element(id="user_login")
     wordpress.element(name="log")
-    wordpress.element(tag="input")
+    wordpress.element(tags="input")
     wordpress.element(classes="input")
 
     # Lost your password link

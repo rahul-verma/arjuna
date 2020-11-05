@@ -63,3 +63,12 @@ def check_withx_gns_home(request, wordpress):
 
     e = wordpress.gns.formatter(val2=20).user_node_with4
     print(e.source.content.root)
+
+    e = wordpress.gns.formatter(val2=20).user_node_with4
+    print(e.source.content.root)
+
+    e = wordpress.gns.body_node_with_1
+    print(e.source.content.root)
+
+    e = wordpress.gns.formatter(text='Me').body_node_with_2
+    print(e.source.content.root)

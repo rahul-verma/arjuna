@@ -113,8 +113,8 @@ class With(metaclass=_WithXMetaClass):
         return With(WithType.SELECTOR, selector)
 
     @classmethod
-    def tag(cls, selector):
-        return With(WithType.TAG, selector)
+    def tags(cls, selector):
+        return With(WithType.TAGS, selector)
 
     @classmethod
     def xpath(cls, xpath):

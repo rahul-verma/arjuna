@@ -51,6 +51,10 @@ def check_arjuna_exts_gns(request, wordpress):
     element = wordpress.gns.user_fattr
     print(element.source.content.root)
 
+    # Based on tags
+    element = wordpress.gns.form_tags_str
+    element = wordpress.gns.form_tags_list
+
     # Based on compound classes
     element = wordpress.gns.button_classes_str
     element = wordpress.gns.button_classes_list
@@ -71,3 +75,5 @@ def check_arjuna_exts_gns(request, wordpress):
     element = wordpress.gns.user_fnode
     element = wordpress.gns.user_fnode_tag
     element = wordpress.gns.user_fnode_multi
+    element = wordpress.gns.body_node_1
+    element = wordpress.gns.body_node_2

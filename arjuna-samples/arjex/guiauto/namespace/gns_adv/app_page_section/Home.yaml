@@ -24,6 +24,17 @@ withx:
       size: $val2$
       tag: $tg$
 
+  body_node:
+    wtype: node
+    wvalue:
+      tags: 
+        - $tg$ 
+        - '*'
+      classes: 
+        - $cl1$
+        - wp-core-ui
+      .text: $text$
+
 labels:
 
   user:
@@ -60,6 +71,22 @@ labels:
       tag: a
       text: Lost
 
+  body_node_1:
+    node:
+      tags: $tg$ *
+      classes: $cl1$ wp-core-ui
+      .text: $text$
+
+  body_node_2:
+    node:
+      tags: 
+        - $tg$ 
+        - '*'
+      classes: 
+        - $cl1$
+        - wp-core-ui
+      .text: $text$
+
   user_node_with1:
     for_node_1:
       val: 'er_l'
@@ -81,3 +108,14 @@ labels:
       attr1: id
       val1: 'er_l'
       tg: input
+
+  body_node_with_1:
+    body_node:
+      tg: html
+      cl1: locale-en-us
+      text: Me
+
+  body_node_with_2:
+    body_node:
+      tg: html
+      cl1: locale-en-us

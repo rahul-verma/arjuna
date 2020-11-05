@@ -56,10 +56,13 @@ class WithX:
         fmt = copy.deepcopy(self.__xdict[name])
         repl_dict = {k.lower():v for k,v in kwargs.items()}
         try:
-            if fmt["wtype"] in {'ATTR', 'FATTR', 'NODE', 'BNODE', 'FNODE'}:
+            if fmt["wtype"] in {'ATTR', 'FATTR', 'BATTR', 'EATTR', 'NODE', 'BNODE', 'FNODE'}:
                 out = dict()
                 for k,v in fmt["wvalue"].items():
-                    out[_format(k, repl_dict)] = _format(v, repl_dict)
+                    if type(v) in {list, tuple}:
+                        out[_format(k, repl_dict)] = [_format(v_entry, repl_dict) for v_entry in v]
+                    else:
+                        out[_format(k, repl_dict)] = _format(v, repl_dict)
                     #out[k.format(**kwargs)] = v.format(**kwargs)
                 return fmt["wtype"], out
             else:

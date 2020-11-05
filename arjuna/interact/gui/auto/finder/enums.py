@@ -6,7 +6,7 @@ class WithType(Enum):
     CLASSES = auto()
     LINK = auto()
     FLINK = auto()
-    TAG = auto()
+    TAGS = auto()
     XPATH = auto()
     SELECTOR = auto()
 
@@ -43,7 +43,7 @@ class GenericLocateWith(Enum):
     LINK = auto() 
     FLINK = auto()
     PLINK = auto() 
-    TAG = auto()
+    TAGS = auto()
 
     INDEX = auto()
     WINDOW_TITLE = auto()

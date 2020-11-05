@@ -21,7 +21,6 @@ class LocatorTranslator:
     }
 
     NEED_TRANSLATION = {
-        GenericLocateWith.TAG : GenericLocateWith.TAG_NAME,
         GenericLocateWith.LINK : GenericLocateWith.PARTIAL_LINK_TEXT,
         GenericLocateWith.FLINK : GenericLocateWith.LINK_TEXT,
         GenericLocateWith.SELECTOR : GenericLocateWith.CSS_SELECTOR,
@@ -132,6 +131,9 @@ class LocatorTranslator:
                 #         css_string = "." + ".".join(rlvalue[0])
                 glvalue = process_selector(rlvalue)
                 gltype = GenericLocateWith.CSS_SELECTOR
+            elif gltype == GenericLocateWith.TAGS:
+                glvalue = " ".join(process_tags(rlvalue))
+                gltype = GenericLocateWith.CSS_SELECTOR                
             elif gltype in {GenericLocateWith.NODE, GenericLocateWith.BNODE, GenericLocateWith.FNODE}:
                 lkeys = [k.lower() for k in rlvalue.keys()]
                 if 'tag' in lkeys and 'tags' in lkeys:

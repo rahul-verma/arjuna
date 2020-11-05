@@ -64,6 +64,31 @@ labels:
       size: 20
       tag: input
 
+  body_node_1:
+    node:
+      tags: html *
+      classes: locale-en-us wp-core-ui
+      .text: Me
+
+  body_node_2:
+    node:
+      tags: 
+        - html 
+        - '*'
+      classes: 
+        - locale-en-us
+        - wp-core-ui
+      .text: Me
+
+  form_tags_str:
+    tags: html body form
+
+  form_tags_list:
+    tags: 
+      - html 
+      - body
+      - form
+
   button_classes_str:
     classes: button button-large
 

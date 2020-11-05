@@ -48,6 +48,11 @@ def check_arjuna_exts_coded(request, wordpress):
     # Based on full match of an attribute
     wordpress.element(eattr=attr("for", "_login"))
 
+    # Based on descendent tags
+    wordpress.element(tags="html body form")
+    wordpress.element(tags=("html", "body", "form"))
+    wordpress.element(tags=("html", "body", "input"))
+
     # Based on compound classes
     wordpress.element(classes="button button-large")
     wordpress.element(classes=("button", "button-large"))

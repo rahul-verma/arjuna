@@ -71,3 +71,9 @@ def check_fmt_gns_node(request, wordpress):
 
     e = wordpress.gns.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).user_node_f4
     print(e.source.content.root)
+
+    e = wordpress.gns.formatter(tg="html", cl1='locale-en-us', text='Me').body_node_1
+    print(e.source.content.root)
+
+    e = wordpress.gns.formatter(tg="html", cl1='locale-en-us', text='Me').body_node_2
+    print(e.source.content.root)
