@@ -89,6 +89,12 @@ labels:
       - body
       - form
 
+  any_tags_list:
+    tags: 
+      - html 
+      - body
+      - any
+
   button_classes_str:
     classes: button button-large
 

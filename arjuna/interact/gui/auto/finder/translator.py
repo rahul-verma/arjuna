@@ -94,7 +94,7 @@ class LocatorTranslator:
                 tag_list = tagsvalue.strip().split()
             else:
                 tag_list = tagsvalue
-            return tag_list
+            return [t.lower()=='any' and '*' or t for t in tag_list]
 
         rltype = locator.ltype
         rlvalue = locator.lvalue

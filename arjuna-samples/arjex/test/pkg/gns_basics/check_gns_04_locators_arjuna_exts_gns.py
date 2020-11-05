@@ -54,6 +54,8 @@ def check_arjuna_exts_gns(request, wordpress):
     # Based on tags
     element = wordpress.gns.form_tags_str
     element = wordpress.gns.form_tags_list
+    element = wordpress.gns.any_tags_list
+    print(element.source.content.root)
 
     # Based on compound classes
     element = wordpress.gns.button_classes_str
