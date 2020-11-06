@@ -381,13 +381,13 @@ To enforce XPath generation instead of a CSS Selector, you can pass **use_xpath*
 
 .. code-block:: python
 
-    wordpress.element(node=node(use_xpath=True, tags="html *", classes=("alocale-en-us", "wp-core-ui")))
+    wordpress.element(node=node(use_xpath=True, tags="html *", classes=("locale-en-us", "wp-core-ui")))
 
 As **use_xpath** is set to True, Arjuna generates the following XPath:
 
 .. code-block:: text
 
-    //html//*[contains(@class,'alocale-en-us') and contains(@class,'wp-core-ui')]
+    //html//*[contains(@class,'locale-en-us') and contains(@class,'wp-core-ui')]
 
 
 **fnode** Locator

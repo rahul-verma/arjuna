@@ -137,7 +137,7 @@ class LocatorTranslator:
             elif gltype in {GenericLocateWith.NODE, GenericLocateWith.BNODE, GenericLocateWith.FNODE}:
                 lkeys = [k.lower() for k in rlvalue.keys()]
                 if 'tag' in lkeys and 'tags' in lkeys:
-                    raise Exception("node Locator definition can contain either tag or tags.")
+                    raise Exception("node Locator definition can contain either 'tag' or 'tags' a key.")
                 if len(set(lkeys).intersection(set(cls.TEXT_TRANSLATIONS.keys()))) > 1:
                     raise Exception("node Locator definition can contain only one of text/star_text/*text/dot_text/.text keys.")
                 # Initial processing
