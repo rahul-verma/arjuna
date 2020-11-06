@@ -77,5 +77,6 @@ def check_arjuna_exts_gns(request, wordpress):
     element = wordpress.gns.user_fnode
     element = wordpress.gns.user_fnode_tag
     element = wordpress.gns.user_fnode_multi
+    element = wordpress.gns.user_fnode_multi_xpath_true
     element = wordpress.gns.body_node_1
     element = wordpress.gns.body_node_2

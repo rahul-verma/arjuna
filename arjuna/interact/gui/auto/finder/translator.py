@@ -138,6 +138,8 @@ class LocatorTranslator:
                 lkeys = [k.lower() for k in rlvalue.keys()]
                 if 'tag' in lkeys and 'tags' in lkeys:
                     raise Exception("node Locator definition can contain either tag or tags.")
+                if len(set(lkeys).intersection(set(cls.TEXT_TRANSLATIONS.keys()))) > 1:
+                    raise Exception("node Locator definition can contain only one of text/star_text/*text/dot_text/.text keys.")
                 # Initial processing
                 updated_rlvalue = dict()
                 use_xpath = False
@@ -151,6 +153,13 @@ class LocatorTranslator:
                     elif k.lower() in cls.TEXT_TRANSLATIONS:
                         updated_rlvalue[k.lower()] = v
                         use_xpath = True
+                    elif k.lower() == "use_xpath":
+                        from arjuna.core.types.constants import TRUES, FALSES
+                        v = str(v).strip()
+                        if v.lower() not in TRUES and v.lower() not in FALSES:
+                            raise Exception("Allowed values for use_path are true/false/on/off")
+                        if v.lower() in TRUES:
+                            use_xpath = True
                     else:
                         updated_rlvalue[k] = v
                 rlvalue = updated_rlvalue

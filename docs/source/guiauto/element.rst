@@ -195,8 +195,8 @@ This is used to run the provided JavaScript and returns GuiWidget representing t
     # Using js locator. Value should be a string containing the JavaScript.
     wordpress.element(js="return document.getElementById('wp-submit')")
 
-Text Based Locators
-^^^^^^^^^^^^^^^^^^^
+**Text Based Locators**
+^^^^^^^^^^^^^^^^^^^^^^^
 
 Arjuna provides the following locators for locating based on text: (For more options on text matching see **node** locator.)
 
@@ -227,8 +227,8 @@ It is used to locate a GuiWidget based on partial text match at beginning of tex
     # Using ftext locator. Full text is to be specified.
     wordpress.element(btext="Lost")
 
-Attribute Based Locators
-^^^^^^^^^^^^^^^^^^^^^^^^
+**Attribute Based Locators**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Arjuna provides the following locators for locating based on a single attribute: (For more options on attribute matching see **node** locator.)
 
@@ -275,8 +275,8 @@ It is used to locate a GuiWidget based on partial content at end of a specific a
     wordpress.element(eattr=attr("for", "user_"))
 
 
-Node Definition Based Locators
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Node Definition Based Locators**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Arjuna has a provision to define advanced combinational locator type. This provision replaces the need to hand-craft simple to medium complexity Xpaths and CSS Selectors.
 
@@ -286,7 +286,7 @@ Node Definition based locators are used to locate a GuiWidget based on an AND co
     - Descendant Tag Sequence
     - One or more associated class names
 
-Following are the different node definition locators. The difference is the way attribute content and text content is matched. Tags and classes are handled in the same manner for all.
+Following sections cover various node locators: **node**, **fnode** and **bnode** along with additional information. The difference is the way attribute content and text content is matched. Tags and classes are handled in the same manner for all.
 
 **node** Locator
 """"""""""""""""
@@ -305,18 +305,22 @@ Matches attributes and text partially. Tags and Classes are expected to be provi
     # You can also pass a dictionary of attributes
     wordpress.element(node=node(tags="label", size=20, attrs={'for': '_login'}))
 
-    # You can also use partial text content for matching
-    wordpress.element(node=node(tags="a", text="your password?", title="Found"))
-
-    # You can also use partial text content for matching
-    wordpress.element(node=node(tags="a", text="your password?", title="Found"))
-
 .. note::
 
     In situations where the same attribute name is present in multiple places in the call, following sequence determines what value is finally retained for such an attribute:
         * First the **attrs** dictionary is processed
         * Second, the attributes passed as positional arguments are processed.
         * Third, the attributes passed as direct keyword arguments are processed.
+
+**Text Specification**: Understanding **text**, **star_text** and **dot_text** Keys
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+You can specify the partial text of a node using the **text** key:
+
+.. code-block:: python
+
+    # You can also use partial text content for matching
+    wordpress.element(node=node(tags="a", text="your password?", title="Found"))
 
 Sometimes the HTML/DOM structure contains elements within the text node and hence interferes with the text match. Instead of using **text** key, you can also use the following:
     * **star_text**: It translates to '*//text()' instead of 'text()' in generated XPath. It can also be represented as '*text' in **attrs** dict argument or in gns.
@@ -336,6 +340,14 @@ Sometimes the HTML/DOM structure contains elements within the text node and henc
     e = wordpress.element(node=node(tags="form", attrs={'.text' : "Me"}))
     print(e.source.content.root)
 
+
+.. note::
+
+    You can specify only one out of **text**, **star_text** and **dot_text** keys. They can not be used together in a single node specification.
+
+Specifying **Multiple Tags** and **Multiple Classes** using **tags** and **classes** Keys
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
 You can specify multiple tags as well as classes. The behavior is just like their usage as individual locators except the fact that here they are used in combination with other conditions.
 
 .. code-block::
@@ -345,6 +357,38 @@ You can specify multiple tags as well as classes. The behavior is just like thei
 
     # As tuples. Can also use lists.
     wordpress.element(node=node(tags=("html", "body"), classes=("locale-en-us", "wp-core-ui"))))
+
+**Enforcing XPath Generation**
+""""""""""""""""""""""""""""""
+
+The Node Definition Locators like **node** are translated to a CSS Selector or an XPath by Arjuna.
+
+If no text is specified using **text**, **star_text** or **dot_text** keys, Arjuna generates a CSS Selector rather than an XPath.
+
+For example, consider the following situation:
+
+.. code-block:: python
+
+    wordpress.element(node=node(tags="html *", classes=("locale-en-us", "wp-core-ui")))
+
+As in the above situation, no text related keys are specified, following CSS Selector is generated:
+
+.. code-block:: text
+
+    html *.locale-en-us.wp-core-ui
+
+To enforce XPath generation instead of a CSS Selector, you can pass **use_xpath** key as True.
+
+.. code-block:: python
+
+    wordpress.element(node=node(use_xpath=True, tags="html *", classes=("alocale-en-us", "wp-core-ui")))
+
+As **use_xpath** is set to True, Arjuna generates the following XPath:
+
+.. code-block:: text
+
+    //html//*[contains(@class,'alocale-en-us') and contains(@class,'wp-core-ui')]
+
 
 **fnode** Locator
 """""""""""""""""
@@ -372,8 +416,8 @@ Code usage is same as that of **node** locator. Following is a sample:
     wordpress.element(bnode=node(tags="a", text="Lost", title="Password Lost"))
 
 
-Interaction with GuiElement
----------------------------
+**Interaction with GuiElement**
+-------------------------------
 
 To interact with a GuiElement, from automation angle it must be in an interactable state. In the usual automation code, a test author writes a lot of waiting related code (and let's not even touch the **time.sleep**.).
 

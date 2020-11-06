@@ -7,8 +7,8 @@ After launching a **GuiApp**, apart from basic browser operations, most of times
 
 Externalizing of identifiers is built into Arjuna. The object which contains identification information and related meta-data of a Gui is referred to as **GuiNamespace (GNS)** in Arjuna.
 
-The GNS File
-------------
+**The GNS File**
+----------------
 
 Arjuna uses **YAML** as the format for externalization of identifiers. Fow now, we will discuss basic usage of the format.
 
@@ -41,8 +41,8 @@ Following is the high level format for simple usage:
 #. Labels are treated as case-insensitive by Arjuna.
 
 
-Associating GNS File with App
------------------------------
+**Associating GNS File with GuiApp**
+------------------------------------
 
 Arjuna picks up GNS files relative to the defaut GNS directory: **<Project Root>/guiauto/namespace**. You can give the **label** argument while constructing a **GuiApp** to associate it with the GNS file as follows:
 
@@ -225,8 +225,8 @@ Externalization uses a simple format with **js** as key and value as the JavaScr
         js: "return document.getElementById('wp-submit')"
 
 
-Text Based Locators
-^^^^^^^^^^^^^^^^^^^
+**Text Based Locators**
+^^^^^^^^^^^^^^^^^^^^^^^
 
 These are externalized as a single key-value pair with key as the locator name and value as the full or partial content based on the locator.
 
@@ -260,8 +260,8 @@ These are externalized as a single key-value pair with key as the locator name a
     lost_pass_ftext:
         btext: Lost your
 
-Attribute Based Locators
-^^^^^^^^^^^^^^^^^^^^^^^^
+**Attribute Based Locators**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 These are externalized as a single key-value pair with key as the attribute name and value as the full or partial content attribute based on the locator.
 
@@ -311,14 +311,15 @@ These are externalized as a single key-value pair with key as the attribute name
         eattr:
             for: _login
 
-Node Definition Based Locators
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Node Definition Based Locators**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Node definition based locators are specified as a YAML mapping that contains:
-    - Full tag names if specified
-    - Full class names if specified
-    - Full or partial attribute values depending on type of node locator.
-    - Full or partial text content depending on type of node locator.
+    - Full tag name(s) if specified as a single tag string, space separated string with multiple tags or a YAML list of tags.
+    - Full class name(s() if specified as a single class string, space separated string with multiple classes or a YAML list of classes.
+    - Attributes as key-value pairs of attribute name and Full or partial values depending on type of node locator.
+    - Full or partial text content depending on type of node locator using **text**, **star_text** or **dot_text** key.
+    - **use_xpath** key to enforce XPath generation instead of CSS Selector.
 
 
 **node** Locator
@@ -341,7 +342,7 @@ Following are various samples:
                 title: Found
                 tags: html *
                 classes: cl1 cl2
-                *text: Lost
+                star_text: Lost
 
         n3:
             node:
@@ -365,6 +366,13 @@ Following are various samples:
                     - cl2
                 .text: Lost
 
+    n5:
+        node:
+            id: er_l
+            size: 20
+            tags: input
+            use_xpath: true
+
 **fnode** Locator
 """""""""""""""""
 
@@ -385,7 +393,7 @@ Following are various samples:
             title: Password Lost and Found
             tags: html *
             classes: cl1 cl2
-            *text: Lost your Password?
+            star_text: Lost your Password?
 
     n3:
         node:
@@ -408,6 +416,13 @@ Following are various samples:
                 - cl1 
                 - cl2
             .text: Lost your Password?
+
+    n5:
+        node:
+            id: user_login
+            size: 20
+            tags: input
+            use_xpath: true
 
 **bnode** Locator
 """""""""""""""""
@@ -429,7 +444,7 @@ Following are various samples:
             title: Password
             tags: html *
             classes: cl1 cl2
-            *text: Lost
+            star_text: Lost
 
     n3:
         node:
@@ -440,7 +455,7 @@ Following are various samples:
             classes: 
                 - cl1 
                 - cl2
-            .text: Lost
+            dot_text: Lost
 
     n4:
         node:
@@ -453,10 +468,17 @@ Following are various samples:
                 - cl2
             .text: Lost
 
+    n5:
+        node:
+            id: user_
+            size: 20
+            tags: input
+            use_xpath: true
+
 .. _gns_locator_exts:
 
-Using Arjuna's Extended Locators in GNS
----------------------------------------
+**Coding with Arjuna's Extended Locators Defined in GNS**
+---------------------------------------------------------
 
 You can refer the element labels defined using extended locators in code just like those for externalized basic locators. Following is sample code (assume **app** to be a **GuiApp** object). For example:
 
@@ -465,8 +487,8 @@ You can refer the element labels defined using extended locators in code just li
     element = wordpress.gns.lost_pass_text
 
 
-Dynamic Locators in GNS
------------------------
+**Dynamic Locators in GNS**
+---------------------------
 
 :ref:`dynamic_locators` using :ref:`placeholder_dollars` can be defined in a GNS file as well.
 
@@ -488,8 +510,8 @@ Auto-formatting using **C.,L.,R.** prefixes** works just like it does in code (:
         nav_link3:
             link: $L.links.posting$
 
-Using **GNS**'s **formatter()** Method for Formatting Plaeholders
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Using **GNS**'s **formatter()** Method for Formatting Placeholders
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Placeholdrs can also be defined so that programmatically values can be passed to format the locators:
 

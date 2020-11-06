@@ -25,16 +25,16 @@ def check_nested_element_finding(request, wordpress):
     form = wordpress.element(id="loginform")
 
     # Level 2 - Element in Element
-    user_box = form.element(tag="input")
+    user_box = form.element(tags="input")
     print(user_box.source.content.all)
 
     # Level 2 - MultiElement in Element
-    labels = form.multi_element(tag="label")
+    labels = form.multi_element(tags="label")
 
     for label in labels:
         print(label.text)
         print(label.source.content.all)
 
         # Level 3 - Element in Partial Element
-        i = label.element(tag="input")
+        i = label.element(tags="input")
         print(i.source.content.all)

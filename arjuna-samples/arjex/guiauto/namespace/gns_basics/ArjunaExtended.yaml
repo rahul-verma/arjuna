@@ -64,6 +64,13 @@ labels:
       size: 20
       tags: input
 
+  user_fnode_multi_xpath_true:
+    node:
+      id: user_login
+      size: 20
+      tags: input
+      use_xpath: true
+
   body_node_1:
     node:
       tags: html *
