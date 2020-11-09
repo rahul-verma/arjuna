@@ -56,6 +56,13 @@ class WithX:
         fmt = copy.deepcopy(self.__xdict[name])
         repl_dict = {k.lower():v for k,v in kwargs.items()}
         try:
+            if fmt["wtype"] in {'ATTR', 'FATTR', 'BATTR', 'EATTR'}: #:, 'NODE', 'BNODE', 'FNODE'}:
+                if len(fmt["wvalue"]) > 1:
+                    raise Exception("attr/fattr/battr/eattr specification should contain only a single key value pair for attribute name and value")
+                name = list(fmt["wvalue"].keys())[0]
+                value = list(fmt["wvalue"].values())[0]
+                fmt["wvalue"] = {'name' : name, 'value' : value}
+
             if fmt["wtype"] in {'ATTR', 'FATTR', 'BATTR', 'EATTR', 'NODE', 'BNODE', 'FNODE'}:
                 out = dict()
                 for k,v in fmt["wvalue"].items():

@@ -206,14 +206,17 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
         common_withx = Arjuna.get_withx_ref()
 
         for label, label_map in yaml.get_section("labels").as_map().items():
+            log_debug("Loading label: " + label)
             Validator.name(label)
             self.__ns[label.lower()] = {"locators" : {self.__context: []}, "meta": dict()}
             for loc, loc_obj in label_map.items():
+                log_debug("Loading locator: " + loc)
                 loc = loc.lower()
                 wtype, wvalue = None, None
                 if not self.__withx.has_locator(loc) and not common_withx.has_locator(loc):
                     wtype, wvalue = loc.upper(), loc_obj
                     if wtype in dir(WithType):
+                        log_debug("Loading Arjuna defined Locator: " + loc)
                         if wtype in {'ATTR', 'FATTR', 'BATTR', 'EATTR'}:
                             if len(wvalue) > 1:
                                 raise Exception("attr/fattr/battr/eattr entries in GNS shoul have a single key value pair mapping.")
@@ -225,6 +228,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                         iloc = ImplWith(wtype=wtype, wvalue=wvalue, has_content_locator=False)
                         self.__ns[label.lower()]["locators"][self.__context].append(iloc)
                     else:
+                        log_debug("Loading meta data for key: " + loc)
                         self.__ns[label.lower()]["meta"][wtype.lower()] = wvalue
                 else:
                     if self.__withx.has_locator(loc):
