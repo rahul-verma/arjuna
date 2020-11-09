@@ -47,8 +47,12 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.1.25
+------
+
 1.1.24
 ------
+    - Fix in attr locators used in withx
 
 1.1.23
 ------
