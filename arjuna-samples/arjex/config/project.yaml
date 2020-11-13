@@ -12,3 +12,4 @@ user_options:
   wp.admin.pwd: bitnami
   link.name: Posts
   useridval: user_login
+  input_label: input

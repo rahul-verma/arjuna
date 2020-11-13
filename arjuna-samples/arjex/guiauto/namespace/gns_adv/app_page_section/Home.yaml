@@ -119,3 +119,28 @@ labels:
     body_node:
       tg: html
       cl1: locale-en-us
+
+  pos_single:
+    with_pos_single: er_l
+
+  pos_multi_submit:
+    with_pos_multi:
+      - button
+      - button-large
+
+  pos_multi_submit_2:
+    with_pos_multi_and_global:
+      - button
+      - button-large
+
+  pos_multi_label:
+    with_pos_multi_not_suggested: 
+      - label
+      - for
+      - er_l
+
+  pos_multi_user_field:
+    with_pos_multi_not_suggested: 
+      - input
+      - id
+      - er_l

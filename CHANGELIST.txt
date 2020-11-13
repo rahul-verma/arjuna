@@ -49,6 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.25
 ------
+    - (In progress) Support for anonymous/positional $$ placeholders in withx extended locator definitions.
 
 1.1.24
 ------

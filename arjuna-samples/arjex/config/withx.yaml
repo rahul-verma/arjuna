@@ -32,3 +32,25 @@ for_node_5:
     $attr1$: $C.useridval$
     size: $val2$
     tags: $tg$
+
+with_pos_single:
+  wtype: node
+  wvalue:
+    for: $$
+
+with_pos_multi:
+  wtype: node
+  wvalue:
+    classes: $$ $$
+
+with_pos_multi_and_global:
+  wtype: node
+  wvalue:
+    tag: $C.input_label$
+    classes: $$ $$
+
+with_pos_multi_not_suggested:
+  wtype: node
+  wvalue:
+    tag: $$
+    $$: $$

@@ -51,7 +51,7 @@ def check_withx_in_leftnav_gns_file(request, dashboard):
     dashboard.left_nav.gns.comments.click()
 
 @test
-def check_withx_gns_home(request, wordpress):
+def check_withx_gns_home_named(request, wordpress):
     e = wordpress.gns.user_node_with1
     print(e.source.content.root)
 
@@ -71,4 +71,22 @@ def check_withx_gns_home(request, wordpress):
     print(e.source.content.root)
 
     e = wordpress.gns.formatter(text='Me').body_node_with_2
+    print(e.source.content.root)
+
+@test
+def check_withx_gns_home_positional(request, wordpress):
+
+    e = wordpress.gns.pos_single
+    print(e.source.content.root)
+
+    e = wordpress.gns.pos_multi_submit
+    print(e.source.content.root)
+
+    e = wordpress.gns.pos_multi_label
+    print(e.source.content.root)
+
+    e = wordpress.gns.pos_multi_user_field
+    print(e.source.content.root)
+
+    e = wordpress.gns.pos_multi_submit_2
     print(e.source.content.root)

@@ -260,7 +260,7 @@ class Locator:
             return locals()[gtype](query)
 
 
-        pattern = r"\$(\s*[\w\.]*?\s*)\$"
+        pattern = r"\$(\s*[\w\.]+?\s*)\$"
         repl_dict = {k.lower():v for k,v in fargs.items()}
 
         new_locator = Locator(self.ltype)

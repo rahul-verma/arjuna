@@ -191,5 +191,5 @@ def check_arjuna_exts_coded(request, wordpress):
     e = wordpress.element(node=node(tags="html body", classes=("locale-en-us", "wp-core-ui"), attrs={'.text' : "Me"}))
     print(e.source.content.root)
 
-    e = wordpress.element(node=node(tags="html *", classes=("locale-en-us", "wp-core-ui"), attrs={'.text' : "Me", 'text': '12'}))
+    e = wordpress.element(node=node(tags="html *", classes=("locale-en-us", "wp-core-ui"), attrs={'.text' : "Me"}))
     print(e.source.content.root)

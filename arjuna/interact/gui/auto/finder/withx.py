@@ -1,9 +1,10 @@
 import copy
 import re
+import pickle
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.configure.validator import Validator
 
-def _format(target, repl_dict):
+def _format(target, vargs, repl_dict):
 
     def get_global_value(in_str):
         from arjuna import C, L, R
@@ -11,13 +12,30 @@ def _format(target, repl_dict):
         gtype = gtype.upper()
         return locals()[gtype](query)
 
-    pattern = r"\$(\s*[\w\.]*?\s*)\$"
-    fmt_target = target.replace("\{", "__LB__").replace("}", "__RB__")
+    pos_pattern = r"(\$\s*\$)"
+    named_pattern = r"\$(\s*[\w\.]+?\s*)\$"
+    fmt_target = target.replace("{", "__LB__").replace("}", "__RB__")
 
     # Find params
-    matches = re.findall(pattern, fmt_target)
-    
-    for match in matches:
+    pos_matches = re.findall(pos_pattern, fmt_target)
+    named_matches = re.findall(named_pattern, fmt_target)
+
+    if pos_matches and named_matches:
+        for match in named_matches:
+            match = match.lower().strip()
+            if not match.startswith("c.") and not match.startswith("l.") and not match.startswith("r."):
+                raise Exception("You can not use positional $$ placeholders and named $<name>$ placholders together in a withx locator definition (except those with C./L./R. prefixes to fetch global values.")
+
+    if pos_matches:    
+        if len(pos_matches) != len(vargs):
+            raise Exception("Number of positional arguments supplied to format withx locator do not match number of $$ placeholders. Placeholders: {}. Positional args: {}".format(len(pos_matches), vargs))
+
+        for i,match in enumerate(pos_matches):
+            fmt_target = fmt_target.replace(match, "{}")
+
+        fmt_target = fmt_target.format(*vargs)
+        
+    for match in named_matches:
         names_set = None
         target = "${}$".format(match)
         processed_name = match.lower().strip()
@@ -63,17 +81,20 @@ class WithX:
                 value = list(fmt["wvalue"].values())[0]
                 fmt["wvalue"] = {'name' : name, 'value' : value}
 
-            if fmt["wtype"] in {'ATTR', 'FATTR', 'BATTR', 'EATTR', 'NODE', 'BNODE', 'FNODE'}:
-                out = dict()
-                for k,v in fmt["wvalue"].items():
-                    if type(v) in {list, tuple}:
-                        out[_format(k, repl_dict)] = [_format(v_entry, repl_dict) for v_entry in v]
-                    else:
-                        out[_format(k, repl_dict)] = _format(v, repl_dict)
-                    #out[k.format(**kwargs)] = v.format(**kwargs)
-                return fmt["wtype"], out
-            else:
-                return fmt["wtype"], _format(["wvalue"], repl_dict) #fmt["wvalue"].format(*vargs, **kwargs)
+            pickled = str(fmt["wvalue"])
+            picked_formatted = _format(pickled, vargs, repl_dict)
+            return fmt["wtype"], eval(picked_formatted)
+            # if fmt["wtype"] in {'ATTR', 'FATTR', 'BATTR', 'EATTR', 'NODE', 'BNODE', 'FNODE'}:
+            #     out = dict()
+            #     for k,v in fmt["wvalue"].items():
+            #         if type(v) in {list, tuple}:
+            #             out[_format(k, repl_dict)] = [_format(v_entry, repl_dict) for v_entry in v]
+            #         else:
+            #             out[_format(k, repl_dict)] = _format(v, repl_dict)
+            #         #out[k.format(**kwargs)] = v.format(**kwargs)
+            #     return fmt["wtype"], out
+            # else:
+            #     return fmt["wtype"], _format(["wvalue"], repl_dict) #fmt["wvalue"].format(*vargs, **kwargs)
         except Exception as e:
             from arjuna import log_error
             log_error(f"Error in processing withx {name} : {fmt} for vargs {vargs} and kwargs {kwargs}")

@@ -49,7 +49,7 @@ def check_withx_using_with(request, dashboard):
 
 
 @test
-def check_withx_home_gns_using_with(request, home):
+def check_withx_coded_named(request, home):
     e = home.element(for_node_1=withx(val='er_l'))
     print(e.source.content.root)
 
@@ -64,4 +64,21 @@ def check_withx_home_gns_using_with(request, home):
 
     # Has C var
     e = home.formatter(val2=20).element(for_node_5=withx(tg='input', attr1='id'))
+    print(e.source.content.root)
+
+@test
+def check_withx_coded_positional(request, home):
+    e = home.element(with_pos_single='er_l')
+    print(e.source.content.root)
+
+    e = home.element(with_pos_multi=('button', 'button-large'))
+    print(e.source.content.root)
+
+    e = home.element(with_pos_multi_not_suggested=('label', 'for', 'er_l'))
+    print(e.source.content.root)
+
+    e = home.element(with_pos_multi_not_suggested=('input', 'id', 'er_l'))
+    print(e.source.content.root)
+
+    e = home.element(with_pos_multi_and_global=('button', 'button-large'))
     print(e.source.content.root)

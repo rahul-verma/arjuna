@@ -88,6 +88,8 @@ class GuiWidgetLocator(Dictable):
                 if isinstance(v, Dictable):
                     v = v.as_dict()
                     with_list.append(getattr(With, k.lower())(**v))
+                elif type(v) in {list, tuple}:
+                    with_list.append(getattr(With, k.lower())(*v))
                 else:
                     with_list.append(getattr(With, k.lower())(v))
             else:
