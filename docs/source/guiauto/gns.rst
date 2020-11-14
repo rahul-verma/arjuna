@@ -492,8 +492,10 @@ You can refer the element labels defined using extended locators in code just li
 
 :ref:`dynamic_locators` using :ref:`placeholder_dollars` can be defined in a GNS file as well.
 
-**Auto-Formatting** using **C,L,R** Magic Functions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. _locator_auto_format_gns:
+
+**Auto-Formatting** using **C,L,R** Magic Functions in GNS
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Auto-formatting using **C.,L.,R.** prefixes** works just like it does in code (:ref:`placeholder_dollars`):
 

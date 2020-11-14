@@ -302,18 +302,27 @@ class attr(nvpair):
         A name-value pair with an associated optional tag name. It is an implementation of **Dictable**.
 
         Keyword Arguments:
-            name: (Mandatory) Name of this object
-            value: (Mandatory) Value of this object
-            tag: Tag associated with this object
+            attr_name_value: (Mandatory) Key-Value pair representing name and value of attribute.
+
+        Note:
+            In case the attribute name conflicts with a Python language keyword, you can prefix it with '__' i.e. two underscores. These underscores are removed while processing the attribute name.
+
+            For example, '__for' will become 'for' to avoid conflict with Python's **for** keyword.
     '''
 
-    def __init__(self, name, value, tag=None):
+    def __init__(self, **attr_name_value):
+        if len(attr_name_value) > 1:
+            raise Exception("attr specification must contain a single key value pair for attribute name and value")
+        if len(attr_name_value) > 1:
+            raise Exception("attr/fattr/battr/eattr specification should contain only a single key value pair for attribute name and value")
+        name = list(attr_name_value.keys())[0]
+        if name.startswith('__'):
+            name = name[2:]
+        value = list(attr_name_value.values())[0]
         super().__init__(name, value)
-        self.__tag = tag
 
     def _as_dict(self):
         d = super()._as_dict()
-        d["tag"] = self.__tag
         return d
 
 
@@ -348,20 +357,45 @@ class withx(nvpairs):
 @track("trace")
 class node(nvpairs):
 
-    def __init__(self, *attrs, **nvpairs):
-        self.__attrs = attrs
+    def __init__(self, **nvpairs):
+        '''
+            Represents a Node in HTML/XML/DOM described by name-value pairs.
+
+            Keyword Arguments:
+                **nvpairs: Special and Arbitrary name-value pairs passed as keyword arguments.
+
+            Note:
+                Following keywords have special meaning:
+
+                    * tag - Represents tag name of node
+                    * classes - Passed as a string or list/tuple represents one or more classes in class attribute of node (order does not matter)
+                    * text - Represents text content
+                    * star_text - It is equivalent of *//text() in XPath
+                    * dot_text - It is equivalent of . in XPath
+                    * attrs - It is a dictionary of attributes. Can be used when names can not be passed as keywords.
+                        * Names conflict with Python keywords. For example: 'for'
+                        * '.text' for dot_text
+                        * '*text' for star_text
+
+                All other key value pairs are assumed to be attribute names and corresponding values.
+
+                If any keyword is preceded with '__' (double underscores), the underscores are removed at the time of definition generation. This can be used to avoid conflict of attribute names with Python keywords.
+        '''
         super().__init__(**nvpairs)
 
     def _as_dict(self):
         out_dict = dict()
         d = super()._as_dict()
         if 'attrs' in d:
-            out_dict.update(d['attrs'])
-        for attr in self.__attrs:
-            out_dict.update(attr.name, attr.value)
-        for k,v in d.items():
-            if k != 'attrs':
+            for k,v in d['attrs'].items():
+                if k.startswith('__'):
+                    k = k[2:]
                 out_dict[k] = v
+        for k,v in d.items():
+            if k == 'attrs': continue
+            if k.startswith('__'):
+                k = k[2:]
+            out_dict[k] = v
         return out_dict
 
 

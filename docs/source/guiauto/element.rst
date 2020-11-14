@@ -232,6 +232,10 @@ It is used to locate a GuiWidget based on partial text match at beginning of tex
 
 Arjuna provides the following locators for locating based on a single attribute: (For more options on attribute matching see **node** locator.)
 
+.. note::
+
+    If the attribut name is a Python keyword, prefix it with '__' (two underscores). Arjuna removes this prefix and processes the attribute name as expected.
+
 **attr** Locator 
 """"""""""""""""
 
@@ -239,9 +243,11 @@ It is used to locate a GuiWidget based on partial content of a specific attribut
 
 .. code-block:: python
 
-    # Here the 'for' attribute contains the value 'user_login'. Partial content can be passed.
-    wordpress.element(attr=attr("for", "_login"))
+    # Here the size attribute is 230
+    wordpress.element(attr=attr(size=3))
 
+    # Here the 'for' attribute contains the value 'user_login'. Partial content can be passed.
+    wordpress.element(attr=attr(__for='er_l'))
 
 **fattr** Locator 
 """""""""""""""""
@@ -250,8 +256,11 @@ It is used to locate a GuiWidget based on full content of a specific attribute.
 
 .. code-block:: python
 
+    # Here the size attribute is 230
+    wordpress.element(fattr=attr(size=20))
+
     # Here the 'for' attribute contains the value 'user_login'. Full content should be passed.
-    wordpress.element(fattr=attr("for", "user_login"))
+    wordpress.element(fattr=attr(__for="user_login"))
 
 
 **battr** Locator 
@@ -261,8 +270,11 @@ It is used to locate a GuiWidget based on partial content at beginning of a spec
 
 .. code-block:: python
 
+    # Here the size attribute is 230
+    wordpress.element(fattr=attr(size=2))
+
     # Here the 'for' attribute contains the value 'user_login'.
-    wordpress.element(battr=attr("for", "user_"))
+    wordpress.element(battr=attr(__for="user_"))
 
 
 **eattr** Locator 
@@ -271,8 +283,11 @@ It is used to locate a GuiWidget based on partial content at end of a specific a
 
 .. code-block:: python
 
+    # Here the size attribute is 230
+    wordpress.element(eattr=attr(size=0))
+
     # Here the 'for' attribute contains the value 'user_login'.
-    wordpress.element(eattr=attr("for", "user_"))
+    wordpress.element(eattr=attr(__for="user_"))
 
 
 **Node Definition Based Locators**
@@ -299,18 +314,18 @@ Matches attributes and text partially. Tags and Classes are expected to be provi
     wordpress.element(node=node(tags="input", id="_login", size=20))
 
     # Sometimes names of attributes conflict with Python keywords. 
-    # In such a case 'attr' can be passed as a psitional argument
-    wordpress.element(node=node(attr('for','_login'), tags="label", size=20))
+    # In such a case attribute name can be preceded with '__' (two underscores.)
+    wordpress.element(node=node(__for="_login", tags="label", size=20))
 
     # You can also pass a dictionary of attributes
     wordpress.element(node=node(tags="label", size=20, attrs={'for': '_login'}))
+    wordpress.element(node=node(tags="label", size=20, attrs={'__for': '_login'}))
 
 .. note::
 
     In situations where the same attribute name is present in multiple places in the call, following sequence determines what value is finally retained for such an attribute:
         * First the **attrs** dictionary is processed
-        * Second, the attributes passed as positional arguments are processed.
-        * Third, the attributes passed as direct keyword arguments are processed.
+        * Then, the attributes passed as direct keyword arguments are processed.
 
 **Text Specification**: Understanding **text**, **star_text** and **dot_text** Keys
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -456,6 +471,11 @@ Arjuna's **$<name>$** Placeholder
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 You can use Arjuna's **$<name>$** placeholders in locators to define dynamic locators.
+
+.. _locator_auto_format:
+
+**Auto-Formatting** using **C,L,R** Magic Functions
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The placeholder is more advanced than Python's **{}** placeholder:
     * Provides case-insensitive match for names in placeholders

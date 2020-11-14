@@ -37,16 +37,17 @@ def check_arjuna_exts_coded(request, wordpress):
     wordpress.element(value="Log In")
 
     # Based on partial match of content of an attribute
-    wordpress.element(attr=attr("for", "er_l"))
+    wordpress.element(attr=attr(id="er_l"))
+    wordpress.element(attr=attr(__for="er_l"))
 
     # Based on full match of an attribute
-    wordpress.element(fattr=attr("for", "user_login"))
+    wordpress.element(fattr=attr(__for="user_login"))
 
     # Based on full match of an attribute
-    wordpress.element(battr=attr("for", "user_"))
+    wordpress.element(battr=attr(__for="user_"))
 
     # Based on full match of an attribute
-    wordpress.element(eattr=attr("for", "_login"))
+    wordpress.element(eattr=attr(__for="_login"))
 
     # Based on descendent tags
     wordpress.element(tags="html body form")
@@ -84,6 +85,12 @@ def check_arjuna_exts_coded(request, wordpress):
     print(e.source.content.root)
 
     e = wordpress.element(node=node(attrs={'for': 'er_l'}))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(__for='er_l'))
+    print(e.source.content.root)
+
+    e = wordpress.element(node=node(attrs={'__for': 'er_l'}))
     print(e.source.content.root)
 
     # Direct args update attrs dict

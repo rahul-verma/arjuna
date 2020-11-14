@@ -26,6 +26,13 @@ from typing import List, Dict, Tuple
 from arjuna.tpi.tracker import track
 from arjuna.tpi.helper.arjtype import CIStringDict
 
+def _process_tags(tagsvalue):
+    tag_list = None
+    if type(tagsvalue) is str:
+        tag_list = tagsvalue.strip().split()
+    else:
+        tag_list = tagsvalue
+    return [t.lower()=='any' and '*' or t for t in tag_list]
 
 @track("trace")
 class NodeLocator:
@@ -33,7 +40,7 @@ class NodeLocator:
         Locator for finding an XML Node in an **XmlNode**.
 
         Keyword Arguments:
-            tag: (Optional) Tag of the node
+            tags: (Optional) Descendant tags for the node. Can be a string of single or multiple tags or a list/tuple of tags.
             **attrs: Arbitrary number of key value pairs representing attribute name and value.
 
         Raises:
@@ -45,10 +52,10 @@ class NodeLocator:
             Supports nested node finding.
     '''
     
-    def __init__(self, *, tag: str=None, **attrs):
+    def __init__(self, *, tags: 'strOrSequence'=None, **attrs):
 
-        if tag is None and not attrs:
-            raise Exception("You must provided tag and/or attributes for finding nodes.")
+        if tags is None and not attrs:
+            raise Exception("You must provided tags and/or attributes for finding nodes.")
 
         attr_conditions = []
         if attrs:
@@ -61,10 +68,10 @@ class NodeLocator:
         attr_str = ""
         if attr_conditions:
             attr_str = "[{}]".format("and ".join(attr_conditions))
-        tag = tag and tag or "*"
+        tags = tags and "//".join(_process_tags(tags)) or "*"
         prefix = ".//"
 
-        self.__xpath = "{}{}{}".format(prefix, tag, attr_str)
+        self.__xpath = "{}{}{}".format(prefix, tags, attr_str)
 
     def search_node(self, node: 'XmlNode') -> tuple:
         '''
@@ -418,12 +425,12 @@ class Xml:
             return XmlNode(element).clone()
 
     @classmethod
-    def node_locator(cls, *, tag: str=None, **attrs):
+    def node_locator(cls, *, tags: 'strOrSequence'=None, **attrs):
         '''
             Create a locator for finding an XML Node in an **XmlNode**.
 
             Keyword Arguments:
-                tag: (Optional) Tag of the node
+                tags: (Optional) Descendant tags for the node. Can be a string of single or multiple tags or a list/tuple of tags.
                 **attrs: Arbitrary number of key value pairs representing attribute name and value.
 
             Raises:
@@ -434,4 +441,4 @@ class Xml:
 
                 Supports nested node finding.
         '''
-        return NodeLocator(tag=tag, **attrs)
+        return NodeLocator(tags=tags, **attrs)

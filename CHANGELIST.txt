@@ -50,6 +50,10 @@ Future Themes (In-Progress or Planned):
 1.1.25
 ------
     - (In progress) Support for anonymous/positional $$ placeholders in withx extended locator definitions.
+    - attr() call now accepts a single key-value pair instead of two positional arguments. Conflicting Python name is prefixed with two underscores (__)
+    - node() call simplified. Conflicting Python name is prefixed with two underscores (__).
+    - Updated Locator Docs to reflect the above improvements.
+    - Fix in GuiDropDown logic - changed 'tag' to 'tags'.
 
 1.1.24
 ------

@@ -2,21 +2,20 @@
 withx:
   lnav_link1:
     wtype: xpath
-    wvalue: "//li[contains(*//text(), '{}')]"
+    wvalue: "//li[contains(*//text(), '$$')]"
 
   lnav_link2:
     wtype: xpath
-    wvalue: "//{}[contains(*//text(), '{}')]"
+    wvalue: "//$$[contains(*//text(), '$$')]"
 
   lnav_link3:
     wtype: xpath
-    wvalue: "//li[contains(*//text(), '{lname}')]"
+    wvalue: "//li[contains(*//text(), '$lname$')]"
 
   href:
     wtype: attr
-    wvalue: 
-      name: href
-      value: "{href}"
+    wvalue:
+      href: "$href$"
 
 labels:
 

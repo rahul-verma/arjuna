@@ -12,6 +12,11 @@ def _format(target, vargs, repl_dict):
         gtype = gtype.upper()
         return locals()[gtype](query)
 
+    do_eval = False
+    if type(target) is not str:
+        do_eval = True
+        target = str(target)
+
     pos_pattern = r"(\$\s*\$)"
     named_pattern = r"\$(\s*[\w\.]+?\s*)\$"
     fmt_target = target.replace("{", "__LB__").replace("}", "__RB__")
@@ -24,11 +29,11 @@ def _format(target, vargs, repl_dict):
         for match in named_matches:
             match = match.lower().strip()
             if not match.startswith("c.") and not match.startswith("l.") and not match.startswith("r."):
-                raise Exception("You can not use positional $$ placeholders and named $<name>$ placholders together in a withx locator definition (except those with C./L./R. prefixes to fetch global values.")
+                raise Exception("You can not use positional $$ placeholders and named $<name>$ placholders together in a withx locator definition (except those with C./L./R. prefixes to fetch global values. Wrong withx definition: " + target)
 
     if pos_matches:    
         if len(pos_matches) != len(vargs):
-            raise Exception("Number of positional arguments supplied to format withx locator do not match number of $$ placeholders. Placeholders: {}. Positional args: {}".format(len(pos_matches), vargs))
+            raise Exception("Number of positional arguments supplied to format withx locator do not match number of $$ placeholders. Placeholders: {}. Positional args: {}. Wrong withx definition: {}".format(len(pos_matches), vargs, target))
 
         for i,match in enumerate(pos_matches):
             fmt_target = fmt_target.replace(match, "{}")
@@ -51,17 +56,33 @@ def _format(target, vargs, repl_dict):
         
 
     fmt_target = fmt_target.replace("__LB__", "{").replace("__RB__", "}")
+    if do_eval:
+        fmt_target = eval(fmt_target)
     return fmt_target
 
 class WithX:
 
     def __init__(self, xdict={}):
+        def process_value(wtype, wvalue):
+            if wtype in {'ATTR', 'FATTR', 'BATTR', 'EATTR'}: #:, 'NODE', 'BNODE', 'FNODE'}:
+                if len(wvalue) > 1:
+                    print(len(wvalue))
+                    raise Exception("attr/fattr/battr/eattr specification should contain only a single key value pair for attribute name and value. Wrong withx definition found wtype: {} with value {}".format(wtype, wvalue))
+                name = list(wvalue.keys())[0]
+                value = list(wvalue.values())[0]
+                return {'name' : name, 'value' : value}
+            else:
+                return wvalue
+
         self.__xdict = CIStringDict()
         for k,v in xdict.items():
             try:
-                self.__xdict[Validator.name(k)] = {"wtype" : xdict[k]["wtype"].strip().upper(), "wvalue" : xdict[k]["wvalue"]}
+                wname = Validator.name(k)
+                wtype = xdict[k]["wtype"].strip().upper()
+                wvalue = xdict[k]["wvalue"]
+                self.__xdict[wname] = {"wtype" : wtype, "wvalue" : process_value(wtype, wvalue)}
             except Exception as e:
-                raise Exception(f"Invalid WithX entry for name >>{k}<<.")
+                raise Exception(f"Invalid WithX entry for name >>{k}<<. {e}")
 
     def has_locator(self, name):
         return name in self.__xdict
@@ -74,16 +95,8 @@ class WithX:
         fmt = copy.deepcopy(self.__xdict[name])
         repl_dict = {k.lower():v for k,v in kwargs.items()}
         try:
-            if fmt["wtype"] in {'ATTR', 'FATTR', 'BATTR', 'EATTR'}: #:, 'NODE', 'BNODE', 'FNODE'}:
-                if len(fmt["wvalue"]) > 1:
-                    raise Exception("attr/fattr/battr/eattr specification should contain only a single key value pair for attribute name and value")
-                name = list(fmt["wvalue"].keys())[0]
-                value = list(fmt["wvalue"].values())[0]
-                fmt["wvalue"] = {'name' : name, 'value' : value}
 
-            pickled = str(fmt["wvalue"])
-            picked_formatted = _format(pickled, vargs, repl_dict)
-            return fmt["wtype"], eval(picked_formatted)
+            return fmt["wtype"], _format(fmt["wvalue"], vargs, repl_dict)
             # if fmt["wtype"] in {'ATTR', 'FATTR', 'BATTR', 'EATTR', 'NODE', 'BNODE', 'FNODE'}:
             #     out = dict()
             #     for k,v in fmt["wvalue"].items():
@@ -113,6 +126,3 @@ class WithX:
             vargs = []
             kwargs = loc_obj
         return self.format_args(name, vargs, kwargs)
-        
-
-    

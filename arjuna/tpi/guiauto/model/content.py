@@ -84,7 +84,7 @@ class GuiAppContent(Gui, ScreenShooter):
 
     def send_keys(self, key_chord):
         from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
-        locator = GuiWidgetLocator(tag="body")
+        locator = GuiWidgetLocator(tags="body")
         body = self.locate(locator)
         body.send_keys(key_chord)
 

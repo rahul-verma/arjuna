@@ -401,14 +401,28 @@ Arjuna's **NodeLocator** object helps you in easily defining locating criteria.
     .. code-block:: python
 
         # XmlNode with tag input
-        locator = Xml.node_locator(tag='input')
+        locator = Xml.node_locator(tags='input')
 
         # XmlNode with attr 'a' with value 1
         locator = Xml.node_locator(a=1)
 
         # XmlNode with tag input and attr 'a' with value 1
-        locator = Xml.node_locator(tag='input', a=1)
+        locator = Xml.node_locator(tags='input', a=1)
 
+.. note::
+    'tags' can be provided as:
+
+        * A string containing a single tag
+        * A string containing multiple tags
+        * A list/tuple containing multiple tags.
+
+    When multiple tags are provided, they are treated as a sequential descendant tags.
+
+    .. code-block:: python
+
+        # XmlNode with tag input and attr 'a' with value 1
+        locator = Xml.node_locator(tags='form input', a=1)
+        locator = Xml.node_locator(tags=('form', 'input'), a=1)
 
 You can search for all XMlNodes using this locator in an `XmlNode`:
 
