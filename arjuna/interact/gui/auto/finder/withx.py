@@ -31,9 +31,11 @@ def _format(target, vargs, repl_dict):
             if not match.startswith("c.") and not match.startswith("l.") and not match.startswith("r."):
                 raise Exception("You can not use positional $$ placeholders and named $<name>$ placholders together in a withx locator definition (except those with C./L./R. prefixes to fetch global values. Wrong withx definition: " + target)
 
-    if pos_matches:    
+    if pos_matches:
+        if not vargs:
+            vargs = tuple()    
         if len(pos_matches) != len(vargs):
-            raise Exception("Number of positional arguments supplied to format withx locator do not match number of $$ placeholders. Placeholders: {}. Positional args: {}. Wrong withx definition: {}".format(len(pos_matches), vargs, target))
+            raise Exception("Number of positional arguments supplied to format withx locator do not match number of $$ placeholders. Placeholders: {}. Positional args: {}. Wrong usage of withx locator: {}".format(len(pos_matches), vargs, target))
 
         for i,match in enumerate(pos_matches):
             fmt_target = fmt_target.replace(match, "{}")
@@ -93,7 +95,10 @@ class WithX:
 
         # Critical to create a copy
         fmt = copy.deepcopy(self.__xdict[name])
-        repl_dict = {k.lower():v for k,v in kwargs.items()}
+        if kwargs:
+            repl_dict = {k.lower():v for k,v in kwargs.items()}
+        else:
+            repl_dict = {}
         try:
 
             return fmt["wtype"], _format(fmt["wvalue"], vargs, repl_dict)

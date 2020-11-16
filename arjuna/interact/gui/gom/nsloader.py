@@ -219,7 +219,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                         log_debug("Loading Arjuna defined Locator: " + loc)
                         if wtype in {'ATTR', 'FATTR', 'BATTR', 'EATTR'}:
                             if len(wvalue) > 1:
-                                raise Exception("attr/fattr/battr/eattr entries in GNS shoul have a single key value pair mapping.")
+                                raise Exception("attr/fattr/battr/eattr entries in GNS should have a single key value pair mapping. Found: {} for locator type: {} for label: {}".format(wvalue, loc, label))
                             final_value = dict()
                             for k,v in wvalue.items():
                                 final_value['name'] = k
@@ -237,7 +237,10 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                         wx = common_withx
                     else:
                         raise Exception("No WithX locator with name {} found. Check GNS file at {}.".format(name, self.__ns_path))
-                    wtype, wvalue = wx.format(loc, loc_obj)
+                    try:
+                        wtype, wvalue = wx.format(loc, loc_obj)
+                    except Exception as e:
+                        raise Exception("Error in implementation of withx locator extension: {} for label {}. Implementation: {}. Error: {}.".format(loc, label, wvalue, str(e)))
 
                     iloc = ImplWith(wtype=wtype, wvalue=wvalue, has_content_locator=False)
                     self.__ns[label.lower()]["locators"][self.__context].append(iloc)

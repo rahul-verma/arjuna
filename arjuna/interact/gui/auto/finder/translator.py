@@ -98,6 +98,7 @@ class LocatorTranslator:
 
         rltype = locator.ltype
         rlvalue = locator.lvalue
+        print(rlvalue)
         glvalue = None
         try:
             gltype = GenericLocateWith[rltype.upper()]
