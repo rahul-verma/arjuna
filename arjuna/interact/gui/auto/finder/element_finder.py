@@ -51,8 +51,8 @@ class ElementFinder:
             raise _GuiWidgetPresentError(*wmd.locators)
 
     def find(self, dispatcher_call, wmd, context="ELEMENT"):
-        from arjuna import log_debug
-        log_debug("Finding with wmd: {}".format(str(wmd)))
+        from arjuna import log_trace
+        log_trace("Finding with wmd: {}".format(str(wmd)))
         from arjuna import Arjuna
         found = False
         js_call_name = context == "ELEMENT" and "_find_element_with_js" or "_find_multielement_with_js"
