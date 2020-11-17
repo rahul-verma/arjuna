@@ -47,6 +47,10 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.1.26
+------
+    - TODO: Add doc for YAML's handling of boolean strings.
+    
 1.1.25
 ------
     - Support for anonymous/positional $$ placeholders in withx extended locator definitions.
