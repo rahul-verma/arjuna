@@ -92,6 +92,8 @@ from arjuna.tpi.engine.relation import *
 from arjuna.tpi.engine.resource import *
 from arjuna.tpi.engine.data_markup import *
 
+from arjuna.tpi.error import *
+
 from arjuna.tpi.data.record import *
 from arjuna.tpi.data.generator import Random, Locales, generator, composite, composer
 from arjuna.tpi.data.entity import data_entity
