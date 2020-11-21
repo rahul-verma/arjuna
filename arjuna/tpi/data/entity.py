@@ -76,7 +76,7 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
             *attrs: Arbitrary names for Python attributes to be associated with objects of this entity.
 
         Keyword Arguments:
-            bases: Base data entities for this entity.
+            bases: Base data entities for this entity. Can be a string or tuple or list.
             **attrs_with_defaults: Arbitrary attributes to be associated with objects of this entity, with the defaults that are provided.
 
         Note:
@@ -85,6 +85,17 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
                 * A Python callable
                 * Arjuna `generator`
                 * Arjuna `composite`
+
+        Note:
+            When you provide one or more bases, the overriding order is B1 -> B2 -> B3 ..... -> This Entity.
+
+            At each stage of this chain, you can
+
+                - Add one or more mandatory attributes.
+                - Add one or more optional attributes
+                - Make an optional attribute in base entity as mandatory.
+                - Make a mandatory attribute as optional by assigning a default value.
+                - Change the default for an existing default attribute to something else.
     '''
     for attr in attrs:
         if type(attr) is not str:
@@ -136,4 +147,3 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
     namespace['__str__'] = _str
     return type(entity_name, tuple(), namespace)
 
-    

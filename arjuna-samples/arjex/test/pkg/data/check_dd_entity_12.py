@@ -157,3 +157,12 @@ def check_entity_with_two_base(request):
     Person5 = data_entity("Person5", "country", age=generator(Random.fixed_length_number, length=2), bases=(Person1, Person2))
     print(Person5(gender="M", fname="Roy", country="India"))
     print(Person5(gender="M", fname="Roy", age=15, country="India"))
+
+@test
+def check_simple_merged_entity(request):
+    Person = data_entity("Person", "age", fname=Random.first_name)
+    Address = data_entity("Address", city=Random.city, country=Random.country, postal_code=Random.postal_code)
+
+    # Merged Entity
+    PersonWithAddress = data_entity("PersonWithAddress", bases=(Person, Address))
+    print(PersonWithAddress(age=40))
