@@ -24,10 +24,20 @@ def check_basic_data_entity(request):
     print(person)
 
 @test
+def check_basic_data_entity(request):
+    Person = data_entity("Person", "name age")
+    person = Person(name="Rahul", age=99)
+    print(person)
+
+@test
 def check_wrong_attr_data_entity(request):
     Person = data_entity("Person", "name age")
-    person = Person(name="Rahul", age=99, not_allowed=123)
-    print(person)
+    try:
+        person = Person(name="Rahul", age=99, not_allowed=123)
+    except Exception as e:
+        assert str(e).find("Wrong arguments") != -1
+    else:
+        request.asserter.fail("Failed")
 
 @test
 def check_multi_str_data_entity(request):
@@ -103,3 +113,47 @@ def check_entity_with_composite_gen_arg_composer(request):
                 )
         )
         print(Person(name='Mac'))
+
+
+@test
+def check_entity_with_one_base(request):
+    # Simple base with one mandatory and one optional attr
+    Person1 = data_entity("Person1", "age", fname=Random.first_name)
+
+    # Top entity adds a mandatory attr
+    Person2 = data_entity("Person2", "gender", bases=Person1)
+    print(Person2(gender="M", age=20))
+    print(Person2(gender="M", age=20, fname="Roy"))
+
+    # Top entity adds an optional attr
+    Person3 = data_entity("Person3", "gender", city=Random.city, bases=Person1)
+    print(Person3(gender="M", age=20, fname="Roy"))
+    print(Person3(gender="M", age=20, fname="Roy", city="Bengaluru"))
+
+    # Top entity makes a field mandatory (optional in base)
+    Person4 = data_entity("Person4", "gender fname", city=Random.city, bases=Person1)
+    try:
+        print(Person4(gender="M", age=20))
+    except Exception as e:
+        assert str(e).find("Wrong arguments") != -1
+    else:
+        request.asserter.fail("Failed")
+    print(Person4(gender="M", age=20, fname="Roy"))
+
+    # Top entity makes a mandatory field optional
+    Person5 = data_entity("Person5", "gender fname", age=generator(Random.fixed_length_number, length=2), city=Random.city, bases=Person1)
+    print(Person5(gender="M", fname="Roy"))
+
+
+@test
+def check_entity_with_two_base(request):
+    # Simple base1 with one mandatory and one optional attr
+    Person1 = data_entity("Person1", "age", fname=Random.first_name)
+
+    # Base 2 adds one mandatory arg, makes fname mandatory, adds one optional arg
+    Person2 = data_entity("Person2", "gender fname", city=Random.city, bases=Person1)
+
+    # Top entity makes age optional, add one mandatory parameter
+    Person5 = data_entity("Person5", "country", age=generator(Random.fixed_length_number, length=2), bases=(Person1, Person2))
+    print(Person5(gender="M", fname="Roy", country="India"))
+    print(Person5(gender="M", fname="Roy", age=15, country="India"))

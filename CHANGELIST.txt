@@ -50,7 +50,9 @@ Future Themes (In-Progress or Planned):
 1.1.26
 ------
     - TODO: Add doc for YAML's handling of boolean strings.
-    
+    - TODO: Add docs for spaces.
+    - TODO: Data Entity From other entities, and provision to add more mandatory and optional params.
+
 1.1.25
 ------
     - Support for anonymous/positional $$ placeholders in withx extended locator definitions.

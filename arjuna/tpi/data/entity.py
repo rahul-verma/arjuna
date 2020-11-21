@@ -67,7 +67,7 @@ def _str(self):
         attrs = ", ".join("{}={}".format(k,v) for k,v in self.as_dict().items())
     )
 
-def data_entity(entity_name, *attrs, **attrs_with_defaults):
+def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
     '''
         Create a new Data Entity class with provided name and attributes.
 
@@ -76,6 +76,7 @@ def data_entity(entity_name, *attrs, **attrs_with_defaults):
             *attrs: Arbitrary names for Python attributes to be associated with objects of this entity.
 
         Keyword Arguments:
+            bases: Base data entities for this entity.
             **attrs_with_defaults: Arbitrary attributes to be associated with objects of this entity, with the defaults that are provided.
 
         Note:
@@ -93,14 +94,46 @@ def data_entity(entity_name, *attrs, **attrs_with_defaults):
     # In any multiple names in single string are provided like a namedtuple, added as individual names.
     for attr in attrs:
         final_attrs.extend(attr.split())
+
+    if not set(final_attrs).isdisjoint(set(attrs_with_defaults.keys())):
+        raise Exception("Mandatory attribute can not be assigned a default value. Evaluate usage for: {}".format(set(final_attrs).intersection(set(attrs_with_defaults.keys()))))
+
     namespace = dict()
-    namespace['_MANDATORY'] = set(final_attrs)
-    namespace['_DEFAULT'] = set(attrs_with_defaults.keys())
+    namespace['_MANDATORY'] = set()
+    namespace['_DEFAULT'] = set()
     namespace['_REFDICT'] = dict()
+
+    if type(bases) not in {list, tuple}:
+        bases = (bases,)
+    for base in bases:
+        base_vars = vars(base)
+        namespace['_MANDATORY'] = namespace['_MANDATORY'].union(base_vars['_MANDATORY'])
+        # Remove these params from Defaults
+        for attr in namespace['_DEFAULT'].intersection(namespace['_MANDATORY']):
+            namespace['_DEFAULT'].remove(attr)
+
+        namespace['_DEFAULT'] = namespace['_DEFAULT'].union(base_vars['_DEFAULT'])
+        # Remove optional params from Mandatory
+        for attr in namespace['_DEFAULT'].intersection(namespace['_MANDATORY']):
+            namespace['_MANDATORY'].remove(attr)
+        #namespace['_MANDATORY'].difference_update(namespace['_DEFAULT'])
+        namespace['_REFDICT'].update(base_vars['_REFDICT'])
+
+    namespace['_MANDATORY'] = namespace['_MANDATORY'].union(set(final_attrs))
+    # Remove mandatory params from Defaults
+    for attr in namespace['_DEFAULT'].intersection(namespace['_MANDATORY']):
+        namespace['_DEFAULT'].remove(attr)
+    namespace['_DEFAULT'] = namespace['_DEFAULT'].union(set(attrs_with_defaults.keys()))
+    # Remove optional params from Mandatory
+    for attr in namespace['_DEFAULT'].intersection(namespace['_MANDATORY']):
+        namespace['_MANDATORY'].remove(attr)
     namespace['_REFDICT'].update({f: None for f in final_attrs})
     namespace['_REFDICT'].update(attrs_with_defaults)
+
     namespace['__init__'] = _init
     namespace['__getattr__'] = _attr
     namespace['as_dict'] = _as_dict
     namespace['__str__'] = _str
     return type(entity_name, tuple(), namespace)
+
+    
