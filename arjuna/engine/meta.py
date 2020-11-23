@@ -82,13 +82,20 @@ class Space:
         setattr(container, name, value)
 
     def __getattr__(self, name):
+        from arjuna import log_trace
         if type(name) is str and not name.startswith("__"):
-            return self[name]
+            try:
+                val = self[name]
+                log_trace("Space: Got value {} for {}.".format(val, name))
+                return val
+            except Exception as e:
+                log_trace("Space: No value for {} in {} in any scope.".format(name))
+                raise AttributeError(str(e))
 
     def __setattr__(self, name, value):
         container = self._get_container_for_scope()
-        from arjuna import log_debug
-        log_debug("Space: Setting {}={} in {} scope".format(name, value, self._request.scope), contexts="request")
+        from arjuna import log_trace
+        log_trace("Space: Setting {}={} in {} scope".format(name, value, self._request.scope)) #, contexts="request")
         setattr(container, name, value)
 
     @property
@@ -231,7 +238,12 @@ class My:
         self._space = Space(pytest_request)
         if pytest_request.scope in {"function"}:
             if not self._module:
-                self._module = Module(pytest_request)     
+                self._module = Module(pytest_request)  
+            if not self._group:
+                self._group = Group(self._request)   
+        if pytest_request.scope in {"module"}:
+            if not self._group:
+                self._group = Group(self._request)  
 
     @property
     def info(self):
