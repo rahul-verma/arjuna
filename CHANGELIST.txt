@@ -47,6 +47,10 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.1.28
+------
+
+
 1.1.27
 ------
     - Added explicit requirement for urllib3
