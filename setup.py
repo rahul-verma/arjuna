@@ -54,8 +54,9 @@ setup(
                 ]
     },
     install_requires = [
-        "lxml==4.4.1", 
-        "requests==2.22.0", 
+        "urllib==1.25.3",
+        "requests==2.22.0",
+        "lxml==4.4.1",
         "requests-toolbelt==0.9.1", 
         "selenium==4.0.0a1", 
         "webdriver_manager==2.3.0", 
