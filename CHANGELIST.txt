@@ -47,9 +47,12 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
-1.1.28
+1.1.29
 ------
 
+1.1.28
+------
+    - Fixed typo in setup
 
 1.1.27
 ------
