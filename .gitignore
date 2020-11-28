@@ -95,3 +95,5 @@ arjuna-samples/**/geckodriver
 arjuna-samples/pvt/**
 arjuna-samples/arjex_play/**
 arjuna-samples/**/tools/**
+
+**/*.local.*
