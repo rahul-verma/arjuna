@@ -49,7 +49,14 @@ Future Themes (In-Progress or Planned):
 
 1.1.29
 ------
-
+    - Rearranged locator docs to place coded and GNS entries next to each other.
+    - Added GuiWidgetLocatorDefinitionError as an exception to TPI.
+    - Added support for .local files for the following: (if present these files override the corresponding regular config files.)
+        - project.local.yaml
+        - data.local.yaml
+        - envs.local.yaml
+        - 
+    - Support for empty sessions.yaml, stages.yaml and groups.yaml. Named exception raised rather than NoneType exception.
 1.1.28
 ------
     - Fixed typo in setup

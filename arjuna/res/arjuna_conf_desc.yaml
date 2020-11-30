@@ -19,12 +19,19 @@ project.root.dir: absolute_dir_path_present
 
 conf.dir: absolute_dir_path
 conf.project.file: absolute_file_path
+conf.project.local.file: absolute_file_path
 conf.data.file: absolute_file_path
+conf.data.local.file: absolute_file_path
 conf.envs.file: absolute_file_path
+conf.envs.local.file: absolute_file_path
 conf.sessions.file: absolute_file_path
+conf.sessions.local.file: absolute_file_path
 conf.stages.file: absolute_file_path
+conf.stages.local.file: absolute_file_path
 conf.groups.file: absolute_file_path
+conf.groups.local.file: absolute_file_path
 conf.withx.file: absolute_file_path
+conf.withx.local.file: absolute_file_path
 
 tests.dir: absolute_dir_path
 hooks.dir: absolute_dir_path

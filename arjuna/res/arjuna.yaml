@@ -20,12 +20,19 @@ arjuna_options:
 
   conf.dir: $project_root_dir$/config/
   conf.project.file: $project_root_dir$/config/project.yaml
+  conf.project.local.file: $project_root_dir$/config/project.local.yaml
   conf.data.file: $project_root_dir$/config/data.yaml
+  conf.data.local.file: $project_root_dir$/config/data.local.yaml
   conf.envs.file: $project_root_dir$/config/envs.yaml
+  conf.envs.local.file: $project_root_dir$/config/envs.local.yaml
   conf.sessions.file: $project_root_dir$/config/sessions.yaml
+  conf.sessions.local.file: $project_root_dir$/config/sessions.local.yaml
   conf.stages.file: $project_root_dir$/config/stages.yaml
+  conf.stages.local.file: $project_root_dir$/config/stages.local.yaml
   conf.groups.file: $project_root_dir$/config/groups.yaml
+  conf.groups.local.file: $project_root_dir$/config/groups.local.yaml
   conf.withx.file: $project_root_dir$/config/withx.yaml
+  conf.withx.local.file: $project_root_dir$/config/withx.local.yaml
 
   tests.dir: $project_root_dir$/test
   hooks.dir: $project_root_dir$/hook

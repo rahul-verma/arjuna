@@ -95,7 +95,8 @@ class GuiWidgetLocator(Dictable):
             else:
                 self.__meta[k] = v
         if not with_list:
-            raise Exception("You must provide atleast one locator.")
+            from arjuna.tpi.error import GuiWidgetLocatorDefinitionError
+            raise GuiWidgetLocatorDefinitionError("You must provide atleast one valid locator argument to create GuiWidgetLocator definition. None of Arjuna defined locators or withx locators were provided. Got the speification dictionary as: {}".format(self.__named_args))
         from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
         return GuiWidgetMetaData.create_wmd(*with_list, meta=self.__meta)
 

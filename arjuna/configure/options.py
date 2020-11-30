@@ -41,6 +41,7 @@ class Options(metaclass=abc.ABCMeta):
 
     def update(self, option_name, option_value):
         option_name = self._process_option_name(option_name)
+        validator_name = "not_fetched_yet"
         try:
             is_not_set = False
             try:
@@ -61,7 +62,7 @@ class Options(metaclass=abc.ABCMeta):
                         else:
                             self.__options[option_key] = option_value
         except Exception as e:
-            raise ArjunaOptionValidationError(option_value, option_name, validator_name)
+            raise ArjunaOptionValidationError(option_value, option_name, validator_name, str(e))
     
     def __get_option_key(self, option_name):
         return isinstance(option_name, Enum) and option_name.name or option_name
@@ -330,7 +331,9 @@ class EditableConfig:
         for linked_project in linked_projects:
             proj_conf.update(linked_project.ref_conf_editable)
         proj_conf.update(arjuna_conf)
-        location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_PROJECT_FILE)
+        location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_PROJECT_LOCAL_FILE)
+        if not os.path.isfile(location):
+            location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_PROJECT_FILE)
         if not os.path.isfile(location):
             return proj_conf
         proj_conf.update(
@@ -364,7 +367,9 @@ class EditableConfig:
 
     @classmethod
     def data_confs(cls, *, arjuna_conf):
-        location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_DATA_FILE)
+        location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_DATA_LOCAL_FILE)
+        if not os.path.isfile(location):        
+            location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_DATA_FILE)
         if not os.path.isfile(location):
             return {}
         return cls.__multi_confs_file(
@@ -373,7 +378,9 @@ class EditableConfig:
 
     @classmethod
     def env_confs(cls, *, arjuna_conf):
-        location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_ENVS_FILE)
+        location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_ENVS_LOCAL_FILE)
+        if not os.path.isfile(location):  
+            location = arjuna_conf.arjuna_options.value(ArjunaOption.CONF_ENVS_FILE)
         if not os.path.isfile(location):
             return {}
         return cls.__multi_confs_file(

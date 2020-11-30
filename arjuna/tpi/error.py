@@ -116,6 +116,7 @@ class GuiLabelNotPresentError(Exception):
         context_msg = context and  " for context {}".format(context) or ""
         super().__init__("Gui namespace >{}< does not contain element with name: {}{}. {}.".format(gns_name, label, context_msg, msg))
 
+
 class GuiLabelNotPresentError(Exception):
     '''
         Raised when a non-existing GNS label is referenced.
@@ -124,7 +125,16 @@ class GuiLabelNotPresentError(Exception):
     def __init__(self, gns_name, label, context=None, msg=None):
         msg = msg is None and "" or msg
         context_msg = context and  " for context {}".format(context) or ""
-        super().__init__(f"No label definition exists for name {label} in {gns_name}, {context} {msg}")
+        super().__init__("Gui namespace >{}< does not contain element with name: {}{}. {}.".format(gns_name, label, context_msg, msg))
+
+
+class GuiWidgetLocatorDefinitionError(Exception):
+    '''
+        Raised when there is a problem in the way GuiWidgetLocator is specified in the arguments.
+    '''
+
+    def __init__(self, msg):
+        super().__init__(msg)
 
 
 class TestSessionsFileNotFoundError(Exception):
@@ -286,7 +296,11 @@ class DisallowedArjunaOptionError(Exception):
 
 class ArjunaOptionValidationError(Exception):
 
-    def __init__(self, option, name, validator):
+    def __init__(self, option, name, validator, emsg=None):
+        if emsg is None:
+            emsg = ""
+        else:
+            emsg = ". {}".format(emsg)
         super().__init__(
-            "Config option value <{}>(type:{}) for <{}> option did not pass the validation check: [{}]".format(
-                    option, type(option), name, validator))
+            "Config option value <{}>(type:{}) for <{}> option did not pass the validation check: [{}]{}".format(
+                    option, type(option), name, validator, emsg))

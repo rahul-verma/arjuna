@@ -1,0 +1,5 @@
+arjuna_options:
+  app.url: "https://testmile.com"
+
+user_options:
+  some_option: central

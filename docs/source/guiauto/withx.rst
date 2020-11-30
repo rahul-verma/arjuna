@@ -3,7 +3,7 @@
 **Defining Your Own Locators** using **withx**
 ==============================================
 
-As seen in :ref:`coded_locator_exts` section, Arjuna defines its own locator extensions to provide advanced identification facilities. These can be externalised and used in GNS as well - :ref:`gns_locator_exts`.
+As seen in :ref:`locator_exts` section, Arjuna defines its own locator extensions to provide advanced identification facilities.
 
 This leads to a lot of reuse of custom locator strings as well as representing complex reusable locators in an easy manner.
 
@@ -61,12 +61,12 @@ Following is an example:
             formcontrolname: $$
 
 In the above example, a new locator type **fcn** has been defined:
-    * **wtype** key has been set to **xpath** which means that this locator extension is built on top of **attr**. Here you can use any of :ref:`locators` or you can also use :ref:`coded_locator_exts`.
-    * **wvalue** defines the locator value and uses the corresponding GNS format (Refer :ref:`basic_locator_gns` and :ref:`ext_locator_gns`)
+    * **wtype** key has been set to **xpath** which means that this locator extension is built on top of **attr**. Here you can use any of :ref:`basic_locators` or you can also use :ref:`locator_exts`.
+    * **wvalue** defines the locator value and uses the corresponding GNS format
     * $$ placeholder specifies the anonymous/positional placeholder.
 
-Usage in Code
-"""""""""""""
+Coded
+"""""
 
 You can use the defined locator type in your code just like other locators in Arjuna.
 
@@ -82,8 +82,8 @@ Following code uses the **fcn** locator extension defined in previous section:
 Notice how the code starts representing your application in a much cleaner way.
 
 
-Usage in GNS
-""""""""""""
+GNS
+"""
 
 You can also use the defined locator type in a GNS file.
 
@@ -93,13 +93,11 @@ Following GNS Yaml file uses the **fcn** locator:
 
 .. code-block:: yaml
 
-    labels:
+    username:
+        fcn: username
 
-        username:
-            fcn: username
-
-        pwd:
-            fcn: password
+    pwd:
+        fcn: password
 
 Now you can use the labels as usual in code:
 
@@ -152,8 +150,8 @@ Let's define a **cbutton** locator to tackle this:
         wvalue:
             formcontrolname: button $$ $$
 
-Usage in Code
-"""""""""""""
+Coded
+"""""
 
 You can use the defined locator type in your code just like other locators in Arjuna.
 
@@ -164,8 +162,8 @@ As multiple placeholders are used, s list or tuple needs to be provided as value
     app.element(cbutton=('button-large', 'button-visible'))
     app.element(cbutton=('button-small', 'button-hidden'))
 
-Usage in GNS
-""""""""""""
+GNS
+"""
 
 You can also use the defined locator type in a GNS file.
 
@@ -175,17 +173,15 @@ Following GNS Yaml file uses the **cbutton** locator:
 
 .. code-block:: yaml
 
-    labels:
+    button1:
+        cbutton:
+            - button-large
+            - button-visible
 
-        button1:
-            cbutton:
-                - button-large
-                - button-visible
-
-        button2:
-            cbutton:
-                - button-small
-                - button-hidden
+    button2:
+        cbutton:
+            - button-small
+            - button-hidden
 
 Now you can use the labels as usual in code:
 
@@ -215,13 +211,13 @@ Following is an example:
         wvalue: "//li[contains(*//text(), '$lname$')]"
 
 In the above example, a new locator type **nav_link** has been defined:
-    * **wtype** key has been set to **xpath** which means that this locator extension is built on top of **xpath**. Here you can use any of :ref:`locators` or you can also use :ref:`coded_locator_exts`.
-    * **wvalue** defines the locator value and uses the corresponding GNS format (Refer :ref:`basic_locator_gns` and :ref:`ext_locator_gns`)
+    * **wtype** key has been set to **xpath** which means that this locator extension is built on top of **xpath**. Here you can use any of :ref:`locators` or you can also use :ref:`locator_exts`.
+    * **wvalue** defines the locator value and uses the corresponding GNS format (Refer :ref:`locators`)
     * **$lname$** is an example of named placeholder.
 
 
-Usage in Code
-"""""""""""""
+Coded
+"""""
 
 You can use the newly defined locator in your code just like other locators in Arjuna.
 
@@ -235,8 +231,8 @@ Following code uses the **nav_link** locator extension defined in previous secti
 
 Note how the placeholder name is used as a keyword argument to pass the value.
 
-Usage in GNS
-""""""""""""
+GNS
+"""
 
 You can also use the defined locator extension in a GNS file.
 
@@ -246,10 +242,9 @@ Following GNS Yaml file uses the **nav_link** locator extension:
 
 .. code-block:: yaml
 
-    labels:
-        posts:
-            nav_link: 
-                lname: Posts
+    posts:
+        nav_link: 
+            lname: Posts
 
 Now you can use the **posts** label as usual in code:
 
@@ -282,8 +277,8 @@ Consider the following example where a complex locator is defined with multiple 
 
 Here, the name of attribute is dynamic along with its value. The tag sequence is also dynamic.
 
-Usage in Code
-"""""""""""""
+Coded
+"""""
 
 Following code uses the **dyn** locator extension defined in previous section:
 
@@ -294,8 +289,8 @@ Following code uses the **dyn** locator extension defined in previous section:
 
 Note how the placeholder names are used as a keyword arguments to pass the value.
 
-Usage in GNS
-""""""""""""
+GNS
+"""
 
 You can also use the defined locator extension in a GNS file.
 
@@ -305,19 +300,17 @@ Following GNS Yaml file uses the **nav_link** locator extension:
 
 .. code-block:: yaml
 
-    labels:
+    user:
+        dyn: 
+            aname: name
+            aval: user
+            tag: input
 
-        user:
-            dyn: 
-                aname: name
-                aval: user
-                tag: input
-
-        city:
-            dyn:
-                aname: custom
-                aval: city
-                tag: select
+    city:
+        dyn:
+            aname: custom
+            aval: city
+            tag: select
 
 Now you can use the **posts** label as usual in code:
 
@@ -366,7 +359,7 @@ Now you can use the **username** and **posts** labels as usual in code (assuming
 **Mixing Anonymous/Positional ($$) and Named ($<name>$) Placeholders**
 ----------------------------------------------------------------------
 
-You **CAN NOT** mix **$$ and $<name>$ placeholders** unless the named placeholders are CLR references (see :ref:`locator_auto_format` and :ref:`locator_auto_format_gns`)
+You **CAN NOT** mix **$$ and $<name>$ placeholders** unless the named placeholders are CLR references (see :ref:`locator_auto_format`)
 
 .. code-block:: yaml
 

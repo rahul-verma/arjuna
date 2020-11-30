@@ -1,0 +1,6 @@
+env1:
+  arjuna_options:
+    app.url: https://env1_local
+
+  user_options:
+    check: env1_local

@@ -1,0 +1,6 @@
+arjuna_options:
+  app.url: "https://google.com"
+
+user_options:
+  some_option: local
+

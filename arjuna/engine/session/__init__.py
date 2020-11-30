@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 from arjuna.tpi.constant import ArjunaOption
 from arjuna.tpi.parser.yaml import Yaml
 from arjuna.core.error import *
@@ -92,7 +94,9 @@ class YamlTestSession(BaseTestSession):
     def __load_sessions_file(cls):
         from arjuna import C
         if cls.__SESSIONS_YAML is None:
-            cls.SESSIONS_YAML_FILE = C(ArjunaOption.CONF_SESSIONS_FILE)
+            cls.SESSIONS_YAML_FILE = C(ArjunaOption.CONF_SESSIONS_LOCAL_FILE)
+            if not os.path.isfile(cls.SESSIONS_YAML_FILE):
+                cls.SESSIONS_YAML_FILE = C(ArjunaOption.CONF_SESSIONS_FILE)  
             try:
                 cls.__SESSIONS_YAML = Yaml.from_file(cls.SESSIONS_YAML_FILE, allow_any=True)
             except FileNotFoundError as e:
@@ -100,6 +104,8 @@ class YamlTestSession(BaseTestSession):
 
     @classmethod
     def get_session_yaml(cls, name):
+        if cls.__SESSIONS_YAML is None:
+            raise UndefinedTestSessionError(name=name, file_path=cls.__SESSIONS_YAML) 
         try:
             return cls.__SESSIONS_YAML.get_section(name)
         except YamlUndefinedSectionError as e:
@@ -109,7 +115,9 @@ class YamlTestSession(BaseTestSession):
     def __load_stages_file(cls):
         from arjuna import C
         if cls.__STAGES_YAML is None:
-            cls.STAGES_YAML_FILE = C(ArjunaOption.CONF_STAGES_FILE)
+            cls.STAGES_YAML_FILE = C(ArjunaOption.CONF_STAGES_LOCAL_FILE)
+            if not os.path.isfile(cls.STAGES_YAML_FILE):
+                cls.STAGES_YAML_FILE = C(ArjunaOption.CONF_STAGES_FILE)  
             try:
                 cls.__STAGES_YAML = Yaml.from_file(cls.STAGES_YAML_FILE, allow_any=True)
             except FileNotFoundError:
@@ -117,6 +125,8 @@ class YamlTestSession(BaseTestSession):
 
     @classmethod
     def get_stage_yaml(cls, name):
+        if cls.__STAGES_YAML is None:
+            raise UndefinedTestStageError(name=name, file_path=cls.STAGES_YAML_FILE) 
         try:
             return cls.__STAGES_YAML.get_section(name)
         except YamlUndefinedSectionError as e:
@@ -126,7 +136,9 @@ class YamlTestSession(BaseTestSession):
     def __load_groups_file(cls):
         from arjuna import C
         if cls.__GROUPS_YAML is None:
-            cls.GROUPS_YAML_FILE = C(ArjunaOption.CONF_GROUPS_FILE)
+            cls.GROUPS_YAML_FILE = C(ArjunaOption.CONF_GROUPS_LOCAL_FILE)
+            if not os.path.isfile(cls.GROUPS_YAML_FILE):
+                cls.GROUPS_YAML_FILE = C(ArjunaOption.CONF_GROUPS_FILE)                
             try:
                 cls.__GROUPS_YAML = Yaml.from_file(cls.GROUPS_YAML_FILE, allow_any=True)
             except FileNotFoundError:
@@ -134,6 +146,8 @@ class YamlTestSession(BaseTestSession):
 
     @classmethod
     def get_group_yaml(cls, name):
+        if cls.__GROUPS_YAML is None:
+            raise UndefinedTestGroupError(name=name, file_path=cls.GROUPS_YAML_FILE)            
         try:
             return cls.__GROUPS_YAML.get_section(name)
         except YamlUndefinedSectionError as e:

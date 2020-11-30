@@ -1,0 +1,6 @@
+data1:
+  arjuna_options:
+    app.url: https://data1_local
+
+  user_options:
+    check: data1_local

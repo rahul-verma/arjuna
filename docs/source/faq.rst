@@ -162,3 +162,66 @@ Following are some examples where **sample_group** is the group name.
             ir:
                 - "author is Rahul"
                 - "priority < 3"
+
+
+Can I Maintain **Local Configuration (.local) Files** That Override the Default Configuration Files?
+----------------------------------------------------------------------------------------------------
+
+Yes!
+
+Need for Local Config Files
+===========================
+
+When you work as team then at times you need to create configuration files that are **local** to your development machine.
+
+There are various reasons to need this feature:
+    * You are experimenting with a configuration value.
+    * You have local deployed environments.
+    * You want to use a temporary user account to test a transient/under-development feature.
+
+and so on.
+
+Supported Local Config Files
+============================
+
+Arjuna supports maintaining local versions of all its configuration files. Following table provides the names of the **local** files and corresponding default files:
+
+.. list-table:: Title
+   :widths: 50 50
+   :header-rows: 1
+
+   * - Local Config File Name
+     - Corresponding Default Config File Name
+   * - project.local.yaml
+     - project.yaml
+   * - data.local.yaml
+     - data.yaml
+   * - envs.local.yaml
+     - envs.yaml
+   * - sessions.local.yaml
+     - sessions.yaml
+   * - stages.local.yaml
+     - stages.yaml
+   * - groups.local.yaml
+     - groups.yaml
+   * - withx.local.yaml
+     - withx.yaml
+
+What Happens When a Local Config File is Present?
+=================================================
+
+When a local file is present then Arjuna loads this file and IGNORES the default corresponding config file.
+
+Creating local config files is optional and you can create one or more of them as paer your need.
+
+Configuring Version Control To Avoid Check-In of Local Config Files
+===================================================================
+
+A suggested practice is to set your version control software to ignore local config files during check-in so that different people in your team can maintain their own versions of these local config files.
+
+For example, if you are using Git, then you can add the following to **.gitignore**:
+
+.. code-block:: text
+
+    **/*.local.*
+

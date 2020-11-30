@@ -69,6 +69,9 @@ class ArjunaOption(Enum):
     CONF_PROJECT_FILE = auto()
     '''Project conf file path.'''
 
+    CONF_PROJECT_LOCAL_FILE = auto()
+    '''Local Project conf file path.'''
+
     TESTS_DIR = auto()
     '''Directory containing test modules.'''
 
@@ -132,20 +135,38 @@ class ArjunaOption(Enum):
     CONF_DATA_FILE = auto()
     '''File that contains all data configurations.'''
 
+    CONF_DATA_LOCAL_FILE = auto()
+    '''Local File that contains all data configurations.'''
+
     CONF_ENVS_FILE = auto()
     '''File that contains all environment configurations.'''
+
+    CONF_ENVS_LOCAL_FILE = auto()
+    '''Local File that contains all environment configurations.'''
 
     CONF_SESSIONS_FILE = auto()
     '''File that contains all test session definitions.'''
 
+    CONF_SESSIONS_LOCAL_FILE = auto()
+    '''Local File that contains all test session definitions.'''
+
     CONF_STAGES_FILE = auto()
-    '''Directory that contains all test stage definitions.'''
+    '''File that contains all test stage definitions.'''
+
+    CONF_STAGES_LOCAL_FILE = auto()
+    '''Local File that contains all test stage definitions.'''
 
     CONF_GROUPS_FILE = auto()
-    '''Directory that contains all test group definitions.'''
+    '''File that contains all test group definitions.'''
+
+    CONF_GROUPS_LOCAL_FILE = auto()
+    '''Local File that contains all test group definitions.'''
 
     CONF_WITHX_FILE = auto()
-    '''Path of withx.yaml file used for writing custom locators for Gui Automation.'''
+    '''withx.yaml file used for writing custom locators for Gui Automation.'''
+
+    CONF_WITHX_LOCAL_FILE = auto()
+    '''Local withx.yaml file used for writing custom locators for Gui Automation.'''
 
     DATA_DIR = auto()
     '''Directory containing data files in test project.'''

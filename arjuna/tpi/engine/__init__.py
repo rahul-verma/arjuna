@@ -280,7 +280,9 @@ except ModuleNotFoundError as e:
 
         from arjuna.tpi.parser.yaml import Yaml
         from arjuna.interact.gui.auto.finder.withx import WithX
-        fpath = self.ref_config.value(ArjunaOption.CONF_WITHX_FILE)
+        fpath = self.ref_config.value(ArjunaOption.CONF_WITHX_LOCAL_FILE)
+        if not os.path.isfile(fpath): 
+            fpath = self.ref_config.value(ArjunaOption.CONF_WITHX_FILE)
         creation_context= f"WithX.yaml file at {fpath}"
         if os.path.isfile(fpath):        
             wyaml = Yaml.from_file(fpath, allow_any=True)

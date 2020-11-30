@@ -13,7 +13,7 @@ Arjuna has more types of widgets covered in the following sections.
 **GuiMultiElement** - Handling Multiple GuiElements Together
 ------------------------------------------------------------
 
-Arjuna provides a special abstraction for representing mutliple **GuiElement**s together rather than a raw Python list. This provides an opportunity to include higher level methods for test code authors.
+Arjuna provides a special abstraction for representing mutliple **GuiElements** together rather than a raw Python list. This provides an opportunity to include higher level methods for test code authors.
 
 Defining and Using a GuiMultiElement In Code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -46,7 +46,7 @@ In your code, you can create an element of this as usual, however this time you'
 Interacting with GuiMultiElement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-It provides various properties and methods for a higher level interaction with a sequence of **GuiElement**s.
+It provides various properties and methods for a higher level interaction with a sequence of **GuiElements**.
 
 - It supports index based retrieval just like a regular list. Indexes start from computer counting (0).
 - In addition to this, it provides propeties like **first_element**, **last_element** and **random_element**.

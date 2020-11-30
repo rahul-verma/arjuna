@@ -1,0 +1,4 @@
+with_pos_single:
+  wtype: node
+  wvalue:
+    for: $$

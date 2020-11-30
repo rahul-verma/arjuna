@@ -1,0 +1,8 @@
+stage_1:
+  include:
+    - gp1
+    - gp2
+
+stage_2:
+  include:
+    - gp3

@@ -7,6 +7,8 @@
    guiapp
    element
    gns
+   locators
+   dynamic_locators
    withx
    widgets
    gom
