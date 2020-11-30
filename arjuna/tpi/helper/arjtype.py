@@ -242,6 +242,20 @@ class Offset(Point):
     def __init__(self, x, y):
         super().__init__(x,y)
 
+class oneof:
+    '''
+        Represents the given sequence as choices.
+
+        Args:
+            choices: Arbitrary objects as choices.
+    '''
+
+    def __init__(self, *choices):
+        self.__choices = choices
+
+    def as_list(self):
+        return list(self.__choices)
+
 @track("trace")
 class Screen:
     '''

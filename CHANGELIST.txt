@@ -49,7 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.30
 ------
-
+    - Support for OR relationship among different values of same locator type - coded as well as GNS.
 
 
 1.1.29

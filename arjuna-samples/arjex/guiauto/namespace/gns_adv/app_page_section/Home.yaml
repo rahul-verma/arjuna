@@ -144,3 +144,12 @@ labels:
       - input
       - id
       - er_l
+
+  diff_locator_or:
+      classes: nonexisting
+      attr:
+        type: submit
+
+  same_locator_or:
+      - name: nonexisting
+      - name: log

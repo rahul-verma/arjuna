@@ -75,11 +75,11 @@ class GuiWidgetLocator(Dictable):
             }
 
     def _as_raw_wmd(self):
-        from arjuna import Arjuna
+        from arjuna import Arjuna, oneof
         from arjuna.interact.gui.auto.finder._with import With
         from arjuna.interact.gui.auto.finder.enums import WithType
-        with_list = []
-        for k,v in self.__named_args.items():
+
+        def add_to_list(with_list, k, v):
             if k.upper() in WithType.__members__:
                 if isinstance(v, Dictable):
                     v = v.as_dict()
@@ -94,6 +94,15 @@ class GuiWidgetLocator(Dictable):
                     with_list.append(getattr(With, k.lower())(v))
             else:
                 self.__meta[k] = v
+
+        with_list = []
+        for k,v in self.__named_args.items():
+            if isinstance(v, oneof):
+                for oneofval in v.as_list():
+                    add_to_list(with_list, k, oneofval)
+            else:
+                add_to_list(with_list, k, v)
+
         if not with_list:
             from arjuna.tpi.error import GuiWidgetLocatorDefinitionError
             raise GuiWidgetLocatorDefinitionError("You must provide atleast one valid locator argument to create GuiWidgetLocator definition. None of Arjuna defined locators or withx locators were provided. Got the speification dictionary as: {}".format(self.__named_args))
