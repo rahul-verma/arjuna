@@ -388,6 +388,7 @@ Arjuna Exceptions
     * :py:class:`TestGroupsFileNotFoundError <arjuna.tpi.error.TestGroupsFileNotFoundError>`
     * :py:class:`UndefinedTestGroupError <arjuna.tpi.error.UndefinedTestGroupError>`
 * Gui Automation
+    * :py:class:`GuiWidgetLocatorDefinitionError <arjuna.tpi.error.GuiWidgetLocatorDefinitionError>`
     * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.error.GuiWidgetForLabelPresentError>`
     * :py:class:`GuiWidgetPresentError <arjuna.tpi.error.GuiWidgetPresentError>`
     * :py:class:`GuiWidgetForLabelNotPresentError <arjuna.tpi.error.GuiWidgetForLabelNotPresentError>`
