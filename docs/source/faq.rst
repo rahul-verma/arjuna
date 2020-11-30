@@ -186,7 +186,7 @@ Supported Local Config Files
 
 Arjuna supports maintaining local versions of all its configuration files. Following table provides the names of the **local** files and corresponding default files:
 
-.. list-table:: Title
+.. list-table:: Local Config File Names
    :widths: 50 50
    :header-rows: 1
 

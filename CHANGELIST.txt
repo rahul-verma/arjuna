@@ -60,7 +60,7 @@ Future Themes (In-Progress or Planned):
         - project.local.yaml
         - data.local.yaml
         - envs.local.yaml
-        - 
+        - sessions.yaml, stages.yaml, groups.yaml
     - Support for empty sessions.yaml, stages.yaml and groups.yaml. Named exception raised rather than NoneType exception.
 1.1.28
 ------
