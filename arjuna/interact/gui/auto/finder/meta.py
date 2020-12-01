@@ -20,6 +20,7 @@ from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.constant import *
 from arjuna.core.constant import *
 from arjuna.core.utils.repr_utils import repr_dict
+from arjuna.tpi.tracker import track
 
 class InteractionConfig:
 
@@ -60,21 +61,48 @@ class InteractionConfig:
     def __str__(self):
         return repr_dict(self.__settings)
 
+@track("debug")
 class Meta:
 
     def __init__(self, mdict=None):
-        self.__mdict = not mdict and CIStringDict() or CIStringDict(mdict)
+        from arjuna import log_debug
+        temp_dict = not mdict and CIStringDict() or CIStringDict(mdict)
+        self.__mdict = CIStringDict()
         from arjuna.core.constant import GuiWidgetType
-        if "type" in self.__mdict:
+        if "type" in temp_dict:
+            log_debug("Copying provided type from meta dict: {}".format(temp_dict["type"]))
             try:
-                widget_type = self.__mdict["type"]
+                widget_type = temp_dict["type"]
                 if not isinstance(widget_type, GuiWidgetType):
                     self.__mdict["type"] = GuiWidgetType[widget_type.upper()]
+                else:
+                    self.__mdict["type"] = temp_dict["type"]
             except Exception as e:
                 raise Exception("{} is not a valid Gui widget type.".format(widget_type))
         else:
             self.__mdict["type"] = GuiWidgetType.ELEMENT
-        self.__mdict["settings"] = InteractionConfig(self.__mdict) # Interconfig keys are removed
+        self.__mdict["relations"] = dict()
+        to_remove = list()
+        for k,v in temp_dict.items():
+            if k.lower() in {'above', 'below', 'left', 'right', 'near'}:
+                self.__mdict["relations"][k.lower()] = v 
+                to_remove.append(k)
+        for k in to_remove:
+            del temp_dict[k]
+        if "relations" in temp_dict:
+            self.__mdict["relations"].update(temp_dict["relations"])
+            del temp_dict["relations"]
+
+        from arjuna.tpi.guiauto.base.single_widget import SingleGuiWidget
+        from arjuna.tpi.error import GuiWidgetLocatorDefinitionError
+
+        for k,v in self.__mdict["relations"].items():
+            if isinstance(v, SingleGuiWidget):
+                self.__mdict["relations"][k] = v.dispatcher.driver_element
+                # raise GuiWidgetLocatorDefinitionError("Relations must point to an already found GuiElement. Provided: {}".format(v))
+
+        self.__mdict["settings"] = InteractionConfig(temp_dict) # Interconfig keys are removed
+        log_debug("Meta dictionary is: {}".format(self.__mdict))
 
     def update_settings(self, source_wmd):
         self.settings.update(source_wmd.meta.settings)
@@ -99,5 +127,6 @@ class Meta:
 
     def __str__(self):
         return repr_dict(self.__mdict)
+
 
     

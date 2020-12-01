@@ -19,6 +19,7 @@ from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from arjuna.tpi.error import *
 from arjuna.core.error import *
+from selenium.webdriver.support.relative_locator import RelativeBy
 
 class ElementFinder:
     BY_MAP = {
@@ -31,20 +32,54 @@ class ElementFinder:
         "CSS_SELECTOR": By.CSS_SELECTOR,
         "XPATH": By.XPATH
     }
+
+    RELATION_MAP = {
+        "above": "above",
+        "below": "below",
+        "right": "to_left_of",
+        "left": "to_right_of",
+        "near": "near",
+    }
     
     @classmethod
-    def find_element(cls, container, byType, byValue):
+    def __create_relative_by(cls, byType, byValue, relations):
         from arjuna import log_debug
-        log_debug(f"Finding element in container:{container} with wtype:{byType} and wvalue:{byValue}")
+        relative_by = RelativeBy({byType: byValue})
+        for k,v in relations.items():
+            try:
+                getattr(relative_by, cls.RELATION_MAP[k.lower()])(v)
+            except:
+                pass
+        log_debug("Root" + str(relative_by.root))
+        log_debug("Filters" + str(relative_by.filters))
+        return relative_by
+        
+    @classmethod
+    def find_element(cls, container, byType, byValue, *, relations=None):
+        from arjuna import log_debug
+        log_debug(f"Finding element in container:{container} with wtype:{byType} and wvalue:{byValue} with relations: {relations}")
         try:
-            return container.find_element(cls.BY_MAP[byType.upper()], byValue)
+            byType = cls.BY_MAP[byType.upper()]
+            if not relations:
+                return container.find_element(byType, byValue)
+            else:
+                # Currently Selenium supports Relative locator only for find_elements
+                elements = container.find_elements(cls.__create_relative_by(byType, byValue, relations))
+                if len(elements) == 0:
+                    raise Exception("No elements found.")
+                else:
+                    return elements[0]
         except Exception as e:
             raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue))
 
 
     @classmethod
-    def find_elements(cls, container, byType, byValue):
-        elements = container.find_elements(cls.BY_MAP[byType.upper()], byValue)
+    def find_elements(cls, container, byType, byValue, relations=None):
+        byType = cls.BY_MAP[byType.upper()]
+        if not relations:
+            elements = container.find_elements(byType, byValue)
+        else:
+            elements = container.find_elements(cls.__create_relative_by(byType, byValue, relations))            
         if len(elements) == 0:
             raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue))
         return elements

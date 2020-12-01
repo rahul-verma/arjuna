@@ -123,8 +123,8 @@ class SeleniumDriverDispatcher:
     def take_screenshot_as_base64(self):
         return DriverCommands.take_screenshot_as_base64(self.__driver)
 
-    def find_element(self, with_type, with_value):
-        element = ElementFinder.find_element(self.__driver, with_type, with_value)
+    def find_element(self, with_type, with_value, *, relations=None):
+        element = ElementFinder.find_element(self.__driver, with_type, with_value, relations=relations)
         return 1, self.__create_gui_element_dispatcher(element)
 
     def __process_single_js_element(self, element):
@@ -159,8 +159,8 @@ class SeleniumDriverDispatcher:
         element = self.__process_js_element(element)
         return 1, self.__create_gui_element_dispatcher(element)
 
-    def find_multielement(self, with_type, with_value):
-        web_elements = ElementFinder.find_elements(self.__driver, with_type, with_value)
+    def find_multielement(self, with_type, with_value, *, relations=None):
+        web_elements = ElementFinder.find_elements(self.__driver, with_type, with_value, relations=relations)
         melement = MultiElement([SeleniumDriverElementDispatcher(self, web_element) for web_element in web_elements])
         return melement.get_size(), melement
 

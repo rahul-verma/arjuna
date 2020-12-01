@@ -62,6 +62,8 @@ class ElementFinder:
             if "POINT" in {l.ltype.name for l in locators}:
                 raise ConditionException("With.POINT can be used only with GuiElement.")
 
+        # Prepare Relations dict
+
         we = None
         for locator in locators:
             try:
@@ -75,7 +77,7 @@ class ElementFinder:
                     if locator.ltype.name == "XPATH":
                         if not lvalue.startswith("."):
                             lvalue = "." + lvalue
-                    size, dispatcher = dispatcher_call(locator.ltype.name, lvalue)
+                    size, dispatcher = dispatcher_call(locator.ltype.name, lvalue, relations=wmd.meta.relations)
                 return locator.ltype.name, locator.lvalue, size, dispatcher
             except WaitableError as e:
                 we = e
