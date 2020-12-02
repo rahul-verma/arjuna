@@ -50,6 +50,9 @@ Future Themes (In-Progress or Planned):
 1.1.30
 ------
     - Support for OR relationship among different values of same locator type - coded as well as GNS.
+    - Support for Relative Locators
+        - Coded - Added at App/Page level.
+        - GNS Support added - Can provide label from same GNS file.
 
 
 1.1.29

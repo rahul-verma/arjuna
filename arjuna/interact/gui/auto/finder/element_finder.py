@@ -18,7 +18,9 @@
 import abc
 from arjuna.core.error import WaitableError, _GuiWidgetPresentError
 from arjuna.tpi.error import GuiWidgetNotFoundError
+from arjuna import track
 
+@track("debug")
 class ElementFinder:
     def __init__(self, container): #, obj_name=""):
         self.__container = container

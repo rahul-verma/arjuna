@@ -18,8 +18,10 @@
 from functools import partial
 from arjuna.tpi.error import *
 from arjuna.core.error import *
+from arjuna.tpi.tracker import track
 from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
 
+@track("debug")
 class GuiEmdFinder:
 
     def __init__(self, gui):
@@ -29,6 +31,7 @@ class GuiEmdFinder:
     def __getattr__(self, name):
         return partial(getattr(self.__automator, name.lower()), self.__gui)
 
+@track("debug")
 class GuiFinder:
 
     def __init__(self, gui):

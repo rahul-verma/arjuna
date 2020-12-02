@@ -17,27 +17,31 @@
 
 from arjuna import *
 
-@test
-def check_relative_locators_coded_basic_find(request, wordpress):
-    user_label = wordpress.element(attr=attr(__for="user_login"))
-    print(user_label.source.content.all) 
-    e = wordpress.element(tags="input", right=user_label)
-    print(e.source.content.all) 
-    e = wordpress.element(tags="input", below=user_label)
-    print(e.source.content.all)  
-    pass_label = wordpress.element(attr=attr(__for="user_pass"))
-    e = wordpress.element(tags="input", above=pass_label)
-    print(e.source.content.all)  
-    e = wordpress.element(classes="button", left=wordpress.element(id="rememberme"))
-    print(e.source.content.all)  
-    e = wordpress.element(tags="*", near=wordpress.element(attr=attr(__for="rememberme")))
-    print(e.source.content.all) 
+
+from arjex.lib.gns_adv.app_page_section.app import WordPress
+
+@for_test
+def wordpress(request):
+    # Setup
+    wordpress = WordPress(section_dir="withx")
+    home = wordpress.launch()
+    yield home
+
+    # Teadown
+    wordpress.quit()
 
 @test
-def check_relative_locators_coded_basic_find_all(request, wordpress):
-    user_label = wordpress.element(attr=attr(__for="user_login"))
+def check_relative_locators_gns_basic_find(request, wordpress):
+    e = wordpress.element(tags="input", right=wordpress.gns.user_label)
+    print(e.source.content.all)
+    e = wordpress.gns.rel_input_1
+    print(e.source.content.all)
+
+@test
+def check_relative_locators_gns_find_all(request, wordpress):
+    user_label = wordpress.multi_element(tags="*", below=wordpress.gns.user_label)
     print(user_label.source.content.all) 
-    elems = wordpress.multi_element(tags="*", below=user_label).elements
+    elems = wordpress.gns.rel_all_1
     for e in elems:
         print(e.source.content.root)  
 

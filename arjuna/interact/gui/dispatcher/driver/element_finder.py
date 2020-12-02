@@ -70,6 +70,7 @@ class ElementFinder:
                 else:
                     return elements[0]
         except Exception as e:
+            print(e.__class__, e)
             raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue))
 
 

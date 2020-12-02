@@ -29,7 +29,7 @@ prop_dict_msg = {
     "fdel": ("(Deleting Property)","", ""),
 }
 
-def trim_arg(arg, max_len=100):
+def trim_arg(arg, max_len=300):
     arg = str(arg)
     return len(arg) > max_len and arg[0:max_len] + "<SNIP>" or arg
 
@@ -47,7 +47,7 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
     from arjuna import log_error
     name = func.__name__
     qualname = func.__qualname__
-    if name != "__init__":
+    if name not in {"__init__", "__getattr__"}:
         level = name.startswith("_") and "trace" or level
     log_call = getattr(arjuna, "log_{}".format(level.strip().lower()))
     if name != qualname and not static:
@@ -59,6 +59,8 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
         msg_1 = prop_dict_msg[prop_type][0]
         msg_2 = prop_dict_msg[prop_type][1].format(pvargs, kwargs)
         log_call("{} {}{}".format(qualname, msg_1, msg_2))
+    elif name == "__getattr__":
+        log_call("{} Dynamic attr retrieval.".format(qualname.replace("__getattr__", pvargs[0])))
     else:
         log_call("{}:: Started with args {} and kwargs {}.".format(qualname, trim_args(pvargs), trim_kwargs(kwargs)))
     ret = None
@@ -73,6 +75,8 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
             msg_1 = prop_dict_msg[prop_type][0]
             msg_3 = prop_dict_msg[prop_type][2].format(ret)
             log_call("{}:: Finished.{}".format(qualname, msg_3, msg_3))
+        elif name == "__getattr__":
+            log_call("{} Dynamic attr value: {}.".format(qualname.replace("__getattr__", pvargs[0]), trim_ret_value(ret)))
         else:
             log_call("{}:: Finished. Returning: {}".format(qualname, trim_ret_value(ret)))
         return ret

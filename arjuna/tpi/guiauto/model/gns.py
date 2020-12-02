@@ -4,6 +4,9 @@ from arjuna.tpi.error import *
 from arjuna.core.error import *
 from arjuna.interact.gui.auto.finder import GuiEmdFinder, GuiElementEmdFinder
 
+from arjuna import track
+
+@track("debug")
 class GNS:
     '''
         Gui Namespace object associated with a **Gui** or **GuiElement**.

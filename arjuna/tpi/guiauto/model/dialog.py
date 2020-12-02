@@ -20,6 +20,9 @@ from .gui import Gui
 from .section import GuiSection
 from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 
+from arjuna import track
+
+@track("debug")
 class GuiDialog(GuiSection):
     '''
         Represents a GUI Dialog. Can be associated with a **GuiApp** or **GuiPage**.
