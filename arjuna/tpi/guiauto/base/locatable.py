@@ -52,7 +52,7 @@ class Locatable:
     @property
     def located_with(self):
         '''
-            Identifier which located this Locatable. Useful to know if multiple identifiers are present in GuiWidgetLocator.
+            Identifier which located this Locatable. Useful to know if multiple identifiers are present in GuiWidgetDefinition.
         '''
         return self.__located_with
 

@@ -51,7 +51,7 @@ class _GuiPartialElement(GuiElement):
 
 class GuiMultiElement(AsserterMixIn, IterableAsserterMixin, Locatable,_Dispatchable):
     '''
-        Represents multiple GuiElements found using a same GuiWidgetLocator.
+        Represents multiple GuiElements found using a same GuiWidgetDefinition.
 
         Not meant to be directly created. It is created using calls from **Gui** object or **GuiNamespace** object of **Gui**.
 

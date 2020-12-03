@@ -15,13 +15,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
+from arjuna.tpi.guiauto.meta.locator import GuiWidgetDefinition
 from arjuna.tpi.tracker import track
 
 @track("debug")
 class GNSLabelFormatter:
     '''
-        Formattter for the GuiWidgetLocator associated with a GNS Label.
+        Formattter for the GuiWidgetDefinition associated with a GNS Label.
 
         It is not created directly by a test author. Created using **.format** call of GNS object associated with a **Gui**.
 
@@ -29,7 +29,7 @@ class GNSLabelFormatter:
             gns: Gui Namespace object
 
         Keyword Arguments:
-            **fargs: Arbitrary key-value pairs to format the GuiWidgetLocator associated with a GNS Label.
+            **fargs: Arbitrary key-value pairs to format the GuiWidgetDefinition associated with a GNS Label.
 
         Note:
             Supports **.** notation for a **GuiWidgetLabel** just like a **GNS** object. For example:
@@ -63,9 +63,9 @@ class GNSLabelFormatter:
         return self.__gns._locate_with_wmd(fmt_wmd)
 
 @track("debug")
-class GuiWidgetLocatorFormatter:
+class GuiWidgetDefinitionFormatter:
     '''
-        Formattter for a GuiWidgetLocator created by GuiWidget factory methods.
+        Formattter for a GuiWidgetDefinition created by GuiWidget factory methods.
 
         It is not created directly by a test author. Created using **.format** call of a **Gui** or **GuiElement**.
 
@@ -73,7 +73,7 @@ class GuiWidgetLocatorFormatter:
             creator: **Gui** or **GuiElement**
 
         Keyword Arguments:
-            **fargs: Arbitrary key-value pairs to format the GuiWidgetLocator associated with a GNS Label.
+            **fargs: Arbitrary key-value pairs to format the GuiWidgetDefinition associated with a GNS Label.
 
         Note:
             Supports all GuiWidget factory method calls:
@@ -92,19 +92,19 @@ class GuiWidgetLocatorFormatter:
         self.__creator = creator
         self.__fargs = fargs
 
-    def locator(type="element", **kwargs) -> GuiWidgetLocator:
+    def locator(type="element", **kwargs) -> GuiWidgetDefinition:
         '''
-            Create a GuiWidgetLocator.
+            Create a GuiWidgetDefinition.
 
             Keyword Arguments:
                 type: type of GuiWidget (element, multi_element, dropdown, radio_group)
-                **kwargs: Arbitrary key-value pairs used to construct a **GuiWidgetLocator**
+                **kwargs: Arbitrary key-value pairs used to construct a **GuiWidgetDefinition**
 
             Returns:
-                A `GuiWidgetLocator` as per the arguments to this call and format arugments of this GuiWidgetLocatorFormatter.
+                A `GuiWidgetDefinition` as per the arguments to this call and format arugments of this GuiWidgetDefinitionFormatter.
 
             Note:
-                The format key-value pairs of this `GuiWidgetLocatorFormatter` are used to format the identifiers in the constructed **GuiWidgetLocator**.
+                The format key-value pairs of this `GuiWidgetDefinitionFormatter` are used to format the identifiers in the constructed **GuiWidgetDefinition**.
         '''        
 
     def locate(self, type="element", **kwargs):
@@ -113,15 +113,15 @@ class GuiWidgetLocatorFormatter:
 
             Keyword Arguments:
                 type: type of GuiWidget (element, multi_element, dropdown, radio_group)
-                **kwargs: Arbitrary key-value pairs used to construct a **GuiWidgetLocator**
+                **kwargs: Arbitrary key-value pairs used to construct a **GuiWidgetDefinition**
 
             Returns:
                 An object of type `GuiWidget`. Exact object type depends on the value of **type** attribute. 
 
             Note:
-                The format key-value pairs of this `GuiWidgetLocatorFormatter` are used to format the identifiers in the constructed **GuiWidgetLocator**.
+                The format key-value pairs of this `GuiWidgetDefinitionFormatter` are used to format the identifiers in the constructed **GuiWidgetDefinition**.
         '''
-        return self.__creator.locate(GuiWidgetLocator(type=type, fmt_args=self.__fargs, **kwargs))
+        return self.__creator.locate(GuiWidgetDefinition(type=type, fmt_args=self.__fargs, **kwargs))
 
     def __getattr__(self, factory):
         if factory not in self._FACTORIES:

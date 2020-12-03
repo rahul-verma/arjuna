@@ -59,7 +59,7 @@ class GuiWidgetForLabelPresentError(Exception):
 
 class GuiWidgetPresentError(Exception):
     '''
-        Raised when a GuiWidget is unexpectedly found using a GuiWidgetLocator object. Involves Dynamic Waiting for absence.
+        Raised when a GuiWidget is unexpectedly found using a GuiWidgetDefinition object. Involves Dynamic Waiting for absence.
     '''
 
     def __init__(self, gui, wmd, message=None):
@@ -78,7 +78,7 @@ class GuiWidgetForLabelNotPresentError(Exception):
 
 class GuiWidgetNotPresentError(Exception):
     '''
-        Raised when a GuiWidget is NOT found using a GuiWidgetLocator object. Involves Dynamic Waiting for presence.
+        Raised when a GuiWidget is NOT found using a GuiWidgetDefinition object. Involves Dynamic Waiting for presence.
     '''
 
     def __init__(self, gui, wmd, message=None):
@@ -128,9 +128,9 @@ class GuiLabelNotPresentError(Exception):
         super().__init__("Gui namespace >{}< does not contain element with name: {}{}. {}.".format(gns_name, label, context_msg, msg))
 
 
-class GuiWidgetLocatorDefinitionError(Exception):
+class GuiWidgetDefinitionError(Exception):
     '''
-        Raised when there is a problem in the way GuiWidgetLocator is specified in the arguments.
+        Raised when there is a problem in the way GuiWidgetDefinition is specified in the arguments.
     '''
 
     def __init__(self, msg):

@@ -24,7 +24,7 @@ from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
 from arjuna.tpi.helper.arjtype import Dictable
 
 from arjuna.interact.gui.gom.guidef import *
-from arjuna.tpi.guiauto.meta.formatter import GuiWidgetLocatorFormatter
+from arjuna.tpi.guiauto.meta.formatter import GuiWidgetDefinitionFormatter
 from arjuna.tpi.engine.asserter import AsserterMixIn
 
 from arjuna.core.poller.conditions import *
@@ -83,8 +83,8 @@ class GuiAppContent(Gui, ScreenShooter):
         return self.__automator.network_recorder
 
     def send_keys(self, key_chord):
-        from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
-        locator = GuiWidgetLocator(tags="body")
+        from arjuna.tpi.guiauto.meta.locator import GuiWidgetDefinition
+        locator = GuiWidgetDefinition(tags="body")
         body = self.locate(locator)
         body.send_keys(key_chord)
 
@@ -151,14 +151,14 @@ class GuiAppContent(Gui, ScreenShooter):
         '''
         return self._automator.browser
 
-    def formatter(self, **fargs) -> GuiWidgetLocatorFormatter:
+    def formatter(self, **fargs) -> GuiWidgetDefinitionFormatter:
         '''
-            Create a :class:`~arjuna.tpi.guiauto.meta.formatter.GuiWidgetLocatorFormatter` object.
+            Create a :class:`~arjuna.tpi.guiauto.meta.formatter.GuiWidgetDefinitionFormatter` object.
 
             Keyword Arguments:
-                **fargs: Arbitrary key-value pairs to be used for formatting identifiers in `GuiWidgetLocator`.
+                **fargs: Arbitrary key-value pairs to be used for formatting identifiers in `GuiWidgetDefinition`.
         '''
-        return GuiWidgetLocatorFormatter(self, **fargs)
+        return GuiWidgetDefinitionFormatter(self, **fargs)
 
     def _wait_until_absent(self, wmd):
         try:
@@ -171,16 +171,16 @@ class GuiAppContent(Gui, ScreenShooter):
             Wait until a **GuiWidget** is absent.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(**kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(**kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Note:
                 By default Wait is done until **ArjunaOption.GUIAUTO_MAX_WAIT** in the **Configuration** object associated with this **GuiAppContent**.
 
                 You can pass **max_wait** argument to change this. Value is considered in seconds.
         '''
-        from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
-        wmd = GuiWidgetLocator(fmt_args=fargs, **kwargs)._as_wmd()
+        from arjuna.tpi.guiauto.meta.locator import GuiWidgetDefinition
+        wmd = GuiWidgetDefinition(fmt_args=fargs, **kwargs)._as_wmd()
         self._wait_until_absent(wmd)
 
     def contains(self, *, fargs=None, **kwargs):
@@ -188,8 +188,8 @@ class GuiAppContent(Gui, ScreenShooter):
             Check whether this **GuiAppContent** object contains a **GuiWidget**. Includes dynamic waiting.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(**kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(**kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Note:
                 By default Wait is done until **ArjunaOption.GUIAUTO_MAX_WAIT** in the **Configuration** object associated with this **GuiAppContent**.
@@ -272,10 +272,10 @@ class GuiAppContent(Gui, ScreenShooter):
            Locate a `GuiWidget`.
 
            Arguments:
-            locator: `GuiWidgetLocator` object.
+            locator: `GuiWidgetDefinition` object.
 
             Returns:
-                An object of type `GuiWidget`. Exact object type depends on the value of **type** attribute in `GuiWidgetLocator`. 
+                An object of type `GuiWidget`. Exact object type depends on the value of **type** attribute in `GuiWidgetDefinition`. 
         '''
         return self._finder.locate(locator)
 
@@ -284,8 +284,8 @@ class GuiAppContent(Gui, ScreenShooter):
             Locate a `GuiElement`.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Returns:
                 `GuiElement` object.
@@ -297,8 +297,8 @@ class GuiAppContent(Gui, ScreenShooter):
             Locate a `GuiMultiElement`.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Returns:
                 `GuiMultiElement` object.
@@ -310,8 +310,8 @@ class GuiAppContent(Gui, ScreenShooter):
             Locate a `GuiDropDown`.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Returns:
                 `GuiDropDown` object.
@@ -323,8 +323,8 @@ class GuiAppContent(Gui, ScreenShooter):
             Locate a `GuiRadioGroup`
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Returns:
                 `GuiRadioGroup` object

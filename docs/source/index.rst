@@ -265,10 +265,10 @@ Web GUI Automation
         * :py:class:`GuiSection <arjuna.tpi.guiauto.model.section.GuiSection>`
         * :py:class:`GuiDialog <arjuna.tpi.guiauto.model.dialog.GuiDialog>`
 * Defining and formatting Gui Widget Locators:
-    * :py:class:`GuiWidgetLocator <arjuna.tpi.guiauto.meta.locator.GuiWidgetLocator>`
-    * Classes related to formatting of **GuiWidgetLocator**:
+    * :py:class:`GuiWidgetDefinition <arjuna.tpi.guiauto.meta.locator.GuiWidgetDefinition>`
+    * Classes related to formatting of **GuiWidgetDefinition**:
         * :py:class:`GNSLabelFormatter <arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter>`
-        * :py:class:`GuiWidgetLocatorFormatter <arjuna.tpi.guiauto.meta.formatter.GuiWidgetLocatorFormatter>`
+        * :py:class:`GuiWidgetDefinitionFormatter <arjuna.tpi.guiauto.meta.formatter.GuiWidgetDefinitionFormatter>`
 * Different Gui Widgets
     * :py:class:`GuiElement <arjuna.tpi.guiauto.widget.element.GuiElement>`
     * :py:class:`GuiMultiElement <arjuna.tpi.guiauto.widget.multielement.GuiMultiElement>`
@@ -388,7 +388,7 @@ Arjuna Exceptions
     * :py:class:`TestGroupsFileNotFoundError <arjuna.tpi.error.TestGroupsFileNotFoundError>`
     * :py:class:`UndefinedTestGroupError <arjuna.tpi.error.UndefinedTestGroupError>`
 * Gui Automation
-    * :py:class:`GuiWidgetLocatorDefinitionError <arjuna.tpi.error.GuiWidgetLocatorDefinitionError>`
+    * :py:class:`GuiWidgetDefinitionError <arjuna.tpi.error.GuiWidgetDefinitionError>`
     * :py:class:`GuiWidgetForLabelPresentError <arjuna.tpi.error.GuiWidgetForLabelPresentError>`
     * :py:class:`GuiWidgetPresentError <arjuna.tpi.error.GuiWidgetPresentError>`
     * :py:class:`GuiWidgetForLabelNotPresentError <arjuna.tpi.error.GuiWidgetForLabelNotPresentError>`

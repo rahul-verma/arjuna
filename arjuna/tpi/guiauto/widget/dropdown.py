@@ -16,7 +16,7 @@
 # limitations under the License.
 
 from arjuna.interact.gui.auto.finder.wmd import SimpleGuiWidgetMetaData
-from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
+from arjuna.tpi.guiauto.meta.locator import GuiWidgetDefinition
 
 from arjuna.tpi.guiauto.source.element import GuiElementSource
 from arjuna.tpi.tracker import track
@@ -44,7 +44,7 @@ class GuiDropDown:
         self._wrapped_main_element = self.__finder._wmd_finder.element(wmd)
         self.__found = False
         self.__options = None
-        self.__option_locator = self._wmd.meta.option_locator is not None and self._wmd.meta.option_locator or GuiWidgetLocator(type="multi_element", tags="option")
+        self.__option_locator = self._wmd.meta.option_locator is not None and self._wmd.meta.option_locator or GuiWidgetDefinition(type="multi_element", tags="option")
 
         # It is seen in some websites like Bootstrap based that both select and options are children of a main div element.
         self.__option_container_same_as_select = self._wmd.meta.option_container_locator is None and True or False
@@ -178,7 +178,7 @@ class GuiDropDown:
             
             Waits for clickability.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         option = self.__options.first_selected_element
         return option.text

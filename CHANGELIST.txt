@@ -52,14 +52,16 @@ Future Themes (In-Progress or Planned):
     - Support for OR relationship among different values of same locator type - coded as well as GNS.
     - Support for Relative Locators
         - Coded - Added at App/Page level.
-        - GNS Support added - Can provide label from same GNS file. Fallback/App GNS?
+        - GNS Support added - Can provide label from same GNS file.
+        - Coded - widget call can be used to provide as relationship rather than existing element.
+        - GNS supports chain of relation: label1 -> label2 -> label3
         - When multiple locators are provided with an OR relationship, relations are applied to each one of them.
         - In GNS the relationship labels can contain Arjuna placeholders and then the parent label can be formaated as usual using gns.formatter call.
 
 1.1.29
 ------
     - Rearranged locator docs to place coded and GNS entries next to each other.
-    - Added GuiWidgetLocatorDefinitionError as an exception to TPI.
+    - Added GuiWidgetDefinitionError as an exception to TPI.
     - Added support for .local files for the following: (if present these files override the corresponding regular config files.)
         - project.local.yaml
         - data.local.yaml
@@ -649,7 +651,7 @@ FIX: Dispatcher issue in MultiElement when created using filters.
 - Added doc strings for:
     - Gui, GuiAppContent, GuiApp, GuiPage, GuiSection, GuiDialog
     - SingleGuiWidget, Locatable, GuiElement. GuiMultiElement, GuiDropDown, GuiRadioGroup
-    - Gui Locator Formatter, GuiWidgetLocator, Dictable
+    - Gui Locator Formatter, GuiWidgetDefinition, Dictable
     - GNS, GNS Formtter
     - GuiSource, SingleEntityGuiSource, GuiPageSource, GuiElementSource, GuiMultiElementSource
     - Image

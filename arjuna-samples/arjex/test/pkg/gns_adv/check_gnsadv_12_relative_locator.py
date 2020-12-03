@@ -50,6 +50,16 @@ def check_relative_locators_gns_basic_find(request, home):
     print(e.source.content.all)
 
 @test
+def check_relative_locators_gns_widget(request, home):
+    raise Exception("Not supported yet. Relations can only use labels in GNS.")
+
+@test
+def check_relative_locators_gns_chain(request, home):
+    e = home.gns.rel_input_chain
+    print(e.source.content.all)
+
+
+@test
 def check_relative_locators_gns_find_all(request, home):
     user_label = home.multi_element(tags="*", below=home.gns.user_label)
     print(user_label.source.content.all) 

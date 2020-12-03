@@ -173,6 +173,23 @@ labels:
       tags: input
       left_of: user_label
 
+  second_level:
+    title: "Powered by WordPress"
+
+  first_level:
+    tags: label
+    below: second_level
+
+  rel_input_chain:
+    tags: input
+    below: first_level
+
+  rel_input_2:
+      tags: input
+      below:     
+        attr:
+          for: user_login
+
   rel_all_1:
       tags: "*"
       below: user_label

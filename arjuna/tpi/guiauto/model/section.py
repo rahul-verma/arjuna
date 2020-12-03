@@ -61,12 +61,12 @@ class GuiSection(GuiAppContent):
         return self.__root_element
 
     def __determine_root(self, root_init):
-        from arjuna import GuiWidgetLocator
+        from arjuna import GuiWidgetDefinition
         root_label = None
         root_gns = self._gui_def.root_element_name
         if root_init:
             # root in __init__ as a Locator instead of GNS Label
-            if isinstance(root_init, GuiWidgetLocator):
+            if isinstance(root_init, GuiWidgetDefinition):
                 root_label = "anonymous"
             else:
                 root_label = root_init
@@ -117,10 +117,10 @@ class GuiSection(GuiAppContent):
            Locate a GuiWidget.
 
            Arguments:
-            locator: `GuiWidgetLocator` object.
+            locator: `GuiWidgetDefinition` object.
 
             Returns:
-                An object of type `GuiWidget`. Exact object type depends on the value of **type** attribute in `GuiWidgetLocator`. 
+                An object of type `GuiWidget`. Exact object type depends on the value of **type** attribute in `GuiWidgetDefinition`. 
         '''
         return self.__get_caller("locate")(fargs=fargs, **kwargs)
 
@@ -129,8 +129,8 @@ class GuiSection(GuiAppContent):
             Locate a `GuiElement`.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Returns:
                 `GuiElement` object.
@@ -142,8 +142,8 @@ class GuiSection(GuiAppContent):
             Locate a `GuiMultiElement`.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Returns:
                 `GuiMultiElement` object.
@@ -155,8 +155,8 @@ class GuiSection(GuiAppContent):
             Locate a `GuiDropDown`.
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Returns:
                 `GuiDropDown` object.
@@ -168,8 +168,8 @@ class GuiSection(GuiAppContent):
             Locate a `GuiRadioGroup`
 
             Keyword Arguments:
-                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetLocator`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
-                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetLocator`
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
 
             Returns:
                 `GuiRadioGroup` object

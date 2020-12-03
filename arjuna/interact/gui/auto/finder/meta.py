@@ -94,12 +94,12 @@ class Meta:
             del temp_dict["relations"]
 
         from arjuna.tpi.guiauto.base.single_widget import SingleGuiWidget
-        from arjuna.tpi.error import GuiWidgetLocatorDefinitionError
+        from arjuna.tpi.error import GuiWidgetDefinitionError
 
         for k,v in self.__mdict["relations"].items():
             if isinstance(v, SingleGuiWidget):
                 self.__mdict["relations"][k] = v.dispatcher.driver_element
-                # raise GuiWidgetLocatorDefinitionError("Relations must point to an already found GuiElement. Provided: {}".format(v))
+                # raise GuiWidgetDefinitionError("Relations must point to an already found GuiElement. Provided: {}".format(v))
 
         self.__mdict["settings"] = InteractionConfig(temp_dict) # Interconfig keys are removed
         log_debug("Meta dictionary is: {}".format(self.__mdict))

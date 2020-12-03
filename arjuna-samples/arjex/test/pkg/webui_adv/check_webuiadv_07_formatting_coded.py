@@ -39,15 +39,15 @@ def check_fmt_coded_fmt_locate(request, logged_in_wordpress):
 
 @test
 def check_fmt_config_coded_locate(request, logged_in_wordpress):
-    logged_in_wordpress.locate(GuiWidgetLocator(link="$C.link.name$")).click()
+    logged_in_wordpress.locate(GuiWidgetDefinition(link="$C.link.name$")).click()
 
 @test
 def check_fmt_reference_coded_locate(request, logged_in_wordpress):
-    logged_in_wordpress.locate(GuiWidgetLocator(link="$R.links.test1.navlink$")).click()
+    logged_in_wordpress.locate(GuiWidgetDefinition(link="$R.links.test1.navlink$")).click()
 
 @test
 def check_fmt_reference_l10n_coded_locate(request, logged_in_wordpress):
-    logged_in_wordpress.locate(GuiWidgetLocator(link="$L.links.posting$")).click()
+    logged_in_wordpress.locate(GuiWidgetDefinition(link="$L.links.posting$")).click()
 
 
 # Node formatting

@@ -19,7 +19,7 @@ from functools import partial
 from arjuna.tpi.error import *
 from arjuna.core.error import *
 from arjuna.tpi.tracker import track
-from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
+from arjuna.tpi.guiauto.meta.locator import GuiWidgetDefinition
 
 @track("debug")
 class GuiEmdFinder:
@@ -38,12 +38,33 @@ class GuiFinder:
         self.__wmd_finder = GuiEmdFinder(gui)
         self.__gui = gui
 
+    def __process_widgetdef_in_relations(self, wmd):
+        from arjuna import log_debug        
+        from arjuna.core.error import ArjunaTimeoutError
+        from arjuna.tpi.error import GuiWidgetNotPresentError
+        log_debug("Processing GuiWidgetDefinition relationships for GuiWidgetMetaData: {} in gui: {}".format(wmd, self.__gui))
+        for k,v in wmd.meta.relations.items():
+            from arjuna import GuiWidgetDefinition
+            if isinstance(v, GuiWidgetDefinition):
+                log_debug("Triggering locating operation for GuiWidgetDefinition {} in relations dict.".format(v))
+                rwmd = v._as_wmd()
+                rwmd = self.__process_widgetdef_in_relations(rwmd)
+                log_debug("Finding element with wmd: {}.".format(rwmd))
+                try:
+                    wmd.meta.relations[k] = getattr(self.__wmd_finder, rwmd.meta["type"].name.lower())(rwmd).dispatcher.driver_element
+                except ArjunaTimeoutError:
+                    raise GuiWidgetNotPresentError(self.__gui, rwmd) 
+                #  = self.locate(v).dispatcher.driver_element
+                log_debug("Replaced relation {} with corresponding GuiElement in relations dict.".format(k))               
+        return wmd
+
     def locate(self, locator):
         from arjuna import log_debug
         from arjuna.core.error import ArjunaTimeoutError
         from arjuna.tpi.error import GuiWidgetNotPresentError
         
         wmd = locator._as_wmd()
+        wmd = self.__process_widgetdef_in_relations(wmd)
         log_debug("Finding element with wmd: {}.".format(wmd))
         try:
             return getattr(self.__wmd_finder, wmd.meta["type"].name.lower())(wmd)
@@ -52,7 +73,7 @@ class GuiFinder:
 
     def __locate_interim(self, name):
         def finder(fargs=None, **kwargs):
-            locator = GuiWidgetLocator(type=name, fmt_args=fargs, **kwargs)
+            locator = GuiWidgetDefinition(type=name, fmt_args=fargs, **kwargs)
             return self.locate(locator)
         return finder
 
@@ -96,7 +117,7 @@ class GuiElementFinder:
 
     def __locate_interim(self, name):
         def finder(fargs=None, **kwargs):
-            locator = GuiWidgetLocator(type=name, fmt_args=None, **kwargs)
+            locator = GuiWidgetDefinition(type=name, fmt_args=None, **kwargs)
             return self.locate(locator)
         return finder
 

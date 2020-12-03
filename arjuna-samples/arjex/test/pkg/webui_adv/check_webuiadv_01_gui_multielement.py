@@ -37,7 +37,7 @@ def check_multielement_coded_using_locate(request, logged_in_wordpress):
     wordpress.element(link="Posts").click()
     wordpress.element(link="Categories").click()
 
-    check_boxes = wordpress.locate(GuiWidgetLocator(type="multi_element", name="delete_tags[]"))
+    check_boxes = wordpress.locate(GuiWidgetDefinition(type="multi_element", name="delete_tags[]"))
     check_boxes[1].check()
     check_boxes[1].uncheck()
     check_boxes.first_element.uncheck()
@@ -51,6 +51,6 @@ def check_multielement_assertions(request, logged_in_wordpress):
     wordpress.element(link="Posts").click()
     wordpress.element(link="Categories").click()
 
-    check_boxes = wordpress.locate(GuiWidgetLocator(type="multi_element", name="delete_tags[]"))
+    check_boxes = wordpress.locate(GuiWidgetDefinition(type="multi_element", name="delete_tags[]"))
     check_boxes.assert_not_empty(msg="Checkboxes should not be empty")
     check_boxes.assert_size(2, msg="Checkboxes should be 2 in number in current setup.")

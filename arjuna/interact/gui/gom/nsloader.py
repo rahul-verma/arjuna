@@ -205,7 +205,7 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
 
         common_withx = Arjuna.get_withx_ref()
 
-        from arjuna.tpi.error import GuiWidgetLocatorDefinitionError
+        from arjuna.tpi.error import GuiWidgetDefinitionError
         for label, label_map in yaml.get_section("labels").as_map().items():
             log_debug("Loading label: " + label)
             Validator.name(label)
@@ -215,10 +215,10 @@ class YamlGnsLoader(BaseGuiNamespaceLoader):
                     loc, loc_obj = entry, label_map[entry]
                 elif type(label_map) is list:
                     if type(entry) is not dict or len(entry) != 1:
-                        raise GuiWidgetLocatorDefinitionError("The GNS entry for label {} is not correctly formatted. For list content type, each list item should be a single item dictionary. Found: {}".format(label, label_map))
+                        raise GuiWidgetDefinitionError("The GNS entry for label {} is not correctly formatted. For list content type, each list item should be a single item dictionary. Found: {}".format(label, label_map))
                     loc, loc_obj = list(entry.keys())[0], list(entry.values())[0]
                 else:
-                    raise GuiWidgetLocatorDefinitionError("The GNS entry for label {} is not correctly formatted. The content should either be a YAML mapping or YAML list. Found: {}".format(label, label_map))
+                    raise GuiWidgetDefinitionError("The GNS entry for label {} is not correctly formatted. The content should either be a YAML mapping or YAML list. Found: {}".format(label, label_map))
                 log_debug("Loading locator: " + loc)
                 loc = loc.lower()
                 wtype, wvalue = None, None

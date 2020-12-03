@@ -29,8 +29,15 @@ def check_relative_locators_coded_basic_find(request, wordpress):
     e = wordpress.element(tags="input", above=pass_label)
     print(e.source.content.all)  
     e = wordpress.element(classes="button", right_of=wordpress.element(id="rememberme"))
-    print(e.source.content.all)  
+    print(e.source.content.all)     
     e = wordpress.element(tags="*", near=wordpress.element(attr=attr(__for="rememberme")))
+    print(e.source.content.all) 
+
+@test
+def check_relative_locators_coded_widget(request, wordpress):
+    e = wordpress.element(tags="input", below=widget(text="Username"))
+    print(e.source.content.all) 
+    e = wordpress.element(tags="input", below=widget(tags="label", below=widget(title='Powered by WordPress')))
     print(e.source.content.all) 
 
 @test

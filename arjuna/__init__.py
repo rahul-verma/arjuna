@@ -98,7 +98,9 @@ from arjuna.tpi.data.record import *
 from arjuna.tpi.data.generator import Random, Locales, generator, composite, composer
 from arjuna.tpi.data.entity import data_entity
 
-from arjuna.tpi.guiauto.meta.locator import GuiWidgetLocator
+from arjuna.tpi.guiauto.meta.locator import GuiWidgetDefinition
+gui_widget_def = GuiWidgetDefinition
+widget = GuiWidgetDefinition
 from arjuna.tpi.guiauto.model.app import GuiApp
 from arjuna.tpi.guiauto.model.page import GuiPage
 from arjuna.tpi.guiauto.model.section import GuiSection

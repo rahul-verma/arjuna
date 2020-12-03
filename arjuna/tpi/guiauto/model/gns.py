@@ -74,7 +74,7 @@ class GNS:
             Create a :class:`~arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter` object.
 
             Keyword Arguments:
-                **fargs: Arbitrary key-value pairs to be used for formatting identifiers in **GuiWidgetLocator**.
+                **fargs: Arbitrary key-value pairs to be used for formatting identifiers in **GuiWidgetDefinition**.
         '''
         return GNSLabelFormatter(self, **fargs)
 

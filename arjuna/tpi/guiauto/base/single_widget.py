@@ -95,7 +95,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability. Waits for click to succeed.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.__wait_until_clickable_if_configured()
         self._interactions.Click().wait()
@@ -110,7 +110,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.__wait_until_clickable_if_configured()
         self.__only_hover()
@@ -121,7 +121,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.__only_hover()
         self.__wait_until_clickable_if_configured()
@@ -133,7 +133,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.__wait_until_clickable_if_configured()
         self.dispatcher.double_click()
@@ -150,7 +150,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability. Click happens only if it is currently deselected.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.__conditional_selected_state_click(False)
 
@@ -160,7 +160,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability. Click happens only if it is currently selected.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.__conditional_selected_state_click(True)
 
@@ -168,7 +168,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
         '''
             Wait until visibility of this Gui Widget.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self._conditions.IsVisible().wait()
 
@@ -176,7 +176,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
         '''
             Wait for clickability of this Gui Widget.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self._conditions.IsClickable().wait()
 
@@ -184,7 +184,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
         '''
             Wait for selected state of this Gui Widget.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self._conditions.IsSelected().wait()
 
@@ -242,7 +242,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability. Waits for text to be set as expected.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         return self.source.content.text
 
@@ -270,7 +270,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
            Waits for clickability. **Click on GuiWidget is NOT executed before send keys operation**.
 
-           **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+           **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.__wait_until_clickable_if_configured()
         self._only_enter_text(text)
@@ -281,7 +281,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
            Waits for clickability. **Click on GuiWidget is NOT executed before send keys operation**.
 
-           **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+           **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         keys = ""
         for key in key_chord._parts:
@@ -296,7 +296,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
            Waits for clickability. **Click on GuiWidget is executed before send keys operation**.
 
-           **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+           **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.__wait_until_clickable_if_configured()
         self._only_click()
@@ -321,7 +321,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability. Click happens only if it is currently unchecked.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.select()
 
@@ -331,7 +331,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability. Click happens only if it is currently checked.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.deselect()
 
@@ -341,7 +341,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             Waits for clickability. Waits for click to succeed.
 
-            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetLocator or GNS file.
+            **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
         self.click()
 

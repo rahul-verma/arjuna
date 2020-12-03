@@ -36,4 +36,4 @@ def check_basic_identifiers_factory(request, wordpress):
 
 @test
 def check_basic_identifiers_using_locate(request, wordpress):
-    wordpress.locate(GuiWidgetLocator(id="user_login"))
+    wordpress.locate(GuiWidgetDefinition(id="user_login"))
