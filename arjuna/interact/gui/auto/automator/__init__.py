@@ -219,33 +219,25 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
 
     #### Element Finding
 
-    def __process_labels_in_relations(self, gui, wmd):
-        for k,v in wmd.meta.relations.items():
-            if type(v) is str:
-                log_debug("Triggering locating operation for label {} in relations dict.".format(k))
-                wmd.meta.relations[k] = getattr(gui.gns, v).dispatcher.driver_element
-                log_debug("Replaced label {} with corresponding GuiElement in relations dict.".format(k))
-        return wmd
-
     def element(self, gui, wmd):
         from arjuna.tpi.guiauto.widget.element import GuiElement
-        gui_element = GuiElement(gui, self.__process_labels_in_relations(gui, wmd)) 
+        gui_element = GuiElement(gui, wmd) 
         self._load_element(gui_element)
         return gui_element
 
     def multi_element(self, gui, wmd):
         from arjuna.tpi.guiauto.widget.multielement import GuiMultiElement
-        m_guielement = GuiMultiElement(gui, self.__process_labels_in_relations(gui, wmd))
+        m_guielement = GuiMultiElement(gui, wmd)
         self._load_multielement(m_guielement)
         return m_guielement
 
     def dropdown(self, gui, wmd):
         from arjuna.tpi.guiauto.widget.dropdown import GuiDropDown
-        return GuiDropDown(gui, self.__process_labels_in_relations(gui, wmd))
+        return GuiDropDown(gui, wmd)
 
     def radio_group(self, gui, wmd):
         from arjuna.tpi.guiauto.widget.radio_group import GuiRadioGroup
-        return GuiRadioGroup(gui, self.__process_labels_in_relations(gui, wmd))
+        return GuiRadioGroup(gui, wmd)
 
     def execute_javascript(self, js, *args):
         return self.browser.execute_javascript(js, 

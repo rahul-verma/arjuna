@@ -128,7 +128,19 @@ class GNS:
                 return True
         return False
 
+    def __process_labels_in_relations(self, wmd):
+        from arjuna import log_debug
+        log_debug("Processing relationship for GuiWidgetMetaData: {} in gui: {}".format(wmd, self.__gui))
+        for k,v in wmd.meta.relations.items():
+            from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
+            if type(v) is str:
+                log_debug("Triggering locating operation for label {} in relations dict.".format(k))
+                wmd.meta.relations[k] = getattr(self, v).dispatcher.driver_element
+                log_debug("Replaced label {} with corresponding GuiElement in relations dict.".format(k))               
+        return wmd
+
     def _locate_with_wmd(self, wmd):
+        wmd = self.__process_labels_in_relations(wmd)
         factory = getattr(self.__finder, wmd.meta["type"].name.lower())
         return factory(wmd)
 

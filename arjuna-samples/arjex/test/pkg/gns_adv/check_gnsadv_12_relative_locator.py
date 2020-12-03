@@ -21,56 +21,68 @@ from arjuna import *
 from arjex.lib.gns_adv.app_page_section.app import WordPress
 
 @for_test
-def wordpress(request):
+def home(request):
     # Setup
-    wordpress = WordPress(section_dir="withx")
+    wordpress = WordPress(section_dir="simple")
     home = wordpress.launch()
     yield home
 
     # Teadown
     wordpress.quit()
 
+@for_module
+def dashboard(request):
+    # Setup
+    wordpress = WordPress(section_dir="simple")
+    home = wordpress.launch()
+    dashboard = home.login_with_default_creds()
+    yield dashboard
+
+    # Teadown
+    dashboard.top_nav.logout()
+    wordpress.quit()
+
 @test
-def check_relative_locators_gns_basic_find(request, wordpress):
-    e = wordpress.element(tags="input", right=wordpress.gns.user_label)
+def check_relative_locators_gns_basic_find(request, home):
+    e = home.element(tags="input", right=home.gns.user_label)
     print(e.source.content.all)
-    e = wordpress.gns.rel_input_1
+    e = home.gns.rel_input_1
     print(e.source.content.all)
 
 @test
-def check_relative_locators_gns_find_all(request, wordpress):
-    user_label = wordpress.multi_element(tags="*", below=wordpress.gns.user_label)
+def check_relative_locators_gns_find_all(request, home):
+    user_label = home.multi_element(tags="*", below=home.gns.user_label)
     print(user_label.source.content.all) 
-    elems = wordpress.gns.rel_all_1
+    elems = home.gns.rel_all_1
     for e in elems:
         print(e.source.content.root)  
 
 @test
-def check_relative_locators_coded_or(request, wordpress):
-    pass_label = wordpress.element(attr=attr(__for="user_pass"))
-    e = wordpress.element(name="wrong", id="wrong", tags="input", above=pass_label)
+def check_relative_locators_gns_or(request, home):
+    e = home.gns.rel_or
     print(e.source.content.all) 
 
 @test
-def check_relative_locators_coded_table_find(request, logged_in_wordpress):
-    wordpress = logged_in_wordpress
-    wordpress.element(link="Pages").click()
-
-    test1 = wordpress.element(link="Test1")
-    date_col = wordpress.element(id="date")
-    test1_date = wordpress.element(classes="column-date", left=test1, below=date_col)
+def check_relative_locators_gns_table_find(request, dashboard):
+    pages = dashboard.left_nav.pages_page
+    # test1 = pages.gns.formatter(text="Test1").page_name
+    # date_col = pages.gns.formatter(col="date").column
+    test1_date = pages.gns.published
     print(test1_date.source.content.all)
 
-    test1 = wordpress.element(link="Test1", right=test1_date)
-    print(test1.source.content.all)
-
-    elems = wordpress.multi_element(classes="column-date", right=wordpress.element(link="Sample Page"), below=date_col).elements
+    elems = pages.gns.dates.elements
     for e in elems:
         print(e.source.content.all)  
 
+@test
+def check_relative_locators_gns_formatter(request, dashboard):
+    pages = dashboard.left_nav.pages_page
+    test1_date = pages.gns.formatter(ltext="Test1", col="date").published_dyn
+    print(test1_date.source.content.all)
+
 
 @test
-def check_relative_locators_coded_nested(request, wordpress):
+def check_relative_locators_gns_nested(request, wordpress):
     raise Exception("Not supported by Selenium and hence in Arjuna yet.")
     # # Locate the form and then all input elements
 

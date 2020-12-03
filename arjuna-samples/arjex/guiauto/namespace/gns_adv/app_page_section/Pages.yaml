@@ -1,0 +1,28 @@
+labels:
+
+  page_name:
+    link: Test1
+
+  column:
+    id: date
+    
+  published:
+    classes: column-date
+    right_of: page_name
+    below: column
+
+  dates:
+    type: multi_element
+    classes: column-date
+    below: column
+
+  dyn_page_name:
+    link: $ltext$
+
+  dyn_column:
+    id: $col$
+    
+  published_dyn:
+    classes: column-date
+    right_of: dyn_page_name
+    below: dyn_column

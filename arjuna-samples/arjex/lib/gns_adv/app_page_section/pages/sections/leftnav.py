@@ -30,6 +30,12 @@ class LeftNav(WPBaseGuiSection):
         self.gns.settings.click()
         return Settings(self)
 
+    @property
+    def pages_page(self):
+        from arjex.lib.gns_adv.app_page_section.pages.pages import Pages
+        self.gns.pages.click()
+        return Pages(self)
+
 
 class LeftNavCodedRootLabel(WPBaseGuiSection):
     

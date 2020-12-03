@@ -36,8 +36,8 @@ class ElementFinder:
     RELATION_MAP = {
         "above": "above",
         "below": "below",
-        "right": "to_left_of",
-        "left": "to_right_of",
+        "right_of": "to_right_of",
+        "left_of": "to_left_of",
         "near": "near",
     }
     
@@ -70,7 +70,6 @@ class ElementFinder:
                 else:
                     return elements[0]
         except Exception as e:
-            print(e.__class__, e)
             raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue))
 
 

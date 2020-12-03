@@ -21,14 +21,14 @@ from arjuna import *
 def check_relative_locators_coded_basic_find(request, wordpress):
     user_label = wordpress.element(attr=attr(__for="user_login"))
     print(user_label.source.content.all) 
-    e = wordpress.element(tags="input", right=user_label)
+    e = wordpress.element(tags="input", left_of=user_label)
     print(e.source.content.all) 
     e = wordpress.element(tags="input", below=user_label)
     print(e.source.content.all)  
     pass_label = wordpress.element(attr=attr(__for="user_pass"))
     e = wordpress.element(tags="input", above=pass_label)
     print(e.source.content.all)  
-    e = wordpress.element(classes="button", left=wordpress.element(id="rememberme"))
+    e = wordpress.element(classes="button", right_of=wordpress.element(id="rememberme"))
     print(e.source.content.all)  
     e = wordpress.element(tags="*", near=wordpress.element(attr=attr(__for="rememberme")))
     print(e.source.content.all) 
@@ -54,16 +54,15 @@ def check_relative_locators_coded_table_find(request, logged_in_wordpress):
 
     test1 = wordpress.element(link="Test1")
     date_col = wordpress.element(id="date")
-    test1_date = wordpress.element(classes="column-date", left=test1, below=date_col)
+    test1_date = wordpress.element(classes="column-date", right_of=test1, below=date_col)
     print(test1_date.source.content.all)
 
-    test1 = wordpress.element(link="Test1", right=test1_date)
+    test1 = wordpress.element(link="Test1", left_of=test1_date)
     print(test1.source.content.all)
 
-    elems = wordpress.multi_element(classes="column-date", right=wordpress.element(link="Sample Page"), below=date_col).elements
+    elems = wordpress.multi_element(classes="column-date", right_of=wordpress.element(link="Sample Page"), below=date_col).elements
     for e in elems:
         print(e.source.content.all)  
-
 
 @test
 def check_relative_locators_coded_nested(request, wordpress):
@@ -73,7 +72,7 @@ def check_relative_locators_coded_nested(request, wordpress):
     # # Level 1 - Element from App
     # form = wordpress.element(id="loginform")
 
-    # e = form.element(classes="button", left=wordpress.element(id="rememberme"))
+    # e = form.element(classes="button", right_of=wordpress.element(id="rememberme"))
     # print(e.source.content.all)
 
     # # Level 2 - MultiElement in Element

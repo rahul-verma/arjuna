@@ -171,9 +171,15 @@ labels:
 
   rel_input_1:
       tags: input
-      right: user_label
+      left_of: user_label
 
   rel_all_1:
       tags: "*"
       below: user_label
       type: multi_element
+
+  rel_or:
+      name: wrong
+      id: wrong
+      tags: input
+      above: pass_label

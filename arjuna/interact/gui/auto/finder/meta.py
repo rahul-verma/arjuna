@@ -84,7 +84,7 @@ class Meta:
         self.__mdict["relations"] = dict()
         to_remove = list()
         for k,v in temp_dict.items():
-            if k.lower() in {'above', 'below', 'left', 'right', 'near'}:
+            if k.lower() in {'above', 'below', 'left_of', 'right_of', 'near'}:
                 self.__mdict["relations"][k.lower()] = v 
                 to_remove.append(k)
         for k in to_remove:

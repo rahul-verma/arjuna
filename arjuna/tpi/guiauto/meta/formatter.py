@@ -49,6 +49,17 @@ class GNSLabelFormatter:
         from arjuna import log_debug
         log_debug("Finding element with label: {}, wmd: {} and fargs: {}".format(name, wmd, self.__fargs))
         fmt_wmd = wmd.create_formatted_wmd(**self.__fargs)
+        for k,v in fmt_wmd.meta.relations.items():
+            from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
+            print(">>>>>>>>>", k, v)
+            if type(v) is str:
+                log_debug("Formatting related label {} in relations dict.".format(k))
+                rwmd = self.__gui_def.get_wmd(v)
+                log_debug("Retrieved  GuiWidgetMetaData {} for label {} in relations dict.".format(rwmd, k))
+                log_debug("Formatting with args: {}".format(self.__fargs))
+                frwmd = rwmd.create_formatted_wmd(**self.__fargs)
+                fmt_wmd.meta.relations[k] = self.__gns._locate_with_wmd(frwmd).dispatcher.driver_element
+                log_debug("Replaced label {} with corresponding GuiElement in relations dict.".format(k, frwmd))
         return self.__gns._locate_with_wmd(fmt_wmd)
 
 @track("debug")

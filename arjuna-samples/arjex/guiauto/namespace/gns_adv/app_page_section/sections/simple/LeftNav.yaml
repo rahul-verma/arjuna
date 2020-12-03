@@ -6,6 +6,9 @@ labels:
   settings:
     link: Settings
 
+  pages:
+    link: Pages
+
   first_div:
     xpath: "//div"
 

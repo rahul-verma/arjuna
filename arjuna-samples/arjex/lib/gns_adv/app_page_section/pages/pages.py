@@ -15,16 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna import *
-from .base import WPBaseGuiSection
+from .base import WPFullGuiPage
 
-class LeftNav(WPBaseGuiSection):
+class Pages(WPFullGuiPage):
 
-    def __init__(self, page):
-        super().__init__(page)
-
-    @property
-    def settings_page(self):
-        from arjex.lib.app_page_section.pages.settings import Settings
-        self.gns.settings.click()
-        return Settings(self)
+    pass
