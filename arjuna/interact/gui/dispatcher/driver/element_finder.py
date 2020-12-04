@@ -20,7 +20,10 @@ from selenium.common.exceptions import NoSuchElementException
 from arjuna.tpi.error import *
 from arjuna.core.error import *
 from selenium.webdriver.support.relative_locator import RelativeBy
+from selenium.webdriver.remote.webelement import WebElement
+from arjuna.tpi.tracker import track
 
+@track("debug")
 class ElementFinder:
     BY_MAP = {
         "ID": By.ID,
@@ -63,7 +66,10 @@ class ElementFinder:
             if not relations:
                 return container.find_element(byType, byValue)
             else:
-                # Currently Selenium supports Relative locator only for find_elements
+                # Currently Selenium supports Relative locator only for find_elements and at driver level
+                # For nested element finding change to WebDriver instance if relations are defined.
+                if isinstance(container, WebElement):
+                    container = container.parent
                 elements = container.find_elements(cls.__create_relative_by(byType, byValue, relations))
                 if len(elements) == 0:
                     raise Exception("No elements found.")
@@ -79,6 +85,10 @@ class ElementFinder:
         if not relations:
             elements = container.find_elements(byType, byValue)
         else:
+            # Currently Selenium supports Relative locator only for find_elements and at driver level
+            # For nested element finding change to WebDriver instance if relations are defined.
+            if isinstance(container, WebElement):
+                container = container.parent
             elements = container.find_elements(cls.__create_relative_by(byType, byValue, relations))            
         if len(elements) == 0:
             raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue))

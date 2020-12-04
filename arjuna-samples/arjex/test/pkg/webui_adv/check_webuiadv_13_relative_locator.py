@@ -73,25 +73,25 @@ def check_relative_locators_coded_table_find(request, logged_in_wordpress):
 
 @test
 def check_relative_locators_coded_nested(request, wordpress):
-    raise Exception("Not supported by Selenium and hence in Arjuna yet.")
-    # # Locate the form and then all input elements
+    #raise Exception("Not supported by Selenium and hence in Arjuna yet.")
+    # Locate the form and then all input elements
 
-    # # Level 1 - Element from App
-    # form = wordpress.element(id="loginform")
+    # Level 1 - Element from App
+    form = wordpress.element(id="loginform")
 
-    # e = form.element(classes="button", right_of=wordpress.element(id="rememberme"))
-    # print(e.source.content.all)
+    e = form.element(classes="button", right_of=wordpress.element(id="rememberme"))
+    print(e.source.content.all)
 
-    # # Level 2 - MultiElement in Element
-    # labels = form.multi_element(tags="label", below=form.element(attr=attr(__for="user_login")))
+    # Level 2 - MultiElement in Element
+    labels = form.multi_element(tags="label", below=form.element(attr=attr(__for="user_login")))
 
-    # for label in labels:
-    #     print(label.text)
-    #     print(label.source.content.all)
+    for label in labels:
+        print(label.text)
+        print(label.source.content.all)
 
-    #     # Level 3 - Element in Partial Element
-    #     i = label.element(tags="input")
-    #     print(i.source.content.all)
+        # Level 3 - Element in Partial Element
+        i = label.element(tags="input")
+        print(i.source.content.all)
 
 
 

@@ -71,10 +71,12 @@ class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, SingleGuiWidget):
         return None
 
     def _find_element_with_js(self, js):
-        raise Exception("With.JS is currently not supported for nested element finding.")
+        # Falls back to driver level
+        return self._automator.dispatcher.find_element_with_js(js)
 
     def _find_multielement_with_js(self, js):
-        raise Exception("With.JS is currently not supported for nested element finding.")
+        # Falls back to driver level
+        return self._automator.dispatcher.find_multielement_with_js(js)
 
     def _wait_until_absent(self, wmd):
         try:

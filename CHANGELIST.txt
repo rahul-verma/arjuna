@@ -57,6 +57,9 @@ Future Themes (In-Progress or Planned):
         - GNS supports chain of relation: label1 -> label2 -> label3
         - When multiple locators are provided with an OR relationship, relations are applied to each one of them.
         - In GNS the relationship labels can contain Arjuna placeholders and then the parent label can be formaated as usual using gns.formatter call.
+        - Nested element finding falls back to direct finding with WebDriver as JS execution support exists only at driver level in Selenium.
+    - with.JS and With.Point is supported at element level, however it does not do nested element finding, rather uses driver itself.
+    - The fallback mechanism for JS, Point and Relative locators has been added so that such locators can be defined without issues in GNS files or coded GuiSections which have root element set for them.
 
 1.1.29
 ------
