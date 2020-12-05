@@ -22,7 +22,7 @@ from browsermobproxy.exceptions import ProxyServerError
 
 from .driverelement import SeleniumDriverElementDispatcher
 from arjuna.interact.gui.dispatcher.driver.driver_commands import DriverCommands
-from arjuna.interact.gui.dispatcher.driver.element_finder import ElementFinder
+from arjuna.interact.gui.dispatcher.driver.element_finder import SeleniumElementFinder
 from arjuna.interact.gui.dispatcher.driver.melement import MultiElement
 from selenium.webdriver.remote.webelement import WebElement
 
@@ -123,8 +123,8 @@ class SeleniumDriverDispatcher:
     def take_screenshot_as_base64(self):
         return DriverCommands.take_screenshot_as_base64(self.__driver)
 
-    def find_element(self, with_type, with_value, *, relations=None):
-        element = ElementFinder.find_element(self.__driver, with_type, with_value, relations=relations)
+    def find_element(self, with_type, with_value, *, relations=None, filters=None):
+        element = SeleniumElementFinder.find_element(self.__driver, with_type, with_value, relations=relations, filters=filters)
         return 1, self.__create_gui_element_dispatcher(element)
 
     def __process_single_js_element(self, element):
@@ -159,8 +159,8 @@ class SeleniumDriverDispatcher:
         element = self.__process_js_element(element)
         return 1, self.__create_gui_element_dispatcher(element)
 
-    def find_multielement(self, with_type, with_value, *, relations=None):
-        web_elements = ElementFinder.find_elements(self.__driver, with_type, with_value, relations=relations)
+    def find_multielement(self, with_type, with_value, *, relations=None, filters=None):
+        web_elements = SeleniumElementFinder.find_elements(self.__driver, with_type, with_value, relations=relations, filters=filters)
         melement = MultiElement([SeleniumDriverElementDispatcher(self, web_element) for web_element in web_elements])
         return melement.get_size(), melement
 

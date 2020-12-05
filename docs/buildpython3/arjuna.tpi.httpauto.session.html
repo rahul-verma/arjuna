@@ -1,0 +1,369 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.tpi.httpauto.session module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.tpi.httpauto.session">
+<span id="arjuna-tpi-httpauto-session-module"></span><h1>arjuna.tpi.httpauto.session module<a class="headerlink" href="#module-arjuna.tpi.httpauto.session" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="arjuna.tpi.httpauto.session.HttpSession">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.httpauto.session.</code><code class="sig-name descname">HttpSession</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">url=None</em>, <em class="sig-param">oauth_token=None</em>, <em class="sig-param">request_content_handler=None</em>, <em class="sig-param">headers=None</em>, <em class="sig-param">max_redirects=None</em>, <em class="sig-param">auth=None</em>, <em class="sig-param">proxy=None</em>, <em class="sig-param">_auto_session=True</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Create an HTTP Session. Does automatic cookie management.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>url</strong> – Base URL for this HTTP session. If relative path is used as a route in sender methods like <cite>.get</cite>, then this URL is prefixed to their provided routes.</p></li>
+<li><p><strong>oauth_token</strong> – OAuth 2.0 Bearer token for this session.</p></li>
+<li><p><strong>request_content_handler</strong> – Default content type handler for requests sent in this session. Overridable in individual sender methods. Default is Http.content.urlencoded.</p></li>
+<li><p><strong>headers</strong> – HTTP headers to be added to request headers made by this session.</p></li>
+<li><p><strong>max_redirects</strong> – Maximum number of redirects allowed for a request. Default is 30.</p></li>
+<li><p><strong>auth</strong> – HTTP Authentication object: Basic/Digest.</p></li>
+<li><p><strong>proxy</strong> – Proxies dict to be associated with this session.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.add_cookies">
+<code class="sig-name descname">add_cookies</code><span class="sig-paren">(</span><em class="sig-param">cookie_dict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.add_cookies" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add cookies to the session.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.auth">
+<em class="property">property </em><code class="sig-name descname">auth</code><a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.auth" title="Permalink to this definition">¶</a></dt>
+<dd><p>HTTP Authentication object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.cookies">
+<em class="property">property </em><code class="sig-name descname">cookies</code><a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.cookies" title="Permalink to this definition">¶</a></dt>
+<dd><p>All current cookies in this session object.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.delete">
+<code class="sig-name descname">delete</code><span class="sig-paren">(</span><em class="sig-param">route</em>, <em class="sig-param">label=None</em>, <em class="sig-param">xcodes=None</em>, <em class="sig-param">strict=False</em>, <em class="sig-param">headers=None</em>, <em class="sig-param">cookies=None</em>, <em class="sig-param">allow_redirects=True</em>, <em class="sig-param">auth=None</em>, <em class="sig-param">timeout: float = None</em>, <em class="sig-param">pretty_url=False</em>, <em class="sig-param">query_params=None</em>, <em class="sig-param">**named_query_params</em><span class="sig-paren">)</span> &#x2192; arjuna.tpi.httpauto.response.HttpResponse<a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.delete" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an HTTP DELETE request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>route</strong> – Absolute or relative URL. If relative, then <cite>url</cite> of this session object is pre-fixed.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>label</strong> – Label for this request. If available, it is used in reports and logs.</p></li>
+<li><p><strong>xcodes</strong> – Expected HTTP response code(s).</p></li>
+<li><p><strong>strict</strong> – If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.</p></li>
+<li><p><strong>headers</strong> – Mapping of additional HTTP headers to be sent with this request.</p></li>
+<li><p><strong>cookies</strong> – Python dict of cookies to send with request.</p></li>
+<li><p><strong>allow_redirects</strong> – If True, redirections are allowed for the HTTP message. Default is True.</p></li>
+<li><p><strong>auth</strong> – HTTP Authentication object: Basic/Digest.</p></li>
+<li><p><strong>timeout</strong> – How long to wait for the server to send data before giving up.</p></li>
+<li><p><strong>pretty_url</strong> – If True, the query params are formatted using pretty URL format instead of usual query string which is the default.</p></li>
+<li><p><strong>query_params</strong> – A mapping of key-values to be included in query string.</p></li>
+<li><p><strong>**named_query_params</strong> – Arbitrary key/value pairs. These are appended to the query string of URL for this request.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>query_params</strong> and <strong>named_query_params</strong> have the same goal.
+In case of duplicates, named_query_params override query_params.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.get">
+<code class="sig-name descname">get</code><span class="sig-paren">(</span><em class="sig-param">route</em>, <em class="sig-param">label=None</em>, <em class="sig-param">xcodes=None</em>, <em class="sig-param">strict=False</em>, <em class="sig-param">headers=None</em>, <em class="sig-param">cookies=None</em>, <em class="sig-param">allow_redirects=True</em>, <em class="sig-param">auth=None</em>, <em class="sig-param">timeout: float = None</em>, <em class="sig-param">pretty_url=False</em>, <em class="sig-param">query_params=None</em>, <em class="sig-param">**named_query_params</em><span class="sig-paren">)</span> &#x2192; arjuna.tpi.httpauto.response.HttpResponse<a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.get" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an HTTP GET request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>route</strong> – Absolute or relative URL. If relative, then <cite>url</cite> of this session object is pre-fixed.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>label</strong> – Label for this request. If available, it is used in reports and logs.</p></li>
+<li><p><strong>xcodes</strong> – Expected HTTP response code(s).</p></li>
+<li><p><strong>strict</strong> – If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.</p></li>
+<li><p><strong>headers</strong> – Mapping of additional HTTP headers to be sent with this request.</p></li>
+<li><p><strong>cookies</strong> – Python dict of cookies to send with request.</p></li>
+<li><p><strong>allow_redirects</strong> – If True, redirections are allowed for the HTTP message. Default is True.</p></li>
+<li><p><strong>auth</strong> – HTTP Authentication object: Basic/Digest.</p></li>
+<li><p><strong>timeout</strong> – How long to wait for the server to send data before giving up.</p></li>
+<li><p><strong>pretty_url</strong> – If True, the query params are formatted using pretty URL format instead of usual query string which is the default.</p></li>
+<li><p><strong>query_params</strong> – A mapping of key-values to be included in query string.</p></li>
+<li><p><strong>**named_query_params</strong> – Arbitrary key/value pairs. These are appended to the query string of URL for this request.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>query_params</strong> and <strong>named_query_params</strong> have the same goal.
+In case of duplicates, named_query_params override query_params.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.head">
+<code class="sig-name descname">head</code><span class="sig-paren">(</span><em class="sig-param">route</em>, <em class="sig-param">label=None</em>, <em class="sig-param">xcodes=None</em>, <em class="sig-param">strict=False</em>, <em class="sig-param">headers=None</em>, <em class="sig-param">cookies=None</em>, <em class="sig-param">allow_redirects=True</em>, <em class="sig-param">auth=None</em>, <em class="sig-param">timeout: float = None</em>, <em class="sig-param">pretty_url=False</em>, <em class="sig-param">query_params=None</em>, <em class="sig-param">**named_query_params</em><span class="sig-paren">)</span> &#x2192; arjuna.tpi.httpauto.response.HttpResponse<a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an HTTP HEAD request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>route</strong> – Absolute or relative URL. If relative, then <cite>url</cite> of this session object is pre-fixed.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>label</strong> – Label for this request. If available, it is used in reports and logs.</p></li>
+<li><p><strong>xcodes</strong> – Expected HTTP response code(s).</p></li>
+<li><p><strong>strict</strong> – If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.</p></li>
+<li><p><strong>headers</strong> – Mapping of additional HTTP headers to be sent with this request.</p></li>
+<li><p><strong>cookies</strong> – Python dict of cookies to send with request.</p></li>
+<li><p><strong>allow_redirects</strong> – If True, redirections are allowed for the HTTP message. Default is True.</p></li>
+<li><p><strong>auth</strong> – HTTP Authentication object: Basic/Digest.</p></li>
+<li><p><strong>timeout</strong> – How long to wait for the server to send data before giving up.</p></li>
+<li><p><strong>pretty_url</strong> – If True, the query params are formatted using pretty URL format instead of usual query string which is the default.</p></li>
+<li><p><strong>query_params</strong> – A mapping of key-values to be included in query string.</p></li>
+<li><p><strong>**named_query_params</strong> – Arbitrary key/value pairs. These are appended to the query string of URL for this request.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>query_params</strong> and <strong>named_query_params</strong> have the same goal.
+In case of duplicates, named_query_params override query_params.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.headers">
+<em class="property">property </em><code class="sig-name descname">headers</code><a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.headers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request headers.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.options">
+<code class="sig-name descname">options</code><span class="sig-paren">(</span><em class="sig-param">route</em>, <em class="sig-param">*</em>, <em class="sig-param">content</em>, <em class="sig-param">label=None</em>, <em class="sig-param">xcodes=None</em>, <em class="sig-param">strict=False</em>, <em class="sig-param">headers=None</em>, <em class="sig-param">cookies=None</em>, <em class="sig-param">allow_redirects=True</em>, <em class="sig-param">auth=None</em>, <em class="sig-param">timeout: float = None</em>, <em class="sig-param">pretty_url=False</em>, <em class="sig-param">query_params=None</em>, <em class="sig-param">**named_query_params</em><span class="sig-paren">)</span> &#x2192; arjuna.tpi.httpauto.response.HttpResponse<a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.options" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an HTTP PUT request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>route</strong> – Absolute or relative URL. If relative, then <cite>url</cite> of this session object is pre-fixed.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>label</strong> – Label for this request. If available, it is used in reports and logs.</p></li>
+<li><p><strong>content</strong> – Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - ‘content’ and ‘type’.</p></li>
+<li><p><strong>xcodes</strong> – Expected HTTP response code(s).</p></li>
+<li><p><strong>strict</strong> – If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.</p></li>
+<li><p><strong>headers</strong> – Mapping of additional HTTP headers to be sent with this request.</p></li>
+<li><p><strong>cookies</strong> – Python dict of cookies to send with request.</p></li>
+<li><p><strong>allow_redirects</strong> – If True, redirections are allowed for the HTTP message. Default is True.</p></li>
+<li><p><strong>auth</strong> – HTTP Authentication object: Basic/Digest.</p></li>
+<li><p><strong>timeout</strong> – How long to wait for the server to send data before giving up.</p></li>
+<li><p><strong>pretty_url</strong> – If True, the query params are formatted using pretty URL format instead of usual query string which is the default.</p></li>
+<li><p><strong>query_params</strong> – A mapping of key-values to be included in query string.</p></li>
+<li><p><strong>**named_query_params</strong> – Arbitrary key/value pairs. These are appended to the query string of URL for this request.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>query_params</strong> and <strong>named_query_params</strong> have the same goal.
+In case of duplicates, named_query_params override query_params.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.patch">
+<code class="sig-name descname">patch</code><span class="sig-paren">(</span><em class="sig-param">route</em>, <em class="sig-param">*</em>, <em class="sig-param">content</em>, <em class="sig-param">label=None</em>, <em class="sig-param">xcodes=None</em>, <em class="sig-param">strict=False</em>, <em class="sig-param">headers=None</em>, <em class="sig-param">cookies=None</em>, <em class="sig-param">allow_redirects=True</em>, <em class="sig-param">auth=None</em>, <em class="sig-param">timeout: float = None</em>, <em class="sig-param">pretty_url=False</em>, <em class="sig-param">query_params=None</em>, <em class="sig-param">**named_query_params</em><span class="sig-paren">)</span> &#x2192; arjuna.tpi.httpauto.response.HttpResponse<a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.patch" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an HTTP PUT request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>route</strong> – Absolute or relative URL. If relative, then <cite>url</cite> of this session object is pre-fixed.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>label</strong> – Label for this request. If available, it is used in reports and logs.</p></li>
+<li><p><strong>content</strong> – Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - ‘content’ and ‘type’.</p></li>
+<li><p><strong>xcodes</strong> – Expected HTTP response code(s).</p></li>
+<li><p><strong>strict</strong> – If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.</p></li>
+<li><p><strong>headers</strong> – Mapping of additional HTTP headers to be sent with this request.</p></li>
+<li><p><strong>cookies</strong> – Python dict of cookies to send with request.</p></li>
+<li><p><strong>allow_redirects</strong> – If True, redirections are allowed for the HTTP message. Default is True.</p></li>
+<li><p><strong>auth</strong> – HTTP Authentication object: Basic/Digest.</p></li>
+<li><p><strong>timeout</strong> – How long to wait for the server to send data before giving up.</p></li>
+<li><p><strong>pretty_url</strong> – If True, the query params are formatted using pretty URL format instead of usual query string which is the default.</p></li>
+<li><p><strong>query_params</strong> – A mapping of key-values to be included in query string.</p></li>
+<li><p><strong>**named_query_params</strong> – Arbitrary key/value pairs. These are appended to the query string of URL for this request.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>query_params</strong> and <strong>named_query_params</strong> have the same goal.
+In case of duplicates, named_query_params override query_params.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.post">
+<code class="sig-name descname">post</code><span class="sig-paren">(</span><em class="sig-param">route</em>, <em class="sig-param">*</em>, <em class="sig-param">content</em>, <em class="sig-param">label=None</em>, <em class="sig-param">xcodes=None</em>, <em class="sig-param">strict=False</em>, <em class="sig-param">headers=None</em>, <em class="sig-param">cookies=None</em>, <em class="sig-param">allow_redirects=True</em>, <em class="sig-param">auth=None</em>, <em class="sig-param">timeout: float = None</em>, <em class="sig-param">pretty_url=False</em>, <em class="sig-param">query_params=None</em>, <em class="sig-param">**named_query_params</em><span class="sig-paren">)</span> &#x2192; arjuna.tpi.httpauto.response.HttpResponse<a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.post" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an HTTP POST request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>route</strong> – Absolute or relative URL. If relative, then <cite>url</cite> of this session object is pre-fixed.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>label</strong> – Label for this request. If available, it is used in reports and logs.</p></li>
+<li><p><strong>content</strong> – Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - ‘content’ and ‘type’.</p></li>
+<li><p><strong>xcodes</strong> – Expected HTTP response code(s).</p></li>
+<li><p><strong>strict</strong> – If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.</p></li>
+<li><p><strong>headers</strong> – Mapping of additional HTTP headers to be sent with this request.</p></li>
+<li><p><strong>cookies</strong> – Python dict of cookies to send with request.</p></li>
+<li><p><strong>allow_redirects</strong> – If True, redirections are allowed for the HTTP message. Default is True.</p></li>
+<li><p><strong>auth</strong> – HTTP Authentication object: Basic/Digest.</p></li>
+<li><p><strong>timeout</strong> – How long to wait for the server to send data before giving up.</p></li>
+<li><p><strong>pretty_url</strong> – If True, the query params are formatted using pretty URL format instead of usual query string which is the default.</p></li>
+<li><p><strong>query_params</strong> – A mapping of key-values to be included in query string.</p></li>
+<li><p><strong>**named_query_params</strong> – Arbitrary key/value pairs. These are appended to the query string of URL for this request.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>query_params</strong> and <strong>named_query_params</strong> have the same goal.
+In case of duplicates, named_query_params override query_params.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.put">
+<code class="sig-name descname">put</code><span class="sig-paren">(</span><em class="sig-param">route</em>, <em class="sig-param">*</em>, <em class="sig-param">content</em>, <em class="sig-param">label=None</em>, <em class="sig-param">xcodes=None</em>, <em class="sig-param">strict=False</em>, <em class="sig-param">headers=None</em>, <em class="sig-param">cookies=None</em>, <em class="sig-param">allow_redirects=True</em>, <em class="sig-param">auth=None</em>, <em class="sig-param">timeout: float = None</em>, <em class="sig-param">pretty_url=False</em>, <em class="sig-param">query_params=None</em>, <em class="sig-param">**named_query_params</em><span class="sig-paren">)</span> &#x2192; arjuna.tpi.httpauto.response.HttpResponse<a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.put" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sends an HTTP PUT request.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>route</strong> – Absolute or relative URL. If relative, then <cite>url</cite> of this session object is pre-fixed.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>label</strong> – Label for this request. If available, it is used in reports and logs.</p></li>
+<li><p><strong>content</strong> – Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - ‘content’ and ‘type’.</p></li>
+<li><p><strong>xcodes</strong> – Expected HTTP response code(s).</p></li>
+<li><p><strong>strict</strong> – If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.</p></li>
+<li><p><strong>headers</strong> – Mapping of additional HTTP headers to be sent with this request.</p></li>
+<li><p><strong>cookies</strong> – Python dict of cookies to send with request.</p></li>
+<li><p><strong>allow_redirects</strong> – If True, redirections are allowed for the HTTP message. Default is True.</p></li>
+<li><p><strong>auth</strong> – HTTP Authentication object: Basic/Digest.</p></li>
+<li><p><strong>timeout</strong> – How long to wait for the server to send data before giving up.</p></li>
+<li><p><strong>pretty_url</strong> – If True, the query params are formatted using pretty URL format instead of usual query string which is the default.</p></li>
+<li><p><strong>query_params</strong> – A mapping of key-values to be included in query string.</p></li>
+<li><p><strong>**named_query_params</strong> – Arbitrary key/value pairs. These are appended to the query string of URL for this request.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p><strong>query_params</strong> and <strong>named_query_params</strong> have the same goal.
+In case of duplicates, named_query_params override query_params.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.request_content_handler">
+<em class="property">property </em><code class="sig-name descname">request_content_handler</code><a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.request_content_handler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Request content handler for content formatting.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.send">
+<code class="sig-name descname">send</code><span class="sig-paren">(</span><em class="sig-param">request</em><span class="sig-paren">)</span> &#x2192; arjuna.tpi.httpauto.response.HttpResponse<a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send the provided HttpRequest to server.</p>
+<p>In case of ConnectionError, retries the connection 5 times at a gap of 1 second. Currently, not configurable.</p>
+<dl class="simple">
+<dt>Returns</dt><dd><p><cite>HttpResponse</cite> object. In case of redirections, this is the last HttpResponse object, which encapsulates all redirections which can be retrieved from it.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.httpauto.session.HttpSession.url">
+<em class="property">property </em><code class="sig-name descname">url</code><a class="headerlink" href="#arjuna.tpi.httpauto.session.HttpSession.url" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base URL for this session.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

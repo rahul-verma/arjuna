@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import random
+
 from selenium.webdriver.common.by import By
 from selenium.common.exceptions import NoSuchElementException
 from arjuna.tpi.error import *
@@ -24,7 +26,7 @@ from selenium.webdriver.remote.webelement import WebElement
 from arjuna.tpi.tracker import track
 
 @track("debug")
-class ElementFinder:
+class SeleniumElementFinder:
     BY_MAP = {
         "ID": By.ID,
         "NAME": By.NAME,
@@ -57,39 +59,62 @@ class ElementFinder:
         log_debug("Filters" + str(relative_by.filters))
         return relative_by
         
+    # @classmethod
+    # def find_element(cls, container, byType, byValue, *, relations=None):
+    #     from arjuna import log_debug
+    #     log_debug(f"Finding element in container:{container} with wtype:{byType} and wvalue:{byValue} with relations: {relations}")
+    #     try:
+    #         byType = cls.BY_MAP[byType.upper()]
+    #         if not relations:
+    #             return container.find_element(byType, byValue)
+    #         else:
+    #             # Currently Selenium supports Relative locator only for find_elements and at driver level
+    #             # For nested element finding change to WebDriver instance if relations are defined.
+    #             if isinstance(container, WebElement):
+    #                 container = container.parent
+    #             elements = container.find_elements(cls.__create_relative_by(byType, byValue, relations))
+    #             if len(elements) == 0:
+    #                 raise Exception("No elements found.")
+    #             else:
+    #                 return elements[0]
+    #     except Exception as e:
+    #         raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue))
+
+    _POS = {
+        "first" : 1,
+        "last" : -1
+    }
+
     @classmethod
-    def find_element(cls, container, byType, byValue, *, relations=None):
+    def find_element(cls, container, byType, byValue, *, relations=None, filters=None):
         from arjuna import log_debug
-        log_debug(f"Finding element in container:{container} with wtype:{byType} and wvalue:{byValue} with relations: {relations}")
-        try:
-            byType = cls.BY_MAP[byType.upper()]
-            if not relations:
-                return container.find_element(byType, byValue)
-            else:
-                # Currently Selenium supports Relative locator only for find_elements and at driver level
-                # For nested element finding change to WebDriver instance if relations are defined.
-                if isinstance(container, WebElement):
-                    container = container.parent
-                elements = container.find_elements(cls.__create_relative_by(byType, byValue, relations))
-                if len(elements) == 0:
-                    raise Exception("No elements found.")
-                else:
-                    return elements[0]
-        except Exception as e:
-            raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue))
-
+        log_debug(f"Finding element in container:{container} with wtype:{byType} and wvalue:{byValue} with relations: {relations} and filters: {filters}")
+        elements = cls.find_elements(container, byType, byValue, relations=relations)
+        pos = 1
+        if filters:
+            if 'pos' in filters:
+                pos = filters['pos']
+                if pos in cls._POS:
+                    pos = cls._POS[pos]
+                elif pos == "random":
+                    pos = random.randint(1, len(elements))
+        return elements[pos-1]
 
     @classmethod
-    def find_elements(cls, container, byType, byValue, relations=None):
-        byType = cls.BY_MAP[byType.upper()]
+    def find_elements(cls, container, byType, byValue, *, relations=None, filters=None):
+        from arjuna import log_debug
+        log_debug(f"Finding elements in container:{container} with wtype:{byType} and wvalue:{byValue} with relations: {relations} and filters: {filters}")
+        sbyType = cls.BY_MAP[byType.upper()]
         if not relations:
-            elements = container.find_elements(byType, byValue)
+            elements = container.find_elements(sbyType, byValue)
         else:
             # Currently Selenium supports Relative locator only for find_elements and at driver level
             # For nested element finding change to WebDriver instance if relations are defined.
             if isinstance(container, WebElement):
                 container = container.parent
-            elements = container.find_elements(cls.__create_relative_by(byType, byValue, relations))            
+            rby = cls.__create_relative_by(sbyType, byValue, relations)
+            log_debug("Selenium find_elements call made with RelativeBy: {}".format(rby.to_dict()))
+            elements = container.find_elements(rby)            
         if len(elements) == 0:
-            raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue))
+            raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue), message="No element found for Selenium locator")
         return elements

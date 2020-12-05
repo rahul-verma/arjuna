@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.tpi.engine.test module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.tpi.engine.test">
+<span id="arjuna-tpi-engine-test-module"></span><h1>arjuna.tpi.engine.test module<a class="headerlink" href="#module-arjuna.tpi.engine.test" title="Permalink to this headline">¶</a></h1>
+<dl class="function">
+<dt id="arjuna.tpi.engine.test.skip">
+<code class="sig-prename descclassname">arjuna.tpi.engine.test.</code><code class="sig-name descname">skip</code><span class="sig-paren">(</span><em class="sig-param">condition: bool</em>, <em class="sig-param">*</em>, <em class="sig-param">reason: str = None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.engine.test.skip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builder for a Skip condition.
+Wraps <strong>pytest.mark.skip</strong> and <strong>pytest.mark.skipif</strong></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>condition</strong> – True/False. You can give a condition code evaluating to bool. You can give such code as a string as well. Or the string can be just a statement stating the reason.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>reason</strong> – Why this test is to be skipped.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="arjuna.tpi.engine.test.test">
+<code class="sig-prename descclassname">arjuna.tpi.engine.test.</code><code class="sig-name descname">test</code><span class="sig-paren">(</span><em class="sig-param">f: Callable = None</em>, <em class="sig-param">*</em>, <em class="sig-param">id: str = None</em>, <em class="sig-param">resources: ListOrTuple = None</em>, <em class="sig-param">drive_with: DataSource = None</em>, <em class="sig-param">exclude_if: Relation = None</em>, <em class="sig-param">xfail: boolOrXFail = False</em>, <em class="sig-param">skip: boolOrSkip = False</em>, <em class="sig-param">priority: int = 5</em>, <em class="sig-param">author: str = None</em>, <em class="sig-param">idea: str = None</em>, <em class="sig-param">component: str = None</em>, <em class="sig-param">app_version: str = '0.0.0'</em>, <em class="sig-param">level: str = None</em>, <em class="sig-param">reviewed: bool = False</em>, <em class="sig-param">unstable: bool = False</em>, <em class="sig-param">tags: set = {}</em>, <em class="sig-param">bugs: set = {}</em>, <em class="sig-param">envs: set = {}</em>, <em class="sig-param">**test_attrs</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.engine.test.test" title="Permalink to this definition">¶</a></dt>
+<dd><p>Decorator for marking a function as a test function.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>func</strong> – A Function with signature <strong>f(request)</strong>. The name request is mandatory and enforced.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>id</strong> – Alnum string representing an ID which you want to associate with the test.</p></li>
+<li><p><strong>resources</strong> – Fixtures/Resources that you want to associate this test with. Wraps pytest.mark.usefixtures. Instead of using this, you can also pass the names as direct arguments in the function signature.</p></li>
+<li><p><strong>drive_with</strong> – <p>Used for data driven testing. Argument can be Arjuna Data Source. Wraps <strong>pytest.mark.parametrize</strong>. If you use this argument, the test function signature must include a <strong>data</strong> argument e.g.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@test</span><span class="p">(</span><span class="n">drive_with</span><span class="o">=&lt;</span><span class="n">DS</span><span class="o">&gt;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_sample</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</p></li>
+<li><p><strong>exclude_if</strong> – Define exclusion condition. Argument can be an Arjuna Relation. Wraps <strong>pytest.mark.dependency</strong>.</p></li>
+<li><p><strong>xfail</strong> – Mark this test as a expected fail by setting to True. You can also use helper <cite>xfail()</cite> to create an advanced xfail construct. Wraps <strong>pytest.mark.xfail</strong>.</p></li>
+<li><p><strong>skip</strong> – Mark this test as a expected skipped by setting to True. You can also use helper <cite>skip()</cite> to create an advanced skip construct. Wraps <strong>pytest.mark.skip</strong> and Wraps <strong>pytest.mark.skipif</strong>.</p></li>
+<li><p><strong>priority</strong> – An integer value 1-5 depicting priority of this test, 1 being highest, 5 being lowest.</p></li>
+<li><p><strong>author</strong> – Author of this test</p></li>
+<li><p><strong>idea</strong> – The idea describing this test</p></li>
+<li><p><strong>component</strong> – Primary software component that this test targets.</p></li>
+<li><p><strong>app_version</strong> – Version of SUT that this test targets</p></li>
+<li><p><strong>level</strong> – Level of this test.</p></li>
+<li><p><strong>reviewed</strong> – Has this test been reviewed?</p></li>
+<li><p><strong>unstable</strong> – Is this test unstable?</p></li>
+<li><p><strong>tags</strong> – Set of tags for this test</p></li>
+<li><p><strong>bugs</strong> – Set of bugs associated with this test</p></li>
+<li><p><strong>envs</strong> – Set of Environment names on which this test is supposed to run.</p></li>
+<li><p><strong>**test_attrs</strong> – Arbitrary name-value pairs to provide further test attributes.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The test function name must start with the prefix <strong>check_</strong></p>
+<p>The test function must have the minimum signature as <strong>check_&lt;some_name&gt;(request)</strong> with <strong>request</strong> as the first argument.</p>
+</div>
+</dd></dl>
+
+<dl class="function">
+<dt id="arjuna.tpi.engine.test.xfail">
+<code class="sig-prename descclassname">arjuna.tpi.engine.test.</code><code class="sig-name descname">xfail</code><span class="sig-paren">(</span><em class="sig-param">condition</em>, <em class="sig-param">*</em>, <em class="sig-param">reason: str = 'Expected Failure'</em>, <em class="sig-param">raises: Exception = None</em>, <em class="sig-param">run: bool = True</em>, <em class="sig-param">strict: bool = False</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.engine.test.xfail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Builder for an Expected Failure condition and decisions.
+Directly wraps <strong>pytest.mark.xfail</strong> <a class="reference external" href="https://docs.pytest.org/en/latest/reference.html#pytest-mark-xfail">https://docs.pytest.org/en/latest/reference.html#pytest-mark-xfail</a></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>condition</strong> – True/False. You can give a condition code evaluating to bool. You can give such code as a string as well. The string can be just a statement stating the reason.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>reason</strong> – Why this test is expected to fail. Mandatory if condition is a bool.</p></li>
+<li><p><strong>raises</strong> – Exception subclass expected to be raised by the test function (reported as XFailed); other exceptions will fail the test (reported as Failed).</p></li>
+<li><p><strong>run</strong> – Should this test be executed.</p></li>
+<li><p><strong>strict</strong> – Test Suite will not be marked as a fail if this is False and this test passes or fails. If True, if this test passes, the test suite is marked as fail.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

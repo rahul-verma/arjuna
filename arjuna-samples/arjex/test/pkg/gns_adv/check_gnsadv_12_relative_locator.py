@@ -44,7 +44,7 @@ def dashboard(request):
 
 @test
 def check_relative_locators_gns_basic_find(request, home):
-    e = home.element(tags="input", right=home.gns.user_label)
+    e = home.element(tags="input", below=home.gns.user_label)
     print(e.source.content.all)
     e = home.gns.rel_input_1
     print(e.source.content.all)
@@ -92,26 +92,26 @@ def check_relative_locators_gns_formatter(request, dashboard):
 
 
 @test
-def check_relative_locators_gns_nested(request, wordpress):
-    raise Exception("Not supported by Selenium and hence in Arjuna yet.")
-    # # Locate the form and then all input elements
+def check_relative_locators_gns_nested(request, home):
+    # Locate the form and then all input elements
 
-    # # Level 1 - Element from App
-    # form = wordpress.element(id="loginform")
+    # Level 1 - Element in App
+    form = home.gns.login_form
 
-    # e = form.element(classes="button", left=wordpress.element(id="rememberme"))
-    # print(e.source.content.all)
+    # Level 2 - Element in Element
+    e = form.gns.sbutton
+    print(e.source.content.all)
 
-    # # Level 2 - MultiElement in Element
-    # labels = form.multi_element(tags="label", below=form.element(attr=attr(__for="user_login")))
+    # Level 2 -MultiElement in Element
+    labels = form.gns.labels
 
-    # for label in labels:
-    #     print(label.text)
-    #     print(label.source.content.all)
+    for label in labels:
+        print(label.text)
+        print(label.source.content.all)
 
-    #     # Level 3 - Element in Partial Element
-    #     i = label.element(tags="input")
-    #     print(i.source.content.all)
+        # Level 3 - Element in Partial Element
+        i = label.gns.input
+        print(i.source.content.all)
 
 
 

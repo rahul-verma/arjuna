@@ -1,0 +1,251 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>&lt;no title&gt; &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="../_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="The GuiApp class" href="guiapp.html" />
+    <link rel="prev" title="Introduction" href="../reporting.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="guiapp.html" title="The GuiApp class"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../reporting.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="toctree-wrapper compound" id="guiauto">
+<p class="caption"><span class="caption-text">Contents:</span><a class="headerlink" href="#guiauto" title="Permalink to this toctree">¶</a></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="guiapp.html">The <strong>GuiApp</strong> class</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guiapp.html#launching-a-web-application">Launching a Web Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guiapp.html#associating-a-app-with-a-base-url">Associating a App with a Base URL</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guiapp.html#setting-guiapp-base-url-in-configuration">Setting GuiApp Base URL in Configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="element.html"><strong>Element Identification and Interaction</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="element.html#guielement-and-widgets"><strong>GuiElement and Widgets</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="element.html#identification"><strong>Identification</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="element.html#interaction-with-guielement"><strong>Interaction with GuiElement</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="element.html#automatic-dynamic-waiting"><strong>Automatic Dynamic Waiting</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="element.html#interaction-methods">Interaction Methods</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gns.html"><strong>Gui Namespace - Externalizing Locators</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gns.html#the-gns-file"><strong>The GNS File</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gns.html#associating-gns-file-with-guiapp"><strong>Associating GNS File with GuiApp</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gns.html#using-gns-labels-in-code"><strong>Using GNS Labels in Code</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="gns.html#guiapp-gns-as-fallback-gns-for-pages-sections-and-widgets"><strong>GuiApp GNS</strong> as <strong>Fallback GNS</strong> for Pages, Sections and Widgets</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="locators.html"><strong>GuiWidget Locators</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="locators.html#basic-locators"><strong>Basic Locators</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#id-locator"><strong>id</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#name-locator"><strong>name</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#tags-locator"><strong>tags</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#classes-locator"><strong>classes</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#link-locator"><strong>link</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#flink-locator"><strong>flink</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#xpath-locator"><strong>xpath</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#selector-locator"><strong>selector</strong> Locator</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="locators.html#arjuna-s-locator-extensions"><strong>Arjuna’s Locator Extensions</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#title-locator"><strong>title</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#value-locator"><strong>value</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#id2"><strong>tags</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#id3"><strong>classes</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#point-locator"><strong>point</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#js-locator"><strong>js</strong> Locator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#text-based-locators"><strong>Text Based Locators</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#text-locator"><strong>text</strong> Locator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#ftext-locator"><strong>ftext</strong> Locator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#btext-locator"><strong>btext</strong> Locator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#attribute-based-locators"><strong>Attribute Based Locators</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#attr-locator"><strong>attr</strong> Locator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#fattr-locator"><strong>fattr</strong> Locator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#battr-locator"><strong>battr</strong> Locator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#eattr-locator"><strong>eattr</strong> Locator</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="locators.html#node-definition-based-locators"><strong>Node Definition Based Locators</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#node-locator"><strong>node</strong> Locator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#text-specification-understanding-text-star-text-and-dot-text-keys"><strong>Text Specification</strong>: Understanding <strong>text</strong>, <strong>star_text</strong> and <strong>dot_text</strong> Keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#specifying-multiple-tags-and-multiple-classes-using-tags-and-classes-keys">Specifying <strong>Multiple Tags</strong> and <strong>Multiple Classes</strong> using <strong>tags</strong> and <strong>classes</strong> Keys</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#enforcing-xpath-generation"><strong>Enforcing XPath Generation</strong></a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#fnode-locator"><strong>fnode</strong> Locator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="locators.html#bnode-locator"><strong>bnode</strong> Locator</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="locators.html#alternative-locators-specifying-multiple-locators-with-or-relationship"><strong>Alternative Locators</strong> - Specifying Multiple Locators with <strong>OR Relationship</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="dynamic_locators.html"><strong>Dynamic/Formatted GuiWidget Locators</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_locators.html#arjuna-s-name-placeholder">Arjuna’s <strong>$&lt;name&gt;$</strong> Placeholder</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_locators.html#auto-formatting-using-c-l-r-magic-functions"><strong>Auto-Formatting</strong> using <strong>C,L,R</strong> Magic Functions</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_locators.html#coded"><strong>Coded</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_locators.html#gns"><strong>GNS</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="dynamic_locators.html#formatting-placeholders-using-formatter-method">Formatting Placeholders using <strong>formatter</strong> Method</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_locators.html#id1"><strong>Coded</strong></a></li>
+<li class="toctree-l3"><a class="reference internal" href="dynamic_locators.html#id2"><strong>GNS</strong></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="withx.html"><strong>Defining Your Own Locators</strong> using <strong>withx</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="withx.html#global-locators-in-the-withx-yaml-file"><strong>Global Locators</strong> in The <strong>withx.yaml</strong> File</a></li>
+<li class="toctree-l2"><a class="reference internal" href="withx.html#defining-and-using-a-new-locator-with-anonymous-positional-placeholders"><strong>Defining and Using</strong> a New Locator with <strong>Anonymous/Positional Placeholders</strong> (<strong>$$</strong>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="withx.html#single-placeholder"><strong>Single Placeholder</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#definition">Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#coded">Coded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#gns">GNS</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="withx.html#multiple-placeholders"><strong>Multiple Placeholders</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#id1">Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#id2">Coded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#id3">GNS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="withx.html#defining-and-using-a-new-locator-with-named-placeholders-name"><strong>Defining and Using</strong> a <strong>New Locator</strong> with <strong>Named Placeholders</strong> (<strong>$&lt;name&gt;$</strong>)</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="withx.html#id4"><strong>Single Placeholder</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#id5">Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#id6">Coded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#id7">GNS</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="withx.html#id8"><strong>Multiple Placeholders</strong></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#id9">Definition</a></li>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#id10">Coded</a></li>
+<li class="toctree-l4"><a class="reference internal" href="withx.html#id11">GNS</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="withx.html#defining-new-locator-locally-for-a-given-gui">Defining <strong>New Locator Locally</strong> for a given <strong>Gui</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="withx.html#mixing-anonymous-positional-and-named-name-placeholders"><strong>Mixing Anonymous/Positional ($$) and Named ($&lt;name&gt;$) Placeholders</strong></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="widgets.html">Gui Widgets</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html#guielement"><strong>GuiElement</strong></a></li>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html#guimultielement-handling-multiple-guielements-together"><strong>GuiMultiElement</strong> - Handling Multiple GuiElements Together</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html#defining-and-using-a-guimultielement-in-code">Defining and Using a GuiMultiElement In Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html#defining-guimultielement-in-gns-and-using-it-in-code">Defining GuiMultiElement in GNS and Using it in Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html#interacting-with-guimultielement">Interacting with GuiMultiElement</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html#dropdown-handling-default-html-select"><strong>DropDown</strong> - Handling Default HTML Select</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html#defining-and-using-a-dropdown-in-code">Defining and Using a DropDown In Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html#defining-dropdown-in-gns-and-using-it-in-code">Defining DropDown in GNS and Using it in Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html#interacting-with-dropdown">Interacting with DropDown</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="widgets.html#radiogroup-handling-default-html-radio-group"><strong>RadioGroup</strong> - Handling Default HTML Radio Group</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html#defining-and-using-a-radiogroup-in-code">Defining and Using a RadioGroup In Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html#defining-radiogroup-in-gns-and-using-it-in-code">Defining RadioGroup in GNS and Using it in Code</a></li>
+<li class="toctree-l3"><a class="reference internal" href="widgets.html#interacting-with-radiogroup">Interacting with RadioGroup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="gom.html"><strong>Advanced Gui Abstractions</strong></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="gom.html#concept-of-gui-in-arjuna">Concept of <strong>Gui</strong> in Arjuna</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gom.html#the-guiapp-class">The <strong>GuiApp</strong> Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gom.html#the-guipage-class">The <strong>GuiPage</strong> Class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gom.html#the-guisection-class">The <strong>GuiSection</strong> Class</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gom.html#gui-abstraction-models"><strong>Gui Abstraction Models</strong></a><ul>
+<li class="toctree-l3"><a class="reference internal" href="gom.html#app-model-using-app-class"><strong>App Model</strong> using App class</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gom.html#app-page-model-using-guiapp-and-guipage-classes"><strong>App-Page Model</strong> using GuiApp and GuiPage Classes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gom.html#app-page-section-model-using-guiapp-guipage-and-guisection-classes"><strong>App-Page-Section Model</strong> using GuiApp, GuiPage and GuiSection Classes</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="gom.html#arjuna-s-gui-loading-model"><strong>Arjuna’s Gui Loading Model</strong></a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="../index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="../reporting.html" title="previous chapter">Introduction</a>
+          <li>Next: <a href="guiapp.html" title="next chapter">The <strong>GuiApp</strong> class</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="../_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

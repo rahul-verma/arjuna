@@ -1,0 +1,373 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introduction &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="textparsing.html" />
+    <link rel="prev" title="Advanced Gui Abstractions" href="guiauto/gom.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="textparsing.html" title="Introduction"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="guiauto/gom.html" title="Advanced Gui Abstractions"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<span id="httpauto"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Test automation at the HTTP layer in case of web applications and services is increasingly becoming popular and rightly so.</p>
+<p>At HTTP layer, you get faster and more stable test automation.</p>
+<p>Arjuna supports writing tests at this layer by wrapping various related Python modules (primarily <cite>requests</cite> and <cite>requests_oauthlib</cite>), all in one framework.</p>
+<p><strong>Note</strong> This is currently a beta quality feature. The TPI for the classes and functions is fairly finalized, but prone to minor changes and extensions.</p>
+</div>
+<div class="section" id="the-http-facade-class">
+<h1>The <strong>Http Facade Class</strong><a class="headerlink" href="#the-http-facade-class" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna provides you with <a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http" title="arjuna.tpi.httpauto.http.Http"><code class="xref py py-class docutils literal notranslate"><span class="pre">Http</span></code></a> as the facade class to start with HTTP automation.</p>
+<p>Its features include sending various HTTP method requests, creating a session of requests, handling content types and so on.</p>
+</div>
+<div class="section" id="supported-http-methods">
+<h1>Supported <strong>HTTP Methods</strong><a class="headerlink" href="#supported-http-methods" title="Permalink to this headline">¶</a></h1>
+<dl class="simple">
+<dt>Currently the following HTTP methods/verbs are supported:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.get" title="arjuna.tpi.httpauto.http.Http.get"><code class="xref py py-func docutils literal notranslate"><span class="pre">GET</span></code></a></p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.post" title="arjuna.tpi.httpauto.http.Http.post"><code class="xref py py-func docutils literal notranslate"><span class="pre">POST</span></code></a></p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.put" title="arjuna.tpi.httpauto.http.Http.put"><code class="xref py py-func docutils literal notranslate"><span class="pre">PUT</span></code></a></p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.delete" title="arjuna.tpi.httpauto.http.Http.delete"><code class="xref py py-func docutils literal notranslate"><span class="pre">DELETE</span></code></a></p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.head" title="arjuna.tpi.httpauto.http.Http.head"><code class="xref py py-func docutils literal notranslate"><span class="pre">HEAD</span></code></a></p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.options" title="arjuna.tpi.httpauto.http.Http.options"><code class="xref py py-func docutils literal notranslate"><span class="pre">OPTIONS</span></code></a></p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.patch" title="arjuna.tpi.httpauto.http.Http.patch"><code class="xref py py-func docutils literal notranslate"><span class="pre">PATCH</span></code></a></p></li>
+</ul>
+</dd>
+</dl>
+<p>Simulating a request with a given HTTP method is achieved by making correspindingly named methods in <a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http" title="arjuna.tpi.httpauto.http.Http"><code class="xref py py-class docutils literal notranslate"><span class="pre">Http</span></code></a>.</p>
+<p>Following are some basic examples of these calls:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Http</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://another.com/api/res/someid&quot;</span><span class="p">)</span>
+<span class="c1"># With relative route. Base/Default URL of Session is prefixed.</span>
+<span class="n">Http</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/res/someid&quot;</span><span class="p">)</span>
+
+<span class="n">Http</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="s2">&quot;/res/someid&quot;</span><span class="p">)</span>
+
+<span class="c1"># Content sent as URL encoded</span>
+<span class="n">Http</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/res&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;a&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+<span class="n">Http</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/res&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;a&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">})</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>All types of requests return an <code class="xref py py-class docutils literal notranslate"><span class="pre">HttpResponse</span></code> object, which can be inquired to validate or extract data.</p>
+<p>You can set custom headers and content type for invidual requests. Explore the <a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http" title="arjuna.tpi.httpauto.http.Http"><code class="xref py py-class docutils literal notranslate"><span class="pre">Http</span></code></a> class documentation.</p>
+</div>
+<div class="section" id="handling-content-types">
+<h1>Handling <strong>Content Types</strong><a class="headerlink" href="#handling-content-types" title="Permalink to this headline">¶</a></h1>
+<p>By default the content is URL encoded.</p>
+<dl class="simple">
+<dt>Http class provides various content specifiers. You can use any of the following:</dt><dd><ul class="simple">
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.html" title="arjuna.tpi.httpauto.http.Http.content.html"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.html</span></code></a>: Content-Type is sent as “text/html”.</p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.text" title="arjuna.tpi.httpauto.http.Http.content.text"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.text</span></code></a>: Content-Type is sent as “text/html”.</p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.bytes" title="arjuna.tpi.httpauto.http.Http.content.bytes"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.bytes</span></code></a>: Content-Type is sent as “text/html”.</p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.utf8" title="arjuna.tpi.httpauto.http.Http.content.utf8"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.utf8</span></code></a>: Content-Type is sent as “text/html”.</p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.urlencoded" title="arjuna.tpi.httpauto.http.Http.content.urlencoded"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.urlencoded</span></code></a>: Content-Type is sent as “application/x-www-form-urlencoded”.</p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.json" title="arjuna.tpi.httpauto.http.Http.content.json"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.json</span></code></a>: Content-Type is sent as “application/json”.</p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.xml" title="arjuna.tpi.httpauto.http.Http.content.xml"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.xml</span></code></a>: Content-Type is sent as “application/xml”.</p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.file" title="arjuna.tpi.httpauto.http.Http.content.file"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.file</span></code></a>: Content-Type is sent as the content type got from multipart encoding.</p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.multipart" title="arjuna.tpi.httpauto.http.Http.content.multipart"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.multipart</span></code></a>: Content-Type is sent as the content type got from multipart encoding.</p></li>
+<li><p><a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.content.custom" title="arjuna.tpi.httpauto.http.Http.content.custom"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.content.custom</span></code></a>: Content-Type is sent as specified.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Following is a simple example of sending JSON content:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Content sent as serialized JSON</span>
+<span class="n">Http</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s2">&quot;/res&quot;</span><span class="p">,</span> <span class="n">content</span><span class="o">=</span><span class="n">Http</span><span class="o">.</span><span class="n">content</span><span class="o">.</span><span class="n">json</span><span class="p">({</span><span class="s1">&#39;a&#39;</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="creating-an-http-session">
+<h1>Creating an <strong>HTTP Session</strong><a class="headerlink" href="#creating-an-http-session" title="Permalink to this headline">¶</a></h1>
+<p>Beyond basic automation, you will need to send requests as a part of the same session so that cookie management is done automatically for you.</p>
+<p>Along with this you also get other benefits in the form of common settings across all requests that are sent as a part of this session.</p>
+<p>You can create a new session using <a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http.session" title="arjuna.tpi.httpauto.http.Http.session"><code class="xref py py-func docutils literal notranslate"><span class="pre">Http.session</span></code></a> method to create an object of <a class="reference internal" href="arjuna.tpi.httpauto.session.html#arjuna.tpi.httpauto.session.HttpSession" title="arjuna.tpi.httpauto.session.HttpSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">HttpSession</span></code></a>.</p>
+<p>It supports all the HTTP methods that are supported by <a class="reference internal" href="arjuna.tpi.httpauto.http.html#arjuna.tpi.httpauto.http.Http" title="arjuna.tpi.httpauto.http.Http"><code class="xref py py-class docutils literal notranslate"><span class="pre">Http</span></code></a> class.</p>
+<p>Following is an example of the most basic construct for creating an HttpSession:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">svc</span> <span class="o">=</span> <span class="n">Http</span><span class="o">.</span><span class="n">session</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://svc.com/api&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The <strong>url</strong> argument sets the base/default URL for this HttpSession. If relative path is used as a route in sender methods like <cite>get()</cite>, then this URL is prefixed to their provided routes.</p>
+<p>You can add request headers, add OAuth bearer token, set default content handler and so on. Explore the <a class="reference internal" href="arjuna.tpi.httpauto.session.html#arjuna.tpi.httpauto.session.HttpSession" title="arjuna.tpi.httpauto.session.HttpSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">HttpSession</span></code></a> class documentation.</p>
+</div>
+<div class="section" id="setting-a-request-label">
+<h1>Setting a <strong>Request Label</strong><a class="headerlink" href="#setting-a-request-label" title="Permalink to this headline">¶</a></h1>
+<p>All session request methods accept a <cite>label</cite> argument. This is used in reports and logging to give a user-defined representation of an HTTP request.</p>
+<p>Following are basic examples of these calls:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">svc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/api/res/someid&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Authorization Request&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="setting-arbitrary-query-string-parmaters-in-url">
+<h1>Setting <strong>Arbitrary Query String Parmaters</strong> in URL<a class="headerlink" href="#setting-arbitrary-query-string-parmaters-in-url" title="Permalink to this headline">¶</a></h1>
+<p>A common need in HTTP automation is to set the query parameters in the URL.</p>
+<p>One can ofcourse do it with Python string formatting. However, Arjuna makes it easier fpr url-encoded params, the most commonly used format.</p>
+<p>You can achieve this for all types of session requests. Following is a get example, where arbitrary key-value arguments are passed to become query parameters:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">svc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://app.com/somepath&quot;</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">something</span><span class="o">=</span><span class="s2">&quot;test&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>In the above example, the URL will be</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>https://another.com/somepath?a=1&amp;something=test
+</pre></div>
+</div>
+</div></blockquote>
+<p>Sometimes, the names in query string are not valid Python names and hence can not be passed as keyword arguments. You can use <strong>quer_params</strong> argument in such situations.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">svc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://app.com/somepath&quot;</span><span class="p">,</span> <span class="n">query_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;nonpy-name&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;something&#39;</span><span class="p">:</span><span class="s2">&quot;test&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>If used in combinations, the keyword arugments will override the values in <strong>query_params</strong></p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">svc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://app.com/somepath&quot;</span><span class="p">,</span> <span class="n">query_params</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;something&#39;</span><span class="p">:</span><span class="s2">&quot;test&quot;</span><span class="p">},</span> <span class="n">a</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>In the above case, the value of a will be 2:</p>
+<blockquote>
+<div><div class="highlight-text notranslate"><div class="highlight"><pre><span></span>https://another.com/somepath?a=2&amp;something=test
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="checking-expected-http-status-code-s">
+<h1>Checking <strong>Expected HTTP Status Code(s)</strong><a class="headerlink" href="#checking-expected-http-status-code-s" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="inquiring">
+<h2><strong>Inquiring</strong><a class="headerlink" href="#inquiring" title="Permalink to this headline">¶</a></h2>
+<p>Status code can be easily inquired:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">svc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/obj/someid&quot;</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="asserting">
+<h2><strong>Asserting</strong><a class="headerlink" href="#asserting" title="Permalink to this headline">¶</a></h2>
+<p>You can also assert status codes by inquiring <cite>HttpResponse</cite> object as follows:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">response</span> <span class="o">=</span> <span class="n">svc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/obj/someid&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">assert_status_codes</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Your context string&quot;</span><span class="p">)</span>
+<span class="n">response</span><span class="o">.</span><span class="n">assert_status_codes</span><span class="p">({</span><span class="mi">200</span><span class="p">,</span> <span class="mi">404</span><span class="p">},</span> <span class="n">msg</span><span class="o">=</span><span class="s2">&quot;Your context string&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="xcodes-argument">
+<h2><strong>xcodes</strong> Argument<a class="headerlink" href="#xcodes-argument" title="Permalink to this headline">¶</a></h2>
+<p>You can set a session request to raise an <cite>HttpUnexpectedStatusCode</cite> exception if expected status code is not got:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">svc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/obj/someid&quot;</span><span class="p">,</span> <span class="n">xcodes</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="xcodes-argument-in-strict-mode">
+<h2><strong>xcodes</strong> Argument in <strong>strict</strong> Mode<a class="headerlink" href="#xcodes-argument-in-strict-mode" title="Permalink to this headline">¶</a></h2>
+<p>You can set a session request to raise an <cite>AssertionError</cite> exception if expected status code is not got:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">svc</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;/obj/someid&quot;</span><span class="p">,</span> <span class="n">xcodes</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="the-httpresponse-object">
+<h1>The <strong>HttpResponse</strong> Object<a class="headerlink" href="#the-httpresponse-object" title="Permalink to this headline">¶</a></h1>
+<p>If a session request is successful it returns an <code class="xref py py-class docutils literal notranslate"><span class="pre">HttpResponse</span></code> object.</p>
+<p>It provides you with various properties to assert or extract data.</p>
+<div class="section" id="basic-data-extraction">
+<h2>Basic <strong>Data Extraction</strong><a class="headerlink" href="#basic-data-extraction" title="Permalink to this headline">¶</a></h2>
+<p>You can easily extract the following data using response properties:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1">#Response headers</span>
+<span class="n">response</span><span class="o">.</span><span class="n">headers</span>
+
+<span class="c1"># Status Code</span>
+<span class="n">response</span><span class="o">.</span><span class="n">status_code</span>
+
+<span class="c1"># Status Message</span>
+<span class="n">response</span><span class="o">.</span><span class="n">status</span>
+
+<span class="c1"># Request Information</span>
+<span class="c1"># In case of redirects, this is for the last request</span>
+<span class="n">response</span><span class="o">.</span><span class="n">request</span>
+<span class="n">response</span><span class="o">.</span><span class="n">url</span>
+<span class="n">response</span><span class="o">.</span><span class="n">query_params</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="redirections">
+<h2><strong>Redirections</strong><a class="headerlink" href="#redirections" title="Permalink to this headline">¶</a></h2>
+<p>An <code class="xref py py-class docutils literal notranslate"><span class="pre">HttpResponse</span></code> object maintains all redirect history.</p>
+<p>You can get a sequence of all redirect <code class="xref py py-class docutils literal notranslate"><span class="pre">HttpResponse</span></code> objects using <cite>redir_history</cite> property.</p>
+<p>You can get the last redirect response using <cite>last_redir_response</cite> property.</p>
+</div>
+<div class="section" id="handling-response-content">
+<h2>Handling <strong>Response Content</strong><a class="headerlink" href="#handling-response-content" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>You can get formatted as well as un-formatted response content using following properties:</dt><dd><ul class="simple">
+<li><p><cite>text</cite>: Unformatted content as plain text</p></li>
+<li><p><cite>html</cite>: Response as an <a class="reference internal" href="arjuna.tpi.parser.html.html#arjuna.tpi.parser.html.HtmlNode" title="arjuna.tpi.parser.html.HtmlNode"><code class="xref py py-class docutils literal notranslate"><span class="pre">HtmlNode</span></code></a> object.</p></li>
+<li><p><cite>json</cite>: Response as a <a class="reference internal" href="arjuna.tpi.parser.json.html#arjuna.tpi.parser.json.JsonDict" title="arjuna.tpi.parser.json.JsonDict"><code class="xref py py-class docutils literal notranslate"><span class="pre">JsonDict</span></code></a> or <a class="reference internal" href="arjuna.tpi.parser.json.html#arjuna.tpi.parser.json.JsonList" title="arjuna.tpi.parser.json.JsonList"><code class="xref py py-class docutils literal notranslate"><span class="pre">JsonList</span></code></a> object.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Check <strong>Parsing JSON, XML, HTML Files and Strings</strong> section in documentation to know more about how to parse and extract data from these content type.</p>
+</div>
+</div>
+<div class="section" id="support-for-open-authentication-oauth">
+<h1>Support for <strong>Open Authentication (OAuth)</strong><a class="headerlink" href="#support-for-open-authentication-oauth" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna supports the following OAuth grant types with its custom HTTP session objects:</p>
+<div class="section" id="oauth-client-grant-session">
+<h2>OAuth <strong>Client Grant Session</strong><a class="headerlink" href="#oauth-client-grant-session" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Http</span><span class="o">.</span><span class="n">oauth_client_grant_session</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>It wraps the <cite>BackendApplicationClient</cite> object from <cite>requests_oauthlib</cite> package.</p>
+<p>Once created, the session supports all methods in <a class="reference internal" href="arjuna.tpi.httpauto.session.html#arjuna.tpi.httpauto.session.HttpSession" title="arjuna.tpi.httpauto.session.HttpSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">HttpSession</span></code></a> object discussed above.</p>
+<p>Explore <a class="reference internal" href="arjuna.tpi.httpauto.oauth.html#arjuna.tpi.httpauto.oauth.OAuthClientGrantSession" title="arjuna.tpi.httpauto.oauth.OAuthClientGrantSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuthClientGrantSession</span></code></a> for constructor.</p>
+</div>
+<div class="section" id="oauth-implicit-grant-session">
+<h2>OAuth <strong>Implicit Grant Session</strong><a class="headerlink" href="#oauth-implicit-grant-session" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Http</span><span class="o">.</span><span class="n">oauth_implicit_grant_session</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>It wraps the <cite>MobileApplicationClient</cite> object from <cite>requests_oauthlib</cite> package.</p>
+<p>Once created, the session supports all methods in <a class="reference internal" href="arjuna.tpi.httpauto.session.html#arjuna.tpi.httpauto.session.HttpSession" title="arjuna.tpi.httpauto.session.HttpSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">HttpSession</span></code></a> object discussed above.</p>
+<p>Explore <a class="reference internal" href="arjuna.tpi.httpauto.oauth.html#arjuna.tpi.httpauto.oauth.OAuthImplicitGrantSession" title="arjuna.tpi.httpauto.oauth.OAuthImplicitGrantSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuthImplicitGrantSession</span></code></a> for constructor.</p>
+</div>
+<div class="section" id="creating-a-new-session-from-an-oauth-session">
+<h2>Creating a New Session from an OAuth Session<a class="headerlink" href="#creating-a-new-session-from-an-oauth-session" title="Permalink to this headline">¶</a></h2>
+<p>Many a times, you will want to reuse the OAuthToken to connect to multiple services for testing.</p>
+<p>Rather than creating a token each time, you can create it once by creating <a class="reference internal" href="arjuna.tpi.httpauto.oauth.html#arjuna.tpi.httpauto.oauth.OAuthClientGrantSession" title="arjuna.tpi.httpauto.oauth.OAuthClientGrantSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuthClientGrantSession</span></code></a> or <a class="reference internal" href="arjuna.tpi.httpauto.oauth.html#arjuna.tpi.httpauto.oauth.OAuthImplicitGrantSession" title="arjuna.tpi.httpauto.oauth.OAuthImplicitGrantSession"><code class="xref py py-class docutils literal notranslate"><span class="pre">OAuthImplicitGrantSession</span></code></a>.</p>
+<p>Now you can use this OAuth session to create a new <cite>HttpSession</cite> object for any base URL using <cite>create_new_session</cite> call.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">oauth_session</span><span class="o">.</span><span class="n">create_new_session</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://someapp.com/api&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#the-http-facade-class">The <strong>Http Facade Class</strong></a></li>
+<li><a class="reference internal" href="#supported-http-methods">Supported <strong>HTTP Methods</strong></a></li>
+<li><a class="reference internal" href="#handling-content-types">Handling <strong>Content Types</strong></a></li>
+<li><a class="reference internal" href="#creating-an-http-session">Creating an <strong>HTTP Session</strong></a></li>
+<li><a class="reference internal" href="#setting-a-request-label">Setting a <strong>Request Label</strong></a></li>
+<li><a class="reference internal" href="#setting-arbitrary-query-string-parmaters-in-url">Setting <strong>Arbitrary Query String Parmaters</strong> in URL</a></li>
+<li><a class="reference internal" href="#checking-expected-http-status-code-s">Checking <strong>Expected HTTP Status Code(s)</strong></a><ul>
+<li><a class="reference internal" href="#inquiring"><strong>Inquiring</strong></a></li>
+<li><a class="reference internal" href="#asserting"><strong>Asserting</strong></a></li>
+<li><a class="reference internal" href="#xcodes-argument"><strong>xcodes</strong> Argument</a></li>
+<li><a class="reference internal" href="#xcodes-argument-in-strict-mode"><strong>xcodes</strong> Argument in <strong>strict</strong> Mode</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#the-httpresponse-object">The <strong>HttpResponse</strong> Object</a><ul>
+<li><a class="reference internal" href="#basic-data-extraction">Basic <strong>Data Extraction</strong></a></li>
+<li><a class="reference internal" href="#redirections"><strong>Redirections</strong></a></li>
+<li><a class="reference internal" href="#handling-response-content">Handling <strong>Response Content</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#support-for-open-authentication-oauth">Support for <strong>Open Authentication (OAuth)</strong></a><ul>
+<li><a class="reference internal" href="#oauth-client-grant-session">OAuth <strong>Client Grant Session</strong></a></li>
+<li><a class="reference internal" href="#oauth-implicit-grant-session">OAuth <strong>Implicit Grant Session</strong></a></li>
+<li><a class="reference internal" href="#creating-a-new-session-from-an-oauth-session">Creating a New Session from an OAuth Session</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="guiauto/gom.html" title="previous chapter"><strong>Advanced Gui Abstractions</strong></a>
+          <li>Next: <a href="textparsing.html" title="next chapter">Introduction</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

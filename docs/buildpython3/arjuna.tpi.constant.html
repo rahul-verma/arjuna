@@ -1,0 +1,2977 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.tpi.constant module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.tpi.constant">
+<span id="arjuna-tpi-constant-module"></span><h1>arjuna.tpi.constant module<a class="headerlink" href="#module-arjuna.tpi.constant" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="arjuna.tpi.constant.ArjunaOption">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.constant.</code><code class="sig-name descname">ArjunaOption</code><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Represents all built-in configuration options for Arjuna.</p>
+<p>Any option name which is does not correspond to ArjunaOption enum constant is treated as a user defined option.</p>
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.ALLOW_INSECURE_SSL_CERT">
+<code class="sig-name descname">ALLOW_INSECURE_SSL_CERT</code><em class="property"> = 65</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.ALLOW_INSECURE_SSL_CERT" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, insecure SSL certificates are allowd. Default is True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.APPIUM_AUTO_LAUNCH">
+<code class="sig-name descname">APPIUM_AUTO_LAUNCH</code><em class="property"> = 86</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.APPIUM_AUTO_LAUNCH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs Arjuna to launch Appium programmatically. Default is True. Currently not processed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.APPIUM_SERVICE_URL">
+<code class="sig-name descname">APPIUM_SERVICE_URL</code><em class="property"> = 85</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.APPIUM_SERVICE_URL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Appium Service URL. Currently not processed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.APP_URL">
+<code class="sig-name descname">APP_URL</code><em class="property"> = 55</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.APP_URL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Base URL for a Web App. Used by launch() method if url is not specified for GuiApp.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR">
+<code class="sig-name descname">ARJUNA_EXTERNAL_IMPORTS_DIR</code><em class="property"> = 2</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory of third party libs directly included in Arjuna.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.ARJUNA_ROOT_DIR">
+<code class="sig-name descname">ARJUNA_ROOT_DIR</code><em class="property"> = 1</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.ARJUNA_ROOT_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root Directory of Arjuna Installed/Imported in a session</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.BROWSER_BIN_PATH">
+<code class="sig-name descname">BROWSER_BIN_PATH</code><em class="property"> = 62</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.BROWSER_BIN_PATH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of the Browser binary on test system.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.BROWSER_DIM_HEIGHT">
+<code class="sig-name descname">BROWSER_DIM_HEIGHT</code><em class="property"> = 60</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.BROWSER_DIM_HEIGHT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Browser Height for GUI Automation. If not set, Arjuna does not change the height of browser.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.BROWSER_DIM_WIDTH">
+<code class="sig-name descname">BROWSER_DIM_WIDTH</code><em class="property"> = 61</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.BROWSER_DIM_WIDTH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Browser Width for GUI Automation. If not set, Arjuna does not change the width of browser.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.BROWSER_HEADLESS">
+<code class="sig-name descname">BROWSER_HEADLESS</code><em class="property"> = 57</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.BROWSER_HEADLESS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets headless mode for browser for GUI Automation. Default is False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.BROWSER_MAXIMIZE">
+<code class="sig-name descname">BROWSER_MAXIMIZE</code><em class="property"> = 59</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.BROWSER_MAXIMIZE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Browser is maximized in GUI Automation after launch. Default is False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.BROWSER_NAME">
+<code class="sig-name descname">BROWSER_NAME</code><em class="property"> = 56</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.BROWSER_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Browser Name for Gui Automation. Chrome/Firefox. Default is Chrome</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.BROWSER_NETWORK_RECORDER_AUTOMATIC">
+<code class="sig-name descname">BROWSER_NETWORK_RECORDER_AUTOMATIC</code><em class="property"> = 64</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.BROWSER_NETWORK_RECORDER_AUTOMATIC" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, when a browser is launched, Arjuna automatically starts capturing all traffic. Default is False</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.BROWSER_NETWORK_RECORDER_ENABLED">
+<code class="sig-name descname">BROWSER_NETWORK_RECORDER_ENABLED</code><em class="property"> = 63</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.BROWSER_NETWORK_RECORDER_ENABLED" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, Arjuna uses BrowserMob proxy, if available in test project, to capture Network requests made by browser. Default is False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.BROWSER_VERSION">
+<code class="sig-name descname">BROWSER_VERSION</code><em class="property"> = 58</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.BROWSER_VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Browser Version for GUI Automation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_DATA_FILE">
+<code class="sig-name descname">CONF_DATA_FILE</code><em class="property"> = 37</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_DATA_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>File that contains all data configurations.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_DATA_LOCAL_FILE">
+<code class="sig-name descname">CONF_DATA_LOCAL_FILE</code><em class="property"> = 38</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_DATA_LOCAL_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local File that contains all data configurations.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_DIR">
+<code class="sig-name descname">CONF_DIR</code><em class="property"> = 36</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test Project configuration directory</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_ENVS_FILE">
+<code class="sig-name descname">CONF_ENVS_FILE</code><em class="property"> = 39</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_ENVS_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>File that contains all environment configurations.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_ENVS_LOCAL_FILE">
+<code class="sig-name descname">CONF_ENVS_LOCAL_FILE</code><em class="property"> = 40</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_ENVS_LOCAL_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local File that contains all environment configurations.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_GROUPS_FILE">
+<code class="sig-name descname">CONF_GROUPS_FILE</code><em class="property"> = 45</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_GROUPS_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>File that contains all test group definitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_GROUPS_LOCAL_FILE">
+<code class="sig-name descname">CONF_GROUPS_LOCAL_FILE</code><em class="property"> = 46</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_GROUPS_LOCAL_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local File that contains all test group definitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_PROJECT_FILE">
+<code class="sig-name descname">CONF_PROJECT_FILE</code><em class="property"> = 15</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_PROJECT_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Project conf file path.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_PROJECT_LOCAL_FILE">
+<code class="sig-name descname">CONF_PROJECT_LOCAL_FILE</code><em class="property"> = 16</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_PROJECT_LOCAL_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local Project conf file path.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_SESSIONS_FILE">
+<code class="sig-name descname">CONF_SESSIONS_FILE</code><em class="property"> = 41</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_SESSIONS_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>File that contains all test session definitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_SESSIONS_LOCAL_FILE">
+<code class="sig-name descname">CONF_SESSIONS_LOCAL_FILE</code><em class="property"> = 42</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_SESSIONS_LOCAL_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local File that contains all test session definitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_STAGES_FILE">
+<code class="sig-name descname">CONF_STAGES_FILE</code><em class="property"> = 43</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_STAGES_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>File that contains all test stage definitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_STAGES_LOCAL_FILE">
+<code class="sig-name descname">CONF_STAGES_LOCAL_FILE</code><em class="property"> = 44</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_STAGES_LOCAL_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local File that contains all test stage definitions.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_WITHX_FILE">
+<code class="sig-name descname">CONF_WITHX_FILE</code><em class="property"> = 47</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_WITHX_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>withx.yaml file used for writing custom locators for Gui Automation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.CONF_WITHX_LOCAL_FILE">
+<code class="sig-name descname">CONF_WITHX_LOCAL_FILE</code><em class="property"> = 48</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.CONF_WITHX_LOCAL_FILE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Local withx.yaml file used for writing custom locators for Gui Automation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.DATA_DIR">
+<code class="sig-name descname">DATA_DIR</code><em class="property"> = 49</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.DATA_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing data files in test project.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.DATA_FILE_DIR">
+<code class="sig-name descname">DATA_FILE_DIR</code><em class="property"> = 54</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.DATA_FILE_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing files used as file data.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.DATA_REF_CONTEXTUAL_DIR">
+<code class="sig-name descname">DATA_REF_CONTEXTUAL_DIR</code><em class="property"> = 52</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.DATA_REF_CONTEXTUAL_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing contextual data reference files in test project.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.DATA_REF_DIR">
+<code class="sig-name descname">DATA_REF_DIR</code><em class="property"> = 51</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.DATA_REF_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing contextual data reference files in test project.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.DATA_REF_INDEXED_DIR">
+<code class="sig-name descname">DATA_REF_INDEXED_DIR</code><em class="property"> = 53</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.DATA_REF_INDEXED_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing indexed data reference files in test project.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.DATA_SRC_DIR">
+<code class="sig-name descname">DATA_SRC_DIR</code><em class="property"> = 50</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.DATA_SRC_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing data source files in test project.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.DBAUTO_DIR">
+<code class="sig-name descname">DBAUTO_DIR</code><em class="property"> = 33</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.DBAUTO_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing Database interaction automation related input files.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.DBAUTO_SQL_DIR">
+<code class="sig-name descname">DBAUTO_SQL_DIR</code><em class="property"> = 34</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.DBAUTO_SQL_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing SQL files for Database interaction automation.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.DEPS_DIR">
+<code class="sig-name descname">DEPS_DIR</code><em class="property"> = 32</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.DEPS_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing external tool binaries in Arjuna test project.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.GUIAUTO_CONTEXT">
+<code class="sig-name descname">GUIAUTO_CONTEXT</code><em class="property"> = 70</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.GUIAUTO_CONTEXT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Gui Automation Context. Currently not processed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.GUIAUTO_DEF_MULTICONTEXT">
+<code class="sig-name descname">GUIAUTO_DEF_MULTICONTEXT</code><em class="property"> = 69</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.GUIAUTO_DEF_MULTICONTEXT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets multi context mode for GNS files. Currently not processed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.GUIAUTO_DIR">
+<code class="sig-name descname">GUIAUTO_DIR</code><em class="property"> = 67</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.GUIAUTO_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root directory of all Gui automation relation directories and files</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.GUIAUTO_MAX_WAIT">
+<code class="sig-name descname">GUIAUTO_MAX_WAIT</code><em class="property"> = 72</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.GUIAUTO_MAX_WAIT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Maximum time for a Gui element locating or waitable interaction to occur. Uses Dynamic Wait. Expressed in seconds. Default is 60.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.GUIAUTO_NAME">
+<code class="sig-name descname">GUIAUTO_NAME</code><em class="property"> = 66</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.GUIAUTO_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Engine name. Currently set to Selenium which is the only supported engine.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.GUIAUTO_NAMESPACE_DIR">
+<code class="sig-name descname">GUIAUTO_NAMESPACE_DIR</code><em class="property"> = 68</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.GUIAUTO_NAMESPACE_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root directory of all Gui Namespace (GNS) files.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.GUIAUTO_SLOMO_INTERVAL">
+<code class="sig-name descname">GUIAUTO_SLOMO_INTERVAL</code><em class="property"> = 74</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.GUIAUTO_SLOMO_INTERVAL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Time Interval between successive Gui Automation actions when Slow Motion mode is ON. Expressed in seconds. Default is 2</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.GUIAUTO_SLOMO_ON">
+<code class="sig-name descname">GUIAUTO_SLOMO_ON</code><em class="property"> = 73</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.GUIAUTO_SLOMO_ON" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets slow motion mode for Gui Automation. Default is False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.HOOKS_DIR">
+<code class="sig-name descname">HOOKS_DIR</code><em class="property"> = 18</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.HOOKS_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Arjuna Hooks directory.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.IMG_COMP_MIN_SCORE">
+<code class="sig-name descname">IMG_COMP_MIN_SCORE</code><em class="property"> = 87</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.IMG_COMP_MIN_SCORE" title="Permalink to this definition">¶</a></dt>
+<dd><p>A fraction that represents minimum image comparison score to decide on an image match. Default is 0.7. Currently not processed.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.L10N_DIR">
+<code class="sig-name descname">L10N_DIR</code><em class="property"> = 12</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.L10N_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing Localization files.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.L10N_LOCALE">
+<code class="sig-name descname">L10N_LOCALE</code><em class="property"> = 10</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.L10N_LOCALE" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default Locale type to be used for Localization call. Values as per arjuna.tpi.constant.Locale</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.L10N_STRICT">
+<code class="sig-name descname">L10N_STRICT</code><em class="property"> = 11</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.L10N_STRICT" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets Localization mode to strict. Default is False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.LOG_ALLOWED_CONTEXTS">
+<code class="sig-name descname">LOG_ALLOWED_CONTEXTS</code><em class="property"> = 9</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.LOG_ALLOWED_CONTEXTS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allowed context strings for logging (file as well as display). Messages without contexts always get logged.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.LOG_CONSOLE_LEVEL">
+<code class="sig-name descname">LOG_CONSOLE_LEVEL</code><em class="property"> = 8</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.LOG_CONSOLE_LEVEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum level for a message to be displayed on console</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.LOG_DIR">
+<code class="sig-name descname">LOG_DIR</code><em class="property"> = 28</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.LOG_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing arjuna.log for current test run.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.LOG_FILE_LEVEL">
+<code class="sig-name descname">LOG_FILE_LEVEL</code><em class="property"> = 7</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.LOG_FILE_LEVEL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Minimum level for a message to be logged to log file.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.LOG_NAME">
+<code class="sig-name descname">LOG_NAME</code><em class="property"> = 3</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.LOG_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of Arjuna’s log file</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.MOBILE_APP_FILE_PATH">
+<code class="sig-name descname">MOBILE_APP_FILE_PATH</code><em class="property"> = 79</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.MOBILE_APP_FILE_PATH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mobile App path on test system. No default set.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.MOBILE_DEVICE_NAME">
+<code class="sig-name descname">MOBILE_DEVICE_NAME</code><em class="property"> = 77</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.MOBILE_DEVICE_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mobile Device name. No default set.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.MOBILE_DEVICE_UDID">
+<code class="sig-name descname">MOBILE_DEVICE_UDID</code><em class="property"> = 78</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.MOBILE_DEVICE_UDID" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mobile Device UDID. No default set.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.MOBILE_OS_NAME">
+<code class="sig-name descname">MOBILE_OS_NAME</code><em class="property"> = 75</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.MOBILE_OS_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mobile OS Name. iOs/Android. Default is Android.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.MOBILE_OS_VERSION">
+<code class="sig-name descname">MOBILE_OS_VERSION</code><em class="property"> = 76</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.MOBILE_OS_VERSION" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mobile OS Version. No default set.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.PROJECT_NAME">
+<code class="sig-name descname">PROJECT_NAME</code><em class="property"> = 13</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.PROJECT_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test Project Name</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.PROJECT_ROOT_DIR">
+<code class="sig-name descname">PROJECT_ROOT_DIR</code><em class="property"> = 14</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.PROJECT_ROOT_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test Project Root Directory</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.REPORTS_DIR">
+<code class="sig-name descname">REPORTS_DIR</code><em class="property"> = 19</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.REPORTS_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root directory for test reports.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.REPORT_DIR">
+<code class="sig-name descname">REPORT_DIR</code><em class="property"> = 21</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.REPORT_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reporting directory for current test run under REPORTS_DIR. Name is generated with RUN_ID and Current Timestamp. With –static-rid CLI switch, timestamp is not appended.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.REPORT_FORMATS">
+<code class="sig-name descname">REPORT_FORMATS</code><em class="property"> = 20</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.REPORT_FORMATS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Formats for Report Generation. XML/HTML</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.REPORT_GROUP_RENAME">
+<code class="sig-name descname">REPORT_GROUP_RENAME</code><em class="property"> = 24</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.REPORT_GROUP_RENAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, for run-group command, reports are created without session and stage prefixes.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.REPORT_HTML_DIR">
+<code class="sig-name descname">REPORT_HTML_DIR</code><em class="property"> = 23</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.REPORT_HTML_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing report.html for current test run.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.REPORT_NETWORK_ALWAYS">
+<code class="sig-name descname">REPORT_NETWORK_ALWAYS</code><em class="property"> = 26</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.REPORT_NETWORK_ALWAYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, Network packets are always show in Report, else they are not shown for passed tests. Default is False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.REPORT_NETWORK_FILTER">
+<code class="sig-name descname">REPORT_NETWORK_FILTER</code><em class="property"> = 27</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.REPORT_NETWORK_FILTER" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, in reporting, the request/response for static resources like image files, css etc will be excluded. Only HTML/JSON/XML content is included. Default is True</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.REPORT_SCREENSHOTS_ALWAYS">
+<code class="sig-name descname">REPORT_SCREENSHOTS_ALWAYS</code><em class="property"> = 25</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.REPORT_SCREENSHOTS_ALWAYS" title="Permalink to this definition">¶</a></dt>
+<dd><p>If True, Screenshots are always show in Report, else they are not shown for passed tests. Default is False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.REPORT_XML_DIR">
+<code class="sig-name descname">REPORT_XML_DIR</code><em class="property"> = 22</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.REPORT_XML_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing report.xml for current test run.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.RUN_HOST_OS">
+<code class="sig-name descname">RUN_HOST_OS</code><em class="property"> = 6</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.RUN_HOST_OS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Windows/Mac/Linux.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>Host Operating System type</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.RUN_ID">
+<code class="sig-name descname">RUN_ID</code><em class="property"> = 4</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.RUN_ID" title="Permalink to this definition">¶</a></dt>
+<dd><p>An alnum string representing current test run. Default is <strong>mrun</strong></p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.RUN_SESSION_NAME">
+<code class="sig-name descname">RUN_SESSION_NAME</code><em class="property"> = 5</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.RUN_SESSION_NAME" title="Permalink to this definition">¶</a></dt>
+<dd><p>Current session name.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.SCREENSHOTS_DIR">
+<code class="sig-name descname">SCREENSHOTS_DIR</code><em class="property"> = 29</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.SCREENSHOTS_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing screenshots for current test run.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.SCROLL_PIXELS">
+<code class="sig-name descname">SCROLL_PIXELS</code><em class="property"> = 71</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.SCROLL_PIXELS" title="Permalink to this definition">¶</a></dt>
+<dd><p>Number of pixels for each scroll call in Gui Automation. Default is 100.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.SELENIUM_DRIVERS_DIR">
+<code class="sig-name descname">SELENIUM_DRIVERS_DIR</code><em class="property"> = 81</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.SELENIUM_DRIVERS_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Root Directory containing OS specific browser drivers for Selenium. Has an impact only if SELENIUM_DRIVER_DOWNLOAD is set to False.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.SELENIUM_DRIVER_DOWNLOAD">
+<code class="sig-name descname">SELENIUM_DRIVER_DOWNLOAD</code><em class="property"> = 83</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.SELENIUM_DRIVER_DOWNLOAD" title="Permalink to this definition">¶</a></dt>
+<dd><p>Instructs Arjuna to automatically download Selenium browser driver for chosen browser. Default is True.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.SELENIUM_DRIVER_PATH">
+<code class="sig-name descname">SELENIUM_DRIVER_PATH</code><em class="property"> = 82</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.SELENIUM_DRIVER_PATH" title="Permalink to this definition">¶</a></dt>
+<dd><p>Absolute path of Selenium browser driver. Automatically set to WebDriverManager’s downloaded driver if SELENIUM_DRIVER_DOWNLOAD is True, else automatically set as per the test project structure, OS and browser.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.SELENIUM_DRIVER_PROP">
+<code class="sig-name descname">SELENIUM_DRIVER_PROP</code><em class="property"> = 80</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.SELENIUM_DRIVER_PROP" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selenium Environment variable for browser driver as per chosen browser. Automatically set as per chosen browser. Default is webdriver.chrome.driver</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.SELENIUM_SERVICE_URL">
+<code class="sig-name descname">SELENIUM_SERVICE_URL</code><em class="property"> = 84</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.SELENIUM_SERVICE_URL" title="Permalink to this definition">¶</a></dt>
+<dd><p>Selenium’s Service URL. If set, Arjuna does not launch the browser service and uses this URL as the service URL.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.TEMP_DIR">
+<code class="sig-name descname">TEMP_DIR</code><em class="property"> = 35</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.TEMP_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Temporary directory for this session.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.TESTS_DIR">
+<code class="sig-name descname">TESTS_DIR</code><em class="property"> = 17</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.TESTS_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing test modules.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.TOOLS_BMPROXY_DIR">
+<code class="sig-name descname">TOOLS_BMPROXY_DIR</code><em class="property"> = 31</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.TOOLS_BMPROXY_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing BrowerMob Proxy binaries.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.ArjunaOption.TOOLS_DIR">
+<code class="sig-name descname">TOOLS_DIR</code><em class="property"> = 30</em><a class="headerlink" href="#arjuna.tpi.constant.ArjunaOption.TOOLS_DIR" title="Permalink to this definition">¶</a></dt>
+<dd><p>Directory containing external tool binaries in Arjuna test project.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.tpi.constant.BrowserName">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.constant.</code><code class="sig-name descname">BrowserName</code><a class="headerlink" href="#arjuna.tpi.constant.BrowserName" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Allowed browser names for Gui Automation.</p>
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.BrowserName.CHROME">
+<code class="sig-name descname">CHROME</code><em class="property"> = 1</em><a class="headerlink" href="#arjuna.tpi.constant.BrowserName.CHROME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.BrowserName.FIREFOX">
+<code class="sig-name descname">FIREFOX</code><em class="property"> = 2</em><a class="headerlink" href="#arjuna.tpi.constant.BrowserName.FIREFOX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.tpi.constant.Locale">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.constant.</code><code class="sig-name descname">Locale</code><a class="headerlink" href="#arjuna.tpi.constant.Locale" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Allowed locale names in Arjuna.</p>
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.A3">
+<code class="sig-name descname">A3</code><em class="property"> = 0</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.A3" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.A3_AZ">
+<code class="sig-name descname">A3_AZ</code><em class="property"> = 1</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.A3_AZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AA_DJ">
+<code class="sig-name descname">AA_DJ</code><em class="property"> = 2</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AA_DJ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AA_ER">
+<code class="sig-name descname">AA_ER</code><em class="property"> = 3</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AA_ER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AA_ET">
+<code class="sig-name descname">AA_ET</code><em class="property"> = 4</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AA_ET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AF">
+<code class="sig-name descname">AF</code><em class="property"> = 5</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AF_ZA">
+<code class="sig-name descname">AF_ZA</code><em class="property"> = 6</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AF_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AM">
+<code class="sig-name descname">AM</code><em class="property"> = 7</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AMERICAN">
+<code class="sig-name descname">AMERICAN</code><em class="property"> = 9</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AMERICAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AM_ET">
+<code class="sig-name descname">AM_ET</code><em class="property"> = 8</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AM_ET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AN_ES">
+<code class="sig-name descname">AN_ES</code><em class="property"> = 10</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AN_ES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR">
+<code class="sig-name descname">AR</code><em class="property"> = 11</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ARABIC">
+<code class="sig-name descname">ARABIC</code><em class="property"> = 31</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ARABIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_AA">
+<code class="sig-name descname">AR_AA</code><em class="property"> = 12</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_AA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_AE">
+<code class="sig-name descname">AR_AE</code><em class="property"> = 13</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_AE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_BH">
+<code class="sig-name descname">AR_BH</code><em class="property"> = 14</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_BH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_DZ">
+<code class="sig-name descname">AR_DZ</code><em class="property"> = 15</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_DZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_EG">
+<code class="sig-name descname">AR_EG</code><em class="property"> = 16</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_EG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_IN">
+<code class="sig-name descname">AR_IN</code><em class="property"> = 17</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_IQ">
+<code class="sig-name descname">AR_IQ</code><em class="property"> = 18</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_IQ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_JO">
+<code class="sig-name descname">AR_JO</code><em class="property"> = 19</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_JO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_KW">
+<code class="sig-name descname">AR_KW</code><em class="property"> = 20</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_KW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_LB">
+<code class="sig-name descname">AR_LB</code><em class="property"> = 21</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_LB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_LY">
+<code class="sig-name descname">AR_LY</code><em class="property"> = 22</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_LY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_MA">
+<code class="sig-name descname">AR_MA</code><em class="property"> = 23</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_MA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_OM">
+<code class="sig-name descname">AR_OM</code><em class="property"> = 24</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_OM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_QA">
+<code class="sig-name descname">AR_QA</code><em class="property"> = 25</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_QA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_SA">
+<code class="sig-name descname">AR_SA</code><em class="property"> = 26</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_SA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_SD">
+<code class="sig-name descname">AR_SD</code><em class="property"> = 27</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_SD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_SY">
+<code class="sig-name descname">AR_SY</code><em class="property"> = 28</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_SY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_TN">
+<code class="sig-name descname">AR_TN</code><em class="property"> = 29</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_TN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AR_YE">
+<code class="sig-name descname">AR_YE</code><em class="property"> = 30</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AR_YE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AS">
+<code class="sig-name descname">AS</code><em class="property"> = 32</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AST_ES">
+<code class="sig-name descname">AST_ES</code><em class="property"> = 34</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AST_ES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AS_IN">
+<code class="sig-name descname">AS_IN</code><em class="property"> = 33</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AS_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AYC_PE">
+<code class="sig-name descname">AYC_PE</code><em class="property"> = 35</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AYC_PE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AZ">
+<code class="sig-name descname">AZ</code><em class="property"> = 36</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.AZ_AZ">
+<code class="sig-name descname">AZ_AZ</code><em class="property"> = 37</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.AZ_AZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BE">
+<code class="sig-name descname">BE</code><em class="property"> = 38</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BEM_ZM">
+<code class="sig-name descname">BEM_ZM</code><em class="property"> = 40</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BEM_ZM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BER_DZ">
+<code class="sig-name descname">BER_DZ</code><em class="property"> = 41</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BER_DZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BER_MA">
+<code class="sig-name descname">BER_MA</code><em class="property"> = 42</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BER_MA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BE_BY">
+<code class="sig-name descname">BE_BY</code><em class="property"> = 39</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BE_BY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BG">
+<code class="sig-name descname">BG</code><em class="property"> = 43</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BG_BG">
+<code class="sig-name descname">BG_BG</code><em class="property"> = 44</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BG_BG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BHO_IN">
+<code class="sig-name descname">BHO_IN</code><em class="property"> = 45</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BHO_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BN_BD">
+<code class="sig-name descname">BN_BD</code><em class="property"> = 46</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BN_BD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BN_IN">
+<code class="sig-name descname">BN_IN</code><em class="property"> = 47</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BN_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BOKMAL">
+<code class="sig-name descname">BOKMAL</code><em class="property"> = 50</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BOKMAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BOKMÅL">
+<code class="sig-name descname">BOKMÅL</code><em class="property"> = 51</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BOKMÅL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BO_CN">
+<code class="sig-name descname">BO_CN</code><em class="property"> = 48</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BO_CN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BO_IN">
+<code class="sig-name descname">BO_IN</code><em class="property"> = 49</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BO_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BR">
+<code class="sig-name descname">BR</code><em class="property"> = 52</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BRX_IN">
+<code class="sig-name descname">BRX_IN</code><em class="property"> = 54</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BRX_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BR_FR">
+<code class="sig-name descname">BR_FR</code><em class="property"> = 53</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BR_FR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BS">
+<code class="sig-name descname">BS</code><em class="property"> = 55</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BS_BA">
+<code class="sig-name descname">BS_BA</code><em class="property"> = 56</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BS_BA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BULGARIAN">
+<code class="sig-name descname">BULGARIAN</code><em class="property"> = 57</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BULGARIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.BYN_ER">
+<code class="sig-name descname">BYN_ER</code><em class="property"> = 58</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.BYN_ER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.C">
+<code class="sig-name descname">C</code><em class="property"> = 59</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.C" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CA">
+<code class="sig-name descname">CA</code><em class="property"> = 61</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CATALAN">
+<code class="sig-name descname">CATALAN</code><em class="property"> = 66</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CATALAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CA_AD">
+<code class="sig-name descname">CA_AD</code><em class="property"> = 62</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CA_AD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CA_ES">
+<code class="sig-name descname">CA_ES</code><em class="property"> = 63</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CA_ES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CA_FR">
+<code class="sig-name descname">CA_FR</code><em class="property"> = 64</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CA_FR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CA_IT">
+<code class="sig-name descname">CA_IT</code><em class="property"> = 65</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CA_IT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CEXTEND">
+<code class="sig-name descname">CEXTEND</code><em class="property"> = 67</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CEXTEND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CRH_UA">
+<code class="sig-name descname">CRH_UA</code><em class="property"> = 68</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CRH_UA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CROATIAN">
+<code class="sig-name descname">CROATIAN</code><em class="property"> = 69</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CROATIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CS">
+<code class="sig-name descname">CS</code><em class="property"> = 70</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CSB_PL">
+<code class="sig-name descname">CSB_PL</code><em class="property"> = 73</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CSB_PL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CS_CS">
+<code class="sig-name descname">CS_CS</code><em class="property"> = 71</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CS_CS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CS_CZ">
+<code class="sig-name descname">CS_CZ</code><em class="property"> = 72</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CS_CZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CV_RU">
+<code class="sig-name descname">CV_RU</code><em class="property"> = 74</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CV_RU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CY">
+<code class="sig-name descname">CY</code><em class="property"> = 75</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CY_GB">
+<code class="sig-name descname">CY_GB</code><em class="property"> = 76</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CY_GB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CZ">
+<code class="sig-name descname">CZ</code><em class="property"> = 77</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CZECH">
+<code class="sig-name descname">CZECH</code><em class="property"> = 79</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CZECH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.CZ_CZ">
+<code class="sig-name descname">CZ_CZ</code><em class="property"> = 78</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.CZ_CZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.C_C">
+<code class="sig-name descname">C_C</code><em class="property"> = 60</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.C_C" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DA">
+<code class="sig-name descname">DA</code><em class="property"> = 80</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DANISH">
+<code class="sig-name descname">DANISH</code><em class="property"> = 82</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DANISH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DANSK">
+<code class="sig-name descname">DANSK</code><em class="property"> = 83</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DANSK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DA_DK">
+<code class="sig-name descname">DA_DK</code><em class="property"> = 81</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DA_DK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DE">
+<code class="sig-name descname">DE</code><em class="property"> = 84</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DEUTSCH">
+<code class="sig-name descname">DEUTSCH</code><em class="property"> = 90</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DEUTSCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DE_AT">
+<code class="sig-name descname">DE_AT</code><em class="property"> = 85</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DE_AT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DE_BE">
+<code class="sig-name descname">DE_BE</code><em class="property"> = 86</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DE_BE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DE_CH">
+<code class="sig-name descname">DE_CH</code><em class="property"> = 87</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DE_CH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DE_DE">
+<code class="sig-name descname">DE_DE</code><em class="property"> = 88</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DE_DE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DE_LU">
+<code class="sig-name descname">DE_LU</code><em class="property"> = 89</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DE_LU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DOI_IN">
+<code class="sig-name descname">DOI_IN</code><em class="property"> = 91</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DOI_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DUTCH">
+<code class="sig-name descname">DUTCH</code><em class="property"> = 92</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DUTCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DV_MV">
+<code class="sig-name descname">DV_MV</code><em class="property"> = 93</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DV_MV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.DZ_BT">
+<code class="sig-name descname">DZ_BT</code><em class="property"> = 94</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.DZ_BT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EE">
+<code class="sig-name descname">EE</code><em class="property"> = 95</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EESTI">
+<code class="sig-name descname">EESTI</code><em class="property"> = 97</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EESTI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EE_EE">
+<code class="sig-name descname">EE_EE</code><em class="property"> = 96</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EE_EE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EL">
+<code class="sig-name descname">EL</code><em class="property"> = 98</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EL_CY">
+<code class="sig-name descname">EL_CY</code><em class="property"> = 99</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EL_CY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EL_GR">
+<code class="sig-name descname">EL_GR</code><em class="property"> = 100</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EL_GR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN">
+<code class="sig-name descname">EN</code><em class="property"> = 101</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ENGLISH">
+<code class="sig-name descname">ENGLISH</code><em class="property"> = 122</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ENGLISH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ENGLISH_UK">
+<code class="sig-name descname">ENGLISH_UK</code><em class="property"> = 123</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ENGLISH_UK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ENGLISH_US">
+<code class="sig-name descname">ENGLISH_US</code><em class="property"> = 124</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ENGLISH_US" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ENG_GB">
+<code class="sig-name descname">ENG_GB</code><em class="property"> = 121</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ENG_GB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_AG">
+<code class="sig-name descname">EN_AG</code><em class="property"> = 102</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_AG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_AU">
+<code class="sig-name descname">EN_AU</code><em class="property"> = 103</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_AU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_BE">
+<code class="sig-name descname">EN_BE</code><em class="property"> = 104</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_BE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_BW">
+<code class="sig-name descname">EN_BW</code><em class="property"> = 105</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_BW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_CA">
+<code class="sig-name descname">EN_CA</code><em class="property"> = 106</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_CA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_DK">
+<code class="sig-name descname">EN_DK</code><em class="property"> = 107</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_DK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_GB">
+<code class="sig-name descname">EN_GB</code><em class="property"> = 108</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_GB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_HK">
+<code class="sig-name descname">EN_HK</code><em class="property"> = 109</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_HK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_IE">
+<code class="sig-name descname">EN_IE</code><em class="property"> = 110</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_IE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_IN">
+<code class="sig-name descname">EN_IN</code><em class="property"> = 111</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_NG">
+<code class="sig-name descname">EN_NG</code><em class="property"> = 112</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_NG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_NZ">
+<code class="sig-name descname">EN_NZ</code><em class="property"> = 113</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_NZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_PH">
+<code class="sig-name descname">EN_PH</code><em class="property"> = 114</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_PH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_SG">
+<code class="sig-name descname">EN_SG</code><em class="property"> = 115</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_SG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_UK">
+<code class="sig-name descname">EN_UK</code><em class="property"> = 116</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_UK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_US">
+<code class="sig-name descname">EN_US</code><em class="property"> = 117</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_US" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_ZA">
+<code class="sig-name descname">EN_ZA</code><em class="property"> = 118</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_ZM">
+<code class="sig-name descname">EN_ZM</code><em class="property"> = 119</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_ZM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EN_ZW">
+<code class="sig-name descname">EN_ZW</code><em class="property"> = 120</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EN_ZW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EO">
+<code class="sig-name descname">EO</code><em class="property"> = 125</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EO_EO">
+<code class="sig-name descname">EO_EO</code><em class="property"> = 126</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EO_EO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EO_XX">
+<code class="sig-name descname">EO_XX</code><em class="property"> = 127</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EO_XX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES">
+<code class="sig-name descname">ES</code><em class="property"> = 128</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ESTONIAN">
+<code class="sig-name descname">ESTONIAN</code><em class="property"> = 150</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ESTONIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_AR">
+<code class="sig-name descname">ES_AR</code><em class="property"> = 129</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_AR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_BO">
+<code class="sig-name descname">ES_BO</code><em class="property"> = 130</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_BO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_CL">
+<code class="sig-name descname">ES_CL</code><em class="property"> = 131</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_CL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_CO">
+<code class="sig-name descname">ES_CO</code><em class="property"> = 132</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_CO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_CR">
+<code class="sig-name descname">ES_CR</code><em class="property"> = 133</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_CR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_CU">
+<code class="sig-name descname">ES_CU</code><em class="property"> = 134</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_CU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_DO">
+<code class="sig-name descname">ES_DO</code><em class="property"> = 135</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_DO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_EC">
+<code class="sig-name descname">ES_EC</code><em class="property"> = 136</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_EC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_ES">
+<code class="sig-name descname">ES_ES</code><em class="property"> = 137</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_ES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_GT">
+<code class="sig-name descname">ES_GT</code><em class="property"> = 138</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_GT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_HN">
+<code class="sig-name descname">ES_HN</code><em class="property"> = 139</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_HN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_MX">
+<code class="sig-name descname">ES_MX</code><em class="property"> = 140</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_MX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_NI">
+<code class="sig-name descname">ES_NI</code><em class="property"> = 141</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_NI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_PA">
+<code class="sig-name descname">ES_PA</code><em class="property"> = 142</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_PA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_PE">
+<code class="sig-name descname">ES_PE</code><em class="property"> = 143</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_PE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_PR">
+<code class="sig-name descname">ES_PR</code><em class="property"> = 144</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_PR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_PY">
+<code class="sig-name descname">ES_PY</code><em class="property"> = 145</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_PY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_SV">
+<code class="sig-name descname">ES_SV</code><em class="property"> = 146</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_SV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_US">
+<code class="sig-name descname">ES_US</code><em class="property"> = 147</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_US" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_UY">
+<code class="sig-name descname">ES_UY</code><em class="property"> = 148</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_UY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ES_VE">
+<code class="sig-name descname">ES_VE</code><em class="property"> = 149</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ES_VE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ET">
+<code class="sig-name descname">ET</code><em class="property"> = 151</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ET_EE">
+<code class="sig-name descname">ET_EE</code><em class="property"> = 152</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ET_EE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EU">
+<code class="sig-name descname">EU</code><em class="property"> = 153</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EU_ES">
+<code class="sig-name descname">EU_ES</code><em class="property"> = 154</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EU_ES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.EU_FR">
+<code class="sig-name descname">EU_FR</code><em class="property"> = 155</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.EU_FR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FA">
+<code class="sig-name descname">FA</code><em class="property"> = 156</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FA_IR">
+<code class="sig-name descname">FA_IR</code><em class="property"> = 157</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FA_IR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FF_SN">
+<code class="sig-name descname">FF_SN</code><em class="property"> = 158</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FF_SN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FI">
+<code class="sig-name descname">FI</code><em class="property"> = 159</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FIL_PH">
+<code class="sig-name descname">FIL_PH</code><em class="property"> = 161</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FIL_PH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FINNISH">
+<code class="sig-name descname">FINNISH</code><em class="property"> = 162</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FINNISH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FI_FI">
+<code class="sig-name descname">FI_FI</code><em class="property"> = 160</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FI_FI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FO">
+<code class="sig-name descname">FO</code><em class="property"> = 163</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FO_FO">
+<code class="sig-name descname">FO_FO</code><em class="property"> = 164</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FO_FO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FR">
+<code class="sig-name descname">FR</code><em class="property"> = 165</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FRANÇAIS">
+<code class="sig-name descname">FRANÇAIS</code><em class="property"> = 171</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FRANÇAIS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FRENCH">
+<code class="sig-name descname">FRENCH</code><em class="property"> = 173</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FRENCH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FRENCH_FRANCE">
+<code class="sig-name descname">FRENCH_FRANCE</code><em class="property"> = 174</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FRENCH_FRANCE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FRE_FR">
+<code class="sig-name descname">FRE_FR</code><em class="property"> = 172</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FRE_FR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FR_BE">
+<code class="sig-name descname">FR_BE</code><em class="property"> = 166</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FR_BE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FR_CA">
+<code class="sig-name descname">FR_CA</code><em class="property"> = 167</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FR_CA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FR_CH">
+<code class="sig-name descname">FR_CH</code><em class="property"> = 168</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FR_CH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FR_FR">
+<code class="sig-name descname">FR_FR</code><em class="property"> = 169</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FR_FR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FR_LU">
+<code class="sig-name descname">FR_LU</code><em class="property"> = 170</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FR_LU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FUR_IT">
+<code class="sig-name descname">FUR_IT</code><em class="property"> = 175</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FUR_IT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FY_DE">
+<code class="sig-name descname">FY_DE</code><em class="property"> = 176</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FY_DE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.FY_NL">
+<code class="sig-name descname">FY_NL</code><em class="property"> = 177</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.FY_NL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GA">
+<code class="sig-name descname">GA</code><em class="property"> = 178</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GALEGO">
+<code class="sig-name descname">GALEGO</code><em class="property"> = 180</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GALEGO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GALICIAN">
+<code class="sig-name descname">GALICIAN</code><em class="property"> = 181</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GALICIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GA_IE">
+<code class="sig-name descname">GA_IE</code><em class="property"> = 179</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GA_IE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GD">
+<code class="sig-name descname">GD</code><em class="property"> = 182</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GD_GB">
+<code class="sig-name descname">GD_GB</code><em class="property"> = 183</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GD_GB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GERMAN">
+<code class="sig-name descname">GERMAN</code><em class="property"> = 185</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GERMAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GERMAN_GERMANY">
+<code class="sig-name descname">GERMAN_GERMANY</code><em class="property"> = 186</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GERMAN_GERMANY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GER_DE">
+<code class="sig-name descname">GER_DE</code><em class="property"> = 184</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GER_DE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GEZ_ER">
+<code class="sig-name descname">GEZ_ER</code><em class="property"> = 187</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GEZ_ER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GEZ_ET">
+<code class="sig-name descname">GEZ_ET</code><em class="property"> = 188</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GEZ_ET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GL">
+<code class="sig-name descname">GL</code><em class="property"> = 189</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GL_ES">
+<code class="sig-name descname">GL_ES</code><em class="property"> = 190</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GL_ES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GREEK">
+<code class="sig-name descname">GREEK</code><em class="property"> = 191</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GREEK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GU_IN">
+<code class="sig-name descname">GU_IN</code><em class="property"> = 192</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GU_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GV">
+<code class="sig-name descname">GV</code><em class="property"> = 193</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.GV_GB">
+<code class="sig-name descname">GV_GB</code><em class="property"> = 194</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.GV_GB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HA_NG">
+<code class="sig-name descname">HA_NG</code><em class="property"> = 195</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HA_NG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HE">
+<code class="sig-name descname">HE</code><em class="property"> = 196</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HEBREW">
+<code class="sig-name descname">HEBREW</code><em class="property"> = 198</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HEBREW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HE_IL">
+<code class="sig-name descname">HE_IL</code><em class="property"> = 197</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HE_IL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HI">
+<code class="sig-name descname">HI</code><em class="property"> = 199</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HI_IN">
+<code class="sig-name descname">HI_IN</code><em class="property"> = 200</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HI_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HNE">
+<code class="sig-name descname">HNE</code><em class="property"> = 201</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HNE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HNE_IN">
+<code class="sig-name descname">HNE_IN</code><em class="property"> = 202</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HNE_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HR">
+<code class="sig-name descname">HR</code><em class="property"> = 203</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HRVATSKI">
+<code class="sig-name descname">HRVATSKI</code><em class="property"> = 205</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HRVATSKI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HR_HR">
+<code class="sig-name descname">HR_HR</code><em class="property"> = 204</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HR_HR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HSB_DE">
+<code class="sig-name descname">HSB_DE</code><em class="property"> = 206</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HSB_DE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HT_HT">
+<code class="sig-name descname">HT_HT</code><em class="property"> = 207</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HT_HT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HU">
+<code class="sig-name descname">HU</code><em class="property"> = 208</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HUNGARIAN">
+<code class="sig-name descname">HUNGARIAN</code><em class="property"> = 210</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HUNGARIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HU_HU">
+<code class="sig-name descname">HU_HU</code><em class="property"> = 209</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HU_HU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.HY_AM">
+<code class="sig-name descname">HY_AM</code><em class="property"> = 211</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.HY_AM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IA">
+<code class="sig-name descname">IA</code><em class="property"> = 212</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IA_FR">
+<code class="sig-name descname">IA_FR</code><em class="property"> = 213</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IA_FR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ICELANDIC">
+<code class="sig-name descname">ICELANDIC</code><em class="property"> = 214</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ICELANDIC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ID">
+<code class="sig-name descname">ID</code><em class="property"> = 215</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ID_ID">
+<code class="sig-name descname">ID_ID</code><em class="property"> = 216</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ID_ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IG_NG">
+<code class="sig-name descname">IG_NG</code><em class="property"> = 217</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IG_NG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IK_CA">
+<code class="sig-name descname">IK_CA</code><em class="property"> = 218</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IK_CA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IN">
+<code class="sig-name descname">IN</code><em class="property"> = 219</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IN_ID">
+<code class="sig-name descname">IN_ID</code><em class="property"> = 220</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IN_ID" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IS">
+<code class="sig-name descname">IS</code><em class="property"> = 221</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ISO_8859_1">
+<code class="sig-name descname">ISO_8859_1</code><em class="property"> = 223</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ISO_8859_1" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ISO_8859_15">
+<code class="sig-name descname">ISO_8859_15</code><em class="property"> = 224</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ISO_8859_15" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IS_IS">
+<code class="sig-name descname">IS_IS</code><em class="property"> = 222</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IS_IS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IT">
+<code class="sig-name descname">IT</code><em class="property"> = 225</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ITALIAN">
+<code class="sig-name descname">ITALIAN</code><em class="property"> = 228</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ITALIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IT_CH">
+<code class="sig-name descname">IT_CH</code><em class="property"> = 226</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IT_CH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IT_IT">
+<code class="sig-name descname">IT_IT</code><em class="property"> = 227</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IT_IT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IU">
+<code class="sig-name descname">IU</code><em class="property"> = 229</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IU_CA">
+<code class="sig-name descname">IU_CA</code><em class="property"> = 230</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IU_CA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IW">
+<code class="sig-name descname">IW</code><em class="property"> = 231</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.IW_IL">
+<code class="sig-name descname">IW_IL</code><em class="property"> = 232</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.IW_IL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.JA">
+<code class="sig-name descname">JA</code><em class="property"> = 233</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.JA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.JAPAN">
+<code class="sig-name descname">JAPAN</code><em class="property"> = 235</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.JAPAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.JAPANESE">
+<code class="sig-name descname">JAPANESE</code><em class="property"> = 236</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.JAPANESE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.JA_JP">
+<code class="sig-name descname">JA_JP</code><em class="property"> = 234</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.JA_JP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.JP_JP">
+<code class="sig-name descname">JP_JP</code><em class="property"> = 237</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.JP_JP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KA">
+<code class="sig-name descname">KA</code><em class="property"> = 238</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KA_GE">
+<code class="sig-name descname">KA_GE</code><em class="property"> = 239</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KA_GE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KK_KZ">
+<code class="sig-name descname">KK_KZ</code><em class="property"> = 240</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KK_KZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KL">
+<code class="sig-name descname">KL</code><em class="property"> = 241</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KL_GL">
+<code class="sig-name descname">KL_GL</code><em class="property"> = 242</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KL_GL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KM_KH">
+<code class="sig-name descname">KM_KH</code><em class="property"> = 243</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KM_KH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KN">
+<code class="sig-name descname">KN</code><em class="property"> = 244</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KN_IN">
+<code class="sig-name descname">KN_IN</code><em class="property"> = 245</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KN_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KO">
+<code class="sig-name descname">KO</code><em class="property"> = 246</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KOK_IN">
+<code class="sig-name descname">KOK_IN</code><em class="property"> = 248</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KOK_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KOREAN">
+<code class="sig-name descname">KOREAN</code><em class="property"> = 249</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KOREAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KO_KR">
+<code class="sig-name descname">KO_KR</code><em class="property"> = 247</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KO_KR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KS">
+<code class="sig-name descname">KS</code><em class="property"> = 250</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KS_IN">
+<code class="sig-name descname">KS_IN</code><em class="property"> = 251</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KS_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KU_TR">
+<code class="sig-name descname">KU_TR</code><em class="property"> = 252</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KU_TR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KW">
+<code class="sig-name descname">KW</code><em class="property"> = 253</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KW_GB">
+<code class="sig-name descname">KW_GB</code><em class="property"> = 254</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KW_GB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KY">
+<code class="sig-name descname">KY</code><em class="property"> = 255</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.KY_KG">
+<code class="sig-name descname">KY_KG</code><em class="property"> = 256</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.KY_KG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LB_LU">
+<code class="sig-name descname">LB_LU</code><em class="property"> = 257</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LB_LU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LG_UG">
+<code class="sig-name descname">LG_UG</code><em class="property"> = 258</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LG_UG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LIJ_IT">
+<code class="sig-name descname">LIJ_IT</code><em class="property"> = 261</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LIJ_IT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LITHUANIAN">
+<code class="sig-name descname">LITHUANIAN</code><em class="property"> = 262</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LITHUANIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LI_BE">
+<code class="sig-name descname">LI_BE</code><em class="property"> = 259</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LI_BE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LI_NL">
+<code class="sig-name descname">LI_NL</code><em class="property"> = 260</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LI_NL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LO">
+<code class="sig-name descname">LO</code><em class="property"> = 263</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LO_LA">
+<code class="sig-name descname">LO_LA</code><em class="property"> = 264</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LO_LA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LT">
+<code class="sig-name descname">LT</code><em class="property"> = 265</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LT_LT">
+<code class="sig-name descname">LT_LT</code><em class="property"> = 266</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LT_LT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LV">
+<code class="sig-name descname">LV</code><em class="property"> = 267</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.LV_LV">
+<code class="sig-name descname">LV_LV</code><em class="property"> = 268</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.LV_LV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MAG_IN">
+<code class="sig-name descname">MAG_IN</code><em class="property"> = 269</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MAG_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MAI">
+<code class="sig-name descname">MAI</code><em class="property"> = 270</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MAI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MAI_IN">
+<code class="sig-name descname">MAI_IN</code><em class="property"> = 271</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MAI_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MG_MG">
+<code class="sig-name descname">MG_MG</code><em class="property"> = 272</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MG_MG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MHR_RU">
+<code class="sig-name descname">MHR_RU</code><em class="property"> = 273</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MHR_RU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MI">
+<code class="sig-name descname">MI</code><em class="property"> = 274</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MI_NZ">
+<code class="sig-name descname">MI_NZ</code><em class="property"> = 275</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MI_NZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MK">
+<code class="sig-name descname">MK</code><em class="property"> = 276</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MK_MK">
+<code class="sig-name descname">MK_MK</code><em class="property"> = 277</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MK_MK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ML">
+<code class="sig-name descname">ML</code><em class="property"> = 278</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ML" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ML_IN">
+<code class="sig-name descname">ML_IN</code><em class="property"> = 279</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ML_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MNI_IN">
+<code class="sig-name descname">MNI_IN</code><em class="property"> = 281</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MNI_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MN_MN">
+<code class="sig-name descname">MN_MN</code><em class="property"> = 280</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MN_MN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MR">
+<code class="sig-name descname">MR</code><em class="property"> = 282</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MR_IN">
+<code class="sig-name descname">MR_IN</code><em class="property"> = 283</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MR_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MS">
+<code class="sig-name descname">MS</code><em class="property"> = 284</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MS_MY">
+<code class="sig-name descname">MS_MY</code><em class="property"> = 285</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MS_MY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MT">
+<code class="sig-name descname">MT</code><em class="property"> = 286</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MT_MT">
+<code class="sig-name descname">MT_MT</code><em class="property"> = 287</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MT_MT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.MY_MM">
+<code class="sig-name descname">MY_MM</code><em class="property"> = 288</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.MY_MM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NB">
+<code class="sig-name descname">NB</code><em class="property"> = 289</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NB" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NB_NO">
+<code class="sig-name descname">NB_NO</code><em class="property"> = 290</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NB_NO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NDS_DE">
+<code class="sig-name descname">NDS_DE</code><em class="property"> = 291</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NDS_DE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NDS_NL">
+<code class="sig-name descname">NDS_NL</code><em class="property"> = 292</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NDS_NL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NE_NP">
+<code class="sig-name descname">NE_NP</code><em class="property"> = 293</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NE_NP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NHN_MX">
+<code class="sig-name descname">NHN_MX</code><em class="property"> = 294</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NHN_MX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NIU_NU">
+<code class="sig-name descname">NIU_NU</code><em class="property"> = 295</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NIU_NU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NIU_NZ">
+<code class="sig-name descname">NIU_NZ</code><em class="property"> = 296</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NIU_NZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NL">
+<code class="sig-name descname">NL</code><em class="property"> = 297</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NL_AW">
+<code class="sig-name descname">NL_AW</code><em class="property"> = 298</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NL_AW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NL_BE">
+<code class="sig-name descname">NL_BE</code><em class="property"> = 299</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NL_BE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NL_NL">
+<code class="sig-name descname">NL_NL</code><em class="property"> = 300</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NL_NL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NN">
+<code class="sig-name descname">NN</code><em class="property"> = 301</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NN_NO">
+<code class="sig-name descname">NN_NO</code><em class="property"> = 302</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NN_NO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NO">
+<code class="sig-name descname">NO</code><em class="property"> = 303</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NORWEGIAN">
+<code class="sig-name descname">NORWEGIAN</code><em class="property"> = 305</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NORWEGIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NO_NO">
+<code class="sig-name descname">NO_NO</code><em class="property"> = 304</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NO_NO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NR">
+<code class="sig-name descname">NR</code><em class="property"> = 306</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NR_ZA">
+<code class="sig-name descname">NR_ZA</code><em class="property"> = 307</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NR_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NSO">
+<code class="sig-name descname">NSO</code><em class="property"> = 308</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NSO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NSO_ZA">
+<code class="sig-name descname">NSO_ZA</code><em class="property"> = 309</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NSO_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NY">
+<code class="sig-name descname">NY</code><em class="property"> = 310</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NYNORSK">
+<code class="sig-name descname">NYNORSK</code><em class="property"> = 312</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NYNORSK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.NY_NO">
+<code class="sig-name descname">NY_NO</code><em class="property"> = 311</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.NY_NO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.OC">
+<code class="sig-name descname">OC</code><em class="property"> = 313</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.OC" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.OC_FR">
+<code class="sig-name descname">OC_FR</code><em class="property"> = 314</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.OC_FR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.OM_ET">
+<code class="sig-name descname">OM_ET</code><em class="property"> = 315</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.OM_ET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.OM_KE">
+<code class="sig-name descname">OM_KE</code><em class="property"> = 316</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.OM_KE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.OR">
+<code class="sig-name descname">OR</code><em class="property"> = 317</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.OR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.OR_IN">
+<code class="sig-name descname">OR_IN</code><em class="property"> = 318</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.OR_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.OS_RU">
+<code class="sig-name descname">OS_RU</code><em class="property"> = 319</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.OS_RU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PA">
+<code class="sig-name descname">PA</code><em class="property"> = 320</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PAP_AN">
+<code class="sig-name descname">PAP_AN</code><em class="property"> = 323</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PAP_AN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PA_IN">
+<code class="sig-name descname">PA_IN</code><em class="property"> = 321</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PA_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PA_PK">
+<code class="sig-name descname">PA_PK</code><em class="property"> = 322</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PA_PK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PD">
+<code class="sig-name descname">PD</code><em class="property"> = 324</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PD_DE">
+<code class="sig-name descname">PD_DE</code><em class="property"> = 325</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PD_DE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PD_US">
+<code class="sig-name descname">PD_US</code><em class="property"> = 326</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PD_US" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PH">
+<code class="sig-name descname">PH</code><em class="property"> = 327</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PH_PH">
+<code class="sig-name descname">PH_PH</code><em class="property"> = 328</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PH_PH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PL">
+<code class="sig-name descname">PL</code><em class="property"> = 329</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PL_PL">
+<code class="sig-name descname">PL_PL</code><em class="property"> = 330</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PL_PL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.POLISH">
+<code class="sig-name descname">POLISH</code><em class="property"> = 331</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.POLISH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PORTUGUESE">
+<code class="sig-name descname">PORTUGUESE</code><em class="property"> = 332</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PORTUGUESE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PORTUGUESE_BRAZIL">
+<code class="sig-name descname">PORTUGUESE_BRAZIL</code><em class="property"> = 333</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PORTUGUESE_BRAZIL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.POSIX">
+<code class="sig-name descname">POSIX</code><em class="property"> = 334</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.POSIX" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PP">
+<code class="sig-name descname">PP</code><em class="property"> = 335</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PP_AN">
+<code class="sig-name descname">PP_AN</code><em class="property"> = 336</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PP_AN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PS_AF">
+<code class="sig-name descname">PS_AF</code><em class="property"> = 337</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PS_AF" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PT">
+<code class="sig-name descname">PT</code><em class="property"> = 338</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PT_BR">
+<code class="sig-name descname">PT_BR</code><em class="property"> = 339</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PT_BR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.PT_PT">
+<code class="sig-name descname">PT_PT</code><em class="property"> = 340</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.PT_PT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.RO">
+<code class="sig-name descname">RO</code><em class="property"> = 341</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.RO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ROMANIAN">
+<code class="sig-name descname">ROMANIAN</code><em class="property"> = 343</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ROMANIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.RO_RO">
+<code class="sig-name descname">RO_RO</code><em class="property"> = 342</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.RO_RO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.RU">
+<code class="sig-name descname">RU</code><em class="property"> = 344</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.RU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.RUMANIAN">
+<code class="sig-name descname">RUMANIAN</code><em class="property"> = 347</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.RUMANIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.RUSSIAN">
+<code class="sig-name descname">RUSSIAN</code><em class="property"> = 348</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.RUSSIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.RU_RU">
+<code class="sig-name descname">RU_RU</code><em class="property"> = 345</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.RU_RU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.RU_UA">
+<code class="sig-name descname">RU_UA</code><em class="property"> = 346</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.RU_UA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.RW">
+<code class="sig-name descname">RW</code><em class="property"> = 349</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.RW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.RW_RW">
+<code class="sig-name descname">RW_RW</code><em class="property"> = 350</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.RW_RW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SAT_IN">
+<code class="sig-name descname">SAT_IN</code><em class="property"> = 352</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SAT_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SA_IN">
+<code class="sig-name descname">SA_IN</code><em class="property"> = 351</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SA_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SC_IT">
+<code class="sig-name descname">SC_IT</code><em class="property"> = 353</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SC_IT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SD">
+<code class="sig-name descname">SD</code><em class="property"> = 354</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SD" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SD_IN">
+<code class="sig-name descname">SD_IN</code><em class="property"> = 355</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SD_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SD_PK">
+<code class="sig-name descname">SD_PK</code><em class="property"> = 356</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SD_PK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SERBOCROATIAN">
+<code class="sig-name descname">SERBOCROATIAN</code><em class="property"> = 358</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SERBOCROATIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SE_NO">
+<code class="sig-name descname">SE_NO</code><em class="property"> = 357</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SE_NO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SH">
+<code class="sig-name descname">SH</code><em class="property"> = 359</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SHS_CA">
+<code class="sig-name descname">SHS_CA</code><em class="property"> = 363</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SHS_CA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SH_HR">
+<code class="sig-name descname">SH_HR</code><em class="property"> = 360</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SH_HR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SH_SP">
+<code class="sig-name descname">SH_SP</code><em class="property"> = 361</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SH_SP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SH_YU">
+<code class="sig-name descname">SH_YU</code><em class="property"> = 362</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SH_YU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SI">
+<code class="sig-name descname">SI</code><em class="property"> = 364</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SID_ET">
+<code class="sig-name descname">SID_ET</code><em class="property"> = 366</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SID_ET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SINHALA">
+<code class="sig-name descname">SINHALA</code><em class="property"> = 367</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SINHALA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SI_LK">
+<code class="sig-name descname">SI_LK</code><em class="property"> = 365</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SI_LK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SK">
+<code class="sig-name descname">SK</code><em class="property"> = 368</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SK_SK">
+<code class="sig-name descname">SK_SK</code><em class="property"> = 369</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SK_SK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SL">
+<code class="sig-name descname">SL</code><em class="property"> = 370</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SLOVAK">
+<code class="sig-name descname">SLOVAK</code><em class="property"> = 373</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SLOVAK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SLOVENE">
+<code class="sig-name descname">SLOVENE</code><em class="property"> = 374</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SLOVENE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SLOVENIAN">
+<code class="sig-name descname">SLOVENIAN</code><em class="property"> = 375</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SLOVENIAN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SL_CS">
+<code class="sig-name descname">SL_CS</code><em class="property"> = 371</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SL_CS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SL_SI">
+<code class="sig-name descname">SL_SI</code><em class="property"> = 372</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SL_SI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SO_DJ">
+<code class="sig-name descname">SO_DJ</code><em class="property"> = 376</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SO_DJ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SO_ET">
+<code class="sig-name descname">SO_ET</code><em class="property"> = 377</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SO_ET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SO_KE">
+<code class="sig-name descname">SO_KE</code><em class="property"> = 378</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SO_KE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SO_SO">
+<code class="sig-name descname">SO_SO</code><em class="property"> = 379</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SO_SO" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SP">
+<code class="sig-name descname">SP</code><em class="property"> = 380</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SPANISH">
+<code class="sig-name descname">SPANISH</code><em class="property"> = 382</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SPANISH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SPANISH_SPAIN">
+<code class="sig-name descname">SPANISH_SPAIN</code><em class="property"> = 383</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SPANISH_SPAIN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SP_YU">
+<code class="sig-name descname">SP_YU</code><em class="property"> = 381</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SP_YU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SQ">
+<code class="sig-name descname">SQ</code><em class="property"> = 384</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SQ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SQ_AL">
+<code class="sig-name descname">SQ_AL</code><em class="property"> = 385</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SQ_AL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SQ_MK">
+<code class="sig-name descname">SQ_MK</code><em class="property"> = 386</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SQ_MK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SR">
+<code class="sig-name descname">SR</code><em class="property"> = 387</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SR_CS">
+<code class="sig-name descname">SR_CS</code><em class="property"> = 388</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SR_CS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SR_ME">
+<code class="sig-name descname">SR_ME</code><em class="property"> = 389</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SR_ME" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SR_RS">
+<code class="sig-name descname">SR_RS</code><em class="property"> = 390</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SR_RS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SR_SP">
+<code class="sig-name descname">SR_SP</code><em class="property"> = 391</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SR_SP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SR_YU">
+<code class="sig-name descname">SR_YU</code><em class="property"> = 392</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SR_YU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SS">
+<code class="sig-name descname">SS</code><em class="property"> = 393</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SS_ZA">
+<code class="sig-name descname">SS_ZA</code><em class="property"> = 394</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SS_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ST">
+<code class="sig-name descname">ST</code><em class="property"> = 395</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ST" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ST_ZA">
+<code class="sig-name descname">ST_ZA</code><em class="property"> = 396</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ST_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SV">
+<code class="sig-name descname">SV</code><em class="property"> = 397</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SV_FI">
+<code class="sig-name descname">SV_FI</code><em class="property"> = 398</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SV_FI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SV_SE">
+<code class="sig-name descname">SV_SE</code><em class="property"> = 399</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SV_SE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SWEDISH">
+<code class="sig-name descname">SWEDISH</code><em class="property"> = 402</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SWEDISH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SW_KE">
+<code class="sig-name descname">SW_KE</code><em class="property"> = 400</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SW_KE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SW_TZ">
+<code class="sig-name descname">SW_TZ</code><em class="property"> = 401</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SW_TZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.SZL_PL">
+<code class="sig-name descname">SZL_PL</code><em class="property"> = 403</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.SZL_PL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TA">
+<code class="sig-name descname">TA</code><em class="property"> = 404</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TA_IN">
+<code class="sig-name descname">TA_IN</code><em class="property"> = 405</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TA_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TA_LK">
+<code class="sig-name descname">TA_LK</code><em class="property"> = 406</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TA_LK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TE">
+<code class="sig-name descname">TE</code><em class="property"> = 407</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TE_IN">
+<code class="sig-name descname">TE_IN</code><em class="property"> = 408</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TE_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TG">
+<code class="sig-name descname">TG</code><em class="property"> = 409</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TG_TJ">
+<code class="sig-name descname">TG_TJ</code><em class="property"> = 410</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TG_TJ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TH">
+<code class="sig-name descname">TH</code><em class="property"> = 411</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.THAI">
+<code class="sig-name descname">THAI</code><em class="property"> = 413</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.THAI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TH_TH">
+<code class="sig-name descname">TH_TH</code><em class="property"> = 412</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TH_TH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TIG_ER">
+<code class="sig-name descname">TIG_ER</code><em class="property"> = 416</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TIG_ER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TI_ER">
+<code class="sig-name descname">TI_ER</code><em class="property"> = 414</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TI_ER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TI_ET">
+<code class="sig-name descname">TI_ET</code><em class="property"> = 415</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TI_ET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TK_TM">
+<code class="sig-name descname">TK_TM</code><em class="property"> = 417</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TK_TM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TL">
+<code class="sig-name descname">TL</code><em class="property"> = 418</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TL_PH">
+<code class="sig-name descname">TL_PH</code><em class="property"> = 419</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TL_PH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TN">
+<code class="sig-name descname">TN</code><em class="property"> = 420</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TN_ZA">
+<code class="sig-name descname">TN_ZA</code><em class="property"> = 421</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TN_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TR">
+<code class="sig-name descname">TR</code><em class="property"> = 422</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TR_CY">
+<code class="sig-name descname">TR_CY</code><em class="property"> = 423</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TR_CY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TR_TR">
+<code class="sig-name descname">TR_TR</code><em class="property"> = 424</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TR_TR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TS">
+<code class="sig-name descname">TS</code><em class="property"> = 425</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TS_ZA">
+<code class="sig-name descname">TS_ZA</code><em class="property"> = 426</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TS_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TT">
+<code class="sig-name descname">TT</code><em class="property"> = 427</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TT_RU">
+<code class="sig-name descname">TT_RU</code><em class="property"> = 428</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TT_RU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.TURKISH">
+<code class="sig-name descname">TURKISH</code><em class="property"> = 429</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.TURKISH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UG_CN">
+<code class="sig-name descname">UG_CN</code><em class="property"> = 430</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UG_CN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UK">
+<code class="sig-name descname">UK</code><em class="property"> = 431</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UK_UA">
+<code class="sig-name descname">UK_UA</code><em class="property"> = 432</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UK_UA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UNIV">
+<code class="sig-name descname">UNIV</code><em class="property"> = 433</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UNIV" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UNIVERSAL">
+<code class="sig-name descname">UNIVERSAL</code><em class="property"> = 434</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UNIVERSAL" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UNM_US">
+<code class="sig-name descname">UNM_US</code><em class="property"> = 435</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UNM_US" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UR">
+<code class="sig-name descname">UR</code><em class="property"> = 436</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UR_IN">
+<code class="sig-name descname">UR_IN</code><em class="property"> = 437</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UR_IN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UR_PK">
+<code class="sig-name descname">UR_PK</code><em class="property"> = 438</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UR_PK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UZ">
+<code class="sig-name descname">UZ</code><em class="property"> = 439</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.UZ_UZ">
+<code class="sig-name descname">UZ_UZ</code><em class="property"> = 440</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.UZ_UZ" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.VE">
+<code class="sig-name descname">VE</code><em class="property"> = 441</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.VE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.VE_ZA">
+<code class="sig-name descname">VE_ZA</code><em class="property"> = 442</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.VE_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.VI">
+<code class="sig-name descname">VI</code><em class="property"> = 443</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.VI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.VI_VN">
+<code class="sig-name descname">VI_VN</code><em class="property"> = 444</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.VI_VN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.WA">
+<code class="sig-name descname">WA</code><em class="property"> = 445</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.WA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.WAE_CH">
+<code class="sig-name descname">WAE_CH</code><em class="property"> = 447</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.WAE_CH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.WAL_ET">
+<code class="sig-name descname">WAL_ET</code><em class="property"> = 448</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.WAL_ET" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.WA_BE">
+<code class="sig-name descname">WA_BE</code><em class="property"> = 446</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.WA_BE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.WO_SN">
+<code class="sig-name descname">WO_SN</code><em class="property"> = 449</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.WO_SN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.XH">
+<code class="sig-name descname">XH</code><em class="property"> = 450</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.XH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.XH_ZA">
+<code class="sig-name descname">XH_ZA</code><em class="property"> = 451</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.XH_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.YI">
+<code class="sig-name descname">YI</code><em class="property"> = 452</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.YI" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.YI_US">
+<code class="sig-name descname">YI_US</code><em class="property"> = 453</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.YI_US" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.YO_NG">
+<code class="sig-name descname">YO_NG</code><em class="property"> = 454</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.YO_NG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.YUE_HK">
+<code class="sig-name descname">YUE_HK</code><em class="property"> = 455</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.YUE_HK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ZH">
+<code class="sig-name descname">ZH</code><em class="property"> = 456</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ZH" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ZH_CN">
+<code class="sig-name descname">ZH_CN</code><em class="property"> = 457</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ZH_CN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ZH_HK">
+<code class="sig-name descname">ZH_HK</code><em class="property"> = 458</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ZH_HK" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ZH_SG">
+<code class="sig-name descname">ZH_SG</code><em class="property"> = 459</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ZH_SG" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ZH_TW">
+<code class="sig-name descname">ZH_TW</code><em class="property"> = 460</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ZH_TW" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ZU">
+<code class="sig-name descname">ZU</code><em class="property"> = 461</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ZU" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.Locale.ZU_ZA">
+<code class="sig-name descname">ZU_ZA</code><em class="property"> = 462</em><a class="headerlink" href="#arjuna.tpi.constant.Locale.ZU_ZA" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.tpi.constant.TimeUnit">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.constant.</code><code class="sig-name descname">TimeUnit</code><a class="headerlink" href="#arjuna.tpi.constant.TimeUnit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">enum.Enum</span></code></p>
+<p>Allowed time unit types.</p>
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.TimeUnit.MILLI_SECONDS">
+<code class="sig-name descname">MILLI_SECONDS</code><em class="property"> = 1</em><a class="headerlink" href="#arjuna.tpi.constant.TimeUnit.MILLI_SECONDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.TimeUnit.MINUTES">
+<code class="sig-name descname">MINUTES</code><em class="property"> = 3</em><a class="headerlink" href="#arjuna.tpi.constant.TimeUnit.MINUTES" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="arjuna.tpi.constant.TimeUnit.SECONDS">
+<code class="sig-name descname">SECONDS</code><em class="property"> = 2</em><a class="headerlink" href="#arjuna.tpi.constant.TimeUnit.SECONDS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

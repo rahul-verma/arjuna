@@ -1,0 +1,292 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.tpi.error module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.tpi.error">
+<span id="arjuna-tpi-error-module"></span><h1>arjuna.tpi.error module<a class="headerlink" href="#module-arjuna.tpi.error" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna Exceptions</p>
+<p>This module defines Exception classes that represent different types of run-time issues that can happen. The exceptions encapsulate the underlying exception message and stack traces.</p>
+<dl class="exception">
+<dt id="arjuna.tpi.error.ArjunaOptionValidationError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">ArjunaOptionValidationError</code><span class="sig-paren">(</span><em class="sig-param">option</em>, <em class="sig-param">name</em>, <em class="sig-param">validator</em>, <em class="sig-param">emsg=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.ArjunaOptionValidationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.ConfigCreationError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">ConfigCreationError</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.ConfigCreationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is an error in the creation of a configuration object.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.DisallowedArjunaOptionError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">DisallowedArjunaOptionError</code><span class="sig-paren">(</span><em class="sig-param">stage</em>, <em class="sig-param">option</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.DisallowedArjunaOptionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is an attempt to set an ArjunOption value in a configuration stage, where it is not allowed to override the value.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.GuiLabelNotPresentError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">GuiLabelNotPresentError</code><span class="sig-paren">(</span><em class="sig-param">gns_name</em>, <em class="sig-param">label</em>, <em class="sig-param">context=None</em>, <em class="sig-param">msg=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.GuiLabelNotPresentError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when a non-existing GNS label is referenced.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.GuiNamespaceLoadingError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">GuiNamespaceLoadingError</code><span class="sig-paren">(</span><em class="sig-param">gui</em>, <em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.GuiNamespaceLoadingError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is a problem with loading a GNS file.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.GuiNotLoadedError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">GuiNotLoadedError</code><span class="sig-paren">(</span><em class="sig-param">gui</em>, <em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.GuiNotLoadedError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="arjuna.core.error.html#arjuna.core.error.WaitableError" title="arjuna.core.error.WaitableError"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.core.error.WaitableError</span></code></a></p>
+<p>Raised when there is a problem at any step of Arjuna’s Gui Loading Protocol.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.GuiWidgetDefinitionError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">GuiWidgetDefinitionError</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.GuiWidgetDefinitionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is a problem in the way GuiWidgetDefinition is specified in the arguments.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.GuiWidgetForLabelNotPresentError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">GuiWidgetForLabelNotPresentError</code><span class="sig-paren">(</span><em class="sig-param">gui</em>, <em class="sig-param">label</em>, <em class="sig-param">message=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.GuiWidgetForLabelNotPresentError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when a GuiWidget corresponding to a GNS label is NOT found. Involves Dynamic Waiting for presence.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.GuiWidgetForLabelPresentError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">GuiWidgetForLabelPresentError</code><span class="sig-paren">(</span><em class="sig-param">gui</em>, <em class="sig-param">label</em>, <em class="sig-param">message=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.GuiWidgetForLabelPresentError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when a GuiWidget corresponding to a GNS label is unexpectedly found. Involves Dynamic Waiting for absence.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.GuiWidgetNotPresentError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">GuiWidgetNotPresentError</code><span class="sig-paren">(</span><em class="sig-param">gui</em>, <em class="sig-param">wmd</em>, <em class="sig-param">message=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.GuiWidgetNotPresentError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when a GuiWidget is NOT found using a GuiWidgetDefinition object. Involves Dynamic Waiting for presence.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.GuiWidgetPresentError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">GuiWidgetPresentError</code><span class="sig-paren">(</span><em class="sig-param">gui</em>, <em class="sig-param">wmd</em>, <em class="sig-param">message=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.GuiWidgetPresentError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when a GuiWidget is unexpectedly found using a GuiWidgetDefinition object. Involves Dynamic Waiting for absence.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.HttpConnectError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">HttpConnectError</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.HttpConnectError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is a connection error.</p>
+<dl class="method">
+<dt id="arjuna.tpi.error.HttpConnectError.request">
+<em class="property">property </em><code class="sig-name descname">request</code><a class="headerlink" href="#arjuna.tpi.error.HttpConnectError.request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.HttpRequestCreationError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">HttpRequestCreationError</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.HttpRequestCreationError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is an error in creating an HTTP request.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.HttpSendError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">HttpSendError</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em>, <em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.HttpSendError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is an error in sending an HTTP request.</p>
+<dl class="method">
+<dt id="arjuna.tpi.error.HttpSendError.request">
+<em class="property">property </em><code class="sig-name descname">request</code><a class="headerlink" href="#arjuna.tpi.error.HttpSendError.request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.error.HttpSendError.response">
+<em class="property">property </em><code class="sig-name descname">response</code><a class="headerlink" href="#arjuna.tpi.error.HttpSendError.response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.HttpUnexpectedStatusCodeError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">HttpUnexpectedStatusCodeError</code><span class="sig-paren">(</span><em class="sig-param">request</em>, <em class="sig-param">response</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.HttpUnexpectedStatusCodeError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when the HTTP status code for a request does not match expected status code(s).</p>
+<dl class="method">
+<dt id="arjuna.tpi.error.HttpUnexpectedStatusCodeError.request">
+<em class="property">property </em><code class="sig-name descname">request</code><a class="headerlink" href="#arjuna.tpi.error.HttpUnexpectedStatusCodeError.request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.error.HttpUnexpectedStatusCodeError.response">
+<em class="property">property </em><code class="sig-name descname">response</code><a class="headerlink" href="#arjuna.tpi.error.HttpUnexpectedStatusCodeError.response" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.InvalidTestSessionDefError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">InvalidTestSessionDefError</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">session_name</em>, <em class="sig-param">sessions_file_path</em>, <em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.InvalidTestSessionDefError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is an error in the definition of a test session.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.InvalidTestStageDefError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">InvalidTestStageDefError</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">session_name</em>, <em class="sig-param">stage_name</em>, <em class="sig-param">stages_file_path</em>, <em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.InvalidTestStageDefError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is an error in the definition of a test stage.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.TestDecoratorError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">TestDecoratorError</code><span class="sig-paren">(</span><em class="sig-param">func_qual_name</em>, <em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.TestDecoratorError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is an error in &#64;test decorator for a given test function.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.TestGroupsFileNotFoundError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">TestGroupsFileNotFoundError</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.TestGroupsFileNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there <cite>run-session/run-stage/run-group</cite> CLI sommand is used and <cite>groups.yaml</cite> does not exist at <cite>&lt;Project Root Dir&gt;/config</cite> directory.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.TestSelectorNotFoundError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">TestSelectorNotFoundError</code><a class="headerlink" href="#arjuna.tpi.error.TestSelectorNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Test Selector object was not found for current thread (and for current test group creation.)</p>
+<p>Every Test Group is run in a thread either sequentially or parallely.</p>
+<p>A Test Selector object is supposed to be created for every test group.</p>
+<p>This exception is raised when Arjuna is not able to find the registered test Selector object for current thread.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.TestSessionsFileNotFoundError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">TestSessionsFileNotFoundError</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.TestSessionsFileNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when <cite>run-session</cite> CLI sommand is used and sessions.yaml does not exist in <cite>&lt;Project Root Dir&gt;/config</cite> directory.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.TestStagesFileNotFoundError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">TestStagesFileNotFoundError</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.TestStagesFileNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there <cite>run-session/run-stage</cite> CLI sommand is used and stages.yaml is does not exist in <cite>&lt;Project Root Dir&gt;/config</cite> directory.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.UndefinedConfigError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">UndefinedConfigError</code><span class="sig-paren">(</span><em class="sig-param">referred_conf_name</em>, <em class="sig-param">defined_conf_names</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.UndefinedConfigError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when a configurtion is a referenced by its name in code, externalized files or configuration query.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.UndefinedTestGroupError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">UndefinedTestGroupError</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name</em>, <em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.UndefinedTestGroupError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is no definition for a name used as test group name.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.UndefinedTestSessionError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">UndefinedTestSessionError</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name</em>, <em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.UndefinedTestSessionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is no definition for a name used as test session name.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.tpi.error.UndefinedTestStageError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.tpi.error.</code><code class="sig-name descname">UndefinedTestStageError</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">name</em>, <em class="sig-param">file_path</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.error.UndefinedTestStageError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is no definition for a name used as test stage name.</p>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

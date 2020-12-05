@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tests are Test Functions &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="What are Test Resources?" href="resources.html" />
+    <link rel="prev" title="Arjuna Command Line Interface" href="cli.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="What are Test Resources?"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="cli.html" title="Arjuna Command Line Interface"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tests-are-test-functions">
+<span id="test-function"></span><h1>Tests are <strong>Test Functions</strong><a class="headerlink" href="#tests-are-test-functions" title="Permalink to this headline">¶</a></h1>
+<p>Writing a basic test in Arjuna is very easy. Following is a simple test skeleton:</p>
+</div>
+<div class="section" id="basic-usage-of-test-decorator">
+<h1>Basic Usage of <strong>&#64;test Decorator</strong><a class="headerlink" href="#basic-usage-of-test-decorator" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arjuna</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@test</span>
+<span class="k">def</span> <span class="nf">check_test_name</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<ol class="arabic simple">
+<li><p>Create a test module in <strong>&lt;Project Root Directory&gt;/test/pkg</strong>. The module name should start with the prefix <strong>check_</strong></p></li>
+<li><p>In the python test module file, import all names from Arjuna: <strong>from arjuna import *</strong>. Ofcourse, as you become more aware of Arjuna’s TPI (tester programming interface), you can do selective imports using Python.</p></li>
+<li><p>Create a test. In Arjuna, a test is a function marked with <strong>&#64;test</strong> decorator. It must start with the prefix <strong>check_</strong>. It should take <strong>one mandatory argument</strong>: <strong>request</strong>.</p></li>
+<li><p>The contents of the test function depend on the test that you want to write.</p></li>
+</ol>
+</div>
+<div class="section" id="running-a-specific-test-function">
+<h1><strong>Running</strong> a Specific Test Function<a class="headerlink" href="#running-a-specific-test-function" title="Permalink to this headline">¶</a></h1>
+<p>You can run this test by running <strong>arjuna</strong> module or running <strong>arjuna_launcher.py</strong> script:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m arjuna run-selected -p path/to-proj_name -it check_test_name
+python arjuna_launcher.py run-selected -it check_test_name
+</pre></div>
+</div>
+</div>
+<div class="section" id="skipping-a-test">
+<h1><strong>Skipping</strong> a Test<a class="headerlink" href="#skipping-a-test" title="Permalink to this headline">¶</a></h1>
+<p>You can mark a test as skipped:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arjuna</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@test</span><span class="p">(</span><span class="n">skip</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_test_name</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>You can also do a conditional skipping:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arjuna</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@test</span><span class="p">(</span><span class="n">skip</span><span class="o">=</span><span class="n">skip</span><span class="p">(</span><span class="s2">&quot;abc &gt; 2&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;Foo bar&quot;</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">check_test_name</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="handling-expected-failures-in-tests">
+<h1>Handling <strong>Expected Failures</strong> in Tests<a class="headerlink" href="#handling-expected-failures-in-tests" title="Permalink to this headline">¶</a></h1>
+<p>You can mark a test as a test which is expected to fail:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arjuna</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@test</span><span class="p">(</span><span class="n">xfail</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_test_name</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>You can also specify advanced conditional expected failures:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arjuna</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@test</span><span class="p">(</span><span class="n">xfail</span><span class="o">=</span><span class="n">xfail</span><span class="p">(</span><span class="s2">&quot;abc &gt; 2&quot;</span><span class="p">,</span> <span class="n">reason</span><span class="o">=</span><span class="s2">&quot;Foo bar&quot;</span><span class="p">,</span> <span class="n">raises</span><span class="o">=</span><span class="n">SomeException</span><span class="p">,</span> <span class="n">run</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">strict</span><span class="o">=</span><span class="bp">True</span><span class="p">))</span>
+<span class="k">def</span> <span class="nf">check_test_name</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Such a test is reported as XFailed. If it passes, it is reported as XPassed.</p>
+</div>
+<div class="section" id="specifying-built-in-test-attributes">
+<h1>Specifying <strong>Built-in Test Attributes</strong><a class="headerlink" href="#specifying-built-in-test-attributes" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna tests have many built-in attributes, which can be specified as an argument in <strong>&#64;test</strong>, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arjuna</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@test</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="s2">&quot;SomeID&quot;</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_test_name</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>Following is the complete list:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>Overridable Attributes:</dt><dd><ul>
+<li><p><strong>id</strong>: Alnum string representing an ID which you want to associate with the test.</p></li>
+<li><p><strong>priority</strong>: An integer value 1-5 depicting priority of this test, 1 being highest, 5 being lowest.</p></li>
+<li><p><strong>author</strong>: Author of this test</p></li>
+<li><p><strong>idea</strong>: The idea describing this test</p></li>
+<li><p><strong>component</strong>: Primary software component that this test targets.</p></li>
+<li><p><strong>app_version</strong>: Version of SUT that this test targets</p></li>
+<li><p><strong>level</strong>: Level of this test.</p></li>
+<li><p><strong>reviewed</strong>: Has this test been reviewed?</p></li>
+<li><p><strong>unstable</strong>: Is this test unstable?</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Non-overridable Attributes:</dt><dd><ul>
+<li><p><strong>package</strong>: Full qualified package</p></li>
+<li><p><strong>module</strong>: Name of module containing this test</p></li>
+<li><p><strong>name</strong>: Name of this test function</p></li>
+<li><p><strong>qual_name</strong>: Full qualified name of this test function <strong>&lt;package&gt;.&lt;module&gt;.&lt;function&gt;</strong></p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div>
+<div class="section" id="user-defined-test-attributes">
+<h1><strong>User-Defined Test Attributes</strong><a class="headerlink" href="#user-defined-test-attributes" title="Permalink to this headline">¶</a></h1>
+<p>You can define any number of your own attributes for a test:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arjuna</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@test</span><span class="p">(</span><span class="n">policy</span><span class="o">=</span><span class="s2">&quot;Some policy&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">check_test_name</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="specifying-tags-bugs-environments">
+<h1>Specifying <strong>Tags, Bugs, Environments</strong><a class="headerlink" href="#specifying-tags-bugs-environments" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna tests have built-in tag containers (sets), which can be specified as an argument in <strong>&#64;test</strong>, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">arjuna</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="nd">@test</span><span class="p">(</span><span class="n">tags</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;t1&#39;</span><span class="p">,</span> <span class="s1">&#39;t2&#39;</span><span class="p">},</span> <span class="n">bugs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;b1&#39;</span><span class="p">,</span><span class="s1">&#39;b2&#39;</span><span class="p">},</span> <span class="n">envs</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;e1&#39;</span><span class="p">,</span><span class="s1">&#39;e2&#39;</span><span class="p">})</span>
+<span class="k">def</span> <span class="nf">check_test_name</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<dl class="simple">
+<dt>Following are the containers:</dt><dd><ul class="simple">
+<li><p><strong>bugs</strong>: Set of bugs associated with this test</p></li>
+<li><p><strong>envs</strong>: Set of Environment names on which this test is supposed to run.</p></li>
+<li><p><strong>tags</strong>: Set of arbitrary tags for this test</p></li>
+</ul>
+</dd>
+</dl>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Tests are <strong>Test Functions</strong></a></li>
+<li><a class="reference internal" href="#basic-usage-of-test-decorator">Basic Usage of <strong>&#64;test Decorator</strong></a></li>
+<li><a class="reference internal" href="#running-a-specific-test-function"><strong>Running</strong> a Specific Test Function</a></li>
+<li><a class="reference internal" href="#skipping-a-test"><strong>Skipping</strong> a Test</a></li>
+<li><a class="reference internal" href="#handling-expected-failures-in-tests">Handling <strong>Expected Failures</strong> in Tests</a></li>
+<li><a class="reference internal" href="#specifying-built-in-test-attributes">Specifying <strong>Built-in Test Attributes</strong></a></li>
+<li><a class="reference internal" href="#user-defined-test-attributes"><strong>User-Defined Test Attributes</strong></a></li>
+<li><a class="reference internal" href="#specifying-tags-bugs-environments">Specifying <strong>Tags, Bugs, Environments</strong></a></li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="cli.html" title="previous chapter">Arjuna Command Line Interface</a>
+          <li>Next: <a href="resources.html" title="next chapter">What are Test Resources?</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

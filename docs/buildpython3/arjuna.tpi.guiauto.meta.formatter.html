@@ -1,0 +1,176 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.tpi.guiauto.meta.formatter module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.tpi.guiauto.meta.formatter">
+<span id="arjuna-tpi-guiauto-meta-formatter-module"></span><h1>arjuna.tpi.guiauto.meta.formatter module<a class="headerlink" href="#module-arjuna.tpi.guiauto.meta.formatter" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.guiauto.meta.formatter.</code><code class="sig-name descname">GNSLabelFormatter</code><span class="sig-paren">(</span><em class="sig-param">gns</em>, <em class="sig-param">**fargs</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.meta.formatter.GNSLabelFormatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Formattter for the GuiWidgetDefinition associated with a GNS Label.</p>
+<p>It is not created directly by a test author. Created using <strong>.format</strong> call of GNS object associated with a <strong>Gui</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>gns</strong> – Gui Namespace object</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>**fargs</strong> – Arbitrary key-value pairs to format the GuiWidgetDefinition associated with a GNS Label.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Supports <strong>.</strong> notation for a <strong>GuiWidgetLabel</strong> just like a <strong>GNS</strong> object. For example:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fmt</span><span class="o">.</span><span class="n">label1</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.tpi.guiauto.meta.formatter.GuiWidgetDefinitionFormatter">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.guiauto.meta.formatter.</code><code class="sig-name descname">GuiWidgetDefinitionFormatter</code><span class="sig-paren">(</span><em class="sig-param">creator</em>, <em class="sig-param">**fargs</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.meta.formatter.GuiWidgetDefinitionFormatter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Formattter for a GuiWidgetDefinition created by GuiWidget factory methods.</p>
+<p>It is not created directly by a test author. Created using <strong>.format</strong> call of a <strong>Gui</strong> or <strong>GuiElement</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>creator</strong> – <strong>Gui</strong> or <strong>GuiElement</strong></p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>**fargs</strong> – Arbitrary key-value pairs to format the GuiWidgetDefinition associated with a GNS Label.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Supports all GuiWidget factory method calls:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">fmt</span><span class="o">.</span><span class="n">element</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">multi_element</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">dropdown</span>
+<span class="n">fmt</span><span class="o">.</span><span class="n">radio_group</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.meta.formatter.GuiWidgetDefinitionFormatter.locate">
+<code class="sig-name descname">locate</code><span class="sig-paren">(</span><em class="sig-param">type='element'</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.meta.formatter.GuiWidgetDefinitionFormatter.locate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate a GuiWidget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – type of GuiWidget (element, multi_element, dropdown, radio_group)</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary key-value pairs used to construct a <strong>GuiWidgetDefinition</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>An object of type <cite>GuiWidget</cite>. Exact object type depends on the value of <strong>type</strong> attribute.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The format key-value pairs of this <cite>GuiWidgetDefinitionFormatter</cite> are used to format the identifiers in the constructed <strong>GuiWidgetDefinition</strong>.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.meta.formatter.GuiWidgetDefinitionFormatter.locator">
+<code class="sig-name descname">locator</code><span class="sig-paren">(</span><em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; arjuna.tpi.guiauto.meta.locator.GuiWidgetDefinition<a class="headerlink" href="#arjuna.tpi.guiauto.meta.formatter.GuiWidgetDefinitionFormatter.locator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a GuiWidgetDefinition.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>type</strong> – type of GuiWidget (element, multi_element, dropdown, radio_group)</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary key-value pairs used to construct a <strong>GuiWidgetDefinition</strong></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A <cite>GuiWidgetDefinition</cite> as per the arguments to this call and format arugments of this GuiWidgetDefinitionFormatter.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The format key-value pairs of this <cite>GuiWidgetDefinitionFormatter</cite> are used to format the identifiers in the constructed <strong>GuiWidgetDefinition</strong>.</p>
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

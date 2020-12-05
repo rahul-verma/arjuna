@@ -1,0 +1,184 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introduction &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="faq.html" />
+    <link rel="prev" title="Introduction" href="textparsing.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="Introduction"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="textparsing.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<span id="help-third-party"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna uses a lot of third party libraries to provide its functionality:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>lxml</p></li>
+<li><p>requests</p></li>
+<li><p>requests-toolbelt</p></li>
+<li><p>selenium</p></li>
+<li><p>webdriver_manager</p></li>
+<li><p>xlrd</p></li>
+<li><p>xlwt</p></li>
+<li><p>pyparsing</p></li>
+<li><p>pyhocon</p></li>
+<li><p>pytest</p></li>
+<li><p>pytest-html</p></li>
+<li><p>pytest-dependency</p></li>
+<li><p>PyYAML</p></li>
+<li><p>mimesis</p></li>
+<li><p>jsonpath-rw</p></li>
+<li><p>jsonpath-rw-ext</p></li>
+<li><p>genson</p></li>
+<li><p>jsonschema</p></li>
+<li><p>Pallets-Sphinx-Themes</p></li>
+<li><p>oauthlib</p></li>
+<li><p>requests_oauthlib</p></li>
+<li><p>bs4</p></li>
+<li><p>browsermob-proxy</p></li>
+<li><p>haralyzer</p></li>
+<li><p>mysql-connector-python</p></li>
+</ul>
+</div></blockquote>
+<p>Some of this is completely wrapped which means you need not worry about them.</p>
+<p>However, some libraries like pytest, selenium or PyYAML etc have an indirect impact on the way testers write code or create input files in Arjuna.</p>
+<p>This section contains helpful information about such libraries.</p>
+</div>
+<div class="section" id="beware-of-the-boolean-interpretation-in-yaml">
+<h1>Beware of the Boolean Interpretation in YAML<a class="headerlink" href="#beware-of-the-boolean-interpretation-in-yaml" title="Permalink to this headline">¶</a></h1>
+<p>YAML specification as used by PyYAML converts many strings to their boolean counterparts (True/False). Arjuna uses YAML for most of its input file formats. When you are creating such YAML files, you need to be aware of this YAML parsing behavior.</p>
+<p>One example is let’s say you use a locator in GNS files where value of attribute <strong>abc</strong> is <strong>Yes</strong>. You end up writing something like following in GNS:</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">labels</span><span class="p p-Indicator">:</span>
+
+    <span class="l l-Scalar l-Scalar-Plain">some_button</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">fattr</span><span class="p p-Indicator">:</span>
+            <span class="l l-Scalar l-Scalar-Plain">abc</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Yes</span>
+</pre></div>
+</div>
+<p>What you later see is that there is an error in finding the element and the corresponding CSS Selector generated is shown as the following in exception message:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="p">[</span><span class="nx">abc</span><span class="o">=</span><span class="s1">&#39;True&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>The above CSS Selector is obviously not what you intented for the situation. What you meant was:</p>
+<div class="highlight-javascript notranslate"><div class="highlight"><pre><span></span><span class="o">*</span><span class="p">[</span><span class="nx">abc</span><span class="o">=</span><span class="s1">&#39;Yes&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>This is because of YAML’s support for intuitively converting some string literals to boolean. Following are some strings that are converted to True/False by PyYAML:</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">a</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">Yes</span>
+<span class="l l-Scalar l-Scalar-Plain">b</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">y</span>
+<span class="l l-Scalar l-Scalar-Plain">c</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">n</span>
+<span class="l l-Scalar l-Scalar-Plain">d</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">No</span>
+<span class="l l-Scalar l-Scalar-Plain">e</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">on</span>
+<span class="l l-Scalar l-Scalar-Plain">f</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">off</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Following is the regex from YAML 1.1 specification:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">y</span><span class="o">|</span><span class="n">Y</span><span class="o">|</span><span class="n">yes</span><span class="o">|</span><span class="n">Yes</span><span class="o">|</span><span class="n">YES</span><span class="o">|</span><span class="n">n</span><span class="o">|</span><span class="n">N</span><span class="o">|</span><span class="n">no</span><span class="o">|</span><span class="n">No</span><span class="o">|</span><span class="n">NO</span><span class="o">|</span><span class="n">true</span><span class="o">|</span><span class="bp">True</span><span class="o">|</span><span class="n">TRUE</span><span class="o">|</span><span class="n">false</span><span class="o">|</span><span class="bp">False</span><span class="o">|</span><span class="n">FALSE</span><span class="o">|</span><span class="n">on</span><span class="o">|</span><span class="n">On</span><span class="o">|</span><span class="n">ON</span><span class="o">|</span><span class="n">off</span><span class="o">|</span><span class="n">Off</span><span class="o">|</span><span class="n">OFF</span>
+</pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>As a rule of thumb:</dt><dd><ul class="simple">
+<li><p>For true/false, when you mean boolean, use True/true/False/false.</p></li>
+<li><p>For other strings mentioned above or when you mean True/true/False/false as strings, then provide them in quotes.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="c1"># as string</span>
+<span class="l l-Scalar l-Scalar-Plain">a</span><span class="p p-Indicator">:</span> <span class="s">&quot;y&quot;</span>
+
+<span class="c1"># True as boolean</span>
+<span class="l l-Scalar l-Scalar-Plain">b</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">True</span>
+
+<span class="c1"># True as string</span>
+<span class="l l-Scalar l-Scalar-Plain">c</span><span class="p p-Indicator">:</span> <span class="s">&quot;True&quot;</span>
+</pre></div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#beware-of-the-boolean-interpretation-in-yaml">Beware of the Boolean Interpretation in YAML</a></li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="textparsing.html" title="previous chapter">Introduction</a>
+          <li>Next: <a href="faq.html" title="next chapter">Introduction</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

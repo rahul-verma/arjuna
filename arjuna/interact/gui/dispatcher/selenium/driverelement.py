@@ -17,7 +17,7 @@
 
 
 from arjuna.interact.gui.dispatcher.driver.element_commands import DriverElementCommands
-from arjuna.interact.gui.dispatcher.driver.element_finder import ElementFinder
+from arjuna.interact.gui.dispatcher.driver.element_finder import SeleniumElementFinder
 from arjuna.interact.gui.dispatcher.driver.melement import MultiElement
 from arjuna.tpi.error import *
 from arjuna.core.error import *
@@ -43,12 +43,12 @@ class SeleniumDriverElementDispatcher:
         self.__partial = True
         self.__instance_index = index
 
-    def find_element(self, with_type, with_value, *, relations=None):
-        element = ElementFinder.find_element(self.driver_element, with_type, with_value, relations=relations)
+    def find_element(self, with_type, with_value, *, relations=None, filters=None):
+        element = SeleniumElementFinder.find_element(self.driver_element, with_type, with_value, relations=relations, filters=filters)
         return 1, self.create_dispatcher(self.__driver_dispatcher, element)
 
-    def find_multielement(self, with_type, with_value, *, relations=None):
-        web_elements = ElementFinder.find_elements(self.driver_element, with_type, with_value, relations=relations)
+    def find_multielement(self, with_type, with_value, *, relations=None, filters=None):
+        web_elements = SeleniumElementFinder.find_elements(self.driver_element, with_type, with_value, relations=relations, filters=filters)
         melement = MultiElement([self.create_dispatcher(self.__driver_dispatcher, web_element) for web_element in web_elements])
         return melement.get_size(), melement
 

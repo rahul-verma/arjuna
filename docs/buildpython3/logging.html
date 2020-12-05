@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Introduction &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Introduction" href="reporting.html" />
+    <link rel="prev" title="Purpose" href="l10n.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="reporting.html" title="Introduction"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="l10n.html" title="Purpose"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="introduction">
+<span id="logging"></span><h1>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna’s logging features as provided by <a class="reference internal" href="arjuna.tpi.log.html#module-arjuna.tpi.log" title="arjuna.tpi.log"><code class="xref py py-mod docutils literal notranslate"><span class="pre">log</span></code></a> module, give you precise control over what is included in console display and log file.</p>
+<p>For each test run, Arjuna creates a log file with the name <strong>arjuna.log</strong> in <strong>&lt;Test Project Directory&gt;/report/&lt;run report dir&gt;/log</strong> directory.</p>
+</div>
+<div class="section" id="arjuna-s-logging-functions-to-support-python-logging-levels">
+<h1><strong>Arjuna’s Logging Functions</strong> to Support Python Logging Levels<a class="headerlink" href="#arjuna-s-logging-functions-to-support-python-logging-levels" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna provides individual logging functions to support the default Python logging levels:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>DEBUG - <a class="reference internal" href="arjuna.tpi.log.html#arjuna.tpi.log.log_debug" title="arjuna.tpi.log.log_debug"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_debug</span></code></a></p></li>
+<li><p>INFO - <a class="reference internal" href="arjuna.tpi.log.html#arjuna.tpi.log.log_info" title="arjuna.tpi.log.log_info"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_info</span></code></a></p></li>
+<li><p>WARNING - <a class="reference internal" href="arjuna.tpi.log.html#arjuna.tpi.log.log_warning" title="arjuna.tpi.log.log_warning"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_warning</span></code></a></p></li>
+<li><p>ERROR - <a class="reference internal" href="arjuna.tpi.log.html#arjuna.tpi.log.log_error" title="arjuna.tpi.log.log_error"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_error</span></code></a></p></li>
+<li><p>FATAL - <a class="reference internal" href="arjuna.tpi.log.html#arjuna.tpi.log.log_fatal" title="arjuna.tpi.log.log_fatal"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_fatal</span></code></a></p></li>
+</ul>
+</div></blockquote>
+<p>The levels work just like Python logging levels. <strong>FATAL</strong> has the top priority and <strong>DEBUG</strong> has the least.</p>
+</div>
+<div class="section" id="controlling-which-log-messages-are-included-on-console-and-in-log-file">
+<h1>Controlling Which Log Messages Are Included on Console and in Log File<a class="headerlink" href="#controlling-which-log-messages-are-included-on-console-and-in-log-file" title="Permalink to this headline">¶</a></h1>
+<p>When you set a log level, only the log messages that are of same or higher priority get logged.</p>
+<p>For example, setting a log level to <strong>WARNING</strong> would mean:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Calls to <strong>log_warning</strong>, <strong>log_error</strong> and <strong>log_fatal</strong> will be entertained.</p></li>
+<li><p>Calls to <strong>log_info</strong> and <strong>log_debug</strong> will be ignored.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="default-logging-levels">
+<h1><strong>Default</strong> Logging Levels<a class="headerlink" href="#default-logging-levels" title="Permalink to this headline">¶</a></h1>
+<p>Default logging level for console is <strong>INFO</strong>.</p>
+<p>Default logging level for log file (arjuna.log) is <strong>DEBUG</strong>.</p>
+</div>
+<div class="section" id="arjuna-s-trace-log-level">
+<h1>Arjuna’s <strong>TRACE</strong> Log Level<a class="headerlink" href="#arjuna-s-trace-log-level" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna adds an additional level of logging - <strong>TRACE</strong> - which is of lower priority than <strong>DEBUG</strong>.</p>
+<p>This is parimarily added so that Arjuna’s internal logging is kept to a minimum even when the logging is taking place at <strong>DEBUG</strong> level.</p>
+<p>You can use it in your test project with a similar goal by using <a class="reference internal" href="arjuna.tpi.log.html#arjuna.tpi.log.log_trace" title="arjuna.tpi.log.log_trace"><code class="xref py py-func docutils literal notranslate"><span class="pre">log_trace</span></code></a> call.</p>
+</div>
+<div class="section" id="overriding-logging-level-defaults">
+<h1><strong>Overriding Logging Level Defaults</strong><a class="headerlink" href="#overriding-logging-level-defaults" title="Permalink to this headline">¶</a></h1>
+<p>You can change Arjuna’s logging level defaults using the following commands in command line:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>-dl</strong> / <strong>–display-level</strong>: Set level for console logging.</p></li>
+<li><p><strong>-ll</strong> / <strong>–log-level</strong>: Set level for file logging (arjuna.log)</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="contextual-logging">
+<h1><strong>Contextual Logging</strong><a class="headerlink" href="#contextual-logging" title="Permalink to this headline">¶</a></h1>
+<p>This is an advanced feature provided by Arjuna.</p>
+<p>You can set one or more contexts (strings) to log messages.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">log_info</span><span class="p">(</span><span class="s2">&quot;test context 2&quot;</span><span class="p">,</span> <span class="n">contexts</span><span class="o">=</span><span class="s2">&quot;test2&quot;</span><span class="p">)</span>
+<span class="n">log_info</span><span class="p">(</span><span class="s2">&quot;test context 4&quot;</span><span class="p">,</span> <span class="n">contexts</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;test3&quot;</span><span class="p">,</span> <span class="s2">&quot;test4&quot;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>A log message with a context(s) set for it does not get logged by default in Arjuna. It is only logged when <strong>ArjunaOption.LOG_ALLOWED_CONTEXTS</strong> has been accordingly set to include the context string. This can be done by any of the following means:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Passing <strong>-ao LOG_ALLOWED_CONTEXTS &lt;comma separated context strings&gt;</strong> to the command line.</p></li>
+<li><p>Overrding LOG_ALLOWED_CONTEXTS in the reference configuration.</p></li>
+</ul>
+</div></blockquote>
+<p>Note: Log messages without contexts set for them will work as usual and are not impacted by the <strong>LOG_ALLOWED_CONTEXTS</strong> option.</p>
+</div>
+<div class="section" id="auto-logging-using-track-decorator">
+<h1><strong>Auto-Logging</strong> using <strong>&#64;track</strong> Decorator<a class="headerlink" href="#auto-logging-using-track-decorator" title="Permalink to this headline">¶</a></h1>
+<p>Many a times, you want to log messages at the beginning and end of a Python function/method call.</p>
+<p>This is a primary use case and usually depends on test author’s commitment to logging (and needs conscious efforts.)</p>
+</div>
+<div class="section" id="tracking-methods-functions-properties">
+<h1>Tracking <strong>Methods, Functions, Properties</strong><a class="headerlink" href="#tracking-methods-functions-properties" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna’s solves this by provding auto-logging using its <a class="reference internal" href="arjuna.tpi.tracker.html#arjuna.tpi.tracker.track" title="arjuna.tpi.tracker.track"><code class="xref py py-func docutils literal notranslate"><span class="pre">&#64;track</span></code></a> decorator. It will log:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Beginning of the call with provided arguments.</p></li>
+<li><p>End of the call with return value (Long return values are truncated for brevity.)</p></li>
+<li><p>Exceptions and exception trace if any exception is raised in calling the given function/method/property.</p></li>
+</ul>
+</div></blockquote>
+<dl class="simple">
+<dt>You can use <strong>&#64;track</strong> with:</dt><dd><ul class="simple">
+<li><p>Functions</p></li>
+<li><p>Bound Methods in a class</p></li>
+<li><p>Class Methods in a class</p></li>
+<li><p>Static Methods in a class</p></li>
+<li><p>Properties in a class</p></li>
+</ul>
+</dd>
+</dl>
+<p>Following are some samples:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Function</span>
+<span class="nd">@track</span>
+<span class="k">def</span> <span class="nf">test1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;in test1&quot;</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MethodTrack</span><span class="p">:</span>
+
+    <span class="c1"># Bound Method</span>
+    <span class="nd">@track</span>
+    <span class="k">def</span> <span class="nf">test1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;in test1&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Class method</span>
+    <span class="nd">@track</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">cls_method_1</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;in cls_method&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Static Method</span>
+    <span class="nd">@track</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">stat_method_1</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+        <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;in stat_method&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Property getter</span>
+    <span class="nd">@track</span>
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">prop1</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;prop1 getter&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_p</span>
+
+    <span class="c1"># Property setter. Note that just setting this will also decorate the getter.</span>
+    <span class="nd">@track</span>
+    <span class="nd">@prop1.setter</span>
+    <span class="k">def</span> <span class="nf">prop1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;prop1 setter&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_p</span> <span class="o">=</span> <span class="n">value</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="tracking-all-methods-in-a-class">
+<h1>Tracking <strong>All Methods</strong> in a Class<a class="headerlink" href="#tracking-all-methods-in-a-class" title="Permalink to this headline">¶</a></h1>
+<p>If you want to track all methods in a class, you can decorate the class with <strong>&#64;track</strong> rather than decorating all individual methods.</p>
+<p>This will:</p>
+<blockquote>
+<div><ul class="simple">
+<li><dl class="simple">
+<dt>Track all</dt><dd><ul>
+<li><p>Bound Methods in a class</p></li>
+<li><p>Class Methods in a class</p></li>
+<li><p>Static Methods in a class</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>NOT track:</dt><dd><ul>
+<li><p>properties (They still need to be individually decorated.)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</div></blockquote>
+<p>Following is a sample:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@track</span>
+<span class="k">class</span> <span class="nc">ClassTrack</span><span class="p">:</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;in __init__&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">test1</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">vargs</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;in test1&quot;</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">cls_method</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">a</span><span class="p">):</span>
+        <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;in cls_method&quot;</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">stat_method</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+        <span class="n">log_debug</span><span class="p">(</span><span class="s2">&quot;in stat_method&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="default-logging-level-for-track">
+<h1><strong>Default Logging Level</strong> for &#64;track<a class="headerlink" href="#default-logging-level-for-track" title="Permalink to this headline">¶</a></h1>
+<p>To control verbosity of logging, &#64;track uses the following default logging levels:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><strong>DEBUG</strong> for all public methods.</p></li>
+<li><p><strong>TRACE</strong> for all protected (begin with “_”), private (begin with “__”) and magic methods (the dunder methods begin and end with “__”)</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="changing-logging-level-for-track">
+<h1><strong>Changing Logging Level</strong> for &#64;track<a class="headerlink" href="#changing-logging-level-for-track" title="Permalink to this headline">¶</a></h1>
+<p>You can change the logging level for an object decorated with <strong>&#64;track</strong> by providing the level as argument:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nd">@track</span><span class="p">(</span><span class="s2">&quot;info&quot;</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ClassTrackInfo</span><span class="p">:</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>Note: This does not impact logging level for non-public methods.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Introduction</a></li>
+<li><a class="reference internal" href="#arjuna-s-logging-functions-to-support-python-logging-levels"><strong>Arjuna’s Logging Functions</strong> to Support Python Logging Levels</a></li>
+<li><a class="reference internal" href="#controlling-which-log-messages-are-included-on-console-and-in-log-file">Controlling Which Log Messages Are Included on Console and in Log File</a></li>
+<li><a class="reference internal" href="#default-logging-levels"><strong>Default</strong> Logging Levels</a></li>
+<li><a class="reference internal" href="#arjuna-s-trace-log-level">Arjuna’s <strong>TRACE</strong> Log Level</a></li>
+<li><a class="reference internal" href="#overriding-logging-level-defaults"><strong>Overriding Logging Level Defaults</strong></a></li>
+<li><a class="reference internal" href="#contextual-logging"><strong>Contextual Logging</strong></a></li>
+<li><a class="reference internal" href="#auto-logging-using-track-decorator"><strong>Auto-Logging</strong> using <strong>&#64;track</strong> Decorator</a></li>
+<li><a class="reference internal" href="#tracking-methods-functions-properties">Tracking <strong>Methods, Functions, Properties</strong></a></li>
+<li><a class="reference internal" href="#tracking-all-methods-in-a-class">Tracking <strong>All Methods</strong> in a Class</a></li>
+<li><a class="reference internal" href="#default-logging-level-for-track"><strong>Default Logging Level</strong> for &#64;track</a></li>
+<li><a class="reference internal" href="#changing-logging-level-for-track"><strong>Changing Logging Level</strong> for &#64;track</a></li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="l10n.html" title="previous chapter">Purpose</a>
+          <li>Next: <a href="reporting.html" title="next chapter">Introduction</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

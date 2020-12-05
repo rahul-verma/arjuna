@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gui Namespace - Externalizing Locators &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="../_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GuiWidget Locators" href="locators.html" />
+    <link rel="prev" title="Element Identification and Interaction" href="element.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="locators.html" title="GuiWidget Locators"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="element.html" title="Element Identification and Interaction"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Arjuna 1.1.30 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">&lt;no title&gt;</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gui-namespace-externalizing-locators">
+<span id="gns"></span><h1><strong>Gui Namespace - Externalizing Locators</strong><a class="headerlink" href="#gui-namespace-externalizing-locators" title="Permalink to this headline">¶</a></h1>
+<p>After launching a <strong>GuiApp</strong>, apart from basic browser operations, most of times an automated test finds and interacts with Gui elements. If locators can be externalized outside of the code, it has a significant impact on the maintainbility of the Gui test automation implementation.</p>
+<p>Externalizing of identifiers is built into Arjuna. The object which contains identification information and related meta-data of a Gui is referred to as <strong>GuiNamespace (GNS)</strong> in Arjuna.</p>
+<div class="section" id="the-gns-file">
+<h2><strong>The GNS File</strong><a class="headerlink" href="#the-gns-file" title="Permalink to this headline">¶</a></h2>
+<p>Arjuna uses <strong>YAML</strong> as the format for externalization of identifiers. Fow now, we will discuss basic usage of the format.</p>
+<p>Following is the high level format for simple usage:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">labels</span><span class="p p-Indicator">:</span>
+
+ <span class="l l-Scalar l-Scalar-Plain">&lt;label1&gt;</span><span class="p p-Indicator">:</span>
+     <span class="l l-Scalar l-Scalar-Plain">&lt;locator type&gt;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;locator data&gt;</span>
+
+ <span class="l l-Scalar l-Scalar-Plain">&lt;label2&gt;</span><span class="p p-Indicator">:</span>
+     <span class="l l-Scalar l-Scalar-Plain">&lt;locator type&gt;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;locator data&gt;</span>
+
+ <span class="l l-Scalar l-Scalar-Plain">&lt;labelN&gt;</span><span class="p p-Indicator">:</span>
+     <span class="l l-Scalar l-Scalar-Plain">&lt;locator type&gt;</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">&lt;locator data&gt;</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>This file has a <strong>YAML</strong> extension.</p></li>
+<li><p>All labels are placed under <strong>labels</strong> heading.</p></li>
+<li><p>Each label represents element identification information which can be later referenced by this label.</p></li>
+<li><p>The label should be a valid Arjuna name.</p></li>
+<li><p>In its basic usage format, the section has a key value pair for a given locator type. For example</p>
+<blockquote>
+<div><div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">id</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">user_login</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Labels are treated as case-insensitive by Arjuna.</p></li>
+</ol>
+<p>Check <a class="reference internal" href="locators.html#basic-locators"><span class="std std-ref">Basic Locators</span></a> to know how to externalize a specific locator.</p>
+</div>
+<div class="section" id="associating-gns-file-with-guiapp">
+<h2><strong>Associating GNS File with GuiApp</strong><a class="headerlink" href="#associating-gns-file-with-guiapp" title="Permalink to this headline">¶</a></h2>
+<p>Arjuna picks up GNS files relative to the defaut GNS directory: <strong>&lt;Project Root&gt;/guiauto/namespace</strong>. You can give the <strong>label</strong> argument while constructing a <strong>GuiApp</strong> to associate it with the GNS file as follows:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span> <span class="o">=</span> <span class="n">GuiApp</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;SomeName&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>There are many advanced ways for this association, which are documented later in this doc.</p>
+</div>
+<div class="section" id="using-gns-labels-in-code">
+<h2><strong>Using GNS Labels in Code</strong><a class="headerlink" href="#using-gns-labels-in-code" title="Permalink to this headline">¶</a></h2>
+<p>You can create elements using these identifiers by using <strong>&lt;app object&gt;.gns.&lt;GNS label&gt;` syntax in your code as follows (assume **app</strong> to be the <strong>GuiApp</strong> object). For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">element</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">gns</span><span class="o">.</span><span class="n">user_id</span>
+</pre></div>
+</div>
+<p>Arjuna uses operator overloading to tie the <strong>gns</strong> attribute to the <strong>GNS file</strong> label, locates it and creates the <strong>GuiElement</strong>.</p>
+</div>
+<div class="section" id="guiapp-gns-as-fallback-gns-for-pages-sections-and-widgets">
+<h2><strong>GuiApp GNS</strong> as <strong>Fallback GNS</strong> for Pages, Sections and Widgets<a class="headerlink" href="#guiapp-gns-as-fallback-gns-for-pages-sections-and-widgets" title="Permalink to this headline">¶</a></h2>
+<p>The GNS file for GuiApp acts as a fallback for labels not defined in GNS of a corresponding <strong>GuiPage</strong>, <strong>GuiSection</strong> or <strong>GuiWidget</strong>.</p>
+<p>This comes handy when there are locators that are relevant for multiple pages, sections or widgets.</p>
+<p>This also helps to start small with externalization by putting all locators in <strong>GuiApp</strong> GNS file and then expanding the model further as you go along by creating more externalized GNS files for pages, sections and widgets.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>Gui Namespace - Externalizing Locators</strong></a><ul>
+<li><a class="reference internal" href="#the-gns-file"><strong>The GNS File</strong></a></li>
+<li><a class="reference internal" href="#associating-gns-file-with-guiapp"><strong>Associating GNS File with GuiApp</strong></a></li>
+<li><a class="reference internal" href="#using-gns-labels-in-code"><strong>Using GNS Labels in Code</strong></a></li>
+<li><a class="reference internal" href="#guiapp-gns-as-fallback-gns-for-pages-sections-and-widgets"><strong>GuiApp GNS</strong> as <strong>Fallback GNS</strong> for Pages, Sections and Widgets</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="../index.html">Overview</a>
+    <ul>
+      <li><a href="index.html">&lt;no title&gt;</a>
+        <ul>
+          <li>Previous: <a href="element.html" title="previous chapter"><strong>Element Identification and Interaction</strong></a>
+          <li>Next: <a href="locators.html" title="next chapter"><strong>GuiWidget Locators</strong></a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="../_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

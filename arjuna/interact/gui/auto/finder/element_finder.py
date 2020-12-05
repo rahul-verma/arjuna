@@ -79,7 +79,7 @@ class ElementFinder:
                     if locator.ltype.name == "XPATH":
                         if not lvalue.startswith("."):
                             lvalue = "." + lvalue
-                    size, dispatcher = dispatcher_call(locator.ltype.name, lvalue, relations=wmd.meta.relations)
+                    size, dispatcher = dispatcher_call(locator.ltype.name, lvalue, relations=wmd.meta.relations, filters=wmd.meta.filters)
                 return locator.ltype.name, locator.lvalue, size, dispatcher
             except WaitableError as e:
                 we = e
@@ -88,4 +88,4 @@ class ElementFinder:
             else:
                 we = None
         if not found:
-            raise GuiWidgetNotFoundError(*wmd.locators, container=self.__container)
+            raise GuiWidgetNotFoundError(*wmd.locators, relations=wmd.meta.relations, filters=wmd.meta.filters, container=self.__container)

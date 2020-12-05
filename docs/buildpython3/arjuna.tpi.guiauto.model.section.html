@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.tpi.guiauto.model.section module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.tpi.guiauto.model.section">
+<span id="arjuna-tpi-guiauto-model-section-module"></span><h1>arjuna.tpi.guiauto.model.section module<a class="headerlink" href="#module-arjuna.tpi.guiauto.model.section" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="arjuna.tpi.guiauto.model.section.GuiSection">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.guiauto.model.section.</code><code class="sig-name descname">GuiSection</code><span class="sig-paren">(</span><em class="sig-param">*args</em>, <em class="sig-param">parent_gui: arjuna.tpi.guiauto.model.gui.Gui</em>, <em class="sig-param">label: str = None</em>, <em class="sig-param">root: LabelOrLocator = None</em>, <em class="sig-param">gns_dir: str = None</em>, <em class="sig-param">gns_file_name: str = None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.model.section.GuiSection" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="arjuna.tpi.guiauto.model.content.html#arjuna.tpi.guiauto.model.content.GuiAppContent" title="arjuna.tpi.guiauto.model.content.GuiAppContent"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.tpi.guiauto.model.content.GuiAppContent</span></code></a></p>
+<p>Represents a GUI Section i.e. a part of the current page in the Gui.</p>
+<p>It is an implementation of <strong>GuiAppContent</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>*args</strong> – Any number of positional argumnts. These are passed to the <strong>prepare()</strong> method if defined in inherited class.</p>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>parent_gui</strong> – (Mandatory) The <strong>Gui</strong> object that contains this <strong>GuiSection</strong>.</p></li>
+<li><p><strong>label</strong> – Label for the this <strong>GuiSection</strong>. If not provided, the class name is used as the label.</p></li>
+<li><p><strong>root</strong> – Root element of this <strong>GuiSection</strong>. Can be <strong>label</strong> string defined in its GNS File or a <strong>Locator</strong> object.</p></li>
+<li><p><strong>gns_dir</strong> – Relative Root Directory for GNS file associated with this <strong>GuiSection</strong>. Default is <strong>page/section</strong> directory in associated <strong>GuiApp</strong> namespace. If provided, it is considered relative to the namespace directory of associated <strong>GuiApp</strong>.</p></li>
+<li><p><strong>gns_file_name</strong> – Name of GNS file associated with this <strong>GuiSection</strong>. If not provided, default is <strong>&lt;label&gt;.yaml</strong>.</p></li>
+<li><p><strong>kwargs</strong> – Arbitrary keyword arugments. These are passed to the <strong>prepare()</strong> method if defined in inherited class.</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A <strong>GuiSection</strong> can have a root element. If defined, all locator calls in this object happen as a nested locating call using the root element.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Root element provided in in __init__ call is given preference.</p></li>
+<li><p>If not provided, Arjuna looks for <strong>root</strong> definition in <strong>load</strong> section of its GNS file.</p></li>
+<li><p>If above is also not provided, then locating happens from the root of the DOM of current page.</p></li>
+</ul>
+</div></blockquote>
+</div>
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.model.section.GuiSection.dropdown">
+<code class="sig-name descname">dropdown</code><span class="sig-paren">(</span><em class="sig-param">fargs=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; GuiDropDown<a class="headerlink" href="#arjuna.tpi.guiauto.model.section.GuiSection.dropdown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate a <cite>GuiDropDown</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fargs</strong> – A dictionary of key-value pairs for formatting the <cite>GuiWidgetDefinition</cite>. Use <strong>.format(kwargs).wait_until_absent</strong> for more Pythonic code when formatting.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary key-value pairs used to construct a <cite>GuiWidgetDefinition</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>GuiDropDown</cite> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.model.section.GuiSection.element">
+<code class="sig-name descname">element</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">fargs=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; GuiElement<a class="headerlink" href="#arjuna.tpi.guiauto.model.section.GuiSection.element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate a <cite>GuiElement</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fargs</strong> – A dictionary of key-value pairs for formatting the <cite>GuiWidgetDefinition</cite>. Use <strong>.format(kwargs).wait_until_absent</strong> for more Pythonic code when formatting.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary key-value pairs used to construct a <cite>GuiWidgetDefinition</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>GuiElement</cite> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.model.section.GuiSection.locate">
+<code class="sig-name descname">locate</code><span class="sig-paren">(</span><em class="sig-param">locator</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.model.section.GuiSection.locate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate a GuiWidget.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>locator</strong> – <cite>GuiWidgetDefinition</cite> object.</p></li>
+<li><p><strong>Returns</strong> – An object of type <cite>GuiWidget</cite>. Exact object type depends on the value of <strong>type</strong> attribute in <cite>GuiWidgetDefinition</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.model.section.GuiSection.multi_element">
+<code class="sig-name descname">multi_element</code><span class="sig-paren">(</span><em class="sig-param">fargs=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; GuiMultiElement<a class="headerlink" href="#arjuna.tpi.guiauto.model.section.GuiSection.multi_element" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate a <cite>GuiMultiElement</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fargs</strong> – A dictionary of key-value pairs for formatting the <cite>GuiWidgetDefinition</cite>. Use <strong>.format(kwargs).wait_until_absent</strong> for more Pythonic code when formatting.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary key-value pairs used to construct a <cite>GuiWidgetDefinition</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>GuiMultiElement</cite> object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.model.section.GuiSection.parent">
+<em class="property">property </em><code class="sig-name descname">parent</code><a class="headerlink" href="#arjuna.tpi.guiauto.model.section.GuiSection.parent" title="Permalink to this definition">¶</a></dt>
+<dd><p>Parent GUI of this <strong>GuiSection</strong>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.model.section.GuiSection.radio_group">
+<code class="sig-name descname">radio_group</code><span class="sig-paren">(</span><em class="sig-param">fargs=None</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span> &#x2192; GuiRadioGroup<a class="headerlink" href="#arjuna.tpi.guiauto.model.section.GuiSection.radio_group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Locate a <cite>GuiRadioGroup</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Keyword Arguments</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>fargs</strong> – A dictionary of key-value pairs for formatting the <cite>GuiWidgetDefinition</cite>. Use <strong>.format(kwargs).wait_until_absent</strong> for more Pythonic code when formatting.</p></li>
+<li><p><strong>**kwargs</strong> – Arbitrary key-value pairs used to construct a <cite>GuiWidgetDefinition</cite></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><cite>GuiRadioGroup</cite> object</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.model.section.GuiSection.source">
+<em class="property">property </em><code class="sig-name descname">source</code><a class="headerlink" href="#arjuna.tpi.guiauto.model.section.GuiSection.source" title="Permalink to this definition">¶</a></dt>
+<dd><p><cite>GuiElementSource</cite> object for the root element of this <strong>GuiSection</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises</dt>
+<dd class="field-odd"><p><strong>Exception is raised if root element is not defined.</strong> – </p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

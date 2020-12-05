@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.engine.meta module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.engine.meta">
+<span id="arjuna-engine-meta-module"></span><h1>arjuna.engine.meta module<a class="headerlink" href="#module-arjuna.engine.meta" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="arjuna.engine.meta.Group">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.meta.</code><code class="sig-name descname">Group</code><span class="sig-paren">(</span><em class="sig-param">py_request</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.Group" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.engine.meta.Group.config">
+<em class="property">property </em><code class="sig-name descname">config</code><a class="headerlink" href="#arjuna.engine.meta.Group.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.Group.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#arjuna.engine.meta.Group.name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.Group.space">
+<em class="property">property </em><code class="sig-name descname">space</code><a class="headerlink" href="#arjuna.engine.meta.Group.space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.Group.thread_name">
+<em class="property">property </em><code class="sig-name descname">thread_name</code><a class="headerlink" href="#arjuna.engine.meta.Group.thread_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.meta.GroupSpace">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.meta.</code><code class="sig-name descname">GroupSpace</code><span class="sig-paren">(</span><em class="sig-param">pytest_request</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.GroupSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.meta.Space" title="arjuna.engine.meta.Space"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.meta.Space</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.meta.Info">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.meta.</code><code class="sig-name descname">Info</code><span class="sig-paren">(</span><em class="sig-param">pytest_request</em>, <em class="sig-param">attrs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.Info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.engine.meta.Info.get_qual_name">
+<code class="sig-name descname">get_qual_name</code><span class="sig-paren">(</span><em class="sig-param">with_params=False</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.Info.get_qual_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.Info.get_qual_name_with_data">
+<code class="sig-name descname">get_qual_name_with_data</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.Info.get_qual_name_with_data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.meta.Module">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.meta.</code><code class="sig-name descname">Module</code><span class="sig-paren">(</span><em class="sig-param">py_request</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.Module" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.engine.meta.Module.space">
+<em class="property">property </em><code class="sig-name descname">space</code><a class="headerlink" href="#arjuna.engine.meta.Module.space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.meta.ModuleSpace">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.meta.</code><code class="sig-name descname">ModuleSpace</code><span class="sig-paren">(</span><em class="sig-param">pytest_request</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.ModuleSpace" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.meta.Space" title="arjuna.engine.meta.Space"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.meta.Space</span></code></a></p>
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.meta.My">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.meta.</code><code class="sig-name descname">My</code><span class="sig-paren">(</span><em class="sig-param">test_meta_data=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.My" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.engine.meta.My.asserter">
+<em class="property">property </em><code class="sig-name descname">asserter</code><a class="headerlink" href="#arjuna.engine.meta.My.asserter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.bugs">
+<em class="property">property </em><code class="sig-name descname">bugs</code><a class="headerlink" href="#arjuna.engine.meta.My.bugs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.config">
+<em class="property">property </em><code class="sig-name descname">config</code><a class="headerlink" href="#arjuna.engine.meta.My.config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.contextual_data_refs">
+<em class="property">property </em><code class="sig-name descname">contextual_data_refs</code><a class="headerlink" href="#arjuna.engine.meta.My.contextual_data_refs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.data">
+<em class="property">property </em><code class="sig-name descname">data</code><a class="headerlink" href="#arjuna.engine.meta.My.data" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.envs">
+<em class="property">property </em><code class="sig-name descname">envs</code><a class="headerlink" href="#arjuna.engine.meta.My.envs" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.get_config">
+<code class="sig-name descname">get_config</code><span class="sig-paren">(</span><em class="sig-param">name=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.My.get_config" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.group">
+<em class="property">property </em><code class="sig-name descname">group</code><a class="headerlink" href="#arjuna.engine.meta.My.group" title="Permalink to this definition">¶</a></dt>
+<dd><p>This info is available only within the body of a fixture or test function.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.info">
+<em class="property">property </em><code class="sig-name descname">info</code><a class="headerlink" href="#arjuna.engine.meta.My.info" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.module">
+<em class="property">property </em><code class="sig-name descname">module</code><a class="headerlink" href="#arjuna.engine.meta.My.module" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.raw_request">
+<em class="property">property </em><code class="sig-name descname">raw_request</code><a class="headerlink" href="#arjuna.engine.meta.My.raw_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.resources">
+<em class="property">property </em><code class="sig-name descname">resources</code><a class="headerlink" href="#arjuna.engine.meta.My.resources" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.set_req_obj">
+<code class="sig-name descname">set_req_obj</code><span class="sig-paren">(</span><em class="sig-param">pytest_request</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.My.set_req_obj" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.space">
+<em class="property">property </em><code class="sig-name descname">space</code><a class="headerlink" href="#arjuna.engine.meta.My.space" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.meta.My.tags">
+<em class="property">property </em><code class="sig-name descname">tags</code><a class="headerlink" href="#arjuna.engine.meta.My.tags" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.meta.Space">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.meta.</code><code class="sig-name descname">Space</code><span class="sig-paren">(</span><em class="sig-param">pytest_request</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.meta.Space" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.engine.meta.Space.raw_request">
+<em class="property">property </em><code class="sig-name descname">raw_request</code><a class="headerlink" href="#arjuna.engine.meta.Space.raw_request" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

@@ -269,7 +269,7 @@ class Locator:
             new_locator.set_value(locator.lvalue.create_formatted_locator(**fargs))
             return new_locator
 
-        fmt_locator_value = self.lvalue.replace("\{", "__LB__").replace("}", "__RB__")
+        fmt_locator_value = str(self.lvalue).replace("\{", "__LB__").replace("}", "__RB__")
 
         # Find params
         matches = re.findall(pattern, fmt_locator_value)

@@ -1,0 +1,291 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.tpi.guiauto.base.single_widget module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.tpi.guiauto.base.single_widget">
+<span id="arjuna-tpi-guiauto-base-single-widget-module"></span><h1>arjuna.tpi.guiauto.base.single_widget module<a class="headerlink" href="#module-arjuna.tpi.guiauto.base.single_widget" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.guiauto.base.single_widget.</code><code class="sig-name descname">SingleGuiWidget</code><span class="sig-paren">(</span><em class="sig-param">gui</em>, <em class="sig-param">wmd</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.interact.gui.auto.base.dispatchable._Dispatchable</span></code></p>
+<p>Abstract claas for a single GuiWidget in the Gui.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gui</strong> – Gui containing this GuiWidget.</p></li>
+<li><p><strong>wmd</strong> – GuiWidgetMetaData of this GuiWidget.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.check">
+<code class="sig-name descname">check</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.check" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check this GuiWidget.</p>
+<p>Waits for clickability. Click happens only if it is currently unchecked.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.clear_text">
+<code class="sig-name descname">clear_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.clear_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear text of this GuiWidget.</p>
+<p>Waits for clickability.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.click">
+<code class="sig-name descname">click</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.click" title="Permalink to this definition">¶</a></dt>
+<dd><p>Click on this GuiWidget.</p>
+<p>Waits for clickability. Waits for click to succeed.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.config">
+<em class="property">property </em><code class="sig-name descname">config</code><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.config" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Configuration</strong> object associated with this GuiWidget.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.deselect">
+<code class="sig-name descname">deselect</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.deselect" title="Permalink to this definition">¶</a></dt>
+<dd><p>De-select this GuiWidget.</p>
+<p>Waits for clickability. Click happens only if it is currently selected.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.double_click">
+<code class="sig-name descname">double_click</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.double_click" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mouse double click.</p>
+<p>Waits for clickability.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.enter_text">
+<code class="sig-name descname">enter_text</code><span class="sig-paren">(</span><em class="sig-param">text</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.enter_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send text to this GuiWidget.</p>
+<p>Waits for clickability. <strong>Click on GuiWidget is executed before send keys operation</strong>.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.get_attr">
+<code class="sig-name descname">get_attr</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.get_attr" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get value of an attribute for this GuiWidget.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.get_property">
+<code class="sig-name descname">get_property</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.get_property" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get value of a property for this GuiWidget.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.hover">
+<code class="sig-name descname">hover</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.hover" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mouse hover on this GuiWidget.</p>
+<p>Waits for clickability.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.hover_and_click">
+<code class="sig-name descname">hover_and_click</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.hover_and_click" title="Permalink to this definition">¶</a></dt>
+<dd><p>Mouse hover and click on this GuiWidget.</p>
+<p>Waits for clickability.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.is_checked">
+<code class="sig-name descname">is_checked</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.is_checked" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether GuiWidget is checked. No dynamic waiting.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.is_clickable">
+<code class="sig-name descname">is_clickable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.is_clickable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether GuiWidget is clickable. No dynamic waiting.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.is_selected">
+<code class="sig-name descname">is_selected</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.is_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether GuiWidget is selected. No dynamic waiting.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.is_visible">
+<code class="sig-name descname">is_visible</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.is_visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check whether GuiWidget is visible. No dynamic waiting.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.scroll_full_height">
+<code class="sig-name descname">scroll_full_height</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.scroll_full_height" title="Permalink to this definition">¶</a></dt>
+<dd><p>Scroll full height of a GuiWidget. Applicable when it represents scrollable widgets in a Gui.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.select">
+<code class="sig-name descname">select</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select this GuiWidget.</p>
+<p>Waits for clickability. Click happens only if it is currently deselected.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.send_keys">
+<code class="sig-name descname">send_keys</code><span class="sig-paren">(</span><em class="sig-param">key_chord</em>, <em class="sig-param">wait_clickable=True</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.send_keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send KeyChord to this GuiWidget.</p>
+<p>Waits for clickability. <strong>Click on GuiWidget is NOT executed before send keys operation</strong>.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.send_text">
+<code class="sig-name descname">send_text</code><span class="sig-paren">(</span><em class="sig-param">text</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.send_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send text to this GuiWidget.</p>
+<p>Waits for clickability. <strong>Click on GuiWidget is NOT executed before send keys operation</strong>.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.source">
+<em class="property">property </em><code class="sig-name descname">source</code><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.source" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GuiSource</strong> object for this <strong>GuiWidget</strong>.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.text">
+<em class="property">property </em><code class="sig-name descname">text</code><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Text contained in this <strong>GuiWidget</strong>. It is a settable property.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl>
+<dt>You can set text of this GuiWidget (Clears and enters text.) using following Python code:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">element</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&lt;some_text&gt;&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p>Waits for clickability. Waits for text to be set as expected.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.toggle">
+<code class="sig-name descname">toggle</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.toggle" title="Permalink to this definition">¶</a></dt>
+<dd><p>Toggle the selected/checked stage of a GuiWidget.</p>
+<p>Waits for clickability. Waits for click to succeed.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.uncheck">
+<code class="sig-name descname">uncheck</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.uncheck" title="Permalink to this definition">¶</a></dt>
+<dd><p>Uncheck this GuiWidget.</p>
+<p>Waits for clickability. Click happens only if it is currently checked.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.wait_until_clickable">
+<code class="sig-name descname">wait_until_clickable</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.wait_until_clickable" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait for clickability of this Gui Widget.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.wait_until_selected">
+<code class="sig-name descname">wait_until_selected</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.wait_until_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait for selected state of this Gui Widget.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.wait_until_visible">
+<code class="sig-name descname">wait_until_visible</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.base.single_widget.SingleGuiWidget.wait_until_visible" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait until visibility of this Gui Widget.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

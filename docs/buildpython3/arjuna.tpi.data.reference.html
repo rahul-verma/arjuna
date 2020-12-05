@@ -1,0 +1,172 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.tpi.data.reference module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.tpi.data.reference">
+<span id="arjuna-tpi-data-reference-module"></span><h1>arjuna.tpi.data.reference module<a class="headerlink" href="#module-arjuna.tpi.data.reference" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="arjuna.tpi.data.reference.ContextualDataReference">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.data.reference.</code><code class="sig-name descname">ContextualDataReference</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.ContextualDataReference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for autoloaded Contextual data references in Arjuna.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>path</strong> – Path of the contextual data reference file.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It behaves like a Python dictionary. So, you get items by names/keys and loop over it.</p>
+</div>
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.ContextualDataReference.as_json">
+<code class="sig-name descname">as_json</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.ContextualDataReference.as_json" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.ContextualDataReference.enumerate">
+<code class="sig-name descname">enumerate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.ContextualDataReference.enumerate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print all items in this data reference.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.ContextualDataReference.items">
+<code class="sig-name descname">items</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.ContextualDataReference.items" title="Permalink to this definition">¶</a></dt>
+<dd><p>Items iterator for this reference.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.ContextualDataReference.keys">
+<code class="sig-name descname">keys</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.ContextualDataReference.keys" title="Permalink to this definition">¶</a></dt>
+<dd><p>Names of contexts/keys in this reference.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.ContextualDataReference.name">
+<em class="property">property </em><code class="sig-name descname">name</code><a class="headerlink" href="#arjuna.tpi.data.reference.ContextualDataReference.name" title="Permalink to this definition">¶</a></dt>
+<dd><p>Name of this reference.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.ContextualDataReference.path">
+<em class="property">property </em><code class="sig-name descname">path</code><a class="headerlink" href="#arjuna.tpi.data.reference.ContextualDataReference.path" title="Permalink to this definition">¶</a></dt>
+<dd><p>Path of this reference file.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.tpi.data.reference.IndexedDataReference">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.data.reference.</code><code class="sig-name descname">IndexedDataReference</code><span class="sig-paren">(</span><em class="sig-param">pydict</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.IndexedDataReference" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Base class for autoloaded Indexed Data References in Arjuna.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pydict</strong> – A python repr of a list with indices as keys.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It behaves like a Python tuple. So, you get items by index and loop over it.</p>
+</div>
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.IndexedDataReference.enumerate">
+<code class="sig-name descname">enumerate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.IndexedDataReference.enumerate" title="Permalink to this definition">¶</a></dt>
+<dd><p>Print all items in this data reference.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.IndexedDataReference.first">
+<code class="sig-name descname">first</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.IndexedDataReference.first" title="Permalink to this definition">¶</a></dt>
+<dd><p>First item in this data reference.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.IndexedDataReference.last">
+<code class="sig-name descname">last</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.IndexedDataReference.last" title="Permalink to this definition">¶</a></dt>
+<dd><p>Last item in this data reference.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.data.reference.IndexedDataReference.random">
+<code class="sig-name descname">random</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.data.reference.IndexedDataReference.random" title="Permalink to this definition">¶</a></dt>
+<dd><p>Random item in this data reference.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

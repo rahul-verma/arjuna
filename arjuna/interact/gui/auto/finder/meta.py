@@ -61,13 +61,29 @@ class InteractionConfig:
     def __str__(self):
         return repr_dict(self.__settings)
 
-@track("debug")
 class Meta:
+    _ALLOWED_FILTERS = {
+        GuiWidgetType.ELEMENT: {'pos'},
+        GuiWidgetType.MULTI_ELEMENT: {'slice'},
+        GuiWidgetType.DROPDOWN: {'pos'},
+        GuiWidgetType.RADIO_GROUP: set(),
+    }
 
+    _POS = {"first", "last", "random"}
+
+    @track("debug")
     def __init__(self, mdict=None):
         from arjuna import log_debug
         temp_dict = not mdict and CIStringDict() or CIStringDict(mdict)
         self.__mdict = CIStringDict()
+        self.__process_type(temp_dict)
+        self.__process_relations(temp_dict)
+        self.__process_filters(temp_dict)
+        self.__process_settings(temp_dict)
+        log_debug("Meta dictionary is: {}".format(self.__mdict))
+
+    def __process_type(self, temp_dict):
+        from arjuna import log_debug
         from arjuna.core.constant import GuiWidgetType
         if "type" in temp_dict:
             log_debug("Copying provided type from meta dict: {}".format(temp_dict["type"]))
@@ -81,7 +97,10 @@ class Meta:
                 raise Exception("{} is not a valid Gui widget type.".format(widget_type))
         else:
             self.__mdict["type"] = GuiWidgetType.ELEMENT
-        self.__mdict["relations"] = dict()
+
+    def __process_relations(self, temp_dict):
+        from arjuna import log_debug
+        self.__mdict["relations"] = CIStringDict()
         to_remove = list()
         for k,v in temp_dict.items():
             if k.lower() in {'above', 'below', 'left_of', 'right_of', 'near'}:
@@ -101,8 +120,43 @@ class Meta:
                 self.__mdict["relations"][k] = v.dispatcher.driver_element
                 # raise GuiWidgetDefinitionError("Relations must point to an already found GuiElement. Provided: {}".format(v))
 
+    def __process_filters(self, temp_dict):
+        from arjuna import log_debug
+        self.__mdict["filters"] = CIStringDict()
+        to_remove = list()
+        for k,v in temp_dict.items():
+            if k.lower() in {'pos', 'slice'}:
+                self.__mdict["filters"][k.lower()] = v 
+                to_remove.append(k)
+        for k in to_remove:
+            del temp_dict[k]
+        if "filters" in temp_dict:
+            self.__mdict["filters"].update(temp_dict["filters"])
+            del temp_dict["filters"]
+
+        allowed_filters = self._ALLOWED_FILTERS[self.__mdict['type']]
+        for k in self.__mdict["filters"]:
+            if k not in allowed_filters:
+                raise Exception("{} is not allowed filter meta data for GuiWidget of type: {}. Allowed: {}".format(k, self.__mdict['type'], allowed_filters))
+
+        self.__format_pos()
+
+    def __format_pos(self):
+        if "pos" not in self.__mdict["filters"]:
+            return
+        
+        pos = self.__mdict["filters"]["pos"]
+        fpos = str(pos).lower().strip()
+        try:
+            if fpos in self._POS:
+                self.__mdict["filters"]["pos"] = fpos
+            else:
+                self.__mdict["filters"]["pos"] = int(fpos)
+        except:
+            raise Exception("Invalid value for >>pos<< filter. Must be an integer or a string: first/last/random. Found: {}".format(pos))
+
+    def __process_settings(self, temp_dict):
         self.__mdict["settings"] = InteractionConfig(temp_dict) # Interconfig keys are removed
-        log_debug("Meta dictionary is: {}".format(self.__mdict))
 
     def update_settings(self, source_wmd):
         self.settings.update(source_wmd.meta.settings)
@@ -113,6 +167,7 @@ class Meta:
     def has(self, name):
         return name.lower() in self.__mdict
 
+    @track("debug")
     def __getattr__(self, name):
         return self[name]
 

@@ -1,0 +1,480 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Understanding Configuration System of Arjuna &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Purpose" href="ddt.html" />
+    <link rel="prev" title="What are Test Resources?" href="resources.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="ddt.html" title="Purpose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="resources.html" title="What are Test Resources?"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="understanding-configuration-system-of-arjuna">
+<span id="configuration"></span><h1>Understanding Configuration System of Arjuna<a class="headerlink" href="#understanding-configuration-system-of-arjuna" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna has possibly the most advanced configuration system amongst any test frameworks or tools that you will come across.</p>
+<p>You can start simple. Even without defining a single configuration file of your own. And as your needs unfold, you can benefit by the variety of options provided by Arjuna.</p>
+<div class="section" id="configuration-object-and-configuration-options">
+<h2><strong>Configuration</strong> object and Configuration Options<a class="headerlink" href="#configuration-object-and-configuration-options" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>Options in Arjuna can be defined with various configuration files, command line and/or programmatically.</p></li>
+<li><p>Arjuna supports tweaking its built in options which are represented by <strong>ArjunaOption</strong> enum.</p></li>
+<li><p>Arjuna also supports user defined options. So, you can create your own project related options and use the same eco-system which Arjuna uses for its built-in options.</p></li>
+<li><p>A <a class="reference internal" href="arjuna.tpi.config.html#arjuna.tpi.config.Configuration" title="arjuna.tpi.config.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a> object represents fixed values for configured settings (Arjuna options as well user defined options).</p></li>
+<li><p>A <a class="reference internal" href="arjuna.tpi.config.html#arjuna.tpi.config.Configuration" title="arjuna.tpi.config.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a> is immutable which means that once created it can not be modified. This saves you from a lot of debugging overhead as configuration objects are large global objects. Arjuna makes them read-only.</p></li>
+</ul>
+</div>
+<div class="section" id="default-reference-configuration">
+<h2>Default <strong>Reference Configuration</strong><a class="headerlink" href="#default-reference-configuration" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><dl class="simple">
+<dt>As a part of initialation, Arjuna creates the reference <a class="reference internal" href="arjuna.tpi.config.html#arjuna.tpi.config.Configuration" title="arjuna.tpi.config.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a> object which combines the following to create the reference :</dt><dd><ul>
+<li><p>Default settings for Arjuna options</p></li>
+<li><p>Project level settings included in <strong>&lt;Project root directory&gt;/config/project.yaml</strong> file.</p></li>
+<li><p>Options in data configuration with name <strong>data</strong> in <strong>&lt;Project root directory&gt;/config/data.yaml</strong> file, if present.</p></li>
+<li><p>Options in environment configuration with name <strong>env</strong> in <strong>&lt;Project root directory&gt;/config/envs.yaml</strong> file, if present.</p></li>
+<li><p>CLI options represtedn by Arjuna’s named CLI switches (e.g. for logging options)</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>You can get the reference configuration by calling <strong>Arjuna.get_config()</strong> and any other configuration with <strong>Arjuna.get_config(&lt;name&gt;)</strong> call.</p></li>
+<li><p>Within test or test fixture code, you can also get the reference configuration object (if not re-assigned by test author to a non-reference configuration) using <strong>request.config</strong> or use <strong>request.get_config</strong> to retrieve any configuration.</p></li>
+</ul>
+<p>Each <a class="reference internal" href="arjuna.tpi.config.html#arjuna.tpi.config.Configuration" title="arjuna.tpi.config.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a> object ever created in a run in any manner takes reference configuration as its basis at its root. So, in case of you have a chain of configurations as C1 -&gt; C2 -&gt; C3 where C1 was used to create C2 which was then used to create C3, either C1 is the reference configuration itself or it has reference configuration used by its parent/grandparent.</p>
+</div>
+<div class="section" id="using-a-non-default-configuration-as-reference-configuration">
+<h2>Using a non-default Configuration as Reference Configuration<a class="headerlink" href="#using-a-non-default-configuration-as-reference-configuration" title="Permalink to this headline">¶</a></h2>
+<dl class="simple">
+<dt>You can instruct Arjuna to use any of the following Configuration objects to be used as a Reference Configuration:</dt><dd><ul class="simple">
+<li><p>Default Reference Configuration.</p></li>
+<li><p>Any Data Configuration</p></li>
+<li><p>Any Environment Configuration</p></li>
+<li><p>Any combination of Data and Enviroment configurations</p></li>
+<li><p>Any configuration defined in <strong>register_ref_confs</strong> hook in <strong>&lt;Project Root Directory/hook/arjuna_config.py</strong> module.</p></li>
+</ul>
+</dd>
+<dt>There are various places to pass on this instruction:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Test Run:</dt><dd><ul>
+<li><p><strong>-c / –ref-conf</strong> command line switch with any <strong>run-x</strong> commands in Arjuna CLI.</p></li>
+<li><p>This becomes reference configuration for this test run, current test session, all stages and groups in the session, unless overriden in their YAML definition.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Test Session definition:</dt><dd><ul>
+<li><p><strong>conf</strong> attribute in YAML. This becomes reference configuration for this session, all stages and groups in this session, unless overriden in their YAML definition.</p></li>
+<li><p>This also overrides -c switch if passed.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Test Stage definition:</dt><dd><ul>
+<li><p><strong>conf</strong> attribute in YAML. This becomes reference configuration for this stage and all groups in this stage, unless overriden in their YAML definition.</p></li>
+<li><p>This also overrides -c switch if passed.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Test Group definition:</dt><dd><ul>
+<li><p><strong>conf</strong> attribute in YAML. This becomes reference configuration for this group and all test modules and test functions, unless programmatically overriden.</p></li>
+<li><p>This also overrides -c switch if passed.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+<p>All calls to the reference configuration are replaced with the configuration object that you attached. This means that this configuration becomes the reference configuration.</p>
+<p>As discussed in above section, the core reference configuration is the basis of all Configuration obejcts. So, you have access to all options in their original form except the ones that were overriden in the Configuration object that you attached to the group.</p>
+</div>
+</div>
+<div class="section" id="project-yaml-setting-project-level-configuration-options">
+<h1><strong>project.yaml</strong> - Setting Project Level Configuration Options<a class="headerlink" href="#project-yaml-setting-project-level-configuration-options" title="Permalink to this headline">¶</a></h1>
+<p>Many a times, it is useful to change the defaults of Arjuna at project level to avoid writing code every time. It is also a much better way when you need to tweak quite a few settings and you know that those settings are applicable to most of your tests.</p>
+<p>In Arjuna you can do this by providing options under <strong>arjuna_options</strong> section in <strong>&lt;Project root directory&gt;/config/project.yaml</strong> file.</p>
+<p>For example:</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">arjuna_options</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">browser.name</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">firefox</span>
+</pre></div>
+</div>
+<p>The above entry tweaks <strong>ArjunaOption.BROWSER_NAME</strong>. You can also use <strong>BROWSER_NAME</strong> instead of <strong>brower.name</strong>.</p>
+<p>For being more intuitive and less mistake prone, Arjuna supports keys in this section as <strong>case-insensitive</strong> and treats <strong>. (dot)</strong> and <strong>_ (underscore)</strong> as interchangeable.</p>
+</div>
+<div class="section" id="configuration-builder-creating-custom-configurations">
+<h1><strong>Configuration Builder</strong> - Creating Custom Configurations<a class="headerlink" href="#configuration-builder-creating-custom-configurations" title="Permalink to this headline">¶</a></h1>
+<p>In Arjuna, you can create your own configurations as well. You can do this by using reference Configuration or any other configuration created by you as the source object.</p>
+<p>Given a <a class="reference internal" href="arjuna.tpi.config.html#arjuna.tpi.config.Configuration" title="arjuna.tpi.config.Configuration"><code class="xref py py-class docutils literal notranslate"><span class="pre">Configuration</span></code></a> object (say <strong>config</strong>), you can get a <strong>ConfigBuilder</strong> object with <strong>config.builder</strong> property. You can add options to the builder and then call its <strong>register</strong> method to create a new configuration. This newly created configuration is returned by the <strong>register</strong> call.</p>
+<p>Sometimes it is useful to provide your own name to the custom configuration that you are creating. Arjuna helps you in creating the configuration in one place and retrieving it in another place. You need not pass the configuration object around for simple needs of this nature. To achieve this pass the name while registering: <strong>register(&lt;name&gt;)</strong>. It can also now be retrived anywhere in your project with the <strong>Arjuna.get_config(&lt;name&gt;)</strong> call. Within a test, it can also be retrieve by using <strong>request.get_config(&lt;name&gt;)</strong> call.</p>
+<p><strong>ConfigBuilder</strong> also provides direct methods for some commonly used Arjuna Options. For example <strong>.firefox()</strong> is equivalent to <strong>.option(“browser.name”, BrowserName.FIREFOX)</strong></p>
+</div>
+<div class="section" id="defining-and-handling-user-options">
+<h1>Defining and Handling <strong>User Options</strong><a class="headerlink" href="#defining-and-handling-user-options" title="Permalink to this headline">¶</a></h1>
+<p>Just like Arjuna options, you can define your own options in <strong>project.yaml</strong> file as well as programmatically. Rest of the fundamentals remain same as Arjuna options. That’s the key point! Arjuna provides you the same facilities for your own defined options that it provides to built-in <strong>ArjunaOptions</strong>.</p>
+<div class="section" id="user-options-in-project-conf">
+<h2>User Options in Project Conf<a class="headerlink" href="#user-options-in-project-conf" title="Permalink to this headline">¶</a></h2>
+<p>In Arjuna you can define your own option under <strong>user_options</strong> section in <strong>&lt;Project root directory&gt;/config/project.yaml</strong> file.</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">user_options</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">target.url</span><span class="p p-Indicator">:</span> <span class="s">&quot;https://google.com&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="adding-user-options-programmatically">
+<h2>Adding User Options Programmatically<a class="headerlink" href="#adding-user-options-programmatically" title="Permalink to this headline">¶</a></h2>
+<p>You can also add user options programmatically using the <strong>ConfigBuilder</strong> object just like we use it for tweaking Ajuna’s builtin-options.</p>
+<p>Retrieving the values is same as retrieving an <strong>ArjunaOption</strong>.</p>
+</div>
+</div>
+<div class="section" id="configuration-builder-adding-options-from-a-yaml-file">
+<h1>Configuration Builder - <strong>Adding options from a .yaml File</strong><a class="headerlink" href="#configuration-builder-adding-options-from-a-yaml-file" title="Permalink to this headline">¶</a></h1>
+<p><strong>ConfigBuilder</strong> can also load Arjuna options as well user options from <strong>.yaml</strong> files. It comes handy when you have a controlled set of configurations which want to create at run-time. It could be also helpful if for some reasons your logic involves clubbing of options from multiple files.</p>
+<p>You can load options from any file using <strong>from_file</strong> method of <strong>ConfigBuilder</strong> and providing the file path.</p>
+</div>
+<div class="section" id="the-magic-c-function">
+<h1>The Magic <strong>C</strong> Function<a class="headerlink" href="#the-magic-c-function" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Arjuna provides a special function <strong>C</strong> for retrieving values from the reference configuration as it is a very common operation to do on test code. You can pass an <strong>ArjunaOption</strong> enum constant or an option name. The name string has all the flexibility seen in previous example.</p>
+</div>
+<div class="section" id="configuration-query-format">
+<h2><strong>Configuration Query Format</strong><a class="headerlink" href="#configuration-query-format" title="Permalink to this headline">¶</a></h2>
+<p>As Arjuna supports a multi-configuration system, it also provides a special query syntax for retrieving configuration values.</p>
+<p>You can use the configuration query syntax <strong>&lt;confname&gt;.&lt;option&gt;</strong> to retrieve configuration values for a given configuration.</p>
+<p>Let’s say we have custom configuration with name <strong>nconf</strong>.
+- <strong>browser.name</strong> refers to the property in reference configuration.
+- You can prefix a configuration name with a configuration name. For example <strong>reference.browser.name</strong> and <strong>nconf.browser.name</strong> will retrieve <strong>browser.name</strong> from <strong>reference</strong> and <strong>nconf</strong> configurations respectively.</p>
+</div>
+</div>
+<div class="section" id="data-configurations-and-environment-configurations">
+<h1><strong>Data Configurations and Environment Configurations</strong><a class="headerlink" href="#data-configurations-and-environment-configurations" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="defining-data-configurations">
+<h2>Defining Data Configurations<a class="headerlink" href="#defining-data-configurations" title="Permalink to this headline">¶</a></h2>
+<p>Many a times, you end up using Data Driven testing when what you need is a simple data separation.</p>
+<p>Added to this, you might have different sets of data for different runs.</p>
+<p>One simple option in Arjuna is to define such data as user defined options in data configuration file.</p>
+<p>You can define any number of data configurations in <strong>&lt;Project Root Dir&gt;/config/data.yaml&gt;</strong> file.</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">data_conf_1</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">arjuna_options</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;options&gt;</span>
+    <span class="l l-Scalar l-Scalar-Plain">user_options</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;options&gt;</span>
+<span class="l l-Scalar l-Scalar-Plain">data_conf_2</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">arjuna_options</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;options&gt;</span>
+    <span class="l l-Scalar l-Scalar-Plain">user_options</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;options&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-environment-configuration">
+<h2>Defining Environment Configuration<a class="headerlink" href="#defining-environment-configuration" title="Permalink to this headline">¶</a></h2>
+<p>You might have multiple test environments or deployments against which you run the tests.</p>
+<p>For example, your web application could have a dev, staging, system and production deployment with respective URLs and other associated options.</p>
+<p>You can define any number of environment configurations in <strong>&lt;Project Root Dir&gt;/config/envs.yaml&gt;</strong> file.</p>
+<div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">env1</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">arjuna_options</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;options&gt;</span>
+    <span class="l l-Scalar l-Scalar-Plain">user_options</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;options&gt;</span>
+<span class="l l-Scalar l-Scalar-Plain">env2</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">arjuna_options</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;options&gt;</span>
+    <span class="l l-Scalar l-Scalar-Plain">user_options</span><span class="p p-Indicator">:</span>
+        <span class="l l-Scalar l-Scalar-Plain">&lt;options&gt;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="combining-data-and-environment-configurations">
+<h2>Combining Data and Environment Configurations<a class="headerlink" href="#combining-data-and-environment-configurations" title="Permalink to this headline">¶</a></h2>
+<p>Another need is that you might want to use data and environment information in combination.</p>
+<p>Arjuna has built-in support for this and does it by default for you.</p>
+<dl class="simple">
+<dt>Arjuna automatically loads these combinations of data confs and environment confs when it loads. For each combination:</dt><dd><ul class="simple">
+<li><dl class="simple">
+<dt>Reference config is taken as base (which means Arjuna’s internal defaults + Options that you have passed in project.yaml + Default data conf (if defined) + Default env conf (if defined))</dt><dd><ul>
+<li><p>For default data and env conf, see the next section.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>A given data conf is superimposed</p></li>
+<li><p>A given env conf is superimposed</p></li>
+<li><p>CLI options are superimposed</p></li>
+</ul>
+</dd>
+</dl>
+<p>The config name is set to <strong>&lt;dataconfname&gt;_&lt;envconfname&gt;</strong> e.g. <strong>data1_env1</strong>.</p>
+<p>You can retrieve an environment config by its name using <strong>Arjuna.get_config</strong> (anywhere in your project) or <strong>request.get_config</strong> call (in a test fixture or test function). Now you can inquire the values just like you deal with any configuration in Arjuna.</p>
+<p>You can also retrieve their options using the magic <strong>C</strong> function, for example <strong>C(“data1_env1.browser.name”)</strong></p>
+</div>
+<div class="section" id="default-data-configuration-and-environment-configuration">
+<h2>Default Data Configuration and Environment Configuration<a class="headerlink" href="#default-data-configuration-and-environment-configuration" title="Permalink to this headline">¶</a></h2>
+<p>A data configuration with name <strong>data</strong> is considered a default.</p>
+<p>An environment configuration with name <strong>env</strong> is considered a default.</p>
+<p>What it means is that if these configurations are defined, then Arjuna uses options contained in them to update the reference configuration.</p>
+<dl class="simple">
+<dt>This feature has the following side-effects:</dt><dd><ul class="simple">
+<li><p>A configuration with name <strong>data_env</strong> is same as the reference configuration.</p></li>
+<li><p>A configuration with name <strong>data1_env</strong> is same as <strong>data1</strong></p></li>
+<li><p>A configuration with name <strong>data_env1</strong> is same as <strong>env1</strong></p></li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="arjuna-options-reference-for-overriding">
+<h1><strong>Arjuna Options Reference for Overriding</strong><a class="headerlink" href="#arjuna-options-reference-for-overriding" title="Permalink to this headline">¶</a></h1>
+<p>Arjuna has a well defined control over which options can be overriden in which type of configuration.</p>
+<p>Refer <a class="reference internal" href="arjuna.tpi.constant.html#arjuna.tpi.constant.ArjunaOption" title="arjuna.tpi.constant.ArjunaOption"><code class="xref py py-class docutils literal notranslate"><span class="pre">ArjunaOption</span> <span class="pre">Enum</span></code></a> for purpose of each option.</p>
+<div class="section" id="options-overridable-in-a-coded-configuration">
+<h2>Options Overridable in a <strong>Coded Configuration</strong><a class="headerlink" href="#options-overridable-in-a-coded-configuration" title="Permalink to this headline">¶</a></h2>
+<p>When you create a configuration using <a class="reference internal" href="arjuna.tpi.config.html#arjuna.tpi.config.ConfigBuilder" title="arjuna.tpi.config.ConfigBuilder"><code class="xref py py-class docutils literal notranslate"><span class="pre">ConfigBuilder</span></code></a> in your code, the following options can be overriden:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>REPORT_NETWORK_FILTER</p></li>
+<li><p>APP_URL</p></li>
+<li><p>BROWSER_NAME</p></li>
+<li><p>BROWSER_HEADLESS</p></li>
+<li><p>BROWSER_VERSION</p></li>
+<li><p>BROWSER_MAXIMIZE</p></li>
+<li><p>BROWSER_DIM_HEIGHT</p></li>
+<li><p>BROWSER_DIM_WIDTH</p></li>
+<li><p>BROWSER_BIN_PATH</p></li>
+<li><p>BROWSER_NETWORK_RECORDER_AUTOMATIC</p></li>
+<li><p>SCROLL_PIXELS</p></li>
+<li><p>GUIAUTO_MAX_WAIT</p></li>
+<li><p>GUIAUTO_SLOMO_ON</p></li>
+<li><p>GUIAUTO_SLOMO_INTERVAL</p></li>
+<li><p>MOBILE_OS_NAME</p></li>
+<li><p>MOBILE_OS_VERSION</p></li>
+<li><p>MOBILE_DEVICE_NAME</p></li>
+<li><p>MOBILE_DEVICE_UDID</p></li>
+<li><p>MOBILE_APP_FILE_PATH</p></li>
+<li><p>SELENIUM_DRIVER_DOWNLOAD</p></li>
+<li><p>SELENIUM_SERVICE_URL</p></li>
+<li><p>APPIUM_SERVICE_URL</p></li>
+<li><p>APPIUM_AUTO_LAUNCH</p></li>
+<li><p>IMG_COMP_MIN_SCORE</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="options-overridable-in-a-reference-configuration">
+<h2>Options Overridable in a <strong>Reference Configuration</strong><a class="headerlink" href="#options-overridable-in-a-reference-configuration" title="Permalink to this headline">¶</a></h2>
+<p>A reference configuration is defined in any of the following manner and combinations:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>project.yaml</p></li>
+<li><p>Entry in data.yaml</p></li>
+<li><p>Entry in envs.yaml</p></li>
+<li><p>Configuration created via Arjuna’s <strong>register_ref_confs</strong> hook in arjuna_config.py</p></li>
+</ul>
+</div></blockquote>
+<p>A reference configuration can override what can be overriden in a coded configuration. In addition, you can also override the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>LOG_ALLOWED_CONTEXTS</p></li>
+<li><p>REPORT_SCREENSHOTS_ALWAYS</p></li>
+<li><p>REPORT_NETWORK_ALWAYS</p></li>
+<li><p>L10N_LOCALE</p></li>
+<li><p>L10N_STRICT</p></li>
+<li><p>BROWSER_NETWORK_RECORDER_ENABLED</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="options-overridable-via-command-line">
+<h2>Options Overridable via <strong>Command Line</strong><a class="headerlink" href="#options-overridable-via-command-line" title="Permalink to this headline">¶</a></h2>
+<p>Via command line’s <strong>-ao</strong> / <strong>–arjuna-option</strong> switches, you can override Arjuna options across every configuration created by Arjuna.</p>
+<p>You can override options that you can override in a Reference configuration (and hence a coded configuration too). In addition, you can override the following:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>RUN_SESSION_NAME</p></li>
+<li><p>LOG_FILE_LEVEL</p></li>
+<li><p>LOG_CONSOLE_LEVEL</p></li>
+<li><p>REPORT_FORMATS</p></li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="read-only-options">
+<h2><strong>Read-Only Options</strong><a class="headerlink" href="#read-only-options" title="Permalink to this headline">¶</a></h2>
+<p>In addition to the overridable options, Arjuna also has various options that are inquirable, but not oveeridable, because of the following reasons:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>These are auto-determined by Arjuna based on the machine on which the tests are running.</p></li>
+<li><p>To impose a strict directory structure for an Arjuna test project for consistency across projects.</p></li>
+<li><p>The values are determined based on other Arjuna options provided by the test author.</p></li>
+</ul>
+</div></blockquote>
+<p>Following is the list:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>ARJUNA_ROOT_DIR</p></li>
+<li><p>ARJUNA_EXTERNAL_IMPORTS_DIR</p></li>
+<li><p>LOG_NAME</p></li>
+<li><p>RUN_HOST_OS</p></li>
+<li><p>L10N_DIR</p></li>
+<li><p>PROJECT_NAME</p></li>
+<li><p>PROJECT_ROOT_DIR</p></li>
+<li><p>CONF_PROJECT_FILE</p></li>
+<li><p>CONF_PROJECT_LOCAL_FILE</p></li>
+<li><p>TESTS_DIR</p></li>
+<li><p>HOOKS_DIR</p></li>
+<li><p>REPORTS_DIR</p></li>
+<li><p>REPORT_DIR</p></li>
+<li><p>REPORT_XML_DIR</p></li>
+<li><p>REPORT_HTML_DIR</p></li>
+<li><p>LOG_DIR</p></li>
+<li><p>SCREENSHOTS_DIR</p></li>
+<li><p>TOOLS_DIR</p></li>
+<li><p>TOOLS_BMPROXY_DIR</p></li>
+<li><p>TEMP_DIR</p></li>
+<li><p>CONF_DIR</p></li>
+<li><p>CONF_DATA_FILE</p></li>
+<li><p>CONF_DATA_LOCAL_FILE</p></li>
+<li><p>CONF_ENVS_FILE</p></li>
+<li><p>CONF_ENVS_LOCAL_FILE</p></li>
+<li><p>CONF_SESSIONS_FILE</p></li>
+<li><p>CONF_SESSIONS_LOCAL_FILE</p></li>
+<li><p>CONF_STAGES_FILE</p></li>
+<li><p>CONF_STAGES_LOCAL_FILE</p></li>
+<li><p>CONF_GROUPS_FILE</p></li>
+<li><p>CONF_GROUPS_LOCAL_FILE</p></li>
+<li><p>CONF_WITHX_FILE</p></li>
+<li><p>CONF_WITHX_LOCAL_FILE</p></li>
+<li><p>DATA_DIR</p></li>
+<li><p>DATA_SRC_DIR</p></li>
+<li><p>DATA_REF_DIR</p></li>
+<li><p>DATA_REF_CONTEXTUAL_DIR</p></li>
+<li><p>DATA_REF_INDEXED_DIR</p></li>
+<li><p>DATA_FILE_DIR</p></li>
+<li><p>GUIAUTO_NAME</p></li>
+<li><p>GUIAUTO_DIR</p></li>
+<li><p>GUIAUTO_NAMESPACE_DIR</p></li>
+<li><p>GUIAUTO_DEF_MULTICONTEXT</p></li>
+<li><p>GUIAUTO_CONTEXT</p></li>
+<li><p>SELENIUM_DRIVER_PROP</p></li>
+<li><p>SELENIUM_DRIVERS_DIR</p></li>
+<li><p>SELENIUM_DRIVER_PATH</p></li>
+<li><p>RUN_ID</p></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Understanding Configuration System of Arjuna</a><ul>
+<li><a class="reference internal" href="#configuration-object-and-configuration-options"><strong>Configuration</strong> object and Configuration Options</a></li>
+<li><a class="reference internal" href="#default-reference-configuration">Default <strong>Reference Configuration</strong></a></li>
+<li><a class="reference internal" href="#using-a-non-default-configuration-as-reference-configuration">Using a non-default Configuration as Reference Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#project-yaml-setting-project-level-configuration-options"><strong>project.yaml</strong> - Setting Project Level Configuration Options</a></li>
+<li><a class="reference internal" href="#configuration-builder-creating-custom-configurations"><strong>Configuration Builder</strong> - Creating Custom Configurations</a></li>
+<li><a class="reference internal" href="#defining-and-handling-user-options">Defining and Handling <strong>User Options</strong></a><ul>
+<li><a class="reference internal" href="#user-options-in-project-conf">User Options in Project Conf</a></li>
+<li><a class="reference internal" href="#adding-user-options-programmatically">Adding User Options Programmatically</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration-builder-adding-options-from-a-yaml-file">Configuration Builder - <strong>Adding options from a .yaml File</strong></a></li>
+<li><a class="reference internal" href="#the-magic-c-function">The Magic <strong>C</strong> Function</a><ul>
+<li><a class="reference internal" href="#purpose">Purpose</a></li>
+<li><a class="reference internal" href="#configuration-query-format"><strong>Configuration Query Format</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#data-configurations-and-environment-configurations"><strong>Data Configurations and Environment Configurations</strong></a><ul>
+<li><a class="reference internal" href="#defining-data-configurations">Defining Data Configurations</a></li>
+<li><a class="reference internal" href="#defining-environment-configuration">Defining Environment Configuration</a></li>
+<li><a class="reference internal" href="#combining-data-and-environment-configurations">Combining Data and Environment Configurations</a></li>
+<li><a class="reference internal" href="#default-data-configuration-and-environment-configuration">Default Data Configuration and Environment Configuration</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#arjuna-options-reference-for-overriding"><strong>Arjuna Options Reference for Overriding</strong></a><ul>
+<li><a class="reference internal" href="#options-overridable-in-a-coded-configuration">Options Overridable in a <strong>Coded Configuration</strong></a></li>
+<li><a class="reference internal" href="#options-overridable-in-a-reference-configuration">Options Overridable in a <strong>Reference Configuration</strong></a></li>
+<li><a class="reference internal" href="#options-overridable-via-command-line">Options Overridable via <strong>Command Line</strong></a></li>
+<li><a class="reference internal" href="#read-only-options"><strong>Read-Only Options</strong></a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="resources.html" title="previous chapter">What are Test Resources?</a>
+          <li>Next: <a href="ddt.html" title="next chapter">Purpose</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

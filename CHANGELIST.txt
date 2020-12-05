@@ -60,6 +60,9 @@ Future Themes (In-Progress or Planned):
         - Nested element finding falls back to direct finding with WebDriver as JS execution support exists only at driver level in Selenium.
     - with.JS and With.Point is supported at element level, however it does not do nested element finding, rather uses driver itself.
     - The fallback mechanism for JS, Point and Relative locators has been added so that such locators can be defined without issues in GNS files or coded GuiSections which have root element set for them.
+    - 'pos' widget meta key for selecting a widget at position when multiple elements are found.
+        - Can take int as a value or one of first/last/random
+        - Supported in Coded format.
 
 1.1.29
 ------

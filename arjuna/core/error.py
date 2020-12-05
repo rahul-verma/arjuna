@@ -130,10 +130,12 @@ def format_msg(msg):
 
 class _WidgetNotFoundError(WaitableError):
 
-    def __init__(self, elem_name, *locators, container=None, message=None):
+    def __init__(self, elem_name, *locators, container=None, relations=None, filters=None, message=None):
         container = container and  " in {}".format(container) or ""
+        relations = relations and  " with relations {}".format(relations) or ""
+        filters = filters and  " and filters {}".format(filters) or ""
         message = format_msg(message)
-        super().__init__("{} not found using any of the locators: {}{}.{}".format(elem_name, GuiWidgetMetaData.locators_as_str(locators), container, message))
+        super().__init__("{} not found using any of the locators: {}{}{}{}.{}".format(elem_name, GuiWidgetMetaData.locators_as_str(locators), relations, filters, container, message))
 
 class _WidgetPresentError(WaitableError):
 
@@ -143,8 +145,8 @@ class _WidgetPresentError(WaitableError):
 
 class GuiWidgetNotFoundError(_WidgetNotFoundError):
 
-    def __init__(self, *locators, container=None, message=None):
-        super().__init__("GuiWidget", *locators, container=container, message=message)
+    def __init__(self, *locators, container=None, relations=None, filters=None, message=None):
+        super().__init__("GuiWidget", *locators, container=container, relations=relations, filters=filters, message=message)
 
 class _GuiWidgetPresentError(_WidgetPresentError):
 

@@ -1,0 +1,276 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.core.error module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.core.error">
+<span id="arjuna-core-error-module"></span><h1>arjuna.core.error module<a class="headerlink" href="#module-arjuna.core.error" title="Permalink to this headline">¶</a></h1>
+<dl class="exception">
+<dt id="arjuna.core.error.ArjunaException">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">ArjunaException</code><span class="sig-paren">(</span><em class="sig-param">message</em>, <em class="sig-param">scrreenshots_path=None</em>, <em class="sig-param">child=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.ArjunaException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="arjuna.core.error.ArjunaException.contains_screenshot">
+<code class="sig-name descname">contains_screenshot</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.ArjunaException.contains_screenshot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.core.error.ArjunaException.get_child_Exceptions">
+<code class="sig-name descname">get_child_Exceptions</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.ArjunaException.get_child_Exceptions" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.core.error.ArjunaException.get_screenshot_path">
+<code class="sig-name descname">get_screenshot_path</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.ArjunaException.get_screenshot_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.core.error.ArjunaException.set_screenshot_path">
+<code class="sig-name descname">set_screenshot_path</code><span class="sig-paren">(</span><em class="sig-param">path</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.ArjunaException.set_screenshot_path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.ArjunaTimeoutError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">ArjunaTimeoutError</code><span class="sig-paren">(</span><em class="sig-param">context</em>, <em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.ArjunaTimeoutError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.core.error.WaitableError" title="arjuna.core.error.WaitableError"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.core.error.WaitableError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.ChildFrameNotFoundError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">ChildFrameNotFoundError</code><span class="sig-paren">(</span><em class="sig-param">*locators</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.ChildFrameNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.core.error._WidgetNotFoundError</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.ChildWindowNotFoundError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">ChildWindowNotFoundError</code><span class="sig-paren">(</span><em class="sig-param">*locators</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.ChildWindowNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.core.error._WidgetNotFoundError</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.DataSourceFinished">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">DataSourceFinished</code><span class="sig-paren">(</span><em class="sig-param">msg=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.DataSourceFinished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">StopIteration</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.DirReaderFinishedException">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">DirReaderFinishedException</code><a class="headerlink" href="#arjuna.core.error.DirReaderFinishedException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.ExclusionRuleMet">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">ExclusionRuleMet</code><span class="sig-paren">(</span><em class="sig-param">rule</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.ExclusionRuleMet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<dl class="method">
+<dt id="arjuna.core.error.ExclusionRuleMet.rule">
+<em class="property">property </em><code class="sig-name descname">rule</code><a class="headerlink" href="#arjuna.core.error.ExclusionRuleMet.rule" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.GuiWidgetNotFoundError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">GuiWidgetNotFoundError</code><span class="sig-paren">(</span><em class="sig-param">*locators</em>, <em class="sig-param">container=None</em>, <em class="sig-param">relations=None</em>, <em class="sig-param">filters=None</em>, <em class="sig-param">message=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.GuiWidgetNotFoundError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.core.error._WidgetNotFoundError</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.GuiWidgetNotReadyError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">GuiWidgetNotReadyError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.GuiWidgetNotReadyError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.core.error.WaitableError" title="arjuna.core.error.WaitableError"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.core.error.WaitableError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.GuiWidgetTextNotSetError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">GuiWidgetTextNotSetError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.GuiWidgetTextNotSetError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.core.error.WaitableError" title="arjuna.core.error.WaitableError"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.core.error.WaitableError</span></code></a></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.IncompatibleInputForValueException">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">IncompatibleInputForValueException</code><span class="sig-paren">(</span><em class="sig-param">value</em>, <em class="sig-param">actual</em>, <em class="sig-param">value_type</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.IncompatibleInputForValueException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.InvalidSelectionRule">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">InvalidSelectionRule</code><a class="headerlink" href="#arjuna.core.error.InvalidSelectionRule" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.NoInclusionRuleMet">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">NoInclusionRuleMet</code><a class="headerlink" href="#arjuna.core.error.NoInclusionRuleMet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.Problem">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">Problem</code><span class="sig-paren">(</span><em class="sig-param">text</em>, <em class="sig-param">screenshot_path</em>, <em class="sig-param">exc</em>, <em class="sig-param">component=None</em>, <em class="sig-param">object_name=None</em>, <em class="sig-param">method_name=None</em>, <em class="sig-param">code=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.Problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.core.error.ArjunaException" title="arjuna.core.error.ArjunaException"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.core.error.ArjunaException</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.core.error.Problem.get_problem_code">
+<code class="sig-name descname">get_problem_code</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.Problem.get_problem_code" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.core.error.Problem.get_problem_component">
+<code class="sig-name descname">get_problem_component</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.Problem.get_problem_component" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.core.error.Problem.get_problem_method">
+<code class="sig-name descname">get_problem_method</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.Problem.get_problem_method" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.core.error.Problem.get_problem_object">
+<code class="sig-name descname">get_problem_object</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.Problem.get_problem_object" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.core.error.Problem.get_problem_text">
+<code class="sig-name descname">get_problem_text</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.Problem.get_problem_text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.RulePatternDoesNotMatchError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">RulePatternDoesNotMatchError</code><span class="sig-paren">(</span><em class="sig-param">rule_str</em>, <em class="sig-param">pattern_class</em>, <em class="sig-param">expected_format</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.RulePatternDoesNotMatchError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.StringKeyValueContainerLookupException">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">StringKeyValueContainerLookupException</code><span class="sig-paren">(</span><em class="sig-param">key</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.StringKeyValueContainerLookupException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.TestGroupsFinished">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">TestGroupsFinished</code><a class="headerlink" href="#arjuna.core.error.TestGroupsFinished" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.UnsupportedRepresentationException">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">UnsupportedRepresentationException</code><span class="sig-paren">(</span><em class="sig-param">klass_user_friendly_name</em>, <em class="sig-param">method</em>, <em class="sig-param">str_source_value</em>, <em class="sig-param">target_value_type</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.UnsupportedRepresentationException" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.WaitableError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">WaitableError</code><span class="sig-paren">(</span><em class="sig-param">message</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.WaitableError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.YamlError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">YamlError</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.YamlError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when there is an eror in Yaml structure or there is an error in its expected format in the context where it is used in Arjuna.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.YamlListIndexError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">YamlListIndexError</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.YamlListIndexError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when the YamlList does not have the provided index.</p>
+</dd></dl>
+
+<dl class="exception">
+<dt id="arjuna.core.error.YamlUndefinedSectionError">
+<em class="property">exception </em><code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">YamlUndefinedSectionError</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.YamlUndefinedSectionError" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Exception</span></code></p>
+<p>Raised when the YamlList does not have the provided section key.</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="arjuna.core.error.format_msg">
+<code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">format_msg</code><span class="sig-paren">(</span><em class="sig-param">msg</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.format_msg" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="arjuna.core.error.message_formatter">
+<code class="sig-prename descclassname">arjuna.core.error.</code><code class="sig-name descname">message_formatter</code><span class="sig-paren">(</span><em class="sig-param">text</em>, <em class="sig-param">component=None</em>, <em class="sig-param">object_name=None</em>, <em class="sig-param">method_name=None</em>, <em class="sig-param">code=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.core.error.message_formatter" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

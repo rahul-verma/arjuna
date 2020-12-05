@@ -1,0 +1,231 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Gui Widgets &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="../_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Advanced Gui Abstractions" href="gom.html" />
+    <link rel="prev" title="Defining Your Own Locators using withx" href="withx.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="gom.html" title="Advanced Gui Abstractions"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="withx.html" title="Defining Your Own Locators using withx"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Arjuna 1.1.30 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">&lt;no title&gt;</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="gui-widgets">
+<span id="widgets"></span><h1>Gui Widgets<a class="headerlink" href="#gui-widgets" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="guielement">
+<h2><strong>GuiElement</strong><a class="headerlink" href="#guielement" title="Permalink to this headline">¶</a></h2>
+<p>So far this was the GuiWidget type that was dicussed in documentation.</p>
+<p>Arjuna has more types of widgets covered in the following sections.</p>
+</div>
+<div class="section" id="guimultielement-handling-multiple-guielements-together">
+<h2><strong>GuiMultiElement</strong> - Handling Multiple GuiElements Together<a class="headerlink" href="#guimultielement-handling-multiple-guielements-together" title="Permalink to this headline">¶</a></h2>
+<p>Arjuna provides a special abstraction for representing mutliple <strong>GuiElements</strong> together rather than a raw Python list. This provides an opportunity to include higher level methods for test code authors.</p>
+<div class="section" id="defining-and-using-a-guimultielement-in-code">
+<h3>Defining and Using a GuiMultiElement In Code<a class="headerlink" href="#defining-and-using-a-guimultielement-in-code" title="Permalink to this headline">¶</a></h3>
+<p>You can create a <strong>GuiElement</strong> using the <strong>multi_element</strong> factory call of a <strong>GuiApp</strong> (assume <strong>app</strong> to be <strong>GuiApp</strong> object):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">multi_element</span><span class="p">(</span><span class="o">&lt;</span><span class="n">locator_type</span><span class="o">&gt;=&lt;</span><span class="n">locator_value</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-guimultielement-in-gns-and-using-it-in-code">
+<h3>Defining GuiMultiElement in GNS and Using it in Code<a class="headerlink" href="#defining-guimultielement-in-gns-and-using-it-in-code" title="Permalink to this headline">¶</a></h3>
+<p>You can also define a <strong>GuiMultiElement</strong> in a GNS File.</p>
+<p>In the GNS file for a label corresponding to a GuiMultiElement, add the <strong>type</strong> entry and set it to <strong>multi_element</strong>, for example:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">cat_checkboxes</span><span class="p p-Indicator">:</span>
+  <span class="l l-Scalar l-Scalar-Plain">type</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">multi_element</span>
+  <span class="l l-Scalar l-Scalar-Plain">name</span><span class="p p-Indicator">:</span> <span class="s">&quot;delete_tags[]&quot;</span>
+</pre></div>
+</div>
+<p>In your code, you can create an element of this as usual, however this time you’ll get a <strong>GuiMultiElement</strong> object instead of <strong>GuiElement</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">check_boxes</span> <span class="o">=</span> <span class="n">wordpress</span><span class="o">.</span><span class="n">gns</span><span class="o">.</span><span class="n">cat_checkboxes</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interacting-with-guimultielement">
+<h3>Interacting with GuiMultiElement<a class="headerlink" href="#interacting-with-guimultielement" title="Permalink to this headline">¶</a></h3>
+<p>It provides various properties and methods for a higher level interaction with a sequence of <strong>GuiElements</strong>.</p>
+<ul class="simple">
+<li><p>It supports index based retrieval just like a regular list. Indexes start from computer counting (0).</p></li>
+<li><p>In addition to this, it provides propeties like <strong>first_element</strong>, <strong>last_element</strong> and <strong>random_element</strong>.</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="dropdown-handling-default-html-select">
+<h2><strong>DropDown</strong> - Handling Default HTML Select<a class="headerlink" href="#dropdown-handling-default-html-select" title="Permalink to this headline">¶</a></h2>
+<p>DropDown object in Arjuna represents the Select-style control in the UI. Here, we cover handling of a default-HTML select control which has <strong>&lt;select&gt;` as the root tag and **option</strong> as the tag for an option.</p>
+<div class="section" id="defining-and-using-a-dropdown-in-code">
+<h3>Defining and Using a DropDown In Code<a class="headerlink" href="#defining-and-using-a-dropdown-in-code" title="Permalink to this headline">¶</a></h3>
+<p>You can create a <strong>DropDown</strong> using the <strong>dropdown</strong> factory call of a <strong>GuiApp</strong> (assume <strong>app</strong> to be <strong>GuiApp</strong> object):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">dropdown</span><span class="p">(</span><span class="o">&lt;</span><span class="n">locator_type</span><span class="o">&gt;=&lt;</span><span class="n">locator_value</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-dropdown-in-gns-and-using-it-in-code">
+<h3>Defining DropDown in GNS and Using it in Code<a class="headerlink" href="#defining-dropdown-in-gns-and-using-it-in-code" title="Permalink to this headline">¶</a></h3>
+<p>You can also define a <strong>DropDown</strong> in a GNS File.</p>
+<p>In the GNS file for a label corresponding to a GuiMultiElement, add the <strong>type</strong> entry and set it to <strong>dropdown</strong>, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">role</span><span class="p">:</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="n">dropdown</span>
+  <span class="nb">id</span><span class="p">:</span> <span class="n">default_role</span>
+</pre></div>
+</div>
+<p>In your code, you can create an element of this as usual, however this time you’ll get a <strong>DropDown</strong> object instead of <strong>GuiElement</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">element</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">gns</span><span class="o">.</span><span class="n">role</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interacting-with-dropdown">
+<h3>Interacting with DropDown<a class="headerlink" href="#interacting-with-dropdown" title="Permalink to this headline">¶</a></h3>
+<p>It provides various properties and methods for a higher level interaction with a drop down list.</p>
+<ul class="simple">
+<li><p>You can select an option by its visible text by calling <strong>select_text</strong> method of DropDown.</p></li>
+<li><p>DropDown provides various enquiry methods - <strong>has_visible_text_selected</strong>, <strong>has_value_selected</strong>, has_index_selected**.</p></li>
+<li><p>DropDown also has enquirable properties - <strong>value</strong> and <strong>text</strong>.</p></li>
+<li><p>There are other ways of selection as well - <strong>select_value</strong> to select by value attribute of an option, <strong>select_index</strong> to select an option present at provided index.</p></li>
+<li><p>DropDown also has a way of selecting an option by setting its <strong>text</strong> property. This is similar to <strong>.text</strong> property setting of a text-box. It is different from <strong>select_text</strong> method in terms of implementation. <strong>select_text</strong> uses DOM inquiry to match the text of an option and then clicks it to select it. Setting the <strong>.text</strong> property similuates the user action where the user types a string in a focused/highlighted select control to select an option (in technical terms it is equivalent of sendkeys).</p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="radiogroup-handling-default-html-radio-group">
+<h2><strong>RadioGroup</strong> - Handling Default HTML Radio Group<a class="headerlink" href="#radiogroup-handling-default-html-radio-group" title="Permalink to this headline">¶</a></h2>
+<p>RadioGroup object in Arjuna represents the Radio Buttons in the UI that belong to a single selection group (have the same name). Here, we cover handling of a default-HTML RadioGroup control which represents multiple <strong>&lt;input type=’radio’&gt;` elements which have the same **name</strong> attribute value.</p>
+<div class="section" id="defining-and-using-a-radiogroup-in-code">
+<h3>Defining and Using a RadioGroup In Code<a class="headerlink" href="#defining-and-using-a-radiogroup-in-code" title="Permalink to this headline">¶</a></h3>
+<p>You can create a <strong>RadioGroup</strong> using the <strong>radio_group</strong> factory call of a <strong>GuiApp</strong> (assume <strong>app</strong> to be <strong>GuiApp</strong> object):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">app</span><span class="o">.</span><span class="n">radio_group</span><span class="p">(</span><span class="o">&lt;</span><span class="n">locator_type</span><span class="o">&gt;=&lt;</span><span class="n">locator_value</span><span class="o">&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="defining-radiogroup-in-gns-and-using-it-in-code">
+<h3>Defining RadioGroup in GNS and Using it in Code<a class="headerlink" href="#defining-radiogroup-in-gns-and-using-it-in-code" title="Permalink to this headline">¶</a></h3>
+<p>You can also define a <strong>RadioGroup</strong> in a GNS File.</p>
+<p>In the GNS file for a label corresponding to a GuiMultiElement, add the <strong>type</strong> entry and set it to <strong>radio_group</strong>, for example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">date_format</span><span class="p">:</span>
+  <span class="nb">type</span><span class="p">:</span> <span class="n">radio_group</span>
+  <span class="n">name</span><span class="p">:</span> <span class="n">date_format</span>
+</pre></div>
+</div>
+<p>In your code, you can create an element of this as usual, however this time you’ll get a <strong>RadioGroup</strong> object instead of <strong>GuiElement</strong>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">element</span> <span class="o">=</span> <span class="n">app</span><span class="o">.</span><span class="n">gns</span><span class="o">.</span><span class="n">date_format</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="interacting-with-radiogroup">
+<h3>Interacting with RadioGroup<a class="headerlink" href="#interacting-with-radiogroup" title="Permalink to this headline">¶</a></h3>
+<p>It provides various properties and methods for a higher level interaction with a radio group.</p>
+<ul class="simple">
+<li><p>You can select a a by its visible text by calling <strong>select_text</strong> method of DropDown.</p></li>
+<li><p>RadioGroup provides various enquiry methods - <strong>has_value_selected</strong>, <strong>has_index_selected</strong>.</p></li>
+<li><p>RadioGroup also has <strong>value</strong> enquirable property.</p></li>
+<li><p>You can use two ways of selecting a radio button - <strong>select_value</strong> to select by value attribute of an option, <strong>select_index</strong> to select a radio button present at provided index.</p></li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Gui Widgets</a><ul>
+<li><a class="reference internal" href="#guielement"><strong>GuiElement</strong></a></li>
+<li><a class="reference internal" href="#guimultielement-handling-multiple-guielements-together"><strong>GuiMultiElement</strong> - Handling Multiple GuiElements Together</a><ul>
+<li><a class="reference internal" href="#defining-and-using-a-guimultielement-in-code">Defining and Using a GuiMultiElement In Code</a></li>
+<li><a class="reference internal" href="#defining-guimultielement-in-gns-and-using-it-in-code">Defining GuiMultiElement in GNS and Using it in Code</a></li>
+<li><a class="reference internal" href="#interacting-with-guimultielement">Interacting with GuiMultiElement</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#dropdown-handling-default-html-select"><strong>DropDown</strong> - Handling Default HTML Select</a><ul>
+<li><a class="reference internal" href="#defining-and-using-a-dropdown-in-code">Defining and Using a DropDown In Code</a></li>
+<li><a class="reference internal" href="#defining-dropdown-in-gns-and-using-it-in-code">Defining DropDown in GNS and Using it in Code</a></li>
+<li><a class="reference internal" href="#interacting-with-dropdown">Interacting with DropDown</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#radiogroup-handling-default-html-radio-group"><strong>RadioGroup</strong> - Handling Default HTML Radio Group</a><ul>
+<li><a class="reference internal" href="#defining-and-using-a-radiogroup-in-code">Defining and Using a RadioGroup In Code</a></li>
+<li><a class="reference internal" href="#defining-radiogroup-in-gns-and-using-it-in-code">Defining RadioGroup in GNS and Using it in Code</a></li>
+<li><a class="reference internal" href="#interacting-with-radiogroup">Interacting with RadioGroup</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="../index.html">Overview</a>
+    <ul>
+      <li><a href="index.html">&lt;no title&gt;</a>
+        <ul>
+          <li>Previous: <a href="withx.html" title="previous chapter"><strong>Defining Your Own Locators</strong> using <strong>withx</strong></a>
+          <li>Next: <a href="gom.html" title="next chapter"><strong>Advanced Gui Abstractions</strong></a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="../_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

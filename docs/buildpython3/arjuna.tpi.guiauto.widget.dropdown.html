@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.tpi.guiauto.widget.dropdown module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.tpi.guiauto.widget.dropdown">
+<span id="arjuna-tpi-guiauto-widget-dropdown-module"></span><h1>arjuna.tpi.guiauto.widget.dropdown module<a class="headerlink" href="#module-arjuna.tpi.guiauto.widget.dropdown" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.tpi.guiauto.widget.dropdown.</code><code class="sig-name descname">GuiDropDown</code><span class="sig-paren">(</span><em class="sig-param">gui</em>, <em class="sig-param">wmd</em>, <em class="sig-param">parent=None</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Represents a drop down list in th Gui.</p>
+<p>Not meant to be directly created. It is created using calls from <strong>Gui</strong> object or <strong>GuiNamespace</strong> object of <strong>Gui</strong>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>gui</strong> – <strong>Gui</strong> object containing this GuiDropDown.</p></li>
+<li><p><strong>wmd</strong> – <strong>GuiElementMetaData</strong> object for this GuiDropDown.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Keyword Arguments</dt>
+<dd class="field-even"><p><strong>parent</strong> – <strong>GuiElement</strong> in case it is found inside a <strong>GuiElement</strong>. Default is the <strong>Gui</strong> object.</p>
+</dd>
+</dl>
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.gui">
+<em class="property">property </em><code class="sig-name descname">gui</code><a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.gui" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>Gui</strong> object containing this GuiDropDown.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.has_index_selected">
+<code class="sig-name descname">has_index_selected</code><span class="sig-paren">(</span><em class="sig-param">index: int</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.has_index_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this GuiDropDown has option selected at given index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> – Target index.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.has_value_selected">
+<code class="sig-name descname">has_value_selected</code><span class="sig-paren">(</span><em class="sig-param">value: str</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.has_value_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this GuiDropDown has option with given value attribute content selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – Exact content of value attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.has_visible_text_selected">
+<code class="sig-name descname">has_visible_text_selected</code><span class="sig-paren">(</span><em class="sig-param">text: str</em><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.has_visible_text_selected" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this GuiDropDown has option with visible text selected.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> – Exact visible text content.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.is_multi_select">
+<code class="sig-name descname">is_multi_select</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; bool<a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.is_multi_select" title="Permalink to this definition">¶</a></dt>
+<dd><p>Check if this GuiDropDown allows multiple selection of options.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.select_index">
+<code class="sig-name descname">select_index</code><span class="sig-paren">(</span><em class="sig-param">index: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.select_index" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select option at given index.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>index</strong> – Target index.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.select_ordinal">
+<code class="sig-name descname">select_ordinal</code><span class="sig-paren">(</span><em class="sig-param">ordinal: int</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.select_ordinal" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select option at given ordinal.</p>
+<p>Ordinals are as per human counting. First element is at ordinal 1.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>ordinal</strong> – Target ordinal.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.select_text">
+<code class="sig-name descname">select_text</code><span class="sig-paren">(</span><em class="sig-param">text: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.select_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select option with given visible text.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>text</strong> – Exact visible text content.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.select_value">
+<code class="sig-name descname">select_value</code><span class="sig-paren">(</span><em class="sig-param">value: str</em><span class="sig-paren">)</span> &#x2192; None<a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.select_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Select option with given content of value attribute.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>value</strong> – Exact content of value attribute.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.source">
+<em class="property">property </em><code class="sig-name descname">source</code><a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.source" title="Permalink to this definition">¶</a></dt>
+<dd><p><strong>GuiSource</strong> for this GuiDropDown (source of root element).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.text">
+<em class="property">property </em><code class="sig-name descname">text</code><a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Visible text of selected option</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<dl>
+<dt>You can select an option with visible text of this GuiDropDown too using following Python code:</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">dropdown</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="s2">&quot;&lt;some_text&gt;&quot;</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+<p><strong>Method used for this diffent from **select_text**</strong>. It uses <strong>send_keys</strong> to simulate this interaction instead of clicking an option.</p>
+<p>Waits for clickability.</p>
+<p><strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> in associated configuration is used as the default. Can be overriden using <strong>max_wait</strong> argument in GuiWidgetDefinition or GNS file.</p>
+</div>
+</dd></dl>
+
+<dl class="method">
+<dt id="arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.value">
+<em class="property">property </em><code class="sig-name descname">value</code><a class="headerlink" href="#arjuna.tpi.guiauto.widget.dropdown.GuiDropDown.value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Content of value attribute of selected option</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

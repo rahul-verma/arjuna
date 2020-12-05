@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>arjuna.engine.data.source module &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-arjuna.engine.data.source">
+<span id="arjuna-engine-data-source-module"></span><h1>arjuna.engine.data.source module<a class="headerlink" href="#module-arjuna.engine.data.source" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="arjuna.engine.data.source.DataArrayDataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">DataArrayDataSource</code><span class="sig-paren">(</span><em class="sig-param">records</em>, <em class="sig-param">*</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataArrayDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.DataSource" title="arjuna.engine.data.source.DataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.DataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataArrayDataSource.get_next">
+<code class="sig-name descname">get_next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataArrayDataSource.get_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataArrayDataSource.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataArrayDataSource.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataArrayDataSource.should_exclude">
+<code class="sig-name descname">should_exclude</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataArrayDataSource.should_exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.DataClassDataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">DataClassDataSource</code><span class="sig-paren">(</span><em class="sig-param">dclass</em>, <em class="sig-param">*vargs</em>, <em class="sig-param">context</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataClassDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.DataSource" title="arjuna.engine.data.source.DataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.DataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataClassDataSource.get_next">
+<code class="sig-name descname">get_next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataClassDataSource.get_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataClassDataSource.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataClassDataSource.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataClassDataSource.should_exclude">
+<code class="sig-name descname">should_exclude</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataClassDataSource.should_exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataClassDataSource.terminate">
+<code class="sig-name descname">terminate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataClassDataSource.terminate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.DataFunctionDataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">DataFunctionDataSource</code><span class="sig-paren">(</span><em class="sig-param">func</em>, <em class="sig-param">*vargs</em>, <em class="sig-param">context</em>, <em class="sig-param">**kwargs</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataFunctionDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.DataSource" title="arjuna.engine.data.source.DataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.DataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataFunctionDataSource.get_next">
+<code class="sig-name descname">get_next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataFunctionDataSource.get_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataFunctionDataSource.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataFunctionDataSource.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataFunctionDataSource.should_exclude">
+<code class="sig-name descname">should_exclude</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataFunctionDataSource.should_exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataFunctionDataSource.terminate">
+<code class="sig-name descname">terminate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataFunctionDataSource.terminate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.DataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">DataSource</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.all_records">
+<em class="property">property </em><code class="sig-name descname">all_records</code><a class="headerlink" href="#arjuna.engine.data.source.DataSource.all_records" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.context">
+<em class="property">property </em><code class="sig-name descname">context</code><a class="headerlink" href="#arjuna.engine.data.source.DataSource.context" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.get_name">
+<code class="sig-name descname">get_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.get_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.get_next">
+<em class="property">abstract </em><code class="sig-name descname">get_next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.get_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.is_terminated">
+<code class="sig-name descname">is_terminated</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.is_terminated" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.next">
+<code class="sig-name descname">next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.reset">
+<em class="property">abstract </em><code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.set_name">
+<code class="sig-name descname">set_name</code><span class="sig-paren">(</span><em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.set_name" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.should_exclude">
+<em class="property">abstract </em><code class="sig-name descname">should_exclude</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.should_exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.terminate">
+<code class="sig-name descname">terminate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.terminate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DataSource.validate">
+<code class="sig-name descname">validate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DataSource.validate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.DsvFileMapDataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">DsvFileMapDataSource</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">delimiter='t'</em>, <em class="sig-param">*</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DsvFileMapDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.FileDataSource" title="arjuna.engine.data.source.FileDataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.FileDataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.DsvFileMapDataSource.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DsvFileMapDataSource.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.DummyDataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">DummyDataSource</code><span class="sig-paren">(</span><em class="sig-param">*</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DummyDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.DataSource" title="arjuna.engine.data.source.DataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.DataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.DummyDataSource.get_next">
+<code class="sig-name descname">get_next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DummyDataSource.get_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.DummyDataSource.should_exclude">
+<code class="sig-name descname">should_exclude</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.DummyDataSource.should_exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.ExcelFileMapDataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">ExcelFileMapDataSource</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">*</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.ExcelFileMapDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.FileDataSource" title="arjuna.engine.data.source.FileDataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.FileDataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.ExcelFileMapDataSource.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.ExcelFileMapDataSource.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.ExcelFileMapDataSource.should_exclude">
+<code class="sig-name descname">should_exclude</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.ExcelFileMapDataSource.should_exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.FileDataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">FileDataSource</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">*</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.FileDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.DataSource" title="arjuna.engine.data.source.DataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.DataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.FileDataSource.get_next">
+<code class="sig-name descname">get_next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.FileDataSource.get_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.FileDataSource.path">
+<em class="property">property </em><code class="sig-name descname">path</code><a class="headerlink" href="#arjuna.engine.data.source.FileDataSource.path" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.FileDataSource.reader">
+<em class="property">property </em><code class="sig-name descname">reader</code><a class="headerlink" href="#arjuna.engine.data.source.FileDataSource.reader" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.FileDataSource.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.FileDataSource.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.FileDataSource.should_exclude">
+<code class="sig-name descname">should_exclude</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.FileDataSource.should_exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.IniFileDataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">IniFileDataSource</code><span class="sig-paren">(</span><em class="sig-param">path</em>, <em class="sig-param">*</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.IniFileDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.FileDataSource" title="arjuna.engine.data.source.FileDataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.FileDataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.IniFileDataSource.process">
+<code class="sig-name descname">process</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.IniFileDataSource.process" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.MultiDataSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">MultiDataSource</code><span class="sig-paren">(</span><em class="sig-param">dsource_defs</em>, <em class="sig-param">*</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.MultiDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.DataSource" title="arjuna.engine.data.source.DataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.DataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.MultiDataSource.get_next">
+<code class="sig-name descname">get_next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.MultiDataSource.get_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.MultiDataSource.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.MultiDataSource.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.MultiDataSource.should_exclude">
+<code class="sig-name descname">should_exclude</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.MultiDataSource.should_exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="arjuna.engine.data.source.SingleDataRecordSource">
+<em class="property">class </em><code class="sig-prename descclassname">arjuna.engine.data.source.</code><code class="sig-name descname">SingleDataRecordSource</code><span class="sig-paren">(</span><em class="sig-param">record</em>, <em class="sig-param">*</em>, <em class="sig-param">context</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.SingleDataRecordSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#arjuna.engine.data.source.DataSource" title="arjuna.engine.data.source.DataSource"><code class="xref py py-class docutils literal notranslate"><span class="pre">arjuna.engine.data.source.DataSource</span></code></a></p>
+<dl class="method">
+<dt id="arjuna.engine.data.source.SingleDataRecordSource.get_next">
+<code class="sig-name descname">get_next</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.SingleDataRecordSource.get_next" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.SingleDataRecordSource.reset">
+<code class="sig-name descname">reset</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.SingleDataRecordSource.reset" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="arjuna.engine.data.source.SingleDataRecordSource.should_exclude">
+<code class="sig-name descname">should_exclude</code><span class="sig-paren">(</span><em class="sig-param">data_record</em><span class="sig-paren">)</span><a class="headerlink" href="#arjuna.engine.data.source.SingleDataRecordSource.should_exclude" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

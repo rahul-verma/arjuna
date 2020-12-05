@@ -1,0 +1,420 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Purpose &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Purpose" href="l10n.html" />
+    <link rel="prev" title="Random Data Generation" href="datagen_entity.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="l10n.html" title="Purpose"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="datagen_entity.html" title="Random Data Generation"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arjuna 1.1.30 documentation</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="purpose">
+<span id="data-ref"></span><h1>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h1>
+<p>Data References represent global data containers which can be accessed from anywhere in your test project.</p>
+<p>Arjuna supports two types of data references - Contextual and Indexed - as discussed below. For each of them Excel and YAML formats are supported.</p>
+<p>These reference files are automatically loaded when <strong>Arjuna.init()</strong> is called by Arjuna launcher.</p>
+</div>
+<div class="section" id="contextual-data-references">
+<h1><strong>Contextual Data References</strong><a class="headerlink" href="#contextual-data-references" title="Permalink to this headline">¶</a></h1>
+<p>There are various situations in which you need contextual data. Such a need is catered by the concept of Contextual Data References in Arjuna.</p>
+<p>Consider the following example:
+1. You have 3 types of user accounts - <strong>Bronze</strong>, <strong>Silver</strong> and <strong>Gold</strong>.
+2. The user account information includes a <strong>User</strong> and <strong>Pwd</strong> to repesented user name and password representing a given account type.
+3. In different situations, you want to use the user accounts and retrieve them by the context name from a single source of information.</p>
+<p>You place such files in <strong>&lt;Project Root&gt;/data/reference/contextual</strong> directory.</p>
+<div class="section" id="excel-based-contextual-data-references">
+<h2><strong>Excel</strong> based Contextual Data References<a class="headerlink" href="#excel-based-contextual-data-references" title="Permalink to this headline">¶</a></h2>
+<p>A reference file can be found <strong>arjex</strong> project.</p>
+<img alt="_images/context_excel_ref.png" src="_images/context_excel_ref.png" />
+<p>The context of data is represented by columns. Here Account Type’s values -  <strong>Bronze</strong>, <strong>Silver</strong> and <strong>Gold</strong> represent the contexts, for which the <strong>User</strong> and <strong>Pwd</strong> values are different.</p>
+</div>
+<div class="section" id="yaml-based-contextual-data-references">
+<h2><strong>YAML</strong> based Contextual Data References<a class="headerlink" href="#yaml-based-contextual-data-references" title="Permalink to this headline">¶</a></h2>
+<p>For more complex data needs, YAML could be a better format than Excel, with the benefit that you can track changes in a source control system.</p>
+<p>A reference file can be found <strong>arjex</strong> project.</p>
+<p>Following is a sample of the same data as represented in Excel in previous section:</p>
+<blockquote>
+<div><div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">Bronze</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">User</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">B1</span>
+    <span class="l l-Scalar l-Scalar-Plain">Pwd</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">BP1</span>
+<span class="l l-Scalar l-Scalar-Plain">Silver</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">User</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">S1</span>
+    <span class="l l-Scalar l-Scalar-Plain">Pwd</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">SP1</span>
+<span class="l l-Scalar l-Scalar-Plain">Gold</span><span class="p p-Indicator">:</span>
+    <span class="l l-Scalar l-Scalar-Plain">User</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">G1</span>
+    <span class="l l-Scalar l-Scalar-Plain">Pwd</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">GP1</span>
+</pre></div>
+</div>
+</div></blockquote>
+<p>The context of data is represented by keys/section names in the root of YAML. Here Account Type’s values -  <strong>Bronze</strong>, <strong>Silver</strong> and <strong>Gold</strong> represent the contexts, for which the <strong>User</strong> and <strong>Pwd</strong> values are different.</p>
+</div>
+<div class="section" id="the-magic-r-function-for-contextual-references">
+<h2>The Magic <strong>R</strong> Function for Contextual References<a class="headerlink" href="#the-magic-r-function-for-contextual-references" title="Permalink to this headline">¶</a></h2>
+<p>You can access contextual data references in your test code with Arjuna’s magic <strong>R</strong> function (similar to <strong>L</strong> and <strong>C</strong> functions seen in other features).</p>
+<p>It has the following signature. The first argument is the query. <strong>bucket</strong> and <strong>context</strong> are optional arguments, if query includes them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=&lt;</span><span class="n">bucket_name</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">context</span><span class="o">=&lt;</span><span class="n">context_name</span><span class="o">&gt;</span><span class="p">))</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>The name of the file is the <strong>bucket</strong> name (without the extension).</p></li>
+<li><dl>
+<dt>You can retrieve values from contextual data reference with a combination of <strong>bucket</strong>, <strong>context</strong> and <strong>reference name</strong>.</dt><dd><ul>
+<li><p>Query can be of format <strong>bucket.context.refname</strong> without passing bucket and context arguments separately.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bucket</span><span class="o">.</span><span class="n">context</span><span class="o">.</span><span class="n">refname</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;eusers.bronze.pwd&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Query can be of format <strong>context.refname</strong> and bucket can be supplied as argument.</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">context</span><span class="o">.</span><span class="n">refname</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;bronze.pwd&quot;</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s2">&quot;eusers&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Query can contain just the reference name and bucket and context arguments can be provided.</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">refname</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;pwd&quot;</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s2">&quot;eusers&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;bronze&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="indexed-data-references">
+<h1><strong>Indexed Data References</strong><a class="headerlink" href="#indexed-data-references" title="Permalink to this headline">¶</a></h1>
+<p>There are situations where the data reference is a list/sequence of objects which you want to access by their position rather than against a name/key.</p>
+<p>This global data need is met with Arjuna’s Indexed Data References.</p>
+<p>Consider the following example:
+1. You have a list of eCommerce site coupons.
+2. Sometimes you want to use them all, sometimes you want to choose one at random and so on.
+3. They share the same context. There is no special meaning to one item differentiating itself from another. In simple words, all are equivalent.</p>
+<p>You place such files in <strong>&lt;Project Root&gt;/data/reference/indexed</strong> directory.</p>
+<div class="section" id="excel-based-indexed-data-references">
+<h2><strong>Excel</strong> based Indexed Data References<a class="headerlink" href="#excel-based-indexed-data-references" title="Permalink to this headline">¶</a></h2>
+<p>A reference file can be found <strong>arjex</strong> project.</p>
+<img alt="_images/inputxls.png" src="_images/inputxls.png" />
+<p>Each row is mapped to the heading strings in the first row. Indexing starts at 0 and from the first data row.</p>
+</div>
+<div class="section" id="id1">
+<h2><strong>YAML</strong> based Contextual Data References<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>A reference file can be found <strong>arjex</strong> project.</p>
+<p>Following is a sample of the same data as represented in Excel in previous section:</p>
+<blockquote>
+<div><div class="highlight-YAML notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span>
+    <span class="l l-Scalar l-Scalar-Plain">Left</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">1</span>
+    <span class="l l-Scalar l-Scalar-Plain">Right</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">2</span>
+    <span class="l l-Scalar l-Scalar-Plain">Sum</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">3</span>
+<span class="p p-Indicator">-</span>
+    <span class="l l-Scalar l-Scalar-Plain">Left</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">4</span>
+    <span class="l l-Scalar l-Scalar-Plain">Right</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">5</span>
+    <span class="l l-Scalar l-Scalar-Plain">Sum</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">8</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="the-magic-r-function-for-indexed-references">
+<h2>The Magic <strong>R</strong> Function for Indexed References<a class="headerlink" href="#the-magic-r-function-for-indexed-references" title="Permalink to this headline">¶</a></h2>
+<p>You can access indexed data references just like contextual ones in your test code with Arjuna’s magic <strong>R</strong> function.</p>
+<p>It has the following signature. The first argument is the query. <strong>bucket</strong> and <strong>index</strong> are optional arguments, if query includes them.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=&lt;</span><span class="n">bucket_name</span><span class="o">&gt;</span><span class="p">,</span> <span class="n">index</span><span class="o">=&lt;</span><span class="n">index</span><span class="o">&gt;</span><span class="p">))</span>
+</pre></div>
+</div>
+<ol class="arabic">
+<li><p>The name of the file is the <strong>bucket</strong> name (without the extension).</p></li>
+<li><dl>
+<dt>You can retrieve values from indexed data reference with a combination of <strong>bucket</strong>, <strong>context</strong> and <strong>reference name</strong>.</dt><dd><ul>
+<li><p>Query can be of format <strong>bucket.index.refname</strong> without passing bucket and context arguments separately.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bucket</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">refname</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;eusers.1.pwd&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Query can be of format <strong>index.refname</strong> and bucket can be supplied as argument.</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">1.</span><span class="n">refname</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;1.pwd&quot;</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s2">&quot;eusers&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Query can contain just the reference name and bucket and context arguments can be provided.</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">refname</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;pwd&quot;</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s2">&quot;eusers&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ol>
+</div>
+</div>
+<div class="section" id="retrieving-complete-referred-object">
+<h1><strong>Retrieving Complete Referred Object</strong><a class="headerlink" href="#retrieving-complete-referred-object" title="Permalink to this headline">¶</a></h1>
+<p>In the above sections we saw retrieving a name/key in the referred object by context or index.</p>
+<p>You can also retrieve the complete object in one shot.</p>
+<div class="section" id="get-contextual-data-reference-object">
+<h2>Get Contextual Data Reference Object<a class="headerlink" href="#get-contextual-data-reference-object" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt>You can retrieve the object from contextual data reference with a combination of <strong>bucket</strong> and <strong>context</strong>.</dt><dd><ul>
+<li><p>Query can be of format <strong>bucket.context</strong> without passing bucket and context arguments separately.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bucket</span><span class="o">.</span><span class="n">context</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;eusers.bronze&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Query can be of format <strong>context</strong> and bucket can be supplied as argument.</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">context</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;bronze&quot;</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s2">&quot;eusers&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Query can be blank if bucket=”eusers” and context=”bronze” are passed arguments to <strong>R()</strong></dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="p">(</span><span class="n">bucket</span><span class="o">=</span><span class="s2">&quot;eusers&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">=</span><span class="s2">&quot;bronze&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="get-indexed-data-reference-object">
+<h2>Get Indexed Data Reference Object<a class="headerlink" href="#get-indexed-data-reference-object" title="Permalink to this headline">¶</a></h2>
+<dl>
+<dt>You can retrieve object from indexed data reference with a combination of <strong>bucket</strong> and <strong>index</strong>.</dt><dd><ul>
+<li><p>Query can be of format <strong>bucket.index</strong> without passing bucket and index arguments separately.</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">bucket</span><span class="o">.</span><span class="n">index</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;eusers.1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><dl>
+<dt>Query can be of format <strong>index</strong> and bucket can be supplied as argument.</dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">index</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;1&quot;</span><span class="p">,</span> <span class="n">bucket</span><span class="o">=</span><span class="s2">&quot;eusers&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+<li><dl>
+<dt>Query can be blank if bucket=”eusers” and index=1 are passed arguments to <strong>R()</strong></dt><dd><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="p">(</span><span class="n">bucket</span><span class="o">=</span><span class="s2">&quot;eusers&quot;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="retrieving-complete-contextual-indexed-data-reference">
+<h1><strong>Retrieving Complete Contextual/Indexed Data Reference</strong><a class="headerlink" href="#retrieving-complete-contextual-indexed-data-reference" title="Permalink to this headline">¶</a></h1>
+<p>In the above sections we saw retrieving a name/key in the referred object by context or index.</p>
+<p>You can also retrieve the complete Data Reference.</p>
+<div class="section" id="using-r-and-query">
+<h2>Using <strong>R()</strong> and <strong>Query</strong><a class="headerlink" href="#using-r-and-query" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">R</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
+
+<span class="c1"># For example</span>
+<span class="n">R</span><span class="p">(</span><span class="s2">&quot;eusers&quot;</span><span class="p">)</span>
+
+<span class="n">R</span><span class="p">(</span><span class="n">bucket</span><span class="o">=</span><span class="n">bucket_name</span><span class="p">)</span>
+
+<span class="c1">#For Example</span>
+<span class="n">R</span><span class="p">(</span><span class="n">bucket</span><span class="o">=</span><span class="s2">&quot;eusers&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="using-arjuna-get-data-ref">
+<h2>Using <strong>Arjuna.get_data_ref()</strong><a class="headerlink" href="#using-arjuna-get-data-ref" title="Permalink to this headline">¶</a></h2>
+<p>As for this use case the query is not of much use, an easier way is to do the following:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Arjuna</span><span class="o">.</span><span class="n">get_data_ref</span><span class="p">(</span><span class="n">bucket_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="contextual-data-references-behave-like-python-dicts">
+<h1><strong>Contextual</strong> Data References Behave Like <strong>Python Dicts</strong><a class="headerlink" href="#contextual-data-references-behave-like-python-dicts" title="Permalink to this headline">¶</a></h1>
+<p>If you retrieve the a contextual data reference, you can treat it like a Python dict:</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_ref</span><span class="p">[</span><span class="n">context_key</span><span class="p">]</span>
+<span class="n">data_ref</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+<span class="n">data_ref</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+
+<span class="k">for</span> <span class="n">context</span> <span class="ow">in</span> <span class="n">data_ref</span><span class="p">:</span>
+    <span class="c1"># do something</span>
+
+<span class="k">for</span> <span class="n">context</span><span class="p">,</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">data_ref</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="c1"># do something</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+<div class="section" id="indexed-data-references-behave-like-python-tuples-sequences">
+<h1><strong>Indexed</strong> Data References Behave Like <strong>Python Tuples (Sequences)</strong><a class="headerlink" href="#indexed-data-references-behave-like-python-tuples-sequences" title="Permalink to this headline">¶</a></h1>
+<p>If you retrieve the an indexed data reference, you can treat it like a Python tuple (sequence):</p>
+<blockquote>
+<div><div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">data_ref</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">record</span> <span class="ow">in</span> <span class="n">data_ref</span><span class="p">:</span>
+    <span class="c1"># do something</span>
+</pre></div>
+</div>
+</div></blockquote>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Purpose</a></li>
+<li><a class="reference internal" href="#contextual-data-references"><strong>Contextual Data References</strong></a><ul>
+<li><a class="reference internal" href="#excel-based-contextual-data-references"><strong>Excel</strong> based Contextual Data References</a></li>
+<li><a class="reference internal" href="#yaml-based-contextual-data-references"><strong>YAML</strong> based Contextual Data References</a></li>
+<li><a class="reference internal" href="#the-magic-r-function-for-contextual-references">The Magic <strong>R</strong> Function for Contextual References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#indexed-data-references"><strong>Indexed Data References</strong></a><ul>
+<li><a class="reference internal" href="#excel-based-indexed-data-references"><strong>Excel</strong> based Indexed Data References</a></li>
+<li><a class="reference internal" href="#id1"><strong>YAML</strong> based Contextual Data References</a></li>
+<li><a class="reference internal" href="#the-magic-r-function-for-indexed-references">The Magic <strong>R</strong> Function for Indexed References</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#retrieving-complete-referred-object"><strong>Retrieving Complete Referred Object</strong></a><ul>
+<li><a class="reference internal" href="#get-contextual-data-reference-object">Get Contextual Data Reference Object</a></li>
+<li><a class="reference internal" href="#get-indexed-data-reference-object">Get Indexed Data Reference Object</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#retrieving-complete-contextual-indexed-data-reference"><strong>Retrieving Complete Contextual/Indexed Data Reference</strong></a><ul>
+<li><a class="reference internal" href="#using-r-and-query">Using <strong>R()</strong> and <strong>Query</strong></a></li>
+<li><a class="reference internal" href="#using-arjuna-get-data-ref">Using <strong>Arjuna.get_data_ref()</strong></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#contextual-data-references-behave-like-python-dicts"><strong>Contextual</strong> Data References Behave Like <strong>Python Dicts</strong></a></li>
+<li><a class="reference internal" href="#indexed-data-references-behave-like-python-tuples-sequences"><strong>Indexed</strong> Data References Behave Like <strong>Python Tuples (Sequences)</strong></a></li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="datagen_entity.html" title="previous chapter"><strong>Random Data</strong> Generation</a>
+          <li>Next: <a href="l10n.html" title="next chapter">Purpose</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

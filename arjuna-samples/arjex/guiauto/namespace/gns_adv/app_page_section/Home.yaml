@@ -200,3 +200,20 @@ labels:
       id: wrong
       tags: input
       above: pass_label
+
+  login_form:
+    id: loginform
+
+  sbutton:
+    classes: button
+
+  input:
+    tags: input
+
+  labels:
+    tags: label
+    below: user_label
+    type: multi_element
+  
+
+  

@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Advanced Gui Abstractions &#8212; Arjuna 1.1.30 documentation</title>
+    <link rel="stylesheet" href="../_static/flask.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Introduction" href="../httpauto.html" />
+    <link rel="prev" title="Gui Widgets" href="widgets.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = '../';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="../httpauto.html" title="Introduction"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="widgets.html" title="Gui Widgets"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="../index.html">Arjuna 1.1.30 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="index.html" accesskey="U">&lt;no title&gt;</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="advanced-gui-abstractions">
+<span id="gom"></span><h1><strong>Advanced Gui Abstractions</strong><a class="headerlink" href="#advanced-gui-abstractions" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="concept-of-gui-in-arjuna">
+<h2>Concept of <strong>Gui</strong> in Arjuna<a class="headerlink" href="#concept-of-gui-in-arjuna" title="Permalink to this headline">¶</a></h2>
+<p>Graphical User Interfaces are represented using the <strong>Gui</strong> class in Arjuna. It provides all methods to interact with the Gui as well for creation of objects for its visual elements.</p>
+<p>Arjuna has three types of <strong>Gui</strong>’s, namely <strong>GuiApp</strong>, <strong>GuiPage</strong> and <strong>GuiSection</strong> and any children thereof.</p>
+<p>Note that <strong>GuiDialog</strong> is an alias for <strong>GuiSection</strong> currently, but this behavior could change in future.</p>
+<div class="section" id="the-guiapp-class">
+<h3>The <strong>GuiApp</strong> Class<a class="headerlink" href="#the-guiapp-class" title="Permalink to this headline">¶</a></h3>
+<p>In addition to directly creating an object of App, you can also inherit from it and extend it.</p>
+<p>For example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">WordPress</span><span class="p">(</span><span class="n">GuiApp</span><span class="p">):</span>
+
+ <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">url</span><span class="o">=</span><span class="n">url</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Within the class’ methods, you can now access its methods directly:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="bp">self</span><span class="o">.</span><span class="n">gns</span><span class="o">.</span><span class="n">abc</span> <span class="c1"># Element for abc label in GNS</span>
+<span class="bp">self</span><span class="o">.</span><span class="n">launch</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="the-guipage-class">
+<h3>The <strong>GuiPage</strong> Class<a class="headerlink" href="#the-guipage-class" title="Permalink to this headline">¶</a></h3>
+<p>You can implement a GuiPage by inheriting from <strong>GuiPage</strong> class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">Home</span><span class="p">(</span><span class="n">GuiPage</span><span class="p">):</span>
+
+ <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_gui</span><span class="p">):</span>
+     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">source_gui</span><span class="o">=</span><span class="n">source_gui</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <strong>GuiPage</strong> must be provided with a <strong>source_gui</strong> i.e. the <strong>Gui</strong> from where the page is being created.</p>
+</div>
+<div class="section" id="the-guisection-class">
+<h3>The <strong>GuiSection</strong> Class<a class="headerlink" href="#the-guisection-class" title="Permalink to this headline">¶</a></h3>
+<p>You can implement a GuiSection by inheriting from <strong>GuiSection</strong> class:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">LeftNav</span><span class="p">(</span><span class="n">GuiSection</span><span class="p">):</span>
+
+ <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">):</span>
+     <span class="n">url</span> <span class="o">=</span> <span class="n">C</span><span class="p">(</span><span class="s2">&quot;wp.login.url&quot;</span><span class="p">)</span>
+     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent_gui</span><span class="o">=</span><span class="n">page</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>A <strong>GuiSection</strong> must be provided with a <strong>page</strong> i.e. the <strong>GuiPage</strong> for which the section is being created.</p>
+</div>
+</div>
+<div class="section" id="gui-abstraction-models">
+<h2><strong>Gui Abstraction Models</strong><a class="headerlink" href="#gui-abstraction-models" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="app-model-using-app-class">
+<h3><strong>App Model</strong> using App class<a class="headerlink" href="#app-model-using-app-class" title="Permalink to this headline">¶</a></h3>
+<p>You can implement a class as a <strong>GuiApp</strong> by using inheritance. This is the suggested way of implenting a web application abstraction in Arjuna.</p>
+<p>This is the simplest way to get started with an equivalent of GuiPage Object Model (POM), GuiPage Factories, Loadable Component, all clubbed into one concept. We represent the complete appplication as a single class which is attached to a a single GNS file for externalization. It should work well for small apps or where you are automating only a small sub-set of the application.</p>
+</div>
+<div class="section" id="app-page-model-using-guiapp-and-guipage-classes">
+<h3><strong>App-Page Model</strong> using GuiApp and GuiPage Classes<a class="headerlink" href="#app-page-model-using-guiapp-and-guipage-classes" title="Permalink to this headline">¶</a></h3>
+<p>For professional test automation, where you automate multiple use cases across different pages/screens, a simple App Model will not suffice. In the simple App Model, the GNS file will be cluttered with labels from multiple pages and the <strong>GuiApp</strong> class will have so many methods that it will impact code mainteance and understandability.</p>
+<dl class="simple">
+<dt>One step forward from Arjuna’s App Model is the App-Page Model:</dt><dd><ol class="arabic simple">
+<li><p>You  implement the web application as a child of <strong>GuiApp</strong> class.</p></li>
+<li><p>We implemented each web page of interest as a child of <strong>GuiPage</strong> class.</p></li>
+<li><p>The <strong>GuiPage</strong> classes have methods to move from one page to another.</p></li>
+</ol>
+</dd>
+</dl>
+</div>
+<div class="section" id="app-page-section-model-using-guiapp-guipage-and-guisection-classes">
+<h3><strong>App-Page-Section Model</strong> using GuiApp, GuiPage and GuiSection Classes<a class="headerlink" href="#app-page-section-model-using-guiapp-guipage-and-guisection-classes" title="Permalink to this headline">¶</a></h3>
+<dl class="simple">
+<dt>Consider the following:</dt><dd><ol class="arabic simple">
+<li><p>Typcally, the web applications follow a set of a templates for different pages. Such templates have some repetitive sections across multiple pages. Examples: Left navigation bars, Top Menus, Sidebars etc.</p></li>
+<li><p>Some application pages might be two complex to be represented as a single page.</p></li>
+<li><p>Some similar HTML components like tables etc. are resued across multiple pages as a part of their contents.</p></li>
+</ol>
+</dd>
+</dl>
+<p>Unless you address the above in the way you implement the Gui abstraction, the code will not clearly represent the Gui. Also, even if externalized, this could result in repeated identifiers across different GNS files.</p>
+<dl class="simple">
+<dt>One step forward from Arjuna’s App-GuiPage Model is the App-GuiPage-GuiSection Model:</dt><dd><ol class="arabic simple">
+<li><p>Implement the web application as a child of <strong>GuiApp</strong> class.</p></li>
+<li><p>Implement each web page of interest as a child of <strong>GuiPage</strong> class.</p></li>
+<li><p>GuiPages inherit from different template base pages to represent common structures.</p></li>
+<li><p>Reusables page portions are implemented as <strong>GuiSections</strong> and a correct composition relationship is established between a <strong>GuiPage</strong> and its <strong>GuiSections</strong> using OOP.</p></li>
+<li><p>In short, Apps have pages and a page can have sections.</p></li>
+</ol>
+</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="arjuna-s-gui-loading-model">
+<h2><strong>Arjuna’s Gui Loading Model</strong><a class="headerlink" href="#arjuna-s-gui-loading-model" title="Permalink to this headline">¶</a></h2>
+<p>All <strong>Gui**s follow the **Gui Loading Mechanism</strong> in Arjuna. For a <strong>GuiApp</strong>, loading logic is triggered when it is launched (<strong>launch</strong> method called). For <strong>GuiPage</strong> and <strong>GuiSection</strong> it takes place as a part of initialization (<strong>super().__init__()</strong> call.)</p>
+<p>We can hook into the mechanism by implementing one or more of the three hooks made available by Arjuna to all <strong>Gui**s. We don’t need to do anything special to the **Gui</strong> classes to make it happen. It is available by default. On the other end, if we don’t want to use it, we don’t need to do anything at all because all the hook methods are optional.</p>
+<p>It draws inspiration from Selenium Java’s implementation of Loadable Component but it is Arjuna’s custom implementation using its own conditions and wait mechanism.</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Gui’s <strong>prepare</strong> method is called with any <strong>*args</strong> and <strong>**kwargs</strong> provided in the <strong>__init__</strong> implementation of a child <strong>Gui</strong>. This is the method which you use for externalization of Gui definitions.</p></li>
+<li><p>Root Element is polled for, if defined, until <strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> number of seconds. In case of exception, loading stops here and <strong>GuiNotLoadedError</strong> is raised.</p></li>
+<li><p>Anchor Element is polled for, if defined, until <strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> number of seconds. In case of exception, loading stops here and <strong>GuiNotLoadedError</strong> is raised.</p></li>
+<li><p><strong>validate_readiness</strong> method is called. If it does not raise any exception, then the loading mechanism stops here.</p></li>
+<li><p>If in <strong>step 4</strong>, an exception of type <strong>arjuna.tpi.error.WaitableError</strong> (or its sub-type) is raised, then the next steps as mentioned in <strong>Step 6 and 7</strong> are performed, else <strong>GuiNotLoadedError</strong> exception is raised.</p></li>
+<li><p>Gui’s <strong>reach_until</strong> method is called. If any exception is raised by it, then <strong>GuiNotLoadedError</strong> exception is raised, else <strong>step 7</strong> is executed.</p></li>
+<li><p>This time <strong>validate_readiness</strong> is called, but not directly. It is tied to the <strong>GuiReady</strong> condition which is polling wait-based caller. If <strong>validate_readiness</strong> raises an exception of type <strong>arjuna.tpi.error.WaitableError</strong> (or its sub-type), <strong>GuiReady</strong> condition keeps calling it until <strong>ArjunaOption.GUIAUTO_MAX_WAIT</strong> number of seconds are passed in <strong>Gui</strong>’s configuration. If successful, during the wait time, then Gui is considered loaded, else <strong>GuiNotLoadedError</strong> exception is raised.</p></li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>Advanced Gui Abstractions</strong></a><ul>
+<li><a class="reference internal" href="#concept-of-gui-in-arjuna">Concept of <strong>Gui</strong> in Arjuna</a><ul>
+<li><a class="reference internal" href="#the-guiapp-class">The <strong>GuiApp</strong> Class</a></li>
+<li><a class="reference internal" href="#the-guipage-class">The <strong>GuiPage</strong> Class</a></li>
+<li><a class="reference internal" href="#the-guisection-class">The <strong>GuiSection</strong> Class</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#gui-abstraction-models"><strong>Gui Abstraction Models</strong></a><ul>
+<li><a class="reference internal" href="#app-model-using-app-class"><strong>App Model</strong> using App class</a></li>
+<li><a class="reference internal" href="#app-page-model-using-guiapp-and-guipage-classes"><strong>App-Page Model</strong> using GuiApp and GuiPage Classes</a></li>
+<li><a class="reference internal" href="#app-page-section-model-using-guiapp-guipage-and-guisection-classes"><strong>App-Page-Section Model</strong> using GuiApp, GuiPage and GuiSection Classes</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#arjuna-s-gui-loading-model"><strong>Arjuna’s Gui Loading Model</strong></a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="../index.html">Overview</a>
+    <ul>
+      <li><a href="index.html">&lt;no title&gt;</a>
+        <ul>
+          <li>Previous: <a href="widgets.html" title="previous chapter">Gui Widgets</a>
+          <li>Next: <a href="../httpauto.html" title="next chapter">Introduction</a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2015-2020, Rahul Verma.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 2.4.4.
+    </div>
+  <script src="../_static/version_warning_offset.js"></script>
+
+  </body>
+</html>
