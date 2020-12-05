@@ -56,6 +56,7 @@ tools/**
 tmp/**
 tmp/**/*
 docs/build/*
+docs/buildpython3/*
 *.tmp
 *.bak
 *.swp
@@ -95,3 +96,4 @@ arjuna-samples/**/geckodriver
 arjuna-samples/pvt/**
 arjuna-samples/arjex_play/**
 arjuna-samples/**/tools/**
+
