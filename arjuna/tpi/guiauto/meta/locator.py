@@ -18,7 +18,7 @@
 from arjuna.tpi.helper.arjtype import Dictable
 from arjuna.tpi.tracker import track
 
-@track("trace")
+@track("debug")
 class GuiWidgetDefinition(Dictable):
     '''
         Representation of indentifiers, format arguments, widget configuration and named arguments for a GuiWidget.
@@ -75,7 +75,7 @@ class GuiWidgetDefinition(Dictable):
             }
 
     def _as_raw_wmd(self):
-        from arjuna import Arjuna, oneof
+        from arjuna import Arjuna, oneof, log_debug
         from arjuna.interact.gui.auto.finder._with import With
         from arjuna.interact.gui.auto.finder.enums import WithType
 
@@ -107,6 +107,7 @@ class GuiWidgetDefinition(Dictable):
             from arjuna.tpi.error import GuiWidgetDefinitionError
             raise GuiWidgetDefinitionError("You must provide atleast one valid locator argument to create GuiWidgetDefinition definition. None of Arjuna defined locators or withx locators were provided. Got the speification dictionary as: {}".format(self.__named_args))
         from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
+
         return GuiWidgetMetaData.create_wmd(*with_list, meta=self.__meta)
 
     def _as_wmd(self):
@@ -114,5 +115,7 @@ class GuiWidgetDefinition(Dictable):
             Convert this **GuiWidgetDefinition** to **GuiWidgetMetaData** object
         '''
         wmd = self._as_raw_wmd()
+        from arjuna import log_debug
+        log_debug("Unformatted Widget def is: " + str(wmd))
         fmt_wmd = wmd.create_formatted_wmd(**self.__fmt_args)
         return fmt_wmd

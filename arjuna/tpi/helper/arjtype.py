@@ -26,6 +26,7 @@ import pprint
 from collections import OrderedDict, namedtuple
 from typing import Callable
 import abc
+from enum import Enum, auto
 
 from arjuna.tpi.tracker import track
 
@@ -412,5 +413,181 @@ class node(nvpairs):
             out_dict[k] = v
         return out_dict
 
+class positions(metaclass=abc.ABCMeta):
+    '''
+        Represents positions based filter objects for Tuples and Lists. Positions are considered in human counting (index + 1).
+
+        Keyword Arguments:
+            strict: If True, exception is raised if the out list is empty.
+    '''
+
+    def __init__(self, *, strict: bool):
+        self.__strict = strict
+
+    @property
+    def is_strict(self):
+        return self.__strict
+
+    def filter(self, sequence):
+        '''
+            Filters a provided sequence based on the positions object concrete implementations.
+
+            Returns:
+                New filtered Tuple or List. Return type is same as provided type.
+        '''
+        t = self.__get_seq_type(sequence)
+        out = self._filter(sequence)
+        if self.__strict and not out:
+            if not sequence:
+                raise Exception("The filtered sequence is empty. The input sequence itself was empty.")                
+            else:
+                raise Exception("The filtered sequence is empty.")
+        return t(out)
+
+    @abc.abstractmethod
+    def _filter(self, sequence):
+        pass
+
+    @classmethod
+    def fixed(cls, *vargs, strict: bool=True):
+        '''
+            Returns FixedPositionsFilter object.
+
+            Args:
+                *vargs: (int) positions in an sequence
+
+            Keyword Arguments:
+                strict: If True, exception is raised if for any of the provided positions, there is no entry in sequence. If False, None is placed at that position.
+        ''' 
+        return FixedPositionsFilter(*vargs, strict=strict)
+
+    @classmethod
+    def slice(cls, *vargs, strict: bool=True):
+        '''
+            Returns SlicedPositionsFilter object.
+
+            Args:
+                *vargs: (int) 1,2,or 3 arguments are accepted. See Notes.
+
+            Note:
+                Following is the meaning of 1,2,3 arg signatures:
+
+                slice(stop)
+                slice(start, stop)
+                slice(start, stop, step)
+
+            Keyword Arguments:
+                strict: If True, exception is raised if out list is empty.
+        ''' 
+        if len(vargs) > 3 or not vargs:
+            raise Exception(f"Invalid positional arguments provided. Refer doc for 1,2,3 positional arg signature of this method. Args provided: {vargs}")
+        elif len(vargs) == 1:
+            return SlicedPositionsFilter(stop=vargs[0], strict=strict)
+        elif len(vargs) == 2:
+            return SlicedPositionsFilter(start=vargs[0], stop=vargs[1], strict=strict)
+        else:
+            return SlicedPositionsFilter(start=vargs[0], stop=vargs[1], step=vargs[2], strict=strict)
+
+
+    @classmethod
+    def odd(cls, strict: bool=True):
+        '''
+            Returns OddPositionsFilter object which provides entries at odd positions.
+
+            Keyword Arguments:
+                strict: If True, exception is raised if out list is empty.
+        ''' 
+        return OddPositionsFilter(strict=strict)
+
+
+    @classmethod
+    def even(cls, strict: bool=True):
+        '''
+            Returns EvenPositionsFilter object which provides entries at odd positions.
+
+            Keyword Arguments:
+                strict: If True, exception is raised if out list is empty.
+        ''' 
+        return EvenPositionsFilter(strict=strict)
+
+    def __get_seq_type(cls, sequence):
+        t = type(sequence)
+        if type(sequence) not in {tuple, list}:
+            raise Exception(f"positions filters support filtering of only tuples and lists. Provided {sequence} of type {t}")
+        return t
+
+class FixedPositionsFilter(positions):
+    '''
+        Represents fixed positions filter object.
+
+        Args:
+            *vargs: (int) positions in an sequence
+
+        Keyword Arguments:
+            strict: If True, exception is raised if for any of the provided positions, there is no entry in sequence. Default is True.
+    ''' 
+
+    def __init__(self, *vargs, strict=True):
+        super().__init__(strict=strict)
+        self.__indices = [v-1 for v in vargs]
+
+    def _filter(self, sequence):
+        out = []
+        for i in self.__indices:
+            try:
+                out.append(sequence[i])
+            except IndexError:
+                if self.is_strict:
+                    raise Exception("No entry found at pos {} in {}".format(i+1, sequence))
+                else:
+                    out.append(None)
+        return out
+
+
+class SlicedPositionsFilter(positions):
+    '''
+        Represents sliced positions filter object.
+
+        Keyword Args:
+            stop: Optional. Stop position. Default is end of sequence.
+            start: Optional. Start position. Default is 1. 
+            step: Optional. Position delta between two successive values.
+            strict: If True, exception is raised if for any of the provided positions, there is no entry in sequence. Default is True.
+
+        Note:
+            If not argument is provided, then all elements are included.
+    ''' 
+
+    def __init__(self, *, stop: int=None, start: int=1, step: int=1, strict: bool=True):
+        super().__init__(strict=strict)
+        start = start - 1
+        # Python slices don't contain right boundary. So, no need to subtract 1 from stop.
+        self.__slice = slice(start, stop, step)
+
+    def _filter(self, sequence):
+        return sequence[self.__slice]
+
+
+class OddPositionsFilter(SlicedPositionsFilter):
+    '''
+        Represents odd positions filter object which provides entries at odd positions.
+
+        Keyword Args:
+            strict: If True, exception is raised if for any of the provided positions, there is no entry in sequence. Default is True.
+    ''' 
+
+    def __init__(self, *, strict: bool=True):
+        super().__init__(start=1, step=2, strict=strict)
+
+class EvenPositionsFilter(SlicedPositionsFilter):
+    '''
+        Represents odd positions filter object which provides entries at even positions.
+
+        Keyword Args:
+            strict: If True, exception is raised if for any of the provided positions, there is no entry in sequence. Default is True.
+    ''' 
+
+    def __init__(self, *, strict: bool=True):
+        super().__init__(start=2, step=2, strict=strict)
 
 NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response sub_network_packets")

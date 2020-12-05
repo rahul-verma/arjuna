@@ -24,7 +24,9 @@ from .enums import WithType
 from ._with import With, ImplWith, Locator, GuiGenericLocator
 from .translator import LocatorTranslator
 from arjuna.core.utils.repr_utils import repr_dict
+from arjuna.tpi.tracker import track
 
+@track("debug")
 class GuiWidgetMetaData:
 
     def __init__(self, locators, meta=None, process=True):

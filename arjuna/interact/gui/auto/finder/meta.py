@@ -35,10 +35,7 @@ class InteractionConfig:
         loaded = []
         for k,v in meta_dict.items():
             try:
-                if isinstance(k, GuiInteractionConfigType):
-                    self.__settings[k] = v
-                else:
-                    self._settings[GuiInteractionConfigType[k.upper()]] = v
+
                 loaded.append(k)
             except:
                 pass
@@ -58,13 +55,31 @@ class InteractionConfig:
     def should_scroll_to_view(self):
         return self.__settings[GuiInteractionConfigType.SCROLL_TO_VIEW]
 
+    def __setitem__(self, name, value):
+        if isinstance(name, GuiInteractionConfigType):
+            self.__settings[k] = value
+        else:
+            self._settings[GuiInteractionConfigType[name.upper()]] = value
+
+    @classmethod
+    def is_a_setting(cls, name):
+        if isinstance(name, GuiInteractionConfigType):
+            return True
+        else:
+            try:
+                GuiInteractionConfigType[name.upper()]
+                return True
+            except:
+                return False
+
+
     def __str__(self):
         return repr_dict(self.__settings)
 
 class Meta:
     _ALLOWED_FILTERS = {
         GuiWidgetType.ELEMENT: {'pos'},
-        GuiWidgetType.MULTI_ELEMENT: {'slice'},
+        GuiWidgetType.MULTI_ELEMENT: {'pos'},
         GuiWidgetType.DROPDOWN: {'pos'},
         GuiWidgetType.RADIO_GROUP: set(),
     }
@@ -80,7 +95,7 @@ class Meta:
         self.__process_relations(temp_dict)
         self.__process_filters(temp_dict)
         self.__process_settings(temp_dict)
-        log_debug("Meta dictionary is: {}".format(self.__mdict))
+        log_debug("Meta dictionary is: {}".format(repr_dict(self.__mdict)))
 
     def __process_type(self, temp_dict):
         from arjuna import log_debug
@@ -104,10 +119,11 @@ class Meta:
         to_remove = list()
         for k,v in temp_dict.items():
             if k.lower() in {'above', 'below', 'left_of', 'right_of', 'near'}:
-                self.__mdict["relations"][k.lower()] = v 
+                 
                 to_remove.append(k)
         for k in to_remove:
             del temp_dict[k]
+
         if "relations" in temp_dict:
             self.__mdict["relations"].update(temp_dict["relations"])
             del temp_dict["relations"]
@@ -116,44 +132,21 @@ class Meta:
         from arjuna.tpi.error import GuiWidgetDefinitionError
 
         for k,v in self.__mdict["relations"].items():
-            if isinstance(v, SingleGuiWidget):
-                self.__mdict["relations"][k] = v.dispatcher.driver_element
-                # raise GuiWidgetDefinitionError("Relations must point to an already found GuiElement. Provided: {}".format(v))
+            self.__set_relation(self, k, v)
 
     def __process_filters(self, temp_dict):
         from arjuna import log_debug
         self.__mdict["filters"] = CIStringDict()
         to_remove = list()
         for k,v in temp_dict.items():
-            if k.lower() in {'pos', 'slice'}:
-                self.__mdict["filters"][k.lower()] = v 
+            if k.lower() in {'pos'}:
+                self.__set_filter(k,v)
                 to_remove.append(k)
         for k in to_remove:
             del temp_dict[k]
         if "filters" in temp_dict:
             self.__mdict["filters"].update(temp_dict["filters"])
             del temp_dict["filters"]
-
-        allowed_filters = self._ALLOWED_FILTERS[self.__mdict['type']]
-        for k in self.__mdict["filters"]:
-            if k not in allowed_filters:
-                raise Exception("{} is not allowed filter meta data for GuiWidget of type: {}. Allowed: {}".format(k, self.__mdict['type'], allowed_filters))
-
-        self.__format_pos()
-
-    def __format_pos(self):
-        if "pos" not in self.__mdict["filters"]:
-            return
-        
-        pos = self.__mdict["filters"]["pos"]
-        fpos = str(pos).lower().strip()
-        try:
-            if fpos in self._POS:
-                self.__mdict["filters"]["pos"] = fpos
-            else:
-                self.__mdict["filters"]["pos"] = int(fpos)
-        except:
-            raise Exception("Invalid value for >>pos<< filter. Must be an integer or a string: first/last/random. Found: {}".format(pos))
 
     def __process_settings(self, temp_dict):
         self.__mdict["settings"] = InteractionConfig(temp_dict) # Interconfig keys are removed
@@ -177,8 +170,42 @@ class Meta:
         else:
             return None
 
+    def __set_relation(self, name, value):
+        if isinstance(value, SingleGuiWidget):
+            value = value.dispatcher.driver_element
+        self.__mdict["relations"][name] = value
+
+    def __format_pos(self, pos):
+        if self.__mdict["type"] in {GuiWidgetType.ELEMENT, GuiWidgetType.DROPDOWN}:
+            fpos = str(pos).lower().strip()
+            try:
+                if fpos in self._POS:
+                    return self._POS[fpos]
+                else:
+                    return int(fpos)
+            except:
+                raise Exception("Invalid value for >>pos<< filter for Gui Widget Type {}. Must be an integer or a string: first/last/random. Found: {}".format(self.__mdict["type"], pos))
+        else:
+            return pos          
+
+    def __set_filter(self, name, value):
+        allowed_filters = self._ALLOWED_FILTERS[self.__mdict['type']]
+        if name not in allowed_filters:
+            raise Exception("{} is not allowed filter meta data for GuiWidget of type: {}. Allowed: {}".format(k, self.__mdict['type'], allowed_filters))
+        if name == "pos":
+            self.__mdict["filters"][name] = self.__format_pos(value)
+        else:
+            self.__mdict["filters"][name] = value
+
     def __setitem__(self, name, value):
-        self.__mdict[name] = value
+        if InteractionConfig.is_a_setting(name):
+            self["settings"][name] = value
+        elif name.lower() in {"above", "below", "near", "right_of", "left_of"}:
+            self.__set_relation(name, value)
+        elif name.lower() in {"pos", "slice"}:
+            self.__set_filter(name, value)
+        else:
+            self.__mdict[name] = value
 
     def __str__(self):
         return repr_dict(self.__mdict)

@@ -90,7 +90,7 @@ class SeleniumElementFinder:
         from arjuna import log_debug
         log_debug(f"Finding element in container:{container} with wtype:{byType} and wvalue:{byValue} with relations: {relations} and filters: {filters}")
         elements = cls.find_elements(container, byType, byValue, relations=relations)
-        pos = 1
+        pos = 0
         if filters:
             if 'pos' in filters:
                 pos = filters['pos']
@@ -117,4 +117,8 @@ class SeleniumElementFinder:
             elements = container.find_elements(rby)            
         if len(elements) == 0:
             raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue), message="No element found for Selenium locator")
+        if filters is not None:
+            if "pos" in filters:
+                log_debug("Filtering elements with filter: {}".format(filters["pos"]))
+                return filters["pos"].filter(elements)
         return elements

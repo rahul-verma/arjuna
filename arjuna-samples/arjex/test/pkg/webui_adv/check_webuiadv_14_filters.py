@@ -18,7 +18,7 @@
 from arjuna import *
 
 @test
-def check_filters_coded_index(request, wordpress):
+def check_filters_coded_element_pos(request, wordpress):
     pass_label = wordpress.element(tags="input", pos=2)
     print(pass_label.source.content.all)
     pass_label = wordpress.element(tags="input", pos="first")
@@ -27,3 +27,17 @@ def check_filters_coded_index(request, wordpress):
     print(pass_label.source.content.all)
     pass_label = wordpress.element(tags="input", pos="random")
     print(pass_label.source.content.all)
+
+
+@test
+def check_filters_coded_multielement_slice(request, wordpress):
+    inputs = wordpress.multi_element(tags="*", pos=pos.fixed(2,4))
+    print(inputs.source.content.root)
+    inputs = wordpress.multi_element(tags="*", pos=pos.slice(2,4))
+    print(inputs.source.content.root)
+    inputs = wordpress.multi_element(tags="*", pos=pos.slice(2,7,2))
+    print(inputs.source.content.root)
+    inputs = wordpress.multi_element(tags="*", pos=pos.odd())
+    print(inputs.source.content.root)
+    inputs = wordpress.multi_element(tags="*", pos=pos.even())
+    print(inputs.source.content.root)

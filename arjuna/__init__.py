@@ -77,7 +77,8 @@ from arjuna.tpi.error import *
 from arjuna.tpi.constant import *
 from arjuna.core.constant import *
 from arjuna.tpi.tracker import track
-from arjuna.tpi.helper.arjtype import nvpair, nvpairs, withx, Screen, attr, node, Point, Offset, NetworkPacketInfo, oneof
+from arjuna.tpi.helper.arjtype import nvpair, nvpairs, withx, Screen, attr, node, Point, Offset, NetworkPacketInfo, oneof, positions
+pos = positions
 from arjuna.tpi.helper.audit import HardCoded
 from arjuna.tpi.helper.arjtype import ProcessedKeyDict
 from arjuna.tpi.helper.datetime import Time, DateTime, DateTimeDelta, DateTimeStepper
