@@ -89,16 +89,8 @@ class SeleniumElementFinder:
     def find_element(cls, container, byType, byValue, *, relations=None, filters=None):
         from arjuna import log_debug
         log_debug(f"Finding element in container:{container} with wtype:{byType} and wvalue:{byValue} with relations: {relations} and filters: {filters}")
-        elements = cls.find_elements(container, byType, byValue, relations=relations)
-        pos = 0
-        if filters:
-            if 'pos' in filters:
-                pos = filters['pos']
-                if pos in cls._POS:
-                    pos = cls._POS[pos]
-                elif pos == "random":
-                    pos = random.randint(1, len(elements))
-        return elements[pos-1]
+        elements = cls.find_elements(container, byType, byValue, relations=relations, filters=filters)
+        return elements[0]
 
     @classmethod
     def find_elements(cls, container, byType, byValue, *, relations=None, filters=None):
@@ -114,11 +106,19 @@ class SeleniumElementFinder:
                 container = container.parent
             rby = cls.__create_relative_by(sbyType, byValue, relations)
             log_debug("Selenium find_elements call made with RelativeBy: {}".format(rby.to_dict()))
-            elements = container.find_elements(rby)            
+            elements = container.find_elements(rby)         
         if len(elements) == 0:
-            raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue), message="No element found for Selenium locator")
+            raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue), message="No element found for Selenium locator")   
         if filters is not None:
             if "pos" in filters:
                 log_debug("Filtering elements with filter: {}".format(filters["pos"]))
-                return filters["pos"].filter(elements)
+                try:
+                    extracted_elements = filters["pos"].extract(elements)
+                    if type(extracted_elements) is not list:
+                        return [extracted_elements]
+                    else:
+                        return extracted_elements
+                except Exception as e:
+                    log_debug("Exception in filters processing: {}".format(e))
+                    raise GuiWidgetNotFoundError("By.{}={}".format(byType, byValue), message="No element found for Selenium locator after applying position filters.")   
         return elements

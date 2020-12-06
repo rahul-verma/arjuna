@@ -84,7 +84,7 @@ class Meta:
         GuiWidgetType.RADIO_GROUP: set(),
     }
 
-    _POS = {"first", "last", "random"}
+    _POS = {"first", "last", "random", "odd", "even"}
 
     @track("debug")
     def __init__(self, mdict=None):
@@ -176,17 +176,45 @@ class Meta:
         self.__mdict["relations"][name] = value
 
     def __format_pos(self, pos):
-        if self.__mdict["type"] in {GuiWidgetType.ELEMENT, GuiWidgetType.DROPDOWN}:
-            fpos = str(pos).lower().strip()
-            try:
-                if fpos in self._POS:
-                    return self._POS[fpos]
-                else:
-                    return int(fpos)
-            except:
-                raise Exception("Invalid value for >>pos<< filter for Gui Widget Type {}. Must be an integer or a string: first/last/random. Found: {}".format(self.__mdict["type"], pos))
+        from arjuna.tpi.helper.arjtype import pos as pos_factory
+        from arjuna.tpi.helper.arjtype import Extractor
+        if self.__mdict["type"] == GuiWidgetType.RADIO_GROUP:
+            raise Exception(">>pos<< filter is not supported for Gui Widget Type RADIO_GROUP.")
+        if type(pos) is str:
+            fpos = pos.lower().strip()
+            if fpos in self._POS:
+                return pos_factory.create_extractor(fpos)
+            else:
+                raise Exception("The only string liternals support for defining position are first/last/random")
+        elif type(pos) is list:
+            return pos_factory.at(*[int(str(i).strip()) for i in pos])
+        elif type(pos) is dict:
+            if len(pos) > 1:
+                raise Exception("Extractor specification dictionary can take only one root key. Found entry: {}".format(pos))
+            extractor_name = list(pos.keys())[0].lower().strip()
+            extractor_args = list(pos.values())[0]
+            if extractor_name == "slice":
+                extractor_args = {k: k in {"start", "stop", "step"} and int(v) or v for k,v in extractor_args.items()}
+                start = extractor_args.get("start", None)
+                stop = extractor_args.get("stop", None)
+                step = extractor_args.get("step", None)
+                return pos_factory.slice(start, stop, step)
+            elif extractor_name == "random":
+                extractor_args = {k: k in {"count"} and int(v) or v for k,v in extractor_args.items()}
+                return pos_factory.random(**extractor_args)
+            if type(extractor_args) is list:
+                return pos_factory.create_extractor(extractor_name, *extractor_args)
+            elif type(extractor_args) is dict:
+                return pos_factory.create_extractor(extractor_name, **extractor_args)
+            else:
+                return pos_factory.create_extractor(extractor_name, extractor_args)
+        elif isinstance(pos, Extractor):
+            return pos
         else:
-            return pos          
+            try:
+                return pos_factory.at(int(str(pos).lower().strip()))
+            except:
+                raise Exception("Value of pos is not of any allowed type. It can be an int, a list of ints, an extractor specification dictionary or an Extractor object.")          
 
     def __set_filter(self, name, value):
         allowed_filters = self._ALLOWED_FILTERS[self.__mdict['type']]

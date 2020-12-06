@@ -214,6 +214,107 @@ labels:
     tags: label
     below: user_label
     type: multi_element
-  
 
+  epos_1:
+    tags: input
+    pos: 2
+
+  epos_2:
+    tags: input
+    pos: first
   
+  epos_3:
+    tags: input
+    pos: last
+
+  epos_4:
+    tags: input
+    pos: random
+
+  epos_5:
+    tags: input
+    pos: odd
+
+  epos_6:
+    tags: input
+    pos: even
+
+  mepos_1:
+    tags: input
+    pos: 2
+    type: multi_element
+
+  mepos_2:
+    tags: input
+    pos: first
+    type: multi_element
+  
+  mepos_3:
+    tags: input
+    pos: last
+    type: multi_element
+
+  mepos_4:
+    tags: input
+    pos: random
+    type: multi_element
+
+  mepos_5:
+    tags: input
+    pos: odd
+    type: multi_element
+
+  mepos_6:
+    tags: input
+    pos: even
+    type: multi_element
+
+  mepos_7:
+    tags: input
+    pos: 
+      at: 
+        - 2
+        - 4
+    type: multi_element
+
+  mepos_8:
+    tags: "*"
+    pos: 
+      slice: 
+        stop: 4
+    type: multi_element
+
+  mepos_9:
+    tags: "*"
+    pos: 
+      slice: 
+        start: 2
+        stop: 4
+    type: multi_element
+
+  mepos_10:
+    tags: "*"
+    pos: 
+      slice: 
+        start: 2
+        stop: 7
+        step: 2
+    type: multi_element
+
+  mepos_11:
+    tags: "*"
+    pos: 
+      random: 
+        count: 3
+    type: multi_element
+
+  epos_nested:
+    tags: input
+    pos: 3
+
+  mepos_nested:
+    tags: input
+    pos: 
+      - 2
+      - 4
+    type: multi_element
