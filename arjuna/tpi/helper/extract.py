@@ -99,14 +99,19 @@ class pos:
             Note:
                 Following is the meaning of 1,2,3 arg signatures:
 
-                slice(stop)
-                slice(start, stop)
-                slice(start, stop, step)
+                .. code-block:: python
 
-                You can also use the keyword stype:
-                slice(stop=4)
-                slice(start=2, stop=4)
-                slice(start=2, stop=7, step=2)
+                    slice(stop)
+                    slice(start, stop)
+                    slice(start, stop, step)
+
+                You can also use the keyword arguments instead of positional arguments:
+
+                .. code-block:: python
+
+                    slice(stop=4)
+                    slice(start=2, stop=4)
+                    slice(start=2, stop=7, step=2)
 
                 You can not mix these styles of calling. Either use vargs or kwargs, else an Exception is raised.
         ''' 
