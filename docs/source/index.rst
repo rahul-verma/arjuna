@@ -353,6 +353,7 @@ Helpers
     * :py:class:`nvpairs <arjuna.tpi.helper.arjtype.nvpair>`
     * :py:class:`withx <arjuna.tpi.helper.arjtype.withx>`
     * :py:class:`attr <arjuna.tpi.helper.arjtype.attr>`
+* :py:class:`Position Based Extractors <arjuna.tpi.helper.extract.pos>`
 
 
 Logging

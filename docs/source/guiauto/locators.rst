@@ -805,24 +805,3 @@ Code usage is same as that of **node** locator. Following is a sample:
             tags: a
             text: Lost
             title: Password Lost
-
-**Alternative Locators** - Specifying Multiple Locators with **OR Relationship**
---------------------------------------------------------------------------------
-
-You can also pass multiple locators as arugment in **element** calls. 
-
-Arjuna will try all of these one by one in a dynamic wait mechanism. The total maximum wait time does not add up, it remains same as that for using a single identifier.
-
-**Coded**
-
-.. code-block:: python
-
-   wordpress.element(tags="input", classes="someclass")
-
-**GNS**
-
-.. code-block:: yaml
-
-    some_label:
-        tags: input
-        classes: someclass

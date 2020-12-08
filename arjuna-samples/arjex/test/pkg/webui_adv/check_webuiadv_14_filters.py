@@ -71,14 +71,26 @@ def check_filters_coded_gns_data_structs(request, wordpress):
     print("!!!!", inputs.source.content.root)
     elems = wordpress.multi_element(tags="input", pos={"random": {'count': "3"}})
     print("!!!!", elems.source.content.all)
+    elems = wordpress.multi_element(tags="input", pos={"random": 3})
+    print("!!!!", elems.source.content.all)
 
 @test
 def check_filters_coded_multielement_pos(request, wordpress):
     elems = wordpress.multi_element(tags="*", pos=pos.at(2,4))
     print("!!!!", elems.source.content.root)
+    elems = wordpress.multi_element(tags="*", pos=(2,4))
+    print("!!!!", elems.source.content.root)
+    elems = wordpress.multi_element(tags="*", pos=pos.slice(4))
+    print("!!!!", elems.source.content.root)
+    elems = wordpress.multi_element(tags="*", pos=pos.slice(stop=4))
+    print("!!!!", elems.source.content.root)
     elems = wordpress.multi_element(tags="*", pos=pos.slice(2,4))
     print("!!!!", elems.source.content.root)
+    elems = wordpress.multi_element(tags="*", pos=pos.slice(start=2, stop=4))
+    print("!!!!", elems.source.content.root)
     elems = wordpress.multi_element(tags="*", pos=pos.slice(2,7,2))
+    print("!!!!", elems.source.content.root)
+    elems = wordpress.multi_element(tags="*", pos=pos.slice(start=2, stop=7, step=2))
     print("!!!!", elems.source.content.root)
     elems = wordpress.multi_element(tags="*", pos=pos.odd())
     print("!!!!", elems.source.content.root)
@@ -97,6 +109,8 @@ def check_filters_coded_multielement_pos(request, wordpress):
 
     # Random with count of matches
     elems = wordpress.multi_element(tags="input", pos=pos.random(count=3))
+    print("!!!!", elems.source.content.all)
+    elems = wordpress.multi_element(tags="input", pos=pos.random(3))
     print("!!!!", elems.source.content.all)
 
 @test

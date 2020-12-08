@@ -176,38 +176,29 @@ class Meta:
         self.__mdict["relations"][name] = value
 
     def __format_pos(self, pos):
-        from arjuna.tpi.helper.arjtype import pos as pos_factory
-        from arjuna.tpi.helper.arjtype import Extractor
+        from arjuna.tpi.helper.extract import pos as pos_factory
+        from arjuna.tpi.helper.extract import Extractor
         if self.__mdict["type"] == GuiWidgetType.RADIO_GROUP:
             raise Exception(">>pos<< filter is not supported for Gui Widget Type RADIO_GROUP.")
         if type(pos) is str:
             fpos = pos.lower().strip()
             if fpos in self._POS:
-                return pos_factory.create_extractor(fpos)
+                return pos_factory._create_extractor(fpos)
             else:
                 raise Exception("The only string liternals support for defining position are first/last/random")
-        elif type(pos) is list:
+        elif type(pos) in {list, tuple}:
             return pos_factory.at(*[int(str(i).strip()) for i in pos])
         elif type(pos) is dict:
             if len(pos) > 1:
                 raise Exception("Extractor specification dictionary can take only one root key. Found entry: {}".format(pos))
             extractor_name = list(pos.keys())[0].lower().strip()
             extractor_args = list(pos.values())[0]
-            if extractor_name == "slice":
-                extractor_args = {k: k in {"start", "stop", "step"} and int(v) or v for k,v in extractor_args.items()}
-                start = extractor_args.get("start", None)
-                stop = extractor_args.get("stop", None)
-                step = extractor_args.get("step", None)
-                return pos_factory.slice(start, stop, step)
-            elif extractor_name == "random":
-                extractor_args = {k: k in {"count"} and int(v) or v for k,v in extractor_args.items()}
-                return pos_factory.random(**extractor_args)
-            if type(extractor_args) is list:
-                return pos_factory.create_extractor(extractor_name, *extractor_args)
+            if type(extractor_args) in {list, tuple}:
+                return pos_factory._create_extractor(extractor_name, *extractor_args)
             elif type(extractor_args) is dict:
-                return pos_factory.create_extractor(extractor_name, **extractor_args)
+                return pos_factory._create_extractor(extractor_name, **extractor_args)
             else:
-                return pos_factory.create_extractor(extractor_name, extractor_args)
+                return pos_factory._create_extractor(extractor_name, extractor_args)
         elif isinstance(pos, Extractor):
             return pos
         else:

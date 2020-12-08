@@ -50,7 +50,7 @@ Future Themes (In-Progress or Planned):
 1.1.30
 ------
     - Support for OR relationship among different values of same locator type - coded as well as GNS.
-    - Support for Relative Locators
+    - Support for Visual Relationships
         - Coded - Added at App/Page level.
         - GNS Support added - Can provide label from same GNS file.
         - Coded - widget call can be used to provide as relationship rather than existing element.
@@ -60,10 +60,11 @@ Future Themes (In-Progress or Planned):
         - Nested element finding falls back to direct finding with WebDriver as JS execution support exists only at driver level in Selenium.
     - with.JS and With.Point is supported at element level, however it does not do nested element finding, rather uses driver itself.
     - The fallback mechanism for JS, Point and Relative locators has been added so that such locators can be defined without issues in GNS files or coded GuiSections which have root element set for them.
-    - 'pos' meta key
+    - 'pos' meta key in widget meta data:
         - Supported in coded as well GNS format.
         - Supported in nested element finding.
         - Value can be an int, a list, an extractor string literal, an extractor specification dict or an extractor object.
+    - Docs added for additional OR support, Visual Relationships and position filters
 
 1.1.29
 ------
