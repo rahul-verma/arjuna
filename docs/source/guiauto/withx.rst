@@ -227,7 +227,7 @@ Following code uses the **nav_link** locator extension defined in previous secti
 
 .. code-block:: python
 
-    wordpress.element(nav_link=withx(lname="Posts"))
+    app.element(nav_link=withx(lname="Posts"))
 
 Note how the placeholder name is used as a keyword argument to pass the value.
 
@@ -250,7 +250,7 @@ Now you can use the **posts** label as usual in code:
 
 .. code-block:: python
 
-    wordpress.gns.posts
+    app.gns.posts
 
 **Multiple Placeholders**
 ^^^^^^^^^^^^^^^^^^^^^^^^^

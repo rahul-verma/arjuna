@@ -49,7 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.31
 ------
-
+    - Minor doc edits for name of app in GuiAuto chapter.
 
 
 1.1.30

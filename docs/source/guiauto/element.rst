@@ -31,7 +31,7 @@ For example, following code locates a GuiElement by its **id** attribute:
 
 .. code-block:: python
 
-   wordpress.element(id="user_login")
+   app.element(id="user_login")
 
 **Interaction with GuiElement**
 -------------------------------

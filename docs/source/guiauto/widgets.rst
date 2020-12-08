@@ -41,7 +41,7 @@ In your code, you can create an element of this as usual, however this time you'
 
 .. code-block:: python
 
-   check_boxes = wordpress.gns.cat_checkboxes
+   check_boxes = app.gns.cat_checkboxes
 
 Interacting with GuiMultiElement
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

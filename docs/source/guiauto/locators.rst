@@ -21,7 +21,7 @@ Locates a GuiWidget by the content of its **id** attribute.
 
 .. code-block:: python
 
-   wordpress.element(id="user_login")
+   app.element(id="user_login")
 
 **GNS**
 
@@ -39,7 +39,7 @@ Locates a GuiWidget by the content of its **name** attribute.
 
 .. code-block:: python
 
-   wordpress.element(name="log")
+   app.element(name="log")
 
 **GNS**
 
@@ -58,7 +58,7 @@ Locates a GuiWidget by the content of its tag name. For more advanced usage, see
 
 .. code-block:: python
 
-   wordpress.element(tags="input")
+   app.element(tags="input")
 
 **GNS**
 
@@ -78,7 +78,7 @@ Locates a GuiWidget by a class name contained in its class attribute. For more a
 
 .. code-block:: python
 
-   wordpress.element(classes="cls")
+   app.element(classes="cls")
 
 **GNS**
 
@@ -94,7 +94,7 @@ Locates a GuiWidget by its PARTIAL link text.
 
 .. code-block:: python
 
-   wordpress.element(link="password")
+   app.element(link="password")
 
 **GNS**
 
@@ -112,7 +112,7 @@ Locates a GuiWidget by its FULL link text.
 
 .. code-block:: python
 
-   wordpress.element(flink="Lost your password?")
+   app.element(flink="Lost your password?")
 
 **GNS**
 
@@ -131,7 +131,7 @@ Locates a GuiWidget by the specifield XML Path (xpath).
 
 .. code-block:: python
 
-   wordpress.element(xpath="//*[contains(text(), 'Lost')]")
+   app.element(xpath="//*[contains(text(), 'Lost')]")
 
 **GNS**
 
@@ -150,7 +150,7 @@ Locates a GuiWidget by the specifield CSS Selector.
 
 .. code-block:: python
 
-   wordpress.element(selector=".button.button-large")
+   app.element(selector=".button.button-large")
    
 **GNS**
 
@@ -179,7 +179,7 @@ It is used to locate a GuiWidget based on content of its **title** attribute.
 .. code-block:: python
 
     # Using title locator. Full content of title attribute should be specified.   
-    wordpress.element(title="Password Lost and Found")
+    app.element(title="Password Lost and Found")
 
 **GNS**
 
@@ -199,7 +199,7 @@ It is used to locate a GuiWidget based on content of its **value** attribute.
 .. code-block:: python
 
     # Using value locator. Full content of value attribute should be specified.      
-    wordpress.element(value="Log In")
+    app.element(value="Log In")
 
 **GNS**
 
@@ -221,10 +221,10 @@ This is used to locate a GuiWidget based on a sequence of tags representing a se
 .. code-block:: python
 
     # Value can be a string containing space separated tags.
-    wordpress.element(tags="html body form")
+    app.element(tags="html body form")
 
     # Value can also be supplied as a list/tuple of tags.
-    wordpress.element(tags=("html", "body", "form"))
+    app.element(tags=("html", "body", "form"))
 
 **GNS**
 
@@ -277,10 +277,10 @@ Order of provided classes does not matter.
 .. code-block:: python
 
     # Value can be a string containing space separated CSS classes.
-    wordpress.element(classes="button button-large")
+    app.element(classes="button button-large")
 
     # Value can also be supplied as a list/tuple of CSS classes.
-    wordpress.element(classes=("button", "button-large"))
+    app.element(classes=("button", "button-large"))
 
 **GNS**
 
@@ -313,7 +313,7 @@ This is used to run a JavaScript to find the GuiWidget under an XY coordinate.
 .. code-block:: python
 
     # Using point locator. Value should be a Point object with x and y coordinates specified.
-    wordpress.element(point=Point(1043, 458))
+    app.element(point=Point(1043, 458))
 
 **GNS**
 
@@ -339,7 +339,7 @@ This is used to run the provided JavaScript and returns GuiWidget representing t
 .. code-block:: python
 
     # Using js locator. Value should be a string containing the JavaScript.
-    wordpress.element(js="return document.getElementById('wp-submit')")
+    app.element(js="return document.getElementById('wp-submit')")
 
 **GNS**
 
@@ -368,7 +368,7 @@ It is used to locate a GuiWidget based on its PARTIAL text.
 
 .. code-block:: python
 
-    wordpress.element(text="your")
+    app.element(text="your")
 
 **GNS**
 
@@ -387,7 +387,7 @@ It is used to locate a GuiWidget based on its FULL text.
 .. code-block:: python
 
     # Using ftext locator. Full text is to be specified.
-    wordpress.element(ftext="Lost your password?")
+    app.element(ftext="Lost your password?")
 
 **GNS**
 
@@ -405,7 +405,7 @@ It is used to locate a GuiWidget based on partial text match at BEGINNING of tex
 .. code-block:: python
 
     # Using ftext locator. Full text is to be specified.
-    wordpress.element(btext="Lost")
+    app.element(btext="Lost")
 
 **GNS**
 
@@ -438,10 +438,10 @@ It is used to locate a GuiWidget based on PARTIAL content of a specific attribut
 .. code-block:: python
 
     # Here the size attribute is 230
-    wordpress.element(attr=attr(size=3))
+    app.element(attr=attr(size=3))
 
     # Here the 'for' attribute contains the value 'user_login'. Partial content can be passed.
-    wordpress.element(attr=attr(__for='er_l'))
+    app.element(attr=attr(__for='er_l'))
 
 **GNS**
 
@@ -468,10 +468,10 @@ It is used to locate a GuiWidget based on FULL content of a specific attribute.
 .. code-block:: python
 
     # Here the size attribute is 230
-    wordpress.element(fattr=attr(size=230))
+    app.element(fattr=attr(size=230))
 
     # Here the 'for' attribute contains the value 'user_login'. Full content should be passed.
-    wordpress.element(fattr=attr(__for="user_login"))
+    app.element(fattr=attr(__for="user_login"))
 
 **GNS**
 
@@ -497,10 +497,10 @@ It is used to locate a GuiWidget based on partial content at BEGINNING of a spec
 .. code-block:: python
 
     # Here the size attribute is 230
-    wordpress.element(battr=attr(size=2))
+    app.element(battr=attr(size=2))
 
     # Here the 'for' attribute contains the value 'user_login'.
-    wordpress.element(battr=attr(__for="user_"))
+    app.element(battr=attr(__for="user_"))
 
 **GNS**
 
@@ -525,10 +525,10 @@ It is used to locate a GuiWidget based on partial content at END of a specific a
 .. code-block:: python
 
     # Here the size attribute is 230
-    wordpress.element(eattr=attr(size=0))
+    app.element(eattr=attr(size=0))
 
     # Here the 'for' attribute contains the value 'user_login'.
-    wordpress.element(eattr=attr(__for="user_"))
+    app.element(eattr=attr(__for="user_"))
 
 **GNS**
 
@@ -570,15 +570,15 @@ Matches attributes and text partially. Tags and Classes are expected to be provi
 .. code-block:: python
 
     # Here a HTML element with tag input is targeted which has id=user_login and size=20. Partial content can be passed.
-    wordpress.element(node=node(tags="input", id="_login", size=20))
+    app.element(node=node(tags="input", id="_login", size=20))
 
     # Sometimes names of attributes conflict with Python keywords. 
     # In such a case attribute name can be preceded with '__' (two underscores.)
-    wordpress.element(node=node(__for="_login", tags="label", size=20))
+    app.element(node=node(__for="_login", tags="label", size=20))
 
     # You can also pass a dictionary of attributes
-    wordpress.element(node=node(tags="label", size=20, attrs={'for': '_login'}))
-    wordpress.element(node=node(tags="label", size=20, attrs={'__for': '_login'}))
+    app.element(node=node(tags="label", size=20, attrs={'for': '_login'}))
+    app.element(node=node(tags="label", size=20, attrs={'__for': '_login'}))
 
 .. note::
 
@@ -607,7 +607,7 @@ You can specify the partial text of a node using the **text** key:
 .. code-block:: python
 
     # You can also use partial text content for matching
-    wordpress.element(node=node(tags="a", text="your password", title="Found"))
+    app.element(node=node(tags="a", text="your password", title="Found"))
 
 
 **GNS**
@@ -629,15 +629,15 @@ Sometimes the HTML/DOM structure contains elements within the text node and henc
 .. code-block:: python
 
     # Using node with star_text
-    wordpress.element(node=node(star_text="Me"))
+    app.element(node=node(star_text="Me"))
 
-    wordpress.element(node=node(attrs={'*text' : "Me"}))
+    app.element(node=node(attrs={'*text' : "Me"}))
 
     # Using node with dot_text
-    e = wordpress.element(node=node(tags="form", dot_text="Me"))
+    e = app.element(node=node(tags="form", dot_text="Me"))
     print(e.source.content.root)
 
-    e = wordpress.element(node=node(tags="form", attrs={'.text' : "Me"}))
+    e = app.element(node=node(tags="form", attrs={'.text' : "Me"}))
     print(e.source.content.root)
 
 **GNS**
@@ -677,10 +677,10 @@ You can specify multiple tags as well as classes. The behavior is just like thei
 .. code-block::
 
     # As space separated strings
-    wordpress.element(node=node(tags="html body", classes="locale-en-us wp-core-ui")))
+    app.element(node=node(tags="html body", classes="locale-en-us wp-core-ui")))
 
     # As tuples. Can also use lists.
-    wordpress.element(node=node(tags=("html", "body"), classes=("locale-en-us", "wp-core-ui"))))
+    app.element(node=node(tags=("html", "body"), classes=("locale-en-us", "wp-core-ui"))))
 
 **GNS**
 
@@ -714,7 +714,7 @@ For example, consider the following situation in Coded and GNS format:
 
 .. code-block:: python
 
-    wordpress.element(node=node(tags="html *", classes=("locale-en-us", "wp-core-ui")))
+    app.element(node=node(tags="html *", classes=("locale-en-us", "wp-core-ui")))
 
 **GNS**
 
@@ -739,7 +739,7 @@ To enforce XPath generation instead of a CSS Selector, you can pass **use_xpath*
 
 .. code-block:: python
 
-    wordpress.element(node=node(use_xpath=True, tags="html *", classes=("locale-en-us", "wp-core-ui")))
+    app.element(node=node(use_xpath=True, tags="html *", classes=("locale-en-us", "wp-core-ui")))
 
 **GNS**
 
@@ -770,7 +770,7 @@ Code usage is same as that of **node** locator. Following is a sample:
 
 .. code-block:: python
 
-    wordpress.element(fnode=node(tags="a", text="Lost your password?", title="Password Lost and Found"))
+    app.element(fnode=node(tags="a", text="Lost your password?", title="Password Lost and Found"))
 
 **GNS**
 
@@ -794,7 +794,7 @@ Code usage is same as that of **node** locator. Following is a sample:
 .. code-block:: python
 
     # You can also partial text content at beginning for matching
-    wordpress.element(bnode=node(tags="a", text="Lost", title="Password Lost"))
+    app.element(bnode=node(tags="a", text="Lost", title="Password Lost"))
 
 **GNS**
 

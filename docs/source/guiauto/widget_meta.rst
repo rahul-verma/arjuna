@@ -73,7 +73,7 @@ Following is an example of locating a submit button to the right of remember me 
 .. code-block:: python
 
     # right_of with GuiElement as its value
-    app.element(classes="button", right_of=wordpress.element(id="rememberme"))
+    app.element(classes="button", right_of=app.element(id="rememberme"))
 
     # right_of with widget (GuiWidgetDefinition) as its value
     app.element(classes="button", right_of=widget(id="rememberme"))
@@ -112,9 +112,9 @@ Following coded and GNS examples locate Publish date link which is in Date Colum
 
 .. code-block:: python
 
-    test1 = wordpress.element(link="Test1")
-    date_col = wordpress.element(id="date")
-    test1_date = wordpress.element(classes="column-date", right_of=test1, below=date_col)
+    test1 = app.element(link="Test1")
+    date_col = app.element(id="date")
+    test1_date = app.element(classes="column-date", right_of=test1, below=date_col)
 
 **GNS**
 """""""

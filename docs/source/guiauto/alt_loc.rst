@@ -15,7 +15,7 @@ Coded
 
 .. code-block:: python
 
-   wordpress.element(tags="input", classes="someclass")
+   app.element(tags="input", classes="someclass")
 
 **GNS**
 ^^^^^^^
