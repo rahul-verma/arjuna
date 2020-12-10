@@ -18,7 +18,7 @@
 from arjuna.tpi.helper.arjtype import Dictable
 from arjuna.tpi.tracker import track
 
-@track("debug")
+@track("trace")
 class GuiWidgetDefinition(Dictable):
     '''
         Representation of indentifiers, format arguments, widget configuration and named arguments for a GuiWidget.

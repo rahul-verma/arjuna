@@ -29,6 +29,7 @@ from typing import Callable
 from enum import Enum, auto
 
 from arjuna.tpi.tracker import track
+from arjuna.tpi.constant import DomDirection, DomNodeType
 
 class _ArDict(metaclass=abc.ABCMeta):
 
@@ -368,15 +369,18 @@ class withx(nvpairs):
     '''
     pass
 
-
 @track("trace")
-class node(nvpairs):
+class Node(nvpairs):
 
-    def __init__(self, **nvpairs):
+    def __init__(self, *, type, **nvpairs):
         '''
             Represents a Node in HTML/XML/DOM described by name-value pairs.
 
             Keyword Arguments:
+                type: (Mandatory) DomNodeType - NODE/FNODE/BNODE determines how attribute content is matched:
+                    * NODE: Partial Content
+                    * FNODE: Full Content
+                    * BNODE: Partial Content at Beginning
                 **nvpairs: Special and Arbitrary name-value pairs passed as keyword arguments.
 
             Note:
@@ -397,6 +401,11 @@ class node(nvpairs):
                 If any keyword is preceded with '__' (double underscores), the underscores are removed at the time of definition generation. This can be used to avoid conflict of attribute names with Python keywords.
         '''
         super().__init__(**nvpairs)
+        self.__type = type
+    
+    @property
+    def ntype(self):
+        return self.__type
 
     def _as_dict(self):
         out_dict = dict()
@@ -412,5 +421,124 @@ class node(nvpairs):
                 k = k[2:]
             out_dict[k] = v
         return out_dict
+
+@track("trace")
+class node(Node):
+
+    def __init__(self, **nvpairs):
+        super().__init__(type=DomNodeType.NODE, **nvpairs)
+
+@track("trace")
+class fnode(Node):
+
+    def __init__(self, **nvpairs):
+        super().__init__(type=DomNodeType.FNODE, **nvpairs)
+
+@track("trace")
+class bnode(Node):
+
+    def __init__(self, **nvpairs):
+        super().__init__(type=DomNodeType.BNODE, **nvpairs)
+
+@track("trace")
+class _Axis:
+
+    def __init__(self, direction, node):
+        self.__direction = direction
+        self.__node = node
+
+    @property
+    def direction(self):
+        return self.__direction
+
+    @property
+    def node(self):
+        return self.__node
+
+
+@track("trace")
+class axes:
+    '''
+        Represents a DOM axes with a starting node and then as per axis objects sequence.
+
+        Arguments:
+            start: Starting point as a node object
+    '''
+
+    def __init__(self, start):
+        self.__start = start
+        self.__axes = list()
+
+    @property
+    def _start(self):
+        return self.__start
+
+    @property
+    def _axes(self):
+        return self.__axes
+
+    @classmethod
+    def _from_dict(cls, axes_dict):
+        print(axes_dict)
+        axes_dict = {k.lower():v for k,v in axes_dict.items()}
+        axes_obj = axes(node(**axes_dict['start']))
+        del axes_dict['start']
+        for k,v in axes_dict.items():
+            getattr(axes_obj, k)(node(**v))
+        return axes_obj
+
+    @classmethod
+    def _from_list(cls, axes_list):
+        start = None
+        axes_entries = []
+
+        for entry in axes_list:
+            if len(entry) > 1:
+                raise Exception("If axes specification is of list type, each list item must be a single key value pair. Wrong axes definition found: {}".format(axes_list))
+            name = list(entry.keys())[0].lower()
+            value = list(entry.values())[0]
+            if name == "start":
+                if start is None:
+                    start = node(**value)
+                else:
+                    raise Exception("Duplicate definition of start key found in axes def: {}".format(axes_list))
+            else:
+                axes_entries.append((name, node(**value)))
+        
+        if start is None:
+            raise Exception("axes definition must have start key. Wrong axes def: {}".format(axes_list))
+
+        axes_obj = axes(start)
+        for direction, n in axes_entries:
+            getattr(axes_obj, direction)(n)
+        return axes_obj
+
+    def up(self, node):
+        '''
+        Move towards node definition in the direction of Ancestors.
+        '''
+        self.__axes.append(_Axis(DomDirection.UP, node))
+        return self
+
+    def down(self, node):
+        '''
+        Move towards node definition in the direction of Descendants.
+        '''
+        self.__axes.append(_Axis(DomDirection.DOWN, node))
+        return self
+
+    def left(self, node):
+        '''
+        Move towards node definition in the direction of Previous Siblings.
+        '''
+        self.__axes.append(_Axis(DomDirection.LEFT, node))
+        return self
+
+    def right(self, node):
+        '''
+        Move towards node definition in the direction of Forward Siblings.
+        '''
+        self.__axes.append(_Axis(DomDirection.RIGHT, node))
+        return self
 
 NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response sub_network_packets")

@@ -18,7 +18,7 @@
 from arjuna.tpi.guiauto.meta.locator import GuiWidgetDefinition
 from arjuna.tpi.tracker import track
 
-@track("debug")
+@track("trace")
 class GNSLabelFormatter:
     '''
         Formattter for the GuiWidgetDefinition associated with a GNS Label.
@@ -62,7 +62,7 @@ class GNSLabelFormatter:
                 log_debug("Replaced label {} with corresponding GuiElement in relations dict.".format(k, frwmd))
         return self.__gns._locate_with_wmd(fmt_wmd)
 
-@track("debug")
+@track("trace")
 class GuiWidgetDefinitionFormatter:
     '''
         Formattter for a GuiWidgetDefinition created by GuiWidget factory methods.

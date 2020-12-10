@@ -302,6 +302,23 @@ class BrowserName(Enum):
     CHROME = auto()
     FIREFOX = auto()
 
+class DomDirection(Enum):
+    '''
+    Directions in DOM movement.
+    '''
+    UP = auto()
+    DOWN = auto()
+    LEFT = auto()
+    RIGHT = auto()
+
+class DomNodeType(Enum):
+    '''
+    Directions in DOM movement.
+    '''
+    NODE = auto()
+    BNODE = auto()
+    FNODE = auto()
+
 import locale
 import re
 __locales = [i.upper() for i in locale.locale_alias.keys() if re.match('^[\w_]+$', i)]

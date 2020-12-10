@@ -22,6 +22,7 @@ class WithType(Enum):
     NODE = auto()
     BNODE = auto()
     FNODE = auto()
+    AXES = auto()
     ATTR_WORD = auto()
     VALUE = auto()
     POINT = auto()
@@ -65,6 +66,7 @@ class GenericLocateWith(Enum):
     NODE = auto()
     FNODE = auto()
     BNODE = auto()
+    AXES = auto()
     IMAGE_SRC = auto()
     IMAGE = auto()
 

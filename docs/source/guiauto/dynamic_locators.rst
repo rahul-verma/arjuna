@@ -39,13 +39,13 @@ In the following examples, the values are automatically formatted for dyanmic lo
 .. code-block:: python
 
     # From Reference Configuration
-    wordpress.element(link="$C.link.name$")
+    app.element(link="$C.link.name$")
 
     # From Data Reference
-    wordpress.element(link="$R.links.test1.navlink$")
+    app.element(link="$R.links.test1.navlink$")
 
     # From Localizer
-    wordpress.element(link="$L.links.posting$")
+    app.element(link="$L.links.posting$")
 
 **GNS**
 ^^^^^^^
@@ -75,7 +75,7 @@ Rather than using the **element** method of a **Gui**, you use **formatter** cal
 
 .. code-block:: python
 
-    wordpress.formatter(text="Media").element(link="$text$")
+    app.formatter(text="Media").element(link="$text$")
 
 In the above example, **$text$** placeholder is defined for the **link** locator.
 
@@ -85,14 +85,14 @@ The above call is equivalent to the following non-dynamic locator call:
 
 .. code-block:: python
 
-    wordpress.element(link="Media")
+    app.element(link="Media")
 
 Following is some more involved examples of the power of dyanmic identifiers:
 
 .. code-block:: python
     
-    wordpress.formatter(tg="input", idx="er_l", sz=20).element(node=node(tags="$tg$", id="$idx$", size="$sz$"))
-    wordpress.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(attrs={'tags':"$tg$", '$attr1$': "$idx$", '$attr2$': "$sz$"}))
+    app.formatter(tg="input", idx="er_l", sz=20).element(node=node(tags="$tg$", id="$idx$", size="$sz$"))
+    app.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).element(node=node(attrs={'tags':"$tg$", '$attr1$': "$idx$", '$attr2$': "$sz$"}))
 
 **GNS**
 ^^^^^^^
@@ -116,8 +116,8 @@ Using **formatter** you pass one or more keyword arguments to format the locator
 
 .. code-block:: python
 
-    wordpress.gns.formatter(text="Media").nav_link1
-    wordpress.gns.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).password
+    app.gns.formatter(text="Media").nav_link1
+    app.gns.formatter(tg="input", attr1='id', idx="er_l", attr2='size', sz=20).password
 
 .. note::
 

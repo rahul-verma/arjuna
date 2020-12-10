@@ -118,6 +118,33 @@ labels:
   elem_js:
     js: "return document.getElementById('wp-submit')"
 
-  
+  axes1:
+    axes:
+      start:
+        id: user_login
+      
+      up:
+        tags: label
 
+  axes_dir_repeat:
+    axes:
+      - start:
+          tags: html
+      
+      - down:
+          classes: button
 
+      - up:
+          tags: form
+
+      - down:
+          tags: p
+
+      - right:
+          tags: p
+
+      - left:
+          tags: p
+
+      - down:
+          tags: input

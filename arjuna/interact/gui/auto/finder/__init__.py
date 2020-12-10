@@ -21,7 +21,7 @@ from arjuna.core.error import *
 from arjuna.tpi.tracker import track
 from arjuna.tpi.guiauto.meta.locator import GuiWidgetDefinition
 
-@track("debug")
+@track("trace")
 class GuiEmdFinder:
 
     def __init__(self, gui):
@@ -31,7 +31,7 @@ class GuiEmdFinder:
     def __getattr__(self, name):
         return partial(getattr(self.__automator, name.lower()), self.__gui)
 
-@track("debug")
+@track("trace")
 class GuiFinder:
 
     def __init__(self, gui):
@@ -80,6 +80,7 @@ class GuiFinder:
     def __getattr__(self, name):
         return self.__locate_interim(name)
 
+@track("trace")
 class GuiElementEmdFinder:
 
     def __init__(self, gui_element):
@@ -97,6 +98,7 @@ class GuiElementEmdFinder:
         self.__gui_element._load_multielement(m_guielement)
         return m_guielement
 
+@track("trace")
 class GuiElementFinder:
 
     def __init__(self, gui_element):

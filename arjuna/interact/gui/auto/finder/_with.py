@@ -200,6 +200,10 @@ class With(metaclass=_WithXMetaClass):
         return With(WithType.BNODE, map)
 
     @classmethod
+    def axes(cls, map):
+        return With(WithType.AXES, map)
+
+    @classmethod
     def value(cls, value):
         return With(WithType.VALUE, value)
 

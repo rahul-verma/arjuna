@@ -160,7 +160,7 @@ class pos:
         ''' 
         return _EvenPositionsExtractor(strict=strict)
 
-@track("debug")
+@track("trace")
 class Extractor(metaclass=abc.ABCMeta):
     '''
         Abstract class for extractors. Given an object, a concrete implementation extracts objects from the given object.

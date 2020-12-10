@@ -19,7 +19,7 @@ from arjuna import *
 
 
 @test
-def check_arjuna_exts_coded(request, wordpress):
+def check_arjuna_exts_coded_basic(request, wordpress):
 
     # Based on partial text
     wordpress.element(text="your") 
@@ -36,6 +36,9 @@ def check_arjuna_exts_coded(request, wordpress):
     # Based on Value
     wordpress.element(value="Log In")
 
+@test
+def check_arjuna_exts_coded_attr(request, wordpress):
+
     # Based on partial match of content of an attribute
     wordpress.element(attr=attr(id="er_l"))
     wordpress.element(attr=attr(__for="er_l"))
@@ -49,21 +52,34 @@ def check_arjuna_exts_coded(request, wordpress):
     # Based on full match of an attribute
     wordpress.element(eattr=attr(__for="_login"))
 
+@test
+def check_arjuna_exts_coded_tags(request, wordpress):
+
     # Based on descendent tags
     wordpress.element(tags="html body form")
     wordpress.element(tags=("html", "body", "form"))
     wordpress.element(tags=("html", "body", "input"))
 
+@test
+def check_arjuna_exts_coded_classes(request, wordpress):
+
     # Based on compound classes
     wordpress.element(classes="button button-large")
     wordpress.element(classes=("button", "button-large"))
 
+@test
+def check_arjuna_exts_coded_point(request, wordpress):
+
     # Based on Point (location in terms of X,Y co-ordinates)
     wordpress.element(point=Point(1043, 458))
 
+@test
+def check_arjuna_exts_coded_js(request, wordpress):
     # With Javascript
     wordpress.element(js="return document.getElementById('wp-submit')")
 
+@test
+def check_arjuna_exts_coded_node(request, wordpress):
     # With.NODE
     # Based on node (partial matches of attrs and tag)
     e = wordpress.element(node=node(id="er_l"))
@@ -199,4 +215,28 @@ def check_arjuna_exts_coded(request, wordpress):
     print(e.source.content.root)
 
     e = wordpress.element(node=node(tags="html *", classes=("locale-en-us", "wp-core-ui"), attrs={'.text' : "Me"}))
+    print(e.source.content.root)
+
+@test
+def check_arjuna_exts_coded_axes(request, wordpress):
+    e = wordpress.element(axes=axes(fnode(id="user_login")).up(node(tags="label")))
+    print(e.source.content.root)
+
+    e = wordpress.element(axes=axes(node(id="er_log")).up(node(tags="label")))
+    print(e.source.content.root)
+
+    e = wordpress.element(axes=axes(bnode(id="user_l")).up(node(tags="label")))
+    print(e.source.content.root)
+
+    e = wordpress.element(axes=axes(node(id="er_l")).up(fnode(name="loginform")))
+    print(e.source.content.root)
+
+    e = wordpress.element(axes=axes(node(id="user_l")).up(node(name="infor")))
+    print(e.source.content.root)
+
+    e = wordpress.element(axes=axes(node(id="user_l")).up(bnode(name="loginf")))
+    print(e.source.content.root)
+
+    # All of them together
+    e = wordpress.element(axes=axes(node(tags="html")).down(node(classes="button")).up(node(tags="form")).down(node(tags="p")).right(node(tags="p")).left(node(tags="p")).down(node(tags="input")))
     print(e.source.content.root)

@@ -26,7 +26,7 @@ from .translator import LocatorTranslator
 from arjuna.core.utils.repr_utils import repr_dict
 from arjuna.tpi.tracker import track
 
-@track("debug")
+@track("trace")
 class GuiWidgetMetaData:
 
     def __init__(self, locators, meta=None, process=True):

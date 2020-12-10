@@ -69,7 +69,7 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
     except Exception as e:
         import traceback
         log_call("{}:: Exception: {}. Trace: {}".format(qualname, e, traceback.format_exc()))
-        raise
+        raise Exception("{}:: Exception: {}".format(qualname, e)) from e
     else:
         if prop:
             msg_1 = prop_dict_msg[prop_type][0]

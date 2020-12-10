@@ -80,3 +80,13 @@ def check_arjuna_exts_gns(request, wordpress):
     element = wordpress.gns.user_fnode_multi_xpath_true
     element = wordpress.gns.body_node_1
     element = wordpress.gns.body_node_2
+
+
+@test
+def check_arjuna_exts_gns_axes(request, wordpress):
+    e = wordpress.gns.axes1
+    print(e.source.content.root)
+
+    # All of them together
+    e = wordpress.gns.axes_dir_repeat
+    print(e.source.content.root)

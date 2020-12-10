@@ -86,7 +86,7 @@ class Meta:
 
     _POS = {"first", "last", "random", "odd", "even"}
 
-    @track("debug")
+    @track("trace")
     def __init__(self, mdict=None):
         from arjuna import log_debug
         temp_dict = not mdict and CIStringDict() or CIStringDict(mdict)
@@ -160,7 +160,7 @@ class Meta:
     def has(self, name):
         return name.lower() in self.__mdict
 
-    @track("debug")
+    @track("trace")
     def __getattr__(self, name):
         return self[name]
 

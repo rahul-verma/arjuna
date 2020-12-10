@@ -424,13 +424,6 @@ In GNS, **pos.random** can be represented using a string literal or the count ca
         pos:
             random: 3
 
-    multi_elem1:
-        type: multi_element
-        tags: input
-        pos:
-            random:
-                count: 3
-
 **slice** Extractor
 ^^^^^^^^^^^^^^^^^^^
 
