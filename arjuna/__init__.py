@@ -55,6 +55,22 @@ class _ArjunFacade:
     def __init__(self):
         self.__version = pkg_resources.require("arjuna")[0].version
 
+    def load(self, raw_args):
+        from arjuna.tpi.parser.text import _TextResource
+        from arjuna.interface.cli import ArjunaCLI
+        reader = _TextResource("header.txt")
+        print(reader.read().format(version=self.__version))
+        reader.close()
+
+        print("Parsing CLI Options...")
+        cli = ArjunaCLI(raw_args)
+        # Initialize the Arjuna Core as per CLI options
+        print("Intializing Arjuna...")
+        cli.init()
+
+        print("Loading Arjuna core to allow third party test engine to take over test execution...")
+        cli.load()
+
     def launch(self, raw_args):
         from arjuna.tpi.parser.text import _TextResource
         from arjuna.interface.cli import ArjunaCLI

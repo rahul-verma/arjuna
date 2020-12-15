@@ -211,7 +211,7 @@ class __RunCommand(Command):
         self._set_parser(parser)
         self.enumerate_only = False
 
-    def execute(self, arg_dict):
+    def load(self, arg_dict):
         for parent in self.parents:
             parent.process(arg_dict)
 
@@ -236,6 +236,9 @@ class __RunCommand(Command):
 
         py_3rdparty_dir = Arjuna.get_config().value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR)
         sys.path.append(py_3rdparty_dir)
+
+    def execute(self, arg_dict):
+        pass
 
     def pop_command_args(self, arg_dict):
         pass

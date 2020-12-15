@@ -24,3 +24,8 @@ class CommandEnum(Enum):
     RUN_STAGE = auto()
     RUN_GROUP = auto()
     RUN_SELECTED = auto()
+
+class TargetEnum(Enum):
+    PROJECT = auto()
+    GROUP = auto()
+    SELECTED = auto()

@@ -19,7 +19,7 @@ import os
 import sys
 import time
 
-def main(*args):
+def main(*args, ext_engine=False):
     print("Executing Arjuna command line with args: {}".format(args))
     try:
         import signal
@@ -30,7 +30,11 @@ def main(*args):
         signal.signal(signal.SIGINT, signal_handler)
         from arjuna import _ArjunFacade
         facade = _ArjunFacade()
-        facade.launch(args and args or sys.argv)
+        # For external test engine, Arjuna is loaded but it does not itself execute tests.
+        if ext_engine:
+            facade.load(args and args or sys.argv)
+        else:
+            facade.launch(args and args or sys.argv)
     except Exception as e:
         # The following sleep is to accommodate a common IDE issue of
         # interspersing main exception with console output.

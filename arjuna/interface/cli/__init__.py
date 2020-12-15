@@ -27,7 +27,7 @@ from arjuna.core.constant import *
 from arjuna.tpi.parser.text import _TextResource
 from arjuna.core.types import constants
 from arjuna.core.adv.py import *
-from arjuna.interface.enums import CommandEnum
+from arjuna.interface.enums import CommandEnum, TargetEnum
 
 from .parser import *
 from .command import *
@@ -111,3 +111,38 @@ class ArjunaCLI:
         # Delegation using Arjuna's Enum based switch-case equivalent
         switch = EnumSwitch(execute_cases, (self.arg_dict,))
         switch(command_enum)
+
+    def load(self):
+        command = self.arg_dict['command']
+        del self.arg_dict['command']
+
+        if not command:
+            command = "run-project"
+
+        # Delegation dictionary for primary command description
+        desc_cases = {
+            # CommandEnum.LAUNCH_SETU: "Launching Setu",
+            CommandEnum.CREATE_PROJECT: "Creating new project",
+            CommandEnum.RUN_PROJECT: "Loading Project",
+            CommandEnum.RUN_GROUP: "Loading group",
+            CommandEnum.RUN_SELECTED: "Loading selected tests"
+        }
+
+        # Hyphens in commands are replaced with underscores for enum conversion
+        # So, create-project is internally referred as CREATE_PROJECT
+        command_enum = CommandEnum[command.upper().replace("-", "_")]
+
+        print(desc_cases[command_enum] + "...")
+
+        # Delegation dictionary for primary command choices
+        # Respective command object's 'execute' method is the handler.
+        execute_cases = {
+            CommandEnum.RUN_PROJECT: (self.run_project.load, ),
+            CommandEnum.RUN_GROUP: (self.run_group.load, ),
+            CommandEnum.RUN_SELECTED: (self.run_selected.load, )
+        }
+
+        # Delegation using Arjuna's Enum based switch-case equivalent
+        switch = EnumSwitch(execute_cases, (self.arg_dict,))
+        switch(command_enum)
+

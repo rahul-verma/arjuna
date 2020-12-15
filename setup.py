@@ -81,6 +81,7 @@ setup(
         "haralyzer==1.8.0", 
         "mysql-connector-python==8.0.21"
     ],
+    entry_points={"pytest11": ["arjuna = arjuna.engine.pytestplug"]},
     keywords = "arjuna selenium testing automation page-object data-driven",
     license = "Apache License, Version 2.0",
     classifiers=[

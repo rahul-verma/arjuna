@@ -132,7 +132,6 @@ class TestGroup:
                 selector.include(rule)
             for rule in rules['er']:
                 selector.exclude(rule)
-            
 
         Arjuna.register_test_selector_for_group(selector)
 
