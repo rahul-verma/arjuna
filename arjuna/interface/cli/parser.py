@@ -61,7 +61,7 @@ class RunParser(Parser):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
         self.parser.add_argument("-r", "--run-id", dest="run.id", metavar="run_id", type=partial(lname_check, "Run ID"), help = 'Alnum 3-30 length. Only lower case letters.', default="mrun")
-        self.parser.add_argument('-o', '--output-format', dest="report.formats", type=report_format, action="append", choices=[i for i in ReportFormat.__members__], help='Output/Report format. Can pass any number of these switches.') # choices=['XML', 'HTML'], 
+        self.parser.add_argument('-o', '--report-format', dest="report.formats", type=report_format, action="append", choices=[i for i in ReportFormat.__members__], help='Output/Report format. Can pass any number of these switches.') # choices=['XML', 'HTML'], 
         self.parser.add_argument('-l', '--link-project', dest="linked_projects", action="append", help='Linked Arjuna Test Project.')
         self.parser.add_argument('--update', dest="static.rid", action='store_true', help = 'Will result in overwriting of report files. Useful during script development.')
         self.parser.add_argument('--dry-run', dest="dry_run", choices=[i for i in DryRunType.__members__], type=dry_run_type, help='Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. SHOW_TESTS - enumerate tests. SHOW_PLAN - enumerates tests and fixtures. RUN_FIXTURES - Executes setup/teardown fixtures and emuerates tests.')
@@ -130,15 +130,15 @@ class PickersParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-ip', '--include-package', dest="ip", action="append", metavar="package_name_or_regex", default=None, help='Name/regex pattern for including test packages. Can pass any number of these switches.')
-        self.parser.add_argument('-ep', '--exclude-package', dest="ep", action="append", metavar="package_name_or_regex", default=None, help='Name/regex pattern for excluding test packages. Can pass any number of these switches.')
-        self.parser.add_argument('-im', '--include-module', dest="im", action="append", metavar="module_name_or_regex", default=None, help='Name/regex pattern for including test modules. Can pass any number of these switches.')
-        self.parser.add_argument('-em', '--exclude-module', dest="em", action="append", metavar="module_name_or_regex", default=None, help='Name/regex pattern for excluding test modules. Can pass any number of these switches.')
-        self.parser.add_argument('-it', '--include-test', dest="it", action="append", metavar="test_name_or_regex", default=None, help='Name/regex pattern for including test functions. Can pass any number of these switches.')
-        self.parser.add_argument('-et', '--exclude-test', dest="et", action="append", metavar="test_name_or_regex", default=None, help='Name/regex pattern for excluding test functions. Can pass any number of these switches.')
+        self.parser.add_argument('--ipack', dest="ipack", action="append", metavar="package_name_or_regex", default=None, help='Name/regex pattern for including test packages. Can pass any number of these switches.')
+        self.parser.add_argument('--epack', dest="epack", action="append", metavar="package_name_or_regex", default=None, help='Name/regex pattern for excluding test packages. Can pass any number of these switches.')
+        self.parser.add_argument('--imod', dest="imod", action="append", metavar="module_name_or_regex", default=None, help='Name/regex pattern for including test modules. Can pass any number of these switches.')
+        self.parser.add_argument('--emod', dest="emod", action="append", metavar="module_name_or_regex", default=None, help='Name/regex pattern for excluding test modules. Can pass any number of these switches.')
+        self.parser.add_argument('--itest', dest="itest", action="append", metavar="test_name_or_regex", default=None, help='Name/regex pattern for including test functions. Can pass any number of these switches.')
+        self.parser.add_argument('--etest', dest="etest", action="append", metavar="test_name_or_regex", default=None, help='Name/regex pattern for excluding test functions. Can pass any number of these switches.')
 
-        self.parser.add_argument('-ir', '--include-rule', dest="ir", action="append", metavar="rule", default=None, help='Include test functions that match the rule. Can pass any number of these switches. Test Function is included if any of the inclusion rules matches.')
-        self.parser.add_argument('-er', '--exclude-rule', dest="er", action="append", metavar="rule", default=None, help='Exclude test functions that match the rule. Can pass any number of these switches. Test Function is excluded if any of the exclusion rules matches. Evaluated before any inclusion rules.')
+        self.parser.add_argument('--irule', dest="irule", action="append", metavar="rule", default=None, help='Include test functions that match the rule. Can pass any number of these switches. Test Function is included if any of the inclusion rules matches.')
+        self.parser.add_argument('--erule', dest="erule", action="append", metavar="rule", default=None, help='Exclude test functions that match the rule. Can pass any number of these switches. Test Function is excluded if any of the exclusion rules matches. Evaluated before any inclusion rules.')
 
     def process(self, arg_dict):
         pass

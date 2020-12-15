@@ -325,13 +325,15 @@ class RunSelected(__RunCommand):
 
     def pop_command_args(self, arg_dict):
         from arjuna.engine.session.group import TestGroup
-        i_e_rules = TestGroup.create_rule_strs(arg_dict)
-        self.__rules['ir'].extend(i_e_rules['ir'])
-        self.__rules['er'].extend(i_e_rules['er'])
-        irule_strs = arg_dict.pop('ir')
-        if irule_strs:
-            self.__rules['ir'].extend(irule_strs)
-        erule_strs = arg_dict.pop('er')
-        if erule_strs:
-            self.__rules['er'].extend(erule_strs)
+        for v in {'ipack', 'epack', 'imod', 'emod', 'itest', 'etest', 'irule', 'erule'}:
+            arg_dict.pop(v)
+        # i_e_rules = TestGroup.create_rule_strs(arg_dict)
+        # self.__rules['ir'].extend(i_e_rules['ir'])
+        # self.__rules['er'].extend(i_e_rules['er'])
+        # irule_strs = arg_dict.pop('ir')
+        # if irule_strs:
+        #     self.__rules['ir'].extend(irule_strs)
+        # erule_strs = arg_dict.pop('er')
+        # if erule_strs:
+        #     self.__rules['er'].extend(erule_strs)
 

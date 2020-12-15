@@ -39,13 +39,14 @@ class TestGroup:
 
     @classmethod
     def create_rule_strs(cls, include_exclude_dict):
+        print(include_exclude_dict)
         pickers_rulestr = {
-            'ip': "package *= {}",
-            'ep': "package *= {}",
-            'im': "module *= {}",
-            'em': "module *= {}",
-            'it': "name *= {}",
-            'et': "name *= {}",
+            'ipack': "package *= {}",
+            'epack': "package *= {}",
+            'imod': "module *= {}",
+            'emod': "module *= {}",
+            'itest': "name *= {}",
+            'etest': "name *= {}",
         }
 
         rules = {'ir': [], 'er': []}
