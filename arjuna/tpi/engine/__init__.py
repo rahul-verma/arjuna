@@ -429,7 +429,7 @@ class Arjuna:
         return cls.__ARJ_COMMAND
 
     @classmethod
-    def init(cls, project_root_dir, cli_config=None, run_id=None, *, static_rid=False, linked_projects=[]):
+    def init(cls, project_root_dir, *, run_id=None, static_rid=False, linked_projects=[], arjuna_options={}, user_options={}):
         '''
             Returns reference test context which contains reference configuration.
             This reference test context merges central conf, project conf and central CLI options.
@@ -439,7 +439,8 @@ class Arjuna:
         cls.ARJUNA_SINGLETON = ArjunaSingleton()
         if linked_projects is None:
             linked_projects = list()
-        return cls.ARJUNA_SINGLETON.init(project_root_dir, cli_config, run_id, static_rid=static_rid, linked_projects=linked_projects)
+        from arjuna.configure.cli import CliArgsConfig
+        return cls.ARJUNA_SINGLETON.init(project_root_dir, CliArgsConfig({'ao': arjuna_options, 'uo': user_options}), run_id, static_rid=static_rid, linked_projects=linked_projects)
 
     @classmethod
     def get_logger(cls):

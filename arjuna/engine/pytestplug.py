@@ -300,12 +300,18 @@ def pytest_configure(config):
     print(args)
     print(" ".join(args))
 
-    from arjuna.main import main
-    main(*args, ext_engine=True)
+    from arjuna import Arjuna
+    Arjuna.init(
+        config.option.rootdir, 
+        run_id=config.getoption("run.id"), 
+        static_rid=config.getoption("static.rid"), 
+        linked_projects=config.getoption("link.projects"), 
+        arjuna_options={}, user_options={}
+    )
+    # main(*args, ext_engine=True)
     import os
     from arjuna import C
     os.chdir(C("project.root.dir"))
-    # PytestHooks.add_env_data(config)
 
     # Ported from current Test Group concept.
     from arjuna import Arjuna

@@ -203,137 +203,137 @@ class CreateProject(Command):
         print("Project {} successfully created at {}.".format(project_name, parent_dir))
 
 
-class __RunCommand(Command):
-    def __init__(self, subparsers, sub_parser_name, parents, help):
-        super().__init__()
-        self.parents = parents
-        parser = subparsers.add_parser(sub_parser_name, parents=[parent.get_parser() for parent in parents], help=help)
-        self._set_parser(parser)
-        self.enumerate_only = False
+# class __RunCommand(Command):
+#     def __init__(self, subparsers, sub_parser_name, parents, help):
+#         super().__init__()
+#         self.parents = parents
+#         parser = subparsers.add_parser(sub_parser_name, parents=[parent.get_parser() for parent in parents], help=help)
+#         self._set_parser(parser)
+#         self.enumerate_only = False
 
-    def load(self, arg_dict):
-        for parent in self.parents:
-            parent.process(arg_dict)
+#     def load(self, arg_dict):
+#         for parent in self.parents:
+#             parent.process(arg_dict)
 
-        from arjuna import Arjuna
-        project_root_dir = arg_dict.pop("project.root.dir")
-        runid = arg_dict.pop("run.id")
-        static_rid = arg_dict.pop("static.rid")
-        self.dry_run = arg_dict.pop("dry_run")
-        if self.dry_run:
-            self.dry_run = DryRunType[self.dry_run]
-        self.linked_projects = arg_dict.pop("linked_projects")
-        if "ref_conf" in arg_dict:
-            self.ref_conf_name = arg_dict.pop("ref_conf")
+#         from arjuna import Arjuna
+#         project_root_dir = arg_dict.pop("project.root.dir")
+#         runid = arg_dict.pop("run.id")
+#         static_rid = arg_dict.pop("static.rid")
+#         self.dry_run = arg_dict.pop("dry_run")
+#         if self.dry_run:
+#             self.dry_run = DryRunType[self.dry_run]
+#         self.linked_projects = arg_dict.pop("linked_projects")
+#         if "ref_conf" in arg_dict:
+#             self.ref_conf_name = arg_dict.pop("ref_conf")
 
-        self.pop_command_args(arg_dict)
+#         self.pop_command_args(arg_dict)
 
-        Arjuna.init(project_root_dir, CliArgsConfig(arg_dict), runid, static_rid=static_rid, linked_projects=self.linked_projects)
+#         Arjuna.init(project_root_dir, CliArgsConfig(arg_dict), runid, static_rid=static_rid, linked_projects=self.linked_projects)
 
-        import sys
-        proj_dir = Arjuna.get_config().value(ArjunaOption.PROJECT_ROOT_DIR)
-        sys.path.append(proj_dir + "/..")
+#         import sys
+#         proj_dir = Arjuna.get_config().value(ArjunaOption.PROJECT_ROOT_DIR)
+#         sys.path.append(proj_dir + "/..")
 
-        py_3rdparty_dir = Arjuna.get_config().value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR)
-        sys.path.append(py_3rdparty_dir)
+#         py_3rdparty_dir = Arjuna.get_config().value(ArjunaOption.ARJUNA_EXTERNAL_IMPORTS_DIR)
+#         sys.path.append(py_3rdparty_dir)
 
-    def execute(self, arg_dict):
-        pass
+#     def execute(self, arg_dict):
+#         pass
 
-    def pop_command_args(self, arg_dict):
-        pass
+#     def pop_command_args(self, arg_dict):
+#         pass
 
-    def exit(self):
-        from arjuna import Arjuna
-        Arjuna.exit()
+#     def exit(self):
+#         from arjuna import Arjuna
+#         Arjuna.exit()
 
-class RunProject(__RunCommand):
-    def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-project', parents, "Run all tests in an Arjuna Test Project in a single thread.")
-        self.ref_conf_name = None
+# class RunProject(__RunCommand):
+#     def __init__(self, subparsers, parents):
+#         super().__init__(subparsers, 'run-project', parents, "Run all tests in an Arjuna Test Project in a single thread.")
+#         self.ref_conf_name = None
 
-    def execute(self, arg_dict):
-        super().execute(arg_dict)
-        from arjuna import Arjuna
-        session = Arjuna.get_test_session()
-        session.load_tests(dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
-        session.run()
-        super().exit()
-
-
-class RunSession(__RunCommand):
-    def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-session', parents, "Run tests as per the named test session definition in sessions.yaml.")
-
-    def execute(self, arg_dict):
-        super().execute(arg_dict)
-        from arjuna import Arjuna
-        session = Arjuna.get_test_session()
-        session.load_tests(dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
-        session.run()
-        super().exit()
-
-class RunStage(__RunCommand):
-    def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-stage', parents, "Run tests as per the named test stage definition in stages.yaml.")
-        self.__stage_name = None
-
-    def execute(self, arg_dict):
-        super().execute(arg_dict)
-        from arjuna import Arjuna
-        session = Arjuna.get_test_session()
-        session.load_tests_for_stage(stage_name=self.__stage_name, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
-        session.run()
-        super().exit()
-
-    def pop_command_args(self, arg_dict):
-        self.__stage_name = arg_dict.pop("stage_name")
-
-class RunGroup(__RunCommand):
-    def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-group', parents, "Run tests as per the named test group definition in groups.yaml.")
-        self.__group_name = None
-
-    def execute(self, arg_dict):
-        super().execute(arg_dict)
-        from arjuna import Arjuna
-        session = Arjuna.get_test_session()
-        session.load_tests_for_group(group_name=self.__group_name, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
-        session.run()
-        super().exit()
-
-    def pop_command_args(self, arg_dict):
-        self.__group_name = arg_dict.pop("group_name")
+#     def execute(self, arg_dict):
+#         super().execute(arg_dict)
+#         from arjuna import Arjuna
+#         session = Arjuna.get_test_session()
+#         session.load_tests(dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
+#         session.run()
+#         super().exit()
 
 
-class RunSelected(__RunCommand):
+# class RunSession(__RunCommand):
+#     def __init__(self, subparsers, parents):
+#         super().__init__(subparsers, 'run-session', parents, "Run tests as per the named test session definition in sessions.yaml.")
 
-    def __init__(self, subparsers, parents):
-        super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified in a single thread.")
-        self.ref_conf_name = None
-        self.__pickers_dict = dict()
-        self.__rules = {'ir': [], 'er': []}
+#     def execute(self, arg_dict):
+#         super().execute(arg_dict)
+#         from arjuna import Arjuna
+#         session = Arjuna.get_test_session()
+#         session.load_tests(dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
+#         session.run()
+#         super().exit()
 
-    def execute(self, arg_dict):
-        super().execute(arg_dict)
+# class RunStage(__RunCommand):
+#     def __init__(self, subparsers, parents):
+#         super().__init__(subparsers, 'run-stage', parents, "Run tests as per the named test stage definition in stages.yaml.")
+#         self.__stage_name = None
 
-        from arjuna import Arjuna
-        session = Arjuna.get_test_session()
-        session.load_tests(rules=self.__rules, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
-        session.run()
-        super().exit()
+#     def execute(self, arg_dict):
+#         super().execute(arg_dict)
+#         from arjuna import Arjuna
+#         session = Arjuna.get_test_session()
+#         session.load_tests_for_stage(stage_name=self.__stage_name, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
+#         session.run()
+#         super().exit()
 
-    def pop_command_args(self, arg_dict):
-        from arjuna.engine.session.group import TestGroup
-        for v in {'ipack', 'epack', 'imod', 'emod', 'itest', 'etest', 'irule', 'erule'}:
-            arg_dict.pop(v)
-        # i_e_rules = TestGroup.create_rule_strs(arg_dict)
-        # self.__rules['ir'].extend(i_e_rules['ir'])
-        # self.__rules['er'].extend(i_e_rules['er'])
-        # irule_strs = arg_dict.pop('ir')
-        # if irule_strs:
-        #     self.__rules['ir'].extend(irule_strs)
-        # erule_strs = arg_dict.pop('er')
-        # if erule_strs:
-        #     self.__rules['er'].extend(erule_strs)
+#     def pop_command_args(self, arg_dict):
+#         self.__stage_name = arg_dict.pop("stage_name")
+
+# class RunGroup(__RunCommand):
+#     def __init__(self, subparsers, parents):
+#         super().__init__(subparsers, 'run-group', parents, "Run tests as per the named test group definition in groups.yaml.")
+#         self.__group_name = None
+
+#     def execute(self, arg_dict):
+#         super().execute(arg_dict)
+#         from arjuna import Arjuna
+#         session = Arjuna.get_test_session()
+#         session.load_tests_for_group(group_name=self.__group_name, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
+#         session.run()
+#         super().exit()
+
+#     def pop_command_args(self, arg_dict):
+#         self.__group_name = arg_dict.pop("group_name")
+
+
+# class RunSelected(__RunCommand):
+
+#     def __init__(self, subparsers, parents):
+#         super().__init__(subparsers, 'run-selected', parents, "Run tests selected based on selectors specified in a single thread.")
+#         self.ref_conf_name = None
+#         self.__pickers_dict = dict()
+#         self.__rules = {'ir': [], 'er': []}
+
+#     def execute(self, arg_dict):
+#         super().execute(arg_dict)
+
+#         from arjuna import Arjuna
+#         session = Arjuna.get_test_session()
+#         session.load_tests(rules=self.__rules, dry_run=self.dry_run, ref_conf_name=self.ref_conf_name)
+#         session.run()
+#         super().exit()
+
+#     def pop_command_args(self, arg_dict):
+#         from arjuna.engine.session.group import TestGroup
+#         for v in {'ipack', 'epack', 'imod', 'emod', 'itest', 'etest', 'irule', 'erule'}:
+#             arg_dict.pop(v)
+#         # i_e_rules = TestGroup.create_rule_strs(arg_dict)
+#         # self.__rules['ir'].extend(i_e_rules['ir'])
+#         # self.__rules['er'].extend(i_e_rules['er'])
+#         # irule_strs = arg_dict.pop('ir')
+#         # if irule_strs:
+#         #     self.__rules['ir'].extend(irule_strs)
+#         # erule_strs = arg_dict.pop('er')
+#         # if erule_strs:
+#         #     self.__rules['er'].extend(erule_strs)
 
