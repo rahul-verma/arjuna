@@ -18,6 +18,10 @@
 from arjuna import *
 
 @test
+def check_dummy(request):
+    assert 1==2
+
+@test
 def check_webpp_nourl(request):
     google = GuiApp()
     google.launch(blank_slate=True)
@@ -28,17 +32,6 @@ def check_webpp_nourl(request):
 @test
 def check_webpp_url_arg(request):
     google = GuiApp(url="https://google.com")
-    google.launch()
-    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
-    google.quit()
-
-@test
-def check_webpp_url_in_custom_config(request):
-    cb = request.config.builder
-    cb[ArjunaOption.APP_URL] = "https://google.com"
-    conf = cb.register()
-
-    google = GuiApp(config=conf)
     google.launch()
     request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
     google.quit()

@@ -13,16 +13,23 @@ from arjuna.interface.enums import TargetEnum
 
 
 _ARJUNA_CLI_ARGS = {
-    "target": ("--target", {
-        "dest":"target", 
-        "metavar":"target", 
-        "choices":[i for i in TargetEnum.__members__],
-        "type":ustr, 
-        "help":'Choose what to run. Running all tests in project is the default.', 
-        # "default":"mrun"
+    # "target": ("--target", {
+    #     "dest":"target", 
+    #     "metavar":"target", 
+    #     "choices":[i for i in TargetEnum.__members__],
+    #     "type":ustr, 
+    #     "help":'Choose what to run. Running all tests in project is the default.', 
+    #     # "default":"mrun"
+    # }),
+
+    "project": ("--project", {
+        "dest":"project", 
+        "metavar":"project_root_dir", 
+        "type": project_dir,
+        "help":'Valid absolute path of an existing Arjuna test project. If not provided pytest rootdir value is considered. If that is not provided, current working directory is considered.'
     }),
 
-    "run.id": ("--run-id", {
+    "run.id": ("--rid", {
         "dest":"run.id", 
         "metavar":"run_id", 
         # "type":partial(lname_check, "Run ID"), 
@@ -30,13 +37,13 @@ _ARJUNA_CLI_ARGS = {
         # "default":"mrun"
     }),
 
-    "report.formats": ('--report-format', {
+    "report.formats": ('--otype', {
         "dest":"report.formats", 
-        # "type":report_format, 
+        "type":report_format, 
         "action":"append", 
         "choices":[i for i in ReportFormat.__members__], 
         "help":'Output/Report format. Can pass any number of these switches.',
-        "default": ['XML', 'HTML']
+        # "default": ['XML', 'HTML']
      }), # "choices":['XML', 'HTML'], 
 
     "link.projects": ('--link-projects', {
@@ -58,14 +65,14 @@ _ARJUNA_CLI_ARGS = {
         "help":'Does a dry run. Tests are not executed. Behavior depends on the type passed as argument. SHOW_TESTS - enumerate tests. SHOW_PLAN - enumerates tests and fixtures. RUN_FIXTURES - Executes setup/teardown fixtures and emuerates tests.'
     }),
 
-    "ref.conf": ('--ref-conf', {
+    "ref.conf": ('--rconf', {
         "dest":"ref.conf", 
         "metavar":"config_name", 
         # "type":str, 
-        "help":"Reference Configuration object name for this run. Default is 'ref'"
+        "help":"Run/Reference Configuration object name for this run. Default is 'ref'"
     }),
 
-    "ao": ('--arjuna-option', {
+    "ao": ('--ao', {
         "dest":"ao",
         "nargs":2,
         "action":'append',
@@ -73,7 +80,7 @@ _ARJUNA_CLI_ARGS = {
         "help":'Arjuna Option. Can pass any number of these switches.'
     }),
 
-    "uo": ("--user-option", {
+    "uo": ("--uo", {
         "dest":"uo",
         "nargs":2,
         "action":'append',
@@ -95,6 +102,13 @@ _ARJUNA_CLI_ARGS = {
         "choices":[i for i in LoggingLevel.__members__],
         "help":"Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')", 
         # "default":LoggingLevel.DEBUG.name
+    }),
+
+    "group": ("--group", {
+        "dest": "group", 
+        "metavar": "group_name", 
+        "type": partial(lname_check, "Group Name"), 
+        "help": 'Name of a defined group in test groups configuration file in <Project Root>/config/groups.yaml file.'
     }),
 
     'ipack': ('--ipack', {
@@ -173,31 +187,42 @@ _commands = {
     "SELECTED" : "run-selected",
 }
 
-
 RAW_ARGS = ["pytest"]
 CONVERTED_ARGS = ["pytest", "-p", "arjuna"]
 
-def pytest_cmdline_parse(pluginmanager, args):
-    if '--help' in args or '-h' in args:
-        return
-    RAW_ARGS.extend(args)
+def _determine_project_root_dir(args):
+    def process_rootdir_or_project(index, arg):
+        argparts = [p.strip() for p in arg.split("=")]
+        if len(argparts) == 2:
+            project_path = argparts[1]
+        else:
+            project_path = args[index + 1]
+            if project_path.startswith("-"):
+                raise Exception("For rootdir switch you must provide a path.")
+        return project_path
+
     project_path = None
+    root_dir = None
     for index, arg in enumerate(args):
         if arg.lower().startswith("--rootdir"):
-            argparts = [p.strip() for p in arg.split("=")]
-            if len(argparts) == 2:
-                project_path = argparts[1]
-            else:
-                project_path = args[index + 1]
-                if project_path.startswith("-"):
-                    raise Exception("For rootdir switch you must provide a path.")
-            break
-    if project_path is None:
-        project_path = os.getcwd()
-        CONVERTED_ARGS.extend(['--rootdir', project_path])
-    sys.path.append(project_path + "/..")
-    args.extend(['--rootdir', project_path])
+            root_dir = process_rootdir_or_project(index, arg)
+        elif arg.lower().startswith("--project"):
+            project_path = process_rootdir_or_project(index, arg)
 
+    if project_path is None and root_dir is None:
+        project_path = os.getcwd()
+
+    if project_path is None:
+        project_path = root_dir
+
+    CONVERTED_ARGS.extend(['--project', project_path])
+
+    sys.path.append(project_path + "/..")
+    if root_dir is None:
+        args.extend(['--rootdir', project_path])
+    return project_path
+
+def _add_pytest_addl_args(args):
     res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
     pytest_ini_path = res_path + "/pytest.ini"
     css_path = res_path + "/arjuna.css"
@@ -213,6 +238,7 @@ def pytest_cmdline_parse(pluginmanager, args):
     args.extend(platform_args)
     CONVERTED_ARGS.extend(platform_args)    
 
+def _handle_dry_run_option(args):
     dry_run_raw = None
     for index, arg in enumerate(args):
         if arg.lower().startswith("--dry-run"):
@@ -250,29 +276,29 @@ def pytest_cmdline_parse(pluginmanager, args):
         args.extend([darg])
         CONVERTED_ARGS.extend([darg]) 
 
-    # args.extend(['--report-format', 'HTML', '--report-format', 'XML'])
-
+def pytest_cmdline_parse(pluginmanager, args):
+    if '--help' in args or '-h' in args:
+        return
+    print(args)
+    RAW_ARGS.extend(args)
+    _determine_project_root_dir(args)
+    _add_pytest_addl_args(args)
+    _handle_dry_run_option(args)
     global pytestargs
     pytestargs = args
+
+_ONLY_CMD = {"project", "run.id", "static.rid", "link.projects", "dry.run"}
 
 @pytest.hookimpl(tryfirst=True)
 def pytest_configure(config):
     if config.getoption("help"):
         return
 
-    args = ["arjuna"]
-    value = config.getoption("target")
-    if not value: 
-        value = "project"
-        CONVERTED_ARGS.extend(["--target", value])
-    args.append(_commands[value.upper()])
-    args.append('-p')
-    args.append(config.option.rootdir)
     rule_dict = dict()
+    arg_dict = {}
     for option in _ARJUNA_CLI_ARGS:
         value = config.getoption(option)
-        if option == "target":
-            CONVERTED_ARGS.extend(["--" + option, value.lower()])
+        if option.lower() in _ONLY_CMD:
             continue
         if option.lower() in {'ipack', 'epack', 'imod', 'emod', 'itest', 'etest', 'irule', 'erule'}:
             rule_dict[option.lower()] = value
@@ -281,32 +307,37 @@ def pytest_configure(config):
                     CONVERTED_ARGS.extend(["--" + option, v])
             continue
         if value:
-            if _ARJUNA_CLI_ARGS[option][1].get('action', None) == 'append':
-                for entry in value:
-                    print(entry)
-                    args.append(_ARJUNA_CLI_ARGS[option][0])
-                    if type(entry) is list:
-                        args.extend(str(i) for i in entry)
-                    else:
-                        args.append(str(entry))
-            elif _ARJUNA_CLI_ARGS[option][1].get('action', None) in {'store_true', 'store_false'}:
-                args.append(_ARJUNA_CLI_ARGS[option][0])
-            else:
-                args.append(_ARJUNA_CLI_ARGS[option][0])
-                if type(value) is list:
-                    args.extend([str(i)] for i in value)
-                else:
-                    args.append(str(value))
-    print(args)
-    print(" ".join(args))
+            arg_dict[option] = value
+            # if _ARJUNA_CLI_ARGS[option][1].get('action', None) == 'append':
+            #     for entry in value:
+            #         print(entry)
+            #         args.append(_ARJUNA_CLI_ARGS[option][0])
+            #         if type(entry) is list:
+            #             args.extend(str(i) for i in entry)
+            #         else:
+            #             args.append(str(entry))
+            # elif _ARJUNA_CLI_ARGS[option][1].get('action', None) in {'store_true', 'store_false'}:
+            #     args.append(_ARJUNA_CLI_ARGS[option][0])
+            # else:
+            #     args.append(_ARJUNA_CLI_ARGS[option][0])
+            #     if type(value) is list:
+            #         args.extend([str(i)] for i in value)
+            #     else:
+            #         args.append(str(value))
+    # print(args)
+    # print(" ".join(args))
+    # print(">>>>", rule_dict)
 
     from arjuna import Arjuna
+    from arjuna.configure.cli import CliArgsConfig
+    cliconfig = CliArgsConfig(arg_dict)
     Arjuna.init(
         config.option.rootdir, 
         run_id=config.getoption("run.id"), 
         static_rid=config.getoption("static.rid"), 
         linked_projects=config.getoption("link.projects"), 
-        arjuna_options={}, user_options={}
+        arjuna_options=cliconfig.arjuna_options, 
+        user_options=cliconfig.user_options
     )
     # main(*args, ext_engine=True)
     import os
@@ -347,8 +378,10 @@ def pytest_configure(config):
     html_path = os.path.join(Arjuna.get_config().value(ArjunaOption.REPORT_HTML_DIR), "report.html")
     report_formats = Arjuna.get_config().value(ArjunaOption.REPORT_FORMATS)
 
+    print(report_formats)
+
     if ReportFormat.XML in report_formats:
-        config.option.junit_xml = xml_path
+        config.option.xmlpath = xml_path
 
     if ReportFormat.HTML in report_formats:
         config.option.htmlpath = html_path
@@ -373,7 +406,6 @@ def pytest_runtest_makereport(item, call):
     result = yield
     PytestHooks.prepare_result(result)
     PytestHooks.enhance_reports(item, result)
-
 
 def pytest_html_report_title(report):
     PytestHooks.set_report_title(report)
