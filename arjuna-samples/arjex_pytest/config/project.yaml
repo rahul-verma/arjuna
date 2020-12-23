@@ -1,0 +1,15 @@
+arjuna_options:
+  app.url: "https://google.com"
+  guiauto.max.wait: 3
+  deps.dir: ../extdeps
+
+user_options:
+  target.url: "https://google.com"
+  wp.app.url: "http://192.168.56.101"
+  wp.login.url: "http://192.168.56.101/wp-admin"
+  wp.logout.url: "http://192.168.56.101/wp-login.php?action=logout"
+  wp.admin.name: user
+  wp.admin.pwd: bitnami
+  link.name: Posts
+  useridval: user_login
+  input_label: input

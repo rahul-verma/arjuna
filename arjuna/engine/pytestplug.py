@@ -10,18 +10,12 @@ from functools import partial
 
 from arjuna.interface.cli.validation import *
 from arjuna.interface.enums import TargetEnum
+from arjuna.core.error import *
+from arjuna.tpi.error import *
+from arjuna.tpi.parser.yaml import Yaml
 
 
 _ARJUNA_CLI_ARGS = {
-    # "target": ("--target", {
-    #     "dest":"target", 
-    #     "metavar":"target", 
-    #     "choices":[i for i in TargetEnum.__members__],
-    #     "type":ustr, 
-    #     "help":'Choose what to run. Running all tests in project is the default.', 
-    #     # "default":"mrun"
-    # }),
-
     "project": ("--project", {
         "dest":"project", 
         "metavar":"project_root_dir", 
@@ -69,7 +63,7 @@ _ARJUNA_CLI_ARGS = {
         "dest":"ref.conf", 
         "metavar":"config_name", 
         # "type":str, 
-        "help":"Run/Reference Configuration object name for this run. Default is 'ref'"
+        "help":"Run/Reference Configuration object name for this run. Default is 'ref'",
     }),
 
     "ao": ('--ao', {
@@ -108,7 +102,8 @@ _ARJUNA_CLI_ARGS = {
         "dest": "group", 
         "metavar": "group_name", 
         "type": partial(lname_check, "Group Name"), 
-        "help": 'Name of a defined group in test groups configuration file in <Project Root>/config/groups.yaml file.'
+        "help": 'Name of a defined group in test groups configuration file in <Project Root>/config/groups.yaml file.',
+        "default": "mgroup"
     }),
 
     'ipack': ('--ipack', {
@@ -256,7 +251,6 @@ def _handle_dry_run_option(args):
         try:
             dry_run = DryRunType[dry_run_raw.upper()]
         except Exception as e:
-            print(e)
             raise Exception("Invalid dry run type. Should be one of show_tests/show_plan/create_res")
 
         print("!!!!!! This is a DRY RUN !!!!!!!")
@@ -279,7 +273,6 @@ def _handle_dry_run_option(args):
 def pytest_cmdline_parse(pluginmanager, args):
     if '--help' in args or '-h' in args:
         return
-    print(args)
     RAW_ARGS.extend(args)
     _determine_project_root_dir(args)
     _add_pytest_addl_args(args)
@@ -287,13 +280,9 @@ def pytest_cmdline_parse(pluginmanager, args):
     global pytestargs
     pytestargs = args
 
-_ONLY_CMD = {"project", "run.id", "static.rid", "link.projects", "dry.run"}
+_ONLY_CMD = {"project", "run.id", "static.rid", "link.projects", "dry.run", "ref.conf", "group"}
 
-@pytest.hookimpl(tryfirst=True)
-def pytest_configure(config):
-    if config.getoption("help"):
-        return
-
+def _load_argdict_rule_dict(config):
     rule_dict = dict()
     arg_dict = {}
     for option in _ARJUNA_CLI_ARGS:
@@ -308,26 +297,9 @@ def pytest_configure(config):
             continue
         if value:
             arg_dict[option] = value
-            # if _ARJUNA_CLI_ARGS[option][1].get('action', None) == 'append':
-            #     for entry in value:
-            #         print(entry)
-            #         args.append(_ARJUNA_CLI_ARGS[option][0])
-            #         if type(entry) is list:
-            #             args.extend(str(i) for i in entry)
-            #         else:
-            #             args.append(str(entry))
-            # elif _ARJUNA_CLI_ARGS[option][1].get('action', None) in {'store_true', 'store_false'}:
-            #     args.append(_ARJUNA_CLI_ARGS[option][0])
-            # else:
-            #     args.append(_ARJUNA_CLI_ARGS[option][0])
-            #     if type(value) is list:
-            #         args.extend([str(i)] for i in value)
-            #     else:
-            #         args.append(str(value))
-    # print(args)
-    # print(" ".join(args))
-    # print(">>>>", rule_dict)
+    return arg_dict, rule_dict
 
+def _init_arjuna(config, arg_dict):
     from arjuna import Arjuna
     from arjuna.configure.cli import CliArgsConfig
     cliconfig = CliArgsConfig(arg_dict)
@@ -339,63 +311,156 @@ def pytest_configure(config):
         arjuna_options=cliconfig.arjuna_options, 
         user_options=cliconfig.user_options
     )
-    # main(*args, ext_engine=True)
+
     import os
     from arjuna import C
     os.chdir(C("project.root.dir"))
 
-    # Ported from current Test Group concept.
+class TestGroup:
+
+    def __init__(self, *, name="mgroup", rconf_name="ref"):
+        from arjuna import Arjuna
+        from arjuna.tpi.constant import ArjunaOption
+        Arjuna.register_group_params(name=name, config=Arjuna.get_config(rconf_name), thread_name=threading.currentThread().name)    
+
+    def __create_rule_strs(self, include_exclude_dict):
+        pickers_rulestr = {
+            'ipack': "package *= {}",
+            'epack': "package *= {}",
+            'imod': "module *= {}",
+            'emod': "module *= {}",
+            'itest': "name *= {}",
+            'etest': "name *= {}",
+        }
+
+        rules = {'ir': [], 'er': []}
+
+        for picker in pickers_rulestr:
+            names = include_exclude_dict.pop(picker)
+            if names:
+                for name in names:
+                    if picker.startswith('i'):
+                        rules['ir'].append(pickers_rulestr[picker].format(name))
+                    else:
+                        rules['er'].append(pickers_rulestr[picker].format(name))
+
+        for k,v in include_exclude_dict.items():
+            if not v: continue
+            if k == "irule":
+                rules['ir'].extend(v)
+            elif k == "erule":
+                rules['er'].extend(v)
+
+        return rules
+
+    def _load_tests(self, rule_dict):
+        i_e_rules = self.__create_rule_strs(rule_dict)
+        rules = {'ir': [], 'er': []}
+        rules['ir'].extend(i_e_rules['ir'])
+        rules['er'].extend(i_e_rules['er'])
+
+        from arjuna.engine.selection.selector import Selector
+        selector = Selector()
+        if rules:
+            for rule in rules['ir']:
+                selector.include(rule)
+            for rule in rules['er']:
+                selector.exclude(rule)
+
+        from arjuna import Arjuna
+        Arjuna.register_test_selector_for_group(selector)
+
+    @classmethod
+    def from_pickers(cls, *, rconf_name=None, rules={}):
+        if rconf_name is None: rconf_name = "ref"
+        group = TestGroup(rconf_name=rconf_name)
+        group._load_tests(rules)
+        return group
+
+    @classmethod
+    def __get_group_yaml(cls, name):
+        from arjuna import C
+        gfile = C(ArjunaOption.CONF_GROUPS_LOCAL_FILE)
+        if not os.path.isfile(gfile):
+            gfile = C(ArjunaOption.CONF_GROUPS_FILE)                
+        try:
+            gyaml = Yaml.from_file(gfile, allow_any=True)
+        except FileNotFoundError:
+            raise TestGroupsFileNotFoundError(file_path=gfile)
+           
+        try:
+            return gyaml.get_section(name)
+        except YamlUndefinedSectionError as e:
+            raise UndefinedTestGroupError(name=name, file_path=gfile)
+
+    @classmethod
+    def from_def(cls, name, *, rconf_name=None, rules={}):
+        group_yaml = cls.__get_group_yaml(name)
+        from arjuna import Arjuna
+        for gmd_name in group_yaml.section_names:
+            rules = {
+                'ipack': None,
+                'epack': None,
+                'imod': None,
+                'emod': None,
+                'itest': None,
+                'etest': None,
+                'irule' : None,
+                'erule': None
+            }
+            gmd_name = gmd_name.lower()
+            if gmd_name == "conf":
+                rconf_name = group_yaml["conf"]
+            elif gmd_name in rules:
+                rules[gmd_name] = group_yaml[gmd_name]
+
+        if rconf_name is None:
+            rconf_name = "ref"
+        group = TestGroup(name=name, rconf_name=rconf_name)
+        group._load_tests(rules)
+        return group
+
+def _configure_pytest_reports(config):
     from arjuna import Arjuna
-    from arjuna.tpi.constant import ArjunaOption
-    Arjuna.register_group_params(name="mgroup", config=Arjuna.get_config(), thread_name=threading.currentThread().name)
-
-    # From current CLI (run-selected logic)
-    from arjuna.engine.session.group import TestGroup
-    print(rule_dict)
-    i_e_rules = TestGroup.create_rule_strs(rule_dict)
-    print(i_e_rules)
-    rules = {'ir': [], 'er': []}
-    rules['ir'].extend(i_e_rules['ir'])
-    rules['er'].extend(i_e_rules['er'])
-    irule_strs = config.getoption('irule')
-    if irule_strs:
-        rules['ir'].extend(irule_strs)
-    erule_strs = config.getoption('erule')
-    if erule_strs:
-        rules['er'].extend(erule_strs)
-
-    from arjuna.engine.selection.selector import Selector
-    selector = Selector()
-    if rules:
-        for rule in rules['ir']:
-            selector.include(rule)
-        for rule in rules['er']:
-            selector.exclude(rule)
-
-    Arjuna.register_test_selector_for_group(selector)
-
     xml_path = os.path.join(Arjuna.get_config().value(ArjunaOption.REPORT_XML_DIR), "report.xml")
     html_path = os.path.join(Arjuna.get_config().value(ArjunaOption.REPORT_HTML_DIR), "report.html")
     report_formats = Arjuna.get_config().value(ArjunaOption.REPORT_FORMATS)
 
-    print(report_formats)
-
     if ReportFormat.XML in report_formats:
         config.option.xmlpath = xml_path
+        CONVERTED_ARGS.extend(["--junit-xml", xml_path])
 
     if ReportFormat.HTML in report_formats:
         config.option.htmlpath = html_path
         config.option.self_contained_html = True
+        CONVERTED_ARGS.extend(["--html", html_path])
+        CONVERTED_ARGS.extend(["--self-contained-html"])
 
+@pytest.hookimpl(tryfirst=True)
+def pytest_configure(config):
+    if config.getoption("help"):
+        return
+
+    arg_dict, rule_dict = _load_argdict_rule_dict(config)
+    _init_arjuna(config, arg_dict)
+    gname = config.getoption("group").lower()
+    if gname == "mgroup":
+        group = TestGroup.from_pickers(rconf_name=config.getoption("ref.conf"), rules=rule_dict)
+    else:
+        group = TestGroup.from_def(gname, rconf_name=config.getoption("ref.conf"))
+
+    _configure_pytest_reports(config)
+
+    from arjuna import Arjuna
     Arjuna._set_command(" ".join(RAW_ARGS))
     Arjuna.register_pytest_command_for_group(" ".join(CONVERTED_ARGS))
 
     PytestHooks.add_env_data(config)
 
 def pytest_collection_modifyitems(items, config):
-    from arjuna import Arjuna
-    session = Arjuna.get_test_session()
-    session.load_tests(dry_run=config.getoption("dry.run"), ref_conf_name=config.getoption("ref.conf"))
+    # from arjuna import Arjuna
+    # session = Arjuna.get_test_session()
+    # session.load_tests(dry_run=config.getoption("dry.run"), ref_conf_name=config.getoption("ref.conf"))
     PytestHooks.select_tests(items, config)
 
 def pytest_generate_tests(metafunc):

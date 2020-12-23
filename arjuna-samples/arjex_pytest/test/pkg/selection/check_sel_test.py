@@ -18,20 +18,13 @@
 from arjuna import *
 
 @test
-def check_dummy(request):
+def check_t1(request):
     assert 1==2
 
 @test
-def check_webpp_nourl(request):
-    google = GuiApp()
-    google.launch(blank_slate=True)
-    google.go_to_url("https://google.com")
-    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
-    google.quit()
+def check_t2(request):
+    assert 1==1
 
 @test
-def check_webpp_url_arg(request):
-    google = GuiApp(url="https://google.com")
-    google.launch()
-    request.asserter.assert_equal("Google", google.title, "GuiPage title does not match.")
-    google.quit()
+def check_t3(request):
+    pass
