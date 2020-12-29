@@ -53,7 +53,7 @@ class ElementFinder:
             raise _GuiWidgetPresentError(*wmd.locators)
 
     def find(self, dispatcher_call, wmd, context="ELEMENT"):
-        from arjuna import log_trace
+        from arjuna import log_trace, log_debug
         log_trace("Finding with wmd: {}".format(str(wmd)))
         from arjuna import Arjuna
         found = False
@@ -79,11 +79,14 @@ class ElementFinder:
                     if locator.ltype.name == "XPATH":
                         if not lvalue.startswith("."):
                             lvalue = "." + lvalue
+                    log_debug("Trying out locator {} with value {}".format(locator.ltype.name, lvalue))
                     size, dispatcher = dispatcher_call(locator.ltype.name, lvalue, relations=wmd.meta.relations, filters=wmd.meta.filters)
                 return locator.ltype.name, locator.lvalue, size, dispatcher
             except WaitableError as e:
+                log_debug("Waitable exception raised.")
                 we = e
             except Exception as f:
+                log_debug("Non-Waitable exception raised: {}: {}".format(f.__class__.__name__, str(f)))
                 raise f
             else:
                 we = None

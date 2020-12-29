@@ -1,6 +1,0 @@
-arjuna_options:
-  browser.name: firefox
-  app.url: "https://dyn"
-
-user_options:
-  user: "dyn_user"

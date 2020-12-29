@@ -68,8 +68,10 @@ def func_wrapper(func, level, *vargs, static=False, prop=False, prop_type="fget"
         ret = func(*vargs, **kwargs)
     except Exception as e:
         import traceback
-        log_call("{}:: Exception: {}. Trace: {}".format(qualname, e, traceback.format_exc()))
-        raise Exception("{}:: Exception: {}".format(qualname, e)) from e
+        log_call("{}:: Exception: {}.".format(qualname, e))
+
+        # Same exception should be raised else it WILL cause error-dependent-logic error
+        raise e
     else:
         if prop:
             msg_1 = prop_dict_msg[prop_type][0]

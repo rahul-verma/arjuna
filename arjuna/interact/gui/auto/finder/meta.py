@@ -132,7 +132,7 @@ class Meta:
         from arjuna.tpi.error import GuiWidgetDefinitionError
 
         for k,v in self.__mdict["relations"].items():
-            self.__set_relation(self, k, v)
+            self.__set_relation(k, v)
 
     def __process_filters(self, temp_dict):
         from arjuna import log_debug
@@ -171,6 +171,7 @@ class Meta:
             return None
 
     def __set_relation(self, name, value):
+        from arjuna.tpi.guiauto.base.single_widget import SingleGuiWidget
         if isinstance(value, SingleGuiWidget):
             value = value.dispatcher.driver_element
         self.__mdict["relations"][name] = value

@@ -18,7 +18,7 @@
 from arjuna import *
 
 @test
-def check_diff_locator_or(request, wordpress):
+def check_coded_diff_locator_or(request, wordpress):
     e = wordpress.element(classes="nonexisting", attr=attr(type="submit"))
     print(e.source.content.root)
 

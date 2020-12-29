@@ -82,15 +82,15 @@ _ARJUNA_CLI_ARGS = {
         "help":'User Option. Can pass any number of these switches.'
     }),
 
-    'log.console.level': ('--display-log-level', {
+    'log.console.level': ('--display-level', {
         "dest":'log.console.level', 
-        # "type":ustr, 
+        "type":ustr, 
         "choices":[i for i in LoggingLevel.__members__],
         "help":"Minimum message level for display. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')", 
         # "default":LoggingLevel.INFO.name
     }),
 
-    'log.file.level': ('--file-log-level', {
+    'log.file.level': ('--logger-level', {
         "dest":'log.file.level', 
         # "type":ustr, 
         "choices":[i for i in LoggingLevel.__members__],
@@ -273,7 +273,7 @@ def _handle_dry_run_option(args):
 def pytest_cmdline_parse(pluginmanager, args):
     if '--help' in args or '-h' in args:
         return
-    RAW_ARGS.extend(args)
+    RAW_ARGS.extend([arg.find(" ") == -1 and arg or f'"{arg}"' for arg in args])
     _determine_project_root_dir(args)
     _add_pytest_addl_args(args)
     _handle_dry_run_option(args)
@@ -293,7 +293,10 @@ def _load_argdict_rule_dict(config):
             rule_dict[option.lower()] = value
             if value:
                 for v in value:
-                    CONVERTED_ARGS.extend(["--" + option, v])
+                    if option.lower() in {"irule", "erule"}:
+                        CONVERTED_ARGS.extend(["--" + option, f'"{v}"'])    
+                    else:
+                        CONVERTED_ARGS.extend(["--" + option, v])
             continue
         if value:
             arg_dict[option] = value
