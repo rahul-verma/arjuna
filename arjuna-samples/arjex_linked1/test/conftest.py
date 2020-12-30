@@ -9,7 +9,6 @@ def get_import_lenient_set(context):
 try:
     from arjex_minimal.lib.resource.group import *
 except ModuleNotFoundError as e:
-    print("Found")
     if e.name not in get_import_lenient_set("group"):
         raise Exception(e.name)
 

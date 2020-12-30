@@ -535,7 +535,7 @@ class Json:
                 Arjuna's `JsonDict` or `JsonList` object or the same object for allow_any = True
         '''
 
-        with open(file_path, 'r') as f:
+        with open(file_path, 'r', encoding='utf-8') as f:
             return cls.from_str(f.read(), allow_any=allow_any)
 
     @classmethod

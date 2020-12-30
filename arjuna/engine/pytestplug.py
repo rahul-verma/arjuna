@@ -186,36 +186,49 @@ RAW_ARGS = ["pytest"]
 CONVERTED_ARGS = ["pytest", "-p", "arjuna"]
 
 def _determine_project_root_dir(args):
-    def process_rootdir_or_project(index, arg):
+    print(args)
+    def process_rootdir_or_project(index, arg, oargs):
         argparts = [p.strip() for p in arg.split("=")]
         if len(argparts) == 2:
             project_path = argparts[1]
+            oargs[index] = "__REMOVE__"
         else:
             project_path = args[index + 1]
             if project_path.startswith("-"):
                 raise Exception("For rootdir switch you must provide a path.")
+
+            oargs[index] = "__REMOVE__"
+            oargs[index + 1] = "__REMOVE__"
         return project_path
 
     project_path = None
     root_dir = None
-    for index, arg in enumerate(args):
+
+    from copy import deepcopy
+    targs = deepcopy(args)
+
+    for index, arg in enumerate(targs):
         if arg.lower().startswith("--rootdir"):
-            root_dir = process_rootdir_or_project(index, arg)
+            root_dir = process_rootdir_or_project(index, arg, args)
         elif arg.lower().startswith("--project"):
-            project_path = process_rootdir_or_project(index, arg)
+            project_path = process_rootdir_or_project(index, arg, args)
 
     if project_path is None and root_dir is None:
-        project_path = os.getcwd()
+        pytest_root_dir = os.getcwd()
+    elif project_path is not None:
+        pytest_root_dir = project_path
+    elif root_dir is not None:
+        pytest_root_dir = root_dir
 
-    if project_path is None:
-        project_path = root_dir
+    CONVERTED_ARGS.extend(['--project', pytest_root_dir])
 
-    CONVERTED_ARGS.extend(['--project', project_path])
+    args[:] = [e for e in args if e != "__REMOVE__"]
+    sys.path.append(pytest_root_dir + "/..")
+    args.extend(['--rootdir', pytest_root_dir])
 
-    sys.path.append(project_path + "/..")
-    if root_dir is None:
-        args.extend(['--rootdir', project_path])
-    return project_path
+    print(args)
+
+    return pytest_root_dir
 
 def _add_pytest_addl_args(args):
     res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
@@ -430,8 +443,9 @@ def _configure_pytest_reports(config):
     report_formats = Arjuna.get_config().value(ArjunaOption.REPORT_FORMATS)
 
     if ReportFormat.XML in report_formats:
-        config.option.xmlpath = xml_path
-        CONVERTED_ARGS.extend(["--junit-xml", xml_path])
+        if not config.option.xmlpath:
+            config.option.xmlpath = xml_path
+            CONVERTED_ARGS.extend(["--junit-xml", xml_path])
 
     if ReportFormat.HTML in report_formats:
         config.option.htmlpath = html_path
