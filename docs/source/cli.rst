@@ -65,7 +65,7 @@ This command creates a test project with name **proj_name** at the path provided
 **run-project** Command
 -----------------------
 
-This command is used to run all tests in an :ref:`Arjuna Test Project <test_project>`. The tests are picked up from the **<Project Root Dir>/test/module** directory.
+This command is used to run all tests in an :ref:`Arjuna Test Project <test_project>`. The tests are picked up from the **<Project Root Dir>/test/pkg** directory.
 
 .. code-block:: bash
 
@@ -95,7 +95,7 @@ Following run options can be provided in command line:
 **run-selected** Command
 ------------------------
 
-This command is used to run a sub-set of tests in the project. The tests are picked up from the **<Project Root Dir>/test/module** directory as per the selectors provided.
+This command is used to run a sub-set of tests in the project. The tests are picked up from the **<Project Root Dir>/test/pkg** directory as per the selectors provided.
 
 .. code-block:: bash
 

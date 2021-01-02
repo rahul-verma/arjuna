@@ -50,7 +50,7 @@ You use the **records** factory function to provide multiple records. It can con
     def check_records(request, data):
         pass
 
-The report will contain separate entries for each test. The name will indicate the data used. (e.g. **test/module/check_04_dd_records.py::check_records[Data-> Indexed:[7, 8] Named:{sum=10}]**)
+The report will contain separate entries for each test. The name will indicate the data used. (e.g. **test/pkg/check_04_dd_records.py::check_records[Data-> Indexed:[7, 8] Named:{sum=10}]**)
 
 Retrieval of data values is done exactly the same way as in case of a single data record.
 
