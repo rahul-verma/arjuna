@@ -51,7 +51,6 @@ class GNSLabelFormatter:
         fmt_wmd = wmd.create_formatted_wmd(**self.__fargs)
         for k,v in fmt_wmd.meta.relations.items():
             from arjuna.interact.gui.auto.finder.wmd import GuiWidgetMetaData
-            print(">>>>>>>>>", k, v)
             if type(v) is str:
                 log_debug("Formatting related label {} in relations dict.".format(k))
                 rwmd = self.__gui_def.get_wmd(v)

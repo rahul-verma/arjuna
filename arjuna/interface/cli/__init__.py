@@ -35,7 +35,6 @@ from .command import *
 class ArjunaCLI:
 
     def __init__(self, args):
-        print(args)
         super().__init__()
         self._args = args
         from arjuna import Arjuna

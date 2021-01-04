@@ -312,7 +312,7 @@ class Yaml:
                 Arjuna's `YamlDict` or `YamlList` object or the same object for allow_any = True
         '''
         yaml_name = os.path.basename(file_path).split(".yaml")[0]
-        f = open(file_path, "r")
+        f = open(file_path, "r", encoding="utf-8")
         ydict = yaml.load(f, Loader=yaml.SafeLoader)
         f.close()
         return cls.from_object(ydict, allow_any=allow_any)

@@ -39,7 +39,7 @@ class TestGroup:
 
     @classmethod
     def create_rule_strs(cls, include_exclude_dict):
-        print(include_exclude_dict)
+
         pickers_rulestr = {
             'ipack': "package *= {}",
             'epack': "package *= {}",

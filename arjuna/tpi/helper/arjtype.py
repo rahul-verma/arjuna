@@ -479,7 +479,6 @@ class axes:
 
     @classmethod
     def _from_dict(cls, axes_dict):
-        print(axes_dict)
         axes_dict = {k.lower():v for k,v in axes_dict.items()}
         axes_obj = axes(node(**axes_dict['start']))
         del axes_dict['start']

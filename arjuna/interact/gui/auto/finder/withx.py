@@ -68,7 +68,6 @@ class WithX:
         def process_value(wtype, wvalue):
             if wtype in {'ATTR', 'FATTR', 'BATTR', 'EATTR'}: #:, 'NODE', 'BNODE', 'FNODE'}:
                 if len(wvalue) > 1:
-                    print(len(wvalue))
                     raise Exception("attr/fattr/battr/eattr specification should contain only a single key value pair for attribute name and value. Wrong withx definition found wtype: {} with value {}".format(wtype, wvalue))
                 name = list(wvalue.keys())[0]
                 value = list(wvalue.values())[0]

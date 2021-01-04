@@ -53,7 +53,6 @@ class DriverCommands:
 
     @classmethod
     def send_keys(cls, driver, key_str):
-        print(key_str)
         ActionChains(driver).send_keys(key_str).perform()
 
     @classmethod

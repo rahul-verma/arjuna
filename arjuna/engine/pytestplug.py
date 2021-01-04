@@ -40,7 +40,7 @@ _ARJUNA_CLI_ARGS = {
         # "default": ['XML', 'HTML']
      }), # "choices":['XML', 'HTML'], 
 
-    "link.projects": ('--link-projects', {
+    "link.projects": ('--link', {
         "dest":"link.projects", 
         "action":"append", 
         "help":'Linked Arjuna Test Project.',
@@ -186,7 +186,6 @@ RAW_ARGS = ["pytest"]
 CONVERTED_ARGS = ["pytest", "-p", "arjuna"]
 
 def _determine_project_root_dir(args):
-    print(args)
     def process_rootdir_or_project(index, arg, oargs):
         argparts = [p.strip() for p in arg.split("=")]
         if len(argparts) == 2:
@@ -223,10 +222,20 @@ def _determine_project_root_dir(args):
     CONVERTED_ARGS.extend(['--project', pytest_root_dir])
 
     args[:] = [e for e in args if e != "__REMOVE__"]
+
+    def convert_to_absolute(p):
+        if p.startswith("./test") or p.startswith(".\\test"):
+            return os.path.join(pytest_root_dir + p[1:])
+        else:
+            return p
+    args[:] = [convert_to_absolute(e) for e in args]
     sys.path.append(pytest_root_dir + "/..")
     args.extend(['--rootdir', pytest_root_dir])
 
-    print(args)
+    conf_file = os.path.join(pytest_root_dir, "test/conftest.py")
+    if os.path.exists(conf_file):
+        os.remove(conf_file)
+
 
     return pytest_root_dir
 
