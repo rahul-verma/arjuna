@@ -47,21 +47,9 @@ class ArjunaCLI:
 
         # Create re-usable parses for command arguments
         new_project_parser = NewProjectParser()
-        project_parser = ProjectParser()
-        run_parser = RunParser()
-        run_default_group_parser = RunDefaultGroupParser()
-        session_parser = SessionParser()
-        stage_parser = StageParser()
-        group_parser = GroupParser()
-        pickers_parser = PickersParser()
 
         # Create primary command handlers
         self.create_project = CreateProject(subparsers, [new_project_parser])
-        self.run_project = RunProject(subparsers, [project_parser, run_parser, run_default_group_parser])
-        self.run_session = RunSession(subparsers, [project_parser, run_parser, session_parser])
-        self.run_stage = RunStage(subparsers, [project_parser, run_parser, stage_parser])
-        self.run_group = RunGroup(subparsers, [project_parser, run_parser, group_parser])
-        self.run_selected = RunSelected(subparsers, [project_parser, run_parser, run_default_group_parser, pickers_parser])
 
     def init(self):
         time.sleep(0.1)

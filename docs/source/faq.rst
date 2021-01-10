@@ -21,7 +21,7 @@ For simple dependency, where you just want to use the library from another Arjun
 
 For example let's say "parent" project depends on "child" and "child" is contained in the **/abc/def/root/child** location. Then:
     * You can set **deps.dir = /abc/def/root** in **project.yaml**
-    * You can as well pass **-ao deps.dir /abc/def/root** in the command line.
+    * You can as well pass **--ao deps.dir /abc/def/root** in the command line.
 
 The path can also be a relative path. Arjuna will consider it relative to the root of parent Arjuna project.
 
@@ -39,14 +39,13 @@ In an Arjuna test project, you typically define many externalized files like con
 
 Arjuna provides a feature to make an Arjuna test project linked to one or more other Arjuna test projects and automatically makes their artifacts available to the top project.
 
-To achieve this, you can pass **-l**/**--link-project** CLI option.
+To achieve this, you can pass **--link** CLI option.
 
 For example to link to "linked1" project present at **/abc/def/root/linked**:
 
     .. code-block:: text
 
-        -l /abc/def/root/linked
-        --link-project /abc/def/root/linked
+        --link /abc/def/root/linked
 
 The path can also be a relative path. Arjuna will consider it relative to the root of parent Arjuna project.
 
@@ -76,15 +75,14 @@ You can link multiple projects as well:
 
     .. code-block:: text
 
-        -l /abc/def/root/linked1 -l /abc/def/root/linked2 -l /abc/def/root/linked3
-        --link-project /abc/def/root/linked1 --link-project /abc/def/root/linked2 --link-project /abc/def/root/linked3
+        --link /abc/def/root/linked1 --link /abc/def/root/linked2 --link /abc/def/root/linked3
 
 In the above case, merging/overriding order is as follows:
     * linked2 overrides linked1
     * linked3 overrides linked2 and linked1
     * parent project overrides linked3, linked2 and linked1
 
-Pay attention to the order of multiple **-l**/**--link-project** switches as it determines the overriding order.
+Pay attention to the order of multiple **--link** switches as it determines the overriding order.
 
 
 How Do I Use Custom Test Selection Rules?
@@ -98,8 +96,8 @@ Command-Line
 ============
 
 When you use :ref:`run_selected`, you can provide the following switches to provide rules:
-    * **-ir**/**--include-rule**
-    * **-er**/**--exclude-rule**
+    * **--irule**
+    * **--erule**
 
 Any number of the above switches can be provided. Following are some examples:
 
@@ -108,21 +106,21 @@ Any number of the above switches can be provided. Following are some examples:
 
     .. code-block:: text
 
-        -ir unstable -ir "not reviewed"
+        --irule unstable --irule "not reviewed"
 
 
 :ref:`iterable_pattern_rule` Example
 
     .. code-block:: text
 
-        -ir "with tags a,b" -ir "without tags x,y"
+        --irule "with tags a,b" --irule "without tags x,y"
 
 
 :ref:`test_attr_rule` Example
 
     .. code-block:: text
 
-        -ir "author is Rahul" -ir "priority < 3"
+        --irule "author is Rahul" --irule "priority < 3"
 
 
 Group Definition in **groups.yaml**
@@ -139,7 +137,7 @@ Following are some examples where **sample_group** is the group name.
     .. code-block:: yaml
 
         sample_group:
-            ir:
+            irule:
                 - "unstable"
                 - "not reviewed"
 
@@ -149,7 +147,7 @@ Following are some examples where **sample_group** is the group name.
     .. code-block:: yaml
 
         sample_group:
-            ir:
+            irule:
                 - "with tags slow"
                 - "without tags x,y"
 
@@ -159,7 +157,7 @@ Following are some examples where **sample_group** is the group name.
     .. code-block:: yaml
 
         sample_group:
-            ir:
+            irule:
                 - "author is Rahul"
                 - "priority < 3"
 
@@ -198,10 +196,6 @@ Arjuna supports maintaining local versions of all its configuration files. Follo
      - data.yaml
    * - envs.local.yaml
      - envs.yaml
-   * - sessions.local.yaml
-     - sessions.yaml
-   * - stages.local.yaml
-     - stages.yaml
    * - groups.local.yaml
      - groups.yaml
    * - withx.local.yaml

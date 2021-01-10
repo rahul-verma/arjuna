@@ -114,27 +114,27 @@ A very common use case for test selection is based on packahe, module and/or fun
 
 Given the common usage of these in test automation world, Arjuna provides shortcut rules for these.
 
-* **ip**: Include Package
+* **ipack**: Include Package
 
     * Internally translates to partial match for **package** test attribute: **package *= pkg_name_or_pattern**
 
-* **ep**: Exclude Package
+* **epack**: Exclude Package
 
     * Internally translates to unsuccessful partial match for **package** test attribute:  **package !*= pkg_name_or_pattern**
 
-* **im**: Include Module
+* **imod**: Include Module
 
     * Internally translates to partial match for **module** test attribute:  **module *= module_name_or_pattern**
 
-* **em**: Exclude Module
+* **emod**: Exclude Module
 
     * Internally translates to unsuccessful partial match for **module** test attribute:  **module !*= module_name_or_pattern**
 
-* **it**: Include Test
+* **itest**: Include Test
 
     * Internally translates to partial match for **name** test attribute:  **name *= function_name_or_pattern**
 
-* **et**: Exclude Test
+* **etest**: Exclude Test
 
     * Internally translates to unsuccessful partial match for **name** test attribute:  **name !*= function_name_or_pattern**
 
@@ -148,17 +148,17 @@ Rules are segregated as package, module and test rules (inclusion/exclusion).
 
 Following is the test selection process as per Arjuna rules:
 
-    #. Package check: Specified using ip/ep or ir/er with "package operator operand" grammar.
+    #. Package check: Specified using ipack/epack or irule/erule with "package operator operand" grammar.
         - if package for a test meets an exclusion rule, it is excluded.
         - if no inclusion rule is specified, it is included for module validation.
         - if an inclusion rule is met, it is selected for module validation.
         - if no inclusion rule is met, it is excluded.
-    #. Module check: Specified using im/em or ir/er with "module operator operand" grammar.
+    #. Module check: Specified using imod/emod or irule/erule with "module operator operand" grammar.
         - if module for a test meets an exclusion rule, it is excluded.
         - if no inclusion rule is specified, it is included for test validation.
         - if an inclusion rule is met, it is selected for test validation.
         - if no inclusion rule is met, it is excluded.
-    #. Test check: Specified using it/et or ir/er with any rule grammar except "package operator operand" and "module operator operand".
+    #. Test check: Specified using itest/etest or irule/erule with any rule grammar except "package operator operand" and "module operator operand".
         - if a test meets an exclusion rule, it is excluded.
         - if no inclusion rule is specified, it is included in test group run.
         - if an inclusion rule is met, it is included in test group run.

@@ -8,7 +8,6 @@ Subpackages
 
    arjuna.engine.data
    arjuna.engine.selection
-   arjuna.engine.session
 
 Submodules
 ----------
@@ -19,6 +18,7 @@ Submodules
    arjuna.engine.logger
    arjuna.engine.meta
    arjuna.engine.pytest
+   arjuna.engine.pytestplug
    arjuna.engine.track
 
 Module contents

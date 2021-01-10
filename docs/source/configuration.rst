@@ -41,17 +41,11 @@ You can instruct Arjuna to use any of the following Configuration objects to be 
 
 There are various places to pass on this instruction:
     * Test Run:
-        - **-c / --ref-conf** command line switch with any **run-x** commands in Arjuna CLI. 
+        - **--rconf** command line switch. 
         - This becomes reference configuration for this test run, current test session, all stages and groups in the session, unless overriden in their YAML definition.
-    * Test Session definition:
-        - **conf** attribute in YAML. This becomes reference configuration for this session, all stages and groups in this session, unless overriden in their YAML definition.
-        - This also overrides -c switch if passed.
-    * Test Stage definition:
-        - **conf** attribute in YAML. This becomes reference configuration for this stage and all groups in this stage, unless overriden in their YAML definition.
-        - This also overrides -c switch if passed.
     * Test Group definition:
         - **conf** attribute in YAML. This becomes reference configuration for this group and all test modules and test functions, unless programmatically overriden.
-        - This also overrides -c switch if passed.    
+        - This value is overriden by command line option "--rconf" if provided.   
 
 All calls to the reference configuration are replaced with the configuration object that you attached. This means that this configuration becomes the reference configuration.
 
@@ -285,7 +279,7 @@ A reference configuration can override what can be overriden in a coded configur
 Options Overridable via **Command Line**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Via command line's **-ao** / **--arjuna-option** switches, you can override Arjuna options across every configuration created by Arjuna.
+Via command line's **--ao** switch, you can override Arjuna options across every configuration created by Arjuna.
 
 You can override options that you can override in a Reference configuration (and hence a coded configuration too). In addition, you can override the following:
 

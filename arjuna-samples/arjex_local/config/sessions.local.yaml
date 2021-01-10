@@ -1,5 +1,0 @@
-session_1:
-
-  include: 
-    - stage_1
-    - stage_2
