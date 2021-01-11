@@ -49,7 +49,8 @@ Future Themes (In-Progress or Planned):
 
 1.1.32
 ------
-
+    - Arjuna acts as a pytest plugin for the purpose of test execution.
+    - CLI options are significantly updated. Old usage is deprecated. Refer the new docs.
 
 1.1.31
 ------
