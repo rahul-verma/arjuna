@@ -2,13 +2,13 @@
 
 ![Arjuna](https://github.com/rahul-verma/arjuna/blob/master/Arjuna.png)
 
-Arjuna is a Python based test automation framework developed by [Rahul Verma](www.rahulverma.net). It is an open source, Apache Licensed software [hosted on GitHub](https://github.com/rahul-verma/arjuna)
+Arjuna is a **Python based test automation framework** developed by [Rahul Verma](www.rahulverma.net). It is an open source, Apache Licensed software [hosted on GitHub](https://github.com/rahul-verma/arjuna)
 
 Rahul has implemented smaller variants of features in Arjuna across frameworks and organizations, or given advise around it. However Arjuna being a generic library has the most complete implementation of his ideas, away from project specific contexts and constraints.
 
-Arjuna uses **[pytest](https://docs.pytest.org/en/latest/)** as its recommended test engine. Arjuna also provides its markup for some common use cases on top of pytest. If you like, you can make use of Arjuna with any other test engine or custom frameworks as well.
+For test execution, Arjuna is implemented as a **[pytest](https://docs.pytest.org/en/latest/)** plugin and provides its own markup over pytest as its underlying test engine. If you like, you can make use of Arjuna with any other test engine or custom frameworks as well.
 
-You'd need Python 3.5+ to make use of Arjuna.
+You'd need **Python 3.8+** to make use of Arjuna.
 
 Note: On Linux, the built-in Python3 build has issues with the Python's built-in enum module which is heavily used in Arjuna. One alternative is to install ActiveState Python on linux. Advanced users can go for installing a custom Python build.
 
