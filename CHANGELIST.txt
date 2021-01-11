@@ -47,6 +47,9 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.1.33
+------
+
 1.1.32
 ------
     - Arjuna acts as a pytest plugin for the purpose of test execution.
