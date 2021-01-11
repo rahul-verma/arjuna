@@ -37,7 +37,7 @@ class ProjectParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-p', '--project-root-dir', metavar="test_project_root_dir", dest="project.root.dir", type=project_dir, help = 'Valid absolute path of an existing Arjuna test project. Needed with python -m arjuna call only. With python arjuna_launcher.py you can skip this argument as the script determines its container Arjuna test project automatically.')
+        self.parser.add_argument('--project', metavar="test_project_root_dir", dest="project.root.dir", type=project_dir, help = 'Valid absolute path of an existing Arjuna test project. Needed with python -m arjuna call only. With python arjuna_launcher.py you can skip this argument as the script determines its container Arjuna test project automatically.')
 
     def process(self, arg_dict):
         if arg_dict['project.root.dir'] is None:
@@ -49,7 +49,7 @@ class NewProjectParser(Parser):
     def __init__(self):
         super().__init__()
         self.parser = argparse.ArgumentParser(add_help=False)
-        self.parser.add_argument('-p', '--project-root-dir', metavar="test_project_root_dir", dest="project.root.dir", type=new_project_dir, help = 'Absolute non-existing Project root directory. Last part of directory represents project name. Name of project should be an Alnum 3-30 length with only lower case letters.')
+        self.parser.add_argument('--project', metavar="test_project_root_dir", dest="project.root.dir", type=new_project_dir, help = 'Absolute non-existing Project root directory. Last part of directory represents project name. Name of project should be an Alnum 3-30 length with only lower case letters.')
 
     def process(self, arg_dict):
         if arg_dict['project.root.dir'] is None:

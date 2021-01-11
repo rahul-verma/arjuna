@@ -1,5 +1,7 @@
 .. _logging:
 
+**Logging**
+===========
 
 Introduction
 ------------
@@ -52,8 +54,8 @@ You can use it in your test project with a similar goal by using :py:func:`log_t
 
 You can change Arjuna's logging level defaults using the following commands in command line:
 
-    * **-dl** / **--display-level**: Set level for console logging.
-    * **-ll** / **--log-level**: Set level for file logging (arjuna.log)
+    * **--display-level**: Set level for console logging.
+    * **--logger-level**: Set level for file logging (arjuna.log)
 
 **Contextual Logging**
 ----------------------

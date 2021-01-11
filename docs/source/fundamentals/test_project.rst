@@ -1,7 +1,7 @@
 .. _test_project:
 
-Arjuna Test Project
-===================
+Arjuna **Test Project**
+=======================
 
 A fixed project structure has to be followed for an Arjuna test project. This brings consitency across mutliple test automation implementations within and outside your organization.
 
@@ -16,7 +16,7 @@ It is a simple to run command. For example:
 
 .. code-block:: bash
 
-   python -m arjuna create-project -p /path/to/proj_name
+   python -m arjuna create-project --project /path/to/proj_name
 
 This command creates a test project with name **proj_name** at the path provided. **proj_name** must be a valid Arjuna name.
 

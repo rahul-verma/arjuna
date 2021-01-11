@@ -92,7 +92,7 @@ _ARJUNA_CLI_ARGS = {
 
     'log.file.level': ('--logger-level', {
         "dest":'log.file.level', 
-        # "type":ustr, 
+        "type":ustr, 
         "choices":[i for i in LoggingLevel.__members__],
         "help":"Minimum message level for log file. (choose from 'DEBUG', 'INFO', 'WARN', 'ERROR', 'FATAL')", 
         # "default":LoggingLevel.DEBUG.name
@@ -251,7 +251,7 @@ def _add_pytest_addl_args(args):
     if platform.system().casefold() == "Windows".casefold() :
         platform_args = ["--capture", "no"]
     else:
-        platform_args = ["--no-print-logs", "--show-capture", "all"]
+        platform_args = ["--show-capture", "all", "--no-print-logs"]
     args.extend(platform_args)
     CONVERTED_ARGS.extend(platform_args)    
 
@@ -473,6 +473,8 @@ def pytest_configure(config):
     if gname == "mgroup":
         group = TestGroup.from_pickers(rconf_name=config.getoption("ref.conf"), rules=rule_dict)
     else:
+        if rule_dict:
+            raise Exception("When you provide a group name, you can provide test selectors/rules in Command line. You have provided group name as >>{}<< and also provided selectors/rules: {}".format(gname, {k:v for k,v in rule_dict.items() if v}))
         group = TestGroup.from_def(gname, rconf_name=config.getoption("ref.conf"))
 
     _configure_pytest_reports(config)

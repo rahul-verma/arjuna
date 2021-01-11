@@ -1,7 +1,7 @@
 .. _installation:
 
-Installing Arjuna
-=================
+**Installing** Arjuna
+=====================
 
 1. Download and install latest Python (3.5+) from https://python.org
     * If you are insterested to learn python Following are links for tutorials and docs.

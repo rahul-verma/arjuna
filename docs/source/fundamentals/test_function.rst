@@ -1,14 +1,17 @@
 .. _test_function:
 
 
+**Basics** of Writing **Automated Tests** in Arjuna
+===================================================
+
 Tests are **Test Functions**
-============================
+----------------------------
 
 Writing a basic test in Arjuna is very easy. Following is a simple test skeleton:
 
 
 Basic Usage of **@test Decorator**
-==================================
+----------------------------------
 
 .. code-block:: python
 
@@ -25,11 +28,10 @@ Basic Usage of **@test Decorator**
 
 
 **Running** a Specific Test Function
-====================================
-
-You can run this test by running **arjuna** module or running **arjuna_launcher.py** script:
+------------------------------------
 
 .. code-block:: bash
 
-    python -m arjuna run-selected -p path/to-proj_name -it check_test_name
-    python arjuna_launcher.py run-selected -it check_test_name
+    pytest -p arjuna --project path/to-proj_name --itest check_test_name
+
+To learn more about other options for controlling which tests are run, refer :ref:`cli_testselect`

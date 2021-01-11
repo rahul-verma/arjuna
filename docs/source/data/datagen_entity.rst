@@ -1,5 +1,7 @@
 .. _datagen_entity:
 
+**Data Generation and Data Entities**
+=====================================
 
 **Random Data** Generation
 --------------------------

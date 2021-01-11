@@ -1,5 +1,8 @@
 .. _data_ref:
 
+**Data References**
+===================
+
 Purpose
 -------
 
@@ -26,7 +29,7 @@ You place such files in **<Project Root>/data/reference/contextual** directory.
 
 A reference file can be found **arjex** project.
 
-.. image:: _static/context_excel_ref.png
+.. image:: ../_static/context_excel_ref.png
 
 The context of data is represented by columns. Here Account Type's values -  **Bronze**, **Silver** and **Gold** represent the contexts, for which the **User** and **Pwd** values are different.
 
@@ -111,7 +114,7 @@ You place such files in **<Project Root>/data/reference/indexed** directory.
 
 A reference file can be found **arjex** project.
 
-.. image:: _static/inputxls.png
+.. image:: ../_static/inputxls.png
 
 Each row is mapped to the heading strings in the first row. Indexing starts at 0 and from the first data row.
 

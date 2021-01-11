@@ -1,5 +1,7 @@
 .. _text_parsing:
 
+**Parsing Text, JSON, YAML, XML, HTML Files and Strings**
+=========================================================
 
 Introduction
 ------------

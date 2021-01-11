@@ -1,7 +1,10 @@
 .. _configuration:
 
-Understanding Configuration System of Arjuna
---------------------------------------------
+**Handling Configuration Options**
+==================================
+
+Understanding **Configuration System** of Arjuna
+------------------------------------------------
 
 Arjuna has possibly the most advanced configuration system amongst any test frameworks or tools that you will come across.
 
@@ -227,6 +230,8 @@ Arjuna has a well defined control over which options can be overriden in which t
 
 Refer :py:class:`ArjunaOption Enum <arjuna.tpi.constant.ArjunaOption>` for purpose of each option.
 
+.. _coded_override:
+
 Options Overridable in a **Coded Configuration**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -257,6 +262,8 @@ When you create a configuration using :py:class:`ConfigBuilder<arjuna.tpi.config
 	* APPIUM_AUTO_LAUNCH
 	* IMG_COMP_MIN_SCORE
 
+.. _ref_override:
+
 Options Overridable in a **Reference Configuration**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -267,7 +274,7 @@ A reference configuration is defined in any of the following manner and combinat
     * Entry in envs.yaml
     * Configuration created via Arjuna's **register_ref_confs** hook in arjuna_config.py
 
-A reference configuration can override what can be overriden in a coded configuration. In addition, you can also override the following:
+A reference configuration can override what can be overriden in a coded configuration (refer :ref:`coded_override`). In addition, you can also override the following:
 
 	* LOG_ALLOWED_CONTEXTS
 	* REPORT_SCREENSHOTS_ALWAYS
@@ -276,14 +283,15 @@ A reference configuration can override what can be overriden in a coded configur
 	* L10N_STRICT
 	* BROWSER_NETWORK_RECORDER_ENABLED
 
+.. _cli_overridable:
+
 Options Overridable via **Command Line**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Via command line's **--ao** switch, you can override Arjuna options across every configuration created by Arjuna.
 
-You can override options that you can override in a Reference configuration (and hence a coded configuration too). In addition, you can override the following:
+You can override options that you can override in a Reference configuration (refer :ref:`ref_override`) as well as in a coded configuration (refer :ref:`coded_override`). In addition, you can override the following:
 
-	* RUN_SESSION_NAME
 	* LOG_FILE_LEVEL
 	* LOG_CONSOLE_LEVEL
 	* REPORT_FORMATS

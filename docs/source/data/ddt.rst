@@ -1,5 +1,8 @@
 .. _ddt:
 
+**Data Driven Testing** with Arjuna
+===================================
+
 Purpose
 -------
 
@@ -141,7 +144,7 @@ Driving with Excel File
 
 An excel data file (.xls file) can contain data in following format. (.xlsx files are NOT supported as of now)
 
-.. image:: _static/inputxls.png
+.. image:: ../_static/inputxls.png
 
 .. code-block:: python
 

@@ -8,6 +8,7 @@ This section lists and answers frequently asked questions about usage of Arjuna.
 
 Although some information might be repeated from elsewhere, it extends the overall documentation coverage by providing new, additional insights and pointers.
 
+.. _link_project:
 
 Can I Make an Arjuna Test Project depend on another Arjuna Test Project?
 ------------------------------------------------------------------------
@@ -32,8 +33,8 @@ For example, let's consider the following directory structre:
 In the above case **deps.dir** can be passed as **../../root**.
 
 
-Method 2 (Advanced): **-l**/**--link-project** CLI Option
-=========================================================
+Method 2 (Advanced): **--link** CLI Option
+==========================================
 
 In an Arjuna test project, you typically define many externalized files like configurations, data files, reference files and so on. A simple Python import resolution like Method 1 can not automatically make these available to dependent project. You will need to write quite a bit of complex code to achieve this.
 
@@ -83,84 +84,6 @@ In the above case, merging/overriding order is as follows:
     * parent project overrides linked3, linked2 and linked1
 
 Pay attention to the order of multiple **--link** switches as it determines the overriding order.
-
-
-How Do I Use Custom Test Selection Rules?
------------------------------------------
-
-Arjuna defines an advanced grammar for selection of tests with its :ref:`selection_rules` (the linked page describes the rules grammar in detail.)
-
-You can supply one or more selection rules in command line or write them in a group definition.
-
-Command-Line
-============
-
-When you use :ref:`run_selected`, you can provide the following switches to provide rules:
-    * **--irule**
-    * **--erule**
-
-Any number of the above switches can be provided. Following are some examples:
-
-
-:ref:`boolean_pattern_rule` Example
-
-    .. code-block:: text
-
-        --irule unstable --irule "not reviewed"
-
-
-:ref:`iterable_pattern_rule` Example
-
-    .. code-block:: text
-
-        --irule "with tags a,b" --irule "without tags x,y"
-
-
-:ref:`test_attr_rule` Example
-
-    .. code-block:: text
-
-        --irule "author is Rahul" --irule "priority < 3"
-
-
-Group Definition in **groups.yaml**
-===================================
-
-You can also add rules to the group definition in **groups.yaml**. 
-
-Any number of such rules can be added.
-
-Following are some examples where **sample_group** is the group name.
-
-:ref:`boolean_pattern_rule` Example
-
-    .. code-block:: yaml
-
-        sample_group:
-            irule:
-                - "unstable"
-                - "not reviewed"
-
-
-:ref:`iterable_pattern_rule` Example
-
-    .. code-block:: yaml
-
-        sample_group:
-            irule:
-                - "with tags slow"
-                - "without tags x,y"
-
-
-:ref:`test_attr_rule` Example
-
-    .. code-block:: yaml
-
-        sample_group:
-            irule:
-                - "author is Rahul"
-                - "priority < 3"
-
 
 Can I Maintain **Local Configuration (.local) Files** That Override the Default Configuration Files?
 ----------------------------------------------------------------------------------------------------

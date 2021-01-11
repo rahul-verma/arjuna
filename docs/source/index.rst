@@ -10,15 +10,15 @@ Welcome to Arjuna - The Framework for Professional Coded Testing
 .. image:: _static/Arjuna.png
     :align: center
 
-Arjuna is a Python based test automation framework developed by `Rahul Verma <http://www.rahulverma.net>`_. 
+Arjuna is a **Python based test automation framework** developed by `Rahul Verma <http://www.rahulverma.net>`_. 
 
-It is an open source, Apache Licensed software: `Arjuna on GitHub <https://github.com/rahul-verma/arjuna>`_.
+It is an **open source, Apache Licensed** software: `Arjuna on GitHub <https://github.com/rahul-verma/arjuna>`_.
 
 Rahul has implemented smaller variants of features in Arjuna across frameworks and organizations, or given advice around it. However Arjuna being a generic library has the most complete implementation of his ideas, away from project specific contexts and constraints.
 
-For test execution, Arjuna is implemented as a pytest plugin and provides its own markup over `pytest <https://docs.pytest.org/en/latest/>`_ as its underlying test engine. If you like, you can make use of Arjuna with any other test engine or custom frameworks as well.
+For test execution, Arjuna is implemented as a `pytest <https://docs.pytest.org/en/latest/>`_  plugin and provides its own markup over pytest as its underlying test engine. If you like, you can make use of Arjuna with any other test engine or custom frameworks as well.
 
-You'd need Python 3.8+ to make use of Arjuna.
+You'd need **Python 3.8+** to make use of Arjuna.
 
 Note: On Linux, the built-in Python3 build has issues with the Python's built-in enum module which is heavily used in Arjuna. One alternative is to install ActiveState Python on linux. Advanced users can go for installing a custom Python build.
 
@@ -28,131 +28,29 @@ You can find a lot of example code for using Arjuna in `Arjex project on GitHub 
 Tester's Guide
 **************
 
-Fundamentals
-============
+
+Arjuna Fundamentals
+===================
 
 .. toctree::
-   :maxdepth: 6
+   :maxdepth: 2
 
-   installation
-   test_project
-   test_function
+   fundamentals/index
 
-
-Provisions in **@test** Decorator
+Handling Data and Files in Arjuna
 =================================
 
 .. toctree::
-   :maxdepth: 6
+   :maxdepth: 2
 
-   test_function_adv
-
-Arjuna's Command Line Interface as pytest plugin
-================================================
-
-.. toctree::
-   :maxdepth: 6
-
-   cli
-
-
-Handling Test Resources
-=======================
-
-.. toctree::
-   :maxdepth: 6
-
-   resources
-
-Handling Configuration Options
-==============================
-
-.. toctree::
-   :maxdepth: 6
-
-   configuration
-
-Data Driven Testing with Arjuna
-===============================
-
-.. toctree::
-   :maxdepth: 6
-
-   ddt
-
-
-Test Selection Rules
-====================
-
-.. toctree::
-   :maxdepth: 6
-
-   selection_rules
-
-
-Test Sessions, Stages, Groups
-=============================
-
-.. toctree::
-   :maxdepth: 6
-
-   sessions_stages_groups
-
-Data Spaces - Shareable Data Objects for Tests
-==============================================
-
-.. toctree::
-   :maxdepth: 6
-
-   test_spaces
-
-Data Generation and Data Entities
-=================================
-
-.. toctree::
-   :maxdepth: 6
-
-   datagen_entity
-
-Data References
-===============
-
-.. toctree::
-   :maxdepth: 6
-
-   data_ref
-
-Localization
-============
-
-.. toctree::
-   :maxdepth: 6
-
-   l10n
-
-Logging
-=======
-
-.. toctree::
-   :maxdepth: 6
-
-   logging
-
-
-Test Reporting
-==============
-
-.. toctree::
-   :maxdepth: 6
-
-   reporting
+   data/index
 
 
 Web GUI Automation
 ==================
 
 .. toctree::
-   :maxdepth: 6
+   :maxdepth: 2
 
    guiauto/index
 
@@ -161,17 +59,10 @@ HTTP Automation
 ===============
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 2
 
    httpauto
 
-Parsing Text, JSON, YAML, XML, HTML Files and Strings
-=====================================================
-
-.. toctree::
-   :maxdepth: 4
-
-   textparsing
 
 Notes About Python Libraries and Tools Used in Arjuna
 =====================================================
@@ -185,7 +76,7 @@ Frequently Asked Questions (FAQs)
 =================================
 
 .. toctree::
-   :maxdepth: 4
+   :maxdepth: 1
 
    faq
 

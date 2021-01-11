@@ -1,7 +1,10 @@
 .. _test_spaces:
 
+**Data Spaces - Shareable Data Objects for Tests**
+==================================================
+
 **Need for Spaces in Test Automation**
-======================================
+--------------------------------------
 
 Test resources are in general a great way for setting up pre-reqiusities and providing required resources to tests.
 
@@ -11,14 +14,14 @@ However, there are circumstances where you need to create and share data among t
     * You want to maintain a data structure that contains consumable data.
 
 **Types** of Spaces
-===================
+-------------------
 
 The space object is accesed using the **request** object that is passed to every test resource function as well as test function in Arjuna.
 
 There are three types of test spaces that are provided to you:
 
 **Group Space**
----------------
+^^^^^^^^^^^^^^^
 
 Within a **@for_group** test resource function, the following Python code refers to Group space:
 
@@ -38,7 +41,7 @@ In other test resource functions or test functions, it must be explictly accesse
     request.group.space
 
 **Module Space**
-----------------
+^^^^^^^^^^^^^^^^
 
 Within a **@for_module** test resource function, the following Python code refers to Module space:
 
@@ -62,7 +65,7 @@ In other test resource functions or test functions, it must be explictly accesse
     Module space is not accessible from a group resource function as it is at a lower level than group.
 
 **Test Space**
---------------
+^^^^^^^^^^^^^^
 
 Within a **@for_test** test resource function or a test function, the following Python code refers to Test space:
 
@@ -75,7 +78,7 @@ Within a **@for_test** test resource function or a test function, the following 
     Test space is not accessible anywhere else as it is the lowest space level.
 
 **Defining and Utilizing Objects in Spaces**
-============================================
+--------------------------------------------
 
 Declaring and accessing an object in any space is done as if you are dealing with a defined attribute of an object:
 
@@ -95,12 +98,11 @@ Declaring and accessing an object in any space is done as if you are dealing wit
     del request.space.obj_name[5]
 
 **Test Space**
---------------
+^^^^^^^^^^^^^^
 
 This is the simplest to understand space and you will mostly utilize it to create objects in **@for_test** test resource functions which can then be used by test functions.
 
-Definition
-^^^^^^^^^^
+**Definition**
 
 .. code-block:: python
 
@@ -110,8 +112,7 @@ Definition
         request.space.mutable = {1:2, 3:4}
         yield
 
-Access in Test Function
-^^^^^^^^^^^^^^^^^^^^^^^
+**Access in Test Function**
 
 .. code-block:: python
 
@@ -120,8 +121,7 @@ Access in Test Function
         assert request.space.immutable == "testing"
         assert request.space.mutable[3] == 4
 
-Access in **@for_test** Resource Function
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Access in @for_test Resource Function**
 
 .. code-block:: python
 
@@ -132,7 +132,6 @@ Access in **@for_test** Resource Function
         yield
 
 **Test Space is NOT Shared Among Tests**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Test Space is unique to a test and is not shareable. 
 
@@ -156,8 +155,7 @@ However, if you expect these changes to reflect in next test(s) in the run seque
         assert request.space.immutable == "changed" # Fails
         assert request.space.mutable[5] == 6 # Will Fail if above is commented.
 
-**Modifying** Space Objects in **Multiple Test Resources** for a Test
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Modifying Space Objects in **Multiple Test Resources** for a Test**
 
 When you use multiple test resource functions for a given test, then its space is defined by all definitions and modifications done by these resource functions.
 
@@ -198,12 +196,11 @@ Same is true if you are using the resource functions as a chain:
         assert request.space.something == "changed"
 
 **Module Space**
-----------------
+^^^^^^^^^^^^^^^^
 
 The workings of Module space are similar to those of test space.
 
-Definition
-^^^^^^^^^^
+**Definition**
 
 .. code-block:: python
 
@@ -214,7 +211,6 @@ Definition
         yield
 
 **Accessing Module Space in Test Function (Explicit)**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -223,8 +219,7 @@ Definition
         assert request.module.space.immutable == "testing"
         assert request.module.space.mutable[3] == 4
 
-**Cross-Space Lookup** in Arjuna (**Test -> Module**)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Cross-Space Lookup in Arjuna (Test -> Module)**
 
 If the named object that you want to find does not exist in Test Space, Arjuna automatically looks for it in Module Space and then in Group Space.
 
@@ -247,7 +242,6 @@ it triggers the automatic lookup of Arjuna across spaces.
 See the following section for this implicit lookup.
 
 **Accessing Module Space in Test Function (Implicit)**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -259,8 +253,7 @@ See the following section for this implicit lookup.
 
 The above code works as Arjuna after not finding these objects in Test Space will automatically look for them in Module Space.
 
-Access in **@for_module** and **@for_test** Resource Functions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Access in @for_module and @for_test Resource Functions**
 
 The Module Space can be accessed in other module level as well as test resource functions:
 
@@ -281,7 +274,6 @@ The Module Space can be accessed in other module level as well as test resource 
         yield
 
 **Module Space is Shared Among Tests in SAME Module**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Unlike the Test Space, Module Space is shared among tests in a module.
 
@@ -303,7 +295,6 @@ It means modifications done by one test are seen by another:
         assert request.space.mutable[5] == 6
 
 **Creating and Sharing Data From Within Tests in a Module**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As the Module Space is shared among tests, you can create new objects in this space in a test function as well. These can then be accessed and/or modified in subsequent tests in the module.
 
@@ -330,12 +321,11 @@ In the following code **created_id** is defined in first test function and then 
 
 
 **Group Space**
----------------
+^^^^^^^^^^^^^^^
 
 The workings of Group space are similar to those of module space.
 
-Definition
-^^^^^^^^^^
+**Definition**
 
 .. code-block:: python
 
@@ -346,7 +336,6 @@ Definition
         yield
 
 **Accessing Group Space in Test Function (Explicit)**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -355,8 +344,7 @@ Definition
         assert request.group.space.immutable == "testing"
         assert request.group.space.mutable[3] == 4
 
-**Cross-Space Lookup** in Arjuna (**Test -> Module -> Group**)
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Cross-Space Lookup** in Arjuna (Test -> Module -> Group)**
 
 If the named object that you want to find does not exist in Test Space, Arjuna automatically looks for it in Module Space and then in Group Space.
 
@@ -379,7 +367,6 @@ it triggers the automatic lookup of Arjuna across spaces.
 See the following section for this implicit lookup.
 
 **Accessing Group Space in Test Function (Implicit)**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -391,8 +378,7 @@ See the following section for this implicit lookup.
 
 The above code works as Arjuna after not finding these objects in Test Space will automatically look for them in Group Space.
 
-Access in **@for_group**, **@for_module** and **@for_test** Resource Functions
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+**Access in @for_group, @for_module and @for_test Resource Functions**
 
 The Group Space can be accessed in all other resource functions:
 
@@ -420,7 +406,6 @@ The Group Space can be accessed in all other resource functions:
         yield
 
 **Group Space is Shared Among Tests Across Modules**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Unlike the Test Space, Group Space is shared among tests.
 
@@ -444,7 +429,6 @@ It means modifications done by one test are seen by another:
         assert request.space.mutable[5] == 6
 
 **Creating and Sharing Data From Within Tests Across Modules**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 As the Group Space is shared among tests across modules, you can create new objects in this space in a test function as well. These can then be accessed and/or modified in subsequent tests in any other module.
 

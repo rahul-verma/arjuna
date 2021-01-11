@@ -1,7 +1,10 @@
 .. _resources:
 
+**Handling Test Resources**
+===========================
+
 What are Test Resources?
-========================
+------------------------
 
 More often than not, a test needs one or more resources. It could be a launched browser, an application in a certain state, a database handle and so on.
 
@@ -11,7 +14,7 @@ In Arjuna you can create resources at various levels and associate them with tes
 
 
 Resource Levels - **@for_group**, **@for_module**, **@for_test**
-================================================================
+----------------------------------------------------------------
 
 A resource is defined as a python function (a generator with a single yield to be precise) in Arjuna:
 
@@ -50,14 +53,14 @@ Following is an example using **@for_test**:
 
 
 **Module-Specific** Resources 
-=============================
+-----------------------------
 
 You can place the resource functions in a test module python file. 
 
 In such a case, these can be used only by the tests present in that module.
 
 **Cross-Module** Shared Resources
-=================================
+---------------------------------
 
 You might want to make resource functions available across your project.
 
@@ -73,7 +76,7 @@ To make use of this feature, you can choose to do one of the following depending
 * For more complex project needs, where the resource creators grow in number, you can convert **resource.py** to a **resource package**. An example of this can be found in the `Arjex project on GitHub <https://github.com/rahul-verma/arjuna/tree/master/arjuna-samples/arjex>`_.
 
 **Data-Driven** Test Resources
-==============================
+------------------------------
 
 You can data-drive a test resource as well just like you data-drive a test.
 
@@ -90,7 +93,7 @@ Within the resource, you can act on data to create a custom resource.
 The data can be acces from request object as **request.data** as a **DataRecord** object.
 
 **Associating a Resource with a Test**
-======================================
+--------------------------------------
 
 To associate a test resource with a test, pass its name as an argument:
 
@@ -107,7 +110,7 @@ Note that if the resource has been created at a higher level already (group/modu
 
 
 Setting a **Resource as a Default**
-===================================
+-----------------------------------
 
 You might-want to auto-create a resource i.e. make it a default at a certain level. When this is done, you don't need to pass the resource creator name as an argument to a test function.
 

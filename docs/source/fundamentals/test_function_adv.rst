@@ -1,8 +1,10 @@
 .. _test_function_adv:
 
+Provisions in **@test** Decorator
+=================================
 
 **Skipping** a Test
-===================
+-------------------
 
 You can mark a test as skipped:
 
@@ -27,7 +29,7 @@ You can also do a conditional skipping:
 
 
 Handling **Expected Failures** in Tests
-=======================================
+---------------------------------------
 
 You can mark a test as a test which is expected to fail:
 
@@ -54,7 +56,7 @@ Such a test is reported as XFailed. If it passes, it is reported as XPassed.
 
 
 Specifying **Built-in Test Attributes**
-=======================================
+---------------------------------------
 
 Arjuna tests have many built-in attributes, which can be specified as an argument in **@test**, for example:
 
@@ -85,7 +87,7 @@ Following is the complete list:
     * **qual_name**: Full qualified name of this test function **<package>.<module>.<function>**
 
 **User-Defined Test Attributes**
-================================
+--------------------------------
 
 You can define any number of your own attributes for a test:
 
@@ -100,7 +102,7 @@ You can define any number of your own attributes for a test:
 
 
 Specifying **Tags, Bugs, Environments**
-=======================================
+---------------------------------------
 
 Arjuna tests have built-in tag containers (sets), which can be specified as an argument in **@test**, for example:
 
