@@ -22,7 +22,7 @@ For simple dependency, where you just want to use the library from another Arjun
 
 For example let's say "parent" project depends on "child" and "child" is contained in the **/abc/def/root/child** location. Then:
     * You can set **deps.dir = /abc/def/root** in **project.yaml**
-    * You can as well pass **--ao deps.dir /abc/def/root** in the command line.
+    * You can as well pass ``--ao deps.dir /abc/def/root`` in the command line.
 
 The path can also be a relative path. Arjuna will consider it relative to the root of parent Arjuna project.
 
@@ -33,14 +33,14 @@ For example, let's consider the following directory structre:
 In the above case **deps.dir** can be passed as **../../root**.
 
 
-Method 2 (Advanced): **--link** CLI Option
+Method 2 (Advanced): ``--link`` CLI Option
 ==========================================
 
 In an Arjuna test project, you typically define many externalized files like configurations, data files, reference files and so on. A simple Python import resolution like Method 1 can not automatically make these available to dependent project. You will need to write quite a bit of complex code to achieve this.
 
 Arjuna provides a feature to make an Arjuna test project linked to one or more other Arjuna test projects and automatically makes their artifacts available to the top project.
 
-To achieve this, you can pass **--link** CLI option.
+To achieve this, you can pass ``--link`` CLI option.
 
 For example to link to "linked1" project present at **/abc/def/root/linked**:
 
@@ -51,13 +51,13 @@ For example to link to "linked1" project present at **/abc/def/root/linked**:
 The path can also be a relative path. Arjuna will consider it relative to the root of parent Arjuna project.
 
 For example, let's consider the following directory structre:
-    * Child project: /abc/def/root/linked
+    * Linked project: /abc/def/root/linked
     * Parent project: /abc/def/xyz/parent
 
-In the above case **deps.dir** can be passed as **../../root/linked**.
+In the above case Linked project path can be passed as **../../root/linked**.
 
 With this linking, following will happen automatically:
-    * Confiugurations
+    * Configurations
         * project.yaml gets merged.
         * All data confiturations in data.yaml get merged. 
         * All environment configurations in envs.yaml get merged.
@@ -83,7 +83,7 @@ In the above case, merging/overriding order is as follows:
     * linked3 overrides linked2 and linked1
     * parent project overrides linked3, linked2 and linked1
 
-Pay attention to the order of multiple **--link** switches as it determines the overriding order.
+Pay attention to the order of multiple ``--link`` switches as it determines the overriding order.
 
 Can I Maintain **Local Configuration (.local) Files** That Override the Default Configuration Files?
 ----------------------------------------------------------------------------------------------------

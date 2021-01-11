@@ -71,7 +71,7 @@ You can set one or more contexts (strings) to log messages.
 
 A log message with a context(s) set for it does not get logged by default in Arjuna. It is only logged when **ArjunaOption.LOG_ALLOWED_CONTEXTS** has been accordingly set to include the context string. This can be done by any of the following means:
 
-    * Passing **--ao LOG_ALLOWED_CONTEXTS <comma separated context strings>** to the command line.
+    * Passing ``--ao LOG_ALLOWED_CONTEXTS <comma separated context strings>`` to the command line.
     * Overrding LOG_ALLOWED_CONTEXTS in the reference configuration.
 
 Note: Log messages without contexts set for them will work as usual and are not impacted by the **LOG_ALLOWED_CONTEXTS** option.

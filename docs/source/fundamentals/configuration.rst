@@ -44,11 +44,11 @@ You can instruct Arjuna to use any of the following Configuration objects to be 
 
 There are various places to pass on this instruction:
     * Test Run:
-        - **--rconf** command line switch. 
+        - ``--rconf`` command line switch. 
         - This becomes reference configuration for this test run, current test session, all stages and groups in the session, unless overriden in their YAML definition.
     * Test Group definition:
         - **conf** attribute in YAML. This becomes reference configuration for this group and all test modules and test functions, unless programmatically overriden.
-        - This value is overriden by command line option "--rconf" if provided.   
+        - This value is overriden by command line option ``--rconf`` if provided.   
 
 All calls to the reference configuration are replaced with the configuration object that you attached. This means that this configuration becomes the reference configuration.
 
@@ -288,7 +288,7 @@ A reference configuration can override what can be overriden in a coded configur
 Options Overridable via **Command Line**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Via command line's **--ao** switch, you can override Arjuna options across every configuration created by Arjuna.
+Via command line's ``--ao`` switch, you can override Arjuna options across every configuration created by Arjuna.
 
 You can override options that you can override in a Reference configuration (refer :ref:`ref_override`) as well as in a coded configuration (refer :ref:`coded_override`). In addition, you can override the following:
 

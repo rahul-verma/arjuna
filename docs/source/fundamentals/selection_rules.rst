@@ -123,8 +123,8 @@ You can supply one or more selection rules in command line or write them in a gr
 ^^^^^^^^^^^^^^^^
 
 In CLI, you can provide the following switches to provide rules:
-    * **--irule**
-    * **--erule**
+    * ``--irule``
+    * ``--erule``
 
 Any number of the above switches can be provided. Following are some examples:
 
