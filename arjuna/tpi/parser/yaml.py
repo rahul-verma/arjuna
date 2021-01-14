@@ -28,6 +28,14 @@ from json import JSONEncoder
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.core.error import YamlError, YamlUndefinedSectionError, YamlListIndexError
 
+# Custom tag handlers
+def join_tag(loader, node):
+    seq = loader.construct_sequence(node)
+    return ''.join([str(i) for i in seq])
+
+# register tag handlers
+yaml.add_constructor('!join', join_tag, Loader=yaml.SafeLoader)
+
 class YamlElement(metaclass=abc.ABCMeta):
     '''
         Abstract Json Element. Base class for YamlList and YamlDict.
@@ -46,7 +54,11 @@ class YamlElement(metaclass=abc.ABCMeta):
         '''
         return yaml.dump(self.__pyobj).replace("_ArDict__store:\n","")
 
-    __str__ = str 
+    __str__ = as_str 
+    
+
+    def __repr__(self):
+        return "Yaml as PyObj: " + str(self.__pyobj)
 
     def _get_item(self, name, *, strict=True, as_yaml_str=False, allow_any=False):
         val = self._get_value(name, strict=strict)

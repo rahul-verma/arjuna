@@ -17,7 +17,6 @@
 
 # The tests are based on tests for jsonpath-rw-ext in https://github.com/wolverdude/GenSON
 
-import yaml
 from arjuna import *
 from arjuna.tpi.parser.yaml import Yaml
 
@@ -70,3 +69,15 @@ def check_list_looping(request):
     yaml_node = Yaml.from_str(test)
     for item in yaml_node:
         print(item, type(item))
+
+
+@test
+def check_join_construct(request):
+    test = '''
+    root: &BASE /path/to/root
+    patha: !join [*BASE, a]
+    pathb: !join [*BASE, b]
+'''
+
+    yaml_node = Yaml.from_str(test)
+    assert yaml_node == {'root': '/path/to/root', 'patha': '/path/to/roota', 'pathb': '/path/to/rootb'}
