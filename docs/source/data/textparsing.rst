@@ -335,6 +335,27 @@ YamlList supports comparision with a YamlList or Python list.
         yaml_list_1 == yaml_list_2
         yaml_list_1 == py_list
 
+Using **!join** construct
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Arjuna provides **!join** construct to easily construct strings by concatenating the provided list. For example:
+
+    .. code-block:: YAML
+
+        root: &BASE /path/to/root
+        patha: !join [*BASE, a]
+        pathb: !join [*BASE, b]
+
+Once loaded this YAML is equivalent to the following Python dictionary:
+
+    .. code-block:: python
+
+        {
+            'root': '/path/to/root', 
+            'pathaa': '/path/to/roota', 
+            'pathb': '/path/to/rootb'
+        }
+
 
 **XML**
 -------

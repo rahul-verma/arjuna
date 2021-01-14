@@ -49,7 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.34
 ------
-
+    - Added !join construct support in YAML files.
 
 1.1.33
 ------
