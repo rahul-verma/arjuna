@@ -58,7 +58,7 @@ setup(
         "requests==2.22.0",
         "lxml==4.4.1",
         "requests-toolbelt==0.9.1", 
-        "selenium==4.0.0a6", 
+        "selenium==4.0.0a7", 
         "webdriver_manager==2.3.0", 
         "xlrd==1.2.0", 
         "xlwt==1.3.0", 
