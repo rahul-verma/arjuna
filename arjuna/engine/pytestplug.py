@@ -231,6 +231,7 @@ def _determine_project_root_dir(args):
     args[:] = [convert_to_absolute(e) for e in args]
     sys.path.append(pytest_root_dir + "/..")
     args.extend(['--rootdir', pytest_root_dir])
+    args.extend(['-c', pytest_root_dir + "/pytest.ini"])
 
     conf_file = os.path.join(pytest_root_dir, "test/conftest.py")
     if os.path.exists(conf_file):
@@ -241,9 +242,9 @@ def _determine_project_root_dir(args):
 
 def _add_pytest_addl_args(args):
     res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
-    pytest_ini_path = res_path + "/pytest.ini"
+    # pytest_ini_path = res_path + "/pytest.ini"
     css_path = res_path + "/arjuna.css"
-    more_args = ["-c", pytest_ini_path, "--disable-warnings", "-rxX", "--css", css_path]
+    more_args = ["--disable-warnings", "-rxX", "--css", css_path, "--log-level", "FATAL"] #"-c", pytest_ini_path, 
     args.extend(more_args)
     CONVERTED_ARGS.extend(more_args)
 
@@ -251,7 +252,7 @@ def _add_pytest_addl_args(args):
     if platform.system().casefold() == "Windows".casefold() :
         platform_args = ["--capture", "no"]
     else:
-        platform_args = ["--show-capture", "all", "--no-print-logs"]
+        platform_args = ["--show-capture", "all"] #, "--no-print-logs"]
     args.extend(platform_args)
     CONVERTED_ARGS.extend(platform_args)    
 
@@ -292,11 +293,21 @@ def _handle_dry_run_option(args):
         args.extend([darg])
         CONVERTED_ARGS.extend([darg]) 
 
-def pytest_cmdline_parse(pluginmanager, args):
+
+# def pytest_cmdline_parse(pluginmanager, args):
+@pytest.hookimpl(tryfirst=True)
+def pytest_load_initial_conftests(early_config, parser, args):
     if '--help' in args or '-h' in args:
         return
     RAW_ARGS.extend([arg.find(" ") == -1 and arg or f'"{arg}"' for arg in args])
     _determine_project_root_dir(args)
+
+    res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
+    # pytest_ini_path = res_path + "/pytest.ini"
+    css_path = res_path + "/arjuna.css"
+    import pathlib
+    # early_config.inifile = pathlib.Path(pytest_ini_path)
+
     _add_pytest_addl_args(args)
     _handle_dry_run_option(args)
     global pytestargs

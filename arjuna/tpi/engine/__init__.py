@@ -212,9 +212,13 @@ except ModuleNotFoundError as e:
             res_import_blocks.append(res_import_block.format(project=proj.name))
         res_import_blocks.append(res_import_block.format(project=self.ref_config.value(ArjunaOption.PROJECT_NAME)))
         contents = contents.format(res_import_block="".join(res_import_blocks))
-        f = open(get_proj_target_path("test/conftest.py"), "w")
-        f.write(contents)
-        f.close()
+
+        if os.path.exists(get_proj_target_path("test")):
+            f = open(get_proj_target_path("test/conftest.py"), "w")
+            f.write(contents)
+            f.close()
+        else:
+            raise Exception("No test directory found in project: {}. Check current directory or --project switch value.".format(self.ref_config.value(ArjunaOption.PROJECT_ROOT_DIR)))
 
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_DIR))
         self.__create_dir_if_doesnot_exist(self.ref_config.value(ArjunaOption.REPORT_XML_DIR))
@@ -557,6 +561,7 @@ class Arjuna:
 
     @classmethod
     def register_test_meta_data(cls, qual_name, test_meta_data):
+        print(qual_name)
         cls.ARJUNA_SINGLETON.register_test_meta_data(qual_name, test_meta_data)
 
     @classmethod

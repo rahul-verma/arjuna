@@ -57,7 +57,7 @@ data.ref.dir: absolute_dir_path
 data.ref.contextual.dir: absolute_dir_path
 data.ref.indexed.dir: absolute_dir_path
 data.file.dir: absolute_dir_path
-temp.dir: absolute_dir_path
+# temp.dir: absolute_dir_path
 
 app.url: web_url
 

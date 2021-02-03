@@ -214,7 +214,7 @@ class AttrPatternRule(Rule):
 
             author is Rahul
     '''
-    __condition_str = "|".join(get_all_symbols()).replace('*=','\*=') #"is|not|eq|=|==|!=|ne|lt|<|le|<=|gt|>|ge|>=|matches|~=|contains|\*="
+    __condition_str = "|".join(get_all_symbols()).replace('*=',r'\*=') #"is|not|eq|=|==|!=|ne|lt|<|le|<=|gt|>|ge|>=|matches|~=|contains|\*="
     __p5_raw = r"^\s*(?P<target>\w+)\s+(?P<condition>({}){{1,1}})\s+(?P<expression>.*?)\s*$".format(__condition_str)
 
     __PATTERN = re.compile(__p5_raw, re.IGNORECASE)

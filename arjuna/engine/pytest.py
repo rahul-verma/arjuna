@@ -238,11 +238,26 @@ class PytestHooks:
         '''
         from arjuna import Arjuna
         from arjuna.core.error import ExclusionRuleMet, NoInclusionRuleMet
+        from arjuna import C
         selector = Arjuna.get_test_selector()
         final_selection = []
         deselected = []
+        qual_names = set()
         for item in pytest_items:
+            # if item.name.split("[")[0] == "test":
+            #     continue
+        
             qual_name = item.nodeid.split('::')[0].replace("/",".").replace('\\',"").replace(".py","") + "." + item.name.split("[")[0]
+            start_index = qual_name.find(C("project.name") + "." + "test")
+            if start_index == -1:
+                if qual_name.startswith("test."):
+                    qual_name = C("project.name") + "." + qual_name                    
+                else:
+                    deselected.append(item)
+                    continue
+            else:
+                qual_name = qual_name[start_index:]
+                
             try:
                 selector.validate(Arjuna.get_test_meta_data(qual_name))
             except (ExclusionRuleMet, NoInclusionRuleMet) as e:

@@ -321,7 +321,7 @@ class EditableConfig:
             project_name = os.path.basename(project_root_dir),
             host_os = cls._OS_MAP[platform.system()],
             run_id = run_id and run_id or "mrun",
-            temp_dir = tempfile.TemporaryDirectory().name,
+            # temp_dir = tempfile.TemporaryDirectory().name,
             validate=False
         )
 

@@ -42,7 +42,7 @@ class Selector:
 
     def __build_rule(self, rule_str):
         pattern = None
-        rule_str = rule_str.replace('\!', '!') # From command line ! has to be escaped
+        rule_str = rule_str.replace(r'\!', '!') # From command line ! has to be escaped
         try:
             return BoolAttrPatternRule.from_str(rule_str)
         except RulePatternDoesNotMatchError:
