@@ -3,6 +3,7 @@ import os
 import pytest
 import threading
 import platform
+import pkg_resources
 
 from arjuna.engine.pytest import PytestHooks
 
@@ -172,6 +173,11 @@ _ARJUNA_CLI_ARGS = {
 }
 
 def pytest_addoption(parser):
+    from arjuna.tpi.parser.text import _TextResource
+    reader = _TextResource("header.txt")
+    print(reader.read().format(version=pkg_resources.require("arjuna")[0].version))
+    reader.close()
+    
     group = parser.getgroup("arjuna", "Arjuna Test Automation Framework")
     for k,v in _ARJUNA_CLI_ARGS.items():
         group.addoption(v[0], **v[1])
@@ -297,6 +303,7 @@ def _handle_dry_run_option(args):
 # def pytest_cmdline_parse(pluginmanager, args):
 @pytest.hookimpl(tryfirst=True)
 def pytest_load_initial_conftests(early_config, parser, args):
+
     if '--help' in args or '-h' in args:
         return
     RAW_ARGS.extend([arg.find(" ") == -1 and arg or f'"{arg}"' for arg in args])

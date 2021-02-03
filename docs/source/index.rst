@@ -325,7 +325,7 @@ with the help of patches submitted by `these contributors <https://github.com/ra
 Copyright and License
 *********************
 
-Copyright 2015-2020 Rahul Verma
+Copyright 2015-2021 Rahul Verma
 
 Licensed under the Apache License, Version 2.0 (the “License”); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 

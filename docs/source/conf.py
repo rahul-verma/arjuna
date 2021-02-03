@@ -25,7 +25,7 @@ import pallets_sphinx_themes
 # -- Project information -----------------------------------------------------
 
 project = 'Arjuna'
-copyright = '2015-2020, Rahul Verma'
+copyright = '2015-2021, Rahul Verma'
 author = 'Rahul Verma'
 
 # The full version, including alpha/beta/rc tags
