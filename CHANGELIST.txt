@@ -50,6 +50,8 @@ Future Themes (In-Progress or Planned):
 1.1.34
 ------
     - Added !join construct support in YAML files.
+    - Upgraded pytest and selenium versions. 
+    - Arjuna now needs Python 3.8+
 
 1.1.33
 ------
