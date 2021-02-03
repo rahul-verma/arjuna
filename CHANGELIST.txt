@@ -49,6 +49,8 @@ Future Themes (In-Progress or Planned):
 
 1.1.35
 ------
+    - Arjuna header is shown when any command is executed.
+    - Updated copyright info.
 
 1.1.34
 ------
