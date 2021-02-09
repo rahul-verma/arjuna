@@ -15,13 +15,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from commons import *
 from arjuna import *
 
-init_arjuna()
-wordpress = login()
+@test
+def check_assert_approx_pass(request):
+    request.asserter.assert_approx_equal(4.4555, 4.4566, "Mismtatch", places=2)
 
-wordpress.ui.execute_javascript("document.getElementsByClassName('welcome-view-site')[0].click();")
-wordpress.ui.element(With.link_text("Site Admin")).wait_until_clickable()
+@test
+def check_assert_approx_fail(request):
+    request.asserter.assert_approx_equal(4.4555, 4.4566, "Mismtatch", places=3)
 
-logout(wordpress)
+@test
+def check_assert_approx_pass_delta(request):
+    request.asserter.assert_approx_equal(4.4555, 4.4566, "Mismtatch", delta=0.002)
+
+@test
+def check_assert_approx_fail_delta(request):
+    request.asserter.assert_approx_equal(4.4555, 4.4566, "Mismtatch", delta=0.0001)
+
+
+

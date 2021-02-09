@@ -45,6 +45,115 @@ class Asserter:
         '''
         self.__asserter.assertEqual(obj1, obj2, msg)
 
+    def assert_approx_equal(self, obj1, obj2, msg, places=None, delta=None):
+        '''
+            Assert round(obj1-obj2, places) == 0 # If places is supplied
+            Assert round(obj1-obj2, places) == delta # If delta is supplied
+
+            Wrapper on unittest's assertAlmostEqual
+
+            Args:
+                obj1: Object of any type which supports == operator for obj2 type
+                obj2: Object meeting the above constraint
+                msg: A context string explaining why this assertion was done.
+                places: Number of decimal places used for rounding
+                delta: The difference between objects after rounding (diff <= delta for passing assertion)
+
+            Note:
+                You can specify either places or delta not both.
+
+            Note:
+                This method rounds the values to the given number of decimal places (i.e. like the Python's round() function) and not significant digits.
+        '''
+        if places is not None and delta is not None:
+            raise TypeError("Specify delta or places not both.")
+        elif places is None and delta is None:
+            self.__asserter.assertAlmostEqual(obj1, obj2, msg=msg)
+        elif places is None:
+            self.__asserter.assertAlmostEqual(obj1, obj2, msg=msg, delta=delta)
+        else:
+            self.__asserter.assertAlmostEqual(obj1, obj2, msg=msg, places=places)
+
+    def assert_approx_not_equal(self, obj1, obj2, msg, places=7, delta=None):
+        '''
+            Assert round(obj1-obj2, places) != 0 # If places is supplied
+            Assert round(obj1-obj2, places) == delta # If delta is supplied
+
+            Wrapper on unittest's assertAlmostEqual
+
+            Args:
+                obj1: Object of any type which supports == operator for obj2 type
+                obj2: Object meeting the above constraint
+                msg: A context string explaining why this assertion was done.
+                places: Number of decimal places used for rounding
+                delta: The allowed difference between objects after rounding (diff >= delta for passing assertion)
+
+            Note:
+                You can specify either places or delta not both.
+
+            Note:
+                This method rounds the values to the given number of decimal places (i.e. like the Python's round() function) and not significant digits.
+        '''
+
+        if places is not None and delta is not None:
+            raise TypeError("Specify delta or places not both.")
+        elif places is None and delta is None:
+            self.__asserter.assertNotAlmostEqual(obj1, obj2, msg=msg)
+        elif places is None:
+            self.__asserter.assertNotAlmostEqual(obj1, obj2, msg=msg, delta=delta)
+        else:
+            self.__asserter.assertNotAlmostEqual(obj1, obj2, msg=msg, places=places)
+
+    def assert_exceptions(self, exceptions, callable=None, *cargs, regex=None, **ckwargs):
+        '''
+            Asserts that one of the provided exception is raised when the provided callable is called with provided arguments/
+
+            Wrapper on unittest's assertAlmostEqual
+
+            Args:
+                exceptions: One or more Exception classes provided as tuple. A single Exception can be directly provided.
+                callable: The callable to be called.
+                cargs: Positional arguments to be passed to callable
+
+            Keyword Arguments:
+                regex: Regular expression to match the string representation of the Exception. Can be a string or a regular expression object that can be used with Python's **re.search()** call.
+                ckwargs; Keyword arguments to be passed to callable
+
+            Note:
+                You can use this method to create a context manager by not providing the callable.
+
+                This means you can write the code to be asserted for directly inline:
+                
+                    .. code-block:: python
+
+                        with asserter.assert_exceptions(SomeException):
+                            do_something()
+
+                If you want to futher put assertions on the the actual exception raised, you can use context manager's **exception** attribute:
+
+                    .. code-block:: python
+
+                        with asserter.assert_exceptions(SomeException) as cm:
+                            do_something()
+
+                        asserter.assert_equal(cm.exception.error_code, 3)
+        '''
+        if callable is None:
+            if cargs or ckwargs:
+                raise Exception("Positional and/or Keywrod arguments are allowed only when callable is provided.")
+            if regex is not None:
+                return self.__asserter.assertRaisesRegex(exceptions, regex)
+            else:
+                return self.__asserter.assertRaises(exceptions)
+        else:
+            if regex is not None:
+                self.__asserter.assertRaisesRegex(exceptions, regex, callable, *cargs, **ckwargs)
+            else:
+                return self.__asserter.assertRaises(exceptions, callable, *cargs, **ckwargs)
+                
+            
+
+
     def assert_lesser(self, obj1, obj2, msg):
         '''
             Assert obj1 < obj2

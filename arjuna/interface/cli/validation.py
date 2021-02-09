@@ -17,6 +17,7 @@
 
 import sys
 import re
+import os
 
 from arjuna.tpi.constant import *
 from arjuna.core.constant import *
@@ -54,6 +55,8 @@ def absolute_file_path(input):
 def project_dir(input):
     if not os.path.exists(input):
         print('Project path does not exist: {}'.format(input))
+        print('Current Working Directory: {}'.format(os.getcwd()))
+        print('Path should be a correct absolute path or a correct path relative to current working directory.')
         print('Exiting...', file=sys.stderr)
         sys.exit(1)
     elif not os.path.isdir(input):
@@ -61,7 +64,10 @@ def project_dir(input):
         print('Exiting...', file=sys.stderr)
         sys.exit(1)
     else:
-        proj_name = os.path.basename(input)
+        if input == ".":
+            proj_name = os.path.basename(os.getcwd())
+        else:
+            proj_name = os.path.basename(input)
         lname_check("Project", proj_name)
         return input
 

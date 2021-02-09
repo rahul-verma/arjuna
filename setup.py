@@ -26,7 +26,7 @@ with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name = "arjuna",
-    version = "1.1.35",
+    version = "1.1.36",
     url = "https://rahulverma.net",
     description = "Arjuna is a Python based test automation framework developed by Rahul Verma (www.rahulverma.net).",
     author = "Rahul Verma",
@@ -54,6 +54,7 @@ setup(
                 ]
     },
     install_requires = [
+        "pyOpenSSL>=0.14",
         "urllib3==1.25.3",
         "requests==2.22.0",
         "lxml==4.4.1",

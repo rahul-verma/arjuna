@@ -172,12 +172,18 @@ _ARJUNA_CLI_ARGS = {
     }),
 }
 
+def convert_to_absolute(p):
+    if p.startswith("./test") or p.startswith(".\\test"):
+        return os.path.join(pytest_root_dir + p[1:])
+    else:
+        return p
+
 def pytest_addoption(parser):
     from arjuna.tpi.parser.text import _TextResource
     reader = _TextResource("header.txt")
     print(reader.read().format(version=pkg_resources.require("arjuna")[0].version))
     reader.close()
-    
+
     group = parser.getgroup("arjuna", "Arjuna Test Automation Framework")
     for k,v in _ARJUNA_CLI_ARGS.items():
         group.addoption(v[0], **v[1])
@@ -218,25 +224,26 @@ def _determine_project_root_dir(args):
         elif arg.lower().startswith("--project"):
             project_path = process_rootdir_or_project(index, arg, args)
 
-    if project_path is None and root_dir is None:
+    if project_path is None:
         pytest_root_dir = os.getcwd()
     elif project_path is not None:
-        pytest_root_dir = project_path
+        if project_path == ".":
+            pytest_root_dir = os.getcwd()
+        else:
+            pytest_root_dir = project_path
     elif root_dir is not None:
         pytest_root_dir = root_dir
+
+    if not os.path.isabs(pytest_root_dir):
+        pytest_root_dir = os.path.join(os.getcwd(), pytest_root_dir)
 
     CONVERTED_ARGS.extend(['--project', pytest_root_dir])
 
     args[:] = [e for e in args if e != "__REMOVE__"]
 
-    def convert_to_absolute(p):
-        if p.startswith("./test") or p.startswith(".\\test"):
-            return os.path.join(pytest_root_dir + p[1:])
-        else:
-            return p
     args[:] = [convert_to_absolute(e) for e in args]
     sys.path.append(pytest_root_dir + "/..")
-    args.extend(['--rootdir', pytest_root_dir])
+    args.extend(['--rootdir=' + pytest_root_dir])
     args.extend(['-c', pytest_root_dir + "/pytest.ini"])
 
     conf_file = os.path.join(pytest_root_dir, "test/conftest.py")
@@ -304,10 +311,12 @@ def _handle_dry_run_option(args):
 @pytest.hookimpl(tryfirst=True)
 def pytest_load_initial_conftests(early_config, parser, args):
 
+    # print(early_config.known_args_namespace)
+    # sys.exit()
     if '--help' in args or '-h' in args:
         return
     RAW_ARGS.extend([arg.find(" ") == -1 and arg or f'"{arg}"' for arg in args])
-    _determine_project_root_dir(args)
+    pytest_root_dir = _determine_project_root_dir(args)
 
     res_path = os.path.abspath(os.path.join(os.path.dirname(os.path.realpath(__file__)), "../res"))
     # pytest_ini_path = res_path + "/pytest.ini"
@@ -346,16 +355,25 @@ def _init_arjuna(config, arg_dict):
     from arjuna import Arjuna
     from arjuna.configure.cli import CliArgsConfig
     cliconfig = CliArgsConfig(arg_dict)
+
+    linked_projects = config.getoption("link.projects")
+    if linked_projects is not None:
+        out = []
+        for lp in linked_projects:
+            if not os.path.isabs(lp):
+                out.append(os.path.join(os.getcwd(), lp))
+            else:
+                out.append(lp)
+        linked_projects = out
     Arjuna.init(
         config.option.rootdir, 
         run_id=config.getoption("run.id"), 
         static_rid=config.getoption("static.rid"), 
-        linked_projects=config.getoption("link.projects"), 
+        linked_projects=linked_projects, 
         arjuna_options=cliconfig.arjuna_options, 
         user_options=cliconfig.user_options
     )
 
-    import os
     from arjuna import C
     os.chdir(C("project.root.dir"))
 

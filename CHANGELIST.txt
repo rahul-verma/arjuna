@@ -47,6 +47,14 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.1.36
+------
+    - Added advanced assertions:
+        - approximate equality comparison: assert_approx_equal and assert_approx_not_equal
+        - asserting raised exceptions: assert_exceptions (callable or as context manager). Supports regex match for string repr of exception.
+    - --project accepts project path relative to current working directory. It also accepts '.'
+    - Internal improvements to cater to pytest's auto-disocvery mehchanism in situation of multiple projects.
+    
 1.1.35
 ------
     - Arjuna header is shown when any command is executed.
