@@ -29,7 +29,7 @@ copyright = '2015-2021, Rahul Verma'
 author = 'Rahul Verma'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1.36'
+release = '1.1.37'
 
 
 # -- General configuration ---------------------------------------------------
