@@ -48,7 +48,7 @@ class Asserter:
     def assert_approx_equal(self, obj1, obj2, msg, places=None, delta=None):
         '''
             Assert round(obj1-obj2, places) == 0 if places is supplied
-            
+
             Assert round(obj1-obj2, places) == delta if delta is supplied
 
             Wrapper on unittest's assertAlmostEqual
@@ -81,7 +81,7 @@ class Asserter:
 
             Assert round(obj1-obj2, places) > delta if delta is supplied
 
-            Wrapper on unittest's assertAlmostEqual
+            Wrapper on unittest's assertNotAlmostEqual
 
             Args:
                 obj1: Object of any type which supports == operator for obj2 type
