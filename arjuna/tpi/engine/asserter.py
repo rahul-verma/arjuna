@@ -117,7 +117,7 @@ class Asserter:
 
             Keyword Arguments:
                 regex: Regular expression to match the string representation of the Exception. Can be a string or a regular expression object that can be used with Python's **re.search()** call.
-                ckwargs; Keyword arguments to be passed to callable
+                ckwargs: Keyword arguments to be passed to callable
 
             Note:
                 You can use this method to create a context manager by not providing the callable.
