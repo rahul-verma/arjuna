@@ -34,4 +34,10 @@ Basic Usage of **@test Decorator**
 
     pytest -p arjuna --project path/to-proj_name --itest check_test_name
 
+Note:
+    pytest determines root directory in various ways. If you are facing difficulties with test discovery, try the following:
+    * If your IDE provisions it, set the current working directory to test project root directory.
+    * Cd into the project root
+    * Add these to command line: --project . -c pytest.ini
+    
 To learn more about other options for controlling which tests are run, refer :ref:`cli_testselect`

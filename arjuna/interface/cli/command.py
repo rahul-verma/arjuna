@@ -104,6 +104,7 @@ class FileObjectType(Enum):
 class CreateProject(Command):
 
     COMMON_DIRS_FILES = (
+        (FileObjectType.FILE, "pytest.ini"),
         (FileObjectType.DIR, "config"),
         (FileObjectType.FILE, "config/data.yaml"),
         (FileObjectType.FILE, "config/envs.yaml"),
@@ -182,7 +183,8 @@ class CreateProject(Command):
                 self.__create_file_or_dir(project_temp_dir, ftype, frpath)
             copy_file("../../res/project.yaml", "config/project.yaml")
             copy_file("../../res/check_dummy.py", "test/pkg/check_dummy.py")
-            copy_file("../../res/arjuna_launcher.py", "script/arjuna_launcher.py")
+            copy_file("../../res/pt.ini", "pytest.ini")
+            # copy_file("../../res/arjuna_launcher.py", "script/arjuna_launcher.py")
             f = open(get_src_file_path("../../res/conftest.txt"), "r")
             contents = f.read().format(project=project_name)
             f.close()

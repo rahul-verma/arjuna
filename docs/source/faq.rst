@@ -48,13 +48,13 @@ For example to link to "linked1" project present at **/abc/def/root/linked**:
 
         --link /abc/def/root/linked
 
-The path can also be a relative path. Arjuna will consider it relative to the root of parent Arjuna project.
+The path can also be a relative path. Arjuna will consider it **relative to the current directory**.
 
 For example, let's consider the following directory structre:
     * Linked project: /abc/def/root/linked
     * Parent project: /abc/def/xyz/parent
 
-In the above case Linked project path can be passed as **../../root/linked**.
+In the above case Linked project path can be passed as **root/linked**, if current working directory is **/abc/def**
 
 With this linking, following will happen automatically:
     * Configurations

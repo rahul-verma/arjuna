@@ -22,6 +22,12 @@ The command line options specific to Arjuna are listed under "Arjuna Test Automa
     * If not provided, then value of "--rootdir" option from pytest is used.
     * If **--rootdir** is also not provided, then the current working directory is used.
 
+Note:
+    pytest determines root directory in various ways. If you are facing difficulties with test discovery, try the following:
+    * If your IDE provisions it, set the current working directory to test project root directory.
+    * Cd into the project root
+    * Add these to command line: --project . -c pytest.ini
+
 .. _cli_testselect:
 
 **Controlling Test Selection**
@@ -53,6 +59,17 @@ You can also provide custom rules for test selection (Refer :ref:`selection_rule
 - ``--irule``: One or more rules for including test functions. Each rule is provided as a separate option-pattern pair. Test Function is included if any of the inclusion rules matches.
 - ``--erule``: One or more rules for excluding test functions. Each rule is provided as a separate option-pattern pair. Test Function is excluded if any of the exclusion rules matches. Evaluated before any inclusion rules.
 
+For example, the following command will run all test packages whose name contains **smoke**:
+
+.. code-block:: bash
+
+    pytest -p arjuna --project path/to-proj_name --ipack smoke
+
+Note:
+    pytest determines root directory in various ways. If you are facing difficulties with test discovery, try the following:
+    * If your IDE provisions it, set the current working directory to test project root directory.
+    * Cd into the project root
+    * Add these to command line: --project . -c pytest.ini
 
 .. _test_group:
 
@@ -88,6 +105,12 @@ You can now a specific test group by providing the ``--group`` option in CLI:
 .. code-block:: bash
 
     pytest -p arjuna --project path/to-proj_name --group gp1
+
+Note:
+    pytest determines root directory in various ways. If you are facing difficulties with test discovery, try the following:
+    * If your IDE provisions it, set the current working directory to test project root directory.
+    * Cd into the project root
+    * Add these to command line: --project . -c pytest.ini
 
 Controlling **Test Reporting**
 ------------------------------
