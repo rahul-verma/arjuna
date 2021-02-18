@@ -108,9 +108,7 @@ class Asserter:
 
     def assert_exceptions(self, exceptions, callable=None, *cargs, regex=None, **ckwargs):
         '''
-            Asserts that one of the provided exception is raised when the provided callable is called with provided arguments/
-
-            Wrapper on unittest's assertAlmostEqual
+            Asserts that one of the provided exceptions is raised when the provided callable (or ) is called with provided arguments.
 
             Args:
                 exceptions: One or more Exception classes provided as tuple. A single Exception can be directly provided.

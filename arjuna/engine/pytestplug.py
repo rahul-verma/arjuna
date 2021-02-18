@@ -310,7 +310,6 @@ def _handle_dry_run_option(args):
 # def pytest_cmdline_parse(pluginmanager, args):
 @pytest.hookimpl(tryfirst=True)
 def pytest_load_initial_conftests(early_config, parser, args):
-
     # print(early_config.known_args_namespace)
     # sys.exit()
     if '--help' in args or '-h' in args:

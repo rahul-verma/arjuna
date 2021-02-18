@@ -15,6 +15,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import os
+
 from itertools import cycle
 from py.xml import html, raw
 
@@ -236,6 +238,10 @@ class PytestHooks:
                 pytest_items: List of pytest `Item` objects. Each item represents a collected test function node.
                 pytest_config: pytest Config object
         '''
+
+        def process_nodename(item):
+            return item.name.split("[")[0]
+
         from arjuna import Arjuna
         from arjuna.core.error import ExclusionRuleMet, NoInclusionRuleMet
         from arjuna import C
@@ -246,17 +252,45 @@ class PytestHooks:
         for item in pytest_items:
             # if item.name.split("[")[0] == "test":
             #     continue
-        
-            qual_name = item.nodeid.split('::')[0].replace("/",".").replace('\\',"").replace(".py","") + "." + item.name.split("[")[0]
-            start_index = qual_name.find(C("project.name") + "." + "test")
-            if start_index == -1:
-                if qual_name.startswith("test."):
-                    qual_name = C("project.name") + "." + qual_name                    
-                else:
-                    deselected.append(item)
-                    continue
-            else:
-                qual_name = qual_name[start_index:]
+
+            qual_name = None
+
+            # For a test function
+            # Root dir should be folder containing the module
+            # E.g. check_config_03_create_conf.py::check_create_config[G]
+            temp_full_path = os.path.join(pytest_config.rootdir, item.nodeid.split('::')[0])
+            full_dotted_notation = temp_full_path.replace("/",".").replace('\\',".").replace(".py","") 
+            full_dotted_notation =  full_dotted_notation.replace("..", ".")
+
+            project_name = C("project.name")
+            project_index = full_dotted_notation.find(project_name + "." + "test")
+
+            if project_index == -1:
+                deselected.append(item)
+                continue
+
+            qual_name = full_dotted_notation[project_index:] + "." + process_nodename(item)
+
+            # if os.path.exists(temp_full_path):
+            #     if os.path.isfile(temp_full_path):
+            #         test_path_index = temp_full_path.find(os.path.join(C("project.root.dir"), "test"))
+            #         if test_path_index == -1:
+            #             continue
+            #         else:
+            #             dotted_root = str(pytest_config.rootdir).replace("/",".").replace('\\',"")
+            #             proj_suffix = dotted_root[dotted_root.find(project_name):]
+            #             qual_name = proj_suffix + "." + process_nodeid(item) + "." + process_nodename(item)
+            # else:
+            #     qual_name = process_nodeid(item) + "." + process_nodename(item)
+            #     start_index = qual_name.find(project_name + "." + "test")
+            #     if start_index == -1:
+            #         if qual_name.startswith("test."):
+            #             qual_name = project_name + "." + qual_name                    
+            #         else:
+            #             deselected.append(item)
+            #             continue
+            #     else:
+            #         qual_name = qual_name[start_index:]
                 
             try:
                 selector.validate(Arjuna.get_test_meta_data(qual_name))
