@@ -47,6 +47,9 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.1.38
+------
+
 1.1.37
 ------
     - Debug mode in VSCode works. Arjuna selection uses a uniform way of determining qual name for all situations.
