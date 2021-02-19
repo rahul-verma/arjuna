@@ -49,6 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.37
 ------
+    - Debug mode in VSCode works. Arjuna selection uses a uniform way of determining qual name for all situations.
 
 1.1.36
 ------
