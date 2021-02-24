@@ -104,14 +104,13 @@ class FileObjectType(Enum):
 class CreateProject(Command):
 
     COMMON_DIRS_FILES = (
+        (FileObjectType.FILE, "__init__.py"),
         (FileObjectType.FILE, "pytest.ini"),
         (FileObjectType.DIR, "config"),
         (FileObjectType.FILE, "config/data.yaml"),
         (FileObjectType.FILE, "config/envs.yaml"),
         (FileObjectType.FILE, "config/groups.yaml"),
         (FileObjectType.FILE, "config/project.yaml"),
-        (FileObjectType.FILE, "config/sessions.yaml"),
-        (FileObjectType.FILE, "config/stages.yaml"),
         (FileObjectType.FILE, "config/withx.yaml"),
         (FileObjectType.DIR, "data"),
         (FileObjectType.DIR, "data/source"),
@@ -182,15 +181,15 @@ class CreateProject(Command):
             for ftype, frpath in CreateProject.COMMON_DIRS_FILES:
                 self.__create_file_or_dir(project_temp_dir, ftype, frpath)
             copy_file("../../res/project.yaml", "config/project.yaml")
-            copy_file("../../res/check_dummy.py", "test/pkg/check_dummy.py")
+            copy_file("../../res/check_dummy.txt", "test/pkg/check_dummy.py")
             copy_file("../../res/pt.ini", "pytest.ini")
             # copy_file("../../res/arjuna_launcher.py", "script/arjuna_launcher.py")
-            f = open(get_src_file_path("../../res/conftest.txt"), "r")
-            contents = f.read().format(project=project_name)
-            f.close()
-            f = open(get_proj_target_path("test/conftest.py"), "w")
-            f.write(contents)
-            f.close()
+            # f = open(get_src_file_path("../../res/conftest.txt"), "r")
+            # contents = f.read().format(project=project_name)
+            # f.close()
+            # f = open(get_proj_target_path("test/conftest.py"), "w")
+            # f.write(contents)
+            # f.close()
             for d in ["data/source", "data/file", "data/reference/contextual", "data/reference/indexed", "dbauto", "dbauto/sql", "dependency", "l10n", "guiauto/namespace", "tools/bmproxy"]:
                 copy_file("../../res/placeholder.txt", d + "/placeholder.txt")
             for os_name in ["mac", "windows", "linux"]:

@@ -49,6 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.38
 ------
+    - Fixed new Arjuna test project creation
 
 1.1.37
 ------

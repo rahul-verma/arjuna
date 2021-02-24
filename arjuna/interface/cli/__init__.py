@@ -70,11 +70,11 @@ class ArjunaCLI:
         desc_cases = {
             # CommandEnum.LAUNCH_SETU: "Launching Setu",
             CommandEnum.CREATE_PROJECT: "Creating new project",
-            CommandEnum.RUN_PROJECT: "Running the project",
-            CommandEnum.RUN_SESSION: "Running the selected test session",
-            CommandEnum.RUN_STAGE: "Running the selected test stage",
-            CommandEnum.RUN_GROUP: "Running the selected test group",
-            CommandEnum.RUN_SELECTED: "Running tests based on selectors"
+            # CommandEnum.RUN_PROJECT: "Running the project",
+            # CommandEnum.RUN_SESSION: "Running the selected test session",
+            # CommandEnum.RUN_STAGE: "Running the selected test stage",
+            # CommandEnum.RUN_GROUP: "Running the selected test group",
+            # CommandEnum.RUN_SELECTED: "Running tests based on selectors"
         }
 
         # Hyphens in commands are replaced with underscores for enum conversion
@@ -88,12 +88,12 @@ class ArjunaCLI:
         execute_cases = {
             # CommandEnum.LAUNCH_SETU: (self.launch_setu.execute,),
             CommandEnum.CREATE_PROJECT: (self.create_project.execute, ),
-            CommandEnum.RUN_PROJECT: (self.run_project.execute, ),
-            CommandEnum.RUN_SESSION: (self.run_session.execute, ),
-            CommandEnum.RUN_STAGE: (self.run_stage.execute, ),
-            CommandEnum.RUN_GROUP: (self.run_group.execute, ),
+            # CommandEnum.RUN_PROJECT: (self.run_project.execute, ),
+            # CommandEnum.RUN_SESSION: (self.run_session.execute, ),
+            # CommandEnum.RUN_STAGE: (self.run_stage.execute, ),
             # CommandEnum.RUN_GROUP: (self.run_group.execute, ),
-            CommandEnum.RUN_SELECTED: (self.run_selected.execute, )
+            # CommandEnum.RUN_GROUP: (self.run_group.execute, ),
+            # CommandEnum.RUN_SELECTED: (self.run_selected.execute, )
         }
 
         # Delegation using Arjuna's Enum based switch-case equivalent
