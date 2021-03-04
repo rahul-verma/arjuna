@@ -49,6 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.1.39
 ------
+ - Changed laxml dependency to lxml>=4.4.1
 
 1.1.38
 ------
