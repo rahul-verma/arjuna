@@ -368,7 +368,7 @@ class IterableAsserterMixin:
         '''
         length = len(self)
         if length < min_size or length > max_size:
-            raise AssertionError(f"{self.__klass_name} is not in expected size range. Expected maximum size is {size}. Actual: {length}. {msg}")
+            raise AssertionError(f"{self.__klass_name} is not in expected size range. Expected min: {min_size} < actual: {length} < max: {max_size}. {msg}")
 
 
 
