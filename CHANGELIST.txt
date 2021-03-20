@@ -49,6 +49,10 @@ Future Themes (In-Progress or Planned):
 
 1.1.40
 ------
+    - A custom Http Proxy can be set for GUI Automation and HTTP Automation.
+    - Arjuna options - HTTP_PROXY_ENABLED, HTTP_PROXY_HOST, HTTP_PROXY_PORT introduced.
+    - Proxy is disabled by default.
+    - Stefan's mix for size assertion exception message merged.
 
 1.1.39
 ------

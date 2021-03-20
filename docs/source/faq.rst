@@ -142,3 +142,28 @@ For example, if you are using Git, then you can add the following to **.gitignor
 
     **/*.local.*
 
+Can I use an HTTP Proxy with Arjuna where applicable?
+-----------------------------------------------------
+
+Yes. Arjuna allows you to set an HTTP/S Proxy for Web UI Automation and HTTP layer automation.
+
+Setting Proxy across Test Project
+=================================
+
+You can set a global proxy in **project.yaml** file. You can also provide the options with **-ao** switch in CLI.
+
+Following 3 options are the relevant options:
+    * HTTP_PROXY_ENABLED: Enables/Disables proxy. Can be set to True/False. False by default.
+    * HTTP_PROXY_HOST: Host/IP of proxy. Default is **localhost**.
+    * HTTP_PROXY_PORT: Network port of proxy. Default is **8080**.
+
+Setting Proxy for a Particular HTTP Session
+===========================================
+
+Rather than a global proxy setting, which applies to all Web GUI Automation as well as HTTP Automation, you can also set the proxy for a particular HttpSession as follows:
+
+.. code-block:: python
+
+    session = Http.session(proxy=Http.proxy('proxyhost', 9000))
+
+
