@@ -48,16 +48,22 @@ class OAuthSession(HttpSession):
         self.__token = token
         self._session.headers.update({'Authorization': 'Bearer ' + self.token})
 
-    def create_new_session(self, url, *, request_content_handler=None):
+    def create_new_session(self, url, *, request_content_handler=None, headers=None, max_redirects=None, auth=None, proxy=None):
         '''
             Create a new HttpSession object. OAuth token of this session is attached to the new session.
 
             Arguments:
                 url: Base URL for the new HTTP session.
-                content-type: Default request content type for the new session.
+
+            Keyword Arguments:
+                request_content_handler: Default content type handler for requests sent in this session. Overridable in individual sender methods. Default is Http.content.urlencoded.
+                headers: HTTP headers to be added to request headers made by this session.
+                max_redirects: Maximum number of redirects allowed for a request. Default is 30.
+                auth: HTTP Authentication object: Basic/Digest.
+                proxy: Proxies dict to be associated with this session.
         '''
         from .http import Http
-        session = Http.session(url=url, oauth_token=self.token, request_content_handler=request_content_handler)
+        session = Http.session(url=url, oauth_token=self.token, request_content_handler=request_content_handler, headers=headers, max_redirects=max_redirects, auth=auth, proxy=proxy)
         session.add_cookies(self._session.cookies)
         return session
 

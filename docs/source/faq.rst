@@ -164,6 +164,10 @@ Rather than a global proxy setting, which applies to all Web GUI Automation as w
 
 .. code-block:: python
 
+    # Direct Session
     session = Http.session(proxy=Http.proxy('proxyhost', 9000))
+
+    # From ouathsession
+    session = ouathsession.create_new_session("https://someurl.com", proxy=Http.proxy('proxyhost', 9000))
 
 
