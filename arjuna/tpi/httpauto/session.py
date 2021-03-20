@@ -58,9 +58,8 @@ class HttpSession:
                 self.__session.proxies = proxy
             else:
                 from arjuna import C, Http
-                print(C("http.proxy.enabled"))
                 if C("http.proxy.enabled"):
-                    self.__session.proxies = Http.proxy('{}:{}'.format(C('http.proxy.host'), C('http.proxy.port')))
+                    self.__session.proxies = Http.proxy(C('http.proxy.host'), C('http.proxy.port'))
 
         if oauth_token:
             self.__session.headers['Authorization'] = f'Bearer {oauth_token}'

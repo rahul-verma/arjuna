@@ -150,7 +150,7 @@ Yes. Arjuna allows you to set an HTTP/S Proxy for Web UI Automation and HTTP lay
 Setting Proxy across Test Project
 =================================
 
-You can set a global proxy in **project.yaml** file. You can also provide the options with **-ao** switch in CLI.
+You can set a global proxy in **project.yaml** file. You can also provide the options with ``--ao`` switch in CLI.
 
 Following 3 options are the relevant Arjuna options:
     * **HTTP_PROXY_ENABLED**: Enables/Disables proxy. Can be set to True/False. False by default.
