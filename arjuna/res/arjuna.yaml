@@ -64,6 +64,10 @@ arjuna_options:
 
   app.url: NOT_SET
 
+  http.proxy.enabled: False
+  http.proxy.host: localhost
+  http.proxy.port: 8080
+
   guiauto.name: SELENIUM
   guiauto.dir: $project_root_dir$/guiauto
   guiauto.namespace.dir: $project_root_dir$/guiauto/namespace

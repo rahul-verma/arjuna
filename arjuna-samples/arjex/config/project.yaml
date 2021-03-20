@@ -2,6 +2,7 @@ arjuna_options:
   app.url: "https://google.com"
   guiauto.max.wait: 3
   deps.dir: ../extdeps
+  http.proxy.enabled: False
 
 user_options:
   target.url: "https://google.com"

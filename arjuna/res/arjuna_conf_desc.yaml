@@ -61,6 +61,10 @@ data.file.dir: absolute_dir_path
 
 app.url: web_url
 
+http.proxy.enabled: bool
+http.proxy.host: str
+http.proxy.port: int
+
 guiauto.name: guiauto_automator_name
 guiauto.dir: absolute_dir_path
 guiauto.namespace.dir: absolute_dir_path

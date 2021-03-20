@@ -56,6 +56,12 @@ class HttpSession:
                 self.__session.auth = auth
             if proxy is not None:
                 self.__session.proxies = proxy
+            else:
+                from arjuna import C, Http
+                print(C("http.proxy.enabled"))
+                if C("http.proxy.enabled"):
+                    self.__session.proxies = Http.proxy('{}:{}'.format(C('http.proxy.host'), C('http.proxy.port')))
+
         if oauth_token:
             self.__session.headers['Authorization'] = f'Bearer {oauth_token}'
 
@@ -176,20 +182,25 @@ class HttpSession:
         try:
             counter = 0
             exc_flag = False
+            exc_desc = None
             while counter < max_connection_retries:
                 counter += 1
                 try:
-                    response = HttpResponse(self, self._session.send(request._request, allow_redirects=request.allow_redirects, timeout=request.timeout, proxies=self._session.proxies))
+                    if self._session.proxies:
+                        response = HttpResponse(self, self._session.send(request._request, allow_redirects=request.allow_redirects, timeout=request.timeout, proxies=self._session.proxies, verify=False))
+                    else:
+                        response = HttpResponse(self, self._session.send(request._request, allow_redirects=request.allow_redirects, timeout=request.timeout))
                 except (ProxyError, InvalidProxyURL) as e:
                     raise HttpConnectError(request, "There is an error in connecting to the configured proxy. Proxy settings: {}. Error: {}".format(self.__session.proxies, str(e)))
-                except ConnectionError:
+                except ConnectionError as f:
                     exc_flag = True
+                    exc_desc = str(f)
                     time.sleep(1)
                     continue
                 else:
                     break
             if exc_flag:
-                raise HttpConnectError(request, "Connection error despite trying 5 times.")
+                raise HttpConnectError(request, "Connection error despite trying 5 times. Error: {}".format(exc_desc))
         except TooManyRedirects as e:
             response = HttpResponse(self._session, e.response)
             self.__register_network_info(request, response)

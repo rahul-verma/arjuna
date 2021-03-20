@@ -26,6 +26,22 @@ from arjuna.interact.gui.dispatcher.driver.element_finder import SeleniumElement
 from arjuna.interact.gui.dispatcher.driver.melement import MultiElement
 from selenium.webdriver.remote.webelement import WebElement
 
+class HttpProxy:
+
+    def __init__(self, host, port):
+        self.proxy = "{}:{}".format(host, port)
+
+    def add_to_capabilities(self, capabilities):
+
+        capabilities['proxy'] = {
+            'proxyType': "MANUAL",
+            'httpProxy': self.proxy,
+            'sslProxy': self.proxy
+        }
+
+    def close(self):
+        pass
+
 class SeleniumDriverDispatcher:
 
     def __init__(self):
@@ -82,6 +98,9 @@ class SeleniumDriverDispatcher:
         bmproxy_server = Arjuna._get_bmproxy_server()
         if bmproxy_server is not None:
             self.__proxy = bmproxy_server.create_proxy()
+        else:
+            from arjuna import C
+            self.__proxy = HttpProxy(C('http.proxy.host'), C('http.proxy.port'))
 
         self.__driver = BrowserLauncher.launch(config, svc_url=svc_url, proxy=self.__proxy) 
 

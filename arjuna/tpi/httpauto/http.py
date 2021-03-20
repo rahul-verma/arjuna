@@ -247,11 +247,17 @@ class Http:
         return HttpSession().options(route, label=label, content=content, xcodes=xcodes, strict=strict, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
 
     @classmethod
-    def proxy(cls, url):
+    def proxy(cls, host="localhost", port=8080):
         '''
         Create a proxy dict.
+
+        Arguments:
+
+            host: Proxy host name/IP. Default is localhost
+            port: Proxy network port. Default is 8080
         '''
-        return {'http': url, 'https': url}
+        proxy = f"http://{host}:{port}"
+        return {'http': proxy, 'https': proxy}
 
     class auth:
         '''

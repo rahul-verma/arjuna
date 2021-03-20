@@ -83,7 +83,10 @@ _RAW_OPTION_LEVELS = {
 
     ConfigStage.PROJECT: {
         "LOG_ALLOWED_CONTEXTS",
-        "DEPS_DIR"
+        "DEPS_DIR",
+        "HTTP_PROXY_ENABLED",
+        "HTTP_PROXY_HOST",
+        "HTTP_PROXY_PORT",
     },
 
     ConfigStage.REFERENCE: {

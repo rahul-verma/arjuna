@@ -189,6 +189,15 @@ class ArjunaOption(Enum):
     APP_URL = auto()
     '''Base URL for a Web App. Used by launch() method if url is not specified for GuiApp.'''
 
+    HTTP_PROXY_ENABLED = auto()
+    '''Is a proxy enabled for HTTP requests (GUIAuto as well as HttpAuto)'''
+
+    HTTP_PROXY_HOST = auto()
+    '''IP address/Name of HTTP proxy host. Default is localhost.'''
+
+    HTTP_PROXY_PORT = auto()
+    '''Network Port of HTTP proxy. Default is 8080.'''
+
     BROWSER_NAME = auto()
     '''Browser Name for Gui Automation. Chrome/Firefox. Default is Chrome'''
 
