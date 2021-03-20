@@ -152,10 +152,10 @@ Setting Proxy across Test Project
 
 You can set a global proxy in **project.yaml** file. You can also provide the options with **-ao** switch in CLI.
 
-Following 3 options are the relevant options:
-    * HTTP_PROXY_ENABLED: Enables/Disables proxy. Can be set to True/False. False by default.
-    * HTTP_PROXY_HOST: Host/IP of proxy. Default is **localhost**.
-    * HTTP_PROXY_PORT: Network port of proxy. Default is **8080**.
+Following 3 options are the relevant Arjuna options:
+    * **HTTP_PROXY_ENABLED**: Enables/Disables proxy. Can be set to True/False. False by default.
+    * **HTTP_PROXY_HOST**: Host/IP of proxy. Default is **localhost**.
+    * **HTTP_PROXY_PORT**: Network port of proxy. Default is **8080**.
 
 Setting Proxy for a Particular HTTP Session
 ===========================================
