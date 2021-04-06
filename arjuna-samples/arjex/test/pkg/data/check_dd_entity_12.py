@@ -62,6 +62,15 @@ def check_entity_with_simple_generators(request):
         print(Person2(age=99))
 
 @test
+def check_entity_with_spchars(request):
+    v1 = generator(
+                            Random.ustr, 
+                            prefix='with non ascii chars ÄÖÜ@€!§$%/()=?``', 
+                            maxlen=50
+                    ).generate()
+    print(v1)
+
+@test
 def check_entity_with_simple_gen_args(request):
     for i in range(3):
         Person1 = data_entity("Person", "name age", debt=generator(Random.fixed_length_number, length=i+1))

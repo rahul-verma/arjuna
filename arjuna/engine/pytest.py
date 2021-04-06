@@ -238,6 +238,7 @@ class PytestHooks:
                 pytest_items: List of pytest `Item` objects. Each item represents a collected test function node.
                 pytest_config: pytest Config object
         '''
+        from arjuna import log_debug
 
         def process_nodename(item):
             return item.name.split("[")[0]
@@ -249,7 +250,10 @@ class PytestHooks:
         final_selection = []
         deselected = []
         qual_names = set()
+
         for item in pytest_items:
+            nid = item.nodeid
+            log_debug(f"Processing {nid} as collected by pytest")
             # if item.name.split("[")[0] == "test":
             #     continue
 
@@ -291,7 +295,7 @@ class PytestHooks:
             #             continue
             #     else:
             #         qual_name = qual_name[start_index:]
-                
+
             try:
                 selector.validate(Arjuna.get_test_meta_data(qual_name))
             except (ExclusionRuleMet, NoInclusionRuleMet) as e:

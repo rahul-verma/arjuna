@@ -26,5 +26,43 @@ msg="Unexpected data record."
         record(7,8,sum=10),   # Fail
     )
 )
-def check_records(request, data):
+def check_records_ascii(request, data):
     request.asserter.assert_equal(data[0] + data[1], data['sum'], msg=msg)
+
+
+@test(drive_with=
+    records(
+        record("non ascii chars ÄÖÜ@€!§$%/()=?``"),
+        record("some utf-8 chars \U0001f408 \u00B5 \U0001F431"),    # Pass
+        record("some utf-8 chars Δ"),   # Fail
+    )
+)
+def check_records_spchars(request, data):
+    print(data)
+
+
+@test(drive_with=
+    records(
+        record(whatever=str(generator(
+                        Random.ustr, 
+                        prefix='with non ascii chars ÄÖÜ@€!§$%/()=?``', 
+                        maxlen=50
+                ).generate())
+        )
+    )
+)
+def check_records_data_entity(request, data):
+    print(data)
+
+@test(drive_with=
+    records(
+        record(whatever=str(generator(
+                        Random.ustr, 
+                        prefix='with non ascii chars ÄÖÜ@€!§$%/()=?``', 
+                        maxlen=50
+                ).generate())
+        )
+    )
+)
+def check_records_random_data_entity(request, data):
+    print(data)

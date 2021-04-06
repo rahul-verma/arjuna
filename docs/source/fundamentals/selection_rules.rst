@@ -66,7 +66,7 @@ Simple Pattern for presence/absence of strings in iterables.
 
 * **with** keyword means an iterable that contains **ANY** of the provided names.
 * **withall** keyword means an iterable that contains **ALL** of the provided names.
-* **with** keyword means an iterable that **DOESNOT** contain **ANY** of the provided names.
+* **without** keyword means an iterable that **DOESNOT** contain **ANY** of the provided names.
 
 You can use singular version as well - **tag/bug/env** for built-in containers.
 
@@ -253,4 +253,10 @@ Following is the test selection process as per Arjuna rules:
         - if no inclusion rule is specified, it is included in test group run.
         - if an inclusion rule is met, it is included in test group run.
         - if no inclusion rule is met, it is excluded from test group run.
+
+.. note::
+
+    At a selection level (package/module/test), the rules are evaluated as an OR condition.
+
+    This means for example, if a test matches **any** of the inclusion rules, it will be selected. Similarly, if it matches any of the exclusion rules, it will be de-selected.
 
