@@ -100,7 +100,8 @@ class SeleniumDriverDispatcher:
             self.__proxy = bmproxy_server.create_proxy()
         else:
             from arjuna import C
-            self.__proxy = HttpProxy(C('http.proxy.host'), C('http.proxy.port'))
+            if C("http.proxy.enabled"):
+                self.__proxy = HttpProxy(C('http.proxy.host'), C('http.proxy.port'))
 
         self.__driver = BrowserLauncher.launch(config, svc_url=svc_url, proxy=self.__proxy) 
 
