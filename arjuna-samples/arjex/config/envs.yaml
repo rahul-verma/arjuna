@@ -26,6 +26,19 @@ chrome:
   arjuna_options:
     browser.name: chrome
 
+  user_options:
+    test.url: ta.world
+
 firefox:
   arjuna_options:
     browser.name: firefox
+
+  user_options:
+    test.url: rahul.world
+
+jelson:
+  arjuna_options:
+    browser.name: firefox
+
+  user_options:
+    test.url: jelson.world

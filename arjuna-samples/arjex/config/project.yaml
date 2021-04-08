@@ -14,3 +14,4 @@ user_options:
   link.name: Posts
   useridval: user_login
   input_label: input
+  test.url: project.world

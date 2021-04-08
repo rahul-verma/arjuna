@@ -23,6 +23,8 @@ def check_config_retrieval_C(request):
     print(C("browser.name"))
     print(C("BROWSER_NAME"))
 
+    print(C("test.url"))
+
 @test
 def check_conf_name_wise_query(request):
     cb = request.config.builder
