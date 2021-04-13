@@ -89,7 +89,7 @@ class Space:
                 log_trace("Space: Got value {} for {}.".format(val, name))
                 return val
             except Exception as e:
-                log_trace("Space: No value for {} in {} in any scope.".format(name))
+                log_trace("Space: No value for {} in any scope.".format(name))
                 raise AttributeError(str(e))
 
     def __setattr__(self, name, value):

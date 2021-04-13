@@ -550,7 +550,7 @@ class Json:
                 Arjuna's `JsonDict` object
         '''
 
-        return JsonDict(d)
+        return JsonDict(map)
 
     @classmethod
     def from_iter(cls, iter) -> JsonList:
