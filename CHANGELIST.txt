@@ -49,7 +49,9 @@ Future Themes (In-Progress or Planned):
 
 1.1.42
 ------
-
+    - Fix for max_wait in GNS
+    - Fix in proxy setting for Selenium
+    - Fix in Json.from_dict
 
 1.1.40
 ------
