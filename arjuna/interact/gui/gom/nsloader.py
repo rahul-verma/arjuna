@@ -80,12 +80,13 @@ class GuiNamespace:
         return not self.__ns
 
     def add_element_meta_data(self, name, context, raw_locators, meta):
+        from arjuna import log_debug
+        log_debug("Loading {} label. Meta data: {}".format(name, str(meta)))
         wmd = GuiWidgetMetaData.create_wmd(*raw_locators, meta=meta)
         name = name.lower()
         if not self.has(name):
             self.__ns[name] = {}
         self.__ns[name][context] = wmd
-        from arjuna import log_debug
         log_debug("Loaded {} label. EMD: {}".format(name, str(wmd)))
 
     def add_reference(self, name, value):

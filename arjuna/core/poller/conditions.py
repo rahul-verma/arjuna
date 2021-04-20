@@ -45,6 +45,8 @@ class Condition:
         return self.__call_result
 
     def wait(self, *, max_wait=60, poll_interval=0.5):
+        from arjuna import log_debug
+        log_debug("Dynamic wait call triggered with max_wait: {}".format(max_wait))
         end_time = time.time() + max_wait
         e = None
         etrace = None

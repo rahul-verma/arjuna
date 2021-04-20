@@ -37,12 +37,16 @@ def check_absent_gns_1_max_wait(request, dashboard):
         dashboard.left_nav.gns.wait_until_absent("settings")
     except GuiWidgetForLabelPresentError:
         print(time.time() - b)
+        assert time.time() - b > 3
+        assert time.time() - b < 5
 
     try:
         b = time.time()
         dashboard.left_nav.gns.wait_until_absent("settings_max_wait")
     except GuiWidgetForLabelPresentError:
         print(time.time() - b)
+        assert time.time() - b > 10
+        assert time.time() - b < 12
 
 @test
 def check_absent_gns_2_max_wait(request, dashboard):

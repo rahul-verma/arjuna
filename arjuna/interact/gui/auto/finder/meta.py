@@ -35,7 +35,7 @@ class InteractionConfig:
         loaded = []
         for k,v in meta_dict.items():
             try:
-
+                self[k] = v
                 loaded.append(k)
             except:
                 pass
@@ -59,7 +59,7 @@ class InteractionConfig:
         if isinstance(name, GuiInteractionConfigType):
             self.__settings[k] = value
         else:
-            self._settings[GuiInteractionConfigType[name.upper()]] = value
+            self.__settings[GuiInteractionConfigType[name.upper()]] = value
 
     @classmethod
     def is_a_setting(cls, name):
@@ -89,12 +89,15 @@ class Meta:
     @track("trace")
     def __init__(self, mdict=None):
         from arjuna import log_debug
+        log_debug("Input Meta Dict for Meta creation: {}".format(repr_dict(mdict)))
         temp_dict = not mdict and CIStringDict() or CIStringDict(mdict)
         self.__mdict = CIStringDict()
         self.__process_type(temp_dict)
         self.__process_relations(temp_dict)
         self.__process_filters(temp_dict)
         self.__process_settings(temp_dict)
+        self.__mdict.update({k:v for k,v in temp_dict.items() if k.lower() not in {"type", "relations", "settings", "filters"}})
+        print(self.__mdict)
         log_debug("Meta dictionary is: {}".format(repr_dict(self.__mdict)))
 
     def __process_type(self, temp_dict):
@@ -165,9 +168,11 @@ class Meta:
         return self[name]
 
     def __getitem__(self, name):
+        from arjuna import log_debug
         if self.has(name):
             return self.__mdict[name]
         else:
+            log_debug(f"Meta dict does not have {name}. Returning None.")
             return None
 
     def __set_relation(self, name, value):
