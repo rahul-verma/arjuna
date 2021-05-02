@@ -58,7 +58,7 @@ def check_msg_simple_get_with_label(request, httpbin):
 @test
 def check_msg_params_and_fmting(request, httpbin):
     url = "http://example.com/path?key=value"
-    r = httpbin.message('05_params_and_fmt', url=url, param_str="a=b")
+    r = httpbin.message('05_params_fmt', url=url, param_str="a=b")
 
 @test
 def check_msg_pretty_url(request, httpbin):
@@ -88,4 +88,28 @@ def check_msg_post_urlencoded(request, httpbin):
     record(msg="06_content03_json_res5"),
 ))
 def check_msg_post_json(request, data, httpbin):
-    r = httpbin.message(data.msg)
+    httpbin.message(data.msg)
+
+@test(drive_with=records(
+    record(msg="06_content03_json_res6"),
+    record(msg="06_content03_json_res7"),
+))
+def check_msg_multiline_payload(request, data, httpbin):
+    payload = {
+      "str" : "b",
+      "int": 1,
+      "float": 1.1,
+      "dict": {
+          "a": "b"
+      },
+      "list": [1,2,3],
+      "bool": True,
+      "int_as_str": "1",
+      "float_as_str": "1.2",
+      "bool1_as_str": "true",
+      "bool2_as_str": "True",
+      "space": "what is this 1"
+    }
+
+    httpbin.message(data.msg, payload=payload)
+

@@ -16,6 +16,7 @@
 # limitations under the License.
 
 import json
+import ast
 import abc
 import os
 import time
@@ -29,6 +30,8 @@ from arjuna.tpi.helper.arjtype import CIStringDict
 from requests.exceptions import ConnectionError, TooManyRedirects
 from arjuna.tpi.engine.asserter import AsserterMixIn
 
+safe_eval = ast.literal_eval
+
 def _convert_yaml_json_to_json(jval):
     def handle_str_val(in_val):
         if in_val.lower().strip() == "null":
@@ -39,8 +42,8 @@ def _convert_yaml_json_to_json(jval):
                 out_val = in_val
             else:
                 try:
-                    out_val = eval(in_val)
-                except (NameError, SyntaxError): # The string is evaluated as a variable name or Python statement
+                    out_val = safe_eval(in_val)
+                except (NameError, SyntaxError, ValueError): # The string is evaluated as a variable name or Python statement
                     out_val = jval
         return out_val
 
@@ -49,8 +52,13 @@ def _convert_yaml_json_to_json(jval):
         if "value" in jval:
             raw_value = jval["value"]
             if "type" in jval:
-                jval = eval("{}({})".format(jval["type"].lower(), raw_value))
-            elif type() is str:
+                jtype = jval["type"].lower().strip()
+                allowed_set = {"str", "dict", "list", "int", "float", "bool"}
+                if jtype in allowed_set:
+                    jval = eval(jtype)(jval["value"])
+                else:
+                    raise Exception("type can be specified only as one of {}".format(allowed_set))
+            elif type(raw_value) is str:
                 jval = handle_str_val(raw_value)
             else:
                 jval = raw_value

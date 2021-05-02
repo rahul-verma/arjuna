@@ -13,8 +13,8 @@
 #     headers:
 #     text:
 #       full:
-#       partial:
-#       pattern:
+#       partials:
+#       patterns:
 #     json:
 #       type:
 #       size:

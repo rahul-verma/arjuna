@@ -54,7 +54,7 @@ def _attr(self, name):
     else:
         raise AttributeError("{} object does not have an attribute with name: {}.".format(self.__class__.__name__, name))
 
-def _as_dict(self, remove_none=False):
+def _as_dict(self, remove_none=True):
     d = dict(vars(self))
     if remove_none:
         return {k:v for k,v in d.items() if v is not None}

@@ -52,6 +52,8 @@ Future Themes (In-Progress or Planned):
 - HttpAuto
     - strict argument has been deprecated in HTTP method calls.
     - Support for externalization of HTTP msg (Basic Support. More features will unfold in upcoming builds.)
+    - remove_none default has been changed to True for Data Entity's .as_dict() method.
+    - !!! TO DO - Added support for data_entity as a valid content without converting using as_dict().
 
 1.1.42
 ------

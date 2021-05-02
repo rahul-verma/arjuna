@@ -160,7 +160,7 @@ class _HttpRequest(HttpRequest):
                 self.__content = content
         self.__xcodes = None
         if xcodes is not None:
-            self.__xcodes = self._process_xcodes(xcodes)
+            self.__xcodes = self._process_codes(xcodes)
         self.__query_params = query_params
         if self.__query_params is None:
             self.__query_params = dict()

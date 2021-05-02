@@ -1,0 +1,31 @@
+request:
+  method: post
+  route: "http://httpbin.org/post"
+  content_type: json
+  content: $payload$
+
+response:
+
+  expected:
+  
+    json:
+      jpaths: 
+        "json.str" : "b"
+        "json.int": 1
+        "json.float": 1.1
+        "json.dict": {
+            "a": "b"
+          }
+        "json.list": [1,2,3]
+        "json.bool": True
+        "json.int_as_str": 
+          type: str
+          value: "1"
+        "json.float_as_str": 
+          type: str
+          value: "1.2"       
+        "json.bool1_as_str": "true"
+        "json.bool2_as_str": 
+          type: str
+          value: "True"
+        "json.space": "what is this 1"
