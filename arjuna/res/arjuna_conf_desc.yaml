@@ -64,6 +64,8 @@ app.url: web_url
 http.proxy.enabled: bool
 http.proxy.host: str
 http.proxy.port: int
+httpauto.dir: absolute_dir_path
+httpauto.message.dir: absolute_dir_path
 
 guiauto.name: guiauto_automator_name
 guiauto.dir: absolute_dir_path

@@ -1,0 +1,16 @@
+request:
+  method: post
+  route: "http://httpbin.org/post"
+  content_type: urlencoded
+  content:
+    a: b
+    d: 1
+
+response:
+
+  expected:
+    json:
+      jpaths: 
+        form:
+          a: b
+          d: "1" # httpbin returns it as a string

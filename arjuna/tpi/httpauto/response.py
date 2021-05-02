@@ -26,12 +26,12 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 from requests.exceptions import ConnectionError, TooManyRedirects
 import time
 
-from .message import HttpMessage
+from .message import HttpPacket
 
 
-class HttpResponse(HttpMessage):
+class HttpResponse(HttpPacket):
     '''
-        Encapsulates HTTP response message. Contains redirected responses as redirection history, if applicable.
+        Encapsulates HTTP response packet. Contains redirected responses as redirection history, if applicable.
 
         Arguments:
             session: `HttpSession` object which created corresponding `HttpRequest` for this response.

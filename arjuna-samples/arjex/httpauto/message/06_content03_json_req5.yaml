@@ -1,0 +1,21 @@
+request:
+  method: post
+  route: "http://httpbin.org/post"
+  content_type: json
+  content: 
+    {
+      "a": null,
+      "b": "null"
+    }
+
+response:
+
+  expected:
+  
+    json:
+      jpaths: 
+        json: 
+            {
+              "a": null, # null is differentiated from "null" as string
+              "b": "null"
+            }

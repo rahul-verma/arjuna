@@ -1,0 +1,7 @@
+request:
+  method: get
+  route: "/abc"
+
+response:
+  expected:
+    codes: 404

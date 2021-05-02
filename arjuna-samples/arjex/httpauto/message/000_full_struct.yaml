@@ -1,0 +1,43 @@
+# label=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params
+
+# request:
+#   method: 
+#   route: 
+#   headers:
+#   content:
+
+# response:
+
+#   expected:
+#     codes: 200
+#     headers:
+#     text:
+#       full:
+#       partial:
+#       pattern:
+#     json:
+#       type:
+#       size:
+#       min_size:
+#       max_size:
+#       size_range:
+#       schema:
+#       jpaths:
+#         id: id
+
+#   unexpected:
+#     codes: 500
+#     headers:
+#     text:
+#       partials:
+#       patterns:
+#     json:
+#       type:
+#       jpaths:
+#         id: id
+
+#   extract:
+#     text:
+#        id: id
+#     json:
+#        id: id

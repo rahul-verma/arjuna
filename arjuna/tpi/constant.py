@@ -198,6 +198,12 @@ class ArjunaOption(Enum):
     HTTP_PROXY_PORT = auto()
     '''Network Port of HTTP proxy. Default is 8080.'''
 
+    HTTPAUTO_DIR = auto()
+    '''Root directory of all HTTP automation relation directories and files'''
+
+    HTTPAUTO_MESSAGE_DIR = auto()
+    '''Root directory of all HTTP message YAML files.'''
+
     BROWSER_NAME = auto()
     '''Browser Name for Gui Automation. Chrome/Firefox. Default is Chrome'''
 

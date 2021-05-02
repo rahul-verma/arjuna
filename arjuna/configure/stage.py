@@ -71,6 +71,8 @@ _RAW_OPTION_LEVELS = {
         "SELENIUM_DRIVERS_DIR",
         "SELENIUM_DRIVER_PATH",
         "RUN_ID",
+        "HTTPAUTO_DIR",
+        "HTTPAUTO_MESSAGE_DIR"
     },
 
     ConfigStage.CLI: {

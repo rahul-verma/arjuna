@@ -1,0 +1,8 @@
+request:
+  label: "Simple Get"
+  method: get
+  route: "/get"
+
+response:
+  expected:
+    codes: 200

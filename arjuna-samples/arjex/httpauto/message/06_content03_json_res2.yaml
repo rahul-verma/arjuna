@@ -1,0 +1,21 @@
+request:
+  method: post
+  route: "http://httpbin.org/post"
+  content_type: json
+  content: >
+    {
+      "a" : "b",
+      "d": 1
+    }
+
+response:
+
+  expected:
+  
+    json:
+      jpaths: 
+        json: >
+          {
+            "a" :  "b",
+            "d": 1
+          }

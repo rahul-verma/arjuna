@@ -67,6 +67,8 @@ arjuna_options:
   http.proxy.enabled: False
   http.proxy.host: localhost
   http.proxy.port: 8080
+  httpauto.dir: $project_root_dir$/httpauto
+  httpauto.message.dir: $project_root_dir$/httpauto/message
 
   guiauto.name: SELENIUM
   guiauto.dir: $project_root_dir$/guiauto

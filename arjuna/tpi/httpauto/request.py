@@ -25,12 +25,12 @@ from arjuna.tpi.parser.html import Html
 from arjuna.tpi.engine.asserter import AsserterMixIn
 import time
 
-from .message import HttpMessage
+from .message import HttpPacket
 from .response import HttpResponse
 
-class HttpRequest(HttpMessage):
+class HttpRequest(HttpPacket):
     '''
-        Encapsulates HTTP response message.
+        Encapsulates HTTP request packet.
 
         Arguments:
             session: `HttpSession` object which created this `HttpRequest`.
@@ -39,13 +39,12 @@ class HttpRequest(HttpMessage):
         Keyword Arguments:
             label: Label for this request. If available, it is used in Reports and logs.
             xcodes: Expected Status Code(s)
-            strict: If True in case of unexpected status code, an AssertionError is raised, else HttpUnexpectedStatusCodeError is raised.
             allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
             timeout: How long to wait for the server to send data before giving up.
             cookies: Cookie dictionary
     '''
 
-    def __init__(self, session, request, label=None, xcodes=None, strict=False, allow_redirects=True, timeout=None, cookies=None):
+    def __init__(self, session, request, label=None, xcodes=None, allow_redirects=True, timeout=None, cookies=None):
         super().__init__(request)
         self.__session = session
         self.__request = request
@@ -54,7 +53,6 @@ class HttpRequest(HttpMessage):
         printable_label = label and self.__label + "::" + req_repr or req_repr
         printable_label = len(printable_label) > 119 and printable_label[:125] + "<SNIP>" or printable_label
         self.__label = printable_label
-        self.__strict = strict
         self.__allow_redirects = allow_redirects
         self.__timeout = timeout
         self.__cookies = cookies
@@ -113,13 +111,6 @@ class HttpRequest(HttpMessage):
         return self.__xcodes
 
     @property
-    def strict(self) -> bool:
-        '''
-        True if sending this request should raise an Assertion error in case of unexpected status code.
-        '''
-        return self.__strict
-
-    @property
     def text(self):
         '''
             Content of this request message as plain text.
@@ -157,7 +148,7 @@ class HttpRequest(HttpMessage):
 
 class _HttpRequest(HttpRequest):
 
-    def __init__(self, session, url, method, label=None, content=None, xcodes=None, strict=False, headers=None, cookies=None, allow_redirects=True, auth=None, timeout=None, pretty_url=False, query_params=None, **named_query_params):
+    def __init__(self, session, url, method, label=None, content=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout=None, pretty_url=False, query_params=None, **named_query_params):
         self.__session = session
         self.__method = method.upper()
         self.__url = url
@@ -169,7 +160,7 @@ class _HttpRequest(HttpRequest):
                 self.__content = content
         self.__xcodes = None
         if xcodes is not None:
-            self.__xcodes = type(xcodes) in {set, list, tuple} and xcodes or {xcodes}
+            self.__xcodes = self._process_xcodes(xcodes)
         self.__query_params = query_params
         if self.__query_params is None:
             self.__query_params = dict()
@@ -186,7 +177,11 @@ class _HttpRequest(HttpRequest):
         self.__auth = auth is not None and auth or self.__session.auth
         self.__prepare_headers()
         self.__req = self.__build_request()
-        super().__init__(self.__session, self.__req, label=label, xcodes=self.__xcodes, strict=strict, allow_redirects=allow_redirects, timeout=timeout, cookies=self.__cookies)
+        super().__init__(self.__session, self.__req, label=label, xcodes=self.__xcodes, allow_redirects=allow_redirects, timeout=timeout, cookies=self.__cookies)
+
+    @classmethod
+    def _process_codes(cls, codes):
+        return type(codes) in {set, list, tuple} and ccodes or {codes}
 
     def __prepare_headers(self):
         if self.__method in {'POST', 'PUT', 'PATCH', 'OPTIONS'}:

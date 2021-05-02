@@ -1,0 +1,5 @@
+# GET is default method
+# No response checking is allowed.
+
+request:
+  route: "/get"

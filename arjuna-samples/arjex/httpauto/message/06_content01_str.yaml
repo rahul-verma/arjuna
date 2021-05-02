@@ -1,0 +1,12 @@
+request:
+  method: post
+  route: "http://httpbin.org/post"
+  content_type: text
+  content: test
+
+response:
+
+  expected:
+    json:
+      jpaths: 
+        data: test
