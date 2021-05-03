@@ -17,6 +17,11 @@
 
 from .generator import _gen
 
+class _DataEntity:
+    _MANDATORY = set()
+    _DEFAULT = set()
+    _REFDICT = dict()
+
 def _init(self, **kwargs):
     wrong_args = False
     provided_set = kwargs.keys()
@@ -67,6 +72,12 @@ def _str(self):
         attrs = ", ".join("{}={}".format(k,v) for k,v in self.as_dict().items())
     )
 
+def _iter(self):
+    return iter(self.as_dict())
+
+def __getitem__(self, k):
+    return getattr(self, k)
+
 def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
     '''
         Create a new Data Entity class with provided name and attributes.
@@ -116,6 +127,7 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
 
     if type(bases) not in {list, tuple}:
         bases = (bases,)
+
     for base in bases:
         base_vars = vars(base)
         namespace['_MANDATORY'] = namespace['_MANDATORY'].union(base_vars['_MANDATORY'])
@@ -145,5 +157,6 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
     namespace['__getattr__'] = _attr
     namespace['as_dict'] = _as_dict
     namespace['__str__'] = _str
-    return type(entity_name, tuple(), namespace)
+    namespace['__iter__'] = _iter
+    return type(entity_name, (_DataEntity,), namespace)
 

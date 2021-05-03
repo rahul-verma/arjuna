@@ -259,7 +259,9 @@ class _HttpMessage:
         f = open(file_path, "r")
         msg_yaml = f.read()
         f.close()
-        from arjuna.core.fmt import arj_format_str
+        from arjuna.core.fmt import arj_format_str, arj_convert
+        # Convert Arjuna custom objects to raw Python objects before formatting.
+        fargs = {k:arj_convert(v) for k,v in fargs.items()}
         msg_yaml = arj_format_str(msg_yaml, tuple(), fargs)
         msg_yaml = Yaml.from_str(msg_yaml, allow_any=True)
         if msg_yaml is None:

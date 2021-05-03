@@ -77,3 +77,38 @@ def arj_format_str(target, vargs, repl_dict):
     if do_eval:
         fmt_target = eval(fmt_target)
     return fmt_target
+
+def arj_convert(content):
+
+        from json import JSONEncoder, dumps, loads
+        from arjuna.tpi.parser.yaml import YamlDict, YamlList
+        from arjuna.tpi.parser.json import JsonDict, JsonList
+        from arjuna.tpi.data.entity import _DataEntity
+
+        class _CustomEncoder(JSONEncoder):
+            def default(self, o):
+                if isinstance(o, YamlDict) or isinstance(o, YamlList) or isinstance(o, JsonList) or isinstance(o, JsonDict):
+                    return o.raw_object
+                elif isinstance(o, _DataEntity):
+                    return o.as_dict()
+                return JSONEncoder.default(self, o)
+
+        if type(content) is tuple:
+            content = list(content)
+
+        if content:
+            if isinstance(content, JsonList) or isinstance(content, JsonDict):
+                content = content.raw_object
+            elif isinstance(content, _DataEntity):
+                content = content.as_dict()
+            elif content == "null":
+                content = None
+            content = dumps(content, cls=_CustomEncoder, indent=2)
+        else:
+            if content is not None:
+                content = str(content)
+
+        if content != "":
+            return loads(content)
+        else:
+            return ""

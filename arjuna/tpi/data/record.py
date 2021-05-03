@@ -82,7 +82,9 @@ class DataRecord:
         Get the indexed values in this Data Record as a JsonList.
         '''
         from arjuna import Json, Http
-        return Json.from_str(Http.content.json(self.indexed_values).content)
+        from arjuna.core.fmt import arj_convert
+        #return Json.from_str(Http.content.json(self.indexed_values).content)
+        return Json.from_object(arj_convert(self.indexed_values))
 
     @property
     def named_values(self) -> dict:
@@ -97,7 +99,8 @@ class DataRecord:
         Get the named values in this Data Record as a JsonDict.
         '''
         from arjuna import Json, Http
-        return Json.from_str(Http.content.json(self.named_values).content)
+        from arjuna.core.fmt import arj_convert
+        return Json.from_object(arj_convert(self.named_values))
 
     def is_empty(self) -> bool:
         '''

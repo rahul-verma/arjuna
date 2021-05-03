@@ -53,7 +53,8 @@ Future Themes (In-Progress or Planned):
     - strict argument has been deprecated in HTTP method calls.
     - Support for externalization of HTTP msg (Basic Support. More features will unfold in upcoming builds.)
     - remove_none default has been changed to True for Data Entity's .as_dict() method.
-    - !!! TO DO - Added support for data_entity as a valid content without converting using as_dict().
+    - Added support for data_entity as a valid content without converting using as_dict().
+- JsonDict can be compared with YamlDict or DataEntity. JsonList can be compared with YamlList.
 
 1.1.42
 ------

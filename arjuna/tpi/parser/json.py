@@ -85,7 +85,7 @@ class JsonList(JsonElement):
         Note:
             Supports indexing just like a Python list.
 
-            Also supports == operator. Right operand can be a Python list or a `JsonList` object.
+            Also supports == operator. Right operand can be a Python list or a `JsonList` or a `YamlList` object.
     '''
 
     def __init__(self, pylist: list):
@@ -121,9 +121,10 @@ class JsonList(JsonElement):
         return len(self.__list)
 
     def __eq__(self, other):
+        from arjuna.tpi.parser.yaml import YamlList
         if type(other) is list:
             pass
-        elif type(other) is JsonList:
+        elif type(other) is JsonList or type(other) is YamlList:
             other = other.raw_object
         elif other is None:
             return False
@@ -147,8 +148,7 @@ class JsonDict(_ArDict, JsonElement):
         Note:
             Supports dictionary methods as well as **.** access for key.
 
-            Also supports == operator. Right operand can be a Python dict or a `JsonDict` object.
-
+            Also supports == operator. Right operand can be a Python dict or a `JsonDict` or a `YamlDict` or any custom DataEntity object.
     '''
 
     def __init__(self, pydict: dict=None):
@@ -283,10 +283,15 @@ class JsonDict(_ArDict, JsonElement):
         return Json.extract_schema(self)
 
     def __eq__(self, other):
+        from arjuna.tpi.parser.yaml import YamlDict
+        from arjuna.tpi.data.entity import _DataEntity
+
         if type(other) is dict:
             pass
-        elif type(other) is JsonDict:
+        elif type(other) is JsonDict or type(other) is YamlDict:
             other = other.raw_object
+        elif isinstance(other, _DataEntity):
+            other = other.as_dict()
         elif other is None:
             return False
         else:

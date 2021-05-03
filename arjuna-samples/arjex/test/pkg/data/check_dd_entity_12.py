@@ -21,13 +21,8 @@ from arjuna import *
 def check_basic_data_entity(request):
     Person = data_entity("Person", "name age")
     person = Person(name="Rahul", age=99)
-    print(person)
-
-@test
-def check_basic_data_entity(request):
-    Person = data_entity("Person", "name age")
-    person = Person(name="Rahul", age=99)
-    print(person)
+    from arjuna.tpi.data.entity import _DataEntity
+    print(person, isinstance(person, _DataEntity), issubclass(person.__class__, _DataEntity))
 
 @test
 def check_wrong_attr_data_entity(request):

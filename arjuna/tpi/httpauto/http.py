@@ -335,27 +335,8 @@ class Http:
             '''
             Send a dictionary of key-values as JSON. Content-Type is sent as “application/json”
             '''
-            from json import JSONEncoder
-            from arjuna.tpi.parser.yaml import YamlDict, YamlList
-            from arjuna.tpi.parser.json import JsonDict, JsonList
-            class _CustomEncoder(JSONEncoder):
-                def default(self, o):
-                    if isinstance(o, YamlDict) or isinstance(o, YamlList) or isinstance(o, JsonList) or isinstance(o, JsonDict):
-                        return o.raw_object
-                    return JSONEncoder.default(self, o)
-
-            if type(content) is tuple:
-                content = list(content)
-
-            if content:
-                if isinstance(content, JsonList) or isinstance(content, JsonDict):
-                    content = content.raw_object
-                elif content == "null":
-                    content = None
-                content = json.dumps(content, cls=_CustomEncoder, indent=2)
-            else:
-                if content is not None:
-                    content = str(content)
+            from arjuna.core.fmt import arj_convert
+            content = json.dumps(arj_convert(content), indent=2)
             return _HttpContent(content=content, type=cls.get_content_type(cls.json))
 
         @classmethod
