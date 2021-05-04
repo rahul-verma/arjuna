@@ -54,6 +54,8 @@ Future Themes (In-Progress or Planned):
     - Support for externalization of HTTP msg (Basic Support. More features will unfold in upcoming builds.)
     - remove_none default has been changed to True for Data Entity's .as_dict() method.
     - Added support for data_entity as a valid content without converting using as_dict().
+    - Added support for Parsed cookie and HttpCookie Arjuna class.
+    - Support for checking secure and HttpOnly flags.
 - JsonDict can be compared with YamlDict or DataEntity. JsonList can be compared with YamlList.
 
 1.1.42

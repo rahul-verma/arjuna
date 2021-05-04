@@ -113,3 +113,15 @@ def check_msg_multiline_payload(request, data, httpbin):
 
     httpbin.message(data.msg, payload=payload)
 
+@test(drive_with=records(
+    record(msg="07_headers_req1"),
+    record(msg="07_headers_res1"),
+))
+def check_msg_headers(request, data, httpbin):
+    httpbin.message(data.msg)
+
+@test(drive_with=records(
+    record(msg="08_cookies_1"),
+))
+def check_msg_cookies(request, data, httpbin):
+    httpbin.message(data.msg)

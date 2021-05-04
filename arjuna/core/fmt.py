@@ -80,6 +80,9 @@ def arj_format_str(target, vargs, repl_dict):
 
 def arj_convert(content):
 
+        if content is None or content == "":
+            return content
+
         from json import JSONEncoder, dumps, loads
         from arjuna.tpi.parser.yaml import YamlDict, YamlList
         from arjuna.tpi.parser.json import JsonDict, JsonList

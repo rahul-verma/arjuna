@@ -27,6 +27,23 @@ from .request import _HttpRequest
 from .response import HttpResponse
 from .message import _HttpMessage
 
+class HttpCookie:
+
+    def __init__(self, session, cookie):
+        self.__cookie = cookie
+
+    @property
+    def _raw_cookie(self):
+        return self.__cookie
+
+    @property
+    def secure_enabled(self):
+        return self.__cookie.secure
+
+    @property
+    def httponly_enabled(self):
+        return self.__cookie.has_nonstandard_attr("HttpOnly")
+
 
 class HttpSession:
     '''
@@ -69,9 +86,16 @@ class HttpSession:
     @property
     def cookies(self) -> dict:
         '''
-            All current cookies in this session object.
+            All current cookie name/values in this session object.
         '''
         return self.__session.cookies.get_dict()
+
+    @property
+    def parsed_cookies(self) -> dict:
+        '''
+            All current cookie name and corresponding `HttpCookie` object in this session object.
+        '''
+        return {cookie.name:HttpCookie(self, cookie) for cookie in self._session.cookies}
 
     def add_cookies(self, cookie_dict):
         '''

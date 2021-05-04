@@ -89,6 +89,20 @@ class HttpResponse(HttpPacket):
             codes = {codes}
         self.asserter.assert_true(self.status_code in codes, f"HTTP status code {self.status_code} is not expected. Expected: {codes}. {msg}")
 
+    def assert_headers(self, headers: dict, *, msg):
+        '''
+            Assert that all headers in provided in the headers dict are matched in response.
+
+            Arguments:
+                headers: HTTP headers dictionary
+
+            Keyword Arguments:
+                msg: Purpose of this assertion
+        '''
+        for k,v in headers.items():
+            self.asserter.assert_true(k in self.headers, f"HTTP response header {k} is not present in response. {msg}")
+            self.asserter.assert_equal(self.headers[k], v, f"HTTP response header {k} value does not match. {msg}")
+
     @property
     def status(self) -> str:
         ''' 

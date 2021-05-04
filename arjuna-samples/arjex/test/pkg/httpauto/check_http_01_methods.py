@@ -22,6 +22,13 @@ import io
 from arjuna import *
 
 @test
+def check_temp_http(request, httpbin):
+    s = Http.session(url="https://google.com")
+    s.message()
+    for c,v in s.parsed_cookies.items():
+        print(c, v.secure_enabled, v.httponly_enabled)
+
+@test
 def check_HTTP_200_OK_HEAD(request, httpbin):
     r = httpbin.head('/get')
     assert r.status_code == 200

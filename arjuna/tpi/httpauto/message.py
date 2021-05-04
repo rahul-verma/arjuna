@@ -32,7 +32,7 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 
 safe_eval = ast.literal_eval
 
-def _convert_yaml_json_to_json(jval):
+def _convert_yaml_obj_to_content(jval):
     def handle_str_val(in_val):
         if in_val.lower().strip() == "null":
             out_val = "null"
@@ -88,15 +88,17 @@ class _HttpYamlReqRepr:
 
         if "content_type" in req_yaml:
             from arjuna import Http
-            if "content" in req_yaml:
-                if req_yaml["content_type"] == "json":
-                    req_yaml["content"] = _convert_yaml_json_to_json(req_yaml["content"])
-
-                if req_yaml["content"] is None:
-                    req_yaml["content"] == "null"
-
-                req_yaml["content"] = getattr(Http.content, req_yaml["content_type"].lower())(req_yaml["content"])
+            content_handler = getattr(Http.content, req_yaml["content_type"].lower())
             del req_yaml["content_type"]
+        else:
+            content_handler = session.request_content_handler
+
+        if "content" in req_yaml:
+            req_yaml["content"] = _convert_yaml_obj_to_content(req_yaml["content"])
+            # if req_yaml["content"] is None:
+            #     req_yaml["content"] == "null"
+
+            req_yaml["content"] = content_handler(req_yaml["content"])
 
         self.__attrs = req_yaml
 
@@ -114,7 +116,7 @@ class _HttpYamlReqRepr:
 
 class _HttpResProcessor(metaclass=abc.ABCMeta):
     
-    def __init__(self, session, codes=200, url=None, headers=None, text=None, json={}):
+    def __init__(self, session, codes=200, url=None, headers={}, cookies={}, text=None, json={}):
         from .request import _HttpRequest
         self.__session = session
         self.__json_set = False
@@ -124,7 +126,8 @@ class _HttpResProcessor(metaclass=abc.ABCMeta):
         self.__repr = {
             "codes" : _HttpRequest._process_codes(codes),
             "url" : url,
-            "headers": {},
+            "headers": headers,
+            "cookies": cookies,
             "text": {
                 "partials": None,
                 "patterns": None
@@ -157,6 +160,14 @@ class _HttpResProcessor(metaclass=abc.ABCMeta):
         return self.__repr["url"]
 
     @property
+    def headers(self):
+        return self.__repr["headers"]
+
+    @property
+    def cookies(self):
+        return self.__repr["cookies"]
+
+    @property
     def json(self):
         if self.__json_set:
             return self.__repr["json"]
@@ -177,8 +188,36 @@ class JsonValidator(AsserterMixIn):
                     if str(e).startswith("Parse error"):
                         raise Exception("Wrong JPath syntax: {}".format(jpath))
                     raise
-                jval = _convert_yaml_json_to_json(jval)
+                jval = _convert_yaml_obj_to_content(jval)
                 self.asserter.assert_equal(val, jval, "Dummy msg") # msg should reflect label or file name
+
+class CookieValidator(AsserterMixIn):
+
+    def __init__(self, session, cookie_yaml):
+        super().__init__()
+        for cookie_name, cookie_val in cookie_yaml.items():
+            msg = f"Cookie with name {cookie_name} was not found in session cookies."
+            try:
+                self.asserter.assert_true(cookie_name in session.cookies, msg=msg)
+            except AssertionError:
+                self.asserter.fail(msg=msg)
+            attr_map = {
+                "secure": None,
+                "HttpOnly": None
+            }
+            cookie_val_to_match = None
+            if type(cookie_val) is dict:
+                for k,v in cookie_val.items():
+                    if k in raw_map:
+                        raw_map[k] = v
+                if "value" in cookie_val:
+                    cookie_val_to_match = cookie_val["value"]
+            else:
+                cookie_val_to_match = str(cookie_val)
+            
+            for scname, scvalue in session.full_cookies.items():
+                print(scname, scvalue, type(scvalue))
+
 
 class _HttpExpectedResProcessor(_HttpResProcessor):
     
@@ -191,7 +230,12 @@ class _HttpExpectedResProcessor(_HttpResProcessor):
         if self.url:
             assert response.request.url == self.url 
         if self.json:
-            jvalidator = JsonValidator(response.json, self.json)   
+            jvalidator = JsonValidator(response.json, self.json)  
+        if self.headers:
+            headers = {k:str(v) for k,v in  _convert_yaml_obj_to_content(self.headers).items()}
+            response.assert_headers(self.headers, msg="dummy") 
+        if self.cookies:
+            CookieValidator(self._session, _convert_yaml_obj_to_content(self.cookies))
 
 class _HttpUnexpectedResProcessor(_HttpResProcessor):
 
