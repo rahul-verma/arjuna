@@ -4,10 +4,6 @@ request:
   content_type: json
   content: ["a", "b"]
 
-response:
-
-  expected:
-  
-    json:
-      jpaths: 
-        json: ["a", "b"]
+match:
+  jpath:
+    json: ["a", "b"]

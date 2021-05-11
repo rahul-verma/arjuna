@@ -232,8 +232,8 @@ class HttpUnexpectedStatusCodeError(Exception):
         Raised when the HTTP status code for a request does not match expected status code(s).
     '''
 
-    def __init__(self, request, response):
-        super().__init__(f"Unexpected status code {response.status_code} for {response.url} in {request.method} request.")
+    def __init__(self, request, response, *, msg):
+        super().__init__(f"Unexpected status code {response.status_code} for {response.url} in {request.method} request. {msg}.")
         self.__request = request
         self.__response = response
 

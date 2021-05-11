@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.interact.gui.auto.automator.actions
    arjuna.interact.gui.auto.automator.automator_conditions

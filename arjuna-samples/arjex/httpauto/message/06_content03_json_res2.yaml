@@ -8,14 +8,10 @@ request:
       "d": 1
     }
 
-response:
-
-  expected:
-  
-    json:
-      jpaths: 
-        json: >
-          {
-            "a" :  "b",
-            "d": 1
-          }
+match:
+  jpath:
+    json: >
+      {
+        "a" :  "b",
+        "d": 1
+      }

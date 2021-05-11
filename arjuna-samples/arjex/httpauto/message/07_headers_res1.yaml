@@ -1,8 +1,5 @@
 request:
   route: "http://httpbin.org/response-headers?foo=bar"
 
-response:
-
-  expected:
-    headers:
-      foo: bar
+headers:
+  foo: bar

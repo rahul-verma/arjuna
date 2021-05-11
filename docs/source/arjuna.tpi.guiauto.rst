@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.tpi.guiauto.base
    arjuna.tpi.guiauto.meta
@@ -17,6 +18,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.tpi.guiauto.helper
 

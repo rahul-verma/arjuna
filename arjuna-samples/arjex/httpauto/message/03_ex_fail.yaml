@@ -2,6 +2,4 @@ request:
   method: get
   route: "/get"
 
-response:
-  expected:
-    codes: 404
+codes: 404

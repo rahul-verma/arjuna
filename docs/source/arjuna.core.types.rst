@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.core.types.constants
    arjuna.core.types.descriptors

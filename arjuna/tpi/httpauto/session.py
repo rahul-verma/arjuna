@@ -25,7 +25,8 @@ import time
 
 from .request import _HttpRequest
 from .response import HttpResponse
-from .message import _HttpMessage
+from .cookie import HttpCookie
+from arjuna.interact.http.model.message import HttpMessage
 
 class HttpCookie:
 
@@ -33,16 +34,20 @@ class HttpCookie:
         self.__cookie = cookie
 
     @property
-    def _raw_cookie(self):
+    def _cookie(self):
         return self.__cookie
 
     @property
+    def value(self):
+        return self._cookie.value
+
+    @property
     def secure_enabled(self):
-        return self.__cookie.secure
+        return self._cookie.secure
 
     @property
     def httponly_enabled(self):
-        return self.__cookie.has_nonstandard_attr("HttpOnly")
+        return self._cookie.has_nonstandard_attr("HttpOnly")
 
 
 class HttpSession:
@@ -193,18 +198,18 @@ class HttpSession:
 
     def message(self, msg_name=None, **fargs) -> HttpResponse:
         if msg_name is not None:
-            msg = _HttpMessage.from_file(self, msg_name, **fargs)
+            msg = HttpMessage.from_file(self, msg_name, **fargs)
         else:
-            msg = _HttpMessage.root(self)
+            msg = HttpMessage.root(self)
         return msg.send()
 
     def _validate_status_code(cls, response, codes, *, expected=True):
         if expected:
             if response.status_code not in codes:
-                raise HttpUnexpectedStatusCodeError(response.request, response)
+                raise HttpUnexpectedStatusCodeError(response.request, response, msg=f"Expected code(s): {codes}")
         else:
             if response.status_code in codes:
-                raise HttpUnexpectedStatusCodeError(response.request, response)
+                raise HttpUnexpectedStatusCodeError(response.request, response, msg=f"Unexpected code(s): {codes}")
 
 
     def _send(self, request) -> HttpResponse:

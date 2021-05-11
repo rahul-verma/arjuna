@@ -4,10 +4,6 @@ request:
   content_type: json
   content: "null"
 
-response:
-
-  expected:
-  
-    json:
-      jpaths: 
-        json: null # httpbin returns null object not null string as root object is null
+match:
+  jpath:
+    json: null # httpbin returns null object not null string as root object is null

@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.tpi.data.entity
    arjuna.tpi.data.generator

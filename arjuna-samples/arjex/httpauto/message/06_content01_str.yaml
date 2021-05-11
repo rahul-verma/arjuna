@@ -4,9 +4,6 @@ request:
   content_type: text
   content: test
 
-response:
-
-  expected:
-    json:
-      jpaths: 
-        data: test
+match:
+  jpath:
+    data: test

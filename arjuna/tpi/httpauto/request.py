@@ -26,7 +26,7 @@ from arjuna.tpi.data.entity import _DataEntity
 from arjuna.tpi.engine.asserter import AsserterMixIn
 import time
 
-from .message import HttpPacket
+from .packet import HttpPacket
 from .response import HttpResponse
 
 class HttpRequest(HttpPacket):
@@ -114,11 +114,17 @@ class HttpRequest(HttpPacket):
     @property
     def text(self):
         '''
-            Content of this request message as plain text.
+            Content of this request message as Text object.
+        '''
+        from arjuna.tpi.parser.text import Text
+        return Text(self.content)
+
+    @property
+    def content(self):
+        '''
+            Content of this request message as plain unformatted text.
         '''
         return self.__request.body
-
-    content = text
 
     __OUT ='''{}
 {}{}'''
@@ -136,7 +142,7 @@ class HttpRequest(HttpPacket):
         ).strip()
 
     def __str__(self):
-        content = self.text
+        content = self.content
         if isinstance(content, bytes):
             content = content.decode()
         return self.repr_as_str(
@@ -182,7 +188,7 @@ class _HttpRequest(HttpRequest):
 
     @classmethod
     def _process_codes(cls, codes):
-        return type(codes) in {set, list, tuple} and ccodes or {codes}
+        return type(codes) in {set, list, tuple} and codes or {int(codes)}
 
     def __prepare_headers(self):
         if self.__method in {'POST', 'PUT', 'PATCH', 'OPTIONS'}:

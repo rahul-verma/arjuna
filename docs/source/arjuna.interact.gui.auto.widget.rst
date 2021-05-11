@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.interact.gui.auto.widget.internal
    arjuna.interact.gui.auto.widget.nested

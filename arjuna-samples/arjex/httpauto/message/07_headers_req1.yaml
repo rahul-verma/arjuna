@@ -3,9 +3,6 @@ request:
   headers:
     'User-agent': 'Mozilla/5.0'
 
-response:
-
-  expected:
-    json:
-      jpaths:
-        'user-agent': 'Mozilla/5.0' # httpbin reflects it in root dict
+match:
+  jpath:
+    'user-agent': 'Mozilla/5.0' # httpbin reflects it in root dict

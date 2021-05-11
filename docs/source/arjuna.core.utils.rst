@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.core.utils.cmd_utils
    arjuna.core.utils.data_utils

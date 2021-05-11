@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.interact.gui.auto.finder.element_finder
    arjuna.interact.gui.auto.finder.enums

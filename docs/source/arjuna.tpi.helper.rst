@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.tpi.helper.arjtype
    arjuna.tpi.helper.audit

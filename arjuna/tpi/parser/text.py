@@ -16,6 +16,7 @@
 # limitations under the License.
 
 import os
+import re
 
 from arjuna.core.utils import data_utils
 from arjuna.core.types import constants
@@ -245,6 +246,38 @@ class Text:
     '''
     Provides factory methods for dealing with reading text file content in various forms.
     '''
+    def __init__(self, text):
+        self.__content = text
+
+    @property
+    def content(self):
+        return self.__content
+
+    def findall(self, repattern):
+        return re.findall(repattern, self.content)
+
+    def find(self, repattern):
+        all = re.findall(repattern, self.content)
+        if all:
+            return all
+        else:
+            raise Exception(f"No match found for {repattern} in {self.content}")
+
+    def exists(self, repattern):
+        matches = re.findall(repattern, self.content)
+        if matches:
+            return True
+        else:
+            return False
+
+    def __str__(self):
+        return self.content
+
+    def __repr__(self):
+        return self.content
+
+    def __eq__(self, other):
+        return self.content == other
 
     @classmethod
     def file_content(cls, fpath) -> str:

@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.tpi.guiauto.obj.frame
    arjuna.tpi.guiauto.obj.webalert

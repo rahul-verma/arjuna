@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.interact.gui.dispatcher.driver.driver_commands
    arjuna.interact.gui.dispatcher.driver.element_commands

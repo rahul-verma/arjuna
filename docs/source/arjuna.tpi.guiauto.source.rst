@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.tpi.guiauto.source.base
    arjuna.tpi.guiauto.source.content

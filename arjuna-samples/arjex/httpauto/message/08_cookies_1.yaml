@@ -1,8 +1,6 @@
 request:
   route: "http://httpbin.org/cookies/set?foo=bar"
 
-response:
-
-  expected:
-    cookies:
-      foo: bar1
+# Response
+cookies:
+  foo: bar1

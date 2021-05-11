@@ -155,6 +155,11 @@ class JsonDict(_ArDict, JsonElement):
         _ArDict.__init__(self, pydict)
         JsonElement.__init__(self, self.store)
 
+    def __str__(self):
+        return str(self.store)
+
+    __repr__ = __str__
+
     @property
     def size(self):
         '''

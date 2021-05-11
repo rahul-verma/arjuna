@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.interact.gui.auto.condition.container_conditions
    arjuna.interact.gui.auto.condition.element_conditions

@@ -1,4 +1,2 @@
 
-response:
-  expected:
-    codes: 200
+codes: 200

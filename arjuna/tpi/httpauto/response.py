@@ -26,7 +26,7 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 from requests.exceptions import ConnectionError, TooManyRedirects
 import time
 
-from .message import HttpPacket
+from .packet import HttpPacket
 
 
 class HttpResponse(HttpPacket):
@@ -111,27 +111,33 @@ class HttpResponse(HttpPacket):
         return self.__resp.reason
 
     @property
-    def text(self) -> str:
-        ''' 
-            HTTP Response content as plain text.
+    def text(self):
+        '''
+            HTTP Response content as Text object.
+        '''
+        from arjuna.tpi.parser.text import Text
+        return Text(self.content)
+
+    @property
+    def content(self):
+        '''
+            HTTP Response content as plain unformatted text.
         '''
         return self.__resp.text
-
-    content = text
 
     @property
     def json(self) -> 'JsonDictOrJsonList':
         ''' 
             HTTP Response content as Arjuna's `JsonDict` or `JsonList` object.
         '''
-        return Json.from_str(self.text)
+        return Json.from_str(self.content)
 
     @property
     def html(self) -> 'HtmlNode':
         ''' 
             HTTP Response content as Arjuna's `HtmlNode` object.
         '''
-        return Html.from_str(self.text)
+        return Html.from_str(self.content)
 
     @property
     def redir_history(self) -> tuple:
@@ -199,6 +205,6 @@ class HttpResponse(HttpPacket):
             status_code = self.status_code,
             status_msg = self.status,
             headers = self.headers,
-            content = self.text
+            content = self.content
         )
 

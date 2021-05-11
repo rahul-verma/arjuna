@@ -6,11 +6,8 @@ request:
     a: b
     d: 1
 
-response:
-
-  expected:
-    json:
-      jpaths: 
-        form:
-          a: b
-          d: "1" # httpbin returns it as a string
+match:
+  jpath: 
+    form:
+      a: b
+      d: "1" # httpbin returns it as a string

@@ -22,7 +22,7 @@
 #       max_size:
 #       size_range:
 #       schema:
-#       jpaths:
+#       match:
 #         id: id
 
 #   unexpected:
@@ -33,7 +33,7 @@
 #       patterns:
 #     json:
 #       type:
-#       jpaths:
+#       match:
 #         id: id
 
 #   extract:

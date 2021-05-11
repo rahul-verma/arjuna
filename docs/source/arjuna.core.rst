@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.core.adv
    arjuna.core.db
@@ -19,11 +20,13 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.core.checks
    arjuna.core.constant
    arjuna.core.discovery
    arjuna.core.error
+   arjuna.core.fmt
    arjuna.core.har
    arjuna.core.utils
    arjuna.core.value

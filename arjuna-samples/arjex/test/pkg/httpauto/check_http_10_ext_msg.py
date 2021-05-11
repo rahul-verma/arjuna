@@ -125,3 +125,11 @@ def check_msg_headers(request, data, httpbin):
 ))
 def check_msg_cookies(request, data, httpbin):
     httpbin.message(data.msg)
+
+@test(drive_with=records(
+    record(msg="08_text01"),
+    record(msg="08_text02")
+))
+def check_msg_text(request, data, httpbin):
+    httpbin.message(data.msg)
+

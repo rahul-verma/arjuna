@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.tpi.data
    arjuna.tpi.dbauto
@@ -20,6 +21,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.tpi.arjuna_types
    arjuna.tpi.config

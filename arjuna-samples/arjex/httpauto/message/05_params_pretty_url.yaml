@@ -4,7 +4,5 @@ request:
   $param$: $val$
   pretty_url: True
 
-response:
-  expected:
-    codes: 404
-    url: "$url$/$param$/$val$"
+codes: 404
+url: "$url$/$param$/$val$"

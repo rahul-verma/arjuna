@@ -7,15 +7,11 @@ request:
       "a" : "b",
       "d": 1
     }
-
-response:
-
-  expected:
   
+match:
+  jpath: 
     json:
-      jpaths: 
-        json:
-          {
-            "a" :  "b",
-            "d": 1
-          }
+      {
+        "a" :  "b",
+        "d": 1
+      }

@@ -3,7 +3,5 @@ request:
   route: "$url$#fragment"
   a: b
 
-response:
-  expected:
-    codes: 404
-    url: "$url$&$param_str$#fragment"
+codes: 404
+url: "$url$&$param_str$#fragment"

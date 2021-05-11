@@ -1,0 +1,5 @@
+request:
+  route: "http://httpbin.org"
+
+has:
+  regex: '<title>\s*httpbin.org\s*</title>'

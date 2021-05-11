@@ -4,10 +4,6 @@ request:
   content_type: json
   content: null
 
-response:
-
-  expected:
-  
-    json:
-      jpaths: 
-        json: null
+match:
+  jpath:
+    json: null

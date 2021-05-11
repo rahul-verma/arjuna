@@ -8,14 +8,10 @@ request:
       "b": "null"
     }
 
-response:
-
-  expected:
-  
-    json:
-      jpaths: 
-        json: 
-            {
-              "a": null, # null is differentiated from "null" as string
-              "b": "null"
-            }
+match:
+  jpath:
+    json: 
+        {
+          "a": null, # null is differentiated from "null" as string
+          "b": "null"
+        }

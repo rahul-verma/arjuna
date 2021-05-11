@@ -5,6 +5,7 @@ Subpackages
 -----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.interact.gui.auto
    arjuna.interact.gui.dispatcher

@@ -5,6 +5,7 @@ Submodules
 ----------
 
 .. toctree::
+   :maxdepth: 4
 
    arjuna.interact.gui.gom.guidef
    arjuna.interact.gui.gom.guimgr
