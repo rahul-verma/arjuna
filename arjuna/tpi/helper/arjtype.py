@@ -540,4 +540,10 @@ class axes:
         self.__axes.append(_Axis(DomDirection.RIGHT, node))
         return self
 
+class NotFound:
+    '''
+    To differentiate a not found object from Python's None.
+    '''
+    pass
+
 NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response sub_network_packets")

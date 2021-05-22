@@ -241,17 +241,22 @@ class DelimTextFileWithLineAsMap:
 
     __next__ = next
 
+from arjuna.tpi.engine.asserter import AsserterMixIn
 
-class Text:
+class Text(AsserterMixIn):
     '''
     Provides factory methods for dealing with reading text file content in various forms.
     '''
     def __init__(self, text):
+        super().__init__()
         self.__content = text
 
     @property
     def content(self):
         return self.__content
+
+    def assert_contains(self, sub_str, *, msg):
+        self.asserter.assert_true(sub_str in self.content, msg="Sub string {} not found in {}. ".format(sub_str, self.content) + msg)
 
     def findall(self, repattern):
         return re.findall(repattern, self.content)

@@ -86,7 +86,7 @@ class GNS:
             if self.__gui.app._common_guidef is not self.__gui_def:
                 wmd = self.__gui.app._common_guidef.get_wmd(label)
         if wmd is None:
-            raise Exception("Definition for label {} not found.")
+            raise Exception(f"Definition for label {label} not found.")
         return wmd.create_formatted_wmd() # Only globals will be processed.
 
     def wait_until_absent(self, *labels):

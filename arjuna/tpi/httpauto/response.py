@@ -23,6 +23,7 @@ from arjuna.tpi.error import HttpUnexpectedStatusCodeError, HttpSendError
 from arjuna.tpi.parser.json import Json
 from arjuna.tpi.parser.html import Html
 from arjuna.tpi.engine.asserter import AsserterMixIn
+from arjuna.tpi.helper.arjtype import CIStringDict
 from requests.exceptions import ConnectionError, TooManyRedirects
 import time
 
@@ -42,6 +43,7 @@ class HttpResponse(HttpPacket):
         super().__init__(response)
         self.__session = session
         self.__resp = response
+        self.__store = CIStringDict()
 
     @property
     def is_redirect(self):
@@ -49,6 +51,13 @@ class HttpResponse(HttpPacket):
         Is True if this is a response is a redirection response.
         '''
         return self.__resp.is_redirect
+
+    @property
+    def store(self):
+        '''
+        Values extracted from response and stored.
+        '''
+        return self.__store
 
     @property
     def url(self) -> str:
