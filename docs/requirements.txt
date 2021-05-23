@@ -1,4 +1,4 @@
-Sphinx
+Sphinx==3.0.1
 Pallets-Sphinx-Themes
 requests
 requests-toolbelt
