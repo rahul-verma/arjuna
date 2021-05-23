@@ -1,3 +1,4 @@
+Sphinx
 Pallets-Sphinx-Themes
 requests
 requests-toolbelt
