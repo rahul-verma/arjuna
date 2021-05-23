@@ -30,7 +30,6 @@ class Validator(AsserterMixIn):
         return self.__response
 
     def validate(self, name, target):
-        print(self.__response.store)
         stored_value = self.__response.store[name]
 
         def validate_found(expected_to_be_found):
@@ -38,9 +37,9 @@ class Validator(AsserterMixIn):
             if isinstance(stored_value, NotFound):
                 exists = False
             if expected_to_be_found:
-                self.asserter.assert_true(exists, f"No value was extracted for name {name}")
+                self.asserter.assert_true(exists, f"No value was extracted for name >>{name}<<.")
             else:
-                self.asserter.assert_false(exists, "{} was extracted for name {}. It should not exist.".format(stored_value, name))
+                self.asserter.assert_false(exists, ">>{}<< was extracted for name >>{}<<. It should not exist.".format(stored_value, name))
 
         if "exists" not in target:
             validate_found(True)
@@ -59,7 +58,9 @@ class Validator(AsserterMixIn):
                 if type(stored_value) is str:
                     proc_stored_value = Text(stored_value)
                 for item in v:
-                    getattr(proc_stored_value, "assert_contains")(item, msg="Dummy msg.")
+                    getattr(proc_stored_value, "assert_contains")(item, msg=f"Extracted value for >>{name}<< does not contain >>{item}<<.")
+            elif k == "min":
+                self.asserter.assert_min(stored_value, v, msg=f"Extracted value for >>{name}<< did not match min value criterion.")
 
 
 

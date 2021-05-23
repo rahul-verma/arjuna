@@ -60,7 +60,7 @@ class TextValidator(AsserterMixIn, metaclass=abc.ABCMeta):
     def assert_match_for_patterns(self, patterns):
         match_dict = self.__extract_patterns([k for k in patterns.keys()])
         for regex, actual in match_dict.items():
-            self._eval_pattern_match(regex, actual, expected)
+            self._eval_pattern_match(regex, actual, patterns[regex])
 
 class ExpectedTextValidator(TextValidator):
 
@@ -68,10 +68,10 @@ class ExpectedTextValidator(TextValidator):
         super().__init__(response)
 
     def _eval_pattern_exists(self, pattern, exists):
-        self.asserter.assert_true(exists, f"Expected pattern {pattern} was not found.")
+        self.asserter.assert_true(exists, f"Expected pattern >>{pattern}<< was not found.")
 
     def _eval_pattern_match(self, pattern, actual, expected):
-        self.asserter.assert_equal(actual, expected, "Value for pattern {pattern} does not match.")
+        self.asserter.assert_equal(actual, expected, f"Value for pattern >>{pattern}<< does not match.")
 
 class UnexpectedTextValidator(TextValidator):
 
@@ -79,9 +79,9 @@ class UnexpectedTextValidator(TextValidator):
         super().__init__(response)
 
     def _eval_pattern_exists(self, pattern, exists):
-        self.asserter.assert_false(exists, f"Unexpected pattern {pattern} was found.")
+        self.asserter.assert_false(exists, f"Unexpected pattern >>{pattern}<< was found.")
 
     def _eval_pattern_match(self, pattern, actual, expected):
-        self.asserter.assert_equal(actual, expected, "Value for pattern {pattern} does not match.")
+        self.asserter.assert_equal(actual, expected, f"Value for pattern >>{pattern}<< does not match.")
 
 

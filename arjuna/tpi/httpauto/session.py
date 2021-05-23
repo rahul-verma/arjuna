@@ -42,11 +42,11 @@ class HttpCookie:
         return self._cookie.value
 
     @property
-    def secure_enabled(self):
+    def secure(self):
         return self._cookie.secure
 
     @property
-    def httponly_enabled(self):
+    def httponly(self):
         return self._cookie.has_nonstandard_attr("HttpOnly")
 
 

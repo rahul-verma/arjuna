@@ -543,7 +543,11 @@ class axes:
 class NotFound:
     '''
     To differentiate a not found object from Python's None.
+
+    Always evalutes to False in a boolean context.
     '''
-    pass
+    
+    def __bool__(self):
+        return False
 
 NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response sub_network_packets")

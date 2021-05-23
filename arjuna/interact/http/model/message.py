@@ -26,6 +26,11 @@ class HttpMessage:
         self.__session = session
         self.__req_repr = req_repr
         self.__resp_processor = resp_processor
+        self.__label = req_repr.label
+
+    @property
+    def label(self):
+        return self.__label
 
     @property
     def _req(self):
@@ -42,13 +47,13 @@ class HttpMessage:
         except AttributeError:
             raise Exception(f"Unsupported HTTP method: {method}")
         else:
-            response = call(self._req.route, **self._req.attrs)
+            response = call(self._req.route, label=self.label, **self._req.attrs)
             self.__resp_processor.validate(response)
             return response
 
     @classmethod
     def root(cls, session):
-        req_repr = HttpRequestYamlRepr(session, CIStringDict())
+        req_repr = HttpRequestYamlRepr(session, CIStringDict(), label="Root")
         resp_proc = HttpResponseYamlRepr(session, CIStringDict())
         return HttpMessage(session, req_repr, resp_proc)
 
@@ -68,11 +73,17 @@ class HttpMessage:
         if msg_yaml is None:
             return cls.root(session)
 
+        if "label" in msg_yaml:
+            label = msg_yaml["label"]
+            del msg_yaml["label"]
+        else: 
+            label = msg_file_name
+
         if "request" in msg_yaml:
-            req_repr = HttpRequestYamlRepr(session, CIStringDict(msg_yaml["request"].as_map()))
+            req_repr = HttpRequestYamlRepr(session, CIStringDict(msg_yaml["request"].as_map()), label=label)
             del msg_yaml["request"]
         else:
-            req_repr = HttpRequestYamlRepr(session, CIStringDict())
+            req_repr = HttpRequestYamlRepr(session, CIStringDict(), label=label)
         
         resp_proc = HttpResponseYamlRepr(session, CIStringDict(msg_yaml.as_map()))
 

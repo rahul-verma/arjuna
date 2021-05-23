@@ -20,6 +20,8 @@ from .json.validator import ExpectedJsonValidator, UnexpectedJsonValidator
 from .cookie.validator import CookieValidator
 from .text.validator import ExpectedTextValidator, UnexpectedTextValidator
 from .header.store import HeaderExtractor
+from .text.store import TextExtractor
+from .xml.store import XmlExtractor
 from .validator import Validator
 from arjuna.interact.http.model.internal.helper.yaml import convert_yaml_obj_to_content
 from arjuna.tpi.engine.asserter import AsserterMixIn
@@ -82,9 +84,7 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
 
         for k in self.__repr["validate"]:
             if k not in self.__repr["store"]:
-                raise Exception(f"{k} in validate section is not defined in store section of message.")
-
-        print(self.__repr) 
+                raise Exception(f"{k} in validate section is not defined in store section of message.") 
 
     @property
     def _session(self):
@@ -154,6 +154,10 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
             for name, sdict in self.store.items():
                 if sdict["header"]:
                     HeaderExtractor(response).store(name, sdict["header"])
+                elif sdict["regex"]:
+                    TextExtractor(response).store(name, sdict["regex"])
+                elif sdict["xpath"]:
+                    XmlExtractor(response).store(name, sdict["xpath"])
         if self.validations:
             validator = Validator(response)
             for k, target in self.validations.items():
@@ -183,7 +187,7 @@ class HttpExpectedResProcessor(_HttpResProcessor):
             assert response.request.url == self.url 
         if self.headers:
             headers = {k:str(v) for k,v in  convert_yaml_obj_to_content(self.headers).items()}
-            response.assert_headers(self.headers, msg="dummy") 
+            response.assert_headers(headers, msg="One or more headers do not match expected values.") 
         if self.cookies:
             CookieValidator(self._session, convert_yaml_obj_to_content(self.cookies))
 
@@ -211,4 +215,4 @@ class HttpUnexpectedResProcessor(_HttpResProcessor):
             headers = {k:str(v) for k,v in  convert_yaml_obj_to_content(self.headers).items()}
             for k,v in headers.items():
                 if k in response.headers:
-                    self.asserter.assert_not_equal(response.headers[k], v, f"HTTP response header {k} value matches {v} which is unexpected.")
+                    self.asserter.assert_not_equal(response.headers[k], v, f"HTTP response header >>{k}<< value matches >>{v}<< which is unexpected.")

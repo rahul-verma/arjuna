@@ -21,22 +21,23 @@ class CookieValidator(AsserterMixIn):
 
     def __init__(self, session, cookie_yaml):
         super().__init__()
+        cookies = session.parsed_cookies
         for cookie_name, cookie_val in cookie_yaml.items():
-            msg = f"Cookie with name {cookie_name} was not found in session cookies."
+            msg = f"Cookie with name >>{cookie_name}<< was not found in session cookies."
             try:
                 self.asserter.assert_true(cookie_name in session.cookies, msg=msg)
             except AssertionError:
                 self.asserter.fail(msg=msg)
-            attr_map = {
-                "secure": None,
-                "HttpOnly": None
-            }
-            cookie_val_to_match = None
+
+            cookie = cookies[cookie_name]
+
             if type(cookie_val) is dict:
                 for k,v in cookie_val.items():
-                    if k in raw_map:
-                        raw_map[k] = v
-                if "value" in cookie_val:
-                    cookie_val_to_match = cookie_val["value"]
+                    if k == "value":
+                        self.asserter.assert_equal(cookie.value, cookie_val["value"], f"Cookie value for >>{cookie_name}<< does not match expected value.")
+                    elif k.lower() == "httponly":
+                        self.asserter.assert_true(cookie.httponly, f"Cookie >>{cookie_name}<< does not have >>HttpOnly flag<< set.")
+                    elif k.lower() == "secure":
+                        self.asserter.assert_true(cookie.secure, f"Cookie >>{cookie_name}<< does not have >>secure flag<< set.")
             else:
-                cookie_val_to_match = str(cookie_val)
+                self.asserter.assert_equal(cookie.value, str(cookie_val), f"Cookie value for >>{cookie_name}<< does not match expected value.")

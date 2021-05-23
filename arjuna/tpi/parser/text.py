@@ -264,7 +264,7 @@ class Text(AsserterMixIn):
     def find(self, repattern):
         all = re.findall(repattern, self.content)
         if all:
-            return all
+            return all[0]
         else:
             raise Exception(f"No match found for {repattern} in {self.content}")
 

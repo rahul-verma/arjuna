@@ -67,10 +67,10 @@ class ExpectedJsonValidator(_JsonValidator):
         super().__init__(response)
 
     def _eval_pattern_exists(self, pattern, exists):
-        self.asserter.assert_true(exists, f"Expected pattern {pattern} was not found.")
+        self.asserter.assert_true(exists, f"Expected pattern >>{pattern}<< was not found.")
 
     def _eval_pattern_match(self, pattern, actual, expected):
-        self.asserter.assert_equal(actual, expected, "Value for pattern {pattern} does not match.")
+        self.asserter.assert_equal(actual, expected, f"Value for pattern >>{pattern}<< does not match.")
 
 class UnexpectedJsonValidator(_JsonValidator):
 
@@ -78,8 +78,8 @@ class UnexpectedJsonValidator(_JsonValidator):
         super().__init__(response)
 
     def _eval_pattern_exists(self, pattern, exists):
-        self.asserter.assert_false(exists, f"Unexpected pattern {pattern} was found.")
+        self.asserter.assert_false(exists, f"Unexpected pattern >>{pattern}<< was found.")
 
     def _eval_pattern_match(self, pattern, actual, expected):
-        self.asserter.assert_equal(actual, expected, "Value for pattern {pattern} does not match.")
+        self.asserter.assert_equal(actual, expected, f"Value for pattern >>{pattern}<< does not match.")
 
