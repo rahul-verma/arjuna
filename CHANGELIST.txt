@@ -57,6 +57,8 @@ Future Themes (In-Progress or Planned):
     - Added support for Parsed cookie and HttpCookie Arjuna class.
     - Support for checking secure and HttpOnly flags.
     - HttpRequest.text returns Arjuna's Text object. For raw text, use .content
+    - Support for has/match sections for basic existence and equality assertion on content.
+    - Support for store and validate sections in message for advanced assertions beyond has (exists) and match (equality). Works for headers as well.
 - JsonDict can be compared with YamlDict or DataEntity. JsonList can be compared with YamlList.
 
 1.1.42

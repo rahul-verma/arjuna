@@ -1,4 +1,4 @@
-arjuna.interact.http.model.internal.processor.cookie package
+arjuna.interact.http.model.internal.processor.header package
 ============================================================
 
 Submodules
@@ -7,12 +7,12 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
-   arjuna.interact.http.model.internal.processor.cookie.validator
+   arjuna.interact.http.model.internal.processor.header.store
 
 Module contents
 ---------------
 
-.. automodule:: arjuna.interact.http.model.internal.processor.cookie
+.. automodule:: arjuna.interact.http.model.internal.processor.header
    :members:
    :undoc-members:
    :show-inheritance:
