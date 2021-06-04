@@ -219,7 +219,7 @@ class JsonDict(_ArDict, JsonElement):
         validator = Draft7Validator(schema)
         errors = []
         for error in sorted(validator.iter_errors(self.store), key=str):
-            errors.append("Key >>{}<<: {}".format(".".join(error.path), error.message))
+            errors.append("Key >>{}<<: {}".format(".".join([str(i) for i in error.path]), error.message))
         if errors:
             return False, errors
         else:
