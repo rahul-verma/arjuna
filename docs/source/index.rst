@@ -61,7 +61,7 @@ HTTP Automation
 .. toctree::
    :maxdepth: 2
 
-   httpauto
+   httpauto/index
 
 
 Notes About Python Libraries and Tools Used in Arjuna
