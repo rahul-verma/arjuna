@@ -49,11 +49,11 @@ Future Themes (In-Progress or Planned):
 
 1.2.0
 -----
+    - Fix in arj_convert. When it checks for blank string, it first checks for its type to avoid triggering the overloaded == logic in provided object.
 
 1.1.44
 ------
     - Fix in matches_schema method for Json to handle mismtach in array entries.
-
 
 1.1.43
 ------

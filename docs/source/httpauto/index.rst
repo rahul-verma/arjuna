@@ -9,4 +9,6 @@
    request
    response
    oauth
+   seam
+   seam_message
    

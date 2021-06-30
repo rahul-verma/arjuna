@@ -80,7 +80,10 @@ def arj_format_str(target, vargs, repl_dict):
 
 def arj_convert(content):
 
-        if content is None or content == "":
+        if content is None:
+            return content
+
+        if type(content) is str and content == "":
             return content
 
         from json import JSONEncoder, dumps, loads

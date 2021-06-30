@@ -58,6 +58,10 @@ When you create project using **create-project** command, Arjuna places **placeh
 
     - **arjuna_config.py**: Can contain configurtion related function hooks enabled by Arjuna.
 
+- **httpauto**: Contains HTTP automation related files.
+
+    - **message**: HTTP Message Files go here.
+
 - **report**: Reports are generated here. Each test run is associated with a run-id.
 
     - **Timestamp-RunID**: Root directory of report for a given run. If **--static-rid** is provided then the directory is named as the run id that you provide with **-rid** CLI option or as the default run id which is **mrun**.
