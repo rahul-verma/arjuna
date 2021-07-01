@@ -47,6 +47,10 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.2.1
+-----
+
+
 1.2.0
 -----
     - Fix in arj_convert. When it checks for blank string, it first checks for its type to avoid triggering the overloaded == logic in provided object.
