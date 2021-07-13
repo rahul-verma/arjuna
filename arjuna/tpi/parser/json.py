@@ -23,8 +23,8 @@ import json
 import copy
 import abc
 from arjuna.tpi.helper.arjtype import _ArDict
-from jsonpath_rw import jsonpath
-from jsonpath_rw_ext import parse
+from jsonpath_ng import jsonpath, parse
+#from jsonpath_rw_ext import parse
 from json.decoder import JSONDecodeError
 from genson import SchemaBuilder
 from typing import Any
@@ -97,6 +97,9 @@ class JsonList(JsonElement):
     def __getitem__(self, index):
         return Json.from_object(self.__list[index], allow_any=True)
 
+    def __delitem__(self, index):
+        del self.store[key]
+
     def __len__(self):
         return len(self.__list)
 
@@ -113,6 +116,24 @@ class JsonList(JsonElement):
             A copy of the Python list that this object wraps.
         '''
         return copy.deepcopy(self.__list)
+
+    def pop(self, index=-1):
+        '''
+            Remove and return item at index (default last).
+        '''
+        return Json.from_object(self.__list.pop(index), allow_any=True)
+
+    def extend(self, iterable):
+        '''
+            Extend JsonList by appending elements from the iterable.
+        '''
+        self.__list.extend(iterable)
+
+    def append(self, object):
+        '''
+            Append object to the end of the JsonList.
+        '''
+        self.__list.append(object)
 
     def __str__(self):
         return str(self.__list)
@@ -159,6 +180,9 @@ class JsonDict(_ArDict, JsonElement):
         return str(self.store)
 
     __repr__ = __str__
+
+    def __delitem__(self, key):
+        del self.store[key]
 
     @property
     def size(self):
@@ -253,7 +277,7 @@ class JsonDict(_ArDict, JsonElement):
         if not matched:
             raise AssertionError("JsonDict does not match schema. Found the following errors. {}".format(". ".join(errors)))
 
-    def assert_match(self, jobj, *, msg, ignore_keys=None):
+    def assert_match(self, jobj, *, msg, ignore=None):
         '''
             Assert that this JsonDict matches the provided object.
 
@@ -262,23 +286,30 @@ class JsonDict(_ArDict, JsonElement):
 
             Keyword Args:
                 msg: Purpose of this assertion.
-                ignore_keys: Keys to be ignored while matching
+                ignore: jpath to be ignored while matching
         '''
-        if type(jobj) is dict:
-            jobj = JsonDict(jobj)
-        elif type(jobj) is JsonDict:
-            pass
-        else:
+        if type(jobj) not in {dict, JsonDict}:
             raise Exception("JsonDict.assert_match expected_dict argument should be a dictionary or a JsonDict object.")
-        if ignore_keys is None:
-            ignore_keys = set()
-        elif type(ignore_keys) in {set, dict, list, tuple}:
-            ignore_keys = set([i.lower() for i in ignore_keys])
+
+        # New logic based on content update to support japths instead of just keys to ignore.
+        if ignore is None:
+            ignore = set()
+        elif type(ignore) in {set, dict, list, tuple}:
+            ignore = set([i for i in ignore])
         else:
-            ignore_keys = {str(ignore_keys).lower()}
-        for k,v in self.items():
-            if k.lower() not in ignore_keys:
-                self.asserter.assert_equal(Json.from_object(v, allow_any=True), jobj[k], msg=msg)
+            ignore = {str(ignore)}
+
+        raw_obj = self.raw_object
+        if type(jobj) is JsonDict:
+            jobj = jobj.raw_object
+
+        for i in ignore:
+            expr = parse(i)
+            raw_obj = expr.update(raw_obj, None)
+            jobj = expr.update(jobj, None)
+
+        for k,v in raw_obj.items():
+            self.asserter.assert_equal(Json.from_object(v, allow_any=True), jobj[k], msg=msg + f" Verify key: {k}")
 
     @property
     def schema(self) -> 'JsonSchema':

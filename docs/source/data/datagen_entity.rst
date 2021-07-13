@@ -27,8 +27,8 @@ Using its methods you can generate the following:
     * postal code
     * sentence
     * ustr
+    * fixed_length_str
     * fixed_length_number
-
 
 Creating a Basic **Data Entity**
 --------------------------------

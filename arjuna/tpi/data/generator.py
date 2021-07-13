@@ -167,19 +167,73 @@ class Random:
     '''
 
     @classmethod
-    def ustr(cls, *, prefix: str=None, maxlen=None) -> str:
+    def ustr(cls, *, prefix: str=None, maxlen: int=None, minlen: int=None, delim:str="-", strict=False) -> str:
         '''
-            Generate a unique UUID string
-
+            Generate a unique UUID string.
+            If minlen/maxlen are specified in a manner that leads to uuid truncation, uniqueness is not enforced.
+            Base string is calculated as prefix + delim + uuid. Base string length is prefix length + delim length + 36 (length of uuid4)
+            Different arguments tweak the length of generated string by appending uuid one or more times fully or partially.
+            
             Keyword Arguments:
                 prefix: (Optional) prefix to be added to the generated UUID string.
-                maxlen: (Optional) Maximum length of the retuned string (inclusive of prefix-).
+                minlen: (Optional) Minimum length of the retuned string (inclusive of prefix + delim). Default is base string length.
+                maxlen: (Optional) Maximum length of the retuned string (inclusive of prefix + delim). Should be greater than minlen. Default is calculated as:
+                    * if minlen > half of base string length, then default maxlen is 2 * minlen 
+                    * if minlen <  half of base string length, then default maxlen is base string length
 
+                delim: (Optional) Delimiter between prefix and generated string. Default is "-". Ignored if prefix is not specified.
+                strict: (Optional) If True uniqueness of string is enforced which means full generated uuid must be used atleast once. This means length of generated string must be >= base string length, else an exception is thrown.
             Returns:
                 A string that is unique for current session.
         '''
-        prefix = prefix and prefix + "-" or ""
-        return maxlen and "{}{}".format(prefix, uuid.uuid4())[:int(maxlen)] or "{}{}".format(prefix, uuid.uuid4())
+        if maxlen is not None and minlen is not None:
+            if maxlen < minlen:
+                raise Exception("maxlen must be greater than minlen for Random.ustr call")
+
+        prefix = prefix and prefix + delim or ""
+        gen_str = uuid.uuid4()
+        base_str = prefix + str(gen_str)
+
+        if strict:
+            if minlen is not None and minlen < len(base_str):
+                minlen = len(base_str)
+            if maxlen is not None and maxlen < len(base_str):
+                raise Exception("In strict mode the maxlen can not be less than length of prefix + delim + 36 (len of uuid). Generated string: >>{}<< (length={}). Specified maxlen: {}".format(base_str, len(base_str), maxlen))
+
+        target_len = len(base_str)
+        if minlen is not None and maxlen is not None:
+            target_len = Random.int(begin=minlen, end=maxlen)
+        elif minlen is not None:
+            if minlen < 0.5 * len(base_str):
+                target_len = Random.int(begin=minlen, end=len(base_str))
+            else:
+                target_len = Random.int(begin=minlen, end=2 * minlen)
+        elif maxlen is not None:
+            if maxlen <= len(base_str):
+                target_len = maxlen
+            else:
+                target_len = Random.int(begin=len(base_str), end=maxlen)
+
+        multiplier = (target_len // 36) + (target_len % 36 > 0 and 1 or 0)
+        base_str = prefix + multiplier * str(gen_str)
+
+        return base_str[:target_len]
+
+    @classmethod
+    def fixed_length_str(cls, *, length):
+        '''
+            Generate a fixed length string
+
+            Keyword Arguments:
+                length: Number of chracters in generated number.
+
+            Returns:
+                A generated fixed length string
+
+            Note:
+                A number of minimum length 1 is always generated.
+        '''
+        return Random.ustr(minlen=length, maxlen=length)[:length]
 
     @classmethod
     def first_name(cls, *, locale=Locales.EN):

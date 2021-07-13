@@ -49,7 +49,11 @@ Future Themes (In-Progress or Planned):
 
 1.2.1
 -----
-
+    - Support for Min len in Random string generation. Added provision for strict usage and custom delimiter.
+    - Added fixed_length_str method in Random class
+    - JsonDict.assert_match: ignore_keys is changed to ignore argument which supports Jpath based igorning of content in JsonDict while matching.
+    - JsonDict now support del keyword for deleting an item.
+    - Added pop/extend/append methods to JsonList
 
 1.2.0
 -----
