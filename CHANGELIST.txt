@@ -47,6 +47,10 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.2.2
+-----
+
+
 1.2.1
 -----
     - Support for Min len in Random string generation. Added provision for strict usage and custom delimiter.
