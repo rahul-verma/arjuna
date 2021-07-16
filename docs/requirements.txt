@@ -24,3 +24,4 @@ jsonschema
 haralyzer
 browsermob-proxy
 mysql-connector-python
+jsonpath-ng

@@ -49,7 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.2.2
 -----
-
+    - Added jsonpath-ng==1.5.3 to dependencies.
 
 1.2.1
 -----

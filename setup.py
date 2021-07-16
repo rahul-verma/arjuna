@@ -72,6 +72,7 @@ setup(
         "mimesis==4.0.0", 
         "jsonpath-rw==1.4.0", 
         "jsonpath-rw-ext==1.2.2", 
+        "jsonpath-ng==1.5.3",
         "genson==1.2.1", 
         "jsonschema==3.2.0", 
         "Pallets-Sphinx-Themes", 
