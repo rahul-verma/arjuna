@@ -47,6 +47,9 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.2.3
+-----
+
 1.2.2
 -----
     - Added jsonpath-ng==1.5.3 to dependencies.
