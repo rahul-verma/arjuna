@@ -57,7 +57,17 @@ class record(_DataMarkUp):
         return SingleDataRecordSource(self.get_record(context=context), context=context)
 
     def get_record(self, *, context="Test"):
-        return DataRecord(context=context, *self.__vargs, **self.__kwargs)
+        from arjuna import generator
+        def convert_generator(arg):
+            if isinstance(arg, generator):
+                return arg.generate()
+            else:
+                return arg
+
+        return DataRecord(context=context, 
+            *[convert_generator(arg) for arg in self.__vargs], 
+            **{k: convert_generator(v) for k,v in self.__kwargs.items()}
+        )
 
 class records(_DataMarkUp):
     '''

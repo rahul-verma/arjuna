@@ -49,6 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.2.3
 -----
+    - Data Record is now aware of Arjuna's generator construct and calls its generate() method automatically even if not called explicitly.
 
 1.2.2
 -----

@@ -121,6 +121,21 @@ You can also use your own random data generator callables:
         # Gets assigned a random int as age when object is created as returned by some_data_gen
         person2 = Person(name=Random.name, country='India')
 
+.. _generator:
+
+Arjuna's **generator** Construct
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Arjuna's **generator** construct can call any callable with provided arbitrary positional as well as keyword arguments.
+
+This is a **lazy mechanism**. It means that when this construct is used, till its **generate()** call is made, the corresponding callable is not called.
+
+Following are some examples
+
+    .. code-block:: python
+
+        generator(Random.first_name).generate()
+        generator(some_callable, arg1, arg2, kwarg1=value1, kwarg2=value2).generate()
 
 Using **generator** Construct to Provide Arbitrary Arguments to Generator Callables
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

@@ -12,7 +12,7 @@ Here, we will explore various flexible options available in Arjuna for data driv
 
 You can supply **drive_with** argument to the **@test** decorator to instruct Arjuna to associate a **Data Source** with a test. Depending on the needs, as described below, you use Arjuna's markup for different types of data sources.
 
-Single **data record**
+Single **Data Record**
 ----------------------
 
 Sometimes, the need is simple. You have a single data record, but want to separate it from the test code for the sake of clarity.
@@ -34,6 +34,20 @@ This need is solved with the **record** markup of Arjuna. You can provide any nu
 5. Within the body of the tests, you access the positional values using indices (e.g. **data[0]**)
 6. You can retrieve named values using a dictionary syntax (e.g. **data['a']**) or dot syntax (e.g. **data.a**).
 7. Names are case-insensitive. **data['a']**, **data['A']**, **data.a** and **data.A** mean the same thing.
+
+You can also use Arjuna's :ref:`generator` construct in data record. The **generate()** call of :ref:`generator`  is optional as data records recognizes when a :ref:`generator` is supplied as a positional or keyword argument.
+
+.. code-block:: python
+
+    from arjuna import *
+
+    @test(drive_with=record(generator(Random.first_name).generate()))
+    def check_generator_with_generate_call(request, data):
+        pass
+
+    @test(drive_with=record(generator(Random.first_name)))
+    def check_generator_without_generate_call(request, data):
+        pass
 
 **Multiple Data Records**
 -------------------------
