@@ -14,3 +14,24 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+from .message import RootHttpMessage, HttpMessage
+
+class HttpMessageLoader:
+
+    def __init__(self, action):
+        self._action = action
+
+    def __getattr__(self, msg_name: str, **fargs) -> HttpMessage:
+        if msg_name == "root":
+            msg = RootHttpMessage(vars(self)["_action"])
+        else:
+            msg = HttpMessage(name=msg_name, action=vars(self)["_action"], **fargs)
+
+        return msg
+
+    def send(self, msg_name=None, **fargs):
+        if msg_name is None:
+            return self.root.send(**fargs)
+        else:
+            return getattr(self, msg_name).send(**fargs)

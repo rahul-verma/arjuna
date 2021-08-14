@@ -14,3 +14,20 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+from .action import *
+
+class HttpActionLoader:
+
+    def __init__(self, endpoint):
+        self._endpoint = endpoint
+
+    def __getattr__(self, action_name: str, **fargs) -> HttpEndPointAction:
+        if action_name == "_anon":
+            msg = AnonEndPointAction(endpoint=vars(self)["_endpoint"])
+        else:
+            msg = HttpEndPointAction(vars(self)["_endpoint"], name=action_name, **fargs)
+        return msg
+
+    def perform(self, **fargs):
+        self._anon.perform(**fargs)

@@ -1,0 +1,5 @@
+request:
+  method: get
+  route: "/get"
+
+codes: 200

@@ -21,78 +21,94 @@ import io
 
 from arjuna import *
 
-
 @test(drive_with=records(
-    record(msg="01_default1"),
+    record(msg="m01_default1"),
     record(msg=None),
-    record(msg="01_default2"),
-    record(msg="01_default3_onlyres"),
+    record(msg="m01_default2"),
+    record(msg="m01_default3_onlyres"),
 ))
 def check_msg_defaults(request, data, httpbin):
     if data.msg is not None:
-        r = httpbin.message(data.msg)
+        r = httpbin.send(data.msg)
     else:
-        r = httpbin.message()
+        r = httpbin.send()
+
+@test
+def check_msg_default_with_dot(request, httpbin):
+    httpbin.message.m01_default1.send()
 
 @test(drive_with=records(
-    record(msg="02_200_ex"),
-    record(msg="02_404_unex"),
-    record(msg="02_404_ex"),
-    record(msg="01_default3_onlyres"),
+    record(msg="m02_200_ex"),
+    record(msg="m02_404_unex"),
+    record(msg="m02_404_ex"),
+    record(msg="m01_default3_onlyres"),
 ))
 def check_msg_basic(request, data, httpbin):
-    r = httpbin.message('02_200_ex')
+    r = httpbin.send(data.msg)
 
+@test
+def check_msg_basic_with_dot(request, httpbin):
+    httpbin.message.m02_200_ex.send()
 
 @test(drive_with=records(
-    record(msg="03_ex_fail"),
-    record(msg="03_unex_fail"),
+    record(msg="m03_ex_fail"),
+    record(msg="m03_unex_fail"),
 ))
 def check_msg_fail(request, data, httpbin):
-    r = httpbin.message(data.msg)
+    r = httpbin.send(data.msg)
 
 @test
 def check_msg_simple_get_with_label(request, httpbin):
-    r = httpbin.message('04_label')
+    r = httpbin.send('m04_label')
 
 @test
 def check_msg_params_and_fmting(request, httpbin):
     url = "http://example.com/path?key=value"
-    r = httpbin.message('05_params_fmt', url=url, param_str="a=b")
+    r = httpbin.send('m05_params_fmt', url=url, param_str="a=b")
+
+@test
+def check_msg_params_and_fmting_with_dot(request, httpbin):
+    url = "http://example.com/path?key=value"
+    r = httpbin.message.m05_params_fmt.send(url=url, param_str="a=b")
 
 @test
 def check_msg_pretty_url(request, httpbin):
     url = "http://httpbin.org"
-    r = httpbin.message('05_params_pretty_url', url=url, param="a", val=1)
+    r = httpbin.send('m05_params_pretty_url', url=url, param="a", val=1)
+
+@test
+def check_msg_pretty_url_with_dot(request, httpbin):
+    url = "http://httpbin.org"
+    r = httpbin.message.m05_params_pretty_url.send(url=url, param="a", val=1)
 
 @test
 def check_msg_post_str(request, httpbin):
-    r = httpbin.message('06_content01_str')
+    r = httpbin.send('m06_content01_str')
 
 @test
 def check_msg_post_urlencoded(request, httpbin):
-    r = httpbin.message('06_content02_urlencoded')
+    r = httpbin.send('m06_content02_urlencoded')
 
 @test(drive_with=records(
-    record(msg="06_content03_json_req1"),
-    record(msg="06_content03_json_req2"),
-    record(msg="06_content03_json_req3"),
-    record(msg="06_content03_json_req4"),
-    record(msg="06_content03_json_req5"),
-    record(msg="06_content03_json_req6"),
-    record(msg="06_content03_json_req7"),
-    record(msg="06_content03_json_res1"),
-    record(msg="06_content03_json_res2"),
-    record(msg="06_content03_json_res3"),
-    record(msg="06_content03_json_res4"),
-    record(msg="06_content03_json_res5"),
+    record(msg="m06_content03_json_req1"),
+    record(msg="m06_content03_json_req2"),
+    record(msg="m06_content03_json_req3"),
+    record(msg="m06_content03_json_req4"),
+    record(msg="m06_content03_json_req5"),
+    record(msg="m06_content03_json_req6"),
+    record(msg="m06_content03_json_req7"),
+    record(msg="m06_content03_json_res1"),
+    record(msg="m06_content03_json_res2"),
+    record(msg="m06_content03_json_res3"),
+    record(msg="m06_content03_json_res4"),
+    record(msg="m06_content03_json_res5"),
 ))
 def check_msg_post_json(request, data, httpbin):
-    httpbin.message(data.msg)
+    httpbin.send(data.msg)
 
 @test(drive_with=records(
-    record(msg="06_content03_json_res6"),
-    record(msg="06_content03_json_res7"),
+    record(msg="m06_content03_json_res6"),
+    record(msg="m06_content03_json_res7"),
 ))
 def check_msg_multiline_payload(request, data, httpbin):
     payload = {
@@ -111,25 +127,30 @@ def check_msg_multiline_payload(request, data, httpbin):
       "space": "what is this 1"
     }
 
-    httpbin.message(data.msg, payload=payload)
+    httpbin.send(data.msg, payload=payload)
 
 @test(drive_with=records(
-    record(msg="07_headers_req1"),
-    record(msg="07_headers_res1"),
+    record(msg="m07_headers_req1"),
+    record(msg="m07_headers_res1"),
 ))
 def check_msg_headers(request, data, httpbin):
-    httpbin.message(data.msg)
+    httpbin.send(data.msg)
 
 @test(drive_with=records(
-    record(msg="08_cookies_1"),
+    record(msg="m08_cookies_1"),
 ))
 def check_msg_cookies(request, data, httpbin):
-    httpbin.message(data.msg)
+    httpbin.send(data.msg)
 
 @test(drive_with=records(
-    record(msg="08_text01"),
-    record(msg="08_text02")
+    record(msg="m08_text01"),
+    record(msg="m08_text02")
 ))
 def check_msg_text(request, data, httpbin):
-    httpbin.message(data.msg)
+    httpbin.send(data.msg)
 
+# SEAMful
+
+@test
+def check_root_message(request, httpbinseam):
+    httpbinseam.message.m_200_ex.send()

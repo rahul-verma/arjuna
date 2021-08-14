@@ -285,6 +285,34 @@ class HttpSendError(Exception):
     def response(self):
         return self.__response
 
+class SEAMFulMessageFileError(Exception):
+    '''
+        Raised when there is an error in locating file for SEAMful Message for HTTP Automation.
+    '''     
+    def __init__(self, *, service="mservice", endpoint="mendpoint", action="maction", msg_name, msg):
+        meta_str = f">{msg_name}<"
+        if action != "maction":
+            meta_str += " for action >{action}<"
+        if endpoint != "mendpoint":
+            meta_str += " for end point >{endpoint}<"
+        if service == "mservice":
+            meta_str += " for service >{service}<"
+        super().__init__(f"Error in HTTP Message File for message: >{meta_str}<. {msg}")
+
+class SEAMFulMessageProcessingError(Exception):
+    '''
+        Raised when there is an error in processing of SEAMful Message for HTTP Automation.
+    '''  
+    def __init__(self, *, service="mservice", endpoint="mendpoint", action="maction", msg_name, msg):
+        meta_str = f">{msg_name}<"
+        if action != "maction":
+            meta_str += " for action >{action}<"
+        if endpoint != "mendpoint":
+            meta_str += " for end point >{endpoint}<"
+        if service == "mservice":
+            meta_str += " for service >{service}<"
+        super().__init__(f"Error in processing HTTP message: >{meta_str}<. {msg}")
+
 class DisallowedArjunaOptionError(Exception):
     '''
         Raised when there is an attempt to set an ArjunOption value in a configuration stage, where it is not allowed to override the value.

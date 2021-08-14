@@ -24,6 +24,7 @@ from requests.auth import *
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from .session import HttpSession
 from .response import HttpResponse
+from .seamful.service import HttpService
 from .oauth import OAuthImplicitGrantSession, OAuthClientGrantSession
 
 from collections import namedtuple
@@ -52,6 +53,17 @@ class Http:
                 proxy: Proxies dict to be associated with this session.
         '''
         return HttpSession(url=url, oauth_token=oauth_token, request_content_handler=request_content_handler, headers=headers, max_redirects=max_redirects, auth=auth, proxy=proxy, _auto_session=True)
+
+    @classmethod
+    def service(cls, *, session, name="mservice"):
+        '''
+            Create an HTTP Service representing SEAMful automation in Arjuna.
+
+            Keyword Arguments:
+                session: HTTP Session associated with this service.
+                name: (Optional) Name of service. Should have a corresponding named directory in Project root/httpauto/service directory. If not provided then the name is set to **mservice**
+        '''
+        return HttpService(session=session, name=name)
 
     @classmethod
     def get(cls, route, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:

@@ -26,7 +26,7 @@ import time
 from .request import _HttpRequest
 from .response import HttpResponse
 from .cookie import HttpCookie
-from arjuna.interact.http.model.message import HttpMessage
+
 
 class HttpCookie:
 
@@ -195,13 +195,6 @@ class HttpSession:
         Arjuna.get_report_metadata().add_network_packet_info(
             NetworkPacketInfo(label=request.label, request=str(request), response=str(response), sub_network_packets=tuple(sub_network_packets))
         )
-
-    def message(self, msg_name=None, **fargs) -> HttpResponse:
-        if msg_name is not None:
-            msg = HttpMessage.from_file(self, msg_name, **fargs)
-        else:
-            msg = HttpMessage.root(self)
-        return msg.send()
 
     def _validate_status_code(cls, response, codes, *, expected=True):
         if expected:

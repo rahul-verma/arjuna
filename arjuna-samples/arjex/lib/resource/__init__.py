@@ -15,5 +15,7 @@ __all__ = [
 
     # HTTP Auto
     "httpbin",
-    "httpsbin"
+    "httpsbin",
+    "httpbinseam",
+    "httpsbinseam"
 ]

@@ -28,9 +28,10 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 
 class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
     
-    def __init__(self, session, codes=None, url=None, headers={}, cookies={}, has={}, match={}, store={}, validate={}):
+    def __init__(self, service, codes=None, url=None, headers={}, cookies={}, has={}, match={}, store={}, validate={}):
         super().__init__()
-        self.__session = session
+        self.__service = service
+        self.__session = service.session
         self.__match_set = False
         self.__has_set = False
         self.__store_set = False
@@ -165,8 +166,8 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
 
 class HttpExpectedResProcessor(_HttpResProcessor):
     
-    def __init__(self, session, conditions_dict):
-        super().__init__(session, **conditions_dict)
+    def __init__(self, service, conditions_dict):
+        super().__init__(service, **conditions_dict)
         self.__text_validator = None
         self.__json_validator = None
 
@@ -193,8 +194,8 @@ class HttpExpectedResProcessor(_HttpResProcessor):
 
 class HttpUnexpectedResProcessor(_HttpResProcessor):
 
-    def __init__(self, session, conditions_dict):
-        super().__init__(session, **conditions_dict)
+    def __init__(self, service, conditions_dict):
+        super().__init__(service, **conditions_dict)
         self.__text_validator = None
         self.__json_validator = None
 

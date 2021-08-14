@@ -1,5 +1,6 @@
+label: "Simple Get"
+
 request:
-  label: "Simple Get"
   method: get
   route: "/get"
 

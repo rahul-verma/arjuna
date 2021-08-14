@@ -19,7 +19,7 @@ from arjuna.interact.http.model.internal.helper.yaml import convert_yaml_obj_to_
 
 class HttpRequestYamlRepr:
 
-    def __init__(self, session, req_yaml, *, label):
+    def __init__(self, action, req_yaml, *, label):
         self.__label = label
         if "method" in req_yaml:     
             self.__method = req_yaml["method"]
@@ -38,7 +38,7 @@ class HttpRequestYamlRepr:
             content_handler = getattr(Http.content, req_yaml["content_type"].lower())
             del req_yaml["content_type"]
         else:
-            content_handler = session.request_content_handler
+            content_handler = action.endpoint.service.session.request_content_handler
 
         if "content" in req_yaml:
             req_yaml["content"] = convert_yaml_obj_to_content(req_yaml["content"])
