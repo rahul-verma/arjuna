@@ -299,17 +299,32 @@ class JsonDict(_ArDict, JsonElement):
         else:
             ignore = {str(ignore)}
 
-        raw_obj = self.raw_object
+        from copy import deepcopy
+        raw_obj = deepcopy(self.raw_object)
         if type(jobj) is JsonDict:
-            jobj = jobj.raw_object
+            jobj = deepcopy(jobj.raw_object)
+        else:
+            jobj = deepcopy(jobj)
 
         for i in ignore:
             expr = parse(i)
-            raw_obj = expr.update(raw_obj, None)
-            jobj = expr.update(jobj, None)
+            raw_obj = expr.update(raw_obj, "__IGNORE__")
+            jobj = expr.update(jobj, "__IGNORE__")
 
         for k,v in raw_obj.items():
-            self.asserter.assert_equal(Json.from_object(v, allow_any=True), jobj[k], msg=msg + f" Verify key: {k}")
+            if k in jobj:
+                self.asserter.assert_equal(Json.from_object(v, allow_any=True), jobj[k], msg=msg + f" Verify key: {k}")
+            else:
+                if v == "__IGNORE__":
+                    continue
+                self.asserter.fail(msg=f"Extra key >>{k}<< with value >>{v}<< found in Json matching.")
+
+        for k,v in jobj.items():
+            if k not in raw_obj:
+                if v == "__IGNORE__":
+                    continue
+                self.asserter.fail(msg=f"Missing key >>{k}<< in target Json Element matching. Expected value >>{v}<<.")
+
 
     @property
     def schema(self) -> 'JsonSchema':

@@ -49,6 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.2.4
 -----
+    - Fixes in assert_match method of JsonDict.
 
 1.2.3
 -----

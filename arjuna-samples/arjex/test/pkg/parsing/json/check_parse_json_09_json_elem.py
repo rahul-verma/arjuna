@@ -158,3 +158,127 @@ def check_assert_match_04_ikeys(request):
     j2 = Json.from_object(obj2)
 
     j1.assert_match(j2, ignore={"id", "child.id", "child3.id", "child4.gchild.id"}, msg="Jdict scalar matched.")
+
+
+@test
+def check_assert_match_05_user_submitted_01(request):
+    obj1 = {
+                "name": 'Thorshammer',
+                "debNum": '11111',
+                "subdomain": 'sub',
+                "sDebNum": '11111',
+            }
+
+    obj2 = {
+        "id": "632b6b68-fe70-11eb-b27b-96000028c1ce",
+        "name": "Thorshammer",
+        "debNum": None,
+        "domain": "sub.something.com",
+        "list": [],
+        "host": "somehost",
+        "sDebNum": "11111",
+        "fid": 540,
+        "subdomain": "sub"
+    }
+
+    j1 = Json.from_object(obj1)
+    j2 = Json.from_object(obj2)
+
+    j1.assert_match(j2, ignore=['id', 'debNum', 'domain', 'list', 'host', 'fid'], msg="Jdict scalar matched.")
+    j2.assert_match(j1, ignore=['id', 'debNum', 'domain', 'list', 'host', 'fid'], msg="Jdict scalar matched.")
+
+@test(xfail=True)
+def check_assert_match_05_diffkeys_01(request):
+    '''
+        obj2 has extra key. obj1 matching with obj2.
+    '''
+
+    obj1 = {
+                "a": 'a1',
+                "b": 'b1',
+                "c": 'c1'
+            }
+
+    obj2 = {
+                "a": 'a1',
+                "b": 'b1',
+                "c": 'c1',
+                "d": 'd1',
+            }
+
+    j1 = Json.from_object(obj1)
+    j2 = Json.from_object(obj2)
+
+    j1.assert_match(j2, msg="Extraneous key found.")
+
+@test(xfail=True)
+def check_assert_match_05_diffkeys_02(request):
+    '''
+        obj2 has extra key. obj2 matching with obj1.
+    '''
+
+    obj1 = {
+                "a": 'a1',
+                "b": 'b1',
+                "c": 'c1'
+            }
+
+    obj2 = {
+                "a": 'a1',
+                "b": 'b1',
+                "c": 'c1',
+                "d": 'd1',
+            }
+
+    j1 = Json.from_object(obj1)
+    j2 = Json.from_object(obj2)
+
+    j2.assert_match(j1, msg="Missing key.")
+
+@test
+def check_assert_match_05_diffkeys_03(request):
+    '''
+        obj2 has extra key. obj1 matching with obj2. Using ignore.
+    '''
+
+    obj1 = {
+                "a": 'a1',
+                "b": 'b1',
+                "c": 'c1'
+            }
+
+    obj2 = {
+                "a": 'a1',
+                "b": 'b1',
+                "c": 'c1',
+                "d": 'd1',
+            }
+
+    j1 = Json.from_object(obj1)
+    j2 = Json.from_object(obj2)
+
+    j1.assert_match(j2, ignore=["d"], msg="Extraneous key found.")
+
+@test
+def check_assert_match_05_diffkeys_04(request):
+    '''
+        obj2 has extra key. obj2 matching with obj1. Using ignore.
+    '''
+
+    obj1 = {
+                "a": 'a1',
+                "b": 'b1',
+                "c": 'c1'
+            }
+
+    obj2 = {
+                "a": 'a1',
+                "b": 'b1',
+                "c": 'c1',
+                "d": 'd1',
+            }
+
+    j1 = Json.from_object(obj1)
+    j2 = Json.from_object(obj2)
+
+    j2.assert_match(j1, ignore=["d"], msg="Missing key.")
