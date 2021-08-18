@@ -54,7 +54,7 @@ def __log(invoker, level, msg, contexts=None):
         contexts = ("default",)
     contexts = set(contexts)
     try:
-        getattr(Arjuna.get_logger(), level)(msg.replace('\n', ' ').replace('\r', ''), extra={'invoker': invoker, 'contexts':contexts})
+        getattr(Arjuna.get_logger(), level)(str(msg).replace('\n', ' ').replace('\r', ''), extra={'invoker': invoker, 'contexts':contexts})
     except AttributeError:
         # In case the logging is called before the logger is set.
         # In future versions, see if there can be a fallabck logger.
@@ -71,7 +71,7 @@ def log_trace(msg: str, *, contexts: ListOrTupleOrStr=None):
         Log a message with **TRACE** level.
 
         Args: 
-            msg: Log message
+            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
             contexts: (Optional) Context strings for this log message.
     '''
     __log(_Stack.get_invoker(), "trace", msg, contexts=contexts)
@@ -81,7 +81,7 @@ def log_debug(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
         Log a message with **DEBUG** level.
 
         Args: 
-            msg: Log message
+            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
             contexts: (Optional) Context strings for this log message.
     '''
     __log(_Stack.get_invoker(), "debug", msg, contexts=contexts)
@@ -91,7 +91,7 @@ def log_info(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
         Log a message with **INFO** level.
 
         Args: 
-            msg: Log message
+            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
             contexts: (Optional) Context strings for this log message.
     '''
     __log(_Stack.get_invoker(), "info", msg, contexts=contexts)
@@ -101,7 +101,7 @@ def log_warning(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
         Log a message with **WARNING** level.
 
         Args: 
-            msg: Log message
+            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
             contexts: (Optional) Context strings for this log message.
     '''
     __log(_Stack.get_invoker(), "warning", msg, contexts=contexts)
@@ -111,7 +111,7 @@ def log_error(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
         Log a message with **ERROR** level.
 
         Args: 
-            msg: Log message
+            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
             contexts: (Optional) Context strings for this log message.
     '''
     __log(_Stack.get_invoker(), "error", msg, contexts=contexts)
@@ -121,7 +121,7 @@ def log_fatal(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
         Log a message with **FATAL** level.
 
         Args: 
-            msg: Log message
+            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
             contexts: (Optional) Context strings for this log message.
     '''
     __log(_Stack.get_invoker(), "fatal", msg, contexts=contexts)

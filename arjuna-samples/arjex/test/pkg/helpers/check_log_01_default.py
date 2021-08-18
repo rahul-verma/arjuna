@@ -25,3 +25,7 @@ def check_dl_fl_default(request):
     log_warning("should go to both")
     log_error("should go to both")
     log_fatal("should go to both")
+
+@test
+def check_log_error_with_diff_objects(request):
+    log_error({'a':1})
