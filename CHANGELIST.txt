@@ -47,6 +47,10 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.2.6
+-----
+
+
 1.2.5
 -----
     - Fix in logger functionality to convert msg to string representation to allow non-string objects to be logged.
