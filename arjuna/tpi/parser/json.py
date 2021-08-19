@@ -173,6 +173,7 @@ class JsonDict(_ArDict, JsonElement):
     '''
 
     def __init__(self, pydict: dict=None):
+        self.__dict = pydict
         _ArDict.__init__(self, pydict)
         JsonElement.__init__(self, self.store)
 
@@ -183,6 +184,14 @@ class JsonDict(_ArDict, JsonElement):
 
     def __delitem__(self, key):
         del self.store[key]
+
+    def __getattr__(self, attr):
+        try:
+            val = self.__dict[attr]
+        except AttributeError:
+            raise AttributeError(f"No attribute/key with name {attr}.")
+        else:
+            return Json.from_object(val, allow_any=True)
 
     @property
     def size(self):

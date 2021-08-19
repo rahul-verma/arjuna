@@ -49,7 +49,7 @@ Future Themes (In-Progress or Planned):
 
 1.2.6
 -----
-
+    - JsonDict updates __getattr__ method to support returning of Arjuna Json objects (JsonDict/JsonList).
 
 1.2.5
 -----

@@ -17,6 +17,7 @@
 
 # The tests are based on tests for jsonpath-rw-ext in https://github.com/wolverdude/GenSON
 
+from arjuna.tpi.parser.json import JsonDict, JsonList
 from arjuna import *
 
 
@@ -282,3 +283,41 @@ def check_assert_match_05_diffkeys_04(request):
     j2 = Json.from_object(obj2)
 
     j2.assert_match(j1, ignore=["d"], msg="Missing key.")
+
+@test
+def check_jsondict_subelement_type(request):
+    obj = {
+        'a': 1,
+        'b': {
+            'c1': 2,
+            'c2': {1:2},
+            'c3': [1,2]
+        },
+        'd': [1,2,3],
+        'e': [{1:2}, [3,4]]
+    }
+
+    jobj = Json.from_object(obj)
+
+    # Checking types with Jsondict key retrieval
+    assert type(jobj) is JsonDict
+    assert type(jobj['a']) is int
+    assert type(jobj['b']) is JsonDict
+    assert type(jobj['b']['c2']) is JsonDict
+    assert type(jobj['b']['c3']) is JsonList
+    assert type(jobj['b']) is JsonDict
+    assert type(jobj['d']) is JsonList
+    assert type(jobj['e']) is JsonList
+    assert type(jobj['e'][0]) is JsonDict
+    assert type(jobj['e'][1]) is JsonList
+
+    # Checking types with Jsondict attr retrieval
+    assert type(jobj.b) is JsonDict
+    assert type(jobj.b.c2) is JsonDict
+    assert type(jobj.b.c3) is JsonList
+    assert type(jobj.d) is JsonList
+    assert type(jobj.e) is JsonList
+    assert type(jobj.e[0]) is JsonDict
+    assert type(jobj.e[1]) is JsonList
+
+    
