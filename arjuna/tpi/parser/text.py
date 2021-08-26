@@ -243,12 +243,13 @@ class DelimTextFileWithLineAsMap:
 
 from arjuna.tpi.engine.asserter import AsserterMixIn
 
-class Text(AsserterMixIn):
+class Text(str, AsserterMixIn):
     '''
     Provides factory methods for dealing with reading text file content in various forms.
     '''
     def __init__(self, text):
-        super().__init__()
+        str.__init__(text)
+        AsserterMixIn.__init__(self)
         self.__content = text
 
     @property

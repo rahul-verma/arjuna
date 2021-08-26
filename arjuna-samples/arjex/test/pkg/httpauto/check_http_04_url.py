@@ -25,14 +25,14 @@ from arjuna import *
 
 @test
 def check_whitespaces_are_removed_from_url(request):
-    session = Http.session(url="  http://httpbin.org  ")
-    resp = session.get('/ ')
+    service = Http.service(url="  http://httpbin.org  ")
+    resp = service.get('/ ')
     assert resp.request.url == 'http://httpbin.org/'
 
 @test
 def check_slash_added(request):
-    session = Http.session(url="  http://httpbin.org  ")
-    resp = session.get('abc')
+    service = Http.service(url="  http://httpbin.org  ")
+    resp = service.get('abc')
     assert resp.request.url == 'http://httpbin.org/abc'
 
 @test(
@@ -44,8 +44,8 @@ def check_slash_added(request):
     )
 )
 def check_mixed_case_scheme_acceptable(request, data):
-    session = Http.session(url=f"{data.scheme}httpbin.org")
-    resp = session.get('/', xcodes=200, strict=True)
+    service = Http.service(url=f"{data.scheme}httpbin.org")
+    resp = service.get('/', xcodes=200, strict=True)
 
 @test(drive_with=records(
     # Connecting to an unknown domain should raise a ConnectionError
@@ -57,4 +57,4 @@ def check_mixed_case_scheme_acceptable(request, data):
 ))
 def check_errors(request, data):
     with pytest.raises(data.exception):
-        Http.get(data.url, timeout=1)
+        Http.service().get(data.url, timeout=1)

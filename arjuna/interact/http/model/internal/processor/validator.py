@@ -30,7 +30,10 @@ class Validator(AsserterMixIn):
         return self.__response
 
     def validate(self, name, target):
-        stored_value = self.__response.store[name]
+        if name.lower() == "content":
+            stored_value = self.__response.store["default_content"]
+        else:
+            stored_value = self.__response.store[name]
 
         def validate_found(expected_to_be_found):
             exists = True
@@ -61,7 +64,11 @@ class Validator(AsserterMixIn):
                     getattr(proc_stored_value, "assert_contains")(item, msg=f"Extracted value for >>{name}<< does not contain >>{item}<<.")
             elif k == "min":
                 self.asserter.assert_min(stored_value, v, msg=f"Extracted value for >>{name}<< did not match min value criterion.")
-
+            elif k == "empty":
+                proc_stored_value = stored_value
+                if type(stored_value) is str:
+                    proc_stored_value = Text(stored_value)
+                getattr(proc_stored_value, "assert_not_empty")(msg=f">>{name} is empty")
 
 
 

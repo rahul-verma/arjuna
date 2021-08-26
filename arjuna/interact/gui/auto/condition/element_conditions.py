@@ -58,6 +58,12 @@ class GuiElementLenientInteraction:
     def __init__(self, gui_element):
         self.__element = gui_element
 
+    def Hover(self):
+        caller = DynamicCaller(
+            self.__element._only_hover
+        )
+        return CommandCondition(caller)  
+
     def Click(self):
         caller = DynamicCaller(
             self.__element._only_click

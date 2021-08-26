@@ -285,31 +285,43 @@ class HttpSendError(Exception):
     def response(self):
         return self.__response
 
-class SEAMFulMessageFileError(Exception):
+class SEAMfulMessageFileError(Exception):
     '''
         Raised when there is an error in locating file for SEAMful Message for HTTP Automation.
     '''     
-    def __init__(self, *, service="mservice", endpoint="mendpoint", action="maction", msg_name, msg):
-        meta_str = f">{msg_name}<"
-        if action != "maction":
-            meta_str += " for action >{action}<"
-        if endpoint != "mendpoint":
-            meta_str += " for end point >{endpoint}<"
-        if service == "mservice":
-            meta_str += " for service >{service}<"
-        super().__init__(f"Error in HTTP Message File for message: >{meta_str}<. {msg}")
+    def __init__(self, msg_obj, *, msg):
+        meta_str = f">{msg_obj.name}<"
+        if msg_obj._action.name != "anon":
+            meta_str += f" for action >{msg_obj._action.name}<"
+        if msg_obj._action._endpoint.name != "anon":
+            meta_str += f" for end point >{msg_obj._action._endpoint.name}<"
+        if msg_obj._action._endpoint.service.name != "anon":
+            meta_str += f" for service >{msg_obj._action._endpoint.service.name}<"
+        super().__init__(f"Error in HTTP Message File for message {meta_str}. {msg}")
+
+class SEAMfulActionFileError(Exception):
+    '''
+        Raised when there is an error in locating file for SEAMful Action for HTTP Automation.
+    '''     
+    def __init__(self, action_obj, *, msg):
+        meta_str = f">{action_obj.name}<"
+        if action_obj._endpoint.name != "anon":
+            meta_str += f" for end point >{action_obj._endpoint.name}<"
+        if action_obj._endpoint.service.name != "anon":
+            meta_str += f" for service >{action_obj._endpoint.service.name}<"
+        super().__init__(f"Error in HTTP Action File for action {meta_str}. {msg}")
 
 class SEAMFulMessageProcessingError(Exception):
     '''
         Raised when there is an error in processing of SEAMful Message for HTTP Automation.
     '''  
-    def __init__(self, *, service="mservice", endpoint="mendpoint", action="maction", msg_name, msg):
+    def __init__(self, *, service="anon", endpoint="anon", action="anon", msg_name, msg):
         meta_str = f">{msg_name}<"
-        if action != "maction":
+        if action != "anon":
             meta_str += " for action >{action}<"
-        if endpoint != "mendpoint":
+        if endpoint != "anon":
             meta_str += " for end point >{endpoint}<"
-        if service == "mservice":
+        if service == "anon":
             meta_str += " for service >{service}<"
         super().__init__(f"Error in processing HTTP message: >{meta_str}<. {msg}")
 

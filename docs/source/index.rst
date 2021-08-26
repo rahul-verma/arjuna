@@ -183,13 +183,13 @@ Web GUI Automation
 HTTP Automation
 ===============
 * :py:class:`Http <arjuna.tpi.httpauto.http.Http>`
-* :py:class:`HttpSession <arjuna.tpi.httpauto.session.HttpSession>`
+* :py:class:`HttpService<arjuna.tpi.httpauto.session.HttpService>`
 * :py:class:`HttpRequest <arjuna.tpi.httpauto.request.HttpRequest>`
 * :py:class:`HttpResponse <arjuna.tpi.httpauto.response.HttpResponse>`
 * OAuth Support
-    * :py:class:`OAuthSession <arjuna.tpi.httpauto.oauth.OAuthSession>`
-    * :py:class:`OAuthClientGrantSession <arjuna.tpi.httpauto.oauth.OAuthClientGrantSession>`
-    * :py:class:`OAuthImplicitGrantSession <arjuna.tpi.httpauto.oauth.OAuthImplicitGrantSession>`
+    * :py:class:`OAuthService <arjuna.tpi.httpauto.oauth.OAuthService>`
+    * :py:class:`OAuthClientGrantService <arjuna.tpi.httpauto.oauth.OAuthClientGrantService>`
+    * :py:class:`OAuthImplicitGrantService <arjuna.tpi.httpauto.oauth.OAuthImplicitGrantService>`
 
 Reporting Protocols
 ===================

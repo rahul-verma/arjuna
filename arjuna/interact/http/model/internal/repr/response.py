@@ -25,10 +25,10 @@ class HttpResponseYamlRepr:
         self.__unexproc = None
         
         if "unexpected" in resp_yaml:
-            self.__unexproc = HttpUnexpectedResProcessor(action.endpoint.service, CIStringDict(resp_yaml["unexpected"]))
+            self.__unexproc = HttpUnexpectedResProcessor(action._endpoint.service, CIStringDict(resp_yaml["unexpected"]))
             del resp_yaml["unexpected"]
 
-        self.__xproc = HttpExpectedResProcessor(action.endpoint.service, CIStringDict(resp_yaml))
+        self.__xproc = HttpExpectedResProcessor(action._endpoint.service, CIStringDict(resp_yaml))
 
     def validate(self, response):
         if self.__xproc:

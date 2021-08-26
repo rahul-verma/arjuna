@@ -6,17 +6,17 @@
 Introduction
 ------------
 
-Arjuna's **Http facade class** as well as **HttpSession** object can read and send abstracted Http messages in YAML based externalization files.
+Arjuna's **Http facade class** as well as **HttpService** object can read and send abstracted Http messages in YAML based externalization files.
 
 In addition, any checks and extractions specified in the YAML file are also performed.
 
 These files are placed under **<Arjuna Test Project root dir>/httpauto/message** directory.
 
-To keep the documentation terse, we will assume **svc** as an **HttpSession** object.
+To keep the documentation terse, we will assume **svc** as an **HttpService** object.
 
     .. code-block:: python
 
-        svc.message("abc")
+        svc.send("abc")
     
 The above code will look for a file **abc.yaml** in the **<Arjuna Test Project root dir>/httpauto/message** directory and then perform corresponding HTTP message as per specification.
 
@@ -24,7 +24,7 @@ You can also create sub-directories to organize messages.
 
     .. code-block:: python
 
-        svc.message("some_dir/abc")
+        svc.send("some_dir/abc")
 
 The above code will look for a file **abc.yaml** in the **<Arjuna Test Project root dir>/httpauto/message/some_dir** directory and then perform corresponding HTTP message as per specification.
 
@@ -33,14 +33,14 @@ Blank Message File
 
 A blank message file means the following:
     * Send a GET request
-    * Route is the root of session i.e. same as default URL of HttpSession object
+    * Route is the root of session i.e. same as default URL of HttpService object
     * Perform no checks on response
 
 Technically it means the same as following:
 
     .. code-block:: python
 
-        svc.message()
+        svc.send()
 
 GET is default method
 ---------------------
@@ -191,7 +191,7 @@ You can pass values to these named placeholders as follows (assume abc.yaml as t
 
     .. code-block:: python
 
-        svc.message('abc', url="/get", param_str="a=b")
+        svc.send('abc', url="/get", param_str="a=b")
 
 Here **url** construct is used to validate the URL for which the response was yielded.
 
@@ -398,7 +398,7 @@ You can also use the stored value in code:
 
     .. code-block:: python
 
-        response = svc.message("/abc")
+        response = svc.send("/abc")
         # Following logic checks whether atleast one of them was matched (not None)
         if not response.store.form and not response.store.password:
             request.asserter.fail("Autocomplete is not disabled. Either form or password field should have automcomplete='off'")

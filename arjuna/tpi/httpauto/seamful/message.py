@@ -19,8 +19,7 @@ import os
 from arjuna.interact.http.model.internal.repr.request import HttpRequestYamlRepr
 from arjuna.interact.http.model.internal.repr.response import HttpResponseYamlRepr
 from arjuna.tpi.helper.arjtype import CIStringDict
-from arjuna.tpi.error import SEAMFulMessageFileError
-
+from arjuna.tpi.error import SEAMfulMessageFileError
 
 class BaseHttpMessage:
 
@@ -29,7 +28,7 @@ class BaseHttpMessage:
         self.__action = action
 
     @property
-    def _name(self):
+    def name(self):
         return self.__name
 
     @property
@@ -40,7 +39,7 @@ class BaseHttpMessage:
         label, req_repr, resp_proc = self._load(**fargs)
         method = req_repr.method
         try:
-            call = getattr(self._action.endpoint.service.session, method)
+            call = getattr(self._action._endpoint.service._session, method)
         except AttributeError:
             raise Exception(f"Unsupported HTTP method: {method}")
         else:
@@ -69,11 +68,11 @@ class HttpMessage(BaseHttpMessage):
         self.__fargs = fargs
         # Process Yaml file
         from arjuna import C, Yaml
-        file_path = os.path.join(action.endpoint.root_dir, "message", name + ".yaml")
+        file_path = os.path.join(action._endpoint.root_dir, "message", name + ".yaml")
         try:
             f = open(file_path, "r")
         except FileNotFoundError:
-            raise SEAMFulMessageFileError(self, msg=f"Message file not found at location: {file_path}")
+            raise SEAMfulMessageFileError(self, msg=f"Message file not found at location: {file_path}")
         self.__msg_yaml = f.read()
         f.close()
         super().__init__(name=name, action=action)
@@ -90,13 +89,13 @@ class HttpMessage(BaseHttpMessage):
         if msg_yaml is None:
             req_repr = HttpRequestYamlRepr(self._action, CIStringDict(), label="Root")
             resp_proc = HttpResponseYamlRepr(self._action, CIStringDict())
-            return self._name, req_repr, resp_proc
+            return self.name, req_repr, resp_proc
 
         if "label" in msg_yaml:
             label = msg_yaml["label"]
             del msg_yaml["label"]
         else: 
-            label = self._name
+            label = self.name
 
         if "request" in msg_yaml:
             req_repr = HttpRequestYamlRepr(self._action, CIStringDict(msg_yaml["request"].as_map()), label=label)

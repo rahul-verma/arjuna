@@ -1,0 +1,12 @@
+load:
+  content:
+    entity: Item
+
+store:
+  id: content.name
+
+messages:
+  - items
+  - item_post_bulk
+  - non_empty_items
+  - item_get_bulk

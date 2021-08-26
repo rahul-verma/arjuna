@@ -23,13 +23,13 @@ from arjuna import *
 
 @test
 def check_set_cookie_on_301(request):
-    s = Http.session(url="http://httpbin.org")
+    s = Http.service(url="http://httpbin.org")
     s.get('cookies/set?foo=bar')
     assert s.cookies['foo'] == 'bar'
 
 @test
 def check_cookie_sent_on_redirect(request):
-    s = Http.session(url="http://httpbin.org")
+    s = Http.service(url="http://httpbin.org")
     s.get('cookies/set?foo=bar')
     r = s.get('/redirect/1')
     assert s.cookies['foo'] == 'bar'
@@ -37,7 +37,7 @@ def check_cookie_sent_on_redirect(request):
 
 @test
 def check_cookie_removed_on_expire(request):
-    s = Http.session(url="http://httpbin.org")
+    s = Http.service(url="http://httpbin.org")
     s.get('cookies/set?foo=bar')
     assert s.cookies['foo'] == 'bar'
     s.get(
@@ -51,14 +51,14 @@ def check_cookie_removed_on_expire(request):
 
 @test
 def check_cookie_persists_via_api(request):
-    s = Http.session(url="http://httpbin.org")
+    s = Http.service(url="http://httpbin.org")
     r = s.get('/redirect/1', cookies={'foo': 'bar'})
     assert 'foo' in r.request.headers['Cookie']
     assert 'foo' in r.redir_history[0].request.headers['Cookie']
 
 @test
 def check_request_cookie_overrides_session_cookie(request):
-    s = Http.session(url="http://httpbin.org")
+    s = Http.service(url="http://httpbin.org")
     s.add_cookies({'foo': 'bar'})
     r = s.get('/cookies', cookies={'foo': 'baz'})
     # Session cookie should not be modified
@@ -66,7 +66,7 @@ def check_request_cookie_overrides_session_cookie(request):
 
 @test
 def check_request_cookies_not_persisted(request):
-    s = Http.session(url="http://httpbin.org")
+    s = Http.service(url="http://httpbin.org")
     r = s.get('/cookies', cookies={'foo': 'baz'})
     # Sending a request with cookies should not add cookies to the session
     assert not s.cookies

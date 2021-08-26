@@ -23,8 +23,8 @@ from arjuna import *
 
 @test
 def check_temp_http(request, httpbin):
-    s = Http.session(url="https://google.com")
-    s.message()
+    s = Http.service(url="https://google.com")
+    s.send()
     for c,v in s.parsed_cookies.items():
         print(c, v.secure_enabled, v.httponly_enabled)
 

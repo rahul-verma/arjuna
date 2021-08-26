@@ -49,6 +49,10 @@ Future Themes (In-Progress or Planned):
 
 1.2.7
 ----
+    - Arjuna's HTTP Layer automation now exposes only HttpService as a top object for doing seamful as well as simple automation.
+    - HttpSession is an Arjuna internal object (non-TPI). Http class methods for sending requests have been removed as in practice non-auto cookie management is rarely required. This reduces the public interface of Arjuna thereby simplying learning curve and documentation.
+    - Initial support for HTTP Action externalization added.
+    - Added Hover as a waitable operation.
 
 1.2.6
 -----
@@ -374,7 +378,7 @@ Docs
 HTTP Auto
     - Http.content.json implements custom JSON encoder to handle nested structures containing Yaml or Json custom objects.
 Fixes
-    - Fixed oauth_implicit_grant_session in http.py.
+    - Fixed oauth_implicit_grant_service in http.py.
 
 1.0.17
 ------

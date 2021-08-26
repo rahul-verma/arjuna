@@ -1,0 +1,11 @@
+label: Check Item List
+
+request:
+  method: get
+  route: "/items"
+
+content_type: json
+
+validate:
+  content:
+    empty: False

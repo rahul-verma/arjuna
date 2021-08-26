@@ -213,7 +213,7 @@ class _HttpRequest(HttpRequest):
                 data = self.__content.content
             else:
                 data = None
-            req = Request(self.__method, url, data=data, headers=self.__headers, params=query_params, cookies=self.__cookies, auth=self.__auth)
+            req = Request(self.__method, url, data=data, headers={h:v for h,v in self.__headers.items() if v is not None}, params=query_params, cookies=self.__cookies, auth=self.__auth)
             return req.prepare()
         except Exception as e:
             raise HttpRequestCreationError("{} : {}".format(e.__class__.__name__, str(e)))

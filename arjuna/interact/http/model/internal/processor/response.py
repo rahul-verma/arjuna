@@ -28,10 +28,11 @@ from arjuna.tpi.engine.asserter import AsserterMixIn
 
 class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
     
-    def __init__(self, service, codes=None, url=None, headers={}, cookies={}, has={}, match={}, store={}, validate={}):
+    def __init__(self, service, codes=None, url=None, headers={}, cookies={}, has={}, match={}, store={}, validate={}, content_type="html"):
         super().__init__()
         self.__service = service
-        self.__session = service.session
+        self.__session = service._session
+        self.__default_content_type = content_type
         self.__match_set = False
         self.__has_set = False
         self.__store_set = False
@@ -75,7 +76,7 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
             if k in self.__repr["match"]:
                 self.__repr["match"][k] = match[k]   
 
-        store_var_dict = {"jpath":{}, "regex":{}, "xpath":{}, "header":{}, "cookie":{}}
+        store_var_dict = {"jpath":{}, "regex":{}, "xpath":{}, "header":{}, "cookie":{}, "response": None}
         import copy
         for k,v in store.items():
             self.__repr["store"][k] = copy.deepcopy(store_var_dict)
@@ -84,8 +85,8 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
                     self.__repr["store"][k][k2] = v2   
 
         for k in self.__repr["validate"]:
-            if k not in self.__repr["store"]:
-                raise Exception(f"{k} in validate section is not defined in store section of message.") 
+            if k not in self.__repr["store"] and k.lower() != "content":
+                raise Exception(f"Kye: >>{k}<< in validate section is not defined in store section of message.") 
 
     @property
     def _session(self):
@@ -159,6 +160,9 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
                     TextExtractor(response).store(name, sdict["regex"])
                 elif sdict["xpath"]:
                     XmlExtractor(response).store(name, sdict["xpath"])
+        
+        response.store["default_content"] = getattr(response, self.__default_content_type.lower())
+        
         if self.validations:
             validator = Validator(response)
             for k, target in self.validations.items():

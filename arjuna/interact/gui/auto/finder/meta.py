@@ -97,7 +97,6 @@ class Meta:
         self.__process_filters(temp_dict)
         self.__process_settings(temp_dict)
         self.__mdict.update({k:v for k,v in temp_dict.items() if k.lower() not in {"type", "relations", "settings", "filters"}})
-        print(self.__mdict)
         log_debug("Meta dictionary is: {}".format(repr_dict(self.__mdict)))
 
     def __process_type(self, temp_dict):

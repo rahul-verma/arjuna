@@ -1,0 +1,12 @@
+label: Check creating of item
+
+request:
+  method: post
+  route: "/item"
+  content_type: json
+  content: {
+    'name': "$name$",
+    'price': "$price$"
+  }
+
+codes: 200

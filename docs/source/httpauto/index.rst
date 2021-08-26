@@ -5,7 +5,7 @@
    :maxdepth: 4
 
    intro
-   session
+   service
    request
    response
    oauth

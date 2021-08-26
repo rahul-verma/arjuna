@@ -26,7 +26,7 @@ class HttpActionLoader:
         if action_name == "_anon":
             msg = AnonEndPointAction(endpoint=vars(self)["_endpoint"])
         else:
-            msg = HttpEndPointAction(vars(self)["_endpoint"], name=action_name, **fargs)
+            msg = HttpEndPointAction(name=action_name, endpoint=vars(self)["_endpoint"], **fargs)
         return msg
 
     def perform(self, **fargs):

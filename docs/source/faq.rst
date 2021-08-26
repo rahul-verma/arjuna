@@ -157,17 +157,17 @@ Following 3 options are the relevant Arjuna options:
     * **HTTP_PROXY_HOST**: Host/IP of proxy. Default is **localhost**.
     * **HTTP_PROXY_PORT**: Network port of proxy. Default is **8080**.
 
-Setting Proxy for a Particular HTTP Session
+Setting Proxy for a Particular HTTP Service
 ===========================================
 
-Rather than a global proxy setting, which applies to all Web GUI Automation as well as HTTP Automation, you can also set the proxy for a particular HttpSession as follows:
+Rather than a global proxy setting, which applies to all Web GUI Automation as well as HTTP Automation, you can also set the proxy for a particular HttpService as follows:
 
 .. code-block:: python
 
     # Direct Session
-    session = Http.session(proxy=Http.proxy('proxyhost', 9000))
+    service = Http.service(proxy=Http.proxy('proxyhost', 9000))
 
     # From ouathsession
-    session = ouathsession.create_new_session("https://someurl.com", proxy=Http.proxy('proxyhost', 9000))
+    service = ouathservice.create_new_service("https://someurl.com", proxy=Http.proxy('proxyhost', 9000))
 
 

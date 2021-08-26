@@ -24,14 +24,14 @@ from arjuna import *
 @test
 def check_proxy_default(request):
     # any proxy related error (address resolution, no route to host, etc) should result in a ProxyError
-    s = Http.session()
+    s = Http.service()
     r = s.get('https://www.google.com')
     print(r.text)
 
 @test
 def check_proxy_valid(request):
     # any proxy related error (address resolution, no route to host, etc) should result in a ProxyError
-    s = Http.session(proxy=Http.proxy('localhost', 8080))
+    s = Http.service(proxy=Http.proxy('localhost', 8080))
     r = s.get('https://www.google.com')
     print(r.text)
 
@@ -39,15 +39,15 @@ def check_proxy_valid(request):
 def check_proxy_error(request):
     # any proxy related error (address resolution, no route to host, etc) should result in a ProxyError
     with pytest.raises(HttpConnectError):
-        s = Http.session(proxy=Http.proxy('non-resolvable-address'))
+        s = Http.service(proxy=Http.proxy('non-resolvable-address'))
         s.get('http://httpbin.org')
 
 @test
 def check_proxy_error_on_bad_url(request):
     with pytest.raises(HttpConnectError):
-        s = Http.session(proxy=Http.proxy('badproxyurl',3128))
+        s = Http.service(proxy=Http.proxy('badproxyurl',3128))
         s.get("https://httpbing.org")
 
     with pytest.raises(HttpConnectError):
-        s = Http.session(proxy=Http.proxy('/example.com'))
+        s = Http.service(proxy=Http.proxy('/example.com'))
         s.get("http://httpbing.org")

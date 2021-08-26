@@ -65,8 +65,8 @@ def check_too_many_redirects_custom_limit(request, httpbin):
         requests allows up to 20 redirects
     '''
     try:
-        session = Http.session(url="http://httpbin.org", max_redirects=5)
-        session.get('/', query_params={'relative-redirect' : 50}, pretty_url=True)
+        service = Http.service(url="http://httpbin.org", max_redirects=5)
+        service.get('/', query_params={'relative-redirect' : 50}, pretty_url=True)
     except HttpSendError as e:
         assert e.request.url == 'http://httpbin.org/relative-redirect/50'
         assert e.response.url == 'http://httpbin.org/relative-redirect/45'

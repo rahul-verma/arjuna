@@ -21,8 +21,8 @@ By default Arjuna takes a dictionary (or other dictionary-like objects) as a con
     .. code-block:: python
 
         # Content sent as URL encoded
-        Http.post("http://abc.com/res", content={'a' : 1, 'b': 2}) 
-        Http.put("http://abc.com/res", content={'a' : 1, 'b': 2})
+        svc.post("http://abc.com/res", content={'a' : 1, 'b': 2}) 
+        svc.put("http://abc.com/res", content={'a' : 1, 'b': 2})
 
 For example, in the above code, the provided dictionary is converted to the following:
 
@@ -52,7 +52,7 @@ Following is a simple example of sending JSON content:
     .. code-block:: python
 
         # Content sent as serialized JSON
-        Http.post("http://abc.com/res", content=Http.content.json({'a' : 1, 'b': 2}))
+        svc.post("http://abc.com/res", content=Http.content.json({'a' : 1, 'b': 2}))
 
 In the above example, the content will be sent as following:
 
@@ -62,26 +62,16 @@ In the above example, the content will be sent as following:
 
 In addition, the **Content-Type** header is set to **application/json**.
 
-Using **HttpSession**'s **request_content_handler** Global Handler
+Using **HttpService**'s **request_content_handler** Global Handler
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Arjuna's HttpSession object makes content handling very straight-forward as you will mostly likely use the same content handling tpye across multiple requests.
+Arjuna's HttpService object makes content handling very straight-forward as you will mostly likely use the same content handling type across multiple requests.
 
 You can set the content handler in one go across all the requests that are sent by a given session.
 
-So, instead of doing this
-
     ..  code-block:: python
 
-        Http.post("http://abc.com/res1", content=Http.content.json({'a' : 1, 'b': 2}))
-        Http.post("http://abc.com/res2", content=Http.content.json({'c' : 1, 'd': 2}))
-        Http.post("http://abc.com/res3", content=Http.content.json({'e' : 1, 'f': 2}))
-
-you can do the following
-
-    ..  code-block:: python
-
-        svc = Http.session(url="http://abc.com", request_content_handler=Http.content.json)
+        svc = Http.service(url="http://abc.com", request_content_handler=Http.content.json)
         svc.post("/res1", content={'a' : 1, 'b': 2})
         svc.post("/res2", content={'c' : 1, 'd': 2})
         svc.post("/res3", content={'e' : 1, 'f': 2})
@@ -89,7 +79,7 @@ you can do the following
 Setting a **Request Label**
 ---------------------------
 
-All session request methods accept a `label` argument. This is used in reports and logging to give a user-defined representation of an HTTP request.
+All service request methods accept a `label` argument. This is used in reports and logging to give a user-defined representation of an HTTP request.
 
 Following are basic examples of these calls:
 
@@ -105,7 +95,7 @@ A common need in HTTP automation is to set the query parameters in the URL.
 
 One can ofcourse do it with Python string formatting. However, Arjuna makes it easier fpr url-encoded params, the most commonly used format.
 
-You can achieve this for all types of session requests. Following is a get example, where arbitrary key-value arguments are passed to become query parameters:
+You can achieve this for all types of service requests. Following is a get example, where arbitrary key-value arguments are passed to become query parameters:
 
     .. code-block:: python
 

@@ -30,7 +30,7 @@ from arjuna import *
 ))
 def check_set_basicauth(request, data):
     auth = Http.auth.basic(user=data.username, pwd=data.password)
-    r = Http.get('http://httpbin.org/get', auth=auth)
+    r = Http.service().get('http://httpbin.org/get', auth=auth)
     from requests.auth import _basic_auth_str
     assert r.request.headers['Authorization'] == _basic_auth_str(data.username, data.password)
 
@@ -40,13 +40,13 @@ def check_basicauth_get(request):
     auth = Http.auth.basic(user='user', pwd='pass')
     url = 'http://httpbin.org/basic-auth/user/pass'
 
-    r = Http.get(url, auth=auth)
+    r = Http.service().get(url, auth=auth)
     assert r.status_code == 200
 
-    r = Http.get(url)
+    r = Http.service().get(url)
     assert r.status_code == 401
 
-    s = Http.session(auth=auth)
+    s = Http.service(auth=auth)
     r = s.get(url)
     assert r.status_code == 200
 
@@ -56,7 +56,7 @@ def check_basicauth_encodes_byte_strings(request):
     than the unicode string "b'test'" in Python 3.
     """
     auth = Http.auth.basic(user=b'\xc5\xafsername', pwd=b'test\xc6\xb6')
-    r = Http.get('http://httpbin.org', auth=auth)
+    r = Http.service().get('http://httpbin.org', auth=auth)
     assert r.request.headers['Authorization'] == 'Basic xa9zZXJuYW1lOnRlc3TGtg=='
 
 digest_auth_algo = ('MD5', 'SHA-256', 'SHA-512')
@@ -68,14 +68,14 @@ def check_DIGEST_HTTP_200_OK_GET(request):
         auth = Http.auth.digest(user='user', pwd='pass')
         url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype + '/never'
 
-        r = Http.get(url, auth=auth)
+        r = Http.service().get(url, auth=auth)
         assert r.status_code == 200
 
-        r = Http.get(url)
+        r = Http.service().get(url)
         assert r.status_code == 401
         print(r.headers['WWW-Authenticate'])
 
-        s = Http.session(auth=auth)
+        s = Http.service(auth=auth)
         r = s.get(url)
         assert r.status_code == 200
 
@@ -86,10 +86,10 @@ def check_DIGEST_AUTH_RETURNS_COOKIE(request):
         auth = Http.auth.digest(user='user', pwd='pass')
         url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype
 
-        r = Http.get(url)
+        r = Http.service().get(url)
         #assert r.cookies['fake'] == 'fake_value'
 
-        r = Http.get(url, auth=auth)
+        r = Http.service().get(url, auth=auth)
         assert r.status_code == 200
 
 @test
@@ -98,7 +98,7 @@ def check_DIGEST_AUTH_SETS_SESSION_COOKIES(request):
         auth = Http.auth.digest(user='user', pwd='pass')
         url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype + '/never'
 
-        s = Http.session()
+        s = Http.service()
         s.get(url, auth=auth)
         assert s.cookies['fake'] == 'fake_value'
         
@@ -110,14 +110,14 @@ def check_DIGESTAUTH_WRONG_HTTP_401_GET(request):
         auth = Http.auth.digest(user='user', pwd='wrongpass')
         url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype
 
-        r = Http.get(url, auth=auth)
+        r = Http.service().get(url, auth=auth)
         assert r.status_code == 401
 
-        r = Http.get(url)
+        r = Http.service().get(url)
         assert r.status_code == 401
         print(r.headers['WWW-Authenticate'])
 
-        s = Http.session(auth=auth)
+        s = Http.service(auth=auth)
         r = s.get(url)
         assert r.status_code == 401
 
@@ -128,5 +128,5 @@ def check_DIGESTAUTH_QUOTES_QOP_VALUE(request):
         auth = Http.auth.digest(user='user', pwd='wrongpass')
         url = 'http://httpbin.org/digest-auth/auth/user/pass/' + authtype
 
-        r = Http.get(url, auth=auth)
+        r = Http.service().get(url, auth=auth)
         assert '"auth"' in r.request.headers['Authorization']

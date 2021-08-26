@@ -1,0 +1,5 @@
+request:
+  method: get
+  route: "/items"
+
+codes: 200

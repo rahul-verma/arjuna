@@ -9,6 +9,14 @@ Subpackages
 
    arjuna.interact.http.model
 
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 4
+
+   arjuna.interact.http.session
+
 Module contents
 ---------------
 

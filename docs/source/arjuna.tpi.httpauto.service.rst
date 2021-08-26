@@ -1,7 +1,7 @@
-arjuna.tpi.httpauto.session module
+arjuna.tpi.httpauto.service module
 ==================================
 
-.. automodule:: arjuna.tpi.httpauto.session
+.. automodule:: arjuna.tpi.httpauto.service
    :members:
    :undoc-members:
    :show-inheritance:

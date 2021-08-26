@@ -1,7 +1,7 @@
-arjuna.interact.http.model.message module
+arjuna.tpi.httpauto.seamful.action module
 =========================================
 
-.. automodule:: arjuna.interact.http.model.message
+.. automodule:: arjuna.tpi.httpauto.seamful.action
    :members:
    :undoc-members:
    :show-inheritance:

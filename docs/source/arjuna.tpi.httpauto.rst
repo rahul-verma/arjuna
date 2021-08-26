@@ -1,6 +1,14 @@
 arjuna.tpi.httpauto package
 ===========================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   arjuna.tpi.httpauto.seamful
+
 Submodules
 ----------
 
@@ -13,7 +21,7 @@ Submodules
    arjuna.tpi.httpauto.packet
    arjuna.tpi.httpauto.request
    arjuna.tpi.httpauto.response
-   arjuna.tpi.httpauto.session
+   arjuna.tpi.httpauto.service
 
 Module contents
 ---------------

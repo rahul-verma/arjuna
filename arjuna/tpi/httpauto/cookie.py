@@ -26,12 +26,21 @@ class HttpCookie:
 
     @property
     def value(self):
+        '''
+        Value stored in this cookie.
+        '''
         return self._cookie.value
 
     @property
-    def secure_enabled(self):
+    def secure(self):
+        '''
+        If secure flag is set for this cookie, this value is True, else False.
+        '''
         return self._cookie.secure
 
     @property
-    def httponly_enabled(self):
+    def httponly(self):
+        '''
+        If HttpOnly flag is set for this cookie, this value is True, else False.
+        '''
         return self._cookie.has_nonstandard_attr("HttpOnly")

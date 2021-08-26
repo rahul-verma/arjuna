@@ -101,7 +101,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
         self._interactions.Click().wait()
         #self._only_click()
 
-    def __only_hover(self):
+    def _only_hover(self):
         self.dispatcher.hover()
 
     def hover(self):
@@ -112,8 +112,9 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
-        self.__wait_until_clickable_if_configured()
-        self.__only_hover()
+        # self.__wait_until_clickable_if_configured()
+        # self._only_hover()
+        self._interactions.Hover().wait()
 
     def hover_and_click(self):
         '''
@@ -123,7 +124,7 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
 
             **ArjunaOption.GUIAUTO_MAX_WAIT** in associated configuration is used as the default. Can be overriden using **max_wait** argument in GuiWidgetDefinition or GNS file.
         '''
-        self.__only_hover()
+        self._interactions.Hover().wait()
         self.__wait_until_clickable_if_configured()
         self.dispatcher.mouse_click()
 

@@ -29,6 +29,10 @@ class BaseHttpEndPoint:
         self.__actions = HttpActionLoader(endpoint=self)
 
     @property
+    def name(self):
+        return self.__name
+
+    @property
     def service(self):
         return self.__service
 
@@ -59,7 +63,7 @@ class BaseHttpEndPoint:
 class AnonHttpEndPoint(BaseHttpEndPoint):
 
     def __init__(self, *, service):
-        super().__init__(name="anonep", service=service, ep_dir=service.root_dir)
+        super().__init__(name="anon", service=service, ep_dir=service.root_dir)
 
 class HttpEndPoint(BaseHttpEndPoint):
     def __init__(self, *, name, service):

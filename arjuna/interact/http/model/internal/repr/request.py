@@ -38,7 +38,7 @@ class HttpRequestYamlRepr:
             content_handler = getattr(Http.content, req_yaml["content_type"].lower())
             del req_yaml["content_type"]
         else:
-            content_handler = action.endpoint.service.session.request_content_handler
+            content_handler = action._endpoint.service._session.request_content_handler
 
         if "content" in req_yaml:
             req_yaml["content"] = convert_yaml_obj_to_content(req_yaml["content"])

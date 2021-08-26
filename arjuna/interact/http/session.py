@@ -23,31 +23,9 @@ from arjuna.tpi.error import HttpUnexpectedStatusCodeError, HttpSendError, HttpC
 from requests.exceptions import ConnectionError, TooManyRedirects, ProxyError, InvalidProxyURL
 import time
 
-from .request import _HttpRequest
-from .response import HttpResponse
-from .cookie import HttpCookie
-
-
-class HttpCookie:
-
-    def __init__(self, session, cookie):
-        self.__cookie = cookie
-
-    @property
-    def _cookie(self):
-        return self.__cookie
-
-    @property
-    def value(self):
-        return self._cookie.value
-
-    @property
-    def secure(self):
-        return self._cookie.secure
-
-    @property
-    def httponly(self):
-        return self._cookie.has_nonstandard_attr("HttpOnly")
+from arjuna.tpi.httpauto.request import _HttpRequest
+from arjuna.tpi.httpauto.response import HttpResponse
+from arjuna.tpi.httpauto.cookie import HttpCookie
 
 
 class HttpSession:
@@ -67,7 +45,7 @@ class HttpSession:
     def __init__(self, *, url=None, oauth_token=None, request_content_handler=None, headers=None, max_redirects=None, auth=None, proxy=None, _auto_session=True):
         self.__url = url is not None and url.strip() or None
         self.__request_content_handler = request_content_handler
-        from .http import Http
+        from arjuna.tpi.httpauto.http import Http
         if self.__request_content_handler is None:
             self.__request_content_handler = Http.content.urlencoded
         self.__session = None
@@ -119,7 +97,7 @@ class HttpSession:
         self.__session = session
         if self.__provided_headers is not None:
             self.__session.headers.update(self.__provided_headers)
-        from .http import Http
+        from arjuna.tpi.httpauto.http import Http
         if self.request_content_handler != Http.content.custom:
             self.__session.headers['Content-Type'] = Http.content.get_content_type(self.request_content_handler)
 
@@ -261,190 +239,32 @@ class HttpSession:
 
 
     def get(self, route, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
-        '''
-        Sends an HTTP GET request.
-
-        Arguments:
-            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
-
-        Keyword Arguments:
-            label: Label for this request. If available, it is used in reports and logs.
-            xcodes: Expected HTTP response code(s).
-            headers: Mapping of additional HTTP headers to be sent with this request.
-            cookies: Python dict of cookies to send with request.
-            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
-            auth: HTTP Authentication object: Basic/Digest.
-            timeout: How long to wait for the server to send data before giving up.
-            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            query_params: A mapping of key-values to be included in query string.
-            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
-
-        Note:
-            **query_params** and **named_query_params** have the same goal.
-            In case of duplicates, named_query_params override query_params.
-        '''
         request = _HttpRequest(self, self.__route(route), method="get", label=label, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
 
     def head(self, route, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
-        '''
-        Sends an HTTP HEAD request.
-
-        Arguments:
-            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
-
-        Keyword Arguments:
-            label: Label for this request. If available, it is used in reports and logs.
-            xcodes: Expected HTTP response code(s).
-            headers: Mapping of additional HTTP headers to be sent with this request.
-            cookies: Python dict of cookies to send with request.
-            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
-            auth: HTTP Authentication object: Basic/Digest.
-            timeout: How long to wait for the server to send data before giving up.
-            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            query_params: A mapping of key-values to be included in query string.
-            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
-
-        Note:
-            **query_params** and **named_query_params** have the same goal.
-            In case of duplicates, named_query_params override query_params.
-        '''
         request = _HttpRequest(self, self.__route(route), method="head", label=label, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
 
     def delete(self, route, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
-        '''
-        Sends an HTTP DELETE request.
-
-        Arguments:
-            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
-
-        Keyword Arguments:
-            label: Label for this request. If available, it is used in reports and logs.
-            xcodes: Expected HTTP response code(s).
-            headers: Mapping of additional HTTP headers to be sent with this request.
-            cookies: Python dict of cookies to send with request.
-            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
-            auth: HTTP Authentication object: Basic/Digest.
-            timeout: How long to wait for the server to send data before giving up.
-            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            query_params: A mapping of key-values to be included in query string.
-            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
-
-        Note:
-            **query_params** and **named_query_params** have the same goal.
-            In case of duplicates, named_query_params override query_params.
-        '''
         request = _HttpRequest(self, self.__route(route), method="delete", label=label, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
     def post(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
-        '''
-        Sends an HTTP POST request.
-
-        Arguments:
-            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
-
-        Keyword Arguments:
-            label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
-            xcodes: Expected HTTP response code(s).
-            headers: Mapping of additional HTTP headers to be sent with this request.
-            cookies: Python dict of cookies to send with request.
-            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
-            auth: HTTP Authentication object: Basic/Digest.
-            timeout: How long to wait for the server to send data before giving up.
-            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            query_params: A mapping of key-values to be included in query string.
-            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
-
-        Note:
-            **query_params** and **named_query_params** have the same goal.
-            In case of duplicates, named_query_params override query_params.
-        '''
         request = _HttpRequest(self, self.__route(route), method="post", label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
     def put(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
-        '''
-        Sends an HTTP PUT request.
-
-        Arguments:
-            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
-
-        Keyword Arguments:
-            label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
-            xcodes: Expected HTTP response code(s).
-            headers: Mapping of additional HTTP headers to be sent with this request.
-            cookies: Python dict of cookies to send with request.
-            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
-            auth: HTTP Authentication object: Basic/Digest.
-            timeout: How long to wait for the server to send data before giving up.
-            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            query_params: A mapping of key-values to be included in query string.
-            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
-
-        Note:
-            **query_params** and **named_query_params** have the same goal.
-            In case of duplicates, named_query_params override query_params.
-        '''
         request = _HttpRequest(self, self.__route(route), method="put", label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
     def patch(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
-        '''
-        Sends an HTTP PUT request.
-
-        Arguments:
-            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
-
-        Keyword Arguments:
-            label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
-            xcodes: Expected HTTP response code(s).
-            headers: Mapping of additional HTTP headers to be sent with this request.
-            cookies: Python dict of cookies to send with request.
-            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
-            auth: HTTP Authentication object: Basic/Digest.
-            timeout: How long to wait for the server to send data before giving up.
-            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            query_params: A mapping of key-values to be included in query string.
-            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
-
-        Note:
-            **query_params** and **named_query_params** have the same goal.
-            In case of duplicates, named_query_params override query_params.
-        '''
         request = _HttpRequest(self, self.__route(route), method="patch", label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
     def options(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
-        '''
-        Sends an HTTP PUT request.
-
-        Arguments:
-            route: Absolute or relative URL. If relative, then `url` of this session object is pre-fixed.
-
-        Keyword Arguments:
-            label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
-            xcodes: Expected HTTP response code(s).
-            headers: Mapping of additional HTTP headers to be sent with this request.
-            cookies: Python dict of cookies to send with request.
-            allow_redirects: If True, redirections are allowed for the HTTP message. Default is True.
-            auth: HTTP Authentication object: Basic/Digest.
-            timeout: How long to wait for the server to send data before giving up.
-            pretty_url: If True, the query params are formatted using pretty URL format instead of usual query string which is the default.
-            query_params: A mapping of key-values to be included in query string.
-            **named_query_params: Arbitrary key/value pairs. These are appended to the query string of URL for this request.
-
-        Note:
-            **query_params** and **named_query_params** have the same goal.
-            In case of duplicates, named_query_params override query_params.
-        '''
         request = _HttpRequest(self, self.__route(route), method="options", label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 

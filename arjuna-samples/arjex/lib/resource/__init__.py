@@ -17,5 +17,6 @@ __all__ = [
     "httpbin",
     "httpsbin",
     "httpbinseam",
-    "httpsbinseam"
+    "httpsbinseam",
+    "narada"
 ]
