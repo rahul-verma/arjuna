@@ -16,8 +16,10 @@
 # limitations under the License.
 
 from .generator import _gen
+import collections
+import copy
 
-class _DataEntity:
+class _DataEntity(collections.Mapping):
     _MANDATORY = set()
     _DEFAULT = set()
     _REFDICT = dict()
@@ -59,12 +61,22 @@ def _attr(self, name):
     else:
         raise AttributeError("{} object does not have an attribute with name: {}.".format(self.__class__.__name__, name))
 
-def _as_dict(self, remove_none=True):
+def _sattr(self, name, value):
+    raise Exception(">>{}<< object is an immutable data entity. It does not support attribute assignment after object creation. You tried assigning value >>{}<< for attr/key >>{}<<.".format(self.__class__.__name__, value, name))
+
+def _as_dict(self, *, remove=None, remove_none=True):
     d = dict(vars(self))
     if remove_none:
-        return {k:v for k,v in d.items() if v is not None}
+        d = {k:v for k,v in d.items() if v is not None}
+
+    if remove is None:
+        remove = set()
+    elif type(remove) in {set, dict, list, tuple}:
+        remove = set([i for i in remove])
     else:
-        return d
+        remove = {str(remove)}
+
+    return {k:v for k,v in d.items() if k not in remove}
 
 def _str(self):
     return "{klass}({attrs})".format(
@@ -72,15 +84,35 @@ def _str(self):
         attrs = ", ".join("{}={}".format(k,v) for k,v in self.as_dict().items())
     )
 
-def _iter(self):
-    return iter(self.as_dict())
+def _iter(self, *, remove=None, remove_none=True):
+    return iter(self.as_dict(remove=remove, remove_none=remove_none))
 
-def __getitem__(self, k):
+def _getitem(self, k):
     return getattr(self, k)
+
+def _setitem(self, k, v):
+    return setattr(self, k, v)
+
+def _delitem(self, name):
+    raise Exception(">>{}<< object is an immutable data entity. It does not support attribute/item deletion after object creation. You tried deleting value for >>{}<<.".format(self.__class__.__name__, name))
+
+def _len(self):
+    return len(self.as_dict())
+
+def _size(self, *, remove=None, remove_none=True):
+    return len(self.as_dict(remove=remove, remove_none=remove_none))
+
+def _items(self, *, remove=None, remove_none=True):
+    return self.as_dict(remove=remove, remove_none=remove_none).items()
+
+def _keys(self, *, remove=None, remove_none=True):
+    return self.as_dict(remove=remove, remove_none=remove_none).keys()
 
 def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
     '''
         Create a new Data Entity class with provided name and attributes.
+
+        Objects of newly created Data Entity class are Immutable i.e. their attribute values can not be changed.
 
         Arguments:
             entity_name: The class name for this new Data Entity type.
@@ -96,6 +128,70 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
                 * A Python callable
                 * Arjuna `generator`
                 * Arjuna `composite`
+
+        Note:
+            Data entity objects behave like Python dictionaries. 
+
+            So you can retrieve an attribute value as:
+
+                .. code-block:: python
+                
+                    entity.attr
+                    # or
+                    entity['attr']
+
+            Following dict-like operations are valid too. The key difference to note is that in these operations that attributes that have None value are excluded unlike a Python dictionary.
+
+                .. code-block:: python
+
+                    entity.keys()
+                    entity.items()
+                    **entity # Unpacking of key-values
+
+                    # Iterating on keys
+                    for attr in entity:
+                        pass
+
+                    # Iterating on key-value pairs
+                    for attr, value in entity.items():
+                        pass
+
+            To retain keys/attrs corresponding to None values, you can provide **remove_none=False** as argument:
+
+                .. code-block:: python
+
+                    entity.keys(remove_none=False)
+                    entity.items(remove_none=False)
+                    **entity # Unpacking of key-values
+
+                    # Iterating on keys
+                    for attr in entity.keys(remove_none=False):
+                        pass
+
+                    # Iterating on key-value pairs
+                    for attr, value in entity.items(remove_none=False):
+                        pass
+
+            Also note that because len() in Python is not flexible to allow for the above, you can use **size** method:
+
+                .. code-block:: python
+
+                    len(entity) # Will ignore attrs with None value
+                    entity.size() # Will ignore attrs with None value
+                    entity.size(remove_none=False) # Includes attrs with None value
+
+            All above mentioned methods also accept **remove** argument to explicitly exclude one or more attributes by name.
+
+                .. code-block:: python
+
+                    entity.keys(remove='some_key')
+                    entity.keys(remove={'some_key1', 'some_key2'})
+
+                    entity.items(remove='some_key')
+                    entity.items(remove={'some_key1', 'some_key2'})
+
+                    entity.size(remove='some_key')                 
+                    entity.size(remove={'some_key1', 'some_key2'})
 
         Note:
             When you provide one or more bases, the overriding order is B1 -> B2 -> B3 ..... -> This Entity.
@@ -155,8 +251,16 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
 
     namespace['__init__'] = _init
     namespace['__getattr__'] = _attr
+    namespace['__setattr__'] = _sattr
     namespace['as_dict'] = _as_dict
     namespace['__str__'] = _str
     namespace['__iter__'] = _iter
+    namespace['__len__'] = _len
+    namespace['__getitem__'] = _getitem
+    namespace['__delitem__'] = _delitem
+    namespace['__setitem__'] = _setitem
+    namespace['keys'] = _keys
+    namespace['items'] = _items
+    namespace['size'] = _size
     return type(entity_name, (_DataEntity,), namespace)
 

@@ -49,6 +49,10 @@ Future Themes (In-Progress or Planned):
 
 1.2.8
 -----
+    - Added dictionary behavior to dynamic Data Entity that Arjuna generates using data_entity call.
+    - Objects of these classes are immutable.
+    - Added **remove** support to all dictionary methods and **as_dict** method to exclude one of more keys.
+    - Created tests to validate these new features.
 
 1.2.7
 ----

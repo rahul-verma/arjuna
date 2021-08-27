@@ -25,6 +25,12 @@ def check_basic_data_entity(request):
     print(person, isinstance(person, _DataEntity), issubclass(person.__class__, _DataEntity))
 
 @test
+def check_basic_data_entity_del_attr(request):
+    Person = data_entity("Person", "name age gender")
+    person = Person(name="R", age=99, gender="m")
+    print(person)
+
+@test
 def check_wrong_attr_data_entity(request):
     Person = data_entity("Person", "name age")
     try:
@@ -170,3 +176,109 @@ def check_simple_merged_entity(request):
     # Merged Entity
     PersonWithAddress = data_entity("PersonWithAddress", bases=(Person, Address))
     print(PersonWithAddress(age=40))
+
+Person = data_entity("Person", "name age gender")
+
+@test
+def check_basic_data_entity_dict_behavior_1(request):
+    person = Person(name="R", age=99, gender="m")
+    print(person['name'])
+
+@test
+def check_basic_data_entity_dict_behavior_2_1(request):
+    person = Person(name="R", age=99, gender="m")
+    def f(**kwargs):
+        print(kwargs)
+    f(**person)
+
+@test
+def check_basic_data_entity_dict_behavior_2_2(request):
+    person = Person(name="R", age=99, gender=None)
+    def f(**kwargs):
+        print(kwargs)
+    f(**person)
+
+
+@test
+def check_basic_data_entity_dict_behavior_3_1(request):
+    person = Person(name="R", age=99, gender="m")
+    for k,v in person.items():
+        print(k,v)
+
+@test
+def check_basic_data_entity_dict_behavior_3_2(request):
+    person = Person(name="R", age=99, gender=None)
+    for k,v in person.items():
+        print(k,v)
+
+@test
+def check_basic_data_entity_dict_behavior_3_3(request):
+    person = Person(name="R", age=99, gender=None)
+    for k,v in person.items(remove_none=False):
+        print(k,v)
+
+@test
+def check_basic_data_entity_dict_behavior_3_4(request):
+    person = Person(name="R", age=99, gender=None)
+    for k,v in person.items(remove="age"):
+        print(k,v)
+
+@test
+def check_basic_data_entity_dict_behavior_4_1(request):
+    person = Person(name="R", age=99, gender="m")
+    print(len(person))
+
+@test
+def check_basic_data_entity_dict_behavior_4_2(request):
+    person = Person(name="R", age=99, gender=None)
+    print(person.size())
+
+@test
+def check_basic_data_entity_dict_behavior_4_3(request):
+    person = Person(name="R", age=99, gender=None)
+    print(person.size(remove_none=False))
+
+@test
+def check_basic_data_entity_dict_behavior_5_1(request):
+    person = Person(name="R", age=99, gender="m")
+    print(person.items())
+
+@test
+def check_basic_data_entity_dict_behavior_5_2(request):
+    person = Person(name="R", age=99, gender=None)
+    print(person.items())
+
+@test
+def check_basic_data_entity_dict_behavior_5_3(request):
+    person = Person(name="R", age=99, gender=None)
+    print(person.items(remove_none=False))
+
+@test
+def check_basic_data_entity_dict_behavior_6_1(request):
+    person = Person(name="R", age=99, gender="m")
+    print(person.keys())
+
+@test
+def check_basic_data_entity_dict_behavior_6_2(request):
+    person = Person(name="R", age=99, gender=None)
+    print(person.keys())
+
+@test
+def check_basic_data_entity_dict_behavior_6_3(request):
+    person = Person(name="R", age=99, gender=None)
+    print(person.keys(remove_none=False))
+
+@test
+def check_basic_data_entity_immutable_1(request):
+    person = Person(name="R", age=99, gender="m")
+    person.age = 12
+
+@test
+def check_basic_data_entity_immutable_2(request):
+    person = Person(name="R", age=99, gender="m")
+    person['age'] = 12
+
+@test
+def check_basic_data_entity_immutable_3(request):
+    person = Person(name="R", age=99, gender="m")
+    del person['age']
