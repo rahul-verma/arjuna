@@ -49,6 +49,17 @@ Future Themes (In-Progress or Planned):
 
 1.2.9
 -----
+    - Hook restructuring: Resources, Entities and Config hooks will now be present under project/libs/hook sub-package.
+    - Data Entity and Data Generator support added to HTTP Action in SEAMful model.
+    - New tests added to validate HTTP actions.
+    - Arjuna Format String now supports special lookups
+        * data.xyz looks up in data container.
+        * abc.xyz looks up in abc container.
+        * xyz looks up for a direct name xyz and then also looks up in data container.
+        * Conceptual support added for a.b.c or even a.b.c[123] style placements. This is yet to be tested.
+    - Internal module added for dynamic importing.
+    - New Arjuna Options added for hook packages.
+    - Step wise logging added for HTTP Action and Message for clarity. Custom string representations added to the objects themselves.
 
 1.2.8
 -----
