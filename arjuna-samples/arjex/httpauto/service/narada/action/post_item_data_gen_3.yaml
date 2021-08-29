@@ -1,0 +1,15 @@
+data:
+  name:
+    generator: ustr
+  price: 
+    generator: fixed_length_number
+    length: 3
+
+store:
+  id: name
+
+messages:
+  - items
+  - item_post_1
+  - non_empty_items
+  - item_get_1_1

@@ -35,7 +35,6 @@ arjuna_options:
   conf.withx.local.file: $project_root_dir$/config/withx.local.yaml
 
   tests.dir: $project_root_dir$/test
-  hooks.dir: $project_root_dir$/hook
   reports.dir: $project_root_dir$/report
   report.dir: $project_root_dir$/report/$run_id$
   report.formats:
@@ -61,6 +60,10 @@ arjuna_options:
   data.ref.contextual.dir: $project_root_dir$/data/reference/contextual
   data.ref.indexed.dir: $project_root_dir$/data/reference/indexed
   data.file.dir: $project_root_dir$/data/file
+
+  hooks.config.package: $project_name$.lib.hook.config
+  hooks.entity.package: $project_name$.lib.hook.entity
+  hooks.resource.package: $project_name$.lib.hook.resource
 
   app.url: NOT_SET
 

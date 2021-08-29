@@ -1,0 +1,15 @@
+label: Check fetching of item
+
+request:
+  method: get
+  route: "/item/$data.name$"
+
+content_type: json
+
+match:
+  content: {
+    'name': "$data.name$",
+    'price': "$data.price$"
+  }
+
+codes: 200

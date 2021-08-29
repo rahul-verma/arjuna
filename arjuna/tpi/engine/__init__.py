@@ -196,10 +196,10 @@ class ArjunaSingleton:
 
         res_import_block = '''
 try:
-    from {project}.lib.resource import *
+    from {project}.lib.hook.resource import *
 except ModuleNotFoundError as e:
-    if e.name not in {{"{project}.lib", "{project}.lib.resource"}}:
-        raise Exception(e.name)
+    if e.name not in {{"{project}.lib", "{project}.lib.hook", "{project}.lib.hook.resource"}}:
+        raise
 '''
 
         from arjuna import Arjuna
@@ -234,16 +234,9 @@ except ModuleNotFoundError as e:
         from arjuna.tpi.hook.config import Configurator
         configurator = Configurator()
         # Load configs from config hooks
-        hooks_dir = self.ref_config.value(ArjunaOption.HOOKS_DIR)
-        if os.path.isdir(hooks_dir):
-            sys.path.append(hooks_dir)
-        try:
-            from arjuna_config import register_ref_confs
-        except ModuleNotFoundError as e: # Module not defined.
-            pass
-        except ImportError as f: # Hook not defined
-            pass
-        else:
+        from arjuna.core.importer import import_arj_config_hook
+        register_ref_confs = import_arj_config_hook(name="register_ref_confs")
+        if register_ref_confs is not None:
             register_ref_confs(configurator)
 
         def get_deps_dir_path(fpath):

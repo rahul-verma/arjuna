@@ -28,6 +28,9 @@ import time
 
 from .packet import HttpPacket
 from .response import HttpResponse
+import re
+
+_NAMED_PATTERN = r"\$(\s*[\w\.]+?\s*)\$"
 
 class HttpRequest(HttpPacket):
     '''
@@ -176,7 +179,8 @@ class _HttpRequest(HttpRequest):
         self.__headers = {}
         self.__headers.update(session.headers)
         if headers:
-            self.__headers.update(headers)
+            self.__headers.update(headers)       
+        self.__headers = {k:v for k,v in self.__headers.items() if v is not None}     
         self.__cookies = dict()
         self.__cookies.update(self.__session.cookies)
         if cookies is not None:
@@ -198,6 +202,16 @@ class _HttpRequest(HttpRequest):
                 del self.__headers['Content-Type']
 
     def __build_request(self):
+        req_repr = "{} {}".format(self.__method, self.__url)
+        named_matches = re.findall(_NAMED_PATTERN, str(self.__headers))
+        if named_matches:
+            raise HttpRequestCreationError("{} : {}".format(req_repr, "Found pending placeholders in request headers: {}. Fix formatting logic to correctly send this request.".format(named_matches)))
+
+        named_matches = re.findall(_NAMED_PATTERN, self.__url)
+        if named_matches:
+            raise HttpRequestCreationError("{} : {}".format(req_repr, "Found pending placeholders in request URL: {}. Fix formatting logic to correctly send this request.".format(named_matches)))
+
+
         parsed_uri = urlparse(self.__url)
         #self.__headers['Host'] = parsed_uri.netloc
         if self.__pretty_url:
@@ -211,8 +225,12 @@ class _HttpRequest(HttpRequest):
         try:
             if self.__content:
                 data = self.__content.content
+                named_matches = re.findall(_NAMED_PATTERN, data)
+                if named_matches:
+                    raise HttpRequestCreationError("{} : {}".format(req_repr, "Found pending placeholders in request content: {}. Fix formatting logic to correctly send this request.".format(named_matches)))
             else:
                 data = None
+            
             req = Request(self.__method, url, data=data, headers={h:v for h,v in self.__headers.items() if v is not None}, params=query_params, cookies=self.__cookies, auth=self.__auth)
             return req.prepare()
         except Exception as e:

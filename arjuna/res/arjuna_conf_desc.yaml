@@ -34,7 +34,6 @@ conf.withx.file: absolute_file_path
 conf.withx.local.file: absolute_file_path
 
 tests.dir: absolute_dir_path
-hooks.dir: absolute_dir_path
 reports.dir: absolute_dir_path
 report.dir: absolute_dir_path
 report.formats: report_formats
@@ -50,6 +49,10 @@ tools.bmproxy.dir: absolute_dir_path
 deps.dir: str
 dbauto.dir: absolute_dir_path
 dbauto.sql.dir: absolute_dir_path
+
+hooks.config.package: str
+hooks.entity.package: str
+hooks.resource.package: str
 
 data.dir: absolute_dir_path
 data.src.dir: absolute_dir_path

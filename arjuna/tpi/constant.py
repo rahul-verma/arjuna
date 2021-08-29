@@ -75,8 +75,17 @@ class ArjunaOption(Enum):
     TESTS_DIR = auto()
     '''Directory containing test modules.'''
 
-    HOOKS_DIR = auto()
-    '''Arjuna Hooks directory.'''
+    HOOKS_PACKAGE = auto()
+    '''Arjuna Hooks Package Import Path.'''
+
+    HOOKS_CONFIG_PACKAGE = auto()
+    '''Arjuna Config Hooks Package Import Path.'''
+
+    HOOKS_ENTITY_PACKAGE = auto()
+    '''Arjuna Data Entity Hooks Package Import Path.'''
+
+    HOOKS_RESOURCE_PACKAGE = auto()
+    '''Arjuna Resource Package Import Path.'''
 
     REPORTS_DIR = auto()
     '''Root directory for test reports.'''

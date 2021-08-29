@@ -21,6 +21,13 @@ from arjuna.interact.http.model.internal.repr.response import HttpResponseYamlRe
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.error import SEAMfulMessageFileError
 
+def check_data_arg_type(kwargs):
+    from arjuna.tpi.data.entity import _DataEntity
+    if 'data' in kwargs:
+        if type(kwargs['data']) is not dict and not isinstance(kwargs['data'], _DataEntity):
+            raise Exception("'data' keyword argument for HTTP message call or HTTP message.send() call can only be a Python dict or an Arjuna Data Entity. Provided: >>{}<< of type >>{}<<".format(kwargs['data'], type(kwargs['data'])))
+
+
 class BaseHttpMessage:
 
     def __init__(self, name, action):
@@ -36,6 +43,9 @@ class BaseHttpMessage:
         return self.__action
 
     def send(self, **fargs):
+        from arjuna import log_info
+        log_info("Sending", self)
+        check_data_arg_type(fargs)
         label, req_repr, resp_proc = self._load(**fargs)
         method = req_repr.method
         try:
@@ -49,6 +59,21 @@ class BaseHttpMessage:
 
     def _load(self, **sfargs):
         pass
+
+    def _get_file_path_msg(self):
+        return ""
+
+    def __str__(self):
+        meta_str = f"HTTP Message >{self.name}<" + self._get_file_path_msg()
+        if self._action.name != "anon":
+            meta_str += f" for action >{self._action.name}<"
+        if self._action._endpoint.name != "anon":
+            meta_str += f" for end point >{self._action._endpoint.name}<"
+        if self._action._endpoint.service.name != "anon":
+            meta_str += f" for service >{self._action._endpoint.service.name}<"
+        return meta_str
+
+    __repr__ = __str__
 
 
 class RootHttpMessage(BaseHttpMessage):
@@ -65,17 +90,21 @@ class HttpMessage(BaseHttpMessage):
 
     def __init__(self, *, name, action, **fargs):
         super().__init__(name=name, action=action, **fargs)
+        check_data_arg_type(fargs)
         self.__fargs = fargs
         # Process Yaml file
         from arjuna import C, Yaml
-        file_path = os.path.join(action._endpoint.root_dir, "message", name + ".yaml")
+        self.__file_path = os.path.join(action._endpoint.root_dir, "message", name + ".yaml")
         try:
-            f = open(file_path, "r")
+            f = open(self.__file_path, "r")
         except FileNotFoundError:
-            raise SEAMfulMessageFileError(self, msg=f"Message file not found at location: {file_path}")
+            raise SEAMfulMessageFileError(self, msg=f"Message file not found at location: {self.__file_path}")
         self.__msg_yaml = f.read()
         f.close()
         super().__init__(name=name, action=action)
+
+    def _get_file_path_msg(self):
+        return f" at ({self.__file_path})"
 
     def _load(self, **sfargs):
         from arjuna import C, Yaml

@@ -17,7 +17,6 @@
 
 from .generator import _gen
 import collections
-import copy
 
 class _DataEntity(collections.Mapping):
     _MANDATORY = set()

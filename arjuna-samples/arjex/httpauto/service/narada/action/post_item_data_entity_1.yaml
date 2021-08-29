@@ -1,0 +1,8 @@
+entity:
+  item: Item
+
+messages:
+  - items
+  - item_post_4
+  - non_empty_items
+  - item_get_5

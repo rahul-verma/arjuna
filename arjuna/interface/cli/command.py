@@ -127,9 +127,14 @@ class CreateProject(Command):
         (FileObjectType.DIR, "guiauto/driver/linux"),
         (FileObjectType.DIR, "guiauto/driver/mac"),
         (FileObjectType.DIR, "guiauto/driver/windows"),
+        (FileObjectType.DIR, "httpauto"),
+        (FileObjectType.DIR, "httpauto/action"),
+        (FileObjectType.DIR, "httpauto/message"),
+        (FileObjectType.DIR, "httpauto/service"),
+        (FileObjectType.DIR, "httpauto/endpoint"),
+        (FileObjectType.DIR, "httpauto/endpoint/action"),
+        (FileObjectType.DIR, "httpauto/endpoint/message"),
         (FileObjectType.DIR, "guiauto/namespace"),
-        (FileObjectType.DIR, "hook"),
-        (FileObjectType.FILE, "hook/arjuna_config.py"),
         (FileObjectType.DIR, "report"),
         (FileObjectType.DIR, "script"),
         (FileObjectType.DIR, "test"),
@@ -140,7 +145,12 @@ class CreateProject(Command):
         (FileObjectType.DIR, "tools/bmproxy"),
         (FileObjectType.DIR, "lib"),
         (FileObjectType.FILE, "lib/__init__.py"),
-        (FileObjectType.FILE, "lib/resource.py")
+        (FileObjectType.DIR, "lib/hook"),
+        (FileObjectType.FILE, "lib/hook/__init__.py"),
+        (FileObjectType.FILE, "lib/hook/entity.py"),
+        (FileObjectType.FILE, "lib/hook/resource.py"),
+        (FileObjectType.FILE, "lib/hook/config.py"),
+        (FileObjectType.FILE, "lib/hook/__init__.py"),
     )
 
     def __init__(self, subparsers, parents):

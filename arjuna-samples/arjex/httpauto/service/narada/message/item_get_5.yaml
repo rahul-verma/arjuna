@@ -2,11 +2,11 @@ label: Check fetching of item
 
 request:
   method: get
-  route: "/item/$id$"
+  route: "/item/$item.name$"
 
 content_type: json
 
 match:
-  content: $content$
+  content: $item$
 
 codes: 200

@@ -1,5 +1,5 @@
 messages:
   - items
-  - item_post
+  - item_post_1
   - non_empty_items
-  - item_get
+  - item_get_1

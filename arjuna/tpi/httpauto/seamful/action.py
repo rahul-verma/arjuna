@@ -15,13 +15,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from arjuna.tpi.parser.yaml import YamlDict
+from arjuna.tpi.data.generator import generator
 import os
-import importlib
 
 from arjuna.tpi.httpauto.response import HttpResponse
 from arjuna.tpi.error import SEAMfulActionFileError
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.data.entity import _DataEntity
+from arjuna import Random
+
+def check_data_arg_type(kwargs):
+    if 'data' in kwargs:
+        if type(kwargs['data']) is not dict and not isinstance(kwargs['data'], _DataEntity):
+            raise Exception("'data' keyword argument for action call or action.perform() call can only be a Python dict or an Arjuna Data Entity. Provided: >>{}<< of type >>{}<<".format(kwargs['data'], type(kwargs['data'])))
+
 
 class _HttpActionStep:
 
@@ -62,10 +70,24 @@ class BaseHttpEndPointAction:
         return self.__endpoint
 
     def send(self, msg_name=None, **fargs) -> HttpResponse:
+        check_data_arg_type(fargs)
         return self.message.send(msg_name, **fargs)
 
     def perform(self, **fargs) -> HttpResponse:
         pass
+
+    def _get_file_path_msg(self):
+        return ""
+
+    def __str__(self):
+        meta_str = f"HTTP Action: >{self.name}<" + self._get_file_path_msg()
+        if self._endpoint.name != "anon":
+            meta_str += f" for end point >{self._endpoint.name}<"
+        if self._endpoint.service.name != "anon":
+            meta_str += f" for service >{self._endpoint.service.name}<"
+        return meta_str
+
+    __repr__ = __str__
 
 class AnonEndPointAction(BaseHttpEndPointAction):
 
@@ -79,6 +101,7 @@ class HttpEndPointAction(BaseHttpEndPointAction):
 
     def __init__(self, *, name, endpoint, **fargs):
         super().__init__(name=name, endpoint=endpoint)
+        check_data_arg_type(fargs)
         self.__fargs = fargs
         # Process Yaml file
         from arjuna import C, Yaml
@@ -90,6 +113,9 @@ class HttpEndPointAction(BaseHttpEndPointAction):
         self.__msg_yaml = f.read()
         f.close()
         self.__store = CIStringDict()
+
+    def _get_file_path_msg(self):
+        return f" at ({self.__action_file_path})"
 
     @property
     def store(self):
@@ -110,32 +136,62 @@ class HttpEndPointAction(BaseHttpEndPointAction):
         if action_yaml is None:
             return CIStringDict(), margs, list()
 
-        if "load" in action_yaml:
-            from arjuna import Random
-            for name, instruction in action_yaml["load"].items():
-                if "generator" in instruction:
-                    d = {}
-                    d.update(instruction)
-                    gen = d["generator"]
-                    del d["generator"]
-                    self.store[name] = getattr(Random, gen)(**d)
-                elif "entity" in instruction:
-                    mod_path = ".".join([C("project.name"), "lib.entity"])
-                    d = {}
-                    d.update(instruction)
-                    entity = d["entity"]
-                    del d["entity"]
-                    try:
-                        mod = importlib.import_module(mod_path)
-                    except ImportError:
-                        raise SEAMfulActionFileError(self, f"{mod_path} is not importable. Entity >>{entity}<< can not be loaded. Validate action file: {self.__action_file_path}")
+        def call_generator(in_dict):
+            d = {}
+            d.update(in_dict)
+            gen = d["generator"]
+            del d["generator"]
+            return getattr(Random, gen)(**d)       
+
+        def gen_or_value(value):
+            if isinstance(value, YamlDict):
+                if "generator" in value:
+                    return call_generator(value)
+                else:
+                    return value
+            else:
+                return value
+
+        if 'data' not in self.store:
+            self.store['data'] = CIStringDict()
+
+        if "data" in action_yaml:
+            for name, instruction in action_yaml["data"].items():
+                if type(instruction) is dict or isinstance(instruction, YamlDict):
+                    if "generator" in instruction:
+                        self.store['data'][name] = call_generator(instruction)
                     else:
-                        self.store[name] = getattr(mod, entity)(**d)                    
+                        self.store['data'][name] = instruction
+            
+        if "entity" in action_yaml:
+            from arjuna.core.importer import import_arj_entity
+            for name, instruction in action_yaml["entity"].items():
+                if name == "data":
+                    raise SEAMfulActionFileError(self, msg=f"Entity name can not be >>data<< as it is reserved space for action.store.data. Validate action file: {self.__action_file_path}")                 
+                if type(instruction) is str:
+                    entity = instruction
+                    kwargs = {}
+                elif type(instruction) is dict or isinstance(instruction, YamlDict):
+                    entity = instruction['type']
+                    kwargs = {}
+                    kwargs.update(instruction.items())
+                    del kwargs['type']
+                else:
+                    raise SEAMfulActionFileError(self, msg=f"Entity >>{entity}<< can not be loaded. Its value can either be the Entity Class Name or dictionary has 'type' key set to Entity Class Name and rest of them are keyword arguments. Validate action file: {self.__action_file_path}")                 
+                try:
+                    entity_callable = import_arj_entity(entity)
+                except Exception as e:
+                    raise SEAMfulActionFileError(self, msg=f"Entity >>{entity}<< can not be loaded. Error: {e}. Validate action file: {self.__action_file_path}")                 
+                else:
+                    entity_kwarg_dict = {k:gen_or_value(v) for k,v in kwargs.items()}
+                    self.store[name] = entity_callable(**entity_kwarg_dict)
 
         if "store" in action_yaml:
             for k, v in action_yaml["store"].items():
                 if v in self.store:
                     self.store[k] = self.store[v]
+                elif v in self.store['data']:
+                    self.store[k] = self.store['data'][v]
                 elif v.split(".")[0] in self.store:
                     ename, attr = v.split(".", 1) 
                     if isinstance(self.store[ename], _DataEntity):
@@ -143,8 +199,14 @@ class HttpEndPointAction(BaseHttpEndPointAction):
                 else:
                     self.store[k] = v
         
-        margs.update(self.store)
-        
+        if 'data' in margs:
+            if isinstance(margs['data'], _DataEntity):
+                margs['data'] = margs['data'].as_dict()
+        else:
+            margs['data'] = dict()
+        margs['data'].update(self.store['data'])
+
+        margs.update({k:v for k,v in self.store.items() if k != "data"})
 
         mproc = None
         if "messages" in action_yaml:
@@ -156,6 +218,9 @@ class HttpEndPointAction(BaseHttpEndPointAction):
         return CIStringDict(), margs, mproc
 
     def perform(self, **fargs):
+        from arjuna import log_info
+        log_info(f"Performing", self)
+        check_data_arg_type(fargs)
         meta, fargs, steps = self._load(**fargs)
         for step in steps:
             response = step.perform(**fargs)

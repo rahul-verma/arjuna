@@ -1,0 +1,12 @@
+label: Check fetching of item
+
+request:
+  method: get
+  route: "/item/$data.name$"
+
+content_type: json
+
+match:
+  content: $data$
+
+codes: 200

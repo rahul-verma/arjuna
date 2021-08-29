@@ -46,7 +46,7 @@ import sys
 from arjuna.tpi.helper.audit import _Stack
 from arjuna.tpi.arjuna_types import *
 
-def __log(invoker, level, msg, contexts=None):
+def __log(invoker, level, *msg, contexts=None):
     from arjuna import Arjuna, ArjunaOption
     if type(contexts) is str:
         contexts = (contexts,)
@@ -54,7 +54,8 @@ def __log(invoker, level, msg, contexts=None):
         contexts = ("default",)
     contexts = set(contexts)
     try:
-        getattr(Arjuna.get_logger(), level)(str(msg).replace('\n', ' ').replace('\r', ''), extra={'invoker': invoker, 'contexts':contexts})
+        msg = " ".join([str(m).replace('\n', ' ').replace('\r', '') for m in msg])
+        getattr(Arjuna.get_logger(), level)(msg, extra={'invoker': invoker, 'contexts':contexts})
     except AttributeError:
         # In case the logging is called before the logger is set.
         # In future versions, see if there can be a fallabck logger.
@@ -66,62 +67,62 @@ def __log(invoker, level, msg, contexts=None):
         else :
             sys.stderr.write(msg+"\n")
 
-def log_trace(msg: str, *, contexts: ListOrTupleOrStr=None):
+def log_trace(*msg: object, contexts: ListOrTupleOrStr=None):
     '''
         Log a message with **TRACE** level.
 
         Args: 
-            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
+            msg: Arbitrary Log Message Objects. String representations of all objects are joined using a single blank space.
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(_Stack.get_invoker(), "trace", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "trace", *msg, contexts=contexts)
 
-def log_debug(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
+def log_debug(*msg: object, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **DEBUG** level.
 
         Args: 
-            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
+            msg: Arbitrary Log Message Objects. String representations of all objects are joined using a single blank space.
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(_Stack.get_invoker(), "debug", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "debug", *msg, contexts=contexts)
 
-def log_info(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
+def log_info(*msg: object, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **INFO** level.
 
         Args: 
-            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
+            msg: Arbitrary Log Message Objects. String representations of all objects are joined using a single blank space.
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(_Stack.get_invoker(), "info", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "info", *msg, contexts=contexts)
 
-def log_warning(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
+def log_warning(*msg: object, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **WARNING** level.
 
         Args: 
-            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
+            msg: Arbitrary Log Message Objects. String representations of all objects are joined using a single blank space.
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(_Stack.get_invoker(), "warning", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "warning", *msg, contexts=contexts)
 
-def log_error(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
+def log_error(*msg: object, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **ERROR** level.
 
         Args: 
-            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
+            msg: Arbitrary Log Message Objects. String representations of all objects are joined using a single blank space.
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(_Stack.get_invoker(), "error", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "error", *msg, contexts=contexts)
 
-def log_fatal(msg: str, *, contexts: ListOrTupleOrStr=None) -> None:
+def log_fatal(*msg: object, contexts: ListOrTupleOrStr=None) -> None:
     '''
         Log a message with **FATAL** level.
 
         Args: 
-            msg: Log message. If not string object is provided str(msg) is used to get its string representation.
+            msg: Arbitrary Log Message Objects. String representations of all objects are joined using a single blank space.
             contexts: (Optional) Context strings for this log message.
     '''
-    __log(_Stack.get_invoker(), "fatal", msg, contexts=contexts)
+    __log(_Stack.get_invoker(), "fatal", *msg, contexts=contexts)

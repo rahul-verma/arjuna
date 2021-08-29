@@ -1,0 +1,15 @@
+entity:
+  item:
+    type: Item
+    name:
+      generator: ustr
+    price: 34
+
+store:
+  id: item.name
+
+messages:
+  - items
+  - item_post_4
+  - non_empty_items
+  - item_get_6
