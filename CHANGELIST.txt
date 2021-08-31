@@ -47,6 +47,9 @@ Future Themes (In-Progress or Planned):
     - Discussion with Pierre
         - Add container assertions to Asserter.
 
+1.2.10
+------
+
 1.2.9
 -----
     - Hook restructuring: Resources, Entities and Config hooks will now be present under project/libs/hook sub-package.
