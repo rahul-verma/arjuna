@@ -135,6 +135,8 @@ class HttpRequest(HttpPacket):
     @classmethod
     def repr_as_str(cls, *, method, url, headers, content=None):
         if content:
+            if isinstance(content, bytes):
+                content = content.decode('utf-8', 'backslashreplace')
             content = '\n\n{}\n'.format(content)
         else:
             content = ""
@@ -147,7 +149,7 @@ class HttpRequest(HttpPacket):
     def __str__(self):
         content = self.content
         if isinstance(content, bytes):
-            content = content.decode()
+            content = content.decode('utf-8', 'backslashreplace')
         return self.repr_as_str(
             method = self.__request.method,
             url = self.url,
@@ -225,9 +227,10 @@ class _HttpRequest(HttpRequest):
         try:
             if self.__content:
                 data = self.__content.content
-                named_matches = re.findall(_NAMED_PATTERN, data)
-                if named_matches:
-                    raise HttpRequestCreationError("{} : {}".format(req_repr, "Found pending placeholders in request content: {}. Fix formatting logic to correctly send this request.".format(named_matches)))
+                if type(data) is not bytes:
+                    named_matches = re.findall(_NAMED_PATTERN, data)
+                    if named_matches:
+                        raise HttpRequestCreationError("{} : {}".format(req_repr, "Found pending placeholders in request content: {}. Fix formatting logic to correctly send this request.".format(named_matches)))
             else:
                 data = None
             

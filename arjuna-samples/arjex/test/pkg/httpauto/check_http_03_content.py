@@ -37,6 +37,9 @@ def check_multipart_file(request):
     post2 = Http.service().post(url, content=Http.content.file('fname', "sample.txt", headers={'X-A': 'b'}))
     assert post2.status_code == 200
 
+    post3 = Http.service().post(url, content=Http.content.file('fname', "black.png", headers={'X-A': 'b'}))
+    assert post2.status_code == 200
+
 @test
 def check_multipart_files_and_fields(request):
     url = "http://httpbin.org/post"
@@ -44,6 +47,14 @@ def check_multipart_files_and_fields(request):
     r = Http.service().post(url, content=Http.content.multipart(
         {'a': 1, 'b': 3},
         Http.field('fname', "sample.txt", is_file=True),
+        {'a': 7, 'b': 9},
+        Http.field('c', 'something')
+    ))
+    assert r.status_code == 200
+
+    r = Http.service().post(url, content=Http.content.multipart(
+        {'a': 1, 'b': 3},
+        Http.field('fname', "black.png", is_file=True),
         {'a': 7, 'b': 9},
         Http.field('c', 'something')
     ))

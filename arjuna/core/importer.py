@@ -26,7 +26,8 @@ def import_module(mod_name, *, prefix="", optional=False):
     except ModuleNotFoundError:
         if not optional:
             raise
-    return mod 
+    else:
+        return mod 
 
 def import_name_in_module(*, mod_name, name, prefix="", optional=False):
     mod = import_module(mod_name, prefix=prefix, optional=optional)
