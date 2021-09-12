@@ -5,7 +5,7 @@ entity:
       generator: ustr
     price: 34
 
-store:
+alias:
   id: item.name
 
 messages:

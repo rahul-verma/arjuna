@@ -1,32 +1,61 @@
 .. _seam_message:
 
-**SEAMful - HTTP Message**
-==========================
+**SEAMful - Message**
+=====================
 
 Introduction
 ------------
 
-Arjuna's **Http facade class** as well as **HttpService** object can read and send abstracted Http messages in YAML based externalization files.
+In addition to the coded way discussed in :ref:`http_service` documentation, Arjuna's **HttpService** object can read and send abstracted Http messages in YAML based externalization files.
 
 In addition, any checks and extractions specified in the YAML file are also performed.
 
-These files are placed under **<Arjuna Test Project root dir>/httpauto/message** directory.
+Defining **Messages** with **Anonymous Service**
+------------------------------------------------
 
-To keep the documentation terse, we will assume **svc** as an **HttpService** object.
+The message files are placed under **<Arjuna Test Project root dir>/httpauto/message** directory.
+
+    .. code-block:: yaml
+
+        myproj
+          - httpauto
+            - message
+              - mymsg1.yaml
+              - mymsg2.yaml
+
+
+Defining **Messages** with **Named Service**
+--------------------------------------------
+
+The message files are placed under **<Arjuna Test Project root dir>/httpauto/service/<service_name>/message** directory.
+
+    .. code-block:: yaml
+
+        myproj
+          - httpauto
+            - service
+              - myservice
+                - message
+                  - mymsg1.yaml
+                  - mymsg2.yaml
+
+
+Sending **Message using Service**
+---------------------------------
+Depending on whether the message file name is a valid Python name or not, you can use the following ways to send this HTTP message using the service:
 
     .. code-block:: python
 
-        svc.send("abc")
-    
-The above code will look for a file **abc.yaml** in the **<Arjuna Test Project root dir>/httpauto/message** directory and then perform corresponding HTTP message as per specification.
+        # Python name
+        service.message.mymsg1.send()
 
-You can also create sub-directories to organize messages.
+        # Python name
+        service.send("non python name")
+        service.send("non/python/name") # With sub-directories
 
-    .. code-block:: python
+The service will look for the correspinding message in **<Arjuna Test Project root dir>/httpauto/message** or **<Arjuna Test Project root dir>/httpauto/service/<service_name>/message** directory depending on whether it is an anonymous service or named service respectively.
 
-        svc.send("some_dir/abc")
-
-The above code will look for a file **abc.yaml** in the **<Arjuna Test Project root dir>/httpauto/message/some_dir** directory and then perform corresponding HTTP message as per specification.
+It will then send the corresponding HTTP message as per specification.
 
 Blank Message File
 ------------------
@@ -40,6 +69,8 @@ Technically it means the same as following:
 
     .. code-block:: python
 
+        svc.message.send()
+        # or
         svc.send()
 
 GET is default method
@@ -167,6 +198,9 @@ will send a GET request to **<session_url>/get/a/b/c/d** and validate whether HT
 **Dynamic Messages** using Arjuna's **$<name>$** Placeholders
 -------------------------------------------------------------
 
+Basic Formatting
+^^^^^^^^^^^^^^^^
+
 You can specify the YAML in a dynamic way so that you can pass data to it from code.
 
 .. note:: 
@@ -177,13 +211,20 @@ For example
 
     .. code-block:: yaml
 
-        request:
-            method: get
-            route: "$url$"
-            a: b
+        label: Check creating of item
 
-        codes: 404
-        url: "$url$?$param_str$"
+        request:
+            method: post
+            route: "/item"
+
+        content_type: json
+        
+        content: {
+            'name': "$name$",
+            'price': "$price$"
+        }
+
+        codes: 200
 
 in the above YAML specifies **$url$** and **$param_str** plaecholders.
 
@@ -191,9 +232,40 @@ You can pass values to these named placeholders as follows (assume abc.yaml as t
 
     .. code-block:: python
 
-        svc.send('abc', url="/get", param_str="a=b")
+        svc.mymsg.send(name="something", price=121)
 
 Here **url** construct is used to validate the URL for which the response was yielded.
+
+Using **data** Formatting Container with Dictionary
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Rather than passing individual values for formatting, you can also send all of them as a Python dictiionary:
+
+    .. code-block:: python
+
+        inputs = {'name'='something', price=121}
+
+        svc.mymsg.send(**inputs)
+        # is same as
+        svc.mymsg.send(data=inputs)
+
+In the yaml, you can now use:
+
+    .. code-block:: yaml
+        
+        content: {
+            'name': "$data.name$",
+            'price': "$data.price$"
+        }
+
+Arjuna's formatter for look a name in directly supplied arguments and if not found then in the container named **data**. So, even the following is valid:
+
+    .. code-block:: yaml
+
+        content: {
+            'name': "$name$",
+            'price': "$price$"
+        }
 
 Handling **Content Type**
 -------------------------
@@ -341,8 +413,8 @@ The following example validates the secure and HttpPnly flag along with value fo
                 secure: True
                 HttpOnly: True
 
-**Content Validation** - Using **has** Construct 
-------------------------------------------------
+**Content Validation** - Check Presence Using **has** Construct 
+---------------------------------------------------------------
 
 The **has** section in message YAML is used to check presence of patterns in the HTTP Response content.
 
@@ -369,6 +441,68 @@ You can also use **has** construct under **unexpected** section.
             has:
                 regex: 'ip\s*"\s*:\s*"\s*19'
 
+**Content Validation** - Check Equality Using **match** Construct 
+-----------------------------------------------------------------
+
+The **match** section in message YAML is used to check presence of patterns in the HTTP Response content and matching the value that they represent.
+
+Depending on the pattern type, the corresponding content is treated as text/HTML/json etc.
+
+Using **jpath** in match
+^^^^^^^^^^^^^^^^^^^^^^^^
+
+Following is an example of **jpath** pattern
+
+    .. code-block:: yaml
+
+        request:
+            route: "http://httpbin.org/user-agent"
+            headers:
+                'User-agent': 'Mozilla/5.0'
+
+        match:
+            jpath:
+                'user-agent': 'Mozilla/5.0' # httpbin reflects it in root dict
+
+You can also use **match** construct under **unexpected** section.
+
+    .. code-block:: yaml
+
+        request:
+            route: "http://httpbin.org/user-agent"
+            headers:
+                'User-agent': 'Mozilla/5.0'
+
+        unexpected:
+            match:
+                jpath:
+                    'user-agent': 'Chrome' # httpbin reflects it in root dict
+
+Using **content** in match
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can match the complete content by specifying content_type section and then using **content** construct in match.
+
+    .. code-block:: yaml
+
+        label: Check fetching of item
+
+        request:
+            method: get
+            route: "/item/$id$"
+
+        content_type: json
+
+        match:
+            content: {
+                'name': "$name$",
+                'price': "$price$"
+             }
+
+        codes: 200
+
+
+.. _message_data_extraction:
 
 **Extracting and Storing** Data From Response - **store** Construct
 -------------------------------------------------------------------
@@ -398,7 +532,7 @@ You can also use the stored value in code:
 
     .. code-block:: python
 
-        response = svc.send("/abc")
+        response = svc.mymessage.send(route="abc")
         # Following logic checks whether atleast one of them was matched (not None)
         if not response.store.form and not response.store.password:
             request.asserter.fail("Autocomplete is not disabled. Either form or password field should have automcomplete='off'")
@@ -418,6 +552,37 @@ At times you will want to put custom validations on pieces of data in an HTTP Re
 
 You can use **validate** construct for this purpose. To make use of this construct, you should first extract and store values in one or more variables using the **store** construct.
 
+The following example uses **store** construct with **regex** & puts its value in **jvalue** variable. Then it validates whether is is greater than 9 by using **min** command in **validate** construct.
+
+    .. code-block:: yaml
+
+        label: Check Error Message
+
+        request:
+            route: "/res"
+
+        store:
+            jvalue:
+                regex: "(SomeRegEx)"
+
+        validate:
+            jvalue: 
+                min: 9
+
+Validations which are available under **validate** construct are
+    * **exists**: Check for presence
+    * **empty**: Check whether value is empty
+    * **min**: Check value >= specified value
+    * **max**: Check value <= specified value
+    * **contains** Check the specified one of more values are contained in the object.
+
+**Optional Extractions**
+------------------------
+
+In some use cases, you want to make the extraction optional. It means that you are fine when if it is not found. In some cases, like security testing for presence of certain error messages, the absence is what you are looking for.
+
+By default, Arjuna raises an exception if extraction fails. You can make it optional by speciffying **strict** as False.
+
 The following example uses **store** construct with **regex** & puts its value in **error_trace** variable. Then it validates whether it was found using the **exists** command in **validate** construct.
 
     .. code-block:: yaml
@@ -429,16 +594,9 @@ The following example uses **store** construct with **regex** & puts its value i
 
         store:
             error_trace:
-                regex: "(SomeErrorStr)"
+                regex: "(SomeErrorRegEx)"
 
         validate:
             error_trace: 
                 exists: False
-
-Other validations which are available under **validate** construct are
-    * **min**: Check value >= specified value
-    * **max**: Check value <= specified value
-    * **contains** Check the specified one of more values are contained in the object.
-
-
 

@@ -1,0 +1,11 @@
+label: Check Dynamic Item dict
+
+request:
+  method: get
+  route: "/ditems"
+
+content_type: json
+
+validate:
+  content:
+    empty: False

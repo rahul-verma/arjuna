@@ -20,6 +20,7 @@ Classes to assist in XML Parsing.
 '''
 import os
 import re
+from io import BytesIO, StringIO
 from lxml import etree, html
 from typing import List, Dict, Tuple
 
@@ -393,7 +394,7 @@ class Xml:
             Create an `XmlNode` from a string.
         '''
         lenient_parser = etree.XMLParser(encoding='utf-8', recover=True)
-        return XmlNode(etree.parse(StringIO(xml_str), lenient_parser))
+        return XmlNode(etree.parse(BytesIO(xml_str.encode('utf-8')), lenient_parser).getroot())
 
 
     @classmethod

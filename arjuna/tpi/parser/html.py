@@ -22,7 +22,7 @@ Classes to assist in HTML Parsing.
 from io import StringIO
 from lxml.html import soupparser
 
-from .xml import XmlNode
+from .xml import XmlNode, Xml
 
 class HtmlNode(XmlNode):
     '''
@@ -74,9 +74,14 @@ class Html:
             body = lxml_tree.getroot().find('body')
             return HtmlNode(list(body)[0])
         else:
-            lxml_tree = soupparser.parse(StringIO(html_str))
-            body = lxml_tree.getroot()
-            return HtmlNode(body)
+            try:
+                # Try with SoupParser
+                lxml_tree = soupparser.parse(StringIO(html_str))
+            except ValueError:
+                return Xml.from_str(html_str)
+            else:
+                body = lxml_tree.getroot()
+                return HtmlNode(body)
 
     @classmethod
     def from_file(cls, file_path: str, partial=False) -> HtmlNode:

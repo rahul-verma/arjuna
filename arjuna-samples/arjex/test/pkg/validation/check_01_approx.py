@@ -21,11 +21,11 @@ from arjuna import *
 def check_assert_approx_pass(request):
     request.asserter.assert_approx_equal(4.4555, 4.4566, "Mismtatch", places=2)
 
-@test
+@test(xfail=True)
 def check_assert_approx_fail(request):
     request.asserter.assert_approx_equal(4.4555, 4.4566, "Mismtatch", places=3)
 
-@test
+@test(xfail=True)
 def check_assert_approx_pass_delta(request):
     request.asserter.assert_approx_equal(4.4555, 4.4566, "Mismtatch", delta=0.002)
 

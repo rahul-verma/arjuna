@@ -28,7 +28,7 @@ def check_test_space_3_1_modify(request, tres):
     assert request.space.immutable == "changed"
     assert request.space.mutable[5] == 6
 
-@test
+@test(xfail=True)
 def check_test_space_3_2_test(request, tres):
     assert request.space.immutable == "changed" # Fails
     assert request.space.mutable[5] == 6 # Will Fail if above is commented.

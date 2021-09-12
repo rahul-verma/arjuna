@@ -24,7 +24,7 @@ def check_skip(request):
     print("Should be skipped")
     assert 1 == 2
 
-@test(skip=False)
+@test(skip=False, xfail=True)
 def check_not_skip(request):
     print("Should not be skipped")
     assert 1 == 2
@@ -34,7 +34,7 @@ def check_skip_with_condition_str(request):
     print("Should be skipped")
     assert 1 == 2
 
-@test(skip=skip("True is False"))
+@test(skip=skip("True is False"), xfail=True)
 def check_not_skip_with_condition_str(request):
     print("Should not be skipped")
     assert 1 == 2

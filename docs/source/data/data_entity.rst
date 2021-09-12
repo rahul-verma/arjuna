@@ -1,41 +1,14 @@
-.. _datagen_entity:
+.. _data_entity:
 
-**Data Generation and Data Entities**
-=====================================
+**Data Entities**
+=================
 
-**Random Data** Generation
---------------------------
-
-Data Generation is a common need in testing and test automation.
-
-Python's own libaries can be used for generation of random strings and numbers. However, tester's needs are much more involved than that.
-
-Arjuna currently has basic support for contextual data generation by using **mimesis** library provided by its :py:class:`Random <arjuna.tpi.engine.data.generator.Random>` class.
-
-Using its methods you can generate the following:
-
-    * first_name
-    * last_name
-    * name
-    * city
-    * country
-    * email
-    * phone
-    * house_number
-    * street)name
-    * street_number
-    * postal code
-    * sentence
-    * ustr
-    * fixed_length_str
-    * fixed_length_number
+In simple words, a Data Entity is a Python class whose objects when created can contain automatically generated associated data.
 
 Creating a Basic **Data Entity**
 --------------------------------
 
 Arjuna's :py:class:`data_entity <arjuna.tpi.data.entity.data_entity>` gives you an advanced, yet easy way of creating entities that contain associated generated/provided data.
-
-In simple words, a Data Entity is a Python class whose objects when created can contain automatically generated associated data.
 
 In its simplest form, :py:class:`data_entity <arjuna.tpi.data.entity.data_entity>` is a Python class (without custom behaviors/methods) creator without writing a class. In its more involved forms, it starts serving complex data needs of today's automation world.
 
@@ -69,6 +42,107 @@ You can define data attributes with default value in the familiar Pythonic way f
     .. code-block:: python
 
         Person = data_entity("Person", "name age", country='India')
+
+Data Entity has a **Python Dictionary-like Behavior**
+-----------------------------------------------------
+Data entity objects behave like Python dictionaries. 
+
+
+Attribute as a Key
+^^^^^^^^^^^^^^^^^^
+
+You can retrieve an attribute value as:
+
+    .. code-block:: python
+    
+        entity.attr
+        # or
+        entity['attr']
+
+**keys** and **items** Methods - None values Removed by Default
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Following dict-like operations are valid too. The key difference to note is that in these operations that attributes that have None value are excluded unlike a Python dictionary.
+
+    .. code-block:: python
+
+        entity.keys()
+        entity.items()
+        **entity # Unpacking of key-values
+
+        # Iterating on keys
+        for attr in entity:
+            pass
+
+        # Iterating on key-value pairs
+        for attr, value in entity.items():
+            pass
+
+**keys** and **items** Methods - Retaining None Values
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To retain keys/attrs corresponding to None values, you can provide **remove_none=False** as argument:
+
+    .. code-block:: python
+
+        entity.keys(remove_none=False)
+        entity.items(remove_none=False)
+        **entity # Unpacking of key-values
+
+        # Iterating on keys
+        for attr in entity.keys(remove_none=False):
+            pass
+
+        # Iterating on key-value pairs
+        for attr, value in entity.items(remove_none=False):
+            pass
+
+**len** unction vs **size** Method
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Also note that because len() in Python is not flexible to allow for the above, you can use **size** method:
+
+    .. code-block:: python
+
+        len(entity) # Will ignore attrs with None value
+        entity.size() # Will ignore attrs with None value
+        entity.size(remove_none=False) # Includes attrs with None value
+
+**remove** Argument for Removing Specific Keys/Attributes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+All above mentioned methods also accept **remove** argument to explicitly exclude one or more attributes by name.
+
+    .. code-block:: python
+
+        entity.keys(remove='some_key')
+        entity.keys(remove={'some_key1', 'some_key2'})
+
+        entity.items(remove='some_key')
+        entity.items(remove={'some_key1', 'some_key2'})
+
+        entity.size(remove='some_key')                 
+        entity.size(remove={'some_key1', 'some_key2'})
+
+**del** is NOT Allowed
+^^^^^^^^^^^^^^^^^^^^^^
+
+Delete operation is disllowed on the data entity because it corresponds to attribute deletion. Use **as_dict()** method for representation that has one or more keys removed.
+
+    .. code-block:: python
+
+        # Raises exception
+        del entity['some_attr']
+
+
+Creating **Immutable** Data Entity Objects
+------------------------------------------
+
+You can make an object of a data entity IMMUTABLE by passing **freeze=True** argument.
+
+    .. code-block:: python
+
+        person = Person(name="SomeName", age=21, freeze=True)
+        # Raises Exception
+        person.age = 25
 
 
 Basic Usage of **Random** with **Data Entity**
@@ -238,10 +312,10 @@ To achieve this you can make use of the **bases** argument. A single base entity
 
 Consider the following base data entity:
 
-.. code-block:: python
+    .. code-block:: python
 
-    # Simple base with one mandatory and one optional attr
-    Person = data_entity("Person", "age", fname=Random.first_name)
+        # Simple base with one mandatory and one optional attr
+        Person = data_entity("Person", "age", fname=Random.first_name)
 
 In the following sections, we will utilize this as base entity and make further tweaks.
 
@@ -250,12 +324,12 @@ In the following sections, we will utilize this as base entity and make further 
 
 Here the **UpdatedPerson** entity uses **Person** as its base entity and adds **gender** as a mandatory attribute:
 
-.. code-block:: python
+    .. code-block:: python
 
-    # Top entity adds a mandatory attr
-    UpdatedPerson = data_entity("UpdatedPerson", "gender", bases=Person)
-    p1 = UpdatedPerson(gender="M", age=20)
-    p2 = UpdatedPerson(gender="M", age=20, fname="Roy")
+        # Top entity adds a mandatory attr
+        UpdatedPerson = data_entity("UpdatedPerson", "gender", bases=Person)
+        p1 = UpdatedPerson(gender="M", age=20)
+        p2 = UpdatedPerson(gender="M", age=20, fname="Roy")
 
 
 **Adding** an **Optional/Default** Attribute
@@ -263,12 +337,12 @@ Here the **UpdatedPerson** entity uses **Person** as its base entity and adds **
 
 Here the **UpdatedPerson** entity uses **Person** as its base entity and adds **city** as an optional attribute:
 
-.. code-block:: python
+    .. code-block:: python
 
-    # Top entity adds an optional attr
-    UpdatedPerson = data_entity("UpdatedPerson", city=Random.city, bases=Person)
-    p1 = UpdatedPerson(age=20, fname="Roy")
-    p2 = UpdatedPerson(age=20, fname="Roy", city="Bengaluru")
+        # Top entity adds an optional attr
+        UpdatedPerson = data_entity("UpdatedPerson", city=Random.city, bases=Person)
+        p1 = UpdatedPerson(age=20, fname="Roy")
+        p2 = UpdatedPerson(age=20, fname="Roy", city="Bengaluru")
 
 
 **Changing Value of Optional/Default Attribute**
@@ -276,12 +350,12 @@ Here the **UpdatedPerson** entity uses **Person** as its base entity and adds **
 
 Here the **UpdatedPerson** entity uses **Person** as its base entity and changes the value for **fname** attribute.
 
-.. code-block:: python
+    .. code-block:: python
 
-    # Top entity adds an optional attr
-    UpdatedPerson = data_entity("UpdatedPerson", fname=Random.name, bases=Person)
-    p1 = UpdatedPerson(age=20)
-    p2 = UpdatedPerson(age=20, fname="Roy")
+        # Top entity adds an optional attr
+        UpdatedPerson = data_entity("UpdatedPerson", fname=Random.name, bases=Person)
+        p1 = UpdatedPerson(age=20)
+        p2 = UpdatedPerson(age=20, fname="Roy")
 
 
 Converting an **Optional/Default Attribute to Mandatory Attribute**
@@ -289,11 +363,11 @@ Converting an **Optional/Default Attribute to Mandatory Attribute**
 
 Here the **UpdatedPerson** entity uses **Person** as its base entity and makes **fname** mandatory.
 
-.. code-block:: python
+    .. code-block:: python
 
-    # Top entity adds an optional attr
-    UpdatedPerson = data_entity("UpdatedPerson", "fname", bases=Person)
-    p1 = UpdatedPerson(age=20, fname="Roy")
+        # Top entity adds an optional attr
+        UpdatedPerson = data_entity("UpdatedPerson", "fname", bases=Person)
+        p1 = UpdatedPerson(age=20, fname="Roy")
 
 
 Converting a **Mandatory Attribute to Optional Attribute**
@@ -301,11 +375,11 @@ Converting a **Mandatory Attribute to Optional Attribute**
 
 Here the **UpdatedPerson** entity uses **Person** as its base entity and makes **age** attribute optional.
 
-.. code-block:: python
+    .. code-block:: python
 
-    # Top entity adds an optional attr
-    UpdatedPerson = data_entity("UpdatedPerson", age=generator(Random.fixed_length_number, length=2), bases=Person)
-    p1 = UpdatedPerson()
+        # Top entity adds an optional attr
+        UpdatedPerson = data_entity("UpdatedPerson", age=generator(Random.fixed_length_number, length=2), bases=Person)
+        p1 = UpdatedPerson()
 
 **Multiple Base Data Entities**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -319,14 +393,14 @@ One simple requirement you might have is to merge two data entities together.
 
 Here's an intuitive approach:
 
-.. code-block:: python
+    .. code-block:: python
 
-    Person = data_entity("Person", "age", fname=Random.first_name)
-    Address = data_entity("Address", city=Random.city, country=Random.country, postal_code=Random.postal_code)
+        Person = data_entity("Person", "age", fname=Random.first_name)
+        Address = data_entity("Address", city=Random.city, country=Random.country, postal_code=Random.postal_code)
 
-    # Merged Entity
-    PersonWithAddress = data_entity("PersonWithAddress", bases=(Person, Address))
-    p = PersonWithAddress(age=40)
+        # Merged Entity
+        PersonWithAddress = data_entity("PersonWithAddress", bases=(Person, Address))
+        p = PersonWithAddress(age=40)
 
 **Merged Data Entity with Custom Overrides**
 """"""""""""""""""""""""""""""""""""""""""""
@@ -335,28 +409,36 @@ Sometimes the base data entities have common attributes and the top data entity 
 
 Following code snippet demonstrates this:
 
-.. code-block:: python
+    .. code-block:: python
 
-    # Simple Base 1 with one mandatory and one optional attr
-    Person = data_entity("Person", "age", fname=Random.first_name)
+        # Simple Base 1 with one mandatory and one optional attr
+        Person = data_entity("Person", "age", fname=Random.first_name)
 
-    # Base 2 adds one mandatory arg, makes fname mandatory, adds one optional arg
-    MiddlePerson = data_entity("MiddlePerson", "gender fname", city=Random.city, bases=Person1)
+        # Base 2 adds one mandatory arg, makes fname mandatory, adds one optional arg
+        MiddlePerson = data_entity("MiddlePerson", "gender fname", city=Random.city, bases=Person1)
 
-    # Top entity makes age optional, add one mandatory parameter
-    TopPerson = data_entity("TopPerson", "country", age=generator(Random.fixed_length_number, length=2), bases=(Person, MiddlePerson))
-    p1 = TopPerson(gender="M", fname="Roy", country="India")
-    p2 = TopPerson(gender="M", fname="Roy", age=15, country="India")
+        # Top entity makes age optional, add one mandatory parameter
+        TopPerson = data_entity("TopPerson", "country", age=generator(Random.fixed_length_number, length=2), bases=(Person, MiddlePerson))
+        p1 = TopPerson(gender="M", fname="Roy", country="India")
+        p2 = TopPerson(gender="M", fname="Roy", age=15, country="India")
 
+.. _data_entity_injectable:
 
+Defining Entities for **Dependency Injection**
+----------------------------------------------
 
+If you define a data entity that are imporatble as **from yourproject.lib.hook.entity import MyEntity**, then Arjuna can allow the usage of this entity in places where it can do dependency injection.
 
+Currently, following places allow for dependency injection for a Data Entity:
+    * SEAMful HTTP Action yaml files
 
+In its simplest form, you can code an entity in **project/lib/hook/entity.py** python file. For example:
 
+    .. code-block:: python
 
+        from arjuna import *
 
-
-
-
-
-
+        Item = data_entity(
+            "Item",
+            name = Random.ustr,
+            price = generator(Random.fixed_length_number, length=3)

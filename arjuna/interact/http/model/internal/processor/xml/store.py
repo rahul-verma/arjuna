@@ -26,11 +26,14 @@ class XmlExtractor:
     def response(self):
         return self.__response
 
-    def store(self, name, xpath):
+    def store(self, name, xpath, strict):
         try:
             value = self.response.html.find_with_xpath(xpath)
         except Exception:
-            value = NotFound()
+            if not strict:
+                value = NotFound()
+            else:
+                raise Exception(f"Issue in extracting value for >{name}< as no element was found using xpath >{xpath}<.")
         finally:
             self.response.store[name] = value
 

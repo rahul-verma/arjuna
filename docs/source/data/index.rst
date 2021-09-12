@@ -7,7 +7,9 @@
    ddt
    test_spaces
    data_ref
-   datagen_entity
+   data_gen
+   data_entity
+   data_builtin_entities
    textparsing
    l10n
    

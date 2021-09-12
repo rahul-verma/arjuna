@@ -17,7 +17,7 @@
 
 from arjuna import *
 
-@test
+@test(xfail=True)
 def check_missing_ref(request):
     R('missing')
 

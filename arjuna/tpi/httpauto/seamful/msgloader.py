@@ -30,8 +30,8 @@ class HttpMessageLoader:
 
         return msg
 
-    def send(self, msg_name=None, **fargs):
-        if msg_name is None:
+    def send(self, msg=None, **fargs):
+        if msg is None:
             return self.root.send(**fargs)
         else:
-            return getattr(self, msg_name).send(**fargs)
+            return getattr(self, msg).send(**fargs)

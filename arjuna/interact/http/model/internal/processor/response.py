@@ -22,6 +22,7 @@ from .text.validator import ExpectedTextValidator, UnexpectedTextValidator
 from .header.store import HeaderExtractor
 from .text.store import TextExtractor
 from .xml.store import XmlExtractor
+from .json.store import JsonExtractor
 from .validator import Validator
 from arjuna.interact.http.model.internal.helper.yaml import convert_yaml_obj_to_content
 from arjuna.tpi.engine.asserter import AsserterMixIn
@@ -76,7 +77,7 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
             if k in self.__repr["match"]:
                 self.__repr["match"][k] = match[k]   
 
-        store_var_dict = {"jpath":{}, "regex":{}, "xpath":{}, "header":{}, "cookie":{}, "response": None}
+        store_var_dict = {"jpath":{}, "regex":{}, "xpath":{}, "header":{}, "cookie":{}, "response": None, "strict": True}
         import copy
         for k,v in store.items():
             self.__repr["store"][k] = copy.deepcopy(store_var_dict)
@@ -86,7 +87,7 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
 
         for k in self.__repr["validate"]:
             if k not in self.__repr["store"] and k.lower() != "content":
-                raise Exception(f"Kye: >>{k}<< in validate section is not defined in store section of message.") 
+                raise Exception(f"Key: >>{k}<< in validate section is not defined in store section of message.") 
 
     @property
     def _session(self):
@@ -155,11 +156,13 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
         if self.store:
             for name, sdict in self.store.items():
                 if sdict["header"]:
-                    HeaderExtractor(response).store(name, sdict["header"])
+                    HeaderExtractor(response).store(name, sdict["header"], sdict["strict"])
                 elif sdict["regex"]:
-                    TextExtractor(response).store(name, sdict["regex"])
+                    TextExtractor(response).store(name, sdict["regex"], sdict["strict"])
                 elif sdict["xpath"]:
-                    XmlExtractor(response).store(name, sdict["xpath"])
+                    XmlExtractor(response).store(name, sdict["xpath"], sdict["strict"])
+                elif sdict["jpath"]:
+                    JsonExtractor(response).store(name, sdict["jpath"], sdict["strict"])
         
         response.store["default_content"] = getattr(response, self.__default_content_type.lower())
         

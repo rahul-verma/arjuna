@@ -554,7 +554,6 @@ class Arjuna:
 
     @classmethod
     def register_test_meta_data(cls, qual_name, test_meta_data):
-        print(qual_name)
         cls.ARJUNA_SINGLETON.register_test_meta_data(qual_name, test_meta_data)
 
     @classmethod

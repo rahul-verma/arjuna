@@ -22,11 +22,11 @@ class HttpActionLoader:
     def __init__(self, endpoint):
         self._endpoint = endpoint
 
-    def __getattr__(self, action_name: str, **fargs) -> HttpEndPointAction:
-        if action_name == "_anon":
+    def __getattr__(self, action: str, **fargs) -> HttpEndPointAction:
+        if action == "_anon":
             msg = AnonEndPointAction(endpoint=vars(self)["_endpoint"])
         else:
-            msg = HttpEndPointAction(name=action_name, endpoint=vars(self)["_endpoint"], **fargs)
+            msg = HttpEndPointAction(name=action, endpoint=vars(self)["_endpoint"], **fargs)
         return msg
 
     def perform(self, **fargs):

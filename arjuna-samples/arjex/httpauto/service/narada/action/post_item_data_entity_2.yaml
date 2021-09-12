@@ -1,7 +1,7 @@
 entity:
   item: Item
 
-store:
+alias:
   id: item.name
 
 messages:

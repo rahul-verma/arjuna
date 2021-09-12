@@ -50,7 +50,7 @@ def check_msg_basic(request, data, httpbin):
 def check_msg_basic_with_dot(request, httpbin):
     httpbin.message.m02_200_ex.send()
 
-@test(drive_with=records(
+@test(xfail=True, drive_with=records(
     record(msg="m03_ex_fail"),
     record(msg="m03_unex_fail"),
 ))
@@ -144,6 +144,11 @@ def check_msg_cookies(request, data, httpbin):
 
 @test(drive_with=records(
     record(msg="m08_text01"),
+))
+def check_msg_text(request, data, httpbin):
+    httpbin.send(data.msg)
+
+@test(xfail=True, drive_with=records(
     record(msg="m08_text02")
 ))
 def check_msg_text(request, data, httpbin):
@@ -154,3 +159,8 @@ def check_msg_text(request, data, httpbin):
 @test
 def check_root_message(request, httpbinseam):
     httpbinseam.message.m_200_ex.send()
+
+@test
+def check_message_store_1(request, httpbin):
+    response = httpbin.message.m09_store_1.send()
+    print(response.store)

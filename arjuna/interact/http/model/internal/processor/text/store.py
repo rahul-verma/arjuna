@@ -26,11 +26,14 @@ class TextExtractor:
     def response(self):
         return self.__response
 
-    def store(self, name, regex):
+    def store(self, name, regex, strict):
         try:
             value = self.response.text.find(regex)
         except Exception:
-            value = NotFound()
+            if not strict:
+                value = NotFound()
+            else:
+                raise Exception(f"Issue in extracting value for >{name}< as no element was found using regex >{regex}<.")
         finally:
             self.response.store[name] = value
 

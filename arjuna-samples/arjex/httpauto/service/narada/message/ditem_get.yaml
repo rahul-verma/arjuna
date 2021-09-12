@@ -1,0 +1,16 @@
+label: Check dynamic item fetching
+
+request:
+  method: get
+  route: "/ditem/$iid$"
+
+content_type: json
+
+match:
+  content: {
+    'iid': $iid$,
+    'name': "$name$",
+    'price': "$price$"
+  }
+
+codes: 200

@@ -1,0 +1,13 @@
+label: Check incrementing
+
+request:
+  method: get
+  route: "/inc/$value$"
+
+content_type: json
+
+store:
+  value:
+    jpath: value
+
+codes: 200

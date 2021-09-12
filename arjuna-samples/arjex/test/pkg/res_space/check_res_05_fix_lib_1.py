@@ -28,3 +28,7 @@ def check_2(request, module_resource):
 @test
 def check_3(request, group_resource):
     assert group_resource['a'] == 1
+
+@test
+def check_group_constant_int_res_1(request, constant_int):
+    assert constant_int == 1

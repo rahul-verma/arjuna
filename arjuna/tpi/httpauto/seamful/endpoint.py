@@ -45,7 +45,7 @@ class BaseHttpEndPoint:
         '''
             Http Message Loader for this service using default end point.
         '''
-        return self.action._anon.message
+        return self.action._anon._message
 
     @property
     def action(self):
@@ -54,11 +54,14 @@ class BaseHttpEndPoint:
         '''
         return self.__actions
 
-    def send(self, msg_name=None, **fargs) -> HttpResponse:
-        return self.action._anon.send(msg_name=msg_name, **fargs)
+    def send(self, msg=None, **fargs) -> HttpResponse:
+        return self.action._anon.send(msg=msg, **fargs)
 
-    def perform(self, action_name, **fargs) -> HttpResponse:
-        getattr(self.__actions, action_name).perform()
+    def perform(self, action, **fargs) -> HttpResponse:
+        if action is None:
+            self.__actions._anon.perform(**fargs)
+        else:
+            getattr(self.__actions, action).perform(**fargs)
 
 class AnonHttpEndPoint(BaseHttpEndPoint):
 

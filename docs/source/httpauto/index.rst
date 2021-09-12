@@ -5,10 +5,9 @@
    :maxdepth: 4
 
    intro
+   seamful
    service
-   request
-   response
-   oauth
-   seam
    seam_message
+   seam_action
+   oauth
    

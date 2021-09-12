@@ -15,20 +15,22 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
+from mimesis import locales
+
 '''
 Data Generator
 
 This module contains classes and functions that generate data.
 '''
 
-import uuid
-import random
-from mimesis import Person
-from mimesis import Address
-from mimesis import locales
-from mimesis import Text
-
-Locales = locales
+from arjuna.engine.data.generator.text import Text
+from arjuna.engine.data.generator.number import Number
+from arjuna.engine.data.generator.person import Person
+from arjuna.engine.data.generator.address import Address
+from arjuna.engine.data.generator.entity import Entity
+from arjuna.engine.data.generator.color import Color
+from arjuna.engine.data.generator.file import File
 
 class _gen:
     pass
@@ -161,269 +163,145 @@ class composite(_gen):
         else:
             return self.__composer(out)
 
-class Random:
+class DataLocale:
+    '''
+        Data Locale object.
+
+        When this object is passed where relevant to Random class methods, it localizes the data generated.
+
+        To create a specific locale object, you can use the dot notation.
+
+        .. code-block:: python
+
+            locale.en
+            locale.fr
+
+        For list of supported locales, check :ref:`suppored_data_locales`. You also use the following code to get all supported locale names:
+
+        .. code-block:: python
+
+            locale.supported
+    '''
+
+    __SUPPORTED = {
+        'cs': 'Czech', 
+        'da': 'Danish', 
+        'de': 'German', 
+        'de_at': 'Austrian German', 
+        'de_ch': 'Swiss German', 
+        'el': 'Greek', 
+        'en': 'English', 
+        'en_gb': 'British English', 
+        'en_au': 'Australian English', 
+        'en_ca': 'Canadian English', 
+        'es': 'Spanish', 
+        'es_mx': 'Mexican Spanish', 
+        'et': 'Estonian', 
+        'fa': 'Farsi', 
+        'fi': 'Finnish', 
+        'fr': 'French', 
+        'hu': 'Hungarian', 
+        'is': 'Icelandic', 
+        'it': 'Italian', 
+        'ja': 'Japanese', 
+        'kk': 'Kazakh', 
+        'ko': 'Korean', 
+        'nl': 'Dutch', 
+        'nl_be': 'Belgium Dutch', 
+        'no': 'Norwegian', 
+        'pl': 'Polish', 
+        'pt': 'Portuguese', 
+        'pt_br': 'Brazilian Portuguese', 
+        'ru': 'Russian', 
+        'sv': 'Swedish', 
+        'tr': 'Turkish', 
+        'uk': 'Ukrainian', 
+        'zh': 'Chinese'
+    }
+
+    _SINGLE_OBJ = {
+
+    }
+
+    def __getattr__(self, name):
+        if name.lower() in self.__SUPPORTED:
+            if name not in self._SINGLE_OBJ:
+                self._SINGLE_OBJ[name] = getattr(locales, name.upper())
+            return self._SINGLE_OBJ[name]
+        else:
+            raise Exception(f"{name} is not a support locale name for Random class methods. Allowed: {self.__SUPPORTED}")
+
+    @property
+    def supported(self):
+        import copy
+        return copy.deepcopy(self.__SUPPORTED)
+
+
+class __RandomMetaClass(type):
+
+    @property
+    def locale(cls):
+        return DataLocale()
+
+
+class Random(metaclass=__RandomMetaClass):
     '''
         Provides methods to create random strings and numbers of different kinds.
     '''
 
-    @classmethod
-    def ustr(cls, *, prefix: str=None, maxlen: int=None, minlen: int=None, delim:str="-", strict=False) -> str:
-        '''
-            Generate a unique UUID string.
-            If minlen/maxlen are specified in a manner that leads to uuid truncation, uniqueness is not enforced.
-            Base string is calculated as prefix + delim + uuid. Base string length is prefix length + delim length + 36 (length of uuid4)
-            Different arguments tweak the length of generated string by appending uuid one or more times fully or partially.
-            
-            Keyword Arguments:
-                prefix: (Optional) prefix to be added to the generated UUID string.
-                minlen: (Optional) Minimum length of the retuned string (inclusive of prefix + delim). Default is base string length.
-                maxlen: (Optional) Maximum length of the retuned string (inclusive of prefix + delim). Should be greater than minlen. Default is calculated as:
-                    * if minlen > half of base string length, then default maxlen is 2 * minlen 
-                    * if minlen <  half of base string length, then default maxlen is base string length
+    # Text
+    ustr = Text.ustr
+    fixed_length_str = Text.fixed_length_str
+    sentence = Text.sentence
+    alphabet = Text.alphabet
 
-                delim: (Optional) Delimiter between prefix and generated string. Default is "-". Ignored if prefix is not specified.
-                strict: (Optional) If True uniqueness of string is enforced which means full generated uuid must be used atleast once. This means length of generated string must be >= base string length, else an exception is thrown.
-            Returns:
-                A string that is unique for current session.
-        '''
-        if maxlen is not None and minlen is not None:
-            if maxlen < minlen:
-                raise Exception("maxlen must be greater than minlen for Random.ustr call")
+    # Number
+    int = Number.int
+    fixed_length_number = Number.fixed_length_number
 
-        prefix = prefix and prefix + delim or ""
-        gen_str = uuid.uuid4()
-        base_str = prefix + str(gen_str)
+    # Person
+    first_name = Person.first_name
+    last_name = Person.last_name
+    name = Person.name
+    phone = Person.phone
+    email = Person.email
 
-        if strict:
-            if minlen is not None and minlen < len(base_str):
-                minlen = len(base_str)
-            if maxlen is not None and maxlen < len(base_str):
-                raise Exception("In strict mode the maxlen can not be less than length of prefix + delim + 36 (len of uuid). Generated string: >>{}<< (length={}). Specified maxlen: {}".format(base_str, len(base_str), maxlen))
+    # Address
+    street_number = Address.street_number
+    street_name = Address.street_name
+    house_number = Address.house_number
+    postal_code = Address.postal_code
+    city = Address.city
+    country = Address.country
 
-        target_len = len(base_str)
-        if minlen is not None and maxlen is not None:
-            target_len = Random.int(begin=minlen, end=maxlen)
-        elif minlen is not None:
-            if minlen < 0.5 * len(base_str):
-                target_len = Random.int(begin=minlen, end=len(base_str))
-            else:
-                target_len = Random.int(begin=minlen, end=2 * minlen)
-        elif maxlen is not None:
-            if maxlen <= len(base_str):
-                target_len = maxlen
-            else:
-                target_len = Random.int(begin=len(base_str), end=maxlen)
+    # Color
+    color = Color.color
+    rgb_color = Color.rgb_color
+    hex_color = Color.hex_color
 
-        multiplier = (target_len // 36) + (target_len % 36 > 0 and 1 or 0)
-        base_str = prefix + multiplier * str(gen_str)
+    # # File
+    # mp3 = File.mp3
+    # aac = File.aac
+    # zip = File.zip
+    # gzip = File.gzip
+    # pdf = File.pdf
+    # docx = File.docx
+    # xlsx = File.xlsx
+    # pptx = File.pptx
+    # gif = File.gif
+    # png = File.png
+    # jpg = File.jpg
+    # mov = File.mov
+    # mp4 = File.mp4
 
-        return base_str[:target_len]
+    # Entities
+    person = Entity.person
+    address = Entity.address
 
-    @classmethod
-    def fixed_length_str(cls, *, length):
-        '''
-            Generate a fixed length string
 
-            Keyword Arguments:
-                length: Number of chracters in generated number.
 
-            Returns:
-                A generated fixed length string
-
-            Note:
-                A number of minimum length 1 is always generated.
-        '''
-        return Random.ustr(minlen=length, maxlen=length)[:length]
-
-    @classmethod
-    def first_name(cls, *, locale=Locales.EN):
-        '''
-            Generate a first name.
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating first name
-
-            Returns:
-                A generated first name
-        '''
-        return Person(locale).first_name()
-
-    @classmethod
-    def last_name(cls, *, locale=Locales.EN):
-        '''
-            Generate a last name.
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating last name
-
-            Returns:
-                A generated last name
-        '''
-        return Person(locale).last_name()
-
-    @classmethod
-    def name(cls, *, locale=Locales.EN):
-        '''
-            Generate a full name (first name and last name).
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating phone number
-
-            Returns:
-                A generated full name
-        '''
-        return "{} {}".format(cls.first_name(locale=locale), cls.last_name(locale=locale))
-
-    @classmethod
-    def phone(cls, *, locale=Locales.EN):
-        '''
-            Generate a phone number.
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating phone number
-
-            Returns:
-                A generated phone number
-        '''
-        return cls.first_name(locale=locale)
-
-    @classmethod
-    def email(cls, *, locale=Locales.EN):
-        '''
-            Generate an email address.
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating email address
-
-            Returns:
-                A generated email address
-        '''
-        return Person(locale).email()
-
-    @classmethod
-    def street_name(cls, *, locale=Locales.EN):
-        '''
-            Generate a street name
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating street name
-
-            Returns:
-                A generated street name
-        '''
-        return Address(locale).street_name()
-
-    @classmethod
-    def street_number(cls, *, locale=Locales.EN):
-        '''
-            Generate a street number
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating street number
-
-            Returns:
-                A generated street number
-        '''
-        return Address(locale).street_number()
-
-    @classmethod
-    def house_number(cls, *, locale=Locales.EN):
-        '''
-            Generate a house number
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating house number
-
-            Returns:
-                A generated house number
-        '''
-        return cls.street_number(locale=locale)
-
-    @classmethod
-    def postal_code(cls, *, locale=Locales.EN):
-        '''
-            Generate a postal code
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating postal code
-
-            Returns:
-                A generated postal code
-        '''
-        return Address(locale).postal_code()
-
-    @classmethod
-    def city(cls, *, locale=Locales.EN):
-        '''
-            Generate a city name.
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating city name
-
-            Returns:
-                A generated city name
-        '''
-        return Address(locale).city()
-
-    @classmethod
-    def country(cls, *, locale=Locales.EN):
-        '''
-            Generate a country name
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating country name
-
-            Returns:
-                A generated country name
-        '''
-        return Address(locale).country()
-
-    @classmethod
-    def sentence(cls, *, locale=Locales.EN):
-        '''
-            Generate a sentence
-
-            Keyword Arguments:
-                locale: (Optional) locale for generating sentence
-
-            Returns:
-                A generated sentence
-        '''
-        return Text(locale).sentence()
-
-    @classmethod
-    def fixed_length_number(cls, *, length):
-        '''
-            Generate a fixed length number
-
-            Keyword Arguments:
-                length: Number of digits in generated number.
-
-            Returns:
-                A generated fixed length number
-
-            Note:
-                A number of minimum length 1 is always generated.
-        '''
-        arr0 = [str(random.randint(1,9))]
-        arr = []
-        if length >= 2:
-            arr = [str(random.randint(0,9)) for i in range(length-1)]
-        arr0.extend(arr)
-        return int("".join(arr0))
-
-    @classmethod
-    def int(cls, *, end, begin=0):
-        '''
-            Generate a random integer.
-
-            Keyword Arguments:
-                end: (inclusive) upper limit for the integer
-                begin: (inclusive) lower limit for the integer. Default is 0.
-
-            Returns:
-                A generated integer
-        '''
-        return random.randint(begin, end)
 
         
+
+
+    

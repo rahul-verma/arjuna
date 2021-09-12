@@ -26,11 +26,14 @@ class HeaderExtractor:
     def response(self):
         return self.__response
 
-    def store(self, name, header):
+    def store(self, name, header, strict):
         try:
             value = self.response.headers[header]
         except KeyError:
-            value = NotFound()
-        finally:
-            self.response.store[name] = value
+            if not strict:
+                value = NotFound()
+            else:
+                raise Exception(f"Issue in extracting value for >{name}< as no HTTP Header exists with this name in HTTP Response.")
+
+        self.response.store[name] = value
 

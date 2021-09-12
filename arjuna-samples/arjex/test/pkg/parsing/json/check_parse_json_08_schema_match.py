@@ -19,7 +19,7 @@
 
 from arjuna import *
 
-@test
+@test(xfail=True)
 def check_assert_schema_1(request):
     obj1 = {
         "id": 1,

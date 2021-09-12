@@ -1,0 +1,11 @@
+data:
+  name:
+    generator: ustr
+  price: 
+    generator: fixed_length_number
+    length: 3
+
+messages:
+  - ditem_post
+  - ditems
+  - ditem_get

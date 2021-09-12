@@ -22,6 +22,18 @@ import io
 from arjuna import *
 from arjex.lib.hook.entity import Item
 
+
+@for_test(default=True)
+def items(request, narada):
+    yield
+    narada.delete("/items")
+
+
+@test
+def check_action_01_action_blank(request, narada):
+    narada.perform()
+
+
 @test
 def check_action_01_msg_individual_vals(request, narada):
     '''
@@ -67,7 +79,7 @@ def check_action_01_msg_additional_id(request, narada):
     narada.message.item_get_1_1.send(id=name, name=input_dict['name'], price=input_dict['price'])
 
 @test
-def check_action_01_action_individual_vals_filedata_gen_storesection(request, narada):
+def check_action_01_action_individual_vals_filedata_gen_alias_section(request, narada):
     narada.action.post_item_data_gen_3.perform()
 
 @test
@@ -168,3 +180,23 @@ def check_action_05_action_mixed_entity_and_other(request, narada):
 def check_action_05_action_mixed_dynamic_entity_and_other(request, narada):
     item = Item()
     narada.action.post_item_data_entity_3.perform()
+
+@test
+def check_action_06_action_responses(request, narada):
+    responses = narada.action.post_item_coded_data_1.perform(**Item())
+    for response in responses:
+        print(response)
+
+@test
+def check_action_06_action_store(request, narada):
+    responses = narada.action.post_item_coded_data_1.perform(**Item())
+    for response in responses:
+        print(response.response.store)
+
+@test
+def check_action_07_dynamic(request, narada):
+    narada.action.get_inc_1.perform(value=5)
+
+@test
+def check_action_07_msg2datainmsg2(request, narada):
+    narada.action.ditem_create.perform()

@@ -17,7 +17,7 @@
 
 from arjuna import *
 
-@test
+@test(xfail=True)
 def check_strict_l10n_mode(request):
     print(L("non_existing"))
     print(L("non_existing", strict=True, locale=Locale.DE_DE))

@@ -1,0 +1,8 @@
+request:
+  route: "http://httpbin.org/user-agent"
+  headers:
+    'User-agent': 'Mozilla/5.0'
+
+store:
+  agent:
+    jpath: 'user-agent'

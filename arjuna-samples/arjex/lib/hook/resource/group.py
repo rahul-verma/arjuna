@@ -8,3 +8,8 @@ def group_resource(request):
 
     del d['a']
     assert d == {}
+
+
+@for_group
+def constant_int(request):
+    yield 1

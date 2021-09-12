@@ -7,6 +7,7 @@ __all__ = [
     "group_resource", 
     "module_resource", 
     "test_resource", 
+    "constant_int",
 
     # GUI Auto
     "wordpress", 

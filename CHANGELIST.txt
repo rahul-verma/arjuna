@@ -40,15 +40,28 @@ Future Themes (In-Progress or Planned):
         - -ip/im/-it switches should not accept blank string.
         - ArjunaOption.REPORT_SORT_BY_NAME based on pytest-html option if available Or else auto execte an injected JavaScript to do this.
         - See if a sortable reporting time column and group column can be introduced as well.
-        - --no-print-logs is removed in latest pytest. Needs to be removed from Arjuna as well (--show-capture is the option.)
         - Docs:
             - Rules usage in CLI
             - Table: Coded Locators and GNS
-    - Discussion with Pierre
-        - Add container assertions to Asserter.
 
 1.2.10
 ------
+- Data Entiy
+    - Data Entities are mutable by default.
+    - An object of a data entity can be made immutable by passing freeze=True as argument.
+- Random class
+    - Added Random.person and Random.address calls to generate Person and Address data entity objects.
+    - Added support for providing name and/or domain in Random.email
+    - Added Random.alphabet method
+    - Revamped documentation for Random class and wrote additional tests
+- HTTP Message
+    - Added support for strict/non-strict mode in store section. Default is strict.
+    - Added support for jpath in store section.
+- HTTP Action
+    - Added support for aliasing of data
+    - Data can flow between messages as the action store is updated with extracted data from messages.
+    - Documention created for most common use cases.
+- Fixes in Xml.from_str method.
 
 1.2.9
 -----

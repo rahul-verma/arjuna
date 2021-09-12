@@ -1,0 +1,16 @@
+label: Check creating of dynamic item
+
+request:
+  method: post
+  route: "/ditem"
+  content_type: json
+  content: {
+    'name': "$name$",
+    'price': "$price$"
+  }
+
+store:
+  iid:
+    jpath: iid
+
+codes: 200

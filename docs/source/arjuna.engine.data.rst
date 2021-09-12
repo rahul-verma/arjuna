@@ -1,6 +1,15 @@
 arjuna.engine.data package
 ==========================
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 4
+
+   arjuna.engine.data.entity
+   arjuna.engine.data.generator
+
 Submodules
 ----------
 

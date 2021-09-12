@@ -27,7 +27,7 @@ def generate_exc(e):
 def check_assert_exc_pass(request):
     request.asserter.assert_exceptions(ValueError, call_this, "a")
 
-@test
+@test(xfail=True)
 def check_assert_exc_fail(request):
     request.asserter.assert_exceptions(ValueError, call_this, 1)
 
@@ -36,7 +36,7 @@ def check_assert_exc_cm_pass(request):
     with request.asserter.assert_exceptions(ValueError):
         call_this("a")
 
-@test
+@test(xfail=True)
 def check_assert_exc_cm_fail(request):
     with request.asserter.assert_exceptions(ValueError):
         call_this(1)
@@ -46,7 +46,7 @@ def check_assert_exc_regex_pass(request):
     request.asserter.assert_exceptions(ValueError, call_this, "a", regex=".*invalid literal.*")
 
 
-@test
+@test(xfail=True)
 def check_assert_exc_regex_fail(request):
     request.asserter.assert_exceptions(ValueError, call_this, "a", regex=".*wrong msg.*")
 
@@ -55,6 +55,6 @@ def check_assert_exc_multi_pass(request):
     request.asserter.assert_exceptions((ValueError, TypeError), generate_exc, ValueError)
     request.asserter.assert_exceptions((ValueError, TypeError), generate_exc, TypeError)
 
-@test
+@test(xfail=True)
 def check_assert_exc_multi_fail(request):
     request.asserter.assert_exceptions((ValueError, IndexError), generate_exc, TypeError)

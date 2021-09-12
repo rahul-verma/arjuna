@@ -5,7 +5,7 @@ data:
     generator: fixed_length_number
     length: 3
 
-store:
+alias:
   id: name
 
 messages:

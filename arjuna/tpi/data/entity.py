@@ -23,7 +23,8 @@ class _DataEntity(collections.Mapping):
     _DEFAULT = set()
     _REFDICT = dict()
 
-def _init(self, **kwargs):
+def _init(self, freeze=False, **kwargs):
+    vars(self)['__freeze'] = freeze
     wrong_args = False
     provided_set = kwargs.keys()
     mandatory_args_missing = self._MANDATORY - provided_set
@@ -58,13 +59,20 @@ def _attr(self, name):
     if name in self._REFDICT:
         return self._REFDICT[name]
     else:
-        raise AttributeError("{} object does not have an attribute with name: {}.".format(self.__class__.__name__, name))
+        raise AttributeError("{} object does not have an attribute with name: {}. Allowed: {}".format(self.__class__.__name__, name, self._REFDICT.keys()))
 
 def _sattr(self, name, value):
-    raise Exception(">>{}<< object is an immutable data entity. It does not support attribute assignment after object creation. You tried assigning value >>{}<< for attr/key >>{}<<.".format(self.__class__.__name__, value, name))
+    if vars(self)['__freeze']:
+        raise Exception(">>{}<< object is an immutable data entity (freeze is True). It does not support attribute assignment after object creation. You tried assigning value >>{}<< for attr/key >>{}<<.".format(self.__class__.__name__, value, name))
+    else:
+        if name in self._REFDICT:
+            self._REFDICT[name] = value
+        else:
+            raise AttributeError("{} object does not have an attribute with name: {}. Allowed: {}".format(self.__class__.__name__, name, self._REFDICT.keys()))
+
 
 def _as_dict(self, *, remove=None, remove_none=True):
-    d = dict(vars(self))
+    d = dict({k:v for k,v in vars(self).items() if not k.startswith('__')})
     if remove_none:
         d = {k:v for k,v in d.items() if v is not None}
 
@@ -93,7 +101,7 @@ def _setitem(self, k, v):
     return setattr(self, k, v)
 
 def _delitem(self, name):
-    raise Exception(">>{}<< object is an immutable data entity. It does not support attribute/item deletion after object creation. You tried deleting value for >>{}<<.".format(self.__class__.__name__, name))
+    raise Exception(">>{}<< object is a data entity. It does not support attribute/item deletion after object creation. You tried deleting value for >>{}<<. To get a dictionary representation without some attributes, call its as_dict() method with remove and/or remove_none arguments.".format(self.__class__.__name__, name))
 
 def _len(self):
     return len(self.as_dict())
@@ -105,13 +113,13 @@ def _items(self, *, remove=None, remove_none=True):
     return self.as_dict(remove=remove, remove_none=remove_none).items()
 
 def _keys(self, *, remove=None, remove_none=True):
-    return self.as_dict(remove=remove, remove_none=remove_none).keys()
+    return tuple(self.as_dict(remove=remove, remove_none=remove_none).keys())
 
 def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
     '''
         Create a new Data Entity class with provided name and attributes.
 
-        Objects of newly created Data Entity class are Immutable i.e. their attribute values can not be changed.
+        Check :ref:`data_entity` documentation for various use cases.
 
         Arguments:
             entity_name: The class name for this new Data Entity type.
@@ -120,6 +128,14 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
         Keyword Arguments:
             bases: Base data entities for this entity. Can be a string or tuple or list.
             **attrs_with_defaults: Arbitrary attributes to be associated with objects of this entity, with the defaults that are provided.
+
+        Note:
+            You can create objects of newly created data entity just like a normal Python class.
+
+            .. code-block:: python
+
+                Person = data_entity("Person", "name age")
+                person = Person(name="SomeName", age=21)
 
         Note:
             The defaults that are provided can be any of the following:
@@ -202,6 +218,24 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
                 - Make an optional attribute in base entity as mandatory.
                 - Make a mandatory attribute as optional by assigning a default value.
                 - Change the default for an existing default attribute to something else.
+
+        Note:
+            Delete operation is disllowed on the data entity because it corresponds to attribute deletion. Use **as_dict()** method for representation that has one or more keys removed.
+
+                .. code-block:: python
+
+                    # Raises exception
+                    del entity['some_attr']
+
+        Note:
+            You can make an object of a data entity IMMUTABLE by passing **freeze=True** argument.
+
+                .. code-block:: python
+
+                    person = Person(name="SomeName", age=21, freeze=True)
+                    # Raises Exception
+                    person.age = 25
+
     '''
     for attr in attrs:
         if type(attr) is not str:
@@ -262,4 +296,3 @@ def data_entity(entity_name, *attrs, bases=tuple(), **attrs_with_defaults):
     namespace['items'] = _items
     namespace['size'] = _size
     return type(entity_name, (_DataEntity,), namespace)
-

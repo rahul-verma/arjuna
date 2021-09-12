@@ -24,6 +24,7 @@ from arjuna.tpi.error import SEAMfulActionFileError
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.data.entity import _DataEntity
 from arjuna import Random
+from arjuna.tpi.helper.arjtype import NotFound
 
 def check_data_arg_type(kwargs):
     if 'data' in kwargs:
@@ -35,10 +36,14 @@ class _HttpActionStep:
 
     def __init__(self, action, step_yaml):
         self.__action = action
-        self.__step_yaml = step_yaml
+        self.__msg = step_yaml
+
+    @property
+    def _message(self):
+        return self.__msg
 
     def perform(self, **fargs):
-        return self.__action.send(self.__step_yaml, **fargs)
+        return self.__action.send(self.__msg, **fargs)
 
 class _HttpActionSteps:
 
@@ -62,16 +67,16 @@ class BaseHttpEndPointAction:
         return self.__name
 
     @property
-    def message(self):
+    def _message(self):
         return self._messages
 
     @property
     def _endpoint(self):
         return self.__endpoint
 
-    def send(self, msg_name=None, **fargs) -> HttpResponse:
+    def send(self, msg=None, **fargs) -> HttpResponse:
         check_data_arg_type(fargs)
-        return self.message.send(msg_name, **fargs)
+        return self._message.send(msg, **fargs)
 
     def perform(self, **fargs) -> HttpResponse:
         pass
@@ -96,6 +101,43 @@ class AnonEndPointAction(BaseHttpEndPointAction):
 
     def perform(self, **fargs):
         pass
+
+class HttpMessageResponse:
+
+    def __init__(self, *, step, msg, response):
+        self.__step = step
+        self.__msg = msg
+        self.__response = response
+
+    @property
+    def step(self):
+        '''
+            Step number for message in the action starting from 1.
+        '''
+        return self.__step
+
+    @property
+    def msg(self):
+        '''
+           HTTP Message name.
+        '''
+        return self.__msg
+
+    @property
+    def response(self):
+        '''
+            HTTP Response object.
+        '''
+        return self.__response
+
+    def __str__(self):
+        return str({
+            "step": self.step,
+            "msg": self.msg,
+            "response": self.response
+        })
+
+    __repr__ = __str__
 
 class HttpEndPointAction(BaseHttpEndPointAction):
 
@@ -186,8 +228,8 @@ class HttpEndPointAction(BaseHttpEndPointAction):
                     entity_kwarg_dict = {k:gen_or_value(v) for k,v in kwargs.items()}
                     self.store[name] = entity_callable(**entity_kwarg_dict)
 
-        if "store" in action_yaml:
-            for k, v in action_yaml["store"].items():
+        if "alias" in action_yaml:
+            for k, v in action_yaml["alias"].items():
                 if v in self.store:
                     self.store[k] = self.store[v]
                 elif v in self.store['data']:
@@ -221,7 +263,12 @@ class HttpEndPointAction(BaseHttpEndPointAction):
         from arjuna import log_info
         log_info(f"Performing", self)
         check_data_arg_type(fargs)
+        responses = list()
         meta, fargs, steps = self._load(**fargs)
-        for step in steps:
+        for index, step in enumerate(steps):
             response = step.perform(**fargs)
-            self.store.update(response.store)
+            new_data = {k:v for k,v in response.store.items() if k != "default_content" and not isinstance(v, NotFound)}
+            self.store.update(new_data)
+            fargs.update(new_data)
+            responses.append(HttpMessageResponse(step=index+1, msg=step._message, response=response))
+        return responses

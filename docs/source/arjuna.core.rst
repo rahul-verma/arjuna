@@ -28,6 +28,7 @@ Submodules
    arjuna.core.error
    arjuna.core.fmt
    arjuna.core.har
+   arjuna.core.importer
    arjuna.core.utils
    arjuna.core.value
 

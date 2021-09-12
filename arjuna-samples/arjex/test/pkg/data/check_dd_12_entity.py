@@ -269,16 +269,28 @@ def check_basic_data_entity_dict_behavior_6_3(request):
     print(person.keys(remove_none=False))
 
 @test
-def check_basic_data_entity_immutable_1(request):
+def check_basic_data_entity_mmutable_1(request):
     person = Person(name="R", age=99, gender="m")
     person.age = 12
+    print(person)
 
 @test
-def check_basic_data_entity_immutable_2(request):
+def check_basic_data_entity_mutable_2(request):
     person = Person(name="R", age=99, gender="m")
     person['age'] = 12
+    print(person)
 
-@test
-def check_basic_data_entity_immutable_3(request):
+@test(xfail=True)
+def check_basic_data_entity_mutable_but_delnotallowed(request):
     person = Person(name="R", age=99, gender="m")
     del person['age']
+
+@test(xfail=True)
+def check_basic_data_entity_immutable_1(request):
+    person = Person(name="R", age=99, gender="m", freeze=True)
+    person.age = 15
+
+@test(xfail=True)
+def check_basic_data_entity_immutable_2(request):
+    person = Person(name="R", age=99, gender="m", freeze=True)
+    person['age'] = 15

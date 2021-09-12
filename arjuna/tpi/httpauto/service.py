@@ -88,17 +88,17 @@ class HttpService:
         '''
         return self.ep._anon.action
 
-    def send(self, msg_name=None, **fargs) -> HttpResponse:
+    def send(self, msg=None, **fargs) -> HttpResponse:
         '''
             Send an HTTP Message using this service using default end point.
         '''
-        return self.ep._anon.send(msg_name=msg_name, **fargs)
+        return self.ep._anon.send(msg=msg, **fargs)
     
-    def perform(self, msg_name=None, **fargs) -> HttpResponse:
+    def perform(self, action=None, **fargs) -> HttpResponse:
         '''
             Perform an HTTP Action using this service using default end point.
         '''
-        return self.ep._anon.perform(msg_name=msg_name, **fargs)
+        return self.ep._anon.perform(action=action, **fargs)
 
     @property
     def cookies(self) -> dict:
