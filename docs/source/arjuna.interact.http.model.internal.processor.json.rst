@@ -7,6 +7,7 @@ Submodules
 .. toctree::
    :maxdepth: 4
 
+   arjuna.interact.http.model.internal.processor.json.store
    arjuna.interact.http.model.internal.processor.json.validator
 
 Module contents
