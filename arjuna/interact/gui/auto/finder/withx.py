@@ -3,7 +3,7 @@ import re
 import pickle
 from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.configure.validator import Validator
-from arjuna.core.fmt import arj_format_str
+from arjuna.tpi.parser.text import Text
 
 class WithX:
 
@@ -43,7 +43,7 @@ class WithX:
             repl_dict = {}
         try:
 
-            return fmt["wtype"], arj_format_str(fmt["wvalue"], vargs, repl_dict)
+            return fmt["wtype"], Text(fmt["wvalue"]).format(*vargs, **repl_dict)
             # if fmt["wtype"] in {'ATTR', 'FATTR', 'BATTR', 'EATTR', 'NODE', 'BNODE', 'FNODE'}:
             #     out = dict()
             #     for k,v in fmt["wvalue"].items():

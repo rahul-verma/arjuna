@@ -25,6 +25,7 @@ from arjuna.tpi.helper.arjtype import CIStringDict
 from arjuna.tpi.data.entity import _DataEntity
 from arjuna import Random
 from arjuna.tpi.helper.arjtype import NotFound
+from arjuna.tpi.parser.text import Text
 
 def check_data_arg_type(kwargs):
     if 'data' in kwargs:
@@ -171,9 +172,9 @@ class HttpEndPointAction(BaseHttpEndPointAction):
         margs = {}
         margs.update(self.__fargs)
         margs.update(sfargs)
-        from arjuna.core.fmt import arj_format_str, arj_convert
+        from arjuna.core.fmt import arj_convert
         margs = {k:arj_convert(v) for k,v in margs.items()}
-        action_yaml = arj_format_str(self.__msg_yaml, tuple(), margs)
+        action_yaml = Text(self.__msg_yaml).format(**margs)
         action_yaml = Yaml.from_str(action_yaml, allow_any=True)
         if action_yaml is None:
             return CIStringDict(), margs, list()

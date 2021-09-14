@@ -209,14 +209,16 @@ You can generate a random fixed length string with :py:func:`fixed_length_str <a
 
         Random.fixed_length_str(length=10)
 
-Fixed Length Number
-^^^^^^^^^^^^^^^^^^^
-You can generate a random fixed length string with :py:func:`fixed_length_number <arjuna.tpi.data.generator.Random.fixed_length_number>`.
+Alphabet
+^^^^^^^^
+You can get complete alphabet as list of characters with :py:func:`alphabet <arjuna.tpi.data.generator.Random.alphabet>`.
 
     .. code-block:: python
 
-        Random.fixed_length_number(length=9)
+        Random.alphabet()
 
+        # In lower case
+        Random.alphabet(lower_case=True)
 
 Random **Number**
 -----------------
@@ -235,16 +237,13 @@ You can generate a random integer with :py:func:`int <arjuna.tpi.data.generator.
         Random.int(10, begin=5)
         Random.int(begin=5, end=10)  
 
-Alphabet
-^^^^^^^^
-You can get complete alphabet as list of characters with :py:func:`alphabet <arjuna.tpi.data.generator.Random.alphabet>`.
+Fixed Length Number
+^^^^^^^^^^^^^^^^^^^
+You can generate a random fixed length number with :py:func:`fixed_length_number <arjuna.tpi.data.generator.Random.fixed_length_number>`.
 
     .. code-block:: python
 
-        Random.alphabet()
-
-        # In lower case
-        Random.alphabet(lower_case=True)
+        Random.fixed_length_number(length=9)
 
 Random **Color**
 ----------------

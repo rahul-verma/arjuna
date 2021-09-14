@@ -37,8 +37,8 @@ Arjuna Fundamentals
 
    fundamentals/index
 
-Handling Data and Files in Arjuna
-=================================
+Handling Data and Information Exchange Formats
+==============================================
 
 .. toctree::
    :maxdepth: 2

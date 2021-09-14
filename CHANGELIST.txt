@@ -1,52 +1,33 @@
-Following is the list of critical additions and updates for a given released version:
+Following is the list of critical additions and updates for a given version. Some of these versions are released to PyPI:
 
 Future Themes (In-Progress or Planned):
     - System exit code for arjuna should be based on pytest exit codes across session group threads.
     - Call Walkthroughs and Identify New Named Exceptions to be created.
-    - Auto screenshot name should consider session, stage and group name.
-    - Configuration:
-        - Provision for vars section in config files 
-        - Stage factory
-        - Group Factory
-            - single conf to all groups
-            - cycle confs over groups
-        - Stage level conf
-            - existing
-            - create new
-        - Group level conf
-            - existing: already there
-            - create new
-    Fixtures:
-        - for_session
-            - Look for thread safety.
-        - for_stage
     - GUI Automation
         - withx hook for programmatic identifiers.
         - Support multiple entries for same locator type in YAML file.
-    - Dynamic session, stage and group:
-        - Provision for vars to create dyanmic Sessions, Stages and Groups.
-            : -var command line switch can parameterize session for run-session, stage for run-stage, group for run-group
-    - Stage to stage dependency.
-    - Group to group dependency.
     - The report directory should contain a confs directory. Whenever a new configuration is created. All its parameters should be dumped in a file for reference.
-    - with cleanup.
     - Better Logging
         - Devise a way for the logger pre and post pytest runs.
     - Report merging for HTML and XML files.
     - From discussions with Stefan:
         - Support for custom CSS for HTML reporting in Arjuna test projects.
-        - OAuth related requests to be available in a collapsible group.
         - Tests with bugs should be marked as xfail automatically. (Configurable)
-        - -ip/im/-it switches should not accept blank string.
         - ArjunaOption.REPORT_SORT_BY_NAME based on pytest-html option if available Or else auto execte an injected JavaScript to do this.
         - See if a sortable reporting time column and group column can be introduced as well.
         - Docs:
-            - Rules usage in CLI
             - Table: Coded Locators and GNS
+            - Recipes
+
+1.2.11
+------
+- Rearranged docs for Parsing formats.
+- arjuna_format_str used internally is now a bound method format() of Text object and a part of TPI.
+- TO DO: Fix New Project Creation as per new directories and modules.
 
 1.2.10
 ------
-- Data Entiy
+- Data Entity
     - Data Entities are mutable by default.
     - An object of a data entity can be made immutable by passing freeze=True as argument.
 - Random class

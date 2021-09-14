@@ -87,8 +87,8 @@ A simple way to achieve this is to write a data function. A static data function
 
 We use **data_function** factory function to associate the data function with the test function Retrieval of values is same as earlier.
 
-Driving with Static Data Generator
-----------------------------------
+Driving with **Static Data Generator**
+--------------------------------------
 
 You can also use a Python generator instead of a normal function:
 
@@ -98,8 +98,8 @@ You can also use a Python generator instead of a normal function:
     def check_generator_func(request, data):
         pass
 
-Driving with Dynamic Data Function or Generator
------------------------------------------------
+Driving with **Dynamic Data Function or Generator**
+---------------------------------------------------
 
 Another advanced measure that you can take is creating a data function which acts on the arguments supplied by you to govern the data it returns/generates.
 
@@ -127,8 +127,8 @@ Instead of a function, you can also represent your data generation logic as a da
 
 We use **data_class** factory function to associate the data class with the test function. Retrieval of values is same as earlier.
 
-Driving with Dynamic Data Classes
----------------------------------
+Driving with **Dynamic Data Classes**
+-------------------------------------
 
 Another advanced measure that you can take is creating a data class which acts on the arguments supplied by you to govern the data it generates.
 
@@ -153,8 +153,8 @@ You can use **data_file** factory function to specify a data file. Arjuna determ
 
 The files are automatically picked up from **Data Sources directory** which is **<Project Root>/data/source**.
 
-Driving with Excel File
-^^^^^^^^^^^^^^^^^^^^^^^
+Driving with **Excel** File
+---------------------------
 
 An excel data file (.xls file) can contain data in following format. (.xlsx files are NOT supported as of now)
 
@@ -168,8 +168,8 @@ An excel data file (.xls file) can contain data in following format. (.xlsx file
     def check_drive_with_excel(request, data):
         pass
 
-Driving with Delimiter Separated File
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Driving with **Delimited Text File**
+------------------------------------
 
 An delimiter-separated data file can contain data in following format.
 
@@ -203,8 +203,8 @@ An delimiter-separated data file can contain data in following format.
 
 Default delimiter is **tab**. If you use any other delimiter, you can pass it as **delimiter** argument.
 
-Driving with INI File
-^^^^^^^^^^^^^^^^^^^^^
+Driving with **INI** File
+-------------------------
 
 An INI data file can contain data in following format.
 
@@ -228,8 +228,8 @@ An INI data file can contain data in following format.
     def check_drive_with_ini(request, data):
         pass
 
-Data Files with Exclude Filter for Records
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Data Files with **Exclude Filter** for Records
+----------------------------------------------
 
 At times, you might want to selectively mark records in data files to be excluded from consideration.
 
