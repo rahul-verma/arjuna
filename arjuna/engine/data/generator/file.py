@@ -15,29 +15,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def dummy_gen(*args, **kawrgs):
-    return ""
-
-class DummyMeta(type):
-    def __getattr__(self, name):
-        return dummy_gen
-
-class DummyClass(metaclass=DummyMeta):
-    def __getattr__(self, name):
-        return dummy_gen
-
-try:
-    from mimesis import BinaryFile
-    from mimesis.enums import AudioFile, CompressedFile, DocumentFile, ImageFile, VideoFile
-except:
-    # This has to wait. Mimesis 5.0.0 release on Pypi not available yet.
-    BinaryFile = DummyClass
-    AudioFile = DummyClass
-    CompressedFile = DummyClass
-    DocumentFile = DummyClass
-    ImageFile = DummyClass
-    VideoFile = DummyClass
-
+# This has to wait. Mimesis 5.0.0 release on Pypi not available yet.
+# from mimesis import BinaryFile
+#     from mimesis.enums import AudioFile, CompressedFile, DocumentFile, ImageFile, VideoFile
 
 class File:
 
