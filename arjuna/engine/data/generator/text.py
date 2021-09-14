@@ -105,7 +105,7 @@ class Text:
         return MimesisText(locale).sentence()
 
     @classmethod
-    def alphabet(cls, *, locale=Locales.EN, lower_case=False) -> list[str]:
+    def alphabet(cls, *, locale=Locales.EN, lower_case=False):
         '''
             Generate a random integer.
 
@@ -168,7 +168,7 @@ class Text:
         return MimesisText(locale).swear_word()
 
     @classmethod
-    def words(cls, *, locale=Locales.EN, count=5) -> list[str]:
+    def words(cls, *, locale=Locales.EN, count=5): # -> list[str]: Readthedocs has max version 3.8, this can be used 3.9 onwards
         '''
             Generate a random word.
 
