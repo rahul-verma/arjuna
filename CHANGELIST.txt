@@ -23,7 +23,6 @@ Future Themes (In-Progress or Planned):
 ------
 - Rearranged docs for Parsing formats.
 - arjuna_format_str used internally is now a bound method format() of Text object and a part of TPI.
-- TO DO: Fix New Project Creation as per new directories and modules.
 
 1.2.10
 ------
