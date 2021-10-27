@@ -15,25 +15,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from arjuna.tpi.helper.arjtype import NotFound
+# The tests are based on tests for requests library in https://github.com/psf/requests
 
-class TextExtractor:
+import io
 
-    def __init__(self, response):
-        self.__response =  response
+from arjuna import *
 
-    @property
-    def response(self):
-        return self.__response
 
-    def store(self, name, regex, strict):
-        try:
-            value = self.response.text.find(regex)
-        except Exception:
-            if not strict:
-                value = NotFound()
-            else:
-                raise Exception(f"Issue in extracting value for >{name}< as no element was found using regex >{regex}<.")
-        
-        self.response.store[name] = value
+@test
+def check_httpsec_01_private_resource(request, httpbinseam):
+    httpbinseam.action.private_resource.perform()
 

@@ -148,11 +148,17 @@ class HttpEndPointAction(BaseHttpEndPointAction):
         self.__fargs = fargs
         # Process Yaml file
         from arjuna import C, Yaml
-        self.__action_file_path = os.path.join(endpoint.root_dir, "action", name + ".yaml")
+        # Check Built-In Security Action
+        my_dir = os.path.dirname(os.path.realpath(__file__))
+        self.__action_file_path = os.path.abspath(os.path.join(my_dir, "..", "..","..", "res", "security", "http", "action", name + ".yaml"))
         try:
             f = open(self.__action_file_path, "r")
         except FileNotFoundError:
-            raise SEAMfulActionFileError(self, msg=f"Message file not found at location: {self.__action_file_path}")
+            self.__action_file_path = os.path.join(endpoint.root_dir, "action", name + ".yaml")
+            try:
+                f = open(self.__action_file_path, "r")
+            except FileNotFoundError:
+                raise SEAMfulActionFileError(self, msg=f"Action file not found at location: {self.__action_file_path}")
         self.__msg_yaml = f.read()
         f.close()
         self.__store = CIStringDict()

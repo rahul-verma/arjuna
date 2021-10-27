@@ -23,6 +23,8 @@ from .service import HttpService
 from bs4 import BeautifulSoup
 import urllib.parse
 
+from arjuna import track
+
 class OAuthService(HttpService):
     '''
         Base Class for all types of OAuth Http Sessions.
@@ -67,7 +69,7 @@ class OAuthService(HttpService):
         session.add_cookies(self._session.cookies)
         return session
 
-
+@track("info")
 class OAuthClientGrantService(OAuthService):
     '''
         Creates token using OAuth's Resource Owner Client Credentials Grant Type.
@@ -90,7 +92,7 @@ class OAuthClientGrantService(OAuthService):
                                   client_secret=client_secret)
         self._set_outh_token(token['access_token'])
 
-
+@track("info")
 class OAuthImplicitGrantService(OAuthService):
     '''
         Creates token using OAuth's Implicit Code Grant Type.

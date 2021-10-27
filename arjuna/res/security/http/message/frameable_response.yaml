@@ -1,0 +1,7 @@
+label: Check Frameable Response
+
+request:
+  route: "$route$"
+
+headers:
+  x-frame-options: "DENY"

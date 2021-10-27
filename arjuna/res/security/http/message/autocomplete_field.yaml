@@ -1,0 +1,19 @@
+label: Check AutoComplete Off for a Field or Containing Form
+
+request:
+  route: "$route$"
+
+codes: 200
+
+store:
+  form:
+    xpath: "//*[@$attr$='$form$' and autocomplete='off']"
+    strict: False
+  field:
+    xpath: "//*[@$attr$='$field$' and autocomplete='off']"
+    strict: False
+
+validate:
+  or: 
+    - form
+    - field

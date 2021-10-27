@@ -30,6 +30,13 @@ class Validator(AsserterMixIn):
         return self.__response
 
     def validate(self, name, target):
+        # Group assertions
+        if name.lower() in {"or", "and"}:
+            stored_value = [self.__response.store[name] for name in target]
+            getattr(self.asserter, "assert_{}".format(name.lower()))(*stored_value, msg="{} criterion not met in HTTP message.".format(name.upper()))
+            return
+
+        # Stored name assertions for a single name
         if name.lower() == "content":
             stored_value = self.__response.store["default_content"]
         else:

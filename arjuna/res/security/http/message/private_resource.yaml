@@ -1,0 +1,7 @@
+label: Check Private Resource Absence
+
+request:
+  method: get
+  route: "$route$"
+
+codes: 404

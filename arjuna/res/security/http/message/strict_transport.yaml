@@ -1,0 +1,16 @@
+label: Check Strict Transport Policy Header
+
+request:
+  route: "$route$"
+
+store:
+  transport:
+    header: Strict-Transport-Security
+    strict: False
+
+validate:
+  transport:
+    exists: True
+    contains:
+      - includeSubDomains
+      - preload

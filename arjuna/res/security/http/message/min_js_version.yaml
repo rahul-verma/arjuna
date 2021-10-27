@@ -1,0 +1,14 @@
+label: Check Minimum JS Version
+
+request:
+  route: "$route$"
+
+content_type: text
+
+store:
+  js_ver: 
+    regex: "$regex$"
+
+validate:
+  js_ver:
+    min: "$min$"

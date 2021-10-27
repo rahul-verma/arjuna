@@ -34,6 +34,6 @@ class XmlExtractor:
                 value = NotFound()
             else:
                 raise Exception(f"Issue in extracting value for >{name}< as no element was found using xpath >{xpath}<.")
-        finally:
-            self.response.store[name] = value
+
+        self.response.store[name] = value
 

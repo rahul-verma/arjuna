@@ -1,0 +1,8 @@
+
+entity:
+  item: Item
+
+messages:
+  - ditem_post
+  - ditem_get
+

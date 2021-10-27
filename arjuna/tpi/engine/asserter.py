@@ -252,6 +252,51 @@ class Asserter:
         '''
         self.__asserter.fail(msg)
 
+    def assert_or(self, *objects, msg):
+        '''
+            Assert atleast one of the provided objects is True (as per Python's boolean evaluation)
+
+            Args:
+                objects: One or more arbitraty objects
+                msg: A context string explaining why this assertion was done.
+        '''
+        atleast_one_true = False
+        for obj in objects:
+            try:
+                self.__asserter.assertTrue(obj, msg)
+            except AssertionError:
+                continue
+            else:
+                atleast_one_true = True
+                break
+    
+        if not atleast_one_true:
+            self.fail("None of the objects evaluated to True: [{}]. {}".format(
+                [str(i) for i in objects], msg
+            ))
+
+    def assert_and(self, *objects, msg):
+        '''
+            Assert that ALL of the provided objects are True (as per Python's boolean evaluation)
+
+            Args:
+                objects: One or more arbitraty objects
+                msg: A context string explaining why this assertion was done.
+        '''
+        all_true = True
+        for obj in objects:
+            try:
+                self.__asserter.assertTrue(obj, msg)
+            except AssertionError:
+                all_true = False
+                break
+            else:
+                continue
+    
+        if not all_true:
+            self.fail("Atleast one of the objects evaluated to False: [{}]. {}".format(
+                [str(i) for i in objects], msg
+            ))
 
 class AsserterMixIn:
     '''

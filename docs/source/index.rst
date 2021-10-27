@@ -63,6 +63,13 @@ HTTP Automation
 
    httpauto/index
 
+Security Testing
+================
+
+.. toctree::
+   :maxdepth: 2
+
+   security/index
 
 Notes About Python Libraries and Tools Used in Arjuna
 =====================================================

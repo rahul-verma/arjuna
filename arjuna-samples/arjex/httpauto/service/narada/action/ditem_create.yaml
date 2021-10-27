@@ -7,5 +7,4 @@ data:
 
 messages:
   - ditem_post
-  - ditems
   - ditem_get

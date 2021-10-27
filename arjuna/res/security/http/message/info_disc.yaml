@@ -1,0 +1,12 @@
+label: Check Info Disclosure
+
+request:
+  route: "$route$"
+
+store:
+  unexpected_content:
+    regex: "$regex$"
+
+validate:
+  unexpected_content:
+    exists: False

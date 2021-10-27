@@ -1,0 +1,8 @@
+label: Check Secure Cookie Flag
+
+request:
+  route: "$route$"
+
+cookies:
+  "$name$":
+    secure: True

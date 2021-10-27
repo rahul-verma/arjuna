@@ -1,0 +1,10 @@
+label: Check CORS Policy Implementation
+
+request:
+  route: "$route$"
+  headers:
+    Origin: "https://bqbiffmtswfl.com"
+
+unexpected:
+  headers:
+    Access-Control-Allow-Origin: "https://bqbiffmtswfl.com"

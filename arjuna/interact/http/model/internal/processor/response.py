@@ -85,8 +85,9 @@ class _HttpResProcessor(AsserterMixIn, metaclass=abc.ABCMeta):
                 if k2 in self.__repr["store"][k]:
                     self.__repr["store"][k][k2] = v2   
 
+        direct_validations = {"or", "and"}
         for k in self.__repr["validate"]:
-            if k not in self.__repr["store"] and k.lower() != "content":
+            if k not in self.__repr["store"] and k.lower() != "content" and k.lower() not in direct_validations:
                 raise Exception(f"Key: >>{k}<< in validate section is not defined in store section of message.") 
 
     @property

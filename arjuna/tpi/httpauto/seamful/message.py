@@ -95,11 +95,17 @@ class HttpMessage(BaseHttpMessage):
         self.__fargs = fargs
         # Process Yaml file
         from arjuna import C, Yaml
-        self.__file_path = os.path.join(action._endpoint.root_dir, "message", name + ".yaml")
+        # Check Built-In Security Message
+        my_dir = os.path.dirname(os.path.realpath(__file__))
+        self.__action_file_path = os.path.abspath(os.path.join(my_dir, "..", "..","..", "res", "security", "http", "message", name + ".yaml"))
         try:
-            f = open(self.__file_path, "r")
+            f = open(self.__action_file_path, "r")
         except FileNotFoundError:
-            raise SEAMfulMessageFileError(self, msg=f"Message file not found at location: {self.__file_path}")
+            self.__file_path = os.path.join(action._endpoint.root_dir, "message", name + ".yaml")
+            try:
+                f = open(self.__file_path, "r")
+            except FileNotFoundError:
+                raise SEAMfulMessageFileError(self, msg=f"Message file not found at location: {self.__file_path}")
         self.__msg_yaml = f.read()
         f.close()
         super().__init__(name=name, action=action)

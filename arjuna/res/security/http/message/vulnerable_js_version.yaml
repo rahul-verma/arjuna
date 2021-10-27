@@ -1,0 +1,12 @@
+label: Check JS Version
+
+request:
+  route: "$route$"
+
+store:
+  jquery_ver: 
+    regex: "$regex$"
+
+validate:
+  jquery_ver:
+    exists: False

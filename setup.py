@@ -50,7 +50,9 @@ setup(
                     "res/*.yaml",
                     "res/*.css",
                     "res/*.js",
-                    "res/*.html"
+                    "res/*.html",
+                    "res/security/http/action/*.yaml",
+                    "res/security/http/message/*.yaml",
                 ]
     },
     install_requires = [

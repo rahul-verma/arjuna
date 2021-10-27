@@ -1,0 +1,15 @@
+label: Check AutoComplete Off for a Form
+
+request:
+  route: "$route$"
+
+codes: 200
+
+store:
+  form:
+    xpath: "//*[@$attr$='$form$' and autocomplete='off']"
+    strict: False
+
+validate:
+  form:
+    exists: True

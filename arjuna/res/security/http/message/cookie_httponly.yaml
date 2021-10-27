@@ -1,0 +1,8 @@
+label: Check HttpOnly Cookie Flag
+
+request:
+  route: "$route$"
+
+cookies:
+  "$name$":
+    HttpOnly: True

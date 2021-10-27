@@ -21,6 +21,21 @@ Future Themes (In-Progress or Planned):
 
 1.2.12
 ------
+- Added assert_or and assert_and methods to Asserter object.
+- Added support for or, and constructs in HTTP message.
+- Added built-in security tests at HTTP layer:
+    - Autocomplete field
+    - Cookie HTTPOnly and Secure
+    - CORS policy
+    - Frameable Response
+    - Information Disclosure
+    - Minimum JS Version
+    - Private IP disclosure
+    - Private Resource Accessible
+    - Strict Transport Policy
+    - Vulnerable JS Version
+- Fixed logic in HTTP stores in case of extraction failure.
+- Added Security testing section for built-in tests.
 
 1.2.11
 ------

@@ -1,0 +1,7 @@
+arjuna_options:
+  http.proxy.enabled: False
+
+user_options:
+  narada.host.url: "http://localhost:9000"
+
+
