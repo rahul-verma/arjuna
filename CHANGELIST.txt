@@ -19,6 +19,9 @@ Future Themes (In-Progress or Planned):
             - Table: Coded Locators and GNS
             - Recipes
 
+1.2.13
+------
+
 1.2.12
 ------
 - Added assert_or and assert_and methods to Asserter object.
