@@ -92,6 +92,7 @@ _RAW_OPTION_LEVELS = {
         "HTTP_PROXY_ENABLED",
         "HTTP_PROXY_HOST",
         "HTTP_PROXY_PORT",
+        "SOCKET_TIMEOUT"
     },
 
     ConfigStage.REFERENCE: {

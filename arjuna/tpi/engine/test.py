@@ -39,9 +39,9 @@ def _call_func(func, request_wrapper, data=None, *args, **kwargs):
     log_info("Begin test function: {}".format(qual_name))  
     try:
         if data:      
-            func(request=request_wrapper, data=data, *args, **kwargs)
+            return func(request=request_wrapper, data=data, *args, **kwargs)
         else:
-            func(request=request_wrapper, *args, **kwargs)
+            return func(request=request_wrapper, *args, **kwargs)
     except Exception as e:
         log_info("End test function (with failure/error): {}. Exception Message: {}".format(qual_name, str(e)))    
         raise e
@@ -289,12 +289,12 @@ def test(
         @functools.wraps(orig_func)
         def wrapper_without_data(request, *args, **kwargs):
             my.set_req_obj(request)
-            _call_func(func, my, *args, **kwargs)
+            return _call_func(func, my, *args, **kwargs)
 
         @functools.wraps(orig_func)
         def wrapper_with_data(request, data, *args, **kwargs):
             my.set_req_obj(request)
-            _call_func(func, my, data, *args, **kwargs)
+            return _call_func(func, my, data, *args, **kwargs)
 
         if drive_with:
             return wrapper_with_data

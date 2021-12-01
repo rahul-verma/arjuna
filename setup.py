@@ -70,7 +70,7 @@ setup(
         "pytest==6.2.1", 
         "pytest-html==2.1.1", 
         "pytest-dependency==0.4.0", 
-        "PyYAML==5.3", 
+        "PyYAML==6.0", 
         "mimesis==4.1.3", 
         "jsonpath-rw==1.4.0", 
         "jsonpath-rw-ext==1.2.2", 

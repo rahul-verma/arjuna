@@ -198,6 +198,9 @@ class ArjunaOption(Enum):
     APP_URL = auto()
     '''Base URL for a Web App. Used by launch() method if url is not specified for GuiApp.'''
 
+    SOCKET_TIMEOUT = auto()
+    '''Timeout for socket connections. Default is 60 seconds.'''
+
     HTTP_PROXY_ENABLED = auto()
     '''Is a proxy enabled for HTTP requests (GUIAuto as well as HttpAuto)'''
 

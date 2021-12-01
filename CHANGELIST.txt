@@ -21,6 +21,9 @@ Future Themes (In-Progress or Planned):
 
 1.2.13
 ------
+    - BUGFIX: HTTP layer tests at times got stuck after one test. This seems to happen when the socket library is not passed a timeout.
+    - A default socket timeout of 60 seconds is now configured.
+    - It can be changed at project level or in CLI options using SOCKET_TIMEOUT property.
 
 1.2.12
 ------

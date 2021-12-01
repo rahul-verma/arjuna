@@ -230,6 +230,8 @@ except ModuleNotFoundError as e:
         self.__logger = Logger(self.ref_config)
         from arjuna import ArjunaOption
         self.__allowed_log_contexts = self.ref_config.value(ArjunaOption.LOG_ALLOWED_CONTEXTS)
+        import socket
+        socket.setdefaulttimeout(self.ref_config.value(ArjunaOption.SOCKET_TIMEOUT))
 
         from arjuna.tpi.hook.config import Configurator
         configurator = Configurator()

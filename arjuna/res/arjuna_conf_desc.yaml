@@ -64,6 +64,7 @@ data.file.dir: absolute_dir_path
 
 app.url: web_url
 
+socket.timeout: int
 http.proxy.enabled: bool
 http.proxy.host: str
 http.proxy.port: int

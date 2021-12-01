@@ -192,7 +192,7 @@ class HttpSession:
             Returns
                 `HttpResponse` object. In case of redirections, this is the last HttpResponse object, which encapsulates all redirections which can be retrieved from it.
         '''
-        from arjuna import Arjuna, log_info
+        from arjuna import Arjuna, log_info, C
         from arjuna.tpi.helper.arjtype import NetworkPacketInfo
         log_info(request.label)
         max_connection_retries = 5
@@ -203,10 +203,13 @@ class HttpSession:
             while counter < max_connection_retries:
                 counter += 1
                 try:
+                    timeout = C("socket.timeout")
+                    if request.timeout is not None:
+                        timeout = request.timeout
                     if self._session.proxies:
-                        response = HttpResponse(self, self._session.send(request._request, allow_redirects=request.allow_redirects, timeout=request.timeout, proxies=self._session.proxies, verify=False))
+                        response = HttpResponse(self, self._session.send(request._request, allow_redirects=request.allow_redirects, timeout=timeout, proxies=self._session.proxies, verify=False))
                     else:
-                        response = HttpResponse(self, self._session.send(request._request, allow_redirects=request.allow_redirects, timeout=request.timeout))
+                        response = HttpResponse(self, self._session.send(request._request, allow_redirects=request.allow_redirects, timeout=timeout))
                 except (ProxyError, InvalidProxyURL) as e:
                     raise HttpConnectError(request, "There is an error in connecting to the configured proxy. Proxy settings: {}. Error: {}".format(self.__session.proxies, str(e)))
                 except ConnectionError as f:

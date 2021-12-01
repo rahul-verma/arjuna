@@ -1,3 +1,4 @@
+
 function openModal(event){
     var source = event.target || event.srcElement;
     var modal = document.getElementById("modal-packet");

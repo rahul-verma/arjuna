@@ -15,7 +15,6 @@ from arjuna.core.error import *
 from arjuna.tpi.error import *
 from arjuna.tpi.parser.yaml import Yaml
 
-
 _ARJUNA_CLI_ARGS = {
     "project": ("--project", {
         "dest":"project", 
