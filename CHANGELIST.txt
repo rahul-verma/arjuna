@@ -19,6 +19,9 @@ Future Themes (In-Progress or Planned):
             - Table: Coded Locators and GNS
             - Recipes
 
+1.2.14
+------
+
 1.2.13
 ------
     - BUGFIX: HTTP layer tests at times got stuck after one test. This seems to happen when the socket library is not passed a timeout.
