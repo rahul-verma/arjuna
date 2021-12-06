@@ -21,6 +21,8 @@ Future Themes (In-Progress or Planned):
 
 1.2.14
 ------
+    - Added URL Redirection security test action.
+    - FIX: Fixed Group selection.
 
 1.2.13
 ------

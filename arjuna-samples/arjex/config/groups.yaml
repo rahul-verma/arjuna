@@ -1,55 +1,55 @@
 gp1:
   conf: data1_env1
-  im:
-    - check_group_info_1
+  imod:
+    - check_gp1
 
 gp2:
   conf: data2_env2
-  im:
-    - check_group_info_2
+  imod:
+    - check_gp2
 
 gp3:
   conf: data1_env1
-  im:
+  imod:
     - check_group_info_1
 
 gp4:
   conf: data2_env2
-  im:
+  imod:
     - check_group_info_2
 
 gp_tag:
 
-  ir:
+  irule:
     - "with tags slow"
 
 gp_rules:
 
   conf: data2_env2
 
-  ir:
+  irule:
     - "package *= data"
 
-  er:
+  erule:
     - "module !*= excel"
 
 check_conf:
   conf: firefox
 
-  im:
+  imod:
     - check_group_conf
     - check_01_simple_test
 
 all_gp1:
   conf: chrome
 
-  ir:
+  irule:
     - "package *= pkg"
 
 all_gp2:
   conf: firefox
 
-  ir:
+  irule:
     - "package *= pkg"
 
 

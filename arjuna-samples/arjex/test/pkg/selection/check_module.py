@@ -18,10 +18,10 @@
 from arjuna import *
 
 # Both tests should run for --rule "module == check_module"
-# Only check_module test should run for --rule "name == check_module"
+# Only check_module test should run for --rule "name == check_test"
 
 @test
-def check_selection(request):
+def check_test(request):
     pass
 
 @test

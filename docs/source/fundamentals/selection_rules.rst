@@ -26,13 +26,13 @@ The rules are categorized based on their inclusion effect:
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     * If the specified rule matches, it leads to inclusion of a test function, or next level of checks (see next section).
-    * Specified as **ir**
+    * Specified as **irule**
 
 **Exclusion rules** / **erule**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
     * If the specified rule matches, it leads to exclusion of a test function.
-    * Specified as **er**
+    * Specified as **erule**
 
 Any number of these rules can be specified in CLI or test group definition.
 

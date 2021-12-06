@@ -193,7 +193,7 @@ class HttpExpectedResProcessor(_HttpResProcessor):
         if self.codes:
             self._session._validate_status_code(response, self.codes)
         if self.url:
-            assert response.request.url == self.url 
+            assert response.request.url.startswith(self.url)
         if self.headers:
             headers = {k:str(v) for k,v in  convert_yaml_obj_to_content(self.headers).items()}
             response.assert_headers(headers, msg="One or more headers do not match expected values.") 
@@ -220,6 +220,8 @@ class HttpUnexpectedResProcessor(_HttpResProcessor):
     def _validate(self, response):
         if self.codes:
             self._session._validate_status_code(response, self.codes, expected=False)
+        if self.url:
+            assert not response.request.url.startswith(self.url)
         if self.headers:
             headers = {k:str(v) for k,v in  convert_yaml_obj_to_content(self.headers).items()}
             for k,v in headers.items():

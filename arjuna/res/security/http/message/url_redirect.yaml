@@ -1,0 +1,9 @@
+label: Check for Malicious URL Redirection
+
+request:
+  method: get
+  route: "$route$"
+  $redir_param$: $redir_url$
+
+unexpected:
+  url: "$redir_url$"

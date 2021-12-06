@@ -507,9 +507,11 @@ def pytest_configure(config):
     if gname == "mgroup":
         group = TestGroup.from_pickers(rconf_name=config.getoption("ref.conf"), rules=rule_dict)
     else:
-        if rule_dict:
-            raise Exception("When you provide a group name, you can provide test selectors/rules in Command line. You have provided group name as >>{}<< and also provided selectors/rules: {}".format(gname, {k:v for k,v in rule_dict.items() if v}))
-        group = TestGroup.from_def(gname, rconf_name=config.getoption("ref.conf"))
+        filtered_rule_dict = {k:v for k,v in rule_dict.items() if v}
+        if filtered_rule_dict:
+            raise Exception("When you provide a group name, you can not provide test selectors/rules in Command line. You have provided group name as >>{}<< and also provided selectors/rules: {}.".format(gname, {k:v for k,v in filtered_rule_dict.items() if v}))
+        else:
+            group = TestGroup.from_def(gname, rconf_name=config.getoption("ref.conf"))
 
     _configure_pytest_reports(config)
 
