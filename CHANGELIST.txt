@@ -19,6 +19,9 @@ Future Themes (In-Progress or Planned):
             - Table: Coded Locators and GNS
             - Recipes
 
+1.2.15
+------
+
 1.2.14
 ------
     - Added URL Redirection security test action.
