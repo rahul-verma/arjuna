@@ -59,7 +59,7 @@ setup(
         "pyOpenSSL>=0.14",
         "urllib3==1.25.3",
         "requests==2.22.0",
-        "lxml==4.6.3",
+        "lxml==4.6.5",
         "requests-toolbelt==0.9.1", 
         "selenium==4.0.0a7", 
         "webdriver_manager==3.2.2", 
