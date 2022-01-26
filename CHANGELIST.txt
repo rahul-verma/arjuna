@@ -19,6 +19,9 @@ Future Themes (In-Progress or Planned):
             - Table: Coded Locators and GNS
             - Recipes
 
+1.2.17
+------
+
 1.2.16
 ------
     - Introduced NotSet class for cases where code needs to differentiate not setting a value from Python None.
