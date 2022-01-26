@@ -550,4 +550,14 @@ class NotFound:
     def __bool__(self):
         return False
 
+class NotSet:
+    '''
+    To differentiate a not set object from Python's None.
+
+    Always evalutes to False in a boolean context.
+    '''
+    
+    def __bool__(self):
+        return False
+
 NetworkPacketInfo = namedtuple("NetworkPacketInfo", "label request response sub_network_packets")

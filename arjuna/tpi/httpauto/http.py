@@ -27,6 +27,7 @@ from .oauth import OAuthImplicitGrantService, OAuthClientGrantService
 
 from collections import namedtuple
 from arjuna.tpi.data.entity import data_entity
+from arjuna.tpi.helper.arjtype import NotSet
 
 _HttpContent = namedtuple("_HttpContent", "content type")
 _HttpField = namedtuple("_HttpField", "name value is_file content_type headers")
@@ -109,10 +110,13 @@ class Http:
             return _HttpContent(content="", type=cls.get_content_type(cls.blank))
 
         @classmethod
-        def html(cls, content=""):
+        def html(cls, content=NotSet()):
             '''
             Send HTML content. Content-Type is sent as “text/html”
             '''
+            if isinstance(content, NotSet):
+                return _HttpContent(content=None, type=cls.get_content_type(cls.html))
+
             return _HttpContent(content=content, type=cls.get_content_type(cls.html))
 
         text = html
@@ -122,6 +126,8 @@ class Http:
             '''
             Send bytes string. Content-Type is sent as “text/html”
             '''
+            if isinstance(content, NotSet):
+                return _HttpContent(content=None, type=cls.get_content_type(cls.bytes))
             if content:
                 content = io.BytesIO(content)
             return _HttpContent(content=content, type=cls.get_content_type(cls.bytes))
@@ -131,33 +137,43 @@ class Http:
             '''
             Send UTF-8 string. Content-Type is sent as “text/html”
             '''
+            if isinstance(content, NotSet):
+                return _HttpContent(content=None, type=cls.get_content_type(cls.utf8))
             if content:
                 content = content.encode("utf-8")
             return _HttpContent(content=content, type=cls.get_content_type(cls.utf8))
 
         @classmethod
-        def urlencoded(cls, content=""):
+        def urlencoded(cls, content=NotSet()):
             '''
             Send a dictionary of key-values in URL encoded format. Content-Type is sent as “application/x-www-form-urlencoded”
             '''
+            if isinstance(content, NotSet):
+                return _HttpContent(content=None, type=cls.get_content_type(cls.urlencoded))
             if content:
                 content = urlencode(content)
             return _HttpContent(content=content, type=cls.get_content_type(cls.urlencoded))
 
         @classmethod
-        def json(cls, content=""):
+        def json(cls, content=NotSet()):
             '''
             Send a dictionary of key-values as JSON. Content-Type is sent as “application/json”
             '''
+            if isinstance(content, NotSet):
+                return _HttpContent(content=None, type=cls.get_content_type(cls.json))
+            
             from arjuna.core.fmt import arj_convert
             content = json.dumps(arj_convert(content), indent=2)
             return _HttpContent(content=content, type=cls.get_content_type(cls.json))
+            
 
         @classmethod
         def xml(cls, content=""):
             '''
             Send an XML string as XML. Content-Type is sent as “application/xml
             '''
+            if isinstance(content, NotSet):
+                return _HttpContent(content=None, type=cls.get_content_type(cls.xml))
             return _HttpContent(content=content, type=cls.get_content_type(cls.xml))
 
         @classmethod
@@ -197,6 +213,8 @@ class Http:
             '''
             Send content with a custom content type.
             '''
+            if isinstance(content, NotSet):
+                return _HttpContent(content=None, type=type)    
             return _HttpContent(content=content, type=type)
 
     @classmethod

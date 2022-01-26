@@ -21,7 +21,10 @@ Future Themes (In-Progress or Planned):
 
 1.2.16
 ------
-
+    - Introduced NotSet class for cases where code needs to differentiate not setting a value from Python None.
+    - An exception is raised if relative URL is provided for an HTTP request when the corresponding Service base URL is not set.
+    - Empty content POST/PUT/PATCH requests are allowed when request content handler is set at Service Level or HTTP Content object is provided at a request level.
+    - Empty content is supported for all content types except File/Multipart data.
 
 1.2.15
 ------

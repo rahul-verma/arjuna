@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from arjuna.tpi.helper.arjtype import NotSet
 import json
 import abc
 from urllib.parse import urlparse, urlencode, parse_qs, quote
@@ -24,6 +25,7 @@ from arjuna.tpi.parser.json import Json, JsonDict, JsonList
 from arjuna.tpi.parser.html import Html
 from arjuna.tpi.data.entity import _DataEntity
 from arjuna.tpi.engine.asserter import AsserterMixIn
+from arjuna.tpi.helper.arjtype import NotSet
 import time
 
 from .packet import HttpPacket
@@ -166,7 +168,7 @@ class _HttpRequest(HttpRequest):
         self.__url = url
         self.__content = None
         if content is not None:
-            if type(content) in {str, dict, list, tuple} or isinstance(content, JsonDict) or isinstance(content, JsonList) or isinstance(content, _DataEntity):
+            if type(content) in {str, dict, list, tuple} or isinstance(content, JsonDict) or isinstance(content, JsonList) or isinstance(content, _DataEntity) or isinstance(content, NotSet):
                 self.__content = self.__session.request_content_handler(content)
             else:
                 self.__content = content
@@ -227,7 +229,7 @@ class _HttpRequest(HttpRequest):
         try:
             if self.__content:
                 data = self.__content.content
-                if type(data) is not bytes:
+                if data and type(data) is not bytes:
                     named_matches = re.findall(_NAMED_PATTERN, data)
                     if named_matches:
                         raise HttpRequestCreationError("{} : {}".format(req_repr, "Found pending placeholders in request content: {}. Fix formatting logic to correctly send this request.".format(named_matches)))

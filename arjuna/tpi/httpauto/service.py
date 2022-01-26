@@ -20,6 +20,7 @@ import os
 from arjuna.tpi.httpauto.response import HttpResponse
 from arjuna.interact.http.session import HttpSession
 from .seamful.eploader import HttpEndPointLoader
+from arjuna.tpi.helper.arjtype import NotSet
 
 class HttpService:
     '''
@@ -27,7 +28,7 @@ class HttpService:
 
         Keyword Arguments:
             name: Name of service. Should have a corresponding named directory in Project root/httpauto/service directory. If not provided then the name is set to **anon** and root directory is set to Project root/httpauto.
-            url: Base URL for this HTTP session. If relative path is used as a route in sender methods like `.get`, then this URL is prefixed to their provided routes.
+            url: Base URL for this HTTP session. If relative path is used as a route in sender methods like `.get`, then this URL is prefixed to their provided routes. If not provided then for all requests you must provide absolute URLs.
             oauth_token: OAuth 2.0 Bearer token for this service.
             request_content_handler: Default content type handler for requests sent in this service. Overridable in individual sender methods. Default is Http.content.urlencoded.
             headers: HTTP headers to be added to request headers made by this service.
@@ -231,7 +232,7 @@ class HttpService:
         '''
         return self._session.delete(route, label=label, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
 
-    def post(self, route, *, content="", label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def post(self, route, *, content=NotSet(), label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP POST request.
 
@@ -240,7 +241,7 @@ class HttpService:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'. Default is empty string.
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'. Default is a NotSet object.
             xcodes: Expected HTTP response code(s).
             headers: Mapping of additional HTTP headers to be sent with this request.
             cookies: Python dict of cookies to send with request.
@@ -257,7 +258,7 @@ class HttpService:
         '''
         return self._session.post(route, label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
 
-    def put(self, route, *, content="", label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def put(self, route, *, content=NotSet(), label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -266,7 +267,7 @@ class HttpService:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'. Default is empty string.
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'. Default is a NotSet object.
             xcodes: Expected HTTP response code(s).
             headers: Mapping of additional HTTP headers to be sent with this request.
             cookies: Python dict of cookies to send with request.
@@ -283,7 +284,7 @@ class HttpService:
         '''
         return self._session.put(route, label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
 
-    def patch(self, route, *, content="", label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def patch(self, route, *, content=NotSet(), label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PATCH request.
 
@@ -292,7 +293,7 @@ class HttpService:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'. Default is empty string.
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'. Default is a NotSet object.
             xcodes: Expected HTTP response code(s).
             headers: Mapping of additional HTTP headers to be sent with this request.
             cookies: Python dict of cookies to send with request.

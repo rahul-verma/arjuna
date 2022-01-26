@@ -58,5 +58,24 @@ def check_get_head(request, data, httpbin):
 )
 def check_no_body_content_length(request, data, httpbin):
     resp = getattr(httpbin, data.method.lower())("/")
-    resp.request.assert_empty_content(msg="Empty content request should have content length as 0.")
 
+@test(
+    drive_with = records(
+        record(method='POST'),
+        record(method='PUT'),
+        record(method='PATCH')
+    )
+)
+def check_no_body_content_length_json_content_type(request, data, httpbin):
+    resp = getattr(httpbin, data.method.lower())("/", content=Http.content.json())
+
+@test(
+    drive_with = records(
+        record(method='POST'),
+        record(method='PUT'),
+        record(method='PATCH')
+    )
+)
+def check_no_body_content_length_with_svc_json_content_handler(request, data):
+    svc = Http.service(url="http://httpbin.org", request_content_handler=Http.content.json)
+    resp = getattr(svc, data.method.lower())("/")
