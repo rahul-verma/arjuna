@@ -265,3 +265,22 @@ Arjuna let's you validate this using **cookie_secure** HTTP action.
 .. note::
 
     This test should be conducted **after** the server has issued the cookies.
+
+**Malicious URL Redirect**
+--------------------------
+
+Some HTTP requests might contain paramters that take a URL (relative/absolute) as value and redirect to that URL as a part of functionality. Sometimes, the application does not implement a proper whitelist for these user-supplied URLs and hence vulnerable to malicious URL redirection attacks.
+
+Arjuna let's you validate this using **url_redirect** HTTP action.
+
+.. code-block:: python
+
+    service.action.url_redirect.perform(
+        route="https://someurl",
+        redir_param="<name_of_redir_param>",
+        redir_url="<unexpected redirect url to try out>"
+    )
+
+* **route** is the absolute or relative URI exluding the redirection parameter.
+* **redir_param** is the name of parameter that contains the redirection url.
+* **redir_url** is the redirection url that you try in this test.

@@ -53,11 +53,10 @@ def check_get_head(request, data, httpbin):
     drive_with = records(
         record(method='POST'),
         record(method='PUT'),
-        record(method='PATCH'),
-        record(method='OPTIONS'),
+        record(method='PATCH')
     )
 )
 def check_no_body_content_length(request, data, httpbin):
-    resp = getattr(httpbin, data.method.lower())("/", content="")
+    resp = getattr(httpbin, data.method.lower())("/")
     resp.request.assert_empty_content(msg="Empty content request should have content length as 0.")
 

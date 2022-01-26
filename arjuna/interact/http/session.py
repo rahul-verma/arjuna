@@ -255,19 +255,19 @@ class HttpSession:
         request = _HttpRequest(self, self.__route(route), method="delete", label=label, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
-    def post(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def post(self, route, *, content="", label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         request = _HttpRequest(self, self.__route(route), method="post", label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
-    def put(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def put(self, route, *, content="", label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         request = _HttpRequest(self, self.__route(route), method="put", label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
-    def patch(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def patch(self, route, *, content="", label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         request = _HttpRequest(self, self.__route(route), method="patch", label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 
-    def options(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def options(self, route, *, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         request = _HttpRequest(self, self.__route(route), method="options", label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
         return self._send(request)
 

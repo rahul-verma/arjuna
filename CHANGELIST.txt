@@ -21,6 +21,8 @@ Future Themes (In-Progress or Planned):
 
 1.2.15
 ------
+    - Added documentation for Malicious URL redirection HTTP action.
+    - HTTP Post and Put requests without content are allowed. Same as content="".
 
 1.2.14
 ------

@@ -231,7 +231,7 @@ class HttpService:
         '''
         return self._session.delete(route, label=label, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
 
-    def post(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def post(self, route, *, content="", label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP POST request.
 
@@ -240,7 +240,7 @@ class HttpService:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'. Default is empty string.
             xcodes: Expected HTTP response code(s).
             headers: Mapping of additional HTTP headers to be sent with this request.
             cookies: Python dict of cookies to send with request.
@@ -257,7 +257,7 @@ class HttpService:
         '''
         return self._session.post(route, label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
 
-    def put(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def put(self, route, *, content="", label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PUT request.
 
@@ -266,7 +266,7 @@ class HttpService:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'. Default is empty string.
             xcodes: Expected HTTP response code(s).
             headers: Mapping of additional HTTP headers to be sent with this request.
             cookies: Python dict of cookies to send with request.
@@ -283,7 +283,7 @@ class HttpService:
         '''
         return self._session.put(route, label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
 
-    def patch(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def patch(self, route, *, content="", label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP PATCH request.
 
@@ -292,7 +292,7 @@ class HttpService:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
+            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'. Default is empty string.
             xcodes: Expected HTTP response code(s).
             headers: Mapping of additional HTTP headers to be sent with this request.
             cookies: Python dict of cookies to send with request.
@@ -309,7 +309,7 @@ class HttpService:
         '''
         return self._session.patch(route, label=label, content=content, xcodes=xcodes, headers=headers, cookies=cookies, allow_redirects=allow_redirects, auth=auth, timeout=timeout, pretty_url=pretty_url, query_params=query_params, **named_query_params)
 
-    def options(self, route, *, content, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
+    def options(self, route, *, label=None, xcodes=None, headers=None, cookies=None, allow_redirects=True, auth=None, timeout: float=None, pretty_url=False, query_params=None, **named_query_params) -> HttpResponse:
         '''
         Sends an HTTP OPTIONS request.
 
@@ -318,7 +318,6 @@ class HttpService:
 
         Keyword Arguments:
             label: Label for this request. If available, it is used in reports and logs.
-            content: Content to be sent in this HTTP request. If passed as string, then content-type set in session is used using the content request handler. It can also be a dictionary with keys - 'content' and 'type'.
             xcodes: Expected HTTP response code(s).
             headers: Mapping of additional HTTP headers to be sent with this request.
             cookies: Python dict of cookies to send with request.
