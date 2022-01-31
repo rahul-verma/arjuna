@@ -3,9 +3,6 @@ arjuna_options:
   guiauto.max.wait: 3
   deps.dir: ../extdeps
   http.proxy.enabled: False
-  emailauto.imap.host: "w0117bac.kasserver.com"
-  emailauto.user: "email_10@qs.solarlog-web.com"
-  emailauto.password: "DBsds#109"
 
 user_options:
   target.url: "https://google.com"
