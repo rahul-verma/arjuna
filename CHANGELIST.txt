@@ -19,6 +19,9 @@ Future Themes (In-Progress or Planned):
             - Table: Coded Locators and GNS
             - Recipes
 
+1.2.18
+------
+
 1.2.17
 ------
 - Support for Reading Emails using IMAP (instead of POP) as it provides more stability and features.
