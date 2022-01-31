@@ -9,6 +9,7 @@ Subpackages
 
    arjuna.tpi.data
    arjuna.tpi.dbauto
+   arjuna.tpi.emailauto
    arjuna.tpi.engine
    arjuna.tpi.guiauto
    arjuna.tpi.helper

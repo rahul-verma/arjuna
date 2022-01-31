@@ -71,6 +71,13 @@ http.proxy.port: int
 httpauto.dir: absolute_dir_path
 httpauto.message.dir: absolute_dir_path
 
+emailauto.imap.host: str
+emailauto.imap.port: int
+emailauto.imap.usessl: bool
+emailauto.user: str
+emailauto.password: str
+emailauto.max.wait: positive_int
+
 guiauto.name: guiauto_automator_name
 guiauto.dir: absolute_dir_path
 guiauto.namespace.dir: absolute_dir_path

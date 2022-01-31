@@ -234,3 +234,13 @@ class RulePatternDoesNotMatchError(Exception):
 
     def __init__(self, rule_str, pattern_class, expected_format):
         super().__init__(f"{rule_str} is not a {pattern_class.__name__}. Expected format: {expected_format}")
+
+class EmailBoxNotConnected(WaitableError):
+
+    def __init__(self, server, mailbox, msg):
+        super().__init__(f"Mailbox >{mailbox}< not selected for email IMAP server >{server.host}<. {msg}")
+
+class EmailNotReceived(WaitableError):
+
+    def __init__(self, server, mailbox, msg, **kwargs):
+        super().__init__(f"Email not received in mailbox >{mailbox}< at email IMAP server >{server.host}< as per conditions: >>{kwargs}<<. {msg}")

@@ -74,6 +74,13 @@ arjuna_options:
   httpauto.dir: $project_root_dir$/httpauto
   httpauto.message.dir: $project_root_dir$/httpauto/message
 
+  emailauto.imap.host: localhost
+  emailauto.imap.port: not_set
+  emailauto.imap.usessl: True
+  emailauto.user: not_set
+  emailauto.password: not_set
+  emailauto.max.wait: 120
+
   guiauto.name: SELENIUM
   guiauto.dir: $project_root_dir$/guiauto
   guiauto.namespace.dir: $project_root_dir$/guiauto/namespace

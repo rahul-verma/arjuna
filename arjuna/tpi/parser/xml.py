@@ -152,6 +152,26 @@ class XmlNode:
             return text
 
     @property
+    def links(self) -> tuple:
+        '''
+            All links in the XML.
+        '''
+        from arjuna.tpi.parser.text import Text
+        return Text(self.as_str()).links
+
+    @property
+    def unique_links(self) -> tuple:
+        '''
+            All unique links in the XML.
+        '''
+        from arjuna.tpi.parser.text import Text
+        return Text(self.as_str()).unique_links
+
+    def find_links(self, *, unique=True, contain=""):
+        from arjuna.tpi.parser.text import Text
+        return Text(self.as_str()).find_links(unique=unique, contain=contain)       
+
+    @property
     def texts(self) -> list:
         '''
             List of Texts of the node.

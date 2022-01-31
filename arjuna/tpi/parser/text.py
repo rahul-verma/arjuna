@@ -412,6 +412,44 @@ class Text(str, AsserterMixIn):
         else:
             raise Exception(f"No match found for {repattern} in {self.content}")
 
+    def find_links(self, *, unique=True, contain=""):
+        def remove_trailing_slash(full_link):
+            if full_link.endswith("/"):
+                return full_link[:-1]
+            else:
+                return full_link
+
+        def remove_quotes(s):
+            return s.replace('"', "").replace("'", "")
+
+        r = r"(?i)\b((?:https?://|www\d{0,3}[.]|[a-z0-9.\-]+[.][a-z]{2,4}/)(?:[^\s()<>]+|\(([^\s()<>]+|(\([^\s()<>]+\)))*\))+(?:\(([^\s()<>]+|(\([^\s()<>]+\)))*\)|[^\s`!()\[\]{};:'\".,<>?«»“”‘’]))"
+        out = []
+        for k in self.findall(r):
+            if type(k) is str:
+                if k:
+                    out.append(remove_quotes(k))
+            else:
+                out.extend([remove_quotes(i) for i in k if i.strip()])
+        
+        out = [remove_trailing_slash(i) for i in out]
+
+        # Filter
+        out = [o for o in out if contain in o]
+
+        if unique:
+            return tuple(set(out))
+        else:
+            return tuple(out)
+
+    @property
+    def links(self):
+        self.get_links()
+
+    @property
+    def unique_links(self):
+        self.get_links(unique=True)
+        
+
     def exists(self, repattern):
         matches = re.findall(repattern, self.content)
         if matches:

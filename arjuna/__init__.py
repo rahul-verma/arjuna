@@ -127,6 +127,8 @@ from arjuna.tpi.guiauto.helper import Keys
 from arjuna.tpi.httpauto.http import Http
 from arjuna.tpi.httpauto.oauth import OAuthImplicitGrantService
 
+from arjuna.tpi.emailauto import EmailServer
+
 from arjuna.tpi.dbauto.db import DB
 
 from arjuna.tpi.hook.config import Configurator

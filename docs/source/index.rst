@@ -63,6 +63,14 @@ HTTP Automation
 
    httpauto/index
 
+Email Automation
+================
+
+.. toctree::
+   :maxdepth: 2
+
+   emailauto/index
+
 Security Testing
 ================
 

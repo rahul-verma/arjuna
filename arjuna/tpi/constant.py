@@ -216,6 +216,24 @@ class ArjunaOption(Enum):
     HTTPAUTO_MESSAGE_DIR = auto()
     '''Root directory of all HTTP message YAML files.'''
 
+    EMAILAUTO_IMAP_HOST = auto()
+    '''IP address/Name of EmailBox for IMAP Protocol. Default is localhost.'''
+
+    EMAILAUTO_IMAP_PORT = auto()
+    '''Network Port of EmailBox for IMAP Protocol. Default is 993 in SSL Mode and 143 in non-SSL Mode.'''
+
+    EMAILAUTO_IMAP_USESSL = auto()
+    '''Enables/Disables usage of SSL for connecting to EmailBox via IMAP. Default is True.'''
+
+    EMAILAUTO_USER = auto()
+    '''Default Email Address to be used in Arjuna.'''
+
+    EMAILAUTO_PASSWORD = auto()
+    '''Default Email password to be used in Arjuna.'''
+
+    EMAILAUTO_MAX_WAIT = auto()
+    '''Maximum time for selecting a mailbox or reading/parsing emails. Uses Dynamic Wait. Expressed in seconds. Default is 120 seconds.'''
+
     BROWSER_NAME = auto()
     '''Browser Name for Gui Automation. Chrome/Firefox. Default is Chrome'''
 
