@@ -21,6 +21,20 @@ Future Themes (In-Progress or Planned):
 
 1.2.17
 ------
+- Support for Reading Emails using IMAP (instead of POP) as it provides more stability and features.
+- Support to connect to a given mailbox. Inbox is the default.
+- State mechanism to identify new emails using save_state.
+- The emails are filterable by sender, subject, content.
+- The emails are got as latest first by default (IMAP gives the latest one at end). Can be overriden.
+- Support for getting top x emails.
+- Reading the email is a waitable event as there might be some delay in getting email from server.
+- Server host, port, user, password etc are configurable. SSL usage is default.
+- Support for finding all unique links. 
+- Support for HTML as well as text content in emails. Support for Multi-part Email.
+- Support for easily available meta data of email like its sender, recipient, date, content and support for inquiring any custom headers.
+- There is a lot of state management involved in maintaining connection to a mailbox. These intricacies are encapsulated to the max extent possible.
+- The code represents a natural tester-oriented interface for automation.
+
 
 1.2.16
 ------
