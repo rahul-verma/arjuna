@@ -206,6 +206,26 @@ HTTP Automation
     * :py:class:`OAuthClientGrantService <arjuna.tpi.httpauto.oauth.OAuthClientGrantService>`
     * :py:class:`OAuthImplicitGrantService <arjuna.tpi.httpauto.oauth.OAuthImplicitGrantService>`
 
+HTTP Automation
+===============
+* :py:class:`Http <arjuna.tpi.httpauto.http.Http>`
+* :py:class:`HttpService<arjuna.tpi.httpauto.session.HttpService>`
+* :py:class:`HttpRequest <arjuna.tpi.httpauto.request.HttpRequest>`
+* :py:class:`HttpResponse <arjuna.tpi.httpauto.response.HttpResponse>`
+* OAuth Support
+    * :py:class:`OAuthService <arjuna.tpi.httpauto.oauth.OAuthService>`
+    * :py:class:`OAuthClientGrantService <arjuna.tpi.httpauto.oauth.OAuthClientGrantService>`
+    * :py:class:`OAuthImplicitGrantService <arjuna.tpi.httpauto.oauth.OAuthImplicitGrantService>`
+
+E-Mail Automation
+=================
+* :py:class:`EmailServer <arjuna.tpi.emailauto.EmailServer>`
+* :py:class:`ImapServer <arjuna.tpi.emailauto.server.ImapServer>`
+* :py:class:`MailBox <arjuna.tpi.emailauto.mailbox.MailBox>`
+* :py:class:`MailBox <arjuna.tpi.emailauto.mailbox.MailBox>`
+* :py:class:`Emails <arjuna.tpi.emailauto.email.Emails>`
+* :py:class:`Email <arjuna.tpi.emailauto.email.Email>`
+
 Reporting Protocols
 ===================
 
@@ -316,6 +336,8 @@ Arjuna Exceptions
     * :py:class:`HttpConnectError <arjuna.tpi.error.HttpConnectError>`
     * :py:class:`HttpSendError <arjuna.tpi.error.HttpSendError>`
     * :py:class:`HttpUnexpectedStatusCodeError <arjuna.tpi.error.HttpUnexpectedStatusCodeError>`
+    * :py:class:`SEAMfulActionFileError <arjuna.tpi.error.SEAMfulActionFileError>`
+    * :py:class:`SEAMfulMessageFileError <arjuna.tpi.error.SEAMfulMessageFileError>`
 
 ******************
 Indices and tables

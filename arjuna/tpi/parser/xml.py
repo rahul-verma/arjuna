@@ -42,7 +42,10 @@ class NodeLocator:
 
         Keyword Arguments:
             tags: (Optional) Descendant tags for the node. Can be a string of single or multiple tags or a list/tuple of tags.
-            **attrs: Arbitrary number of key value pairs representing attribute name and value.
+            text: Partial text content.
+            attrs: Arbitrary attributes as a dictionary. Use this when the attr names are not valid Python names.
+            **attr_kwargs: Arbitrary number of key value pairs representing attribute name and value. The values here will override those in attr_dict if there is an overlap of name(s).
+
 
         Raises:
             Exception: If neither tag nor an attribute is provided.
@@ -53,12 +56,18 @@ class NodeLocator:
             Supports nested node finding.
     '''
     
-    def __init__(self, *, tags: 'strOrSequence'=None, **attrs):
+    def __init__(self, *, tags: 'strOrSequence'=None, text=None, attrs={}, **attr_kwargs):
 
-        if tags is None and not attrs:
+        if tags is None and text is None and not attrs and not attr_kwargs:
             raise Exception("You must provided tags and/or attributes for finding nodes.")
-
+        
         attr_conditions = []
+
+        if text:
+            attr_conditions.append("contains(text(), '{}')".format(text))
+
+        attrs.update(attr_kwargs)
+
         if attrs:
             for attr, value in attrs.items():
                 if value is None:
@@ -124,19 +133,21 @@ class XmlNode:
             Text of this node.
 
             Keyword Arguments:
-                normalize: If True, empty lines are removed and individual lines are trimmed.
+                normalize: If True, all extra space is trimmed to a single space.
         '''
         texts = self.texts
 
         if normalize:
-            return "".join([l for l in texts if l !="\n"]).strip()
+            text = "".join([l for l in texts if l !="\n"]).strip()
+            text = " ".join(text.split())
+            return text
         else:
             return "".join(texts).strip()
 
     @property
     def normalized_text(self) -> str:
         '''
-            Text of this node with empty lines removed and individual lines trimmed.
+            Text of this node with all extra space trimmed to a single space.
         '''
         return self.get_text(normalize=True)
 
@@ -446,13 +457,15 @@ class Xml:
             return XmlNode(element).clone()
 
     @classmethod
-    def node_locator(cls, *, tags: 'strOrSequence'=None, **attrs):
+    def node_locator(cls, *, tags: 'strOrSequence'=None, text=None, attrs={}, **attr_kwargs):
         '''
             Create a locator for finding an XML Node in an **XmlNode**.
 
             Keyword Arguments:
                 tags: (Optional) Descendant tags for the node. Can be a string of single or multiple tags or a list/tuple of tags.
-                **attrs: Arbitrary number of key value pairs representing attribute name and value.
+                text: Partial text content.
+                attrs: Arbitrary attributes as a dictionary. Use this when the attr names are not valid Python names.
+                **attr_kwargs: Arbitrary number of key value pairs representing attribute name and value. The values here will override those in attr_dict if there is an overlap of name(s).
 
             Raises:
                 Exception: If neither tag nor an attribute is provided.
@@ -462,4 +475,4 @@ class Xml:
 
                 Supports nested node finding.
         '''
-        return NodeLocator(tags=tags, **attrs)
+        return NodeLocator(tags=tags, text=text, attrs=attrs, **attr_kwargs)

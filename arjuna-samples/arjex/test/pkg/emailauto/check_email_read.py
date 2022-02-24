@@ -37,7 +37,6 @@ def check_email_links(request):
     ms = EmailServer.imap()
     mb = ms.get_mailbox()
 
-    mb._force_state(0)
     # Write code to Trigger the event that leads to sending email(s) to this mailbox.
 
     # After the event
@@ -45,4 +44,3 @@ def check_email_links(request):
     print(lemail.find_link("confirm-email"))
     
     ms.quit()
-
