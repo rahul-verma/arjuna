@@ -19,6 +19,9 @@ Future Themes (In-Progress or Planned):
             - Table: Coded Locators and GNS
             - Recipes
 
+1.2.19
+------
+
 1.2.18
 ------
 - Added support for text and attr dict based search in XML/HTML NodeLocator.
