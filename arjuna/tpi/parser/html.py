@@ -22,7 +22,7 @@ Classes to assist in HTML Parsing.
 from io import StringIO
 from lxml.html import soupparser
 
-from .xml import XmlNode, Xml
+from .xml import XmlNode, Xml, NodeLocator
 
 class HtmlNode(XmlNode):
     '''

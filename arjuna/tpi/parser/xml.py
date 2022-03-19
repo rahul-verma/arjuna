@@ -57,7 +57,6 @@ class NodeLocator:
     '''
     
     def __init__(self, *, tags: 'strOrSequence'=None, text=None, attrs={}, **attr_kwargs):
-
         if tags is None and text is None and not attrs and not attr_kwargs:
             raise Exception("You must provided tags and/or attributes for finding nodes.")
         
@@ -66,10 +65,11 @@ class NodeLocator:
         if text:
             attr_conditions.append("contains(text(), '{}')".format(text))
 
-        attrs.update(attr_kwargs)
+        lattrs = {}
+        lattrs.update(attr_kwargs)
 
-        if attrs:
-            for attr, value in attrs.items():
+        if lattrs:
+            for attr, value in lattrs.items():
                 if value is None:
                     attr_conditions.append("@{}".format(attr))
                 else:
@@ -89,6 +89,9 @@ class NodeLocator:
         '''
         return (XmlNode(n) for n in node.xpath(self.__xpath))
 
+    def __str__(self):
+        return "XPath: {}".format(self.__xpath)
+
 
 def _process_child_html(in_str):
     processed = "\n".join([l for l in in_str.splitlines() if l.strip()])
@@ -104,7 +107,6 @@ def _empty_or_none(in_str):
         return True
     else:
         return in_str is None
-
 
 @track("trace")
 class XmlNode:
@@ -386,7 +388,7 @@ class XmlNode:
             return matches[0]
         else:
             if strict:
-                raise Exception("Element could not be found with Node Locators: >><<".format([str(n) for n in node_locators]))
+                raise Exception("Element could not be found with Node Locators: >>{}<<".format([str(n) for n in node_locators]))
             else:
                 return None
 

@@ -21,6 +21,7 @@ Future Themes (In-Progress or Planned):
 
 1.2.19
 ------
+- CRITICAL FIX: Xml.node_locator call retained attr dict values in successive calls. Fixed.
 
 1.2.18
 ------
