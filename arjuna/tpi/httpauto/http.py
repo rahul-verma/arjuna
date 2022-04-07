@@ -23,7 +23,7 @@ from urllib.parse import urlencode
 from requests.auth import *
 from requests_toolbelt.multipart.encoder import MultipartEncoder
 from .service import HttpService
-from .oauth import OAuthImplicitGrantService, OAuthClientGrantService
+from .oauth import OAuthImplicitGrantService, OAuthClientGrantService, OAuthAuthCodeGrantService
 
 from collections import namedtuple
 from arjuna.tpi.data.entity import data_entity
@@ -265,3 +265,51 @@ class Http:
 
         '''
         return OAuthImplicitGrantService(name=name, url=url, client_id=client_id, scope=scope, redirect_uri=redirect_uri, auth_url=auth_url, auth_handler=auth_handler, **auth_args)
+
+
+    @classmethod
+    def oauth_auth_code_grant_service(cls,
+                                      *,
+                                      name="anon",
+                                      url,
+                                      client_id,
+                                      scope,
+                                      redirect_uri=None,
+                                      auth_url,
+                                      auth_handler=None,
+                                      token_url,
+                                      **auth_args):
+        '''
+            Create OAuthAuthCodeGrantService object.
+
+            Creates token using OAuth's Auth Code Grant Type.
+            Uses MobileApplicationClient from requests_oauthlib.
+
+            Keyword Arguments:
+                url: Base URL for this HTTP session. If relative path is used as a route in sender methods like `.get`, then this URL is prefixed to their provided routes.
+                client_id: Client ID
+                scope: Scope
+                redirect_uri: Redirect URI
+                auth_url: Authorization URL
+                auth_handler: A callback function to handle custom authroization logic. It will be called by providing session object, authorization URL and auth_args.
+                token_url: Token URL
+                **auth_args: Arbitray key-value pairs to be passed as arguments to the auth_handler callback.
+
+            Note:s
+                Some sample auth_handler signatures:
+
+                    .. code-block:: python
+
+                        auth_handler_1(oauth_session, auth_url, **kwargs)
+                        auth_handler_2(oauth_session, auth_url, some_arg=None, another_arg="some_def_value")
+
+        '''
+        return OAuthAuthCodeGrantService(name=name,
+                                         url=url,
+                                         client_id=client_id,
+                                         scope=scope,
+                                         redirect_uri=redirect_uri,
+                                         auth_url=auth_url,
+                                         auth_handler=auth_handler,
+                                         token_url=token_url,
+                                         **auth_args)
