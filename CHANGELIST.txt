@@ -19,6 +19,13 @@ Future Themes (In-Progress or Planned):
             - Table: Coded Locators and GNS
             - Recipes
 
+1.2.21
+------
+
+1.2.20
+------
+    - Support for OAuth Auth Grant service added by Stefan.
+
 1.2.19
 ------
 - CRITICAL FIX: Xml.node_locator call retained attr dict values in successive calls. Fixed.
