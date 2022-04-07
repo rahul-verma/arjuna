@@ -15,7 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from oauthlib.oauth2 import BackendApplicationClient, MobileApplicationClient
+from oauthlib.oauth2 import BackendApplicationClient, MobileApplicationClient, WebApplicationClient
 from requests_oauthlib import OAuth2Session
 
 from .service import HttpService
@@ -46,7 +46,7 @@ class OAuthService(HttpService):
         '''
         return self.__token
 
-    def _set_outh_token(self, token):
+    def _set_oauth_token(self, token):
         self.__token = token
         self._session.headers.update({'Authorization': 'Bearer ' + self.token})
 
@@ -90,7 +90,7 @@ class OAuthClientGrantService(OAuthService):
         token = oauth.fetch_token(token_url=token_url, 
                                   client_id=client_id,
                                   client_secret=client_secret)
-        self._set_outh_token(token['access_token'])
+        self._set_oauth_token(token['access_token'])
 
 @track("info")
 class OAuthImplicitGrantService(OAuthService):
@@ -129,7 +129,61 @@ class OAuthImplicitGrantService(OAuthService):
 
         token = None
         if auth_handler is None:
-            token = outh.token_from_fragment(auth_url)
+            token = oauth.token_from_fragment(auth_url)
         else:
             token = auth_handler(self, auth_url, **auth_args)
-        self._set_outh_token(token)
+        self._set_oauth_token(token)
+
+@track("info")
+class OAuthAuthCodeGrantService(OAuthService):
+    '''
+        Creates token using OAuth's Auth Code Grant Type.
+        Uses WebApplicationClient from requests_oauthlib.
+
+        Keyword Arguments:
+            name: Name of service. Should have a corresponding named directory in Project root/httpauto/service directory. If not provided then the name is set to **anon** and root directory is set to Project root/httpauto.
+            url: Base URL for this HTTP service. If relative path is used as a route in sender methods like `.get`, then this URL is prefixed to their provided routes.
+            client_id: Client ID
+            scope: Scope
+            redirect_uri: Redirect URI
+            auth_url: Authorization URL
+            auth_handler: A callback function to handle custom authroization logic. It will be called by providing session object, authorization URL and auth_args.
+            token_url: Token URL
+            **auth_args: Arbitray key-value pairs to be passed as arguments to the auth_handler callback.
+
+        Note:
+            Some sample auth_handler signatures:
+
+                .. code-block:: python
+
+                    auth_handler_1(oauth_service, auth_url, **kwargs)
+                    auth_handler_2(oauth_service, auth_url, some_arg=None, another_arg="some_def_value")
+
+    '''
+
+    def __init__(self,
+                 *,
+                 name="anon",
+                 url,
+                 client_id,
+                 # TODO: figure out why the scope is changed frommthe C('scope)
+                 scope,
+                 redirect_uri=None,
+                 auth_url,
+                 auth_handler=None,
+                 token_url,
+                 **auth_args):
+        oauth = OAuth2Session(
+            client=WebApplicationClient(client_id=client_id),
+            scope=scope,
+            redirect_uri=redirect_uri,
+        )
+        super().__init__(name=name, session=oauth, url=url)
+
+        auth_url, state = oauth.authorization_url(auth_url)
+
+        code = auth_handler(self, auth_url, **auth_args)
+
+        token = oauth.fetch_token(token_url, code)['access_token']
+
+        self._set_oauth_token(token)
