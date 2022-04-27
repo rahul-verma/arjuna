@@ -167,5 +167,22 @@ class DriverCommands:
         chain = ActionChains(driver).double_click(webelement).perform()
 
     @classmethod
+    def drag_element(cls, driver, source_element, offset):
+        ActionChains(driver).click_and_hold(source_element).move_by_offset(offset.x, offset.y).pause(3).release().perform(0)
+
+    @classmethod
+    def drop_element(cls, driver, source_element, target_element, offset=None):
+        if offset is None:
+            ActionChains(driver).click_and_hold(source_element).move_to_element(target_element).pause(3).release().perform()
+        else:
+            ActionChains(driver).click_and_hold(source_element).move_to_element(target_element).pause(3).move_by_offset(offset.x, offset.y).pause(3).release()
+
+    @classmethod
     def scroll_to_element(cls, driver, webelement):
         cls.execute_javascript(driver, "arguments[0].scrollIntoView(true);", webelement)
+
+    def switch_to_frame(driver, webelement):
+        driver.switch_to.frame(webelement)
+
+    def switch_to_dom_root(driver):
+        driver.switch_to.default_content()

@@ -15,6 +15,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+from arjuna.tpi.helper.arjtype import Offset
 import os
 import platform
 
@@ -250,6 +251,18 @@ class SeleniumDriverDispatcher:
 
     def double_click_on_element(self, element_dispatcher):
         DriverCommands.double_click_on_element(self.__driver, element_dispatcher.driver_element)
+
+    def switch_to_frame(self, element_dispatcher):
+        DriverCommands.switch_to_frame(self.__driver, element_dispatcher.driver_element)
+
+    def switch_to_dom_root(self):
+        DriverCommands.switch_to_dom_root(self.__driver)
+
+    def drag_element(self, source_element_dispatcher, offset):
+        DriverCommands.drag_element(self.__driver, source_element_dispatcher.driver_element, offset)
+
+    def drop_element(self, source_element_dispatcher, target_element_dispatcher, offset=None):
+        DriverCommands.drop_element(self.__driver, source_element_dispatcher.driver_element, target_element_dispatcher.driver_element, offset)
 
     def scroll_to_element(self, element_dispatcher):
         DriverCommands.scroll_to_element(self.__driver, element_dispatcher.driver_element)

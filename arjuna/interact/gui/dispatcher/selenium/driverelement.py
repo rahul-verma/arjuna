@@ -71,6 +71,12 @@ class SeleniumDriverElementDispatcher:
     def double_click(self):
         self.__driver_dispatcher.double_click_on_element(self)
 
+    def drag(self, offset):
+        self.__driver_dispatcher.drag_element(self, offset)
+
+    def drop(self, element_dispatcher, offset=None):
+        self.__driver_dispatcher.drop_element(self, element_dispatcher, offset)
+
     def scroll_to_view(self):
         self.__driver_dispatcher.scroll_to_element(self)
 

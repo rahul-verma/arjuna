@@ -229,6 +229,14 @@ class Point(Dictable):
         '''
         return (self.__x, self.__y)
 
+    @property
+    def x(self):
+        return self.__x
+
+    @property
+    def y(self):
+        return self.__y
+
     def _as_dict(self):
         return {"x": self.__x, "y":self.__y}
 
@@ -269,15 +277,14 @@ class Screen:
         '''
             Create a **Point** on Gui Screen in terms of its XY coordinates.
         '''
-        #return  _Point(x,y)
-        raise NotImplementedError()
+        return  Point(x,y)
 
     @staticmethod
     def offset(x, y) -> Offset:
         '''
             Create a **Offset** on Gui Screen in terms of its XY coordinates.
         '''
-        # return _Offset(x,y)
+        return Offset(x,y)
         raise NotImplementedError()
 
 @track("trace")

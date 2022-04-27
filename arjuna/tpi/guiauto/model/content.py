@@ -210,9 +210,6 @@ class GuiAppContent(Gui, ScreenShooter):
         '''
         return self._automator.dom_root(self)
 
-    def _frame(self, *str_or_with_locators):
-        return self._automator.frame(self, self.convert_to_with_wmd(*str_or_with_locators))
-
     @property
     def _alert(self):
         return self._automator.alert
@@ -291,6 +288,12 @@ class GuiAppContent(Gui, ScreenShooter):
                 `GuiElement` object.
         '''
         return self._finder.element(fargs=fargs, **kwargs)
+
+    def switch_to_dom_root(self):
+        '''
+        Switch to root of DOM. Used when you want to exit the context of a frame.
+        '''
+        self.__automator.browser.switch_to_dom_root()
 
     def multi_element(self, fargs=None, **kwargs):
         '''

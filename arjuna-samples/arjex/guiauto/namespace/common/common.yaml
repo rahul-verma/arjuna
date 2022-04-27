@@ -1,0 +1,53 @@
+labels:
+  jframe:
+    classes: demo-frame
+
+  todrag:
+    id: draggable
+
+  todrop:
+    id: droppable
+
+  nodeattrs1:
+    node:
+      style: display
+
+  nodeattrs2:
+    node:
+      use_xpath: True
+      style: display
+
+  nodeattrs3:
+    node:
+      attrs:
+        style: display
+
+  nodeattrs4:
+    node:
+      use_xpath: True
+      attrs:
+        style: display
+
+  nodeattrs5:
+    node:
+      href: "/"
+      title: jQuery
+
+  nodeattrs6:
+    node:
+      use_xpath: True
+      href: "/"
+      title: jQuery
+
+  nodeattrs7:
+    node:
+      attrs:
+        href: "/"
+        title: jQuery
+
+  nodeattrs8:
+    node:
+      use_xpath: True
+      attrs:
+        href: "/"
+        title: jQuery

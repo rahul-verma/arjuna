@@ -21,6 +21,9 @@ Future Themes (In-Progress or Planned):
 
 1.2.21
 ------
+    - Support for drag and drop operations for GuiElement.
+    - Support for attrs in node for XPath and CSS Selector generation.
+    - Support for Frame handling (in progress).
 
 1.2.20
 ------

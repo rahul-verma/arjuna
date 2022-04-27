@@ -156,13 +156,25 @@ class LocatorTranslator:
             if k.lower() in cls.TEXT_TRANSLATIONS:
                 k = cls.TEXT_TRANSLATIONS[k.lower()]
             else:
-                k = f'@{k}'
-            if gltype == GenericLocateWith.NODE:
-                xblocks.append(f"contains({k},'{v}')")
-            elif gltype == GenericLocateWith.BNODE:
-                xblocks.append(f"starts-with({k},'{v}')")
-            elif gltype == GenericLocateWith.FNODE:
-                xblocks.append(f"{k}='{v}'")
+                if k.lower() == "attrs":
+                    for ak, av in v.items():
+                        ak = f'@{ak}'
+                        if gltype == GenericLocateWith.NODE:
+                            xblocks.append(f"contains({ak},'{av}')")
+                        elif gltype == GenericLocateWith.BNODE:
+                            xblocks.append(f"starts-with({ak},'{av}')")
+                        elif gltype == GenericLocateWith.FNODE:
+                            xblocks.append(f"{ak}='{av}'")
+                    continue
+                else:
+                    k = f'@{k}'
+                    if gltype == GenericLocateWith.NODE:
+                        xblocks.append(f"contains({k},'{v}')")
+                    elif gltype == GenericLocateWith.BNODE:
+                        xblocks.append(f"starts-with({k},'{v}')")
+                    elif gltype == GenericLocateWith.FNODE:
+                        xblocks.append(f"{k}='{v}'")
+
         if xblocks:
             xblocks_str = "[" + " and ".join(xblocks) + "]"
         else:
@@ -182,6 +194,7 @@ class LocatorTranslator:
         tags = '*'
         classes = ""
         for k,v in rlvalue.items():
+            print(k,v, type(k), type(v))
             if k.lower() == 'tags':
                 tags = " ".join(v)
                 continue
@@ -189,13 +202,25 @@ class LocatorTranslator:
             if k == "classes":
                 classes = "." + ".".join(v)
                 continue
+
+            if k.lower() == "attrs":
+                for ak, av in v.items():
+                    if gltype == GenericLocateWith.NODE:
+                        cblocks.append(f"[{ak}*='{av}']")
+                    elif gltype == GenericLocateWith.BNODE:
+                        cblocks.append(f"[{ak}^='{av}']")
+                    elif gltype == GenericLocateWith.FNODE:
+                        cblocks.append(f"[{ak}='{av}']")
+                continue
+            else:
+                if gltype == GenericLocateWith.NODE:
+                    cblocks.append(f"[{k}*='{v}']")
+                elif gltype == GenericLocateWith.BNODE:
+                    cblocks.append(f"[{k}^='{v}']")
+                elif gltype == GenericLocateWith.FNODE:
+                    cblocks.append(f"[{k}='{v}']")
             
-            if gltype == GenericLocateWith.NODE:
-                cblocks.append(f"[{k}*='{v}']")
-            elif gltype == GenericLocateWith.BNODE:
-                cblocks.append(f"[{k}^='{v}']")
-            elif gltype == GenericLocateWith.FNODE:
-                cblocks.append(f"[{k}='{v}']")
+            
         if cblocks:
             cblocks_str = "".join(cblocks)
         else:

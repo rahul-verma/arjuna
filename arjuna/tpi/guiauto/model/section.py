@@ -43,7 +43,7 @@ class GuiSection(GuiAppContent):
         Note:
             A **GuiSection** can have a root element. If defined, all locator calls in this object happen as a nested locating call using the root element.
 
-                - Root element provided in in __init__ call is given preference.
+                - Root element provided in __init__ call is given preference.
                 - If not provided, Arjuna looks for **root** definition in **load** section of its GNS file.
                 - If above is also not provided, then locating happens from the root of the DOM of current page.
     '''
@@ -97,11 +97,11 @@ class GuiSection(GuiAppContent):
             if self.__root_meta[0] != "anonymous":
                 wmd = self._gui_def.get_wmd(label)
                 from arjuna import log_debug
-                log_debug("Loading Root Element {} for Gui GuiSection: {}".format(label, self.label))
+                log_debug("Loading Root Element {} for GuiSection: {}".format(label, self.label))
                 self.__root_element = self._wmd_finder.element(wmd)
             else:
                 from arjuna import log_debug
-                log_debug("Loading Root Element with Locator {} for Gui GuiSection: {}".format(str(locator), self.label))
+                log_debug("Loading Root Element with Locator {} for GuiSection: {}".format(str(locator), self.label))
                 self.__root_element = self._finder.locate(locator)           
             
             self.__container = self.__root_element

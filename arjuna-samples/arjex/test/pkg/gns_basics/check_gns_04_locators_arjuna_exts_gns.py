@@ -90,3 +90,17 @@ def check_arjuna_exts_gns_axes(request, wordpress):
     # All of them together
     e = wordpress.gns.axes_dir_repeat
     print(e.source.content.root)
+
+@test
+def check_gns_node_with_attrs(request):
+    app = GuiApp(gns_dir="common", label="common", url="https://jqueryui.com/droppable/")
+    app.launch()
+    app.gns.nodeattrs1
+    app.gns.nodeattrs2
+    app.gns.nodeattrs3
+    app.gns.nodeattrs4
+    app.gns.nodeattrs5
+    app.gns.nodeattrs6
+    app.gns.nodeattrs7
+    app.gns.nodeattrs8
+    app.quit()

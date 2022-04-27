@@ -65,3 +65,8 @@ class Browser:
 
     def execute_javascript(self, js, *args):
         return self.__automator.dispatcher.execute_javascript(js, *args)
+
+    def switch_to_dom_root(self):
+        self.__automator.dispatcher.switch_to_dom_root()
+
+    
