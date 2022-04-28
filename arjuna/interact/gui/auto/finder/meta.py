@@ -82,6 +82,7 @@ class Meta:
         GuiWidgetType.MULTI_ELEMENT: {'pos'},
         GuiWidgetType.DROPDOWN: {'pos'},
         GuiWidgetType.RADIO_GROUP: set(),
+        GuiWidgetType.FRAME: set(),
     }
 
     _POS = {"first", "last", "random", "odd", "even"}

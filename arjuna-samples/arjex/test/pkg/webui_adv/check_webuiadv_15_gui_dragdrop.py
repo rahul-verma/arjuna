@@ -21,11 +21,10 @@ from arjuna import *
 def check_drag_drop(request):
     app = GuiApp(url="https://jqueryui.com/droppable/")
     app.launch()
-    frame = app.element(classes="demo-frame")
-    frame.switch_to_me()
+    frame = app.frame(classes="demo-frame")
     drag = app.element(id="draggable")
     drop = app.element(id="droppable")
     drag.drop(drop)
-    app.switch_to_dom_root()
+    frame.exit()
     app.quit()
 

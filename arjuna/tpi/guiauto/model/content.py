@@ -289,12 +289,6 @@ class GuiAppContent(Gui, ScreenShooter):
         '''
         return self._finder.element(fargs=fargs, **kwargs)
 
-    def switch_to_dom_root(self):
-        '''
-        Switch to root of DOM. Used when you want to exit the context of a frame.
-        '''
-        self.__automator.browser.switch_to_dom_root()
-
     def multi_element(self, fargs=None, **kwargs):
         '''
             Locate a `GuiMultiElement`.
@@ -333,5 +327,18 @@ class GuiAppContent(Gui, ScreenShooter):
                 `GuiRadioGroup` object
         '''
         return self._finder.radio_group(fargs=fargs, **kwargs)
+
+    def frame(self, fargs=None, **kwargs):
+        '''
+            Locate a `GuiFrame`
+
+            Keyword Arguments:
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
+
+            Returns:
+                `GuiFrame` object
+        '''
+        return self._finder.frame(fargs=fargs, **kwargs)
 
 

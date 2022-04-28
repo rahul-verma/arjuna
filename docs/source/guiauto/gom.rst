@@ -13,7 +13,7 @@ Arjuna has three types of **Gui**'s, namely **GuiApp**, **GuiPage** and **GuiSec
 Note that **GuiDialog** is an alias for **GuiSection** currently, but this behavior could change in future.
 
 The **GuiApp** Class
-^^^^^^^^^^^^^^^^^^^^
+--------------------
 
 In addition to directly creating an object of App, you can also inherit from it and extend it.
 
@@ -34,7 +34,7 @@ Within the class' methods, you can now access its methods directly:
    self.launch()
 
 The **GuiPage** Class
-^^^^^^^^^^^^^^^^^^^^^
+---------------------
 
 You can implement a GuiPage by inheriting from **GuiPage** class:
 
@@ -48,7 +48,7 @@ You can implement a GuiPage by inheriting from **GuiPage** class:
 A **GuiPage** must be provided with a **source_gui** i.e. the **Gui** from where the page is being created.
 
 The **GuiSection** Class
-^^^^^^^^^^^^^^^^^^^^^^^^
+------------------------
 
 You can implement a GuiSection by inheriting from **GuiSection** class:
 
@@ -62,18 +62,15 @@ You can implement a GuiSection by inheriting from **GuiSection** class:
 
 A **GuiSection** must be provided with a **page** i.e. the **GuiPage** for which the section is being created.
 
-**Gui Abstraction Models**
---------------------------
-
-**App Model** using App class
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Gui Abstraction Models: **App Model**
+-------------------------------------
 
 You can implement a class as a **GuiApp** by using inheritance. This is the suggested way of implenting a web application abstraction in Arjuna. 
 
 This is the simplest way to get started with an equivalent of GuiPage Object Model (POM), GuiPage Factories, Loadable Component, all clubbed into one concept. We represent the complete appplication as a single class which is attached to a a single GNS file for externalization. It should work well for small apps or where you are automating only a small sub-set of the application. 
 
-**App-Page Model** using GuiApp and GuiPage Classes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Gui Abstraction Models: **App-Page Model**
+------------------------------------------
 
 For professional test automation, where you automate multiple use cases across different pages/screens, a simple App Model will not suffice. In the simple App Model, the GNS file will be cluttered with labels from multiple pages and the **GuiApp** class will have so many methods that it will impact code mainteance and understandability.
 
@@ -82,8 +79,8 @@ One step forward from Arjuna's App Model is the App-Page Model:
     #. We implemented each web page of interest as a child of **GuiPage** class.
     #. The **GuiPage** classes have methods to move from one page to another.
 
-**App-Page-Section Model** using GuiApp, GuiPage and GuiSection Classes
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Gui Abstraction Models: **App-Page-Section Model**
+--------------------------------------------------
 
 Consider the following:
     1. Typcally, the web applications follow a set of a templates for different pages. Such templates have some repetitive sections across multiple pages. Examples: Left navigation bars, Top Menus, Sidebars etc.

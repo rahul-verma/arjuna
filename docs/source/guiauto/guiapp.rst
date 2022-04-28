@@ -9,8 +9,8 @@ A web application is represented using a **GuiApp** object. To automate your web
 
 Web automation facilities in Arjuna use Selenium WebDriver as the underlying browser automation library.
 
-Launching a Web Application
----------------------------
+**Launching** a Web Application
+-------------------------------
 
 .. code-block:: python
 
@@ -25,8 +25,8 @@ Launching a Web Application
 4. You can use its **go_to_url** method to go to Google search page.
 5. You can quit the app using **quit** method of **GuiApp**.
 
-Associating a App with a Base URL
----------------------------------
+Associating a App with a **Base URL**
+-------------------------------------
 
 You can associate the **GuiApp** with a base URL by providing **url** arg while creating its object. Now the app knows where to go when it is launched. If this represents your situation (which mostly is the case), then it leads to much simpler code as follows:
 
@@ -36,8 +36,8 @@ You can associate the **GuiApp** with a base URL by providing **url** arg while 
    google.launch()
    google.quit()
 
-Setting GuiApp Base URL in Configuration
-----------------------------------------
+Setting GuiApp **Base URL in Configuration**
+--------------------------------------------
 
 During initilization, **GuiApp** automatically looks for the **ArjunaOption.APP_URL** option in the **Configuration** object associated with it. It means you can provide this option in any of the following ways:
     - Modify Reference **Configuration**

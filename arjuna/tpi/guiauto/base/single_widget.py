@@ -128,12 +128,12 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
         self.__wait_until_clickable_if_configured()
         self.dispatcher.mouse_click()
 
-    def drag(self, offset):
+    def drag(self, *, offset):
         self._interactions.Hover().wait()
         self.__wait_until_clickable_if_configured()
         self.dispatcher.drag(offset)
 
-    def drop(self, target, offset=None):
+    def drop(self, target, *, offset=None):
         self._interactions.Hover().wait()
         self.__wait_until_clickable_if_configured()
         self.dispatcher.drop(target.dispatcher, offset)

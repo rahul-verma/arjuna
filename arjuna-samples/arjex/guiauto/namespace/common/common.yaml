@@ -1,5 +1,6 @@
 labels:
   jframe:
+    type: frame
     classes: demo-frame
 
   todrag:

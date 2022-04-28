@@ -23,7 +23,8 @@ Future Themes (In-Progress or Planned):
 ------
     - Support for drag and drop operations for GuiElement.
     - Support for attrs in node for XPath and CSS Selector generation.
-    - Support for Frame handling (in progress).
+    - Initial support for frame handling. GuiFrame is a new class added with simple to use features.
+    - Added documentation for various GuiElement methods. Rearranged Gui Auto docs.
 
 1.2.20
 ------

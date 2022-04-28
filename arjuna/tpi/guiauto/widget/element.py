@@ -63,12 +63,6 @@ class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, SingleGuiWidget):
         '''
         return self.__gns
 
-    def switch_to_me(self):
-        '''
-        Switch to an IFrame represented by this element.
-        '''
-        self._automator.dispatcher.switch_to_frame(self.dispatcher)
-
     @property
     def root_element(self):
         '''
@@ -201,3 +195,16 @@ class GuiElement(AsserterMixIn, GuiWidgetContainer, Locatable, SingleGuiWidget):
                 `GuiRadioGroup` object
         '''
         return self._finder.radio_group(fargs=fargs, **kwargs)
+
+    def frame(self, fargs=None, **kwargs):
+        '''
+            Locate a `GuiFrame`
+
+            Keyword Arguments:
+                fargs: A dictionary of key-value pairs for formatting the **GuiWidgetDefinition**. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a **GuiWidgetDefinition**
+
+            Returns:
+                `GuiFrame` object
+        '''
+        return self._finder.frame(fargs=fargs, **kwargs)

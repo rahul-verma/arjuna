@@ -9,6 +9,7 @@ Submodules
 
    arjuna.tpi.guiauto.widget.dropdown
    arjuna.tpi.guiauto.widget.element
+   arjuna.tpi.guiauto.widget.frame
    arjuna.tpi.guiauto.widget.multielement
    arjuna.tpi.guiauto.widget.radio_group
 

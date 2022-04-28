@@ -206,17 +206,6 @@ HTTP Automation
     * :py:class:`OAuthClientGrantService <arjuna.tpi.httpauto.oauth.OAuthClientGrantService>`
     * :py:class:`OAuthImplicitGrantService <arjuna.tpi.httpauto.oauth.OAuthImplicitGrantService>`
 
-HTTP Automation
-===============
-* :py:class:`Http <arjuna.tpi.httpauto.http.Http>`
-* :py:class:`HttpService<arjuna.tpi.httpauto.session.HttpService>`
-* :py:class:`HttpRequest <arjuna.tpi.httpauto.request.HttpRequest>`
-* :py:class:`HttpResponse <arjuna.tpi.httpauto.response.HttpResponse>`
-* OAuth Support
-    * :py:class:`OAuthService <arjuna.tpi.httpauto.oauth.OAuthService>`
-    * :py:class:`OAuthClientGrantService <arjuna.tpi.httpauto.oauth.OAuthClientGrantService>`
-    * :py:class:`OAuthImplicitGrantService <arjuna.tpi.httpauto.oauth.OAuthImplicitGrantService>`
-
 E-Mail Automation
 =================
 * :py:class:`EmailServer <arjuna.tpi.emailauto.EmailServer>`

@@ -22,11 +22,10 @@ def check_gns_drag_drop(request):
     app = GuiApp(gns_dir="common", label="common", url="https://jqueryui.com/droppable/")
     app.launch()
     frame = app.gns.jframe
-    frame.switch_to_me()
-    drag = app.gns.todrag
-    drop = app.gns.todrop
+    drag = frame.gns.todrag
+    drop = frame.gns.todrop
     drag.drop(drop)
-    app.switch_to_dom_root()
+    frame.exit()
     app.quit()
 
 

@@ -66,7 +66,7 @@ class GuiElementSource(SingleGuiEntitySource):
         '''
         return attr in self.attrs
 
-    def get_attr_value(self, attr, optional=False) -> str:
+    def get_attr_value(self, attr, *, optional=False) -> str:
         '''
             Get value of an attribute.
 
@@ -87,7 +87,7 @@ class GuiElementSource(SingleGuiEntitySource):
             else:
                 raise Exception("Attribute {} not found for element".format(attr))
 
-    def get_value(self, optional=False):
+    def get_value(self, *, optional=False):
         '''
             Get content of value attribute.
 

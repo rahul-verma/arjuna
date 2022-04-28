@@ -176,6 +176,19 @@ class GuiSection(GuiAppContent):
         '''
         return self.__get_caller("radio_group")(fargs=fargs, **kwargs)     
 
+    def frame(self, fargs=None, **kwargs) -> 'GuiFrame':
+        '''
+            Locate a `GuiRadioGroup`
+
+            Keyword Arguments:
+                fargs: A dictionary of key-value pairs for formatting the `GuiWidgetDefinition`. Use **.format(kwargs).wait_until_absent** for more Pythonic code when formatting.
+                **kwargs: Arbitrary key-value pairs used to construct a `GuiWidgetDefinition`
+
+            Returns:
+                `GuiFrame` object
+        '''
+        return self.__get_caller("frame")(fargs=fargs, **kwargs)  
+
     @property
     def parent(self):
         '''

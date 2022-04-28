@@ -1,7 +1,7 @@
 .. _element:
 
-**Element Identification and Interaction**
-==========================================
+**Element Identification**
+==========================
 
 **GuiElement and Widgets**
 --------------------------
@@ -32,32 +32,3 @@ For example, following code locates a GuiElement by its **id** attribute:
 .. code-block:: python
 
    app.element(id="user_login")
-
-**Interaction with GuiElement**
--------------------------------
-
-To interact with a GuiElement, from automation angle it must be in an interactable state. In the usual automation code, a test author writes a lot of waiting related code (and let's not even touch the **time.sleep**.).
-
-**Automatic Dynamic Waiting**
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-Arjuna does a granular automatic waiting of three types:
-    - Waiting for the presence of an element when it is attempting to identify a GuiElement
-    - Waiting for the right state (for example, clickability of an GuiElement when you enter text or want to click it)
-    - Waiting for interaction to succeed (Arjuna, for example, retries click if interaction exception is raised).
-
-Interaction Methods
-^^^^^^^^^^^^^^^^^^^
-
-Once locted **GuiElement** provides various interaction methods. Some are shown below:
-
-.. code-block:: python
-
-   element.text = user
-   element.click()
-
-**text** is a property of **GuiElement**. **element.text = "some_string"** is equivalent of setting text of the text box.
-
-**click** method is used to click the element.
-
-Check :py:class:`GuiElement <arjuna.tpi.guiauto.widget.element.GuiElement>` and its base classes to know about various methods and properties.

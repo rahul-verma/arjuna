@@ -239,6 +239,10 @@ class GuiAutomator(GuiWidgetContainer,_Dispatchable):
         from arjuna.tpi.guiauto.widget.radio_group import GuiRadioGroup
         return GuiRadioGroup(gui, wmd)
 
+    def frame(self, gui, wmd):
+        from arjuna.tpi.guiauto.widget.frame import GuiFrame
+        return GuiFrame(gui, wmd)
+
     def execute_javascript(self, js, *args):
         return self.browser.execute_javascript(js, 
         *[
