@@ -49,7 +49,7 @@ Depending on whether the message file name is a valid Python name or not, you ca
         # Python name
         service.message.mymsg1.send()
 
-        # Python name
+        # Invalid Python name
         service.send("non python name")
         service.send("non/python/name") # With sub-directories
 
@@ -226,7 +226,7 @@ For example
 
         codes: 200
 
-in the above YAML specifies **$url$** and **$param_str** plaecholders.
+in the above YAML specifies **$url$** and **$price$** plaecholders.
 
 You can pass values to these named placeholders as follows (assume abc.yaml as the message file name)
 

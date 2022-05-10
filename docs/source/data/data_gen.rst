@@ -250,7 +250,7 @@ Random **Color**
 
 Color
 ^^^^^
-You can generate a random color with :py:func:`int <arjuna.tpi.data.generator.Random.color>`.
+You can generate a random color with :py:func:`color <arjuna.tpi.data.generator.Random.color>`.
 
     .. code-block:: python
 
@@ -259,7 +259,7 @@ You can generate a random color with :py:func:`int <arjuna.tpi.data.generator.Ra
 
 RGB Color
 ^^^^^^^^^
-You can generate a random RGB color with :py:func:`int <arjuna.tpi.data.generator.Random.color>`.
+You can generate a random RGB color with :py:func:`rgb_color <arjuna.tpi.data.generator.Random.rgb_color>`.
 
     .. code-block:: python
 
