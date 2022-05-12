@@ -68,7 +68,7 @@ To enable this, Arjuna tries to automatically import such resource creators with
 
     .. code-block:: python
 
-        from testproj.lib.resource import *
+        from testproj.lib.hook.resource import *
 
 To make use of this feature, you can choose to do one of the following depending on your requirements:
 
