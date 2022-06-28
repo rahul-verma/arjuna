@@ -19,7 +19,7 @@ Future Themes (In-Progress or Planned):
             - Table: Coded Locators and GNS
             - Recipes
 
-1.2.22
+1.2.23
 ------
 
 1.2.21
