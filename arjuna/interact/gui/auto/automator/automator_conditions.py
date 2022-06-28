@@ -24,5 +24,4 @@ class GuiAutomatorConditions:
         self.__automator = automator
 
     def AlertIsPresent(self):
-        caller = DynamicCaller(self.__automator.get_alert_handler().is_alert_present)
-        return BooleanCondition(caller, True)
+        return Conditions.true_condition(self.__automator.get_alert_handler().is_alert_present)

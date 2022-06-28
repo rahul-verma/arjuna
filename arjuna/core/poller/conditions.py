@@ -68,7 +68,10 @@ class Condition:
             ctime = time.time()
             if(ctime > end_time):
                 break
-        raise ArjunaTimeoutError(self.__class__.__name__, str(e) + etrace)
+        if e is not None:
+            raise ArjunaTimeoutError(self.__class__.__name__, str(e) + etrace)
+        else:
+            raise ArjunaTimeoutError(self.__class__.__name__, "Wait time over.")
 
     def execute(self):
         try:
@@ -89,13 +92,30 @@ class CommandCondition(Condition):
 
 class BooleanCondition(Condition):
 
-    def __init__(self, dynamic_caller, expectation_type=True):
+    def __init__(self, dynamic_caller, expected=True):
         super().__init__(dynamic_caller)
-        self.__expectation_type = expectation_type
+        self.__expectation_type = expected
 
     def is_met(self):
         try:
             self.execute()
             return self.__expectation_type == self.get_call_result()
+        except WaitableError as we:
+            raise we
         except Exception as e:
             raise ConditionException("Unexpected exception in boolean condition checking: " + str(e) + traceback.format_exc())
+
+class Conditions:
+
+    @classmethod
+    def __create_caller(cls, target, *vargs, **kwargs):
+        from arjuna.core.poller.caller import DynamicCaller
+        return DynamicCaller(target, *vargs, **kwargs)
+
+    @classmethod
+    def true_condition(cls, target, *vargs, **kwargs):
+        return BooleanCondition(cls.__create_caller(target, *vargs, **kwargs), True)
+
+    @classmethod
+    def false_condition(cls, target, *vargs, **kwargs):
+        return BooleanCondition(cls.__create_caller(target, *vargs, **kwargs), False)

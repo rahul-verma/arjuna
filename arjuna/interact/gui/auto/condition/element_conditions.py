@@ -19,7 +19,7 @@ import abc
 import types
 
 from arjuna.core.poller.caller import DynamicCaller
-from arjuna.core.poller.conditions import BooleanCondition, CommandCondition
+from arjuna.core.poller.conditions import BooleanCondition, CommandCondition, Conditions
 
 class Handler(metaclass=abc.ABCMeta):
 
@@ -42,16 +42,13 @@ class GuiElementConditions(Handler):
         super().__init__(element)
 
     def IsSelected(self):
-        caller = DynamicCaller(self.element.is_selected)
-        return BooleanCondition(caller, True)
+        return Conditions.true_condition(self.element.is_selected)
 
     def IsVisible(self):
-        caller = DynamicCaller(self.element.is_visible)
-        return BooleanCondition(caller, True)   
+        return Conditions.true_condition(self.element.is_visible)  
 
     def IsClickable(self):
-        caller = DynamicCaller(self.element.is_clickable)
-        return BooleanCondition(caller, True)     
+        return Conditions.true_condition(self.element.is_clickable)   
 
 class GuiElementLenientInteraction:
 
