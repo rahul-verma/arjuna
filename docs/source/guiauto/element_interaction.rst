@@ -61,12 +61,14 @@ You can drag an element using **drag** method by providing an Offset specifying 
 
    element.drag(offset=Screen.offset(10,20))
 
-You can drop an element on another element using **drop** method by providing the target element and optionally an Offset specifying X and Y coordinate offsets as follows:
+You can drop an element on another element using **drop** method by providing the target element and offsets specifying X and Y coordinate offsets as follows:
 
 .. code-block:: python
 
    element.drop(target_element)
-   element.drop(target_element, offset=Screen.offset(10,20))
+   element.drop(target_element, source_offset=Screen.offset(10,20), target_offset=Screen.offset(30,50))
+
+Here **source_offset** is from the source element and **target_offset** is from target element where the element is dropped. None or one or both of these can be provided in the call.
 
 **Checking/Unchecking/Toggling** a Checkbox
 -------------------------------------------

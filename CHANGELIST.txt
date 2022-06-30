@@ -21,6 +21,7 @@ Future Themes (In-Progress or Planned):
 
 1.2.23
 ------
+    - Support for source and target offsets in drag and drop function.
 
 1.2.21
 ------

@@ -171,11 +171,18 @@ class DriverCommands:
         ActionChains(driver).click_and_hold(source_element).move_by_offset(offset.x, offset.y).pause(3).release().perform(0)
 
     @classmethod
-    def drop_element(cls, driver, source_element, target_element, offset=None):
-        if offset is None:
-            ActionChains(driver).click_and_hold(source_element).move_to_element(target_element).pause(3).release().perform()
+    def drop_element(cls, driver, source_element, target_element, source_offset=None, target_offset=None):
+        if source_offset is None:
+            source_offset = (0,0)
         else:
-            ActionChains(driver).click_and_hold(source_element).move_to_element(target_element).pause(3).move_by_offset(offset.x, offset.y).pause(3).release()
+            source_offset = (source_offset.x,source_offset.y)
+
+        if target_offset is None:
+            target_offset = (0,0)
+        else:
+            target_offset = (target_offset.x,target_offset.y)
+
+        ActionChains(driver).click_and_hold(source_element).move_by_offset(200, 50).move_to_element(target_element).pause(3).release().perform()
 
     @classmethod
     def scroll_to_element(cls, driver, webelement):

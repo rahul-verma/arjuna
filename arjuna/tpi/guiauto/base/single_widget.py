@@ -133,10 +133,10 @@ class SingleGuiWidget(_Dispatchable, metaclass=abc.ABCMeta):
         self.__wait_until_clickable_if_configured()
         self.dispatcher.drag(offset)
 
-    def drop(self, target, *, offset=None):
+    def drop(self, target, *, source_offset=None, target_offset=None):
         self._interactions.Hover().wait()
         self.__wait_until_clickable_if_configured()
-        self.dispatcher.drop(target.dispatcher, offset)
+        self.dispatcher.drop(target.dispatcher, source_offset, target_offset)
 
     def double_click(self):
         '''
