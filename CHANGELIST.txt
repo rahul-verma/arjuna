@@ -19,6 +19,9 @@ Future Themes (In-Progress or Planned):
             - Table: Coded Locators and GNS
             - Recipes
 
+1.2.24
+------
+
 1.2.23
 ------
     - Support for source and target offsets in drag and drop function.
