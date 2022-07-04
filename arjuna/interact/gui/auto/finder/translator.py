@@ -192,7 +192,6 @@ class LocatorTranslator:
             prefix = ""
         glvalue = f"{prefix}{tags}{xblocks_str}"
         gltype = GenericLocateWith.XPATH
-        print(gltype, glvalue)
         return gltype, glvalue
 
     @classmethod
