@@ -155,6 +155,12 @@ class LocatorTranslator:
 
             if k.lower() in cls.TEXT_TRANSLATIONS:
                 k = cls.TEXT_TRANSLATIONS[k.lower()]
+                if gltype == GenericLocateWith.NODE:
+                    xblocks.append(f"contains({k},'{v}')")
+                elif gltype == GenericLocateWith.BNODE:
+                    xblocks.append(f"starts-with({k},'{v}')")
+                elif gltype == GenericLocateWith.FNODE:
+                    xblocks.append(f"{k}='{v}'")
             else:
                 if k.lower() == "attrs":
                     for ak, av in v.items():
@@ -186,6 +192,7 @@ class LocatorTranslator:
             prefix = ""
         glvalue = f"{prefix}{tags}{xblocks_str}"
         gltype = GenericLocateWith.XPATH
+        print(gltype, glvalue)
         return gltype, glvalue
 
     @classmethod
@@ -194,7 +201,6 @@ class LocatorTranslator:
         tags = '*'
         classes = ""
         for k,v in rlvalue.items():
-            print(k,v, type(k), type(v))
             if k.lower() == 'tags':
                 tags = " ".join(v)
                 continue
@@ -227,6 +233,7 @@ class LocatorTranslator:
             cblocks_str = ""
         glvalue = f"{tags}{classes}{cblocks_str}"
         gltype = GenericLocateWith.CSS_SELECTOR
+        print(gltype, glvalue)
         return gltype, glvalue
 
 

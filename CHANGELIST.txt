@@ -21,6 +21,7 @@ Future Themes (In-Progress or Planned):
 
 1.2.24
 ------
+    - Critical Fix for XPath based node conversion.
 
 1.2.23
 ------
