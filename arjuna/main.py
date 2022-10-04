@@ -15,13 +15,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-import sys
-import time
+import os # os is a operating system by  this module we can interact with our operating system , famous module provided by python  
+import sys # it is a system module which can be used in various thing but some of them are sys.exit(1) is used to exit the condition 
+import time # this time module is used to return time into seconds.
 
 def main(*args, ext_engine=False):
     print("Executing Arjuna command line with args: {}".format(args))
     try:
+        """
+        by usnig try and exception we can print the errors occured during our programmes , as python is a interpreted language so it wil check line by line and if some error 
+        occured it will stop to avoiding this we usually print that error in ecxception. when tries failed
+        """"
         import signal
         import sys
         def signal_handler(sig, frame):
