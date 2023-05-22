@@ -58,7 +58,7 @@ setup(
     install_requires = [
         "pyOpenSSL>=0.14",
         "urllib3==1.25.3",
-        "requests==2.22.0",
+        "requests==2.31.0",
         "lxml==4.6.3",
         "requests-toolbelt==0.9.1", 
         "selenium==4.0.0a7", 
