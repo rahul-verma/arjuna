@@ -19,6 +19,8 @@
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.common.proxy import *
 
+from arjuna import *
+
 
 class BrowserLauncher:
 
@@ -58,13 +60,16 @@ class BrowserLauncher:
         #     proxy.ssl_proxy = proxy_string
         #     proxy.add_to_capabilities(caps)
 
+        options = ChromeOptions()
+
         from arjuna import log_debug
         log_debug("Is proxy set for Chrome?: {}".format(proxy is not None))
         if proxy is not None:
-            proxy.add_to_capabilities(caps)
+            options.add_argument('--proxy-server=%s' % "{}:{}".format(C("http.proxy.host"), C("http.proxy.port")))
+            # proxy.add_to_capabilities(caps)
             caps['acceptInsecureCerts'] = True
 
-        options = ChromeOptions()
+        
 
         if browser_bin_path.lower() != "not_set":
             options.binary_location = browser_bin_path
@@ -83,17 +88,18 @@ class BrowserLauncher:
             for ext in config["browserExtensions"]:
                 options.add_extension(ext)
 
-        caps[ChromeOptions.KEY] = options.to_capabilities()[ChromeOptions.KEY]
+        # caps[ChromeOptions.KEY] = options.to_capabilities()[ChromeOptions.KEY]
         from selenium import webdriver
-        return webdriver.Remote(svc_url, caps)
+
+        return webdriver.Remote(svc_url, options=options)
 
     @classmethod
     def _create_firefox(cls, config, driver_path, browser_bin_path, svc_url, proxy=None):
         from selenium.webdriver import Firefox
         from selenium.webdriver import FirefoxOptions
-        from selenium.webdriver import FirefoxProfile
+        # from selenium.webdriver import FirefoxProfile
 
-        profile = FirefoxProfile()
+        # profile = FirefoxProfile()
         # if config["arjuna_options"]["BROWSER_PROXY_ON"]:
         #     proxy = Proxy()
         #     proxy_string = "{}.{}".format(
@@ -107,13 +113,14 @@ class BrowserLauncher:
         caps = DesiredCapabilities.FIREFOX
         caps.update(config["driverCapabilities"])
 
-        from arjuna import log_debug
+        options = FirefoxOptions()
+
         log_debug("Is proxy set for Firefox?: {}".format(proxy is not None))
         if proxy is not None:
-            proxy.add_to_capabilities(caps)
+            options.set_preference('network.proxy.type', 1)
+            options.set_preference('network.proxy.http', C("http.proxy.host"))
+            options.set_preference('network.proxy.http_port', C("http.proxy.port"))    
             caps['acceptInsecureCerts'] = True
-
-        options = FirefoxOptions()
 
         if browser_bin_path.lower() != "not_set":
             options.binary_location = browser_bin_path
@@ -130,7 +137,7 @@ class BrowserLauncher:
                 options.add_argument(arg)
 
         from selenium import webdriver
-        return webdriver.Remote(svc_url, browser_profile=profile, options=options)
+        return webdriver.Remote(svc_url, options=options)
 
         # driver = Firefox(executable_path=driver_path, firefox_profile=profile, capabilities=caps)
         # if cls.are_extensions_set(config):
