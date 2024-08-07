@@ -53,7 +53,7 @@ class DriverCapabilities:
     }
 
     # Selenium
-    UNEXPECTED_ALERT_BEHAVIOUR = "unexpectedAlertBehaviour" # accept,dismiss,ignore
+    # UNEXPECTED_ALERT_BEHAVIOUR = "unexpectedAlertBehaviour" # accept,dismiss,ignore
     UNHANDLED_PROMPT_BEHAVIOUR = "unhandledPromptBehavior" # accept,dismiss,ignore
     ELEMENT_SCROLL_BEHAVIOR = "elementScrollBehavior" #???
     AUTOMATION_NAME = "automationName"
@@ -157,7 +157,7 @@ class DriverCapabilities:
                 self.__out_dict["arjuna_options"][k] = v
 
     def __process(self, dict_from_requester):
-        self.__out_dict["driverCapabilities"][self.UNEXPECTED_ALERT_BEHAVIOUR] = "dismiss"
+        # self.__out_dict["driverCapabilities"][self.UNEXPECTED_ALERT_BEHAVIOUR] = "dismiss"
         self.__out_dict["driverCapabilities"][self.UNHANDLED_PROMPT_BEHAVIOUR] = "dismiss"
         if not dict_from_requester: return
         if "browserArgs" in dict_from_requester and dict_from_requester["browserArgs"]:
