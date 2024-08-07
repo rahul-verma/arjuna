@@ -129,7 +129,7 @@ class Device(Enum):
     MOBILE = auto()
     GENERIC = auto()    
 
-class Device(Enum):
+class Direction(Enum):
     UP = auto()
     DOWN = auto()
     LEFT = auto()
